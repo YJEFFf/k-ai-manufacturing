@@ -1,0 +1,372 @@
+{
+  "source": {
+    "url": "https://www.kamp-ai.kr/cptFileDownload",
+    "post_fileSeq": 8079,
+    "archive_sha256": "dda4a581568aa5bd4c2ae6680d7595bcecd926158b58369f3d39cf2e0a820941"
+  },
+  "limitations": [
+    "Only one normal date and one anomaly date. No independent future normal day or independent fault event validation.",
+    "Physical fault cause, real versus injected anomaly provenance and RUL cannot be determined from these CSVs alone."
+  ],
+  "normal": {
+    "rows": 20000,
+    "columns": [
+      "Unnamed: 0",
+      "TimeStamp",
+      "AI0_Vibration",
+      "AI1_Vibration",
+      "AI2_Current",
+      "Equipment_state"
+    ],
+    "labels": {
+      "0": 20000
+    },
+    "missing": {
+      "Unnamed: 0": 0,
+      "TimeStamp": 0,
+      "AI0_Vibration": 0,
+      "AI1_Vibration": 0,
+      "AI2_Current": 0,
+      "Equipment_state": 0
+    },
+    "numeric_summary": {
+      "AI0_Vibration": {
+        "count": 20000.0,
+        "mean": -9.380764999999997e-05,
+        "std": 0.07063373666381956,
+        "min": -0.31457,
+        "25%": -0.04416825,
+        "50%": -0.0001715,
+        "75%": 0.04401125,
+        "max": 0.351699
+      },
+      "AI1_Vibration": {
+        "count": 20000.0,
+        "mean": -9.274240000000002e-05,
+        "std": 0.11888768274230738,
+        "min": -0.366498,
+        "25%": -0.06924725000000001,
+        "50%": -0.009316999999999999,
+        "75%": 0.060176,
+        "max": 0.399782
+      },
+      "AI2_Current": {
+        "count": 20000.0,
+        "mean": 1.4462092726,
+        "std": 122.6644935767214,
+        "min": -271.56833,
+        "25%": -101.3116925,
+        "50%": 1.8498299999999999,
+        "75%": 103.8444175,
+        "max": 273.235
+      }
+    },
+    "first_timestamp": "2022-07-12 00:00:00.019000",
+    "last_timestamp": "2022-07-12 01:16:55.828000",
+    "unique_timestamps": 19999,
+    "time_step_counts": {
+      "0.1": 19400,
+      "4.24": 3,
+      "2.104": 2,
+      "1.766": 2,
+      "4.586": 2,
+      "1.737": 2,
+      "1.947": 2,
+      "1.976": 2,
+      "1.655": 2,
+      "8.432": 2,
+      "1.882": 2,
+      "1.918": 2
+    },
+    "duplicate_sensor_rows": 1,
+    "contiguous_100ms_blocks": 600,
+    "block_length_histogram": {
+      "1": 10,
+      "2": 7,
+      "3": 8,
+      "4": 5,
+      "5": 5,
+      "6": 7,
+      "7": 8,
+      "8": 12,
+      "9": 8,
+      "10": 9,
+      "11": 10,
+      "12": 10,
+      "13": 13,
+      "14": 8,
+      "15": 7,
+      "16": 4,
+      "17": 6,
+      "18": 6,
+      "19": 5,
+      "20": 8,
+      "21": 8,
+      "22": 12,
+      "23": 11,
+      "24": 11,
+      "25": 10,
+      "26": 10,
+      "27": 10,
+      "28": 4,
+      "29": 8,
+      "30": 6,
+      "31": 4,
+      "32": 9,
+      "33": 5,
+      "34": 10,
+      "35": 10,
+      "36": 12,
+      "37": 8,
+      "38": 13,
+      "39": 7,
+      "40": 8,
+      "41": 5,
+      "42": 10,
+      "43": 8,
+      "44": 9,
+      "45": 7,
+      "46": 6,
+      "47": 3,
+      "48": 8,
+      "49": 10,
+      "50": 202
+    },
+    "note": "Blocks are recording segments, not verified independent fault events."
+  },
+  "outlier": {
+    "rows": 600,
+    "columns": [
+      "Unnamed: 0",
+      "TimeStamp",
+      "AI0_Vibration",
+      "AI1_Vibration",
+      "AI2_Current",
+      "Equipment_state"
+    ],
+    "labels": {
+      "1": 600
+    },
+    "missing": {
+      "Unnamed: 0": 0,
+      "TimeStamp": 0,
+      "AI0_Vibration": 0,
+      "AI1_Vibration": 0,
+      "AI2_Current": 0,
+      "Equipment_state": 0
+    },
+    "numeric_summary": {
+      "AI0_Vibration": {
+        "count": 600.0,
+        "mean": 0.007577742062533333,
+        "std": 0.44792806747493324,
+        "min": -1.5027352,
+        "25%": -0.1163999675,
+        "50%": 0.015770585,
+        "75%": 0.09285926850000001,
+        "max": 1.8032037
+      },
+      "AI1_Vibration": {
+        "count": 600.0,
+        "mean": -0.008137206515450001,
+        "std": 0.24122637806781533,
+        "min": -0.7512533,
+        "25%": -0.1364255325,
+        "50%": 0.00216106905,
+        "75%": 0.1714324925,
+        "max": 0.50932143
+      },
+      "AI2_Current": {
+        "count": 600.0,
+        "mean": 57.32974096633334,
+        "std": 153.17261944641663,
+        "min": -399.35117,
+        "25%": -33.378605,
+        "50%": 53.644187,
+        "75%": 146.62744,
+        "max": 538.82605
+      }
+    },
+    "first_timestamp": "2022-07-17 10:51:07.943000",
+    "last_timestamp": "2022-07-17 10:53:53.540000",
+    "unique_timestamps": 600,
+    "time_step_counts": {
+      "0.1": 579,
+      "8.481": 1,
+      "1.991": 1,
+      "3.519": 1,
+      "5.265": 1,
+      "6.394": 1,
+      "8.391": 1,
+      "2.823": 1,
+      "4.26": 1,
+      "6.051": 1,
+      "7.608": 1,
+      "8.546": 1
+    },
+    "duplicate_sensor_rows": 0,
+    "contiguous_100ms_blocks": 21,
+    "block_length_histogram": {
+      "3": 1,
+      "4": 2,
+      "8": 1,
+      "10": 1,
+      "15": 2,
+      "18": 1,
+      "24": 1,
+      "25": 1,
+      "28": 1,
+      "31": 1,
+      "36": 1,
+      "40": 1,
+      "42": 1,
+      "47": 1,
+      "50": 5
+    },
+    "note": "Blocks are recording segments, not verified independent fault events."
+  },
+  "cross_label_identical_sensor_rows": 0,
+  "split": {
+    "method": "chronological contiguous-block normal 60/20/20; every provided outlier is held out",
+    "train_normal": 11963,
+    "calibration_normal": 3947,
+    "test_normal": 4090,
+    "test_outlier": 600,
+    "train_blocks": 360,
+    "calibration_blocks": 120,
+    "test_normal_blocks": 120,
+    "outlier_blocks": 21
+  },
+  "pointwise_baselines": {
+    "abs_standardized_AI0_Vibration": {
+      "threshold": 2.777769530004121,
+      "precision": 0.9681818181818181,
+      "recall": 0.355,
+      "f1": 0.5195121951219512,
+      "roc_auc": 0.7982375713121435,
+      "average_precision": 0.6050004652287098,
+      "confusion_matrix_tn_fp_fn_tp": [
+        4083,
+        7,
+        387,
+        213
+      ],
+      "normal_false_alarm_rate": 0.0017114914425427872
+    },
+    "abs_standardized_AI1_Vibration": {
+      "threshold": 2.6456400391233807,
+      "precision": 0.9789473684210527,
+      "recall": 0.155,
+      "f1": 0.26762589928057556,
+      "roc_auc": 0.8357094539527301,
+      "average_precision": 0.5762761997741525,
+      "confusion_matrix_tn_fp_fn_tp": [
+        4088,
+        2,
+        507,
+        93
+      ],
+      "normal_false_alarm_rate": 0.0004889975550122249
+    },
+    "abs_standardized_AI2_Current": {
+      "threshold": 1.9996601539908407,
+      "precision": 0.8068181818181818,
+      "recall": 0.11833333333333333,
+      "f1": 0.2063953488372093,
+      "roc_auc": 0.5770513447432764,
+      "average_precision": 0.33566714495288796,
+      "confusion_matrix_tn_fp_fn_tp": [
+        4073,
+        17,
+        529,
+        71
+      ],
+      "normal_false_alarm_rate": 0.004156479217603912
+    },
+    "max_abs_standardized": {
+      "threshold": 2.8448901882880304,
+      "precision": 0.9745762711864406,
+      "recall": 0.38333333333333336,
+      "f1": 0.5502392344497608,
+      "roc_auc": 0.8671157294213528,
+      "average_precision": 0.6744237421493771,
+      "confusion_matrix_tn_fp_fn_tp": [
+        4084,
+        6,
+        370,
+        230
+      ],
+      "normal_false_alarm_rate": 0.001466992665036675
+    },
+    "squared_standardized_distance": {
+      "threshold": 15.01239273915027,
+      "precision": 0.9865470852017937,
+      "recall": 0.36666666666666664,
+      "f1": 0.534629404617254,
+      "roc_auc": 0.8714682151589243,
+      "average_precision": 0.6726488831303887,
+      "confusion_matrix_tn_fp_fn_tp": [
+        4087,
+        3,
+        380,
+        220
+      ],
+      "normal_false_alarm_rate": 0.0007334963325183374
+    },
+    "5nn_distance": {
+      "threshold": 0.468250516960224,
+      "precision": 0.966789667896679,
+      "recall": 0.43666666666666665,
+      "f1": 0.6016073478760046,
+      "roc_auc": 0.9063406682966585,
+      "average_precision": 0.7494216602710566,
+      "confusion_matrix_tn_fp_fn_tp": [
+        4081,
+        9,
+        338,
+        262
+      ],
+      "normal_false_alarm_rate": 0.002200488997555012
+    },
+    "isolation_forest": {
+      "threshold": 0.6600485755439296,
+      "precision": 0.9856115107913669,
+      "recall": 0.22833333333333333,
+      "f1": 0.37077131258457374,
+      "roc_auc": 0.8976845965770173,
+      "average_precision": 0.6892126897485215,
+      "confusion_matrix_tn_fp_fn_tp": [
+        4088,
+        2,
+        463,
+        137
+      ],
+      "normal_false_alarm_rate": 0.0004889975550122249
+    }
+  },
+  "trailing_5_point_rms": {
+    "threshold": 1.9854259052358245,
+    "precision": 0.9801587301587301,
+    "recall": 0.47775628626692457,
+    "f1": 0.6423927178153446,
+    "roc_auc": 0.9195017442377003,
+    "average_precision": 0.763370857164584,
+    "confusion_matrix_tn_fp_fn_tp": [
+      3609,
+      5,
+      270,
+      247
+    ],
+    "normal_false_alarm_rate": 0.001383508577753182,
+    "warmup_excluded_normal": 476,
+    "warmup_excluded_outlier": 83,
+    "scored_normal": 3614,
+    "scored_outlier": 517,
+    "limitation": "Scored points only: warm-up samples omitted. Not directly identical evaluation denominator to pointwise scores."
+  },
+  "metadata_leakage_warning": {
+    "date_predicts_provided_label_perfectly": true,
+    "Equipment_state_is_target_not_feature": true,
+    "filenames_encode_label": true
+  }
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "file": "Guidebook_장비이상 조기탐지 AI 데이터셋.pdf",
+    "bytes": 19900874,
+    "status": "bounded_final_read_failed",
+    "error": "Command '['/bin/cp', '데이터셋/Guidebook_장비이상 조기탐지 AI 데이터셋.pdf', '/tmp/kamp-followup-cache/Guidebook_장비이상 조기탐지 AI 데이터셋.pdf']' timed out after 10 seconds"
+  },
+  {
+    "file": "Guidebook_열처리 공급망최적화 AI 데이터셋.pdf",
+    "bytes": 14770051,
+    "status": "copied",
+    "text": "analysis/followup_materials/pdf_text/Guidebook_열처리 공급망최적화 AI 데이터셋.txt"
+  },
+  {
+    "file": "06. Guidebook_Machinevision.pdf",
+    "bytes": 15684810,
+    "status": "bounded_final_read_failed",
+    "error": "Command '['/bin/cp', '데이터셋/06. Guidebook_Machinevision.pdf', '/tmp/kamp-followup-cache/06. Guidebook_Machinevision.pdf']' timed out after 10 seconds"
+  }
+]

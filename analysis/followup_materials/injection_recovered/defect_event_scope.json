@@ -1,0 +1,110 @@
+{
+  "all_unique_rows": 5232,
+  "all_unique_shot_time_keys": 2626,
+  "bad_products": 60,
+  "bad_calendar_days": 6,
+  "bad_plan_days": 6,
+  "bad_equipment": [
+    "S14"
+  ],
+  "bad_shot_time_keys": 52,
+  "bad_production_instruction_proxy_keys": 9,
+  "bad_parts_by_time_multiplicity": {
+    "1": 44,
+    "2": 8
+  },
+  "bad_day_details": [
+    {
+      "date": "2020-10-16",
+      "bad_products": 17,
+      "distinct_timestamp": 14,
+      "first": "2020-10-16 05:21:38",
+      "last": "2020-10-16 05:57:20",
+      "part_counts": {
+        "CN7 W/S SIDE MLD'G RH": 13,
+        "CN7 W/S SIDE MLD'G LH": 4
+      },
+      "reasons": {
+        "가스": 13,
+        "미성형": 4
+      }
+    },
+    {
+      "date": "2020-10-22",
+      "bad_products": 15,
+      "distinct_timestamp": 15,
+      "first": "2020-10-22 00:51:52",
+      "last": "2020-10-22 07:37:31",
+      "part_counts": {
+        "RG3 MOLD'G W/SHLD, RH": 15
+      },
+      "reasons": {
+        "가스": 10,
+        "미성형": 5
+      }
+    },
+    {
+      "date": "2020-10-23",
+      "bad_products": 10,
+      "distinct_timestamp": 10,
+      "first": "2020-10-23 01:03:33",
+      "last": "2020-10-23 07:21:20",
+      "part_counts": {
+        "RG3 MOLD'G W/SHLD, RH": 10
+      },
+      "reasons": {
+        "가스": 7,
+        "미성형": 3
+      }
+    },
+    {
+      "date": "2020-10-27",
+      "bad_products": 10,
+      "distinct_timestamp": 5,
+      "first": "2020-10-27 00:56:21",
+      "last": "2020-10-27 01:05:41",
+      "part_counts": {
+        "CN7 W/S SIDE MLD'G RH": 5,
+        "CN7 W/S SIDE MLD'G LH": 5
+      },
+      "reasons": {
+        "초기허용불량": 10
+      }
+    },
+    {
+      "date": "2020-11-03",
+      "bad_products": 1,
+      "distinct_timestamp": 1,
+      "first": "2020-11-03 04:44:17",
+      "last": "2020-11-03 04:44:17",
+      "part_counts": {
+        "CN7 W/S SIDE MLD'G LH": 1
+      },
+      "reasons": {
+        "미성형": 1
+      }
+    },
+    {
+      "date": "2020-11-04",
+      "bad_products": 7,
+      "distinct_timestamp": 7,
+      "first": "2020-11-04 05:17:45",
+      "last": "2020-11-04 05:33:13",
+      "part_counts": {
+        "RG3 MOLD'G W/SHLD, LH": 5,
+        "RG3 MOLD'G W/SHLD, RH": 2
+      },
+      "reasons": {
+        "가스": 5,
+        "미성형": 2
+      }
+    }
+  ],
+  "episodes_defined_by_gap_minutes": {
+    "3": 31,
+    "5": 28,
+    "10": 23,
+    "30": 15
+  },
+  "interpretation": "Timestamp and production-instruction keys are proxies, not verified independent physical failure incidents or cavity IDs."
+}

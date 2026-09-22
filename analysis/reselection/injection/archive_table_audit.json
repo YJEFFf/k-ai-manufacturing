@@ -1,0 +1,1454 @@
+{
+  "archives": {
+    "Dataset_사출성형 공급망최적화 AI 데이터셋.zip": [
+      {
+        "name": "data/사출성형.csv",
+        "bytes": 3680606,
+        "compressed": 592778,
+        "crc": 3729363518
+      }
+    ]
+  },
+  "tables": {
+    "Investment_Casting.csv": {
+      "shape": [
+        73612,
+        23
+      ],
+      "columns": [
+        "line_unit",
+        "production",
+        "timestamp",
+        "date",
+        "production_count",
+        "mold_temperature",
+        "facility_CycleTime",
+        "production_CycleTime",
+        "mechanical_strength",
+        "molten_capacity",
+        "injection_pressure",
+        "sleeve_temperature",
+        "top_temp1",
+        "top_temp2",
+        "top_temp3",
+        "top_temp4",
+        "bottom_temp1",
+        "bottom_temp2",
+        "bottom_temp3",
+        "bottom_temp4",
+        "biscuit_thickness",
+        "cooling_water_temp",
+        "PassOrFail"
+      ],
+      "dtypes": {
+        "line_unit": "str",
+        "production": "str",
+        "timestamp": "str",
+        "date": "str",
+        "production_count": "int64",
+        "mold_temperature": "int64",
+        "facility_CycleTime": "int64",
+        "production_CycleTime": "int64",
+        "mechanical_strength": "float64",
+        "molten_capacity": "float64",
+        "injection_pressure": "float64",
+        "sleeve_temperature": "float64",
+        "top_temp1": "float64",
+        "top_temp2": "float64",
+        "top_temp3": "float64",
+        "top_temp4": "int64",
+        "bottom_temp1": "float64",
+        "bottom_temp2": "float64",
+        "bottom_temp3": "float64",
+        "bottom_temp4": "int64",
+        "biscuit_thickness": "float64",
+        "cooling_water_temp": "float64",
+        "PassOrFail": "float64"
+      },
+      "missing": {
+        "mechanical_strength": 1,
+        "molten_capacity": 16316,
+        "injection_pressure": 1,
+        "sleeve_temperature": 1,
+        "top_temp1": 1,
+        "top_temp2": 1,
+        "top_temp3": 1,
+        "bottom_temp1": 1,
+        "bottom_temp2": 1,
+        "bottom_temp3": 1,
+        "biscuit_thickness": 1,
+        "cooling_water_temp": 1,
+        "PassOrFail": 1
+      },
+      "unique": {
+        "line_unit": 1,
+        "production": 1,
+        "timestamp": 64,
+        "date": 49670,
+        "production_count": 1928,
+        "mold_temperature": 68,
+        "facility_CycleTime": 199,
+        "production_CycleTime": 200,
+        "mechanical_strength": 15,
+        "molten_capacity": 34,
+        "injection_pressure": 123,
+        "sleeve_temperature": 440,
+        "top_temp1": 315,
+        "top_temp2": 223,
+        "top_temp3": 223,
+        "top_temp4": 1,
+        "bottom_temp1": 332,
+        "bottom_temp2": 292,
+        "bottom_temp3": 292,
+        "bottom_temp4": 1,
+        "biscuit_thickness": 68,
+        "cooling_water_temp": 35,
+        "PassOrFail": 3
+      },
+      "duplicate_rows": 0,
+      "head": [
+        {
+          "line_unit": "line_no1",
+          "production": "CylinderHead",
+          "timestamp": "2021-08-04",
+          "date": "7:04:11",
+          "production_count": 1,
+          "mold_temperature": 587,
+          "facility_CycleTime": 153,
+          "production_CycleTime": 161,
+          "mechanical_strength": 88.0,
+          "molten_capacity": 12.0,
+          "injection_pressure": 660.0,
+          "sleeve_temperature": 416.0,
+          "top_temp1": 360.0,
+          "top_temp2": 266.0,
+          "top_temp3": 806.0,
+          "top_temp4": 1620,
+          "bottom_temp1": 655.0,
+          "bottom_temp2": 381.0,
+          "bottom_temp3": 1143.0,
+          "bottom_temp4": 1880,
+          "biscuit_thickness": 142.0,
+          "cooling_water_temp": 45.0,
+          "PassOrFail": 0.0
+        },
+        {
+          "line_unit": "line_no1",
+          "production": "CylinderHead",
+          "timestamp": "2021-08-04",
+          "date": "7:05:25",
+          "production_count": 2,
+          "mold_temperature": 579,
+          "facility_CycleTime": 149,
+          "production_CycleTime": 153,
+          "mechanical_strength": 87.0,
+          "molten_capacity": 18.0,
+          "injection_pressure": 662.0,
+          "sleeve_temperature": 419.0,
+          "top_temp1": 214.0,
+          "top_temp2": 369.0,
+          "top_temp3": 1109.0,
+          "top_temp4": 1620,
+          "bottom_temp1": 557.0,
+          "bottom_temp2": 298.0,
+          "bottom_temp3": 894.0,
+          "bottom_temp4": 1880,
+          "biscuit_thickness": 146.0,
+          "cooling_water_temp": 39.0,
+          "PassOrFail": 0.0
+        },
+        {
+          "line_unit": "line_no1",
+          "production": "CylinderHead",
+          "timestamp": "2021-08-04",
+          "date": "7:07:01",
+          "production_count": 3,
+          "mold_temperature": 588,
+          "facility_CycleTime": 146,
+          "production_CycleTime": 147,
+          "mechanical_strength": 88.0,
+          "molten_capacity": 12.0,
+          "injection_pressure": 660.0,
+          "sleeve_temperature": 415.0,
+          "top_temp1": 362.0,
+          "top_temp2": 264.0,
+          "top_temp3": 801.0,
+          "top_temp4": 1620,
+          "bottom_temp1": 657.0,
+          "bottom_temp2": 383.0,
+          "bottom_temp3": 1149.0,
+          "bottom_temp4": 1880,
+          "biscuit_thickness": 148.0,
+          "cooling_water_temp": 45.0,
+          "PassOrFail": 0.0
+        }
+      ],
+      "small_value_counts": {
+        "line_unit": {
+          "line_no1": 73612
+        },
+        "production": {
+          "CylinderHead": 73612
+        },
+        "mechanical_strength": {
+          "87.0": 24406,
+          "88.0": 17820,
+          "86.0": 8700,
+          "89.0": 8269,
+          "90.0": 4836,
+          "91.0": 2847,
+          "85.0": 2797,
+          "82.0": 1375,
+          "81.0": 1127,
+          "83.0": 633,
+          "84.0": 464,
+          "80.0": 201,
+          "0.0": 116,
+          "92.0": 20,
+          "nan": 1
+        },
+        "top_temp4": {
+          "1620": 73612
+        },
+        "bottom_temp4": {
+          "1880": 73612
+        },
+        "PassOrFail": {
+          "0.0": 70334,
+          "1.0": 3277,
+          "nan": 1
+        }
+      },
+      "numeric_summary": {
+        "production_count": {
+          "count": 73612.0,
+          "mean": 680.0736021300875,
+          "std": 458.2429026035448,
+          "min": 1.0,
+          "25%": 299.0,
+          "50%": 615.0,
+          "75%": 1001.0,
+          "max": 1928.0
+        },
+        "mold_temperature": {
+          "count": 73612.0,
+          "mean": 586.6384285170896,
+          "std": 45.59939306159049,
+          "min": 0.0,
+          "25%": 584.0,
+          "50%": 595.0,
+          "75%": 596.0,
+          "max": 600.0
+        },
+        "facility_CycleTime": {
+          "count": 73612.0,
+          "mean": 151.50345052437103,
+          "std": 13.279855731579943,
+          "min": 33.0,
+          "25%": 144.0,
+          "50%": 150.0,
+          "75%": 156.0,
+          "max": 497.0
+        },
+        "production_CycleTime": {
+          "count": 73612.0,
+          "mean": 156.52199369667989,
+          "std": 13.528021598077782,
+          "min": 37.0,
+          "25%": 149.0,
+          "50%": 155.0,
+          "75%": 161.0,
+          "max": 499.0
+        },
+        "mechanical_strength": {
+          "count": 73611.0,
+          "mean": 87.23094374482075,
+          "std": 3.924186366706772,
+          "min": 0.0,
+          "25%": 87.0,
+          "50%": 87.0,
+          "75%": 88.0,
+          "max": 92.0
+        },
+        "molten_capacity": {
+          "count": 57296.0,
+          "mean": 16.330215023736386,
+          "std": 14.096291801917697,
+          "min": 0.0,
+          "25%": 12.0,
+          "50%": 17.0,
+          "75%": 20.0,
+          "max": 653.0
+        },
+        "injection_pressure": {
+          "count": 73611.0,
+          "mean": 648.6489655078725,
+          "std": 53.06741581962679,
+          "min": 82.0,
+          "25%": 650.0,
+          "50%": 660.0,
+          "75%": 662.0,
+          "max": 696.0
+        },
+        "sleeve_temperature": {
+          "count": 73611.0,
+          "mean": 357.3102253739251,
+          "std": 88.98582973068879,
+          "min": 80.0,
+          "25%": 331.0,
+          "50%": 382.0,
+          "75%": 416.0,
+          "max": 1130.0
+        },
+        "top_temp1": {
+          "count": 73611.0,
+          "mean": 378.8596269579275,
+          "std": 88.6284435857655,
+          "min": 50.0,
+          "25%": 342.0,
+          "50%": 395.0,
+          "75%": 440.0,
+          "max": 2859.0
+        },
+        "top_temp2": {
+          "count": 73611.0,
+          "mean": 342.7507573596337,
+          "std": 61.23463819516734,
+          "min": 50.0,
+          "25%": 311.0,
+          "50%": 355.0,
+          "75%": 377.0,
+          "max": 8264.0
+        },
+        "top_temp3": {
+          "count": 73611.0,
+          "mean": 1031.2926600643925,
+          "std": 158.01616262731974,
+          "min": 173.0,
+          "25%": 938.0,
+          "50%": 1068.0,
+          "75%": 1132.0,
+          "max": 2859.0
+        },
+        "top_temp4": {
+          "count": 73612.0,
+          "mean": 1620.0,
+          "std": 0.0,
+          "min": 1620.0,
+          "25%": 1620.0,
+          "50%": 1620.0,
+          "75%": 1620.0,
+          "max": 1620.0
+        },
+        "bottom_temp1": {
+          "count": 73611.0,
+          "mean": 460.5097607694502,
+          "std": 111.10970771101805,
+          "min": 50.0,
+          "25%": 393.0,
+          "50%": 469.0,
+          "75%": 557.0,
+          "max": 797.0
+        },
+        "bottom_temp2": {
+          "count": 73611.0,
+          "mean": 412.71132031897406,
+          "std": 88.81928609763385,
+          "min": 50.0,
+          "25%": 359.0,
+          "50%": 403.0,
+          "75%": 492.0,
+          "max": 2870.0
+        },
+        "bottom_temp3": {
+          "count": 73611.0,
+          "mean": 1237.8067408403635,
+          "std": 261.11901977850164,
+          "min": 150.0,
+          "25%": 1077.0,
+          "50%": 1209.0,
+          "75%": 1476.0,
+          "max": 2870.0
+        },
+        "bottom_temp4": {
+          "count": 73612.0,
+          "mean": 1880.0,
+          "std": 0.0,
+          "min": 1880.0,
+          "25%": 1880.0,
+          "50%": 1880.0,
+          "75%": 1880.0,
+          "max": 1880.0
+        },
+        "biscuit_thickness": {
+          "count": 73611.0,
+          "mean": 150.3602586569942,
+          "std": 18.234533469493826,
+          "min": 100.0,
+          "25%": 147.0,
+          "50%": 150.0,
+          "75%": 153.0,
+          "max": 522.0
+        },
+        "cooling_water_temp": {
+          "count": 73611.0,
+          "mean": 35.501188681039515,
+          "std": 5.195146604341196,
+          "min": 5.0,
+          "25%": 33.0,
+          "50%": 35.0,
+          "75%": 39.0,
+          "max": 68.0
+        },
+        "PassOrFail": {
+          "count": 73611.0,
+          "mean": 0.04451780304574045,
+          "std": 0.20624389957901645,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 0.0,
+          "75%": 0.0,
+          "max": 1.0
+        }
+      }
+    },
+    "Dataset_사출성형 공급망최적화 AI 데이터셋.zip!data/사출성형.csv": {
+      "shape": [
+        34617,
+        20
+      ],
+      "columns": [
+        "Product_Number",
+        "T일 예정 수주량",
+        "T+1일 예정 수주량",
+        "T+2일 예정 수주량",
+        "T+3일 예정 수주량",
+        "T+4일 예정 수주량",
+        "작년 T일 예정 수주량",
+        "작년 T+1일 예정 수주량",
+        "작년 T+2일 예정 수주량",
+        "작년 T+3일 예정 수주량",
+        "작년 T+4일 예정 수주량",
+        "T일 예상 수주량",
+        "T+1일 예상 수주량",
+        "T+2일 예상 수주량",
+        "T+3일 예상 수주량",
+        "T+4일 예상 수주량",
+        "DateTime",
+        "DoW",
+        "Temperature",
+        "Humidity"
+      ],
+      "dtypes": {
+        "Product_Number": "str",
+        "T일 예정 수주량": "int64",
+        "T+1일 예정 수주량": "int64",
+        "T+2일 예정 수주량": "int64",
+        "T+3일 예정 수주량": "int64",
+        "T+4일 예정 수주량": "int64",
+        "작년 T일 예정 수주량": "int64",
+        "작년 T+1일 예정 수주량": "int64",
+        "작년 T+2일 예정 수주량": "int64",
+        "작년 T+3일 예정 수주량": "int64",
+        "작년 T+4일 예정 수주량": "int64",
+        "T일 예상 수주량": "int64",
+        "T+1일 예상 수주량": "int64",
+        "T+2일 예상 수주량": "int64",
+        "T+3일 예상 수주량": "int64",
+        "T+4일 예상 수주량": "int64",
+        "DateTime": "str",
+        "DoW": "str",
+        "Temperature": "float64",
+        "Humidity": "float64"
+      },
+      "missing": {},
+      "unique": {
+        "Product_Number": 117,
+        "T일 예정 수주량": 481,
+        "T+1일 예정 수주량": 366,
+        "T+2일 예정 수주량": 360,
+        "T+3일 예정 수주량": 372,
+        "T+4일 예정 수주량": 373,
+        "작년 T일 예정 수주량": 381,
+        "작년 T+1일 예정 수주량": 365,
+        "작년 T+2일 예정 수주량": 411,
+        "작년 T+3일 예정 수주량": 385,
+        "작년 T+4일 예정 수주량": 377,
+        "T일 예상 수주량": 378,
+        "T+1일 예상 수주량": 369,
+        "T+2일 예상 수주량": 383,
+        "T+3일 예상 수주량": 386,
+        "T+4일 예상 수주량": 387,
+        "DateTime": 304,
+        "DoW": 7,
+        "Temperature": 95,
+        "Humidity": 95
+      },
+      "duplicate_rows": 2,
+      "head": [
+        {
+          "Product_Number": "Product_ac",
+          "T일 예정 수주량": 0,
+          "T+1일 예정 수주량": 0,
+          "T+2일 예정 수주량": 0,
+          "T+3일 예정 수주량": 2,
+          "T+4일 예정 수주량": 3,
+          "작년 T일 예정 수주량": 7,
+          "작년 T+1일 예정 수주량": 3,
+          "작년 T+2일 예정 수주량": 0,
+          "작년 T+3일 예정 수주량": 2,
+          "작년 T+4일 예정 수주량": 0,
+          "T일 예상 수주량": 0,
+          "T+1일 예상 수주량": 8,
+          "T+2일 예상 수주량": 6,
+          "T+3일 예상 수주량": 0,
+          "T+4일 예상 수주량": 0,
+          "DateTime": "2022-03-13 7:04",
+          "DoW": "Sunday",
+          "Temperature": 20.76761905,
+          "Humidity": 50.01571429
+        },
+        {
+          "Product_Number": "Product_c2",
+          "T일 예정 수주량": 166,
+          "T+1일 예정 수주량": 130,
+          "T+2일 예정 수주량": 130,
+          "T+3일 예정 수주량": 130,
+          "T+4일 예정 수주량": 0,
+          "작년 T일 예정 수주량": 0,
+          "작년 T+1일 예정 수주량": 126,
+          "작년 T+2일 예정 수주량": 126,
+          "작년 T+3일 예정 수주량": 126,
+          "작년 T+4일 예정 수주량": 126,
+          "T일 예상 수주량": 126,
+          "T+1일 예상 수주량": 126,
+          "T+2일 예상 수주량": 0,
+          "T+3일 예상 수주량": 126,
+          "T+4일 예상 수주량": 126,
+          "DateTime": "2022-02-25 11:34",
+          "DoW": "Friday",
+          "Temperature": 13.66616438,
+          "Humidity": 12.7109589
+        },
+        {
+          "Product_Number": "Product_d7",
+          "T일 예정 수주량": 21,
+          "T+1일 예정 수주량": 11,
+          "T+2일 예정 수주량": 10,
+          "T+3일 예정 수주량": 18,
+          "T+4일 예정 수주량": 20,
+          "작년 T일 예정 수주량": 24,
+          "작년 T+1일 예정 수주량": 0,
+          "작년 T+2일 예정 수주량": 11,
+          "작년 T+3일 예정 수주량": 0,
+          "작년 T+4일 예정 수주량": 0,
+          "T일 예상 수주량": 0,
+          "T+1일 예상 수주량": 0,
+          "T+2일 예상 수주량": 0,
+          "T+3일 예상 수주량": 0,
+          "T+4일 예상 수주량": 0,
+          "DateTime": "2022-02-10 6:31",
+          "DoW": "Thursday",
+          "Temperature": 14.10637367,
+          "Humidity": 28.37485424
+        }
+      ],
+      "small_value_counts": {
+        "DoW": {
+          "Sunday": 6822,
+          "Saturday": 5796,
+          "Friday": 5430,
+          "Monday": 5111,
+          "Thursday": 4648,
+          "Tuesday": 4088,
+          "Wednesday": 2722
+        }
+      },
+      "numeric_summary": {
+        "T일 예정 수주량": {
+          "count": 34617.0,
+          "mean": 101.46826703642719,
+          "std": 168.00425525463564,
+          "min": 0.0,
+          "25%": 2.0,
+          "50%": 30.0,
+          "75%": 124.0,
+          "max": 1131.0
+        },
+        "T+1일 예정 수주량": {
+          "count": 34617.0,
+          "mean": 67.01403934483058,
+          "std": 131.21273538328686,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 5.0,
+          "75%": 69.0,
+          "max": 883.0
+        },
+        "T+2일 예정 수주량": {
+          "count": 34617.0,
+          "mean": 48.75829794609585,
+          "std": 115.20005166289997,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 0.0,
+          "75%": 36.0,
+          "max": 885.0
+        },
+        "T+3일 예정 수주량": {
+          "count": 34617.0,
+          "mean": 51.888551867579515,
+          "std": 115.11186845356897,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 0.0,
+          "75%": 44.0,
+          "max": 872.0
+        },
+        "T+4일 예정 수주량": {
+          "count": 34617.0,
+          "mean": 60.85582228384897,
+          "std": 123.27479438607243,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 1.0,
+          "75%": 62.0,
+          "max": 865.0
+        },
+        "작년 T일 예정 수주량": {
+          "count": 34617.0,
+          "mean": 63.70996909033134,
+          "std": 127.46987867820125,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 1.0,
+          "75%": 67.0,
+          "max": 863.0
+        },
+        "작년 T+1일 예정 수주량": {
+          "count": 34617.0,
+          "mean": 70.92272582835024,
+          "std": 133.0882599205943,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 8.0,
+          "75%": 79.0,
+          "max": 909.0
+        },
+        "작년 T+2일 예정 수주량": {
+          "count": 34617.0,
+          "mean": 89.92656787127711,
+          "std": 146.4361748638134,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 28.0,
+          "75%": 109.0,
+          "max": 912.0
+        },
+        "작년 T+3일 예정 수주량": {
+          "count": 34617.0,
+          "mean": 76.28064245890748,
+          "std": 138.96163515775206,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 11.0,
+          "75%": 88.0,
+          "max": 909.0
+        },
+        "작년 T+4일 예정 수주량": {
+          "count": 34617.0,
+          "mean": 55.156339370829365,
+          "std": 120.92679236513611,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 0.0,
+          "75%": 49.0,
+          "max": 886.0
+        },
+        "T일 예상 수주량": {
+          "count": 34617.0,
+          "mean": 71.21786983274114,
+          "std": 134.57381465485486,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 5.0,
+          "75%": 82.0,
+          "max": 839.0
+        },
+        "T+1일 예상 수주량": {
+          "count": 34617.0,
+          "mean": 73.14544876794639,
+          "std": 135.42346562239143,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 8.0,
+          "75%": 88.0,
+          "max": 896.0
+        },
+        "T+2일 예상 수주량": {
+          "count": 34617.0,
+          "mean": 71.89340497443453,
+          "std": 135.46023423734317,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 5.0,
+          "75%": 80.0,
+          "max": 794.0
+        },
+        "T+3일 예상 수주량": {
+          "count": 34617.0,
+          "mean": 77.254816997429,
+          "std": 138.45426468054103,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 10.0,
+          "75%": 88.0,
+          "max": 926.0
+        },
+        "T+4일 예상 수주량": {
+          "count": 34617.0,
+          "mean": 76.30918334922148,
+          "std": 138.17141448070728,
+          "min": 0.0,
+          "25%": 0.0,
+          "50%": 6.0,
+          "75%": 87.0,
+          "max": 969.0
+        },
+        "Temperature": {
+          "count": 34617.0,
+          "mean": 18.059813181948922,
+          "std": 5.221528718324876,
+          "min": 8.190540541,
+          "25%": 13.41,
+          "50%": 19.5439305856833,
+          "75%": 22.51669120831529,
+          "max": 27.59588184187663
+        },
+        "Humidity": {
+          "count": 34617.0,
+          "mean": 35.617654871648035,
+          "std": 80.92957176903774,
+          "min": 11.53,
+          "25%": 21.79947368,
+          "50%": 28.932168021680216,
+          "75%": 37.06,
+          "max": 1021.615319148936
+        }
+      }
+    }
+  },
+  "errors": {
+    "Dataset_사출성형 예지보전 AI 데이터셋.zip": "BadZipFile('File is not a zip file')"
+  },
+  "files": [
+    {
+      "name": "06. Dataset_Machinevision.zip",
+      "bytes": 80981170,
+      "cloud": true
+    },
+    {
+      "name": "Investment_Casting.csv",
+      "bytes": 8586965,
+      "cloud": false,
+      "sha256": "1d9c109982acc6d7278e7fbd5ac7bfddc6c6158974753ae05a7094e7b23adf34"
+    },
+    {
+      "name": "Dataset_사출성형 공급망최적화 AI 데이터셋.zip",
+      "bytes": 592954,
+      "cloud": false,
+      "sha256": "eced80185b4a70f0295741b55d6a371e244f217fde5dba4ff6ed7686759f73d8"
+    },
+    {
+      "name": "Dataset_소성가공 품질보증 AI 데이터셋.zip",
+      "bytes": 135896,
+      "cloud": true
+    },
+    {
+      "name": "Dataset_주조 품질보증 AI 데이터셋.zip",
+      "bytes": 154921,
+      "cloud": true
+    },
+    {
+      "name": "04. Dataset_Molding.zip",
+      "bytes": 25152722,
+      "cloud": true
+    },
+    {
+      "name": "Dataset_사출성형 예지보전 AI 데이터셋.zip",
+      "bytes": 20879464,
+      "cloud": false,
+      "sha256": "60415170e420b4b61ba6ec867d55ecff8316dd2104a9a89b663c3394c1362777"
+    },
+    {
+      "name": "Dataset_주조 설비 예지보전 AI 데이터셋.zip",
+      "bytes": 118170,
+      "cloud": true
+    },
+    {
+      "name": "Dataset_생산공정 최적화 AI 데이터셋.zip",
+      "bytes": 3806275,
+      "cloud": true
+    }
+  ],
+  "truncated_local_headers": {
+    "Dataset_사출성형 예지보전 AI 데이터셋.zip": [
+      {
+        "name": "AASX 및 변환파일/engineering.csv",
+        "expected_bytes": 25316,
+        "compressed": 2169,
+        "available_compressed": 2169,
+        "complete": true,
+        "flag": 2048,
+        "crc_ok": true,
+        "table": {
+          "shape": [
+            230,
+            6
+          ],
+          "columns": [
+            "ns=2;s=CloudDataSolution.CloudSolution.BasicConfiguration.InternetAddress",
+            " ",
+            " .1",
+            " .2",
+            " 100",
+            " -1"
+          ],
+          "dtypes": {
+            "ns=2;s=CloudDataSolution.CloudSolution.BasicConfiguration.InternetAddress": "str",
+            " ": "str",
+            " .1": "str",
+            " .2": "str",
+            " 100": "int64",
+            " -1": "int64"
+          },
+          "missing": {},
+          "unique": {
+            "ns=2;s=CloudDataSolution.CloudSolution.BasicConfiguration.InternetAddress": 230,
+            " ": 1,
+            " .1": 1,
+            " .2": 1,
+            " 100": 1,
+            " -1": 1
+          },
+          "duplicate_rows": 0,
+          "head": [
+            {
+              "ns=2;s=CloudDataSolution.CloudSolution.BasicConfiguration.InternetAddress": "ns=2;s=CloudDataSolution.CloudSolution.BasicConfiguration.SamplingInterval",
+              " ": " ",
+              " .1": " ",
+              " .2": " ",
+              " 100": 100,
+              " -1": -1
+            },
+            {
+              "ns=2;s=CloudDataSolution.CloudSolution.BasicConfiguration.InternetAddress": "ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.BasicConfiguration.NetworkConnection",
+              " ": " ",
+              " .1": " ",
+              " .2": " ",
+              " 100": 100,
+              " -1": -1
+            },
+            {
+              "ns=2;s=CloudDataSolution.CloudSolution.BasicConfiguration.InternetAddress": "ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.BasicConfiguration.SamplingInterval",
+              " ": " ",
+              " .1": " ",
+              " .2": " ",
+              " 100": 100,
+              " -1": -1
+            }
+          ],
+          "small_value_counts": {
+            " ": {
+              " ": 230
+            },
+            " .1": {
+              " ": 230
+            },
+            " .2": {
+              " ": 230
+            },
+            " 100": {
+              "100": 230
+            },
+            " -1": {
+              "-1": 230
+            }
+          },
+          "numeric_summary": {
+            " 100": {
+              "count": 230.0,
+              "mean": 100.0,
+              "std": 0.0,
+              "min": 100.0,
+              "25%": 100.0,
+              "50%": 100.0,
+              "75%": 100.0,
+              "max": 100.0
+            },
+            " -1": {
+              "count": 230.0,
+              "mean": -1.0,
+              "std": 0.0,
+              "min": -1.0,
+              "25%": -1.0,
+              "50%": -1.0,
+              "75%": -1.0,
+              "max": -1.0
+            }
+          }
+        }
+      },
+      {
+        "name": "AASX 및 변환파일/Injection_Molding_Machine_AAS_Final.aasx",
+        "expected_bytes": 32010,
+        "compressed": 31065,
+        "available_compressed": 31065,
+        "complete": true,
+        "flag": 2048,
+        "crc_ok": true
+      },
+      {
+        "name": "AASX 및 변환파일/Injection_Molding_Machine_AAS_Final.xml",
+        "expected_bytes": 698575,
+        "compressed": 36354,
+        "available_compressed": 36354,
+        "complete": true,
+        "flag": 2048,
+        "crc_ok": true
+      },
+      {
+        "name": "AASX 및 변환파일/nodeset.xml",
+        "expected_bytes": 265951,
+        "compressed": 13530,
+        "available_compressed": 13530,
+        "complete": true,
+        "flag": 2048,
+        "crc_ok": true
+      },
+      {
+        "name": "AASX 및 변환파일/syscfg.json",
+        "expected_bytes": 485,
+        "compressed": 273,
+        "available_compressed": 273,
+        "complete": true,
+        "flag": 2048,
+        "crc_ok": true
+      },
+      {
+        "name": "data/InjectionMolding_Raw_Data.csv",
+        "expected_bytes": 142892566,
+        "compressed": 24214987,
+        "available_compressed": 20795633,
+        "complete": false,
+        "flag": 0,
+        "partial_table_unverified": {
+          "shape": [
+            883092,
+            26
+          ],
+          "columns": [
+            "No_Shot",
+            "Machine_Cycle_Time",
+            "Cycle_Time",
+            "Barrel_Temp_Z1",
+            "Barrel_Temp_Z2",
+            "Barrel_Temp_Z3",
+            "Barrel_Temp_Z4",
+            "Hopper_Temp",
+            "Injection_Pressure_Real_Time",
+            "Screw_Position",
+            "Injection_Peak_Press",
+            "Max_Injection_Rate",
+            "Screw_Velocity",
+            "VP_Time",
+            "VP_Position",
+            "Weighing_Start_Position",
+            "VP_Press",
+            "Plasticizing_Time",
+            "Plasticizing_Start_Position",
+            "Plasticizing_End_Position",
+            "Plasticizing_RPM",
+            "Minimum_Cushion",
+            "Cooling_Time",
+            "Back_Flow",
+            "Decompression_Time",
+            "_ID"
+          ],
+          "dtypes": {
+            "No_Shot": "int64",
+            "Machine_Cycle_Time": "float64",
+            "Cycle_Time": "float64",
+            "Barrel_Temp_Z1": "float64",
+            "Barrel_Temp_Z2": "float64",
+            "Barrel_Temp_Z3": "float64",
+            "Barrel_Temp_Z4": "float64",
+            "Hopper_Temp": "float64",
+            "Injection_Pressure_Real_Time": "float64",
+            "Screw_Position": "float64",
+            "Injection_Peak_Press": "float64",
+            "Max_Injection_Rate": "float64",
+            "Screw_Velocity": "float64",
+            "VP_Time": "float64",
+            "VP_Position": "float64",
+            "Weighing_Start_Position": "float64",
+            "VP_Press": "float64",
+            "Plasticizing_Time": "float64",
+            "Plasticizing_Start_Position": "float64",
+            "Plasticizing_End_Position": "float64",
+            "Plasticizing_RPM": "float64",
+            "Minimum_Cushion": "float64",
+            "Cooling_Time": "float64",
+            "Back_Flow": "float64",
+            "Decompression_Time": "float64",
+            "_ID": "int64"
+          },
+          "missing": {},
+          "unique": {
+            "No_Shot": 9178,
+            "Machine_Cycle_Time": 416,
+            "Cycle_Time": 617,
+            "Barrel_Temp_Z1": 211,
+            "Barrel_Temp_Z2": 259,
+            "Barrel_Temp_Z3": 248,
+            "Barrel_Temp_Z4": 301,
+            "Hopper_Temp": 202,
+            "Injection_Pressure_Real_Time": 153,
+            "Screw_Position": 757,
+            "Injection_Peak_Press": 6281,
+            "Max_Injection_Rate": 1128,
+            "Screw_Velocity": 5373,
+            "VP_Time": 7,
+            "VP_Position": 60,
+            "Weighing_Start_Position": 896,
+            "VP_Press": 5673,
+            "Plasticizing_Time": 591,
+            "Plasticizing_Start_Position": 893,
+            "Plasticizing_End_Position": 47,
+            "Plasticizing_RPM": 9,
+            "Minimum_Cushion": 757,
+            "Cooling_Time": 13,
+            "Back_Flow": 9,
+            "Decompression_Time": 13,
+            "_ID": 883092
+          },
+          "duplicate_rows": 0,
+          "head": [
+            {
+              "No_Shot": 0,
+              "Machine_Cycle_Time": 16.54,
+              "Cycle_Time": 16.52,
+              "Barrel_Temp_Z1": 210.2,
+              "Barrel_Temp_Z2": 200.7,
+              "Barrel_Temp_Z3": 193.5,
+              "Barrel_Temp_Z4": 187.3,
+              "Hopper_Temp": 40.1,
+              "Injection_Pressure_Real_Time": 1.23,
+              "Screw_Position": 6.02,
+              "Injection_Peak_Press": 1211.65,
+              "Max_Injection_Rate": 78.37,
+              "Screw_Velocity": 20.6,
+              "VP_Time": 2.0,
+              "VP_Position": 8.14,
+              "Weighing_Start_Position": 10.51,
+              "VP_Press": 1062.0,
+              "Plasticizing_Time": 4.74,
+              "Plasticizing_Start_Position": 10.46,
+              "Plasticizing_End_Position": 63.11,
+              "Plasticizing_RPM": 28.27,
+              "Minimum_Cushion": 6.02,
+              "Cooling_Time": 8.0,
+              "Back_Flow": 49.03,
+              "Decompression_Time": 0.32,
+              "_ID": 0
+            },
+            {
+              "No_Shot": 1,
+              "Machine_Cycle_Time": 16.56,
+              "Cycle_Time": 16.54,
+              "Barrel_Temp_Z1": 210.2,
+              "Barrel_Temp_Z2": 200.8,
+              "Barrel_Temp_Z3": 193.5,
+              "Barrel_Temp_Z4": 187.2,
+              "Hopper_Temp": 40.2,
+              "Injection_Pressure_Real_Time": 1.24,
+              "Screw_Position": 6.02,
+              "Injection_Peak_Press": 1211.65,
+              "Max_Injection_Rate": 78.37,
+              "Screw_Velocity": 20.6,
+              "VP_Time": 2.0,
+              "VP_Position": 8.14,
+              "Weighing_Start_Position": 10.51,
+              "VP_Press": 1062.0,
+              "Plasticizing_Time": 4.81,
+              "Plasticizing_Start_Position": 10.49,
+              "Plasticizing_End_Position": 63.11,
+              "Plasticizing_RPM": 28.27,
+              "Minimum_Cushion": 6.02,
+              "Cooling_Time": 8.0,
+              "Back_Flow": 49.03,
+              "Decompression_Time": 0.32,
+              "_ID": 1
+            },
+            {
+              "No_Shot": 2,
+              "Machine_Cycle_Time": 16.58,
+              "Cycle_Time": 16.56,
+              "Barrel_Temp_Z1": 210.1,
+              "Barrel_Temp_Z2": 200.7,
+              "Barrel_Temp_Z3": 193.5,
+              "Barrel_Temp_Z4": 187.2,
+              "Hopper_Temp": 40.2,
+              "Injection_Pressure_Real_Time": 1.26,
+              "Screw_Position": 6.02,
+              "Injection_Peak_Press": 1209.16,
+              "Max_Injection_Rate": 78.32,
+              "Screw_Velocity": 35.38,
+              "VP_Time": 2.0,
+              "VP_Position": 8.12,
+              "Weighing_Start_Position": 10.54,
+              "VP_Press": 1101.41,
+              "Plasticizing_Time": 4.8,
+              "Plasticizing_Start_Position": 10.53,
+              "Plasticizing_End_Position": 63.11,
+              "Plasticizing_RPM": 28.27,
+              "Minimum_Cushion": 6.02,
+              "Cooling_Time": 8.0,
+              "Back_Flow": 49.03,
+              "Decompression_Time": 0.32,
+              "_ID": 2
+            }
+          ],
+          "small_value_counts": {
+            "VP_Time": {
+              "1.0": 739888,
+              "2.0": 125053,
+              "1.5": 11664,
+              "3.0": 6386,
+              "0.0": 99,
+              "9.0": 1,
+              "6.0": 1
+            },
+            "Plasticizing_RPM": {
+              "33.93": 345939,
+              "28.27": 189034,
+              "18.85": 169749,
+              "22.62": 151197,
+              "15.08": 11093,
+              "11.31": 6369,
+              "35.81": 5863,
+              "47.12": 3284,
+              "37.7": 564
+            },
+            "Cooling_Time": {
+              "8.0": 683947,
+              "7.0": 77956,
+              "9.0": 65574,
+              "6.0": 19355,
+              "10.0": 19225,
+              "15.0": 6398,
+              "13.0": 4578,
+              "14.0": 2112,
+              "11.0": 1653,
+              "12.0": 1166,
+              "16.0": 1117,
+              "7.5": 8,
+              "17.0": 3
+            },
+            "Back_Flow": {
+              "49.03": 610743,
+              "78.45": 207472,
+              "58.84": 61588,
+              "9.81": 2749,
+              "19.61": 480,
+              "245.17": 56,
+              "294.2": 2,
+              "98.07": 1,
+              "304.01": 1
+            },
+            "Decompression_Time": {
+              "0.32": 317006,
+              "0.29": 276568,
+              "0.34": 140998,
+              "0.33": 101210,
+              "0.35": 19359,
+              "0.31": 15374,
+              "0.3": 9337,
+              "0.42": 3228,
+              "0.36": 8,
+              "0.37": 1,
+              "0.41": 1,
+              "0.17": 1,
+              "0.4": 1
+            }
+          },
+          "numeric_summary": {
+            "No_Shot": {
+              "count": 883092.0,
+              "mean": 1436.7135757089861,
+              "std": 972.727429782887,
+              "min": 0.0,
+              "25%": 662.0,
+              "50%": 1364.0,
+              "75%": 2110.0,
+              "max": 9177.0
+            },
+            "Machine_Cycle_Time": {
+              "count": 883092.0,
+              "mean": 15.106251851449226,
+              "std": 1.8365983701173914,
+              "min": 11.12,
+              "25%": 13.98,
+              "50%": 14.58,
+              "75%": 15.58,
+              "max": 34.52
+            },
+            "Cycle_Time": {
+              "count": 883092.0,
+              "mean": 15.119634534114224,
+              "std": 1.8400224304783948,
+              "min": 11.12,
+              "25%": 14.0,
+              "50%": 14.6,
+              "75%": 15.6,
+              "max": 60.74
+            },
+            "Barrel_Temp_Z1": {
+              "count": 883092.0,
+              "mean": 210.5440135342637,
+              "std": 9.438991044280238,
+              "min": 13.0,
+              "25%": 205.0,
+              "50%": 210.0,
+              "75%": 214.9,
+              "max": 275.1
+            },
+            "Barrel_Temp_Z2": {
+              "count": 883092.0,
+              "mean": 201.4260147300621,
+              "std": 6.468665397917994,
+              "min": 12.9,
+              "25%": 200.0,
+              "50%": 200.0,
+              "75%": 200.1,
+              "max": 251.5
+            },
+            "Barrel_Temp_Z3": {
+              "count": 883092.0,
+              "mean": 196.8196584274345,
+              "std": 6.656787974433923,
+              "min": 12.8,
+              "25%": 194.9,
+              "50%": 195.1,
+              "75%": 195.3,
+              "max": 246.9
+            },
+            "Barrel_Temp_Z4": {
+              "count": 883092.0,
+              "mean": 191.80893938570387,
+              "std": 6.5590251815187015,
+              "min": 12.7,
+              "25%": 190.0,
+              "50%": 190.1,
+              "75%": 190.3,
+              "max": 241.8
+            },
+            "Hopper_Temp": {
+              "count": 883092.0,
+              "mean": 42.75603306337278,
+              "std": 5.492870268864856,
+              "min": 12.1,
+              "25%": 39.9,
+              "50%": 40.2,
+              "75%": 48.9,
+              "max": 52.1
+            },
+            "Injection_Pressure_Real_Time": {
+              "count": 883092.0,
+              "mean": 0.951283252481055,
+              "std": 0.22818605294581354,
+              "min": 0.0,
+              "25%": 0.75,
+              "50%": 1.01,
+              "75%": 1.04,
+              "max": 3.0
+            },
+            "Screw_Position": {
+              "count": 883092.0,
+              "mean": 8.184416051781694,
+              "std": 1.6593626368179664,
+              "min": -0.03,
+              "25%": 6.8,
+              "50%": 8.04,
+              "75%": 8.86,
+              "max": 27.82
+            },
+            "Injection_Peak_Press": {
+              "count": 883092.0,
+              "mean": 1043.6710516797798,
+              "std": 121.21061128650852,
+              "min": 211.15,
+              "25%": 936.04,
+              "50%": 1050.93,
+              "75%": 1080.5,
+              "max": 1504.6
+            },
+            "Max_Injection_Rate": {
+              "count": 883092.0,
+              "mean": 60.0644573272094,
+              "std": 9.976390943805326,
+              "min": 11.05,
+              "25%": 55.97,
+              "50%": 62.44,
+              "75%": 62.78,
+              "max": 84.31
+            },
+            "Screw_Velocity": {
+              "count": 883092.0,
+              "mean": 33.264972018770415,
+              "std": 12.292035752552009,
+              "min": 0.0,
+              "25%": 24.01,
+              "50%": 37.67,
+              "75%": 43.94,
+              "max": 59.24
+            },
+            "VP_Time": {
+              "count": 883092.0,
+              "mean": 1.1625776249813156,
+              "std": 0.38421005518398366,
+              "min": 0.0,
+              "25%": 1.0,
+              "50%": 1.0,
+              "75%": 1.0,
+              "max": 9.0
+            },
+            "VP_Position": {
+              "count": 883092.0,
+              "mean": 9.253684825590085,
+              "std": 1.3438439623952259,
+              "min": 4.23,
+              "25%": 8.14,
+              "50%": 9.14,
+              "75%": 10.15,
+              "max": 29.25
+            },
+            "Weighing_Start_Position": {
+              "count": 883092.0,
+              "mean": 11.584036000779081,
+              "std": 1.6943749886623685,
+              "min": 0.07,
+              "25%": 10.74,
+              "50%": 10.98,
+              "75%": 12.67,
+              "max": 34.13
+            },
+            "VP_Press": {
+              "count": 883092.0,
+              "mean": 991.8881211810321,
+              "std": 110.53478879289031,
+              "min": 1.04,
+              "25%": 875.43,
+              "50%": 1029.23,
+              "75%": 1045.2,
+              "max": 1390.99
+            },
+            "Plasticizing_Time": {
+              "count": 883092.0,
+              "mean": 3.9006288246298233,
+              "std": 1.2543864570462968,
+              "min": 0.0,
+              "25%": 2.57,
+              "50%": 4.25,
+              "75%": 4.87,
+              "max": 24.37
+            },
+            "Plasticizing_Start_Position": {
+              "count": 883092.0,
+              "mean": 11.569813609454055,
+              "std": 1.6728514589942836,
+              "min": 0.11,
+              "25%": 10.77,
+              "50%": 11.01,
+              "75%": 12.67,
+              "max": 34.04
+            },
+            "Plasticizing_End_Position": {
+              "count": 883092.0,
+              "mean": 48.314044346455404,
+              "std": 14.306617065676763,
+              "min": 25.44,
+              "25%": 30.54,
+              "50%": 59.04,
+              "75%": 60.06,
+              "max": 63.13
+            },
+            "Plasticizing_RPM": {
+              "count": 883092.0,
+              "mean": 27.54732347252608,
+              "std": 6.36909551007598,
+              "min": 11.31,
+              "25%": 22.62,
+              "50%": 28.27,
+              "75%": 33.93,
+              "max": 47.12
+            },
+            "Minimum_Cushion": {
+              "count": 883092.0,
+              "mean": 8.184418780829178,
+              "std": 1.6593904244844375,
+              "min": -0.03,
+              "25%": 6.8,
+              "50%": 8.04,
+              "75%": 8.86,
+              "max": 27.94
+            },
+            "Cooling_Time": {
+              "count": 883092.0,
+              "mean": 8.097711223745657,
+              "std": 1.008781425552543,
+              "min": 6.0,
+              "25%": 8.0,
+              "50%": 8.0,
+              "75%": 8.0,
+              "max": 17.0
+            },
+            "Back_Flow": {
+              "count": 883092.0,
+              "mean": 56.50130009104374,
+              "std": 12.733807380336934,
+              "min": 9.81,
+              "25%": 49.03,
+              "50%": 49.03,
+              "75%": 58.84,
+              "max": 304.01
+            },
+            "Decompression_Time": {
+              "count": 883092.0,
+              "mean": 0.3155820005163675,
+              "std": 0.019999597291541688,
+              "min": 0.17,
+              "25%": 0.29,
+              "50%": 0.32,
+              "75%": 0.33,
+              "max": 0.42
+            },
+            "_ID": {
+              "count": 883092.0,
+              "mean": 441545.5,
+              "std": 254926.84629712894,
+              "min": 0.0,
+              "25%": 220772.75,
+              "50%": 441545.5,
+              "75%": 662318.25,
+              "max": 883091.0
+            }
+          }
+        },
+        "partial_decompressed_bytes": 122751215,
+        "partial_zero_shot_rows": 344,
+        "partial_duplicate_sensor_rows": 6
+      }
+    ]
+  }
+}

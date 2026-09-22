@@ -1,0 +1,870 @@
+[
+  {
+    "path": ".DS_Store",
+    "bytes": 14340,
+    "blocks": 32,
+    "flags": "0x8000",
+    "dataless": false
+  },
+  {
+    "path": "과제재선정_자료확보목록.md",
+    "bytes": 15379,
+    "blocks": 32,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "KAMP_가이드북_관련데이터셋_조사.md",
+    "bytes": 24133,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "로봇용접_심층분석.md",
+    "bytes": 26073,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "analysis/.DS_Store",
+    "bytes": 8196,
+    "blocks": 24,
+    "flags": "0x8000",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/미확인 761196.crdownload",
+    "bytes": 746732317,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/06. Dataset_Machinevision.zip",
+    "bytes": 80981170,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_표면처리 자원최적화 AI 데이터셋.pdf",
+    "bytes": 8772579,
+    "blocks": 1144,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_의류 품질보증 AI 데이터셋.pdf",
+    "bytes": 12222799,
+    "blocks": 23880,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Dataset_회전기계 고장유형 AI 데이터셋.zip",
+    "bytes": 17455226,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/미확인 4910.crdownload",
+    "bytes": 1800020352,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_정밀가공 품질보증 AI 데이터셋.pdf",
+    "bytes": 9453591,
+    "blocks": 18472,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Investment_Casting.csv",
+    "bytes": 8586965,
+    "blocks": 16776,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Dataset_로봇용접 예지보전 AI 데이터셋.zip",
+    "bytes": 0,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_제조현장용 Scene-Text Recognition 학습 AI 데이터셋.pdf",
+    "bytes": 8088647,
+    "blocks": 15800,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Guidebook_장비이상 조기탐지 AI 데이터셋.pdf",
+    "bytes": 19900874,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Dataset_전자부품(배터리팩) 품질보증 AI 데이터셋.zip",
+    "bytes": 40648302,
+    "blocks": 79392,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/.DS_Store",
+    "bytes": 10244,
+    "blocks": 24,
+    "flags": "0x8000",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Dataset_품질 이상탐지 진단(전해탈지) AI 데이터셋.zip",
+    "bytes": 543609,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_사출성형 예지보전 AI 데이터셋.pdf",
+    "bytes": 14756212,
+    "blocks": 28824,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/02. Guidebook_FordEngine.pdf",
+    "bytes": 16513007,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Dataset_정밀가공 자원최적화 AI 데이터셋.zip",
+    "bytes": 3759959,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/10. Guidebook_Pasteurizer.pdf",
+    "bytes": 8889005,
+    "blocks": 17368,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Guidebook_생산공정 최적화 AI 데이터셋.pdf",
+    "bytes": 8359638,
+    "blocks": 96,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_품질 이상탐지, 진단(크로메이트) AI 데이터셋.pdf",
+    "bytes": 12840749,
+    "blocks": 1368,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/10. Dataset_Pasteurizer.zip",
+    "bytes": 1024190,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_용접 예지보전 AI 데이터셋.pdf",
+    "bytes": 11135269,
+    "blocks": 21752,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Dataset_의류 품질보증 AI 데이터셋.zip",
+    "bytes": 40978257,
+    "blocks": 80040,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Guidebook_소성가공 예지보전 AI 데이터셋.pdf",
+    "bytes": 10622468,
+    "blocks": 912,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/12. Guidebook_XrayInspection.pdf",
+    "bytes": 10041335,
+    "blocks": 496,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_품질 이상탐지, 진단(도금욕) AI 데이터셋.pdf",
+    "bytes": 12677329,
+    "blocks": 24768,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Guidebook_전자부품(음향기기) 품질보증 AI 데이터셋.pdf",
+    "bytes": 7057042,
+    "blocks": 13784,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/08. Guidebook_Meltingtank.pdf",
+    "bytes": 6949725,
+    "blocks": 13576,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Guidebook_주조 품질보증 AI 데이터셋.pdf",
+    "bytes": 15785611,
+    "blocks": 30832,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Dataset_전자부품(배터리팩) 예지보전 AI 데이터셋.zip",
+    "bytes": 1099753,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Dataset_전자부품(음향기기) 품질보증 AI 데이터셋.zip",
+    "bytes": 1188894424,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/01. Guidebook_OCR.pdf",
+    "bytes": 6464003,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Dataset_품질 이상탐지 진단(도금욕) AI 데이터셋.zip",
+    "bytes": 624196,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_열처리 공정최적화 AI 데이터셋.pdf",
+    "bytes": 8514775,
+    "blocks": 16632,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Guidebook_정밀가공 자원최적화 AI 데이터셋.pdf",
+    "bytes": 10837259,
+    "blocks": 21168,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Dataset_사출성형 공급망최적화 AI 데이터셋.zip",
+    "bytes": 592954,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_전자부품(배터리팩) 예지보전 AI 데이터셋.pdf",
+    "bytes": 18150193,
+    "blocks": 35456,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Dataset_용접 공정최적화 AI 데이터셋.zip",
+    "bytes": 3209749,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_화장품 품질보증 AI 데이터셋.pdf",
+    "bytes": 14207250,
+    "blocks": 27752,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/03. Guidebook_CNC.pdf",
+    "bytes": 17079800,
+    "blocks": 33360,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Dataset_의류 공정최적화 AI 데이터셋.zip",
+    "bytes": 36738768,
+    "blocks": 71760,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Dataset_자원 최적화 AI 데이터셋.zip",
+    "bytes": 108161,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/07. Guidebook_Press.pdf",
+    "bytes": 10762556,
+    "blocks": 1016,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/08. Dataset_Meltingtank.zip",
+    "bytes": 7066099,
+    "blocks": 13808,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/09. Guidebook_Mixer.pdf",
+    "bytes": 7964342,
+    "blocks": 872,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Dataset_기계부품 품질보증 AI 데이터셋.zip",
+    "bytes": 38483625,
+    "blocks": 75168,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Dataset_제조현장용 Scene-Text Recognition 학습 AI 데이터셋.egg",
+    "bytes": 4366517521,
+    "blocks": 8528360,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Guidebook_공정운영 최적화 AI 데이터셋.pdf",
+    "bytes": 11129964,
+    "blocks": 21744,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Guidebook_주조 설비 예지보전 AI 데이터셋.pdf",
+    "bytes": 15316200,
+    "blocks": 29920,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Guidebook_의류 공정최적화 AI 데이터셋.pdf",
+    "bytes": 12785263,
+    "blocks": 24976,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Dataset_소성가공 품질보증 AI 데이터셋.zip",
+    "bytes": 135896,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Dataset_주조 품질보증 AI 데이터셋.zip",
+    "bytes": 154921,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Dataset 정밀가공 품질보증 AI 데이터셋.zip",
+    "bytes": 183476,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Dataset_공급망 최적화 AI 데이터셋.zip",
+    "bytes": 1055117,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/11. Dataset_Drier.zip",
+    "bytes": 7548786,
+    "blocks": 1256,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Dataset_표면처리 자원최적화 AI 데이터셋.zip",
+    "bytes": 271064,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/03. Dataset_CNC.zip",
+    "bytes": 3332556,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/04. Dataset_Molding.zip",
+    "bytes": 25152722,
+    "blocks": 1176,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_열처리 품질보증 AI 데이터셋.pdf",
+    "bytes": 10017574,
+    "blocks": 19568,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Guidebook_열처리 예지보전 AI 데이터셋.pdf",
+    "bytes": 11094171,
+    "blocks": 576,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_로봇용접 예지보전 AI 데이터셋.pdf",
+    "bytes": 13031601,
+    "blocks": 1064,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/09. Dataset_Mixer.zip",
+    "bytes": 2050141,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/미확인 677813.crdownload",
+    "bytes": 956443008,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Dataset_사출성형 예지보전 AI 데이터셋.zip",
+    "bytes": 20879464,
+    "blocks": 40784,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Dataset_열처리 품질보증 AI 데이터셋.zip",
+    "bytes": 222711829,
+    "blocks": 434992,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/미확인 32652.crdownload",
+    "bytes": 5715792871,
+    "blocks": 11163664,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Guidebook_용접 공정최적화 AI 데이터셋.pdf",
+    "bytes": 11089172,
+    "blocks": 21664,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Guidebook_열처리 공급망최적화 AI 데이터셋.pdf",
+    "bytes": 14770051,
+    "blocks": 1608,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Dataset_화장품 품질보증 AI 데이터셋.zip",
+    "bytes": 635827,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Dataset_주조 설비 예지보전 AI 데이터셋.zip",
+    "bytes": 118170,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/02. Dataset_FordEngine.zip",
+    "bytes": 14072102,
+    "blocks": 96,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_전자부품(배터리팩) 품질보증 AI 데이터셋.pdf",
+    "bytes": 19035179,
+    "blocks": 37184,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Dataset_표면처리 공급망최적화 AI 데이터셋.zip",
+    "bytes": 5504,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/11. Guidebook_Dryer.pdf",
+    "bytes": 7739783,
+    "blocks": 1120,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Dataset_공정운영 최적화 AI 데이터셋.zip",
+    "bytes": 397678,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_사출성형 공급망최적화 AI 데이터셋.pdf",
+    "bytes": 13173970,
+    "blocks": 880,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_회전기계 고장유형 AI 데이터셋.pdf",
+    "bytes": 7510601,
+    "blocks": 1696,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Dataset_소성가공 자원최적화 AI 데이터셋.zip",
+    "bytes": 1451234,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/12. Dataset_XrayInspection.zip",
+    "bytes": 0,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_품질 이상탐지, 진단(전해탈지) AI 데이터셋.pdf",
+    "bytes": 9203710,
+    "blocks": 17976,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Guidebook_생산계획 최적화 AI 데이터셋.pdf",
+    "bytes": 7306571,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/07. Dataset_Press.zip",
+    "bytes": 2488324,
+    "blocks": 1168,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Dataset_품질 이상탐지 진단(크로메이트) AI 데이터셋.zip",
+    "bytes": 0,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_제조현장 안전관리 AI 데이터셋.pdf",
+    "bytes": 10485362,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Dataset_열처리 공정최적화 AI 데이터셋.zip",
+    "bytes": 223771951,
+    "blocks": 437056,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Dataset_열처리 공급망최적화 AI 데이터셋.zip",
+    "bytes": 3207,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Dataset 용접 예지보전 AI 데이터셋.zip",
+    "bytes": 738769,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/미확인 594108.crdownload",
+    "bytes": 34951626,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Dataset_생산계획 최적화 AI 데이터셋.zip",
+    "bytes": 2946398,
+    "blocks": 352,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/미확인 366780.crdownload",
+    "bytes": 143071501,
+    "blocks": 14808,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_자원 최적화 AI 데이터셋.pdf",
+    "bytes": 6881474,
+    "blocks": 576,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/01. Dataset_OCR.zip",
+    "bytes": 81525666,
+    "blocks": 159232,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/04. Guidebook_Molding.pdf",
+    "bytes": 33461303,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Dataset_생산공정 최적화 AI 데이터셋.zip",
+    "bytes": 3806275,
+    "blocks": 424,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Dataset_장비이상 조기탐지 AI 데이터셋.zip",
+    "bytes": 0,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_주조 공정최적화 AI 데이터셋.pdf",
+    "bytes": 2989217,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_표면처리 공급망최적화 AI 데이터셋.pdf",
+    "bytes": 13507116,
+    "blocks": 32,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_공급망 최적화 AI 데이터셋.pdf",
+    "bytes": 5378091,
+    "blocks": 1704,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_기계부품 품질보증 AI 데이터셋.pdf",
+    "bytes": 6463425,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_소성가공 품질보증 AI 데이터셋.pdf",
+    "bytes": 10406100,
+    "blocks": 20328,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/06. Guidebook_Machinevision.pdf",
+    "bytes": 15684810,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Guidebook_소성가공 자원최적화 AI 데이터셋.pdf",
+    "bytes": 7428238,
+    "blocks": 14512,
+    "flags": "0x40",
+    "dataless": false
+  },
+  {
+    "path": "데이터셋/Dataset_소성가공 예지보전 AI 데이터셋.zip",
+    "bytes": 377029,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/Dataset_열처리 예지보전 AI 데이터셋.zip",
+    "bytes": 0,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "관련 자료/제6회 K-인공지능 제조데이터 분석 경진대회 과제공개(일반국민,대학(원)생).hwpx",
+    "bytes": 77132,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "관련 자료/Guidebook_로봇용접 예지보전 AI 데이터셋.pdf",
+    "bytes": 13031336,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "관련 자료/경진대회 결과보고서 양식_일반국민,대학(원)생 부문.hwpx",
+    "bytes": 87294,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/2. 용접기 AI 데이터셋/scaled_data.csv",
+    "bytes": 639945,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "데이터셋/2. 용접기 AI 데이터셋/Welding Data Set_01.xlsx",
+    "bytes": 551445,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "analysis/welding/.DS_Store",
+    "bytes": 6148,
+    "blocks": 16,
+    "flags": "0x8000",
+    "dataless": false
+  },
+  {
+    "path": "analysis/welding/requirements.txt",
+    "bytes": 96,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "analysis/welding/README.md",
+    "bytes": 3453,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "analysis/welding/deep_dive.py",
+    "bytes": 18064,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "analysis/welding/outputs/audit.json",
+    "bytes": 25561,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "analysis/welding/outputs/daily_audit.csv",
+    "bytes": 818,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "analysis/welding/outputs/welding_data_audit.png",
+    "bytes": 230161,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "analysis/welding/outputs/reference_exceedance_by_date.csv",
+    "bytes": 394,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "analysis/welding/outputs/unlabelled_scores.csv",
+    "bytes": 1221307,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  },
+  {
+    "path": "analysis/welding/outputs/repeated_sequences.csv",
+    "bytes": 2585,
+    "blocks": 0,
+    "flags": "0x40000060",
+    "dataless": true
+  }
+]

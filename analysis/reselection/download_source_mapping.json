@@ -1,0 +1,804 @@
+[
+  {
+    "path": "데이터셋/미확인 761196.crdownload",
+    "bytes": 746732317,
+    "cloud": true,
+    "source_metadata_error": "CalledProcessError"
+  },
+  {
+    "path": "데이터셋/06. Dataset_Machinevision.zip",
+    "bytes": 80981170,
+    "cloud": true,
+    "seq_candidates": [
+      "6"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_표면처리 자원최적화 AI 데이터셋.pdf",
+    "bytes": 8772579,
+    "cloud": true,
+    "seq_candidates": [
+      "41"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_의류 품질보증 AI 데이터셋.pdf",
+    "bytes": 12222799,
+    "cloud": false,
+    "seq_candidates": [
+      "62"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_회전기계 고장유형 AI 데이터셋.zip",
+    "bytes": 17455226,
+    "cloud": true,
+    "seq_candidates": [
+      "18"
+    ]
+  },
+  {
+    "path": "데이터셋/미확인 4910.crdownload",
+    "bytes": 1800020352,
+    "cloud": true,
+    "source_metadata_error": "CalledProcessError"
+  },
+  {
+    "path": "데이터셋/Guidebook_정밀가공 품질보증 AI 데이터셋.pdf",
+    "bytes": 9453591,
+    "cloud": false,
+    "seq_candidates": [
+      "50"
+    ]
+  },
+  {
+    "path": "데이터셋/Investment_Casting.csv",
+    "bytes": 8586965,
+    "cloud": false,
+    "seq_candidates": [
+      "53"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_로봇용접 예지보전 AI 데이터셋.zip",
+    "bytes": 0,
+    "cloud": true,
+    "source_metadata_error": "CalledProcessError"
+  },
+  {
+    "path": "데이터셋/Guidebook_제조현장용 Scene-Text Recognition 학습 AI 데이터셋.pdf",
+    "bytes": 8088647,
+    "cloud": false,
+    "seq_candidates": [
+      "16"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_장비이상 조기탐지 AI 데이터셋.pdf",
+    "bytes": 19900874,
+    "cloud": true,
+    "seq_candidates": [
+      "23"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_전자부품(배터리팩) 품질보증 AI 데이터셋.zip",
+    "bytes": 40648302,
+    "cloud": false,
+    "seq_candidates": [
+      "58"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_품질 이상탐지 진단(전해탈지) AI 데이터셋.zip",
+    "bytes": 543609,
+    "cloud": true,
+    "seq_candidates": [
+      "20"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_사출성형 예지보전 AI 데이터셋.pdf",
+    "bytes": 14756212,
+    "cloud": false,
+    "seq_candidates": [
+      "56"
+    ]
+  },
+  {
+    "path": "데이터셋/02. Guidebook_FordEngine.pdf",
+    "bytes": 16513007,
+    "cloud": true,
+    "seq_candidates": [
+      "2"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_정밀가공 자원최적화 AI 데이터셋.zip",
+    "bytes": 3759959,
+    "cloud": true,
+    "seq_candidates": [
+      "44"
+    ]
+  },
+  {
+    "path": "데이터셋/10. Guidebook_Pasteurizer.pdf",
+    "bytes": 8889005,
+    "cloud": false,
+    "seq_candidates": [
+      "10"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_생산공정 최적화 AI 데이터셋.pdf",
+    "bytes": 8359638,
+    "cloud": true,
+    "seq_candidates": [
+      "28"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_품질 이상탐지, 진단(크로메이트) AI 데이터셋.pdf",
+    "bytes": 12840749,
+    "cloud": true,
+    "seq_candidates": [
+      "25"
+    ]
+  },
+  {
+    "path": "데이터셋/10. Dataset_Pasteurizer.zip",
+    "bytes": 1024190,
+    "cloud": true,
+    "seq_candidates": [
+      "10"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_용접 예지보전 AI 데이터셋.pdf",
+    "bytes": 11135269,
+    "cloud": false,
+    "seq_candidates": [
+      "51"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_의류 품질보증 AI 데이터셋.zip",
+    "bytes": 40978257,
+    "cloud": false,
+    "seq_candidates": [
+      "62"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_소성가공 예지보전 AI 데이터셋.pdf",
+    "bytes": 10622468,
+    "cloud": true,
+    "seq_candidates": [
+      "48"
+    ]
+  },
+  {
+    "path": "데이터셋/12. Guidebook_XrayInspection.pdf",
+    "bytes": 10041335,
+    "cloud": true,
+    "seq_candidates": [
+      "12"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_품질 이상탐지, 진단(도금욕) AI 데이터셋.pdf",
+    "bytes": 12677329,
+    "cloud": false,
+    "seq_candidates": [
+      "21"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_전자부품(음향기기) 품질보증 AI 데이터셋.pdf",
+    "bytes": 7057042,
+    "cloud": false,
+    "seq_candidates": [
+      "47"
+    ]
+  },
+  {
+    "path": "데이터셋/08. Guidebook_Meltingtank.pdf",
+    "bytes": 6949725,
+    "cloud": false,
+    "seq_candidates": [
+      "8"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_주조 품질보증 AI 데이터셋.pdf",
+    "bytes": 15785611,
+    "cloud": false,
+    "seq_candidates": [
+      "55"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_전자부품(배터리팩) 예지보전 AI 데이터셋.zip",
+    "bytes": 1099753,
+    "cloud": true,
+    "seq_candidates": [
+      "57"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_전자부품(음향기기) 품질보증 AI 데이터셋.zip",
+    "bytes": 1188894424,
+    "cloud": true,
+    "seq_candidates": [
+      "47"
+    ]
+  },
+  {
+    "path": "데이터셋/01. Guidebook_OCR.pdf",
+    "bytes": 6464003,
+    "cloud": true,
+    "seq_candidates": [
+      "1"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_품질 이상탐지 진단(도금욕) AI 데이터셋.zip",
+    "bytes": 624196,
+    "cloud": true,
+    "seq_candidates": [
+      "21"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_열처리 공정최적화 AI 데이터셋.pdf",
+    "bytes": 8514775,
+    "cloud": false,
+    "seq_candidates": [
+      "61"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_정밀가공 자원최적화 AI 데이터셋.pdf",
+    "bytes": 10837259,
+    "cloud": false,
+    "seq_candidates": [
+      "44"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_사출성형 공급망최적화 AI 데이터셋.zip",
+    "bytes": 592954,
+    "cloud": true,
+    "seq_candidates": [
+      "40"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_전자부품(배터리팩) 예지보전 AI 데이터셋.pdf",
+    "bytes": 18150193,
+    "cloud": false,
+    "seq_candidates": [
+      "57"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_용접 공정최적화 AI 데이터셋.zip",
+    "bytes": 3209749,
+    "cloud": true,
+    "seq_candidates": [
+      "52"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_화장품 품질보증 AI 데이터셋.pdf",
+    "bytes": 14207250,
+    "cloud": false,
+    "seq_candidates": [
+      "42"
+    ]
+  },
+  {
+    "path": "데이터셋/03. Guidebook_CNC.pdf",
+    "bytes": 17079800,
+    "cloud": false,
+    "seq_candidates": [
+      "3"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_의류 공정최적화 AI 데이터셋.zip",
+    "bytes": 36738768,
+    "cloud": false,
+    "seq_candidates": [
+      "90"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_자원 최적화 AI 데이터셋.zip",
+    "bytes": 108161,
+    "cloud": true,
+    "seq_candidates": [
+      "27"
+    ]
+  },
+  {
+    "path": "데이터셋/07. Guidebook_Press.pdf",
+    "bytes": 10762556,
+    "cloud": true,
+    "seq_candidates": [
+      "7"
+    ]
+  },
+  {
+    "path": "데이터셋/08. Dataset_Meltingtank.zip",
+    "bytes": 7066099,
+    "cloud": false,
+    "seq_candidates": [
+      "8"
+    ]
+  },
+  {
+    "path": "데이터셋/09. Guidebook_Mixer.pdf",
+    "bytes": 7964342,
+    "cloud": true,
+    "seq_candidates": [
+      "9"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_기계부품 품질보증 AI 데이터셋.zip",
+    "bytes": 38483625,
+    "cloud": false,
+    "seq_candidates": [
+      "59"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_제조현장용 Scene-Text Recognition 학습 AI 데이터셋.egg",
+    "bytes": 4366517521,
+    "cloud": false,
+    "seq_candidates": [
+      "16"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_공정운영 최적화 AI 데이터셋.pdf",
+    "bytes": 11129964,
+    "cloud": false,
+    "seq_candidates": [
+      "19"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_주조 설비 예지보전 AI 데이터셋.pdf",
+    "bytes": 15316200,
+    "cloud": false,
+    "seq_candidates": [
+      "54"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_의류 공정최적화 AI 데이터셋.pdf",
+    "bytes": 12785263,
+    "cloud": false,
+    "seq_candidates": [
+      "90"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_소성가공 품질보증 AI 데이터셋.zip",
+    "bytes": 135896,
+    "cloud": true,
+    "seq_candidates": [
+      "49"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_주조 품질보증 AI 데이터셋.zip",
+    "bytes": 154921,
+    "cloud": true,
+    "seq_candidates": [
+      "55"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset 정밀가공 품질보증 AI 데이터셋.zip",
+    "bytes": 183476,
+    "cloud": true,
+    "seq_candidates": [
+      "50"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_공급망 최적화 AI 데이터셋.zip",
+    "bytes": 1055117,
+    "cloud": true,
+    "seq_candidates": [
+      "26"
+    ]
+  },
+  {
+    "path": "데이터셋/11. Dataset_Drier.zip",
+    "bytes": 7548786,
+    "cloud": true,
+    "seq_candidates": [
+      "11"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_표면처리 자원최적화 AI 데이터셋.zip",
+    "bytes": 271064,
+    "cloud": true,
+    "seq_candidates": [
+      "41"
+    ]
+  },
+  {
+    "path": "데이터셋/03. Dataset_CNC.zip",
+    "bytes": 3332556,
+    "cloud": true,
+    "seq_candidates": [
+      "3"
+    ]
+  },
+  {
+    "path": "데이터셋/04. Dataset_Molding.zip",
+    "bytes": 25152722,
+    "cloud": true,
+    "seq_candidates": [
+      "4"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_열처리 품질보증 AI 데이터셋.pdf",
+    "bytes": 10017574,
+    "cloud": false,
+    "seq_candidates": [
+      "60"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_열처리 예지보전 AI 데이터셋.pdf",
+    "bytes": 11094171,
+    "cloud": true,
+    "seq_candidates": [
+      "43"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_로봇용접 예지보전 AI 데이터셋.pdf",
+    "bytes": 13031601,
+    "cloud": true,
+    "seq_candidates": [
+      "45"
+    ]
+  },
+  {
+    "path": "데이터셋/09. Dataset_Mixer.zip",
+    "bytes": 2050141,
+    "cloud": true,
+    "seq_candidates": [
+      "9"
+    ]
+  },
+  {
+    "path": "데이터셋/미확인 677813.crdownload",
+    "bytes": 956443008,
+    "cloud": true,
+    "source_metadata_error": "CalledProcessError"
+  },
+  {
+    "path": "데이터셋/Dataset_사출성형 예지보전 AI 데이터셋.zip",
+    "bytes": 20879464,
+    "cloud": false,
+    "seq_candidates": [
+      "56"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_열처리 품질보증 AI 데이터셋.zip",
+    "bytes": 222711829,
+    "cloud": false,
+    "seq_candidates": [
+      "60"
+    ]
+  },
+  {
+    "path": "데이터셋/미확인 32652.crdownload",
+    "bytes": 5715792871,
+    "cloud": false,
+    "source_metadata_error": "CalledProcessError"
+  },
+  {
+    "path": "데이터셋/Guidebook_용접 공정최적화 AI 데이터셋.pdf",
+    "bytes": 11089172,
+    "cloud": false,
+    "seq_candidates": [
+      "52"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_열처리 공급망최적화 AI 데이터셋.pdf",
+    "bytes": 14770051,
+    "cloud": true,
+    "seq_candidates": [
+      "37"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_화장품 품질보증 AI 데이터셋.zip",
+    "bytes": 635827,
+    "cloud": true,
+    "seq_candidates": [
+      "42"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_주조 설비 예지보전 AI 데이터셋.zip",
+    "bytes": 118170,
+    "cloud": true,
+    "seq_candidates": [
+      "54"
+    ]
+  },
+  {
+    "path": "데이터셋/02. Dataset_FordEngine.zip",
+    "bytes": 14072102,
+    "cloud": true,
+    "seq_candidates": [
+      "2"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_전자부품(배터리팩) 품질보증 AI 데이터셋.pdf",
+    "bytes": 19035179,
+    "cloud": false,
+    "seq_candidates": [
+      "58"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_표면처리 공급망최적화 AI 데이터셋.zip",
+    "bytes": 5504,
+    "cloud": true,
+    "seq_candidates": [
+      "36"
+    ]
+  },
+  {
+    "path": "데이터셋/11. Guidebook_Dryer.pdf",
+    "bytes": 7739783,
+    "cloud": true,
+    "seq_candidates": [
+      "11"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_공정운영 최적화 AI 데이터셋.zip",
+    "bytes": 397678,
+    "cloud": true,
+    "seq_candidates": [
+      "19"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_사출성형 공급망최적화 AI 데이터셋.pdf",
+    "bytes": 13173970,
+    "cloud": true,
+    "seq_candidates": [
+      "40"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_회전기계 고장유형 AI 데이터셋.pdf",
+    "bytes": 7510601,
+    "cloud": true,
+    "seq_candidates": [
+      "18"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_소성가공 자원최적화 AI 데이터셋.zip",
+    "bytes": 1451234,
+    "cloud": true,
+    "seq_candidates": [
+      "46"
+    ]
+  },
+  {
+    "path": "데이터셋/12. Dataset_XrayInspection.zip",
+    "bytes": 0,
+    "cloud": true,
+    "source_metadata_error": "CalledProcessError"
+  },
+  {
+    "path": "데이터셋/Guidebook_품질 이상탐지, 진단(전해탈지) AI 데이터셋.pdf",
+    "bytes": 9203710,
+    "cloud": false,
+    "seq_candidates": [
+      "20"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_생산계획 최적화 AI 데이터셋.pdf",
+    "bytes": 7306571,
+    "cloud": true,
+    "seq_candidates": [
+      "30"
+    ]
+  },
+  {
+    "path": "데이터셋/07. Dataset_Press.zip",
+    "bytes": 2488324,
+    "cloud": true,
+    "seq_candidates": [
+      "7"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_품질 이상탐지 진단(크로메이트) AI 데이터셋.zip",
+    "bytes": 0,
+    "cloud": true,
+    "source_metadata_error": "CalledProcessError"
+  },
+  {
+    "path": "데이터셋/Guidebook_제조현장 안전관리 AI 데이터셋.pdf",
+    "bytes": 10485362,
+    "cloud": true,
+    "seq_candidates": [
+      "29"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_열처리 공정최적화 AI 데이터셋.zip",
+    "bytes": 223771951,
+    "cloud": false,
+    "seq_candidates": [
+      "61"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_열처리 공급망최적화 AI 데이터셋.zip",
+    "bytes": 3207,
+    "cloud": true,
+    "seq_candidates": [
+      "37"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset 용접 예지보전 AI 데이터셋.zip",
+    "bytes": 738769,
+    "cloud": true,
+    "seq_candidates": [
+      "51"
+    ]
+  },
+  {
+    "path": "데이터셋/미확인 594108.crdownload",
+    "bytes": 34951626,
+    "cloud": true,
+    "source_metadata_error": "CalledProcessError"
+  },
+  {
+    "path": "데이터셋/Dataset_생산계획 최적화 AI 데이터셋.zip",
+    "bytes": 2946398,
+    "cloud": true,
+    "seq_candidates": [
+      "30"
+    ]
+  },
+  {
+    "path": "데이터셋/미확인 366780.crdownload",
+    "bytes": 143071501,
+    "cloud": true,
+    "source_metadata_error": "CalledProcessError"
+  },
+  {
+    "path": "데이터셋/Guidebook_자원 최적화 AI 데이터셋.pdf",
+    "bytes": 6881474,
+    "cloud": true,
+    "seq_candidates": [
+      "27"
+    ]
+  },
+  {
+    "path": "데이터셋/01. Dataset_OCR.zip",
+    "bytes": 81525666,
+    "cloud": false,
+    "seq_candidates": [
+      "1"
+    ]
+  },
+  {
+    "path": "데이터셋/04. Guidebook_Molding.pdf",
+    "bytes": 33461303,
+    "cloud": true,
+    "seq_candidates": [
+      "4"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_생산공정 최적화 AI 데이터셋.zip",
+    "bytes": 3806275,
+    "cloud": true,
+    "seq_candidates": [
+      "28"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_장비이상 조기탐지 AI 데이터셋.zip",
+    "bytes": 0,
+    "cloud": true,
+    "source_metadata_error": "CalledProcessError"
+  },
+  {
+    "path": "데이터셋/Guidebook_주조 공정최적화 AI 데이터셋.pdf",
+    "bytes": 2989217,
+    "cloud": true,
+    "seq_candidates": [
+      "53"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_표면처리 공급망최적화 AI 데이터셋.pdf",
+    "bytes": 13507116,
+    "cloud": true,
+    "seq_candidates": [
+      "36"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_공급망 최적화 AI 데이터셋.pdf",
+    "bytes": 5378091,
+    "cloud": true,
+    "seq_candidates": [
+      "26"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_기계부품 품질보증 AI 데이터셋.pdf",
+    "bytes": 6463425,
+    "cloud": true,
+    "seq_candidates": [
+      "59"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_소성가공 품질보증 AI 데이터셋.pdf",
+    "bytes": 10406100,
+    "cloud": false,
+    "seq_candidates": [
+      "49"
+    ]
+  },
+  {
+    "path": "데이터셋/06. Guidebook_Machinevision.pdf",
+    "bytes": 15684810,
+    "cloud": true,
+    "seq_candidates": [
+      "6"
+    ]
+  },
+  {
+    "path": "데이터셋/Guidebook_소성가공 자원최적화 AI 데이터셋.pdf",
+    "bytes": 7428238,
+    "cloud": false,
+    "seq_candidates": [
+      "46"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_소성가공 예지보전 AI 데이터셋.zip",
+    "bytes": 377029,
+    "cloud": true,
+    "seq_candidates": [
+      "48"
+    ]
+  },
+  {
+    "path": "데이터셋/Dataset_열처리 예지보전 AI 데이터셋.zip",
+    "bytes": 0,
+    "cloud": true,
+    "source_metadata_error": "CalledProcessError"
+  }
+]

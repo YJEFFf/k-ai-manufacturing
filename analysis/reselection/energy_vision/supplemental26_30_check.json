@@ -1,0 +1,43 @@
+{
+  "26": {
+    "rows": 17364,
+    "parts": 117,
+    "timestamps": 153,
+    "days": 49,
+    "start": "2021-09-13 18:30:00",
+    "end": "2021-11-01 07:03:00",
+    "parse_failure": 0,
+    "duplicate_part_timestamp": 306,
+    "rows_per_part_range": [
+      33,
+      306
+    ],
+    "daily_rows_per_part_range": [
+      14,
+      49
+    ],
+    "notes": "Recorded future quantity columns are contemporaneous plans, not realized future orders."
+  },
+  "30": {
+    "machine_rows": 21151,
+    "machine_unique": 37,
+    "items": 6617,
+    "duplicate_item_machine_keys": 0,
+    "machine_nulls": {
+      "item": 0,
+      "machine": 2,
+      "capacity": 0
+    },
+    "order_rows": 127,
+    "order_dates": [
+      "2021-02-10 00:00:00",
+      "2021-09-15 00:00:00"
+    ],
+    "order_date_unique": 51,
+    "order_item_unique": 96,
+    "order_classification_present": 46,
+    "order_classification_missing": 81,
+    "orders_without_machine_item": 0,
+    "notes": "No energy measurement column; original workbook includes title/header rows and processed version is not independent sample."
+  }
+}

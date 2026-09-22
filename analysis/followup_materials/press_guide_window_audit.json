@@ -1,0 +1,103 @@
+{
+  "data/outlier_data.csv": {
+    "full": {
+      "rows": 600,
+      "windows": 480,
+      "input20_elapsed_seconds_quantiles": {
+        "0": 1.9,
+        "0.5": 3.58,
+        "0.9": 10.257600000000002,
+        "1": 23.805
+      },
+      "input_end_to_label_elapsed_seconds_quantiles": {
+        "0": 14.889,
+        "0.5": 27.709,
+        "0.9": 36.165,
+        "1": 38.888
+      },
+      "input_end_to_label_exact_10_seconds": 0,
+      "input_first_state_same_as_future_label": 480
+    },
+    "guide_evaluation_pool": {
+      "rows": 600,
+      "windows": 480,
+      "input20_elapsed_seconds_quantiles": {
+        "0": 1.9,
+        "0.5": 3.58,
+        "0.9": 10.257600000000002,
+        "1": 23.805
+      },
+      "input_end_to_label_elapsed_seconds_quantiles": {
+        "0": 14.889,
+        "0.5": 27.709,
+        "0.9": 36.165,
+        "1": 38.888
+      },
+      "input_end_to_label_exact_10_seconds": 0,
+      "input_first_state_same_as_future_label": 480
+    },
+    "guide_validation_test_boundary": {
+      "validation_windows": 300,
+      "last_validation_start": 299,
+      "first_test_start": 300,
+      "shared_input_rows": 19,
+      "note": "Class-specific pool-relative indices; neighbors share 19 of 20 input rows."
+    }
+  },
+  "data/press_data_normal.csv": {
+    "full": {
+      "rows": 20000,
+      "windows": 19880,
+      "input20_elapsed_seconds_quantiles": {
+        "0": 1.9,
+        "0.5": 3.353,
+        "0.9": 7.892,
+        "1": 24.761
+      },
+      "input_end_to_label_elapsed_seconds_quantiles": {
+        "0": 13.29,
+        "0.5": 21.954,
+        "0.9": 33.62,
+        "1": 47.504
+      },
+      "input_end_to_label_exact_10_seconds": 0,
+      "input_first_state_same_as_future_label": 19880
+    },
+    "guide_evaluation_pool": {
+      "rows": 5000,
+      "windows": 4880,
+      "input20_elapsed_seconds_quantiles": {
+        "0": 1.9,
+        "0.5": 3.383,
+        "0.9": 8.065,
+        "1": 24.055
+      },
+      "input_end_to_label_elapsed_seconds_quantiles": {
+        "0": 13.547,
+        "0.5": 22.443,
+        "0.9": 34.57,
+        "1": 46.174
+      },
+      "input_end_to_label_exact_10_seconds": 0,
+      "input_first_state_same_as_future_label": 4880
+    },
+    "guide_validation_test_boundary": {
+      "validation_windows": 880,
+      "last_validation_start": 879,
+      "first_test_start": 880,
+      "shared_input_rows": 19,
+      "note": "Class-specific pool-relative indices; neighbors share 19 of 20 input rows."
+    }
+  },
+  "guide_reported_metrics": {
+    "tn": 3922,
+    "fp": 78,
+    "tp": 154,
+    "fn": 26,
+    "precision": 0.6637931034482759,
+    "recall": 0.8555555555555555,
+    "f1": 0.7475728155339806,
+    "fpr": 0.0195,
+    "note": "Guide PDF40-41; not an independently rerun neural-model score."
+  }
+}

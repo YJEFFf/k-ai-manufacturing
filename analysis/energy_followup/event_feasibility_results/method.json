@@ -1,0 +1,15 @@
+{
+  "source_sha256": "d0017a053f663fecac99f96831d07aa0fb673c651b31c88c125b0d41c1dc0e32",
+  "known_test_exposure": "All dates were previously inspected; exploratory feasibility audit only.",
+  "event": "Consecutive high quarter intervals at monthly training threshold; bridge 0/15/30 low minutes.",
+  "censoring": "Require low preceding quarter and all four previous forecast origins. Monthly boundaries and cooldown states reset separately.",
+  "alarm": "Existing fixed thresholds only; origin power below high threshold; shared past-only cooldown 0/60/120 min.",
+  "primary": "Predefined before this audit: calibration FPR budget3%, cooldown60min, merge0min.",
+  "lead": "Minutes before START of first high quarter, not its measurement end. 0 is permitted; >=15 separately counted.",
+  "false_notification": "Sent notification with no high quarter in next60min. It is not industrial hazard ground truth.",
+  "uncertainty": "Events can remain dependent. No confidence interval or new independent validation claimed.",
+  "workload": "Equal cooldown/calibration rules are not equal realized notification burdens.",
+  "policy_calibration_limit": "Thresholds were calibrated for the original window alarms, before this new origin-low gate/cooldown. Recalibrate the complete notification policy on earlier calibration data before claiming a fair operational advantage. In August the recent-value3% cutoff is175 and peak threshold176: integer power cannot satisfy 175<power<176, so this new gate suppresses all its alerts.",
+  "event_dependence": "One notice can cover more than one nearby event; event counts are not independent, and merge15/30 sensitivity must accompany merge0.",
+  "units": "Exposure day=96 available forecast origins; fractional days allowed around gaps."
+}

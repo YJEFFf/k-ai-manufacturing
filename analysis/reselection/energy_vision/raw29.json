@@ -1,0 +1,136 @@
+{
+  "archive": "데이터셋/미확인 32652.crdownload",
+  "status": "incomplete EGG: metadata and complete annotation blocks only",
+  "directories": {
+    "data/dataset/train_annot": 6122,
+    "data/dataset/train_image": 6122,
+    "data/dataset/valid_annot": 1526,
+    "data/dataset/valid_image": 1334
+  },
+  "labels": {
+    "person": 7688,
+    ".": 4
+  },
+  "dimensions": {
+    "1920x1080": 7648
+  },
+  "objects_per_annotation": {
+    "1": 7604,
+    "2": 44
+  },
+  "bad_boxes_count": 0,
+  "bad_boxes_examples": [],
+  "xml_errors": [],
+  "xml_filename_mismatch_count": 0,
+  "annotation_splits": {
+    "train": 6122,
+    "valid": 1526
+  },
+  "image_header_splits": {
+    "train": 6122,
+    "valid": 1334
+  },
+  "clip_counts": {
+    "train": {
+      "20211026 090012 H265-1": 56,
+      "20211026 093935 H265-16": 216,
+      "20211026 094920 H265-17": 114,
+      "20211026 101058 H265-19": 320,
+      "20211026 103359 H265-23": 27,
+      "20211026 112143 H265-41": 516,
+      "20211026 115339 H265-42": 178,
+      "20211026 122420 H265-43": 435,
+      "20211026 130616 H265-45": 724,
+      "20211026 133910 H265-46": 680,
+      "20211026 140703 H265-47": 787,
+      "20211026 170705 H265-50": 928,
+      "20211026 180705 H265-51": 1141
+    },
+    "valid": {
+      "20211026 090012 H265-1": 14,
+      "20211026 093935 H265-16": 54,
+      "20211026 094920 H265-17": 28,
+      "20211026 101058 H265-19": 80,
+      "20211026 103359 H265-23": 6,
+      "20211026 112143 H265-41": 128,
+      "20211026 115339 H265-42": 44,
+      "20211026 122420 H265-43": 108,
+      "20211026 130616 H265-45": 181,
+      "20211026 133910 H265-46": 170,
+      "20211026 140703 H265-47": 196,
+      "20211026 170705 H265-50": 232,
+      "20211026 180705 H265-51": 285
+    }
+  },
+  "sample_decoded_images": [
+    {
+      "file": "data/dataset/train_image/20211026 090012 H265-1_1.jpg",
+      "size": [
+        1920,
+        1080
+      ],
+      "mode": "RGB",
+      "sha256": "06ed7808fdf25cb48e0e8d99e87e4f09864570c3aa3ee84bb646e009fed69393"
+    },
+    {
+      "file": "data/dataset/train_image/20211026 090012 H265-1_11.jpg",
+      "size": [
+        1920,
+        1080
+      ],
+      "mode": "RGB",
+      "sha256": "bdc786387454f5d6f499525036a3702af677a7b6cca18b296bb401170de2ad49"
+    },
+    {
+      "file": "data/dataset/train_image/20211026 090012 H265-1_14.jpg",
+      "size": [
+        1920,
+        1080
+      ],
+      "mode": "RGB",
+      "sha256": "b7b8916b9a60e979e4eb78f5af829ec61bbc553b7691b4d5c1ef0c0a34106b48"
+    }
+  ],
+  "split_intersections": [
+    {
+      "splits": [
+        "train",
+        "valid"
+      ],
+      "identical_annotation_stems": 0,
+      "shared_video_prefixes": 13,
+      "prefixes": [
+        "20211026 090012 H265-1",
+        "20211026 093935 H265-16",
+        "20211026 094920 H265-17",
+        "20211026 101058 H265-19",
+        "20211026 103359 H265-23",
+        "20211026 112143 H265-41",
+        "20211026 115339 H265-42",
+        "20211026 122420 H265-43",
+        "20211026 130616 H265-45",
+        "20211026 133910 H265-46",
+        "20211026 140703 H265-47",
+        "20211026 170705 H265-50",
+        "20211026 180705 H265-51"
+      ],
+      "a_clip_count": 13,
+      "b_clip_count": 13
+    }
+  ],
+  "image_pairing": {
+    "train": {
+      "annotation_without_image_header": 0,
+      "image_header_without_annotation": 0
+    },
+    "valid": {
+      "annotation_without_image_header": 192,
+      "image_header_without_annotation": 0
+    }
+  },
+  "valid_nearest_train_frame_index_distance": {
+    "1": 1460,
+    "2": 65,
+    "3": 1
+  }
+}

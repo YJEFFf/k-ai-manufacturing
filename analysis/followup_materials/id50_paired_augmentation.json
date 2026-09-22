@@ -1,0 +1,92 @@
+{
+  "positive_rows": 99,
+  "same_timestamp": 99,
+  "changed_features_counts": {
+    "SpindleSpeed_max": 49,
+    "ServoCurrent_X_max": 99,
+    "ServoCurrent_Z1_max": 0,
+    "ServoCurrent_Z2_max": 0,
+    "ServoCurrent_Z3_max": 0,
+    "ServoLoad_X_max": 0,
+    "ServoLoad_Z1_max": 0,
+    "ServoLoad_Z2_max": 0,
+    "ServoLoad_Z3_max": 0,
+    "SpindleSpeed_mean": 99,
+    "ServoCurrent_X_mean": 99,
+    "ServoCurrent_Z1_mean": 0,
+    "ServoCurrent_Z2_mean": 0,
+    "ServoCurrent_Z3_mean": 0,
+    "ServoLoad_X_mean": 0,
+    "ServoLoad_Z1_mean": 0,
+    "ServoLoad_Z2_mean": 0,
+    "ServoLoad_Z3_mean": 0,
+    "SpindleSpeed_min": 0,
+    "ServoCurrent_X_min": 0,
+    "ServoCurrent_Z1_min": 0,
+    "ServoCurrent_Z2_min": 0,
+    "ServoCurrent_Z3_min": 0,
+    "ServoLoad_X_min": 0,
+    "ServoLoad_Z1_min": 0,
+    "ServoLoad_Z2_min": 0,
+    "ServoLoad_Z3_min": 0,
+    "SpindleSpeed_std": 99,
+    "ServoCurrent_X_std": 99,
+    "ServoCurrent_Z1_std": 0,
+    "ServoCurrent_Z2_std": 0,
+    "ServoCurrent_Z3_std": 0,
+    "ServoLoad_X_std": 99,
+    "ServoLoad_Z1_std": 0,
+    "ServoLoad_Z2_std": 0,
+    "ServoLoad_Z3_std": 99,
+    "SpindleLoad_max": 99,
+    "SpindleLoad_mean": 99,
+    "SpindleLoad_min": 0,
+    "SpindleLoad_std": 99
+  },
+  "ratios": {
+    "SpindleSpeed_max": {
+      "1.0": 50,
+      "0.995": 49
+    },
+    "ServoCurrent_X_max": {
+      "0.98": 50,
+      "1.05": 49
+    },
+    "SpindleSpeed_mean": {
+      "0.98": 50,
+      "1.05": 49
+    },
+    "ServoCurrent_X_mean": {
+      "0.97": 50,
+      "0.9": 49
+    },
+    "SpindleSpeed_std": {
+      "1.01": 50,
+      "0.99": 49
+    },
+    "ServoCurrent_X_std": {
+      "0.97": 50,
+      "0.9": 49
+    },
+    "ServoLoad_X_std": {
+      "1.05": 50,
+      "1.1": 49
+    },
+    "ServoLoad_Z3_std": {
+      "1.05": 50,
+      "1.1": 49
+    },
+    "SpindleLoad_max": {
+      "1.05": 50,
+      "1.01": 49
+    },
+    "SpindleLoad_mean": {
+      "0.97": 50,
+      "0.9": 49
+    },
+    "SpindleLoad_std": {
+      "1.05": 50,
+      "1.1": 49
+    }
+  }
+}

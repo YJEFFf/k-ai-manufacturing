@@ -1,0 +1,97 @@
+{
+  "purpose": "Final follow-up artifact integrity; source datasets excluded",
+  "files": [
+    {
+      "path": "analysis/energy_followup/window_experiment.py",
+      "bytes": 10674,
+      "sha256": "d0f643a6e49f9658c007aedfab2b8e51c51dd506ae6b886cd50ff2fce3850681"
+    },
+    {
+      "path": "analysis/energy_followup/interval_policy_audit.py",
+      "bytes": 6481,
+      "sha256": "f8b6cc0c26b4266b62b9c3e13845281a50d47539a9acf1c99f1e83d421d1465b"
+    },
+    {
+      "path": "analysis/energy_followup/classifier_experiment.py",
+      "bytes": 13493,
+      "sha256": "20e8cb82aaeb94c38a22bd6463110276867fda4417163a59333dda15176865a8"
+    },
+    {
+      "path": "analysis/energy_followup/classifier_transition_audit.py",
+      "bytes": 3917,
+      "sha256": "5680c206b83f1fc7237e6aef92a617b2a7b690d36038ac7950bb24c69810322c"
+    },
+    {
+      "path": "analysis/energy_followup/common.py",
+      "bytes": 4561,
+      "sha256": "4df455114fd1bcfef498f4b08ee40d23559f69a4da04aa86171d65dc19840a35"
+    },
+    {
+      "path": "analysis/energy_followup/run_experiments.py",
+      "bytes": 1097,
+      "sha256": "825e5e73e9e7987433dcb973bf1bfc8d66bfb6ebad22cef71e149391087d9650"
+    },
+    {
+      "path": "analysis/energy_followup/compare_policies.py",
+      "bytes": 9091,
+      "sha256": "709a8629a2988a16a3753d14460008c1a47f731e5c02bf05890100ef850d2b19"
+    },
+    {
+      "path": "analysis/energy_followup/requirements.txt",
+      "bytes": 80,
+      "sha256": "ae62ee36b9474fbdad6b6520ab1c5106cfb2ba90d93f634e7c74f9f00fc82092"
+    },
+    {
+      "path": "analysis/energy_followup/window_topic_review.md",
+      "bytes": 4402,
+      "sha256": "30a9562b8f22051be8e8fecd847d8b015fd0569d2e47fee332798530b3241b48"
+    },
+    {
+      "path": "analysis/energy_followup/window_report.md",
+      "bytes": 6148,
+      "sha256": "4097e358ce8eb0c468cb358ed6a70017388b5f90b90d4fd6fc4381be6d89ce3b"
+    },
+    {
+      "path": "analysis/energy_followup/critique.md",
+      "bytes": 5524,
+      "sha256": "86a377f663399657c80af5dd6f35af7007b69ec21b54b072d36bd9fcc50eab53"
+    },
+    {
+      "path": "analysis/energy_followup/README.md",
+      "bytes": 5523,
+      "sha256": "aecfd439639c4748ae1bdb53eea7b4b1edc724f882c61ec2019b974d2bda2989"
+    },
+    {
+      "path": "analysis/energy_followup/classifier_guide27_review.md",
+      "bytes": 4299,
+      "sha256": "3b23c84083ff1cc7b944fd0c5c95fdaa99e79311c1dd4904f7a86015817c2d88"
+    },
+    {
+      "path": "analysis/energy_followup/classifier_report.md",
+      "bytes": 7223,
+      "sha256": "34f6892083f2ffef12cd8dcef1431b9aaa23567ec7b7fe4032c789c4fd49a04c"
+    },
+    {
+      "path": "과제재선정_정밀검토.md",
+      "bytes": 6138,
+      "sha256": "1471aad65ad1db90b01fba6f74e86211d5400545c1fa3836060fcd1e82cab4ce"
+    },
+    {
+      "path": "과제재선정_후속검증.md",
+      "bytes": 23096,
+      "sha256": "92f2e47afa007302f98592f32edab11d0692b93f7b62cf088da36df232c2cfca"
+    }
+  ],
+  "integrity_checks": {
+    "independent_prediction_alignment": {
+      "independent_implementations_same_truth_and_threshold": true,
+      "all_three_baseline_alarm_budgets_identical": true,
+      "prediction_rows": 24960,
+      "unique_prediction_keys": true,
+      "known_test_exposure": "exploratory; these dates informed topic selection",
+      "bootstrap_note": "paired day/block sensitivity, not a guarantee under drift or multiple model selection"
+    },
+    "python_syntax": "All 7 energy experiment scripts parsed successfully; run_experiments --help passed",
+    "review": "Independent reviewer compared the main report figures to CSV outputs; no discrepancies found"
+  }
+}

@@ -1,0 +1,1032 @@
+{
+  "scope": "Data audit and unlabelled scoring demonstration; NOT defect prediction validation",
+  "input_source": "데이터셋/2. 용접기 AI 데이터셋/Welding Data Set_01.xlsx",
+  "sha256": {
+    "zip": null,
+    "xlsx": "d514d6aaa121630c04d7d51c97a56025e78e2c86868813f7722ba5db922c1f33",
+    "csv": "a267d1eaab5ca7c81205e38dbb7fb024ebbcb25b866d8cc0907890526e4edfb6"
+  },
+  "versions": {
+    "python": "3.14.6",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "openpyxl": "3.1.5",
+    "matplotlib": "3.11.2"
+  },
+  "seed": 7,
+  "sheet_shapes": {
+    "Raw data": [
+      11939,
+      10
+    ],
+    "result": [
+      23,
+      7
+    ],
+    "data set": [
+      10,
+      3
+    ]
+  },
+  "raw_missing": {
+    "idx": 0,
+    "Machine_Name": 0,
+    "Item No": 0,
+    "working time": 0,
+    "Thickness 1(mm)": 0,
+    "Thickness 2(mm)": 0,
+    "weld force(bar)": 0,
+    "weld current(kA)": 0,
+    "weld Voltage(v)": 0,
+    "weld time(ms)": 0
+  },
+  "scaled_missing": {
+    "Unnamed: 0": 0,
+    "용접 가압력": 18,
+    "전류": 15,
+    "전압": 15,
+    "통전시간": 23
+  },
+  "constant_columns": [
+    "Machine_Name",
+    "Item No",
+    "Thickness 1(mm)",
+    "Thickness 2(mm)"
+  ],
+  "sensor_summary": {
+    "weld force(bar)": {
+      "count": 11939.0,
+      "mean": 2.787925286874948,
+      "std": 1.4559662268256377,
+      "min": 1.7399999999999998,
+      "1%": 2.2600000000000002,
+      "5%": 2.2800000000000002,
+      "50%": 2.34,
+      "95%": 7.540000000000001,
+      "99%": 8.293400000000057,
+      "max": 10.540000000000001
+    },
+    "weld current(kA)": {
+      "count": 11939.0,
+      "mean": 14.71120780634894,
+      "std": 0.09900035766905148,
+      "min": 14.520000000000001,
+      "1%": 14.540000000000001,
+      "5%": 14.56,
+      "50%": 14.729999999999999,
+      "95%": 14.889999999999999,
+      "99%": 14.99,
+      "max": 15.070000000000002
+    },
+    "weld Voltage(v)": {
+      "count": 11939.0,
+      "mean": 2.7042234693022866,
+      "std": 0.024699653002157686,
+      "min": 2.464,
+      "1%": 2.6489999999999996,
+      "5%": 2.694,
+      "50%": 2.702,
+      "95%": 2.75,
+      "99%": 2.765620000000001,
+      "max": 2.861
+    },
+    "weld time(ms)": {
+      "count": 11939.0,
+      "mean": 71.72412262333529,
+      "std": 0.6320493678960675,
+      "min": 70.0,
+      "1%": 70.0,
+      "5%": 71.0,
+      "50%": 72.0,
+      "95%": 73.0,
+      "99%": 73.0,
+      "max": 73.0
+    }
+  },
+  "unique_sensor_vectors_exact": 1574,
+  "unique_sensor_vectors_rounded6": 1574,
+  "duplicate_date_idx_rows": [
+    {
+      "idx": 1,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-03-25T00:00:00",
+      "Thickness 1(mm)": 0.7,
+      "Thickness 2(mm)": 0.7,
+      "weld force(bar)": 2.29,
+      "weld current(kA)": 14.74,
+      "weld Voltage(v)": 2.698,
+      "weld time(ms)": 72.0,
+      "excel_row": 1202
+    },
+    {
+      "idx": 1,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-03-25T00:00:00",
+      "Thickness 1(mm)": 0.7,
+      "Thickness 2(mm)": 0.7,
+      "weld force(bar)": 2.31,
+      "weld current(kA)": 14.729999999999999,
+      "weld Voltage(v)": 2.699,
+      "weld time(ms)": 72.0,
+      "excel_row": 3552
+    }
+  ],
+  "result_defect_sum_NOT_unique_bad_parts": 39,
+  "result_label_status": "Likely counts by date/type; row linkage, unit and inspection denominator unconfirmed",
+  "workbook_metadata": {
+    "Raw data": {
+      "visibility": "visible",
+      "formula_count": 0,
+      "comment_count": 0,
+      "hidden_rows": [],
+      "hidden_columns": []
+    },
+    "result": {
+      "visibility": "visible",
+      "formula_count": 0,
+      "comment_count": 0,
+      "hidden_rows": [],
+      "hidden_columns": []
+    },
+    "data set": {
+      "visibility": "visible",
+      "formula_count": 0,
+      "comment_count": 0,
+      "hidden_rows": [],
+      "hidden_columns": []
+    }
+  },
+  "suspected_date_typos_NOT_corrected": {
+    "D3552": "2020-03-25T00:00:00",
+    "D5201": "2020-03-25T00:00:00"
+  },
+  "extracted_input_matches_zip": null,
+  "scaled_csv_candidate_reconstruction": {
+    "status": "Inferred and numerically checked; official preprocessing provenance unavailable",
+    "feature_order": [
+      "weld force(bar)",
+      "weld current(kA)",
+      "weld Voltage(v)",
+      "weld time(ms)"
+    ],
+    "slopes": [
+      118.26,
+      139.78,
+      95.78,
+      2170.0
+    ],
+    "offsets": [
+      1.74,
+      14.52,
+      2.46,
+      70.0
+    ],
+    "minimum": [
+      1.74,
+      14.52,
+      2.46,
+      70.0
+    ],
+    "maximum": [
+      120.0,
+      154.3,
+      98.24,
+      2240.0
+    ],
+    "missing_by_feature": [
+      18,
+      15,
+      15,
+      23
+    ],
+    "outside_collection_range_by_feature": [
+      43,
+      50,
+      27,
+      47
+    ],
+    "flagged_cells": 238,
+    "flagged_rows": 237,
+    "unflagged_rows": 11702,
+    "unflagged_rows_matching_raw_display_multiset": 11702,
+    "note": "Collection limits are not weld quality labels; matching repeated tuples does not identify a unique row"
+  },
+  "outside_declared_collection_range": {
+    "Thickness 1(mm)": 0,
+    "Thickness 2(mm)": 0,
+    "weld force(bar)": 0,
+    "weld current(kA)": 0,
+    "weld Voltage(v)": 0,
+    "weld time(ms)": 0
+  },
+  "daily": [
+    {
+      "date": "2020-03-24",
+      "records": 1200,
+      "idx_unique": 1200,
+      "idx_min": 1,
+      "idx_max": 1200,
+      "idx_monotonic_in_file": true,
+      "unique_vectors_exact": 803,
+      "seen_in_earlier_dates_exact": 0,
+      "seen_in_earlier_dates_rounded6": 0,
+      "pressure_gt5_descriptive_only": 0,
+      "recorded_defect_sum_NOT_unique_parts": 4,
+      "recorded_type1": 2,
+      "recorded_type2": 1,
+      "recorded_type3": 1
+    },
+    {
+      "date": "2020-03-25",
+      "records": 1352,
+      "idx_unique": 1351,
+      "idx_min": 1,
+      "idx_max": 1650,
+      "idx_monotonic_in_file": false,
+      "unique_vectors_exact": 1068,
+      "seen_in_earlier_dates_exact": 437,
+      "seen_in_earlier_dates_rounded6": 437,
+      "pressure_gt5_descriptive_only": 243,
+      "recorded_defect_sum_NOT_unique_parts": 8,
+      "recorded_type1": 3,
+      "recorded_type2": 2,
+      "recorded_type3": 3
+    },
+    {
+      "date": "2020-03-26",
+      "records": 1000,
+      "idx_unique": 1000,
+      "idx_min": 1,
+      "idx_max": 1000,
+      "idx_monotonic_in_file": true,
+      "unique_vectors_exact": 342,
+      "seen_in_earlier_dates_exact": 1000,
+      "seen_in_earlier_dates_rounded6": 1000,
+      "pressure_gt5_descriptive_only": 0,
+      "recorded_defect_sum_NOT_unique_parts": 7,
+      "recorded_type1": 3,
+      "recorded_type2": 2,
+      "recorded_type3": 2
+    },
+    {
+      "date": "2020-03-27",
+      "records": 1648,
+      "idx_unique": 1648,
+      "idx_min": 2,
+      "idx_max": 1649,
+      "idx_monotonic_in_file": true,
+      "unique_vectors_exact": 1237,
+      "seen_in_earlier_dates_exact": 1648,
+      "seen_in_earlier_dates_rounded6": 1648,
+      "pressure_gt5_descriptive_only": 243,
+      "recorded_defect_sum_NOT_unique_parts": null,
+      "recorded_type1": null,
+      "recorded_type2": null,
+      "recorded_type3": null
+    },
+    {
+      "date": "2020-03-30",
+      "records": 1470,
+      "idx_unique": 1470,
+      "idx_min": 1,
+      "idx_max": 1470,
+      "idx_monotonic_in_file": true,
+      "unique_vectors_exact": 375,
+      "seen_in_earlier_dates_exact": 1470,
+      "seen_in_earlier_dates_rounded6": 1470,
+      "pressure_gt5_descriptive_only": 0,
+      "recorded_defect_sum_NOT_unique_parts": 4,
+      "recorded_type1": 1,
+      "recorded_type2": 2,
+      "recorded_type3": 1
+    },
+    {
+      "date": "2020-03-31",
+      "records": 1800,
+      "idx_unique": 1800,
+      "idx_min": 1,
+      "idx_max": 1800,
+      "idx_monotonic_in_file": true,
+      "unique_vectors_exact": 1340,
+      "seen_in_earlier_dates_exact": 1800,
+      "seen_in_earlier_dates_rounded6": 1800,
+      "pressure_gt5_descriptive_only": 243,
+      "recorded_defect_sum_NOT_unique_parts": 5,
+      "recorded_type1": 2,
+      "recorded_type2": 3,
+      "recorded_type3": null
+    },
+    {
+      "date": "2020-04-02",
+      "records": 2000,
+      "idx_unique": 2000,
+      "idx_min": 1,
+      "idx_max": 2000,
+      "idx_monotonic_in_file": true,
+      "unique_vectors_exact": 816,
+      "seen_in_earlier_dates_exact": 2000,
+      "seen_in_earlier_dates_rounded6": 2000,
+      "pressure_gt5_descriptive_only": 0,
+      "recorded_defect_sum_NOT_unique_parts": 4,
+      "recorded_type1": 1,
+      "recorded_type2": 1,
+      "recorded_type3": 2
+    },
+    {
+      "date": "2020-04-03",
+      "records": 800,
+      "idx_unique": 800,
+      "idx_min": 1,
+      "idx_max": 800,
+      "idx_monotonic_in_file": true,
+      "unique_vectors_exact": 693,
+      "seen_in_earlier_dates_exact": 800,
+      "seen_in_earlier_dates_rounded6": 800,
+      "pressure_gt5_descriptive_only": 243,
+      "recorded_defect_sum_NOT_unique_parts": 4,
+      "recorded_type1": 2,
+      "recorded_type2": 1,
+      "recorded_type3": 1
+    },
+    {
+      "date": "2020-04-07",
+      "records": 669,
+      "idx_unique": 669,
+      "idx_min": 1,
+      "idx_max": 669,
+      "idx_monotonic_in_file": true,
+      "unique_vectors_exact": 184,
+      "seen_in_earlier_dates_exact": 669,
+      "seen_in_earlier_dates_rounded6": 669,
+      "pressure_gt5_descriptive_only": 0,
+      "recorded_defect_sum_NOT_unique_parts": 3,
+      "recorded_type1": 0,
+      "recorded_type2": 1,
+      "recorded_type3": 2
+    }
+  ],
+  "long_contiguous_repeated_sensor_sequences": [
+    {
+      "date_a": "2020-03-24",
+      "date_b": "2020-03-25",
+      "mode": "exact",
+      "offset_a_0based": 130,
+      "offset_b_0based": 975,
+      "length": 375
+    },
+    {
+      "date_a": "2020-03-24",
+      "date_b": "2020-03-25",
+      "mode": "rounded6",
+      "offset_a_0based": 130,
+      "offset_b_0based": 975,
+      "length": 375
+    },
+    {
+      "date_a": "2020-03-24",
+      "date_b": "2020-03-26",
+      "mode": "exact",
+      "offset_a_0based": 130,
+      "offset_b_0based": 508,
+      "length": 492
+    },
+    {
+      "date_a": "2020-03-24",
+      "date_b": "2020-03-26",
+      "mode": "rounded6",
+      "offset_a_0based": 130,
+      "offset_b_0based": 508,
+      "length": 492
+    },
+    {
+      "date_a": "2020-03-24",
+      "date_b": "2020-03-27",
+      "mode": "exact",
+      "offset_a_0based": 792,
+      "offset_b_0based": 55,
+      "length": 408
+    },
+    {
+      "date_a": "2020-03-24",
+      "date_b": "2020-03-27",
+      "mode": "rounded6",
+      "offset_a_0based": 792,
+      "offset_b_0based": 55,
+      "length": 408
+    },
+    {
+      "date_a": "2020-03-24",
+      "date_b": "2020-03-30",
+      "mode": "exact",
+      "offset_a_0based": 130,
+      "offset_b_0based": 672,
+      "length": 544
+    },
+    {
+      "date_a": "2020-03-24",
+      "date_b": "2020-03-30",
+      "mode": "rounded6",
+      "offset_a_0based": 130,
+      "offset_b_0based": 672,
+      "length": 544
+    },
+    {
+      "date_a": "2020-03-24",
+      "date_b": "2020-03-31",
+      "mode": "exact",
+      "offset_a_0based": 792,
+      "offset_b_0based": 46,
+      "length": 408
+    },
+    {
+      "date_a": "2020-03-24",
+      "date_b": "2020-03-31",
+      "mode": "rounded6",
+      "offset_a_0based": 792,
+      "offset_b_0based": 46,
+      "length": 408
+    },
+    {
+      "date_a": "2020-03-24",
+      "date_b": "2020-04-02",
+      "mode": "exact",
+      "offset_a_0based": 130,
+      "offset_b_0based": 478,
+      "length": 544
+    },
+    {
+      "date_a": "2020-03-24",
+      "date_b": "2020-04-02",
+      "mode": "rounded6",
+      "offset_a_0based": 130,
+      "offset_b_0based": 478,
+      "length": 544
+    },
+    {
+      "date_a": "2020-03-24",
+      "date_b": "2020-04-07",
+      "mode": "exact",
+      "offset_a_0based": 225,
+      "offset_b_0based": 0,
+      "length": 262
+    },
+    {
+      "date_a": "2020-03-24",
+      "date_b": "2020-04-07",
+      "mode": "rounded6",
+      "offset_a_0based": 225,
+      "offset_b_0based": 0,
+      "length": 262
+    },
+    {
+      "date_a": "2020-03-25",
+      "date_b": "2020-03-26",
+      "mode": "exact",
+      "offset_a_0based": 975,
+      "offset_b_0based": 109,
+      "length": 375
+    },
+    {
+      "date_a": "2020-03-25",
+      "date_b": "2020-03-26",
+      "mode": "rounded6",
+      "offset_a_0based": 975,
+      "offset_b_0based": 109,
+      "length": 375
+    },
+    {
+      "date_a": "2020-03-25",
+      "date_b": "2020-03-27",
+      "mode": "exact",
+      "offset_a_0based": 0,
+      "offset_b_0based": 463,
+      "length": 1185
+    },
+    {
+      "date_a": "2020-03-25",
+      "date_b": "2020-03-27",
+      "mode": "rounded6",
+      "offset_a_0based": 0,
+      "offset_b_0based": 463,
+      "length": 1185
+    },
+    {
+      "date_a": "2020-03-25",
+      "date_b": "2020-03-30",
+      "mode": "exact",
+      "offset_a_0based": 975,
+      "offset_b_0based": 273,
+      "length": 375
+    },
+    {
+      "date_a": "2020-03-25",
+      "date_b": "2020-03-30",
+      "mode": "rounded6",
+      "offset_a_0based": 975,
+      "offset_b_0based": 273,
+      "length": 375
+    },
+    {
+      "date_a": "2020-03-25",
+      "date_b": "2020-03-31",
+      "mode": "exact",
+      "offset_a_0based": 0,
+      "offset_b_0based": 454,
+      "length": 1346
+    },
+    {
+      "date_a": "2020-03-25",
+      "date_b": "2020-03-31",
+      "mode": "rounded6",
+      "offset_a_0based": 0,
+      "offset_b_0based": 454,
+      "length": 1346
+    },
+    {
+      "date_a": "2020-03-25",
+      "date_b": "2020-04-02",
+      "mode": "exact",
+      "offset_a_0based": 975,
+      "offset_b_0based": 478,
+      "length": 375
+    },
+    {
+      "date_a": "2020-03-25",
+      "date_b": "2020-04-02",
+      "mode": "rounded6",
+      "offset_a_0based": 975,
+      "offset_b_0based": 478,
+      "length": 375
+    },
+    {
+      "date_a": "2020-03-25",
+      "date_b": "2020-04-03",
+      "mode": "exact",
+      "offset_a_0based": 270,
+      "offset_b_0based": 0,
+      "length": 800
+    },
+    {
+      "date_a": "2020-03-25",
+      "date_b": "2020-04-03",
+      "mode": "rounded6",
+      "offset_a_0based": 270,
+      "offset_b_0based": 0,
+      "length": 800
+    },
+    {
+      "date_a": "2020-03-25",
+      "date_b": "2020-04-07",
+      "mode": "exact",
+      "offset_a_0based": 1070,
+      "offset_b_0based": 0,
+      "length": 262
+    },
+    {
+      "date_a": "2020-03-25",
+      "date_b": "2020-04-07",
+      "mode": "rounded6",
+      "offset_a_0based": 1070,
+      "offset_b_0based": 0,
+      "length": 262
+    },
+    {
+      "date_a": "2020-03-26",
+      "date_b": "2020-03-27",
+      "mode": "exact",
+      "offset_a_0based": 109,
+      "offset_b_0based": 1438,
+      "length": 210
+    },
+    {
+      "date_a": "2020-03-26",
+      "date_b": "2020-03-27",
+      "mode": "rounded6",
+      "offset_a_0based": 109,
+      "offset_b_0based": 1438,
+      "length": 210
+    },
+    {
+      "date_a": "2020-03-26",
+      "date_b": "2020-03-30",
+      "mode": "exact",
+      "offset_a_0based": 0,
+      "offset_b_0based": 164,
+      "length": 1000
+    },
+    {
+      "date_a": "2020-03-26",
+      "date_b": "2020-03-30",
+      "mode": "rounded6",
+      "offset_a_0based": 0,
+      "offset_b_0based": 164,
+      "length": 1000
+    },
+    {
+      "date_a": "2020-03-26",
+      "date_b": "2020-03-31",
+      "mode": "exact",
+      "offset_a_0based": 109,
+      "offset_b_0based": 1429,
+      "length": 371
+    },
+    {
+      "date_a": "2020-03-26",
+      "date_b": "2020-03-31",
+      "mode": "rounded6",
+      "offset_a_0based": 109,
+      "offset_b_0based": 1429,
+      "length": 371
+    },
+    {
+      "date_a": "2020-03-26",
+      "date_b": "2020-04-02",
+      "mode": "exact",
+      "offset_a_0based": 360,
+      "offset_b_0based": 330,
+      "length": 640
+    },
+    {
+      "date_a": "2020-03-26",
+      "date_b": "2020-04-02",
+      "mode": "rounded6",
+      "offset_a_0based": 360,
+      "offset_b_0based": 330,
+      "length": 640
+    },
+    {
+      "date_a": "2020-03-26",
+      "date_b": "2020-04-07",
+      "mode": "exact",
+      "offset_a_0based": 204,
+      "offset_b_0based": 0,
+      "length": 262
+    },
+    {
+      "date_a": "2020-03-26",
+      "date_b": "2020-04-07",
+      "mode": "rounded6",
+      "offset_a_0based": 204,
+      "offset_b_0based": 0,
+      "length": 262
+    },
+    {
+      "date_a": "2020-03-27",
+      "date_b": "2020-03-30",
+      "mode": "exact",
+      "offset_a_0based": 1438,
+      "offset_b_0based": 273,
+      "length": 210
+    },
+    {
+      "date_a": "2020-03-27",
+      "date_b": "2020-03-30",
+      "mode": "rounded6",
+      "offset_a_0based": 1438,
+      "offset_b_0based": 273,
+      "length": 210
+    },
+    {
+      "date_a": "2020-03-27",
+      "date_b": "2020-03-31",
+      "mode": "exact",
+      "offset_a_0based": 9,
+      "offset_b_0based": 0,
+      "length": 1639
+    },
+    {
+      "date_a": "2020-03-27",
+      "date_b": "2020-03-31",
+      "mode": "rounded6",
+      "offset_a_0based": 9,
+      "offset_b_0based": 0,
+      "length": 1639
+    },
+    {
+      "date_a": "2020-03-27",
+      "date_b": "2020-04-02",
+      "mode": "exact",
+      "offset_a_0based": 0,
+      "offset_b_0based": 1267,
+      "length": 733
+    },
+    {
+      "date_a": "2020-03-27",
+      "date_b": "2020-04-02",
+      "mode": "rounded6",
+      "offset_a_0based": 0,
+      "offset_b_0based": 1267,
+      "length": 733
+    },
+    {
+      "date_a": "2020-03-27",
+      "date_b": "2020-04-03",
+      "mode": "exact",
+      "offset_a_0based": 733,
+      "offset_b_0based": 0,
+      "length": 800
+    },
+    {
+      "date_a": "2020-03-27",
+      "date_b": "2020-04-03",
+      "mode": "rounded6",
+      "offset_a_0based": 733,
+      "offset_b_0based": 0,
+      "length": 800
+    },
+    {
+      "date_a": "2020-03-27",
+      "date_b": "2020-04-07",
+      "mode": "exact",
+      "offset_a_0based": 1533,
+      "offset_b_0based": 0,
+      "length": 115
+    },
+    {
+      "date_a": "2020-03-27",
+      "date_b": "2020-04-07",
+      "mode": "rounded6",
+      "offset_a_0based": 1533,
+      "offset_b_0based": 0,
+      "length": 115
+    },
+    {
+      "date_a": "2020-03-30",
+      "date_b": "2020-03-31",
+      "mode": "exact",
+      "offset_a_0based": 273,
+      "offset_b_0based": 1429,
+      "length": 371
+    },
+    {
+      "date_a": "2020-03-30",
+      "date_b": "2020-03-31",
+      "mode": "rounded6",
+      "offset_a_0based": 273,
+      "offset_b_0based": 1429,
+      "length": 371
+    },
+    {
+      "date_a": "2020-03-30",
+      "date_b": "2020-04-02",
+      "mode": "exact",
+      "offset_a_0based": 524,
+      "offset_b_0based": 330,
+      "length": 946
+    },
+    {
+      "date_a": "2020-03-30",
+      "date_b": "2020-04-02",
+      "mode": "rounded6",
+      "offset_a_0based": 524,
+      "offset_b_0based": 330,
+      "length": 946
+    },
+    {
+      "date_a": "2020-03-30",
+      "date_b": "2020-04-07",
+      "mode": "exact",
+      "offset_a_0based": 368,
+      "offset_b_0based": 0,
+      "length": 262
+    },
+    {
+      "date_a": "2020-03-30",
+      "date_b": "2020-04-07",
+      "mode": "rounded6",
+      "offset_a_0based": 368,
+      "offset_b_0based": 0,
+      "length": 262
+    },
+    {
+      "date_a": "2020-03-31",
+      "date_b": "2020-04-02",
+      "mode": "exact",
+      "offset_a_0based": 0,
+      "offset_b_0based": 1276,
+      "length": 724
+    },
+    {
+      "date_a": "2020-03-31",
+      "date_b": "2020-04-02",
+      "mode": "rounded6",
+      "offset_a_0based": 0,
+      "offset_b_0based": 1276,
+      "length": 724
+    },
+    {
+      "date_a": "2020-03-31",
+      "date_b": "2020-04-03",
+      "mode": "exact",
+      "offset_a_0based": 724,
+      "offset_b_0based": 0,
+      "length": 800
+    },
+    {
+      "date_a": "2020-03-31",
+      "date_b": "2020-04-03",
+      "mode": "rounded6",
+      "offset_a_0based": 724,
+      "offset_b_0based": 0,
+      "length": 800
+    },
+    {
+      "date_a": "2020-03-31",
+      "date_b": "2020-04-07",
+      "mode": "exact",
+      "offset_a_0based": 1524,
+      "offset_b_0based": 0,
+      "length": 262
+    },
+    {
+      "date_a": "2020-03-31",
+      "date_b": "2020-04-07",
+      "mode": "rounded6",
+      "offset_a_0based": 1524,
+      "offset_b_0based": 0,
+      "length": 262
+    },
+    {
+      "date_a": "2020-04-02",
+      "date_b": "2020-04-07",
+      "mode": "exact",
+      "offset_a_0based": 573,
+      "offset_b_0based": 0,
+      "length": 262
+    },
+    {
+      "date_a": "2020-04-02",
+      "date_b": "2020-04-07",
+      "mode": "rounded6",
+      "offset_a_0based": 573,
+      "offset_b_0based": 0,
+      "length": 262
+    }
+  ],
+  "unlabelled_model_demonstration": {
+    "reference_dates": [
+      "2020-03-24",
+      "2020-03-25"
+    ],
+    "reference_rows": 2552,
+    "reference_unique_vectors": 1574,
+    "later_rows": 9387,
+    "later_vectors_seen_in_reference_exact": 9387,
+    "threshold_rule": "99th percentile on fitted reference records; NOT calibrated false positive rate",
+    "thresholds": {
+      "robust_deviation": 136.58213049147778,
+      "isolation_forest": 0.6700622291279099,
+      "one_class_svm": -5.160425305759064
+    },
+    "later_reference_exceedance_rates": [
+      {
+        "working time": "2020-03-26T00:00:00",
+        "robust_deviation_reference_exceedance": 0.0,
+        "isolation_forest_reference_exceedance": 0.0,
+        "one_class_svm_reference_exceedance": 0.0
+      },
+      {
+        "working time": "2020-03-27T00:00:00",
+        "robust_deviation_reference_exceedance": 0.015776699029126214,
+        "isolation_forest_reference_exceedance": 0.015776699029126214,
+        "one_class_svm_reference_exceedance": 0.014563106796116505
+      },
+      {
+        "working time": "2020-03-30T00:00:00",
+        "robust_deviation_reference_exceedance": 0.0,
+        "isolation_forest_reference_exceedance": 0.0,
+        "one_class_svm_reference_exceedance": 0.0
+      },
+      {
+        "working time": "2020-03-31T00:00:00",
+        "robust_deviation_reference_exceedance": 0.014444444444444444,
+        "isolation_forest_reference_exceedance": 0.014444444444444444,
+        "one_class_svm_reference_exceedance": 0.013333333333333334
+      },
+      {
+        "working time": "2020-04-02T00:00:00",
+        "robust_deviation_reference_exceedance": 0.0,
+        "isolation_forest_reference_exceedance": 0.0,
+        "one_class_svm_reference_exceedance": 0.0
+      },
+      {
+        "working time": "2020-04-03T00:00:00",
+        "robust_deviation_reference_exceedance": 0.0325,
+        "isolation_forest_reference_exceedance": 0.0325,
+        "one_class_svm_reference_exceedance": 0.03
+      },
+      {
+        "working time": "2020-04-07T00:00:00",
+        "robust_deviation_reference_exceedance": 0.0,
+        "isolation_forest_reference_exceedance": 0.0,
+        "one_class_svm_reference_exceedance": 0.0
+      }
+    ],
+    "reference_exceedance_selection_overlap": [
+      {
+        "date": "2020-03-26",
+        "counts": {
+          "robust_deviation": 0,
+          "isolation_forest": 0,
+          "one_class_svm": 0
+        },
+        "robust_and_isolation": 0,
+        "all_three": 0
+      },
+      {
+        "date": "2020-03-27",
+        "counts": {
+          "robust_deviation": 26,
+          "isolation_forest": 26,
+          "one_class_svm": 24
+        },
+        "robust_and_isolation": 17,
+        "all_three": 5
+      },
+      {
+        "date": "2020-03-30",
+        "counts": {
+          "robust_deviation": 0,
+          "isolation_forest": 0,
+          "one_class_svm": 0
+        },
+        "robust_and_isolation": 0,
+        "all_three": 0
+      },
+      {
+        "date": "2020-03-31",
+        "counts": {
+          "robust_deviation": 26,
+          "isolation_forest": 26,
+          "one_class_svm": 24
+        },
+        "robust_and_isolation": 17,
+        "all_three": 5
+      },
+      {
+        "date": "2020-04-02",
+        "counts": {
+          "robust_deviation": 0,
+          "isolation_forest": 0,
+          "one_class_svm": 0
+        },
+        "robust_and_isolation": 0,
+        "all_three": 0
+      },
+      {
+        "date": "2020-04-03",
+        "counts": {
+          "robust_deviation": 26,
+          "isolation_forest": 26,
+          "one_class_svm": 24
+        },
+        "robust_and_isolation": 17,
+        "all_three": 5
+      },
+      {
+        "date": "2020-04-07",
+        "counts": {
+          "robust_deviation": 0,
+          "isolation_forest": 0,
+          "one_class_svm": 0
+        },
+        "robust_and_isolation": 0,
+        "all_three": 0
+      }
+    ],
+    "top5pct_unique_vector_count": 79,
+    "top5pct_pairwise_jaccard": {
+      "isolation_forest__robust_deviation": 0.19696969696969696,
+      "isolation_forest__one_class_svm": 0.16176470588235295,
+      "one_class_svm__robust_deviation": 0.18796992481203006
+    },
+    "isolation_forest_top5pct_jaccard_raw_vs_deduplicated_fit": 0.8588235294117647,
+    "isolation_forest_seed_sensitivity": [
+      {
+        "seed": 0,
+        "top5pct_jaccard_vs_seed7": 0.8588235294117647
+      },
+      {
+        "seed": 7,
+        "top5pct_jaccard_vs_seed7": 1.0
+      },
+      {
+        "seed": 42,
+        "top5pct_jaccard_vs_seed7": 0.8809523809523809
+      }
+    ],
+    "quality_metrics": null,
+    "limitations": [
+      "No individual defect labels",
+      "All later exact sensor vectors already observed",
+      "Reference data not verified defect-free",
+      "Density sensitive to duplicate frequency",
+      "SVM nu=.01 is a regularization setting, not a measured defect rate",
+      "No defect F1, miss rate, false alarm rate or optimal model selection justified"
+    ]
+  }
+}

@@ -1,0 +1,822 @@
+{
+  "50": {
+    "rows": 1085,
+    "columns": [
+      "SerialNo",
+      "ReceivedDateTime",
+      "SpindleSpeed_max",
+      "ServoCurrent_X_max",
+      "ServoCurrent_Z1_max",
+      "ServoCurrent_Z2_max",
+      "ServoCurrent_Z3_max",
+      "ServoLoad_X_max",
+      "ServoLoad_Z1_max",
+      "ServoLoad_Z2_max",
+      "ServoLoad_Z3_max",
+      "SpindleSpeed_mean",
+      "ServoCurrent_X_mean",
+      "ServoCurrent_Z1_mean",
+      "ServoCurrent_Z2_mean",
+      "ServoCurrent_Z3_mean",
+      "ServoLoad_X_mean",
+      "ServoLoad_Z1_mean",
+      "ServoLoad_Z2_mean",
+      "ServoLoad_Z3_mean",
+      "SpindleSpeed_min",
+      "ServoCurrent_X_min",
+      "ServoCurrent_Z1_min",
+      "ServoCurrent_Z2_min",
+      "ServoCurrent_Z3_min",
+      "ServoLoad_X_min",
+      "ServoLoad_Z1_min",
+      "ServoLoad_Z2_min",
+      "ServoLoad_Z3_min",
+      "SpindleSpeed_std",
+      "ServoCurrent_X_std",
+      "ServoCurrent_Z1_std",
+      "ServoCurrent_Z2_std",
+      "ServoCurrent_Z3_std",
+      "ServoLoad_X_std",
+      "ServoLoad_Z1_std",
+      "ServoLoad_Z2_std",
+      "ServoLoad_Z3_std",
+      "SpindleLoad_max",
+      "SpindleLoad_mean",
+      "SpindleLoad_min",
+      "SpindleLoad_std",
+      "passorfail"
+    ],
+    "missing_cells": 0,
+    "label_counts": {
+      "0": 986,
+      "1": 99
+    },
+    "full_row_duplicates": 0,
+    "sensor_vector_unique": 1085,
+    "sensor_vector_duplicate_rows": 0,
+    "conflicting_sensor_groups": 0,
+    "rows_in_conflicting_sensor_groups": 0,
+    "feature_ranges": {
+      "SpindleSpeed_max": [
+        2211.8949500000003,
+        2233.11,
+        22
+      ],
+      "ServoCurrent_X_max": [
+        280.78000000000003,
+        1670.2875,
+        644
+      ],
+      "ServoCurrent_Z1_max": [
+        236.34,
+        3208.77,
+        620
+      ],
+      "ServoCurrent_Z2_max": [
+        30.3,
+        30.3,
+        1
+      ],
+      "ServoCurrent_Z3_max": [
+        42.42,
+        4714.68,
+        377
+      ],
+      "ServoLoad_X_max": [
+        34.34,
+        189.88,
+        131
+      ],
+      "ServoLoad_Z1_max": [
+        17.17,
+        221.19,
+        135
+      ],
+      "ServoLoad_Z2_max": [
+        30.3,
+        30.3,
+        1
+      ],
+      "ServoLoad_Z3_max": [
+        40.4,
+        4184.43,
+        126
+      ],
+      "SpindleSpeed_mean": [
+        518.2974033149171,
+        1445.904117647059,
+        1076
+      ],
+      "ServoCurrent_X_mean": [
+        117.88133108108109,
+        194.2170588235294,
+        1077
+      ],
+      "ServoCurrent_Z1_mean": [
+        81.78506172839506,
+        278.5939726027397,
+        983
+      ],
+      "ServoCurrent_Z2_mean": [
+        30.3,
+        30.3,
+        1
+      ],
+      "ServoCurrent_Z3_mean": [
+        40.42385826771654,
+        265.6027027027027,
+        979
+      ],
+      "ServoLoad_X_mean": [
+        14.730884353741496,
+        21.414640522875818,
+        908
+      ],
+      "ServoLoad_Z1_mean": [
+        4.9245341614906835,
+        23.527058823529412,
+        932
+      ],
+      "ServoLoad_Z2_mean": [
+        30.3,
+        30.3,
+        1
+      ],
+      "ServoLoad_Z3_mean": [
+        40.4,
+        159.63315789473685,
+        938
+      ],
+      "SpindleSpeed_min": [
+        0.0,
+        0.0,
+        1
+      ],
+      "ServoCurrent_X_min": [
+        0.0,
+        5.05,
+        6
+      ],
+      "ServoCurrent_Z1_min": [
+        0.0,
+        27.27,
+        27
+      ],
+      "ServoCurrent_Z2_min": [
+        30.3,
+        30.3,
+        1
+      ],
+      "ServoCurrent_Z3_min": [
+        40.4,
+        40.4,
+        1
+      ],
+      "ServoLoad_X_min": [
+        0.0,
+        0.0,
+        1
+      ],
+      "ServoLoad_Z1_min": [
+        0.0,
+        1.01,
+        2
+      ],
+      "ServoLoad_Z2_min": [
+        30.3,
+        30.3,
+        1
+      ],
+      "ServoLoad_Z3_min": [
+        40.4,
+        40.4,
+        1
+      ],
+      "SpindleSpeed_std": [
+        759.0147737685223,
+        933.0535555660176,
+        1085
+      ],
+      "ServoCurrent_X_std": [
+        67.28065977449754,
+        255.2385308051563,
+        1085
+      ],
+      "ServoCurrent_Z1_std": [
+        75.45204665167772,
+        509.62172146792346,
+        986
+      ],
+      "ServoCurrent_Z2_std": [
+        0.0,
+        0.0,
+        1
+      ],
+      "ServoCurrent_Z3_std": [
+        0.1989886212517672,
+        960.1031042455804,
+        986
+      ],
+      "ServoLoad_X_std": [
+        7.666835366213318,
+        31.544526457365382,
+        1085
+      ],
+      "ServoLoad_Z1_std": [
+        5.535260590661832,
+        36.351373043046856,
+        986
+      ],
+      "ServoLoad_Z2_std": [
+        0.0,
+        0.0,
+        1
+      ],
+      "ServoLoad_Z3_std": [
+        0.0,
+        669.1851634913979,
+        1078
+      ],
+      "SpindleLoad_max": [
+        6325.85119,
+        33725.8057185,
+        981
+      ],
+      "SpindleLoad_mean": [
+        187.1259979096588,
+        5364.009208121212,
+        1085
+      ],
+      "SpindleLoad_min": [
+        0.0,
+        0.0,
+        1
+      ],
+      "SpindleLoad_std": [
+        765.4753605819526,
+        6161.802626910314,
+        1085
+      ]
+    },
+    "constant_columns": [
+      "ServoCurrent_Z2_max",
+      "ServoLoad_Z2_max",
+      "ServoCurrent_Z2_mean",
+      "ServoLoad_Z2_mean",
+      "SpindleSpeed_min",
+      "ServoCurrent_Z2_min",
+      "ServoCurrent_Z3_min",
+      "ServoLoad_X_min",
+      "ServoLoad_Z2_min",
+      "ServoLoad_Z3_min",
+      "ServoCurrent_Z2_std",
+      "ServoLoad_Z2_std",
+      "SpindleLoad_min"
+    ],
+    "groups": {
+      "field": "SerialNo",
+      "n": 986,
+      "mixed_label_groups": 99,
+      "row_count_quantiles": {
+        "0.0": 1.0,
+        "0.25": 1.0,
+        "0.5": 1.0,
+        "0.75": 1.0,
+        "1.0": 2.0
+      },
+      "all_negative_groups": 887,
+      "all_positive_groups": 0
+    },
+    "dates": {
+      "2022-08-23": {
+        "0": 306,
+        "1": 31
+      },
+      "2022-08-24": {
+        "0": 304,
+        "1": 34
+      },
+      "2022-08-25": {
+        "0": 376,
+        "1": 34
+      }
+    },
+    "timestamp_monotonic": true,
+    "benchmarks": [
+      {
+        "split": "random_stratified",
+        "train_n": 759,
+        "train_positive": 69,
+        "n": 326,
+        "positive_n": 30,
+        "precision": 0.9666666666666667,
+        "recall": 0.9666666666666667,
+        "f1": 0.9666666666666667,
+        "ap": 0.995473718593852
+      },
+      {
+        "split": "past_to_2022-08-25",
+        "train_n": 675,
+        "train_positive": 65,
+        "n": 410,
+        "positive_n": 34,
+        "precision": 1.0,
+        "recall": 0.9705882352941176,
+        "f1": 0.9850746268656716,
+        "ap": 1.0
+      }
+    ]
+  },
+  "51": {
+    "data/normal_data.csv": {
+      "rows": 81775,
+      "columns": [
+        "Unnamed: 0",
+        "WK_DT",
+        "PIPE_NO",
+        "DV_R",
+        "DA_R",
+        "AV_R",
+        "AA_R",
+        "PM_R",
+        "FIN_JGMT"
+      ],
+      "missing_cells": 0,
+      "label_counts": {
+        "1": 81775
+      },
+      "full_row_duplicates": 0,
+      "sensor_vector_unique": 31642,
+      "sensor_vector_duplicate_rows": 50133,
+      "conflicting_sensor_groups": 0,
+      "rows_in_conflicting_sensor_groups": 0,
+      "feature_ranges": {
+        "DV_R": [
+          308.0,
+          323.0,
+          16
+        ],
+        "DA_R": [
+          7934.0,
+          8653.0,
+          422
+        ],
+        "AV_R": [
+          357.0,
+          370.0,
+          14
+        ],
+        "AA_R": [
+          5948.0,
+          50003.0,
+          417
+        ],
+        "PM_R": [
+          9270.0,
+          10717.0,
+          38
+        ]
+      },
+      "constant_columns": [
+        "FIN_JGMT"
+      ],
+      "groups": {
+        "field": "PIPE_NO",
+        "n": 24,
+        "mixed_label_groups": 0,
+        "row_count_quantiles": {
+          "0.0": 2043.0,
+          "0.25": 2654.25,
+          "0.5": 2742.0,
+          "0.75": 5097.25,
+          "1.0": 5516.0
+        },
+        "all_negative_groups": 0,
+        "all_positive_groups": 24
+      },
+      "duplicates_excluding_storage_index": 5266,
+      "date_label_counts": {
+        "20220117": {
+          "1": 2480
+        },
+        "20220322": {
+          "1": 9320
+        },
+        "20220323": {
+          "1": 20816
+        },
+        "20220324": {
+          "1": 8234
+        },
+        "20220325": {
+          "1": 10578
+        },
+        "20220328": {
+          "1": 11690
+        },
+        "20220329": {
+          "1": 15804
+        },
+        "20220331": {
+          "1": 2853
+        }
+      },
+      "timestamp_unique": 40888,
+      "timestamp_monotonic": true,
+      "best_short_repeat_offsets": [
+        {
+          "offset": 1,
+          "equal_fraction": 0.08851224105461393
+        },
+        {
+          "offset": 48,
+          "equal_fraction": 0.04146732414012505
+        },
+        {
+          "offset": 96,
+          "equal_fraction": 0.01644241481898652
+        },
+        {
+          "offset": 196,
+          "equal_fraction": 0.00930386496524841
+        },
+        {
+          "offset": 148,
+          "equal_fraction": 0.007914048047827311
+        },
+        {
+          "offset": 204,
+          "equal_fraction": 0.007551703424010984
+        },
+        {
+          "offset": 400,
+          "equal_fraction": 0.0071643625192012285
+        },
+        {
+          "offset": 200,
+          "equal_fraction": 0.005896414342629482
+        },
+        {
+          "offset": 404,
+          "equal_fraction": 0.005173833429600226
+        },
+        {
+          "offset": 144,
+          "equal_fraction": 0.004961350467346964
+        }
+      ],
+      "most_common_sensor_vectors": [
+        {
+          "DV_R": 308,
+          "DA_R": 8506,
+          "AV_R": 357,
+          "AA_R": 5948,
+          "PM_R": 9270,
+          "count": 246
+        },
+        {
+          "DV_R": 308,
+          "DA_R": 8494,
+          "AV_R": 357,
+          "AA_R": 5948,
+          "PM_R": 9270,
+          "count": 115
+        },
+        {
+          "DV_R": 308,
+          "DA_R": 7934,
+          "AV_R": 357,
+          "AA_R": 5948,
+          "PM_R": 9270,
+          "count": 109
+        },
+        {
+          "DV_R": 308,
+          "DA_R": 7934,
+          "AV_R": 359,
+          "AA_R": 6030,
+          "PM_R": 9270,
+          "count": 84
+        },
+        {
+          "DV_R": 308,
+          "DA_R": 8556,
+          "AV_R": 357,
+          "AA_R": 5948,
+          "PM_R": 9270,
+          "count": 84
+        }
+      ]
+    },
+    "data/outlier_data.csv": {
+      "rows": 18225,
+      "columns": [
+        "WK_DT",
+        "PIPE_NO",
+        "DV_R",
+        "DA_R",
+        "AV_R",
+        "AA_R",
+        "PM_R",
+        "FIN_JGMT"
+      ],
+      "missing_cells": 0,
+      "label_counts": {
+        "0": 18225
+      },
+      "full_row_duplicates": 0,
+      "sensor_vector_unique": 1550,
+      "sensor_vector_duplicate_rows": 16675,
+      "conflicting_sensor_groups": 0,
+      "rows_in_conflicting_sensor_groups": 0,
+      "feature_ranges": {
+        "DV_R": [
+          250.0,
+          260.0,
+          3
+        ],
+        "DA_R": [
+          6800.0,
+          7300.0,
+          6
+        ],
+        "AV_R": [
+          250.0,
+          304.0,
+          10
+        ],
+        "AA_R": [
+          3800.0,
+          4500.0,
+          9
+        ],
+        "PM_R": [
+          4700.0,
+          5200.0,
+          6
+        ]
+      },
+      "constant_columns": [
+        "FIN_JGMT"
+      ],
+      "groups": {
+        "field": "PIPE_NO",
+        "n": 6,
+        "mixed_label_groups": 0,
+        "row_count_quantiles": {
+          "0.0": 691.0,
+          "0.25": 2246.0,
+          "0.5": 2490.0,
+          "0.75": 4423.75,
+          "1.0": 5321.0
+        },
+        "all_negative_groups": 6,
+        "all_positive_groups": 0
+      },
+      "duplicates_excluding_storage_index": 0,
+      "date_label_counts": {
+        "20220331": {
+          "0": 2673
+        },
+        "20220401": {
+          "0": 15552
+        }
+      },
+      "timestamp_unique": 9113,
+      "timestamp_monotonic": true,
+      "best_short_repeat_offsets": [
+        {
+          "offset": 1840,
+          "equal_fraction": 0.6849557522123894
+        },
+        {
+          "offset": 1380,
+          "equal_fraction": 0.1474621549421193
+        },
+        {
+          "offset": 460,
+          "equal_fraction": 0.14641148325358852
+        },
+        {
+          "offset": 736,
+          "equal_fraction": 0.0945737320601521
+        },
+        {
+          "offset": 1104,
+          "equal_fraction": 0.07470358039834121
+        },
+        {
+          "offset": 920,
+          "equal_fraction": 0.05917364923432534
+        },
+        {
+          "offset": 1748,
+          "equal_fraction": 0.05856648661770954
+        },
+        {
+          "offset": 506,
+          "equal_fraction": 0.04774535809018567
+        },
+        {
+          "offset": 644,
+          "equal_fraction": 0.046186223764291
+        },
+        {
+          "offset": 92,
+          "equal_fraction": 0.04604864060001103
+        }
+      ],
+      "most_common_sensor_vectors": [
+        {
+          "DV_R": 255,
+          "DA_R": 7100,
+          "AV_R": 255,
+          "AA_R": 4000,
+          "PM_R": 5000,
+          "count": 98
+        },
+        {
+          "DV_R": 250,
+          "DA_R": 7000,
+          "AV_R": 255,
+          "AA_R": 4000,
+          "PM_R": 5000,
+          "count": 97
+        },
+        {
+          "DV_R": 250,
+          "DA_R": 7100,
+          "AV_R": 255,
+          "AA_R": 4200,
+          "PM_R": 5000,
+          "count": 96
+        },
+        {
+          "DV_R": 255,
+          "DA_R": 7000,
+          "AV_R": 255,
+          "AA_R": 4000,
+          "PM_R": 5000,
+          "count": 93
+        },
+        {
+          "DV_R": 250,
+          "DA_R": 7000,
+          "AV_R": 255,
+          "AA_R": 4200,
+          "PM_R": 5000,
+          "count": 89
+        }
+      ]
+    },
+    "single_feature_separation": {
+      "DV_R": {
+        "normal_min": 308.0,
+        "normal_max": 323.0,
+        "abnormal_min": 250.0,
+        "abnormal_max": 260.0,
+        "disjoint_range": true
+      },
+      "DA_R": {
+        "normal_min": 7934.0,
+        "normal_max": 8653.0,
+        "abnormal_min": 6800.0,
+        "abnormal_max": 7300.0,
+        "disjoint_range": true
+      },
+      "AV_R": {
+        "normal_min": 357.0,
+        "normal_max": 370.0,
+        "abnormal_min": 250.0,
+        "abnormal_max": 304.0,
+        "disjoint_range": true
+      },
+      "AA_R": {
+        "normal_min": 5948.0,
+        "normal_max": 50003.0,
+        "abnormal_min": 3800.0,
+        "abnormal_max": 4500.0,
+        "disjoint_range": true
+      },
+      "PM_R": {
+        "normal_min": 9270.0,
+        "normal_max": 10717.0,
+        "abnormal_min": 4700.0,
+        "abnormal_max": 5200.0,
+        "disjoint_range": true
+      }
+    }
+  },
+  "52": {
+    "rows": 739888,
+    "columns": [
+      "PIPE_NO",
+      "DV_R",
+      "DA_R",
+      "AV_R",
+      "AA_R",
+      "PM_R",
+      "FIN_JGMT"
+    ],
+    "missing_cells": 0,
+    "label_counts": {
+      "1": 626092,
+      "0": 113796
+    },
+    "full_row_duplicates": 370567,
+    "sensor_vector_unique": 340983,
+    "sensor_vector_duplicate_rows": 398905,
+    "conflicting_sensor_groups": 4414,
+    "rows_in_conflicting_sensor_groups": 17758,
+    "feature_ranges": {
+      "DV_R": [
+        1.0,
+        12680.0,
+        1113
+      ],
+      "DA_R": [
+        1.0,
+        13701.0,
+        4962
+      ],
+      "AV_R": [
+        11.0,
+        10984.0,
+        1492
+      ],
+      "AA_R": [
+        1.0,
+        78935.0,
+        4166
+      ],
+      "PM_R": [
+        2.0,
+        50761372.0,
+        5406
+      ]
+    },
+    "constant_columns": [],
+    "groups": {
+      "field": "PIPE_NO",
+      "n": 303,
+      "mixed_label_groups": 0,
+      "row_count_quantiles": {
+        "0.0": 24.0,
+        "0.25": 1607.0,
+        "0.5": 2352.0,
+        "0.75": 2783.0,
+        "1.0": 7922.0
+      },
+      "all_negative_groups": 41,
+      "all_positive_groups": 262
+    },
+    "benchmarks": [
+      {
+        "split": "row_random",
+        "train_n": 517921,
+        "train_pipes": 303,
+        "test_pipes": 303,
+        "pipe_overlap": 303,
+        "test_seen_exact_vector_fraction": 0.740574049295616,
+        "n": 221967,
+        "positive_n": 34139,
+        "precision": 0.8699701937406855,
+        "recall": 0.615571633615513,
+        "f1": 0.7209880778797495,
+        "ap": 0.8287767380792879
+      },
+      {
+        "split": "pipe_group",
+        "train_n": 509940,
+        "train_pipes": 212,
+        "test_pipes": 91,
+        "pipe_overlap": 0,
+        "test_seen_exact_vector_fraction": 0.10807660862455859,
+        "n": 229948,
+        "positive_n": 26358,
+        "precision": 0.4691407502404617,
+        "recall": 0.44411563851582064,
+        "f1": 0.4562853244981485,
+        "ap": 0.39580315649431297
+      }
+    ]
+  },
+  "51_vs_52": {
+    "data/normal_data.csv": {
+      "shared_pipes": 12,
+      "pipes_51": 24,
+      "matching_rows": {
+        "DV_R|DA_R|AV_R|AA_R|PM_R": 2,
+        "PIPE_NO|DV_R|DA_R|AV_R|AA_R|PM_R": 0
+      }
+    },
+    "data/outlier_data.csv": {
+      "shared_pipes": 1,
+      "pipes_51": 6,
+      "matching_rows": {
+        "DV_R|DA_R|AV_R|AA_R|PM_R": 0,
+        "PIPE_NO|DV_R|DA_R|AV_R|AA_R|PM_R": 0
+      }
+    }
+  }
+}

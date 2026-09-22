@@ -1,0 +1,142 @@
+{
+  "seq": 41,
+  "file": "Dataset_표면처리 자원최적화 AI 데이터셋.zip",
+  "bytes": 271064,
+  "members": [
+    {
+      "name": "data/Resource_Management_Process.csv",
+      "bytes": 1395011
+    }
+  ],
+  "crc_first_bad_member": null,
+  "tables": {
+    "data/Resource_Management_Process.csv": {
+      "shape": [
+        24479,
+        9
+      ],
+      "columns": [
+        "Datetime",
+        "Production",
+        "Temperature",
+        "Humidity",
+        "Power_Cost",
+        "DoW",
+        "Worker_Power",
+        "Man_Cost",
+        "Power_Usage"
+      ],
+      "missing_by_column": {
+        "Datetime": 0,
+        "Production": 0,
+        "Temperature": 0,
+        "Humidity": 0,
+        "Power_Cost": 0,
+        "DoW": 0,
+        "Worker_Power": 0,
+        "Man_Cost": 0,
+        "Power_Usage": 0
+      },
+      "unique_by_column": {
+        "Datetime": 23903,
+        "Production": 1030,
+        "Temperature": 475,
+        "Humidity": 945,
+        "Power_Cost": 3,
+        "DoW": 7,
+        "Worker_Power": 808,
+        "Man_Cost": 2,
+        "Power_Usage": 217
+      },
+      "duplicate_full_rows": 0,
+      "numeric": {
+        "Production": {
+          "count": 24479.0,
+          "mean": 231.55798847992156,
+          "std": 214.88600122426948,
+          "min": 112.0,
+          "25%": 114.0,
+          "50%": 126.0,
+          "75%": 276.0,
+          "max": 2573.0
+        },
+        "Temperature": {
+          "count": 24479.0,
+          "mean": 16.332203112872257,
+          "std": 9.679979693935046,
+          "min": -13.7,
+          "25%": 9.5,
+          "50%": 17.8,
+          "75%": 24.1,
+          "max": 36.0
+        },
+        "Humidity": {
+          "count": 24479.0,
+          "mean": 63.23156174680338,
+          "std": 24.224440544773465,
+          "min": -2.0,
+          "25%": 45.6,
+          "50%": 67.4,
+          "75%": 84.9,
+          "max": 97.0
+        },
+        "Power_Cost": {
+          "count": 24479.0,
+          "mean": 162.53313452346907,
+          "std": 30.831938131792185,
+          "min": 109.8,
+          "25%": 167.2,
+          "50%": 167.2,
+          "75%": 191.6,
+          "max": 191.6
+        },
+        "Worker_Power": {
+          "count": 24479.0,
+          "mean": 1.042009886024756,
+          "std": 1.9894610687645364,
+          "min": 0.12,
+          "25%": 0.14,
+          "50%": 0.25,
+          "75%": 1.31,
+          "max": 48.53
+        },
+        "Man_Cost": {
+          "count": 24479.0,
+          "mean": 1.3124923403733812,
+          "std": 0.24206838117539312,
+          "min": 1.0,
+          "25%": 1.0,
+          "50%": 1.5,
+          "75%": 1.5,
+          "max": 1.5
+        },
+        "Power_Usage": {
+          "count": 24479.0,
+          "mean": 136.46823808162097,
+          "std": 58.113685017125256,
+          "min": 39.0,
+          "25%": 68.0,
+          "50%": 147.0,
+          "75%": 186.0,
+          "max": 270.0
+        }
+      },
+      "dates": {
+        "Datetime": {
+          "min": "2021-02-08 00:15:00",
+          "max": "2021-10-21 23:45:00",
+          "days": 249,
+          "duplicates": 576,
+          "nonmonotonic": true,
+          "top_intervals_seconds": {
+            "900.0": 23897,
+            "0.0": 576,
+            "87300.0": 4,
+            "260100.0": 1
+          }
+        }
+      }
+    }
+  },
+  "status": "all archive bytes CRC-checked; tabular members parsed"
+}

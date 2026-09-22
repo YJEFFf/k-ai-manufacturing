@@ -1,0 +1,37 @@
+[
+  {
+    "name": "data/공정 데이터 2022년 8월.csv",
+    "size": 3670648,
+    "compressed": 331201
+  },
+  {
+    "name": "data/로봇 1호-전류 데이터.csv",
+    "size": 282290,
+    "compressed": 78311
+  },
+  {
+    "name": "data/로봇 2호-전류 데이터.csv",
+    "size": 224472,
+    "compressed": 63358
+  },
+  {
+    "name": "data/프레스 1호-유압모터 전류데이터.csv",
+    "size": 1143093,
+    "compressed": 261430
+  },
+  {
+    "name": "data/프레스 2호-유압모터 전류데이터.csv",
+    "size": 1140223,
+    "compressed": 265232
+  },
+  {
+    "name": "data/프레스 3호-유압모터 전류데이터.csv",
+    "size": 1038726,
+    "compressed": 224972
+  },
+  {
+    "name": "data/프레스 4호-유압모터 전류데이터.csv",
+    "size": 1036006,
+    "compressed": 225284
+  }
+]

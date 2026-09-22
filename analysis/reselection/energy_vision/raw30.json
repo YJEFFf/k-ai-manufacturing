@@ -1,0 +1,391 @@
+{
+  "seq": 30,
+  "file": "Dataset_생산계획 최적화 AI 데이터셋.zip",
+  "bytes": 2946398,
+  "members": [
+    {
+      "name": "data/machine_info.csv",
+      "bytes": 349665
+    },
+    {
+      "name": "data/NC공정생산이력.xlsx",
+      "bytes": 1490742
+    },
+    {
+      "name": "data/NC공정생산이력_1차 가공 데이터.xlsx",
+      "bytes": 1497182
+    },
+    {
+      "name": "data/order_info.csv",
+      "bytes": 4076
+    }
+  ],
+  "crc_first_bad_member": null,
+  "tables": {
+    "data/machine_info.csv": {
+      "shape": [
+        21151,
+        3
+      ],
+      "columns": [
+        "item",
+        "machine",
+        "capacity"
+      ],
+      "missing_by_column": {
+        "item": 0,
+        "machine": 2,
+        "capacity": 0
+      },
+      "unique_by_column": {
+        "item": 6617,
+        "machine": 37,
+        "capacity": 2835
+      },
+      "duplicate_full_rows": 0,
+      "numeric": {
+        "machine": {
+          "count": 21149.0,
+          "mean": 420.6861317319968,
+          "std": 12.07125020231141,
+          "min": 401.0,
+          "25%": 409.0,
+          "50%": 424.0,
+          "75%": 433.0,
+          "max": 442.0
+        },
+        "capacity": {
+          "count": 21151.0,
+          "mean": 10.441903456101366,
+          "std": 18.304675092950443,
+          "min": 0.05,
+          "25%": 3.2,
+          "50%": 5.5,
+          "75%": 10.5,
+          "max": 930.0
+        }
+      },
+      "dates": {}
+    },
+    "data/NC공정생산이력.xlsx:CYCLETIME": {
+      "shape": [
+        21152,
+        7
+      ],
+      "columns": [
+        "JSDWG",
+        "MCNO",
+        "AVG_CT",
+        "MAX_CT",
+        "MIN_CT",
+        "20h",
+        "10h"
+      ],
+      "missing_by_column": {
+        "JSDWG": 0,
+        "MCNO": 2,
+        "AVG_CT": 0,
+        "MAX_CT": 0,
+        "MIN_CT": 0,
+        "20h": 0,
+        "10h": 0
+      },
+      "unique_by_column": {
+        "JSDWG": 6618,
+        "MCNO": 38,
+        "AVG_CT": 2836,
+        "MAX_CT": 1419,
+        "MIN_CT": 1189,
+        "20h": 2836,
+        "10h": 2836
+      },
+      "duplicate_full_rows": 0,
+      "numeric": {},
+      "dates": {}
+    },
+    "data/NC공정생산이력.xlsx:생산미결리스트": {
+      "shape": [
+        141,
+        17
+      ],
+      "columns": [
+        "생산 미결 리스트 - NC대기(L/T 3日)",
+        "Unnamed: 1",
+        "Unnamed: 2",
+        "Unnamed: 3",
+        "Unnamed: 4",
+        "Unnamed: 5",
+        "Unnamed: 6",
+        "Unnamed: 7",
+        "Unnamed: 8",
+        "Unnamed: 9",
+        "Unnamed: 10",
+        "Unnamed: 11",
+        "Unnamed: 12",
+        "Unnamed: 13",
+        "Unnamed: 14",
+        "Unnamed: 15",
+        "Unnamed: 16"
+      ],
+      "missing_by_column": {
+        "생산 미결 리스트 - NC대기(L/T 3日)": 1,
+        "Unnamed: 1": 2,
+        "Unnamed: 2": 3,
+        "Unnamed: 3": 2,
+        "Unnamed: 4": 2,
+        "Unnamed: 5": 2,
+        "Unnamed: 6": 2,
+        "Unnamed: 7": 2,
+        "Unnamed: 8": 1,
+        "Unnamed: 9": 2,
+        "Unnamed: 10": 1,
+        "Unnamed: 11": 1,
+        "Unnamed: 12": 94,
+        "Unnamed: 13": 2,
+        "Unnamed: 14": 2,
+        "Unnamed: 15": 10,
+        "Unnamed: 16": 136
+      },
+      "unique_by_column": {
+        "생산 미결 리스트 - NC대기(L/T 3日)": 140,
+        "Unnamed: 1": 139,
+        "Unnamed: 2": 105,
+        "Unnamed: 3": 112,
+        "Unnamed: 4": 118,
+        "Unnamed: 5": 70,
+        "Unnamed: 6": 7,
+        "Unnamed: 7": 30,
+        "Unnamed: 8": 102,
+        "Unnamed: 9": 66,
+        "Unnamed: 10": 107,
+        "Unnamed: 11": 58,
+        "Unnamed: 12": 15,
+        "Unnamed: 13": 45,
+        "Unnamed: 14": 33,
+        "Unnamed: 15": 19,
+        "Unnamed: 16": 1
+      },
+      "duplicate_full_rows": 0,
+      "numeric": {},
+      "dates": {}
+    },
+    "data/NC공정생산이력_1차 가공 데이터.xlsx:CYCLETIME": {
+      "shape": [
+        21152,
+        7
+      ],
+      "columns": [
+        "JSDWG",
+        "MCNO",
+        "AVG_CT",
+        "MAX_CT",
+        "MIN_CT",
+        "20h",
+        "10h"
+      ],
+      "missing_by_column": {
+        "JSDWG": 0,
+        "MCNO": 2,
+        "AVG_CT": 0,
+        "MAX_CT": 0,
+        "MIN_CT": 0,
+        "20h": 0,
+        "10h": 0
+      },
+      "unique_by_column": {
+        "JSDWG": 6618,
+        "MCNO": 38,
+        "AVG_CT": 2836,
+        "MAX_CT": 1419,
+        "MIN_CT": 1189,
+        "20h": 2836,
+        "10h": 2836
+      },
+      "duplicate_full_rows": 0,
+      "numeric": {},
+      "dates": {}
+    },
+    "data/NC공정생산이력_1차 가공 데이터.xlsx:생산미결리스트(1차 가공)": {
+      "shape": [
+        183,
+        18
+      ],
+      "columns": [
+        "No.",
+        "발주번호",
+        "호선",
+        "중산도면",
+        "원도면",
+        "품명",
+        "재질",
+        "소재",
+        "길이",
+        "수량",
+        "중량",
+        "영업납기",
+        "선급",
+        "현재진행공정",
+        "지연",
+        "비고",
+        "긴급",
+        "단가"
+      ],
+      "missing_by_column": {
+        "No.": 0,
+        "발주번호": 0,
+        "호선": 5,
+        "중산도면": 0,
+        "원도면": 0,
+        "품명": 0,
+        "재질": 0,
+        "소재": 0,
+        "길이": 0,
+        "수량": 0,
+        "중량": 0,
+        "영업납기": 0,
+        "선급": 109,
+        "현재진행공정": 0,
+        "지연": 0,
+        "비고": 13,
+        "긴급": 176,
+        "단가": 0
+      },
+      "unique_by_column": {
+        "No.": 183,
+        "발주번호": 183,
+        "호선": 128,
+        "중산도면": 148,
+        "원도면": 161,
+        "품명": 95,
+        "재질": 9,
+        "소재": 28,
+        "길이": 128,
+        "수량": 78,
+        "중량": 147,
+        "영업납기": 60,
+        "선급": 12,
+        "현재진행공정": 46,
+        "지연": 34,
+        "비고": 17,
+        "긴급": 1,
+        "단가": 146
+      },
+      "duplicate_full_rows": 0,
+      "numeric": {
+        "No.": {
+          "count": 183.0,
+          "mean": 92.0,
+          "std": 52.97169055259611,
+          "min": 1.0,
+          "25%": 46.5,
+          "50%": 92.0,
+          "75%": 137.5,
+          "max": 183.0
+        },
+        "길이": {
+          "count": 183.0,
+          "mean": 421.3661202185792,
+          "std": 363.17021763592027,
+          "min": 9.0,
+          "25%": 209.5,
+          "50%": 354.0,
+          "75%": 536.0,
+          "max": 2671.0
+        },
+        "수량": {
+          "count": 183.0,
+          "mean": 101.3224043715847,
+          "std": 127.48203877241627,
+          "min": 1.0,
+          "25%": 17.0,
+          "50%": 44.0,
+          "75%": 144.0,
+          "max": 716.0
+        },
+        "중량": {
+          "count": 183.0,
+          "mean": 412.9398907103825,
+          "std": 651.7202609746172,
+          "min": 0.0,
+          "25%": 49.0,
+          "50%": 146.0,
+          "75%": 554.5,
+          "max": 4820.0
+        },
+        "지연": {
+          "count": 183.0,
+          "mean": -29.57377049180328,
+          "std": 99.94055249750961,
+          "min": -577.0,
+          "25%": -14.0,
+          "50%": -5.0,
+          "75%": 1.0,
+          "max": 5.0
+        },
+        "단가": {
+          "count": 183.0,
+          "mean": 44118.40983606558,
+          "std": 72802.11843457496,
+          "min": 1213.0,
+          "25%": 11551.0,
+          "50%": 21360.0,
+          "75%": 38365.0,
+          "max": 481190.0
+        }
+      },
+      "dates": {}
+    },
+    "data/order_info.csv": {
+      "shape": [
+        127,
+        5
+      ],
+      "columns": [
+        "영업납기",
+        "중산도면",
+        "단가",
+        "수량",
+        "선급"
+      ],
+      "missing_by_column": {
+        "영업납기": 0,
+        "중산도면": 0,
+        "단가": 0,
+        "수량": 0,
+        "선급": 81
+      },
+      "unique_by_column": {
+        "영업납기": 51,
+        "중산도면": 96,
+        "단가": 100,
+        "수량": 62,
+        "선급": 10
+      },
+      "duplicate_full_rows": 0,
+      "numeric": {
+        "단가": {
+          "count": 127.0,
+          "mean": 45204.13385826772,
+          "std": 81277.07750254653,
+          "min": 2990.0,
+          "25%": 11551.0,
+          "50%": 21160.0,
+          "75%": 35816.5,
+          "max": 481190.0
+        },
+        "수량": {
+          "count": 127.0,
+          "mean": 114.11023622047244,
+          "std": 140.70645049836386,
+          "min": 2.0,
+          "25%": 20.0,
+          "50%": 48.0,
+          "75%": 169.0,
+          "max": 716.0
+        }
+      },
+      "dates": {}
+    }
+  },
+  "status": "all archive bytes CRC-checked; tabular members parsed"
+}

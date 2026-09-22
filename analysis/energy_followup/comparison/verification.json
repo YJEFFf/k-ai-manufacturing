@@ -1,0 +1,8 @@
+{
+  "independent_implementations_same_truth_and_threshold": true,
+  "all_three_baseline_alarm_budgets_identical": true,
+  "prediction_rows": 24960,
+  "unique_prediction_keys": true,
+  "known_test_exposure": "exploratory; these dates informed topic selection",
+  "bootstrap_note": "paired day/block sensitivity, not a guarantee under drift or multiple model selection"
+}

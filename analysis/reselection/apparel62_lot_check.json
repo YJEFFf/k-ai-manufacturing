@@ -1,0 +1,17 @@
+{
+  "source": "데이터셋/Dataset_의류 품질보증 AI 데이터셋.zip",
+  "member": "data/최종데이터셋_전처리 완료.csv",
+  "rows": 34156,
+  "lot_count": 125,
+  "target_unique": 125,
+  "target_nunique_per_lot": {
+    "1": 125
+  },
+  "lot_min_rows": 65,
+  "lot_max_rows": 603,
+  "random_train_lots": 125,
+  "random_test_lots": 125,
+  "random_test_rows_lot_seen_in_train": 6832,
+  "random_test_rows": 6832,
+  "full_duplicate_rows": 0
+}
