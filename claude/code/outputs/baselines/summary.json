@@ -1,0 +1,271 @@
+{
+  "folds": {
+    "0": 3844,
+    "1": 2877,
+    "2": 1744,
+    "3": 1740,
+    "4": 1734
+  },
+  "leakage": {
+    "random_row_split": 0.9667368421052631,
+    "grouped_split": 0.0
+  },
+  "daily_lodo": [
+    {
+      "model": "IsolationForest|raw|dedup",
+      "MAE_model": 4.75,
+      "MAE_naive": 2.19,
+      "spearman_pred_actual": 0.48,
+      "pred_total": 33.0
+    },
+    {
+      "model": "IsolationForest|raw|all",
+      "MAE_model": 5.125,
+      "MAE_naive": 2.19,
+      "spearman_pred_actual": 0.48,
+      "pred_total": 36.0
+    },
+    {
+      "model": "SPC|raw|all",
+      "MAE_model": 6.375,
+      "MAE_naive": 2.19,
+      "spearman_pred_actual": 0.373,
+      "pred_total": 46.0
+    },
+    {
+      "model": "SPC|raw|dedup",
+      "MAE_model": 6.375,
+      "MAE_naive": 2.19,
+      "spearman_pred_actual": 0.373,
+      "pred_total": 46.0
+    },
+    {
+      "model": "SPC|phys|all",
+      "MAE_model": 6.375,
+      "MAE_naive": 2.19,
+      "spearman_pred_actual": 0.373,
+      "pred_total": 46.0
+    },
+    {
+      "model": "SPC|phys|dedup",
+      "MAE_model": 6.375,
+      "MAE_naive": 2.19,
+      "spearman_pred_actual": 0.373,
+      "pred_total": 46.0
+    },
+    {
+      "model": "IsolationForest|phys|all",
+      "MAE_model": 6.5,
+      "MAE_naive": 2.19,
+      "spearman_pred_actual": 0.373,
+      "pred_total": 47.0
+    },
+    {
+      "model": "AutoEncoder|phys|all",
+      "MAE_model": 6.75,
+      "MAE_naive": 2.19,
+      "spearman_pred_actual": 0.373,
+      "pred_total": 49.0
+    },
+    {
+      "model": "IsolationForest|phys|dedup",
+      "MAE_model": 6.75,
+      "MAE_naive": 2.19,
+      "spearman_pred_actual": 0.373,
+      "pred_total": 49.0
+    },
+    {
+      "model": "AutoEncoder|phys|dedup",
+      "MAE_model": 6.75,
+      "MAE_naive": 2.19,
+      "spearman_pred_actual": 0.373,
+      "pred_total": 49.0
+    },
+    {
+      "model": "AutoEncoder|raw|all",
+      "MAE_model": 6.75,
+      "MAE_naive": 2.19,
+      "spearman_pred_actual": 0.373,
+      "pred_total": 49.0
+    },
+    {
+      "model": "AutoEncoder|raw|dedup",
+      "MAE_model": 6.75,
+      "MAE_naive": 2.19,
+      "spearman_pred_actual": 0.373,
+      "pred_total": 49.0
+    },
+    {
+      "model": "RobustMahalanobis|raw|dedup",
+      "MAE_model": 6.75,
+      "MAE_naive": 2.19,
+      "spearman_pred_actual": 0.373,
+      "pred_total": 49.0
+    },
+    {
+      "model": "RobustMahalanobis|raw|all",
+      "MAE_model": 6.75,
+      "MAE_naive": 2.19,
+      "spearman_pred_actual": 0.373,
+      "pred_total": 49.0
+    },
+    {
+      "model": "RobustMahalanobis|phys|dedup",
+      "MAE_model": 6.75,
+      "MAE_naive": 2.19,
+      "spearman_pred_actual": 0.373,
+      "pred_total": 49.0
+    },
+    {
+      "model": "RobustMahalanobis|phys|all",
+      "MAE_model": 6.75,
+      "MAE_naive": 2.19,
+      "spearman_pred_actual": 0.373,
+      "pred_total": 49.0
+    }
+  ],
+  "actual_total_labeled": 39.0,
+  "spearman_between_models": {
+    "SPC|raw|dedup": {
+      "SPC|raw|dedup": 1.0,
+      "IsolationForest|raw|dedup": 0.906,
+      "AutoEncoder|raw|dedup": 0.911,
+      "RobustMahalanobis|raw|dedup": 0.942,
+      "SPC|phys|dedup": 0.977,
+      "IsolationForest|phys|dedup": 0.913,
+      "AutoEncoder|phys|dedup": 0.925,
+      "RobustMahalanobis|phys|dedup": 0.938
+    },
+    "IsolationForest|raw|dedup": {
+      "SPC|raw|dedup": 0.906,
+      "IsolationForest|raw|dedup": 1.0,
+      "AutoEncoder|raw|dedup": 0.88,
+      "RobustMahalanobis|raw|dedup": 0.957,
+      "SPC|phys|dedup": 0.905,
+      "IsolationForest|phys|dedup": 0.981,
+      "AutoEncoder|phys|dedup": 0.88,
+      "RobustMahalanobis|phys|dedup": 0.95
+    },
+    "AutoEncoder|raw|dedup": {
+      "SPC|raw|dedup": 0.911,
+      "IsolationForest|raw|dedup": 0.88,
+      "AutoEncoder|raw|dedup": 1.0,
+      "RobustMahalanobis|raw|dedup": 0.904,
+      "SPC|phys|dedup": 0.875,
+      "IsolationForest|phys|dedup": 0.863,
+      "AutoEncoder|phys|dedup": 0.954,
+      "RobustMahalanobis|phys|dedup": 0.898
+    },
+    "RobustMahalanobis|raw|dedup": {
+      "SPC|raw|dedup": 0.942,
+      "IsolationForest|raw|dedup": 0.957,
+      "AutoEncoder|raw|dedup": 0.904,
+      "RobustMahalanobis|raw|dedup": 1.0,
+      "SPC|phys|dedup": 0.945,
+      "IsolationForest|phys|dedup": 0.96,
+      "AutoEncoder|phys|dedup": 0.914,
+      "RobustMahalanobis|phys|dedup": 0.995
+    },
+    "SPC|phys|dedup": {
+      "SPC|raw|dedup": 0.977,
+      "IsolationForest|raw|dedup": 0.905,
+      "AutoEncoder|raw|dedup": 0.875,
+      "RobustMahalanobis|raw|dedup": 0.945,
+      "SPC|phys|dedup": 1.0,
+      "IsolationForest|phys|dedup": 0.925,
+      "AutoEncoder|phys|dedup": 0.889,
+      "RobustMahalanobis|phys|dedup": 0.944
+    },
+    "IsolationForest|phys|dedup": {
+      "SPC|raw|dedup": 0.913,
+      "IsolationForest|raw|dedup": 0.981,
+      "AutoEncoder|raw|dedup": 0.863,
+      "RobustMahalanobis|raw|dedup": 0.96,
+      "SPC|phys|dedup": 0.925,
+      "IsolationForest|phys|dedup": 1.0,
+      "AutoEncoder|phys|dedup": 0.87,
+      "RobustMahalanobis|phys|dedup": 0.956
+    },
+    "AutoEncoder|phys|dedup": {
+      "SPC|raw|dedup": 0.925,
+      "IsolationForest|raw|dedup": 0.88,
+      "AutoEncoder|raw|dedup": 0.954,
+      "RobustMahalanobis|raw|dedup": 0.914,
+      "SPC|phys|dedup": 0.889,
+      "IsolationForest|phys|dedup": 0.87,
+      "AutoEncoder|phys|dedup": 1.0,
+      "RobustMahalanobis|phys|dedup": 0.908
+    },
+    "RobustMahalanobis|phys|dedup": {
+      "SPC|raw|dedup": 0.938,
+      "IsolationForest|raw|dedup": 0.95,
+      "AutoEncoder|raw|dedup": 0.898,
+      "RobustMahalanobis|raw|dedup": 0.995,
+      "SPC|phys|dedup": 0.944,
+      "IsolationForest|phys|dedup": 0.956,
+      "AutoEncoder|phys|dedup": 0.908,
+      "RobustMahalanobis|phys|dedup": 1.0
+    }
+  },
+  "top1pct_jaccard": {
+    "SPC vs IsolationForest (raw)": 0.017,
+    "SPC vs AutoEncoder (raw)": 1.0,
+    "SPC vs RobustMahalanobis (raw)": 1.0,
+    "IsolationForest vs AutoEncoder (raw)": 0.017,
+    "IsolationForest vs RobustMahalanobis (raw)": 0.017,
+    "AutoEncoder vs RobustMahalanobis (raw)": 1.0,
+    "SPC vs IsolationForest (phys)": 0.072,
+    "SPC vs AutoEncoder (phys)": 1.0,
+    "SPC vs RobustMahalanobis (phys)": 1.0,
+    "IsolationForest vs AutoEncoder (phys)": 0.072,
+    "IsolationForest vs RobustMahalanobis (phys)": 0.072,
+    "AutoEncoder vs RobustMahalanobis (phys)": 1.0
+  },
+  "top1pct_location": {
+    "SPC|raw|dedup": {
+      "high_force_block": 1.0,
+      "copy_boundary": 0.0,
+      "high_current_stepper_zone": 0.133
+    },
+    "IsolationForest|raw|dedup": {
+      "high_force_block": 0.839,
+      "copy_boundary": 0.0,
+      "high_current_stepper_zone": 0.935
+    },
+    "AutoEncoder|raw|dedup": {
+      "high_force_block": 1.0,
+      "copy_boundary": 0.0,
+      "high_current_stepper_zone": 0.133
+    },
+    "RobustMahalanobis|raw|dedup": {
+      "high_force_block": 1.0,
+      "copy_boundary": 0.0,
+      "high_current_stepper_zone": 0.133
+    },
+    "SPC|phys|dedup": {
+      "high_force_block": 1.0,
+      "copy_boundary": 0.0,
+      "high_current_stepper_zone": 0.133
+    },
+    "IsolationForest|phys|dedup": {
+      "high_force_block": 0.667,
+      "copy_boundary": 0.0,
+      "high_current_stepper_zone": 0.933
+    },
+    "AutoEncoder|phys|dedup": {
+      "high_force_block": 1.0,
+      "copy_boundary": 0.0,
+      "high_current_stepper_zone": 0.133
+    },
+    "RobustMahalanobis|phys|dedup": {
+      "high_force_block": 1.0,
+      "copy_boundary": 0.0,
+      "high_current_stepper_zone": 0.133
+    }
+  },
+  "base_rates": {
+    "high_force_block": 0.081,
+    "copy_boundary": 0.001,
+    "high_current_stepper_zone": 0.079
+  }
+}

@@ -1,0 +1,13 @@
+# 원본 데이터 (README만 올림)
+data/*
+!data/README.md
+
+# 재실행하면 생기는 큰 산출물
+code/outputs/diagnosis/rows_flagged.csv
+code/outputs/physics/features.csv
+code/outputs/baselines/oof_scores.csv
+code/outputs/injection/results_rows.csv
+
+__pycache__/
+*.pyc
+.omc/
