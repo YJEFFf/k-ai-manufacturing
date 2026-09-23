@@ -11,3 +11,8 @@ code/outputs/injection/results_rows.csv
 __pycache__/
 *.pyc
 .omc/
+
+# ③ 프레스: 재실행하면 생기는 큰 산출물 (지표 CSV만 올림)
+code/press/outputs/requantize/*/press_record_notifications.csv
+code/press/outputs/requantize/*/press_alarm_runs.csv
+code/press/outputs/**/record_notifications_with_sine.csv

@@ -1,0 +1,10 @@
+variant,rule,f1,flagged_normal,flagged_abn
+raw,current_on_grid,0.97165991902834,35,600
+raw,vib_finer_than_1e-6,1.0,0,600
+raw,either,0.97165991902834,35,600
+matched,current_on_grid,0.05660377358490566,20000,600
+matched,vib_finer_than_1e-6,0.0,0,0
+matched,either,0.05660377358490566,20000,600
+coarse,current_on_grid,0.05660377358490566,20000,600
+coarse,vib_finer_than_1e-6,0.0,0,0
+coarse,either,0.05660377358490566,20000,600
