@@ -15,11 +15,13 @@ VENDOR = HERE / "vendor" / "press_policy_audit.py"
 # 팀 레포 main의 codex/analysis/press_welding_review/press_policy_audit.py (마지막 변경 83a2273)
 VENDOR_SHA256 = "4887e4c52bcb9022324225a113d1ca4e54b37a395a0707cd222a72683b4312a0"
 SENSORS = ["AI0_Vibration", "AI1_Vibration", "AI2_Current"]
+CRLF, LF = bytes([13, 10]), bytes([10])
 
 
 def load_vendor():
     """예준 헬퍼를 import. 파일이 바뀌면 수치가 조용히 바뀌므로 해시·상수를 확인한다."""
-    digest = hashlib.sha256(VENDOR.read_bytes()).hexdigest()
+    # 줄바꿈을 LF로 정규화해 해시한다 (Windows git autocrlf 체크아웃에서도 같은 값)
+    digest = hashlib.sha256(VENDOR.read_bytes().replace(CRLF, LF)).hexdigest()
     assert digest == VENDOR_SHA256, f"vendor 파일이 바뀜: {digest}"
     spec = importlib.util.spec_from_file_location("yj_vendor", VENDOR)
     yj = importlib.util.module_from_spec(spec)
