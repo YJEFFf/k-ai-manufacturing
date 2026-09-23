@@ -1,0 +1,272 @@
+{
+  "reference_rows": 1934,
+  "feature_summary_reference": {
+    "energy_J": {
+      "count": 1934.0,
+      "mean": 2855.0373,
+      "std": 35.8479,
+      "min": 2594.7042,
+      "25%": 2830.8839,
+      "50%": 2861.3909,
+      "75%": 2872.1678,
+      "max": 3072.0456
+    },
+    "power_kW": {
+      "count": 1934.0,
+      "mean": 39.8067,
+      "std": 0.3551,
+      "min": 36.5451,
+      "25%": 39.7023,
+      "50%": 39.8152,
+      "75%": 39.906,
+      "max": 42.6673
+    },
+    "resistance_uohm": {
+      "count": 1934.0,
+      "mean": 183.6662,
+      "std": 1.4511,
+      "min": 168.2034,
+      "25%": 182.9831,
+      "50%": 183.4352,
+      "75%": 184.2607,
+      "max": 193.1479
+    },
+    "i2t": {
+      "count": 1934.0,
+      "mean": 15545.661,
+      "std": 229.0102,
+      "min": 14778.463,
+      "25%": 15389.5968,
+      "50%": 15600.8448,
+      "75%": 15664.5,
+      "max": 16351.5528
+    },
+    "force": {
+      "count": 1934.0,
+      "mean": 2.3702,
+      "std": 0.2737,
+      "min": 1.74,
+      "25%": 2.3,
+      "50%": 2.32,
+      "75%": 2.36,
+      "max": 4.96
+    },
+    "current": {
+      "count": 1934.0,
+      "mean": 14.7221,
+      "std": 0.088,
+      "min": 14.52,
+      "25%": 14.7,
+      "50%": 14.74,
+      "75%": 14.76,
+      "max": 15.07
+    },
+    "voltage": {
+      "count": 1934.0,
+      "mean": 2.7039,
+      "std": 0.016,
+      "min": 2.481,
+      "25%": 2.699,
+      "50%": 2.702,
+      "75%": 2.705,
+      "max": 2.854
+    },
+    "weld_time": {
+      "count": 1934.0,
+      "mean": 71.7225,
+      "std": 0.6337,
+      "min": 70.0,
+      "25%": 71.0,
+      "50%": 72.0,
+      "75%": 72.0,
+      "max": 73.0
+    }
+  },
+  "physics_checks": [
+    {
+      "check": "가압력↑ → 접촉저항(R)↓",
+      "expected": "음(-)",
+      "observed": 0.371,
+      "consistent": false
+    },
+    {
+      "check": "통전시간↑ → 입열량↑",
+      "expected": "양(+)",
+      "observed": 0.65,
+      "consistent": true
+    },
+    {
+      "check": "전류↑ → 입열량↑",
+      "expected": "양(+)",
+      "observed": 0.509,
+      "consistent": true
+    },
+    {
+      "check": "전압 변동계수(CV)",
+      "expected": "저항 변화에 따라 변동",
+      "observed": 0.00593,
+      "consistent": null
+    },
+    {
+      "check": "고가압력 블록의 R 중앙값 − 정상 R 중앙값 (µΩ)",
+      "expected": "음(-): 가압력 3배면 R 감소",
+      "observed": 0.934,
+      "consistent": false
+    }
+  ],
+  "stepper_events": [
+    {
+      "day": "2020-03-24",
+      "pos_in_day": 405,
+      "idx": 406,
+      "row": 405,
+      "level_before_kA": 14.59,
+      "level_after_kA": 14.71,
+      "direction": "up"
+    },
+    {
+      "day": "2020-03-25",
+      "pos_in_day": 438,
+      "idx": 439,
+      "row": 1638,
+      "level_before_kA": 14.8,
+      "level_after_kA": 14.93,
+      "direction": "up"
+    },
+    {
+      "day": "2020-03-25",
+      "pos_in_day": 468,
+      "idx": 469,
+      "row": 1668,
+      "level_before_kA": 14.85,
+      "level_after_kA": 14.81,
+      "direction": "down"
+    },
+    {
+      "day": "2020-03-25",
+      "pos_in_day": 512,
+      "idx": 513,
+      "row": 1712,
+      "level_before_kA": 14.8,
+      "level_after_kA": 14.93,
+      "direction": "up"
+    },
+    {
+      "day": "2020-03-25",
+      "pos_in_day": 537,
+      "idx": 538,
+      "row": 1737,
+      "level_before_kA": 14.83,
+      "level_after_kA": 14.73,
+      "direction": "down"
+    },
+    {
+      "day": "2020-03-25",
+      "pos_in_day": 621,
+      "idx": 622,
+      "row": 1821,
+      "level_before_kA": 14.8,
+      "level_after_kA": 14.93,
+      "direction": "up"
+    },
+    {
+      "day": "2020-03-25",
+      "pos_in_day": 646,
+      "idx": 647,
+      "row": 1846,
+      "level_before_kA": 14.83,
+      "level_after_kA": 14.74,
+      "direction": "down"
+    },
+    {
+      "day": "2020-03-25",
+      "pos_in_day": 715,
+      "idx": 716,
+      "row": 1915,
+      "level_before_kA": 14.8,
+      "level_after_kA": 14.93,
+      "direction": "up"
+    },
+    {
+      "day": "2020-03-25",
+      "pos_in_day": 745,
+      "idx": 746,
+      "row": 1945,
+      "level_before_kA": 14.85,
+      "level_after_kA": 14.81,
+      "direction": "down"
+    },
+    {
+      "day": "2020-03-25",
+      "pos_in_day": 789,
+      "idx": 790,
+      "row": 1989,
+      "level_before_kA": 14.8,
+      "level_after_kA": 14.93,
+      "direction": "up"
+    },
+    {
+      "day": "2020-03-25",
+      "pos_in_day": 814,
+      "idx": 815,
+      "row": 2014,
+      "level_before_kA": 14.83,
+      "level_after_kA": 14.73,
+      "direction": "down"
+    },
+    {
+      "day": "2020-03-25",
+      "pos_in_day": 898,
+      "idx": 899,
+      "row": 2098,
+      "level_before_kA": 14.8,
+      "level_after_kA": 14.94,
+      "direction": "up"
+    }
+  ],
+  "reset_cycle_lengths": {
+    "2020-03-25": [
+      69,
+      109,
+      99,
+      69
+    ]
+  },
+  "operating_window_0.5_99.5": {
+    "current": [
+      14.5366,
+      14.99
+    ],
+    "weld_time": [
+      70.0,
+      73.0
+    ],
+    "energy_J": [
+      2762.6064,
+      2990.9717
+    ],
+    "force": [
+      2.17,
+      4.5133
+    ]
+  },
+  "lobe_threshold_mahal2": 1150.228,
+  "lobe_center": {
+    "energy_J": 2852.049,
+    "resistance_uohm": 183.639,
+    "force": 2.325
+  },
+  "outside_lobe_rows": 1052,
+  "outside_lobe_by_group": {
+    "reference(원본·정상가압)": 20,
+    "high_force_block": 972,
+    "copied_normal": 60
+  },
+  "daily_spearman": {
+    "risk_cold_p99 ~ defect_용접부족": 0.261,
+    "risk_indent_p99 ~ defect_파임": 0.69,
+    "risk_unstable_p99 ~ defect_크랙": -0.02,
+    "outside_lobe ~ defect_total": 0.48,
+    "energy_mean ~ defect_total": 0.381
+  }
+}

@@ -1,0 +1,575 @@
+{
+  "rows": 2177,
+  "rate": 0.03,
+  "rate_realistic": 0.005,
+  "seeds": [
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "context_window": 25,
+  "params": {
+    "cold": {
+      "dI": [
+        0.01,
+        0.025,
+        0.05
+      ],
+      "dt": [
+        0,
+        1,
+        3
+      ]
+    },
+    "indent": {
+      "dF": [
+        0.15,
+        0.4,
+        1.0
+      ],
+      "dI": [
+        0.005,
+        0.01,
+        0.02
+      ]
+    },
+    "spike": {
+      "dI": [
+        0.01,
+        0.025,
+        0.05
+      ],
+      "dR": [
+        0.01,
+        0.02,
+        0.04
+      ]
+    }
+  },
+  "metrics": [
+    {
+      "model": "Ctx(raw)",
+      "F1_mean": 0.305,
+      "F1_std": 0.041,
+      "precision_mean": 0.202,
+      "precision_std": 0.029,
+      "recall_mean": 0.625,
+      "recall_std": 0.072,
+      "AP_mean": 0.116,
+      "AP_std": 0.012,
+      "FP_in_highforce_share_mean": 0.677,
+      "FP_in_highforce_share_std": 0.006
+    },
+    {
+      "model": "IsolationForest|phys",
+      "F1_mean": 0.272,
+      "F1_std": 0.055,
+      "precision_mean": 0.225,
+      "precision_std": 0.041,
+      "recall_mean": 0.345,
+      "recall_std": 0.085,
+      "AP_mean": 0.127,
+      "AP_std": 0.037,
+      "FP_in_highforce_share_mean": 0.704,
+      "FP_in_highforce_share_std": 0.018
+    },
+    {
+      "model": "PhysCtx",
+      "F1_mean": 0.267,
+      "F1_std": 0.048,
+      "precision_mean": 0.178,
+      "precision_std": 0.033,
+      "recall_mean": 0.532,
+      "recall_std": 0.089,
+      "AP_mean": 0.109,
+      "AP_std": 0.01,
+      "FP_in_highforce_share_mean": 0.676,
+      "FP_in_highforce_share_std": 0.018
+    },
+    {
+      "model": "SPC|raw",
+      "F1_mean": 0.196,
+      "F1_std": 0.044,
+      "precision_mean": 0.114,
+      "precision_std": 0.028,
+      "recall_mean": 0.742,
+      "recall_std": 0.082,
+      "AP_mean": 0.073,
+      "AP_std": 0.006,
+      "FP_in_highforce_share_mean": 0.639,
+      "FP_in_highforce_share_std": 0.169
+    },
+    {
+      "model": "SPC|phys",
+      "F1_mean": 0.181,
+      "F1_std": 0.039,
+      "precision_mean": 0.105,
+      "precision_std": 0.025,
+      "recall_mean": 0.689,
+      "recall_std": 0.093,
+      "AP_mean": 0.07,
+      "AP_std": 0.006,
+      "FP_in_highforce_share_mean": 0.632,
+      "FP_in_highforce_share_std": 0.171
+    },
+    {
+      "model": "IsolationForest|raw",
+      "F1_mean": 0.145,
+      "F1_std": 0.029,
+      "precision_mean": 0.092,
+      "precision_std": 0.019,
+      "recall_mean": 0.345,
+      "recall_std": 0.073,
+      "AP_mean": 0.107,
+      "AP_std": 0.023,
+      "FP_in_highforce_share_mean": 0.734,
+      "FP_in_highforce_share_std": 0.025
+    },
+    {
+      "model": "AutoEncoder|raw",
+      "F1_mean": 0.141,
+      "F1_std": 0.025,
+      "precision_mean": 0.083,
+      "precision_std": 0.014,
+      "recall_mean": 0.486,
+      "recall_std": 0.093,
+      "AP_mean": 0.057,
+      "AP_std": 0.006,
+      "FP_in_highforce_share_mean": 0.677,
+      "FP_in_highforce_share_std": 0.023
+    },
+    {
+      "model": "RobustMahalanobis|raw",
+      "F1_mean": 0.132,
+      "F1_std": 0.026,
+      "precision_mean": 0.077,
+      "precision_std": 0.015,
+      "recall_mean": 0.465,
+      "recall_std": 0.089,
+      "AP_mean": 0.061,
+      "AP_std": 0.011,
+      "FP_in_highforce_share_mean": 0.656,
+      "FP_in_highforce_share_std": 0.038
+    },
+    {
+      "model": "AutoEncoder|phys",
+      "F1_mean": 0.125,
+      "F1_std": 0.021,
+      "precision_mean": 0.073,
+      "precision_std": 0.013,
+      "recall_mean": 0.44,
+      "recall_std": 0.078,
+      "AP_mean": 0.062,
+      "AP_std": 0.009,
+      "FP_in_highforce_share_mean": 0.651,
+      "FP_in_highforce_share_std": 0.035
+    },
+    {
+      "model": "RobustMahalanobis|phys",
+      "F1_mean": 0.121,
+      "F1_std": 0.025,
+      "precision_mean": 0.072,
+      "precision_std": 0.015,
+      "recall_mean": 0.397,
+      "recall_std": 0.067,
+      "AP_mean": 0.063,
+      "AP_std": 0.011,
+      "FP_in_highforce_share_mean": 0.706,
+      "FP_in_highforce_share_std": 0.047
+    }
+  ],
+  "fp_location": {
+    "Ctx(raw)": {
+      "FP_per_1000_clean": 76.52,
+      "FP_rate_highforce": 0.462,
+      "FP_rate_normal": 0.0278
+    },
+    "PhysCtx": {
+      "FP_per_1000_clean": 76.14,
+      "FP_rate_highforce": 0.4586,
+      "FP_rate_normal": 0.0278
+    },
+    "IsolationForest|phys": {
+      "FP_per_1000_clean": 36.08,
+      "FP_rate_highforce": 0.2264,
+      "FP_rate_normal": 0.0121
+    }
+  },
+  "best_baseline": "IsolationForest|phys",
+  "scoped_metrics": [
+    {
+      "scope": "블록 밖",
+      "model": "AutoEncoder|phys",
+      "F1": 0.214,
+      "precision": 0.15,
+      "recall": 0.379,
+      "AP": 0.106
+    },
+    {
+      "scope": "블록 밖",
+      "model": "AutoEncoder|raw",
+      "F1": 0.256,
+      "precision": 0.182,
+      "recall": 0.43,
+      "AP": 0.103
+    },
+    {
+      "scope": "블록 밖",
+      "model": "Ctx(raw)",
+      "F1": 0.484,
+      "precision": 0.404,
+      "recall": 0.604,
+      "AP": 0.214
+    },
+    {
+      "scope": "블록 밖",
+      "model": "IsolationForest|phys",
+      "F1": 0.349,
+      "precision": 0.428,
+      "recall": 0.298,
+      "AP": 0.188
+    },
+    {
+      "scope": "블록 밖",
+      "model": "IsolationForest|raw",
+      "F1": 0.239,
+      "precision": 0.214,
+      "recall": 0.275,
+      "AP": 0.194
+    },
+    {
+      "scope": "블록 밖",
+      "model": "PhysCtx",
+      "F1": 0.419,
+      "precision": 0.36,
+      "recall": 0.502,
+      "AP": 0.204
+    },
+    {
+      "scope": "블록 밖",
+      "model": "RobustMahalanobis|phys",
+      "F1": 0.225,
+      "precision": 0.172,
+      "recall": 0.332,
+      "AP": 0.132
+    },
+    {
+      "scope": "블록 밖",
+      "model": "RobustMahalanobis|raw",
+      "F1": 0.232,
+      "precision": 0.163,
+      "recall": 0.406,
+      "AP": 0.1
+    },
+    {
+      "scope": "블록 밖",
+      "model": "SPC|phys",
+      "F1": 0.338,
+      "precision": 0.239,
+      "recall": 0.655,
+      "AP": 0.167
+    },
+    {
+      "scope": "블록 밖",
+      "model": "SPC|raw",
+      "F1": 0.37,
+      "precision": 0.26,
+      "recall": 0.713,
+      "AP": 0.181
+    },
+    {
+      "scope": "블록 안",
+      "model": "AutoEncoder|phys",
+      "F1": 0.05,
+      "precision": 0.026,
+      "recall": 1.0,
+      "AP": 0.068
+    },
+    {
+      "scope": "블록 안",
+      "model": "AutoEncoder|raw",
+      "F1": 0.05,
+      "precision": 0.026,
+      "recall": 1.0,
+      "AP": 0.056
+    },
+    {
+      "scope": "블록 안",
+      "model": "Ctx(raw)",
+      "F1": 0.082,
+      "precision": 0.044,
+      "recall": 0.79,
+      "AP": 0.065
+    },
+    {
+      "scope": "블록 안",
+      "model": "IsolationForest|phys",
+      "F1": 0.149,
+      "precision": 0.083,
+      "recall": 0.78,
+      "AP": 0.233
+    },
+    {
+      "scope": "블록 안",
+      "model": "IsolationForest|raw",
+      "F1": 0.07,
+      "precision": 0.036,
+      "recall": 1.0,
+      "AP": 0.183
+    },
+    {
+      "scope": "블록 안",
+      "model": "PhysCtx",
+      "F1": 0.083,
+      "precision": 0.044,
+      "recall": 0.79,
+      "AP": 0.052
+    },
+    {
+      "scope": "블록 안",
+      "model": "RobustMahalanobis|phys",
+      "F1": 0.05,
+      "precision": 0.026,
+      "recall": 1.0,
+      "AP": 0.08
+    },
+    {
+      "scope": "블록 안",
+      "model": "RobustMahalanobis|raw",
+      "F1": 0.05,
+      "precision": 0.026,
+      "recall": 1.0,
+      "AP": 0.077
+    },
+    {
+      "scope": "블록 안",
+      "model": "SPC|phys",
+      "F1": 0.05,
+      "precision": 0.026,
+      "recall": 1.0,
+      "AP": 0.05
+    },
+    {
+      "scope": "블록 안",
+      "model": "SPC|raw",
+      "F1": 0.05,
+      "precision": 0.026,
+      "recall": 1.0,
+      "AP": 0.05
+    },
+    {
+      "scope": "전체",
+      "model": "AutoEncoder|phys",
+      "F1": 0.125,
+      "precision": 0.073,
+      "recall": 0.44,
+      "AP": 0.062
+    },
+    {
+      "scope": "전체",
+      "model": "AutoEncoder|raw",
+      "F1": 0.141,
+      "precision": 0.083,
+      "recall": 0.486,
+      "AP": 0.057
+    },
+    {
+      "scope": "전체",
+      "model": "Ctx(raw)",
+      "F1": 0.305,
+      "precision": 0.202,
+      "recall": 0.625,
+      "AP": 0.116
+    },
+    {
+      "scope": "전체",
+      "model": "IsolationForest|phys",
+      "F1": 0.272,
+      "precision": 0.225,
+      "recall": 0.345,
+      "AP": 0.127
+    },
+    {
+      "scope": "전체",
+      "model": "IsolationForest|raw",
+      "F1": 0.145,
+      "precision": 0.092,
+      "recall": 0.345,
+      "AP": 0.107
+    },
+    {
+      "scope": "전체",
+      "model": "PhysCtx",
+      "F1": 0.267,
+      "precision": 0.178,
+      "recall": 0.532,
+      "AP": 0.109
+    },
+    {
+      "scope": "전체",
+      "model": "RobustMahalanobis|phys",
+      "F1": 0.121,
+      "precision": 0.072,
+      "recall": 0.397,
+      "AP": 0.063
+    },
+    {
+      "scope": "전체",
+      "model": "RobustMahalanobis|raw",
+      "F1": 0.132,
+      "precision": 0.077,
+      "recall": 0.465,
+      "AP": 0.061
+    },
+    {
+      "scope": "전체",
+      "model": "SPC|phys",
+      "F1": 0.181,
+      "precision": 0.105,
+      "recall": 0.689,
+      "AP": 0.07
+    },
+    {
+      "scope": "전체",
+      "model": "SPC|raw",
+      "F1": 0.196,
+      "precision": 0.114,
+      "recall": 0.742,
+      "AP": 0.073
+    }
+  ],
+  "metrics_realistic_rate": [
+    {
+      "model": "IsolationForest|phys",
+      "F1_mean": 0.167,
+      "F1_std": 0.149,
+      "precision_mean": 0.157,
+      "precision_std": 0.154,
+      "recall_mean": 0.24,
+      "recall_std": 0.207,
+      "AP_mean": 0.064,
+      "AP_std": 0.046,
+      "FP_in_highforce_share_mean": 0.664,
+      "FP_in_highforce_share_std": 0.046
+    },
+    {
+      "model": "PhysCtx",
+      "F1_mean": 0.054,
+      "F1_std": 0.023,
+      "precision_mean": 0.029,
+      "precision_std": 0.012,
+      "recall_mean": 0.44,
+      "recall_std": 0.182,
+      "AP_mean": 0.021,
+      "AP_std": 0.003,
+      "FP_in_highforce_share_mean": 0.677,
+      "FP_in_highforce_share_std": 0.011
+    },
+    {
+      "model": "Ctx(raw)",
+      "F1_mean": 0.052,
+      "F1_std": 0.022,
+      "precision_mean": 0.028,
+      "precision_std": 0.012,
+      "recall_mean": 0.42,
+      "recall_std": 0.164,
+      "AP_mean": 0.022,
+      "AP_std": 0.002,
+      "FP_in_highforce_share_mean": 0.685,
+      "FP_in_highforce_share_std": 0.007
+    },
+    {
+      "model": "IsolationForest|raw",
+      "F1_mean": 0.045,
+      "F1_std": 0.013,
+      "precision_mean": 0.024,
+      "precision_std": 0.007,
+      "recall_mean": 0.34,
+      "recall_std": 0.089,
+      "AP_mean": 0.03,
+      "AP_std": 0.011,
+      "FP_in_highforce_share_mean": 0.806,
+      "FP_in_highforce_share_std": 0.023
+    },
+    {
+      "model": "SPC|raw",
+      "F1_mean": 0.029,
+      "F1_std": 0.012,
+      "precision_mean": 0.015,
+      "precision_std": 0.006,
+      "recall_mean": 0.6,
+      "recall_std": 0.1,
+      "AP_mean": 0.013,
+      "AP_std": 0.002,
+      "FP_in_highforce_share_mean": 0.614,
+      "FP_in_highforce_share_std": 0.238
+    },
+    {
+      "model": "SPC|phys",
+      "F1_mean": 0.029,
+      "F1_std": 0.013,
+      "precision_mean": 0.015,
+      "precision_std": 0.007,
+      "recall_mean": 0.6,
+      "recall_std": 0.1,
+      "AP_mean": 0.013,
+      "AP_std": 0.002,
+      "FP_in_highforce_share_mean": 0.6,
+      "FP_in_highforce_share_std": 0.226
+    },
+    {
+      "model": "AutoEncoder|raw",
+      "F1_mean": 0.024,
+      "F1_std": 0.009,
+      "precision_mean": 0.012,
+      "precision_std": 0.004,
+      "recall_mean": 0.42,
+      "recall_std": 0.148,
+      "AP_mean": 0.011,
+      "AP_std": 0.001,
+      "FP_in_highforce_share_mean": 0.724,
+      "FP_in_highforce_share_std": 0.047
+    },
+    {
+      "model": "RobustMahalanobis|raw",
+      "F1_mean": 0.024,
+      "F1_std": 0.01,
+      "precision_mean": 0.012,
+      "precision_std": 0.005,
+      "recall_mean": 0.4,
+      "recall_std": 0.158,
+      "AP_mean": 0.012,
+      "AP_std": 0.002,
+      "FP_in_highforce_share_mean": 0.736,
+      "FP_in_highforce_share_std": 0.053
+    },
+    {
+      "model": "AutoEncoder|phys",
+      "F1_mean": 0.024,
+      "F1_std": 0.009,
+      "precision_mean": 0.012,
+      "precision_std": 0.005,
+      "recall_mean": 0.4,
+      "recall_std": 0.141,
+      "AP_mean": 0.012,
+      "AP_std": 0.001,
+      "FP_in_highforce_share_mean": 0.74,
+      "FP_in_highforce_share_std": 0.041
+    },
+    {
+      "model": "RobustMahalanobis|phys",
+      "F1_mean": 0.021,
+      "F1_std": 0.009,
+      "precision_mean": 0.011,
+      "precision_std": 0.005,
+      "recall_mean": 0.34,
+      "recall_std": 0.152,
+      "AP_mean": 0.012,
+      "AP_std": 0.002,
+      "FP_in_highforce_share_mean": 0.8,
+      "FP_in_highforce_share_std": 0.003
+    }
+  ]
+}

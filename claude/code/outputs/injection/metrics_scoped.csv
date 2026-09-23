@@ -1,0 +1,31 @@
+﻿scope,model,F1,precision,recall,AP
+블록 밖,AutoEncoder|phys,0.214,0.15,0.379,0.106
+블록 밖,AutoEncoder|raw,0.256,0.182,0.43,0.103
+블록 밖,Ctx(raw),0.484,0.404,0.604,0.214
+블록 밖,IsolationForest|phys,0.349,0.428,0.298,0.188
+블록 밖,IsolationForest|raw,0.239,0.214,0.275,0.194
+블록 밖,PhysCtx,0.419,0.36,0.502,0.204
+블록 밖,RobustMahalanobis|phys,0.225,0.172,0.332,0.132
+블록 밖,RobustMahalanobis|raw,0.232,0.163,0.406,0.1
+블록 밖,SPC|phys,0.338,0.239,0.655,0.167
+블록 밖,SPC|raw,0.37,0.26,0.713,0.181
+블록 안,AutoEncoder|phys,0.05,0.026,1.0,0.068
+블록 안,AutoEncoder|raw,0.05,0.026,1.0,0.056
+블록 안,Ctx(raw),0.082,0.044,0.79,0.065
+블록 안,IsolationForest|phys,0.149,0.083,0.78,0.233
+블록 안,IsolationForest|raw,0.07,0.036,1.0,0.183
+블록 안,PhysCtx,0.083,0.044,0.79,0.052
+블록 안,RobustMahalanobis|phys,0.05,0.026,1.0,0.08
+블록 안,RobustMahalanobis|raw,0.05,0.026,1.0,0.077
+블록 안,SPC|phys,0.05,0.026,1.0,0.05
+블록 안,SPC|raw,0.05,0.026,1.0,0.05
+전체,AutoEncoder|phys,0.125,0.073,0.44,0.062
+전체,AutoEncoder|raw,0.141,0.083,0.486,0.057
+전체,Ctx(raw),0.305,0.202,0.625,0.116
+전체,IsolationForest|phys,0.272,0.225,0.345,0.127
+전체,IsolationForest|raw,0.145,0.092,0.345,0.107
+전체,PhysCtx,0.267,0.178,0.532,0.109
+전체,RobustMahalanobis|phys,0.121,0.072,0.397,0.063
+전체,RobustMahalanobis|raw,0.132,0.077,0.465,0.061
+전체,SPC|phys,0.181,0.105,0.689,0.07
+전체,SPC|raw,0.196,0.114,0.742,0.073

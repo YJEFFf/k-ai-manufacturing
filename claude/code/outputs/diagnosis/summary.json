@@ -1,0 +1,231 @@
+{
+  "n_rows": 11939,
+  "label_rows": 23,
+  "defects_total": 39,
+  "days_raw": 9,
+  "days_labeled": 8,
+  "days_without_label": [
+    "2020-03-27"
+  ],
+  "result_idx_is_row_number": true,
+  "idx_issues": [
+    {
+      "day": "2020-03-25",
+      "n": 1352,
+      "idx_max": 1650,
+      "dup": 1,
+      "gaps": [
+        [
+          1350,
+          1650
+        ]
+      ]
+    },
+    {
+      "day": "2020-03-27",
+      "n": 1648,
+      "idx_max": 1649,
+      "dup": 0,
+      "gaps": []
+    }
+  ],
+  "constant_columns": {
+    "machine": "Spot-01",
+    "item": "65235-25800",
+    "thick1": 0.7,
+    "thick2": 0.7
+  },
+  "out_of_spec": {
+    "thick1": {
+      "range": [
+        0.3,
+        2.3
+      ],
+      "n_out": 0,
+      "min": 0.7,
+      "max": 0.7
+    },
+    "thick2": {
+      "range": [
+        0.3,
+        2.3
+      ],
+      "n_out": 0,
+      "min": 0.7,
+      "max": 0.7
+    },
+    "force": {
+      "range": [
+        1.0,
+        12.0
+      ],
+      "n_out": 0,
+      "min": 1.7399999999999998,
+      "max": 10.540000000000001
+    },
+    "current": {
+      "range": [
+        12.0,
+        18.0
+      ],
+      "n_out": 0,
+      "min": 14.520000000000001,
+      "max": 15.070000000000002
+    },
+    "voltage": {
+      "range": [
+        1.5,
+        3.5
+      ],
+      "n_out": 0,
+      "min": 2.464,
+      "max": 2.861
+    },
+    "weld_time": {
+      "range": [
+        30.0,
+        120.0
+      ],
+      "n_out": 0,
+      "min": 70.0,
+      "max": 73.0
+    }
+  },
+  "window": 27,
+  "unique_sensor_tuples": 1574,
+  "rows_in_repeated_block": 11693,
+  "rows_copy_of_earlier": 9762,
+  "rows_original_estimate": 2177,
+  "copy_segments": 48,
+  "original_rows_per_day": {
+    "2020-03-24": 1200,
+    "2020-03-25": 977,
+    "2020-03-26": 0,
+    "2020-03-27": 0,
+    "2020-03-30": 0,
+    "2020-03-31": 0,
+    "2020-04-02": 0,
+    "2020-04-03": 0,
+    "2020-04-07": 0
+  },
+  "days_fully_copied": [
+    "2020-03-26",
+    "2020-03-27",
+    "2020-03-30",
+    "2020-03-31",
+    "2020-04-02",
+    "2020-04-03",
+    "2020-04-07"
+  ],
+  "window_sensitivity": {
+    "9": {
+      "copy_of_earlier": 0.8177,
+      "in_repeated": 0.9794
+    },
+    "27": {
+      "copy_of_earlier": 0.8177,
+      "in_repeated": 0.9794
+    },
+    "54": {
+      "copy_of_earlier": 0.8134,
+      "in_repeated": 0.9794
+    },
+    "81": {
+      "copy_of_earlier": 0.7977,
+      "in_repeated": 0.9747
+    }
+  },
+  "high_force": {
+    "threshold_bar": 5.0,
+    "rows_per_day": {
+      "2020-03-25": 243,
+      "2020-03-27": 243,
+      "2020-03-31": 243,
+      "2020-04-03": 243
+    },
+    "identical_across_days": true,
+    "idx_span": {
+      "2020-03-25": [
+        678,
+        975
+      ],
+      "2020-03-27": [
+        1142,
+        1439
+      ],
+      "2020-03-31": [
+        1132,
+        1429
+      ],
+      "2020-04-03": [
+        408,
+        705
+      ]
+    },
+    "force_range": [
+      5.01,
+      10.540000000000001
+    ],
+    "normal_force_median": 2.33
+  },
+  "fractional_weld_time": {
+    "rows": 297,
+    "per_day": {
+      "2020-03-24": 27,
+      "2020-03-25": 27,
+      "2020-03-26": 54,
+      "2020-03-27": 27,
+      "2020-03-30": 54,
+      "2020-03-31": 27,
+      "2020-04-02": 54,
+      "2020-04-03": 27
+    },
+    "values": [
+      72.16,
+      72.18,
+      72.2,
+      72.24
+    ]
+  },
+  "scaled_vs_raw": {
+    "force": {
+      "rowwise_corr": 0.3135,
+      "sorted_value_corr": 0.5817,
+      "nulls": 18
+    },
+    "current": {
+      "rowwise_corr": 0.0301,
+      "sorted_value_corr": 0.2481,
+      "nulls": 15
+    },
+    "voltage": {
+      "rowwise_corr": -0.0217,
+      "sorted_value_corr": 0.2814,
+      "nulls": 15
+    },
+    "weld_time": {
+      "rowwise_corr": 0.0174,
+      "sorted_value_corr": 0.131,
+      "nulls": 23
+    }
+  },
+  "daily_spearman_vs_defects": {
+    "n": 0.304,
+    "force_mean": 0.457,
+    "current_mean": 0.381,
+    "voltage_mean": 0.254,
+    "weld_time_mean": 0.203,
+    "force_std": 0.469,
+    "current_std": 0.558,
+    "voltage_std": 0.127,
+    "weld_time_std": -0.381,
+    "copy_share": -0.257,
+    "high_force_rows": 0.48
+  },
+  "high_force_days_defects": {
+    "2020-03-25": 8.0,
+    "2020-03-27": null,
+    "2020-03-31": 5.0,
+    "2020-04-03": 4.0
+  }
+}
