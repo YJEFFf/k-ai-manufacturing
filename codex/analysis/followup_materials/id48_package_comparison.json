@@ -1,0 +1,18 @@
+{
+  "archive": "/tmp/kamp-followup-cache/Dataset_소성가공 예지보전 AI 데이터셋.zip",
+  "archive_sha256": "0bf0e7a2de0c7622cffdab426fd42deab20078b6f4c724815a87b802f7b8f5fa",
+  "members": [
+    {
+      "name": "data/outlier_data.csv",
+      "bytes": 38823,
+      "sha256": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+      "same_as_contest_csv": true
+    },
+    {
+      "name": "data/press_data_normal.csv",
+      "bytes": 1211960,
+      "sha256": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+      "same_as_contest_csv": true
+    }
+  ]
+}

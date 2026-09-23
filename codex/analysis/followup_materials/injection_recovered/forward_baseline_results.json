@@ -1,0 +1,4867 @@
+{
+  "protocol": "Fixed models; exact duplicate records removed first; TimeStamp dates split before fitting; Reason/ERR_FACT_QTY/id/time/serial are never predictor inputs; no test tuning",
+  "records": [
+    {
+      "split": "original_contest_period_to_all_later",
+      "model": "part_name_prior",
+      "inputs": "known part name only",
+      "integrity": {
+        "train_n": 2393,
+        "train_positive": 42,
+        "test_n": 2837,
+        "test_positive": 18,
+        "train_dates": [
+          "2020-10-16",
+          "2020-10-19",
+          "2020-10-20",
+          "2020-10-21",
+          "2020-10-22",
+          "2020-10-23"
+        ],
+        "test_dates": [
+          "2020-10-27",
+          "2020-10-29",
+          "2020-10-30",
+          "2020-11-03",
+          "2020-11-04",
+          "2020-11-05",
+          "2020-11-06"
+        ],
+        "id_overlap": 0,
+        "shot_time_overlap": 0
+      },
+      "all": {
+        "n": 2837,
+        "positive": 18,
+        "prevalence": 0.00634473034896017,
+        "AP": 0.01068537722411086,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 288,
+            "positive_found": 5,
+            "recall": 0.2777777777777778,
+            "random_expected_positive": 1.892349073184758
+          },
+          "0.2": {
+            "selected": 571,
+            "positive_found": 7,
+            "recall": 0.3888888888888889,
+            "random_expected_positive": 3.686106597073741
+          },
+          "0.3": {
+            "selected": 855,
+            "positive_found": 7,
+            "recall": 0.3888888888888889,
+            "random_expected_positive": 5.4787842073558135
+          }
+        }
+      }
+    },
+    {
+      "split": "original_contest_period_to_all_later",
+      "model": "LR",
+      "inputs": "physical_sensors",
+      "integrity": {
+        "train_n": 2393,
+        "train_positive": 42,
+        "test_n": 2837,
+        "test_positive": 18,
+        "train_dates": [
+          "2020-10-16",
+          "2020-10-19",
+          "2020-10-20",
+          "2020-10-21",
+          "2020-10-22",
+          "2020-10-23"
+        ],
+        "test_dates": [
+          "2020-10-27",
+          "2020-10-29",
+          "2020-10-30",
+          "2020-11-03",
+          "2020-11-04",
+          "2020-11-05",
+          "2020-11-06"
+        ],
+        "id_overlap": 0,
+        "shot_time_overlap": 0
+      },
+      "all": {
+        "n": 2837,
+        "positive": 18,
+        "prevalence": 0.00634473034896017,
+        "AP": 0.01468465001748014,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 288,
+            "positive_found": 1,
+            "recall": 0.05555555555555555,
+            "random_expected_positive": 1.892349073184758
+          },
+          "0.2": {
+            "selected": 571,
+            "positive_found": 3,
+            "recall": 0.16666666666666666,
+            "random_expected_positive": 3.686106597073741
+          },
+          "0.3": {
+            "selected": 855,
+            "positive_found": 4,
+            "recall": 0.2222222222222222,
+            "random_expected_positive": 5.4787842073558135
+          }
+        }
+      },
+      "by_product": {
+        "CN7": {
+          "n": 2763,
+          "positive": 11,
+          "prevalence": 0.003981179876945349,
+          "AP": 0.010067693167216025,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 278,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 1.1036166788185608
+            },
+            "0.2": {
+              "selected": 554,
+              "positive_found": 1,
+              "recall": 0.09090909090909091,
+              "random_expected_positive": 2.2072333576371217
+            },
+            "0.3": {
+              "selected": 831,
+              "positive_found": 1,
+              "recall": 0.09090909090909091,
+              "random_expected_positive": 3.3097701228487706
+            }
+          }
+        },
+        "RG3": {
+          "n": 74,
+          "positive": 7,
+          "prevalence": 0.0945945945945946,
+          "AP": 0.12605377265009082,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 10,
+              "positive_found": 1,
+              "recall": 0.14285714285714285,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 17,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 24,
+              "positive_found": 3,
+              "recall": 0.42857142857142855,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        }
+      },
+      "by_date": {
+        "2020-10-27": {
+          "n": 628,
+          "positive": 10,
+          "prevalence": 0.01592356687898089,
+          "AP": 0.00962327514884528,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 63,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 1.0031847133757963
+            },
+            "0.2": {
+              "selected": 126,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 2.0063694267515926
+            },
+            "0.3": {
+              "selected": 189,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 3.0095541401273884
+            }
+          }
+        },
+        "2020-10-29": {
+          "n": 454,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 46,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 91,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 137,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-10-30": {
+          "n": 755,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 76,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 151,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 227,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-11-03": {
+          "n": 926,
+          "positive": 1,
+          "prevalence": 0.0010799136069114472,
+          "AP": 0.00819672131147541,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 93,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.10043196544276457
+            },
+            "0.2": {
+              "selected": 186,
+              "positive_found": 1,
+              "recall": 1.0,
+              "random_expected_positive": 0.20086393088552915
+            },
+            "0.3": {
+              "selected": 278,
+              "positive_found": 1,
+              "recall": 1.0,
+              "random_expected_positive": 0.3002159827213823
+            }
+          }
+        },
+        "2020-11-04": {
+          "n": 71,
+          "positive": 7,
+          "prevalence": 0.09859154929577464,
+          "AP": 0.1690047279909031,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 8,
+              "positive_found": 1,
+              "recall": 0.14285714285714285,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 15,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 22,
+              "positive_found": 3,
+              "recall": 0.42857142857142855,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        },
+        "2020-11-05": {
+          "n": 2,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-11-06": {
+          "n": 1,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        }
+      },
+      "excluding_startup_allowance": {
+        "n": 2827,
+        "positive": 8,
+        "prevalence": 0.002829854969932791,
+        "AP": 0.006463184969557722,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 287,
+            "positive_found": 1,
+            "recall": 0.125,
+            "random_expected_positive": 0.8891643598089617
+          },
+          "0.2": {
+            "selected": 569,
+            "positive_found": 3,
+            "recall": 0.375,
+            "random_expected_positive": 1.6797371703221489
+          },
+          "0.3": {
+            "selected": 852,
+            "positive_found": 4,
+            "recall": 0.5,
+            "random_expected_positive": 2.4692300672284246
+          }
+        }
+      }
+    },
+    {
+      "split": "original_contest_period_to_all_later",
+      "model": "RF",
+      "inputs": "physical_sensors",
+      "integrity": {
+        "train_n": 2393,
+        "train_positive": 42,
+        "test_n": 2837,
+        "test_positive": 18,
+        "train_dates": [
+          "2020-10-16",
+          "2020-10-19",
+          "2020-10-20",
+          "2020-10-21",
+          "2020-10-22",
+          "2020-10-23"
+        ],
+        "test_dates": [
+          "2020-10-27",
+          "2020-10-29",
+          "2020-10-30",
+          "2020-11-03",
+          "2020-11-04",
+          "2020-11-05",
+          "2020-11-06"
+        ],
+        "id_overlap": 0,
+        "shot_time_overlap": 0
+      },
+      "all": {
+        "n": 2837,
+        "positive": 18,
+        "prevalence": 0.00634473034896017,
+        "AP": 0.1294863834431848,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 288,
+            "positive_found": 8,
+            "recall": 0.4444444444444444,
+            "random_expected_positive": 1.892349073184758
+          },
+          "0.2": {
+            "selected": 571,
+            "positive_found": 11,
+            "recall": 0.6111111111111112,
+            "random_expected_positive": 3.686106597073741
+          },
+          "0.3": {
+            "selected": 855,
+            "positive_found": 12,
+            "recall": 0.6666666666666666,
+            "random_expected_positive": 5.4787842073558135
+          }
+        }
+      },
+      "by_product": {
+        "CN7": {
+          "n": 2763,
+          "positive": 11,
+          "prevalence": 0.003981179876945349,
+          "AP": 0.20186228164174494,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 278,
+              "positive_found": 6,
+              "recall": 0.5454545454545454,
+              "random_expected_positive": 1.1036166788185608
+            },
+            "0.2": {
+              "selected": 554,
+              "positive_found": 8,
+              "recall": 0.7272727272727273,
+              "random_expected_positive": 2.2072333576371217
+            },
+            "0.3": {
+              "selected": 831,
+              "positive_found": 8,
+              "recall": 0.7272727272727273,
+              "random_expected_positive": 3.3097701228487706
+            }
+          }
+        },
+        "RG3": {
+          "n": 74,
+          "positive": 7,
+          "prevalence": 0.0945945945945946,
+          "AP": 0.18891655545790884,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 10,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 17,
+              "positive_found": 3,
+              "recall": 0.42857142857142855,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 24,
+              "positive_found": 4,
+              "recall": 0.5714285714285714,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        }
+      },
+      "by_date": {
+        "2020-10-27": {
+          "n": 628,
+          "positive": 10,
+          "prevalence": 0.01592356687898089,
+          "AP": 0.28398485441963706,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 63,
+              "positive_found": 6,
+              "recall": 0.6,
+              "random_expected_positive": 1.0031847133757963
+            },
+            "0.2": {
+              "selected": 126,
+              "positive_found": 8,
+              "recall": 0.8,
+              "random_expected_positive": 2.0063694267515926
+            },
+            "0.3": {
+              "selected": 189,
+              "positive_found": 8,
+              "recall": 0.8,
+              "random_expected_positive": 3.0095541401273884
+            }
+          }
+        },
+        "2020-10-29": {
+          "n": 454,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 46,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 91,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 137,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-10-30": {
+          "n": 755,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 76,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 151,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 227,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-11-03": {
+          "n": 926,
+          "positive": 1,
+          "prevalence": 0.0010799136069114472,
+          "AP": 0.0017605633802816902,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 93,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.10043196544276457
+            },
+            "0.2": {
+              "selected": 186,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.20086393088552915
+            },
+            "0.3": {
+              "selected": 278,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.3002159827213823
+            }
+          }
+        },
+        "2020-11-04": {
+          "n": 71,
+          "positive": 7,
+          "prevalence": 0.09859154929577464,
+          "AP": 0.18891655545790884,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 8,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 15,
+              "positive_found": 3,
+              "recall": 0.42857142857142855,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 22,
+              "positive_found": 4,
+              "recall": 0.5714285714285714,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        },
+        "2020-11-05": {
+          "n": 2,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-11-06": {
+          "n": 1,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        }
+      },
+      "excluding_startup_allowance": {
+        "n": 2827,
+        "positive": 8,
+        "prevalence": 0.002829854969932791,
+        "AP": 0.14656894798023828,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 287,
+            "positive_found": 2,
+            "recall": 0.25,
+            "random_expected_positive": 0.8891643598089617
+          },
+          "0.2": {
+            "selected": 569,
+            "positive_found": 3,
+            "recall": 0.375,
+            "random_expected_positive": 1.6797371703221489
+          },
+          "0.3": {
+            "selected": 852,
+            "positive_found": 4,
+            "recall": 0.5,
+            "random_expected_positive": 2.4692300672284246
+          }
+        }
+      }
+    },
+    {
+      "split": "original_contest_period_to_all_later",
+      "model": "HGB",
+      "inputs": "physical_sensors",
+      "integrity": {
+        "train_n": 2393,
+        "train_positive": 42,
+        "test_n": 2837,
+        "test_positive": 18,
+        "train_dates": [
+          "2020-10-16",
+          "2020-10-19",
+          "2020-10-20",
+          "2020-10-21",
+          "2020-10-22",
+          "2020-10-23"
+        ],
+        "test_dates": [
+          "2020-10-27",
+          "2020-10-29",
+          "2020-10-30",
+          "2020-11-03",
+          "2020-11-04",
+          "2020-11-05",
+          "2020-11-06"
+        ],
+        "id_overlap": 0,
+        "shot_time_overlap": 0
+      },
+      "all": {
+        "n": 2837,
+        "positive": 18,
+        "prevalence": 0.00634473034896017,
+        "AP": 0.05107552156026257,
+        "precision_at_0_5": 0.13333333333333333,
+        "recall_at_0_5": 0.2222222222222222,
+        "f1_at_0_5": 0.16666666666666666,
+        "flagged_at_0_5": 30,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 288,
+            "positive_found": 1,
+            "recall": 0.05555555555555555,
+            "random_expected_positive": 1.892349073184758
+          },
+          "0.2": {
+            "selected": 571,
+            "positive_found": 2,
+            "recall": 0.1111111111111111,
+            "random_expected_positive": 3.686106597073741
+          },
+          "0.3": {
+            "selected": 855,
+            "positive_found": 4,
+            "recall": 0.2222222222222222,
+            "random_expected_positive": 5.4787842073558135
+          }
+        }
+      },
+      "by_product": {
+        "CN7": {
+          "n": 2763,
+          "positive": 11,
+          "prevalence": 0.003981179876945349,
+          "AP": 0.003516613998914183,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 278,
+              "positive_found": 1,
+              "recall": 0.09090909090909091,
+              "random_expected_positive": 1.1036166788185608
+            },
+            "0.2": {
+              "selected": 554,
+              "positive_found": 1,
+              "recall": 0.09090909090909091,
+              "random_expected_positive": 2.2072333576371217
+            },
+            "0.3": {
+              "selected": 831,
+              "positive_found": 1,
+              "recall": 0.09090909090909091,
+              "random_expected_positive": 3.3097701228487706
+            }
+          }
+        },
+        "RG3": {
+          "n": 74,
+          "positive": 7,
+          "prevalence": 0.0945945945945946,
+          "AP": 0.13064070432491487,
+          "precision_at_0_5": 0.13333333333333333,
+          "recall_at_0_5": 0.5714285714285714,
+          "f1_at_0_5": 0.21621621621621623,
+          "flagged_at_0_5": 30,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 10,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 17,
+              "positive_found": 1,
+              "recall": 0.14285714285714285,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 24,
+              "positive_found": 3,
+              "recall": 0.42857142857142855,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        }
+      },
+      "by_date": {
+        "2020-10-27": {
+          "n": 628,
+          "positive": 10,
+          "prevalence": 0.01592356687898089,
+          "AP": 0.0138334784748873,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 63,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 1.0031847133757963
+            },
+            "0.2": {
+              "selected": 126,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 2.0063694267515926
+            },
+            "0.3": {
+              "selected": 189,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 3.0095541401273884
+            }
+          }
+        },
+        "2020-10-29": {
+          "n": 454,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 46,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 91,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 137,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-10-30": {
+          "n": 755,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 76,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 151,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 227,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-11-03": {
+          "n": 926,
+          "positive": 1,
+          "prevalence": 0.0010799136069114472,
+          "AP": 0.017857142857142856,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 93,
+              "positive_found": 1,
+              "recall": 1.0,
+              "random_expected_positive": 0.10043196544276457
+            },
+            "0.2": {
+              "selected": 186,
+              "positive_found": 1,
+              "recall": 1.0,
+              "random_expected_positive": 0.20086393088552915
+            },
+            "0.3": {
+              "selected": 278,
+              "positive_found": 1,
+              "recall": 1.0,
+              "random_expected_positive": 0.3002159827213823
+            }
+          }
+        },
+        "2020-11-04": {
+          "n": 71,
+          "positive": 7,
+          "prevalence": 0.09859154929577464,
+          "AP": 0.13064070432491487,
+          "precision_at_0_5": 0.13333333333333333,
+          "recall_at_0_5": 0.5714285714285714,
+          "f1_at_0_5": 0.21621621621621623,
+          "flagged_at_0_5": 30,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 8,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 15,
+              "positive_found": 1,
+              "recall": 0.14285714285714285,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 22,
+              "positive_found": 3,
+              "recall": 0.42857142857142855,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        },
+        "2020-11-05": {
+          "n": 2,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-11-06": {
+          "n": 1,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        }
+      },
+      "excluding_startup_allowance": {
+        "n": 2827,
+        "positive": 8,
+        "prevalence": 0.002829854969932791,
+        "AP": 0.1057130192345959,
+        "precision_at_0_5": 0.13333333333333333,
+        "recall_at_0_5": 0.5,
+        "f1_at_0_5": 0.21052631578947367,
+        "flagged_at_0_5": 30,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 287,
+            "positive_found": 1,
+            "recall": 0.125,
+            "random_expected_positive": 0.8891643598089617
+          },
+          "0.2": {
+            "selected": 569,
+            "positive_found": 2,
+            "recall": 0.25,
+            "random_expected_positive": 1.6797371703221489
+          },
+          "0.3": {
+            "selected": 852,
+            "positive_found": 4,
+            "recall": 0.5,
+            "random_expected_positive": 2.4692300672284246
+          }
+        }
+      }
+    },
+    {
+      "split": "original_contest_period_to_all_later",
+      "model": "LR",
+      "inputs": "physical_sensors+part_name",
+      "integrity": {
+        "train_n": 2393,
+        "train_positive": 42,
+        "test_n": 2837,
+        "test_positive": 18,
+        "train_dates": [
+          "2020-10-16",
+          "2020-10-19",
+          "2020-10-20",
+          "2020-10-21",
+          "2020-10-22",
+          "2020-10-23"
+        ],
+        "test_dates": [
+          "2020-10-27",
+          "2020-10-29",
+          "2020-10-30",
+          "2020-11-03",
+          "2020-11-04",
+          "2020-11-05",
+          "2020-11-06"
+        ],
+        "id_overlap": 0,
+        "shot_time_overlap": 0
+      },
+      "all": {
+        "n": 2837,
+        "positive": 18,
+        "prevalence": 0.00634473034896017,
+        "AP": 0.009758718066978794,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 288,
+            "positive_found": 0,
+            "recall": 0.0,
+            "random_expected_positive": 1.892349073184758
+          },
+          "0.2": {
+            "selected": 571,
+            "positive_found": 0,
+            "recall": 0.0,
+            "random_expected_positive": 3.686106597073741
+          },
+          "0.3": {
+            "selected": 855,
+            "positive_found": 0,
+            "recall": 0.0,
+            "random_expected_positive": 5.4787842073558135
+          }
+        }
+      },
+      "by_product": {
+        "CN7": {
+          "n": 2763,
+          "positive": 11,
+          "prevalence": 0.003981179876945349,
+          "AP": 0.008793885254406579,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 278,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 1.1036166788185608
+            },
+            "0.2": {
+              "selected": 554,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 2.2072333576371217
+            },
+            "0.3": {
+              "selected": 831,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 3.3097701228487706
+            }
+          }
+        },
+        "RG3": {
+          "n": 74,
+          "positive": 7,
+          "prevalence": 0.0945945945945946,
+          "AP": 0.08282315755430306,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 10,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 17,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 24,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        }
+      },
+      "by_date": {
+        "2020-10-27": {
+          "n": 628,
+          "positive": 10,
+          "prevalence": 0.01592356687898089,
+          "AP": 0.00893203388766395,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 63,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 1.0031847133757963
+            },
+            "0.2": {
+              "selected": 126,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 2.0063694267515926
+            },
+            "0.3": {
+              "selected": 189,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 3.0095541401273884
+            }
+          }
+        },
+        "2020-10-29": {
+          "n": 454,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 46,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 91,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 137,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-10-30": {
+          "n": 755,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 76,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 151,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 227,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-11-03": {
+          "n": 926,
+          "positive": 1,
+          "prevalence": 0.0010799136069114472,
+          "AP": 0.002777777777777778,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 93,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.10043196544276457
+            },
+            "0.2": {
+              "selected": 186,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.20086393088552915
+            },
+            "0.3": {
+              "selected": 278,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.3002159827213823
+            }
+          }
+        },
+        "2020-11-04": {
+          "n": 71,
+          "positive": 7,
+          "prevalence": 0.09859154929577464,
+          "AP": 0.08665600037448777,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 8,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 15,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 22,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        },
+        "2020-11-05": {
+          "n": 2,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-11-06": {
+          "n": 1,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        }
+      },
+      "excluding_startup_allowance": {
+        "n": 2827,
+        "positive": 8,
+        "prevalence": 0.002829854969932791,
+        "AP": 0.002726869197157281,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 287,
+            "positive_found": 0,
+            "recall": 0.0,
+            "random_expected_positive": 0.8891643598089617
+          },
+          "0.2": {
+            "selected": 569,
+            "positive_found": 0,
+            "recall": 0.0,
+            "random_expected_positive": 1.6797371703221489
+          },
+          "0.3": {
+            "selected": 852,
+            "positive_found": 0,
+            "recall": 0.0,
+            "random_expected_positive": 2.4692300672284246
+          }
+        }
+      }
+    },
+    {
+      "split": "original_contest_period_to_all_later",
+      "model": "RF",
+      "inputs": "physical_sensors+part_name",
+      "integrity": {
+        "train_n": 2393,
+        "train_positive": 42,
+        "test_n": 2837,
+        "test_positive": 18,
+        "train_dates": [
+          "2020-10-16",
+          "2020-10-19",
+          "2020-10-20",
+          "2020-10-21",
+          "2020-10-22",
+          "2020-10-23"
+        ],
+        "test_dates": [
+          "2020-10-27",
+          "2020-10-29",
+          "2020-10-30",
+          "2020-11-03",
+          "2020-11-04",
+          "2020-11-05",
+          "2020-11-06"
+        ],
+        "id_overlap": 0,
+        "shot_time_overlap": 0
+      },
+      "all": {
+        "n": 2837,
+        "positive": 18,
+        "prevalence": 0.00634473034896017,
+        "AP": 0.013587121467180146,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 288,
+            "positive_found": 4,
+            "recall": 0.2222222222222222,
+            "random_expected_positive": 1.892349073184758
+          },
+          "0.2": {
+            "selected": 571,
+            "positive_found": 4,
+            "recall": 0.2222222222222222,
+            "random_expected_positive": 3.686106597073741
+          },
+          "0.3": {
+            "selected": 855,
+            "positive_found": 7,
+            "recall": 0.3888888888888889,
+            "random_expected_positive": 5.4787842073558135
+          }
+        }
+      },
+      "by_product": {
+        "CN7": {
+          "n": 2763,
+          "positive": 11,
+          "prevalence": 0.003981179876945349,
+          "AP": 0.0051702067305931625,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 278,
+              "positive_found": 3,
+              "recall": 0.2727272727272727,
+              "random_expected_positive": 1.1036166788185608
+            },
+            "0.2": {
+              "selected": 554,
+              "positive_found": 3,
+              "recall": 0.2727272727272727,
+              "random_expected_positive": 2.2072333576371217
+            },
+            "0.3": {
+              "selected": 831,
+              "positive_found": 5,
+              "recall": 0.45454545454545453,
+              "random_expected_positive": 3.3097701228487706
+            }
+          }
+        },
+        "RG3": {
+          "n": 74,
+          "positive": 7,
+          "prevalence": 0.0945945945945946,
+          "AP": 0.10046230440967283,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 10,
+              "positive_found": 1,
+              "recall": 0.14285714285714285,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 17,
+              "positive_found": 1,
+              "recall": 0.14285714285714285,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 24,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        }
+      },
+      "by_date": {
+        "2020-10-27": {
+          "n": 628,
+          "positive": 10,
+          "prevalence": 0.01592356687898089,
+          "AP": 0.024831802009535976,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 63,
+              "positive_found": 2,
+              "recall": 0.2,
+              "random_expected_positive": 1.0031847133757963
+            },
+            "0.2": {
+              "selected": 126,
+              "positive_found": 2,
+              "recall": 0.2,
+              "random_expected_positive": 2.0063694267515926
+            },
+            "0.3": {
+              "selected": 189,
+              "positive_found": 4,
+              "recall": 0.4,
+              "random_expected_positive": 3.0095541401273884
+            }
+          }
+        },
+        "2020-10-29": {
+          "n": 454,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 46,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 91,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 137,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-10-30": {
+          "n": 755,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 76,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 151,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 227,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-11-03": {
+          "n": 926,
+          "positive": 1,
+          "prevalence": 0.0010799136069114472,
+          "AP": 0.2,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 93,
+              "positive_found": 1,
+              "recall": 1.0,
+              "random_expected_positive": 0.10043196544276457
+            },
+            "0.2": {
+              "selected": 186,
+              "positive_found": 1,
+              "recall": 1.0,
+              "random_expected_positive": 0.20086393088552915
+            },
+            "0.3": {
+              "selected": 278,
+              "positive_found": 1,
+              "recall": 1.0,
+              "random_expected_positive": 0.3002159827213823
+            }
+          }
+        },
+        "2020-11-04": {
+          "n": 71,
+          "positive": 7,
+          "prevalence": 0.09859154929577464,
+          "AP": 0.10331727205337288,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 8,
+              "positive_found": 1,
+              "recall": 0.14285714285714285,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 15,
+              "positive_found": 1,
+              "recall": 0.14285714285714285,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 22,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        },
+        "2020-11-05": {
+          "n": 2,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-11-06": {
+          "n": 1,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        }
+      },
+      "excluding_startup_allowance": {
+        "n": 2827,
+        "positive": 8,
+        "prevalence": 0.002829854969932791,
+        "AP": 0.018700637114757758,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 287,
+            "positive_found": 2,
+            "recall": 0.25,
+            "random_expected_positive": 0.8891643598089617
+          },
+          "0.2": {
+            "selected": 569,
+            "positive_found": 2,
+            "recall": 0.25,
+            "random_expected_positive": 1.6797371703221489
+          },
+          "0.3": {
+            "selected": 852,
+            "positive_found": 3,
+            "recall": 0.375,
+            "random_expected_positive": 2.4692300672284246
+          }
+        }
+      }
+    },
+    {
+      "split": "original_contest_period_to_all_later",
+      "model": "HGB",
+      "inputs": "physical_sensors+part_name",
+      "integrity": {
+        "train_n": 2393,
+        "train_positive": 42,
+        "test_n": 2837,
+        "test_positive": 18,
+        "train_dates": [
+          "2020-10-16",
+          "2020-10-19",
+          "2020-10-20",
+          "2020-10-21",
+          "2020-10-22",
+          "2020-10-23"
+        ],
+        "test_dates": [
+          "2020-10-27",
+          "2020-10-29",
+          "2020-10-30",
+          "2020-11-03",
+          "2020-11-04",
+          "2020-11-05",
+          "2020-11-06"
+        ],
+        "id_overlap": 0,
+        "shot_time_overlap": 0
+      },
+      "all": {
+        "n": 2837,
+        "positive": 18,
+        "prevalence": 0.00634473034896017,
+        "AP": 0.07900921492918175,
+        "precision_at_0_5": 0.09523809523809523,
+        "recall_at_0_5": 0.1111111111111111,
+        "f1_at_0_5": 0.10256410256410256,
+        "flagged_at_0_5": 21,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 288,
+            "positive_found": 3,
+            "recall": 0.16666666666666666,
+            "random_expected_positive": 1.892349073184758
+          },
+          "0.2": {
+            "selected": 571,
+            "positive_found": 3,
+            "recall": 0.16666666666666666,
+            "random_expected_positive": 3.686106597073741
+          },
+          "0.3": {
+            "selected": 855,
+            "positive_found": 5,
+            "recall": 0.2777777777777778,
+            "random_expected_positive": 5.4787842073558135
+          }
+        }
+      },
+      "by_product": {
+        "CN7": {
+          "n": 2763,
+          "positive": 11,
+          "prevalence": 0.003981179876945349,
+          "AP": 0.004185335774825183,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 1,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 278,
+              "positive_found": 1,
+              "recall": 0.09090909090909091,
+              "random_expected_positive": 1.1036166788185608
+            },
+            "0.2": {
+              "selected": 554,
+              "positive_found": 1,
+              "recall": 0.09090909090909091,
+              "random_expected_positive": 2.2072333576371217
+            },
+            "0.3": {
+              "selected": 831,
+              "positive_found": 3,
+              "recall": 0.2727272727272727,
+              "random_expected_positive": 3.3097701228487706
+            }
+          }
+        },
+        "RG3": {
+          "n": 74,
+          "positive": 7,
+          "prevalence": 0.0945945945945946,
+          "AP": 0.24433032648991043,
+          "precision_at_0_5": 0.1,
+          "recall_at_0_5": 0.2857142857142857,
+          "f1_at_0_5": 0.14814814814814814,
+          "flagged_at_0_5": 20,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 10,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 17,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 24,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        }
+      },
+      "by_date": {
+        "2020-10-27": {
+          "n": 628,
+          "positive": 10,
+          "prevalence": 0.01592356687898089,
+          "AP": 0.014757992658784656,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 63,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 1.0031847133757963
+            },
+            "0.2": {
+              "selected": 126,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 2.0063694267515926
+            },
+            "0.3": {
+              "selected": 189,
+              "positive_found": 2,
+              "recall": 0.2,
+              "random_expected_positive": 3.0095541401273884
+            }
+          }
+        },
+        "2020-10-29": {
+          "n": 454,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 1,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 46,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 91,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 137,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-10-30": {
+          "n": 755,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 76,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 151,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 227,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-11-03": {
+          "n": 926,
+          "positive": 1,
+          "prevalence": 0.0010799136069114472,
+          "AP": 1.0,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 93,
+              "positive_found": 1,
+              "recall": 1.0,
+              "random_expected_positive": 0.10043196544276457
+            },
+            "0.2": {
+              "selected": 186,
+              "positive_found": 1,
+              "recall": 1.0,
+              "random_expected_positive": 0.20086393088552915
+            },
+            "0.3": {
+              "selected": 278,
+              "positive_found": 1,
+              "recall": 1.0,
+              "random_expected_positive": 0.3002159827213823
+            }
+          }
+        },
+        "2020-11-04": {
+          "n": 71,
+          "positive": 7,
+          "prevalence": 0.09859154929577464,
+          "AP": 0.24453736582738456,
+          "precision_at_0_5": 0.1,
+          "recall_at_0_5": 0.2857142857142857,
+          "f1_at_0_5": 0.14814814814814814,
+          "flagged_at_0_5": 20,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 8,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 15,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 22,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        },
+        "2020-11-05": {
+          "n": 2,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-11-06": {
+          "n": 1,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        }
+      },
+      "excluding_startup_allowance": {
+        "n": 2827,
+        "positive": 8,
+        "prevalence": 0.002829854969932791,
+        "AP": 0.16629431321528904,
+        "precision_at_0_5": 0.09523809523809523,
+        "recall_at_0_5": 0.25,
+        "f1_at_0_5": 0.13793103448275862,
+        "flagged_at_0_5": 21,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 287,
+            "positive_found": 3,
+            "recall": 0.375,
+            "random_expected_positive": 0.8891643598089617
+          },
+          "0.2": {
+            "selected": 569,
+            "positive_found": 3,
+            "recall": 0.375,
+            "random_expected_positive": 1.6797371703221489
+          },
+          "0.3": {
+            "selected": 852,
+            "positive_found": 3,
+            "recall": 0.375,
+            "random_expected_positive": 2.4692300672284246
+          }
+        }
+      }
+    },
+    {
+      "split": "past_to_november",
+      "model": "part_name_prior",
+      "inputs": "known part name only",
+      "integrity": {
+        "train_n": 4230,
+        "train_positive": 52,
+        "test_n": 1000,
+        "test_positive": 8,
+        "train_dates": [
+          "2020-10-16",
+          "2020-10-19",
+          "2020-10-20",
+          "2020-10-21",
+          "2020-10-22",
+          "2020-10-23",
+          "2020-10-27",
+          "2020-10-29",
+          "2020-10-30"
+        ],
+        "test_dates": [
+          "2020-11-03",
+          "2020-11-04",
+          "2020-11-05",
+          "2020-11-06"
+        ],
+        "id_overlap": 0,
+        "shot_time_overlap": 0
+      },
+      "all": {
+        "n": 1000,
+        "positive": 8,
+        "prevalence": 0.008,
+        "AP": 0.01890292161320199,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 103,
+            "positive_found": 0,
+            "recall": 0.0,
+            "random_expected_positive": 0.8891643598089617
+          },
+          "0.2": {
+            "selected": 203,
+            "positive_found": 2,
+            "recall": 0.25,
+            "random_expected_positive": 1.6797371703221489
+          },
+          "0.3": {
+            "selected": 302,
+            "positive_found": 2,
+            "recall": 0.25,
+            "random_expected_positive": 2.4692300672284246
+          }
+        }
+      }
+    },
+    {
+      "split": "past_to_november",
+      "model": "LR",
+      "inputs": "physical_sensors",
+      "integrity": {
+        "train_n": 4230,
+        "train_positive": 52,
+        "test_n": 1000,
+        "test_positive": 8,
+        "train_dates": [
+          "2020-10-16",
+          "2020-10-19",
+          "2020-10-20",
+          "2020-10-21",
+          "2020-10-22",
+          "2020-10-23",
+          "2020-10-27",
+          "2020-10-29",
+          "2020-10-30"
+        ],
+        "test_dates": [
+          "2020-11-03",
+          "2020-11-04",
+          "2020-11-05",
+          "2020-11-06"
+        ],
+        "id_overlap": 0,
+        "shot_time_overlap": 0
+      },
+      "all": {
+        "n": 1000,
+        "positive": 8,
+        "prevalence": 0.008,
+        "AP": 0.11708400374474062,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 1,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 103,
+            "positive_found": 0,
+            "recall": 0.0,
+            "random_expected_positive": 0.8891643598089617
+          },
+          "0.2": {
+            "selected": 203,
+            "positive_found": 3,
+            "recall": 0.375,
+            "random_expected_positive": 1.6797371703221489
+          },
+          "0.3": {
+            "selected": 302,
+            "positive_found": 4,
+            "recall": 0.5,
+            "random_expected_positive": 2.4692300672284246
+          }
+        }
+      },
+      "by_product": {
+        "CN7": {
+          "n": 926,
+          "positive": 1,
+          "prevalence": 0.0010799136069114472,
+          "AP": 0.006493506493506494,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 93,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.10043196544276457
+            },
+            "0.2": {
+              "selected": 186,
+              "positive_found": 1,
+              "recall": 1.0,
+              "random_expected_positive": 0.20086393088552915
+            },
+            "0.3": {
+              "selected": 278,
+              "positive_found": 1,
+              "recall": 1.0,
+              "random_expected_positive": 0.3002159827213823
+            }
+          }
+        },
+        "RG3": {
+          "n": 74,
+          "positive": 7,
+          "prevalence": 0.0945945945945946,
+          "AP": 0.12879775866566845,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 1,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 10,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 17,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 24,
+              "positive_found": 3,
+              "recall": 0.42857142857142855,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        }
+      },
+      "by_date": {
+        "2020-11-03": {
+          "n": 926,
+          "positive": 1,
+          "prevalence": 0.0010799136069114472,
+          "AP": 0.006493506493506494,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 93,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.10043196544276457
+            },
+            "0.2": {
+              "selected": 186,
+              "positive_found": 1,
+              "recall": 1.0,
+              "random_expected_positive": 0.20086393088552915
+            },
+            "0.3": {
+              "selected": 278,
+              "positive_found": 1,
+              "recall": 1.0,
+              "random_expected_positive": 0.3002159827213823
+            }
+          }
+        },
+        "2020-11-04": {
+          "n": 71,
+          "positive": 7,
+          "prevalence": 0.09859154929577464,
+          "AP": 0.12879775866566845,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 1,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 8,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 15,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 22,
+              "positive_found": 3,
+              "recall": 0.42857142857142855,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        },
+        "2020-11-05": {
+          "n": 2,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-11-06": {
+          "n": 1,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        }
+      },
+      "excluding_startup_allowance": {
+        "n": 1000,
+        "positive": 8,
+        "prevalence": 0.008,
+        "AP": 0.11708400374474062,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 1,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 103,
+            "positive_found": 0,
+            "recall": 0.0,
+            "random_expected_positive": 0.8891643598089617
+          },
+          "0.2": {
+            "selected": 203,
+            "positive_found": 3,
+            "recall": 0.375,
+            "random_expected_positive": 1.6797371703221489
+          },
+          "0.3": {
+            "selected": 302,
+            "positive_found": 4,
+            "recall": 0.5,
+            "random_expected_positive": 2.4692300672284246
+          }
+        }
+      }
+    },
+    {
+      "split": "past_to_november",
+      "model": "RF",
+      "inputs": "physical_sensors",
+      "integrity": {
+        "train_n": 4230,
+        "train_positive": 52,
+        "test_n": 1000,
+        "test_positive": 8,
+        "train_dates": [
+          "2020-10-16",
+          "2020-10-19",
+          "2020-10-20",
+          "2020-10-21",
+          "2020-10-22",
+          "2020-10-23",
+          "2020-10-27",
+          "2020-10-29",
+          "2020-10-30"
+        ],
+        "test_dates": [
+          "2020-11-03",
+          "2020-11-04",
+          "2020-11-05",
+          "2020-11-06"
+        ],
+        "id_overlap": 0,
+        "shot_time_overlap": 0
+      },
+      "all": {
+        "n": 1000,
+        "positive": 8,
+        "prevalence": 0.008,
+        "AP": 0.04748379103856825,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 103,
+            "positive_found": 1,
+            "recall": 0.125,
+            "random_expected_positive": 0.8891643598089617
+          },
+          "0.2": {
+            "selected": 203,
+            "positive_found": 3,
+            "recall": 0.375,
+            "random_expected_positive": 1.6797371703221489
+          },
+          "0.3": {
+            "selected": 302,
+            "positive_found": 3,
+            "recall": 0.375,
+            "random_expected_positive": 2.4692300672284246
+          }
+        }
+      },
+      "by_product": {
+        "CN7": {
+          "n": 926,
+          "positive": 1,
+          "prevalence": 0.0010799136069114472,
+          "AP": 0.0010799136069114472,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 93,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.10043196544276457
+            },
+            "0.2": {
+              "selected": 186,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.20086393088552915
+            },
+            "0.3": {
+              "selected": 278,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.3002159827213823
+            }
+          }
+        },
+        "RG3": {
+          "n": 74,
+          "positive": 7,
+          "prevalence": 0.0945945945945946,
+          "AP": 0.15926827141112854,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 10,
+              "positive_found": 1,
+              "recall": 0.14285714285714285,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 17,
+              "positive_found": 3,
+              "recall": 0.42857142857142855,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 24,
+              "positive_found": 3,
+              "recall": 0.42857142857142855,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        }
+      },
+      "by_date": {
+        "2020-11-03": {
+          "n": 926,
+          "positive": 1,
+          "prevalence": 0.0010799136069114472,
+          "AP": 0.0010799136069114472,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 93,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.10043196544276457
+            },
+            "0.2": {
+              "selected": 186,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.20086393088552915
+            },
+            "0.3": {
+              "selected": 278,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.3002159827213823
+            }
+          }
+        },
+        "2020-11-04": {
+          "n": 71,
+          "positive": 7,
+          "prevalence": 0.09859154929577464,
+          "AP": 0.15926827141112856,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 8,
+              "positive_found": 1,
+              "recall": 0.14285714285714285,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 15,
+              "positive_found": 3,
+              "recall": 0.42857142857142855,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 22,
+              "positive_found": 3,
+              "recall": 0.42857142857142855,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        },
+        "2020-11-05": {
+          "n": 2,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-11-06": {
+          "n": 1,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        }
+      },
+      "excluding_startup_allowance": {
+        "n": 1000,
+        "positive": 8,
+        "prevalence": 0.008,
+        "AP": 0.04748379103856825,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 103,
+            "positive_found": 1,
+            "recall": 0.125,
+            "random_expected_positive": 0.8891643598089617
+          },
+          "0.2": {
+            "selected": 203,
+            "positive_found": 3,
+            "recall": 0.375,
+            "random_expected_positive": 1.6797371703221489
+          },
+          "0.3": {
+            "selected": 302,
+            "positive_found": 3,
+            "recall": 0.375,
+            "random_expected_positive": 2.4692300672284246
+          }
+        }
+      }
+    },
+    {
+      "split": "past_to_november",
+      "model": "HGB",
+      "inputs": "physical_sensors",
+      "integrity": {
+        "train_n": 4230,
+        "train_positive": 52,
+        "test_n": 1000,
+        "test_positive": 8,
+        "train_dates": [
+          "2020-10-16",
+          "2020-10-19",
+          "2020-10-20",
+          "2020-10-21",
+          "2020-10-22",
+          "2020-10-23",
+          "2020-10-27",
+          "2020-10-29",
+          "2020-10-30"
+        ],
+        "test_dates": [
+          "2020-11-03",
+          "2020-11-04",
+          "2020-11-05",
+          "2020-11-06"
+        ],
+        "id_overlap": 0,
+        "shot_time_overlap": 0
+      },
+      "all": {
+        "n": 1000,
+        "positive": 8,
+        "prevalence": 0.008,
+        "AP": 0.15298296836982966,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 103,
+            "positive_found": 1,
+            "recall": 0.125,
+            "random_expected_positive": 0.8891643598089617
+          },
+          "0.2": {
+            "selected": 203,
+            "positive_found": 2,
+            "recall": 0.25,
+            "random_expected_positive": 1.6797371703221489
+          },
+          "0.3": {
+            "selected": 302,
+            "positive_found": 4,
+            "recall": 0.5,
+            "random_expected_positive": 2.4692300672284246
+          }
+        }
+      },
+      "by_product": {
+        "CN7": {
+          "n": 926,
+          "positive": 1,
+          "prevalence": 0.0010799136069114472,
+          "AP": 0.005319148936170213,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 93,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.10043196544276457
+            },
+            "0.2": {
+              "selected": 186,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.20086393088552915
+            },
+            "0.3": {
+              "selected": 278,
+              "positive_found": 1,
+              "recall": 1.0,
+              "random_expected_positive": 0.3002159827213823
+            }
+          }
+        },
+        "RG3": {
+          "n": 74,
+          "positive": 7,
+          "prevalence": 0.0945945945945946,
+          "AP": 0.20299938157081013,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 10,
+              "positive_found": 1,
+              "recall": 0.14285714285714285,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 17,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 24,
+              "positive_found": 3,
+              "recall": 0.42857142857142855,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        }
+      },
+      "by_date": {
+        "2020-11-03": {
+          "n": 926,
+          "positive": 1,
+          "prevalence": 0.0010799136069114472,
+          "AP": 0.005319148936170213,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 93,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.10043196544276457
+            },
+            "0.2": {
+              "selected": 186,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.20086393088552915
+            },
+            "0.3": {
+              "selected": 278,
+              "positive_found": 1,
+              "recall": 1.0,
+              "random_expected_positive": 0.3002159827213823
+            }
+          }
+        },
+        "2020-11-04": {
+          "n": 71,
+          "positive": 7,
+          "prevalence": 0.09859154929577464,
+          "AP": 0.20323248180391038,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 8,
+              "positive_found": 1,
+              "recall": 0.14285714285714285,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 15,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 22,
+              "positive_found": 3,
+              "recall": 0.42857142857142855,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        },
+        "2020-11-05": {
+          "n": 2,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-11-06": {
+          "n": 1,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        }
+      },
+      "excluding_startup_allowance": {
+        "n": 1000,
+        "positive": 8,
+        "prevalence": 0.008,
+        "AP": 0.15298296836982966,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 103,
+            "positive_found": 1,
+            "recall": 0.125,
+            "random_expected_positive": 0.8891643598089617
+          },
+          "0.2": {
+            "selected": 203,
+            "positive_found": 2,
+            "recall": 0.25,
+            "random_expected_positive": 1.6797371703221489
+          },
+          "0.3": {
+            "selected": 302,
+            "positive_found": 4,
+            "recall": 0.5,
+            "random_expected_positive": 2.4692300672284246
+          }
+        }
+      }
+    },
+    {
+      "split": "past_to_november",
+      "model": "LR",
+      "inputs": "physical_sensors+part_name",
+      "integrity": {
+        "train_n": 4230,
+        "train_positive": 52,
+        "test_n": 1000,
+        "test_positive": 8,
+        "train_dates": [
+          "2020-10-16",
+          "2020-10-19",
+          "2020-10-20",
+          "2020-10-21",
+          "2020-10-22",
+          "2020-10-23",
+          "2020-10-27",
+          "2020-10-29",
+          "2020-10-30"
+        ],
+        "test_dates": [
+          "2020-11-03",
+          "2020-11-04",
+          "2020-11-05",
+          "2020-11-06"
+        ],
+        "id_overlap": 0,
+        "shot_time_overlap": 0
+      },
+      "all": {
+        "n": 1000,
+        "positive": 8,
+        "prevalence": 0.008,
+        "AP": 0.023584177310007677,
+        "precision_at_0_5": 0.06060606060606061,
+        "recall_at_0_5": 0.25,
+        "f1_at_0_5": 0.0975609756097561,
+        "flagged_at_0_5": 33,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 103,
+            "positive_found": 0,
+            "recall": 0.0,
+            "random_expected_positive": 0.8891643598089617
+          },
+          "0.2": {
+            "selected": 203,
+            "positive_found": 0,
+            "recall": 0.0,
+            "random_expected_positive": 1.6797371703221489
+          },
+          "0.3": {
+            "selected": 302,
+            "positive_found": 1,
+            "recall": 0.125,
+            "random_expected_positive": 2.4692300672284246
+          }
+        }
+      },
+      "by_product": {
+        "CN7": {
+          "n": 926,
+          "positive": 1,
+          "prevalence": 0.0010799136069114472,
+          "AP": 0.0030959752321981426,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 93,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.10043196544276457
+            },
+            "0.2": {
+              "selected": 186,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.20086393088552915
+            },
+            "0.3": {
+              "selected": 278,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.3002159827213823
+            }
+          }
+        },
+        "RG3": {
+          "n": 74,
+          "positive": 7,
+          "prevalence": 0.0945945945945946,
+          "AP": 0.09041007537789275,
+          "precision_at_0_5": 0.06060606060606061,
+          "recall_at_0_5": 0.2857142857142857,
+          "f1_at_0_5": 0.1,
+          "flagged_at_0_5": 33,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 10,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 17,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 24,
+              "positive_found": 1,
+              "recall": 0.14285714285714285,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        }
+      },
+      "by_date": {
+        "2020-11-03": {
+          "n": 926,
+          "positive": 1,
+          "prevalence": 0.0010799136069114472,
+          "AP": 0.0030959752321981426,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 93,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.10043196544276457
+            },
+            "0.2": {
+              "selected": 186,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.20086393088552915
+            },
+            "0.3": {
+              "selected": 278,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.3002159827213823
+            }
+          }
+        },
+        "2020-11-04": {
+          "n": 71,
+          "positive": 7,
+          "prevalence": 0.09859154929577464,
+          "AP": 0.09190574234128242,
+          "precision_at_0_5": 0.06060606060606061,
+          "recall_at_0_5": 0.2857142857142857,
+          "f1_at_0_5": 0.1,
+          "flagged_at_0_5": 33,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 8,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 15,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 22,
+              "positive_found": 1,
+              "recall": 0.14285714285714285,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        },
+        "2020-11-05": {
+          "n": 2,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-11-06": {
+          "n": 1,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        }
+      },
+      "excluding_startup_allowance": {
+        "n": 1000,
+        "positive": 8,
+        "prevalence": 0.008,
+        "AP": 0.023584177310007677,
+        "precision_at_0_5": 0.06060606060606061,
+        "recall_at_0_5": 0.25,
+        "f1_at_0_5": 0.0975609756097561,
+        "flagged_at_0_5": 33,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 103,
+            "positive_found": 0,
+            "recall": 0.0,
+            "random_expected_positive": 0.8891643598089617
+          },
+          "0.2": {
+            "selected": 203,
+            "positive_found": 0,
+            "recall": 0.0,
+            "random_expected_positive": 1.6797371703221489
+          },
+          "0.3": {
+            "selected": 302,
+            "positive_found": 1,
+            "recall": 0.125,
+            "random_expected_positive": 2.4692300672284246
+          }
+        }
+      }
+    },
+    {
+      "split": "past_to_november",
+      "model": "RF",
+      "inputs": "physical_sensors+part_name",
+      "integrity": {
+        "train_n": 4230,
+        "train_positive": 52,
+        "test_n": 1000,
+        "test_positive": 8,
+        "train_dates": [
+          "2020-10-16",
+          "2020-10-19",
+          "2020-10-20",
+          "2020-10-21",
+          "2020-10-22",
+          "2020-10-23",
+          "2020-10-27",
+          "2020-10-29",
+          "2020-10-30"
+        ],
+        "test_dates": [
+          "2020-11-03",
+          "2020-11-04",
+          "2020-11-05",
+          "2020-11-06"
+        ],
+        "id_overlap": 0,
+        "shot_time_overlap": 0
+      },
+      "all": {
+        "n": 1000,
+        "positive": 8,
+        "prevalence": 0.008,
+        "AP": 0.04325754340751331,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 103,
+            "positive_found": 0,
+            "recall": 0.0,
+            "random_expected_positive": 0.8891643598089617
+          },
+          "0.2": {
+            "selected": 203,
+            "positive_found": 2,
+            "recall": 0.25,
+            "random_expected_positive": 1.6797371703221489
+          },
+          "0.3": {
+            "selected": 302,
+            "positive_found": 2,
+            "recall": 0.25,
+            "random_expected_positive": 2.4692300672284246
+          }
+        }
+      },
+      "by_product": {
+        "CN7": {
+          "n": 926,
+          "positive": 1,
+          "prevalence": 0.0010799136069114472,
+          "AP": 0.0010799136069114472,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 93,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.10043196544276457
+            },
+            "0.2": {
+              "selected": 186,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.20086393088552915
+            },
+            "0.3": {
+              "selected": 278,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.3002159827213823
+            }
+          }
+        },
+        "RG3": {
+          "n": 74,
+          "positive": 7,
+          "prevalence": 0.0945945945945946,
+          "AP": 0.11168166191207665,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 10,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 17,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 24,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        }
+      },
+      "by_date": {
+        "2020-11-03": {
+          "n": 926,
+          "positive": 1,
+          "prevalence": 0.0010799136069114472,
+          "AP": 0.0010799136069114472,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 93,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.10043196544276457
+            },
+            "0.2": {
+              "selected": 186,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.20086393088552915
+            },
+            "0.3": {
+              "selected": 278,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.3002159827213823
+            }
+          }
+        },
+        "2020-11-04": {
+          "n": 71,
+          "positive": 7,
+          "prevalence": 0.09859154929577464,
+          "AP": 0.11168166191207665,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 8,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 15,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 22,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        },
+        "2020-11-05": {
+          "n": 2,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-11-06": {
+          "n": 1,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        }
+      },
+      "excluding_startup_allowance": {
+        "n": 1000,
+        "positive": 8,
+        "prevalence": 0.008,
+        "AP": 0.04325754340751331,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 103,
+            "positive_found": 0,
+            "recall": 0.0,
+            "random_expected_positive": 0.8891643598089617
+          },
+          "0.2": {
+            "selected": 203,
+            "positive_found": 2,
+            "recall": 0.25,
+            "random_expected_positive": 1.6797371703221489
+          },
+          "0.3": {
+            "selected": 302,
+            "positive_found": 2,
+            "recall": 0.25,
+            "random_expected_positive": 2.4692300672284246
+          }
+        }
+      }
+    },
+    {
+      "split": "past_to_november",
+      "model": "HGB",
+      "inputs": "physical_sensors+part_name",
+      "integrity": {
+        "train_n": 4230,
+        "train_positive": 52,
+        "test_n": 1000,
+        "test_positive": 8,
+        "train_dates": [
+          "2020-10-16",
+          "2020-10-19",
+          "2020-10-20",
+          "2020-10-21",
+          "2020-10-22",
+          "2020-10-23",
+          "2020-10-27",
+          "2020-10-29",
+          "2020-10-30"
+        ],
+        "test_dates": [
+          "2020-11-03",
+          "2020-11-04",
+          "2020-11-05",
+          "2020-11-06"
+        ],
+        "id_overlap": 0,
+        "shot_time_overlap": 0
+      },
+      "all": {
+        "n": 1000,
+        "positive": 8,
+        "prevalence": 0.008,
+        "AP": 0.07319761723809945,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 103,
+            "positive_found": 1,
+            "recall": 0.125,
+            "random_expected_positive": 0.8891643598089617
+          },
+          "0.2": {
+            "selected": 203,
+            "positive_found": 2,
+            "recall": 0.25,
+            "random_expected_positive": 1.6797371703221489
+          },
+          "0.3": {
+            "selected": 302,
+            "positive_found": 3,
+            "recall": 0.375,
+            "random_expected_positive": 2.4692300672284246
+          }
+        }
+      },
+      "by_product": {
+        "CN7": {
+          "n": 926,
+          "positive": 1,
+          "prevalence": 0.0010799136069114472,
+          "AP": 0.004405286343612335,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 93,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.10043196544276457
+            },
+            "0.2": {
+              "selected": 186,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.20086393088552915
+            },
+            "0.3": {
+              "selected": 278,
+              "positive_found": 1,
+              "recall": 1.0,
+              "random_expected_positive": 0.3002159827213823
+            }
+          }
+        },
+        "RG3": {
+          "n": 74,
+          "positive": 7,
+          "prevalence": 0.0945945945945946,
+          "AP": 0.11686656434899995,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 10,
+              "positive_found": 1,
+              "recall": 0.14285714285714285,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 17,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 24,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        }
+      },
+      "by_date": {
+        "2020-11-03": {
+          "n": 926,
+          "positive": 1,
+          "prevalence": 0.0010799136069114472,
+          "AP": 0.004405286343612335,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 93,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.10043196544276457
+            },
+            "0.2": {
+              "selected": 186,
+              "positive_found": 0,
+              "recall": 0.0,
+              "random_expected_positive": 0.20086393088552915
+            },
+            "0.3": {
+              "selected": 278,
+              "positive_found": 1,
+              "recall": 1.0,
+              "random_expected_positive": 0.3002159827213823
+            }
+          }
+        },
+        "2020-11-04": {
+          "n": 71,
+          "positive": 7,
+          "prevalence": 0.09859154929577464,
+          "AP": 0.11686656434899995,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 8,
+              "positive_found": 1,
+              "recall": 0.14285714285714285,
+              "random_expected_positive": 0.7887323943661971
+            },
+            "0.2": {
+              "selected": 15,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 1.4788732394366197
+            },
+            "0.3": {
+              "selected": 22,
+              "positive_found": 2,
+              "recall": 0.2857142857142857,
+              "random_expected_positive": 2.1690140845070425
+            }
+          }
+        },
+        "2020-11-05": {
+          "n": 2,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        },
+        "2020-11-06": {
+          "n": 1,
+          "positive": 0,
+          "prevalence": 0.0,
+          "AP": null,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.2": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            },
+            "0.3": {
+              "selected": 1,
+              "positive_found": 0,
+              "recall": null,
+              "random_expected_positive": 0.0
+            }
+          }
+        }
+      },
+      "excluding_startup_allowance": {
+        "n": 1000,
+        "positive": 8,
+        "prevalence": 0.008,
+        "AP": 0.07319761723809945,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 103,
+            "positive_found": 1,
+            "recall": 0.125,
+            "random_expected_positive": 0.8891643598089617
+          },
+          "0.2": {
+            "selected": 203,
+            "positive_found": 2,
+            "recall": 0.25,
+            "random_expected_positive": 1.6797371703221489
+          },
+          "0.3": {
+            "selected": 302,
+            "positive_found": 3,
+            "recall": 0.375,
+            "random_expected_positive": 2.4692300672284246
+          }
+        }
+      }
+    },
+    {
+      "split": "rg3_oct22_to_oct23",
+      "model": "part_name_prior",
+      "inputs": "known part name only",
+      "integrity": {
+        "train_n": 682,
+        "train_positive": 15,
+        "test_n": 500,
+        "test_positive": 10,
+        "train_dates": [
+          "2020-10-21",
+          "2020-10-22"
+        ],
+        "test_dates": [
+          "2020-10-23"
+        ],
+        "id_overlap": 0,
+        "shot_time_overlap": 0
+      },
+      "all": {
+        "n": 500,
+        "positive": 10,
+        "prevalence": 0.02,
+        "AP": 0.04,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 50,
+            "positive_found": 3,
+            "recall": 0.3,
+            "random_expected_positive": 1.0
+          },
+          "0.2": {
+            "selected": 100,
+            "positive_found": 4,
+            "recall": 0.4,
+            "random_expected_positive": 2.0
+          },
+          "0.3": {
+            "selected": 150,
+            "positive_found": 8,
+            "recall": 0.8,
+            "random_expected_positive": 3.0
+          }
+        }
+      }
+    },
+    {
+      "split": "rg3_oct22_to_oct23",
+      "model": "LR",
+      "inputs": "physical_sensors",
+      "integrity": {
+        "train_n": 682,
+        "train_positive": 15,
+        "test_n": 500,
+        "test_positive": 10,
+        "train_dates": [
+          "2020-10-21",
+          "2020-10-22"
+        ],
+        "test_dates": [
+          "2020-10-23"
+        ],
+        "id_overlap": 0,
+        "shot_time_overlap": 0
+      },
+      "all": {
+        "n": 500,
+        "positive": 10,
+        "prevalence": 0.02,
+        "AP": 0.018505554477937107,
+        "precision_at_0_5": 0.015418502202643172,
+        "recall_at_0_5": 0.7,
+        "f1_at_0_5": 0.03017241379310345,
+        "flagged_at_0_5": 454,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 50,
+            "positive_found": 1,
+            "recall": 0.1,
+            "random_expected_positive": 1.0
+          },
+          "0.2": {
+            "selected": 100,
+            "positive_found": 1,
+            "recall": 0.1,
+            "random_expected_positive": 2.0
+          },
+          "0.3": {
+            "selected": 150,
+            "positive_found": 2,
+            "recall": 0.2,
+            "random_expected_positive": 3.0
+          }
+        }
+      },
+      "by_product": {
+        "RG3": {
+          "n": 500,
+          "positive": 10,
+          "prevalence": 0.02,
+          "AP": 0.018505554477937107,
+          "precision_at_0_5": 0.015418502202643172,
+          "recall_at_0_5": 0.7,
+          "f1_at_0_5": 0.03017241379310345,
+          "flagged_at_0_5": 454,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 50,
+              "positive_found": 1,
+              "recall": 0.1,
+              "random_expected_positive": 1.0
+            },
+            "0.2": {
+              "selected": 100,
+              "positive_found": 1,
+              "recall": 0.1,
+              "random_expected_positive": 2.0
+            },
+            "0.3": {
+              "selected": 150,
+              "positive_found": 2,
+              "recall": 0.2,
+              "random_expected_positive": 3.0
+            }
+          }
+        }
+      },
+      "by_date": {
+        "2020-10-23": {
+          "n": 500,
+          "positive": 10,
+          "prevalence": 0.02,
+          "AP": 0.018505554477937107,
+          "precision_at_0_5": 0.015418502202643172,
+          "recall_at_0_5": 0.7,
+          "f1_at_0_5": 0.03017241379310345,
+          "flagged_at_0_5": 454,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 50,
+              "positive_found": 1,
+              "recall": 0.1,
+              "random_expected_positive": 1.0
+            },
+            "0.2": {
+              "selected": 100,
+              "positive_found": 1,
+              "recall": 0.1,
+              "random_expected_positive": 2.0
+            },
+            "0.3": {
+              "selected": 150,
+              "positive_found": 2,
+              "recall": 0.2,
+              "random_expected_positive": 3.0
+            }
+          }
+        }
+      },
+      "excluding_startup_allowance": {
+        "n": 500,
+        "positive": 10,
+        "prevalence": 0.02,
+        "AP": 0.018505554477937107,
+        "precision_at_0_5": 0.015418502202643172,
+        "recall_at_0_5": 0.7,
+        "f1_at_0_5": 0.03017241379310345,
+        "flagged_at_0_5": 454,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 50,
+            "positive_found": 1,
+            "recall": 0.1,
+            "random_expected_positive": 1.0
+          },
+          "0.2": {
+            "selected": 100,
+            "positive_found": 1,
+            "recall": 0.1,
+            "random_expected_positive": 2.0
+          },
+          "0.3": {
+            "selected": 150,
+            "positive_found": 2,
+            "recall": 0.2,
+            "random_expected_positive": 3.0
+          }
+        }
+      }
+    },
+    {
+      "split": "rg3_oct22_to_oct23",
+      "model": "RF",
+      "inputs": "physical_sensors",
+      "integrity": {
+        "train_n": 682,
+        "train_positive": 15,
+        "test_n": 500,
+        "test_positive": 10,
+        "train_dates": [
+          "2020-10-21",
+          "2020-10-22"
+        ],
+        "test_dates": [
+          "2020-10-23"
+        ],
+        "id_overlap": 0,
+        "shot_time_overlap": 0
+      },
+      "all": {
+        "n": 500,
+        "positive": 10,
+        "prevalence": 0.02,
+        "AP": 0.03350931361380277,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 50,
+            "positive_found": 3,
+            "recall": 0.3,
+            "random_expected_positive": 1.0
+          },
+          "0.2": {
+            "selected": 100,
+            "positive_found": 3,
+            "recall": 0.3,
+            "random_expected_positive": 2.0
+          },
+          "0.3": {
+            "selected": 150,
+            "positive_found": 3,
+            "recall": 0.3,
+            "random_expected_positive": 3.0
+          }
+        }
+      },
+      "by_product": {
+        "RG3": {
+          "n": 500,
+          "positive": 10,
+          "prevalence": 0.02,
+          "AP": 0.03350931361380277,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 50,
+              "positive_found": 3,
+              "recall": 0.3,
+              "random_expected_positive": 1.0
+            },
+            "0.2": {
+              "selected": 100,
+              "positive_found": 3,
+              "recall": 0.3,
+              "random_expected_positive": 2.0
+            },
+            "0.3": {
+              "selected": 150,
+              "positive_found": 3,
+              "recall": 0.3,
+              "random_expected_positive": 3.0
+            }
+          }
+        }
+      },
+      "by_date": {
+        "2020-10-23": {
+          "n": 500,
+          "positive": 10,
+          "prevalence": 0.02,
+          "AP": 0.03350931361380277,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 50,
+              "positive_found": 3,
+              "recall": 0.3,
+              "random_expected_positive": 1.0
+            },
+            "0.2": {
+              "selected": 100,
+              "positive_found": 3,
+              "recall": 0.3,
+              "random_expected_positive": 2.0
+            },
+            "0.3": {
+              "selected": 150,
+              "positive_found": 3,
+              "recall": 0.3,
+              "random_expected_positive": 3.0
+            }
+          }
+        }
+      },
+      "excluding_startup_allowance": {
+        "n": 500,
+        "positive": 10,
+        "prevalence": 0.02,
+        "AP": 0.03350931361380277,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 50,
+            "positive_found": 3,
+            "recall": 0.3,
+            "random_expected_positive": 1.0
+          },
+          "0.2": {
+            "selected": 100,
+            "positive_found": 3,
+            "recall": 0.3,
+            "random_expected_positive": 2.0
+          },
+          "0.3": {
+            "selected": 150,
+            "positive_found": 3,
+            "recall": 0.3,
+            "random_expected_positive": 3.0
+          }
+        }
+      }
+    },
+    {
+      "split": "rg3_oct22_to_oct23",
+      "model": "HGB",
+      "inputs": "physical_sensors",
+      "integrity": {
+        "train_n": 682,
+        "train_positive": 15,
+        "test_n": 500,
+        "test_positive": 10,
+        "train_dates": [
+          "2020-10-21",
+          "2020-10-22"
+        ],
+        "test_dates": [
+          "2020-10-23"
+        ],
+        "id_overlap": 0,
+        "shot_time_overlap": 0
+      },
+      "all": {
+        "n": 500,
+        "positive": 10,
+        "prevalence": 0.02,
+        "AP": 0.036899452073068335,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 50,
+            "positive_found": 2,
+            "recall": 0.2,
+            "random_expected_positive": 1.0
+          },
+          "0.2": {
+            "selected": 100,
+            "positive_found": 2,
+            "recall": 0.2,
+            "random_expected_positive": 2.0
+          },
+          "0.3": {
+            "selected": 150,
+            "positive_found": 2,
+            "recall": 0.2,
+            "random_expected_positive": 3.0
+          }
+        }
+      },
+      "by_product": {
+        "RG3": {
+          "n": 500,
+          "positive": 10,
+          "prevalence": 0.02,
+          "AP": 0.036899452073068335,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 50,
+              "positive_found": 2,
+              "recall": 0.2,
+              "random_expected_positive": 1.0
+            },
+            "0.2": {
+              "selected": 100,
+              "positive_found": 2,
+              "recall": 0.2,
+              "random_expected_positive": 2.0
+            },
+            "0.3": {
+              "selected": 150,
+              "positive_found": 2,
+              "recall": 0.2,
+              "random_expected_positive": 3.0
+            }
+          }
+        }
+      },
+      "by_date": {
+        "2020-10-23": {
+          "n": 500,
+          "positive": 10,
+          "prevalence": 0.02,
+          "AP": 0.036899452073068335,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 50,
+              "positive_found": 2,
+              "recall": 0.2,
+              "random_expected_positive": 1.0
+            },
+            "0.2": {
+              "selected": 100,
+              "positive_found": 2,
+              "recall": 0.2,
+              "random_expected_positive": 2.0
+            },
+            "0.3": {
+              "selected": 150,
+              "positive_found": 2,
+              "recall": 0.2,
+              "random_expected_positive": 3.0
+            }
+          }
+        }
+      },
+      "excluding_startup_allowance": {
+        "n": 500,
+        "positive": 10,
+        "prevalence": 0.02,
+        "AP": 0.036899452073068335,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 50,
+            "positive_found": 2,
+            "recall": 0.2,
+            "random_expected_positive": 1.0
+          },
+          "0.2": {
+            "selected": 100,
+            "positive_found": 2,
+            "recall": 0.2,
+            "random_expected_positive": 2.0
+          },
+          "0.3": {
+            "selected": 150,
+            "positive_found": 2,
+            "recall": 0.2,
+            "random_expected_positive": 3.0
+          }
+        }
+      }
+    },
+    {
+      "split": "rg3_oct22_to_oct23",
+      "model": "LR",
+      "inputs": "physical_sensors+part_name",
+      "integrity": {
+        "train_n": 682,
+        "train_positive": 15,
+        "test_n": 500,
+        "test_positive": 10,
+        "train_dates": [
+          "2020-10-21",
+          "2020-10-22"
+        ],
+        "test_dates": [
+          "2020-10-23"
+        ],
+        "id_overlap": 0,
+        "shot_time_overlap": 0
+      },
+      "all": {
+        "n": 500,
+        "positive": 10,
+        "prevalence": 0.02,
+        "AP": 0.03336545940898348,
+        "precision_at_0_5": 0.02875399361022364,
+        "recall_at_0_5": 0.9,
+        "f1_at_0_5": 0.05572755417956656,
+        "flagged_at_0_5": 313,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 50,
+            "positive_found": 2,
+            "recall": 0.2,
+            "random_expected_positive": 1.0
+          },
+          "0.2": {
+            "selected": 100,
+            "positive_found": 3,
+            "recall": 0.3,
+            "random_expected_positive": 2.0
+          },
+          "0.3": {
+            "selected": 150,
+            "positive_found": 4,
+            "recall": 0.4,
+            "random_expected_positive": 3.0
+          }
+        }
+      },
+      "by_product": {
+        "RG3": {
+          "n": 500,
+          "positive": 10,
+          "prevalence": 0.02,
+          "AP": 0.03336545940898348,
+          "precision_at_0_5": 0.02875399361022364,
+          "recall_at_0_5": 0.9,
+          "f1_at_0_5": 0.05572755417956656,
+          "flagged_at_0_5": 313,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 50,
+              "positive_found": 2,
+              "recall": 0.2,
+              "random_expected_positive": 1.0
+            },
+            "0.2": {
+              "selected": 100,
+              "positive_found": 3,
+              "recall": 0.3,
+              "random_expected_positive": 2.0
+            },
+            "0.3": {
+              "selected": 150,
+              "positive_found": 4,
+              "recall": 0.4,
+              "random_expected_positive": 3.0
+            }
+          }
+        }
+      },
+      "by_date": {
+        "2020-10-23": {
+          "n": 500,
+          "positive": 10,
+          "prevalence": 0.02,
+          "AP": 0.03336545940898348,
+          "precision_at_0_5": 0.02875399361022364,
+          "recall_at_0_5": 0.9,
+          "f1_at_0_5": 0.05572755417956656,
+          "flagged_at_0_5": 313,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 50,
+              "positive_found": 2,
+              "recall": 0.2,
+              "random_expected_positive": 1.0
+            },
+            "0.2": {
+              "selected": 100,
+              "positive_found": 3,
+              "recall": 0.3,
+              "random_expected_positive": 2.0
+            },
+            "0.3": {
+              "selected": 150,
+              "positive_found": 4,
+              "recall": 0.4,
+              "random_expected_positive": 3.0
+            }
+          }
+        }
+      },
+      "excluding_startup_allowance": {
+        "n": 500,
+        "positive": 10,
+        "prevalence": 0.02,
+        "AP": 0.03336545940898348,
+        "precision_at_0_5": 0.02875399361022364,
+        "recall_at_0_5": 0.9,
+        "f1_at_0_5": 0.05572755417956656,
+        "flagged_at_0_5": 313,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 50,
+            "positive_found": 2,
+            "recall": 0.2,
+            "random_expected_positive": 1.0
+          },
+          "0.2": {
+            "selected": 100,
+            "positive_found": 3,
+            "recall": 0.3,
+            "random_expected_positive": 2.0
+          },
+          "0.3": {
+            "selected": 150,
+            "positive_found": 4,
+            "recall": 0.4,
+            "random_expected_positive": 3.0
+          }
+        }
+      }
+    },
+    {
+      "split": "rg3_oct22_to_oct23",
+      "model": "RF",
+      "inputs": "physical_sensors+part_name",
+      "integrity": {
+        "train_n": 682,
+        "train_positive": 15,
+        "test_n": 500,
+        "test_positive": 10,
+        "train_dates": [
+          "2020-10-21",
+          "2020-10-22"
+        ],
+        "test_dates": [
+          "2020-10-23"
+        ],
+        "id_overlap": 0,
+        "shot_time_overlap": 0
+      },
+      "all": {
+        "n": 500,
+        "positive": 10,
+        "prevalence": 0.02,
+        "AP": 0.07618879692933227,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 50,
+            "positive_found": 3,
+            "recall": 0.3,
+            "random_expected_positive": 1.0
+          },
+          "0.2": {
+            "selected": 100,
+            "positive_found": 3,
+            "recall": 0.3,
+            "random_expected_positive": 2.0
+          },
+          "0.3": {
+            "selected": 150,
+            "positive_found": 4,
+            "recall": 0.4,
+            "random_expected_positive": 3.0
+          }
+        }
+      },
+      "by_product": {
+        "RG3": {
+          "n": 500,
+          "positive": 10,
+          "prevalence": 0.02,
+          "AP": 0.07618879692933227,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 50,
+              "positive_found": 3,
+              "recall": 0.3,
+              "random_expected_positive": 1.0
+            },
+            "0.2": {
+              "selected": 100,
+              "positive_found": 3,
+              "recall": 0.3,
+              "random_expected_positive": 2.0
+            },
+            "0.3": {
+              "selected": 150,
+              "positive_found": 4,
+              "recall": 0.4,
+              "random_expected_positive": 3.0
+            }
+          }
+        }
+      },
+      "by_date": {
+        "2020-10-23": {
+          "n": 500,
+          "positive": 10,
+          "prevalence": 0.02,
+          "AP": 0.07618879692933227,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 50,
+              "positive_found": 3,
+              "recall": 0.3,
+              "random_expected_positive": 1.0
+            },
+            "0.2": {
+              "selected": 100,
+              "positive_found": 3,
+              "recall": 0.3,
+              "random_expected_positive": 2.0
+            },
+            "0.3": {
+              "selected": 150,
+              "positive_found": 4,
+              "recall": 0.4,
+              "random_expected_positive": 3.0
+            }
+          }
+        }
+      },
+      "excluding_startup_allowance": {
+        "n": 500,
+        "positive": 10,
+        "prevalence": 0.02,
+        "AP": 0.07618879692933227,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 50,
+            "positive_found": 3,
+            "recall": 0.3,
+            "random_expected_positive": 1.0
+          },
+          "0.2": {
+            "selected": 100,
+            "positive_found": 3,
+            "recall": 0.3,
+            "random_expected_positive": 2.0
+          },
+          "0.3": {
+            "selected": 150,
+            "positive_found": 4,
+            "recall": 0.4,
+            "random_expected_positive": 3.0
+          }
+        }
+      }
+    },
+    {
+      "split": "rg3_oct22_to_oct23",
+      "model": "HGB",
+      "inputs": "physical_sensors+part_name",
+      "integrity": {
+        "train_n": 682,
+        "train_positive": 15,
+        "test_n": 500,
+        "test_positive": 10,
+        "train_dates": [
+          "2020-10-21",
+          "2020-10-22"
+        ],
+        "test_dates": [
+          "2020-10-23"
+        ],
+        "id_overlap": 0,
+        "shot_time_overlap": 0
+      },
+      "all": {
+        "n": 500,
+        "positive": 10,
+        "prevalence": 0.02,
+        "AP": 0.07659422346193535,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 50,
+            "positive_found": 2,
+            "recall": 0.2,
+            "random_expected_positive": 1.0
+          },
+          "0.2": {
+            "selected": 100,
+            "positive_found": 2,
+            "recall": 0.2,
+            "random_expected_positive": 2.0
+          },
+          "0.3": {
+            "selected": 150,
+            "positive_found": 4,
+            "recall": 0.4,
+            "random_expected_positive": 3.0
+          }
+        }
+      },
+      "by_product": {
+        "RG3": {
+          "n": 500,
+          "positive": 10,
+          "prevalence": 0.02,
+          "AP": 0.07659422346193535,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 50,
+              "positive_found": 2,
+              "recall": 0.2,
+              "random_expected_positive": 1.0
+            },
+            "0.2": {
+              "selected": 100,
+              "positive_found": 2,
+              "recall": 0.2,
+              "random_expected_positive": 2.0
+            },
+            "0.3": {
+              "selected": 150,
+              "positive_found": 4,
+              "recall": 0.4,
+              "random_expected_positive": 3.0
+            }
+          }
+        }
+      },
+      "by_date": {
+        "2020-10-23": {
+          "n": 500,
+          "positive": 10,
+          "prevalence": 0.02,
+          "AP": 0.07659422346193535,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "f1_at_0_5": 0.0,
+          "flagged_at_0_5": 0,
+          "inspection_budgets": {
+            "0.1": {
+              "selected": 50,
+              "positive_found": 2,
+              "recall": 0.2,
+              "random_expected_positive": 1.0
+            },
+            "0.2": {
+              "selected": 100,
+              "positive_found": 2,
+              "recall": 0.2,
+              "random_expected_positive": 2.0
+            },
+            "0.3": {
+              "selected": 150,
+              "positive_found": 4,
+              "recall": 0.4,
+              "random_expected_positive": 3.0
+            }
+          }
+        }
+      },
+      "excluding_startup_allowance": {
+        "n": 500,
+        "positive": 10,
+        "prevalence": 0.02,
+        "AP": 0.07659422346193535,
+        "precision_at_0_5": 0.0,
+        "recall_at_0_5": 0.0,
+        "f1_at_0_5": 0.0,
+        "flagged_at_0_5": 0,
+        "inspection_budgets": {
+          "0.1": {
+            "selected": 50,
+            "positive_found": 2,
+            "recall": 0.2,
+            "random_expected_positive": 1.0
+          },
+          "0.2": {
+            "selected": 100,
+            "positive_found": 2,
+            "recall": 0.2,
+            "random_expected_positive": 2.0
+          },
+          "0.3": {
+            "selected": 150,
+            "positive_found": 4,
+            "recall": 0.4,
+            "random_expected_positive": 3.0
+          }
+        }
+      }
+    }
+  ]
+}

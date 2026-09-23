@@ -1,0 +1,26 @@
+{
+  "explicit_limit": "Contest task 5 raw CSV was reacquired from official public attachment 8081 and tested; most extra guides/archives remain cloud-only.",
+  "guides_read": [
+    46
+  ],
+  "xml_complete_read_count": 7648,
+  "image_decode_sample_count": 3,
+  "actual_image_view_count": 1,
+  "verified_zeros": [
+    12,
+    25
+  ],
+  "pending": [
+    41,
+    46,
+    26,
+    30,
+    36,
+    37
+  ],
+  "raw29": "raw29.json",
+  "contest_raw_read": [
+    27
+  ],
+  "forecasts": "energy_forecast_results.json"
+}

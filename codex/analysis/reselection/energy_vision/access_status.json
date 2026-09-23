@@ -1,0 +1,117 @@
+[
+  {
+    "name": "Guidebook_표면처리 자원최적화 AI 데이터셋.pdf",
+    "bytes": 8772579,
+    "flags": "0x40000060"
+  },
+  {
+    "name": "Dataset_정밀가공 자원최적화 AI 데이터셋.zip",
+    "bytes": 3759959,
+    "flags": "0x40000060"
+  },
+  {
+    "name": "Guidebook_품질 이상탐지, 진단(크로메이트) AI 데이터셋.pdf",
+    "bytes": 12840749,
+    "flags": "0x40000060"
+  },
+  {
+    "name": "12. Guidebook_XrayInspection.pdf",
+    "bytes": 10041335,
+    "flags": "0x40000060"
+  },
+  {
+    "name": "Guidebook_정밀가공 자원최적화 AI 데이터셋.pdf",
+    "bytes": 10837259,
+    "flags": "0x40"
+  },
+  {
+    "name": "Dataset_사출성형 공급망최적화 AI 데이터셋.zip",
+    "bytes": 592954,
+    "flags": "0x40000060"
+  },
+  {
+    "name": "Dataset_자원 최적화 AI 데이터셋.zip",
+    "bytes": 108161,
+    "flags": "0x40000060"
+  },
+  {
+    "name": "Dataset_공급망 최적화 AI 데이터셋.zip",
+    "bytes": 1055117,
+    "flags": "0x40000060"
+  },
+  {
+    "name": "Dataset_표면처리 자원최적화 AI 데이터셋.zip",
+    "bytes": 271064,
+    "flags": "0x40000060"
+  },
+  {
+    "name": "Guidebook_열처리 공급망최적화 AI 데이터셋.pdf",
+    "bytes": 14770051,
+    "flags": "0x40000060"
+  },
+  {
+    "name": "Dataset_표면처리 공급망최적화 AI 데이터셋.zip",
+    "bytes": 5504,
+    "flags": "0x40000060"
+  },
+  {
+    "name": "Guidebook_사출성형 공급망최적화 AI 데이터셋.pdf",
+    "bytes": 13173970,
+    "flags": "0x40000060"
+  },
+  {
+    "name": "Dataset_소성가공 자원최적화 AI 데이터셋.zip",
+    "bytes": 1451234,
+    "flags": "0x40000060"
+  },
+  {
+    "name": "12. Dataset_XrayInspection.zip",
+    "bytes": 0,
+    "flags": "0x40000060"
+  },
+  {
+    "name": "Guidebook_생산계획 최적화 AI 데이터셋.pdf",
+    "bytes": 7306571,
+    "flags": "0x40000060"
+  },
+  {
+    "name": "Dataset_품질 이상탐지 진단(크로메이트) AI 데이터셋.zip",
+    "bytes": 0,
+    "flags": "0x40000060"
+  },
+  {
+    "name": "Guidebook_제조현장 안전관리 AI 데이터셋.pdf",
+    "bytes": 10485362,
+    "flags": "0x40000060"
+  },
+  {
+    "name": "Dataset_열처리 공급망최적화 AI 데이터셋.zip",
+    "bytes": 3207,
+    "flags": "0x40000060"
+  },
+  {
+    "name": "Dataset_생산계획 최적화 AI 데이터셋.zip",
+    "bytes": 2946398,
+    "flags": "0x40000060"
+  },
+  {
+    "name": "Guidebook_자원 최적화 AI 데이터셋.pdf",
+    "bytes": 6881474,
+    "flags": "0x40000060"
+  },
+  {
+    "name": "Guidebook_표면처리 공급망최적화 AI 데이터셋.pdf",
+    "bytes": 13507116,
+    "flags": "0x40000060"
+  },
+  {
+    "name": "Guidebook_공급망 최적화 AI 데이터셋.pdf",
+    "bytes": 5378091,
+    "flags": "0x40000060"
+  },
+  {
+    "name": "Guidebook_소성가공 자원최적화 AI 데이터셋.pdf",
+    "bytes": 7428238,
+    "flags": "0x40"
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "cn7": {
+    "shared_equipment_timestamp_part_keys": 1210,
+    "unique_labeled_id": 1210,
+    "unique_unlabeled_id": 1210,
+    "sensor_max_difference_median": 2.6855468718167685e-05,
+    "sensor_max_difference_max": 2.6855468718167685e-05,
+    "all_24_features_absdiff_under_0_0001_rows": 1210,
+    "matching_key_bad_labels": 17
+  },
+  "rg3": {
+    "shared_equipment_timestamp_part_keys": 774,
+    "unique_labeled_id": 774,
+    "unique_unlabeled_id": 774,
+    "sensor_max_difference_median": 1.2207031261368684e-05,
+    "sensor_max_difference_max": 2.929687502728484e-05,
+    "all_24_features_absdiff_under_0_0001_rows": 774,
+    "matching_key_bad_labels": 16
+  }
+}

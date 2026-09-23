@@ -1,0 +1,252 @@
+{
+  "source_archive": "데이터셋/미확인 761196.crdownload",
+  "file_counts": {
+    "error": 13,
+    "normal": 170
+  },
+  "unique_byte_hashes": 43,
+  "normal_unique_byte_hashes": 30,
+  "error_unique_byte_hashes": 13,
+  "duplicate_hash_groups": {
+    "126df143fe1f19d1e0577647d98cb04b4250009fd523cbdc42932c239299565a": [
+      "data/FAN_sound_OK/FAN_sound_01.wav",
+      "data/FAN_sound_OK/FAN_sound_131.wav",
+      "data/FAN_sound_OK/FAN_sound_50.wav",
+      "data/FAN_sound_OK/FAN_sound_70.wav",
+      "data/FAN_sound_OK/FAN_sound_81.wav"
+    ],
+    "a740535c471b3bd342bfbe38cb260688314812d6c0dfcac4cd0e1156df1d2f3d": [
+      "data/FAN_sound_OK/FAN_sound_02.wav",
+      "data/FAN_sound_OK/FAN_sound_132.wav",
+      "data/FAN_sound_OK/FAN_sound_51.wav",
+      "data/FAN_sound_OK/FAN_sound_71.wav",
+      "data/FAN_sound_OK/FAN_sound_82.wav"
+    ],
+    "c07bc2fc183c72b6bfed85f9084591dcc3f1819ef0f879b38ea310eb752fef36": [
+      "data/FAN_sound_OK/FAN_sound_03.wav",
+      "data/FAN_sound_OK/FAN_sound_133.wav",
+      "data/FAN_sound_OK/FAN_sound_52.wav",
+      "data/FAN_sound_OK/FAN_sound_72.wav",
+      "data/FAN_sound_OK/FAN_sound_83.wav"
+    ],
+    "6c8b9ee3f941693ff66bd51138016fd3e2f3341aabc62268124766dc6697a683": [
+      "data/FAN_sound_OK/FAN_sound_04.wav",
+      "data/FAN_sound_OK/FAN_sound_134.wav",
+      "data/FAN_sound_OK/FAN_sound_53.wav",
+      "data/FAN_sound_OK/FAN_sound_73.wav",
+      "data/FAN_sound_OK/FAN_sound_84.wav"
+    ],
+    "e392e8d8f4f870f1ea25b1ded14c6da23ef0fdc875bc795a800a1122e24d4ab0": [
+      "data/FAN_sound_OK/FAN_sound_05.wav",
+      "data/FAN_sound_OK/FAN_sound_135.wav",
+      "data/FAN_sound_OK/FAN_sound_54.wav",
+      "data/FAN_sound_OK/FAN_sound_74.wav",
+      "data/FAN_sound_OK/FAN_sound_85.wav"
+    ],
+    "70069748eb3a1440ae27e1b2192024c835e3052700fe7ab6dd66f56c01b724e4": [
+      "data/FAN_sound_OK/FAN_sound_06.wav",
+      "data/FAN_sound_OK/FAN_sound_136.wav",
+      "data/FAN_sound_OK/FAN_sound_55.wav",
+      "data/FAN_sound_OK/FAN_sound_75.wav",
+      "data/FAN_sound_OK/FAN_sound_86.wav"
+    ],
+    "8fd40ca16d4e15d4379f6cbc451cc40aaa5805f34845a77bcdc5410c6dcfa55e": [
+      "data/FAN_sound_OK/FAN_sound_07.wav",
+      "data/FAN_sound_OK/FAN_sound_137.wav",
+      "data/FAN_sound_OK/FAN_sound_56.wav",
+      "data/FAN_sound_OK/FAN_sound_76.wav",
+      "data/FAN_sound_OK/FAN_sound_87.wav"
+    ],
+    "5cccce99a66cfb9ec9ae61d66b3f70b401a5503d441c3068946d8bc8b7d0481e": [
+      "data/FAN_sound_OK/FAN_sound_08.wav",
+      "data/FAN_sound_OK/FAN_sound_138.wav",
+      "data/FAN_sound_OK/FAN_sound_57.wav",
+      "data/FAN_sound_OK/FAN_sound_77.wav",
+      "data/FAN_sound_OK/FAN_sound_88.wav"
+    ],
+    "096af5fd0d91524841a991b090d6f026355b2e5f36ee620b4a1c22b467912020": [
+      "data/FAN_sound_OK/FAN_sound_09.wav",
+      "data/FAN_sound_OK/FAN_sound_139.wav",
+      "data/FAN_sound_OK/FAN_sound_58.wav",
+      "data/FAN_sound_OK/FAN_sound_78.wav",
+      "data/FAN_sound_OK/FAN_sound_89.wav"
+    ],
+    "b2682c13c4973e6fd47de9f9016f15cb55aae20f682b73cb3f64571e8613ce10": [
+      "data/FAN_sound_OK/FAN_sound_10.wav",
+      "data/FAN_sound_OK/FAN_sound_140.wav",
+      "data/FAN_sound_OK/FAN_sound_59.wav",
+      "data/FAN_sound_OK/FAN_sound_79.wav",
+      "data/FAN_sound_OK/FAN_sound_90.wav"
+    ],
+    "c7613840a2ec7860c5c75a5055b27284c66652f16ea7923977dbe842302a639e": [
+      "data/FAN_sound_OK/FAN_sound_100.wav",
+      "data/FAN_sound_OK/FAN_sound_119.wav",
+      "data/FAN_sound_OK/FAN_sound_129.wav",
+      "data/FAN_sound_OK/FAN_sound_150.wav",
+      "data/FAN_sound_OK/FAN_sound_169.wav",
+      "data/FAN_sound_OK/FAN_sound_20.wav",
+      "data/FAN_sound_OK/FAN_sound_39.wav"
+    ],
+    "0bf08efecbb5b648a4c98474cc27a703125f9b2953c37294c3d20731eca2570c": [
+      "data/FAN_sound_OK/FAN_sound_101.wav",
+      "data/FAN_sound_OK/FAN_sound_120.wav",
+      "data/FAN_sound_OK/FAN_sound_130.wav",
+      "data/FAN_sound_OK/FAN_sound_151.wav",
+      "data/FAN_sound_OK/FAN_sound_170.wav",
+      "data/FAN_sound_OK/FAN_sound_21.wav",
+      "data/FAN_sound_OK/FAN_sound_40.wav"
+    ],
+    "1ee16a23dd0b3f93f51084ab203e40771fae1ab511abc60b4284cf6c81a662de": [
+      "data/FAN_sound_OK/FAN_sound_102.wav",
+      "data/FAN_sound_OK/FAN_sound_152.wav",
+      "data/FAN_sound_OK/FAN_sound_22.wav",
+      "data/FAN_sound_OK/FAN_sound_41.wav",
+      "data/FAN_sound_OK/FAN_sound_61.wav"
+    ],
+    "c7d9c51881945df09c248d0990adebae06cea74505484ae00e6ff90456a05742": [
+      "data/FAN_sound_OK/FAN_sound_103.wav",
+      "data/FAN_sound_OK/FAN_sound_153.wav",
+      "data/FAN_sound_OK/FAN_sound_23.wav",
+      "data/FAN_sound_OK/FAN_sound_42.wav",
+      "data/FAN_sound_OK/FAN_sound_62.wav"
+    ],
+    "9c53d2c82126742975dffdda72438a46c83bdc8adbd70cd1c3d6985110440f2c": [
+      "data/FAN_sound_OK/FAN_sound_104.wav",
+      "data/FAN_sound_OK/FAN_sound_154.wav",
+      "data/FAN_sound_OK/FAN_sound_24.wav",
+      "data/FAN_sound_OK/FAN_sound_43.wav",
+      "data/FAN_sound_OK/FAN_sound_63.wav"
+    ],
+    "4d23b3355886670a407734bd404eddd7979d0761b867f31ecceed5898c534c9e": [
+      "data/FAN_sound_OK/FAN_sound_105.wav",
+      "data/FAN_sound_OK/FAN_sound_155.wav",
+      "data/FAN_sound_OK/FAN_sound_25.wav",
+      "data/FAN_sound_OK/FAN_sound_44.wav",
+      "data/FAN_sound_OK/FAN_sound_64.wav"
+    ],
+    "8a7237b5143e49eeced23bb2f31a02b4b58599e19f5331c0f31ca2081c27d362": [
+      "data/FAN_sound_OK/FAN_sound_106.wav",
+      "data/FAN_sound_OK/FAN_sound_156.wav",
+      "data/FAN_sound_OK/FAN_sound_26.wav",
+      "data/FAN_sound_OK/FAN_sound_45.wav",
+      "data/FAN_sound_OK/FAN_sound_65.wav"
+    ],
+    "f6a0a8c8b4fbf24dec4e3e91612de88c4d7d9ba46fefebe991fdefa406d9f1b6": [
+      "data/FAN_sound_OK/FAN_sound_107.wav",
+      "data/FAN_sound_OK/FAN_sound_157.wav",
+      "data/FAN_sound_OK/FAN_sound_27.wav",
+      "data/FAN_sound_OK/FAN_sound_46.wav",
+      "data/FAN_sound_OK/FAN_sound_66.wav"
+    ],
+    "f180a56dbaf66cf814dc688b5e41a0abcd585e9e0eaff63594b1074b472e9b27": [
+      "data/FAN_sound_OK/FAN_sound_108.wav",
+      "data/FAN_sound_OK/FAN_sound_158.wav",
+      "data/FAN_sound_OK/FAN_sound_28.wav",
+      "data/FAN_sound_OK/FAN_sound_47.wav",
+      "data/FAN_sound_OK/FAN_sound_67.wav"
+    ],
+    "f750fd8cc202aa082493d7d38054437e993d83de89e310ae789ab89324dc1dbd": [
+      "data/FAN_sound_OK/FAN_sound_109.wav",
+      "data/FAN_sound_OK/FAN_sound_159.wav",
+      "data/FAN_sound_OK/FAN_sound_29.wav",
+      "data/FAN_sound_OK/FAN_sound_48.wav",
+      "data/FAN_sound_OK/FAN_sound_68.wav"
+    ],
+    "d6c28b0b69d350d04b3e36f3a25975418739e51e47deb4aaec02508f73cd46fe": [
+      "data/FAN_sound_OK/FAN_sound_11.wav",
+      "data/FAN_sound_OK/FAN_sound_141.wav",
+      "data/FAN_sound_OK/FAN_sound_60.wav",
+      "data/FAN_sound_OK/FAN_sound_80.wav",
+      "data/FAN_sound_OK/FAN_sound_91.wav"
+    ],
+    "450b5a37e5917acf1e5463f3331048be3b79df91b7246052db02de5d1ef0457a": [
+      "data/FAN_sound_OK/FAN_sound_110.wav",
+      "data/FAN_sound_OK/FAN_sound_160.wav",
+      "data/FAN_sound_OK/FAN_sound_30.wav",
+      "data/FAN_sound_OK/FAN_sound_49.wav",
+      "data/FAN_sound_OK/FAN_sound_69.wav"
+    ],
+    "0599c0879610b6e6d74b604cb27b4c81727c8d0500ad41a1382faa770cc2a0fe": [
+      "data/FAN_sound_OK/FAN_sound_111.wav",
+      "data/FAN_sound_OK/FAN_sound_12.wav",
+      "data/FAN_sound_OK/FAN_sound_121.wav",
+      "data/FAN_sound_OK/FAN_sound_142.wav",
+      "data/FAN_sound_OK/FAN_sound_161.wav",
+      "data/FAN_sound_OK/FAN_sound_31.wav",
+      "data/FAN_sound_OK/FAN_sound_92.wav"
+    ],
+    "badbe73dfc9ecb94696eec64fb3beb49ecab33556c5c31477f6340fb5c7fe606": [
+      "data/FAN_sound_OK/FAN_sound_112.wav",
+      "data/FAN_sound_OK/FAN_sound_122.wav",
+      "data/FAN_sound_OK/FAN_sound_13.wav",
+      "data/FAN_sound_OK/FAN_sound_143.wav",
+      "data/FAN_sound_OK/FAN_sound_162.wav",
+      "data/FAN_sound_OK/FAN_sound_32.wav",
+      "data/FAN_sound_OK/FAN_sound_93.wav"
+    ],
+    "34cc1b1923811935c45c5f7090db505ddd761c3e537e8e3cec26d60d3fbc056b": [
+      "data/FAN_sound_OK/FAN_sound_113.wav",
+      "data/FAN_sound_OK/FAN_sound_123.wav",
+      "data/FAN_sound_OK/FAN_sound_14.wav",
+      "data/FAN_sound_OK/FAN_sound_144.wav",
+      "data/FAN_sound_OK/FAN_sound_163.wav",
+      "data/FAN_sound_OK/FAN_sound_33.wav",
+      "data/FAN_sound_OK/FAN_sound_94.wav"
+    ],
+    "de4d6a37333fb7f44757f29ee03626168ad69d632ba0cfe8fb19aeb776b43461": [
+      "data/FAN_sound_OK/FAN_sound_114.wav",
+      "data/FAN_sound_OK/FAN_sound_124.wav",
+      "data/FAN_sound_OK/FAN_sound_145.wav",
+      "data/FAN_sound_OK/FAN_sound_15.wav",
+      "data/FAN_sound_OK/FAN_sound_164.wav",
+      "data/FAN_sound_OK/FAN_sound_34.wav",
+      "data/FAN_sound_OK/FAN_sound_95.wav"
+    ],
+    "9d23d88c441273fec47abc2f9cb8f75c9b7cc95b8908890dc6723b970caba3bb": [
+      "data/FAN_sound_OK/FAN_sound_115.wav",
+      "data/FAN_sound_OK/FAN_sound_125.wav",
+      "data/FAN_sound_OK/FAN_sound_146.wav",
+      "data/FAN_sound_OK/FAN_sound_16.wav",
+      "data/FAN_sound_OK/FAN_sound_165.wav",
+      "data/FAN_sound_OK/FAN_sound_35.wav",
+      "data/FAN_sound_OK/FAN_sound_96.wav"
+    ],
+    "9c486ae979add3930d181c53ef015da9050c38573c9e67f9cd89120c429ce40c": [
+      "data/FAN_sound_OK/FAN_sound_116.wav",
+      "data/FAN_sound_OK/FAN_sound_126.wav",
+      "data/FAN_sound_OK/FAN_sound_147.wav",
+      "data/FAN_sound_OK/FAN_sound_166.wav",
+      "data/FAN_sound_OK/FAN_sound_17.wav",
+      "data/FAN_sound_OK/FAN_sound_36.wav",
+      "data/FAN_sound_OK/FAN_sound_97.wav"
+    ],
+    "7b8df901bea219db4d44e3ca045aba89223f48df1eb2537a289cb35b39499ab2": [
+      "data/FAN_sound_OK/FAN_sound_117.wav",
+      "data/FAN_sound_OK/FAN_sound_127.wav",
+      "data/FAN_sound_OK/FAN_sound_148.wav",
+      "data/FAN_sound_OK/FAN_sound_167.wav",
+      "data/FAN_sound_OK/FAN_sound_18.wav",
+      "data/FAN_sound_OK/FAN_sound_37.wav",
+      "data/FAN_sound_OK/FAN_sound_98.wav"
+    ],
+    "94288f857d8e0e2afd910ef7ed142d5957ef628a684b5778d7cece2c5aded6b4": [
+      "data/FAN_sound_OK/FAN_sound_118.wav",
+      "data/FAN_sound_OK/FAN_sound_128.wav",
+      "data/FAN_sound_OK/FAN_sound_149.wav",
+      "data/FAN_sound_OK/FAN_sound_168.wav",
+      "data/FAN_sound_OK/FAN_sound_19.wav",
+      "data/FAN_sound_OK/FAN_sound_38.wav",
+      "data/FAN_sound_OK/FAN_sound_99.wav"
+    ]
+  },
+  "illustrative_random_80_20_split": {
+    "random_state": 42,
+    "stratified": true,
+    "train_files": 146,
+    "test_files": 37,
+    "test_files_whose_exact_bytes_are_also_in_train": 34,
+    "test_normal_files": 34,
+    "test_error_files": 3,
+    "note": "This is a leakage check, not a measured predictive score."
+  }
+}

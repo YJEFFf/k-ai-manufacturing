@@ -1,0 +1,23 @@
+{
+  "0": {
+    "image_count": 500,
+    "mean_mask_image_fraction": 0.002253450993175715,
+    "median_gradient_after_before_ratio": 0.2150437413308539,
+    "mean_gradient_after_before_ratio": 0.42860859407899016,
+    "outside_mask_changed_total": 0
+  },
+  "1": {
+    "image_count": 500,
+    "mean_mask_image_fraction": 0.00450690198635143,
+    "median_gradient_after_before_ratio": 0.2906416465517053,
+    "mean_gradient_after_before_ratio": 0.5742709964411079,
+    "outside_mask_changed_total": 0
+  },
+  "2": {
+    "image_count": 500,
+    "mean_mask_image_fraction": 0.006742785875668672,
+    "median_gradient_after_before_ratio": 0.3355323241700191,
+    "mean_gradient_after_before_ratio": 0.6485457797441975,
+    "outside_mask_changed_total": 0
+  }
+}

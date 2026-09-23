@@ -1,0 +1,15 @@
+# Shared local files and raw materials; analysis-specific rules live in codex/.
+.DS_Store
+**/__pycache__/
+*.py[cod]
+/데이터셋/
+/관련 자료/
+*.zip
+*.egg
+*.crdownload
+*.xlsx
+*.xls
+*.pdf
+*.hwpx
+*.wav
+*.bmp

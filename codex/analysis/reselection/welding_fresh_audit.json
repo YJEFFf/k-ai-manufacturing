@@ -1,0 +1,344 @@
+{
+  "source": "https://www.kamp-ai.kr/contestNoticeDetail?CPT_NOTICE_SEQ=28",
+  "attachment_id": 8078,
+  "members": [
+    {
+      "name": "2. 용접기 AI 데이터셋/scaled_data.csv",
+      "bytes": 639945,
+      "sha256": "a267d1eaab5ca7c81205e38dbb7fb024ebbcb25b866d8cc0907890526e4edfb6",
+      "crc_pass": true
+    },
+    {
+      "name": "2. 용접기 AI 데이터셋/Welding Data Set_01.xlsx",
+      "bytes": 551445,
+      "sha256": "d514d6aaa121630c04d7d51c97a56025e78e2c86868813f7722ba5db922c1f33",
+      "crc_pass": true
+    }
+  ],
+  "sheets": {
+    "Raw data": {
+      "rows": 11939,
+      "columns": [
+        "idx",
+        "Machine_Name",
+        "Item No",
+        "working time",
+        "Thickness 1(mm)",
+        "Thickness 2(mm)",
+        "weld force(bar)",
+        "weld current(kA)",
+        "weld Voltage(v)",
+        "weld time(ms)"
+      ]
+    },
+    "result": {
+      "rows": 23,
+      "columns": [
+        "idx",
+        "Machine_Name",
+        "Item No",
+        "working time",
+        "defect",
+        "defect type",
+        "Unnamed: 6"
+      ]
+    },
+    "data set": {
+      "rows": 10,
+      "columns": [
+        "Data",
+        "항목 설명",
+        "수집 범위"
+      ]
+    }
+  },
+  "unique_sensor_vectors": 1574,
+  "constant_columns": [
+    "Machine_Name",
+    "Item No",
+    "Thickness 1(mm)",
+    "Thickness 2(mm)"
+  ],
+  "raw_by_date": {
+    "2020-03-24 00:00:00": 1200,
+    "2020-03-25 00:00:00": 1352,
+    "2020-03-26 00:00:00": 1000,
+    "2020-03-27 00:00:00": 1648,
+    "2020-03-30 00:00:00": 1470,
+    "2020-03-31 00:00:00": 1800,
+    "2020-04-02 00:00:00": 2000,
+    "2020-04-03 00:00:00": 800,
+    "2020-04-07 00:00:00": 669
+  },
+  "result_records": [
+    {
+      "idx": 1,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-03-24 00:00:00",
+      "defect": 2,
+      "defect type": 1,
+      "Unnamed: 6": "파임불량"
+    },
+    {
+      "idx": 2,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-03-24 00:00:00",
+      "defect": 1,
+      "defect type": 2,
+      "Unnamed: 6": "용접부족"
+    },
+    {
+      "idx": 3,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-03-24 00:00:00",
+      "defect": 1,
+      "defect type": 3,
+      "Unnamed: 6": "크랙발생"
+    },
+    {
+      "idx": 4,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-03-25 00:00:00",
+      "defect": 3,
+      "defect type": 1,
+      "Unnamed: 6": NaN
+    },
+    {
+      "idx": 5,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-03-25 00:00:00",
+      "defect": 2,
+      "defect type": 2,
+      "Unnamed: 6": NaN
+    },
+    {
+      "idx": 6,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-03-25 00:00:00",
+      "defect": 3,
+      "defect type": 3,
+      "Unnamed: 6": NaN
+    },
+    {
+      "idx": 7,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-03-26 00:00:00",
+      "defect": 3,
+      "defect type": 1,
+      "Unnamed: 6": NaN
+    },
+    {
+      "idx": 8,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-03-26 00:00:00",
+      "defect": 2,
+      "defect type": 2,
+      "Unnamed: 6": NaN
+    },
+    {
+      "idx": 9,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-03-26 00:00:00",
+      "defect": 2,
+      "defect type": 3,
+      "Unnamed: 6": NaN
+    },
+    {
+      "idx": 10,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-03-30 00:00:00",
+      "defect": 1,
+      "defect type": 1,
+      "Unnamed: 6": NaN
+    },
+    {
+      "idx": 11,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-03-30 00:00:00",
+      "defect": 2,
+      "defect type": 2,
+      "Unnamed: 6": NaN
+    },
+    {
+      "idx": 12,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-03-30 00:00:00",
+      "defect": 1,
+      "defect type": 3,
+      "Unnamed: 6": NaN
+    },
+    {
+      "idx": 13,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-03-31 00:00:00",
+      "defect": 2,
+      "defect type": 1,
+      "Unnamed: 6": NaN
+    },
+    {
+      "idx": 14,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-03-31 00:00:00",
+      "defect": 3,
+      "defect type": 2,
+      "Unnamed: 6": NaN
+    },
+    {
+      "idx": 15,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-04-02 00:00:00",
+      "defect": 1,
+      "defect type": 1,
+      "Unnamed: 6": NaN
+    },
+    {
+      "idx": 16,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-04-02 00:00:00",
+      "defect": 1,
+      "defect type": 2,
+      "Unnamed: 6": NaN
+    },
+    {
+      "idx": 17,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-04-02 00:00:00",
+      "defect": 2,
+      "defect type": 3,
+      "Unnamed: 6": NaN
+    },
+    {
+      "idx": 18,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-04-03 00:00:00",
+      "defect": 2,
+      "defect type": 1,
+      "Unnamed: 6": NaN
+    },
+    {
+      "idx": 19,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-04-03 00:00:00",
+      "defect": 1,
+      "defect type": 2,
+      "Unnamed: 6": NaN
+    },
+    {
+      "idx": 20,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-04-03 00:00:00",
+      "defect": 1,
+      "defect type": 3,
+      "Unnamed: 6": NaN
+    },
+    {
+      "idx": 21,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-04-07 00:00:00",
+      "defect": 0,
+      "defect type": 1,
+      "Unnamed: 6": NaN
+    },
+    {
+      "idx": 22,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-04-07 00:00:00",
+      "defect": 1,
+      "defect type": 2,
+      "Unnamed: 6": NaN
+    },
+    {
+      "idx": 23,
+      "Machine_Name": "Spot-01",
+      "Item No": "65235-25800",
+      "working time": "2020-04-07 00:00:00",
+      "defect": 2,
+      "defect type": 3,
+      "Unnamed: 6": NaN
+    }
+  ],
+  "defect_count_sum": 39,
+  "defect_sum_interpretation": "sum of date/type counts, not verified unique defective products",
+  "repeated_window_rows": {
+    "27": {
+      "covered_later_rows": 9762,
+      "fraction_all_rows": 0.8176564201356897
+    }
+  },
+  "sensor_stats": {
+    "weld force(bar)": {
+      "count": 11939.0,
+      "mean": 2.787925286874948,
+      "std": 1.4559662268256377,
+      "min": 1.7399999999999998,
+      "25%": 2.31,
+      "50%": 2.34,
+      "75%": 2.37,
+      "max": 10.540000000000001
+    },
+    "weld current(kA)": {
+      "count": 11939.0,
+      "mean": 14.71120780634894,
+      "std": 0.09900035766905148,
+      "min": 14.520000000000001,
+      "25%": 14.610000000000001,
+      "50%": 14.729999999999999,
+      "75%": 14.750000000000002,
+      "max": 15.070000000000002
+    },
+    "weld Voltage(v)": {
+      "count": 11939.0,
+      "mean": 2.7042234693022866,
+      "std": 0.024699653002157686,
+      "min": 2.464,
+      "25%": 2.699,
+      "50%": 2.702,
+      "75%": 2.7060000000000004,
+      "max": 2.861
+    },
+    "weld time(ms)": {
+      "count": 11939.0,
+      "mean": 71.72412262333529,
+      "std": 0.6320493678960675,
+      "min": 70.0,
+      "25%": 71.0,
+      "50%": 72.0,
+      "75%": 72.0,
+      "max": 73.0
+    }
+  },
+  "missing": {
+    "idx": 0,
+    "Machine_Name": 0,
+    "Item No": 0,
+    "working time": 0,
+    "Thickness 1(mm)": 0,
+    "Thickness 2(mm)": 0,
+    "weld force(bar)": 0,
+    "weld current(kA)": 0,
+    "weld Voltage(v)": 0,
+    "weld time(ms)": 0
+  }
+}

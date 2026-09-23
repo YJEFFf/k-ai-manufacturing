@@ -1,0 +1,45 @@
+# Local system files
+.DS_Store
+**/__pycache__/
+*.py[cod]
+
+# Original contest materials and downloaded datasets
+/데이터셋/
+/관련 자료/
+*.zip
+*.egg
+*.crdownload
+*.xlsx
+*.xls
+*.pdf
+*.hwpx
+*.wav
+*.bmp
+
+# Extracted copies of guides and downloaded official pages
+analysis/**/pdf_text/
+analysis/reselection/official_sources/
+analysis/reselection/official_notice.html
+analysis/reselection/*.html
+analysis/reselection/energy_vision/guide*.txt
+
+# Recovered or row-level data that could reproduce distributed datasets
+analysis/followup_materials/injection_recovered/*.csv
+analysis/**/predictions*.csv
+analysis/**/*predictions.csv.gz
+analysis/**/joined*.csv.gz
+analysis/welding/outputs/unlabelled_scores.csv
+analysis/xray_followup/original_sample_*.png
+analysis/xray_followup/comparison_*.png
+analysis/xray_followup/per_image_boxes_candidates.json
+analysis/xray_followup/recovery_manifest.json
+analysis/xray_followup/cleaning_probe_results.json
+analysis/reselection/xray_label_audit.json
+
+# Large file inventories and archive-member dumps
+analysis/reselection/archive_*.json
+analysis/reselection/*egg_scan.json
+analysis/reselection/*egg_crc.json
+analysis/reselection/xray_prefix_audit.json
+analysis/reselection/misc_table_profiles.json
+analysis/reselection/*listing.json

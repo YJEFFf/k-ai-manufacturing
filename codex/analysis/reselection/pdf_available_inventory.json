@@ -1,0 +1,176 @@
+[
+  {
+    "source": "데이터셋/Guidebook_의류 품질보증 AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_의류 품질보증 AI 데이터셋.txt",
+    "pages": 103,
+    "chars": 103532
+  },
+  {
+    "source": "데이터셋/Guidebook_정밀가공 품질보증 AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_정밀가공 품질보증 AI 데이터셋.txt",
+    "pages": 58,
+    "chars": 49640
+  },
+  {
+    "source": "데이터셋/Guidebook_제조현장용 Scene-Text Recognition 학습 AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_제조현장용 Scene-Text Recognition 학습 AI 데이터셋.txt",
+    "pages": 48,
+    "chars": 35696
+  },
+  {
+    "source": "데이터셋/Guidebook_사출성형 예지보전 AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_사출성형 예지보전 AI 데이터셋.txt",
+    "pages": 85,
+    "chars": 79890
+  },
+  {
+    "source": "데이터셋/10. Guidebook_Pasteurizer.pdf",
+    "text": "analysis/reselection/pdf_text/10. Guidebook_Pasteurizer.txt",
+    "pages": 63,
+    "chars": 44068
+  },
+  {
+    "source": "데이터셋/Guidebook_용접 예지보전 AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_용접 예지보전 AI 데이터셋.txt",
+    "pages": 68,
+    "chars": 56089
+  },
+  {
+    "source": "데이터셋/Guidebook_품질 이상탐지, 진단(도금욕) AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_품질 이상탐지, 진단(도금욕) AI 데이터셋.txt",
+    "pages": 90,
+    "chars": 73603
+  },
+  {
+    "source": "데이터셋/Guidebook_전자부품(음향기기) 품질보증 AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_전자부품(음향기기) 품질보증 AI 데이터셋.txt",
+    "pages": 51,
+    "chars": 45285
+  },
+  {
+    "source": "데이터셋/08. Guidebook_Meltingtank.pdf",
+    "text": "analysis/reselection/pdf_text/08. Guidebook_Meltingtank.txt",
+    "pages": 56,
+    "chars": 47416
+  },
+  {
+    "source": "데이터셋/Guidebook_주조 품질보증 AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_주조 품질보증 AI 데이터셋.txt",
+    "pages": 79,
+    "chars": 72910
+  },
+  {
+    "source": "데이터셋/Guidebook_열처리 공정최적화 AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_열처리 공정최적화 AI 데이터셋.txt",
+    "pages": 63,
+    "chars": 62136
+  },
+  {
+    "source": "데이터셋/Guidebook_정밀가공 자원최적화 AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_정밀가공 자원최적화 AI 데이터셋.txt",
+    "pages": 76,
+    "chars": 69454
+  },
+  {
+    "source": "데이터셋/Guidebook_전자부품(배터리팩) 예지보전 AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_전자부품(배터리팩) 예지보전 AI 데이터셋.txt",
+    "pages": 109,
+    "chars": 117188
+  },
+  {
+    "source": "데이터셋/Guidebook_화장품 품질보증 AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_화장품 품질보증 AI 데이터셋.txt",
+    "pages": 96,
+    "chars": 87611
+  },
+  {
+    "source": "데이터셋/03. Guidebook_CNC.pdf",
+    "text": "analysis/reselection/pdf_text/03. Guidebook_CNC.txt",
+    "pages": 59,
+    "chars": 48629
+  },
+  {
+    "source": "데이터셋/Guidebook_공정운영 최적화 AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_공정운영 최적화 AI 데이터셋.txt",
+    "pages": 74,
+    "chars": 53768
+  },
+  {
+    "source": "데이터셋/Guidebook_주조 설비 예지보전 AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_주조 설비 예지보전 AI 데이터셋.txt",
+    "pages": 71,
+    "chars": 62205
+  },
+  {
+    "source": "데이터셋/Guidebook_의류 공정최적화 AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_의류 공정최적화 AI 데이터셋.txt",
+    "pages": 110,
+    "chars": 110717
+  },
+  {
+    "source": "데이터셋/Guidebook_열처리 품질보증 AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_열처리 품질보증 AI 데이터셋.txt",
+    "pages": 75,
+    "chars": 67717
+  },
+  {
+    "source": "데이터셋/Guidebook_용접 공정최적화 AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_용접 공정최적화 AI 데이터셋.txt",
+    "pages": 71,
+    "chars": 57863
+  },
+  {
+    "source": "데이터셋/Guidebook_전자부품(배터리팩) 품질보증 AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_전자부품(배터리팩) 품질보증 AI 데이터셋.txt",
+    "pages": 126,
+    "chars": 180577
+  },
+  {
+    "source": "데이터셋/Guidebook_품질 이상탐지, 진단(전해탈지) AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_품질 이상탐지, 진단(전해탈지) AI 데이터셋.txt",
+    "pages": 68,
+    "chars": 51642
+  },
+  {
+    "source": "데이터셋/Guidebook_소성가공 품질보증 AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_소성가공 품질보증 AI 데이터셋.txt",
+    "pages": 68,
+    "chars": 56957
+  },
+  {
+    "source": "데이터셋/Guidebook_소성가공 자원최적화 AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_소성가공 자원최적화 AI 데이터셋.txt",
+    "pages": 83,
+    "chars": 111365
+  },
+  {
+    "source": "데이터셋/Guidebook_표면처리 자원최적화 AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_표면처리 자원최적화 AI 데이터셋.txt",
+    "pages": 53,
+    "chars": 47107
+  },
+  {
+    "source": "데이터셋/Guidebook_품질 이상탐지, 진단(크로메이트) AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_품질 이상탐지, 진단(크로메이트) AI 데이터셋.txt",
+    "pages": 92,
+    "chars": 76005
+  },
+  {
+    "source": "데이터셋/Guidebook_공급망 최적화 AI 데이터셋.pdf",
+    "text": "analysis/reselection/pdf_text/Guidebook_공급망 최적화 AI 데이터셋.txt",
+    "pages": 67,
+    "chars": 77103
+  },
+  {
+    "source": "데이터셋/Guidebook_제조현장 안전관리 AI 데이터셋.pdf",
+    "text": "analysis/reselection/energy_vision/guide29.txt",
+    "pages": 81,
+    "chars": 99650
+  },
+  {
+    "source": "데이터셋/Guidebook_생산계획 최적화 AI 데이터셋.pdf",
+    "text": "analysis/reselection/energy_vision/guide30.txt",
+    "pages": 69,
+    "chars": 66573
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "source_sha256": "8f7af2e49366c93e1d6f5fdef4b5e350066c1792ac463c2c2886e370f4674830",
+  "predictions_sha256": "d0017a053f663fecac99f96831d07aa0fb673c651b31c88c125b0d41c1dc0e32",
+  "assumption": "Hourly production is available once its full hour has ended; actual ERP reporting delay unverified.",
+  "limitations": [
+    "Zero recorded production does not prove equipment was stopped or energy was wasted.",
+    "States describe the preceding two complete hours, not necessarily the current instant.",
+    "No retraining, new feature selection, calibrated policy or causal improvement is tested.",
+    "Windows overlap; subgroup denominators are not independent events.",
+    "All dates were inspected earlier; this is post-hoc exploratory error diagnosis.",
+    "A stratum association may be explained by time of day or season; no independent incremental effect claimed."
+  ],
+  "unknown_predictions": 0
+}

@@ -1,0 +1,2208 @@
+{
+  "source": "https://www.kamp-ai.kr/cptFileDownload",
+  "fileSeq": 8077,
+  "zip_sha256": "1fd8eccd9203374e1a0465d66acb5822c2fd3eec4084d2ca537d4155aa947ad7",
+  "zip_bytes": 2118073,
+  "crc_test_bad_member": null,
+  "tables": {
+    "moldset_labeled_cn7": {
+      "rows": 1211,
+      "columns": [
+        "Unnamed: 0",
+        "PassOrFail",
+        "Injection_Time",
+        "Filling_Time",
+        "Plasticizing_Time",
+        "Cycle_Time",
+        "Clamp_Close_Time",
+        "Cushion_Position",
+        "Plasticizing_Position",
+        "Clamp_Open_Position",
+        "Max_Injection_Speed",
+        "Max_Screw_RPM",
+        "Average_Screw_RPM",
+        "Max_Injection_Pressure",
+        "Max_Switch_Over_Pressure",
+        "Max_Back_Pressure",
+        "Average_Back_Pressure",
+        "Barrel_Temperature_1",
+        "Barrel_Temperature_2",
+        "Barrel_Temperature_3",
+        "Barrel_Temperature_4",
+        "Barrel_Temperature_5",
+        "Barrel_Temperature_6",
+        "Hopper_Temperature",
+        "Mold_Temperature_3",
+        "Mold_Temperature_4"
+      ],
+      "sha256": "f870b0c259297f20d503f2e2739966553e5db5ef1deb0cc7513eefa4bbfa2753",
+      "missing_cells": 0,
+      "unique_sensor_rows": 606,
+      "duplicate_sensor_rows": 605,
+      "adjacent_identical_sensors": 570,
+      "group_size_frequencies": {
+        "2": 605,
+        "1": 1
+      },
+      "index_range": [
+        0,
+        1210
+      ],
+      "mean_by_sensor": {
+        "Injection_Time": -2.9571720794640006e-14,
+        "Filling_Time": -5.351073286649144e-15,
+        "Plasticizing_Time": 6.477615031206859e-15,
+        "Cycle_Time": 5.069437850509716e-14,
+        "Clamp_Close_Time": -1.574811480412972e-14,
+        "Cushion_Position": 4.630532492906094e-12,
+        "Plasticizing_Position": -3.628403202262972e-14,
+        "Clamp_Open_Position": 0.0,
+        "Max_Injection_Speed": 3.2388075156034296e-15,
+        "Max_Screw_RPM": -6.68884160831143e-15,
+        "Average_Screw_RPM": 4.196367998477487e-14,
+        "Max_Injection_Pressure": 1.074908581265486e-13,
+        "Max_Switch_Over_Pressure": -1.5924136951716862e-14,
+        "Max_Back_Pressure": -3.755139148525715e-15,
+        "Average_Back_Pressure": -3.708199909169144e-15,
+        "Barrel_Temperature_1": -1.8247629299867148e-14,
+        "Barrel_Temperature_2": -3.5057744394439294e-14,
+        "Barrel_Temperature_3": 8.755634991230467e-15,
+        "Barrel_Temperature_4": 2.114319362767565e-14,
+        "Barrel_Temperature_5": 5.257194807936001e-15,
+        "Barrel_Temperature_6": -3.579410371184551e-14,
+        "Hopper_Temperature": -2.675536643324572e-15,
+        "Mold_Temperature_3": -8.214366887400002e-16,
+        "Mold_Temperature_4": -1.6428733774800003e-16
+      },
+      "population_std_by_sensor": {
+        "Injection_Time": 1.0,
+        "Filling_Time": 1.0,
+        "Plasticizing_Time": 1.0,
+        "Cycle_Time": 1.0,
+        "Clamp_Close_Time": 1.0,
+        "Cushion_Position": 1.0,
+        "Plasticizing_Position": 0.9999999999999999,
+        "Clamp_Open_Position": 0.0,
+        "Max_Injection_Speed": 1.0,
+        "Max_Screw_RPM": 1.0,
+        "Average_Screw_RPM": 1.0,
+        "Max_Injection_Pressure": 1.0000000000000002,
+        "Max_Switch_Over_Pressure": 1.0,
+        "Max_Back_Pressure": 1.0,
+        "Average_Back_Pressure": 1.0,
+        "Barrel_Temperature_1": 0.9999999999999999,
+        "Barrel_Temperature_2": 1.0,
+        "Barrel_Temperature_3": 0.9999999999999999,
+        "Barrel_Temperature_4": 1.0,
+        "Barrel_Temperature_5": 1.0,
+        "Barrel_Temperature_6": 1.0000000000000002,
+        "Hopper_Temperature": 1.0,
+        "Mold_Temperature_3": 0.9999999999999999,
+        "Mold_Temperature_4": 0.9999999999999997
+      },
+      "label_counts": {
+        "0": 1194,
+        "1": 17
+      },
+      "conflicting_groups": 11,
+      "conflicting_rows": 22,
+      "positive_groups": 14,
+      "all_positive_groups": 3,
+      "same_input_deterministic_full_sample_f1_upper_bound": 0.7555555555555555,
+      "sensor_conflict_examples": [
+        [
+          {
+            "Unnamed: 0": 103,
+            "PassOrFail": 1
+          },
+          {
+            "Unnamed: 0": 104,
+            "PassOrFail": 0
+          }
+        ],
+        [
+          {
+            "Unnamed: 0": 107,
+            "PassOrFail": 1
+          },
+          {
+            "Unnamed: 0": 108,
+            "PassOrFail": 0
+          }
+        ],
+        [
+          {
+            "Unnamed: 0": 101,
+            "PassOrFail": 1
+          },
+          {
+            "Unnamed: 0": 102,
+            "PassOrFail": 0
+          }
+        ],
+        [
+          {
+            "Unnamed: 0": 109,
+            "PassOrFail": 1
+          },
+          {
+            "Unnamed: 0": 110,
+            "PassOrFail": 0
+          }
+        ]
+      ]
+    },
+    "moldset_labeled_rg3": {
+      "rows": 1182,
+      "columns": [
+        "Unnamed: 0",
+        "PassOrFail",
+        "Injection_Time",
+        "Filling_Time",
+        "Plasticizing_Time",
+        "Cycle_Time",
+        "Clamp_Close_Time",
+        "Cushion_Position",
+        "Plasticizing_Position",
+        "Clamp_Open_Position",
+        "Max_Injection_Speed",
+        "Max_Screw_RPM",
+        "Average_Screw_RPM",
+        "Max_Injection_Pressure",
+        "Max_Switch_Over_Pressure",
+        "Max_Back_Pressure",
+        "Average_Back_Pressure",
+        "Barrel_Temperature_1",
+        "Barrel_Temperature_2",
+        "Barrel_Temperature_3",
+        "Barrel_Temperature_4",
+        "Barrel_Temperature_5",
+        "Barrel_Temperature_6",
+        "Hopper_Temperature",
+        "Mold_Temperature_3",
+        "Mold_Temperature_4"
+      ],
+      "sha256": "14aab21476eea02c823ccb00f82800040280d805dbce5a3eb7c11b176a9e5aa4",
+      "missing_cells": 0,
+      "unique_sensor_rows": 591,
+      "duplicate_sensor_rows": 591,
+      "adjacent_identical_sensors": 574,
+      "group_size_frequencies": {
+        "2": 591
+      },
+      "index_range": [
+        1211,
+        2392
+      ],
+      "mean_by_sensor": {
+        "Injection_Time": -4.715310676228618e-14,
+        "Filling_Time": -1.923635156034112e-16,
+        "Plasticizing_Time": -1.7601261677712126e-14,
+        "Cycle_Time": 5.502648534233517e-14,
+        "Clamp_Close_Time": 4.97259687834818e-14,
+        "Cushion_Position": 2.788886249218256e-12,
+        "Plasticizing_Position": 1.813266588956655e-13,
+        "Clamp_Open_Position": 0.0,
+        "Max_Injection_Speed": -2.7556073610188658e-14,
+        "Max_Screw_RPM": -1.2069307764148403e-14,
+        "Average_Screw_RPM": -8.43273561526454e-14,
+        "Max_Injection_Pressure": -7.256913626138688e-14,
+        "Max_Switch_Over_Pressure": -1.1613947254555952e-14,
+        "Max_Back_Pressure": 6.5884504094168345e-15,
+        "Average_Back_Pressure": 8.175449413144977e-15,
+        "Barrel_Temperature_1": -4.4617064320249017e-14,
+        "Barrel_Temperature_2": 4.473052873765571e-14,
+        "Barrel_Temperature_3": 2.130275651311214e-14,
+        "Barrel_Temperature_4": 4.0684883550121475e-14,
+        "Barrel_Temperature_5": -7.989848677386997e-14,
+        "Barrel_Temperature_6": -2.1749099982910682e-14,
+        "Hopper_Temperature": -6.396086893813423e-15,
+        "Mold_Temperature_3": -3.847270312068224e-16,
+        "Mold_Temperature_4": 4.80908789008528e-17
+      },
+      "population_std_by_sensor": {
+        "Injection_Time": 1.0,
+        "Filling_Time": 0.9999999999999999,
+        "Plasticizing_Time": 0.9999999999999999,
+        "Cycle_Time": 1.0,
+        "Clamp_Close_Time": 1.0,
+        "Cushion_Position": 1.0,
+        "Plasticizing_Position": 1.0,
+        "Clamp_Open_Position": 0.0,
+        "Max_Injection_Speed": 0.9999999999999998,
+        "Max_Screw_RPM": 1.0000000000000002,
+        "Average_Screw_RPM": 1.0,
+        "Max_Injection_Pressure": 1.0,
+        "Max_Switch_Over_Pressure": 0.9999999999999999,
+        "Max_Back_Pressure": 1.0,
+        "Average_Back_Pressure": 1.0,
+        "Barrel_Temperature_1": 1.0,
+        "Barrel_Temperature_2": 1.0,
+        "Barrel_Temperature_3": 1.0,
+        "Barrel_Temperature_4": 1.0,
+        "Barrel_Temperature_5": 1.0,
+        "Barrel_Temperature_6": 0.9999999999999999,
+        "Hopper_Temperature": 1.0,
+        "Mold_Temperature_3": 1.0,
+        "Mold_Temperature_4": 0.9999999999999998
+      },
+      "label_counts": {
+        "0": 1157,
+        "1": 25
+      },
+      "conflicting_groups": 25,
+      "conflicting_rows": 50,
+      "positive_groups": 25,
+      "all_positive_groups": 0,
+      "same_input_deterministic_full_sample_f1_upper_bound": 0.6666666666666666,
+      "sensor_conflict_examples": [
+        [
+          {
+            "Unnamed: 0": 1371,
+            "PassOrFail": 1
+          },
+          {
+            "Unnamed: 0": 1372,
+            "PassOrFail": 0
+          }
+        ],
+        [
+          {
+            "Unnamed: 0": 1511,
+            "PassOrFail": 1
+          },
+          {
+            "Unnamed: 0": 1512,
+            "PassOrFail": 0
+          }
+        ],
+        [
+          {
+            "Unnamed: 0": 1831,
+            "PassOrFail": 1
+          },
+          {
+            "Unnamed: 0": 1832,
+            "PassOrFail": 0
+          }
+        ],
+        [
+          {
+            "Unnamed: 0": 1761,
+            "PassOrFail": 1
+          },
+          {
+            "Unnamed: 0": 1762,
+            "PassOrFail": 0
+          }
+        ]
+      ]
+    },
+    "moldset_unlabeled_cn7": {
+      "rows": 35239,
+      "columns": [
+        "Unnamed: 0",
+        "Injection_Time",
+        "Filling_Time",
+        "Plasticizing_Time",
+        "Cycle_Time",
+        "Clamp_Close_Time",
+        "Cushion_Position",
+        "Plasticizing_Position",
+        "Clamp_Open_Position",
+        "Max_Injection_Speed",
+        "Max_Screw_RPM",
+        "Average_Screw_RPM",
+        "Max_Injection_Pressure",
+        "Max_Switch_Over_Pressure",
+        "Max_Back_Pressure",
+        "Average_Back_Pressure",
+        "Barrel_Temperature_1",
+        "Barrel_Temperature_2",
+        "Barrel_Temperature_3",
+        "Barrel_Temperature_4",
+        "Barrel_Temperature_5",
+        "Barrel_Temperature_6",
+        "Hopper_Temperature",
+        "Mold_Temperature_3",
+        "Mold_Temperature_4"
+      ],
+      "sha256": "110a2d408d6cb8002caf26f50c06d06e42998e067e708788a3e37e9d1769b978",
+      "missing_cells": 0,
+      "unique_sensor_rows": 28771,
+      "duplicate_sensor_rows": 6468,
+      "adjacent_identical_sensors": 6467,
+      "group_size_frequencies": {
+        "1": 22303,
+        "2": 6468
+      },
+      "index_range": [
+        114610,
+        777220
+      ],
+      "mean_by_sensor": {
+        "Injection_Time": 1.0323728843303479e-16,
+        "Filling_Time": -7.484703411395022e-16,
+        "Plasticizing_Time": -2.5809322108258696e-17,
+        "Cycle_Time": 7.742796632477609e-16,
+        "Clamp_Close_Time": -7.742796632477609e-17,
+        "Cushion_Position": -1.290466105412935e-16,
+        "Plasticizing_Position": -5.161864421651739e-17,
+        "Clamp_Open_Position": 1.4969406822790045e-15,
+        "Max_Injection_Speed": -1.290466105412935e-16,
+        "Max_Screw_RPM": 3.0971186529910437e-16,
+        "Average_Screw_RPM": 2.5809322108258696e-17,
+        "Max_Injection_Pressure": -3.0971186529910437e-16,
+        "Max_Switch_Over_Pressure": -5.161864421651739e-17,
+        "Max_Back_Pressure": -2.8390254319084565e-16,
+        "Average_Back_Pressure": 0.0,
+        "Barrel_Temperature_1": 5.161864421651739e-17,
+        "Barrel_Temperature_2": 4.6714873015948245e-15,
+        "Barrel_Temperature_3": -2.58093221082587e-16,
+        "Barrel_Temperature_4": 9.859161045354822e-15,
+        "Barrel_Temperature_5": 1.4195127159542284e-15,
+        "Barrel_Temperature_6": -7.226610190312435e-16,
+        "Hopper_Temperature": -4.645677979486565e-16,
+        "Mold_Temperature_3": 0.0,
+        "Mold_Temperature_4": 1.290466105412935e-16
+      },
+      "population_std_by_sensor": {
+        "Injection_Time": 1.0,
+        "Filling_Time": 1.0,
+        "Plasticizing_Time": 1.0,
+        "Cycle_Time": 0.9999999999999999,
+        "Clamp_Close_Time": 1.0,
+        "Cushion_Position": 1.0,
+        "Plasticizing_Position": 0.9999999999999999,
+        "Clamp_Open_Position": 0.9999999999999998,
+        "Max_Injection_Speed": 1.0,
+        "Max_Screw_RPM": 1.0,
+        "Average_Screw_RPM": 1.0,
+        "Max_Injection_Pressure": 1.0000000000000002,
+        "Max_Switch_Over_Pressure": 1.0,
+        "Max_Back_Pressure": 0.9999999999999999,
+        "Average_Back_Pressure": 0.9999999999999999,
+        "Barrel_Temperature_1": 1.0,
+        "Barrel_Temperature_2": 0.9999999999999999,
+        "Barrel_Temperature_3": 1.0,
+        "Barrel_Temperature_4": 1.0,
+        "Barrel_Temperature_5": 0.9999999999999998,
+        "Barrel_Temperature_6": 0.9999999999999999,
+        "Hopper_Temperature": 0.9999999999999998,
+        "Mold_Temperature_3": 1.0,
+        "Mold_Temperature_4": 0.9999999999999999
+      }
+    },
+    "moldset_unlabeled_rg3": {
+      "rows": 35941,
+      "columns": [
+        "Unnamed: 0",
+        "Injection_Time",
+        "Filling_Time",
+        "Plasticizing_Time",
+        "Cycle_Time",
+        "Clamp_Close_Time",
+        "Cushion_Position",
+        "Plasticizing_Position",
+        "Clamp_Open_Position",
+        "Max_Injection_Speed",
+        "Max_Screw_RPM",
+        "Average_Screw_RPM",
+        "Max_Injection_Pressure",
+        "Max_Switch_Over_Pressure",
+        "Max_Back_Pressure",
+        "Average_Back_Pressure",
+        "Barrel_Temperature_1",
+        "Barrel_Temperature_2",
+        "Barrel_Temperature_3",
+        "Barrel_Temperature_4",
+        "Barrel_Temperature_5",
+        "Barrel_Temperature_6",
+        "Hopper_Temperature",
+        "Mold_Temperature_3",
+        "Mold_Temperature_4"
+      ],
+      "sha256": "ef9b30014ce4d6671a72f5a4c3f286802b71ff08d52f9d6a551a3f81e6af8c9c",
+      "missing_cells": 0,
+      "unique_sensor_rows": 29707,
+      "duplicate_sensor_rows": 6234,
+      "adjacent_identical_sensors": 6233,
+      "group_size_frequencies": {
+        "1": 23473,
+        "2": 6234
+      },
+      "index_range": [
+        119515,
+        795309
+      ],
+      "mean_by_sensor": {
+        "Injection_Time": 1.391786778261903e-16,
+        "Filling_Time": 2.0244171320173135e-16,
+        "Plasticizing_Time": 2.5305214150216418e-17,
+        "Cycle_Time": 1.2652607075108208e-16,
+        "Clamp_Close_Time": -5.567147113047612e-16,
+        "Cushion_Position": -1.518312849012985e-16,
+        "Plasticizing_Position": 7.591564245064925e-17,
+        "Clamp_Open_Position": 5.0610428300432836e-17,
+        "Max_Injection_Speed": 0.0,
+        "Max_Screw_RPM": -1.0122085660086567e-16,
+        "Average_Screw_RPM": 1.0122085660086567e-16,
+        "Max_Injection_Pressure": 1.771364990515149e-16,
+        "Max_Switch_Over_Pressure": -3.2896778395281343e-16,
+        "Max_Back_Pressure": 5.0610428300432836e-17,
+        "Average_Back_Pressure": -1.518312849012985e-16,
+        "Barrel_Temperature_1": -1.0122085660086567e-16,
+        "Barrel_Temperature_2": 3.6692560517813804e-16,
+        "Barrel_Temperature_3": -3.2896778395281343e-16,
+        "Barrel_Temperature_4": -7.047502140835272e-15,
+        "Barrel_Temperature_5": -4.048834264034627e-16,
+        "Barrel_Temperature_6": 1.0628189943090896e-15,
+        "Hopper_Temperature": -3.163151768777052e-16,
+        "Mold_Temperature_3": -3.2896778395281343e-16,
+        "Mold_Temperature_4": 5.0610428300432836e-17
+      },
+      "population_std_by_sensor": {
+        "Injection_Time": 1.0000000000000002,
+        "Filling_Time": 0.9999999999999999,
+        "Plasticizing_Time": 1.0,
+        "Cycle_Time": 1.0,
+        "Clamp_Close_Time": 0.9999999999999999,
+        "Cushion_Position": 0.9999999999999998,
+        "Plasticizing_Position": 1.0,
+        "Clamp_Open_Position": 1.0,
+        "Max_Injection_Speed": 1.0,
+        "Max_Screw_RPM": 1.0,
+        "Average_Screw_RPM": 0.9999999999999999,
+        "Max_Injection_Pressure": 1.0,
+        "Max_Switch_Over_Pressure": 0.9999999999999999,
+        "Max_Back_Pressure": 1.0,
+        "Average_Back_Pressure": 1.0,
+        "Barrel_Temperature_1": 1.0,
+        "Barrel_Temperature_2": 0.9999999999999999,
+        "Barrel_Temperature_3": 1.0,
+        "Barrel_Temperature_4": 1.0,
+        "Barrel_Temperature_5": 1.0,
+        "Barrel_Temperature_6": 0.9999999999999999,
+        "Hopper_Temperature": 1.0,
+        "Mold_Temperature_3": 1.0,
+        "Mold_Temperature_4": 1.0000000000000002
+      }
+    }
+  },
+  "metrics_positive_class": 1,
+  "experiments": [
+    {
+      "split": "5-fold stratified sensor-group split; not temporal validation",
+      "model": "logistic_balanced",
+      "pooled": {
+        "n": 2393,
+        "class1": 42,
+        "average_precision": 0.1964292284597624,
+        "f1_at_0_5": 0.06608695652173913,
+        "precision_at_0_5": 0.03564727954971857,
+        "recall_at_0_5": 0.4523809523809524,
+        "confusion_matrix": [
+          [
+            1837,
+            514
+          ],
+          [
+            23,
+            19
+          ]
+        ],
+        "recall_at_top_5pct_rows_tie_order_dependent": 0.2619047619047619,
+        "recall_at_top_10pct_rows_tie_order_dependent": 0.2857142857142857,
+        "recall_at_top_20pct_rows_tie_order_dependent": 0.42857142857142855
+      },
+      "folds": [
+        {
+          "train_groups": 957,
+          "test_groups": 240,
+          "group_intersection": 0,
+          "n": 480,
+          "class1": 8,
+          "average_precision": 0.08938318144306427,
+          "f1_at_0_5": 0.07017543859649122,
+          "precision_at_0_5": 0.03773584905660377,
+          "recall_at_0_5": 0.5,
+          "confusion_matrix": [
+            [
+              370,
+              102
+            ],
+            [
+              4,
+              4
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.25,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.375,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.5
+        },
+        {
+          "train_groups": 957,
+          "test_groups": 240,
+          "group_intersection": 0,
+          "n": 480,
+          "class1": 8,
+          "average_precision": 0.020987632784392748,
+          "f1_at_0_5": 0.041666666666666664,
+          "precision_at_0_5": 0.022727272727272728,
+          "recall_at_0_5": 0.25,
+          "confusion_matrix": [
+            [
+              386,
+              86
+            ],
+            [
+              6,
+              2
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.125,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.25
+        },
+        {
+          "train_groups": 958,
+          "test_groups": 239,
+          "group_intersection": 0,
+          "n": 477,
+          "class1": 8,
+          "average_precision": 0.3405630821771529,
+          "f1_at_0_5": 0.09022556390977443,
+          "precision_at_0_5": 0.048,
+          "recall_at_0_5": 0.75,
+          "confusion_matrix": [
+            [
+              350,
+              119
+            ],
+            [
+              2,
+              6
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.5,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.5,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.625
+        },
+        {
+          "train_groups": 958,
+          "test_groups": 239,
+          "group_intersection": 0,
+          "n": 478,
+          "class1": 9,
+          "average_precision": 0.2517061367986911,
+          "f1_at_0_5": 0.06201550387596899,
+          "precision_at_0_5": 0.03333333333333333,
+          "recall_at_0_5": 0.4444444444444444,
+          "confusion_matrix": [
+            [
+              353,
+              116
+            ],
+            [
+              5,
+              4
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.2222222222222222,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.3333333333333333,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.3333333333333333
+        },
+        {
+          "train_groups": 958,
+          "test_groups": 239,
+          "group_intersection": 0,
+          "n": 478,
+          "class1": 9,
+          "average_precision": 0.24052548430836618,
+          "f1_at_0_5": 0.05825242718446602,
+          "precision_at_0_5": 0.031914893617021274,
+          "recall_at_0_5": 0.3333333333333333,
+          "confusion_matrix": [
+            [
+              378,
+              91
+            ],
+            [
+              6,
+              3
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.2222222222222222,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.2222222222222222,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.3333333333333333
+        }
+      ],
+      "by_product": {
+        "cn7": {
+          "n": 1211,
+          "class1": 17,
+          "average_precision": 0.468645548859365,
+          "f1_at_0_5": 0.09803921568627451,
+          "precision_at_0_5": 0.05190311418685121,
+          "recall_at_0_5": 0.8823529411764706,
+          "confusion_matrix": [
+            [
+              920,
+              274
+            ],
+            [
+              2,
+              15
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.5882352941176471,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.7058823529411765,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.8823529411764706
+        },
+        "rg3": {
+          "n": 1182,
+          "class1": 25,
+          "average_precision": 0.01708153585500881,
+          "f1_at_0_5": 0.02973977695167286,
+          "precision_at_0_5": 0.01639344262295082,
+          "recall_at_0_5": 0.16,
+          "confusion_matrix": [
+            [
+              917,
+              240
+            ],
+            [
+              21,
+              4
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.12
+        }
+      }
+    },
+    {
+      "split": "5-fold stratified sensor-group split; not temporal validation",
+      "model": "rf_balanced",
+      "pooled": {
+        "n": 2393,
+        "class1": 42,
+        "average_precision": 0.08380617073590028,
+        "f1_at_0_5": 0.15,
+        "precision_at_0_5": 0.15789473684210525,
+        "recall_at_0_5": 0.14285714285714285,
+        "confusion_matrix": [
+          [
+            2319,
+            32
+          ],
+          [
+            36,
+            6
+          ]
+        ],
+        "recall_at_top_5pct_rows_tie_order_dependent": 0.16666666666666666,
+        "recall_at_top_10pct_rows_tie_order_dependent": 0.2857142857142857,
+        "recall_at_top_20pct_rows_tie_order_dependent": 0.47619047619047616
+      },
+      "folds": [
+        {
+          "train_groups": 957,
+          "test_groups": 240,
+          "group_intersection": 0,
+          "n": 480,
+          "class1": 8,
+          "average_precision": 0.03026867183047296,
+          "f1_at_0_5": 0.0,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "confusion_matrix": [
+            [
+              464,
+              8
+            ],
+            [
+              8,
+              0
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.25
+        },
+        {
+          "train_groups": 957,
+          "test_groups": 240,
+          "group_intersection": 0,
+          "n": 480,
+          "class1": 8,
+          "average_precision": 0.036528062929717345,
+          "f1_at_0_5": 0.0,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "confusion_matrix": [
+            [
+              470,
+              2
+            ],
+            [
+              8,
+              0
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.25,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.5
+        },
+        {
+          "train_groups": 958,
+          "test_groups": 239,
+          "group_intersection": 0,
+          "n": 477,
+          "class1": 8,
+          "average_precision": 0.2971175066908158,
+          "f1_at_0_5": 0.2222222222222222,
+          "precision_at_0_5": 0.2,
+          "recall_at_0_5": 0.25,
+          "confusion_matrix": [
+            [
+              461,
+              8
+            ],
+            [
+              6,
+              2
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.25,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.375,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.625
+        },
+        {
+          "train_groups": 958,
+          "test_groups": 239,
+          "group_intersection": 0,
+          "n": 478,
+          "class1": 9,
+          "average_precision": 0.08649038415372354,
+          "f1_at_0_5": 0.19047619047619047,
+          "precision_at_0_5": 0.16666666666666666,
+          "recall_at_0_5": 0.2222222222222222,
+          "confusion_matrix": [
+            [
+              459,
+              10
+            ],
+            [
+              7,
+              2
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.2222222222222222,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.4444444444444444,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.5555555555555556
+        },
+        {
+          "train_groups": 958,
+          "test_groups": 239,
+          "group_intersection": 0,
+          "n": 478,
+          "class1": 9,
+          "average_precision": 0.27057662304974894,
+          "f1_at_0_5": 0.26666666666666666,
+          "precision_at_0_5": 0.3333333333333333,
+          "recall_at_0_5": 0.2222222222222222,
+          "confusion_matrix": [
+            [
+              465,
+              4
+            ],
+            [
+              7,
+              2
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.3333333333333333,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.3333333333333333,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.4444444444444444
+        }
+      ],
+      "by_product": {
+        "cn7": {
+          "n": 1211,
+          "class1": 17,
+          "average_precision": 0.20369106541424573,
+          "f1_at_0_5": 0.2222222222222222,
+          "precision_at_0_5": 0.17857142857142858,
+          "recall_at_0_5": 0.29411764705882354,
+          "confusion_matrix": [
+            [
+              1171,
+              23
+            ],
+            [
+              12,
+              5
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.47058823529411764,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.8823529411764706,
+          "recall_at_top_20pct_rows_tie_order_dependent": 1.0
+        },
+        "rg3": {
+          "n": 1182,
+          "class1": 25,
+          "average_precision": 0.023032784795925423,
+          "f1_at_0_5": 0.05714285714285714,
+          "precision_at_0_5": 0.1,
+          "recall_at_0_5": 0.04,
+          "confusion_matrix": [
+            [
+              1148,
+              9
+            ],
+            [
+              24,
+              1
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.04,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.04,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.12
+        }
+      }
+    },
+    {
+      "split": "5-fold stratified sensor-group split; not temporal validation",
+      "model": "hgb_balanced",
+      "pooled": {
+        "n": 2393,
+        "class1": 42,
+        "average_precision": 0.11268061797806962,
+        "f1_at_0_5": 0.1323529411764706,
+        "precision_at_0_5": 0.09574468085106383,
+        "recall_at_0_5": 0.21428571428571427,
+        "confusion_matrix": [
+          [
+            2266,
+            85
+          ],
+          [
+            33,
+            9
+          ]
+        ],
+        "recall_at_top_5pct_rows_tie_order_dependent": 0.23809523809523808,
+        "recall_at_top_10pct_rows_tie_order_dependent": 0.30952380952380953,
+        "recall_at_top_20pct_rows_tie_order_dependent": 0.42857142857142855
+      },
+      "folds": [
+        {
+          "train_groups": 957,
+          "test_groups": 240,
+          "group_intersection": 0,
+          "n": 480,
+          "class1": 8,
+          "average_precision": 0.03885800900611449,
+          "f1_at_0_5": 0.07692307692307693,
+          "precision_at_0_5": 0.05555555555555555,
+          "recall_at_0_5": 0.125,
+          "confusion_matrix": [
+            [
+              455,
+              17
+            ],
+            [
+              7,
+              1
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.125,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.25,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.25
+        },
+        {
+          "train_groups": 957,
+          "test_groups": 240,
+          "group_intersection": 0,
+          "n": 480,
+          "class1": 8,
+          "average_precision": 0.03904875543546542,
+          "f1_at_0_5": 0.1,
+          "precision_at_0_5": 0.08333333333333333,
+          "recall_at_0_5": 0.125,
+          "confusion_matrix": [
+            [
+              461,
+              11
+            ],
+            [
+              7,
+              1
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.125,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.375,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.5
+        },
+        {
+          "train_groups": 958,
+          "test_groups": 239,
+          "group_intersection": 0,
+          "n": 477,
+          "class1": 8,
+          "average_precision": 0.17157815894502307,
+          "f1_at_0_5": 0.15,
+          "precision_at_0_5": 0.09375,
+          "recall_at_0_5": 0.375,
+          "confusion_matrix": [
+            [
+              440,
+              29
+            ],
+            [
+              5,
+              3
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.375,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.375,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.5
+        },
+        {
+          "train_groups": 958,
+          "test_groups": 239,
+          "group_intersection": 0,
+          "n": 478,
+          "class1": 9,
+          "average_precision": 0.16350972831708915,
+          "f1_at_0_5": 0.17391304347826086,
+          "precision_at_0_5": 0.14285714285714285,
+          "recall_at_0_5": 0.2222222222222222,
+          "confusion_matrix": [
+            [
+              457,
+              12
+            ],
+            [
+              7,
+              2
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.4444444444444444,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.4444444444444444,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.4444444444444444
+        },
+        {
+          "train_groups": 958,
+          "test_groups": 239,
+          "group_intersection": 0,
+          "n": 478,
+          "class1": 9,
+          "average_precision": 0.25074737156680776,
+          "f1_at_0_5": 0.14814814814814814,
+          "precision_at_0_5": 0.1111111111111111,
+          "recall_at_0_5": 0.2222222222222222,
+          "confusion_matrix": [
+            [
+              453,
+              16
+            ],
+            [
+              7,
+              2
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.2222222222222222,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.2222222222222222,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.3333333333333333
+        }
+      ],
+      "by_product": {
+        "cn7": {
+          "n": 1211,
+          "class1": 17,
+          "average_precision": 0.28958014652465147,
+          "f1_at_0_5": 0.2909090909090909,
+          "precision_at_0_5": 0.21052631578947367,
+          "recall_at_0_5": 0.47058823529411764,
+          "confusion_matrix": [
+            [
+              1164,
+              30
+            ],
+            [
+              9,
+              8
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.5882352941176471,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.7647058823529411,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.9411764705882353
+        },
+        "rg3": {
+          "n": 1182,
+          "class1": 25,
+          "average_precision": 0.019064966683914823,
+          "f1_at_0_5": 0.024691358024691357,
+          "precision_at_0_5": 0.017857142857142856,
+          "recall_at_0_5": 0.04,
+          "confusion_matrix": [
+            [
+              1102,
+              55
+            ],
+            [
+              24,
+              1
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.04,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.08,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.16
+        }
+      }
+    },
+    {
+      "split": "cn7 product-specific 5-fold sensor-group; not temporal",
+      "model": "logistic_balanced",
+      "pooled": {
+        "n": 1211,
+        "class1": 17,
+        "average_precision": 0.4056516144327448,
+        "f1_at_0_5": 0.1981981981981982,
+        "precision_at_0_5": 0.11702127659574468,
+        "recall_at_0_5": 0.6470588235294118,
+        "confusion_matrix": [
+          [
+            1111,
+            83
+          ],
+          [
+            6,
+            11
+          ]
+        ],
+        "recall_at_top_5pct_rows_tie_order_dependent": 0.5882352941176471,
+        "recall_at_top_10pct_rows_tie_order_dependent": 0.7647058823529411,
+        "recall_at_top_20pct_rows_tie_order_dependent": 1.0
+      },
+      "folds": [
+        {
+          "group_intersection": 0,
+          "n": 244,
+          "class1": 3,
+          "average_precision": 0.08194444444444444,
+          "f1_at_0_5": 0.08695652173913043,
+          "precision_at_0_5": 0.05,
+          "recall_at_0_5": 0.3333333333333333,
+          "confusion_matrix": [
+            [
+              222,
+              19
+            ],
+            [
+              2,
+              1
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.3333333333333333,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.3333333333333333,
+          "recall_at_top_20pct_rows_tie_order_dependent": 1.0
+        },
+        {
+          "group_intersection": 0,
+          "n": 242,
+          "class1": 4,
+          "average_precision": 0.3020833333333333,
+          "f1_at_0_5": 0.23076923076923078,
+          "precision_at_0_5": 0.13636363636363635,
+          "recall_at_0_5": 0.75,
+          "confusion_matrix": [
+            [
+              219,
+              19
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.75,
+          "recall_at_top_10pct_rows_tie_order_dependent": 1.0,
+          "recall_at_top_20pct_rows_tie_order_dependent": 1.0
+        },
+        {
+          "group_intersection": 0,
+          "n": 242,
+          "class1": 4,
+          "average_precision": 0.6204545454545455,
+          "f1_at_0_5": 0.375,
+          "precision_at_0_5": 0.25,
+          "recall_at_0_5": 0.75,
+          "confusion_matrix": [
+            [
+              229,
+              9
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.75,
+          "recall_at_top_10pct_rows_tie_order_dependent": 1.0,
+          "recall_at_top_20pct_rows_tie_order_dependent": 1.0
+        },
+        {
+          "group_intersection": 0,
+          "n": 243,
+          "class1": 3,
+          "average_precision": 0.21075581395348836,
+          "f1_at_0_5": 0.10526315789473684,
+          "precision_at_0_5": 0.0625,
+          "recall_at_0_5": 0.3333333333333333,
+          "confusion_matrix": [
+            [
+              225,
+              15
+            ],
+            [
+              2,
+              1
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.3333333333333333,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.3333333333333333,
+          "recall_at_top_20pct_rows_tie_order_dependent": 1.0
+        },
+        {
+          "group_intersection": 0,
+          "n": 240,
+          "class1": 3,
+          "average_precision": 0.7916666666666666,
+          "f1_at_0_5": 0.2222222222222222,
+          "precision_at_0_5": 0.125,
+          "recall_at_0_5": 1.0,
+          "confusion_matrix": [
+            [
+              216,
+              21
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 1.0,
+          "recall_at_top_10pct_rows_tie_order_dependent": 1.0,
+          "recall_at_top_20pct_rows_tie_order_dependent": 1.0
+        }
+      ]
+    },
+    {
+      "split": "cn7 product-specific 5-fold sensor-group; not temporal",
+      "model": "rf_balanced",
+      "pooled": {
+        "n": 1211,
+        "class1": 17,
+        "average_precision": 0.2347473653790778,
+        "f1_at_0_5": 0.2545454545454545,
+        "precision_at_0_5": 0.18421052631578946,
+        "recall_at_0_5": 0.4117647058823529,
+        "confusion_matrix": [
+          [
+            1163,
+            31
+          ],
+          [
+            10,
+            7
+          ]
+        ],
+        "recall_at_top_5pct_rows_tie_order_dependent": 0.5882352941176471,
+        "recall_at_top_10pct_rows_tie_order_dependent": 1.0,
+        "recall_at_top_20pct_rows_tie_order_dependent": 1.0
+      },
+      "folds": [
+        {
+          "group_intersection": 0,
+          "n": 244,
+          "class1": 3,
+          "average_precision": 0.11944444444444445,
+          "f1_at_0_5": 0.0,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "confusion_matrix": [
+            [
+              235,
+              6
+            ],
+            [
+              3,
+              0
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.3333333333333333,
+          "recall_at_top_10pct_rows_tie_order_dependent": 1.0,
+          "recall_at_top_20pct_rows_tie_order_dependent": 1.0
+        },
+        {
+          "group_intersection": 0,
+          "n": 242,
+          "class1": 4,
+          "average_precision": 0.2589962121212121,
+          "f1_at_0_5": 0.3333333333333333,
+          "precision_at_0_5": 0.25,
+          "recall_at_0_5": 0.5,
+          "confusion_matrix": [
+            [
+              232,
+              6
+            ],
+            [
+              2,
+              2
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.5,
+          "recall_at_top_10pct_rows_tie_order_dependent": 1.0,
+          "recall_at_top_20pct_rows_tie_order_dependent": 1.0
+        },
+        {
+          "group_intersection": 0,
+          "n": 242,
+          "class1": 4,
+          "average_precision": 0.4083333333333333,
+          "f1_at_0_5": 0.3333333333333333,
+          "precision_at_0_5": 0.25,
+          "recall_at_0_5": 0.5,
+          "confusion_matrix": [
+            [
+              232,
+              6
+            ],
+            [
+              2,
+              2
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 1.0,
+          "recall_at_top_10pct_rows_tie_order_dependent": 1.0,
+          "recall_at_top_20pct_rows_tie_order_dependent": 1.0
+        },
+        {
+          "group_intersection": 0,
+          "n": 243,
+          "class1": 3,
+          "average_precision": 0.11666666666666667,
+          "f1_at_0_5": 0.0,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "confusion_matrix": [
+            [
+              238,
+              2
+            ],
+            [
+              3,
+              0
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.3333333333333333,
+          "recall_at_top_10pct_rows_tie_order_dependent": 1.0,
+          "recall_at_top_20pct_rows_tie_order_dependent": 1.0
+        },
+        {
+          "group_intersection": 0,
+          "n": 240,
+          "class1": 3,
+          "average_precision": 0.25,
+          "f1_at_0_5": 0.35294117647058826,
+          "precision_at_0_5": 0.21428571428571427,
+          "recall_at_0_5": 1.0,
+          "confusion_matrix": [
+            [
+              226,
+              11
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 1.0,
+          "recall_at_top_10pct_rows_tie_order_dependent": 1.0,
+          "recall_at_top_20pct_rows_tie_order_dependent": 1.0
+        }
+      ]
+    },
+    {
+      "split": "cn7 product-specific 5-fold sensor-group; not temporal",
+      "model": "hgb_balanced",
+      "pooled": {
+        "n": 1211,
+        "class1": 17,
+        "average_precision": 0.4344670792596364,
+        "f1_at_0_5": 0.32432432432432434,
+        "precision_at_0_5": 0.3,
+        "recall_at_0_5": 0.35294117647058826,
+        "confusion_matrix": [
+          [
+            1180,
+            14
+          ],
+          [
+            11,
+            6
+          ]
+        ],
+        "recall_at_top_5pct_rows_tie_order_dependent": 0.6470588235294118,
+        "recall_at_top_10pct_rows_tie_order_dependent": 0.8823529411764706,
+        "recall_at_top_20pct_rows_tie_order_dependent": 1.0
+      },
+      "folds": [
+        {
+          "group_intersection": 0,
+          "n": 244,
+          "class1": 3,
+          "average_precision": 0.19166666666666668,
+          "f1_at_0_5": 0.0,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "confusion_matrix": [
+            [
+              237,
+              4
+            ],
+            [
+              3,
+              0
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 1.0,
+          "recall_at_top_10pct_rows_tie_order_dependent": 1.0,
+          "recall_at_top_20pct_rows_tie_order_dependent": 1.0
+        },
+        {
+          "group_intersection": 0,
+          "n": 242,
+          "class1": 4,
+          "average_precision": 0.5708333333333333,
+          "f1_at_0_5": 0.4,
+          "precision_at_0_5": 0.3333333333333333,
+          "recall_at_0_5": 0.5,
+          "confusion_matrix": [
+            [
+              234,
+              4
+            ],
+            [
+              2,
+              2
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.5,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.75,
+          "recall_at_top_20pct_rows_tie_order_dependent": 1.0
+        },
+        {
+          "group_intersection": 0,
+          "n": 242,
+          "class1": 4,
+          "average_precision": 0.725,
+          "f1_at_0_5": 0.5,
+          "precision_at_0_5": 0.5,
+          "recall_at_0_5": 0.5,
+          "confusion_matrix": [
+            [
+              236,
+              2
+            ],
+            [
+              2,
+              2
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 1.0,
+          "recall_at_top_10pct_rows_tie_order_dependent": 1.0,
+          "recall_at_top_20pct_rows_tie_order_dependent": 1.0
+        },
+        {
+          "group_intersection": 0,
+          "n": 243,
+          "class1": 3,
+          "average_precision": 0.1378968253968254,
+          "f1_at_0_5": 0.0,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "confusion_matrix": [
+            [
+              238,
+              2
+            ],
+            [
+              3,
+              0
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.6666666666666666,
+          "recall_at_top_10pct_rows_tie_order_dependent": 1.0,
+          "recall_at_top_20pct_rows_tie_order_dependent": 1.0
+        },
+        {
+          "group_intersection": 0,
+          "n": 240,
+          "class1": 3,
+          "average_precision": 0.738095238095238,
+          "f1_at_0_5": 0.5714285714285714,
+          "precision_at_0_5": 0.5,
+          "recall_at_0_5": 0.6666666666666666,
+          "confusion_matrix": [
+            [
+              235,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.6666666666666666,
+          "recall_at_top_10pct_rows_tie_order_dependent": 1.0,
+          "recall_at_top_20pct_rows_tie_order_dependent": 1.0
+        }
+      ]
+    },
+    {
+      "split": "rg3 product-specific 5-fold sensor-group; not temporal",
+      "model": "logistic_balanced",
+      "pooled": {
+        "n": 1182,
+        "class1": 25,
+        "average_precision": 0.021913587471991187,
+        "f1_at_0_5": 0.041189931350114416,
+        "precision_at_0_5": 0.021844660194174758,
+        "recall_at_0_5": 0.36,
+        "confusion_matrix": [
+          [
+            754,
+            403
+          ],
+          [
+            16,
+            9
+          ]
+        ],
+        "recall_at_top_5pct_rows_tie_order_dependent": 0.0,
+        "recall_at_top_10pct_rows_tie_order_dependent": 0.04,
+        "recall_at_top_20pct_rows_tie_order_dependent": 0.2
+      },
+      "folds": [
+        {
+          "group_intersection": 0,
+          "n": 236,
+          "class1": 5,
+          "average_precision": 0.026473918943618502,
+          "f1_at_0_5": 0.02666666666666667,
+          "precision_at_0_5": 0.014285714285714285,
+          "recall_at_0_5": 0.2,
+          "confusion_matrix": [
+            [
+              162,
+              69
+            ],
+            [
+              4,
+              1
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.2
+        },
+        {
+          "group_intersection": 0,
+          "n": 236,
+          "class1": 5,
+          "average_precision": 0.02678992699679937,
+          "f1_at_0_5": 0.02197802197802198,
+          "precision_at_0_5": 0.011627906976744186,
+          "recall_at_0_5": 0.2,
+          "confusion_matrix": [
+            [
+              146,
+              85
+            ],
+            [
+              4,
+              1
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.2,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.2
+        },
+        {
+          "group_intersection": 0,
+          "n": 238,
+          "class1": 5,
+          "average_precision": 0.019605585057610293,
+          "f1_at_0_5": 0.024691358024691357,
+          "precision_at_0_5": 0.013157894736842105,
+          "recall_at_0_5": 0.2,
+          "confusion_matrix": [
+            [
+              158,
+              75
+            ],
+            [
+              4,
+              1
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.0
+        },
+        {
+          "group_intersection": 0,
+          "n": 236,
+          "class1": 5,
+          "average_precision": 0.03616985851028404,
+          "f1_at_0_5": 0.04597701149425287,
+          "precision_at_0_5": 0.024390243902439025,
+          "recall_at_0_5": 0.4,
+          "confusion_matrix": [
+            [
+              151,
+              80
+            ],
+            [
+              3,
+              2
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.2,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.4
+        },
+        {
+          "group_intersection": 0,
+          "n": 236,
+          "class1": 5,
+          "average_precision": 0.04225995815456327,
+          "f1_at_0_5": 0.07766990291262135,
+          "precision_at_0_5": 0.04081632653061224,
+          "recall_at_0_5": 0.8,
+          "confusion_matrix": [
+            [
+              137,
+              94
+            ],
+            [
+              1,
+              4
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.2
+        }
+      ]
+    },
+    {
+      "split": "rg3 product-specific 5-fold sensor-group; not temporal",
+      "model": "rf_balanced",
+      "pooled": {
+        "n": 1182,
+        "class1": 25,
+        "average_precision": 0.02735868122214946,
+        "f1_at_0_5": 0.046511627906976744,
+        "precision_at_0_5": 0.05555555555555555,
+        "recall_at_0_5": 0.04,
+        "confusion_matrix": [
+          [
+            1140,
+            17
+          ],
+          [
+            24,
+            1
+          ]
+        ],
+        "recall_at_top_5pct_rows_tie_order_dependent": 0.08,
+        "recall_at_top_10pct_rows_tie_order_dependent": 0.12,
+        "recall_at_top_20pct_rows_tie_order_dependent": 0.28
+      },
+      "folds": [
+        {
+          "group_intersection": 0,
+          "n": 236,
+          "class1": 5,
+          "average_precision": 0.10638720829732067,
+          "f1_at_0_5": 0.2222222222222222,
+          "precision_at_0_5": 0.25,
+          "recall_at_0_5": 0.2,
+          "confusion_matrix": [
+            [
+              228,
+              3
+            ],
+            [
+              4,
+              1
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.2,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.2,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.6
+        },
+        {
+          "group_intersection": 0,
+          "n": 236,
+          "class1": 5,
+          "average_precision": 0.036812567132116,
+          "f1_at_0_5": 0.0,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "confusion_matrix": [
+            [
+              231,
+              0
+            ],
+            [
+              5,
+              0
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.2,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.4
+        },
+        {
+          "group_intersection": 0,
+          "n": 238,
+          "class1": 5,
+          "average_precision": 0.0263641498799507,
+          "f1_at_0_5": 0.0,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "confusion_matrix": [
+            [
+              231,
+              2
+            ],
+            [
+              5,
+              0
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.2
+        },
+        {
+          "group_intersection": 0,
+          "n": 236,
+          "class1": 5,
+          "average_precision": 0.018264729620661824,
+          "f1_at_0_5": 0.0,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "confusion_matrix": [
+            [
+              229,
+              2
+            ],
+            [
+              5,
+              0
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.0
+        },
+        {
+          "group_intersection": 0,
+          "n": 236,
+          "class1": 5,
+          "average_precision": 0.036634313961900165,
+          "f1_at_0_5": 0.0,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "confusion_matrix": [
+            [
+              221,
+              10
+            ],
+            [
+              5,
+              0
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.2,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.2
+        }
+      ]
+    },
+    {
+      "split": "rg3 product-specific 5-fold sensor-group; not temporal",
+      "model": "hgb_balanced",
+      "pooled": {
+        "n": 1182,
+        "class1": 25,
+        "average_precision": 0.028380942350311283,
+        "f1_at_0_5": 0.03389830508474576,
+        "precision_at_0_5": 0.029411764705882353,
+        "recall_at_0_5": 0.04,
+        "confusion_matrix": [
+          [
+            1124,
+            33
+          ],
+          [
+            24,
+            1
+          ]
+        ],
+        "recall_at_top_5pct_rows_tie_order_dependent": 0.04,
+        "recall_at_top_10pct_rows_tie_order_dependent": 0.12,
+        "recall_at_top_20pct_rows_tie_order_dependent": 0.28
+      },
+      "folds": [
+        {
+          "group_intersection": 0,
+          "n": 236,
+          "class1": 5,
+          "average_precision": 0.13962020693852709,
+          "f1_at_0_5": 0.18181818181818182,
+          "precision_at_0_5": 0.16666666666666666,
+          "recall_at_0_5": 0.2,
+          "confusion_matrix": [
+            [
+              226,
+              5
+            ],
+            [
+              4,
+              1
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.2,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.2,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.4
+        },
+        {
+          "group_intersection": 0,
+          "n": 236,
+          "class1": 5,
+          "average_precision": 0.049783549783549784,
+          "f1_at_0_5": 0.0,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "confusion_matrix": [
+            [
+              231,
+              0
+            ],
+            [
+              5,
+              0
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.4,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.4
+        },
+        {
+          "group_intersection": 0,
+          "n": 238,
+          "class1": 5,
+          "average_precision": 0.027569448920399614,
+          "f1_at_0_5": 0.0,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "confusion_matrix": [
+            [
+              223,
+              10
+            ],
+            [
+              5,
+              0
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.2
+        },
+        {
+          "group_intersection": 0,
+          "n": 236,
+          "class1": 5,
+          "average_precision": 0.026614061614061615,
+          "f1_at_0_5": 0.0,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "confusion_matrix": [
+            [
+              223,
+              8
+            ],
+            [
+              5,
+              0
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.2
+        },
+        {
+          "group_intersection": 0,
+          "n": 236,
+          "class1": 5,
+          "average_precision": 0.02741049792592533,
+          "f1_at_0_5": 0.0,
+          "precision_at_0_5": 0.0,
+          "recall_at_0_5": 0.0,
+          "confusion_matrix": [
+            [
+              221,
+              10
+            ],
+            [
+              5,
+              0
+            ]
+          ],
+          "recall_at_top_5pct_rows_tie_order_dependent": 0.0,
+          "recall_at_top_10pct_rows_tie_order_dependent": 0.2,
+          "recall_at_top_20pct_rows_tie_order_dependent": 0.2
+        }
+      ]
+    },
+    {
+      "split": "product cn7 -> rg3; each CSV independently standardized",
+      "model": "logistic_balanced",
+      "n": 1182,
+      "class1": 25,
+      "average_precision": 0.024061444355677367,
+      "f1_at_0_5": 0.03636363636363636,
+      "precision_at_0_5": 0.03333333333333333,
+      "recall_at_0_5": 0.04,
+      "confusion_matrix": [
+        [
+          1128,
+          29
+        ],
+        [
+          24,
+          1
+        ]
+      ],
+      "recall_at_top_5pct_rows_tie_order_dependent": 0.08,
+      "recall_at_top_10pct_rows_tie_order_dependent": 0.12,
+      "recall_at_top_20pct_rows_tie_order_dependent": 0.2
+    },
+    {
+      "split": "product cn7 -> rg3; each CSV independently standardized",
+      "model": "rf_balanced",
+      "n": 1182,
+      "class1": 25,
+      "average_precision": 0.02012303824258744,
+      "f1_at_0_5": 0.0,
+      "precision_at_0_5": 0.0,
+      "recall_at_0_5": 0.0,
+      "confusion_matrix": [
+        [
+          1157,
+          0
+        ],
+        [
+          25,
+          0
+        ]
+      ],
+      "recall_at_top_5pct_rows_tie_order_dependent": 0.0,
+      "recall_at_top_10pct_rows_tie_order_dependent": 0.04,
+      "recall_at_top_20pct_rows_tie_order_dependent": 0.16
+    },
+    {
+      "split": "product cn7 -> rg3; each CSV independently standardized",
+      "model": "hgb_balanced",
+      "n": 1182,
+      "class1": 25,
+      "average_precision": 0.01775755243824811,
+      "f1_at_0_5": 0.0,
+      "precision_at_0_5": 0.0,
+      "recall_at_0_5": 0.0,
+      "confusion_matrix": [
+        [
+          1157,
+          0
+        ],
+        [
+          25,
+          0
+        ]
+      ],
+      "recall_at_top_5pct_rows_tie_order_dependent": 0.04,
+      "recall_at_top_10pct_rows_tie_order_dependent": 0.08,
+      "recall_at_top_20pct_rows_tie_order_dependent": 0.08
+    },
+    {
+      "split": "product rg3 -> cn7; each CSV independently standardized",
+      "model": "logistic_balanced",
+      "n": 1211,
+      "class1": 17,
+      "average_precision": 0.010433247449782851,
+      "f1_at_0_5": 0.010968921389396709,
+      "precision_at_0_5": 0.005660377358490566,
+      "recall_at_0_5": 0.17647058823529413,
+      "confusion_matrix": [
+        [
+          667,
+          527
+        ],
+        [
+          14,
+          3
+        ]
+      ],
+      "recall_at_top_5pct_rows_tie_order_dependent": 0.0,
+      "recall_at_top_10pct_rows_tie_order_dependent": 0.0,
+      "recall_at_top_20pct_rows_tie_order_dependent": 0.0
+    },
+    {
+      "split": "product rg3 -> cn7; each CSV independently standardized",
+      "model": "rf_balanced",
+      "n": 1211,
+      "class1": 17,
+      "average_precision": 0.016515188937487615,
+      "f1_at_0_5": 0.0,
+      "precision_at_0_5": 0.0,
+      "recall_at_0_5": 0.0,
+      "confusion_matrix": [
+        [
+          1176,
+          18
+        ],
+        [
+          17,
+          0
+        ]
+      ],
+      "recall_at_top_5pct_rows_tie_order_dependent": 0.0,
+      "recall_at_top_10pct_rows_tie_order_dependent": 0.058823529411764705,
+      "recall_at_top_20pct_rows_tie_order_dependent": 0.11764705882352941
+    },
+    {
+      "split": "product rg3 -> cn7; each CSV independently standardized",
+      "model": "hgb_balanced",
+      "n": 1211,
+      "class1": 17,
+      "average_precision": 0.013653950911775826,
+      "f1_at_0_5": 0.0,
+      "precision_at_0_5": 0.0,
+      "recall_at_0_5": 0.0,
+      "confusion_matrix": [
+        [
+          1142,
+          52
+        ],
+        [
+          17,
+          0
+        ]
+      ],
+      "recall_at_top_5pct_rows_tie_order_dependent": 0.0,
+      "recall_at_top_10pct_rows_tie_order_dependent": 0.0,
+      "recall_at_top_20pct_rows_tie_order_dependent": 0.058823529411764705
+    },
+    {
+      "split": "cn7 index-prefix70% -> suffix30%; chronology unverified",
+      "model": "logistic_balanced",
+      "train_rows": 847,
+      "train_class1": 17,
+      "n": 364,
+      "class1": 0,
+      "average_precision": null,
+      "f1_at_0_5": 0.0,
+      "precision_at_0_5": 0.0,
+      "recall_at_0_5": 0.0,
+      "confusion_matrix": [
+        [
+          358,
+          6
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "recall_at_top_5pct_rows_tie_order_dependent": null,
+      "recall_at_top_10pct_rows_tie_order_dependent": null,
+      "recall_at_top_20pct_rows_tie_order_dependent": null
+    },
+    {
+      "split": "cn7 index-prefix70% -> suffix30%; chronology unverified",
+      "model": "rf_balanced",
+      "train_rows": 847,
+      "train_class1": 17,
+      "n": 364,
+      "class1": 0,
+      "average_precision": null,
+      "f1_at_0_5": 0.0,
+      "precision_at_0_5": 0.0,
+      "recall_at_0_5": 0.0,
+      "confusion_matrix": [
+        [
+          364,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "recall_at_top_5pct_rows_tie_order_dependent": null,
+      "recall_at_top_10pct_rows_tie_order_dependent": null,
+      "recall_at_top_20pct_rows_tie_order_dependent": null
+    },
+    {
+      "split": "cn7 index-prefix70% -> suffix30%; chronology unverified",
+      "model": "hgb_balanced",
+      "train_rows": 847,
+      "train_class1": 17,
+      "n": 364,
+      "class1": 0,
+      "average_precision": null,
+      "f1_at_0_5": 0.0,
+      "precision_at_0_5": 0.0,
+      "recall_at_0_5": 0.0,
+      "confusion_matrix": [
+        [
+          364,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "recall_at_top_5pct_rows_tie_order_dependent": null,
+      "recall_at_top_10pct_rows_tie_order_dependent": null,
+      "recall_at_top_20pct_rows_tie_order_dependent": null
+    },
+    {
+      "split": "rg3 index-prefix70% -> suffix30%; chronology unverified",
+      "model": "logistic_balanced",
+      "train_rows": 826,
+      "train_class1": 19,
+      "n": 355,
+      "class1": 6,
+      "average_precision": 0.03077830621913694,
+      "f1_at_0_5": 0.04065040650406504,
+      "precision_at_0_5": 0.020833333333333332,
+      "recall_at_0_5": 0.8333333333333334,
+      "confusion_matrix": [
+        [
+          114,
+          235
+        ],
+        [
+          1,
+          5
+        ]
+      ],
+      "recall_at_top_5pct_rows_tie_order_dependent": 0.0,
+      "recall_at_top_10pct_rows_tie_order_dependent": 0.16666666666666666,
+      "recall_at_top_20pct_rows_tie_order_dependent": 0.3333333333333333
+    },
+    {
+      "split": "rg3 index-prefix70% -> suffix30%; chronology unverified",
+      "model": "rf_balanced",
+      "train_rows": 826,
+      "train_class1": 19,
+      "n": 355,
+      "class1": 6,
+      "average_precision": 0.036442980434643,
+      "f1_at_0_5": 0.0,
+      "precision_at_0_5": 0.0,
+      "recall_at_0_5": 0.0,
+      "confusion_matrix": [
+        [
+          349,
+          0
+        ],
+        [
+          6,
+          0
+        ]
+      ],
+      "recall_at_top_5pct_rows_tie_order_dependent": 0.16666666666666666,
+      "recall_at_top_10pct_rows_tie_order_dependent": 0.16666666666666666,
+      "recall_at_top_20pct_rows_tie_order_dependent": 0.5
+    },
+    {
+      "split": "rg3 index-prefix70% -> suffix30%; chronology unverified",
+      "model": "hgb_balanced",
+      "train_rows": 826,
+      "train_class1": 19,
+      "n": 355,
+      "class1": 6,
+      "average_precision": 0.07139146966106281,
+      "f1_at_0_5": 0.0,
+      "precision_at_0_5": 0.0,
+      "recall_at_0_5": 0.0,
+      "confusion_matrix": [
+        [
+          348,
+          1
+        ],
+        [
+          6,
+          0
+        ]
+      ],
+      "recall_at_top_5pct_rows_tie_order_dependent": 0.16666666666666666,
+      "recall_at_top_10pct_rows_tie_order_dependent": 0.16666666666666666,
+      "recall_at_top_20pct_rows_tie_order_dependent": 0.16666666666666666
+    }
+  ],
+  "all_labeled": {
+    "rows": 2393,
+    "class1": 42,
+    "sensor_groups": 1197,
+    "features": [
+      "Injection_Time",
+      "Filling_Time",
+      "Plasticizing_Time",
+      "Cycle_Time",
+      "Clamp_Close_Time",
+      "Cushion_Position",
+      "Plasticizing_Position",
+      "Max_Injection_Speed",
+      "Max_Screw_RPM",
+      "Average_Screw_RPM",
+      "Max_Injection_Pressure",
+      "Max_Switch_Over_Pressure",
+      "Max_Back_Pressure",
+      "Average_Back_Pressure",
+      "Barrel_Temperature_1",
+      "Barrel_Temperature_2",
+      "Barrel_Temperature_3",
+      "Barrel_Temperature_4",
+      "Barrel_Temperature_5",
+      "Barrel_Temperature_6",
+      "Hopper_Temperature",
+      "Mold_Temperature_3",
+      "Mold_Temperature_4"
+    ]
+  }
+}

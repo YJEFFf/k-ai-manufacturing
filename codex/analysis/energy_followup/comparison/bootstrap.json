@@ -1,0 +1,206 @@
+[
+  {
+    "horizon_minutes": 15,
+    "model": "q95_hgb",
+    "baseline": "persistence",
+    "budget": 0.05,
+    "block_days": 1,
+    "days": 45,
+    "replicates": 2000,
+    "recall_delta_percentile_2_5_97_5": [
+      0.06771172415471576,
+      0.17127106614526072
+    ],
+    "fpr_delta_percentile_2_5_97_5": [
+      -0.002058355199325397,
+      0.011713876412059352
+    ]
+  },
+  {
+    "horizon_minutes": 15,
+    "model": "q95_hgb",
+    "baseline": "persistence",
+    "budget": 0.05,
+    "block_days": 7,
+    "days": 45,
+    "replicates": 2000,
+    "recall_delta_percentile_2_5_97_5": [
+      0.050651711792347266,
+      0.18058904148566873
+    ],
+    "fpr_delta_percentile_2_5_97_5": [
+      -0.0036105526674481267,
+      0.013705665996933056
+    ]
+  },
+  {
+    "horizon_minutes": 15,
+    "model": "logistic",
+    "baseline": "persistence",
+    "budget": 0.05,
+    "block_days": 1,
+    "days": 45,
+    "replicates": 2000,
+    "recall_delta_percentile_2_5_97_5": [
+      0.014736836466487642,
+      0.13287719979296056
+    ],
+    "fpr_delta_percentile_2_5_97_5": [
+      -0.011545760098594798,
+      0.0022833629999494836
+    ]
+  },
+  {
+    "horizon_minutes": 15,
+    "model": "logistic",
+    "baseline": "persistence",
+    "budget": 0.05,
+    "block_days": 7,
+    "days": 45,
+    "replicates": 2000,
+    "recall_delta_percentile_2_5_97_5": [
+      0.00467144975113837,
+      0.11359113876950118
+    ],
+    "fpr_delta_percentile_2_5_97_5": [
+      -0.014656796393500659,
+      0.0037500938438438467
+    ]
+  },
+  {
+    "horizon_minutes": 15,
+    "model": "hgb_classifier",
+    "baseline": "persistence",
+    "budget": 0.05,
+    "block_days": 1,
+    "days": 45,
+    "replicates": 2000,
+    "recall_delta_percentile_2_5_97_5": [
+      0.03303244992565373,
+      0.17549726228530352
+    ],
+    "fpr_delta_percentile_2_5_97_5": [
+      -0.0009991248901366967,
+      0.01825612404407829
+    ]
+  },
+  {
+    "horizon_minutes": 15,
+    "model": "hgb_classifier",
+    "baseline": "persistence",
+    "budget": 0.05,
+    "block_days": 7,
+    "days": 45,
+    "replicates": 2000,
+    "recall_delta_percentile_2_5_97_5": [
+      0.021188848899068087,
+      0.17929514214308026
+    ],
+    "fpr_delta_percentile_2_5_97_5": [
+      -0.005060168162408107,
+      0.02480459068286976
+    ]
+  },
+  {
+    "horizon_minutes": 60,
+    "model": "q95_hgb",
+    "baseline": "persistence",
+    "budget": 0.05,
+    "block_days": 1,
+    "days": 45,
+    "replicates": 2000,
+    "recall_delta_percentile_2_5_97_5": [
+      0.22338707766668245,
+      0.4470106487619209
+    ],
+    "fpr_delta_percentile_2_5_97_5": [
+      -0.0012832203431920324,
+      0.024638601384136965
+    ]
+  },
+  {
+    "horizon_minutes": 60,
+    "model": "q95_hgb",
+    "baseline": "persistence",
+    "budget": 0.05,
+    "block_days": 7,
+    "days": 45,
+    "replicates": 2000,
+    "recall_delta_percentile_2_5_97_5": [
+      0.22220412595005423,
+      0.4331345971423489
+    ],
+    "fpr_delta_percentile_2_5_97_5": [
+      -0.0026053052133015345,
+      0.026978897285422295
+    ]
+  },
+  {
+    "horizon_minutes": 60,
+    "model": "logistic",
+    "baseline": "persistence",
+    "budget": 0.05,
+    "block_days": 1,
+    "days": 45,
+    "replicates": 2000,
+    "recall_delta_percentile_2_5_97_5": [
+      0.03454726198591233,
+      0.3367131250561092
+    ],
+    "fpr_delta_percentile_2_5_97_5": [
+      0.00235657382110897,
+      0.04209797204264772
+    ]
+  },
+  {
+    "horizon_minutes": 60,
+    "model": "logistic",
+    "baseline": "persistence",
+    "budget": 0.05,
+    "block_days": 7,
+    "days": 45,
+    "replicates": 2000,
+    "recall_delta_percentile_2_5_97_5": [
+      -0.0857348901098901,
+      0.40714285714285714
+    ],
+    "fpr_delta_percentile_2_5_97_5": [
+      -0.007350050900629505,
+      0.04837974033080577
+    ]
+  },
+  {
+    "horizon_minutes": 60,
+    "model": "hgb_classifier",
+    "baseline": "persistence",
+    "budget": 0.05,
+    "block_days": 1,
+    "days": 45,
+    "replicates": 2000,
+    "recall_delta_percentile_2_5_97_5": [
+      0.18484073261356113,
+      0.43245049862696905
+    ],
+    "fpr_delta_percentile_2_5_97_5": [
+      0.0028202247191011177,
+      0.03437762393774887
+    ]
+  },
+  {
+    "horizon_minutes": 60,
+    "model": "hgb_classifier",
+    "baseline": "persistence",
+    "budget": 0.05,
+    "block_days": 7,
+    "days": 45,
+    "replicates": 2000,
+    "recall_delta_percentile_2_5_97_5": [
+      0.1259887665198238,
+      0.462253832382231
+    ],
+    "fpr_delta_percentile_2_5_97_5": [
+      -0.0052515543212158676,
+      0.03933287136665303
+    ]
+  }
+]

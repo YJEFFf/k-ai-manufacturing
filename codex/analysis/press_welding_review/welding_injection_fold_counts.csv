@@ -1,0 +1,11 @@
+fold,mode,train_rows,purged_rows,test_rows,training_context_using_test_history
+0,original,1741,0,436,25
+0,purged_25,1716,25,436,0
+1,original,1742,0,435,25
+1,purged_25,1692,50,435,0
+2,original,1741,0,436,25
+2,purged_25,1691,50,436,0
+3,original,1742,0,435,25
+3,purged_25,1692,50,435,0
+4,original,1742,0,435,0
+4,purged_25,1717,25,435,0

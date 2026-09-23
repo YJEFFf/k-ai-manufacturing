@@ -1,0 +1,22 @@
+[
+  {
+    "name": "data/machine_info.csv",
+    "size": 349665,
+    "compressed": 85553
+  },
+  {
+    "name": "data/NC공정생산이력.xlsx",
+    "size": 1490742,
+    "compressed": 1402458
+  },
+  {
+    "name": "data/NC공정생산이력_1차 가공 데이터.xlsx",
+    "size": 1497182,
+    "compressed": 1456392
+  },
+  {
+    "name": "data/order_info.csv",
+    "size": 4076,
+    "compressed": 1281
+  }
+]

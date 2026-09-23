@@ -1,0 +1,170 @@
+[
+  {
+    "window_points_including_target": 4,
+    "start": "2021-05-01",
+    "test_windows": 2976,
+    "exact_window_seen_in_training": 1949,
+    "fraction": 0.6549059139784946
+  },
+  {
+    "window_points_including_target": 4,
+    "start": "2021-06-01",
+    "test_windows": 2880,
+    "exact_window_seen_in_training": 2798,
+    "fraction": 0.9715277777777778
+  },
+  {
+    "window_points_including_target": 4,
+    "start": "2021-07-01",
+    "test_windows": 2778,
+    "exact_window_seen_in_training": 550,
+    "fraction": 0.19798416126709864
+  },
+  {
+    "window_points_including_target": 4,
+    "start": "2021-08-01",
+    "test_windows": 4320,
+    "exact_window_seen_in_training": 1283,
+    "fraction": 0.2969907407407407
+  },
+  {
+    "window_points_including_target": 8,
+    "start": "2021-05-01",
+    "test_windows": 2976,
+    "exact_window_seen_in_training": 1678,
+    "fraction": 0.5638440860215054
+  },
+  {
+    "window_points_including_target": 8,
+    "start": "2021-06-01",
+    "test_windows": 2880,
+    "exact_window_seen_in_training": 2705,
+    "fraction": 0.9392361111111112
+  },
+  {
+    "window_points_including_target": 8,
+    "start": "2021-07-01",
+    "test_windows": 2770,
+    "exact_window_seen_in_training": 85,
+    "fraction": 0.030685920577617327
+  },
+  {
+    "window_points_including_target": 8,
+    "start": "2021-08-01",
+    "test_windows": 4320,
+    "exact_window_seen_in_training": 350,
+    "fraction": 0.08101851851851852
+  },
+  {
+    "window_points_including_target": 16,
+    "start": "2021-05-01",
+    "test_windows": 2976,
+    "exact_window_seen_in_training": 1479,
+    "fraction": 0.4969758064516129
+  },
+  {
+    "window_points_including_target": 16,
+    "start": "2021-06-01",
+    "test_windows": 2880,
+    "exact_window_seen_in_training": 2614,
+    "fraction": 0.9076388888888889
+  },
+  {
+    "window_points_including_target": 16,
+    "start": "2021-07-01",
+    "test_windows": 2754,
+    "exact_window_seen_in_training": 1,
+    "fraction": 0.00036310820624546115
+  },
+  {
+    "window_points_including_target": 16,
+    "start": "2021-08-01",
+    "test_windows": 4320,
+    "exact_window_seen_in_training": 2,
+    "fraction": 0.000462962962962963
+  },
+  {
+    "window_points_including_target": 24,
+    "start": "2021-05-01",
+    "test_windows": 2976,
+    "exact_window_seen_in_training": 1383,
+    "fraction": 0.4647177419354839
+  },
+  {
+    "window_points_including_target": 24,
+    "start": "2021-06-01",
+    "test_windows": 2880,
+    "exact_window_seen_in_training": 2572,
+    "fraction": 0.8930555555555556
+  },
+  {
+    "window_points_including_target": 24,
+    "start": "2021-07-01",
+    "test_windows": 2738,
+    "exact_window_seen_in_training": 1,
+    "fraction": 0.0003652300949598247
+  },
+  {
+    "window_points_including_target": 24,
+    "start": "2021-08-01",
+    "test_windows": 4320,
+    "exact_window_seen_in_training": 0,
+    "fraction": 0.0
+  },
+  {
+    "window_points_including_target": 48,
+    "start": "2021-05-01",
+    "test_windows": 2976,
+    "exact_window_seen_in_training": 1117,
+    "fraction": 0.37533602150537637
+  },
+  {
+    "window_points_including_target": 48,
+    "start": "2021-06-01",
+    "test_windows": 2880,
+    "exact_window_seen_in_training": 2452,
+    "fraction": 0.8513888888888889
+  },
+  {
+    "window_points_including_target": 48,
+    "start": "2021-07-01",
+    "test_windows": 2690,
+    "exact_window_seen_in_training": 1,
+    "fraction": 0.0003717472118959108
+  },
+  {
+    "window_points_including_target": 48,
+    "start": "2021-08-01",
+    "test_windows": 4320,
+    "exact_window_seen_in_training": 0,
+    "fraction": 0.0
+  },
+  {
+    "window_points_including_target": 96,
+    "start": "2021-05-01",
+    "test_windows": 2976,
+    "exact_window_seen_in_training": 589,
+    "fraction": 0.19791666666666666
+  },
+  {
+    "window_points_including_target": 96,
+    "start": "2021-06-01",
+    "test_windows": 2880,
+    "exact_window_seen_in_training": 2212,
+    "fraction": 0.7680555555555556
+  },
+  {
+    "window_points_including_target": 96,
+    "start": "2021-07-01",
+    "test_windows": 2594,
+    "exact_window_seen_in_training": 1,
+    "fraction": 0.00038550501156515033
+  },
+  {
+    "window_points_including_target": 96,
+    "start": "2021-08-01",
+    "test_windows": 4320,
+    "exact_window_seen_in_training": 0,
+    "fraction": 0.0
+  }
+]
