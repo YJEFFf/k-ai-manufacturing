@@ -16,3 +16,4 @@ __pycache__/
 code/press/outputs/requantize/*/press_record_notifications.csv
 code/press/outputs/requantize/*/press_alarm_runs.csv
 code/press/outputs/**/record_notifications_with_sine.csv
+code/press/outputs/pipeline/record_notifications.csv

@@ -3,6 +3,8 @@
 제6회 K-인공지능 제조데이터 분석 경진대회(일반국민/대학(원)생) 준비 중 Claude Code로 진행한 분석입니다.
 예준님(Codex) 작업과 섞이지 않게 이 폴더에만 둡니다.
 
+> **제출 파이프라인 (③ 프레스):** `python code/press/pipeline/run_all.py` 한 번 → 모델 비교·예측 파일·오류분석·진단 ([`code/press/pipeline/README.md`](code/press/pipeline/README.md)). 보고서용 수치: [`notes/프레스_결과요약_보고서용.md`](notes/프레스_결과요약_보고서용.md)
+>
 > **먼저 읽을 것 (③ 프레스, 9/23~):** [`notes/프레스_분석방향_아이디어.md`](notes/프레스_분석방향_아이디어.md) — 분석 방향, 수상작·논문 조사, 아래 검증 결과 전부.
 > 용접 시기(9/22) 기록: [`notes/HANDOFF_2026-09-22.md`](notes/HANDOFF_2026-09-22.md)
 
@@ -27,7 +29,10 @@
 | `notes/용접_수상전략.md` | ② 용접 전략 (진단 D1~D10, 평가항목별 설계) |
 | `notes/문의메일_초안.md` | 주최 측 문의 메일 (발송용 C 버전) |
 | `notes/프레스_분석방향_아이디어.md` | ③ 프레스 분석 방향 · 수상작/논문 조사 · 05~07 검증 결과 |
-| `code/press/` | ③ 프레스 검증 스크립트 05~07 (결과는 `code/press/outputs/`, 큰 CSV 제외) |
+| `code/press/pipeline/` | ③ 프레스 **제출 파이프라인** (`run_all.py`) |
+| `code/press/` | ③ 프레스 탐색 스크립트 05~07 (결과는 `code/press/outputs/`, 큰 CSV 제외) |
+| `notes/프레스_결과요약_보고서용.md` | 보고서 장별 수치·문장 |
+| `notes/프레스_실행계획_2026-09-23.md` | 파이프라인 계획 (Architect·Critic 리뷰 3회 반영) |
 | `code/` | ② 용접 분석 파이프라인 (01~04 + 공통 모듈 `wlib.py`) |
 | `code/outputs/` | 실행 결과 보고서(`*_report.md`)·그림·요약. 큰 CSV는 제외(재실행하면 생김) |
 | `data/` | 원본 데이터 자리 (git에 올리지 않음) |
