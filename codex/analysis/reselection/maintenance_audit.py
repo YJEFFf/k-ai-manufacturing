@@ -11,7 +11,7 @@ import hashlib
 import pandas as pd
 import numpy as np
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 DATA = next(p for p in ROOT.iterdir() if p.is_dir() and unicodedata.normalize('NFC',p.name) == '데이터셋')
 OUT = Path(__file__).with_suffix('.json')
 KEYS = ['소성가공 예지보전', '회전기계', 'Mixer', 'Drier', 'FordEngine', 'Press', '기계부품', '장비이상 조기탐지', '열처리 예지보전', '로봇용접 예지보전']

@@ -3,7 +3,7 @@
 All model definitions, splits, and calibration budgets are fixed in this file.
 No anomaly labels are used for fitting or threshold selection. Recording blocks
 are not independent failures. All anomaly rows, including block starts, count.
-Run: python analysis/press_welding_review/sensor_relation_audit.py
+Run from codex/: python analysis/press_welding_review/sensor_relation_audit.py
 """
 from __future__ import annotations
 
@@ -60,7 +60,7 @@ def main():
     parser.add_argument("--archive", type=Path)
     parser.add_argument("--out", type=Path, default=Path(__file__).resolve().parent)
     args = parser.parse_args()
-    root = Path(__file__).resolve().parents[2]
+    root = Path(__file__).resolve().parents[3]
     archive = args.archive or next(root.rglob("Dataset_소성가공 예지보전 AI 데이터셋.zip"))
     with zipfile.ZipFile(archive) as z:
         members = {Path(n).name: n for n in z.namelist() if n.endswith(".csv")}

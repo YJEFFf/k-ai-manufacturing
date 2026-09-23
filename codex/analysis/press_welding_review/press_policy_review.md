@@ -86,10 +86,11 @@ RMS 준비 구간에 단순 점수를 쓰는 결합 정책은 이후 검토할 �
 ## 재현 및 확인
 
 ```bash
+cd codex
 /opt/anaconda3/bin/python analysis/press_welding_review/press_policy_audit.py
 ```
 
-`--zip`으로 원본 ZIP 경로, `--output`으로 산출물 경로를 지정할 수 있다. 기본 ZIP 탐색은 작업폴더 아래 소성가공 예지보전 ZIP 한 개를 요구한다.
+`--zip`으로 원본 ZIP 경로, `--output`으로 산출물 경로를 지정할 수 있다. 기본 ZIP 탐색은 저장소 루트 아래 소성가공 예지보전 ZIP 한 개를 요구한다.
 
 - `press_policy_metrics.csv`: 두 분할 × 세 점수 × 두 보정단위 × 세 예산의 36개 구성.
 - `press_record_notifications.csv`: 정상·이상 기록구간별 커버리지, 최초 알림, 반복 경보 수, 관측후 지연.

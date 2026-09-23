@@ -62,7 +62,8 @@ Ctx의 3% 결과는 경계를 제거해도 거의 유지됐다. 고가압력 밖
 ## 재현과 산출물
 
 ```sh
-PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python analysis/press_welding_review/welding_validation_audit.py --claude-code /tmp/kai-claude-review.XP9eUV/claude/code
+cd codex
+PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python analysis/press_welding_review/welding_validation_audit.py --claude-code ../claude/code
 ```
 
 다른 환경에서는 `--claude-code`에 해당 Claude 브랜치의 `claude/code` 경로를 지정한다. 원본 XLSX 위치가 다르면 `--xlsx`로 지정한다. 실라벨 집계만 재현하려면 `--daily-only`를 사용한다.

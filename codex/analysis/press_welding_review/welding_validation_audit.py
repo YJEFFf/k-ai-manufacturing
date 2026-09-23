@@ -1,8 +1,8 @@
 """Bounded welding audit: real daily labels and purged synthetic sensitivity.
 
-Run with the reviewed Claude branch's code directory, for example:
+Run from codex/ with the reviewed Claude code directory, for example:
   /opt/anaconda3/bin/python analysis/press_welding_review/welding_validation_audit.py \
-    --claude-code /tmp/kai-claude-review.XP9eUV/claude/code
+    --claude-code ../claude/code
 
 Daily models and alpha=10 are fixed before examining results. The synthetic
 experiment reuses identical original validation/test injections across modes.
@@ -191,7 +191,7 @@ def main():
     parser.add_argument("--daily-only", action="store_true")
     args = parser.parse_args()
     out = Path(__file__).resolve().parent
-    repo = out.parents[1]
+    repo = out.parents[2]
     xlsx = args.xlsx or next(repo.rglob("Welding Data Set_01.xlsx"))
     sys.path.insert(0, str(args.claude_code))
     import wlib

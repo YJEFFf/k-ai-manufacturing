@@ -11,7 +11,7 @@ import zlib
 from PIL import Image
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[1]
+ROOT = HERE.parents[2]
 scan_path = next(HERE.glob("*32652.egg_scan.json"))
 scan = json.loads(scan_path.read_text())
 entries = scan["entries"]

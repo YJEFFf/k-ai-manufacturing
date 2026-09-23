@@ -7,13 +7,14 @@ if the cache budget would be exceeded. No report-template access.
 from pathlib import Path
 import json,subprocess,unicodedata,datetime,shutil
 
-ROOT=Path(__file__).resolve().parents[2]
+ROOT=Path(__file__).resolve().parents[3]
 OUT=Path(__file__).resolve().parent
+ANALYSIS=OUT.parent
 CACHE=Path('/tmp/kamp-followup-cache');CACHE.mkdir(exist_ok=True)
 textdir=OUT/'pdf_text';textdir.mkdir(exist_ok=True)
-mapping=json.loads((ROOT/'analysis/reselection/download_source_mapping.json').read_text())
-pdfs=json.loads((ROOT/'analysis/reselection/pdf_available_inventory.json').read_text())
-archive_checks=json.loads((ROOT/'analysis/reselection/archive_checks.json').read_text())
+mapping=json.loads((ANALYSIS/'reselection/download_source_mapping.json').read_text())
+pdfs=json.loads((ANALYSIS/'reselection/pdf_available_inventory.json').read_text())
+archive_checks=json.loads((ANALYSIS/'reselection/archive_checks.json').read_text())
 read_pdfs={unicodedata.normalize('NFC',r['source']) for r in pdfs}
 good_archives={unicodedata.normalize('NFC',r['path']) for r in archive_checks if r.get('status')=='zip_crc_all_pass'}
 priority=[4,48,27,51,52,50,2,18,9,11,23,43,45]

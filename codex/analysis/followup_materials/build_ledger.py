@@ -1,10 +1,10 @@
 """Current guide coverage ledger from stat and materialized texts; no originals changed."""
 from pathlib import Path
 import json,re,unicodedata,datetime,zipfile
-ROOT=Path(__file__).resolve().parents[2];OUT=Path(__file__).resolve().parent
+ROOT=Path(__file__).resolve().parents[3];OUT=Path(__file__).resolve().parent
 catalog=json.loads(Path('/tmp/kamp_free_catalog.json').read_text())['entries']
 source=next(p for p in ROOT.iterdir() if unicodedata.normalize('NFC',p.name)=='데이터셋')
-old=ROOT/'analysis/reselection/pdf_text';new=OUT/'pdf_text'
+old=OUT.parent/'reselection/pdf_text';new=OUT/'pdf_text'
 def norm(s):return re.sub(r'[\s_,.\-]+','',unicodedata.normalize('NFC',s)).lower()
 def identify(name):
  m=re.match(r'^(\d{2})\.',name)
@@ -23,7 +23,7 @@ for e in catalog:
  p=source_files.get(ident);t=fresh.get(ident) or prior.get(ident)
  r={'id':ident,'title':e['title'],'source':str(p.relative_to(ROOT)) if p else None,'source_current_location_known':p is not None,'source_bytes':p.stat().st_size if p else None,'text_extracted':t is not None,'text':str(t.relative_to(ROOT)) if t else None,'prior_text_exists':ident in prior,'followup_text_exists':ident in fresh}
  if ident in reviewed:r.update(review_status='decisive_label_validation_sections_reviewed_in_followup',reviewed_pdf_pages=reviewed[ident])
- elif ident==4:r.update(review_status='completed_injection_raw_guide_mapping_and_forward_audit',followup_report='analysis/followup_materials/injection_recovered/injection_recovered_verdict.md')
+ elif ident==4:r.update(review_status='completed_injection_raw_guide_mapping_and_forward_audit',followup_report='codex/analysis/followup_materials/injection_recovered/injection_recovered_verdict.md')
  elif ident==27:r['review_status']='energy_agent_reported_guide_review_complete'
  elif t:r['review_status']='text_available_no_new_decisive_review_claim_by_this_agent'
  else:r['review_status']='body_unavailable_or_current_location_unknown'

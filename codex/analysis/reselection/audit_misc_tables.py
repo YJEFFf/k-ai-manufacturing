@@ -7,7 +7,7 @@ import unicodedata
 import zipfile
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 OUT = Path(__file__).resolve().parent
 DATA = next(p for p in ROOT.iterdir() if unicodedata.normalize('NFC', p.name) == '데이터셋')
 TERMS = ['Dataset_Meltingtank', '전자부품(배터리팩) 품질보증', '열처리 품질보증',

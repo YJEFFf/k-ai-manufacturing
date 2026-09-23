@@ -6,7 +6,7 @@ import numpy as np
 from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.metrics import average_precision_score, f1_score, precision_score, recall_score, confusion_matrix
 
-ROOT=Path(__file__).resolve().parents[3]
+ROOT=Path(__file__).resolve().parents[4]
 OUT=Path(__file__).resolve().parent
 DATA=next(p for p in ROOT.iterdir() if unicodedata.normalize('NFC',p.name)=='데이터셋')
 d=pd.read_csv(DATA/'Investment_Casting.csv')

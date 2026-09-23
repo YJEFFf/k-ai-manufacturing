@@ -101,7 +101,7 @@ def main():
                         default=Path(__file__).resolve().parent)
     args = parser.parse_args()
     if args.zip is None:
-        matches = list(Path.cwd().glob('*/*소성가공 예지*zip'))
+        matches = list(Path(__file__).resolve().parents[3].glob('*/*소성가공 예지*zip'))
         assert len(matches) == 1, matches
         args.zip = matches[0]
     with zipfile.ZipFile(args.zip) as archive:

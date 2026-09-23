@@ -100,14 +100,15 @@ RMS는 준비에 필요한 처음 4관측 때문에 이상 83행을 판정하지
 
 ## 재현 및 변경 범위
 
-원본·기존 보고서·Claude 브랜치 코드는 수정하지 않았다. 이 폴더에 추가 감사 코드와 결과를 보관한다. GitHub 푸시나 외부 연락은 수행하지 않았다.
+검증 당시 원본·기존 보고서·Claude 브랜치 코드는 수정하지 않았다. 이 폴더에 추가 감사 코드와 결과를 보관한다. 검증 후 사용자 요청으로 GitHub에 커밋·푸시하고, Codex 자료를 `codex/`로 옮기면서 실행 경로와 안내를 갱신했다. 외부 연락은 수행하지 않았다.
 
-확인 환경: Python 3.12.2, numpy 1.26.4, pandas 2.3.3, scipy 1.13.1, scikit-learn 1.8.0, openpyxl 3.1.5, matplotlib 3.9.2. 저장소 루트에서 실행한다. 원본 데이터는 기존 로컬 폴더에 있어야 한다.
+확인 환경: Python 3.12.2, numpy 1.26.4, pandas 2.3.3, scipy 1.13.1, scikit-learn 1.8.0, openpyxl 3.1.5, matplotlib 3.9.2. 저장소 루트에서 `codex/`로 이동한 뒤 실행한다. 원본 데이터는 저장소 루트의 기존 로컬 폴더에 있어야 한다.
 
 ```bash
+cd codex
 python analysis/press_welding_review/press_policy_audit.py
 python analysis/press_welding_review/sensor_relation_audit.py
-python analysis/press_welding_review/welding_validation_audit.py --claude-code /path/to/claude/code
+python analysis/press_welding_review/welding_validation_audit.py --claude-code ../claude/code
 ```
 
 마지막 경로에는 커밋 `1162c1d`의 `claude/code`를 지정한다. 이번 실행 경로는 `/tmp/kai-claude-review.XP9eUV/claude/code`였다. 실제 일별 집계만 재현할 때는 `--daily-only`를 추가한다. 합성 실험은 Claude의 원함수를 가져와 같은 주입·분할을 사용하고 경계 제외의 효과만 비교한다.

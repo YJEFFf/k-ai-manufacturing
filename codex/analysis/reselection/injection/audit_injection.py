@@ -7,7 +7,7 @@ import io, json, zipfile, unicodedata, hashlib, struct, zlib
 import pandas as pd
 import numpy as np
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[4]
 OUT = Path(__file__).resolve().parent
 DATA = next(p for p in ROOT.iterdir() if unicodedata.normalize('NFC', p.name) == '데이터셋')
 KEYS = ['Molding', 'Machinevision', '사출성형 예지보전', '생산공정 최적화',

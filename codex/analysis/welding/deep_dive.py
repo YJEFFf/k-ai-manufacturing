@@ -330,7 +330,7 @@ def audit(root, out, plots):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[2])
+    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[3])
     parser.add_argument("--out", type=Path, default=Path(__file__).resolve().parent / "outputs")
     parser.add_argument("--plots", action="store_true", help="Requires matplotlib")
     args = parser.parse_args()
