@@ -11,26 +11,40 @@
     "normal": 0,
     "abnormal": 0
   },
-  "split_segment_counts": {
-    "A": {
-      "train": 360,
-      "cal": 120,
-      "test": 120
-    },
-    "B": {
-      "train": 300,
-      "cal": 120,
-      "test": 180
-    }
-  },
   "diagnosis_generated": true,
   "format_rules_after_preprocess_max_separability": 0.5,
-  "artifact_roundtrip_ok": true,
+  "conformal_mc_within_4se": true,
+  "step2": {
+    "A": {
+      "main_model": "combined_w8",
+      "degenerate": false,
+      "stream_equals_evaluation": true,
+      "shuffle_invariant": true,
+      "prediction_alarm_counts_equal_table": true,
+      "conformal_p_equals_threshold_alarms": true,
+      "artifact": "main_A.json",
+      "normal_notified": 0,
+      "abnormal_notified": 21,
+      "seconds": 3.2
+    },
+    "B": {
+      "main_model": "combined_w8",
+      "degenerate": false,
+      "stream_equals_evaluation": true,
+      "shuffle_invariant": true,
+      "prediction_alarm_counts_equal_table": true,
+      "conformal_p_equals_threshold_alarms": true,
+      "artifact": "main_B.json",
+      "normal_notified": 3,
+      "abnormal_notified": 21,
+      "seconds": 2.6
+    }
+  },
+  "step2_all_ok": true,
   "outputs_free_of_raw_sensor_columns": true,
   "raw_column_hits": {},
   "pending_steps": [
-    "scores_calibrate_evaluate(2단계)",
-    "robustness_ablation_errors(3단계)",
+    "robustness_sensitivity_ablation_errors(3단계)",
     "baselines_lstm_uncertainty(4단계)",
     "field_persistence_evidence(5단계)",
     "freeze_env_clean_repro_zip(6단계)"

@@ -6,8 +6,8 @@
 |---|---|---|---|
 | `yejun/analysis/press_welding_review/press_policy_audit.py` (예준 평가 헬퍼) | 320818e | 4887e4c52bcb9022 | `vendor/press_policy_audit.py`로 바이트 동일 복사. `blocks, rms5, cutoff_at_budget, segment_max, summarize_records, SPLITS, BUDGETS` 사용. import 시 LF 정규화 해시 검증 |
 | `claude/code/press/pipeline/data.py` (준용) | cee2267 | f95f3e1fddeeb8f6 | `press/data.py`로 재작성: 해시·행 수 검증, 행 상태(bad_timestamp/bad_value), 잘못된 행 경계, 분할 A/B 이름, 전처리 3종 통합 |
-| `claude/code/press/pipeline/scores.py` (준용) | bfe9290 | 230cf028f9ae6901 | 2단계에서 `press/scores.py`로 재작성 예정(사인 적합 hat 행렬·max-z·5NN·RMS5·IF·MLP-AE 구조 재사용, 상한 있는 `tail_logp`는 q95 지수 꼬리로 대체) |
-| `claude/code/press/pipeline/evaluate.py` (준용) | bfe9290 | 0cd565da0062deb6 | 2단계에서 `press/calibrate.py`·`press/evaluate.py`로 재작성 예정(conformal p, criterion 열, alpha_grid) |
+| `claude/code/press/pipeline/scores.py` (준용) | bfe9290 | 230cf028f9ae6901 | `press/scores.py`로 재작성: 사인 적합 hat 행렬·max-z·5NN·RMS5·IF·MLP-AE 구조 재사용. 상한 있는 `tail_logp`는 절제용 `capped_logp`로 남기고 주 변환은 `ExpTail`(q95 초과분 지수 꼬리). SST=0 창은 0이 아니라 NaN. 진동 2센서 max-z 추가. artifact 상태로 추론하는 `MainModel` 추가 |
+| `claude/code/press/pipeline/evaluate.py` (준용) | bfe9290 | 0cd565da0062deb6 | `press/calibrate.py`(conformal p·alpha_grid·p≤α와 동치인 문턱·cutoff·이항 상한·MC 검사)와 `press/evaluate.py`(모델×단위×기준×α 집계, vendor summarize_records 재사용)로 재작성 |
 | `claude/code/press/pipeline/diagnosis.py` (준용) | bfe9290 | 828b70771a173d10 | `press/diagnosis.py`로 재작성: 자릿수·격자 허용오차 2종·규칙 발화율/AUROC·Δt 분해·구간 평균 범위·lag-1 자기상관·파형 표 추가. '지터'·DC 오프셋 해석 제거 |
 | `claude/code/press/pipeline/analysis.py` (준용) | bfe9290 | d79e94d51a93a13b | 3단계에서 `press/analysis.py`로 재작성 예정(분모 포함 조건표·2×2 상호작용) |
 | `claude/code/press/pipeline/select_w.py` (준용) | bfe9290 | 418a8c71185794c8 | 사용하지 않음(PLAN §2: 주 모델 w=8 고정, 민감도 공개) |

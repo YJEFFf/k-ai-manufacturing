@@ -1,12 +1,14 @@
 {
   "protocol_version": "v1",
-  "git_commit": "8d234a2",
+  "git_commit": "3a7d504",
   "args": {
     "root": ".",
     "out": "outputs",
     "artifacts": "None",
     "preprocess": "matched",
-    "no_verify": "False"
+    "no_verify": "False",
+    "no_baselines": "False",
+    "steps": "2"
   },
   "environment": {
     "python": "3.12.2",
@@ -46,19 +48,29 @@
     }
   },
   "timings_s": {
-    "load_validate_s": 0.74,
-    "splits_preprocess_s": 0.0,
-    "diagnosis_s": 1.44,
-    "total_s": 2.19
+    "step1_s": 1.52,
+    "step2_s": 5.86,
+    "total_s": 7.39
   },
   "outputs": {
     "checks.json": "efa0aa7cd5e5909ce27fcef227ba5d94fbef4f6cc75b91dfa524b952461d418f",
+    "conformal_mc.csv": "9ad41b2c95e1df78dc00b6f6b5a6c9c2017b49aaddbf577352692c5118d18183",
     "diagnosis.json": "f5cadd1ee7f854de37e0cfc05aca1f4f4b362ac3ada9a9b9e6a96d833d5b3e8d",
     "diagnosis.md": "a5f675ae7a993a792f2aef0de57feb8536cdb2fd7ea177c061ffbf165db29e0d",
     "fig_current_waveform.png": "881450e3419bcaf582a403fe45da1ba87862517c8517dc29da1a65e405752579",
     "fig_segment_length.png": "4cec977dbfbad67e97a1f7aedf8179ac2de5a0ce3b49527e6aea9e1c99f0f02a",
+    "model_comparison.csv": "69ceeb1b18bafc2061330ba242dabd9b489939c8517bcf84156803b0ce9e876f",
+    "model_comparison.md": "d26c36449617890860f567502715b4547bd14027fcabf07f91192f9ff4a7acad",
+    "model_comparison_cutoff.md": "af355eef23fc6bed1af0fa6f0906480940337400cf69f5f9b25666f1a34d568f",
+    "operating_points.csv": "fb51ae4056db6f0f7a48fc43134f242ad95167e2734d7065882dded7f459b25f",
+    "predictions_A.csv": "0656fc309cd75e0fa083cd74206b436871e19e7c8a6d9e4fd8d9256a7e7e8b4b",
+    "predictions_B.csv": "a1f4fd3d8246c738aded9b464adffa94cf87769cae8e55f45483af7fd241a0ea",
     "preprocess_effect.csv": "0156e0621334b9fbc02e1d9c29d43ea342e3a07cb676efbb4967a6fdfa088414",
+    "records_main_A.csv": "91843e924c44d6ebbe73783337699c5f6523efee4983a65ea54fa87be69a7f33",
+    "records_main_B.csv": "9a6442a2b306e4acc5a12f8ee98b059ae1a330ae3cf13d2ba49eb6178bf25c38",
     "splits.csv": "616f348579ff313e3bbc5e592a26f29a92f7c7ce6a3e5369980cddc4e6de1880",
+    "tail_params.csv": "86d33c25f7e46672c8579801437c849a72e608e259c411793485108aec0d19d3",
+    "thresholds_main.csv": "c2da6d95539bc43cf654ada62f42385cc496945c799ad8eaedbf4155c5006bfa",
     "waveform_segments.csv": "9b36afcc7ff9a017b623332d0d561228078a894db11eeabbbe0b1379cbabcee1"
   }
 }
