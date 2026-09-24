@@ -40,13 +40,18 @@ print(f"file means AI2: normal {N.AI2_Current.mean():.6f}, abnormal {A.AI2_Curre
 sm = N.groupby("seg").AI2_Current.mean(); print(f"normal segment means range: {sm.min():.2f} .. {sm.max():.2f}; abnormal seg means range: {A.groupby('seg').AI2_Current.mean().min():.2f} .. {A.groupby('seg').AI2_Current.mean().max():.2f}")
 print(f"normal AI2 std {N.AI2_Current.std():.2f}, abnormal {A.AI2_Current.std():.2f}")
 
-print("\n== current grid: multiples of 1e7*2^-23 ==")
-g = 1e7 * 2.0**-23
-for lab, df in [("normal", N), ("abnormal", A)]:
-    q = df.AI2_Current.values / g
-    print(f"{lab}: on-grid fraction {(np.abs(q-np.round(q))<1e-6).mean():.4f}; grid={g:.7f}")
-print("vibration decimals (max digits after point) normal/abnormal:",
-      max(len(s.split('.')[1]) if '.' in s else 0 for s in pd.read_csv(io.BytesIO(zf.read('data/press_data_normal.csv')), dtype=str).AI0_Vibration.head(2000)),
+print("\n== current grid: spacing and dimensionless tolerance explicitly reported ==")
+# 05 uses spacing 1.1920929 and residual tolerance 1e-3. A tighter
+# tolerance is a separate sensitivity check, not the same shortcut rule.
+for definition, g in [("legacy_05", 1.1920929), ("binary_spacing_hypothesis", 1e7 * 2.0**-23)]:
+    for lab, df in [("normal", N), ("abnormal", A)]:
+        q = df.AI2_Current.values / g
+        residual = np.abs(q - np.round(q))
+        for tolerance in (1e-3, 1e-6):
+            print(f"{definition}, {lab}: grid={g:.12g}, tolerance={tolerance:g}, "
+                  f"on-grid fraction={(residual < tolerance).mean():.4f}")
+print("vibration decimals (max digits after point, all rows) normal/abnormal:",
+      max(len(s.split('.')[1]) if '.' in s else 0 for s in pd.read_csv(io.BytesIO(zf.read('data/press_data_normal.csv')), dtype=str).AI0_Vibration),
       max(len(s.split('.')[1]) if '.' in s else 0 for s in pd.read_csv(io.BytesIO(zf.read('data/outlier_data.csv')), dtype=str).AI0_Vibration))
 
 print("\n== R1: half period ==")

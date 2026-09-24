@@ -1,0 +1,52 @@
+2026-09-24 Codex final review verification
+Base: 33312d4; verifier updated to distinguish grid spacings/tolerances and inspect all vibration rows.
+Script SHA256: 9386cee5331262a591a5db9fbf599c3707bf6761670feb0dcce3ae5598ba594d
+Scope: factual recalculation only; no new POT model training or performance claim.
+
+== R3: Δt (seconds) ==
+normal: n_gaps=19999, dt==0.1 (±1e-6): 19400, dt==0: 1, other<=0.15: 0
+   SD(all <=0.15 incl zeros)=0.000717921  SD(positive only)=1.39e-17  max|dt-0.1| among positive small=0.00e+00
+   distinct ms fractional offsets mod 100: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] (count 99)
+abnormal: n_gaps=599, dt==0.1 (±1e-6): 579, dt==0: 0, other<=0.15: 0
+   SD(all <=0.15 incl zeros)=0.000000000  SD(positive only)=1.39e-17  max|dt-0.1| among positive small=0.00e+00
+   distinct ms fractional offsets mod 100: [7, 9, 15, 18, 24, 26, 34, 39, 40, 43] (count 21)
+
+== segments == 600 21
+
+== R6: LSTM trailing-20 windows inside abnormal segments ==
+abnormal seg lengths: [3, 4, 4, 8, 10, 15, 15, 18, 24, 25, 28, 31, 36, 40, 42, 47, 50, 50, 50, 50, 50]
+segments <20: 8 [3, 4, 4, 8, 10, 15, 15, 18]
+scorable rows (sum max(0,len-19)): 276  scorable segments: 13
+F1 upper bound (unscored=miss, no FP): 0.63014
+  w=5: scorable rows 517, scorable segs 18, F1 ub 0.9257
+  w=8: scorable rows 463, scorable segs 18, F1 ub 0.8711
+  w=10: scorable rows 428, scorable segs 17, F1 ub 0.8327
+
+== R3: current means ==
+file means AI2: normal 1.446209, abnormal 57.329741
+normal segment means range: -235.94 .. 222.17; abnormal seg means range: -184.77 .. 272.43
+normal AI2 std 122.66, abnormal 153.17
+
+== current grid: spacing and dimensionless tolerance explicitly reported ==
+legacy_05, normal: grid=1.1920929, tolerance=0.001, on-grid fraction=0.0018
+legacy_05, normal: grid=1.1920929, tolerance=1e-06, on-grid fraction=0.0000
+legacy_05, abnormal: grid=1.1920929, tolerance=0.001, on-grid fraction=1.0000
+legacy_05, abnormal: grid=1.1920929, tolerance=1e-06, on-grid fraction=0.0767
+binary_spacing_hypothesis, normal: grid=1.19209289551, tolerance=0.001, on-grid fraction=0.0018
+binary_spacing_hypothesis, normal: grid=1.19209289551, tolerance=1e-06, on-grid fraction=0.0000
+binary_spacing_hypothesis, abnormal: grid=1.19209289551, tolerance=0.001, on-grid fraction=1.0000
+binary_spacing_hypothesis, abnormal: grid=1.19209289551, tolerance=1e-06, on-grid fraction=0.0767
+vibration decimals (max digits after point, all rows) normal/abnormal: 16 11
+
+== R1: half period ==
+half period 0.8333s; w=8 span (w-1)dt=0.7s, duration w*dt=0.8s; w needed by span: 10, by duration: 9
+
+== R7: mean-removed RMS phase sensitivity (unit sine 0.6Hz, dt=0.1) ==
+  w=3: min 0.03317 max 0.30057 ratio 9.06
+  w=8: min 0.27937 max 0.69188 ratio 2.48
+  w=17: min 0.69999 max 0.71388 ratio 1.02
+
+== R2/R5 ==
+P(true FA rate of max-threshold > 1%) iid: 0.99^120 = 0.299380
+one-sided 95% upper bound on FA rate given 0/120: 0.024655
+cutoff exceedance prob (1 allowed of 120): 2/121 = 0.01653; conformal alpha_eff at 1/3/5%: [0.008264462809917356, 0.024793388429752067, 0.049586776859504134]
