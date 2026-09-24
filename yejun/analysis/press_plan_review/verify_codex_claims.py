@@ -1,8 +1,8 @@
 """Codex 적대적 검토(README.md)의 사실 주장을 원본 zip에서 직접 재계산한다.
 실행: 저장소 루트에서  PYTHONDONTWRITEBYTECODE=1 python3 yejun/analysis/press_plan_review/verify_codex_claims.py
-입력: 데이터셋/Dataset_소성가공 예지보전 AI 데이터셋.zip (Git 제외). 출력은 화면에만 낸다."""
+입력: 데이터셋/프레스_유압펌프_예지보전/Dataset_소성가공 예지보전 AI 데이터셋.zip (Git 제외). 출력은 화면에만 낸다."""
 import zipfile, io, numpy as np, pandas as pd
-Z = "데이터셋/Dataset_소성가공 예지보전 AI 데이터셋.zip"
+Z = "데이터셋/프레스_유압펌프_예지보전/Dataset_소성가공 예지보전 AI 데이터셋.zip"
 zf = zipfile.ZipFile(Z)
 def load(name):
     df = pd.read_csv(io.BytesIO(zf.read(name)))
