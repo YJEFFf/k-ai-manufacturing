@@ -6,6 +6,7 @@
 
 ## 먼저 볼 문서
 
+- [클로드 후속 계획 적대적 검토](analysis/press_plan_review/README.md): 2026-09-24 계획 실행 전 수정할 R1~R8, 실제 계산 결과, 검토 당시 계획 원문
 - `analysis/press_welding_review/README.md`: 2026-09-23 프레스·용접 추가 검증과 현재 선택
 - `과제재선정_정밀검토.md`: 이전 후보 범위에서의 과제 추천과 핵심 근거
 - `과제재선정_후속검증.md`: 추가 자료 및 실험을 반영한 상세 검토
@@ -15,6 +16,7 @@
 
 ## 디렉터리
 
+- `analysis/press_plan_review/`: 클로드 후속 계획 검토와 검토 당시 원문
 - `analysis/press_welding_review/`: 두 후보의 집계 정답·경보 정책·센서 관계 추가 검증
 - `analysis/reselection/`: 다섯 과제와 KAMP 추가 자료의 감사 코드·결과·판정
 - `analysis/energy_followup/`: 전력 예측, 고부하 경보, 오류 조건 분석
