@@ -1,0 +1,9 @@
+split_id,split,part,rows,segments
+A,normal_60_20_20,train,11963,360
+A,normal_60_20_20,cal,3947,120
+A,normal_60_20_20,test,4090,120
+A,normal_60_20_20,abnormal_test,600,21
+B,normal_50_20_30,train,10133,300
+B,normal_50_20_30,cal,3770,120
+B,normal_50_20_30,test,6097,180
+B,normal_50_20_30,abnormal_test,600,21

@@ -1,0 +1,7 @@
+# 실제 실행·검증한 조합 (macOS arm64, Python 3.12.2). 2단계 이후 torch 등은 사용 시점에 추가한다.
+numpy==1.26.4
+pandas==2.3.3
+scikit-learn==1.8.0
+scipy==1.13.1
+matplotlib==3.9.2
+pytest==9.0.3

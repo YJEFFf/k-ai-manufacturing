@@ -43,3 +43,10 @@ analysis/reselection/*egg_crc.json
 analysis/reselection/xray_prefix_audit.json
 analysis/reselection/misc_table_profiles.json
 analysis/reselection/*listing.json
+
+# press_submission: 원본 데이터·학습 상태·행별 예측은 Git 제외 (제출 ZIP에만 포함)
+press_submission/data/
+press_submission/artifacts/
+press_submission/outputs/predictions*.csv
+press_submission/outputs/**/records*.csv
+press_submission/**/.pytest_cache/

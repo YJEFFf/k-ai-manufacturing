@@ -1,0 +1,64 @@
+{
+  "protocol_version": "v1",
+  "git_commit": "8d234a2",
+  "args": {
+    "root": ".",
+    "out": "outputs",
+    "artifacts": "None",
+    "preprocess": "matched",
+    "no_verify": "False"
+  },
+  "environment": {
+    "python": "3.12.2",
+    "platform": "macOS-26.3.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.8.0",
+    "scipy": "1.13.1",
+    "matplotlib": "3.9.2",
+    "blas": null,
+    "protocol_version": "v1"
+  },
+  "omp_num_threads": "1",
+  "inputs": {
+    "data_dir": "data/3_소성가공_예지보전",
+    "verified": true,
+    "files": {
+      "normal": {
+        "path": "data/3_소성가공_예지보전/press_data_normal.csv",
+        "sha256": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+        "rows": 20000,
+        "sha256_expected": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+        "sha256_ok": true,
+        "rows_expected": 20000,
+        "rows_ok": true
+      },
+      "abnormal": {
+        "path": "data/3_소성가공_예지보전/outlier_data.csv",
+        "sha256": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+        "rows": 600,
+        "sha256_expected": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+        "sha256_ok": true,
+        "rows_expected": 600,
+        "rows_ok": true
+      }
+    }
+  },
+  "timings_s": {
+    "load_validate_s": 0.74,
+    "splits_preprocess_s": 0.0,
+    "diagnosis_s": 1.44,
+    "total_s": 2.19
+  },
+  "outputs": {
+    "checks.json": "efa0aa7cd5e5909ce27fcef227ba5d94fbef4f6cc75b91dfa524b952461d418f",
+    "diagnosis.json": "f5cadd1ee7f854de37e0cfc05aca1f4f4b362ac3ada9a9b9e6a96d833d5b3e8d",
+    "diagnosis.md": "a5f675ae7a993a792f2aef0de57feb8536cdb2fd7ea177c061ffbf165db29e0d",
+    "fig_current_waveform.png": "881450e3419bcaf582a403fe45da1ba87862517c8517dc29da1a65e405752579",
+    "fig_segment_length.png": "4cec977dbfbad67e97a1f7aedf8179ac2de5a0ce3b49527e6aea9e1c99f0f02a",
+    "preprocess_effect.csv": "0156e0621334b9fbc02e1d9c29d43ea342e3a07cb676efbb4967a6fdfa088414",
+    "splits.csv": "616f348579ff313e3bbc5e592a26f29a92f7c7ce6a3e5369980cddc4e6de1880",
+    "waveform_segments.csv": "9b36afcc7ff9a017b623332d0d561228078a894db11eeabbbe0b1379cbabcee1"
+  }
+}
