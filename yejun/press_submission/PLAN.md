@@ -164,7 +164,7 @@ yejun/press_submission/
   run_all.py, predict.py, verify.py
   press/
     data.py, scores.py, calibrate.py, evaluate.py
-    lstm_ae.py, diagnosis.py, analysis.py, field.py, robustness.py, numbers.py
+    lstm_ae.py, diagnosis.py, analysis.py, field.py, robustness.py, numbers.py, validation.py
   vendor/press_policy_audit.py
   tests/
   tools/check_alignment.py     # 보고서 착수 지시 이후에만 사용
@@ -184,6 +184,7 @@ Python 3.12·CPU를 기준으로 실제 설치·실행한 의존성 조합을 `=
 - 캐시 키는 입력 해시·코드/프로토콜 버전·전처리·분할·모델 설정·시드·환경을 포함한다. 경로 이름이나 과거 산출물의 존재만으로 재사용하지 않는다.
 - 복사한 코드의 출처 경로·커밋·해시와 변경점을 PROVENANCE에 기록한다. 공통 구간 함수 하나를 사용하고 vendor 내부의 별도 함수가 다른 경계를 적용하지 않는지 확인한다.
 - `numbers.json`은 실행 결과만 읽어 생성하는 검수용 수치 집계다. 각 숫자에는 모델·분할·전처리·criterion·예산·단위·분모·실행 ID를 연결한다. 보고서 서술이나 장별 문서는 생성하지 않는다.
+- 실행기와 검증기는 `validation.py`의 단계별 필수 검사·산출물 계약을 공유한다. 누락된 검사나 결과를 완료로 간주하지 않으며, manifest에 해당 실행 산출물의 해시를 기록한다. `verify.py --steps N`은 실행 범위 내의 명시적인 부분 비교다. 기대값 동결은 검증된 입력·필수 검사·파일 무결성을 먼저 확인한다. run_id에는 코드·설정·입력·환경을 반영한다.
 - 공식 별도 테스트셋은 확보된 자료에서 확인되지 않았다. 자체 평가 예측 파일이라는 상태와 이상 자료 재사용을 명시한다. W13 문의 초안에 예측 형식·자체 평가셋·p값 출력의 적합성을 포함한다. 메일 발송은 예준의 별도 발송 지시가 있을 때 수행한다.
 
 ## 8. 구현 순서와 완료 기준

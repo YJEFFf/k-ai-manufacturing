@@ -4,7 +4,8 @@
 
 1단계: 데이터 검증·기록구간·분할·전처리 효과·진단·manifest.
 2단계: 주 전처리에서 분할 A/B마다 정상 학습 적합 → 보정 → 평가(모델 × 보정 단위 × 기준 × α) → 주 모델 artifact·예측 파일·검사.
-3단계 이후는 checks.json의 pending_steps에 표시한다.
+3단계: 강건성·오류 조건, 4단계: LSTM·불확실성, 5단계: 현장 정책·검수용 수치 집계.
+실행 범위는 checks.json의 steps_run으로 기록하며 대회 보고서는 생성하지 않는다.
 """
 from __future__ import annotations
 
@@ -28,9 +29,8 @@ from press.artifact import Artifact  # noqa: E402
 from press.calibrate import ALPHAS, conformal_p, mc_check_conformal, segment_max, thresholds_for  # noqa: E402
 from press.evaluate import comparison_markdown, evaluate_models  # noqa: E402
 from press.scores import MAIN_W, ExpTail, MainModel, Scorer  # noqa: E402
+from press.validation import check_required, output_names, run_fingerprint  # noqa: E402
 
-REQUIRED_CHECKS = ["input_hash_ok", "input_rows_ok", "segments_equal_vendor_blocks", "conformal_mc_within_4se",
-                   "step2_all_ok", "step3_label_bypass_ok", "outputs_free_of_raw_sensor_columns"]
 EXTERNAL_CHECKS = ["tools/clean_repro.sh --with-lstm (캐시 사용 깨끗한 클론 재현)", "tools/clean_repro.sh --retrain-lstm (캐시 없는 재학습 재현)",
                    "verify.py --out outputs (동결 기대값 비교)"]
 
@@ -275,7 +275,7 @@ def main(argv=None):
     ap.add_argument("--preprocess", choices=list(D.QUANTIZATION), default="matched")
     ap.add_argument("--no-verify", action="store_true", help="입력 해시·행 수 검증을 건너뛴다(다른 자료로 실행할 때)")
     ap.add_argument("--no-baselines", action="store_true", help="5NN·RMS5·IF·MLP-AE 생략(빠른 확인용)")
-    ap.add_argument("--steps", type=int, default=5, help="실행할 단계 수 (1 진단, 2 주 모델, 3 강건성·오류, 4 LSTM·불확실성, 5 현장·수치 집계; 보고서 생성 없음)")
+    ap.add_argument("--steps", type=int, choices=range(1, 6), default=5, help="실행할 단계 수 (1 진단, 2 주 모델, 3 강건성·오류, 4 LSTM·불확실성, 5 현장·수치 집계; 보고서 생성 없음)")
     ap.add_argument("--lstm-epochs", type=int, default=300, help="공통 프로토콜 LSTM 최대 에폭(축약 학습)")
     ap.add_argument("--lstm-patience", type=int, default=30, help="공통 프로토콜 LSTM 조기 종료 patience")
     ap.add_argument("--lstm-guide-epochs", type=int, default=800, help="가이드북 재구현 최대 에폭(원값 800)")
@@ -312,21 +312,25 @@ def main(argv=None):
     checks["raw_column_hits"] = raw_hits
     checks["steps_run"] = args.steps
     checks["external_checks_not_run_here"] = EXTERNAL_CHECKS
-    failed = [k for k in REQUIRED_CHECKS if k in checks and checks[k] is not True]
-    checks["required_checks_ok"] = not failed
-    checks["required_checks_failed"] = failed
     timings["total_s"] = round(time.time() - t0, 2)
     import torch  # noqa: E402
     code_hash = code_sha256()
-    run_id = f"{git_commit() or 'nocommit'}+{code_hash[:12]}"
-    pre_manifest = dict(git_commit=git_commit(), code_sha256=code_hash, run_id=run_id, environment=D.environment(), timings_s=timings, torch=torch.__version__)
+    env = D.environment()
+    identity = run_fingerprint(code_hash, vars(args), ctx["load_report"],
+                               dict(env, torch=torch.__version__, omp_num_threads=os.environ.get("OMP_NUM_THREADS")))
+    run_id = f"{git_commit() or 'nocommit'}+{identity[:16]}"
+    pre_manifest = dict(git_commit=git_commit(), code_sha256=code_hash, run_id=run_id, environment=env, timings_s=timings, torch=torch.__version__)
     if args.steps >= 5:
         checks["step5_numbers"] = numbers.run(out, pre_manifest)
+    failed = check_required(checks, args.steps, verify_inputs=not args.no_verify, summary=False)
+    failed += [f"output:{name}" for name in sorted(output_names(args.steps)) if not (out / name).is_file()]
+    checks["required_checks_ok"] = not failed
+    checks["required_checks_failed"] = failed
     D.dump_json(checks, out / "checks.json")   # manifest보다 먼저 써서 해시에 포함한다
-    manifest = dict(protocol_version=D.PROTOCOL_VERSION, git_commit=git_commit(), code_sha256=code_hash, run_id=run_id, torch=torch.__version__,
-                    args={k: str(v) for k, v in vars(args).items()}, environment=D.environment(), omp_num_threads=os.environ.get("OMP_NUM_THREADS"),
+    manifest = dict(protocol_version=D.PROTOCOL_VERSION, git_commit=git_commit(), code_sha256=code_hash, run_id=run_id, execution_sha256=identity, torch=torch.__version__,
+                    args={k: str(v) for k, v in vars(args).items()}, environment=env, omp_num_threads=os.environ.get("OMP_NUM_THREADS"),
                     inputs=ctx["load_report"], timings_s=timings,
-                    outputs={str(p.relative_to(out)): D.sha256_file(p) for p in sorted(out.rglob("*")) if p.is_file() and p.name != "manifest.json"})
+                    outputs={name: D.sha256_file(out / name) for name in sorted(output_names(args.steps) | {"checks.json"}) if (out / name).is_file()})
     D.dump_json(manifest, out / "manifest.json")
     print(json.dumps(D.to_jsonable(checks), ensure_ascii=False, indent=2))
     if failed:

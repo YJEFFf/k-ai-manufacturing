@@ -49,11 +49,12 @@ def main():
 
         def verify_case(name, edit):
             d = tmp / name
-            shutil.copytree(pkg / "outputs", d)
+            shutil.copytree(outputs, d)
             edit(d)
             r = subprocess.run([sys.executable, str(pkg / "verify.py"), "--out", str(d)],
                                env=env, text=True, capture_output=True)
-            return dict(exit_code=r.returncode, summary=r.stdout.strip().splitlines()[-1],
+            lines = (r.stdout or r.stderr).strip().splitlines()
+            return dict(exit_code=r.returncode, summary=lines[-1] if lines else "출력 없음",
                         failures=[line for line in r.stdout.splitlines() if line.startswith("FAIL")])
 
         normal, abnormal, load_info = D.load(pkg)
@@ -130,6 +131,11 @@ def main():
         def change_runtime_metadata(d):
             p=d/"lstm_guidebook_reproduction.json"; obj=json.loads(p.read_text())
             obj.update(cached=False,train_seconds=1.0); p.write_text(json.dumps(obj))
+            # 새 실행의 메타데이터 차이를 모사한다. 사후 파일 변조와 구별하려고
+            # 해당 실행 manifest의 해시도 갱신하며 동결 기대값은 그대로 둔다.
+            mp=d/"manifest.json"; man=json.loads(mp.read_text())
+            man["outputs"][p.name]=hashlib.sha256(p.read_bytes()).hexdigest()
+            mp.write_text(json.dumps(man))
         cold = verify_case("cold_metadata_only", change_runtime_metadata)
         add("verify_cold_runtime_metadata", issue_reproduced=cold["exit_code"] != 0, **cold)
 
@@ -168,10 +174,12 @@ def main():
         cache=tmp/"tiny_lstm_cache"
         extra={"split":"review_synthetic","preprocess":"raw","inputs":{"synthetic":"same-input"}}
         call=(train,seg,frames,segs,np.zeros(3),np.ones(3),cache,1,1,0,extra)
-        old,_,_,_=lstm_ae.protocol_common(*call,log=lambda *_:None)
+        old,_,old_meta,_=lstm_ae.protocol_common(*call,log=lambda *_:None)
         src=(pkg/"press"/"lstm_ae.py").read_text()
         assert "return self.out(h)" in src
-        modified=tmp/"modified_lstm_ae.py"
+        modified_dir=tmp/"modified_press"
+        shutil.copytree(pkg/"press",modified_dir,ignore=shutil.ignore_patterns("__pycache__"))
+        modified=modified_dir/"lstm_ae.py"
         modified.write_text(src.replace("return self.out(h)","return self.out(h) + 100.0"))
         spec=importlib.util.spec_from_file_location("press.review_modified_lstm",modified)
         altered=importlib.util.module_from_spec(spec); spec.loader.exec_module(altered)
@@ -179,8 +187,11 @@ def main():
         fresh,_,fresh_meta,_=altered.protocol_common(*call,retrain=True,log=lambda *_:None)
         same=all(np.allclose(old[k],cached[k],equal_nan=True) for k in old)
         delta=float(np.nanmax(np.abs(cached["test"]-fresh["test"])))
-        add("cache_reuses_changed_implementation", issue_reproduced=bool(meta["cached"] and same and delta>1),
+        invalidated=not meta["cached"] and meta["cache_key"] != old_meta["cache_key"]
+        add("cache_reuses_changed_implementation", issue_reproduced=bool(not invalidated or same or delta>1e-8),
             cache_hit_after_code_change=meta["cached"], old_scores_reused=same,
+            code_change_invalidated_cache=invalidated,
+            old_to_modified_max_score_delta=float(np.nanmax(np.abs(old["test"]-cached["test"]))),
             forced_retrain_max_score_delta=delta, cache_key=meta["cache_key"])
 
         legacy_generator=(pkg/"press/evidence.py").exists()

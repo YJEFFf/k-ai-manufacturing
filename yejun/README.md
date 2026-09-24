@@ -8,7 +8,8 @@
 
 ## 먼저 볼 문서
 
-- [프레스 1~6단계 구현 검수](analysis/press_implementation_review/README.md): 2026-09-25 실행 재현·독립 재집계 확인, 최종 완료 전 R1~R6 수정 사항과 재현 코드
+- [프레스 구현 재검수·수정](analysis/press_implementation_review/codex_recheck.md): 2026-09-25 Claude 수정 재검증·남은 완료 판정 오류 수정, 테스트 46개·전체 집계 비교 38/38·독립 재집계 통과. 보고서 작성은 보류
+- [최초 구현 검수 이력](analysis/press_implementation_review/README.md): R1~R6 반례·Claude 재검수·후속 검증 연결
 - [프레스 제출 패키지 실행계획 — 확정 v1](press_submission/PLAN.md): 확정 연구설계·실행 프로토콜·단계별 완료 조건
 - [클로드 후속 계획 적대적 검토](analysis/press_plan_review/README.md): 2026-09-24 계획 실행 전 수정할 R1~R8, 실제 계산 결과, 검토 당시 계획 원문
 - `analysis/press_welding_review/README.md`: 2026-09-23 프레스·용접 추가 검증과 현재 선택

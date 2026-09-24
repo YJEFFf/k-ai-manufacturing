@@ -1,6 +1,8 @@
 """검수 R1~R4·R6의 반례를 회귀 검사로 옮긴 것 (yejun/analysis/press_implementation_review/review_checks.py 기준)."""
 import json
+import os
 import shutil
+import subprocess
 from pathlib import Path
 
 import numpy as np
@@ -10,20 +12,41 @@ import pytest
 import verify
 from press.field import persistence_score
 from press.lstm_ae import config_key
+from press.validation import (SPLIT_CHECKS, check_required, file_hash, output_names,
+                              required_check_names, result_names, run_fingerprint)
 
 
-def _mini_outputs(tmp_path: Path) -> Path:
+def _stamp(out: Path):
+    p = out / "manifest.json"
+    man = json.loads(p.read_text())
+    steps = int(man["args"]["steps"])
+    man["outputs"] = {n: file_hash(out / n) for n in output_names(steps) | {"checks.json"} if (out / n).is_file()}
+    p.write_text(json.dumps(man))
+
+
+def _mini_outputs(tmp_path: Path, steps=1) -> Path:
     out = tmp_path / "outputs"
     exp = out / "expected"
     exp.mkdir(parents=True)
     a = pd.DataFrame({"model": ["combined_w8", "lstm20"], "threshold": [1.5, np.inf], "f1_all_rows": [0.9, 0.3], "alarm": [1, 0]})
-    a.to_csv(out / "t.csv", index=False); a.to_csv(exp / "t.csv", index=False)
-    d = {"structure": {"normal": {"rows": 20000}}, "path": "/x"}
-    (out / "diagnosis.json").write_text(json.dumps(d)); (exp / "diagnosis.json").write_text(json.dumps(dict(d, path="/y")))
-    man = {"inputs": {"files": {"normal": {"sha256": "h"}}}, "environment": {"platform": "p"}, "code_sha256": "c" * 64}
-    (out / "manifest.json").write_text(json.dumps(man)); (exp / "manifest.json").write_text(json.dumps(man))
-    checks = {k: True for k in verify.REQUIRED_CHECKS}
-    (out / "checks.json").write_text(json.dumps(checks)); (exp / "checks.json").write_text(json.dumps(checks))
+    for name in output_names(steps):
+        if name.endswith(".csv"):
+            a.to_csv(out / name, index=False)
+        elif name.endswith(".json"):
+            (out / name).write_text(json.dumps({"structure": {"normal": {"rows": 20000}}, "path": "/x"}))
+        else:
+            (out / name).write_text("test artifact")
+    man = {"inputs": {"verified": True, "files": {"normal": {"sha256": "h"}}},
+           "environment": {"platform": "p"}, "code_sha256": "c" * 64, "args": {"steps": str(steps)}}
+    (out / "manifest.json").write_text(json.dumps(man))
+    checks = {k: True for k in required_check_names(steps)}
+    checks.update(steps_run=steps, required_checks_ok=True, required_checks_failed=[])
+    if steps >= 2:
+        checks["step2"] = {s: {k: True for k in SPLIT_CHECKS} for s in ("A", "B")}
+    (out / "checks.json").write_text(json.dumps(checks))
+    _stamp(out)
+    for name in result_names(steps) | {"checks.json", "manifest.json"}:
+        shutil.copy2(out / name, exp / name)
     return out
 
 
@@ -34,7 +57,7 @@ def test_verify_passes_on_identical(tmp_path):
 
 def test_verify_fails_on_missing_result(tmp_path):            # R1: 결과 파일 누락
     out = _mini_outputs(tmp_path)
-    (out / "t.csv").unlink()
+    (out / "waveform_segments.csv").unlink()
     assert verify.main(["--out", str(out)]) == 1
 
 
@@ -55,21 +78,23 @@ def test_verify_inf_vs_nan_differs(tmp_path):                 # R1: ±inf와 NaN
 
 
 def test_verify_fails_on_required_check(tmp_path):            # R1: 필수 검사 false
-    out = _mini_outputs(tmp_path)
+    out = _mini_outputs(tmp_path, steps=5)
     c = json.loads((out / "checks.json").read_text()); c["conformal_mc_within_4se"] = False
     (out / "checks.json").write_text(json.dumps(c))
+    _stamp(out)
     assert verify.main(["--out", str(out)]) == 1
     assert verify.main(["--out", str(out), "--freeze"]) == 2   # 동결도 거부
 
 
 def test_verify_tolerance_per_row(tmp_path):                  # 파일 단위가 아니라 행(model)별 허용오차
     out = _mini_outputs(tmp_path)
-    a = pd.read_csv(out / "t.csv"); a.loc[a.model == "combined_w8", "f1_all_rows"] += 1e-5
-    a.to_csv(out / "t.csv", index=False)
-    assert verify.main(["--out", str(out)]) == 1
-    a = pd.read_csv(out / "expected" / "t.csv"); a.loc[a.model == "lstm20", "f1_all_rows"] += 1e-5
-    a.to_csv(out / "t.csv", index=False)
-    assert verify.main(["--out", str(out)]) == 0
+    path = out / "waveform_segments.csv"; expected = out / "expected" / path.name
+    a = pd.read_csv(path); a.loc[a.model == "combined_w8", "f1_all_rows"] += 1e-5
+    a.to_csv(path, index=False)
+    assert not verify.compare_csv(path, expected)["ok"]
+    a = pd.read_csv(expected); a.loc[a.model == "lstm20", "f1_all_rows"] += 1e-5
+    a.to_csv(path, index=False)
+    assert verify.compare_csv(path, expected)["ok"]
 
 
 def test_verify_ignores_runtime_metadata(tmp_path):           # R6: 실행 메타데이터는 비교하지 않음
@@ -77,9 +102,105 @@ def test_verify_ignores_runtime_metadata(tmp_path):           # R6: 실행 메�
     g = {"f1": 0.61, "tn": 10, "cached": False, "train_seconds": 1.0}
     (out / "expected" / "g.json").write_text(json.dumps(dict(g, cached=True, train_seconds=99.0)))
     (out / "g.json").write_text(json.dumps(g))
-    assert verify.main(["--out", str(out)]) == 0
+    assert verify.compare_json(out / "g.json", out / "expected" / "g.json")["ok"]
     (out / "g.json").write_text(json.dumps(dict(g, f1=0.62)))
+    assert not verify.compare_json(out / "g.json", out / "expected" / "g.json")["ok"]
+
+
+@pytest.mark.parametrize("missing", ["conformal_mc_within_4se", "required_checks_ok", "all"])
+def test_missing_checks_cannot_pass_or_freeze(tmp_path, missing):
+    out = _mini_outputs(tmp_path, steps=5)
+    checks = json.loads((out / "checks.json").read_text())
+    if missing == "all":
+        checks = {"steps_run": 5}
+    else:
+        checks.pop(missing)
+    (out / "checks.json").write_text(json.dumps(checks))
+    _stamp(out)  # 새 실행이 불완전한 검사를 기록한 경우도 거부해야 한다.
     assert verify.main(["--out", str(out)]) == 1
+    assert verify.main(["--out", str(out), "--freeze"]) == 2
+
+
+def test_freeze_requires_complete_outputs_and_preserves_old_snapshot(tmp_path):
+    out = _mini_outputs(tmp_path, steps=5)
+    before = {p.name: p.read_bytes() for p in (out / "expected").iterdir()}
+    (out / "model_comparison_all.csv").unlink()
+    _stamp(out)  # 불완전한 목록만 담은 manifest도 완료 근거가 아니다.
+    assert verify.main(["--out", str(out), "--freeze"]) == 2
+    assert before == {p.name: p.read_bytes() for p in (out / "expected").iterdir()}
+    (out / "expected" / "model_comparison_all.csv").unlink()
+    assert verify.main(["--out", str(out)]) == 1
+
+
+@pytest.mark.parametrize("name", ["predictions_A.csv", "numbers.json"])
+def test_changed_unfrozen_outputs_fail_integrity(tmp_path, name):
+    out = _mini_outputs(tmp_path, steps=5)
+    (out / name).write_text("tampered")
+    assert verify.main(["--out", str(out)]) == 1
+
+
+def test_partial_run_needs_explicit_comparison_scope(tmp_path):
+    full = _mini_outputs(tmp_path / "full", steps=5)
+    partial = _mini_outputs(tmp_path / "partial", steps=1)
+    shutil.rmtree(partial / "expected")
+    shutil.copytree(full / "expected", partial / "expected")
+    assert verify.main(["--out", str(partial)]) == 1
+    assert verify.main(["--out", str(partial), "--steps", "1"]) == 0
+
+
+def test_lstm_json_tolerance_and_exact_counts(tmp_path):
+    a, b = tmp_path / "lstm_guidebook_reproduction.json", tmp_path / "expected.json"
+    b.write_text(json.dumps({"f1": 0.61, "tp": 10}))
+    a.write_text(json.dumps({"f1": 0.6101, "tp": 10}))
+    assert verify.compare_json(a, b)["ok"]
+    a.write_text(json.dumps({"f1": 0.6101, "tp": 11}))
+    assert not verify.compare_json(a, b)["ok"]
+    a.write_text(json.dumps({"f1": 0.6101, "tp": 10.0001}))
+    assert not verify.compare_json(a, b)["ok"]
+
+
+def test_run_identity_distinguishes_configuration_inputs_and_environment():
+    args, inputs, env = {"seed": 0, "preprocess": "matched", "out": "a"}, {"files": {"normal": {"sha256": "h"}}}, {"torch": "t"}
+    key = run_fingerprint("code", args, inputs, env)
+    assert run_fingerprint("code", dict(args, seed=1), inputs, env) != key
+    assert run_fingerprint("code", args, {"files": {"normal": {"sha256": "changed"}}}, env) != key
+    assert run_fingerprint("code", args, inputs, {"torch": "changed"}) != key
+    assert run_fingerprint("code", dict(args, out="b"), inputs, env) == key
+
+
+def test_runner_gate_requires_individual_checks():
+    checks = {k: True for k in required_check_names(2)}
+    checks["step2"] = {s: {k: True for k in SPLIT_CHECKS} for s in ("A", "B")}
+    checks["step2"]["B"].pop("prediction_alarm_counts_equal_table")
+    assert "step2.B.prediction_alarm_counts_equal_table" in check_required(checks, 2, summary=False)
+    checks["input_hash_ok"] = False
+    assert "input_hash_ok" not in check_required(checks, 2, verify_inputs=False, summary=False)
+
+
+@pytest.mark.parametrize("run_status", [0, 7])
+def test_clean_repro_propagates_failure_and_declares_scope(tmp_path, run_status):
+    pkg = tmp_path / "repo" / "yejun" / "press_submission"
+    (pkg / "tools").mkdir(parents=True)
+    (pkg / "data").mkdir()
+    (pkg / "outputs" / "expected").mkdir(parents=True)
+    source = Path(__file__).resolve().parents[1] / "tools" / "clean_repro.sh"
+    script = pkg / "tools" / source.name
+    shutil.copy2(source, script)
+    bin_dir = tmp_path / "bin"; bin_dir.mkdir()
+    fake_git = bin_dir / "git"
+    fake_git.write_text('#!/bin/bash\nif [[ "$1" == clone ]]; then mkdir -p "$4/yejun/press_submission"; else echo test-head; fi\n')
+    fake_python = bin_dir / "python3"
+    fake_python.write_text('#!/bin/bash\nif [[ "$1" == run_all.py ]]; then exit ' + str(run_status) + '; fi\nprintf "%s\\n" "$@" > "$VERIFY_CALL"\n')
+    fake_git.chmod(0o755); fake_python.chmod(0o755)
+    scratch = tmp_path / "scratch"; scratch.mkdir()
+    calls = tmp_path / "verify_call"
+    env = dict(os.environ, PATH=str(bin_dir) + os.pathsep + os.environ["PATH"], TMPDIR=str(scratch), VERIFY_CALL=str(calls))
+    result = subprocess.run(["bash", str(script)], env=env, text=True, capture_output=True)
+    assert result.returncode == run_status, result.stdout + result.stderr
+    if run_status:
+        assert not calls.exists()
+    else:
+        assert calls.read_text().splitlines()[-2:] == ["--steps", "3"]
 
 
 def test_persistence_missing_resets_window():                  # R3
