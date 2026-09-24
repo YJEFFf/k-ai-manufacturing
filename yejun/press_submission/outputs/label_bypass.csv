@@ -1,0 +1,9 @@
+split,check,expect_equal,scores_equal,max_abs_score_diff,alarm_rows_changed,alarm_segments_changed,passed
+normal_60_20_20,timestamps_shifted_5_days,True,True,0.0,0,0,True
+normal_60_20_20,extra_columns_index_label_random,True,True,0.0,0,0,True
+normal_60_20_20,reserialized_6_decimals(stress),False,False,0.004620197636745149,0,0,True
+normal_60_20_20,future_rows_appended,True,True,0.0,0,0,True
+normal_50_20_30,timestamps_shifted_5_days,True,True,0.0,0,0,True
+normal_50_20_30,extra_columns_index_label_random,True,True,0.0,0,0,True
+normal_50_20_30,reserialized_6_decimals(stress),False,False,0.004699354943988876,0,0,True
+normal_50_20_30,future_rows_appended,True,True,0.0,0,0,True

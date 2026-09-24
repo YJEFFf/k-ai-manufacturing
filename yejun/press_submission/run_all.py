@@ -23,13 +23,13 @@ import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
 
 from press import data as D  # noqa: E402
-from press import diagnosis  # noqa: E402
+from press import analysis, diagnosis, robustness  # noqa: E402
 from press.artifact import Artifact  # noqa: E402
 from press.calibrate import ALPHAS, conformal_p, mc_check_conformal, segment_max, thresholds_for  # noqa: E402
 from press.evaluate import comparison_markdown, evaluate_models  # noqa: E402
 from press.scores import MAIN_W, MainModel, Scorer  # noqa: E402
 
-PENDING = ["robustness_sensitivity_ablation_errors(3단계)", "baselines_lstm_uncertainty(4단계)",
+PENDING = ["baselines_lstm_uncertainty(4단계)",
            "field_persistence_evidence(5단계)", "freeze_env_clean_repro_zip(6단계)"]
 MAIN_ALPHA = 0.01
 
@@ -121,7 +121,7 @@ def step2(args, out, art_dir, ctx, checks):
     all_metrics, tails, ops, mc = [], [], [], mc_check_conformal()
     checks["conformal_mc_within_4se"] = all(abs(m["realized"] - m["alpha_grid"]) <= 4 * m["mc_se"] for m in mc)
     pd.DataFrame(mc).to_csv(out / "conformal_mc.csv", index=False)
-    step_checks = {}
+    step_checks, ctx2 = {}, {}
     for sid in D.SPLITS:
         t0 = time.time()
         sp = D.split_normal(normal, ctx["seg_n"], sid)
@@ -190,6 +190,7 @@ def step2(args, out, art_dir, ctx, checks):
                                 normal_notified=n_norm, abnormal_notified=n_abn, seconds=round(time.time() - t0, 1))
         for t in thr_rows:
             ops.append(dict(split=sp["name"], model=main_model, **t))
+        ctx2[sid] = dict(name=sp["name"], train=q["train"], seg_train=segs["train"], stream=stream, seg_stream=seg_stream, pred=pred, state=state)
         print(f"split {sid} done in {time.time() - t0:.1f}s: {main_model} conformal 1% → normal {n_norm}/{ev.normal_segments}, abnormal {n_abn}/21", flush=True)
     mt = pd.concat(all_metrics, ignore_index=True)
     mt.to_csv(out / "model_comparison.csv", index=False)
@@ -201,6 +202,17 @@ def step2(args, out, art_dir, ctx, checks):
     checks["step2"] = step_checks
     checks["step2_all_ok"] = all(v["stream_equals_evaluation"] and v["shuffle_invariant"] and v["prediction_alarm_counts_equal_table"]
                                  and v["conformal_p_equals_threshold_alarms"] for v in step_checks.values())
+    return ctx2
+
+
+def step3(args, out, ctx, ctx2, checks):
+    vendor, normal, abnormal = ctx["vendor"], ctx["normal"], ctx["abnormal"]
+    log = lambda m: print(m, flush=True)  # noqa: E731
+    rob = robustness.run(out, vendor, normal, abnormal, ctx["seg_n"], ctx["seg_a"],
+                         {sid: c["state"] for sid, c in ctx2.items()}, {sid: c["stream"] for sid, c in ctx2.items()}, log=log)
+    checks["step3_robustness"] = rob
+    checks["step3_analysis"] = analysis.run(out, ctx2, MAIN_W, log=log)
+    checks["step3_label_bypass_ok"] = rob["label_bypass_all_passed"]
 
 
 def main(argv=None):
@@ -211,7 +223,7 @@ def main(argv=None):
     ap.add_argument("--preprocess", choices=list(D.QUANTIZATION), default="matched")
     ap.add_argument("--no-verify", action="store_true", help="입력 해시·행 수 검증을 건너뛴다(다른 자료로 실행할 때)")
     ap.add_argument("--no-baselines", action="store_true", help="5NN·RMS5·IF·MLP-AE 생략(빠른 확인용)")
-    ap.add_argument("--steps", type=int, default=2, help="실행할 단계 수 (1: 진단만)")
+    ap.add_argument("--steps", type=int, default=3, help="실행할 단계 수 (1: 진단만, 2: 주 모델까지, 3: 강건성·오류 분석까지)")
     args = ap.parse_args(argv)
     out = args.out
     out.mkdir(parents=True, exist_ok=True)
@@ -222,8 +234,12 @@ def main(argv=None):
     timings["step1_s"] = round(time.time() - t0, 2)
     if args.steps >= 2:
         t1 = time.time()
-        step2(args, out, art_dir, ctx, checks)
+        ctx2 = step2(args, out, art_dir, ctx, checks)
         timings["step2_s"] = round(time.time() - t1, 2)
+    if args.steps >= 3:
+        t2 = time.time()
+        step3(args, out, ctx, ctx2, checks)
+        timings["step3_s"] = round(time.time() - t2, 2)
     raw_hits = scan_outputs_for_raw_values(out)
     checks["outputs_free_of_raw_sensor_columns"] = not raw_hits
     checks["raw_column_hits"] = raw_hits

@@ -1,0 +1,12 @@
+split,alpha,kind,item,share,n
+normal_60_20_20,0.01,abnormal_alarm_row_reason,sine,0.654690618762475,501
+normal_60_20_20,0.01,abnormal_alarm_row_reason,both,0.249500998003992,501
+normal_60_20_20,0.01,abnormal_alarm_row_reason,maxz,0.09580838323353294,501
+normal_60_20_20,0.01,maxz_sensor_share,AI0_Vibration,0.9479768786127167,173
+normal_60_20_20,0.01,maxz_sensor_share,AI1_Vibration,0.05202312138728324,173
+normal_50_20_30,0.01,abnormal_alarm_row_reason,sine,0.6186770428015564,514
+normal_50_20_30,0.01,abnormal_alarm_row_reason,both,0.2723735408560311,514
+normal_50_20_30,0.01,abnormal_alarm_row_reason,maxz,0.10894941634241245,514
+normal_50_20_30,0.01,maxz_sensor_share,AI0_Vibration,0.9183673469387755,196
+normal_50_20_30,0.01,maxz_sensor_share,AI1_Vibration,0.08163265306122448,196
+normal_50_20_30,0.01,fp_segment_first_reason,maxz,1.0,3

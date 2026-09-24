@@ -41,10 +41,32 @@
     }
   },
   "step2_all_ok": true,
+  "step3_robustness": {
+    "label_bypass_all_passed": true,
+    "reserialization_alarm_segments_changed": 0,
+    "dead_component_cases": 0,
+    "tail_fit_failures": 0,
+    "combined_conformal_1pct_abnormal_detected_range": [
+      19,
+      21
+    ],
+    "combined_conformal_1pct_normal_notified_range": [
+      0,
+      5
+    ]
+  },
+  "step3_analysis": {
+    "fn_table_rows": 66,
+    "abnormal_segments_missed_alpha1pct": 0,
+    "normal_test_segments_alerted_alpha1pct": {
+      "normal_50_20_30": 3,
+      "normal_60_20_20": 0
+    }
+  },
+  "step3_label_bypass_ok": true,
   "outputs_free_of_raw_sensor_columns": true,
   "raw_column_hits": {},
   "pending_steps": [
-    "robustness_sensitivity_ablation_errors(3단계)",
     "baselines_lstm_uncertainty(4단계)",
     "field_persistence_evidence(5단계)",
     "freeze_env_clean_repro_zip(6단계)"

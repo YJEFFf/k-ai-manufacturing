@@ -17,15 +17,20 @@ def _safe_f1(truth, pred):
 
 
 def evaluate_models(vendor, split_name: str, preprocess: str, model_scores: dict, frames: dict, segs: dict,
-                    comp_bounds: dict | None = None):
+                    comp_bounds: dict | None = None, threshold_override: dict | None = None, units=("recording_segments", "rows")):
     """model_scores[model] = {"cal": arr, "test": arr, "abn": arr}. frames/segs: cal, test, abn.
-    comp_bounds[model] = 사인 성분의 이론상 최댓값 변환값 g_s(1) (결합 모델만). 반환 (metrics, records)."""
+    comp_bounds[model] = 사인 성분의 이론상 최댓값 변환값 g_s(1) (결합 모델만).
+    threshold_override[(model, unit)] = thresholds_for() 형식의 행 목록 → 보정셋 대신 고정 문턱 사용(동결 진단용).
+    반환 (metrics, records)."""
     cal, test, abn = frames["cal"], frames["test"], frames["abn"]
     metrics, records = [], []
     for model, sc in model_scores.items():
         cal_seg_max = segment_max(sc["cal"], segs["cal"])
         for unit, cal_values in (("recording_segments", cal_seg_max), ("rows", sc["cal"])):
-            for th in thresholds_for(cal_values, unit):
+            if unit not in units:
+                continue
+            th_rows = (threshold_override or {}).get((model, unit)) or thresholds_for(cal_values, unit)
+            for th in th_rows:
                 thr = th["threshold"]
                 common = dict(split=split_name, preprocess=preprocess, model=model, calibration_unit=unit,
                               criterion=th["criterion"], alpha=th["alpha"])

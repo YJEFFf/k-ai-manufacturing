@@ -1,6 +1,6 @@
 # ③ 프레스 유압펌프 이상 탐지 — 제출 패키지
 
-실행 기준은 [PLAN.md](PLAN.md)다. 현재 상태: **1단계(데이터·진단·뼈대)와 2단계(w=8 고정·q95 지수 꼬리·conformal 보정·추론) 구현.** 3~6단계는 `outputs/checks.json`의 `pending_steps`에 표시된다.
+실행 기준은 [PLAN.md](PLAN.md)다. 현재 상태: **1~3단계 구현** (데이터·진단·뼈대 / w=8 고정·q95 지수 꼬리·conformal 보정·추론 / 전처리·창 민감도·동결 진단·절제·라벨 우회·FN/FP 조건). 4~6단계는 `outputs/checks.json`의 `pending_steps`에 표시된다.
 
 ## 실행
 
@@ -9,7 +9,7 @@ cd yejun/press_submission
 python -m pip install -r requirements.txt
 # 데이터 배치: data/3_소성가공_예지보전/press_data_normal.csv, outlier_data.csv (Git 제외)
 #   로컬 원본: ../../데이터셋/프레스_유압펌프_예지보전/data/3_소성가공_예지보전/ 에서 복사하거나 --root로 그 폴더를 지정
-OMP_NUM_THREADS=1 python run_all.py --root . --out outputs            # 약 10초 (2단계 포함)
+OMP_NUM_THREADS=1 python run_all.py --root . --out outputs            # 약 40초 (3단계 포함); --steps 2 면 10초
 python -m pytest -q tests                                              # 정확성 검사
 python predict.py --model artifacts/main_A.json --input <입력.csv> --out predictions.csv   # 저장 상태만으로 추론
 ```
@@ -31,6 +31,12 @@ python predict.py --model artifacts/main_A.json --input <입력.csv> --out predi
 | `model_comparison.csv` / `.md` / `_cutoff.md` | 모델 × 분할 × 보정 단위 × 기준(conformal/cutoff) × α 집계. 주 지표: 이상 탐지 구간, 정상 알림 구간, 판정 가능 비율, 첫 경보 지연; F1·coverage 병기 |
 | `operating_points.csv`, `thresholds_main.csv` | 주 모델(combined_w8)의 운영점: 명목 α, alpha_grid, 문턱, 정상 알림 k/n, 독립 가정 이항 95% 상한, 지연 |
 | `tail_params.csv`, `conformal_mc.csv` | 성분별 q95·beta·적합 여부·g(1); 순위 p값 MC 검사 |
+| `sensitivity.csv`, `sensitivity_params.csv` | 전처리 raw/matched/coarse × 분할 × 창 {5,6,8,10,12,15,20} 전 절차 재실행(구간 단위 conformal·cutoff), 성분별 꼬리 파라미터·g(1) |
+| `quantization_frozen.csv` | matched로 적합·보정한 주 모델을 동결하고 평가 입력만 raw/coarse로 바꾼 진단(재적합 효과와 입력 효과 분리) |
+| `ablation.csv` | matched·w=8 절제: 사인 제거, 크기 제거, 초기 max-z 보완 제거, capped 꼬리(기존 ECDF) |
+| `label_bypass.csv` | 날짜 이동·불필요한 열·6자리 재직렬화(스트레스)·미래 행 추가에 대한 추론 불변 |
+| `segment_features.csv`, `error_conditions_fn.csv`, `error_conditions_fp.csv`, `alarm_components.csv`, `influence.csv`, `interaction_2x2.csv` | 기록구간 특징, 분모 포함 FN(행)/FP(구간) 조건표(위치·길이·진폭 대리 지표·진동 사분위), 발화 성분, 단변량 AUROC(방향 표기), 진동 수준×파형 2×2 |
+| `fig_vibration_vs_waveform.png`, `fig_recall_by_position.png`, `fig_error_examples.png` | 진동×구간 R²(사후), 위치별 이상 행 경보율, 사례(파형만 경보·FP·늦은 경보) |
 | `predictions_A.csv`, `predictions_B.csv`, `records_main_*.csv` | 행별 예측(평가 스트림)·구간별 알림 기록 — Git 제외 |
 | `checks.json`, `manifest.json` | 정확성 검사 결과, 환경·입력 해시·산출물 해시·실행 시간 |
 | `../artifacts/main_A.json`, `main_B.json` | 주 모델 학습·보정 상태(스케일러, 참조 점수, 꼬리 변환, 보정 구간 최댓값, 문턱). `predict.py`가 이 파일만으로 추론한다 — Git 제외 |
@@ -47,7 +53,7 @@ python predict.py --model artifacts/main_A.json --input <입력.csv> --out predi
 |---|---|
 | 1 데이터·구간·분할·진단·뼈대 | 완료 |
 | 2 w=8 고정, q95 지수 꼬리, conformal 보정, 추론·집계 | 완료 |
-| 3 전처리·창 민감도, 절제, 오류 조건 | 예정 |
+| 3 전처리·창 민감도, 절제, 오류 조건 | 완료 |
 | 4 기준모델·LSTM 3프로토콜, coverage·불확실성 | 예정 |
 | 5 업무량·지속성·진폭 후보·장별 근거 | 예정 |
 | 6 환경 고정·깨끗한 재현·ZIP 조립 | 예정 |

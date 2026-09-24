@@ -1,6 +1,6 @@
 {
   "protocol_version": "v1",
-  "git_commit": "3a7d504",
+  "git_commit": "8003e0e",
   "args": {
     "root": ".",
     "out": "outputs",
@@ -8,7 +8,7 @@
     "preprocess": "matched",
     "no_verify": "False",
     "no_baselines": "False",
-    "steps": "2"
+    "steps": "3"
   },
   "environment": {
     "python": "3.12.2",
@@ -48,17 +48,28 @@
     }
   },
   "timings_s": {
-    "step1_s": 1.52,
-    "step2_s": 5.86,
-    "total_s": 7.39
+    "step1_s": 1.47,
+    "step2_s": 5.81,
+    "step3_s": 30.5,
+    "total_s": 37.79
   },
   "outputs": {
-    "checks.json": "efa0aa7cd5e5909ce27fcef227ba5d94fbef4f6cc75b91dfa524b952461d418f",
+    "ablation.csv": "d523cb63cde49b29fe25a20500b5a80e33071b411d6477740171d71bb7411906",
+    "alarm_components.csv": "8c2624778b54b2c7dcb4e3e25e17b50fcc9798df8c45f3658cf0682682d9043c",
+    "checks.json": "7a6f31b22900d98ba898e87ff0c050d7eeaf831852411b4d1995293149a37632",
     "conformal_mc.csv": "9ad41b2c95e1df78dc00b6f6b5a6c9c2017b49aaddbf577352692c5118d18183",
     "diagnosis.json": "f5cadd1ee7f854de37e0cfc05aca1f4f4b362ac3ada9a9b9e6a96d833d5b3e8d",
     "diagnosis.md": "a5f675ae7a993a792f2aef0de57feb8536cdb2fd7ea177c061ffbf165db29e0d",
+    "error_conditions_fn.csv": "0de59e794f08f880a104cd2c41642882a5ab9ec7b152f689fc017e9d9b986de9",
+    "error_conditions_fp.csv": "73185980976661574af4ab13c9b0313097d23bece292a431500fee7fd5c48458",
     "fig_current_waveform.png": "881450e3419bcaf582a403fe45da1ba87862517c8517dc29da1a65e405752579",
+    "fig_error_examples.png": "d391c7b3c2b5d35c0d6977e820bc9d3e265986f3fd821f60e62707fe38871d3e",
+    "fig_recall_by_position.png": "988341eac536ddf5c6b4800235e5a8db0609b40847a34f1c061e37efd7f0071a",
     "fig_segment_length.png": "4cec977dbfbad67e97a1f7aedf8179ac2de5a0ce3b49527e6aea9e1c99f0f02a",
+    "fig_vibration_vs_waveform.png": "d116ad04b5153c69cc8a1b9a3f6907c874007c29f6eb8d4a740553c1c4246890",
+    "influence.csv": "86938db821b384299ac29f74e808455d197eb8bae5bc641a044a62c810c9e550",
+    "interaction_2x2.csv": "42e38924ed4647913c4da4c0e6d7e94a9aef11a31da2fc8b9b208718ec986fb1",
+    "label_bypass.csv": "0dc378785b250b2d213cd0f17b5bd2543c7cea2afff29e1434d4d418c5249144",
     "model_comparison.csv": "69ceeb1b18bafc2061330ba242dabd9b489939c8517bcf84156803b0ce9e876f",
     "model_comparison.md": "d26c36449617890860f567502715b4547bd14027fcabf07f91192f9ff4a7acad",
     "model_comparison_cutoff.md": "af355eef23fc6bed1af0fa6f0906480940337400cf69f5f9b25666f1a34d568f",
@@ -66,8 +77,12 @@
     "predictions_A.csv": "0656fc309cd75e0fa083cd74206b436871e19e7c8a6d9e4fd8d9256a7e7e8b4b",
     "predictions_B.csv": "a1f4fd3d8246c738aded9b464adffa94cf87769cae8e55f45483af7fd241a0ea",
     "preprocess_effect.csv": "0156e0621334b9fbc02e1d9c29d43ea342e3a07cb676efbb4967a6fdfa088414",
+    "quantization_frozen.csv": "a3d52f6bb10d880a5ed2be16e8f8dfdd4a9753536d353835bf989c920a5698a6",
     "records_main_A.csv": "91843e924c44d6ebbe73783337699c5f6523efee4983a65ea54fa87be69a7f33",
     "records_main_B.csv": "9a6442a2b306e4acc5a12f8ee98b059ae1a330ae3cf13d2ba49eb6178bf25c38",
+    "segment_features.csv": "c250e6d0d018baa7997c9d4cea84c326070c929fd13138501bdfaceae08062c7",
+    "sensitivity.csv": "03d5e3e7eb282eda5549d45128871290daa6b1f8151f5a941a77c2eef14e8d88",
+    "sensitivity_params.csv": "f88db959a5f0ab4c037c2b5e2e8b12265ac1d02f02d703d64394beac8f77eeab",
     "splits.csv": "616f348579ff313e3bbc5e592a26f29a92f7c7ce6a3e5369980cddc4e6de1880",
     "tail_params.csv": "86d33c25f7e46672c8579801437c849a72e608e259c411793485108aec0d19d3",
     "thresholds_main.csv": "c2da6d95539bc43cf654ada62f42385cc496945c799ad8eaedbf4155c5006bfa",
