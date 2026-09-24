@@ -1,0 +1,1467 @@
+[
+ {
+  "path": "미확인 761196.crdownload",
+  "bytes": 746732317,
+  "kind": "archive",
+  "id": null,
+  "readable": true,
+  "n_files": 217,
+  "uncompressed": 1940389060,
+  "ext": {
+   ".wav": 183,
+   ".csv": 34
+  },
+  "csv_rows": {
+   "Error Lot list.csv": 33,
+   "kemp-abh-sensor-2021.09.06.csv": 1548,
+   "kemp-abh-sensor-2021.09.07.csv": 1548,
+   "kemp-abh-sensor-2021.09.08.csv": 1548,
+   "kemp-abh-sensor-2021.09.09.csv": 1548,
+   "kemp-abh-sensor-2021.09.10.csv": 1548,
+   "kemp-abh-sensor-2021.09.13.csv": 1548,
+   "kemp-abh-sensor-2021.09.14.csv": 1548,
+   "kemp-abh-sensor-2021.09.15.csv": 1548,
+   "kemp-abh-sensor-2021.09.16.csv": 1548,
+   "kemp-abh-sensor-2021.09.17.csv": 1548,
+   "kemp-abh-sensor-2021.09.23.csv": 1548,
+   "kemp-abh-sensor-2021.09.24.csv": 1548,
+   "kemp-abh-sensor-2021.09.27.csv": 1548,
+   "kemp-abh-sensor-2021.09.28.csv": 1548,
+   "kemp-abh-sensor-2021.09.29.csv": 1548,
+   "kemp-abh-sensor-2021.09.30.csv": 1548,
+   "kemp-abh-sensor-2021.10.01.csv": 1548,
+   "kemp-abh-sensor-2021.10.05.csv": 1548,
+   "kemp-abh-sensor-2021.10.06.csv": 1548,
+   "kemp-abh-sensor-2021.10.07.csv": 1548,
+   "kemp-abh-sensor-2021.10.08.csv": 1548,
+   "kemp-abh-sensor-2021.10.12.csv": 1548,
+   "kemp-abh-sensor-2021.10.13.csv": 1548,
+   "kemp-abh-sensor-2021.10.14.csv": 1548,
+   "kemp-abh-sensor-2021.10.15.csv": 1548,
+   "kemp-abh-sensor-2021.10.18.csv": 1548,
+   "kemp-abh-sensor-2021.10.19.csv": 1548,
+   "kemp-abh-sensor-2021.10.20.csv": 1548,
+   "kemp-abh-sensor-2021.10.21.csv": 1548,
+   "kemp-abh-sensor-2021.10.22.csv": 1548,
+   "kemp-abh-sensor-2021.10.25.csv": 1548,
+   "kemp-abh-sensor-2021.10.26.csv": 1548,
+   "kemp-abh-sensor-2021.10.27.csv": 1548
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "06. Dataset_Machinevision.zip",
+  "bytes": 80981170,
+  "kind": "archive",
+  "id": 6,
+  "readable": true,
+  "n_files": 2,
+  "uncompressed": 80980842,
+  "ext": {
+   ".zip": 2
+  },
+  "csv_rows": {},
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Guidebook_표면처리 자원최적화 AI 데이터셋.pdf",
+  "bytes": 8772579,
+  "kind": "guidebook",
+  "id": 41
+ },
+ {
+  "path": "Guidebook_의류 품질보증 AI 데이터셋.pdf",
+  "bytes": 12222799,
+  "kind": "guidebook",
+  "id": 62
+ },
+ {
+  "path": "Dataset_회전기계 고장유형 AI 데이터셋.zip",
+  "bytes": 17455226,
+  "kind": "archive",
+  "id": 18,
+  "readable": true,
+  "n_files": 8,
+  "uncompressed": 76553969,
+  "ext": {
+   ".csv": 8
+  },
+  "csv_rows": {
+   "g1_sensor1.csv": 190217,
+   "g1_sensor2.csv": 184210,
+   "g1_sensor3.csv": 196078,
+   "g1_sensor4.csv": 183968,
+   "g2_sensor1.csv": 190217,
+   "g2_sensor2.csv": 184210,
+   "g2_sensor3.csv": 196078,
+   "g2_sensor4.csv": 183968
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "미확인 4910.crdownload",
+  "bytes": 1800020352,
+  "kind": "archive",
+  "id": null,
+  "readable": true,
+  "n_files": 5360,
+  "uncompressed": 2413974342,
+  "ext": {
+   ".bmp": 2824,
+   ".jpg": 1110,
+   ".xml": 833,
+   ".txt": 536,
+   ".py": 18,
+   ".pyc": 7
+  },
+  "csv_rows": {},
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Guidebook_정밀가공 품질보증 AI 데이터셋.pdf",
+  "bytes": 9453591,
+  "kind": "guidebook",
+  "id": 50
+ },
+ {
+  "path": "Investment_Casting.csv",
+  "bytes": 8586965,
+  "kind": "csv",
+  "id": 53,
+  "rows": 73612
+ },
+ {
+  "path": "Dataset_로봇용접 예지보전 AI 데이터셋.zip",
+  "bytes": 0,
+  "kind": "archive",
+  "id": 45,
+  "readable": false,
+  "error": "0 bytes"
+ },
+ {
+  "path": "Guidebook_제조현장용 Scene-Text Recognition 학습 AI 데이터셋.pdf",
+  "bytes": 8088647,
+  "kind": "guidebook",
+  "id": 16
+ },
+ {
+  "path": "Guidebook_장비이상 조기탐지 AI 데이터셋.pdf",
+  "bytes": 19900874,
+  "kind": "guidebook",
+  "id": 23
+ },
+ {
+  "path": "Dataset_전자부품(배터리팩) 품질보증 AI 데이터셋.zip",
+  "bytes": 40648302,
+  "kind": "archive",
+  "id": 58,
+  "readable": true,
+  "n_files": 125,
+  "uncompressed": 661787369,
+  "ext": {
+   ".csv": 121,
+   ".xml": 2,
+   ".aasx": 1,
+   ".json": 1
+  },
+  "csv_rows": {
+   "engineering.csv": 469,
+   "Test01_OK_chg_Label.csv": 1723,
+   "Test02_OK_dchg_Label.csv": 1019,
+   "Test03_OK_chg_Label.csv": 1421,
+   "Test04_OK_dchg_Label.csv": 1505,
+   "Test05_NG_chg_Label.csv": 5016,
+   "Test06_NG_chg_Label.csv": 854,
+   "Test07_NG_dchg_Label.csv": 4594,
+   "Test08_NG_chg_Label.csv": 2396,
+   "Test09_NG_dchg_Label.csv": 4864,
+   "Test01_OK_chg.csv": 1723,
+   "Test02_OK_dchg.csv": 1019,
+   "Test03_OK_chg .csv": 1421,
+   "Test04_OK_dchg.csv": 1505,
+   "Test05_NG_chg.csv": 5016,
+   "Test06_NG_chg.csv": 854,
+   "Test07_NG_dchg.csv": 4594,
+   "Test08_NG_chg.csv": 2396,
+   "Test09_NG_dchg.csv": 4864,
+   "1000_chg.csv": 6009,
+   "1000_dchg.csv": 5358,
+   "1001_chg.csv": 6009,
+   "1001_dchg.csv": 5357,
+   "1002_chg.csv": 6008,
+   "1002_dchg.csv": 4374,
+   "1003_chg.csv": 6008,
+   "1003_dchg.csv": 4372,
+   "1004_chg.csv": 8515,
+   "1004_dchg.csv": 4795,
+   "1005_chg.csv": 8514,
+   "1005_dchg.csv": 4795,
+   "1006_chg.csv": 4796,
+   "1006_dchg.csv": 4306,
+   "1007_chg.csv": 4795,
+   "1007_dchg.csv": 3920,
+   "1008_chg.csv": 6055,
+   "1008_dchg.csv": 4492,
+   "1009_chg.csv": 6049,
+   "1009_dchg.csv": 4491,
+   "1010_chg.csv": 6092,
+   "1010_dchg.csv": 3777,
+   "1011_chg.csv": 6093,
+   "1011_dchg.csv": 3776,
+   "1012_chg.csv": 4982,
+   "1012_dchg.csv": 1967,
+   "1013_chg.csv": 8240,
+   "1013_dchg.csv": 5964,
+   "1014_chg.csv": 8408,
+   "1014_dchg.csv": 5332,
+   "1015_chg.csv": 8334,
+   "1015_dchg.csv": 5382,
+   "1016_chg.csv": 5022,
+   "1016_dchg.csv": 6964,
+   "1017_chg.csv": 7246,
+   "1017_dchg.csv": 1432,
+   "1018_chg.csv": 10454,
+   "1018_dchg.csv": 1128,
+   "1019_chg.csv": 10914,
+   "1019_dchg.csv": 1156,
+   "1020_chg.csv": 11008,
+   "1020_dchg.csv": 1123,
+   "1021_chg.csv": 10998,
+   "1021_dchg.csv": 1119,
+   "1022_chg.csv": 2370,
+   "1022_dchg.csv": 1051,
+   "1023_chg.csv": 1069,
+   "1023_dchg.csv": 1048,
+   "1024_chg.csv": 1685,
+   "1024_dchg.csv": 1016,
+   "1025_chg.csv": 1805,
+   "1025_dchg.csv": 1069,
+   "1026_chg.csv": 1285,
+   "1026_dchg.csv": 1759,
+   "1027_chg.csv": 1044,
+   "1027_dchg.csv": 1069,
+   "1028_chg.csv": 1056,
+   "1028_dchg.csv": 1583,
+   "1029_chg.csv": 1752,
+   "1029_dchg.csv": 1255,
+   "1030_chg.csv": 1240,
+   "1030_dchg.csv": 1111,
+   "1031_chg.csv": 9609,
+   "1031_dchg.csv": 5160,
+   "1032_chg.csv": 6620,
+   "1032_dchg.csv": 7021,
+   "1033_chg.csv": 5061,
+   "1033_dchg.csv": 9458,
+   "1034_chg.csv": 8618,
+   "1034_dchg.csv": 9589,
+   "1035_chg.csv": 7271,
+   "1035_dchg.csv": 6449,
+   "1036_chg.csv": 11316,
+   "1036_dchg.csv": 6272,
+   "1037_chg.csv": 11024,
+   "1037_dchg.csv": 1128,
+   "1038_chg.csv": 11270,
+   "1038_dchg.csv": 1156,
+   "1039_chg.csv": 11008,
+   "1039_dchg.csv": 1123,
+   "1040_chg.csv": 10998,
+   "1040_dchg.csv": 1119,
+   "1041_chg.csv": 1711,
+   "1041_dchg.csv": 509,
+   "1042_chg.csv": 2369,
+   "1042_dchg.csv": 1051,
+   "1043_chg.csv": 12582,
+   "1043_dchg.csv": 1349,
+   "1044_chg.csv": 12110,
+   "1044_dchg.csv": 1823,
+   "1045_chg.csv": 12005,
+   "1045_dchg.csv": 1146,
+   "1046_chg.csv": 11955,
+   "1046_dchg.csv": 1289,
+   "1047_chg.csv": 1069,
+   "1047_dchg.csv": 1048,
+   "1048_chg.csv": 1685,
+   "1048_dchg.csv": 1015,
+   "1049_chg.csv": 1044,
+   "1049_dchg.csv": 1069,
+   "1050_chg.csv": 2654,
+   "1050_dchg.csv": 1690
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Dataset_품질 이상탐지 진단(전해탈지) AI 데이터셋.zip",
+  "bytes": 543609,
+  "kind": "archive",
+  "id": 20,
+  "readable": true,
+  "n_files": 34,
+  "uncompressed": 2068615,
+  "ext": {
+   ".csv": 34
+  },
+  "csv_rows": {
+   "Error Lot list.csv": 33,
+   "kemp-abh-sensor-2021.09.06.csv": 1518,
+   "kemp-abh-sensor-2021.09.07.csv": 1518,
+   "kemp-abh-sensor-2021.09.08.csv": 1518,
+   "kemp-abh-sensor-2021.09.09.csv": 1518,
+   "kemp-abh-sensor-2021.09.10.csv": 1518,
+   "kemp-abh-sensor-2021.09.13.csv": 1518,
+   "kemp-abh-sensor-2021.09.14.csv": 1518,
+   "kemp-abh-sensor-2021.09.15.csv": 1518,
+   "kemp-abh-sensor-2021.09.16.csv": 1518,
+   "kemp-abh-sensor-2021.09.17.csv": 1518,
+   "kemp-abh-sensor-2021.09.23.csv": 1518,
+   "kemp-abh-sensor-2021.09.24.csv": 1518,
+   "kemp-abh-sensor-2021.09.27.csv": 1518,
+   "kemp-abh-sensor-2021.09.28.csv": 1518,
+   "kemp-abh-sensor-2021.09.29.csv": 1518,
+   "kemp-abh-sensor-2021.09.30.csv": 1518,
+   "kemp-abh-sensor-2021.10.01.csv": 1518,
+   "kemp-abh-sensor-2021.10.05.csv": 1518,
+   "kemp-abh-sensor-2021.10.06.csv": 1518,
+   "kemp-abh-sensor-2021.10.07.csv": 1518,
+   "kemp-abh-sensor-2021.10.08.csv": 1518,
+   "kemp-abh-sensor-2021.10.12.csv": 1518,
+   "kemp-abh-sensor-2021.10.13.csv": 1518,
+   "kemp-abh-sensor-2021.10.14.csv": 1518,
+   "kemp-abh-sensor-2021.10.15.csv": 1518,
+   "kemp-abh-sensor-2021.10.18.csv": 1518,
+   "kemp-abh-sensor-2021.10.19.csv": 1518,
+   "kemp-abh-sensor-2021.10.20.csv": 1518,
+   "kemp-abh-sensor-2021.10.21.csv": 1518,
+   "kemp-abh-sensor-2021.10.22.csv": 1518,
+   "kemp-abh-sensor-2021.10.25.csv": 1518,
+   "kemp-abh-sensor-2021.10.26.csv": 1518,
+   "kemp-abh-sensor-2021.10.27.csv": 1518
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Guidebook_사출성형 예지보전 AI 데이터셋.pdf",
+  "bytes": 14756212,
+  "kind": "guidebook",
+  "id": 56
+ },
+ {
+  "path": "02. Guidebook_FordEngine.pdf",
+  "bytes": 16513007,
+  "kind": "guidebook",
+  "id": 2
+ },
+ {
+  "path": "Dataset_정밀가공 자원최적화 AI 데이터셋.zip",
+  "bytes": 3759959,
+  "kind": "archive",
+  "id": 44,
+  "readable": true,
+  "n_files": 2,
+  "uncompressed": 3762880,
+  "ext": {
+   ".xlsx": 2
+  },
+  "csv_rows": {},
+  "csv_uncounted": 0
+ },
+ {
+  "path": "10. Guidebook_Pasteurizer.pdf",
+  "bytes": 8889005,
+  "kind": "guidebook",
+  "id": 10
+ },
+ {
+  "path": "Guidebook_생산공정 최적화 AI 데이터셋.pdf",
+  "bytes": 8359638,
+  "kind": "guidebook",
+  "id": 28
+ },
+ {
+  "path": "Guidebook_품질 이상탐지, 진단(크로메이트) AI 데이터셋.pdf",
+  "bytes": 12840749,
+  "kind": "guidebook",
+  "id": 25
+ },
+ {
+  "path": "10. Dataset_Pasteurizer.zip",
+  "bytes": 1024190,
+  "kind": "archive",
+  "id": 10,
+  "readable": true,
+  "n_files": 1,
+  "uncompressed": 6408881,
+  "ext": {
+   ".csv": 1
+  },
+  "csv_rows": {
+   "pasteurizer.csv": 210794
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Guidebook_용접 예지보전 AI 데이터셋.pdf",
+  "bytes": 11135269,
+  "kind": "guidebook",
+  "id": 51
+ },
+ {
+  "path": "Dataset_의류 품질보증 AI 데이터셋.zip",
+  "bytes": 40978257,
+  "kind": "archive",
+  "id": 62,
+  "readable": true,
+  "n_files": 7,
+  "uncompressed": 309956923,
+  "ext": {
+   ".xlsx": 4,
+   ".csv": 3
+  },
+  "csv_rows": {
+   "PRODUCTION_TREND.csv": 2119545,
+   "PRODUCTION_TREND_품질전처리 데이터셋.csv": 2099361,
+   "최종데이터셋_전처리 완료.csv": 34156
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Guidebook_품질 이상탐지, 진단(도금욕) AI 데이터셋.pdf",
+  "bytes": 12677329,
+  "kind": "guidebook",
+  "id": 21
+ },
+ {
+  "path": "Guidebook_전자부품(음향기기) 품질보증 AI 데이터셋.pdf",
+  "bytes": 7057042,
+  "kind": "guidebook",
+  "id": 47
+ },
+ {
+  "path": "08. Guidebook_Meltingtank.pdf",
+  "bytes": 6949725,
+  "kind": "guidebook",
+  "id": 8
+ },
+ {
+  "path": "Guidebook_주조 품질보증 AI 데이터셋.pdf",
+  "bytes": 15785611,
+  "kind": "guidebook",
+  "id": 55
+ },
+ {
+  "path": "Dataset_전자부품(배터리팩) 예지보전 AI 데이터셋.zip",
+  "bytes": 1099753,
+  "kind": "archive",
+  "id": 57,
+  "readable": true,
+  "n_files": 12,
+  "uncompressed": 8599134,
+  "ext": {
+   ".csv": 8,
+   ".xml": 2,
+   ".aasx": 1,
+   ".json": 1
+  },
+  "csv_rows": {
+   "engineering.csv": 59,
+   "WeldingTest_03_NG_Label.csv": 1053,
+   "WeldingTest_04_NG_Label.csv": 351,
+   "WeldingTest_01_OK.csv": 1950,
+   "WeldingTest_02_OK.csv": 1872,
+   "WeldingTest_03_NG.csv": 1053,
+   "WeldingTest_04_NG.csv": 351,
+   "Training_Data.csv": 135759
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Dataset_전자부품(음향기기) 품질보증 AI 데이터셋.zip",
+  "bytes": 1188894424,
+  "kind": "archive",
+  "id": 47,
+  "readable": true,
+  "n_files": 348,
+  "uncompressed": 1226798832,
+  "ext": {
+   ".wav": 348
+  },
+  "csv_rows": {},
+  "csv_uncounted": 0
+ },
+ {
+  "path": "01. Guidebook_OCR.pdf",
+  "bytes": 6464003,
+  "kind": "guidebook",
+  "id": 1
+ },
+ {
+  "path": "Dataset_품질 이상탐지 진단(도금욕) AI 데이터셋.zip",
+  "bytes": 624196,
+  "kind": "archive",
+  "id": 21,
+  "readable": true,
+  "n_files": 34,
+  "uncompressed": 2280287,
+  "ext": {
+   ".csv": 34
+  },
+  "csv_rows": {
+   "Error Lot list.csv": 33,
+   "kemp-abh-sensor-2021.09.06.csv": 1518,
+   "kemp-abh-sensor-2021.09.07.csv": 1518,
+   "kemp-abh-sensor-2021.09.08.csv": 1518,
+   "kemp-abh-sensor-2021.09.09.csv": 1518,
+   "kemp-abh-sensor-2021.09.10.csv": 1518,
+   "kemp-abh-sensor-2021.09.13.csv": 1518,
+   "kemp-abh-sensor-2021.09.14.csv": 1518,
+   "kemp-abh-sensor-2021.09.15.csv": 1518,
+   "kemp-abh-sensor-2021.09.16.csv": 1518,
+   "kemp-abh-sensor-2021.09.17.csv": 1518,
+   "kemp-abh-sensor-2021.09.23.csv": 1518,
+   "kemp-abh-sensor-2021.09.24.csv": 1518,
+   "kemp-abh-sensor-2021.09.27.csv": 1518,
+   "kemp-abh-sensor-2021.09.28.csv": 1518,
+   "kemp-abh-sensor-2021.09.29.csv": 1518,
+   "kemp-abh-sensor-2021.09.30.csv": 1518,
+   "kemp-abh-sensor-2021.10.01.csv": 1518,
+   "kemp-abh-sensor-2021.10.05.csv": 1518,
+   "kemp-abh-sensor-2021.10.06.csv": 1518,
+   "kemp-abh-sensor-2021.10.07.csv": 1518,
+   "kemp-abh-sensor-2021.10.08.csv": 1518,
+   "kemp-abh-sensor-2021.10.12.csv": 1518,
+   "kemp-abh-sensor-2021.10.13.csv": 1518,
+   "kemp-abh-sensor-2021.10.14.csv": 1518,
+   "kemp-abh-sensor-2021.10.15.csv": 1518,
+   "kemp-abh-sensor-2021.10.18.csv": 1518,
+   "kemp-abh-sensor-2021.10.19.csv": 1518,
+   "kemp-abh-sensor-2021.10.20.csv": 1518,
+   "kemp-abh-sensor-2021.10.21.csv": 1518,
+   "kemp-abh-sensor-2021.10.22.csv": 1518,
+   "kemp-abh-sensor-2021.10.25.csv": 1518,
+   "kemp-abh-sensor-2021.10.26.csv": 1518,
+   "kemp-abh-sensor-2021.10.27.csv": 1518
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Guidebook_열처리 공정최적화 AI 데이터셋.pdf",
+  "bytes": 8514775,
+  "kind": "guidebook",
+  "id": 61
+ },
+ {
+  "path": "Guidebook_정밀가공 자원최적화 AI 데이터셋.pdf",
+  "bytes": 10837259,
+  "kind": "guidebook",
+  "id": 44
+ },
+ {
+  "path": "Dataset_사출성형 공급망최적화 AI 데이터셋.zip",
+  "bytes": 592954,
+  "kind": "archive",
+  "id": 40,
+  "readable": true,
+  "n_files": 1,
+  "uncompressed": 3680606,
+  "ext": {
+   ".csv": 1
+  },
+  "csv_rows": {
+   "사출성형.csv": 34617
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Guidebook_전자부품(배터리팩) 예지보전 AI 데이터셋.pdf",
+  "bytes": 18150193,
+  "kind": "guidebook",
+  "id": 57
+ },
+ {
+  "path": "Dataset_용접 공정최적화 AI 데이터셋.zip",
+  "bytes": 3209749,
+  "kind": "archive",
+  "id": 52,
+  "readable": true,
+  "n_files": 1,
+  "uncompressed": 29701557,
+  "ext": {
+   ".csv": 1
+  },
+  "csv_rows": {
+   "용접 데이터.csv": 739888
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Guidebook_화장품 품질보증 AI 데이터셋.pdf",
+  "bytes": 14207250,
+  "kind": "guidebook",
+  "id": 42
+ },
+ {
+  "path": "03. Guidebook_CNC.pdf",
+  "bytes": 17079800,
+  "kind": "guidebook",
+  "id": 3
+ },
+ {
+  "path": "Dataset_의류 공정최적화 AI 데이터셋.zip",
+  "bytes": 36738768,
+  "kind": "archive",
+  "id": 90,
+  "readable": false,
+  "error": "BadZipFile"
+ },
+ {
+  "path": "Dataset_자원 최적화 AI 데이터셋.zip",
+  "bytes": 108161,
+  "kind": "archive",
+  "id": 27,
+  "readable": true,
+  "n_files": 1,
+  "uncompressed": 437447,
+  "ext": {
+   ".csv": 1
+  },
+  "csv_rows": {
+   "okm_augumented_2021.csv": 6168
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "08. Dataset_Meltingtank.zip",
+  "bytes": 7066099,
+  "kind": "archive",
+  "id": 8,
+  "readable": true,
+  "n_files": 1,
+  "uncompressed": 36941417,
+  "ext": {
+   ".csv": 1
+  },
+  "csv_rows": {
+   "melting_tank.csv": 835200
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "09. Guidebook_Mixer.pdf",
+  "bytes": 7964342,
+  "kind": "guidebook",
+  "id": 9
+ },
+ {
+  "path": "Dataset_기계부품 품질보증 AI 데이터셋.zip",
+  "bytes": 38483625,
+  "kind": "archive",
+  "id": 59,
+  "readable": true,
+  "n_files": 2,
+  "uncompressed": 282858469,
+  "ext": {
+   ".csv": 2
+  },
+  "csv_rows": {
+   "raw_total_data.csv": 579297,
+   "실습데이터.csv": 579297
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Dataset_제조현장용 Scene-Text Recognition 학습 AI 데이터셋.egg",
+  "bytes": 4366517521,
+  "kind": "archive",
+  "id": 16,
+  "readable": false,
+  "error": "BadZipFile"
+ },
+ {
+  "path": "Guidebook_공정운영 최적화 AI 데이터셋.pdf",
+  "bytes": 11129964,
+  "kind": "guidebook",
+  "id": 19
+ },
+ {
+  "path": "Guidebook_주조 설비 예지보전 AI 데이터셋.pdf",
+  "bytes": 15316200,
+  "kind": "guidebook",
+  "id": 54
+ },
+ {
+  "path": "Guidebook_의류 공정최적화 AI 데이터셋.pdf",
+  "bytes": 12785263,
+  "kind": "guidebook",
+  "id": 90
+ },
+ {
+  "path": "Dataset_소성가공 품질보증 AI 데이터셋.zip",
+  "bytes": 135896,
+  "kind": "archive",
+  "id": 49,
+  "readable": true,
+  "n_files": 1,
+  "uncompressed": 1687261,
+  "ext": {
+   ".csv": 1
+  },
+  "csv_rows": {
+   "소성가공 압출공정 데이터셋.csv": 17280
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Dataset_주조 품질보증 AI 데이터셋.zip",
+  "bytes": 154921,
+  "kind": "archive",
+  "id": 55,
+  "readable": true,
+  "n_files": 6,
+  "uncompressed": 1956257,
+  "ext": {
+   ".xml": 2,
+   ".csv": 2,
+   ".aasx": 1,
+   ".json": 1
+  },
+  "csv_rows": {
+   "engineering.csv": 133,
+   "DieCasting_Quality_Raw_Data.csv": 7536
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Dataset 정밀가공 품질보증 AI 데이터셋.zip",
+  "bytes": 183476,
+  "kind": "archive",
+  "id": 50,
+  "readable": true,
+  "n_files": 1,
+  "uncompressed": 523505,
+  "ext": {
+   ".csv": 1
+  },
+  "csv_rows": {
+   "정밀가공_품질보증_데이터셋.csv": 1085
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Dataset_공급망 최적화 AI 데이터셋.zip",
+  "bytes": 1055117,
+  "kind": "archive",
+  "id": 26,
+  "readable": true,
+  "n_files": 1,
+  "uncompressed": 9707520,
+  "ext": {
+   ".xls": 1
+  },
+  "csv_rows": {},
+  "csv_uncounted": 0
+ },
+ {
+  "path": "11. Dataset_Drier.zip",
+  "bytes": 7548786,
+  "kind": "archive",
+  "id": 11,
+  "readable": true,
+  "n_files": 2,
+  "uncompressed": 150718501,
+  "ext": {
+   ".csv": 2
+  },
+  "csv_rows": {
+   "drying_actuator1.csv": 1709056,
+   "drying_actuator2.csv": 1709056
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Dataset_표면처리 자원최적화 AI 데이터셋.zip",
+  "bytes": 271064,
+  "kind": "archive",
+  "id": 41,
+  "readable": true,
+  "n_files": 1,
+  "uncompressed": 1395011,
+  "ext": {
+   ".csv": 1
+  },
+  "csv_rows": {
+   "Resource_Management_Process.csv": 24479
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "03. Dataset_CNC.zip",
+  "bytes": 3332556,
+  "kind": "archive",
+  "id": 3,
+  "readable": true,
+  "n_files": 30,
+  "uncompressed": 15336870,
+  "ext": {
+   ".csv": 30
+  },
+  "csv_rows": {
+   "experiment_01.csv": 1055,
+   "experiment_02.csv": 1668,
+   "experiment_03.csv": 1521,
+   "experiment_04.csv": 532,
+   "experiment_05.csv": 462,
+   "experiment_06.csv": 1296,
+   "experiment_07.csv": 565,
+   "experiment_08.csv": 605,
+   "experiment_09.csv": 740,
+   "experiment_10.csv": 1301,
+   "experiment_11.csv": 2314,
+   "experiment_12.csv": 2276,
+   "experiment_13.csv": 2233,
+   "experiment_14.csv": 2332,
+   "experiment_15.csv": 1381,
+   "experiment_16.csv": 602,
+   "experiment_17.csv": 2150,
+   "experiment_18.csv": 2253,
+   "experiment_19.csv": 565,
+   "experiment_20.csv": 605,
+   "experiment_21.csv": 1668,
+   "experiment_22.csv": 565,
+   "experiment_23.csv": 462,
+   "experiment_24.csv": 2332,
+   "experiment_25.csv": 565,
+   "train.csv": 25,
+   "X_test.csv": 13241,
+   "X_train.csv": 18805,
+   "Y_test.csv": 13241,
+   "Y_train.csv": 18805
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "04. Dataset_Molding.zip",
+  "bytes": 25152722,
+  "kind": "archive",
+  "id": 4,
+  "readable": true,
+  "n_files": 8,
+  "uncompressed": 268317189,
+  "ext": {
+   ".csv": 8
+  },
+  "csv_rows": {
+   "labeled_data.csv": 7996,
+   "moldset_labeled.csv": 2607,
+   "moldset_labeled_cn7.csv": 1211,
+   "moldset_labeled_rg3.csv": 1182,
+   "moldset_unlabeled_cn7.csv": 35239,
+   "moldset_unlabeled_rg3.csv": 35941,
+   "supervised_label_cn7.csv": 6736,
+   "unlabeled_data.csv": 795315
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Guidebook_열처리 품질보증 AI 데이터셋.pdf",
+  "bytes": 10017574,
+  "kind": "guidebook",
+  "id": 60
+ },
+ {
+  "path": "Guidebook_열처리 예지보전 AI 데이터셋.pdf",
+  "bytes": 11094171,
+  "kind": "guidebook",
+  "id": 43
+ },
+ {
+  "path": "Guidebook_로봇용접 예지보전 AI 데이터셋.pdf",
+  "bytes": 13031601,
+  "kind": "guidebook",
+  "id": 45
+ },
+ {
+  "path": "09. Dataset_Mixer.zip",
+  "bytes": 2050141,
+  "kind": "archive",
+  "id": 9,
+  "readable": true,
+  "n_files": 1,
+  "uncompressed": 20246952,
+  "ext": {
+   ".csv": 1
+  },
+  "csv_rows": {
+   "mixing_actuator.csv": 351232
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "미확인 677813.crdownload",
+  "bytes": 956443008,
+  "kind": "archive",
+  "id": null,
+  "readable": true,
+  "n_files": 1486,
+  "uncompressed": 957797636,
+  "ext": {
+   ".png": 1452,
+   ".csv": 34
+  },
+  "csv_rows": {
+   "Error Lot list.csv": 33,
+   "kemp-abh-sensor-2021.09.06.csv": 1518,
+   "kemp-abh-sensor-2021.09.07.csv": 1518,
+   "kemp-abh-sensor-2021.09.08.csv": 1518,
+   "kemp-abh-sensor-2021.09.09.csv": 1518,
+   "kemp-abh-sensor-2021.09.10.csv": 1518,
+   "kemp-abh-sensor-2021.09.13.csv": 1518,
+   "kemp-abh-sensor-2021.09.14.csv": 1518,
+   "kemp-abh-sensor-2021.09.15.csv": 1518,
+   "kemp-abh-sensor-2021.09.16.csv": 1518,
+   "kemp-abh-sensor-2021.09.17.csv": 1518,
+   "kemp-abh-sensor-2021.09.23.csv": 1518,
+   "kemp-abh-sensor-2021.09.24.csv": 1518,
+   "kemp-abh-sensor-2021.09.27.csv": 1518,
+   "kemp-abh-sensor-2021.09.28.csv": 1518,
+   "kemp-abh-sensor-2021.09.29.csv": 1518,
+   "kemp-abh-sensor-2021.09.30.csv": 1518,
+   "kemp-abh-sensor-2021.10.01.csv": 1518,
+   "kemp-abh-sensor-2021.10.05.csv": 1518,
+   "kemp-abh-sensor-2021.10.06.csv": 1518,
+   "kemp-abh-sensor-2021.10.07.csv": 1518,
+   "kemp-abh-sensor-2021.10.08.csv": 1518,
+   "kemp-abh-sensor-2021.10.12.csv": 1518,
+   "kemp-abh-sensor-2021.10.13.csv": 1518,
+   "kemp-abh-sensor-2021.10.14.csv": 1518,
+   "kemp-abh-sensor-2021.10.15.csv": 1518,
+   "kemp-abh-sensor-2021.10.18.csv": 1518,
+   "kemp-abh-sensor-2021.10.19.csv": 1518,
+   "kemp-abh-sensor-2021.10.20.csv": 1518,
+   "kemp-abh-sensor-2021.10.21.csv": 1518,
+   "kemp-abh-sensor-2021.10.22.csv": 1518,
+   "kemp-abh-sensor-2021.10.25.csv": 1518,
+   "kemp-abh-sensor-2021.10.26.csv": 1518,
+   "kemp-abh-sensor-2021.10.27.csv": 1518
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Dataset_사출성형 예지보전 AI 데이터셋.zip",
+  "bytes": 20879464,
+  "kind": "archive",
+  "id": 56,
+  "readable": false,
+  "error": "BadZipFile"
+ },
+ {
+  "path": "Dataset_열처리 품질보증 AI 데이터셋.zip",
+  "bytes": 222711829,
+  "kind": "archive",
+  "id": 60,
+  "readable": true,
+  "n_files": 5,
+  "uncompressed": 1080326775,
+  "ext": {
+   ".csv": 3,
+   ".txt": 1,
+   ".xlsx": 1
+  },
+  "csv_rows": {
+   "data.csv": 2939722,
+   "train.csv": 108,
+   "품질전처리후데이터.csv": 2939722
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "미확인 32652.crdownload",
+  "bytes": 5715792871,
+  "kind": "archive",
+  "id": null,
+  "readable": false,
+  "error": "BadZipFile"
+ },
+ {
+  "path": "Guidebook_용접 공정최적화 AI 데이터셋.pdf",
+  "bytes": 11089172,
+  "kind": "guidebook",
+  "id": 52
+ },
+ {
+  "path": "Guidebook_열처리 공급망최적화 AI 데이터셋.pdf",
+  "bytes": 14770051,
+  "kind": "guidebook",
+  "id": 37
+ },
+ {
+  "path": "Dataset_화장품 품질보증 AI 데이터셋.zip",
+  "bytes": 635827,
+  "kind": "archive",
+  "id": 42,
+  "readable": true,
+  "n_files": 2,
+  "uncompressed": 4540968,
+  "ext": {
+   ".csv": 2
+  },
+  "csv_rows": {
+   "Process_Data.csv": 59233,
+   "QC_Data.csv": 22
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Dataset_주조 설비 예지보전 AI 데이터셋.zip",
+  "bytes": 118170,
+  "kind": "archive",
+  "id": 54,
+  "readable": true,
+  "n_files": 6,
+  "uncompressed": 885959,
+  "ext": {
+   ".xml": 2,
+   ".csv": 2,
+   ".aasx": 1,
+   ".json": 1
+  },
+  "csv_rows": {
+   "engineering.csv": 133,
+   "DieCasting_Raw_Data.csv": 5161
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "02. Dataset_FordEngine.zip",
+  "bytes": 14072102,
+  "kind": "archive",
+  "id": 2,
+  "readable": true,
+  "n_files": 5,
+  "uncompressed": 66936498,
+  "ext": {
+   ".txt": 3,
+   ".arff": 2
+  },
+  "csv_rows": {},
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Guidebook_전자부품(배터리팩) 품질보증 AI 데이터셋.pdf",
+  "bytes": 19035179,
+  "kind": "guidebook",
+  "id": 58
+ },
+ {
+  "path": "Dataset_표면처리 공급망최적화 AI 데이터셋.zip",
+  "bytes": 5504,
+  "kind": "archive",
+  "id": 36,
+  "readable": true,
+  "n_files": 1,
+  "uncompressed": 28381,
+  "ext": {
+   ".csv": 1
+  },
+  "csv_rows": {
+   "일무사_표면처리.csv": 177
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "11. Guidebook_Dryer.pdf",
+  "bytes": 7739783,
+  "kind": "guidebook",
+  "id": 11
+ },
+ {
+  "path": "Dataset_공정운영 최적화 AI 데이터셋.zip",
+  "bytes": 397678,
+  "kind": "archive",
+  "id": 19,
+  "readable": true,
+  "n_files": 34,
+  "uncompressed": 1728637,
+  "ext": {
+   ".csv": 34
+  },
+  "csv_rows": {
+   "kemp-abh-sensor-2021.09.06.csv": 1518,
+   "kemp-abh-sensor-2021.09.07.csv": 1518,
+   "kemp-abh-sensor-2021.09.08.csv": 1518,
+   "kemp-abh-sensor-2021.09.09.csv": 1518,
+   "kemp-abh-sensor-2021.09.10.csv": 1518,
+   "kemp-abh-sensor-2021.09.13.csv": 1518,
+   "kemp-abh-sensor-2021.09.14.csv": 1518,
+   "kemp-abh-sensor-2021.09.15.csv": 1518,
+   "kemp-abh-sensor-2021.09.16.csv": 1518,
+   "kemp-abh-sensor-2021.09.17.csv": 1518,
+   "kemp-abh-sensor-2021.09.23.csv": 1518,
+   "kemp-abh-sensor-2021.09.24.csv": 1518,
+   "kemp-abh-sensor-2021.09.27.csv": 1518,
+   "kemp-abh-sensor-2021.09.28.csv": 1518,
+   "kemp-abh-sensor-2021.09.29.csv": 1518,
+   "kemp-abh-sensor-2021.09.30.csv": 1518,
+   "kemp-abh-sensor-2021.10.01.csv": 1518,
+   "kemp-abh-sensor-2021.10.05.csv": 1518,
+   "kemp-abh-sensor-2021.10.06.csv": 1518,
+   "kemp-abh-sensor-2021.10.07.csv": 1518,
+   "kemp-abh-sensor-2021.10.08.csv": 1518,
+   "kemp-abh-sensor-2021.10.12.csv": 1518,
+   "kemp-abh-sensor-2021.10.13.csv": 1518,
+   "kemp-abh-sensor-2021.10.14.csv": 1518,
+   "kemp-abh-sensor-2021.10.15.csv": 1518,
+   "kemp-abh-sensor-2021.10.18.csv": 1518,
+   "kemp-abh-sensor-2021.10.19.csv": 1518,
+   "kemp-abh-sensor-2021.10.20.csv": 1518,
+   "kemp-abh-sensor-2021.10.21.csv": 1518,
+   "kemp-abh-sensor-2021.10.22.csv": 1518,
+   "kemp-abh-sensor-2021.10.25.csv": 1518,
+   "kemp-abh-sensor-2021.10.26.csv": 1518,
+   "kemp-abh-sensor-2021.10.27.csv": 1518,
+   "kemp-process-rate.csv": 726
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Guidebook_사출성형 공급망최적화 AI 데이터셋.pdf",
+  "bytes": 13173970,
+  "kind": "guidebook",
+  "id": 40
+ },
+ {
+  "path": "Guidebook_회전기계 고장유형 AI 데이터셋.pdf",
+  "bytes": 7510601,
+  "kind": "guidebook",
+  "id": 18
+ },
+ {
+  "path": "Dataset_소성가공 자원최적화 AI 데이터셋.zip",
+  "bytes": 1451234,
+  "kind": "archive",
+  "id": 46,
+  "readable": true,
+  "n_files": 7,
+  "uncompressed": 8535458,
+  "ext": {
+   ".csv": 7
+  },
+  "csv_rows": {
+   "공정 데이터 2022년 8월.csv": 55007,
+   "로봇 1호-전류 데이터.csv": 8219,
+   "로봇 2호-전류 데이터.csv": 6545,
+   "프레스 1호-유압모터 전류데이터.csv": 32534,
+   "프레스 2호-유압모터 전류데이터.csv": 32452,
+   "프레스 3호-유압모터 전류데이터.csv": 29593,
+   "프레스 4호-유압모터 전류데이터.csv": 29516
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Guidebook_품질 이상탐지, 진단(전해탈지) AI 데이터셋.pdf",
+  "bytes": 9203710,
+  "kind": "guidebook",
+  "id": 20
+ },
+ {
+  "path": "Guidebook_생산계획 최적화 AI 데이터셋.pdf",
+  "bytes": 7306571,
+  "kind": "guidebook",
+  "id": 30
+ },
+ {
+  "path": "Dataset_품질 이상탐지 진단(크로메이트) AI 데이터셋.zip",
+  "bytes": 0,
+  "kind": "archive",
+  "id": 25,
+  "readable": false,
+  "error": "0 bytes"
+ },
+ {
+  "path": "Guidebook_제조현장 안전관리 AI 데이터셋.pdf",
+  "bytes": 10485362,
+  "kind": "guidebook",
+  "id": 29
+ },
+ {
+  "path": "Dataset_열처리 공정최적화 AI 데이터셋.zip",
+  "bytes": 223771951,
+  "kind": "archive",
+  "id": 61,
+  "readable": true,
+  "n_files": 4,
+  "uncompressed": 1031216745,
+  "ext": {
+   ".csv": 2,
+   ".xlsx": 1,
+   ".txt": 1
+  },
+  "csv_rows": {
+   "raw_total_data.csv": 2939722,
+   "품질전처리후데이터.csv": 2939722
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Dataset_열처리 공급망최적화 AI 데이터셋.zip",
+  "bytes": 3207,
+  "kind": "archive",
+  "id": 37,
+  "readable": true,
+  "n_files": 1,
+  "uncompressed": 25418,
+  "ext": {
+   ".csv": 1
+  },
+  "csv_rows": {
+   "data.csv": 688
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Dataset 용접 예지보전 AI 데이터셋.zip",
+  "bytes": 738769,
+  "kind": "archive",
+  "id": 51,
+  "readable": true,
+  "n_files": 2,
+  "uncompressed": 6197909,
+  "ext": {
+   ".csv": 2
+  },
+  "csv_rows": {
+   "normal_data.csv": 81775,
+   "outlier_data.csv": 18225
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "미확인 594108.crdownload",
+  "bytes": 34951626,
+  "kind": "archive",
+  "id": null,
+  "readable": true,
+  "n_files": 4,
+  "uncompressed": 110986922,
+  "ext": {
+   ".csv": 4
+  },
+  "csv_rows": {
+   "current_anomaly.csv": 32,
+   "current_normal.csv": 8202,
+   "vibration_anomaly.csv": 16,
+   "vibration_normal.csv": 1774
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Dataset_생산계획 최적화 AI 데이터셋.zip",
+  "bytes": 2946398,
+  "kind": "archive",
+  "id": 30,
+  "readable": true,
+  "n_files": 4,
+  "uncompressed": 3341665,
+  "ext": {
+   ".csv": 2,
+   ".xlsx": 2
+  },
+  "csv_rows": {
+   "machine_info.csv": 21151,
+   "order_info.csv": 127
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "미확인 366780.crdownload",
+  "bytes": 143071501,
+  "kind": "archive",
+  "id": null,
+  "readable": true,
+  "n_files": 2,
+  "uncompressed": 683925880,
+  "ext": {
+   ".csv": 2
+  },
+  "csv_rows": {
+   "data.csv": 345390
+  },
+  "csv_uncounted": 1
+ },
+ {
+  "path": "Guidebook_자원 최적화 AI 데이터셋.pdf",
+  "bytes": 6881474,
+  "kind": "guidebook",
+  "id": 27
+ },
+ {
+  "path": "01. Dataset_OCR.zip",
+  "bytes": 81525666,
+  "kind": "archive",
+  "id": 1,
+  "readable": true,
+  "n_files": 27313,
+  "uncompressed": 81372425,
+  "ext": {
+   ".jpg": 27237,
+   ".png": 44,
+   ".py": 12,
+   ".pyc": 8,
+   ".xml": 5,
+   ".txt": 4
+  },
+  "csv_rows": {},
+  "csv_uncounted": 0
+ },
+ {
+  "path": "04. Guidebook_Molding.pdf",
+  "bytes": 33461303,
+  "kind": "guidebook",
+  "id": 4
+ },
+ {
+  "path": "Dataset_생산공정 최적화 AI 데이터셋.zip",
+  "bytes": 3806275,
+  "kind": "archive",
+  "id": 28,
+  "readable": true,
+  "n_files": 1,
+  "uncompressed": 26499947,
+  "ext": {
+   ".csv": 1
+  },
+  "csv_rows": {
+   "raw_data.csv": 175102
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "Dataset_장비이상 조기탐지 AI 데이터셋.zip",
+  "bytes": 0,
+  "kind": "archive",
+  "id": 23,
+  "readable": false,
+  "error": "0 bytes"
+ },
+ {
+  "path": "Guidebook_주조 공정최적화 AI 데이터셋.pdf",
+  "bytes": 2989217,
+  "kind": "guidebook",
+  "id": 53
+ },
+ {
+  "path": "Guidebook_표면처리 공급망최적화 AI 데이터셋.pdf",
+  "bytes": 13507116,
+  "kind": "guidebook",
+  "id": 36
+ },
+ {
+  "path": "Guidebook_공급망 최적화 AI 데이터셋.pdf",
+  "bytes": 5378091,
+  "kind": "guidebook",
+  "id": 26
+ },
+ {
+  "path": "Guidebook_기계부품 품질보증 AI 데이터셋.pdf",
+  "bytes": 6463425,
+  "kind": "guidebook",
+  "id": 59
+ },
+ {
+  "path": "Guidebook_소성가공 품질보증 AI 데이터셋.pdf",
+  "bytes": 10406100,
+  "kind": "guidebook",
+  "id": 49
+ },
+ {
+  "path": "06. Guidebook_Machinevision.pdf",
+  "bytes": 15684810,
+  "kind": "guidebook",
+  "id": 6
+ },
+ {
+  "path": "Guidebook_소성가공 자원최적화 AI 데이터셋.pdf",
+  "bytes": 7428238,
+  "kind": "guidebook",
+  "id": 46
+ },
+ {
+  "path": "Dataset_열처리 예지보전 AI 데이터셋.zip",
+  "bytes": 0,
+  "kind": "archive",
+  "id": 43,
+  "readable": false,
+  "error": "0 bytes"
+ },
+ {
+  "path": "프레스_유압펌프_예지보전/Guidebook_소성가공 예지보전 AI 데이터셋.pdf",
+  "bytes": 10622468,
+  "kind": "guidebook",
+  "id": 48
+ },
+ {
+  "path": "프레스_유압펌프_예지보전/Dataset_소성가공 예지보전 AI 데이터셋.zip",
+  "bytes": 377029,
+  "kind": "archive",
+  "id": 48,
+  "readable": true,
+  "n_files": 2,
+  "uncompressed": 1250783,
+  "ext": {
+   ".csv": 2
+  },
+  "csv_rows": {
+   "outlier_data.csv": 600,
+   "press_data_normal.csv": 20000
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "프레스_유압펌프_예지보전/미사용_KAMP07_다른프레스데이터셋/07. Guidebook_Press.pdf",
+  "bytes": 10762556,
+  "kind": "guidebook",
+  "id": 48
+ },
+ {
+  "path": "프레스_유압펌프_예지보전/미사용_KAMP07_다른프레스데이터셋/07. Dataset_Press.zip",
+  "bytes": 2488324,
+  "kind": "archive",
+  "id": 48,
+  "readable": true,
+  "n_files": 3,
+  "uncompressed": 7999328,
+  "ext": {
+   ".xlsx": 2,
+   ".csv": 1
+  },
+  "csv_rows": {
+   "input_data.csv": 64359
+  },
+  "csv_uncounted": 0
+ },
+ {
+  "path": "프레스_유압펌프_예지보전/data/3_소성가공_예지보전/press_data_normal.csv",
+  "bytes": 1211960,
+  "kind": "csv",
+  "id": 48,
+  "rows": 20000
+ },
+ {
+  "path": "프레스_유압펌프_예지보전/data/3_소성가공_예지보전/outlier_data.csv",
+  "bytes": 38823,
+  "kind": "csv",
+  "id": 48,
+  "rows": 600
+ },
+ {
+  "path": "2. 용접기 AI 데이터셋/scaled_data.csv",
+  "bytes": 639945,
+  "kind": "csv",
+  "id": 5,
+  "rows": 11939
+ },
+ {
+  "path": "2. 용접기 AI 데이터셋/Welding Data Set_01.xlsx",
+  "bytes": 551445,
+  "kind": "xlsx",
+  "id": 5
+ }
+]
