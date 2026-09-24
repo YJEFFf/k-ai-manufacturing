@@ -4,6 +4,8 @@ Run with press_submission/requirements.txt installed:
   python review_checks.py --package ../../press_submission --outputs <rerun outputs> --out review_results.json
 The package and its outputs are never changed. A reproduced issue is recorded,
 not treated as a successful production acceptance test.
+Report generation was removed at the user's request on 2026-09-25.
+The R5 probe now checks absence; it never recreates a report draft.
 """
 from __future__ import annotations
 
@@ -30,7 +32,7 @@ def main():
     import numpy as np
     import pandas as pd
     import torch
-    from press import data as D, evidence, lstm_ae
+    from press import data as D, lstm_ae
     from press.artifact import Artifact
     from press.field import persistence_score
     from predict import predict_frame
@@ -181,17 +183,11 @@ def main():
             cache_hit_after_code_change=meta["cached"], old_scores_reused=same,
             forced_retrain_max_score_delta=delta, cache_key=meta["cache_key"])
 
-        d=tmp/"changed_evidence_inputs";shutil.copytree(outputs,d)
-        p=d/"persistence.csv"; df=pd.read_csv(p)
-        mask=(df.model=="persist_k2n3")&(df.criterion=="conformal")&(df.alpha==.01)
-        df.loc[mask,"abnormal_notified_segments"]=0;df.loc[mask,"normal_notified_segments"]=5
-        df.to_csv(p,index=False)
-        e=tmp/"changed_evidence"
-        evidence.run(d,e,json.loads((d/"manifest.json").read_text()),json.loads((d/"checks.json").read_text()))
-        stale="지속성 (2,3) 규칙은 두 분할에서 이상 21구간 탐지를 유지한 채 정상 알림을 0으로 줄였고"
-        text=(e/"보고서_근거_장별.md").read_text()
-        add("evidence_stale_narrative", issue_reproduced=stale in text,
-            altered_table_abnormal_detected=0, altered_table_normal_alerts=5, unchanged_claim=stale)
+        legacy_generator=(pkg/"press/evidence.py").exists()
+        report_draft=(pkg/"evidence/보고서_근거_장별.md").exists()
+        add("report_generation_removed", issue_reproduced=legacy_generator or report_draft,
+            legacy_generator_exists=legacy_generator, report_draft_exists=report_draft,
+            report_work="deferred_until_explicit_user_instruction")
 
         manifest=json.loads((outputs/"manifest.json").read_text())
         stale_hash=[]

@@ -4,6 +4,8 @@
 
 현재 선택은 **③ 프레스 유압펌프 이상 탐지·오경보 분석**이다. 사용자 결정으로 ① 사출·④ X-ray·⑤ 전력은 후보에서 제외했다. ② 용접과의 추가 검증 및 최종 판단은 [프레스·용접 비교 보고서](analysis/press_welding_review/README.md)를 우선 참고한다. 아래 기존 문서는 당시 후보 범위와 판단을 보존한 기록이다.
 
+**현재 단계: 구현·실험·디버깅·검수.** 2026-09-25 예준 지시로 대회 보고서 초안과 자동 생성 코드를 삭제했다. 예준이 결과에 만족하고 **보고서 작성 시작을 명시적으로 지시하기 전까지 보고서 작업을 진행하지 않는다.** Codex와 Claude Code 공통 지침은 [AGENTS.md](AGENTS.md)를 따른다.
+
 ## 먼저 볼 문서
 
 - [프레스 1~6단계 구현 검수](analysis/press_implementation_review/README.md): 2026-09-25 실행 재현·독립 재집계 확인, 최종 완료 전 R1~R6 수정 사항과 재현 코드
@@ -18,7 +20,7 @@
 
 ## 디렉터리
 
-- `press_submission/`: 확정 실행계획, 제출 코드·실험 결과·보고서 근거
+- `press_submission/`: 실행계획, 모델 코드·실험 결과·검수용 수치 집계 (보고서 작성 보류)
 - `analysis/press_implementation_review/`: 1~6단계 구현의 실행 재현·독립 재집계·결함 재현·검수 판정
 - `analysis/press_plan_review/`: 클로드 후속 계획 검토와 검토 당시 원문
 - `analysis/press_welding_review/`: 두 후보의 집계 정답·경보 정책·센서 관계 추가 검증

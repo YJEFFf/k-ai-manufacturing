@@ -1,8 +1,8 @@
 # ③ 프레스 유압펌프 이상 탐지 — 제출 패키지
 
-실행 기준은 [PLAN.md](PLAN.md)다. 구현 범위: **1~6단계 코드·산출물 작성, 최종 검수 보완 필요** (데이터·진단·뼈대 / w=8 고정·q95 지수 꼬리·conformal 보정·추론 / 전처리·창 민감도·동결 진단·절제·라벨 우회·FN/FP 조건 / LSTM-AE 3프로토콜·블록 부트스트랩 / 업무량·지속성·진폭 정규화 후보·판단표·보고서 근거·numbers.json / 기대값 동결·캐시 사용 클론 재현·ZIP 조립).
+실행 기준은 [PLAN.md](PLAN.md)다. 현재는 **구현·실험·디버깅·검수 단계**다. 2026-09-25 예준 지시로 대회 보고서 초안과 자동 생성 코드를 삭제했다. **예준이 검수 결과에 만족하고 보고서 작성 시작을 명시적으로 지시하기 전에는 보고서 작업을 절대 진행하지 않는다.** 이전 단계 완료 기록은 보고서 착수 허가가 아니다.
 
-2026-09-25 [Codex 구현 검수](../analysis/press_implementation_review/README.md): 새 환경에서 기존 테스트 26개 통과, 캐시 사용 전체 실행 33/33 재현, 주 모델 A 21/21·0/120 및 B 21/21·3/180 독립 재집계 일치. **검증 도구·LSTM 캐시 무효화·지속성 결측 처리·운영점별 오류 집계·근거 문장 생성·캐시 없는 학습 검증(R1~R6)**을 보완한 뒤 최종 완료를 판정한다. `checks.json.pending_steps`는 현재 고정 목록이므로 상세 남은 일은 검수 문서를 따른다.
+2026-09-25 [Codex 구현 검수](../analysis/press_implementation_review/README.md): 검수 대상 `7beb732`에서 기존 테스트 26개 통과, 캐시 사용 전체 실행 33/33 재현, 주 모델 A 21/21·0/120 및 B 21/21·3/180 독립 재집계 일치. **검증 도구·LSTM 캐시 무효화·지속성 결측 처리·운영점별 오류 집계·캐시 없는 학습 검증(R1·R2·R3·R4·R6)** 보완이 남았다. R5의 보고서 생성 기능은 삭제했으며 검수용 `numbers.json`만 생성한다. `outputs/`의 기존 실행 기록은 당시 상태를 보존한 것이므로 현재 완료 판정으로 사용하지 않는다. 상세 남은 일은 검수 문서를 따른다.
 
 ## 실행
 
@@ -14,7 +14,6 @@ python -m pip install -r requirements.txt
 OMP_NUM_THREADS=1 python run_all.py --root . --out outputs            # LSTM 캐시가 있으면 약 1분, 없으면 첫 실행 30~40분(CPU 학습); --steps 3 이면 40초
 python -m pytest -q tests                                              # 정확성 검사
 python verify.py --out outputs                                         # outputs/expected 대비 허용오차 검사 (--freeze 로 동결)
-python tools/check_alignment.py --numbers outputs/numbers.json --text <보고서.txt> <발표.txt>   # 수치 정렬 검사
 python predict.py --model artifacts/main_A.json --input <입력.csv> --out predictions.csv   # 저장 상태만으로 추론
 ```
 
@@ -45,7 +44,7 @@ python predict.py --model artifacts/main_A.json --input <입력.csv> --out predi
 | `model_comparison_lstm.csv`, `lstm_common_meta.csv`, `lstm_common_history_*.csv`, `model_comparison_all.csv/.md` | 공통 프로토콜 LSTM20 단독·LSTM20+max-z 결합(정상 학습 내부 조기 종료, 구간 내부 창, 정상 보정만)과 전체 모델 병합표 |
 | `uncertainty.csv` | 정상 평가 구간 알림 수의 moving-block bootstrap(블록 5·10·20) 민감도. 관측 카운트가 주 결과이며 0건은 퇴화로 표시 |
 | `workload.csv`, `persistence.csv`, `load_normalization.csv`, `load_normalization_meta.csv`, `field_decision_table.md` | 업무량(기록시간·경과시간 기준, 가동시간 시나리오), 지속성 (k,n) 규칙(재보정), 진폭 정규화 후보(온라인 trailing-17 특징), 작업자 판단표 |
-| `numbers.json`, `../evidence/보고서_근거_장별.md` | 헤드라인 수치(모델·분할·기준·α·분모·run_id 연결)와 보고서 6장별 근거·문장 초안 |
+| `numbers.json` | 검수용 수치 집계(모델·분할·기준·α·분모·run_id 연결). 보고서 서술·장별 초안 생성 없음 |
 | `predictions_A.csv`, `predictions_B.csv`, `records_main_*.csv` | 행별 예측(평가 스트림)·구간별 알림 기록 — Git 제외 |
 | `checks.json`, `manifest.json` | 정확성 검사 결과, 환경·입력 해시·산출물 해시·실행 시간 |
 | `../artifacts/main_A.json`, `main_B.json` | 주 모델 학습·보정 상태(스케일러, 참조 점수, 꼬리 변환, 보정 구간 최댓값, 문턱). `predict.py`가 이 파일만으로 추론한다 — Git 제외 |
@@ -68,11 +67,12 @@ python predict.py --model artifacts/main_A.json --input <입력.csv> --out predi
 | 2 w=8 고정, q95 지수 꼬리, conformal 보정, 추론·집계 | 완료 |
 | 3 전처리·창 민감도, 절제, 오류 조건 | 구현·기본 결과 재현, R4 오류 집계 수정 필요 |
 | 4 기준모델·LSTM 3프로토콜, coverage·불확실성 | 캐시 사용 결과 재현, R2·R6 보완 필요 |
-| 5 업무량·지속성·진폭 후보·장별 근거 | 구현·기본 결과 재현, R3·R5 보완 필요 |
-| 6 환경 고정·깨끗한 재현·ZIP 조립 | 캐시 사용 재현·ZIP 확인, R1·R6 및 최종 제출자료 대조 필요 |
+| 5 업무량·지속성·진폭 후보·수치 집계 | 구현·기본 결과 재현, R3 보완 필요. 보고서 생성 기능 삭제 |
+| 6 환경 고정·깨끗한 재현·구현 재검수 | 캐시 사용 재현, R1·R6 보완 및 재검수 필요 |
+| 보고서·발표자료·최종 제출물 조립 | 보류. 예준의 명시적인 보고서 작성 시작 지시 필요 |
 
 ## 재현 확인 범위 (6단계)
 - `outputs/expected/`는 검증된 실행(이 저장소의 커밋 시점, macOS arm64·Python 3.12.2)에서 `verify.py --freeze`로 동결한 집계값이다.
 - `bash tools/clean_repro.sh --with-lstm`: 저장소를 임시 폴더에 클론하고 산출물을 지운 뒤 데이터·LSTM 캐시를 복사해 `run_all.py`를 처음부터 실행하고 `verify.py`로 비교한다. 같은 기기에서 33/33 파일이 허용오차 안에서 일치했다(LSTM 관련 1e-3, IF/MLP-AE 1e-6, 나머지 1e-8).
 - LSTM 캐시 없이 처음부터 학습하면 약 30분이 더 걸리고, 다른 기기·OS에서는 LSTM 오차가 허용오차를 넘을 수 있다. 그 경우 경보 판정(`alarm*` 열)의 차이 수를 verify가 따로 보고한다. 다른 OS 검증은 수행하지 못했다.
-- 제출 ZIP: `python tools/make_submission_zip.py --out ../submission_press.zip` (코드·requirements·README·PLAN·PROVENANCE·학습용 데이터·artifacts(LSTM 캐시)·outputs·근거 문서·행별 예측 파일). 텍스트 파일의 소속·이메일·홈 경로 문자열을 검사한다. 보고서·발표자료·설문 캡처는 별도로 준비한다.
+- 초안을 포함했던 기존 `yejun/submission_press.zip`은 삭제했다. 최종 ZIP 조립과 보고서·발표자료 대조는 예준의 명시적인 보고서 착수 지시 이후로 보류한다. `tools/make_submission_zip.py`는 `evidence/`를 수집하지 않는다.

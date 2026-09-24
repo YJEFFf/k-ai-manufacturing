@@ -1,8 +1,6 @@
-"""5단계 검사: 지속성 정책 점수, 진폭 정규화 특징, 근거 표 생성."""
+"""5단계 검사: 지속성 정책 점수, 진폭 정규화 특징."""
 import numpy as np
-import pandas as pd
 
-from press.evidence import md_table
 from press.field import _amp, persistence_score, trailing_feature
 
 
@@ -25,9 +23,3 @@ def test_trailing_amp_on_sine():
     a = trailing_feature(x, np.zeros(40, int), 17, _amp)
     assert np.isnan(a[:16]).all() and np.isfinite(a[16:]).all()
     assert abs(a[16:].mean() - 100) < 5
-
-
-def test_md_table():
-    df = pd.DataFrame({"a": [1, 2], "b": [0.12345, np.nan], "c": ["x", "y"]})
-    md = md_table(df, ["a", "b", "c"], {"a": "A"})
-    assert md.splitlines()[0] == "| A | b | c |" and "0.123" in md and md.count("\n") == 3

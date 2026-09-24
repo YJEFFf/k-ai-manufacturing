@@ -11,8 +11,7 @@ import zipfile
 from pathlib import Path
 
 PKG = Path(__file__).resolve().parents[1]
-INCLUDE_DIRS = ["press", "vendor", "tests", "tools", "outputs", "evidence", "artifacts", "data"]
-EXCLUDE_FILES = {"evidence/요청사항_준용.md"}   # 팀 내부 요청 노트는 제출물이 아니다
+INCLUDE_DIRS = ["press", "vendor", "tests", "tools", "outputs", "artifacts", "data"]
 INCLUDE_FILES = ["README.md", "PLAN.md", "PROVENANCE.md", "requirements.txt", "run_all.py", "predict.py", "verify.py"]
 EXCLUDE_PARTS = {"__pycache__", ".pytest_cache", ".DS_Store"}
 BLIND_PATTERNS = tuple(p for p in ("@gm" "ail", "@na" "ver", "/Us" "ers/", "heoy" "ejun", "YJE" "FFf"))   # 자기 파일 검출을 피하려고 분리해 적음
@@ -29,7 +28,7 @@ def main(argv=None):
         if not p.exists():
             continue
         for f in sorted(p.rglob("*")):
-            if f.is_file() and not (EXCLUDE_PARTS & set(f.parts)) and str(f.relative_to(PKG)) not in EXCLUDE_FILES:
+            if f.is_file() and not (EXCLUDE_PARTS & set(f.parts)):
                 if args.exclude_lstm_cache and "lstm_cache" in f.parts:
                     continue
                 files.append(f)

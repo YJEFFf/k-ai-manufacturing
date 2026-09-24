@@ -23,13 +23,13 @@ import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
 
 from press import data as D  # noqa: E402
-from press import analysis, diagnosis, evidence, field, lstm_ae, robustness, uncertainty  # noqa: E402
+from press import analysis, diagnosis, field, lstm_ae, numbers, robustness, uncertainty  # noqa: E402
 from press.artifact import Artifact  # noqa: E402
 from press.calibrate import ALPHAS, conformal_p, mc_check_conformal, segment_max, thresholds_for  # noqa: E402
 from press.evaluate import comparison_markdown, evaluate_models  # noqa: E402
 from press.scores import MAIN_W, ExpTail, MainModel, Scorer  # noqa: E402
 
-PENDING = ["freeze_env_clean_repro_zip(6단계)"]
+PENDING = ["implementation_review_and_clean_repro(6단계)"]
 MAIN_ALPHA = 0.01
 
 
@@ -262,7 +262,7 @@ def main(argv=None):
     ap.add_argument("--preprocess", choices=list(D.QUANTIZATION), default="matched")
     ap.add_argument("--no-verify", action="store_true", help="입력 해시·행 수 검증을 건너뛴다(다른 자료로 실행할 때)")
     ap.add_argument("--no-baselines", action="store_true", help="5NN·RMS5·IF·MLP-AE 생략(빠른 확인용)")
-    ap.add_argument("--steps", type=int, default=5, help="실행할 단계 수 (1 진단, 2 주 모델, 3 강건성·오류, 4 LSTM·불확실성, 5 현장·근거)")
+    ap.add_argument("--steps", type=int, default=5, help="실행할 단계 수 (1 진단, 2 주 모델, 3 강건성·오류, 4 LSTM·불확실성, 5 현장·수치 집계; 보고서 생성 없음)")
     ap.add_argument("--lstm-epochs", type=int, default=300, help="공통 프로토콜 LSTM 최대 에폭(축약 학습)")
     ap.add_argument("--lstm-patience", type=int, default=30, help="공통 프로토콜 LSTM 조기 종료 patience")
     ap.add_argument("--lstm-guide-epochs", type=int, default=800, help="가이드북 재구현 최대 에폭(원값 800)")
@@ -302,7 +302,7 @@ def main(argv=None):
     import torch  # noqa: E402
     pre_manifest = dict(git_commit=git_commit(), environment=D.environment(), timings_s=timings, torch=torch.__version__)
     if args.steps >= 5:
-        checks["step5_evidence"] = evidence.run(out, D.PACKAGE_DIR / "evidence", pre_manifest, checks)
+        checks["step5_numbers"] = numbers.run(out, pre_manifest)
     manifest = dict(protocol_version=D.PROTOCOL_VERSION, git_commit=git_commit(), torch=torch.__version__, args={k: str(v) for k, v in vars(args).items()},
                     environment=D.environment(), omp_num_threads=os.environ.get("OMP_NUM_THREADS"),
                     inputs=ctx["load_report"], timings_s=timings,
