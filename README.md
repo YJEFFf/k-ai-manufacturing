@@ -6,18 +6,18 @@
 
 | 폴더 | 담당 |
 |---|---|
-| [`codex/`](codex/) | 예준 — Codex 분석 (과제 비교·데이터 감사·추가 검증, 코드와 결과) |
+| [`yejun/`](yejun/) | 예준 — Codex·Claude Code 분석 (과제 비교·데이터 감사·추가 검증, 코드와 결과) |
 | [`claude/`](claude/) | 준용 — Claude Code 분석 (진단·베이스라인·주입 벤치마크, 노트) |
 
-두 분석 브랜치의 커밋 이력을 보존해 `main`에 병합했습니다. 후속 작업도 작업자·도구별 폴더로 구분합니다.
+두 분석 브랜치의 커밋 이력을 보존해 `main`에 병합했습니다. 후속 작업도 작업자별 폴더로 구분합니다.
 
 ## 현재 주제 판단 — 2026-09-23
 
 현재 선택은 **③ 프레스 유압펌프 이상 탐지·오경보 분석**입니다. 사용자 결정으로 ① 사출·④ X-ray·⑤ 전력은 선정 대상에서 제외하고, ② 용접과 ③ 프레스만 추가 비교했습니다.
 
-- [최신 프레스·용접 비교 및 판단](codex/analysis/press_welding_review/README.md)
-- [프레스 경보 정책 검증](codex/analysis/press_welding_review/press_policy_review.md)
-- [용접 집계 라벨·합성 실험 후속 검증](codex/analysis/press_welding_review/welding_validation_report.md)
+- [최신 프레스·용접 비교 및 판단](yejun/analysis/press_welding_review/README.md)
+- [프레스 경보 정책 검증](yejun/analysis/press_welding_review/press_policy_review.md)
+- [용접 집계 라벨·합성 실험 후속 검증](yejun/analysis/press_welding_review/welding_validation_report.md)
 - [준용 × Claude의 9/22 작업 인수인계](claude/notes/HANDOFF_2026-09-22.md)
 
 각 폴더의 과거 보고서는 당시 판단을 보존합니다. 특히 Claude 문서의 용접·전력 검토는 9/22 기준이며, 현재 주제 판단은 위 최신 비교 문서를 기준으로 확인합니다. 프레스 선택이 복잡한 모델의 성능 우위나 수상을 보장한다는 뜻은 아닙니다.
@@ -26,4 +26,4 @@
 
 대회 원본 데이터·관련 자료와 대용량 중간 산출물은 Git에 올리지 않습니다. 로컬 원본 자료는 그대로 유지하며, 필요한 데이터 위치와 실행 방법은 각 폴더의 README를 따릅니다.
 
-Codex 자료는 기존 루트에서 `codex/`로 이동했습니다. 과거 문서의 `analysis/...` 실행 명령은 `codex/` 안에서 실행하고, Claude 교차 검증에는 `../claude/code`를 지정합니다. 기존 절대 경로와 임시 경로는 당시 실행 기록으로 보존했습니다.
+예준 자료는 기존 루트에서 `codex/`로 옮긴 뒤 2026-09-24에 `yejun/`으로 이름을 바꿨습니다. 과거 기록에 남은 `codex/` 경로는 지금의 `yejun/`입니다. 과거 문서의 `analysis/...` 실행 명령은 `yejun/` 안에서 실행하고, Claude 교차 검증에는 `../claude/code`를 지정합니다. 기존 절대 경로와 임시 경로는 당시 실행 기록으로 보존했습니다.

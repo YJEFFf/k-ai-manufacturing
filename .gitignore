@@ -1,4 +1,4 @@
-# Shared local files and raw materials; analysis-specific rules live in codex/.
+# Shared local files and raw materials; analysis-specific rules live in yejun/.
 .DS_Store
 **/__pycache__/
 *.py[cod]

@@ -3,7 +3,7 @@
 All model definitions, splits, and calibration budgets are fixed in this file.
 No anomaly labels are used for fitting or threshold selection. Recording blocks
 are not independent failures. All anomaly rows, including block starts, count.
-Run from codex/: python analysis/press_welding_review/sensor_relation_audit.py
+Run from yejun/: python analysis/press_welding_review/sensor_relation_audit.py
 """
 from __future__ import annotations
 

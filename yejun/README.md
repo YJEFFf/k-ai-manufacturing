@@ -1,6 +1,6 @@
 # K-AI 제조데이터 분석 경진대회
 
-이 폴더는 Codex가 수행한 과제 재선정, 데이터 품질 감사, 기준모델 실험과 후속 검증을 보관한다.
+이 폴더는 예준의 작업 공간이다. Codex와 Claude Code를 번갈아 쓰며, 두 도구가 함께 따르는 작업 규칙은 [`AGENTS.md`](AGENTS.md)에 있다. 과제 재선정, 데이터 품질 감사, 기준모델 실험과 후속 검증을 보관한다.
 
 현재 선택은 **③ 프레스 유압펌프 이상 탐지·오경보 분석**이다. 사용자 결정으로 ① 사출·④ X-ray·⑤ 전력은 후보에서 제외했다. ② 용접과의 추가 검증 및 최종 판단은 [프레스·용접 비교 보고서](analysis/press_welding_review/README.md)를 우선 참고한다. 아래 기존 문서는 당시 후보 범위와 판단을 보존한 기록이다.
 
@@ -30,10 +30,10 @@
 
 ## 폴더 이동 후 실행
 
-기존 문서의 `analysis/...` 명령은 `codex/` 안에서 실행한다. 원본 `데이터셋/`과 `관련 자료/`는 저장소 루트에 있는 로컬 자료를 사용하며 Git에 포함하지 않는다. 과거 보고서의 절대 경로·`/tmp` 경로는 당시 실행 기록으로 보존했다. 해당 자료가 없는 환경에서는 스크립트의 입력 경로 옵션을 지정해야 한다.
+이 폴더는 2026-09-24에 `codex/`에서 `yejun/`으로 이름을 바꿨다. 과거 기록에 남은 `codex/` 경로는 지금의 `yejun/`이다. 기존 문서의 `analysis/...` 명령은 `yejun/` 안에서 실행한다. 원본 `데이터셋/`과 `관련 자료/`는 저장소 루트에 있는 로컬 자료를 사용하며 Git에 포함하지 않는다. 과거 보고서의 절대 경로·`/tmp` 경로는 당시 실행 기록으로 보존했다. 해당 자료가 없는 환경에서는 스크립트의 입력 경로 옵션을 지정해야 한다.
 
 ```bash
-cd codex
+cd yejun
 python analysis/press_welding_review/press_policy_audit.py
 python analysis/press_welding_review/welding_validation_audit.py --claude-code ../claude/code
 ```

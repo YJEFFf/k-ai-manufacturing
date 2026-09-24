@@ -1,6 +1,6 @@
 """Bounded welding audit: real daily labels and purged synthetic sensitivity.
 
-Run from codex/ with the reviewed Claude code directory, for example:
+Run from yejun/ with the reviewed Claude code directory, for example:
   /opt/anaconda3/bin/python analysis/press_welding_review/welding_validation_audit.py \
     --claude-code ../claude/code
 

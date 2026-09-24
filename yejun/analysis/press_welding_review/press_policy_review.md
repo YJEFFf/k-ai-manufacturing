@@ -86,7 +86,7 @@ RMS 준비 구간에 단순 점수를 쓰는 결합 정책은 이후 검토할 �
 ## 재현 및 확인
 
 ```bash
-cd codex
+cd yejun
 /opt/anaconda3/bin/python analysis/press_welding_review/press_policy_audit.py
 ```
 

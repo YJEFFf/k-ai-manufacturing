@@ -62,7 +62,7 @@ Ctx의 3% 결과는 경계를 제거해도 거의 유지됐다. 고가압력 밖
 ## 재현과 산출물
 
 ```sh
-cd codex
+cd yejun
 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python analysis/press_welding_review/welding_validation_audit.py --claude-code ../claude/code
 ```
 
