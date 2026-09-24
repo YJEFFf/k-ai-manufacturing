@@ -1,0 +1,15 @@
+split,feature,auroc,direction,separability,n_normal,n_abnormal,definition
+normal_60_20_20,vib0_std,0.8635454181672668,higher⇒abnormal,0.8635454181672668,119,21,
+normal_60_20_20,vib1_std,0.927170868347339,higher⇒abnormal,0.927170868347339,119,21,
+normal_60_20_20,amp_proxy,0.4333333333333333,lower⇒abnormal,0.5666666666666667,120,21,평균 제거 RMS×√2(길이<17 신뢰 제한)
+normal_60_20_20,r2_segment,0.0,lower⇒abnormal,1.0,109,17,구간 전체 사인 R²(사후)
+normal_60_20_20,sine_trailing_median,1.0,higher⇒abnormal,1.0,114,18,trailing-8 1−R² 중앙값(경보 특징)
+normal_60_20_20,maxz_max,0.9757936507936508,higher⇒abnormal,0.9757936507936508,120,21,
+normal_60_20_20,length,0.4093253968253968,lower⇒abnormal,0.5906746031746032,120,21,
+normal_50_20_30,vib0_std,0.8619313647246607,higher⇒abnormal,0.8619313647246607,179,21,
+normal_50_20_30,vib1_std,0.8978451715881883,higher⇒abnormal,0.8978451715881883,179,21,
+normal_50_20_30,amp_proxy,0.3777777777777778,lower⇒abnormal,0.6222222222222222,180,21,평균 제거 RMS×√2(길이<17 신뢰 제한)
+normal_50_20_30,r2_segment,0.0,lower⇒abnormal,1.0,165,17,구간 전체 사인 R²(사후)
+normal_50_20_30,sine_trailing_median,1.0,higher⇒abnormal,1.0,171,18,trailing-8 1−R² 중앙값(경보 특징)
+normal_50_20_30,maxz_max,0.9584656084656085,higher⇒abnormal,0.9584656084656085,180,21,
+normal_50_20_30,length,0.41388888888888886,lower⇒abnormal,0.5861111111111111,180,21,

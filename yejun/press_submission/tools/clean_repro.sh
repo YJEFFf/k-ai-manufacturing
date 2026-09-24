@@ -14,6 +14,7 @@ cp -R "$PKG/data/." "$DEST/data/"
 [[ $WITH_LSTM -eq 1 && -d "$PKG/artifacts/lstm_cache" ]] && cp -R "$PKG/artifacts/lstm_cache" "$DEST/artifacts/"
 cp -R "$PKG/outputs/expected" "$DEST/outputs_expected_from_source" 2>/dev/null || true
 cd "$DEST"
+rm -rf outputs && mkdir -p outputs   # 커밋된 산출물을 지우고 처음부터 다시 만든다
 echo "== clone: $(git rev-parse --short HEAD) → run_all --steps $STEPS =="
 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 python3 run_all.py --root . --out outputs --steps "$STEPS" > "$TMP/run.log" 2>&1
 mkdir -p outputs/expected && cp -R "$DEST/outputs_expected_from_source/." outputs/expected/ 2>/dev/null || true

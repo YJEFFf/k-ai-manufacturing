@@ -1,0 +1,243 @@
+{
+  "structure": {
+    "normal": {
+      "rows": 20000,
+      "bad_rows": 0,
+      "start": "2022-07-12 00:00:00.019000",
+      "end": "2022-07-12 01:16:55.828000",
+      "elapsed_min": 76.93015,
+      "recorded_min": 33.333333333333336,
+      "segments": 600,
+      "seg_len_min": 1,
+      "seg_len_median": 37.0,
+      "seg_len_max": 50,
+      "segments_len_50": 202,
+      "duplicate_timestamps": 1,
+      "missing_values": 0,
+      "label_values": [
+        0
+      ],
+      "dt": {
+        "n_gaps": 19999,
+        "exact_0_1": 19400,
+        "zero_gap": 1,
+        "other_small": 0,
+        "gaps_over_0_15s": 598,
+        "sd_small_incl_zero_s": 0.0007179211523727704,
+        "sd_small_excl_zero_s": 0.0,
+        "max_gap_s": 16.643
+      },
+      "lag1": {
+        "AI0_Vibration": 0.033274181368023584,
+        "AI1_Vibration": 0.31913290347887896,
+        "AI2_Current": 0.9281999112557411,
+        "pairs": 19400
+      }
+    },
+    "abnormal": {
+      "rows": 600,
+      "bad_rows": 0,
+      "start": "2022-07-17 10:51:07.943000",
+      "end": "2022-07-17 10:53:53.540000",
+      "elapsed_min": 2.7599500000000003,
+      "recorded_min": 1.0,
+      "segments": 21,
+      "seg_len_min": 3,
+      "seg_len_median": 28.0,
+      "seg_len_max": 50,
+      "segments_len_50": 5,
+      "duplicate_timestamps": 0,
+      "missing_values": 0,
+      "label_values": [
+        1
+      ],
+      "dt": {
+        "n_gaps": 599,
+        "exact_0_1": 579,
+        "zero_gap": 0,
+        "other_small": 0,
+        "gaps_over_0_15s": 20,
+        "sd_small_incl_zero_s": 1.3877787807814457e-17,
+        "sd_small_excl_zero_s": 1.3877787807814457e-17,
+        "max_gap_s": 8.572
+      },
+      "lag1": {
+        "AI0_Vibration": 0.7177874602140809,
+        "AI1_Vibration": 0.650591264090157,
+        "AI2_Current": 0.8270618463847459,
+        "pairs": 579
+      }
+    }
+  },
+  "decimals": {
+    "normal": {
+      "AI0_Vibration": {
+        "mode": 6,
+        "max": 16
+      },
+      "AI1_Vibration": {
+        "mode": 6,
+        "max": 16
+      },
+      "AI2_Current": {
+        "mode": 5,
+        "max": 14
+      }
+    },
+    "abnormal": {
+      "AI0_Vibration": {
+        "mode": 8,
+        "max": 11
+      },
+      "AI1_Vibration": {
+        "mode": 8,
+        "max": 11
+      },
+      "AI2_Current": {
+        "mode": 5,
+        "max": 16
+      }
+    }
+  },
+  "format_rules_raw": [
+    {
+      "rule": "current_on_grid",
+      "normal_fire_rate": 0.00175,
+      "abnormal_fire_rate": 1.0,
+      "auroc": 0.999125,
+      "auroc_reversed": 0.0008749999999999591,
+      "separability": 0.999125
+    },
+    {
+      "rule": "current_on_grid_strict",
+      "normal_fire_rate": 0.0,
+      "abnormal_fire_rate": 0.07666666666666666,
+      "auroc": 0.5383333333333333,
+      "auroc_reversed": 0.46166666666666667,
+      "separability": 0.5383333333333333
+    },
+    {
+      "rule": "vib_finer_than_1e-6",
+      "normal_fire_rate": 0.0,
+      "abnormal_fire_rate": 1.0,
+      "auroc": 1.0,
+      "auroc_reversed": 0.0,
+      "separability": 1.0
+    },
+    {
+      "rule": "either",
+      "normal_fire_rate": 0.00175,
+      "abnormal_fire_rate": 1.0,
+      "auroc": 0.999125,
+      "auroc_reversed": 0.0008749999999999591,
+      "separability": 0.999125
+    }
+  ],
+  "format_rules_matched": [
+    {
+      "rule": "current_on_grid",
+      "normal_fire_rate": 1.0,
+      "abnormal_fire_rate": 1.0,
+      "auroc": 0.5,
+      "auroc_reversed": 0.5,
+      "separability": 0.5
+    },
+    {
+      "rule": "current_on_grid_strict",
+      "normal_fire_rate": 1.0,
+      "abnormal_fire_rate": 1.0,
+      "auroc": 0.5,
+      "auroc_reversed": 0.5,
+      "separability": 0.5
+    },
+    {
+      "rule": "vib_finer_than_1e-6",
+      "normal_fire_rate": 0.0,
+      "abnormal_fire_rate": 0.0,
+      "auroc": 0.5,
+      "auroc_reversed": 0.5,
+      "separability": 0.5
+    },
+    {
+      "rule": "either",
+      "normal_fire_rate": 1.0,
+      "abnormal_fire_rate": 1.0,
+      "auroc": 0.5,
+      "auroc_reversed": 0.5,
+      "separability": 0.5
+    }
+  ],
+  "stats": {
+    "normal": {
+      "describe": {
+        "AI0_Vibration": {
+          "mean": -9.380765000000027e-05,
+          "std": 0.07063373666381961,
+          "min": -0.31457,
+          "max": 0.351699
+        },
+        "AI1_Vibration": {
+          "mean": -9.274240000000003e-05,
+          "std": 0.1188876827423073,
+          "min": -0.366498,
+          "max": 0.399782
+        },
+        "AI2_Current": {
+          "mean": 1.4462092726,
+          "std": 122.66449357672178,
+          "min": -271.56833,
+          "max": 273.235
+        }
+      },
+      "current_segment_mean_min": -235.93798333333334,
+      "current_segment_mean_max": 222.1701433333333
+    },
+    "abnormal": {
+      "describe": {
+        "AI0_Vibration": {
+          "mean": 0.007577742062533333,
+          "std": 0.44792806747493313,
+          "min": -1.5027352,
+          "max": 1.8032037
+        },
+        "AI1_Vibration": {
+          "mean": -0.008137206515450001,
+          "std": 0.2412263780678154,
+          "min": -0.7512533,
+          "max": 0.50932143
+        },
+        "AI2_Current": {
+          "mean": 57.32974096633334,
+          "std": 153.17261944641655,
+          "min": -399.35117,
+          "max": 538.82605
+        }
+      },
+      "current_segment_mean_min": -184.77441725,
+      "current_segment_mean_max": 272.42637233333335
+    }
+  },
+  "waveform": {
+    "abnormal": {
+      "segments_fitted": 17,
+      "r2_min": 0.2906549760658754,
+      "r2_median": 0.45057292309856,
+      "r2_max": 0.7830052795639849,
+      "f_median": 0.22,
+      "f_q25": 0.105,
+      "f_q75": 0.725,
+      "f_exact_0_600": 0
+    },
+    "normal": {
+      "segments_fitted": 530,
+      "r2_min": 0.9928620117920693,
+      "r2_median": 0.9963625883882263,
+      "r2_max": 0.99983303977061,
+      "f_median": 0.6,
+      "f_q25": 0.6,
+      "f_q75": 0.6,
+      "f_exact_0_600": 411
+    }
+  },
+  "preprocess": "matched"
+}

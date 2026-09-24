@@ -1,6 +1,6 @@
 # ③ 프레스 유압펌프 이상 탐지 — 제출 패키지
 
-실행 기준은 [PLAN.md](PLAN.md)다. 현재 상태: **1~5단계 구현** (데이터·진단·뼈대 / w=8 고정·q95 지수 꼬리·conformal 보정·추론 / 전처리·창 민감도·동결 진단·절제·라벨 우회·FN/FP 조건 / LSTM-AE 3프로토콜·블록 부트스트랩 / 업무량·지속성·진폭 정규화 후보·판단표·보고서 근거·numbers.json). 6단계(환경 동결·깨끗한 재현·ZIP)는 `outputs/checks.json`의 `pending_steps`에 표시된다.
+실행 기준은 [PLAN.md](PLAN.md)다. 현재 상태: **1~6단계 구현 완료** (데이터·진단·뼈대 / w=8 고정·q95 지수 꼬리·conformal 보정·추론 / 전처리·창 민감도·동결 진단·절제·라벨 우회·FN/FP 조건 / LSTM-AE 3프로토콜·블록 부트스트랩 / 업무량·지속성·진폭 정규화 후보·판단표·보고서 근거·numbers.json / 기대값 동결·깨끗한 클론 재현·ZIP 조립). 남은 것은 `outputs/checks.json`의 `pending_steps`에 표시된다.
 
 ## 실행
 
@@ -67,4 +67,10 @@ python predict.py --model artifacts/main_A.json --input <입력.csv> --out predi
 | 3 전처리·창 민감도, 절제, 오류 조건 | 완료 |
 | 4 기준모델·LSTM 3프로토콜, coverage·불확실성 | 완료 |
 | 5 업무량·지속성·진폭 후보·장별 근거 | 완료 |
-| 6 환경 고정·깨끗한 재현·ZIP 조립 | 예정 |
+| 6 환경 고정·깨끗한 재현·ZIP 조립 | 완료 (재현 확인 범위는 아래) |
+
+## 재현 확인 범위 (6단계)
+- `outputs/expected/`는 검증된 실행(이 저장소의 커밋 시점, macOS arm64·Python 3.12.2)에서 `verify.py --freeze`로 동결한 집계값이다.
+- `bash tools/clean_repro.sh --with-lstm`: 저장소를 임시 폴더에 클론하고 산출물을 지운 뒤 데이터·LSTM 캐시를 복사해 `run_all.py`를 처음부터 실행하고 `verify.py`로 비교한다. 같은 기기에서 33/33 파일이 허용오차 안에서 일치했다(LSTM 관련 1e-3, IF/MLP-AE 1e-6, 나머지 1e-8).
+- LSTM 캐시 없이 처음부터 학습하면 약 30분이 더 걸리고, 다른 기기·OS에서는 LSTM 오차가 허용오차를 넘을 수 있다. 그 경우 경보 판정(`alarm*` 열)의 차이 수를 verify가 따로 보고한다. 다른 OS 검증은 수행하지 못했다.
+- 제출 ZIP: `python tools/make_submission_zip.py --out ../submission_press.zip` (코드·requirements·README·PLAN·PROVENANCE·학습용 데이터·artifacts(LSTM 캐시)·outputs·근거 문서·행별 예측 파일). 텍스트 파일의 소속·이메일·홈 경로 문자열을 검사한다. 보고서·발표자료·설문 캡처는 별도로 준비한다.

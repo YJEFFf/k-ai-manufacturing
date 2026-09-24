@@ -1,0 +1,13 @@
+split,model,calibration_unit,criterion,alpha,alpha_grid,allowed_exceedances,n_calibration,threshold,alarm_possible
+normal_60_20_20,combined_w8,recording_segments,conformal,0.01,0.008264462809917356,0,120,4.417925848290822,True
+normal_60_20_20,combined_w8,recording_segments,cutoff,0.01,0.01652892561983471,1,120,4.048809037976115,True
+normal_60_20_20,combined_w8,recording_segments,conformal,0.03,0.024793388429752067,2,120,3.2693542507125732,True
+normal_60_20_20,combined_w8,recording_segments,cutoff,0.03,0.03305785123966942,3,120,3.1419433720252625,True
+normal_60_20_20,combined_w8,recording_segments,conformal,0.05,0.049586776859504134,5,120,2.87050720226447,True
+normal_60_20_20,combined_w8,recording_segments,cutoff,0.05,0.05785123966942149,6,120,2.810300349559765,True
+normal_50_20_30,combined_w8,recording_segments,conformal,0.01,0.008264462809917356,0,120,3.5199003630751613,True
+normal_50_20_30,combined_w8,recording_segments,cutoff,0.01,0.01652892561983471,1,120,3.509866190591197,True
+normal_50_20_30,combined_w8,recording_segments,conformal,0.03,0.024793388429752067,2,120,3.258881453987633,True
+normal_50_20_30,combined_w8,recording_segments,cutoff,0.03,0.03305785123966942,3,120,3.094402801801934,True
+normal_50_20_30,combined_w8,recording_segments,conformal,0.05,0.049586776859504134,5,120,2.911816622903019,True
+normal_50_20_30,combined_w8,recording_segments,cutoff,0.05,0.05785123966942149,6,120,2.9059341681388737,True
