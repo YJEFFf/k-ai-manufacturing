@@ -10,7 +10,7 @@ from . import data as D
 
 
 def run(out: Path, manifest: dict) -> dict:
-    run_id = manifest.get("git_commit") or "uncommitted"
+    run_id = manifest.get("run_id") or manifest.get("git_commit") or "uncommitted"
     diag = json.loads((out / "diagnosis.json").read_text(encoding="utf-8"))
     comparison = out / "model_comparison_all.csv"
     mc = pd.read_csv(comparison if comparison.exists() else out / "model_comparison.csv")

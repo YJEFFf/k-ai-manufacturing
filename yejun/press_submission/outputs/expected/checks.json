@@ -1,0 +1,112 @@
+{
+  "input_hash_ok": true,
+  "input_rows_ok": true,
+  "segments_equal_vendor_blocks": true,
+  "segment_counts": {
+    "normal": 600,
+    "abnormal": 21
+  },
+  "segment_counts_ok": true,
+  "bad_rows": {
+    "normal": 0,
+    "abnormal": 0
+  },
+  "diagnosis_generated": true,
+  "format_rules_after_preprocess_max_separability": 0.5,
+  "conformal_mc_within_4se": true,
+  "step2": {
+    "A": {
+      "main_model": "combined_w8",
+      "degenerate": false,
+      "stream_equals_evaluation": true,
+      "shuffle_invariant": true,
+      "prediction_alarm_counts_equal_table": true,
+      "conformal_p_equals_threshold_alarms": true,
+      "artifact": "main_A.json",
+      "normal_notified": 0,
+      "abnormal_notified": 21,
+      "seconds": 3.1
+    },
+    "B": {
+      "main_model": "combined_w8",
+      "degenerate": false,
+      "stream_equals_evaluation": true,
+      "shuffle_invariant": true,
+      "prediction_alarm_counts_equal_table": true,
+      "conformal_p_equals_threshold_alarms": true,
+      "artifact": "main_B.json",
+      "normal_notified": 3,
+      "abnormal_notified": 21,
+      "seconds": 2.6
+    }
+  },
+  "step2_all_ok": true,
+  "step3_robustness": {
+    "label_bypass_all_passed": true,
+    "reserialization_alarm_segments_changed": 0,
+    "dead_component_cases": 0,
+    "tail_fit_failures": 0,
+    "combined_conformal_1pct_abnormal_detected_range": [
+      19,
+      21
+    ],
+    "combined_conformal_1pct_normal_notified_range": [
+      0,
+      5
+    ]
+  },
+  "step3_analysis": {
+    "fn_table_rows": 66,
+    "abnormal_segments_missed_alpha1pct": 0,
+    "normal_test_segments_alerted_alpha1pct": {
+      "normal_50_20_30": 3,
+      "normal_60_20_20": 0
+    }
+  },
+  "step3_label_bypass_ok": true,
+  "step4": {
+    "guidebook_f1": 0.6143,
+    "guidebook_epochs": 749,
+    "guidebook_cached": false,
+    "lstm_common": {
+      "lstm20@normal_60_20_20": "12/21 · 1/120 · cov 0.46",
+      "lstm20_plus_maxz@normal_60_20_20": "18/21 · 1/120 · cov 1.00",
+      "lstm20@normal_50_20_30": "10/21 · 0/180 · cov 0.46",
+      "lstm20_plus_maxz@normal_50_20_30": "18/21 · 0/180 · cov 1.00"
+    },
+    "uncertainty_rows": 54,
+    "lstm_epochs_setting": 300
+  },
+  "step5_field": {
+    "persistence_conformal_1pct": {
+      "persist_k1n1@normal_60_20_20": "21/21 · 0/120 · delay 0.1",
+      "persist_k2n3@normal_60_20_20": "21/21 · 0/120 · delay 0.2",
+      "persist_k3n3@normal_60_20_20": "21/21 · 0/120 · delay 0.4",
+      "persist_k1n1@normal_50_20_30": "21/21 · 3/180 · delay 0.0",
+      "persist_k2n3@normal_50_20_30": "21/21 · 0/180 · delay 0.2",
+      "persist_k3n3@normal_50_20_30": "21/21 · 0/180 · delay 0.4"
+    },
+    "load_normalization_conformal_1pct": {
+      "loadnorm_resid_plus_sine@normal_60_20_20": "21/21 · 1/120",
+      "loadnorm_resid_only@normal_60_20_20": "13/21 · 0/120",
+      "main_combined_w8(reference)@normal_60_20_20": "21/21 · 0/120",
+      "loadnorm_resid_plus_sine@normal_50_20_30": "21/21 · 1/180",
+      "loadnorm_resid_only@normal_50_20_30": "13/21 · 0/180",
+      "main_combined_w8(reference)@normal_50_20_30": "21/21 · 3/180"
+    },
+    "workload_rows": 18
+  },
+  "outputs_free_of_raw_sensor_columns": true,
+  "raw_column_hits": {},
+  "steps_run": 5,
+  "external_checks_not_run_here": [
+    "tools/clean_repro.sh --with-lstm (캐시 사용 깨끗한 클론 재현)",
+    "tools/clean_repro.sh --retrain-lstm (캐시 없는 재학습 재현)",
+    "verify.py --out outputs (동결 기대값 비교)"
+  ],
+  "required_checks_ok": true,
+  "required_checks_failed": [],
+  "step5_numbers": {
+    "numbers_items": 27
+  }
+}

@@ -1,3 +1,3 @@
-split,cached,epochs_run,train_seconds,cache_key,train_windows_fit,train_windows_earlystop,max_epochs,patience,tail_ok,tail_u,tail_beta
-normal_60_20_20,True,197,0.0,8122102adb08b9aa,4929,1061,300,30,True,0.4497206449508669,0.2857772425810494
-normal_50_20_30,True,101,0.0,7837bffc8372e75a,4145,962,300,30,True,0.6609139800071715,0.3469601591117682
+split,cached,epochs_run,train_seconds,cache_key,train_windows_fit,train_windows_earlystop,max_epochs,patience,tail_ok,tail_u,tail_beta,tail_reference,n_ref
+normal_60_20_20,False,197,135.0,b2d28a65e1c7f537,4929,1061,300,30,True,0.5040923357009888,0.35869135046904943,train_B_holdout_windows,1061
+normal_50_20_30,False,101,58.4,a4939aefa58869ff,4145,962,300,30,True,0.7022517412900924,0.29180184389863706,train_B_holdout_windows,962

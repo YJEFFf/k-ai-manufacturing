@@ -67,7 +67,7 @@
   "step4": {
     "guidebook_f1": 0.6143,
     "guidebook_epochs": 749,
-    "guidebook_cached": true,
+    "guidebook_cached": false,
     "lstm_common": {
       "lstm20@normal_60_20_20": "12/21 · 1/120 · cov 0.46",
       "lstm20_plus_maxz@normal_60_20_20": "18/21 · 1/120 · cov 1.00",
@@ -98,11 +98,15 @@
   },
   "outputs_free_of_raw_sensor_columns": true,
   "raw_column_hits": {},
-  "pending_steps": [
-    "freeze_env_clean_repro_zip(6단계)"
+  "steps_run": 5,
+  "external_checks_not_run_here": [
+    "tools/clean_repro.sh --with-lstm (캐시 사용 깨끗한 클론 재현)",
+    "tools/clean_repro.sh --retrain-lstm (캐시 없는 재학습 재현)",
+    "verify.py --out outputs (동결 기대값 비교)"
   ],
-  "step5_evidence": {
-    "evidence_lines": 191,
+  "required_checks_ok": true,
+  "required_checks_failed": [],
+  "step5_numbers": {
     "numbers_items": 27
   }
 }

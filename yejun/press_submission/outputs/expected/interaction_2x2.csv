@@ -1,13 +1,13 @@
 split,vib_high,vib_threshold,wave,wave_threshold,abnormal_segments,abnormal_detected,abnormal_missed,normal_segments,normal_alerted
-normal_60_20_20,False,segment max|z| > q95 of normal-train (3.15),broken,segment R² < q05 of normal-train (0.995),3,3,0,23,0
-normal_60_20_20,False,segment max|z| > q95 of normal-train (3.15),sine-like,segment R² < q05 of normal-train (0.995),0,0,0,84,0
-normal_60_20_20,False,segment max|z| > q95 of normal-train (3.15),unfittable(<10),segment R² < q05 of normal-train (0.995),0,0,0,11,0
-normal_60_20_20,True,segment max|z| > q95 of normal-train (3.15),broken,segment R² < q05 of normal-train (0.995),14,14,0,0,0
-normal_60_20_20,True,segment max|z| > q95 of normal-train (3.15),sine-like,segment R² < q05 of normal-train (0.995),0,0,0,2,0
-normal_60_20_20,True,segment max|z| > q95 of normal-train (3.15),unfittable(<10),segment R² < q05 of normal-train (0.995),4,4,0,0,0
-normal_50_20_30,False,segment max|z| > q95 of normal-train (3.13),broken,segment R² < q05 of normal-train (0.995),3,3,0,29,0
-normal_50_20_30,False,segment max|z| > q95 of normal-train (3.13),sine-like,segment R² < q05 of normal-train (0.995),0,0,0,128,0
-normal_50_20_30,False,segment max|z| > q95 of normal-train (3.13),unfittable(<10),segment R² < q05 of normal-train (0.995),0,0,0,15,0
-normal_50_20_30,True,segment max|z| > q95 of normal-train (3.13),broken,segment R² < q05 of normal-train (0.995),14,14,0,0,0
-normal_50_20_30,True,segment max|z| > q95 of normal-train (3.13),sine-like,segment R² < q05 of normal-train (0.995),0,0,0,8,3
-normal_50_20_30,True,segment max|z| > q95 of normal-train (3.13),unfittable(<10),segment R² < q05 of normal-train (0.995),4,4,0,0,0
+normal_60_20_20,False,segment max|z| of AI0/AI1 (vibration only) > q95 of normal-train (3.15),broken,segment R² < q05 of normal-train (0.995),3,3,0,23,0
+normal_60_20_20,False,segment max|z| of AI0/AI1 (vibration only) > q95 of normal-train (3.15),sine-like,segment R² < q05 of normal-train (0.995),0,0,0,84,0
+normal_60_20_20,False,segment max|z| of AI0/AI1 (vibration only) > q95 of normal-train (3.15),unfittable(<10),segment R² < q05 of normal-train (0.995),0,0,0,11,0
+normal_60_20_20,True,segment max|z| of AI0/AI1 (vibration only) > q95 of normal-train (3.15),broken,segment R² < q05 of normal-train (0.995),14,14,0,0,0
+normal_60_20_20,True,segment max|z| of AI0/AI1 (vibration only) > q95 of normal-train (3.15),sine-like,segment R² < q05 of normal-train (0.995),0,0,0,2,0
+normal_60_20_20,True,segment max|z| of AI0/AI1 (vibration only) > q95 of normal-train (3.15),unfittable(<10),segment R² < q05 of normal-train (0.995),4,4,0,0,0
+normal_50_20_30,False,segment max|z| of AI0/AI1 (vibration only) > q95 of normal-train (3.13),broken,segment R² < q05 of normal-train (0.995),3,3,0,29,0
+normal_50_20_30,False,segment max|z| of AI0/AI1 (vibration only) > q95 of normal-train (3.13),sine-like,segment R² < q05 of normal-train (0.995),0,0,0,128,0
+normal_50_20_30,False,segment max|z| of AI0/AI1 (vibration only) > q95 of normal-train (3.13),unfittable(<10),segment R² < q05 of normal-train (0.995),0,0,0,15,0
+normal_50_20_30,True,segment max|z| of AI0/AI1 (vibration only) > q95 of normal-train (3.13),broken,segment R² < q05 of normal-train (0.995),14,14,0,0,0
+normal_50_20_30,True,segment max|z| of AI0/AI1 (vibration only) > q95 of normal-train (3.13),sine-like,segment R² < q05 of normal-train (0.995),0,0,0,8,3
+normal_50_20_30,True,segment max|z| of AI0/AI1 (vibration only) > q95 of normal-train (3.13),unfittable(<10),segment R² < q05 of normal-train (0.995),4,4,0,0,0

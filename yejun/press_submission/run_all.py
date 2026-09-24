@@ -29,7 +29,19 @@ from press.calibrate import ALPHAS, conformal_p, mc_check_conformal, segment_max
 from press.evaluate import comparison_markdown, evaluate_models  # noqa: E402
 from press.scores import MAIN_W, ExpTail, MainModel, Scorer  # noqa: E402
 
-PENDING = ["implementation_review_and_clean_repro(6단계)"]
+REQUIRED_CHECKS = ["input_hash_ok", "input_rows_ok", "segments_equal_vendor_blocks", "conformal_mc_within_4se",
+                   "step2_all_ok", "step3_label_bypass_ok", "outputs_free_of_raw_sensor_columns"]
+EXTERNAL_CHECKS = ["tools/clean_repro.sh --with-lstm (캐시 사용 깨끗한 클론 재현)", "tools/clean_repro.sh --retrain-lstm (캐시 없는 재학습 재현)",
+                   "verify.py --out outputs (동결 기대값 비교)"]
+
+
+def code_sha256() -> str:
+    """실행 결과를 낳는 코드의 해시(press/*.py, run_all.py, predict.py, vendor). run_id에 커밋과 함께 붙인다."""
+    import hashlib
+    h = hashlib.sha256()
+    for p in sorted(list((D.PACKAGE_DIR / "press").glob("*.py")) + [D.PACKAGE_DIR / "run_all.py", D.PACKAGE_DIR / "predict.py", D.PACKAGE_DIR / "vendor" / "press_policy_audit.py"]):
+        h.update(p.name.encode()); h.update(p.read_bytes().replace(b"\r\n", b"\n"))
+    return h.hexdigest()
 MAIN_ALPHA = 0.01
 
 
@@ -234,13 +246,14 @@ def step4(args, out, art_dir, ctx, ctx2, checks):
                                                       cache, args.lstm_epochs, args.lstm_patience, args.seed,
                                                       dict(split=c["name"], preprocess=args.preprocess, inputs=sha), retrain=args.retrain_lstm, log=log)
         hist.to_csv(out / f"lstm_common_history_{sid}.csv", index=False)
-        tail = ExpTail(ref)
+        tail = ExpTail(meta["ref_holdout"])   # 조기 종료용 학습-B 창의 오차(학습 적합 창은 in-sample이라 제외)
         comps = {k: c["scorer"].components(c["frames"][k], c["segs"][k])[0]["g_maxz3"] for k in ("cal", "test", "abn")}
         model_scores = {"lstm20": sc, "lstm20_plus_maxz": {k: np.fmax(comps[k], tail(sc[k])) for k in sc}}
         mt, _ = evaluate_models(vendor, c["name"], args.preprocess, model_scores, c["frames"], c["segs"], units=("recording_segments", "rows"))
         mt["split_id"], mt["is_main_model"] = sid, False
         rows.append(mt)
-        metas.append(dict(split=c["name"], **meta, tail_ok=tail.ok, tail_u=tail.u, tail_beta=tail.beta))
+        metas.append(dict(split=c["name"], **{k: v for k, v in meta.items() if k != "ref_holdout"}, tail_ok=tail.ok, tail_u=tail.u, tail_beta=tail.beta,
+                          tail_reference="train_B_holdout_windows", n_ref=int(np.isfinite(meta["ref_holdout"]).sum())))
         log(f"  LSTM common protocol {sid}: epochs {meta['epochs_run']}, cached={meta['cached']}")
     lm = pd.concat(rows, ignore_index=True)
     lm.to_csv(out / "model_comparison_lstm.csv", index=False)
@@ -297,19 +310,28 @@ def main(argv=None):
     raw_hits = scan_outputs_for_raw_values(out)
     checks["outputs_free_of_raw_sensor_columns"] = not raw_hits
     checks["raw_column_hits"] = raw_hits
-    checks["pending_steps"] = PENDING
+    checks["steps_run"] = args.steps
+    checks["external_checks_not_run_here"] = EXTERNAL_CHECKS
+    failed = [k for k in REQUIRED_CHECKS if k in checks and checks[k] is not True]
+    checks["required_checks_ok"] = not failed
+    checks["required_checks_failed"] = failed
     timings["total_s"] = round(time.time() - t0, 2)
     import torch  # noqa: E402
-    pre_manifest = dict(git_commit=git_commit(), environment=D.environment(), timings_s=timings, torch=torch.__version__)
+    code_hash = code_sha256()
+    run_id = f"{git_commit() or 'nocommit'}+{code_hash[:12]}"
+    pre_manifest = dict(git_commit=git_commit(), code_sha256=code_hash, run_id=run_id, environment=D.environment(), timings_s=timings, torch=torch.__version__)
     if args.steps >= 5:
         checks["step5_numbers"] = numbers.run(out, pre_manifest)
-    manifest = dict(protocol_version=D.PROTOCOL_VERSION, git_commit=git_commit(), torch=torch.__version__, args={k: str(v) for k, v in vars(args).items()},
-                    environment=D.environment(), omp_num_threads=os.environ.get("OMP_NUM_THREADS"),
+    D.dump_json(checks, out / "checks.json")   # manifest보다 먼저 써서 해시에 포함한다
+    manifest = dict(protocol_version=D.PROTOCOL_VERSION, git_commit=git_commit(), code_sha256=code_hash, run_id=run_id, torch=torch.__version__,
+                    args={k: str(v) for k, v in vars(args).items()}, environment=D.environment(), omp_num_threads=os.environ.get("OMP_NUM_THREADS"),
                     inputs=ctx["load_report"], timings_s=timings,
                     outputs={str(p.relative_to(out)): D.sha256_file(p) for p in sorted(out.rglob("*")) if p.is_file() and p.name != "manifest.json"})
     D.dump_json(manifest, out / "manifest.json")
-    D.dump_json(checks, out / "checks.json")
     print(json.dumps(D.to_jsonable(checks), ensure_ascii=False, indent=2))
+    if failed:
+        print(f"필수 검사 실패: {failed} → 종료 코드 1", file=sys.stderr)
+        sys.exit(1)
     return checks
 
 

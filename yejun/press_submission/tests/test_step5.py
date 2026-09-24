@@ -11,10 +11,10 @@ def test_persistence_score_semantics():
     assert np.allclose(p11, s, equal_nan=True)
     p23 = persistence_score(s, seg, 2, 3)          # 최근 3개 유효값 중 2번째 큰 값
     assert np.isnan(p23[0]) and np.isnan(p23[1]) and np.isnan(p23[2])
-    assert p23[3] == 2.0 and p23[4] == 5.0 and p23[5] == 3.0      # (1,5,2)→2, (5,2,9)→5, (2,9,3)→3
-    assert np.isnan(p23[6]) and np.isnan(p23[7]) and p23[8] == 7.0  # 새 구간은 다시 채움
+    assert np.isnan(p23[3]) and np.isnan(p23[4]) and p23[5] == 3.0   # 결측(NaN)에서 창 초기화 → 2행 미판정, (2,9,3)→3 (검수 R3)
+    assert np.isnan(p23[6]) and np.isnan(p23[7]) and p23[8] == 7.0  # 새 구간은 다시 채움: (7,1,8)→7
     p33 = persistence_score(s, seg, 3, 3)
-    assert p33[4] == 2.0 and p33[5] == 2.0
+    assert p33[5] == 2.0 and p33[8] == 1.0
 
 
 def test_trailing_amp_on_sine():

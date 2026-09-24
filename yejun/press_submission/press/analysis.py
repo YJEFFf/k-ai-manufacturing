@@ -55,6 +55,7 @@ def analyze_split(sid: str, name: str, train: pd.DataFrame, seg_train: np.ndarra
                                         sine_trailing_median=("score_sine", "median"), alarm=("alarm", "max"),
                                         alarm_003=(ALARM_COLS[0.03], "max"), alarm_005=(ALARM_COLS[0.05], "max")).reset_index()
     first = pred[pred.alarm == 1].groupby("record_id").agg(first_alarm_pos=("position_in_record", "min"))
+    first_by_alpha = {a: pred[pred[col] == 1].groupby("record_id").position_in_record.min() for a, col in ALARM_COLS.items()}   # R4: α별 최초 경보 위치
     first_reason = pred[pred.alarm == 1].sort_values("position_in_record").groupby("record_id").alarm_reason.first().rename("first_reason")
     feat = feat.merge(agg, on="record_id").merge(first, on="record_id", how="left").merge(first_reason, on="record_id", how="left")
     feat["label"] = (feat.source == "abnormal").astype(int)
@@ -64,16 +65,22 @@ def analyze_split(sid: str, name: str, train: pd.DataFrame, seg_train: np.ndarra
     mean, scale = np.asarray(state["scaler_mean"]), np.asarray(state["scaler_scale"])
     ztr = np.abs((train[D.SENSORS].to_numpy(float) - mean) / scale).max(1)
     ftr["maxz_max"] = pd.Series(ztr).groupby(seg_train).max().to_numpy()
+    # 진동 축은 진동 두 센서만의 max|z|로 정의한다(전류 제외; 검수 기록 사항)
+    zvib_tr = np.abs((train[D.SENSORS[:2]].to_numpy(float) - mean[:2]) / scale[:2]).max(1)
+    ftr["vibz_max"] = pd.Series(zvib_tr).groupby(seg_train).max().to_numpy()
+    zvib = np.abs((stream[D.SENSORS[:2]].to_numpy(float) - mean[:2]) / scale[:2]).max(1)
+    feat = feat.merge(pd.Series(zvib).groupby(seg_stream).max().rename("vibz_max").reset_index().rename(columns={"index": "record_id"}), on="record_id")
     q_amp = ftr[ftr.amp_reliable].amp_proxy.quantile([.25, .5, .75]).to_numpy()
     q_vib = ftr.vib0_std.dropna().quantile([.25, .5, .75]).to_numpy()
     feat["amp_bin"] = [_quartile_bin(x, q_amp) for x in feat.amp_proxy]
     feat["vib_bin"] = [_quartile_bin(x, q_vib) for x in feat.vib0_std]
-    vib_hi_thr = float(ftr.maxz_max.quantile(.95))
+    vib_hi_thr = float(ftr.vibz_max.quantile(.95))
     r2_lo_thr = float(ftr.r2_segment.dropna().quantile(.05))
-    feat["vib_high"] = feat.maxz_max > vib_hi_thr
+    feat["vib_high"] = feat.vibz_max > vib_hi_thr
     feat["wave"] = np.where(feat.r2_segment.isna(), "unfittable(<10)", np.where(feat.r2_segment < r2_lo_thr, "broken", "sine-like"))
+    feat["amp_fit_reliable"] = feat.amp_reliable & (feat.wave == "sine-like")   # 길이 ≥17 이고 파형 적합이 정상 범위일 때만 진폭 대리 지표를 신뢰
     feat.insert(0, "split", name)
-    p = pred.merge(feat[["record_id", "len_bin", "amp_bin", "vib_bin", "amp_reliable", "length"]], on="record_id")
+    p = pred.merge(feat[["record_id", "len_bin", "amp_bin", "vib_bin", "amp_reliable", "amp_fit_reliable", "length"]], on="record_id")
     p["pos_bin"] = np.where(p.position_in_record < w - 1, f"warmup(<{w-1})", "scored")
     abn = p[p.source == "abnormal"]
 
@@ -84,7 +91,8 @@ def analyze_split(sid: str, name: str, train: pd.DataFrame, seg_train: np.ndarra
             for val, g in abn.groupby(cond):
                 fn_rows.append(dict(split=name, alpha=alpha, condition=cond, value=val, abnormal_rows=len(g),
                                     fn_rows=int((g[col] == 0).sum()), fn_rate=float((g[col] == 0).mean()),
-                                    rows_before_first_alarm=int((g.position_in_record < g.record_id.map(first.first_alarm_pos).fillna(10**9)).sum())))
+                                    rows_before_first_alarm=int((g.position_in_record < g.record_id.map(first_by_alpha[alpha]).fillna(10**9)).sum()),
+                                    unreliable_amp_rows=int((~g.amp_fit_reliable).sum()) if cond == "amp_bin" else None))
             nt = feat[feat.source == "normal_test"]
             acol = {0.01: "alarm", 0.03: "alarm_003", 0.05: "alarm_005"}[alpha]
             for val, g in nt.groupby(cond if cond != "pos_bin" else "len_bin"):
@@ -92,7 +100,7 @@ def analyze_split(sid: str, name: str, train: pd.DataFrame, seg_train: np.ndarra
                     continue
                 fp_rows.append(dict(split=name, alpha=alpha, condition=cond, value=val, normal_segments=len(g),
                                     fp_segments=int(g[acol].sum()), fp_rate=float(g[acol].mean()),
-                                    unreliable_amp_segments=int((~g.amp_reliable).sum()) if cond == "amp_bin" else None))
+                                    unreliable_amp_segments=int((~g.amp_fit_reliable).sum()) if cond == "amp_bin" else None))
     # 발화 성분
     comp = []
     for alpha, col in ALARM_COLS.items():
@@ -118,7 +126,7 @@ def analyze_split(sid: str, name: str, train: pd.DataFrame, seg_train: np.ndarra
     cells = []
     for (vh, wv), g in feat.groupby(["vib_high", "wave"]):
         a, nt = g[g.label == 1], g[g.label == 0]
-        cells.append(dict(split=name, vib_high=bool(vh), vib_threshold=f"segment max|z| > q95 of normal-train ({vib_hi_thr:.2f})",
+        cells.append(dict(split=name, vib_high=bool(vh), vib_threshold=f"segment max|z| of AI0/AI1 (vibration only) > q95 of normal-train ({vib_hi_thr:.2f})",
                           wave=wv, wave_threshold=f"segment R² < q05 of normal-train ({r2_lo_thr:.3f})",
                           abnormal_segments=len(a), abnormal_detected=int(a.alarm.sum()), abnormal_missed=int((a.alarm == 0).sum()),
                           normal_segments=len(nt), normal_alerted=int(nt.alarm.sum())))

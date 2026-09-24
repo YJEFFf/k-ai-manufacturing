@@ -48,18 +48,22 @@ def workload(ops: pd.DataFrame, frames_by_split: dict) -> pd.DataFrame:
 
 # ---------- 지속성 ----------
 def persistence_score(score: np.ndarray, seg: np.ndarray, k: int, n: int) -> np.ndarray:
-    """같은 구간 최근 n개 유효 점수 중 k번째 큰 값. n개가 다 없으면 NaN."""
+    """같은 구간에서 연속된 최근 n개 유효 점수 중 k번째 큰 값. 구간 첫 n−1행·결측 행·결측 직후 n−1행은 미판정(NaN).
+
+    결측(NaN) 점수는 창을 비운다(검수 R3): 결측 행 자체는 NaN이고, 그 뒤 새로 연속 n개 유효 관측이 쌓여야 다시 판정한다.
+    """
     out = np.full(len(score), np.nan)
     if n == 1:
         return score.copy()
     valid = np.isfinite(score)
-    # 구간 내 유효 점수 누적 위치
     for s in np.unique(seg):
         idx = np.flatnonzero(seg == s)
         buf = []
         for i in idx:
-            if valid[i]:
-                buf.append(score[i])
+            if not valid[i]:
+                buf = []          # 결측 → 창 초기화, 이 행은 미판정
+                continue
+            buf.append(score[i])
             if len(buf) >= n:
                 out[i] = np.sort(buf[-n:])[-k]
     return out

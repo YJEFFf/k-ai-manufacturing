@@ -4,7 +4,8 @@
    조기 종료·학습률 감소는 검증 정상 창 val_loss 기준 → 마지막 시점 MSE → 검증 PR 곡선의 P=R 점 문턱(이상 라벨 사용) → 평가 4,000 정상 + 180 이상 창.
 2. 공통 프로토콜 LSTM20 단독: 주 전처리·정상 학습 표준화, 기록구간 내부 창, 정상 학습 내부(뒤 20% 구간) 조기 종료, 마지막 시점 MSE, 정상 보정만.
 3. LSTM20 + max-z 결합: 주 모델과 같은 지수 꼬리·fmax·보정. max-z는 전 행에서 활성화.
-PyTorch(CPU, 단일 스레드, 고정 시드)로 구현했으며 원 Keras와 초기화·최적화 세부가 다르다. 학습 결과는 설정 해시로 캐시한다.
+PyTorch(CPU, 단일 스레드, 고정 시드)로 구현했으며 원 Keras와 초기화·최적화 세부가 다르다. 가이드북 코드 26은 EarlyStopping(restore_best_weights=True)이며 여기서도 최적 가중치를 복원한다.
+학습 결과는 설정·코드·입력·전처리·스케일러를 담은 해시로 캐시한다(검수 R2).
 """
 from __future__ import annotations
 
@@ -46,8 +47,18 @@ class LSTMAE(nn.Module):
         return self.out(h)
 
 
-def config_key(cfg: dict) -> str:
-    return hashlib.sha256(json.dumps(cfg, sort_keys=True, default=str).encode()).hexdigest()[:16]
+def code_fingerprint() -> str:
+    """학습·점수 계산에 영향을 주는 코드(lstm_ae.py, scores.py, data.py)의 해시. 코드가 바뀌면 캐시가 무효화된다."""
+    h = hashlib.sha256()
+    here = Path(__file__).resolve().parent
+    for name in ("lstm_ae.py", "scores.py", "data.py"):
+        h.update((here / name).read_bytes().replace(b"\r\n", b"\n"))
+    return h.hexdigest()[:16]
+
+
+def config_key(cfg: dict, code: str | None = None) -> str:
+    payload = dict(cfg, code=code if code is not None else code_fingerprint(), protocol_version=D.PROTOCOL_VERSION)
+    return hashlib.sha256(json.dumps(payload, sort_keys=True, default=str).encode()).hexdigest()[:16]
 
 
 def train_ae(Xtr: np.ndarray, Xval: np.ndarray, epochs: int, patience: int, seed: int = 0, lr: float = 1e-3, batch: int = 128,
@@ -84,7 +95,7 @@ def train_ae(Xtr: np.ndarray, Xval: np.ndarray, epochs: int, patience: int, seed
             if wait >= patience:
                 break
     if best_state is not None:
-        model.load_state_dict(best_state)   # 최적 가중치 복원(원 Keras 코드의 restore 설정은 확인되지 않음)
+        model.load_state_dict(best_state)   # 가이드북 EarlyStopping(restore_best_weights=True)와 같게 최적 가중치 복원
     model.eval()
     return model, pd.DataFrame(hist)
 
@@ -120,8 +131,8 @@ def protocol_guidebook(normal: pd.DataFrame, abnormal: pd.DataFrame, cache_dir: 
                        input_sha256: dict, retrain: bool = False, log=print) -> tuple[dict, pd.DataFrame]:
     from sklearn.metrics import precision_recall_curve
     from sklearn.preprocessing import MinMaxScaler
-    cfg = dict(protocol="guidebook", seq=SEQ, shift=LABEL_SHIFT, train_rows=GUIDE_TRAIN_ROWS, epochs=epochs, patience=patience,
-               seed=seed, torch=torch.__version__, inputs=input_sha256)
+    cfg = dict(protocol="guidebook", seq=SEQ, shift=LABEL_SHIFT, train_rows=GUIDE_TRAIN_ROWS, valid=(GUIDE_VALID_NORMAL, GUIDE_VALID_ANOMALY),
+               epochs=epochs, patience=patience, seed=seed, torch=torch.__version__, inputs=input_sha256, preprocess="abs+minmax")
     key = config_key(cfg)
     hit = None if retrain else _cache_get(cache_dir, key)
     Xn = np.abs(normal[D.SENSORS].to_numpy(float))
@@ -171,7 +182,10 @@ def protocol_guidebook(normal: pd.DataFrame, abnormal: pd.DataFrame, cache_dir: 
 def protocol_common(train: pd.DataFrame, seg_train: np.ndarray, frames: dict, segs: dict, scaler_mean, scaler_scale,
                     cache_dir: Path, epochs: int, patience: int, seed: int, cfg_extra: dict, retrain: bool = False, log=print):
     """기록구간 내부 창 20, 정상 학습 앞 80% 구간으로 학습·뒤 20%로 조기 종료. 반환 (scores{cal,test,abn}, ref_train_errors, meta, history)."""
-    cfg = dict(protocol="common_lstm20", seq=SEQ, epochs=epochs, patience=patience, seed=seed, torch=torch.__version__, **cfg_extra)
+    train_fp = hashlib.sha256(np.ascontiguousarray(train[D.SENSORS].to_numpy(float)).tobytes() + seg_train.astype(np.int64).tobytes()).hexdigest()[:16]
+    cfg = dict(protocol="common_lstm20", seq=SEQ, epochs=epochs, patience=patience, seed=seed, torch=torch.__version__,
+               scaler_mean=[round(float(v), 12) for v in scaler_mean], scaler_scale=[round(float(v), 12) for v in scaler_scale],
+               train_fingerprint=train_fp, **cfg_extra)
     key = config_key(cfg)
     hit = None if retrain else _cache_get(cache_dir, key)
     def Z(fr):
@@ -197,11 +211,13 @@ def protocol_common(train: pd.DataFrame, seg_train: np.ndarray, frames: dict, se
         idx_t, Wt = windows(ztr, seg_train)
         ref = np.full(len(train), np.nan)
         ref[idx_t] = last_step_error(model, Wt)
-        _cache_put(cache_dir, key, {**out, "ref": ref, "history": hist.to_records(index=False)})
+        ref_holdout = last_step_error(model, Wb)   # 조기 종료용 학습-B 창(적합에 쓰지 않음) → 꼬리 참조용
+        _cache_put(cache_dir, key, {**out, "ref": ref, "ref_holdout": ref_holdout, "history": hist.to_records(index=False)})
         meta = dict(cached=False, epochs_run=int(len(hist)), train_seconds=round(time.time() - t0, 1))
     else:
         out = {k: hit[k] for k in ("cal", "test", "abn")}
-        ref, hist = hit["ref"], pd.DataFrame(hit["history"])
+        ref, ref_holdout, hist = hit["ref"], hit["ref_holdout"], pd.DataFrame(hit["history"])
         meta = dict(cached=True, epochs_run=int(len(hist)), train_seconds=0.0)
-    meta.update(cache_key=key, train_windows_fit=int(len(Wa)), train_windows_earlystop=int(len(Wb)), max_epochs=epochs, patience=patience)
+    meta.update(cache_key=key, train_windows_fit=int(len(Wa)), train_windows_earlystop=int(len(Wb)), max_epochs=epochs, patience=patience,
+                ref_holdout=ref_holdout)
     return out, ref, meta, hist
