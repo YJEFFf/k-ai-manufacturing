@@ -1,0 +1,53 @@
+{
+  "source": "C:\\Users\\jacob\\AppData\\Local\\Temp\\claude\\c--Users-jacob-Documents-Obsidian-Vault--------------\\48217aed-10f8-4b99-96a3-0442c62d20d7\\scratchpad\\repo\\claude\\code\\press\\outputs\\requantize\\press_coarse.zip",
+  "design": "Exploratory re-evaluation of previously inspected data.",
+  "fixed_splits": [
+    {
+      "split": "normal_60_20_20",
+      "train_normal_rows": 11963,
+      "calibration_normal_rows": 3947,
+      "test_normal_rows": 4090,
+      "train_blocks": 360,
+      "calibration_blocks": 120,
+      "test_normal_blocks": 120,
+      "test_abnormal_rows": 600,
+      "test_abnormal_blocks": 21
+    },
+    {
+      "split": "normal_50_20_30",
+      "train_normal_rows": 10133,
+      "calibration_normal_rows": 3770,
+      "test_normal_rows": 6097,
+      "train_blocks": 300,
+      "calibration_blocks": 120,
+      "test_normal_blocks": 180,
+      "test_abnormal_rows": 600,
+      "test_abnormal_blocks": 21
+    }
+  ],
+  "models": [
+    "max_abs_z",
+    "5nn_distance",
+    "trailing_rms5"
+  ],
+  "budgets": [
+    0.01,
+    0.03,
+    0.05
+  ],
+  "threshold": "Strict score > past-normal order statistic. All calibration observations or recording segments are in budget denominators. Missing RMS scores never alarm.",
+  "state": "All trailing windows and consecutive-alarm runs reset at a non-0.1-second timestamp step. No histories cross split boundaries.",
+  "first_notification": "At most one first notification per recording segment; equivalent to thresholding the maximum observed score of that segment for calibration counts. Applied online as soon as the score crosses the fixed threshold.",
+  "alarm_runs": "Every consecutive sequence of positive row alarms is a separate run. A negative or unavailable score ends a run. No cooldown tuned on abnormal records.",
+  "coverage": "RMS requires five observed points. Unscored abnormal rows count as missed in all-row recall/F1; all 21 abnormal recording segments stay in segment-recall denominator.",
+  "delay": "Time since FIRST OBSERVATION of this abnormal recording segment; conditional on being detected. Not lead before physical fault, whose onset is unavailable.",
+  "workload": "Same normal-calibration budget is not the same realized test burden. Row, first-per-record and run counts are all reported. Runs themselves have not been equal-budget calibrated.",
+  "limitations": [
+    "One normal date and one abnormal date; date and provided class are confounded.",
+    "Recording segments are not independent verified failures or machine starts/stops.",
+    "Two normal splits reuse the same abnormal data; they are sensitivity analyses, not independent replications.",
+    "RMS coverage loss must accompany scored-row metrics.",
+    "No abnormal-label tuning, threshold selection or hyperparameter search.",
+    "No inference of real field false-alert rates, maintenance savings or future generalization."
+  ]
+}

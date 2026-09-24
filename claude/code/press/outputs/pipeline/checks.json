@@ -1,0 +1,25 @@
+{
+  "normal_60_20_20": {
+    "w_rule": 5,
+    "w_tied_candidates": 3,
+    "pred_rows": 4690,
+    "shuffle_invariant": true,
+    "normal_alarm_segments": 0,
+    "abnormal_alarm_segments": 21
+  },
+  "normal_50_20_30": {
+    "w_rule": 10,
+    "w_tied_candidates": 2,
+    "pred_rows": 6697,
+    "shuffle_invariant": true,
+    "normal_alarm_segments": 1,
+    "abnormal_alarm_segments": 21
+  },
+  "reproduction_07": {
+    "rows_compared": 48,
+    "max_abs_f1_diff": 1.1102230246251565e-16,
+    "segment_counts_equal": true
+  },
+  "conformal_vs_cutoff_max_diff_rows": 337,
+  "vendor_sha256_ok": true
+}
