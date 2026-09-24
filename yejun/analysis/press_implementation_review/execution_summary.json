@@ -1,0 +1,85 @@
+{
+  "review_date": "2026-09-25",
+  "reviewed_commit": "7beb732ad07011fb841056dc53daf6efab39e67c",
+  "review_script_sha256": "e9945dbc236340e2103d4f7a49c9a38dd280ed784111db98629294b042439825",
+  "environment": {
+    "python": "3.12.2",
+    "platform": "macOS-26.3.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.8.0",
+    "scipy": "1.13.1",
+    "matplotlib": "3.9.2",
+    "blas": null,
+    "protocol_version": "v1",
+    "torch": "2.5.1",
+    "pytest": "9.0.3"
+  },
+  "existing_tests": {
+    "passed": 26,
+    "failed": 0,
+    "seconds": 53.98
+  },
+  "rerun": {
+    "steps": 5,
+    "lstm_cache_used": true,
+    "fresh_output_directory": true,
+    "timings_s": {
+      "step1_s": 1.89,
+      "step2_s": 5.89,
+      "step3_s": 31.1,
+      "step4_s": 2.81,
+      "step5_s": 2.07,
+      "total_s": 43.79
+    },
+    "verify_passed": 33,
+    "verify_total": 33,
+    "csv_max_absolute_difference": 0
+  },
+  "clean_repro_script": {
+    "arguments": "--with-lstm",
+    "exit_code": 0,
+    "lstm_cache_used": true,
+    "verify_passed": 33,
+    "verify_total": 33
+  },
+  "full_cold_lstm_retraining_performed": false,
+  "zip_audit": {
+    "zip_members": 126,
+    "manifest_members": 125,
+    "hash_mismatches": [],
+    "missing_required": [],
+    "blind_check_hits": [],
+    "archive_integrity": null,
+    "manifest_git_commit": "f029b42"
+  },
+  "source_hashes": {
+    "predict.py": "148f8c21681cdf260b940fc21602448faa4cf34cba196e0f78f07baf62e047a8",
+    "press/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "press/analysis.py": "97027aa8bcdb211da81c4f7392d4016f8b82940ef25253001bdff9b1fb18d75a",
+    "press/artifact.py": "a25447664ff1b30eb1930fa2a39b5c1d550a4ef1833512b5130eb7cf570d183e",
+    "press/calibrate.py": "a2b7b686757cc513b6430637323c7d1059f485ff70c547492eefe9589b8eb17b",
+    "press/data.py": "81dc394c8b0b53618177e5822c7cc0f7ff7c7f060d08471c968b4cfaaa05411f",
+    "press/diagnosis.py": "f7ecb071d7c9c9b25c670bcb6052f8201ca2e03e991b57f9fe13fec6346cf499",
+    "press/evaluate.py": "aa749026db25e3982a20019f6ca4b609794fc6cbfdcaaa2b639088cc4c948e63",
+    "press/evidence.py": "f8982a01a72d71ab290422cd0d7de6314789deb2e23f4f1003e0b69083041f31",
+    "press/field.py": "9c122c8ecf8847268ff1fbda2d81a1d45dbceb915123a2a1d30d4a652445b0a9",
+    "press/lstm_ae.py": "cc728dc5bfc50b8879a345fdefe2ccd3790740e7e7f787e0ef264ac640064c6f",
+    "press/robustness.py": "c21ff3ebb89af34dc8d172e7465dc33ffb3a020c4432ef7fe6c816361fa8b413",
+    "press/scores.py": "22ed1700eabadaadcec25c2602b40bd8a0a84879ad658e0ced2b05c2b87078ae",
+    "press/uncertainty.py": "4f97fc6df689947602f5c349144303c609940aa588d98ce480b56fd39ea5b899",
+    "run_all.py": "433c748094e00e5e00a393514cdd36129e70213fd9fd56ae8357d8da12bef9e0",
+    "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/conftest.py": "8659c4f6af34a32f61ecc29774fd873cf628e7e0828ce9ff04773418357a6cc6",
+    "tests/test_step1.py": "4c77eefbc3ff0a5835deda9464815e2b6094c9d22968176aad8f2904f9adba62",
+    "tests/test_step2.py": "47922985b2c5b2b62c2fea3f3e248194980bb7234f0daf0b2cf40b673dc60e94",
+    "tests/test_step3.py": "28e8af921c0fa621ce0825b50590c6a3f0c5a923ac6c8addf740be04d9654e43",
+    "tests/test_step4.py": "deb8b8eedfe0382aba91fc5cdceae001b2e3f1f1830b5b5799a7ff083807595b",
+    "tests/test_step5.py": "14b2076de4366b8eab8fed54c16b93952b5dd357bd31bc39bf4003f9397d85af",
+    "tools/check_alignment.py": "002ab94f3a621aad8d252898445477110910ceb15665ff201d1af24db63339de",
+    "tools/make_submission_zip.py": "c94eb25fc2bea60d925738b6b838c367c4c9732874194cb68c014803e3a48078",
+    "vendor/press_policy_audit.py": "4887e4c52bcb9022324225a113d1ca4e54b37a395a0707cd222a72683b4312a0",
+    "verify.py": "f9d3a256e3142e45b5e827f6e065228dd51acc4308d3bac2d0f82cbbe355aeb7"
+  }
+}

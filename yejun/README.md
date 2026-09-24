@@ -6,7 +6,8 @@
 
 ## 먼저 볼 문서
 
-- [프레스 제출 패키지 실행계획 — 확정 v1](press_submission/PLAN.md): 최종 재검수 반영 완료. W1·W6·W11 일부부터 구현하고 실행 중 디버깅
+- [프레스 1~6단계 구현 검수](analysis/press_implementation_review/README.md): 2026-09-25 실행 재현·독립 재집계 확인, 최종 완료 전 R1~R6 수정 사항과 재현 코드
+- [프레스 제출 패키지 실행계획 — 확정 v1](press_submission/PLAN.md): 확정 연구설계·실행 프로토콜·단계별 완료 조건
 - [클로드 후속 계획 적대적 검토](analysis/press_plan_review/README.md): 2026-09-24 계획 실행 전 수정할 R1~R8, 실제 계산 결과, 검토 당시 계획 원문
 - `analysis/press_welding_review/README.md`: 2026-09-23 프레스·용접 추가 검증과 현재 선택
 - `과제재선정_정밀검토.md`: 이전 후보 범위에서의 과제 추천과 핵심 근거
@@ -17,7 +18,8 @@
 
 ## 디렉터리
 
-- `press_submission/`: 확정 실행계획과 앞으로 구현할 제출 패키지
+- `press_submission/`: 확정 실행계획, 제출 코드·실험 결과·보고서 근거
+- `analysis/press_implementation_review/`: 1~6단계 구현의 실행 재현·독립 재집계·결함 재현·검수 판정
 - `analysis/press_plan_review/`: 클로드 후속 계획 검토와 검토 당시 원문
 - `analysis/press_welding_review/`: 두 후보의 집계 정답·경보 정책·센서 관계 추가 검증
 - `analysis/reselection/`: 다섯 과제와 KAMP 추가 자료의 감사 코드·결과·판정
