@@ -17,3 +17,5 @@
 | `yejun/analysis/press_merge_review/review_checks.py` (예준) | 미커밋 | — | 재양자화 전 절차 재실행·동결 진단·절제·라벨 우회를 `press/robustness.py`로 재구현 |
 
 기록구간 규칙은 `press.data.segments` 하나만 사용하며 vendor `blocks`와의 일치를 `run_all.py`와 `tests/`에서 확인한다.
+
+가이드북 LSTM-Autoencoder(`데이터셋/프레스_유압펌프_예지보전/Guidebook_소성가공 예지보전 AI 데이터셋.pdf`, 코드 20~33)는 `press/lstm_ae.py`에 PyTorch로 재구현했다: abs·MinMax·창 20·라벨 100시점 이동·검증 880/300 창·Adam 1e-3·batch 128·ReduceLROnPlateau(0.7, 50)·EarlyStopping(1e-5)·마지막 시점 MSE·P=R 문턱. 최적 가중치 복원은 원 코드에서 확인되지 않아 우리 선택이다.

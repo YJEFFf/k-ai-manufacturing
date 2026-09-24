@@ -23,14 +23,13 @@ import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
 
 from press import data as D  # noqa: E402
-from press import analysis, diagnosis, robustness  # noqa: E402
+from press import analysis, diagnosis, evidence, field, lstm_ae, robustness, uncertainty  # noqa: E402
 from press.artifact import Artifact  # noqa: E402
 from press.calibrate import ALPHAS, conformal_p, mc_check_conformal, segment_max, thresholds_for  # noqa: E402
 from press.evaluate import comparison_markdown, evaluate_models  # noqa: E402
-from press.scores import MAIN_W, MainModel, Scorer  # noqa: E402
+from press.scores import MAIN_W, ExpTail, MainModel, Scorer  # noqa: E402
 
-PENDING = ["baselines_lstm_uncertainty(4단계)",
-           "field_persistence_evidence(5단계)", "freeze_env_clean_repro_zip(6단계)"]
+PENDING = ["freeze_env_clean_repro_zip(6단계)"]
 MAIN_ALPHA = 0.01
 
 
@@ -147,7 +146,8 @@ def step2(args, out, art_dir, ctx, checks):
         mt, rec = evaluate_models(vendor, sp["name"], pre, model_scores, frames, segs, comp_bounds)
         mt["split_id"], mt["is_main_model"] = sid, mt.model == main_model
         all_metrics.append(mt)
-        rec[rec.model == main_model].to_csv(out / f"records_main_{sid}.csv", index=False)
+        rec_main = rec[rec.model == main_model]
+        rec_main.to_csv(out / f"records_main_{sid}.csv", index=False)
 
         # 주 모델 artifact (학습 상태 + 보정 상태)
         cal_seg_max = segment_max(model_scores[main_model]["cal"], segs["cal"])
@@ -190,7 +190,8 @@ def step2(args, out, art_dir, ctx, checks):
                                 normal_notified=n_norm, abnormal_notified=n_abn, seconds=round(time.time() - t0, 1))
         for t in thr_rows:
             ops.append(dict(split=sp["name"], model=main_model, **t))
-        ctx2[sid] = dict(name=sp["name"], train=q["train"], seg_train=segs["train"], stream=stream, seg_stream=seg_stream, pred=pred, state=state)
+        ctx2[sid] = dict(name=sp["name"], train=q["train"], seg_train=segs["train"], stream=stream, seg_stream=seg_stream, pred=pred, state=state,
+                         records=rec_main, frames=frames, segs=segs, scorer=scorer)
         print(f"split {sid} done in {time.time() - t0:.1f}s: {main_model} conformal 1% → normal {n_norm}/{ev.normal_segments}, abnormal {n_abn}/21", flush=True)
     mt = pd.concat(all_metrics, ignore_index=True)
     mt.to_csv(out / "model_comparison.csv", index=False)
@@ -215,6 +216,44 @@ def step3(args, out, ctx, ctx2, checks):
     checks["step3_label_bypass_ok"] = rob["label_bypass_all_passed"]
 
 
+def step4(args, out, art_dir, ctx, ctx2, checks):
+    vendor, normal, abnormal = ctx["vendor"], ctx["normal"], ctx["abnormal"]
+    log = lambda m: print(m, flush=True)  # noqa: E731
+    unc = uncertainty.run({sid: c["records"] for sid, c in ctx2.items()}, out)
+    cache = art_dir / "lstm_cache"
+    sha = {k: v["sha256"] for k, v in ctx["load_report"]["files"].items()}
+    guide, ghist = lstm_ae.protocol_guidebook(normal, abnormal, cache, args.lstm_guide_epochs, args.lstm_guide_patience, args.seed, sha,
+                                              retrain=args.retrain_lstm, log=log)
+    ghist.to_csv(out / "lstm_guidebook_history.csv", index=False)
+    D.dump_json(guide, out / "lstm_guidebook_reproduction.json")
+    log(f"  LSTM guidebook protocol: epochs {guide['epochs_run']}, F1 {guide['f1']:.3f} (guide 0.748), cached={guide['cached']}")
+    rows, metas = [], []
+    for sid, c in ctx2.items():
+        st = c["state"]
+        sc, ref, meta, hist = lstm_ae.protocol_common(c["train"], c["seg_train"], c["frames"], c["segs"], np.asarray(st["scaler_mean"]), np.asarray(st["scaler_scale"]),
+                                                      cache, args.lstm_epochs, args.lstm_patience, args.seed,
+                                                      dict(split=c["name"], preprocess=args.preprocess, inputs=sha), retrain=args.retrain_lstm, log=log)
+        hist.to_csv(out / f"lstm_common_history_{sid}.csv", index=False)
+        tail = ExpTail(ref)
+        comps = {k: c["scorer"].components(c["frames"][k], c["segs"][k])[0]["g_maxz3"] for k in ("cal", "test", "abn")}
+        model_scores = {"lstm20": sc, "lstm20_plus_maxz": {k: np.fmax(comps[k], tail(sc[k])) for k in sc}}
+        mt, _ = evaluate_models(vendor, c["name"], args.preprocess, model_scores, c["frames"], c["segs"], units=("recording_segments", "rows"))
+        mt["split_id"], mt["is_main_model"] = sid, False
+        rows.append(mt)
+        metas.append(dict(split=c["name"], **meta, tail_ok=tail.ok, tail_u=tail.u, tail_beta=tail.beta))
+        log(f"  LSTM common protocol {sid}: epochs {meta['epochs_run']}, cached={meta['cached']}")
+    lm = pd.concat(rows, ignore_index=True)
+    lm.to_csv(out / "model_comparison_lstm.csv", index=False)
+    pd.DataFrame(metas).to_csv(out / "lstm_common_meta.csv", index=False)
+    full = pd.concat([pd.read_csv(out / "model_comparison.csv"), lm], ignore_index=True)
+    full.to_csv(out / "model_comparison_all.csv", index=False)
+    comparison_markdown(full, out / "model_comparison_all.md", "recording_segments", "conformal")
+    m1 = lm[(lm.calibration_unit == "recording_segments") & (lm.criterion == "conformal") & (lm.alpha == MAIN_ALPHA)]
+    checks["step4"] = dict(guidebook_f1=round(guide["f1"], 4), guidebook_epochs=guide["epochs_run"], guidebook_cached=guide["cached"],
+                           lstm_common={r.model + "@" + r.split: f"{int(r.abnormal_notified_segments)}/21 · {int(r.normal_notified_segments)}/{int(r.normal_segments)} · cov {r.abnormal_row_coverage:.2f}" for r in m1.itertuples()},
+                           uncertainty_rows=int(len(unc)), lstm_epochs_setting=args.lstm_epochs)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", type=Path, default=D.PACKAGE_DIR, help="data/3_소성가공_예지보전/ 를 포함하는 폴더")
@@ -223,7 +262,13 @@ def main(argv=None):
     ap.add_argument("--preprocess", choices=list(D.QUANTIZATION), default="matched")
     ap.add_argument("--no-verify", action="store_true", help="입력 해시·행 수 검증을 건너뛴다(다른 자료로 실행할 때)")
     ap.add_argument("--no-baselines", action="store_true", help="5NN·RMS5·IF·MLP-AE 생략(빠른 확인용)")
-    ap.add_argument("--steps", type=int, default=3, help="실행할 단계 수 (1: 진단만, 2: 주 모델까지, 3: 강건성·오류 분석까지)")
+    ap.add_argument("--steps", type=int, default=5, help="실행할 단계 수 (1 진단, 2 주 모델, 3 강건성·오류, 4 LSTM·불확실성, 5 현장·근거)")
+    ap.add_argument("--lstm-epochs", type=int, default=300, help="공통 프로토콜 LSTM 최대 에폭(축약 학습)")
+    ap.add_argument("--lstm-patience", type=int, default=30, help="공통 프로토콜 LSTM 조기 종료 patience")
+    ap.add_argument("--lstm-guide-epochs", type=int, default=800, help="가이드북 재구현 최대 에폭(원값 800)")
+    ap.add_argument("--lstm-guide-patience", type=int, default=120, help="가이드북 재구현 조기 종료 patience(원값 120)")
+    ap.add_argument("--retrain-lstm", action="store_true", help="LSTM 캐시를 무시하고 다시 학습")
+    ap.add_argument("--seed", type=int, default=0)
     args = ap.parse_args(argv)
     out = args.out
     out.mkdir(parents=True, exist_ok=True)
@@ -240,12 +285,25 @@ def main(argv=None):
         t2 = time.time()
         step3(args, out, ctx, ctx2, checks)
         timings["step3_s"] = round(time.time() - t2, 2)
+    if args.steps >= 4:
+        t3 = time.time()
+        step4(args, out, art_dir, ctx, ctx2, checks)
+        timings["step4_s"] = round(time.time() - t3, 2)
+    if args.steps >= 5:
+        t4 = time.time()
+        ops = pd.read_csv(out / "operating_points.csv")
+        checks["step5_field"] = field.run(out, ctx["vendor"], ctx2, args.preprocess, ops, log=lambda m: print(m, flush=True))
+        timings["step5_s"] = round(time.time() - t4, 2)
     raw_hits = scan_outputs_for_raw_values(out)
     checks["outputs_free_of_raw_sensor_columns"] = not raw_hits
     checks["raw_column_hits"] = raw_hits
     checks["pending_steps"] = PENDING
     timings["total_s"] = round(time.time() - t0, 2)
-    manifest = dict(protocol_version=D.PROTOCOL_VERSION, git_commit=git_commit(), args={k: str(v) for k, v in vars(args).items()},
+    import torch  # noqa: E402
+    pre_manifest = dict(git_commit=git_commit(), environment=D.environment(), timings_s=timings, torch=torch.__version__)
+    if args.steps >= 5:
+        checks["step5_evidence"] = evidence.run(out, D.PACKAGE_DIR / "evidence", pre_manifest, checks)
+    manifest = dict(protocol_version=D.PROTOCOL_VERSION, git_commit=git_commit(), torch=torch.__version__, args={k: str(v) for k, v in vars(args).items()},
                     environment=D.environment(), omp_num_threads=os.environ.get("OMP_NUM_THREADS"),
                     inputs=ctx["load_report"], timings_s=timings,
                     outputs={str(p.relative_to(out)): D.sha256_file(p) for p in sorted(out.rglob("*")) if p.is_file() and p.name != "manifest.json"})

@@ -1,6 +1,6 @@
 # ③ 프레스 유압펌프 이상 탐지 — 제출 패키지
 
-실행 기준은 [PLAN.md](PLAN.md)다. 현재 상태: **1~3단계 구현** (데이터·진단·뼈대 / w=8 고정·q95 지수 꼬리·conformal 보정·추론 / 전처리·창 민감도·동결 진단·절제·라벨 우회·FN/FP 조건). 4~6단계는 `outputs/checks.json`의 `pending_steps`에 표시된다.
+실행 기준은 [PLAN.md](PLAN.md)다. 현재 상태: **1~5단계 구현** (데이터·진단·뼈대 / w=8 고정·q95 지수 꼬리·conformal 보정·추론 / 전처리·창 민감도·동결 진단·절제·라벨 우회·FN/FP 조건 / LSTM-AE 3프로토콜·블록 부트스트랩 / 업무량·지속성·진폭 정규화 후보·판단표·보고서 근거·numbers.json). 6단계(환경 동결·깨끗한 재현·ZIP)는 `outputs/checks.json`의 `pending_steps`에 표시된다.
 
 ## 실행
 
@@ -9,8 +9,10 @@ cd yejun/press_submission
 python -m pip install -r requirements.txt
 # 데이터 배치: data/3_소성가공_예지보전/press_data_normal.csv, outlier_data.csv (Git 제외)
 #   로컬 원본: ../../데이터셋/프레스_유압펌프_예지보전/data/3_소성가공_예지보전/ 에서 복사하거나 --root로 그 폴더를 지정
-OMP_NUM_THREADS=1 python run_all.py --root . --out outputs            # 약 40초 (3단계 포함); --steps 2 면 10초
+OMP_NUM_THREADS=1 python run_all.py --root . --out outputs            # LSTM 캐시가 있으면 약 1분, 없으면 첫 실행 30~40분(CPU 학습); --steps 3 이면 40초
 python -m pytest -q tests                                              # 정확성 검사
+python verify.py --out outputs                                         # outputs/expected 대비 허용오차 검사 (--freeze 로 동결)
+python tools/check_alignment.py --numbers outputs/numbers.json --text <보고서.txt> <발표.txt>   # 수치 정렬 검사
 python predict.py --model artifacts/main_A.json --input <입력.csv> --out predictions.csv   # 저장 상태만으로 추론
 ```
 
@@ -37,9 +39,15 @@ python predict.py --model artifacts/main_A.json --input <입력.csv> --out predi
 | `label_bypass.csv` | 날짜 이동·불필요한 열·6자리 재직렬화(스트레스)·미래 행 추가에 대한 추론 불변 |
 | `segment_features.csv`, `error_conditions_fn.csv`, `error_conditions_fp.csv`, `alarm_components.csv`, `influence.csv`, `interaction_2x2.csv` | 기록구간 특징, 분모 포함 FN(행)/FP(구간) 조건표(위치·길이·진폭 대리 지표·진동 사분위), 발화 성분, 단변량 AUROC(방향 표기), 진동 수준×파형 2×2 |
 | `fig_vibration_vs_waveform.png`, `fig_recall_by_position.png`, `fig_error_examples.png` | 진동×구간 R²(사후), 위치별 이상 행 경보율, 사례(파형만 경보·FP·늦은 경보) |
+| `lstm_guidebook_reproduction.json`, `lstm_guidebook_history.csv` | 가이드북 LSTM-AE 프로토콜 재구현(PyTorch): 검증 P=R 문턱, 4,000 정상·180 이상 창 혼동행렬, 가이드 보고값 병기. 주 비교표와 다른 프로토콜 |
+| `model_comparison_lstm.csv`, `lstm_common_meta.csv`, `lstm_common_history_*.csv`, `model_comparison_all.csv/.md` | 공통 프로토콜 LSTM20 단독·LSTM20+max-z 결합(정상 학습 내부 조기 종료, 구간 내부 창, 정상 보정만)과 전체 모델 병합표 |
+| `uncertainty.csv` | 정상 평가 구간 알림 수의 moving-block bootstrap(블록 5·10·20) 민감도. 관측 카운트가 주 결과이며 0건은 퇴화로 표시 |
+| `workload.csv`, `persistence.csv`, `load_normalization.csv`, `load_normalization_meta.csv`, `field_decision_table.md` | 업무량(기록시간·경과시간 기준, 가동시간 시나리오), 지속성 (k,n) 규칙(재보정), 진폭 정규화 후보(온라인 trailing-17 특징), 작업자 판단표 |
+| `numbers.json`, `../evidence/보고서_근거_장별.md` | 헤드라인 수치(모델·분할·기준·α·분모·run_id 연결)와 보고서 6장별 근거·문장 초안 |
 | `predictions_A.csv`, `predictions_B.csv`, `records_main_*.csv` | 행별 예측(평가 스트림)·구간별 알림 기록 — Git 제외 |
 | `checks.json`, `manifest.json` | 정확성 검사 결과, 환경·입력 해시·산출물 해시·실행 시간 |
 | `../artifacts/main_A.json`, `main_B.json` | 주 모델 학습·보정 상태(스케일러, 참조 점수, 꼬리 변환, 보정 구간 최댓값, 문턱). `predict.py`가 이 파일만으로 추론한다 — Git 제외 |
+| `../artifacts/lstm_cache/*.npz` | LSTM 학습 결과 캐시(설정 해시 키: 프로토콜·에폭·patience·시드·torch 버전·입력 해시). `--retrain-lstm`으로 무시 — Git 제외, 제출 ZIP 포함 |
 
 산출 CSV에는 센서 원값 열이 없다(`checks.json.outputs_free_of_raw_sensor_columns`). 원본 CSV·행별 예측·artifacts는 Git 제외이며 제출 ZIP에만 포함한다.
 
@@ -48,12 +56,15 @@ python predict.py --model artifacts/main_A.json --input <입력.csv> --out predi
 - 주 기준: 정상 보정 기록구간 최댓값의 conformal p ≤ α (α=1%, 3%·5% 병기). 참고 기준: 기존 cutoff. 두 기준은 `criterion` 열로 구분한다.
 - 결과 해석: 정상·이상이 각각 하루라 이미 본 자료에 대한 탐색적 평가다. 1%는 고정 비교 기준이지 현장 최적 운영점이 아니다.
 
+## LSTM 학습 설정
+- 가이드북 재구현: `--lstm-guide-epochs 800 --lstm-guide-patience 120`(원값). 공통 프로토콜: `--lstm-epochs`·`--lstm-patience`(기본 축약값, `outputs/lstm_common_meta.csv`에 실제 에폭 기록). CPU 단일 스레드·고정 시드. 원 Keras와 초기화·최적화 세부가 달라 가이드 수치의 정확한 재현을 보장하지 않는다.
+
 ## 구현 단계 (PLAN §8)
 | 단계 | 상태 |
 |---|---|
 | 1 데이터·구간·분할·진단·뼈대 | 완료 |
 | 2 w=8 고정, q95 지수 꼬리, conformal 보정, 추론·집계 | 완료 |
 | 3 전처리·창 민감도, 절제, 오류 조건 | 완료 |
-| 4 기준모델·LSTM 3프로토콜, coverage·불확실성 | 예정 |
-| 5 업무량·지속성·진폭 후보·장별 근거 | 예정 |
+| 4 기준모델·LSTM 3프로토콜, coverage·불확실성 | 완료 |
+| 5 업무량·지속성·진폭 후보·장별 근거 | 완료 |
 | 6 환경 고정·깨끗한 재현·ZIP 조립 | 예정 |
