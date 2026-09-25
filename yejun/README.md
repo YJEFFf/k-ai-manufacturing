@@ -8,6 +8,7 @@
 
 ## 먼저 볼 문서
 
+- [Codex 전체 워크플로우 검수 F1~F5 반영](analysis/press_guard_review/README.md): 2026-09-26 재적합 민감도·절제·구간 조건표·2×2·예측 CSV 계약·audit 분리. v2 테스트 46개·audit 16/16·verify 19/19·새 클론 19/19
 - [위치 0·1 미탐 후보 실험](analysis/press_early/README.md): 2026-09-25 공동 정상 분포·1차 예측 오차 후보를 사전 고정해 시험, 둘 다 채택 기준 불충족(정상 알림 증가 또는 개선 없음). v2 유지
 - [Claude 후속 구현 Codex 재검수](analysis/press_guard_review/codex_recheck.md): 검증·동결 누락 경로와 웹 차트/재생 결함 수정, 미탐 해석 교정, 토의 항목 3개 판단
 - [코덱스 인수인계 검수·웹 콘솔 구현](analysis/press_guard_review/README.md): Claude의 v2·후보 탐색·UCI 재현, 웹 연결·검수·벤치마크 및 사용자 위임에 따른 v2 채택·디벨롭 이력

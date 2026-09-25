@@ -54,6 +54,10 @@ PYTHON=/opt/anaconda3/bin/python bash yejun/press_guard/tools/clean_repro.sh # �
 |---|---|
 | `outputs/model_comparison_v2.csv` (+`.md`) | v1 패키지의 기준모델·결합·LSTM 결과와 v2 후보 고정 비교를 같은 입력(해시 확인)·분할·보정 구간에서 합친 표. `is_final_model`=early6_ar2 |
 | `outputs/robustness_v2.csv` | matched로 적합·보정한 상태를 고정하고 평가 입력만 raw/coarse로 바꾼 v1·v2 결과(press_advance에서 추출). 웹 콘솔 성능 검증 탭에 조건표와 함께 표시 |
+| `outputs/sensitivity_v2.csv` | 전처리(raw/matched/coarse)별로 **학습·보정·평가를 다시 실행**한 v1·v2 결과(PLAN §5.2 ①). matched 재적합 v2는 저장 모델 지표와 같음을 실행 중 확인 |
+| `outputs/ablation_v2.csv` | matched 재적합에서 v2 성분 절제: 센서 크기·파형·예측 오차·초반 창 전환을 각각 제거한 결과 |
+| `outputs/error_conditions_segments_v2.csv` | 구간 단위 조건표(길이·진동 산포·진폭·진동 수준·파형): 이상은 미탐 구간, 정상은 알림 구간. 진폭 조건에 신뢰 제한(길이<17) 구간 수 |
+| `outputs/interaction_2x2_v2.csv` | 진동 수준(진동 두 센서 max|z| > 정상 학습 q95) × 전류 파형(사인 R² < 정상 학습 q05) 교차표, v1·v2 경보 각각 |
 | `outputs/error_conditions_v2.csv` | v1·v2의 미탐(이상)·오경보(정상) 조건: 구간 내 위치, 구간 길이, 진동 산포·전류 진폭 4분위, 가장 강한 성분. 분모 포함 |
 | `outputs/records_first_alarm_v2.csv` | 이상 21구간별 v1·v2 첫 경보 위치·미탐 행·첫 경보 근거 |
 | `outputs/uncertainty_v2.csv` | 이동 블록 부트스트랩: 정상 알림 구간 수(블록 5·10·20), 이상 미탐 행·탐지 구간(블록 3·5). 관측값이 주 결과 |
@@ -62,6 +66,12 @@ PYTHON=/opt/anaconda3/bin/python bash yejun/press_guard/tools/clean_repro.sh # �
 | `outputs/fig_first_alarm_v2.png` | 이상 21구간의 첫 경보 시점 v1 vs v2 |
 | `outputs/fig_missed_example_v2.png` | v2 미탐이 가장 많은 구간의 전류·성분 점수 |
 | `outputs/expected/` | `verify.py --freeze`로 동결한 결과 CSV 10개 + manifest/audit/summary |
+
+행 단위 조건표의 사분위 경계는 정상 학습 구간 기준으로 하나만 쓰고(열 `q25·q50·q75·boundary_source`), 정상·이상 평가에 같은 경계를 적용한다. 진폭 조건에는 길이 17 미만 행 수(`unreliable_amp_rows`)를 함께 적는다.
+
+재적합 민감도(α=1%): v2는 raw 재적합 A 미탐 43, coarse 재적합 B 정상 알림 4/180·미탐 34로 matched(3/180·31)보다 나쁘다. 정밀도가 거친 입력으로 학습·보정하면 B의 정상 알림이 한 구간 늘어난다. 절제(matched): 예측 오차 성분 제거 시 미탐 44→86·31→71, 파형 제거 시 133·112, 센서 크기 제거 시 이상 탐지 20/21, 초반 창 전환 제거 시 46·33. 각 성분이 결과를 바꾼다.
+
+v2 예측 CSV에는 v1 계약(PLAN §7)과 대응하는 `model_id`(early6_ar2_A/B)·`protocol_version`·`criterion`·`is_scored`·`anomaly_score`(1−p) 열이 있다. v1의 `position_in_record`는 v2의 `position`, `alarm_reason`은 `reason`, `combined_score`는 `score`에 해당한다.
 
 v2의 미탐 감소 55행 중 위치 2~6에서 A 49행·B 51행, 위치 10 이후에서 A 6행·B 4행이 개선됐다. 위치 0·1은 A 각각 13행(합계 26), B 각각 10행(합계 20) 미탐으로 v1·v2가 같다. 그 위치에는 센서 크기 성분만 있다. 개선이 위치 2~6에만 국한된다는 이전 서술과 A 23·23/B 20·20 표기는 오류였다.
 
@@ -78,7 +88,7 @@ OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/pres
 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python -m pytest -q yejun/press_guard/test_guard.py yejun/press_guard/test_serve.py
 ```
 
-- `audit.py`: 실행 코드·저장 모델·v1 의존 코드·입력 해시가 manifest와 같은지, 입력 묶음 1·7·128행 순차 추론이 전체 추론과 같은지, 독립 집계·p값 순위 규칙·구간당 알림 한 번·날짜 이동/라벨 불변을 실제 자료로 확인한다. 웹 콘솔 '실행 검증' 목록이 이 파일을 읽는다.
+- `audit.py`: 실행 코드·저장 모델·v1 의존 코드·입력 해시가 manifest와 같은지, 입력 묶음 1·7·128행 순차 추론이 전체 추론과 같은지, 독립 집계·p값 순위 규칙·날짜 이동/라벨 불변을 실제 자료로 확인한다(16개). 구간당 알림이 경보 유무와 일치하는 정확성 검사와 이상 21구간 탐지 성능 회귀 검사는 이름을 나눠 판정한다. 웹 콘솔 '실행 검증' 목록이 이 파일을 읽는다.
 - `benchmark.py`: 분할 A 평가 스트림 4,690행, CPU 한 스레드. 1행 묶음 호출당 약 10 ms(p95 10.5 ms)로 수집 주기 0.1초보다 짧다. 128행 묶음 약 7,300행/초, 전체 일괄 0.27초. 기기 참고치다.
 - 웹 화면의 경보 문턱선은 `p ≤ α`와 동치인 점수(정상 보정 구간 최대 점수 순위)를 표시한다. 그래프 색은 계열 3개를 색각 이상 분리·대비 검사(dataviz 검증기)로 확인해 정했다.
 
