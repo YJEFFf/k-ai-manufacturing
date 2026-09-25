@@ -1,0 +1,23 @@
+== clone: 684c51a ==
+-- /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/tmp.UEvYLmn0mw/clone/yejun/press_submission/run_all.py --root /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/tmp.UEvYLmn0mw/clone/yejun/press_submission --out /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/tmp.UEvYLmn0mw/clone/yejun/press_submission/outputs --steps 2 --no-baselines
+-- /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/tmp.UEvYLmn0mw/clone/yejun/press_guard/train.py --rolling
+-- /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/tmp.UEvYLmn0mw/clone/yejun/press_guard/analyze.py
+-- /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/tmp.UEvYLmn0mw/clone/yejun/press_guard/audit.py
+OK   outputs.integrity
+OK   inputs.sha256
+OK   expected.integrity
+OK   configuration
+OK   analysis_summary.json
+OK   metrics.csv  max|Δ|=0
+OK   rolling.csv  max|Δ|=0
+OK   cases_A.csv  max|Δ|=0
+OK   cases_B.csv  max|Δ|=0
+OK   model_comparison_v2.csv  max|Δ|=0
+OK   robustness_v2.csv  max|Δ|=0
+OK   error_conditions_v2.csv  max|Δ|=0
+OK   records_first_alarm_v2.csv  max|Δ|=0
+OK   uncertainty_v2.csv  max|Δ|=0
+OK   workload_v2.csv  max|Δ|=0
+
+15/15 통과. 코드 6ecd8e7efb1c vs 동결 6ecd8e7efb1c; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+임시 폴더: /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/tmp.UEvYLmn0mw (검사 후 삭제 가능)

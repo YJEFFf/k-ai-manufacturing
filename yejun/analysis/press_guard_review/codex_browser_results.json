@@ -1,0 +1,19 @@
+{
+  "default_kpis": [
+    21,
+    556,
+    "100.0%",
+    141
+  ],
+  "condition_rows": 8,
+  "robustness_rows": 12,
+  "external_rows": 6,
+  "B_alpha03_notifications": 26,
+  "B_alpha03_alarm_rows": 576,
+  "export_rows": 18,
+  "upload_rows": 12,
+  "upload_invalid_rows": 1,
+  "empty_replay_hover": true,
+  "replay": true,
+  "console_exceptions": []
+}

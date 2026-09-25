@@ -10,6 +10,7 @@ import pandas as pd
 from model import GuardModel, StreamDetector, cases, D, BASE, HERE, ALPHAS
 from press.calibrate import conformal_p, segment_max
 from press.scores import sine_score
+from contracts import CODE_FILES, TRAIN_TABLES, PREDICTIONS
 
 
 def baseline(model, frame):
@@ -93,11 +94,11 @@ def main():
             m=GuardModel.fit(tr,ca,split=f"train_to_{end}",input_hashes=hashes)
             rolling.extend(evaluate_pair(m,ca,te,abnormal,f"normal_{end+120}_{end+179}"))
         pd.DataFrame(rolling).to_csv(args.out/"rolling.csv",index=False)
-    code_files=[HERE/n for n in ("model.py","train.py","predict.py","test_guard.py")]   # 결과를 낳는 코드만. serve/audit/benchmark는 제외
+    written=tuple(n for n in TRAIN_TABLES if n!="rolling.csv" or args.rolling)+PREDICTIONS
     D.dump_json(dict(version="press-guard-v2.0",input_hashes=hashes,environment=D.environment(),
-                     code_hashes={p.name:D.sha256_file(p) for p in code_files},
+                     code_hashes={n:D.sha256_file(HERE/n) for n in CODE_FILES},config={"rolling":args.rolling},
                      artifacts={p.name:D.sha256_file(p) for p in args.artifacts.glob("guard_*.json")},
-                     outputs={p.name:D.sha256_file(p) for p in args.out.glob("*.csv")},
+                     outputs={n:D.sha256_file(args.out/n) for n in written},
                      exploratory=True, elapsed_s=time.monotonic()-start),args.out/"manifest.json")
     print(metrics[metrics.alpha.eq(.01)].to_string(index=False))
 

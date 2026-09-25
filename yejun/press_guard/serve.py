@@ -85,10 +85,20 @@ class Console:
         cond=cond[cond.alpha.eq(.01)&cond.condition.isin(["pos_bin","strongest_component"])] if len(cond) else cond
         rob=pd.read_csv(robustness) if robustness.exists() else pd.DataFrame()
         rob=rob[rob.criterion.eq("conformal")] if len(rob) else rob
+        from contracts import execution_errors, read_json
+        audit_data=json.loads(audit.read_text()) if audit.exists() else {}
+        try:
+            errors=execution_errors(read_json(HERE/"outputs"/"manifest.json"),HERE/"outputs",HERE/"artifacts")
+        except (OSError,ValueError,KeyError,TypeError,AttributeError):
+            errors=["실행 기록 오류"]
+        if errors:
+            audit_data["all_ok"]=False
+            audit_data["checks"]=[dict(name="현재 파일과 실행 검증 기록의 연결",ok=False,
+                                        detail="파일이 변경되었거나 검증이 미완료입니다. 검증을 다시 실행하세요.")]
         return dict(metrics=json.loads(metrics.to_json(orient="records")),
                     conditions=json.loads(cond.to_json(orient="records")),robustness=json.loads(rob.to_json(orient="records")),
                     external=json.loads(pd.read_csv(external).to_json(orient="records")) if external.exists() else [],
-                    audit=json.loads(audit.read_text()) if audit.exists() else {},
+                    audit=audit_data,
                     benchmark=json.loads(benchmark.read_text()) if benchmark.exists() else {})
 
 

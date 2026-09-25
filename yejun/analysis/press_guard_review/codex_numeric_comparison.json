@@ -1,0 +1,52 @@
+[
+  {
+    "file": "metrics.csv",
+    "ok": true,
+    "max_abs_diff": 0.0
+  },
+  {
+    "file": "rolling.csv",
+    "ok": true,
+    "max_abs_diff": 0.0
+  },
+  {
+    "file": "cases_A.csv",
+    "ok": true,
+    "max_abs_diff": 0.0
+  },
+  {
+    "file": "cases_B.csv",
+    "ok": true,
+    "max_abs_diff": 0.0
+  },
+  {
+    "file": "model_comparison_v2.csv",
+    "ok": true,
+    "max_abs_diff": 0.0
+  },
+  {
+    "file": "robustness_v2.csv",
+    "ok": true,
+    "max_abs_diff": 0.0
+  },
+  {
+    "file": "error_conditions_v2.csv",
+    "ok": true,
+    "max_abs_diff": 0.0
+  },
+  {
+    "file": "records_first_alarm_v2.csv",
+    "ok": true,
+    "max_abs_diff": 0.0
+  },
+  {
+    "file": "uncertainty_v2.csv",
+    "ok": true,
+    "max_abs_diff": 0.0
+  },
+  {
+    "file": "workload_v2.csv",
+    "ok": true,
+    "max_abs_diff": 0.0
+  }
+]

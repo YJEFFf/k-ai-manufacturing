@@ -1,0 +1,31 @@
+{
+  "same_bytes": {
+    "metrics.csv": true,
+    "strata.csv": true,
+    "partitions.csv": true
+  },
+  "audit": {
+    "cycles": 2205,
+    "stable": 1449,
+    "transient": 756,
+    "stable_leakage_counts": {
+      "0": 489,
+      "1": 480,
+      "2": 480
+    },
+    "missing_features": 0,
+    "exact_duplicate_feature_cycles": 0,
+    "feature_shape": [
+      2205,
+      4,
+      12
+    ],
+    "partition_counts": {
+      "test_leak": 960,
+      "excluded": 756,
+      "train": 293,
+      "cal": 98,
+      "test_normal": 98
+    }
+  }
+}

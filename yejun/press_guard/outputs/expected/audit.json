@@ -16,11 +16,12 @@
     "blas": null,
     "protocol_version": "v1"
   },
+  "run_fingerprint": "6c85c2bbf1ea394eb39859a3e3a711a98301951ef7406a6d4b6af56f82ec9d2a",
   "checks": [
     {
-      "name": "실행 코드가 manifest와 같음",
+      "name": "실행 코드·선행 산출물이 manifest와 같음",
       "ok": true,
-      "detail": "model.py·predict.py·test_guard.py·train.py 해시 일치"
+      "detail": "필수 코드·학습·분석·원본 해시 일치"
     },
     {
       "name": "저장 모델이 manifest와 같음",
@@ -89,5 +90,5 @@
     }
   ],
   "all_ok": true,
-  "elapsed_s": 127.3
+  "elapsed_s": 127.0
 }

@@ -14,6 +14,7 @@ import pandas as pd
 
 from model import GuardModel, StreamDetector, cases, D, HERE, ALPHAS
 from press.validation import code_sha256
+from contracts import CODE_FILES, execution_errors, run_fingerprint
 
 
 def check(name, ok, detail):
@@ -30,9 +31,10 @@ def main():
     start = time.monotonic()
     manifest = json.loads((args.out / "manifest.json").read_text())
     checks = []
-    now = {name: D.sha256_file(HERE / name) for name in manifest["code_hashes"]}
-    checks.append(check("실행 코드가 manifest와 같음", now == manifest["code_hashes"],
-                        "·".join(sorted(now)) + " 해시 일치" if now == manifest["code_hashes"] else f"변경됨 {sorted(k for k in now if now[k] != manifest['code_hashes'].get(k))}"))
+    now = {name: D.sha256_file(HERE / name) for name in CODE_FILES}
+    errors=execution_errors(manifest,args.out,args.artifacts,require_audit=False)
+    checks.append(check("실행 코드·선행 산출물이 manifest와 같음", now == manifest.get("code_hashes") and not errors,
+                        "필수 코드·학습·분석·원본 해시 일치" if not errors else str(errors)))
     art = {p.name: D.sha256_file(p) for p in args.artifacts.glob("guard_*.json")}
     checks.append(check("저장 모델이 manifest와 같음", art == manifest["artifacts"], f"{sorted(art)} 해시 일치" if art == manifest["artifacts"] else "해시 불일치"))
     models = {sid: GuardModel.load(args.artifacts / f"guard_{sid}.json") for sid in D.SPLITS}
@@ -72,8 +74,10 @@ def main():
         inv = model.predict(shifted)
         checks.append(check(f"{sid} 날짜 이동·라벨 변경에 불변", np.array_equal(inv.alarm.to_numpy(), pa.alarm.to_numpy()) and np.allclose(inv.score.to_numpy(), pa.score.to_numpy(), equal_nan=True), "경보·점수 동일"))
     result = dict(version=manifest["version"], generated_from_manifest=manifest.get("input_hashes"), environment=D.environment(),
-                  checks=checks, all_ok=all(c["ok"] for c in checks), elapsed_s=round(time.monotonic() - start, 1))
+                  run_fingerprint=run_fingerprint(manifest), checks=checks, all_ok=all(c["ok"] for c in checks), elapsed_s=round(time.monotonic() - start, 1))
     D.dump_json(result, args.out / "audit.json")
+    manifest["audit_sha256"]=D.sha256_file(args.out/"audit.json")
+    D.dump_json(manifest,args.out/"manifest.json")
     print(f"{sum(c['ok'] for c in checks)}/{len(checks)} 통과 → {args.out / 'audit.json'}")
     return 0 if result["all_ok"] else 1
 

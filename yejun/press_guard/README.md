@@ -4,7 +4,7 @@
 
 **모델·CSV 순차 추론·로컬 웹 콘솔 구현과 테스트 완료(2026-09-25 Claude).** `serve.py`의 `/api/overview`·`/api/analyze`에 `web/app.js`를 연결했다. 점검 대기열(근거 필터·CSV 내보내기), 선택 구간의 전류·성분 점수 그래프(호버 툴팁·문턱선·재생), 성능 검증·외부 검증 탭이 동작한다. API 계약 테스트 10개와 헤드리스 Chrome 렌더링(DOM 값·스크린샷)으로 확인했다. 사람이 브라우저에서 클릭·업로드·재생을 직접 확인한 기록은 아직 없다. 로컬 기록 재생용이며 설비 제어를 하지 않는다.
 
-기존 `../press_submission/` v1 코드·산출물·동결 기대값은 바꾸지 않았다. 이 폴더는 별도 버전의 후보 구현이다. 대회 보고서 작업은 시작하지 않았다.
+기존 `../press_submission/` v1 코드·산출물·동결 기대값은 바꾸지 않았다. 예준의 위임을 기록한 `21c6cab`에 따라 v2를 최종 모델로 디벨롭한다. 대회 보고서 작업은 시작하지 않았다.
 
 ## 확인한 수치
 
@@ -39,7 +39,7 @@ CSV 필수 열: `TimeStamp, AI0_Vibration, AI1_Vibration, AI2_Current`. 기본 �
 
 ## 최종 모델 패키지로서의 산출물 (2026-09-25 Claude)
 
-예준 위임에 따라 v2를 최종 모델 후보로 디벨롭한다. v1 패키지(`../press_submission/`)는 기준선·기준모델·LSTM 비교의 출처로 그대로 두고, 이 폴더에 v1과 같은 수준의 분석·재현 도구를 갖춘다.
+예준 위임에 따라 v2를 최종 모델로 디벨롭한다. v1 패키지(`../press_submission/`)는 기준선·기준모델·LSTM 비교의 출처로 그대로 두고, 이 폴더에 분석·재현 도구를 갖춘다.
 
 ```bash
 export OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
@@ -47,7 +47,7 @@ export OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
 /opt/anaconda3/bin/python yejun/press_guard/analyze.py            # 통합 비교·오류 조건·불확실성·업무량·그림 (약 5초)
 /opt/anaconda3/bin/python yejun/press_guard/audit.py              # 실행 검증 14개
 /opt/anaconda3/bin/python yejun/press_guard/verify.py             # 동결 기대값 비교 (--freeze 로 동결)
-bash yejun/press_guard/tools/clean_repro.sh                        # 깨끗한 클론 재현 (약 1분)
+PYTHON=/opt/anaconda3/bin/python bash yejun/press_guard/tools/clean_repro.sh # 커밋된 코드·기대값으로 새 클론 재현
 ```
 
 | 산출물 | 내용 |
@@ -61,9 +61,13 @@ bash yejun/press_guard/tools/clean_repro.sh                        # 깨끗한 �
 | `outputs/fig_recall_by_position_v2.png` | 위치별 이상 행 재현율 v1 vs v2 |
 | `outputs/fig_first_alarm_v2.png` | 이상 21구간의 첫 경보 시점 v1 vs v2 |
 | `outputs/fig_missed_example_v2.png` | v2 미탐이 가장 많은 구간의 전류·성분 점수 |
-| `outputs/expected/` | `verify.py --freeze`로 동결한 결과 9개 + manifest/audit/summary |
+| `outputs/expected/` | `verify.py --freeze`로 동결한 결과 CSV 10개 + manifest/audit/summary |
 
-확인된 사실: v2의 미탐 감소는 전부 구간 위치 2~6에서 나온다. 위치 0·1의 미탐(A 23+23행 중 v1·v2 모두 23·23)은 같다. 그 위치에는 센서 크기 성분만 있다. 미탐 행의 가장 강한 성분은 센서 크기(A 72행 중 29행 미탐)이고, 파형·예측 오차가 가장 강한 행은 거의 놓치지 않는다.
+v2의 미탐 감소 55행 중 위치 2~6에서 A 49행·B 51행, 위치 10 이후에서 A 6행·B 4행이 개선됐다. 위치 0·1은 A 각각 13행(합계 26), B 각각 10행(합계 20) 미탐으로 v1·v2가 같다. 그 위치에는 센서 크기 성분만 있다. 개선이 위치 2~6에만 국한된다는 이전 서술과 A 23·23/B 20·20 표기는 오류였다.
+
+주 비교 기준은 α=1%다. B에서 α를 3%로 높이면 v2 정상 알림은 3→5구간(경보 행 3→7), 미탐은 31행으로 같고 F1은 0.970990→0.967687로 낮아진다. α=3%에서의 모델 간 비교도 v1 4/180 대 v2 5/180으로 표기한다. α=5%는 v1 6/180 대 v2 7/180이다.
+
+`contracts.py`는 학습·분석·검수·웹 코드, 필수 예측/집계/그림, 원본 비교표, 개별 검사 14개를 확인한다. 분석은 학습 실행에, audit는 코드·모델·분석 결과에 연결된다. 파일 변경·검사 누락·오래된 audit는 동결 근거로 사용할 수 없다. 기대값도 자체 해시와 검사 계약을 검증한다. 새 클론은 v1 주 모델 예측을 재생성하고, 기존 기준모델·LSTM 비교표는 커밋된 표의 해시를 확인해 재사용한다. LSTM 전체 재학습은 포함하지 않는다.
 
 ## 웹 콘솔·검증 도구
 
@@ -84,4 +88,4 @@ OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python -m pytest 
 
 순차 추론 검수 중 BLAS의 배치 크기에 따른 미세한 사인 잔차 차이가 ECDF 순위를 바꾸는 문제를 발견했다. v2에서는 행별 합산 순서를 고정했고, 시각은 각 행에 동일한 파싱 규칙을 적용했다. 최종 수치는 유지됐다. 원본 센서 이력은 직전 7행만 유지하며 이상 구간 내 반복 경보는 점검 건 하나로 묶는다.
 
-2026-09-25 Claude 후속 검수([기록](../analysis/press_guard_review/README.md)): 깨끗한 클론 재현(지표·모델 바이트 동일, 20초), CLI 청크 1·7·128·전체 동일, API·헤드리스 브라우저 확인, 벤치마크, 코드 리뷰를 수행했다. 남은 것: 사람이 브라우저에서 직접 조작한 확인, 다른 OS, v2를 v1 대신 기본 모델로 채택할지에 대한 예준의 결정. 수집 오류는 판정 보류이며 고장 확률·원인·잔여수명·자동 정지를 구현한 것이 아니다.
+2026-09-25 Claude 후속 검수([기록](../analysis/press_guard_review/README.md))와 Codex 재검수는 [재검수 기록](../analysis/press_guard_review/codex_recheck.md)을 참고한다. Chrome 자동 조작으로 탭·선택·재생·CSV 업로드/내보내기까지 확인했다. 계산 불가 점수를 0으로 그리던 문제와 빈 재생 위치의 호버 오류를 수정했다. 사람이 직접 조작한 확인·다른 OS·다른 날짜/설비 검증은 별개다. 수집 오류는 판정 보류이며 고장 확률·원인·잔여수명·자동 정지를 구현한 것이 아니다.

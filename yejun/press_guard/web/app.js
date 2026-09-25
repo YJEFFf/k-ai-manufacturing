@@ -19,6 +19,7 @@
     time: s => { const m = /(\d{2}:\d{2}:\d{2}(?:\.\d+)?)/.exec(String(s || '')); return m ? m[1].slice(0, 12) : String(s || '—'); },
   };
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const numberOrNaN = v => v == null || v === '' ? NaN : Number(v);
   const setMessage = (text, error = false) => { const m = $('message'); m.textContent = text; m.classList.toggle('error', !!error); };
 
   async function api(path, body) {
@@ -127,7 +128,7 @@
     }).join('');
     queue.querySelectorAll('.queue-item').forEach(el => el.addEventListener('click', () => selectCase(Number(el.dataset.record))));
   }
-  $('filter').addEventListener('change', () => { state.filter = $('filter').value; renderQueue(); const first = filteredCases()[0]; if (first && !filteredCases().some(c => c.record_id === state.selected)) selectCase(first.record_id); });
+  $('filter').addEventListener('change', () => { state.filter = $('filter').value; renderQueue(); const first = filteredCases()[0]; if (!first) renderDetail(null); else if (!filteredCases().some(c => c.record_id === state.selected)) selectCase(first.record_id); });
 
   function selectCase(recordId) {
     state.selected = recordId;
@@ -143,6 +144,8 @@
   function renderDetail(c) {
     const summary = $('detail-summary');
     if (!c) {
+      state.selected = null; stopReplay(); hideTooltip();
+      $('scrubber').disabled = true; $('replay').disabled = true;
       $('detail-title').textContent = state.result ? '경보 구간이 없습니다' : '점검 구간을 선택하세요';
       $('reference').textContent = '';
       summary.innerHTML = '경보가 발생한 시점과 관측 근거를 함께 확인합니다.';
@@ -152,6 +155,7 @@
       return;
     }
     const rows = recordRows(c.record_id);
+    $('scrubber').disabled = false; $('replay').disabled = false;
     $('detail-title').textContent = `구간 ${fmt.int(c.record_id)} · ${fmt.int(rows.length)}관측`;
     $('reference').textContent = c.reference_label == null ? '참조 라벨 없음' : (Number(c.reference_label) === 1 ? '참조 라벨: 이상 기록' : '참조 라벨: 정상 기록');
     const reasons = String(c.evidence).split('+').filter(Boolean).map(e => REASON_LABEL[e] || e).join(' + ');
@@ -182,10 +186,11 @@
     const domain = opts.domainRows || rows;
     const n = domain.length;
     const vals = [];
-    domain.forEach(r => series.forEach(s => { const v = Number(r[s.key]); if (Number.isFinite(v)) vals.push(v); }));
+    domain.forEach(r => series.forEach(s => { const v = numberOrNaN(r[s.key]); if (Number.isFinite(v)) vals.push(v); }));
     if (opts.threshold != null && Number.isFinite(opts.threshold)) vals.push(opts.threshold);
     if (!vals.length) { container.innerHTML = '<div class="empty">표시할 값이 없습니다</div>'; return; }
-    let lo = Math.min(...vals), hi = Math.max(...vals);
+    let lo = Infinity, hi = -Infinity;
+    vals.forEach(v => { lo = Math.min(lo, v); hi = Math.max(hi, v); });
     if (opts.threshold != null) lo = Math.min(lo, 0);
     if (hi === lo) { hi = lo + 1; }
     const pad = (hi - lo) * 0.08; lo -= pad; hi += pad;
@@ -207,23 +212,24 @@
     }
     series.forEach(s => {
       let d = '', pen = false;
-      rows.forEach((r, i) => { const v = Number(r[s.key]); if (!Number.isFinite(v)) { pen = false; return; } d += `${pen ? 'L' : 'M'}${x(i).toFixed(1)},${y(v).toFixed(1)}`; pen = true; });
+      rows.forEach((r, i) => { const v = numberOrNaN(r[s.key]); if (!Number.isFinite(v)) { pen = false; return; } d += `${pen ? 'L' : 'M'}${x(i).toFixed(1)},${y(v).toFixed(1)}`; pen = true; });
       svg += `<path d="${d}" fill="none" stroke="${s.color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"${s.dash ? ` stroke-dasharray="${s.dash}"` : ''}/>`;
-      const last = [...rows].reverse().find(r => Number.isFinite(Number(r[s.key])));
+      const last = [...rows].reverse().find(r => Number.isFinite(numberOrNaN(r[s.key])));
       if (last && series.length > 1) svg += `<text x="${W - m.r}" y="${y(Number(last[s.key])) - 5}" text-anchor="end" style="fill:${s.color}">${esc(s.name)}</text>`;
     });
     if (opts.alarms) {
-      rows.forEach((r, i) => { if (Number(r.alarm) === 1 && Number.isFinite(Number(r[series[0].key]))) svg += `<circle cx="${x(i)}" cy="${y(Number(r[series[0].key]))}" r="4" fill="${ALARM}" stroke="#fff" stroke-width="2"/>`; });
+      rows.forEach((r, i) => { if (Number(r.alarm) === 1 && Number.isFinite(numberOrNaN(r[series[0].key]))) svg += `<circle cx="${x(i)}" cy="${y(Number(r[series[0].key]))}" r="4" fill="${ALARM}" stroke="#fff" stroke-width="2"/>`; });
     }
     if (state.cursor != null && state.cursor < rows.length) {
       const i = state.cursor;
       svg += `<line x1="${x(i)}" x2="${x(i)}" y1="${m.t}" y2="${H - m.b}" stroke="#8a969e" stroke-width="1"/>`;
-      series.forEach(s => { const v = Number(rows[i][s.key]); if (Number.isFinite(v)) svg += `<circle cx="${x(i)}" cy="${y(v)}" r="4.5" fill="${s.color}" stroke="#fff" stroke-width="2"/>`; });
+      series.forEach(s => { const v = numberOrNaN(rows[i][s.key]); if (Number.isFinite(v)) svg += `<circle cx="${x(i)}" cy="${y(v)}" r="4.5" fill="${s.color}" stroke="#fff" stroke-width="2"/>`; });
     }
     svg += '</svg>';
     container.innerHTML = svg;
     const el = container.querySelector('svg');
     const move = ev => {
+      if (!rows.length) return;
       const rect = el.getBoundingClientRect();
       const px = (ev.clientX - rect.left) * (W / rect.width);
       const i = Math.max(0, Math.min(rows.length - 1, Math.round((px - m.l) / (W - m.l - m.r) * (n - 1))));

@@ -16,6 +16,7 @@ import pandas as pd
 
 from model import GuardModel, cases, D, BASE, HERE, ALPHAS
 from press.uncertainty import moving_block_bootstrap
+from contracts import training_errors, training_fingerprint, ANALYSIS_FILES, SOURCES, check_files
 
 ADVANCE = HERE.parent / "analysis" / "press_advance"
 V1 = BASE / "outputs"
@@ -55,6 +56,21 @@ def model_comparison(out):
         lines.append(f"| {r.split_id} | {'**' + r.model + '**' if r.model == FINAL else r.model} | {r.source} | {int(r.abnormal_notified_segments)}/21 | {int(r.normal_notified_segments)}/{int(r.normal_segments)} | {int(r.fn)} | {int(r.fp)} | {r.f1_all_rows:.4f} | {r.abnormal_row_coverage:.2f} | {r.delay_median_s:.1f}/{r.delay_max_s:.1f} |")
     (out / "model_comparison_v2.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     return both
+
+
+def source_hashes():
+    """v1 행별 예측·기준모델 표의 실행 출처와 후보 코드를 확인한다."""
+    v1=json.loads((V1/"manifest.json").read_text())
+    expected=json.loads((V1/"expected"/"manifest.json").read_text())
+    bad=check_files(V1,v1.get("outputs"),("predictions_A.csv","predictions_B.csv"))
+    bad+=check_files(V1,expected.get("outputs"),("model_comparison_all.csv",))
+    if {k:v["sha256"] for k,v in expected["inputs"]["files"].items()}!=D.EXPECTED_SHA256:
+        bad.append("v1 기준모델 표 입력 해시 불일치")
+    adv=json.loads((ADVANCE/"manifest.json").read_text())
+    if adv.get("script_sha256")!=D.sha256_file(ADVANCE/"run_experiment.py"):
+        bad.append("후보 탐색 코드가 실행 당시와 다름")
+    if bad: raise ValueError(f"분석 원본 무결성 오류: {bad}")
+    return {n:D.sha256_file(HERE.parent/n) for n in SOURCES}
 
 
 # ---------- 입력 정밀도 강건성 (v1 3단계 형식) ----------
@@ -257,6 +273,9 @@ def main():
     args = ap.parse_args()
     start = time.monotonic()
     manifest = json.loads((args.out / "manifest.json").read_text())
+    bad=training_errors(manifest,args.out,args.artifacts)
+    if bad: raise SystemExit(f"학습 실행 무결성 오류: {bad}")
+    sources=source_hashes()
     agree, hashes = input_hashes_agree(manifest)
     if not agree:
         raise SystemExit(f"입력 해시 불일치: {hashes}")
@@ -298,6 +317,10 @@ def main():
                           "fig_recall_by_position_v2.png", "fig_first_alarm_v2.png", "fig_missed_example_v2.png"],
                    elapsed_s=round(time.monotonic() - start, 1))
     D.dump_json(summary, args.out / "analysis_summary.json")
+    manifest["analysis"]=dict(training_fingerprint=training_fingerprint(manifest),config={"reps":args.reps},
+                              sources=sources,outputs={n:D.sha256_file(args.out/n) for n in ANALYSIS_FILES})
+    manifest.pop("audit_sha256",None)
+    D.dump_json(manifest,args.out/"manifest.json")
     print(json.dumps(D.to_jsonable(summary), ensure_ascii=False, indent=1))
 
 
