@@ -12,7 +12,7 @@ import pytest
 import verify
 from press.field import persistence_score
 from press.lstm_ae import config_key
-from press.validation import (SPLIT_CHECKS, check_required, file_hash, output_names,
+from press.validation import (SPLIT_CHECKS, artifact_names, check_required, code_sha256, file_hash, output_names,
                               required_check_names, result_names, run_fingerprint)
 
 
@@ -20,7 +20,9 @@ def _stamp(out: Path):
     p = out / "manifest.json"
     man = json.loads(p.read_text())
     steps = int(man["args"]["steps"])
+    art = out.parent / "artifacts"
     man["outputs"] = {n: file_hash(out / n) for n in output_names(steps) | {"checks.json"} if (out / n).is_file()}
+    man["artifacts"] = {n: file_hash(art / n) for n in artifact_names(steps) if (art / n).is_file()}
     p.write_text(json.dumps(man))
 
 
@@ -36,8 +38,11 @@ def _mini_outputs(tmp_path: Path, steps=1) -> Path:
             (out / name).write_text(json.dumps({"structure": {"normal": {"rows": 20000}}, "path": "/x"}))
         else:
             (out / name).write_text("test artifact")
+    art = out.parent / "artifacts"; art.mkdir()
+    for name in artifact_names(steps):
+        (art / name).write_text(json.dumps({"model_id": name, "state": {"u": 1.0}}))
     man = {"inputs": {"verified": True, "files": {"normal": {"sha256": "h"}}},
-           "environment": {"platform": "p"}, "code_sha256": "c" * 64, "args": {"steps": str(steps)}}
+           "environment": {"platform": "p"}, "code_sha256": code_sha256(), "args": {"steps": str(steps)}}
     (out / "manifest.json").write_text(json.dumps(man))
     checks = {k: True for k in required_check_names(steps)}
     checks.update(steps_run=steps, required_checks_ok=True, required_checks_failed=[])
@@ -139,6 +144,25 @@ def test_changed_unfrozen_outputs_fail_integrity(tmp_path, name):
     assert verify.main(["--out", str(out)]) == 1
 
 
+def test_code_changed_after_run_fails_verify_and_freeze(tmp_path):   # 실행 후 코드 변경 → 산출물은 이 코드의 결과가 아니다
+    out = _mini_outputs(tmp_path, steps=5)
+    assert verify.main(["--out", str(out)]) == 0
+    p = out / "manifest.json"; man = json.loads(p.read_text()); man["code_sha256"] = "c" * 64
+    p.write_text(json.dumps(man))
+    assert verify.main(["--out", str(out)]) == 1
+    assert verify.main(["--out", str(out), "--freeze"]) == 2
+
+
+@pytest.mark.parametrize("how", ["tamper", "delete"])
+def test_changed_artifact_fails_integrity(tmp_path, how):        # predict.py가 읽는 artifact도 실행 시 해시와 대조
+    out = _mini_outputs(tmp_path, steps=2)
+    assert verify.main(["--out", str(out)]) == 0
+    art = tmp_path / "artifacts" / "main_A.json"
+    art.write_text("tampered") if how == "tamper" else art.unlink()
+    assert verify.main(["--out", str(out)]) == 1
+    assert verify.main(["--out", str(out), "--freeze"]) == 2
+
+
 def test_partial_run_needs_explicit_comparison_scope(tmp_path):
     full = _mini_outputs(tmp_path / "full", steps=5)
     partial = _mini_outputs(tmp_path / "partial", steps=1)
@@ -188,9 +212,11 @@ def test_clean_repro_propagates_failure_and_declares_scope(tmp_path, run_status)
     shutil.copy2(source, script)
     bin_dir = tmp_path / "bin"; bin_dir.mkdir()
     fake_git = bin_dir / "git"
-    fake_git.write_text('#!/bin/bash\nif [[ "$1" == clone ]]; then mkdir -p "$4/yejun/press_submission"; else echo test-head; fi\n')
+    fake_git.write_text('#!/bin/bash\nif [[ "$1" == clone ]]; then mkdir -p "$4/yejun/press_submission/outputs/expected"; '
+                        'echo committed > "$4/yejun/press_submission/outputs/expected/marker"; else echo test-head; fi\n')
     fake_python = bin_dir / "python3"
-    fake_python.write_text('#!/bin/bash\nif [[ "$1" == run_all.py ]]; then exit ' + str(run_status) + '; fi\nprintf "%s\\n" "$@" > "$VERIFY_CALL"\n')
+    fake_python.write_text('#!/bin/bash\nif [[ "$1" == run_all.py ]]; then exit ' + str(run_status) + '; fi\n'
+                           'printf "%s\\n" "$@" > "$VERIFY_CALL"; cat outputs/expected/marker >> "$VERIFY_CALL"\n')
     fake_git.chmod(0o755); fake_python.chmod(0o755)
     scratch = tmp_path / "scratch"; scratch.mkdir()
     calls = tmp_path / "verify_call"
@@ -200,7 +226,7 @@ def test_clean_repro_propagates_failure_and_declares_scope(tmp_path, run_status)
     if run_status:
         assert not calls.exists()
     else:
-        assert calls.read_text().splitlines()[-2:] == ["--steps", "3"]
+        assert calls.read_text().splitlines()[-3:] == ["--steps", "3", "committed"]   # 클론에 커밋된 기대값을 쓴다
 
 
 def test_persistence_missing_resets_window():                  # R3

@@ -1,37 +1,37 @@
 {
-  "run_id": "e43d96b+60398424a6d8c422",
+  "run_id": "bf246a9+8830e803a7ca72b3",
   "protocol_version": "v1",
   "preprocess_main": "matched",
   "items": {
     "normal_rows": {
       "value": 20000,
       "unit": "rows",
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "normal_segments": {
       "value": 600,
       "unit": "segments",
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "abnormal_rows": {
       "value": 600,
       "unit": "rows",
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "abnormal_segments": {
       "value": 21,
       "unit": "segments",
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "format_rule_max_separability_raw": {
       "value": 1.0,
       "unit": "auroc",
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "format_rule_max_separability_matched": {
       "value": 0.5,
       "unit": "auroc",
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "main_conformal_1pct_abnormal_detected@normal_60_20_20": {
       "value": 21,
@@ -42,7 +42,7 @@
       "alpha": 0.01,
       "unit": "segments",
       "denominator": 21,
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "main_conformal_1pct_normal_notified@normal_60_20_20": {
       "value": 0,
@@ -53,7 +53,7 @@
       "alpha": 0.01,
       "unit": "segments",
       "denominator": 120,
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "main_conformal_1pct_f1_all_rows@normal_60_20_20": {
       "value": 0.9101,
@@ -63,7 +63,7 @@
       "criterion": "conformal",
       "alpha": 0.01,
       "unit": "f1",
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "main_conformal_1pct_binomial_upper95@normal_60_20_20": {
       "value": 0.0247,
@@ -73,7 +73,7 @@
       "alpha": 0.01,
       "unit": "rate",
       "assumption": "독립 정상 구간",
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "main_conformal_1pct_abnormal_detected@normal_50_20_30": {
       "value": 21,
@@ -84,7 +84,7 @@
       "alpha": 0.01,
       "unit": "segments",
       "denominator": 21,
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "main_conformal_1pct_normal_notified@normal_50_20_30": {
       "value": 3,
@@ -95,7 +95,7 @@
       "alpha": 0.01,
       "unit": "segments",
       "denominator": 180,
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "main_conformal_1pct_f1_all_rows@normal_50_20_30": {
       "value": 0.9203,
@@ -105,7 +105,7 @@
       "criterion": "conformal",
       "alpha": 0.01,
       "unit": "f1",
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "main_conformal_1pct_binomial_upper95@normal_50_20_30": {
       "value": 0.0425,
@@ -115,7 +115,7 @@
       "alpha": 0.01,
       "unit": "rate",
       "assumption": "독립 정상 구간",
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "maxz_3_conformal_1pct_abnormal_detected@normal_60_20_20": {
       "value": 18,
@@ -126,7 +126,7 @@
       "alpha": 0.01,
       "unit": "segments",
       "denominator": 21,
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "maxz_3_conformal_1pct_abnormal_detected@normal_50_20_30": {
       "value": 18,
@@ -137,7 +137,7 @@
       "alpha": 0.01,
       "unit": "segments",
       "denominator": 21,
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "sine_w8_conformal_1pct_abnormal_detected@normal_60_20_20": {
       "value": 18,
@@ -148,7 +148,7 @@
       "alpha": 0.01,
       "unit": "segments",
       "denominator": 21,
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "sine_w8_conformal_1pct_abnormal_detected@normal_50_20_30": {
       "value": 18,
@@ -159,7 +159,7 @@
       "alpha": 0.01,
       "unit": "segments",
       "denominator": 21,
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "lstm20_conformal_1pct_abnormal_detected@normal_60_20_20": {
       "value": 12,
@@ -170,7 +170,7 @@
       "alpha": 0.01,
       "unit": "segments",
       "denominator": 21,
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "lstm20_conformal_1pct_abnormal_detected@normal_50_20_30": {
       "value": 10,
@@ -181,7 +181,7 @@
       "alpha": 0.01,
       "unit": "segments",
       "denominator": 21,
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "lstm20_plus_maxz_conformal_1pct_abnormal_detected@normal_60_20_20": {
       "value": 18,
@@ -192,7 +192,7 @@
       "alpha": 0.01,
       "unit": "segments",
       "denominator": 21,
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "lstm20_plus_maxz_conformal_1pct_abnormal_detected@normal_50_20_30": {
       "value": 18,
@@ -203,42 +203,42 @@
       "alpha": 0.01,
       "unit": "segments",
       "denominator": 21,
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "lstm_guidebook_repro_f1": {
       "value": 0.6143,
       "protocol": "guidebook_reproduction_pytorch",
       "unit": "f1",
       "note": "이상 라벨로 문턱 선택; 주 비교표와 다른 프로토콜",
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "abnormal_low_vibration_broken_wave_detected@normal_60_20_20": {
       "value": 3,
       "unit": "segments",
       "denominator": 3,
       "source": "interaction_2x2.csv",
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "abnormal_low_vibration_broken_wave_detected@normal_50_20_30": {
       "value": 3,
       "unit": "segments",
       "denominator": 3,
       "source": "interaction_2x2.csv",
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "alerts_per_recorded_hour_conformal_1pct@normal_60_20_20": {
       "value": 0.0,
       "unit": "alerts/hour",
       "basis": "recorded time = 0.1s × rows",
       "split": "normal_60_20_20",
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     },
     "alerts_per_recorded_hour_conformal_1pct@normal_50_20_30": {
       "value": 17.714,
       "unit": "alerts/hour",
       "basis": "recorded time = 0.1s × rows",
       "split": "normal_50_20_30",
-      "run_id": "e43d96b+60398424a6d8c422"
+      "run_id": "bf246a9+8830e803a7ca72b3"
     }
   }
 }

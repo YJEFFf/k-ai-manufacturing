@@ -51,8 +51,8 @@ def main():
             d = tmp / name
             shutil.copytree(outputs, d)
             edit(d)
-            r = subprocess.run([sys.executable, str(pkg / "verify.py"), "--out", str(d)],
-                               env=env, text=True, capture_output=True)
+            r = subprocess.run([sys.executable, str(pkg / "verify.py"), "--out", str(d), "--artifacts", str(pkg / "artifacts")],
+                               env=env, text=True, capture_output=True)   # artifact 무결성 검사는 원본 artifacts와 대조
             lines = (r.stdout or r.stderr).strip().splitlines()
             return dict(exit_code=r.returncode, summary=lines[-1] if lines else "출력 없음",
                         failures=[line for line in r.stdout.splitlines() if line.startswith("FAIL")])

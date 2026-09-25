@@ -6,6 +6,8 @@ import json
 from pathlib import Path
 
 
+PACKAGE_DIR = Path(__file__).resolve().parents[1]
+ARTIFACTS_BY_STEP = {2: {"main_A.json", "main_B.json"}}
 RESULTS_BY_STEP = {
     1: {"diagnosis.json", "waveform_segments.csv", "preprocess_effect.csv", "splits.csv"},
     2: {"conformal_mc.csv", "model_comparison.csv", "operating_points.csv", "tail_params.csv", "thresholds_main.csv"},
@@ -55,6 +57,22 @@ def output_names(steps: int) -> set[str]:
     return result_names(steps) | _through_step(OTHER_OUTPUTS_BY_STEP, steps)
 
 
+def artifact_names(steps: int) -> set[str]:
+    """predict.py가 읽는 주 모델 artifact. 실행 산출물이므로 manifest에 해시를 기록하고 verify가 대조한다."""
+    return _through_step(ARTIFACTS_BY_STEP, steps)
+
+
+def code_sha256(package_dir: Path = PACKAGE_DIR) -> str:
+    """실행 결과를 낳는 코드의 해시(press/*.py, run_all.py, predict.py, vendor). run_all이 manifest에 기록하고
+    verify가 현재 패키지 코드와 대조한다(실행 후 코드가 바뀐 산출물은 완료 근거가 아니다)."""
+    h = hashlib.sha256()
+    files = sorted(list((package_dir / "press").glob("*.py"))
+                   + [package_dir / "run_all.py", package_dir / "predict.py", package_dir / "vendor" / "press_policy_audit.py"])
+    for f in files:
+        h.update(f.name.encode()); h.update(f.read_bytes().replace(b"\r\n", b"\n"))
+    return h.hexdigest()
+
+
 def required_check_names(steps: int, verify_inputs: bool = True) -> set[str]:
     return _through_step(CHECKS_BY_STEP, steps) | (INPUT_CHECKS if verify_inputs else set())
 
@@ -88,18 +106,18 @@ def file_hash(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def check_files(out: Path, manifest: dict, names: set[str]) -> list[str]:
-    """실행 시 기록한 해시와 실제 파일을 대조한다. 예측값·숫자·checks도 포함한다."""
-    hashes = manifest.get("outputs", {})
+def check_files(out: Path, manifest: dict, names: set[str], key: str = "outputs", label: str = "") -> list[str]:
+    """실행 시 기록한 해시와 실제 파일을 대조한다. 예측값·숫자·checks·artifact(key="artifacts")도 포함한다."""
+    hashes = manifest.get(key, {})
     bad = []
     for name in sorted(names):
         path = out / name
         if not path.is_file():
-            bad.append(f"{name}: 없음")
+            bad.append(f"{label}{name}: 없음")
         elif name not in hashes:
-            bad.append(f"{name}: manifest 해시 없음")
+            bad.append(f"{label}{name}: manifest 해시 없음")
         elif file_hash(path) != hashes[name]:
-            bad.append(f"{name}: 실행 후 내용 변경")
+            bad.append(f"{label}{name}: 실행 후 내용 변경")
     return bad
 
 

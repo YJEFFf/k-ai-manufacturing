@@ -2,6 +2,8 @@
 
 실행 기준은 [PLAN.md](PLAN.md)다. 현재는 **구현·실험·디버깅·검수 단계**다. 2026-09-25 예준 지시로 대회 보고서 초안과 자동 생성 코드를 삭제했다. **예준이 검수 결과에 만족하고 보고서 작성 시작을 명시적으로 지시하기 전에는 보고서 작업을 절대 진행하지 않는다.** 이전 단계 완료 기록은 보고서 착수 허가가 아니다.
 
+2026-09-25 [Claude 재검수 2차](../analysis/press_implementation_review/claude_recheck_2.md): Codex 재검수 주장을 전부 재현하고, 실행 후 코드 변경 검출(`code.matches_manifest`)·artifact 해시 대조·새 클론 안내·`clean_repro.sh` 기대값 출처를 보완했다. 테스트 **49개**, 전체 집계 비교 **39/39** 통과. `outputs/`는 표준 환경 재실행으로 갱신했다(그림·diagnosis는 `e43d96b`와 바이트 동일).
+
 2026-09-25 [Codex 재검수·수정](../analysis/press_implementation_review/codex_recheck.md): Claude 수정 후에도 남은 필수 검사 누락·불완전 동결·파일 변조·재현 실패 전파 문제를 수정했다. 테스트 **46개**, 캐시 사용 전체 집계 비교 **38/38** 통과. 주 모델 A 21/21·0/120 및 B 21/21·3/180 독립 재집계 일치. `outputs/`는 이번 실행으로 갱신했고 `outputs/expected/`는 이전 기대값을 유지한 채 비교했다. 현재 확인 범위에서 미해결 구현 오류는 발견하지 못했다. 보고서 작성은 별도 지시 전까지 보류한다.
 
 ## 실행
@@ -13,13 +15,13 @@ python -m pip install -r requirements.txt
 #   로컬 원본: ../../데이터셋/프레스_유압펌프_예지보전/data/3_소성가공_예지보전/ 에서 복사하거나 --root로 그 폴더를 지정
 OMP_NUM_THREADS=1 python run_all.py --root . --out outputs            # LSTM 캐시가 있으면 약 1분, 없으면 첫 실행 30~40분(CPU 학습); --steps 3 이면 40초
 python -m pytest -q tests                                              # 정확성 검사
-python verify.py --out outputs                                         # outputs/expected 대비 허용오차 검사 (--freeze 로 동결)
+python verify.py --out outputs                                         # run_all 실행 뒤 outputs/expected 대비 허용오차 검사 (--freeze 로 동결)
 python predict.py --model artifacts/main_A.json --input <입력.csv> --out predictions.csv   # 저장 상태만으로 추론
 ```
 
 `--root`는 `data/3_소성가공_예지보전/`을 포함하는 폴더다. 기본은 이 패키지 폴더. `--no-verify`를 주면 해시·행 수 검증을 건너뛰고 다른 자료로도 실행한다(그때 기록구간 수 검사는 생략된다). 이 미검증 실행은 `verify.py`의 정식 비교·기대값 동결 대상에서 제외한다.
 
-`verify.py`는 단계별 필수 파일·검사 항목, 예측 파일을 포함한 실행 산출물 해시, 실행 범위·설정을 확인한다. 부분 실행은 `python verify.py --out outputs --steps 3`처럼 비교 범위를 지정한다. 기본 전체 비교는 동결 기대값과 실행 단계가 같아야 한다. `--freeze`는 필수 검사·파일 검증이 끝난 실행만 저장한다.
+`verify.py`는 단계별 필수 파일·검사 항목, 예측 파일과 `artifacts/main_A·B.json`을 포함한 실행 산출물 해시, 현재 패키지 코드 해시와 manifest의 일치(실행 후 코드 변경 검출), 실행 범위·설정을 확인한다. 행별 예측·기록 파일은 Git에 없으므로 갓 클론한 저장소에서는 `run_all.py`를 먼저 실행해야 통과한다. 부분 실행은 `python verify.py --out outputs --steps 3`처럼 비교 범위를 지정한다. 기본 전체 비교는 동결 기대값과 실행 단계가 같아야 한다. `--freeze`는 필수 검사·파일·코드 검증이 끝난 실행만 저장한다.
 
 ## 입력 검증
 - SHA-256: 정상 `f2d61cb3…b0a7`, 이상 `9fad8c23…ed2e`. 행 수 20,000 / 600.

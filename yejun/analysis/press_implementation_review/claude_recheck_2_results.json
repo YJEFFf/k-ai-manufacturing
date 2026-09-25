@@ -1,0 +1,165 @@
+{
+  "reviewed_package": "/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission",
+  "torch": "2.5.1",
+  "python": "3.12.2 | packaged by conda-forge | (main, Feb 16 2024, 20:54:21) [Clang 16.0.6 ]",
+  "findings": {
+    "main_metrics_independent": {
+      "rows": [
+        {
+          "split": "A",
+          "normal_notified": 0,
+          "abnormal_detected": 21,
+          "fp_rows": 0,
+          "fn_rows": 99,
+          "f1": 0.9100817438692098,
+          "metrics_equal": true,
+          "cli_prediction_path_equal": true
+        },
+        {
+          "split": "B",
+          "normal_notified": 3,
+          "abnormal_detected": 21,
+          "fp_rows": 3,
+          "fn_rows": 86,
+          "f1": 0.9203222918531782,
+          "metrics_equal": true,
+          "cli_prediction_path_equal": true
+        }
+      ],
+      "prefix_and_bad_input_checks": true
+    },
+    "first_alarm_counts_by_alpha": {
+      "issue_reproduced": false,
+      "rows": [
+        {
+          "split": "A",
+          "alpha": 0.01,
+          "reported": 64,
+          "recomputed": 64,
+          "equal": true
+        },
+        {
+          "split": "A",
+          "alpha": 0.03,
+          "reported": 55,
+          "recomputed": 55,
+          "equal": true
+        },
+        {
+          "split": "A",
+          "alpha": 0.05,
+          "reported": 55,
+          "recomputed": 55,
+          "equal": true
+        },
+        {
+          "split": "B",
+          "alpha": 0.01,
+          "reported": 55,
+          "recomputed": 55,
+          "equal": true
+        },
+        {
+          "split": "B",
+          "alpha": 0.03,
+          "reported": 55,
+          "recomputed": 55,
+          "equal": true
+        },
+        {
+          "split": "B",
+          "alpha": 0.05,
+          "reported": 55,
+          "recomputed": 55,
+          "equal": true
+        }
+      ]
+    },
+    "verify_missing_result": {
+      "issue_reproduced": false,
+      "exit_code": 1,
+      "summary": "37/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 362db343a42f vs 동결 3b66c92eba46",
+      "failures": [
+        "FAIL outputs.integrity  (['model_comparison_all.csv: 없음'])",
+        "FAIL model_comparison_all.csv  (필수 결과 파일 없음(실행 또는 기대값))"
+      ]
+    },
+    "verify_all_results_missing": {
+      "issue_reproduced": false,
+      "exit_code": 2,
+      "summary": "검증 실패: [Errno 2] No such file or directory: '/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press-review-probes-nca51k4b/all_results_missing/checks.json'",
+      "failures": []
+    },
+    "verify_corrupted_diagnosis": {
+      "issue_reproduced": false,
+      "exit_code": 1,
+      "summary": "37/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 362db343a42f vs 동결 3b66c92eba46",
+      "failures": [
+        "FAIL outputs.integrity  (['diagnosis.json: 실행 후 내용 변경'])",
+        "FAIL diagnosis.json  (결과 값이 다름(정수·범주는 정확 비교, 실수 허용오차 1e-08))"
+      ]
+    },
+    "verify_cold_runtime_metadata": {
+      "issue_reproduced": false,
+      "exit_code": 0,
+      "summary": "39/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 362db343a42f vs 동결 3b66c92eba46",
+      "failures": []
+    },
+    "verify_inf_to_nan": {
+      "issue_reproduced": false,
+      "comparison": {
+        "file": "finite_a.csv",
+        "ok": false,
+        "reason": "NaN/inf pattern differs in threshold"
+      }
+    },
+    "runner_failed_check_exit": {
+      "issue_reproduced": false,
+      "exit_code": 1,
+      "conformal_mc_within_4se": false
+    },
+    "persistence_missing_reset": {
+      "issue_reproduced": false,
+      "actual": [
+        NaN,
+        NaN,
+        10.0,
+        NaN,
+        NaN,
+        NaN,
+        0.0
+      ],
+      "expected": [
+        NaN,
+        NaN,
+        10.0,
+        NaN,
+        NaN,
+        NaN,
+        0.0
+      ]
+    },
+    "cache_reuses_changed_implementation": {
+      "issue_reproduced": false,
+      "cache_hit_after_code_change": false,
+      "old_scores_reused": false,
+      "code_change_invalidated_cache": true,
+      "old_to_modified_max_score_delta": 10130.38789331913,
+      "forced_retrain_max_score_delta": 0.0,
+      "cache_key": "6f8957843fc4c4f3"
+    },
+    "report_generation_removed": {
+      "issue_reproduced": false,
+      "legacy_generator_exists": false,
+      "report_draft_exists": false,
+      "report_work": "deferred_until_explicit_user_instruction"
+    },
+    "manifest_output_hashes": {
+      "issue_reproduced": false,
+      "mismatches": [],
+      "checks_json_in_manifest": true,
+      "git_commit": "bf246a9",
+      "run_id": "bf246a9+8830e803a7ca72b3"
+    }
+  }
+}

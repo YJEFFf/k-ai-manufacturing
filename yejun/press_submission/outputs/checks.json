@@ -25,7 +25,7 @@
       "artifact": "main_A.json",
       "normal_notified": 0,
       "abnormal_notified": 21,
-      "seconds": 3.3
+      "seconds": 3.4
     },
     "B": {
       "main_model": "combined_w8",
@@ -37,7 +37,7 @@
       "artifact": "main_B.json",
       "normal_notified": 3,
       "abnormal_notified": 21,
-      "seconds": 2.6
+      "seconds": 2.8
     }
   },
   "step2_all_ok": true,

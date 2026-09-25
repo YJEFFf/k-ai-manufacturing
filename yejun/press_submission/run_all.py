@@ -29,19 +29,12 @@ from press.artifact import Artifact  # noqa: E402
 from press.calibrate import ALPHAS, conformal_p, mc_check_conformal, segment_max, thresholds_for  # noqa: E402
 from press.evaluate import comparison_markdown, evaluate_models  # noqa: E402
 from press.scores import MAIN_W, ExpTail, MainModel, Scorer  # noqa: E402
-from press.validation import check_required, output_names, run_fingerprint  # noqa: E402
+from press.validation import artifact_names, check_required, code_sha256, output_names, run_fingerprint  # noqa: E402
 
 EXTERNAL_CHECKS = ["tools/clean_repro.sh --with-lstm (캐시 사용 깨끗한 클론 재현)", "tools/clean_repro.sh --retrain-lstm (캐시 없는 재학습 재현)",
                    "verify.py --out outputs (동결 기대값 비교)"]
 
 
-def code_sha256() -> str:
-    """실행 결과를 낳는 코드의 해시(press/*.py, run_all.py, predict.py, vendor). run_id에 커밋과 함께 붙인다."""
-    import hashlib
-    h = hashlib.sha256()
-    for p in sorted(list((D.PACKAGE_DIR / "press").glob("*.py")) + [D.PACKAGE_DIR / "run_all.py", D.PACKAGE_DIR / "predict.py", D.PACKAGE_DIR / "vendor" / "press_policy_audit.py"]):
-        h.update(p.name.encode()); h.update(p.read_bytes().replace(b"\r\n", b"\n"))
-    return h.hexdigest()
 MAIN_ALPHA = 0.01
 
 
@@ -324,13 +317,15 @@ def main(argv=None):
         checks["step5_numbers"] = numbers.run(out, pre_manifest)
     failed = check_required(checks, args.steps, verify_inputs=not args.no_verify, summary=False)
     failed += [f"output:{name}" for name in sorted(output_names(args.steps)) if not (out / name).is_file()]
+    failed += [f"artifact:{name}" for name in sorted(artifact_names(args.steps)) if not (art_dir / name).is_file()]
     checks["required_checks_ok"] = not failed
     checks["required_checks_failed"] = failed
     D.dump_json(checks, out / "checks.json")   # manifest보다 먼저 써서 해시에 포함한다
     manifest = dict(protocol_version=D.PROTOCOL_VERSION, git_commit=git_commit(), code_sha256=code_hash, run_id=run_id, execution_sha256=identity, torch=torch.__version__,
                     args={k: str(v) for k, v in vars(args).items()}, environment=env, omp_num_threads=os.environ.get("OMP_NUM_THREADS"),
                     inputs=ctx["load_report"], timings_s=timings,
-                    outputs={name: D.sha256_file(out / name) for name in sorted(output_names(args.steps) | {"checks.json"}) if (out / name).is_file()})
+                    outputs={name: D.sha256_file(out / name) for name in sorted(output_names(args.steps) | {"checks.json"}) if (out / name).is_file()},
+                    artifacts={name: D.sha256_file(art_dir / name) for name in sorted(artifact_names(args.steps)) if (art_dir / name).is_file()})
     D.dump_json(manifest, out / "manifest.json")
     print(json.dumps(D.to_jsonable(checks), ensure_ascii=False, indent=2))
     if failed:

@@ -1,9 +1,9 @@
 {
   "protocol_version": "v1",
-  "git_commit": "e43d96b",
-  "code_sha256": "2006b7b9ebe80a539bdc727fa4de90506c061e145d843f2bcf642ea6ad171350",
-  "run_id": "e43d96b+60398424a6d8c422",
-  "execution_sha256": "60398424a6d8c4229bd37f051e2c5d99f4c7abc2b140688c57b103a40a3fa2fd",
+  "git_commit": "bf246a9",
+  "code_sha256": "362db343a42f5224e977bc81f43a7bbd5549b3d1a2d1e720b633b729404f58d7",
+  "run_id": "bf246a9+8830e803a7ca72b3",
+  "execution_sha256": "8830e803a7ca72b3d85815358288baedcb447ee018d9123cb4fd389c6666b216",
   "torch": "2.5.1",
   "args": {
     "root": ".",
@@ -58,28 +58,28 @@
     }
   },
   "timings_s": {
-    "step1_s": 1.51,
-    "step2_s": 5.94,
-    "step3_s": 30.61,
-    "step4_s": 2.72,
-    "step5_s": 2.0,
-    "total_s": 42.83
+    "step1_s": 1.67,
+    "step2_s": 6.26,
+    "step3_s": 32.71,
+    "step4_s": 2.87,
+    "step5_s": 2.19,
+    "total_s": 45.75
   },
   "outputs": {
     "ablation.csv": "d523cb63cde49b29fe25a20500b5a80e33071b411d6477740171d71bb7411906",
     "alarm_components.csv": "8c2624778b54b2c7dcb4e3e25e17b50fcc9798df8c45f3658cf0682682d9043c",
-    "checks.json": "57e1efa276364afbac0e6cee37f51b7f13b8f20647f098446c9886c6335a182c",
+    "checks.json": "d9e54029697c62f697ad03ef5698a435f96b612414933a954b6fe0e36429b664",
     "conformal_mc.csv": "9ad41b2c95e1df78dc00b6f6b5a6c9c2017b49aaddbf577352692c5118d18183",
-    "diagnosis.json": "e4ef36deb1c37a01e45045a7853a00ce6cfbd11e2f0ac6ce6a8084e0a4cbe3f8",
+    "diagnosis.json": "f5cadd1ee7f854de37e0cfc05aca1f4f4b362ac3ada9a9b9e6a96d833d5b3e8d",
     "diagnosis.md": "a5f675ae7a993a792f2aef0de57feb8536cdb2fd7ea177c061ffbf165db29e0d",
     "error_conditions_fn.csv": "e2b5e291c4613ec65c6addf465065aeff637237a53ea535a989becb00d233ae5",
     "error_conditions_fp.csv": "8948a749e4ec8c2b841db0122669595f19fb353707b6bd7fffcc0196e0a3770c",
     "field_decision_table.md": "d97ae3433953472d59ed5469c6cf76558e040752881e174de3d2297bf8691b21",
-    "fig_current_waveform.png": "363f5fd7e1a6bb6ad0d10327436427a22ddfaf47b7af2635fbe823eaec9371b6",
-    "fig_error_examples.png": "2525d4500896b2e74deb479576b15918ddc0a11bcd9b6b5e3677d9cdfd41ddbd",
-    "fig_recall_by_position.png": "6954bdca667cc784a36ab8a5a8388a4c9b6f82f95f0c8393acb9e69e8e978ad4",
-    "fig_segment_length.png": "4b099d38537ccdbaea8bf0c52d747e0feca65494ccda726daf74a3f56dd15928",
-    "fig_vibration_vs_waveform.png": "afccdf58e8c367c090890936a3e94936739388d6ac60e431ba1cfddf96894cab",
+    "fig_current_waveform.png": "881450e3419bcaf582a403fe45da1ba87862517c8517dc29da1a65e405752579",
+    "fig_error_examples.png": "d391c7b3c2b5d35c0d6977e820bc9d3e265986f3fd821f60e62707fe38871d3e",
+    "fig_recall_by_position.png": "988341eac536ddf5c6b4800235e5a8db0609b40847a34f1c061e37efd7f0071a",
+    "fig_segment_length.png": "4cec977dbfbad67e97a1f7aedf8179ac2de5a0ce3b49527e6aea9e1c99f0f02a",
+    "fig_vibration_vs_waveform.png": "d116ad04b5153c69cc8a1b9a3f6907c874007c29f6eb8d4a740553c1c4246890",
     "influence.csv": "86938db821b384299ac29f74e808455d197eb8bae5bc641a044a62c810c9e550",
     "interaction_2x2.csv": "ec1d0682ccdad3d13c37764ac111dab817c2387c19f537d63efbbff722c1190e",
     "label_bypass.csv": "0dc378785b250b2d213cd0f17b5bd2543c7cea2afff29e1434d4d418c5249144",
@@ -96,7 +96,7 @@
     "model_comparison_all.md": "d3dc7bd867bcd04daabf9ce319a3e7665ec763caaf15058b4034e3bf0727c798",
     "model_comparison_cutoff.md": "af355eef23fc6bed1af0fa6f0906480940337400cf69f5f9b25666f1a34d568f",
     "model_comparison_lstm.csv": "d0d18c5c8bb8ad06caffa28426a177325ee8a1f182e958125ba850753c4392f8",
-    "numbers.json": "b5e136d45d1610903d011d9ebf2086d462c8db764f5ea621fd24072c6af4f5b9",
+    "numbers.json": "f0b8b1696ae66861d3d3948b75d213f9de38b2e0d308cfec48b69d03efab6bb0",
     "operating_points.csv": "fb51ae4056db6f0f7a48fc43134f242ad95167e2734d7065882dded7f459b25f",
     "persistence.csv": "9bc1ef956e2af3d81d191bc442b0f94a99c00eb0060884823aa4bea44edade1f",
     "predictions_A.csv": "0656fc309cd75e0fa083cd74206b436871e19e7c8a6d9e4fd8d9256a7e7e8b4b",
@@ -114,5 +114,9 @@
     "uncertainty.csv": "65dd946e37b6db7ae27ed100db12a5984a08b06c61ae88c5f93621ec683ba37d",
     "waveform_segments.csv": "9b36afcc7ff9a017b623332d0d561228078a894db11eeabbbe0b1379cbabcee1",
     "workload.csv": "e6d8b13dab52e7e8a6e6dd01db3298f6895eaa8c1933871897d2c4a19be2e61a"
+  },
+  "artifacts": {
+    "main_A.json": "10e0052305ef88b828f2409f73d5f32df3ac0b6cf15de9d4b18c6d33fb0b4d05",
+    "main_B.json": "e143f9e9305a9ecfc8d9834c18114621d448733c689c5906978b9dff5ad613a3"
   }
 }

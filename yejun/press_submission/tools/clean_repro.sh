@@ -19,7 +19,8 @@ DEST="$TMP/clone/yejun/press_submission"
 mkdir -p "$DEST/data" "$DEST/artifacts"
 cp -R "$PKG/data/." "$DEST/data/"
 [[ $WITH_LSTM -eq 1 && -d "$PKG/artifacts/lstm_cache" ]] && cp -R "$PKG/artifacts/lstm_cache" "$DEST/artifacts/"
-cp -R "$PKG/outputs/expected" "$DEST/outputs_expected_from_source"
+[[ -d "$DEST/outputs/expected" ]] || { echo "클론에 outputs/expected가 없다. 동결 기대값을 먼저 커밋한다." >&2; exit 2; }
+mv "$DEST/outputs/expected" "$DEST/outputs_expected_from_clone"   # 커밋된 기대값만 쓴다(작업 트리의 미커밋 변경 제외)
 cd "$DEST"
 rm -rf outputs && mkdir -p outputs   # 커밋된 산출물을 지우고 처음부터 다시 만든다
 echo "== clone: $(git rev-parse --short HEAD) → run_all --steps $STEPS =="
@@ -27,6 +28,6 @@ RUN_ARGS=(--root . --out outputs --steps "$STEPS")
 [[ $RETRAIN -eq 1 ]] && RUN_ARGS+=(--retrain-lstm)
 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 python3 run_all.py "${RUN_ARGS[@]}" > "$TMP/run.log" 2>&1 || { RUN_STATUS=$?; echo "run_all 실패(종료 코드 $RUN_STATUS), 로그: $TMP/run.log" >&2; tail -5 "$TMP/run.log"; exit "$RUN_STATUS"; }
 mkdir -p outputs/expected
-cp -R "$DEST/outputs_expected_from_source/." outputs/expected/
+cp -R "$DEST/outputs_expected_from_clone/." outputs/expected/
 PYTHONDONTWRITEBYTECODE=1 python3 verify.py --out outputs --steps "$STEPS" | tail -n 45
 echo "임시 폴더: $TMP (검사 후 삭제 가능)"

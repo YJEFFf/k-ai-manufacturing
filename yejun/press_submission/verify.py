@@ -8,7 +8,10 @@
 - 기본은 동결된 실행과 같은 단계까지 검사한다. --steps N은 명시적인 부분 검사이며 실행 범위 안에서만 허용한다.
 - 수치 열은 행의 `model` 값으로 허용오차를 고른다: 기본 1e-8, isolation_forest·mlp_ae_w5 1e-6, lstm 계열 1e-3. NaN·±inf는 패턴이 정확히 같아야 한다.
 - 실행 메타데이터(cached·train_seconds·cache_key·epochs_run·경로)는 결과 수치와 분리해 비교하지 않는다.
-- checks.json의 필수 검사(REQUIRED_CHECKS)가 true가 아니면 실패한다.
+- checks.json의 단계별 필수 검사(press/validation.py)가 true가 아니면 실패한다.
+- 현재 패키지 코드 해시가 manifest의 code_sha256과 다르면(실행 후 코드 변경) 실패하고 동결도 거부한다.
+- 주 모델 artifact(artifacts/main_A.json·main_B.json)도 실행 시 해시와 대조한다. 행별 예측·기록 파일은 Git에 없으므로
+  갓 클론한 저장소에서는 run_all.py를 먼저 실행해야 통과한다.
 """
 from __future__ import annotations
 
@@ -23,14 +26,14 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from press.validation import (check_files, check_required, declared_steps,
-                              output_names, required_check_names, result_names)
+from press.validation import (artifact_names, check_files, check_required, code_sha256, declared_steps,
+                              output_names, result_names)
 
 TOL_DEFAULT, TOL_BY_MODEL = 1e-8, {"isolation_forest": 1e-6, "mlp_ae_w5": 1e-6}
 TOL_LSTM = 1e-3
 META_COLUMNS = {"train_seconds", "cached", "cache_key", "epochs_run", "max_epochs", "patience"}
 META_KEYS = {"cached", "train_seconds", "cache_key", "epochs_run", "max_epochs", "patience", "path", "data_dir", "notes"}
-REQUIRED_CHECKS = sorted(required_check_names(5) | {"required_checks_ok"})
+GIT_EXCLUDED = ("predictions_", "records_")   # yejun/.gitignore: 행별 파일은 실행해야 생긴다
 
 
 def tol_for(model, fname: str) -> float:
@@ -109,6 +112,7 @@ def main(argv=None):
     ap.add_argument("--out", type=Path, default=Path(__file__).resolve().parent / "outputs")
     ap.add_argument("--freeze", action="store_true")
     ap.add_argument("--steps", type=int, choices=range(1, 6), help="명시적인 부분 비교 범위. 동결은 실행한 모든 단계를 대상으로 한다")
+    ap.add_argument("--artifacts", type=Path, default=None, help="주 모델 artifact 폴더. 기본: <out>/../artifacts (run_all과 같음)")
     args = ap.parse_args(argv)
     try:
         return verify_outputs(args)
@@ -126,11 +130,17 @@ def verify_outputs(args):
     if man_now.get("inputs", {}).get("verified") is not True:
         bad_required.append("inputs.verified (--no-verify 실행은 비교·동결 불가)")
     bad_files = check_files(args.out, man_now, output_names(steps) | {"checks.json"})
+    art_dir = args.artifacts or args.out.parent / "artifacts"
+    bad_files += check_files(art_dir, man_now, artifact_names(steps), key="artifacts", label="artifacts/")
+    if any(b.endswith("없음") and b.startswith(GIT_EXCLUDED) for b in bad_files):
+        print("행별 예측·기록 파일이 없다. 이 파일은 Git에 없으므로 run_all.py를 먼저 실행한 뒤 verify한다.", file=sys.stderr)
+    code_now = code_sha256()
+    bad_code = [] if code_now == man_now.get("code_sha256") else [f"현재 코드 {code_now[:12]} ≠ 실행 코드 {str(man_now.get('code_sha256'))[:12]} (실행 후 코드 변경)"]
     if args.freeze:
         if args.steps is not None:
             raise ValueError("--freeze와 --steps는 함께 사용할 수 없다")
-        if bad_required or bad_files:
-            print(f"동결 거부: 필수 검사 {bad_required}; 산출물 {bad_files}", file=sys.stderr)
+        if bad_required or bad_files or bad_code:
+            print(f"동결 거부: 필수 검사 {bad_required}; 산출물 {bad_files}; 코드 {bad_code}", file=sys.stderr)
             return 2
         # 먼저 복사를 완료한다. 검사 실패나 복사 실패로 기존 기대값을 지우지 않는다.
         with tempfile.TemporaryDirectory(prefix=".freeze-", dir=args.out) as scratch:
@@ -157,6 +167,7 @@ def verify_outputs(args):
     res = [dict(file="inputs.sha256", ok=hashes(man_now) == hashes(man_exp))]
     res.append(dict(file="checks.required", ok=not bad_required, reason=f"미통과 {bad_required}" if bad_required else None))
     res.append(dict(file="outputs.integrity", ok=not bad_files, reason=str(bad_files)))
+    res.append(dict(file="code.matches_manifest", ok=not bad_code, reason=str(bad_code)))
     res.append(dict(file="expected.integrity", ok=not exp_bad, reason=str(exp_bad)))
     res.append(dict(file="execution.scope", ok=scope_ok, reason=f"실행 {steps}, 기대값 {exp_steps}, 요청 {scope}"))
     config_keys = {"preprocess"} | ({"no_baselines"} if scope >= 2 else set())
