@@ -37,6 +37,33 @@ OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/pres
 
 CSV 필수 열: `TimeStamp, AI0_Vibration, AI1_Vibration, AI2_Current`. 기본 원본 위치는 v1 패키지와 같으며 `train.py --root`로 바꿀 수 있다. `predict.py`는 학습하지 않는다. 신규 설비의 정상 기준을 무검증으로 기존 모델에 적용하지 않는다.
 
+## 최종 모델 패키지로서의 산출물 (2026-09-25 Claude)
+
+예준 위임에 따라 v2를 최종 모델 후보로 디벨롭한다. v1 패키지(`../press_submission/`)는 기준선·기준모델·LSTM 비교의 출처로 그대로 두고, 이 폴더에 v1과 같은 수준의 분석·재현 도구를 갖춘다.
+
+```bash
+export OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
+/opt/anaconda3/bin/python yejun/press_guard/train.py --rolling    # 학습·보정·저장·평가 (약 20초)
+/opt/anaconda3/bin/python yejun/press_guard/analyze.py            # 통합 비교·오류 조건·불확실성·업무량·그림 (약 5초)
+/opt/anaconda3/bin/python yejun/press_guard/audit.py              # 실행 검증 14개
+/opt/anaconda3/bin/python yejun/press_guard/verify.py             # 동결 기대값 비교 (--freeze 로 동결)
+bash yejun/press_guard/tools/clean_repro.sh                        # 깨끗한 클론 재현 (약 1분)
+```
+
+| 산출물 | 내용 |
+|---|---|
+| `outputs/model_comparison_v2.csv` (+`.md`) | v1 패키지의 기준모델·결합·LSTM 결과와 v2 후보 고정 비교를 같은 입력(해시 확인)·분할·보정 구간에서 합친 표. `is_final_model`=early6_ar2 |
+| `outputs/error_conditions_v2.csv` | v1·v2의 미탐(이상)·오경보(정상) 조건: 구간 내 위치, 구간 길이, 진동 산포·전류 진폭 4분위, 가장 강한 성분. 분모 포함 |
+| `outputs/records_first_alarm_v2.csv` | 이상 21구간별 v1·v2 첫 경보 위치·미탐 행·첫 경보 근거 |
+| `outputs/uncertainty_v2.csv` | 이동 블록 부트스트랩: 정상 알림 구간 수(블록 5·10·20), 이상 미탐 행·탐지 구간(블록 3·5). 관측값이 주 결과 |
+| `outputs/workload_v2.csv` | α별 정상 첫 알림 수와 기록시간·경과시간 기준 알림률, 가동시간 시나리오 |
+| `outputs/fig_recall_by_position_v2.png` | 위치별 이상 행 재현율 v1 vs v2 |
+| `outputs/fig_first_alarm_v2.png` | 이상 21구간의 첫 경보 시점 v1 vs v2 |
+| `outputs/fig_missed_example_v2.png` | v2 미탐이 가장 많은 구간의 전류·성분 점수 |
+| `outputs/expected/` | `verify.py --freeze`로 동결한 결과 9개 + manifest/audit/summary |
+
+확인된 사실: v2의 미탐 감소는 전부 구간 위치 2~6에서 나온다. 위치 0·1의 미탐(A 23+23행 중 v1·v2 모두 23·23)은 같다. 그 위치에는 센서 크기 성분만 있다. 미탐 행의 가장 강한 성분은 센서 크기(A 72행 중 29행 미탐)이고, 파형·예측 오차가 가장 강한 행은 거의 놓치지 않는다.
+
 ## 웹 콘솔·검증 도구
 
 ```bash

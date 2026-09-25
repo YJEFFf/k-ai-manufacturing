@@ -1,0 +1,55 @@
+{
+  "input_hashes": {
+    "normal": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+    "abnormal": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e"
+  },
+  "comparison_rows": 228,
+  "models": [
+    "5nn_distance",
+    "ar2_only",
+    "combined_w8",
+    "early6_ar2",
+    "early_w6_to_w8",
+    "isolation_forest",
+    "lstm20",
+    "lstm20_plus_maxz",
+    "maxz_3",
+    "maxz_ar2",
+    "maxz_vib2",
+    "mlp_ae_w5",
+    "sine_w8",
+    "trailing_rms5"
+  ],
+  "fn_rows_at_position_0_1": {
+    "v1": {
+      "A": 26,
+      "B": 20
+    },
+    "v2": {
+      "A": 26,
+      "B": 20
+    }
+  },
+  "fn_rows_total": {
+    "v1": {
+      "A": 99,
+      "B": 86
+    },
+    "v2": {
+      "A": 44,
+      "B": 31
+    }
+  },
+  "files": [
+    "model_comparison_v2.csv",
+    "model_comparison_v2.md",
+    "error_conditions_v2.csv",
+    "records_first_alarm_v2.csv",
+    "uncertainty_v2.csv",
+    "workload_v2.csv",
+    "fig_recall_by_position_v2.png",
+    "fig_first_alarm_v2.png",
+    "fig_missed_example_v2.png"
+  ],
+  "elapsed_s": 17.0
+}
