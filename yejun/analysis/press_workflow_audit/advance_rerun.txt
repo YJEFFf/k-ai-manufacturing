@@ -1,0 +1,13 @@
+A AR(2) [ 0.10017176  1.83308321 -0.97486193]
+B AR(2) [ 0.09803183  1.83249624 -0.97423012]
+split_id          model  normal_notified_segments  abnormal_notified_segments  fn  fp  f1_all_rows  abnormal_row_coverage  delay_median_s  delay_max_s
+       A    baseline_w8                         0                          21  99   0     0.910082                   1.00             0.1          0.7
+       A early_w6_to_w8                         0                          21  86   0     0.922801                   1.00             0.1          0.7
+       A       ar2_only                         0                          20 173   0     0.831548                   0.93             0.2          0.5
+       A       maxz_ar2                         0                          21 133   0     0.875351                   1.00             0.1          0.5
+       A     early6_ar2                         0                          21  44   0     0.961938                   1.00             0.1          0.5
+       B    baseline_w8                         3                          21  86   3     0.920322                   1.00             0.0          0.7
+       B early_w6_to_w8                         3                          21  71   3     0.934629                   1.00             0.0          0.7
+       B       ar2_only                         1                          20 165   1     0.839768                   0.93             0.2          0.5
+       B       maxz_ar2                         3                          21 112   3     0.894592                   1.00             0.0          0.5
+       B     early6_ar2                         3                          21  31   3     0.970990                   1.00             0.0          0.5

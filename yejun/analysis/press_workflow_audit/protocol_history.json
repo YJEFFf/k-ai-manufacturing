@@ -1,0 +1,32 @@
+[
+  {
+    "directory": "press_advance",
+    "protocol_first_commits": [
+      "bb0bc94"
+    ],
+    "metrics_first_commits": [
+      "bb0bc94"
+    ],
+    "separate_prior_protocol_commit": false
+  },
+  {
+    "directory": "press_early",
+    "protocol_first_commits": [
+      "0afea45"
+    ],
+    "metrics_first_commits": [
+      "0afea45"
+    ],
+    "separate_prior_protocol_commit": false
+  },
+  {
+    "directory": "press_external",
+    "protocol_first_commits": [
+      "bb0bc94"
+    ],
+    "metrics_first_commits": [
+      "bb0bc94"
+    ],
+    "separate_prior_protocol_commit": false
+  }
+]

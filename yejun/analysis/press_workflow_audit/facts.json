@@ -1,0 +1,172 @@
+{
+  "head": "0afea457cd3a6faf99e23b38a552a9430f338c39",
+  "script_sha256": "df8aa8705031b350f5e87307d6dcf06ff431bf920a01ef7498446806c496c062",
+  "environment": {
+    "python": "3.12.2",
+    "platform": "macOS-26.3.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.8.0",
+    "scipy": "1.13.1",
+    "matplotlib": "3.9.2",
+    "blas": null,
+    "protocol_version": "v1"
+  },
+  "data": {
+    "normal": {
+      "rows": 20000,
+      "segments": 600,
+      "sha256": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+      "dates": [
+        "2022-07-12"
+      ],
+      "labels": {
+        "0": 20000
+      },
+      "recorded_seconds": 2000.0,
+      "date_label_counts": {
+        "0": {
+          "2022-07-12": 20000
+        }
+      }
+    },
+    "abnormal": {
+      "rows": 600,
+      "segments": 21,
+      "sha256": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+      "dates": [
+        "2022-07-17"
+      ],
+      "labels": {
+        "1": 600
+      },
+      "recorded_seconds": 60.0,
+      "date_label_counts": {
+        "1": {
+          "2022-07-17": 600
+        }
+      }
+    }
+  },
+  "splits": {
+    "A": {
+      "train": {
+        "rows": 11963,
+        "segments": 360
+      },
+      "cal": {
+        "rows": 3947,
+        "segments": 120
+      },
+      "test": {
+        "rows": 4090,
+        "segments": 120
+      }
+    },
+    "B": {
+      "train": {
+        "rows": 10133,
+        "segments": 300
+      },
+      "cal": {
+        "rows": 3770,
+        "segments": 120
+      },
+      "test": {
+        "rows": 6097,
+        "segments": 180
+      }
+    }
+  },
+  "fits": {
+    "A": {
+      "mean_max_difference": 0.0,
+      "scale_max_difference": 0.0,
+      "ar2_max_difference": 0.0,
+      "calibration_max_difference": 0.0,
+      "n_cal": 120,
+      "min_p": 0.008264462809917356
+    },
+    "B": {
+      "mean_max_difference": 0.0,
+      "scale_max_difference": 0.0,
+      "ar2_max_difference": 0.0,
+      "calibration_max_difference": 0.0,
+      "n_cal": 120,
+      "min_p": 0.008264462809917356
+    }
+  },
+  "checks": {
+    "raw_hashes_and_independent_boundaries": true,
+    "normal_only_fit_state_matches": true,
+    "all_six_v2_operating_points_recounted": true,
+    "early_primary_twelve_rows_recounted": true,
+    "v2_condition_row_denominators": true,
+    "external_eighteen_operating_points_and_disjoint_partitions": true
+  },
+  "overlap": {
+    "normal_test_A_and_B_segments": 120,
+    "abnormal_A_and_B_segments": 21,
+    "note": "같은 기록의 재사용. 독립 반복 두 건으로 합산 불가"
+  },
+  "candidate_tables": {
+    "press_improvement": {
+      "rows": 288,
+      "criteria": {
+        "conformal": 144,
+        "cutoff": 144
+      },
+      "models": 8
+    },
+    "press_advance": {
+      "rows": 180,
+      "criteria": {
+        "conformal": 90,
+        "cutoff": 90
+      },
+      "models": 5
+    },
+    "press_early": {
+      "rows": 216,
+      "criteria": {
+        "conformal": 108,
+        "cutoff": 108
+      },
+      "models": 6
+    }
+  },
+  "v2_error_schema": {
+    "columns": [
+      "split_id",
+      "model",
+      "alpha",
+      "subset",
+      "error",
+      "condition",
+      "value",
+      "rows",
+      "error_rows",
+      "error_rate"
+    ],
+    "conditions": [
+      "pos_bin",
+      "len_bin",
+      "vib_quartile",
+      "amp_quartile",
+      "strongest_component"
+    ]
+  },
+  "notification_gate_probe": {
+    "current_all_records_have_one": false,
+    "one_if_and_only_if_alarm": true,
+    "meaning": "미탐 구간의 알림0은 정상 동작인데 현재 audit 식은 실패한다. 현재 21/21 수치에는 영향 없음"
+  },
+  "external": {
+    "sha256": "24128aad2ee45eea7e6b63ebbd9992cdf25d0483a2cebefbfc13bc69079af1f2",
+    "cycles": 2205,
+    "stable": 1449,
+    "recalculated_operating_points": 18,
+    "note": "대회 GuardModel과 별개인 외부 모델 3종"
+  }
+}

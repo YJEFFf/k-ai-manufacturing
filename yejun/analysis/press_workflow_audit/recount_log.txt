@@ -1,0 +1,65 @@
+PS1 (2205, 6000)
+EPS1 (2205, 6000)
+FS1 (2205, 600)
+VS1 (2205, 60)
+{
+  "checks": {
+    "raw_hashes_and_independent_boundaries": true,
+    "normal_only_fit_state_matches": true,
+    "all_six_v2_operating_points_recounted": true,
+    "early_primary_twelve_rows_recounted": true,
+    "v2_condition_row_denominators": true,
+    "external_eighteen_operating_points_and_disjoint_partitions": true
+  },
+  "fits": {
+    "A": {
+      "mean_max_difference": 0.0,
+      "scale_max_difference": 0.0,
+      "ar2_max_difference": 0.0,
+      "calibration_max_difference": 0.0,
+      "n_cal": 120,
+      "min_p": 0.008264462809917356
+    },
+    "B": {
+      "mean_max_difference": 0.0,
+      "scale_max_difference": 0.0,
+      "ar2_max_difference": 0.0,
+      "calibration_max_difference": 0.0,
+      "n_cal": 120,
+      "min_p": 0.008264462809917356
+    }
+  },
+  "tables": {
+    "press_improvement": {
+      "rows": 288,
+      "criteria": {
+        "conformal": 144,
+        "cutoff": 144
+      },
+      "models": 8
+    },
+    "press_advance": {
+      "rows": 180,
+      "criteria": {
+        "conformal": 90,
+        "cutoff": 90
+      },
+      "models": 5
+    },
+    "press_early": {
+      "rows": 216,
+      "criteria": {
+        "conformal": 108,
+        "cutoff": 108
+      },
+      "models": 6
+    }
+  },
+  "external": {
+    "sha256": "24128aad2ee45eea7e6b63ebbd9992cdf25d0483a2cebefbfc13bc69079af1f2",
+    "cycles": 2205,
+    "stable": 1449,
+    "recalculated_operating_points": 18,
+    "note": "대회 GuardModel과 별개인 외부 모델 3종"
+  }
+}

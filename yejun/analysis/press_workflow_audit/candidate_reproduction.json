@@ -1,0 +1,38 @@
+[
+  {
+    "file": "press_advance/metrics.csv",
+    "rows": 180,
+    "max_abs_difference": 0.0,
+    "same_sha256": true
+  },
+  {
+    "file": "press_advance/primary.csv",
+    "rows": 10,
+    "max_abs_difference": 0.0,
+    "same_sha256": true
+  },
+  {
+    "file": "press_early/metrics.csv",
+    "rows": 216,
+    "max_abs_difference": 0.0,
+    "same_sha256": true
+  },
+  {
+    "file": "press_early/primary.csv",
+    "rows": 12,
+    "max_abs_difference": 0.0,
+    "same_sha256": true
+  },
+  {
+    "file": "press_improvement/candidate_metrics.csv",
+    "rows": 288,
+    "max_abs_difference": 0.0,
+    "same_sha256": true
+  },
+  {
+    "file": "press_improvement/conformal_1pct.csv",
+    "rows": 48,
+    "max_abs_difference": 0.0,
+    "same_sha256": true
+  }
+]

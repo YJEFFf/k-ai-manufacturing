@@ -1,0 +1,19 @@
+split A: 8 candidates × 3 input variants done
+split B: 8 candidates × 3 input variants done
+split_id                          model  normal_notified_segments  abnormal_notified_segments  fp  fn  f1_all_rows  abnormal_row_coverage  delay_median_s  delay_max_s
+       A                    baseline_w8                         0                          21   0  99     0.910082                   1.00             0.1          0.7
+       A                    loadnorm_w8                         1                          21   1  84     0.923903                   1.00             0.0          0.7
+       A           baseline_persist2of3                         0                          21   0 108     0.901099                   0.93             0.2          0.8
+       A           loadnorm_persist2of3                         0                          21   0 108     0.901099                   0.93             0.2          0.8
+       A          magnitude_persist2of3                         0                          21   0 101     0.908098                   0.93             0.2          0.7
+       A loadnorm_magnitude_persist2of3                         0                          21   0 100     0.909091                   0.93             0.2          0.7
+       A                 early_w5_to_w8                         0                          21   0  86     0.922801                   1.00             0.1          0.7
+       A                 early_w6_to_w8                         0                          21   0  86     0.922801                   1.00             0.1          0.7
+       B                    baseline_w8                         3                          21   3  86     0.920322                   1.00             0.0          0.7
+       B                    loadnorm_w8                         1                          21   1  84     0.923903                   1.00             0.0          0.7
+       B           baseline_persist2of3                         0                          21   0 108     0.901099                   0.93             0.2          0.8
+       B           loadnorm_persist2of3                         0                          21   0 108     0.901099                   0.93             0.2          0.8
+       B          magnitude_persist2of3                         4                          21   4  99     0.906787                   0.93             0.2          0.7
+       B loadnorm_magnitude_persist2of3                         4                          21   4  98     0.907776                   0.93             0.2          0.7
+       B                 early_w5_to_w8                         3                          21   3  73     0.932743                   1.00             0.0          0.7
+       B                 early_w6_to_w8                         3                          21   3  71     0.934629                   1.00             0.0          0.7

@@ -1,0 +1,29 @@
+[
+  {
+    "name": "v1 pytest",
+    "command": "OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python -m pytest -q yejun/press_submission/tests",
+    "chunk_id": "b712a3",
+    "wall_time_seconds": 0.000002625,
+    "exit_code": 0,
+    "original_token_count": 25,
+    "output": ".................................................                        [100%]\n49 passed in 7.45s\n"
+  },
+  {
+    "name": "v2 pytest",
+    "command": "OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python -m pytest -q yejun/press_guard",
+    "chunk_id": "ede7cf",
+    "wall_time_seconds": 0.000006917,
+    "exit_code": 0,
+    "original_token_count": 25,
+    "output": "...........................................                              [100%]\n43 passed in 12.34s\n"
+  },
+  {
+    "name": "verify and web regression",
+    "command": "v2 verify.py; v1 verify.py; node --test yejun/press_guard/test_web.cjs",
+    "chunk_id": "299747",
+    "wall_time_seconds": 0.000007083,
+    "exit_code": 0,
+    "original_token_count": 599,
+    "output": "OK   outputs.integrity\nOK   inputs.sha256\nOK   expected.integrity\nOK   configuration\nOK   analysis_summary.json\nOK   metrics.csv  max|Δ|=0\nOK   rolling.csv  max|Δ|=0\nOK   cases_A.csv  max|Δ|=0\nOK   cases_B.csv  max|Δ|=0\nOK   model_comparison_v2.csv  max|Δ|=0\nOK   robustness_v2.csv  max|Δ|=0\nOK   error_conditions_v2.csv  max|Δ|=0\nOK   records_first_alarm_v2.csv  max|Δ|=0\nOK   uncertainty_v2.csv  max|Δ|=0\nOK   workload_v2.csv  max|Δ|=0\n\n15/15 통과. 코드 6ecd8e7efb1c vs 동결 6ecd8e7efb1c; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit\nOK   inputs.sha256\nOK   checks.required\nOK   outputs.integrity\nOK   code.matches_manifest\nOK   expected.integrity\nOK   execution.scope\nOK   configuration\nOK   ablation.csv  max|Δ|=0\nOK   alarm_components.csv  max|Δ|=0\nOK   conformal_mc.csv  max|Δ|=0\nOK   diagnosis.json\nOK   error_conditions_fn.csv  max|Δ|=0\nOK   error_conditions_fp.csv  max|Δ|=0\nOK   influence.csv  max|Δ|=0\nOK   interaction_2x2.csv  max|Δ|=0\nOK   label_bypass.csv  max|Δ|=0\nOK   load_normalization.csv  max|Δ|=0\nOK   load_normalization_meta.csv  max|Δ|=0\nOK   lstm_common_history_A.csv  max|Δ|=0\nOK   lstm_common_history_B.csv  max|Δ|=0\nOK   lstm_common_meta.csv  max|Δ|=0\nOK   lstm_guidebook_history.csv  max|Δ|=0\nOK   lstm_guidebook_reproduction.json\nOK   model_comparison.csv  max|Δ|=0\nOK   model_comparison_all.csv  max|Δ|=0\nOK   model_comparison_lstm.csv  max|Δ|=0\nOK   operating_points.csv  max|Δ|=0\nOK   persistence.csv  max|Δ|=0\nOK   preprocess_effect.csv  max|Δ|=0\nOK   quantization_frozen.csv  max|Δ|=0\nOK   segment_features.csv  max|Δ|=0\nOK   sensitivity.csv  max|Δ|=0\nOK   sensitivity_params.csv  max|Δ|=0\nOK   splits.csv  max|Δ|=0\nOK   tail_params.csv  max|Δ|=0\nOK   thresholds_main.csv  max|Δ|=0\nOK   uncertainty.csv  max|Δ|=0\nOK   waveform_segments.csv  max|Δ|=0\nOK   workload.csv  max|Δ|=0\n\n39/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 362db343a42f vs 동결 3b66c92eba46\nTAP version 13\n# web regressions: 4 passed (null gap / empty replay hover / 50k rows / empty selection)\n# Subtest: yejun/press_guard/test_web.cjs\nok 1 - yejun/press_guard/test_web.cjs\n  ---\n  duration_ms: 210.445416\n  ...\n1..1\n# tests 1\n# suites 0\n# pass 1\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 215.873041\n"
+  }
+]

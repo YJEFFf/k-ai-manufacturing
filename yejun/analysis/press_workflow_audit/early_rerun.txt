@@ -1,0 +1,137 @@
+A AR(2) [ 0.10017176  1.83308321 -0.97486193] AR(1) [0.30084749 0.92931313]
+B AR(2) [ 0.09803183  1.83249624 -0.97423012] AR(1) [0.23634503 0.92939373]
+split_id          model  normal_notified_segments  abnormal_notified_segments  fn  fp  f1_all_rows  delay_max_s
+       A             v2                         0                          21  44   0     0.961938          0.5
+       A       v2_joint                         0                          21  40   0     0.965517          0.5
+       A       v2_diff1                         0                          21  44   0     0.961938          0.5
+       A v2_joint_diff1                         0                          21  40   0     0.965517          0.5
+       A     joint_only                         0                          18 408   0     0.484848          3.3
+       A     diff1_only                         2                          20 462   3     0.372470          0.6
+       B             v2                         3                          21  31   3     0.970990          0.5
+       B       v2_joint                         4                          21  31   4     0.970162          0.5
+       B       v2_diff1                         3                          21  31   3     0.970990          0.5
+       B v2_joint_diff1                         4                          21  31   4     0.970162          0.5
+       B     joint_only                         4                          18 381   4     0.532199          3.3
+       B     diff1_only                         0                          20 472   0     0.351648          0.6
+{
+ "v2": {
+  "normal_notified": {
+   "A": 0,
+   "B": 3
+  },
+  "abnormal_notified": {
+   "A": 21,
+   "B": 21
+  },
+  "fn": {
+   "A": 44,
+   "B": 31
+  },
+  "f1": {
+   "A": 0.961938,
+   "B": 0.97099
+  },
+  "meets_selection_rule": true,
+  "fn_lower_than_v2": false
+ },
+ "v2_joint": {
+  "normal_notified": {
+   "A": 0,
+   "B": 4
+  },
+  "abnormal_notified": {
+   "A": 21,
+   "B": 21
+  },
+  "fn": {
+   "A": 40,
+   "B": 31
+  },
+  "f1": {
+   "A": 0.965517,
+   "B": 0.970162
+  },
+  "meets_selection_rule": false,
+  "fn_lower_than_v2": false
+ },
+ "v2_diff1": {
+  "normal_notified": {
+   "A": 0,
+   "B": 3
+  },
+  "abnormal_notified": {
+   "A": 21,
+   "B": 21
+  },
+  "fn": {
+   "A": 44,
+   "B": 31
+  },
+  "f1": {
+   "A": 0.961938,
+   "B": 0.97099
+  },
+  "meets_selection_rule": true,
+  "fn_lower_than_v2": false
+ },
+ "v2_joint_diff1": {
+  "normal_notified": {
+   "A": 0,
+   "B": 4
+  },
+  "abnormal_notified": {
+   "A": 21,
+   "B": 21
+  },
+  "fn": {
+   "A": 40,
+   "B": 31
+  },
+  "f1": {
+   "A": 0.965517,
+   "B": 0.970162
+  },
+  "meets_selection_rule": false,
+  "fn_lower_than_v2": false
+ },
+ "joint_only": {
+  "normal_notified": {
+   "A": 0,
+   "B": 4
+  },
+  "abnormal_notified": {
+   "A": 18,
+   "B": 18
+  },
+  "fn": {
+   "A": 408,
+   "B": 381
+  },
+  "f1": {
+   "A": 0.484848,
+   "B": 0.532199
+  },
+  "meets_selection_rule": false,
+  "fn_lower_than_v2": false
+ },
+ "diff1_only": {
+  "normal_notified": {
+   "A": 2,
+   "B": 0
+  },
+  "abnormal_notified": {
+   "A": 20,
+   "B": 20
+  },
+  "fn": {
+   "A": 462,
+   "B": 472
+  },
+  "f1": {
+   "A": 0.37247,
+   "B": 0.351648
+  },
+  "meets_selection_rule": false,
+  "fn_lower_than_v2": false
+ }
+}

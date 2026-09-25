@@ -1,0 +1,14 @@
+{
+  "press_data_normal.csv": {
+    "archive_member": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+    "shared_extracted": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+    "package_copy": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7"
+  },
+  "outlier_data.csv": {
+    "archive_member": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+    "shared_extracted": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+    "package_copy": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e"
+  },
+  "zip_crc_ok": true,
+  "zip_sha256": "0bf0e7a2de0c7622cffdab426fd42deab20078b6f4c724815a87b802f7b8f5fa"
+}
