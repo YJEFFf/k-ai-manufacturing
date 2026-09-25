@@ -1,0 +1,131 @@
+"""⑤ 전력 패키지 전체 실행: 원본 → 진단 → 워크포워드 비교·선택 → 시험 → 피크 → 분석 → 현장 시뮬레이션 → 그림.
+
+사용:
+    python run_all.py                       # data/ 의 CSV 또는 저장소 데이터셋 ZIP 자동 탐색
+    python run_all.py --data /경로/Dataset_자원\\ 최적화\\ AI\\ 데이터셋.zip
+    python run_all.py --stages diagnostics,models   # 일부 단계만
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import platform
+import sys
+import time
+import warnings
+from importlib import metadata
+
+warnings.filterwarnings("ignore", category=RuntimeWarning)
+warnings.filterwarnings("ignore", category=UserWarning)
+
+from powerguard import config as C  # noqa: E402
+from powerguard import data as D  # noqa: E402
+from powerguard import io  # noqa: E402
+
+STAGES = ["diagnostics", "models", "peak", "analysis", "ablation", "field", "external", "figures", "digest"]
+
+
+def versions() -> dict:
+    out = {"python": platform.python_version(), "platform": platform.platform()}
+    for pkg in ("numpy", "pandas", "scikit-learn", "lightgbm", "shap", "scipy", "matplotlib"):
+        try:
+            out[pkg] = metadata.version(pkg)
+        except metadata.PackageNotFoundError:
+            out[pkg] = None
+    return out
+
+
+def main(argv=None) -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--data", default=None, help="원본 CSV 또는 KAMP ZIP 경로")
+    ap.add_argument("--stages", default=",".join(STAGES))
+    ap.add_argument("--kamp-dir", default=None, help="외부 KAMP 자료 ZIP 폴더(기본: 저장소 데이터셋/)")
+    args = ap.parse_args(argv)
+    stages = [s.strip() for s in args.stages.split(",") if s.strip()]
+    if args.kamp_dir:
+        from pathlib import Path
+        C.KAMP_DIR = Path(args.kamp_dir)
+    bad = [s for s in stages if s not in STAGES]
+    if bad:
+        print(f"알 수 없는 단계: {bad}", file=sys.stderr)
+        return 2
+    t_all = time.time()
+    timings = {}
+    df, meta = D.load_raw(args.data)
+    diag = D.diagnose(df)
+    iv = D.build_intervals(df, diag)
+    ctx = {"df": df, "meta": meta, "diag": diag, "iv": iv}
+
+    def stage(name, fn):
+        if name not in stages:
+            return
+        t0 = time.time()
+        print(f"[{name}] 시작", flush=True)
+        fn()
+        timings[name] = round(time.time() - t0, 1)
+        print(f"[{name}] 완료 {timings[name]}s", flush=True)
+
+    def s_diag():
+        from powerguard import stage_diagnostics
+        stage_diagnostics.run(df, meta, diag, iv)
+
+    def s_models():
+        from powerguard import stage_models
+        ctx["models"] = stage_models.run(iv, log=lambda m: print(m, flush=True))
+
+    def _selection():
+        return json.loads((C.OUTPUT_DIR / "cv" / "selection.json").read_text(encoding="utf-8"))
+
+    def _frames():
+        if "models" in ctx:
+            return ctx["models"]["frames"]
+        from powerguard import cv as CV
+        return CV.build_frames(iv)
+
+    def s_peak():
+        from powerguard import stage_peak
+        stage_peak.run(iv, _frames(), _selection())
+
+    def s_analysis():
+        from powerguard import stage_analysis
+        stage_analysis.run(iv, _frames(), _selection(), df=df, diag=diag, log=lambda m: print(m, flush=True))
+
+    def s_ablation():
+        from powerguard import stage_analysis
+        stage_analysis.run_heavy(iv, df, diag, _selection(), log=lambda m: print(m, flush=True))
+
+    def s_field():
+        from powerguard import stage_field
+        stage_field.run(iv, _frames(), _selection())
+
+    def s_external():
+        from powerguard import stage_external
+        stage_external.run()
+
+    def s_figures():
+        from powerguard import stage_figures
+        stage_figures.run(iv)
+
+    stage("diagnostics", s_diag)
+    stage("models", s_models)
+    stage("peak", s_peak)
+    stage("analysis", s_analysis)
+    stage("ablation", s_ablation)
+    stage("field", s_field)
+    stage("external", s_external)
+    stage("figures", s_figures)
+
+    def s_digest():
+        from powerguard import stage_digest
+        stage_digest.run()
+
+    stage("digest", s_digest)
+    manifest = {"data": meta, "seed": C.SEED, "stages": stages, "timings_s": timings,
+                "total_s": round(time.time() - t_all, 1), "versions": versions()}
+    io.write_json(manifest, C.OUTPUT_DIR / "run_manifest.json")
+    print(f"전체 완료 {manifest['total_s']}s", flush=True)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

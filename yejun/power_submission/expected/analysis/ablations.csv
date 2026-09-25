@@ -1,0 +1,9 @@
+ablation,task,cv_RMSE,cv_MAE,test_RMSE,test_MAE
+hybrid_no_weather,B,17.8121,11.4701,14.8107,8.62926
+hybrid_no_weather,A4,10.8694,7.21496,9.8947,6.1832
+issue_2400_BL5_regime_analog,B,18.6959,10.717,15.0046,8.40638
+issue_2400_M9l_analog_level_adj,B,18.6909,10.703,14.9339,8.36471
+train_on_copies_M1_lgbm,B,30.844,16.7105,22.7039,14.8868
+train_on_copies_BL5_regime_analog,B,26.8885,13.0209,15.5319,8.90956
+train_on_copies_M1_lgbm,A4,12.0234,7.39002,9.53121,6.38138
+train_on_copies_M7_hybrid,A4,12.1174,7.25397,9.72475,6.14094

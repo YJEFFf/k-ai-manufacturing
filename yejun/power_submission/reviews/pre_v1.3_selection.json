@@ -1,0 +1,145 @@
+{
+ "B": {
+  "chosen": "M9l_analog_level_adj",
+  "rule": "pooled RMSE 최소 → 더 단순한 등급 최선 모델과 날짜 부트스트랩(90%) 비교, B는 동률 시 일 최대 오차로 2차 비교",
+  "trail": [
+   {
+    "model": "M8_blend",
+    "vs_simpler": "M9l_analog_level_adj",
+    "rmse_boot": {
+     "stat": "RMSE",
+     "diff": -0.490234,
+     "ci90": [
+      -1.357509,
+      0.413119
+     ],
+     "p_a_better": 0.8035,
+     "n_days": 57
+    },
+    "daymax_boot": {
+     "stat": "daymax_MAE",
+     "diff": 1.347618,
+     "ci90": [
+      0.81478,
+      1.942369
+     ],
+     "p_a_better": 0.0,
+     "n_days": 57
+    },
+    "keep": false
+   },
+   {
+    "model": "M9l_analog_level_adj",
+    "vs_simpler": "BL5_regime_analog",
+    "rmse_boot": {
+     "stat": "RMSE",
+     "diff": -0.074335,
+     "ci90": [
+      -0.269466,
+      0.086386
+     ],
+     "p_a_better": 0.748,
+     "n_days": 57
+    },
+    "daymax_boot": {
+     "stat": "daymax_MAE",
+     "diff": -0.683032,
+     "ci90": [
+      -1.378513,
+      -0.081724
+     ],
+     "p_a_better": 0.975,
+     "n_days": 57
+    },
+    "keep": true
+   }
+  ],
+  "pooled_RMSE": {
+   "M8_blend": 17.39,
+   "M9l_analog_level_adj": 17.8802,
+   "M7c_hybrid_coolmono": 17.9036,
+   "M9_analog_adjusted": 17.9152,
+   "M7_hybrid": 17.9525,
+   "BL5_regime_analog": 17.9546,
+   "M1_lgbm": 21.187,
+   "M5_sched_analog": 23.5765,
+   "BL3_profile": 26.2076,
+   "M3_mlp": 26.8621,
+   "M3d_dayvec_mlp": 28.1517,
+   "BL2_same_daytype": 28.4536,
+   "BL4_ridge": 37.925
+  },
+  "V3_RMSE": {
+   "M8_blend": 10.782,
+   "M9_analog_adjusted": 10.9558,
+   "M9l_analog_level_adj": 11.014,
+   "M7c_hybrid_coolmono": 11.2316,
+   "M7_hybrid": 11.2471,
+   "BL5_regime_analog": 11.3341,
+   "M1_lgbm": 13.5813,
+   "BL3_profile": 19.5416,
+   "M3d_dayvec_mlp": 19.6686,
+   "M5_sched_analog": 19.715,
+   "M3_mlp": 19.7793,
+   "BL4_ridge": 27.4472,
+   "BL2_same_daytype": 29.9534
+  },
+  "blend_members": [
+   "M9l_analog_level_adj",
+   "M7c_hybrid_coolmono"
+  ]
+ },
+ "A": {
+  "chosen": "M7c_hybrid_coolmono",
+  "rule": "pooled RMSE 최소 → 더 단순한 등급 최선 모델과 날짜 부트스트랩(90%) 비교, B는 동률 시 일 최대 오차로 2차 비교",
+  "trail": [
+   {
+    "model": "M7c_hybrid_coolmono",
+    "vs_simpler": "M1_lgbm",
+    "rmse_boot": {
+     "stat": "mean_RMSE",
+     "diff": -0.483785,
+     "ci90": [
+      -0.9249,
+      -0.045207
+     ],
+     "p_a_better": 0.967,
+     "n_days": 57
+    },
+    "keep": true
+   }
+  ],
+  "pooled_RMSE": {
+   "M7c_hybrid_coolmono": 9.4077,
+   "M8_blend": 9.4085,
+   "M7_hybrid": 9.4153,
+   "M1_lgbm": 9.8915,
+   "M6_analog_level": 10.7826,
+   "BL6_analog_persist": 11.3158,
+   "BL4_ridge": 13.1518,
+   "M3_mlp": 17.683,
+   "BL5_regime_analog": 18.6959,
+   "BL1_persistence": 22.6066,
+   "BL3_profile": 26.2076,
+   "BL2_same_daytype": 29.2557
+  },
+  "V3_RMSE": {
+   "M8_blend": 8.3833,
+   "M7c_hybrid_coolmono": 8.3849,
+   "M7_hybrid": 8.3867,
+   "M1_lgbm": 8.7165,
+   "M6_analog_level": 9.3476,
+   "BL4_ridge": 10.1282,
+   "BL6_analog_persist": 10.3072,
+   "BL5_regime_analog": 10.7512,
+   "M3_mlp": 13.8725,
+   "BL3_profile": 19.5416,
+   "BL1_persistence": 23.0004,
+   "BL2_same_daytype": 28.1549
+  },
+  "blend_members": [
+   "M7c_hybrid_coolmono",
+   "M7_hybrid"
+  ]
+ }
+}

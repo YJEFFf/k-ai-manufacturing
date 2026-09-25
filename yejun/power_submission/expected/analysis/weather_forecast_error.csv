@@ -1,0 +1,10 @@
+sigma_C,task,model,cv_RMSE,test_RMSE
+0,B,M9l_analog_level_adj,17.8802,15.0821
+0,B,M1_lgbm,21.4115,13.9715
+0,A4,M1_lgbm,11.1682,9.37844
+1.5,B,M9l_analog_level_adj,17.8802,15.0821
+1.5,B,M1_lgbm,21.351,14.221
+1.5,A4,M1_lgbm,11.0808,9.45976
+3,B,M9l_analog_level_adj,17.8802,15.0821
+3,B,M1_lgbm,20.831,14.5539
+3,A4,M1_lgbm,11.2087,9.52143

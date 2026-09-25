@@ -1,0 +1,118 @@
+{
+ "kamp41_provenance": {
+  "rows_41": 24479,
+  "rows_27_x4_minus_2days_minus1": 24479,
+  "sha256_41": "ee0d72ae4982c375af0ef8de446e568b8b80246987c85214eba9dc21246f7031",
+  "dropped_27_dates": [
+   20210713,
+   20210715
+  ],
+  "power_usage_regression_on_27_prev_same_next": [
+   0.6007,
+   0.2968,
+   0.0959,
+   44.1002
+  ],
+  "power_usage_R2": 0.9647,
+  "production_corr_41_vs_27_div4": 0.99998,
+  "dates_with_varying_production": 193,
+  "dates_production_corr_below_0.99": 2,
+  "verdict": "#41은 #27의 15분 구간(손상 2일 제외)과 행 단위로 대응하는 파생 자료 → 외부 검증에서 제외"
+ },
+ "kamp30_schedule_slack": {
+  "sha256": {
+   "machine_info": "c7aa5d83bcc10f55b60d5d558ce66cbc4a11ffd9da84da646905de5389e8da8a",
+   "order_info": "a66ed495161d0baa9ead5ad8a23089fb6a5ad8b0a0652481ec71031eefad5cf5"
+  },
+  "orders": 127,
+  "orders_with_cycle_time": 127,
+  "machines": 37,
+  "due_span_days": 217,
+  "total_min_machine_minutes": 57155.5,
+  "order_book_minutes_share_of_capacity_by_due_month": {
+   "2021-02": 0.0048,
+   "2021-03": 0.0047,
+   "2021-04": 0.0047,
+   "2021-05": 0.0111,
+   "2021-06": 0.0445,
+   "2021-07": 0.0427,
+   "2021-08": 0.004,
+   "2021-09": 0.0005
+  },
+  "constraints": {
+   "minutes_per_machine_per_day": 600,
+   "reference_run_hours_per_day": [
+    10,
+    20
+   ],
+   "cycle_time_rows": 21151,
+   "items": 6617
+  },
+  "note": "주문표 127건(가이드의 최적화 예제 범위)만의 최단 가공시간 합이므로 공장 전체 부하·가동률이 아니다. 일정 이동 시나리오의 제약값(설비당 600분/일, 품목×설비 가공시간, 납기)의 출처로만 쓰며, 설비별 kW가 없어 전력 절감량은 계산하지 않는다."
+ },
+ "kamp46_mechanism": {
+  "sha256": {
+   "R1": "fe2dcd204d1a4fb9b8c7368894b429d1548dd91087b0a9a6593eabb64bf6c321",
+   "R2": "eda0a90f057b4d683fb95ee0ec85eedb4cafeb75c306b88d0c6e494cb6aafc94",
+   "P1": "0fef08ec8e3ec4287817e275d5730ae0098fb90b662a021b5fd6dd420b6396bc",
+   "P2": "d20a9f334a99347b540b7035f0cf61d07e36f1a07c25ce88d1eb5b2c1db42365",
+   "P3": "a938df6554708469f3244f8c706645f554055654f169074b10bf8c5cab643bf3",
+   "P4": "85cf2c271e62bd1bbeea9d05b19594df9f96616a752595621f6b287654aba397"
+  },
+  "coverage_all6_after_hold": 0.745,
+  "share_minutes_by_n_on": {
+   "0": 0.3769,
+   "1": 0.0053,
+   "2": 0.0693,
+   "3": 0.1758,
+   "4": 0.3686,
+   "5": 0.0037,
+   "6": 0.0005
+  },
+  "P1P2_on_agreement": 0.9957,
+  "press_starts": {
+   "P1": 35,
+   "P2": 33,
+   "share_P1_start_within_3min_of_P2": 0.886,
+   "P1_start_hours": {
+    "6": 28,
+    "7": 4,
+    "8": 1,
+    "9": 1,
+    "13": 1
+   }
+  },
+  "peak_15min_sum_A": 78.54,
+  "sum_of_individual_15min_peaks_A": 125.82,
+  "top5pct_blocks_on_fraction": {
+   "R1": 0.949,
+   "R2": 0.937,
+   "P1": 0.997,
+   "P2": 0.998,
+   "P3": 0.013,
+   "P4": 0.009
+  },
+  "below_median_blocks_on_fraction": {
+   "R1": 0.11,
+   "R2": 0.102,
+   "P1": 0.276,
+   "P2": 0.278,
+   "P3": 0.004,
+   "P4": 0.005
+  },
+  "stagger_insample_per_day_median_pct": 11.09,
+  "stagger_fixed_policy_oos": {
+   "offsets_min": {
+    "P1": 40,
+    "P2": -60,
+    "R1": -35,
+    "R2": 60
+   },
+   "median_pct": 3.29,
+   "mean_pct": 2.64,
+   "days": 15,
+   "days_worse": 5
+  },
+  "note": "6대 설비는 한 탠덤 라인(생산 로그 라인 1개)이어서 개별 이동은 물리적 제약 확인이 필요"
+ }
+}

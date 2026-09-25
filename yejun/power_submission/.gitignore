@@ -1,0 +1,8 @@
+# 원본 추출본·학습 모델·행 단위 예측은 Git 제외 (제출 ZIP에만 포함)
+data/
+artifacts/
+outputs/**/predictions*.csv
+outputs/**/*rows*.csv
+outputs/**/*.parquet
+.pytest_cache/
+__pycache__/

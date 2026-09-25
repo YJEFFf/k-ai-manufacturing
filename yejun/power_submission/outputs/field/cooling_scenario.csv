@@ -1,0 +1,5 @@
+share_reducible,month,slope_per_C,base_temp,month_max_before,month_max_after,hot_workdays,month_max_reduction
+0.3,8,2.08444,28,218,217.125,7,0.875464
+0.3,9,2.08444,28,204,204,0,0
+0.5,8,2.08444,28,218,216.541,7,1.45911
+0.5,9,2.08444,28,204,204,0,0

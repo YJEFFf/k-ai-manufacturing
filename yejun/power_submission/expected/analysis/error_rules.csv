@@ -1,0 +1,30 @@
+task,model,period,rule,n,mean_abs_err,ratio
+B,M9l_analog_level_adj,test,regime > 1.50 & regime_prev <= 1.00 & month <= 8.50,384,24.4121,2.84523
+B,M9l_analog_level_adj,test,regime > 1.50 & regime_prev > 1.00 & running_without_plan <= 0.50,1736,10.7126,1.24855
+B,M9l_analog_level_adj,test,regime > 1.50 & regime_prev > 1.00 & running_without_plan > 0.50,278,7.99943,0.932331
+B,M9l_analog_level_adj,test,regime > 1.50 & regime_prev <= 1.00 & month > 8.50,192,7.82619,0.91214
+B,M9l_analog_level_adj,test,regime <= 1.50 & regime > 0.50 & month > 8.50,192,6.78646,0.790959
+B,M9l_analog_level_adj,test,regime <= 1.50 & regime > 0.50 & month <= 8.50,262,5.78626,0.674387
+B,M9l_analog_level_adj,test,regime <= 1.50 & regime <= 0.50 & month <= 8.50,1010,1.68119,0.195942
+B,M9l_analog_level_adj,test,regime <= 1.50 & regime <= 0.50 & month > 8.50,192,1.125,0.131118
+B,M9l_analog_level_adj,cv,month <= 4.50 & daytype4 <= 2.50 & work_dayshift <= 0.50,816,26.0221,2.49216
+B,M9l_analog_level_adj,cv,month > 4.50 & daytype4 <= 1.50 & work_dayshift > 0.50,1344,11.7397,1.12432
+B,M9l_analog_level_adj,cv,month <= 4.50 & daytype4 <= 2.50 & work_dayshift > 0.50,432,10.4874,1.00439
+B,M9l_analog_level_adj,cv,month > 4.50 & daytype4 <= 1.50 & work_dayshift <= 0.50,1344,8.6942,0.832654
+B,M9l_analog_level_adj,cv,month > 4.50 & daytype4 > 1.50 & prod_level > 0.50,216,6.65278,0.637144
+B,M9l_analog_level_adj,cv,month <= 4.50 & daytype4 > 2.50,192,1.9349,0.185307
+B,M9l_analog_level_adj,cv,month > 4.50 & daytype4 > 1.50 & prod_level <= 0.50,1128,1.8617,0.178297
+A4,M1_lgbm,test,work_dayshift > 0.50 & regime_prev <= 1.00,288,13.8584,2.32867
+A4,M1_lgbm,test,work_dayshift > 0.50 & regime_prev > 1.00 & prod_change <= 1.50,610,9.50865,1.59776
+A4,M1_lgbm,test,work_dayshift > 0.50 & regime_prev > 1.00 & prod_change > 1.50,396,8.8763,1.49151
+A4,M1_lgbm,test,work_dayshift <= 0.50 & regime > 0.50 & prod_level > 0.50,1196,6.17922,1.03831
+A4,M1_lgbm,test,work_dayshift <= 0.50 & regime > 0.50 & prod_level <= 0.50,554,4.07768,0.685184
+A4,M1_lgbm,test,work_dayshift <= 0.50 & regime <= 0.50 & temp_level > 2.50,582,2.62267,0.440694
+A4,M1_lgbm,test,work_dayshift <= 0.50 & regime <= 0.50 & temp_level <= 2.50,620,1.26871,0.213185
+A4,M1_lgbm,cv,daytype4 <= 1.50 & month <= 4.50 & prod_level <= 0.50,224,17.3498,2.35811
+A4,M1_lgbm,cv,daytype4 <= 1.50 & month > 4.50 & work_dayshift > 0.50,1344,10.4248,1.41689
+A4,M1_lgbm,cv,daytype4 > 1.50 & prod_change > 0.50,236,9.5717,1.30094
+A4,M1_lgbm,cv,daytype4 <= 1.50 & month <= 4.50 & prod_level > 0.50,736,9.47614,1.28796
+A4,M1_lgbm,cv,daytype4 <= 1.50 & month > 4.50 & work_dayshift <= 0.50,1344,6.67771,0.907604
+A4,M1_lgbm,cv,daytype4 > 1.50 & prod_change <= 0.50 & temp_level <= 1.50,596,3.81732,0.518834
+A4,M1_lgbm,cv,daytype4 > 1.50 & prod_change <= 0.50 & temp_level > 1.50,992,1.89489,0.257546

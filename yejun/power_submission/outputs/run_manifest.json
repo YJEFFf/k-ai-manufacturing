@@ -1,0 +1,29 @@
+{
+ "data": {
+  "source": "Dataset_자원 최적화 AI 데이터셋.zip",
+  "sha256": "8f7af2e49366c93e1d6f5fdef4b5e350066c1792ac463c2c2886e370f4674830",
+  "rows": 6168,
+  "cols": 18
+ },
+ "seed": 20260925,
+ "stages": [
+  "diagnostics",
+  "digest"
+ ],
+ "timings_s": {
+  "diagnostics": 0.0,
+  "digest": 0.0
+ },
+ "total_s": 2.7,
+ "versions": {
+  "python": "3.12.2",
+  "platform": "macOS-26.3.1-arm64-arm-64bit",
+  "numpy": "2.5.3",
+  "pandas": "3.0.6",
+  "scikit-learn": "1.9.1",
+  "lightgbm": "4.7.0",
+  "shap": "0.52.0",
+  "scipy": "1.18.1",
+  "matplotlib": "3.11.2"
+ }
+}
