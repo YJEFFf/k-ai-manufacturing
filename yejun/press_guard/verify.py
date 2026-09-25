@@ -19,7 +19,7 @@ import pandas as pd
 from model import D, HERE, BASE
 from press.validation import code_sha256
 
-RESULTS = ["metrics.csv", "rolling.csv", "cases_A.csv", "cases_B.csv", "model_comparison_v2.csv", "error_conditions_v2.csv",
+RESULTS = ["metrics.csv", "rolling.csv", "cases_A.csv", "cases_B.csv", "model_comparison_v2.csv", "robustness_v2.csv", "error_conditions_v2.csv",
            "records_first_alarm_v2.csv", "uncertainty_v2.csv", "workload_v2.csv"]
 META = ["manifest.json", "audit.json", "analysis_summary.json"]
 ARTIFACTS = ["guard_A.json", "guard_B.json"]

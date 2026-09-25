@@ -302,11 +302,38 @@
       order.flatMap(split => ['baseline_v1', 'guard_v2'].map(model => rows.find(r => r.split === split && r.model === model)).filter(Boolean).map(r =>
         `<tr${r.model === 'guard_v2' ? ' class="highlight"' : ''}><td>${r.split}</td><td>${r.model === 'guard_v2' ? 'v2 · 정상 동역학 결합' : 'v1 · 기존 결합'}</td><td>${fmt.num(r.f1, 6)}</td><td>${fmt.int(r.fn)}</td><td>${fmt.int(r.fp)}</td><td>${fmt.int(r.normal_notified_segments)} / ${fmt.int(r.normal_segments)}</td><td>${fmt.int(r.abnormal_notified_segments)} / ${fmt.int(r.abnormal_segments)}</td><td>${fmt.num(r.delay_max_s, 1)}초</td></tr>`)).join('')
     }</tbody></table>`;
+    renderConditions(o.conditions || []);
+    renderRobustness(o.robustness || []);
     const audit = o.audit && o.audit.checks ? o.audit.checks : [];
     const bench = o.benchmark && o.benchmark.runs ? o.benchmark.runs : [];
     const auditRows = audit.map(c => `<div class="audit-row"><span>${esc(c.name)}</span><b>${c.ok ? '통과' : '실패'} · ${esc(c.detail || '')}</b></div>`);
     const benchRows = bench.map(b => `<div class="audit-row"><span>처리 속도 · 묶음 ${esc(b.label)}</span><b>${fmt.int(Math.round(b.rows_per_second))}행/초 · 호출당 ${fmt.num(b.p95_ms, 1)}ms(p95)</b></div>`);
     $('audit-list').innerHTML = (auditRows.length || benchRows.length) ? auditRows.concat(benchRows).join('') : '<div class="empty">실행 검증 기록(outputs/audit.json)이 없습니다. audit.py를 실행하세요.</div>';
+  }
+
+  function renderConditions(rows) {
+    const el = $('conditions');
+    if (!rows.length) { el.innerHTML = '<div class="empty">조건표(outputs/error_conditions_v2.csv)가 없습니다. analyze.py를 실행하세요.</div>'; return; }
+    const pos = rows.filter(r => r.condition === 'pos_bin');
+    const order = ['0', '1', '2–4', '5–6', '7–9', '≥10'];
+    const cell = (split, model, subset, value) => { const r = pos.find(x => x.split_id === split && x.model === model && x.subset === subset && String(x.value) === value); return r ? `${fmt.int(r.error_rows)} / ${fmt.int(r.rows)}` : '—'; };
+    el.innerHTML = `<table><thead><tr><th>정상 기준</th><th>모델</th><th>구분</th>${order.map(v => `<th>위치 ${v}</th>`).join('')}</tr></thead><tbody>${
+      ['A', 'B'].flatMap(split => [['abnormal', '이상 미탐 행 / 행'], ['normal', '정상 오경보 행 / 행']].flatMap(([subset, label]) => ['v1', 'v2'].map(model =>
+        `<tr${model === 'v2' ? ' class="highlight"' : ''}><td>${split}</td><td>${model}</td><td>${label}</td>${order.map(v => `<td>${cell(split, model, subset, v)}</td>`).join('')}</tr>`))).join('')
+    }</tbody></table>`;
+  }
+
+  function renderRobustness(rows) {
+    const el = $('robustness');
+    if (!rows.length) { el.innerHTML = '<div class="empty">강건성 표(outputs/robustness_v2.csv)가 없습니다. analyze.py를 실행하세요.</div>'; return; }
+    const variants = ['raw', 'matched', 'coarse'];
+    const alphas = [0.01, 0.03, 0.05];
+    el.innerHTML = `<table><thead><tr><th>정상 기준</th><th>α</th><th>모델</th>${variants.map(v => `<th>${v} · 정상 알림 / 미탐 행 / F1</th>`).join('')}</tr></thead><tbody>${
+      ['A', 'B'].flatMap(split => alphas.flatMap(alpha => ['v1', 'v2'].map(version => {
+        const cells = variants.map(v => { const r = rows.find(x => x.split_id === split && Number(x.alpha) === alpha && x.version === version && x.input_variant === v); return r ? `${fmt.int(r.normal_notified_segments)}/${fmt.int(r.normal_segments)} · ${fmt.int(r.fn)} · ${fmt.num(r.f1_all_rows, 4)}` : '—'; });
+        return `<tr${version === 'v2' ? ' class="highlight"' : ''}><td>${split}</td><td>${fmt.pct(alpha, 0)}</td><td>${version}</td>${cells.map(c => `<td>${c}</td>`).join('')}</tr>`;
+      }))).join('')
+    }</tbody></table>`;
   }
 
   // ---------- 외부 데이터 탭 ----------

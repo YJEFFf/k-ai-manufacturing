@@ -64,6 +64,9 @@ def test_overview_lists_metrics_external_audit(console):
     o = console.overview()
     assert len(o["metrics"]) == 12 and len(o["external"]) == 18
     assert isinstance(o["audit"], dict) and isinstance(o["benchmark"], dict)
+    assert isinstance(o["conditions"], list) and isinstance(o["robustness"], list)
+    if o["conditions"]:
+        assert {"split_id", "model", "subset", "condition", "value", "rows", "error_rows"} <= set(o["conditions"][0])
 
 
 def test_http_routes(console):

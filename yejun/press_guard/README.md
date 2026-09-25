@@ -53,6 +53,7 @@ bash yejun/press_guard/tools/clean_repro.sh                        # 깨끗한 �
 | 산출물 | 내용 |
 |---|---|
 | `outputs/model_comparison_v2.csv` (+`.md`) | v1 패키지의 기준모델·결합·LSTM 결과와 v2 후보 고정 비교를 같은 입력(해시 확인)·분할·보정 구간에서 합친 표. `is_final_model`=early6_ar2 |
+| `outputs/robustness_v2.csv` | matched로 적합·보정한 상태를 고정하고 평가 입력만 raw/coarse로 바꾼 v1·v2 결과(press_advance에서 추출). 웹 콘솔 성능 검증 탭에 조건표와 함께 표시 |
 | `outputs/error_conditions_v2.csv` | v1·v2의 미탐(이상)·오경보(정상) 조건: 구간 내 위치, 구간 길이, 진동 산포·전류 진폭 4분위, 가장 강한 성분. 분모 포함 |
 | `outputs/records_first_alarm_v2.csv` | 이상 21구간별 v1·v2 첫 경보 위치·미탐 행·첫 경보 근거 |
 | `outputs/uncertainty_v2.csv` | 이동 블록 부트스트랩: 정상 알림 구간 수(블록 5·10·20), 이상 미탐 행·탐지 구간(블록 3·5). 관측값이 주 결과 |

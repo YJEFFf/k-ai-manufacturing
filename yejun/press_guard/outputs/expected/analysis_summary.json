@@ -40,9 +40,11 @@
       "B": 31
     }
   },
+  "robustness_rows": 72,
   "files": [
     "model_comparison_v2.csv",
     "model_comparison_v2.md",
+    "robustness_v2.csv",
     "error_conditions_v2.csv",
     "records_first_alarm_v2.csv",
     "uncertainty_v2.csv",
@@ -51,5 +53,5 @@
     "fig_first_alarm_v2.png",
     "fig_missed_example_v2.png"
   ],
-  "elapsed_s": 17.0
+  "elapsed_s": 4.9
 }

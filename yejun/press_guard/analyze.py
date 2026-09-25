@@ -57,6 +57,19 @@ def model_comparison(out):
     return both
 
 
+# ---------- 입력 정밀도 강건성 (v1 3단계 형식) ----------
+def robustness(out):
+    """matched로 적합·보정한 상태를 고정하고 평가 입력만 raw/coarse로 바꾼 결과(press_advance). 재학습·재보정 없음."""
+    m = pd.read_csv(ADVANCE / "metrics.csv")
+    r = m[m.model.isin([FINAL, BASELINE]) & m.calibration_unit.eq("recording_segments")].copy()
+    r["version"] = np.where(r.model.eq(FINAL), "v2", "v1")
+    cols = ["split_id", "split", "version", "model", "input_variant", "criterion", "alpha", "normal_notified_segments", "normal_segments", "abnormal_notified_segments",
+            "fn", "fp", "f1_all_rows", "abnormal_row_coverage", "delay_median_s", "delay_max_s"]
+    r = r[cols].sort_values(["split_id", "input_variant", "criterion", "alpha", "version"]).reset_index(drop=True)
+    r.to_csv(out / "robustness_v2.csv", index=False)
+    return r
+
+
 # ---------- 행별 예측 로드 ----------
 def load_v1(sid):
     p = pd.read_csv(V1 / f"predictions_{sid}.csv")
@@ -250,6 +263,7 @@ def main():
     normal, abnormal, _ = D.load(args.root) if args.root else D.load()
     metrics = pd.read_csv(args.out / "metrics.csv")
     comparison = model_comparison(args.out)
+    robust = robustness(args.out)
     cond, recs, unc, work, v2_by_split = [], [], [], [], {}
     from serve import score_threshold
     for sid in D.SPLITS:
@@ -279,7 +293,8 @@ def main():
     early = cond[cond.subset.eq("abnormal") & cond.condition.eq("pos_bin") & cond.value.isin(["0", "1"]) & cond.alpha.eq(.01)].groupby(["split_id", "model"]).error_rows.sum().unstack()
     summary = dict(input_hashes=hashes["v2"], comparison_rows=int(len(comparison)), models=sorted(comparison.model.unique().tolist()),
                    fn_rows_at_position_0_1=early.to_dict(), fn_rows_total={m: {sid: int(recs[recs.split_id.eq(sid)][f"{m}_fn_rows"].sum()) for sid in D.SPLITS} for m in ("v1", "v2")},
-                   files=["model_comparison_v2.csv", "model_comparison_v2.md", "error_conditions_v2.csv", "records_first_alarm_v2.csv", "uncertainty_v2.csv", "workload_v2.csv",
+                   robustness_rows=int(len(robust)),
+                   files=["model_comparison_v2.csv", "model_comparison_v2.md", "robustness_v2.csv", "error_conditions_v2.csv", "records_first_alarm_v2.csv", "uncertainty_v2.csv", "workload_v2.csv",
                           "fig_recall_by_position_v2.png", "fig_first_alarm_v2.png", "fig_missed_example_v2.png"],
                    elapsed_s=round(time.monotonic() - start, 1))
     D.dump_json(summary, args.out / "analysis_summary.json")

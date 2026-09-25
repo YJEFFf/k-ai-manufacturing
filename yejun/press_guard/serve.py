@@ -80,7 +80,13 @@ class Console:
         metrics=pd.read_csv(HERE/"outputs"/"metrics.csv")
         external=HERE.parent/"analysis"/"press_external"/"metrics.csv"
         audit=HERE/"outputs"/"audit.json"; benchmark=HERE/"outputs"/"benchmark.json"
+        conditions=HERE/"outputs"/"error_conditions_v2.csv"; robustness=HERE/"outputs"/"robustness_v2.csv"
+        cond=pd.read_csv(conditions) if conditions.exists() else pd.DataFrame()
+        cond=cond[cond.alpha.eq(.01)&cond.condition.isin(["pos_bin","strongest_component"])] if len(cond) else cond
+        rob=pd.read_csv(robustness) if robustness.exists() else pd.DataFrame()
+        rob=rob[rob.criterion.eq("conformal")] if len(rob) else rob
         return dict(metrics=json.loads(metrics.to_json(orient="records")),
+                    conditions=json.loads(cond.to_json(orient="records")),robustness=json.loads(rob.to_json(orient="records")),
                     external=json.loads(pd.read_csv(external).to_json(orient="records")) if external.exists() else [],
                     audit=json.loads(audit.read_text()) if audit.exists() else {},
                     benchmark=json.loads(benchmark.read_text()) if benchmark.exists() else {})
