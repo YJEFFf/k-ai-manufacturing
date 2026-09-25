@@ -8,6 +8,7 @@
 
 ## 먼저 볼 문서
 
+- [위치 0·1 미탐 후보 실험](analysis/press_early/README.md): 2026-09-25 공동 정상 분포·1차 예측 오차 후보를 사전 고정해 시험, 둘 다 채택 기준 불충족(정상 알림 증가 또는 개선 없음). v2 유지
 - [Claude 후속 구현 Codex 재검수](analysis/press_guard_review/codex_recheck.md): 검증·동결 누락 경로와 웹 차트/재생 결함 수정, 미탐 해석 교정, 토의 항목 3개 판단
 - [코덱스 인수인계 검수·웹 콘솔 구현](analysis/press_guard_review/README.md): Claude의 v2·후보 탐색·UCI 재현, 웹 연결·검수·벤치마크 및 사용자 위임에 따른 v2 채택·디벨롭 이력
 - [Press Guard v2 구현·실험](press_guard/README.md): 2026-09-25 정상 전류 AR(2) 잔차 결합으로 F1 A 0.961938/B 0.970990, 미탐 44/31, 정상 알림 0/120·3/180 유지. 테스트 42개·JS 회귀 4개 통과. 로컬 웹 콘솔 동작

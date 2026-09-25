@@ -1,0 +1,221 @@
+{
+  "protocol": {
+    "version": "press-early-exploratory-v1",
+    "registered_before_scores": true,
+    "decision": "기록구간 위치 0·1(센서 크기 성분만 존재)의 미탐을 정상 자료만으로 줄일 수 있는가 — Codex 재검수(c229f90) 토의 항목 3",
+    "fit": "정상 학습 구간만. 기존 A/B 시간순 구간 분할·matched 전처리·v2(early6_ar2) 성분 유지",
+    "calibration": "후보별 정상 보정 구간 최댓값 conformal; alpha 0.01, 0.03, 0.05. 이상 라벨은 적합·문턱·후보 선택에 사용하지 않음",
+    "candidates": [
+      "v2",
+      "v2_joint",
+      "v2_diff1",
+      "v2_joint_diff1",
+      "joint_only",
+      "diff1_only"
+    ],
+    "components": {
+      "joint": "세 센서 표준화 값의 정상 학습 공분산 Mahalanobis 거리(모든 위치에서 계산). 절대 크기만 보는 max|z|와 달리 센서 간 결합 구조의 이탈을 본다. 정상 학습 분포 ExpTail 변환",
+      "diff1": "정상 학습에서 적합한 1차 선형 예측 x_t = c + b·x_{t-1}의 절대 잔차(위치 1부터). 구간 경계 통과 금지. ExpTail 변환"
+    },
+    "combination": "v2 점수와 새 성분의 최댓값. 성분별 가중치·문턱 조정 없음",
+    "selection": "주 alpha 1%·matched에서 두 분할 모두 정상 알림 구간 수가 v2 이하이고 이상 21/21 유지일 때만 채택 후보. 그 경우에도 자동 채택하지 않고 예준·Codex와 논의. 기준 미충족·개선 없음도 정상 결과이며 전부 공개",
+    "stress": [
+      "raw",
+      "coarse"
+    ],
+    "evidence_limit": "이미 본 이상 21구간을 다시 사용하는 탐색. 후보를 늘릴수록 같은 자료에 맞춘 선택 위험이 커진다. 독립 검증·실제 고장 시각·수상 근거가 아님"
+  },
+  "fit": {
+    "A": {
+      "ar2": [
+        0.10017176356137535,
+        1.833083212563616,
+        -0.9748619270345045
+      ],
+      "ar1": [
+        0.3008474949267404,
+        0.9293131327572521
+      ],
+      "joint_tail_u": 2.8148875215735965,
+      "joint_tail_beta": 0.3191819458720007,
+      "ar1_tail_u": 82.90131359627418,
+      "ar1_tail_beta": 5.045331810469815
+    },
+    "B": {
+      "ar2": [
+        0.09803182822501699,
+        1.832496243498945,
+        -0.9742301185717609
+      ],
+      "ar1": [
+        0.2363450289705687,
+        0.9293937263633953
+      ],
+      "joint_tail_u": 2.8008389001857283,
+      "joint_tail_beta": 0.3110953221379231,
+      "ar1_tail_u": 82.21994774153272,
+      "ar1_tail_beta": 5.206811518063937
+    }
+  },
+  "verdict": {
+    "v2": {
+      "normal_notified": {
+        "A": 0,
+        "B": 3
+      },
+      "abnormal_notified": {
+        "A": 21,
+        "B": 21
+      },
+      "fn": {
+        "A": 44,
+        "B": 31
+      },
+      "f1": {
+        "A": 0.961938,
+        "B": 0.97099
+      },
+      "meets_selection_rule": true,
+      "fn_lower_than_v2": false
+    },
+    "v2_joint": {
+      "normal_notified": {
+        "A": 0,
+        "B": 4
+      },
+      "abnormal_notified": {
+        "A": 21,
+        "B": 21
+      },
+      "fn": {
+        "A": 40,
+        "B": 31
+      },
+      "f1": {
+        "A": 0.965517,
+        "B": 0.970162
+      },
+      "meets_selection_rule": false,
+      "fn_lower_than_v2": false
+    },
+    "v2_diff1": {
+      "normal_notified": {
+        "A": 0,
+        "B": 3
+      },
+      "abnormal_notified": {
+        "A": 21,
+        "B": 21
+      },
+      "fn": {
+        "A": 44,
+        "B": 31
+      },
+      "f1": {
+        "A": 0.961938,
+        "B": 0.97099
+      },
+      "meets_selection_rule": true,
+      "fn_lower_than_v2": false
+    },
+    "v2_joint_diff1": {
+      "normal_notified": {
+        "A": 0,
+        "B": 4
+      },
+      "abnormal_notified": {
+        "A": 21,
+        "B": 21
+      },
+      "fn": {
+        "A": 40,
+        "B": 31
+      },
+      "f1": {
+        "A": 0.965517,
+        "B": 0.970162
+      },
+      "meets_selection_rule": false,
+      "fn_lower_than_v2": false
+    },
+    "joint_only": {
+      "normal_notified": {
+        "A": 0,
+        "B": 4
+      },
+      "abnormal_notified": {
+        "A": 18,
+        "B": 18
+      },
+      "fn": {
+        "A": 408,
+        "B": 381
+      },
+      "f1": {
+        "A": 0.484848,
+        "B": 0.532199
+      },
+      "meets_selection_rule": false,
+      "fn_lower_than_v2": false
+    },
+    "diff1_only": {
+      "normal_notified": {
+        "A": 2,
+        "B": 0
+      },
+      "abnormal_notified": {
+        "A": 20,
+        "B": 20
+      },
+      "fn": {
+        "A": 462,
+        "B": 472
+      },
+      "f1": {
+        "A": 0.37247,
+        "B": 0.351648
+      },
+      "meets_selection_rule": false,
+      "fn_lower_than_v2": false
+    }
+  },
+  "inputs": {
+    "data_dir": "/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission/data/3_소성가공_예지보전",
+    "verified": true,
+    "files": {
+      "normal": {
+        "path": "/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission/data/3_소성가공_예지보전/press_data_normal.csv",
+        "sha256": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+        "rows": 20000,
+        "sha256_expected": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+        "sha256_ok": true,
+        "rows_expected": 20000,
+        "rows_ok": true
+      },
+      "abnormal": {
+        "path": "/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission/data/3_소성가공_예지보전/outlier_data.csv",
+        "sha256": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+        "rows": 600,
+        "sha256_expected": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+        "sha256_ok": true,
+        "rows_expected": 600,
+        "rows_ok": true
+      }
+    }
+  },
+  "code_sha256": "362db343a42f5224e977bc81f43a7bbd5549b3d1a2d1e720b633b729404f58d7",
+  "script_sha256": "d0dda0fb9860d8d039e1cd77a0c8f49397136ee3d76b7f7378af06640e93a300",
+  "environment": {
+    "python": "3.12.2",
+    "platform": "macOS-26.3.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.8.0",
+    "scipy": "1.13.1",
+    "matplotlib": "3.9.2",
+    "blas": null,
+    "protocol_version": "v1"
+  },
+  "elapsed_s": 6.503823667000688
+}
