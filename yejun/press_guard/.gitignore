@@ -1,0 +1,5 @@
+artifacts/
+outputs/predictions*.csv
+outputs/demo*.json
+__pycache__/
+.pytest_cache/

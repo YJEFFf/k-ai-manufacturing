@@ -1,0 +1,101 @@
+{
+  "protocol": {
+    "version": "press-advance-exploratory-v1",
+    "decision": "구간 초반 탐지 공백을 정상 전류의 2차 재귀 예측 오차로 보완할 수 있는가",
+    "fit": "정상 학습 구간만. 기존 A/B 시간순 구간 분할과 matched 전처리 유지",
+    "calibration": "후보별 정상 보정 구간 최댓값 conformal; alpha 0.01, 0.03, 0.05",
+    "candidates": [
+      "baseline_w8",
+      "early_w6_to_w8",
+      "ar2_only",
+      "maxz_ar2",
+      "early6_ar2"
+    ],
+    "ar2": "상수항 + 직전 전류 2개 선형 최소제곱; 구간 경계 통과 금지. 절대 잔차를 정상 학습 분포 ExpTail로 변환",
+    "selection": "주 alpha 1%에서 두 분할 모두 기존 정상 알림 수 이하, 21/21 이상 구간 유지, F1 및 최초 경보 지연 비교. 기준 미충족 후보는 기본값으로 채택하지 않음",
+    "stress": [
+      "raw",
+      "coarse",
+      "시간 이동 불변",
+      "라벨 제거 불변",
+      "청크 경계 불변",
+      "누락/역순/중복 시각에서 상태 초기화"
+    ],
+    "evidence_limit": "이미 본 이상 데이터 재사용. 독립 검증·실제 고장 예측·수상 확률 근거가 아님",
+    "directions": {
+      "D1": {
+        "idea": "딥러닝 규모 확대",
+        "objection": "독립 고장 사례 부족과 기존 LSTM 부진; 복잡성 자체가 차별성 근거가 아님"
+      },
+      "D2": {
+        "idea": "정상 동역학 기반 초반 탐지 + 구간당 점검 알림",
+        "selected": true,
+        "rejection": "거짓 알림 증가 또는 경계/청크에 따라 결과 변화"
+      },
+      "D3": {
+        "idea": "외부 유압 데이터 직접 합쳐 증강",
+        "objection": "전류/전력과 진동 샘플링이 달라 직접 결합 불가",
+        "repair": "다른 설비의 정상 기준 보정과 고장 검출을 별도 검증"
+      }
+    }
+  },
+  "fit": {
+    "A": {
+      "ar2_coefficients": [
+        0.10017176356137535,
+        1.833083212563616,
+        -0.9748619270345045
+      ],
+      "ar2_tail_u": 21.996799098878643,
+      "ar2_tail_beta": 3.423228657870734
+    },
+    "B": {
+      "ar2_coefficients": [
+        0.09803182822501699,
+        1.832496243498945,
+        -0.9742301185717609
+      ],
+      "ar2_tail_u": 22.104046730079162,
+      "ar2_tail_beta": 3.5225009795393545
+    }
+  },
+  "inputs": {
+    "data_dir": "/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission/data/3_소성가공_예지보전",
+    "verified": true,
+    "files": {
+      "normal": {
+        "path": "/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission/data/3_소성가공_예지보전/press_data_normal.csv",
+        "sha256": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+        "rows": 20000,
+        "sha256_expected": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+        "sha256_ok": true,
+        "rows_expected": 20000,
+        "rows_ok": true
+      },
+      "abnormal": {
+        "path": "/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission/data/3_소성가공_예지보전/outlier_data.csv",
+        "sha256": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+        "rows": 600,
+        "sha256_expected": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+        "sha256_ok": true,
+        "rows_expected": 600,
+        "rows_ok": true
+      }
+    }
+  },
+  "code_sha256": "362db343a42f5224e977bc81f43a7bbd5549b3d1a2d1e720b633b729404f58d7",
+  "script_sha256": "7b47703a2aed002350bb2462a4aa6abc6db8891e835f2950db1a72548eb8a71c",
+  "environment": {
+    "python": "3.12.2",
+    "platform": "macOS-26.3.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.8.0",
+    "scipy": "1.13.1",
+    "matplotlib": "3.9.2",
+    "blas": null,
+    "protocol_version": "v1"
+  },
+  "elapsed_s": 5.9904969999997775
+}

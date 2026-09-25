@@ -1,0 +1,20 @@
+{
+  "version": "uci-hydraulic-normal-only-v1",
+  "registered_before_model_scores": true,
+  "target": "내부 펌프 누설 0 대 1/2, stable flag=0",
+  "data_unit": "60초 완전 사이클; 창이나 센서별 행을 임의 분할하지 않음",
+  "inputs": ["PS1 압력", "EPS1 전력", "FS1 유량", "VS1 진동"],
+  "features": "센서마다 5초 구간 평균 12개, 총 48개. 단순 대조는 센서별 전체 평균 4개",
+  "models": ["marginal_maxz", "normal_signature", "hydraulic_efficiency"],
+  "model_definitions": {
+    "marginal_maxz": "정상 학습의 평균/표준편차로 표준화한 4개 전체 평균의 최대 절대값",
+    "normal_signature": "정상 학습으로만 표준화하고 Ledoit-Wolf 공분산을 추정한 48차원 Mahalanobis 거리",
+    "hydraulic_efficiency": "각 5초 위상에서 EPS1/(PS1*FS1)의 로그; 양수 분모인 경우만. 정상 학습 평균/표준편차로 표준화한 최대 절대값. 물리 효율의 정확한 측정값은 아님"
+  },
+  "partitions": "각 (cooler,valve,accumulator) 조건에서 누설 없는 정상 사이클을 원래 순서로 60% 학습/20% 보정/나머지 시험. 누설 사이클은 전부 시험 전용",
+  "evaluations": ["현지 정상 기준: 각 cooler 내부 학습/보정/시험", "환경 이동: 나머지 cooler 2종 학습/보정 후 남은 cooler 전체 시험"],
+  "alpha": 0.05,
+  "threshold": "후보별 정상 보정 사이클 점수 conformal. 누설 라벨은 적합·문턱·후보 선택에 사용하지 않음",
+  "limitations": ["대회 모델 가중치의 직접 전이가 아니다", "제어된 시험대 사이클이며 독립 실제 고장 수가 아니다", "인접 사이클의 시간 의존성이 있어 명목 오경보율 보장을 주장하지 않음", "cooler/valve/accumulator 상태는 분할·진단에만 사용하고 모델 특징에서 제외"],
+  "rejection": "환경 이동에서 정상 오경보 증가 또는 약한 누설 누락이면 보편적 전이 주장을 기각. 결과가 나빠도 모든 고정 후보와 환경을 공개"
+}

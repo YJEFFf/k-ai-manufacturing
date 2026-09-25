@@ -1,0 +1,113 @@
+{
+  "source": "https://archive.ics.uci.edu/dataset/447/condition+monitoring+of+hydraulic+systems",
+  "download": "https://archive.ics.uci.edu/static/public/447/condition+monitoring+of+hydraulic+systems.zip",
+  "doi": "10.24432/C5CW21",
+  "license": "CC BY 4.0",
+  "citation": "Helwig, N., Pignanelli, E., & Schuetze, A. (2015). Condition monitoring of hydraulic systems. UCI Machine Learning Repository.",
+  "sha256": "24128aad2ee45eea7e6b63ebbd9992cdf25d0483a2cebefbfc13bc69079af1f2",
+  "bytes": 76601704,
+  "crc_checked": true,
+  "members": [
+    {
+      "name": "CE.txt",
+      "bytes": 911516,
+      "crc32": "7a58d188"
+    },
+    {
+      "name": "CP.txt",
+      "bytes": 779343,
+      "crc32": "96870479"
+    },
+    {
+      "name": "description.txt",
+      "bytes": 4044,
+      "crc32": "26bd1a01"
+    },
+    {
+      "name": "EPS1.txt",
+      "bytes": 87411594,
+      "crc32": "7df374f4"
+    },
+    {
+      "name": "FS1.txt",
+      "bytes": 7581926,
+      "crc32": "419ba2e5"
+    },
+    {
+      "name": "FS2.txt",
+      "bytes": 8271923,
+      "crc32": "e131ba00"
+    },
+    {
+      "name": "profile.txt",
+      "bytes": 31196,
+      "crc32": "f6d1e285"
+    },
+    {
+      "name": "PS1.txt",
+      "bytes": 91391892,
+      "crc32": "0d5d1c64"
+    },
+    {
+      "name": "PS2.txt",
+      "bytes": 82373611,
+      "crc32": "e12742d7"
+    },
+    {
+      "name": "PS3.txt",
+      "bytes": 69916801,
+      "crc32": "439ce40f"
+    },
+    {
+      "name": "PS4.txt",
+      "bytes": 46698180,
+      "crc32": "e710efb6"
+    },
+    {
+      "name": "PS5.txt",
+      "bytes": 77776429,
+      "crc32": "2dd6cb89"
+    },
+    {
+      "name": "PS6.txt",
+      "bytes": 77875407,
+      "crc32": "6b029331"
+    },
+    {
+      "name": "SE.txt",
+      "bytes": 824838,
+      "crc32": "035cfaf2"
+    },
+    {
+      "name": "TS1.txt",
+      "bytes": 904586,
+      "crc32": "b0cbaf13"
+    },
+    {
+      "name": "TS2.txt",
+      "bytes": 910594,
+      "crc32": "bf0b5f54"
+    },
+    {
+      "name": "TS3.txt",
+      "bytes": 908805,
+      "crc32": "8219ef36"
+    },
+    {
+      "name": "TS4.txt",
+      "bytes": 910127,
+      "crc32": "10518e19"
+    },
+    {
+      "name": "VS1.txt",
+      "bytes": 778499,
+      "crc32": "42874b00"
+    },
+    {
+      "name": "documentation.txt",
+      "bytes": 4719,
+      "crc32": "02359f89"
+    }
+  ],
+  "limitations": "별도 유압 시험대 60초 사이클. 대회 프레스의 추가 날짜나 독립 실고장 사례가 아니다. VS1 1 Hz, EPS1 전력 100 Hz로 대회 센서와 직접 호환되지 않는다."
+}

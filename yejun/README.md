@@ -8,6 +8,8 @@
 
 ## 먼저 볼 문서
 
+- [Press Guard v2 구현·실험](press_guard/README.md): 2026-09-25 정상 전류 AR(2) 잔차 결합으로 F1 A 0.961938/B 0.970990, 미탐 44/31, 정상 알림 0/120·3/180 유지. 순차 추론 테스트 13개 통과. 웹 연결은 미완성
+- [외부 유압 데이터 확보·검증](analysis/press_external/README.md): UCI 2,205사이클 다운로드·CRC 확인 및 18개 고정 비교 완료. 다른 운전 환경으로의 무보정 전이 실패도 보존
 - [프레스 성능 개선 후보 실험](analysis/press_improvement/README.md): 2026-09-25 초반 6→8관측 창 후보가 정상 알림·21/21 탐지를 유지하며 F1 A 0.910→0.923, B 0.920→0.935. 탐색 결과이며 기본 모델은 유지
 - [Claude 2차 수정에 대한 Codex 재검수](analysis/press_implementation_review/codex_recheck_2.md): 2026-09-25 테스트 49개·깨끗한 클론 27/27 및 39/39·독립 재집계 통과. 실제 코드·모델 파일 변경과 기준값 출처도 확인. 보고서 작성은 보류
 - [Claude 구현 재검수 2차](analysis/press_implementation_review/claude_recheck_2.md): 코드 변경 검출·artifact 무결성·새 클론 안내·기준값 출처 보완 이력
@@ -24,6 +26,9 @@
 
 ## 디렉터리
 
+- `press_guard/`: 별도 v2 후보의 학습·저장·CSV/순차 추론·집계·테스트. 로컬 웹 시연 초안은 구현 중
+- `analysis/press_advance/`: 정상 전류 AR(2) 결합의 후보 고정·절제·입력 정밀도 실험
+- `analysis/press_external/`: UCI 유압 자료 확보·특징 추출·환경 이동 검증
 - `press_submission/`: 실행계획, 모델 코드·실험 결과·검수용 수치 집계 (보고서 작성 보류)
 - `analysis/press_implementation_review/`: 1~6단계 구현의 실행 재현·독립 재집계·결함 재현·검수 판정
 - `analysis/press_improvement/`: 기존 구현을 유지한 채 수행하는 성능 개선 후보·입력 정밀도 민감도 실험
