@@ -1,0 +1,29 @@
+{
+  "protocol": "exploratory-performance-v1",
+  "candidates": {
+    "baseline_w8": "기존: max(g_maxz3, g_sine8)",
+    "loadnorm_w8": "기존: max(17관측 진폭 보정, 부족한 행은 max-z로 보완, g_sine8)",
+    "baseline_persist2of3": "기존: 기본 결합 점수의 최근 3점 중 두 번째 큰 값으로 재보정",
+    "loadnorm_persist2of3": "진폭 보정 결합 점수의 최근 3점 중 두 번째 큰 값으로 재보정",
+    "magnitude_persist2of3": "max(최근 3점 중 두 번째 큰 g_maxz3, g_sine8)",
+    "loadnorm_magnitude_persist2of3": "max(최근 3점 중 두 번째 큰 진폭 보정 크기 성분, g_sine8)",
+    "early_w5_to_w8": "구간 위치 0~6에는 g_sine5, 위치 7부터는 g_sine8을 max-z와 결합",
+    "early_w6_to_w8": "구간 위치 0~6에는 g_sine6, 위치 7부터는 g_sine8을 max-z와 결합"
+  },
+  "fit_preprocess": "matched",
+  "eval_preprocess": [
+    "matched",
+    "raw",
+    "coarse"
+  ],
+  "alpha": [
+    0.01,
+    0.03,
+    0.05
+  ],
+  "calibration": "normal recording-segment maxima, separately calibrated per candidate",
+  "new_candidate_count": 5,
+  "reference_candidate_count": 3,
+  "exploration_only": true,
+  "baseline_not_replaced": true
+}

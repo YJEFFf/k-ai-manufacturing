@@ -8,6 +8,7 @@
 
 ## 먼저 볼 문서
 
+- [프레스 성능 개선 후보 실험](analysis/press_improvement/README.md): 2026-09-25 초반 6→8관측 창 후보가 정상 알림·21/21 탐지를 유지하며 F1 A 0.910→0.923, B 0.920→0.935. 탐색 결과이며 기본 모델은 유지
 - [Claude 2차 수정에 대한 Codex 재검수](analysis/press_implementation_review/codex_recheck_2.md): 2026-09-25 테스트 49개·깨끗한 클론 27/27 및 39/39·독립 재집계 통과. 실제 코드·모델 파일 변경과 기준값 출처도 확인. 보고서 작성은 보류
 - [Claude 구현 재검수 2차](analysis/press_implementation_review/claude_recheck_2.md): 코드 변경 검출·artifact 무결성·새 클론 안내·기준값 출처 보완 이력
 - [프레스 구현 재검수·수정 (Codex)](analysis/press_implementation_review/codex_recheck.md): 2026-09-25 Claude 수정 재검증·남은 완료 판정 오류 수정
@@ -25,6 +26,7 @@
 
 - `press_submission/`: 실행계획, 모델 코드·실험 결과·검수용 수치 집계 (보고서 작성 보류)
 - `analysis/press_implementation_review/`: 1~6단계 구현의 실행 재현·독립 재집계·결함 재현·검수 판정
+- `analysis/press_improvement/`: 기존 구현을 유지한 채 수행하는 성능 개선 후보·입력 정밀도 민감도 실험
 - `analysis/press_plan_review/`: 클로드 후속 계획 검토와 검토 당시 원문
 - `analysis/press_welding_review/`: 두 후보의 집계 정답·경보 정책·센서 관계 추가 검증
 - `analysis/reselection/`: 다섯 과제와 KAMP 추가 자료의 감사 코드·결과·판정

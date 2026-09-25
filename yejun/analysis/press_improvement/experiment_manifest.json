@@ -1,0 +1,89 @@
+{
+  "config": {
+    "protocol": "exploratory-performance-v1",
+    "candidates": {
+      "baseline_w8": "기존: max(g_maxz3, g_sine8)",
+      "loadnorm_w8": "기존: max(17관측 진폭 보정, 부족한 행은 max-z로 보완, g_sine8)",
+      "baseline_persist2of3": "기존: 기본 결합 점수의 최근 3점 중 두 번째 큰 값으로 재보정",
+      "loadnorm_persist2of3": "진폭 보정 결합 점수의 최근 3점 중 두 번째 큰 값으로 재보정",
+      "magnitude_persist2of3": "max(최근 3점 중 두 번째 큰 g_maxz3, g_sine8)",
+      "loadnorm_magnitude_persist2of3": "max(최근 3점 중 두 번째 큰 진폭 보정 크기 성분, g_sine8)",
+      "early_w5_to_w8": "구간 위치 0~6에는 g_sine5, 위치 7부터는 g_sine8을 max-z와 결합",
+      "early_w6_to_w8": "구간 위치 0~6에는 g_sine6, 위치 7부터는 g_sine8을 max-z와 결합"
+    },
+    "fit_preprocess": "matched",
+    "eval_preprocess": [
+      "matched",
+      "raw",
+      "coarse"
+    ],
+    "alpha": [
+      0.01,
+      0.03,
+      0.05
+    ],
+    "calibration": "normal recording-segment maxima, separately calibrated per candidate",
+    "new_candidate_count": 5,
+    "reference_candidate_count": 3,
+    "exploration_only": true,
+    "baseline_not_replaced": true
+  },
+  "baseline_commit": "d7cbd80572169244adcf8c2d671f2e79cf70e77f",
+  "package_code_sha256": "362db343a42f5224e977bc81f43a7bbd5549b3d1a2d1e720b633b729404f58d7",
+  "script_sha256": "742991d3ea8af58be6219e96b3868a03c4d93483c2e211506ea87380e8ce0fd6",
+  "inputs": {
+    "data_dir": "/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission/data/3_소성가공_예지보전",
+    "verified": true,
+    "files": {
+      "normal": {
+        "path": "/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission/data/3_소성가공_예지보전/press_data_normal.csv",
+        "sha256": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+        "rows": 20000,
+        "sha256_expected": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+        "sha256_ok": true,
+        "rows_expected": 20000,
+        "rows_ok": true
+      },
+      "abnormal": {
+        "path": "/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission/data/3_소성가공_예지보전/outlier_data.csv",
+        "sha256": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+        "rows": 600,
+        "sha256_expected": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+        "sha256_ok": true,
+        "rows_expected": 600,
+        "rows_ok": true
+      }
+    }
+  },
+  "environment": {
+    "python": "3.12.2",
+    "platform": "macOS-26.3.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.8.0",
+    "scipy": "1.13.1",
+    "matplotlib": "3.9.2",
+    "blas": null,
+    "protocol_version": "v1"
+  },
+  "elapsed_s": 8.23,
+  "checks": {
+    "prefix_invariant": {
+      "A": true,
+      "B": true
+    },
+    "reference_tables_equal": {
+      "baseline_w8": true,
+      "loadnorm_w8": true,
+      "baseline_persist2of3": true
+    },
+    "independent_counts_and_pvalues": true,
+    "source_outputs_and_artifacts_unchanged": true
+  },
+  "outputs": {
+    "config.json": "19c5cdceb88e0f83f8202fa7d445e314dfd920cb3607e1a456360efa2fd4b6ed",
+    "candidate_metrics.csv": "50b23aa04b80f3a81ddfbc09138e8e6f99b272e8daa2b3a2e44809a8a51e78f9",
+    "conformal_1pct.csv": "a2edc4065a9cb7a1cb9164845f726f283308505a270171098a3537c04c30f127"
+  }
+}
