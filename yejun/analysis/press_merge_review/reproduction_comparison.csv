@@ -1,0 +1,8 @@
+file,rows,same_layout,equal_at_1e_9,max_numeric_abs_diff,differing_columns
+conformal_unit_test.csv,54,True,True,0.0,
+error_conditions.csv,12,True,True,0.0,
+influence.csv,24,True,True,0.0,
+model_comparison.csv,108,True,True,4.8482051706599805e-12,
+predictions_test.csv,11387,True,True,1.6390694357326652e-11,
+segment_features.csv,342,True,True,1.741093380580594e-12,
+w_selection.csv,10,True,True,0.0,

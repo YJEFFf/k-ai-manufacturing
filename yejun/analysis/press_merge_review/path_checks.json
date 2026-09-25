@@ -1,0 +1,7 @@
+{
+  "custom_root_csv_exists": true,
+  "child_returncode": 1,
+  "last_error_line": "FileNotFoundError: [Errno 2] No such file or directory: '/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press-review-child-108n1_ss/claude/data/3_소성가공_예지보전/press_data_normal.csv'",
+  "child_command": "05_requantize_audit.py --audit <vendor file> (same arguments as run_all.py)",
+  "custom_out_diagnosis_omits_requantization": true
+}

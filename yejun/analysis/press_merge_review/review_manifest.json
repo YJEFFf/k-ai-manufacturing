@@ -1,0 +1,22 @@
+{
+  "reviewed_commit": "b5d41d3b9bd8fbbf0842277dc1265b0e84327806",
+  "python": "3.12.8",
+  "packages": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "scikit-learn": "1.9.1",
+    "matplotlib": "3.11.2",
+    "scipy": "1.18.1"
+  },
+  "input_sha256": {
+    "outlier_data.csv": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+    "press_data_normal.csv": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7"
+  },
+  "quantization": "05.quantize applied directly to all train/cal/test inputs; no CSV rounding step",
+  "comparison_tolerance": "absolute 1e-9, relative 0",
+  "scope": "Exploratory verification of already inspected data, not independent validation",
+  "vendor_equal_to_codex": true,
+  "all_csvs_reproduced_at_1e_9": true,
+  "checks_json_equal": true,
+  "custom_out_diagnosis_has_requantization": false
+}
