@@ -17,6 +17,14 @@ MAX_UPLOAD=8*1024*1024
 MAX_ROWS=50000
 
 
+def score_threshold(cal,alpha):
+    """p=(1+#cal≥s)/(n+1) ≤ α 와 동치인 점수 문턱. 점수가 이 값을 넘으면 경보다. 화면 표시용."""
+    n=len(cal); allowed=int(np.floor(alpha*(n+1)-1))
+    if allowed<0: return float("inf")
+    ordered=np.sort(np.asarray(cal,float))[::-1]
+    return float(ordered[allowed]) if allowed<n else float("-inf")
+
+
 class Console:
     def __init__(self):
         self.normal,self.abnormal,_=D.load()
@@ -62,7 +70,8 @@ class Console:
                                scored=int(predictions.score.notna().sum()),invalid=int(predictions.status.ne("ok").sum()),
                                alarm_rows=int(predictions.alarm.sum()),notifications=int(predictions.notification.sum()),
                                elapsed_s=duration),
-                    calibration_segments=len(self.models[split].cal),cases=json.loads(queue.to_json(orient="records")),
+                    calibration_segments=len(self.models[split].cal),threshold=score_threshold(self.models[split].cal,alpha),
+                    cases=json.loads(queue.to_json(orient="records")),
                     points=json.loads(plot.to_json(orient="records",double_precision=12)))
         if kind!="upload": self.cache[key]=result
         return result
@@ -70,10 +79,11 @@ class Console:
     def overview(self):
         metrics=pd.read_csv(HERE/"outputs"/"metrics.csv")
         external=HERE.parent/"analysis"/"press_external"/"metrics.csv"
-        audit=HERE/"outputs"/"audit.json"
+        audit=HERE/"outputs"/"audit.json"; benchmark=HERE/"outputs"/"benchmark.json"
         return dict(metrics=json.loads(metrics.to_json(orient="records")),
                     external=json.loads(pd.read_csv(external).to_json(orient="records")) if external.exists() else [],
-                    audit=json.loads(audit.read_text()) if audit.exists() else {})
+                    audit=json.loads(audit.read_text()) if audit.exists() else {},
+                    benchmark=json.loads(benchmark.read_text()) if benchmark.exists() else {})
 
 
 def handler(console):

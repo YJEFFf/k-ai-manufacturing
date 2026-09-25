@@ -17,10 +17,10 @@
     "protocol_version": "v1"
   },
   "code_hashes": {
-    "test_guard.py": "a7138210eb4f17278631747f4e08b3567c457c68bacfa96ffebcdb24c4c6b8c6",
-    "predict.py": "ba5f132fc4892b7f4e16ff918e26693858a1e9c7465859a9e0a27fff541318af",
     "model.py": "6ecd8e7efb1c0d3a1ae2b3239aedbcc0a2fd9b4b698565ea1982127cdfe0e5a3",
-    "train.py": "fc9701b6e91083d7f88473c74afe8e17f7a6ba931f22cce49f5d395944ac7059"
+    "train.py": "55c17f04881d47a4637eb77a57a90801a726bdb421b57d02e20e41370d51c883",
+    "predict.py": "ba5f132fc4892b7f4e16ff918e26693858a1e9c7465859a9e0a27fff541318af",
+    "test_guard.py": "a7138210eb4f17278631747f4e08b3567c457c68bacfa96ffebcdb24c4c6b8c6"
   },
   "artifacts": {
     "guard_A.json": "63234e1bc2a646b34694df0bc4d51507c86c5f6efaaaf065eef108bd6b2514ad",
@@ -37,5 +37,5 @@
     "rolling.csv": "f7fd51580796b3e310b1a66d146e1703600119a10f557963cec3081c4e16c73b"
   },
   "exploratory": true,
-  "elapsed_s": 20.742702999999892
+  "elapsed_s": 20.466078290999576
 }

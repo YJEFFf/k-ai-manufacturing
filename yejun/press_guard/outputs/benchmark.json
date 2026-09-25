@@ -1,0 +1,72 @@
+{
+  "version": "press-guard-v2.0",
+  "split": "A",
+  "rows": 4690,
+  "sampling_seconds": 0.1,
+  "runs": [
+    {
+      "label": "1행",
+      "chunk": 1,
+      "rows": 4690,
+      "calls": 4690,
+      "repeats": 3,
+      "seconds_best": 43.4734,
+      "rows_per_second": 107.9,
+      "p50_ms": 10.176,
+      "p95_ms": 10.47,
+      "max_ms": 29.738
+    },
+    {
+      "label": "8행",
+      "chunk": 8,
+      "rows": 4690,
+      "calls": 587,
+      "repeats": 3,
+      "seconds_best": 6.1261,
+      "rows_per_second": 765.6,
+      "p50_ms": 10.509,
+      "p95_ms": 10.797,
+      "max_ms": 23.6
+    },
+    {
+      "label": "128행",
+      "chunk": 128,
+      "rows": 4690,
+      "calls": 37,
+      "repeats": 3,
+      "seconds_best": 0.6454,
+      "rows_per_second": 7267.1,
+      "p50_ms": 17.465,
+      "p95_ms": 18.056,
+      "max_ms": 18.462
+    },
+    {
+      "label": "전체",
+      "chunk": 4690,
+      "rows": 4690,
+      "calls": 1,
+      "repeats": 3,
+      "seconds_best": 0.2733,
+      "rows_per_second": 17161.3,
+      "p50_ms": 276.859,
+      "p95_ms": 279.539,
+      "max_ms": 279.836
+    }
+  ],
+  "batch_predict_seconds": 0.2678,
+  "environment": {
+    "python": "3.12.2",
+    "platform": "macOS-26.3.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.8.0",
+    "scipy": "1.13.1",
+    "matplotlib": "3.9.2",
+    "blas": null,
+    "protocol_version": "v1",
+    "processor": "arm",
+    "omp_num_threads": "1"
+  },
+  "note": "CPU 한 스레드 참고치. 1행 묶음의 호출당 지연이 수집 주기 0.1초보다 작아야 행 단위 실시간 처리가 가능하다."
+}

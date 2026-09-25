@@ -93,7 +93,7 @@ def main():
             m=GuardModel.fit(tr,ca,split=f"train_to_{end}",input_hashes=hashes)
             rolling.extend(evaluate_pair(m,ca,te,abnormal,f"normal_{end+120}_{end+179}"))
         pd.DataFrame(rolling).to_csv(args.out/"rolling.csv",index=False)
-    code_files=[p for p in HERE.glob("*.py") if p.name != "serve.py"]
+    code_files=[HERE/n for n in ("model.py","train.py","predict.py","test_guard.py")]   # 결과를 낳는 코드만. serve/audit/benchmark는 제외
     D.dump_json(dict(version="press-guard-v2.0",input_hashes=hashes,environment=D.environment(),
                      code_hashes={p.name:D.sha256_file(p) for p in code_files},
                      artifacts={p.name:D.sha256_file(p) for p in args.artifacts.glob("guard_*.json")},
