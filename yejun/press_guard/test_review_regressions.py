@@ -74,3 +74,18 @@ def test_gain_is_not_only_in_warmup():
         x=c[c.split_id.eq(sid)].pivot(index="value",columns="model",values="error_rows")
         assert x.loc[["0","1"],"v1"].sum()==early==x.loc[["0","1"],"v2"].sum()
         assert x.loc["≥10","v1"]-x.loc["≥10","v2"]==late_gain
+
+
+def test_v1_rerun_does_not_break_v2_verify(tmp_path):
+    """v1 패키지를 다시 실행하면 v1 manifest의 타이밍·run_id가 바뀐다. v2 검증은 그 파일 해시에 묶이면 안 된다."""
+    from contracts import SOURCES, analysis_errors
+    manifest=json.loads((HERE/"outputs"/"manifest.json").read_text())
+    root=tmp_path/"src"
+    for name in SOURCES:
+        target=root/name; target.parent.mkdir(parents=True,exist_ok=True); shutil.copy2(HERE.parent/name,target)
+    live=root/"press_submission"/"outputs"/"manifest.json"; live.parent.mkdir(parents=True,exist_ok=True)
+    original=json.loads((HERE.parent/"press_submission"/"outputs"/"manifest.json").read_text())
+    original["timings_s"]={"total_s":1.0}; original["run_id"]="other+run"
+    live.write_text(json.dumps(original))
+    assert "press_submission/outputs/manifest.json" not in SOURCES
+    assert analysis_errors(manifest,HERE/"outputs",source_root=root)==[]

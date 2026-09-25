@@ -13,7 +13,9 @@ ANALYSIS_TABLES = ("model_comparison_v2.csv", "robustness_v2.csv", "error_condit
 ANALYSIS_FILES = ANALYSIS_TABLES + ("analysis_summary.json", "model_comparison_v2.md", "fig_recall_by_position_v2.png",
                                     "fig_first_alarm_v2.png", "fig_missed_example_v2.png")
 ARTIFACTS = ("guard_A.json", "guard_B.json")
-SOURCES = ("press_submission/outputs/manifest.json", "press_submission/outputs/expected/manifest.json",
+# v1의 실행 중 manifest(타이밍·run_id가 매 실행마다 바뀜)는 분석 시점에 analyze.source_hashes()가 예측 파일 해시로 확인한다.
+# 여기 넣으면 v1 패키지를 다시 실행할 때마다 v2 verify가 깨진다(패키지 간 결합).
+SOURCES = ("press_submission/outputs/expected/manifest.json",
            "press_submission/outputs/model_comparison_all.csv", "press_submission/outputs/predictions_A.csv",
            "press_submission/outputs/predictions_B.csv", "analysis/press_advance/manifest.json",
            "analysis/press_advance/metrics.csv", "analysis/press_advance/run_experiment.py")
