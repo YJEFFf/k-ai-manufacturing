@@ -1,0 +1,470 @@
+{
+  "reviewed_commit": "9ecbdcb7bf52e66ddbdd652a02ccb919a1bb394f",
+  "pytest": {
+    "passed": 49,
+    "seconds": 6.49,
+    "command": "OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python -m pytest -q tests"
+  },
+  "clean_repro": {
+    "full": {
+      "git_commit": "9ecbdcb",
+      "code_sha256": "362db343a42f5224e977bc81f43a7bbd5549b3d1a2d1e720b633b729404f58d7",
+      "run_id": "9ecbdcb+8830e803a7ca72b3",
+      "steps": 5,
+      "timings_s": {
+        "step1_s": 1.57,
+        "step2_s": 5.93,
+        "step3_s": 30.66,
+        "step4_s": 2.98,
+        "step5_s": 2.02,
+        "total_s": 43.18
+      },
+      "environment": {
+        "python": "3.12.2",
+        "platform": "macOS-26.3.1-arm64-arm-64bit",
+        "machine": "arm64",
+        "numpy": "1.26.4",
+        "pandas": "2.3.3",
+        "scikit_learn": "1.8.0",
+        "scipy": "1.13.1",
+        "matplotlib": "3.9.2",
+        "blas": null,
+        "protocol_version": "v1"
+      },
+      "torch": "2.5.1",
+      "result_comparisons": [
+        {
+          "file": "ablation.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "alarm_components.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "conformal_mc.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "diagnosis.json",
+          "ok": true,
+          "reason": null
+        },
+        {
+          "file": "error_conditions_fn.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "error_conditions_fp.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "influence.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "interaction_2x2.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "label_bypass.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "load_normalization.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "load_normalization_meta.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "lstm_common_history_A.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "lstm_common_history_B.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "lstm_common_meta.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "lstm_guidebook_history.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "lstm_guidebook_reproduction.json",
+          "ok": true,
+          "reason": null
+        },
+        {
+          "file": "model_comparison.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "model_comparison_all.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "model_comparison_lstm.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "operating_points.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "persistence.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "preprocess_effect.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "quantization_frozen.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "segment_features.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "sensitivity.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "sensitivity_params.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "splits.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "tail_params.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "thresholds_main.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "uncertainty.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "waveform_segments.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "workload.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        }
+      ],
+      "artifact_state_equal_to_source": {
+        "main_A.json": true,
+        "main_B.json": true
+      },
+      "figures_byte_equal_to_source": {
+        "fig_recall_by_position.png": true,
+        "fig_current_waveform.png": true,
+        "fig_vibration_vs_waveform.png": true,
+        "fig_segment_length.png": true,
+        "fig_error_examples.png": true
+      },
+      "diagnosis_byte_equal_to_source": true,
+      "guidebook_cached": true,
+      "common_cached": [
+        {
+          "split": "normal_60_20_20",
+          "cached": true,
+          "epochs_run": 197
+        },
+        {
+          "split": "normal_50_20_30",
+          "cached": true,
+          "epochs_run": 101
+        }
+      ],
+      "command": "PATH=/opt/anaconda3/bin:$PATH bash tools/clean_repro.sh --with-lstm",
+      "exit_code": 0,
+      "verification_passed": 39,
+      "verification_total": 39
+    },
+    "partial": {
+      "git_commit": "9ecbdcb",
+      "code_sha256": "362db343a42f5224e977bc81f43a7bbd5549b3d1a2d1e720b633b729404f58d7",
+      "run_id": "9ecbdcb+aa2376ddf2bcec09",
+      "steps": 3,
+      "timings_s": {
+        "step1_s": 1.66,
+        "step2_s": 6.21,
+        "step3_s": 30.95,
+        "total_s": 38.83
+      },
+      "environment": {
+        "python": "3.12.2",
+        "platform": "macOS-26.3.1-arm64-arm-64bit",
+        "machine": "arm64",
+        "numpy": "1.26.4",
+        "pandas": "2.3.3",
+        "scikit_learn": "1.8.0",
+        "scipy": "1.13.1",
+        "matplotlib": "3.9.2",
+        "blas": null,
+        "protocol_version": "v1"
+      },
+      "torch": "2.5.1",
+      "result_comparisons": [
+        {
+          "file": "ablation.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "alarm_components.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "conformal_mc.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "diagnosis.json",
+          "ok": true,
+          "reason": null
+        },
+        {
+          "file": "error_conditions_fn.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "error_conditions_fp.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "influence.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "interaction_2x2.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "label_bypass.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "model_comparison.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "operating_points.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "preprocess_effect.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "quantization_frozen.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "segment_features.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "sensitivity.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "sensitivity_params.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "splits.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "tail_params.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "thresholds_main.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        },
+        {
+          "file": "waveform_segments.csv",
+          "ok": true,
+          "max_abs_diff": 0.0,
+          "alarm_cells_diff": 0,
+          "reason": null
+        }
+      ],
+      "artifact_state_equal_to_source": {
+        "main_A.json": true,
+        "main_B.json": true
+      },
+      "figures_byte_equal_to_source": {
+        "fig_recall_by_position.png": true,
+        "fig_current_waveform.png": true,
+        "fig_vibration_vs_waveform.png": true,
+        "fig_segment_length.png": true,
+        "fig_error_examples.png": true
+      },
+      "diagnosis_byte_equal_to_source": true,
+      "command": "PATH=/opt/anaconda3/bin:$PATH bash tools/clean_repro.sh",
+      "exit_code": 0,
+      "verification_passed": 27,
+      "verification_total": 27
+    }
+  },
+  "cacheless_full_retraining_performed": false
+}

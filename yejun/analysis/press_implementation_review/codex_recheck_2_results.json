@@ -1,0 +1,145 @@
+{
+  "reviewed_commit": "9ecbdcb7bf52e66ddbdd652a02ccb919a1bb394f",
+  "reviewed_package": "/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission",
+  "python": "3.12.2 | packaged by conda-forge | (main, Feb 16 2024, 20:54:21) [Clang 16.0.6 ]",
+  "findings": {
+    "fresh_clone_instructions": {
+      "passed": true,
+      "exit_code": 1,
+      "summary": "38/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 362db343a42f vs 동결 3b66c92eba46",
+      "failures": [
+        "FAIL outputs.integrity  (['predictions_A.csv: 없음', 'predictions_B.csv: 없음', 'records_main_A.csv: 없음', 'records_main_B.csv: 없음', 'artifacts/main_A.json: 없음', 'artifacts/main_B.json: 없음'])"
+      ],
+      "stderr": "행별 예측·기록 파일이 없다. 이 파일은 Git에 없으므로 run_all.py를 먼저 실행한 뒤 verify한다."
+    },
+    "real_outputs_baseline": {
+      "passed": true,
+      "exit_code": 0,
+      "summary": "39/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 362db343a42f vs 동결 3b66c92eba46",
+      "failures": [],
+      "stderr": ""
+    },
+    "code_change:press/scores.py": {
+      "passed": true,
+      "verification": {
+        "exit_code": 1,
+        "summary": "38/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 362db343a42f vs 동결 3b66c92eba46",
+        "failures": [
+          "FAIL code.matches_manifest  (['현재 코드 06df97bf8ea7 ≠ 실행 코드 362db343a42f (실행 후 코드 변경)'])"
+        ],
+        "stderr": ""
+      },
+      "freeze_exit": 2,
+      "expected_preserved": true
+    },
+    "code_change:predict.py": {
+      "passed": true,
+      "verification": {
+        "exit_code": 1,
+        "summary": "38/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 362db343a42f vs 동결 3b66c92eba46",
+        "failures": [
+          "FAIL code.matches_manifest  (['현재 코드 d3b68ac18200 ≠ 실행 코드 362db343a42f (실행 후 코드 변경)'])"
+        ],
+        "stderr": ""
+      },
+      "freeze_exit": 2,
+      "expected_preserved": true
+    },
+    "code_change:vendor/press_policy_audit.py": {
+      "passed": true,
+      "verification": {
+        "exit_code": 1,
+        "summary": "38/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 362db343a42f vs 동결 3b66c92eba46",
+        "failures": [
+          "FAIL code.matches_manifest  (['현재 코드 171f71517c21 ≠ 실행 코드 362db343a42f (실행 후 코드 변경)'])"
+        ],
+        "stderr": ""
+      },
+      "freeze_exit": 2,
+      "expected_preserved": true
+    },
+    "artifact_tamper:main_A.json": {
+      "passed": true,
+      "verification": {
+        "exit_code": 1,
+        "summary": "38/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 362db343a42f vs 동결 3b66c92eba46",
+        "failures": [
+          "FAIL outputs.integrity  (['artifacts/main_A.json: 실행 후 내용 변경'])"
+        ],
+        "stderr": ""
+      },
+      "freeze_exit": 2,
+      "expected_preserved": true
+    },
+    "artifact_delete:main_A.json": {
+      "passed": true,
+      "verification": {
+        "exit_code": 1,
+        "summary": "38/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 362db343a42f vs 동결 3b66c92eba46",
+        "failures": [
+          "FAIL outputs.integrity  (['artifacts/main_A.json: 없음'])"
+        ],
+        "stderr": ""
+      },
+      "freeze_exit": 2,
+      "expected_preserved": true
+    },
+    "artifact_tamper:main_B.json": {
+      "passed": true,
+      "verification": {
+        "exit_code": 1,
+        "summary": "38/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 362db343a42f vs 동결 3b66c92eba46",
+        "failures": [
+          "FAIL outputs.integrity  (['artifacts/main_B.json: 실행 후 내용 변경'])"
+        ],
+        "stderr": ""
+      },
+      "freeze_exit": 2,
+      "expected_preserved": true
+    },
+    "artifact_delete:main_B.json": {
+      "passed": true,
+      "verification": {
+        "exit_code": 1,
+        "summary": "38/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 362db343a42f vs 동결 3b66c92eba46",
+        "failures": [
+          "FAIL outputs.integrity  (['artifacts/main_B.json: 없음'])"
+        ],
+        "stderr": ""
+      },
+      "freeze_exit": 2,
+      "expected_preserved": true
+    },
+    "explicit_artifact_directory": {
+      "passed": true,
+      "explicit": {
+        "exit_code": 0,
+        "summary": "39/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 362db343a42f vs 동결 3b66c92eba46",
+        "failures": [],
+        "stderr": ""
+      },
+      "without_override": {
+        "exit_code": 1,
+        "summary": "38/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 362db343a42f vs 동결 3b66c92eba46",
+        "failures": [
+          "FAIL outputs.integrity  (['artifacts/main_A.json: 없음', 'artifacts/main_B.json: 없음'])"
+        ],
+        "stderr": ""
+      }
+    },
+    "clean_repro_uses_committed_expected": {
+      "passed": true,
+      "exit_code": 0,
+      "expected_matches_commit": true,
+      "different_expected_files": [],
+      "summary": [
+        "27/27 통과 (1~3단계 부분 비교, 필수 집계 20개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 362db343a42f vs 동결 3b66c92eba46"
+      ],
+      "stderr": ""
+    },
+    "source_outputs_and_artifacts_unchanged": {
+      "passed": true
+    }
+  },
+  "passed": true
+}

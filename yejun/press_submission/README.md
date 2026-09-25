@@ -2,7 +2,9 @@
 
 실행 기준은 [PLAN.md](PLAN.md)다. 현재는 **구현·실험·디버깅·검수 단계**다. 2026-09-25 예준 지시로 대회 보고서 초안과 자동 생성 코드를 삭제했다. **예준이 검수 결과에 만족하고 보고서 작성 시작을 명시적으로 지시하기 전에는 보고서 작업을 절대 진행하지 않는다.** 이전 단계 완료 기록은 보고서 착수 허가가 아니다.
 
-2026-09-25 [Claude 재검수 2차](../analysis/press_implementation_review/claude_recheck_2.md): Codex 재검수 주장을 전부 재현하고, 실행 후 코드 변경 검출(`code.matches_manifest`)·artifact 해시 대조·새 클론 안내·`clean_repro.sh` 기대값 출처를 보완했다. 테스트 **49개**, 전체 집계 비교 **39/39** 통과. `outputs/`는 표준 환경 재실행으로 갱신했다(그림·diagnosis는 `e43d96b`와 바이트 동일).
+2026-09-25 [Claude 2차 수정에 대한 Codex 재검수](../analysis/press_implementation_review/codex_recheck_2.md): 테스트 **49개**, 깨끗한 클론의 1~3단계 **27/27** 및 1~5단계 **39/39** 통과(LSTM 캐시 사용). 실제 코드 변경·모델 파일 변조/삭제·새 클론 안내·미커밋 기대값 제외를 확인했고 추가 구현 결함은 발견하지 못했다. 구현 코드·`outputs/`·`outputs/expected/`는 유지했다.
+
+2026-09-25 [Claude 재검수 2차](../analysis/press_implementation_review/claude_recheck_2.md): Codex 재검수 주장을 전부 재현하고, 실행 후 코드 변경 검출(`code.matches_manifest`)·artifact 해시 대조·새 클론 안내·`clean_repro.sh` 기대값 출처를 보완했다. 테스트 **49개**, 전체 집계 비교 **39/39** 통과. 당시 `outputs/`는 표준 환경 재실행으로 갱신했다(그림·diagnosis는 `e43d96b`와 바이트 동일).
 
 2026-09-25 [Codex 재검수·수정](../analysis/press_implementation_review/codex_recheck.md): Claude 수정 후에도 남은 필수 검사 누락·불완전 동결·파일 변조·재현 실패 전파 문제를 수정했다. 테스트 **46개**, 캐시 사용 전체 집계 비교 **38/38** 통과. 주 모델 A 21/21·0/120 및 B 21/21·3/180 독립 재집계 일치. `outputs/`는 이번 실행으로 갱신했고 `outputs/expected/`는 이전 기대값을 유지한 채 비교했다. 현재 확인 범위에서 미해결 구현 오류는 발견하지 못했다. 보고서 작성은 별도 지시 전까지 보류한다.
 
@@ -72,12 +74,12 @@ python predict.py --model artifacts/main_A.json --input <입력.csv> --out predi
 | 3 전처리·창 민감도, 절제, 오류 조건 | 구현·기본 결과 재현. R4(α별 최초 경보 위치) 수정 완료 |
 | 4 기준모델·LSTM 3프로토콜, coverage·불확실성 | R2(캐시 키에 코드·전처리·스케일러·자료 해시) 수정 완료, 새 키로 재학습. R6 캐시 없는 재현은 아래 재현 확인 범위 참조 |
 | 5 업무량·지속성·진폭 후보·수치 집계 | R3(지속성 결측 처리) 수정 완료. 보고서 생성 기능 삭제 |
-| 6 환경 고정·깨끗한 재현·구현 재검수 | Claude 수정과 Codex 재검수 보완 후 테스트 46개·전체 집계 비교 38/38 통과. 상세 범위는 Codex 재검수 기록 참조 |
+| 6 환경 고정·깨끗한 재현·구현 재검수 | Claude 2차 보완과 Codex 재검수 후 테스트 49개·전체 집계 비교 39/39 통과. 상세 범위는 최신 재검수 기록 참조 |
 | 보고서·발표자료·최종 제출물 조립 | 보류. 예준의 명시적인 보고서 작성 시작 지시 필요 |
 
 ## 재현 확인 범위 (6단계)
 - `outputs/expected/`는 검증된 실행(이 저장소의 커밋 시점, macOS arm64·Python 3.12.2)에서 `verify.py --freeze`로 동결한 집계값이다.
 - `bash tools/clean_repro.sh --with-lstm`: 저장소를 임시 폴더에 클론하고 산출물을 지운 뒤 데이터·LSTM 캐시를 복사해 `run_all.py`를 처음부터 실행하고 `verify.py`로 비교한다. `--retrain-lstm`은 캐시 없이 LSTM을 처음부터 학습한다(약 30분). 허용오차는 행의 모델별로 적용한다(LSTM 계열 1e-3, IF/MLP-AE 1e-6, 나머지 1e-8). 결과 기록은 재검수 문서에 있다.
-- Codex 재검수에서 기본 명령의 1~3단계는 26/26, `--with-lstm`의 1~5단계는 38/38 통과했다. 전체 LSTM의 캐시 없는 재학습은 Claude의 `294b0f6` 실행 기록을 참조하며 이번 Codex 작업에서 반복하지 않았다.
+- 최신 Codex 재검수에서 기본 명령의 1~3단계는 27/27, `--with-lstm`의 1~5단계는 39/39 통과했다. 전체 LSTM의 캐시 없는 재학습은 Claude의 `294b0f6` 실행 기록을 참조하며 이번 Codex 작업에서 반복하지 않았다.
 - 다른 기기·OS에서는 LSTM 오차가 허용오차를 넘을 수 있다. 그 경우 경보 판정(`alarm*` 열)의 차이 수를 verify가 따로 보고한다. 다른 OS 검증은 수행하지 못했다. `verify.py`는 기대 파일 누락·진단 수치 변조·필수 검사 실패를 모두 실패로 처리하며, 실행 메타데이터(cached·train_seconds 등)는 비교하지 않는다.
 - 초안을 포함했던 기존 `yejun/submission_press.zip`은 삭제했다. 최종 ZIP 조립과 보고서·발표자료 대조는 예준의 명시적인 보고서 착수 지시 이후로 보류한다. `tools/make_submission_zip.py`는 `evidence/`를 수집하지 않는다.
