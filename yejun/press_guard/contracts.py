@@ -8,8 +8,8 @@ CODE_FILES = ("model.py", "train.py", "predict.py", "analyze.py", "audit.py", "v
               "serve.py", "benchmark.py", "tools/clean_repro.sh", "web/app.js", "web/index.html", "web/style.css")
 TRAIN_TABLES = ("metrics.csv", "rolling.csv", "cases_A.csv", "cases_B.csv")
 PREDICTIONS = tuple(f"predictions_{kind}_{sid}.csv" for kind in ("normal", "abnormal") for sid in ("A", "B"))
-ANALYSIS_TABLES = ("model_comparison_v2.csv", "robustness_v2.csv", "error_conditions_v2.csv",
-                   "records_first_alarm_v2.csv", "uncertainty_v2.csv", "workload_v2.csv")
+ANALYSIS_TABLES = ("model_comparison_v2.csv", "robustness_v2.csv", "sensitivity_v2.csv", "ablation_v2.csv", "error_conditions_v2.csv",
+                   "error_conditions_segments_v2.csv", "interaction_2x2_v2.csv", "records_first_alarm_v2.csv", "uncertainty_v2.csv", "workload_v2.csv")
 ANALYSIS_FILES = ANALYSIS_TABLES + ("analysis_summary.json", "model_comparison_v2.md", "fig_recall_by_position_v2.png",
                                     "fig_first_alarm_v2.png", "fig_missed_example_v2.png")
 ARTIFACTS = ("guard_A.json", "guard_B.json")
@@ -22,7 +22,7 @@ SOURCES = ("press_submission/outputs/expected/manifest.json",
 AUDIT_NAMES = ("실행 코드·선행 산출물이 manifest와 같음", "저장 모델이 manifest와 같음", "v1 의존 코드가 학습 당시와 같음",
                "입력 자료 해시가 학습 당시와 같음") + tuple(
     f"{sid} {name}" for sid in ("A", "B") for name in ("입력 묶음 1·7·128행과 전체 추론 동일", "독립 집계가 metrics.csv와 같음",
-        "p값이 보정 순위 규칙과 같음", "이상 구간마다 알림 한 번", "날짜 이동·라벨 변경에 불변"))
+        "p값이 보정 순위 규칙과 같음", "구간당 알림은 경보 유무와 일치(정확성)", "이상 21구간 모두 탐지(성능 회귀)", "날짜 이동·라벨 변경에 불변"))
 
 
 def read_json(path):

@@ -2,6 +2,8 @@
 
     OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 python yejun/press_guard/analyze.py
 
+산출: 통합 비교, 입력 정밀도 스트레스(robustness), 전처리별 재적합 민감도(sensitivity), 성분 절제(ablation), 행/구간 단위 미탐·오경보 조건표,
+진동×파형 2×2, 구간별 첫 경보, 불확실성, 업무량, 그림.
 입력: press_guard/outputs(train.py 결과), press_guard/artifacts, press_submission/outputs(v1 패키지 실행 결과),
 analysis/press_advance(후보 고정 비교). 세 실행의 입력 자료 해시가 같아야 표를 합친다.
 모든 결과는 이미 본 이상 21구간을 재사용한 탐색 평가다. 위치는 기록구간 시작 기준이며 실제 고장 시각이 아니다.
@@ -16,6 +18,9 @@ import pandas as pd
 
 from model import GuardModel, cases, D, BASE, HERE, ALPHAS
 from press.uncertainty import moving_block_bootstrap
+from press.diagnosis import MIN_FIT_LEN, sine_fit
+from press.scores import Scorer, ExpTail, window_index
+from press.evaluate import evaluate_models
 from contracts import training_errors, training_fingerprint, ANALYSIS_FILES, SOURCES, check_files
 
 ADVANCE = HERE.parent / "analysis" / "press_advance"
@@ -109,12 +114,51 @@ def _with_length(p):
 
 
 # ---------- 미탐·오경보 조건 ----------
-def error_conditions(sid, v1_pair, v2_pairs, feats):
+AMP_MIN_LEN = 17
+QUARTILE_LABELS = ("Q1(<q25)", "Q2", "Q3", "Q4(≥q75)")
+
+
+def segment_feature_table(frame, seg, mean, scale):
+    """구간 특징(사후 기술 통계): 길이, 진동 산포, 전류 진폭 대리 지표(길이≥17만 신뢰), 사인 R²(길이≥10), 진동 두 센서 max|z|."""
+    v0, v1_, cur = (frame[c].to_numpy(float) for c in D.SENSORS)
+    zvib = np.abs((frame[D.SENSORS[:2]].to_numpy(float) - mean[:2]) / scale[:2]).max(1)
     rows = []
-    def add(model, alpha, subset, kind, cond, value, mask, alarm):
+    for s_ in np.unique(seg):
+        idx = np.flatnonzero(seg == s_); c = cur[idx]
+        rows.append(dict(record_id=int(s_), length=int(len(idx)),
+                         vib_std=float(np.sqrt(v0[idx].var(ddof=1) + v1_[idx].var(ddof=1))) if len(idx) > 1 else np.nan,
+                         amp_proxy=float(np.sqrt(2 * np.mean((c - c.mean()) ** 2))), amp_reliable=bool(len(idx) >= AMP_MIN_LEN),
+                         r2_segment=float(sine_fit(c)[1]) if len(idx) >= MIN_FIT_LEN else np.nan, vibz_max=float(zvib[idx].max())))
+    return pd.DataFrame(rows)
+
+
+def condition_bounds(train_feats):
+    """정상 학습 구간 기준의 공통 경계(v1 analysis와 같은 정의). 정상·이상 평가에 같은 경계를 적용한다."""
+    return dict(vib=tuple(train_feats.vib_std.dropna().quantile([.25, .5, .75]).to_numpy()),
+                amp=tuple(train_feats[train_feats.amp_reliable].amp_proxy.quantile([.25, .5, .75]).to_numpy()),
+                vib_high=float(train_feats.vibz_max.quantile(.95)), r2_low=float(train_feats.r2_segment.dropna().quantile(.05)))
+
+
+def _quartile(values, q):
+    v = np.asarray(values, float)
+    lab = np.full(len(v), "NA", dtype=object)
+    ok = np.isfinite(v)
+    lab[ok & (v < q[0])] = QUARTILE_LABELS[0]; lab[ok & (v >= q[0]) & (v < q[1])] = QUARTILE_LABELS[1]
+    lab[ok & (v >= q[1]) & (v < q[2])] = QUARTILE_LABELS[2]; lab[ok & (v >= q[2])] = QUARTILE_LABELS[3]
+    return lab
+
+
+def _wave(feats, bounds):
+    return np.where(feats.r2_segment.isna(), "unfittable(<10)", np.where(feats.r2_segment < bounds["r2_low"], "broken", "sine-like"))
+
+
+def error_conditions(sid, v1_pair, v2_pairs, feats, bounds):
+    """행 단위 조건표. 사분위 경계는 정상 학습 구간 기준(열에 저장). 진폭 조건에는 신뢰 제한(길이<17) 행 수를 함께 적는다."""
+    rows = []
+    def add(model, alpha, subset, kind, cond, value, mask, alarm, extra=None):
         n = int(mask.sum()); err = int(((alarm == 0) if kind == "fn" else (alarm == 1))[mask].sum())
         rows.append(dict(split_id=sid, model=model, alpha=alpha, subset=subset, error=kind, condition=cond, value=value,
-                         rows=n, error_rows=err, error_rate=err / n if n else np.nan))
+                         rows=n, error_rows=err, error_rate=err / n if n else np.nan, **(extra or {})))
     def conditions(model, alpha, pn, pa):
         for subset, kind, p in (("abnormal", "fn", pa), ("normal", "fp", pn)):
             p = _with_length(p)
@@ -125,12 +169,17 @@ def error_conditions(sid, v1_pair, v2_pairs, feats):
             for lo, hi, lab in LEN_BINS:
                 add(model, alpha, subset, kind, "len_bin", lab, (ln >= lo) & (ln <= hi), alarm)
             f = feats[subset].set_index("record_id")
-            for col, name in (("vib_std", "vib_quartile"), ("amp_proxy", "amp_quartile")):
-                q = np.nanpercentile(f[col], [25, 50, 75])
-                per_row = p.record_id.map(f[col]).to_numpy(float)
-                for lab, m in (("Q1", per_row < q[0]), ("Q2", (per_row >= q[0]) & (per_row < q[1])), ("Q3", (per_row >= q[1]) & (per_row < q[2])), ("Q4", per_row >= q[2]),
-                               ("NA", ~np.isfinite(per_row))):   # 길이 1 구간은 진동 표준편차가 없다
-                    add(model, alpha, subset, kind, name, lab, m, alarm)
+            reliable = p.record_id.map(f.amp_reliable).to_numpy(bool)
+            for col, name, q in (("vib_std", "vib_quartile", bounds["vib"]), ("amp_proxy", "amp_quartile", bounds["amp"])):
+                lab = _quartile(p.record_id.map(f[col]).to_numpy(float), q)
+                for value in QUARTILE_LABELS + ("NA",):
+                    m = lab == value
+                    if not m.any() and value == "NA":
+                        continue
+                    extra = dict(q25=q[0], q50=q[1], q75=q[2], boundary_source="normal_train_segments")
+                    if name == "amp_quartile":
+                        extra["unreliable_amp_rows"] = int((m & ~reliable).sum())
+                    add(model, alpha, subset, kind, name, value, m, alarm, extra)
             if model == "v2":
                 comp = p[["g_magnitude", "g_waveform", "g_dynamics"]].to_numpy(float)
                 strongest = np.where(np.isfinite(comp).any(axis=1), np.array(["magnitude", "waveform", "dynamics"])[np.nan_to_num(comp, nan=-np.inf).argmax(axis=1)], "none")
@@ -142,14 +191,96 @@ def error_conditions(sid, v1_pair, v2_pairs, feats):
     return pd.DataFrame(rows)
 
 
-def segment_feature_table(frame, seg):
-    v0, v1_, cur = (frame[c].to_numpy(float) for c in D.SENSORS)
+def segment_conditions(sid, v1_pair, v2_pairs, feats, bounds):
+    """구간 단위 조건표(PLAN §5.3의 구간 분모): 이상은 탐지/미탐 구간, 정상은 알림 구간. 진폭 조건에 신뢰 제한 구간 수."""
     rows = []
-    for s in np.unique(seg):
-        idx = np.flatnonzero(seg == s); c = cur[idx]
-        rows.append(dict(record_id=int(s), length=int(len(idx)), vib_std=float(np.sqrt(v0[idx].var(ddof=1) + v1_[idx].var(ddof=1))) if len(idx) > 1 else np.nan,
-                         amp_proxy=float(np.sqrt(2 * np.mean((c - c.mean()) ** 2))), amp_reliable=bool(len(idx) >= 17)))
+    def per(model, alpha, pn, pa):
+        for subset, p in (("abnormal", pa), ("normal", pn)):
+            f = feats[subset].copy()
+            f["alerted"] = f.record_id.map(p.groupby("record_id").alarm.max()).fillna(0).astype(int)
+            f["len_bin"] = [_bin(n, LEN_BINS) for n in f.length]
+            f["vib_quartile"] = _quartile(f.vib_std, bounds["vib"]); f["amp_quartile"] = _quartile(f.amp_proxy, bounds["amp"])
+            f["vib_high"] = np.where(f.vibz_max > bounds["vib_high"], "high(>q95 train)", "normal-range")
+            f["wave"] = _wave(f, bounds)
+            for cond in ("len_bin", "vib_quartile", "amp_quartile", "vib_high", "wave"):
+                for value, g in f.groupby(cond, sort=False):
+                    err = int((g.alerted == 0).sum()) if subset == "abnormal" else int(g.alerted.sum())
+                    rows.append(dict(split_id=sid, model=model, alpha=alpha, subset=subset, error="missed_segments" if subset == "abnormal" else "alerted_segments",
+                                     condition=cond, value=value, segments=len(g), error_segments=err, error_rate=err / len(g),
+                                     unreliable_amp_segments=int((~g.amp_reliable).sum()) if cond == "amp_quartile" else None))
+    per("v1", .01, *v1_pair)
+    for alpha, (pn, pa) in v2_pairs.items():
+        per("v2", alpha, pn, pa)
     return pd.DataFrame(rows)
+
+
+def interaction_2x2(sid, v1_pair, v2_pairs, feats, bounds):
+    """진동 수준(진동 두 센서 max|z| > 정상 학습 q95) × 전류 파형(사인 R² < 정상 학습 q05) 교차표. v1 analysis와 같은 정의, 경보는 각 모델의 것."""
+    rows = []
+    def per(model, alpha, pn, pa):
+        for subset, p in (("abnormal", pa), ("normal", pn)):
+            f = feats[subset].copy()
+            f["alerted"] = f.record_id.map(p.groupby("record_id").alarm.max()).fillna(0).astype(int)
+            f["vib_high"] = f.vibz_max > bounds["vib_high"]; f["wave"] = _wave(f, bounds)
+            for (vh, wv), g in f.groupby(["vib_high", "wave"]):
+                rows.append(dict(split_id=sid, model=model, alpha=alpha, subset=subset, vib_high=bool(vh), wave=wv, segments=len(g),
+                                 alerted_segments=int(g.alerted.sum()), missed_segments=int((g.alerted == 0).sum()) if subset == "abnormal" else None,
+                                 vib_threshold=f"segment max|z| of AI0/AI1 > q95 of normal-train ({bounds['vib_high']:.2f})",
+                                 wave_threshold=f"segment R² < q05 of normal-train ({bounds['r2_low']:.3f})"))
+    per("v1", .01, *v1_pair)
+    for alpha, (pn, pa) in v2_pairs.items():
+        per("v2", alpha, pn, pa)
+    return pd.DataFrame(rows)
+
+
+# ---------- 재적합 민감도·절제 (PLAN §5.2 ①을 최종 v2에 적용) ----------
+def _ar2_fit(train, seg):
+    x = train[D.SENSORS[2]].to_numpy(float); idx = window_index(seg, 3)
+    coef = np.linalg.lstsq(np.column_stack([np.ones(len(idx)), x[idx - 1], x[idx - 2]]), x[idx], rcond=None)[0]
+    return coef, ExpTail(_ar2_residual(train, seg, coef))
+
+
+def _ar2_residual(frame, seg, coef):
+    x = frame[D.SENSORS[2]].to_numpy(float); idx = window_index(seg, 3)
+    out = np.full(len(x), np.nan); out[idx] = np.abs(x[idx] - coef[0] - coef[1] * x[idx - 1] - coef[2] * x[idx - 2])
+    return out
+
+
+def _v2_scores(base, ar2, frame, seg):
+    comp, _ = base.components(frame, seg)
+    pos, _ = D.segment_positions(seg)
+    gz, s6, s8 = comp["g_maxz3"], comp["g_sine_6"], comp["g_sine_8"]
+    switch = np.where(pos < 7, s6, s8)
+    gd = ar2[1](_ar2_residual(frame, seg, ar2[0]))
+    return dict(v2=np.fmax(np.fmax(gz, switch), gd), v1_combined_w8=np.fmax(gz, s8),
+                no_magnitude=np.fmax(switch, gd), no_waveform=np.fmax(gz, gd), no_dynamics=np.fmax(gz, switch), no_early_switch=np.fmax(np.fmax(gz, s8), gd))
+
+
+def refit_experiments(normal, abnormal, vendor, metrics):
+    """① 전처리별로 학습·보정·평가를 다시 실행(재적합 민감도). ② matched 재적합에서 성분 절제. 결과 산식·기대값은 바꾸지 않는다."""
+    sens, abl = [], []
+    for sid in D.SPLITS:
+        split = D.split_normal(normal, D.segments(normal), sid)
+        for variant in ("raw", "matched", "coarse"):
+            q = {k: D.quantize(split[k], variant) for k in ("train", "cal", "test")}; q["abn"] = D.quantize(abnormal, variant)
+            segs = {k: D.segments(v) for k, v in q.items()}
+            base = Scorer(q["train"], segs["train"], vendor, wins=(6, 8), baselines=False)
+            ar2 = _ar2_fit(q["train"], segs["train"])
+            ss = {k: _v2_scores(base, ar2, q[k], segs[k]) for k in ("cal", "test", "abn")}
+            frames = dict(cal=q["cal"], test=q["test"], abn=q["abn"])
+            by_model = {m: {k: ss[k][m] for k in frames} for m in ("v2", "v1_combined_w8")}
+            mt, _ = evaluate_models(vendor, split["name"], variant, by_model, frames, segs, units=("recording_segments",))
+            mt["split_id"], mt["fit_variant"], mt["ar2_coefficients"] = sid, variant, str(np.round(ar2[0], 6).tolist())
+            sens.append(mt)
+            if variant == "matched":
+                by_model = {m: {k: ss[k][m] for k in frames} for m in ("v2", "no_magnitude", "no_waveform", "no_dynamics", "no_early_switch")}
+                ma, _ = evaluate_models(vendor, split["name"], variant, by_model, frames, segs, units=("recording_segments",))
+                ma["split_id"] = sid; abl.append(ma)
+                row = ma[ma.model.eq("v2") & ma.criterion.eq("conformal") & ma.alpha.eq(.01)].iloc[0]
+                got = metrics[metrics.split.eq(sid) & metrics.model.eq("guard_v2") & metrics.alpha.eq(.01)].iloc[0]
+                assert (int(row.tp), int(row.fp), int(row.fn)) == (int(got.tp), int(got.fp), int(got.fn)), ("matched 재적합이 저장 모델 결과와 다름", sid)
+        print(f"{sid}: 재적합 민감도·절제", flush=True)
+    return pd.concat(sens, ignore_index=True), pd.concat(abl, ignore_index=True)
 
 
 # ---------- 기록구간별 첫 경보 ----------
@@ -280,10 +411,13 @@ def main():
     if not agree:
         raise SystemExit(f"입력 해시 불일치: {hashes}")
     normal, abnormal, _ = D.load(args.root) if args.root else D.load()
+    vendor = D.load_vendor()
     metrics = pd.read_csv(args.out / "metrics.csv")
     comparison = model_comparison(args.out)
     robust = robustness(args.out)
-    cond, recs, unc, work, v2_by_split = [], [], [], [], {}
+    sens, abl = refit_experiments(normal, abnormal, vendor, metrics)
+    sens.to_csv(args.out / "sensitivity_v2.csv", index=False); abl.to_csv(args.out / "ablation_v2.csv", index=False)
+    cond, segc, inter, recs, unc, work, v2_by_split, bounds_used = [], [], [], [], [], [], {}, {}
     from serve import score_threshold
     for sid in D.SPLITS:
         model = GuardModel.load(args.artifacts / f"guard_{sid}.json")
@@ -296,14 +430,20 @@ def main():
                     p[c] = pd.to_numeric((split["test"] if p is pn else abnormal)[c], errors="coerce").to_numpy()
             pn.attrs["threshold"] = score_threshold(model.cal, alpha)
         v2_by_split[sid] = pairs
-        feats = {"normal": segment_feature_table(split["test"], D.segments(split["test"])), "abnormal": segment_feature_table(abnormal, D.segments(abnormal))}
-        cond.append(error_conditions(sid, v1_pair, pairs, feats))
+        q = {k: D.quantize(D.inputs_only(f), "matched") for k, f in (("train", split["train"]), ("test", split["test"]), ("abn", abnormal))}
+        feats = {"normal": segment_feature_table(q["test"], D.segments(q["test"]), model.mean, model.scale), "abnormal": segment_feature_table(q["abn"], D.segments(q["abn"]), model.mean, model.scale)}
+        bounds = condition_bounds(segment_feature_table(q["train"], D.segments(q["train"]), model.mean, model.scale)); bounds_used[sid] = bounds
+        cond.append(error_conditions(sid, v1_pair, pairs, feats, bounds))
+        segc.append(segment_conditions(sid, v1_pair, pairs, feats, bounds))
+        inter.append(interaction_2x2(sid, v1_pair, pairs, feats, bounds))
         recs.append(record_table(sid, v1_pair, pairs[.01]))
         unc.append(uncertainty(sid, split["name"], v1_pair, pairs, reps=args.reps))
         work.append(workload(sid, split["name"], split["test"], metrics))
         print(f"{sid}: 조건·불확실성·업무량 집계", flush=True)
-    cond, recs, unc, work = (pd.concat(x, ignore_index=True) for x in (cond, recs, unc, work))
+    cond, segc, inter, recs, unc, work = (pd.concat(x, ignore_index=True) for x in (cond, segc, inter, recs, unc, work))
     cond.to_csv(args.out / "error_conditions_v2.csv", index=False)
+    segc.to_csv(args.out / "error_conditions_segments_v2.csv", index=False)
+    inter.to_csv(args.out / "interaction_2x2_v2.csv", index=False)
     recs.to_csv(args.out / "records_first_alarm_v2.csv", index=False)
     unc.to_csv(args.out / "uncertainty_v2.csv", index=False)
     work.to_csv(args.out / "workload_v2.csv", index=False)
@@ -312,8 +452,10 @@ def main():
     early = cond[cond.subset.eq("abnormal") & cond.condition.eq("pos_bin") & cond.value.isin(["0", "1"]) & cond.alpha.eq(.01)].groupby(["split_id", "model"]).error_rows.sum().unstack()
     summary = dict(input_hashes=hashes["v2"], comparison_rows=int(len(comparison)), models=sorted(comparison.model.unique().tolist()),
                    fn_rows_at_position_0_1=early.to_dict(), fn_rows_total={m: {sid: int(recs[recs.split_id.eq(sid)][f"{m}_fn_rows"].sum()) for sid in D.SPLITS} for m in ("v1", "v2")},
-                   robustness_rows=int(len(robust)),
-                   files=["model_comparison_v2.csv", "model_comparison_v2.md", "robustness_v2.csv", "error_conditions_v2.csv", "records_first_alarm_v2.csv", "uncertainty_v2.csv", "workload_v2.csv",
+                   robustness_rows=int(len(robust)), sensitivity_rows=int(len(sens)), ablation_rows=int(len(abl)),
+                   condition_bounds={sid: {k: (list(np.round(v, 6)) if isinstance(v, tuple) else round(v, 6)) for k, v in b.items()} for sid, b in bounds_used.items()},
+                   files=["model_comparison_v2.csv", "model_comparison_v2.md", "robustness_v2.csv", "sensitivity_v2.csv", "ablation_v2.csv", "error_conditions_v2.csv",
+                          "error_conditions_segments_v2.csv", "interaction_2x2_v2.csv", "records_first_alarm_v2.csv", "uncertainty_v2.csv", "workload_v2.csv",
                           "fig_recall_by_position_v2.png", "fig_first_alarm_v2.png", "fig_missed_example_v2.png"],
                    elapsed_s=round(time.monotonic() - start, 1))
     D.dump_json(summary, args.out / "analysis_summary.json")

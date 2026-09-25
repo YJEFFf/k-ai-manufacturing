@@ -84,3 +84,49 @@ def test_verify_detects_tampering(tmp_path):
     a = json.loads((art / "guard_A.json").read_text()); a["state"]["ar2"][0] += 1; (art / "guard_A.json").write_text(json.dumps(a))
     assert verify.main(["--out", str(out), "--artifacts", str(art)]) == 1
     assert verify.main(["--out", str(out), "--artifacts", str(art), "--freeze"]) == 2
+
+
+def test_refit_sensitivity_and_ablation_contract(tables):
+    """재적합 민감도(3전처리×2모델)와 절제(5후보)가 있고, matched 재적합 v2는 저장 모델 지표와 같다."""
+    s = pd.read_csv(OUT / "sensitivity_v2.csv"); a = pd.read_csv(OUT / "ablation_v2.csv"); metrics = tables["metrics.csv"]
+    assert set(s.fit_variant) == {"raw", "matched", "coarse"} and set(s.model) == {"v2", "v1_combined_w8"}
+    assert set(a.model) == {"v2", "no_magnitude", "no_waveform", "no_dynamics", "no_early_switch"}
+    for sid in ("A", "B"):
+        m = metrics[metrics.split.eq(sid) & metrics.model.eq("guard_v2") & metrics.alpha.eq(.01)].iloc[0]
+        r = s[s.split_id.eq(sid) & s.fit_variant.eq("matched") & s.model.eq("v2") & s.criterion.eq("conformal") & s.alpha.eq(.01)].iloc[0]
+        assert (r.tp, r.fp, r.fn) == (m.tp, m.fp, m.fn)
+        v1 = metrics[metrics.split.eq(sid) & metrics.model.eq("baseline_v1") & metrics.alpha.eq(.01)].iloc[0]
+        r1 = s[s.split_id.eq(sid) & s.fit_variant.eq("matched") & s.model.eq("v1_combined_w8") & s.criterion.eq("conformal") & s.alpha.eq(.01)].iloc[0]
+        assert (r1.tp, r1.fp, r1.fn) == (v1.tp, v1.fp, v1.fn)
+        full = a[a.split_id.eq(sid) & a.model.eq("v2") & a.criterion.eq("conformal") & a.alpha.eq(.01)].iloc[0]
+        assert (full.tp, full.fp, full.fn) == (m.tp, m.fp, m.fn)
+
+
+def test_segment_conditions_and_interaction_denominators(tables):
+    """구간 단위 조건표의 분모는 이상 21·정상 120/180이고, 오류 구간 합은 지표의 구간 수와 같다. 2×2 셀 합도 같다."""
+    c = pd.read_csv(OUT / "error_conditions_segments_v2.csv"); i = pd.read_csv(OUT / "interaction_2x2_v2.csv"); metrics = tables["metrics.csv"]
+    for sid, n_normal in (("A", 120), ("B", 180)):
+        for model, name in (("v1", "baseline_v1"), ("v2", "guard_v2")):
+            m = metrics[metrics.split.eq(sid) & metrics.model.eq(name) & metrics.alpha.eq(.01)].iloc[0]
+            for cond in ("len_bin", "vib_quartile", "amp_quartile", "vib_high", "wave"):
+                x = c[c.split_id.eq(sid) & c.model.eq(model) & c.alpha.eq(.01) & c.condition.eq(cond)]
+                abn, nor = x[x.subset.eq("abnormal")], x[x.subset.eq("normal")]
+                assert abn.segments.sum() == 21 and abn.error_segments.sum() == 21 - m.abnormal_notified_segments, (sid, model, cond)
+                assert nor.segments.sum() == n_normal and nor.error_segments.sum() == m.normal_notified_segments, (sid, model, cond)
+            y = i[i.split_id.eq(sid) & i.model.eq(model) & i.alpha.eq(.01)]
+            assert y[y.subset.eq("abnormal")].segments.sum() == 21 and y[y.subset.eq("normal")].segments.sum() == n_normal
+            assert y[y.subset.eq("abnormal")].missed_segments.sum() == 21 - m.abnormal_notified_segments
+    e = pd.read_csv(OUT / "error_conditions_v2.csv")
+    amp = e[e.condition.eq("amp_quartile")]
+    assert amp.q25.notna().all() and (amp.boundary_source == "normal_train_segments").all() and amp.unreliable_amp_rows.notna().all()
+    # 같은 분할·같은 사분위 이름은 정상·이상에서 같은 경계를 쓴다
+    for sid in ("A", "B"):
+        g = e[e.split_id.eq(sid) & e.condition.eq("vib_quartile")]
+        assert g.q25.nunique() == 1 and g.q75.nunique() == 1
+
+
+def test_prediction_contract_columns():
+    p = pd.read_csv(OUT / "predictions_abnormal_A.csv")
+    assert {"model_id", "protocol_version", "criterion", "is_scored", "anomaly_score"} <= set(p.columns)
+    assert (p.model_id == "early6_ar2_A").all() and (p.criterion == "conformal").all()
+    assert np.allclose(p.anomaly_score, 1 - p.p_value, equal_nan=True) and (p.is_scored == p.score.notna().astype(int)).all()

@@ -66,8 +66,13 @@ def main():
         direct = np.array([(1 + np.sum(model.cal >= s)) / (len(model.cal) + 1) if np.isfinite(s) else np.nan for s in pa.score])
         p_ok = np.allclose(np.nan_to_num(direct, nan=-1), np.nan_to_num(pa.p_value.to_numpy(), nan=-1))
         checks.append(check(f"{sid} p값이 보정 순위 규칙과 같음", p_ok, f"보정 구간 {len(model.cal)}개 · α {ALPHAS}"))
-        notif_ok = pa.groupby("record_id").notification.sum().eq(1).all() and len(cases(pa)) == pa.record_id.nunique()
-        checks.append(check(f"{sid} 이상 구간마다 알림 한 번", notif_ok, f"{pa.record_id.nunique()}구간 · 알림 {int(pa.notification.sum())}회 · 점검 건 {len(cases(pa))}"))
+        # 정확성: 구간당 알림 수 = 그 구간에 경보가 있으면 1, 없으면 0 (정상·이상 모두). 점검 건 수 = 경보가 있는 구간 수
+        per = pd.concat([pn.assign(record_id=pn.record_id + 10**6), pa]).groupby("record_id").agg(n=("notification", "sum"), any=("alarm", "max"))
+        notif_ok = per.n.eq(per["any"]).all() and len(cases(pa)) == int(pa.groupby("record_id").alarm.max().sum())
+        checks.append(check(f"{sid} 구간당 알림은 경보 유무와 일치(정확성)", notif_ok, f"정상 {pn.record_id.nunique()}·이상 {pa.record_id.nunique()}구간 · 알림 {int(pn.notification.sum())}+{int(pa.notification.sum())}회"))
+        # 성능 회귀: 이상 21구간 모두 탐지. 정확성 검사와 분리해 이름 붙인다(PLAN §2 R8)
+        detected = int(pa.groupby("record_id").alarm.max().sum())
+        checks.append(check(f"{sid} 이상 21구간 모두 탐지(성능 회귀)", detected == pa.record_id.nunique() == 21, f"{detected}/{pa.record_id.nunique()}구간"))
         shifted = D.inputs_only(abnormal)
         shifted[D.TIME] = (pd.to_datetime(shifted[D.TIME]) + pd.Timedelta(days=400)).astype(str)
         shifted["Equipment_state"] = 0

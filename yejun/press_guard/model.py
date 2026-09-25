@@ -132,7 +132,8 @@ class GuardModel:
             raise ValueError(f"alpha는 {ALPHAS} 중 하나여야 한다")
         status,seg = layout(frame)
         if len(frame) == 0:
-            return pd.DataFrame(columns=["row_id","record_id","timestamp","status","position","score","p_value","alarm","notification","reason","action"])
+            return pd.DataFrame(columns=["row_id","record_id","timestamp","status","position","score","p_value","alarm","notification","reason","action",
+                                         "is_scored","anomaly_score","criterion","model_id","protocol_version"])
         pos, _ = D.segment_positions(seg)
         clean = D.inputs_only(frame)
         for c in D.SENSORS:
@@ -157,6 +158,12 @@ class GuardModel:
         out = pd.DataFrame(dict(row_id=np.arange(len(frame)), record_id=seg, timestamp=frame[D.TIME].astype(str).to_numpy(),
                                 status=status, position=pos, score=comp["score"], p_value=p, alarm=alarm.astype(int),
                                 reason=reasons, action=actions, alpha=alpha, **{k:v for k,v in comp.items() if k != "score"}))
+        # v1 예측 계약(PLAN §7)과의 대응: is_scored·anomaly_score(1−p)·criterion·model_id. 결과 파일만으로 출처를 알 수 있게 한다.
+        out["is_scored"] = np.isfinite(comp["score"]).astype(int)
+        out["anomaly_score"] = 1 - p
+        out["criterion"] = "conformal"
+        out["model_id"] = f"{MODEL}_{self.state.get('split', 'custom')}"
+        out["protocol_version"] = VERSION
         out["notification"] = (out.alarm.eq(1) & out.groupby("record_id").alarm.cumsum().eq(1)).astype(int)
         return out
 

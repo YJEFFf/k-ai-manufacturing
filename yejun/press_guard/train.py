@@ -1,6 +1,7 @@
 """정상 자료로 v2 적합/보정, 기존 기준과 대조, 기록구간별 알림 산출."""
 from pathlib import Path
 import argparse
+import sys
 import json
 import time
 
@@ -95,7 +96,9 @@ def main():
             rolling.extend(evaluate_pair(m,ca,te,abnormal,f"normal_{end+120}_{end+179}"))
         pd.DataFrame(rolling).to_csv(args.out/"rolling.csv",index=False)
     written=tuple(n for n in TRAIN_TABLES if n!="rolling.csv" or args.rolling)+PREDICTIONS
-    D.dump_json(dict(version="press-guard-v2.0",input_hashes=hashes,environment=D.environment(),
+    import resource
+    peak_mb=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/(1024**2 if sys.platform=="darwin" else 1024)   # macOS는 바이트, Linux는 KB
+    D.dump_json(dict(version="press-guard-v2.0",input_hashes=hashes,environment=D.environment(),resources={"peak_rss_mb":round(peak_mb,1)},
                      code_hashes={n:D.sha256_file(HERE/n) for n in CODE_FILES},config={"rolling":args.rolling},
                      artifacts={p.name:D.sha256_file(p) for p in args.artifacts.glob("guard_*.json")},
                      outputs={n:D.sha256_file(args.out/n) for n in written},

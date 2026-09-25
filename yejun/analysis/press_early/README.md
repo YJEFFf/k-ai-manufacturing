@@ -5,7 +5,7 @@ Codex 재검수(c229f90) 토의 항목 3의 답. v2(early6_ar2)의 남은 미탐
 - `joint`: 세 센서 표준화 값의 정상 학습 공분산 Mahalanobis 거리(모든 위치). 센서 간 결합 구조의 이탈.
 - `diff1`: 정상 학습에서 적합한 1차 선형 예측 x_t = c + b·x_{t−1}의 절대 잔차(위치 1부터).
 - 결합은 v2 점수와의 최댓값. 후보별 정상 보정 구간 최댓값 conformal, α 1/3/5%, raw/coarse 입력 스트레스 포함.
-- 채택 기준(사전 고정): 주 α=1%·matched에서 두 분할 모두 정상 알림이 v2 이하이고 21/21 유지. 그 경우에도 자동 채택하지 않는다.
+- 채택 기준(사전 고정): 주 α=1%·matched에서 두 분할 모두 정상 알림이 v2 이하이고 21/21 유지. 그 경우에도 자동 채택하지 않는다. 계수·문턱은 정상 자료로만 적합하지만, 채택 여부는 이상 탐지 결과를 참조하는 탐색적 선택이다(Codex 워크플로우 검수 F5 반영).
 
 ## 결과 — α=1%, matched
 
@@ -20,7 +20,7 @@ Codex 재검수(c229f90) 토의 항목 3의 답. v2(early6_ar2)의 남은 미탐
 
 **결론: 두 후보 모두 채택하지 않는다.** joint는 A에서 미탐 4행을 줄이지만 B에서 정상 알림 1구간을 늘리고 B 미탐은 그대로다. diff1은 주 운영점에서 v2와 완전히 같고 α 3·5%에서 미탐 1~2행만 줄어든다. 위치 0·1의 미탐 26·20행은 이 두 방향으로는 정상 오경보를 늘리지 않고 줄일 수 없다는 것이 이번 실험의 답이다. 코덱스가 지적한 대로 "다른 어떤 방법으로도 불가능"이라는 뜻은 아니며, 직전 구간 정보를 쓰지 않는 현재 규칙 안에서 시험한 두 방향의 결과다.
 
-raw/coarse 입력과 α 3·5%의 전체 결과는 [metrics.csv](metrics.csv)(108행), 판정과 적합 계수·환경·코드 해시는 [manifest.json](manifest.json)에 있다. v2 후보 행은 press_advance의 early6_ar2와 TP/FP/FN이 같음을 실행 중 확인했다.
+raw/coarse 입력과 α 3·5%·cutoff 기준의 전체 결과는 [metrics.csv](metrics.csv)(216행 = conformal 108 + cutoff 108), 판정과 적합 계수·환경·코드 해시는 [manifest.json](manifest.json)에 있다. v2 후보 행은 press_advance의 early6_ar2와 TP/FP/FN이 같음을 실행 중 확인했다.
 
 ```bash
 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/analysis/press_early/run_experiment.py

@@ -41,11 +41,47 @@
     }
   },
   "robustness_rows": 72,
+  "sensitivity_rows": 72,
+  "ablation_rows": 60,
+  "condition_bounds": {
+    "A": {
+      "vib": [
+        0.081316,
+        0.128891,
+        0.185704
+      ],
+      "amp": [
+        117.476179,
+        155.693167,
+        223.055757
+      ],
+      "vib_high": 3.147169,
+      "r2_low": 0.994717
+    },
+    "B": {
+      "vib": [
+        0.082127,
+        0.130035,
+        0.182662
+      ],
+      "amp": [
+        116.720563,
+        158.06452,
+        222.86321
+      ],
+      "vib_high": 3.129618,
+      "r2_low": 0.994736
+    }
+  },
   "files": [
     "model_comparison_v2.csv",
     "model_comparison_v2.md",
     "robustness_v2.csv",
+    "sensitivity_v2.csv",
+    "ablation_v2.csv",
     "error_conditions_v2.csv",
+    "error_conditions_segments_v2.csv",
+    "interaction_2x2_v2.csv",
     "records_first_alarm_v2.csv",
     "uncertainty_v2.csv",
     "workload_v2.csv",
@@ -53,5 +89,5 @@
     "fig_first_alarm_v2.png",
     "fig_missed_example_v2.png"
   ],
-  "elapsed_s": 5.1
+  "elapsed_s": 12.2
 }
