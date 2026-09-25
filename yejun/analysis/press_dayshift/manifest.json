@@ -1,0 +1,164 @@
+{
+  "protocol_commit": "b3d6562",
+  "protocol_sha256": "4274c09a017efdfda55dda168cb0a6e94e39ffb98c14b5691b2aee4118aec2ed",
+  "script_sha256": "3a572caef6f416b2d6ff8ab76465a52023dae8f1b3e41c89b14f7b06f905005a",
+  "contest_inputs": {
+    "normal": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+    "abnormal": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e"
+  },
+  "reference_zip_sha256": "0c4adfaf11479d09341707236d0e1a2e5ede14bc64b954edaee8ae74c9b9ca9e",
+  "v2_artifacts": {
+    "guard_A.json": "63234e1bc2a646b34694df0bc4d51507c86c5f6efaaaf065eef108bd6b2514ad",
+    "guard_B.json": "eb16901388d24dc25f8e50a4b3e5ed74595884a20652203553471ea17bb4255e"
+  },
+  "settings": {
+    "operating_a": 0.5,
+    "sensitivity_a": [
+      0.1,
+      0.5,
+      2.0
+    ],
+    "min_day_operating": 30,
+    "min_window_operating": 10,
+    "min_days_press": 10,
+    "min_days_time_of_day": 5,
+    "night_hours": [
+      0,
+      1
+    ],
+    "morning_hours": [
+      10,
+      11
+    ],
+    "grid": [
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.91,
+      0.92,
+      0.93,
+      0.94,
+      0.95,
+      0.96,
+      0.97,
+      0.98,
+      0.99,
+      1.0,
+      1.01,
+      1.02,
+      1.03,
+      1.04,
+      1.05,
+      1.06,
+      1.07,
+      1.08,
+      1.09,
+      1.1,
+      1.15,
+      1.2,
+      1.25,
+      1.3,
+      1.35,
+      1.4,
+      1.45,
+      1.5
+    ],
+    "alphas": [
+      0.01,
+      0.03,
+      0.05
+    ],
+    "amp_min_len": 17
+  },
+  "presses_included": [
+    1,
+    2
+  ],
+  "contest_rms_ratio": 1.302098629578778,
+  "tolerance_band": {
+    "k_low": 0.5,
+    "k_high": 1.04,
+    "first_fail_below": null,
+    "first_fail_above": 1.05,
+    "baseline_normal_notified": {
+      "A": 0,
+      "B": 3
+    },
+    "grid_min": 0.5,
+    "grid_max": 1.5
+  },
+  "verdict": {
+    "contest_fold": 1.302098629578778,
+    "level_rule": "exceeds_reference_variation",
+    "r2_available": {
+      "1": true,
+      "2": true
+    },
+    "band_rule": "reference_day_variation_within_band",
+    "s2_rule": "detection_not_level_dependent",
+    "level_rule_all_bases": {
+      "rms_reliable": {
+        "ratio": 1.302098629578778,
+        "fold": 1.302098629578778,
+        "rule": "exceeds_reference_variation"
+      },
+      "std_reliable": {
+        "ratio": 0.9316640563083465,
+        "fold": 1.0733482667158267,
+        "rule": "exceeds_reference_variation"
+      },
+      "rms_all": {
+        "ratio": 1.4373806518896701,
+        "fold": 1.4373806518896701,
+        "rule": "exceeds_reference_variation"
+      }
+    },
+    "posthoc_comparability": {
+      "reference_operating_p1_p99": {
+        "1": [
+          5.828,
+          6.44
+        ],
+        "2": [
+          5.27,
+          5.775
+        ]
+      },
+      "reference_within_day_p90_over_p10_median": 1.0278599522972034,
+      "contest_normal_10min_block_relative_range": [
+        0.8540295359656999,
+        1.2940379150315584
+      ],
+      "contest_abnormal_relative": 1.302098629578778,
+      "abnormal_within_normal_block_range": true,
+      "note": "참고 현장 전류는 가동 중 거의 일정한 무부하 운전 전류라 대회 전류와 비교 가능한 양이 아니다. 대회 정상 77분 안의 10분 블록 변동이 이상 3분의 수준 차이와 비슷하다. 사전 규칙의 exceeds 판정은 교락 반박 근거로 쓰지 않는다."
+    }
+  },
+  "posthoc_additions": [
+    "R4: 다른 날 오전 창 / 심야 창 비(대회 구조와 같은 날짜+시간대 차이). 프로토콜 외 추가, 해석 규칙에 쓰지 않음",
+    "reference_quality.csv: 파일 품질 요약. 프로토콜 외 추가",
+    "P1 contest_within_window.csv: 대회 정상 77분 안의 10·5분 블록 중앙값 비. 결과를 본 뒤 추가",
+    "P2 reference_operating_distribution.csv: 참고 현장 가동 전류 분위수. 결과를 본 뒤 추가",
+    "level_rule_all_bases: 프로토콜 2차 지표에 C1 규칙 적용",
+    "fig_reference_daily.png: 참고 현장 일 중앙값과 대회 정상 10분 블록을 같은 축에 비교하도록 설계 변경"
+  ],
+  "environment": {
+    "python": "3.12.2",
+    "platform": "macOS-26.3.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.8.0",
+    "scipy": "1.13.1",
+    "matplotlib": "3.9.2",
+    "blas": null,
+    "protocol_version": "v1"
+  },
+  "elapsed_s": 26.1
+}
