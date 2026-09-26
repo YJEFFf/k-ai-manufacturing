@@ -1,0 +1,72 @@
+{
+  "version": "press-supplement-v1",
+  "registered_before_results": true,
+  "date": "2026-09-26",
+  "purpose": "비교 기록(yejun/analysis/power_press_comparison/README.md §5)의 미실시 보완 3개: E1 고장 주입, E2 UCI에 v2 구조 적용, E3 재보정 절차 곡선. 대회 보고서가 아니다.",
+  "seen_before_fixing": [
+    "정상·이상 기록구간의 기술 통계(진동 표준편차, 전류 평균·표준편차·최대·최소, FFT 주파수: 정상 전류 0.6 Hz 사인, 이상 전류 불규칙)",
+    "동결 guard_A의 평균·척도·AR(2) 계수·꼬리 문턱·보정 최대값",
+    "UCI 파일 목록과 센서 배열 크기(EPS1·PS1 6000, FS1 600, VS1 60/사이클)",
+    "기존 press_external 결과(metrics.csv): 이번 비교 기준",
+    "주입·재보정·UCI v2 점수는 이 파일 고정 전에 계산하지 않았다"
+  ],
+  "frozen_model_rule": "E1과 E3의 기준 모델은 yejun/press_guard/artifacts/guard_{A,B}.json을 그대로 불러 쓴다. v2 산식·꼬리 변환·문턱 규칙은 바꾸지 않는다. E3의 재적합은 GuardModel.fit 그대로다.",
+  "E1_fault_injection": {
+    "question": "시작 시각을 아는 이상에서 v2가 몇 초 만에, 어느 세기부터 탐지하는가. 같은 날·같은 시간대 정상 기록에 주입하므로 날짜 교락이 없다.",
+    "base_records": "각 분할의 정상 평가 구간(A 480~599, B 420~599) 중 길이 30행 이상 기록",
+    "onset": {"main": "t0=10행(1초). 주입 전 10행은 원본 그대로", "secondary": "t0=0(기록 시작부터 이상, 대회 이상 자료의 측정 방식과 같음), 길이 20행 이상 기록"},
+    "families": {
+      "vib_noise": {"levels": [0.25, 0.5, 1, 2, 4, 8], "definition": "두 진동 센서에 N(0, (s·σ_c)^2) 가산, σ_c는 해당 분할 정상 학습 표준편차(모델 scale)"},
+      "cur_noise": {"levels": [0.02, 0.05, 0.1, 0.2, 0.4, 0.8], "definition": "전류에 N(0, (s·σ_I)^2) 가산, σ_I는 모델 전류 scale. 파형 불규칙화"},
+      "cur_offset": {"levels": [0.05, 0.1, 0.2, 0.4, 0.8, 1.6], "definition": "전류에 d·A 가산, A=√2·σ_I(정상 사인 진폭 근사)"},
+      "cur_gain": {"levels": [0.5, 0.7, 0.85, 1.15, 1.3, 1.5], "definition": "전류를 모델 평균 기준으로 k배: μ+k(x−μ)"}
+    },
+    "ramp_variant": "vib_noise·cur_noise는 추가로 세기를 t0부터 20행(2초)에 걸쳐 0→s로 선형 증가시킨 경사형도 평가(t0=10)",
+    "repetitions": "잡음 가산 족은 반복 5회(시드 고정, 모든 세기·분할에 같은 표준정규 난수를 공유). 결정적 족(offset·gain)은 1회",
+    "alpha": [0.01, 0.03, 0.05],
+    "main_alpha": 0.01,
+    "comparison": "v1 기준선(크기+사인8, train.baseline과 같은 산식·보정)도 같은 주입 자료로 평가",
+    "metrics": ["주입 기록 중 t0 이후 20행(2초) 안에 경보가 난 비율(탐지율)", "t0 이후 첫 경보까지 지연(초) 중앙값·90백분위, 기록 끝까지 무경보는 미탐", "t0 이후 행 재현율", "t0 이전 경보가 난 기록 수(주입과 무관해야 하며 원본 예측과 같은지 확인)", "첫 경보 근거 성분"],
+    "summary_rule": "족별로 두 분할 모두 탐지율 ≥ 90%(α=1%)인 가장 약한 세기를 '탐지 하한'으로 보고. 없으면 '격자 안에서 도달 못 함'",
+    "reference": "관측 이상 21구간을 같은 축에 놓기 위해 이상 구간별 진동 표준편차/정상 σ, 전류 AR(2) 잔차 표준편차/정상 잔차 표준편차, 전류 평균/A를 기술 통계로 함께 기록(모델 적합에는 쓰지 않음)",
+    "limitations": ["주입 신호는 인공적이며 실제 고장 물리의 재현이 아니다", "족과 세기 격자는 관측 이상의 기술 통계를 보고 정했다", "같은 정상 기록을 여러 족·세기에 재사용하므로 결과는 독립 시험 수가 아니다"]
+  },
+  "E2_uci_v2_structure": {
+    "question": "v2 구조(센서 크기 max|z| + 전류 대응 채널의 초반 6→8 사인 파형 + AR(2) 잔차, 정상 학습 q95 지수 꼬리, fmax, 기록 최대 점수 conformal)를 가중치 전이 없이 UCI 펌프 누설 자료에 그대로 적용하면 기존 단순 모델 3종 대비 어떤가",
+    "data": "yejun/analysis/press_external/data/hydraulic.zip, 안정 사이클(stable flag=0) 1,449개",
+    "resampling": "10 Hz로 통일: EPS1·PS1은 10개 평균, FS1은 원래 10 Hz, VS1은 1 Hz 값을 10번 반복(영차 유지). 사이클 하나 = 기록구간 하나(600행)",
+    "current_channel": "EPS1(모터 전력)을 대회 전류 자리에 둔다(파형·AR(2) 대상)",
+    "variants": {
+      "v2_4ch": "크기 채널 PS1·FS1·VS1·EPS1 (기존 외부 검증과 같은 센서). 주 결과",
+      "v2_3ch": "크기 채널 VS1·PS1·EPS1 (대회와 같은 3채널 형태)",
+      "v2_4ch_phase": "v2_4ch에서 크기 성분의 평균·척도를 사이클 내 위치(600개)별로 정상 학습에서 추정, 척도는 max(위치별 표준편차, 0.1×전체 표준편차). 사이클형 시험대에 대한 유일한 사전 적응"
+    },
+    "unchanged_from_contest": "사인 창 6/8·주파수 격자 0~5 Hz, 위치<7이면 6창, AR(2) 최소제곱, ExpTail q=0.95, 정규화 없음(원 단위), 양자화 없음",
+    "partitions": "press_external/evaluate.py와 같은 규칙(조건별 정상 60/20/20, 누설은 시험 전용). partitions.csv와 같은지 확인",
+    "evaluations": ["local_normal_reference(냉각 조건별)", "unseen_cooler(나머지 두 냉각 조건으로 적합·보정)"],
+    "alpha": 0.05,
+    "metrics": ["F1", "정상 오경보율", "누설 재현율(약·강 별도)", "AUROC(사이클 최대 점수)"],
+    "comparison": "press_external/metrics.csv의 marginal_maxz·normal_signature·hydraulic_efficiency를 재계산 없이 나란히",
+    "sanity": "같은 일반화 구현을 대회 자료(matched 양자화, guard 분할 A/B)에 돌려 저장 v2 지표(A F1 0.961938, B 0.970990)를 재현해야 UCI 결과를 쓴다",
+    "rejection": "결과가 기존 모델보다 나빠도 전 변형·환경을 공개. 좋은 냉각 조건만 골라 보편 성능으로 표현하지 않는다. 대회 F1과 합산·직접 비교하지 않는다"
+  },
+  "E3_recalibration_curve": {
+    "question": "새 날짜·설비에서 정상 자료를 몇 분 모으면 v2의 문턱과 성능이 안정되는가",
+    "pool": "정상 기록구간 0~479에서 시간순 연속 블록으로 학습(n_train)과 바로 뒤 보정(n_cal)을 뽑는다",
+    "test": "정상 480~599(분할 A 평가와 같음), 이상 21구간, E1 주입(t0=10, vib_noise s=2·cur_noise s=0.2·cur_offset d=0.4, 반복 2회)",
+    "grid_alpha_1pct": {"n_train": [15, 30, 60, 120, 240, 300], "n_cal": [99, 120, 180]},
+    "grid_alpha_5pct": {"n_train": [15, 30, 60, 120, 240, 300], "n_cal": [19, 40, 60]},
+    "starts": "시작 구간 0, 60, 120, … (60 간격), 학습+보정이 0~479 안에 들어가는 모든 시작",
+    "note": "α=1%는 보정 99구간 미만이면 최소 p값 1/(n+1) > α라 경보 불가. 이것은 결과가 아니라 산식의 성질",
+    "report": ["정상 사용량: 학습+보정 행 수×0.1초(분), 첫 행~끝 행 경과 분", "시작별 정상 알림 /120, 이상 탐지 /21, 이상 미탐 행 /600, F1, 주입 탐지율", "시작 간 최소·중앙값·최대"],
+    "stability_rule": "모든 시작에서 정상 알림 ≤ 3/120, 이상 21/21, 주입 탐지율 ≥ 90%인 (n_train, n_cal) 중 정상 사용량이 가장 적은 것을 '재보정 최소 자료'로 보고",
+    "domain_shift_secondary": {
+      "shift": "새 날 모의: 전류를 k배(k ∈ 0.85, 1.15, 1.3; 모델 평균 기준)로 정상 풀·평가·이상 전체에 적용. press_dayshift의 대회 정상 10분 블록 중앙값 변동 0.854~1.294배 범위",
+      "conditions": ["frozen: 동결 guard_A 그대로", "recal_only: guard_A 학습 상태 유지, 보정만 이동 자료 360~479로 다시", "refit: 이동 자료로 학습 n_train ∈ {60, 360}의 끝 구간 + 보정 120구간 재적합"],
+      "metrics": ["정상 알림 /120", "이상 탐지 /21·미탐 행", "주입 탐지율"]
+    },
+    "limitations": ["풀과 평가가 같은 날 77분이다. 다른 날 자료의 재보정 효과를 직접 측정한 것이 아니다", "전류 배율은 날짜 차이의 한 가지 모의일 뿐이다"]
+  },
+  "outputs": "yejun/analysis/press_supplement/ 아래 CSV·JSON·그림. 행 단위 예측은 Git 제외",
+  "no_report": "대회 보고서·발표자료 작업 금지(yejun/AGENTS.md)"
+}
