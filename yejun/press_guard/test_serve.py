@@ -38,6 +38,9 @@ def test_analyze_contract_and_cache(console):
     assert {"record_id", "first_row", "evidence", "action", "reference_label", "detection_delay_s"} <= set(result["cases"][0])
     assert {"AI2_Current", "g_dynamics", "g_waveform", "g_magnitude", "p_value", "alarm", "notification", "status"} <= set(result["points"][0])
     assert all(c["reference_label"] in (0, 1) for c in result["cases"])
+    assert {"priority_rank", "magnitude_sensors", "alarm_share", "alert_units", "beyond_calibration_length"} <= set(result["cases"][0])
+    assert sorted(c["priority_rank"] for c in result["cases"]) == list(range(1, len(result["cases"]) + 1))
+    assert result["min_p_attainable"] == 1 / 121 and result["alert_unit_rows"] == 50
     assert console.analyze({"split": "A", "alpha": .01, "dataset": "mixed"}) is result   # 캐시
     json.dumps(result, allow_nan=False)   # NaN 없이 직렬화 가능
 
@@ -65,6 +68,9 @@ def test_overview_lists_metrics_external_audit(console):
     assert len(o["metrics"]) == 12 and len(o["external"]) == 18
     assert isinstance(o["audit"], dict) and isinstance(o["benchmark"], dict)
     assert isinstance(o["conditions"], list) and isinstance(o["robustness"], list)
+    assert len(o["decision_table"]) == 6 and o["alert_unit_rows"] == 50
+    if o["workload"]:
+        assert len(o["workload"]) == 6 and {"nominal_alerts_per_8h_elapsed", "upper95_alerts_per_8h_elapsed"} <= set(o["workload"][0])
     if o["conditions"]:
         assert {"split_id", "model", "subset", "condition", "value", "rows", "error_rows"} <= set(o["conditions"][0])
 

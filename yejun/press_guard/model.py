@@ -24,6 +24,51 @@ from press.validation import code_sha256
 VERSION = "press-guard-v2.0"
 MODEL = "early6_ar2"
 ALPHAS = (.01, .03, .05)
+# 보정·알림 단위의 최대 길이. 대회 자료의 수집 묶음(기록구간)은 최대 50행(5초)이다. 더 긴 연속 입력은 기록구간 안에서
+# 50행 블록으로 나눠 보정·알림한다. 대회 자료에서는 블록이 기록구간과 같으므로 결과가 바뀌지 않는다.
+ALERT_UNIT_ROWS = 50
+ACTIONS = dict(vibration="진동·부하 확인", vibration_and_current="진동·전류 함께 점검",
+               current_magnitude="전류 크기·부하·계측 확인", current_magnitude_and_shape="전류 크기·파형·계측 확인",
+               current_shape="전류 파형·계측 확인", invalid="수집 상태 확인")
+# 경보 근거 → 확인 대상(가설) → 권장 확인. 조치 규칙(action_for)과 같은 내용이며 정비 결과로 검증한 것은 아니다.
+DECISION_TABLE = (
+    dict(evidence="크기(진동 센서)", check_target="펌프 상·하부 진동 증가: 체결·베어링·부하 변화(가설)", action=ACTIONS["vibration"]),
+    dict(evidence="크기(전류 센서)", check_target="전류 크기 변화: 부하 증가 또는 계측 이상(가설)", action=ACTIONS["current_magnitude"]),
+    dict(evidence="파형 또는 예측 오차(전류)", check_target="전류 파형 흐트러짐: 모터·전원·계측(가설)", action=ACTIONS["current_shape"]),
+    dict(evidence="크기(진동) + 파형·예측 오차, 또는 구간 안에서 진동·전류 크기 모두", check_target="진동과 전류가 함께 변함(가설)", action=ACTIONS["vibration_and_current"]),
+    dict(evidence="크기(전류) + 파형·예측 오차", check_target="전류 크기와 파형이 함께 변함(가설)", action=ACTIONS["current_magnitude_and_shape"]),
+    dict(evidence="수집 오류(결측·비유한 값·시각 오류)", check_target="수집 경로·센서 연결", action=ACTIONS["invalid"]),
+)
+
+
+def action_for(magnitude_vibration, magnitude_current, shape):
+    """권장 확인. 크기 성분은 최대 편차가 진동 센서인지 전류 센서인지까지 구분한다."""
+    if magnitude_vibration and (shape or magnitude_current):
+        return ACTIONS["vibration_and_current"]
+    if magnitude_vibration:
+        return ACTIONS["vibration"]
+    if magnitude_current and shape:
+        return ACTIONS["current_magnitude_and_shape"]
+    if magnitude_current:
+        return ACTIONS["current_magnitude"]
+    return ACTIONS["current_shape"]
+
+
+def alert_units(seg, pos):
+    """보정·알림 단위 번호: 기록구간 안의 50행 블록. 기록구간이 50행 이하면 기록구간 번호와 같은 묶음이다."""
+    seg, block = np.asarray(seg), np.asarray(pos) // ALERT_UNIT_ROWS
+    if not len(seg):
+        return np.array([], dtype=int)
+    return np.cumsum(np.r_[False, (seg[1:] != seg[:-1]) | (block[1:] != block[:-1])])
+
+
+def first_alerts(record, block, alarm):
+    """경보 단위의 첫 경보에 알린다. 같은 기록구간의 바로 앞 블록도 경보였으면 이어지는 이상으로 보고 새로 알리지 않는다."""
+    f = pd.DataFrame(dict(r=np.asarray(record), b=np.asarray(block), a=np.asarray(alarm, bool)))
+    first = f.a & f.groupby(["r", "b"]).a.cumsum().eq(1)
+    alarmed = f.groupby(["r", "b"]).a.any()
+    previous = alarmed.reindex(pd.MultiIndex.from_arrays([f.r, f.b - 1]), fill_value=False).to_numpy()
+    return (first.to_numpy() & ~previous).astype(int)
 
 
 def layout(frame):
@@ -107,7 +152,8 @@ class GuardModel:
         model = cls(state)
         cf = D.quantize(D.inputs_only(calibration), "matched")
         sg = layout(cf)[1]
-        model.cal = segment_max(model.components(cf, sg)["score"], sg)
+        # 보정 단위 = 알림 단위(기록구간 안 50행 블록). 대회 자료는 기록구간과 같다.
+        model.cal = segment_max(model.components(cf, sg)["score"], alert_units(sg, D.segment_positions(sg)[0]))
         if not len(model.cal) or not np.isfinite(model.cal).all():
             raise ValueError("유효한 보정 구간 부족")
         model.state["calibration"] = model.cal
@@ -133,7 +179,7 @@ class GuardModel:
         status,seg = layout(frame)
         if len(frame) == 0:
             return pd.DataFrame(columns=["row_id","record_id","timestamp","status","position","score","p_value","alarm","notification","reason","action",
-                                         "is_scored","anomaly_score","criterion","model_id","protocol_version"])
+                                         "is_scored","anomaly_score","criterion","model_id","protocol_version","alert_unit","beyond_calibration_length"])
         pos, _ = D.segment_positions(seg)
         clean = D.inputs_only(frame)
         for c in D.SENSORS:
@@ -153,8 +199,8 @@ class GuardModel:
             else:
                 names = [name for name,yes in zip(("magnitude","waveform","dynamics"),active[i]) if yes]
                 reasons.append("+".join(names))
-                actions.append("진동·전류 함께 점검" if active[i,0] and active[i,1:].any() else
-                               "진동·부하 확인" if active[i,0] else "전류 파형·계측 확인")
+                current = comp["magnitude_sensor"][i] == D.SENSORS[2]
+                actions.append(action_for(active[i,0] and not current, active[i,0] and current, active[i,1:].any()))
         out = pd.DataFrame(dict(row_id=np.arange(len(frame)), record_id=seg, timestamp=frame[D.TIME].astype(str).to_numpy(),
                                 status=status, position=pos, score=comp["score"], p_value=p, alarm=alarm.astype(int),
                                 reason=reasons, action=actions, alpha=alpha, **{k:v for k,v in comp.items() if k != "score"}))
@@ -164,7 +210,9 @@ class GuardModel:
         out["criterion"] = "conformal"
         out["model_id"] = f"{MODEL}_{self.state.get('split', 'custom')}"
         out["protocol_version"] = VERSION
-        out["notification"] = (out.alarm.eq(1) & out.groupby("record_id").alarm.cumsum().eq(1)).astype(int)
+        out["alert_unit"] = pos // ALERT_UNIT_ROWS
+        out["beyond_calibration_length"] = (pos >= ALERT_UNIT_ROWS).astype(int)   # 대회 보정 기록구간(최대 50행)보다 긴 연속 입력
+        out["notification"] = first_alerts(seg, out.alert_unit, alarm)
         return out
 
     def save(self, path):
@@ -191,8 +239,8 @@ class GuardModel:
 class StreamDetector:
     """청크 크기에 무관한 추론. 센서 원본은 직전 7행만 유지한다.
 
-    잘못된 행·역순·중복·샘플 누락은 경계가 된다. 같은 구간에서 첫 경보만 알림.
-    외부가 새 장치로 전환할 때는 새 인스턴스를 생성해야 한다.
+    잘못된 행·역순·중복·샘플 누락은 경계가 된다. 경보 단위(기록구간 안 50행 블록)의 첫 경보만 알리고,
+    바로 앞 블록도 경보였으면 이어지는 이상으로 묶는다. 외부가 새 장치로 전환할 때는 새 인스턴스를 생성해야 한다.
     """
     def __init__(self, model, alpha=.01):
         if alpha not in ALPHAS:
@@ -202,7 +250,8 @@ class StreamDetector:
         self.tail_records = np.array([], dtype=int)
         self.tail_positions = np.array([], dtype=int)
         self.rows_seen = 0
-        self.last_notified_record = None
+        self.alert_record = None      # 현재 기록구간 번호와 그 안에서 경보가 난 블록
+        self.alerted_blocks = set()
 
     def push(self, frame):
         layout(frame)
@@ -219,13 +268,17 @@ class StreamDetector:
             continuation = rec == self.tail_records[-1]
             positions[continuation] += self.tail_positions[-1] - positions[n_old-1]
         result["record_id"], result["position"] = rec, positions
+        result["alert_unit"] = positions // ALERT_UNIT_ROWS
+        result["beyond_calibration_length"] = (positions >= ALERT_UNIT_ROWS).astype(int)
         result = result.iloc[n_old:].copy().reset_index(drop=True)
         result["row_id"] = np.arange(self.rows_seen,self.rows_seen+len(incoming))
         notifications = []
         for r in result.itertuples():
-            notify = bool(r.alarm and r.record_id != self.last_notified_record)
-            if notify:
-                self.last_notified_record = r.record_id
+            if r.record_id != self.alert_record:
+                self.alert_record, self.alerted_blocks = r.record_id, set()
+            notify = bool(r.alarm) and r.alert_unit not in self.alerted_blocks and r.alert_unit - 1 not in self.alerted_blocks
+            if r.alarm:
+                self.alerted_blocks = {b for b in self.alerted_blocks if b >= r.alert_unit - 1} | {r.alert_unit}
             notifications.append(int(notify))
         result["notification"] = notifications
         self.rows_seen += len(incoming)
@@ -235,17 +288,39 @@ class StreamDetector:
 
 
 def cases(predictions):
-    """고장 사건 수가 아니라 기록구간당 한 건의 검토 대기열이다."""
+    """점검 대기열. 고장 사건 수가 아니라, 같은 기록구간에서 경보가 이어진 블록 묶음 하나가 한 건이다(대회 자료는 기록구간당 한 건).
+
+    priority_rank는 이상 라벨 없이 정한 정렬 키다: 근거 성분 수가 많을수록, 경보 행 비율이 높을수록, 최대 점수가 클수록 먼저.
+    """
+    p = predictions
+    if not len(p) or not p.alarm.eq(1).any():
+        return pd.DataFrame()
+    block = p.alert_unit.to_numpy() if "alert_unit" in p else p.position.to_numpy() // ALERT_UNIT_ROWS
+    blocks = pd.DataFrame(dict(r=p.record_id.to_numpy(), b=block, a=p.alarm.eq(1).to_numpy())).groupby(["r", "b"], sort=False).a.any().reset_index()
+    continues = blocks.groupby("r").a.shift(1, fill_value=False)
+    blocks["episode"] = np.where(blocks.a, np.cumsum(blocks.a & ~continues), 0)
+    episode = pd.MultiIndex.from_arrays([p.record_id.to_numpy(), block]).map(blocks.set_index(["r", "b"]).episode).to_numpy()
+    blocks_of_rows = pd.Series(block, index=p.index)
     result = []
-    for record, group in predictions.groupby("record_id",sort=False):
-        flagged = group[group.alarm.eq(1)]
-        if flagged.empty:
+    for ep, group in p.groupby(episode, sort=True):
+        if ep == 0:
             continue
+        flagged = group[group.alarm.eq(1)]
         first = flagged.iloc[0]
         reasons = sorted(set("+".join(flagged.reason).split("+")) - {""})
-        result.append(dict(record_id=int(record), first_row=int(first.row_id), first_timestamp=first.timestamp,
+        magnitude = flagged[flagged.reason.str.contains("magnitude")].magnitude_sensor if "magnitude_sensor" in flagged else pd.Series(dtype=str)
+        sensors = sorted(set(magnitude))
+        shape = bool({"waveform", "dynamics"} & set(reasons))
+        result.append(dict(record_id=int(first.record_id), first_row=int(first.row_id), first_timestamp=first.timestamp,
                            first_alarm_position=int(first.position), detection_delay_s=float(first.position*D.DT),
                            alarm_rows=len(flagged), observed_rows=len(group), peak_score=float(flagged.score.max()),
                            min_p=float(flagged.p_value.min()), evidence="+".join(reasons),
-                           action="진동·전류 함께 점검" if "magnitude" in reasons and len(reasons)>1 else str(first.action)))
-    return pd.DataFrame(result)
+                           action=action_for(any(x != D.SENSORS[2] for x in sensors), D.SENSORS[2] in sensors, shape),
+                           magnitude_sensors="+".join(sensors), alarm_share=len(flagged) / len(group),
+                           alert_units=int(blocks_of_rows.loc[group.index].nunique()),
+                           beyond_calibration_length=int(group.position.max() >= ALERT_UNIT_ROWS)))
+    queue = pd.DataFrame(result)
+    order = queue.assign(n=queue.evidence.str.count(r"\+") + 1).sort_values(["n", "alarm_share", "peak_score"], ascending=False, kind="stable").index
+    queue.loc[order, "priority_rank"] = np.arange(1, len(queue) + 1)
+    queue["priority_rank"] = queue.priority_rank.astype(int)
+    return queue

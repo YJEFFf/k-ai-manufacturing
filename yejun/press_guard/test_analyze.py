@@ -68,6 +68,11 @@ def test_uncertainty_and_workload_observed_match(tables):
                 assert ((x.boot_p2_5 <= x.observed) & (x.observed <= x.boot_p97_5)).all()
                 ww = w[w.split_id.eq(sid) & w.model.eq(name) & w.alpha.eq(alpha)].iloc[0]
                 assert ww.first_alert_segments == m.normal_notified_segments and ww.scenario_alerts_per_day_8h_recorded_rate == pytest.approx(ww.alerts_per_recorded_hour * 8)
+                # α는 구간당 비율: 보정 120구간이 허용하는 명목 비율과 경과시간 환산(루브릭 검수 R8)
+                assert ww.alpha_grid_rate == pytest.approx(np.floor(alpha * 121 + 1e-9) / 121)
+                assert ww.nominal_alerts_per_8h_elapsed == pytest.approx(ww.alpha_grid_rate * ww.units_per_elapsed_hour * 8)
+                assert ww.observed_alerts_per_8h_elapsed == pytest.approx(ww.alerts_per_elapsed_hour * 8)
+                assert ww.observed_rate_upper95 >= ww.first_alert_segments / ww.normal_segments
 
 
 def test_verify_detects_tampering(tmp_path):
@@ -125,8 +130,19 @@ def test_segment_conditions_and_interaction_denominators(tables):
         assert g.q25.nunique() == 1 and g.q75.nunique() == 1
 
 
+def test_decision_table_is_the_action_rule():
+    """판단표는 조치 규칙과 같은 원천(model.DECISION_TABLE)에서 나온다."""
+    from model import DECISION_TABLE, ACTIONS, action_for
+    t = pd.read_csv(OUT / "decision_table_v2.csv")
+    assert t.to_dict("records") == [dict(r) for r in DECISION_TABLE]
+    assert set(t.action) == set(ACTIONS.values())
+    assert action_for(True, False, False) == ACTIONS["vibration"] and action_for(False, True, False) == ACTIONS["current_magnitude"]
+    assert action_for(False, True, True) == ACTIONS["current_magnitude_and_shape"] and action_for(True, True, False) == ACTIONS["vibration_and_current"]
+
+
 def test_prediction_contract_columns():
     p = pd.read_csv(OUT / "predictions_abnormal_A.csv")
-    assert {"model_id", "protocol_version", "criterion", "is_scored", "anomaly_score"} <= set(p.columns)
+    assert {"model_id", "protocol_version", "criterion", "is_scored", "anomaly_score", "alert_unit", "beyond_calibration_length"} <= set(p.columns)
+    assert (p.alert_unit == 0).all() and (p.beyond_calibration_length == 0).all()   # 대회 기록구간은 모두 50행 이하
     assert (p.model_id == "early6_ar2_A").all() and (p.criterion == "conformal").all()
     assert np.allclose(p.anomaly_score, 1 - p.p_value, equal_nan=True) and (p.is_scored == p.score.notna().astype(int)).all()

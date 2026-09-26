@@ -16,7 +16,7 @@ import time
 import numpy as np
 import pandas as pd
 
-from model import GuardModel, cases, D, BASE, HERE, ALPHAS
+from model import GuardModel, cases, D, BASE, HERE, ALPHAS, DECISION_TABLE, ALERT_UNIT_ROWS
 from press.uncertainty import moving_block_bootstrap
 from press.diagnosis import MIN_FIT_LEN, sine_fit
 from press.scores import Scorer, ExpTail, window_index
@@ -323,7 +323,13 @@ def uncertainty(sid, name, v1_pair, v2_pairs, reps=2000):
 
 
 # ---------- 업무량 ----------
-def workload(sid, name, test, metrics):
+def workload(sid, name, test, metrics, n_cal):
+    """α별 정상 알림 업무량. α는 시간 비율이 아니라 보정·알림 단위(기록구간, 최대 50행)당 비율이다.
+
+    경과시간 기준 교대(8시간)당 건수를 보정 격자 명목값, 관측값, 관측 비율의 이항 단측 95% 상한으로 나란히 둔다.
+    같은 날 간헐 수집 밀도(경과 1시간당 기록구간 수)를 가정한 환산이며 다른 날짜·설비의 보장이 아니다.
+    """
+    from scipy import stats
     t = pd.to_datetime(test[D.TIME]); recorded_h = len(test) * D.DT / 3600; elapsed_h = (t.max() - t.min()).total_seconds() / 3600
     rows = []
     for r in metrics[metrics.split.eq(sid)].itertuples():
@@ -333,6 +339,13 @@ def workload(sid, name, test, metrics):
                     abnormal_detected=r.abnormal_notified_segments, abnormal_fn_rows=r.fn, delay_median_s=r.delay_median_s, delay_max_s=r.delay_max_s)
         for h in (8, 16, 24):
             base[f"scenario_alerts_per_day_{h}h_recorded_rate"] = r.normal_notified_segments / recorded_h * h
+        units_per_hour = r.normal_segments / elapsed_h
+        grid = np.floor(r.alpha * (n_cal + 1) + 1e-9) / (n_cal + 1)   # p ≤ α가 실제로 허용하는 명목 비율
+        upper = float(stats.beta.ppf(.95, r.normal_notified_segments + 1, r.normal_segments - r.normal_notified_segments))
+        base.update(alert_unit_max_rows=ALERT_UNIT_ROWS, units_per_elapsed_hour=units_per_hour, alpha_grid_rate=grid,
+                    nominal_alerts_per_8h_elapsed=grid * units_per_hour * 8,
+                    observed_alerts_per_8h_elapsed=r.normal_notified_segments / elapsed_h * 8,
+                    observed_rate_upper95=upper, upper95_alerts_per_8h_elapsed=upper * units_per_hour * 8)
         rows.append(base)
     return pd.DataFrame(rows)
 
@@ -438,7 +451,7 @@ def main():
         inter.append(interaction_2x2(sid, v1_pair, pairs, feats, bounds))
         recs.append(record_table(sid, v1_pair, pairs[.01]))
         unc.append(uncertainty(sid, split["name"], v1_pair, pairs, reps=args.reps))
-        work.append(workload(sid, split["name"], split["test"], metrics))
+        work.append(workload(sid, split["name"], split["test"], metrics, len(model.cal)))
         print(f"{sid}: 조건·불확실성·업무량 집계", flush=True)
     cond, segc, inter, recs, unc, work = (pd.concat(x, ignore_index=True) for x in (cond, segc, inter, recs, unc, work))
     cond.to_csv(args.out / "error_conditions_v2.csv", index=False)
@@ -447,6 +460,7 @@ def main():
     recs.to_csv(args.out / "records_first_alarm_v2.csv", index=False)
     unc.to_csv(args.out / "uncertainty_v2.csv", index=False)
     work.to_csv(args.out / "workload_v2.csv", index=False)
+    pd.DataFrame(DECISION_TABLE).to_csv(args.out / "decision_table_v2.csv", index=False)   # 조치 규칙(model.action_for)과 같은 원천
     figures(args.out, cond, recs, v2_by_split)
     # 검수용 요약: v1과 v2의 위치 0·1 미탐이 같은지(향상이 위치 2~6에 국한되는지)
     early = cond[cond.subset.eq("abnormal") & cond.condition.eq("pos_bin") & cond.value.isin(["0", "1"]) & cond.alpha.eq(.01)].groupby(["split_id", "model"]).error_rows.sum().unstack()
@@ -456,7 +470,7 @@ def main():
                    condition_bounds={sid: {k: (list(np.round(v, 6)) if isinstance(v, tuple) else round(v, 6)) for k, v in b.items()} for sid, b in bounds_used.items()},
                    files=["model_comparison_v2.csv", "model_comparison_v2.md", "robustness_v2.csv", "sensitivity_v2.csv", "ablation_v2.csv", "error_conditions_v2.csv",
                           "error_conditions_segments_v2.csv", "interaction_2x2_v2.csv", "records_first_alarm_v2.csv", "uncertainty_v2.csv", "workload_v2.csv",
-                          "fig_recall_by_position_v2.png", "fig_first_alarm_v2.png", "fig_missed_example_v2.png"],
+                          "decision_table_v2.csv", "fig_recall_by_position_v2.png", "fig_first_alarm_v2.png", "fig_missed_example_v2.png"],
                    elapsed_s=round(time.monotonic() - start, 1))
     D.dump_json(summary, args.out / "analysis_summary.json")
     manifest["analysis"]=dict(training_fingerprint=training_fingerprint(manifest),config={"reps":args.reps},

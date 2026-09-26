@@ -10,11 +10,11 @@
       "rows": 4690,
       "calls": 4690,
       "repeats": 3,
-      "seconds_best": 43.4734,
-      "rows_per_second": 107.9,
-      "p50_ms": 10.176,
-      "p95_ms": 10.47,
-      "max_ms": 29.738
+      "seconds_best": 48.86,
+      "rows_per_second": 96.0,
+      "p50_ms": 11.282,
+      "p95_ms": 11.692,
+      "max_ms": 31.236
     },
     {
       "label": "8행",
@@ -22,11 +22,11 @@
       "rows": 4690,
       "calls": 587,
       "repeats": 3,
-      "seconds_best": 6.1261,
-      "rows_per_second": 765.6,
-      "p50_ms": 10.509,
-      "p95_ms": 10.797,
-      "max_ms": 23.6
+      "seconds_best": 6.796,
+      "rows_per_second": 690.1,
+      "p50_ms": 11.598,
+      "p95_ms": 12.02,
+      "max_ms": 26.673
     },
     {
       "label": "128행",
@@ -34,11 +34,11 @@
       "rows": 4690,
       "calls": 37,
       "repeats": 3,
-      "seconds_best": 0.6454,
-      "rows_per_second": 7267.1,
-      "p50_ms": 17.465,
-      "p95_ms": 18.056,
-      "max_ms": 18.462
+      "seconds_best": 0.6891,
+      "rows_per_second": 6806.0,
+      "p50_ms": 18.813,
+      "p95_ms": 19.699,
+      "max_ms": 19.85
     },
     {
       "label": "전체",
@@ -46,14 +46,14 @@
       "rows": 4690,
       "calls": 1,
       "repeats": 3,
-      "seconds_best": 0.2733,
-      "rows_per_second": 17161.3,
-      "p50_ms": 276.859,
-      "p95_ms": 279.539,
-      "max_ms": 279.836
+      "seconds_best": 0.279,
+      "rows_per_second": 16810.3,
+      "p50_ms": 282.234,
+      "p95_ms": 282.466,
+      "max_ms": 282.492
     }
   ],
-  "batch_predict_seconds": 0.2678,
+  "batch_predict_seconds": 0.2752,
   "environment": {
     "python": "3.12.2",
     "platform": "macOS-26.3.1-arm64-arm-64bit",

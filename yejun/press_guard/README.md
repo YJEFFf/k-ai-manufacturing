@@ -87,12 +87,61 @@ v2의 미탐 감소 55행 중 위치 2~6에서 A 49행·B 51행, 위치 10 이�
 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/press_guard/serve.py --port 8765   # http://127.0.0.1:8765
 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/press_guard/audit.py       # outputs/audit.json (실행 검증 16개)
 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/press_guard/benchmark.py   # outputs/benchmark.json (처리시간)
-OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python -m pytest -q yejun/press_guard/test_guard.py yejun/press_guard/test_serve.py
+OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python -m pytest -q yejun/press_guard/test_guard.py yejun/press_guard/test_serve.py yejun/press_guard/test_analyze.py yejun/press_guard/test_review_regressions.py yejun/press_guard/test_recalibrate.py
 ```
 
 - `audit.py`: 실행 코드·저장 모델·v1 의존 코드·입력 해시가 manifest와 같은지, 입력 묶음 1·7·128행 순차 추론이 전체 추론과 같은지, 독립 집계·p값 순위 규칙·날짜 이동/라벨 불변을 실제 자료로 확인한다(16개). 구간당 알림이 경보 유무와 일치하는 정확성 검사와 이상 21구간 탐지 성능 회귀 검사는 이름을 나눠 판정한다. 웹 콘솔 '실행 검증' 목록이 이 파일을 읽는다.
-- `benchmark.py`: 분할 A 평가 스트림 4,690행, CPU 한 스레드. 1행 묶음 호출당 약 10 ms(p95 10.5 ms)로 수집 주기 0.1초보다 짧다. 128행 묶음 약 7,300행/초, 전체 일괄 0.27초. 기기 참고치다.
+- `benchmark.py`: 분할 A 평가 스트림 4,690행, CPU 한 스레드. 2026-09-26 재측정에서 1행 묶음 호출당 약 11 ms(p95 11.7 ms)로 수집 주기 0.1초보다 짧다. 128행 묶음 약 6,800행/초, 전체 일괄 0.28초. 기기 참고치다(평가관 04의 측정은 p95 19.9 ms).
 - 웹 화면의 경보 문턱선은 `p ≤ α`와 동치인 점수(정상 보정 구간 최대 점수 순위)를 표시한다. 그래프 색은 계열 3개를 색각 이상 분리·대비 검사(dataviz 검증기)로 확인해 정했다.
+
+## 현장 운영 규칙 (2026-09-26, 루브릭 검수 3단계)
+
+[루브릭 검수](../analysis/press_rubric_review/README.md)의 R6·R7·R8·R15·R16·R17을 반영했다. 대회 자료의 지표·예측·오류 조건표·불확실성은 이전과 같다(저장 모델 바이트 동일, 기존 열 값 동일). 동결 기대값에서 바뀐 것은 `cases_*.csv`(열 5개 추가), `workload_v2.csv`(열 7개 추가), 새 `decision_table_v2.csv`다. pytest 54개(재보정 4개 포함), JS 4, audit 16/16, verify 20/20을 통과했다.
+
+**알림·보정 단위(R7).** 대회 자료는 최대 50행(5초)의 수집 묶음(기록구간)이 1.5~16.6초 간격으로 들어온다. 보정·알림 단위를 "기록구간 안의 50행 블록"으로 정했다(`ALERT_UNIT_ROWS`, `alert_units`). 대회 자료에서는 블록이 곧 기록구간이다.
+- 끊김 없는 연속 입력은 50행마다 새 블록이 되고, 블록의 첫 경보에 알린다.
+- 바로 앞 블록도 경보였으면 이어지는 이상으로 보고 같은 건으로 묶는다.
+- 이전에는 연속 입력 전체가 한 기록구간이 되어, 앞쪽 오경보 뒤의 이상이 새 알림 없이 묻혔다.
+- 예측 CSV의 `alert_unit`은 블록 번호, `beyond_calibration_length`는 대회 보정 단위보다 긴 연속 입력인지를 보인다.
+- 연속 입력의 블록은 초반 창이 비지 않아(기록 시작이 없음), 대회 보정값의 α는 근사다. 연속 수집 설비에서는 같은 방식의 정상 연속 자료로 재보정한다(R16).
+
+**α의 뜻과 업무량(R8).** α는 시간 비율이 아니라 **보정·알림 단위(기록구간)당** 비율이다. 대회 정상 자료의 밀도는 경과 1시간에 약 447구간이다. [workload_v2.csv](outputs/workload_v2.csv)의 새 열로 교대 8시간(경과시간) 환산을 둔다.
+
+| 분할 | α | 명목(보정 격자 ⌊α·121⌋/121) | 관측 | 관측 비율의 이항 95% 상한 |
+|---|---:|---:|---:|---:|
+| A | 1% | 약 30건 | 0건(0/120) | 약 88건 |
+| B | 1% | 약 30건 | 약 60건(3/180) | 약 152건 |
+| B | 3% | 약 89건 | 약 99건(5/180) | 약 206건 |
+| B | 5% | 약 178건 | 약 139건(7/180) | 약 257건 |
+
+A 평가 구간은 보정보다 조용한 시간대라 관측 0건은 유리한 조건의 값이다. 같은 날 간헐 수집 밀도를 가정한 환산이다. 연속 수집이면 블록 수(시간당 720개)로 다시 계산해야 한다. 웹 콘솔의 α 선택지에 "구간당"을 붙이고, 성능 탭에 업무량 표를 넣었다.
+
+**조치 문구와 판단표(R6).** 크기 성분은 세 센서 중 최대 편차 센서를 따른다. 이전 규칙은 이를 보지 않아 전류만 튀어도 "진동·부하 확인"을 권했다.
+- 전류 크기만 발화: "전류 크기·부하·계측 확인"
+- 전류 크기와 파형·예측 오차가 함께 발화: "전류 크기·파형·계측 확인"
+- 관측 자료의 크기 발화는 모두 진동 센서라 기존 결과는 같다.
+- 판단표는 조치 규칙과 같은 원천(`model.DECISION_TABLE`)에서 [decision_table_v2.csv](outputs/decision_table_v2.csv)로 나온다. 대기열·CSV에는 `magnitude_sensors` 열이 붙는다.
+- 확인 대상은 가설이며 정비 결과로 검증하지 않았다.
+
+**대기열 우선순위(R15).** `priority_rank`는 이상 라벨 없이 정한 정렬 키다(근거 성분 수 → 경보 행 비율 → 최대 점수). 웹 대기열은 기본으로 이 순서를 쓰고, 시간순으로 바꿀 수 있다.
+- α=1%에서는 보정 120구간으로 낼 수 있는 최소 p값(1/121)이 모든 경보에 같다. 그래서 상세 화면은 p값 대신 "문턱 대비 최대 점수"를 먼저 보인다.
+- 사후 관찰(이상 라벨 사용, 성능 근거 아님): 정상+이상 혼합 자료에서 정상 오경보는 모든 분할·α에서 이상 21건보다 아래 순위였다(B α=1%에서 22~24위).
+- 품질검사 우선순위와의 연결은 가공품·로트 자료가 없어 제안 수준이다.
+
+**재보정 절차(R16).** [recalibrate.py](recalibrate.py)는 새 날짜·설비의 정상 CSV 하나로 학습·보정·수락 검사를 한다.
+
+```bash
+OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/press_guard/recalibrate.py --normal new_normal.csv --out site_model.json
+```
+
+1. 시간순으로 학습 / 보정(기본 120단위) / 수락 검사(기본 60단위)로 나눈다. α=1%에서 보정 단위가 99개 미만이면 중단한다.
+2. 수락 검사 (a): 수락 구간의 알림 단위 수가 이항 95백분위 이하인가.
+3. 수락 검사 (b): 30행 이상 단위에 전류 잡음 0.2σ·전류 오프셋 0.4×진폭·진동 잡음 4σ를 넣었을 때 2초 안 탐지율이 각각 90% 이상인가. 주입 세기는 보완 실험 E1의 결과를 보고 정한 운영 기준이다.
+4. 통과할 때만 모델을 저장하고 보고서 JSON을 남긴다.
+
+대회 정상 0~479구간을 새 자료로 가정하면 학습 300·보정 120·수락 60단위(정상 약 26.5분, 경과 약 61분)에서 알림 2/60(한도 2), 주입 3종 모두 36단위 100%로 통과했다. 같은 날 자료라 새 날짜의 성능을 보장하지 않는다.
+
+**콘솔 문구(R17).** 성능 탭의 "v2의 향상은 위치 2~6에서 나온다"를 README의 정정(위치 2~6에서 A 49행·B 51행, 위치 10 이후 A 6행·B 4행)과 맞췄다.
 
 ## 검수 범위
 

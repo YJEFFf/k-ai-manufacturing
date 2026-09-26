@@ -85,6 +85,7 @@
     "records_first_alarm_v2.csv",
     "uncertainty_v2.csv",
     "workload_v2.csv",
+    "decision_table_v2.csv",
     "fig_recall_by_position_v2.png",
     "fig_first_alarm_v2.png",
     "fig_missed_example_v2.png"

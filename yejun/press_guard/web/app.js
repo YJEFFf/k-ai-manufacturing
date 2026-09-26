@@ -10,7 +10,14 @@
   ];
   const REASON_LABEL = { dynamics: '전류 예측 오차', waveform: '전류 파형', magnitude: '센서 크기' };
   const ALARM = '#b3412e';
-  const state = { overview: null, result: null, selected: null, filter: 'all', upload: null, replay: null, cursor: null, busy: false };
+  const state = { overview: null, result: null, selected: null, filter: 'all', sort: 'priority', upload: null, replay: null, cursor: null, busy: false };
+  const SENSOR_LABEL = { AI0_Vibration: '진동', AI1_Vibration: '진동', AI2_Current: '전류' };
+  // 크기 성분은 최대 편차가 난 센서까지 붙여 보인다(진동·전류).
+  const reasonLabel = (e, c) => {
+    if (e !== 'magnitude' || !c || !c.magnitude_sensors) return REASON_LABEL[e] || e;
+    const kinds = [...new Set(String(c.magnitude_sensors).split('+').filter(Boolean).map(s => SENSOR_LABEL[s] || s))];
+    return `${REASON_LABEL.magnitude}(${kinds.join('·')})`;
+  };
 
   const fmt = {
     int: v => (v == null || Number.isNaN(v)) ? '—' : Number(v).toLocaleString('ko-KR'),
@@ -106,7 +113,9 @@
 
   function filteredCases() {
     const cases = state.result ? state.result.cases : [];
-    return state.filter === 'all' ? cases : cases.filter(c => String(c.evidence).split('+').includes(state.filter));
+    const list = state.filter === 'all' ? cases : cases.filter(c => String(c.evidence).split('+').includes(state.filter));
+    // 우선순위는 이상 라벨 없이 정한 정렬 키(근거 성분 수 → 경보 행 비율 → 최대 점수). 시간순은 첫 경보 행 순서.
+    return [...list].sort((a, b) => state.sort === 'priority' ? (a.priority_rank - b.priority_rank) : (a.first_row - b.first_row));
   }
 
   function renderQueue() {
@@ -118,16 +127,17 @@
       return;
     }
     queue.innerHTML = list.map(c => {
-      const chips = String(c.evidence).split('+').filter(Boolean).map(e => `<span class="chip ${esc(e)}">${esc(REASON_LABEL[e] || e)}</span>`).join('');
+      const chips = String(c.evidence).split('+').filter(Boolean).map(e => `<span class="chip ${esc(e)}">${esc(reasonLabel(e, c))}</span>`).join('');
       const ref = c.reference_label == null ? '' : (Number(c.reference_label) === 1 ? ' · 참조 라벨: 이상' : ' · 참조 라벨: 정상');
       return `<button type="button" class="queue-item${c.record_id === state.selected ? ' selected' : ''}" data-record="${c.record_id}">
-        <div class="queue-top"><span class="queue-id">구간 ${fmt.int(c.record_id)}</span><span class="queue-time">${esc(fmt.time(c.first_timestamp))}</span></div>
+        <div class="queue-top"><span class="queue-id">우선 ${fmt.int(c.priority_rank)} · 구간 ${fmt.int(c.record_id)}</span><span class="queue-time">${esc(fmt.time(c.first_timestamp))}</span></div>
         <div class="chips">${chips}</div>
         <div class="queue-action">첫 경보 ${fmt.num(c.detection_delay_s, 1)}초 · 경보 ${fmt.int(c.alarm_rows)}/${fmt.int(c.observed_rows)}행${ref}</div>
       </button>`;
     }).join('');
     queue.querySelectorAll('.queue-item').forEach(el => el.addEventListener('click', () => selectCase(Number(el.dataset.record))));
   }
+  $('sort').addEventListener('change', () => { state.sort = $('sort').value; renderQueue(); });
   $('filter').addEventListener('change', () => { state.filter = $('filter').value; renderQueue(); const first = filteredCases()[0]; if (!first) renderDetail(null); else if (!filteredCases().some(c => c.record_id === state.selected)) selectCase(first.record_id); });
 
   function selectCase(recordId) {
@@ -158,12 +168,14 @@
     $('scrubber').disabled = false; $('replay').disabled = false;
     $('detail-title').textContent = `구간 ${fmt.int(c.record_id)} · ${fmt.int(rows.length)}관측`;
     $('reference').textContent = c.reference_label == null ? '참조 라벨 없음' : (Number(c.reference_label) === 1 ? '참조 라벨: 이상 기록' : '참조 라벨: 정상 기록');
-    const reasons = String(c.evidence).split('+').filter(Boolean).map(e => REASON_LABEL[e] || e).join(' + ');
+    const reasons = String(c.evidence).split('+').filter(Boolean).map(e => reasonLabel(e, c)).join(' + ');
+    const thr = state.result.threshold;
+    // α 1%에서는 모든 경보의 p값이 보정으로 낼 수 있는 최솟값 하나라 건 사이 순위 정보가 없다. 문턱 대비 최대 점수를 먼저 보인다.
     summary.innerHTML = [
       ['첫 경보', `${fmt.num(c.detection_delay_s, 1)}초 (${fmt.int(c.first_alarm_position + 1)}번째 관측)`],
       ['경보 관측', `${fmt.int(c.alarm_rows)} / ${fmt.int(c.observed_rows)}행`],
-      ['최소 p값', fmt.num(c.min_p, 4)],
-      ['최대 점수', fmt.num(c.peak_score, 2)],
+      ['문턱 대비 최대 점수', Number.isFinite(thr) && thr > 0 ? `${fmt.num(c.peak_score, 2)} / ${fmt.num(thr, 2)} (×${fmt.num(c.peak_score / thr, 1)})` : fmt.num(c.peak_score, 2)],
+      ['최소 p값', `${fmt.num(c.min_p, 4)} (가능한 최솟값 ${fmt.num(state.result.min_p_attainable, 4)})`],
       ['근거', reasons || '—'],
     ].map(([k, v]) => `<div><span>${k}</span><b>${esc(v)}</b></div>`).join('');
     $('action').textContent = c.action || '—';
@@ -281,7 +293,7 @@
   $('export').addEventListener('click', () => {
     const list = filteredCases();
     if (!list.length) { setMessage('내보낼 점검 구간이 없습니다.', true); return; }
-    const cols = ['record_id', 'first_timestamp', 'first_alarm_position', 'detection_delay_s', 'alarm_rows', 'observed_rows', 'peak_score', 'min_p', 'evidence', 'action', 'reference_label'];
+    const cols = ['priority_rank', 'record_id', 'first_timestamp', 'first_alarm_position', 'detection_delay_s', 'alarm_rows', 'observed_rows', 'alarm_share', 'peak_score', 'min_p', 'evidence', 'magnitude_sensors', 'action', 'alert_units', 'beyond_calibration_length', 'reference_label'];
     const cell = v => { const s = v == null ? '' : String(v); return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
     const csv = [cols.join(','), ...list.map(c => cols.map(k => cell(c[k])).join(','))].join('\n');
     const url = URL.createObjectURL(new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8' }));
@@ -309,6 +321,8 @@
         `<tr${r.model === 'guard_v2' ? ' class="highlight"' : ''}><td>${r.split}</td><td>${r.model === 'guard_v2' ? 'v2 · 정상 동역학 결합' : 'v1 · 기존 결합'}</td><td>${fmt.num(r.f1, 6)}</td><td>${fmt.int(r.fn)}</td><td>${fmt.int(r.fp)}</td><td>${fmt.int(r.normal_notified_segments)} / ${fmt.int(r.normal_segments)}</td><td>${fmt.int(r.abnormal_notified_segments)} / ${fmt.int(r.abnormal_segments)}</td><td>${fmt.num(r.delay_max_s, 1)}초</td></tr>`)).join('')
     }</tbody></table>`;
     renderConditions(o.conditions || []);
+    renderWorkload(o.workload || []);
+    renderDecisionTable(o.decision_table || []);
     renderRobustness(o.robustness || []);
     const audit = o.audit && o.audit.checks ? o.audit.checks : [];
     const bench = o.benchmark && o.benchmark.runs ? o.benchmark.runs : [];
@@ -326,6 +340,22 @@
     el.innerHTML = `<table><thead><tr><th>정상 기준</th><th>모델</th><th>구분</th>${order.map(v => `<th>위치 ${v}</th>`).join('')}</tr></thead><tbody>${
       ['A', 'B'].flatMap(split => [['abnormal', '이상 미탐 행 / 행'], ['normal', '정상 오경보 행 / 행']].flatMap(([subset, label]) => ['v1', 'v2'].map(model =>
         `<tr${model === 'v2' ? ' class="highlight"' : ''}><td>${split}</td><td>${model}</td><td>${label}</td>${order.map(v => `<td>${cell(split, model, subset, v)}</td>`).join('')}</tr>`))).join('')
+    }</tbody></table>`;
+  }
+
+  function renderWorkload(rows) {
+    const el = $('workload');
+    if (!rows.length) { el.innerHTML = '<div class="empty">업무량 표(outputs/workload_v2.csv)가 없습니다. analyze.py를 실행하세요.</div>'; return; }
+    el.innerHTML = `<table><thead><tr><th>정상 기준</th><th>α</th><th>경과 1시간당 구간</th><th>명목 비율</th><th>교대 8시간 · 명목</th><th>관측 알림 / 구간</th><th>교대 8시간 · 관측</th><th>교대 8시간 · 관측 95% 상한</th></tr></thead><tbody>${
+      rows.map(r => `<tr><td>${esc(r.split_id)}</td><td>${fmt.pct(r.alpha, 0)}</td><td>${fmt.int(Math.round(r.units_per_elapsed_hour))}</td><td>${fmt.pct(r.alpha_grid_rate, 2)}</td><td>${fmt.num(r.nominal_alerts_per_8h_elapsed, 0)}건</td><td>${fmt.int(r.first_alert_segments)} / ${fmt.int(r.normal_segments)}</td><td>${fmt.num(r.observed_alerts_per_8h_elapsed, 0)}건</td><td>${fmt.num(r.upper95_alerts_per_8h_elapsed, 0)}건</td></tr>`).join('')
+    }</tbody></table>`;
+  }
+
+  function renderDecisionTable(rows) {
+    const el = $('decision-table');
+    if (!rows.length) { el.innerHTML = '<div class="empty">판단표가 없습니다.</div>'; return; }
+    el.innerHTML = `<table><thead><tr><th>경보 근거</th><th>확인 대상(가설)</th><th>권장 확인</th></tr></thead><tbody>${
+      rows.map(r => `<tr><td>${esc(r.evidence)}</td><td>${esc(r.check_target)}</td><td>${esc(r.action)}</td></tr>`).join('')
     }</tbody></table>`;
   }
 

@@ -99,3 +99,65 @@ def test_rank_rule_independent(model,data,alpha):
     direct=np.asarray([(1+sum(model.cal>=s))/(len(model.cal)+1) for s in pred.score])
     np.testing.assert_array_equal(pred.p_value.to_numpy(),direct)
     np.testing.assert_array_equal(pred.alarm.to_numpy(),(direct<=alpha).astype(int))
+
+
+def _continuous(frame, start="2022-07-12 02:00:00"):
+    """끊김 없는 0.1초 간격으로 다시 찍은 입력(연속 수집 모의)."""
+    f = D.inputs_only(frame).copy()
+    f[D.TIME] = (pd.Timestamp(start) + pd.to_timedelta(np.arange(len(f)) * 100, unit="ms")).astype(str)
+    return f
+
+
+def test_action_follows_magnitude_sensor(model, data):
+    """크기 성분이 전류에서 나왔으면 진동 점검을 권하지 않는다(루브릭 검수 R6)."""
+    n, _ = data
+    base = D.inputs_only(n.iloc[:1]).copy()
+    cur, vib = base.copy(), base.copy()
+    cur[D.SENSORS[2]] = model.mean[2] + 30 * model.scale[2]
+    vib[D.SENSORS[0]] = model.mean[0] + 30 * model.scale[0]
+    pc, pv = model.predict(cur), model.predict(vib)
+    assert pc.loc[0, "reason"] == "magnitude" and pc.loc[0, "magnitude_sensor"] == D.SENSORS[2]
+    assert pc.loc[0, "action"] == "전류 크기·부하·계측 확인" and cases(pc).action.iloc[0] == "전류 크기·부하·계측 확인"
+    assert pv.loc[0, "action"] == "진동·부하 확인" and cases(pv).magnitude_sensors.iloc[0] == D.SENSORS[0]
+
+
+def _synthetic_normal(model, rows, seed=0):
+    """끊김 없는 정상 모의 신호: 0.6 Hz 사인 전류 + 작은 잡음, 정상 척도의 절반인 진동 잡음. 실제 기록을 이어 붙이면 경계마다 위상이 끊겨 인공 경보가 생긴다."""
+    rng = np.random.default_rng(seed)
+    t = np.arange(rows) * D.DT
+    return pd.DataFrame({D.TIME: "", D.SENSORS[0]: model.mean[0] + .5 * model.scale[0] * rng.standard_normal(rows),
+                         D.SENSORS[1]: model.mean[1] + .5 * model.scale[1] * rng.standard_normal(rows),
+                         D.SENSORS[2]: model.mean[2] + np.sqrt(2) * model.scale[2] * np.sin(2 * np.pi * .6 * t) + 2 * rng.standard_normal(rows)})
+
+
+def test_continuous_stream_rearms_and_merges(model, data):
+    """연속 입력은 50행 블록으로 알린다. 앞쪽 알림 뒤의 이상도 새 알림을 받고, 이어지는 이상 블록은 한 건으로 묶인다(R7)."""
+    _, a = data
+    normal_part = _synthetic_normal(model, 1500)
+    normal_part.loc[39, D.SENSORS[0]] = model.mean[0] + 30 * model.scale[0]     # 앞쪽 오경보 하나
+    frame = _continuous(pd.concat([normal_part, D.inputs_only(a)], ignore_index=True))
+    pred = model.predict(frame)
+    assert pred.record_id.nunique() == 1 and pred.beyond_calibration_length.sum() == len(frame) - 50
+    assert pred.notification.iloc[:50].sum() == 1 and pred.alarm.iloc[50:1500].sum() == 0   # 전제: 스파이크 뒤 정상 부분은 조용하다
+    later = pred.iloc[1500:]
+    assert later.notification.sum() >= 1                      # 이상 부분이 앞 알림에 묻히지 않는다(이전 규칙이면 0)
+    blocks = later.groupby("alert_unit").alarm.max()
+    assert later.notification.sum() < blocks.sum()            # 경보가 이어진 블록은 새로 알리지 않는다
+    queue = cases(pred)
+    assert len(queue) == pred.notification.sum() and queue.beyond_calibration_length.iloc[-1] == 1
+    for chunks in ((1,), (7, 50, 3), (128,)):
+        stream = StreamDetector(model); parts = []; i = 0; c = 0
+        while i < len(frame):
+            size = chunks[c % len(chunks)]; parts.append(stream.push(frame.iloc[i:i + size])); i += size; c += 1
+        pd.testing.assert_frame_equal(pd.concat(parts, ignore_index=True), pred, rtol=1e-11, atol=1e-11)
+
+
+def test_calibration_unit_is_alert_unit(data):
+    """보정도 알림과 같은 단위(기록구간 안 50행 블록)로 한다. 대회 자료는 기록구간과 같다."""
+    n, _ = data
+    sp = D.split_normal(n, D.segments(n), "A")
+    cal = _continuous(sp["cal"].iloc[:1000])
+    m = GuardModel.fit(sp["train"], cal, split="A")
+    assert len(m.cal) == 20
+    same = GuardModel.fit(sp["train"], sp["cal"], split="A")
+    assert len(same.cal) == 120

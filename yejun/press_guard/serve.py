@@ -11,7 +11,7 @@ import threading
 import numpy as np
 import pandas as pd
 
-from model import GuardModel, StreamDetector, cases, D, HERE, ALPHAS
+from model import GuardModel, StreamDetector, cases, D, HERE, ALPHAS, DECISION_TABLE, ALERT_UNIT_ROWS
 
 MAX_UPLOAD=8*1024*1024
 MAX_ROWS=50000
@@ -71,6 +71,7 @@ class Console:
                                alarm_rows=int(predictions.alarm.sum()),notifications=int(predictions.notification.sum()),
                                elapsed_s=duration),
                     calibration_segments=len(self.models[split].cal),threshold=score_threshold(self.models[split].cal,alpha),
+                    min_p_attainable=1/(len(self.models[split].cal)+1),alert_unit_rows=ALERT_UNIT_ROWS,
                     cases=json.loads(queue.to_json(orient="records")),
                     points=json.loads(plot.to_json(orient="records",double_precision=12)))
         if kind!="upload": self.cache[key]=result
@@ -81,6 +82,9 @@ class Console:
         external=HERE.parent/"analysis"/"press_external"/"metrics.csv"
         audit=HERE/"outputs"/"audit.json"; benchmark=HERE/"outputs"/"benchmark.json"
         conditions=HERE/"outputs"/"error_conditions_v2.csv"; robustness=HERE/"outputs"/"robustness_v2.csv"
+        workload=HERE/"outputs"/"workload_v2.csv"
+        work=pd.read_csv(workload) if workload.exists() else pd.DataFrame()
+        work=work[work.model.eq("guard_v2")] if len(work) else work
         cond=pd.read_csv(conditions) if conditions.exists() else pd.DataFrame()
         cond=cond[cond.alpha.eq(.01)&cond.condition.isin(["pos_bin","strongest_component"])] if len(cond) else cond
         rob=pd.read_csv(robustness) if robustness.exists() else pd.DataFrame()
@@ -98,7 +102,8 @@ class Console:
         return dict(metrics=json.loads(metrics.to_json(orient="records")),
                     conditions=json.loads(cond.to_json(orient="records")),robustness=json.loads(rob.to_json(orient="records")),
                     external=json.loads(pd.read_csv(external).to_json(orient="records")) if external.exists() else [],
-                    audit=audit_data,
+                    audit=audit_data,workload=json.loads(work.to_json(orient="records")),
+                    decision_table=list(DECISION_TABLE),alert_unit_rows=ALERT_UNIT_ROWS,
                     benchmark=json.loads(benchmark.read_text()) if benchmark.exists() else {})
 
 

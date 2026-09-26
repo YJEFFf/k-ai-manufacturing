@@ -4,12 +4,13 @@ import json
 from pathlib import Path
 from model import D, HERE, GuardModel, VERSION
 
-CODE_FILES = ("model.py", "train.py", "predict.py", "analyze.py", "audit.py", "verify.py", "contracts.py",
+CODE_FILES = ("model.py", "train.py", "predict.py", "recalibrate.py", "analyze.py", "audit.py", "verify.py", "contracts.py",
               "serve.py", "benchmark.py", "tools/clean_repro.sh", "web/app.js", "web/index.html", "web/style.css")
 TRAIN_TABLES = ("metrics.csv", "rolling.csv", "cases_A.csv", "cases_B.csv")
 PREDICTIONS = tuple(f"predictions_{kind}_{sid}.csv" for kind in ("normal", "abnormal") for sid in ("A", "B"))
 ANALYSIS_TABLES = ("model_comparison_v2.csv", "robustness_v2.csv", "sensitivity_v2.csv", "ablation_v2.csv", "error_conditions_v2.csv",
-                   "error_conditions_segments_v2.csv", "interaction_2x2_v2.csv", "records_first_alarm_v2.csv", "uncertainty_v2.csv", "workload_v2.csv")
+                   "error_conditions_segments_v2.csv", "interaction_2x2_v2.csv", "records_first_alarm_v2.csv", "uncertainty_v2.csv", "workload_v2.csv",
+                   "decision_table_v2.csv")
 ANALYSIS_FILES = ANALYSIS_TABLES + ("analysis_summary.json", "model_comparison_v2.md", "fig_recall_by_position_v2.png",
                                     "fig_first_alarm_v2.png", "fig_missed_example_v2.png")
 ARTIFACTS = ("guard_A.json", "guard_B.json")

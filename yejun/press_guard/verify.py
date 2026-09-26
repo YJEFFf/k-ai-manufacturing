@@ -20,7 +20,8 @@ from model import D, HERE
 from contracts import (TRAIN_TABLES, ANALYSIS_TABLES, execution_errors, read_json, check_files, audit_errors)
 
 RESULTS = ["metrics.csv", "rolling.csv", "cases_A.csv", "cases_B.csv", "model_comparison_v2.csv", "robustness_v2.csv", "sensitivity_v2.csv", "ablation_v2.csv",
-           "error_conditions_v2.csv", "error_conditions_segments_v2.csv", "interaction_2x2_v2.csv", "records_first_alarm_v2.csv", "uncertainty_v2.csv", "workload_v2.csv"]
+           "error_conditions_v2.csv", "error_conditions_segments_v2.csv", "interaction_2x2_v2.csv", "records_first_alarm_v2.csv", "uncertainty_v2.csv", "workload_v2.csv",
+           "decision_table_v2.csv"]
 META = ["manifest.json", "audit.json", "analysis_summary.json"]
 ARTIFACTS = ["guard_A.json", "guard_B.json"]
 TOL = 1e-9
