@@ -29,9 +29,11 @@
   "copy_groups_earliest_member_consistent": "21/45",
   "copy_groups_latest_member_consistent": "44/45",
   "copy_groups_chosen_origin_consistent": "45/45",
+  "copy_groups_chosen_origin_note": "규칙이 정합 구성원을 원본으로 고르므로 거의 자동으로 나오는 값이다(증거로 쓰지 않는다)",
   "singleton_days_consistent": "88/95",
   "singleton_days_consistent_measured_period": "87/88",
   "earliest_is_origin_binom_p": 5.31543e-16,
+  "earliest_is_origin_binom_p_measured_baseline": 6.44401e-35,
   "unique_daily_power_patterns": 142,
   "copied_power_days": 115,
   "copied_by_month": {
@@ -229,9 +231,110 @@
   "휴무 다음 평일의 01~05시 야간조 전력|5~9월": "1/22",
   "복제군 구성원의 앞뒤 자정 연속성|가장 이른 구성원": "24/45",
   "복제군 구성원의 앞뒤 자정 연속성|가장 늦은 구성원": "43/45",
-  "복제군 구성원의 앞뒤 자정 연속성|가장 늦은 쪽만 연속 / 가장 이른 쪽만 연속": "20/1",
+  "복제군 구성원의 앞뒤 자정 연속성|불일치 쌍 중 가장 늦은 쪽만 연속": "20/21",
   "가동 패턴 복제군: 13~16시 고원 전력 vs 일 최고기온|가장 늦은 날짜 기온": 0.331725,
-  "가동 패턴 복제군: 13~16시 고원 전력 vs 일 최고기온|가장 이른 날짜 기온": -0.141009
+  "가동 패턴 복제군: 13~16시 고원 전력 vs 일 최고기온|가장 이른 날짜 기온": -0.141009,
+  "자정 연속성(전날 21~23시 ↔ 당일 01~05시)|5~9월|p_value": 1.55535e-09,
+  "휴무 다음 평일의 01~05시 야간조 전력|5~9월|p_value": 7.97905e-08,
+  "복제군 구성원의 앞뒤 자정 연속성|불일치 쌍 중 가장 늦은 쪽만 연속|p_value": 2.09808e-05,
+  "가동 패턴 복제군: 13~16시 고원 전력 vs 일 최고기온|가장 늦은 날짜 기온|p_value": 0.059303,
+  "가동 패턴 복제군: 13~16시 고원 전력 vs 일 최고기온|가장 이른 날짜 기온|p_value": 0.433788
+ },
+ "origin_threshold_sensitivity": {
+  "combinations": 972,
+  "grid": {
+   "night_power_on": [
+    40,
+    60,
+    80
+   ],
+   "day_power_on": [
+    80,
+    100,
+    120
+   ],
+   "day_prod_on": [
+    500,
+    1000,
+    3000
+   ],
+   "night_prod_on": [
+    1,
+    100,
+    400
+   ],
+   "evening_power_on": [
+    40,
+    60,
+    80
+   ],
+   "evening_prod_on": [
+    0,
+    50,
+    100,
+    200
+   ]
+  },
+  "latest_consistent_range": [
+   40,
+   44
+  ],
+  "earliest_consistent_range": [
+   19,
+   22
+  ],
+  "min_gap_latest_minus_earliest": 20,
+  "combinations_without_origin_change": 162,
+  "max_origin_changed_groups": 3,
+  "one_way_from_headline": {
+   "evening_prod_on": {
+    "0": {
+     "origin_changes": "-",
+     "singleton_measured_consistent": "87/88"
+    },
+    "50": {
+     "origin_changes": "2021-06-17→2021-03-17",
+     "singleton_measured_consistent": "84/88"
+    },
+    "100": {
+     "origin_changes": "2021-06-17→2021-03-17",
+     "singleton_measured_consistent": "84/88"
+    },
+    "200": {
+     "origin_changes": "2021-05-18→2021-04-16; 2021-06-17→2021-03-17; 2021-06-24→2021-03-24",
+     "singleton_measured_consistent": "81/88"
+    }
+   },
+   "evening_power_on": {
+    "40": {
+     "origin_changes": "-",
+     "singleton_measured_consistent": "87/88"
+    },
+    "60": {
+     "origin_changes": "-",
+     "singleton_measured_consistent": "87/88"
+    },
+    "80": {
+     "origin_changes": "-",
+     "singleton_measured_consistent": "87/88"
+    }
+   },
+   "night_prod_on": {
+    "1": {
+     "origin_changes": "-",
+     "singleton_measured_consistent": "88/88"
+    },
+    "100": {
+     "origin_changes": "-",
+     "singleton_measured_consistent": "87/88"
+    },
+    "400": {
+     "origin_changes": "2021-06-10→2021-03-10",
+     "singleton_measured_consistent": "84/88"
+    }
+   }
+  },
+  "file": "diagnostics/copy_origin_sensitivity.csv"
  },
  "usable": {
   "usable_days": 133,

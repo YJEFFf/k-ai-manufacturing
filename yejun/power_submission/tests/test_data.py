@@ -44,7 +44,7 @@ def test_copies(dg):
 
 
 def test_copy_origin_is_latest_consistent_member(dg):
-    """복제군의 가장 늦은 구성원은 모두 달력·생산과 정합하고, 가장 이른 구성원은 절반만 정합한다."""
+    """복제군의 가장 늦은 구성원은 45군 중 44군이 달력·생산과 정합하고(예외 7/28·7/30군), 가장 이른 구성원은 절반만 정합한다."""
     _, _, d = dg
     s = d.summary
     assert s["copy_groups_multi"] == 45
@@ -53,6 +53,7 @@ def test_copy_origin_is_latest_consistent_member(dg):
     assert s["copy_groups_earliest_member_consistent"] == "21/45"
     assert s["singleton_days_consistent_measured_period"] == "87/88"
     assert s["earliest_is_origin_binom_p"] < 1e-10
+    assert s["earliest_is_origin_binom_p_measured_baseline"] < 1e-30  # 실측 기간 단독 날짜(87/88) 기준
     assert s["copied_src_later_share"] > 0.99  # 예외 1일: 7/30 ← 7/28(같은 달, 저녁 정합으로 판정)
     g = d.copy_groups
     assert (g[g["is_origin"]]["consistent"] == 1).all()
@@ -110,13 +111,21 @@ def test_waterfall_adds_up(dg):
 
 
 def test_consistency_rule_is_robust_to_thresholds(dg):
-    """정합 판정 문턱을 바꿔도(야간 40~80, 주간 80~120, 주간 생산 500~3000) 결론이 같다."""
+    """정합 판정 문턱 6개의 전 조합(972)에서 '가장 늦은 구성원 정합 ≫ 가장 이른 구성원 정합'이 유지되고, 원본이 바뀌는 군은
+    많아야 3개다. 저녁 생산 문턱을 50 이상으로 올리면 6/17군의 원본이 채움 날짜(3/17)로 바뀐다(공개된 민감도)."""
     from powerguard import stage_diagnostics as SD
     df, _, d = dg
-    t = SD.origin_sensitivity(df, d)
-    assert (t["latest_consistent"] >= 43).all()
+    t, summ = SD.origin_sensitivity(df, d)
+    assert len(t) == 972 and int(t["is_headline"].sum()) == 1
+    h = t[t["is_headline"]].iloc[0]
+    assert (h["latest_consistent"], h["earliest_consistent"], h["origin_changed_groups"]) == (44, 21, 0)
+    assert h["singleton_measured_consistent"] == "87/88"
+    assert (t["latest_consistent"] >= 40).all()
     assert (t["earliest_consistent"] <= 25).all()
     assert (t["latest_consistent"] - t["earliest_consistent"]).min() >= 18
+    assert summ["max_origin_changed_groups"] <= 3
+    assert summ["one_way_from_headline"]["evening_prod_on"]["50"]["origin_changes"] == "2021-06-17→2021-03-17"
+    assert summ["one_way_from_headline"]["evening_power_on"]["40"]["origin_changes"] == "-"
 
 
 def test_power_only_direction_checks(dg):
@@ -128,6 +137,11 @@ def test_power_only_direction_checks(dg):
     assert r[("자정 연속성(전날 21~23시 ↔ 당일 01~05시)", "5~9월")] > 0.95
     assert r[("자정 연속성(전날 21~23시 ↔ 당일 01~05시)", "1~4월")] < 0.8
     assert r[("휴무 다음 평일의 01~05시 야간조 전력", "5~9월")] < 0.1
+    pv = t.set_index(["check", "subset"])["p_value"]
+    assert pv[("자정 연속성(전날 21~23시 ↔ 당일 01~05시)", "5~9월")] < 1e-6
+    assert pv[("복제군 구성원의 앞뒤 자정 연속성", "불일치 쌍 중 가장 늦은 쪽만 연속")] < 1e-3
+    ex = t.set_index(["check", "subset"])["exceptions"]
+    assert ex[("휴무 다음 평일의 01~05시 야간조 전력", "5~9월")] == "8/17"
 
 
 def test_naive_intervals_include_copies(dg):

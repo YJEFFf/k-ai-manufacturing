@@ -8,7 +8,9 @@
     "M7c_hybrid_coolmono"
    ],
    "n": 4320,
-   "max_abs_diff_vs_training_run": 4.99886e-05
+   "max_abs_diff_vs_training_run": 4.99886e-05,
+   "rows_differing_after_4dp_rounding": 0,
+   "pass": true
   },
   "A1": {
    "model": "M7c_hybrid_coolmono",
@@ -16,7 +18,9 @@
     "M7c_hybrid_coolmono"
    ],
    "n": 4320,
-   "max_abs_diff_vs_training_run": 4.99677e-05
+   "max_abs_diff_vs_training_run": 4.99677e-05,
+   "rows_differing_after_4dp_rounding": 0,
+   "pass": true
   },
   "A2": {
    "model": "M7c_hybrid_coolmono",
@@ -24,7 +28,9 @@
     "M7c_hybrid_coolmono"
    ],
    "n": 4320,
-   "max_abs_diff_vs_training_run": 4.99732e-05
+   "max_abs_diff_vs_training_run": 4.99732e-05,
+   "rows_differing_after_4dp_rounding": 0,
+   "pass": true
   },
   "A3": {
    "model": "M7c_hybrid_coolmono",
@@ -32,7 +38,9 @@
     "M7c_hybrid_coolmono"
    ],
    "n": 4320,
-   "max_abs_diff_vs_training_run": 4.99866e-05
+   "max_abs_diff_vs_training_run": 4.99866e-05,
+   "rows_differing_after_4dp_rounding": 0,
+   "pass": true
   },
   "A4": {
    "model": "M7c_hybrid_coolmono",
@@ -40,7 +48,11 @@
     "M7c_hybrid_coolmono"
    ],
    "n": 4320,
-   "max_abs_diff_vs_training_run": 5e-05
+   "max_abs_diff_vs_training_run": 5e-05,
+   "rows_differing_after_4dp_rounding": 296,
+   "pass": true
   }
- }
+ },
+ "pass_criterion": "모든 과제의 max_abs_diff_vs_training_run ≤ 5e-5(학습 때 예측의 소수 넷째 자리 저장 반올림 폭)",
+ "pass": true
 }

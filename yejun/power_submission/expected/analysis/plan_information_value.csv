@@ -11,12 +11,33 @@ B,L3_plus_hourly_quantity_oracle,M7c_hybrid_coolmono,10.2992,7.22634,14.7093,8.3
 B,L1a_regime_error05_seed0,M1_lgbm,19.2692,9.70445,33.3866,17.1935,0→2:1; 1→2:1
 B,L1a_regime_error05_seed1,M1_lgbm,21.3367,10.2805,39.8622,19.9226,1→2:1; 1→0:1; 2→0:1
 B,L1a_regime_error05_seed2,M1_lgbm,10.2992,7.27871,24.9147,12.7079,0→2:1; 2→1:1
+B,L1a_regime_error05_seed3,M1_lgbm,20.2034,10.3251,33.9137,16.1097,2→0:1
+B,L1a_regime_error05_seed4,M1_lgbm,19.7622,10.4897,28.3421,14.0565,
+B,L1a_regime_error05_seed5,M1_lgbm,24.383,10.9255,41.364,20.8193,0→1:1; 2→1:1; 2→0:1
+B,L1a_regime_error05_seed6,M1_lgbm,17.0167,10.7597,32.7149,16.8638,
+B,L1a_regime_error05_seed7,M1_lgbm,15.5022,8.51233,28.812,14.8795,2→1:3; 0→1:1; 2→0:1
+B,L1a_regime_error05_seed8,M1_lgbm,10.6962,7.58893,30.7967,15.1898,
+B,L1a_regime_error05_seed9,M1_lgbm,17.3872,9.84183,26.9993,13.1398,0→2:1; 2→1:1; 2→0:1
 B,L1a_regime_error10_seed0,M1_lgbm,17.346,9.27492,36.713,21.0421,2→1:2; 0→2:1; 0→1:1; 1→0:1
 B,L1a_regime_error10_seed1,M1_lgbm,24.2777,11.5949,40.4848,21.5287,2→1:3; 1→0:2; 2→0:1
 B,L1a_regime_error10_seed2,M1_lgbm,10.1507,7.10182,36.6108,18.8934,2→0:2; 0→1:1; 2→1:1
+B,L1a_regime_error10_seed3,M1_lgbm,15.6987,9.71799,35.4299,18.1688,2→0:1; 1→2:1
+B,L1a_regime_error10_seed4,M1_lgbm,21.9322,11.71,18.318,9.85934,2→1:1; 0→1:1; 1→0:1
+B,L1a_regime_error10_seed5,M1_lgbm,17.1072,10.5044,40.6237,21.691,0→2:1; 0→1:1; 2→0:1; 2→1:1
+B,L1a_regime_error10_seed6,M1_lgbm,21.832,11.8158,38.1832,19.7233,1→2:1
+B,L1a_regime_error10_seed7,M1_lgbm,23.3904,12.1901,47.7682,26.7794,2→1:2; 2→0:2; 0→2:1; 0→1:1
+B,L1a_regime_error10_seed8,M1_lgbm,20.0732,9.9474,39.7519,20.1212,2→0:1
+B,L1a_regime_error10_seed9,M1_lgbm,14.3797,8.8688,37.6781,20.2895,2→1:2; 2→0:2; 0→1:1
 B,L1a_regime_error20_seed0,M1_lgbm,12.3249,7.9551,41.7885,23.5094,2→0:2; 0→1:1; 0→2:1; 1→2:1; 2→1:1
 B,L1a_regime_error20_seed1,M1_lgbm,18.476,10.9893,50.4301,28.5547,2→0:3; 0→2:2; 1→0:2; 2→1:2
 B,L1a_regime_error20_seed2,M1_lgbm,13.7084,8.80389,43.2372,22.9236,2→1:6; 2→0:3; 0→1:1
+B,L1a_regime_error20_seed3,M1_lgbm,13.9928,8.9171,44.0971,23.6873,2→0:3; 0→2:2; 0→1:1; 2→1:1; 1→0:1
+B,L1a_regime_error20_seed4,M1_lgbm,19.6361,10.0319,39.8027,22.4554,2→1:3; 0→2:2; 0→1:1; 1→0:1
+B,L1a_regime_error20_seed5,M1_lgbm,16.6833,9.9873,47.6516,26.2462,0→2:3; 2→0:3; 2→1:2
+B,L1a_regime_error20_seed6,M1_lgbm,15.2282,9.41117,41.1476,21.0117,1→2:2; 1→0:1; 2→0:1; 0→2:1
+B,L1a_regime_error20_seed7,M1_lgbm,15.8718,10.0953,46.3901,26.3353,2→1:4; 0→2:3; 2→0:2
+B,L1a_regime_error20_seed8,M1_lgbm,22.3846,10.5176,42.6631,23.2986,2→1:5; 0→2:2; 2→0:1
+B,L1a_regime_error20_seed9,M1_lgbm,14.5401,8.63812,40.965,22.7228,2→1:4; 2→0:2; 0→1:1; 0→2:1
 A4,L0_calendar_only,M1_lgbm,9.82675,6.80696,27.902,16.2445,
 A4,L1a_day_regime(headline),M1_lgbm,9.46665,6.62326,9.81766,6.30637,
 A4,L1a_day_regime(headline),M7c_hybrid_coolmono,9.06783,6.32535,10.2852,6.38291,
@@ -28,9 +49,30 @@ A4,L3_plus_hourly_quantity_oracle,M7c_hybrid_coolmono,9.02276,6.29249,10.0268,6.
 A4,L1a_regime_error05_seed0,M7c_hybrid_coolmono,11.197,6.99758,13.8039,7.90983,0→2:1; 1→2:1
 A4,L1a_regime_error05_seed1,M7c_hybrid_coolmono,12.7287,7.63577,16.3743,9.1799,1→2:1; 1→0:1; 2→0:1
 A4,L1a_regime_error05_seed2,M7c_hybrid_coolmono,9.16655,6.40868,13.9111,7.96005,0→2:1; 2→1:1
+A4,L1a_regime_error05_seed3,M7c_hybrid_coolmono,11.8996,7.45796,14.8911,8.34759,2→0:1
+A4,L1a_regime_error05_seed4,M7c_hybrid_coolmono,11.6207,7.21486,12.5985,7.57957,
+A4,L1a_regime_error05_seed5,M7c_hybrid_coolmono,13.4535,7.86012,16.5239,9.35689,0→1:1; 2→1:1; 2→0:1
+A4,L1a_regime_error05_seed6,M7c_hybrid_coolmono,11.5048,7.33971,13.4224,7.76986,
+A4,L1a_regime_error05_seed7,M7c_hybrid_coolmono,10.4555,6.78732,13.3401,7.71277,2→1:3; 0→1:1; 2→0:1
+A4,L1a_regime_error05_seed8,M7c_hybrid_coolmono,9.06242,6.3269,14.5808,8.24771,
+A4,L1a_regime_error05_seed9,M7c_hybrid_coolmono,10.8195,7.03108,13.7996,7.65944,0→2:1; 2→1:1; 2→0:1
 A4,L1a_regime_error10_seed0,M7c_hybrid_coolmono,10.8169,6.99007,15.2689,9.15859,2→1:2; 0→2:1; 0→1:1; 1→0:1
 A4,L1a_regime_error10_seed1,M7c_hybrid_coolmono,14.0651,8.47657,16.3782,9.29809,2→1:3; 1→0:2; 2→0:1
 A4,L1a_regime_error10_seed2,M7c_hybrid_coolmono,9.20911,6.43213,16.8276,9.86636,2→0:2; 0→1:1; 2→1:1
+A4,L1a_regime_error10_seed3,M7c_hybrid_coolmono,11.0698,7.27873,15.1986,8.55103,2→0:1; 1→2:1
+A4,L1a_regime_error10_seed4,M7c_hybrid_coolmono,11.8939,7.28662,10.8232,6.60178,2→1:1; 0→1:1; 1→0:1
+A4,L1a_regime_error10_seed5,M7c_hybrid_coolmono,13.5202,7.96107,14.5015,8.68084,0→2:1; 0→1:1; 2→0:1; 2→1:1
+A4,L1a_regime_error10_seed6,M7c_hybrid_coolmono,13.4082,7.8772,15.4105,8.64671,1→2:1
+A4,L1a_regime_error10_seed7,M7c_hybrid_coolmono,13.6747,8.59535,18.4358,10.3573,2→1:2; 2→0:2; 0→2:1; 0→1:1
+A4,L1a_regime_error10_seed8,M7c_hybrid_coolmono,12.4272,7.48407,17.139,9.45488,2→0:1
+A4,L1a_regime_error10_seed9,M7c_hybrid_coolmono,10.1663,6.88053,17.2224,9.66402,2→1:2; 2→0:2; 0→1:1
 A4,L1a_regime_error20_seed0,M7c_hybrid_coolmono,10.7088,7.17143,17.5127,9.86131,2→0:2; 0→1:1; 0→2:1; 1→2:1; 2→1:1
 A4,L1a_regime_error20_seed1,M7c_hybrid_coolmono,13.0793,8.32325,20.1643,11.5408,2→0:3; 0→2:2; 1→0:2; 2→1:2
 A4,L1a_regime_error20_seed2,M7c_hybrid_coolmono,9.55259,6.66861,19.9105,11.505,2→1:6; 2→0:3; 0→1:1
+A4,L1a_regime_error20_seed3,M7c_hybrid_coolmono,11.3083,7.49325,17.7607,9.88821,2→0:3; 0→2:2; 0→1:1; 2→1:1; 1→0:1
+A4,L1a_regime_error20_seed4,M7c_hybrid_coolmono,12.4624,7.76661,17.2379,9.84409,2→1:3; 0→2:2; 0→1:1; 1→0:1
+A4,L1a_regime_error20_seed5,M7c_hybrid_coolmono,11.3057,7.46968,18.3345,10.7488,0→2:3; 2→0:3; 2→1:2
+A4,L1a_regime_error20_seed6,M7c_hybrid_coolmono,12.8095,7.70785,17.708,9.81606,1→2:2; 1→0:1; 2→0:1; 0→2:1
+A4,L1a_regime_error20_seed7,M7c_hybrid_coolmono,12.0942,7.72354,18.722,10.7581,2→1:4; 0→2:3; 2→0:2
+A4,L1a_regime_error20_seed8,M7c_hybrid_coolmono,13.0614,7.81638,17.4047,9.75176,2→1:5; 0→2:2; 2→0:1
+A4,L1a_regime_error20_seed9,M7c_hybrid_coolmono,9.80811,6.73832,17.9137,10.1112,2→1:4; 2→0:2; 0→1:1; 0→2:1

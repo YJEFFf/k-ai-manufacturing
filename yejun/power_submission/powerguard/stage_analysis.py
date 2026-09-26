@@ -168,12 +168,16 @@ def condition_skill(iv: pd.DataFrame, cond: pd.DataFrame, selection: dict) -> pd
                             continue
                         yy, pa, pb = y.to_numpy()[mm], pr[m].to_numpy()[mm], pr[best_bl].to_numpy()[mm]
                         sk, lo, hi = _skill_boot(yy, pa, pb, y.index[mm].normalize().to_numpy()) if m != best_bl else (0.0, 0.0, 0.0)
-                        nd = int(len(np.unique(y.index[mm].normalize())))
+                        dts = y.index[mm].normalize()
+                        nd = int(len(np.unique(dts)))
+                        # 게이트일(체제 0)은 ML 계열 예측이 구조 기준으로 바뀌므로, 모델 자체의 행동을 담은 날짜 수를 따로 센다
+                        nd_ng = int(len(np.unique(dts[cond["regime"].to_numpy()[mm] != 0])))
                         gate_eq = bool((cond["regime"].to_numpy()[mm] == 0).all()) and best_bl != "BL3_profile"
+                        flag = ("게이트로 모델≡기준" if gate_eq else
+                                (f"사례(게이트일 제외 {nd_ng}일)" if nd_ng < 5 and nd_ng < nd else ("5일 미만(사례)" if nd < 5 else "")))
                         rows.append(dict(task=task, model=m, baseline=best_bl, period=per, condition=col, value=str(val),
-                                         availability=AVAILABILITY.get(col, ""), n=int(mm.sum()),
-                                         flag=("게이트로 모델≡기준" if gate_eq else ("5일 미만(사례)" if nd < 5 else "")),
-                                         days=int(len(np.unique(y.index[mm].normalize()))),
+                                         availability=AVAILABILITY.get(col, ""), n=int(mm.sum()), flag=flag,
+                                         days=nd, days_excl_gate=nd_ng,
                                          MAE=float(np.mean(np.abs(pa - yy))), RMSE=float(np.sqrt(np.mean((pa - yy) ** 2))),
                                          bias=float(np.mean(pa - yy)), skill_vs_baseline=sk, skill_ci90_lo=lo, skill_ci90_hi=hi))
     return pd.DataFrame(rows)
@@ -299,9 +303,9 @@ def error_rules(iv: pd.DataFrame, cond: pd.DataFrame, selection: dict) -> tuple[
             daysc, dayst = y.index.normalize().to_numpy(), y.index.normalize().to_numpy()
             oc = _mean_ci(vc[mc], daysc[mc])
             ot = _mean_ci(vt[mt], dayst[mt])
-            rows.append(dict(task=task, model=chosen, baseline=best_bl, target=target, rule="(전체)", n_cv=int(mc.sum()),
-                             mean_cv=oc[0], ci_cv_lo=oc[1], ci_cv_hi=oc[2], n_test=int(mt.sum()), mean_test=ot[0],
-                             ci_test_lo=ot[1], ci_test_hi=ot[2], reproduced=np.nan))
+            rows.append(dict(task=task, model=chosen, baseline=best_bl, target=target, rule="(전체)", direction="",
+                             n_cv=int(mc.sum()), mean_cv=oc[0], ci_cv_lo=oc[1], ci_cv_hi=oc[2], n_test=int(mt.sum()),
+                             mean_test=ot[0], ci_test_lo=ot[1], ci_test_hi=ot[2], reproduced=np.nan))
             for text, conds in _leaves(tree, list(X.columns)):
                 lc = mc & _apply(X, conds)
                 lt = mt & _apply(X, conds)
@@ -316,9 +320,14 @@ def error_rules(iv: pd.DataFrame, cond: pd.DataFrame, selection: dict) -> tuple[
                     else:  # 교차검증·시험 모두 잎 구간이 각 기간 전체 평균을 같은 쪽으로 배제
                         up = a[0] > oc[0]
                         rep = float(((a[1] > oc[0]) and (b[1] > ot[0])) if up else ((a[2] < oc[0]) and (b[2] < ot[0])))
-                rows.append(dict(task=task, model=chosen, baseline=best_bl, target=target, rule=text, n_cv=int(lc.sum()),
-                                 mean_cv=a[0], ci_cv_lo=a[1], ci_cv_hi=a[2], n_test=int(lt.sum()), mean_test=b[0],
-                                 ci_test_lo=b[1], ci_test_hi=b[2], reproduced=rep))
+                # 잎의 방향(교차검증 기준): 손실은 양수 = 모델이 기준보다 나쁨, 가동 주간 오차는 전체 평균보다 큼/작음
+                if target == "loss_vs_baseline":
+                    direction = "모델 열위(기준보다 나쁨)" if a[0] > 0 else "모델 우위(기준보다 좋음)"
+                else:
+                    direction = "오차 큼(전체 대비)" if a[0] > oc[0] else "오차 작음(전체 대비)"
+                rows.append(dict(task=task, model=chosen, baseline=best_bl, target=target, rule=text, direction=direction,
+                                 n_cv=int(lc.sum()), mean_cv=a[0], ci_cv_lo=a[1], ci_cv_hi=a[2], n_test=int(lt.sum()),
+                                 mean_test=b[0], ci_test_lo=b[1], ci_test_hi=b[2], reproduced=rep))
             # 안정성: 교차검증 날짜 부트스트랩에서 첫 분할 변수와 깊이 2 구조 전체의 재등장 비율
             root = X.columns[tree.tree_.feature[0]] if tree.tree_.feature[0] >= 0 else None
             struct = tuple(sorted(X.columns[f] for f in tree.tree_.feature if f >= 0))
@@ -568,6 +577,14 @@ def alarm_error_conditions(iv: pd.DataFrame, st: pd.DataFrame) -> tuple[pd.DataF
     cond["temp_bin"] = pd.cut(iv["temp"].shift(-1), [-50, 20, 26, 30, 50], labels=["<20", "20-26", "26-30", "30+"]).astype(str)
     cond["month"] = tgt.month
     cond["now_above_T"] = (iv["y"].to_numpy() >= pr["T"].to_numpy()).astype(int)
+    # 운영 창(다음 1시간의 첫 목표 구간 기준, 전면 가동일): 기동·휴식 복귀·점심·점심 복귀·주간조 종료
+    slot = np.asarray(tgt.hour * 4 + tgt.minute // 15)
+    reg_t = st["regime"].reindex(day).to_numpy()
+    cond["operating_window"] = np.select(
+        [reg_t != 2, (slot >= 30) & (slot <= 35), np.isin(slot, [40, 41, 60, 61]), (slot >= 48) & (slot <= 51),
+         (slot >= 52) & (slot <= 53), (slot >= 68) & (slot <= 71), (slot >= 36) & (slot <= 79)],
+        ["부분 가동·정지일", "기동 07:30~08:59", "휴식·복귀 10:00~10:29·15:00~15:29", "점심 12:00~12:59",
+         "점심 복귀 13:00~13:29", "주간조 종료 17:00~17:59", "그 밖의 주간 09~19시"], default="야간·새벽")
     # 확률 예측의 여유: 놓친 피크의 초과폭(실제 최대 − T), 오경보의 부족폭(T − 실제 최대)
     ymax = pd.concat([iv["y"].shift(-k) for k in range(1, 5)], axis=1).max(axis=1).to_numpy()
     margin = ymax - pr["T"].to_numpy()
@@ -655,8 +672,10 @@ def dayahead_slot_errors(iv: pd.DataFrame, st: pd.DataFrame) -> pd.DataFrame:
 def run(iv: pd.DataFrame, frames: dict, selection: dict, df: pd.DataFrame | None = None, diag=None,
         log=print) -> dict:
     miss = [r for r in ("cv/cv_metrics.csv", "peak/peak_summary.json") if not (C.OUTPUT_DIR / r).exists()]
-    if miss or not (C.ARTIFACT_DIR / "test_B.csv.gz").exists():
-        raise FileNotFoundError(f"analysis 단계 선행 산출물이 없다: {miss or 'artifacts/test_*.csv.gz'} — models·peak를 먼저 실행한다")
+    miss += [f"artifacts/{f}" for f in [f"{n}_{t}.csv.gz" for n in ("oof", "test") for t in TASKS]
+             + ["next_hour_prob.csv.gz", "dayahead_slot_prob.csv.gz"] if not (C.ARTIFACT_DIR / f).exists()]
+    if miss:
+        raise FileNotFoundError(f"analysis 단계 선행 산출물이 없다: {miss} — models·peak를 먼저 실행한다")
     od = io.out_dir("analysis")
     y = iv["y"]
     st = F.schedule_table(iv)
@@ -763,11 +782,33 @@ def run(iv: pd.DataFrame, frames: dict, selection: dict, df: pd.DataFrame | None
 
 # ---------------------------------------------------------------- 계획 정보가치·절제(재학습이 많아 별도 단계)
 
+REGIME_ERROR_SEEDS = 10
+
+
+def regime_error_summary(t: pd.DataFrame) -> pd.DataFrame:
+    """체제 오류 반복의 요약: 오류율별 교차검증·시험 RMSE 평균[최소, 최대]와 헤드라인(오류 없음) 대비 평균 증가."""
+    e = t[t["level"].str.startswith("L1a_regime_error")].copy()
+    if e.empty:
+        return pd.DataFrame()
+    e["error_rate"] = e["level"].str.extract(r"error(\d+)")[0].astype(int) / 100
+    base = t[t["level"] == "L1a_day_regime(headline)"].set_index(["task", "model"])
+    rows = []
+    for (task, model, err), g in e.groupby(["task", "model", "error_rate"]):
+        b = base.loc[(task, model)] if (task, model) in base.index else None
+        row = dict(task=task, model=model, error_rate=err, n_seeds=len(g))
+        for col in ("cv_RMSE", "test_RMSE"):
+            row.update({f"{col}_mean": g[col].mean(), f"{col}_min": g[col].min(), f"{col}_max": g[col].max(),
+                        f"{col}_increase_vs_headline": g[col].mean() - b[col] if b is not None else np.nan})
+        rows.append(row)
+    return pd.DataFrame(rows)
+
+
 def info_value(iv: pd.DataFrame, selection: dict, log=print) -> pd.DataFrame:
     """계획 정보 수준별 성능(교차검증 pooled·시험): M1(LightGBM)과 M7c(하이브리드, 선택 모델의 ML 부분).
 
     L0 달력만 / L1a 날짜 가동 체제(헤드라인) / L1b + 일 계획 세부(총량·첫/마지막 가동 시각) / L2 + 시간별 가동 여부
-    / L3 + 시간별 생산 수량(오라클) / L1a_err: 계획 체제가 날짜의 5·10·20%에서 틀릴 때(모든 기간 같은 오류율)."""
+    / L3 + 시간별 생산 수량(오라클) / L1a_err: 계획 체제가 날짜의 5·10·20%에서 틀릴 때(모든 기간 같은 오류율, 난수 10개 —
+    어느 날이 뒤집히는지에 따라 편차가 커서 평균[최소, 최대]로 요약한다)."""
     y = iv["y"]
     cvmask, temask = _cvmask(iv), _temask(iv)
     fr_or = CV.build_frames(iv, oracle=True, tasks=("B", "A4"))
@@ -782,7 +823,7 @@ def info_value(iv: pd.DataFrame, selection: dict, log=print) -> pd.DataFrame:
             "L3_plus_hourly_quantity_oracle": (F.feature_list(fam, oracle=True), None),
         }
         for err in (0.05, 0.10, 0.20):
-            for sd in range(3):
+            for sd in range(REGIME_ERROR_SEEDS):
                 levels[f"L1a_regime_error{int(err * 100):02d}_seed{sd}"] = (F.feature_list(fam), (err, C.SEED + sd))
         for lvl, (feats, err) in levels.items():
             Xv = fr_or[task] if err is None else CV.build_frames(iv, regime_noise=err, tasks=(task,))[task]
@@ -911,9 +952,10 @@ def ablations(iv: pd.DataFrame, df: pd.DataFrame, diag, selection: dict, log=pri
         for mname in models[task]:
             fac = build_model(mname, fam, feats, selection)
             rec("daytype3_no_prev_regime", task, mname, CV.run_cv(fr3[task], iv, fac, fam), CV.run_test(fr3[task], iv, fac, fam))
-    # 계획 정지 게이트 제외(게이트 공개용: 선택 모델·LightGBM의 게이트 전후, 가동 주간은 게이트와 무관)
+    # 계획 정지 게이트 제외(게이트 공개용: 선택 모델·LightGBM·하이브리드의 게이트 전후, 가동 주간은 게이트와 무관)
     for task, fam in (("B", "B"), ("A4", "A")):
-        for mname in [m for m in models[task] if not (m.startswith("BL") or m.startswith("M6"))]:
+        gate_models = [m for m in models[task] if not (m.startswith("BL") or m.startswith("M6"))]
+        for mname in dict.fromkeys(gate_models + ["M7c_hybrid_coolmono"]):
             fac = build_model(mname, fam, F.feature_list(fam), selection, gate=False)
             pt = rec("no_plan_stop_gate", task, mname, CV.run_cv(frames[task], iv, fac, fam),
                      CV.run_test(frames[task], iv, fac, fam), posthoc=True)
@@ -925,6 +967,60 @@ def ablations(iv: pd.DataFrame, df: pd.DataFrame, diag, selection: dict, log=pri
             rec("analog_key_plus_prev_regime", task, mname, CV.run_cv(frp[task], iv, fac, fam),
                 CV.run_test(frp[task], iv, fac, fam), posthoc=True)
     return pd.DataFrame(rows), pd.DataFrame(contrib)
+
+
+def structural_retuned(iv: pd.DataFrame, selection: dict, log=print) -> tuple[pd.DataFrame, dict]:
+    """사후 민감도(헤드라인 불변): 구조 기준의 초모수(B 유사일 k=2, A 수준 보정 ρ=0.9)는 v1(옛 복제 방향·옛 폴드)에서 고정했고
+    현재 폴드에서 다시 고르지 않았다. 현재 폴드 교차검증 최선값(cv/structural_sweep.csv)으로 바꾼 기준모델(BL5·M6)과 선택 모델의
+    차이(교차검증·시험, 날짜 짝 부트스트랩 90%)와, 그 기준을 후보에 넣고 선택 규칙을 다시 적용했을 때의 선택을 기록한다."""
+    y = iv["y"]
+    usable = iv["usable"].to_numpy()
+    cvmask, temask = _cvmask(iv), _temask(iv)
+    sw = pd.read_csv(C.OUTPUT_DIR / "cv" / "structural_sweep.csv")
+    k_best = int(sw[sw.param == "k"].sort_values("RMSE").iloc[0]["value"])
+    rho_best = float(sw[sw.param == "rho"].sort_values("RMSE").iloc[0]["value"])
+    st = F.schedule_table(iv)
+    cvm = pd.read_csv(C.OUTPUT_DIR / "cv" / "cv_metrics.csv")
+    blocks = CV.cv_blocks() + [("pooled", C.CV_FOLDS[0][1], C.CV_FOLDS[-1][2])]
+    work = SM.work_dayshift(iv)
+    xmid = F.dayahead_features(iv, st, issue_hour=24)
+    spec = {"B": (["B"], "BL5_regime_analog", "k", 2, k_best,
+                  {"B": F.dayahead_features(iv, st, issue_hour=17, analog_k=k_best)}, lambda: M.AnalogDay("analog_regime")),
+            "A": (["A1", "A2", "A3", "A4"], "M6_analog_level", "rho", 0.9, rho_best,
+                  {f"A{h}": F.intraday_features(iv, h, xmid) for h in range(1, 5)}, lambda: M.AnalogLevel(rho_best))}
+    rows, out = [], {"k_best": k_best, "rho_best": rho_best,
+                     "note": "사후 민감도. 헤드라인 k=2·ρ=0.9는 v1에서 고정했고 현재 폴드에서 다시 고르지 않았다. 채택하지 않는다"}
+    for fam, (tasks, base, param, v_head, v_best, frames, fac) in spec.items():
+        chosen = selection[fam]["chosen"]
+        oof = {t: SM.load_predictions("oof", t).reindex(y.index) for t in tasks}
+        tst = {t: SM.load_predictions("test", t).reindex(y.index) for t in tasks}
+        new_rows = []
+        pc, pt = {}, {}
+        for t in tasks:
+            pc[t] = CV.run_cv(frames[t], iv, fac, fam)
+            pt[t] = CV.run_test(frames[t], iv, fac, fam)
+            SM._scores(y, pc[t], usable, iv, new_rows, t, base, blocks, work=work)
+        for label, v, c_pred, t_pred in (("headline", v_head, {t: oof[t][base] for t in tasks}, {t: tst[t][base] for t in tasks}),
+                                         ("retuned", v_best, pc, pt)):
+            if len(tasks) == 1:
+                bc = MT.paired_day_bootstrap(y, oof[tasks[0]][chosen], c_pred[tasks[0]], cvmask)
+                bt = MT.paired_day_bootstrap(y, tst[tasks[0]][chosen], t_pred[tasks[0]], temask)
+            else:
+                bc = MT.multi_bootstrap_rmse(y, [oof[t][chosen] for t in tasks], [c_pred[t] for t in tasks], cvmask)
+                bt = MT.multi_bootstrap_rmse(y, [tst[t][chosen] for t in tasks], [t_pred[t] for t in tasks], temask)
+            rows.append(dict(family=fam, baseline=base, param=param, value=v, setting=label, chosen=chosen,
+                             cv_RMSE=float(np.mean([MT.regression(y[cvmask], c_pred[t][cvmask])["RMSE"] for t in tasks])),
+                             test_RMSE=float(np.mean([MT.regression(y[temask], t_pred[t][temask])["RMSE"] for t in tasks])),
+                             chosen_minus_baseline_cv=bc["diff"], cv_ci90=str(bc["ci90"]),
+                             chosen_minus_baseline_test=bt["diff"], test_ci90=str(bt["ci90"]), posthoc_sensitivity=True))
+        # 선택 규칙 재적용: 기준모델 한 줄만 재조정 값으로 바꾼 교차검증 표·OOF
+        cvm2 = pd.concat([cvm[~((cvm.task.isin(tasks)) & (cvm.model == base))], pd.DataFrame(new_rows)], ignore_index=True)
+        oof2 = {t: oof[t].assign(**{base: pc[t]}) for t in tasks}
+        s2 = SM.select(cvm2, oof2, iv, tasks)
+        out[fam] = {"baseline": base, param: v_best, "rule_choice_with_retuned_baseline": s2["chosen"],
+                    "headline_choice": chosen, "trail": s2["trail"]}
+        log(f"  structural-retuned {fam} {base} {param}={v_best} → 규칙 선택 {s2['chosen']}")
+    return pd.DataFrame(rows), out
 
 
 NAIVE_FOLDS = [("V1_Apr", pd.Timestamp("2021-04-01"), pd.Timestamp("2021-05-01")),
@@ -966,7 +1062,7 @@ def naive_protocol(df: pd.DataFrame, diag, selection: dict, log=print) -> pd.Dat
     tm_h = pd.read_csv(C.OUTPUT_DIR / "test" / "test_metrics.csv")
     for fam, tasks in (("B", ["B"]), ("A", ["A1", "A2", "A3", "A4"])):
         ch = selection[fam]["chosen"]
-        rows.append(dict(protocol="honest(v2.0 헤드라인)", family=fam, model=ch, chosen_by_protocol=True,
+        rows.append(dict(protocol="honest(헤드라인)", family=fam, model=ch, chosen_by_protocol=True,
                          cv_RMSE=float(cvm_h[(cvm_h.task.isin(tasks)) & (cvm_h.split == "pooled") & (cvm_h.model == ch)]["RMSE"].mean()),
                          test_RMSE=float(tm_h[(tm_h.task.isin(tasks)) & (tm_h.model == ch)]["RMSE"].mean())))
     return pd.DataFrame(rows)
@@ -1005,10 +1101,15 @@ def run_heavy(iv: pd.DataFrame, df: pd.DataFrame, diag, selection: dict, log=pri
     """계획 정보가치·절제·반사실 절차·기상 예보오차·학습 창 곡선·LightGBM 격자(재학습이 많아 별도 단계)."""
     od = io.out_dir("analysis")
     io.write_csv(SM.ml_sweep(iv, CV.build_frames(iv, tasks=("B", "A4")), log=log), io.out_dir("cv") / "ml_sweep.csv")
-    io.write_csv(info_value(iv, selection, log=log), od / "plan_information_value.csv")
+    iv_t = info_value(iv, selection, log=log)
+    io.write_csv(iv_t, od / "plan_information_value.csv")
+    io.write_csv(regime_error_summary(iv_t), od / "plan_regime_error_summary.csv")
     ab, contrib = ablations(iv, df, diag, selection, log=log)
     io.write_csv(ab, od / "ablations.csv")
     io.write_csv(contrib, od / "ablation_copy_day_contrib.csv")
+    sr, sr_sel = structural_retuned(iv, selection, log=log)
+    io.write_csv(sr, od / "structural_retuned.csv")
+    io.write_json(sr_sel, od / "structural_retuned_selection.json")
     io.write_csv(naive_protocol(df, diag, selection, log=log), od / "naive_protocol.csv")
     io.write_csv(weather_noise(iv, selection, log=log), od / "weather_forecast_error.csv")
     io.write_csv(learning_curve(iv, selection, log=log), od / "learning_curve.csv")

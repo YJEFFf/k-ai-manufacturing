@@ -1,0 +1,91 @@
+{
+ "k_best": 4,
+ "rho_best": 0.8,
+ "note": "사후 민감도. 헤드라인 k=2·ρ=0.9는 v1에서 고정했고 현재 폴드에서 다시 고르지 않았다. 채택하지 않는다",
+ "B": {
+  "baseline": "BL5_regime_analog",
+  "k": 4,
+  "rule_choice_with_retuned_baseline": "BL5_regime_analog",
+  "headline_choice": "M8_blend",
+  "trail": [
+   {
+    "model": "M8_blend",
+    "vs_simpler": "BL5_regime_analog",
+    "rmse_boot": {
+     "stat": "RMSE",
+     "diff": -0.074649,
+     "ci90": [
+      -0.414002,
+      0.298225
+     ],
+     "p_a_better": 0.6485,
+     "n_days": 58
+    },
+    "daymax_boot": {
+     "stat": "daymax_MAE",
+     "diff": 1.773476,
+     "ci90": [
+      0.772447,
+      2.828561
+     ],
+     "p_a_better": 0.0015,
+     "n_days": 58
+    },
+    "keep": false
+   },
+   {
+    "model": "BL5_regime_analog",
+    "vs_simpler": "BL3_profile",
+    "rmse_boot": {
+     "stat": "RMSE",
+     "diff": -1.824935,
+     "ci90": [
+      -2.414702,
+      -1.191934
+     ],
+     "p_a_better": 1.0,
+     "n_days": 58
+    },
+    "keep": true
+   }
+  ]
+ },
+ "A": {
+  "baseline": "M6_analog_level",
+  "rho": 0.8,
+  "rule_choice_with_retuned_baseline": "M7c_hybrid_coolmono",
+  "headline_choice": "M7c_hybrid_coolmono",
+  "trail": [
+   {
+    "model": "M8_blend",
+    "vs_simpler": "M7c_hybrid_coolmono",
+    "rmse_boot": {
+     "stat": "mean_RMSE",
+     "diff": -0.071736,
+     "ci90": [
+      -0.141516,
+      0.004671
+     ],
+     "p_a_better": 0.936,
+     "n_days": 58
+    },
+    "keep": false
+   },
+   {
+    "model": "M7c_hybrid_coolmono",
+    "vs_simpler": "M1_lgbm",
+    "rmse_boot": {
+     "stat": "mean_RMSE",
+     "diff": -0.350531,
+     "ci90": [
+      -0.522012,
+      -0.198031
+     ],
+     "p_a_better": 1.0,
+     "n_days": 58
+    },
+    "keep": true
+   }
+  ]
+ }
+}

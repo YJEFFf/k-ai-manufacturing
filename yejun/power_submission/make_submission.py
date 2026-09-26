@@ -1,4 +1,5 @@
-"""재현용 제출 ZIP 구성: 코드·테스트·기대값·산출물(시험 예측 파일 포함)·원본 CSV·저장된 선택 모델과 파일별 SHA-256 목록.
+"""재현용 제출 ZIP 구성: 코드·테스트·기대값·산출물(시험 예측 파일 포함)·원본 CSV·저장된 선택 모델·행 단위 예측(OOF·시험·확률)과
+파일별 SHA-256 목록.
 
 사용:
     python make_submission.py                         # ../power_submission_package.zip
@@ -6,6 +7,8 @@
 
 ZIP을 풀고
 - 추론만: `python run_all.py --stages predict`(저장된 모델로 시험 예측 재생성, 수 초)
+- 시험 예측 파일 전체(구간·확률·경보)까지: `python run_all.py --stages predict,peak`(약 1분, 동봉한 행 단위 예측 사용).
+  analysis·field·figures·digest 단계도 학습 없이 따로 돌릴 수 있다
 - 전체: `python run_all.py`(원본은 data/, 외부 ZIP은 data/external/에서 자동으로 찾음) → `python -m pytest -q tests`
   → `python verify.py --require-fresh`(풀기만 하고 실행하지 않은 사본은 실패).
 작업 기록(PLAN.md, reviews/)은 기본으로 빼며 `--include-plan`, `--include-reviews`로 넣는다.
@@ -21,7 +24,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 INCLUDE = ["run_all.py", "verify.py", "make_submission.py", "requirements.txt", "environment.yml", "README.md",
            "powerguard", "tests", "expected", "outputs", "data/okm_augumented_2021.csv", "artifacts/models"]
-ARTIFACT_GLOBS = ["artifacts/test_*.csv.gz"]  # 추론 확인(학습 때 예측과 비교)에 필요한 시험 예측
+ARTIFACT_GLOBS = ["artifacts/*.csv.gz"]  # 행 단위 예측(OOF·시험·확률): 추론 확인과 학습 없는 일부 단계 재실행에 필요
 EXTERNAL = ["Dataset_표면처리 자원최적화 AI 데이터셋.zip", "Dataset_소성가공 자원최적화 AI 데이터셋.zip",
             "Dataset_생산계획 최적화 AI 데이터셋.zip"]
 SKIP_PARTS = {"__pycache__", ".pytest_cache", ".venv"}

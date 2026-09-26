@@ -144,6 +144,7 @@ def copy_origin_evidence(days: pd.DataFrame) -> dict:
     single = days[(days["copy_group_size"] == 1) & days["consistent"].notna()]
     meas = single[single.index >= C.MEASURED_START]
     p_single = float(single["consistent"].mean())
+    p_meas = float(meas["consistent"].mean()) if len(meas) else np.nan
     n = int(first_ok.notna().sum())
     k = int((first_ok == 1).sum())
     return {
@@ -151,10 +152,14 @@ def copy_origin_evidence(days: pd.DataFrame) -> dict:
         "copy_groups_earliest_member_consistent": f"{k}/{n}",
         "copy_groups_latest_member_consistent": f"{int((last_ok == 1).sum())}/{int(last_ok.notna().sum())}",
         "copy_groups_chosen_origin_consistent": f"{int((days.loc[days['copy_group_size'] > 1].query('~copied')['consistent'] == 1).sum())}/{len(first_ok)}",
+        "copy_groups_chosen_origin_note": "규칙이 정합 구성원을 원본으로 고르므로 거의 자동으로 나오는 값이다(증거로 쓰지 않는다)",
         "singleton_days_consistent": f"{int(single['consistent'].sum())}/{len(single)}",
         "singleton_days_consistent_measured_period": f"{int(meas['consistent'].sum())}/{len(meas)}",
-        # 가장 이른 구성원이 실제 측정이라면 단독 날짜와 같은 비율로 정합해야 한다(이항 검정, 한쪽)
+        # 가장 이른 구성원이 실제 측정이라면 단독 날짜와 같은 비율로 정합해야 한다(이항 검정, 한쪽).
+        # 기준 비율: 모든 단독 날짜(1~4월 부분 복제 채움 포함, 보수적)와 실측 기간(5/1~) 단독 날짜
         "earliest_is_origin_binom_p": float(binomtest(k, n, p_single, alternative="less").pvalue) if n else None,
+        "earliest_is_origin_binom_p_measured_baseline": (float(binomtest(k, n, p_meas, alternative="less").pvalue)
+                                                         if n and np.isfinite(p_meas) else None),
     }
 
 
@@ -268,7 +273,7 @@ def diagnose(df: pd.DataFrame) -> Diagnosis:
 
     # 부분 복제: 완전 복제가 아닌 날 중, 다른 패턴 날짜와 16구간(4시간) 이상 연속으로 값이 같은 날.
     # 두 패턴 중 어느 쪽이 원본인지는 복제군과 같은 규칙(C.COPY_ORIGIN)으로 정하고 원본이 아닌 쪽만 표시한다.
-    # 서로 다른 날짜 쌍의 자연 발생 최장 동일 연속은 11구간 이하였다(진단 표 참고).
+    # 서로 다른 날짜 쌍의 자연 발생 최장 동일 연속은 12구간이었다(summary의 natural_max_equal_run_below_threshold).
     ymat = {d: x[P].to_numpy().ravel() for d, x in df.groupby("date", sort=True)}
     dlist = list(days.index)
     src = days["power_src"]

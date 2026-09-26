@@ -33,3 +33,53 @@ def test_staggering_conserves_energy():
     y2 = SF.apply_staggering(y.copy(), iv, m_fixed=20.0, s=0.5, hold=0.0)
     assert np.isclose(np.nansum(y2), np.nansum(y))
     assert np.nanmax(y2) < np.nanmax(y)
+
+
+def test_measured_payback_uses_pre_shed_demand_forecast_and_no_dump():
+    """측정 기반 회복(v2.3): 차단으로 낮아진 직전 값이 아니라 차단 전 수요와 익일 예측으로 판정하고, 창 안에 못 푼 잔여는
+    한 구간에 몰지 않고 같은 날 20~23시에 나눈다. 에너지는 보존된다."""
+    n = 96
+    room = np.full(n, 205.9)
+    # (1) 고원 200에서 차단: 낮아진 값(180)으로 보면 바로 풀지만, 차단 전 수요(200) + 회복분 > 205.9라 풀지 않는다
+    y = np.full(n, 200.0)
+    y[60:] = 150.0
+    al = np.zeros(n, bool)
+    al[40] = True
+    y2, _ = SF.simulate(y.copy(), al, 0.10, room=room, search=16, unlock_after_shed=True)
+    assert np.isclose(y2.sum(), y.sum()) and y2[43:58].max() <= 200.0
+    # (2) 7/19 모양: 차단 직후 급변 구간(43)은 직전 수요가 낮아도(182) 익일 예측(205)에 여유가 없어 회복분을 얹지 않는다
+    y = np.full(n, 150.0)
+    y[40:48] = [209, 203, 182, 222, 207, 186, 205, 204]
+    fc = np.full(n, 150.0)
+    fc[36:52] = 205.0
+    y2, _ = SF.simulate(y.copy(), al, 0.10, room=room, search=16, unlock_after_shed=True, forecast=fc)
+    assert np.isclose(y2.sum(), y.sum()) and y2[43] == 222.0  # v2.2: 231.6
+    # (3) 고원(208)이 이어져 창 안에 못 풀면 잔여는 20~23시에 고르게(몰아넣기 없음)
+    z = np.full(n, 208.0)
+    z2, _ = SF.simulate(z.copy(), al, 0.10, room=room, search=16, unlock_after_shed=True)
+    assert np.isclose(z2.sum(), z.sum())
+    assert z2.max() <= 208.0 + 41.6 / 16 + 1e-9
+    assert np.allclose(z2[80:96], z2[80])
+
+
+def test_interlock_caps_single_interval_spikes_only():
+    y = np.array([180.0, 182.0, 222.0, 207.0, 206.0, 214.0, 190.0])
+    y2, n = SF.apply_interlock(y, 15.0)
+    assert n == 1 and y2[2] == 207.0 and y2[5] == 214.0  # 214는 앞뒤보다 +8·+24 → 한쪽만 높아 스파이크 아님
+    assert SF.event_type(15.0, 45, 15.0) == "spike" and SF.event_type(15.0, 45, 20.0) == "plateau"
+
+
+def test_measured_payback_does_not_stack_beyond_room():
+    """연속 차단 사건들의 회복분이 한 구간에 겹쳐도, 이미 푼 양을 포함해 (목표 − 여유)를 넘기지 않는다(직전 수요 기준)."""
+    n = 96
+    y = np.full(n, 150.0)
+    y[36:44] = 204.0
+    al = np.zeros(n, bool)
+    al[35] = al[37] = al[39] = True  # 차단 직후 재경보(측정 기반 회복)
+    room = np.full(n, 205.9)
+    y2, info = SF.simulate(y.copy(), al, 0.10, room=room, search=16, unlock_after_shed=True)
+    assert info["episodes"] == 3 and np.isclose(y2.sum(), y.sum())
+    head = np.r_[np.nan, y[:-1]]  # 이 예에서는 차단 전 수요 = 원래 값
+    extra = y2 - y
+    ok = (extra <= 1e-9) | (head + extra <= 205.9 + 1e-9) | (np.arange(n) >= 80)
+    assert ok.all()

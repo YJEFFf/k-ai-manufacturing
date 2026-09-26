@@ -1,7 +1,7 @@
 {
  "margin": 5.0,
  "tau_chosen_on_july": 0.5,
- "note": "문턱 τ는 7월 기준(초기 래칫 ≈201)에서 골라 시험(≈217)으로 옮기면 맞지 않는다 → 순위·주당 상위 1일 규칙을 함께 본다",
+ "note": "운영 규칙은 7월 교차검증 문턱 τ(D-1 17:00 실행 가능). 7월 기준(초기 래칫 ≈201)에서 고른 τ는 시험(≈217)으로 옮기면 맞지 않는다. 순위·주당 상위 1일은 같은 주 뒤 날짜의 확률을 쓰는 사후 순위 평가이고, 직전 4가동일 비교는 확인용 인과 규칙이다(둘 다 채택하지 않음)",
  "cv_jul": {
   "days": 27,
   "workdays": 18,
@@ -13,14 +13,16 @@
   "precision": 0.3,
   "recall": 0.75,
   "flag_rate_workdays": 0.555556,
-  "risk_day_ranks_among_workdays": [
+  "risk_day_ranks_among_workdays_posthoc": [
    7,
    15,
    3,
    9
   ],
-  "week_top1_days": 5,
-  "week_top1_hits": 1
+  "week_top1_posthoc_days": 5,
+  "week_top1_posthoc_hits": 1,
+  "above_prev4_days": 3,
+  "above_prev4_hits": 1
  },
  "test": {
   "days": 43,
@@ -33,10 +35,12 @@
   "precision": null,
   "recall": 0.0,
   "flag_rate_workdays": 0.0,
-  "risk_day_ranks_among_workdays": [
+  "risk_day_ranks_among_workdays_posthoc": [
    1
   ],
-  "week_top1_days": 6,
-  "week_top1_hits": 1
+  "week_top1_posthoc_days": 6,
+  "week_top1_posthoc_hits": 1,
+  "above_prev4_days": 2,
+  "above_prev4_hits": 0
  }
 }

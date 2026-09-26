@@ -30,7 +30,11 @@ def run() -> dict:
                        "copy_groups_earliest_member_consistent": d.get("copy_groups_earliest_member_consistent"),
                        "copy_groups_latest_member_consistent": d.get("copy_groups_latest_member_consistent"),
                        "singleton_days_consistent": d.get("singleton_days_consistent"),
+                       "singleton_days_consistent_measured_period": d.get("singleton_days_consistent_measured_period"),
                        "earliest_is_origin_binom_p": d.get("earliest_is_origin_binom_p"),
+                       "earliest_is_origin_binom_p_measured_baseline": d.get("earliest_is_origin_binom_p_measured_baseline"),
+                       "origin_threshold_sensitivity": diag.get("origin_threshold_sensitivity"),
+                       "direction_checks_power_only": diag.get("direction_checks_power_only"),
                        "copied_by_src_month": d.get("copied_by_src_month"), "genuine_days_by_month": d.get("genuine_days_by_month"),
                        "partial_copy_days": d["partial_copy_days"],
                        "hour_copy_placebo": d["hour_copy_placebo_matches"], "corrupt_dates": d["corrupt_hour_dates"],
@@ -47,9 +51,9 @@ def run() -> dict:
                                                               "blend_members": v.get("blend_members"), "trail": v["trail"]}
                                                           for k, v in sel.items()}}
     rob = _read_csv("cv/selection_robustness.csv")
-    if not rob.empty:
+    if not rob.empty:  # 난수 20개(2,000회)와 반복 수 20,000회(seed 0)를 따로 센다
         out["selection_robustness"] = {"source": "cv/selection_robustness.csv", **{
-            f: g["chosen"].value_counts().to_dict() for f, g in rob.groupby("family")}}
+            f"{f}|n_boot={nb}": g["chosen"].value_counts().to_dict() for (f, nb), g in rob.groupby(["family", "n_boot"])}}
     tm = _read_csv("test/test_metrics.csv")
     if not tm.empty and sel:
         rows = {}
@@ -94,11 +98,11 @@ def run() -> dict:
                                                 "rows": g[["task", "model", "cv_RMSE", "test_RMSE", "test_diff_vs_headline",
                                                            "diff_ci90"]].round(3).to_dict("records")}
     er = _read_csv("analysis/error_rules.csv")
-    if not er.empty:
+    if not er.empty:  # 잎의 방향별(모델 우위/열위, 오차 큼/작음) 재현 수
         e2 = er[er.rule != "(전체)"]
         out["error_rules_reproduced"] = {"source": "analysis/error_rules.csv", **{
-            f"{t}|{tg}": f"{int(g.reproduced.fillna(0).sum())}/{int(g.reproduced.notna().sum())}"
-            for (t, tg), g in e2.groupby(["task", "target"])}}
+            f"{t}|{tg}|{dr}": f"{int(g.reproduced.fillna(0).sum())}/{int(g.reproduced.notna().sum())}"
+            for (t, tg, dr), g in e2.groupby(["task", "target", "direction"])}}
     cvm = _read_csv("cv/cv_metrics.csv")
     if not cvm.empty and sel:
         out["cv_pooled_RMSE_chosen"] = {"source": "cv/cv_metrics.csv", **{
@@ -112,12 +116,18 @@ def run() -> dict:
         m = pk["prob_method"]["chosen"]
         o = {"source": "peak/*", "T_test": pk["T_test"], "prob_method": m, "tau": pk["tau"][m],
              "calibration": pk["prob_method"].get("calibration")}
-        if not nh.empty:
-            o["test_classification"] = nh[(nh.method == m) & (nh.period == "test")].iloc[0][
-                ["F1", "precision", "recall", "PR_AUC", "Brier", "ECE", "base_rate", "BSS_vs_climatology"]].to_dict()
+        if not nh.empty:  # 확률 방법은 자기 교차검증 F1 문턱(cv_f1) 행을 쓴다(τ=0.5 고정 행은 비교용)
+            cols = ["tau", "F1", "precision", "recall", "PR_AUC", "Brier", "ECE", "base_rate", "BSS_vs_climatology"]
+            o["test_classification"] = nh[(nh.method == m) & (nh.period == "test") & (nh.tau_rule == "cv_f1")].iloc[0][cols].to_dict()
             o["test_rules_F1"] = nh[(nh.method.str.startswith("R_")) & (nh.period == "test")].set_index("method")["F1"].to_dict()
-            o["test_climatology_prob_quality"] = nh[(nh.method == "P_climatology") & (nh.period == "test")].iloc[0][
-                ["PR_AUC", "Brier", "ECE"]].to_dict()
+            o["test_climatology_cv_tau"] = nh[(nh.method == "P_climatology") & (nh.period == "test")
+                                              & (nh.tau_rule == "cv_f1")].iloc[0][cols].to_dict()
+            o["test_lgbm_classifier_cv_tau"] = nh[(nh.method == "P_lgbm_classifier") & (nh.period == "test")
+                                                  & (nh.tau_rule == "cv_f1")].iloc[0][cols].to_dict()
+        pq = _read_csv("peak/next_hour_prob_quality_bootstrap.csv")
+        if not pq.empty:
+            o["prob_quality_bootstrap"] = {"source": "peak/next_hour_prob_quality_bootstrap.csv",
+                                           "rows": pq.round(4).to_dict("records")}
         fb = _read_csv("peak/next_hour_f1_bootstrap.csv")
         if not fb.empty:
             o["F1_diff_bootstrap"] = fb.to_dict("records")
@@ -181,9 +191,20 @@ def run() -> dict:
         if not t0.empty:
             out[key] = {"source": rel, "rows": t0.round(4).to_dict("records")}
     for rel, key in (("analysis/plan_information_value.csv", "plan_information_value"),
-                     ("analysis/ablations.csv", "ablations"), ("analysis/learning_curve.csv", "learning_curve")):
+                     ("analysis/plan_regime_error_summary.csv", "plan_regime_error_summary"),
+                     ("analysis/ablations.csv", "ablations"), ("analysis/learning_curve.csv", "learning_curve"),
+                     ("analysis/structural_retuned.csv", "structural_retuned")):
         t = _read_csv(rel)
         if not t.empty:
             out[key] = {"source": rel, "rows": t.round(4).to_dict("records")}
+    j = _read_json("analysis/structural_retuned_selection.json")
+    if j:
+        out["structural_retuned_selection"] = {"source": "analysis/structural_retuned_selection.json",
+                                               **{k: ({kk: vv for kk, vv in v.items() if kk != "trail"} if isinstance(v, dict) else v)
+                                                  for k, v in j.items()}}
+    sj = _read_csv("field/ratchet_events_spike_jump_sensitivity.csv")
+    if not sj.empty:
+        out["ratchet_event_types_by_spike_jump"] = {"source": "field/ratchet_events_spike_jump_sensitivity.csv", **{
+            f"{g0:g}": {f"{str(r.date)[5:10]} {r.time}": r.type for r in g.itertuples()} for g0, g in sj.groupby("spike_jump")}}
     io.write_json(out, C.OUTPUT_DIR / "key_numbers.json")
     return out

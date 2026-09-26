@@ -22,15 +22,17 @@ TAU_GRID = np.round(np.arange(0.05, 0.96, 0.05), 2)
 
 
 def honest_stream(task: str, model: str) -> pd.Series:
-    """OOF와 시험 예측을 하나의 시간순 흐름으로 합친다."""
+    """OOF와 시험 예측을 하나의 시간순 흐름으로 합친다. 한쪽이라도 없으면 오류(조용히 건너뛰면 교차검증 구간이 비어
+    뒤 단계가 틀린 산출물을 쓴다)."""
     parts = []
     for name in ("oof", "test"):
-        try:
-            df = SM.load_predictions(name, task)
-        except FileNotFoundError:
-            continue
-        if model in df:
-            parts.append(df[model])
+        f = C.ARTIFACT_DIR / f"{name}_{task}.csv.gz"
+        if not f.exists():
+            raise FileNotFoundError(f"행 단위 예측이 없다: {f} — models 단계를 먼저 실행한다(제출 묶음이면 artifacts/ 확인)")
+        df = SM.load_predictions(name, task)
+        if model not in df:
+            raise KeyError(f"{f.name}에 {model} 예측이 없다")
+        parts.append(df[model])
     s = pd.concat(parts).sort_index()
     return s[~s.index.duplicated(keep="last")]
 
@@ -163,6 +165,53 @@ def f1_difference_bootstrap(lab: np.ndarray, pa: np.ndarray, ta: float, pb: np.n
 
     point, ci = _day_boot(df.index.to_numpy(), fn_, block_days=block_days)
     return {"F1_diff": point, "ci90": ci, "n_days": int(len(df))}
+
+
+def prob_quality_bootstrap(lab: np.ndarray, probs: dict, chosen: str, masks: dict, common: np.ndarray,
+                           index: pd.DatetimeIndex, n_boot: int = 2000) -> pd.DataFrame:
+    """확률 품질 차이의 날짜 블록 부트스트랩(1·7일 블록, 90% 구간): 선택 방법의 BSS(기후값 대비)와 Brier·PR-AUC 차이
+    (선택 − 기후값, 선택 − LightGBM 분류기). 같은 재표집으로 두 비교를 함께 계산한다."""
+    from sklearn.metrics import average_precision_score as ap
+    day = index.normalize().to_numpy()
+    rows = []
+    for per in ("cv", "test"):
+        m = masks[per] & common
+        yy, dd = lab[m].astype(float), day[m]
+        pa = probs[chosen].to_numpy()[m]
+        others = {o: probs[o].to_numpy()[m] for o in ("P_climatology", "P_lgbm_classifier") if o != chosen}
+        ud = np.array(sorted(np.unique(dd)))
+        pos = {d: np.where(dd == d)[0] for d in ud}
+
+        def stats(ix):
+            y_, a_ = yy[ix], pa[ix]
+            ba = np.mean((a_ - y_) ** 2)
+            ok = 0 < y_.sum() < len(y_)
+            ap_a = ap(y_, a_) if ok else np.nan
+            out = []
+            for pb in others.values():
+                bb = np.mean((pb[ix] - y_) ** 2)
+                out += [1 - ba / bb, ba - bb, (ap_a - ap(y_, pb[ix])) if ok else np.nan]
+            return out
+
+        point = stats(np.arange(len(yy)))
+        for bd in (1, 7):
+            rng = np.random.default_rng(C.SEED)
+            bs = []
+            for _ in range(n_boot):
+                if bd <= 1:
+                    pick = ud[rng.integers(0, len(ud), len(ud))]
+                else:
+                    st = rng.integers(0, max(len(ud) - bd + 1, 1), int(np.ceil(len(ud) / bd)))
+                    pick = np.concatenate([ud[s0:s0 + bd] for s0 in st])[:len(ud)]
+                bs.append(stats(np.concatenate([pos[d] for d in pick])))
+            bs = np.array(bs, float)
+            for j, o in enumerate(others):
+                for k, metric in enumerate(("BSS", "Brier_diff", "PR_AUC_diff")):
+                    c = 3 * j + k
+                    rows.append(dict(method=chosen, vs=o, period=per, block_days=bd, metric=metric, value=point[c],
+                                     ci90_lo=float(np.nanquantile(bs[:, c], 0.05)), ci90_hi=float(np.nanquantile(bs[:, c], 0.95)),
+                                     n_days=int(len(ud))))
+    return pd.DataFrame(rows)
 
 
 def calibration_table(lab: np.ndarray, probs: dict, masks: dict, common: np.ndarray) -> tuple[pd.DataFrame, pd.DataFrame]:
@@ -317,7 +366,8 @@ def run(iv: pd.DataFrame, frames: dict, selection: dict) -> dict:
                 continue
             c = MT.classification(lab_T[m].astype(int), p.to_numpy()[m], 0.5)
             bss = 1 - c["Brier"] / brier_clim[per] if c.get("Brier") is not None and brier_clim[per] else np.nan
-            crow.append(dict(method=pname, period=per, base_rate=c["pos"] / c["n"], BSS_vs_climatology=bss, **c))
+            crow.append(dict(method=pname, period=per, tau=0.5, tau_rule="rule" if pname.startswith("R_") else "fixed_0.5",
+                             base_rate=c["pos"] / c["n"], BSS_vs_climatology=bss, **c))
     # 확률 방법 선택: 공통 행 교차검증 Brier 최소(사전 규칙). 기후값은 비교 기준이라 후보가 아니다
     briers = {r["method"]: r.get("Brier", np.nan) for r in crow
               if r["period"] == "cv" and r["method"] in ("P_residual_sim", "P_lgbm_classifier")}
@@ -364,6 +414,14 @@ def run(iv: pd.DataFrame, frames: dict, selection: dict) -> dict:
             for per in ("cv", "test"):
                 r = _alarm_eval(p, labels, y, usable, T_arr, tau, masks[per] & common)
                 arows.append(dict(method=pname, period=per, tau_rule=label, **r))
+    # 분류표: 확률 방법마다 자기 교차검증 F1 문턱 행(τ=0.5 고정 행은 기후값처럼 낮은 확률을 내는 방법의 F1을 깎는다)
+    for pname in tau_sel:
+        for per, pm in masks.items():
+            m = pm & common
+            c = MT.classification(lab_T[m].astype(int), probs[pname].to_numpy()[m], tau_sel[pname]["tau_f1"])
+            bss = 1 - c["Brier"] / brier_clim[per] if c.get("Brier") is not None and brier_clim[per] else np.nan
+            crow.append(dict(method=pname, period=per, tau=tau_sel[pname]["tau_f1"], tau_rule="cv_f1",
+                             base_rate=c["pos"] / c["n"], BSS_vs_climatology=bss, **c))
     for rname in ("R_persistence", "R_analog", "R_clock"):
         for per in ("cv", "test"):
             r = _alarm_eval(probs[rname], labels, y, usable, T_arr, 0.5, masks[per] & common)
@@ -386,6 +444,7 @@ def run(iv: pd.DataFrame, frames: dict, selection: dict) -> dict:
                 fb.append(dict(method=prob_method, vs=other, period=per, block_days=bd, F1_diff=b["F1_diff"],
                                ci90=str(b["ci90"]), n_days=b["n_days"]))
     io.write_csv(pd.DataFrame(fb), od / "next_hour_f1_bootstrap.csv")
+    io.write_csv(prob_quality_bootstrap(lab_T, probs, prob_method, masks, common, idx), od / "next_hour_prob_quality_bootstrap.csv")
     ct, rel = calibration_table(lab_T, {k: probs[k] for k in ("P_residual_sim", "P_lgbm_classifier", "P_climatology")},
                                 masks, common)
     io.write_csv(ct, od / "next_hour_calibration.csv")

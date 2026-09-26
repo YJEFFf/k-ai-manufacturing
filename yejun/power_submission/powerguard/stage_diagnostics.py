@@ -127,8 +127,22 @@ def imbalance(iv: pd.DataFrame, st: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
+def _corr_ci(a: np.ndarray, b: np.ndarray, days: np.ndarray, n_boot: int = 2000) -> tuple[float, float]:
+    """Pearson 상관의 날짜 블록 부트스트랩 90% 구간(같은 날의 시간 값은 함께 뽑는다)."""
+    ud = np.unique(days)
+    pos = {d: np.where(days == d)[0] for d in ud}
+    rng = np.random.default_rng(C.SEED)
+    bs = []
+    for _ in range(n_boot):
+        ix = np.concatenate([pos[d] for d in rng.choice(ud, len(ud), replace=True)])
+        if np.std(a[ix]) > 0 and np.std(b[ix]) > 0:
+            bs.append(np.corrcoef(a[ix], b[ix])[0, 1])
+    return float(np.quantile(bs, 0.05)), float(np.quantile(bs, 0.95))
+
+
 def production_power_relation(iv: pd.DataFrame, st: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
-    """생산량과 전력의 관계(시험 전 학습 가능 구간). 시간 단위(가동 안 편차)와 날짜 단위를 분리한다."""
+    """생산량과 전력의 관계(시험 전 학습 가능 구간). 시간 단위(가동 안 편차)와 날짜 단위를 분리한다.
+    상관에는 날짜 블록 부트스트랩 90% 구간을 붙인다."""
     u = iv[iv["trainable"] & (iv.index < C.TEST_START)]
     hourly = u.groupby(u.index.floor("h")).agg(y=("y_train", "mean"), prod=("prod", "first"))
     hourly["date"] = hourly.index.normalize()
@@ -146,18 +160,24 @@ def production_power_relation(iv: pd.DataFrame, st: pd.DataFrame) -> tuple[pd.Da
         dev_rows.append(pd.DataFrame({"dy": g["y"] - ref_y, "dp": g["prod"] - ref_p, "prod": g["prod"]}))
     dv = pd.concat(dev_rows).dropna()
     dv = dv[dv["prod"] >= 100]
-    rows.append(dict(level="hour", scope="전면 가동일 08~19시, 생산≥100: 최근 같은 유형 2일 대비 편차", n=len(dv),
-                     pearson=float(dv[["dy", "dp"]].corr().iloc[0, 1])))
+
+    def corr_row(level, scope, a, b, days):
+        lo, hi = _corr_ci(a, b, days)
+        return dict(level=level, scope=scope, n=len(a), n_days=int(len(np.unique(days))),
+                    pearson=float(np.corrcoef(a, b)[0, 1]), ci90_lo=lo, ci90_hi=hi)
+
+    rows.append(corr_row("hour", "전면 가동일 08~19시, 생산≥100: 최근 같은 유형 2일 대비 편차", dv["dy"].to_numpy(),
+                         dv["dp"].to_numpy(), dv.index.normalize().to_numpy()))
     # (2) 가동 주간 원시 상관(시간별 생산량 vs 전력)
     w2 = w[w["prod"] >= 100]
-    rows.append(dict(level="hour", scope="전면 가동일 08~19시, 생산≥100: 원시값", n=len(w2),
-                     pearson=float(w2[["y", "prod"]].corr().iloc[0, 1])))
+    rows.append(corr_row("hour", "전면 가동일 08~19시, 생산≥100: 원시값", w2["y"].to_numpy(), w2["prod"].to_numpy(),
+                         w2["date"].to_numpy()))
     # (3) 날짜 단위: 전면 가동일 일 생산 총량 vs 주간 평균 전력
     day = hourly.groupby("date").agg(y_day=("y", lambda v: v.iloc[8:20].mean() if len(v) >= 20 else np.nan),
                                      prod=("prod", "sum"), regime=("regime", "first"))
     full = day[day.regime == 2].dropna()
-    rows.append(dict(level="day", scope="전면 가동일: 일 생산 총량 vs 08~19시 평균 전력", n=len(full),
-                     pearson=float(full[["y_day", "prod"]].corr().iloc[0, 1])))
+    rows.append(corr_row("day", "전면 가동일: 일 생산 총량 vs 08~19시 평균 전력", full["y_day"].to_numpy(),
+                         full["prod"].to_numpy(), full.index.to_numpy()))
     # (4) 모든 날: 체제(정지/부분/전면)별 주간 평균 전력
     for r, g in day.dropna().groupby("regime"):
         rows.append(dict(level="day", scope=f"체제 {int(r)} 날의 08~19시 평균 전력(평균)", n=len(g), pearson=np.nan,
@@ -196,26 +216,56 @@ def operating_states(iv: pd.DataFrame, st: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def origin_sensitivity(df: pd.DataFrame, diag: D.Diagnosis) -> pd.DataFrame:
-    """원본 판정 근거의 문턱 민감도: 정합 판정 문턱을 바꿔도 '가장 늦은 구성원 정합 ≫ 가장 이른 구성원 정합'인가."""
+SENS_GRID = {"night_power_on": (40, 60, 80), "day_power_on": (80, 100, 120), "day_prod_on": (500, 1000, 3000),
+             "night_prod_on": (1, 100, 400), "evening_power_on": (40, 60, 80), "evening_prod_on": (0, 50, 100, 200)}
+
+
+def origin_sensitivity(df: pd.DataFrame, diag: D.Diagnosis) -> tuple[pd.DataFrame, dict]:
+    """원본 판정 근거의 문턱 민감도(정합 판정 문턱 6개의 전 조합): '가장 늦은 구성원 정합 ≫ 가장 이른 구성원 정합'이 유지되는가,
+    원본이 바뀌는 복제군은 몇 개·어느 군인가, 단독 날짜(실측 기간) 정합은 얼마인가. 집계값은 문턱과 무관해 한 번만 만든다."""
+    import itertools
     days = diag.days
     corrupt = set(days.index[days["corrupt_hour"]])
+    agg = D.consistency_table(df, corrupt)
+    valid = agg["consistent"].notna()
     multi = days[days["copy_group_size"] > 1]
+    groups = [sorted(x.index) for _, x in multi.groupby("power_src")]
+    base = {g[0]: D.choose_origin(g, agg["consistent"], C.COPY_ORIGIN) for g in groups}
+    single = days.index[(days["copy_group_size"] == 1) & ~days["corrupt_hour"]]
+    single_meas = single[single >= C.MEASURED_START]
     rows = []
-    import itertools
-    for npw, dpw, dprod, nprod in itertools.product((40, 60, 80), (80, 100, 120), (500, 1000, 3000), (1, 100, 400)):
-        if True:
-            if True:
-                cons = D.consistency_table(df, corrupt, night_power_on=npw, day_power_on=dpw, day_prod_on=dprod,
-                                           night_prod_on=nprod)["consistent"]
-                g = multi.groupby("power_src")
-                first = g.apply(lambda x: cons.get(x.index.min()), include_groups=False)
-                last = g.apply(lambda x: cons.get(x.index.max()), include_groups=False)
-                single = days.index[(days["copy_group_size"] == 1) & ~days["corrupt_hour"]]
-                rows.append(dict(night_power_on=npw, day_power_on=dpw, day_prod_on=dprod, night_prod_on=nprod, groups=len(first),
-                                 earliest_consistent=int((first == 1).sum()), latest_consistent=int((last == 1).sum()),
-                                 singleton_consistent_share=float(cons.reindex(single).mean())))
-    return pd.DataFrame(rows)
+    for combo in itertools.product(*SENS_GRID.values()):
+        th = dict(zip(SENS_GRID, combo))
+        ok = (((agg["night_power"] > th["night_power_on"]) == (agg["night_prod"] > th["night_prod_on"]))
+              & ((agg["day_power"] > th["day_power_on"]) == (agg["day_prod"] > th["day_prod_on"]))
+              & ((agg["evening_power"] > th["evening_power_on"]) == (agg["evening_prod"] > th["evening_prod_on"])))
+        cons = ok.astype(float).where(valid)
+        changed = [f"{base[g[0]].date()}→{o.date()}" for g in groups
+                   if (o := D.choose_origin(g, cons, C.COPY_ORIGIN)) != base[g[0]]]
+        sm = cons.reindex(single_meas)
+        rows.append(dict(**th, groups=len(groups), earliest_consistent=int(sum(cons.get(g[0]) == 1 for g in groups)),
+                         latest_consistent=int(sum(cons.get(g[-1]) == 1 for g in groups)),
+                         origin_changed_groups=len(changed), origin_changes="; ".join(changed),
+                         singleton_consistent_share=float(cons.reindex(single).mean()),
+                         singleton_measured_consistent=f"{int(sm.sum())}/{int(sm.notna().sum())}",
+                         is_headline=all(th[k] == getattr(C, k.upper()) for k in th)))
+    t = pd.DataFrame(rows)
+    one_way = {}
+    for key in ("evening_prod_on", "evening_power_on", "night_prod_on"):
+        others = [k for k in SENS_GRID if k != key]
+        sub = t[np.logical_and.reduce([t[k] == getattr(C, k.upper()) for k in others])]
+        one_way[key] = {str(r[key]): {"origin_changes": r["origin_changes"] or "-",
+                                      "singleton_measured_consistent": r["singleton_measured_consistent"]}
+                        for _, r in sub.iterrows()}
+    summ = {"combinations": int(len(t)), "grid": {k: list(v) for k, v in SENS_GRID.items()},
+            "latest_consistent_range": [int(t.latest_consistent.min()), int(t.latest_consistent.max())],
+            "earliest_consistent_range": [int(t.earliest_consistent.min()), int(t.earliest_consistent.max())],
+            "min_gap_latest_minus_earliest": int((t.latest_consistent - t.earliest_consistent).min()),
+            "combinations_without_origin_change": int((t.origin_changed_groups == 0).sum()),
+            "max_origin_changed_groups": int(t.origin_changed_groups.max()),
+            "one_way_from_headline": one_way,
+            "file": "diagnostics/copy_origin_sensitivity.csv"}
+    return t, summ
 
 
 def direction_checks(df: pd.DataFrame, diag: D.Diagnosis) -> tuple[pd.DataFrame, dict]:
@@ -225,8 +275,10 @@ def direction_checks(df: pd.DataFrame, diag: D.Diagnosis) -> tuple[pd.DataFrame,
     - 휴무 다음 날: 전날이 일요일·공휴일인 평일의 01~05시에 야간조 전력이 있는가(실측이면 거의 없다)
     - 복제군 안: 가장 이른/늦은 구성원의 앞뒤 자정 연속성
     - 기상(약함): 가동 패턴 복제군의 13~16시 고원 전력과 일 최고기온 상관(가장 늦은/이른 날짜 기준)
+    두 기간 비교는 Fisher 정확 검정(양측), 같은 군의 가장 늦은/이른 구성원 비교는 정확 McNemar(불일치 쌍의 이항, 양측).
+    실측 기간·가장 늦은 구성원의 예외 날짜를 함께 적는다.
     """
-    from scipy.stats import pearsonr
+    from scipy.stats import binomtest, fisher_exact, pearsonr
     P = C.POWER_COLS
     hr = df["시간"]
     pw = df[P].mean(axis=1)
@@ -250,44 +302,63 @@ def direction_checks(df: pd.DataFrame, diag: D.Diagnosis) -> tuple[pd.DataFrame,
             return np.nan
         return float(eve[d] == night[d + one])
 
+    def _days(ix) -> str:
+        return ", ".join(f"{d.month}/{d.day}" for d in ix)
+
+    def _fisher(r1, r2) -> float:
+        return float(fisher_exact([[r1["k"], r1["n"] - r1["k"]], [r2["k"], r2["n"] - r2["k"]]])[1])
+
     cp = pd.Series({d: cont_prev(d) for d in idx})
     rows, res = [], {}
+    pair = []
     for label, m in (("1~4월", idx < C.MEASURED_START), ("5~9월", idx >= C.MEASURED_START)):
         v = cp[m].dropna()
-        rows.append(dict(check="자정 연속성(전날 21~23시 ↔ 당일 01~05시)", subset=label, k=int(v.sum()), n=len(v),
-                         rate=float(v.mean())))
+        pair.append(dict(check="자정 연속성(전날 21~23시 ↔ 당일 01~05시)", subset=label, k=int(v.sum()), n=len(v),
+                         rate=float(v.mean()), exceptions=_days(v.index[v == 0]) if label == "5~9월" else ""))
+    pair[1].update(test="Fisher 정확(1~4월 vs 5~9월, 양측)", p_value=_fisher(pair[0], pair[1]))
+    rows += pair
     d3 = F.daytype3(idx)
     prev_rest = pd.Series(F.daytype3(idx - one) == 2, index=idx) & pd.Series(d3 == 0, index=idx)
+    pair = []
     for label, m in (("1~4월", idx < C.MEASURED_START), ("5~9월", idx >= C.MEASURED_START)):
         dd = idx[m & prev_rest.to_numpy() & ~idx.isin(list(corrupt))]
         v = night.reindex(dd).astype(float)
-        rows.append(dict(check="휴무 다음 평일의 01~05시 야간조 전력", subset=label, k=int(v.sum()), n=len(v), rate=float(v.mean())))
+        pair.append(dict(check="휴무 다음 평일의 01~05시 야간조 전력", subset=label, k=int(v.sum()), n=len(v), rate=float(v.mean()),
+                         exceptions=_days(v.index[v == 1]) if label == "5~9월" else ""))
+    pair[1].update(test="Fisher 정확(1~4월 vs 5~9월, 양측)", p_value=_fisher(pair[0], pair[1]))
+    rows += pair
     multi = days[days["copy_group_size"] > 1]
     both = {}
     for which in ("earliest", "latest"):
-        vals = []
+        vals, dates = [], []
         for _, x in multi.groupby("power_src"):
             d = x.index.min() if which == "earliest" else x.index.max()
             a, b = cont_prev(d), cont_next(d)
             vals.append(np.nan if (np.isnan(a) or np.isnan(b)) else float(a == 1 and b == 1))
-        v = pd.Series(vals).dropna()
+            dates.append(d)
+        v = pd.Series(vals, index=dates).dropna()
         both[which] = pd.Series(vals)
         rows.append(dict(check="복제군 구성원의 앞뒤 자정 연속성", subset=f"가장 {'이른' if which == 'earliest' else '늦은'} 구성원",
-                         k=int(v.sum()), n=len(v), rate=float(v.mean())))
+                         k=int(v.sum()), n=len(v), rate=float(v.mean()),
+                         exceptions=_days(v.index[v == 0]) if which == "latest" else ""))
     only_late = int(((both["latest"] == 1) & (both["earliest"] == 0)).sum())
     only_early = int(((both["latest"] == 0) & (both["earliest"] == 1)).sum())
-    rows.append(dict(check="복제군 구성원의 앞뒤 자정 연속성", subset="가장 늦은 쪽만 연속 / 가장 이른 쪽만 연속",
-                     k=only_late, n=only_early, rate=np.nan))
+    nd = only_late + only_early
+    rows.append(dict(check="복제군 구성원의 앞뒤 자정 연속성", subset="불일치 쌍 중 가장 늦은 쪽만 연속", k=only_late, n=nd,
+                     rate=only_late / nd if nd else np.nan, discordant_latest_only=only_late,
+                     discordant_earliest_only=only_early, test="정확 McNemar(불일치 쌍 이항, 양측)",
+                     p_value=float(binomtest(only_late, nd, 0.5).pvalue) if nd else np.nan))
     run_groups = [x for _, x in multi.groupby("power_src") if plateau.get(x.index.max(), 0) > C.DAY_POWER_ON]
     for which in ("latest", "earliest"):
         xs = [tmax[(x.index.max() if which == "latest" else x.index.min())] for x in run_groups]
         ys = [plateau[x.index.max()] for x in run_groups]
         r, p = pearsonr(xs, ys) if len(xs) >= 5 else (np.nan, np.nan)
         rows.append(dict(check="가동 패턴 복제군: 13~16시 고원 전력 vs 일 최고기온", subset=f"{'가장 늦은' if which == 'latest' else '가장 이른'} 날짜 기온",
-                         k=np.nan, n=len(xs), rate=float(r), p_value=float(p)))
+                         k=np.nan, n=len(xs), rate=float(r), test="Pearson(양측, 약한 보조 근거)", p_value=float(p)))
     t = pd.DataFrame(rows)
     res = {f"{r.check}|{r.subset}": (f"{int(r.k)}/{int(r.n)}" if np.isfinite(r.k) and "고원" not in r.check else r.rate)
            for r in t.itertuples()}
+    res.update({f"{r.check}|{r.subset}|p_value": r.p_value for r in t.itertuples() if np.isfinite(r.p_value)})
     return t, res
 
 
@@ -325,7 +396,8 @@ def run(df: pd.DataFrame, meta: dict, diag: D.Diagnosis, iv: pd.DataFrame) -> di
     io.write_csv(cm[["date", "weekday", "month", "power_src", "src_month", "src_offset_days", "src_same_weekday",
                      "src_same_dom", "category", "consistent", "prod_total", "power_mean"]], od / "copy_map.csv")
     io.write_csv(diag.copy_groups, od / "copy_groups.csv")
-    io.write_csv(origin_sensitivity(df, diag), od / "copy_origin_sensitivity.csv")
+    sens, sens_summary = origin_sensitivity(df, diag)
+    io.write_csv(sens, od / "copy_origin_sensitivity.csv")
     dchk, dres = direction_checks(df, diag)
     io.write_csv(dchk, od / "copy_direction_checks.csv")
     io.write_csv(diag.contradictions, od / "copy_contradictions.csv")
@@ -419,7 +491,8 @@ def run(df: pd.DataFrame, meta: dict, diag: D.Diagnosis, iv: pd.DataFrame) -> di
         "test_plan_zero_days": [str(d.date()) for d in test_days.index[test_days["prod_total"] == 0]],
         "test_holidays": [str(d.date()) for d in test_days.index[test_days["holiday"]]],
     }
-    summary = {"meta": meta, "diagnosis": diag.summary, "direction_checks_power_only": dres, "usable": usable_summary,
+    summary = {"meta": meta, "diagnosis": diag.summary, "direction_checks_power_only": dres,
+               "origin_threshold_sensitivity": sens_summary, "usable": usable_summary,
                "peak": peak_summary, "test_composition": test_summary}
     io.write_json(summary, od / "summary.json")
     return summary

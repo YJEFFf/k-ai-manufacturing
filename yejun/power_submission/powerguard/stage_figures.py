@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 import json
+import re
 
 import matplotlib
 
@@ -392,7 +393,9 @@ def fig_integrated():
     lad = _read("field/ratchet_ladder.csv")
     ub = _read("field/ratchet_perfect_control_bound.csv")
     d = _read("field/integrated_scenario.csv")
-    fig, axes = plt.subplots(1, 3, figsize=(15, 3.4))
+    d = d[~d["scenario"].str.startswith("(비교) 인터록만")].reset_index(drop=True)  # 문턱 민감도 행은 표로만
+    d["label"] = [re.sub(r"\s*\((?!비교).*?\)", "", str(sc)) for sc in d["scenario"]]  # 괄호 설명은 표(integrated_scenario.csv)에
+    fig, axes = plt.subplots(1, 3, figsize=(16, 3.8), gridspec_kw={"width_ratios": [1, 1, 1.15], "wspace": 0.5})
     ax = axes[0]
     ax.plot(lad["step"], lad["ratchet"], marker="o", markersize=5, color=SERIES[0])
     for _, r in lad.iterrows():
@@ -410,11 +413,12 @@ def fig_integrated():
     ax.set_title("완전 제어 상한: 넘은 구간만 T로 묶을 때", fontsize=10)
     ax = axes[2]
     yy = np.arange(len(d))
-    ax.barh(yy, d["ratchet_max_jul_sep"], color=SERIES[0], height=0.55)
+    ax.barh(yy, d["ratchet_max_jul_sep"], height=0.55,
+            color=[SERIES[1] if str(sc).startswith("(비교)") else SERIES[0] for sc in d["scenario"]])
     for i, r in d.iterrows():
         ax.text(r["ratchet_max_jul_sep"] + 0.3, i, f"{r['ratchet_max_jul_sep']:.1f} ({r['basic_charge_change_pct']:+.1f}%)",
                 va="center", fontsize=7, color=INK2)
-    ax.set_yticks(yy, d["scenario"], fontsize=7)
+    ax.set_yticks(yy, d["label"], fontsize=7.5)
     ax.invert_yaxis()
     ax.set_xlim(float(d["ratchet_max_jul_sep"].min()) - 12, float(d["ratchet_max_jul_sep"].max()) + 8)
     ax.set_xlabel("요금적용전력(7~9월 최대)")

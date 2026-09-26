@@ -1,19 +1,19 @@
-task,model,baseline,target,rule,n_cv,mean_cv,ci_cv_lo,ci_cv_hi,n_test,mean_test,ci_test_lo,ci_test_hi,reproduced
-B,M8_blend,BL5_regime_analog,loss_vs_baseline,(전체),4512,-0.536041,-0.825083,-0.252532,3044,-0.986493,-1.4875,-0.503631,
-B,M8_blend,BL5_regime_analog,loss_vs_baseline,work_dayshift <= 0.50 & daytype4 <= 1.50,1872,-0.285669,-0.55499,-0.000469079,1248,-1.06676,-1.55969,-0.586608,1
-B,M8_blend,BL5_regime_analog,loss_vs_baseline,work_dayshift <= 0.50 & daytype4 > 1.50,768,0.304631,-0.350764,0.893224,502,-0.233919,-1.18363,0.670233,0
-B,M8_blend,BL5_regime_analog,loss_vs_baseline,work_dayshift > 0.50 & daytype4 <= 0.50,384,-0.0227831,-0.92925,0.843191,288,-0.692222,-2.44886,0.660041,0
-B,M8_blend,BL5_regime_analog,loss_vs_baseline,work_dayshift > 0.50 & daytype4 > 0.50,1488,-1.41737,-2.18882,-0.6811,1006,-1.3467,-2.09174,-0.574105,1
-B,M8_blend,BL5_regime_analog,abs_err_workday,(전체),1872,10.8246,10.1085,11.6397,1294,11.7209,10.0554,13.848,
-B,M8_blend,BL5_regime_analog,abs_err_workday,win_lunch_1145_1315 <= 0.50 & win_startup_0730_0845 <= 0.50,1482,10.9367,10.1049,11.8294,1026,12.0346,10.2206,14.3875,0
-B,M8_blend,BL5_regime_analog,abs_err_workday,win_lunch_1145_1315 <= 0.50 & win_startup_0730_0845 > 0.50,156,11.7372,10.4278,13.0492,108,10.1443,8.34296,11.9628,0
-B,M8_blend,BL5_regime_analog,abs_err_workday,win_lunch_1145_1315 > 0.50,234,9.50629,8.42961,10.7111,160,10.7735,8.8413,13.2411,0
-A4,M7c_hybrid_coolmono,BL4_ridge,loss_vs_baseline,(전체),4512,-0.80171,-1.05854,-0.564373,3044,-0.930276,-1.32686,-0.570148,
-A4,M7c_hybrid_coolmono,BL4_ridge,loss_vs_baseline,regime <= 1.50 & temp_level <= 1.50,576,-2.46046,-2.97767,-1.77341,392,-1.91726,-2.38979,-1.40174,1
-A4,M7c_hybrid_coolmono,BL4_ridge,loss_vs_baseline,regime <= 1.50 & temp_level > 1.50,192,-2.15135,-2.48031,-1.6322,62,0.297669,-1.95236,2.15063,0
-A4,M7c_hybrid_coolmono,BL4_ridge,loss_vs_baseline,regime > 1.50 & first_day_after_off <= 0.50,2976,-0.329401,-0.592849,-0.0867304,2014,-0.44439,-0.771874,-0.150485,1
-A4,M7c_hybrid_coolmono,BL4_ridge,loss_vs_baseline,regime > 1.50 & first_day_after_off > 0.50,768,-1.05044,-1.23191,-0.845087,576,-2.08966,-3.26713,-1.08893,1
-A4,M7c_hybrid_coolmono,BL4_ridge,abs_err_workday,(전체),1872,9.76724,9.28923,10.2182,1294,10.5945,9.53296,11.7526,
-A4,M7c_hybrid_coolmono,BL4_ridge,abs_err_workday,win_startup_0730_0845 <= 0.50 & win_lunch_1145_1315 <= 0.50,1482,9.68281,9.19,10.1866,1026,10.3724,9.28518,11.6594,0
-A4,M7c_hybrid_coolmono,BL4_ridge,abs_err_workday,win_startup_0730_0845 <= 0.50 & win_lunch_1145_1315 > 0.50,234,8.66367,7.74482,9.63837,160,10.4057,8.73979,12.2675,0
-A4,M7c_hybrid_coolmono,BL4_ridge,abs_err_workday,win_startup_0730_0845 > 0.50,156,12.2246,10.7679,13.8676,108,12.984,9.66424,16.8732,0
+task,model,baseline,target,rule,direction,n_cv,mean_cv,ci_cv_lo,ci_cv_hi,n_test,mean_test,ci_test_lo,ci_test_hi,reproduced
+B,M8_blend,BL5_regime_analog,loss_vs_baseline,(전체),,4512,-0.536041,-0.825083,-0.252532,3044,-0.986493,-1.4875,-0.503631,
+B,M8_blend,BL5_regime_analog,loss_vs_baseline,work_dayshift <= 0.50 & daytype4 <= 1.50,모델 우위(기준보다 좋음),1872,-0.285669,-0.55499,-0.000469079,1248,-1.06676,-1.55969,-0.586608,1
+B,M8_blend,BL5_regime_analog,loss_vs_baseline,work_dayshift <= 0.50 & daytype4 > 1.50,모델 열위(기준보다 나쁨),768,0.304631,-0.350764,0.893224,502,-0.233919,-1.18363,0.670233,0
+B,M8_blend,BL5_regime_analog,loss_vs_baseline,work_dayshift > 0.50 & daytype4 <= 0.50,모델 우위(기준보다 좋음),384,-0.0227831,-0.92925,0.843191,288,-0.692222,-2.44886,0.660041,0
+B,M8_blend,BL5_regime_analog,loss_vs_baseline,work_dayshift > 0.50 & daytype4 > 0.50,모델 우위(기준보다 좋음),1488,-1.41737,-2.18882,-0.6811,1006,-1.3467,-2.09174,-0.574105,1
+B,M8_blend,BL5_regime_analog,abs_err_workday,(전체),,1872,10.8246,10.1085,11.6397,1294,11.7209,10.0554,13.848,
+B,M8_blend,BL5_regime_analog,abs_err_workday,win_lunch_1145_1315 <= 0.50 & win_startup_0730_0845 <= 0.50,오차 큼(전체 대비),1482,10.9367,10.1049,11.8294,1026,12.0346,10.2206,14.3875,0
+B,M8_blend,BL5_regime_analog,abs_err_workday,win_lunch_1145_1315 <= 0.50 & win_startup_0730_0845 > 0.50,오차 큼(전체 대비),156,11.7372,10.4278,13.0492,108,10.1443,8.34296,11.9628,0
+B,M8_blend,BL5_regime_analog,abs_err_workday,win_lunch_1145_1315 > 0.50,오차 작음(전체 대비),234,9.50629,8.42961,10.7111,160,10.7735,8.8413,13.2411,0
+A4,M7c_hybrid_coolmono,BL4_ridge,loss_vs_baseline,(전체),,4512,-0.80171,-1.05854,-0.564373,3044,-0.930276,-1.32686,-0.570148,
+A4,M7c_hybrid_coolmono,BL4_ridge,loss_vs_baseline,regime <= 1.50 & temp_level <= 1.50,모델 우위(기준보다 좋음),576,-2.46046,-2.97767,-1.77341,392,-1.91726,-2.38979,-1.40174,1
+A4,M7c_hybrid_coolmono,BL4_ridge,loss_vs_baseline,regime <= 1.50 & temp_level > 1.50,모델 우위(기준보다 좋음),192,-2.15135,-2.48031,-1.6322,62,0.297669,-1.95236,2.15063,0
+A4,M7c_hybrid_coolmono,BL4_ridge,loss_vs_baseline,regime > 1.50 & first_day_after_off <= 0.50,모델 우위(기준보다 좋음),2976,-0.329401,-0.592849,-0.0867304,2014,-0.44439,-0.771874,-0.150485,1
+A4,M7c_hybrid_coolmono,BL4_ridge,loss_vs_baseline,regime > 1.50 & first_day_after_off > 0.50,모델 우위(기준보다 좋음),768,-1.05044,-1.23191,-0.845087,576,-2.08966,-3.26713,-1.08893,1
+A4,M7c_hybrid_coolmono,BL4_ridge,abs_err_workday,(전체),,1872,9.76724,9.28923,10.2182,1294,10.5945,9.53296,11.7526,
+A4,M7c_hybrid_coolmono,BL4_ridge,abs_err_workday,win_startup_0730_0845 <= 0.50 & win_lunch_1145_1315 <= 0.50,오차 작음(전체 대비),1482,9.68281,9.19,10.1866,1026,10.3724,9.28518,11.6594,0
+A4,M7c_hybrid_coolmono,BL4_ridge,abs_err_workday,win_startup_0730_0845 <= 0.50 & win_lunch_1145_1315 > 0.50,오차 작음(전체 대비),234,8.66367,7.74482,9.63837,160,10.4057,8.73979,12.2675,0
+A4,M7c_hybrid_coolmono,BL4_ridge,abs_err_workday,win_startup_0730_0845 > 0.50,오차 큼(전체 대비),156,12.2246,10.7679,13.8676,108,12.984,9.66424,16.8732,0

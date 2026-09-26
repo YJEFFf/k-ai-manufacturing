@@ -1,0 +1,5 @@
+family,baseline,param,value,setting,chosen,cv_RMSE,test_RMSE,chosen_minus_baseline_cv,cv_ci90,chosen_minus_baseline_test,test_ci90,posthoc_sensitivity
+B,BL5_regime_analog,k,2,headline,M8_blend,10.7038,15.1814,-0.768512,"[-1.1083977504413145, -0.43296756556509014]",-1.2055,"[-1.6356557365657236, -0.7081863851505039]",True
+B,BL5_regime_analog,k,4,retuned,M8_blend,10.0099,14.1506,-0.0746493,"[-0.41400226995847483, 0.2982251971892439]",-0.174712,"[-0.8406916782269047, 0.7433298293613948]",True
+A,M6_analog_level,rho,0.9,headline,M7c_hybrid_coolmono,9.40504,10.4306,-1.07025,"[-1.259524068091276, -0.8823767737131422]",-1.43213,"[-1.618002558945836, -1.2253540092326882]",True
+A,M6_analog_level,rho,0.8,retuned,M7c_hybrid_coolmono,8.97166,10.5669,-0.63687,"[-0.7930492137569302, -0.4878776487003828]",-1.56844,"[-2.178824041362662, -0.9982668072790417]",True
