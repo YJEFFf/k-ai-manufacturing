@@ -18,19 +18,25 @@ NAMES = {"vib_noise": "진동 잡음 s(×정상 σ)", "cur_noise": "전류 잡�
 def fig_e1():
     s = pd.read_csv(HERE / "e1_summary.csv")
     s = s[s.alpha.eq(.01) & s["shape"].eq("step") & s.t0.eq(10)]
-    # 두 분할 중 나쁜 쪽(탐지율 최소, 지연 최대)
-    agg = s.groupby(["family", "level", "model"]).agg(rate=("detect_rate_2s", "min"), delay=("delay_median_s", "max")).reset_index()
-    none = agg[agg.family.eq("none")].set_index("model").rate
-    fig, axes = plt.subplots(2, 4, figsize=(12, 5.4), sharey="row")
+    # 신호 탐지는 두 분할 중 나쁜 쪽(탐지율 최소, 지연 최대). 지연은 탐지된 기록만의 중앙값이라 탐지율과 함께 읽는다.
+    agg = s.groupby(["family", "level", "model"]).agg(rate=("detect_rate_2s", "min"), any_rate=("detect_rate_any", "min"),
+                                                     delay=("delay_median_s", "max")).reset_index()
+    none = s[s.family.eq("none") & s.model.eq("guard_v2")].set_index("split")
+    records = none.records.astype(int).to_dict()
+    fig, axes = plt.subplots(2, 4, figsize=(12, 5.8), sharey="row")
     for j, fam in enumerate(NAMES):
         g = agg[agg.family.eq(fam)].sort_values("level")
         x = range(len(g.level.unique()))
         labels = [f"{v:g}" for v in sorted(g.level.unique())]
         for model, color, ls, mk, lab in (("guard_v2", V2, "-", "o", "v2"), ("baseline_v1", V1, "--", "s", "v1")):
-            gm = g[g.model.eq(model)]
+            gm = g[g.model.eq(model)].reset_index(drop=True)
             axes[0, j].plot(x, gm.rate, ls, color=color, marker=mk, ms=6, lw=2, label=lab)
-            axes[1, j].plot(x, gm.delay, ls, color=color, marker=mk, ms=6, lw=2, label=lab)
-        axes[0, j].axhline(none["guard_v2"], color=REF, lw=1, ls=":")
+            axes[1, j].plot(x, gm.delay, ls, color=color, lw=2)
+            few = gm.any_rate < .5   # 탐지된 기록이 절반 미만이면 지연은 소수 기록의 값: 빈 표시
+            axes[1, j].plot([i for i in x if not few[i]], gm.delay[~few], mk, color=color, ms=6, label=lab)
+            axes[1, j].plot([i for i in x if few[i]], gm.delay[few], mk, color=color, ms=6, mfc="white", mew=1.5)
+        # 무주입 경보율은 오경보 관점이라 두 분할 중 높은 쪽을 기준선으로 그린다
+        axes[0, j].axhline(none.detect_rate_2s.max(), color=REF, lw=1, ls=":")
         axes[0, j].axhline(.9, color=GRID, lw=1)
         for i in (0, 1):
             axes[i, j].set_xticks(list(x), labels)
@@ -38,11 +44,16 @@ def fig_e1():
         axes[0, j].set_title(NAMES[fam], color=INK)
         axes[1, j].set_xlabel("세기")
     axes[0, 0].set_ylabel("2초 안 탐지율(두 분할 중 낮은 쪽)")
-    axes[1, 0].set_ylabel("첫 경보 지연 중앙값(초, 높은 쪽)")
-    axes[0, 0].legend(frameon=False, loc="lower right")
-    axes[0, 0].text(0, none["guard_v2"] + .02, "주입 없음(v2)", color=MUTED, fontsize=8)
-    fig.suptitle("E1 고장 주입: 시작 1초 뒤 계단형 주입, α=1%, 동결 모델", color=INK, x=.01, ha="left")
-    fig.tight_layout()
+    axes[1, 0].set_ylabel("첫 경보 지연 중앙값(초)\n탐지된 기록만, 두 분할 중 늦은 쪽")
+    rate = none.detect_rate_2s
+    handles, names = axes[0, 0].get_legend_handles_labels()
+    handles += [plt.Line2D([], [], color=REF, lw=1, ls=":"),
+                plt.Line2D([], [], color=MUTED, marker="o", ls="", ms=6, mfc="white", mew=1.5)]
+    names += [f"주입 없음 2초 창 경보율(A {rate['A']:.1%}·B {rate['B']:.1%}, 높은 쪽 표시)", "빈 표시: 탐지된 기록 50% 미만이라 지연이 소수 기록의 값"]
+    fig.legend(handles, names, loc="lower center", ncol=4, frameon=False, fontsize=8)   # 그래프 밖: 선과 겹치지 않는다
+    fig.suptitle(f"E1 고장 주입: 시작 1초 뒤 계단형 주입, α=1%, 동결 모델 · 기록 A {records['A']}개·B {records['B']}개, 잡음 족은 반복 5회(독립 시험 아님)",
+                 color=INK, x=.01, ha="left")
+    fig.tight_layout(rect=(0, .05, 1, 1))
     fig.savefig(HERE / "fig_e1_detection.png", dpi=150)
 
 
@@ -61,7 +72,7 @@ def fig_e3():
         ax.set_xlabel("재보정에 쓴 정상 자료(분, 0.1초×행)")
         ax.grid(color=GRID, lw=.6)
     axes[0].legend(frameon=False)
-    fig.suptitle("E3 재보정: 학습+보정 정상 자료량별 성능, 정상 평가 480~599", color=INK, x=.01, ha="left")
+    fig.suptitle("E3 재보정: 학습+보정 정상 자료량별 성능 · 정상 평가 480~599는 보정보다 조용한 시간대 · 사전 안정 규칙 충족 0/36", color=INK, x=.01, ha="left")
     fig.tight_layout()
     fig.savefig(HERE / "fig_e3_recalibration.png", dpi=150)
 

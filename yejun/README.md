@@ -13,7 +13,7 @@
 - [위치 0·1 미탐 후보 실험](analysis/press_early/README.md): 2026-09-25 공동 정상 분포·1차 예측 오차 후보를 사전 고정해 시험, 둘 다 채택 기준 불충족(정상 알림 증가 또는 개선 없음). v2 유지
 - [Claude 후속 구현 Codex 재검수](analysis/press_guard_review/codex_recheck.md): 검증·동결 누락 경로와 웹 차트/재생 결함 수정, 미탐 해석 교정, 토의 항목 3개 판단
 - [코덱스 인수인계 검수·웹 콘솔 구현](analysis/press_guard_review/README.md): Claude의 v2·후보 탐색·UCI 재현, 웹 연결·검수·벤치마크 및 사용자 위임에 따른 v2 채택·디벨롭 이력
-- [Press Guard v2 구현·실험](press_guard/README.md): 2026-09-25 정상 전류 AR(2) 잔차 결합으로 F1 A 0.961938/B 0.970990, 미탐 44/31, 정상 알림 0/120·3/180 유지. 테스트 42개·JS 회귀 4개 통과. 로컬 웹 콘솔 동작
+- [Press Guard v2 구현·실험](press_guard/README.md): 2026-09-25 정상 전류 AR(2) 잔차 결합으로 F1 A 0.961938/B 0.970990, 미탐 44/31, 정상 알림 0/120·3/180 유지(A 평가 구간은 보정보다 조용한 시간대라 0/120은 유리한 조건의 값). 테스트 42개·JS 회귀 4개 통과. 로컬 웹 콘솔 동작
 - [외부 유압 데이터 확보·검증](analysis/press_external/README.md): UCI 2,205사이클 다운로드·CRC 확인 및 18개 고정 비교 완료. 다른 운전 환경으로의 무보정 전이 실패도 보존
 - [프레스 성능 개선 후보 실험](analysis/press_improvement/README.md): 2026-09-25 초반 6→8관측 창 후보가 정상 알림·21/21 탐지를 유지하며 F1 A 0.910→0.923, B 0.920→0.935. 탐색 결과이며 기본 모델은 유지
 - [Claude 2차 수정에 대한 Codex 재검수](analysis/press_implementation_review/codex_recheck_2.md): 2026-09-25 테스트 49개·깨끗한 클론 27/27 및 39/39·독립 재집계 통과. 실제 코드·모델 파일 변경과 기준값 출처도 확인. 보고서 작성은 보류

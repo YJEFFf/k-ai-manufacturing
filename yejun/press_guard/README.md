@@ -17,7 +17,9 @@
 | B | v1 | 0.920322 | 86 | 3/180 | 21/21 | 0.7초 |
 | B | v2 | **0.970990** | **31** | 3/180 | 21/21 | **0.5초** |
 
-미탐 감소율 A 55.6%, B 64.0%. 첫 경보 지연은 **기록 시작 기준**이며 실제 고장 발생 시각은 없다. A/B는 같은 이상 21구간을 재사용하므로 독립 검증 두 건이 아니다. 이미 본 이상 자료를 사용한 탐색 결과이며 수상·현장 성능 보장의 근거가 아니다.
+미탐 감소율 A 55.6%, B 64.0%. 첫 경보 지연은 **기록 시작 기준**이며 실제 고장 발생 시각은 없다.
+
+**A의 정상 알림 0/120은 유리한 조건에서 잰 값이다.** A의 정상 평가 구간(480~599구간, 01:00~01:17)은 정상 77분 중 가장 조용한 시간대다. v2 A 평가 구간 중 최대 점수가 보정 구간 중앙값을 넘는 것은 12/120이다(보정과 평가가 교환가능하면 약 60개, Mann–Whitney p=2.9e-11). B 평가 구간도 50/180으로 보정보다 조용하다. 오경보는 B의 3/180과 아래 시간순 비교의 420~479구간 2/60을 함께 본다. 분할은 바꾸지 않았다([루브릭 검수 R1](../analysis/press_rubric_review/README.md)). A/B는 같은 이상 21구간을 재사용하므로 독립 검증 두 건이 아니다. 이미 본 이상 자료를 사용한 탐색 결과이며 수상·현장 성능 보장의 근거가 아니다.
 
 - 정상 평가 구간을 300~359, 360~419, 420~479, 480~539, 540~599로 나눈 시간순 5회 비교에서도 F1 0.961938~0.971819. 정상 알림은 각 0·0·2·0·0/60으로 v1과 동일. 이상 자료는 다시 같은 21구간이다.
 - raw 정밀도 입력에서는 개선 유지. coarse B에서는 v2 정상 알림 **5/180**, v1 **4/180**으로 증가했다. 모든 입력 정밀도에서 오경보가 같다고 주장하면 안 된다.
@@ -45,7 +47,7 @@ CSV 필수 열: `TimeStamp, AI0_Vibration, AI1_Vibration, AI2_Current`. 기본 �
 export OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
 /opt/anaconda3/bin/python yejun/press_guard/train.py --rolling    # 학습·보정·저장·평가 (약 20초)
 /opt/anaconda3/bin/python yejun/press_guard/analyze.py            # 통합 비교·오류 조건·불확실성·업무량·그림 (약 5초)
-/opt/anaconda3/bin/python yejun/press_guard/audit.py              # 실행 검증 14개
+/opt/anaconda3/bin/python yejun/press_guard/audit.py              # 실행 검증 16개
 /opt/anaconda3/bin/python yejun/press_guard/verify.py             # 동결 기대값 비교 (--freeze 로 동결)
 PYTHON=/opt/anaconda3/bin/python bash yejun/press_guard/tools/clean_repro.sh # 커밋된 코드·기대값으로 새 클론 재현
 ```
@@ -77,13 +79,13 @@ v2의 미탐 감소 55행 중 위치 2~6에서 A 49행·B 51행, 위치 10 이�
 
 주 비교 기준은 α=1%다. B에서 α를 3%로 높이면 v2 정상 알림은 3→5구간(경보 행 3→7), 미탐은 31행으로 같고 F1은 0.970990→0.967687로 낮아진다. α=3%에서의 모델 간 비교도 v1 4/180 대 v2 5/180으로 표기한다. α=5%는 v1 6/180 대 v2 7/180이다.
 
-`contracts.py`는 학습·분석·검수·웹 코드, 필수 예측/집계/그림, 원본 비교표, 개별 검사 14개를 확인한다. 분석은 학습 실행에, audit는 코드·모델·분석 결과에 연결된다. 파일 변경·검사 누락·오래된 audit는 동결 근거로 사용할 수 없다. 기대값도 자체 해시와 검사 계약을 검증한다. 새 클론은 v1 주 모델 예측을 재생성하고, 기존 기준모델·LSTM 비교표는 커밋된 표의 해시를 확인해 재사용한다. LSTM 전체 재학습은 포함하지 않는다.
+`contracts.py`는 학습·분석·검수·웹 코드, 필수 예측/집계/그림, 원본 비교표, 개별 검사 16개를 확인한다. 분석은 학습 실행에, audit는 코드·모델·분석 결과에 연결된다. 파일 변경·검사 누락·오래된 audit는 동결 근거로 사용할 수 없다. 기대값도 자체 해시와 검사 계약을 검증한다. 새 클론은 v1 주 모델 예측을 재생성하고, 기존 기준모델·LSTM 비교표는 커밋된 표의 해시를 확인해 재사용한다. LSTM 전체 재학습은 포함하지 않는다.
 
 ## 웹 콘솔·검증 도구
 
 ```bash
 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/press_guard/serve.py --port 8765   # http://127.0.0.1:8765
-OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/press_guard/audit.py       # outputs/audit.json (실행 검증 14개)
+OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/press_guard/audit.py       # outputs/audit.json (실행 검증 16개)
 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/press_guard/benchmark.py   # outputs/benchmark.json (처리시간)
 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python -m pytest -q yejun/press_guard/test_guard.py yejun/press_guard/test_serve.py
 ```
