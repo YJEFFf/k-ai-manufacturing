@@ -4,6 +4,7 @@
     python run_all.py                       # data/ 의 CSV 또는 저장소 데이터셋 ZIP 자동 탐색
     python run_all.py --data /경로/Dataset_자원\\ 최적화\\ AI\\ 데이터셋.zip
     python run_all.py --stages diagnostics,models   # 일부 단계만
+    python run_all.py --stages predict              # 추론만: 저장된 모델로 시험 예측 재생성(학습 없음, 수 초)
 """
 from __future__ import annotations
 
@@ -26,7 +27,7 @@ from powerguard import config as C  # noqa: E402
 from powerguard import data as D  # noqa: E402
 from powerguard import io  # noqa: E402
 
-STAGES = ["diagnostics", "models", "peak", "analysis", "ablation", "field", "external", "figures", "digest"]
+STAGES = ["diagnostics", "models", "predict", "peak", "analysis", "ablation", "field", "external", "figures", "digest"]
 
 
 def versions() -> dict:
@@ -108,6 +109,10 @@ def main(argv=None) -> int:
         from powerguard import cv as CV
         return CV.build_frames(iv)
 
+    def s_predict():
+        from powerguard import stage_predict
+        stage_predict.run(iv, _frames(), _selection())
+
     def s_peak():
         from powerguard import stage_peak
         stage_peak.run(iv, _frames(), _selection())
@@ -134,6 +139,7 @@ def main(argv=None) -> int:
 
     stage("diagnostics", s_diag)
     stage("models", s_models)
+    stage("predict", s_predict)
     stage("peak", s_peak)
     stage("analysis", s_analysis)
     stage("ablation", s_ablation)

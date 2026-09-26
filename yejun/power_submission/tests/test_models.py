@@ -50,3 +50,30 @@ def test_lags_use_observed_values_on_train_excluded_day(base):
     t = pd.Timestamp("2021-07-09 10:00")
     assert X.at[t, "lag_0"] == iv.at[t - pd.Timedelta(minutes=15), "y"]
     assert np.isfinite(X.loc["2021-07-09", "lag_0"].iloc[1:]).all()
+
+
+def test_saved_models_round_trip(base, tmp_path, monkeypatch):
+    """추론 전용 단계: 게이트·하이브리드 모델을 joblib으로 저장·복원해도 예측이 같다(파일 SHA-256 목록 포함)."""
+    import joblib
+
+    from powerguard import config as C
+    from powerguard import registry as R
+    from powerguard import stage_models as SM
+    iv, fr = base
+    monkeypatch.setattr(C, "ARTIFACT_DIR", tmp_path)
+    monkeypatch.setattr(SM, "MODEL_DIR", tmp_path / "models")
+    X = fr["B"]
+    tr = CV.train_mask(X.index, iv["trainable"].to_numpy(), pd.Timestamp("2021-07-05"), "B")
+    ev = (X.index >= pd.Timestamp("2021-07-05")) & (X.index < pd.Timestamp("2021-07-12"))
+    store = []
+    for name in ("M7c_hybrid_coolmono", "M1_lgbm"):
+        m = R.candidates("B")[name]()
+        m.fit(X.loc[tr], iv["y_train"][tr])
+        store.append((pd.Timestamp("2021-07-05"), pd.Timestamp("2021-07-12"), m))
+        SM.save_models("B", name, store[-1:])
+    import json
+    man = json.loads((tmp_path / "models" / "manifest.json").read_text(encoding="utf-8"))["models"]
+    assert len(man) == 2 and all(len(x["sha256"]) == 64 for x in man)
+    for (_, _, m), entry in zip(store, man):
+        m2 = joblib.load(tmp_path / entry["file"])
+        np.testing.assert_array_equal(m.predict(X.loc[ev]), m2.predict(X.loc[ev]))

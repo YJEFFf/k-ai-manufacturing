@@ -416,7 +416,7 @@ def run(iv: pd.DataFrame, frames: dict, selection: dict) -> dict:
         ("alarm_next_hour", "p_next_hour_peak ≥ τ(교차검증 F1 최대)이면 1, 확률 결측이면 빈칸"),
         ("peak_T", "피크 기준(시험 시작 전 학습 가능 구간 q95)"),
     ]
-    io.write_csv(pd.DataFrame(cols_doc, columns=["column", "meaning"]), io.out_dir("test") / "predictions_test_columns.csv")
+    io.write_csv(pd.DataFrame(cols_doc, columns=["column", "meaning"]), io.out_dir("test") / "test_prediction_columns.csv")
     C.ARTIFACT_DIR.mkdir(parents=True, exist_ok=True)
     pd.DataFrame({"P_residual_sim": prob_res, "P_lgbm_classifier": prob_clf, "P_climatology": prob_clim,
                   **({prob_method: p_star} if prob_method not in ("P_residual_sim", "P_lgbm_classifier") else {}),

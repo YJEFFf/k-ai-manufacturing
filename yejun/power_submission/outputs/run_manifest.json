@@ -8,64 +8,71 @@
  "seed": 20260925,
  "stages_last_run": {
   "diagnostics": {
-   "started_epoch": 1790415139.264759,
-   "finished_epoch": 1790415140.061169,
-   "finished_at": "2026-09-26T19:39:24",
+   "started_epoch": 1790421939.463647,
+   "finished_epoch": 1790421940.27098,
+   "finished_at": "2026-09-26T21:35:20",
    "seconds": 0.8
   },
   "models": {
-   "started_epoch": 1790415140.061184,
-   "finished_epoch": 1790415657.849614,
-   "finished_at": "2026-09-26T19:39:24",
-   "seconds": 517.8
+   "started_epoch": 1790421940.270995,
+   "finished_epoch": 1790422565.481893,
+   "finished_at": "2026-09-26T21:35:20",
+   "seconds": 625.2
   },
   "peak": {
-   "started_epoch": 1790415657.849647,
-   "finished_epoch": 1790415690.121402,
-   "finished_at": "2026-09-26T19:39:24",
-   "seconds": 32.3
+   "started_epoch": 1790422566.046846,
+   "finished_epoch": 1790422599.421982,
+   "finished_at": "2026-09-26T21:35:20",
+   "seconds": 33.4
   },
   "analysis": {
-   "started_epoch": 1790415690.121423,
-   "finished_epoch": 1790415790.333244,
-   "finished_at": "2026-09-26T19:39:24",
-   "seconds": 100.2
+   "started_epoch": 1790422599.422015,
+   "finished_epoch": 1790422696.136443,
+   "finished_at": "2026-09-26T21:35:20",
+   "seconds": 96.7
   },
   "ablation": {
-   "started_epoch": 1790415790.333264,
-   "finished_epoch": 1790419106.160384,
-   "finished_at": "2026-09-26T19:39:24",
-   "seconds": 3315.8
+   "started_epoch": 1790422696.136463,
+   "finished_epoch": 1790426062.97249,
+   "finished_at": "2026-09-26T21:35:20",
+   "seconds": 3366.8
   },
   "field": {
-   "started_epoch": 1790419106.160401,
-   "finished_epoch": 1790419114.613078,
-   "finished_at": "2026-09-26T19:39:24",
-   "seconds": 8.5
+   "started_epoch": 1790426062.972511,
+   "finished_epoch": 1790426070.356298,
+   "finished_at": "2026-09-26T21:35:20",
+   "seconds": 7.4
   },
   "external": {
-   "started_epoch": 1790419114.613102,
-   "finished_epoch": 1790419161.944952,
-   "finished_at": "2026-09-26T19:39:24",
-   "seconds": 47.3
+   "started_epoch": 1790426070.356322,
+   "finished_epoch": 1790426117.463459,
+   "finished_at": "2026-09-26T21:35:20",
+   "seconds": 47.1
   },
   "figures": {
-   "started_epoch": 1790419161.944974,
-   "finished_epoch": 1790419164.907046,
-   "finished_at": "2026-09-26T19:39:24",
-   "seconds": 3.0
+   "started_epoch": 1790426117.463478,
+   "finished_epoch": 1790426120.190112,
+   "finished_at": "2026-09-26T21:35:20",
+   "seconds": 2.7
   },
   "digest": {
-   "started_epoch": 1790419164.90707,
-   "finished_epoch": 1790419164.961527,
-   "finished_at": "2026-09-26T19:39:24",
+   "started_epoch": 1790426120.190132,
+   "finished_epoch": 1790426120.297877,
+   "finished_at": "2026-09-26T21:35:20",
    "seconds": 0.1
+  },
+  "predict": {
+   "started_epoch": 1790422565.48192,
+   "finished_epoch": 1790422566.046828,
+   "finished_at": "2026-09-26T21:35:20",
+   "seconds": 0.6
   }
  },
  "last_invocation": {
   "stages": [
    "diagnostics",
    "models",
+   "predict",
    "peak",
    "analysis",
    "ablation",
@@ -77,27 +84,29 @@
   "argv": [],
   "timings_s": {
    "diagnostics": 0.8,
-   "models": 517.8,
-   "peak": 32.3,
-   "analysis": 100.2,
-   "ablation": 3315.8,
-   "field": 8.5,
-   "external": 47.3,
-   "figures": 3.0,
+   "models": 625.2,
+   "predict": 0.6,
+   "peak": 33.4,
+   "analysis": 96.7,
+   "ablation": 3366.8,
+   "field": 7.4,
+   "external": 47.1,
+   "figures": 2.7,
    "digest": 0.1
   },
-  "total_s": 4027.0,
-  "started_at": "2026-09-26T18:32:17",
-  "finished_at": "2026-09-26T19:39:24",
-  "started_epoch": 1790415137.958642,
-  "finished_epoch": 1790419164.962651,
+  "total_s": 4182.2,
+  "started_at": "2026-09-26T20:25:38",
+  "finished_at": "2026-09-26T21:35:20",
+  "started_epoch": 1790421938.135884,
+  "finished_epoch": 1790426120.303119,
   "full_run": true,
-  "code_sha256": "94a0d568cc9ab1d6ffc15c644e0fdc52760bf4b8677bad7fbf8ffa214aa19a32"
+  "code_sha256": "f15656bcd3186b956ad6fd1e09af9591c2d99f9f2a977de0262259c4bd2139ab"
  },
  "last_full_run": {
   "stages": [
    "diagnostics",
    "models",
+   "predict",
    "peak",
    "analysis",
    "ablation",
@@ -109,26 +118,27 @@
   "argv": [],
   "timings_s": {
    "diagnostics": 0.8,
-   "models": 517.8,
-   "peak": 32.3,
-   "analysis": 100.2,
-   "ablation": 3315.8,
-   "field": 8.5,
-   "external": 47.3,
-   "figures": 3.0,
+   "models": 625.2,
+   "predict": 0.6,
+   "peak": 33.4,
+   "analysis": 96.7,
+   "ablation": 3366.8,
+   "field": 7.4,
+   "external": 47.1,
+   "figures": 2.7,
    "digest": 0.1
   },
-  "total_s": 4027.0,
-  "started_at": "2026-09-26T18:32:17",
-  "finished_at": "2026-09-26T19:39:24",
-  "started_epoch": 1790415137.958642,
-  "finished_epoch": 1790419164.962651,
+  "total_s": 4182.2,
+  "started_at": "2026-09-26T20:25:38",
+  "finished_at": "2026-09-26T21:35:20",
+  "started_epoch": 1790421938.135884,
+  "finished_epoch": 1790426120.303119,
   "full_run": true,
-  "code_sha256": "94a0d568cc9ab1d6ffc15c644e0fdc52760bf4b8677bad7fbf8ffa214aa19a32"
+  "code_sha256": "f15656bcd3186b956ad6fd1e09af9591c2d99f9f2a977de0262259c4bd2139ab"
  },
  "environment": {
   "cpu_count": 8,
-  "git_commit": "2f3190bf35ffd8e736d89aeabdcbd216b12f1e07"
+  "git_commit": "7f702b7eabd9e117f0dad752dbacacddf5aaf0aa"
  },
  "versions": {
   "python": "3.12.2",

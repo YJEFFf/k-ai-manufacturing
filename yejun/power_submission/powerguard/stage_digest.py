@@ -79,6 +79,9 @@ def run() -> dict:
         if key == "test_skill_chosen" and sel:
             t0 = t0[[m == sel["A" if tk.startswith("A") else "B"]["chosen"] for tk, m in zip(t0.task, t0.model)]]
         out[key] = {"source": rel, "rows": t0.round(4).to_dict("records")}
+    j = _read_json("test/inference_check.json")
+    if j:
+        out["inference_check"] = {"source": "test/inference_check.json", **j}
     j = _read_json("field/ratchet_risk_days_summary.json")
     if j:
         out["ratchet_risk_days"] = {"source": "field/ratchet_risk_days_summary.json", **j}

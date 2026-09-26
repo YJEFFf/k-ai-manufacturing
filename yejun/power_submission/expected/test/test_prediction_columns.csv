@@ -1,0 +1,11 @@
+column,meaning
+interval_start,행 색인: 15분 구간 시작 시각(값은 구간 종료 뒤 확인)
+actual,실측 15분 최대수요전력(원자료 단위)
+usable,평가 가능 구간(정전·결측이면 False)
+dayahead_M8_blend,"익일 예측(발행 D-1 17:00), 이 구간(목표)의 값"
+"dayahead_lo80, dayahead_hi80",익일 예측 80% 구간(롤링 Mondrian conformal)
+intraday_h1..h4_M7c_hybrid_coolmono,실시간 예측: 이 구간(목표)을 15·30·45·60분 전에 발행한 값
+"intraday_h4_lo80, intraday_h4_hi80",60분 전 예측의 80% 구간
+p_next_hour_peak,발행 구간 기준: 이 구간 종료 시점에 발행한 '다음 1시간(다음 네 구간) 최대 ≥ peak_T' 확률
+alarm_next_hour,"p_next_hour_peak ≥ τ(교차검증 F1 최대)이면 1, 확률 결측이면 빈칸"
+peak_T,피크 기준(시험 시작 전 학습 가능 구간 q95)

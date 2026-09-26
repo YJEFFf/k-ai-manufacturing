@@ -1,0 +1,46 @@
+{
+ "n_model_files": 48,
+ "tasks": {
+  "B": {
+   "model": "M8_blend",
+   "members": [
+    "M1_lgbm",
+    "M7c_hybrid_coolmono"
+   ],
+   "n": 4320,
+   "max_abs_diff_vs_training_run": 4.99886e-05
+  },
+  "A1": {
+   "model": "M7c_hybrid_coolmono",
+   "members": [
+    "M7c_hybrid_coolmono"
+   ],
+   "n": 4320,
+   "max_abs_diff_vs_training_run": 4.99677e-05
+  },
+  "A2": {
+   "model": "M7c_hybrid_coolmono",
+   "members": [
+    "M7c_hybrid_coolmono"
+   ],
+   "n": 4320,
+   "max_abs_diff_vs_training_run": 4.99732e-05
+  },
+  "A3": {
+   "model": "M7c_hybrid_coolmono",
+   "members": [
+    "M7c_hybrid_coolmono"
+   ],
+   "n": 4320,
+   "max_abs_diff_vs_training_run": 4.99866e-05
+  },
+  "A4": {
+   "model": "M7c_hybrid_coolmono",
+   "members": [
+    "M7c_hybrid_coolmono"
+   ],
+   "n": 4320,
+   "max_abs_diff_vs_training_run": 5e-05
+  }
+ }
+}

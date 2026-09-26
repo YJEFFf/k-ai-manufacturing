@@ -63,8 +63,10 @@ def weekly_blocks(start: pd.Timestamp, end: pd.Timestamp, weekly: bool = True) -
 
 
 def run_split(X: pd.DataFrame, iv: pd.DataFrame, factory: Callable, task: str,
-              blocks: list[tuple[pd.Timestamp, pd.Timestamp]]) -> pd.Series:
-    """blocks의 각 (시작, 끝)마다 시작 이전의 학습 가능 구간으로 학습하고 그 블록을 예측한다."""
+              blocks: list[tuple[pd.Timestamp, pd.Timestamp]], store: list | None = None) -> pd.Series:
+    """blocks의 각 (시작, 끝)마다 시작 이전의 학습 가능 구간으로 학습하고 그 블록을 예측한다.
+
+    store가 주어지면 (시작, 끝, 학습된 모델)을 담는다(추론 전용 단계용 모델 저장)."""
     pred = pd.Series(np.nan, index=X.index)
     idx = X.index
     trainable = iv["trainable"].to_numpy()
@@ -77,6 +79,8 @@ def run_split(X: pd.DataFrame, iv: pd.DataFrame, factory: Callable, task: str,
         m = factory()
         m.fit(X.loc[tr], y_fit[tr])
         pred.loc[ev] = m.predict(X.loc[ev])
+        if store is not None:
+            store.append((s, e, m))
     return pred
 
 
@@ -94,8 +98,9 @@ def run_cv(X: pd.DataFrame, iv: pd.DataFrame, factory: Callable, task: str, week
     return pred
 
 
-def run_test(X: pd.DataFrame, iv: pd.DataFrame, factory: Callable, task: str, weekly: bool = True) -> pd.Series:
-    return run_split(X, iv, factory, task, weekly_blocks(C.TEST_START, C.TEST_END, weekly))
+def run_test(X: pd.DataFrame, iv: pd.DataFrame, factory: Callable, task: str, weekly: bool = True,
+             store: list | None = None) -> pd.Series:
+    return run_split(X, iv, factory, task, weekly_blocks(C.TEST_START, C.TEST_END, weekly), store=store)
 
 
 def fold_of(index: pd.DatetimeIndex) -> np.ndarray:

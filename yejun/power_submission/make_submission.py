@@ -1,12 +1,14 @@
-"""재현용 제출 ZIP 구성: 코드·테스트·기대값·산출물(시험 예측 파일 포함)·원본 CSV와 파일별 SHA-256 목록.
+"""재현용 제출 ZIP 구성: 코드·테스트·기대값·산출물(시험 예측 파일 포함)·원본 CSV·저장된 선택 모델과 파일별 SHA-256 목록.
 
 사용:
     python make_submission.py                         # ../power_submission_package.zip
     python make_submission.py --out 경로.zip --with-external "/경로/데이터셋"   # 외부 KAMP ZIP 3개도 data/external/에
 
-ZIP을 풀고 `python run_all.py`(원본은 data/에, 외부 ZIP을 넣었다면 data/external/에서 자동으로 찾음)
-→ `python -m pytest -q tests` → `python verify.py --require-fresh`(풀기만 하고 실행하지 않은 사본은 실패).
-내부 검수 기록(reviews/)은 기본으로 빼며 `--include-reviews`로 넣는다.
+ZIP을 풀고
+- 추론만: `python run_all.py --stages predict`(저장된 모델로 시험 예측 재생성, 수 초)
+- 전체: `python run_all.py`(원본은 data/, 외부 ZIP은 data/external/에서 자동으로 찾음) → `python -m pytest -q tests`
+  → `python verify.py --require-fresh`(풀기만 하고 실행하지 않은 사본은 실패).
+작업 기록(PLAN.md, reviews/)은 기본으로 빼며 `--include-plan`, `--include-reviews`로 넣는다.
 """
 from __future__ import annotations
 
@@ -17,11 +19,12 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-INCLUDE = ["run_all.py", "verify.py", "make_submission.py", "requirements.txt", "environment.yml", "README.md", "PLAN.md",
-           "powerguard", "tests", "expected", "outputs", "data/okm_augumented_2021.csv"]
+INCLUDE = ["run_all.py", "verify.py", "make_submission.py", "requirements.txt", "environment.yml", "README.md",
+           "powerguard", "tests", "expected", "outputs", "data/okm_augumented_2021.csv", "artifacts/models"]
+ARTIFACT_GLOBS = ["artifacts/test_*.csv.gz"]  # 추론 확인(학습 때 예측과 비교)에 필요한 시험 예측
 EXTERNAL = ["Dataset_표면처리 자원최적화 AI 데이터셋.zip", "Dataset_소성가공 자원최적화 AI 데이터셋.zip",
             "Dataset_생산계획 최적화 AI 데이터셋.zip"]
-SKIP_PARTS = {"__pycache__", ".pytest_cache", ".venv", "artifacts"}
+SKIP_PARTS = {"__pycache__", ".pytest_cache", ".venv"}
 
 
 def iter_files():
@@ -33,17 +36,23 @@ def iter_files():
             for f in sorted(p.rglob("*")):
                 if f.is_file() and not (set(f.relative_to(ROOT).parts) & SKIP_PARTS) and f.suffix != ".pyc":
                     yield f
+    for g in ARTIFACT_GLOBS:
+        yield from sorted(ROOT.glob(g))
 
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default=str(ROOT.parent / "power_submission_package.zip"))
     ap.add_argument("--with-external", default=None, help="외부 KAMP ZIP이 있는 폴더(#41·#46·#30을 data/external/에 넣는다)")
-    ap.add_argument("--include-reviews", action="store_true", help="내부 검수 기록(reviews/)도 넣는다(기본: 뺀다)")
+    ap.add_argument("--include-reviews", action="store_true", help="작업 검수 기록(reviews/)도 넣는다(기본: 뺀다)")
+    ap.add_argument("--include-plan", action="store_true", help="작업 계획 기록(PLAN.md)도 넣는다(기본: 뺀다)")
     args = ap.parse_args(argv)
     if args.include_reviews:
         INCLUDE.append("reviews")
-    missing = [m for m in ("data/okm_augumented_2021.csv", "outputs/test/predictions_test.csv") if not (ROOT / m).exists()]
+    if args.include_plan:
+        INCLUDE.append("PLAN.md")
+    missing = [m for m in ("data/okm_augumented_2021.csv", "outputs/test/predictions_test.csv", "artifacts/models/manifest.json")
+               if not (ROOT / m).exists()]
     if missing:
         print(f"필수 파일 없음: {missing} — run_all.py를 먼저 실행한다(원본은 --data로 한 번 주면 data/에 저장된다)")
         return 1

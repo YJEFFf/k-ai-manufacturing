@@ -254,7 +254,8 @@ def structural_sweep(iv: pd.DataFrame) -> pd.DataFrame:
 
 
 def run_test_all(iv: pd.DataFrame, frames: dict, models_by_task: dict, blend_members: dict,
-                 weekly: bool = True, log=print) -> tuple[pd.DataFrame, dict]:
+                 weekly: bool = True, log=print, save: dict | None = None) -> tuple[pd.DataFrame, dict]:
+    """save: {가족: [모델 이름]} — 그 모델들의 주간 재학습 모델을 artifacts/models/에 저장한다(추론 전용 단계용)."""
     y = iv["y"]
     usable = iv["usable"].to_numpy()
     rows, preds = [], {}
@@ -268,7 +269,10 @@ def run_test_all(iv: pd.DataFrame, frames: dict, models_by_task: dict, blend_mem
             if model == "M8_blend":
                 continue
             t0 = time.time()
-            p = CV.run_test(X, iv, reg[model], fam, weekly=weekly)
+            store = [] if (save and model in save.get(fam, [])) else None
+            p = CV.run_test(X, iv, reg[model], fam, weekly=weekly, store=store)
+            if store:
+                save_models(task, model, store)
             preds[task][model] = p
             _scores(y, p, usable, iv, rows, task, model, tb)
             log(f"  TEST {task} {model} {time.time() - t0:.1f}s")
@@ -278,6 +282,28 @@ def run_test_all(iv: pd.DataFrame, frames: dict, models_by_task: dict, blend_mem
             preds[task]["M8_blend"] = p
             _scores(y, p, usable, iv, rows, task, "M8_blend", tb)
     return pd.DataFrame(rows), preds
+
+
+MODEL_DIR = C.ARTIFACT_DIR / "models"
+
+
+def save_models(task: str, model: str, store: list) -> None:
+    """주간 재학습 모델(시험 구간)을 joblib으로 저장하고 목록(파일별 SHA-256)을 갱신한다."""
+    import hashlib
+    import json
+
+    import joblib
+    d = MODEL_DIR / task / model
+    d.mkdir(parents=True, exist_ok=True)
+    mp = MODEL_DIR / "manifest.json"
+    man = json.loads(mp.read_text(encoding="utf-8")) if mp.exists() else {"models": []}
+    man["models"] = [m for m in man["models"] if not (m["task"] == task and m["model"] == model)]
+    for s, e, m in store:
+        f = d / f"{s:%Y%m%d}.joblib"
+        joblib.dump(m, f, compress=3)
+        man["models"].append(dict(task=task, model=model, block_start=str(s), block_end=str(e),
+                                  file=str(f.relative_to(C.ARTIFACT_DIR)), sha256=hashlib.sha256(f.read_bytes()).hexdigest()))
+    mp.write_text(json.dumps(man, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
 
 
 def save_predictions(preds: dict, iv: pd.DataFrame, name: str) -> None:
@@ -357,7 +383,12 @@ def run(iv: pd.DataFrame, log=print) -> dict:
     save_predictions(oof, iv, "oof")
 
     models_by_task = {t: list(oof[t].keys()) for t in TASKS}
-    tm, preds = run_test_all(iv, frames, models_by_task, blend_members, weekly=True, log=log)
+    # 추론 전용 단계용: 선택 모델(앙상블이면 구성원)의 시험 주간 재학습 모델을 저장한다
+    save = {fam: (sel[fam]["blend_members"] if sel[fam]["chosen"] == "M8_blend" else [sel[fam]["chosen"]]) for fam in sel}
+    mp = MODEL_DIR / "manifest.json"
+    if mp.exists():
+        mp.unlink()
+    tm, preds = run_test_all(iv, frames, models_by_task, blend_members, weekly=True, log=log, save=save)
     tdir = io.out_dir("test")
     io.write_csv(tm, tdir / "test_metrics.csv")
     save_predictions(preds, iv, "test")
