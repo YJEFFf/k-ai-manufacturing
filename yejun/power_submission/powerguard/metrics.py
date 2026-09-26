@@ -6,11 +6,14 @@ import pandas as pd
 from sklearn.metrics import average_precision_score, brier_score_loss, roc_auc_score
 
 
-def regression(y, p, T: float | None = None, mask_work=None) -> dict:
+def regression(y, p, T=None, mask_work=None) -> dict:
+    """T: 피크 기준(스칼라 또는 y와 같은 길이의 배열)."""
     y = np.asarray(y, float)
     p = np.asarray(p, float)
     ok = np.isfinite(y) & np.isfinite(p)
     y, p = y[ok], p[ok]
+    if T is not None and np.ndim(T):
+        T = np.asarray(T, float)[ok]
     e = p - y
     out = {
         "n": int(len(y)),
@@ -29,6 +32,7 @@ def regression(y, p, T: float | None = None, mask_work=None) -> dict:
     if mask_work is not None:
         w = np.asarray(mask_work, bool)[ok]
         out["MAE_work"] = float(np.mean(np.abs(e[w]))) if w.any() else np.nan
+        out["RMSE_work"] = float(np.sqrt(np.mean(e[w] ** 2))) if w.any() else np.nan
     return out
 
 
@@ -101,8 +105,9 @@ def daily_peak(df: pd.DataFrame, pred_col: str, y_col: str = "y") -> dict:
     for d, x in g:
         if len(x) < 80:
             continue
-        ia, ip = x[y_col].to_numpy().argmax(), x[pred_col].to_numpy().argmax()
-        rows.append(dict(date=d, ymax=x[y_col].max(), pmax=x[pred_col].max(), slot_err=abs(int(ia) - int(ip))))
+        ia, ip = x[y_col].idxmax(), x[pred_col].idxmax()  # 시각으로 비교(결측 구간이 있어도 슬롯이 어긋나지 않음)
+        rows.append(dict(date=d, ymax=x[y_col].max(), pmax=x[pred_col].max(),
+                         slot_err=abs(int((ia - ip) / pd.Timedelta(minutes=15)))))
     r = pd.DataFrame(rows)
     if r.empty:
         return {}
@@ -119,7 +124,6 @@ def paired_day_bootstrap(y: pd.Series, p_a: pd.Series, p_b: pd.Series, mask: np.
     """
     d = pd.DataFrame({"y": y, "a": p_a, "b": p_b})[mask].dropna()
     day = d.index.normalize()
-    days = pd.DatetimeIndex(sorted(day.unique()))
     if stat == "daymax_MAE":
         g = d.groupby(day)
         per_day = pd.DataFrame({"ea": (g["a"].max() - g["y"].max()).abs(), "eb": (g["b"].max() - g["y"].max()).abs(),

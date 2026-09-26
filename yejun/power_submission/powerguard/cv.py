@@ -28,14 +28,23 @@ def eval_mask(index: pd.DatetimeIndex, usable: np.ndarray, start: pd.Timestamp, 
     return usable & (index >= start) & (index < end)
 
 
-def build_frames(iv: pd.DataFrame, issue_hour_b: int = 17, oracle: bool = False) -> dict:
-    """과제별 특징 행렬: {'B': X_B, 'A1'..'A4': X_A(h)}. 행 = 목표 구간."""
+def build_frames(iv: pd.DataFrame, issue_hour_b: int = 17, oracle: bool = False, analog_key: tuple = F.ANALOG_KEY,
+                 regime_noise: tuple[float, int] | None = None, tasks=("B", "A1", "A2", "A3", "A4")) -> dict:
+    """과제별 특징 행렬: {'B': X_B, 'A1'..'A4': X_A(h)}. 행 = 목표 구간.
+
+    analog_key: 유사일 키(절제용). regime_noise=(비율, 난수): 계획 체제 오류 민감도(모든 기간에 같은 오류).
+    """
     st = F.schedule_table(iv)
-    xb = F.dayahead_features(iv, st, issue_hour=issue_hour_b, oracle_plan=oracle)
-    xmid = xb if issue_hour_b >= 24 else F.dayahead_features(iv, st, issue_hour=24, oracle_plan=oracle)
+    if regime_noise is not None:
+        st = F.perturb_regime(st, *regime_noise)
+    xb = F.dayahead_features(iv, st, issue_hour=issue_hour_b, oracle_plan=oracle, analog_key=analog_key)
+    if not any(t.startswith("A") for t in tasks):
+        return {"B": xb}
+    xmid = xb if issue_hour_b >= 24 else F.dayahead_features(iv, st, issue_hour=24, oracle_plan=oracle, analog_key=analog_key)
     frames = {"B": xb}
     for h in (1, 2, 3, 4):
-        frames[f"A{h}"] = F.intraday_features(iv, h, xmid)
+        if f"A{h}" in tasks:
+            frames[f"A{h}"] = F.intraday_features(iv, h, xmid)
     return frames
 
 

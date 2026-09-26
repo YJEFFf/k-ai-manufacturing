@@ -56,7 +56,8 @@ def _read_member(path, contains: str, **kw) -> tuple[pd.DataFrame, str]:
 
 def provenance_41() -> dict:
     a, sha41 = _read_member(_zip("41"), "")
-    b, _ = _read_member(_zip("27"), "okm")
+    from . import data as D  # #27은 이번 실행의 원본(--data·data/·환경변수)과 같은 자료를 쓴다
+    b = pd.read_csv(_io.BytesIO(D.read_bytes(D.resolve_source(C.DATA_PATH))), encoding="utf-8-sig")
     bad = sorted(b.loc[b["시간"] > 23, "날짜"].unique())
     bb = b[~b["날짜"].isin(bad)].reset_index(drop=True)
     P = bb[["15분", "30분", "45분", "60분"]].to_numpy().reshape(-1).astype(float)

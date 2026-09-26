@@ -1,10 +1,12 @@
-"""S6: 조건별 성능·부트스트랩·오차 조건 규칙·SHAP·피크 조건·계획 정보가치·절제."""
+"""S6: 조건별 성능·기술점수·오차 조건 규칙·SHAP·피크 조건·FN/FP 집중 조건·계획 정보가치·절제."""
 from __future__ import annotations
 
+import json
 import time
 
 import numpy as np
 import pandas as pd
+from scipy import stats
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeRegressor, _tree
 
@@ -20,11 +22,50 @@ from . import stage_models as SM
 
 TASKS = ["B", "A1", "A2", "A3", "A4"]
 
+# 조건의 발행 시점 가용성: 사전(달력) / 전날 확정 가정(운영일정) / 예보 대리(기상) / 사후(실적·정답 기반)
+AVAILABILITY = {
+    "month": "사전", "daytype4": "사전", "window": "사전", "holiday_or_vacation": "전날 확정 가정",
+    "first_day_after_off": "사전", "regime": "전날 확정 가정", "regime_prev": "전날 확정 가정",
+    "work_dayshift": "전날 확정 가정", "holiday_work": "전날 확정 가정", "calendar_operation_mismatch": "전날 확정 가정",
+    "analog_atypical": "발행 시점", "temp_bin": "예보 대리", "prod_bin": "사후(실적)", "prod_change_bin": "사후(실적)",
+    "running_without_plan": "사후(정답)", "plan_but_idle": "사후(정답)",
+}
+RULE_CONDITIONS = ["daytype4", "regime", "regime_prev", "work_dayshift", "holiday_work", "calendar_operation_mismatch",
+                   "analog_atypical", "first_day_after_off", "window", "temp_bin"]  # 규칙 탐색에 쓰는 사전 목록(월 제외)
+
+
+def _cvmask(iv: pd.DataFrame) -> np.ndarray:
+    y = iv["y"]
+    usable = iv["usable"].to_numpy()
+    m = np.zeros(len(y), bool)
+    for _, s, e in CV.cv_blocks():
+        m |= CV.eval_mask(y.index, usable, s, e)
+    return m
+
+
+def _temask(iv: pd.DataFrame) -> np.ndarray:
+    return CV.eval_mask(iv.index, iv["usable"].to_numpy(), C.TEST_START, C.TEST_END)
+
+
+def build_model(name: str, fam: str, feats: list[str], selection: dict | None = None):
+    """이름 → 주어진 특징 목록으로 만든 모델 생성 함수(절제용)."""
+    base = name.split("_")[0]
+    if base == "M1":
+        return lambda: M.gated(M.LGBModel(feats, objective="huber", alpha=10.0), fam)
+    if base == "M7":
+        return lambda: M.gated(M.Hybrid(feats, fam), fam)
+    if base == "M7c":
+        return lambda: M.gated(M.Hybrid(feats, fam, monotone=R.COOL_MONO), fam)
+    if base == "M8":
+        mem = selection[fam]["blend_members"]
+        return lambda: M.Blend([build_model(m, fam, feats, selection)() for m in mem], [0.5, 0.5])
+    return R.factory(fam, name, selection)
+
 
 # ---------------------------------------------------------------- 조건 표
 
 def condition_table(iv: pd.DataFrame, st: pd.DataFrame) -> pd.DataFrame:
-    """구간별 해석용 조건(사후 분석 전용, 모델 입력 아님)."""
+    """구간별 해석용 조건(모델 입력 아님). 가용성은 AVAILABILITY에 기록한다."""
     idx = iv.index
     day = idx.normalize()
     slot = iv["slot"].to_numpy()
@@ -51,9 +92,18 @@ def condition_table(iv: pd.DataFrame, st: pd.DataFrame) -> pd.DataFrame:
     y = iv["y_raw"]
     c["running_without_plan"] = ((prod < 100) & (y > 100)).astype(int)
     c["plan_but_idle"] = ((prod >= 500) & (y < 40)).astype(int)
-    c["temp_bin"] = pd.cut(iv["temp"], [-50, 10, 20, 26, 30, 50], labels=["<10", "10-20", "20-26", "26-30", "30+"]).astype(str)
+    c["temp_bin"] = pd.cut(iv["temp"], [-50, 20, 26, 30, 50], labels=["<20", "20-26", "26-30", "30+"]).astype(str)
     c["holiday_or_vacation"] = (iv["holiday"].to_numpy() | (c["regime"].to_numpy() == 0)).astype(int)
     c["first_day_after_off"] = (c["daytype4"] == 0).astype(int)
+    c["holiday_work"] = (iv["holiday"].to_numpy() & (c["regime"].to_numpy() == 2)).astype(int)
+    # 달력–실제 가동 불일치: 달력상 '휴무 다음 평일'인데 전날 가동, 또는 '연속 평일'인데 전날 정지·부분
+    mis = ((c["daytype4"] == 0) & (c["regime_prev"] == 2)) | ((c["daytype4"] == 1) & (c["regime_prev"] < 2))
+    c["calendar_operation_mismatch"] = mis.astype(int)
+    # 익일 유사일(발행 D-1 17:00, k=2)에 전날 체제가 다른 날이 섞였는가(야간조 이월 모양이 다른 유사일)
+    ia = F.analog_indices(iv, st, 2, "regime", 2)
+    rp = st["regime_prev"].to_numpy()
+    atyp = np.array([any(j >= 0 and rp[j] != rp[i] for j in ia[i]) for i in range(len(ia))], dtype=int)
+    c["analog_atypical"] = pd.Series(atyp, index=st.index).reindex(day).to_numpy()
     return c
 
 
@@ -73,89 +123,211 @@ def by_condition(y, preds: dict, cond: pd.DataFrame, mask: np.ndarray, cols: lis
     return pd.DataFrame(rows)
 
 
-# ---------------------------------------------------------------- 규칙 탐색
-
-def tree_rules(X: pd.DataFrame, target: np.ndarray, max_depth: int = 3, min_leaf: int = 150) -> list[dict]:
-    t = DecisionTreeRegressor(max_depth=max_depth, min_samples_leaf=min_leaf, random_state=C.SEED).fit(X, target)
-    tr = t.tree_
-    names = list(X.columns)
-    out = []
-    overall = float(np.mean(target))
-
-    def walk(node, conds):
-        if tr.feature[node] == _tree.TREE_UNDEFINED:
-            out.append(dict(rule=" & ".join(conds) if conds else "(전체)", n=int(tr.n_node_samples[node]),
-                            mean_abs_err=float(tr.value[node][0][0]), ratio=float(tr.value[node][0][0] / overall)))
-            return
-        f = names[tr.feature[node]]
-        th = tr.threshold[node]
-        walk(tr.children_left[node], conds + [f"{f} <= {th:.2f}"])
-        walk(tr.children_right[node], conds + [f"{f} > {th:.2f}"])
-
-    walk(0, [])
-    return sorted(out, key=lambda r: -r["ratio"])
-
-
-def rule_stability(X: pd.DataFrame, target: np.ndarray, days: np.ndarray, n_rep: int = 100) -> pd.DataFrame:
-    """날짜 부트스트랩마다 트리를 다시 맞추고 첫 두 분할 변수의 선택 빈도를 센다."""
+def _skill_boot(y: np.ndarray, pm: np.ndarray, pb: np.ndarray, days: np.ndarray, n_boot: int = 500) -> tuple:
+    d = pd.DataFrame({"d": days, "a": (pm - y) ** 2, "b": (pb - y) ** 2}).groupby("d").sum()
+    A, B = d["a"].to_numpy(), d["b"].to_numpy()
+    if B.sum() == 0:
+        return np.nan, np.nan, np.nan
+    point = 1 - np.sqrt(A.sum() / B.sum())
     rng = np.random.default_rng(C.SEED)
-    ud = np.unique(days)
-    cnt = {}
-    for _ in range(n_rep):
-        pick = rng.choice(ud, len(ud), replace=True)
-        ix = np.concatenate([np.where(days == d)[0] for d in pick])
-        t = DecisionTreeRegressor(max_depth=2, min_samples_leaf=150, random_state=C.SEED).fit(X.iloc[ix], target[ix])
-        feats = {X.columns[f] for f in t.tree_.feature if f >= 0}
-        for f in feats:
-            cnt[f] = cnt.get(f, 0) + 1
-    return pd.Series(cnt, name="selected_share").div(n_rep).sort_values(ascending=False).reset_index().rename(
-        columns={"index": "feature"})
+    bs = []
+    for _ in range(n_boot):
+        ix = rng.integers(0, len(A), len(A))
+        if B[ix].sum() > 0:
+            bs.append(1 - np.sqrt(A[ix].sum() / B[ix].sum()))
+    return float(point), float(np.quantile(bs, 0.05)), float(np.quantile(bs, 0.95))
 
+
+def condition_skill(iv: pd.DataFrame, cond: pd.DataFrame, selection: dict) -> pd.DataFrame:
+    """조건 × 모델 × 기간(교차검증·시험): 표본 수·날짜 수·MAE·편향·최강 기준 대비 RMSE 기술점수와 90% 구간."""
+    y = iv["y"]
+    cvm = pd.read_csv(C.OUTPUT_DIR / "cv" / "cv_metrics.csv")
+    cols = ["work_dayshift", "regime", "regime_prev", "daytype4", "window", "temp_bin", "holiday_work",
+            "calendar_operation_mismatch", "analog_atypical", "first_day_after_off", "month"]
+    rows = []
+    for task, best_bl_override in (("B", None), ("A4", None), ("B", "BL3_profile"), ("A4", "BL3_profile")):
+        fam = "A" if task.startswith("A") else "B"
+        pooled = cvm[(cvm.task == task) & (cvm.split == "pooled")].set_index("model")["RMSE"]
+        # 기준: 교차검증 최강 기준모델(주), 프로파일 BL3(시험에서 강했던 단순 기준과의 비교, 설명용)
+        best_bl = best_bl_override or pooled[[m for m in pooled.index if m.startswith("BL")]].idxmin()
+        if best_bl_override and best_bl_override == pooled[[m for m in pooled.index if m.startswith("BL")]].idxmin():
+            continue
+        models = list(dict.fromkeys([selection[fam]["chosen"], "M1_lgbm", best_bl]))
+        for per, mask, src in (("cv", _cvmask(iv), "oof"), ("test", _temask(iv), "test")):
+            pr = SM.load_predictions(src, task).reindex(y.index)
+            for m in models:
+                if m not in pr or (best_bl_override and m == best_bl):
+                    continue
+                for col in cols:
+                    for val, ix in cond[mask].groupby(col).groups.items():
+                        mm = np.zeros(len(y), bool)
+                        mm[y.index.get_indexer(ix)] = True
+                        mm &= pr[m].notna().to_numpy() & pr[best_bl].notna().to_numpy()
+                        if mm.sum() < 40:
+                            continue
+                        yy, pa, pb = y.to_numpy()[mm], pr[m].to_numpy()[mm], pr[best_bl].to_numpy()[mm]
+                        sk, lo, hi = _skill_boot(yy, pa, pb, y.index[mm].normalize().to_numpy()) if m != best_bl else (0.0, 0.0, 0.0)
+                        rows.append(dict(task=task, model=m, baseline=best_bl, period=per, condition=col, value=str(val),
+                                         availability=AVAILABILITY.get(col, ""), n=int(mm.sum()),
+                                         days=int(len(np.unique(y.index[mm].normalize()))),
+                                         MAE=float(np.mean(np.abs(pa - yy))), RMSE=float(np.sqrt(np.mean((pa - yy) ** 2))),
+                                         bias=float(np.mean(pa - yy)), skill_vs_baseline=sk, skill_ci90_lo=lo, skill_ci90_hi=hi))
+    return pd.DataFrame(rows)
+
+
+# ---------------------------------------------------------------- 규칙 탐색(교차검증에서 찾고 시험에서 재현 확인)
 
 def encode_conditions(cond: pd.DataFrame) -> pd.DataFrame:
     X = pd.DataFrame(index=cond.index)
-    for c in ["daytype4", "regime", "regime_prev", "work_dayshift", "running_without_plan", "plan_but_idle",
-              "holiday_or_vacation", "first_day_after_off", "month"]:
+    for c in ["daytype4", "regime", "regime_prev", "work_dayshift", "holiday_work", "calendar_operation_mismatch",
+              "analog_atypical", "first_day_after_off"]:
         X[c] = cond[c].astype(float)
-    for w in cond["window"].unique():
+    for w in sorted(cond["window"].unique()):
         if w != "steady":
             X[f"win_{w}"] = (cond["window"] == w).astype(float)
-    X["prod_level"] = cond["prod_bin"].map({"0": 0, "1-500": 1, "500-1500": 2, "1500+": 3}).astype(float)
-    X["prod_change"] = cond["prod_change_bin"].map({"<100": 0, "100-1000": 1, "1000+": 2}).astype(float)
-    X["temp_level"] = cond["temp_bin"].map({"<10": 0, "10-20": 1, "20-26": 2, "26-30": 3, "30+": 4}).astype(float)
+    X["temp_level"] = cond["temp_bin"].map({"<20": 0, "20-26": 1, "26-30": 2, "30+": 3}).astype(float)
     return X.fillna(-1)
+
+
+def _leaves(tree: DecisionTreeRegressor, names: list[str]) -> list[tuple[str, list]]:
+    tr = tree.tree_
+    out = []
+
+    def walk(node, conds):
+        if tr.feature[node] == _tree.TREE_UNDEFINED:
+            out.append((" & ".join(f"{f} {op} {th:.2f}" for f, op, th in conds) or "(전체)", conds))
+            return
+        f, th = names[tr.feature[node]], tr.threshold[node]
+        walk(tr.children_left[node], conds + [(f, "<=", th)])
+        walk(tr.children_right[node], conds + [(f, ">", th)])
+
+    walk(0, [])
+    return out
+
+
+def _apply(X: pd.DataFrame, conds: list) -> np.ndarray:
+    m = np.ones(len(X), bool)
+    for f, op, th in conds:
+        m &= (X[f].to_numpy() <= th) if op == "<=" else (X[f].to_numpy() > th)
+    return m
+
+
+def _mean_ci(v: np.ndarray, days: np.ndarray, n_boot: int = 500) -> tuple[float, float, float]:
+    if len(v) == 0:
+        return np.nan, np.nan, np.nan
+    d = pd.DataFrame({"d": days, "v": v}).groupby("d")["v"].agg(["sum", "size"])
+    S, N = d["sum"].to_numpy(), d["size"].to_numpy()
+    rng = np.random.default_rng(C.SEED)
+    bs = [S[ix].sum() / N[ix].sum() for ix in (rng.integers(0, len(S), len(S)) for _ in range(n_boot))]
+    return float(S.sum() / N.sum()), float(np.quantile(bs, 0.05)), float(np.quantile(bs, 0.95))
+
+
+def error_rules(iv: pd.DataFrame, cond: pd.DataFrame, selection: dict) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """목표 두 가지: (a) 최강 기준 대비 손실 |e_모델| − |e_기준|(양수 = 기준보다 나쁨), (b) 가동 주간 안의 |e_모델|.
+    교차검증에서 깊이 2 트리(잎 ≥150)로 규칙을 찾고, 같은 규칙을 시험에 적용해 재현 여부를 본다(월은 쓰지 않음)."""
+    y = iv["y"]
+    cvm = pd.read_csv(C.OUTPUT_DIR / "cv" / "cv_metrics.csv")
+    X = encode_conditions(cond)
+    cvmask, temask = _cvmask(iv), _temask(iv)
+    work = cond["work_dayshift"].to_numpy() == 1
+    rows, stab = [], []
+    for task in ("B", "A4"):
+        fam = "A" if task.startswith("A") else "B"
+        chosen = selection[fam]["chosen"]
+        pooled = cvm[(cvm.task == task) & (cvm.split == "pooled")].set_index("model")["RMSE"]
+        best_bl = pooled[[m for m in pooled.index if m.startswith("BL")]].idxmin()
+        po = SM.load_predictions("oof", task).reindex(y.index)
+        pt = SM.load_predictions("test", task).reindex(y.index)
+        for target in ("loss_vs_baseline", "abs_err_workday"):
+            def tgt(p, mask):
+                m = mask & p[chosen].notna().to_numpy() & p[best_bl].notna().to_numpy()
+                if target == "abs_err_workday":
+                    m &= work
+                e = np.abs(p[chosen].to_numpy() - y.to_numpy())
+                v = e - np.abs(p[best_bl].to_numpy() - y.to_numpy()) if target == "loss_vs_baseline" else e
+                return m, v
+            mc, vc = tgt(po, cvmask)
+            mt, vt = tgt(pt, temask)
+            tree = DecisionTreeRegressor(max_depth=2, min_samples_leaf=150, random_state=C.SEED).fit(X[mc], vc[mc])
+            daysc, dayst = y.index.normalize().to_numpy(), y.index.normalize().to_numpy()
+            oc = _mean_ci(vc[mc], daysc[mc])
+            ot = _mean_ci(vt[mt], dayst[mt])
+            rows.append(dict(task=task, model=chosen, baseline=best_bl, target=target, rule="(전체)", n_cv=int(mc.sum()),
+                             mean_cv=oc[0], ci_cv_lo=oc[1], ci_cv_hi=oc[2], n_test=int(mt.sum()), mean_test=ot[0],
+                             ci_test_lo=ot[1], ci_test_hi=ot[2], reproduced=np.nan))
+            for text, conds in _leaves(tree, list(X.columns)):
+                lc = mc & _apply(X, conds)
+                lt = mt & _apply(X, conds)
+                a = _mean_ci(vc[lc], daysc[lc])
+                b = _mean_ci(vt[lt], dayst[lt])
+                # 재현 판정 — 기준 대비 손실: 교차검증과 시험의 부호가 같고 시험 90% 구간이 0을 포함하지 않음.
+                # 가동 주간 오차: 교차검증 잎이 전체보다 크면(작으면) 시험 잎의 90% 구간이 시험 전체 평균보다 위(아래)
+                rep = np.nan
+                if lt.sum() >= 40 and np.isfinite(b[0]):
+                    if target == "loss_vs_baseline":
+                        rep = float(np.sign(a[0]) == np.sign(b[0]) and (b[1] > 0 or b[2] < 0))
+                    else:
+                        up = a[0] > oc[0]
+                        rep = float((b[1] > ot[0]) if up else (b[2] < ot[0]))
+                rows.append(dict(task=task, model=chosen, baseline=best_bl, target=target, rule=text, n_cv=int(lc.sum()),
+                                 mean_cv=a[0], ci_cv_lo=a[1], ci_cv_hi=a[2], n_test=int(lt.sum()), mean_test=b[0],
+                                 ci_test_lo=b[1], ci_test_hi=b[2], reproduced=rep))
+            # 안정성: 교차검증 날짜 부트스트랩에서 첫 분할 변수와 깊이 2 구조 전체의 재등장 비율
+            root = X.columns[tree.tree_.feature[0]] if tree.tree_.feature[0] >= 0 else None
+            struct = tuple(sorted(X.columns[f] for f in tree.tree_.feature if f >= 0))
+            rng = np.random.default_rng(C.SEED)
+            ud = np.unique(daysc[mc])
+            hits_root, hits_struct = 0, 0
+            for _ in range(100):
+                pick = rng.choice(ud, len(ud), replace=True)
+                ix = np.concatenate([np.where(mc & (daysc == d))[0] for d in pick])
+                tb = DecisionTreeRegressor(max_depth=2, min_samples_leaf=150, random_state=C.SEED).fit(X.iloc[ix], vc[ix])
+                r0 = X.columns[tb.tree_.feature[0]] if tb.tree_.feature[0] >= 0 else None
+                hits_root += int(r0 == root)
+                hits_struct += int(tuple(sorted(X.columns[f] for f in tb.tree_.feature if f >= 0)) == struct)
+            stab.append(dict(task=task, target=target, root_feature=root, root_recurrence=hits_root / 100,
+                             structure=" | ".join(struct), structure_recurrence=hits_struct / 100))
+    return pd.DataFrame(rows), pd.DataFrame(stab)
 
 
 # ---------------------------------------------------------------- 피크 조건(서술)
 
-def peak_conditions(iv: pd.DataFrame, st: pd.DataFrame, T: float) -> dict:
-    y = iv["y_train"]
+def _plateau(v: np.ndarray) -> float:
+    s = np.r_[v[36:40], v[42:48], v[53:60]]  # 09:00~11:59, 13:15~14:59(10:00 휴식·점심 제외)
+    return float(np.nanmean(s))
+
+
+def peak_conditions(iv: pd.DataFrame, st: pd.DataFrame, T: float) -> tuple[dict, pd.DataFrame]:
+    y = iv["y"]
     day = iv.index.normalize()
     full = st.index[(st["regime"] == 2) & (st["daytype3"] == 0)]
     ymat = y.to_numpy().reshape(-1, 96)
     dates = pd.DatetimeIndex(st.index)
-    rows = []
     tmax = iv["temp"].groupby(day).max()
+    rows = []
     for i, d in enumerate(dates):
-        if d not in full or np.isfinite(ymat[i]).sum() < 90:
+        if d not in full or np.isfinite(ymat[i]).sum() < 90 or d < C.MEASURED_START:
             continue
         v = ymat[i]
         am = int(np.nanargmax(v))
-        plateau = np.nanmean(np.r_[v[36:48], v[53:60]])
+        plateau = _plateau(v)
         startup = np.nanmax(v[30:36])
         rows.append(dict(date=d, month=d.month, period="test" if d >= C.TEST_START else "pre_test",
                          max_slot=am, daymax=float(np.nanmax(v)), plateau=float(plateau),
-                         startup_peak=float(startup), startup_excess=float(startup - plateau),
+                         startup_peak=float(startup), startup_excess=C.startup_excess(v),
                          type="startup" if 30 <= am <= 35 else ("plateau" if 36 <= am <= 63 else "other"),
-                         tmax=float(tmax.get(d, np.nan)), over_T=bool(np.nanmax(v) >= T)))
+                         tmax=float(tmax.get(d, np.nan)), over_T=bool(np.nanmax(v) >= T),
+                         monday_like=int(st["daytype4"].get(d) == 0), day_index=int((d - C.MEASURED_START).days)))
     dd = pd.DataFrame(rows)
-    out = {"n_days": int(len(dd))}
+    out = {"n_days": int(len(dd)), "n_days_by_month": dd.groupby("month").size().to_dict()}
     out["type_share_by_month"] = dd.groupby("month")["type"].value_counts(normalize=True).round(3).unstack().fillna(0).to_dict()
     out["startup_excess_by_month_median"] = dd.groupby("month")["startup_excess"].median().round(2).to_dict()
-    # 여름(6~9월) 가동일 고원 수준 vs 최고기온 기울기(날짜 부트스트랩)
-    for label, sub in (("summer_pre_test", dd[(dd.month.isin([6, 7, 8, 9])) & (dd.period == "pre_test")]),
-                       ("summer_test", dd[(dd.period == "test")]),
-                       ("spring_winter", dd[dd.month.isin([1, 2, 3, 4, 5])])):
+    groups = [g["startup_excess"].to_numpy() for _, g in dd.groupby("month") if len(g) >= 3]
+    out["startup_excess_kruskal_p"] = float(stats.kruskal(*groups).pvalue) if len(groups) >= 2 else None
+    # 고원 수준 vs 최고기온: 단순 기울기(부트스트랩), 날짜 추세·월요일 통제 회귀, Theil–Sen
+    for label, sub, note in (("summer_pre_test", dd[(dd.month.isin([6, 7])) & (dd.period == "pre_test")], "6·7월(시험 전)"),
+                             ("summer_test", dd[dd.period == "test"], "8·9월(시험)"),
+                             ("pooled_jun_sep_posthoc", dd[dd.month.isin([6, 7, 8, 9])], "6~9월 합동(사후, 참고)")):
         if len(sub) < 8:
             continue
         x, yv = sub["tmax"].to_numpy(), sub["plateau"].to_numpy()
@@ -166,33 +338,51 @@ def peak_conditions(iv: pd.DataFrame, st: pd.DataFrame, T: float) -> dict:
             ix = rng.integers(0, len(sub), len(sub))
             if np.ptp(x[ix]) > 0:
                 bs.append(np.polyfit(x[ix], yv[ix], 1)[0])
-        out[f"plateau_slope_per_C_{label}"] = {"slope": slope, "ci90": [float(np.quantile(bs, 0.05)), float(np.quantile(bs, 0.95))],
-                                              "n_days": int(len(sub)), "corr": float(np.corrcoef(x, yv)[0, 1])}
+        Z = np.column_stack([x, sub["day_index"].to_numpy(), sub["monday_like"].to_numpy(), np.ones(len(sub))])
+        beta, *_ = np.linalg.lstsq(Z, yv, rcond=None)
+        bz = []
+        for _ in range(1000):
+            ix = rng.integers(0, len(sub), len(sub))
+            if np.ptp(x[ix]) > 0:
+                bz.append(np.linalg.lstsq(Z[ix], yv[ix], rcond=None)[0][0])
+        ts = stats.theilslopes(yv, x, alpha=0.90)
+        out[f"plateau_slope_per_C_{label}"] = {
+            "note": note, "slope": slope, "ci90": [float(np.quantile(bs, 0.05)), float(np.quantile(bs, 0.95))],
+            "n_days": int(len(sub)), "corr": float(np.corrcoef(x, yv)[0, 1]),
+            "slope_controlling_trend_monday": float(beta[0]),
+            "slope_controlling_ci90": [float(np.quantile(bz, 0.05)), float(np.quantile(bz, 0.95))],
+            "theil_sen": float(ts.slope), "theil_sen_ci90": [float(ts.low_slope), float(ts.high_slope)],
+            "tmax_date_corr": float(np.corrcoef(x, sub["day_index"].to_numpy())[0, 1])}
+    # 최대피크 분해: 월 최대 날과 상위 10일의 유형(기동 과도분 vs 고원)
+    mon = dd.loc[dd.groupby("month")["daymax"].idxmax(), ["month", "date", "daymax", "type", "plateau", "startup_excess", "tmax"]]
+    out["month_max_days"] = [{k: (str(v) if k == "date" else v) for k, v in r.items()} for r in mon.to_dict("records")]
+    for per in ("pre_test", "test"):
+        top = dd[dd.period == per].nlargest(10, "daymax")
+        out[f"top10_type_counts_{per}"] = top["type"].value_counts().to_dict()
     return out, dd
 
 
-def peak_logit(iv: pd.DataFrame, st: pd.DataFrame, T: float) -> pd.DataFrame:
-    """가동일(전면 가동) 15분 구간의 T 이상 여부에 대한 해석용 로지스틱(날짜 부트스트랩 신뢰구간)."""
-    y = iv["y_train"]
+def peak_logit(iv: pd.DataFrame, st: pd.DataFrame, T: float) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """전면 가동일 08~16시 15분 구간의 T 이상 여부 로지스틱(기준 범주 13~16시, 날짜 군집 부트스트랩)과 조건부 비율표."""
+    y = iv["y"]
     day = iv.index.normalize()
-    m = (st["regime"].reindex(day).to_numpy() == 2) & y.notna().to_numpy() & (iv.index < C.TEST_START)
     hour = iv["hour"].to_numpy()
-    slot = iv["slot"].to_numpy()
+    reg = st["regime"].reindex(day).to_numpy()
+    base = (reg == 2) & y.notna().to_numpy() & (hour >= 8) & (hour < 17)
+    cdd = np.maximum(iv["temp"].to_numpy() - 24, 0)
     X = pd.DataFrame({
-        "startup_0800_0900": ((slot >= 32) & (slot <= 35)).astype(float),
-        "morning_0900_1200": ((hour >= 9) & (hour < 12)).astype(float),
-        "afternoon_1300_1600": ((hour >= 13) & (hour < 16)).astype(float),
-        "late_1600_2000": ((hour >= 16) & (hour < 20)).astype(float),
+        "startup_0800_0859": (hour == 8).astype(float),
+        "morning_0900_1159": ((hour >= 9) & (hour < 12)).astype(float),
+        "lunch_1200_1259": (hour == 12).astype(float),
         "monday_like": (st["daytype4"].reindex(day).to_numpy() == 0).astype(float),
-        "saturday": (st["daytype4"].reindex(day).to_numpy() == 2).astype(float),
-        "cdd24": np.maximum(iv["temp"].to_numpy() - 24, 0),
-        "summer": iv.index.month.isin([6, 7, 8, 9]).astype(float),
-    }, index=iv.index)[m]
-    lab = (y[m] >= T).astype(int).to_numpy()
+        "cdd24": cdd,
+    }, index=iv.index)
+    X["startup_x_cdd24"] = X["startup_0800_0859"] * cdd
+    X["morning_x_cdd24"] = X["morning_0900_1159"] * cdd
+    m = base & (iv.index < C.TEST_START) & (iv.index >= C.MEASURED_START)
+    Xm, lab = X[m], (y[m] >= T).astype(int).to_numpy()
     days = day[m]
-    X = X.loc[:, X.nunique() > 1]  # 시험 전 표본에서 변화가 없는 조건(예: 전면 가동 토요일)은 제외
-    fit = LogisticRegression(C=10.0, max_iter=2000).fit(X, lab)
-    coef = pd.Series(fit.coef_[0], index=X.columns)
+    fit = LogisticRegression(C=1.0, max_iter=4000).fit(Xm, lab)
     rng = np.random.default_rng(C.SEED)
     ud = np.unique(days)
     boots = []
@@ -201,221 +391,215 @@ def peak_logit(iv: pd.DataFrame, st: pd.DataFrame, T: float) -> pd.DataFrame:
         ix = np.concatenate([np.where(days == d)[0] for d in pick])
         if lab[ix].min() == lab[ix].max():
             continue
-        boots.append(LogisticRegression(C=10.0, max_iter=2000).fit(X.iloc[ix], lab[ix]).coef_[0])
+        boots.append(LogisticRegression(C=1.0, max_iter=4000).fit(Xm.iloc[ix], lab[ix]).coef_[0])
     B = np.array(boots)
-    return pd.DataFrame({"feature": X.columns, "odds_ratio": np.exp(coef.to_numpy()),
+    odds = pd.DataFrame({"feature": Xm.columns, "odds_ratio": np.exp(fit.coef_[0]),
                          "or_ci05": np.exp(np.quantile(B, 0.05, axis=0)), "or_ci95": np.exp(np.quantile(B, 0.95, axis=0)),
-                         "n": len(lab), "positives": int(lab.sum())})
+                         "reference": "13~16시, cdd24=0", "n": len(lab), "positives": int(lab.sum())})
+    rows = []
+    band = pd.cut(pd.Series(hour), [7, 8, 11, 12, 16], labels=["08", "09-11", "12", "13-16"]).astype(str).to_numpy()
+    tb = pd.cut(iv["temp"], [-50, 20, 26, 30, 50], labels=["<20", "20-26", "26-30", "30+"]).astype(str).to_numpy()
+    for per, pm in (("pre_test", base & (iv.index < C.TEST_START)), ("test", base & (iv.index >= C.TEST_START))):
+        d = pd.DataFrame({"band": band[pm], "temp": tb[pm], "peak": (y.to_numpy()[pm] >= T)})
+        g = d.groupby(["band", "temp"])["peak"].agg(n="size", rate="mean").reset_index()
+        g.insert(0, "period", per)
+        rows.append(g)
+    return odds, pd.concat(rows, ignore_index=True)
 
 
 # ---------------------------------------------------------------- SHAP(LightGBM 기여도)
 
-def shap_importance(iv: pd.DataFrame, frames: dict, task: str, log=print) -> tuple[pd.DataFrame, pd.DataFrame]:
-    """시험 시작 전 학습 가능 구간으로 M1(LightGBM)과 하이브리드 보정기를 적합해 시험 구간 기여도를 계산."""
+def _fit_shap(model, X_tr, y_tr, X_te, names_inner=None):
+    model.fit(X_tr, y_tr)
+    contrib = model.contrib(X_te)
+    names = names_inner or model.features
+    return names, np.abs(contrib[:, :-1]).mean(axis=0), model
+
+
+def shap_importance(iv: pd.DataFrame, frames: dict, task: str, log=print) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    """시험 시작 전 학습 가능 구간으로 적합해 시험 구간 기여도(평균 |SHAP|)를 계산한다.
+
+    M1(LightGBM), M7c 하이브리드의 잔차 보정기(선택 모델의 ML 부분), 구조만 모델(지연·유사일 없이 달력·체제·기상,
+    시각×기온 상호작용을 드러내기 위한 설명용)."""
     X = frames[task]
     fam = "A" if task.startswith("A") else "B"
     feats = F.feature_list(fam)
     tr = CV.train_mask(X.index, iv["trainable"].to_numpy(), C.TEST_START, fam)
     te = (X.index >= C.TEST_START) & iv["usable"].to_numpy()
+    ytr = iv["y_train"][tr]
     rows = []
     inter = pd.DataFrame()
-    for name, model in (("M1_lgbm", M.LGBModel(feats, objective="huber", alpha=10.0)),
-                        ("M7_hybrid_residual", M.Hybrid(feats, fam))):
-        model.fit(X.loc[tr], iv["y_train"][tr])
+    dep = pd.DataFrame()
+    struct_feats = F.CAL + F.SCHED + F.WEATHER
+    models = (("M1_lgbm", M.LGBModel(feats, objective="huber", alpha=10.0)),
+              ("M7c_hybrid_residual", M.Hybrid(feats, fam, monotone=R.COOL_MONO)),
+              ("structure_only_lgbm", M.LGBModel(struct_feats, objective="huber", alpha=10.0)))
+    for name, model in models:
+        model.fit(X.loc[tr], ytr)
         contrib = model.contrib(X.loc[te])
-        names = (model.features if name == "M1_lgbm" else model.inner_.features)
+        names = model.inner_.features if name.startswith("M7c") else model.features
         mean_abs = np.abs(contrib[:, :-1]).mean(axis=0)
         for f, v in zip(names, mean_abs):
-            rows.append(dict(task=task, model=name, feature=f, mean_abs_shap=float(v)))
-        if name == "M1_lgbm":
+            g = F.FEATURE_GLOSSARY.get(f, (f, "기타", ""))
+            rows.append(dict(task=task, model=name, feature=f, feature_ko=g[0], group=g[1], availability=g[2],
+                             mean_abs_shap=float(v)))
+        if name in ("M1_lgbm", "structure_only_lgbm"):
             try:
                 import shap
+                inner = model.m_
                 sample = X.loc[te, names].sample(n=min(400, int(te.sum())), random_state=C.SEED)
-                iv_vals = shap.TreeExplainer(model.m_).shap_interaction_values(sample)
+                iv_vals = shap.TreeExplainer(inner).shap_interaction_values(sample)
                 A = np.abs(iv_vals).mean(axis=0)
                 np.fill_diagonal(A, 0)
-                pairs = []
-                for i in range(len(names)):
-                    for j in range(i + 1, len(names)):
-                        pairs.append((names[i], names[j], float(A[i, j] + A[j, i])))
-                inter = pd.DataFrame(sorted(pairs, key=lambda t: -t[2])[:25], columns=["feature_1", "feature_2", "mean_abs_interaction"])
-                inter.insert(0, "task", task)
+                pairs = sorted([(names[i], names[j], float(A[i, j] + A[j, i])) for i in range(len(names))
+                                for j in range(i + 1, len(names))], key=lambda t: -t[2])
+                t = pd.DataFrame(pairs, columns=["feature_1", "feature_2", "mean_abs_interaction"])
+                t["rank"] = np.arange(1, len(t) + 1)
+                t["n_pairs"] = len(t)
+                wanted = {frozenset(x) for x in (("slot", "temp"), ("slot", "tmax_day"), ("hour", "temp"), ("hour", "cdd24"),
+                                                 ("slot", "cdd24"), ("slot", "regime"), ("hour", "regime"), ("slot", "regime_prev"))}
+                t["specified_pair"] = [frozenset((a, b)) in wanted for a, b in zip(t.feature_1, t.feature_2)]
+                t = t[(t["rank"] <= 25) | t["specified_pair"]]
+                t.insert(0, "model", name)
+                t.insert(0, "task", task)
+                inter = pd.concat([inter, t], ignore_index=True)
+                if name == "structure_only_lgbm":
+                    # 의존도: 기상 특징 SHAP 합을 시간대 × 기온 구간으로 평균(시각×기온 상호작용의 크기)
+                    sv = shap.TreeExplainer(inner).shap_values(X.loc[te, names])
+                    wx = [i for i, f in enumerate(names) if f in F.WEATHER]
+                    s_wx = sv[:, wx].sum(axis=1)
+                    hr = X.loc[te, "hour"].to_numpy()
+                    tb = pd.cut(X.loc[te, "tmax_day"], [-50, 26, 28, 30, 32, 50], labels=["<26", "26-28", "28-30", "30-32", "32+"]).astype(str)
+                    hb = pd.cut(pd.Series(hr), [-1, 6, 8, 11, 12, 16, 19, 23],
+                                labels=["00-06", "07-08", "09-11", "12", "13-16", "17-19", "20-23"]).astype(str).to_numpy()
+                    dep = pd.DataFrame({"hour_band": hb, "tmax_bin": tb.to_numpy(), "weather_shap": s_wx}).groupby(
+                        ["hour_band", "tmax_bin"])["weather_shap"].agg(["mean", "size"]).reset_index()
+                    dep.insert(0, "task", task)
             except Exception as e:  # shap 미설치 등
                 log(f"  SHAP 상호작용 생략: {e}")
     imp = pd.DataFrame(rows).sort_values(["model", "mean_abs_shap"], ascending=[True, False])
-    return imp, inter
-
-
-# ---------------------------------------------------------------- 계획 정보가치·절제
-
-def info_value(iv: pd.DataFrame, log=print) -> pd.DataFrame:
-    """계획 정보 수준별 성능(교차검증 pooled·시험). LightGBM(M1)과 하이브리드(M7)로 비교.
-
-    L0 달력만 / L1 날짜 단위 운영일정(헤드라인) / L2 + 시간별 가동 여부(생산량 ≥100에서 파생)
-    / L3 + 시간별 생산 수량(오라클) / L3 잡음: 수량에 시간 단위 곱셈 잡음(한 시간의 네 구간은 같은 잡음).
-    """
-    y = iv["y"]
-    usable = iv["usable"].to_numpy()
-    fr_or = CV.build_frames(iv, oracle=True)
-    cvmask = np.zeros(len(y), bool)
-    for _, s, e in CV.cv_blocks():
-        cvmask |= CV.eval_mask(y.index, usable, s, e)
-    temask = CV.eval_mask(y.index, usable, C.TEST_START, C.TEST_END)
-    rows = []
-    rng = np.random.default_rng(C.SEED)
-    hour_key = iv.index.floor("h")
-    uniq_hours = pd.DatetimeIndex(hour_key.unique())
-    for task in ("B", "A4"):
-        fam = "A" if task.startswith("A") else "B"
-        X = fr_or[task]
-        levels = {
-            "L0_calendar_only": (F.feature_list(fam, schedule_on=False), None),
-            "L1_day_schedule(headline)": (F.feature_list(fam), None),
-            "L2_plus_hourly_onoff": (F.feature_list(fam, hourly_onoff=True), None),
-            "L3_plus_hourly_quantity_oracle": (F.feature_list(fam, oracle=True), None),
-        }
-        for sigma in (0.1, 0.25, 0.5):
-            levels[f"L3_hourly_quantity_noise{int(sigma * 100)}"] = (F.feature_list(fam, oracle=True), sigma)
-        for lvl, (feats, sigma) in levels.items():
-            Xv = X
-            if sigma is not None:
-                Xv = X.copy()
-                hn = pd.Series(np.exp(rng.normal(0, sigma, len(uniq_hours)) - sigma ** 2 / 2), index=uniq_hours)
-                noise = hn.reindex(hour_key).to_numpy()
-                Xv["plan_h"] = X["plan_h"] * noise
-                Xv["plan_h_next"] = X["plan_h_next"] * hn.reindex(hour_key + pd.Timedelta(hours=1)).to_numpy()
-                Xv["plan_h_prev"] = X["plan_h_prev"] * hn.reindex(hour_key - pd.Timedelta(hours=1)).to_numpy()
-                Xv["plan_share_h"] = Xv["plan_h"] / Xv["plan_total"].replace(0, np.nan)
-            for mname, fac in (("M1_lgbm", lambda f=feats: M.LGBModel(f, objective="huber", alpha=10.0)),
-                               ("M7_hybrid", lambda f=feats: M.Hybrid(f, fam))):
-                if lvl == "L0_calendar_only" and mname == "M7_hybrid":
-                    continue  # 하이브리드 기준(유사일)은 일정 정보를 쓰므로 L0에 없음
-                t0 = time.time()
-                pc = CV.run_cv(Xv, iv, fac, fam)
-                pt = CV.run_test(Xv, iv, fac, fam)
-                rc = MT.regression(y[cvmask], pc[cvmask])
-                rt = MT.regression(y[temask], pt[temask])
-                rows.append(dict(task=task, level=lvl, model=mname, cv_RMSE=rc["RMSE"], cv_MAE=rc["MAE"],
-                                 test_RMSE=rt["RMSE"], test_MAE=rt["MAE"]))
-                log(f"  info {task} {lvl} {mname} {time.time() - t0:.0f}s")
-    return pd.DataFrame(rows)
-
-
-def weather_noise(iv: pd.DataFrame, selection: dict, log=print) -> pd.DataFrame:
-    """기상 예보오차 민감도: 기온에 날짜별 편향 + 시간별 잡음(σ, σ/2)을 넣어 학습·예측 모두 예보 대리로 사용."""
-    y = iv["y"]
-    usable = iv["usable"].to_numpy()
-    cvmask = np.zeros(len(y), bool)
-    for _, s, e in CV.cv_blocks():
-        cvmask |= CV.eval_mask(y.index, usable, s, e)
-    temask = CV.eval_mask(y.index, usable, C.TEST_START, C.TEST_END)
-    rows = []
-    for sigma in (0.0, 1.5, 3.0):
-        ivn = iv.copy()
-        if sigma > 0:
-            rng = np.random.default_rng(C.SEED + int(sigma * 10))
-            days = pd.DatetimeIndex(iv.index.normalize().unique())
-            hours = pd.DatetimeIndex(iv.index.floor("h").unique())
-            b = pd.Series(rng.normal(0, sigma, len(days)), index=days).reindex(iv.index.normalize()).to_numpy()
-            e = pd.Series(rng.normal(0, sigma / 2, len(hours)), index=hours).reindex(iv.index.floor("h")).to_numpy()
-            ivn["temp"] = iv["temp"] + b + e
-        fr = CV.build_frames(ivn)
-        for task, fam in (("B", "B"), ("A4", "A")):
-            feats = F.feature_list(fam)
-            chosen = selection[fam]["chosen"]
-            reg = R.candidates(fam)
-            pairs = [(chosen, reg[chosen])]
-            if chosen != "M1_lgbm":
-                pairs.append(("M1_lgbm", lambda f=feats: M.LGBModel(f, objective="huber", alpha=10.0)))
-            for mname, fac in pairs:
-                pc = CV.run_cv(fr[task], ivn, fac, fam)
-                pt = CV.run_test(fr[task], ivn, fac, fam)
-                rows.append(dict(sigma_C=sigma, task=task, model=mname,
-                                 cv_RMSE=MT.regression(y[cvmask], pc[cvmask])["RMSE"],
-                                 test_RMSE=MT.regression(y[temask], pt[temask])["RMSE"]))
-                log(f"  weather-noise {sigma} {task} {mname}")
-    return pd.DataFrame(rows)
-
-
-def ablations(iv: pd.DataFrame, df: pd.DataFrame, diag, log=print) -> pd.DataFrame:
-    y = iv["y"]
-    usable = iv["usable"].to_numpy()
-    cvmask = np.zeros(len(y), bool)
-    for _, s, e in CV.cv_blocks():
-        cvmask |= CV.eval_mask(y.index, usable, s, e)
-    temask = CV.eval_mask(y.index, usable, C.TEST_START, C.TEST_END)
-    rows = []
-
-    def rec(name, task, pc, pt):
-        rc = MT.regression(y[cvmask], pc[cvmask])
-        rt = MT.regression(y[temask], pt[temask])
-        rows.append(dict(ablation=name, task=task, cv_RMSE=rc["RMSE"], cv_MAE=rc["MAE"], test_RMSE=rt["RMSE"],
-                         test_MAE=rt["MAE"]))
-        log(f"  ablation {name} {task}")
-
-    frames = CV.build_frames(iv)
-    # 기상 제외
-    for task, fam in (("B", "B"), ("A4", "A")):
-        fac = lambda f=F.feature_list(fam, weather_on=False): M.Hybrid(f, fam)
-        rec("hybrid_no_weather", task, CV.run_cv(frames[task], iv, fac, fam), CV.run_test(frames[task], iv, fac, fam))
-    # 발행 시각 24:00 (B)
-    fr24 = CV.build_frames(iv, issue_hour_b=24)
-    for mname, fac in (("BL5_regime_analog", lambda: M.AnalogDay("analog_regime")),
-                       ("M9l_analog_level_adj", lambda: M.AnalogAdjusted(True, False))):
-        rec(f"issue_2400_{mname}", "B", CV.run_cv(fr24["B"], iv, fac, "B"), CV.run_test(fr24["B"], iv, fac, "B"))
-    # 복제 포함 학습
-    iv_c = D.build_intervals(df, diag, train_on_copies=True)
-    fr_c = CV.build_frames(iv_c)
-    for task, fam, mname, fac in (("B", "B", "M1_lgbm", lambda: M.LGBModel(F.feature_list("B"), objective="huber", alpha=10.0)),
-                                  ("B", "B", "BL5_regime_analog", lambda: M.AnalogDay("analog_regime")),
-                                  ("A4", "A", "M1_lgbm", lambda: M.LGBModel(F.feature_list("A"), objective="huber", alpha=10.0)),
-                                  ("A4", "A", "M7_hybrid", lambda: M.Hybrid(F.feature_list("A"), "A"))):
-        rec(f"train_on_copies_{mname}", task, CV.run_cv(fr_c[task], iv_c, fac, fam), CV.run_test(fr_c[task], iv_c, fac, fam))
-    return pd.DataFrame(rows)
+    return imp, inter, dep
 
 
 # ---------------------------------------------------------------- 피크 경보 FN/FP 집중 조건
 
-def alarm_error_conditions(iv: pd.DataFrame, st: pd.DataFrame) -> pd.DataFrame:
-    """다음 1시간 피크 경보(선택 확률 방법·F1 문턱)의 FN/FP를 목표 창 조건별로 교차집계(분모 병기)."""
-    import json
+def _rate_ci(num: np.ndarray, den: np.ndarray, days: np.ndarray, n_boot: int = 500) -> tuple[float, float, float]:
+    d = pd.DataFrame({"d": days, "a": num, "b": den}).groupby("d").sum()
+    A, B = d["a"].to_numpy(float), d["b"].to_numpy(float)
+    if B.sum() == 0:
+        return np.nan, np.nan, np.nan
+    rng = np.random.default_rng(C.SEED)
+    bs = []
+    for _ in range(n_boot):
+        ix = rng.integers(0, len(A), len(A))
+        if B[ix].sum() > 0:
+            bs.append(A[ix].sum() / B[ix].sum())
+    return float(A.sum() / B.sum()), float(np.quantile(bs, 0.05)), float(np.quantile(bs, 0.95))
+
+
+def alarm_error_conditions(iv: pd.DataFrame, st: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    """다음 1시간 피크 경보(선택 확률 방법·F1 문턱)의 FN/FP를 목표 창 조건별로: 미탐률·오경보율(날짜 군집 90% 구간),
+    FN 점유/양성 점유(lift), 같은 칸의 시각 규칙·기후값 확률 미탐률, 2원 표(시간대×월, 시간대×기온), 놓친 사건 목록."""
     pk = json.loads((C.OUTPUT_DIR / "peak" / "peak_summary.json").read_text(encoding="utf-8"))
     m = pk["prob_method"]["chosen"]
     tau = pk["tau"][m]["tau_f1"]
+    tau_clim = pk["tau"].get("P_climatology", {}).get("tau_f1", 0.5)
     pr = pd.read_csv(C.ARTIFACT_DIR / "next_hour_prob.csv.gz", index_col=0, parse_dates=True).reindex(iv.index)
     ok = pr["common"].fillna(False).astype(bool).to_numpy()
     lab = pr["label"].to_numpy() == 1
     alarm = pr[m].to_numpy() >= tau
+    alarm_clock = pr["R_clock"].to_numpy() >= 0.5
+    alarm_clim = pr["P_climatology"].to_numpy() >= tau_clim
     idx = iv.index
-    tgt = idx + pd.Timedelta(minutes=15)  # 목표 창의 첫 구간
+    tgt = idx + pd.Timedelta(minutes=15)
     day = tgt.normalize()
     cond = pd.DataFrame(index=idx)
     cond["target_hour_band"] = pd.cut(tgt.hour, [-1, 6, 7, 8, 11, 12, 15, 19, 23],
                                       labels=["00-06", "07", "08", "09-11", "12", "13-15", "16-19", "20-23"]).astype(str)
     cond["daytype4"] = st["daytype4"].reindex(day).to_numpy()
-    cond["regime"] = st["regime"].reindex(day).to_numpy()
     cond["regime_prev"] = st["regime_prev"].reindex(day).to_numpy()
     cond["temp_bin"] = pd.cut(iv["temp"].shift(-1), [-50, 20, 26, 30, 50], labels=["<20", "20-26", "26-30", "30+"]).astype(str)
     cond["month"] = tgt.month
     cond["now_above_T"] = (iv["y"].to_numpy() >= pr["T"].to_numpy()).astype(int)
-    rows = []
+    # 확률 예측의 여유: 놓친 피크의 초과폭(실제 최대 − T), 오경보의 부족폭(T − 실제 최대)
+    ymax = pd.concat([iv["y"].shift(-k) for k in range(1, 5)], axis=1).max(axis=1).to_numpy()
+    margin = ymax - pr["T"].to_numpy()
+    rows, two, missed = [], [], []
+    days = idx.normalize().to_numpy()
     for per, (s0, e0) in {"cv": (C.CV_FOLDS[0][1], C.CV_FOLDS[-1][2]), "test": (C.TEST_START, C.TEST_END)}.items():
         pm = ok & (idx >= s0) & (idx < e0)
-        tot_fn = int((pm & lab & ~alarm).sum())
+        tot_fn, tot_pos = int((pm & lab & ~alarm).sum()), int((pm & lab).sum())
         tot_fp = int((pm & ~lab & alarm).sum())
         for col in cond.columns:
             for val, ix in cond[pm].groupby(col).groups.items():
                 mm = np.zeros(len(idx), bool)
                 mm[idx.get_indexer(ix)] = True
                 pos = int((mm & lab).sum())
-                neg = int((mm & ~lab).sum())
-                fn = int((mm & lab & ~alarm).sum())
-                fp = int((mm & ~lab & alarm).sum())
-                rows.append(dict(period=per, condition=col, value=str(val), n=int(mm.sum()), positives=pos,
-                                 FN=fn, FP=fp, miss_rate=fn / pos if pos else np.nan,
-                                 false_alarm_rate=fp / neg if neg else np.nan,
+                fn, fp = int((mm & lab & ~alarm).sum()), int((mm & ~lab & alarm).sum())
+                mr = _rate_ci((mm & lab & ~alarm)[mm], (mm & lab)[mm], days[mm])
+                far = _rate_ci((mm & ~lab & alarm)[mm], (mm & ~lab)[mm], days[mm])
+                rows.append(dict(period=per, condition=col, value=str(val), n=int(mm.sum()), positives=pos, FN=fn, FP=fp,
+                                 miss_rate=mr[0], miss_ci90_lo=mr[1], miss_ci90_hi=mr[2],
+                                 false_alarm_rate=far[0], fa_ci90_lo=far[1], fa_ci90_hi=far[2],
                                  share_of_all_FN=fn / tot_fn if tot_fn else np.nan,
-                                 share_of_all_FP=fp / tot_fp if tot_fp else np.nan))
+                                 share_of_all_FP=fp / tot_fp if tot_fp else np.nan,
+                                 FN_lift=(fn / tot_fn) / (pos / tot_pos) if tot_fn and pos else np.nan,
+                                 miss_rate_clock=float((mm & lab & ~alarm_clock).sum() / pos) if pos else np.nan,
+                                 miss_rate_climatology=float((mm & lab & ~alarm_clim).sum() / pos) if pos else np.nan))
+        for c2 in ("month", "temp_bin"):
+            g = pd.DataFrame({"band": cond["target_hour_band"][pm], c2: cond[c2][pm], "pos": lab[pm],
+                              "fn": (lab & ~alarm)[pm], "fp": (~lab & alarm)[pm]}).groupby(["band", c2]).sum().reset_index()
+            g["miss_rate"] = g["fn"] / g["pos"].replace(0, np.nan)
+            g.insert(0, "table", f"hour_band_x_{c2}")
+            g.insert(0, "period", per)
+            two.append(g.rename(columns={c2: "second"}))
+        fnm = pm & lab & ~alarm
+        fpm = pm & ~lab & alarm
+        rows.append(dict(period=per, condition="margin", value="FN: 실제 최대 − T < 5", n=int(fnm.sum()),
+                         miss_rate=float(np.mean(margin[fnm] < 5)) if fnm.any() else np.nan))
+        rows.append(dict(period=per, condition="margin", value="FP: T − 실제 최대 < 5", n=int(fpm.sum()),
+                         false_alarm_rate=float(np.mean(-margin[fpm] < 5)) if fpm.any() else np.nan))
+    # 놓친 사건(시험): 사건 시작 전 1시간 발행 중 경보가 한 번도 없던 사건
+    from . import peak as PK
+    T_test = CV.peak_threshold(iv, C.TEST_START)
+    ev = PK.events(iv["y"], iv["usable"].to_numpy(), T_test)
+    for _, e in ev.iterrows():
+        s = int(e["start"])
+        if idx[s] < C.TEST_START or s < 4:
+            continue
+        cand = np.arange(s - 4, s)
+        if not ok[cand].any():
+            continue
+        missed.append(dict(start=idx[s], n=int(e["n"]), peak=float(e["peak"]), detected_model=bool(alarm[cand].any()),
+                           detected_clock=bool(alarm_clock[cand].any()), detected_climatology=bool(alarm_clim[cand].any()),
+                           max_prob_before=float(np.nanmax(pr[m].to_numpy()[cand])), hour=int(idx[s].hour),
+                           temp=float(iv["temp"].iloc[s])))
+    return pd.DataFrame(rows), pd.concat(two, ignore_index=True), pd.DataFrame(missed)
+
+
+def dayahead_slot_errors(iv: pd.DataFrame, st: pd.DataFrame) -> pd.DataFrame:
+    """익일 슬롯 피크 확률(CV F1 문턱)의 미탐을 시간대·월·기온으로 분해."""
+    p = C.ARTIFACT_DIR / "dayahead_slot_prob.csv.gz"
+    if not p.exists():
+        return pd.DataFrame()
+    d = pd.read_csv(p, parse_dates=["ts"])
+    cv = d[d.period == "cv"]
+    tau, _ = MT.best_f1_threshold(cv["label"].to_numpy(), cv["p"].to_numpy())
+    d["alarm"] = d["p"] >= tau
+    d["hour_band"] = pd.cut(d["ts"].dt.hour, [-1, 7, 8, 11, 12, 16, 19, 23],
+                            labels=["00-07", "08", "09-11", "12", "13-16", "17-19", "20-23"]).astype(str)
+    d["month"] = d["ts"].dt.month
+    temp = iv["temp"].reindex(pd.DatetimeIndex(d["ts"])).to_numpy()
+    d["temp_bin"] = pd.cut(pd.Series(temp), [-50, 20, 26, 30, 50], labels=["<20", "20-26", "26-30", "30+"]).astype(str).to_numpy()
+    rows = []
+    for per, g0 in d.groupby("period"):
+        for col in ("hour_band", "month", "temp_bin", "rule"):
+            for val, g in g0.groupby(col):
+                pos = int(g["label"].sum())
+                rows.append(dict(period=per, tau=tau, condition=col, value=str(val), n=len(g), positives=pos,
+                                 FN=int((g["label"].astype(bool) & ~g["alarm"]).sum()),
+                                 miss_rate=float((g["label"].astype(bool) & ~g["alarm"]).sum() / pos) if pos else np.nan,
+                                 FP=int((~g["label"].astype(bool) & g["alarm"]).sum())))
     return pd.DataFrame(rows)
 
 
@@ -423,17 +607,16 @@ def alarm_error_conditions(iv: pd.DataFrame, st: pd.DataFrame) -> pd.DataFrame:
 
 def run(iv: pd.DataFrame, frames: dict, selection: dict, df: pd.DataFrame | None = None, diag=None,
         log=print) -> dict:
+    miss = [r for r in ("cv/cv_metrics.csv", "peak/peak_summary.json") if not (C.OUTPUT_DIR / r).exists()]
+    if miss or not (C.ARTIFACT_DIR / "test_B.csv.gz").exists():
+        raise FileNotFoundError(f"analysis 단계 선행 산출물이 없다: {miss or 'artifacts/test_*.csv.gz'} — models·peak를 먼저 실행한다")
     od = io.out_dir("analysis")
     y = iv["y"]
-    usable = iv["usable"].to_numpy()
     st = F.schedule_table(iv)
     cond = condition_table(iv, st)
-    temask = CV.eval_mask(y.index, usable, C.TEST_START, C.TEST_END)
-    cvmask = np.zeros(len(y), bool)
-    for _, s, e in CV.cv_blocks():
-        cvmask |= CV.eval_mask(y.index, usable, s, e)
-    summary = {}
-    # 1) 조건별 성능(모든 모델) + 기술점수
+    temask = _temask(iv)
+    summary = {"availability": AVAILABILITY}
+    # 1) 조건별 성능(모든 모델, 시험) + 기술점수 + 부트스트랩
     rows, skill_rows, boot_rows = [], [], []
     cvm = pd.read_csv(C.OUTPUT_DIR / "cv" / "cv_metrics.csv")
     for task in TASKS:
@@ -456,8 +639,9 @@ def run(iv: pd.DataFrame, frames: dict, selection: dict, df: pd.DataFrame | None
             skill_rows.append(dict(task=task, model=m, test_RMSE=r["RMSE"], test_MAE=r["MAE"],
                                    skill_vs_best_baseline=1 - r["RMSE"] / rb["RMSE"], best_baseline=best_bl,
                                    skill_vs_naive=1 - r["RMSE"] / rn["RMSE"], naive=naive))
-        for other in (best_bl, naive):
-            if other == chosen:
+        others = [best_bl, naive, "M1_lgbm"] + (["BL3_profile"] if fam == "B" else ["M6_analog_level"])
+        for other in dict.fromkeys(others):
+            if other == chosen or other not in preds:
                 continue
             for stat in ("RMSE", "MAE") + (("daymax_MAE",) if task == "B" else ()):
                 for bd in (1, 7):
@@ -466,77 +650,284 @@ def run(iv: pd.DataFrame, frames: dict, selection: dict, df: pd.DataFrame | None
     io.write_csv(pd.concat(rows, ignore_index=True), od / "test_by_condition.csv")
     io.write_csv(pd.DataFrame(skill_rows), od / "test_skill.csv")
     io.write_csv(pd.DataFrame(boot_rows).assign(ci90=lambda d: d["ci90"].astype(str)), od / "test_bootstrap.csv")
-
-    # 2) 오차가 큰 조건: 선택 모델, 시험·교차검증
-    rule_out = []
-    stab_out = []
+    # 선택 모델의 시험 일별 오차 기여(상위 날짜)와 달력–가동 불일치 사례
+    day_rows = []
     for task in ("B", "A4"):
         fam = "A" if task.startswith("A") else "B"
-        chosen = selection[fam]["chosen"]
-        for per, mask in (("test", temask), ("cv", cvmask)):
-            src = "test" if per == "test" else "oof"
-            p = SM.load_predictions(src, task).reindex(y.index)[chosen]
-            m = mask & p.notna().to_numpy()
-            err = np.abs(p[m] - y[m]).to_numpy()
-            Xc = encode_conditions(cond[m])
-            for r in tree_rules(Xc, err):
-                rule_out.append(dict(task=task, model=chosen, period=per, **r))
-            s = rule_stability(Xc, err, Xc.index.normalize().to_numpy())
-            s.insert(0, "period", per)
-            s.insert(0, "task", task)
-            stab_out.append(s)
-    io.write_csv(pd.DataFrame(rule_out), od / "error_rules.csv")
-    io.write_csv(pd.concat(stab_out, ignore_index=True), od / "error_rule_stability.csv")
+        pt = SM.load_predictions("test", task).reindex(y.index)
+        ch = selection[fam]["chosen"]
+        e2 = ((pt[ch] - y) ** 2).where(pd.Series(temask, index=y.index))
+        g = e2.groupby(y.index.normalize()).agg(["sum", "count"])
+        g = g[g["count"] > 0]
+        g["share_of_SSE"] = g["sum"] / g["sum"].sum()
+        g["day_RMSE"] = np.sqrt(g["sum"] / g["count"])
+        g = g.sort_values("sum", ascending=False).head(10).reset_index().rename(columns={"index": "date", "ts": "date"})
+        cday = cond.groupby(cond.index.normalize()).first()
+        for r in g.itertuples():
+            cr = cday.loc[r.date]
+            day_rows.append(dict(task=task, model=ch, date=r.date, day_RMSE=r.day_RMSE, share_of_SSE=r.share_of_SSE,
+                                 daytype4=cr["daytype4"], regime=cr["regime"], regime_prev=cr["regime_prev"],
+                                 holiday_work=cr["holiday_work"], calendar_operation_mismatch=cr["calendar_operation_mismatch"],
+                                 analog_atypical=cr["analog_atypical"]))
+    io.write_csv(pd.DataFrame(day_rows), od / "test_top_error_days.csv")
 
-    # 3) SHAP
-    imps, inters = [], []
+    # 2) 조건 × 모델 기술점수(교차검증·시험, 90% 구간)
+    io.write_csv(condition_skill(iv, cond, selection), od / "condition_skill.csv")
+
+    # 3) 오차 조건 규칙(교차검증에서 찾고 시험에서 재현 확인)
+    rules, stab = error_rules(iv, cond, selection)
+    io.write_csv(rules, od / "error_rules.csv")
+    io.write_csv(stab, od / "error_rule_stability.csv")
+
+    # 4) SHAP
+    imps, inters, deps = [], [], []
     for task in ("B", "A4"):
-        imp, inter = shap_importance(iv, frames, task, log=log)
+        imp, inter, dep = shap_importance(iv, frames, task, log=log)
         imps.append(imp)
         inters.append(inter)
-    io.write_csv(pd.concat(imps, ignore_index=True), od / "shap_importance.csv")
+        deps.append(dep)
+    imp = pd.concat(imps, ignore_index=True)
+    io.write_csv(imp, od / "shap_importance.csv")
+    grp = imp.groupby(["task", "model", "group"])["mean_abs_shap"].sum().reset_index()
+    grp["share"] = grp["mean_abs_shap"] / grp.groupby(["task", "model"])["mean_abs_shap"].transform("sum")
+    io.write_csv(grp.sort_values(["task", "model", "share"], ascending=[True, True, False]), od / "shap_grouped.csv")
     io.write_csv(pd.concat(inters, ignore_index=True), od / "shap_interactions.csv")
+    io.write_csv(pd.concat(deps, ignore_index=True), od / "shap_weather_dependence.csv")
 
-    # 4) 피크 조건(서술) + 로지스틱
+    # 5) 피크 조건(서술) + 로지스틱 + 조건부 비율
     T = CV.peak_threshold(iv, C.TEST_START)
     pc_sum, pc_days = peak_conditions(iv, st, T)
     io.write_csv(pc_days, od / "peak_days.csv")
     io.write_json(pc_sum, od / "peak_conditions.json")
-    io.write_csv(peak_logit(iv, st, T), od / "peak_logit_odds.csv")
+    odds, rates = peak_logit(iv, st, T)
+    io.write_csv(odds, od / "peak_logit_odds.csv")
+    io.write_csv(rates, od / "peak_conditional_rates.csv")
     if (C.ARTIFACT_DIR / "next_hour_prob.csv.gz").exists():
-        io.write_csv(alarm_error_conditions(iv, st), od / "peak_alarm_error_conditions.csv")
+        a, b, c = alarm_error_conditions(iv, st)
+        io.write_csv(a, od / "peak_alarm_error_conditions.csv")
+        io.write_csv(b, od / "peak_alarm_error_2way.csv")
+        io.write_csv(c, od / "peak_events_test_detection.csv")
+    io.write_csv(dayahead_slot_errors(iv, st), od / "dayahead_slot_error_conditions.csv")
     summary["peak_conditions"] = pc_sum
-
     io.write_json(summary, od / "analysis_summary.json")
     return summary
 
 
-def learning_curve(iv: pd.DataFrame, log=print) -> pd.DataFrame:
-    """사후 설명용(시험 구간을 본 뒤 추가, 선택·설계에 쓰지 않음): 학습 창 길이(최근 N일)별 시험 성능.
-    주간 재학습마다 같은 길이의 창을 쓴다."""
+# ---------------------------------------------------------------- 계획 정보가치·절제(재학습이 많아 별도 단계)
+
+def info_value(iv: pd.DataFrame, selection: dict, log=print) -> pd.DataFrame:
+    """계획 정보 수준별 성능(교차검증 pooled·시험): M1(LightGBM)과 M7c(하이브리드, 선택 모델의 ML 부분).
+
+    L0 달력만 / L1a 날짜 가동 체제(헤드라인) / L1b + 일 계획 세부(총량·첫/마지막 가동 시각) / L2 + 시간별 가동 여부
+    / L3 + 시간별 생산 수량(오라클) / L1a_err: 계획 체제가 날짜의 5·10·20%에서 틀릴 때(모든 기간 같은 오류율)."""
     y = iv["y"]
-    usable = iv["usable"].to_numpy()
-    temask = CV.eval_mask(y.index, usable, C.TEST_START, C.TEST_END)
-    frames = CV.build_frames(iv)
+    cvmask, temask = _cvmask(iv), _temask(iv)
+    fr_or = CV.build_frames(iv, oracle=True, tasks=("B", "A4"))
+    rows = []
+    for task in ("B", "A4"):
+        fam = "A" if task.startswith("A") else "B"
+        levels = {
+            "L0_calendar_only": (F.feature_list(fam, schedule_on=False), None),
+            "L1a_day_regime(headline)": (F.feature_list(fam), None),
+            "L1b_plus_day_plan_detail": (F.feature_list(fam, day_plan=True), None),
+            "L2_plus_hourly_onoff": (F.feature_list(fam, hourly_onoff=True), None),
+            "L3_plus_hourly_quantity_oracle": (F.feature_list(fam, oracle=True), None),
+            "L1a_regime_error05": (F.feature_list(fam), 0.05),
+            "L1a_regime_error10": (F.feature_list(fam), 0.10),
+            "L1a_regime_error20": (F.feature_list(fam), 0.20),
+        }
+        for lvl, (feats, err) in levels.items():
+            Xv = fr_or[task] if err is None else CV.build_frames(iv, regime_noise=(err, C.SEED), tasks=(task,))[task]
+            for mname in ("M1_lgbm", "M7c_hybrid_coolmono"):
+                if lvl == "L0_calendar_only" and mname.startswith("M7"):
+                    continue  # 하이브리드 기준(유사일)은 일정 정보를 쓰므로 L0에 없음
+                if task == "A4" and mname == "M1_lgbm" and lvl in ("L2_plus_hourly_onoff", "L1a_regime_error05",
+                                                                     "L1a_regime_error10", "L1a_regime_error20"):
+                    continue  # 실행 시간 절약: A4 LightGBM은 L0·L1a·L1b·L3만
+                fac = build_model(mname, fam, feats, selection)
+                t0 = time.time()
+                pc = CV.run_cv(Xv, iv, fac, fam)
+                pt = CV.run_test(Xv, iv, fac, fam)
+                rc = MT.regression(y[cvmask], pc[cvmask])
+                rt = MT.regression(y[temask], pt[temask])
+                rows.append(dict(task=task, level=lvl, model=mname, cv_RMSE=rc["RMSE"], cv_MAE=rc["MAE"],
+                                 test_RMSE=rt["RMSE"], test_MAE=rt["MAE"]))
+                log(f"  info {task} {lvl} {mname} {time.time() - t0:.0f}s")
+    return pd.DataFrame(rows)
+
+
+def weather_noise(iv: pd.DataFrame, selection: dict, log=print) -> pd.DataFrame:
+    """기상 예보오차 민감도: 기온에 날짜별 편향 + 시간별 잡음(σ, σ/2)을 넣어 학습·예측 모두 예보 대리로 사용."""
+    y = iv["y"]
+    cvmask, temask = _cvmask(iv), _temask(iv)
+    rows = []
+    for sigma in (0.0, 1.5, 3.0):
+        ivn = iv.copy()
+        if sigma > 0:
+            rng = np.random.default_rng(C.SEED + int(sigma * 10))
+            days = pd.DatetimeIndex(iv.index.normalize().unique())
+            hours = pd.DatetimeIndex(iv.index.floor("h").unique())
+            b = pd.Series(rng.normal(0, sigma, len(days)), index=days).reindex(iv.index.normalize()).to_numpy()
+            e = pd.Series(rng.normal(0, sigma / 2, len(hours)), index=hours).reindex(iv.index.floor("h")).to_numpy()
+            ivn["temp"] = iv["temp"] + b + e
+        fr = CV.build_frames(ivn, tasks=("B", "A4"))
+        for task, fam in (("B", "B"), ("A4", "A")):
+            feats = F.feature_list(fam)
+            chosen = selection[fam]["chosen"]
+            for mname in dict.fromkeys([chosen, "M1_lgbm"]):
+                fac = build_model(mname, fam, feats, selection)
+                pc = CV.run_cv(fr[task], ivn, fac, fam)
+                pt = CV.run_test(fr[task], ivn, fac, fam)
+                rows.append(dict(sigma_C=sigma, task=task, model=mname,
+                                 cv_RMSE=MT.regression(y[cvmask], pc[cvmask])["RMSE"],
+                                 test_RMSE=MT.regression(y[temask], pt[temask])["RMSE"]))
+                log(f"  weather-noise {sigma} {task} {mname}")
+    return pd.DataFrame(rows)
+
+
+def ablations(iv: pd.DataFrame, df: pd.DataFrame, diag, selection: dict, log=print) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """절제: 기상 제외, 발행 24:00, 복제 포함 학습, 요일유형3·전날 체제 제외, 유사일 키에 전날 체제 추가(사후 민감도).
+
+    각 행은 교차검증 pooled·시험 RMSE와, 헤드라인 설정 대비 시험 RMSE 차이의 날짜 부트스트랩 90% 구간."""
+    y = iv["y"]
+    cvmask, temask = _cvmask(iv), _temask(iv)
+    rows, contrib = [], []
+    frames = CV.build_frames(iv, tasks=("B", "A4"))
+    base_pred = {}
+
+    def headline(task, mname):
+        key = (task, mname)
+        if key not in base_pred:
+            fam = "A" if task.startswith("A") else "B"
+            src = SM.load_predictions("test", task).reindex(y.index)
+            if mname in src:
+                base_pred[key] = src[mname]
+            else:
+                base_pred[key] = CV.run_test(frames[task], iv, build_model(mname, fam, F.feature_list(fam), selection), fam)
+        return base_pred[key]
+
+    def rec(name, task, mname, pc, pt, posthoc=False):
+        rc = MT.regression(y[cvmask], pc[cvmask])
+        rt = MT.regression(y[temask], pt[temask])
+        b = MT.paired_day_bootstrap(y, pt, headline(task, mname), temask, stat="RMSE")
+        rows.append(dict(ablation=name, task=task, model=mname, cv_RMSE=rc["RMSE"], cv_MAE=rc["MAE"], test_RMSE=rt["RMSE"],
+                         test_MAE=rt["MAE"], test_diff_vs_headline=b["diff"], diff_ci90=str(b["ci90"]),
+                         posthoc_sensitivity=posthoc))
+        log(f"  ablation {name} {task} {mname}")
+        return pt
+
+    models = {"B": list(dict.fromkeys([selection["B"]["chosen"], "M1_lgbm", "BL5_regime_analog"])),
+              "A4": list(dict.fromkeys([selection["A"]["chosen"], "M1_lgbm", "M6_analog_level"]))}
+    # 기상 제외
+    for task, fam in (("B", "B"), ("A4", "A")):
+        feats = F.feature_list(fam, weather_on=False)
+        for mname in models[task]:
+            if mname.startswith("BL") or mname.startswith("M6"):
+                continue
+            fac = build_model(mname, fam, feats, selection)
+            rec("no_weather", task, mname, CV.run_cv(frames[task], iv, fac, fam), CV.run_test(frames[task], iv, fac, fam))
+    # 발행 시각 24:00 (B)
+    fr24 = CV.build_frames(iv, issue_hour_b=24, tasks=("B",))
+    for mname in models["B"]:
+        fac = build_model(mname, "B", F.feature_list("B"), selection)
+        rec("issue_2400", "B", mname, CV.run_cv(fr24["B"], iv, fac, "B"), CV.run_test(fr24["B"], iv, fac, "B"))
+    # 복제 포함 학습(복제·부분 복제를 학습 정답과 유사일 풀에 넣음, 평가는 그대로)
+    iv_c = D.build_intervals(df, diag, train_on_copies=True)
+    fr_c = CV.build_frames(iv_c, tasks=("B", "A4"))
+    for task, fam in (("B", "B"), ("A4", "A")):
+        for mname in models[task]:
+            fac = build_model(mname, fam, F.feature_list(fam), selection)
+            pt = rec("train_on_copies", task, mname, CV.run_cv(fr_c[task], iv_c, fac, fam), CV.run_test(fr_c[task], iv_c, fac, fam))
+            e_a = ((pt - y) ** 2).where(pd.Series(temask, index=y.index))
+            e_b = ((headline(task, mname) - y) ** 2).where(pd.Series(temask, index=y.index))
+            dd = (e_a - e_b).groupby(y.index.normalize()).sum()
+            tot = dd.sum()
+            for d, v in dd.sort_values(ascending=False).head(5).items():
+                contrib.append(dict(ablation="train_on_copies", task=task, model=mname, date=d, delta_SSE=v,
+                                    share_of_total_delta=v / tot if tot else np.nan))
+    # 요일유형3 유사일 키 + 전날 체제·요일유형4 특징 제외(야간조 이월 지식의 기여)
+    fr3 = CV.build_frames(iv, analog_key=("daytype3",), tasks=("B", "A4"))
+    for task, fam in (("B", "B"), ("A4", "A")):
+        feats = [c for c in F.feature_list(fam) if c not in ("daytype4", "regime_prev")]
+        for mname in models[task]:
+            fac = build_model(mname, fam, feats, selection)
+            rec("daytype3_no_prev_regime", task, mname, CV.run_cv(fr3[task], iv, fac, fam), CV.run_test(fr3[task], iv, fac, fam))
+    # 유사일 키에 전날 체제 추가(시험 오류 분석에서 나온 사후 민감도, 헤드라인 불변)
+    frp = CV.build_frames(iv, analog_key=("daytype4", "regime_prev"), tasks=("B", "A4"))
+    for task, fam in (("B", "B"), ("A4", "A")):
+        for mname in models[task]:
+            fac = build_model(mname, fam, F.feature_list(fam), selection)
+            rec("analog_key_plus_prev_regime", task, mname, CV.run_cv(frp[task], iv, fac, fam),
+                CV.run_test(frp[task], iv, fac, fam), posthoc=True)
+    return pd.DataFrame(rows), pd.DataFrame(contrib)
+
+
+NAIVE_FOLDS = [("V1_Apr", pd.Timestamp("2021-04-01"), pd.Timestamp("2021-05-01")),
+               ("V2_May", pd.Timestamp("2021-05-01"), pd.Timestamp("2021-06-01")),
+               ("V3_Jul", pd.Timestamp("2021-07-01"), pd.Timestamp("2021-08-01"))]
+NAIVE_CANDIDATES = {"B": ["BL2_same_daytype", "BL3_profile", "BL5_regime_analog", "M9l_analog_level_adj", "M1_lgbm",
+                          "M7c_hybrid_coolmono"],
+                    "A": ["BL1_persistence", "BL6_analog_persist", "M6_analog_level", "M1_lgbm", "M7c_hybrid_coolmono"]}
+
+
+def naive_protocol(df: pd.DataFrame, diag, selection: dict, log=print) -> pd.DataFrame:
+    """반사실: 복제를 모르는 흔한 절차(손상·정전만 제외, 1~7월 원자료로 4·5·7월 폴드)에 같은 선택 규칙을 적용하면
+    어떤 모델이 뽑히고, 교차검증 점수와 시험 점수가 어떻게 다른가. 시험 구간(8~9월)은 두 절차 모두 같은 정답이다."""
+    iv_n = D.build_intervals(df, diag, naive=True)
+    saved = C.CV_FOLDS
+    rows = []
+    try:
+        C.CV_FOLDS = NAIVE_FOLDS
+        frames = CV.build_frames(iv_n)
+        cvm, oof = SM.run_cv_all(iv_n, frames, log=log, candidates=NAIVE_CANDIDATES)
+        for fam, tasks in (("B", ["B"]), ("A", ["A1", "A2", "A3", "A4"])):
+            s = SM.select(cvm, oof, iv_n, tasks)
+            for mname in dict.fromkeys((s["chosen"], selection[fam]["chosen"])):
+                if mname not in R.candidates(fam) and mname != "M8_blend":
+                    continue
+                cv_r, te_r = [], []
+                for t in tasks:
+                    fac = build_model(mname, fam, F.feature_list(fam), selection)
+                    pt = CV.run_test(frames[t], iv_n, fac, fam)
+                    te_r.append(MT.regression(iv_n["y"][_temask(iv_n)], pt[_temask(iv_n)])["RMSE"])
+                    r = cvm[(cvm.task == t) & (cvm.split == "pooled") & (cvm.model == mname)]
+                    cv_r.append(float(r["RMSE"].iloc[0]) if len(r) else np.nan)
+                rows.append(dict(protocol="naive(복제 미인지)", family=fam, model=mname, chosen_by_protocol=mname == s["chosen"],
+                                 cv_RMSE=float(np.mean(cv_r)), test_RMSE=float(np.mean(te_r))))
+                log(f"  naive {fam} {mname}")
+    finally:
+        C.CV_FOLDS = saved
+    cvm_h = pd.read_csv(C.OUTPUT_DIR / "cv" / "cv_metrics.csv")
+    tm_h = pd.read_csv(C.OUTPUT_DIR / "test" / "test_metrics.csv")
+    for fam, tasks in (("B", ["B"]), ("A", ["A1", "A2", "A3", "A4"])):
+        ch = selection[fam]["chosen"]
+        rows.append(dict(protocol="honest(v2.0 헤드라인)", family=fam, model=ch, chosen_by_protocol=True,
+                         cv_RMSE=float(cvm_h[(cvm_h.task.isin(tasks)) & (cvm_h.split == "pooled") & (cvm_h.model == ch)]["RMSE"].mean()),
+                         test_RMSE=float(tm_h[(tm_h.task.isin(tasks)) & (tm_h.model == ch)]["RMSE"].mean())))
+    return pd.DataFrame(rows)
+
+
+def learning_curve(iv: pd.DataFrame, selection: dict, log=print) -> pd.DataFrame:
+    """사후 설명용(시험 구간을 본 뒤 추가, 선택·설계에 쓰지 않음): 학습 창 길이(최근 N일)별 시험 성능."""
+    y = iv["y"]
+    temask = _temask(iv)
+    frames = CV.build_frames(iv, tasks=("B", "A4"))
     rows = []
     for task in ("B", "A4"):
         fam = "A" if task.startswith("A") else "B"
         X = frames[task]
         feats = F.feature_list(fam)
-        for win in (30, 60, 90, None):
-            for mname, fac in (("M1_lgbm", lambda: M.LGBModel(feats, objective="huber", alpha=10.0)),
-                               ("M7c_hybrid_coolmono", lambda: M.Hybrid(feats, fam, monotone=R.COOL_MONO)),
-                               ("M9l_analog_level_adj", lambda: M.AnalogAdjusted(True, False))):
-                if mname == "M9l_analog_level_adj" and fam == "A":
-                    continue
-                iv_w = iv
+        names = list(dict.fromkeys([selection[fam]["chosen"], "M1_lgbm", "M7c_hybrid_coolmono"]))
+        for win in (30, 60, None):
+            for mname in names:
+                fac = build_model(mname, fam, feats, selection)
                 pred = pd.Series(np.nan, index=X.index)
                 for s0, e0 in CV.weekly_blocks(C.TEST_START, C.TEST_END):
                     tr = CV.train_mask(X.index, iv["trainable"].to_numpy(), s0, fam)
                     if win is not None:
                         tr &= X.index >= s0 - pd.Timedelta(days=win)
                     ev = (X.index >= s0) & (X.index < e0)
-                    m = fac().fit(X.loc[tr], iv_w["y_train"][tr])
+                    m = fac().fit(X.loc[tr], iv["y_train"][tr])
                     pred.loc[ev] = m.predict(X.loc[ev])
                 r = MT.regression(y[temask], pred[temask])
                 rows.append(dict(task=task, model=mname, train_window_days=win or "all", test_RMSE=r["RMSE"],
@@ -546,9 +937,13 @@ def learning_curve(iv: pd.DataFrame, log=print) -> pd.DataFrame:
 
 
 def run_heavy(iv: pd.DataFrame, df: pd.DataFrame, diag, selection: dict, log=print) -> None:
-    """계획 정보가치 곡선·절제·기상 예보오차·학습 창 곡선(재학습이 많아 별도 단계)."""
+    """계획 정보가치·절제·반사실 절차·기상 예보오차·학습 창 곡선·LightGBM 격자(재학습이 많아 별도 단계)."""
     od = io.out_dir("analysis")
-    io.write_csv(info_value(iv, log=log), od / "plan_information_value.csv")
-    io.write_csv(ablations(iv, df, diag, log=log), od / "ablations.csv")
+    io.write_csv(SM.ml_sweep(iv, CV.build_frames(iv, tasks=("B", "A4")), log=log), io.out_dir("cv") / "ml_sweep.csv")
+    io.write_csv(info_value(iv, selection, log=log), od / "plan_information_value.csv")
+    ab, contrib = ablations(iv, df, diag, selection, log=log)
+    io.write_csv(ab, od / "ablations.csv")
+    io.write_csv(contrib, od / "ablation_copy_day_contrib.csv")
+    io.write_csv(naive_protocol(df, diag, selection, log=log), od / "naive_protocol.csv")
     io.write_csv(weather_noise(iv, selection, log=log), od / "weather_forecast_error.csv")
-    io.write_csv(learning_curve(iv, log=log), od / "learning_curve.csv")
+    io.write_csv(learning_curve(iv, selection, log=log), od / "learning_curve.csv")

@@ -6,15 +6,86 @@
   "cols": 18
  },
  "seed": 20260925,
- "stages": [
-  "diagnostics",
-  "digest"
- ],
- "timings_s": {
-  "diagnostics": 0.0,
-  "digest": 0.0
+ "stages_last_run": {
+  "diagnostics": {
+   "finished_at": "2026-09-26T17:56:03",
+   "seconds": 0.3
+  },
+  "models": {
+   "finished_at": "2026-09-26T17:56:03",
+   "seconds": 682.6
+  },
+  "peak": {
+   "finished_at": "2026-09-26T17:56:03",
+   "seconds": 37.8
+  },
+  "analysis": {
+   "finished_at": "2026-09-26T17:56:03",
+   "seconds": 110.0
+  },
+  "ablation": {
+   "finished_at": "2026-09-26T17:56:03",
+   "seconds": 2696.4
+  },
+  "field": {
+   "finished_at": "2026-09-26T17:56:03",
+   "seconds": 6.4
+  },
+  "external": {
+   "finished_at": "2026-09-26T17:56:03",
+   "seconds": 53.2
+  },
+  "figures": {
+   "finished_at": "2026-09-26T17:56:03",
+   "seconds": 3.1
+  },
+  "digest": {
+   "finished_at": "2026-09-26T17:56:03",
+   "seconds": 0.1
+  }
  },
- "total_s": 2.7,
+ "last_invocation": {
+  "stages": [
+   "diagnostics",
+   "models",
+   "peak",
+   "analysis",
+   "ablation",
+   "field",
+   "external",
+   "figures",
+   "digest"
+  ],
+  "timings_s": {
+   "diagnostics": 0.3,
+   "models": 682.6,
+   "peak": 37.8,
+   "analysis": 110.0,
+   "ablation": 2696.4,
+   "field": 6.4,
+   "external": 53.2,
+   "figures": 3.1,
+   "digest": 0.1
+  },
+  "total_s": 3591.6,
+  "finished_at": "2026-09-26T17:56:03",
+  "full_run": true
+ },
+ "last_full_run": {
+  "finished_at": "2026-09-26T17:56:03",
+  "total_s": 3591.6,
+  "timings_s": {
+   "diagnostics": 0.3,
+   "models": 682.6,
+   "peak": 37.8,
+   "analysis": 110.0,
+   "ablation": 2696.4,
+   "field": 6.4,
+   "external": 53.2,
+   "figures": 3.1,
+   "digest": 0.1
+  }
+ },
  "versions": {
   "python": "3.12.2",
   "platform": "macOS-26.3.1-arm64-arm-64bit",

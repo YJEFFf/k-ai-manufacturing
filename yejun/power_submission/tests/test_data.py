@@ -34,17 +34,48 @@ def test_copies(dg):
     assert s["unique_daily_power_patterns"] == 142
     assert s["copied_power_days"] == 115
     assert s["hour_copy_placebo_matches"] == "0/3885"
+    assert s["partial_copy_days"] == ["2021-01-01", "2021-01-09", "2021-01-10", "2021-01-16",
+                                      "2021-03-07", "2021-03-21", "2021-03-28"]
+    con = set(pd.to_datetime(d.contradictions["date"]).dt.strftime("%Y-%m-%d"))
+    # 설·삼일절·일요일인데 평일 가동 전력(v1에서 찾은 모순)은 모두 복제일 쪽에 있다
+    assert {"2021-02-11", "2021-03-01", "2021-03-14", "2021-05-09"} <= con
+    assert all(pd.Timestamp(x) < pd.Timestamp("2021-06-01") for x in con)  # 모순은 모두 1~5월의 채움 날짜
+
+
+def test_copy_origin_is_latest_consistent_member(dg):
+    """복제군의 가장 늦은 구성원은 모두 달력·생산과 정합하고, 가장 이른 구성원은 절반만 정합한다."""
+    _, _, d = dg
+    s = d.summary
+    assert s["copy_groups_multi"] == 45
+    assert s["copy_groups_latest_member_consistent"] == "45/45"
+    assert s["copy_groups_earliest_member_consistent"] == "22/45"
+    assert s["earliest_is_origin_binom_p"] < 1e-10
+    assert s["copied_src_later_share"] == 1.0
+    g = d.copy_groups
+    assert (g[g["is_origin"]]["consistent"] == 1).all()
+    # 1~4월은 원본일이 없다: 실측은 5월부터
+    assert s["genuine_days_by_month"] == {5: 30, 6: 30, 7: 27, 8: 31, 9: 14}
+
+
+def test_previous_rule_reproducible(dg):
+    """비교용 v1.x 규칙(가장 이른 날짜 = 원본)은 예전 부분 복제 목록을 그대로 재현한다."""
+    df, _, _ = dg
+    old = C.COPY_ORIGIN
+    try:
+        C.COPY_ORIGIN = "earliest"
+        s = D.diagnose(df).summary
+    finally:
+        C.COPY_ORIGIN = old
     assert s["partial_copy_days"] == ["2021-01-02", "2021-01-09", "2021-01-10", "2021-01-16", "2021-02-09",
                                       "2021-02-10", "2021-02-16", "2021-03-07", "2021-03-21", "2021-03-28"]
-    assert set(pd.to_datetime(d.contradictions["date"]).dt.strftime("%Y-%m-%d")) == {
-        "2021-02-11", "2021-03-01", "2021-03-14", "2021-05-09"}
+    assert s["copy_groups_earliest_member_consistent"] == "22/45"
 
 
 def test_corruption_outage_mismatch(dg):
     df, _, d = dg
     s = d.summary
     assert s["corrupt_hour_dates"] == ["2021-07-13", "2021-07-15"]
-    assert s["regime_mismatch_days"] == ["2021-01-17", "2021-01-24", "2021-02-19", "2021-02-26"]
+    assert s["regime_mismatch_days"] == ["2021-07-09"]
     iv = D.build_intervals(df, d)
     out = iv.index[iv["outage"]]
     assert len(out) == 74
@@ -52,8 +83,9 @@ def test_corruption_outage_mismatch(dg):
     # 손상일 전력·생산은 결측
     bad = iv.loc["2021-07-13"]
     assert bad["y_raw"].isna().all() and bad["prod"].isna().all()
-    # 평가 가능 ⊇ 학습 가능
+    # 평가 가능 ⊇ 학습 가능, 5월 이전 평가 가능 구간 없음
     assert (iv["trainable"] <= iv["usable"]).all()
+    assert not iv.loc[iv.index < C.MEASURED_START, "usable"].any()
 
 
 def test_test_period_is_clean(dg):
@@ -62,3 +94,30 @@ def test_test_period_is_clean(dg):
     te = iv.loc["2021-08-01":"2021-09-14"]
     assert not te["copied"].any() and not te["partial_copy"].any() and not te["hour_copy"].any()
     assert int(te["usable"].sum()) == 4320 - 74
+
+
+def test_waterfall_adds_up(dg):
+    from powerguard import stage_diagnostics as SD
+    df, _, d = dg
+    iv = D.build_intervals(df, d)
+    w = SD.preprocessing_waterfall(iv)
+    assert int(w.iloc[0]["remaining"]) == 24672
+    steps = w.iloc[1:6]
+    assert int(w.iloc[0]["remaining"] - steps["removed"].sum()) == int(iv["usable"].sum()) == 12694
+
+
+def test_consistency_rule_is_robust_to_thresholds(dg):
+    """정합 판정 문턱을 바꿔도(야간 40~80, 주간 80~120, 주간 생산 500~3000) 결론이 같다."""
+    from powerguard import stage_diagnostics as SD
+    df, _, d = dg
+    t = SD.origin_sensitivity(df, d)
+    assert (t["latest_consistent"] == 45).all()
+    assert (t["earliest_consistent"] <= 25).all()
+
+
+def test_naive_intervals_include_copies(dg):
+    df, _, d = dg
+    iv = D.build_intervals(df, d, naive=True)
+    assert iv.loc["2021-02-01":"2021-02-28", "usable"].sum() > 0
+    assert not iv["outage"][iv["usable"]].any()
+    assert np.array_equal(iv["usable"].to_numpy(), iv["trainable"].to_numpy())

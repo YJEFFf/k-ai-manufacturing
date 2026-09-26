@@ -341,13 +341,12 @@ class Blend:
 class DayVectorMLP:
     """과제 B: 하루 96구간을 한 번에 출력하는 다층 퍼셉트론(유사일 프로파일 대비 잔차를 학습).
 
-    입력 = 날짜 단위(체제·전날 체제·요일유형4 원핫·일 계획 총량·첫/마지막 가동 시간·주간/야간 가동 시간 수·
-    일 최고/평균 기온·D-1 주간 수준·D-2 평균/최대) + 유사일 프로파일 96. 출력 = y(96) − 유사일(96).
+    입력 = 날짜 단위(체제·전날 체제·요일유형4 원핫·일 최고/평균 기온·D-1 주간 수준·D-2 평균/최대)
+    + 유사일 프로파일 96. 출력 = y(96) − 유사일(96). v2.0: 시간별 생산량 파생 일 계획 세부는 입력에서 뺐다.
     학습일 = 정답 96개가 모두 학습 가능한 날.
     """
     name = "M3d_dayvec_mlp"
-    DAY_COLS = ["regime", "regime_prev", "plan_total", "plan_active_hours", "plan_first_hour", "plan_last_hour",
-                "plan_night_active", "plan_day_active", "tmax_day", "tmean_day", "d1_dayshift_mean", "d2_mean", "d2_max"]
+    DAY_COLS = ["regime", "regime_prev", "tmax_day", "tmean_day", "d1_dayshift_mean", "d2_mean", "d2_max"]
 
     def __init__(self, hidden=(64,), alpha=1e-2, seed=C.SEED):
         self.hidden = hidden
@@ -451,3 +450,49 @@ class AnalogAdjusted:
         p = b + w * (self._Z(X) @ self.beta_)
         p[~np.isfinite(p)] = self.mu_
         return p
+
+
+class PlanStopGate:
+    """계획 정지일(당일 가동 체제 0)에는 ML 예측 대신 구조 기준값(A: 수준 보정 유사일, B: 체제별 유사일)을 쓴다.
+
+    학습 자료(5~7월 실측)에는 평일 정지일이 없어 ML이 요일로 외삽해 가동 수준을 예측한다(v2.0 첫 시험 실행에서
+    휴가 주간 8/2~8/6에 확인, 사후 추가). 유사일 기준값은 같은 체제 날짜에서 오므로 정지일에 대기 전력을 준다.
+    """
+
+    def __init__(self, inner, task: str, rho: float = 0.9):
+        self.inner = inner
+        self.task = task
+        self.rho = rho
+
+    @property
+    def name(self):
+        return getattr(self.inner, "name", "gated")
+
+    @property
+    def features(self):
+        return self.inner.features
+
+    def fit(self, X, y):
+        self.inner.fit(X, y)
+        return self
+
+    def predict(self, X):
+        p = np.asarray(self.inner.predict(X), dtype=float).copy()
+        stop = X["regime"].to_numpy() == 0
+        if stop.any():
+            base = analog_level(X, self.rho) if self.task == "A" else _analog_base(X)
+            idx = np.where(stop & np.isfinite(base))[0]
+            p[idx] = base[idx]
+        return p
+
+    def contrib(self, X):
+        return self.inner.contrib(X)
+
+    def __getattr__(self, item):  # inner_, m_ 등 내부 속성 접근(설명 분석용)
+        if item == "inner":
+            raise AttributeError(item)
+        return getattr(self.inner, item)
+
+
+def gated(model, task: str):
+    return PlanStopGate(model, task)

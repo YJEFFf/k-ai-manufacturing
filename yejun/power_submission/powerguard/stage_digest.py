@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import json
 
-import numpy as np
 import pandas as pd
 
 from . import config as C
@@ -26,12 +25,31 @@ def run() -> dict:
     if diag:
         d = diag["diagnosis"]
         out["data"] = {"source": "diagnostics/summary.json", "days": d["n_days"], "unique_day_patterns": d["unique_daily_power_patterns"],
-                       "copied_days": d["copied_power_days"], "partial_copy_days": d["partial_copy_days"],
+                       "copied_days": d["copied_power_days"], "copy_origin_rule": d.get("copy_origin_rule"),
+                       "copy_groups_multi": d.get("copy_groups_multi"),
+                       "copy_groups_earliest_member_consistent": d.get("copy_groups_earliest_member_consistent"),
+                       "copy_groups_latest_member_consistent": d.get("copy_groups_latest_member_consistent"),
+                       "singleton_days_consistent": d.get("singleton_days_consistent"),
+                       "earliest_is_origin_binom_p": d.get("earliest_is_origin_binom_p"),
+                       "copied_by_src_month": d.get("copied_by_src_month"), "genuine_days_by_month": d.get("genuine_days_by_month"),
+                       "partial_copy_days": d["partial_copy_days"],
                        "hour_copy_placebo": d["hour_copy_placebo_matches"], "corrupt_dates": d["corrupt_hour_dates"],
                        "regime_mismatch_days": d["regime_mismatch_days"], "usable": diag["usable"], "peak": diag["peak"],
                        "test_composition": diag["test_composition"]}
+    for rel, key in (("diagnostics/preprocessing_waterfall.csv", "preprocessing_waterfall"),
+                     ("diagnostics/split_composition.csv", "split_composition"),
+                     ("diagnostics/production_power_relation.csv", "production_power_relation")):
+        t0 = _read_csv(rel)
+        if not t0.empty:
+            out[key] = {"source": rel, "rows": t0.round(4).to_dict("records")}
     sel = _read_json("cv/selection.json")
-    out["selection"] = {"source": "cv/selection.json", **{k: {"chosen": v["chosen"], "trail": v["trail"]} for k, v in sel.items()}}
+    out["selection"] = {"source": "cv/selection.json", **{k: {"chosen": v["chosen"], "v1_rule_choice": v.get("v1_rule_choice"),
+                                                              "blend_members": v.get("blend_members"), "trail": v["trail"]}
+                                                          for k, v in sel.items()}}
+    rob = _read_csv("cv/selection_robustness.csv")
+    if not rob.empty:
+        out["selection_robustness"] = {"source": "cv/selection_robustness.csv", **{
+            f: g["chosen"].value_counts().to_dict() for f, g in rob.groupby("family")}}
     tm = _read_csv("test/test_metrics.csv")
     if not tm.empty and sel:
         rows = {}
@@ -41,10 +59,29 @@ def run() -> dict:
             ch = sel[fam]["chosen"]
             ref = "BL1_persistence" if fam == "A" else "BL2_same_daytype"
             rows[task] = {"chosen": ch, "MAE": t.at[ch, "MAE"], "RMSE": t.at[ch, "RMSE"], "nMAE": t.at[ch, "nMAE"],
-                          "R2": t.at[ch, "R2"], "naive": ref, "naive_RMSE": t.at[ref, "RMSE"],
+                          "R2": t.at[ch, "R2"], "RMSE_work_dayshift": t.at[ch, "RMSE_work"] if "RMSE_work" in t else None,
+                          "naive": ref, "naive_RMSE": t.at[ref, "RMSE"],
                           "rmse_reduction_vs_naive": 1 - t.at[ch, "RMSE"] / t.at[ref, "RMSE"],
-                          "best_test_model": t["RMSE"].idxmin(), "best_test_RMSE": t["RMSE"].min()}
+                          "best_test_model": t["RMSE"].idxmin(), "best_test_RMSE": t["RMSE"].min(),
+                          "best_test_baseline": t[t.index.str.startswith("BL")]["RMSE"].idxmin(),
+                          "best_test_baseline_RMSE": t[t.index.str.startswith("BL")]["RMSE"].min()}
         out["test_regression"] = {"source": "test/test_metrics.csv", **rows}
+    for rel, key, filt in (("analysis/test_skill.csv", "test_skill_chosen", None),
+                           ("cv/selection_summary.csv", "selection_summary", None),
+                           ("peak/day_level_metrics.csv", "day_level_metrics_test", ("period", "test")),
+                           ("peak/month_max_prediction.csv", "month_max_prediction", None),
+                           ("analysis/test_bootstrap.csv", "test_bootstrap", None)):
+        t0 = _read_csv(rel)
+        if t0.empty:
+            continue
+        if filt:
+            t0 = t0[t0[filt[0]] == filt[1]]
+        if key == "test_skill_chosen" and sel:
+            t0 = t0[[m == sel["A" if tk.startswith("A") else "B"]["chosen"] for tk, m in zip(t0.task, t0.model)]]
+        out[key] = {"source": rel, "rows": t0.round(4).to_dict("records")}
+    j = _read_json("field/ratchet_risk_days_summary.json")
+    if j:
+        out["ratchet_risk_days"] = {"source": "field/ratchet_risk_days_summary.json", **j}
     cvm = _read_csv("cv/cv_metrics.csv")
     if not cvm.empty and sel:
         out["cv_pooled_RMSE_chosen"] = {"source": "cv/cv_metrics.csv", **{
@@ -60,8 +97,13 @@ def run() -> dict:
              "calibration": pk["prob_method"].get("calibration")}
         if not nh.empty:
             o["test_classification"] = nh[(nh.method == m) & (nh.period == "test")].iloc[0][
-                ["F1", "precision", "recall", "PR_AUC", "Brier", "ECE", "base_rate"]].to_dict()
+                ["F1", "precision", "recall", "PR_AUC", "Brier", "ECE", "base_rate", "BSS_vs_climatology"]].to_dict()
             o["test_rules_F1"] = nh[(nh.method.str.startswith("R_")) & (nh.period == "test")].set_index("method")["F1"].to_dict()
+            o["test_climatology"] = nh[(nh.method == "P_climatology") & (nh.period == "test")].iloc[0][
+                ["F1", "PR_AUC", "Brier", "ECE"]].to_dict()
+        fb = _read_csv("peak/next_hour_f1_bootstrap.csv")
+        if not fb.empty:
+            o["F1_diff_bootstrap"] = fb.to_dict("records")
         if not sens.empty:
             s = sens[sens.period == "test"]
             o["threshold_sensitivity_test"] = {str(q): s[s.peak_q == q].set_index("method")[["F1", "PR_AUC"]].round(4).to_dict("index")
@@ -94,12 +136,25 @@ def run() -> dict:
         out["demand_controller_test_shed10"] = {"source": "field/demand_controller.csv", **{
             f"T{int(r.target)}|{r.payback}|{r.policy}": {"over_reduction_share": r.over_reduction_share,
                                                          "max_month_max_change": r.max_month_max_change,
-                                                         "episodes_per_day": r.episodes_per_day, "tau": r.tau}
+                                                         "episodes_per_workday": r.episodes_per_workday,
+                                                         "shed_hours_per_workday": r.shed_hours_per_workday, "tau": r.tau}
             for r in t.itertuples()}}
     st = _read_csv("field/startup_staggering_monthly.csv")
     if not st.empty:
-        out["startup_staggering"] = {"source": "field/startup_staggering_monthly.csv",
+        st = st[(st["hold"] == 0)]
+        out["startup_staggering"] = {"source": "field/startup_staggering_monthly.csv(유지 부하 0)",
                                      "rows": st.round(3).to_dict("records")}
+    for rel in ("field/billing_ratchet.json",):
+        j = _read_json(rel)
+        if j:
+            out["billing_ratchet"] = {"source": rel, **j}
+    for rel, key in (("field/integrated_scenario.csv", "integrated_scenario"), ("field/alarm_burden.csv", "alarm_burden"),
+                     ("field/ratchet_events.csv", "ratchet_events"), ("analysis/naive_protocol.csv", "naive_protocol"),
+                     ("analysis/shap_grouped.csv", "shap_grouped"), ("analysis/error_rule_stability.csv", "error_rule_stability"),
+                     ("cv/ml_sweep.csv", "ml_sweep")):
+        t0 = _read_csv(rel)
+        if not t0.empty:
+            out[key] = {"source": rel, "rows": t0.round(4).to_dict("records")}
     for rel, key in (("analysis/plan_information_value.csv", "plan_information_value"),
                      ("analysis/ablations.csv", "ablations"), ("analysis/learning_curve.csv", "learning_curve")):
         t = _read_csv(rel)

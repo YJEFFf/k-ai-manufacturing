@@ -1,0 +1,13 @@
+method,calibration,period,n,Brier,ECE,PR_AUC
+P_residual_sim,none,cv,5463,0.0459939,0.00912667,0.937797
+P_residual_sim,none,test,4236,0.0503314,0.0122556,0.75622
+P_residual_sim,isotonic,cv,5463,0.0476895,0.0111975,0.92197
+P_residual_sim,isotonic,test,4236,0.0511194,0.0147614,0.741649
+P_lgbm_classifier,none,cv,5463,0.0657527,0.0448388,0.904447
+P_lgbm_classifier,none,test,4236,0.0574214,0.0313641,0.739103
+P_lgbm_classifier,isotonic,cv,5463,0.0583109,0.0144592,0.880198
+P_lgbm_classifier,isotonic,test,4236,0.0635109,0.0515969,0.719693
+P_climatology,none,cv,5463,0.0978816,0.0845587,0.787728
+P_climatology,none,test,4236,0.0620683,0.0267858,0.571531
+P_climatology,isotonic,cv,5463,0.0993807,0.0554932,0.715592
+P_climatology,isotonic,test,4236,0.06515,0.0328276,0.576756

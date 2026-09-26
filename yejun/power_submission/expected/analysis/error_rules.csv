@@ -1,30 +1,18 @@
-task,model,period,rule,n,mean_abs_err,ratio
-B,M9l_analog_level_adj,test,regime > 1.50 & regime_prev <= 1.00 & month <= 8.50,384,24.4121,2.84523
-B,M9l_analog_level_adj,test,regime > 1.50 & regime_prev > 1.00 & running_without_plan <= 0.50,1736,10.7126,1.24855
-B,M9l_analog_level_adj,test,regime > 1.50 & regime_prev > 1.00 & running_without_plan > 0.50,278,7.99943,0.932331
-B,M9l_analog_level_adj,test,regime > 1.50 & regime_prev <= 1.00 & month > 8.50,192,7.82619,0.91214
-B,M9l_analog_level_adj,test,regime <= 1.50 & regime > 0.50 & month > 8.50,192,6.78646,0.790959
-B,M9l_analog_level_adj,test,regime <= 1.50 & regime > 0.50 & month <= 8.50,262,5.78626,0.674387
-B,M9l_analog_level_adj,test,regime <= 1.50 & regime <= 0.50 & month <= 8.50,1010,1.68119,0.195942
-B,M9l_analog_level_adj,test,regime <= 1.50 & regime <= 0.50 & month > 8.50,192,1.125,0.131118
-B,M9l_analog_level_adj,cv,month <= 4.50 & daytype4 <= 2.50 & work_dayshift <= 0.50,816,26.0221,2.49216
-B,M9l_analog_level_adj,cv,month > 4.50 & daytype4 <= 1.50 & work_dayshift > 0.50,1344,11.7397,1.12432
-B,M9l_analog_level_adj,cv,month <= 4.50 & daytype4 <= 2.50 & work_dayshift > 0.50,432,10.4874,1.00439
-B,M9l_analog_level_adj,cv,month > 4.50 & daytype4 <= 1.50 & work_dayshift <= 0.50,1344,8.6942,0.832654
-B,M9l_analog_level_adj,cv,month > 4.50 & daytype4 > 1.50 & prod_level > 0.50,216,6.65278,0.637144
-B,M9l_analog_level_adj,cv,month <= 4.50 & daytype4 > 2.50,192,1.9349,0.185307
-B,M9l_analog_level_adj,cv,month > 4.50 & daytype4 > 1.50 & prod_level <= 0.50,1128,1.8617,0.178297
-A4,M1_lgbm,test,work_dayshift > 0.50 & regime_prev <= 1.00,288,13.8584,2.32867
-A4,M1_lgbm,test,work_dayshift > 0.50 & regime_prev > 1.00 & prod_change <= 1.50,610,9.50865,1.59776
-A4,M1_lgbm,test,work_dayshift > 0.50 & regime_prev > 1.00 & prod_change > 1.50,396,8.8763,1.49151
-A4,M1_lgbm,test,work_dayshift <= 0.50 & regime > 0.50 & prod_level > 0.50,1196,6.17922,1.03831
-A4,M1_lgbm,test,work_dayshift <= 0.50 & regime > 0.50 & prod_level <= 0.50,554,4.07768,0.685184
-A4,M1_lgbm,test,work_dayshift <= 0.50 & regime <= 0.50 & temp_level > 2.50,582,2.62267,0.440694
-A4,M1_lgbm,test,work_dayshift <= 0.50 & regime <= 0.50 & temp_level <= 2.50,620,1.26871,0.213185
-A4,M1_lgbm,cv,daytype4 <= 1.50 & month <= 4.50 & prod_level <= 0.50,224,17.3498,2.35811
-A4,M1_lgbm,cv,daytype4 <= 1.50 & month > 4.50 & work_dayshift > 0.50,1344,10.4248,1.41689
-A4,M1_lgbm,cv,daytype4 > 1.50 & prod_change > 0.50,236,9.5717,1.30094
-A4,M1_lgbm,cv,daytype4 <= 1.50 & month <= 4.50 & prod_level > 0.50,736,9.47614,1.28796
-A4,M1_lgbm,cv,daytype4 <= 1.50 & month > 4.50 & work_dayshift <= 0.50,1344,6.67771,0.907604
-A4,M1_lgbm,cv,daytype4 > 1.50 & prod_change <= 0.50 & temp_level <= 1.50,596,3.81732,0.518834
-A4,M1_lgbm,cv,daytype4 > 1.50 & prod_change <= 0.50 & temp_level > 1.50,992,1.89489,0.257546
+task,model,baseline,target,rule,n_cv,mean_cv,ci_cv_lo,ci_cv_hi,n_test,mean_test,ci_test_lo,ci_test_hi,reproduced
+B,M8_blend,BL5_regime_analog,loss_vs_baseline,(전체),5568,-0.407032,-0.694817,-0.173252,4246,-0.688141,-1.02014,-0.356713,
+B,M8_blend,BL5_regime_analog,loss_vs_baseline,work_dayshift <= 0.50 & daytype4 <= 1.50,1968,-0.237176,-0.492844,0.0540401,1728,-0.726893,-1.12914,-0.38899,1
+B,M8_blend,BL5_regime_analog,loss_vs_baseline,work_dayshift <= 0.50 & daytype4 > 1.50,1632,0.143356,-0.154542,0.470801,1224,-0.155791,-0.54388,0.136722,0
+B,M8_blend,BL5_regime_analog,loss_vs_baseline,work_dayshift > 0.50 & regime_prev <= 1.00,480,-0.0452102,-0.73096,0.651987,288,-0.348369,-1.53218,0.670409,0
+B,M8_blend,BL5_regime_analog,loss_vs_baseline,work_dayshift > 0.50 & regime_prev > 1.00,1488,-1.35205,-2.12482,-0.628615,1006,-1.36656,-2.24473,-0.488829,1
+B,M8_blend,BL5_regime_analog,abs_err_workday,(전체),1968,10.8496,10.0423,11.6108,1294,11.7561,10.1397,13.8117,
+B,M8_blend,BL5_regime_analog,abs_err_workday,analog_atypical <= 0.50 & win_lunch_1145_1315 <= 0.50,1512,10.8097,9.98513,11.6255,966,10.6848,9.49182,12.0567,0
+B,M8_blend,BL5_regime_analog,abs_err_workday,analog_atypical <= 0.50 & win_lunch_1145_1315 > 0.50,216,9.25395,8.24289,10.2707,136,10.2207,8.10939,12.936,0
+B,M8_blend,BL5_regime_analog,abs_err_workday,analog_atypical > 0.50,240,12.5366,9.96958,15.354,192,18.2336,11.6071,28.1192,0
+A4,M7c_hybrid_coolmono,BL4_ridge,loss_vs_baseline,(전체),5568,-0.770001,-0.997144,-0.562645,4246,-0.701523,-1.01435,-0.405651,
+A4,M7c_hybrid_coolmono,BL4_ridge,loss_vs_baseline,regime_prev <= -0.50,192,-2.8541,-3.36583,-2.34238,0,,,,
+A4,M7c_hybrid_coolmono,BL4_ridge,loss_vs_baseline,regime_prev > -0.50 & regime <= 0.50,864,0,0,0,1202,0,0,0,0
+A4,M7c_hybrid_coolmono,BL4_ridge,loss_vs_baseline,regime_prev > -0.50 & regime > 0.50,4512,-0.828763,-1.08684,-0.610876,3044,-0.978537,-1.38295,-0.621089,1
+A4,M7c_hybrid_coolmono,BL4_ridge,abs_err_workday,(전체),1968,9.8464,9.37013,10.2818,1294,10.5061,9.47545,11.6457,
+A4,M7c_hybrid_coolmono,BL4_ridge,abs_err_workday,win_startup_0730_0845 <= 0.50 & analog_atypical <= 0.50,1584,9.46482,8.93554,9.98663,1010,9.68389,8.86103,10.6037,0
+A4,M7c_hybrid_coolmono,BL4_ridge,abs_err_workday,win_startup_0730_0845 <= 0.50 & analog_atypical > 0.50,220,10.8933,9.84875,11.9378,176,13.8162,9.86162,18.7833,0
+A4,M7c_hybrid_coolmono,BL4_ridge,abs_err_workday,win_startup_0730_0845 > 0.50,164,12.1276,10.6647,13.91,108,12.8009,9.61858,16.7126,0

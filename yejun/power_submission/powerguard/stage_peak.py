@@ -1,6 +1,6 @@
 """S5: 피크 위험 확률·예측구간·경보·사건·월 최대 경신 위험.
 
-'정직한 예측 흐름' = 교차검증 OOF(4·5·7월) + 시험(8~9월) 예측. 잔차 기반 분포는 이 흐름의 과거 잔차만 쓴다.
+'정직한 예측 흐름' = 교차검증 OOF(6·7월) + 시험(8~9월) 예측. 잔차 기반 분포는 이 흐름의 과거 잔차만 쓴다.
 """
 from __future__ import annotations
 
@@ -92,6 +92,147 @@ def run_classifier(iv: pd.DataFrame, Xc: pd.DataFrame, labels: pd.DataFrame, T_a
     return prob
 
 
+def climatology_prob(iv: pd.DataFrame, labels: pd.DataFrame, regime_day: pd.Series) -> pd.Series:
+    """확률형 기준: 발행 구간 i의 P(다음 1시간 최대 ≥ T)를 과거 빈도로 추정(키 = 목표일 체제 × 첫 목표 슬롯).
+
+    주간 재학습과 같게 블록 시작 75분 전까지 끝난 발행만으로 빈도를 만들고, 키 표본이 10 미만이면 슬롯 → 전체 빈도.
+    T는 블록이 속한 폴드(또는 시험)의 기준을 쓴다.
+    """
+    idx = iv.index
+    tgt = idx + pd.Timedelta(minutes=15)
+    reg = regime_day.reindex(tgt.normalize()).to_numpy()
+    slot = (tgt.hour * 4 + tgt.minute // 15).to_numpy()
+    valid = labels["valid"].to_numpy()
+    mx = labels["max_next"].to_numpy()
+    prob = pd.Series(np.nan, index=idx)
+    blocks = []
+    for name, s, e in CV.cv_blocks() + [("test", C.TEST_START, C.TEST_END)]:
+        blocks += [(s0, e0, s) for s0, e0 in CV.weekly_blocks(s, e)]
+    for s0, e0, fold_start in blocks:
+        T = CV.peak_threshold(iv, fold_start)
+        tr = valid & (idx < s0 - pd.Timedelta(minutes=75)) & np.isfinite(reg)
+        lab = (mx[tr] >= T).astype(float)
+        d = pd.DataFrame({"r": reg[tr], "s": slot[tr], "l": lab})
+        k2 = d.groupby(["r", "s"])["l"].agg(["mean", "size"])
+        k1 = d.groupby("s")["l"].mean()
+        base = float(d["l"].mean()) if len(d) else np.nan
+        ev = (idx >= s0) & (idx < e0)
+        key = pd.MultiIndex.from_arrays([reg[ev], slot[ev]])
+        v2 = k2.reindex(key)
+        pv = np.where(v2["size"].to_numpy() >= 10, v2["mean"].to_numpy(), np.nan)
+        pv = np.where(np.isfinite(pv), pv, k1.reindex(slot[ev]).to_numpy())
+        pv = np.where(np.isfinite(pv), pv, base)
+        prob[ev] = pv
+    return prob
+
+
+def _day_boot(days: np.ndarray, fn, n_boot: int = 2000, block_days: int = 1, seed: int = 0) -> tuple[float, list]:
+    """날짜(블록) 부트스트랩: fn(선택된 날짜 배열) → 통계. 점추정과 90% 구간."""
+    ud = np.array(sorted(np.unique(days)))
+    n = len(ud)
+    rng = np.random.default_rng(seed)
+    point = fn(ud)
+    bs = []
+    for _ in range(n_boot):
+        if block_days <= 1:
+            pick = ud[rng.integers(0, n, n)]
+        else:
+            st = rng.integers(0, max(n - block_days + 1, 1), int(np.ceil(n / block_days)))
+            pick = np.concatenate([ud[s0:s0 + block_days] for s0 in st])[:n]
+        bs.append(fn(pick))
+    bs = np.array(bs, float)
+    return float(point), [float(np.nanquantile(bs, 0.05)), float(np.nanquantile(bs, 0.95))]
+
+
+def f1_difference_bootstrap(lab: np.ndarray, pa: np.ndarray, ta: float, pb: np.ndarray, tb: float, mask: np.ndarray,
+                            index: pd.DatetimeIndex, block_days: int) -> dict:
+    """발행 구간 F1 차이(a − b)의 날짜 블록 부트스트랩. 날짜별 TP·FP·FN을 합쳐 다시 계산한다."""
+    day = index.normalize().to_numpy()
+    m = mask
+    a, b = (pa >= ta) & m, (pb >= tb) & m
+    y = lab & m
+    df = pd.DataFrame({"d": day[m], "tpa": (a & y)[m], "fpa": (a & ~y)[m], "fna": (~a & y)[m],
+                       "tpb": (b & y)[m], "fpb": (b & ~y)[m], "fnb": (~b & y)[m]}).groupby("d").sum()
+
+    def f1(tp, fp, fn):
+        return 2 * tp / (2 * tp + fp + fn) if tp else 0.0
+
+    def fn_(pick):
+        s = df.loc[pick].sum()
+        return f1(s.tpa, s.fpa, s.fna) - f1(s.tpb, s.fpb, s.fnb)
+
+    point, ci = _day_boot(df.index.to_numpy(), fn_, block_days=block_days)
+    return {"F1_diff": point, "ci90": ci, "n_days": int(len(df))}
+
+
+def calibration_table(lab: np.ndarray, probs: dict, masks: dict, common: np.ndarray) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """확률 방법 × 보정(없음/등방 회귀)의 ECE·Brier. 교차검증은 폴드 교차 적합(한 폴드로 적합해 다른 폴드에 적용),
+    시험은 교차검증 전체로 적합. 신뢰도 곡선용 10구간 표도 만든다."""
+    from sklearn.isotonic import IsotonicRegression
+    rows, rel = [], []
+    folds = [(n, s, e) for n, s, e in CV.cv_blocks()]
+    for pname, p in probs.items():
+        pv = p.to_numpy()
+        for calib in ("none", "isotonic"):
+            out = np.full(len(pv), np.nan)
+            if calib == "none":
+                out = pv.copy()
+            else:
+                idx = p.index
+                for i, (_, s, e) in enumerate(folds):
+                    fit_m = common & masks["cv"] & ~((idx >= s) & (idx < e)) & np.isfinite(pv)
+                    app = common & (idx >= s) & (idx < e) & np.isfinite(pv)
+                    if fit_m.sum() > 100 and lab[fit_m].min() != lab[fit_m].max():
+                        iso = IsotonicRegression(out_of_bounds="clip").fit(pv[fit_m], lab[fit_m].astype(float))
+                        out[app] = iso.predict(pv[app])
+                fit_m = common & masks["cv"] & np.isfinite(pv)
+                iso = IsotonicRegression(out_of_bounds="clip").fit(pv[fit_m], lab[fit_m].astype(float))
+                app = masks["test"] & np.isfinite(pv)
+                out[app] = iso.predict(pv[app])
+            for per in ("cv", "test"):
+                m = masks[per] & common & np.isfinite(out)
+                c = MT.classification(lab[m].astype(int), out[m], 0.5)
+                rows.append(dict(method=pname, calibration=calib, period=per, n=c["n"], Brier=c.get("Brier"),
+                                 ECE=c.get("ECE"), PR_AUC=c.get("PR_AUC")))
+                if calib == "none" or pname == "P_lgbm_classifier":
+                    edges = np.linspace(0, 1, 11)
+                    b = np.clip(np.digitize(out[m], edges[1:-1]), 0, 9)
+                    for k in range(10):
+                        mm = b == k
+                        if mm.any():
+                            rel.append(dict(method=pname, calibration=calib, period=per, bin=k, n=int(mm.sum()),
+                                            mean_prob=float(out[m][mm].mean()), observed=float(lab[m][mm].mean())))
+    return pd.DataFrame(rows), pd.DataFrame(rel)
+
+
+def coverage_gain_bootstrap(y: pd.Series, ivs: dict, groups: np.ndarray, mask: np.ndarray, alpha: float) -> dict:
+    """Mondrian − 전역 보정의 가동 주간 포괄률·interval score 차이(날짜 부트스트랩 90% 구간)."""
+    m = mask & (groups == 1) & np.isfinite(ivs["rolling_mondrian"]["lo"].to_numpy()) & np.isfinite(ivs["rolling_global"]["lo"].to_numpy())
+    yy = y.to_numpy()
+    rec = {}
+    for k, v in ivs.items():
+        lo, hi = v["lo"].to_numpy(), v["hi"].to_numpy()
+        cov = ((yy >= lo) & (yy <= hi)).astype(float)
+        sc = (hi - lo) + 2 / alpha * (lo - yy) * (yy < lo) + 2 / alpha * (yy - hi) * (yy > hi)
+        rec[k] = (cov, sc)
+    d = pd.DataFrame({"day": y.index.normalize()[m], "cm": rec["rolling_mondrian"][0][m], "cg": rec["rolling_global"][0][m],
+                      "sm": rec["rolling_mondrian"][1][m], "sg": rec["rolling_global"][1][m]}).groupby("day").agg(["sum", "size"])
+    days = d.index.to_numpy()
+
+    def cov_diff(pick):
+        s = d.loc[pick]
+        return (s[("cm", "sum")].sum() - s[("cg", "sum")].sum()) / s[("cm", "size")].sum()
+
+    def score_diff(pick):
+        s = d.loc[pick]
+        return (s[("sm", "sum")].sum() - s[("sg", "sum")].sum()) / s[("sm", "size")].sum()
+
+    c, cci = _day_boot(days, cov_diff)
+    sdiff, sci = _day_boot(days, score_diff)
+    return {"coverage_diff": c, "coverage_diff_ci90": cci, "interval_score_diff": sdiff, "interval_score_diff_ci90": sci,
+            "n_days": int(len(days))}
+
+
 # ---------------------------------------------------------------- 주 실행
 
 def run(iv: pd.DataFrame, frames: dict, selection: dict) -> dict:
@@ -111,7 +252,7 @@ def run(iv: pd.DataFrame, frames: dict, selection: dict) -> dict:
            "T_cv": {n: CV.peak_threshold(iv, s) for n, s, _ in CV.cv_blocks()}}
 
     # ---- 예측구간(롤링 split conformal / Mondrian / ACI). 잔차는 첫 발행 시각 전에 끝난 목표만.
-    rows = []
+    rows, cov_boot = [], []
     for task, pr in [("B", pred_B), ("A1", preds_h[1]), ("A4", preds_h[4])]:
         kb = KNOWN_B if task == "B" else KNOWN_A
         for alpha in (0.2, 0.1):
@@ -129,7 +270,13 @@ def run(iv: pd.DataFrame, frames: dict, selection: dict) -> dict:
                             continue
                         r = MT.interval_score(y[m], iv_["lo"][m], iv_["hi"][m], alpha)
                         rows.append(dict(task=task, alpha=alpha, method=vname, period=per, cond=cond, **r))
+            for per, pm in masks.items():
+                b = coverage_gain_bootstrap(y, variants, grp, pm & usable, alpha)
+                cov_boot.append(dict(task=task, alpha=alpha, period=per, cond="work_dayshift",
+                                     comparison="rolling_mondrian - rolling_global", **{k: (str(v) if isinstance(v, list) else v)
+                                                                                        for k, v in b.items()}))
     io.write_csv(pd.DataFrame(rows), od / "interval_coverage.csv")
+    io.write_csv(pd.DataFrame(cov_boot), od / "interval_coverage_gain_bootstrap.csv")
 
     # ---- 다음 1시간 최대 초과확률(C-A)
     labels = PK.next_hour_labels(y, usable)
@@ -151,41 +298,55 @@ def run(iv: pd.DataFrame, frames: dict, selection: dict) -> dict:
     rule_clock = ((reg_day == 2) & (tgt_hour >= 8) & (tgt_hour < 16)).astype(float)
     reg_slot = st["regime"].reindex(idx.normalize()).to_numpy()
     rule_clock_slot = ((reg_slot == 2) & (idx.hour >= 8) & (idx.hour < 16)).astype(float)
-    probs = {"P_residual_sim": prob_res, "P_lgbm_classifier": prob_clf,
+    prob_clim = climatology_prob(iv, labels, st["regime"])
+    probs = {"P_residual_sim": prob_res, "P_lgbm_classifier": prob_clf, "P_climatology": prob_clim,
              "R_persistence": pd.Series(rule_persist, index=idx), "R_analog": pd.Series(rule_analog, index=idx),
              "R_clock": pd.Series(rule_clock, index=idx)}
     valid = labels["valid"].to_numpy()
     # 모든 방법이 같은 행에서 평가되도록 공통 행(두 확률이 모두 있는 발행 구간)만 쓴다
     common = valid & np.isfinite(prob_res.to_numpy()) & np.isfinite(prob_clf.to_numpy())
     crow, arows = [], []
+    brier_clim = {}
+    for per, pm in masks.items():
+        m = pm & common
+        brier_clim[per] = MT.classification(lab_T[m].astype(int), prob_clim.to_numpy()[m], 0.5).get("Brier")
     for pname, p in probs.items():
         for per, pm in masks.items():
             m = pm & common
             if m.sum() == 0:
                 continue
             c = MT.classification(lab_T[m].astype(int), p.to_numpy()[m], 0.5)
-            crow.append(dict(method=pname, period=per, base_rate=c["pos"] / c["n"], **c))
-    # 확률 방법 선택: 공통 행 교차검증 Brier 최소(사전 규칙)
-    briers = {r["method"]: r.get("Brier", np.nan) for r in crow if r["period"] == "cv" and r["method"].startswith("P_")}
+            bss = 1 - c["Brier"] / brier_clim[per] if c.get("Brier") is not None and brier_clim[per] else np.nan
+            crow.append(dict(method=pname, period=per, base_rate=c["pos"] / c["n"], BSS_vs_climatology=bss, **c))
+    # 확률 방법 선택: 공통 행 교차검증 Brier 최소(사전 규칙). 기후값은 비교 기준이라 후보가 아니다
+    briers = {r["method"]: r.get("Brier", np.nan) for r in crow
+              if r["period"] == "cv" and r["method"] in ("P_residual_sim", "P_lgbm_classifier")}
     prob_method = min(briers, key=lambda k: briers[k] if np.isfinite(briers[k]) else np.inf)
     p_star = probs[prob_method]
     # 확률 보정 판정: 교차검증 ECE가 0.02를 넘으면 등방 회귀 보정(교차검증 OOF로 적합, 시험에 적용)
     ece_cv = [r["ECE"] for r in crow if r["period"] == "cv" and r["method"] == prob_method][0]
     calib = {"rule": "교차검증 ECE > 0.02이면 등방 회귀 보정", "cv_ECE": ece_cv, "applied": bool(ece_cv > 0.02)}
     if calib["applied"]:
+        # 교차검증 구간은 폴드 교차 적합(다른 폴드로 적합해 적용), 시험은 교차검증 전체로 적합. τ도 보정된 확률로 고른다
         from sklearn.isotonic import IsotonicRegression
-        mcv = masks["cv"] & common
-        iso = IsotonicRegression(out_of_bounds="clip").fit(p_star.to_numpy()[mcv], lab_T[mcv].astype(float))
-        pv = p_star.to_numpy().copy()
-        mt = masks["test"] & np.isfinite(pv)
-        pv[mt] = iso.predict(pv[mt])
+        pv0 = p_star.to_numpy()
+        pv = np.full(len(pv0), np.nan)
+        for _, s, e in CV.cv_blocks():
+            fit_m = masks["cv"] & common & ~((idx >= s) & (idx < e))
+            app = (idx >= s) & (idx < e) & np.isfinite(pv0)
+            iso = IsotonicRegression(out_of_bounds="clip").fit(pv0[fit_m], lab_T[fit_m].astype(float))
+            pv[app] = iso.predict(pv0[app])
+        iso = IsotonicRegression(out_of_bounds="clip").fit(pv0[masks["cv"] & common], lab_T[masks["cv"] & common].astype(float))
+        mt = masks["test"] & np.isfinite(pv0)
+        pv[mt] = iso.predict(pv0[mt])
         p_star = pd.Series(pv, index=idx)
-        probs[prob_method + "_isotonic"] = p_star
+        prob_method = prob_method + "_isotonic"
+        probs[prob_method] = p_star
     res["prob_method"] = {"chosen": prob_method, "cv_brier_common_rows": briers, "calibration": calib}
     # 문턱: (1) 교차검증 F1 최대(주 운영점), (2) 시각 규칙과 같은 경보 시간(교차검증에서 맞춤)
     clock_cv = _alarm_eval(probs["R_clock"], labels, y, usable, T_arr, 0.5, masks["cv"] & common)
     tau_sel = {}
-    for pname in ("P_residual_sim", "P_lgbm_classifier"):
+    for pname in dict.fromkeys(("P_residual_sim", "P_lgbm_classifier", "P_climatology", prob_method)):
         p = probs[pname]
         mcv = masks["cv"] & common
         f1_tau, _ = MT.best_f1_threshold(lab_T[mcv].astype(int), p.to_numpy()[mcv], TAU_GRID)
@@ -214,6 +375,21 @@ def run(iv: pd.DataFrame, frames: dict, selection: dict) -> dict:
             for per in ("cv", "test"):
                 r = _alarm_eval(probs[pname], labels, y, usable, T_arr, tau, masks[per] & common, merge_gap=gap)
                 arows.append(dict(method=pname, period=per, tau_rule=f"{rule}_mergegap{gap * 15}min", **r))
+    # F1 차이 부트스트랩: 선택 방법(F1 문턱) vs 시각 규칙·기후값 확률(각 CV F1 문턱)
+    fb = []
+    tau_c = tau_sel["P_climatology"]["tau_f1"]
+    for other, pb, tb in (("R_clock", probs["R_clock"].to_numpy(), 0.5), ("P_climatology", prob_clim.to_numpy(), tau_c)):
+        for per in ("cv", "test"):
+            for bd in (1, 7):
+                b = f1_difference_bootstrap(lab_T, np.nan_to_num(p_star.to_numpy(), nan=-1), tau_sel[prob_method]["tau_f1"],
+                                            np.nan_to_num(pb, nan=-1), tb, masks[per] & common, idx, bd)
+                fb.append(dict(method=prob_method, vs=other, period=per, block_days=bd, F1_diff=b["F1_diff"],
+                               ci90=str(b["ci90"]), n_days=b["n_days"]))
+    io.write_csv(pd.DataFrame(fb), od / "next_hour_f1_bootstrap.csv")
+    ct, rel = calibration_table(lab_T, {k: probs[k] for k in ("P_residual_sim", "P_lgbm_classifier", "P_climatology")},
+                                masks, common)
+    io.write_csv(ct, od / "next_hour_calibration.csv")
+    io.write_csv(rel, od / "next_hour_reliability.csv")
     # 시험 구간 예측 결과 파일(제출물 '테스트데이터 예측결과'): 선택 모델·확률·경보·예측구간
     ivB = PK.rolling_intervals(y, pred_B, grp, 0.2, known_before=KNOWN_B)
     ivA = PK.rolling_intervals(y, preds_h[4], grp, 0.2, known_before=KNOWN_A)
@@ -224,12 +400,27 @@ def run(iv: pd.DataFrame, frames: dict, selection: dict) -> dict:
         "dayahead_hi80": ivB["hi"].to_numpy()[te],
         **{f"intraday_h{h}_{mA}": preds_h[h].to_numpy()[te] for h in range(1, 5)},
         "intraday_h4_lo80": ivA["lo"].to_numpy()[te], "intraday_h4_hi80": ivA["hi"].to_numpy()[te],
-        "p_next_hour_peak": p_star.to_numpy()[te], "alarm_next_hour": (p_star.to_numpy()[te] >= tau_main).astype(int),
+        "p_next_hour_peak": p_star.to_numpy()[te],
+        "alarm_next_hour": np.where(np.isfinite(p_star.to_numpy()[te]), (p_star.to_numpy()[te] >= tau_main).astype(float), np.nan),
         "peak_T": T_arr[te],
     })
     io.write_csv(out, io.out_dir("test") / "predictions_test.csv")
+    cols_doc = [
+        ("interval_start", "행 색인: 15분 구간 시작 시각(값은 구간 종료 뒤 확인)"),
+        ("actual", "실측 15분 최대수요전력(원자료 단위)"), ("usable", "평가 가능 구간(정전·결측이면 False)"),
+        (f"dayahead_{mB}", "익일 예측(발행 D-1 17:00), 이 구간(목표)의 값"),
+        ("dayahead_lo80, dayahead_hi80", "익일 예측 80% 구간(롤링 Mondrian conformal)"),
+        (f"intraday_h1..h4_{mA}", "실시간 예측: 이 구간(목표)을 15·30·45·60분 전에 발행한 값"),
+        ("intraday_h4_lo80, intraday_h4_hi80", "60분 전 예측의 80% 구간"),
+        ("p_next_hour_peak", "발행 구간 기준: 이 구간 종료 시점에 발행한 '다음 1시간(다음 네 구간) 최대 ≥ peak_T' 확률"),
+        ("alarm_next_hour", "p_next_hour_peak ≥ τ(교차검증 F1 최대)이면 1, 확률 결측이면 빈칸"),
+        ("peak_T", "피크 기준(시험 시작 전 학습 가능 구간 q95)"),
+    ]
+    io.write_csv(pd.DataFrame(cols_doc, columns=["column", "meaning"]), io.out_dir("test") / "predictions_test_columns.csv")
     C.ARTIFACT_DIR.mkdir(parents=True, exist_ok=True)
-    pd.DataFrame({"P_residual_sim": prob_res, "P_lgbm_classifier": prob_clf, "label": lab_T.astype(float),
+    pd.DataFrame({"P_residual_sim": prob_res, "P_lgbm_classifier": prob_clf, "P_climatology": prob_clim,
+                  **({prob_method: p_star} if prob_method not in ("P_residual_sim", "P_lgbm_classifier") else {}),
+                  "R_clock": probs["R_clock"], "R_analog": probs["R_analog"], "label": lab_T.astype(float),
                   "valid": valid, "common": common, "T": T_arr}).to_csv(C.ARTIFACT_DIR / "next_hour_prob.csv.gz",
                                                                      float_format="%.5f")
     io.write_csv(pd.DataFrame(crow), od / "next_hour_classification.csv")
@@ -244,7 +435,7 @@ def run(iv: pd.DataFrame, frames: dict, selection: dict) -> dict:
         T = CV.peak_threshold(iv, s if name != "test" else C.TEST_START)
         dp, slot_p = PK.day_max_prob(pred_B, y, usable, T, st["regime"])
         msl = (idx >= s) & (idx < e) & usable & np.isfinite(slot_p.to_numpy())
-        slot_rows.append(pd.DataFrame({"period": "test" if name == "test" else "cv", "p": slot_p.to_numpy()[msl],
+        slot_rows.append(pd.DataFrame({"ts": idx[msl], "period": "test" if name == "test" else "cv", "p": slot_p.to_numpy()[msl],
                                        "rule": rule_clock_slot[msl], "label": (y.to_numpy()[msl] >= T).astype(int)}))
         dp = dp[(dp["date"] >= s) & (dp["date"] < e)].copy()
         dp["period"] = "test" if name == "test" else "cv"
@@ -304,6 +495,7 @@ def run(iv: pd.DataFrame, frames: dict, selection: dict) -> dict:
                                   **{k: c.get(k) for k in ("n", "pos", "precision", "recall", "F1", "PR_AUC", "Brier")}))
     io.write_csv(pd.DataFrame(srows), od / "next_hour_threshold_sensitivity.csv")
     sl = pd.concat(slot_rows, ignore_index=True)
+    sl.to_csv(C.ARTIFACT_DIR / "dayahead_slot_prob.csv.gz", float_format="%.5f", index=False)
     for per in ("cv", "test"):
         d = sl[sl.period == per]
         mcv = sl[sl.period == "cv"]
@@ -312,6 +504,20 @@ def run(iv: pd.DataFrame, frames: dict, selection: dict) -> dict:
             c = MT.classification(d["label"].to_numpy(), d[col].to_numpy(), tau)
             drows.append(dict(target="slot_y>=T_dayahead", method="p_slot_residual_sim" if col == "p" else "rule_fullday_0800_1600",
                               period=per, base_rate=c["pos"] / c["n"], tau=tau, **c))
+    # 월 최대수요 예측: 익일 예측(발행 D-1 17:00)의 월 최대 vs 실측 월 최대(요금 기준 목표의 예측 오차)
+    mrows = []
+    yv_u = y.where(pd.Series(usable, index=idx))
+    for per, pm in masks.items():
+        for mth in sorted(np.unique(idx[pm].month)):
+            mm = pm & (idx.month == mth)
+            ya, pa = yv_u[mm], pred_B[mm]
+            if ya.notna().sum() == 0 or pa.notna().sum() == 0:
+                continue
+            mrows.append(dict(period=per, month=int(mth), actual_month_max=float(ya.max()), actual_at=str(ya.idxmax()),
+                              pred_month_max=float(pa.max()), pred_at=str(pa.idxmax()),
+                              error=float(pa.max() - ya.max()),
+                              pred_at_actual_peak_time=float(pa.get(ya.idxmax(), np.nan))))
+    io.write_csv(pd.DataFrame(mrows), od / "month_max_prediction.csv")
     io.write_csv(days, od / "day_level.csv")
     io.write_csv(pd.DataFrame(drows), od / "day_level_metrics.csv")
     io.write_json(res, od / "peak_summary.json")
@@ -335,6 +541,7 @@ def _alarm_eval(p, labels, y, usable, T_arr, tau, mask, merge_gap: int = 1):
     prec = agg["TP"] / (agg["TP"] + agg["FP"]) if agg["TP"] + agg["FP"] else np.nan
     rec = agg["TP"] / (agg["TP"] + agg["FN"]) if agg["TP"] + agg["FN"] else np.nan
     leads = [v for r in rows for v in r["leads"]]
+    leads_ep = [v for r in rows for v in r["leads_episode"]]
     on_hours = sum(r["alarm_on_hours_per_day"] * r["days"] for r in rows if np.isfinite(r["alarm_on_hours_per_day"]))
     return dict(tau=tau, **agg, precision=prec, recall=rec,
                 F1=2 * prec * rec / (prec + rec) if agg["TP"] else 0.0,
@@ -342,6 +549,9 @@ def _alarm_eval(p, labels, y, usable, T_arr, tau, mask, merge_gap: int = 1):
                 event_recall_scheduled=agg["detected_scheduled"] / agg["events_scheduled"] if agg["events_scheduled"] else np.nan,
                 event_recall_unscheduled=agg["detected_unscheduled"] / agg["events_unscheduled"] if agg["events_unscheduled"] else np.nan,
                 lead_median_min=float(np.median(leads)) if leads else np.nan,
+                lead_episode_median_min=float(np.median(leads_ep)) if leads_ep else np.nan,
+                lead_episode_p25_p75=(str([float(np.quantile(leads_ep, 0.25)), float(np.quantile(leads_ep, 0.75))])
+                                      if leads_ep else ""),
                 alarm_on_hours_per_day=on_hours / agg["days"] if agg["days"] else np.nan,
                 episodes_per_day=agg["alarm_episodes"] / agg["days"] if agg["days"] else np.nan,
                 false_episodes_per_day=agg["false_episodes"] / agg["days"] if agg["days"] else np.nan)

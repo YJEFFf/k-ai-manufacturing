@@ -12,7 +12,6 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from . import config as C
 
 STEPS = 96
 
@@ -220,7 +219,7 @@ def evaluate_alarms(prob: pd.Series, labels: pd.DataFrame, y: pd.Series, usable:
     f1 = 2 * prec * rec / (prec + rec) if tp else 0.0
     ev = events(y, usable, T, merge_gap)
     slots = (y.index.hour * 4 + y.index.minute // 15).to_numpy()
-    det, leads, n_ev = 0, [], 0
+    det, leads, leads_ep, n_ev = 0, [], [], 0
     by_type = {"scheduled": [0, 0], "unscheduled": [0, 0]}
     for _, e in ev.iterrows():
         s = int(e["start"])
@@ -237,6 +236,11 @@ def evaluate_alarms(prob: pd.Series, labels: pd.DataFrame, y: pd.Series, usable:
             det += 1
             by_type[typ][1] += 1
             leads.append((s - hit.min() - 1) * 15)
+            # 경보 에피소드 기준 선행시간: 창 안 마지막 경보가 속한 연속 경보의 시작부터 사건 시작까지(최대 2시간)
+            k = int(hit.max())
+            while k - 1 >= 0 and alarm[k - 1] and (s - (k - 1)) <= 8:
+                k -= 1
+            leads_ep.append((s - k) * 15)
     ep, fep = 0, 0
     k = 0
     n = len(alarm)
@@ -257,7 +261,7 @@ def evaluate_alarms(prob: pd.Series, labels: pd.DataFrame, y: pd.Series, usable:
                 event_recall=det / n_ev if n_ev else np.nan,
                 events_scheduled=by_type["scheduled"][0], detected_scheduled=by_type["scheduled"][1],
                 events_unscheduled=by_type["unscheduled"][0], detected_unscheduled=by_type["unscheduled"][1],
-                lead_median_min=float(np.median(leads)) if leads else np.nan, leads=leads,
+                lead_median_min=float(np.median(leads)) if leads else np.nan, leads=leads, leads_episode=leads_ep,
                 alarm_episodes=ep, false_episodes=fep, days=ndays,
                 alarm_on_hours_per_day=float(alarm.sum()) * 0.25 / ndays if ndays else np.nan,
                 episodes_per_day=ep / ndays if ndays else np.nan,

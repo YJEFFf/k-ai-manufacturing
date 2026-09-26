@@ -1,0 +1,133 @@
+{
+ "B": {
+  "chosen": "M8_blend",
+  "v1_rule_choice": "M8_blend",
+  "rule": "pooled RMSE 최소 → 더 단순한 등급 최선 모델과 날짜 부트스트랩(90%) 비교, B는 동률 시 일 최대 오차로 2차 비교(v1.1, 교차검증 비교 후 추가)",
+  "bootstrap": {
+   "seed": 0,
+   "n_boot": 2000
+  },
+  "trail": [
+   {
+    "model": "M8_blend",
+    "vs_simpler": "M1_lgbm",
+    "rmse_boot": {
+     "stat": "RMSE",
+     "diff": -0.269762,
+     "ci90": [
+      -0.486303,
+      -0.072585
+     ],
+     "p_a_better": 0.9915,
+     "n_days": 58
+    },
+    "keep": true
+   }
+  ],
+  "pooled_RMSE": {
+   "M8_blend": 9.9402,
+   "M1_lgbm": 10.21,
+   "M7c_hybrid_coolmono": 10.3014,
+   "M7_hybrid": 10.3354,
+   "BL5_regime_analog": 10.6794,
+   "M9l_analog_level_adj": 10.8304,
+   "M9_analog_adjusted": 10.9553,
+   "BL3_profile": 11.8349,
+   "BL4_ridge": 11.934,
+   "M3d_dayvec_mlp": 12.8606,
+   "M3_mlp": 13.5924,
+   "BL2_same_daytype": 26.8297
+  },
+  "V2_Jul_RMSE": {
+   "M8_blend": 9.7453,
+   "M7c_hybrid_coolmono": 9.8812,
+   "M7_hybrid": 9.9287,
+   "M1_lgbm": 10.1815,
+   "BL5_regime_analog": 10.2513,
+   "M9l_analog_level_adj": 10.46,
+   "M9_analog_adjusted": 10.4784,
+   "BL4_ridge": 11.7077,
+   "M3d_dayvec_mlp": 12.308,
+   "BL3_profile": 12.4086,
+   "M3_mlp": 14.3104,
+   "BL2_same_daytype": 25.4538
+  },
+  "blend_members": [
+   "M1_lgbm",
+   "M7c_hybrid_coolmono"
+  ]
+ },
+ "A": {
+  "chosen": "M7c_hybrid_coolmono",
+  "v1_rule_choice": "M7c_hybrid_coolmono",
+  "rule": "pooled RMSE 최소 → 더 단순한 등급 최선 모델과 날짜 부트스트랩(90%) 비교, B는 동률 시 일 최대 오차로 2차 비교(v1.1, 교차검증 비교 후 추가)",
+  "bootstrap": {
+   "seed": 0,
+   "n_boot": 2000
+  },
+  "trail": [
+   {
+    "model": "M8_blend",
+    "vs_simpler": "M7c_hybrid_coolmono",
+    "rmse_boot": {
+     "stat": "mean_RMSE",
+     "diff": -0.071677,
+     "ci90": [
+      -0.143805,
+      0.01027
+     ],
+     "p_a_better": 0.9335,
+     "n_days": 58
+    },
+    "keep": false
+   },
+   {
+    "model": "M7c_hybrid_coolmono",
+    "vs_simpler": "M1_lgbm",
+    "rmse_boot": {
+     "stat": "mean_RMSE",
+     "diff": -0.368676,
+     "ci90": [
+      -0.543727,
+      -0.212545
+     ],
+     "p_a_better": 1.0,
+     "n_days": 58
+    },
+    "keep": true
+   }
+  ],
+  "pooled_RMSE": {
+   "M8_blend": 8.2555,
+   "M7c_hybrid_coolmono": 8.3272,
+   "M7_hybrid": 8.3313,
+   "M1_lgbm": 8.6958,
+   "BL4_ridge": 9.125,
+   "M6_analog_level": 9.4425,
+   "BL5_regime_analog": 10.3076,
+   "BL6_analog_persist": 10.4626,
+   "BL3_profile": 11.8319,
+   "M3_mlp": 12.3596,
+   "BL1_persistence": 22.5514,
+   "BL2_same_daytype": 27.2527
+  },
+  "V2_Jul_RMSE": {
+   "M8_blend": 8.2029,
+   "M7c_hybrid_coolmono": 8.2908,
+   "M7_hybrid": 8.2936,
+   "M1_lgbm": 8.5881,
+   "BL4_ridge": 9.3885,
+   "M6_analog_level": 9.4821,
+   "BL5_regime_analog": 10.0304,
+   "BL6_analog_persist": 10.5237,
+   "BL3_profile": 12.404,
+   "M3_mlp": 14.3585,
+   "BL1_persistence": 23.1016,
+   "BL2_same_daytype": 26.6283
+  },
+  "blend_members": [
+   "M7c_hybrid_coolmono",
+   "M1_lgbm"
+  ]
+ }
+}

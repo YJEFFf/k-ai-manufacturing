@@ -1,34 +1,38 @@
 {
- "model_A": "M1_lgbm",
- "model_B": "M9l_analog_level_adj",
+ "model_A": "M7c_hybrid_coolmono",
+ "model_B": "M8_blend",
  "T_test": 182.0,
  "T_cv": {
-  "V1_Apr": 181.0,
-  "V2_May": 177.0,
-  "V3_Jul": 175.0
+  "V1_Jun": 169.0,
+  "V2_Jul": 175.0
  },
  "prob_method": {
   "chosen": "P_residual_sim",
   "cv_brier_common_rows": {
-   "P_residual_sim": 0.03236,
-   "P_lgbm_classifier": 0.038999
+   "P_residual_sim": 0.045994,
+   "P_lgbm_classifier": 0.065753
   },
   "calibration": {
    "rule": "교차검증 ECE > 0.02이면 등방 회귀 보정",
-   "cv_ECE": 0.012175,
+   "cv_ECE": 0.009127,
    "applied": false
   }
  },
  "tau": {
   "P_residual_sim": {
    "tau_f1": 0.5,
-   "tau_match_clock_hours": 0.2,
-   "clock_alarm_on_hours_per_day_cv": 3.888889
+   "tau_match_clock_hours": 0.6,
+   "clock_alarm_on_hours_per_day_cv": 5.333333
   },
   "P_lgbm_classifier": {
+   "tau_f1": 0.1,
+   "tau_match_clock_hours": 0.35,
+   "clock_alarm_on_hours_per_day_cv": 5.333333
+  },
+  "P_climatology": {
    "tau_f1": 0.15,
-   "tau_match_clock_hours": 0.05,
-   "clock_alarm_on_hours_per_day_cv": 3.888889
+   "tau_match_clock_hours": 0.35,
+   "clock_alarm_on_hours_per_day_cv": 5.333333
   }
  }
 }

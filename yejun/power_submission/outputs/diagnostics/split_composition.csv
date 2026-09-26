@@ -1,0 +1,4 @@
+split,start,end,eval_days,days_full,days_partial,days_stop,eval_intervals,T_q95,peak_intervals,peak_base_rate,train_days_available
+V1_Jun,2021-06-01,2021-06-30,30,22,4,4,2880,169,367,0.127431,30
+V2_Jul,2021-07-01,2021-07-31,28,19,4,5,2688,175,425,0.15811,60
+test,2021-08-01,2021-09-14,45,27,5,13,4246,182,259,0.0609986,87

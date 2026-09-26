@@ -24,70 +24,95 @@
    "2021-07-13": true,
    "2021-07-15": true
   },
+  "copy_origin_rule": "latest_consistent",
+  "copy_groups_multi": 45,
+  "copy_groups_earliest_member_consistent": "22/45",
+  "copy_groups_latest_member_consistent": "45/45",
+  "singleton_days_consistent": "89/95",
+  "earliest_is_origin_binom_p": 0.0,
   "unique_daily_power_patterns": 142,
   "copied_power_days": 115,
   "copied_by_month": {
-   "1": 8,
-   "2": 18,
+   "1": 27,
+   "2": 28,
    "3": 28,
-   "4": 15,
-   "5": 17,
-   "6": 28,
+   "4": 30,
+   "5": 1,
+   "6": 0,
    "7": 1,
    "8": 0,
    "9": 0
   },
   "original_by_month": {
-   "1": 23,
-   "2": 10,
+   "1": 4,
+   "2": 0,
    "3": 3,
-   "4": 15,
-   "5": 14,
-   "6": 2,
+   "4": 0,
+   "5": 30,
+   "6": 30,
    "7": 30,
    "8": 31,
    "9": 14
   },
-  "copied_prod_also_copied_same_src": 0,
-  "copied_src_same_weekday_share": 0.2783,
-  "copied_src_same_day_of_month_share": 0.487,
+  "copied_days_with_production_vector_equal_to_other_day": 31,
+  "copied_days_with_production_vector_equal_to_other_day_all_zero": 31,
+  "copied_src_same_weekday_share": 0.2348,
+  "copied_src_same_day_of_month_share": 0.4957,
+  "copied_src_later_share": 1.0,
+  "copied_by_src_month": {
+   "1<-5": 9,
+   "1<-6": 18,
+   "2<-6": 28,
+   "3<-5": 5,
+   "3<-6": 23,
+   "4<-5": 30,
+   "5<-5": 1,
+   "7<-7": 1
+  },
   "copy_groups": 45,
   "hour_copy_placebo_matches": "0/3885",
   "partial_copy_days": [
-   "2021-01-02",
+   "2021-01-01",
    "2021-01-09",
    "2021-01-10",
    "2021-01-16",
-   "2021-02-09",
-   "2021-02-10",
-   "2021-02-16",
    "2021-03-07",
    "2021-03-21",
    "2021-03-28"
   ],
   "hour_copies_on_non_copied_days": {
-   "2021-01-02": 7,
-   "2021-01-09": 5,
-   "2021-01-16": 6,
-   "2021-02-01": 1,
-   "2021-02-09": 12,
-   "2021-02-10": 12,
-   "2021-02-16": 8,
+   "2021-01-01": 8,
+   "2021-01-09": 17,
+   "2021-01-10": 12,
+   "2021-01-16": 14,
    "2021-03-07": 17,
    "2021-03-21": 16,
    "2021-03-28": 16
   },
-  "natural_max_equal_run_below_threshold": 11,
-  "copied_calendar_contradictions": 4,
-  "orig_days_prod0_but_running": [
-   "2021-01-24"
-  ],
+  "natural_max_equal_run_below_threshold": 12,
+  "copied_calendar_contradictions": 39,
+  "orig_days_prod0_but_running": [],
   "regime_mismatch_days": [
-   "2021-01-17",
-   "2021-01-24",
-   "2021-02-19",
-   "2021-02-26"
+   "2021-07-09"
   ],
+  "genuine_days_by_month": {
+   "5": 30,
+   "6": 30,
+   "7": 27,
+   "8": 31,
+   "9": 14
+  },
+  "days_by_month": {
+   "1": 31,
+   "2": 28,
+   "3": 31,
+   "4": 30,
+   "5": 31,
+   "6": 30,
+   "7": 31,
+   "8": 31,
+   "9": 14
+  },
   "rows_all_power_zero": 17,
   "rows_any_power_zero": 20,
   "min_nonzero_power": 19.0,
@@ -196,40 +221,73 @@
   }
  },
  "usable": {
-  "usable_days": 130,
-  "usable_intervals": 12402,
-  "usable_days_before_test": 85,
+  "usable_days": 133,
+  "usable_intervals": 12694,
+  "usable_days_before_test": 88,
   "usable_days_test": 45,
   "test_intervals_usable": 4246,
-  "trainable_intervals": 12018,
+  "trainable_intervals": 12598,
   "outage_intervals": 74,
-  "excluded_intervals": {
-   "copied": 11040,
-   "partial_copy": 960,
-   "corrupt": 192,
-   "outage": 74,
-   "hour_copy": 400,
-   "regime_mismatch_train_only": 384
-  }
+  "first_usable_day": "2021-05-01",
+  "waterfall_file": "diagnostics/preprocessing_waterfall.csv"
  },
  "peak": {
   "T_q95_train_pool": 182.0,
-  "workdays": 78,
-  "daily_max_in_0730_0859_share_by_month": {
-   "1": 0.583,
-   "2": 0.667,
-   "4": 0.889,
-   "5": 0.444,
-   "7": 0.316,
-   "8": 0.312,
-   "9": 0.4
+  "workdays": 85,
+  "daily_max_in_0730_0859_by_month": {
+   "5": {
+    "share": 0.684,
+    "k": 13,
+    "n": 19,
+    "ci90": [
+     0.496,
+     0.827
+    ]
+   },
+   "6": {
+    "share": 0.545,
+    "k": 12,
+    "n": 22,
+    "ci90": [
+     0.376,
+     0.705
+    ]
+   },
+   "7": {
+    "share": 0.333,
+    "k": 6,
+    "n": 18,
+    "ci90": [
+     0.183,
+     0.527
+    ]
+   },
+   "8": {
+    "share": 0.312,
+    "k": 5,
+    "n": 16,
+    "ci90": [
+     0.161,
+     0.518
+    ]
+   },
+   "9": {
+    "share": 0.4,
+    "k": 4,
+    "n": 10,
+    "ci90": [
+     0.194,
+     0.648
+    ]
+   }
   },
-  "daily_max_in_0815_0900_share": 0.461538,
-  "startup_excess_median": 17.0625,
+  "daily_max_in_0815_0900_share": 0.470588,
+  "startup_excess_median": 13.0,
   "startup_excess_iqr": [
-   11.5,
-   22.875
-  ]
+   7.25,
+   17.75
+  ],
+  "startup_excess_definition": "08:00~08:59 최대 − 09:00~09:59 평균(10:00 휴식 구간 제외, 모든 단계 공통)"
  },
  "test_composition": {
   "test_days": 45,

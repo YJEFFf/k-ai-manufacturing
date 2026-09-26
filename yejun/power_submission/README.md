@@ -2,48 +2,80 @@
 
 제조 생산데이터 기반 15분 전력 예측과 최대피크 위험 분석을 한 번에 재현하는 코드다. 실행계획과 판단 기록은 [PLAN.md](PLAN.md)에 있다. 이 폴더는 보고서가 아니라 코드·실험 결과·분석용 표와 그림을 담는다.
 
+## 환경
+
+- Python 3.12 이상(고정한 numpy 2.5.3 휠은 3.12+용). 메모리 약 1.1GB. 실행 시간은 아래 '실행 기록' 참고.
+- macOS: LightGBM이 OpenMP를 쓰므로 필요하면 `brew install libomp`. Windows: 가상환경 활성화는 `.venv\Scripts\activate`,
+  그림 한글은 맑은 고딕을 쓴다(한글 글꼴이 없으면 `figures` 단계가 경고를 낸다. 수치 산출물에는 영향 없음).
+- LightGBM 스레드(4)·결정적 모드와 난수 시드를 고정해 결과가 코어 수·BLAS·파이썬 빌드와 무관하게 같다
+  (재현 검수에서 다른 파이썬 빌드·OpenBLAS로 비트 단위 일치 확인).
+
 ## 실행
 
 ```bash
-python -m venv .venv && source .venv/bin/activate
+python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-python run_all.py                      # 원본 자동 탐색: data/okm_augumented_2021.csv → 저장소 데이터셋 ZIP
-python run_all.py --data "/경로/Dataset_자원 최적화 AI 데이터셋.zip" --kamp-dir "/경로/데이터셋"
-python -m pytest -q tests              # 데이터 진단·누설(미래 교란 불변)·분할 경계 테스트
-python verify.py                       # outputs/ 를 expected/ 동결값과 비교
+python run_all.py --data "/경로/Dataset_자원 최적화 AI 데이터셋.zip"   # 한 번 주면 data/에 원본 사본을 저장(SHA-256 확인)
+python -m pytest -q tests              # 데이터 진단·누설(미래 교란 불변)·분할 경계·게이트·요금 규칙 테스트
+python verify.py --require-fresh       # outputs/ 를 expected/ 동결값과 비교 + 마지막 전체 실행에서 만든 산출물인지 확인
 ```
 
-단계만 골라 실행할 수 있다: `--stages diagnostics,models,peak,analysis,ablation,field,external,figures,digest`. `peak`부터는 `models` 결과(`artifacts/`)가 필요하다. 전체 실행은 Apple M 계열 8코어에서 약 31분(모델 비교 7.5분, 절제 21분)이다.
+원본 경로는 `--data` 인자 → 환경변수 `POWERGUARD_DATA` → `data/okm_augumented_2021.csv` → 저장소 `데이터셋/` ZIP 순서로 찾는다.
+외부 KAMP 자료(#41·#46·#30) ZIP은 `--kamp-dir` 폴더(기본: 저장소 `데이터셋/`)에서 찾으며, 없으면 `external` 단계는 해당 항목을
+건너뛰고 `verify.py`는 `external/*`를 비교하지 않는다.
 
-원본 CSV의 SHA-256(`8f7af2e4…4830`)을 적재 시 확인한다. 외부 KAMP 자료(#41·#46·#30) ZIP은 `--kamp-dir` 폴더(기본: 저장소 `데이터셋/`)에서 찾으며, 없으면 `external` 단계는 해당 항목을 건너뛴다.
+단계만 골라 실행할 수 있다: `--stages diagnostics,models,peak,analysis,ablation,field,external,figures,digest`.
+`peak`부터는 `models` 결과(`artifacts/`)가 필요하다. `outputs/run_manifest.json`에 단계별 실행 시각, 마지막 호출, 마지막 전체 실행
+(시작·끝·단계별 시간·인자·커밋·CPU 수)이 남는다. 제출용 ZIP은 `python make_submission.py`로 만든다(파일별 SHA-256 목록 포함).
+
+## 실행 기록
+
+- 2026-09-26 v2.0 전체 실행(Apple M 계열 8코어, 다른 전체 실행과 동시에 돌아 부하 상태): 3,592초 — models 683초, peak 38초,
+  analysis 110초, ablation 2,696초(정보가치·절제·반사실 절차·기상 예보오차·학습 창·LightGBM 격자), 나머지 약 1분.
+  `ablation`을 빼면 약 15분이다(`--stages diagnostics,models,peak,analysis,field,external,figures,digest`).
+- 결과 동일성: 코드만 복사한 사본의 전체 재실행을 `verify.py`로 비교한다(PLAN §10 S10).
+
+## 제출 패키지 체크리스트(재현용)
+
+1. `python make_submission.py`가 코드·테스트·기대값·산출물(시험 예측 파일 포함)·원본 CSV와 SHA-256 목록을 ZIP 하나로 만든다.
+2. 원본은 `data/okm_augumented_2021.csv`에 두거나(SHA-256 확인) `--data`로 KAMP ZIP 경로를 준다.
+3. 외부 KAMP 자료(#41·#46·#30) ZIP이 없으면 `external` 단계는 해당 항목을 건너뛰고, `verify.py`는 `external/*`를 비교하지 않는다
+   (메시지로 알린다). 세 ZIP을 `--kamp-dir` 폴더에 두면 모두 비교한다.
+4. 시험 구간 예측 파일 `outputs/test/predictions_test.csv`는 Git에서 빠져 있으므로 `run_all.py`(peak 단계)로 다시 만든다.
+   열 뜻은 `outputs/test/predictions_test_columns.csv`에 있다.
+5. `python -m pytest -q tests` → `python verify.py --require-fresh`로 확인한다. 실행하지 않은 산출물(예: 막 받은 사본)은 신선도 확인에서 실패한다.
 
 ## 구성
 
 | 경로 | 내용 |
 |---|---|
-| `powerguard/data.py` | 원본 적재, 복제(일·시간·부분)·손상·정전·체제 불일치 진단, 15분 구간 표 |
-| `powerguard/features.py` | 발행 시점 기준 특징: 운영일정·요일유형4·기상·지연값·체제별 유사일·실시간 수준 보정 |
-| `powerguard/models.py`, `registry.py` | 기준모델·유사일·LightGBM·MLP·하이브리드·선형 보정 유사일, 비교 후보 목록 |
-| `powerguard/cv.py` | 4·5·7월 워크포워드(폴드 안 주간 재학습), 시험 8/1~9/14 주간 재학습 |
-| `powerguard/stage_models.py` | 교차검증 비교, 사전 규칙(부트스트랩)에 따른 선택, 시험 예측 |
-| `powerguard/peak.py`, `stage_peak.py` | 잔차 기반 예측분포, 다음 1시간 초과확률, 예측구간, 경보·사건, 익일·월 누적 최대 |
-| `powerguard/stage_analysis.py` | 조건별 성능, 부트스트랩, 오차 조건 규칙, SHAP, 피크 조건, 계획 정보가치, 절제 |
-| `powerguard/stage_field.py` | 수요제어·순차 기동·냉방·경보 등급 시뮬레이션(가정 기반) |
+| `powerguard/data.py` | 원본 적재, 복제군 원본 판정(달력·생산 정합, v2.0)·부분/시간 복제·손상·정전·전력–생산 불일치 진단, 15분 구간 표 |
+| `powerguard/features.py` | 발행 시점 기준 특징: 가동 체제·요일유형4·기상·지연값·체제별 유사일·실시간 수준 보정, 특징 사전(FEATURE_GLOSSARY) |
+| `powerguard/models.py`, `registry.py` | 기준모델·유사일·LightGBM·MLP·하이브리드·선형 보정 유사일·계획 정지 게이트, 비교 후보 목록 |
+| `powerguard/cv.py` | 6·7월 워크포워드(5월 = 첫 학습 창, 폴드 안 주간 재학습), 시험 8/1~9/14 주간 재학습 |
+| `powerguard/stage_models.py` | 교차검증 비교, 사전 규칙(부트스트랩)에 따른 선택과 난수 민감도, 한 장 선택표, LightGBM 소형 격자 |
+| `powerguard/peak.py`, `stage_peak.py` | 잔차 기반 예측분포, 다음 1시간 초과확률(기후값 기준·F1 차이 구간·보정 비교), 예측구간, 경보·사건, 익일·월 누적 최대 |
+| `powerguard/stage_analysis.py` | 조건×모델 기술점수, 오차 규칙(교차검증에서 찾고 시험에서 재현 확인), SHAP(묶음·의존도), 피크 조건, FN/FP 집중, 계획 정보가치, 절제·반사실 절차 |
+| `powerguard/stage_field.py` | 요금적용전력(래칫), 래칫 위험일 선별, 수요제어(개입 예산)·순차 기동·냉방·야간 이동·경보 등급·통합 운영 절차(가정 기반) |
 | `powerguard/stage_external.py` | KAMP #41 파생 판정, #46 동시 기동, #30 일정 제약 |
 | `powerguard/stage_figures.py` | 분석용 그림 |
 | `outputs/` | 집계 결과 CSV/JSON과 그림(Git 포함). `outputs/test/predictions_test.csv`는 시험 구간 예측 파일(Git 제외) |
 | `artifacts/`, `data/` | 행 단위 예측·원본 사본(Git 제외) |
 | `expected/` | `verify.py`용 동결 기대값 |
-| `reviews/` | 구현 검수 지적·처리 기록과 변경 전 핵심 수치 |
+| `reviews/` | 검수 지적·처리 기록(구현 검수, 평가위원 검수 1차)과 변경 전 핵심 수치 |
 
 ## 결과 파일 안내
 
-- `outputs/diagnostics/summary.json`: 데이터 진단 수치(복제·손상·정전·사용 가능 구간·시험 구성)
-- `outputs/cv/cv_metrics.csv`, `outputs/cv/selection.json`: 교차검증 성능과 선택 근거(부트스트랩 경로)
+- `outputs/diagnostics/`: `summary.json`(진단 수치·원본 판정 근거), `variable_dictionary.csv`(18열 사전), `missing_outlier_treatment.csv`,
+  `preprocessing_waterfall.csv`, `split_composition.csv`, `imbalance.csv`, `copy_groups.csv`·`copy_origin_sensitivity.csv`(복제 방향),
+  `production_power_relation.csv`·`operating_states.csv`(생산–전력 관계·운영 상태)
+- `outputs/cv/`: `cv_metrics.csv`, `selection.json`(선택 경로), `selection_summary.csv`(과제별 한 장 선택표), `selection_robustness.csv`, `ml_sweep.csv`
 - `outputs/test/test_metrics.csv`: 시험 구간 모든 모델 성능, `test_metrics_static_refit.csv`: 정적 학습 민감도
-- `outputs/peak/`: 예측구간 포괄률, 다음 1시간 피크 분류·경보, 익일·월 누적 최대
-- `outputs/analysis/`: 조건별 성능·기술점수·부트스트랩·오차 규칙·SHAP·피크 조건·계획 정보가치·절제
-- `outputs/field/`: 수요제어·순차 기동·냉방·경보 등급
+- `outputs/peak/`: 예측구간 포괄률·보정 이득 구간, 다음 1시간 피크 분류(기후값 기준·F1 차이·보정 비교·신뢰도)·경보, 익일·월 누적 최대
+- `outputs/analysis/`: 조건×모델 기술점수, 오차 규칙·안정성, SHAP(특징·묶음·상호작용·기상 의존도), 피크 조건·조건부 비율,
+  FN/FP 집중 조건, 계획 정보가치, 절제·반사실 절차(`naive_protocol.csv`), 기상 예보오차, 학습 창 곡선
+- `outputs/field/`: 요금적용전력(`billing_ratchet.json`)·래칫 사건·래칫 위험일, 수요제어(설정·파레토·민감도), 순차 기동, 냉방, 야간 이동,
+  경보 등급·부담, 통합 시나리오·운영 절차
 - `outputs/external/`: 외부 KAMP 자료 판정·메커니즘
 - `outputs/figures/`: 분석용 그림
 - `outputs/key_numbers.json`: 위 결과의 핵심 수치 모음(각 값의 출처 파일 표기)

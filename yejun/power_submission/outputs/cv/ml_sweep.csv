@@ -1,0 +1,13 @@
+task,config,cv_RMSE,cv_best,test_RMSE
+B,default_huber,10.2096,False,13.7983
+B,leaves7_min100,9.78181,True,14.2722
+B,leaves15_min50,9.98845,False,
+B,leaves63_min20,10.2621,False,
+B,leaves31_min100,9.95268,False,
+B,default_l2,10.326,False,
+A4,default_huber,9.47509,False,9.81894
+A4,leaves7_min100,9.52262,False,
+A4,leaves15_min50,9.38953,True,9.87123
+A4,leaves63_min20,9.54415,False,
+A4,leaves31_min100,9.44255,False,
+A4,default_l2,9.54308,False,

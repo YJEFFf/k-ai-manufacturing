@@ -1,16 +1,21 @@
 """동결 기대값(expected/)과 현재 outputs/를 비교한다. 수치 파일(CSV/JSON)은 허용오차 안에서 같아야 한다.
 
 사용:
-    python verify.py            # 비교
-    python verify.py --freeze   # 현재 outputs/를 expected/로 동결(의도한 변경 후에만)
+    python verify.py                  # 비교(+ 산출물이 마지막 전체 실행에서 만들어졌는지 알림)
+    python verify.py --require-fresh  # 비교 + 모든 비교 파일이 마지막 전체 실행 중에 쓰였어야 통과
+    python verify.py --freeze         # 현재 outputs/를 expected/로 동결(의도한 변경 후에만)
+
+추가로 시험 예측 파일(Git 제외)의 SHA-256과 그림 목록을 확인한다.
 """
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import shutil
 import sys
+import time
 from pathlib import Path
 
 import pandas as pd
@@ -74,9 +79,49 @@ def cmp_csv(pa: Path, pb: Path) -> list[str]:
     return errs
 
 
+def external_missing() -> bool:
+    """외부 KAMP ZIP이 없어 external 단계가 항목을 건너뛴 실행인가(그 경우 external/*는 비교하지 않는다)."""
+    p = OUT / "external" / "external_summary.json"
+    if not p.exists():
+        return True
+    j = json.loads(p.read_text(encoding="utf-8"))
+    return any(isinstance(v, dict) and "skipped" in v for v in j.values())
+
+
+PRED = Path("test") / "predictions_test.csv"
+
+
+def sha256(p: Path) -> str:
+    return hashlib.sha256(p.read_bytes()).hexdigest()
+
+
+def freshness(rels: list[Path]) -> tuple[bool, str]:
+    """비교 대상이 마지막 전체 실행(run_manifest.json의 last_full_run) 시작~끝 사이에 쓰였는가.
+
+    깨끗한 클론처럼 실행하지 않은 산출물은 파일 시각이 실행 기록보다 늦어 '신선하지 않음'이 된다."""
+    mp = OUT / "run_manifest.json"
+    if not mp.exists():
+        return False, "run_manifest.json 없음 — run_all.py를 먼저 실행한다"
+    m = json.loads(mp.read_text(encoding="utf-8"))
+    full = m.get("last_full_run")
+    if not full:
+        return False, "전체 실행 기록 없음 — run_all.py(모든 단계)를 실행한다"
+    a = full.get("started_epoch")
+    b = full.get("finished_epoch")
+    if a is None or b is None:  # 이전 형식: 사람이 읽는 시각과 총 시간으로 계산
+        b = time.mktime(time.strptime(full["finished_at"], "%Y-%m-%dT%H:%M:%S")) + 1
+        a = b - float(full.get("total_s", 0)) - 2
+    stale = [str(r) for r in rels if not (a - 1 <= (OUT / r).stat().st_mtime <= b + 1)]
+    if stale:
+        return False, f"마지막 전체 실행({full.get('finished_at')}) 밖에서 쓰인 파일 {len(stale)}개(예: {stale[:3]})"
+    return True, f"모든 비교 파일이 마지막 전체 실행({full.get('started_at', '')}~{full.get('finished_at')}) 중에 쓰였다"
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--freeze", action="store_true")
+    ap.add_argument("--require-fresh", action="store_true", help="비교 파일이 마지막 전체 실행에서 만들어지지 않았으면 실패")
+    ap.add_argument("--skip-external", action="store_true", help="외부 KAMP 자료 산출물(external/*)을 비교하지 않는다")
     args = ap.parse_args(argv)
     if args.freeze:
         if EXP.exists():
@@ -84,19 +129,49 @@ def main(argv=None) -> int:
         for rel in files(OUT):
             (EXP / rel).parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(OUT / rel, EXP / rel)
-        print(f"동결: {len(files(EXP))}개 파일")
+        if (OUT / PRED).exists():
+            (EXP / "predictions_test.sha256").write_text(sha256(OUT / PRED) + "\n", encoding="utf-8")
+        figs = sorted(p.name for p in (OUT / "figures").glob("*.png"))
+        (EXP / "figures.txt").write_text("\n".join(figs) + "\n", encoding="utf-8")
+        print(f"동결: {len(files(EXP))}개 파일 + 시험 예측 SHA-256 + 그림 {len(figs)}개 목록")
         return 0
     exp, cur = set(files(EXP)), set(files(OUT))
+    skip_ext = args.skip_external or external_missing()
+    if skip_ext:
+        exp = {p for p in exp if p.parts[0] != "external"}
+        cur = {p for p in cur if p.parts[0] != "external"}
+        SKIP_JSON_KEYS.add("external")
+        print("외부 KAMP 자료 산출물(external/*, key_numbers.external)은 비교하지 않는다(입력 ZIP 없음 또는 --skip-external)")
     errs = [f"누락: {p}" for p in sorted(exp - cur)] + [f"추가(기대값 없음): {p}" for p in sorted(cur - exp)]
     ok = 0
     for rel in sorted(exp & cur):
-        e = (cmp_json(json.loads((OUT / rel).read_text()), json.loads((EXP / rel).read_text()), str(rel))
+        e = (cmp_json(json.loads((OUT / rel).read_text(encoding="utf-8")), json.loads((EXP / rel).read_text(encoding="utf-8")), str(rel))
              if rel.suffix == ".json" else cmp_csv(OUT / rel, EXP / rel))
         if e:
             errs += e
         else:
             ok += 1
     print(f"일치 {ok}/{len(exp)}")
+    # 시험 예측 파일(Git 제외, run_all로 생성)과 그림 목록
+    shp = EXP / "predictions_test.sha256"
+    if shp.exists():
+        if (OUT / PRED).exists():
+            same = sha256(OUT / PRED) == shp.read_text(encoding="utf-8").strip()
+            print(f"시험 예측 파일 SHA-256 {'일치' if same else '불일치'}")
+            if not same:
+                errs.append("predictions_test.csv SHA-256 불일치")
+        else:
+            print("시험 예측 파일 없음(Git 제외) — run_all.py(peak 단계)로 만든 뒤 다시 확인한다")
+    fl = EXP / "figures.txt"
+    if fl.exists():
+        miss = [n for n in fl.read_text(encoding="utf-8").split() if not (OUT / "figures" / n).exists()]
+        print(f"그림 {'모두 있음' if not miss else f'{len(miss)}개 없음: {miss[:3]}'}")
+        if miss:
+            errs.append(f"그림 누락 {len(miss)}개")
+    fresh, msg = freshness(sorted(exp & cur))
+    print(("신선도 확인: " if fresh else "신선도 경고: ") + msg)
+    if args.require_fresh and not fresh:
+        errs.append("산출물이 마지막 전체 실행에서 만들어지지 않았다")
     for e in errs[:50]:
         print(" -", e)
     return 1 if errs else 0

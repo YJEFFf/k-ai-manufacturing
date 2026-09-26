@@ -1,0 +1,721 @@
+task,model,baseline,period,condition,value,availability,n,days,MAE,RMSE,bias,skill_vs_baseline,skill_ci90_lo,skill_ci90_hi
+B,M8_blend,BL5_regime_analog,cv,work_dayshift,0,전날 확정 가정,3600,58,4.91005,7.21013,-0.292047,0.0363292,-0.00102185,0.0667708
+B,M8_blend,BL5_regime_analog,cv,work_dayshift,1,전날 확정 가정,1968,41,10.8496,13.5897,-3.01898,0.0843566,0.0416618,0.12351
+B,M8_blend,BL5_regime_analog,cv,regime,0.0,전날 확정 가정,864,9,1.57234,2.12275,-0.116319,0,0,0
+B,M8_blend,BL5_regime_analog,cv,regime,1.0,전날 확정 가정,768,8,3.86713,5.61722,0.788414,-0.0224577,-0.129692,0.0879034
+B,M8_blend,BL5_regime_analog,cv,regime,2.0,전날 확정 가정,3936,41,8.81598,11.5214,-1.90491,0.0729649,0.041453,0.10129
+B,M8_blend,BL5_regime_analog,cv,regime_prev,0.0,전날 확정 가정,768,8,7.45113,10.5832,-0.42535,-0.00309399,-0.0635997,0.046498
+B,M8_blend,BL5_regime_analog,cv,regime_prev,1.0,전날 확정 가정,768,8,1.41016,1.96966,-0.454427,0,0,0
+B,M8_blend,BL5_regime_analog,cv,regime_prev,2.0,전날 확정 가정,3840,40,7.95446,10.6535,-1.75636,0.0843044,0.0492723,0.116804
+B,M8_blend,BL5_regime_analog,cv,daytype4,0,사전,768,8,7.45113,10.5832,-0.42535,-0.00309399,-0.0635997,0.046498
+B,M8_blend,BL5_regime_analog,cv,daytype4,1,사전,3168,33,9.14685,11.7375,-2.26359,0.0860125,0.0535062,0.11879
+B,M8_blend,BL5_regime_analog,cv,daytype4,2,사전,864,9,3.75632,5.39489,0.988428,-0.021615,-0.126818,0.0764522
+B,M8_blend,BL5_regime_analog,cv,daytype4,3,사전,768,8,1.41016,1.96966,-0.454427,0,0,0
+B,M8_blend,BL5_regime_analog,cv,window,break_1000,사전,116,58,7.2403,10.7668,-0.331819,0.0128943,-0.0918957,0.117089
+B,M8_blend,BL5_regime_analog,cv,window,break_1500,사전,116,58,8.55072,11.7018,0.857656,0.0470579,-0.0491544,0.136614
+B,M8_blend,BL5_regime_analog,cv,window,break_1645_1745,사전,232,58,7.89451,11.5775,0.0454409,0.0187012,-0.0584306,0.0878139
+B,M8_blend,BL5_regime_analog,cv,window,lunch_1145_1315,사전,348,58,7.46789,10.3102,0.0579845,0.009003,-0.0438253,0.0667861
+B,M8_blend,BL5_regime_analog,cv,window,night_break_0000,사전,116,58,4.14023,5.97279,-0.488848,-0.0740155,-0.134677,-0.0130812
+B,M8_blend,BL5_regime_analog,cv,window,night_break_0300,사전,116,58,5.61106,7.60498,0.131865,-0.0346998,-0.110492,0.0387063
+B,M8_blend,BL5_regime_analog,cv,window,night_break_0500,사전,116,58,5.81512,8.14414,0.0857948,-0.0960108,-0.159198,-0.0370957
+B,M8_blend,BL5_regime_analog,cv,window,night_break_2200,사전,116,58,6.09926,8.54872,0.708049,0.0620705,-0.00824935,0.129693
+B,M8_blend,BL5_regime_analog,cv,window,shift_end_1945_2030,사전,174,58,8.18062,11.7012,-0.192472,0.152936,0.0968381,0.206106
+B,M8_blend,BL5_regime_analog,cv,window,startup_0730_0845,사전,348,58,8.72167,11.9154,-2.67833,0.053378,-0.00706074,0.116744
+B,M8_blend,BL5_regime_analog,cv,window,steady,사전,3770,58,6.84198,9.67545,-1.63649,0.0828152,0.0527,0.11791
+B,M8_blend,BL5_regime_analog,cv,temp_bin,20-26,예보 대리,3308,56,6.93285,9.95399,-0.504258,0.0806994,0.0480219,0.113018
+B,M8_blend,BL5_regime_analog,cv,temp_bin,26-30,예보 대리,1112,35,6.81715,10.1489,-2.14406,0.0618979,0.0126021,0.108333
+B,M8_blend,BL5_regime_analog,cv,temp_bin,30+,예보 대리,240,11,9.01649,11.733,-2.49938,-0.00532494,-0.0763272,0.0521656
+B,M8_blend,BL5_regime_analog,cv,temp_bin,<20,예보 대리,908,26,6.99299,9.10409,-2.57774,0.0554452,-0.0270934,0.133247
+B,M8_blend,BL5_regime_analog,cv,holiday_work,0,전날 확정 가정,5568,58,7.00937,9.94414,-1.25588,0.0688467,0.0421766,0.101296
+B,M8_blend,BL5_regime_analog,cv,calendar_operation_mismatch,0,전날 확정 가정,5568,58,7.00937,9.94414,-1.25588,0.0688467,0.0421766,0.101296
+B,M8_blend,BL5_regime_analog,cv,analog_atypical,0,발행 시점,4992,52,6.83949,9.7327,-1.16079,0.0776741,0.0467203,0.103786
+B,M8_blend,BL5_regime_analog,cv,analog_atypical,1,발행 시점,576,6,8.48161,11.6165,-2.07998,0.00907074,-0.0825553,0.0970213
+B,M8_blend,BL5_regime_analog,cv,first_day_after_off,0,사전,4800,50,6.93868,9.83805,-1.38876,0.080544,0.0496595,0.109096
+B,M8_blend,BL5_regime_analog,cv,first_day_after_off,1,사전,768,8,7.45113,10.5832,-0.42535,-0.00309399,-0.0635997,0.046498
+B,M8_blend,BL5_regime_analog,cv,month,6,사전,2880,30,7.23059,10.1251,-1.65807,0.0848539,0.0402265,0.124542
+B,M8_blend,BL5_regime_analog,cv,month,7,사전,2688,28,6.77234,9.74649,-0.824957,0.0492474,0.0066084,0.0869155
+B,M1_lgbm,BL5_regime_analog,cv,work_dayshift,0,전날 확정 가정,3600,58,4.97676,7.30485,-0.427037,0.0236692,-0.0257558,0.067351
+B,M1_lgbm,BL5_regime_analog,cv,work_dayshift,1,전날 확정 가정,1968,41,11.194,14.0464,-4.11368,0.0535846,6.13401e-05,0.107459
+B,M1_lgbm,BL5_regime_analog,cv,regime,0.0,전날 확정 가정,864,9,1.57234,2.12275,-0.116319,0,0,0
+B,M1_lgbm,BL5_regime_analog,cv,regime,1.0,전날 확정 가정,768,8,4.22698,6.21893,1.18414,-0.131982,-0.320739,0.0691011
+B,M1_lgbm,BL5_regime_analog,cv,regime,2.0,전날 확정 가정,3936,41,8.97897,11.7864,-2.65294,0.0516352,0.00985613,0.091804
+B,M1_lgbm,BL5_regime_analog,cv,regime_prev,0.0,전날 확정 가정,768,8,7.73666,11.0147,-1.18998,-0.043995,-0.111328,0.00124646
+B,M1_lgbm,BL5_regime_analog,cv,regime_prev,1.0,전날 확정 가정,768,8,1.41016,1.96966,-0.454427,0,0,0
+B,M1_lgbm,BL5_regime_analog,cv,regime_prev,2.0,전날 확정 가정,3840,40,8.0967,10.8935,-2.3167,0.0636779,0.0146298,0.112366
+B,M1_lgbm,BL5_regime_analog,cv,daytype4,0,사전,768,8,7.73666,11.0147,-1.18998,-0.043995,-0.111328,0.00124646
+B,M1_lgbm,BL5_regime_analog,cv,daytype4,1,사전,3168,33,9.28014,11.966,-3.0076,0.0682167,0.0161915,0.113143
+B,M1_lgbm,BL5_regime_analog,cv,daytype4,2,사전,864,9,4.07618,5.95277,1.34018,-0.127259,-0.3021,0.0569501
+B,M1_lgbm,BL5_regime_analog,cv,daytype4,3,사전,768,8,1.41016,1.96966,-0.454427,0,0,0
+B,M1_lgbm,BL5_regime_analog,cv,window,break_1000,사전,116,58,7.64235,11.2721,-0.198629,-0.0334325,-0.158483,0.0958358
+B,M1_lgbm,BL5_regime_analog,cv,window,break_1500,사전,116,58,9.01894,12.1776,0.774571,0.00830671,-0.121657,0.112014
+B,M1_lgbm,BL5_regime_analog,cv,window,break_1645_1745,사전,232,58,7.90375,11.5849,-0.202882,0.0180721,-0.0665945,0.0919187
+B,M1_lgbm,BL5_regime_analog,cv,window,lunch_1145_1315,사전,348,58,7.64559,10.5017,-0.0951152,-0.00940032,-0.0643306,0.051492
+B,M1_lgbm,BL5_regime_analog,cv,window,night_break_0000,사전,116,58,4.17812,6.28653,-0.701641,-0.13043,-0.221968,-0.0415061
+B,M1_lgbm,BL5_regime_analog,cv,window,night_break_0300,사전,116,58,5.46552,7.72158,0.146716,-0.0505647,-0.179016,0.0715734
+B,M1_lgbm,BL5_regime_analog,cv,window,night_break_0500,사전,116,58,6.19943,8.70049,-0.133344,-0.170882,-0.272711,-0.0835531
+B,M1_lgbm,BL5_regime_analog,cv,window,night_break_2200,사전,116,58,6.02944,8.37198,0.715609,0.0814617,-0.00635555,0.175518
+B,M1_lgbm,BL5_regime_analog,cv,window,shift_end_1945_2030,사전,174,58,8.22282,11.4842,-0.212433,0.168645,0.0906997,0.24354
+B,M1_lgbm,BL5_regime_analog,cv,window,startup_0730_0845,사전,348,58,8.9696,12.2662,-3.25777,0.0255114,-0.0472537,0.101662
+B,M1_lgbm,BL5_regime_analog,cv,window,steady,사전,3770,58,7.01051,9.97621,-2.24196,0.0543046,0.00672983,0.102851
+B,M1_lgbm,BL5_regime_analog,cv,temp_bin,20-26,예보 대리,3308,56,7.01531,10.0414,-0.96647,0.07263,0.0332908,0.110231
+B,M1_lgbm,BL5_regime_analog,cv,temp_bin,26-30,예보 대리,1112,35,7.38982,10.9595,-2.62251,-0.0130344,-0.0965483,0.0586249
+B,M1_lgbm,BL5_regime_analog,cv,temp_bin,30+,예보 대리,240,11,9.30932,12.3428,-3.48956,-0.0575766,-0.182998,0.0537489
+B,M1_lgbm,BL5_regime_analog,cv,temp_bin,<20,예보 대리,908,26,6.92479,9.19183,-2.95402,0.0463421,-0.0806589,0.15887
+B,M1_lgbm,BL5_regime_analog,cv,holiday_work,0,전날 확정 가정,5568,58,7.17422,10.2096,-1.73007,0.0439896,0.00530146,0.0859947
+B,M1_lgbm,BL5_regime_analog,cv,calendar_operation_mismatch,0,전날 확정 가정,5568,58,7.17422,10.2096,-1.73007,0.0439896,0.00530146,0.0859947
+B,M1_lgbm,BL5_regime_analog,cv,analog_atypical,0,발행 시점,4992,52,6.89942,9.83942,-1.555,0.0675608,0.0284348,0.0995585
+B,M1_lgbm,BL5_regime_analog,cv,analog_atypical,1,발행 시점,576,6,9.5558,12.983,-3.24737,-0.107494,-0.25022,0.0264634
+B,M1_lgbm,BL5_regime_analog,cv,first_day_after_off,0,사전,4800,50,7.08423,10.0748,-1.81649,0.0584156,0.0114778,0.0994457
+B,M1_lgbm,BL5_regime_analog,cv,first_day_after_off,1,사전,768,8,7.73666,11.0147,-1.18998,-0.043995,-0.111328,0.00124646
+B,M1_lgbm,BL5_regime_analog,cv,month,6,사전,2880,30,7.28826,10.2434,-2.0648,0.0741647,0.0185535,0.119226
+B,M1_lgbm,BL5_regime_analog,cv,month,7,사전,2688,28,7.05204,10.1733,-1.37144,0.00761657,-0.0567529,0.0633972
+B,BL5_regime_analog,BL5_regime_analog,cv,work_dayshift,0,전날 확정 가정,3600,58,4.97472,7.48194,-0.515,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,work_dayshift,1,전날 확정 가정,1968,41,11.8829,14.8416,-2.96164,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,regime,0.0,전날 확정 가정,864,9,1.57234,2.12275,-0.116319,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,regime,1.0,전날 확정 가정,768,8,3.5625,5.49384,-0.199219,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,regime,2.0,전날 확정 가정,3936,41,9.45122,12.4282,-1.88745,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,regime_prev,0.0,전날 확정 가정,768,8,7.4681,10.5505,-2.27539,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,regime_prev,1.0,전날 확정 가정,768,8,1.41016,1.96966,-0.454427,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,regime_prev,2.0,전날 확정 가정,3840,40,8.53945,11.6344,-1.60273,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,daytype4,0,사전,768,8,7.4681,10.5505,-2.27539,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,daytype4,1,사전,3168,33,9.93198,12.8421,-1.7934,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,daytype4,2,사전,864,9,3.48553,5.28075,0.110532,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,daytype4,3,사전,768,8,1.41016,1.96966,-0.454427,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,window,break_1000,사전,116,58,7.74569,10.9074,-2.09914,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,window,break_1500,사전,116,58,8.74138,12.2796,-1.13793,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,window,break_1645_1745,사전,232,58,8.11638,11.7981,-1.53448,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,window,lunch_1145_1315,사전,348,58,7.54885,10.4039,-1.18391,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,window,night_break_0000,사전,116,58,3.99138,5.56118,-0.784483,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,window,night_break_0300,사전,116,58,5.47414,7.34994,-0.172414,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,window,night_break_0500,사전,116,58,5.42241,7.43071,-0.293103,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,window,night_break_2200,사전,116,58,6.50862,9.11445,-0.0948276,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,window,shift_end_1945_2030,사전,174,58,9.77011,13.8138,-1.12069,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,window,startup_0730_0845,사전,348,58,8.87356,12.5873,-2.58046,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,window,steady,사전,3770,58,7.32149,10.5491,-1.40318,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,temp_bin,20-26,예보 대리,3308,56,7.46085,10.8278,-0.667019,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,temp_bin,26-30,예보 대리,1112,35,7.25405,10.8185,-2.683,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,temp_bin,30+,예보 대리,240,11,8.55417,11.6708,-1.2,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,temp_bin,<20,예보 대리,908,26,7.15253,9.6385,-2.42786,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,holiday_work,0,전날 확정 가정,5568,58,7.4164,10.6794,-1.37976,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,calendar_operation_mismatch,0,전날 확정 가정,5568,58,7.4164,10.6794,-1.37976,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,analog_atypical,0,발행 시점,4992,52,7.29728,10.5523,-1.38241,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,analog_atypical,1,발행 시점,576,6,8.44878,11.7229,-1.35677,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,first_day_after_off,0,사전,4800,50,7.40813,10.6999,-1.23646,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,first_day_after_off,1,사전,768,8,7.4681,10.5505,-2.27539,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,month,6,사전,2880,30,7.77344,11.064,-2.23941,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,cv,month,7,사전,2688,28,7.03385,10.2513,-0.458705,0,0,0
+B,M8_blend,BL5_regime_analog,test,work_dayshift,0,전날 확정 가정,2952,45,6.25093,13.1387,0.557946,0.0583736,0.0283522,0.104482
+B,M8_blend,BL5_regime_analog,test,work_dayshift,1,전날 확정 가정,1294,27,11.7561,15.85,2.11865,0.103424,0.0593005,0.137836
+B,M8_blend,BL5_regime_analog,test,regime,0.0,전날 확정 가정,1202,13,1.4975,2.0915,0.230449,0,0,0
+B,M8_blend,BL5_regime_analog,test,regime,1.0,전날 확정 가정,454,5,6.14693,8.29166,-1.16323,0.0341711,-0.0711473,0.134529
+B,M8_blend,BL5_regime_analog,test,regime,2.0,전날 확정 가정,2590,27,11.2257,17.5552,1.79139,0.0787115,0.0537558,0.109005
+B,M8_blend,BL5_regime_analog,test,regime_prev,0.0,전날 확정 가정,1344,14,8.64299,17.8197,4.33737,0.0679749,-0.00637262,0.103945
+B,M8_blend,BL5_regime_analog,test,regime_prev,1.0,전날 확정 가정,434,5,1.39286,2.07783,-0.526498,0,0,0
+B,M8_blend,BL5_regime_analog,test,regime_prev,2.0,전날 확정 가정,2468,26,8.68901,12.8263,-0.491221,0.0859451,0.0540247,0.13683
+B,M8_blend,BL5_regime_analog,test,daytype4,0,사전,672,7,13.8116,21.7576,-0.229733,0.0534568,0.00361383,0.105507
+B,M8_blend,BL5_regime_analog,test,daytype4,1,사전,2302,24,7.03625,9.84046,0.331653,0.110198,0.0533764,0.160632
+B,M8_blend,BL5_regime_analog,test,daytype4,2,사전,550,6,5.29765,7.58159,-0.983826,0.0337593,-0.0776922,0.134837
+B,M8_blend,BL5_regime_analog,test,daytype4,3,사전,722,8,7.30276,19.0502,5.98423,0.0786401,0,0.0793238
+B,M8_blend,BL5_regime_analog,test,window,break_1000,사전,88,44,9.26966,13.0898,1.47732,0.0317634,-0.0723293,0.118404
+B,M8_blend,BL5_regime_analog,test,window,break_1500,사전,90,45,8.28121,11.6635,-0.305744,-0.0113538,-0.0862759,0.0557735
+B,M8_blend,BL5_regime_analog,test,window,break_1645_1745,사전,179,45,8.49565,13.2931,1.28199,0.0165674,-0.0198408,0.0590433
+B,M8_blend,BL5_regime_analog,test,window,lunch_1145_1315,사전,268,45,7.57765,11.9529,1.36865,0.0403822,-0.0145748,0.12058
+B,M8_blend,BL5_regime_analog,test,window,night_break_0000,사전,88,44,6.30878,12.2568,1.06902,0.0569113,-0.022119,0.115334
+B,M8_blend,BL5_regime_analog,test,window,night_break_0300,사전,88,44,9.149,18.5541,2.19528,0.0415794,0.00513119,0.0962249
+B,M8_blend,BL5_regime_analog,test,window,night_break_0500,사전,88,44,6.95805,13.1916,1.7467,0.0352996,-0.00685942,0.123664
+B,M8_blend,BL5_regime_analog,test,window,night_break_2200,사전,88,44,5.55566,8.29736,0.036742,0.119947,0.0649992,0.163468
+B,M8_blend,BL5_regime_analog,test,window,shift_end_1945_2030,사전,132,44,6.39346,9.84077,0.430914,0.144642,0.083919,0.206811
+B,M8_blend,BL5_regime_analog,test,window,startup_0730_0845,사전,264,44,8.19758,13.071,1.04852,0.0776303,0.010737,0.141635
+B,M8_blend,BL5_regime_analog,test,window,steady,사전,2873,45,8.03446,14.6267,1.01355,0.0850186,0.0530404,0.116184
+B,M8_blend,BL5_regime_analog,test,temp_bin,20-26,예보 대리,3090,45,8.78555,15.3587,1.25244,0.0738053,0.0427769,0.103191
+B,M8_blend,BL5_regime_analog,test,temp_bin,26-30,예보 대리,800,31,6.47366,10.7008,0.756417,0.0970289,0.0519187,0.148884
+B,M8_blend,BL5_regime_analog,test,temp_bin,30+,예보 대리,244,11,2.89663,5.47563,0.0865996,0.0333358,-0.0983593,0.137185
+B,M8_blend,BL5_regime_analog,test,temp_bin,<20,예보 대리,112,7,5.64383,7.81757,-0.961584,0.140011,0.111564,0.157146
+B,M8_blend,BL5_regime_analog,test,holiday_work,0,전날 확정 가정,4150,44,7.10122,11.7808,0.0581878,0.0754395,0.0415614,0.110263
+B,M8_blend,BL5_regime_analog,test,holiday_work,1,전날 확정 가정,96,1,43.6989,51.9113,43.1991,0.0795327,0.0795327,0.0795327
+B,M8_blend,BL5_regime_analog,test,calendar_operation_mismatch,0,전날 확정 가정,3766,40,8.06926,13.4439,1.56407,0.0810735,0.0493459,0.115595
+B,M8_blend,BL5_regime_analog,test,calendar_operation_mismatch,1,전날 확정 가정,480,5,6.82565,17.9124,-3.12853,0.0566758,0,0.0569202
+B,M8_blend,BL5_regime_analog,test,analog_atypical,0,발행 시점,3190,34,6.90823,10.0536,-0.0208933,0.0956892,0.0569458,0.13352
+B,M8_blend,BL5_regime_analog,test,analog_atypical,1,발행 시점,1056,11,11.0113,22.0244,4.21898,0.0641393,0.0248598,0.101599
+B,M8_blend,BL5_regime_analog,test,first_day_after_off,0,사전,3574,38,6.82254,12.022,1.27112,0.0902117,0.0642959,0.131967
+B,M8_blend,BL5_regime_analog,test,first_day_after_off,1,사전,672,7,13.8116,21.7576,-0.229733,0.0534568,0.00361383,0.105507
+B,M8_blend,BL5_regime_analog,test,month,8,사전,2904,31,8.36186,15.5658,1.47699,0.0793784,0.0521075,0.108768
+B,M8_blend,BL5_regime_analog,test,month,9,사전,1342,14,6.99129,9.88164,0.0740713,0.0620012,0.00261166,0.121325
+B,M1_lgbm,BL5_regime_analog,test,work_dayshift,0,전날 확정 가정,2952,45,6.10441,12.7667,0.337594,0.0850279,0.0264893,0.154944
+B,M1_lgbm,BL5_regime_analog,test,work_dayshift,1,전날 확정 가정,1294,27,12.1111,15.9032,0.658951,0.100413,0.0190545,0.164214
+B,M1_lgbm,BL5_regime_analog,test,regime,0.0,전날 확정 가정,1202,13,1.4975,2.0915,0.230449,0,0,0
+B,M1_lgbm,BL5_regime_analog,test,regime,1.0,전날 확정 가정,454,5,6.24784,8.33647,-0.615256,0.0289516,-0.129497,0.16795
+B,M1_lgbm,BL5_regime_analog,test,regime,2.0,전날 확정 가정,2590,27,11.2183,17.2603,0.714898,0.0941883,0.0394373,0.133851
+B,M1_lgbm,BL5_regime_analog,test,regime_prev,0.0,전날 확정 가정,1344,14,8.6327,17.256,3.40455,0.0974573,-0.061308,0.15935
+B,M1_lgbm,BL5_regime_analog,test,regime_prev,1.0,전날 확정 가정,434,5,1.39286,2.07783,-0.526498,0,0,0
+B,M1_lgbm,BL5_regime_analog,test,regime_prev,2.0,전날 확정 가정,2468,26,8.70551,12.8313,-1.01214,0.0855866,0.0413561,0.12842
+B,M1_lgbm,BL5_regime_analog,test,daytype4,0,사전,672,7,14.0531,21.7428,-1.55351,0.0540965,-0.0432008,0.145031
+B,M1_lgbm,BL5_regime_analog,test,daytype4,1,사전,2302,24,7.08685,9.99655,-0.357986,0.0960837,0.0294654,0.166982
+B,M1_lgbm,BL5_regime_analog,test,daytype4,2,사전,550,6,5.38095,7.62204,-0.531502,0.0286037,-0.139028,0.174954
+B,M1_lgbm,BL5_regime_analog,test,daytype4,3,사전,722,8,6.89048,17.7989,5.5535,0.139159,0,0.140413
+B,M1_lgbm,BL5_regime_analog,test,window,break_1000,사전,88,44,9.20098,13.359,1.16241,0.0118558,-0.154021,0.14572
+B,M1_lgbm,BL5_regime_analog,test,window,break_1500,사전,90,45,8.67215,12.0693,-0.231234,-0.0465413,-0.15328,0.050203
+B,M1_lgbm,BL5_regime_analog,test,window,break_1645_1745,사전,179,45,8.27869,13.2144,0.837349,0.0223887,-0.0472292,0.0974066
+B,M1_lgbm,BL5_regime_analog,test,window,lunch_1145_1315,사전,268,45,7.71605,12.2011,0.808949,0.0204615,-0.079833,0.137421
+B,M1_lgbm,BL5_regime_analog,test,window,night_break_0000,사전,88,44,5.94839,11.5802,0.371435,0.108969,-0.0290664,0.219174
+B,M1_lgbm,BL5_regime_analog,test,window,night_break_0300,사전,88,44,8.82585,18.0822,1.90483,0.0659537,-0.00633937,0.160677
+B,M1_lgbm,BL5_regime_analog,test,window,night_break_0500,사전,88,44,6.51456,12.7609,1.59218,0.0667961,-0.0062949,0.233136
+B,M1_lgbm,BL5_regime_analog,test,window,night_break_2200,사전,88,44,5.51959,8.03732,0.100781,0.147529,0.0330385,0.2188
+B,M1_lgbm,BL5_regime_analog,test,window,shift_end_1945_2030,사전,132,44,6.45871,9.40699,0.699865,0.182346,0.0687308,0.269609
+B,M1_lgbm,BL5_regime_analog,test,window,startup_0730_0845,사전,264,44,8.66772,13.7865,0.506411,0.0271414,-0.105045,0.141475
+B,M1_lgbm,BL5_regime_analog,test,window,steady,사전,2873,45,8.02371,14.2817,0.28741,0.1066,0.0490641,0.147192
+B,M1_lgbm,BL5_regime_analog,test,temp_bin,20-26,예보 대리,3090,45,8.6842,14.9969,0.576891,0.0956216,0.0283867,0.137197
+B,M1_lgbm,BL5_regime_analog,test,temp_bin,26-30,예보 대리,800,31,6.92919,11.1607,-0.017231,0.058226,0.00419335,0.139393
+B,M1_lgbm,BL5_regime_analog,test,temp_bin,30+,예보 대리,244,11,2.9735,5.61383,0.292973,0.00893788,-0.194371,0.176256
+B,M1_lgbm,BL5_regime_analog,test,temp_bin,<20,예보 대리,112,7,5.25862,7.38484,0.0800589,0.187615,0.13168,0.223872
+B,M1_lgbm,BL5_regime_analog,test,holiday_work,0,전날 확정 가정,4150,44,7.17943,11.8526,-0.478764,0.0698092,0.0157105,0.115771
+B,M1_lgbm,BL5_regime_analog,test,holiday_work,1,전날 확정 가정,96,1,40.5982,48.4562,39.9597,0.140797,0.140797,0.140797
+B,M1_lgbm,BL5_regime_analog,test,calendar_operation_mismatch,0,전날 확정 가정,3766,40,8.10868,13.2538,0.87568,0.0940629,0.0231366,0.135163
+B,M1_lgbm,BL5_regime_analog,test,calendar_operation_mismatch,1,전날 확정 가정,480,5,6.5724,17.4918,-3.01781,0.0788255,0,0.0791695
+B,M1_lgbm,BL5_regime_analog,test,analog_atypical,0,발행 시점,3190,34,7.07113,10.3039,-0.652386,0.0731703,0.020506,0.128537
+B,M1_lgbm,BL5_regime_analog,test,analog_atypical,1,발행 시점,1056,11,10.5446,21.0907,3.72194,0.103815,0.0245043,0.170851
+B,M1_lgbm,BL5_regime_analog,test,first_day_after_off,0,사전,3574,38,6.78466,11.7177,0.809519,0.113245,0.0532259,0.146929
+B,M1_lgbm,BL5_regime_analog,test,first_day_after_off,1,사전,672,7,14.0531,21.7428,-1.55351,0.0540965,-0.0432008,0.145031
+B,M1_lgbm,BL5_regime_analog,test,month,8,사전,2904,31,8.45698,15.3155,0.560009,0.0941843,0.028277,0.136689
+B,M1_lgbm,BL5_regime_analog,test,month,9,사전,1342,14,6.80549,9.73715,0.166165,0.0757166,-0.000814705,0.154512
+B,BL5_regime_analog,BL5_regime_analog,test,work_dayshift,0,전날 확정 가정,2952,45,6.74102,13.9531,0.792175,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,work_dayshift,1,전날 확정 가정,1294,27,12.8961,17.6783,3.38369,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,regime,0.0,전날 확정 가정,1202,13,1.4975,2.0915,0.230449,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,regime,1.0,전날 확정 가정,454,5,6.20925,8.58502,-2.0793,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,regime,2.0,전날 확정 가정,2590,27,12.3429,19.055,2.85097,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,regime_prev,0.0,전날 확정 가정,1344,14,8.97991,19.1193,5.21801,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,regime_prev,1.0,전날 확정 가정,434,5,1.39286,2.07783,-0.526498,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,regime_prev,2.0,전날 확정 가정,2468,26,9.68942,14.0323,-0.0273501,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,daytype4,0,사전,672,7,14.5893,22.9863,1.06101,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,daytype4,1,사전,2302,24,7.91811,11.0592,0.994136,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,daytype4,2,사전,550,6,5.34909,7.84648,-1.74,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,daytype4,3,사전,722,8,7.77493,20.6762,6.47161,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,window,break_1000,사전,88,44,9.30114,13.5192,1.55114,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,window,break_1500,사전,90,45,8.04444,11.5326,-1.57778,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,window,break_1645_1745,사전,179,45,8.68994,13.5171,0.77933,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,window,lunch_1145_1315,사전,268,45,7.94963,12.4559,0.942164,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,window,night_break_0000,사전,88,44,6.5625,12.9964,1.47159,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,window,night_break_0300,사전,88,44,9.72727,19.359,2.44318,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,window,night_break_0500,사전,88,44,7.19886,13.6743,1.60795,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,window,night_break_2200,사전,88,44,6.04545,9.42826,-0.295455,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,window,shift_end_1945_2030,사전,132,44,7.48864,11.5049,0.0871212,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,window,startup_0730_0845,사전,264,44,8.91477,14.1711,2.12311,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,window,steady,사전,2873,45,8.84702,15.9858,1.84424,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,temp_bin,20-26,예보 대리,3090,45,9.58285,16.5826,2.03236,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,temp_bin,26-30,예보 대리,800,31,6.91,11.8507,0.945,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,temp_bin,30+,예보 대리,244,11,2.90574,5.66446,-0.372951,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,temp_bin,<20,예보 대리,112,7,6.59821,9.09032,-2.03571,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,holiday_work,0,전날 확정 가정,4150,44,7.72313,12.7421,0.534458,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,holiday_work,1,전날 확정 가정,96,1,47.25,56.3967,46.8646,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,calendar_operation_mismatch,0,전날 확정 가정,3766,40,8.73606,14.63,2.17286,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,calendar_operation_mismatch,1,전날 확정 가정,480,5,7.68125,18.9886,-3.05417,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,analog_atypical,0,발행 시점,3190,34,7.56803,11.1174,0.544828,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,analog_atypical,1,발행 시점,1056,11,11.785,23.5339,4.71496,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,first_day_after_off,0,사전,3574,38,7.49384,13.2141,1.67991,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,first_day_after_off,1,사전,672,7,14.5893,22.9863,1.06101,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,month,8,사전,2904,31,9.10623,16.908,2.51567,0,0,0
+B,BL5_regime_analog,BL5_regime_analog,test,month,9,사전,1342,14,7.55775,10.5348,-0.438525,0,0,0
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,work_dayshift,0,전날 확정 가정,3600,58,4.42923,6.56615,-0.178333,0.160887,0.0929377,0.224198
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,work_dayshift,1,전날 확정 가정,1968,41,9.8464,12.462,-1.27181,0.0314189,0.00565272,0.0564925
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,regime,0.0,전날 확정 가정,864,9,1.83137,2.40599,-0.0753153,0,0,0
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,regime,1.0,전날 확정 가정,768,8,3.21819,4.93374,0.26012,0.315148,0.250009,0.371238
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,regime,2.0,전날 확정 가정,3936,41,7.94438,10.5387,-0.833236,0.0662296,0.0308638,0.101612
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,regime_prev,0.0,전날 확정 가정,768,8,6.40582,9.30482,0.0623656,0.0432363,0.0157652,0.0705001
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,regime_prev,1.0,전날 확정 가정,768,8,1.80248,2.34,-0.153715,0,0,0
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,regime_prev,2.0,전날 확정 가정,3840,40,7.10527,9.72039,-0.897671,0.0601223,0.032109,0.0870524
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,daytype4,0,사전,768,8,6.40582,9.30482,0.0623656,0.0432363,0.0157652,0.0705001
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,daytype4,1,사전,3168,33,8.31736,10.8167,-1.05035,0.0701817,0.0326849,0.112925
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,daytype4,2,사전,864,9,3.08978,4.7496,0.292538,0.307597,0.243104,0.356307
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,daytype4,3,사전,768,8,1.80248,2.34,-0.153715,0,0,0
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,window,break_1000,사전,116,58,6.54789,9.48683,0.354652,-0.0260348,-0.157317,0.0890875
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,window,break_1500,사전,116,58,7.10027,10.1548,1.61731,0.0506344,-0.0319546,0.121622
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,window,break_1645_1745,사전,232,58,7.64768,10.9522,1.28341,-0.0170424,-0.0701357,0.043919
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,window,lunch_1145_1315,사전,348,58,6.78059,9.54267,1.41721,0.0402878,-0.033063,0.108245
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,window,night_break_0000,사전,116,58,4.40511,6.44083,-0.483653,0.520644,0.145826,0.63481
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,window,night_break_0300,사전,116,58,4.88961,6.70715,0.309298,0.0403546,-0.0670067,0.13305
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,window,night_break_0500,사전,116,58,5.25326,7.16255,0.558961,-0.00670581,-0.147482,0.125463
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,window,night_break_2200,사전,116,58,5.65707,7.78373,0.969495,-0.0677172,-0.208202,0.0544227
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,window,shift_end_1945_2030,사전,174,58,8.55843,12.4601,1.73803,0.047576,-0.0266754,0.129511
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,window,startup_0730_0845,사전,348,58,8.72564,12.1125,-3.39203,0.0810327,0.0206591,0.145478
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,window,steady,사전,3770,58,6.03087,8.5848,-0.913441,0.086339,0.0541155,0.118498
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,temp_bin,20-26,예보 대리,3308,56,6.2802,9.07174,-0.182896,0.0772846,0.041835,0.11907
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,temp_bin,26-30,예보 대리,1112,35,6.35139,9.46107,-1.20021,0.110181,0.034663,0.208179
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,temp_bin,30+,예보 대리,240,11,7.42775,10.3193,-0.160217,0.0521858,-0.0139104,0.102778
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,temp_bin,<20,예보 대리,908,26,6.28043,8.36355,-1.28504,0.062772,0.0186433,0.113274
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,holiday_work,0,전날 확정 가정,5568,58,6.34392,9.09762,-0.56482,0.0814689,0.0488655,0.115516
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,calendar_operation_mismatch,0,전날 확정 가정,5568,58,6.34392,9.09762,-0.56482,0.0814689,0.0488655,0.115516
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,analog_atypical,0,발행 시점,4992,52,6.21065,8.94433,-0.580389,0.0565065,0.0341331,0.0802762
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,analog_atypical,1,발행 시점,576,6,7.49896,10.3313,-0.429887,0.206267,0.0608129,0.289969
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,first_day_after_off,0,사전,4800,50,6.33402,9.06403,-0.66517,0.0874748,0.0511318,0.128098
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,first_day_after_off,1,사전,768,8,6.40582,9.30482,0.0623656,0.0432363,0.0157652,0.0705001
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,month,6,사전,2880,30,6.44516,9.18375,-0.903151,0.0473872,0.0146844,0.0844269
+A4,M7c_hybrid_coolmono,BL4_ridge,cv,month,7,사전,2688,28,6.23545,9.00443,-0.202322,0.115456,0.0623459,0.163121
+A4,M1_lgbm,BL4_ridge,cv,work_dayshift,0,전날 확정 가정,3600,58,4.47223,6.60474,-0.470451,0.155955,0.0835752,0.214925
+A4,M1_lgbm,BL4_ridge,cv,work_dayshift,1,전날 확정 가정,1968,41,10.6101,13.1987,-3.45676,-0.025842,-0.0715817,0.0151238
+A4,M1_lgbm,BL4_ridge,cv,regime,0.0,전날 확정 가정,864,9,1.83137,2.40599,-0.0753153,0,0,0
+A4,M1_lgbm,BL4_ridge,cv,regime,1.0,전날 확정 가정,768,8,3.26649,5.32272,-0.0269865,0.261154,0.175111,0.325725
+A4,M1_lgbm,BL4_ridge,cv,regime,2.0,전날 확정 가정,3936,41,8.35615,10.9637,-2.13687,0.0285712,-0.0137121,0.0700335
+A4,M1_lgbm,BL4_ridge,cv,regime_prev,0.0,전날 확정 가정,768,8,6.7893,9.71935,-0.945967,0.000612628,-0.0773719,0.0647009
+A4,M1_lgbm,BL4_ridge,cv,regime_prev,1.0,전날 확정 가정,768,8,1.80248,2.34,-0.153715,0,0,0
+A4,M1_lgbm,BL4_ridge,cv,regime_prev,2.0,전날 확정 가정,3840,40,7.42805,10.1321,-2.0335,0.0203095,-0.012627,0.0567281
+A4,M1_lgbm,BL4_ridge,cv,daytype4,0,사전,768,8,6.7893,9.71935,-0.945967,0.000612628,-0.0773719,0.0647009
+A4,M1_lgbm,BL4_ridge,cv,daytype4,1,사전,3168,33,8.736,11.2447,-2.42558,0.0333884,-0.0104138,0.0760247
+A4,M1_lgbm,BL4_ridge,cv,daytype4,2,사전,864,9,3.13272,5.1093,0.0373325,0.255159,0.16702,0.317355
+A4,M1_lgbm,BL4_ridge,cv,daytype4,3,사전,768,8,1.80248,2.34,-0.153715,0,0,0
+A4,M1_lgbm,BL4_ridge,cv,window,break_1000,사전,116,58,7.67407,10.9489,0.281307,-0.184161,-0.361797,-0.0283699
+A4,M1_lgbm,BL4_ridge,cv,window,break_1500,사전,116,58,7.3109,10.3187,0.948721,0.035314,-0.10596,0.150075
+A4,M1_lgbm,BL4_ridge,cv,window,break_1645_1745,사전,232,58,7.70796,11.0032,0.0526871,-0.021771,-0.117602,0.0598891
+A4,M1_lgbm,BL4_ridge,cv,window,lunch_1145_1315,사전,348,58,7.24011,10.0495,0.730942,-0.0106866,-0.101163,0.0749365
+A4,M1_lgbm,BL4_ridge,cv,window,night_break_0000,사전,116,58,4.42567,6.58889,-1.58031,0.509626,0.202782,0.601757
+A4,M1_lgbm,BL4_ridge,cv,window,night_break_0300,사전,116,58,4.92284,6.99691,0.424314,-0.00110382,-0.159125,0.134944
+A4,M1_lgbm,BL4_ridge,cv,window,night_break_0500,사전,116,58,5.2534,7.38851,0.314712,-0.0384644,-0.202304,0.118971
+A4,M1_lgbm,BL4_ridge,cv,window,night_break_2200,사전,116,58,5.54075,7.52491,0.690917,-0.0322142,-0.15221,0.0746223
+A4,M1_lgbm,BL4_ridge,cv,window,shift_end_1945_2030,사전,174,58,7.90418,11.0385,-0.213257,0.156241,0.0711778,0.235812
+A4,M1_lgbm,BL4_ridge,cv,window,startup_0730_0845,사전,348,58,8.81372,12.1239,-3.55298,0.0801646,0.0159104,0.141869
+A4,M1_lgbm,BL4_ridge,cv,window,steady,사전,3770,58,6.40734,9.13238,-2.01984,0.0280617,-0.0127593,0.0686315
+A4,M1_lgbm,BL4_ridge,cv,temp_bin,20-26,예보 대리,3308,56,6.45394,9.24261,-0.891427,0.0599055,0.0181741,0.106234
+A4,M1_lgbm,BL4_ridge,cv,temp_bin,26-30,예보 대리,1112,35,6.85458,10.1402,-2.58297,0.0463109,-0.0520811,0.148385
+A4,M1_lgbm,BL4_ridge,cv,temp_bin,30+,예보 대리,240,11,8.53766,11.4129,-2.13508,-0.0482602,-0.186117,0.0847257
+A4,M1_lgbm,BL4_ridge,cv,temp_bin,<20,예보 대리,908,26,6.56369,8.88565,-2.38216,0.00426448,-0.0918016,0.110585
+A4,M1_lgbm,BL4_ridge,cv,holiday_work,0,전날 확정 가정,5568,58,6.64166,9.47509,-1.52596,0.0433584,0.00798511,0.0814211
+A4,M1_lgbm,BL4_ridge,cv,calendar_operation_mismatch,0,전날 확정 가정,5568,58,6.64166,9.47509,-1.52596,0.0433584,0.00798511,0.0814211
+A4,M1_lgbm,BL4_ridge,cv,analog_atypical,0,발행 시점,4992,52,6.41585,9.1808,-1.43442,0.0315627,0.00253958,0.0598636
+A4,M1_lgbm,BL4_ridge,cv,analog_atypical,1,발행 시점,576,6,8.59869,11.72,-2.31929,0.0995737,-0.131119,0.242332
+A4,M1_lgbm,BL4_ridge,cv,first_day_after_off,0,사전,4800,50,6.61804,9.43542,-1.61875,0.050085,0.00838729,0.0907434
+A4,M1_lgbm,BL4_ridge,cv,first_day_after_off,1,사전,768,8,6.7893,9.71935,-0.945967,0.000612628,-0.0773719,0.0647009
+A4,M1_lgbm,BL4_ridge,cv,month,6,사전,2880,30,6.7707,9.59255,-1.78475,0.00498296,-0.039725,0.0478146
+A4,M1_lgbm,BL4_ridge,cv,month,7,사전,2688,28,6.50341,9.3476,-1.24868,0.0817448,0.0220995,0.138828
+A4,BL4_ridge,BL4_ridge,cv,work_dayshift,0,전날 확정 가정,3600,58,5.42467,7.82511,-0.19785,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,work_dayshift,1,전날 확정 가정,1968,41,10.204,12.8662,-1.12174,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,regime,0.0,전날 확정 가정,864,9,1.83137,2.40599,-0.0753153,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,regime,1.0,전날 확정 가정,768,8,5.60138,7.2041,-0.15008,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,regime,2.0,전날 확정 가정,3936,41,8.56864,11.2862,-0.696015,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,regime_prev,0.0,전날 확정 가정,768,8,7.45626,9.72531,0.510672,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,regime_prev,1.0,전날 확정 가정,768,8,1.80248,2.34,-0.153715,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,regime_prev,2.0,전날 확정 가정,3840,40,7.86898,10.3422,-0.838251,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,daytype4,0,사전,768,8,7.45626,9.72531,0.510672,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,daytype4,1,사전,3168,33,8.83831,11.6331,-0.988545,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,daytype4,2,사전,864,9,5.20817,6.85959,-0.0720838,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,daytype4,3,사전,768,8,1.80248,2.34,-0.153715,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,window,break_1000,사전,116,58,6.76402,9.24611,-0.963979,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,window,break_1500,사전,116,58,7.43521,10.6964,1.28584,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,window,break_1645_1745,사전,232,58,7.96361,10.7687,0.665244,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,window,lunch_1145_1315,사전,348,58,7.56991,9.94326,1.73693,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,window,night_break_0000,사전,116,58,7.72645,13.4364,-2.77401,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,window,night_break_0300,사전,116,58,5.22182,6.9892,1.09387,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,window,night_break_0500,사전,116,58,5.36193,7.11484,0.832509,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,window,night_break_2200,사전,116,58,5.77098,7.29007,0.429034,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,window,shift_end_1945_2030,사전,174,58,9.62124,13.0826,0.757318,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,window,startup_0730_0845,사전,348,58,9.90964,13.1806,-2.94483,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,window,steady,사전,3770,58,6.78124,9.39605,-0.735913,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,temp_bin,20-26,예보 대리,3308,56,7.14521,9.83157,-0.372465,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,temp_bin,26-30,예보 대리,1112,35,7.12487,10.6326,-1.36289,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,temp_bin,30+,예보 대리,240,11,7.7368,10.8875,1.47045,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,temp_bin,<20,예보 대리,908,26,6.82189,8.92371,-0.578307,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,holiday_work,0,전날 확정 가정,5568,58,7.11392,9.90453,-0.524398,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,calendar_operation_mismatch,0,전날 확정 가정,5568,58,7.11392,9.90453,-0.524398,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,analog_atypical,0,발행 시점,4992,52,6.91604,9.48001,-0.493903,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,analog_atypical,1,발행 시점,576,6,8.82893,13.0161,-0.788689,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,first_day_after_off,0,사전,4800,50,7.05915,9.93291,-0.690009,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,first_day_after_off,1,사전,768,8,7.45626,9.72531,0.510672,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,month,6,사전,2880,30,7.08591,9.64059,-0.471648,0,0,0
+A4,BL4_ridge,BL4_ridge,cv,month,7,사전,2688,28,7.14393,10.1797,-0.580916,0,0,0
+A4,M7c_hybrid_coolmono,BL4_ridge,test,work_dayshift,0,전날 확정 가정,2952,45,4.53088,7.66586,0.217835,0.0944771,0.0494652,0.147047
+A4,M7c_hybrid_coolmono,BL4_ridge,test,work_dayshift,1,전날 확정 가정,1294,27,10.5061,14.3939,1.24262,0.031412,-0.0166629,0.075172
+A4,M7c_hybrid_coolmono,BL4_ridge,test,regime,0.0,전날 확정 가정,1202,13,1.62847,2.2233,0.034077,0,0,0
+A4,M7c_hybrid_coolmono,BL4_ridge,test,regime,1.0,전날 확정 가정,454,5,4.42972,6.41203,-0.966186,0.15909,0.032612,0.29566
+A4,M7c_hybrid_coolmono,BL4_ridge,test,regime,2.0,전날 확정 가정,2590,27,8.8809,12.6882,1.02266,0.0530506,0.0259822,0.077601
+A4,M7c_hybrid_coolmono,BL4_ridge,test,regime_prev,0.0,전날 확정 가정,1344,14,5.71649,11.2658,1.46072,0.071836,0.0213543,0.114333
+A4,M7c_hybrid_coolmono,BL4_ridge,test,regime_prev,1.0,전날 확정 가정,434,5,1.66557,2.41501,-0.189374,0,0,0
+A4,M7c_hybrid_coolmono,BL4_ridge,test,regime_prev,2.0,전날 확정 가정,2468,26,7.52196,10.4296,0.149913,0.0489275,0.018202,0.0835274
+A4,M7c_hybrid_coolmono,BL4_ridge,test,daytype4,0,사전,672,7,8.51667,14.2675,0.323596,0.0612622,0.00776895,0.118621
+A4,M7c_hybrid_coolmono,BL4_ridge,test,daytype4,1,사전,2302,24,6.78993,9.36609,0.301819,0.0421277,0.00418364,0.0750217
+A4,M7c_hybrid_coolmono,BL4_ridge,test,daytype4,2,사전,550,6,3.98789,5.92195,-0.818197,0.155088,0.0139164,0.28635
+A4,M7c_hybrid_coolmono,BL4_ridge,test,daytype4,3,사전,722,8,4.74109,10.7574,2.47751,0.0621338,0,0.0639662
+A4,M7c_hybrid_coolmono,BL4_ridge,test,window,break_1000,사전,88,44,7.52162,10.7425,1.38303,0.0145319,-0.141612,0.116816
+A4,M7c_hybrid_coolmono,BL4_ridge,test,window,break_1500,사전,90,45,6.83243,9.82998,-0.631839,0.0305629,-0.0594406,0.0965574
+A4,M7c_hybrid_coolmono,BL4_ridge,test,window,break_1645_1745,사전,179,45,7.43413,11.1591,1.3649,0.0391087,-0.0756856,0.115114
+A4,M7c_hybrid_coolmono,BL4_ridge,test,window,lunch_1145_1315,사전,268,45,7.07568,10.8664,0.327556,0.027214,-0.0369872,0.114624
+A4,M7c_hybrid_coolmono,BL4_ridge,test,window,night_break_0000,사전,88,44,7.18756,13.1054,1.427,-0.100068,-0.19344,-0.00915568
+A4,M7c_hybrid_coolmono,BL4_ridge,test,window,night_break_0300,사전,88,44,5.17309,7.68605,1.01066,0.143928,0.0685647,0.216298
+A4,M7c_hybrid_coolmono,BL4_ridge,test,window,night_break_0500,사전,88,44,4.11039,5.61221,1.5988,-0.011818,-0.139172,0.110262
+A4,M7c_hybrid_coolmono,BL4_ridge,test,window,night_break_2200,사전,88,44,5.04179,7.66213,1.30883,0.0339062,-0.102134,0.184032
+A4,M7c_hybrid_coolmono,BL4_ridge,test,window,shift_end_1945_2030,사전,132,44,6.85364,10.6401,-0.409458,0.113018,0.0648852,0.176694
+A4,M7c_hybrid_coolmono,BL4_ridge,test,window,startup_0730_0845,사전,264,44,8.37273,13.8468,-1.07163,0.0046555,-0.140575,0.168576
+A4,M7c_hybrid_coolmono,BL4_ridge,test,window,steady,사전,2873,45,6.07658,9.78311,0.598896,0.076084,0.0341812,0.110322
+A4,M7c_hybrid_coolmono,BL4_ridge,test,temp_bin,20-26,예보 대리,3090,45,6.75766,10.5986,0.680501,0.0642184,0.0301935,0.10288
+A4,M7c_hybrid_coolmono,BL4_ridge,test,temp_bin,26-30,예보 대리,800,31,5.80436,10.0416,0.231368,0.0281813,0.0012332,0.068316
+A4,M7c_hybrid_coolmono,BL4_ridge,test,temp_bin,30+,예보 대리,244,11,2.9649,5.11458,0.0361336,0.0232298,-0.157904,0.0958512
+A4,M7c_hybrid_coolmono,BL4_ridge,test,temp_bin,<20,예보 대리,112,7,6.44595,8.14196,-0.407679,0.0843412,0.0327138,0.128363
+A4,M7c_hybrid_coolmono,BL4_ridge,test,holiday_work,0,전날 확정 가정,4150,44,5.93103,9.33313,0.127578,0.0561857,0.0246567,0.0830564
+A4,M7c_hybrid_coolmono,BL4_ridge,test,holiday_work,1,전날 확정 가정,96,1,24.5445,28.8813,17.9328,0.0645742,0.0645742,0.0645742
+A4,M7c_hybrid_coolmono,BL4_ridge,test,calendar_operation_mismatch,0,전날 확정 가정,3766,40,6.62611,10.1886,0.572259,0.0619175,0.0307383,0.0884075
+A4,M7c_hybrid_coolmono,BL4_ridge,test,calendar_operation_mismatch,1,전날 확정 가정,480,5,4.20017,10.2708,0.199729,0.0233312,0,0.0237849
+A4,M7c_hybrid_coolmono,BL4_ridge,test,analog_atypical,0,발행 시점,3190,34,6.35064,9.32645,0.0700587,0.0647924,0.0269847,0.095068
+A4,M7c_hybrid_coolmono,BL4_ridge,test,analog_atypical,1,발행 시점,1056,11,6.35558,12.4658,1.91999,0.0453974,0,0.0963602
+A4,M7c_hybrid_coolmono,BL4_ridge,test,first_day_after_off,0,사전,3574,38,5.94483,9.23454,0.568982,0.0561224,0.0217209,0.0838483
+A4,M7c_hybrid_coolmono,BL4_ridge,test,first_day_after_off,1,사전,672,7,8.51667,14.2675,0.323596,0.0612622,0.00776895,0.118621
+A4,M7c_hybrid_coolmono,BL4_ridge,test,month,8,사전,2904,31,6.42083,10.744,0.726899,0.0646205,0.0380541,0.0916217
+A4,M7c_hybrid_coolmono,BL4_ridge,test,month,9,사전,1342,14,6.20263,8.90229,0.104384,0.0349443,-0.0134643,0.0909044
+A4,M1_lgbm,BL4_ridge,test,work_dayshift,0,전날 확정 가정,2952,45,4.32423,7.21899,0.28851,0.147263,0.0468414,0.264403
+A4,M1_lgbm,BL4_ridge,test,work_dayshift,1,전날 확정 가정,1294,27,10.7912,14.0523,-0.267514,0.0543971,-0.025477,0.136357
+A4,M1_lgbm,BL4_ridge,test,regime,0.0,전날 확정 가정,1202,13,1.62847,2.2233,0.034077,0,0,0
+A4,M1_lgbm,BL4_ridge,test,regime,1.0,전날 확정 가정,454,5,4.65953,6.54027,-0.404995,0.142272,0.0337149,0.283494
+A4,M1_lgbm,BL4_ridge,test,regime,2.0,전날 확정 가정,2590,27,8.74753,12.1763,0.250357,0.0912511,0.0273767,0.149526
+A4,M1_lgbm,BL4_ridge,test,regime_prev,0.0,전날 확정 가정,1344,14,5.91353,11.1986,0.805963,0.0773735,-0.0211105,0.165716
+A4,M1_lgbm,BL4_ridge,test,regime_prev,1.0,전날 확정 가정,434,5,1.66557,2.41501,-0.189374,0,0,0
+A4,M1_lgbm,BL4_ridge,test,regime_prev,2.0,전날 확정 가정,2468,26,7.31698,9.82592,-0.200773,0.103978,0.0264672,0.198174
+A4,M1_lgbm,BL4_ridge,test,daytype4,0,사전,672,7,8.47275,12.9761,-0.371853,0.146228,-0.0124814,0.339745
+A4,M1_lgbm,BL4_ridge,test,daytype4,1,사전,2302,24,6.72922,9.41727,-0.363115,0.0368935,-0.00843994,0.0744282
+A4,M1_lgbm,BL4_ridge,test,daytype4,2,사전,550,6,4.17759,6.0366,-0.354959,0.13873,0.0216202,0.275774
+A4,M1_lgbm,BL4_ridge,test,daytype4,3,사전,722,8,4.49713,9.98734,2.47441,0.129271,0,0.13324
+A4,M1_lgbm,BL4_ridge,test,window,break_1000,사전,88,44,8.14014,11.7662,0.563719,-0.079382,-0.293678,0.0786487
+A4,M1_lgbm,BL4_ridge,test,window,break_1500,사전,90,45,6.84475,9.98008,-0.759212,0.0157591,-0.102778,0.120858
+A4,M1_lgbm,BL4_ridge,test,window,break_1645_1745,사전,179,45,7.10691,11.1714,0.559697,0.0380503,-0.0647137,0.158555
+A4,M1_lgbm,BL4_ridge,test,window,lunch_1145_1315,사전,268,45,7.07446,11.0353,0.505163,0.0120882,-0.0523138,0.106852
+A4,M1_lgbm,BL4_ridge,test,window,night_break_0000,사전,88,44,5.21214,9.23144,0.698773,0.225109,0.0313961,0.444582
+A4,M1_lgbm,BL4_ridge,test,window,night_break_0300,사전,88,44,5.48097,8.73143,1.3691,0.027493,-0.0533135,0.15344
+A4,M1_lgbm,BL4_ridge,test,window,night_break_0500,사전,88,44,4.39338,6.41603,2.16176,-0.156739,-0.445265,0.11781
+A4,M1_lgbm,BL4_ridge,test,window,night_break_2200,사전,88,44,4.89005,7.34669,0.358337,0.0736792,-0.0532156,0.191707
+A4,M1_lgbm,BL4_ridge,test,window,shift_end_1945_2030,사전,132,44,5.69446,8.35539,0.195581,0.303478,0.195464,0.413405
+A4,M1_lgbm,BL4_ridge,test,window,startup_0730_0845,사전,264,44,8.17011,12.2582,-1.39401,0.118851,-0.0534371,0.287804
+A4,M1_lgbm,BL4_ridge,test,window,steady,사전,2873,45,6.11277,9.54546,0.0790564,0.0985285,0.030024,0.163116
+A4,M1_lgbm,BL4_ridge,test,temp_bin,20-26,예보 대리,3090,45,6.56101,10.024,0.294908,0.114944,0.0444846,0.179314
+A4,M1_lgbm,BL4_ridge,test,temp_bin,26-30,예보 대리,800,31,6.37519,10.3803,-0.579538,-0.0046024,-0.044612,0.0682742
+A4,M1_lgbm,BL4_ridge,test,temp_bin,30+,예보 대리,244,11,3.05699,5.37988,0.243905,-0.0274378,-0.329125,0.163235
+A4,M1_lgbm,BL4_ridge,test,temp_bin,<20,예보 대리,112,7,5.44092,7.07907,-0.0145554,0.203875,0.0865004,0.265583
+A4,M1_lgbm,BL4_ridge,test,holiday_work,0,전날 확정 가정,4150,44,5.91538,9.06231,-0.29248,0.0835724,0.0156994,0.156526
+A4,M1_lgbm,BL4_ridge,test,holiday_work,1,전날 확정 가정,96,1,22.7097,26.7205,17.9095,0.134559,0.134559,0.134559
+A4,M1_lgbm,BL4_ridge,test,calendar_operation_mismatch,0,전날 확정 가정,3766,40,6.68703,10.2008,-0.000201142,0.0607931,0.0169712,0.103772
+A4,M1_lgbm,BL4_ridge,test,calendar_operation_mismatch,1,전날 확정 가정,480,5,3.22002,6.03609,1.05474,0.426017,0,0.437352
+A4,M1_lgbm,BL4_ridge,test,analog_atypical,0,발행 시점,3190,34,6.49972,9.60326,-0.629125,0.0370353,0.00451866,0.0803266
+A4,M1_lgbm,BL4_ridge,test,analog_atypical,1,발행 시점,1056,11,5.67694,10.4435,2.37919,0.200261,0.0763868,0.382202
+A4,M1_lgbm,BL4_ridge,test,first_day_after_off,0,사전,3574,38,5.88564,9.10383,0.21136,0.0694823,0.021468,0.103083
+A4,M1_lgbm,BL4_ridge,test,first_day_after_off,1,사전,672,7,8.47275,12.9761,-0.371853,0.146228,-0.0124814,0.339745
+A4,M1_lgbm,BL4_ridge,test,month,8,사전,2904,31,6.44855,10.3616,0.0884033,0.0979105,0.015611,0.182751
+A4,M1_lgbm,BL4_ridge,test,month,9,사전,1342,14,5.96301,8.52725,0.18539,0.0756013,0.0344782,0.119616
+A4,BL4_ridge,BL4_ridge,test,work_dayshift,0,전날 확정 가정,2952,45,5.26576,8.46567,-0.158062,0,0,0
+A4,BL4_ridge,BL4_ridge,test,work_dayshift,1,전날 확정 가정,1294,27,11.1315,14.8607,-0.598086,0,0,0
+A4,BL4_ridge,BL4_ridge,test,regime,0.0,전날 확정 가정,1202,13,1.62847,2.2233,0.034077,0,0,0
+A4,BL4_ridge,BL4_ridge,test,regime,1.0,전날 확정 가정,454,5,5.99096,7.62511,-0.780493,0,0,0
+A4,BL4_ridge,BL4_ridge,test,regime,2.0,전날 확정 가정,2590,27,9.75729,13.399,-0.357969,0,0,0
+A4,BL4_ridge,BL4_ridge,test,regime_prev,0.0,전날 확정 가정,1344,14,6.56599,12.1378,1.15808,0,0,0
+A4,BL4_ridge,BL4_ridge,test,regime_prev,1.0,전날 확정 가정,434,5,1.66557,2.41501,-0.189374,0,0,0
+A4,BL4_ridge,BL4_ridge,test,regime_prev,2.0,전날 확정 가정,2468,26,8.26626,10.9662,-1.1,0,0,0
+A4,BL4_ridge,BL4_ridge,test,daytype4,0,사전,672,7,10.3474,15.1986,-2.20101,0,0,0
+A4,BL4_ridge,BL4_ridge,test,daytype4,1,사전,2302,24,7.13334,9.77801,-0.593123,0,0,0
+A4,BL4_ridge,BL4_ridge,test,daytype4,2,사전,550,6,5.27663,7.00896,-0.664915,0,0,0
+A4,BL4_ridge,BL4_ridge,test,daytype4,3,사전,722,8,5.08612,11.4701,2.72802,0,0,0
+A4,BL4_ridge,BL4_ridge,test,window,break_1000,사전,88,44,7.34219,10.9009,-1.16741,0,0,0
+A4,BL4_ridge,BL4_ridge,test,window,break_1500,사전,90,45,6.99148,10.1399,-2.14838,0,0,0
+A4,BL4_ridge,BL4_ridge,test,window,break_1645_1745,사전,179,45,7.93855,11.6132,0.059995,0,0,0
+A4,BL4_ridge,BL4_ridge,test,window,lunch_1145_1315,사전,268,45,7.62785,11.1704,-0.428669,0,0,0
+A4,BL4_ridge,BL4_ridge,test,window,night_break_0000,사전,88,44,6.75363,11.9132,1.19665,0,0,0
+A4,BL4_ridge,BL4_ridge,test,window,night_break_0300,사전,88,44,6.26902,8.97827,1.0099,0,0,0
+A4,BL4_ridge,BL4_ridge,test,window,night_break_0500,사전,88,44,4.29765,5.54666,1.19654,0,0,0
+A4,BL4_ridge,BL4_ridge,test,window,night_break_2200,사전,88,44,5.728,7.93104,-0.140601,0,0,0
+A4,BL4_ridge,BL4_ridge,test,window,shift_end_1945_2030,사전,132,44,8.13498,11.9959,-1.5187,0,0,0
+A4,BL4_ridge,BL4_ridge,test,window,startup_0730_0845,사전,264,44,9.6397,13.9116,-1.93486,0,0,0
+A4,BL4_ridge,BL4_ridge,test,window,steady,사전,2873,45,6.80861,10.5887,-0.144838,0,0,0
+A4,BL4_ridge,BL4_ridge,test,temp_bin,20-26,예보 대리,3090,45,7.63361,11.3259,-0.195385,0,0,0
+A4,BL4_ridge,BL4_ridge,test,temp_bin,26-30,예보 대리,800,31,6.04237,10.3328,-0.545592,0,0,0
+A4,BL4_ridge,BL4_ridge,test,temp_bin,30+,예보 대리,244,11,2.97219,5.23621,0.11387,0,0,0
+A4,BL4_ridge,BL4_ridge,test,temp_bin,<20,예보 대리,112,7,7.1582,8.89192,-2.03653,0,0,0
+A4,BL4_ridge,BL4_ridge,test,holiday_work,0,전날 확정 가정,4150,44,6.58875,9.88874,-0.757335,0,0,0
+A4,BL4_ridge,BL4_ridge,test,holiday_work,1,전날 확정 가정,96,1,27.1394,30.8751,19.8169,0,0,0
+A4,BL4_ridge,BL4_ridge,test,calendar_operation_mismatch,0,전날 확정 가정,3766,40,7.3274,10.8611,-0.0604009,0,0,0
+A4,BL4_ridge,BL4_ridge,test,calendar_operation_mismatch,1,전날 확정 가정,480,5,4.90352,10.5161,-2.11053,0,0,0
+A4,BL4_ridge,BL4_ridge,test,analog_atypical,0,발행 시점,3190,34,6.99772,9.97259,-0.75469,0,0,0
+A4,BL4_ridge,BL4_ridge,test,analog_atypical,1,발행 시점,1056,11,7.22155,13.0586,1.10506,0,0,0
+A4,BL4_ridge,BL4_ridge,test,first_day_after_off,0,사전,3574,38,6.43404,9.78362,0.0667487,0,0,0
+A4,BL4_ridge,BL4_ridge,test,first_day_after_off,1,사전,672,7,10.3474,15.1986,-2.20101,0,0,0
+A4,BL4_ridge,BL4_ridge,test,month,8,사전,2904,31,7.20756,11.4862,-0.322225,0,0,0
+A4,BL4_ridge,BL4_ridge,test,month,9,사전,1342,14,6.71977,9.22464,-0.22711,0,0,0
+B,M8_blend,BL3_profile,cv,work_dayshift,0,전날 확정 가정,3600,58,4.91005,7.21013,-0.292047,0.0244916,-0.0472753,0.0898348
+B,M8_blend,BL3_profile,cv,work_dayshift,1,전날 확정 가정,1968,41,10.8496,13.5897,-3.01898,0.21058,0.145949,0.266798
+B,M8_blend,BL3_profile,cv,regime,0.0,전날 확정 가정,864,9,1.57234,2.12275,-0.116319,0.0235354,-0.140054,0.137513
+B,M8_blend,BL3_profile,cv,regime,1.0,전날 확정 가정,768,8,3.86713,5.61722,0.788414,-0.045958,-0.250334,0.130075
+B,M8_blend,BL3_profile,cv,regime,2.0,전날 확정 가정,3936,41,8.81598,11.5214,-1.90491,0.167377,0.114529,0.211539
+B,M8_blend,BL3_profile,cv,regime_prev,0.0,전날 확정 가정,768,8,7.45113,10.5832,-0.42535,0.16262,0.0234452,0.246427
+B,M8_blend,BL3_profile,cv,regime_prev,1.0,전날 확정 가정,768,8,1.41016,1.96966,-0.454427,0.106543,0.0493966,0.159917
+B,M8_blend,BL3_profile,cv,regime_prev,2.0,전날 확정 가정,3840,40,7.95446,10.6535,-1.75636,0.166806,0.111478,0.219412
+B,M8_blend,BL3_profile,cv,daytype4,0,사전,768,8,7.45113,10.5832,-0.42535,0.16262,0.0234452,0.246427
+B,M8_blend,BL3_profile,cv,daytype4,1,사전,3168,33,9.14685,11.7375,-2.26359,0.168305,0.113195,0.219655
+B,M8_blend,BL3_profile,cv,daytype4,2,사전,864,9,3.75632,5.39489,0.988428,-0.057159,-0.259551,0.121216
+B,M8_blend,BL3_profile,cv,daytype4,3,사전,768,8,1.41016,1.96966,-0.454427,0.106543,0.0493966,0.159917
+B,M8_blend,BL3_profile,cv,window,break_1000,사전,116,58,7.2403,10.7668,-0.331819,0.234857,0.0710312,0.373739
+B,M8_blend,BL3_profile,cv,window,break_1500,사전,116,58,8.55072,11.7018,0.857656,0.11592,-0.00171932,0.231462
+B,M8_blend,BL3_profile,cv,window,break_1645_1745,사전,232,58,7.89451,11.5775,0.0454409,0.108649,-0.0547653,0.241288
+B,M8_blend,BL3_profile,cv,window,lunch_1145_1315,사전,348,58,7.46789,10.3102,0.0579845,0.188154,0.105479,0.271252
+B,M8_blend,BL3_profile,cv,window,night_break_0000,사전,116,58,4.14023,5.97279,-0.488848,0.0484676,-0.149715,0.192941
+B,M8_blend,BL3_profile,cv,window,night_break_0300,사전,116,58,5.61106,7.60498,0.131865,0.0119786,-0.154962,0.151412
+B,M8_blend,BL3_profile,cv,window,night_break_0500,사전,116,58,5.81512,8.14414,0.0857948,-0.185701,-0.463432,0.0264038
+B,M8_blend,BL3_profile,cv,window,night_break_2200,사전,116,58,6.09926,8.54872,0.708049,-0.0018673,-0.157362,0.11804
+B,M8_blend,BL3_profile,cv,window,shift_end_1945_2030,사전,174,58,8.18062,11.7012,-0.192472,0.117301,-0.0335978,0.245834
+B,M8_blend,BL3_profile,cv,window,startup_0730_0845,사전,348,58,8.72167,11.9154,-2.67833,0.132908,0.0533042,0.215759
+B,M8_blend,BL3_profile,cv,window,steady,사전,3770,58,6.84198,9.67545,-1.63649,0.175899,0.127706,0.223142
+B,M8_blend,BL3_profile,cv,temp_bin,20-26,예보 대리,3308,56,6.93285,9.95399,-0.504258,0.0616139,-0.00443517,0.123012
+B,M8_blend,BL3_profile,cv,temp_bin,26-30,예보 대리,1112,35,6.81715,10.1489,-2.14406,0.270949,0.187176,0.346487
+B,M8_blend,BL3_profile,cv,temp_bin,30+,예보 대리,240,11,9.01649,11.733,-2.49938,0.35172,0.196742,0.468275
+B,M8_blend,BL3_profile,cv,temp_bin,<20,예보 대리,908,26,6.99299,9.10409,-2.57774,0.1859,0.0732569,0.257089
+B,M8_blend,BL3_profile,cv,holiday_work,0,전날 확정 가정,5568,58,7.00937,9.94414,-1.25588,0.159758,0.109785,0.207112
+B,M8_blend,BL3_profile,cv,calendar_operation_mismatch,0,전날 확정 가정,5568,58,7.00937,9.94414,-1.25588,0.159758,0.109785,0.207112
+B,M8_blend,BL3_profile,cv,analog_atypical,0,발행 시점,4992,52,6.83949,9.7327,-1.16079,0.161274,0.102779,0.211206
+B,M8_blend,BL3_profile,cv,analog_atypical,1,발행 시점,576,6,8.48161,11.6165,-2.07998,0.150355,0.0214571,0.260728
+B,M8_blend,BL3_profile,cv,first_day_after_off,0,사전,4800,50,6.93868,9.83805,-1.38876,0.159225,0.101427,0.206594
+B,M8_blend,BL3_profile,cv,first_day_after_off,1,사전,768,8,7.45113,10.5832,-0.42535,0.16262,0.0234452,0.246427
+B,M8_blend,BL3_profile,cv,month,6,사전,2880,30,7.23059,10.1251,-1.65807,0.10183,0.030925,0.164597
+B,M8_blend,BL3_profile,cv,month,7,사전,2688,28,6.77234,9.74649,-0.824957,0.214536,0.13882,0.268098
+B,M1_lgbm,BL3_profile,cv,work_dayshift,0,전날 확정 가정,3600,58,4.97676,7.30485,-0.427037,0.0116761,-0.0616427,0.0839927
+B,M1_lgbm,BL3_profile,cv,work_dayshift,1,전날 확정 가정,1968,41,11.194,14.0464,-4.11368,0.18405,0.120419,0.24423
+B,M1_lgbm,BL3_profile,cv,regime,0.0,전날 확정 가정,864,9,1.57234,2.12275,-0.116319,0.0235354,-0.140054,0.137513
+B,M1_lgbm,BL3_profile,cv,regime,1.0,전날 확정 가정,768,8,4.22698,6.21893,1.18414,-0.158,-0.418643,0.0813675
+B,M1_lgbm,BL3_profile,cv,regime,2.0,전날 확정 가정,3936,41,8.97897,11.7864,-2.65294,0.14822,0.0986871,0.195032
+B,M1_lgbm,BL3_profile,cv,regime_prev,0.0,전날 확정 가정,768,8,7.73666,11.0147,-1.18998,0.128475,0.00190074,0.207006
+B,M1_lgbm,BL3_profile,cv,regime_prev,1.0,전날 확정 가정,768,8,1.41016,1.96966,-0.454427,0.106543,0.0493966,0.159917
+B,M1_lgbm,BL3_profile,cv,regime_prev,2.0,전날 확정 가정,3840,40,8.0967,10.8935,-2.3167,0.148038,0.0886591,0.20345
+B,M1_lgbm,BL3_profile,cv,daytype4,0,사전,768,8,7.73666,11.0147,-1.18998,0.128475,0.00190074,0.207006
+B,M1_lgbm,BL3_profile,cv,daytype4,1,사전,3168,33,9.28014,11.966,-3.0076,0.152112,0.0921677,0.204997
+B,M1_lgbm,BL3_profile,cv,daytype4,2,사전,864,9,4.07618,5.95277,1.34018,-0.166478,-0.411276,0.0753134
+B,M1_lgbm,BL3_profile,cv,daytype4,3,사전,768,8,1.41016,1.96966,-0.454427,0.106543,0.0493966,0.159917
+B,M1_lgbm,BL3_profile,cv,window,break_1000,사전,116,58,7.64235,11.2721,-0.198629,0.198948,0.0429054,0.336715
+B,M1_lgbm,BL3_profile,cv,window,break_1500,사전,116,58,9.01894,12.1776,0.774571,0.0799691,-0.0428217,0.199688
+B,M1_lgbm,BL3_profile,cv,window,break_1645_1745,사전,232,58,7.90375,11.5849,-0.202882,0.108077,-0.0545747,0.232257
+B,M1_lgbm,BL3_profile,cv,window,lunch_1145_1315,사전,348,58,7.64559,10.5017,-0.0951152,0.173078,0.0936037,0.247452
+B,M1_lgbm,BL3_profile,cv,window,night_break_0000,사전,116,58,4.17812,6.28653,-0.701641,-0.0015136,-0.196297,0.143411
+B,M1_lgbm,BL3_profile,cv,window,night_break_0300,사전,116,58,5.46552,7.72158,0.146716,-0.00317064,-0.170321,0.1479
+B,M1_lgbm,BL3_profile,cv,window,night_break_0500,사전,116,58,6.19943,8.70049,-0.133344,-0.266699,-0.56125,-0.0392451
+B,M1_lgbm,BL3_profile,cv,window,night_break_2200,사전,116,58,6.02944,8.37198,0.715609,0.0188458,-0.13265,0.148019
+B,M1_lgbm,BL3_profile,cv,window,shift_end_1945_2030,사전,174,58,8.22282,11.4842,-0.212433,0.133671,-0.0156172,0.252028
+B,M1_lgbm,BL3_profile,cv,window,startup_0730_0845,사전,348,58,8.9696,12.2662,-3.25777,0.107383,0.0334147,0.184227
+B,M1_lgbm,BL3_profile,cv,window,steady,사전,3770,58,7.01051,9.97621,-2.24196,0.150282,0.0981257,0.198353
+B,M1_lgbm,BL3_profile,cv,temp_bin,20-26,예보 대리,3308,56,7.01531,10.0414,-0.96647,0.053377,-0.0103759,0.107114
+B,M1_lgbm,BL3_profile,cv,temp_bin,26-30,예보 대리,1112,35,7.38982,10.9595,-2.62251,0.212715,0.110828,0.301258
+B,M1_lgbm,BL3_profile,cv,temp_bin,30+,예보 대리,240,11,9.30932,12.3428,-3.48956,0.318026,0.124483,0.46036
+B,M1_lgbm,BL3_profile,cv,temp_bin,<20,예보 대리,908,26,6.92479,9.19183,-2.95402,0.178055,0.0707613,0.24653
+B,M1_lgbm,BL3_profile,cv,holiday_work,0,전날 확정 가정,5568,58,7.17422,10.2096,-1.73007,0.137328,0.0869599,0.185806
+B,M1_lgbm,BL3_profile,cv,calendar_operation_mismatch,0,전날 확정 가정,5568,58,7.17422,10.2096,-1.73007,0.137328,0.0869599,0.185806
+B,M1_lgbm,BL3_profile,cv,analog_atypical,0,발행 시점,4992,52,6.89942,9.83942,-1.555,0.152078,0.0931408,0.201178
+B,M1_lgbm,BL3_profile,cv,analog_atypical,1,발행 시점,576,6,9.5558,12.983,-3.24737,0.0504098,-0.0876604,0.175973
+B,M1_lgbm,BL3_profile,cv,first_day_after_off,0,사전,4800,50,7.08423,10.0748,-1.81649,0.13899,0.0807162,0.189685
+B,M1_lgbm,BL3_profile,cv,first_day_after_off,1,사전,768,8,7.73666,11.0147,-1.18998,0.128475,0.00190074,0.207006
+B,M1_lgbm,BL3_profile,cv,month,6,사전,2880,30,7.28826,10.2434,-2.0648,0.0913392,0.0268114,0.140672
+B,M1_lgbm,BL3_profile,cv,month,7,사전,2688,28,7.05204,10.1733,-1.37144,0.180143,0.0959387,0.247518
+B,M8_blend,BL3_profile,test,work_dayshift,0,전날 확정 가정,2952,45,6.25093,13.1387,0.557946,-0.189895,-0.440397,-0.0396036
+B,M8_blend,BL3_profile,test,work_dayshift,1,전날 확정 가정,1294,27,11.7561,15.85,2.11865,-0.0738262,-0.153201,0.0129216
+B,M8_blend,BL3_profile,test,regime,0.0,전날 확정 가정,1202,13,1.4975,2.0915,0.230449,-0.130917,-0.232401,-0.0402322
+B,M8_blend,BL3_profile,test,regime,1.0,전날 확정 가정,454,5,6.14693,8.29166,-1.16323,-0.124228,-0.329114,0.00126207
+B,M8_blend,BL3_profile,test,regime,2.0,전날 확정 가정,2590,27,11.2257,17.5552,1.79139,-0.141077,-0.267299,-0.0396229
+B,M8_blend,BL3_profile,test,regime_prev,0.0,전날 확정 가정,1344,14,8.64299,17.8197,4.33737,-0.339031,-0.969307,-0.181789
+B,M8_blend,BL3_profile,test,regime_prev,1.0,전날 확정 가정,434,5,1.39286,2.07783,-0.526498,-0.132884,-0.212571,-0.0609039
+B,M8_blend,BL3_profile,test,regime_prev,2.0,전날 확정 가정,2468,26,8.68901,12.8263,-0.491221,-0.00454669,-0.0610563,0.0412989
+B,M8_blend,BL3_profile,test,daytype4,0,사전,672,7,13.8116,21.7576,-0.229733,-0.179355,-1.00973,-0.0302688
+B,M8_blend,BL3_profile,test,daytype4,1,사전,2302,24,7.03625,9.84046,0.331653,-0.00201962,-0.0858542,0.0711478
+B,M8_blend,BL3_profile,test,daytype4,2,사전,550,6,5.29765,7.58159,-0.983826,-0.122351,-0.309874,0.0059661
+B,M8_blend,BL3_profile,test,daytype4,3,사전,722,8,7.30276,19.0502,5.98423,-0.256348,-0.301823,-0.14911
+B,M8_blend,BL3_profile,test,window,break_1000,사전,88,44,9.26966,13.0898,1.47732,-0.121218,-0.336673,0.0638296
+B,M8_blend,BL3_profile,test,window,break_1500,사전,90,45,8.28121,11.6635,-0.305744,0.0262767,-0.138971,0.161664
+B,M8_blend,BL3_profile,test,window,break_1645_1745,사전,179,45,8.49565,13.2931,1.28199,-0.130785,-0.2922,0.00352009
+B,M8_blend,BL3_profile,test,window,lunch_1145_1315,사전,268,45,7.57765,11.9529,1.36865,-0.14774,-0.293931,-0.0269092
+B,M8_blend,BL3_profile,test,window,night_break_0000,사전,88,44,6.30878,12.2568,1.06902,-0.203703,-0.54818,-0.0051323
+B,M8_blend,BL3_profile,test,window,night_break_0300,사전,88,44,9.149,18.5541,2.19528,-0.244819,-0.641127,-0.044401
+B,M8_blend,BL3_profile,test,window,night_break_0500,사전,88,44,6.95805,13.1916,1.7467,-0.175412,-0.869865,-0.0265274
+B,M8_blend,BL3_profile,test,window,night_break_2200,사전,88,44,5.55566,8.29736,0.036742,-0.170565,-0.262433,-0.0573484
+B,M8_blend,BL3_profile,test,window,shift_end_1945_2030,사전,132,44,6.39346,9.84077,0.430914,0.024494,-0.0736025,0.13368
+B,M8_blend,BL3_profile,test,window,startup_0730_0845,사전,264,44,8.19758,13.071,1.04852,-0.122153,-0.319081,0.0407368
+B,M8_blend,BL3_profile,test,window,steady,사전,2873,45,8.03446,14.6267,1.01355,-0.143953,-0.272356,-0.0282609
+B,M8_blend,BL3_profile,test,temp_bin,20-26,예보 대리,3090,45,8.78555,15.3587,1.25244,-0.167423,-0.311319,-0.0499895
+B,M8_blend,BL3_profile,test,temp_bin,26-30,예보 대리,800,31,6.47366,10.7008,0.756417,0.00141337,-0.10065,0.106564
+B,M8_blend,BL3_profile,test,temp_bin,30+,예보 대리,244,11,2.89663,5.47563,0.0865996,0.12542,-0.553475,0.353779
+B,M8_blend,BL3_profile,test,temp_bin,<20,예보 대리,112,7,5.64383,7.81757,-0.961584,-0.107648,-0.324686,0.0738046
+B,M8_blend,BL3_profile,test,holiday_work,0,전날 확정 가정,4150,44,7.10122,11.7808,0.0581878,-0.0976736,-0.262223,-0.00657089
+B,M8_blend,BL3_profile,test,holiday_work,1,전날 확정 가정,96,1,43.6989,51.9113,43.1991,-0.256698,-0.256698,-0.256698
+B,M8_blend,BL3_profile,test,calendar_operation_mismatch,0,전날 확정 가정,3766,40,8.06926,13.4439,1.56407,-0.186126,-0.292286,-0.0617526
+B,M8_blend,BL3_profile,test,calendar_operation_mismatch,1,전날 확정 가정,480,5,6.82565,17.9124,-3.12853,0.0128099,-0.00126318,0.111519
+B,M8_blend,BL3_profile,test,analog_atypical,0,발행 시점,3190,34,6.90823,10.0536,-0.0208933,-0.0342641,-0.093235,0.0308791
+B,M8_blend,BL3_profile,test,analog_atypical,1,발행 시점,1056,11,11.0113,22.0244,4.21898,-0.226681,-1.16373,-0.0648224
+B,M8_blend,BL3_profile,test,first_day_after_off,0,사전,3574,38,6.82254,12.022,1.27112,-0.1182,-0.190243,0.0263259
+B,M8_blend,BL3_profile,test,first_day_after_off,1,사전,672,7,13.8116,21.7576,-0.229733,-0.179355,-1.00973,-0.0302688
+B,M8_blend,BL3_profile,test,month,8,사전,2904,31,8.36186,15.5658,1.47699,-0.145578,-0.294839,-0.00767921
+B,M8_blend,BL3_profile,test,month,9,사전,1342,14,6.99129,9.88164,0.0740713,-0.113566,-0.21525,-0.0335565
+B,M1_lgbm,BL3_profile,test,work_dayshift,0,전날 확정 가정,2952,45,6.10441,12.7667,0.337594,-0.156213,-0.411107,-0.016122
+B,M1_lgbm,BL3_profile,test,work_dayshift,1,전날 확정 가정,1294,27,12.1111,15.9032,0.658951,-0.0774319,-0.144764,-0.0167349
+B,M1_lgbm,BL3_profile,test,regime,0.0,전날 확정 가정,1202,13,1.4975,2.0915,0.230449,-0.130917,-0.232401,-0.0402322
+B,M1_lgbm,BL3_profile,test,regime,1.0,전날 확정 가정,454,5,6.24784,8.33647,-0.615256,-0.130303,-0.407996,0.0305253
+B,M1_lgbm,BL3_profile,test,regime,2.0,전날 확정 가정,2590,27,11.2183,17.2603,0.714898,-0.121908,-0.253161,-0.0419953
+B,M1_lgbm,BL3_profile,test,regime_prev,0.0,전날 확정 가정,1344,14,8.6327,17.256,3.40455,-0.296674,-0.9527,-0.175173
+B,M1_lgbm,BL3_profile,test,regime_prev,1.0,전날 확정 가정,434,5,1.39286,2.07783,-0.526498,-0.132884,-0.212571,-0.0609039
+B,M1_lgbm,BL3_profile,test,regime_prev,2.0,전날 확정 가정,2468,26,8.70551,12.8313,-1.01214,-0.00494077,-0.0679404,0.0333039
+B,M1_lgbm,BL3_profile,test,daytype4,0,사전,672,7,14.0531,21.7428,-1.55351,-0.178558,-1.0074,-0.0151124
+B,M1_lgbm,BL3_profile,test,daytype4,1,사전,2302,24,7.08685,9.99655,-0.357986,-0.0179139,-0.0839931,0.0409092
+B,M1_lgbm,BL3_profile,test,daytype4,2,사전,550,6,5.38095,7.62204,-0.531502,-0.128339,-0.375474,0.0344607
+B,M1_lgbm,BL3_profile,test,daytype4,3,사전,722,8,6.89048,17.7989,5.5535,-0.173826,-0.301823,-0.14911
+B,M1_lgbm,BL3_profile,test,window,break_1000,사전,88,44,9.20098,13.359,1.16241,-0.144271,-0.326809,0.0468232
+B,M1_lgbm,BL3_profile,test,window,break_1500,사전,90,45,8.67215,12.0693,-0.231234,-0.00760155,-0.199353,0.142654
+B,M1_lgbm,BL3_profile,test,window,break_1645_1745,사전,179,45,8.27869,13.2144,0.837349,-0.124091,-0.244823,-0.0264257
+B,M1_lgbm,BL3_profile,test,window,lunch_1145_1315,사전,268,45,7.71605,12.2011,0.808949,-0.171566,-0.297539,-0.0541903
+B,M1_lgbm,BL3_profile,test,window,night_break_0000,사전,88,44,5.94839,11.5802,0.371435,-0.137259,-0.477621,0.0364594
+B,M1_lgbm,BL3_profile,test,window,night_break_0300,사전,88,44,8.82585,18.0822,1.90483,-0.213162,-0.5428,-0.0280375
+B,M1_lgbm,BL3_profile,test,window,night_break_0500,사전,88,44,6.51456,12.7609,1.59218,-0.137036,-0.649214,0.00732474
+B,M1_lgbm,BL3_profile,test,window,night_break_2200,사전,88,44,5.51959,8.03732,0.100781,-0.133879,-0.237036,-0.025811
+B,M1_lgbm,BL3_profile,test,window,shift_end_1945_2030,사전,132,44,6.45871,9.40699,0.699865,0.0674943,-0.0469071,0.163434
+B,M1_lgbm,BL3_profile,test,window,startup_0730_0845,사전,264,44,8.66772,13.7865,0.506411,-0.183578,-0.391142,0.0106739
+B,M1_lgbm,BL3_profile,test,window,steady,사전,2873,45,8.02371,14.2817,0.28741,-0.116971,-0.254102,-0.0223463
+B,M1_lgbm,BL3_profile,test,temp_bin,20-26,예보 대리,3090,45,8.6842,14.9969,0.576891,-0.139925,-0.294998,-0.040866
+B,M1_lgbm,BL3_profile,test,temp_bin,26-30,예보 대리,800,31,6.92919,11.1607,-0.017231,-0.0414983,-0.145623,0.0931609
+B,M1_lgbm,BL3_profile,test,temp_bin,30+,예보 대리,244,11,2.9735,5.61383,0.292973,0.103347,-0.684818,0.384473
+B,M1_lgbm,BL3_profile,test,temp_bin,<20,예보 대리,112,7,5.25862,7.38484,0.0800589,-0.0463353,-0.270796,0.129232
+B,M1_lgbm,BL3_profile,test,holiday_work,0,전날 확정 가정,4150,44,7.17943,11.8526,-0.478764,-0.104358,-0.284234,-0.0110761
+B,M1_lgbm,BL3_profile,test,holiday_work,1,전날 확정 가정,96,1,40.5982,48.4562,39.9597,-0.173055,-0.173055,-0.173055
+B,M1_lgbm,BL3_profile,test,calendar_operation_mismatch,0,전날 확정 가정,3766,40,8.10868,13.2538,0.87568,-0.16936,-0.297533,-0.0697931
+B,M1_lgbm,BL3_profile,test,calendar_operation_mismatch,1,전날 확정 가정,480,5,6.5724,17.4918,-3.01781,0.0359896,-0.00126318,0.111519
+B,M1_lgbm,BL3_profile,test,analog_atypical,0,발행 시점,3190,34,7.07113,10.3039,-0.652386,-0.0600191,-0.113729,-0.000325575
+B,M1_lgbm,BL3_profile,test,analog_atypical,1,발행 시점,1056,11,10.5446,21.0907,3.72194,-0.174676,-1.07114,-0.0218232
+B,M1_lgbm,BL3_profile,test,first_day_after_off,0,사전,3574,38,6.78466,11.7177,0.809519,-0.08989,-0.137163,0.00917789
+B,M1_lgbm,BL3_profile,test,first_day_after_off,1,사전,672,7,14.0531,21.7428,-1.55351,-0.178558,-1.0074,-0.0151124
+B,M1_lgbm,BL3_profile,test,month,8,사전,2904,31,8.45698,15.3155,0.560009,-0.127154,-0.286865,-0.0119057
+B,M1_lgbm,BL3_profile,test,month,9,사전,1342,14,6.80549,9.73715,0.166165,-0.0972835,-0.205736,-0.00298554
+A4,M7c_hybrid_coolmono,BL3_profile,cv,work_dayshift,0,전날 확정 가정,3600,58,4.42923,6.56615,-0.178333,0.111648,0.0582093,0.160531
+A4,M7c_hybrid_coolmono,BL3_profile,cv,work_dayshift,1,전날 확정 가정,1968,41,9.8464,12.462,-1.27181,0.275839,0.220229,0.323825
+A4,M7c_hybrid_coolmono,BL3_profile,cv,regime,0.0,전날 확정 가정,864,9,1.83137,2.40599,-0.0753153,-0.120605,-0.247915,-0.0178474
+A4,M7c_hybrid_coolmono,BL3_profile,cv,regime,1.0,전날 확정 가정,768,8,3.21819,4.93374,0.26012,0.0813098,-0.0732224,0.192666
+A4,M7c_hybrid_coolmono,BL3_profile,cv,regime,2.0,전날 확정 가정,3936,41,7.94438,10.5387,-0.833236,0.238247,0.192716,0.276881
+A4,M7c_hybrid_coolmono,BL3_profile,cv,regime_prev,0.0,전날 확정 가정,768,8,6.40582,9.30482,0.0623656,0.263767,0.154879,0.337585
+A4,M7c_hybrid_coolmono,BL3_profile,cv,regime_prev,1.0,전날 확정 가정,768,8,1.80248,2.34,-0.153715,-0.0769331,-0.172493,0.0247736
+A4,M7c_hybrid_coolmono,BL3_profile,cv,regime_prev,2.0,전날 확정 가정,3840,40,7.10527,9.72039,-0.897671,0.239617,0.18835,0.281897
+A4,M7c_hybrid_coolmono,BL3_profile,cv,daytype4,0,사전,768,8,6.40582,9.30482,0.0623656,0.263767,0.154879,0.337585
+A4,M7c_hybrid_coolmono,BL3_profile,cv,daytype4,1,사전,3168,33,8.31736,10.8167,-1.05035,0.233383,0.183392,0.274922
+A4,M7c_hybrid_coolmono,BL3_profile,cv,daytype4,2,사전,864,9,3.08978,4.7496,0.292538,0.0694179,-0.0952462,0.185179
+A4,M7c_hybrid_coolmono,BL3_profile,cv,daytype4,3,사전,768,8,1.80248,2.34,-0.153715,-0.0769331,-0.172493,0.0247736
+A4,M7c_hybrid_coolmono,BL3_profile,cv,window,break_1000,사전,116,58,6.54789,9.48683,0.354652,0.325817,0.169011,0.449921
+A4,M7c_hybrid_coolmono,BL3_profile,cv,window,break_1500,사전,116,58,7.10027,10.1548,1.61731,0.232793,0.110802,0.348977
+A4,M7c_hybrid_coolmono,BL3_profile,cv,window,break_1645_1745,사전,232,58,7.64768,10.9522,1.28341,0.154659,0.032563,0.262343
+A4,M7c_hybrid_coolmono,BL3_profile,cv,window,lunch_1145_1315,사전,348,58,6.78059,9.54267,1.41721,0.248595,0.162391,0.327326
+A4,M7c_hybrid_coolmono,BL3_profile,cv,window,night_break_0000,사전,116,58,4.40511,6.44083,-0.483653,-0.0260958,-0.245917,0.136146
+A4,M7c_hybrid_coolmono,BL3_profile,cv,window,night_break_0300,사전,116,58,4.88961,6.70715,0.309298,0.128622,-0.0304899,0.268663
+A4,M7c_hybrid_coolmono,BL3_profile,cv,window,night_break_0500,사전,116,58,5.25326,7.16255,0.558961,-0.0427914,-0.315981,0.164706
+A4,M7c_hybrid_coolmono,BL3_profile,cv,window,night_break_2200,사전,116,58,5.65707,7.78373,0.969495,0.0889306,-0.0945532,0.223768
+A4,M7c_hybrid_coolmono,BL3_profile,cv,window,shift_end_1945_2030,사전,174,58,8.55843,12.4601,1.73803,0.0610165,-0.137322,0.218446
+A4,M7c_hybrid_coolmono,BL3_profile,cv,window,startup_0730_0845,사전,348,58,8.72564,12.1125,-3.39203,0.118564,0.0302297,0.201953
+A4,M7c_hybrid_coolmono,BL3_profile,cv,window,steady,사전,3770,58,6.03087,8.5848,-0.913441,0.268603,0.222071,0.307498
+A4,M7c_hybrid_coolmono,BL3_profile,cv,temp_bin,20-26,예보 대리,3308,56,6.2802,9.07174,-0.182896,0.144356,0.0878939,0.194278
+A4,M7c_hybrid_coolmono,BL3_profile,cv,temp_bin,26-30,예보 대리,1112,35,6.35139,9.46107,-1.20021,0.320342,0.239333,0.382229
+A4,M7c_hybrid_coolmono,BL3_profile,cv,temp_bin,30+,예보 대리,240,11,7.42775,10.3193,-0.160217,0.429828,0.28456,0.526735
+A4,M7c_hybrid_coolmono,BL3_profile,cv,temp_bin,<20,예보 대리,908,26,6.28043,8.36355,-1.28504,0.25212,0.134781,0.339119
+A4,M7c_hybrid_coolmono,BL3_profile,cv,holiday_work,0,전날 확정 가정,5568,58,6.34392,9.09762,-0.56482,0.231097,0.189534,0.266378
+A4,M7c_hybrid_coolmono,BL3_profile,cv,calendar_operation_mismatch,0,전날 확정 가정,5568,58,6.34392,9.09762,-0.56482,0.231097,0.189534,0.266378
+A4,M7c_hybrid_coolmono,BL3_profile,cv,analog_atypical,0,발행 시점,4992,52,6.21065,8.94433,-0.580389,0.228989,0.184691,0.269037
+A4,M7c_hybrid_coolmono,BL3_profile,cv,analog_atypical,1,발행 시점,576,6,7.49896,10.3313,-0.429887,0.24438,0.0728926,0.360872
+A4,M7c_hybrid_coolmono,BL3_profile,cv,first_day_after_off,0,사전,4800,50,6.33402,9.06403,-0.66517,0.225148,0.173373,0.265572
+A4,M7c_hybrid_coolmono,BL3_profile,cv,first_day_after_off,1,사전,768,8,6.40582,9.30482,0.0623656,0.263767,0.154879,0.337585
+A4,M7c_hybrid_coolmono,BL3_profile,cv,month,6,사전,2880,30,6.44516,9.18375,-0.903151,0.185253,0.125638,0.242409
+A4,M7c_hybrid_coolmono,BL3_profile,cv,month,7,사전,2688,28,6.23545,9.00443,-0.202322,0.274069,0.212659,0.320707
+A4,M1_lgbm,BL3_profile,cv,work_dayshift,0,전날 확정 가정,3600,58,4.47223,6.60474,-0.470451,0.106427,0.0484663,0.158145
+A4,M1_lgbm,BL3_profile,cv,work_dayshift,1,전날 확정 가정,1968,41,10.6101,13.1987,-3.45676,0.233028,0.182412,0.277373
+A4,M1_lgbm,BL3_profile,cv,regime,0.0,전날 확정 가정,864,9,1.83137,2.40599,-0.0753153,-0.120605,-0.247915,-0.0178474
+A4,M1_lgbm,BL3_profile,cv,regime,1.0,전날 확정 가정,768,8,3.26649,5.32272,-0.0269865,0.00887981,-0.148203,0.127366
+A4,M1_lgbm,BL3_profile,cv,regime,2.0,전날 확정 가정,3936,41,8.35615,10.9637,-2.13687,0.207526,0.165153,0.245193
+A4,M1_lgbm,BL3_profile,cv,regime_prev,0.0,전날 확정 가정,768,8,6.7893,9.71935,-0.945967,0.230968,0.154961,0.286851
+A4,M1_lgbm,BL3_profile,cv,regime_prev,1.0,전날 확정 가정,768,8,1.80248,2.34,-0.153715,-0.0769331,-0.172493,0.0247736
+A4,M1_lgbm,BL3_profile,cv,regime_prev,2.0,전날 확정 가정,3840,40,7.42805,10.1321,-2.0335,0.207407,0.161215,0.247911
+A4,M1_lgbm,BL3_profile,cv,daytype4,0,사전,768,8,6.7893,9.71935,-0.945967,0.230968,0.154961,0.286851
+A4,M1_lgbm,BL3_profile,cv,daytype4,1,사전,3168,33,8.736,11.2447,-2.42558,0.203047,0.155291,0.244331
+A4,M1_lgbm,BL3_profile,cv,daytype4,2,사전,864,9,3.13272,5.1093,0.0373325,-0.00105779,-0.179638,0.10932
+A4,M1_lgbm,BL3_profile,cv,daytype4,3,사전,768,8,1.80248,2.34,-0.153715,-0.0769331,-0.172493,0.0247736
+A4,M1_lgbm,BL3_profile,cv,window,break_1000,사전,116,58,7.67407,10.9489,0.281307,0.221917,0.0585901,0.34799
+A4,M1_lgbm,BL3_profile,cv,window,break_1500,사전,116,58,7.3109,10.3187,0.948721,0.220413,0.127079,0.312584
+A4,M1_lgbm,BL3_profile,cv,window,break_1645_1745,사전,232,58,7.70796,11.0032,0.0526871,0.150728,0.0369958,0.244584
+A4,M1_lgbm,BL3_profile,cv,window,lunch_1145_1315,사전,348,58,7.24011,10.0495,0.730942,0.208684,0.122528,0.286757
+A4,M1_lgbm,BL3_profile,cv,window,night_break_0000,사전,116,58,4.42567,6.58889,-1.58031,-0.0496827,-0.293341,0.145376
+A4,M1_lgbm,BL3_profile,cv,window,night_break_0300,사전,116,58,4.92284,6.99691,0.424314,0.0909771,-0.0670801,0.228821
+A4,M1_lgbm,BL3_profile,cv,window,night_break_0500,사전,116,58,5.2534,7.38851,0.314712,-0.0756883,-0.367332,0.153741
+A4,M1_lgbm,BL3_profile,cv,window,night_break_2200,사전,116,58,5.54075,7.52491,0.690917,0.119225,-0.0432194,0.237081
+A4,M1_lgbm,BL3_profile,cv,window,shift_end_1945_2030,사전,174,58,7.90418,11.0385,-0.213257,0.168148,0.0489834,0.273851
+A4,M1_lgbm,BL3_profile,cv,window,startup_0730_0845,사전,348,58,8.81372,12.1239,-3.55298,0.117732,0.0299091,0.19356
+A4,M1_lgbm,BL3_profile,cv,window,steady,사전,3770,58,6.40734,9.13238,-2.01984,0.221952,0.181443,0.260519
+A4,M1_lgbm,BL3_profile,cv,temp_bin,20-26,예보 대리,3308,56,6.45394,9.24261,-0.891427,0.12824,0.0789687,0.171222
+A4,M1_lgbm,BL3_profile,cv,temp_bin,26-30,예보 대리,1112,35,6.85458,10.1402,-2.58297,0.271557,0.19411,0.334071
+A4,M1_lgbm,BL3_profile,cv,temp_bin,30+,예보 대리,240,11,8.53766,11.4129,-2.13508,0.369403,0.211243,0.485567
+A4,M1_lgbm,BL3_profile,cv,temp_bin,<20,예보 대리,908,26,6.56369,8.88565,-2.38216,0.205433,0.117797,0.272376
+A4,M1_lgbm,BL3_profile,cv,holiday_work,0,전날 확정 가정,5568,58,6.64166,9.47509,-1.52596,0.199194,0.160883,0.236011
+A4,M1_lgbm,BL3_profile,cv,calendar_operation_mismatch,0,전날 확정 가정,5568,58,6.64166,9.47509,-1.52596,0.199194,0.160883,0.236011
+A4,M1_lgbm,BL3_profile,cv,analog_atypical,0,발행 시점,4992,52,6.41585,9.1808,-1.43442,0.208605,0.161892,0.251414
+A4,M1_lgbm,BL3_profile,cv,analog_atypical,1,발행 시점,576,6,8.59869,11.72,-2.31929,0.142809,0.000420446,0.235098
+A4,M1_lgbm,BL3_profile,cv,first_day_after_off,0,사전,4800,50,6.61804,9.43542,-1.61875,0.193399,0.142872,0.236361
+A4,M1_lgbm,BL3_profile,cv,first_day_after_off,1,사전,768,8,6.7893,9.71935,-0.945967,0.230968,0.154961,0.286851
+A4,M1_lgbm,BL3_profile,cv,month,6,사전,2880,30,6.7707,9.59255,-1.78475,0.148985,0.103742,0.187296
+A4,M1_lgbm,BL3_profile,cv,month,7,사전,2688,28,6.50341,9.3476,-1.24868,0.246403,0.179343,0.300836
+A4,M7c_hybrid_coolmono,BL3_profile,test,work_dayshift,0,전날 확정 가정,2952,45,4.53088,7.66586,0.217835,0.305721,-0.0521495,0.429823
+A4,M7c_hybrid_coolmono,BL3_profile,test,work_dayshift,1,전날 확정 가정,1294,27,10.5061,14.3939,1.24262,0.0248218,-0.0673202,0.109508
+A4,M7c_hybrid_coolmono,BL3_profile,test,regime,0.0,전날 확정 가정,1202,13,1.62847,2.2233,0.034077,-0.205915,-0.266056,-0.141045
+A4,M7c_hybrid_coolmono,BL3_profile,test,regime,1.0,전날 확정 가정,454,5,4.42972,6.41203,-0.966186,0.130623,-0.00256324,0.209062
+A4,M7c_hybrid_coolmono,BL3_profile,test,regime,2.0,전날 확정 가정,2590,27,8.8809,12.6882,1.02266,0.175273,-0.00435429,0.267564
+A4,M7c_hybrid_coolmono,BL3_profile,test,regime_prev,0.0,전날 확정 가정,1344,14,5.71649,11.2658,1.46072,0.153396,-0.2411,0.259597
+A4,M7c_hybrid_coolmono,BL3_profile,test,regime_prev,1.0,전날 확정 가정,434,5,1.66557,2.41501,-0.189374,-0.315532,-0.395878,-0.233819
+A4,M7c_hybrid_coolmono,BL3_profile,test,regime_prev,2.0,전날 확정 가정,2468,26,7.52196,10.4296,0.149913,0.183158,0.0108822,0.296145
+A4,M7c_hybrid_coolmono,BL3_profile,test,daytype4,0,사전,672,7,8.51667,14.2675,0.323596,0.226634,-0.242517,0.372765
+A4,M7c_hybrid_coolmono,BL3_profile,test,daytype4,1,사전,2302,24,6.78993,9.36609,0.301819,0.046242,-0.0285992,0.106817
+A4,M7c_hybrid_coolmono,BL3_profile,test,daytype4,2,사전,550,6,3.98789,5.92195,-0.818197,0.123336,-0.0372071,0.19591
+A4,M7c_hybrid_coolmono,BL3_profile,test,daytype4,3,사전,722,8,4.74109,10.7574,2.47751,0.290551,-0.30728,0.298341
+A4,M7c_hybrid_coolmono,BL3_profile,test,window,break_1000,사전,88,44,7.52162,10.7425,1.38303,0.0798467,-0.114869,0.255166
+A4,M7c_hybrid_coolmono,BL3_profile,test,window,break_1500,사전,90,45,6.83243,9.82998,-0.631839,0.179348,0.0313501,0.308237
+A4,M7c_hybrid_coolmono,BL3_profile,test,window,break_1645_1745,사전,179,45,7.43413,11.1591,1.3649,0.0506059,-0.150293,0.171774
+A4,M7c_hybrid_coolmono,BL3_profile,test,window,lunch_1145_1315,사전,268,45,7.07568,10.8664,0.327556,-0.0434067,-0.19951,0.0651216
+A4,M7c_hybrid_coolmono,BL3_profile,test,window,night_break_0000,사전,88,44,7.18756,13.1054,1.427,-0.287042,-0.616376,-0.0947884
+A4,M7c_hybrid_coolmono,BL3_profile,test,window,night_break_0300,사전,88,44,5.17309,7.68605,1.01066,0.484333,-0.0569086,0.632837
+A4,M7c_hybrid_coolmono,BL3_profile,test,window,night_break_0500,사전,88,44,4.11039,5.61221,1.5988,0.499934,-0.265105,0.63404
+A4,M7c_hybrid_coolmono,BL3_profile,test,window,night_break_2200,사전,88,44,5.04179,7.66213,1.30883,-0.0814159,-0.192852,0.0391624
+A4,M7c_hybrid_coolmono,BL3_profile,test,window,shift_end_1945_2030,사전,132,44,6.85364,10.6401,-0.409458,-0.0544846,-0.223949,0.130378
+A4,M7c_hybrid_coolmono,BL3_profile,test,window,startup_0730_0845,사전,264,44,8.37273,13.8468,-1.07163,-0.188756,-0.328829,-0.00514298
+A4,M7c_hybrid_coolmono,BL3_profile,test,window,steady,사전,2873,45,6.07658,9.78311,0.598896,0.234847,0.00954678,0.347862
+A4,M7c_hybrid_coolmono,BL3_profile,test,temp_bin,20-26,예보 대리,3090,45,6.75766,10.5986,0.680501,0.194396,-0.0203126,0.280906
+A4,M7c_hybrid_coolmono,BL3_profile,test,temp_bin,26-30,예보 대리,800,31,5.80436,10.0416,0.231368,0.0628359,-0.0233087,0.185738
+A4,M7c_hybrid_coolmono,BL3_profile,test,temp_bin,30+,예보 대리,244,11,2.9649,5.11458,0.0361336,0.182964,-0.300848,0.305252
+A4,M7c_hybrid_coolmono,BL3_profile,test,temp_bin,<20,예보 대리,112,7,6.44595,8.14196,-0.407679,-0.153609,-0.431928,0.129055
+A4,M7c_hybrid_coolmono,BL3_profile,test,holiday_work,0,전날 확정 가정,4150,44,5.93103,9.33313,0.127578,0.130365,-0.0332737,0.24372
+A4,M7c_hybrid_coolmono,BL3_profile,test,holiday_work,1,전날 확정 가정,96,1,24.5445,28.8813,17.9328,0.300824,0.300824,0.300824
+A4,M7c_hybrid_coolmono,BL3_profile,test,calendar_operation_mismatch,0,전날 확정 가정,3766,40,6.62611,10.1886,0.572259,0.101076,-0.037952,0.179858
+A4,M7c_hybrid_coolmono,BL3_profile,test,calendar_operation_mismatch,1,전날 확정 가정,480,5,4.20017,10.2708,0.199729,0.433921,-0.146854,0.43819
+A4,M7c_hybrid_coolmono,BL3_profile,test,analog_atypical,0,발행 시점,3190,34,6.35064,9.32645,0.0700587,0.0405233,-0.00899314,0.103384
+A4,M7c_hybrid_coolmono,BL3_profile,test,analog_atypical,1,발행 시점,1056,11,6.35558,12.4658,1.91999,0.305686,-0.242949,0.39928
+A4,M7c_hybrid_coolmono,BL3_profile,test,first_day_after_off,0,사전,3574,38,5.94483,9.23454,0.568982,0.141049,0.00691563,0.210865
+A4,M7c_hybrid_coolmono,BL3_profile,test,first_day_after_off,1,사전,672,7,8.51667,14.2675,0.323596,0.226634,-0.242517,0.372765
+A4,M7c_hybrid_coolmono,BL3_profile,test,month,8,사전,2904,31,6.42083,10.744,0.726899,0.209269,0.00714481,0.297841
+A4,M7c_hybrid_coolmono,BL3_profile,test,month,9,사전,1342,14,6.20263,8.90229,0.104384,-0.0031894,-0.0858024,0.067434
+A4,M1_lgbm,BL3_profile,test,work_dayshift,0,전날 확정 가정,2952,45,4.32423,7.21899,0.28851,0.346193,-0.0130453,0.503531
+A4,M1_lgbm,BL3_profile,test,work_dayshift,1,전날 확정 가정,1294,27,10.7912,14.0523,-0.267514,0.0479634,-0.0551741,0.149968
+A4,M1_lgbm,BL3_profile,test,regime,0.0,전날 확정 가정,1202,13,1.62847,2.2233,0.034077,-0.205915,-0.266056,-0.141045
+A4,M1_lgbm,BL3_profile,test,regime,1.0,전날 확정 가정,454,5,4.65953,6.54027,-0.404995,0.113235,-0.0571618,0.221578
+A4,M1_lgbm,BL3_profile,test,regime,2.0,전날 확정 가정,2590,27,8.74753,12.1763,0.250357,0.208543,-0.0190589,0.33643
+A4,M1_lgbm,BL3_profile,test,regime_prev,0.0,전날 확정 가정,1344,14,5.91353,11.1986,0.805963,0.158447,-0.233665,0.309828
+A4,M1_lgbm,BL3_profile,test,regime_prev,1.0,전날 확정 가정,434,5,1.66557,2.41501,-0.189374,-0.315532,-0.395878,-0.233819
+A4,M1_lgbm,BL3_profile,test,regime_prev,2.0,전날 확정 가정,2468,26,7.31698,9.82592,-0.200773,0.230439,0.0151973,0.405556
+A4,M1_lgbm,BL3_profile,test,daytype4,0,사전,672,7,8.47275,12.9761,-0.371853,0.296632,-0.221663,0.558177
+A4,M1_lgbm,BL3_profile,test,daytype4,1,사전,2302,24,6.72922,9.41727,-0.363115,0.0410303,-0.0120649,0.0804471
+A4,M1_lgbm,BL3_profile,test,daytype4,2,사전,550,6,4.17759,6.0366,-0.354959,0.106364,-0.0847883,0.211133
+A4,M1_lgbm,BL3_profile,test,daytype4,3,사전,722,8,4.49713,9.98734,2.47441,0.341337,-0.30728,0.350269
+A4,M1_lgbm,BL3_profile,test,window,break_1000,사전,88,44,8.14014,11.7662,0.563719,-0.00784283,-0.157963,0.152763
+A4,M1_lgbm,BL3_profile,test,window,break_1500,사전,90,45,6.84475,9.98008,-0.759212,0.166816,0.0207575,0.299742
+A4,M1_lgbm,BL3_profile,test,window,break_1645_1745,사전,179,45,7.10691,11.1714,0.559697,0.0495602,-0.101075,0.190423
+A4,M1_lgbm,BL3_profile,test,window,lunch_1145_1315,사전,268,45,7.07446,11.0353,0.505163,-0.0596305,-0.169453,0.0459131
+A4,M1_lgbm,BL3_profile,test,window,night_break_0000,사전,88,44,5.21214,9.23144,0.698773,0.0934049,-0.246882,0.397798
+A4,M1_lgbm,BL3_profile,test,window,night_break_0300,사전,88,44,5.48097,8.73143,1.3691,0.414197,-0.140739,0.594571
+A4,M1_lgbm,BL3_profile,test,window,night_break_0500,사전,88,44,4.39338,6.41603,2.16176,0.428311,-0.222536,0.538383
+A4,M1_lgbm,BL3_profile,test,window,night_break_2200,사전,88,44,4.89005,7.34669,0.358337,-0.0368952,-0.154757,0.0956994
+A4,M1_lgbm,BL3_profile,test,window,shift_end_1945_2030,사전,132,44,5.69446,8.35539,0.195581,0.171943,0.0251741,0.326915
+A4,M1_lgbm,BL3_profile,test,window,startup_0730_0845,사전,264,44,8.17011,12.2582,-1.39401,-0.0523707,-0.297745,0.161705
+A4,M1_lgbm,BL3_profile,test,window,steady,사전,2873,45,6.11277,9.54546,0.0790564,0.253434,0.00320485,0.394839
+A4,M1_lgbm,BL3_profile,test,temp_bin,20-26,예보 대리,3090,45,6.56101,10.024,0.294908,0.238065,-0.030662,0.367131
+A4,M1_lgbm,BL3_profile,test,temp_bin,26-30,예보 대리,800,31,6.37519,10.3803,-0.579538,0.0312212,-0.0734499,0.179322
+A4,M1_lgbm,BL3_profile,test,temp_bin,30+,예보 대리,244,11,3.05699,5.37988,0.243905,0.140582,-0.561036,0.359857
+A4,M1_lgbm,BL3_profile,test,temp_bin,<20,예보 대리,112,7,5.44092,7.07907,-0.0145554,-0.0030122,-0.196336,0.183274
+A4,M1_lgbm,BL3_profile,test,holiday_work,0,전날 확정 가정,4150,44,5.91538,9.06231,-0.29248,0.1556,-0.0522788,0.316747
+A4,M1_lgbm,BL3_profile,test,holiday_work,1,전날 확정 가정,96,1,22.7097,26.7205,17.9095,0.353134,0.353134,0.353134
+A4,M1_lgbm,BL3_profile,test,calendar_operation_mismatch,0,전날 확정 가정,3766,40,6.68703,10.2008,-0.000201142,0.0999986,-0.0602457,0.20105
+A4,M1_lgbm,BL3_profile,test,calendar_operation_mismatch,1,전날 확정 가정,480,5,3.22002,6.03609,1.05474,0.667318,-0.146854,0.6762
+A4,M1_lgbm,BL3_profile,test,analog_atypical,0,발행 시점,3190,34,6.49972,9.60326,-0.629125,0.0120459,-0.0467579,0.0738831
+A4,M1_lgbm,BL3_profile,test,analog_atypical,1,발행 시점,1056,11,5.67694,10.4435,2.37919,0.418324,-0.142241,0.613685
+A4,M1_lgbm,BL3_profile,test,first_day_after_off,0,사전,3574,38,5.88564,9.10383,0.21136,0.153207,0.0131169,0.234307
+A4,M1_lgbm,BL3_profile,test,first_day_after_off,1,사전,672,7,8.47275,12.9761,-0.371853,0.296632,-0.221663,0.558177
+A4,M1_lgbm,BL3_profile,test,month,8,사전,2904,31,6.44855,10.3616,0.0884033,0.237411,-0.0409153,0.380544
+A4,M1_lgbm,BL3_profile,test,month,9,사전,1342,14,5.96301,8.52725,0.18539,0.0390741,-0.0236937,0.0916823

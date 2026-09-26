@@ -1,0 +1,9 @@
+date,time,value,month,type,period,measure
+2021-07-19,11:15,222,7,plateau,pre_test,사전 냉방·수요제어
+2021-08-11,08:30,218,8,startup,test,순차·선행 기동
+2021-07-26,08:15,217,7,startup,pre_test,순차·선행 기동
+2021-08-09,08:30,215,8,startup,test,순차·선행 기동
+2021-07-21,09:45,214,7,plateau,pre_test,사전 냉방·수요제어
+2021-07-22,08:15,213,7,startup,pre_test,순차·선행 기동
+2021-07-30,11:45,212,7,plateau,pre_test,사전 냉방·수요제어
+2021-07-27,11:30,211,7,plateau,pre_test,사전 냉방·수요제어

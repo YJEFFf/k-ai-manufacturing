@@ -1,0 +1,27 @@
+task,model,group,mean_abs_shap,share
+A4,M1_lgbm,유사일(사례기반),39.4747,0.562264
+A4,M1_lgbm,최근 전력(지연값),26.5573,0.378274
+A4,M1_lgbm,달력·시각,2.43342,0.0346607
+A4,M1_lgbm,기상(실측을 예보 대리),1.15837,0.0164994
+A4,M1_lgbm,운영일정(체제),0.582854,0.00830198
+A4,M7c_hybrid_residual,유사일(사례기반),7.23196,0.618684
+A4,M7c_hybrid_residual,최근 전력(지연값),3.14625,0.269157
+A4,M7c_hybrid_residual,기상(실측을 예보 대리),0.656119,0.0561301
+A4,M7c_hybrid_residual,달력·시각,0.605354,0.0517872
+A4,M7c_hybrid_residual,운영일정(체제),0.0495792,0.00424143
+A4,structure_only_lgbm,달력·시각,64.8114,0.87313
+A4,structure_only_lgbm,운영일정(체제),5.07348,0.0683492
+A4,structure_only_lgbm,기상(실측을 예보 대리),4.34389,0.0585204
+B,M1_lgbm,유사일(사례기반),43.5342,0.636203
+B,M1_lgbm,최근 전력(지연값),16.6434,0.243225
+B,M1_lgbm,운영일정(체제),3.75969,0.0549436
+B,M1_lgbm,달력·시각,2.55298,0.0373089
+B,M1_lgbm,기상(실측을 예보 대리),1.93783,0.0283192
+B,M7c_hybrid_residual,유사일(사례기반),3.39399,0.402998
+B,M7c_hybrid_residual,최근 전력(지연값),3.11623,0.370017
+B,M7c_hybrid_residual,달력·시각,0.897928,0.106619
+B,M7c_hybrid_residual,기상(실측을 예보 대리),0.81695,0.0970036
+B,M7c_hybrid_residual,운영일정(체제),0.196755,0.0233624
+B,structure_only_lgbm,달력·시각,64.718,0.872656
+B,structure_only_lgbm,운영일정(체제),5.11347,0.0689499
+B,structure_only_lgbm,기상(실측을 예보 대리),4.33064,0.0583942
