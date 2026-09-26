@@ -3,5 +3,5 @@ naive(복제 미인지),B,BL5_regime_analog,True,29.711,15.5319
 naive(복제 미인지),B,M8_blend,False,,14.4294
 naive(복제 미인지),A,M1_lgbm,True,11.3048,8.57521
 naive(복제 미인지),A,M7c_hybrid_coolmono,False,11.3631,8.72548
-honest(v2.0 헤드라인),B,M8_blend,True,9.94414,14.0206
-honest(v2.0 헤드라인),A,M7c_hybrid_coolmono,True,8.35202,8.96524
+honest(v2.0 헤드라인),B,M8_blend,True,9.93528,13.9759
+honest(v2.0 헤드라인),A,M7c_hybrid_coolmono,True,8.33479,8.99846

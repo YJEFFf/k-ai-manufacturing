@@ -39,7 +39,8 @@ def test_copies(dg):
     con = set(pd.to_datetime(d.contradictions["date"]).dt.strftime("%Y-%m-%d"))
     # 설·삼일절·일요일인데 평일 가동 전력(v1에서 찾은 모순)은 모두 복제일 쪽에 있다
     assert {"2021-02-11", "2021-03-01", "2021-03-14", "2021-05-09"} <= con
-    assert all(pd.Timestamp(x) < pd.Timestamp("2021-06-01") for x in con)  # 모순은 모두 1~5월의 채움 날짜
+    assert all(pd.Timestamp(x) < C.TEST_START for x in con)  # 모순은 모두 시험 전 채움 날짜(1~5월과 7/30)
+    assert "2021-07-30" in con and "2021-07-28" not in con  # v2.1: 저녁 정합으로 7/28이 원본
 
 
 def test_copy_origin_is_latest_consistent_member(dg):
@@ -47,10 +48,12 @@ def test_copy_origin_is_latest_consistent_member(dg):
     _, _, d = dg
     s = d.summary
     assert s["copy_groups_multi"] == 45
-    assert s["copy_groups_latest_member_consistent"] == "45/45"
-    assert s["copy_groups_earliest_member_consistent"] == "22/45"
+    assert s["copy_groups_chosen_origin_consistent"] == "45/45"
+    assert s["copy_groups_latest_member_consistent"] == "44/45"  # 예외 1군: 7/28·7/30(원본 7/28)
+    assert s["copy_groups_earliest_member_consistent"] == "21/45"
+    assert s["singleton_days_consistent_measured_period"] == "87/88"
     assert s["earliest_is_origin_binom_p"] < 1e-10
-    assert s["copied_src_later_share"] == 1.0
+    assert s["copied_src_later_share"] > 0.99  # 예외 1일: 7/30 ← 7/28(같은 달, 저녁 정합으로 판정)
     g = d.copy_groups
     assert (g[g["is_origin"]]["consistent"] == 1).all()
     # 1~4월은 원본일이 없다: 실측은 5월부터
@@ -68,7 +71,7 @@ def test_previous_rule_reproducible(dg):
         C.COPY_ORIGIN = old
     assert s["partial_copy_days"] == ["2021-01-02", "2021-01-09", "2021-01-10", "2021-01-16", "2021-02-09",
                                       "2021-02-10", "2021-02-16", "2021-03-07", "2021-03-21", "2021-03-28"]
-    assert s["copy_groups_earliest_member_consistent"] == "22/45"
+    assert s["copy_groups_earliest_member_consistent"] == "21/45"
 
 
 def test_corruption_outage_mismatch(dg):
@@ -111,8 +114,20 @@ def test_consistency_rule_is_robust_to_thresholds(dg):
     from powerguard import stage_diagnostics as SD
     df, _, d = dg
     t = SD.origin_sensitivity(df, d)
-    assert (t["latest_consistent"] == 45).all()
+    assert (t["latest_consistent"] >= 43).all()
     assert (t["earliest_consistent"] <= 25).all()
+    assert (t["latest_consistent"] - t["earliest_consistent"]).min() >= 18
+
+
+def test_power_only_direction_checks(dg):
+    """생산 기록을 쓰지 않는 증거: 자정 연속성과 휴무 다음 날 야간 전력이 5~9월에만 실측답다."""
+    from powerguard import stage_diagnostics as SD
+    df, _, d = dg
+    t, _ = SD.direction_checks(df, d)
+    r = t.set_index(["check", "subset"])["rate"]
+    assert r[("자정 연속성(전날 21~23시 ↔ 당일 01~05시)", "5~9월")] > 0.95
+    assert r[("자정 연속성(전날 21~23시 ↔ 당일 01~05시)", "1~4월")] < 0.8
+    assert r[("휴무 다음 평일의 01~05시 야간조 전력", "5~9월")] < 0.1
 
 
 def test_naive_intervals_include_copies(dg):

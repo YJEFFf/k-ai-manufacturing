@@ -1,10 +1,10 @@
 task,model,param,value,RMSE,MAE
-B,BL5_regime_analog,k,1,11.7543,8.10345
-B,BL5_regime_analog,k,2,10.6794,7.4164
-B,BL5_regime_analog,k,3,10.0733,7.027
-B,BL5_regime_analog,k,4,10.0116,6.99515
-A(mean h1-4),M6_analog_level,rho,0.8,9.00759,
-A(mean h1-4),M6_analog_level,rho,0.85,9.16591,
-A(mean h1-4),M6_analog_level,rho,0.9,9.44245,
-A(mean h1-4),M6_analog_level,rho,0.95,9.86599,
-A(mean h1-4),M6_analog_level,rho,1,10.4626,
+B,BL5_regime_analog,k,1,11.6635,8.05585
+B,BL5_regime_analog,k,2,10.7038,7.42358
+B,BL5_regime_analog,k,3,10.0621,7.00659
+B,BL5_regime_analog,k,4,10.0099,6.98846
+A(mean h1-4),M6_analog_level,rho,0.8,8.97166,
+A(mean h1-4),M6_analog_level,rho,0.85,9.1294,
+A(mean h1-4),M6_analog_level,rho,0.9,9.40504,
+A(mean h1-4),M6_analog_level,rho,0.95,9.82731,
+A(mean h1-4),M6_analog_level,rho,1,10.4222,

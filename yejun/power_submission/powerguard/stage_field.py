@@ -33,7 +33,8 @@ RATCHET_MONTHS = (12, 1, 2, 7, 8, 9)
 RATCHET_FIRST_IN_DATA = pd.Timestamp("2021-07-01")  # 자료 안 첫 래칫 대상 월
 VALLEY_LEVEL = 140.0          # 익일 예측이 이 값 이하인 구간(점심·휴식·저녁)을 회복 구간으로 쓴다
 TAU_CAND = (0.2, 0.3, 0.5, 0.7, 0.9)
-PAYBACK = ("none", "valley", "immediate")
+PAYBACK = ("none", "valley", "immediate", "valley_capped")  # valley_capped(v2.1): 차단 직후 재경보 허용, 측정 부하에 여유가 있을 때만 회복
+ROOM_MARGIN = 5.0
 
 
 def pretest_max(iv: pd.DataFrame) -> float:
@@ -77,9 +78,15 @@ def monthly_max(y: np.ndarray, index: pd.DatetimeIndex, months=(5, 6, 7, 8, 9)) 
     return {int(k): float(v) for k, v in mm.items() if int(k) in months and np.isfinite(v)}
 
 
+SPIKE_JUMP = 15.0  # 앞뒤 두 구간보다 모두 이만큼 높으면 한 구간짜리 스파이크
+
+
 def ratchet_events(iv: pd.DataFrame, top: int = 8) -> pd.DataFrame:
-    """래칫 대상 월(7·8·9월)의 상위 15분 수요 사건: 시각·유형(기동/고원/기타)·대응 대책."""
+    """래칫 대상 월(7·8·9월)의 날짜별 최대 15분 수요 상위 사건: 시각·유형·대응 대책.
+
+    유형: spike(앞뒤 구간보다 모두 SPIKE_JUMP 이상 높은 한 구간), startup(08:00~08:59), plateau(09~16시 고원), other."""
     y = iv["y"]
+    tmax = iv["temp"].groupby(iv.index.normalize()).max()
     s = y[(y.index.month >= 7) & y.notna()]
     rows = []
     for ts, v in s.sort_values(ascending=False).items():
@@ -87,13 +94,48 @@ def ratchet_events(iv: pd.DataFrame, top: int = 8) -> pd.DataFrame:
         if any(r["date"] == d for r in rows):
             continue
         slot = ts.hour * 4 + ts.minute // 15
-        typ = "startup" if 30 <= slot <= 35 else ("plateau" if 36 <= slot <= 63 else "other")
-        rows.append(dict(date=d, time=ts.strftime("%H:%M"), value=float(v), month=ts.month, type=typ,
+        prev = y.get(ts - pd.Timedelta(minutes=15), np.nan)
+        nxt = y.get(ts + pd.Timedelta(minutes=15), np.nan)
+        jump = float(v - np.nanmax([prev, nxt]))
+        if jump >= SPIKE_JUMP:
+            typ = "spike"
+        elif 32 <= slot <= 35:
+            typ = "startup"
+        elif 36 <= slot <= 63:
+            typ = "plateau"
+        else:
+            typ = "other"
+        rows.append(dict(date=d, time=ts.strftime("%H:%M"), value=float(v), prev_interval=prev, next_interval=nxt,
+                         jump_vs_neighbors=jump, tmax=float(tmax.get(d, np.nan)), month=ts.month, type=typ,
                          period="test" if ts >= C.TEST_START else "pre_test",
-                         measure={"startup": "순차·선행 기동", "plateau": "사전 냉방·수요제어", "other": "수요제어"}[typ]))
+                         measure={"spike": "동시 기동 인터록·15분 창 제어(당일 실시간)", "startup": "순차·선행 기동",
+                                  "plateau": "사전 냉방·수요제어", "other": "수요제어"}[typ]))
         if len(rows) >= top:
             break
     return pd.DataFrame(rows)
+
+
+def ratchet_ladder(iv: pd.DataFrame, top: int = 6) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """래칫 사다리: 7~9월 날짜별 최대를 큰 순으로 하나씩 막으면(그날 최대를 다음 사건 수준으로 묶음) 요금적용전력이 얼마나 내려가는가.
+    완전 제어 상한: 목표 T를 넘은 구간을 모두 T로 묶을 때의 초과 구간·일수·에너지와 요금적용전력 변화."""
+    y = iv["y"]
+    s = y[(y.index >= RATCHET_FIRST_IN_DATA) & (y.index < C.TEST_END) & y.notna()]
+    dmax = s.groupby(s.index.normalize()).max().sort_values(ascending=False)
+    base = float(dmax.iloc[0])
+    lad = [dict(step=0, capped_day="", ratchet=base, change_pct=0.0)]
+    for k in range(1, min(top, len(dmax) - 1) + 1):
+        new = float(dmax.iloc[k])
+        lad.append(dict(step=k, capped_day=str(dmax.index[k - 1].date()), ratchet=new, change_pct=(new - base) / base * 100))
+    ub = []
+    ref = pretest_max(iv)
+    for frac in (0.90, 0.92, 0.95, 0.98):
+        T = round(ref * frac, 1)
+        over = s[s > T]
+        ub.append(dict(target=T, target_fraction=frac, intervals_over=int(len(over)),
+                       days_over=int(over.index.normalize().nunique()),
+                       energy_over_share=float((over - T).sum() / s.sum()),
+                       ratchet_if_perfect=min(base, T), change_pct=(min(base, T) - base) / base * 100))
+    return pd.DataFrame(lad), pd.DataFrame(ub)
 
 
 def ratchet_risk_days(iv: pd.DataFrame, selection: dict, margin: float = 5.0) -> tuple[pd.DataFrame, dict]:
@@ -134,22 +176,38 @@ def ratchet_risk_days(iv: pd.DataFrame, selection: dict, margin: float = 5.0) ->
         if f1 >= best[1]:
             best = (tau, f1)
     dp["flag"] = (dp["p_daymax"] >= best[0]).astype(int)
-    res = {"margin": margin, "tau_chosen_on_july": best[0]}
+    # 순위 규칙(문턱 이전 없음): 기간 안 가동일을 위험 확률 순으로 세우고, 주마다 상위 1일을 위험일로(개입 예산 주 1일)
+    reg = st["regime"].reindex(pd.DatetimeIndex(dp["date"])).to_numpy()
+    dp["workday"] = (reg == 2).astype(int)
+    dp["rank_in_period"] = np.nan
+    dp["week_top1"] = 0
+    for per, g in dp[dp["workday"] == 1].groupby("period"):
+        dp.loc[g.index, "rank_in_period"] = g["p_daymax"].rank(ascending=False, method="min")
+        wk = pd.DatetimeIndex(g["date"]).to_period("W")
+        top = g.groupby(wk)["p_daymax"].idxmax()
+        dp.loc[top.to_numpy(), "week_top1"] = 1
+    res = {"margin": margin, "tau_chosen_on_july": best[0],
+           "note": "문턱 τ는 7월 기준(초기 래칫 ≈201)에서 골라 시험(≈217)으로 옮기면 맞지 않는다 → 순위·주당 상위 1일 규칙을 함께 본다"}
     for per, g in dp.groupby("period"):
+        gw = g[g["workday"] == 1]
         tp = int(((g.flag == 1) & (g.label == 1)).sum())
         fp = int(((g.flag == 1) & (g.label == 0)).sum())
         fn = int(((g.flag == 0) & (g.label == 1)).sum())
-        res[per] = {"days": int(len(g)), "risk_days_actual": int((g.label == 1).sum()), "flagged": int(g.flag.sum()),
-                    "TP": tp, "FP": fp, "FN": fn, "precision": tp / (tp + fp) if tp + fp else None,
-                    "recall": tp / (tp + fn) if tp + fn else None,
-                    "flag_rate_workdays": float(g.flag.mean())}
+        wt = int(((gw.week_top1 == 1) & (gw.label == 1)).sum())
+        res[per] = {"days": int(len(g)), "workdays": int(len(gw)), "risk_days_actual": int((g.label == 1).sum()),
+                    "flagged_tau": int(g.flag.sum()), "TP": tp, "FP": fp, "FN": fn,
+                    "precision": tp / (tp + fp) if tp + fp else None, "recall": tp / (tp + fn) if tp + fn else None,
+                    "flag_rate_workdays": float(gw.flag.mean()) if len(gw) else None,
+                    "risk_day_ranks_among_workdays": [int(r) for r in gw.loc[gw.label == 1, "rank_in_period"]],
+                    "week_top1_days": int(gw.week_top1.sum()), "week_top1_hits": wt}
     return dp, res
 
 
 # ---------------------------------------------------------------- 수요제어기
 
 def simulate(y: np.ndarray, alarm_issue: np.ndarray, r: float, valley: np.ndarray | None = None,
-             search: int = 16, shed_len: int = SHED_LEN, rebound_len: int = REBOUND_LEN) -> tuple[np.ndarray, dict]:
+             search: int = 16, shed_len: int = SHED_LEN, rebound_len: int = REBOUND_LEN,
+             room: np.ndarray | None = None, unlock_after_shed: bool = False) -> tuple[np.ndarray, dict]:
     """상태기계: 대기 → (발행 구간 i 경보) → i+1..i+shed_len 차단(부하 r 감소) → 에너지 회복 → 대기.
 
     회복: valley(익일 예측상 저부하 구간 표시)가 주어지면 차단 뒤 search 구간(4시간) 안의 저부하 구간
@@ -169,17 +227,34 @@ def simulate(y: np.ndarray, alarm_issue: np.ndarray, r: float, valley: np.ndarra
                 y2[shed_idx] = y2[shed_idx] - y[shed_idx] * r
                 end = shed_idx[-1]
                 rec = []
-                if valley is not None:
+                if room is not None:
+                    # 측정 기반 회복(v2.1): 직전 구간의 측정 부하 + 회복분이 (목표 − 여유) 이하일 때만 그 구간에 회복분을 푼다.
+                    # 창(search) 안에 다 못 풀면 남은 양을 창 끝 구간에 몰아 푼다(최악). 인과적: 직전 측정값만 쓴다.
+                    share = e / rebound_len
+                    left, t = e, end + 1
+                    while left > 1e-9 and t < min(end + 1 + search, n):
+                        if ok[t] and ok[t - 1] and y2[t - 1] + share <= room[t]:
+                            amt = min(share, left)
+                            y2[t] += amt
+                            left -= amt
+                            rec.append(t)
+                        t += 1
+                    if left > 1e-9:
+                        last = min(end + search, n - 1)
+                        y2[last] += left
+                        rec.append(last)
+                    to_valley += int(left <= 1e-9)
+                elif valley is not None:
                     rec = [t for t in range(end + 1, min(end + 1 + search, n)) if ok[t] and valley[t]][:rebound_len]
                     to_valley += int(bool(rec))
-                if not rec:
+                if room is None and not rec:
                     rec = [t for t in range(end + 1, min(end + 1 + rebound_len, n)) if ok[t]]
-                if rec:
+                if room is None and rec:
                     y2[rec] += e / len(rec)
                 episodes += 1
                 shed_n += len(shed_idx)
                 deferred += e
-                ready_from = max(rec) if rec else end
+                ready_from = end if unlock_after_shed else (max(rec) if rec else end)
                 i = end
                 continue
         i += 1
@@ -187,7 +262,7 @@ def simulate(y: np.ndarray, alarm_issue: np.ndarray, r: float, valley: np.ndarra
                 "payback_to_valley_share": to_valley / episodes if episodes else np.nan}
 
 
-def _run_policy(yfill, al, r, payback, valley, shed_len: int = SHED_LEN, rebound_len: int = REBOUND_LEN):
+def _run_policy(yfill, al, r, payback, valley, shed_len: int = SHED_LEN, rebound_len: int = REBOUND_LEN, room=None):
     if payback == "none":
         y2 = yfill.copy()
         n = len(y2)
@@ -206,6 +281,9 @@ def _run_policy(yfill, al, r, payback, valley, shed_len: int = SHED_LEN, rebound
             i += 1
         info = {"episodes": ep, "shed_intervals": shed_n, "deferred_energy": float(np.nansum(yfill - y2)),
                 "payback_to_valley_share": np.nan}
+    elif payback == "valley_capped":
+        y2, info = simulate(yfill.copy(), al, r, valley, shed_len=shed_len, rebound_len=rebound_len,
+                            room=room, unlock_after_shed=True)
     else:
         y2, info = simulate(yfill.copy(), al, r, valley if payback == "valley" else None,
                             shed_len=shed_len, rebound_len=rebound_len)
@@ -223,6 +301,7 @@ class _Ctx:
         mA = selection["A"]["chosen"]
         self.preds_h = {h: SP.honest_stream(f"A{h}", mA).reindex(self.idx) for h in range(1, 5)}
         predB = SP.honest_stream("B", selection["B"]["chosen"]).reindex(self.idx).to_numpy()
+        self.predB = predB
         self.valley = np.nan_to_num(predB, nan=np.inf) <= VALLEY_LEVEL
         self.yfill = np.where(iv["usable"].to_numpy(), iv["y"].to_numpy(), np.nan)
         self.reg_day = self.st["regime"].reindex((self.idx + pd.Timedelta(minutes=15)).normalize()).to_numpy()
@@ -254,7 +333,8 @@ def _evaluate(ctx: _Ctx, per: str, T: float, pname: str, al, r, payback, tau, sh
     idx = ctx.idx
     m = (idx >= s0) & (idx < e0)
     wd = max(ctx.workdays(m), 1)
-    y2, info = _run_policy(ctx.yfill, al & m, r, payback, ctx.valley, shed_len, rebound_len)
+    room = np.full(len(ctx.yfill), T - ROOM_MARGIN)  # 측정 기반 회복의 상한(목표 − 여유)
+    y2, info = _run_policy(ctx.yfill, al & m, r, payback, ctx.valley, shed_len, rebound_len, room=room)
     bm = pd.Series(ctx.yfill[m], index=idx[m]).groupby(idx[m].month).max()
     am = pd.Series(y2[m], index=idx[m]).groupby(idx[m].month).max()
     ob, oa = int(np.nansum(ctx.yfill[m] >= T)), int(np.nansum(y2[m] >= T))
@@ -378,12 +458,17 @@ def startup_staggering(iv: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, fl
     return dd, mon, m_fixed
 
 
-def apply_staggering(y: np.ndarray, iv: pd.DataFrame, m_fixed: float, s: float = 0.5, hold: float = 0.0) -> np.ndarray:
-    """고정 정책을 전면 가동 평일 전체에 적용한 시계열."""
+def apply_staggering(y: np.ndarray, iv: pd.DataFrame, m_fixed: float, s: float = 0.5, hold: float = 0.0,
+                     only_days=None) -> np.ndarray:
+    """고정 정책을 전면 가동 평일(only_days가 있으면 그 날짜만)에 적용한 시계열."""
     st = F.schedule_table(iv)
     Y = y.reshape(-1, 96).copy()
+    dates = pd.DatetimeIndex(st.index)
+    only = None if only_days is None else set(pd.DatetimeIndex(only_days))
     for i in range(len(Y)):
         if not (st["regime"].iloc[i] == 2 and st["daytype3"].iloc[i] == 0) or np.isfinite(Y[i]).sum() < 90:
+            continue
+        if only is not None and dates[i] not in only:
             continue
         v = Y[i]
         exc = np.clip(v[32:36] - _plateau(v), 0, None)
@@ -487,8 +572,10 @@ def grade_sequence(p: np.ndarray, hold: int = HOLD_INTERVALS) -> np.ndarray:
     return out
 
 
-def alarm_grades(iv: pd.DataFrame, selection: dict) -> tuple[pd.DataFrame, pd.DataFrame]:
-    """확률 구간별 실제 초과 빈도(보정 근거)·조치·담당·확인 항목, 가동일당 부담(히스테리시스 적용)."""
+def alarm_grades(iv: pd.DataFrame, selection: dict, T_fixed: float | None = None) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """확률 구간별 실제 초과 빈도(보정 근거)·조치·담당·확인 항목, 가동일당 부담(히스테리시스 적용).
+
+    T_fixed가 없으면 폴드별 q95(운전 상태 표시용), 있으면 요금 수준 목표(예: 시험 전 최대의 95%)로 계산한다."""
     y = iv["y"]
     idx = iv.index
     st = F.schedule_table(iv)
@@ -498,7 +585,7 @@ def alarm_grades(iv: pd.DataFrame, selection: dict) -> tuple[pd.DataFrame, pd.Da
     labels = PK.next_hour_labels(y, iv["usable"].to_numpy())
     rows, burden = [], []
     for name, s, e in CV.cv_blocks() + [("test", C.TEST_START, C.TEST_END)]:
-        T = CV.peak_threshold(iv, s)
+        T = CV.peak_threshold(iv, s) if T_fixed is None else T_fixed
         p = PK.next_hour_prob(idx, preds_h, y, T, grp).to_numpy()
         m = (idx >= s) & (idx < e) & labels["valid"].to_numpy() & np.isfinite(p)
         lab = labels["max_next"].to_numpy() >= T
@@ -541,38 +628,46 @@ def alarm_grades(iv: pd.DataFrame, selection: dict) -> tuple[pd.DataFrame, pd.Da
 # ---------------------------------------------------------------- 통합 운영 절차
 
 OPERATING_PROCEDURE = [
-    ("D-1 17:00", "익일 96구간 예측(과제 B)·일 최대 초과확률", "래칫 대상 월(7·8·9월)이고 P(일 최대 ≥ 그해 7월 이후 최대 − 5) ≥ τ(7월에서 선택, ratchet_risk_days_summary.json)이면 위험일",
+    ("D-1 17:00", "익일 96구간 예측(과제 B)·일 최대 초과확률", "래칫 대상 월(12·1·2·7·8·9월)이면 P(일 최대 ≥ 현재 요금적용전력(청구서) − 5)로 가동일 순위를 매기고 주마다 상위 1일(개입 예산)을 위험일로",
      "순차 기동 예약(07:15~07:59 분산), 더운 날(예보 최고 ≥28°C) 사전 냉방 예약", "생산관리·설비 담당", "위험일 적중률, 예측 일 최대 오차"),
     ("당일 07:00~09:00", "상시 규칙", "전면 가동 평일", "순차·선행 기동(시험 전 중앙 과도분의 50% 분산)", "현장 반장", "기동 과도분, 08시대 최대"),
-    ("당일 매 15분", "다음 1시간 최대 초과확률(과제 A·C)", "등급 주의 0.2 / 경계 0.5 / 심각 0.8, 내릴 때 30분 유지",
+    ("당일 매 15분", "다음 1시간 최대 초과확률(과제 A·C, 요금 목표 기준)", "등급 주의 0.2 / 경계 0.5 / 심각 0.8, 내릴 때 30분 유지(q95 기준 등급은 운전 상태 표시로만)",
      "등급별 조치(경보 등급표), 심각이면 제어 가능 부하 ≤30분 차단", "에너지(수요) 담당", "경보 시간/가동일, 선행시간, 목표 초과 구간"),
+    ("당일 15분 창 안", "현재 15분 창의 누적 수요(수요제어기)", "창 끝 예상 수요가 목표를 넘으면",
+     "동시 기동 인터록(설비 재기동 순서 관리)·즉시 차단 — 전날 예측이 불가능한 한 구간 스파이크 대응", "설비 담당", "스파이크 건수, 창별 최대"),
     ("월중 매일", "월 누적 최대·요금적용전력", "월 누적 최대가 요금적용전력 − 5에 근접",
      "다음 날 위험일 문턱 하향·수요제어 목표 재설정", "에너지(수요) 담당", "요금적용전력 변화"),
 ]
 
 
-def integrated_scenario(ctx: _Ctx, m_fixed: float, slope: float) -> pd.DataFrame:
-    """기동 분산(고정, s=0.5) → 사전 냉방(c=0.3, 7~9월 더운 날) → 수요제어(목표 0.95×시험 전 최대, r=10%, 저부하 회복)의
-    월 최대와 요금적용전력. 수요제어 확률은 원래 부하의 예측 흐름을 그대로 쓴다(근사)."""
+def integrated_scenario(ctx: _Ctx, m_fixed: float, slope: float, risk_days) -> pd.DataFrame:
+    """운영 절차와 같은 정책의 누적: 순차 기동(위험일만 = 주당 상위 1일; 비교로 매 가동일) → 사전 냉방(c=0.3, 7~9월 더운 날,
+    7월은 기울기 추정 구간이라 표본 내) → 수요제어(목표 0.95×시험 전 최대, r=10%, 여유 구간 회복·차단 직후 재경보).
+    수요제어 확률은 원래 부하의 예측 흐름을 그대로 쓴다(근사). 결과는 7~9월 최대(다음 12개월 기본요금 기준)의 변화 %."""
     iv = ctx.iv
     y0 = ctx.yfill.copy()
-    steps = {"기준(대책 없음)": y0}
-    y1 = apply_staggering(y0, iv, m_fixed, 0.5)
-    steps["+ 순차 기동(고정 정책)"] = y1
+    rd = pd.DatetimeIndex(risk_days)
+    steps = [("기준(대책 없음)", y0, 0)]
+    y1 = apply_staggering(y0, iv, m_fixed, 0.5, only_days=rd)
+    steps.append(("+ 순차 기동(위험일만: 주당 상위 1일)", y1, len(rd)))
+    y1b = apply_staggering(y0, iv, m_fixed, 0.5)
+    steps.append(("(비교) 순차 기동(매 가동일)", y1b, int(((ctx.st["regime"] == 2) & (ctx.st["daytype3"] == 0)
+                                                        & (ctx.st.index >= C.MEASURED_START)).sum())))
     y2 = apply_precool(y1, iv, slope, 0.3) if np.isfinite(slope) and slope > 0 else y1
-    steps["+ 사전 냉방(c=0.3)"] = y2
+    steps.append(("+ 사전 냉방(c=0.3, 7월은 표본 내)", y2, len(rd)))
     T = targets_from_pretest(iv, (0.95,))[0]
-    tau = choose_tau(ctx, T, 0.10, "valley")
-    y3, info = _run_policy(y2, ctx.prob(T) >= tau, 0.10, "valley", ctx.valley)
-    steps[f"+ 수요제어(목표 {T}, τ={tau})"] = y3
+    tau = choose_tau(ctx, T, 0.10, "valley_capped")
+    room = np.full(len(y2), T - ROOM_MARGIN)
+    y3, info = _run_policy(y2, ctx.prob(T) >= tau, 0.10, "valley_capped", ctx.valley, room=room)
+    steps.append((f"+ 수요제어(목표 {T}, τ={tau}, 여유 구간 회복)", y3, info["episodes"]))
     rows = []
     base = monthly_max(y0, ctx.idx)
-    for name, yy in steps.items():
+    for name, yy, nint in steps:
         mm = monthly_max(yy, ctx.idx)
         bill = billing_demand(mm)
-        rows.append(dict(scenario=name, **{f"month_max_{m}": mm.get(m) for m in (5, 6, 7, 8, 9)},
+        rows.append(dict(scenario=name, interventions=nint, **{f"month_max_{m}": mm.get(m) for m in (5, 6, 7, 8, 9)},
                          ratchet_max_jul_sep=ratchet_max(mm), ratchet_change=ratchet_max(mm) - ratchet_max(base),
-                         ratchet_change_pct=(ratchet_max(mm) - ratchet_max(base)) / ratchet_max(base) * 100,
+                         basic_charge_change_pct=(ratchet_max(mm) - ratchet_max(base)) / ratchet_max(base) * 100,
                          billing_demand_sep=bill.get(9)))
     return pd.DataFrame(rows)
 
@@ -613,6 +708,10 @@ def run(iv: pd.DataFrame, frames: dict, selection: dict) -> dict:
     grades, burden = alarm_grades(iv, selection)
     io.write_csv(grades, od / "alarm_grades.csv")
     io.write_csv(burden, od / "alarm_burden.csv")
+    Tb = targets_from_pretest(iv, (0.95,))[0]
+    gb, bb = alarm_grades(iv, selection, T_fixed=Tb)
+    io.write_csv(gb.assign(T=Tb), od / "alarm_grades_billing_target.csv")
+    io.write_csv(bb.assign(T=Tb), od / "alarm_burden_billing_target.csv")
     # 요금적용전력(래칫)
     y0 = np.where(iv["usable"].to_numpy(), iv["y"].to_numpy(), np.nan)
     mm = monthly_max(y0, iv.index)
@@ -621,10 +720,14 @@ def run(iv: pd.DataFrame, frames: dict, selection: dict) -> dict:
                    "m_fixed_startup_excess_pretest_median": m_fixed},
                   od / "billing_ratchet.json")
     io.write_csv(ratchet_events(iv), od / "ratchet_events.csv")
+    lad, ub = ratchet_ladder(iv)
+    io.write_csv(lad, od / "ratchet_ladder.csv")
+    io.write_csv(ub, od / "ratchet_perfect_control_bound.csv")
     rd, rres = ratchet_risk_days(iv, selection)
     io.write_csv(rd, od / "ratchet_risk_days.csv")
     io.write_json(rres, od / "ratchet_risk_days_summary.json")
-    io.write_csv(integrated_scenario(ctx, m_fixed, slope["slope"]), od / "integrated_scenario.csv")
+    risk_days = rd.loc[(rd["week_top1"] == 1), "date"] if len(rd) else []
+    io.write_csv(integrated_scenario(ctx, m_fixed, slope["slope"], risk_days), od / "integrated_scenario.csv")
     io.write_csv(pd.DataFrame(OPERATING_PROCEDURE, columns=["when", "input", "decision_rule", "action", "owner", "kpi"]),
                  od / "operating_procedure.csv")
     return {"taus": taus}

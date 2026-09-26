@@ -26,7 +26,9 @@ def _clean(o):
         return int(o)
     if isinstance(o, (np.floating, float)):
         f = float(o)
-        return None if math.isnan(f) or math.isinf(f) else round(f, 6)
+        if math.isnan(f) or math.isinf(f):
+            return None
+        return float(f"{f:.6g}") if f != 0 and abs(f) < 1e-3 else round(f, 6)  # 아주 작은 값(p값 등)은 유효숫자로
     if isinstance(o, (np.bool_,)):
         return bool(o)
     if isinstance(o, (pd.Timestamp,)):

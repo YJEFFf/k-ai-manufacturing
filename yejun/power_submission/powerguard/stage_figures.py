@@ -169,8 +169,8 @@ def fig_test_timeseries(iv: pd.DataFrame):
     pB = SM.load_predictions("test", "B")
     pA = SM.load_predictions("test", "A4")
     y = iv["y"]
-    for label, (s, e) in {"휴가주_복귀": ("2021-08-06", "2021-08-12"), "9월_가동주": ("2021-09-06", "2021-09-11"),
-                          "대체공휴일_가동": ("2021-08-13", "2021-08-19")}.items():
+    for label, (s, e) in {"vacation_return": ("2021-08-06", "2021-08-12"), "sep_workweek": ("2021-09-06", "2021-09-11"),
+                          "holiday_work": ("2021-08-13", "2021-08-19")}.items():
         m = (y.index >= s) & (y.index < e)
         fig, ax = plt.subplots(figsize=(10, 3.4))
         ax.plot(y.index[m], y[m], color=INK2, linewidth=1.2, label="실제")
@@ -178,7 +178,8 @@ def fig_test_timeseries(iv: pd.DataFrame):
         ax.plot(pA.index, pA[sel["A"]["chosen"]], color=SERIES[1], linewidth=1.2, label=f"60분 뒤 예측({sel['A']['chosen']})")
         ax.set_xlim(pd.Timestamp(s), pd.Timestamp(e))
         ax.set_ylabel("15분 전력")
-        ax.set_title(f"시험 구간 예측 예시: {label.replace('_', ' ')}")
+        ko = {"vacation_return": "하계휴가 뒤 복귀", "sep_workweek": "9월 가동 주", "holiday_work": "대체공휴일 가동 주"}[label]
+        ax.set_title(f"시험 구간 예측 예시: {ko}")
         ax.legend(ncol=3, loc="upper left", fontsize=8)
         _save(fig, f"04_test_timeseries_{label}.png")
 
@@ -235,9 +236,10 @@ def fig_demand_controller():
     pols = ["model_prob", "reactive_now>=T-5", "clock_0800_fullday", "oracle_perfect"]
     names = {"model_prob": "모델 확률 경보", "reactive_now>=T-5": "현재값 반응(T−5)", "clock_0800_fullday": "08시 고정 차단",
              "oracle_perfect": "완전 예지(상한)"}
-    modes = {"none": "되돌림 없음(상한 가정)", "valley": "저부하 시간에 만회", "immediate": "직후 1시간에 만회"}
+    modes = {"none": "되돌림 없음(상한 가정)", "valley": "저부하 시간에 만회", "valley_capped": "여유 구간 만회·차단 직후 재경보",
+             "immediate": "직후 1시간에 만회"}
     targets = sorted(d.target.unique())
-    fig, axes = plt.subplots(1, 3, figsize=(12, 3.4), sharey=True)
+    fig, axes = plt.subplots(1, 4, figsize=(15, 3.4), sharey=True)
     w = 0.2
     for ax, (mode, title) in zip(axes, modes.items()):
         sub_m = d[d.payback == mode]
@@ -386,27 +388,65 @@ def fig_waterfall():
 
 
 def fig_integrated():
+    """래칫 사다리(상위 사건을 하나씩 막을 때)와 완전 제어 상한, 운영 절차 정책의 통합 시나리오."""
+    lad = _read("field/ratchet_ladder.csv")
+    ub = _read("field/ratchet_perfect_control_bound.csv")
     d = _read("field/integrated_scenario.csv")
-    fig, ax = plt.subplots(figsize=(7.2, 2.8))
+    fig, axes = plt.subplots(1, 3, figsize=(15, 3.4))
+    ax = axes[0]
+    ax.plot(lad["step"], lad["ratchet"], marker="o", markersize=5, color=SERIES[0])
+    for _, r in lad.iterrows():
+        ax.annotate(f"{r['ratchet']:.0f} ({r['change_pct']:+.1f}%)", (r["step"], r["ratchet"]), textcoords="offset points",
+                    xytext=(4, 4), fontsize=7, color=INK2)
+    ax.set_xlabel("막은 상위 사건 수(7~9월 날짜별 최대 순)")
+    ax.set_ylabel("요금적용전력(7~9월 최대)")
+    ax.set_title("래칫 사다리: 몇 개의 15분이 1년 기본요금을 정한다", fontsize=10)
+    ax = axes[1]
+    ax.bar([f"{t:g}" for t in ub["target"]], -ub["change_pct"], color=SERIES[0], edgecolor=SURFACE, linewidth=2)
+    for i, r in ub.reset_index(drop=True).iterrows():
+        ax.text(i, -r["change_pct"] + 0.2, f"{int(r['intervals_over'])}구간·{int(r['days_over'])}일", ha="center", fontsize=7, color=INK2)
+    ax.set_xlabel("목표 T(시험 전 최대의 90~98%)")
+    ax.set_ylabel("기본요금 감소 상한(%)")
+    ax.set_title("완전 제어 상한: 넘은 구간만 T로 묶을 때", fontsize=10)
+    ax = axes[2]
     yy = np.arange(len(d))
     ax.barh(yy, d["ratchet_max_jul_sep"], color=SERIES[0], height=0.55)
     for i, r in d.iterrows():
-        ax.text(r["ratchet_max_jul_sep"] + 0.5, i, f"{r['ratchet_max_jul_sep']:.1f} ({r['ratchet_change_pct']:+.1f}%)",
-                va="center", fontsize=7.5, color=INK2)
-    ax.set_yticks(yy, d["scenario"])
+        ax.text(r["ratchet_max_jul_sep"] + 0.3, i, f"{r['ratchet_max_jul_sep']:.1f} ({r['basic_charge_change_pct']:+.1f}%)",
+                va="center", fontsize=7, color=INK2)
+    ax.set_yticks(yy, d["scenario"], fontsize=7)
     ax.invert_yaxis()
-    lo = float(d["ratchet_max_jul_sep"].min()) - 15
-    ax.set_xlim(lo, float(d["ratchet_max_jul_sep"].max()) + 8)
-    ax.set_xlabel("7~9월 최대수요(다음 12개월 기본요금 기준)")
-    ax.set_title("대책 누적 시 요금적용전력(래칫) 변화 — 가정 기반 시뮬레이션")
+    ax.set_xlim(float(d["ratchet_max_jul_sep"].min()) - 12, float(d["ratchet_max_jul_sep"].max()) + 8)
+    ax.set_xlabel("요금적용전력(7~9월 최대)")
+    ax.set_title("운영 절차 정책의 누적(가정 기반)", fontsize=10)
     _save(fig, "15_integrated_ratchet.png")
+
+
+def fig_copy_direction_checks():
+    """생산 기록을 쓰지 않는 복제 방향 증거(전력·달력만)."""
+    t = _read("diagnostics/copy_direction_checks.csv")
+    t = t[t["rate"].notna() & ~t["check"].str.contains("고원")]
+    fig, ax = plt.subplots(figsize=(7.5, 3.0))
+    labels = [f"{c.split('(')[0]} | {s}" for c, s in zip(t["check"], t["subset"])]
+    yy = np.arange(len(t))
+    cols = [SERIES[0] if ("5~9월" in s or "늦은" in s) else SERIES[1] for s in t["subset"]]
+    ax.barh(yy, t["rate"] * 100, color=cols, height=0.55)
+    for i, (r, k, n) in enumerate(zip(t["rate"], t["k"], t["n"])):
+        ax.text(r * 100 + 1, i, f"{r * 100:.0f}% ({int(k)}/{int(n)})", va="center", fontsize=7.5, color=INK2)
+    ax.set_yticks(yy, labels, fontsize=7.5)
+    ax.invert_yaxis()
+    ax.set_xlim(0, 115)
+    ax.set_xlabel("비율(%)")
+    ax.set_title("복제 방향의 생산 무관 증거: 5~9월·가장 늦은 구성원만 실측처럼 이어진다", fontsize=10)
+    _save(fig, "01c_copy_direction_power_only.png")
 
 
 def run(iv: pd.DataFrame) -> None:
     _style()
     for fn in (fig_copy_forensics, fig_profiles, fig_test_timeseries):
         fn(iv)
-    for fn in (fig_copy_direction, fig_model_comparison, fig_peak_conditions, fig_alarm_calibration, fig_demand_controller,
+    for fn in (fig_copy_direction, fig_copy_direction_checks, fig_model_comparison, fig_peak_conditions, fig_alarm_calibration,
+               fig_demand_controller,
                fig_info_value, fig_interval_coverage, fig_learning_curve, fig_condition_skill, fig_reliability,
                fig_waterfall, fig_integrated):
         try:

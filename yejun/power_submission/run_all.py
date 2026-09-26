@@ -39,6 +39,16 @@ def versions() -> dict:
     return out
 
 
+def code_sha256() -> str:
+    """powerguard/*.py와 run_all.py의 지문(실행 중 코드가 바뀌면 산출물 출처가 섞이므로 확인한다)."""
+    import hashlib
+    h = hashlib.sha256()
+    for p in sorted(list((C.PKG_ROOT / "powerguard").glob("*.py")) + [C.PKG_ROOT / "run_all.py"]):
+        h.update(p.name.encode())
+        h.update(p.read_bytes())
+    return h.hexdigest()
+
+
 def _git_commit() -> str | None:
     try:
         r = subprocess.run(["git", "rev-parse", "HEAD"], cwd=C.PKG_ROOT, capture_output=True, text=True, timeout=10)
@@ -64,6 +74,7 @@ def main(argv=None) -> int:
         return 2
     t_all = time.time()
     started_at = time.strftime("%Y-%m-%dT%H:%M:%S")
+    code_start = code_sha256()
     timings, stage_times = {}, {}
     df, meta = D.load_raw(args.data)
     diag = D.diagnose(df)
@@ -135,6 +146,9 @@ def main(argv=None) -> int:
         stage_digest.run()
 
     stage("digest", s_digest)
+    if code_sha256() != code_start:
+        print("오류: 실행 도중 코드(powerguard/*.py, run_all.py)가 바뀌었다. 산출물 출처가 섞였으니 다시 실행한다.", file=sys.stderr)
+        return 3
     # 실행 기록: 일부 단계만 실행해도 이전 단계 기록을 지우지 않고 단계별로 갱신한다
     mpath = C.OUTPUT_DIR / "run_manifest.json"
     prev = json.loads(mpath.read_text(encoding="utf-8")) if mpath.exists() else {}
@@ -145,7 +159,7 @@ def main(argv=None) -> int:
         per_stage[s] = {"started_epoch": a, "finished_epoch": b, "finished_at": now, "seconds": timings.get(s)}
     inv = {"stages": stages, "argv": list(argv) if argv is not None else sys.argv[1:], "timings_s": timings,
            "total_s": round(time.time() - t_all, 1), "started_at": started_at, "finished_at": now,
-           "started_epoch": t_all, "finished_epoch": time.time(), "full_run": stages == STAGES}
+           "started_epoch": t_all, "finished_epoch": time.time(), "full_run": stages == STAGES, "code_sha256": code_start}
     manifest = {"data": meta, "seed": C.SEED, "stages_last_run": per_stage, "last_invocation": inv,
                 "last_full_run": inv if stages == STAGES else prev.get("last_full_run"),
                 "environment": {"cpu_count": os.cpu_count(), "git_commit": _git_commit()}, "versions": versions()}

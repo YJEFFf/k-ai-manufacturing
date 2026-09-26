@@ -105,7 +105,15 @@ def freshness(rels: list[Path]) -> tuple[bool, str]:
     m = json.loads(mp.read_text(encoding="utf-8"))
     full = m.get("last_full_run")
     if not full:
-        return False, "전체 실행 기록 없음 — run_all.py(모든 단계)를 실행한다"
+        return False, "전체 실행 기록 없음 — run_all.py(모든 단계)를 실행한다(일부 단계만 실행하면 신선도 확인은 실패한다)"
+    pk = m.get("packaged_epoch")
+    if pk is not None and (full.get("started_epoch") or 0) <= pk:
+        return False, "제출 묶음을 만든 뒤의 전체 실행 기록이 없다 — 받은 사본에서 run_all.py를 실행한다"
+    cs = full.get("code_sha256")
+    if cs is not None:
+        import run_all
+        if run_all.code_sha256() != cs:
+            return False, "마지막 전체 실행 뒤 코드가 바뀌었다 — run_all.py를 다시 실행한다"
     a = full.get("started_epoch")
     b = full.get("finished_epoch")
     if a is None or b is None:  # 이전 형식: 사람이 읽는 시각과 총 시간으로 계산

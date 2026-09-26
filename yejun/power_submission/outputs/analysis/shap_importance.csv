@@ -1,189 +1,189 @@
 task,model,feature,feature_ko,group,availability,mean_abs_shap
-B,M1_lgbm,analog_regime,체제별 유사일 같은 슬롯,유사일(사례기반),발행 시점,30.908
-B,M1_lgbm,lag_d2,2일 전 같은 슬롯,최근 전력(지연값),발행 시점,9.41413
-B,M1_lgbm,analog_regime_k1,가장 최근 유사일 같은 슬롯,유사일(사례기반),발행 시점,7.15025
-B,M1_lgbm,same_dt_last,같은 요일유형 최근일 같은 슬롯,유사일(사례기반),발행 시점,4.55594
-B,M1_lgbm,dayshift_full,전면 가동일 주간 표시,운영일정(체제),전날 확정 가정,3.6232
-B,M1_lgbm,lag_d7,7일 전 같은 슬롯,최근 전력(지연값),발행 시점,3.52543
-B,M1_lgbm,lag_d1,전날 같은 슬롯(17시 전만),최근 전력(지연값),발행 시점,1.53487
-B,M1_lgbm,d2_mean,2일 전 평균,최근 전력(지연값),발행 시점,1.16351
-B,M1_lgbm,slot,15분 슬롯 번호(0~95),달력·시각,사전,0.872479
-B,M1_lgbm,analog_tmax,유사일 최고기온 평균,유사일(사례기반),발행 시점,0.597251
-B,M1_lgbm,temp,기온,기상(실측을 예보 대리),예보 대리,0.568719
-B,M1_lgbm,dow,요일,달력·시각,사전,0.564387
-B,M1_lgbm,daytype3,요일유형3(평일/토/일·공휴일),달력·시각,사전,0.510749
-B,M1_lgbm,d2_max,2일 전 최대,최근 전력(지연값),발행 시점,0.453112
-B,M1_lgbm,dtmax_vs_analog,최고기온 − 유사일 최고기온,기상(실측을 예보 대리),예보 대리,0.355119
-B,M1_lgbm,d1_level_vs_analog,전날 주간 수준 − 전날 유사일 수준,유사일(사례기반),발행 시점,0.322815
-B,M1_lgbm,d1_dayshift_mean,전날 주간 평균(16:45까지),최근 전력(지연값),발행 시점,0.317839
-B,M1_lgbm,tmax_day,일 최고기온,기상(실측을 예보 대리),예보 대리,0.292125
-B,M1_lgbm,tmean_day,일 평균기온,기상(실측을 예보 대리),예보 대리,0.269981
-B,M1_lgbm,d1_max_sofar,전날 최대(발행 시각까지),최근 전력(지연값),발행 시점,0.234549
-B,M1_lgbm,hum,습도,기상(실측을 예보 대리),예보 대리,0.22177
-B,M1_lgbm,q_in_hour,시간 안 15분 순번,달력·시각,사전,0.200596
-B,M1_lgbm,hour,시,달력·시각,사전,0.166587
-B,M1_lgbm,cdd24,"냉방도(기온−24, ≥0)",기상(실측을 예보 대리),예보 대리,0.157505
-B,M1_lgbm,tariff_season,요금 계절 구분(월 상수),달력·시각,사전,0.149476
-B,M1_lgbm,daytype4,요일유형4(휴무 다음 평일/연속 평일/토/일·공휴일),달력·시각,사전,0.0887066
-B,M1_lgbm,regime,당일 가동 체제(정지/부분/전면),운영일정(체제),전날 확정 가정,0.0841756
-B,M1_lgbm,cdd_day,"일 냉방도(최고−26, ≥0)",기상(실측을 예보 대리),예보 대리,0.0726147
-B,M1_lgbm,regime_prev,전날 가동 체제(야간조 이월),운영일정(체제),전날 확정 가정,0.052316
-B,M1_lgbm,holiday,공휴일,달력·시각,사전,0
-B,M7c_hybrid_residual,analog_regime,체제별 유사일 같은 슬롯,유사일(사례기반),발행 시점,1.44206
-B,M7c_hybrid_residual,lag_d7,7일 전 같은 슬롯,최근 전력(지연값),발행 시점,1.14598
-B,M7c_hybrid_residual,same_dt_last,같은 요일유형 최근일 같은 슬롯,유사일(사례기반),발행 시점,0.813033
-B,M7c_hybrid_residual,d2_mean,2일 전 평균,최근 전력(지연값),발행 시점,0.683599
-B,M7c_hybrid_residual,d2_max,2일 전 최대,최근 전력(지연값),발행 시점,0.649764
-B,M7c_hybrid_residual,dow,요일,달력·시각,사전,0.528233
-B,M7c_hybrid_residual,analog_tmax,유사일 최고기온 평균,유사일(사례기반),발행 시점,0.421635
-B,M7c_hybrid_residual,cdd24,"냉방도(기온−24, ≥0)",기상(실측을 예보 대리),예보 대리,0.364223
-B,M7c_hybrid_residual,d1_level_vs_analog,전날 주간 수준 − 전날 유사일 수준,유사일(사례기반),발행 시점,0.346489
-B,M7c_hybrid_residual,d1_max_sofar,전날 최대(발행 시각까지),최근 전력(지연값),발행 시점,0.279113
-B,M7c_hybrid_residual,base_pred,구조 모델 예측(하이브리드 기준값),유사일(사례기반),발행 시점,0.266511
-B,M7c_hybrid_residual,lag_d1,전날 같은 슬롯(17시 전만),최근 전력(지연값),발행 시점,0.218852
-B,M7c_hybrid_residual,dayshift_full,전면 가동일 주간 표시,운영일정(체제),전날 확정 가정,0.183083
-B,M7c_hybrid_residual,cdd_day,"일 냉방도(최고−26, ≥0)",기상(실측을 예보 대리),예보 대리,0.15224
-B,M7c_hybrid_residual,slot,15분 슬롯 번호(0~95),달력·시각,사전,0.151818
-B,M7c_hybrid_residual,analog_regime_k1,가장 최근 유사일 같은 슬롯,유사일(사례기반),발행 시점,0.10426
-B,M7c_hybrid_residual,tmean_day,일 평균기온,기상(실측을 예보 대리),예보 대리,0.0990947
-B,M7c_hybrid_residual,lag_d2,2일 전 같은 슬롯,최근 전력(지연값),발행 시점,0.0922487
-B,M7c_hybrid_residual,tmax_day,일 최고기온,기상(실측을 예보 대리),예보 대리,0.0848684
-B,M7c_hybrid_residual,daytype3,요일유형3(평일/토/일·공휴일),달력·시각,사전,0.0848036
-B,M7c_hybrid_residual,tariff_season,요금 계절 구분(월 상수),달력·시각,사전,0.0702095
-B,M7c_hybrid_residual,hour,시,달력·시각,사전,0.0477424
-B,M7c_hybrid_residual,d1_dayshift_mean,전날 주간 평균(16:45까지),최근 전력(지연값),발행 시점,0.0466722
-B,M7c_hybrid_residual,dtmax_vs_analog,최고기온 − 유사일 최고기온,기상(실측을 예보 대리),예보 대리,0.0411272
-B,M7c_hybrid_residual,hum,습도,기상(실측을 예보 대리),예보 대리,0.0393989
-B,M7c_hybrid_residual,temp,기온,기상(실측을 예보 대리),예보 대리,0.0359982
-B,M7c_hybrid_residual,daytype4,요일유형4(휴무 다음 평일/연속 평일/토/일·공휴일),달력·시각,사전,0.0125617
-B,M7c_hybrid_residual,regime,당일 가동 체제(정지/부분/전면),운영일정(체제),전날 확정 가정,0.0108999
-B,M7c_hybrid_residual,regime_prev,전날 가동 체제(야간조 이월),운영일정(체제),전날 확정 가정,0.00277177
-B,M7c_hybrid_residual,holiday,공휴일,달력·시각,사전,0.00256071
+B,M1_lgbm,analog_regime,체제별 유사일 같은 슬롯,유사일(사례기반),발행 시점,30.6507
+B,M1_lgbm,lag_d2,2일 전 같은 슬롯,최근 전력(지연값),발행 시점,10.0253
+B,M1_lgbm,analog_regime_k1,가장 최근 유사일 같은 슬롯,유사일(사례기반),발행 시점,7.32646
+B,M1_lgbm,same_dt_last,같은 요일유형 최근일 같은 슬롯,유사일(사례기반),발행 시점,4.74957
+B,M1_lgbm,lag_d7,7일 전 같은 슬롯,최근 전력(지연값),발행 시점,3.48544
+B,M1_lgbm,dayshift_full,전면 가동일 주간 표시,운영일정(체제),전날 확정 가정,3.30936
+B,M1_lgbm,lag_d1,전날 같은 슬롯(17시 전만),최근 전력(지연값),발행 시점,1.55529
+B,M1_lgbm,d2_mean,2일 전 평균,최근 전력(지연값),발행 시점,0.974636
+B,M1_lgbm,slot,15분 슬롯 번호(0~95),달력·시각,사전,0.827877
+B,M1_lgbm,temp,기온,기상(실측을 예보 대리),예보 대리,0.630005
+B,M1_lgbm,analog_tmax,유사일 최고기온 평균,유사일(사례기반),발행 시점,0.581798
+B,M1_lgbm,dow,요일,달력·시각,사전,0.562113
+B,M1_lgbm,daytype3,요일유형3(평일/토/일·공휴일),달력·시각,사전,0.448041
+B,M1_lgbm,dtmax_vs_analog,최고기온 − 유사일 최고기온,기상(실측을 예보 대리),예보 대리,0.398096
+B,M1_lgbm,d1_dayshift_mean,전날 주간 평균(16:45까지),최근 전력(지연값),발행 시점,0.385553
+B,M1_lgbm,d2_max,2일 전 최대,최근 전력(지연값),발행 시점,0.377543
+B,M1_lgbm,d1_level_vs_analog,전날 주간 수준 − 전날 유사일 수준,유사일(사례기반),발행 시점,0.367081
+B,M1_lgbm,tmax_day,일 최고기온,기상(실측을 예보 대리),예보 대리,0.282272
+B,M1_lgbm,tmean_day,일 평균기온,기상(실측을 예보 대리),예보 대리,0.281339
+B,M1_lgbm,d1_max_sofar,전날 최대(발행 시각까지),최근 전력(지연값),발행 시점,0.264783
+B,M1_lgbm,hum,습도,기상(실측을 예보 대리),예보 대리,0.230272
+B,M1_lgbm,q_in_hour,시간 안 15분 순번,달력·시각,사전,0.198204
+B,M1_lgbm,hour,시,달력·시각,사전,0.15588
+B,M1_lgbm,cdd24,"냉방도(기온−24, ≥0)",기상(실측을 예보 대리),예보 대리,0.151773
+B,M1_lgbm,tariff_season,요금 계절 구분(월 상수),달력·시각,사전,0.130255
+B,M1_lgbm,daytype4,요일유형4(휴무 다음 평일/연속 평일/토/일·공휴일),달력·시각,사전,0.0944858
+B,M1_lgbm,regime,당일 가동 체제(정지/부분/전면),운영일정(체제),전날 확정 가정,0.0648056
+B,M1_lgbm,cdd_day,"일 냉방도(최고−26, ≥0)",기상(실측을 예보 대리),예보 대리,0.0542068
+B,M1_lgbm,regime_prev,전날 가동 체제(야간조 이월),운영일정(체제),전날 확정 가정,0.0230961
+B,M1_lgbm,holiday,공휴일,달력·시각,사전,0.00090725
+B,M7c_hybrid_residual,analog_regime,체제별 유사일 같은 슬롯,유사일(사례기반),발행 시점,1.36903
+B,M7c_hybrid_residual,lag_d7,7일 전 같은 슬롯,최근 전력(지연값),발행 시점,0.952002
+B,M7c_hybrid_residual,same_dt_last,같은 요일유형 최근일 같은 슬롯,유사일(사례기반),발행 시점,0.813973
+B,M7c_hybrid_residual,dow,요일,달력·시각,사전,0.694487
+B,M7c_hybrid_residual,d2_mean,2일 전 평균,최근 전력(지연값),발행 시점,0.63592
+B,M7c_hybrid_residual,d2_max,2일 전 최대,최근 전력(지연값),발행 시점,0.431212
+B,M7c_hybrid_residual,d1_level_vs_analog,전날 주간 수준 − 전날 유사일 수준,유사일(사례기반),발행 시점,0.378671
+B,M7c_hybrid_residual,cdd24,"냉방도(기온−24, ≥0)",기상(실측을 예보 대리),예보 대리,0.36248
+B,M7c_hybrid_residual,analog_tmax,유사일 최고기온 평균,유사일(사례기반),발행 시점,0.32159
+B,M7c_hybrid_residual,lag_d1,전날 같은 슬롯(17시 전만),최근 전력(지연값),발행 시점,0.290333
+B,M7c_hybrid_residual,base_pred,구조 모델 예측(하이브리드 기준값),유사일(사례기반),발행 시점,0.287766
+B,M7c_hybrid_residual,dayshift_full,전면 가동일 주간 표시,운영일정(체제),전날 확정 가정,0.253346
+B,M7c_hybrid_residual,d1_max_sofar,전날 최대(발행 시각까지),최근 전력(지연값),발행 시점,0.248745
+B,M7c_hybrid_residual,cdd_day,"일 냉방도(최고−26, ≥0)",기상(실측을 예보 대리),예보 대리,0.134563
+B,M7c_hybrid_residual,slot,15분 슬롯 번호(0~95),달력·시각,사전,0.131846
+B,M7c_hybrid_residual,tmean_day,일 평균기온,기상(실측을 예보 대리),예보 대리,0.130192
+B,M7c_hybrid_residual,d1_dayshift_mean,전날 주간 평균(16:45까지),최근 전력(지연값),발행 시점,0.120901
+B,M7c_hybrid_residual,analog_regime_k1,가장 최근 유사일 같은 슬롯,유사일(사례기반),발행 시점,0.116189
+B,M7c_hybrid_residual,tariff_season,요금 계절 구분(월 상수),달력·시각,사전,0.0703164
+B,M7c_hybrid_residual,lag_d2,2일 전 같은 슬롯,최근 전력(지연값),발행 시점,0.0692632
+B,M7c_hybrid_residual,tmax_day,일 최고기온,기상(실측을 예보 대리),예보 대리,0.0611259
+B,M7c_hybrid_residual,dtmax_vs_analog,최고기온 − 유사일 최고기온,기상(실측을 예보 대리),예보 대리,0.0491113
+B,M7c_hybrid_residual,hum,습도,기상(실측을 예보 대리),예보 대리,0.0470539
+B,M7c_hybrid_residual,temp,기온,기상(실측을 예보 대리),예보 대리,0.0428419
+B,M7c_hybrid_residual,daytype3,요일유형3(평일/토/일·공휴일),달력·시각,사전,0.0224789
+B,M7c_hybrid_residual,hour,시,달력·시각,사전,0.0219895
+B,M7c_hybrid_residual,daytype4,요일유형4(휴무 다음 평일/연속 평일/토/일·공휴일),달력·시각,사전,0.00232541
 B,M7c_hybrid_residual,q_in_hour,시간 안 15분 순번,달력·시각,사전,0
-B,structure_only_lgbm,daytype3,요일유형3(평일/토/일·공휴일),달력·시각,사전,31.2451
-B,structure_only_lgbm,slot,15분 슬롯 번호(0~95),달력·시각,사전,17.4974
-B,structure_only_lgbm,daytype4,요일유형4(휴무 다음 평일/연속 평일/토/일·공휴일),달력·시각,사전,8.34105
-B,structure_only_lgbm,regime,당일 가동 체제(정지/부분/전면),운영일정(체제),전날 확정 가정,3.54462
-B,structure_only_lgbm,hour,시,달력·시각,사전,3.26801
-B,structure_only_lgbm,tariff_season,요금 계절 구분(월 상수),달력·시각,사전,1.92712
-B,structure_only_lgbm,regime_prev,전날 가동 체제(야간조 이월),운영일정(체제),전날 확정 가정,1.56886
-B,structure_only_lgbm,temp,기온,기상(실측을 예보 대리),예보 대리,1.56021
-B,structure_only_lgbm,dow,요일,달력·시각,사전,1.37068
-B,structure_only_lgbm,q_in_hour,시간 안 15분 순번,달력·시각,사전,1.06252
-B,structure_only_lgbm,tmax_day,일 최고기온,기상(실측을 예보 대리),예보 대리,1.03701
-B,structure_only_lgbm,tmean_day,일 평균기온,기상(실측을 예보 대리),예보 대리,0.846491
-B,structure_only_lgbm,hum,습도,기상(실측을 예보 대리),예보 대리,0.563805
-B,structure_only_lgbm,cdd24,"냉방도(기온−24, ≥0)",기상(실측을 예보 대리),예보 대리,0.225288
-B,structure_only_lgbm,cdd_day,"일 냉방도(최고−26, ≥0)",기상(실측을 예보 대리),예보 대리,0.0978291
-B,structure_only_lgbm,holiday,공휴일,달력·시각,사전,0.00612186
-A4,M1_lgbm,analog_regime,체제별 유사일 같은 슬롯,유사일(사례기반),발행 시점,24.6428
-A4,M1_lgbm,lag_0,0분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,15.1642
-A4,M1_lgbm,analog_regime_k1,가장 최근 유사일 같은 슬롯,유사일(사례기반),발행 시점,6.28513
-A4,M1_lgbm,same_dt_last,같은 요일유형 최근일 같은 슬롯,유사일(사례기반),발행 시점,5.93022
-A4,M1_lgbm,lag_d2,2일 전 같은 슬롯,최근 전력(지연값),발행 시점,3.20934
-A4,M1_lgbm,lag_d7,7일 전 같은 슬롯,최근 전력(지연값),발행 시점,3.05672
-A4,M1_lgbm,slot,15분 슬롯 번호(0~95),달력·시각,사전,1.14606
-A4,M1_lgbm,roll8_max,최근 2시간 최대,최근 전력(지연값),발행 시점,0.820759
-A4,M1_lgbm,lag_d1,전날 같은 슬롯(17시 전만),최근 전력(지연값),발행 시점,0.756477
-A4,M1_lgbm,dev_analog_now,현재값 − 유사일(수준 편차),유사일(사례기반),발행 시점,0.674197
-A4,M1_lgbm,lag_1,15분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.652241
-A4,M1_lgbm,dev_analog_roll4,최근 1시간 유사일 편차 평균,유사일(사례기반),발행 시점,0.612101
-A4,M1_lgbm,analog_step,유사일 목표 − 유사일 현재(예정 변화),유사일(사례기반),발행 시점,0.452982
-A4,M1_lgbm,temp,기온,기상(실측을 예보 대리),예보 대리,0.44556
-A4,M1_lgbm,dayshift_full,전면 가동일 주간 표시,운영일정(체제),전날 확정 가정,0.424782
-A4,M1_lgbm,lag_5,75분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.400488
-A4,M1_lgbm,analog_tmax,유사일 최고기온 평균,유사일(사례기반),발행 시점,0.36051
-A4,M1_lgbm,dow,요일,달력·시각,사전,0.355926
-A4,M1_lgbm,d1_level_vs_analog,전날 주간 수준 − 전날 유사일 수준,유사일(사례기반),발행 시점,0.311356
-A4,M1_lgbm,daytype3,요일유형3(평일/토/일·공휴일),달력·시각,사전,0.300812
-A4,M1_lgbm,diff_04,최근 1시간 변화,최근 전력(지연값),발행 시점,0.293393
-A4,M1_lgbm,roll4_mean,최근 1시간 평균,최근 전력(지연값),발행 시점,0.270186
-A4,M1_lgbm,d2_mean,2일 전 평균,최근 전력(지연값),발행 시점,0.26962
-A4,M1_lgbm,tariff_season,요금 계절 구분(월 상수),달력·시각,사전,0.262978
-A4,M1_lgbm,lag_d1_target,전날 같은 슬롯,최근 전력(지연값),발행 시점,0.224515
-A4,M1_lgbm,lag_7,105분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.219528
-A4,M1_lgbm,analog_now,발행 시각 유사일 값,유사일(사례기반),발행 시점,0.205365
-A4,M1_lgbm,d2_max,2일 전 최대,최근 전력(지연값),발행 시점,0.191015
-A4,M1_lgbm,lag_2,30분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.185541
-A4,M1_lgbm,lag_3,45분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.181154
-A4,M1_lgbm,lag_4,60분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.178281
-A4,M1_lgbm,tmean_day,일 평균기온,기상(실측을 예보 대리),예보 대리,0.167521
-A4,M1_lgbm,dtmax_vs_analog,최고기온 − 유사일 최고기온,기상(실측을 예보 대리),예보 대리,0.154182
-A4,M1_lgbm,regime,당일 가동 체제(정지/부분/전면),운영일정(체제),전날 확정 가정,0.145093
-A4,M1_lgbm,hour,시,달력·시각,사전,0.144591
-A4,M1_lgbm,q_in_hour,시간 안 15분 순번,달력·시각,사전,0.138184
-A4,M1_lgbm,d1_dayshift_mean,전날 주간 평균(16:45까지),최근 전력(지연값),발행 시점,0.137282
-A4,M1_lgbm,hum,습도,기상(실측을 예보 대리),예보 대리,0.129098
-A4,M1_lgbm,d1_max_sofar,전날 최대(발행 시각까지),최근 전력(지연값),발행 시점,0.124584
-A4,M1_lgbm,tmax_day,일 최고기온,기상(실측을 예보 대리),예보 대리,0.121622
-A4,M1_lgbm,cdd24,"냉방도(기온−24, ≥0)",기상(실측을 예보 대리),예보 대리,0.116414
-A4,M1_lgbm,lag_6,90분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.114946
-A4,M1_lgbm,diff_01,최근 15분 변화,최근 전력(지연값),발행 시점,0.107086
-A4,M1_lgbm,daytype4,요일유형4(휴무 다음 평일/연속 평일/토/일·공휴일),달력·시각,사전,0.08423
-A4,M1_lgbm,cdd_day,"일 냉방도(최고−26, ≥0)",기상(실측을 예보 대리),예보 대리,0.0239701
-A4,M1_lgbm,regime_prev,전날 가동 체제(야간조 이월),운영일정(체제),전날 확정 가정,0.0129792
-A4,M1_lgbm,holiday,공휴일,달력·시각,사전,0.000632555
-A4,M7c_hybrid_residual,dev_analog_now,현재값 − 유사일(수준 편차),유사일(사례기반),발행 시점,1.84389
-A4,M7c_hybrid_residual,base_pred,구조 모델 예측(하이브리드 기준값),유사일(사례기반),발행 시점,1.37544
-A4,M7c_hybrid_residual,analog_step,유사일 목표 − 유사일 현재(예정 변화),유사일(사례기반),발행 시점,1.29891
-A4,M7c_hybrid_residual,lag_d7,7일 전 같은 슬롯,최근 전력(지연값),발행 시점,1.13187
-A4,M7c_hybrid_residual,same_dt_last,같은 요일유형 최근일 같은 슬롯,유사일(사례기반),발행 시점,0.729506
-A4,M7c_hybrid_residual,dev_analog_roll4,최근 1시간 유사일 편차 평균,유사일(사례기반),발행 시점,0.727094
-A4,M7c_hybrid_residual,analog_regime,체제별 유사일 같은 슬롯,유사일(사례기반),발행 시점,0.458315
-A4,M7c_hybrid_residual,diff_04,최근 1시간 변화,최근 전력(지연값),발행 시점,0.415801
-A4,M7c_hybrid_residual,analog_regime_k1,가장 최근 유사일 같은 슬롯,유사일(사례기반),발행 시점,0.332557
-A4,M7c_hybrid_residual,slot,15분 슬롯 번호(0~95),달력·시각,사전,0.306801
-A4,M7c_hybrid_residual,d1_level_vs_analog,전날 주간 수준 − 전날 유사일 수준,유사일(사례기반),발행 시점,0.277177
-A4,M7c_hybrid_residual,d2_max,2일 전 최대,최근 전력(지연값),발행 시점,0.259709
-A4,M7c_hybrid_residual,cdd24,"냉방도(기온−24, ≥0)",기상(실측을 예보 대리),예보 대리,0.239488
-A4,M7c_hybrid_residual,d2_mean,2일 전 평균,최근 전력(지연값),발행 시점,0.174376
-A4,M7c_hybrid_residual,roll8_max,최근 2시간 최대,최근 전력(지연값),발행 시점,0.166138
-A4,M7c_hybrid_residual,analog_tmax,유사일 최고기온 평균,유사일(사례기반),발행 시점,0.162858
-A4,M7c_hybrid_residual,dow,요일,달력·시각,사전,0.129127
-A4,M7c_hybrid_residual,lag_0,0분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.121164
-A4,M7c_hybrid_residual,lag_5,75분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.111389
-A4,M7c_hybrid_residual,lag_4,60분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.104825
-A4,M7c_hybrid_residual,cdd_day,"일 냉방도(최고−26, ≥0)",기상(실측을 예보 대리),예보 대리,0.104813
-A4,M7c_hybrid_residual,temp,기온,기상(실측을 예보 대리),예보 대리,0.102955
-A4,M7c_hybrid_residual,diff_01,최근 15분 변화,최근 전력(지연값),발행 시점,0.0955936
-A4,M7c_hybrid_residual,roll4_mean,최근 1시간 평균,최근 전력(지연값),발행 시점,0.0902139
-A4,M7c_hybrid_residual,d1_max_sofar,전날 최대(발행 시각까지),최근 전력(지연값),발행 시점,0.0850036
-A4,M7c_hybrid_residual,lag_7,105분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.0797646
-A4,M7c_hybrid_residual,tariff_season,요금 계절 구분(월 상수),달력·시각,사전,0.0759839
-A4,M7c_hybrid_residual,hour,시,달력·시각,사전,0.0701581
-A4,M7c_hybrid_residual,dtmax_vs_analog,최고기온 − 유사일 최고기온,기상(실측을 예보 대리),예보 대리,0.0652349
-A4,M7c_hybrid_residual,tmean_day,일 평균기온,기상(실측을 예보 대리),예보 대리,0.0644479
-A4,M7c_hybrid_residual,lag_3,45분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.0627055
-A4,M7c_hybrid_residual,lag_d1,전날 같은 슬롯(17시 전만),최근 전력(지연값),발행 시점,0.0521641
-A4,M7c_hybrid_residual,hum,습도,기상(실측을 예보 대리),예보 대리,0.0490538
-A4,M7c_hybrid_residual,dayshift_full,전면 가동일 주간 표시,운영일정(체제),전날 확정 가정,0.0437742
-A4,M7c_hybrid_residual,d1_dayshift_mean,전날 주간 평균(16:45까지),최근 전력(지연값),발행 시점,0.0389674
-A4,M7c_hybrid_residual,lag_2,30분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.0385039
-A4,M7c_hybrid_residual,lag_1,15분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.0382784
-A4,M7c_hybrid_residual,lag_d2,2일 전 같은 슬롯,최근 전력(지연값),발행 시점,0.0355175
-A4,M7c_hybrid_residual,lag_6,90분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.0327235
-A4,M7c_hybrid_residual,tmax_day,일 최고기온,기상(실측을 예보 대리),예보 대리,0.0301267
-A4,M7c_hybrid_residual,analog_now,발행 시각 유사일 값,유사일(사례기반),발행 시점,0.026208
-A4,M7c_hybrid_residual,daytype3,요일유형3(평일/토/일·공휴일),달력·시각,사전,0.0166508
-A4,M7c_hybrid_residual,lag_d1_target,전날 같은 슬롯,최근 전력(지연값),발행 시점,0.0115407
-A4,M7c_hybrid_residual,regime_prev,전날 가동 체제(야간조 이월),운영일정(체제),전날 확정 가정,0.00580508
-A4,M7c_hybrid_residual,q_in_hour,시간 안 15분 순번,달력·시각,사전,0.0048706
-A4,M7c_hybrid_residual,daytype4,요일유형4(휴무 다음 평일/연속 평일/토/일·공휴일),달력·시각,사전,0.0017627
-A4,M7c_hybrid_residual,holiday,공휴일,달력·시각,사전,0
+B,M7c_hybrid_residual,holiday,공휴일,달력·시각,사전,0
+B,M7c_hybrid_residual,regime,당일 가동 체제(정지/부분/전면),운영일정(체제),전날 확정 가정,0
+B,M7c_hybrid_residual,regime_prev,전날 가동 체제(야간조 이월),운영일정(체제),전날 확정 가정,0
+B,structure_only_lgbm,daytype3,요일유형3(평일/토/일·공휴일),달력·시각,사전,31.2336
+B,structure_only_lgbm,slot,15분 슬롯 번호(0~95),달력·시각,사전,17.4955
+B,structure_only_lgbm,daytype4,요일유형4(휴무 다음 평일/연속 평일/토/일·공휴일),달력·시각,사전,8.31771
+B,structure_only_lgbm,regime,당일 가동 체제(정지/부분/전면),운영일정(체제),전날 확정 가정,3.53498
+B,structure_only_lgbm,hour,시,달력·시각,사전,3.27819
+B,structure_only_lgbm,tariff_season,요금 계절 구분(월 상수),달력·시각,사전,1.95219
+B,structure_only_lgbm,temp,기온,기상(실측을 예보 대리),예보 대리,1.52699
+B,structure_only_lgbm,regime_prev,전날 가동 체제(야간조 이월),운영일정(체제),전날 확정 가정,1.47044
+B,structure_only_lgbm,dow,요일,달력·시각,사전,1.41466
+B,structure_only_lgbm,tmax_day,일 최고기온,기상(실측을 예보 대리),예보 대리,1.11049
+B,structure_only_lgbm,q_in_hour,시간 안 15분 순번,달력·시각,사전,1.03769
+B,structure_only_lgbm,tmean_day,일 평균기온,기상(실측을 예보 대리),예보 대리,0.838453
+B,structure_only_lgbm,hum,습도,기상(실측을 예보 대리),예보 대리,0.555196
+B,structure_only_lgbm,cdd24,"냉방도(기온−24, ≥0)",기상(실측을 예보 대리),예보 대리,0.211299
+B,structure_only_lgbm,cdd_day,"일 냉방도(최고−26, ≥0)",기상(실측을 예보 대리),예보 대리,0.0977026
+B,structure_only_lgbm,holiday,공휴일,달력·시각,사전,0.00627414
+A4,M1_lgbm,analog_regime,체제별 유사일 같은 슬롯,유사일(사례기반),발행 시점,25.0606
+A4,M1_lgbm,lag_0,0분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,15.0858
+A4,M1_lgbm,analog_regime_k1,가장 최근 유사일 같은 슬롯,유사일(사례기반),발행 시점,6.20153
+A4,M1_lgbm,same_dt_last,같은 요일유형 최근일 같은 슬롯,유사일(사례기반),발행 시점,5.59353
+A4,M1_lgbm,lag_d2,2일 전 같은 슬롯,최근 전력(지연값),발행 시점,3.3836
+A4,M1_lgbm,lag_d7,7일 전 같은 슬롯,최근 전력(지연값),발행 시점,2.89048
+A4,M1_lgbm,slot,15분 슬롯 번호(0~95),달력·시각,사전,1.06829
+A4,M1_lgbm,roll8_max,최근 2시간 최대,최근 전력(지연값),발행 시점,0.883597
+A4,M1_lgbm,lag_d1,전날 같은 슬롯(17시 전만),최근 전력(지연값),발행 시점,0.816441
+A4,M1_lgbm,dev_analog_roll4,최근 1시간 유사일 편차 평균,유사일(사례기반),발행 시점,0.718115
+A4,M1_lgbm,dev_analog_now,현재값 − 유사일(수준 편차),유사일(사례기반),발행 시점,0.679331
+A4,M1_lgbm,lag_1,15분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.632941
+A4,M1_lgbm,temp,기온,기상(실측을 예보 대리),예보 대리,0.507076
+A4,M1_lgbm,dayshift_full,전면 가동일 주간 표시,운영일정(체제),전날 확정 가정,0.45934
+A4,M1_lgbm,analog_step,유사일 목표 − 유사일 현재(예정 변화),유사일(사례기반),발행 시점,0.446609
+A4,M1_lgbm,dow,요일,달력·시각,사전,0.382215
+A4,M1_lgbm,roll4_mean,최근 1시간 평균,최근 전력(지연값),발행 시점,0.365745
+A4,M1_lgbm,lag_5,75분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.332972
+A4,M1_lgbm,analog_tmax,유사일 최고기온 평균,유사일(사례기반),발행 시점,0.289316
+A4,M1_lgbm,d1_level_vs_analog,전날 주간 수준 − 전날 유사일 수준,유사일(사례기반),발행 시점,0.287216
+A4,M1_lgbm,d2_mean,2일 전 평균,최근 전력(지연값),발행 시점,0.280761
+A4,M1_lgbm,analog_now,발행 시각 유사일 값,유사일(사례기반),발행 시점,0.257695
+A4,M1_lgbm,diff_04,최근 1시간 변화,최근 전력(지연값),발행 시점,0.226294
+A4,M1_lgbm,tariff_season,요금 계절 구분(월 상수),달력·시각,사전,0.220602
+A4,M1_lgbm,lag_d1_target,전날 같은 슬롯,최근 전력(지연값),발행 시점,0.212514
+A4,M1_lgbm,lag_2,30분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.196191
+A4,M1_lgbm,lag_4,60분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.185613
+A4,M1_lgbm,lag_3,45분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.185569
+A4,M1_lgbm,d1_dayshift_mean,전날 주간 평균(16:45까지),최근 전력(지연값),발행 시점,0.184564
+A4,M1_lgbm,lag_7,105분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.183762
+A4,M1_lgbm,dtmax_vs_analog,최고기온 − 유사일 최고기온,기상(실측을 예보 대리),예보 대리,0.183301
+A4,M1_lgbm,daytype3,요일유형3(평일/토/일·공휴일),달력·시각,사전,0.166359
+A4,M1_lgbm,d2_max,2일 전 최대,최근 전력(지연값),발행 시점,0.164395
+A4,M1_lgbm,tmean_day,일 평균기온,기상(실측을 예보 대리),예보 대리,0.163436
+A4,M1_lgbm,hour,시,달력·시각,사전,0.141542
+A4,M1_lgbm,cdd24,"냉방도(기온−24, ≥0)",기상(실측을 예보 대리),예보 대리,0.131941
+A4,M1_lgbm,d1_max_sofar,전날 최대(발행 시각까지),최근 전력(지연값),발행 시점,0.131298
+A4,M1_lgbm,q_in_hour,시간 안 15분 순번,달력·시각,사전,0.126267
+A4,M1_lgbm,diff_01,최근 15분 변화,최근 전력(지연값),발행 시점,0.121527
+A4,M1_lgbm,tmax_day,일 최고기온,기상(실측을 예보 대리),예보 대리,0.112315
+A4,M1_lgbm,daytype4,요일유형4(휴무 다음 평일/연속 평일/토/일·공휴일),달력·시각,사전,0.101366
+A4,M1_lgbm,regime,당일 가동 체제(정지/부분/전면),운영일정(체제),전날 확정 가정,0.0969036
+A4,M1_lgbm,hum,습도,기상(실측을 예보 대리),예보 대리,0.0950427
+A4,M1_lgbm,lag_6,90분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.0910981
+A4,M1_lgbm,cdd_day,"일 냉방도(최고−26, ≥0)",기상(실측을 예보 대리),예보 대리,0.0153486
+A4,M1_lgbm,regime_prev,전날 가동 체제(야간조 이월),운영일정(체제),전날 확정 가정,0.0106184
+A4,M1_lgbm,holiday,공휴일,달력·시각,사전,0.00165266
+A4,M7c_hybrid_residual,dev_analog_now,현재값 − 유사일(수준 편차),유사일(사례기반),발행 시점,1.86016
+A4,M7c_hybrid_residual,analog_step,유사일 목표 − 유사일 현재(예정 변화),유사일(사례기반),발행 시점,1.34712
+A4,M7c_hybrid_residual,base_pred,구조 모델 예측(하이브리드 기준값),유사일(사례기반),발행 시점,1.33657
+A4,M7c_hybrid_residual,lag_d7,7일 전 같은 슬롯,최근 전력(지연값),발행 시점,1.15464
+A4,M7c_hybrid_residual,same_dt_last,같은 요일유형 최근일 같은 슬롯,유사일(사례기반),발행 시점,0.680914
+A4,M7c_hybrid_residual,dev_analog_roll4,최근 1시간 유사일 편차 평균,유사일(사례기반),발행 시점,0.629932
+A4,M7c_hybrid_residual,diff_04,최근 1시간 변화,최근 전력(지연값),발행 시점,0.441995
+A4,M7c_hybrid_residual,analog_regime_k1,가장 최근 유사일 같은 슬롯,유사일(사례기반),발행 시점,0.43916
+A4,M7c_hybrid_residual,analog_regime,체제별 유사일 같은 슬롯,유사일(사례기반),발행 시점,0.411253
+A4,M7c_hybrid_residual,slot,15분 슬롯 번호(0~95),달력·시각,사전,0.331988
+A4,M7c_hybrid_residual,d1_level_vs_analog,전날 주간 수준 − 전날 유사일 수준,유사일(사례기반),발행 시점,0.315226
+A4,M7c_hybrid_residual,cdd24,"냉방도(기온−24, ≥0)",기상(실측을 예보 대리),예보 대리,0.213661
+A4,M7c_hybrid_residual,d2_mean,2일 전 평균,최근 전력(지연값),발행 시점,0.205748
+A4,M7c_hybrid_residual,roll8_max,최근 2시간 최대,최근 전력(지연값),발행 시점,0.20328
+A4,M7c_hybrid_residual,d2_max,2일 전 최대,최근 전력(지연값),발행 시점,0.196665
+A4,M7c_hybrid_residual,analog_tmax,유사일 최고기온 평균,유사일(사례기반),발행 시점,0.157152
+A4,M7c_hybrid_residual,diff_01,최근 15분 변화,최근 전력(지연값),발행 시점,0.124241
+A4,M7c_hybrid_residual,lag_0,0분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.120046
+A4,M7c_hybrid_residual,dow,요일,달력·시각,사전,0.119501
+A4,M7c_hybrid_residual,lag_5,75분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.113899
+A4,M7c_hybrid_residual,lag_4,60분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.0932878
+A4,M7c_hybrid_residual,temp,기온,기상(실측을 예보 대리),예보 대리,0.0849043
+A4,M7c_hybrid_residual,dtmax_vs_analog,최고기온 − 유사일 최고기온,기상(실측을 예보 대리),예보 대리,0.0798077
+A4,M7c_hybrid_residual,cdd_day,"일 냉방도(최고−26, ≥0)",기상(실측을 예보 대리),예보 대리,0.0763478
+A4,M7c_hybrid_residual,tmean_day,일 평균기온,기상(실측을 예보 대리),예보 대리,0.0723902
+A4,M7c_hybrid_residual,lag_7,105분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.0718945
+A4,M7c_hybrid_residual,dayshift_full,전면 가동일 주간 표시,운영일정(체제),전날 확정 가정,0.069145
+A4,M7c_hybrid_residual,roll4_mean,최근 1시간 평균,최근 전력(지연값),발행 시점,0.0595364
+A4,M7c_hybrid_residual,tariff_season,요금 계절 구분(월 상수),달력·시각,사전,0.0578604
+A4,M7c_hybrid_residual,hum,습도,기상(실측을 예보 대리),예보 대리,0.0571811
+A4,M7c_hybrid_residual,d1_max_sofar,전날 최대(발행 시각까지),최근 전력(지연값),발행 시점,0.0571769
+A4,M7c_hybrid_residual,hour,시,달력·시각,사전,0.0492886
+A4,M7c_hybrid_residual,lag_1,15분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.0489851
+A4,M7c_hybrid_residual,d1_dayshift_mean,전날 주간 평균(16:45까지),최근 전력(지연값),발행 시점,0.0487337
+A4,M7c_hybrid_residual,lag_d2,2일 전 같은 슬롯,최근 전력(지연값),발행 시점,0.0468801
+A4,M7c_hybrid_residual,lag_d1,전날 같은 슬롯(17시 전만),최근 전력(지연값),발행 시점,0.043698
+A4,M7c_hybrid_residual,analog_now,발행 시각 유사일 값,유사일(사례기반),발행 시점,0.0350388
+A4,M7c_hybrid_residual,lag_2,30분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.0336243
+A4,M7c_hybrid_residual,lag_3,45분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.0324484
+A4,M7c_hybrid_residual,tmax_day,일 최고기온,기상(실측을 예보 대리),예보 대리,0.0320125
+A4,M7c_hybrid_residual,lag_6,90분 전 값(발행 구간 기준),최근 전력(지연값),발행 시점,0.0317766
+A4,M7c_hybrid_residual,daytype3,요일유형3(평일/토/일·공휴일),달력·시각,사전,0.0146601
+A4,M7c_hybrid_residual,lag_d1_target,전날 같은 슬롯,최근 전력(지연값),발행 시점,0.00961868
+A4,M7c_hybrid_residual,q_in_hour,시간 안 15분 순번,달력·시각,사전,0.00632696
+A4,M7c_hybrid_residual,daytype4,요일유형4(휴무 다음 평일/연속 평일/토/일·공휴일),달력·시각,사전,0.00256808
+A4,M7c_hybrid_residual,regime_prev,전날 가동 체제(야간조 이월),운영일정(체제),전날 확정 가정,0.00229837
+A4,M7c_hybrid_residual,holiday,공휴일,달력·시각,사전,0.00118334
 A4,M7c_hybrid_residual,regime,당일 가동 체제(정지/부분/전면),운영일정(체제),전날 확정 가정,0
-A4,structure_only_lgbm,daytype3,요일유형3(평일/토/일·공휴일),달력·시각,사전,31.3591
-A4,structure_only_lgbm,slot,15분 슬롯 번호(0~95),달력·시각,사전,17.4502
-A4,structure_only_lgbm,daytype4,요일유형4(휴무 다음 평일/연속 평일/토/일·공휴일),달력·시각,사전,8.36084
-A4,structure_only_lgbm,regime,당일 가동 체제(정지/부분/전면),운영일정(체제),전날 확정 가정,3.55265
-A4,structure_only_lgbm,hour,시,달력·시각,사전,3.24717
-A4,structure_only_lgbm,tariff_season,요금 계절 구분(월 상수),달력·시각,사전,2.00734
-A4,structure_only_lgbm,temp,기온,기상(실측을 예보 대리),예보 대리,1.58977
-A4,structure_only_lgbm,regime_prev,전날 가동 체제(야간조 이월),운영일정(체제),전날 확정 가정,1.52083
-A4,structure_only_lgbm,dow,요일,달력·시각,사전,1.32891
-A4,structure_only_lgbm,q_in_hour,시간 안 15분 순번,달력·시각,사전,1.04951
-A4,structure_only_lgbm,tmax_day,일 최고기온,기상(실측을 예보 대리),예보 대리,1.01223
-A4,structure_only_lgbm,tmean_day,일 평균기온,기상(실측을 예보 대리),예보 대리,0.844462
-A4,structure_only_lgbm,hum,습도,기상(실측을 예보 대리),예보 대리,0.563647
-A4,structure_only_lgbm,cdd24,"냉방도(기온−24, ≥0)",기상(실측을 예보 대리),예보 대리,0.222461
-A4,structure_only_lgbm,cdd_day,"일 냉방도(최고−26, ≥0)",기상(실측을 예보 대리),예보 대리,0.111328
-A4,structure_only_lgbm,holiday,공휴일,달력·시각,사전,0.00835816
+A4,structure_only_lgbm,daytype3,요일유형3(평일/토/일·공휴일),달력·시각,사전,31.2954
+A4,structure_only_lgbm,slot,15분 슬롯 번호(0~95),달력·시각,사전,17.4408
+A4,structure_only_lgbm,daytype4,요일유형4(휴무 다음 평일/연속 평일/토/일·공휴일),달력·시각,사전,8.32209
+A4,structure_only_lgbm,regime,당일 가동 체제(정지/부분/전면),운영일정(체제),전날 확정 가정,3.53022
+A4,structure_only_lgbm,hour,시,달력·시각,사전,3.27329
+A4,structure_only_lgbm,tariff_season,요금 계절 구분(월 상수),달력·시각,사전,1.98858
+A4,structure_only_lgbm,temp,기온,기상(실측을 예보 대리),예보 대리,1.50938
+A4,structure_only_lgbm,regime_prev,전날 가동 체제(야간조 이월),운영일정(체제),전날 확정 가정,1.44857
+A4,structure_only_lgbm,dow,요일,달력·시각,사전,1.39272
+A4,structure_only_lgbm,q_in_hour,시간 안 15분 순번,달력·시각,사전,1.05857
+A4,structure_only_lgbm,tmax_day,일 최고기온,기상(실측을 예보 대리),예보 대리,1.05436
+A4,structure_only_lgbm,tmean_day,일 평균기온,기상(실측을 예보 대리),예보 대리,0.775876
+A4,structure_only_lgbm,hum,습도,기상(실측을 예보 대리),예보 대리,0.559062
+A4,structure_only_lgbm,cdd24,"냉방도(기온−24, ≥0)",기상(실측을 예보 대리),예보 대리,0.21082
+A4,structure_only_lgbm,cdd_day,"일 냉방도(최고−26, ≥0)",기상(실측을 예보 대리),예보 대리,0.115696
+A4,structure_only_lgbm,holiday,공휴일,달력·시각,사전,0.00715124

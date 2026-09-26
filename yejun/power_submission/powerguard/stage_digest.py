@@ -82,6 +82,20 @@ def run() -> dict:
     j = _read_json("field/ratchet_risk_days_summary.json")
     if j:
         out["ratchet_risk_days"] = {"source": "field/ratchet_risk_days_summary.json", **j}
+    ab = _read_csv("analysis/ablations.csv")
+    if not ab.empty:
+        g = ab[ab.ablation == "no_plan_stop_gate"]
+        if len(g):  # 계획 정지 게이트 공개: 게이트를 뺀 같은 모델의 교차검증·시험 RMSE(헤드라인 = 게이트 포함)
+            out["plan_stop_gate_disclosure"] = {"source": "analysis/ablations.csv(no_plan_stop_gate)",
+                                                "note": "게이트는 시험을 본 뒤 추가(사후). 선택은 게이트 전후 같다. 가동 주간 예측은 게이트와 무관",
+                                                "rows": g[["task", "model", "cv_RMSE", "test_RMSE", "test_diff_vs_headline",
+                                                           "diff_ci90"]].round(3).to_dict("records")}
+    er = _read_csv("analysis/error_rules.csv")
+    if not er.empty:
+        e2 = er[er.rule != "(전체)"]
+        out["error_rules_reproduced"] = {"source": "analysis/error_rules.csv", **{
+            f"{t}|{tg}": f"{int(g.reproduced.fillna(0).sum())}/{int(g.reproduced.notna().sum())}"
+            for (t, tg), g in e2.groupby(["task", "target"])}}
     cvm = _read_csv("cv/cv_metrics.csv")
     if not cvm.empty and sel:
         out["cv_pooled_RMSE_chosen"] = {"source": "cv/cv_metrics.csv", **{
@@ -99,8 +113,8 @@ def run() -> dict:
             o["test_classification"] = nh[(nh.method == m) & (nh.period == "test")].iloc[0][
                 ["F1", "precision", "recall", "PR_AUC", "Brier", "ECE", "base_rate", "BSS_vs_climatology"]].to_dict()
             o["test_rules_F1"] = nh[(nh.method.str.startswith("R_")) & (nh.period == "test")].set_index("method")["F1"].to_dict()
-            o["test_climatology"] = nh[(nh.method == "P_climatology") & (nh.period == "test")].iloc[0][
-                ["F1", "PR_AUC", "Brier", "ECE"]].to_dict()
+            o["test_climatology_prob_quality"] = nh[(nh.method == "P_climatology") & (nh.period == "test")].iloc[0][
+                ["PR_AUC", "Brier", "ECE"]].to_dict()
         fb = _read_csv("peak/next_hour_f1_bootstrap.csv")
         if not fb.empty:
             o["F1_diff_bootstrap"] = fb.to_dict("records")
@@ -111,7 +125,7 @@ def run() -> dict:
         if not al.empty:
             cols = ["tau", "precision", "recall", "F1", "event_recall", "event_recall_scheduled",
                     "event_recall_unscheduled", "events", "alarm_on_hours_per_day", "episodes_per_day",
-                    "false_episodes_per_day", "lead_median_min"]
+                    "false_episodes_per_day", "lead_median_min", "lead_episode_median_min"]
             for rule in ("f1", "match_clock_hours"):
                 a = al[(al.method == m) & (al.period == "test") & (al.tau_rule == rule)]
                 if len(a):
@@ -119,6 +133,9 @@ def run() -> dict:
             c = al[(al.method == "R_clock") & (al.period == "test") & (al.tau_rule == "rule")]
             if len(c):
                 o["test_alarm_clock_rule"] = c.iloc[0][cols].to_dict()
+            c = al[(al.method == "P_climatology") & (al.period == "test") & (al.tau_rule == "f1")]
+            if len(c):  # 기후값도 자기 교차검증 F1 문턱에서(τ=0.5 고정 비교는 모델 우위를 부풀린다)
+                o["test_alarm_climatology_cv_tau"] = c.iloc[0][cols].to_dict()
         out["peak"] = o
     cov = _read_csv("peak/interval_coverage.csv")
     if not cov.empty:
@@ -149,6 +166,11 @@ def run() -> dict:
         if j:
             out["billing_ratchet"] = {"source": rel, **j}
     for rel, key in (("field/integrated_scenario.csv", "integrated_scenario"), ("field/alarm_burden.csv", "alarm_burden"),
+                     ("field/alarm_burden_billing_target.csv", "alarm_burden_billing_target"),
+                     ("field/ratchet_ladder.csv", "ratchet_ladder"), ("field/ratchet_perfect_control_bound.csv", "ratchet_bound"),
+                     ("diagnostics/copy_direction_checks.csv", "copy_direction_checks"),
+                     ("diagnostics/input_support_test_days.csv", "input_support_test_days"),
+                     ("analysis/test_inversion_days.csv", "test_inversion_days"),
                      ("field/ratchet_events.csv", "ratchet_events"), ("analysis/naive_protocol.csv", "naive_protocol"),
                      ("analysis/shap_grouped.csv", "shap_grouped"), ("analysis/error_rule_stability.csv", "error_rule_stability"),
                      ("cv/ml_sweep.csv", "ml_sweep")):

@@ -59,24 +59,24 @@
   "startup_excess_kruskal_p": 0.800476,
   "plateau_slope_per_C_summer_pre_test": {
    "note": "6·7월(시험 전)",
-   "slope": 1.934358,
+   "slope": 1.925945,
    "ci90": [
-    1.285125,
-    2.640141
+    1.268243,
+    2.698839
    ],
    "n_days": 41,
-   "corr": 0.601351,
-   "slope_controlling_trend_monday": 0.546723,
+   "corr": 0.583409,
+   "slope_controlling_trend_monday": 0.495321,
    "slope_controlling_ci90": [
-    -0.2537,
-    1.461488
+    -0.320056,
+    1.433958
    ],
-   "theil_sen": 2.04192,
+   "theil_sen": 2.034976,
    "theil_sen_ci90": [
-    1.243697,
-    2.80112
+    1.176471,
+    2.897603
    ],
-   "tmax_date_corr": 0.654176
+   "tmax_date_corr": 0.642434
   },
   "plateau_slope_per_C_summer_test": {
    "note": "8·9월(시험)",
@@ -101,24 +101,24 @@
   },
   "plateau_slope_per_C_pooled_jun_sep_posthoc": {
    "note": "6~9월 합동(사후, 참고)",
-   "slope": 1.774795,
+   "slope": 1.761079,
    "ci90": [
-    1.200557,
-    2.356363
+    1.184066,
+    2.361217
    ],
    "n_days": 67,
-   "corr": 0.54627,
-   "slope_controlling_trend_monday": 1.715295,
+   "corr": 0.531503,
+   "slope_controlling_trend_monday": 1.700648,
    "slope_controlling_ci90": [
-    1.079229,
-    2.331073
+    1.055895,
+    2.343833
    ],
-   "theil_sen": 1.813645,
+   "theil_sen": 1.801862,
    "theil_sen_ci90": [
-    1.176471,
-    2.452489
+    1.147059,
+    2.456747
    ],
-   "tmax_date_corr": 0.197818
+   "tmax_date_corr": 0.197737
   },
   "month_max_days": [
    {

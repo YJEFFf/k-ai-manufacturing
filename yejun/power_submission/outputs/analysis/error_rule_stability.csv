@@ -1,5 +1,5 @@
 task,target,root_feature,root_recurrence,structure,structure_recurrence
-B,loss_vs_baseline,work_dayshift,0.65,daytype4 | regime_prev | work_dayshift,0.09
-B,abs_err_workday,analog_atypical,0.41,analog_atypical | win_lunch_1145_1315,0.22
-A4,loss_vs_baseline,regime_prev,0.5,regime | regime_prev,0.15
-A4,abs_err_workday,win_startup_0730_0845,0.59,analog_atypical | win_startup_0730_0845,0.1
+B,loss_vs_baseline,work_dayshift,0.57,daytype4 | daytype4 | work_dayshift,0.05
+B,abs_err_workday,win_lunch_1145_1315,0.3,win_lunch_1145_1315 | win_startup_0730_0845,0.06
+A4,loss_vs_baseline,regime,0.7,first_day_after_off | regime | temp_level,0.24
+A4,abs_err_workday,win_startup_0730_0845,0.71,win_lunch_1145_1315 | win_startup_0730_0845,0.21

@@ -1,6 +1,6 @@
 {
  "meta": {
-  "source": "Dataset_자원 최적화 AI 데이터셋.zip",
+  "source": "okm_augumented_2021.csv",
   "sha256": "8f7af2e49366c93e1d6f5fdef4b5e350066c1792ac463c2c2886e370f4674830",
   "rows": 6168,
   "cols": 18
@@ -26,10 +26,12 @@
   },
   "copy_origin_rule": "latest_consistent",
   "copy_groups_multi": 45,
-  "copy_groups_earliest_member_consistent": "22/45",
-  "copy_groups_latest_member_consistent": "45/45",
-  "singleton_days_consistent": "89/95",
-  "earliest_is_origin_binom_p": 0.0,
+  "copy_groups_earliest_member_consistent": "21/45",
+  "copy_groups_latest_member_consistent": "44/45",
+  "copy_groups_chosen_origin_consistent": "45/45",
+  "singleton_days_consistent": "88/95",
+  "singleton_days_consistent_measured_period": "87/88",
+  "earliest_is_origin_binom_p": 5.31543e-16,
   "unique_daily_power_patterns": 142,
   "copied_power_days": 115,
   "copied_by_month": {
@@ -58,7 +60,7 @@
   "copied_days_with_production_vector_equal_to_other_day_all_zero": 31,
   "copied_src_same_weekday_share": 0.2348,
   "copied_src_same_day_of_month_share": 0.4957,
-  "copied_src_later_share": 1.0,
+  "copied_src_later_share": 0.9913,
   "copied_by_src_month": {
    "1<-5": 9,
    "1<-6": 18,
@@ -90,7 +92,7 @@
    "2021-03-28": 16
   },
   "natural_max_equal_run_below_threshold": 12,
-  "copied_calendar_contradictions": 39,
+  "copied_calendar_contradictions": 42,
   "orig_days_prod0_but_running": [],
   "regime_mismatch_days": [
    "2021-07-09"
@@ -220,6 +222,17 @@
    ]
   }
  },
+ "direction_checks_power_only": {
+  "자정 연속성(전날 21~23시 ↔ 당일 01~05시)|1~4월": "88/119",
+  "자정 연속성(전날 21~23시 ↔ 당일 01~05시)|5~9월": "131/133",
+  "휴무 다음 평일의 01~05시 야간조 전력|1~4월": "15/17",
+  "휴무 다음 평일의 01~05시 야간조 전력|5~9월": "1/22",
+  "복제군 구성원의 앞뒤 자정 연속성|가장 이른 구성원": "24/45",
+  "복제군 구성원의 앞뒤 자정 연속성|가장 늦은 구성원": "43/45",
+  "복제군 구성원의 앞뒤 자정 연속성|가장 늦은 쪽만 연속 / 가장 이른 쪽만 연속": "20/1",
+  "가동 패턴 복제군: 13~16시 고원 전력 vs 일 최고기온|가장 늦은 날짜 기온": 0.331725,
+  "가동 패턴 복제군: 13~16시 고원 전력 vs 일 최고기온|가장 이른 날짜 기온": -0.141009
+ },
  "usable": {
   "usable_days": 133,
   "usable_intervals": 12694,
@@ -233,7 +246,7 @@
  },
  "peak": {
   "T_q95_train_pool": 182.0,
-  "workdays": 85,
+  "workdays": 86,
   "daily_max_in_0730_0859_by_month": {
    "5": {
     "share": 0.684,
@@ -254,12 +267,12 @@
     ]
    },
    "7": {
-    "share": 0.333,
+    "share": 0.316,
     "k": 6,
-    "n": 18,
+    "n": 19,
     "ci90": [
-     0.183,
-     0.527
+     0.173,
+     0.504
     ]
    },
    "8": {
@@ -281,11 +294,11 @@
     ]
    }
   },
-  "daily_max_in_0815_0900_share": 0.470588,
-  "startup_excess_median": 13.0,
+  "daily_max_in_0815_0900_share": 0.465116,
+  "startup_excess_median": 13.125,
   "startup_excess_iqr": [
-   7.25,
-   17.75
+   7.375,
+   18.125
   ],
   "startup_excess_definition": "08:00~08:59 최대 − 09:00~09:59 평균(10:00 휴식 구간 제외, 모든 단계 공통)"
  },

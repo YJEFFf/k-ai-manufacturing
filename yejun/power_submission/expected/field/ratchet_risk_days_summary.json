@@ -1,26 +1,42 @@
 {
  "margin": 5.0,
  "tau_chosen_on_july": 0.5,
+ "note": "문턱 τ는 7월 기준(초기 래칫 ≈201)에서 골라 시험(≈217)으로 옮기면 맞지 않는다 → 순위·주당 상위 1일 규칙을 함께 본다",
  "cv_jul": {
   "days": 27,
+  "workdays": 18,
   "risk_days_actual": 4,
-  "flagged": 8,
+  "flagged_tau": 10,
   "TP": 3,
-  "FP": 5,
+  "FP": 7,
   "FN": 1,
-  "precision": 0.375,
+  "precision": 0.3,
   "recall": 0.75,
-  "flag_rate_workdays": 0.296296
+  "flag_rate_workdays": 0.555556,
+  "risk_day_ranks_among_workdays": [
+   7,
+   15,
+   3,
+   9
+  ],
+  "week_top1_days": 5,
+  "week_top1_hits": 1
  },
  "test": {
   "days": 43,
+  "workdays": 27,
   "risk_days_actual": 1,
-  "flagged": 0,
+  "flagged_tau": 0,
   "TP": 0,
   "FP": 0,
   "FN": 1,
   "precision": null,
   "recall": 0.0,
-  "flag_rate_workdays": 0.0
+  "flag_rate_workdays": 0.0,
+  "risk_day_ranks_among_workdays": [
+   1
+  ],
+  "week_top1_days": 6,
+  "week_top1_hits": 1
  }
 }

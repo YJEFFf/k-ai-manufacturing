@@ -45,3 +45,27 @@ def test_cmp_json_tolerance_and_skip_keys():
     b = {"x": 1.0 + 1e-9, "timings_s": {"m": 999}, "l": [1, 2]}
     assert V.cmp_json(a, b) == []
     assert V.cmp_json({"x": 1.0}, {"x": 1.1})
+
+
+def test_packaged_copy_is_not_fresh_until_rerun(tmp_path, monkeypatch):
+    """제출 묶음(packaged_epoch)은 그 뒤의 전체 실행 기록이 있어야 신선하다(unzip이 파일 시각을 보존해도)."""
+    out = tmp_path / "outputs"
+    out.mkdir()
+    monkeypatch.setattr(V, "OUT", out)
+    now = time.time()
+    (out / "run_manifest.json").write_text(json.dumps({"packaged_epoch": now, "last_full_run": {
+        "started_epoch": now - 100, "finished_epoch": now - 10, "finished_at": "f"}}), encoding="utf-8")
+    ok, msg = V.freshness([])
+    assert not ok and "제출 묶음" in msg
+
+
+def test_code_change_after_run_is_not_fresh(tmp_path, monkeypatch):
+    out = tmp_path / "outputs"
+    out.mkdir()
+    monkeypatch.setattr(V, "OUT", out)
+    now = time.time()
+    (out / "run_manifest.json").write_text(json.dumps({"last_full_run": {
+        "started_epoch": now - 100, "finished_epoch": now + 100, "finished_at": "f", "code_sha256": "0" * 64}}),
+        encoding="utf-8")
+    ok, msg = V.freshness([])
+    assert not ok and "코드" in msg

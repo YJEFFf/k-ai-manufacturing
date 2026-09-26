@@ -1,0 +1,5 @@
+target,target_fraction,intervals_over,days_over,energy_over_share,ratchet_if_perfect,change_pct
+199.8,0.9,81,18,0.000614031,199.8,-10
+204.2,0.92,34,12,0.000253837,204.2,-8.01802
+210.9,0.95,11,9,5.58069e-05,210.9,-5
+217.6,0.98,2,2,7.42031e-06,217.6,-1.98198

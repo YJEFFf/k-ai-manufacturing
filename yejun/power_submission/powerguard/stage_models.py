@@ -96,11 +96,16 @@ def add_blend(cvm: pd.DataFrame, oof: dict, iv: pd.DataFrame, family_tasks: list
     top2 = blend_members(rank)
     rows = []
     blocks = CV.cv_blocks() + [("pooled", C.CV_FOLDS[0][1], C.CV_FOLDS[-1][2])]
+    corrs = []
     for task in family_tasks:
         p = (oof[task][top2[0]] + oof[task][top2[1]]) / 2
         oof[task]["M8_blend"] = p
         _scores(y, p, usable, iv, rows, task, "M8_blend", blocks)
-    return pd.concat([cvm, pd.DataFrame(rows)], ignore_index=True), {"members": top2}
+        ra, rb = (oof[task][top2[0]] - y), (oof[task][top2[1]] - y)
+        ok = ra.notna() & rb.notna() & pd.Series(usable, index=y.index)
+        corrs.append(float(np.corrcoef(ra[ok], rb[ok])[0, 1]))
+    return pd.concat([cvm, pd.DataFrame(rows)], ignore_index=True), {"members": top2,
+                                                                    "cv_residual_corr": float(np.mean(corrs))}
 
 
 def select(cvm: pd.DataFrame, oof: dict, iv: pd.DataFrame, family_tasks: list[str], seed: int = 0,
@@ -336,13 +341,15 @@ def selection_table(iv: pd.DataFrame, cvm: pd.DataFrame, tm: pd.DataFrame, oof: 
 def run(iv: pd.DataFrame, log=print) -> dict:
     frames = CV.build_frames(iv)
     cvm, oof = run_cv_all(iv, frames, log=log)
-    blend_members = {}
+    blend_members, blend_corr = {}, {}
     for fam, tasks in (("B", ["B"]), ("A", ["A1", "A2", "A3", "A4"])):
         cvm, info = add_blend(cvm, oof, iv, tasks)
         blend_members[fam] = info["members"]
+        blend_corr[fam] = info["cv_residual_corr"]
     sel = {fam: select(cvm, oof, iv, tasks) for fam, tasks in (("B", ["B"]), ("A", ["A1", "A2", "A3", "A4"]))}
     for fam in sel:
         sel[fam]["blend_members"] = blend_members[fam]
+        sel[fam]["blend_members_cv_residual_corr"] = blend_corr[fam]
     od = io.out_dir("cv")
     io.write_csv(cvm, od / "cv_metrics.csv")
     io.write_csv(structural_sweep(iv), od / "structural_sweep.csv")

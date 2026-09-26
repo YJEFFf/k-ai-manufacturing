@@ -1,11 +1,12 @@
 01_copy_forensics_heatmap.png
 01b_copy_direction.png
+01c_copy_direction_power_only.png
 02_daytype_profiles.png
 03_model_comparison_A4.png
 03_model_comparison_B.png
-04_test_timeseries_9월_가동주.png
-04_test_timeseries_대체공휴일_가동.png
-04_test_timeseries_휴가주_복귀.png
+04_test_timeseries_holiday_work.png
+04_test_timeseries_sep_workweek.png
+04_test_timeseries_vacation_return.png
 05_peak_type_by_month.png
 06_plateau_vs_tmax.png
 07_alarm_grade_calibration.png

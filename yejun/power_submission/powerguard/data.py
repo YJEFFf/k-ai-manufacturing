@@ -95,11 +95,13 @@ def _longest_true_run(b: np.ndarray) -> int:
 
 def consistency_table(df: pd.DataFrame, corrupt: set, night_power_on: float = C.NIGHT_POWER_ON,
                       night_prod_on: float = C.NIGHT_PROD_ON, day_power_on: float = C.DAY_POWER_ON,
-                      day_prod_on: float = C.DAY_PROD_ON) -> pd.DataFrame:
+                      day_prod_on: float = C.DAY_PROD_ON, evening_power_on: float = C.EVENING_POWER_ON,
+                      evening_prod_on: float = C.EVENING_PROD_ON) -> pd.DataFrame:
     """날짜별 전력 패턴–생산 기록 정합성. 손상일(시간 열 손상)은 판정하지 않는다(NaN).
 
-    night_ok: 01~05시 평균 전력이 야간 가동 수준인지와 00~06시에 생산 기록이 있는지가 일치
-    day_ok:   09~16시 평균 전력이 주간 가동 수준인지와 08~19시에 생산 기록이 있는지가 일치
+    night_ok:   01~05시 평균 전력이 야간 가동 수준인지와 00~06시에 생산 기록이 있는지가 일치
+    day_ok:     09~16시 평균 전력이 주간 가동 수준인지와 08~19시에 생산 기록이 있는지가 일치
+    evening_ok: 20~23시 평균 전력이 야간조 수준인지와 20~23시에 생산 기록이 있는지가 일치(v2.1)
     """
     hr = df["시간"]
     pw = df[C.POWER_COLS].mean(axis=1)
@@ -109,14 +111,18 @@ def consistency_table(df: pd.DataFrame, corrupt: set, night_power_on: float = C.
         "day_power": pw[(hr >= 9) & (hr <= 16)].groupby(g[(hr >= 9) & (hr <= 16)]).mean(),
         "night_prod": df.loc[hr <= 6, "생산량"].groupby(g[hr <= 6]).sum(),
         "day_prod": df.loc[(hr >= 8) & (hr <= 19), "생산량"].groupby(g[(hr >= 8) & (hr <= 19)]).sum(),
+        "evening_power": pw[(hr >= 20) & (hr <= 23)].groupby(g[(hr >= 20) & (hr <= 23)]).mean(),
+        "evening_prod": df.loc[(hr >= 20) & (hr <= 23), "생산량"].groupby(g[(hr >= 20) & (hr <= 23)]).sum(),
     }).reindex(pd.DatetimeIndex(sorted(g.unique())))
     night_ok = (t["night_power"] > night_power_on) == (t["night_prod"] > night_prod_on)
     day_ok = (t["day_power"] > day_power_on) == (t["day_prod"] > day_prod_on)
+    evening_ok = (t["evening_power"] > evening_power_on) == (t["evening_prod"] > evening_prod_on)
     t["night_ok"] = night_ok.astype(float)
     t["day_ok"] = day_ok.astype(float)
-    t["consistent"] = (night_ok & day_ok).astype(float)
-    bad = t.index.isin(list(corrupt)) | t[["night_power", "day_power"]].isna().any(axis=1)
-    t.loc[bad, ["night_ok", "day_ok", "consistent"]] = np.nan
+    t["evening_ok"] = evening_ok.astype(float)
+    t["consistent"] = (night_ok & day_ok & evening_ok).astype(float)
+    bad = t.index.isin(list(corrupt)) | t[["night_power", "day_power", "evening_power"]].isna().any(axis=1)
+    t.loc[bad, ["night_ok", "day_ok", "evening_ok", "consistent"]] = np.nan
     return t
 
 
@@ -136,6 +142,7 @@ def copy_origin_evidence(days: pd.DataFrame) -> dict:
     first_ok = grp.apply(lambda x: x.sort_index()["consistent"].iloc[0], include_groups=False)
     last_ok = grp.apply(lambda x: x.sort_index()["consistent"].iloc[-1], include_groups=False)
     single = days[(days["copy_group_size"] == 1) & days["consistent"].notna()]
+    meas = single[single.index >= C.MEASURED_START]
     p_single = float(single["consistent"].mean())
     n = int(first_ok.notna().sum())
     k = int((first_ok == 1).sum())
@@ -143,7 +150,9 @@ def copy_origin_evidence(days: pd.DataFrame) -> dict:
         "copy_groups_multi": int(len(first_ok)),
         "copy_groups_earliest_member_consistent": f"{k}/{n}",
         "copy_groups_latest_member_consistent": f"{int((last_ok == 1).sum())}/{int(last_ok.notna().sum())}",
+        "copy_groups_chosen_origin_consistent": f"{int((days.loc[days['copy_group_size'] > 1].query('~copied')['consistent'] == 1).sum())}/{len(first_ok)}",
         "singleton_days_consistent": f"{int(single['consistent'].sum())}/{len(single)}",
+        "singleton_days_consistent_measured_period": f"{int(meas['consistent'].sum())}/{len(meas)}",
         # 가장 이른 구성원이 실제 측정이라면 단독 날짜와 같은 비율로 정합해야 한다(이항 검정, 한쪽)
         "earliest_is_origin_binom_p": float(binomtest(k, n, p_single, alternative="less").pvalue) if n else None,
     }
@@ -155,7 +164,8 @@ def copy_group_table(days: pd.DataFrame) -> pd.DataFrame:
     first = multi.groupby("power_src").apply(lambda x: x.index.min(), include_groups=False)
     multi["is_earliest"] = multi.index == multi["power_src"].map(first)
     cols = ["power_src", "copy_group_size", "weekday", "month", "holiday", "is_origin", "is_earliest", "consistent",
-            "night_ok", "day_ok", "night_power", "night_prod", "day_power", "day_prod", "prod_total"]
+            "night_ok", "day_ok", "evening_ok", "night_power", "night_prod", "day_power", "day_prod", "evening_power",
+            "evening_prod", "prod_total"]
     return multi[cols].rename(columns={"power_src": "group_origin"}).reset_index().sort_values(["group_origin", "date"])
 
 
@@ -165,6 +175,8 @@ def contradiction_reason(r) -> str:
         parts.append("야간 생산 없는데 야간조 전력" if r.night_power > C.NIGHT_POWER_ON else "야간 생산 있는데 대기 전력")
     if r.day_ok == 0:
         parts.append("주간 생산 없는데 가동 전력" if r.day_power > C.DAY_POWER_ON else "주간 생산 있는데 대기 전력")
+    if getattr(r, "evening_ok", 1) == 0:
+        parts.append("저녁 생산 없는데 야간조 전력" if r.evening_power > C.EVENING_POWER_ON else "저녁 생산 있는데 대기 전력")
     tag = "공휴일" if r.holiday else ("일요일" if r.weekday == 6 else ("토요일" if r.weekday == 5 else "평일"))
     return f"{tag}: " + "·".join(parts)
 
@@ -327,7 +339,8 @@ def diagnose(df: pd.DataFrame) -> Diagnosis:
     con["src_prod_total"] = con["power_src"].map(days["prod_total"])
     con["reason"] = [contradiction_reason(r) for r in con.itertuples()]
     out.contradictions = con.reset_index()[["date", "weekday", "holiday", "prod_total", "night_prod", "night_power",
-                                            "day_prod", "day_power", "power_src", "src_prod_total", "reason"]]
+                                            "day_prod", "day_power", "evening_prod", "evening_power", "power_src",
+                                            "src_prod_total", "reason"]]
     s["copied_calendar_contradictions"] = int(len(con))
 
     # 원본일 중 생산 0인데 가동 전력(생산기록 없는 가동)

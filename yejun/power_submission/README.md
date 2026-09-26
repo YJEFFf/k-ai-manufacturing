@@ -4,7 +4,7 @@
 
 ## 환경
 
-- Python 3.12 이상(고정한 numpy 2.5.3 휠은 3.12+용). 메모리 약 1.1GB. 실행 시간은 아래 '실행 기록' 참고.
+- Python 3.12 이상(고정한 numpy 2.5.3 휠은 3.12+용, conda는 `environment.yml`). 메모리 약 1.1GB. 실행 시간은 아래 '실행 기록' 참고.
 - macOS: LightGBM이 OpenMP를 쓰므로 필요하면 `brew install libomp`. Windows: 가상환경 활성화는 `.venv\Scripts\activate`,
   그림 한글은 맑은 고딕을 쓴다(한글 글꼴이 없으면 `figures` 단계가 경고를 낸다. 수치 산출물에는 영향 없음).
 - LightGBM 스레드(4)·결정적 모드와 난수 시드를 고정해 결과가 코어 수·BLAS·파이썬 빌드와 무관하게 같다
@@ -20,6 +20,10 @@ python -m pytest -q tests              # 데이터 진단·누설(미래 교란 
 python verify.py --require-fresh       # outputs/ 를 expected/ 동결값과 비교 + 마지막 전체 실행에서 만든 산출물인지 확인
 ```
 
+`--require-fresh`는 모든 단계를 한 번에 실행한 기록(run_all.py 인자 없이 또는 모든 단계)을 요구한다. 일부 단계만 다시 돌리면
+그 단계의 산출물이 전체 실행 기록 밖에서 쓰였으므로 실패한다(기본 `verify.py`는 비교는 하고 신선도는 경고만 한다).
+실행 도중 코드가 바뀌면 run_all.py가 오류로 끝나고, 전체 실행 뒤 코드가 바뀌어도 신선도 확인이 실패한다(코드 지문).
+
 원본 경로는 `--data` 인자 → 환경변수 `POWERGUARD_DATA` → `data/okm_augumented_2021.csv` → 저장소 `데이터셋/` ZIP 순서로 찾는다.
 외부 KAMP 자료(#41·#46·#30) ZIP은 `--kamp-dir` 폴더(기본: 저장소 `데이터셋/`)에서 찾으며, 없으면 `external` 단계는 해당 항목을
 건너뛰고 `verify.py`는 `external/*`를 비교하지 않는다.
@@ -30,14 +34,16 @@ python verify.py --require-fresh       # outputs/ 를 expected/ 동결값과 비
 
 ## 실행 기록
 
-- 2026-09-26 v2.0 전체 실행(Apple M 계열 8코어, 다른 전체 실행과 동시에 돌아 부하 상태): 3,592초 — models 683초, peak 38초,
-  analysis 110초, ablation 2,696초(정보가치·절제·반사실 절차·기상 예보오차·학습 창·LightGBM 격자), 나머지 약 1분.
+- 2026-09-26 v2.1 전체 실행(Apple M 계열 8코어, 코드만 복사한 사본의 전체 실행과 동시에 돌아 부하 상태): 4,027초 — models 518초,
+  peak 32초, analysis 100초, ablation 3,316초(정보가치·절제·반사실 절차·기상 예보오차·학습 창·LightGBM 격자), 나머지 약 1분.
   `ablation`을 빼면 약 15분이다(`--stages diagnostics,models,peak,analysis,field,external,figures,digest`).
-- 결과 동일성: 코드만 복사한 사본의 전체 재실행을 `verify.py`로 비교한다(PLAN §10 S10).
+- 결과 동일성: 코드만 복사한 사본의 전체 재실행이 `verify.py --require-fresh`로 91/91·시험 예측 SHA-256·그림 22개 일치(PLAN §10 S11).
 
 ## 제출 패키지 체크리스트(재현용)
 
 1. `python make_submission.py`가 코드·테스트·기대값·산출물(시험 예측 파일 포함)·원본 CSV와 SHA-256 목록을 ZIP 하나로 만든다.
+   묶음 안의 실행 기록에서는 전체 실행 기록을 빼므로, 풀기만 한 사본은 `--require-fresh`에서 실패하고 `run_all.py`를 돌린 뒤 통과한다.
+   내부 검수 기록(reviews/)은 기본으로 빼고(`--include-reviews`로 포함), 외부 ZIP은 `--with-external`로 `data/external/`에 넣는다.
 2. 원본은 `data/okm_augumented_2021.csv`에 두거나(SHA-256 확인) `--data`로 KAMP ZIP 경로를 준다.
 3. 외부 KAMP 자료(#41·#46·#30) ZIP이 없으면 `external` 단계는 해당 항목을 건너뛰고, `verify.py`는 `external/*`를 비교하지 않는다
    (메시지로 알린다). 세 ZIP을 `--kamp-dir` 폴더에 두면 모두 비교한다.

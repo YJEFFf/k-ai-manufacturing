@@ -47,18 +47,19 @@ def _temask(iv: pd.DataFrame) -> np.ndarray:
     return CV.eval_mask(iv.index, iv["usable"].to_numpy(), C.TEST_START, C.TEST_END)
 
 
-def build_model(name: str, fam: str, feats: list[str], selection: dict | None = None):
-    """이름 → 주어진 특징 목록으로 만든 모델 생성 함수(절제용)."""
+def build_model(name: str, fam: str, feats: list[str], selection: dict | None = None, gate: bool = True):
+    """이름 → 주어진 특징 목록으로 만든 모델 생성 함수(절제용). gate=False면 계획 정지 게이트 없이."""
     base = name.split("_")[0]
+    g = (lambda m: M.gated(m, fam)) if gate else (lambda m: m)
     if base == "M1":
-        return lambda: M.gated(M.LGBModel(feats, objective="huber", alpha=10.0), fam)
+        return lambda: g(M.LGBModel(feats, objective="huber", alpha=10.0))
     if base == "M7":
-        return lambda: M.gated(M.Hybrid(feats, fam), fam)
+        return lambda: g(M.Hybrid(feats, fam))
     if base == "M7c":
-        return lambda: M.gated(M.Hybrid(feats, fam, monotone=R.COOL_MONO), fam)
+        return lambda: g(M.Hybrid(feats, fam, monotone=R.COOL_MONO))
     if base == "M8":
         mem = selection[fam]["blend_members"]
-        return lambda: M.Blend([build_model(m, fam, feats, selection)() for m in mem], [0.5, 0.5])
+        return lambda: M.Blend([build_model(m, fam, feats, selection, gate)() for m in mem], [0.5, 0.5])
     return R.factory(fam, name, selection)
 
 
@@ -167,11 +168,55 @@ def condition_skill(iv: pd.DataFrame, cond: pd.DataFrame, selection: dict) -> pd
                             continue
                         yy, pa, pb = y.to_numpy()[mm], pr[m].to_numpy()[mm], pr[best_bl].to_numpy()[mm]
                         sk, lo, hi = _skill_boot(yy, pa, pb, y.index[mm].normalize().to_numpy()) if m != best_bl else (0.0, 0.0, 0.0)
+                        nd = int(len(np.unique(y.index[mm].normalize())))
+                        gate_eq = bool((cond["regime"].to_numpy()[mm] == 0).all()) and best_bl != "BL3_profile"
                         rows.append(dict(task=task, model=m, baseline=best_bl, period=per, condition=col, value=str(val),
                                          availability=AVAILABILITY.get(col, ""), n=int(mm.sum()),
+                                         flag=("게이트로 모델≡기준" if gate_eq else ("5일 미만(사례)" if nd < 5 else "")),
                                          days=int(len(np.unique(y.index[mm].normalize()))),
                                          MAE=float(np.mean(np.abs(pa - yy))), RMSE=float(np.sqrt(np.mean((pa - yy) ** 2))),
                                          bias=float(np.mean(pa - yy)), skill_vs_baseline=sk, skill_ci90_lo=lo, skill_ci90_hi=hi))
+    return pd.DataFrame(rows)
+
+
+def inversion_days(iv: pd.DataFrame, cond: pd.DataFrame, selection: dict) -> pd.DataFrame:
+    """시험에서 선택 모델보다 좋았던 모델과의 차이를 날짜로 분해(사후 설명용).
+
+    B: 선택 모델 vs BL3 프로파일·LightGBM, A4: 선택 모델 vs 앙상블·LightGBM. 날짜별 제곱오차 차이(선택 − 비교)와 점유율,
+    조건 표시, 차이가 큰 4일을 뺀 RMSE."""
+    y = iv["y"]
+    temask = _temask(iv)
+    cday = cond.groupby(cond.index.normalize()).first()
+    rows = []
+    for task, fam, others in (("B", "B", ("BL3_profile", "M1_lgbm")), ("A4", "A", ("M8_blend", "M1_lgbm"))):
+        pt = SM.load_predictions("test", task).reindex(y.index)
+        ch = selection[fam]["chosen"]
+        for other in others:
+            if other == ch or other not in pt:
+                continue
+            m = pd.Series(temask, index=y.index) & pt[ch].notna() & pt[other].notna()
+            ea = ((pt[ch] - y) ** 2).where(m)
+            eb = ((pt[other] - y) ** 2).where(m)
+            d = pd.DataFrame({"sse_chosen": ea.groupby(y.index.normalize()).sum(),
+                              "sse_other": eb.groupby(y.index.normalize()).sum(),
+                              "n": m.groupby(y.index.normalize()).sum()})
+            d = d[d["n"] > 0]
+            d["diff"] = d["sse_chosen"] - d["sse_other"]
+            tot = d["diff"].sum()
+            top = d["diff"].sort_values(ascending=False).head(4).index
+            rest = d.drop(index=top)
+            rm_ch = float(np.sqrt(rest["sse_chosen"].sum() / rest["n"].sum()))
+            rm_ot = float(np.sqrt(rest["sse_other"].sum() / rest["n"].sum()))
+            for dt in d["diff"].sort_values(ascending=False).head(8).index:
+                cr = cday.loc[dt]
+                rows.append(dict(task=task, chosen=ch, other=other, date=dt, diff_SSE=float(d.at[dt, "diff"]),
+                                 share_of_total_diff=float(d.at[dt, "diff"] / tot) if tot else np.nan,
+                                 in_top4=dt in top, daytype4=cr["daytype4"], regime=cr["regime"], regime_prev=cr["regime_prev"],
+                                 holiday_work=cr["holiday_work"], calendar_operation_mismatch=cr["calendar_operation_mismatch"],
+                                 analog_atypical=cr["analog_atypical"],
+                                 rmse_chosen_excl_top4=rm_ch, rmse_other_excl_top4=rm_ot,
+                                 rmse_chosen_all=float(np.sqrt(d["sse_chosen"].sum() / d["n"].sum())),
+                                 rmse_other_all=float(np.sqrt(d["sse_other"].sum() / d["n"].sum()))))
     return pd.DataFrame(rows)
 
 
@@ -186,7 +231,7 @@ def encode_conditions(cond: pd.DataFrame) -> pd.DataFrame:
         if w != "steady":
             X[f"win_{w}"] = (cond["window"] == w).astype(float)
     X["temp_level"] = cond["temp_bin"].map({"<20": 0, "20-26": 1, "26-30": 2, "30+": 3}).astype(float)
-    return X.fillna(-1)
+    return X  # 결측(자료 첫날의 전날 체제 등)은 규칙 적합에서 뺀다(코드값 −1로 채우지 않음)
 
 
 def _leaves(tree: DecisionTreeRegressor, names: list[str]) -> list[tuple[str, list]]:
@@ -240,9 +285,11 @@ def error_rules(iv: pd.DataFrame, cond: pd.DataFrame, selection: dict) -> tuple[
         pt = SM.load_predictions("test", task).reindex(y.index)
         for target in ("loss_vs_baseline", "abs_err_workday"):
             def tgt(p, mask):
-                m = mask & p[chosen].notna().to_numpy() & p[best_bl].notna().to_numpy()
+                m = mask & p[chosen].notna().to_numpy() & p[best_bl].notna().to_numpy() & X.notna().all(axis=1).to_numpy()
                 if target == "abs_err_workday":
                     m &= work
+                else:
+                    m &= cond["regime"].to_numpy() != 0  # 계획 정지일은 게이트로 모델 ≡ 기준(손실 0)이라 뺀다
                 e = np.abs(p[chosen].to_numpy() - y.to_numpy())
                 v = e - np.abs(p[best_bl].to_numpy() - y.to_numpy()) if target == "loss_vs_baseline" else e
                 return m, v
@@ -264,11 +311,11 @@ def error_rules(iv: pd.DataFrame, cond: pd.DataFrame, selection: dict) -> tuple[
                 # 가동 주간 오차: 교차검증 잎이 전체보다 크면(작으면) 시험 잎의 90% 구간이 시험 전체 평균보다 위(아래)
                 rep = np.nan
                 if lt.sum() >= 40 and np.isfinite(b[0]):
-                    if target == "loss_vs_baseline":
-                        rep = float(np.sign(a[0]) == np.sign(b[0]) and (b[1] > 0 or b[2] < 0))
-                    else:
+                    if target == "loss_vs_baseline":  # 교차검증·시험 모두 구간이 0을 배제하고 부호가 같음
+                        rep = float(np.sign(a[0]) == np.sign(b[0]) and (a[1] > 0 or a[2] < 0) and (b[1] > 0 or b[2] < 0))
+                    else:  # 교차검증·시험 모두 잎 구간이 각 기간 전체 평균을 같은 쪽으로 배제
                         up = a[0] > oc[0]
-                        rep = float((b[1] > ot[0]) if up else (b[2] < ot[0]))
+                        rep = float(((a[1] > oc[0]) and (b[1] > ot[0])) if up else ((a[2] < oc[0]) and (b[2] < ot[0])))
                 rows.append(dict(task=task, model=chosen, baseline=best_bl, target=target, rule=text, n_cv=int(lc.sum()),
                                  mean_cv=a[0], ci_cv_lo=a[1], ci_cv_hi=a[2], n_test=int(lt.sum()), mean_test=b[0],
                                  ci_test_lo=b[1], ci_test_hi=b[2], reproduced=rep))
@@ -670,6 +717,7 @@ def run(iv: pd.DataFrame, frames: dict, selection: dict, df: pd.DataFrame | None
                                  holiday_work=cr["holiday_work"], calendar_operation_mismatch=cr["calendar_operation_mismatch"],
                                  analog_atypical=cr["analog_atypical"]))
     io.write_csv(pd.DataFrame(day_rows), od / "test_top_error_days.csv")
+    io.write_csv(inversion_days(iv, cond, selection), od / "test_inversion_days.csv")
 
     # 2) 조건 × 모델 기술점수(교차검증·시험, 90% 구간)
     io.write_csv(condition_skill(iv, cond, selection), od / "condition_skill.csv")
@@ -732,26 +780,37 @@ def info_value(iv: pd.DataFrame, selection: dict, log=print) -> pd.DataFrame:
             "L1b_plus_day_plan_detail": (F.feature_list(fam, day_plan=True), None),
             "L2_plus_hourly_onoff": (F.feature_list(fam, hourly_onoff=True), None),
             "L3_plus_hourly_quantity_oracle": (F.feature_list(fam, oracle=True), None),
-            "L1a_regime_error05": (F.feature_list(fam), 0.05),
-            "L1a_regime_error10": (F.feature_list(fam), 0.10),
-            "L1a_regime_error20": (F.feature_list(fam), 0.20),
         }
+        for err in (0.05, 0.10, 0.20):
+            for sd in range(3):
+                levels[f"L1a_regime_error{int(err * 100):02d}_seed{sd}"] = (F.feature_list(fam), (err, C.SEED + sd))
         for lvl, (feats, err) in levels.items():
-            Xv = fr_or[task] if err is None else CV.build_frames(iv, regime_noise=(err, C.SEED), tasks=(task,))[task]
+            Xv = fr_or[task] if err is None else CV.build_frames(iv, regime_noise=err, tasks=(task,))[task]
             for mname in ("M1_lgbm", "M7c_hybrid_coolmono"):
                 if lvl == "L0_calendar_only" and mname.startswith("M7"):
                     continue  # 하이브리드 기준(유사일)은 일정 정보를 쓰므로 L0에 없음
-                if task == "A4" and mname == "M1_lgbm" and lvl in ("L2_plus_hourly_onoff", "L1a_regime_error05",
-                                                                     "L1a_regime_error10", "L1a_regime_error20"):
-                    continue  # 실행 시간 절약: A4 LightGBM은 L0·L1a·L1b·L3만
-                fac = build_model(mname, fam, feats, selection)
+                if err is not None and not ((task == "B" and mname == "M1_lgbm") or (task == "A4" and mname.startswith("M7c"))):
+                    continue  # 체제 오류 반복은 B LightGBM·A4 하이브리드만(실행 시간)
+                if task == "A4" and mname == "M1_lgbm" and lvl == "L2_plus_hourly_onoff":
+                    continue
+                # L0(달력만)은 게이트 없이: 게이트가 체제로 정지일을 가려 달력만 수준에 체제 정보를 넣지 않게 한다
+                fac = build_model(mname, fam, feats, selection, gate=lvl != "L0_calendar_only")
                 t0 = time.time()
                 pc = CV.run_cv(Xv, iv, fac, fam)
                 pt = CV.run_test(Xv, iv, fac, fam)
                 rc = MT.regression(y[cvmask], pc[cvmask])
                 rt = MT.regression(y[temask], pt[temask])
+                flips = ""
+                if err is not None:
+                    st0 = F.schedule_table(iv)
+                    st1 = F.perturb_regime(st0, *err)
+                    ch = (st0["regime"] != st1["regime"]) & st0["regime"].notna()
+                    te_days = ch[(ch.index >= C.TEST_START) & (ch.index < C.TEST_END)]
+                    flips = "; ".join(f"{int(a)}→{int(b)}:{n}" for (a, b), n in
+                                      pd.DataFrame({"a": st0["regime"][te_days[te_days].index],
+                                                    "b": st1["regime"][te_days[te_days].index]}).value_counts().items())
                 rows.append(dict(task=task, level=lvl, model=mname, cv_RMSE=rc["RMSE"], cv_MAE=rc["MAE"],
-                                 test_RMSE=rt["RMSE"], test_MAE=rt["MAE"]))
+                                 test_RMSE=rt["RMSE"], test_MAE=rt["MAE"], test_regime_flips=flips))
                 log(f"  info {task} {lvl} {mname} {time.time() - t0:.0f}s")
     return pd.DataFrame(rows)
 
@@ -852,6 +911,12 @@ def ablations(iv: pd.DataFrame, df: pd.DataFrame, diag, selection: dict, log=pri
         for mname in models[task]:
             fac = build_model(mname, fam, feats, selection)
             rec("daytype3_no_prev_regime", task, mname, CV.run_cv(fr3[task], iv, fac, fam), CV.run_test(fr3[task], iv, fac, fam))
+    # 계획 정지 게이트 제외(게이트 공개용: 선택 모델·LightGBM의 게이트 전후, 가동 주간은 게이트와 무관)
+    for task, fam in (("B", "B"), ("A4", "A")):
+        for mname in [m for m in models[task] if not (m.startswith("BL") or m.startswith("M6"))]:
+            fac = build_model(mname, fam, F.feature_list(fam), selection, gate=False)
+            pt = rec("no_plan_stop_gate", task, mname, CV.run_cv(frames[task], iv, fac, fam),
+                     CV.run_test(frames[task], iv, fac, fam), posthoc=True)
     # 유사일 키에 전날 체제 추가(시험 오류 분석에서 나온 사후 민감도, 헤드라인 불변)
     frp = CV.build_frames(iv, analog_key=("daytype4", "regime_prev"), tasks=("B", "A4"))
     for task, fam in (("B", "B"), ("A4", "A")):

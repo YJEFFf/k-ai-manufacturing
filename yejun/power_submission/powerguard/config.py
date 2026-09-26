@@ -15,7 +15,8 @@ EXPECTED_DIR = PKG_ROOT / "expected"
 CSV_NAME = "okm_augumented_2021.csv"
 ZIP_MEMBER = "data/okm_augumented_2021.csv"
 DEFAULT_ZIP = REPO_ROOT / "데이터셋" / "Dataset_자원 최적화 AI 데이터셋.zip"
-KAMP_DIR = REPO_ROOT / "데이터셋"  # 외부 KAMP 자료 ZIP 폴더(run_all.py --kamp-dir로 바꿀 수 있다)
+# 외부 KAMP 자료 ZIP 폴더: 패키지 안 data/external(제출 ZIP) → 저장소 데이터셋/. run_all.py --kamp-dir로 바꿀 수 있다
+KAMP_DIR = DATA_DIR / "external" if (DATA_DIR / "external").exists() else REPO_ROOT / "데이터셋"
 DATA_PATH = None  # run_all.py --data로 준 원본 경로(외부 자료 판정도 같은 원본을 쓴다)
 CSV_SHA256 = "8f7af2e49366c93e1d6f5fdef4b5e350066c1792ac463c2c2886e370f4674830"
 
@@ -54,6 +55,9 @@ NIGHT_POWER_ON = 60
 NIGHT_PROD_ON = 100
 DAY_POWER_ON = 100
 DAY_PROD_ON = 1000
+# 저녁(20~23시) 가동: 전력이 야간조 수준인지 ↔ 저녁 생산 기록이 조금이라도 있는지(생산은 묶음으로 기록돼 문턱 0, v2.1)
+EVENING_POWER_ON = 60
+EVENING_PROD_ON = 0
 
 # 부분 복제 판정: 앞선 다른 패턴 날짜와 연속 동일 구간 수가 이 값 이상
 PARTIAL_COPY_RUN = 16

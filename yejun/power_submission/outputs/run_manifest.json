@@ -1,6 +1,6 @@
 {
  "data": {
-  "source": "Dataset_자원 최적화 AI 데이터셋.zip",
+  "source": "okm_augumented_2021.csv",
   "sha256": "8f7af2e49366c93e1d6f5fdef4b5e350066c1792ac463c2c2886e370f4674830",
   "rows": 6168,
   "cols": 18
@@ -8,39 +8,57 @@
  "seed": 20260925,
  "stages_last_run": {
   "diagnostics": {
-   "finished_at": "2026-09-26T17:56:03",
-   "seconds": 0.3
+   "started_epoch": 1790415139.264759,
+   "finished_epoch": 1790415140.061169,
+   "finished_at": "2026-09-26T19:39:24",
+   "seconds": 0.8
   },
   "models": {
-   "finished_at": "2026-09-26T17:56:03",
-   "seconds": 682.6
+   "started_epoch": 1790415140.061184,
+   "finished_epoch": 1790415657.849614,
+   "finished_at": "2026-09-26T19:39:24",
+   "seconds": 517.8
   },
   "peak": {
-   "finished_at": "2026-09-26T17:56:03",
-   "seconds": 37.8
+   "started_epoch": 1790415657.849647,
+   "finished_epoch": 1790415690.121402,
+   "finished_at": "2026-09-26T19:39:24",
+   "seconds": 32.3
   },
   "analysis": {
-   "finished_at": "2026-09-26T17:56:03",
-   "seconds": 110.0
+   "started_epoch": 1790415690.121423,
+   "finished_epoch": 1790415790.333244,
+   "finished_at": "2026-09-26T19:39:24",
+   "seconds": 100.2
   },
   "ablation": {
-   "finished_at": "2026-09-26T17:56:03",
-   "seconds": 2696.4
+   "started_epoch": 1790415790.333264,
+   "finished_epoch": 1790419106.160384,
+   "finished_at": "2026-09-26T19:39:24",
+   "seconds": 3315.8
   },
   "field": {
-   "finished_at": "2026-09-26T17:56:03",
-   "seconds": 6.4
+   "started_epoch": 1790419106.160401,
+   "finished_epoch": 1790419114.613078,
+   "finished_at": "2026-09-26T19:39:24",
+   "seconds": 8.5
   },
   "external": {
-   "finished_at": "2026-09-26T17:56:03",
-   "seconds": 53.2
+   "started_epoch": 1790419114.613102,
+   "finished_epoch": 1790419161.944952,
+   "finished_at": "2026-09-26T19:39:24",
+   "seconds": 47.3
   },
   "figures": {
-   "finished_at": "2026-09-26T17:56:03",
-   "seconds": 3.1
+   "started_epoch": 1790419161.944974,
+   "finished_epoch": 1790419164.907046,
+   "finished_at": "2026-09-26T19:39:24",
+   "seconds": 3.0
   },
   "digest": {
-   "finished_at": "2026-09-26T17:56:03",
+   "started_epoch": 1790419164.90707,
+   "finished_epoch": 1790419164.961527,
+   "finished_at": "2026-09-26T19:39:24",
    "seconds": 0.1
   }
  },
@@ -56,35 +74,61 @@
    "figures",
    "digest"
   ],
+  "argv": [],
   "timings_s": {
-   "diagnostics": 0.3,
-   "models": 682.6,
-   "peak": 37.8,
-   "analysis": 110.0,
-   "ablation": 2696.4,
-   "field": 6.4,
-   "external": 53.2,
-   "figures": 3.1,
+   "diagnostics": 0.8,
+   "models": 517.8,
+   "peak": 32.3,
+   "analysis": 100.2,
+   "ablation": 3315.8,
+   "field": 8.5,
+   "external": 47.3,
+   "figures": 3.0,
    "digest": 0.1
   },
-  "total_s": 3591.6,
-  "finished_at": "2026-09-26T17:56:03",
-  "full_run": true
+  "total_s": 4027.0,
+  "started_at": "2026-09-26T18:32:17",
+  "finished_at": "2026-09-26T19:39:24",
+  "started_epoch": 1790415137.958642,
+  "finished_epoch": 1790419164.962651,
+  "full_run": true,
+  "code_sha256": "94a0d568cc9ab1d6ffc15c644e0fdc52760bf4b8677bad7fbf8ffa214aa19a32"
  },
  "last_full_run": {
-  "finished_at": "2026-09-26T17:56:03",
-  "total_s": 3591.6,
+  "stages": [
+   "diagnostics",
+   "models",
+   "peak",
+   "analysis",
+   "ablation",
+   "field",
+   "external",
+   "figures",
+   "digest"
+  ],
+  "argv": [],
   "timings_s": {
-   "diagnostics": 0.3,
-   "models": 682.6,
-   "peak": 37.8,
-   "analysis": 110.0,
-   "ablation": 2696.4,
-   "field": 6.4,
-   "external": 53.2,
-   "figures": 3.1,
+   "diagnostics": 0.8,
+   "models": 517.8,
+   "peak": 32.3,
+   "analysis": 100.2,
+   "ablation": 3315.8,
+   "field": 8.5,
+   "external": 47.3,
+   "figures": 3.0,
    "digest": 0.1
-  }
+  },
+  "total_s": 4027.0,
+  "started_at": "2026-09-26T18:32:17",
+  "finished_at": "2026-09-26T19:39:24",
+  "started_epoch": 1790415137.958642,
+  "finished_epoch": 1790419164.962651,
+  "full_run": true,
+  "code_sha256": "94a0d568cc9ab1d6ffc15c644e0fdc52760bf4b8677bad7fbf8ffa214aa19a32"
+ },
+ "environment": {
+  "cpu_count": 8,
+  "git_commit": "2f3190bf35ffd8e736d89aeabdcbd216b12f1e07"
  },
  "versions": {
   "python": "3.12.2",
