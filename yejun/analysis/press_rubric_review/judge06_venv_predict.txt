@@ -1,0 +1,1 @@
+600행 처리, 점검 대기 21구간 → /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_judge06_env_ykcxr_rj/predict_cli.csv

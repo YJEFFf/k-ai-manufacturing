@@ -1,0 +1,260 @@
+{
+  "fresh_prediction_recount": [
+    {
+      "split": "A",
+      "alpha": 0.01,
+      "tp": 556,
+      "fp": 0,
+      "fn": 44,
+      "tn": 4090,
+      "normal_notified_segments": 0,
+      "abnormal_notified_segments": 21
+    },
+    {
+      "split": "A",
+      "alpha": 0.03,
+      "tp": 569,
+      "fp": 1,
+      "fn": 31,
+      "tn": 4089,
+      "normal_notified_segments": 1,
+      "abnormal_notified_segments": 21
+    },
+    {
+      "split": "A",
+      "alpha": 0.05,
+      "tp": 569,
+      "fp": 1,
+      "fn": 31,
+      "tn": 4089,
+      "normal_notified_segments": 1,
+      "abnormal_notified_segments": 21
+    },
+    {
+      "split": "B",
+      "alpha": 0.01,
+      "tp": 569,
+      "fp": 3,
+      "fn": 31,
+      "tn": 6094,
+      "normal_notified_segments": 3,
+      "abnormal_notified_segments": 21
+    },
+    {
+      "split": "B",
+      "alpha": 0.03,
+      "tp": 569,
+      "fp": 7,
+      "fn": 31,
+      "tn": 6090,
+      "normal_notified_segments": 5,
+      "abnormal_notified_segments": 21
+    },
+    {
+      "split": "B",
+      "alpha": 0.05,
+      "tp": 569,
+      "fp": 11,
+      "fn": 31,
+      "tn": 6086,
+      "normal_notified_segments": 7,
+      "abnormal_notified_segments": 21
+    }
+  ],
+  "input_hashes": {
+    "normal": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+    "abnormal": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e"
+  },
+  "E1_reaggregate": {
+    "raw_trials": 249606,
+    "summary_groups": 744,
+    "max_abs_difference": 4.440892098500626e-16,
+    "pre_alarm_trials": 0
+  },
+  "E1_fresh_injection_checks": [
+    {
+      "split": "A",
+      "family": "cur_noise",
+      "level": 0.1,
+      "t0": 10,
+      "records": 75,
+      "match": true
+    },
+    {
+      "split": "A",
+      "family": "cur_offset",
+      "level": 0.8,
+      "t0": 0,
+      "records": 92,
+      "match": true
+    },
+    {
+      "split": "A",
+      "family": "cur_offset",
+      "level": 0.8,
+      "t0": 10,
+      "records": 75,
+      "match": true
+    },
+    {
+      "split": "B",
+      "family": "cur_noise",
+      "level": 0.1,
+      "t0": 10,
+      "records": 111,
+      "match": true
+    },
+    {
+      "split": "B",
+      "family": "cur_offset",
+      "level": 0.8,
+      "t0": 0,
+      "records": 139,
+      "match": true
+    },
+    {
+      "split": "B",
+      "family": "cur_offset",
+      "level": 0.8,
+      "t0": 10,
+      "records": 111,
+      "match": true
+    }
+  ],
+  "E1_seed_ranges": [
+    {
+      "split": "A",
+      "family": "cur_noise",
+      "level": 0.1,
+      "records": 75,
+      "trials": 375,
+      "detections": 358,
+      "min_seed_rate": 0.9066666666666666,
+      "max_seed_rate": 0.9866666666666667
+    },
+    {
+      "split": "A",
+      "family": "vib_noise",
+      "level": 2.0,
+      "records": 75,
+      "trials": 375,
+      "detections": 279,
+      "min_seed_rate": 0.68,
+      "max_seed_rate": 0.8
+    },
+    {
+      "split": "B",
+      "family": "cur_noise",
+      "level": 0.1,
+      "records": 111,
+      "trials": 555,
+      "detections": 541,
+      "min_seed_rate": 0.954954954954955,
+      "max_seed_rate": 0.990990990990991
+    },
+    {
+      "split": "B",
+      "family": "vib_noise",
+      "level": 2.0,
+      "records": 111,
+      "trials": 555,
+      "detections": 521,
+      "min_seed_rate": 0.9009009009009009,
+      "max_seed_rate": 0.954954954954955
+    }
+  ],
+  "E1_same_records_offset_onset": [
+    {
+      "split": "A",
+      "t0": 0,
+      "records": 75,
+      "detect_rate_2s": 0.04
+    },
+    {
+      "split": "A",
+      "t0": 10,
+      "records": 75,
+      "detect_rate_2s": 1.0
+    },
+    {
+      "split": "B",
+      "t0": 0,
+      "records": 111,
+      "detect_rate_2s": 0.2882882882882883
+    },
+    {
+      "split": "B",
+      "t0": 10,
+      "records": 111,
+      "detect_rate_2s": 1.0
+    }
+  ],
+  "E1_ar_white_noise_equivalent": {
+    "n": 20,
+    "total_abnormal_segments": 21,
+    "min": 0.17999550953649593,
+    "median": 0.5053320677431679,
+    "max": 0.7638162518906552,
+    "note": "White-noise-equivalent AR residual magnitude, not actual fault severity"
+  },
+  "E3_offset_under_100pct": [
+    {
+      "alpha": 0.01,
+      "n_train": 15,
+      "n_cal": 120,
+      "start": 60,
+      "inject_cur_offset": 0.9733333333333334
+    },
+    {
+      "alpha": 0.01,
+      "n_train": 15,
+      "n_cal": 180,
+      "start": 60,
+      "inject_cur_offset": 0.9733333333333334
+    },
+    {
+      "alpha": 0.01,
+      "n_train": 30,
+      "n_cal": 99,
+      "start": 240,
+      "inject_cur_offset": 0.96
+    },
+    {
+      "alpha": 0.01,
+      "n_train": 30,
+      "n_cal": 120,
+      "start": 240,
+      "inject_cur_offset": 0.96
+    },
+    {
+      "alpha": 0.01,
+      "n_train": 30,
+      "n_cal": 180,
+      "start": 240,
+      "inject_cur_offset": 0.96
+    },
+    {
+      "alpha": 0.01,
+      "n_train": 60,
+      "n_cal": 120,
+      "start": 0,
+      "inject_cur_offset": 0.9866666666666668
+    },
+    {
+      "alpha": 0.01,
+      "n_train": 60,
+      "n_cal": 180,
+      "start": 0,
+      "inject_cur_offset": 0.9866666666666668
+    },
+    {
+      "alpha": 0.05,
+      "n_train": 30,
+      "n_cal": 19,
+      "start": 240,
+      "inject_cur_offset": 0.96
+    }
+  ],
+  "E3_offset_min": 0.96,
+  "E3_noise_min": 1.0
+}

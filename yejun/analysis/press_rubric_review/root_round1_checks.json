@@ -1,0 +1,86 @@
+{
+ "M1_E3_prereg": {
+  "settings": 36,
+  "stable_true": 0,
+  "readme_says_not_applicable": true
+ },
+ "P2_E3_current_100pct": {
+  "fits": 184,
+  "cur_noise_min": 1.0,
+  "cur_offset_min": 0.96,
+  "cur_offset_below_1": 8,
+  "small_15_99_cur_min": 1.0,
+  "readme_sentence_present": true
+ },
+ "M2_fig_none_baseline": {
+  "by_split": {
+   "A": {
+    "records": 75,
+    "rate": 0.0
+   },
+   "B": {
+    "records": 111,
+    "rate": 0.009009009009009
+   }
+  },
+  "figure_uses_min": 0.0
+ },
+ "M3_five_times": {
+  "valid_resid_segments": 20,
+  "abnormal_segments": 21,
+  "equiv_s_median": 0.5047143546946378,
+  "equiv_s_min": 0.17825447901059163,
+  "equiv_s_max": 0.7634078503101215,
+  "ratio_to_floor_0p1": 5.047143546946377,
+  "offset_abs_median_over_A": 0.530710759002218,
+  "offset_ratio_to_floor_0p4": 1.326776897505545
+ },
+ "P2_AMP_definition": {
+  "amp_reliable_length_only": true
+ },
+ "R6_manifests": {
+  "e1": {
+   "keys": [
+    "artifacts",
+    "code_sha256",
+    "elapsed_s",
+    "environment",
+    "experiment",
+    "input_hashes"
+   ],
+   "has_output_hashes": false,
+   "has_artifact_hashes": true,
+   "blas": null
+  },
+  "e2": {
+   "keys": [
+    "code_sha256",
+    "contest_sanity",
+    "cycles_stable",
+    "elapsed_s",
+    "environment",
+    "experiment",
+    "uci_sha256"
+   ],
+   "has_output_hashes": false,
+   "has_artifact_hashes": false,
+   "blas": null
+  },
+  "e3": {
+   "keys": [
+    "code_sha256",
+    "configs",
+    "elapsed_s",
+    "environment",
+    "experiment",
+    "input_hashes"
+   ],
+   "has_output_hashes": false,
+   "has_artifact_hashes": false,
+   "blas": null
+  }
+ },
+ "R6_2_cache_key": {
+  "cache_checks_only_zip_sha": true
+ }
+}

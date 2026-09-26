@@ -1,0 +1,724 @@
+{
+ "one_row_current_only": [
+  {
+   "reason": "magnitude",
+   "action": "진동·부하 확인",
+   "magnitude_sensor": "AI2_Current",
+   "alarm": 1
+  }
+ ],
+ "observed_alpha01": {
+  "A_normal_test": {
+   "magnitude_alarm_rows_by_sensor": {},
+   "cases": 0,
+   "action_counts": {},
+   "vib_word_but_current_only": 0
+  },
+  "A_abnormal": {
+   "magnitude_alarm_rows_by_sensor": {
+    "AI0_Vibration": 164,
+    "AI1_Vibration": 9
+   },
+   "cases": 21,
+   "action_counts": {
+    "진동·전류 함께 점검": 17,
+    "전류 파형·계측 확인": 3,
+    "진동·부하 확인": 1
+   },
+   "vib_word_but_current_only": 0
+  },
+  "B_normal_test": {
+   "magnitude_alarm_rows_by_sensor": {
+    "AI0_Vibration": 3
+   },
+   "cases": 3,
+   "action_counts": {
+    "진동·부하 확인": 3
+   },
+   "vib_word_but_current_only": 0
+  },
+  "B_abnormal": {
+   "magnitude_alarm_rows_by_sensor": {
+    "AI0_Vibration": 180,
+    "AI1_Vibration": 16
+   },
+   "cases": 21,
+   "action_counts": {
+    "진동·전류 함께 점검": 17,
+    "전류 파형·계측 확인": 3,
+    "진동·부하 확인": 1
+   },
+   "vib_word_but_current_only": 0
+  }
+ },
+ "injection_alpha01_rep0": [
+  {
+   "split": "A",
+   "family": "cur_offset",
+   "level": 0.4,
+   "t0": 10,
+   "eligible_records": 75,
+   "cases": 75,
+   "magnitude_alarm_rows_by_sensor": {},
+   "action_counts": {
+    "전류 파형·계측 확인": 75
+   },
+   "vib_word_but_current_only_cases": 0,
+   "magnitude_only_evidence_cases": 0
+  },
+  {
+   "split": "A",
+   "family": "cur_offset",
+   "level": 0.8,
+   "t0": 10,
+   "eligible_records": 75,
+   "cases": 75,
+   "magnitude_alarm_rows_by_sensor": {},
+   "action_counts": {
+    "전류 파형·계측 확인": 75
+   },
+   "vib_word_but_current_only_cases": 0,
+   "magnitude_only_evidence_cases": 0
+  },
+  {
+   "split": "A",
+   "family": "cur_offset",
+   "level": 0.8,
+   "t0": 0,
+   "eligible_records": 92,
+   "cases": 5,
+   "magnitude_alarm_rows_by_sensor": {},
+   "action_counts": {
+    "전류 파형·계측 확인": 5
+   },
+   "vib_word_but_current_only_cases": 0,
+   "magnitude_only_evidence_cases": 0
+  },
+  {
+   "split": "A",
+   "family": "cur_gain",
+   "level": 1.3,
+   "t0": 10,
+   "eligible_records": 75,
+   "cases": 17,
+   "magnitude_alarm_rows_by_sensor": {},
+   "action_counts": {
+    "전류 파형·계측 확인": 17
+   },
+   "vib_word_but_current_only_cases": 0,
+   "magnitude_only_evidence_cases": 0
+  },
+  {
+   "split": "A",
+   "family": "cur_gain",
+   "level": 1.5,
+   "t0": 10,
+   "eligible_records": 75,
+   "cases": 54,
+   "magnitude_alarm_rows_by_sensor": {},
+   "action_counts": {
+    "전류 파형·계측 확인": 54
+   },
+   "vib_word_but_current_only_cases": 0,
+   "magnitude_only_evidence_cases": 0
+  },
+  {
+   "split": "A",
+   "family": "cur_gain",
+   "level": 1.5,
+   "t0": 0,
+   "eligible_records": 92,
+   "cases": 0,
+   "magnitude_alarm_rows_by_sensor": {},
+   "action_counts": {},
+   "vib_word_but_current_only_cases": 0,
+   "magnitude_only_evidence_cases": 0
+  },
+  {
+   "split": "A",
+   "family": "cur_noise",
+   "level": 0.2,
+   "t0": 10,
+   "eligible_records": 75,
+   "cases": 75,
+   "magnitude_alarm_rows_by_sensor": {},
+   "action_counts": {
+    "전류 파형·계측 확인": 75
+   },
+   "vib_word_but_current_only_cases": 0,
+   "magnitude_only_evidence_cases": 0
+  },
+  {
+   "split": "A",
+   "family": "vib_noise",
+   "level": 4,
+   "t0": 10,
+   "eligible_records": 75,
+   "cases": 75,
+   "magnitude_alarm_rows_by_sensor": {
+    "AI0_Vibration": 642,
+    "AI1_Vibration": 613
+   },
+   "action_counts": {
+    "진동·부하 확인": 75
+   },
+   "vib_word_but_current_only_cases": 0,
+   "magnitude_only_evidence_cases": 75
+  },
+  {
+   "split": "B",
+   "family": "cur_offset",
+   "level": 0.4,
+   "t0": 10,
+   "eligible_records": 111,
+   "cases": 111,
+   "magnitude_alarm_rows_by_sensor": {
+    "AI0_Vibration": 3
+   },
+   "action_counts": {
+    "전류 파형·계측 확인": 108,
+    "진동·전류 함께 점검": 3
+   },
+   "vib_word_but_current_only_cases": 0,
+   "magnitude_only_evidence_cases": 0
+  },
+  {
+   "split": "B",
+   "family": "cur_offset",
+   "level": 0.8,
+   "t0": 10,
+   "eligible_records": 111,
+   "cases": 111,
+   "magnitude_alarm_rows_by_sensor": {
+    "AI0_Vibration": 3
+   },
+   "action_counts": {
+    "전류 파형·계측 확인": 108,
+    "진동·전류 함께 점검": 3
+   },
+   "vib_word_but_current_only_cases": 0,
+   "magnitude_only_evidence_cases": 0
+  },
+  {
+   "split": "B",
+   "family": "cur_offset",
+   "level": 0.8,
+   "t0": 0,
+   "eligible_records": 139,
+   "cases": 47,
+   "magnitude_alarm_rows_by_sensor": {
+    "AI0_Vibration": 3
+   },
+   "action_counts": {
+    "전류 파형·계측 확인": 44,
+    "진동·부하 확인": 3
+   },
+   "vib_word_but_current_only_cases": 0,
+   "magnitude_only_evidence_cases": 3
+  },
+  {
+   "split": "B",
+   "family": "cur_gain",
+   "level": 1.3,
+   "t0": 10,
+   "eligible_records": 111,
+   "cases": 56,
+   "magnitude_alarm_rows_by_sensor": {
+    "AI0_Vibration": 3
+   },
+   "action_counts": {
+    "전류 파형·계측 확인": 53,
+    "진동·전류 함께 점검": 3
+   },
+   "vib_word_but_current_only_cases": 0,
+   "magnitude_only_evidence_cases": 0
+  },
+  {
+   "split": "B",
+   "family": "cur_gain",
+   "level": 1.5,
+   "t0": 10,
+   "eligible_records": 111,
+   "cases": 93,
+   "magnitude_alarm_rows_by_sensor": {
+    "AI0_Vibration": 3
+   },
+   "action_counts": {
+    "전류 파형·계측 확인": 90,
+    "진동·전류 함께 점검": 3
+   },
+   "vib_word_but_current_only_cases": 0,
+   "magnitude_only_evidence_cases": 0
+  },
+  {
+   "split": "B",
+   "family": "cur_gain",
+   "level": 1.5,
+   "t0": 0,
+   "eligible_records": 139,
+   "cases": 16,
+   "magnitude_alarm_rows_by_sensor": {
+    "AI0_Vibration": 3
+   },
+   "action_counts": {
+    "전류 파형·계측 확인": 13,
+    "진동·부하 확인": 3
+   },
+   "vib_word_but_current_only_cases": 0,
+   "magnitude_only_evidence_cases": 3
+  },
+  {
+   "split": "B",
+   "family": "cur_noise",
+   "level": 0.2,
+   "t0": 10,
+   "eligible_records": 111,
+   "cases": 111,
+   "magnitude_alarm_rows_by_sensor": {
+    "AI0_Vibration": 3
+   },
+   "action_counts": {
+    "전류 파형·계측 확인": 108,
+    "진동·전류 함께 점검": 3
+   },
+   "vib_word_but_current_only_cases": 0,
+   "magnitude_only_evidence_cases": 0
+  },
+  {
+   "split": "B",
+   "family": "vib_noise",
+   "level": 4,
+   "t0": 10,
+   "eligible_records": 111,
+   "cases": 111,
+   "magnitude_alarm_rows_by_sensor": {
+    "AI1_Vibration": 1166,
+    "AI0_Vibration": 1146
+   },
+   "action_counts": {
+    "진동·부하 확인": 111
+   },
+   "vib_word_but_current_only_cases": 0,
+   "magnitude_only_evidence_cases": 111
+  }
+ ],
+ "queue_priority": {
+  "A_a1": {
+   "n_cal": 120,
+   "p_floor": 0.008264462809917356,
+   "cases": 21,
+   "normal_cases": 0,
+   "queue_in_record_order": true,
+   "distinct_min_p": [
+    0.008264
+   ],
+   "min_p_at_floor_share": 1.0,
+   "normal_case_peak_scores": [],
+   "abnormal_case_peak_min": 12.276,
+   "normal_case_ranks_by_peak_posthoc": [],
+   "normal_case_evidence": [],
+   "normal_case_alarm_frac": []
+  },
+  "A_a3": {
+   "n_cal": 120,
+   "p_floor": 0.008264462809917356,
+   "cases": 22,
+   "normal_cases": 1,
+   "queue_in_record_order": true,
+   "distinct_min_p": [
+    0.008264,
+    0.024793
+   ],
+   "min_p_at_floor_share": 0.9545454545454546,
+   "normal_case_peak_scores": [
+    3.822
+   ],
+   "abnormal_case_peak_min": 12.276,
+   "normal_case_ranks_by_peak_posthoc": [
+    22
+   ],
+   "normal_case_evidence": [
+    "magnitude"
+   ],
+   "normal_case_alarm_frac": [
+    0.023
+   ]
+  },
+  "A_a5": {
+   "n_cal": 120,
+   "p_floor": 0.008264462809917356,
+   "cases": 22,
+   "normal_cases": 1,
+   "queue_in_record_order": true,
+   "distinct_min_p": [
+    0.008264,
+    0.024793
+   ],
+   "min_p_at_floor_share": 0.9545454545454546,
+   "normal_case_peak_scores": [
+    3.822
+   ],
+   "abnormal_case_peak_min": 12.276,
+   "normal_case_ranks_by_peak_posthoc": [
+    22
+   ],
+   "normal_case_evidence": [
+    "magnitude"
+   ],
+   "normal_case_alarm_frac": [
+    0.023
+   ]
+  },
+  "B_a1": {
+   "n_cal": 120,
+   "p_floor": 0.008264462809917356,
+   "cases": 24,
+   "normal_cases": 3,
+   "queue_in_record_order": true,
+   "distinct_min_p": [
+    0.008264
+   ],
+   "min_p_at_floor_share": 1.0,
+   "normal_case_peak_scores": [
+    4.208,
+    4.594,
+    3.971
+   ],
+   "abnormal_case_peak_min": 12.82,
+   "normal_case_ranks_by_peak_posthoc": [
+    22,
+    23,
+    24
+   ],
+   "normal_case_evidence": [
+    "magnitude",
+    "magnitude",
+    "magnitude"
+   ],
+   "normal_case_alarm_frac": [
+    0.02,
+    0.02,
+    0.023
+   ]
+  },
+  "B_a3": {
+   "n_cal": 120,
+   "p_floor": 0.008264462809917356,
+   "cases": 26,
+   "normal_cases": 5,
+   "queue_in_record_order": true,
+   "distinct_min_p": [
+    0.008264,
+    0.024793
+   ],
+   "min_p_at_floor_share": 0.9230769230769231,
+   "normal_case_peak_scores": [
+    4.208,
+    3.392,
+    3.431,
+    4.594,
+    3.971
+   ],
+   "abnormal_case_peak_min": 12.82,
+   "normal_case_ranks_by_peak_posthoc": [
+    22,
+    23,
+    24,
+    25,
+    26
+   ],
+   "normal_case_evidence": [
+    "magnitude",
+    "magnitude",
+    "dynamics",
+    "magnitude",
+    "magnitude"
+   ],
+   "normal_case_alarm_frac": [
+    0.04,
+    0.042,
+    0.023,
+    0.04,
+    0.023
+   ]
+  },
+  "B_a5": {
+   "n_cal": 120,
+   "p_floor": 0.008264462809917356,
+   "cases": 28,
+   "normal_cases": 7,
+   "queue_in_record_order": true,
+   "distinct_min_p": [
+    0.008264,
+    0.024793,
+    0.033058
+   ],
+   "min_p_at_floor_share": 0.8571428571428571,
+   "normal_case_peak_scores": [
+    4.208,
+    3.392,
+    3.431,
+    3.181,
+    4.594,
+    3.971,
+    3.231
+   ],
+   "abnormal_case_peak_min": 12.82,
+   "normal_case_ranks_by_peak_posthoc": [
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28
+   ],
+   "normal_case_evidence": [
+    "magnitude",
+    "magnitude",
+    "dynamics",
+    "magnitude",
+    "magnitude",
+    "magnitude",
+    "magnitude"
+   ],
+   "normal_case_alarm_frac": [
+    0.04,
+    0.042,
+    0.045,
+    0.02,
+    0.06,
+    0.023,
+    0.02
+   ]
+  }
+ },
+ "workload": [
+  {
+   "split": "A",
+   "alpha": 0.01,
+   "normal_segments": 120,
+   "first_alerts": 0,
+   "stored_first_alerts": 0,
+   "recorded_h": 0.11361111111111111,
+   "elapsed_h": 0.2682688888888889,
+   "segments_per_elapsed_h": 447.3123980086315,
+   "seg_len_median_rows": 38.0,
+   "seg_len_max_rows": 50,
+   "alerts_per_8h_elapsed": 0.0,
+   "alerts_per_8h_recorded_stored": 0.0,
+   "recomputed_match": true,
+   "upper95_per_segment": 0.024655401055656376,
+   "upper95_alerts_per_8h_elapsed": 88.22933256056157,
+   "nominal_alpha_alerts_per_8h_elapsed": 35.784991840690516
+  },
+  {
+   "split": "A",
+   "alpha": 0.03,
+   "normal_segments": 120,
+   "first_alerts": 1,
+   "stored_first_alerts": 1,
+   "recorded_h": 0.11361111111111111,
+   "elapsed_h": 0.2682688888888889,
+   "segments_per_elapsed_h": 447.3123980086315,
+   "seg_len_median_rows": 38.0,
+   "seg_len_max_rows": 50,
+   "alerts_per_8h_elapsed": 29.820826533908765,
+   "alerts_per_8h_recorded_stored": 70.4156479217604,
+   "recomputed_match": true,
+   "upper95_per_segment": 0.03892084686016847,
+   "upper95_alerts_per_8h_elapsed": 139.27821873238938,
+   "nominal_alpha_alerts_per_8h_elapsed": 107.35497552207154
+  },
+  {
+   "split": "A",
+   "alpha": 0.05,
+   "normal_segments": 120,
+   "first_alerts": 1,
+   "stored_first_alerts": 1,
+   "recorded_h": 0.11361111111111111,
+   "elapsed_h": 0.2682688888888889,
+   "segments_per_elapsed_h": 447.3123980086315,
+   "seg_len_median_rows": 38.0,
+   "seg_len_max_rows": 50,
+   "alerts_per_8h_elapsed": 29.820826533908765,
+   "alerts_per_8h_recorded_stored": 70.4156479217604,
+   "recomputed_match": true,
+   "upper95_per_segment": 0.03892084686016847,
+   "upper95_alerts_per_8h_elapsed": 139.27821873238938,
+   "nominal_alpha_alerts_per_8h_elapsed": 178.9249592034526
+  },
+  {
+   "split": "B",
+   "alpha": 0.01,
+   "normal_segments": 180,
+   "first_alerts": 3,
+   "stored_first_alerts": 3,
+   "recorded_h": 0.16936111111111113,
+   "elapsed_h": 0.4022588888888889,
+   "segments_per_elapsed_h": 447.47302041526603,
+   "seg_len_median_rows": 37.0,
+   "seg_len_max_rows": 50,
+   "alerts_per_8h_elapsed": 59.663069388702134,
+   "alerts_per_8h_recorded_stored": 141.70903723142527,
+   "recomputed_match": true,
+   "upper95_per_segment": 0.042510022399352164,
+   "upper95_alerts_per_8h_elapsed": 152.17670496766982,
+   "nominal_alpha_alerts_per_8h_elapsed": 35.79784163322128
+  },
+  {
+   "split": "B",
+   "alpha": 0.03,
+   "normal_segments": 180,
+   "first_alerts": 5,
+   "stored_first_alerts": 5,
+   "recorded_h": 0.16936111111111113,
+   "elapsed_h": 0.4022588888888889,
+   "segments_per_elapsed_h": 447.47302041526603,
+   "seg_len_median_rows": 37.0,
+   "seg_len_max_rows": 50,
+   "alerts_per_8h_elapsed": 99.43844898117023,
+   "alerts_per_8h_recorded_stored": 236.18172871904213,
+   "recomputed_match": true,
+   "upper95_per_segment": 0.05751495372913514,
+   "upper95_alerts_per_8h_elapsed": 205.89112051376296,
+   "nominal_alpha_alerts_per_8h_elapsed": 107.39352489966383
+  },
+  {
+   "split": "B",
+   "alpha": 0.05,
+   "normal_segments": 180,
+   "first_alerts": 7,
+   "stored_first_alerts": 7,
+   "recorded_h": 0.16936111111111113,
+   "elapsed_h": 0.4022588888888889,
+   "segments_per_elapsed_h": 447.47302041526603,
+   "seg_len_median_rows": 37.0,
+   "seg_len_max_rows": 50,
+   "alerts_per_8h_elapsed": 139.21382857363832,
+   "alerts_per_8h_recorded_stored": 330.654420206659,
+   "recomputed_match": true,
+   "upper95_per_segment": 0.07180089381251362,
+   "upper95_alerts_per_8h_elapsed": 257.03170258241005,
+   "nominal_alpha_alerts_per_8h_elapsed": 178.9892081661064
+  }
+ ],
+ "delay_vs_records_first_alarm": {
+  "A": {
+   "match": true,
+   "median_s": 0.1,
+   "max_s": 0.5
+  },
+  "B": {
+   "match": true,
+   "median_s": 0.0,
+   "max_s": 0.5
+  }
+ },
+ "continuous_stream_B": {
+  "rows": 6697,
+  "normal_rows": 6097,
+  "records": 1,
+  "notifications": 1,
+  "first_notification_row": 39,
+  "first_notification_in_normal_part": true,
+  "alarm_rows_normal_part": 875,
+  "alarm_rows_abnormal_part": 600,
+  "cases": 1,
+  "case_first_alarm_position": 39,
+  "case_evidence": "dynamics+magnitude+waveform",
+  "case_action": "진동·전류 함께 점검",
+  "segmented_same_rows_cases": 24,
+  "segmented_notifications": 24
+ },
+ "latency_1row_ms": {
+  "rows": 400,
+  "p50": 13.569562501288601,
+  "p95": 19.9046059498869,
+  "max": 74.01870800094912
+ },
+ "web_api": {
+  "overview": {
+   "audit_all_ok": true,
+   "audit_checks": 16,
+   "benchmark_runs": 4,
+   "metrics_rows": 12
+  },
+  "mixed_A_a1": {
+   "cases": 21,
+   "notifications": 21,
+   "threshold": 4.417925848290822,
+   "normal_cases": 0,
+   "case_keys": [
+    "action",
+    "alarm_rows",
+    "detection_delay_s",
+    "evidence",
+    "first_alarm_position",
+    "first_row",
+    "first_timestamp",
+    "min_p",
+    "observed_rows",
+    "peak_score",
+    "record_id",
+    "reference_label"
+   ],
+   "has_magnitude_sensor_in_case": false,
+   "actions": {
+    "진동·전류 함께 점검": 17,
+    "전류 파형·계측 확인": 3,
+    "진동·부하 확인": 1
+   }
+  },
+  "mixed_B_a1": {
+   "cases": 24,
+   "notifications": 24,
+   "threshold": 3.5199003630751613,
+   "normal_cases": 3,
+   "case_keys": [
+    "action",
+    "alarm_rows",
+    "detection_delay_s",
+    "evidence",
+    "first_alarm_position",
+    "first_row",
+    "first_timestamp",
+    "min_p",
+    "observed_rows",
+    "peak_score",
+    "record_id",
+    "reference_label"
+   ],
+   "has_magnitude_sensor_in_case": false,
+   "actions": {
+    "진동·전류 함께 점검": 17,
+    "진동·부하 확인": 4,
+    "전류 파형·계측 확인": 3
+   }
+  },
+  "upload_one_row_current": {
+   "cases": [
+    {
+     "record_id": 0,
+     "first_row": 0,
+     "first_timestamp": "2026-09-26 12:00:00.000",
+     "first_alarm_position": 0,
+     "detection_delay_s": 0.0,
+     "alarm_rows": 1,
+     "observed_rows": 1,
+     "peak_score": 39.7813391909,
+     "min_p": 0.0082644628,
+     "evidence": "magnitude",
+     "action": "진동·부하 확인"
+    }
+   ],
+   "point_magnitude_sensor": "AI2_Current"
+  },
+  "upload_continuous_600": {
+   "segments": 1,
+   "cases": 1,
+   "alarm_rows": 75
+  },
+  "server_stopped": true
+ }
+}

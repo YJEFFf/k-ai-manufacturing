@@ -1,0 +1,12 @@
+A vib_noise 4.0 step 10 PASS
+A cur_noise 0.1 step 10 PASS
+A cur_noise 0.2 ramp 10 PASS
+A cur_offset 0.4 step 10 PASS
+A cur_offset 0.8 step 0 PASS
+A cur_gain 1.5 step 10 PASS
+B vib_noise 4.0 step 10 PASS
+B cur_noise 0.1 step 10 PASS
+B cur_noise 0.2 ramp 10 PASS
+B cur_offset 0.4 step 10 PASS
+B cur_offset 0.8 step 0 PASS
+B cur_gain 1.5 step 10 PASS

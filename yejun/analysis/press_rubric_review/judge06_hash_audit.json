@@ -1,0 +1,123 @@
+{
+  "e1": {
+    "declared_code_hashes_match": {
+      "common.py": true,
+      "fault_injection.py": true,
+      "protocol.json": true
+    },
+    "declared_artifact_hashes_match": {
+      "guard_A.json": true,
+      "guard_B.json": true
+    },
+    "manifest_keys": [
+      "artifacts",
+      "code_sha256",
+      "elapsed_s",
+      "environment",
+      "experiment",
+      "input_hashes"
+    ],
+    "output_hash_contract_present": false,
+    "shared_dependency_hash_contract_present": false,
+    "environment": {
+      "python": "3.12.2",
+      "platform": "macOS-26.3.1-arm64-arm-64bit",
+      "machine": "arm64",
+      "numpy": "1.26.4",
+      "pandas": "2.3.3",
+      "scikit_learn": "1.8.0",
+      "scipy": "1.13.1",
+      "matplotlib": "3.9.2",
+      "blas": null,
+      "protocol_version": "v1"
+    },
+    "current_output_hashes_for_review_only": {
+      "e1_detection_floor.csv": "e0c97954bf46b00895d2e5310ddceb15297aa38b4d995b22715eb1d2ecf96975",
+      "e1_reference_segments.csv": "72dfc4e522c2b489598f6f0beae542e46a2aba0c294a896ad2e777b347f9ac65",
+      "e1_summary.csv": "ac599f2408e6eb8cf03c51ca8f83ffa34ba4cb11d48a168b23e43195ab980344"
+    }
+  },
+  "e2": {
+    "declared_code_hashes_match": {
+      "common.py": true,
+      "uci_v2.py": true,
+      "protocol.json": true
+    },
+    "declared_artifact_hashes_match": {},
+    "manifest_keys": [
+      "code_sha256",
+      "contest_sanity",
+      "cycles_stable",
+      "elapsed_s",
+      "environment",
+      "experiment",
+      "uci_sha256"
+    ],
+    "output_hash_contract_present": false,
+    "shared_dependency_hash_contract_present": false,
+    "environment": {
+      "python": "3.12.2",
+      "platform": "macOS-26.3.1-arm64-arm-64bit",
+      "machine": "arm64",
+      "numpy": "1.26.4",
+      "pandas": "2.3.3",
+      "scikit_learn": "1.8.0",
+      "scipy": "1.13.1",
+      "matplotlib": "3.9.2",
+      "blas": null,
+      "protocol_version": "v1"
+    },
+    "current_output_hashes_for_review_only": {
+      "e2_uci_comparison.csv": "da3922e892ebb3fc5c8a5f5232790fb7cd451cf50be6d64a46123f5761849907",
+      "e2_uci_component_diagnostic_posthoc.csv": "dee030617bbb25a6a0ce8a51b7f2ae6c07d9538f96d78f63ab4c51fe8ff2736a",
+      "e2_uci_metrics.csv": "9182c3046dbe0d43527b3ff1138944ac98a540529de37ef2d7ae4793887f6534",
+      "e2_uci_strata.csv": "8c4ed7a17ffac423368393d6b83501615e20d8d1d18d05baa1166273aac6f818"
+    }
+  },
+  "e3": {
+    "declared_code_hashes_match": {
+      "common.py": true,
+      "recalibration.py": true,
+      "protocol.json": true
+    },
+    "declared_artifact_hashes_match": {},
+    "manifest_keys": [
+      "code_sha256",
+      "configs",
+      "elapsed_s",
+      "environment",
+      "experiment",
+      "input_hashes"
+    ],
+    "output_hash_contract_present": false,
+    "shared_dependency_hash_contract_present": false,
+    "environment": {
+      "python": "3.12.2",
+      "platform": "macOS-26.3.1-arm64-arm-64bit",
+      "machine": "arm64",
+      "numpy": "1.26.4",
+      "pandas": "2.3.3",
+      "scikit_learn": "1.8.0",
+      "scipy": "1.13.1",
+      "matplotlib": "3.9.2",
+      "blas": null,
+      "protocol_version": "v1"
+    },
+    "current_output_hashes_for_review_only": {
+      "e3_curve.csv": "1002608862a00c8863847a429d62dca22bfc2dea29146d6fdc457ca5cec9df11",
+      "e3_domain_shift.csv": "ed6540bc5291a0555e6f7030db2bdacd3f75dddffca524975ab620b1d9fdcac9",
+      "e3_stability.csv": "4447e30b858fc32df317a565ebc86720e7759e802a3a9960f0c27e9c5005762c"
+    }
+  },
+  "protocol_matches_preregistered_commit": true,
+  "current_guard_hashes": {
+    "guard_A.json": "63234e1bc2a646b34694df0bc4d51507c86c5f6efaaaf065eef108bd6b2514ad",
+    "guard_B.json": "eb16901388d24dc25f8e50a4b3e5ed74595884a20652203553471ea17bb4255e"
+  },
+  "source_input_hashes": {
+    "outlier_data.csv": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+    "press_data_normal.csv": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7"
+  },
+  "uci_hash_matches_e2_manifest": true,
+  "review_scope": "Listed hashes and contract presence, not full E1/E2/E3 numerical reruns."
+}

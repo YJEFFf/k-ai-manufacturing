@@ -1,0 +1,286 @@
+{
+ "A": {
+  "ar2": {
+   "coef": [
+    0.10017176356137535,
+    1.833083212563616,
+    -0.9748619270345045
+   ],
+   "root_modulus": 0.9873509644672988,
+   "implied_freq_hz": 0.60642,
+   "pure_sinusoid_0p6hz": {
+    "phi1": 1.8595529717765027,
+    "phi2": -1.0
+   }
+  },
+  "p_value": {
+   "n_calibration": 120,
+   "distinct_p_values_normal_eval": 62,
+   "min_possible_p": 0.008264,
+   "record_alarm_curve": [
+    {
+     "alpha_grid": 0.008264,
+     "alarmed_records": 0,
+     "n_records": 120,
+     "realized": 0.0,
+     "binom_upper95": 0.024655
+    },
+    {
+     "alpha_grid": 0.016529,
+     "alarmed_records": 0,
+     "n_records": 120,
+     "realized": 0.0,
+     "binom_upper95": 0.024655
+    },
+    {
+     "alpha_grid": 0.024793,
+     "alarmed_records": 1,
+     "n_records": 120,
+     "realized": 0.008333,
+     "binom_upper95": 0.038921
+    },
+    {
+     "alpha_grid": 0.033058,
+     "alarmed_records": 1,
+     "n_records": 120,
+     "realized": 0.008333,
+     "binom_upper95": 0.038921
+    },
+    {
+     "alpha_grid": 0.041322,
+     "alarmed_records": 1,
+     "n_records": 120,
+     "realized": 0.008333,
+     "binom_upper95": 0.038921
+    },
+    {
+     "alpha_grid": 0.049587,
+     "alarmed_records": 1,
+     "n_records": 120,
+     "realized": 0.008333,
+     "binom_upper95": 0.038921
+    },
+    {
+     "alpha_grid": 0.057851,
+     "alarmed_records": 2,
+     "n_records": 120,
+     "realized": 0.016667,
+     "binom_upper95": 0.051534
+    },
+    {
+     "alpha_grid": 0.066116,
+     "alarmed_records": 2,
+     "n_records": 120,
+     "realized": 0.016667,
+     "binom_upper95": 0.051534
+    },
+    {
+     "alpha_grid": 0.07438,
+     "alarmed_records": 2,
+     "n_records": 120,
+     "realized": 0.016667,
+     "binom_upper95": 0.051534
+    },
+    {
+     "alpha_grid": 0.082645,
+     "alarmed_records": 2,
+     "n_records": 120,
+     "realized": 0.016667,
+     "binom_upper95": 0.051534
+    },
+    {
+     "alpha_grid": 0.090909,
+     "alarmed_records": 2,
+     "n_records": 120,
+     "realized": 0.016667,
+     "binom_upper95": 0.051534
+    },
+    {
+     "alpha_grid": 0.099174,
+     "alarmed_records": 2,
+     "n_records": 120,
+     "realized": 0.016667,
+     "binom_upper95": 0.051534
+    }
+   ]
+  },
+  "components_abnormal_alpha1": {
+   "alarm_rows": 556,
+   "combo_counts": {
+    "waveform+dynamics": 252,
+    "magnitude+waveform+dynamics": 91,
+    "waveform": 89,
+    "dynamics": 42,
+    "magnitude+waveform": 40,
+    "magnitude+dynamics": 23,
+    "magnitude": 19
+   },
+   "single_component_only_rows": {
+    "magnitude": 19,
+    "waveform": 89,
+    "dynamics": 42
+   },
+   "first_alarm_reason_by_record": {
+    "magnitude": 11,
+    "dynamics": 9,
+    "magnitude+dynamics": 1
+   }
+  },
+  "rank_correlation": {
+   "normal_eval": {
+    "n": 3497,
+    "waveform_vs_dynamics": -0.1808,
+    "magnitude_vs_dynamics": 0.0598,
+    "magnitude_vs_waveform": -0.2508
+   },
+   "abnormal": {
+    "n": 499,
+    "waveform_vs_dynamics": 0.0059,
+    "magnitude_vs_dynamics": 0.0236,
+    "magnitude_vs_waveform": 0.058
+   }
+  }
+ },
+ "B": {
+  "ar2": {
+   "coef": [
+    0.09803182822501699,
+    1.832496243498945,
+    -0.9742301185717609
+   ],
+   "root_modulus": 0.9870309613035251,
+   "implied_freq_hz": 0.60641,
+   "pure_sinusoid_0p6hz": {
+    "phi1": 1.8595529717765027,
+    "phi2": -1.0
+   }
+  },
+  "p_value": {
+   "n_calibration": 120,
+   "distinct_p_values_normal_eval": 98,
+   "min_possible_p": 0.008264,
+   "record_alarm_curve": [
+    {
+     "alpha_grid": 0.008264,
+     "alarmed_records": 3,
+     "n_records": 180,
+     "realized": 0.016667,
+     "binom_upper95": 0.04251
+    },
+    {
+     "alpha_grid": 0.016529,
+     "alarmed_records": 3,
+     "n_records": 180,
+     "realized": 0.016667,
+     "binom_upper95": 0.04251
+    },
+    {
+     "alpha_grid": 0.024793,
+     "alarmed_records": 5,
+     "n_records": 180,
+     "realized": 0.027778,
+     "binom_upper95": 0.057515
+    },
+    {
+     "alpha_grid": 0.033058,
+     "alarmed_records": 7,
+     "n_records": 180,
+     "realized": 0.038889,
+     "binom_upper95": 0.071801
+    },
+    {
+     "alpha_grid": 0.041322,
+     "alarmed_records": 7,
+     "n_records": 180,
+     "realized": 0.038889,
+     "binom_upper95": 0.071801
+    },
+    {
+     "alpha_grid": 0.049587,
+     "alarmed_records": 7,
+     "n_records": 180,
+     "realized": 0.038889,
+     "binom_upper95": 0.071801
+    },
+    {
+     "alpha_grid": 0.057851,
+     "alarmed_records": 7,
+     "n_records": 180,
+     "realized": 0.038889,
+     "binom_upper95": 0.071801
+    },
+    {
+     "alpha_grid": 0.066116,
+     "alarmed_records": 7,
+     "n_records": 180,
+     "realized": 0.038889,
+     "binom_upper95": 0.071801
+    },
+    {
+     "alpha_grid": 0.07438,
+     "alarmed_records": 8,
+     "n_records": 180,
+     "realized": 0.044444,
+     "binom_upper95": 0.078762
+    },
+    {
+     "alpha_grid": 0.082645,
+     "alarmed_records": 9,
+     "n_records": 180,
+     "realized": 0.05,
+     "binom_upper95": 0.085628
+    },
+    {
+     "alpha_grid": 0.090909,
+     "alarmed_records": 9,
+     "n_records": 180,
+     "realized": 0.05,
+     "binom_upper95": 0.085628
+    },
+    {
+     "alpha_grid": 0.099174,
+     "alarmed_records": 11,
+     "n_records": 180,
+     "realized": 0.061111,
+     "binom_upper95": 0.099126
+    }
+   ]
+  },
+  "components_abnormal_alpha1": {
+   "alarm_rows": 569,
+   "combo_counts": {
+    "waveform+dynamics": 252,
+    "magnitude+waveform+dynamics": 111,
+    "waveform": 81,
+    "dynamics": 40,
+    "magnitude+waveform": 37,
+    "magnitude": 25,
+    "magnitude+dynamics": 23
+   },
+   "single_component_only_rows": {
+    "magnitude": 25,
+    "waveform": 81,
+    "dynamics": 40
+   },
+   "first_alarm_reason_by_record": {
+    "magnitude": 12,
+    "dynamics": 8,
+    "magnitude+dynamics": 1
+   }
+  },
+  "rank_correlation": {
+   "normal_eval": {
+    "n": 5205,
+    "waveform_vs_dynamics": -0.1427,
+    "magnitude_vs_dynamics": 0.0794,
+    "magnitude_vs_waveform": -0.3424
+   },
+   "abnormal": {
+    "n": 499,
+    "waveform_vs_dynamics": 0.0059,
+    "magnitude_vs_dynamics": 0.0239,
+    "magnitude_vs_waveform": 0.0583
+   }
+  }
+ }
+}

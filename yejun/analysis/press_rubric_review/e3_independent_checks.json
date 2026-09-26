@@ -1,0 +1,124 @@
+{
+  "configurations": 184,
+  "settings": 36,
+  "preregistered_pass_count": 0,
+  "posthoc_relative_floor": 0.6133333333333334,
+  "posthoc_minimum_settings": [
+    {
+      "alpha": 0.01,
+      "n_train": 15,
+      "n_cal": 99,
+      "starts": 7,
+      "normal_minutes_median": 6.1433333333333335,
+      "normal_notified_max": 1,
+      "abnormal_detected_min": 21,
+      "injection_min": 0.6466666666666667,
+      "f1_min": 0.9628349178910977,
+      "preregistered_pass": false,
+      "posthoc_relative_pass": true
+    },
+    {
+      "alpha": 0.05,
+      "n_train": 60,
+      "n_cal": 40,
+      "starts": 7,
+      "normal_minutes_median": 5.331666666666667,
+      "normal_notified_max": 2,
+      "abnormal_detected_min": 21,
+      "injection_min": 0.8,
+      "f1_min": 0.9718189581554229,
+      "preregistered_pass": false,
+      "posthoc_relative_pass": true
+    }
+  ],
+  "refit_checks": [
+    {
+      "config": [
+        0.01,
+        15,
+        99,
+        0
+      ],
+      "max_absolute_difference": 1.1102230246251565e-16,
+      "fresh": {
+        "alpha": 0.01,
+        "n_train": 15,
+        "n_cal": 99,
+        "start": 0,
+        "normal_rows": 4236,
+        "normal_minutes": 7.0600000000000005,
+        "elapsed_minutes": 14.41985,
+        "normal_notified": 1,
+        "normal_segments": 120,
+        "abnormal_detected": 21,
+        "abnormal_segments": 21,
+        "abnormal_missed_rows": 32,
+        "f1": 0.9717707442258341,
+        "threshold_cal_max": 3.789979107810999,
+        "inject_vib_noise": 0.9133333333333333,
+        "inject_cur_noise": 1.0,
+        "inject_cur_offset": 1.0,
+        "inject_min": 0.9133333333333333
+      }
+    },
+    {
+      "config": [
+        0.01,
+        15,
+        99,
+        360
+      ],
+      "max_absolute_difference": 1.7763568394002505e-15,
+      "fresh": {
+        "alpha": 0.01,
+        "n_train": 15,
+        "n_cal": 99,
+        "start": 360,
+        "normal_rows": 3717,
+        "normal_minutes": 6.195000000000001,
+        "elapsed_minutes": 14.942266666666665,
+        "normal_notified": 0,
+        "normal_segments": 120,
+        "abnormal_detected": 21,
+        "abnormal_segments": 21,
+        "abnormal_missed_rows": 40,
+        "f1": 0.9655172413793104,
+        "threshold_cal_max": 3.849634578805627,
+        "inject_vib_noise": 0.6866666666666666,
+        "inject_cur_noise": 1.0,
+        "inject_cur_offset": 1.0,
+        "inject_min": 0.6866666666666666
+      }
+    },
+    {
+      "config": [
+        0.05,
+        60,
+        40,
+        0
+      ],
+      "max_absolute_difference": 1.7763568394002505e-15,
+      "fresh": {
+        "alpha": 0.05,
+        "n_train": 60,
+        "n_cal": 40,
+        "start": 0,
+        "normal_rows": 3722,
+        "normal_minutes": 6.203333333333334,
+        "elapsed_minutes": 12.487599999999999,
+        "normal_notified": 2,
+        "normal_segments": 120,
+        "abnormal_detected": 21,
+        "abnormal_segments": 21,
+        "abnormal_missed_rows": 30,
+        "f1": 0.9726962457337884,
+        "threshold_cal_max": 3.3466618357168043,
+        "inject_vib_noise": 0.98,
+        "inject_cur_noise": 1.0,
+        "inject_cur_offset": 1.0,
+        "inject_min": 0.98
+      }
+    }
+  ],
+  "scope": "same-day exploratory evidence; no new-date or real-failure validation"
+}

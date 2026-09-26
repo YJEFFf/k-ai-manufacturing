@@ -1,0 +1,10 @@
+diagnosis_json_match all true: True
+splits_csv_match: True
+file identity: {'normal': True, 'abnormal': True}
+normal segments 600 len min/med/max 1 37.0 50 len50 202 gap median/max 4.223 16.643 start-row%50 0.025
+abnormal segments 21 len min/med/max 3 28.0 50 len50 5 gap median/max 5.353 8.572 start-row%50 0.143
+v2 A: cal median 2.006 test median 1.566 share test>cal median 0.100 MWU p 2.92e-11 alarm segs []
+v2 B: cal median 1.967 test median 1.664 share test>cal median 0.278 MWU p 1.65e-03 alarm segs [423, 461, 570]
+segment vib max|z| parts: {'A_train': (18, 360), 'A_cal': (11, 120), 'A_test': (2, 120), 'B_cal': (11, 120), 'B_test': (7, 180), 'block_420_479': (5, 60), 'block_480_539': (0, 60), 'block_540_599': (2, 60)}
+segment corr AI0-AI1: {'normal': {'n': 469, 'median': 0.2814664675429639, 'negative_share': 0.20042643923240938, 'n_negative': 94}, 'abnormal': {'n': 14, 'median': -0.3525579195337373, 'negative_share': 0.9285714285714286, 'n_negative': 13}}
+wrote /Volumes/YJSSD/공모전/k-제조데이터/yejun/analysis/press_rubric_review/judge01_checks.json

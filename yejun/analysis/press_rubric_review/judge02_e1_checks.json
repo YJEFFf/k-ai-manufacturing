@@ -1,0 +1,301 @@
+{
+  "summary_groups": 744,
+  "record_trials": 249606,
+  "floors": [
+    {
+      "family": "cur_gain_down",
+      "model": "baseline_v1",
+      "floor": "none",
+      "min_rate_at_floor": "none"
+    },
+    {
+      "family": "cur_gain_up",
+      "model": "baseline_v1",
+      "floor": "none",
+      "min_rate_at_floor": "none"
+    },
+    {
+      "family": "cur_gain_down",
+      "model": "guard_v2",
+      "floor": "none",
+      "min_rate_at_floor": "none"
+    },
+    {
+      "family": "cur_gain_up",
+      "model": "guard_v2",
+      "floor": "none",
+      "min_rate_at_floor": "none"
+    },
+    {
+      "family": "cur_noise",
+      "model": "baseline_v1",
+      "floor": 0.2,
+      "min_rate_at_floor": 0.9653333333333334
+    },
+    {
+      "family": "cur_noise",
+      "model": "guard_v2",
+      "floor": 0.1,
+      "min_rate_at_floor": 0.9546666666666667
+    },
+    {
+      "family": "cur_offset",
+      "model": "baseline_v1",
+      "floor": 0.8,
+      "min_rate_at_floor": 0.963963963963964
+    },
+    {
+      "family": "cur_offset",
+      "model": "guard_v2",
+      "floor": 0.4,
+      "min_rate_at_floor": 1.0
+    },
+    {
+      "family": "vib_noise",
+      "model": "baseline_v1",
+      "floor": 4.0,
+      "min_rate_at_floor": 1.0
+    },
+    {
+      "family": "vib_noise",
+      "model": "guard_v2",
+      "floor": 4.0,
+      "min_rate_at_floor": 1.0
+    }
+  ],
+  "metrics": [
+    {
+      "split": "A",
+      "tp": 556,
+      "fp": 0,
+      "fn": 44,
+      "f1": 0.9619377162629758
+    },
+    {
+      "split": "B",
+      "tp": 569,
+      "fp": 3,
+      "fn": 31,
+      "f1": 0.9709897610921502
+    }
+  ],
+  "spot_checks": [
+    {
+      "split": "A",
+      "family": "vib_noise",
+      "level": 4.0,
+      "shape": "step",
+      "onset": 10,
+      "model": "guard_v2",
+      "records": 75
+    },
+    {
+      "split": "A",
+      "family": "vib_noise",
+      "level": 4.0,
+      "shape": "step",
+      "onset": 10,
+      "model": "baseline_v1",
+      "records": 75
+    },
+    {
+      "split": "A",
+      "family": "cur_noise",
+      "level": 0.1,
+      "shape": "step",
+      "onset": 10,
+      "model": "guard_v2",
+      "records": 75
+    },
+    {
+      "split": "A",
+      "family": "cur_noise",
+      "level": 0.1,
+      "shape": "step",
+      "onset": 10,
+      "model": "baseline_v1",
+      "records": 75
+    },
+    {
+      "split": "A",
+      "family": "cur_noise",
+      "level": 0.2,
+      "shape": "ramp",
+      "onset": 10,
+      "model": "guard_v2",
+      "records": 75
+    },
+    {
+      "split": "A",
+      "family": "cur_noise",
+      "level": 0.2,
+      "shape": "ramp",
+      "onset": 10,
+      "model": "baseline_v1",
+      "records": 75
+    },
+    {
+      "split": "A",
+      "family": "cur_offset",
+      "level": 0.4,
+      "shape": "step",
+      "onset": 10,
+      "model": "guard_v2",
+      "records": 75
+    },
+    {
+      "split": "A",
+      "family": "cur_offset",
+      "level": 0.4,
+      "shape": "step",
+      "onset": 10,
+      "model": "baseline_v1",
+      "records": 75
+    },
+    {
+      "split": "A",
+      "family": "cur_offset",
+      "level": 0.8,
+      "shape": "step",
+      "onset": 0,
+      "model": "guard_v2",
+      "records": 92
+    },
+    {
+      "split": "A",
+      "family": "cur_offset",
+      "level": 0.8,
+      "shape": "step",
+      "onset": 0,
+      "model": "baseline_v1",
+      "records": 92
+    },
+    {
+      "split": "A",
+      "family": "cur_gain",
+      "level": 1.5,
+      "shape": "step",
+      "onset": 10,
+      "model": "guard_v2",
+      "records": 75
+    },
+    {
+      "split": "A",
+      "family": "cur_gain",
+      "level": 1.5,
+      "shape": "step",
+      "onset": 10,
+      "model": "baseline_v1",
+      "records": 75
+    },
+    {
+      "split": "B",
+      "family": "vib_noise",
+      "level": 4.0,
+      "shape": "step",
+      "onset": 10,
+      "model": "guard_v2",
+      "records": 111
+    },
+    {
+      "split": "B",
+      "family": "vib_noise",
+      "level": 4.0,
+      "shape": "step",
+      "onset": 10,
+      "model": "baseline_v1",
+      "records": 111
+    },
+    {
+      "split": "B",
+      "family": "cur_noise",
+      "level": 0.1,
+      "shape": "step",
+      "onset": 10,
+      "model": "guard_v2",
+      "records": 111
+    },
+    {
+      "split": "B",
+      "family": "cur_noise",
+      "level": 0.1,
+      "shape": "step",
+      "onset": 10,
+      "model": "baseline_v1",
+      "records": 111
+    },
+    {
+      "split": "B",
+      "family": "cur_noise",
+      "level": 0.2,
+      "shape": "ramp",
+      "onset": 10,
+      "model": "guard_v2",
+      "records": 111
+    },
+    {
+      "split": "B",
+      "family": "cur_noise",
+      "level": 0.2,
+      "shape": "ramp",
+      "onset": 10,
+      "model": "baseline_v1",
+      "records": 111
+    },
+    {
+      "split": "B",
+      "family": "cur_offset",
+      "level": 0.4,
+      "shape": "step",
+      "onset": 10,
+      "model": "guard_v2",
+      "records": 111
+    },
+    {
+      "split": "B",
+      "family": "cur_offset",
+      "level": 0.4,
+      "shape": "step",
+      "onset": 10,
+      "model": "baseline_v1",
+      "records": 111
+    },
+    {
+      "split": "B",
+      "family": "cur_offset",
+      "level": 0.8,
+      "shape": "step",
+      "onset": 0,
+      "model": "guard_v2",
+      "records": 139
+    },
+    {
+      "split": "B",
+      "family": "cur_offset",
+      "level": 0.8,
+      "shape": "step",
+      "onset": 0,
+      "model": "baseline_v1",
+      "records": 139
+    },
+    {
+      "split": "B",
+      "family": "cur_gain",
+      "level": 1.5,
+      "shape": "step",
+      "onset": 10,
+      "model": "guard_v2",
+      "records": 111
+    },
+    {
+      "split": "B",
+      "family": "cur_gain",
+      "level": 1.5,
+      "shape": "step",
+      "onset": 10,
+      "model": "baseline_v1",
+      "records": 111
+    }
+  ],
+  "spot_record_checks": 2322
+}

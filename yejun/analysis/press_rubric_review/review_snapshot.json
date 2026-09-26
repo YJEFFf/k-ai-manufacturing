@@ -1,0 +1,44 @@
+{
+  "review_date": "2026-09-26",
+  "base_head": "7ff1e1e1eb29c86ee3fb9b39361fac42e85f1ba4",
+  "review_scope": "프레스 최초 계획→v1→v2→E1/E2/E3 보완 실험. 검수 기록이며 대회 보고서 아님. 기존 구현·모델·결과 변경 없음.",
+  "rubric_source": "관련 자료/제6회 K-인공지능 제조데이터 분석 경진대회 과제공개(일반국민,대학(원)생).hwpx",
+  "rubric_sha256": "cfea6f3cf97c990d1dce2f7f7515c26976bcbfaf331f8fbd5d961f0e0322bb62",
+  "initial_git_status": " M power_submission/PLAN.md\n M power_submission/README.md\n M power_submission/make_submission.py\n M power_submission/powerguard/cv.py\n M power_submission/powerguard/stage_digest.py\n M power_submission/powerguard/stage_models.py\n M power_submission/powerguard/stage_peak.py\n M power_submission/reviews/evaluation_round2.md\n M power_submission/run_all.py\n M power_submission/tests/test_models.py\n?? analysis/press_rubric_review/\n?? power_submission/powerguard/stage_predict.py\n",
+  "pull_result": "미커밋 전력 변경 때문에 git pull --rebase 실패. git ls-remote origin refs/heads/main은 HEAD와 동일(7ff1e1e).",
+  "supplement_protocol_commit": "a102ecf",
+  "supplement_results_commit": "875f269",
+  "reviewer_roles": [
+    {
+      "task": "judge_data",
+      "criterion": 1,
+      "maximum": 15
+    },
+    {
+      "task": "judge_model",
+      "criterion": 2,
+      "maximum": 40
+    },
+    {
+      "task": "judge_errors",
+      "criterion": 3,
+      "maximum": 15
+    },
+    {
+      "task": "judge_field",
+      "criterion": 4,
+      "maximum": 10
+    },
+    {
+      "task": "judge_originality",
+      "criterion": 5,
+      "maximum": 10
+    },
+    {
+      "task": "judge_repro",
+      "criterion": 6,
+      "maximum": 10
+    }
+  ],
+  "review_method": "각 항목 별도 평가관, 최대 3명씩 두 차례. root 독립 재집계·반례 확인 후 중복 지적 통합. 점수는 내부 근거충족도 의견이며 공식 점수·수상확률이 아님."
+}

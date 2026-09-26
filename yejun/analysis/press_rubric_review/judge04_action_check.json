@@ -1,0 +1,57 @@
+{
+  "current_only_large_input": [
+    {
+      "reason": "magnitude",
+      "action": "진동·부하 확인",
+      "magnitude_sensor": "AI2_Current",
+      "g_magnitude": 25.9200730416,
+      "g_waveform": null,
+      "g_dynamics": null,
+      "p_value": 0.0082644628,
+      "alarm": 1,
+      "status": "ok"
+    }
+  ],
+  "cases": [
+    {
+      "record_id": 0,
+      "first_row": 0,
+      "first_timestamp": "2026-09-26 12:00:00.000",
+      "first_alarm_position": 0,
+      "detection_delay_s": 0.0,
+      "alarm_rows": 1,
+      "observed_rows": 1,
+      "peak_score": 25.9200730416,
+      "min_p": 0.0082644628,
+      "evidence": "magnitude",
+      "action": "진동·부하 확인"
+    }
+  ],
+  "normal_A_alpha01_alarms": [],
+  "normal_B_alpha01_alarms": [
+    {
+      "record_id": 3,
+      "position": 41,
+      "reason": "magnitude",
+      "action": "진동·부하 확인",
+      "magnitude_sensor": "AI0_Vibration",
+      "alpha": 0.01
+    },
+    {
+      "record_id": 41,
+      "position": 40,
+      "reason": "magnitude",
+      "action": "진동·부하 확인",
+      "magnitude_sensor": "AI0_Vibration",
+      "alpha": 0.01
+    },
+    {
+      "record_id": 150,
+      "position": 11,
+      "reason": "magnitude",
+      "action": "진동·부하 확인",
+      "magnitude_sensor": "AI0_Vibration",
+      "alpha": 0.01
+    }
+  ]
+}
