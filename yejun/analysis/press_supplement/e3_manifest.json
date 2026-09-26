@@ -1,0 +1,26 @@
+{
+  "experiment": "E3",
+  "input_hashes": {
+    "normal": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+    "abnormal": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e"
+  },
+  "configs": 184,
+  "elapsed_s": 206.00175249999984,
+  "code_sha256": {
+    "common.py": "06b6983270810fabffe64042f15944211b5d66d657c7062eb329f3bfb8b20922",
+    "recalibration.py": "9c456608ed3941d55d28dc7ff535128701266ec960074ce0dbeedc7da036fbb2",
+    "protocol.json": "4c6bf75677b7f9a43b7faf9c7869d7ad5b6511a8ae1eb26ff0370ec6693ade81"
+  },
+  "environment": {
+    "python": "3.12.2",
+    "platform": "macOS-26.3.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.8.0",
+    "scipy": "1.13.1",
+    "matplotlib": "3.9.2",
+    "blas": null,
+    "protocol_version": "v1"
+  }
+}

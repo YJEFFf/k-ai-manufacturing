@@ -1,0 +1,11 @@
+family,model,floor,min_rate_at_floor
+cur_gain_down,baseline_v1,,
+cur_gain_up,baseline_v1,,
+cur_gain_down,guard_v2,,
+cur_gain_up,guard_v2,,
+cur_noise,baseline_v1,0.2,0.9653333333333334
+cur_noise,guard_v2,0.1,0.9546666666666667
+cur_offset,baseline_v1,0.8,0.963963963963964
+cur_offset,guard_v2,0.4,1.0
+vib_noise,baseline_v1,4.0,1.0
+vib_noise,guard_v2,4.0,1.0

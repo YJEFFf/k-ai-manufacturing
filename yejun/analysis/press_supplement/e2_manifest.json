@@ -1,0 +1,39 @@
+{
+  "experiment": "E2",
+  "contest_sanity": [
+    {
+      "split": "A",
+      "tp": 556,
+      "fp": 0,
+      "fn": 44,
+      "f1": 0.9619377162629758
+    },
+    {
+      "split": "B",
+      "tp": 569,
+      "fp": 3,
+      "fn": 31,
+      "f1": 0.9709897610921502
+    }
+  ],
+  "uci_sha256": "24128aad2ee45eea7e6b63ebbd9992cdf25d0483a2cebefbfc13bc69079af1f2",
+  "cycles_stable": 1449,
+  "elapsed_s": 72.78210279200016,
+  "environment": {
+    "python": "3.12.2",
+    "platform": "macOS-26.3.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.8.0",
+    "scipy": "1.13.1",
+    "matplotlib": "3.9.2",
+    "blas": null,
+    "protocol_version": "v1"
+  },
+  "code_sha256": {
+    "common.py": "06b6983270810fabffe64042f15944211b5d66d657c7062eb329f3bfb8b20922",
+    "uci_v2.py": "77edcb28170d95090d122d870b8271d05258007d2d95f04a38bf9eb163d1699f",
+    "protocol.json": "4c6bf75677b7f9a43b7faf9c7869d7ad5b6511a8ae1eb26ff0370ec6693ade81"
+  }
+}

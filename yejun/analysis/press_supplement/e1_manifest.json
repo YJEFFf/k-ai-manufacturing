@@ -1,0 +1,29 @@
+{
+  "experiment": "E1",
+  "input_hashes": {
+    "normal": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+    "abnormal": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e"
+  },
+  "elapsed_s": 488.6760225419998,
+  "code_sha256": {
+    "common.py": "06b6983270810fabffe64042f15944211b5d66d657c7062eb329f3bfb8b20922",
+    "fault_injection.py": "0b2e0a3096cd4411150834f6f5358e01ff0f3fb5bb7ff422e6b328180291f816",
+    "protocol.json": "4c6bf75677b7f9a43b7faf9c7869d7ad5b6511a8ae1eb26ff0370ec6693ade81"
+  },
+  "artifacts": {
+    "guard_A.json": "63234e1bc2a646b34694df0bc4d51507c86c5f6efaaaf065eef108bd6b2514ad",
+    "guard_B.json": "eb16901388d24dc25f8e50a4b3e5ed74595884a20652203553471ea17bb4255e"
+  },
+  "environment": {
+    "python": "3.12.2",
+    "platform": "macOS-26.3.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.8.0",
+    "scipy": "1.13.1",
+    "matplotlib": "3.9.2",
+    "blas": null,
+    "protocol_version": "v1"
+  }
+}
