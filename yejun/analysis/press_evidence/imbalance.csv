@@ -1,0 +1,4 @@
+scope,normal_rows,abnormal_rows,abnormal_row_share,normal_segments,abnormal_segments,abnormal_segment_share,recorded_seconds_normal,recorded_seconds_abnormal,all_positive_row_f1,note
+전체,20000,600,0.02912621359223301,600,21,0.033816425120772944,2000.0,60.0,,
+A 평가,4090,600,0.1279317697228145,120,21,0.14893617021276595,409.0,60.0,0.2268431001890359,전부 양성으로 예측해도 F1 0.227
+B 평가,6097,600,0.08959235478572496,180,21,0.1044776119402985,609.7,60.0,0.16445114430587915,전부 양성으로 예측해도 F1 0.164. A와 기준선이 달라 F1을 같은 잣대로 직접 비교하지 않는다

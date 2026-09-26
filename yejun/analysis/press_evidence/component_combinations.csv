@@ -1,0 +1,16 @@
+split,subset,combination,components,alarm_rows,share
+A,abnormal,waveform+dynamics,2,252,0.45323741007194246
+A,abnormal,magnitude+waveform+dynamics,3,91,0.16366906474820145
+A,abnormal,waveform,1,89,0.16007194244604317
+A,abnormal,dynamics,1,42,0.07553956834532374
+A,abnormal,magnitude+waveform,2,40,0.07194244604316546
+A,abnormal,magnitude+dynamics,2,23,0.04136690647482014
+A,abnormal,magnitude,1,19,0.0341726618705036
+B,abnormal,waveform+dynamics,2,252,0.4428822495606327
+B,abnormal,magnitude+waveform+dynamics,3,111,0.19507908611599298
+B,abnormal,waveform,1,81,0.14235500878734622
+B,abnormal,dynamics,1,40,0.070298769771529
+B,abnormal,magnitude+waveform,2,37,0.06502636203866433
+B,abnormal,magnitude,1,25,0.043936731107205626
+B,abnormal,magnitude+dynamics,2,23,0.040421792618629174
+B,normal,magnitude,1,3,1.0

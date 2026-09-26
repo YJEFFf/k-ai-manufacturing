@@ -69,7 +69,7 @@ PYTHON=/opt/anaconda3/bin/python bash yejun/press_guard/tools/clean_repro.sh # �
 | `outputs/fig_missed_example_v2.png` | v2 미탐이 가장 많은 구간의 전류·성분 점수 |
 | `outputs/expected/` | `verify.py --freeze`로 동결한 결과 CSV 10개 + manifest/audit/summary |
 
-행 단위 조건표의 사분위 경계는 정상 학습 구간 기준으로 하나만 쓰고(열 `q25·q50·q75·boundary_source`), 정상·이상 평가에 같은 경계를 적용한다. 진폭 조건에는 길이 17 미만 행 수(`unreliable_amp_rows`)를 함께 적는다.
+행 단위 조건표의 사분위 경계는 정상 학습 구간 기준으로 하나만 쓰고(열 `q25·q50·q75·boundary_source`), 정상·이상 평가에 같은 경계를 적용한다. 진폭 조건에는 길이 17 미만 행 수(`unreliable_amp_rows`)를 함께 적는다. `amp_reliable`과 `unreliable_amp_*`는 **길이 ≥17 여부만** 뜻한다. 사인이 아닌 구간(파형 broken)의 `amp_proxy`는 √2×평균 제거 RMS일 뿐 사인 진폭이 아니다. 예를 들어 A 정상 평가의 broken 23구간 중 18구간이 길이 ≥17이고, 파형을 판정할 수 있는 이상 17구간은 모두 broken이다. 파형 조건별 구간 수는 [press_evidence/amplitude_reliability.csv](../analysis/press_evidence/amplitude_reliability.csv)에 따로 둔다. 조건표의 분모는 바꾸지 않았다.
 
 재적합 민감도(α=1%): v2는 raw 재적합 A 미탐 43, coarse 재적합 B 정상 알림 4/180·미탐 34로 matched(3/180·31)보다 나쁘다. 정밀도가 거친 입력으로 학습·보정하면 B의 정상 알림이 한 구간 늘어난다. 절제(matched): 예측 오차 성분 제거 시 미탐 44→86·31→71, 파형 제거 시 133·112, 센서 크기 제거 시 이상 탐지 20/21, 초반 창 전환 제거 시 46·33. 각 성분이 결과를 바꾼다.
 

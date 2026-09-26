@@ -1,0 +1,13 @@
+split,subset,wave,segments,length_ge17,length_lt17,r2_low_bound,amp_interpretation
+A,normal_test,sine-like,86,78,8,0.9947174617205652,길이≥17이면 사인 진폭으로 읽을 수 있다
+A,normal_test,broken,23,18,5,0.9947174617205652,사인이 아니므로 amp_proxy는 √2×평균 제거 RMS일 뿐 진폭이 아니다
+A,normal_test,unfittable(<10),11,0,11,0.9947174617205652,파형 판정 불가. 진폭 해석 안 함
+A,abnormal,sine-like,0,0,0,0.9947174617205652,길이≥17이면 사인 진폭으로 읽을 수 있다
+A,abnormal,broken,17,14,3,0.9947174617205652,사인이 아니므로 amp_proxy는 √2×평균 제거 RMS일 뿐 진폭이 아니다
+A,abnormal,unfittable(<10),4,0,4,0.9947174617205652,파형 판정 불가. 진폭 해석 안 함
+B,normal_test,sine-like,136,121,15,0.9947356237091651,길이≥17이면 사인 진폭으로 읽을 수 있다
+B,normal_test,broken,29,24,5,0.9947356237091651,사인이 아니므로 amp_proxy는 √2×평균 제거 RMS일 뿐 진폭이 아니다
+B,normal_test,unfittable(<10),15,0,15,0.9947356237091651,파형 판정 불가. 진폭 해석 안 함
+B,abnormal,sine-like,0,0,0,0.9947356237091651,길이≥17이면 사인 진폭으로 읽을 수 있다
+B,abnormal,broken,17,14,3,0.9947356237091651,사인이 아니므로 amp_proxy는 √2×평균 제거 RMS일 뿐 진폭이 아니다
+B,abnormal,unfittable(<10),4,0,4,0.9947356237091651,파형 판정 불가. 진폭 해석 안 함

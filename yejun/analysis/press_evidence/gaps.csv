@@ -1,0 +1,3 @@
+file,boundaries,zero_gaps,positive_gaps,gap_min_s,gap_q25_s,gap_median_s,gap_q75_s,gap_max_s,gaps_near_0p1_multiple,segments,segments_len50,segments_len_gt50,start_phase_ms_unique
+normal,599,1,598,1.545,2.4065,4.2225,5.808249999999999,16.643,0.021739130434782608,600,202,0,99
+abnormal,20,0,20,1.78,3.4415,5.3525,7.80375,8.572,0.0,21,5,0,21

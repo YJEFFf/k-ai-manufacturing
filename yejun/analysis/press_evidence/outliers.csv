@@ -1,0 +1,5 @@
+sensor,normal_robust_z_max,normal_rows_at_min_or_max,normal_nontrain_rows_outside_trainA_range,abnormal_rows_outside_trainA_range,abnormal_rows_robust_z_gt5,note
+AI0_Vibration,4.954664765867827,2.0,0.0,166,160.0,
+AI1_Vibration,3.7547715311932985,2.0,2.0,67,23.0,
+AI2_Current,1.7549352604479271,2.0,0.0,57,0.0,전류는 사인형이라 행 단위 robust z는 참고치
+어느 센서든,,,,205,,학습 범위 밖 행이 있는 이상 구간 19/21(진동 기준 18/21). 결정: 이상치를 제거하지 않는다(이상 신호 자체). 정상 최솟값·최댓값이 각 1행뿐이라 포화·클리핑 흔적 없음
