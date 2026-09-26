@@ -3,6 +3,9 @@
 가중치 전이가 아니라 같은 구조를 UCI 정상 사이클로 새로 적합한다. 대회 F1과 합산·직접 비교하지 않는다.
 """
 from pathlib import Path
+import argparse
+import hashlib
+import json
 import tempfile
 from zipfile import ZipFile
 import time
@@ -10,12 +13,15 @@ import time
 from sklearn.metrics import f1_score, roc_auc_score
 
 from common import *  # noqa: F403
+import contract
 from model import sine_score as sine_pinned, window_index  # noqa: E402
 from press.scores import ExpTail, sine_score as sine_blas  # noqa: E402
 
 EXT = YEJUN / "analysis" / "press_external"
-CACHE = Path(tempfile.gettempdir()) / "press_supplement_uci10hz.npz"   # 시스템 임시 폴더, Git 제외
 SPEC = PROTOCOL["E2_uci_v2_structure"]
+UCI_SENSORS = ("PS1", "EPS1", "FS1", "VS1")
+# 10 Hz 변환 규칙(EPS1·PS1 10개 평균, FS1 그대로, VS1 영차 유지)을 바꾸면 올린다. 캐시 키에 들어가 이전 변환 결과를 재사용하지 않는다(루브릭 검수 R23).
+CACHE_VERSION = "uci10hz-v1"
 CHANNELS = {"v2_4ch": ["PS1", "FS1", "VS1", "EPS1"], "v2_3ch": ["VS1", "PS1", "EPS1"], "v2_4ch_phase": ["PS1", "FS1", "VS1", "EPS1"]}
 CURRENT = "EPS1"
 
@@ -95,13 +101,32 @@ def contest_sanity():
     return got
 
 
-def load_uci():
+def cache_path(sha, version=CACHE_VERSION):
+    """캐시 키 = 원본 ZIP 해시 + 변환 규칙 버전 + 프로토콜의 변환 설명 + 센서 목록. 시스템 임시 폴더에 두며 Git에 넣지 않는다."""
+    spec = dict(zip=sha, version=version, resampling=SPEC["resampling"], sensors=UCI_SENSORS)
+    key = hashlib.sha256(json.dumps(spec, sort_keys=True, ensure_ascii=False).encode()).hexdigest()[:16]
+    return Path(tempfile.gettempdir()) / f"press_supplement_uci10hz_{key}.npz", key
+
+
+def read_cache(path, key):
+    """키·모양·유한값이 맞을 때만 캐시를 쓴다. 손상되면 None(다시 만든다)."""
+    try:
+        c = np.load(path, allow_pickle=False)
+        arrays = {s: c[s] for s in UCI_SENSORS}
+        ok = str(c["key"]) == key and all(a.shape == (2205, 600) and np.isfinite(a).all() for a in arrays.values())
+        return arrays if ok else None
+    except (OSError, KeyError, ValueError):
+        return None
+
+
+def load_uci(use_cache=True):
     archive = EXT / "data" / "hydraulic.zip"
     sha = D.sha256_file(archive)
-    if CACHE.exists():
-        c = np.load(CACHE, allow_pickle=False)
-        if str(c["sha"]) == sha:
-            return {k: c[k] for k in ("PS1", "EPS1", "FS1", "VS1")}, pd.read_csv(EXT / "partitions.csv"), sha
+    path, key = cache_path(sha)
+    if use_cache and path.exists():
+        arrays = read_cache(path, key)
+        if arrays is not None:
+            return arrays, pd.read_csv(EXT / "partitions.csv"), sha
     arrays = {}
     with ZipFile(archive) as z:
         for s in ("PS1", "EPS1", "FS1", "VS1"):
@@ -111,7 +136,8 @@ def load_uci():
             arrays[s] = raw.reshape(2205, 600, -1).mean(axis=2) if per >= 10 else np.repeat(raw, 10 // per, axis=1)
             assert arrays[s].shape == (2205, 600)
             print(s, raw.shape, "→", arrays[s].shape, flush=True)
-    np.savez(CACHE, sha=sha, **arrays)
+    if use_cache:
+        np.savez(path, key=key, **arrays)
     return arrays, pd.read_csv(EXT / "partitions.csv"), sha
 
 
@@ -139,11 +165,17 @@ def frame_of(arrays, cycles):
     return values, seg, pos
 
 
-def main():
+def main(argv=None):
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--out", type=Path, default=HERE, help="산출물 폴더(재현 검사는 임시 폴더를 쓴다)")
+    ap.add_argument("--no-cache", action="store_true", help="10 Hz 변환 캐시를 쓰지도 만들지도 않는다")
+    args = ap.parse_args(argv)
+    out = args.out
+    out.mkdir(parents=True, exist_ok=True)
     start = time.monotonic()
     sanity = contest_sanity()
     print("대회 자료 재현:", sanity, flush=True)
-    arrays, saved_parts, sha = load_uci()
+    arrays, saved_parts, sha = load_uci(use_cache=not args.no_cache)
     profile = profile_table()
     parts, stable, normal = partitions(profile)
     # 기존 외부 검증과 같은 분할인지 확인
@@ -212,13 +244,12 @@ def main():
     new = pd.DataFrame(metrics)
     old = pd.read_csv(EXT / "metrics.csv")
     both = pd.concat([old.assign(source="press_external(기존)"), new.assign(source="press_supplement E2")], ignore_index=True)
-    new.to_csv(HERE / "e2_uci_metrics.csv", index=False)
-    pd.DataFrame(strata).to_csv(HERE / "e2_uci_strata.csv", index=False)
-    pd.DataFrame(diag).to_csv(HERE / "e2_uci_component_diagnostic_posthoc.csv", index=False)
-    both[["source", "mode", "cooler", "model", "f1", "normal_alarm_rate", "recall", "auroc", "tp", "fp", "fn", "tn"]].to_csv(HERE / "e2_uci_comparison.csv", index=False)
-    D.dump_json(dict(experiment="E2", contest_sanity=sanity, uci_sha256=sha, cycles_stable=int(len(cycles)),
-                     elapsed_s=time.monotonic() - start, environment=D.environment(),
-                     code_sha256={n: D.sha256_file(HERE / n) for n in ("common.py", "uci_v2.py", "protocol.json")}), HERE / "e2_manifest.json")
+    new.to_csv(out / "e2_uci_metrics.csv", index=False)
+    pd.DataFrame(strata).to_csv(out / "e2_uci_strata.csv", index=False)
+    pd.DataFrame(diag).to_csv(out / "e2_uci_component_diagnostic_posthoc.csv", index=False)
+    both[["source", "mode", "cooler", "model", "f1", "normal_alarm_rate", "recall", "auroc", "tp", "fp", "fn", "tn"]].to_csv(out / "e2_uci_comparison.csv", index=False)
+    contract.write_manifest("E2", out, start, config=dict(alpha=SPEC["alpha"], variants=list(CHANNELS), cache_version=CACHE_VERSION, cache_used=not args.no_cache),
+                            contest_sanity=sanity, cycles_stable=int(len(cycles)))
     print(both.sort_values(["mode", "cooler", "model"])[["source", "mode", "cooler", "model", "f1", "normal_alarm_rate", "recall", "auroc"]].to_string(index=False))
 
 

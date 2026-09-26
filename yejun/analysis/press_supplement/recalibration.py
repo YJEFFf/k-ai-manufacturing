@@ -3,9 +3,11 @@
 풀과 평가가 같은 날 77분이다. 다른 날 자료로 재보정 효과를 직접 잰 것이 아니다.
 """
 from concurrent.futures import ProcessPoolExecutor
+import argparse
 import time
 
 from common import *  # noqa: F403
+import contract
 from model import layout  # noqa: E402
 
 SPEC = PROTOCOL["E3_recalibration_curve"]
@@ -127,20 +129,23 @@ def domain_shift(normal, abnormal):
     return pd.DataFrame(rows)
 
 
-def main():
+def main(argv=None):
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--out", type=Path, default=HERE, help="산출물 폴더(재현 검사는 임시 폴더를 쓴다)")
+    out = ap.parse_args(argv).out
+    out.mkdir(parents=True, exist_ok=True)
     start = time.monotonic()
     normal, abnormal, hashes = load_data()
     cfgs = grid()
     with ProcessPoolExecutor(4, initializer=_init) as ex:
         curve = pd.DataFrame(list(ex.map(run_config, cfgs, chunksize=2)))
-    curve.to_csv(HERE / "e3_curve.csv", index=False)
+    curve.to_csv(out / "e3_curve.csv", index=False)
     stab = stability(curve)
-    stab.to_csv(HERE / "e3_stability.csv", index=False)
+    stab.to_csv(out / "e3_stability.csv", index=False)
     shift = domain_shift(normal, abnormal)
-    shift.to_csv(HERE / "e3_domain_shift.csv", index=False)
-    D.dump_json(dict(experiment="E3", input_hashes=hashes, configs=len(cfgs), elapsed_s=time.monotonic() - start,
-                     code_sha256={n: D.sha256_file(HERE / n) for n in ("common.py", "recalibration.py", "protocol.json")},
-                     environment=D.environment()), HERE / "e3_manifest.json")
+    shift.to_csv(out / "e3_domain_shift.csv", index=False)
+    contract.write_manifest("E3", out, start, config=dict(configs=len(cfgs), workers=4, injection=[list(x) for x in INJECT], onset=T0,
+                                                         noise_seeds=[20260926, 20260927], domain_shift_gains=[1.0, .85, 1.15, 1.3]))
     print(stab.to_string(index=False))
     print(shift.to_string(index=False))
 

@@ -91,14 +91,31 @@ UCI 안정 사이클 1,449개를 10 Hz로 맞추고(EPS1·PS1 10개 평균, FS1 
 - E3의 풀과 평가가 같은 날 77분이다. 다른 날 자료로 재보정 효과를 잰 것이 아니다.
 - UCI는 다른 설비·센서·샘플링이다. 가중치를 전이하지 않았고 대회 성능과 합산하지 않는다.
 
-## 재현
+## 재현과 검증
 
 ```bash
 export OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
 /opt/anaconda3/bin/python yejun/analysis/press_supplement/fault_injection.py   # E1 약 20분
-/opt/anaconda3/bin/python yejun/analysis/press_supplement/uci_v2.py            # E2 약 3분(첫 실행은 UCI 읽기 포함), press_external/data/hydraulic.zip 필요
+/opt/anaconda3/bin/python yejun/analysis/press_supplement/uci_v2.py            # E2 약 2분(첫 실행은 UCI 10 Hz 변환 포함), press_external/data/hydraulic.zip 필요
 /opt/anaconda3/bin/python yejun/analysis/press_supplement/recalibration.py     # E3 약 3분(4 프로세스)
-/opt/anaconda3/bin/python yejun/analysis/press_supplement/figures.py
+/opt/anaconda3/bin/python yejun/analysis/press_supplement/figures.py           # 그림(CSV에서 다시 그리는 파생물)
+/opt/anaconda3/bin/python yejun/analysis/press_supplement/verify.py            # 무결성 + 동결 기대값 비교
+/opt/anaconda3/bin/python yejun/analysis/press_supplement/verify.py --rerun E1,E2,E3   # 임시 폴더에 다시 만들어 기대값과 비교
+/opt/anaconda3/bin/python -m pytest -q yejun/analysis/press_supplement/test_contract.py
 ```
 
-각 실험의 입력 해시·코드 해시·환경은 `e1_manifest.json`, `e2_manifest.json`, `e3_manifest.json`에 있다. E1은 두 번 실행해 요약이 같음을 확인했다.
+세 실험 스크립트는 `--out`으로 산출물 폴더를 바꿀 수 있고, E2는 `--no-cache`로 변환 캐시 없이 돌릴 수 있다.
+
+**실행 계약([contract.py](contract.py), 루브릭 검수 R9·R24).** 각 `e1~e3_manifest.json`에 다음을 남긴다.
+- 실제 의존 코드의 해시: 공용 `common.py`·`contract.py`·`protocol.json`, 실험 스크립트, `press_guard/model.py`·`train.py`, v1 `press` 패키지
+- 대회 원본과 UCI ZIP 해시
+- 기준 모델 해시: E1·E2는 `guard_A/B.json`, E3는 `guard_A.json`
+- 외부 비교표 해시: E2의 `press_external/metrics.csv`·`partitions.csv`, `press_guard/outputs/metrics.csv`
+- 필수 산출물 해시, 설정·난수 시드, 실험 프로토콜 식별자(`press-supplement-v1`, 공용 자료 처리 버전과 구분)
+- 실제 BLAS·OpenMP 구성(threadpoolctl)
+
+[verify.py](verify.py)는 이 기록과 현재 파일을 대조하고, 결과 CSV를 [expected/](expected)의 동결값과 비교한다(수치 허용오차 1e-9). 다음 경우에 실패한다: 산출물 누락·변경, 공유 모델 코드 변경, 기준 모델 변경, 외부 비교표 변경, 원본 변경, 동결값 변조. 동결은 무결성이 통과한 실행만 받는다. 그림과 Git 제외 원표(`predictions_e1_records.csv`, 있으면 해시 대조)는 필수 산출물이 아니다.
+
+**E2 변환 캐시(R23).** 캐시 키는 UCI ZIP 해시 + 변환 규칙 버전(`CACHE_VERSION`) + 프로토콜의 변환 설명 + 센서 목록이다. 읽을 때 키·모양·유한값을 확인하고, 맞지 않거나 손상되면 다시 만든다.
+
+계약을 도입하며 세 실험을 다시 돌렸고, 결과 CSV는 이전 실행분과 바이트 단위로 같았다(E1은 세 번째 실행). 원행 센서와 행 단위 원표는 Git 제외다.

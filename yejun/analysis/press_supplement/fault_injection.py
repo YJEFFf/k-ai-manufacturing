@@ -2,11 +2,11 @@
 
 같은 날·같은 시간대 정상 평가 기록에 주입하므로 날짜 교락이 없다. 인공 신호이며 실제 고장 물리가 아니다.
 """
+import argparse
 import time
 
 from common import *  # noqa: F403
-
-OUT = HERE
+import contract
 
 
 def run_split(sid, normal, zs):
@@ -111,7 +111,11 @@ def reference(normal, abnormal):
     return out
 
 
-def main():
+def main(argv=None):
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--out", type=Path, default=HERE, help="산출물 폴더(재현 검사는 임시 폴더를 쓴다)")
+    OUT = ap.parse_args(argv).out
+    OUT.mkdir(parents=True, exist_ok=True)
     start = time.monotonic()
     normal, abnormal, hashes = load_data()
     zs = [standard_noise(len(normal), rep) for rep in range(5)]
@@ -123,10 +127,8 @@ def main():
     floor.to_csv(OUT / "e1_detection_floor.csv", index=False)
     ref = reference(normal, abnormal)
     ref.to_csv(OUT / "e1_reference_segments.csv", index=False)
-    D.dump_json(dict(experiment="E1", input_hashes=hashes, elapsed_s=time.monotonic() - start,
-                     code_sha256={n: D.sha256_file(HERE / n) for n in ("common.py", "fault_injection.py", "protocol.json")},
-                     artifacts={f"guard_{s}.json": D.sha256_file(ARTIFACTS / f"guard_{s}.json") for s in D.SPLITS},
-                     environment=D.environment()), OUT / "e1_manifest.json")
+    contract.write_manifest("E1", OUT, start, config=dict(noise_seeds=[20260926 + r for r in range(5)], repetitions=5, onset=[10, 0],
+                                                         post_window_rows=POST_WINDOW, alphas=list(ALPHAS)))
     print(floor.to_string(index=False))
 
 
