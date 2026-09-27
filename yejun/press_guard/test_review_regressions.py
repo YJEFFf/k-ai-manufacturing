@@ -17,7 +17,7 @@ def copy_run(tmp_path):
 
 
 def update_json(path,update):
-    data=json.loads(path.read_text()); update(data); path.write_text(json.dumps(data))
+    data=json.loads(path.read_text(encoding="utf-8")); update(data); path.write_text(json.dumps(data), encoding="utf-8")
 
 
 @pytest.mark.parametrize("kind",["audit_missing","audit_false","audit_stale","code_missing","summary_changed",
@@ -53,8 +53,8 @@ def test_analysis_code_is_mandatory(copy_run,tmp_path):
     for name in CODE_FILES:
         target=code/name; target.parent.mkdir(parents=True,exist_ok=True)
         shutil.copy2(HERE/name,target)
-    (code/"analyze.py").write_text('raise RuntimeError("changed")\n')
-    manifest=json.loads((out/"manifest.json").read_text())
+    (code/"analyze.py").write_text('raise RuntimeError("changed")\n', encoding="utf-8")
+    manifest=json.loads((out/"manifest.json").read_text(encoding="utf-8"))
     bad=training_errors(manifest,out,art,code_root=code)
     assert any("analyze.py" in message for message in bad)
 
@@ -79,13 +79,28 @@ def test_gain_is_not_only_in_warmup():
 def test_v1_rerun_does_not_break_v2_verify(tmp_path):
     """v1 패키지를 다시 실행하면 v1 manifest의 타이밍·run_id가 바뀐다. v2 검증은 그 파일 해시에 묶이면 안 된다."""
     from contracts import SOURCES, analysis_errors
-    manifest=json.loads((HERE/"outputs"/"manifest.json").read_text())
+    manifest=json.loads((HERE/"outputs"/"manifest.json").read_text(encoding="utf-8"))
     root=tmp_path/"src"
     for name in SOURCES:
         target=root/name; target.parent.mkdir(parents=True,exist_ok=True); shutil.copy2(HERE.parent/name,target)
     live=root/"press_submission"/"outputs"/"manifest.json"; live.parent.mkdir(parents=True,exist_ok=True)
-    original=json.loads((HERE.parent/"press_submission"/"outputs"/"manifest.json").read_text())
+    original=json.loads((HERE.parent/"press_submission"/"outputs"/"manifest.json").read_text(encoding="utf-8"))
     original["timings_s"]={"total_s":1.0}; original["run_id"]="other+run"
-    live.write_text(json.dumps(original))
+    live.write_text(json.dumps(original), encoding="utf-8")
     assert "press_submission/outputs/manifest.json" not in SOURCES
     assert analysis_errors(manifest,HERE/"outputs",source_root=root)==[]
+
+
+
+def test_v1_table_is_compared_with_v1_tolerance(tmp_path):
+    """v2 분석은 v1 비교표를 바이트가 아니라 v1 verify 허용오차로 대조한다(평가관 06 R9): LSTM 값 1e-6 차이는 통과, 1e-2는 실패."""
+    import importlib.util
+    base = HERE.parent / "press_submission"
+    spec = importlib.util.spec_from_file_location("press_v1_verify_test", base / "verify.py")
+    v1 = importlib.util.module_from_spec(spec); spec.loader.exec_module(v1)
+    table = pd.read_csv(base / "outputs" / "model_comparison_all.csv")
+    lstm = table.index[table.model.astype(str).str.contains("lstm")][0]
+    for delta, ok in ((1e-6, True), (1e-2, False)):
+        t = table.copy(); t.loc[lstm, "f1_all_rows"] += delta
+        path = tmp_path / "model_comparison_all.csv"; t.to_csv(path, index=False)
+        assert v1.compare_csv(path, base / "outputs" / "expected" / "model_comparison_all.csv")["ok"] is ok

@@ -4,16 +4,27 @@ import json
 from pathlib import Path
 from model import D, HERE, GuardModel, VERSION
 
-CODE_FILES = ("model.py", "train.py", "predict.py", "recalibrate.py", "analyze.py", "audit.py", "verify.py", "contracts.py",
-              "serve.py", "benchmark.py", "tools/clean_repro.sh", "web/app.js", "web/index.html", "web/style.css")
+CODE_FILES = ("model.py", "probability.py", "insights.py", "monitor.py", "simulate.py", "runtime.py", "train.py", "predict.py", "recalibrate.py", "analyze.py",
+              "audit.py", "verify.py", "contracts.py", "serve.py", "benchmark.py", "tools/clean_repro.sh", "web/app.js", "web/index.html", "web/style.css")
 TRAIN_TABLES = ("metrics.csv", "rolling.csv", "cases_A.csv", "cases_B.csv")
-PREDICTIONS = tuple(f"predictions_{kind}_{sid}.csv" for kind in ("normal", "abnormal") for sid in ("A", "B"))
+PREDICTIONS = tuple(f"predictions_{kind}_{sid}.csv" for kind in ("normal", "abnormal") for sid in ("A", "B")) + ("test_predictions_A.csv", "test_predictions_B.csv")
 ANALYSIS_TABLES = ("model_comparison_v2.csv", "robustness_v2.csv", "sensitivity_v2.csv", "ablation_v2.csv", "error_conditions_v2.csv",
                    "error_conditions_segments_v2.csv", "interaction_2x2_v2.csv", "records_first_alarm_v2.csv", "uncertainty_v2.csv", "workload_v2.csv",
                    "decision_table_v2.csv")
-ANALYSIS_FILES = ANALYSIS_TABLES + ("analysis_summary.json", "model_comparison_v2.md", "fig_recall_by_position_v2.png",
-                                    "fig_first_alarm_v2.png", "fig_missed_example_v2.png")
-ARTIFACTS = ("guard_A.json", "guard_B.json")
+# 루브릭 사이클2 보강 표(verify 동결 대상)와 그림
+INSIGHT_TABLES = ("probability_eval_v2.csv", "probability_reliability_v2.csv", "probability_conversion_v2.csv", "alert_levels_v2.csv",
+                  "alert_budget_design_v2.csv", "queue_mixed_ranks_v2.csv", "queue_injection_ranks_v2.csv", "queue_key_selection_v2.csv",
+                  "sensor_importance_v2.csv", "position_vibration_misses_v2.csv", "coupling_fit_v2.csv", "coupling_records_v2.csv",
+                  "fp_events_v2.csv", "near_miss_v2.csv", "near_miss_corr_v2.csv", "error_conditions_stats_v2.csv",
+                  "alert_levels_injection_v2.csv", "quality_windows_v2.csv", "label_free_alert_probability_v2.csv", "monitor_gain_v2.csv",
+                  "expected_effect_v2.csv", "error_condition_summary_v2.csv")
+INSIGHT_FILES = list(INSIGHT_TABLES) + ["fig_sensor_importance_v2.png", "fig_coupling_v2.png", "fig_false_alarm_cases_v2.png", "fig_probability_reliability_v2.png"]
+ANALYSIS_FILES = ANALYSIS_TABLES + INSIGHT_TABLES + ("analysis_summary.json", "model_comparison_v2.md", "fig_recall_by_position_v2.png",
+                                    "fig_first_alarm_v2.png", "fig_missed_example_v2.png", "fig_sensor_importance_v2.png", "fig_coupling_v2.png",
+                                    "fig_false_alarm_cases_v2.png", "fig_probability_reliability_v2.png")
+MODEL_ARTIFACTS = ("guard_A.json", "guard_B.json")
+PROBABILITY_ARTIFACTS = ("probability_A.json", "probability_B.json")   # 경보와 무관한 이상 확률 층
+ARTIFACTS = MODEL_ARTIFACTS + PROBABILITY_ARTIFACTS
 # v1의 실행 중 manifest(타이밍·run_id가 매 실행마다 바뀜)는 분석 시점에 analyze.source_hashes()가 예측 파일 해시로 확인한다.
 # 여기 넣으면 v1 패키지를 다시 실행할 때마다 v2 verify가 깨진다(패키지 간 결합).
 SOURCES = ("press_submission/outputs/expected/manifest.json",
@@ -27,7 +38,7 @@ AUDIT_NAMES = ("실행 코드·선행 산출물이 manifest와 같음", "저장 
 
 
 def read_json(path):
-    value = json.loads(Path(path).read_text())
+    value = json.loads(Path(path).read_text(encoding="utf-8"))
     if not isinstance(value, dict): raise ValueError(f"{path}: JSON 객체가 아님")
     return value
 
@@ -61,7 +72,13 @@ def training_errors(manifest, out, artifacts, code_root=HERE):
     bad+=check_files(code_root,manifest.get("code_hashes"),CODE_FILES)
     bad+=check_files(out,manifest.get("outputs"),TRAIN_TABLES+PREDICTIONS)
     bad+=check_files(artifacts,manifest.get("artifacts"),ARTIFACTS)
-    for name in ARTIFACTS:
+    for name in PROBABILITY_ARTIFACTS:
+        try:
+            from probability import ProbabilityCalibrator
+            cal=ProbabilityCalibrator.load(Path(artifacts)/name)
+            if cal.state.get("split")!=name.removeprefix("probability_").removesuffix(".json"): bad.append(f"{name}: 분할 불일치")
+        except (OSError,ValueError,KeyError,TypeError) as exc: bad.append(f"{name}: {exc}")
+    for name in MODEL_ARTIFACTS:
         try:
             model=GuardModel.load(Path(artifacts)/name)
             if model.state.get("input_hashes")!=manifest.get("input_hashes"): bad.append(f"{name}: 입력 해시 불일치")

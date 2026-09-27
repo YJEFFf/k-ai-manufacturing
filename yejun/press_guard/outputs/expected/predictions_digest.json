@@ -1,0 +1,984 @@
+{
+  "predictions_normal_A.csv": {
+    "sha256": "a0f444e2a25500ab1ebadfc8f8a9e208855191c2f36f7e5c0a83336135f8cde7",
+    "rows": 4090,
+    "columns": [
+      "row_id",
+      "record_id",
+      "timestamp",
+      "status",
+      "position",
+      "score",
+      "p_value",
+      "alarm",
+      "reason",
+      "action",
+      "alpha",
+      "magnitude",
+      "current_residual",
+      "g_magnitude",
+      "g_waveform",
+      "g_dynamics",
+      "waveform_window",
+      "magnitude_sensor",
+      "is_scored",
+      "anomaly_score",
+      "criterion",
+      "model_id",
+      "protocol_version",
+      "alert_unit",
+      "beyond_calibration_length",
+      "notification",
+      "alert_level",
+      "escalation",
+      "likelihood_ratio",
+      "anomaly_probability",
+      "probability_prior",
+      "record_likelihood_ratio",
+      "record_probability",
+      "probability_source"
+    ],
+    "exact_sha256": "9bdd2f1e222fca8827477e9c0975c024c2b37e049457562fc3a3fd47329136f8",
+    "numeric_summary": {
+      "score": [
+        4090,
+        2469.9301861824906,
+        2158.555683214404,
+        0.0014544369986874,
+        3.8220926214884017
+      ],
+      "p_value": [
+        4090,
+        3894.4876033057853,
+        3731.708421555905,
+        0.024793388429752,
+        1.0
+      ],
+      "alpha": [
+        4090,
+        40.9,
+        0.40900000000000014,
+        0.01,
+        0.01
+      ],
+      "magnitude": [
+        4090,
+        3631.1539244351366,
+        3941.7710512814997,
+        0.0674470910594991,
+        4.062223622756251
+      ],
+      "current_residual": [
+        3851,
+        26075.73249226912,
+        256467.6809956627,
+        0.0003905488819384,
+        31.84395862766135
+      ],
+      "g_magnitude": [
+        4090,
+        816.9847169395049,
+        465.7726249917314,
+        3.630162428686348e-05,
+        3.8220926214884017
+      ],
+      "g_waveform": [
+        3497,
+        1641.652379710085,
+        1359.8044651411221,
+        0.0028990021034027,
+        2.687449121976639
+      ],
+      "g_dynamics": [
+        3851,
+        1268.6536847328198,
+        695.7883410859627,
+        3.8609101852604966e-05,
+        2.5491136291358476
+      ],
+      "waveform_window": [
+        4090,
+        31072.0,
+        238688.0,
+        6.0,
+        8.0
+      ],
+      "is_scored": [
+        4090,
+        4090.0,
+        4090.0,
+        1.0,
+        1.0
+      ],
+      "anomaly_score": [
+        4090,
+        195.5123966942147,
+        32.733214944334385,
+        0.0,
+        0.975206611570248
+      ],
+      "beyond_calibration_length": [
+        4090,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "likelihood_ratio": [
+        4090,
+        226.5185134935992,
+        1838.3922482668231,
+        0.0429102854982038,
+        42.75916666666668
+      ],
+      "anomaly_probability": [
+        4090,
+        2.1567637944724014,
+        0.0920045336263299,
+        0.0004332494408182,
+        0.3016324635091206
+      ],
+      "probability_prior": [
+        4090,
+        40.9,
+        0.40900000000000014,
+        0.01,
+        0.01
+      ],
+      "record_likelihood_ratio": [
+        4090,
+        1673.225805189727,
+        60371.87586702517,
+        0.0429102854982038,
+        42.75916666666668
+      ],
+      "record_probability": [
+        4090,
+        12.598379815480435,
+        3.006105453896202,
+        0.0004332494408182,
+        0.3016324635091206
+      ]
+    },
+    "alarm_rows": 0
+  },
+  "predictions_normal_B.csv": {
+    "sha256": "766e20f562cf8d935a9ab8871734e107b298e872f3af76ef3c046c7ebc4cd8d6",
+    "rows": 6097,
+    "columns": [
+      "row_id",
+      "record_id",
+      "timestamp",
+      "status",
+      "position",
+      "score",
+      "p_value",
+      "alarm",
+      "reason",
+      "action",
+      "alpha",
+      "magnitude",
+      "current_residual",
+      "g_magnitude",
+      "g_waveform",
+      "g_dynamics",
+      "waveform_window",
+      "magnitude_sensor",
+      "is_scored",
+      "anomaly_score",
+      "criterion",
+      "model_id",
+      "protocol_version",
+      "alert_unit",
+      "beyond_calibration_length",
+      "notification",
+      "alert_level",
+      "escalation",
+      "likelihood_ratio",
+      "anomaly_probability",
+      "probability_prior",
+      "record_likelihood_ratio",
+      "record_probability",
+      "probability_source"
+    ],
+    "exact_sha256": "ffec3b230504c1426c805b0cd1a366ce080f7e5397fc5c5a1f5f0de3686ff987",
+    "numeric_summary": {
+      "score": [
+        6097,
+        4160.801269080723,
+        4215.442746887446,
+        0.0016315580545932,
+        4.594198685448777
+      ],
+      "p_value": [
+        6097,
+        5546.842975206611,
+        5128.249026705826,
+        0.0082644628099173,
+        1.0
+      ],
+      "alpha": [
+        6097,
+        60.97,
+        0.6097000000000001,
+        0.01,
+        0.01
+      ],
+      "magnitude": [
+        6097,
+        6199.75639189283,
+        8019.548066062933,
+        0.0687521060949817,
+        4.519375061266168
+      ],
+      "current_residual": [
+        5738,
+        41033.750900063984,
+        450279.82574300375,
+        0.0048276183550228,
+        39.38527496411497
+      ],
+      "g_magnitude": [
+        6097,
+        1762.9338546693803,
+        1495.9921498353915,
+        4.2857303227502786e-05,
+        4.594198685448777
+      ],
+      "g_waveform": [
+        5205,
+        2391.9016634144264,
+        2072.5037626285516,
+        0.0010190304343318,
+        2.9033458495936673
+      ],
+      "g_dynamics": [
+        5738,
+        2028.3002709593484,
+        1305.1962337611783,
+        0.0001821896122799,
+        3.4306126938342856
+      ],
+      "waveform_window": [
+        6097,
+        46298.0,
+        355516.0,
+        6.0,
+        8.0
+      ],
+      "is_scored": [
+        6097,
+        6097.0,
+        6097.0,
+        1.0,
+        1.0
+      ],
+      "anomaly_score": [
+        6097,
+        550.1570247933881,
+        131.56307629260291,
+        0.0,
+        0.9917355371900828
+      ],
+      "beyond_calibration_length": [
+        6097,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "likelihood_ratio": [
+        6097,
+        653.0470032148194,
+        43945.04577312411,
+        0.0423690717015059,
+        121.0
+      ],
+      "anomaly_probability": [
+        6097,
+        4.577524243288844,
+        0.90973762371055,
+        0.0004277873408988,
+        0.5499999999999999
+      ],
+      "probability_prior": [
+        6097,
+        60.97,
+        0.6097000000000001,
+        0.01,
+        0.01
+      ],
+      "record_likelihood_ratio": [
+        6097,
+        6846.4589909580445,
+        761470.3984157438,
+        0.0423690717015059,
+        121.0
+      ],
+      "record_probability": [
+        6097,
+        34.18654475356014,
+        15.743981800944713,
+        0.0004277873408988,
+        0.5499999999999999
+      ]
+    },
+    "alarm_rows": 3
+  },
+  "predictions_abnormal_A.csv": {
+    "sha256": "e51f0fd7eecfca0fa31a6b15beef7fee5729826aa6f9998cd690a3114a00a9ba",
+    "rows": 600,
+    "columns": [
+      "row_id",
+      "record_id",
+      "timestamp",
+      "status",
+      "position",
+      "score",
+      "p_value",
+      "alarm",
+      "reason",
+      "action",
+      "alpha",
+      "magnitude",
+      "current_residual",
+      "g_magnitude",
+      "g_waveform",
+      "g_dynamics",
+      "waveform_window",
+      "magnitude_sensor",
+      "is_scored",
+      "anomaly_score",
+      "criterion",
+      "model_id",
+      "protocol_version",
+      "alert_unit",
+      "beyond_calibration_length",
+      "notification",
+      "alert_level",
+      "escalation",
+      "likelihood_ratio",
+      "anomaly_probability",
+      "probability_prior",
+      "record_likelihood_ratio",
+      "record_probability",
+      "probability_source"
+    ],
+    "exact_sha256": "3c8d96347d73127aea33e5c56e6c4eb4243a2926d7874cd1068b8a208668bafd",
+    "numeric_summary": {
+      "score": [
+        600,
+        15782.176088285592,
+        536874.9437593002,
+        0.0010903708512013,
+        62.03744230345713
+      ],
+      "p_value": [
+        600,
+        30.87603305785121,
+        24.088655146506387,
+        0.0082644628099173,
+        1.0
+      ],
+      "alpha": [
+        600,
+        6.0,
+        0.06000000000000001,
+        0.01,
+        0.01
+      ],
+      "magnitude": [
+        600,
+        2491.6106300745373,
+        22655.83569604784,
+        0.1742028736486496,
+        24.37004151778999
+      ],
+      "current_residual": [
+        558,
+        63176.28088863037,
+        11895162.81432345,
+        0.0008441349321373,
+        500.7473410384364
+      ],
+      "g_magnitude": [
+        600,
+        2517.80111644689,
+        32973.79570120234,
+        0.0010903708512013,
+        31.97989681138388
+      ],
+      "g_waveform": [
+        499,
+        13483.0373054694,
+        460013.8585175654,
+        0.8037478473448777,
+        56.011444125635485
+      ],
+      "g_dynamics": [
+        558,
+        7234.1515073266655,
+        168777.49891193706,
+        7.72216363882458e-05,
+        62.03744230345713
+      ],
+      "waveform_window": [
+        600,
+        4526.0,
+        34564.0,
+        6.0,
+        8.0
+      ],
+      "is_scored": [
+        600,
+        600.0,
+        600.0,
+        1.0,
+        1.0
+      ],
+      "anomaly_score": [
+        600,
+        569.1239669421489,
+        562.3365890308039,
+        0.0,
+        0.9917355371900828
+      ],
+      "beyond_calibration_length": [
+        600,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "likelihood_ratio": [
+        600,
+        67745.1755721657,
+        8156654.81381942,
+        0.0379045423989244,
+        121.0
+      ],
+      "anomaly_probability": [
+        600,
+        309.2501493943078,
+        169.14938576718697,
+        0.000382727629124,
+        0.5499999999999999
+      ],
+      "probability_prior": [
+        600,
+        6.0,
+        0.06000000000000001,
+        0.01,
+        0.01
+      ],
+      "record_likelihood_ratio": [
+        600,
+        69370.6103091109,
+        8380828.295280032,
+        0.0379045423989244,
+        121.0
+      ],
+      "record_probability": [
+        600,
+        315.7510252139705,
+        173.35291871235134,
+        0.000382727629124,
+        0.5499999999999999
+      ]
+    },
+    "alarm_rows": 556
+  },
+  "predictions_abnormal_B.csv": {
+    "sha256": "cce233ba2b27cdfc51bd7cb52c18d7afc58ef6aab8001c821550f3194a01c6a7",
+    "rows": 600,
+    "columns": [
+      "row_id",
+      "record_id",
+      "timestamp",
+      "status",
+      "position",
+      "score",
+      "p_value",
+      "alarm",
+      "reason",
+      "action",
+      "alpha",
+      "magnitude",
+      "current_residual",
+      "g_magnitude",
+      "g_waveform",
+      "g_dynamics",
+      "waveform_window",
+      "magnitude_sensor",
+      "is_scored",
+      "anomaly_score",
+      "criterion",
+      "model_id",
+      "protocol_version",
+      "alert_unit",
+      "beyond_calibration_length",
+      "notification",
+      "alert_level",
+      "escalation",
+      "likelihood_ratio",
+      "anomaly_probability",
+      "probability_prior",
+      "record_likelihood_ratio",
+      "record_probability",
+      "probability_source"
+    ],
+    "exact_sha256": "5d0fbf2d101a4bc5dba26149b13883dc86e5d69c10647f9c136eafd412150da4",
+    "numeric_summary": {
+      "score": [
+        600,
+        15849.937057228084,
+        541573.6392930825,
+        0.0011586342538696,
+        60.298741917918406
+      ],
+      "p_value": [
+        600,
+        30.016528925619802,
+        22.80254081005395,
+        0.0082644628099173,
+        1.0
+      ],
+      "alpha": [
+        600,
+        6.0,
+        0.06000000000000001,
+        0.01,
+        0.01
+      ],
+      "magnitude": [
+        600,
+        2509.0875874326293,
+        22952.40128838052,
+        0.1747893141954363,
+        24.522739208237873
+      ],
+      "current_residual": [
+        558,
+        63155.56101339811,
+        11887612.301688936,
+        0.0097311497739838,
+        500.6346097899532
+      ],
+      "g_magnitude": [
+        600,
+        2624.528609319761,
+        35979.47252920852,
+        0.0011586342538696,
+        33.437835212311384
+      ],
+      "g_waveform": [
+        499,
+        13621.851377023095,
+        469596.6529801836,
+        0.8029365348466109,
+        56.591119339340665
+      ],
+      "g_dynamics": [
+        558,
+        7039.94542077856,
+        159621.89022507652,
+        0.0004556174168438,
+        60.298741917918406
+      ],
+      "waveform_window": [
+        600,
+        4526.0,
+        34564.0,
+        6.0,
+        8.0
+      ],
+      "is_scored": [
+        600,
+        600.0,
+        600.0,
+        1.0,
+        1.0
+      ],
+      "anomaly_score": [
+        600,
+        569.9834710743803,
+        562.7694829588143,
+        0.0,
+        0.9917355371900828
+      ],
+      "beyond_calibration_length": [
+        600,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "likelihood_ratio": [
+        600,
+        68732.30847006678,
+        8316094.095634267,
+        0.0369371394320821,
+        121.0
+      ],
+      "anomaly_probability": [
+        600,
+        312.4429123211158,
+        171.82059355909223,
+        0.0003729632650096,
+        0.5499999999999999
+      ],
+      "probability_prior": [
+        600,
+        6.0,
+        0.06000000000000001,
+        0.01,
+        0.01
+      ],
+      "record_likelihood_ratio": [
+        600,
+        69697.36568152893,
+        8433216.13750789,
+        0.0369371394320821,
+        121.0
+      ],
+      "record_probability": [
+        600,
+        316.8137807569354,
+        174.24001398203055,
+        0.0003729632650096,
+        0.5499999999999999
+      ]
+    },
+    "alarm_rows": 569
+  },
+  "test_predictions_A.csv": {
+    "sha256": "d01201af449699416c0c890e5bd8ba53e9bd6df0c1f11a0f0d45008f860b723f",
+    "rows": 4690,
+    "columns": [
+      "subset",
+      "label",
+      "row_id",
+      "record_id",
+      "timestamp",
+      "status",
+      "position",
+      "score",
+      "p_value",
+      "alarm",
+      "reason",
+      "action",
+      "alpha",
+      "magnitude",
+      "current_residual",
+      "g_magnitude",
+      "g_waveform",
+      "g_dynamics",
+      "waveform_window",
+      "magnitude_sensor",
+      "is_scored",
+      "anomaly_score",
+      "criterion",
+      "model_id",
+      "protocol_version",
+      "alert_unit",
+      "beyond_calibration_length",
+      "notification",
+      "alert_level",
+      "escalation",
+      "likelihood_ratio",
+      "anomaly_probability",
+      "probability_prior",
+      "record_likelihood_ratio",
+      "record_probability",
+      "probability_source"
+    ],
+    "exact_sha256": "245157340a20f9b0e0d529dedcf02fddbe0bfbdbf8cfcd601cf8edb5f2cd1a8e",
+    "numeric_summary": {
+      "score": [
+        4690,
+        18252.106274468082,
+        539033.4994425145,
+        0.0010903708512013,
+        62.03744230345713
+      ],
+      "p_value": [
+        4690,
+        3925.363636363637,
+        3755.7970767024112,
+        0.0082644628099173,
+        1.0
+      ],
+      "alpha": [
+        4690,
+        46.9,
+        0.4690000000000001,
+        0.01,
+        0.01
+      ],
+      "magnitude": [
+        4690,
+        6122.764554509675,
+        26597.606747329337,
+        0.0674470910594991,
+        24.37004151778999
+      ],
+      "current_residual": [
+        4409,
+        89252.01338089947,
+        12151630.49531911,
+        0.0003905488819384,
+        500.7473410384364
+      ],
+      "g_magnitude": [
+        4690,
+        3334.785833386395,
+        33439.56832619407,
+        3.630162428686348e-05,
+        31.97989681138388
+      ],
+      "g_waveform": [
+        3996,
+        15124.689685179485,
+        461373.66298270656,
+        0.0028990021034027,
+        56.011444125635485
+      ],
+      "g_dynamics": [
+        4409,
+        8502.805192059484,
+        169473.287253023,
+        3.8609101852604966e-05,
+        62.03744230345713
+      ],
+      "waveform_window": [
+        4690,
+        35598.0,
+        273252.0,
+        6.0,
+        8.0
+      ],
+      "is_scored": [
+        4690,
+        4690.0,
+        4690.0,
+        1.0,
+        1.0
+      ],
+      "anomaly_score": [
+        4690,
+        764.6363636363635,
+        595.0698039751383,
+        0.0,
+        0.9917355371900828
+      ],
+      "beyond_calibration_length": [
+        4690,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "likelihood_ratio": [
+        4690,
+        67971.6940856593,
+        8158493.206067687,
+        0.0379045423989244,
+        121.0
+      ],
+      "anomaly_probability": [
+        4690,
+        311.4069131887802,
+        169.24139030081332,
+        0.000382727629124,
+        0.5499999999999999
+      ],
+      "probability_prior": [
+        4690,
+        46.9,
+        0.4690000000000001,
+        0.01,
+        0.01
+      ],
+      "record_likelihood_ratio": [
+        4690,
+        71043.83611430062,
+        8441200.171147058,
+        0.0379045423989244,
+        121.0
+      ],
+      "record_probability": [
+        4690,
+        328.34940502945096,
+        176.35902416624756,
+        0.000382727629124,
+        0.5499999999999999
+      ]
+    },
+    "alarm_rows": 556
+  },
+  "test_predictions_B.csv": {
+    "sha256": "e042763e2aeac168fb76c08001f789cf4cfdc2477383f37aa5f394f469c3b980",
+    "rows": 6697,
+    "columns": [
+      "subset",
+      "label",
+      "row_id",
+      "record_id",
+      "timestamp",
+      "status",
+      "position",
+      "score",
+      "p_value",
+      "alarm",
+      "reason",
+      "action",
+      "alpha",
+      "magnitude",
+      "current_residual",
+      "g_magnitude",
+      "g_waveform",
+      "g_dynamics",
+      "waveform_window",
+      "magnitude_sensor",
+      "is_scored",
+      "anomaly_score",
+      "criterion",
+      "model_id",
+      "protocol_version",
+      "alert_unit",
+      "beyond_calibration_length",
+      "notification",
+      "alert_level",
+      "escalation",
+      "likelihood_ratio",
+      "anomaly_probability",
+      "probability_prior",
+      "record_likelihood_ratio",
+      "record_probability",
+      "probability_source"
+    ],
+    "exact_sha256": "396c2ed7a121193fdb4cb63864ed7836f05ceb3eda1f9165406bcdf1d475e5bb",
+    "numeric_summary": {
+      "score": [
+        6697,
+        20010.738326308805,
+        545789.08203997,
+        0.0011586342538696,
+        60.298741917918406
+      ],
+      "p_value": [
+        6697,
+        5576.859504132231,
+        5151.05156751588,
+        0.0082644628099173,
+        1.0
+      ],
+      "alpha": [
+        6697,
+        66.97,
+        0.6697000000000002,
+        0.01,
+        0.01
+      ],
+      "magnitude": [
+        6697,
+        8708.843979325458,
+        30971.94935444345,
+        0.0687521060949817,
+        24.522739208237873
+      ],
+      "current_residual": [
+        6296,
+        104189.3119134621,
+        12337892.127431938,
+        0.0048276183550228,
+        500.6346097899532
+      ],
+      "g_magnitude": [
+        6697,
+        4387.462463989142,
+        37475.46467904391,
+        4.2857303227502786e-05,
+        33.437835212311384
+      ],
+      "g_waveform": [
+        5704,
+        16013.753040437523,
+        471669.1567428122,
+        0.0010190304343318,
+        56.591119339340665
+      ],
+      "g_dynamics": [
+        6296,
+        9068.24569173791,
+        160927.08645883773,
+        0.0001821896122799,
+        60.298741917918406
+      ],
+      "waveform_window": [
+        6697,
+        50824.0,
+        390080.0,
+        6.0,
+        8.0
+      ],
+      "is_scored": [
+        6697,
+        6697.0,
+        6697.0,
+        1.0,
+        1.0
+      ],
+      "anomaly_score": [
+        6697,
+        1120.1404958677683,
+        694.3325592514173,
+        0.0,
+        0.9917355371900828
+      ],
+      "beyond_calibration_length": [
+        6697,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "likelihood_ratio": [
+        6697,
+        69385.3554732816,
+        8360039.141407389,
+        0.0369371394320821,
+        121.0
+      ],
+      "anomaly_probability": [
+        6697,
+        317.0204365644046,
+        172.73033118280276,
+        0.0003729632650096,
+        0.5499999999999999
+      ],
+      "probability_prior": [
+        6697,
+        66.97,
+        0.6697000000000002,
+        0.01,
+        0.01
+      ],
+      "record_likelihood_ratio": [
+        6697,
+        76543.82467248697,
+        9194686.535923632,
+        0.0369371394320821,
+        121.0
+      ],
+      "record_probability": [
+        6697,
+        351.00032551049554,
+        189.9839957829752,
+        0.0003729632650096,
+        0.5499999999999999
+      ]
+    },
+    "alarm_rows": 572
+  }
+}

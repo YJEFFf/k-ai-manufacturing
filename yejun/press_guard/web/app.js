@@ -1,5 +1,6 @@
 // Press Guard v2 웹 콘솔 — serve.py의 /api/overview, /api/analyze에 연결한다.
-// 로컬 기록 재생·CSV 분석용이다. 설비 제어 명령을 보내지 않으며 고장 확률·원인·잔여수명을 추정하지 않는다.
+// 로컬 기록 재생·CSV 분석·모의 운용용이다. 설비 제어 명령을 보내지 않으며 고장 원인·잔여수명을 추정하지 않는다.
+// 이상 확률은 경보와 별도인 보정 층의 값이며 사전 비율 π 가정에 조건부다.
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
@@ -10,7 +11,18 @@
   ];
   const REASON_LABEL = { dynamics: '전류 예측 오차', waveform: '전류 파형', magnitude: '센서 크기' };
   const ALARM = '#b3412e';
-  const state = { overview: null, result: null, selected: null, filter: 'all', sort: 'priority', upload: null, replay: null, cursor: null, busy: false };
+  const state = { overview: null, result: null, selected: null, filter: 'all', levelFilter: 'all', sort: 'priority', upload: null, replay: null, cursor: null, busy: false, sim: null };
+  const LEVEL = { 1: '주의', 2: '점검 요청' };
+  // 점검 결과는 이 브라우저에만 저장한다(저장이 막혀 있어도 화면은 동작한다).
+  const store = {
+    get(k) { try { const v = window.localStorage && window.localStorage.getItem(k); return v ? JSON.parse(v) : null; } catch (e) { return null; } },
+    set(k, v) { try { if (window.localStorage) window.localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } },
+  };
+  const outcomeKey = c => `pg-outcome:${state.result.split}:${state.result.alpha}:${state.result.dataset}:${c.record_id}:${c.first_timestamp}`;
+  const outcomeOf = c => (state.result && store.get(outcomeKey(c))) || { confirmed_at: '', owner: '', outcome: '', measure: '', status: '열림' };
+  // 모의 운용 중에는 커서까지 들어온 행만 보인다.
+  const simVisible = c => !state.sim || c.first_row <= state.sim.row;
+  const levelNow = c => (state.sim && Number(c.level) === 2 && !(c.escalation_row <= state.sim.row)) ? 1 : Number(c.level);
   const SENSOR_LABEL = { AI0_Vibration: '진동', AI1_Vibration: '진동', AI2_Current: '전류' };
   // 크기 성분은 최대 편차가 난 센서까지 붙여 보인다(진동·전류).
   const reasonLabel = (e, c) => {
@@ -39,7 +51,7 @@
 
   function setBusy(busy) {
     state.busy = busy;
-    ['analyze', 'dataset', 'split', 'alpha', 'file'].forEach(id => { $(id).disabled = busy; });
+    ['analyze', 'dataset', 'split', 'alpha', 'prior', 'file', 'simulate'].forEach(id => { $(id).disabled = busy; });
   }
 
   // ---------- 탭 ----------
@@ -52,7 +64,7 @@
   async function analyze() {
     if (state.busy) return;
     const dataset = $('dataset').value;
-    const request = { split: $('split').value, alpha: Number($('alpha').value), dataset };
+    const request = { split: $('split').value, alpha: Number($('alpha').value), prior: Number($('prior').value), dataset };
     if (dataset === 'upload') {
       if (!state.upload) { setMessage('먼저 CSV를 불러오세요.', true); return; }
       request.csv = state.upload.csv;
@@ -63,10 +75,10 @@
       const result = await api('/api/analyze', request);
       state.result = result;
       state.selected = null;
-      stopReplay();
+      stopReplay(); stopSim(false);
       renderResult();
       const src = dataset === 'upload' ? state.upload.name : result.source_name;
-      setMessage(`${src} · ${fmt.int(result.stats.rows)}행 · 정상 기준 ${result.split} (보정 구간 ${result.calibration_segments}개) · α ${fmt.pct(result.alpha, 0)} · 처리 ${fmt.num(result.stats.elapsed_s, 2)}초`);
+      setMessage(`${src} · ${fmt.int(result.stats.rows)}행 · 정상 기준 ${result.split} (보정 구간 ${result.calibration_segments}개) · α ${fmt.pct(result.alpha, 0)} · 이상 확률 π ${fmt.pct(result.prior, 1)}${result.probability_available ? '' : '(보정기 없음)'} · 처리 ${fmt.num(result.stats.elapsed_s, 2)}초`);
     } catch (err) {
       setMessage(`분석 실패: ${err.message}`, true);
     } finally {
@@ -74,7 +86,7 @@
     }
   }
   $('analyze').addEventListener('click', analyze);
-  ['dataset', 'split', 'alpha'].forEach(id => $(id).addEventListener('change', analyze));
+  ['dataset', 'split', 'alpha', 'prior'].forEach(id => $(id).addEventListener('change', analyze));
 
   $('file').addEventListener('change', () => {
     const file = $('file').files[0];
@@ -99,8 +111,7 @@
   function renderResult() {
     const r = state.result;
     const s = r.stats;
-    $('k-case').textContent = fmt.int(r.cases.length);
-    $('k-case-sub').textContent = r.cases.length ? `${fmt.int(s.segments)}개 기록 구간 중 · 구간별 첫 경보 한 번만 알림` : '경보가 발생한 구간이 없습니다';
+    renderLevelKpis();
     $('k-alarm').textContent = fmt.int(s.alarm_rows);
     $('k-coverage').textContent = s.rows ? fmt.pct(s.scored / s.rows, 1) : '—';
     $('k-quality').textContent = s.invalid ? `수집 오류 ${fmt.int(s.invalid)}행은 판정 보류` : '수집 오류 행 없음';
@@ -111,10 +122,19 @@
     if (first) selectCase(first.record_id); else renderDetail(null);
   }
 
+  function renderLevelKpis() {
+    const cases = (state.result ? state.result.cases : []).filter(simVisible);
+    const l2 = cases.filter(c => levelNow(c) === 2).length;
+    $('k-case').textContent = fmt.int(l2);
+    $('k-level1').textContent = fmt.int(cases.length - l2);
+    $('k-case-sub').textContent = cases.length ? `전체 ${fmt.int(cases.length)}건 중 · 건 안에서 경보 2행 이상 · 현장 점검` : '경보가 발생한 구간이 없습니다';
+  }
+
   function filteredCases() {
-    const cases = state.result ? state.result.cases : [];
-    const list = state.filter === 'all' ? cases : cases.filter(c => String(c.evidence).split('+').includes(state.filter));
-    // 우선순위는 이상 라벨 없이 정한 정렬 키(근거 성분 수 → 경보 행 비율 → 최대 점수). 시간순은 첫 경보 행 순서.
+    const cases = (state.result ? state.result.cases : []).filter(simVisible);
+    let list = state.filter === 'all' ? cases : cases.filter(c => String(c.evidence).split('+').includes(state.filter));
+    if (state.levelFilter !== 'all') list = list.filter(c => levelNow(c) === Number(state.levelFilter));
+    // 우선순위는 이상 라벨 없이 정한 정렬 키(단계 → 근거 성분 수 → 경보 행 비율 → 최대 점수). 시간순은 첫 경보 행 순서.
     return [...list].sort((a, b) => state.sort === 'priority' ? (a.priority_rank - b.priority_rank) : (a.first_row - b.first_row));
   }
 
@@ -129,15 +149,19 @@
     queue.innerHTML = list.map(c => {
       const chips = String(c.evidence).split('+').filter(Boolean).map(e => `<span class="chip ${esc(e)}">${esc(reasonLabel(e, c))}</span>`).join('');
       const ref = c.reference_label == null ? '' : (Number(c.reference_label) === 1 ? ' · 참조 라벨: 이상' : ' · 참조 라벨: 정상');
+      const lv = levelNow(c), o = outcomeOf(c);
+      const done = o.outcome ? ` · <span class="done">${esc(o.outcome)}</span>` : '';
+      const prob = Number.isFinite(numberOrNaN(c.max_probability)) ? ` · 이상 확률 ${fmt.pct(c.max_probability, 1)}` : '';
       return `<button type="button" class="queue-item${c.record_id === state.selected ? ' selected' : ''}" data-record="${c.record_id}">
-        <div class="queue-top"><span class="queue-id">우선 ${fmt.int(c.priority_rank)} · 구간 ${fmt.int(c.record_id)}</span><span class="queue-time">${esc(fmt.time(c.first_timestamp))}</span></div>
+        <div class="queue-top"><span class="queue-id"><em class="badge l${lv}">${LEVEL[lv]}</em> 우선 ${fmt.int(c.priority_rank)} · 구간 ${fmt.int(c.record_id)}</span><span class="queue-time">${esc(fmt.time(c.first_timestamp))}</span></div>
         <div class="chips">${chips}</div>
-        <div class="queue-action">첫 경보 ${fmt.num(c.detection_delay_s, 1)}초 · 경보 ${fmt.int(c.alarm_rows)}/${fmt.int(c.observed_rows)}행${ref}</div>
+        <div class="queue-action">첫 경보 ${fmt.num(c.detection_delay_s, 1)}초 · 경보 ${fmt.int(c.alarm_rows)}/${fmt.int(c.observed_rows)}행${prob}${ref}${done}</div>
       </button>`;
     }).join('');
     queue.querySelectorAll('.queue-item').forEach(el => el.addEventListener('click', () => selectCase(Number(el.dataset.record))));
   }
   $('sort').addEventListener('change', () => { state.sort = $('sort').value; renderQueue(); });
+  $('level-filter').addEventListener('change', () => { state.levelFilter = $('level-filter').value; renderQueue(); const first = filteredCases()[0]; if (!first) renderDetail(null); else if (!filteredCases().some(c => c.record_id === state.selected)) selectCase(first.record_id); });
   $('filter').addEventListener('change', () => { state.filter = $('filter').value; renderQueue(); const first = filteredCases()[0]; if (!first) renderDetail(null); else if (!filteredCases().some(c => c.record_id === state.selected)) selectCase(first.record_id); });
 
   function selectCase(recordId) {
@@ -161,6 +185,8 @@
       summary.innerHTML = '경보가 발생한 시점과 관측 근거를 함께 확인합니다.';
       $('current-chart').innerHTML = ''; $('score-chart').innerHTML = '';
       $('action').textContent = '—'; $('position').textContent = '—';
+      $('checklist').textContent = '관측 이상에 대한 확인 순서입니다. 고장 원인 확정이나 자동 정지 명령이 아닙니다.';
+      $('quality-action').textContent = '—'; $('suspect').textContent = '—'; $('outcome').hidden = true;
       $('scrubber').max = 1; $('scrubber').value = 1;
       return;
     }
@@ -171,14 +197,25 @@
     const reasons = String(c.evidence).split('+').filter(Boolean).map(e => reasonLabel(e, c)).join(' + ');
     const thr = state.result.threshold;
     // α 1%에서는 모든 경보의 p값이 보정으로 낼 수 있는 최솟값 하나라 건 사이 순위 정보가 없다. 문턱 대비 최대 점수를 먼저 보인다.
+    const lv = levelNow(c);
+    const esc2 = Number(c.level) === 2 && Number.isFinite(numberOrNaN(c.escalation_after_first_s)) ? ` · 첫 경보 ${fmt.num(c.escalation_after_first_s, 1)}초 뒤 격상` : '';
     summary.innerHTML = [
+      ['단계', `${LEVEL[lv]}${lv === 2 ? esc2 : ' · 화면 확인·기록'}`],
       ['첫 경보', `${fmt.num(c.detection_delay_s, 1)}초 (${fmt.int(c.first_alarm_position + 1)}번째 관측)`],
       ['경보 관측', `${fmt.int(c.alarm_rows)} / ${fmt.int(c.observed_rows)}행`],
       ['문턱 대비 최대 점수', Number.isFinite(thr) && thr > 0 ? `${fmt.num(c.peak_score, 2)} / ${fmt.num(thr, 2)} (×${fmt.num(c.peak_score / thr, 1)})` : fmt.num(c.peak_score, 2)],
       ['최소 p값', `${fmt.num(c.min_p, 4)} (가능한 최솟값 ${fmt.num(state.result.min_p_attainable, 4)})`],
       ['근거', reasons || '—'],
+      ['이상 확률', Number.isFinite(numberOrNaN(c.max_probability)) ? `${fmt.pct(c.max_probability, 1)} (π ${fmt.pct(state.result.prior, 1)} 가정 · 우도비 ${fmt.num(c.max_likelihood_ratio, 1)})` : '보정기 없음'],
     ].map(([k, v]) => `<div><span>${k}</span><b>${esc(v)}</b></div>`).join('');
     $('action').textContent = c.action || '—';
+    const rule = ((state.overview && state.overview.decision_table) || []).find(r => r.action === c.action);
+    $('checklist').textContent = rule ? `점검 항목(가설): ${rule.checklist} · 고장 모드 후보 ${rule.failure_modes}` : '관측 이상에 대한 확인 순서입니다. 고장 원인 확정이나 자동 정지 명령이 아닙니다.';
+    $('quality-action').textContent = c.quality_action || '—';
+    $('suspect').textContent = Number(c.suspect_open) === 1
+      ? `의심 생산 시간창: ${c.suspect_from ? fmt.time(c.suspect_from) : '자료 처음'} ~ ${c.suspect_to ? fmt.time(c.suspect_to) : '진행 중'} (열림 · 다음 정상 기록을 확인할 때까지)`
+      : `의심 생산 시간창: ${fmt.time(c.suspect_from)} ~ ${fmt.time(c.suspect_to)} (${fmt.num(c.suspect_seconds, 1)}초 · 분당 20~60행정이면 ${fmt.num(c.suspect_seconds / 3, 0)}~${fmt.num(c.suspect_seconds, 0)}개, 가정)`;
+    fillOutcome(c);
     $('scrubber').max = rows.length; $('scrubber').value = rows.length;
     state.cursor = null;
     drawCharts(rows, rows.length);
@@ -289,13 +326,64 @@
     }, 100);
   });
 
+  // ---------- 점검 결과 기록 ----------
+  function fillOutcome(c) {
+    const o = outcomeOf(c);
+    $('outcome').hidden = false;
+    $('o-owner').value = o.owner || ''; $('o-outcome').value = o.outcome || ''; $('o-measure').value = o.measure || '';
+    $('outcome-state').textContent = o.confirmed_at ? `${o.status} · ${fmt.time(o.confirmed_at)} 기록` : '열림 · 미확인';
+  }
+  $('outcome').addEventListener('submit', ev => {
+    ev.preventDefault();
+    const c = state.result && state.result.cases.find(x => x.record_id === state.selected);
+    if (!c) return;
+    const outcome = $('o-outcome').value;
+    const record = { confirmed_at: new Date().toISOString(), owner: $('o-owner').value.trim(), outcome, measure: $('o-measure').value.trim(),
+      status: (outcome === '정상 확인' || outcome === '이상 확인') ? '닫힘' : '열림' };
+    const saved = store.set(outcomeKey(c), record);
+    fillOutcome(c); renderQueue();
+    setMessage(saved ? `구간 ${c.record_id} 점검 결과를 기록했습니다(${record.status}).` : '이 브라우저에서는 결과를 저장할 수 없습니다. CSV로 내보내 따로 보관하세요.', !saved);
+  });
+
+  // ---------- 모의 운용: 분석한 기록을 10배속(초당 100행)으로 흘려 알림이 쌓이는 순서를 본다 ----------
+  // 알림 시점·단계는 서버의 StreamDetector(인과 순차 추론) 결과이며 simulate.py와 같다. 화면은 커서까지 들어온 건만 보인다.
+  function stopSim(render = true) {
+    if (!state.sim) return;
+    clearInterval(state.sim.timer); state.sim = null;
+    $('sim-bar').hidden = true; $('simulate').textContent = '▶ 모의 운용';
+    if (render && state.result) { renderLevelKpis(); renderQueue(); }
+  }
+  function startSim() {
+    if (!state.result || state.busy) return;
+    if (state.sim) { stopSim(); return; }
+    const points = state.result.points, rowsPerTick = 10;
+    const events = [];
+    state.result.cases.forEach(c => { events.push({ row: c.first_row, text: `주의 · 구간 ${c.record_id}` }); if (Number(c.level) === 2 && c.escalation_row != null) events.push({ row: c.escalation_row, text: `점검 요청 · 구간 ${c.record_id}` }); });
+    events.sort((a, b) => a.row - b.row);
+    state.sim = { row: -1, next: 0, timer: null };
+    $('sim-bar').hidden = false; $('simulate').textContent = '■ 모의 중지';
+    state.sim.timer = setInterval(() => {
+      const sim = state.sim; if (!sim) return;
+      sim.row = Math.min(points.length - 1, sim.row + rowsPerTick);
+      $('sim-clock').textContent = `${fmt.time(points[sim.row].timestamp)} · ${fmt.int(sim.row + 1)} / ${fmt.int(points.length)}행`;
+      let changed = false;
+      while (sim.next < events.length && events[sim.next].row <= sim.row) { $('sim-last').textContent = `최근 알림: ${events[sim.next].text}`; sim.next += 1; changed = true; }
+      if (changed) { renderLevelKpis(); renderQueue(); }
+      if (sim.row >= points.length - 1) { $('sim-last').textContent += ' · 끝'; clearInterval(sim.timer); setTimeout(() => stopSim(), 1500); }
+    }, 100);
+    renderLevelKpis(); renderQueue();
+  }
+  $('simulate').addEventListener('click', startSim);
+  $('sim-stop').addEventListener('click', () => stopSim());
+
   // ---------- 내보내기 ----------
   $('export').addEventListener('click', () => {
     const list = filteredCases();
     if (!list.length) { setMessage('내보낼 점검 구간이 없습니다.', true); return; }
-    const cols = ['priority_rank', 'record_id', 'first_timestamp', 'first_alarm_position', 'detection_delay_s', 'alarm_rows', 'observed_rows', 'alarm_share', 'peak_score', 'min_p', 'evidence', 'magnitude_sensors', 'action', 'alert_units', 'beyond_calibration_length', 'reference_label'];
+    const cols = ['priority_rank', 'level', 'level_name', 'record_id', 'first_timestamp', 'first_alarm_position', 'detection_delay_s', 'escalation_delay_s', 'alarm_rows', 'observed_rows', 'alarm_share', 'peak_score', 'min_p', 'evidence', 'magnitude_sensors', 'action', 'suspect_from', 'suspect_to', 'suspect_seconds', 'suspect_open', 'quality_action', 'max_probability', 'alert_units', 'beyond_calibration_length', 'reference_label'];
+    const outcomeCols = (state.overview && state.overview.outcome_columns) || ['confirmed_at', 'owner', 'outcome', 'measure', 'status'];
     const cell = v => { const s = v == null ? '' : String(v); return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
-    const csv = [cols.join(','), ...list.map(c => cols.map(k => cell(c[k])).join(','))].join('\n');
+    const csv = [cols.concat(outcomeCols, ['probability_prior']).join(','), ...list.map(c => { const o = outcomeOf(c); return cols.map(k => cell(c[k])).concat(outcomeCols.map(k => cell(o[k])), [cell(state.result.prior)]).join(','); })].join('\n');
     const url = URL.createObjectURL(new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8' }));
     const a = document.createElement('a'); a.href = url; a.download = `press_guard_cases_${state.result.split}_a${Math.round(state.result.alpha * 100)}.csv`; a.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
@@ -323,6 +411,11 @@
     renderConditions(o.conditions || []);
     renderWorkload(o.workload || []);
     renderDecisionTable(o.decision_table || []);
+    renderLevels(o.levels || []);
+    renderQualityRules(o);
+    renderProbability(o);
+    renderMonitorGain(o.monitor_gain || []);
+    renderEffect(o.expected_effect || []);
     renderRobustness(o.robustness || []);
     const audit = o.audit && o.audit.checks ? o.audit.checks : [];
     const bench = o.benchmark && o.benchmark.runs ? o.benchmark.runs : [];
@@ -354,8 +447,63 @@
   function renderDecisionTable(rows) {
     const el = $('decision-table');
     if (!rows.length) { el.innerHTML = '<div class="empty">판단표가 없습니다.</div>'; return; }
-    el.innerHTML = `<table><thead><tr><th>경보 근거</th><th>확인 대상(가설)</th><th>권장 확인</th></tr></thead><tbody>${
-      rows.map(r => `<tr><td>${esc(r.evidence)}</td><td>${esc(r.check_target)}</td><td>${esc(r.action)}</td></tr>`).join('')
+    el.innerHTML = `<table><thead><tr><th>경보 근거</th><th>확인 대상(가설)</th><th>권장 확인</th><th>점검 항목(가설)</th><th>고장 모드 후보</th></tr></thead><tbody>${
+      rows.map(r => `<tr><td>${esc(r.evidence)}</td><td>${esc(r.check_target)}</td><td>${esc(r.action)}</td><td>${esc(r.checklist || '')}</td><td>${esc(r.failure_modes || '')}</td></tr>`).join('')
+    }</tbody></table>`;
+  }
+
+  function renderLevels(rows) {
+    const el = $('levels');
+    if (!rows.length) { el.innerHTML = '<div class="empty">단계별 표(outputs/alert_levels_v2.csv)가 없습니다. analyze.py를 실행하세요.</div>'; return; }
+    const shown = rows.filter(r => Number(r.alpha) === 0.01);
+    el.innerHTML = `<table><thead><tr><th>모델 · 정상 평가 구간</th><th>단계</th><th>정상 알림 / 구간</th><th>교대 8시간 · 관측</th><th>95% 상한</th><th>이상 21구간 탐지</th><th>지연 중앙·최대</th></tr></thead><tbody>${
+      shown.map(r => `<tr${Number(r.level) === 2 ? ' class="highlight"' : ''}><td>${esc(r.model)} · ${esc(r.normal_window)}${r.same_calibration_as ? ` <small>(= ${esc(r.same_calibration_as)})</small>` : ''}</td><td>${LEVEL[r.level]}</td><td>${fmt.int(r.normal_alerted_segments)} / ${fmt.int(r.normal_segments)}</td><td>${fmt.num(r.alerts_per_8h_elapsed, 0)}건</td><td>${fmt.num(r.upper95_alerts_per_8h_elapsed, 0)}건</td><td>${fmt.int(r.abnormal_detected_segments)} / ${fmt.int(r.abnormal_segments)}</td><td>${fmt.num(r.delay_median_s, 1)} · ${fmt.num(r.delay_max_s, 1)}초</td></tr>`).join('')
+    }</tbody></table>`;
+  }
+
+  function renderQualityRules(o) {
+    const el = $('quality-rules');
+    const qa = o.quality_actions || {};
+    const fa = (o.quality_windows || []).filter(r => r.split === 'B');
+    el.innerHTML = `<table><thead><tr><th>단계</th><th>품질 조치(가설)</th></tr></thead><tbody>${
+      Object.keys(qa).map(k => `<tr><td>${LEVEL[k] || k}</td><td>${esc(qa[k])}</td></tr>`).join('')
+    }</tbody></table>${fa.length ? `<p class="fine">예: 대회 B 정상 평가 구간의 1단계 오경보 ${fa.length}건의 의심 시간창은 ${fa.map(r => `${fmt.num(r.suspect_seconds, 1)}초`).join('·')}이며, 분당 20~60행정이면 건당 ${fmt.num(Math.min(...fa.map(r => r.pieces_spm20)), 1)}~${fmt.num(Math.max(...fa.map(r => r.pieces_spm60)), 1)}개입니다(가정). 확인 순서는 대기열 순서를 따릅니다.</p>` : ''}`;
+  }
+
+  function renderProbability(o) {
+    const el = $('probability');
+    const ev = (o.probability || []).filter(r => r.cv === '21fold' && r.unit === 'rows');
+    const lf = (o.label_free || []).filter(r => r.far_basis === 'nominal' || r.far_basis === 'calibrated95');
+    if (!ev.length) { el.innerHTML = '<div class="empty">확률 평가표(outputs/probability_eval_v2.csv)가 없습니다.</div>'; return; }
+    const name = { calibrated_isotonic: '라벨 보정 확률(교차 적합·LR 상한 121)', isotonic_uncapped: '상한 없는 등방 회귀(비교용)', platt_logistic: 'Platt(비교용)', naive_1_minus_p: '1−p (확률 아님, 비교용)', prevalence_only: '유병률만' };
+    const t1 = `<table><thead><tr><th>정상 기준</th><th>방법</th><th>Brier</th><th>log-loss</th><th>ECE</th></tr></thead><tbody>${
+      ev.map(r => `<tr${r.method === 'calibrated_isotonic' ? ' class="highlight"' : ''}><td>${esc(r.split)}</td><td>${name[r.method] || esc(r.method)}</td><td>${fmt.num(r.brier, 4)}</td><td>${fmt.num(r.log_loss, 4)}</td><td>${fmt.num(r.ece, 4)}</td></tr>`).join('')
+    }</tbody></table>`;
+    const pick = lf.filter(r => r.split === 'A' && (r.tpr_basis === 'E1 cur_noise 0.1' || r.tpr_basis === '대회 21/21 95% 하한'));
+    const t2 = pick.length ? `<table><thead><tr><th>오경보율 기준</th><th>탐지율 기준</th><th>우도비</th><th>π 0.01%</th><th>π 0.1%</th><th>π 1%</th></tr></thead><tbody>${
+      [...new Set(pick.map(r => `${r.far_basis}|${r.tpr_basis}`))].map(key => {
+        const [fb, tb] = key.split('|'); const g = pick.filter(r => r.far_basis === fb && r.tpr_basis === tb);
+        const at = pi => { const r = g.find(x => Math.abs(Number(x.prior) - pi) < 1e-12); return r ? fmt.pct(r.p_anomaly_given_alert, 1) : '—'; };
+        return `<tr><td>${fb === 'nominal' ? '명목 1/121' : '보정 조건부 95%'} (${fmt.pct(g[0].far, 2)})</td><td>${esc(tb)} (${fmt.pct(g[0].tpr, 1)})</td><td>${fmt.num(g[0].likelihood_ratio, 0)}</td><td>${at(1e-4)}</td><td>${at(1e-3)}</td><td>${at(1e-2)}</td></tr>`;
+      }).join('')
+    }</tbody></table>` : '';
+    el.innerHTML = `<div class="two-tables"><div><b>교차 보정 평가(21겹, 행 단위)</b>${t1}</div><div><b>라벨 없는 환산 · 1단계 알림 한 건의 이상 확률(A, α 1%)</b>${t2}</div></div>`;
+  }
+
+  function renderMonitorGain(rows) {
+    const el = $('monitor-gain');
+    if (!rows.length) { el.innerHTML = '<div class="empty">감시 모의표(outputs/monitor_gain_v2.csv)가 없습니다.</div>'; return; }
+    el.innerHTML = `<table><thead><tr><th>정상 기준</th><th>전류 배율</th><th>창별 알림 단위(60단위씩)</th><th>한도 95·99%</th><th>전류 수준 최대 비(기준 범위)</th><th>재보정 검토</th></tr></thead><tbody>${
+      rows.map(r => `<tr${r.recalibration_review ? ' class="highlight"' : ''}><td>${esc(r.split)}</td><td>×${fmt.num(r.gain, 2)}</td><td>${esc(r.alerted_by_window)}</td><td>${fmt.int(r.limit95)} · ${fmt.int(r.limit99)}</td><td>${fmt.num(r.max_current_ratio, 2)} (${fmt.num(r.band_low, 2)}~${fmt.num(r.band_high, 2)})</td><td>${r.recalibration_review ? `발동(창 ${fmt.int(r.first_review_window + 1)})` : '—'}</td></tr>`).join('')
+    }</tbody></table>`;
+  }
+
+  function renderEffect(rows) {
+    const el = $('effect');
+    if (!rows.length) { el.innerHTML = '<div class="empty">기대효과표(outputs/expected_effect_v2.csv)가 없습니다.</div>'; return; }
+    const shown = rows.filter(r => r.case === '중간' || r.alert_scenario === '관측');
+    el.innerHTML = `<table><thead><tr><th>알림 수(B, α 1%)</th><th>운영 방식</th><th>가정</th><th>교대 8시간 알림 1·2단계</th><th>교대당 점검 시간</th><th>연간 줄이는 가동 중단</th><th>손익분기 배수</th></tr></thead><tbody>${
+      shown.map(r => `<tr${r.policy === '2단계만 출동' ? ' class="highlight"' : ''}><td>${esc(r.alert_scenario)}</td><td>${esc(r.policy)}</td><td>${esc(r.case)}</td><td>${fmt.num(r.level1_per_8h, 0)} · ${r.level2_per_8h == null ? '—' : fmt.num(r.level2_per_8h, 0)}건</td><td>${fmt.num(r.inspection_hours_per_shift, 1)}시간${Number(r.shift_share) > 1 ? ' (교대 초과)' : ''}</td><td>${fmt.num(r.downtime_hours_avoided_per_year, 1)}시간/년</td><td>${Number.isFinite(Number(r.breakeven_loss_ratio)) ? '×' + fmt.num(r.breakeven_loss_ratio, 1) : '—'}</td></tr>`).join('')
     }</tbody></table>`;
   }
 
@@ -383,7 +531,19 @@
   }
 
   // ---------- 시작 ----------
+  // 주소로 초기 선택을 줄 수 있다(예: /?split=B&alpha=0.01&tab=evidence). 화면 캡처·공유용.
+  function applyQuery() {
+    let q = null;
+    try { q = new URLSearchParams((window.location && window.location.search) || ''); } catch (e) { return; }
+    [['split', 'split'], ['alpha', 'alpha'], ['dataset', 'dataset'], ['prior', 'prior']].forEach(([key, id]) => {
+      const v = q.get(key); if (v != null && [...$(id).options || []].some(o => o.value === v)) $(id).value = v;
+    });
+    const tab = q.get('tab');
+    if (tab) document.querySelectorAll('.tab').forEach(t => { if (t.dataset.tab === tab) t.click(); });
+  }
+
   async function start() {
+    applyQuery();
     try {
       state.overview = await api('/api/overview');
       renderEvidence(state.overview);

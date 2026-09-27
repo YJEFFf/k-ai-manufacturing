@@ -1,0 +1,10 @@
+# Press Guard v2(최종 모델)와 선행 v1 2단계·분석·검증·시험에 필요한 직접 의존성. 파이썬 3.10~3.12(권장 3.12).
+# torch는 필요 없다. v1 기준모델 LSTM-AE 비교까지 다시 만들 때만 requirements-lstm.txt를 쓴다.
+# 전이 의존성까지 고정한 목록: requirements-lock.txt(파이썬 3.12.8 새 가상환경에서 전체 재현·시험 통과).
+numpy==1.26.4
+pandas==2.3.3
+scikit-learn==1.8.0
+scipy==1.13.1
+matplotlib==3.9.2
+threadpoolctl>=3.1
+pytest==9.0.3

@@ -86,9 +86,34 @@ def test_verify_detects_tampering(tmp_path):
     assert verify.main(["--out", str(out), "--artifacts", str(art)]) == 1
     shutil.copy2(OUT / "uncertainty_v2.csv", out / "uncertainty_v2.csv")
     assert verify.main(["--out", str(out), "--artifacts", str(art)]) == 0
-    a = json.loads((art / "guard_A.json").read_text()); a["state"]["ar2"][0] += 1; (art / "guard_A.json").write_text(json.dumps(a))
+    a = json.loads((art / "guard_A.json").read_text(encoding="utf-8")); a["state"]["ar2"][0] += 1; (art / "guard_A.json").write_text(json.dumps(a), encoding="utf-8")
     assert verify.main(["--out", str(out), "--artifacts", str(art)]) == 1
     assert verify.main(["--out", str(out), "--artifacts", str(art), "--freeze"]) == 2
+
+
+def test_verify_compares_row_level_predictions(tmp_path):
+    """행 단위 예측 파일 한 행을 바꾸면 verify의 예측 요약 대조가 실패한다(평가관 06 R5). 1e-9 수준의 부동소수 차이는 통과하고,
+    점수 한 행을 1.0 바꾸면 실패한다."""
+    if not (OUT / "expected" / verify.DIGEST).is_file():
+        pytest.skip("동결 예측 요약이 없다")
+    out = tmp_path / "outputs"; (out / "expected").mkdir(parents=True)
+    shutil.copy2(OUT / "expected" / verify.DIGEST, out / "expected" / verify.DIGEST)
+    for name in verify.PREDICTIONS:
+        shutil.copy2(OUT / name, out / name)
+    assert all(r["ok"] for r in verify.compare_predictions(out, out / "expected"))
+    t = pd.read_csv(out / "test_predictions_A.csv")
+    t.loc[t.index[t.alarm.eq(0)][0], "alarm"] = 1
+    t.to_csv(out / "test_predictions_A.csv", index=False)
+    bad = {r["file"]: r["ok"] for r in verify.compare_predictions(out, out / "expected")}
+    assert bad["test_predictions_A.csv"] is False and bad["test_predictions_B.csv"] is True
+    t = pd.read_csv(OUT / "test_predictions_A.csv")
+    t["score"] = t.score + 1e-9                                          # 다른 기기의 부동소수 차이 수준
+    t.to_csv(out / "test_predictions_A.csv", index=False)
+    ok = {r["file"]: r for r in verify.compare_predictions(out, out / "expected")}
+    assert ok["test_predictions_A.csv"]["ok"] and ok["test_predictions_A.csv"].get("note") == "부동소수 차이만 있음"
+    t = pd.read_csv(OUT / "test_predictions_A.csv"); t.loc[5, "score"] += 1.0
+    t.to_csv(out / "test_predictions_A.csv", index=False)
+    assert not {r["file"]: r["ok"] for r in verify.compare_predictions(out, out / "expected")}["test_predictions_A.csv"]
 
 
 def test_refit_sensitivity_and_ablation_contract(tables):

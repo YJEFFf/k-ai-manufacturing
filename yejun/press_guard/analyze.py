@@ -21,7 +21,10 @@ from press.uncertainty import moving_block_bootstrap
 from press.diagnosis import MIN_FIT_LEN, sine_fit
 from press.scores import Scorer, ExpTail, window_index
 from press.evaluate import evaluate_models
-from contracts import training_errors, training_fingerprint, ANALYSIS_FILES, SOURCES, check_files
+from contracts import training_errors, training_fingerprint, ANALYSIS_FILES, SOURCES, check_files, INSIGHT_FILES
+import runtime
+E1_SUMMARY = HERE.parent / "analysis" / "press_supplement" / "e1_summary.csv"   # 라벨 없는 확률 환산의 주입 탐지율(E1)
+DAYSHIFT = HERE.parent / "analysis" / "press_dayshift" / "v2_current_scale.csv"   # 전류 배율 스트레스(오경보 조건 요약)
 
 ADVANCE = HERE.parent / "analysis" / "press_advance"
 V1 = BASE / "outputs"
@@ -37,8 +40,8 @@ def _bin(v, bins):
 
 
 def input_hashes_agree(v2_manifest):
-    v1 = json.loads((V1 / "manifest.json").read_text())["inputs"]["files"]
-    adv = json.loads((ADVANCE / "manifest.json").read_text())["inputs"]["files"]
+    v1 = json.loads((V1 / "manifest.json").read_text(encoding="utf-8"))["inputs"]["files"]
+    adv = json.loads((ADVANCE / "manifest.json").read_text(encoding="utf-8"))["inputs"]["files"]
     v1h, advh = {k: v["sha256"] for k, v in v1.items()}, {k: v["sha256"] for k, v in adv.items()}
     return v1h == advh == v2_manifest["input_hashes"], dict(v1=v1h, advance=advh, v2=v2_manifest["input_hashes"])
 
@@ -65,16 +68,27 @@ def model_comparison(out):
 
 def source_hashes():
     """v1 행별 예측·기준모델 표의 실행 출처와 후보 코드를 확인한다."""
-    v1=json.loads((V1/"manifest.json").read_text())
-    expected=json.loads((V1/"expected"/"manifest.json").read_text())
+    v1=json.loads((V1/"manifest.json").read_text(encoding="utf-8"))
+    expected=json.loads((V1/"expected"/"manifest.json").read_text(encoding="utf-8"))
     bad=check_files(V1,v1.get("outputs"),("predictions_A.csv","predictions_B.csv"))
-    bad+=check_files(V1,expected.get("outputs"),("model_comparison_all.csv",))
+    # v1 비교표는 v1 verify와 같은 허용오차(LSTM 1e-3 등)로 동결값과 대조한다. 바이트 일치를 요구하면 LSTM을 다시 학습한
+    # 다른 기기에서 원본부터 다시 만드는 경로가 끊긴다(루브릭 사이클2 평가관 06 R9).
+    import importlib.util
+    spec=importlib.util.spec_from_file_location("press_v1_verify",BASE/"verify.py")
+    v1verify=importlib.util.module_from_spec(spec); spec.loader.exec_module(v1verify)
+    table=V1/"model_comparison_all.csv"
+    if not table.is_file():
+        bad.append("model_comparison_all.csv: 없음")
+    else:
+        cmp=v1verify.compare_csv(table,V1/"expected"/"model_comparison_all.csv")
+        if not cmp["ok"]: bad.append(f"model_comparison_all.csv: v1 동결값과 허용오차 밖({cmp['reason']})")
     if {k:v["sha256"] for k,v in expected["inputs"]["files"].items()}!=D.EXPECTED_SHA256:
         bad.append("v1 기준모델 표 입력 해시 불일치")
-    adv=json.loads((ADVANCE/"manifest.json").read_text())
+    adv=json.loads((ADVANCE/"manifest.json").read_text(encoding="utf-8"))
     if adv.get("script_sha256")!=D.sha256_file(ADVANCE/"run_experiment.py"):
         bad.append("후보 탐색 코드가 실행 당시와 다름")
-    if bad: raise ValueError(f"분석 원본 무결성 오류: {bad}")
+    if bad: raise ValueError(f"분석 원본 무결성 오류: {bad}. v1 선행 단계를 먼저 실행한다: "
+                             "python press_submission/run_all.py --steps 2 --no-baselines (또는 한 명령 재현: python press_guard/reproduce.py)")
     return {n:D.sha256_file(HERE.parent/n) for n in SOURCES}
 
 
@@ -153,21 +167,28 @@ def _wave(feats, bounds):
 
 
 def error_conditions(sid, v1_pair, v2_pairs, feats, bounds):
-    """행 단위 조건표. 사분위 경계는 정상 학습 구간 기준(열에 저장). 진폭 조건에는 신뢰 제한(길이<17) 행 수를 함께 적는다."""
+    """행 단위 조건표. 사분위 경계는 정상 학습 구간 기준(열에 저장). 진폭 조건에는 신뢰 제한(길이<17) 행 수를 함께 적는다.
+    *_pos_ge2 열은 같은 조건을 위치 2 이상 행으로만 다시 센 값이다. 위치 0·1에는 크기 성분만 있어 미탐이 몰리므로(초반 창),
+    길이·진폭·진동 조건의 미탐률을 비교할 때는 이 열을 본다(루브릭 사이클2 평가관 03 E2)."""
     rows = []
-    def add(model, alpha, subset, kind, cond, value, mask, alarm, extra=None):
-        n = int(mask.sum()); err = int(((alarm == 0) if kind == "fn" else (alarm == 1))[mask].sum())
-        rows.append(dict(split_id=sid, model=model, alpha=alpha, subset=subset, error=kind, condition=cond, value=value,
-                         rows=n, error_rows=err, error_rate=err / n if n else np.nan, **(extra or {})))
+    def add(model, alpha, subset, kind, cond, value, mask, alarm, extra=None, pos=None):
+        wrong = (alarm == 0) if kind == "fn" else (alarm == 1)
+        n = int(mask.sum()); err = int(wrong[mask].sum())
+        row = dict(split_id=sid, model=model, alpha=alpha, subset=subset, error=kind, condition=cond, value=value,
+                   rows=n, error_rows=err, error_rate=err / n if n else np.nan, **(extra or {}))
+        if pos is not None:
+            m2 = mask & (pos >= 2); n2 = int(m2.sum()); e2 = int(wrong[m2].sum())
+            row.update(rows_pos_ge2=n2, error_rows_pos_ge2=e2, error_rate_pos_ge2=e2 / n2 if n2 else np.nan)
+        rows.append(row)
     def conditions(model, alpha, pn, pa):
         for subset, kind, p in (("abnormal", "fn", pa), ("normal", "fp", pn)):
             p = _with_length(p)
             alarm = p.alarm.to_numpy(int)
             pos = p.position.to_numpy(); ln = p.record_length.to_numpy()
             for lo, hi, lab in POS_BINS:
-                add(model, alpha, subset, kind, "pos_bin", lab, (pos >= lo) & (pos <= hi), alarm)
+                add(model, alpha, subset, kind, "pos_bin", lab, (pos >= lo) & (pos <= hi), alarm, pos=pos)
             for lo, hi, lab in LEN_BINS:
-                add(model, alpha, subset, kind, "len_bin", lab, (ln >= lo) & (ln <= hi), alarm)
+                add(model, alpha, subset, kind, "len_bin", lab, (ln >= lo) & (ln <= hi), alarm, pos=pos)
             f = feats[subset].set_index("record_id")
             reliable = p.record_id.map(f.amp_reliable).to_numpy(bool)
             for col, name, q in (("vib_std", "vib_quartile", bounds["vib"]), ("amp_proxy", "amp_quartile", bounds["amp"])):
@@ -179,12 +200,12 @@ def error_conditions(sid, v1_pair, v2_pairs, feats, bounds):
                     extra = dict(q25=q[0], q50=q[1], q75=q[2], boundary_source="normal_train_segments")
                     if name == "amp_quartile":
                         extra["unreliable_amp_rows"] = int((m & ~reliable).sum())
-                    add(model, alpha, subset, kind, name, value, m, alarm, extra)
+                    add(model, alpha, subset, kind, name, value, m, alarm, extra, pos=pos)
             if model == "v2":
                 comp = p[["g_magnitude", "g_waveform", "g_dynamics"]].to_numpy(float)
                 strongest = np.where(np.isfinite(comp).any(axis=1), np.array(["magnitude", "waveform", "dynamics"])[np.nan_to_num(comp, nan=-np.inf).argmax(axis=1)], "none")
                 for lab in ("magnitude", "waveform", "dynamics", "none"):
-                    add(model, alpha, subset, kind, "strongest_component", lab, strongest == lab, alarm)
+                    add(model, alpha, subset, kind, "strongest_component", lab, strongest == lab, alarm, pos=pos)
     conditions("v1", .01, *v1_pair)
     for alpha, (pn, pa) in v2_pairs.items():
         conditions("v2", alpha, pn, pa)
@@ -351,11 +372,11 @@ def workload(sid, name, test, metrics, n_cal):
 
 
 # ---------- 그림 ----------
-def figures(out, cond, records, v2_pairs_by_split):
+def figures(out, cond, records, v2_pairs_by_split, model_a=None, vib_q95_a=None):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    plt.rcParams.update({"font.family": ["Apple SD Gothic Neo", "AppleGothic", "Nanum Gothic", "DejaVu Sans"], "axes.unicode_minus": False, "font.size": 9})
+    plt.rcParams.update({"font.family": runtime.korean_fonts(), "axes.unicode_minus": False, "font.size": 9})
     # 1) 위치별 이상 행 재현율 v1 vs v2
     fig, axes = plt.subplots(1, 2, figsize=(9, 3.2), sharey=True)
     for ax, sid in zip(axes, ("A", "B")):
@@ -404,7 +425,12 @@ def figures(out, cond, records, v2_pairs_by_split):
     axes[1].scatter(miss.position * D.DT, np.zeros(len(miss)), marker="x", color="#b3412e", s=30, label="미탐 행", zorder=5)
     axes[1].legend(frameon=False, fontsize=7.5, ncol=4); axes[1].set_xlabel("기록 시작 후 시간(초)"); axes[1].set_ylabel("정상 기준 대비 편차")
     for ax in axes: ax.spines[["top", "right"]].set_visible(False); ax.grid(color="#eef1f2")
-    fig.suptitle(f"v2 미탐이 가장 많은 이상 구간(A, 구간 {int(worst)}, {len(g)}관측): 위치 0·1은 센서 크기 성분만 존재", fontsize=9)
+    vib_note = ""
+    if model_a is not None and vib_q95_a is not None and "AI0_Vibration" in g:
+        vz = float(np.abs((g[list(D.SENSORS[:2])].to_numpy(float) - model_a.mean[:2]) / model_a.scale[:2]).max())
+        vib_note = (f" · 진동 정상 범위 구간(진동 max|z| {vz:.2f} ≤ 정상 학습 q95 {vib_q95_a:.2f})" if vz <= vib_q95_a
+                    else f" · 진동 높은 구간(진동 max|z| {vz:.2f} > q95 {vib_q95_a:.2f})")
+    fig.suptitle(f"v2 미탐이 가장 많은 이상 구간(A, 구간 {int(worst)}, {len(g)}관측): 위치 0·1은 센서 크기 성분만 존재{vib_note}", fontsize=8.5)
     fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
 
 
@@ -415,8 +441,9 @@ def main():
     ap.add_argument("--artifacts", type=Path, default=HERE / "artifacts")
     ap.add_argument("--reps", type=int, default=2000)
     args = ap.parse_args()
+    runtime.setup()
     start = time.monotonic()
-    manifest = json.loads((args.out / "manifest.json").read_text())
+    manifest = json.loads((args.out / "manifest.json").read_text(encoding="utf-8"))
     bad=training_errors(manifest,args.out,args.artifacts)
     if bad: raise SystemExit(f"학습 실행 무결성 오류: {bad}")
     sources=source_hashes()
@@ -454,6 +481,37 @@ def main():
         work.append(workload(sid, split["name"], split["test"], metrics, len(model.cal)))
         print(f"{sid}: 조건·불확실성·업무량 집계", flush=True)
     cond, segc, inter, recs, unc, work = (pd.concat(x, ignore_index=True) for x in (cond, segc, inter, recs, unc, work))
+    # 루브릭 사이클2 보강: 이상 확률 층 평가, 2단계 경보, 업무량 사후 상한, 대기열 순위, 센서 중요도·상호작용·오경보 사건
+    import insights
+    models = {sid: GuardModel.load(args.artifacts / f"guard_{sid}.json") for sid in D.SPLITS}
+    work = insights.workload_extras(work, models)
+    extra = {}
+    extra["probability_eval_v2.csv"], extra["probability_reliability_v2.csv"], extra["probability_conversion_v2.csv"] = insights.probability_evaluation(normal, abnormal, models)
+    rolling = insights.rolling_models(normal)
+    extra["alert_levels_v2.csv"] = insights.alert_level_evaluation(normal, abnormal, models, rolling)
+    extra["alert_levels_injection_v2.csv"] = insights.alert_level_injection(normal, models)
+    extra["alert_budget_design_v2.csv"] = insights.alert_budget_design(float(work[work.model.eq("guard_v2")].units_per_elapsed_hour.mean()))
+    extra["queue_mixed_ranks_v2.csv"], extra["queue_injection_ranks_v2.csv"], extra["queue_key_selection_v2.csv"] = insights.queue_rankings(normal, abnormal, models)
+    extra["sensor_importance_v2.csv"] = insights.sensor_importance(normal, abnormal, vendor, metrics, models)
+    extra["position_vibration_misses_v2.csv"] = insights.position_vibration_misses(normal, abnormal, models)
+    fa_records = {sid: sorted(v2_by_split[sid][.01][0].query("alarm == 1").record_id.unique().tolist()) for sid in D.SPLITS}
+    extra["coupling_fit_v2.csv"], extra["coupling_records_v2.csv"] = insights.coupling(normal, abnormal, models, fa_records)
+    extra["fp_events_v2.csv"] = insights.false_alarm_events(normal, abnormal, models, rolling)
+    extra["quality_windows_v2.csv"] = insights.quality_windows(normal, abnormal, models)
+    g2 = work[work.model.eq("guard_v2")]
+    observed = {(r.split_id, r.alpha): (int(r.first_alert_segments), int(r.normal_segments)) for r in g2.itertuples()}
+    extra["label_free_alert_probability_v2.csv"] = insights.label_free_alert_probability(models, E1_SUMMARY, observed)
+    extra["monitor_gain_v2.csv"] = insights.monitor_gain(normal, models)
+    extra["expected_effect_v2.csv"] = insights.expected_effect(extra["alert_levels_v2.csv"], extra["alert_levels_injection_v2.csv"])
+    extra["near_miss_v2.csv"], extra["near_miss_corr_v2.csv"] = insights.near_miss(normal, models)
+    extra["error_conditions_stats_v2.csv"] = insights.condition_stats(segc)
+    for name, table in extra.items():
+        table.to_csv(args.out / name, index=False)
+    # 위 표들과 E1·전류 배율 모의에서 FN·FP 집중 조건을 모은 요약(파일:행 인용)
+    insights.error_condition_summary(args.out, E1_SUMMARY, DAYSHIFT).to_csv(args.out / "error_condition_summary_v2.csv", index=False)
+    insights.insight_figures(args.out, extra["sensor_importance_v2.csv"], extra["coupling_fit_v2.csv"], extra["coupling_records_v2.csv"],
+                             extra["probability_reliability_v2.csv"], extra["fp_events_v2.csv"], normal, models)
+    print("사이클2 보강 표·그림", flush=True)
     cond.to_csv(args.out / "error_conditions_v2.csv", index=False)
     segc.to_csv(args.out / "error_conditions_segments_v2.csv", index=False)
     inter.to_csv(args.out / "interaction_2x2_v2.csv", index=False)
@@ -461,7 +519,8 @@ def main():
     unc.to_csv(args.out / "uncertainty_v2.csv", index=False)
     work.to_csv(args.out / "workload_v2.csv", index=False)
     pd.DataFrame(DECISION_TABLE).to_csv(args.out / "decision_table_v2.csv", index=False)   # 조치 규칙(model.action_for)과 같은 원천
-    figures(args.out, cond, recs, v2_by_split)
+    pv = extra["position_vibration_misses_v2.csv"]
+    figures(args.out, cond, recs, v2_by_split, models["A"], float(pv[pv.split.eq("A")].vib_threshold_train_q95.iloc[0]))
     # 검수용 요약: v1과 v2의 위치 0·1 미탐이 같은지(향상이 위치 2~6에 국한되는지)
     early = cond[cond.subset.eq("abnormal") & cond.condition.eq("pos_bin") & cond.value.isin(["0", "1"]) & cond.alpha.eq(.01)].groupby(["split_id", "model"]).error_rows.sum().unstack()
     summary = dict(input_hashes=hashes["v2"], comparison_rows=int(len(comparison)), models=sorted(comparison.model.unique().tolist()),
@@ -470,7 +529,9 @@ def main():
                    condition_bounds={sid: {k: (list(np.round(v, 6)) if isinstance(v, tuple) else round(v, 6)) for k, v in b.items()} for sid, b in bounds_used.items()},
                    files=["model_comparison_v2.csv", "model_comparison_v2.md", "robustness_v2.csv", "sensitivity_v2.csv", "ablation_v2.csv", "error_conditions_v2.csv",
                           "error_conditions_segments_v2.csv", "interaction_2x2_v2.csv", "records_first_alarm_v2.csv", "uncertainty_v2.csv", "workload_v2.csv",
-                          "decision_table_v2.csv", "fig_recall_by_position_v2.png", "fig_first_alarm_v2.png", "fig_missed_example_v2.png"],
+                          "decision_table_v2.csv", "fig_recall_by_position_v2.png", "fig_first_alarm_v2.png", "fig_missed_example_v2.png"] + INSIGHT_FILES,
+                   external_inputs={"analysis/press_supplement/e1_summary.csv": D.sha256_file(E1_SUMMARY),
+                                    "analysis/press_dayshift/v2_current_scale.csv": D.sha256_file(DAYSHIFT)},
                    elapsed_s=round(time.monotonic() - start, 1))
     D.dump_json(summary, args.out / "analysis_summary.json")
     manifest["analysis"]=dict(training_fingerprint=training_fingerprint(manifest),config={"reps":args.reps},

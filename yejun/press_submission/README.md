@@ -58,6 +58,10 @@ python predict.py --model artifacts/main_A.json --input <입력.csv> --out predi
 
 산출 CSV에는 센서 원값 열이 없다(`checks.json.outputs_free_of_raw_sensor_columns`). 원본 CSV·행별 예측·artifacts는 Git 제외이며 제출 ZIP에만 포함한다.
 
+진단 참조(2026-09-27, v1 산출물은 동결 그대로 둔다):
+- `diagnosis.md`의 `current_on_grid_strict`(허용 1e-6) 행(이상 0.077, AUROC 0.538)은 격자 상수의 유효숫자 한계에서 생긴 값이라 판별 의미가 없다. 격자 판정은 허용 1e-3 기준을 쓴다 → [analysis/press_evidence/current_grid.csv](../analysis/press_evidence/current_grid.csv).
+- `PLAN.md` §7의 "W13 문의 초안"은 진행하지 않는다. 주최 측이 출제 데이터 문의에 답하지 않아 팀 결정으로 바꿨다(숨은 시험 자료를 가정하지 않음) → [analysis/press_dayshift/README.md](../analysis/press_dayshift/README.md) §6의 4번.
+
 ## 주 모델과 경보 기준 (PLAN §3·§4)
 - 성분: 3센서 max-abs-z, 전류 trailing-8 사인 적합 1−R². 각 성분을 정상 학습 참조의 q95 초과분 지수 꼬리로 변환해 fmax로 결합. 사인이 없는 행(구간 첫 7행·SST=0)은 max-z만.
 - 주 기준: 정상 보정 기록구간 최댓값의 conformal p ≤ α (α=1%, 3%·5% 병기). 참고 기준: 기존 cutoff. 두 기준은 `criterion` 열로 구분한다.

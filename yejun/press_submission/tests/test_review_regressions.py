@@ -11,7 +11,6 @@ import pytest
 
 import verify
 from press.field import persistence_score
-from press.lstm_ae import config_key
 from press.validation import (SPLIT_CHECKS, artifact_names, check_required, code_sha256, file_hash, output_names,
                               required_check_names, result_names, run_fingerprint)
 
@@ -237,6 +236,8 @@ def test_persistence_missing_resets_window():                  # R3
 
 
 def test_lstm_cache_key_depends_on_code_and_config():          # R2
+    pytest.importorskip("torch", reason="LSTM 캐시 키 검사는 torch가 있을 때만")
+    from press.lstm_ae import config_key
     cfg = {"protocol": "common_lstm20", "epochs": 1}
     assert config_key(cfg, code="aaaa") != config_key(cfg, code="bbbb")
     assert config_key(cfg, code="aaaa") == config_key(dict(cfg), code="aaaa")

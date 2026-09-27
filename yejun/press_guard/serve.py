@@ -11,7 +11,10 @@ import threading
 import numpy as np
 import pandas as pd
 
-from model import GuardModel, StreamDetector, cases, D, HERE, ALPHAS, DECISION_TABLE, ALERT_UNIT_ROWS
+from model import StreamDetector, cases, D, HERE, ALPHAS, DECISION_TABLE, ALERT_UNIT_ROWS, QUALITY_ACTIONS, LEVEL_NAMES, ESCALATION_ALARM_ROWS, load_bundle
+from monitor import OUTCOME_COLUMNS, OUTCOME_LABELS, OUTCOMES
+import runtime
+PRIORS = (.001, .01, .1)   # 이상 확률 표시용 사전 비율 선택지(경보와 무관)
 
 MAX_UPLOAD=8*1024*1024
 MAX_ROWS=50000
@@ -28,18 +31,20 @@ def score_threshold(cal,alpha):
 class Console:
     def __init__(self):
         self.normal,self.abnormal,_=D.load()
-        self.models={s:GuardModel.load(HERE/"artifacts"/f"guard_{s}.json") for s in D.SPLITS}
+        self.models={s:load_bundle(HERE/"artifacts"/f"guard_{s}.json") for s in D.SPLITS}
         self.cache={}
         self.lock=threading.Lock()
 
     def analyze(self,request):
-        split=str(request.get("split","A")); alpha=float(request.get("alpha",.01))
+        split=str(request.get("split","A")); alpha=float(request.get("alpha",.01)); prior=float(request.get("prior",.01))
         if split not in self.models or alpha not in ALPHAS:
             raise ValueError("분할/경보 기준을 확인하세요")
+        if prior not in PRIORS:
+            raise ValueError("사전 비율을 확인하세요")
         kind=request.get("dataset","mixed")
         if kind not in ("mixed","normal","abnormal","upload"):
             raise ValueError("알 수 없는 자료 선택")
-        key=(split,alpha,kind)
+        key=(split,alpha,kind,prior)
         if kind!="upload" and key in self.cache:
             return self.cache[key]
         if kind=="upload":
@@ -53,7 +58,7 @@ class Console:
         if not 0<len(frame)<=MAX_ROWS:
             raise ValueError(f"1~{MAX_ROWS:,}행의 CSV를 입력하세요")
         start=time.perf_counter()
-        stream=StreamDetector(self.models[split],alpha)
+        stream=StreamDetector(self.models[split],alpha,prior)
         predictions=pd.concat([stream.push(frame.iloc[i:i+128]) for i in range(0,len(frame),128)],ignore_index=True)
         duration=time.perf_counter()-start
         queue=cases(predictions)
@@ -71,11 +76,21 @@ class Console:
                                alarm_rows=int(predictions.alarm.sum()),notifications=int(predictions.notification.sum()),
                                elapsed_s=duration),
                     calibration_segments=len(self.models[split].cal),threshold=score_threshold(self.models[split].cal,alpha),
-                    min_p_attainable=1/(len(self.models[split].cal)+1),alert_unit_rows=ALERT_UNIT_ROWS,
+                    min_p_attainable=1/(len(self.models[split].cal)+1),alert_unit_rows=ALERT_UNIT_ROWS,prior=prior,
+                    probability_available=self.models[split].probability is not None,
+                    level_counts={LEVEL_NAMES[k]:int(queue.level.eq(k).sum()) if len(queue) else 0 for k in LEVEL_NAMES},
                     cases=json.loads(queue.to_json(orient="records")),
                     points=json.loads(plot.to_json(orient="records",double_precision=12)))
         if kind!="upload": self.cache[key]=result
         return result
+
+    @staticmethod
+    def _table(name, query=None):
+        path=HERE/"outputs"/name
+        if not path.exists(): return []
+        t=pd.read_csv(path)
+        if query is not None: t=t[query(t)]
+        return json.loads(t.to_json(orient="records"))
 
     def overview(self):
         metrics=pd.read_csv(HERE/"outputs"/"metrics.csv")
@@ -90,7 +105,7 @@ class Console:
         rob=pd.read_csv(robustness) if robustness.exists() else pd.DataFrame()
         rob=rob[rob.criterion.eq("conformal")] if len(rob) else rob
         from contracts import execution_errors, read_json
-        audit_data=json.loads(audit.read_text()) if audit.exists() else {}
+        audit_data=json.loads(audit.read_text(encoding="utf-8")) if audit.exists() else {}
         try:
             errors=execution_errors(read_json(HERE/"outputs"/"manifest.json"),HERE/"outputs",HERE/"artifacts")
         except (OSError,ValueError,KeyError,TypeError,AttributeError):
@@ -103,8 +118,18 @@ class Console:
                     conditions=json.loads(cond.to_json(orient="records")),robustness=json.loads(rob.to_json(orient="records")),
                     external=json.loads(pd.read_csv(external).to_json(orient="records")) if external.exists() else [],
                     audit=audit_data,workload=json.loads(work.to_json(orient="records")),
-                    decision_table=list(DECISION_TABLE),alert_unit_rows=ALERT_UNIT_ROWS,
-                    benchmark=json.loads(benchmark.read_text()) if benchmark.exists() else {})
+                    decision_table=list(DECISION_TABLE),alert_unit_rows=ALERT_UNIT_ROWS,quality_actions=QUALITY_ACTIONS,
+                    level_names=LEVEL_NAMES,escalation_alarm_rows=ESCALATION_ALARM_ROWS,
+                    outcome_columns=list(OUTCOME_COLUMNS),outcome_labels=OUTCOME_LABELS,outcomes=list(OUTCOMES),
+                    levels=self._table("alert_levels_v2.csv"),
+                    level_injection=self._table("alert_levels_injection_v2.csv",lambda t:t.alpha.eq(.01)),
+                    probability=self._table("probability_eval_v2.csv"),
+                    probability_conversion=self._table("probability_conversion_v2.csv"),
+                    label_free=self._table("label_free_alert_probability_v2.csv",lambda t:t.alpha.eq(.01)&t.far_basis.isin(["nominal","calibrated95"])),
+                    quality_windows=self._table("quality_windows_v2.csv",lambda t:t.alpha.eq(.01)&t.source.eq("normal")),
+                    monitor_gain=self._table("monitor_gain_v2.csv",lambda t:t.alpha.eq(.01)),
+                    expected_effect=self._table("expected_effect_v2.csv"),
+                    benchmark=json.loads(benchmark.read_text(encoding="utf-8")) if benchmark.exists() else {})
 
 
 def handler(console):
@@ -152,6 +177,7 @@ def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--port",type=int,default=8765)
     args=ap.parse_args()
+    runtime.setup()
     console=Console()
     server=ThreadingHTTPServer(("127.0.0.1",args.port),handler(console))
     print(f"Press Guard: http://127.0.0.1:{args.port} (Ctrl+C 종료)",flush=True)

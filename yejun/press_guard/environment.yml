@@ -1,0 +1,10 @@
+# conda env create -f yejun/press_guard/environment.yml && conda activate press-guard
+# 파이썬 3.12 고정. 3.13 이상은 numpy 1.26.4 설치 파일이 없다. torch는 넣지 않는다(최종 모델 경로에 불필요).
+name: press-guard
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - pip:
+      - -r requirements.txt

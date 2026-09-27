@@ -1,8 +1,9 @@
 """4단계 검사: LSTM-AE 형태·축약 학습·마지막 시점 오차·캐시 키·블록 부트스트랩."""
 import numpy as np
-import torch
+import pytest
 
-from press.lstm_ae import LSTMAE, config_key, last_step_error, train_ae
+torch = pytest.importorskip("torch", reason="LSTM 비교(4단계)용. 최종 모델 경로는 torch 없이 돈다(requirements-lstm.txt)")
+from press.lstm_ae import LSTMAE, config_key, last_step_error, train_ae  # noqa: E402
 from press.uncertainty import moving_block_bootstrap
 
 

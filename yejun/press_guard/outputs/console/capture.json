@@ -1,0 +1,29 @@
+{
+  "chrome": "Google Chrome 153.0.8010.54",
+  "shots": {
+    "console_workspace_v2.png": {
+      "url": "/?split=B&alpha=0.01",
+      "size": [
+        1600,
+        1500
+      ],
+      "sha256": "40bc2bd6fb18a7dc1bbd07ccee62ad031a5cde66db5fb2b79484906ceb4f05bc"
+    },
+    "console_evidence_v2.png": {
+      "url": "/?split=B&alpha=0.01&tab=evidence",
+      "size": [
+        1600,
+        7400
+      ],
+      "sha256": "738de0855e4e9cb7e6d47175cb8830d8287d0cbb1a0fd18cdf04b18e8bfb9dcf"
+    }
+  },
+  "web_code_sha256": {
+    "index.html": "68cf82f4dd77b20fca187998674a365c73f4fb3d8d6cdce6e700cc946cb87747",
+    "app.js": "e9534b6b46b504e3c624a815187166ec6f985947308844b6774d414416b252e6",
+    "style.css": "acf648d32c4cbe1986ae0cb96a0d58ea51d268489bd163a0114518fd34a7f6db"
+  },
+  "serve_sha256": "0ce8bf66a407b473e2f679ed8a22c3fdb740bfd30a621e105d3e33799f749081",
+  "model_sha256": "1602db8f6a0845f1043e56c9721297f93418a20b87852b8ea50b3400dd18a761",
+  "note": "그림은 글꼴·브라우저 판에 따라 달라져 verify 동결 대상이 아니다"
+}

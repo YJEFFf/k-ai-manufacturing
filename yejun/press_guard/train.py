@@ -8,10 +8,12 @@ import time
 import numpy as np
 import pandas as pd
 
-from model import GuardModel, StreamDetector, cases, D, BASE, HERE, ALPHAS
+from model import GuardModel, StreamDetector, cases, record_running_max, D, BASE, HERE, ALPHAS
+from probability import ProbabilityCalibrator, posterior, DEFAULT_PRIOR
 from press.calibrate import conformal_p, segment_max
 from press.scores import sine_score
 from contracts import CODE_FILES, TRAIN_TABLES, PREDICTIONS
+import runtime
 
 
 def baseline(model, frame):
@@ -37,17 +39,70 @@ def metric(split, name, alpha, normal_pred, abnormal_pred):
                 normal_scored_rate=float(normal_pred.score.notna().mean()),abnormal_scored_rate=float(abnormal_pred.score.notna().mean()))
 
 
-def evaluate_pair(model, calibration, normal, abnormal, sid, out=None):
+def fit_probability(model, calibration, abnormal, sid, hashes):
+    """이상 확률 층: 정상 보정 행과 이상 21구간 전체로 맞춘 배포용 보정기, 그리고 평가용으로 이상 기록을 하나씩 뺀 우도비."""
+    cal_scores = model.predict(calibration).score.to_numpy()
+    pa = model.predict(abnormal)
+    deploy = ProbabilityCalibrator.fit(cal_scores, pa.score.to_numpy(), calibration_units=len(model.cal), split=sid,
+                                       source=dict(normal="정상 보정 구간 행", abnormal="이상 21구간 전체", input_hashes=hashes))
+    return deploy, oof_likelihood_ratio(model, calibration, abnormal)
+
+
+def oof_likelihood_ratio(model, calibration, abnormal):
+    """평가용 이상 행 우도비: 그 이상 기록을 뺀 나머지로 맞춘 보정기(기록 하나씩 떼어 낸 교차 적합)."""
+    cal_scores = model.predict(calibration).score.to_numpy()
+    pa = model.predict(abnormal)
+    oof = np.full(len(pa), np.nan)
+    for r in np.unique(pa.record_id):
+        keep = pa.record_id.to_numpy() != r
+        fold = ProbabilityCalibrator.fit(cal_scores, pa.score.to_numpy()[keep], calibration_units=len(model.cal))
+        oof[~keep] = fold.likelihood_ratio(pa.score.to_numpy()[~keep])
+    return oof
+
+
+def use_oof(pa, oof_lr):
+    """평가용 이상 행 확률은 그 기록을 뺀 보정기 값으로 바꾼다(정상 평가 행은 어느 적합에도 쓰지 않았다)."""
+    pa["likelihood_ratio"] = oof_lr
+    pa["anomaly_probability"] = posterior(oof_lr, pa.probability_prior.iloc[0])
+    pa["record_likelihood_ratio"] = record_running_max(oof_lr, pa.record_id.to_numpy())
+    pa["record_probability"] = posterior(pa.record_likelihood_ratio.to_numpy(), pa.probability_prior.iloc[0])
+    return pa
+
+
+def test_prediction_file(pn, pa):
+    """제출용 테스트 예측 파일(분할별 1개): 정상 평가 기록 + 이상 기록. 정답 구분 열(subset·label)로 파일만으로 F1을 다시 계산할 수 있다.
+    이상 600행은 두 분할이 같다. 이상 행의 확률 열은 그 기록을 뺀 교차 적합 값이다(probability_source)."""
+    both = pd.concat([pn.assign(subset="normal_test", label=0), pa.assign(subset="abnormal", label=1)], ignore_index=True)
+    return both[["subset", "label"] + [c for c in both.columns if c not in ("subset", "label")]]
+
+
+def combine_streams(pn, pa):
+    """정상 평가와 이상을 한 흐름으로 이어 대기열 순위를 한 번에 매긴다(구간·행 번호가 겹치지 않게 옮긴다)."""
+    shifted = pa.copy()
+    shifted["record_id"] += int(pn.record_id.max()) + 1
+    shifted["row_id"] += len(pn)
+    both = pd.concat([pn, shifted], ignore_index=True)
+    queue = cases(both)
+    if len(queue):
+        queue.insert(0, "source", np.where(queue.record_id > pn.record_id.max(), "abnormal", "normal"))
+        queue.loc[queue.source.eq("abnormal"), "record_id"] -= int(pn.record_id.max()) + 1
+    return queue
+
+
+def evaluate_pair(model, calibration, normal, abnormal, sid, out=None, oof_lr=None):
     ref = segment_max(baseline(model,calibration),D.segments(calibration))
     result = []
     for alpha in ALPHAS:
         pn, pa = model.predict(normal,alpha), model.predict(abnormal,alpha)
+        if oof_lr is not None:   # 평가용 이상 행 확률은 그 기록을 뺀 보정기로(정상 평가 행은 어느 적합에도 쓰지 않았다)
+            pa = use_oof(pa, oof_lr)
+            pn["probability_source"], pa["probability_source"] = "deployment_calibrator", "leave_one_record_out"
         result.append(metric(sid,"guard_v2",alpha,pn,pa))
         if out is not None and alpha == .01:
             pn.to_csv(out/f"predictions_normal_{sid}.csv",index=False)
             pa.to_csv(out/f"predictions_abnormal_{sid}.csv",index=False)
-            combined_cases = pd.concat([cases(pn).assign(source="normal"),cases(pa).assign(source="abnormal")],ignore_index=True)
-            combined_cases.to_csv(out/f"cases_{sid}.csv",index=False)
+            test_prediction_file(pn, pa).to_csv(out/f"test_predictions_{sid}.csv",index=False)
+            combine_streams(pn, pa).to_csv(out/f"cases_{sid}.csv",index=False)
         for frame,pred in ((normal,pn),(abnormal,pa)):
             score = baseline(model,frame)
             pred["score"],pred["p_value"] = score,conformal_p(ref,score)
@@ -63,6 +118,7 @@ def main():
     ap.add_argument("--artifacts",type=Path,default=HERE/"artifacts")
     ap.add_argument("--rolling",action="store_true",help="추가 정상 시간대 5개 비교; 독립 이상 검증은 아님")
     args=ap.parse_args()
+    runtime.setup()
     start=time.monotonic()
     args.out.mkdir(parents=True,exist_ok=True)
     normal,abnormal,inputs=D.load(args.root)
@@ -74,7 +130,10 @@ def main():
         model.save(args.artifacts/f"guard_{sid}.json")
         loaded=GuardModel.load(args.artifacts/f"guard_{sid}.json")
         pd.testing.assert_frame_equal(model.predict(abnormal),loaded.predict(abnormal))
-        rows.extend(evaluate_pair(loaded,split["cal"],split["test"],abnormal,sid,args.out))
+        deploy, oof = fit_probability(loaded, split["cal"], abnormal, sid, hashes)
+        deploy.save(args.artifacts/f"probability_{sid}.json")
+        loaded.attach_probability(ProbabilityCalibrator.load(args.artifacts/f"probability_{sid}.json"))
+        rows.extend(evaluate_pair(loaded,split["cal"],split["test"],abnormal,sid,args.out,oof_lr=oof))
         print(f"{sid}: 정상 학습·보정 / 저장·복원 일치",flush=True)
     metrics=pd.DataFrame(rows)
     metrics.to_csv(args.out/"metrics.csv",index=False)
@@ -96,11 +155,9 @@ def main():
             rolling.extend(evaluate_pair(m,ca,te,abnormal,f"normal_{end+120}_{end+179}"))
         pd.DataFrame(rolling).to_csv(args.out/"rolling.csv",index=False)
     written=tuple(n for n in TRAIN_TABLES if n!="rolling.csv" or args.rolling)+PREDICTIONS
-    import resource
-    peak_mb=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/(1024**2 if sys.platform=="darwin" else 1024)   # macOS는 바이트, Linux는 KB
-    D.dump_json(dict(version="press-guard-v2.0",input_hashes=hashes,environment=D.environment(),resources={"peak_rss_mb":round(peak_mb,1)},
+    D.dump_json(dict(version="press-guard-v2.0",input_hashes=hashes,environment=runtime.environment(D.environment()),resources={"peak_rss_mb":runtime.peak_rss_mb()},
                      code_hashes={n:D.sha256_file(HERE/n) for n in CODE_FILES},config={"rolling":args.rolling},
-                     artifacts={p.name:D.sha256_file(p) for p in args.artifacts.glob("guard_*.json")},
+                     artifacts={p.name:D.sha256_file(p) for p in sorted(args.artifacts.glob("*.json")) if p.name.startswith(("guard_","probability_"))},
                      outputs={n:D.sha256_file(args.out/n) for n in written},
                      exploratory=True, elapsed_s=time.monotonic()-start),args.out/"manifest.json")
     print(metrics[metrics.alpha.eq(.01)].to_string(index=False))

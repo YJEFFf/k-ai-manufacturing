@@ -80,8 +80,8 @@ def test_artifact_roundtrip_and_tamper(model,data,tmp_path):
     path=tmp_path/"guard.json"
     model.save(path)
     pd.testing.assert_frame_equal(model.predict(data[1]),GuardModel.load(path).predict(data[1]))
-    content=json.loads(path.read_text()); content["state"]["ar2"][0]+=1
-    path.write_text(json.dumps(content))
+    content=json.loads(path.read_text(encoding="utf-8")); content["state"]["ar2"][0]+=1
+    path.write_text(json.dumps(content), encoding="utf-8")
     with pytest.raises(ValueError,match="해시"): GuardModel.load(path)
 
 

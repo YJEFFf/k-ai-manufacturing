@@ -88,7 +88,37 @@
     "decision_table_v2.csv",
     "fig_recall_by_position_v2.png",
     "fig_first_alarm_v2.png",
-    "fig_missed_example_v2.png"
+    "fig_missed_example_v2.png",
+    "probability_eval_v2.csv",
+    "probability_reliability_v2.csv",
+    "probability_conversion_v2.csv",
+    "alert_levels_v2.csv",
+    "alert_budget_design_v2.csv",
+    "queue_mixed_ranks_v2.csv",
+    "queue_injection_ranks_v2.csv",
+    "queue_key_selection_v2.csv",
+    "sensor_importance_v2.csv",
+    "position_vibration_misses_v2.csv",
+    "coupling_fit_v2.csv",
+    "coupling_records_v2.csv",
+    "fp_events_v2.csv",
+    "near_miss_v2.csv",
+    "near_miss_corr_v2.csv",
+    "error_conditions_stats_v2.csv",
+    "alert_levels_injection_v2.csv",
+    "quality_windows_v2.csv",
+    "label_free_alert_probability_v2.csv",
+    "monitor_gain_v2.csv",
+    "expected_effect_v2.csv",
+    "error_condition_summary_v2.csv",
+    "fig_sensor_importance_v2.png",
+    "fig_coupling_v2.png",
+    "fig_false_alarm_cases_v2.png",
+    "fig_probability_reliability_v2.png"
   ],
-  "elapsed_s": 12.2
+  "external_inputs": {
+    "analysis/press_supplement/e1_summary.csv": "ac599f2408e6eb8cf03c51ca8f83ffa34ba4cb11d48a168b23e43195ab980344",
+    "analysis/press_dayshift/v2_current_scale.csv": "82b14ccd716bb1dcb54754d6ba613cf41f86107e054908dc0a4e0cbb6d496310"
+  },
+  "elapsed_s": 92.0
 }

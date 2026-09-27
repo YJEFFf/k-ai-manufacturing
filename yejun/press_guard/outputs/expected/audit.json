@@ -13,10 +13,30 @@
     "scikit_learn": "1.8.0",
     "scipy": "1.13.1",
     "matplotlib": "3.9.2",
-    "blas": null,
-    "protocol_version": "v1"
+    "blas": [
+      {
+        "api": "openblas",
+        "version": "0.3.23.dev",
+        "threads": 1,
+        "user_api": "blas"
+      },
+      {
+        "api": "openblas",
+        "version": "0.3.27",
+        "threads": 1,
+        "user_api": "blas"
+      },
+      {
+        "api": "openmp",
+        "version": null,
+        "threads": 1,
+        "user_api": "openmp"
+      }
+    ],
+    "protocol_version": "v1",
+    "press_threads": "1"
   },
-  "run_fingerprint": "69684b4557e183f2fe9008e250563ad68e5088704f2fa6f75fff4eb2390200be",
+  "run_fingerprint": "4dccae7e12d4641382a589813876e236d1dc467f62402b3d8964aeca22dbc45f",
   "checks": [
     {
       "name": "실행 코드·선행 산출물이 manifest와 같음",
@@ -26,12 +46,12 @@
     {
       "name": "저장 모델이 manifest와 같음",
       "ok": true,
-      "detail": "['guard_A.json', 'guard_B.json'] 해시 일치"
+      "detail": "['guard_A.json', 'guard_B.json', 'probability_A.json', 'probability_B.json'] 해시 일치"
     },
     {
       "name": "v1 의존 코드가 학습 당시와 같음",
       "ok": true,
-      "detail": "362db343a42f"
+      "detail": "0fd0718e47cc"
     },
     {
       "name": "입력 자료 해시가 학습 당시와 같음",
@@ -100,5 +120,5 @@
     }
   ],
   "all_ok": true,
-  "elapsed_s": 143.2
+  "elapsed_s": 171.9
 }

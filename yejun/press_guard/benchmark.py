@@ -14,6 +14,7 @@ import numpy as np
 import pandas as pd
 
 from model import GuardModel, StreamDetector, D, HERE
+import runtime
 
 
 def run_case(model, frame, chunk, repeats):
@@ -39,6 +40,7 @@ def main():
     ap.add_argument("--out", type=Path, default=HERE / "outputs")
     ap.add_argument("--repeats", type=int, default=3)
     args = ap.parse_args()
+    runtime.setup()
     model = GuardModel.load(args.artifacts / "guard_A.json")
     normal, abnormal, _ = D.load()
     split = D.split_normal(normal, D.segments(normal), "A")
@@ -46,7 +48,7 @@ def main():
     runs = [run_case(model, frame, chunk, args.repeats) for chunk in (1, 8, 128, len(frame))]
     t0 = time.perf_counter(); model.predict(frame); batch = time.perf_counter() - t0
     result = dict(version="press-guard-v2.0", split="A", rows=int(len(frame)), sampling_seconds=D.DT, runs=runs,
-                  batch_predict_seconds=round(batch, 4), environment=dict(D.environment(), processor=platform.processor(), omp_num_threads=__import__("os").environ.get("OMP_NUM_THREADS")),
+                  batch_predict_seconds=round(batch, 4), environment=dict(runtime.environment(D.environment()), processor=platform.processor(), omp_num_threads=__import__("os").environ.get("OMP_NUM_THREADS")),
                   note="CPU 한 스레드 참고치. 1행 묶음의 호출당 지연이 수집 주기 0.1초보다 작아야 행 단위 실시간 처리가 가능하다.")
     D.dump_json(result, args.out / "benchmark.json")
     print(pd.DataFrame(runs).to_string(index=False))

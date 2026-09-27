@@ -24,7 +24,7 @@ import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
 
 from press import data as D  # noqa: E402
-from press import analysis, diagnosis, field, lstm_ae, numbers, robustness, uncertainty  # noqa: E402
+from press import analysis, diagnosis, field, numbers, robustness, uncertainty  # noqa: E402  (lstm_ae는 torch가 필요해 4단계 안에서 import)
 from press.artifact import Artifact  # noqa: E402
 from press.calibrate import ALPHAS, conformal_p, mc_check_conformal, segment_max, thresholds_for  # noqa: E402
 from press.evaluate import comparison_markdown, evaluate_models  # noqa: E402
@@ -222,6 +222,7 @@ def step3(args, out, ctx, ctx2, checks):
 
 
 def step4(args, out, art_dir, ctx, ctx2, checks):
+    from press import lstm_ae  # noqa: E402  torch는 LSTM 비교(4단계)에만 필요하다. 최종 모델(v2) 경로는 torch 없이 돈다
     vendor, normal, abnormal = ctx["vendor"], ctx["normal"], ctx["abnormal"]
     log = lambda m: print(m, flush=True)  # noqa: E731
     unc = uncertainty.run({sid: c["records"] for sid, c in ctx2.items()}, out)
@@ -306,13 +307,17 @@ def main(argv=None):
     checks["steps_run"] = args.steps
     checks["external_checks_not_run_here"] = EXTERNAL_CHECKS
     timings["total_s"] = round(time.time() - t0, 2)
-    import torch  # noqa: E402
+    try:
+        import torch  # noqa: E402
+        torch_version = torch.__version__
+    except ImportError:   # 2단계까지(최종 모델 v2의 선행 단계)는 torch 없이 돈다
+        torch_version = None
     code_hash = code_sha256()
     env = D.environment()
     identity = run_fingerprint(code_hash, vars(args), ctx["load_report"],
-                               dict(env, torch=torch.__version__, omp_num_threads=os.environ.get("OMP_NUM_THREADS")))
+                               dict(env, torch=torch_version, omp_num_threads=os.environ.get("OMP_NUM_THREADS")))
     run_id = f"{git_commit() or 'nocommit'}+{identity[:16]}"
-    pre_manifest = dict(git_commit=git_commit(), code_sha256=code_hash, run_id=run_id, environment=env, timings_s=timings, torch=torch.__version__)
+    pre_manifest = dict(git_commit=git_commit(), code_sha256=code_hash, run_id=run_id, environment=env, timings_s=timings, torch=torch_version)
     if args.steps >= 5:
         checks["step5_numbers"] = numbers.run(out, pre_manifest)
     failed = check_required(checks, args.steps, verify_inputs=not args.no_verify, summary=False)
@@ -321,7 +326,7 @@ def main(argv=None):
     checks["required_checks_ok"] = not failed
     checks["required_checks_failed"] = failed
     D.dump_json(checks, out / "checks.json")   # manifest보다 먼저 써서 해시에 포함한다
-    manifest = dict(protocol_version=D.PROTOCOL_VERSION, git_commit=git_commit(), code_sha256=code_hash, run_id=run_id, execution_sha256=identity, torch=torch.__version__,
+    manifest = dict(protocol_version=D.PROTOCOL_VERSION, git_commit=git_commit(), code_sha256=code_hash, run_id=run_id, execution_sha256=identity, torch=torch_version,
                     args={k: str(v) for k, v in vars(args).items()}, environment=env, omp_num_threads=os.environ.get("OMP_NUM_THREADS"),
                     inputs=ctx["load_report"], timings_s=timings,
                     outputs={name: D.sha256_file(out / name) for name in sorted(output_names(args.steps) | {"checks.json"}) if (out / name).is_file()},
