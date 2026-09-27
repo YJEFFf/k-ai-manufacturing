@@ -1,0 +1,34 @@
+{
+  "protocol": "press-supervised-baseline-v1",
+  "input_hashes": {
+    "normal": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+    "abnormal": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e"
+  },
+  "code_sha256": {
+    "run.py": "5175591bc91801c54c2426b603c39b6af002dc9355d29b69607fd7abaa4d32b0",
+    "protocol.json": "1eff8d5b04a16231e9c5065a0562aef5b90b94a7fbbe841d0a77d8ef9652ca3f"
+  },
+  "dependencies": {
+    "press_supplement/common.py": "06b6983270810fabffe64042f15944211b5d66d657c7062eb329f3bfb8b20922",
+    "press_supplement/e1_summary.csv": "ac599f2408e6eb8cf03c51ca8f83ffa34ba4cb11d48a168b23e43195ab980344",
+    "press_guard/artifacts/guard_A.json": "63234e1bc2a646b34694df0bc4d51507c86c5f6efaaaf065eef108bd6b2514ad"
+  },
+  "outputs": {
+    "random_rows.csv": "2f5da50a69d72afdf03f92aafe938fb4f632dc4e6c385db4ea22b150da8ecd5f",
+    "grouped_records.csv": "580f8a273a3922af7758d3b599dc6a12d9c15d25629630970ad5758ec2e5d2a1",
+    "injection.csv": "f5773603b39c1ca6faebd61ec89dde114f1aee3f0e7b57d093b722ce439f80d3"
+  },
+  "environment": {
+    "python": "3.12.2",
+    "platform": "macOS-26.3.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.8.0",
+    "scipy": "1.13.1",
+    "matplotlib": "3.9.2",
+    "blas": null,
+    "protocol_version": "v1"
+  },
+  "elapsed_s": 7.1
+}
