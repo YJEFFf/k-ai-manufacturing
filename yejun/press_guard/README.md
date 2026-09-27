@@ -17,6 +17,7 @@ python yejun/press_guard/reproduce.py --data "Dataset_소성가공 예지보전 
 
 - **결과 위치:** `yejun/press_guard/outputs/`에 테스트 예측(`test_predictions_A.csv`·`test_predictions_B.csv`), 지표(`metrics.csv`), 단계별 요약(`reproduce_summary.json`)이 생긴다.
 - **검증:** 한 명령이 v1 선행 결과, v2 동결값 비교(verify), 분석 패키지 동결값 비교까지 실행한다. 한 단계라도 실패하면 종료 코드 1이다.
+- **실측 시간:** M2 한 스레드 기준 15단계에 약 9.5분이 걸린다(git 없는 사본에 주최 측 ZIP만 준 경우 572초). `--tests`를 붙이면 23단계에 약 11분이다(torch 없는 새 가상환경과 새 클론에서 651초).
 - **전체 모드:** `--full`은 v1 LSTM 비교(torch 필요, `requirements-lstm.txt`), 후보 비교, 보완 실험 E1~E3 재실행까지 한다.
 - **시험:** `--tests`는 끝에 pytest와 웹 회귀 시험을 돌린다.
 - **Windows:** PowerShell에서도 같은 명령이다. 모든 파일 입출력은 UTF-8이고 CP949 콘솔에서도 멈추지 않는다. 한글이 깨져 보이면 `chcp 65001`을 쓴다.

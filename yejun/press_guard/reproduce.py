@@ -1,6 +1,6 @@
 """한 명령 재현: 입력 확인 → v1 선행 → v2 학습·분석·실행 검증·동결값 비교 → 분석 패키지 재생성·검증 → 요약.
 
-    python yejun/press_guard/reproduce.py                 # 기본(빠른 경로): torch 없이 최종 모델 전체 + 분석 패키지. 약 12분
+    python yejun/press_guard/reproduce.py                 # 기본(빠른 경로): torch 없이 최종 모델 전체 + 분석 패키지. 약 10분
     python yejun/press_guard/reproduce.py --full          # 전체: v1 1~5단계(LSTM, torch 필요)·후보 비교·보완 실험 E1~E3 재실행까지. 약 25분
     python yejun/press_guard/reproduce.py --data "Dataset_소성가공 예지보전 AI 데이터셋.zip"   # 주최 측 ZIP(또는 두 CSV가 든 폴더)을 먼저 배치
     python yejun/press_guard/reproduce.py --tests         # 끝에 pytest·웹 회귀 시험까지
