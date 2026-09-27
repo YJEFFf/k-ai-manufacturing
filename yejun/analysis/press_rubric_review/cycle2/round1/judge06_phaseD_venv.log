@@ -1,0 +1,93 @@
+Phase D 시작 2026-09-27 17:16:54 HEAD=dcd300aa88288508d0794ce89a9aebcfd53bc3b4 base=3.12.8 /usr/local/bin/python3.12
+STEP D01_pip_install rc=0 wall=26s maxrss_mb=293
+---- D01_pip_install stdout(끝 3줄)
+Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)
+Installing collected packages: pytz, mpmath, tzdata, typing-extensions, threadpoolctl, sympy, six, setuptools, pyparsing, pygments, pluggy, pillow, packaging, numpy, networkx, MarkupSafe, kiwisolver, iniconfig, fsspec, fonttools, filelock, cycler, cloudpickle, scipy, python-dateutil, pytest, joblib, jinja2, contourpy, torch, scikit-learn, pandas, matplotlib
+Successfully installed MarkupSafe-3.0.3 cloudpickle-3.1.2 contourpy-1.3.3 cycler-0.12.1 filelock-4.0.4 fonttools-4.66.0 fsspec-2026.9.0 iniconfig-2.3.0 jinja2-3.1.6 joblib-1.6.0 kiwisolver-1.5.1 matplotlib-3.9.2 mpmath-1.3.0 networkx-3.7 numpy-1.26.4 packaging-26.3 pandas-2.3.3 pillow-12.3.0 pluggy-1.6.0 pygments-2.21.0 pyparsing-3.3.3 pytest-9.0.3 python-dateutil-2.9.0.post0 pytz-2026.4 scikit-learn-1.8.0 scipy-1.13.1 setuptools-84.0.0 six-1.17.0 sympy-1.13.1 threadpoolctl-3.7.0 torch-2.5.1 typing-extensions-4.16.0 tzdata-2026.4
+{"python": "3.12.8", "executable": "/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06/D_venv/venv312/bin/python", "blas": []}
+STEP D02_v1_step2 rc=0 wall=50s maxrss_mb=749
+---- D02_v1_step2 stdout(끝 2줄)
+  "required_checks_failed": []
+}
+STEP D03_train rc=0 wall=27s maxrss_mb=210
+---- D03_train stdout(끝 2줄)
+    B    guard_v2   0.01 569   3  31 6094 0.970990   0.994755 0.948333                         3              180                          21                 21             0.0          0.5                 1.0                   1.0
+    B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              180                          21                 21             0.0          0.7                 1.0                   1.0
+STEP D04_analyze rc=0 wall=20s maxrss_mb=628
+---- D04_analyze stdout(끝 2줄)
+ "elapsed_s": 17.5
+}
+STEP D05_audit rc=0 wall=257s maxrss_mb=387
+---- D05_audit stdout(끝 1줄)
+16/16 통과 → /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06/D_venv/clone/yejun/press_guard/outputs/audit.json
+STEP D06_verify rc=0 wall=2s maxrss_mb=166
+---- D06_verify stdout(끝 2줄)
+
+20/20 통과. 코드 7a2d709c2cd5 vs 동결 7a2d709c2cd5; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+STEP D07_pytest_v2 rc=0 wall=84s maxrss_mb=283
+---- D07_pytest_v2 stdout(끝 3줄)
+......................................................                   [100%]
+54 passed in 84.13s (0:01:24)
+STEP D08_pytest_v1 rc=0 wall=12s maxrss_mb=495
+---- D08_pytest_v1 stdout(끝 3줄)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+49 passed, 14 warnings in 9.96s
+STEP D09_pytest_supp rc=1 wall=2s maxrss_mb=294
+---- D09_pytest_supp stdout(끝 3줄)
+FAILED analysis/press_supplement/test_contract.py::test_mutations_are_detected[E2-protocol]
+FAILED analysis/press_supplement/test_contract.py::test_expected_tampering_is_detected
+5 failed, 6 passed in 2.04s
+STEP D10_pip_notorch rc=0 wall=19s maxrss_mb=228
+---- D10_pip_notorch stdout(끝 2줄)
+Installing collected packages: pytz, tzdata, threadpoolctl, six, pyparsing, pygments, pluggy, pillow, packaging, numpy, kiwisolver, iniconfig, fonttools, cycler, cloudpickle, scipy, python-dateutil, pytest, joblib, contourpy, scikit-learn, pandas, matplotlib
+Successfully installed cloudpickle-3.1.2 contourpy-1.3.3 cycler-0.12.1 fonttools-4.66.0 iniconfig-2.3.0 joblib-1.6.0 kiwisolver-1.5.1 matplotlib-3.9.2 numpy-1.26.4 packaging-26.3 pandas-2.3.3 pillow-12.3.0 pluggy-1.6.0 pygments-2.21.0 pyparsing-3.3.3 pytest-9.0.3 python-dateutil-2.9.0.post0 pytz-2026.4 scikit-learn-1.8.0 scipy-1.13.1 six-1.17.0 threadpoolctl-3.7.0 tzdata-2026.4
+STEP D11_notorch_v1_step2 rc=1 wall=60s maxrss_mb=178
+---- D11_notorch_v1_step2 stdout(끝 3줄)
+---- D11_notorch_v1_step2 stderr(끝 3줄, 시간 측정 제외)
+  File "/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06/D_venv/clone_notorch/yejun/press_submission/press/lstm_ae.py", line 19, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+STEP D12_notorch_train rc=0 wall=31s maxrss_mb=213
+---- D12_notorch_train stdout(끝 2줄)
+    B    guard_v2   0.01 569   3  31 6094 0.970990   0.994755 0.948333                         3              180                          21                 21             0.0          0.5                 1.0                   1.0
+    B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              180                          21                 21             0.0          0.7                 1.0                   1.0
+STEP D13_py314_dryrun rc=1 wall=1s maxrss_mb=81
+---- D13_py314_dryrun stdout(끝 6줄)
+---- D13_py314_dryrun stderr(끝 6줄, 시간 측정 제외)
+ERROR: Ignored the following yanked versions: 2.4.0
+ERROR: Could not find a version that satisfies the requirement numpy==1.26.4 (from versions: 2.3.2, 2.3.3, 2.3.4, 2.3.5, 2.4.0rc1, 2.4.1, 2.4.2, 2.4.3, 2.4.4, 2.4.5, 2.4.6, 2.5.0rc1, 2.5.0, 2.5.1, 2.5.2, 2.5.3)
+ERROR: No matching distribution found for numpy==1.26.4
+STEP D14_uv_resolve_mac_py3.11 rc=0 wall=5s maxrss_mb=90
+---- D14_uv_resolve_mac_py3.11 stdout(끝 4줄)
+typing-extensions==4.16.0
+    # via torch
+tzdata==2026.4
+    # via pandas
+STEP D14_uv_resolve_mac_py3.12 rc=0 wall=1s maxrss_mb=80
+---- D14_uv_resolve_mac_py3.12 stdout(끝 4줄)
+typing-extensions==4.16.0
+    # via torch
+tzdata==2026.4
+    # via pandas
+STEP D14_uv_resolve_mac_py3.13 rc=1 wall=4s maxrss_mb=66
+---- D14_uv_resolve_mac_py3.13 stdout(끝 4줄)
+---- D14_uv_resolve_mac_py3.13 stderr(끝 4줄, 시간 측정 제외)
+      numpy==1.26.4, we can conclude that your requirements are unsatisfiable.
+
+      hint: Wheels are required for `numpy` because building from source is
+      disabled for all packages (i.e., with `--no-build`)
+STEP D15_uv_resolve_win_py312 rc=0 wall=0s maxrss_mb=79
+---- D15_uv_resolve_win_py312 stdout(끝 4줄)
+typing-extensions==4.16.0
+    # via torch
+tzdata==2026.4
+    # via pandas
+STEP D16_uv_resolve_linux_py312 rc=0 wall=1s maxrss_mb=86
+---- D16_uv_resolve_linux_py312 stdout(끝 4줄)
+typing-extensions==4.16.0
+    # via torch
+tzdata==2026.4
+    # via pandas
+---- 리눅스 x86_64 해석 결과의 nvidia·triton 패키지 수: 13
+Phase D 끝 2026-09-27 17:27:06

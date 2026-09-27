@@ -1,0 +1,11 @@
+Phase H 시작 2026-09-27 17:50:32 클론=3ad2452
+STEP H01_train rc=0 wall=10s maxrss_mb=230
+STEP H02_supervised rc=0 wall=140s maxrss_mb=387
+---- H02_supervised stdout(끝 2줄)
+injection B cur_gain 1.5
+done 138.7 s
+---- 커밋 CSV와 바이트 비교
+random_rows.csv 바이트 동일
+grouped_records.csv 바이트 동일
+injection.csv 바이트 동일
+Phase H 끝 2026-09-27 17:53:02

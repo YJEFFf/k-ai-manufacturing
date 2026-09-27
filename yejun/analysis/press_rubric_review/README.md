@@ -1,5 +1,7 @@
 # ③ 프레스 루브릭 검수 — 통합 기록 (2026-09-26)
 
+> 사이클 2(2026-09-27, 평가관 6명 반복 검수)는 [cycle2/README.md](cycle2/README.md)에 있다. 아래는 사이클 1 기록이다.
+
 공식 서면평가 지표 6개 항목마다 별도 평가관을 두고, 최초 계획→v1→v2→보완 실험(E1·E2·E3)까지 검수했다. **검수 기록이며 대회 보고서가 아니다.** 기존 코드·모델·결과·동결 기대값은 바꾸지 않았다. 점수는 내부 근거 충족도 의견이며 공식 점수·수상 확률이 아니다.
 
 - 기준: HEAD `7ff1e1e`, 보완 실험 프로토콜 `a102ecf`·결과 `875f269`. 공식 지표 원문은 [official_task_extract.txt](official_task_extract.txt)(출처 해시는 [review_snapshot.json](review_snapshot.json)).

@@ -1,0 +1,19 @@
+Phase F 시작 2026-09-27 17:22:49 클론=dcd300a
+STEP F01_e2_nocache rc=0 wall=102s maxrss_mb=1076
+---- F01_e2_nocache stdout(끝 3줄)
+press_supplement E2          unseen_cooler     100               v2_3ch 0.030581           0.011834 0.015625 0.507785
+press_supplement E2          unseen_cooler     100               v2_4ch 0.059347           0.041420 0.031250 0.507785
+press_supplement E2          unseen_cooler     100         v2_4ch_phase 0.059347           0.041420 0.031250 0.507785
+STEP F02_verify_nocache_run rc=1 wall=3s maxrss_mb=192
+---- F02_verify_nocache_run stdout(끝 6줄)
+FAIL E2: 실행 설정이 동결 실행과 다름
+실패: 무결성·기대값 비교 E2
+---- F03 결과 CSV만 동결값과 바이트 비교
+e2_uci_metrics.csv 바이트 동일
+e2_uci_strata.csv 바이트 동일
+e2_uci_component_diagnostic_posthoc.csv 바이트 동일
+e2_uci_comparison.csv 바이트 동일
+---- manifest config 비교
+재실행: {'alpha': 0.05, 'variants': ['v2_4ch', 'v2_3ch', 'v2_4ch_phase'], 'cache_version': 'uci10hz-v1', 'cache_used': False}
+동결  : {'alpha': 0.05, 'variants': ['v2_4ch', 'v2_3ch', 'v2_4ch_phase'], 'cache_version': 'uci10hz-v1', 'cache_used': True}
+Phase F 끝 2026-09-27 17:24:34

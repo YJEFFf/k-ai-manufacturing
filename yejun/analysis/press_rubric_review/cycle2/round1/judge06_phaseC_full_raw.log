@@ -1,0 +1,85 @@
+Phase C 시작 2026-09-27 17:02:27 HEAD=dcd300aa88288508d0794ce89a9aebcfd53bc3b4 python=3.12.2 임시=/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06/C_full_raw
+STEP C01_v1_run_all_full rc=0 wall=1957s maxrss_mb=1090
+---- C01_v1_run_all_full stdout(끝 8줄)
+    "verify.py --out outputs (동결 기대값 비교)"
+  ],
+  "step5_numbers": {
+    "numbers_items": 27
+  },
+  "required_checks_ok": true,
+  "required_checks_failed": []
+}
+---- C01_v1_run_all_full stderr(끝 8줄, 시간 측정 제외)
+/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06/C_full_raw/clone/yejun/press_submission/press/robustness.py:165: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
+  "dead_component_cases": int((~sens.waveform_only_alarm_possible.fillna(True).astype(bool)).sum()) if "waveform_only_alarm_possible" in sens else None,
+STEP C02_v1_verify rc=0 wall=1s maxrss_mb=105
+---- C02_v1_verify stdout(끝 6줄)
+OK   thresholds_main.csv  max|Δ|=0
+OK   uncertainty.csv  max|Δ|=0
+OK   waveform_segments.csv  max|Δ|=0
+OK   workload.csv  max|Δ|=0
+
+39/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 362db343a42f vs 동결 3b66c92eba46
+STEP C03_advance rc=0 wall=7s maxrss_mb=234
+---- C03_advance stdout(끝 4줄)
+       B early_w6_to_w8                         3                          21  71   3     0.934629                   1.00             0.0          0.7
+       B       ar2_only                         1                          20 165   1     0.839768                   0.93             0.2          0.5
+       B       maxz_ar2                         3                          21 112   3     0.894592                   1.00             0.0          0.5
+       B     early6_ar2                         3                          21  31   3     0.970990                   1.00             0.0          0.5
+STEP C04_v2_train rc=0 wall=22s maxrss_mb=237
+---- C04_v2_train stdout(끝 4줄)
+    A    guard_v2   0.01 556   0  44 4090 0.961938   1.000000 0.926667                         0              120                          21                 21             0.1          0.5                 1.0                   1.0
+    A baseline_v1   0.01 501   0  99 4090 0.910082   1.000000 0.835000                         0              120                          21                 21             0.1          0.7                 1.0                   1.0
+    B    guard_v2   0.01 569   3  31 6094 0.970990   0.994755 0.948333                         3              180                          21                 21             0.0          0.5                 1.0                   1.0
+    B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              180                          21                 21             0.0          0.7                 1.0                   1.0
+STEP C05_v2_analyze rc=0 wall=14s maxrss_mb=624
+---- C05_v2_analyze stdout(끝 4줄)
+  "fig_missed_example_v2.png"
+ ],
+ "elapsed_s": 12.0
+}
+STEP C06_v2_audit rc=0 wall=149s maxrss_mb=405
+---- C06_v2_audit stdout(끝 3줄)
+OK  B 이상 21구간 모두 탐지(성능 회귀): 21/21구간
+OK  B 날짜 이동·라벨 변경에 불변: 경보·점수 동일
+16/16 통과 → /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06/C_full_raw/clone/yejun/press_guard/outputs/audit.json
+STEP C07_v2_verify rc=0 wall=2s maxrss_mb=188
+---- C07_v2_verify stdout(끝 3줄)
+OK   decision_table_v2.csv  max|Δ|=0
+
+20/20 통과. 코드 7a2d709c2cd5 vs 동결 7a2d709c2cd5; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+STEP C08_evidence rc=0 wall=7s maxrss_mb=594
+---- C08_evidence stdout(끝 3줄)
+    B 10 0.082645 0.082645      180                9  0.050000       0.085628          False
+    B 11 0.090909 0.090909      180                9  0.050000       0.085628          False
+    B 12 0.099174 0.099174      180               11  0.061111       0.099126          False
+STEP C09_supp_verify rc=0 wall=1s maxrss_mb=190
+---- C09_supp_verify stdout(끝 6줄)
+통과: 무결성·기대값 비교 E1, E2, E3
+STEP C10_supp_rerun rc=0 wall=622s maxrss_mb=1063
+---- C10_supp_rerun stdout(끝 8줄)
+-- E1 재실행: /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06/C_full_raw/clone/yejun/analysis/press_supplement/fault_injection.py --out /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06/C_full_raw/tmpdir_rerun/press_supplement_rerun_lpn9poak/E1
+-- E2 재실행: /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06/C_full_raw/clone/yejun/analysis/press_supplement/uci_v2.py --out /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06/C_full_raw/tmpdir_rerun/press_supplement_rerun_lpn9poak/E2
+-- E3 재실행: /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06/C_full_raw/clone/yejun/analysis/press_supplement/recalibration.py --out /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06/C_full_raw/tmpdir_rerun/press_supplement_rerun_lpn9poak/E3
+통과: 무결성·기대값 비교 E1, E2, E3 · 재실행 E1,E2,E3
+STEP C11_supp_figures rc=0 wall=1s maxrss_mb=148
+---- C11_supp_figures stdout(끝 3줄)
+STEP C12_pytest_v2 rc=0 wall=44s maxrss_mb=299
+---- C12_pytest_v2 stdout(끝 3줄)
+......................................................                   [100%]
+54 passed in 43.29s
+STEP C13_pytest_v1 rc=0 wall=7s maxrss_mb=499
+---- C13_pytest_v1 stdout(끝 3줄)
+.................................................                        [100%]
+49 passed in 6.46s
+STEP C14_pytest_supp rc=0 wall=3s maxrss_mb=324
+---- C14_pytest_supp stdout(끝 3줄)
+...........                                                              [100%]
+11 passed in 1.85s
+STEP C15_node_web rc=0 wall=0s maxrss_mb=77
+---- C15_node_web stdout(끝 2줄)
+web regressions: 4 passed (null gap / empty replay hover / 50k rows / empty selection)
+STEP C16_predict_cli rc=0 wall=1s maxrss_mb=190
+---- C16_predict_cli stdout(끝 2줄)
+600행 처리, 점검 대기 21구간 → /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06/C_full_raw/predict_cli_A_abnormal.csv
+Phase C 끝 2026-09-27 17:49:46

@@ -1,0 +1,2266 @@
+{
+ "base": "HEAD dcd300a(검수 시작 f6ec6b8; 검수 대상 파일은 두 커밋에서 같음) 산출물 + 원본 재계산",
+ "splits": {
+  "A": {
+   "recount": {
+    "0.01": {
+     "tp": 556,
+     "fp": 0,
+     "fn": 44,
+     "normal_notified_segments": 0,
+     "abnormal_notified_segments": 21,
+     "matches_metrics_csv": true,
+     "row_table_sums_ok_normal": true,
+     "row_table_sums_ok_abnormal": true
+    },
+    "0.03": {
+     "tp": 569,
+     "fp": 1,
+     "fn": 31,
+     "normal_notified_segments": 1,
+     "abnormal_notified_segments": 21,
+     "matches_metrics_csv": true,
+     "row_table_sums_ok_normal": true,
+     "row_table_sums_ok_abnormal": true
+    },
+    "0.05": {
+     "tp": 569,
+     "fp": 1,
+     "fn": 31,
+     "normal_notified_segments": 1,
+     "abnormal_notified_segments": 21,
+     "matches_metrics_csv": true,
+     "row_table_sums_ok_normal": true,
+     "row_table_sums_ok_abnormal": true
+    }
+   },
+   "bounds": {
+    "vib": [
+     0.0813,
+     0.1289,
+     0.1857
+    ],
+    "amp": [
+     117.4762,
+     155.6932,
+     223.0558
+    ],
+    "vib_high": 3.1472,
+    "r2_low": 0.9947
+   },
+   "fn_position_x_vibration": [
+    {
+     "pos_grp": "0-1",
+     "vib_high": false,
+     "rows": 6,
+     "fn": 6,
+     "rate": 1.0,
+     "ci95": [
+      0.5407,
+      1.0
+     ]
+    },
+    {
+     "pos_grp": "0-1",
+     "vib_high": true,
+     "rows": 36,
+     "fn": 20,
+     "rate": 0.5556,
+     "ci95": [
+      0.381,
+      0.7206
+     ]
+    },
+    {
+     "pos_grp": "2-6",
+     "vib_high": false,
+     "rows": 15,
+     "fn": 4,
+     "rate": 0.2667,
+     "ci95": [
+      0.0779,
+      0.551
+     ]
+    },
+    {
+     "pos_grp": "2-6",
+     "vib_high": true,
+     "rows": 80,
+     "fn": 12,
+     "rate": 0.15,
+     "ci95": [
+      0.08,
+      0.2474
+     ]
+    },
+    {
+     "pos_grp": "7+",
+     "vib_high": false,
+     "rows": 35,
+     "fn": 0,
+     "rate": 0.0,
+     "ci95": [
+      0.0,
+      0.1
+     ]
+    },
+    {
+     "pos_grp": "7+",
+     "vib_high": true,
+     "rows": 428,
+     "fn": 2,
+     "rate": 0.0047,
+     "ci95": [
+      0.0006,
+      0.0168
+     ]
+    }
+   ],
+   "fn_early_vs_late": {
+    "early": "26/42",
+    "late": "18/558",
+    "fisher_p": 4.2721670740027534e-23
+   },
+   "fn_vib_normal_vs_high_pos0_1": {
+    "vib_normal": "6/6",
+    "vib_high": "20/36",
+    "fisher_p": 0.043888561218471366
+   },
+   "fn_vib_normal_vs_high_pos2plus": {
+    "vib_normal": "4/50",
+    "vib_high": "14/508",
+    "fisher_p": 0.068134835035958
+   },
+   "abnormal_vib_normal_segments": [
+    {
+     "record_id": 3,
+     "length": 31,
+     "vibz_max": 1.5386023595592453,
+     "wave": "broken"
+    },
+    {
+     "record_id": 19,
+     "length": 10,
+     "vibz_max": 1.2135502756331618,
+     "wave": "broken"
+    },
+    {
+     "record_id": 20,
+     "length": 15,
+     "vibz_max": 0.93094826453079,
+     "wave": "broken"
+    }
+   ],
+   "fn_condition_stratified_by_position": {
+    "len_bin": {
+     "10–29": {
+      "all": "17/135",
+      "pos2plus": "4/121",
+      "share_rows_pos0_1": 0.104
+     },
+     "5–9": {
+      "all": "1/8",
+      "pos2plus": "0/6",
+      "share_rows_pos0_1": 0.25
+     },
+     "≤4": {
+      "all": "2/11",
+      "pos2plus": "1/5",
+      "share_rows_pos0_1": 0.545
+     },
+     "≥30": {
+      "all": "24/446",
+      "pos2plus": "13/426",
+      "share_rows_pos0_1": 0.045
+     }
+    },
+    "amp_q": {
+     "Q1(<q25)": {
+      "all": "19/210",
+      "pos2plus": "7/188",
+      "share_rows_pos0_1": 0.105
+     },
+     "Q2": {
+      "all": "15/164",
+      "pos2plus": "5/154",
+      "share_rows_pos0_1": 0.061
+     },
+     "Q3": {
+      "all": "10/226",
+      "pos2plus": "6/216",
+      "share_rows_pos0_1": 0.044
+     }
+    },
+    "vib_q": {
+     "Q1(<q25)": {
+      "all": "10/56",
+      "pos2plus": "4/50",
+      "share_rows_pos0_1": 0.107
+     },
+     "Q4(≥q75)": {
+      "all": "34/544",
+      "pos2plus": "14/508",
+      "share_rows_pos0_1": 0.066
+     }
+    }
+   },
+   "fn_rows_pos0_1_magnitude_sensor": {
+    "AI0_Vibration": 9,
+    "AI2_Current": 9,
+    "AI1_Vibration": 8
+   },
+   "fp_segments": [
+    {
+     "tag": "A_frozen",
+     "alpha": 0.03,
+     "record_id": 90,
+     "abs_segment": 570,
+     "block": "540~599",
+     "start": "01:12:43",
+     "length": 44,
+     "alarm_rows": 1,
+     "alarm_positions": [
+      11
+     ],
+     "reasons": [
+      "magnitude"
+     ],
+     "magnitude_sensors": [
+      "AI0_Vibration"
+     ],
+     "vib_high": true,
+     "wave": "sine-like",
+     "vib_q": "Q3",
+     "amp_q": "Q3",
+     "vibz_max": 4.062
+    },
+    {
+     "tag": "A_frozen",
+     "alpha": 0.05,
+     "record_id": 90,
+     "abs_segment": 570,
+     "block": "540~599",
+     "start": "01:12:43",
+     "length": 44,
+     "alarm_rows": 1,
+     "alarm_positions": [
+      11
+     ],
+     "reasons": [
+      "magnitude"
+     ],
+     "magnitude_sensors": [
+      "AI0_Vibration"
+     ],
+     "vib_high": true,
+     "wave": "sine-like",
+     "vib_q": "Q3",
+     "amp_q": "Q3",
+     "vibz_max": 4.062
+    }
+   ],
+   "fp_vib_high_concentration_alpha1": {
+    "vib_high": "0/2",
+    "ci95": [
+     0.0,
+     0.8419
+    ],
+    "normal_range": "0/118",
+    "fisher_p": 1.0
+   },
+   "near_miss": {
+    "threshold": 4.4179,
+    "spearman_ratio_vs": {
+     "vibz_max": 0.426,
+     "vib_std": 0.3,
+     "amp_proxy": 0.444,
+     "length": 0.413,
+     "abs_segment(time)": 0.2
+    },
+    "segments_ratio_ge_0_8": 1,
+    "segments_ratio_ge_0_9": 0,
+    "top10": [
+     {
+      "record_id": 90,
+      "abs_segment": 570,
+      "length": 44,
+      "vibz_max": 4.062,
+      "vib_high": true,
+      "wave": "sine-like",
+      "amp_q": "Q3",
+      "ratio": 0.865
+     },
+     {
+      "record_id": 96,
+      "abs_segment": 576,
+      "length": 50,
+      "vibz_max": 3.553,
+      "vib_high": true,
+      "wave": "sine-like",
+      "amp_q": "Q4(≥q75)",
+      "ratio": 0.705
+     },
+     {
+      "record_id": 82,
+      "abs_segment": 562,
+      "length": 50,
+      "vibz_max": 1.71,
+      "vib_high": false,
+      "wave": "sine-like",
+      "amp_q": "Q2",
+      "ratio": 0.608
+     },
+     {
+      "record_id": 102,
+      "abs_segment": 582,
+      "length": 50,
+      "vibz_max": 1.885,
+      "vib_high": false,
+      "wave": "sine-like",
+      "amp_q": "Q2",
+      "ratio": 0.597
+     },
+     {
+      "record_id": 93,
+      "abs_segment": 573,
+      "length": 20,
+      "vibz_max": 2.257,
+      "vib_high": false,
+      "wave": "sine-like",
+      "amp_q": "Q3",
+      "ratio": 0.577
+     },
+     {
+      "record_id": 86,
+      "abs_segment": 566,
+      "length": 18,
+      "vibz_max": 1.574,
+      "vib_high": false,
+      "wave": "broken",
+      "amp_q": "Q2",
+      "ratio": 0.527
+     },
+     {
+      "record_id": 83,
+      "abs_segment": 563,
+      "length": 50,
+      "vibz_max": 1.808,
+      "vib_high": false,
+      "wave": "broken",
+      "amp_q": "Q1(<q25)",
+      "ratio": 0.515
+     },
+     {
+      "record_id": 113,
+      "abs_segment": 593,
+      "length": 50,
+      "vibz_max": 2.928,
+      "vib_high": false,
+      "wave": "sine-like",
+      "amp_q": "Q3",
+      "ratio": 0.509
+     },
+     {
+      "record_id": 110,
+      "abs_segment": 590,
+      "length": 29,
+      "vibz_max": 2.892,
+      "vib_high": false,
+      "wave": "sine-like",
+      "amp_q": "Q4(≥q75)",
+      "ratio": 0.498
+     },
+     {
+      "record_id": 95,
+      "abs_segment": 575,
+      "length": 50,
+      "vibz_max": 2.157,
+      "vib_high": false,
+      "wave": "sine-like",
+      "amp_q": "Q3",
+      "ratio": 0.49
+     }
+    ],
+    "top10_vib_high": 2
+   },
+   "load_coupling": {
+    "train_segments": 265,
+    "loglog_slope": 1.331,
+    "loglog_r": 0.951,
+    "spearman_amp_vs_vibzmax_train": 0.784,
+    "fp_vib_resid_rank": [],
+    "fp_vibzmax_rank": [],
+    "n_resid": 96,
+    "pearson_log_sd_by_sensor": {
+     "a0": 0.674,
+     "a1": 0.961
+    },
+    "pearson_within_train_blocks": {
+     "0~59": 0.947,
+     "60~119": 0.942,
+     "120~179": 0.926,
+     "180~239": 0.966,
+     "240~299": 0.972,
+     "300~359": 0.962
+    },
+    "spearman_vibstd_amp_train": 0.943,
+    "resid_sd": 0.1314,
+    "abnormal_resid_z": {
+     "n": 14,
+     "median": 12.14,
+     "min": 1.35,
+     "gt3": 13
+    },
+    "normal_test_resid_z": {
+     "n": 96,
+     "median": -2.29,
+     "max": 2.39,
+     "gt3": 0
+    },
+    "fp_amp_q": [],
+    "test_amp_q4_alert": "0/7"
+   },
+   "row_attribution_alpha1": {
+    "alarm_rows": 556,
+    "magnitude_active_by_sensor": {
+     "AI0_Vibration": 164,
+     "AI1_Vibration": 9
+    },
+    "only_vibration_magnitude": {
+     "AI0_Vibration": 17,
+     "AI1_Vibration": 2
+    },
+    "only_current_components": 383
+   },
+   "sensor_ablation_full_reproduces_saved": true,
+   "sensor_ablation_no_magnitude_matches_ablation_v2": true,
+   "sensor_ablation": {
+    "full(v2)": {
+     "0.01": {
+      "tp": 556,
+      "fp": 0,
+      "fn": 44,
+      "f1": 0.961938,
+      "normal_alert_segments": 0,
+      "abnormal_detected_segments": 21
+     },
+     "0.03": {
+      "tp": 569,
+      "fp": 1,
+      "fn": 31,
+      "f1": 0.97265,
+      "normal_alert_segments": 1,
+      "abnormal_detected_segments": 21
+     },
+     "0.05": {
+      "tp": 569,
+      "fp": 1,
+      "fn": 31,
+      "f1": 0.97265,
+      "normal_alert_segments": 1,
+      "abnormal_detected_segments": 21
+     }
+    },
+    "no_AI0": {
+     "0.01": {
+      "tp": 551,
+      "fp": 0,
+      "fn": 49,
+      "f1": 0.957428,
+      "normal_alert_segments": 0,
+      "abnormal_detected_segments": 20
+     },
+     "0.03": {
+      "tp": 553,
+      "fp": 0,
+      "fn": 47,
+      "f1": 0.959237,
+      "normal_alert_segments": 0,
+      "abnormal_detected_segments": 21
+     },
+     "0.05": {
+      "tp": 553,
+      "fp": 0,
+      "fn": 47,
+      "f1": 0.959237,
+      "normal_alert_segments": 0,
+      "abnormal_detected_segments": 21
+     }
+    },
+    "no_AI1": {
+     "0.01": {
+      "tp": 555,
+      "fp": 0,
+      "fn": 45,
+      "f1": 0.961039,
+      "normal_alert_segments": 0,
+      "abnormal_detected_segments": 21
+     },
+     "0.03": {
+      "tp": 566,
+      "fp": 1,
+      "fn": 34,
+      "f1": 0.970009,
+      "normal_alert_segments": 1,
+      "abnormal_detected_segments": 21
+     },
+     "0.05": {
+      "tp": 566,
+      "fp": 1,
+      "fn": 34,
+      "f1": 0.970009,
+      "normal_alert_segments": 1,
+      "abnormal_detected_segments": 21
+     }
+    },
+    "no_AI2_in_magnitude": {
+     "0.01": {
+      "tp": 556,
+      "fp": 0,
+      "fn": 44,
+      "f1": 0.961938,
+      "normal_alert_segments": 0,
+      "abnormal_detected_segments": 21
+     },
+     "0.03": {
+      "tp": 569,
+      "fp": 1,
+      "fn": 31,
+      "f1": 0.97265,
+      "normal_alert_segments": 1,
+      "abnormal_detected_segments": 21
+     },
+     "0.05": {
+      "tp": 569,
+      "fp": 1,
+      "fn": 31,
+      "f1": 0.97265,
+      "normal_alert_segments": 1,
+      "abnormal_detected_segments": 21
+     }
+    },
+    "current_only(AI2 all comps)": {
+     "0.01": {
+      "tp": 549,
+      "fp": 0,
+      "fn": 51,
+      "f1": 0.955614,
+      "normal_alert_segments": 0,
+      "abnormal_detected_segments": 20
+     },
+     "0.03": {
+      "tp": 549,
+      "fp": 0,
+      "fn": 51,
+      "f1": 0.955614,
+      "normal_alert_segments": 0,
+      "abnormal_detected_segments": 20
+     },
+     "0.05": {
+      "tp": 549,
+      "fp": 0,
+      "fn": 51,
+      "f1": 0.955614,
+      "normal_alert_segments": 0,
+      "abnormal_detected_segments": 20
+     }
+    },
+    "no_magnitude(waveform+dynamics)": {
+     "0.01": {
+      "tp": 544,
+      "fp": 0,
+      "fn": 56,
+      "f1": 0.951049,
+      "normal_alert_segments": 0,
+      "abnormal_detected_segments": 20
+     },
+     "0.03": {
+      "tp": 544,
+      "fp": 0,
+      "fn": 56,
+      "f1": 0.951049,
+      "normal_alert_segments": 0,
+      "abnormal_detected_segments": 20
+     },
+     "0.05": {
+      "tp": 544,
+      "fp": 0,
+      "fn": 56,
+      "f1": 0.951049,
+      "normal_alert_segments": 0,
+      "abnormal_detected_segments": 20
+     }
+    },
+    "vibration_only(AI0+AI1)": {
+     "0.01": {
+      "tp": 173,
+      "fp": 0,
+      "fn": 427,
+      "f1": 0.447607,
+      "normal_alert_segments": 0,
+      "abnormal_detected_segments": 18
+     },
+     "0.03": {
+      "tp": 198,
+      "fp": 1,
+      "fn": 402,
+      "f1": 0.49562,
+      "normal_alert_segments": 1,
+      "abnormal_detected_segments": 18
+     },
+     "0.05": {
+      "tp": 211,
+      "fp": 2,
+      "fn": 389,
+      "f1": 0.519065,
+      "normal_alert_segments": 2,
+      "abnormal_detected_segments": 18
+     }
+    },
+    "AI0_only": {
+     "0.01": {
+      "tp": 164,
+      "fp": 0,
+      "fn": 436,
+      "f1": 0.429319,
+      "normal_alert_segments": 0,
+      "abnormal_detected_segments": 18
+     },
+     "0.03": {
+      "tp": 186,
+      "fp": 1,
+      "fn": 414,
+      "f1": 0.472681,
+      "normal_alert_segments": 1,
+      "abnormal_detected_segments": 18
+     },
+     "0.05": {
+      "tp": 195,
+      "fp": 2,
+      "fn": 405,
+      "f1": 0.489335,
+      "normal_alert_segments": 2,
+      "abnormal_detected_segments": 18
+     }
+    },
+    "AI1_only": {
+     "0.01": {
+      "tp": 58,
+      "fp": 0,
+      "fn": 542,
+      "f1": 0.176292,
+      "normal_alert_segments": 0,
+      "abnormal_detected_segments": 17
+     },
+     "0.03": {
+      "tp": 75,
+      "fp": 0,
+      "fn": 525,
+      "f1": 0.222222,
+      "normal_alert_segments": 0,
+      "abnormal_detected_segments": 17
+     },
+     "0.05": {
+      "tp": 75,
+      "fp": 0,
+      "fn": 525,
+      "f1": 0.222222,
+      "normal_alert_segments": 0,
+      "abnormal_detected_segments": 17
+     }
+    }
+   },
+   "channel_swap": [
+    {
+     "channels": "AI0",
+     "reps": 20,
+     "fn_mean": 61.0,
+     "fn_min": 61,
+     "fn_max": 61,
+     "detected_mean": 20.0,
+     "detected_min": 20
+    },
+    {
+     "channels": "AI1",
+     "reps": 20,
+     "fn_mean": 46.0,
+     "fn_min": 46,
+     "fn_max": 46,
+     "detected_mean": 21.0,
+     "detected_min": 21
+    },
+    {
+     "channels": "AI2",
+     "reps": 20,
+     "fn_mean": 427.0,
+     "fn_min": 427,
+     "fn_max": 427,
+     "detected_mean": 18.0,
+     "detected_min": 18
+    },
+    {
+     "channels": "AI0+AI1",
+     "reps": 20,
+     "fn_mean": 63.0,
+     "fn_min": 63,
+     "fn_max": 63,
+     "detected_mean": 20.0,
+     "detected_min": 20
+    },
+    {
+     "channels": "AI0+AI1+AI2",
+     "reps": 20,
+     "fn_mean": 600.0,
+     "fn_min": 600,
+     "fn_max": 600,
+     "detected_mean": 0.0,
+     "detected_min": 0
+    }
+   ]
+  },
+  "B": {
+   "recount": {
+    "0.01": {
+     "tp": 569,
+     "fp": 3,
+     "fn": 31,
+     "normal_notified_segments": 3,
+     "abnormal_notified_segments": 21,
+     "matches_metrics_csv": true,
+     "row_table_sums_ok_normal": true,
+     "row_table_sums_ok_abnormal": true
+    },
+    "0.03": {
+     "tp": 569,
+     "fp": 7,
+     "fn": 31,
+     "normal_notified_segments": 5,
+     "abnormal_notified_segments": 21,
+     "matches_metrics_csv": true,
+     "row_table_sums_ok_normal": true,
+     "row_table_sums_ok_abnormal": true
+    },
+    "0.05": {
+     "tp": 569,
+     "fp": 11,
+     "fn": 31,
+     "normal_notified_segments": 7,
+     "abnormal_notified_segments": 21,
+     "matches_metrics_csv": true,
+     "row_table_sums_ok_normal": true,
+     "row_table_sums_ok_abnormal": true
+    }
+   },
+   "bounds": {
+    "vib": [
+     0.0821,
+     0.13,
+     0.1827
+    ],
+    "amp": [
+     116.7206,
+     158.0645,
+     222.8632
+    ],
+    "vib_high": 3.1296,
+    "r2_low": 0.9947
+   },
+   "fn_position_x_vibration": [
+    {
+     "pos_grp": "0-1",
+     "vib_high": false,
+     "rows": 6,
+     "fn": 6,
+     "rate": 1.0,
+     "ci95": [
+      0.5407,
+      1.0
+     ]
+    },
+    {
+     "pos_grp": "0-1",
+     "vib_high": true,
+     "rows": 36,
+     "fn": 14,
+     "rate": 0.3889,
+     "ci95": [
+      0.2314,
+      0.5654
+     ]
+    },
+    {
+     "pos_grp": "2-6",
+     "vib_high": false,
+     "rows": 15,
+     "fn": 4,
+     "rate": 0.2667,
+     "ci95": [
+      0.0779,
+      0.551
+     ]
+    },
+    {
+     "pos_grp": "2-6",
+     "vib_high": true,
+     "rows": 80,
+     "fn": 7,
+     "rate": 0.0875,
+     "ci95": [
+      0.0359,
+      0.172
+     ]
+    },
+    {
+     "pos_grp": "7+",
+     "vib_high": false,
+     "rows": 35,
+     "fn": 0,
+     "rate": 0.0,
+     "ci95": [
+      0.0,
+      0.1
+     ]
+    },
+    {
+     "pos_grp": "7+",
+     "vib_high": true,
+     "rows": 428,
+     "fn": 0,
+     "rate": 0.0,
+     "ci95": [
+      0.0,
+      0.0086
+     ]
+    }
+   ],
+   "fn_early_vs_late": {
+    "early": "20/42",
+    "late": "11/558",
+    "fisher_p": 2.651485251128446e-18
+   },
+   "fn_vib_normal_vs_high_pos0_1": {
+    "vib_normal": "6/6",
+    "vib_high": "14/36",
+    "fisher_p": 0.007388787876592755
+   },
+   "fn_vib_normal_vs_high_pos2plus": {
+    "vib_normal": "4/50",
+    "vib_high": "7/508",
+    "fisher_p": 0.011782460693353616
+   },
+   "abnormal_vib_normal_segments": [
+    {
+     "record_id": 3,
+     "length": 31,
+     "vibz_max": 1.558158232637401,
+     "wave": "broken"
+    },
+    {
+     "record_id": 19,
+     "length": 10,
+     "vibz_max": 1.228704135848852,
+     "wave": "broken"
+    },
+    {
+     "record_id": 20,
+     "length": 15,
+     "vibz_max": 0.9376949810042217,
+     "wave": "broken"
+    }
+   ],
+   "fn_condition_stratified_by_position": {
+    "len_bin": {
+     "10–29": {
+      "all": "15/135",
+      "pos2plus": "2/121",
+      "share_rows_pos0_1": 0.104
+     },
+     "5–9": {
+      "all": "0/8",
+      "pos2plus": "0/6",
+      "share_rows_pos0_1": 0.25
+     },
+     "≤4": {
+      "all": "1/11",
+      "pos2plus": "1/5",
+      "share_rows_pos0_1": 0.545
+     },
+     "≥30": {
+      "all": "15/446",
+      "pos2plus": "8/426",
+      "share_rows_pos0_1": 0.045
+     }
+    },
+    "amp_q": {
+     "Q1(<q25)": {
+      "all": "16/210",
+      "pos2plus": "6/188",
+      "share_rows_pos0_1": 0.105
+     },
+     "Q2": {
+      "all": "13/214",
+      "pos2plus": "5/202",
+      "share_rows_pos0_1": 0.056
+     },
+     "Q3": {
+      "all": "2/176",
+      "pos2plus": "0/168",
+      "share_rows_pos0_1": 0.045
+     }
+    },
+    "vib_q": {
+     "Q1(<q25)": {
+      "all": "10/56",
+      "pos2plus": "4/50",
+      "share_rows_pos0_1": 0.107
+     },
+     "Q4(≥q75)": {
+      "all": "21/544",
+      "pos2plus": "7/508",
+      "share_rows_pos0_1": 0.066
+     }
+    }
+   },
+   "fn_rows_pos0_1_magnitude_sensor": {
+    "AI2_Current": 8,
+    "AI1_Vibration": 7,
+    "AI0_Vibration": 5
+   },
+   "fp_segments": [
+    {
+     "tag": "B_frozen",
+     "alpha": 0.01,
+     "record_id": 3,
+     "abs_segment": 423,
+     "block": "420~479",
+     "start": "00:53:13",
+     "length": 50,
+     "alarm_rows": 1,
+     "alarm_positions": [
+      41
+     ],
+     "reasons": [
+      "magnitude"
+     ],
+     "magnitude_sensors": [
+      "AI0_Vibration"
+     ],
+     "vib_high": true,
+     "wave": "sine-like",
+     "vib_q": "Q4(≥q75)",
+     "amp_q": "Q4(≥q75)",
+     "vibz_max": 4.251
+    },
+    {
+     "tag": "B_frozen",
+     "alpha": 0.01,
+     "record_id": 41,
+     "abs_segment": 461,
+     "block": "420~479",
+     "start": "00:58:17",
+     "length": 50,
+     "alarm_rows": 1,
+     "alarm_positions": [
+      40
+     ],
+     "reasons": [
+      "magnitude"
+     ],
+     "magnitude_sensors": [
+      "AI0_Vibration"
+     ],
+     "vib_high": true,
+     "wave": "sine-like",
+     "vib_q": "Q4(≥q75)",
+     "amp_q": "Q4(≥q75)",
+     "vibz_max": 4.519
+    },
+    {
+     "tag": "B_frozen",
+     "alpha": 0.01,
+     "record_id": 150,
+     "abs_segment": 570,
+     "block": "540~599",
+     "start": "01:12:43",
+     "length": 44,
+     "alarm_rows": 1,
+     "alarm_positions": [
+      11
+     ],
+     "reasons": [
+      "magnitude"
+     ],
+     "magnitude_sensors": [
+      "AI0_Vibration"
+     ],
+     "vib_high": true,
+     "wave": "sine-like",
+     "vib_q": "Q3",
+     "amp_q": "Q3",
+     "vibz_max": 4.087
+    },
+    {
+     "tag": "B_frozen",
+     "alpha": 0.03,
+     "record_id": 3,
+     "abs_segment": 423,
+     "block": "420~479",
+     "start": "00:53:13",
+     "length": 50,
+     "alarm_rows": 2,
+     "alarm_positions": [
+      17,
+      41
+     ],
+     "reasons": [
+      "magnitude"
+     ],
+     "magnitude_sensors": [
+      "AI0_Vibration"
+     ],
+     "vib_high": true,
+     "wave": "sine-like",
+     "vib_q": "Q4(≥q75)",
+     "amp_q": "Q4(≥q75)",
+     "vibz_max": 4.251
+    },
+    {
+     "tag": "B_frozen",
+     "alpha": 0.03,
+     "record_id": 6,
+     "abs_segment": 426,
+     "block": "420~479",
+     "start": "00:53:35",
+     "length": 24,
+     "alarm_rows": 1,
+     "alarm_positions": [
+      20
+     ],
+     "reasons": [
+      "magnitude"
+     ],
+     "magnitude_sensors": [
+      "AI0_Vibration"
+     ],
+     "vib_high": true,
+     "wave": "sine-like",
+     "vib_q": "Q4(≥q75)",
+     "amp_q": "Q4(≥q75)",
+     "vibz_max": 3.686
+    },
+    {
+     "tag": "B_frozen",
+     "alpha": 0.03,
+     "record_id": 26,
+     "abs_segment": 446,
+     "block": "420~479",
+     "start": "00:56:16",
+     "length": 44,
+     "alarm_rows": 1,
+     "alarm_positions": [
+      41
+     ],
+     "reasons": [
+      "dynamics"
+     ],
+     "magnitude_sensors": [],
+     "vib_high": false,
+     "wave": "sine-like",
+     "vib_q": "Q4(≥q75)",
+     "amp_q": "Q3",
+     "vibz_max": 2.607
+    },
+    {
+     "tag": "B_frozen",
+     "alpha": 0.03,
+     "record_id": 41,
+     "abs_segment": 461,
+     "block": "420~479",
+     "start": "00:58:17",
+     "length": 50,
+     "alarm_rows": 2,
+     "alarm_positions": [
+      10,
+      40
+     ],
+     "reasons": [
+      "magnitude"
+     ],
+     "magnitude_sensors": [
+      "AI0_Vibration"
+     ],
+     "vib_high": true,
+     "wave": "sine-like",
+     "vib_q": "Q4(≥q75)",
+     "amp_q": "Q4(≥q75)",
+     "vibz_max": 4.519
+    },
+    {
+     "tag": "B_frozen",
+     "alpha": 0.03,
+     "record_id": 150,
+     "abs_segment": 570,
+     "block": "540~599",
+     "start": "01:12:43",
+     "length": 44,
+     "alarm_rows": 1,
+     "alarm_positions": [
+      11
+     ],
+     "reasons": [
+      "magnitude"
+     ],
+     "magnitude_sensors": [
+      "AI0_Vibration"
+     ],
+     "vib_high": true,
+     "wave": "sine-like",
+     "vib_q": "Q3",
+     "amp_q": "Q3",
+     "vibz_max": 4.087
+    },
+    {
+     "tag": "B_frozen",
+     "alpha": 0.05,
+     "record_id": 3,
+     "abs_segment": 423,
+     "block": "420~479",
+     "start": "00:53:13",
+     "length": 50,
+     "alarm_rows": 2,
+     "alarm_positions": [
+      17,
+      41
+     ],
+     "reasons": [
+      "magnitude"
+     ],
+     "magnitude_sensors": [
+      "AI0_Vibration"
+     ],
+     "vib_high": true,
+     "wave": "sine-like",
+     "vib_q": "Q4(≥q75)",
+     "amp_q": "Q4(≥q75)",
+     "vibz_max": 4.251
+    },
+    {
+     "tag": "B_frozen",
+     "alpha": 0.05,
+     "record_id": 6,
+     "abs_segment": 426,
+     "block": "420~479",
+     "start": "00:53:35",
+     "length": 24,
+     "alarm_rows": 1,
+     "alarm_positions": [
+      20
+     ],
+     "reasons": [
+      "magnitude"
+     ],
+     "magnitude_sensors": [
+      "AI0_Vibration"
+     ],
+     "vib_high": true,
+     "wave": "sine-like",
+     "vib_q": "Q4(≥q75)",
+     "amp_q": "Q4(≥q75)",
+     "vibz_max": 3.686
+    },
+    {
+     "tag": "B_frozen",
+     "alpha": 0.05,
+     "record_id": 26,
+     "abs_segment": 446,
+     "block": "420~479",
+     "start": "00:56:16",
+     "length": 44,
+     "alarm_rows": 2,
+     "alarm_positions": [
+      34,
+      41
+     ],
+     "reasons": [
+      "dynamics"
+     ],
+     "magnitude_sensors": [],
+     "vib_high": false,
+     "wave": "sine-like",
+     "vib_q": "Q4(≥q75)",
+     "amp_q": "Q3",
+     "vibz_max": 2.607
+    },
+    {
+     "tag": "B_frozen",
+     "alpha": 0.05,
+     "record_id": 36,
+     "abs_segment": 456,
+     "block": "420~479",
+     "start": "00:57:36",
+     "length": 50,
+     "alarm_rows": 1,
+     "alarm_positions": [
+      17
+     ],
+     "reasons": [
+      "magnitude"
+     ],
+     "magnitude_sensors": [
+      "AI0_Vibration"
+     ],
+     "vib_high": true,
+     "wave": "sine-like",
+     "vib_q": "Q4(≥q75)",
+     "amp_q": "Q4(≥q75)",
+     "vibz_max": 3.539
+    },
+    {
+     "tag": "B_frozen",
+     "alpha": 0.05,
+     "record_id": 41,
+     "abs_segment": 461,
+     "block": "420~479",
+     "start": "00:58:17",
+     "length": 50,
+     "alarm_rows": 3,
+     "alarm_positions": [
+      10,
+      40,
+      46
+     ],
+     "reasons": [
+      "magnitude"
+     ],
+     "magnitude_sensors": [
+      "AI0_Vibration"
+     ],
+     "vib_high": true,
+     "wave": "sine-like",
+     "vib_q": "Q4(≥q75)",
+     "amp_q": "Q4(≥q75)",
+     "vibz_max": 4.519
+    },
+    {
+     "tag": "B_frozen",
+     "alpha": 0.05,
+     "record_id": 150,
+     "abs_segment": 570,
+     "block": "540~599",
+     "start": "01:12:43",
+     "length": 44,
+     "alarm_rows": 1,
+     "alarm_positions": [
+      11
+     ],
+     "reasons": [
+      "magnitude"
+     ],
+     "magnitude_sensors": [
+      "AI0_Vibration"
+     ],
+     "vib_high": true,
+     "wave": "sine-like",
+     "vib_q": "Q3",
+     "amp_q": "Q3",
+     "vibz_max": 4.087
+    },
+    {
+     "tag": "B_frozen",
+     "alpha": 0.05,
+     "record_id": 156,
+     "abs_segment": 576,
+     "block": "540~599",
+     "start": "01:13:32",
+     "length": 50,
+     "alarm_rows": 1,
+     "alarm_positions": [
+      44
+     ],
+     "reasons": [
+      "magnitude"
+     ],
+     "magnitude_sensors": [
+      "AI0_Vibration"
+     ],
+     "vib_high": true,
+     "wave": "sine-like",
+     "vib_q": "Q4(≥q75)",
+     "amp_q": "Q4(≥q75)",
+     "vibz_max": 3.574
+    }
+   ],
+   "fp_vib_high_concentration_alpha1": {
+    "vib_high": "3/8",
+    "ci95": [
+     0.0852,
+     0.7551
+    ],
+    "normal_range": "0/172",
+    "fisher_p": 5.858598539535079e-05
+   },
+   "near_miss": {
+    "threshold": 3.5199,
+    "spearman_ratio_vs": {
+     "vibz_max": 0.614,
+     "vib_std": 0.542,
+     "amp_proxy": 0.503,
+     "length": 0.296,
+     "abs_segment(time)": -0.312
+    },
+    "segments_ratio_ge_0_8": 9,
+    "segments_ratio_ge_0_9": 7,
+    "top10": [
+     {
+      "record_id": 41,
+      "abs_segment": 461,
+      "length": 50,
+      "vibz_max": 4.519,
+      "vib_high": true,
+      "wave": "sine-like",
+      "amp_q": "Q4(≥q75)",
+      "ratio": 1.305
+     },
+     {
+      "record_id": 3,
+      "abs_segment": 423,
+      "length": 50,
+      "vibz_max": 4.251,
+      "vib_high": true,
+      "wave": "sine-like",
+      "amp_q": "Q4(≥q75)",
+      "ratio": 1.195
+     },
+     {
+      "record_id": 150,
+      "abs_segment": 570,
+      "length": 44,
+      "vibz_max": 4.087,
+      "vib_high": true,
+      "wave": "sine-like",
+      "amp_q": "Q3",
+      "ratio": 1.128
+     },
+     {
+      "record_id": 26,
+      "abs_segment": 446,
+      "length": 44,
+      "vibz_max": 2.607,
+      "vib_high": false,
+      "wave": "sine-like",
+      "amp_q": "Q3",
+      "ratio": 0.975
+     },
+     {
+      "record_id": 6,
+      "abs_segment": 426,
+      "length": 24,
+      "vibz_max": 3.686,
+      "vib_high": true,
+      "wave": "sine-like",
+      "amp_q": "Q4(≥q75)",
+      "ratio": 0.964
+     },
+     {
+      "record_id": 156,
+      "abs_segment": 576,
+      "length": 50,
+      "vibz_max": 3.574,
+      "vib_high": true,
+      "wave": "sine-like",
+      "amp_q": "Q4(≥q75)",
+      "ratio": 0.918
+     },
+     {
+      "record_id": 36,
+      "abs_segment": 456,
+      "length": 50,
+      "vibz_max": 3.539,
+      "vib_high": true,
+      "wave": "sine-like",
+      "amp_q": "Q4(≥q75)",
+      "ratio": 0.904
+     },
+     {
+      "record_id": 37,
+      "abs_segment": 457,
+      "length": 39,
+      "vibz_max": 1.764,
+      "vib_high": false,
+      "wave": "broken",
+      "amp_q": "Q2",
+      "ratio": 0.825
+     },
+     {
+      "record_id": 49,
+      "abs_segment": 469,
+      "length": 36,
+      "vibz_max": 1.97,
+      "vib_high": false,
+      "wave": "sine-like",
+      "amp_q": "Q3",
+      "ratio": 0.807
+     },
+     {
+      "record_id": 21,
+      "abs_segment": 441,
+      "length": 34,
+      "vibz_max": 3.245,
+      "vib_high": true,
+      "wave": "sine-like",
+      "amp_q": "Q4(≥q75)",
+      "ratio": 0.783
+     }
+    ],
+    "top10_vib_high": 7
+   },
+   "load_coupling": {
+    "train_segments": 222,
+    "loglog_slope": 1.32,
+    "loglog_r": 0.949,
+    "spearman_amp_vs_vibzmax_train": 0.755,
+    "fp_vib_resid_rank": [
+     42,
+     29,
+     4
+    ],
+    "fp_vibzmax_rank": [
+     2,
+     1,
+     3
+    ],
+    "n_resid": 145,
+    "pearson_log_sd_by_sensor": {
+     "a0": 0.655,
+     "a1": 0.962
+    },
+    "pearson_within_train_blocks": {
+     "0~59": 0.947,
+     "60~119": 0.942,
+     "120~179": 0.926,
+     "180~239": 0.966,
+     "240~299": 0.971
+    },
+    "spearman_vibstd_amp_train": 0.938,
+    "resid_sd": 0.1321,
+    "abnormal_resid_z": {
+     "n": 14,
+     "median": 12.1,
+     "min": 1.34,
+     "gt3": 13
+    },
+    "normal_test_resid_z": {
+     "n": 145,
+     "median": -0.94,
+     "max": 2.69,
+     "gt3": 0
+    },
+    "fp_amp_q": [
+     "Q4(≥q75)",
+     "Q4(≥q75)",
+     "Q3"
+    ],
+    "test_amp_q4_alert": "2/26"
+   },
+   "row_attribution_alpha1": {
+    "alarm_rows": 569,
+    "magnitude_active_by_sensor": {
+     "AI0_Vibration": 180,
+     "AI1_Vibration": 16
+    },
+    "only_vibration_magnitude": {
+     "AI0_Vibration": 21,
+     "AI1_Vibration": 4
+    },
+    "only_current_components": 373
+   },
+   "sensor_ablation_full_reproduces_saved": true,
+   "sensor_ablation_no_magnitude_matches_ablation_v2": true,
+   "sensor_ablation": {
+    "full(v2)": {
+     "0.01": {
+      "tp": 569,
+      "fp": 3,
+      "fn": 31,
+      "f1": 0.97099,
+      "normal_alert_segments": 3,
+      "abnormal_detected_segments": 21
+     },
+     "0.03": {
+      "tp": 569,
+      "fp": 7,
+      "fn": 31,
+      "f1": 0.967687,
+      "normal_alert_segments": 5,
+      "abnormal_detected_segments": 21
+     },
+     "0.05": {
+      "tp": 569,
+      "fp": 11,
+      "fn": 31,
+      "f1": 0.964407,
+      "normal_alert_segments": 7,
+      "abnormal_detected_segments": 21
+     }
+    },
+    "no_AI0": {
+     "0.01": {
+      "tp": 553,
+      "fp": 2,
+      "fn": 47,
+      "f1": 0.957576,
+      "normal_alert_segments": 2,
+      "abnormal_detected_segments": 21
+     },
+     "0.03": {
+      "tp": 553,
+      "fp": 6,
+      "fn": 47,
+      "f1": 0.954271,
+      "normal_alert_segments": 5,
+      "abnormal_detected_segments": 21
+     },
+     "0.05": {
+      "tp": 553,
+      "fp": 7,
+      "fn": 47,
+      "f1": 0.953448,
+      "normal_alert_segments": 6,
+      "abnormal_detected_segments": 21
+     }
+    },
+    "no_AI1": {
+     "0.01": {
+      "tp": 566,
+      "fp": 4,
+      "fn": 34,
+      "f1": 0.967521,
+      "normal_alert_segments": 4,
+      "abnormal_detected_segments": 21
+     },
+     "0.03": {
+      "tp": 566,
+      "fp": 7,
+      "fn": 34,
+      "f1": 0.965047,
+      "normal_alert_segments": 5,
+      "abnormal_detected_segments": 21
+     },
+     "0.05": {
+      "tp": 567,
+      "fp": 11,
+      "fn": 33,
+      "f1": 0.962649,
+      "normal_alert_segments": 7,
+      "abnormal_detected_segments": 21
+     }
+    },
+    "no_AI2_in_magnitude": {
+     "0.01": {
+      "tp": 569,
+      "fp": 3,
+      "fn": 31,
+      "f1": 0.97099,
+      "normal_alert_segments": 3,
+      "abnormal_detected_segments": 21
+     },
+     "0.03": {
+      "tp": 569,
+      "fp": 7,
+      "fn": 31,
+      "f1": 0.967687,
+      "normal_alert_segments": 5,
+      "abnormal_detected_segments": 21
+     },
+     "0.05": {
+      "tp": 569,
+      "fp": 11,
+      "fn": 31,
+      "f1": 0.964407,
+      "normal_alert_segments": 7,
+      "abnormal_detected_segments": 21
+     }
+    },
+    "current_only(AI2 all comps)": {
+     "0.01": {
+      "tp": 549,
+      "fp": 1,
+      "fn": 51,
+      "f1": 0.954783,
+      "normal_alert_segments": 1,
+      "abnormal_detected_segments": 20
+     },
+     "0.03": {
+      "tp": 549,
+      "fp": 4,
+      "fn": 51,
+      "f1": 0.952298,
+      "normal_alert_segments": 3,
+      "abnormal_detected_segments": 20
+     },
+     "0.05": {
+      "tp": 549,
+      "fp": 13,
+      "fn": 51,
+      "f1": 0.944923,
+      "normal_alert_segments": 6,
+      "abnormal_detected_segments": 20
+     }
+    },
+    "no_magnitude(waveform+dynamics)": {
+     "0.01": {
+      "tp": 544,
+      "fp": 1,
+      "fn": 56,
+      "f1": 0.950218,
+      "normal_alert_segments": 1,
+      "abnormal_detected_segments": 20
+     },
+     "0.03": {
+      "tp": 544,
+      "fp": 4,
+      "fn": 56,
+      "f1": 0.947735,
+      "normal_alert_segments": 3,
+      "abnormal_detected_segments": 20
+     },
+     "0.05": {
+      "tp": 544,
+      "fp": 13,
+      "fn": 56,
+      "f1": 0.940363,
+      "normal_alert_segments": 6,
+      "abnormal_detected_segments": 20
+     }
+    },
+    "vibration_only(AI0+AI1)": {
+     "0.01": {
+      "tp": 196,
+      "fp": 3,
+      "fn": 404,
+      "f1": 0.490613,
+      "normal_alert_segments": 3,
+      "abnormal_detected_segments": 18
+     },
+     "0.03": {
+      "tp": 201,
+      "fp": 6,
+      "fn": 399,
+      "f1": 0.498141,
+      "normal_alert_segments": 4,
+      "abnormal_detected_segments": 18
+     },
+     "0.05": {
+      "tp": 211,
+      "fp": 9,
+      "fn": 389,
+      "f1": 0.514634,
+      "normal_alert_segments": 6,
+      "abnormal_detected_segments": 18
+     }
+    },
+    "AI0_only": {
+     "0.01": {
+      "tp": 184,
+      "fp": 3,
+      "fn": 416,
+      "f1": 0.467598,
+      "normal_alert_segments": 3,
+      "abnormal_detected_segments": 18
+     },
+     "0.03": {
+      "tp": 189,
+      "fp": 6,
+      "fn": 411,
+      "f1": 0.475472,
+      "normal_alert_segments": 4,
+      "abnormal_detected_segments": 18
+     },
+     "0.05": {
+      "tp": 195,
+      "fp": 9,
+      "fn": 405,
+      "f1": 0.485075,
+      "normal_alert_segments": 6,
+      "abnormal_detected_segments": 18
+     }
+    },
+    "AI1_only": {
+     "0.01": {
+      "tp": 73,
+      "fp": 2,
+      "fn": 527,
+      "f1": 0.216296,
+      "normal_alert_segments": 2,
+      "abnormal_detected_segments": 17
+     },
+     "0.03": {
+      "tp": 75,
+      "fp": 3,
+      "fn": 525,
+      "f1": 0.221239,
+      "normal_alert_segments": 3,
+      "abnormal_detected_segments": 17
+     },
+     "0.05": {
+      "tp": 75,
+      "fp": 4,
+      "fn": 525,
+      "f1": 0.220913,
+      "normal_alert_segments": 4,
+      "abnormal_detected_segments": 17
+     }
+    }
+   },
+   "channel_swap": [
+    {
+     "channels": "AI0",
+     "reps": 20,
+     "fn_mean": 51.0,
+     "fn_min": 51,
+     "fn_max": 51,
+     "detected_mean": 20.0,
+     "detected_min": 20
+    },
+    {
+     "channels": "AI1",
+     "reps": 20,
+     "fn_mean": 34.0,
+     "fn_min": 34,
+     "fn_max": 34,
+     "detected_mean": 21.0,
+     "detected_min": 21
+    },
+    {
+     "channels": "AI2",
+     "reps": 20,
+     "fn_mean": 404.0,
+     "fn_min": 404,
+     "fn_max": 404,
+     "detected_mean": 18.0,
+     "detected_min": 18
+    },
+    {
+     "channels": "AI0+AI1",
+     "reps": 20,
+     "fn_mean": 56.0,
+     "fn_min": 56,
+     "fn_max": 56,
+     "detected_mean": 20.0,
+     "detected_min": 20
+    },
+    {
+     "channels": "AI0+AI1+AI2",
+     "reps": 20,
+     "fn_mean": 599.5,
+     "fn_min": 597,
+     "fn_max": 600,
+     "detected_mean": 0.45,
+     "detected_min": 0
+    }
+   ]
+  }
+ },
+ "input_sha256": {
+  "normal": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+  "abnormal": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e"
+ },
+ "maxz_vib2_equals_maxz_3_all_alpha": true,
+ "rolling_folds": [
+  {
+   "fold": "300~359",
+   "train_end": 180,
+   "fp_segments_alpha_0.01": 0,
+   "fp_segments_alpha_0.03": 3,
+   "fp_segments_alpha_0.05": 5
+  },
+  {
+   "fold": "360~419",
+   "train_end": 240,
+   "fp_segments_alpha_0.01": 0,
+   "fp_segments_alpha_0.03": 0,
+   "fp_segments_alpha_0.05": 2
+  },
+  {
+   "fold": "420~479",
+   "train_end": 300,
+   "identical_to_guard_B_calibration": true,
+   "fp_segments_alpha_0.01": 2,
+   "fp_segments_alpha_0.03": 4,
+   "fp_segments_alpha_0.05": 5
+  },
+  {
+   "fold": "480~539",
+   "train_end": 360,
+   "identical_to_guard_A_calibration": true,
+   "fp_segments_alpha_0.01": 0,
+   "fp_segments_alpha_0.03": 0,
+   "fp_segments_alpha_0.05": 0
+  },
+  {
+   "fold": "540~599",
+   "train_end": 420,
+   "fp_segments_alpha_0.01": 0,
+   "fp_segments_alpha_0.03": 1,
+   "fp_segments_alpha_0.05": 2
+  }
+ ],
+ "fp_pooled_alpha5": {
+  "events": 17,
+  "unique_segments": 14,
+  "vib_high": 15,
+  "sine_like": 17,
+  "length_ge30": 15,
+  "magnitude_only": 15,
+  "single_alarm_row": 13,
+  "magnitude_sensor_counts": {
+   "AI0_Vibration": 15
+  },
+  "by_block": {
+   "540~599": 5,
+   "420~479": 5,
+   "300~359": 5,
+   "360~419": 2
+  },
+  "events_detail": [
+   {
+    "tag": "A_frozen",
+    "alpha": 0.05,
+    "record_id": 90,
+    "abs_segment": 570,
+    "block": "540~599",
+    "start": "01:12:43",
+    "length": 44,
+    "alarm_rows": 1,
+    "alarm_positions": [
+     11
+    ],
+    "reasons": [
+     "magnitude"
+    ],
+    "magnitude_sensors": [
+     "AI0_Vibration"
+    ],
+    "vib_high": true,
+    "wave": "sine-like",
+    "vib_q": "Q3",
+    "amp_q": "Q3",
+    "vibz_max": 4.062,
+    "pool": "A_frozen"
+   },
+   {
+    "tag": "B_frozen",
+    "alpha": 0.05,
+    "record_id": 3,
+    "abs_segment": 423,
+    "block": "420~479",
+    "start": "00:53:13",
+    "length": 50,
+    "alarm_rows": 2,
+    "alarm_positions": [
+     17,
+     41
+    ],
+    "reasons": [
+     "magnitude"
+    ],
+    "magnitude_sensors": [
+     "AI0_Vibration"
+    ],
+    "vib_high": true,
+    "wave": "sine-like",
+    "vib_q": "Q4(≥q75)",
+    "amp_q": "Q4(≥q75)",
+    "vibz_max": 4.251,
+    "pool": "B_frozen"
+   },
+   {
+    "tag": "B_frozen",
+    "alpha": 0.05,
+    "record_id": 6,
+    "abs_segment": 426,
+    "block": "420~479",
+    "start": "00:53:35",
+    "length": 24,
+    "alarm_rows": 1,
+    "alarm_positions": [
+     20
+    ],
+    "reasons": [
+     "magnitude"
+    ],
+    "magnitude_sensors": [
+     "AI0_Vibration"
+    ],
+    "vib_high": true,
+    "wave": "sine-like",
+    "vib_q": "Q4(≥q75)",
+    "amp_q": "Q4(≥q75)",
+    "vibz_max": 3.686,
+    "pool": "B_frozen"
+   },
+   {
+    "tag": "B_frozen",
+    "alpha": 0.05,
+    "record_id": 26,
+    "abs_segment": 446,
+    "block": "420~479",
+    "start": "00:56:16",
+    "length": 44,
+    "alarm_rows": 2,
+    "alarm_positions": [
+     34,
+     41
+    ],
+    "reasons": [
+     "dynamics"
+    ],
+    "magnitude_sensors": [],
+    "vib_high": false,
+    "wave": "sine-like",
+    "vib_q": "Q4(≥q75)",
+    "amp_q": "Q3",
+    "vibz_max": 2.607,
+    "pool": "B_frozen"
+   },
+   {
+    "tag": "B_frozen",
+    "alpha": 0.05,
+    "record_id": 36,
+    "abs_segment": 456,
+    "block": "420~479",
+    "start": "00:57:36",
+    "length": 50,
+    "alarm_rows": 1,
+    "alarm_positions": [
+     17
+    ],
+    "reasons": [
+     "magnitude"
+    ],
+    "magnitude_sensors": [
+     "AI0_Vibration"
+    ],
+    "vib_high": true,
+    "wave": "sine-like",
+    "vib_q": "Q4(≥q75)",
+    "amp_q": "Q4(≥q75)",
+    "vibz_max": 3.539,
+    "pool": "B_frozen"
+   },
+   {
+    "tag": "B_frozen",
+    "alpha": 0.05,
+    "record_id": 41,
+    "abs_segment": 461,
+    "block": "420~479",
+    "start": "00:58:17",
+    "length": 50,
+    "alarm_rows": 3,
+    "alarm_positions": [
+     10,
+     40,
+     46
+    ],
+    "reasons": [
+     "magnitude"
+    ],
+    "magnitude_sensors": [
+     "AI0_Vibration"
+    ],
+    "vib_high": true,
+    "wave": "sine-like",
+    "vib_q": "Q4(≥q75)",
+    "amp_q": "Q4(≥q75)",
+    "vibz_max": 4.519,
+    "pool": "B_frozen"
+   },
+   {
+    "tag": "B_frozen",
+    "alpha": 0.05,
+    "record_id": 150,
+    "abs_segment": 570,
+    "block": "540~599",
+    "start": "01:12:43",
+    "length": 44,
+    "alarm_rows": 1,
+    "alarm_positions": [
+     11
+    ],
+    "reasons": [
+     "magnitude"
+    ],
+    "magnitude_sensors": [
+     "AI0_Vibration"
+    ],
+    "vib_high": true,
+    "wave": "sine-like",
+    "vib_q": "Q3",
+    "amp_q": "Q3",
+    "vibz_max": 4.087,
+    "pool": "B_frozen"
+   },
+   {
+    "tag": "B_frozen",
+    "alpha": 0.05,
+    "record_id": 156,
+    "abs_segment": 576,
+    "block": "540~599",
+    "start": "01:13:32",
+    "length": 50,
+    "alarm_rows": 1,
+    "alarm_positions": [
+     44
+    ],
+    "reasons": [
+     "magnitude"
+    ],
+    "magnitude_sensors": [
+     "AI0_Vibration"
+    ],
+    "vib_high": true,
+    "wave": "sine-like",
+    "vib_q": "Q4(≥q75)",
+    "amp_q": "Q4(≥q75)",
+    "vibz_max": 3.574,
+    "pool": "B_frozen"
+   },
+   {
+    "tag": "fold_300",
+    "alpha": 0.05,
+    "record_id": 1,
+    "abs_segment": 301,
+    "block": "300~359",
+    "start": "00:38:05",
+    "length": 20,
+    "alarm_rows": 1,
+    "alarm_positions": [
+     8
+    ],
+    "reasons": [
+     "magnitude"
+    ],
+    "magnitude_sensors": [
+     "AI0_Vibration"
+    ],
+    "vib_high": true,
+    "wave": "sine-like",
+    "vib_q": "Q4(≥q75)",
+    "amp_q": "Q4(≥q75)",
+    "vibz_max": 3.779,
+    "pool": "fold_300"
+   },
+   {
+    "tag": "fold_300",
+    "alpha": 0.05,
+    "record_id": 3,
+    "abs_segment": 303,
+    "block": "300~359",
+    "start": "00:38:22",
+    "length": 50,
+    "alarm_rows": 2,
+    "alarm_positions": [
+     4,
+     33
+    ],
+    "reasons": [
+     "magnitude"
+    ],
+    "magnitude_sensors": [
+     "AI0_Vibration"
+    ],
+    "vib_high": true,
+    "wave": "sine-like",
+    "vib_q": "Q4(≥q75)",
+    "amp_q": "Q4(≥q75)",
+    "vibz_max": 3.788,
+    "pool": "fold_300"
+   },
+   {
+    "tag": "fold_300",
+    "alpha": 0.05,
+    "record_id": 10,
+    "abs_segment": 310,
+    "block": "300~359",
+    "start": "00:39:17",
+    "length": 50,
+    "alarm_rows": 1,
+    "alarm_positions": [
+     39
+    ],
+    "reasons": [
+     "magnitude"
+    ],
+    "magnitude_sensors": [
+     "AI0_Vibration"
+    ],
+    "vib_high": true,
+    "wave": "sine-like",
+    "vib_q": "Q4(≥q75)",
+    "amp_q": "Q4(≥q75)",
+    "vibz_max": 3.445,
+    "pool": "fold_300"
+   },
+   {
+    "tag": "fold_300",
+    "alpha": 0.05,
+    "record_id": 42,
+    "abs_segment": 342,
+    "block": "300~359",
+    "start": "00:43:01",
+    "length": 45,
+    "alarm_rows": 1,
+    "alarm_positions": [
+     19
+    ],
+    "reasons": [
+     "magnitude"
+    ],
+    "magnitude_sensors": [
+     "AI0_Vibration"
+    ],
+    "vib_high": true,
+    "wave": "sine-like",
+    "vib_q": "Q4(≥q75)",
+    "amp_q": "Q4(≥q75)",
+    "vibz_max": 3.492,
+    "pool": "fold_300"
+   },
+   {
+    "tag": "fold_300",
+    "alpha": 0.05,
+    "record_id": 55,
+    "abs_segment": 355,
+    "block": "300~359",
+    "start": "00:44:22",
+    "length": 50,
+    "alarm_rows": 1,
+    "alarm_positions": [
+     49
+    ],
+    "reasons": [
+     "magnitude"
+    ],
+    "magnitude_sensors": [
+     "AI0_Vibration"
+    ],
+    "vib_high": true,
+    "wave": "sine-like",
+    "vib_q": "Q4(≥q75)",
+    "amp_q": "Q4(≥q75)",
+    "vibz_max": 3.359,
+    "pool": "fold_300"
+   },
+   {
+    "tag": "fold_360",
+    "alpha": 0.05,
+    "record_id": 7,
+    "abs_segment": 367,
+    "block": "360~419",
+    "start": "00:45:57",
+    "length": 50,
+    "alarm_rows": 1,
+    "alarm_positions": [
+     7
+    ],
+    "reasons": [
+     "magnitude"
+    ],
+    "magnitude_sensors": [
+     "AI0_Vibration"
+    ],
+    "vib_high": true,
+    "wave": "sine-like",
+    "vib_q": "Q4(≥q75)",
+    "amp_q": "Q3",
+    "vibz_max": 3.589,
+    "pool": "fold_360"
+   },
+   {
+    "tag": "fold_360",
+    "alpha": 0.05,
+    "record_id": 42,
+    "abs_segment": 402,
+    "block": "360~419",
+    "start": "00:50:22",
+    "length": 46,
+    "alarm_rows": 1,
+    "alarm_positions": [
+     12
+    ],
+    "reasons": [
+     "dynamics"
+    ],
+    "magnitude_sensors": [],
+    "vib_high": false,
+    "wave": "sine-like",
+    "vib_q": "Q3",
+    "amp_q": "Q3",
+    "vibz_max": 2.165,
+    "pool": "fold_360"
+   },
+   {
+    "tag": "fold_540",
+    "alpha": 0.05,
+    "record_id": 30,
+    "abs_segment": 570,
+    "block": "540~599",
+    "start": "01:12:43",
+    "length": 44,
+    "alarm_rows": 1,
+    "alarm_positions": [
+     11
+    ],
+    "reasons": [
+     "magnitude"
+    ],
+    "magnitude_sensors": [
+     "AI0_Vibration"
+    ],
+    "vib_high": true,
+    "wave": "sine-like",
+    "vib_q": "Q3",
+    "amp_q": "Q3",
+    "vibz_max": 4.043,
+    "pool": "fold_540"
+   },
+   {
+    "tag": "fold_540",
+    "alpha": 0.05,
+    "record_id": 36,
+    "abs_segment": 576,
+    "block": "540~599",
+    "start": "01:13:32",
+    "length": 50,
+    "alarm_rows": 1,
+    "alarm_positions": [
+     44
+    ],
+    "reasons": [
+     "magnitude"
+    ],
+    "magnitude_sensors": [
+     "AI0_Vibration"
+    ],
+    "vib_high": true,
+    "wave": "sine-like",
+    "vib_q": "Q4(≥q75)",
+    "amp_q": "Q4(≥q75)",
+    "vibz_max": 3.536,
+    "pool": "fold_540"
+   }
+  ]
+ },
+ "v1_B_fp_records(v1 numbering)": [
+  3,
+  41,
+  150
+ ],
+ "v2_B_fp_records": [
+  3,
+  41,
+  150
+ ],
+ "condition_tables_have_ci_or_test_columns": false,
+ "elapsed_s": 56.3
+}

@@ -1,0 +1,765 @@
+{
+ "clone_commit": "dcd300aa88288508d0794ce89a9aebcfd53bc3b4",
+ "repo_head_now": "3ad24529febdf993e98e48b202db0ad6349ff838",
+ "bit_identity_vs_frozen_manifest": {
+  "B_readme": {
+   "artifacts_bit_identical": {
+    "guard_A.json": true,
+    "guard_B.json": true
+   },
+   "test_predictions_bit_identical": {
+    "predictions_normal_A.csv": true,
+    "predictions_normal_B.csv": true,
+    "predictions_abnormal_A.csv": true,
+    "predictions_abnormal_B.csv": true
+   },
+   "prediction_rows": {
+    "predictions_normal_A.csv": 4090,
+    "predictions_normal_B.csv": 6097,
+    "predictions_abnormal_A.csv": 600,
+    "predictions_abnormal_B.csv": 600
+   }
+  },
+  "C_full_raw": {
+   "artifacts_bit_identical": {
+    "guard_A.json": true,
+    "guard_B.json": true
+   },
+   "test_predictions_bit_identical": {
+    "predictions_normal_A.csv": true,
+    "predictions_normal_B.csv": true,
+    "predictions_abnormal_A.csv": true,
+    "predictions_abnormal_B.csv": true
+   },
+   "prediction_rows": {
+    "predictions_normal_A.csv": 4090,
+    "predictions_normal_B.csv": 6097,
+    "predictions_abnormal_A.csv": 600,
+    "predictions_abnormal_B.csv": 600
+   }
+  },
+  "D_venv312": {
+   "artifacts_bit_identical": {
+    "guard_A.json": true,
+    "guard_B.json": true
+   },
+   "test_predictions_bit_identical": {
+    "predictions_normal_A.csv": true,
+    "predictions_normal_B.csv": true,
+    "predictions_abnormal_A.csv": true,
+    "predictions_abnormal_B.csv": true
+   },
+   "prediction_rows": {
+    "predictions_normal_A.csv": 4090,
+    "predictions_normal_B.csv": 6097,
+    "predictions_abnormal_A.csv": 600,
+    "predictions_abnormal_B.csv": 600
+   }
+  },
+  "E_no_omp": {
+   "artifacts_bit_identical": {
+    "guard_A.json": true,
+    "guard_B.json": true
+   },
+   "test_predictions_bit_identical": {
+    "predictions_normal_A.csv": true,
+    "predictions_normal_B.csv": true,
+    "predictions_abnormal_A.csv": true,
+    "predictions_abnormal_B.csv": true
+   },
+   "prediction_rows": {
+    "predictions_normal_A.csv": 4090,
+    "predictions_normal_B.csv": 6097,
+    "predictions_abnormal_A.csv": 600,
+    "predictions_abnormal_B.csv": 600
+   }
+  }
+ },
+ "predict_cli_vs_train": {
+  "B_readme": {
+   "rows": [
+    600,
+    600
+   ],
+   "common_columns": 26,
+   "only_in_cli": [],
+   "only_in_train": [],
+   "differing_columns": {}
+  },
+  "C_full_raw": {
+   "rows": [
+    600,
+    600
+   ],
+   "common_columns": 26,
+   "only_in_cli": [],
+   "only_in_train": [],
+   "differing_columns": {}
+  }
+ },
+ "regenerated_vs_committed": {
+  "press_advance/metrics.csv": {
+   "ok": true,
+   "bytes_equal": true,
+   "max_abs_diff": 0.0
+  },
+  "press_advance/primary.csv": {
+   "ok": true,
+   "bytes_equal": true,
+   "max_abs_diff": 0.0
+  },
+  "press_evidence": {
+   "amplitude_reliability.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "ar2_oscillator.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "block_context.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "calibration_curve.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "class_differences.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "component_combinations.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "component_correlation.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "current_grid.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "duplicate_rows.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "first_alarm_reason.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "gaps.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "imbalance.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "outliers.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "quality_index.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "segment_rule_tolerance.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "split_context.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "variable_dictionary.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   }
+  },
+  "press_submission_outputs(LSTM 처음부터)": {
+   "model_comparison_all.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "model_comparison_lstm.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "model_comparison.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "operating_points.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "sensitivity.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   }
+  },
+  "press_supervised": {
+   "random_rows.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "grouped_records.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "injection.csv": {
+    "ok": true,
+    "bytes_equal": true,
+    "max_abs_diff": 0.0
+   }
+  }
+ },
+ "zip_builder": {
+  "package_root": "yejun/press_submission",
+  "include_dirs": [
+   "press",
+   "vendor",
+   "tests",
+   "tools",
+   "outputs",
+   "artifacts",
+   "data"
+  ],
+  "n_files": 123,
+  "total_mb": 9.31,
+  "includes_press_guard": false,
+  "includes_v2_predictions": false,
+  "includes_v1_predictions": [
+   "outputs/predictions_A.csv",
+   "outputs/predictions_B.csv"
+  ],
+  "includes_analysis_packages": false
+ },
+ "static_portability": {
+  "encoding_less_text_io_runtime": {
+   "yejun/analysis/press_advance/run_experiment.py": 1,
+   "yejun/analysis/press_supervised/run.py": 1,
+   "yejun/analysis/press_supplement/common.py": 1,
+   "yejun/analysis/press_supplement/contract.py": 1,
+   "yejun/analysis/press_supplement/verify.py": 2,
+   "yejun/press_guard/analyze.py": 6,
+   "yejun/press_guard/audit.py": 1,
+   "yejun/press_guard/contracts.py": 1,
+   "yejun/press_guard/model.py": 2,
+   "yejun/press_guard/recalibrate.py": 1,
+   "yejun/press_guard/serve.py": 2,
+   "yejun/press_submission/vendor/press_policy_audit.py": 1
+  },
+  "encoding_less_text_io_tests": {
+   "yejun/analysis/press_supplement/test_contract.py": 6,
+   "yejun/press_guard/test_analyze.py": 1,
+   "yejun/press_guard/test_guard.py": 2,
+   "yejun/press_guard/test_recalibrate.py": 2,
+   "yejun/press_guard/test_review_regressions.py": 6,
+   "yejun/press_submission/tests/test_review_regressions.py": 26
+  },
+  "unix_only_modules": [
+   "yejun/press_guard/train.py:99: import resource",
+   "yejun/press_guard/train.py:100: peak_mb=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/(1024**2 if sys.platform==\"darwin\" else 1024)   # macOS는 바이트, Linux는 KB"
+  ],
+  "hardcoded_interpreter_path": {
+   "yejun/analysis/press_evidence/README.md": 1,
+   "yejun/analysis/press_evidence/build_tables.py": 1,
+   "yejun/analysis/press_supervised/README.md": 1,
+   "yejun/analysis/press_supervised/run.py": 1,
+   "yejun/analysis/press_supplement/README.md": 7,
+   "yejun/press_guard/README.md": 14
+  },
+  "json_read_without_encoding_cp949": {
+   "yejun/press_submission/outputs/manifest.json": "cp949 해독 실패(바이트 995)",
+   "yejun/press_submission/outputs/expected/manifest.json": "cp949 해독 실패(바이트 901)",
+   "yejun/analysis/press_advance/manifest.json": "cp949 해독 실패(바이트 96)",
+   "yejun/analysis/press_supplement/protocol.json": "cp949 해독 실패(바이트 179)",
+   "yejun/analysis/press_supervised/protocol.json": "cp949 해독 실패(바이트 85)",
+   "yejun/press_guard/outputs/audit.json": "cp949 해독 실패(바이트 652)",
+   "yejun/press_guard/outputs/analysis_summary.json": "cp949로 읽힘"
+  }
+ },
+ "readme": {
+  "press_guard_readme_mentions_v1_prerequisite": false,
+  "press_guard_readme_mentions_requirements": false,
+  "press_guard_readme_mentions_test_prediction_file": false,
+  "press_advance_has_readme": false,
+  "top_readme_has_single_entry": false,
+  "press_guard_has_requirements": false,
+  "press_submission_has_environment_yml": false
+ },
+ "phases": {
+  "judge06_phaseA_clean_repro": [
+   {
+    "step": "A01_v2_clean_repro",
+    "rc": "0",
+    "wall": "239",
+    "maxrss_mb": "774"
+   },
+   {
+    "step": "A02_v1_clean_repro_with_lstm",
+    "rc": "0",
+    "wall": "56",
+    "maxrss_mb": "850"
+   }
+  ],
+  "judge06_phaseB_readme_path": [
+   {
+    "step": "B01_train",
+    "rc": "0",
+    "wall": "24",
+    "maxrss_mb": "238"
+   },
+   {
+    "step": "B02_analyze",
+    "rc": "1",
+    "wall": "2",
+    "maxrss_mb": "213"
+   },
+   {
+    "step": "B03_audit",
+    "rc": "1",
+    "wall": "179",
+    "maxrss_mb": "411"
+   },
+   {
+    "step": "B04_verify",
+    "rc": "1",
+    "wall": "2",
+    "maxrss_mb": "192"
+   },
+   {
+    "step": "B05_v1_step2",
+    "rc": "0",
+    "wall": "9",
+    "maxrss_mb": "781"
+   },
+   {
+    "step": "B06_analyze",
+    "rc": "0",
+    "wall": "18",
+    "maxrss_mb": "645"
+   },
+   {
+    "step": "B07_audit",
+    "rc": "0",
+    "wall": "190",
+    "maxrss_mb": "408"
+   },
+   {
+    "step": "B08_verify",
+    "rc": "0",
+    "wall": "2",
+    "maxrss_mb": "192"
+   },
+   {
+    "step": "B09_predict",
+    "rc": "0",
+    "wall": "2",
+    "maxrss_mb": "189"
+   }
+  ],
+  "judge06_phaseC_full_raw": [
+   {
+    "step": "C01_v1_run_all_full",
+    "rc": "0",
+    "wall": "1957",
+    "maxrss_mb": "1090"
+   },
+   {
+    "step": "C02_v1_verify",
+    "rc": "0",
+    "wall": "1",
+    "maxrss_mb": "105"
+   },
+   {
+    "step": "C03_advance",
+    "rc": "0",
+    "wall": "7",
+    "maxrss_mb": "234"
+   },
+   {
+    "step": "C04_v2_train",
+    "rc": "0",
+    "wall": "22",
+    "maxrss_mb": "237"
+   },
+   {
+    "step": "C05_v2_analyze",
+    "rc": "0",
+    "wall": "14",
+    "maxrss_mb": "624"
+   },
+   {
+    "step": "C06_v2_audit",
+    "rc": "0",
+    "wall": "149",
+    "maxrss_mb": "405"
+   },
+   {
+    "step": "C07_v2_verify",
+    "rc": "0",
+    "wall": "2",
+    "maxrss_mb": "188"
+   },
+   {
+    "step": "C08_evidence",
+    "rc": "0",
+    "wall": "7",
+    "maxrss_mb": "594"
+   },
+   {
+    "step": "C09_supp_verify",
+    "rc": "0",
+    "wall": "1",
+    "maxrss_mb": "190"
+   },
+   {
+    "step": "C10_supp_rerun",
+    "rc": "0",
+    "wall": "622",
+    "maxrss_mb": "1063"
+   },
+   {
+    "step": "C11_supp_figures",
+    "rc": "0",
+    "wall": "1",
+    "maxrss_mb": "148"
+   },
+   {
+    "step": "C12_pytest_v2",
+    "rc": "0",
+    "wall": "44",
+    "maxrss_mb": "299"
+   },
+   {
+    "step": "C13_pytest_v1",
+    "rc": "0",
+    "wall": "7",
+    "maxrss_mb": "499"
+   },
+   {
+    "step": "C14_pytest_supp",
+    "rc": "0",
+    "wall": "3",
+    "maxrss_mb": "324"
+   },
+   {
+    "step": "C15_node_web",
+    "rc": "0",
+    "wall": "0",
+    "maxrss_mb": "77"
+   },
+   {
+    "step": "C16_predict_cli",
+    "rc": "0",
+    "wall": "1",
+    "maxrss_mb": "190"
+   }
+  ],
+  "judge06_phaseD_venv": [
+   {
+    "step": "D01_pip_install",
+    "rc": "0",
+    "wall": "26",
+    "maxrss_mb": "293"
+   },
+   {
+    "step": "D02_v1_step2",
+    "rc": "0",
+    "wall": "50",
+    "maxrss_mb": "749"
+   },
+   {
+    "step": "D03_train",
+    "rc": "0",
+    "wall": "27",
+    "maxrss_mb": "210"
+   },
+   {
+    "step": "D04_analyze",
+    "rc": "0",
+    "wall": "20",
+    "maxrss_mb": "628"
+   },
+   {
+    "step": "D05_audit",
+    "rc": "0",
+    "wall": "257",
+    "maxrss_mb": "387"
+   },
+   {
+    "step": "D06_verify",
+    "rc": "0",
+    "wall": "2",
+    "maxrss_mb": "166"
+   },
+   {
+    "step": "D07_pytest_v2",
+    "rc": "0",
+    "wall": "84",
+    "maxrss_mb": "283"
+   },
+   {
+    "step": "D08_pytest_v1",
+    "rc": "0",
+    "wall": "12",
+    "maxrss_mb": "495"
+   },
+   {
+    "step": "D09_pytest_supp",
+    "rc": "1",
+    "wall": "2",
+    "maxrss_mb": "294"
+   },
+   {
+    "step": "D10_pip_notorch",
+    "rc": "0",
+    "wall": "19",
+    "maxrss_mb": "228"
+   },
+   {
+    "step": "D11_notorch_v1_step2",
+    "rc": "1",
+    "wall": "60",
+    "maxrss_mb": "178"
+   },
+   {
+    "step": "D12_notorch_train",
+    "rc": "0",
+    "wall": "31",
+    "maxrss_mb": "213"
+   },
+   {
+    "step": "D13_py314_dryrun",
+    "rc": "1",
+    "wall": "1",
+    "maxrss_mb": "81"
+   },
+   {
+    "step": "D14_uv_resolve_mac_py3.11",
+    "rc": "0",
+    "wall": "5",
+    "maxrss_mb": "90"
+   },
+   {
+    "step": "D14_uv_resolve_mac_py3.12",
+    "rc": "0",
+    "wall": "1",
+    "maxrss_mb": "80"
+   },
+   {
+    "step": "D14_uv_resolve_mac_py3.13",
+    "rc": "1",
+    "wall": "4",
+    "maxrss_mb": "66"
+   },
+   {
+    "step": "D15_uv_resolve_win_py312",
+    "rc": "0",
+    "wall": "0",
+    "maxrss_mb": "79"
+   },
+   {
+    "step": "D16_uv_resolve_linux_py312",
+    "rc": "0",
+    "wall": "1",
+    "maxrss_mb": "86"
+   }
+  ],
+  "judge06_phaseE_portability": [
+   {
+    "step": "Ea01_cp949_v2_verify",
+    "rc": "1",
+    "wall": "2",
+    "maxrss_mb": "195"
+   },
+   {
+    "step": "Ea02_cp949_v2_analyze",
+    "rc": "1",
+    "wall": "2",
+    "maxrss_mb": "217"
+   },
+   {
+    "step": "Ea03_cp949_v2_train",
+    "rc": "0",
+    "wall": "12",
+    "maxrss_mb": "232"
+   },
+   {
+    "step": "Ea04_cp949_supp_verify",
+    "rc": "1",
+    "wall": "2",
+    "maxrss_mb": "182"
+   },
+   {
+    "step": "Ea05_cp949_serve_import",
+    "rc": "1",
+    "wall": "1",
+    "maxrss_mb": "183"
+   },
+   {
+    "step": "Ea06_cp949_utf8mode_v2_verify",
+    "rc": "0",
+    "wall": "2",
+    "maxrss_mb": "194"
+   },
+   {
+    "step": "Ea07_cp949_v1_step2",
+    "rc": "0",
+    "wall": "8",
+    "maxrss_mb": "775"
+   },
+   {
+    "step": "Eb01_nores_libs",
+    "rc": "1",
+    "wall": "2",
+    "maxrss_mb": "171"
+   },
+   {
+    "step": "Eb02_nores_v2_train",
+    "rc": "1",
+    "wall": "12",
+    "maxrss_mb": "226"
+   },
+   {
+    "step": "Ec01_nomp_v1_step2",
+    "rc": "0",
+    "wall": "8",
+    "maxrss_mb": "780"
+   },
+   {
+    "step": "Ec02_nomp_train",
+    "rc": "0",
+    "wall": "99",
+    "maxrss_mb": "249"
+   },
+   {
+    "step": "Ec03_nomp_analyze",
+    "rc": "0",
+    "wall": "93",
+    "maxrss_mb": "656"
+   },
+   {
+    "step": "Ec04_nomp_audit",
+    "rc": "0",
+    "wall": "259",
+    "maxrss_mb": "412"
+   },
+   {
+    "step": "Ec05_nomp_verify",
+    "rc": "0",
+    "wall": "2",
+    "maxrss_mb": "198"
+   },
+   {
+    "step": "Ed01_official_root_train",
+    "rc": "1",
+    "wall": "2",
+    "maxrss_mb": "183"
+   },
+   {
+    "step": "Ee01_supervised_rerun",
+    "rc": "0",
+    "wall": "12",
+    "maxrss_mb": "272"
+   }
+  ],
+  "judge06_phaseF_e2_nocache": [
+   {
+    "step": "F01_e2_nocache",
+    "rc": "0",
+    "wall": "102",
+    "maxrss_mb": "1076"
+   },
+   {
+    "step": "F02_verify_nocache_run",
+    "rc": "1",
+    "wall": "3",
+    "maxrss_mb": "192"
+   }
+  ],
+  "judge06_phaseG_archive_clean_repro": [],
+  "judge06_phaseH_supervised_v2": [
+   {
+    "step": "H01_train",
+    "rc": "0",
+    "wall": "10",
+    "maxrss_mb": "230"
+   },
+   {
+    "step": "H02_supervised",
+    "rc": "0",
+    "wall": "140",
+    "maxrss_mb": "387"
+   }
+  ],
+  "judge06_phaseI_v1table_tolerance": [
+   {
+    "step": "I01_analyze_tiny_change",
+    "rc": "1",
+    "wall": "1",
+    "maxrss_mb": "212"
+   }
+  ],
+  "judge06_phaseT_timing": [
+   {
+    "step": "T01_v1_step2",
+    "rc": "0",
+    "wall": "8",
+    "maxrss_mb": "769"
+   },
+   {
+    "step": "T02_train",
+    "rc": "0",
+    "wall": "26",
+    "maxrss_mb": "235"
+   },
+   {
+    "step": "T03_analyze",
+    "rc": "0",
+    "wall": "17",
+    "maxrss_mb": "618"
+   },
+   {
+    "step": "T04_audit",
+    "rc": "0",
+    "wall": "172",
+    "maxrss_mb": "406"
+   },
+   {
+    "step": "T05_verify",
+    "rc": "0",
+    "wall": "1",
+    "maxrss_mb": "189"
+   }
+  ]
+ }
+}

@@ -1,0 +1,4 @@
+Phase G 2026-09-27 17:55:10 git archive dcd300a → git 없는 사본에서 clean_repro.sh 실행
+fatal: '/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06/G_archive/copy' 저장소가 없습니다
+rc=128
+정리: /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/tmp.vQ94tBPVcd

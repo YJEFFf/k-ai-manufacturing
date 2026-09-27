@@ -1,0 +1,58 @@
+[    0.2s] HEAD dcd300aa88288508d0794ce89a9aebcfd53bc3b4 → /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r1_v7eswrzy
+[    0.7s] 원본 확인 True 정상 구간 600 이상 구간 21
+[    0.7s] C1 주 수치 재계산
+[    5.4s] A [('guard_v2', 0.01, 556, 0, 44, 0.961938, True), ('baseline_v1', 0.01, 501, 0, 99, 0.910082, True)]
+[   10.7s] B [('guard_v2', 0.01, 569, 3, 31, 0.97099, True), ('baseline_v1', 0.01, 514, 3, 86, 0.920322, True)]
+[   10.7s] C2 비교표 무결성
+[   10.7s] 모델 수 {'A': 14, 'B': 14} 원표 불일치 [] 무임계 열 ['ap_scored_rows']
+[   10.7s] C3 짝 비교
+[   10.8s] A {'fn_v1': 99, 'fn_v2': 44, 'segments_v2_better': 18, 'segments_equal': 3, 'segments_v2_worse': 0, 'sign_test_one_sided_p': 3.814697265625e-06, 'delta_fn_boot95': [40.0, 70.0], 'delta_f1_observed': 0.05185597239376594, 'delta_f1_boot95': [0.03651144041553089, 0.07422145084611378], 'normal_alarm_segments_v1_only': 0, 'normal_alarm_segments_v2_only': 0, 'normal_alarm_segments_both': 0, 'matches_committed_records': True}
+[   10.9s] B {'fn_v1': 86, 'fn_v2': 31, 'segments_v2_better': 16, 'segments_equal': 5, 'segments_v2_worse': 0, 'sign_test_one_sided_p': 1.52587890625e-05, 'delta_fn_boot95': [38.0, 71.0], 'delta_f1_observed': 0.05066746923897203, 'delta_f1_boot95': [0.034884307376404966, 0.07382699296741861], 'normal_alarm_segments_v1_only': 0, 'normal_alarm_segments_v2_only': 0, 'normal_alarm_segments_both': 3, 'matches_committed_records': True}
+[   10.9s] C4 후보 전체 재계산·중첩 선택
+[   18.5s] A 후보 점수 39
+[   25.0s] B 후보 점수 39
+[   25.1s] 후보 재계산 대조: 일치 78 불일치 0 표 없음 0
+[   25.1s] 중첩 FN {'A': 44, 'B': 31} 외견 FN {'A': 44, 'B': 31} 선택 {'advance:early6_ar2': 21}
+[   25.3s] 탐색 규모 63
+[   25.3s] C6 무임계 지표
+[   25.4s] A {'v2_oracle_threshold_f1': 0.972696, 'row_auroc_v2': 0.977569, 'row_auroc_v1': 0.939228, 'row_ap_v2': 0.970475, 'row_ap_v1': 0.912597, 'record_auroc_v2': 1.0, 'record_auroc_v1': 1.0, 'v2_all_rows_scored': True, 'v1_unscored_rows': 0}
+[   25.5s] B {'v2_oracle_threshold_f1': 0.97099, 'row_auroc_v2': 0.975945, 'row_auroc_v1': 0.934191, 'row_ap_v2': 0.965908, 'row_ap_v1': 0.901612, 'record_auroc_v2': 1.0, 'record_auroc_v1': 1.0, 'v2_all_rows_scored': True, 'v1_unscored_rows': 0}
+[   25.5s] C7 확률 출력 가능성
+[   25.6s] A platt {'brier': 0.00675, 'log_loss': 0.03961, 'ece10': 0.00168, 'auroc': 0.97609, 'mean_p_normal': 0.00822, 'mean_p_abnormal': 0.9445, 'share_abnormal_rows_p_ge_0_5': 0.94833, 'share_normal_rows_p_ge_0_5': 0.00024} isotonic brier 0.00708
+[   25.7s] B platt {'brier': 0.00537, 'log_loss': 0.03195, 'ece10': 0.0016, 'auroc': 0.9746, 'mean_p_normal': 0.00628, 'mean_p_abnormal': 0.93693, 'share_abnormal_rows_p_ge_0_5': 0.93833, 'share_normal_rows_p_ge_0_5': 0.00033} isotonic brier 0.00519
+[   25.7s] C8 지도학습 기준선 점검
+[   28.3s] A signal_matched logistic {'loso_fn_conformal': 46, 'loso_fn_half': 26, 'f1_conformal': 0.9601386481802426, 'f1_half': 0.9647058823529412, 'normal_alarm_conformal_all21': 0, 'normal_alarm_half_all21': 14, 'normal_alarm_conformal_fold_range': [0, 0], 'fp_rows_conformal': 0, 'fp_rows_half': 16}
+[   32.1s] A signal_matched hgb {'loso_fn_conformal': 32, 'loso_fn_half': 28, 'f1_conformal': 0.9709401709401709, 'f1_half': 0.9744463373083475, 'normal_alarm_conformal_all21': 2, 'normal_alarm_half_all21': 2, 'normal_alarm_conformal_fold_range': [0, 2], 'fp_rows_conformal': 2, 'fp_rows_half': 2}
+[   36.2s] A format_only hgb {'loso_fn_conformal': 0, 'loso_fn_half': 0, 'f1_conformal': 0.9991673605328892, 'f1_half': 1.0, 'normal_alarm_conformal_all21': 1, 'normal_alarm_half_all21': 0, 'normal_alarm_conformal_fold_range': [1, 1], 'fp_rows_conformal': 1, 'fp_rows_half': 0}
+[   37.1s] A random rows {'tp': 573, 'fp': 15, 'fn': 27, 'f1': 0.9646464646464646}
+[   39.5s] B signal_matched logistic {'loso_fn_conformal': 49, 'loso_fn_half': 26, 'f1_conformal': 0.9574283231972198, 'f1_half': 0.9511184755592378, 'normal_alarm_conformal_all21': 0, 'normal_alarm_half_all21': 28, 'normal_alarm_conformal_fold_range': [0, 1], 'fp_rows_conformal': 0, 'fp_rows_half': 33}
+[   43.6s] B signal_matched hgb {'loso_fn_conformal': 38, 'loso_fn_half': 25, 'f1_conformal': 0.9672977624784854, 'f1_half': 0.9762308998302207, 'normal_alarm_conformal_all21': 0, 'normal_alarm_half_all21': 3, 'normal_alarm_conformal_fold_range': [0, 3], 'fp_rows_conformal': 0, 'fp_rows_half': 3}
+[   47.6s] B format_only hgb {'loso_fn_conformal': 0, 'loso_fn_half': 0, 'f1_conformal': 0.9991673605328892, 'f1_half': 1.0, 'normal_alarm_conformal_all21': 1, 'normal_alarm_half_all21': 0, 'normal_alarm_conformal_fold_range': [1, 8], 'fp_rows_conformal': 1, 'fp_rows_half': 0}
+[   48.6s] B random rows {'tp': 574, 'fp': 16, 'fn': 26, 'f1': 0.9647058823529412}
+[   49.3s] A none 0.0 {'guard_v2_detect_2s': 0.0, 'sup_logistic_detect_2s': 0.0, 'sup_hgb_detect_2s': 0.0, 'guard_v2_committed_detect_2s': 0.0}
+[   52.6s] A cur_noise 0.1 {'guard_v2_detect_2s': 0.955, 'sup_logistic_detect_2s': 0.829, 'sup_hgb_detect_2s': 0.899, 'guard_v2_committed_detect_2s': 0.955}
+[   55.8s] A cur_noise 0.2 {'guard_v2_detect_2s': 1.0, 'sup_logistic_detect_2s': 1.0, 'sup_hgb_detect_2s': 0.997, 'guard_v2_committed_detect_2s': 1.0}
+[   59.1s] A cur_noise 0.4 {'guard_v2_detect_2s': 1.0, 'sup_logistic_detect_2s': 1.0, 'sup_hgb_detect_2s': 1.0, 'guard_v2_committed_detect_2s': 1.0}
+[   59.8s] A cur_offset 0.4 {'guard_v2_detect_2s': 1.0, 'sup_logistic_detect_2s': 0.973, 'sup_hgb_detect_2s': 0.893, 'guard_v2_committed_detect_2s': 1.0}
+[   60.5s] A cur_offset 0.8 {'guard_v2_detect_2s': 1.0, 'sup_logistic_detect_2s': 1.0, 'sup_hgb_detect_2s': 0.987, 'guard_v2_committed_detect_2s': 1.0}
+[   63.7s] A vib_noise 2.0 {'guard_v2_detect_2s': 0.744, 'sup_logistic_detect_2s': 0.216, 'sup_hgb_detect_2s': 0.016, 'guard_v2_committed_detect_2s': 0.744}
+[   67.0s] A vib_noise 4.0 {'guard_v2_detect_2s': 1.0, 'sup_logistic_detect_2s': 0.925, 'sup_hgb_detect_2s': 0.04, 'guard_v2_committed_detect_2s': 1.0}
+[   67.7s] A cur_gain 1.5 {'guard_v2_detect_2s': 0.72, 'sup_logistic_detect_2s': 0.493, 'sup_hgb_detect_2s': 0.52, 'guard_v2_committed_detect_2s': 0.72}
+[   68.3s] A cur_gain 0.5 {'guard_v2_detect_2s': 0.587, 'sup_logistic_detect_2s': 0.387, 'sup_hgb_detect_2s': 0.627, 'guard_v2_committed_detect_2s': 0.587}
+[   69.3s] B none 0.0 {'guard_v2_detect_2s': 0.009, 'sup_logistic_detect_2s': 0.0, 'sup_hgb_detect_2s': 0.0, 'guard_v2_committed_detect_2s': 0.009}
+[   74.2s] B cur_noise 0.1 {'guard_v2_detect_2s': 0.975, 'sup_logistic_detect_2s': 0.739, 'sup_hgb_detect_2s': 0.847, 'guard_v2_committed_detect_2s': 0.975}
+[   79.2s] B cur_noise 0.2 {'guard_v2_detect_2s': 1.0, 'sup_logistic_detect_2s': 0.996, 'sup_hgb_detect_2s': 0.995, 'guard_v2_committed_detect_2s': 1.0}
+[   84.3s] B cur_noise 0.4 {'guard_v2_detect_2s': 1.0, 'sup_logistic_detect_2s': 1.0, 'sup_hgb_detect_2s': 1.0, 'guard_v2_committed_detect_2s': 1.0}
+[   85.3s] B cur_offset 0.4 {'guard_v2_detect_2s': 1.0, 'sup_logistic_detect_2s': 0.856, 'sup_hgb_detect_2s': 0.847, 'guard_v2_committed_detect_2s': 1.0}
+[   86.3s] B cur_offset 0.8 {'guard_v2_detect_2s': 1.0, 'sup_logistic_detect_2s': 1.0, 'sup_hgb_detect_2s': 0.964, 'guard_v2_committed_detect_2s': 1.0}
+[   91.1s] B vib_noise 2.0 {'guard_v2_detect_2s': 0.939, 'sup_logistic_detect_2s': 0.177, 'sup_hgb_detect_2s': 0.013, 'guard_v2_committed_detect_2s': 0.939}
+[   96.0s] B vib_noise 4.0 {'guard_v2_detect_2s': 1.0, 'sup_logistic_detect_2s': 0.886, 'sup_hgb_detect_2s': 0.086, 'guard_v2_committed_detect_2s': 1.0}
+[   97.1s] B cur_gain 1.5 {'guard_v2_detect_2s': 0.829, 'sup_logistic_detect_2s': 0.514, 'sup_hgb_detect_2s': 0.514, 'guard_v2_committed_detect_2s': 0.829}
+[   98.1s] B cur_gain 0.5 {'guard_v2_detect_2s': 0.649, 'sup_logistic_detect_2s': 0.306, 'sup_hgb_detect_2s': 0.613, 'guard_v2_committed_detect_2s': 0.649}
+[   98.1s] C9 이웃 설계 민감도
+[   99.5s] A [('early+AR(1)', 0, 78, 21, 0.9305), ('early+AR(2)', 0, 44, 21, 0.9619), ('early+AR(3)', 0, 50, 21, 0.9565), ('early+AR(4)', 0, 57, 21, 0.9501), ('sum_of_components', 0, 40, 21, 0.9655), ('isolation_forest_on_v2_components', 0, 120, 20, 0.8889), ('5nn_on_v2_components', 0, 36, 21, 0.9691)]
+[  100.9s] B [('early+AR(1)', 3, 63, 21, 0.9421), ('early+AR(2)', 3, 31, 21, 0.971), ('early+AR(3)', 3, 40, 21, 0.963), ('early+AR(4)', 4, 46, 21, 0.9568), ('sum_of_components', 2, 39, 21, 0.9647), ('isolation_forest_on_v2_components', 0, 117, 20, 0.892), ('5nn_on_v2_components', 3, 29, 21, 0.9727)]
+[  100.9s] C11 팀 지도학습 기준선 재실행
+[  111.6s] 팀 지도학습 재실행 {'returncode': 0, 'elapsed_s': 10.606893874999969, 'artifact_sha256': {'A': '63234e1bc2a646b34694df0bc4d51507c86c5f6efaaaf065eef108bd6b2514ad', 'B': 'eb16901388d24dc25f8e50a4b3e5ed74595884a20652203553471ea17bb4255e'}, 'manifest_dependency_guard_A': '63234e1bc2a646b34694df0bc4d51507c86c5f6efaaaf065eef108bd6b2514ad', 'tables': {'random_rows.csv': 'equal', 'grouped_records.csv': 'equal', 'injection.csv': 'equal'}, 'injection_pre_alarm_records_logistic_none': 1, 'injection_pre_alarm_records_logistic_all_conditions': [1]}
+[  111.6s] 완료 → judge02_checks.json
+exit=0

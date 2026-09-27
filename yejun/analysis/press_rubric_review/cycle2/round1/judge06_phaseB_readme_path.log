@@ -1,0 +1,55 @@
+Phase B 시작 2026-09-27 17:02:52 HEAD=dcd300aa88288508d0794ce89a9aebcfd53bc3b4
+STEP B01_train rc=0 wall=24s maxrss_mb=238
+---- B01_train stdout(끝 3줄)
+    A baseline_v1   0.01 501   0  99 4090 0.910082   1.000000 0.835000                         0              120                          21                 21             0.1          0.7                 1.0                   1.0
+    B    guard_v2   0.01 569   3  31 6094 0.970990   0.994755 0.948333                         3              180                          21                 21             0.0          0.5                 1.0                   1.0
+    B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              180                          21                 21             0.0          0.7                 1.0                   1.0
+STEP B02_analyze rc=1 wall=2s maxrss_mb=213
+---- B02_analyze stdout(끝 4줄)
+---- B02_analyze stderr(끝 4줄, 시간 측정 제외)
+  File "/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06/B_readme/clone/yejun/press_guard/analyze.py", line 77, in source_hashes
+    if bad: raise ValueError(f"분석 원본 무결성 오류: {bad}")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: 분석 원본 무결성 오류: ['predictions_A.csv: 없음', 'predictions_B.csv: 없음']
+STEP B03_audit rc=1 wall=179s maxrss_mb=411
+---- B03_audit stdout(끝 4줄)
+OK  B 구간당 알림은 경보 유무와 일치(정확성): 정상 180·이상 21구간 · 알림 3+21회
+OK  B 이상 21구간 모두 탐지(성능 회귀): 21/21구간
+OK  B 날짜 이동·라벨 변경에 불변: 경보·점수 동일
+15/16 통과 → /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06/B_readme/clone/yejun/press_guard/outputs/audit.json
+STEP B04_verify rc=1 wall=2s maxrss_mb=192
+---- B04_verify stdout(끝 6줄)
+OK   records_first_alarm_v2.csv  max|Δ|=0
+OK   uncertainty_v2.csv  max|Δ|=0
+OK   workload_v2.csv  max|Δ|=0
+OK   decision_table_v2.csv  max|Δ|=0
+
+18/20 통과. 코드 7a2d709c2cd5 vs 동결 7a2d709c2cd5; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+STEP B05_v1_step2 rc=0 wall=9s maxrss_mb=781
+---- B05_v1_step2 stdout(끝 3줄)
+  "required_checks_ok": true,
+  "required_checks_failed": []
+}
+STEP B06_analyze rc=0 wall=18s maxrss_mb=645
+---- B06_analyze stdout(끝 3줄)
+ ],
+ "elapsed_s": 15.7
+}
+STEP B07_audit rc=0 wall=190s maxrss_mb=408
+---- B07_audit stdout(끝 2줄)
+OK  B 날짜 이동·라벨 변경에 불변: 경보·점수 동일
+16/16 통과 → /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06/B_readme/clone/yejun/press_guard/outputs/audit.json
+STEP B08_verify rc=0 wall=2s maxrss_mb=192
+---- B08_verify stdout(끝 3줄)
+OK   decision_table_v2.csv  max|Δ|=0
+
+20/20 통과. 코드 7a2d709c2cd5 vs 동결 7a2d709c2cd5; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+STEP B09_predict rc=0 wall=2s maxrss_mb=189
+---- B09_predict stdout(끝 2줄)
+600행 처리, 점검 대기 21구간 → /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06/B_readme/press_predictions.csv
+---- 행별 예측 파일(train.py 산출, Git 제외)
+predictions_abnormal_A.csv rows=600
+predictions_abnormal_B.csv rows=600
+predictions_normal_A.csv rows=4090
+predictions_normal_B.csv rows=6097
+Phase B 끝 2026-09-27 17:10:01

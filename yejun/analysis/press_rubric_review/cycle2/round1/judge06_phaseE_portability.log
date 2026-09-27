@@ -1,0 +1,108 @@
+Phase E 시작 2026-09-27 17:17:59 HEAD=dcd300aa88288508d0794ce89a9aebcfd53bc3b4 클론=dcd300a
+[cp949 출력] E-a 기본 인코딩: CP949 utf8_mode 0
+STEP Ea01_cp949_v2_verify rc=1 wall=2s maxrss_mb=195
+---- Ea01_cp949_v2_verify stdout(끝 8줄)
+[cp949 출력] OK   error_conditions_segments_v2.csv  max|Δ|=0
+[cp949 출력] OK   interaction_2x2_v2.csv  max|Δ|=0
+[cp949 출력] OK   records_first_alarm_v2.csv  max|Δ|=0
+[cp949 출력] OK   uncertainty_v2.csv  max|Δ|=0
+[cp949 출력] OK   workload_v2.csv  max|Δ|=0
+[cp949 출력] OK   decision_table_v2.csv  max|Δ|=0
+
+[cp949 출력] 18/20 통과. 코드 7a2d709c2cd5 vs 동결 7a2d709c2cd5; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+STEP Ea02_cp949_v2_analyze rc=1 wall=2s maxrss_mb=217
+---- Ea02_cp949_v2_analyze stdout(끝 4줄)
+---- Ea02_cp949_v2_analyze stderr(끝 4줄, 시간 측정 제외)
+  File "/opt/anaconda3/lib/python3.12/pathlib.py", line 1028, in read_text
+    return f.read()
+           ^^^^^^^^
+UnicodeDecodeError: 'cp949' codec can't decode byte 0xec in position 1061: illegal multibyte sequence
+STEP Ea03_cp949_v2_train rc=0 wall=12s maxrss_mb=232
+---- Ea03_cp949_v2_train stdout(끝 2줄)
+    B    guard_v2   0.01 569   3  31 6094 0.970990   0.994755 0.948333                         3              180                          21                 21             0.0          0.5                 1.0                   1.0
+    B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              180                          21                 21             0.0          0.7                 1.0                   1.0
+STEP Ea04_cp949_supp_verify rc=1 wall=2s maxrss_mb=182
+---- Ea04_cp949_supp_verify stdout(끝 4줄)
+---- Ea04_cp949_supp_verify stderr(끝 4줄, 시간 측정 제외)
+  File "/opt/anaconda3/lib/python3.12/pathlib.py", line 1028, in read_text
+    return f.read()
+           ^^^^^^^^
+UnicodeDecodeError: 'cp949' codec can't decode byte 0xec in position 179: illegal multibyte sequence
+STEP Ea05_cp949_serve_import rc=1 wall=1s maxrss_mb=183
+---- Ea05_cp949_serve_import stdout(끝 3줄)
+---- Ea05_cp949_serve_import stderr(끝 3줄, 시간 측정 제외)
+    return f.read()
+           ^^^^^^^^
+UnicodeDecodeError: 'cp949' codec can't decode byte 0xec in position 652: illegal multibyte sequence
+STEP Ea06_cp949_utf8mode_v2_verify rc=0 wall=2s maxrss_mb=194
+---- Ea06_cp949_utf8mode_v2_verify stdout(끝 2줄)
+
+20/20 통과. 코드 7a2d709c2cd5 vs 동결 7a2d709c2cd5; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+STEP Ea07_cp949_v1_step2 rc=0 wall=8s maxrss_mb=775
+---- Ea07_cp949_v1_step2 stdout(끝 2줄)
+  "required_checks_failed": []
+}
+STEP Eb01_nores_libs rc=1 wall=2s maxrss_mb=171
+---- Eb01_nores_libs stdout(끝 3줄)
+libs ok
+---- Eb01_nores_libs stderr(끝 3줄, 시간 측정 제외)
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1370, in _find_and_load
+ModuleNotFoundError: import of resource halted; None in sys.modules
+STEP Eb02_nores_v2_train rc=1 wall=12s maxrss_mb=226
+---- Eb02_nores_v2_train stdout(끝 4줄)
+A: 정상 학습·보정 / 저장·복원 일치
+B: 정상 학습·보정 / 저장·복원 일치
+---- Eb02_nores_v2_train stderr(끝 4줄, 시간 측정 제외)
+    main()
+  File "/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06/B_readme/clone/yejun/press_guard/train.py", line 99, in main
+    import resource
+ModuleNotFoundError: import of resource halted; None in sys.modules
+---- Eb02 산출물(학습은 끝났는데 manifest가 남는가)
+cases_A.csv
+cases_B.csv
+metrics.csv
+predictions_abnormal_A.csv
+predictions_abnormal_B.csv
+predictions_normal_A.csv
+predictions_normal_B.csv
+guard_A.json
+guard_B.json
+E-c BLAS: [{"internal_api": "openblas", "version": "0.3.23.dev", "num_threads": 8}]
+STEP Ec01_nomp_v1_step2 rc=0 wall=8s maxrss_mb=780
+---- Ec01_nomp_v1_step2 stdout(끝 1줄)
+}
+STEP Ec02_nomp_train rc=0 wall=99s maxrss_mb=249
+---- Ec02_nomp_train stdout(끝 1줄)
+    B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              180                          21                 21             0.0          0.7                 1.0                   1.0
+STEP Ec03_nomp_analyze rc=0 wall=93s maxrss_mb=656
+---- Ec03_nomp_analyze stdout(끝 1줄)
+}
+STEP Ec04_nomp_audit rc=0 wall=259s maxrss_mb=412
+---- Ec04_nomp_audit stdout(끝 1줄)
+16/16 통과 → /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06/E_portability/clone_nomp/yejun/press_guard/outputs/audit.json
+STEP Ec05_nomp_verify rc=0 wall=2s maxrss_mb=198
+---- Ec05_nomp_verify stdout(끝 2줄)
+
+20/20 통과. 코드 7a2d709c2cd5 vs 동결 7a2d709c2cd5; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+---- E-d 주최 측 ZIP 구조
+official_unzip/data/press_data_normal.csv
+official_unzip/data/outlier_data.csv
+STEP Ed01_official_root_train rc=1 wall=2s maxrss_mb=183
+---- Ed01_official_root_train stdout(끝 2줄)
+---- Ed01_official_root_train stderr(끝 2줄, 시간 측정 제외)
+    raise FileNotFoundError(f"{p} 없음. README의 데이터 배치 절차를 따르거나 --root를 지정한다.")
+FileNotFoundError: /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06/E_portability/official_unzip/data/3_소성가공_예지보전/press_data_normal.csv 없음. README의 데이터 배치 절차를 따르거나 --root를 지정한다.
+STEP Ee01_supervised_rerun rc=0 wall=12s maxrss_mb=272
+---- Ee01_supervised_rerun stdout(끝 3줄)
+  cur_gain   1.30      hgb       75          0.0933                  0             0.2267
+  cur_gain   1.50 logistic       75          0.0000                  1             0.7200
+  cur_gain   1.50      hgb       75          0.1733                  0             0.7200
+Phase E 끝 2026-09-27 17:26:38
+---- Ea08 웹 콘솔 Console().overview() 직접 호출(CP949 모의)
+  File "/opt/anaconda3/lib/python3.12/pathlib.py", line 1028, in read_text
+    return f.read()
+           ^^^^^^^^
+UnicodeDecodeError: 'cp949' codec can't decode byte 0xec in position 652: illegal multibyte sequence
+---- Ea09 같은 호출(PYTHONUTF8=1)
+overview ok True

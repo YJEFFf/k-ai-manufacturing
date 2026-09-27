@@ -1,0 +1,8 @@
+Phase I 시작 2026-09-27 17:54:07 클론=3ad2452
+변경: 145행 matched f1_all_rows 0.32122905027932963 → 0.32122905027932964 (차이 약 1e-17)
+STEP I01_analyze_tiny_change rc=1 wall=1s maxrss_mb=212
+---- I01_analyze_tiny_change stdout(끝 2줄)
+---- I01_analyze_tiny_change stderr(끝 2줄, 시간 측정 제외)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: 분석 원본 무결성 오류: ['model_comparison_all.csv: 실행 후 변경']
+Phase I 끝 2026-09-27 17:54:08 (원래 표로 되돌림)

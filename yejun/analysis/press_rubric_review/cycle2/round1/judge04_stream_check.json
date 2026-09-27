@@ -1,0 +1,64 @@
+{
+ "picked": {
+  "clean_record": 8,
+  "false_alarm_record": 3,
+  "false_alarm_positions": [
+   41
+  ]
+ },
+ "S1_clean_lead": {
+  "rows": 650,
+  "lead_rows": 50,
+  "records": 1,
+  "notifications": [
+   50
+  ],
+  "notifications_after_onset": [
+   0
+  ],
+  "first_alarm_after_onset": 0,
+  "cases": [
+   {
+    "first_row": 50,
+    "first_alarm_position": 50,
+    "alarm_rows": 600,
+    "observed_rows": 600,
+    "alert_units": 12,
+    "evidence": "dynamics+magnitude+waveform",
+    "action": "진동·전류 함께 점검"
+   }
+  ]
+ },
+ "S1_chunk1_same_notifications": true,
+ "S2_false_alarm_lead": {
+  "rows": 650,
+  "lead_rows": 50,
+  "records": 1,
+  "notifications": [
+   41
+  ],
+  "notifications_after_onset": [],
+  "first_alarm_after_onset": 0,
+  "cases": [
+   {
+    "first_row": 41,
+    "first_alarm_position": 41,
+    "alarm_rows": 601,
+    "observed_rows": 650,
+    "alert_units": 13,
+    "evidence": "dynamics+magnitude+waveform",
+    "action": "진동·전류 함께 점검"
+   }
+  ]
+ },
+ "S3_big_stream": {
+  "normal_alarm_rows": 875,
+  "artificial_junctions_in_normal": 179,
+  "normal_alarm_rows_within_7_of_junction": 872,
+  "normal_blocks": 122,
+  "alarmed_blocks_total": 126,
+  "blocks_total": 134,
+  "notifications": 9,
+  "cases": 9
+ }
+}

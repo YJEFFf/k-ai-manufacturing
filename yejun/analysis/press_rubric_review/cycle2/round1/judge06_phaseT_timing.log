@@ -1,0 +1,9 @@
+Phase T 시작 2026-09-27 17:30:21 loadavg={ 4.02 5.65 6.28 } 동시 실행: Phase C의 LSTM 학습(1코어)
+STEP T01_v1_step2 rc=0 wall=8s maxrss_mb=769
+STEP T02_train rc=0 wall=26s maxrss_mb=235
+STEP T03_analyze rc=0 wall=17s maxrss_mb=618
+STEP T04_audit rc=0 wall=172s maxrss_mb=406
+STEP T05_verify rc=0 wall=1s maxrss_mb=189
+---- T05_verify stdout(끝 1줄)
+20/20 통과. 코드 7a2d709c2cd5 vs 동결 7a2d709c2cd5; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+Phase T 끝 2026-09-27 17:34:07 loadavg={ 3.53 4.62 5.68 }

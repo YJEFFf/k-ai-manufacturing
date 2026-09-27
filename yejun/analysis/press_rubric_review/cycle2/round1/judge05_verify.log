@@ -1,0 +1,23 @@
+C0 HEAD dcd300a · 모델·원본 해시 일치 · 미커밋 2건
+C1 A α1% 556/0/44 · B 569/3/31 (metrics.csv 일치)
+C2 AR(2) 암시 주파수 A 0.6064 Hz |r| 0.9874 · B 0.6064 Hz
+C3 A/B 곡선 재계산이 calibration_curve.csv와 일치: A [0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2] B [3, 3, 5, 7, 7, 7, 7, 7, 8, 9, 9, 11]
+C4 시간순 5겹(평가 300구간) 실현 대 명목: k=1 2/300(0.67%) vs 0.83% 90%[0,6], k=3 8/300(2.67%) vs 2.48% 90%[3,13], k=6 14/300(4.67%) vs 4.96% 90%[8,23], k=12 28/300(9.33%) vs 9.92% 90%[20,41]
+C5 α1% 보정 조건부 Beta(1,120): 평균 0.0083, 95% 0.0247, P(실제>1%)=0.299 · B 사후 95% 0.0256 (8시간 92건 vs CP상한 152건)
+C6 수락 검사 (a) 정상인데 거부될 확률(정확 귀무 Beta-Binomial): α0.01 한도 2 → 0.036(이항 가정 0.014), α0.03 한도 4 → 0.042(이항 가정 0.017), α0.05 한도 6 → 0.060(이항 가정 0.029)
+C7 결합 규칙(α1%, TP/FP/FN·F1·정상 알림·근거 없는 이상 경보): A fmax_tippett 556/0/44 0.962 n0 r0, fisher 568/0/32 0.973 n0 r12, stouffer 561/0/39 0.966 n0 r10, sum_g 560/0/40 0.966 n0 r4, mean_g 558/0/42 0.964 n0 r8 | B fmax_tippett 569/3/31 0.971 n3 r0, fisher 569/1/31 0.973 n1 r1, stouffer 561/0/39 0.966 n0 r1, sum_g 561/2/39 0.965 n2 r1, mean_g 558/0/42 0.964 n0 r0
+C7 주 모델 경보 행 성분 조합: A 단일 성분 150/556 (evidence 일치 True) | B 단일 성분 146/569 (evidence 일치 True)
+C8 α1% 알림의 이상 확률(명목 FAR 1/121, 전류 잡음 0.1σ 탐지율): π=0.0001 → 0.011, π=0.001 → 0.104, π=0.01 → 0.538
+C9 위상 일관성: f*=0.603797 Hz, R=0.114 (0.600 Hz에서 0.060), 시작 시각 섞은 귀무 최대 R 0.145; 블록별 최적 0.60404(R 0.18), 0.60206(R 0.17), 0.59928(R 0.18), 0.59002(R 0.19), 0.60500(R 0.18)
+C9b 이웃 기록 위상 연속성: 쌍 355개(공백 중앙 3.05초), R(0.6 Hz) 0.060, 최적 f 0.5500 R 0.069, 짧은/긴 공백 R 0.045/0.110, 섞은 귀무 95% 0.091; 양성 대조(기록 안 1초 간격) R 1.000, 기록 시작 위상 R 0.016
+C10 음수 비율·lag-1(정상): AI0_Vibration 0.501/0.033, AI1_Vibration 0.542/0.319, AI2_Current 0.496/0.928
+통과 정상 알림 단위 수가 이항 95백분위 이하: 2
+통과 고장 주입 cur_noise 0.2 2초 안 탐지율 ≥ 90%: 1.0
+통과 고장 주입 cur_offset 0.4 2초 안 탐지율 ≥ 90%: 1.0
+통과 고장 주입 vib_noise 4 2초 안 탐지율 ≥ 90%: 1.0
+수락 · 모델 저장 /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge05_recal_wfpk9bjo/site.json · 보고서 /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge05_recal_wfpk9bjo/site_report.json
+C11 recalibrate 종료 코드 0, 통과 True: 정상 알림 단위 수가 이항 95백분위 이하 = 2; 고장 주입 cur_noise 0.2 2초 안 탐지율 ≥ 90% = 1.0; 고장 주입 cur_offset 0.4 2초 안 탐지율 ≥ 90% = 1.0; 고장 주입 vib_noise 4 2초 안 탐지율 ≥ 90% = 1.0
+C12 E1 하한: cur_noise/guard_v2 0.1, cur_noise/baseline_v1 0.2, cur_offset/guard_v2 0.4, cur_offset/baseline_v1 0.8, vib_noise/guard_v2 4.0, vib_noise/baseline_v1 4.0
+C13 가중 지도학습(기록 묶음 교차검증, 문턱 0.5): A logistic_balanced F1 0.553 정상 알림 105 탐지 20/21, A hgb_balanced F1 0.833 정상 알림 1 탐지 19/21, B logistic_balanced F1 0.492 정상 알림 151 탐지 20/21, B hgb_balanced F1 0.775 정상 알림 1 탐지 19/21
+C13 가중 지도학습 주입 2초 탐지율(v2): none 0 logistic_balanced 0.92(0.00), none 0 hgb_balanced 0.00(0.00), vib_noise 2 logistic_balanced 0.85(0.74), vib_noise 2 hgb_balanced 0.72(0.74), vib_noise 4 logistic_balanced 0.85(1.00), vib_noise 4 hgb_balanced 1.00(1.00), cur_noise 0.1 logistic_balanced 0.92(0.95), cur_noise 0.1 hgb_balanced 0.15(0.95), cur_noise 0.2 logistic_balanced 0.91(1.00), cur_noise 0.2 hgb_balanced 0.45(1.00), cur_offset 0.4 logistic_balanced 0.97(1.00), cur_offset 0.4 hgb_balanced 0.57(1.00), cur_offset 0.8 logistic_balanced 0.99(1.00), cur_offset 0.8 hgb_balanced 0.87(1.00)
+완료 30.5초 → /Volumes/YJSSD/공모전/k-제조데이터/yejun/analysis/press_rubric_review/cycle2/round1/judge05_verify.json

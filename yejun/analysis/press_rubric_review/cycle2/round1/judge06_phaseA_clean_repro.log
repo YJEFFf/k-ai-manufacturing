@@ -1,0 +1,74 @@
+Phase A 시작 2026-09-27 17:10:30 HEAD=dcd300aa88288508d0794ce89a9aebcfd53bc3b4
+STEP A01_v2_clean_repro rc=0 wall=239s maxrss_mb=774
+---- A01_v2_clean_repro stdout(끝 25줄)
+-- /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/tmp.o5bjoPPwDZ/clone/yejun/press_submission/run_all.py --root /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/tmp.o5bjoPPwDZ/clone/yejun/press_submission --out /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/tmp.o5bjoPPwDZ/clone/yejun/press_submission/outputs --steps 2 --no-baselines
+-- /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/tmp.o5bjoPPwDZ/clone/yejun/press_guard/train.py --rolling
+-- /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/tmp.o5bjoPPwDZ/clone/yejun/press_guard/analyze.py
+-- /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/tmp.o5bjoPPwDZ/clone/yejun/press_guard/audit.py
+OK   expected.integrity
+OK   configuration
+OK   analysis_summary.json
+OK   metrics.csv  max|Δ|=0
+OK   rolling.csv  max|Δ|=0
+OK   cases_A.csv  max|Δ|=0
+OK   cases_B.csv  max|Δ|=0
+OK   model_comparison_v2.csv  max|Δ|=0
+OK   robustness_v2.csv  max|Δ|=0
+OK   sensitivity_v2.csv  max|Δ|=0
+OK   ablation_v2.csv  max|Δ|=0
+OK   error_conditions_v2.csv  max|Δ|=0
+OK   error_conditions_segments_v2.csv  max|Δ|=0
+OK   interaction_2x2_v2.csv  max|Δ|=0
+OK   records_first_alarm_v2.csv  max|Δ|=0
+OK   uncertainty_v2.csv  max|Δ|=0
+OK   workload_v2.csv  max|Δ|=0
+OK   decision_table_v2.csv  max|Δ|=0
+
+20/20 통과. 코드 7a2d709c2cd5 vs 동결 7a2d709c2cd5; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+임시 폴더: /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/tmp.o5bjoPPwDZ (검사 후 삭제 가능)
+STEP A02_v1_clean_repro_with_lstm rc=0 wall=56s maxrss_mb=850
+---- A02_v1_clean_repro_with_lstm stdout(끝 45줄)
+== clone: dcd300a → run_all --steps 5 ==
+OK   inputs.sha256
+OK   checks.required
+OK   outputs.integrity
+OK   code.matches_manifest
+OK   expected.integrity
+OK   execution.scope
+OK   configuration
+OK   ablation.csv  max|Δ|=0
+OK   alarm_components.csv  max|Δ|=0
+OK   conformal_mc.csv  max|Δ|=0
+OK   diagnosis.json
+OK   error_conditions_fn.csv  max|Δ|=0
+OK   error_conditions_fp.csv  max|Δ|=0
+OK   influence.csv  max|Δ|=0
+OK   interaction_2x2.csv  max|Δ|=0
+OK   label_bypass.csv  max|Δ|=0
+OK   load_normalization.csv  max|Δ|=0
+OK   load_normalization_meta.csv  max|Δ|=0
+OK   lstm_common_history_A.csv  max|Δ|=0
+OK   lstm_common_history_B.csv  max|Δ|=0
+OK   lstm_common_meta.csv  max|Δ|=0
+OK   lstm_guidebook_history.csv  max|Δ|=0
+OK   lstm_guidebook_reproduction.json
+OK   model_comparison.csv  max|Δ|=0
+OK   model_comparison_all.csv  max|Δ|=0
+OK   model_comparison_lstm.csv  max|Δ|=0
+OK   operating_points.csv  max|Δ|=0
+OK   persistence.csv  max|Δ|=0
+OK   preprocess_effect.csv  max|Δ|=0
+OK   quantization_frozen.csv  max|Δ|=0
+OK   segment_features.csv  max|Δ|=0
+OK   sensitivity.csv  max|Δ|=0
+OK   sensitivity_params.csv  max|Δ|=0
+OK   splits.csv  max|Δ|=0
+OK   tail_params.csv  max|Δ|=0
+OK   thresholds_main.csv  max|Δ|=0
+OK   uncertainty.csv  max|Δ|=0
+OK   waveform_segments.csv  max|Δ|=0
+OK   workload.csv  max|Δ|=0
+
+39/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 362db343a42f vs 동결 3b66c92eba46
+임시 폴더: /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/tmp.EbUxTzFyr7 (검사 후 삭제 가능)
+Phase A 끝 2026-09-27 17:15:25
