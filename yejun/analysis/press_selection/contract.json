@@ -1,0 +1,12 @@
+{
+  "package": "press_selection",
+  "purpose": "최종모델 선정근거·같은 특징 대안·결합 규칙·통합 비교·오경보 대응 시험(run.py). 검증: python analysis/package_contract.py --package analysis/press_selection",
+  "outputs": ["same_feature_alternatives.csv", "combination_rules.csv", "fp_mitigation_v2.csv", "fp_mitigation_injection_v2.csv",
+              "search_ledger.csv", "candidate_universe.csv", "nested_selection.csv", "paired_records.csv",
+              "selection_evidence.csv", "unified_comparison.csv", "unified_comparison.md"],
+  "manifests": {"manifest.json": {"groups": {"input_sha256": "data", "code_sha256": "auto", "dependencies_sha256": "auto", "outputs": "outputs"}}},
+  "tolerance": 1e-9,
+  "meta_keys": ["elapsed_s", "environment"],
+  "run_options": [],
+  "commands": ["python analysis/press_selection/run.py"]
+}

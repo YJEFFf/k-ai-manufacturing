@@ -1,0 +1,13 @@
+file,index,recomputed,guidebook_reported,note
+normal,completeness,100.0,100.0,
+normal,uniqueness,99.995,99.99,완전 중복 1행(R20) 때문에 정상만 100% 미만
+normal,validity,100.0,100.0,
+normal,consistency,100.0,100.0,
+normal,accuracy,,,가이드북도 산출하지 않음(기준값 없음)
+normal,integrity,66.6667,66.67,유일성·유효성·일관성 중 100%가 아닌 지수 비율
+abnormal,completeness,100.0,100.0,
+abnormal,uniqueness,100.0,100.0,
+abnormal,validity,100.0,100.0,
+abnormal,consistency,100.0,100.0,
+abnormal,accuracy,,,가이드북도 산출하지 않음(기준값 없음)
+abnormal,integrity,100.0,100.0,유일성·유효성·일관성 중 100%가 아닌 지수 비율

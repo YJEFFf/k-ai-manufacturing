@@ -44,8 +44,13 @@ def scores(base, ar, frame, seg):
 
 
 def run():
+    for stream in (sys.stdout, sys.stderr):     # 한국어 Windows(CP949) 콘솔에서 못 쓰는 기호는 바꿔 쓴다
+        try:
+            stream.reconfigure(errors="replace")
+        except (AttributeError, ValueError):
+            pass
     started = time.monotonic()
-    protocol = json.loads((HERE / "protocol.json").read_text())
+    protocol = json.loads((HERE / "protocol.json").read_text(encoding="utf-8"))
     n, a, report = D.load()
     vendor = D.load_vendor()
     all_rows, all_records, fitted = [], [], {}
@@ -78,6 +83,7 @@ def run():
     selected.to_csv(HERE / "primary.csv", index=False)
     D.dump_json(dict(protocol=protocol, fit=fitted, inputs=report, code_sha256=code_sha256(),
                      script_sha256=D.sha256_file(Path(__file__)), environment=D.environment(),
+                     outputs={name: D.sha256_file(HERE / name) for name in ("metrics.csv", "segment_metrics.csv", "primary.csv")},
                      elapsed_s=time.monotonic()-started), HERE / "manifest.json")
     print(selected[["split_id","model","normal_notified_segments","abnormal_notified_segments","fn","fp",
                     "f1_all_rows","abnormal_row_coverage","delay_median_s","delay_max_s"]].to_string(index=False))

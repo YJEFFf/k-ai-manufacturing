@@ -1,6 +1,6 @@
 """라벨 지도학습 기준선 — 흔한 평가(무작위 행 분할)와 엄격한 평가(이상 기록 묶음 교차검증·고장 주입 전이)를 나란히 본다.
 
-    OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/analysis/press_supervised/run.py   # 약 15분
+    python yejun/analysis/press_supervised/run.py   # 약 2.5분
 
 최종모델 v2(이상 라벨 미사용)의 선정근거를 정확히 적기 위한 비교이며 대회 보고서가 아니다. 설계는 protocol.json(v2).
 정상 학습·보정·평가 구간은 v2와 같다. 특징은 창 특징만 쓴 것과 v2 성분을 더한 것 두 가지다.
@@ -25,7 +25,7 @@ sys.path.insert(0, str(YEJUN / "analysis" / "press_supplement"))
 from common import D, BASE, frozen, inject, standard_noise, record_detection, E1  # noqa: E402
 from model import layout  # noqa: E402
 
-PROTOCOL = json.loads((HERE / "protocol.json").read_text())
+PROTOCOL = json.loads((HERE / "protocol.json").read_text(encoding="utf-8"))
 MODELS = {
     "logistic": lambda: make_pipeline(StandardScaler(), LogisticRegression(C=1.0, max_iter=2000)),
     "hgb": lambda: HistGradientBoostingClassifier(random_state=0),
@@ -188,6 +188,11 @@ def injection(normal, abnormal):
 
 
 def main(argv=None):
+    for stream in (sys.stdout, sys.stderr):     # 한국어 Windows(CP949) 콘솔에서 못 쓰는 기호는 바꿔 쓴다
+        try:
+            stream.reconfigure(errors="replace")
+        except (AttributeError, ValueError):
+            pass
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--out", type=Path, default=HERE)
     out = ap.parse_args(argv).out

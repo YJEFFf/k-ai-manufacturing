@@ -93,18 +93,24 @@ UCI 안정 사이클 1,449개를 10 Hz로 맞추고(EPS1·PS1 10개 평균, FS1 
 
 ## 재현과 검증
 
+`yejun/`에서 실행한다. 시간은 이 기기(Apple M2)의 manifest 기록이다.
+
 ```bash
-export OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
-/opt/anaconda3/bin/python yejun/analysis/press_supplement/fault_injection.py   # E1 약 20분
-/opt/anaconda3/bin/python yejun/analysis/press_supplement/uci_v2.py            # E2 약 2분(첫 실행은 UCI 10 Hz 변환 포함), press_external/data/hydraulic.zip 필요
-/opt/anaconda3/bin/python yejun/analysis/press_supplement/recalibration.py     # E3 약 3분(4 프로세스)
-/opt/anaconda3/bin/python yejun/analysis/press_supplement/figures.py           # 그림(CSV에서 다시 그리는 파생물)
-/opt/anaconda3/bin/python yejun/analysis/press_supplement/verify.py            # 무결성 + 동결 기대값 비교
-/opt/anaconda3/bin/python yejun/analysis/press_supplement/verify.py --rerun E1,E2,E3   # 임시 폴더에 다시 만들어 기대값과 비교
-/opt/anaconda3/bin/python -m pytest -q yejun/analysis/press_supplement/test_contract.py
+export OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1        # PowerShell: $env:OMP_NUM_THREADS=1; $env:PYTHONDONTWRITEBYTECODE=1
+python analysis/press_external/acquire.py                  # E2 입력 UCI ZIP 받기(Git 제외 73 MB, 한 번만)
+python analysis/press_supplement/fault_injection.py        # E1 약 7.5분
+python analysis/press_supplement/uci_v2.py                 # E2 약 1.5분(첫 실행은 UCI 10 Hz 변환 포함)
+python analysis/press_supplement/recalibration.py          # E3 약 3분(4 프로세스)
+python analysis/press_supplement/figures.py                # 그림(CSV에서 다시 그리는 파생물)
+python analysis/press_supplement/verify.py                 # 무결성 + 동결 기대값 비교(UCI ZIP이 없으면 E2는 건너뜀)
+python analysis/press_supplement/verify.py --strict        # 건너뛴 실험도 실패로 센다
+python analysis/press_supplement/verify.py --rerun E1,E2,E3   # 임시 폴더에 다시 만들어 기대값과 비교(합계 약 10분)
+python -m pytest -q analysis/press_supplement/test_contract.py
 ```
 
-세 실험 스크립트는 `--out`으로 산출물 폴더를 바꿀 수 있고, E2는 `--no-cache`로 변환 캐시 없이 돌릴 수 있다.
+**UCI 원본(E2 입력).** `analysis/press_external/data/hydraulic.zip`(76,601,704바이트, SHA-256 `24128aad2ee45eea7e6b63ebbd9992cdf25d0483a2cebefbfc13bc69079af1f2`, CC BY 4.0)은 Git에서 뺐다. `acquire.py`가 UCI에서 받고 [acquisition.json](../press_external/acquisition.json)에 해시·CRC를 남긴다. ZIP이 없으면 verify와 계약 테스트는 E2 검사를 이유·획득 명령과 함께 건너뛰고(평가관 06 R6), E1·E3는 그대로 검사한다.
+
+세 실험 스크립트는 `--out`으로 산출물 폴더를 바꿀 수 있고, E2는 `--no-cache`로 변환 캐시 없이 돌릴 수 있다. `--no-cache` 실행은 결과 CSV가 바이트까지 같으므로, verify는 실행 설정의 `cache_used`를 비교하지 않고 "참고"로만 보인다(평가관 06 R7). 캐시 형식(`cache_version`)이 다르면 여전히 실패한다.
 
 **실행 계약([contract.py](contract.py), 루브릭 검수 R9·R24).** 각 `e1~e3_manifest.json`에 다음을 남긴다.
 - 실제 의존 코드의 해시: 공용 `common.py`·`contract.py`·`protocol.json`, 실험 스크립트, `press_guard/model.py`·`train.py`, v1 `press` 패키지

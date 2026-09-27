@@ -1,0 +1,36 @@
+{
+  "protocol": "press-supervised-baseline-v2",
+  "input_hashes": {
+    "normal": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+    "abnormal": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e"
+  },
+  "code_sha256": {
+    "run.py": "1146651afb60ed38fd65c6ff582610782a5700afc1ae4aa67db66050316f82c0",
+    "protocol.json": "efeadc304f390915e9b0e740674f7f982435073d2e280a99dd2312767edc3389"
+  },
+  "dependencies": {
+    "press_supplement/common.py": "3cc480e147ba5e1b48c417a8cec104453093d761aabc943d8df2e23d60a7a08a",
+    "press_supplement/e1_summary.csv": "ac599f2408e6eb8cf03c51ca8f83ffa34ba4cb11d48a168b23e43195ab980344",
+    "press_guard/model.py": "1602db8f6a0845f1043e56c9721297f93418a20b87852b8ea50b3400dd18a761",
+    "press_guard/artifacts/guard_A.json": "7873bb5dcaab78ef7b09d7c72caa0f620a9098bbc8ccfd297acf0ae37349db58",
+    "press_guard/artifacts/guard_B.json": "3bfd17a5b0b765be2a80b59c6d864444dcebf31210df9d5280f2557d3c254cd3"
+  },
+  "outputs": {
+    "random_rows.csv": "b48137569867b7b0300fc1b9878bcd83c88f3895b190ae4bbe4158c113ee8b98",
+    "grouped_records.csv": "f33b034997209fbc9f2c767a4c9fcd9fe536ecad315ee80d66f55ed1851b1341",
+    "injection.csv": "4ae828005c9b6afebfb2ab21fb31de7d30ce0f408a7b44a2db3421ea5af568c5"
+  },
+  "environment": {
+    "python": "3.12.2",
+    "platform": "macOS-26.3.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.8.0",
+    "scipy": "1.13.1",
+    "matplotlib": "3.9.2",
+    "blas": null,
+    "protocol_version": "v1"
+  },
+  "elapsed_s": 135.3
+}

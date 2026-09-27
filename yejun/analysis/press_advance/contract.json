@@ -1,0 +1,34 @@
+{
+  "package": "press_advance",
+  "purpose": "v2 후보 고정 비교(run_experiment.py). press_guard가 primary.csv·metrics.csv·manifest.json을 읽는다. 검증: python analysis/package_contract.py --package analysis/press_advance",
+  "outputs": [
+    "metrics.csv",
+    "primary.csv"
+  ],
+  "manifests": {
+    "manifest.json": {
+      "groups": {
+        "outputs": "outputs"
+      },
+      "scalars": {
+        "script_sha256": "analysis/press_advance/run_experiment.py",
+        "code_sha256": "@v1_code"
+      },
+      "nested": {
+        "inputs.files": "sha256"
+      }
+    }
+  },
+  "tolerance": 1e-09,
+  "meta_keys": [
+    "elapsed_s",
+    "environment"
+  ],
+  "run_options": [],
+  "commands": [
+    "python analysis/press_advance/run_experiment.py"
+  ],
+  "local_outputs": [
+    "segment_metrics.csv"
+  ]
+}

@@ -90,7 +90,7 @@ def errors(exp, out, manifest=None):
     """manifest와 현재 코드·원본·모델·외부 표·산출물의 불일치 목록. 비어 있으면 통과."""
     out = Path(out)
     try:
-        m = manifest if manifest is not None else json.loads((out / manifest_name(exp)).read_text())
+        m = manifest if manifest is not None else json.loads((out / manifest_name(exp)).read_text(encoding="utf-8"))
     except (OSError, ValueError) as exc:
         return [f"{exp}: manifest 오류 {exc}"]
     bad = []

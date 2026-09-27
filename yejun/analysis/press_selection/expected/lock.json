@@ -1,0 +1,20 @@
+{
+  "package": "press_selection",
+  "files": {
+    "same_feature_alternatives.csv": "a42d583c24d0f914642ecf4103b0abcda0b0d516375ae33fc820c33aaf66bdd1",
+    "combination_rules.csv": "e8a2c7e1070baa86f6ab7c3bf7973b9ca07d276105c51ee13130b2ae18cf4816",
+    "fp_mitigation_v2.csv": "b3b37b897a35545e2544ea55036e87bb7c69dedb9dabbdfe856a93b734aaad73",
+    "fp_mitigation_injection_v2.csv": "8be37e61e482962c95a5936dc9a1010f330b936ff1f4ab0dc95c78d3a2ee4609",
+    "search_ledger.csv": "15d53171217a9ec400423feea535d11daef08b7b74a5500c55e7a4d2c9f3cdc6",
+    "candidate_universe.csv": "d7455fcc88cc01d19ba858fc1747268b07ba2cc2942083b81becd22b13e34ebd",
+    "nested_selection.csv": "bbfd441f4f89bf4614e5a5be792130f8ea6c39aa2943a9fd4a8e8c5e993e470c",
+    "paired_records.csv": "b6b4c55cdce04cb3d9ee5d274c036dc78610d699631a68e449ec83ecc6ff9fb1",
+    "selection_evidence.csv": "ba4aff9231934f5a69378f2ced06a3e2d809e920bb1850c6e64a1165237c6f52",
+    "unified_comparison.csv": "03bfc81adde25e20b38bc14c68f13703953b64c4b0381c363ac96abcf1e7f467",
+    "unified_comparison.md": "36ead1390fba53ac1d4963ca9fea3ea7222611ea0b57fa9f8d4171ed4c5f6804",
+    "manifest.json": "8157d9b23b65b97b8d650ee0acc5652a8b268f141e8155837d842a205389a5e5"
+  },
+  "images": [],
+  "local": {},
+  "note": "동결 사본의 SHA-256. 그림은 존재·크기만, Git 제외 결과(local)는 행 수·열만 비교한다"
+}

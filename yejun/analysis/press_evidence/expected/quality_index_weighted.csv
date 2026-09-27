@@ -1,0 +1,15 @@
+file,index,quality_index,weight,weighted_index,guidebook_weighted_index
+normal,completeness,100.0,0.6,60.0,60.0
+normal,uniqueness,99.99,0.1,9.999,9.99
+normal,validity,100.0,0.1,10.0,10.0
+normal,consistency,100.0,0.1,10.0,10.0
+normal,accuracy,,,,
+normal,integrity,66.66666666666667,0.1,6.666666666666668,6.67
+normal,total,,1.0,96.66566666666667,96.66
+abnormal,completeness,100.0,0.6,60.0,60.0
+abnormal,uniqueness,100.0,0.1,10.0,10.0
+abnormal,validity,100.0,0.1,10.0,10.0
+abnormal,consistency,100.0,0.1,10.0,10.0
+abnormal,accuracy,,,,
+abnormal,integrity,100.0,0.1,10.0,10.0
+abnormal,total,,1.0,100.0,100.0

@@ -29,7 +29,7 @@ def acquire():
                   sha256=hashlib.sha256(archive.read_bytes()).hexdigest(), bytes=archive.stat().st_size,
                   crc_checked=True, members=members,
                   limitations="별도 유압 시험대 60초 사이클. 대회 프레스의 추가 날짜나 독립 실고장 사례가 아니다. VS1 1 Hz, EPS1 전력 100 Hz로 대회 센서와 직접 호환되지 않는다.")
-    (HERE / "acquisition.json").write_text(json.dumps(record, ensure_ascii=False, indent=2))
+    (HERE / "acquisition.json").write_text(json.dumps(record, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(record, ensure_ascii=False, indent=2), flush=True)
     return archive
 

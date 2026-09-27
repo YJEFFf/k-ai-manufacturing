@@ -15,7 +15,7 @@ from model import GuardModel, D, BASE, ALPHAS  # noqa: E402
 from press.calibrate import conformal_p, segment_max  # noqa: E402
 from train import baseline  # noqa: E402  v1 기준선(크기+사인8) 산식
 
-PROTOCOL = json.loads((HERE / "protocol.json").read_text())
+PROTOCOL = json.loads((HERE / "protocol.json").read_text(encoding="utf-8"))
 E1 = PROTOCOL["E1_fault_injection"]
 ARTIFACTS = YEJUN / "press_guard" / "artifacts"
 POST_WINDOW = 20   # t0 이후 20행(2초) 안의 경보를 탐지로 본다

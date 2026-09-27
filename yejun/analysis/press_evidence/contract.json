@@ -1,0 +1,77 @@
+{
+  "package": "press_evidence",
+  "purpose": "진단·근거 보강 표(build_tables.py 17표, build_diagnostics.py 16표·그림 5장). 검증: python analysis/package_contract.py --package analysis/press_evidence",
+  "outputs": [
+    "variable_dictionary.csv",
+    "imbalance.csv",
+    "outliers.csv",
+    "quality_index.csv",
+    "class_differences.csv",
+    "split_context.csv",
+    "block_context.csv",
+    "ar2_oscillator.csv",
+    "amplitude_reliability.csv",
+    "component_combinations.csv",
+    "component_correlation.csv",
+    "first_alarm_reason.csv",
+    "calibration_curve.csv",
+    "duplicate_rows.csv",
+    "current_grid.csv",
+    "gaps.csv",
+    "segment_rule_tolerance.csv",
+    "sensor_relations.csv",
+    "operating_variation.csv",
+    "false_alarm_operating_level.csv",
+    "observability.csv",
+    "production_unit_evidence.csv",
+    "abnormal_segments.csv",
+    "abnormal_summary.csv",
+    "outlier_rules.csv",
+    "quality_index_weighted.csv",
+    "guidebook_stats_match.csv",
+    "rolling_calibration_curve.csv",
+    "phase_continuity.csv",
+    "guidebook_protocol_vs_records.csv",
+    "variable_expected_signals.csv",
+    "failure_mode_map.csv",
+    "decision_table_diagnosis_v2.csv",
+    "figures/fig_d2a_timeline.png",
+    "figures/fig_d2b_blocks.png",
+    "figures/fig_d2c_raw_examples.png",
+    "figures/fig_d2d_relations.png",
+    "figures/fig_d2e_format_leak.png"
+  ],
+  "manifests": {
+    "manifest.json": {
+      "groups": {
+        "input_hashes": "data",
+        "artifacts": "guard",
+        "code_sha256": "auto",
+        "sources": "auto",
+        "outputs": "outputs"
+      }
+    },
+    "diagnostics_manifest.json": {
+      "groups": {
+        "input_hashes": "data",
+        "artifacts": "guard",
+        "code_sha256": "auto",
+        "sources": "auto",
+        "cited": "auto",
+        "outputs": "outputs"
+      }
+    }
+  },
+  "tolerance": 1e-09,
+  "meta_keys": [
+    "elapsed_s",
+    "environment",
+    "created",
+    "run_id"
+  ],
+  "run_options": [],
+  "commands": [
+    "python analysis/press_evidence/build_tables.py",
+    "python analysis/press_evidence/build_diagnostics.py"
+  ]
+}

@@ -1,0 +1,12 @@
+stage,source,rules,names,before_v2_selection
+v1 비교,yejun/press_submission/outputs/model_comparison_all.csv,10,5nn_distance combined_w8 isolation_forest lstm20 lstm20_plus_maxz maxz_3 maxz_vib2 mlp_ae_w5 sine_w8 trailing_rms5,예
+v1 창 민감도,yejun/press_submission/outputs/sensitivity.csv,15,combined_w10 combined_w12 combined_w15 combined_w20 combined_w5 combined_w6 combined_w8 maxz_3 sine_w10 sine_w12 sine_w15 sine_w20 sine_w5 sine_w6 sine_w8,예
+v1 절제,yejun/press_submission/outputs/ablation.csv,5,capped_tail(legacy_ecdf) full no_initial_maxz_fill no_magnitude(=sine_w8) no_sine(=maxz_3),예
+v1 지속성,yejun/press_submission/outputs/persistence.csv,3,persist_k1n1 persist_k2n3 persist_k3n3,예
+v1 진폭 정규화,yejun/press_submission/outputs/load_normalization.csv,3,loadnorm_resid_only loadnorm_resid_plus_sine main_combined_w8(reference),예
+improvement,yejun/analysis/press_improvement/candidate_metrics.csv,8,baseline_persist2of3 baseline_w8 early_w5_to_w8 early_w6_to_w8 loadnorm_magnitude_persist2of3 loadnorm_persist2of3 loadnorm_w8 magnitude_persist2of3,예
+advance(v2 선정),yejun/analysis/press_advance/metrics.csv,5,ar2_only baseline_w8 early6_ar2 early_w6_to_w8 maxz_ar2,예
+early,yejun/analysis/press_early/metrics.csv,6,diff1_only joint_only v2 v2_diff1 v2_joint v2_joint_diff1,예
+v2 절제,yejun/press_guard/outputs/ablation_v2.csv,5,no_dynamics no_early_switch no_magnitude no_waveform v2,아니오(선정 후 설명·비교)
+지도학습 기준선,yejun/analysis/press_supervised/grouped_records.csv,4,hgb hgb_balanced logistic logistic_balanced,아니오(선정 후 설명·비교)
+가이드북 LSTM-AE,yejun/press_submission/outputs/lstm_guidebook_reproduction.json,1,guidebook_lstm_ae,아니오(선정 후 설명·비교)

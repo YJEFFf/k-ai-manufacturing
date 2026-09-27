@@ -1,0 +1,13 @@
+split,subset,pair,rows,spearman
+A,abnormal,magnitude~waveform,499,0.0579871417456354
+A,abnormal,magnitude~dynamics,499,0.023565216918912543
+A,abnormal,waveform~dynamics,499,0.0058736267716155205
+A,normal,magnitude~waveform,3497,-0.25077001214694583
+A,normal,magnitude~dynamics,3497,0.05978076035781564
+A,normal,waveform~dynamics,3497,-0.18082663032451002
+B,abnormal,magnitude~waveform,499,0.05826563081435676
+B,abnormal,magnitude~dynamics,499,0.02388407341802356
+B,abnormal,waveform~dynamics,499,0.0058818359610787845
+B,normal,magnitude~waveform,5205,-0.3423509655110991
+B,normal,magnitude~dynamics,5205,0.07940955413606178
+B,normal,waveform~dynamics,5205,-0.14273935926832215

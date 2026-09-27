@@ -1,0 +1,28 @@
+{
+  "package": "press_supervised",
+  "purpose": "라벨 지도학습 기준선(run.py). 검증: python analysis/package_contract.py --package analysis/press_supervised",
+  "outputs": [
+    "random_rows.csv",
+    "grouped_records.csv",
+    "injection.csv"
+  ],
+  "manifests": {
+    "manifest.json": {
+      "groups": {
+        "input_hashes": "data",
+        "code_sha256": "auto",
+        "dependencies": "auto",
+        "outputs": "outputs"
+      }
+    }
+  },
+  "tolerance": 1e-09,
+  "meta_keys": [
+    "elapsed_s",
+    "environment"
+  ],
+  "run_options": [],
+  "commands": [
+    "python analysis/press_supervised/run.py"
+  ]
+}

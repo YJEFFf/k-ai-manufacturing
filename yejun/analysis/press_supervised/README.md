@@ -73,8 +73,15 @@
 
 ## 재현
 
+`yejun/`에서 실행한다(PowerShell은 첫 줄 대신 `$env:OMP_NUM_THREADS=1; $env:PYTHONDONTWRITEBYTECODE=1`). 시간은 이 기기(Apple M2) 실측이다.
+
 ```bash
-OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/analysis/press_supervised/run.py   # 약 4분
+export OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
+python analysis/press_supervised/run.py                                     # 약 2.5분(140초), 결과를 이 폴더에 쓴다
+python analysis/press_supervised/run.py --out <폴더>                        # 다른 폴더에 다시 만들기
+python analysis/package_contract.py --package analysis/press_supervised     # 실행 기록 무결성 + 동결 기대값 비교
+python analysis/package_contract.py --package analysis/press_supervised --out <폴더>   # 다시 만든 결과를 동결값과 비교
+python -m pytest -q analysis/press_supervised/test_contract.py              # 변조·삭제 검출
 ```
 
-입력·코드·의존 파일(E1 요약, press_guard model.py, 동결 guard_A/B)·산출물 해시는 [manifest.json](manifest.json)에 있다.
+입력·코드·의존 파일(E1 요약, press_guard model.py, 동결 guard_A/B)·산출물 해시는 [manifest.json](manifest.json)에 있다. 공용 검사기 [package_contract.py](../package_contract.py)가 [contract.json](contract.json)에 따라 이 기록을 현재 파일과 대조하고, 결과 CSV 3개를 [expected/](expected)의 동결값과 비교한다(수치 허용오차 1e-9, 평가관 06 R8). 의존 파일(E1 요약·v2 모델)이 바뀌면 다시 실행해야 통과한다.

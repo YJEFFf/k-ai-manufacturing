@@ -1,0 +1,4 @@
+column,guidebook_meaning,observed_property,expected_signal_hypothesis,v2_component,failure_modes,dictionary
+AI0_Vibration,유압펌프 상부진동,"정상 음수 50.1%, 평균 -9.4e-05, 기록 안 lag-1 0.033: 10 Hz 순시값 표본(RMS 아님)",기어 마모 시 진동·소음이 심해진다(가이드북 7쪽) → 진동 SD·첨두 증가. 결함 주파수(수십 Hz~kHz)는 5 Hz 위라 접혀 들어와 광대역 에너지로만 보인다(가설),크기(max|z|),"FM1, FM2, FM3, FM4",yejun/analysis/press_evidence/variable_dictionary.csv:4
+AI1_Vibration,유압펌프 하부진동,"정상 음수 54.2%, 평균 -9.3e-05, 기록 안 lag-1 0.319: 10 Hz 순시값 표본(RMS 아님)",기어 마모 시 진동·소음이 심해진다(가이드북 7쪽) → 진동 SD·첨두 증가. 결함 주파수(수십 Hz~kHz)는 5 Hz 위라 접혀 들어와 광대역 에너지로만 보인다(가설),크기(max|z|),"FM1, FM2, FM3, FM4",yejun/analysis/press_evidence/variable_dictionary.csv:5
+AI2_Current,유압펌프 전류,"정상 음수 49.6%, 기록 안 lag-1 0.928(순수 0.6 Hz 사인 0.930), 거의 순수 0.6 Hz 사인",출력 유압이 약해지면 같은 가압에 드는 전류의 진폭·수준·파형이 바뀔 수 있다(가설. 가이드북 7쪽은 전류를 직접 언급하지 않는다),파형(사인 1−R²)·예측 오차(AR(2))·크기(AI2 |z|),"FM4, FM5, FM6",yejun/analysis/press_evidence/variable_dictionary.csv:6

@@ -1,8 +1,8 @@
 {
   "experiment": "E3",
   "protocol": "press-supplement-v1",
-  "run_id": "f9ec122188994771a82787a61aa865f2",
-  "created": "2026-09-26T21:58:36+0900",
+  "run_id": "ce45dc1b45aa41e892cdf6063ca7f130",
+  "created": "2026-09-27T18:48:47+0900",
   "config": {
     "configs": 184,
     "workers": 4,
@@ -33,20 +33,20 @@
     ]
   },
   "code": {
-    "analysis/press_supplement/common.py": "06b6983270810fabffe64042f15944211b5d66d657c7062eb329f3bfb8b20922",
-    "analysis/press_supplement/contract.py": "2650b021c92e8bfe0b6ffc664a1e0c8204e56177b96f364f466b84b7d2091c75",
+    "analysis/press_supplement/common.py": "3cc480e147ba5e1b48c417a8cec104453093d761aabc943d8df2e23d60a7a08a",
+    "analysis/press_supplement/contract.py": "4fc82363a768b3aa4acb6b4fbe0c9b547bb9091f4fb122fbab81d515c64ee78c",
     "analysis/press_supplement/protocol.json": "4c6bf75677b7f9a43b7faf9c7869d7ad5b6511a8ae1eb26ff0370ec6693ade81",
-    "press_guard/model.py": "7a2d709c2cd5adf874a80eb792eec510021ffabb9280a6e41dc6d3fcabea89c0",
-    "press_guard/train.py": "d0f97840d7e9da84313ee841019728d2f2211a8e0881dfb186895e82b82e4acc",
+    "press_guard/model.py": "1602db8f6a0845f1043e56c9721297f93418a20b87852b8ea50b3400dd18a761",
+    "press_guard/train.py": "5e5eac9a11bd3e2d3b08e101ff77248b9d6a5b68068ab17f59d197b0eb76e081",
     "analysis/press_supplement/recalibration.py": "266fdbcbf2b25a012e6654dc95d1ff4d9ba5f3781bd13f8c345f2349bc9aaf8a",
-    "press_submission/press/* (code_sha256)": "362db343a42f5224e977bc81f43a7bbd5549b3d1a2d1e720b633b729404f58d7"
+    "press_submission/press/* (code_sha256)": "0fd0718e47ccf8a7797142b905b88df1f7b33457709d30f3b1fa904f16385004"
   },
   "inputs": {
     "normal": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
     "abnormal": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e"
   },
   "artifacts": {
-    "guard_A.json": "63234e1bc2a646b34694df0bc4d51507c86c5f6efaaaf065eef108bd6b2514ad"
+    "guard_A.json": "7873bb5dcaab78ef7b09d7c72caa0f620a9098bbc8ccfd297acf0ae37349db58"
   },
   "sources": {},
   "outputs": {
@@ -88,5 +88,5 @@
       }
     ]
   },
-  "elapsed_s": 186.8
+  "elapsed_s": 160.4
 }

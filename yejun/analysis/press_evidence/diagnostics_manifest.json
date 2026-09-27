@@ -1,0 +1,174 @@
+{
+  "purpose": "루브릭 사이클2 1회차 평가관 01 D1~D6·평가관 05 O1(a)·O4 진단 보강 표와 그림",
+  "input_hashes": {
+    "normal": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+    "abnormal": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e"
+  },
+  "artifacts": {
+    "guard_A.json": "7873bb5dcaab78ef7b09d7c72caa0f620a9098bbc8ccfd297acf0ae37349db58",
+    "guard_B.json": "3bfd17a5b0b765be2a80b59c6d864444dcebf31210df9d5280f2557d3c254cd3"
+  },
+  "code_sha256": {
+    "yejun/analysis/press_evidence/build_diagnostics.py": "cefd85070f62844022cc74dd5b7fd225f3b90bb354a1cf7007b60a5f62a914b5",
+    "yejun/analysis/press_evidence/figures.py": "13fe13415feb3176e2610160b6d1e73768f40d0f5a2028aaed35678da72eb4c1",
+    "yejun/analysis/press_evidence/build_tables.py": "bed2ded956c76d046f6fd581ee3a5f91a8b8444e80e15f3b77424e8122714d00",
+    "yejun/press_guard/model.py": "1602db8f6a0845f1043e56c9721297f93418a20b87852b8ea50b3400dd18a761",
+    "yejun/press_submission/press/diagnosis.py": "f7ecb071d7c9c9b25c670bcb6052f8201ca2e03e991b57f9fe13fec6346cf499",
+    "yejun/press_submission/press/data.py": "81dc394c8b0b53618177e5822c7cc0f7ff7c7f060d08471c968b4cfaaa05411f"
+  },
+  "sources": {
+    "yejun/press_guard/outputs/coupling_fit_v2.csv": "bc6786eb5d87b22bbc989430cf859dba4238d1629d82bae18d3ed8d2c297df70",
+    "yejun/press_guard/outputs/rolling.csv": "f7fd51580796b3e310b1a66d146e1703600119a10f557963cec3081c4e16c73b",
+    "yejun/press_guard/outputs/ablation_v2.csv": "1a5b97c9a88ad908eed89ae91e673cea9275405498e2c63264c838cf60c3fbe0",
+    "yejun/press_guard/outputs/uncertainty_v2.csv": "c10df72d1662caf044679acbe88c65c1384ba8c68b8d36188926f40ff07aec72",
+    "yejun/press_submission/outputs/load_normalization_meta.csv": "4f933704fe30005e636edb55829870d8434330afc28313a55d9cda27a1b35938",
+    "yejun/analysis/press_supplement/e1_summary.csv": "ac599f2408e6eb8cf03c51ca8f83ffa34ba4cb11d48a168b23e43195ab980344",
+    "yejun/analysis/press_supplement/e1_detection_floor.csv": "e0c97954bf46b00895d2e5310ddceb15297aa38b4d995b22715eb1d2ecf96975",
+    "yejun/analysis/press_supplement/e2_uci_metrics.csv": "9182c3046dbe0d43527b3ff1138944ac98a540529de37ef2d7ae4793887f6534",
+    "yejun/analysis/press_supplement/e3_stability.csv": "4447e30b858fc32df317a565ebc86720e7759e802a3a9960f0c27e9c5005762c",
+    "yejun/analysis/press_supervised/random_rows.csv": "b48137569867b7b0300fc1b9878bcd83c88f3895b190ae4bbe4158c113ee8b98",
+    "yejun/analysis/press_supervised/grouped_records.csv": "f33b034997209fbc9f2c767a4c9fcd9fe536ecad315ee80d66f55ed1851b1341",
+    "yejun/analysis/press_evidence/gaps.csv": "b19fbc020a5576e9919cd5b2c7ba8fc4d0aba0e1aca4d035bc1505458d73df82",
+    "yejun/analysis/press_evidence/imbalance.csv": "25f925cd4096060404131c75ee6fcf5438a7a0e9bc09415dd1f7c43868ffa917",
+    "yejun/analysis/press_evidence/outliers.csv": "704fb6abb05fb56e34ef97c1e68ce872d08ded3220076c3974ec815599711e0c",
+    "yejun/analysis/press_evidence/quality_index.csv": "2c09f0c14471692026ac9909d73fddf7076ac0e317dea11b8f7576976078fe91",
+    "yejun/analysis/press_evidence/block_context.csv": "5e780a19fa57170ebb234f64c67fb469de436cb1e73095ee5933a066d5cbd154",
+    "yejun/analysis/press_evidence/current_grid.csv": "de3ded79e0da43e754b9e2c05aa084f679193d58ff161b3a3877216b27a26f28",
+    "yejun/analysis/press_evidence/class_differences.csv": "7305ce3ca6e576bea7079bfd8a4deb8a611e65c3021e5c54e4c2486435ce05c1"
+  },
+  "cited": {
+    "yejun/analysis/press_evidence/ar2_oscillator.csv": "d4e10ac087b2f5026e9062d7d030f73c6022f1298df1a50a75ff3eb7edfda2bc",
+    "yejun/analysis/press_evidence/calibration_curve.csv": "741576f1e6c724e17c5c3abca29954e3e66bef2943e192b0911a83b8071e824c",
+    "yejun/analysis/press_evidence/duplicate_rows.csv": "b00c711beb3262b67f6345b8426bb4f64f75103fbc3ba211d57baee82ca03a9d",
+    "yejun/analysis/press_evidence/gaps.csv": "b19fbc020a5576e9919cd5b2c7ba8fc4d0aba0e1aca4d035bc1505458d73df82",
+    "yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv": "186a5d41bcec397efbb30ff0eb2b8717e0cc1d5ab6a0ec19c861db7bb7f68771",
+    "yejun/analysis/press_evidence/imbalance.csv": "25f925cd4096060404131c75ee6fcf5438a7a0e9bc09415dd1f7c43868ffa917",
+    "yejun/analysis/press_evidence/outlier_rules.csv": "b287d22b9ec8ed75c5280b89c0f940a39ebaf7b418c78576698c751d523c413f",
+    "yejun/analysis/press_evidence/outliers.csv": "704fb6abb05fb56e34ef97c1e68ce872d08ded3220076c3974ec815599711e0c",
+    "yejun/analysis/press_evidence/rolling_calibration_curve.csv": "b7581b4c800658685e8ec702e86e56f01779d92b5b42c66fd7adb53d8ca1956b",
+    "yejun/analysis/press_evidence/segment_rule_tolerance.csv": "bb37d8d96c62cae9f0dc2ee35f33bfa763c766c5113e86d69e9a54b995698e9d",
+    "yejun/analysis/press_evidence/variable_dictionary.csv": "a3deb159b45ef67210f09ef880b3591284df5307d1fbe573b57ca5bcb129a581",
+    "yejun/analysis/press_supervised/grouped_records.csv": "f33b034997209fbc9f2c767a4c9fcd9fe536ecad315ee80d66f55ed1851b1341",
+    "yejun/analysis/press_supervised/random_rows.csv": "b48137569867b7b0300fc1b9878bcd83c88f3895b190ae4bbe4158c113ee8b98",
+    "yejun/analysis/press_supplement/e1_detection_floor.csv": "e0c97954bf46b00895d2e5310ddceb15297aa38b4d995b22715eb1d2ecf96975",
+    "yejun/analysis/press_supplement/e1_summary.csv": "ac599f2408e6eb8cf03c51ca8f83ffa34ba4cb11d48a168b23e43195ab980344",
+    "yejun/analysis/press_supplement/e2_uci_metrics.csv": "9182c3046dbe0d43527b3ff1138944ac98a540529de37ef2d7ae4793887f6534",
+    "yejun/analysis/press_supplement/e3_stability.csv": "4447e30b858fc32df317a565ebc86720e7759e802a3a9960f0c27e9c5005762c",
+    "yejun/press_guard/model.py": "1602db8f6a0845f1043e56c9721297f93418a20b87852b8ea50b3400dd18a761",
+    "yejun/press_guard/outputs/ablation_v2.csv": "1a5b97c9a88ad908eed89ae91e673cea9275405498e2c63264c838cf60c3fbe0",
+    "yejun/press_guard/outputs/coupling_fit_v2.csv": "bc6786eb5d87b22bbc989430cf859dba4238d1629d82bae18d3ed8d2c297df70",
+    "yejun/press_guard/outputs/uncertainty_v2.csv": "c10df72d1662caf044679acbe88c65c1384ba8c68b8d36188926f40ff07aec72",
+    "yejun/press_guard/test_guard.py": "da7ab34f8f1ea80de3af73222b7ee33cf6ac7d5d8ab59acea6f4a2609db79bf9",
+    "yejun/press_submission/README.md": "aa5e7cf27f2092a38285c485f4728fb09b3bf9d2143bb90a7347a2d58304c795",
+    "yejun/press_submission/outputs/diagnosis.md": "a5f675ae7a993a792f2aef0de57feb8536cdb2fd7ea177c061ffbf165db29e0d",
+    "yejun/press_submission/outputs/label_bypass.csv": "0dc378785b250b2d213cd0f17b5bd2543c7cea2afff29e1434d4d418c5249144",
+    "yejun/press_submission/outputs/load_normalization_meta.csv": "4f933704fe30005e636edb55829870d8434330afc28313a55d9cda27a1b35938",
+    "yejun/press_submission/outputs/splits.csv": "616f348579ff313e3bbc5e592a26f29a92f7c7ce6a3e5369980cddc4e6de1880"
+  },
+  "rolling_folds": [
+    {
+      "fold": "normal_300_359",
+      "train_end": 180,
+      "n_cal": 120,
+      "same_as_frozen": ""
+    },
+    {
+      "fold": "normal_360_419",
+      "train_end": 240,
+      "n_cal": 120,
+      "same_as_frozen": ""
+    },
+    {
+      "fold": "normal_420_479",
+      "train_end": 300,
+      "n_cal": 120,
+      "same_as_frozen": "B"
+    },
+    {
+      "fold": "normal_480_539",
+      "train_end": 360,
+      "n_cal": 120,
+      "same_as_frozen": "A"
+    },
+    {
+      "fold": "normal_540_599",
+      "train_end": 420,
+      "n_cal": 120,
+      "same_as_frozen": ""
+    }
+  ],
+  "outputs": {
+    "sensor_relations.csv": "09a58006012f1f0191c9d45a58a12f21c5c5f74b29788273391eecdeab8da4e0",
+    "operating_variation.csv": "1a9b95468647837a9a5de9ac70ae234403eaf2cb529f658a8b804a3469be5dec",
+    "false_alarm_operating_level.csv": "b1963ac44dd8d4b5edc7ec40f131caa5f92b7538962fe9644c450d56f9a4e031",
+    "observability.csv": "1ffe48888b2d6c923622205caaa609a894d0ec159913ebb5a18ca60ca342e1df",
+    "production_unit_evidence.csv": "3688bb999fbf6879b18547a1ce26bf26b7ee2b9e82b1a18c2dc64f84c8ef6f83",
+    "abnormal_segments.csv": "b19eedfd8d07b2523221466e1e28ae1e18a44686bca2d2c28fc11f8ea67c0b42",
+    "abnormal_summary.csv": "81b2464b8fb5ec745b491c562eca47d619b09d910ce7afd4a20b1fcf1bd58003",
+    "outlier_rules.csv": "b287d22b9ec8ed75c5280b89c0f940a39ebaf7b418c78576698c751d523c413f",
+    "quality_index_weighted.csv": "a213716f22ca4c1a23d34657d6188146adce6b0a9af2e286a0f5989f9d1abb8b",
+    "guidebook_stats_match.csv": "fe3a6755e6036044cb4b02554b731a53685614c2d080339fb9b3db757bfa6fee",
+    "rolling_calibration_curve.csv": "b7581b4c800658685e8ec702e86e56f01779d92b5b42c66fd7adb53d8ca1956b",
+    "phase_continuity.csv": "51d4f832068c689d4f2a56e4bdb3cfaf8892c165c4af48f976fef23010651503",
+    "guidebook_protocol_vs_records.csv": "186a5d41bcec397efbb30ff0eb2b8717e0cc1d5ab6a0ec19c861db7bb7f68771",
+    "variable_expected_signals.csv": "c8774f36b86d4ee0a7931a1b447a17d46686a49e282809ab1233220c14bed8f6",
+    "failure_mode_map.csv": "1f1052f11229bca42f264a2d211cb8c089c066567441e3e23b46ab2b1f54ac50",
+    "decision_table_diagnosis_v2.csv": "9be43bc81b14aed11acbf06126aace0887424b267d38e61d089e31e182d2ef60",
+    "yejun/analysis/press_evidence/figures/fig_d2a_timeline.png": "4d019b78ed55a480043a31a56ec0ebbd927e3734492139e39375388fd20b16af",
+    "yejun/analysis/press_evidence/figures/fig_d2b_blocks.png": "62d298a07efdde16dcb784e42977f43e87f662028fce65440c73e6b8ec9df6a7",
+    "yejun/analysis/press_evidence/figures/fig_d2c_raw_examples.png": "4a0eeb7a8597d438b6bc1b67eae0981cc70d90c5298b98f2483fe5d1c9e0d0b0",
+    "yejun/analysis/press_evidence/figures/fig_d2d_relations.png": "d64740b64078984ef7d88c1993789bc847a5dbf2fbd395ff4d0e4d813253ed49",
+    "yejun/analysis/press_evidence/figures/fig_d2e_format_leak.png": "ce23525f4de3d415d672d2a82819b09be7bb2bbce5e08c6814e2358bb7ac8b80"
+  },
+  "table_notes": {
+    "sensor_relations.csv": "기술 통계. 관계를 인과·고장 근거로 쓰지 않는다. 행 상관은 원본 전체 행, 구간 수준은 길이≥17 기록구간",
+    "operating_variation.csv": "정상 운전변화 정의(기술): 진동 크기와 전류 진폭이 함께 오르내리는 부하 수준 변화. 10분 블록 전류 RMS 중앙값은 전체의 0.85~1.29배. 블록 간 Spearman(전류~AI0 SD) 0.71, (전류~AI1 SD) 0.93",
+    "false_alarm_operating_level.csv": "동결 B, α=1% 정상 평가의 오경보 구간. 백분위 분모는 정상 600구간 전체(길이 1 구간의 SD는 결측으로 '작지 않음'). 운전 강도가 높은 쪽에 있다는 기술이며 원인 판정이 아니다",
+    "observability.csv": "10 Hz 순시값 표본이라 나이퀴스트 5 Hz 위(베어링 결함·펌프 맥동·캐비테이션의 수십 Hz~kHz)는 식별할 수 없다. 크기 성분은 광대역 에너지 변화만 본다. 정상 원본 기준(lag-1은 같은 기록구간 안 이웃 행)",
+    "production_unit_evidence.csv": "기록구간은 사건 트리거·스트로크 단위가 아니고, 전류는 거의 순수 0.6 Hz 사인이다. 모든 해석은 가설이며 물리 단위·원인을 단정하지 않는다",
+    "abnormal_segments.csv": "라벨 일관성 점검(성능 주장 아님). 진동으로만 벗어나는 짧은 구간과 파형으로만 벗어나는 저진동 구간이 서로 다르다(R18 성분 상보성을 자료 쪽에서 뒷받침)",
+    "outlier_rules.csv": "기준은 A 학습 구간(0~359). 관행 1.5×IQR로 진동 이상치를 지우면 이상 행 246/600(41%)와 정상 비학습 206행(2.6%)이 사라진다. 결정: 이상치를 제거하지 않는다(outliers.csv, R3)",
+    "quality_index_weighted.csv": "가이드북 63쪽 표 1·2. 가중치 완전성 60%, 유일성·유효성·일관성·무결성 각 10%, 정확성 제외. 정상 합계 재계산 96.666은 가이드북 표시값 96.66과 같다(가중치 지수를 소수 2자리로 적은 표시 차이: 유일성 9.999→9.99, 무결성 6.667→6.67). 이상 100.00",
+    "guidebook_stats_match.csv": "가이드북 표 2·3(인쇄 10~11쪽) 30개 값을 원본으로 재계산했다. 소수 6자리 반올림 비교, 일치 30/30",
+    "rolling_calibration_curve.csv": "train.py --rolling과 같은 5겹(학습 0~end−1, 보정 직전 120구간, 평가 다음 60구간)을 다시 적합했다. 기록 최소 p ≤ k/121. 같은 날·교환가능성 가정 아래의 점검이며 새 날짜의 보장이 아니다. normal_420_479 폴드는 동결 B와 학습·보정이 같아 보정값이 비트 단위로 같다, normal_480_539 폴드는 동결 A와 학습·보정이 같아 보정값이 비트 단위로 같다. 동결 모델과 독립인 폴드는 3개다. 겹별 90% 구간 위로 벗어난 경우 0건, 아래로 벗어난 경우 5건(normal_480_539: 가장 조용한 블록에서 경보가 적은 쪽)",
+    "phase_continuity.csv": "정확한 시각의 연속 기계 주기(0.6 Hz ≈ 분당 36회)라면 3초 안팎 공백을 넘어서도 위상이 이어져야 한다. 관측은 이 가설과 맞지 않고, 교류 전류 순시값의 앨리어싱(또는 기록 사이 시각 부정확)과 맞는다(확정 아님). 설계 연결: 창·AR을 기록구간 안에서만 쓰고, 위치 0·1을 직전 기록의 위상으로 채울 수 없다. 섞은 귀무는 다음 기록 위상의 순서를 섞은 200회(시드 2)",
+    "guidebook_protocol_vs_records.csv": "가이드북 프로토콜과 기록 구조의 충돌을 정량한 것. 가이드북 LSTM-AE 재현은 press_submission/outputs/lstm_guidebook_reproduction.json",
+    "variable_expected_signals.csv": "variable_dictionary.csv(R2)를 바꾸지 않고 연결한다. 기대 신호는 가설이며 이 자료로 고장 기전을 확인하지 않았다",
+    "failure_mode_map.csv": "E1은 같은 날 정상 기록에 더한 인공 신호(α=1%, 계단형, t0=10행, 2초 안 탐지율)이며 실제 고장 모양의 보장이 아니다. E2는 다른 설비(UCI) 누설",
+    "decision_table_diagnosis_v2.csv": "v2 기준 진단 → 전처리 → 검증 결정표. 근거의 `파일:행`은 실행 시점에 찾아 넣는다(인용 파일 해시는 manifest). 오경보 근거를 폴드끼리 합산하지 않는다(420~479 폴드 = 동결 B, 480~539 폴드 = 동결 A)"
+  },
+  "seeds": {
+    "simulation": 0,
+    "permutation": 2
+  },
+  "environment": {
+    "python": "3.12.2",
+    "platform": "macOS-26.3.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.8.0",
+    "scipy": "1.13.1",
+    "matplotlib": "3.9.2",
+    "blas": null,
+    "protocol_version": "v1",
+    "blas_runtime": [
+      {
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "version": "0.3.23.dev"
+      },
+      {
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "version": "0.3.27"
+      },
+      {
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "version": null
+      }
+    ]
+  },
+  "elapsed_s": 10.8
+}

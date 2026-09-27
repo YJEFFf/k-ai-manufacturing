@@ -4,12 +4,16 @@ from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib import font_manager
 import pandas as pd
 
 HERE = Path(__file__).resolve().parent
 V2, V1, REF = "#2a78d6", "#eb6834", "#8a8a85"   # dataviz 기본 범주 1·2번(검증기 통과), 기준선은 회색
 INK, MUTED, GRID = "#1f1f1e", "#5f5e58", "#e6e5df"
-plt.rcParams.update({"font.family": ["AppleGothic", "DejaVu Sans"], "axes.unicode_minus": False, "font.size": 9,
+# 한글 글꼴: macOS·Windows·Linux 순서. 설치된 것만 넣어 없는 글꼴 경고를 내지 않는다(macOS는 첫 글꼴 그대로라 그림이 바뀌지 않는다).
+KOREAN_FONTS = ("AppleGothic", "Apple SD Gothic Neo", "Malgun Gothic", "NanumGothic", "Nanum Gothic", "Noto Sans CJK KR")
+_installed = {f.name for f in font_manager.fontManager.ttflist}
+plt.rcParams.update({"font.family": [f for f in KOREAN_FONTS if f in _installed] + ["DejaVu Sans"], "axes.unicode_minus": False, "font.size": 9,
                      "axes.edgecolor": MUTED, "axes.labelcolor": INK, "xtick.color": MUTED, "ytick.color": MUTED,
                      "axes.spines.top": False, "axes.spines.right": False})
 NAMES = {"vib_noise": "진동 잡음 s(×정상 σ)", "cur_noise": "전류 잡음 s(×정상 σ)", "cur_offset": "전류 오프셋 d(×진폭)", "cur_gain": "전류 배율 k"}

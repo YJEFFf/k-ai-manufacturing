@@ -3,7 +3,7 @@
 원본 CSV와 동결 v2 모델(press_guard/artifacts)만 읽는다. v1·v2 동결 기대값 밖의 분석용 표이며 보고서 서술이 아니다.
 모델·문턱·분할은 바꾸지 않는다. 이미 본 이상 21구간을 쓰는 기술 통계다.
 
-    OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/analysis/press_evidence/build_tables.py
+    python yejun/analysis/press_evidence/build_tables.py
 """
 from pathlib import Path
 import json
@@ -431,6 +431,11 @@ def gaps_and_rule(raw):
 
 
 def main():
+    for stream in (sys.stdout, sys.stderr):     # 한국어 Windows(CP949) 콘솔에서 못 쓰는 기호는 바꿔 쓴다
+        try:
+            stream.reconfigure(errors="replace")
+        except (AttributeError, ValueError):
+            pass
     start = time.monotonic()
     normal, abnormal, report = D.load(BASE)
     raw = {"normal": normal, "abnormal": abnormal}

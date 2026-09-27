@@ -1,0 +1,7 @@
+split,first_alarm_reason,records
+A,magnitude,11
+A,dynamics,9
+A,magnitude+dynamics,1
+B,magnitude,12
+B,dynamics,8
+B,magnitude+dynamics,1
