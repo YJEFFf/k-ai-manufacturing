@@ -13,7 +13,8 @@
     "selection_evidence.csv",
     "unified_comparison.csv",
     "unified_comparison.md",
-    "rule_transfer_injection_v2.csv"
+    "rule_transfer_injection_v2.csv",
+    "level2_split_ratio.csv"
   ],
   "manifests": {
     "manifest.json": {

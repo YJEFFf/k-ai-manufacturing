@@ -56,7 +56,7 @@ def _import_guard(name):
 
 
 M = _import_guard("model")
-D, GuardModel, layout, alert_units = M.D, M.GuardModel, M.layout, M.alert_units
+D, GuardModel, layout, alert_units, incident_columns = M.D, M.GuardModel, M.layout, M.alert_units, M.incident_columns
 from press.calibrate import conformal_p, conformal_threshold, segment_max  # noqa: E402
 from press.field import LoadNormalizer, persistence_score  # noqa: E402
 from press.scores import ExpTail, Scorer, window_index  # noqa: E402
@@ -78,7 +78,8 @@ KEEP_FMAX = ("fmax 유지 이유: ① 사전 선택 유지 — 결합 규칙은 
              "g=−log10(정상 꼬리 확률)의 최댓값은 Tippett 최소 p 결합이다")
 OUTPUTS = ("same_feature_alternatives.csv", "combination_rules.csv", "fp_mitigation_v2.csv", "fp_mitigation_injection_v2.csv", "search_ledger.csv",
            "candidate_universe.csv", "nested_selection.csv", "paired_records.csv", "selection_evidence.csv",
-           "unified_comparison.csv", "unified_comparison.md", "rule_transfer_injection_v2.csv")
+           "unified_comparison.csv", "unified_comparison.md", "rule_transfer_injection_v2.csv", "level2_split_ratio.csv")
+SPLIT_RANDOM_SEEDS = 100      # 2단계 비 분할 민감도의 기록 단위 무작위 분할 수(시드 0~99)
 # 프로토콜(또는 계획)과 결과 파일이 처음 커밋된 곳. 실행 시 git 기록으로 다시 확인한다(git이 없으면 manifest에 미확인으로 남는다).
 PRECOMMIT = (
     dict(stage="v1 패키지", protocol="yejun/press_submission/PLAN.md", protocol_commit="4135c68", protocol_date="2026-09-24 16:29:59",
@@ -1004,17 +1005,20 @@ def compute(out):
     checks.update({f"supervised_{k}_matches_committed": v for k, v in ch.items()})
     unified = unified_comparison(ctxs, alternatives, rules, sup_rows)
     print(f"[{time.monotonic() - started:6.1f}s] M5", flush=True)
+    level2 = level2_split_ratio(normal, seg_all)
+    print(f"[{time.monotonic() - started:6.1f}s] 2단계 비 분할 민감도", flush=True)
     tables = {"same_feature_alternatives.csv": alternatives, "combination_rules.csv": rules, "fp_mitigation_v2.csv": mitigation,
               "fp_mitigation_injection_v2.csv": injection, "rule_transfer_injection_v2.csv": rule_transfer,
               "search_ledger.csv": ledger, "candidate_universe.csv": universe, "nested_selection.csv": nested,
-              "paired_records.csv": paired, "selection_evidence.csv": evidence, "unified_comparison.csv": unified}
+              "paired_records.csv": paired, "selection_evidence.csv": evidence, "unified_comparison.csv": unified,
+              "level2_split_ratio.csv": level2}
     out.mkdir(parents=True, exist_ok=True)
     for name, t in tables.items():
         t.to_csv(out / name, index=False)
     (out / "unified_comparison.md").write_text(unified_markdown(unified), encoding="utf-8")
     deps = {p: sha(YEJUN / p) for p in ("press_guard/model.py", "press_guard/artifacts/guard_A.json", "press_guard/artifacts/guard_B.json",
                                         "press_guard/outputs/metrics.csv", "press_guard/outputs/records_first_alarm_v2.csv",
-                                        "press_guard/outputs/ablation_v2.csv", "press_guard/outputs/rolling.csv",
+                                        "press_guard/outputs/ablation_v2.csv", "press_guard/outputs/rolling.csv", "press_guard/outputs/expected_effect_v2.csv",
                                         "press_submission/outputs/model_comparison_all.csv", "press_submission/outputs/sensitivity.csv",
                                         "press_submission/outputs/ablation.csv", "press_submission/outputs/persistence.csv",
                                         "press_submission/outputs/load_normalization.csv", "press_submission/outputs/lstm_guidebook_reproduction.json",
@@ -1031,6 +1035,44 @@ def compute(out):
                     outputs={n: sha(out / n) for n in OUTPUTS}, environment=D.environment(), elapsed_s=round(time.monotonic() - started, 1))
     return manifest
 
+
+# ---------------------------------------------------------------- 2단계 교대 추정의 분할 민감도(코덱스 재검수 보완 순서 4)
+def level2_split_ratio(normal, seg_all):
+    """2단계/1단계 사건 비가 정상 분할에 따라 얼마나 달라지는가(사후 민감도, 정상 기록만 사용).
+
+    전진(학습 [0,t)·보정 [t,t+120)·평가 [t+120,600), t=150~420), 시간 역순(뒤쪽으로 학습·보정, 앞쪽을 평가),
+    기록 단위 무작위(학습 300·보정 120·평가 180, 시드 0~99) 분할마다 GuardModel.fit으로 다시 적합한다. 평가 구간을 한 번 추론해 p값을 얻고
+    α마다 경보(p ≤ α)로 사건(60초 규칙)을 다시 묶어 1단계(사건 시작)·2단계(격상) 수를 센다. '모음' 행의 비는 합계의 비이고,
+    교대 추정은 1단계 명목(B α1%, expected_effect_v2.csv)에 그 비를 곱한 외삽이다. 무작위 분할의 평가 기록은 시간상 떨어져 있어
+    사건 묶음이 연속 수집과 다를 수 있다."""
+    nominal = float(pd.read_csv(GUARD / "outputs" / "expected_effect_v2.csv").query("alert_scenario == '명목'").level1_per_8h.iloc[0])
+    rec = np.arange(int(seg_all.max()) + 1)
+    n = len(rec)
+    splits = []
+    for t in range(150, n - 120 - 60 + 1, 10):
+        splits.append(("전진", f"f{t}", rec[:t], rec[t:t + 120], rec[t + 120:]))
+        splits.append(("시간 역순", f"r{t}", rec[n - t:], rec[n - t - 120:n - t], rec[:n - t - 120]))
+    for seed in range(SPLIT_RANDOM_SEEDS):
+        perm = np.random.default_rng(seed).permutation(n)
+        splits.append(("무작위", f"s{seed}", np.sort(perm[:300]), np.sort(perm[300:420]), np.sort(perm[420:])))
+    rows = []
+    for kind, name, tr, ca, te in splits:
+        model = GuardModel.fit(normal[np.isin(seg_all, tr)], normal[np.isin(seg_all, ca)], split=name)
+        p = model.predict(normal[np.isin(seg_all, te)], .01)
+        times = pd.to_datetime(p.timestamp, format="mixed", utc=True, errors="coerce")
+        for alpha in ALPHAS:
+            alarm = p.p_value.to_numpy() <= alpha
+            inc = incident_columns(p.record_id.to_numpy(), p.alert_unit.to_numpy(), alarm, p.reason.to_numpy(), times,
+                                   p.status.eq("ok").to_numpy(), p.time_order_event.to_numpy())
+            rows.append(dict(kind=kind, split=name, alpha=alpha, test_records=len(te), alarm_rows=int(alarm.sum()),
+                             level1=int(inc[:, 1].sum()), level2=int(inc[:, 2].sum())))
+    t = pd.DataFrame(rows)
+    pooled = t.groupby(["kind", "alpha"], sort=False)[["level1", "level2"]].sum().reset_index()
+    pooled["split"], pooled["test_records"], pooled["alarm_rows"] = "모음", np.nan, np.nan
+    t = pd.concat([t, pooled[t.columns]], ignore_index=True)
+    t["ratio"] = t.level2 / t.level1.where(t.level1 > 0)
+    t["level2_per_8h_extrapolated"] = nominal * t.ratio
+    return t
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)

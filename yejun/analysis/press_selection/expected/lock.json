@@ -13,7 +13,8 @@
     "unified_comparison.csv": "a52f5da059c44a3261a74c991a317245c9b633ce739270920593ff1fe70b4fab",
     "unified_comparison.md": "65559d03ec4003e328de97c224ee19b1480c960d87c1eeb53e3d67a9ee528969",
     "rule_transfer_injection_v2.csv": "f9cd350b775bbf5ca1293a8f5d8e9d937f8a62fbee809f9d61e341d1e6072d63",
-    "manifest.json": "1c3369f1961e5f5801234b3134912c0ded42fa92829c97e4d6d0094d29ef9899"
+    "level2_split_ratio.csv": "bb292db4258da5f0c9cd332af64f24f9f44572bfbf5bcd601966d0a65955a6c1",
+    "manifest.json": "2af695b192dbaca203beb18198ed5c7c41a687db920c61f4a2b929b6df912e49"
   },
   "images": [],
   "local": {},

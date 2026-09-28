@@ -5,7 +5,7 @@
     "abnormal": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e"
   },
   "code_sha256": {
-    "run.py": "dc9ce612edccfb32dca328f84bdfec4cb8ab6b862ac9aeb3d3524e683ca555fa"
+    "run.py": "e219f700c765e6fb7e4aa3bba2c5bc28c01657866a6a621dc719a7e11b0a5c5f"
   },
   "dependencies_sha256": {
     "press_guard/model.py": "647e4fb519cd7343d4002b56abdb3459f61d391d64071d3457fdb2834a000496",
@@ -15,6 +15,7 @@
     "press_guard/outputs/records_first_alarm_v2.csv": "14ba376ea2f5789655b0af14c389b7b5aa4c758b5734293d4afdd3e952fb058b",
     "press_guard/outputs/ablation_v2.csv": "1a5b97c9a88ad908eed89ae91e673cea9275405498e2c63264c838cf60c3fbe0",
     "press_guard/outputs/rolling.csv": "f7fd51580796b3e310b1a66d146e1703600119a10f557963cec3081c4e16c73b",
+    "press_guard/outputs/expected_effect_v2.csv": "94b696d2dde0848987b55ea1558ca61fa91e90f1f6a60fd996be80fe3fcc7ec0",
     "press_submission/outputs/model_comparison_all.csv": "21d43024c724604797eec94860d055d42166c2c89bf6ef470b6fa098e6d287f7",
     "press_submission/outputs/sensitivity.csv": "03d5e3e7eb282eda5549d45128871290daa6b1f8151f5a941a77c2eef14e8d88",
     "press_submission/outputs/ablation.csv": "d523cb63cde49b29fe25a20500b5a80e33071b411d6477740171d71bb7411906",
@@ -150,7 +151,8 @@
     "selection_evidence.csv": "9eaeff80c504d9d3e7d81f4a37bfd77dcda8b6f2f7023fae5e8165acd07b5674",
     "unified_comparison.csv": "a52f5da059c44a3261a74c991a317245c9b633ce739270920593ff1fe70b4fab",
     "unified_comparison.md": "65559d03ec4003e328de97c224ee19b1480c960d87c1eeb53e3d67a9ee528969",
-    "rule_transfer_injection_v2.csv": "f9cd350b775bbf5ca1293a8f5d8e9d937f8a62fbee809f9d61e341d1e6072d63"
+    "rule_transfer_injection_v2.csv": "f9cd350b775bbf5ca1293a8f5d8e9d937f8a62fbee809f9d61e341d1e6072d63",
+    "level2_split_ratio.csv": "bb292db4258da5f0c9cd332af64f24f9f44572bfbf5bcd601966d0a65955a6c1"
   },
   "environment": {
     "python": "3.12.2",
@@ -164,5 +166,5 @@
     "blas": null,
     "protocol_version": "v1"
   },
-  "elapsed_s": 66.6
+  "elapsed_s": 429.9
 }
