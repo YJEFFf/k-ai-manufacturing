@@ -1,0 +1,547 @@
+{
+ "/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r3/Q2_venv/clone": [
+  {
+   "file": "yejun/KAMP_가이드북_관련데이터셋_조사.md",
+   "record": false,
+   "patterns": {
+    "/tmp/": 2
+   },
+   "context": "의 `DATASET_SEQ`는 일부 다르므로 링크는 실제 목록에서 추출했다. - 공개 페이지 수집 결과는 `/tmp/kamp_free_catalog.json`, 재현 스크립트는 `/tmp/kamp_free_catalog.py`에 있다. 로그인 우회나 외부 연락"
+  },
+  {
+   "file": "yejun/analysis/energy_followup/classifier_experiment.py",
+   "record": false,
+   "patterns": {
+    "/tmp/": 2
+   },
+   "context": "high-load classifier audit, without parameter search.  Run: /tmp/kamp-review-venv/bin/python analysis/energy_followup/classifier_experiment.py On"
+  },
+  {
+   "file": "yejun/analysis/energy_followup/classifier_guide27_review.md",
+   "record": false,
+   "patterns": {
+    "/tmp/": 2
+   },
+   "context": "# ⑤ 원 가이드 후속 확인  2026-09-22. `/tmp/kamp-followup-cache/Guidebook_자원 최적화 AI 데이터셋.pdf`(84쪽)의 추출 본문에서 관련 표현을 검색하고, PDF"
+  },
+  {
+   "file": "yejun/analysis/energy_followup/classifier_results.json",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "{   \"source_zip\": \"/tmp/kamp_contest_energy.zip\",   \"source_csv_sha256\": \"8f7af2e49366c93e1d6f5fdef4b5e3"
+  },
+  {
+   "file": "yejun/analysis/energy_followup/compare_policies.py",
+   "record": false,
+   "patterns": {
+    "/tmp/": 2
+   },
+   "context": ".ArgumentParser();ap.add_argument('--interval-dir',default='/tmp/kamp-energy-interval-results')     ap.add_argument('--output',default='/tmp/kamp"
+  },
+  {
+   "file": "yejun/analysis/energy_followup/critique.md",
+   "record": false,
+   "patterns": {
+    "/tmp/": 2
+   },
+   "context": "on.py`, `interval_policy_audit.py`, `compare_policies.py`와 `/tmp/kamp-energy-interval-results`, `/tmp/kamp-energy-comparison`의 결과를 확인했다. 기존 실험 파일"
+  },
+  {
+   "file": "yejun/analysis/energy_followup/interval_policy_audit.py",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "=argparse.ArgumentParser();ap.add_argument('--zip',default='/tmp/kamp_contest_energy.zip')     ap.add_argument('--output',default=str(Path(__file"
+  },
+  {
+   "file": "yejun/analysis/energy_followup/window_experiment.py",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "arse.ArgumentParser()     ap.add_argument('--zip', default='/tmp/kamp_contest_energy.zip')     args = ap.parse_args()     out = Path(__file__).re"
+  },
+  {
+   "file": "yejun/analysis/energy_followup/window_report.md",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "께 평가해야 한다. 현재는 비용 절감·실제 피크 저감 또는 완성된 현장 제어를 입증하지 않았다.  재현: `/tmp/kamp-review-venv/bin/python analysis/energy_followup/window_experiment.py`. 출력은 "
+  },
+  {
+   "file": "yejun/analysis/followup_materials/build_ledger.py",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "UT=Path(__file__).resolve().parent catalog=json.loads(Path('/tmp/kamp_free_catalog.json').read_text())['entries'] source=next(p for p in ROOT.ite"
+  },
+  {
+   "file": "yejun/analysis/followup_materials/final_remaining_pdf_attempt.json",
+   "record": false,
+   "patterns": {
+    "/tmp/": 2
+   },
+   "context": " '['/bin/cp', '데이터셋/Guidebook_장비이상 조기탐지 AI 데이터셋.pdf', '/tmp/kamp-followup-cache/Guidebook_장비이상 조기탐지 AI 데이터셋.pdf']' timed out after 10 second"
+  },
+  {
+   "file": "yejun/analysis/followup_materials/id48_package_comparison.json",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "{   \"archive\": \"/tmp/kamp-followup-cache/Dataset_소성가공 예지보전 AI 데이터셋.zip\",   \"archive_sha256\": \"0bf0e7a"
+  },
+  {
+   "file": "yejun/analysis/followup_materials/id50_paired_audit.py",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "ipfile,json import pandas as pd,numpy as np path=next(Path('/tmp/kamp-followup-cache').glob('*정밀가공 품질보증*zip')) with zipfile.ZipFile(path) as z:d="
+  },
+  {
+   "file": "yejun/analysis/followup_materials/injection_recovered/audit_recovered.py",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "mport pandas as pd  HERE=Path(__file__).parent SOURCE=Path('/tmp/kamp-followup-cache/04. Dataset_Molding.zip')  def scalar(x):     if isinstance("
+  },
+  {
+   "file": "yejun/analysis/followup_materials/maintenance_and_welding_followup.md",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "근거를 기록한다. 페이지는 **PDF 파일의 순서**이며 인쇄 쪽수와 1쪽 차이 날 수 있다. 압축파일은 `/tmp/kamp-followup-cache` 사본에서 열고, CSV는 압축 안에서 읽었다. 보고서 양식은 열지 않았다.  이번 복구는 단순 자료 추가보"
+  },
+  {
+   "file": "yejun/analysis/followup_materials/material_access_retry.json",
+   "record": false,
+   "patterns": {
+    "/tmp/": 38
+   },
+   "context": "2026-09-22T18:41:34\",     \"status\": \"cached\",     \"cache\": \"/tmp/kamp-followup-cache/Dataset_소성가공 예지보전 AI 데이터셋.zip\"   },   {     \"source\": \"데이ᄐ"
+  },
+  {
+   "file": "yejun/analysis/followup_materials/material_access_retry_second_pass.json",
+   "record": false,
+   "patterns": {
+    "/tmp/": 16
+   },
+   "context": "y_timeout_10s\",     \"retry_status\": \"cached\",     \"cache\": \"/tmp/kamp-followup-cache/04. Dataset_Molding.zip\"   },   {     \"source\": \"데이터셋/0"
+  },
+  {
+   "file": "yejun/analysis/followup_materials/new_table_audit.py",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "sion_score  OUT=Path(__file__).resolve().parent;CACHE=Path('/tmp/kamp-followup-cache') FEATURES=['DV_R','DA_R','AV_R','AA_R','PM_R'] def tables(p"
+  },
+  {
+   "file": "yejun/analysis/followup_materials/press_guide_window_audit.py",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "t zipfile,json import numpy as np,pandas as pd P=next(Path('/tmp/kamp-followup-cache').glob('*소성가공 예지*zip'));out={} with zipfile.ZipFile(P) as z:"
+  },
+  {
+   "file": "yejun/analysis/followup_materials/retry_material_access.py",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "(__file__).resolve().parent ANALYSIS=OUT.parent CACHE=Path('/tmp/kamp-followup-cache');CACHE.mkdir(exist_ok=True) textdir=OUT/'pdf_text';textdir."
+  },
+  {
+   "file": "yejun/analysis/followup_materials/supplemental_signal_audit.json",
+   "record": true,
+   "patterns": {
+    "/tmp/": 4
+   },
+   "context": "{   \"2\": {     \"archive\": \"/tmp/kamp-followup-cache/02. Dataset_FordEngine.zip\",     \"files\": {       \"dataset/F"
+  },
+  {
+   "file": "yejun/analysis/followup_materials/supplemental_signal_audit.py",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "numpy as np OUT=Path(__file__).resolve().parent;CACHE=Path('/tmp/kamp-followup-cache');out={} def dprofile(d):  return {'rows':len(d),'columns':l"
+  },
+  {
+   "file": "yejun/analysis/press_dayshift/README.md",
+   "record": false,
+   "patterns": {
+    "/opt/anaconda3": 1
+   },
+   "context": " 충족했다.  ```bash OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/analysis/press_dayshift/run_analysis.py   # 약 30초 ```  원자료 ZIP"
+  },
+  {
+   "file": "yejun/analysis/press_dayshift/run_analysis.py",
+   "record": false,
+   "patterns": {
+    "/opt/anaconda3": 1
+   },
+   "context": "고정)을 구현한다.      OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/analysis/press_dayshift/run_analysis.py  참고 자료(KAMP 소성가공 자원최적화"
+  },
+  {
+   "file": "yejun/analysis/press_early/README.md",
+   "record": false,
+   "patterns": {
+    "/opt/anaconda3": 1
+   },
+   "context": " 확인했다.  ```bash OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/analysis/press_early/run_experiment.py ``` "
+  },
+  {
+   "file": "yejun/analysis/press_early/manifest.json",
+   "record": true,
+   "patterns": {
+    "/Volumes/": 3
+   },
+   "context": "r_than_v2\": false     }   },   \"inputs\": {     \"data_dir\": \"/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission/data/3_소성가공_예지보전\",     \"verif"
+  },
+  {
+   "file": "yejun/analysis/press_external/README.md",
+   "record": false,
+   "patterns": {
+    "/opt/anaconda3": 1
+   },
+   "context": "t 제외다.  ```bash OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/analysis/press_external/evaluate.py ```  정상 기준과 학습 센서가 달라지면 재검"
+  },
+  {
+   "file": "yejun/analysis/press_implementation_review/claude_recheck_2_results.json",
+   "record": false,
+   "patterns": {
+    "/Volumes/": 1
+   },
+   "context": "{   \"reviewed_package\": \"/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission\",   \"torch\": \"2.5.1\",   \"pyth"
+  },
+  {
+   "file": "yejun/analysis/press_implementation_review/codex_recheck_2.md",
+   "record": false,
+   "patterns": {
+    "/opt/anaconda3": 1,
+    "/tmp/": 2
+   },
+   "context": " 캐시 코드 변경 시 재학습, 결측 뒤 지속성 창 초기화, α별 최초 경보 위치도 일치 |  실행 환경은 `/opt/anaconda3/bin/python`, Python 3.12.2, numpy 1.26.4, pandas 2.3.3, scikit-learn 1.8.0, sci"
+  },
+  {
+   "file": "yejun/analysis/press_implementation_review/codex_recheck_2_execution.json",
+   "record": false,
+   "patterns": {
+    "/opt/anaconda3": 3
+   },
+   "context": "    \"command\": \"OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python -m pytest -q tests\"   },   \"clean_repro\": {     \"full\": {       \"git"
+  },
+  {
+   "file": "yejun/analysis/press_implementation_review/codex_recheck_2_legacy_results.json",
+   "record": false,
+   "patterns": {
+    "/Volumes/": 1
+   },
+   "context": "{   \"reviewed_package\": \"/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission\",   \"torch\": \"2.5.1\",   \"pyth"
+  },
+  {
+   "file": "yejun/analysis/press_implementation_review/codex_recheck_2_results.json",
+   "record": false,
+   "patterns": {
+    "/Volumes/": 1
+   },
+   "context": "b7bf52e66ddbdd652a02ccb919a1bb394f\",   \"reviewed_package\": \"/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission\",   \"python\": \"3.12.2 | packa"
+  },
+  {
+   "file": "yejun/analysis/press_improvement/README.md",
+   "record": false,
+   "patterns": {
+    "/opt/anaconda3": 1
+   },
+   "context": "``bash cd yejun OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python analysis/press_improvement/run_experiment.py ```  기본 데이터 위치는 `yejun/"
+  },
+  {
+   "file": "yejun/analysis/press_improvement/experiment_manifest.json",
+   "record": true,
+   "patterns": {
+    "/Volumes/": 3
+   },
+   "context": "83c2e211506ea87380e8ce0fd6\",   \"inputs\": {     \"data_dir\": \"/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission/data/3_소성가공_예지보전\",     \"verif"
+  },
+  {
+   "file": "yejun/analysis/press_merge_review/README.md",
+   "record": false,
+   "patterns": {
+    "/tmp/": 2
+   },
+   "context": "e/code/press/pipeline/run_all.py \\   --root DATA_ROOT --out /tmp/press-review-reproduction OMP_NUM_THREADS=1 python yejun/analysis/press_merge_re"
+  },
+  {
+   "file": "yejun/analysis/press_merge_review/path_checks.json",
+   "record": true,
+   "patterns": {
+    "/private/var": 1
+   },
+   "context": ": \"FileNotFoundError: [Errno 2] No such file or directory: '/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press-review-child-108n1_ss/claude/"
+  },
+  {
+   "file": "yejun/analysis/press_plan_review/plan_snapshot.md",
+   "record": false,
+   "patterns": {
+    "/Users/": 1
+   },
+   "context": "센서 원값 없음; 보고서·슬라이드·README·코드 주석·경로 문자열에서 소속·이메일·GitHub 조직명·`/Users/<이름>` 0건; PDF/PPTX 작성자 메타데이터 스크럽. 6. **G6 정렬**: `check_alignment.py` 통과. 7. **G7"
+  },
+  {
+   "file": "yejun/analysis/press_welding_review/README.md",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "```  마지막 경로에는 커밋 `1162c1d`의 `claude/code`를 지정한다. 이번 실행 경로는 `/tmp/kai-claude-review.XP9eUV/claude/code`였다. 실제 일별 집계만 재현할 때는 `--daily-only`를 추가한다. "
+  },
+  {
+   "file": "yejun/analysis/press_welding_review/press_policy_manifest.json",
+   "record": true,
+   "patterns": {
+    "/Users/": 1
+   },
+   "context": "{   \"source\": \"/Users/heoyejun/Documents/k-제조데이터/데이터셋/Dataset_소성가공 예지보전 AI 데이터셋.zip\",   \"des"
+  },
+  {
+   "file": "yejun/analysis/press_welding_review/press_policy_review.md",
+   "record": false,
+   "patterns": {
+    "/opt/anaconda3": 1
+   },
+   "context": "적용한다면 정상 보정부터 같은 정책을 적용해야 한다.  ## 재현 및 확인  ```bash cd yejun /opt/anaconda3/bin/python analysis/press_welding_review/press_policy_audit.py ```  `--zip`으로 원"
+  },
+  {
+   "file": "yejun/analysis/press_welding_review/welding_validation_audit.py",
+   "record": false,
+   "patterns": {
+    "/opt/anaconda3": 1
+   },
+   "context": "un/ with the reviewed Claude code directory, for example:   /opt/anaconda3/bin/python analysis/press_welding_review/welding_validation_audit.py \\     --cl"
+  },
+  {
+   "file": "yejun/analysis/press_welding_review/welding_validation_report.md",
+   "record": false,
+   "patterns": {
+    "/opt/anaconda3": 1
+   },
+   "context": "야 한다.  ## 재현과 산출물  ```sh cd yejun PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python analysis/press_welding_review/welding_validation_audit.py --claude-c"
+  },
+  {
+   "file": "yejun/analysis/press_welding_review/welding_validation_summary.json",
+   "record": false,
+   "patterns": {
+    "/Users/": 1,
+    "/tmp/": 1
+   },
+   "context": " \"numpy\": \"1.26.4\",   \"sklearn\": \"1.8.0\",   \"source_xlsx\": \"/Users/heoyejun/Documents/k-제조데이터/데이터셋/2. 용접기 AI 데이터셋/Welding Data "
+  },
+  {
+   "file": "yejun/analysis/press_workflow_audit/check_workflow.py",
+   "record": false,
+   "patterns": {
+    "/opt/anaconda3": 1
+   },
+   "context": "더에 근거만 쓴다.  실행: OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python \\       yejun/analysis/press_workflow_audit/check_workflow.py 기존 검수의"
+  },
+  {
+   "file": "yejun/analysis/press_workflow_audit/current_checks.json",
+   "record": true,
+   "patterns": {
+    "/opt/anaconda3": 2
+   },
+   "context": "    \"command\": \"OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python -m pytest -q yejun/press_submission/tests\",     \"chunk_id\": \"b712a3\""
+  },
+  {
+   "file": "yejun/analysis/reselection/audit_egg.py",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "ort sys import unicodedata import zlib  sys.path.insert(0, '/tmp/kamp-unegg-reader') import unegg  ROOT = Path(__file__).resolve().parents[3] OUT"
+  },
+  {
+   "file": "yejun/analysis/reselection/build_inventory.py",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "적화 방법 참고 범위.'}   def main():     catalog = json.loads(Path('/tmp/kamp_free_catalog.json').read_text())['entries']     mapping = json.loads((HERE "
+  },
+  {
+   "file": "yejun/analysis/reselection/energy_forecast_audit.py",
+   "record": false,
+   "patterns": {
+    "/tmp/": 2
+   },
+   "context": "uded, not silently repaired. Metrics use source units. Run: /tmp/kamp-review-venv/bin/python energy_forecast_audit.py --zip FILE \"\"\" from pathlib"
+  },
+  {
+   "file": "yejun/analysis/reselection/energy_sequence_overlap_audit.py",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "port pandas as pd import numpy as np  with zipfile.ZipFile('/tmp/kamp_contest_energy.zip') as z:     d=pd.read_csv(z.open(next(n for n in z.namel"
+  },
+  {
+   "file": "yejun/analysis/reselection/energy_vision_audit.md",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "(41)·공급망 최적화(26)·생산계획 최적화(30)의 본문과 분석 코드를 확인했다. 41·26 가이드는 `/tmp/kamp-energy-review`에 별도 사본을 보존했다. - 나머지 담당 PDF 및 ZIP은 실제 읽기를 요청했으나 일부가 macOS의 cl"
+  },
+  {
+   "file": "yejun/analysis/reselection/energy_vision_audit.py",
+   "record": false,
+   "patterns": {
+    "/tmp/": 2
+   },
+   "context": "ves in memory; never extract or modify originals.  Run with /tmp/kamp-review-venv/bin/python. JSON contains aggregate statistics, not source rows"
+  },
+  {
+   "file": "yejun/analysis/reselection/injection/audit_injection.py",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "\"\"\"Read-only archive/table audit. Run with /tmp/kamp-review-venv/bin/python.  Cloud placeholders are skipped. ZIPs are read in m"
+  },
+  {
+   "file": "yejun/analysis/reselection/injection/contest_injection_check.py",
+   "record": false,
+   "patterns": {
+    "/tmp/": 2
+   },
+   "context": "eq=8077; group-aware diagnostics, no ID predictors.  Input: /tmp/kamp_contest_8077_injection.zip, downloaded through official public POST https:/"
+  },
+  {
+   "file": "yejun/analysis/reselection/injection_contest_audit.md",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "데이터 CSV 네 개를 모두 메모리에서 해제하고 전체 행을 읽었다. 중첩 ZIP은 없다. - 입력 사본: `/tmp/kamp_contest_8077_injection.zip`. - 재현: `injection/contest_injection_check.py`, "
+  },
+  {
+   "file": "yejun/analysis/reselection/maintenance_audit.md",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "다.  ## 4. ID 45 로봇용접 예지보전: 이번에 재확인한 페이지의 범위  이 항목은 이전에 생성된 `/tmp/kamp_robot_guide_p10.png`, `p52.png`, `p53.png` 세 장을 직접 확인했다. **PDF 전체를 이번에 다시 읽"
+  },
+  {
+   "file": "yejun/analysis/reselection/maintenance_audit.py",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "ance candidates; never extracts archives to disk.  Run with /tmp/kamp-review-venv/bin/python analysis/reselection/maintenance_audit.py Skip macOS"
+  },
+  {
+   "file": "yejun/analysis/reselection/other_guides_review.md",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "nergy_vision/guide29.txt`에 있다. ID 25는 뒤늦게 읽을 수 있게 된 원 PDF를 `/tmp/kamp_chromate_25.pdf`로 보존한 뒤 확인했다.  ## 판단에 직접 영향을 주는 결론  이 13종 중 대회 ① 사출·② 저항 점용"
+  },
+  {
+   "file": "yejun/analysis/reselection/press_contest_audit.py",
+   "record": false,
+   "patterns": {
+    "/tmp/": 2
+   },
+   "context": "ormal data train/calibrate.  python press_contest_audit.py [/tmp/kamp_contest_8079.zip] No dates, file names, index or Equipment_state are used a"
+  },
+  {
+   "file": "yejun/analysis/reselection/press_contest_verdict.md",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": " 모든 내부 파일의 CRC를 확인하고 **정상·이상 CSV의 전체 행·전체 열**을 읽었다. 임시 원본은 `/tmp/kamp_contest_8079.zip`, 재현 코드와 수치는 `press_contest_audit.py/.json`에 있다. 이 결과는 앞선 "
+  },
+  {
+   "file": "yejun/analysis/reselection/welding_fresh_audit.py",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "mport pandas as pd  OUT = Path(__file__).parent ZIP = Path('/tmp/kamp-contest-originals/8078.zip')   def main():     result = {'source': 'https:/"
+  },
+  {
+   "file": "yejun/analysis/reselection/xray_contest_audit.md",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "서 **원래 ZIP 전체 다운로드·CRC를 완료했다는 뜻은 아니다.** 확보한 영상·텍스트만 별도 ZIP `/tmp/kamp-contest-originals/8080_image_label_recovered.zip`으로 보존했고, 이 ZIP은 전 항목 CRC 검"
+  },
+  {
+   "file": "yejun/analysis/reselection/xray_label_audit.py",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": " scipy import ndimage  HERE=Path(__file__).parent ZIP=Path('/tmp/kamp-contest-originals/8080_image_label_recovered.zip')   def main():     prefix"
+  },
+  {
+   "file": "yejun/analysis/reselection/xray_prefix_audit.py",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "pfile import numpy as np from PIL import Image  ZIP = Path('/tmp/kamp-contest-originals/8080.zip') OUT = Path(__file__).parent   def audit():    "
+  },
+  {
+   "file": "yejun/analysis/welding/README.md",
+   "record": false,
+   "patterns": {
+    "/tmp/": 1
+   },
+   "context": "plots ```  이미 분석에 사용한 임시 환경이 남아 있다면 다음으로 실행할 수 있다.  ```bash /tmp/kamp_selection/venv/bin/python analysis/welding/deep_dive.py --plots ```  기본 입력은"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "record": false,
+   "patterns": {
+    "/opt/anaconda3": 14,
+    "/tmp/": 2
+   },
+   "context": "에서 기존 `press_submission`의 고정 의존성이 설치된 Python을 사용한다. 현재 환경은 `/opt/anaconda3/bin/python`이다. 학습 상태·원본·행별 예측은 Git에 넣지 않는다.  ```bash OMP_NUM_THREADS=1 PYTHONDO"
+  },
+  {
+   "file": "yejun/press_guard/outputs/reproduce_summary.json",
+   "record": true,
+   "patterns": {
+    "/private/tmp": 50,
+    "judge06r3": 50
+   },
+   "context": "tep\": \"v1 선행(주 모델·기준모델·행별 예측)\",       \"command\": [         \"/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scra"
+  },
+  {
+   "file": "yejun/press_guard/tools/package_manifest.py",
+   "record": false,
+   "patterns": {
+    "/Users/": 2,
+    "/Volumes/": 2,
+    "/opt/anaconda3": 2,
+    "C:\\\\": 1
+   },
+   "context": "ternal_inputs 등)이 가리키는 파일의 존재,   넣을 문서·코드·실행 기록 JSON의 절대 경로(/Users/, /Volumes/, /opt/anaconda3, C:\\\\)를 본다. - 대회 제출 ZIP 조립은 예준의 지시 전까지 보류한다(yejun/AG"
+  }
+ ]
+}

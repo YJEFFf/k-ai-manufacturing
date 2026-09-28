@@ -1,0 +1,36 @@
+[   0.1s] HEAD 061fac8ae9a8373265434a5586cde956982db934 · status_before='?? yejun/analysis/press_rubric_review/cycle2/round3/'
+[  99.8s] 재학습: 0 99.6s · 로컬 모델=manifest True · 커밋 산출물=manifest True · 분석 산출물=manifest True
+[ 108.1s] 사건 요약 12행: 코드=독립 구현 True · CSV 일치 True · B α1% 이상 [1, 2]
+[ 275.2s] 스트림=일괄: {'mixed_B_original_time': {'batch_eq_independent': True, 'chunk7_incident_eq_batch': True, 'chunk7_case_cols_eq_batch': True, 'chunk128_incident_eq_batch': True, 'chunk128_case_cols_eq_batch': True}, 'continuous_B_one_record': {'batch_eq_independent': True, 'chunk7_incident_eq_batch': True, 'chunk7_case_cols_eq_batch': True, 'chunk128_incident_eq_batch': True, 'chunk128_case_cols_eq_batch': True}, 'chunk1_small': {'incident_eq_batch': True, 'batch_eq_independent': True}}
+[ 287.5s] 사건 단계 불일치: simulate [['사건 시작', 1], ['격상', 2]] · 사건 대기열 단계 [1] escalation_row [140]
+[ 335.5s] 지속 약한 이상(5창 평균):
+    family  level  records_alarmed  case_alerts  incidents  incident_alerts  max_incidents  mismatch_total
+ cur_noise    0.1             19.8         39.2        2.2              4.4              4               0
+ cur_noise    0.2             20.8         41.4        1.2              2.4              2               0
+cur_offset    0.2              0.0          0.0        0.0              0.0              0               0
+cur_offset    0.4              0.2          0.4        0.2              0.4              1               0
+ vib_noise    2.0             20.2         38.8        1.6              3.2              3               0
+ vib_noise    4.0             20.8         41.6        1.2              2.4              2               0
+[ 369.0s] 2단계 비 민감도:
+          basis  level1  level2    ratio  ratio_hi95  level2_per_8h  level2_per_8h_hi95
+독립 폴드 α5%(팀 채택)       9       1 0.111111    0.429136       3.287221           12.695972
+      독립 폴드 α3%       4       1 0.250000    0.751395       7.396248           22.230027
+       동결 B α3%       5       2 0.400000    0.810745      11.833997           23.985874
+       동결 B α5%       7       3 0.428571    0.774678      12.679283           22.918856
+       동결 A α5%       1       0 0.000000    0.950000       0.000000           28.105743
+독립 폴드 α5% 경보 기록(절대 번호:경보 행) {'rolling_test_300_359': {301: 1, 303: 2, 310: 1, 342: 1, 355: 1}, 'rolling_test_360_419': {367: 1, 402: 1}, 'rolling_test_540_599': {570: 1, 576: 1}}
+[ 369.0s] 기대효과 27행 식 일치 True · 비 0.1111(상한 0.4291) → 교대 3.29건(상한 12.70)
+[ 377.1s] 감시 x1.3_with_change: 창0 5단위 비1.143 → 재보정 검토(운전 조건 변경·수준 이동) | 창1 0단위 비0.99 → 관측 지속 | 창2 1단위 비1.013 → 관측 지속
+[ 377.1s] 감시 x1.3_no_change: 창0 5단위 비1.143 → 설비 점검 요청(열화 의심) | 창1 0단위 비0.99 → 관측 지속 | 창2 1단위 비1.013 → 관측 지속
+[ 377.1s] 감시 x1.5_no_change: 창0 12단위 비1.319 → 재보정 검토(운전 조건 변경·수준 이동) | 창1 0단위 비1.142 → 관측 지속 | 창2 5단위 비1.169 → 설비 점검 요청(열화 의심)
+[ 377.1s] 감시 vib1sigma_last_window_no_change: 창0 2단위 비0.879 → 관측 지속 | 창1 0단위 비0.762 → 관측 지속 | 창2 12단위 비0.779 → 설비 점검 요청(열화 의심)
+[ 377.1s] 감시 vib1sigma_last_window_with_change: 창0 2단위 비0.879 → 관측 지속 | 창1 0단위 비0.762 → 관측 지속 | 창2 12단위 비0.779 → 재보정 검토(운전 조건 변경·수준 이동)
+[ 377.1s] 감시 cur_offset0.2_last_window_no_change: 창0 2단위 비0.879 → 관측 지속 | 창1 0단위 비0.762 → 관측 지속 | 창2 1단위 비0.779 → 관측 지속
+[ 380.6s] 재보정 자료: 사건 내보내기 {'cases': 5, 'unconfirmed_cases': 5, 'rows_removed': 186, 'rows_kept': 15724} · 건 내보내기 {'cases': 5, 'unconfirmed_cases': 5, 'rows_removed': 186, 'rows_kept': 15724}
+[ 386.9s] monitor 명령: rc 0 · 창별 2/0/1
+[ 394.8s] 흔들림: 0ms 기록 180/21 미탐 31 경고 없음 · 1ms 기록 180/21 미탐 31 경고 없음 · 2ms 기록 180/21 미탐 31 경고 없음 · 10ms 기록 180/21 미탐 31 경고 없음 · 20ms 기록 1718/170 미탐 220 경고 있음 · 50ms 기록 4064/403 미탐 380 경고 있음
+[ 421.4s] 재보정 흔들림: 0ms rc 0 저장 True 단위 {'total': 480, 'train': 300, 'cal': 120, 'holdout': 60, 'min_cal_for_alpha': 99} · 2ms rc 0 저장 True 단위 {'total': 480, 'train': 300, 'cal': 120, 'holdout': 60, 'min_cal_for_alpha': 99} · 50ms rc 1 저장 False 단위 {'total': 10492, 'train': 10312, 'cal': 120, 'holdout': 60, 'min_cal_for_alpha': 99}
+[ 455.5s] ±50 ms 경고: predict rc 0 경고 True · simulate rc 0 경고 True · monitor rc 0 경고 True
+[ 455.6s] README 대기열 인용 [35, 55, 63, 71, 83, 91, 95, 111, 115] = CSV 양수 행 [35, 55, 63, 71, 83, 91, 95, 111, 115] → True
+[ 455.7s] 구간 지표 불변 True · 감시 알림 수 {'level1_notifications': 21, 'level2_escalations': 21, 'incident_alerts': 2, 'note': 'monitor_windows의 level1_notifications·level2_escalations는 건(기록구간) 단위 열(notification·escalation)을 센다'} · incidents_*.csv 격상 행 모두 비어 있음 {'A': True, 'B': True}
+[ 455.8s] 끝 · 455.7초 · judge04_r3_check.json

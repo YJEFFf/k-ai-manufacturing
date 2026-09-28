@@ -1,0 +1,27 @@
+내부 검수 표기(평가관·사이클2·루브릭)가 든 행 수, 확장자별: {'.py': 68, '.txt': 1, '.cjs': 2, '.md': 2, '.json': 7, '.csv': 2}
+   19  yejun/press_guard/insights.py
+    8  yejun/analysis/press_selection/run.py
+    4  yejun/press_guard/analyze.py
+    4  yejun/analysis/press_evidence/build_diagnostics.py
+    3  yejun/press_guard/test_simulate.py
+    3  yejun/analysis/press_supplement/test_contract.py
+    2  yejun/press_guard/test_analyze.py
+    2  yejun/press_guard/test_guard.py
+    2  yejun/press_guard/test_monitor.py
+    2  yejun/press_guard/test_portability.py
+    2  yejun/press_guard/test_serve.py
+    2  yejun/press_guard/test_web.cjs
+    2  yejun/analysis/press_evidence/README.md
+    2  yejun/analysis/press_evidence/build_tables.py
+    1  yejun/press_guard/contracts.py
+    1  yejun/press_guard/model.py
+    1  yejun/press_guard/requirements-lock.txt
+    1  yejun/press_guard/runtime.py
+    1  yejun/press_guard/test_probability.py
+    1  yejun/press_guard/test_recalibrate.py
+    1  yejun/press_guard/test_review_regressions.py
+    1  yejun/analysis/press_advance/test_contract.py
+    1  yejun/analysis/press_evidence/diagnostics_manifest.json
+    1  yejun/analysis/press_evidence/expected/diagnostics_manifest.json
+    1  yejun/analysis/press_evidence/expected/manifest.json
+사용자 문서(.md·requirements·environment): {'yejun/press_guard/requirements-lock.txt': 1, 'yejun/analysis/press_evidence/README.md': 2}

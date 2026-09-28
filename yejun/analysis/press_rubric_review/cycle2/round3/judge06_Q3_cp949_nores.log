@@ -1,0 +1,122 @@
+Q3 ì‹œì‘ 2026-09-28 16:16:09 ê¸°ì¤€=061fac8 PY=/opt/anaconda3/bin/python
+Á¶°Ç È®ÀÎ: ±âº» ÀÎÄÚµù CP949 | utf8_mode 0 | stdout cp949
+resource: Â÷´ÜµÊ import of resource halted; None in sys.modules
+STEP Q3a_reproduce_tests rc=0 wall=2268s maxrss_mb=746 load_start=8.92 load_end=18.22
+---- Q3a_reproduce_tests stdout(ë 34ì¤„)
+[8/23] Áø´Ü º¸°­ Ç¥¡¤±×¸² ¡¦
+      Åë°ú ¡¤ 46.2ÃÊ ¡¤ ¿Ï·á 40.8ÃÊ, Ç¥ 20°³, ±×¸² 5Àå
+[9/23] ÁöµµÇĞ½À ±âÁØ¼±(press_supervised) ¡¦
+      Åë°ú ¡¤ 520.7ÃÊ ¡¤ done 516.7 s
+[10/23] ¸ğµ¨ ¼±Á¤ ±Ù°Å(press_selection) ¡¦
+      Åë°ú ¡¤ 194.7ÃÊ ¡¤ ³»ºÎ Á¡°Ë: Åë°ú ¡¤ 191.1 s
+[11/23] press_evidence µ¿°á°ª ºñ±³ ¡¦
+      Åë°ú ¡¤ 1.6ÃÊ ¡¤ Åë°ú: press_evidence ½ÇÇà ±â·Ï ¹«°á¼º¡¤µ¿°á ±â´ë°ª ºñ±³(°á°ú 42°³)
+[12/23] press_supervised µ¿°á°ª ºñ±³ ¡¦
+      Åë°ú ¡¤ 1.5ÃÊ ¡¤ Åë°ú: press_supervised ½ÇÇà ±â·Ï ¹«°á¼º¡¤µ¿°á ±â´ë°ª ºñ±³(°á°ú 3°³)
+[13/23] press_advance µ¿°á°ª ºñ±³ ¡¦
+      Åë°ú ¡¤ 1.4ÃÊ ¡¤ Åë°ú: press_advance ½ÇÇà ±â·Ï ¹«°á¼º¡¤µ¿°á ±â´ë°ª ºñ±³(°á°ú 2°³)
+[14/23] press_selection µ¿°á°ª ºñ±³ ¡¦
+      Åë°ú ¡¤ 1.4ÃÊ ¡¤ Åë°ú: press_selection ½ÇÇà ±â·Ï ¹«°á¼º¡¤µ¿°á ±â´ë°ª ºñ±³(°á°ú 12°³)
+[15/23] º¸¿Ï ½ÇÇè E1~E3 µ¿°á°ª ºñ±³ ¡¦
+      Åë°ú ¡¤ 4.6ÃÊ ¡¤ Åë°ú: ¹«°á¼º¡¤±â´ë°ª ºñ±³ E1, E3 ¡¤ °Ç³Ê¶Ü E2(¿ÜºÎ ÀÔ·Â ¾øÀ½)
+[16/23] ½ÃÇè: v2 ¡¦
+      Åë°ú ¡¤ 220.5ÃÊ ¡¤ 83 passed, 1 skipped in 219.05s (0:03:39)
+[17/23] ½ÃÇè: v1 ¡¦
+      Åë°ú ¡¤ 19.3ÃÊ ¡¤ 49 passed in 17.00s
+[18/23] ½ÃÇè: press_advance ¡¦
+      Åë°ú ¡¤ 2.4ÃÊ ¡¤ 8 passed in 1.35s
+[19/23] ½ÃÇè: press_evidence ¡¦
+      Åë°ú ¡¤ 3.7ÃÊ ¡¤ 6 passed in 2.40s
+[20/23] ½ÃÇè: press_selection ¡¦
+      Åë°ú ¡¤ 2.7ÃÊ ¡¤ 6 passed in 1.60s
+[21/23] ½ÃÇè: press_supervised ¡¦
+      Åë°ú ¡¤ 2.2ÃÊ ¡¤ 6 passed in 1.20s
+[22/23] ½ÃÇè: press_supplement ¡¦
+      Åë°ú ¡¤ 5.7ÃÊ ¡¤ 10 passed, 3 skipped in 4.55s
+[23/23] ½ÃÇè: À¥ ÄÜ¼Ö ¡¦
+      Åë°ú ¡¤ 0.7ÃÊ ¡¤ web regressions: 11 passed (null gap / empty replay hover / 50k rows / empty selection / sim visibility / escalation tim
+
+23/23 ´Ü°è Åë°ú ¡¤ 2266.0ÃÊ ¡¤ ¿ä¾à press_guard/outputs/reproduce_summary.json
+== reproduce_summary: mode=quick python=3.12.2 23/23 í†µê³¼ Â· ì‹¤íŒ¨ 0 Â· 2266.0ì´ˆ
+  [01] rc=0    17.1s  v1 ì„ í–‰(ì£¼ ëª¨ë¸Â·ê¸°ì¤€ëª¨ë¸Â·í–‰ë³„ ì˜ˆì¸¡)  | }  | U+FFFD ë¡œê·¸ 0
+  [02] rc=0     0.9s  v1 ë™ê²°ê°’ ë¹„êµ  | 16/16 í†µê³¼ (1~2ë‹¨ê³„ ë¶€ë¶„ ë¹„êµ, í•„ìˆ˜ ì§‘ê³„ 9ê°œ). í™˜ê²½: macOS-26.3.1-arm64-arm-64bit vs ë™ê²° macOS-26.3.1-arm64-arm-64bit; ì½”ë“œ b372  | U+FFFD ë¡œê·¸ 0
+  [03] rc=0    55.8s  v2 í•™ìŠµÂ·ì‹œê°„ìˆœ 5íšŒ  |     B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3                | U+FFFD ë¡œê·¸ 0
+  [04] rc=0   443.5s  v2 ë¶„ì„  | }  | U+FFFD ë¡œê·¸ 0
+  [05] rc=0   686.1s  v2 ì‹¤í–‰ ê²€ì¦(audit)  | 16/16 í†µê³¼ â†’ /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/  | U+FFFD ë¡œê·¸ 0
+  [06] rc=0     5.6s  v2 ë™ê²°ê°’ ë¹„êµ  | 53/53 í†µê³¼. ì½”ë“œ 2622d9f2a5eb vs ë™ê²° 2622d9f2a5eb; í™˜ê²½ macOS-26.3.1-arm64-arm-64bit vs ë™ê²° macOS-26.3.1-arm64-arm-64b  | U+FFFD ë¡œê·¸ 0
+  [07] rc=0    27.6s  ì§„ë‹¨ í‘œ(press_evidence)  |     B 12 0.099174 0.099174      180               11  0.061111       0.099126          False  | U+FFFD ë¡œê·¸ 0
+  [08] rc=0    46.2s  ì§„ë‹¨ ë³´ê°• í‘œÂ·ê·¸ë¦¼  | ì™„ë£Œ 40.8ì´ˆ, í‘œ 20ê°œ, ê·¸ë¦¼ 5ì¥  | U+FFFD ë¡œê·¸ 0
+  [09] rc=0   520.7s  ì§€ë„í•™ìŠµ ê¸°ì¤€ì„ (press_supervised)  | done 516.7 s  | U+FFFD ë¡œê·¸ 0
+  [10] rc=0   194.7s  ëª¨ë¸ ì„ ì • ê·¼ê±°(press_selection)  | ë‚´ë¶€ ì ê²€: í†µê³¼ Â· 191.1 s  | U+FFFD ë¡œê·¸ 0
+  [11] rc=0     1.6s  press_evidence ë™ê²°ê°’ ë¹„êµ  | í†µê³¼: press_evidence ì‹¤í–‰ ê¸°ë¡ ë¬´ê²°ì„±Â·ë™ê²° ê¸°ëŒ€ê°’ ë¹„êµ(ê²°ê³¼ 42ê°œ)  | U+FFFD ë¡œê·¸ 0
+  [12] rc=0     1.5s  press_supervised ë™ê²°ê°’ ë¹„êµ  | í†µê³¼: press_supervised ì‹¤í–‰ ê¸°ë¡ ë¬´ê²°ì„±Â·ë™ê²° ê¸°ëŒ€ê°’ ë¹„êµ(ê²°ê³¼ 3ê°œ)  | U+FFFD ë¡œê·¸ 0
+  [13] rc=0     1.4s  press_advance ë™ê²°ê°’ ë¹„êµ  | í†µê³¼: press_advance ì‹¤í–‰ ê¸°ë¡ ë¬´ê²°ì„±Â·ë™ê²° ê¸°ëŒ€ê°’ ë¹„êµ(ê²°ê³¼ 2ê°œ)  | U+FFFD ë¡œê·¸ 0
+  [14] rc=0     1.4s  press_selection ë™ê²°ê°’ ë¹„êµ  | í†µê³¼: press_selection ì‹¤í–‰ ê¸°ë¡ ë¬´ê²°ì„±Â·ë™ê²° ê¸°ëŒ€ê°’ ë¹„êµ(ê²°ê³¼ 12ê°œ)  | U+FFFD ë¡œê·¸ 0
+  [15] rc=0     4.6s  ë³´ì™„ ì‹¤í—˜ E1~E3 ë™ê²°ê°’ ë¹„êµ  | í†µê³¼: ë¬´ê²°ì„±Â·ê¸°ëŒ€ê°’ ë¹„êµ E1, E3 Â· ê±´ë„ˆëœ€ E2(ì™¸ë¶€ ì…ë ¥ ì—†ìŒ)  | U+FFFD ë¡œê·¸ 0
+  [16] rc=0   220.5s  ì‹œí—˜: v2  | 83 passed, 1 skipped in 219.05s (0:03:39)  | U+FFFD ë¡œê·¸ 0
+  [17] rc=0    19.3s  ì‹œí—˜: v1  | 49 passed in 17.00s  | U+FFFD ë¡œê·¸ 0
+  [18] rc=0     2.4s  ì‹œí—˜: press_advance  | 8 passed in 1.35s  | U+FFFD ë¡œê·¸ 0
+  [19] rc=0     3.7s  ì‹œí—˜: press_evidence  | 6 passed in 2.40s  | U+FFFD ë¡œê·¸ 0
+  [20] rc=0     2.7s  ì‹œí—˜: press_selection  | 6 passed in 1.60s  | U+FFFD ë¡œê·¸ 0
+  [21] rc=0     2.2s  ì‹œí—˜: press_supervised  | 6 passed in 1.20s  | U+FFFD ë¡œê·¸ 0
+  [22] rc=0     5.7s  ì‹œí—˜: press_supplement  | 10 passed, 3 skipped in 4.55s  | U+FFFD ë¡œê·¸ 0
+  [23] rc=0     0.7s  ì‹œí—˜: ì›¹ ì½˜ì†”  | web regressions: 11 passed (null gap / empty replay hover / 50k rows / empty selection / sim visibility / esca  | U+FFFD ë¡œê·¸ 0
+== ë‹¨ê³„ ë¡œê·¸Â·ìš”ì•½ last_lineì˜ U+FFFD í•©ê³„ 0 Â· ë¡œê·¸ ê²½ë¡œ í˜•ì‹ press_guard/outputs/reproduce_logs/01.log
+---- ì»¤ë°‹ ë™ê²° í•´ì‹œ ëŒ€ì¡°: ì €ì¥ ëª¨ë¸Â·ë³´ì •ê¸° 4/4 ê°™ìŒ {'guard_A.json': True, 'guard_B.json': True, 'probability_A.json': True, 'probability_B.json': True}
+     í–‰ ë‹¨ìœ„ ì˜ˆì¸¡ 6/6 ê°™ìŒ {'predictions_normal_A.csv': True, 'predictions_normal_B.csv': True, 'predictions_abnormal_A.csv': True, 'predictions_abnormal_B.csv': True, 'test_predictions_A.csv': True, 'test_predictions_B.csv': True}
+STEP Q3b1_predict_input rc=0 wall=5s maxrss_mb=196 load_start=18.22 load_end=19.08
+---- Q3b1_predict_input stdout(ë 3ì¤„)
+600Çà Ã³¸®, »ç°Ç 1°³(°Ç 21) ¡æ /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r3/Q3_cp949/x/¿¹Ãø.csv
+STEP Q3b2_predict_splitA rc=0 wall=7s maxrss_mb=218 load_start=19.08 load_end=19.80
+---- Q3b2_predict_splitA stdout(ë 3ì¤„)
+4690Çà ¡æ /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r3/Q3_cp949/x/test_predictions_A.csv ¡¤ SHA-256 b87f1e20aa7ff174¡¦ ¡¤ ÇĞ½À ½ÇÇà°ú °°À½
+     predict --split A SHA-256 b87f1e20aa7ff174 / í•™ìŠµ ì‹¤í–‰ b87f1e20aa7ff174
+STEP Q3b3_simulate rc=0 wall=27s maxrss_mb=196 load_start=19.80 load_end=17.67
+---- Q3b3_simulate stdout(ë 4ì¤„)
+[2022-07-17 10:51:07.943] »ç°Ç ½ÃÀÛ ¡¤ ÁÖÀÇ ¡¤ ±¸°£ 0 ¡¤ magnitude ¡¤ Áøµ¿¡¤ºÎÇÏ È®ÀÎ ¡¤ ÀÌ»ó È®·ü 55.0%
+[2022-07-17 10:51:08.043] °İ»ó ¡¤ Á¡°Ë ¿äÃ» ¡¤ ±¸°£ 0 ¡¤ magnitude ¡¤ Áøµ¿¡¤ºÎÇÏ È®ÀÎ ¡¤ ÀÌ»ó È®·ü 55.0%
+---- Q3b3_simulate stderr(ë 4ì¤„, ì‹œê°„ ì¸¡ì • ì œì™¸)
+600Çà ¡¤ »ç°Ç 1 ¡¤ °İ»ó 1 ¡¤ ±Ù°Å Ãß°¡ 2 ¡¤ ¼öÁı ¿À·ù 0 ¡¤ °è»ê p95 26.7 ms ¡¤ °æ°ú 23.3ÃÊ
+STEP Q3b4_monitor rc=0 wall=6s maxrss_mb=257 load_start=17.67 load_end=16.27
+---- Q3b4_monitor stdout(ë 8ì¤„)
+      2     60              1        2        4                     1                   1       1.002697              °üÃø Áö¼Ó
+      3     60              1        2        4                     1                   0       1.010555              °üÃø Áö¼Ó
+      4     60              1        2        4                     1                   0       1.001303              °üÃø Áö¼Ó
+      5     60              0        2        4                     0                   0       0.940761              °üÃø Áö¼Ó
+      6     60              0        2        4                     0                   0       1.217962              °üÃø Áö¼Ó
+      7     60              2        2        4                     2                   0       0.879251              °üÃø Áö¼Ó
+      8     60              0        2        4                     0                   0       0.761639              °üÃø Áö¼Ó
+      9     60              1        2        4                     1                   0       0.779407              °üÃø Áö¼Ó
+STEP Q3b5_recalibrate rc=0 wall=8s maxrss_mb=224 load_start=16.27 load_end=15.44
+---- Q3b5_recalibrate stdout(ë 6ì¤„)
+Åë°ú Á¤»ó ¾Ë¸² ´ÜÀ§ ¼ö°¡ º¸Á¤ Á¶°ÇºÎ Beta-Binomial 95¹éºĞÀ§ ÀÌÇÏ: 0 (ÇÑµµ 2 ¡¤ Á¤»ó¿¡¼­ °ÅºÎÇÒ È®·ü 3.6% ¡¤ ½ÇÁ¦ ¾Ë¸²·üÀÌ ¸í¸ñÀÇ 2¡¤3¹èÀÏ ¶§ °ÅºÎÇÒ È®·ü(°ËÁ¤·Â) 8%¡¤19%)
+Åë°ú °íÀå ÁÖÀÔ cur_noise 0.2 2ÃÊ ¾È Å½ÁöÀ² ¡Ã 90%: 1.0
+Åë°ú °íÀå ÁÖÀÔ cur_offset 0.4 2ÃÊ ¾È Å½ÁöÀ² ¡Ã 90%: 1.0
+Åë°ú °íÀå ÁÖÀÔ vib_noise 4 2ÃÊ ¾È Å½ÁöÀ² ¡Ã 90%: 1.0
+±³´ë 8½Ã°£ 1´Ü°è ¾Ë¸²: ¸í¸ñ 30.9°Ç ¡¤ º¸Á¤ 95% 92.3°Ç
+¼ö¶ô ¡¤ ¸ğµ¨ ÀúÀå /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r3/Q3_cp949/x/site_model.json ¡¤ º¸°í¼­ /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r3/Q3_cp949/x/site_report.json
+STEP Q3b6_package_manifest rc=0 wall=3s maxrss_mb=195 load_start=15.44 load_end=14.61
+---- Q3b6_package_manifest stdout(ë 14ì¤„)
+                  files  megabytes
+group                             
+baseline_v1         112       1.83
+candidates           13       0.15
+dependency           11       0.31
+final_model         150       6.15
+supporting          174       2.53
+test_predictions      2       4.84
+training_data         2       1.19
+ÇÕ°è 464°³ ¡¤ 17.0 MB
+ºí¶óÀÎµå °Ë»ç Åë°ú
+---- Q3b7 ì›¹ ì½˜ì†”(CP949Â·resource ì°¨ë‹¨)
+GET /api/overview http=200 bytes=170398
+overview audit.all_ok= True | ê²€ì‚¬ 16 | metrics 12
+POST /api/analyze(mixed,B) http=200 bytes=7144524
+analyze stats= {'rows': 6697, 'segments': 201, 'scored': 6697, 'invalid': 0, 'alarm_rows': 572, 'notifications': 24, 'elapsed_s': 3.3630717500000173} | keys ['alert_unit_rows', 'alpha', 'calibration_segments', 'cases', 'dataset', 'incidents', 'level_counts', 'lr_cap', 'min_p_attainable', 'points', 'prior', 'probability_available', 'source_name', 'split']
+POST /api/analyze(upload outlier_data.csv) http=200 bytes=644393
+upload stats= {'rows': 600, 'segments': 21, 'scored': 600, 'invalid': 0, 'alarm_rows': 556, 'notifications': 21, 'elapsed_s': 0.3117560000009689} | ëŒ€ê¸°ì—´ 21 | ì‚¬ê±´ 1
+---- ì„œë²„ ë¡œê·¸ ë(CP949 ì¶œë ¥ì„ UTF-8ë¡œ í’€ì–´ ì ìŒ)
+"GET /api/overview HTTP/1.1" 200 -
+"POST /api/analyze HTTP/1.1" 200 -
+"POST /api/analyze HTTP/1.1" 200 -
+Q3 ë 2026-09-28 16:55:04

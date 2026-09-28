@@ -1,0 +1,1822 @@
+{
+  "C0_provenance": {
+    "head": "061fac8ae9a8373265434a5586cde956982db934",
+    "artifacts_match_manifest": {
+      "guard_A.json": true,
+      "guard_B.json": true,
+      "probability_A.json": true,
+      "probability_B.json": true
+    },
+    "inputs_match_manifest": {
+      "normal": true,
+      "abnormal": true
+    },
+    "local_test_predictions_match_manifest": {
+      "test_predictions_A.csv": true,
+      "test_predictions_B.csv": true
+    },
+    "uncommitted_under_yejun": [
+      "?? yejun/analysis/press_rubric_review/cycle2/round3/"
+    ],
+    "note": "미커밋 파일은 채점 대상이 아니다(HEAD 기준). 이 폴더의 judge05_* 는 이번 검수 산출물이다."
+  },
+  "C1_main_metrics": {
+    "A": {
+      "0.01": {
+        "tp": 556,
+        "fp": 0,
+        "fn": 44,
+        "f1": 0.9619377162629758,
+        "normal_records": 0,
+        "abnormal_records": 21,
+        "matches_metrics_csv": true
+      },
+      "0.03": {
+        "tp": 569,
+        "fp": 1,
+        "fn": 31,
+        "f1": 0.9726495726495726,
+        "normal_records": 1,
+        "abnormal_records": 21,
+        "matches_metrics_csv": true
+      },
+      "0.05": {
+        "tp": 569,
+        "fp": 1,
+        "fn": 31,
+        "f1": 0.9726495726495726,
+        "normal_records": 1,
+        "abnormal_records": 21,
+        "matches_metrics_csv": true
+      }
+    },
+    "B": {
+      "0.01": {
+        "tp": 569,
+        "fp": 3,
+        "fn": 31,
+        "f1": 0.9709897610921502,
+        "normal_records": 3,
+        "abnormal_records": 21,
+        "matches_metrics_csv": true
+      },
+      "0.03": {
+        "tp": 569,
+        "fp": 7,
+        "fn": 31,
+        "f1": 0.967687074829932,
+        "normal_records": 5,
+        "abnormal_records": 21,
+        "matches_metrics_csv": true
+      },
+      "0.05": {
+        "tp": 569,
+        "fp": 11,
+        "fn": 31,
+        "f1": 0.964406779661017,
+        "normal_records": 7,
+        "abnormal_records": 21,
+        "matches_metrics_csv": true
+      }
+    }
+  },
+  "C3_calibration_AB": {
+    "A": {
+      "n_records": 120,
+      "alerted_by_k": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "matches_evidence": true
+    },
+    "B": {
+      "n_records": 180,
+      "alerted_by_k": [
+        3,
+        3,
+        5,
+        7,
+        7,
+        7,
+        7,
+        7,
+        8,
+        9,
+        9,
+        11
+      ],
+      "matches_evidence": true
+    }
+  },
+  "C4_rolling_curve": {
+    "folds": [
+      {
+        "fold": "normal_300_359",
+        "alpha": 0.01,
+        "alerted": 0,
+        "ref": 0,
+        "match": true
+      },
+      {
+        "fold": "normal_300_359",
+        "alpha": 0.03,
+        "alerted": 3,
+        "ref": 3,
+        "match": true
+      },
+      {
+        "fold": "normal_300_359",
+        "alpha": 0.05,
+        "alerted": 5,
+        "ref": 5,
+        "match": true
+      },
+      {
+        "fold": "normal_360_419",
+        "alpha": 0.01,
+        "alerted": 0,
+        "ref": 0,
+        "match": true
+      },
+      {
+        "fold": "normal_360_419",
+        "alpha": 0.03,
+        "alerted": 0,
+        "ref": 0,
+        "match": true
+      },
+      {
+        "fold": "normal_360_419",
+        "alpha": 0.05,
+        "alerted": 2,
+        "ref": 2,
+        "match": true
+      },
+      {
+        "fold": "normal_420_479",
+        "alpha": 0.01,
+        "alerted": 2,
+        "ref": 2,
+        "match": true
+      },
+      {
+        "fold": "normal_420_479",
+        "alpha": 0.03,
+        "alerted": 4,
+        "ref": 4,
+        "match": true
+      },
+      {
+        "fold": "normal_420_479",
+        "alpha": 0.05,
+        "alerted": 5,
+        "ref": 5,
+        "match": true
+      },
+      {
+        "fold": "normal_480_539",
+        "alpha": 0.01,
+        "alerted": 0,
+        "ref": 0,
+        "match": true
+      },
+      {
+        "fold": "normal_480_539",
+        "alpha": 0.03,
+        "alerted": 0,
+        "ref": 0,
+        "match": true
+      },
+      {
+        "fold": "normal_480_539",
+        "alpha": 0.05,
+        "alerted": 0,
+        "ref": 0,
+        "match": true
+      },
+      {
+        "fold": "normal_540_599",
+        "alpha": 0.01,
+        "alerted": 0,
+        "ref": 0,
+        "match": true
+      },
+      {
+        "fold": "normal_540_599",
+        "alpha": 0.03,
+        "alerted": 1,
+        "ref": 1,
+        "match": true
+      },
+      {
+        "fold": "normal_540_599",
+        "alpha": 0.05,
+        "alerted": 2,
+        "ref": 2,
+        "match": true
+      }
+    ],
+    "curve": [
+      {
+        "k": 1,
+        "pooled": 2,
+        "pooled_pi90": [
+          0,
+          6
+        ],
+        "within": true,
+        "committed_pooled": 2,
+        "committed_pi90": [
+          0,
+          6
+        ]
+      },
+      {
+        "k": 2,
+        "pooled": 2,
+        "pooled_pi90": [
+          1,
+          10
+        ],
+        "within": true,
+        "committed_pooled": 2,
+        "committed_pi90": [
+          1,
+          10
+        ]
+      },
+      {
+        "k": 3,
+        "pooled": 8,
+        "pooled_pi90": [
+          3,
+          13
+        ],
+        "within": true,
+        "committed_pooled": 8,
+        "committed_pi90": [
+          3,
+          13
+        ]
+      },
+      {
+        "k": 4,
+        "pooled": 13,
+        "pooled_pi90": [
+          4,
+          17
+        ],
+        "within": true,
+        "committed_pooled": 13,
+        "committed_pi90": [
+          4,
+          17
+        ]
+      },
+      {
+        "k": 5,
+        "pooled": 14,
+        "pooled_pi90": [
+          6,
+          20
+        ],
+        "within": true,
+        "committed_pooled": 14,
+        "committed_pi90": [
+          6,
+          20
+        ]
+      },
+      {
+        "k": 6,
+        "pooled": 14,
+        "pooled_pi90": [
+          8,
+          23
+        ],
+        "within": true,
+        "committed_pooled": 14,
+        "committed_pi90": [
+          8,
+          23
+        ]
+      },
+      {
+        "k": 7,
+        "pooled": 15,
+        "pooled_pi90": [
+          10,
+          26
+        ],
+        "within": true,
+        "committed_pooled": 15,
+        "committed_pi90": [
+          10,
+          26
+        ]
+      },
+      {
+        "k": 8,
+        "pooled": 15,
+        "pooled_pi90": [
+          12,
+          29
+        ],
+        "within": true,
+        "committed_pooled": 15,
+        "committed_pi90": [
+          12,
+          29
+        ]
+      },
+      {
+        "k": 9,
+        "pooled": 21,
+        "pooled_pi90": [
+          14,
+          32
+        ],
+        "within": true,
+        "committed_pooled": 21,
+        "committed_pi90": [
+          14,
+          32
+        ]
+      },
+      {
+        "k": 10,
+        "pooled": 24,
+        "pooled_pi90": [
+          16,
+          35
+        ],
+        "within": true,
+        "committed_pooled": 24,
+        "committed_pi90": [
+          16,
+          35
+        ]
+      },
+      {
+        "k": 11,
+        "pooled": 25,
+        "pooled_pi90": [
+          18,
+          38
+        ],
+        "within": true,
+        "committed_pooled": 25,
+        "committed_pi90": [
+          18,
+          38
+        ]
+      },
+      {
+        "k": 12,
+        "pooled": 28,
+        "pooled_pi90": [
+          20,
+          41
+        ],
+        "within": true,
+        "committed_pooled": 28,
+        "committed_pi90": [
+          20,
+          41
+        ]
+      }
+    ],
+    "per_fold_mismatch_vs_committed": [],
+    "all_pooled_match": true,
+    "all_pi90_match": true,
+    "all_within": true
+  },
+  "C5_workload_and_R2_O9": {
+    "values": {
+      "A": {
+        "0.01": {
+          "l": 1,
+          "prior_q95": 0.024655401055656376,
+          "p_far_gt_alpha": 0.29938039131233163,
+          "eval_alerted": 0,
+          "posterior_q95": 0.012404638050409016,
+          "alerts8h_cp": 88.22933256056157,
+          "alerts8h_post95": 44.389987142060576,
+          "matches_workload": true
+        },
+        "0.03": {
+          "l": 3,
+          "prior_q95": 0.05153371368637799,
+          "p_far_gt_alpha": 0.29843549610418496,
+          "eval_alerted": 1,
+          "posterior_q95": 0.03198819975403926,
+          "alerts8h_cp": 139.2782187323894,
+          "alerts8h_post95": 114.46974671966734,
+          "matches_workload": true
+        },
+        "0.05": {
+          "l": 6,
+          "prior_q95": 0.08560834440147946,
+          "p_far_gt_alpha": 0.441548158392599,
+          "eval_alerted": 1,
+          "posterior_q95": 0.04874425244384057,
+          "alerts8h_cp": 139.2782187323894,
+          "alerts8h_post95": 174.43126759833936,
+          "matches_workload": true
+        }
+      },
+      "B": {
+        "0.01": {
+          "l": 1,
+          "prior_q95": 0.024655401055656376,
+          "p_far_gt_alpha": 0.29938039131233163,
+          "eval_alerted": 3,
+          "posterior_q95": 0.025641393082609616,
+          "alerts8h_cp": 152.1767049676698,
+          "alerts8h_post95": 91.79065288264346,
+          "matches_workload": true
+        },
+        "0.03": {
+          "l": 3,
+          "prior_q95": 0.05153371368637799,
+          "p_far_gt_alpha": 0.29843549610418496,
+          "eval_alerted": 5,
+          "posterior_q95": 0.04337867564300364,
+          "alerts8h_cp": 205.89112051376293,
+          "alerts8h_post95": 155.28629609271175,
+          "matches_workload": true
+        },
+        "0.05": {
+          "l": 6,
+          "prior_q95": 0.08560834440147946,
+          "p_far_gt_alpha": 0.441548158392599,
+          "eval_alerted": 7,
+          "posterior_q95": 0.06400391537870745,
+          "alerts8h_cp": 257.03170258241,
+          "alerts8h_post95": 229.12020266330651,
+          "matches_workload": true
+        }
+      }
+    },
+    "display": {
+      "operations_line": 31,
+      "operations_has_post95_values": true,
+      "operations_has_assumption": true,
+      "operations_has_cp": true,
+      "console_table_has_cp_and_post95_columns": true,
+      "console_note_line": 18,
+      "console_note_has_assumption": true
+    }
+  },
+  "C6_acceptance": {
+    "0.01": {
+      "l": 1,
+      "binomial_limit_old": 2,
+      "betabinom_limit": 2,
+      "code_limit": 2,
+      "reject_old_exact": 0.03580022178979666,
+      "reject_new_exact": 0.03580022178979666
+    },
+    "0.03": {
+      "l": 3,
+      "binomial_limit_old": 4,
+      "betabinom_limit": 4,
+      "code_limit": 4,
+      "reject_old_exact": 0.04204971058903606,
+      "reject_new_exact": 0.04204971058903606
+    },
+    "0.05": {
+      "l": 6,
+      "binomial_limit_old": 6,
+      "betabinom_limit": 7,
+      "code_limit": 7,
+      "reject_old_exact": 0.059840214167413926,
+      "reject_new_exact": 0.029494781256109864
+    }
+  },
+  "C7_fusion": {
+    "results": {
+      "A": {
+        "0.01_tippett_fmax": {
+          "tp": 556,
+          "fp": 0,
+          "fn": 44,
+          "normal_alerted": 0,
+          "fn_pos0_1": 26,
+          "fn_pos2plus": 18,
+          "no_evidence_alarms_abnormal": 0,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.01_fisher": {
+          "tp": 568,
+          "fp": 0,
+          "fn": 32,
+          "normal_alerted": 0,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 12,
+          "no_evidence_alarms_abnormal": 12,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.01_stouffer": {
+          "tp": 561,
+          "fp": 0,
+          "fn": 39,
+          "normal_alerted": 0,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 19,
+          "no_evidence_alarms_abnormal": 10,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.01_sum": {
+          "tp": 560,
+          "fp": 0,
+          "fn": 40,
+          "normal_alerted": 0,
+          "fn_pos0_1": 26,
+          "fn_pos2plus": 14,
+          "no_evidence_alarms_abnormal": 4,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.01_mean": {
+          "tp": 558,
+          "fp": 0,
+          "fn": 42,
+          "normal_alerted": 0,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 22,
+          "no_evidence_alarms_abnormal": 8,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.03_tippett_fmax": {
+          "tp": 569,
+          "fp": 1,
+          "fn": 31,
+          "normal_alerted": 1,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 11,
+          "no_evidence_alarms_abnormal": 0,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.03_fisher": {
+          "tp": 569,
+          "fp": 0,
+          "fn": 31,
+          "normal_alerted": 0,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 11,
+          "no_evidence_alarms_abnormal": 1,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.03_stouffer": {
+          "tp": 562,
+          "fp": 0,
+          "fn": 38,
+          "normal_alerted": 0,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 18,
+          "no_evidence_alarms_abnormal": 1,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.03_sum": {
+          "tp": 562,
+          "fp": 1,
+          "fn": 38,
+          "normal_alerted": 1,
+          "fn_pos0_1": 26,
+          "fn_pos2plus": 12,
+          "no_evidence_alarms_abnormal": 1,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.03_mean": {
+          "tp": 562,
+          "fp": 0,
+          "fn": 38,
+          "normal_alerted": 0,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 18,
+          "no_evidence_alarms_abnormal": 0,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.05_tippett_fmax": {
+          "tp": 569,
+          "fp": 1,
+          "fn": 31,
+          "normal_alerted": 1,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 11,
+          "no_evidence_alarms_abnormal": 0,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.05_fisher": {
+          "tp": 570,
+          "fp": 1,
+          "fn": 30,
+          "normal_alerted": 1,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 10,
+          "no_evidence_alarms_abnormal": 1,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.05_stouffer": {
+          "tp": 563,
+          "fp": 0,
+          "fn": 37,
+          "normal_alerted": 0,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 17,
+          "no_evidence_alarms_abnormal": 1,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.05_sum": {
+          "tp": 567,
+          "fp": 1,
+          "fn": 33,
+          "normal_alerted": 1,
+          "fn_pos0_1": 23,
+          "fn_pos2plus": 10,
+          "no_evidence_alarms_abnormal": 1,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.05_mean": {
+          "tp": 567,
+          "fp": 0,
+          "fn": 33,
+          "normal_alerted": 0,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 13,
+          "no_evidence_alarms_abnormal": 1,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        }
+      },
+      "B": {
+        "0.01_tippett_fmax": {
+          "tp": 569,
+          "fp": 3,
+          "fn": 31,
+          "normal_alerted": 3,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 11,
+          "no_evidence_alarms_abnormal": 0,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.01_fisher": {
+          "tp": 569,
+          "fp": 1,
+          "fn": 31,
+          "normal_alerted": 1,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 11,
+          "no_evidence_alarms_abnormal": 1,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.01_stouffer": {
+          "tp": 561,
+          "fp": 0,
+          "fn": 39,
+          "normal_alerted": 0,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 19,
+          "no_evidence_alarms_abnormal": 1,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.01_sum": {
+          "tp": 561,
+          "fp": 2,
+          "fn": 39,
+          "normal_alerted": 2,
+          "fn_pos0_1": 26,
+          "fn_pos2plus": 13,
+          "no_evidence_alarms_abnormal": 1,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.01_mean": {
+          "tp": 558,
+          "fp": 0,
+          "fn": 42,
+          "normal_alerted": 0,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 22,
+          "no_evidence_alarms_abnormal": 0,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.03_tippett_fmax": {
+          "tp": 569,
+          "fp": 7,
+          "fn": 31,
+          "normal_alerted": 5,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 11,
+          "no_evidence_alarms_abnormal": 0,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.03_fisher": {
+          "tp": 569,
+          "fp": 2,
+          "fn": 31,
+          "normal_alerted": 2,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 11,
+          "no_evidence_alarms_abnormal": 1,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.03_stouffer": {
+          "tp": 561,
+          "fp": 0,
+          "fn": 39,
+          "normal_alerted": 0,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 19,
+          "no_evidence_alarms_abnormal": 1,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.03_sum": {
+          "tp": 570,
+          "fp": 6,
+          "fn": 30,
+          "normal_alerted": 5,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 10,
+          "no_evidence_alarms_abnormal": 1,
+          "no_evidence_alarms_normal": 2,
+          "match": true
+        },
+        "0.03_mean": {
+          "tp": 560,
+          "fp": 0,
+          "fn": 40,
+          "normal_alerted": 0,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 20,
+          "no_evidence_alarms_abnormal": 0,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.05_tippett_fmax": {
+          "tp": 569,
+          "fp": 11,
+          "fn": 31,
+          "normal_alerted": 7,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 11,
+          "no_evidence_alarms_abnormal": 0,
+          "no_evidence_alarms_normal": 0,
+          "match": true
+        },
+        "0.05_fisher": {
+          "tp": 570,
+          "fp": 6,
+          "fn": 30,
+          "normal_alerted": 5,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 10,
+          "no_evidence_alarms_abnormal": 1,
+          "no_evidence_alarms_normal": 1,
+          "match": true
+        },
+        "0.05_stouffer": {
+          "tp": 563,
+          "fp": 1,
+          "fn": 37,
+          "normal_alerted": 1,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 17,
+          "no_evidence_alarms_abnormal": 1,
+          "no_evidence_alarms_normal": 1,
+          "match": true
+        },
+        "0.05_sum": {
+          "tp": 570,
+          "fp": 11,
+          "fn": 30,
+          "normal_alerted": 8,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 10,
+          "no_evidence_alarms_abnormal": 1,
+          "no_evidence_alarms_normal": 4,
+          "match": true
+        },
+        "0.05_mean": {
+          "tp": 567,
+          "fp": 1,
+          "fn": 33,
+          "normal_alerted": 1,
+          "fn_pos0_1": 20,
+          "fn_pos2plus": 13,
+          "no_evidence_alarms_abnormal": 1,
+          "no_evidence_alarms_normal": 1,
+          "match": true
+        }
+      }
+    },
+    "mismatches": []
+  },
+  "C8_label_free": {
+    "mismatches": [],
+    "A_alpha1_cur_noise01": {
+      "nominal_pi0.0001": 0.011420683094894916,
+      "nominal_pi0.001": 0.10364571245361212,
+      "nominal_pi0.01": 0.5384930944892657,
+      "calibrated95_pi0.0001": 0.003857488090090218,
+      "calibrated95_pi0.001": 0.03731292873764314,
+      "calibrated95_pi0.01": 0.2811521789275271,
+      "posterior95_pi0.0001": 0.007638027322497356,
+      "posterior95_pi0.001": 0.07152722062907556,
+      "posterior95_pi0.01": 0.4373736050336299
+    },
+    "rows_checked": 216
+  },
+  "C8b_probability_layer_and_R2_O12": {
+    "splits": {
+      "A": {
+        "lr_cap_saved": 121.0,
+        "brier_21fold": 0.007227797545144603,
+        "ece_21fold": 0.007494986707728503,
+        "committed_brier": 0.0072277975451446,
+        "committed_ece": 0.0074949867077285,
+        "matches_committed": true,
+        "threshold": 4.417925848290822,
+        "lr_at_threshold": 42.759166852513935,
+        "p_at_threshold_pi1": 0.3016324644246853,
+        "iso_step_left": 3.549767891413232,
+        "iso_step_right": 4.683399240858632,
+        "step_normal_cal_rows": 2,
+        "step_abnormal_rows": 13,
+        "step_fitted_left": 0.8666666666666667,
+        "fitted_at_right_knot": 1.0,
+        "pi_fit": 0.13195513525401364,
+        "pi_fit_recomputed": 0.13195513525401364,
+        "alarm_rows": 556,
+        "alarm_rows_min_lr": 108.8926909580834,
+        "alarm_rows_min_p_pi1": 0.5237927820177142,
+        "alarm_rows_lr_below_1": 0,
+        "abnormal_alarm_rows": 556,
+        "abnormal_alarm_lr_below_1": 0,
+        "false_alarm_rows": 0,
+        "false_alarm_lr": [],
+        "false_alarm_p_pi1": [],
+        "matches_conversion_csv": true
+      },
+      "B": {
+        "lr_cap_saved": 121.0,
+        "brier_21fold": 0.005593980836647774,
+        "ece_21fold": 0.0066009496663218484,
+        "committed_brier": 0.0055939808366477,
+        "committed_ece": 0.0066009496663218,
+        "matches_committed": true,
+        "threshold": 3.5199003630751613,
+        "lr_at_threshold": 0.6981483187760894,
+        "p_at_threshold_pi1": 0.007002620716122243,
+        "iso_step_left": 2.8961414111000883,
+        "iso_step_right": 3.5608167697166433,
+        "step_normal_cal_rows": 9,
+        "step_abnormal_rows": 1,
+        "step_fitted_left": 0.1,
+        "fitted_at_right_knot": 1.0,
+        "pi_fit": 0.13729977116704806,
+        "pi_fit_recomputed": 0.13729977116704806,
+        "alarm_rows": 572,
+        "alarm_rows_min_lr": 2.4230148757371968,
+        "alarm_rows_min_p_pi1": 0.023890187830699555,
+        "alarm_rows_lr_below_1": 0,
+        "abnormal_alarm_rows": 569,
+        "abnormal_alarm_lr_below_1": 0,
+        "false_alarm_rows": 3,
+        "false_alarm_lr": [
+          121.0,
+          121.0,
+          121.0
+        ],
+        "false_alarm_p_pi1": [
+          0.5499999999999999,
+          0.5499999999999999,
+          0.5499999999999999
+        ],
+        "matches_conversion_csv": true
+      }
+    },
+    "readme": {
+      "has_min_lr": true,
+      "has_lr_below_1_zero": true,
+      "has_false_alarm_055": true,
+      "has_cannot_filter": true,
+      "has_step_text": true
+    }
+  },
+  "C8c_R2_O8_SBB": {
+    "setting": {
+      "pi": 0.01,
+      "tpr": 0.955,
+      "n_cal": 120,
+      "draws": 4000,
+      "units_per_draw": 20000
+    },
+    "empirical_P_anomaly_given_alarm": 0.5392665865314968,
+    "analytic": 0.5385798513201743,
+    "sbb_lr": 9.281767408006287,
+    "sbb_p": 0.08571865448993402,
+    "share_of_draws_exceeding_sbb": 1.0,
+    "sbb_mentions": [
+      {
+        "file": "press_guard/README.md",
+        "line": 116,
+        "claims_bound": true,
+        "negated": true,
+        "reference": true
+      },
+      {
+        "file": "press_guard/probability.py",
+        "line": 132,
+        "claims_bound": false,
+        "negated": false,
+        "reference": true
+      },
+      {
+        "file": "press_guard/probability.py",
+        "line": 133,
+        "claims_bound": true,
+        "negated": true,
+        "reference": true
+      },
+      {
+        "file": "press_guard/insights.py",
+        "line": 422,
+        "claims_bound": false,
+        "negated": false,
+        "reference": false
+      },
+      {
+        "file": "press_guard/insights.py",
+        "line": 435,
+        "claims_bound": true,
+        "negated": true,
+        "reference": true
+      },
+      {
+        "file": "press_guard/insights.py",
+        "line": 436,
+        "claims_bound": true,
+        "negated": true,
+        "reference": true
+      },
+      {
+        "file": "press_guard/outputs/probability_conversion_v2.csv",
+        "line": 1,
+        "claims_bound": false,
+        "negated": false,
+        "reference": false
+      }
+    ],
+    "unnegated_bound_claims": [],
+    "csv_columns_sbb": [
+      "sbb_reference_lr",
+      "sbb_reference_p",
+      "sbb_note"
+    ],
+    "csv_sbb_note_reference_and_not_bound": true,
+    "old_column_names_absent": true
+  },
+  "C8d_prediction_file_probability": {
+    "A": {
+      "rows": 4690,
+      "file_prior": 0.1279317697228145,
+      "brier_pi1": 0.03214095767850698,
+      "ece_pi1": 0.06153370720921532,
+      "brier_file_prior": 0.0072263221889069884,
+      "ece_file_prior": 0.007534523705139631,
+      "abnormal_rows_at_cap": 555,
+      "false_alarm_rows_at_cap": 0,
+      "false_alarm_rows": 0,
+      "abnormal_lr_equals_judge_oof": true,
+      "reliability_top_bin": {
+        "bin": "[0.9, 0.99)",
+        "mean_predicted": 0.9466583686146224,
+        "observed": 1.0,
+        "conservative": true
+      }
+    },
+    "B": {
+      "rows": 6697,
+      "file_prior": 0.0895923547857249,
+      "brier_pi1": 0.022076229138505488,
+      "ece_pi1": 0.04225467574071903,
+      "brier_file_prior": 0.005592514047599146,
+      "ece_file_prior": 0.00664879242082959,
+      "abnormal_rows_at_cap": 568,
+      "false_alarm_rows_at_cap": 3,
+      "false_alarm_rows": 3,
+      "abnormal_lr_equals_judge_oof": true,
+      "reliability_top_bin": {
+        "bin": "[0.9, 0.99)",
+        "mean_predicted": 0.922525636301257,
+        "observed": 0.9947460595446584,
+        "conservative": true
+      }
+    }
+  },
+  "C9b_phase": {
+    "pairs": 355,
+    "R_neighbors": 0.05959200836030578,
+    "positive_control": 0.9995285952231445,
+    "start_phase": 0.015569808814399417,
+    "matches_committed_R": true
+  },
+  "C10_C16_observability_and_R2_O10": {
+    "by_file_sensor": {
+      "normal/AI0_Vibration": {
+        "share_negative": 0.50065,
+        "lag1_within": 0.03327418136802358,
+        "lag1_mean_removed": 0.01662062372783754,
+        "share_power_le_1hz": 0.11789526785741374,
+        "records_ge20": 452,
+        "records_lag1_gt_0_5": 21,
+        "matches": true,
+        "interpretation": "10 Hz 순시값 표본(부호 대칭·평균 0, 이웃 표본 상관 낮음 lag-1 0.033). 1 Hz 이하 전력 비중 0.12(흰 잡음 0.20보다 낮다). RMS·포락선이 아니다. 5 Hz 위 성분은 접혀 들어온다"
+      },
+      "normal/AI1_Vibration": {
+        "share_negative": 0.5416,
+        "lag1_within": 0.3191329034788789,
+        "lag1_mean_removed": 0.3175979429135781,
+        "share_power_le_1hz": 0.06639670352336093,
+        "records_ge20": 452,
+        "records_lag1_gt_0_5": 3,
+        "matches": true,
+        "interpretation": "10 Hz 순시값 표본(부호 대칭·평균 0, 이웃 표본 상관 낮음 lag-1 0.319). 1 Hz 이하 전력 비중 0.07(흰 잡음 0.20보다 낮다). RMS·포락선이 아니다. 5 Hz 위 성분은 접혀 들어온다"
+      },
+      "normal/AI2_Current": {
+        "share_negative": 0.4961,
+        "lag1_within": 0.9281999112557411,
+        "lag1_mean_removed": 0.9268721510269385,
+        "share_power_le_1hz": 0.9630504086359347,
+        "records_ge20": 452,
+        "records_lag1_gt_0_5": 452,
+        "matches": true,
+        "interpretation": "0.6 Hz 사인형 순시값(lag-1 0.928이 순수 0.6 Hz 사인 0.930과 비슷, 사인 R² 중앙 0.996)"
+      },
+      "abnormal/AI0_Vibration": {
+        "share_negative": 0.4633333333333333,
+        "lag1_within": 0.7177874602140809,
+        "lag1_mean_removed": 0.7038720816233812,
+        "share_power_le_1hz": 0.5985392270160788,
+        "records_ge20": 13,
+        "records_lag1_gt_0_5": 12,
+        "matches": true,
+        "interpretation": "이웃 표본 상관이 높다(lag-1 0.718, 기록 평균 제거 0.704, 기록 13개 중 12개가 0.5 초과). 1 Hz 이하 전력 비중이 0.60다. 흰 잡음(0.20)의 약 3배인 느린(저주파) 변동이다. 접힌 광대역(흰 잡음형) 변화와 모양이 다르다. 원인은 미상(가설)"
+      },
+      "abnormal/AI1_Vibration": {
+        "share_negative": 0.49666666666666665,
+        "lag1_within": 0.650591264090157,
+        "lag1_mean_removed": 0.6317693040221434,
+        "share_power_le_1hz": 0.5470365919201218,
+        "records_ge20": 13,
+        "records_lag1_gt_0_5": 13,
+        "matches": true,
+        "interpretation": "이웃 표본 상관이 높다(lag-1 0.651, 기록 평균 제거 0.632, 기록 13개 중 13개가 0.5 초과). 1 Hz 이하 전력 비중이 0.55다. 흰 잡음(0.20)의 약 3배인 느린(저주파) 변동이다. 접힌 광대역(흰 잡음형) 변화와 모양이 다르다. 원인은 미상(가설)"
+      },
+      "abnormal/AI2_Current": {
+        "share_negative": 0.34,
+        "lag1_within": 0.8270618463847459,
+        "lag1_mean_removed": 0.5754988118899197,
+        "share_power_le_1hz": 0.5120125262234928,
+        "records_ge20": 13,
+        "records_lag1_gt_0_5": 7,
+        "matches": true,
+        "interpretation": "사인형이 깨졌다(사인 R² 중앙 0.451, 정상 0.996). lag-1 0.827"
+      }
+    },
+    "R2_O10": {
+      "abnormal_vib_no_low_lag_phrase": true,
+      "abnormal_vib_says_high_lag": true,
+      "abnormal_current_not_called_sine": true,
+      "fm_rows_citing": [
+        "FM1",
+        "FM2",
+        "FM3"
+      ],
+      "cited_lines_are_abnormal_vibration": true,
+      "readme_O4a_has_values": true
+    }
+  },
+  "C11_recalibrate": {
+    "exit_code": 0,
+    "passed": true,
+    "units": {
+      "total": 480,
+      "train": 300,
+      "cal": 120,
+      "holdout": 60,
+      "min_cal_for_alpha": 99
+    },
+    "checks": [
+      {
+        "name": "정상 알림 단위 수가 보정 조건부 Beta-Binomial 95백분위 이하",
+        "value": 2,
+        "limit": 2,
+        "ok": true,
+        "false_reject_rate": 0.03580022178986453,
+        "power_if_rate_multiplied": {
+          "2x": 0.07724432359434637,
+          "3x": 0.18641279789240556
+        }
+      },
+      {
+        "name": "고장 주입 cur_noise 0.2 2초 안 탐지율 ≥ 90%",
+        "value": 1.0,
+        "limit": 0.9,
+        "ok": true,
+        "false_reject_rate": null,
+        "power_if_rate_multiplied": null
+      },
+      {
+        "name": "고장 주입 cur_offset 0.4 2초 안 탐지율 ≥ 90%",
+        "value": 1.0,
+        "limit": 0.9,
+        "ok": true,
+        "false_reject_rate": null,
+        "power_if_rate_multiplied": null
+      },
+      {
+        "name": "고장 주입 vib_noise 4 2초 안 탐지율 ≥ 90%",
+        "value": 1.0,
+        "limit": 0.9,
+        "ok": true,
+        "false_reject_rate": null,
+        "power_if_rate_multiplied": null
+      }
+    ]
+  },
+  "C12_e1_floor": {
+    "cur_noise/guard_v2": {
+      "floor": 0.1,
+      "ref": 0.1,
+      "match": true
+    },
+    "cur_noise/baseline_v1": {
+      "floor": 0.2,
+      "ref": 0.2,
+      "match": true
+    },
+    "cur_offset/guard_v2": {
+      "floor": 0.4,
+      "ref": 0.4,
+      "match": true
+    },
+    "cur_offset/baseline_v1": {
+      "floor": 0.8,
+      "ref": 0.8,
+      "match": true
+    },
+    "vib_noise/guard_v2": {
+      "floor": 4.0,
+      "ref": 4.0,
+      "match": true
+    },
+    "vib_noise/baseline_v1": {
+      "floor": 4.0,
+      "ref": 4.0,
+      "match": true
+    }
+  },
+  "C13_supervised": {
+    "returncode": 0,
+    "csv_byte_identical": {
+      "random_rows.csv": true,
+      "grouped_records.csv": true,
+      "injection.csv": true
+    },
+    "f1_minus_v2_unweighted_range": [
+      -0.046928674671655735,
+      0.010665023463051648
+    ],
+    "f1_minus_v2_all_range": [
+      -0.1323369372951082,
+      0.010665023463051648
+    ],
+    "stderr_tail": []
+  },
+  "C14_failure_mode_refs": {
+    "decision_table_refs": [
+      "FM1",
+      "FM2",
+      "FM3",
+      "FM4",
+      "FM5",
+      "FM6"
+    ],
+    "all_refs_exist": true
+  },
+  "C15_one_minus_p_wording": {
+    "lines": [
+      {
+        "file": "press_guard/README.md",
+        "line": 76,
+        "negated": true
+      },
+      {
+        "file": "press_guard/README.md",
+        "line": 93,
+        "negated": true
+      },
+      {
+        "file": "press_guard/README.md",
+        "line": 96,
+        "negated": true
+      },
+      {
+        "file": "press_guard/web/app.js",
+        "line": 499,
+        "negated": true
+      }
+    ],
+    "all_negated": true
+  },
+  "C17_R2_O11_aliasing": {
+    "readme_general_form_lines": [
+      186,
+      187,
+      321
+    ],
+    "readme_inverter_lines": [
+      187
+    ],
+    "production_unit_row": [
+      "앨리어싱이라면 원 신호가 k·10 ± 0.6 Hz다. 상용 60 Hz 직입 구동이면 59.4·60.6 Hz(또는 시각이 명목값)여야 하고, 인버터 구동이면 50.6·40.6 Hz처럼 운전 주파수가 그 값이면 된다(가설, 전원 방식 정보 없음)",
+      "0.6 Hz가 정확한 시각의 연속 기계 주기(분당 36회)라면 공백을 건너 위상이 이어져야 한다. 관측과 맞지 않는다(가설 약화, 확정 아님)"
+    ],
+    "old_unconditional_claims": [],
+    "phase_test_consistency_lines": [
+      188
+    ],
+    "remaining_60hz_conditionals": [
+      [
+        "analysis/press_evidence/failure_mode_map.csv",
+        6
+      ],
+      [
+        "analysis/press_evidence/ar2_oscillator.csv",
+        2
+      ],
+      [
+        "analysis/press_evidence/ar2_oscillator.csv",
+        3
+      ],
+      [
+        "analysis/press_evidence/class_differences.csv",
+        11
+      ]
+    ]
+  },
+  "C18_operating_states": {
+    "records_len17": 469,
+    "bic": {
+      "1": 217.4989878844927,
+      "2": -224.10863588678342,
+      "3": -297.6943936263213
+    },
+    "committed_bic": [
+      217.4989878844927,
+      -224.10863588678342,
+      -297.6943936263213
+    ],
+    "boundary": 91.88620735901517,
+    "committed_boundary": 91.88620735901517,
+    "state_counts": {
+      "load": 260,
+      "low": 209
+    },
+    "split_composition": {
+      "A cal": [
+        33,
+        94
+      ],
+      "A eval": [
+        75,
+        96
+      ],
+      "B cal": [
+        29,
+        90
+      ],
+      "B eval": [
+        94,
+        145
+      ]
+    },
+    "split_composition_matches": true,
+    "normal_alarms_by_state": {
+      "A": {
+        "0.01": {
+          "load": [
+            0,
+            21
+          ],
+          "low": [
+            0,
+            75
+          ],
+          "short": [
+            0,
+            24
+          ]
+        },
+        "0.03": {
+          "load": [
+            1,
+            21
+          ],
+          "low": [
+            0,
+            75
+          ],
+          "short": [
+            0,
+            24
+          ]
+        },
+        "0.05": {
+          "load": [
+            1,
+            21
+          ],
+          "low": [
+            0,
+            75
+          ],
+          "short": [
+            0,
+            24
+          ]
+        }
+      },
+      "B": {
+        "0.01": {
+          "load": [
+            3,
+            51
+          ],
+          "low": [
+            0,
+            94
+          ],
+          "short": [
+            0,
+            35
+          ]
+        },
+        "0.03": {
+          "load": [
+            5,
+            51
+          ],
+          "low": [
+            0,
+            94
+          ],
+          "short": [
+            0,
+            35
+          ]
+        },
+        "0.05": {
+          "load": [
+            7,
+            51
+          ],
+          "low": [
+            0,
+            94
+          ],
+          "short": [
+            0,
+            35
+          ]
+        }
+      }
+    },
+    "normal_alarms_by_state_matches": true,
+    "all_normal_alarms_in_load": true
+  },
+  "C19_monitor_branch": {
+    "scenarios": {
+      "current_gain_1": [
+        {
+          "window": 0,
+          "alerted": 2,
+          "limit95": 2,
+          "limit99": 4,
+          "drift_up": false,
+          "change": false,
+          "ratio": 0.879,
+          "action": "관측 지속"
+        },
+        {
+          "window": 1,
+          "alerted": 0,
+          "limit95": 2,
+          "limit99": 4,
+          "drift_up": false,
+          "change": false,
+          "ratio": 0.762,
+          "action": "관측 지속"
+        },
+        {
+          "window": 2,
+          "alerted": 1,
+          "limit95": 2,
+          "limit99": 4,
+          "drift_up": false,
+          "change": false,
+          "ratio": 0.779,
+          "action": "관측 지속"
+        }
+      ],
+      "current_gain_1.3": [
+        {
+          "window": 0,
+          "alerted": 5,
+          "limit95": 2,
+          "limit99": 4,
+          "drift_up": false,
+          "change": false,
+          "ratio": 1.143,
+          "action": "설비 점검 요청(열화 의심)"
+        },
+        {
+          "window": 1,
+          "alerted": 0,
+          "limit95": 2,
+          "limit99": 4,
+          "drift_up": false,
+          "change": false,
+          "ratio": 0.99,
+          "action": "관측 지속"
+        },
+        {
+          "window": 2,
+          "alerted": 1,
+          "limit95": 2,
+          "limit99": 4,
+          "drift_up": false,
+          "change": false,
+          "ratio": 1.013,
+          "action": "관측 지속"
+        }
+      ],
+      "current_gain_1.3_with_change_record": [
+        {
+          "window": 0,
+          "alerted": 5,
+          "limit95": 2,
+          "limit99": 4,
+          "drift_up": false,
+          "change": true,
+          "ratio": 1.143,
+          "action": "재보정 검토(운전 조건 변경·수준 이동)"
+        },
+        {
+          "window": 1,
+          "alerted": 0,
+          "limit95": 2,
+          "limit99": 4,
+          "drift_up": false,
+          "change": false,
+          "ratio": 0.99,
+          "action": "관측 지속"
+        },
+        {
+          "window": 2,
+          "alerted": 1,
+          "limit95": 2,
+          "limit99": 4,
+          "drift_up": false,
+          "change": false,
+          "ratio": 1.013,
+          "action": "관측 지속"
+        }
+      ],
+      "current_gain_1.5": [
+        {
+          "window": 0,
+          "alerted": 12,
+          "limit95": 2,
+          "limit99": 4,
+          "drift_up": true,
+          "change": false,
+          "ratio": 1.319,
+          "action": "재보정 검토(운전 조건 변경·수준 이동)"
+        },
+        {
+          "window": 1,
+          "alerted": 0,
+          "limit95": 2,
+          "limit99": 4,
+          "drift_up": false,
+          "change": false,
+          "ratio": 1.142,
+          "action": "관측 지속"
+        },
+        {
+          "window": 2,
+          "alerted": 5,
+          "limit95": 2,
+          "limit99": 4,
+          "drift_up": false,
+          "change": false,
+          "ratio": 1.169,
+          "action": "설비 점검 요청(열화 의심)"
+        }
+      ],
+      "vibration_noise_2sigma_all_rows": [
+        {
+          "window": 0,
+          "alerted": 57,
+          "limit95": 2,
+          "limit99": 4,
+          "drift_up": false,
+          "change": false,
+          "ratio": 0.879,
+          "action": "설비 점검 요청(열화 의심)"
+        },
+        {
+          "window": 1,
+          "alerted": 56,
+          "limit95": 2,
+          "limit99": 4,
+          "drift_up": false,
+          "change": false,
+          "ratio": 0.762,
+          "action": "설비 점검 요청(열화 의심)"
+        },
+        {
+          "window": 2,
+          "alerted": 56,
+          "limit95": 2,
+          "limit99": 4,
+          "drift_up": false,
+          "change": false,
+          "ratio": 0.779,
+          "action": "설비 점검 요청(열화 의심)"
+        }
+      ]
+    },
+    "band_high": 1.265921414014301,
+    "fm4_uses_current_gain_proxy": true,
+    "fm5_uses_current_gain_proxy": true,
+    "fm4_expected_change": "진동·소음 증가(가이드북 7쪽)와 같은 가압에 드는 전류의 진폭·수준 변화. 누설은 느린 수준 변화일 수 있다",
+    "note": "전류 배율 1.5는 고장 모드표 FM4·FM5의 대리 주입이다. 변경 기록이 없어도 수준 이동 창은 '재보정 검토'로 분기한다."
+  },
+  "C20_rule_transfer_partial": {
+    "rows": [
+      {
+        "split": "A",
+        "family": "vib_shock",
+        "level": 4.0,
+        "reps": 5,
+        "units": 75,
+        "v2_fmax": 29.3,
+        "fisher": 53.3,
+        "stouffer": 12.5,
+        "sum": 53.3,
+        "5nn": 52.3,
+        "match": true
+      },
+      {
+        "split": "A",
+        "family": "vib_noise",
+        "level": 2.0,
+        "reps": 5,
+        "units": 75,
+        "v2_fmax": 76.5,
+        "fisher": 86.7,
+        "stouffer": 41.9,
+        "sum": 86.7,
+        "5nn": 89.9,
+        "match": true
+      },
+      {
+        "split": "A",
+        "family": "cur_offset",
+        "level": 0.2,
+        "reps": 1,
+        "units": 75,
+        "v2_fmax": 40.0,
+        "fisher": 58.7,
+        "stouffer": 24.0,
+        "sum": 58.7,
+        "5nn": 73.3,
+        "match": true
+      },
+      {
+        "split": "B",
+        "family": "vib_shock",
+        "level": 4.0,
+        "reps": 5,
+        "units": 111,
+        "v2_fmax": 87.0,
+        "fisher": 67.0,
+        "stouffer": 15.3,
+        "sum": 77.8,
+        "5nn": 79.6,
+        "match": true
+      },
+      {
+        "split": "B",
+        "family": "vib_noise",
+        "level": 2.0,
+        "reps": 5,
+        "units": 111,
+        "v2_fmax": 95.0,
+        "fisher": 89.5,
+        "stouffer": 42.2,
+        "sum": 94.6,
+        "5nn": 96.4,
+        "match": true
+      },
+      {
+        "split": "B",
+        "family": "cur_offset",
+        "level": 0.2,
+        "reps": 1,
+        "units": 111,
+        "v2_fmax": 52.3,
+        "fisher": 58.6,
+        "stouffer": 23.4,
+        "sum": 69.4,
+        "5nn": 75.7,
+        "match": true
+      }
+    ],
+    "mismatches": []
+  },
+  "C21_level2_non_post_hoc": {
+    "nominal_level1_8h": 29.584993085306845,
+    "ratio": 0.1111111111111111,
+    "cp_upper": 0.42913554703143447,
+    "estimate": 3.2872214539229825,
+    "estimate_upper": 12.695972191584358,
+    "committed": [
+      3.287221453922982,
+      12.695972191584358
+    ],
+    "match": true
+  },
+  "C22_vibration_tones": {
+    "by_file": {
+      "normal": {
+        "records_50rows": 202,
+        "current_freq_median": 0.6000224991195989,
+        "current_freq_sd": 0.0015873734657757925,
+        "AI0_tone_freq_median": 3.593997206123997,
+        "AI0_ratio_median": 5.992025611199722,
+        "AI0_ratio_iqr": [
+          5.960116996944437,
+          6.014788313483805
+        ],
+        "AI1_tone_freq_median": 1.7925680813367297,
+        "AI1_ratio_median": 2.9889827702174143,
+        "AI1_ratio_iqr": [
+          2.9781955928396027,
+          3.0073898979331304
+        ],
+        "harmonic_r2_median_AI0": 0.652076881938829,
+        "harmonic_r2_median_AI1": 0.9125085564647691,
+        "tone_rms_share_of_sd_AI0": 0.5700760883530263,
+        "tone_rms_share_of_sd_AI1": 0.8829491989718213,
+        "tone_amp_median_AI0": 0.048458914948608926,
+        "tone_amp_median_AI1": 0.1216401052765009,
+        "spearman_AI1_tone_amp_vs_current_amp": 0.8905351310074026,
+        "spearman_AI0_tone_amp_vs_current_amp": 0.03659529985054972,
+        "spearman_AI1_tone_freq_vs_current_amp": -0.30547768400838315,
+        "phase_lock_R_AI0_vs_6x": 0.09545437162560369,
+        "phase_lock_R_AI1_vs_3x": 0.030764076274238644,
+        "random_R_scale": 0.07035975447302918,
+        "per_record_AI1_tone_freq": null,
+        "spectral_peak_AI0_iqr": [
+          1.78,
+          3.56,
+          3.6
+        ],
+        "spectral_peak_AI1_iqr": [
+          1.78,
+          1.8,
+          3.58
+        ],
+        "spectral_peak_AI0_per_record": null,
+        "spectral_peak_AI1_per_record": null
+      },
+      "abnormal": {
+        "records_50rows": 5,
+        "current_freq_median": 0.500005420412504,
+        "current_freq_sd": 0.0720355016270226,
+        "AI0_tone_freq_median": 3.5485050773794446,
+        "AI0_ratio_median": 6.968963387653601,
+        "AI0_ratio_iqr": [
+          5.717444385006678,
+          7.096933218147779
+        ],
+        "AI1_tone_freq_median": 1.7575256188147548,
+        "AI1_ratio_median": 3.2999737711855093,
+        "AI1_ratio_iqr": [
+          2.7510243648262986,
+          3.661090935339502
+        ],
+        "harmonic_r2_median_AI0": 0.33250893500895295,
+        "harmonic_r2_median_AI1": 0.23921307417786308,
+        "tone_rms_share_of_sd_AI0": 0.037476134060986224,
+        "tone_rms_share_of_sd_AI1": 0.26088473964341585,
+        "tone_amp_median_AI0": 0.02410266153621547,
+        "tone_amp_median_AI1": 0.07160871195744402,
+        "spearman_AI1_tone_amp_vs_current_amp": 0.7999999999999999,
+        "spearman_AI0_tone_amp_vs_current_amp": -0.09999999999999999,
+        "spearman_AI1_tone_freq_vs_current_amp": -0.39999999999999997,
+        "phase_lock_R_AI0_vs_6x": 0.1751854978380187,
+        "phase_lock_R_AI1_vs_3x": 0.35191256792480263,
+        "random_R_scale": 0.4472135954999579,
+        "per_record_AI1_tone_freq": [
+          1.65,
+          1.683,
+          1.881,
+          1.831,
+          1.758
+        ],
+        "spectral_peak_AI0_iqr": [
+          0.3,
+          0.36,
+          0.72
+        ],
+        "spectral_peak_AI1_iqr": [
+          0.18,
+          0.28,
+          0.7000000000000001
+        ],
+        "spectral_peak_AI0_per_record": [
+          1.18,
+          0.72,
+          0.3,
+          0.36,
+          0.02
+        ],
+        "spectral_peak_AI1_per_record": [
+          0.7,
+          0.28,
+          0.18,
+          1.1,
+          0.18
+        ]
+      }
+    },
+    "fm3_expected_change": "회전 1×·2× 성분(수십 Hz)이 접혀 진동 크기가 커지고, 상·하부 진동의 관계가 바뀔 수 있다",
+    "fm3_confirmed_says_assumed_broadband": true,
+    "fm3_premise_is_narrowband": true,
+    "observability_mentions_tones": false,
+    "evidence_readme_mentions_tones": false,
+    "note": "탐색 분석. 50행 기록의 처음 50관측. 조화 R²는 0.6 Hz의 1~8배 사인·코사인 모형. 위상 R은 기록 상대 시각 기준 (진동 위상 − 3·6×전류 위상)."
+  },
+  "timing_s": {
+    "C0": 0.3,
+    "C1": 2.9,
+    "C4": 25.2,
+    "C7": 4.3,
+    "C8b": 1.9,
+    "C8c": 3.0,
+    "C11": 6.6,
+    "C13": 465.6,
+    "C18": 0.3,
+    "C19": 5.5,
+    "C20": 27.2,
+    "C22": 11.4
+  },
+  "elapsed_s": 555.2
+}

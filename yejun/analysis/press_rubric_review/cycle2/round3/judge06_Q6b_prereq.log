@@ -1,0 +1,53 @@
+Q6b 시작 2026-09-28 16:20:33 기준=061fac8
+원본 CSV: ls: press_submission/data: No such file or directory / press_guard/artifacts: ls: press_guard/artifacts: No such file or directory
+STEP Q6b_contract_press_evidence rc=2 wall=1s maxrss_mb=99 load_start=24.00 load_end=23.68
+     판정 Q6b_contract_press_evidence: rc=2 · stderr 1줄 · stdout 0줄 · Traceback 0 · 첫 줄: 선행 파일 없음(press_submission/data/3_소성가공_예지보전/press_data_normal.csv, press_submission/data/3_소성가공_예지보전/outlier_data.csv, press_guard/artifacts/guard_A.json, press_guard/artifacts/guard_B.json). 먼저 python yejun/press_guard/r
+STEP Q6b_contract_press_supervised rc=2 wall=2s maxrss_mb=101 load_start=23.68 load_end=23.68
+     판정 Q6b_contract_press_supervised: rc=2 · stderr 1줄 · stdout 0줄 · Traceback 0 · 첫 줄: 선행 파일 없음(press_submission/data/3_소성가공_예지보전/press_data_normal.csv, press_submission/data/3_소성가공_예지보전/outlier_data.csv, press_guard/artifacts/guard_A.json, press_guard/artifacts/guard_B.json). 먼저 python yejun/press_guard/r
+STEP Q6b_contract_press_advance rc=2 wall=2s maxrss_mb=101 load_start=23.68 load_end=23.68
+     판정 Q6b_contract_press_advance: rc=2 · stderr 1줄 · stdout 0줄 · Traceback 0 · 첫 줄: 선행 파일 없음(press_submission/data/3_소성가공_예지보전/press_data_normal.csv, press_submission/data/3_소성가공_예지보전/outlier_data.csv, press_guard/artifacts/guard_A.json, press_guard/artifacts/guard_B.json). 먼저 python yejun/press_guard/r
+STEP Q6b_contract_press_selection rc=2 wall=2s maxrss_mb=101 load_start=23.68 load_end=24.42
+     판정 Q6b_contract_press_selection: rc=2 · stderr 1줄 · stdout 0줄 · Traceback 0 · 첫 줄: 선행 파일 없음(press_submission/data/3_소성가공_예지보전/press_data_normal.csv, press_submission/data/3_소성가공_예지보전/outlier_data.csv, press_guard/artifacts/guard_A.json, press_guard/artifacts/guard_B.json). 먼저 python yejun/press_guard/r
+STEP Q6b_contract_rerun rc=2 wall=2s maxrss_mb=101 load_start=24.42 load_end=24.42
+     판정 Q6b_contract_rerun: rc=2 · stderr 1줄 · stdout 0줄 · Traceback 0 · 첫 줄: 선행 파일 없음(press_submission/data/3_소성가공_예지보전/press_data_normal.csv, press_submission/data/3_소성가공_예지보전/outlier_data.csv, press_guard/artifacts/guard_A.json, press_guard/artifacts/guard_B.json). 먼저 python yejun/press_guard/r
+STEP Q6b_contract_freeze rc=2 wall=2s maxrss_mb=101 load_start=24.42 load_end=24.63
+     판정 Q6b_contract_freeze: rc=2 · stderr 1줄 · stdout 0줄 · Traceback 0 · 첫 줄: 선행 파일 없음(press_submission/data/3_소성가공_예지보전/press_data_normal.csv, press_submission/data/3_소성가공_예지보전/outlier_data.csv, press_guard/artifacts/guard_A.json, press_guard/artifacts/guard_B.json). 먼저 python yejun/press_guard/r
+     동결 거부 뒤 press_supervised/expected 변경: 0개
+STEP Q6b_supp_verify rc=2 wall=5s maxrss_mb=187 load_start=24.63 load_end=26.18
+     판정 Q6b_supp_verify: rc=2 · stderr 1줄 · stdout 0줄 · Traceback 0 · 첫 줄: 선행 파일 없음(press_data_normal.csv, outlier_data.csv, guard_A.json, guard_B.json). 먼저 python yejun/press_guard/reproduce.py 로 원본 배치(--data 주최 측 ZIP)와 학습을 한다
+STEP Q6b_supp_strict rc=2 wall=5s maxrss_mb=186 load_start=26.18 load_end=28.09
+     판정 Q6b_supp_strict: rc=2 · stderr 1줄 · stdout 0줄 · Traceback 0 · 첫 줄: 선행 파일 없음(press_data_normal.csv, outlier_data.csv, guard_A.json, guard_B.json). 먼저 python yejun/press_guard/reproduce.py 로 원본 배치(--data 주최 측 ZIP)와 학습을 한다
+STEP Q6b_supp_rerun rc=2 wall=7s maxrss_mb=186 load_start=28.09 load_end=28.48
+     판정 Q6b_supp_rerun: rc=2 · stderr 1줄 · stdout 0줄 · Traceback 0 · 첫 줄: 선행 파일 없음(press_data_normal.csv, outlier_data.csv, guard_A.json, guard_B.json). 먼저 python yejun/press_guard/reproduce.py 로 원본 배치(--data 주최 측 ZIP)와 학습을 한다
+STEP Q6b_contract_from_root rc=2 wall=1s maxrss_mb=100 load_start=28.48 load_end=27.96
+     판정 Q6b_contract_from_root: rc=2 · stderr 1줄 · stdout 0줄 · Traceback 0 · 첫 줄: 선행 파일 없음(press_submission/data/3_소성가공_예지보전/press_data_normal.csv, press_submission/data/3_소성가공_예지보전/outlier_data.csv, press_guard/artifacts/guard_A.json, press_guard/artifacts/guard_B.json). 먼저 python yejun/press_guard/r
+STEP Q6b0_place_data rc=0 wall=5s maxrss_mb=184 load_start=27.96 load_end=27.56
+STEP Q6b_partial_contract rc=2 wall=2s maxrss_mb=100 load_start=27.56 load_end=27.56
+     판정 Q6b_partial_contract: rc=2 · stderr 1줄 · stdout 0줄 · Traceback 0 · 첫 줄: 선행 파일 없음(press_guard/artifacts/guard_A.json, press_guard/artifacts/guard_B.json). 먼저 python yejun/press_guard/reproduce.py 로 원본 배치(--data 주최 측 ZIP)와 학습을 한다
+STEP Q6b_partial_supp rc=2 wall=6s maxrss_mb=187 load_start=27.56 load_end=27.76
+     판정 Q6b_partial_supp: rc=2 · stderr 1줄 · stdout 0줄 · Traceback 0 · 첫 줄: 선행 파일 없음(guard_A.json, guard_B.json). 먼저 python yejun/press_guard/reproduce.py 로 원본 배치(--data 주최 측 ZIP)와 학습을 한다
+STEP Q6b_pytest_press_evidence rc=1 wall=5s maxrss_mb=131 load_start=27.76 load_end=27.30
+---- Q6b_pytest_press_evidence stdout(끝 3줄)
+=========================== short test summary info ============================
+FAILED analysis/press_evidence/test_contract.py::test_committed_run_passes - ...
+1 failed, 5 passed in 3.48s
+STEP Q6b_pytest_press_supervised rc=1 wall=4s maxrss_mb=131 load_start=27.30 load_end=27.83
+---- Q6b_pytest_press_supervised stdout(끝 3줄)
+=========================== short test summary info ============================
+FAILED analysis/press_supervised/test_contract.py::test_committed_run_passes
+1 failed, 5 passed in 2.32s
+STEP Q6b_pytest_press_advance rc=0 wall=4s maxrss_mb=129 load_start=27.83 load_end=28.89
+---- Q6b_pytest_press_advance stdout(끝 3줄)
+........                                                                 [100%]
+8 passed in 2.34s
+STEP Q6b_pytest_press_selection rc=1 wall=5s maxrss_mb=127 load_start=28.89 load_end=29.54
+---- Q6b_pytest_press_selection stdout(끝 3줄)
+=========================== short test summary info ============================
+FAILED analysis/press_selection/test_contract.py::test_committed_run_passes
+1 failed, 5 passed in 2.80s
+STEP Q6b_pytest_press_supplement rc=1 wall=10s maxrss_mb=332 load_start=29.54 load_end=29.67
+---- Q6b_pytest_press_supplement stdout(끝 3줄)
+FAILED analysis/press_supplement/test_contract.py::test_expected_tampering_is_detected
+FAILED analysis/press_supplement/test_contract.py::test_missing_external_input_is_skipped_not_failed
+7 failed, 3 passed, 3 skipped in 7.47s
+Q6b 끝 2026-09-28 16:21:50

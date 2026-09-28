@@ -1,0 +1,28 @@
+Q13 시작 2026-09-28 17:25:21 기준=061fac8 PY=/opt/anaconda3/bin/python 부하={ 6.64 5.67 8.87 }
+STEP Q13_reproduce_timing rc=0 wall=859s maxrss_mb=759 load_start=6.64 load_end=3.15
+---- Q13_reproduce_timing stdout(끝 4줄)
+[15/15] 보완 실험 E1~E3 동결값 비교 …
+      통과 · 1.3초 · 통과: 무결성·기대값 비교 E1, E3 · 건너뜀 E2(외부 입력 없음)
+
+15/15 단계 통과 · 856.8초 · 요약 press_guard/outputs/reproduce_summary.json
+== reproduce_summary: mode=quick python=3.12.2 15/15 통과 · 실패 0 · 856.8초
+  [01] rc=0    29.0s  v1 선행(주 모델·기준모델·행별 예측)  | }  | U+FFFD 로그 0
+  [02] rc=0     1.3s  v1 동결값 비교  | 16/16 통과 (1~2단계 부분 비교, 필수 집계 9개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 b372  | U+FFFD 로그 0
+  [03] rc=0    70.0s  v2 학습·시간순 5회  |     B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3                | U+FFFD 로그 0
+  [04] rc=0   230.5s  v2 분석  | }  | U+FFFD 로그 0
+  [05] rc=0   244.0s  v2 실행 검증(audit)  | 16/16 통과 → /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/  | U+FFFD 로그 0
+  [06] rc=0     1.9s  v2 동결값 비교  | 53/53 통과. 코드 2622d9f2a5eb vs 동결 2622d9f2a5eb; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64b  | U+FFFD 로그 0
+  [07] rc=0     9.8s  진단 표(press_evidence)  |     B 12 0.099174 0.099174      180               11  0.061111       0.099126          False  | U+FFFD 로그 0
+  [08] rc=0    35.5s  진단 보강 표·그림  | 완료 33.7초, 표 20개, 그림 5장  | U+FFFD 로그 0
+  [09] rc=0   154.6s  지도학습 기준선(press_supervised)  | done 153.2 s  | U+FFFD 로그 0
+  [10] rc=0    77.1s  모델 선정 근거(press_selection)  | 내부 점검: 통과 · 75.7 s  | U+FFFD 로그 0
+  [11] rc=0     0.5s  press_evidence 동결값 비교  | 통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 42개)  | U+FFFD 로그 0
+  [12] rc=0     0.4s  press_supervised 동결값 비교  | 통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)  | U+FFFD 로그 0
+  [13] rc=0     0.4s  press_advance 동결값 비교  | 통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)  | U+FFFD 로그 0
+  [14] rc=0     0.5s  press_selection 동결값 비교  | 통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 12개)  | U+FFFD 로그 0
+  [15] rc=0     1.3s  보완 실험 E1~E3 동결값 비교  | 통과: 무결성·기대값 비교 E1, E3 · 건너뜀 E2(외부 입력 없음)  | U+FFFD 로그 0
+== 단계 로그·요약 last_line의 U+FFFD 합계 0 · 로그 경로 형식 press_guard/outputs/reproduce_logs/01.log
+---- 커밋 동결 해시 대조: 저장 모델·보정기 4/4 같음 {'guard_A.json': True, 'guard_B.json': True, 'probability_A.json': True, 'probability_B.json': True}
+     행 단위 예측 6/6 같음 {'predictions_normal_A.csv': True, 'predictions_normal_B.csv': True, 'predictions_abnormal_A.csv': True, 'predictions_abnormal_B.csv': True, 'test_predictions_A.csv': True, 'test_predictions_B.csv': True}
+---- 실행 중 1분 부하 평균: 평균 5.0 · 최대 7.3 (30초 간격 29회)
+Q13 끝 2026-09-28 17:39:41

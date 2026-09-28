@@ -1,0 +1,86 @@
+{
+ "list": "/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r3/Q5_package/package_list.csv",
+ "listed_files": 464,
+ "md_files": 18,
+ "links_checked": 159,
+ "dead_links": [
+  {
+   "file": "yejun/analysis/press_evidence/README.md",
+   "line": 42,
+   "target": "../press_dayshift/README.md",
+   "resolved": "yejun/analysis/press_dayshift/README.md"
+  },
+  {
+   "file": "yejun/analysis/press_selection/README.md",
+   "line": 158,
+   "target": "../press_early/README.md",
+   "resolved": "yejun/analysis/press_early/README.md"
+  },
+  {
+   "file": "yejun/analysis/press_supplement/README.md",
+   "line": 3,
+   "target": "../power_press_comparison/README.md",
+   "resolved": "yejun/analysis/power_press_comparison/README.md"
+  },
+  {
+   "file": "yejun/analysis/press_supplement/README.md",
+   "line": 36,
+   "target": "../press_rubric_review/root_round2_checks.json",
+   "resolved": "yejun/analysis/press_rubric_review/root_round2_checks.json"
+  },
+  {
+   "file": "yejun/analysis/press_supplement/README.md",
+   "line": 111,
+   "target": "../press_external/acquisition.json",
+   "resolved": "yejun/analysis/press_external/acquisition.json"
+  },
+  {
+   "file": "yejun/press_submission/README.md",
+   "line": 3,
+   "target": "PLAN.md",
+   "resolved": "yejun/press_submission/PLAN.md"
+  },
+  {
+   "file": "yejun/press_submission/README.md",
+   "line": 5,
+   "target": "../analysis/press_implementation_review/codex_recheck_2.md",
+   "resolved": "yejun/analysis/press_implementation_review/codex_recheck_2.md"
+  },
+  {
+   "file": "yejun/press_submission/README.md",
+   "line": 7,
+   "target": "../analysis/press_implementation_review/claude_recheck_2.md",
+   "resolved": "yejun/analysis/press_implementation_review/claude_recheck_2.md"
+  },
+  {
+   "file": "yejun/press_submission/README.md",
+   "line": 9,
+   "target": "../analysis/press_implementation_review/codex_recheck.md",
+   "resolved": "yejun/analysis/press_implementation_review/codex_recheck.md"
+  },
+  {
+   "file": "yejun/press_submission/README.md",
+   "line": 63,
+   "target": "../analysis/press_dayshift/README.md",
+   "resolved": "yejun/analysis/press_dayshift/README.md"
+  }
+ ],
+ "links_to_regenerated_files": [],
+ "internal_markers": [
+  {
+   "file": "yejun/analysis/press_evidence/README.md",
+   "line": 10,
+   "text": "python analysis/press_evidence/build_diagnostics.py                       # 약 20초, 사이클2 보강 표 20개·그림 5장"
+  },
+  {
+   "file": "yejun/analysis/press_evidence/README.md",
+   "line": 328,
+   "text": "- 사이클2 보강 표의 관계·기대 신호·고장 모드 대응은 기술 통계와 가설이다. 부하·정비·고주파 계측이 없어 물리 원인을 확정할 수 없다."
+  },
+  {
+   "file": "yejun/analysis/press_supplement/README.md",
+   "line": 36,
+   "text": "**평가 기록의 시간대.** 분할 A의 정상 평가 구간(480~599구간, 01:00~01:17)은 정상 77분 중 가장 조용한 시간대다. v2 A 평가 구간 중 최대 점수가 보정 구간 중앙값을 넘는 것은 12/120(교환가능하면 약 60개, Mann–Whitney p=2.9e-11)이고, B 평가 구간도 50/180이다"
+  }
+ ]
+}

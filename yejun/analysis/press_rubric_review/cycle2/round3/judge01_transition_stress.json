@@ -1,0 +1,657 @@
+{
+  "k_splice_row": 25,
+  "pairs_per_condition": 200,
+  "ramp_gains": {
+    "저수준": [
+      1.747793184407043,
+      1.7569095390764902,
+      3.0002886334825933
+    ],
+    "부하": [
+      0.5721500741171848,
+      0.5691812684480297,
+      0.33330126603161087
+    ]
+  },
+  "B": {
+    "region": [
+      420,
+      600
+    ],
+    "pool": {
+      "저수준": 38,
+      "부하": 17
+    },
+    "results": {
+      "0.01": {
+        "저수준→부하": {
+          "pre": 0.0,
+          "post": 0.74,
+          "post2s": 0.74,
+          "mismatch_deg_median": 4.9381609575182885,
+          "reasons": {
+            "dynamics": 109,
+            "waveform+dynamics": 31,
+            "waveform": 8
+          }
+        },
+        "부하→저수준": {
+          "pre": 0.0,
+          "post": 0.43,
+          "post2s": 0.43,
+          "mismatch_deg_median": 4.871969150578142,
+          "reasons": {
+            "dynamics": 84,
+            "waveform": 2
+          }
+        },
+        "저수준→저수준(대조)": {
+          "pre": 0.0,
+          "post": 0.035,
+          "post2s": 0.035,
+          "mismatch_deg_median": 5.179368778321401,
+          "reasons": {
+            "waveform": 7
+          }
+        },
+        "부하→부하(대조)": {
+          "pre": 0.0,
+          "post": 0.3,
+          "post2s": 0.3,
+          "mismatch_deg_median": 4.780135639628332,
+          "reasons": {
+            "dynamics": 60
+          }
+        },
+        "이득 저수준→부하 경사 1행": {
+          "pre": 0.0,
+          "post": 0.9736842105263158,
+          "post2s": 0.9736842105263158,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "dynamics": 29,
+            "waveform": 4,
+            "waveform+dynamics": 4
+          }
+        },
+        "이득 저수준→부하 경사 10행": {
+          "pre": 0.0,
+          "post": 0.07894736842105263,
+          "post2s": 0.05263157894736842,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "magnitude": 2,
+            "dynamics": 1
+          }
+        },
+        "이득 저수준→부하 경사 20행": {
+          "pre": 0.0,
+          "post": 0.05263157894736842,
+          "post2s": 0.02631578947368421,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "magnitude": 2
+          }
+        },
+        "이득 부하→저수준 경사 1행": {
+          "pre": 0.0,
+          "post": 0.5294117647058824,
+          "post2s": 0.5294117647058824,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "dynamics": 9
+          }
+        },
+        "이득 부하→저수준 경사 10행": {
+          "pre": 0.0,
+          "post": 0.0,
+          "post2s": 0.0,
+          "mismatch_deg_median": 0.0,
+          "reasons": {}
+        },
+        "이득 부하→저수준 경사 20행": {
+          "pre": 0.0,
+          "post": 0.058823529411764705,
+          "post2s": 0.058823529411764705,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "waveform": 1
+          }
+        }
+      },
+      "control_by_amp_ratio": {
+        "<1.1배": {
+          "rate": 0.05078125,
+          "n": 256
+        },
+        "1.1~1.3배": {
+          "rate": 0.19642857142857142,
+          "n": 56
+        },
+        "1.3~1.6배": {
+          "rate": 0.3939393939393939,
+          "n": 66
+        },
+        "≥1.6배": {
+          "rate": 0.7727272727272727,
+          "n": 22
+        }
+      },
+      "0.03": {
+        "저수준→부하": {
+          "pre": 0.0,
+          "post": 0.755,
+          "post2s": 0.755,
+          "mismatch_deg_median": 4.9381609575182885,
+          "reasons": {
+            "dynamics": 103,
+            "waveform+dynamics": 38,
+            "waveform": 8,
+            "magnitude": 2
+          }
+        },
+        "부하→저수준": {
+          "pre": 0.095,
+          "post": 0.445,
+          "post2s": 0.445,
+          "mismatch_deg_median": 4.871969150578142,
+          "reasons": {
+            "dynamics": 87,
+            "waveform": 2
+          }
+        },
+        "저수준→저수준(대조)": {
+          "pre": 0.0,
+          "post": 0.035,
+          "post2s": 0.035,
+          "mismatch_deg_median": 5.179368778321401,
+          "reasons": {
+            "waveform": 7
+          }
+        },
+        "부하→부하(대조)": {
+          "pre": 0.125,
+          "post": 0.4,
+          "post2s": 0.4,
+          "mismatch_deg_median": 4.780135639628332,
+          "reasons": {
+            "dynamics": 67,
+            "magnitude": 13
+          }
+        },
+        "이득 저수준→부하 경사 1행": {
+          "pre": 0.0,
+          "post": 1.0,
+          "post2s": 1.0,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "dynamics": 29,
+            "waveform+dynamics": 5,
+            "waveform": 4
+          }
+        },
+        "이득 저수준→부하 경사 10행": {
+          "pre": 0.0,
+          "post": 0.07894736842105263,
+          "post2s": 0.05263157894736842,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "magnitude": 2,
+            "dynamics": 1
+          }
+        },
+        "이득 저수준→부하 경사 20행": {
+          "pre": 0.0,
+          "post": 0.07894736842105263,
+          "post2s": 0.02631578947368421,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "magnitude": 2,
+            "dynamics": 1
+          }
+        },
+        "이득 부하→저수준 경사 1행": {
+          "pre": 0.11764705882352941,
+          "post": 0.5882352941176471,
+          "post2s": 0.5882352941176471,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "dynamics": 10
+          }
+        },
+        "이득 부하→저수준 경사 10행": {
+          "pre": 0.11764705882352941,
+          "post": 0.058823529411764705,
+          "post2s": 0.058823529411764705,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "waveform": 1
+          }
+        },
+        "이득 부하→저수준 경사 20행": {
+          "pre": 0.11764705882352941,
+          "post": 0.058823529411764705,
+          "post2s": 0.058823529411764705,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "waveform": 1
+          }
+        }
+      },
+      "0.05": {
+        "저수준→부하": {
+          "pre": 0.0,
+          "post": 0.775,
+          "post2s": 0.775,
+          "mismatch_deg_median": 4.9381609575182885,
+          "reasons": {
+            "dynamics": 103,
+            "waveform+dynamics": 41,
+            "waveform": 9,
+            "magnitude": 2
+          }
+        },
+        "부하→저수준": {
+          "pre": 0.155,
+          "post": 0.465,
+          "post2s": 0.465,
+          "mismatch_deg_median": 4.871969150578142,
+          "reasons": {
+            "dynamics": 91,
+            "waveform": 2
+          }
+        },
+        "저수준→저수준(대조)": {
+          "pre": 0.0,
+          "post": 0.05,
+          "post2s": 0.05,
+          "mismatch_deg_median": 5.179368778321401,
+          "reasons": {
+            "waveform": 10
+          }
+        },
+        "부하→부하(대조)": {
+          "pre": 0.185,
+          "post": 0.455,
+          "post2s": 0.455,
+          "mismatch_deg_median": 4.780135639628332,
+          "reasons": {
+            "dynamics": 70,
+            "magnitude": 18,
+            "magnitude+dynamics": 3
+          }
+        },
+        "이득 저수준→부하 경사 1행": {
+          "pre": 0.0,
+          "post": 1.0,
+          "post2s": 1.0,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "dynamics": 29,
+            "waveform+dynamics": 6,
+            "waveform": 3
+          }
+        },
+        "이득 저수준→부하 경사 10행": {
+          "pre": 0.0,
+          "post": 0.18421052631578946,
+          "post2s": 0.15789473684210525,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "dynamics": 4,
+            "magnitude": 3
+          }
+        },
+        "이득 저수준→부하 경사 20행": {
+          "pre": 0.0,
+          "post": 0.07894736842105263,
+          "post2s": 0.05263157894736842,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "magnitude": 3
+          }
+        },
+        "이득 부하→저수준 경사 1행": {
+          "pre": 0.17647058823529413,
+          "post": 0.5882352941176471,
+          "post2s": 0.5882352941176471,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "dynamics": 10
+          }
+        },
+        "이득 부하→저수준 경사 10행": {
+          "pre": 0.17647058823529413,
+          "post": 0.058823529411764705,
+          "post2s": 0.058823529411764705,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "waveform": 1
+          }
+        },
+        "이득 부하→저수준 경사 20행": {
+          "pre": 0.17647058823529413,
+          "post": 0.058823529411764705,
+          "post2s": 0.058823529411764705,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "waveform": 1
+          }
+        }
+      }
+    }
+  },
+  "A": {
+    "region": [
+      480,
+      600
+    ],
+    "pool": {
+      "저수준": 31,
+      "부하": 8
+    },
+    "results": {
+      "0.01": {
+        "저수준→부하": {
+          "pre": 0.0,
+          "post": 0.58,
+          "post2s": 0.58,
+          "mismatch_deg_median": 4.526473319656238,
+          "reasons": {
+            "dynamics": 100,
+            "waveform+dynamics": 10,
+            "waveform": 6
+          }
+        },
+        "부하→저수준": {
+          "pre": 0.0,
+          "post": 0.25,
+          "post2s": 0.25,
+          "mismatch_deg_median": 5.910817090453209,
+          "reasons": {
+            "dynamics": 50
+          }
+        },
+        "저수준→저수준(대조)": {
+          "pre": 0.0,
+          "post": 0.015,
+          "post2s": 0.015,
+          "mismatch_deg_median": 4.664945730789625,
+          "reasons": {
+            "waveform": 3
+          }
+        },
+        "부하→부하(대조)": {
+          "pre": 0.0,
+          "post": 0.25,
+          "post2s": 0.25,
+          "mismatch_deg_median": 4.929563649740974,
+          "reasons": {
+            "dynamics": 50
+          }
+        },
+        "이득 저수준→부하 경사 1행": {
+          "pre": 0.0,
+          "post": 0.967741935483871,
+          "post2s": 0.967741935483871,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "dynamics": 28,
+            "waveform": 2
+          }
+        },
+        "이득 저수준→부하 경사 10행": {
+          "pre": 0.0,
+          "post": 0.0,
+          "post2s": 0.0,
+          "mismatch_deg_median": 0.0,
+          "reasons": {}
+        },
+        "이득 저수준→부하 경사 20행": {
+          "pre": 0.0,
+          "post": 0.0,
+          "post2s": 0.0,
+          "mismatch_deg_median": 0.0,
+          "reasons": {}
+        },
+        "이득 부하→저수준 경사 1행": {
+          "pre": 0.0,
+          "post": 0.375,
+          "post2s": 0.375,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "dynamics": 3
+          }
+        },
+        "이득 부하→저수준 경사 10행": {
+          "pre": 0.0,
+          "post": 0.0,
+          "post2s": 0.0,
+          "mismatch_deg_median": 0.0,
+          "reasons": {}
+        },
+        "이득 부하→저수준 경사 20행": {
+          "pre": 0.0,
+          "post": 0.0,
+          "post2s": 0.0,
+          "mismatch_deg_median": 0.0,
+          "reasons": {}
+        }
+      },
+      "control_by_amp_ratio": {
+        "<1.1배": {
+          "rate": 0.01327433628318584,
+          "n": 226
+        },
+        "1.1~1.3배": {
+          "rate": 0.13725490196078433,
+          "n": 51
+        },
+        "1.3~1.6배": {
+          "rate": 0.2345679012345679,
+          "n": 81
+        },
+        "≥1.6배": {
+          "rate": 0.5714285714285714,
+          "n": 42
+        }
+      },
+      "0.03": {
+        "저수준→부하": {
+          "pre": 0.0,
+          "post": 0.65,
+          "post2s": 0.65,
+          "mismatch_deg_median": 4.526473319656238,
+          "reasons": {
+            "dynamics": 99,
+            "waveform+dynamics": 27,
+            "waveform": 4
+          }
+        },
+        "부하→저수준": {
+          "pre": 0.0,
+          "post": 0.28,
+          "post2s": 0.28,
+          "mismatch_deg_median": 5.910817090453209,
+          "reasons": {
+            "dynamics": 56
+          }
+        },
+        "저수준→저수준(대조)": {
+          "pre": 0.0,
+          "post": 0.025,
+          "post2s": 0.025,
+          "mismatch_deg_median": 4.664945730789625,
+          "reasons": {
+            "waveform": 5
+          }
+        },
+        "부하→부하(대조)": {
+          "pre": 0.0,
+          "post": 0.385,
+          "post2s": 0.385,
+          "mismatch_deg_median": 4.929563649740974,
+          "reasons": {
+            "dynamics": 67,
+            "waveform": 7,
+            "waveform+dynamics": 3
+          }
+        },
+        "이득 저수준→부하 경사 1행": {
+          "pre": 0.0,
+          "post": 1.0,
+          "post2s": 1.0,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "dynamics": 26,
+            "waveform+dynamics": 3,
+            "waveform": 2
+          }
+        },
+        "이득 저수준→부하 경사 10행": {
+          "pre": 0.0,
+          "post": 0.03225806451612903,
+          "post2s": 0.03225806451612903,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "dynamics": 1
+          }
+        },
+        "이득 저수준→부하 경사 20행": {
+          "pre": 0.0,
+          "post": 0.0,
+          "post2s": 0.0,
+          "mismatch_deg_median": 0.0,
+          "reasons": {}
+        },
+        "이득 부하→저수준 경사 1행": {
+          "pre": 0.0,
+          "post": 0.5,
+          "post2s": 0.5,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "dynamics": 4
+          }
+        },
+        "이득 부하→저수준 경사 10행": {
+          "pre": 0.0,
+          "post": 0.0,
+          "post2s": 0.0,
+          "mismatch_deg_median": 0.0,
+          "reasons": {}
+        },
+        "이득 부하→저수준 경사 20행": {
+          "pre": 0.0,
+          "post": 0.125,
+          "post2s": 0.125,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "waveform": 1
+          }
+        }
+      },
+      "0.05": {
+        "저수준→부하": {
+          "pre": 0.0,
+          "post": 0.665,
+          "post2s": 0.665,
+          "mismatch_deg_median": 4.526473319656238,
+          "reasons": {
+            "dynamics": 98,
+            "waveform+dynamics": 28,
+            "waveform": 7
+          }
+        },
+        "부하→저수준": {
+          "pre": 0.0,
+          "post": 0.32,
+          "post2s": 0.32,
+          "mismatch_deg_median": 5.910817090453209,
+          "reasons": {
+            "dynamics": 63,
+            "waveform": 1
+          }
+        },
+        "저수준→저수준(대조)": {
+          "pre": 0.0,
+          "post": 0.035,
+          "post2s": 0.035,
+          "mismatch_deg_median": 4.664945730789625,
+          "reasons": {
+            "waveform": 6,
+            "dynamics": 1
+          }
+        },
+        "부하→부하(대조)": {
+          "pre": 0.0,
+          "post": 0.445,
+          "post2s": 0.445,
+          "mismatch_deg_median": 4.929563649740974,
+          "reasons": {
+            "dynamics": 75,
+            "waveform": 11,
+            "waveform+dynamics": 3
+          }
+        },
+        "이득 저수준→부하 경사 1행": {
+          "pre": 0.0,
+          "post": 1.0,
+          "post2s": 1.0,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "dynamics": 25,
+            "waveform+dynamics": 4,
+            "waveform": 2
+          }
+        },
+        "이득 저수준→부하 경사 10행": {
+          "pre": 0.0,
+          "post": 0.12903225806451613,
+          "post2s": 0.0967741935483871,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "dynamics": 3,
+            "magnitude": 1
+          }
+        },
+        "이득 저수준→부하 경사 20행": {
+          "pre": 0.0,
+          "post": 0.03225806451612903,
+          "post2s": 0.0,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "magnitude": 1
+          }
+        },
+        "이득 부하→저수준 경사 1행": {
+          "pre": 0.0,
+          "post": 0.625,
+          "post2s": 0.625,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "dynamics": 5
+          }
+        },
+        "이득 부하→저수준 경사 10행": {
+          "pre": 0.0,
+          "post": 0.125,
+          "post2s": 0.125,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "waveform": 1
+          }
+        },
+        "이득 부하→저수준 경사 20행": {
+          "pre": 0.0,
+          "post": 0.125,
+          "post2s": 0.125,
+          "mismatch_deg_median": 0.0,
+          "reasons": {
+            "waveform": 1
+          }
+        }
+      }
+    }
+  },
+  "elapsed_s": 85.62907862499924
+}

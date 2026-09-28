@@ -1,0 +1,4 @@
+git 클론 목록 464개 · git 없는 사본 목록 466개 · 공통 464개
+git 없는 사본에만: ['yejun/press_submission/artifacts/main_A.json', 'yejun/press_submission/artifacts/main_B.json']
+git 클론에만: []
+공통 파일 중 SHA-256 다름 9개: ['yejun/press_guard/outputs/analysis_summary.json', 'yejun/press_guard/outputs/audit.json', 'yejun/press_guard/outputs/manifest.json', 'yejun/press_submission/outputs/checks.json', 'yejun/press_submission/outputs/manifest.json', 'yejun/analysis/press_evidence/diagnostics_manifest.json', 'yejun/analysis/press_evidence/manifest.json', 'yejun/analysis/press_supervised/manifest.json', 'yejun/analysis/press_selection/manifest.json']

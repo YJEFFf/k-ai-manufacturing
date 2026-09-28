@@ -1,0 +1,1562 @@
+{
+ "tmp_dir": "/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge04_c2r3_rvvbrrr3",
+ "skip_retrain": false,
+ "provenance": {
+  "head": "061fac8ae9a8373265434a5586cde956982db934",
+  "status_before": "?? yejun/analysis/press_rubric_review/cycle2/round3/",
+  "python": "3.12.2",
+  "omp": "1",
+  "cache_dirs_before": [
+   "/Volumes/YJSSD/공모전/k-제조데이터/yejun/analysis/energy_followup/__pycache__",
+   "/Volumes/YJSSD/공모전/k-제조데이터/yejun/analysis/reselection/__pycache__",
+   "/Volumes/YJSSD/공모전/k-제조데이터/yejun/analysis/reselection/injection/__pycache__",
+   "/Volumes/YJSSD/공모전/k-제조데이터/yejun/power_submission/__pycache__",
+   "/Volumes/YJSSD/공모전/k-제조데이터/yejun/power_submission/powerguard/__pycache__",
+   "/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission/.pytest_cache"
+  ],
+  "status_after": "?? yejun/analysis/press_rubric_review/cycle2/round3/",
+  "cache_dirs_after": [
+   "/Volumes/YJSSD/공모전/k-제조데이터/yejun/analysis/energy_followup/__pycache__",
+   "/Volumes/YJSSD/공모전/k-제조데이터/yejun/analysis/reselection/__pycache__",
+   "/Volumes/YJSSD/공모전/k-제조데이터/yejun/analysis/reselection/injection/__pycache__",
+   "/Volumes/YJSSD/공모전/k-제조데이터/yejun/power_submission/__pycache__",
+   "/Volumes/YJSSD/공모전/k-제조데이터/yejun/power_submission/powerguard/__pycache__",
+   "/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission/.pytest_cache"
+  ]
+ },
+ "retrain_from_raw": {
+  "local_artifacts_eq_manifest": {
+   "guard_A.json": true,
+   "guard_B.json": true,
+   "probability_A.json": true,
+   "probability_B.json": true
+  },
+  "committed_outputs_eq_manifest": {
+   "metrics.csv": true,
+   "rolling.csv": true,
+   "cases_A.csv": true,
+   "cases_B.csv": true,
+   "incidents_A.csv": true,
+   "incidents_B.csv": true,
+   "predictions_normal_A.csv": true,
+   "predictions_normal_B.csv": true,
+   "predictions_abnormal_A.csv": true,
+   "predictions_abnormal_B.csv": true,
+   "test_predictions_A.csv": true,
+   "test_predictions_B.csv": true
+  },
+  "committed_analysis_outputs_eq_manifest_all": true,
+  "analysis_mismatch": [],
+  "returncode": 0,
+  "seconds": 99.6,
+  "stderr_tail": "",
+  "artifacts_eq_manifest": {
+   "guard_A.json": true,
+   "guard_B.json": true,
+   "probability_A.json": true,
+   "probability_B.json": true
+  },
+  "outputs_eq_manifest": {
+   "metrics.csv": true,
+   "rolling.csv": true,
+   "cases_A.csv": true,
+   "cases_B.csv": true,
+   "incidents_A.csv": true,
+   "incidents_B.csv": true,
+   "predictions_normal_A.csv": true,
+   "predictions_normal_B.csv": true,
+   "predictions_abnormal_A.csv": true,
+   "predictions_abnormal_B.csv": true,
+   "test_predictions_A.csv": true,
+   "test_predictions_B.csv": true
+  }
+ },
+ "R2_03_incident_summary": {
+  "rows": 12,
+  "code_eq_independent_all": true,
+  "csv_eq_all": true,
+  "table": [
+   {
+    "split": "A",
+    "alpha": 0.01,
+    "subset": "normal_test",
+    "records": 120,
+    "case_notifications": 0,
+    "case_escalations": 0,
+    "incidents": 0,
+    "incident_level2": 0,
+    "incident_notifications": 0,
+    "incident_updates": 0,
+    "code_eq_mine": true,
+    "csv_eq": true
+   },
+   {
+    "split": "A",
+    "alpha": 0.01,
+    "subset": "abnormal",
+    "records": 21,
+    "case_notifications": 21,
+    "case_escalations": 21,
+    "incidents": 1,
+    "incident_level2": 1,
+    "incident_notifications": 2,
+    "incident_updates": 2,
+    "code_eq_mine": true,
+    "csv_eq": true
+   },
+   {
+    "split": "A",
+    "alpha": 0.03,
+    "subset": "normal_test",
+    "records": 120,
+    "case_notifications": 1,
+    "case_escalations": 0,
+    "incidents": 1,
+    "incident_level2": 0,
+    "incident_notifications": 1,
+    "incident_updates": 0,
+    "code_eq_mine": true,
+    "csv_eq": true
+   },
+   {
+    "split": "A",
+    "alpha": 0.03,
+    "subset": "abnormal",
+    "records": 21,
+    "case_notifications": 21,
+    "case_escalations": 21,
+    "incidents": 1,
+    "incident_level2": 1,
+    "incident_notifications": 2,
+    "incident_updates": 2,
+    "code_eq_mine": true,
+    "csv_eq": true
+   },
+   {
+    "split": "A",
+    "alpha": 0.05,
+    "subset": "normal_test",
+    "records": 120,
+    "case_notifications": 1,
+    "case_escalations": 0,
+    "incidents": 1,
+    "incident_level2": 0,
+    "incident_notifications": 1,
+    "incident_updates": 0,
+    "code_eq_mine": true,
+    "csv_eq": true
+   },
+   {
+    "split": "A",
+    "alpha": 0.05,
+    "subset": "abnormal",
+    "records": 21,
+    "case_notifications": 21,
+    "case_escalations": 21,
+    "incidents": 1,
+    "incident_level2": 1,
+    "incident_notifications": 2,
+    "incident_updates": 2,
+    "code_eq_mine": true,
+    "csv_eq": true
+   },
+   {
+    "split": "B",
+    "alpha": 0.01,
+    "subset": "normal_test",
+    "records": 180,
+    "case_notifications": 3,
+    "case_escalations": 0,
+    "incidents": 3,
+    "incident_level2": 0,
+    "incident_notifications": 3,
+    "incident_updates": 0,
+    "code_eq_mine": true,
+    "csv_eq": true
+   },
+   {
+    "split": "B",
+    "alpha": 0.01,
+    "subset": "abnormal",
+    "records": 21,
+    "case_notifications": 21,
+    "case_escalations": 21,
+    "incidents": 1,
+    "incident_level2": 1,
+    "incident_notifications": 2,
+    "incident_updates": 2,
+    "code_eq_mine": true,
+    "csv_eq": true
+   },
+   {
+    "split": "B",
+    "alpha": 0.03,
+    "subset": "normal_test",
+    "records": 180,
+    "case_notifications": 5,
+    "case_escalations": 2,
+    "incidents": 5,
+    "incident_level2": 2,
+    "incident_notifications": 7,
+    "incident_updates": 0,
+    "code_eq_mine": true,
+    "csv_eq": true
+   },
+   {
+    "split": "B",
+    "alpha": 0.03,
+    "subset": "abnormal",
+    "records": 21,
+    "case_notifications": 21,
+    "case_escalations": 21,
+    "incidents": 1,
+    "incident_level2": 1,
+    "incident_notifications": 2,
+    "incident_updates": 2,
+    "code_eq_mine": true,
+    "csv_eq": true
+   },
+   {
+    "split": "B",
+    "alpha": 0.05,
+    "subset": "normal_test",
+    "records": 180,
+    "case_notifications": 7,
+    "case_escalations": 3,
+    "incidents": 7,
+    "incident_level2": 3,
+    "incident_notifications": 10,
+    "incident_updates": 0,
+    "code_eq_mine": true,
+    "csv_eq": true
+   },
+   {
+    "split": "B",
+    "alpha": 0.05,
+    "subset": "abnormal",
+    "records": 21,
+    "case_notifications": 21,
+    "case_escalations": 21,
+    "incidents": 1,
+    "incident_level2": 1,
+    "incident_notifications": 2,
+    "incident_updates": 2,
+    "code_eq_mine": true,
+    "csv_eq": true
+   }
+  ]
+ },
+ "R2_03_stream_batch": {
+  "mixed_B_original_time": {
+   "rows": 6697,
+   "batch_eq_independent": true,
+   "incidents": 4,
+   "incident_notifications": 5,
+   "case_notifications": 45,
+   "chunk7_incident_eq_batch": true,
+   "chunk7_case_cols_eq_batch": true,
+   "chunk128_incident_eq_batch": true,
+   "chunk128_case_cols_eq_batch": true
+  },
+  "continuous_B_one_record": {
+   "rows": 6697,
+   "batch_eq_independent": true,
+   "incidents": 9,
+   "incident_notifications": 18,
+   "case_notifications": 18,
+   "chunk7_incident_eq_batch": true,
+   "chunk7_case_cols_eq_batch": true,
+   "chunk128_incident_eq_batch": true,
+   "chunk128_case_cols_eq_batch": true
+  },
+  "chunk1_small": {
+   "rows": 407,
+   "incident_eq_batch": true,
+   "batch_eq_independent": true,
+   "simulate_notify_rows": [
+    63,
+    182,
+    257,
+    258
+   ],
+   "batch_notify_rows": [
+    63,
+    182,
+    257,
+    258
+   ],
+   "simulate_kinds": [
+    "사건 시작",
+    "사건 시작",
+    "사건 시작",
+    "격상"
+   ]
+  }
+ },
+ "new_incident_level_mismatch": {
+  "records": [
+   8,
+   3,
+   41,
+   9
+  ],
+  "alarm_rows_per_fa": [
+   1,
+   1
+  ],
+  "predict_incident_escalations": 1,
+  "predict_incidents": 1,
+  "simulate_events": [
+   {
+    "row_id": 91,
+    "kind": "사건 시작",
+    "notify": 1,
+    "level": 1,
+    "level_name": "주의"
+   },
+   {
+    "row_id": 140,
+    "kind": "격상",
+    "notify": 1,
+    "level": 2,
+    "level_name": "점검 요청"
+   }
+  ],
+  "cases_levels": [
+   1,
+   1
+  ],
+  "incident_table": [
+   {
+    "incident_id": 1,
+    "cases": 2,
+    "level": 1,
+    "level_name": "주의",
+    "escalation_row": 140,
+    "quality_action": "다음 샘플 검사를 앞당긴다(가설)"
+   }
+  ],
+  "note": "사건 격상(predict·simulate: 2단계 '점검 요청' 알림)이 났는데 사건 대기열(model.incidents, 콘솔·incidents_*.csv)은 건 단계 최댓값으로 1단계 '주의'·1단계 품질 조치"
+ },
+ "new_sustained_weak_fault": {
+  "windows": [
+   10,
+   50,
+   90,
+   120,
+   155
+  ],
+  "per_window": [
+   {
+    "family": "cur_noise",
+    "level": 0.1,
+    "start": 10,
+    "records_alarmed": 19,
+    "cases": 19,
+    "case_alerts": 37,
+    "incidents": 3,
+    "incident_alerts": 6,
+    "incidents_escalated": 3,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "cur_noise",
+    "level": 0.1,
+    "start": 50,
+    "records_alarmed": 21,
+    "cases": 21,
+    "case_alerts": 42,
+    "incidents": 1,
+    "incident_alerts": 2,
+    "incidents_escalated": 1,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "cur_noise",
+    "level": 0.1,
+    "start": 90,
+    "records_alarmed": 21,
+    "cases": 21,
+    "case_alerts": 42,
+    "incidents": 1,
+    "incident_alerts": 2,
+    "incidents_escalated": 1,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "cur_noise",
+    "level": 0.1,
+    "start": 120,
+    "records_alarmed": 18,
+    "cases": 18,
+    "case_alerts": 35,
+    "incidents": 4,
+    "incident_alerts": 8,
+    "incidents_escalated": 4,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "cur_noise",
+    "level": 0.1,
+    "start": 155,
+    "records_alarmed": 20,
+    "cases": 20,
+    "case_alerts": 40,
+    "incidents": 2,
+    "incident_alerts": 4,
+    "incidents_escalated": 2,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "cur_noise",
+    "level": 0.2,
+    "start": 10,
+    "records_alarmed": 21,
+    "cases": 21,
+    "case_alerts": 42,
+    "incidents": 1,
+    "incident_alerts": 2,
+    "incidents_escalated": 1,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "cur_noise",
+    "level": 0.2,
+    "start": 50,
+    "records_alarmed": 21,
+    "cases": 21,
+    "case_alerts": 42,
+    "incidents": 1,
+    "incident_alerts": 2,
+    "incidents_escalated": 1,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "cur_noise",
+    "level": 0.2,
+    "start": 90,
+    "records_alarmed": 21,
+    "cases": 21,
+    "case_alerts": 42,
+    "incidents": 1,
+    "incident_alerts": 2,
+    "incidents_escalated": 1,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "cur_noise",
+    "level": 0.2,
+    "start": 120,
+    "records_alarmed": 20,
+    "cases": 20,
+    "case_alerts": 40,
+    "incidents": 2,
+    "incident_alerts": 4,
+    "incidents_escalated": 2,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "cur_noise",
+    "level": 0.2,
+    "start": 155,
+    "records_alarmed": 21,
+    "cases": 21,
+    "case_alerts": 41,
+    "incidents": 1,
+    "incident_alerts": 2,
+    "incidents_escalated": 1,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "cur_offset",
+    "level": 0.2,
+    "start": 10,
+    "records_alarmed": 0,
+    "cases": 0,
+    "case_alerts": 0,
+    "incidents": 0,
+    "incident_alerts": 0,
+    "incidents_escalated": 0,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "cur_offset",
+    "level": 0.2,
+    "start": 50,
+    "records_alarmed": 0,
+    "cases": 0,
+    "case_alerts": 0,
+    "incidents": 0,
+    "incident_alerts": 0,
+    "incidents_escalated": 0,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "cur_offset",
+    "level": 0.2,
+    "start": 90,
+    "records_alarmed": 0,
+    "cases": 0,
+    "case_alerts": 0,
+    "incidents": 0,
+    "incident_alerts": 0,
+    "incidents_escalated": 0,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "cur_offset",
+    "level": 0.2,
+    "start": 120,
+    "records_alarmed": 0,
+    "cases": 0,
+    "case_alerts": 0,
+    "incidents": 0,
+    "incident_alerts": 0,
+    "incidents_escalated": 0,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "cur_offset",
+    "level": 0.2,
+    "start": 155,
+    "records_alarmed": 0,
+    "cases": 0,
+    "case_alerts": 0,
+    "incidents": 0,
+    "incident_alerts": 0,
+    "incidents_escalated": 0,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "cur_offset",
+    "level": 0.4,
+    "start": 10,
+    "records_alarmed": 1,
+    "cases": 1,
+    "case_alerts": 2,
+    "incidents": 1,
+    "incident_alerts": 2,
+    "incidents_escalated": 1,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "cur_offset",
+    "level": 0.4,
+    "start": 50,
+    "records_alarmed": 0,
+    "cases": 0,
+    "case_alerts": 0,
+    "incidents": 0,
+    "incident_alerts": 0,
+    "incidents_escalated": 0,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "cur_offset",
+    "level": 0.4,
+    "start": 90,
+    "records_alarmed": 0,
+    "cases": 0,
+    "case_alerts": 0,
+    "incidents": 0,
+    "incident_alerts": 0,
+    "incidents_escalated": 0,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "cur_offset",
+    "level": 0.4,
+    "start": 120,
+    "records_alarmed": 0,
+    "cases": 0,
+    "case_alerts": 0,
+    "incidents": 0,
+    "incident_alerts": 0,
+    "incidents_escalated": 0,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "cur_offset",
+    "level": 0.4,
+    "start": 155,
+    "records_alarmed": 0,
+    "cases": 0,
+    "case_alerts": 0,
+    "incidents": 0,
+    "incident_alerts": 0,
+    "incidents_escalated": 0,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "vib_noise",
+    "level": 2.0,
+    "start": 10,
+    "records_alarmed": 20,
+    "cases": 20,
+    "case_alerts": 39,
+    "incidents": 2,
+    "incident_alerts": 4,
+    "incidents_escalated": 2,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "vib_noise",
+    "level": 2.0,
+    "start": 50,
+    "records_alarmed": 21,
+    "cases": 21,
+    "case_alerts": 41,
+    "incidents": 1,
+    "incident_alerts": 2,
+    "incidents_escalated": 1,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "vib_noise",
+    "level": 2.0,
+    "start": 90,
+    "records_alarmed": 21,
+    "cases": 21,
+    "case_alerts": 38,
+    "incidents": 1,
+    "incident_alerts": 2,
+    "incidents_escalated": 1,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "vib_noise",
+    "level": 2.0,
+    "start": 120,
+    "records_alarmed": 18,
+    "cases": 18,
+    "case_alerts": 34,
+    "incidents": 3,
+    "incident_alerts": 6,
+    "incidents_escalated": 3,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "vib_noise",
+    "level": 2.0,
+    "start": 155,
+    "records_alarmed": 21,
+    "cases": 21,
+    "case_alerts": 42,
+    "incidents": 1,
+    "incident_alerts": 2,
+    "incidents_escalated": 1,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "vib_noise",
+    "level": 4.0,
+    "start": 10,
+    "records_alarmed": 21,
+    "cases": 21,
+    "case_alerts": 42,
+    "incidents": 1,
+    "incident_alerts": 2,
+    "incidents_escalated": 1,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "vib_noise",
+    "level": 4.0,
+    "start": 50,
+    "records_alarmed": 21,
+    "cases": 21,
+    "case_alerts": 42,
+    "incidents": 1,
+    "incident_alerts": 2,
+    "incidents_escalated": 1,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "vib_noise",
+    "level": 4.0,
+    "start": 90,
+    "records_alarmed": 21,
+    "cases": 21,
+    "case_alerts": 42,
+    "incidents": 1,
+    "incident_alerts": 2,
+    "incidents_escalated": 1,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "vib_noise",
+    "level": 4.0,
+    "start": 120,
+    "records_alarmed": 20,
+    "cases": 20,
+    "case_alerts": 40,
+    "incidents": 2,
+    "incident_alerts": 4,
+    "incidents_escalated": 2,
+    "incidents_level1_but_escalated": 0
+   },
+   {
+    "family": "vib_noise",
+    "level": 4.0,
+    "start": 155,
+    "records_alarmed": 21,
+    "cases": 21,
+    "case_alerts": 42,
+    "incidents": 1,
+    "incident_alerts": 2,
+    "incidents_escalated": 1,
+    "incidents_level1_but_escalated": 0
+   }
+  ],
+  "summary": [
+   {
+    "family": "cur_noise",
+    "level": 0.1,
+    "records_alarmed": 19.8,
+    "case_alerts": 39.2,
+    "incidents": 2.2,
+    "incident_alerts": 4.4,
+    "max_incidents": 4,
+    "mismatch_total": 0
+   },
+   {
+    "family": "cur_noise",
+    "level": 0.2,
+    "records_alarmed": 20.8,
+    "case_alerts": 41.4,
+    "incidents": 1.2,
+    "incident_alerts": 2.4,
+    "max_incidents": 2,
+    "mismatch_total": 0
+   },
+   {
+    "family": "cur_offset",
+    "level": 0.2,
+    "records_alarmed": 0.0,
+    "case_alerts": 0.0,
+    "incidents": 0.0,
+    "incident_alerts": 0.0,
+    "max_incidents": 0,
+    "mismatch_total": 0
+   },
+   {
+    "family": "cur_offset",
+    "level": 0.4,
+    "records_alarmed": 0.2,
+    "case_alerts": 0.4,
+    "incidents": 0.2,
+    "incident_alerts": 0.4,
+    "max_incidents": 1,
+    "mismatch_total": 0
+   },
+   {
+    "family": "vib_noise",
+    "level": 2.0,
+    "records_alarmed": 20.2,
+    "case_alerts": 38.8,
+    "incidents": 1.6,
+    "incident_alerts": 3.2,
+    "max_incidents": 3,
+    "mismatch_total": 0
+   },
+   {
+    "family": "vib_noise",
+    "level": 4.0,
+    "records_alarmed": 20.8,
+    "case_alerts": 41.6,
+    "incidents": 1.2,
+    "incident_alerts": 2.4,
+    "max_incidents": 2,
+    "mismatch_total": 0
+   }
+  ],
+  "reference_contest_anomaly": "대회 이상 21기록: 사건 1개·알림 2건(incident_summary_v2.csv)",
+  "note": "[주입] 21연속 기록(약 2.5~3분)의 모든 행. 경보 없는 기록이 끼면 사건이 닫혀 새 사건·새 알림이 된다"
+ },
+ "R2_02_level2_estimate": {
+  "levels_recomputed_rows": 42,
+  "levels_csv_eq_all": true,
+  "nominal_level1_per_8h": 29.58499308530684,
+  "sensitivity": [
+   {
+    "basis": "독립 폴드 α5%(팀 채택)",
+    "level1": 9,
+    "level2": 1,
+    "ratio": 0.1111111111111111,
+    "ratio_hi95": 0.42913554703143447,
+    "level2_per_8h": 3.287221453922982,
+    "level2_per_8h_hi95": 12.695972191584358
+   },
+   {
+    "basis": "독립 폴드 α3%",
+    "level1": 4,
+    "level2": 1,
+    "ratio": 0.25,
+    "ratio_hi95": 0.7513953742698181,
+    "level2_per_8h": 7.39624827132671,
+    "level2_per_8h_hi95": 22.230026952104115
+   },
+   {
+    "basis": "동결 B α3%",
+    "level1": 5,
+    "level2": 2,
+    "ratio": 0.4,
+    "ratio_hi95": 0.8107446225622291,
+    "level2_per_8h": 11.833997234122737,
+    "level2_per_8h_hi95": 23.985874052453255
+   },
+   {
+    "basis": "동결 B α5%",
+    "level1": 7,
+    "level2": 3,
+    "ratio": 0.42857142857142855,
+    "ratio_hi95": 0.7746784159675522,
+    "level2_per_8h": 12.679282750845788,
+    "level2_per_8h_hi95": 22.918855579736487
+   },
+   {
+    "basis": "동결 A α5%",
+    "level1": 1,
+    "level2": 0,
+    "ratio": 0.0,
+    "ratio_hi95": 0.95,
+    "level2_per_8h": 0.0,
+    "level2_per_8h_hi95": 28.1057434310415
+   }
+  ],
+  "csv_nonposthoc_level2": [
+   3.287221,
+   12.695972
+  ],
+  "independent_alpha5_alerted_records_absolute": {
+   "rolling_test_300_359": {
+    "301": 1,
+    "303": 2,
+    "310": 1,
+    "342": 1,
+    "355": 1
+   },
+   "rolling_test_360_419": {
+    "367": 1,
+    "402": 1
+   },
+   "rolling_test_540_599": {
+    "570": 1,
+    "576": 1
+   }
+  },
+  "seen_false_alarm_570_in_independent_fold": {
+   "rolling_test_300_359": null,
+   "rolling_test_360_419": null,
+   "rolling_test_540_599": 1
+  },
+  "note": "팀 채택 비는 독립 폴드 α5% 1/9. 동결 B의 α3·5% 오경보(규칙을 유리하게 고른 자료가 아님)는 2/5·3/7로 더 높다"
+ },
+ "R2_02_expected_effect": {
+  "rows": 27,
+  "formula_eq_all": true,
+  "ratio": 0.1111111111111111,
+  "ratio_hi95": 0.42913554703143447,
+  "level2_per_8h": 3.287221453922982,
+  "level2_per_8h_hi95": 12.695972191584358,
+  "mid_level2_only": [
+   {
+    "alert_scenario": "비사후 추정(독립 폴드 2/1단계 비)",
+    "post_hoc": false,
+    "level2_per_8h": 3.287221453922982,
+    "inspection_hours_per_shift": 1.0957404846409942,
+    "breakeven_loss_ratio": 26.328146137204083
+   },
+   {
+    "alert_scenario": "비사후 추정 95% 상한",
+    "post_hoc": false,
+    "level2_per_8h": 12.695972191584358,
+    "inspection_hours_per_shift": 4.2319907305281195,
+    "breakeven_loss_ratio": 101.68509055421362
+   },
+   {
+    "alert_scenario": "관측",
+    "post_hoc": true,
+    "level2_per_8h": 0.0,
+    "inspection_hours_per_shift": 0.0,
+    "breakeven_loss_ratio": 0.0
+   },
+   {
+    "alert_scenario": "관측 95% 상한",
+    "post_hoc": true,
+    "level2_per_8h": 59.08515450685132,
+    "inspection_hours_per_shift": 19.69505150228377,
+    "breakeven_loss_ratio": 473.22719330004435
+   }
+  ]
+ },
+ "R2_01_monitor_branch": {
+  "x1.3_with_change": [
+   {
+    "w": 0,
+    "units": 5,
+    "lim": [
+     2,
+     4
+    ],
+    "change": true,
+    "ratio": 1.143,
+    "drift": false,
+    "mag": 0.18181818181818182,
+    "cur": 0.8181818181818182,
+    "action": "재보정 검토(운전 조건 변경·수준 이동)",
+    "data": ""
+   },
+   {
+    "w": 1,
+    "units": 0,
+    "lim": [
+     2,
+     4
+    ],
+    "change": false,
+    "ratio": 0.99,
+    "drift": false,
+    "mag": NaN,
+    "cur": NaN,
+    "action": "관측 지속",
+    "data": ""
+   },
+   {
+    "w": 2,
+    "units": 1,
+    "lim": [
+     2,
+     4
+    ],
+    "change": false,
+    "ratio": 1.013,
+    "drift": false,
+    "mag": 1.0,
+    "cur": 0.0,
+    "action": "관측 지속",
+    "data": ""
+   }
+  ],
+  "x1.3_no_change": [
+   {
+    "w": 0,
+    "units": 5,
+    "lim": [
+     2,
+     4
+    ],
+    "change": false,
+    "ratio": 1.143,
+    "drift": false,
+    "mag": 0.18181818181818182,
+    "cur": 0.8181818181818182,
+    "action": "설비 점검 요청(열화 의심)",
+    "data": "점검 '정상 확인' 뒤에만 재보정 자료"
+   },
+   {
+    "w": 1,
+    "units": 0,
+    "lim": [
+     2,
+     4
+    ],
+    "change": false,
+    "ratio": 0.99,
+    "drift": false,
+    "mag": NaN,
+    "cur": NaN,
+    "action": "관측 지속",
+    "data": ""
+   },
+   {
+    "w": 2,
+    "units": 1,
+    "lim": [
+     2,
+     4
+    ],
+    "change": false,
+    "ratio": 1.013,
+    "drift": false,
+    "mag": 1.0,
+    "cur": 0.0,
+    "action": "관측 지속",
+    "data": ""
+   }
+  ],
+  "x1.5_no_change": [
+   {
+    "w": 0,
+    "units": 12,
+    "lim": [
+     2,
+     4
+    ],
+    "change": false,
+    "ratio": 1.319,
+    "drift": true,
+    "mag": 0.09090909090909091,
+    "cur": 0.9090909090909091,
+    "action": "재보정 검토(운전 조건 변경·수준 이동)",
+    "data": ""
+   },
+   {
+    "w": 1,
+    "units": 0,
+    "lim": [
+     2,
+     4
+    ],
+    "change": false,
+    "ratio": 1.142,
+    "drift": false,
+    "mag": NaN,
+    "cur": NaN,
+    "action": "관측 지속",
+    "data": ""
+   },
+   {
+    "w": 2,
+    "units": 5,
+    "lim": [
+     2,
+     4
+    ],
+    "change": false,
+    "ratio": 1.169,
+    "drift": false,
+    "mag": 0.14285714285714285,
+    "cur": 0.8571428571428571,
+    "action": "설비 점검 요청(열화 의심)",
+    "data": "점검 '정상 확인' 뒤에만 재보정 자료"
+   }
+  ],
+  "vib1sigma_last_window_no_change": [
+   {
+    "w": 0,
+    "units": 2,
+    "lim": [
+     2,
+     4
+    ],
+    "change": false,
+    "ratio": 0.879,
+    "drift": false,
+    "mag": 1.0,
+    "cur": 0.0,
+    "action": "관측 지속",
+    "data": ""
+   },
+   {
+    "w": 1,
+    "units": 0,
+    "lim": [
+     2,
+     4
+    ],
+    "change": false,
+    "ratio": 0.762,
+    "drift": false,
+    "mag": NaN,
+    "cur": NaN,
+    "action": "관측 지속",
+    "data": ""
+   },
+   {
+    "w": 2,
+    "units": 12,
+    "lim": [
+     2,
+     4
+    ],
+    "change": false,
+    "ratio": 0.779,
+    "drift": false,
+    "mag": 1.0,
+    "cur": 0.0,
+    "action": "설비 점검 요청(열화 의심)",
+    "data": "점검 '정상 확인' 뒤에만 재보정 자료"
+   }
+  ],
+  "vib1sigma_last_window_with_change": [
+   {
+    "w": 0,
+    "units": 2,
+    "lim": [
+     2,
+     4
+    ],
+    "change": false,
+    "ratio": 0.879,
+    "drift": false,
+    "mag": 1.0,
+    "cur": 0.0,
+    "action": "관측 지속",
+    "data": ""
+   },
+   {
+    "w": 1,
+    "units": 0,
+    "lim": [
+     2,
+     4
+    ],
+    "change": false,
+    "ratio": 0.762,
+    "drift": false,
+    "mag": NaN,
+    "cur": NaN,
+    "action": "관측 지속",
+    "data": ""
+   },
+   {
+    "w": 2,
+    "units": 12,
+    "lim": [
+     2,
+     4
+    ],
+    "change": true,
+    "ratio": 0.779,
+    "drift": false,
+    "mag": 1.0,
+    "cur": 0.0,
+    "action": "재보정 검토(운전 조건 변경·수준 이동)",
+    "data": ""
+   }
+  ],
+  "cur_offset0.2_last_window_no_change": [
+   {
+    "w": 0,
+    "units": 2,
+    "lim": [
+     2,
+     4
+    ],
+    "change": false,
+    "ratio": 0.879,
+    "drift": false,
+    "mag": 1.0,
+    "cur": 0.0,
+    "action": "관측 지속",
+    "data": ""
+   },
+   {
+    "w": 1,
+    "units": 0,
+    "lim": [
+     2,
+     4
+    ],
+    "change": false,
+    "ratio": 0.762,
+    "drift": false,
+    "mag": NaN,
+    "cur": NaN,
+    "action": "관측 지속",
+    "data": ""
+   },
+   {
+    "w": 2,
+    "units": 1,
+    "lim": [
+     2,
+     4
+    ],
+    "change": false,
+    "ratio": 0.779,
+    "drift": false,
+    "mag": 1.0,
+    "cur": 0.0,
+    "action": "관측 지속",
+    "data": ""
+   }
+  ]
+ },
+ "R2_01_recalibration_rule": {
+  "incidents": 5,
+  "cases": 5,
+  "incident_export": {
+   "cases": 5,
+   "unconfirmed_cases": 5,
+   "rows_removed": 186,
+   "rows_kept": 15724
+  },
+  "case_export": {
+   "cases": 5,
+   "unconfirmed_cases": 5,
+   "rows_removed": 186,
+   "rows_kept": 15724
+  },
+  "same_rows_removed": true,
+  "inspect_window_exclusion_in_code": false,
+  "note": "'설비 점검 요청' 창 기간을 재보정 자료에서 빼는 규칙은 OPERATIONS 9단계 문장뿐이고 recalibrate.py에 입력이 없다(수작업)"
+ },
+ "R2_07_monitor_cli": {
+  "returncode": 0,
+  "seconds": 6.3,
+  "alerted_by_window": "2/0/1",
+  "actions": [
+   "관측 지속",
+   "관측 지속",
+   "관측 지속"
+  ],
+  "stdout_tail": "nt_ratio recommended_action\n      0     60              2        2        4                     2                   0       0.879251              관측 지속\n      1     60              0        2        4                     0                   0       0.761639              관측 지속\n      2     60              1        2        4                     1                   0       0.779407              관측 지속\n",
+  "simulate_doc_path_exists": true
+ },
+ "R2_05_jitter_predict": {
+  "0ms": {
+   "normal_records": 180,
+   "normal_alarm_same": true,
+   "normal_alerted_records": 3,
+   "abnormal_records": 21,
+   "abnormal_misses": 31,
+   "abnormal_alarm_same": true,
+   "warning": ""
+  },
+  "1ms": {
+   "normal_records": 180,
+   "normal_alarm_same": true,
+   "normal_alerted_records": 3,
+   "abnormal_records": 21,
+   "abnormal_misses": 31,
+   "abnormal_alarm_same": true,
+   "warning": ""
+  },
+  "2ms": {
+   "normal_records": 180,
+   "normal_alarm_same": true,
+   "normal_alerted_records": 3,
+   "abnormal_records": 21,
+   "abnormal_misses": 31,
+   "abnormal_alarm_same": true,
+   "warning": ""
+  },
+  "10ms": {
+   "normal_records": 180,
+   "normal_alarm_same": true,
+   "normal_alerted_records": 3,
+   "abnormal_records": 21,
+   "abnormal_misses": 31,
+   "abnormal_alarm_same": true,
+   "warning": ""
+  },
+  "20ms": {
+   "normal_records": 1718,
+   "normal_alarm_same": true,
+   "normal_alerted_records": 3,
+   "abnormal_records": 170,
+   "abnormal_misses": 220,
+   "abnormal_alarm_same": false,
+   "warning": "수집 시각 간격 확인: 평균 기록 길이 3.5행. 이웃 행 간격이 0.1초 ± 20 ms를 벗어나면 기록이 쪼개져 파형·예측 오차 성분을 계산하지 못한다(미탐 증가)."
+  },
+  "50ms": {
+   "normal_records": 4064,
+   "normal_alarm_same": true,
+   "normal_alerted_records": 3,
+   "abnormal_records": 403,
+   "abnormal_misses": 380,
+   "abnormal_alarm_same": false,
+   "warning": "수집 시각 간격 확인: 평균 기록 길이 1.5행. 이웃 행 간격이 0.1초 ± 20 ms를 벗어나면 기록이 쪼개져 파형·예측 오차 성분을 계산하지 못한다(미탐 증가)."
+  }
+ },
+ "R2_05_recalibrate_jitter": {
+  "0ms": {
+   "returncode": 0,
+   "seconds": 10.7,
+   "saved": true,
+   "stderr": "",
+   "stdout": "% · 실제 알림률이 명목의 2·3배일 때 거부할 확률(검정력) 8%·19%)\n통과 고장 주입 cur_noise 0.2 2초 안 탐지율 ≥ 90%: 1.0\n통과 고장 주입 cur_offset 0.4 2초 안 탐지율 ≥ 90%: 1.0\n통과 고장 주입 vib_noise 4 2초 안 탐지율 ≥ 90%: 1.0\n교대 8시간 1단계 알림: 명목 31.3건 · 보정 95% 93.5건\n수락 · 모델 저장 /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge04_c2r3_rvvbrrr3/site_0.json · 보고서 /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge04_c2r3_rvvbrrr3/site_0_report.json",
+   "units": {
+    "total": 480,
+    "train": 300,
+    "cal": 120,
+    "holdout": 60,
+    "min_cal_for_alpha": 99
+   },
+   "passed": true,
+   "checks": [
+    [
+     "정상 알림 단위 수가 보정 조건부 Beta-Binomial 95백분위 이하",
+     2,
+     true
+    ],
+    [
+     "고장 주입 cur_noise 0.2 2초 안 탐지율 ≥ 90%",
+     1.0,
+     true
+    ],
+    [
+     "고장 주입 cur_offset 0.4 2초 안 탐지율 ≥ 90%",
+     1.0,
+     true
+    ],
+    [
+     "고장 주입 vib_noise 4 2초 안 탐지율 ≥ 90%",
+     1.0,
+     true
+    ]
+   ],
+   "timing_warning_shown": false
+  },
+  "2ms": {
+   "returncode": 0,
+   "seconds": 10.8,
+   "saved": true,
+   "stderr": "",
+   "stdout": "% · 실제 알림률이 명목의 2·3배일 때 거부할 확률(검정력) 8%·19%)\n통과 고장 주입 cur_noise 0.2 2초 안 탐지율 ≥ 90%: 1.0\n통과 고장 주입 cur_offset 0.4 2초 안 탐지율 ≥ 90%: 1.0\n통과 고장 주입 vib_noise 4 2초 안 탐지율 ≥ 90%: 1.0\n교대 8시간 1단계 알림: 명목 31.3건 · 보정 95% 93.5건\n수락 · 모델 저장 /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge04_c2r3_rvvbrrr3/site_2.json · 보고서 /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge04_c2r3_rvvbrrr3/site_2_report.json",
+   "units": {
+    "total": 480,
+    "train": 300,
+    "cal": 120,
+    "holdout": 60,
+    "min_cal_for_alpha": 99
+   },
+   "passed": true,
+   "checks": [
+    [
+     "정상 알림 단위 수가 보정 조건부 Beta-Binomial 95백분위 이하",
+     2,
+     true
+    ],
+    [
+     "고장 주입 cur_noise 0.2 2초 안 탐지율 ≥ 90%",
+     1.0,
+     true
+    ],
+    [
+     "고장 주입 cur_offset 0.4 2초 안 탐지율 ≥ 90%",
+     1.0,
+     true
+    ],
+    [
+     "고장 주입 vib_noise 4 2초 안 탐지율 ≥ 90%",
+     1.0,
+     true
+    ]
+   ],
+   "timing_warning_shown": false
+  },
+  "50ms": {
+   "returncode": 1,
+   "seconds": 4.8,
+   "saved": false,
+   "stderr": "경고: 수집 시각 간격 확인: 평균 기록 길이 1.5행(0.1초 ± 20 ms 밖의 간격은 기록 경계가 된다)",
+   "stdout": "행 이상 단위가 0개라 판정 불가(최소 10개). 기록이 짧으면 수집 시각 간격을 확인한다)\n실패 고장 주입 cur_offset 0.4 2초 안 탐지율 ≥ 90%: nan (30행 이상 단위가 0개라 판정 불가(최소 10개). 기록이 짧으면 수집 시각 간격을 확인한다)\n실패 고장 주입 vib_noise 4 2초 안 탐지율 ≥ 90%: nan (30행 이상 단위가 0개라 판정 불가(최소 10개). 기록이 짧으면 수집 시각 간격을 확인한다)\n교대 8시간 1단계 알림: 명목 685.0건 · 보정 95% 2043.5건\n거부 · 모델 저장 안 함 · 보고서 /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge04_c2r3_rvvbrrr3/site_50_report.json",
+   "units": {
+    "total": 10492,
+    "train": 10312,
+    "cal": 120,
+    "holdout": 60,
+    "min_cal_for_alpha": 99
+   },
+   "passed": false,
+   "checks": [
+    [
+     "정상 알림 단위 수가 보정 조건부 Beta-Binomial 95백분위 이하",
+     0,
+     true
+    ],
+    [
+     "고장 주입 cur_noise 0.2 2초 안 탐지율 ≥ 90%",
+     NaN,
+     false
+    ],
+    [
+     "고장 주입 cur_offset 0.4 2초 안 탐지율 ≥ 90%",
+     NaN,
+     false
+    ],
+    [
+     "고장 주입 vib_noise 4 2초 안 탐지율 ≥ 90%",
+     NaN,
+     false
+    ]
+   ],
+   "timing_warning_shown": true
+  },
+  "checks_2ms_eq_0ms": true
+ },
+ "R2_05_command_warnings_50ms": {
+  "predict": {
+   "returncode": 0,
+   "warned": true,
+   "tail": "경고: 수집 시각 간격 확인: 평균 기록 길이 1.5행. 이웃 행 간격이 0.1초 ± 20 ms를 벗어나면 기록이 쪼개져 파형·예측 오차 성분을 계산하지 못한다(미탐 증가).\n600행 처리, 사건 38개(건 166) → /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge04_c2r3_rvvbrrr3/pred50.csv"
+  },
+  "simulate": {
+   "returncode": 0,
+   "warned": true,
+   "tail": " 요청 · 구간 375 · magnitude · 진동·부하 확인 · 이상 확률 55.0%\n[2022-07-17 10:53:43.284027] 사건 시작 · 주의 · 구간 386 · dynamics · 전류 파형·계측 확인 · 이상 확률 55.0%\n수집 시각 간격 확인: 평균 기록 길이 1.5행. 이웃 행 간격이 0.1초 ± 20 ms를 벗어나면 기록이 쪼개져 파형·예측 오차 성분을 계산하지 못한다(미탐 증가).\n600행 · 사건 38 · 격상 28 · 근거 추가 6 · 수집 오류 0 · 계산 p95 45.7 ms · 경과 19.9초"
+  },
+  "monitor": {
+   "returncode": 0,
+   "warned": true,
+   "tail": "     4                     0                   0            NaN              관측 지속\n     67     44              0        2        3                     0                   0            NaN              관측 지속\n수집 시각 간격 확인: 평균 기록 길이 1.5행. 이웃 행 간격이 0.1초 ± 20 ms를 벗어나면 기록이 쪼개져 파형·예측 오차 성분을 계산하지 못한다(미탐 증가)."
+  }
+ },
+ "static": {
+  "ops_level2_row": "| 2단계(점검 요청) 교대 8시간 | 비사후 추정 3.3건(95% 상한 12.7건): 1단계 명목 × 독립 시간순 폴드 α 5%의 2단계/1단계 비 1/9. 독립 폴드에서 1→2단계는 α 3% 4→1, α 5% 9→1이다. 대회 정상 평가의 0건(A 0/120·B 0/180, 95% 상한 88·59건)은 규칙을 정하기 전에 본 표본 안 값이다 | [expected_effect_v2.csv](outputs/expected_effect_v2.csv), [alert_levels_v2.csv](outputs/alert_levels_v2.csv) |",
+  "ops_budget_row": "| 목표 k건/교대 설계 | 3건이면 α≈0.08%, 보정 약 1,200단위(정상 약 2.7시간). 현재 구현의 α 선택지(1·3·5%)로는 이 설계를 실행할 수 없다. 그 전까지는 1단계 기록·2단계 출동으로 예산을 맞춘다 | [alert_budget_design_v2.csv](outputs/alert_budget_design_v2.csv), `recalibrate.py --target-alerts-per-8h` |",
+  "readme_level2_line": "- **2단계:** 정상 평가(A·B, 시간순 5창)에서 모두 0건이다. 이상 21구간은 모두 격상했다(지연 중앙 0.2초, 최대 0.6초). 2단계 규칙은 대회 오경보(모두 경보 1행)를 본 뒤 정했으므로 이 0건은 표본 안 값이다. 사후 선택과 무관한 추정은 독립 폴드 α 5%의 2단계/1단계 비 1/9를 1단계 명목에 곱한 교대 8시간 3.3건(95% 상한 12.7건)이다([expected_effect_v2.csv](outputs/expected_effect_v2.csv)).",
+  "index_method_note_level2": "2단계(점검 요청)는 대회 평가 구간에서 0건(95% 상한 A 88건·B 59건)이며 이상 21구간은 모두 첫 경보 0.",
+  "index_mentions_nonposthoc": false,
+  "app_highlight_rule": true,
+  "queue_rows_positive": [
+   35,
+   55,
+   63,
+   71,
+   83,
+   91,
+   95,
+   111,
+   115
+  ],
+  "readme_cited_rows": [
+   35,
+   55,
+   63,
+   71,
+   83,
+   91,
+   95,
+   111,
+   115
+  ],
+  "queue_rows_match": true,
+  "queue_rows": [
+   {
+    "split": "A",
+    "alpha": 0.03,
+    "family": "vib_noise",
+    "level_value": 2.0,
+    "injected_cases": 73,
+    "false_alarm_cases": 1,
+    "injected_below_best_false_alarm": 4
+   },
+   {
+    "split": "A",
+    "alpha": 0.05,
+    "family": "vib_noise",
+    "level_value": 2.0,
+    "injected_cases": 74,
+    "false_alarm_cases": 1,
+    "injected_below_best_false_alarm": 2
+   },
+   {
+    "split": "B",
+    "alpha": 0.01,
+    "family": "cur_noise",
+    "level_value": 0.1,
+    "injected_cases": 111,
+    "false_alarm_cases": 3,
+    "injected_below_best_false_alarm": 1
+   },
+   {
+    "split": "B",
+    "alpha": 0.01,
+    "family": "cur_offset",
+    "level_value": 0.4,
+    "injected_cases": 111,
+    "false_alarm_cases": 3,
+    "injected_below_best_false_alarm": 1
+   },
+   {
+    "split": "B",
+    "alpha": 0.03,
+    "family": "cur_noise",
+    "level_value": 0.1,
+    "injected_cases": 111,
+    "false_alarm_cases": 5,
+    "injected_below_best_false_alarm": 1
+   },
+   {
+    "split": "B",
+    "alpha": 0.03,
+    "family": "cur_offset",
+    "level_value": 0.4,
+    "injected_cases": 111,
+    "false_alarm_cases": 5,
+    "injected_below_best_false_alarm": 1
+   },
+   {
+    "split": "B",
+    "alpha": 0.03,
+    "family": "vib_noise",
+    "level_value": 2.0,
+    "injected_cases": 111,
+    "false_alarm_cases": 5,
+    "injected_below_best_false_alarm": 3
+   },
+   {
+    "split": "B",
+    "alpha": 0.05,
+    "family": "cur_offset",
+    "level_value": 0.4,
+    "injected_cases": 111,
+    "false_alarm_cases": 7,
+    "injected_below_best_false_alarm": 12
+   },
+   {
+    "split": "B",
+    "alpha": 0.05,
+    "family": "vib_noise",
+    "level_value": 2.0,
+    "injected_cases": 111,
+    "false_alarm_cases": 7,
+    "injected_below_best_false_alarm": 3
+   }
+  ],
+  "probability_cap_text": true
+ },
+ "R2_03_segment_metrics_unchanged": {
+  "metrics_csv_eq_round2_commit": true,
+  "retrained_metrics_eq_committed": true,
+  "main": [
+   {
+    "model": "guard_v2",
+    "alpha": 0.01,
+    "fp": 0,
+    "fn": 44,
+    "normal_notified_segments": 0,
+    "abnormal_notified_segments": 21
+   },
+   {
+    "model": "baseline_v1",
+    "alpha": 0.01,
+    "fp": 0,
+    "fn": 99,
+    "normal_notified_segments": 0,
+    "abnormal_notified_segments": 21
+   },
+   {
+    "model": "guard_v2",
+    "alpha": 0.01,
+    "fp": 3,
+    "fn": 31,
+    "normal_notified_segments": 3,
+    "abnormal_notified_segments": 21
+   },
+   {
+    "model": "baseline_v1",
+    "alpha": 0.01,
+    "fp": 3,
+    "fn": 86,
+    "normal_notified_segments": 3,
+    "abnormal_notified_segments": 21
+   }
+  ]
+ },
+ "monitor_alert_count_unit": {
+  "level1_notifications": 21,
+  "level2_escalations": 21,
+  "incident_alerts": 2,
+  "note": "monitor_windows의 level1_notifications·level2_escalations는 건(기록구간) 단위 열(notification·escalation)을 센다"
+ },
+ "incidents_csv_escalation_row": {
+  "A": true,
+  "B": true
+ },
+ "elapsed_s": 455.7
+}

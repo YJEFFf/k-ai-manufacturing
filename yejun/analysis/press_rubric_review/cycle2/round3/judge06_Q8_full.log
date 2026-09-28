@@ -1,0 +1,60 @@
+Q8 시작 2026-09-28 16:14:40 저장소 HEAD=061fac8 기준=061fac8 PY=/opt/anaconda3/bin/python(Python 3.12.2)
+클론 HEAD=061fac8; v1 artifacts 0개; 원본 CSV 0개
+STEP Q8_full_reproduce rc=0 wall=5783s maxrss_mb=1004 load_start=3.08 load_end=3.45
+---- Q8_full_reproduce stdout(끝 40줄)
+입력 배치: {'normal': '/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r3/Q8_full/clone/yejun/press_submission/data/3_소성가공_예지보전/press_data_normal.csv', 'abnormal': '/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r3/Q8_full/clone/yejun/press_submission/data/3_소성가공_예지보전/outlier_data.csv'}
+[1/16] v1 선행(주 모델·기준모델·행별 예측) …
+      통과 · 4466.3초 ·   "dead_component_cases": int((~sens.waveform_only_alarm_possible.fillna(True).astype(bool)).sum()) if "waveform_only_al
+[2/16] v1 동결값 비교 …
+      통과 · 0.9초 · 39/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 b372a18b66af 
+[3/16] 후보 비교(press_advance) …
+      통과 · 14.7초 ·        B     early6_ar2                         3                          21  31   3     0.970990                   1.0
+[4/16] v2 학습·시간순 5회 …
+      통과 · 39.4초 ·     B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              180       
+[5/16] v2 분석 …
+      통과 · 165.0초 · }
+[6/16] v2 실행 검증(audit) …
+      통과 · 219.5초 · 16/16 통과 → /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r3/
+[7/16] v2 동결값 비교 …
+      통과 · 1.7초 · 53/53 통과. 코드 2622d9f2a5eb vs 동결 2622d9f2a5eb; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+[8/16] 진단 표(press_evidence) …
+      통과 · 8.5초 ·     B 12 0.099174 0.099174      180               11  0.061111       0.099126          False
+[9/16] 진단 보강 표·그림 …
+      통과 · 15.4초 · 완료 13.8초, 표 20개, 그림 5장
+[10/16] 지도학습 기준선(press_supervised) …
+      통과 · 157.0초 · done 155.6 s
+[11/16] 모델 선정 근거(press_selection) …
+      통과 · 67.7초 · 내부 점검: 통과 · 66.4 s
+[12/16] press_evidence 동결값 비교 …
+      통과 · 0.4초 · 통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 42개)
+[13/16] press_supervised 동결값 비교 …
+      통과 · 0.4초 · 통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+[14/16] press_advance 동결값 비교 …
+      통과 · 0.4초 · 통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+[15/16] press_selection 동결값 비교 …
+      통과 · 0.4초 · 통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 12개)
+[16/16] 보완 실험 E1~E3 재실행·비교 …
+      통과 · 622.9초 · 통과: 무결성·기대값 비교 E1, E2, E3 · 재실행 E1,E2,E3
+
+16/16 단계 통과 · 5780.5초 · 요약 press_guard/outputs/reproduce_summary.json
+== reproduce_summary: mode=full python=3.12.2 16/16 통과 · 실패 0 · 5780.5초
+  [01] rc=0  4466.3s  v1 선행(주 모델·기준모델·행별 예측)  |   "dead_component_cases": int((~sens.waveform_only_alarm_possible.fillna(True).astype(bool)).sum()) if "wavefo  | U+FFFD 로그 0
+  [02] rc=0     0.9s  v1 동결값 비교  | 39/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 b37  | U+FFFD 로그 0
+  [03] rc=0    14.7s  후보 비교(press_advance)  |        B     early6_ar2                         3                          21  31   3     0.970990              | U+FFFD 로그 0
+  [04] rc=0    39.4s  v2 학습·시간순 5회  |     B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3                | U+FFFD 로그 0
+  [05] rc=0   165.0s  v2 분석  | }  | U+FFFD 로그 0
+  [06] rc=0   219.5s  v2 실행 검증(audit)  | 16/16 통과 → /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/  | U+FFFD 로그 0
+  [07] rc=0     1.7s  v2 동결값 비교  | 53/53 통과. 코드 2622d9f2a5eb vs 동결 2622d9f2a5eb; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64b  | U+FFFD 로그 0
+  [08] rc=0     8.5s  진단 표(press_evidence)  |     B 12 0.099174 0.099174      180               11  0.061111       0.099126          False  | U+FFFD 로그 0
+  [09] rc=0    15.4s  진단 보강 표·그림  | 완료 13.8초, 표 20개, 그림 5장  | U+FFFD 로그 0
+  [10] rc=0   157.0s  지도학습 기준선(press_supervised)  | done 155.6 s  | U+FFFD 로그 0
+  [11] rc=0    67.7s  모델 선정 근거(press_selection)  | 내부 점검: 통과 · 66.4 s  | U+FFFD 로그 0
+  [12] rc=0     0.4s  press_evidence 동결값 비교  | 통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 42개)  | U+FFFD 로그 0
+  [13] rc=0     0.4s  press_supervised 동결값 비교  | 통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)  | U+FFFD 로그 0
+  [14] rc=0     0.4s  press_advance 동결값 비교  | 통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)  | U+FFFD 로그 0
+  [15] rc=0     0.4s  press_selection 동결값 비교  | 통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 12개)  | U+FFFD 로그 0
+  [16] rc=0   622.9s  보완 실험 E1~E3 재실행·비교  | 통과: 무결성·기대값 비교 E1, E2, E3 · 재실행 E1,E2,E3  | U+FFFD 로그 0
+== 단계 로그·요약 last_line의 U+FFFD 합계 0 · 로그 경로 형식 press_guard/outputs/reproduce_logs/01.log
+---- 커밋 동결 해시 대조: 저장 모델·보정기 4/4 같음 {'guard_A.json': True, 'guard_B.json': True, 'probability_A.json': True, 'probability_B.json': True}
+     행 단위 예측 6/6 같음 {'predictions_normal_A.csv': True, 'predictions_normal_B.csv': True, 'predictions_abnormal_A.csv': True, 'predictions_abnormal_B.csv': True, 'test_predictions_A.csv': True, 'test_predictions_B.csv': True}
+Q8 끝 2026-09-28 17:51:04

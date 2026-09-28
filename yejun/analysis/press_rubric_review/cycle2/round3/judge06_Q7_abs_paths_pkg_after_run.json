@@ -1,0 +1,24 @@
+{
+ "/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r3/Q5_package/pkg": [
+  {
+   "file": "yejun/press_guard/outputs/reproduce_summary.json",
+   "record": true,
+   "patterns": {
+    "/private/tmp": 50,
+    "judge06r3": 50
+   },
+   "context": "tep\": \"v1 선행(주 모델·기준모델·행별 예측)\",       \"command\": [         \"/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scra"
+  },
+  {
+   "file": "yejun/press_guard/tools/package_manifest.py",
+   "record": false,
+   "patterns": {
+    "/Users/": 2,
+    "/Volumes/": 2,
+    "/opt/anaconda3": 2,
+    "C:\\\\": 1
+   },
+   "context": "ternal_inputs 등)이 가리키는 파일의 존재,   넣을 문서·코드·실행 기록 JSON의 절대 경로(/Users/, /Volumes/, /opt/anaconda3, C:\\\\)를 본다. - 대회 제출 ZIP 조립은 예준의 지시 전까지 보류한다(yejun/AG"
+  }
+ ]
+}

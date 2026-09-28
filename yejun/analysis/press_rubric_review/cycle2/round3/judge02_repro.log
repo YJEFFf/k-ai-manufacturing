@@ -1,0 +1,83 @@
+HEAD 061fac8ae9a8373265434a5586cde956982db934 · 기준 061fac8ae9a8373265434a5586cde956982db934 · 사본 /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T//judge02_c2r3_repro.BNsxcQ
+9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e  /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T//judge02_c2r3_repro.BNsxcQ/yejun/press_submission/data/3_소성가공_예지보전/outlier_data.csv
+f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7  /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T//judge02_c2r3_repro.BNsxcQ/yejun/press_submission/data/3_소성가공_예지보전/press_data_normal.csv
+[1/23] v1 선행(주 모델·기준모델·행별 예측) …
+      통과 · 9.9초 · }
+[2/23] v1 동결값 비교 …
+      통과 · 0.4초 · 16/16 통과 (1~2단계 부분 비교, 필수 집계 9개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 b372a18b66af v
+[3/23] v2 학습·시간순 5회 …
+      통과 · 25.3초 ·     B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              180       
+[4/23] v2 분석 …
+      통과 · 112.2초 · }
+[5/23] v2 실행 검증(audit) …
+      통과 · 659.2초 · 16/16 통과 → /private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r3_repro.BNsxcQ/yejun/press_guard/outputs/
+[6/23] v2 동결값 비교 …
+      통과 · 5.4초 · 53/53 통과. 코드 2622d9f2a5eb vs 동결 2622d9f2a5eb; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+[7/23] 진단 표(press_evidence) …
+      통과 · 30.0초 ·     B 12 0.099174 0.099174      180               11  0.061111       0.099126          False
+[8/23] 진단 보강 표·그림 …
+      통과 · 44.4초 · 완료 38.9초, 표 20개, 그림 5장
+[9/23] 지도학습 기준선(press_supervised) …
+      통과 · 472.2초 · done 468.2 s
+[10/23] 모델 선정 근거(press_selection) …
+      통과 · 254.8초 · 내부 점검: 통과 · 250.6 s
+[11/23] press_evidence 동결값 비교 …
+      통과 · 1.7초 · 통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 42개)
+[12/23] press_supervised 동결값 비교 …
+      통과 · 1.4초 · 통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+[13/23] press_advance 동결값 비교 …
+      통과 · 1.4초 · 통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+[14/23] press_selection 동결값 비교 …
+      통과 · 1.5초 · 통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 12개)
+[15/23] 보완 실험 E1~E3 동결값 비교 …
+      통과 · 4.2초 · 통과: 무결성·기대값 비교 E1, E3 · 건너뜀 E2(외부 입력 없음)
+[16/23] 시험: v2 …
+      통과 · 285.3초 · 83 passed, 1 skipped in 283.79s (0:04:43)
+[17/23] 시험: v1 …
+      통과 · 23.0초 · 49 passed in 20.39s
+[18/23] 시험: press_advance …
+      통과 · 2.7초 · 8 passed in 1.54s
+[19/23] 시험: press_evidence …
+      통과 · 4.4초 · 6 passed in 2.93s
+[20/23] 시험: press_selection …
+      통과 · 3.1초 · 6 passed in 1.79s
+[21/23] 시험: press_supervised …
+      통과 · 2.5초 · 6 passed in 1.44s
+[22/23] 시험: press_supplement …
+      통과 · 6.0초 · 10 passed, 3 skipped in 4.63s
+[23/23] 시험: 웹 콘솔 …
+      통과 · 1.0초 · web regressions: 11 passed (null gap / empty replay hover / 50k rows / empty selection / sim visibility / escalation tim
+
+23/23 단계 통과 · 1952.1초 · 요약 press_guard/outputs/reproduce_summary.json
+reproduce.py --tests 종료 코드 0 · 1954초
+--- reproduce_summary.json(단계·종료 코드·시간)
+단계 23 실패 0 합계 초 1952.0
+  0     9.9s v1 선행(주 모델·기준모델·행별 예측) | }
+  0     0.4s v1 동결값 비교 | 16/16 통과 (1~2단계 부분 비교, 필수 집계 9개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 b372a18b66af vs 동결 b372a18b66af
+  0    25.3s v2 학습·시간순 5회 |     B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              180                          21         
+  0   112.2s v2 분석 | }
+  0   659.2s v2 실행 검증(audit) | 16/16 통과 → /private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r3_repro.BNsxcQ/yejun/press_guard/outputs/audit.json
+  0     5.4s v2 동결값 비교 | 53/53 통과. 코드 2622d9f2a5eb vs 동결 2622d9f2a5eb; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+  0    30.0s 진단 표(press_evidence) |     B 12 0.099174 0.099174      180               11  0.061111       0.099126          False
+  0    44.4s 진단 보강 표·그림 | 완료 38.9초, 표 20개, 그림 5장
+  0   472.2s 지도학습 기준선(press_supervised) | done 468.2 s
+  0   254.8s 모델 선정 근거(press_selection) | 내부 점검: 통과 · 250.6 s
+  0     1.7s press_evidence 동결값 비교 | 통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 42개)
+  0     1.4s press_supervised 동결값 비교 | 통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+  0     1.4s press_advance 동결값 비교 | 통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+  0     1.5s press_selection 동결값 비교 | 통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 12개)
+  0     4.2s 보완 실험 E1~E3 동결값 비교 | 통과: 무결성·기대값 비교 E1, E3 · 건너뜀 E2(외부 입력 없음)
+  0   285.3s 시험: v2 | 83 passed, 1 skipped in 283.79s (0:04:43)
+  0    23.0s 시험: v1 | 49 passed in 20.39s
+  0     2.7s 시험: press_advance | 8 passed in 1.54s
+  0     4.4s 시험: press_evidence | 6 passed in 2.93s
+  0     3.1s 시험: press_selection | 6 passed in 1.79s
+  0     2.5s 시험: press_supervised | 6 passed in 1.44s
+  0     6.0s 시험: press_supplement | 10 passed, 3 skipped in 4.63s
+  0     1.0s 시험: 웹 콘솔 | web regressions: 11 passed (null gap / empty replay hover / 50k rows / empty selection / sim visibility / escalation timing / level filter / level KPI
+--- 테스트 예측 파일 열·F1·확률 열 확인
+A rows 4690 TP/FP/FN 556 0 44 F1 0.961938 prob cols ['likelihood_ratio', 'anomaly_probability', 'probability_prior', 'record_likelihood_ratio', 'record_probability', 'probability_source', 'file_prior', 'anomaly_probability_file_prior'] file_prior [0.1279317697228145] abnormal LR at cap 555 sha256 b87f1e20aa7ff174
+   digest sha256 b87f1e20aa7ff174 같음
+B rows 6697 TP/FP/FN 569 3 31 F1 0.97099 prob cols ['likelihood_ratio', 'anomaly_probability', 'probability_prior', 'record_likelihood_ratio', 'record_probability', 'probability_source', 'file_prior', 'anomaly_probability_file_prior'] file_prior [0.0895923547857249] abnormal LR at cap 568 sha256 8ad05ed296e7749c
+   digest sha256 8ad05ed296e7749c 같음
+사본 위치: /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T//judge02_c2r3_repro.BNsxcQ

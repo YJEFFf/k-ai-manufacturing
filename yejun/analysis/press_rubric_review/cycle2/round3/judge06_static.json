@@ -1,0 +1,292 @@
+{
+ "commit": "061fac8ae9a8373265434a5586cde956982db934",
+ "python_files_scanned": 78,
+ "team_scope_files": 74,
+ "python_summary": {
+  "팀 시험 밖|read_text:no_encoding": 1,
+  "팀 시험 밖|subprocess_text:no_encoding": 1,
+  "팀 시험 범위|subprocess_text:no_encoding": 2,
+  "팀 시험 범위|unix_module:resource:guarded": 1,
+  "팀 시험 밖|write_text:no_encoding": 1
+ },
+ "python_hits": [
+  {
+   "file": "yejun/analysis/press_early/run_experiment.py",
+   "line": 65,
+   "kind": "read_text:no_encoding",
+   "text": "protocol = json.loads((HERE / \"protocol.json\").read_text())",
+   "team_static_test_scans": false
+  },
+  {
+   "file": "yejun/analysis/press_improvement/run_experiment.py",
+   "line": 168,
+   "kind": "subprocess_text:no_encoding",
+   "text": "head = subprocess.check_output([\"git\", \"rev-parse\", \"HEAD\"], cwd=HERE, text=True).strip()",
+   "team_static_test_scans": false
+  },
+  {
+   "file": "yejun/analysis/press_selection/run.py",
+   "line": 705,
+   "kind": "subprocess_text:no_encoding",
+   "text": "out = subprocess.run([\"git\", \"log\", \"--diff-filter=A\", \"--format=%h %ad\", \"--date=format:%Y-%m-%d %H:%M:%S\", \"--\", path],",
+   "team_static_test_scans": true
+  },
+  {
+   "file": "yejun/press_guard/runtime.py",
+   "line": 48,
+   "kind": "unix_module:resource:guarded",
+   "text": "import resource",
+   "team_static_test_scans": true
+  },
+  {
+   "file": "yejun/press_submission/run_all.py",
+   "line": 57,
+   "kind": "subprocess_text:no_encoding",
+   "text": "return subprocess.run([\"git\", \"rev-parse\", \"--short\", \"HEAD\"], capture_output=True, text=True, check=True,",
+   "team_static_test_scans": true
+  },
+  {
+   "file": "yejun/press_submission/vendor/press_policy_audit.py",
+   "line": 187,
+   "kind": "write_text:no_encoding",
+   "text": "(args.output/'press_policy_manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2))",
+   "team_static_test_scans": false
+  }
+ ],
+ "doc_summary": {
+  "posix_export|yejun/analysis/press_advance/README.md": 1,
+  "internal_marker|yejun/analysis/press_evidence/README.md": 2,
+  "posix_export|yejun/analysis/press_evidence/README.md": 1,
+  "posix_export|yejun/analysis/press_supervised/README.md": 1,
+  "internal_marker|yejun/analysis/press_supplement/README.md": 1,
+  "posix_export|yejun/analysis/press_supplement/README.md": 1,
+  "internal_marker|yejun/press_guard/HISTORY.md": 7,
+  "absolute_path|yejun/press_guard/HISTORY.md": 14,
+  "posix_env_prefix|yejun/press_guard/HISTORY.md": 8,
+  "posix_export|yejun/press_guard/HISTORY.md": 1
+ },
+ "doc_hits": [
+  {
+   "file": "yejun/analysis/press_advance/README.md",
+   "line": 27,
+   "kind": "posix_export",
+   "text": "export OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1        # PowerShell: $env:OMP_NUM_THREADS=1; $env:PYTHONDONTWRITEBYTECODE=1"
+  },
+  {
+   "file": "yejun/analysis/press_evidence/README.md",
+   "line": 10,
+   "kind": "internal_marker",
+   "text": "python analysis/press_evidence/build_diagnostics.py                       # 약 20초, 사이클2 보강 표 20개·그림 5장"
+  },
+  {
+   "file": "yejun/analysis/press_evidence/README.md",
+   "line": 328,
+   "kind": "internal_marker",
+   "text": "- 사이클2 보강 표의 관계·기대 신호·고장 모드 대응은 기술 통계와 가설이다. 부하·정비·고주파 계측이 없어 물리 원인을 확정할 수 없다."
+  },
+  {
+   "file": "yejun/analysis/press_evidence/README.md",
+   "line": 8,
+   "kind": "posix_export",
+   "text": "export OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1        # PowerShell: $env:OMP_NUM_THREADS=1; $env:PYTHONDONTWRITEBYTECODE=1"
+  },
+  {
+   "file": "yejun/analysis/press_supervised/README.md",
+   "line": 81,
+   "kind": "posix_export",
+   "text": "export OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1        # PowerShell: $env:OMP_NUM_THREADS=1; $env:PYTHONDONTWRITEBYTECODE=1"
+  },
+  {
+   "file": "yejun/analysis/press_supplement/README.md",
+   "line": 36,
+   "kind": "internal_marker",
+   "text": "**평가 기록의 시간대.** 분할 A의 정상 평가 구간(480~599구간, 01:00~01:17)은 정상 77분 중 가장 조용한 시간대다. v2 A 평가 구간 중 최대 점수가 보정 구간 중앙값을 넘는 것은 12/120(교환가능하면 약 60개, Mann–Whitney p=2.9e-11)이"
+  },
+  {
+   "file": "yejun/analysis/press_supplement/README.md",
+   "line": 99,
+   "kind": "posix_export",
+   "text": "export OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1        # PowerShell: $env:OMP_NUM_THREADS=1; $env:PYTHONDONTWRITEBYTECODE=1"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 5,
+   "kind": "internal_marker",
+   "text": "## 2026-09-28 루브릭 사이클2 2회차 반영"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 7,
+   "kind": "internal_marker",
+   "text": "2회차 점수는 합계 89.4/100이다(1회차 77.5). 처리 목록은 [cycle2/README.md](../analysis/press_rubric_review/cycle2/README.md)에 있다. press_guard 쪽 변경은 다음과 같다."
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 13,
+   "kind": "internal_marker",
+   "text": "## 2026-09-27 루브릭 사이클2 1회차 반영"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 15,
+   "kind": "internal_marker",
+   "text": "평가관 6명(데이터·모델·오류·현장·창의성·재현성)의 1회차 보완 목록을 반영했다. 원문은 [analysis/press_rubric_review/cycle2/round1/](../analysis/press_rubric_review/cycle2/round1/)에 있다. 주 지표(A F1 "
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 17,
+   "kind": "internal_marker",
+   "text": "| 평가관 항목 | 반영 |"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 61,
+   "kind": "internal_marker",
+   "text": "**A의 정상 알림 0/120은 유리한 조건에서 잰 값이다.** A의 정상 평가 구간(480~599구간, 01:00~01:17)은 정상 77분 중 가장 조용한 시간대다. v2 A 평가 구간 중 최대 점수가 보정 구간 중앙값을 넘는 것은 12/120이다(보정과 평가가 교환가능하면 약 60"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 71,
+   "kind": "absolute_path",
+   "text": "저장소 루트에서 기존 `press_submission`의 고정 의존성이 설치된 Python을 사용한다. 현재 환경은 `/opt/anaconda3/bin/python`이다. 학습 상태·원본·행별 예측은 Git에 넣지 않는다."
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 74,
+   "kind": "absolute_path",
+   "text": "OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/press_guard/train.py --rolling"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 75,
+   "kind": "absolute_path",
+   "text": "OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python -m pytest -q yejun/press_guard/test_guard.py"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 76,
+   "kind": "absolute_path",
+   "text": "OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/press_guard/predict.py --model yejun/press_guard/artifacts/guard_A.json --input new."
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 87,
+   "kind": "absolute_path",
+   "text": "/opt/anaconda3/bin/python yejun/press_guard/train.py --rolling    # 학습·보정·저장·평가 (약 20초)"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 88,
+   "kind": "absolute_path",
+   "text": "/opt/anaconda3/bin/python yejun/press_guard/analyze.py            # 통합 비교·오류 조건·불확실성·업무량·그림 (약 5초)"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 89,
+   "kind": "absolute_path",
+   "text": "/opt/anaconda3/bin/python yejun/press_guard/audit.py              # 실행 검증 16개"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 90,
+   "kind": "absolute_path",
+   "text": "/opt/anaconda3/bin/python yejun/press_guard/verify.py             # 동결 기대값 비교 (--freeze 로 동결)"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 91,
+   "kind": "absolute_path",
+   "text": "PYTHON=/opt/anaconda3/bin/python bash yejun/press_guard/tools/clean_repro.sh # 커밋된 코드·기대값으로 새 클론 재현"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 126,
+   "kind": "absolute_path",
+   "text": "OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/press_guard/serve.py --port 8765   # http://127.0.0.1:8765"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 127,
+   "kind": "absolute_path",
+   "text": "OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/press_guard/audit.py       # outputs/audit.json (실행 검증 16개)"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 128,
+   "kind": "absolute_path",
+   "text": "OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/press_guard/benchmark.py   # outputs/benchmark.json (처리시간)"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 129,
+   "kind": "absolute_path",
+   "text": "OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python -m pytest -q yejun/press_guard/test_guard.py yejun/press_guard/test_serve.py yejun/press_g"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 133,
+   "kind": "internal_marker",
+   "text": "- `benchmark.py`: 분할 A 평가 스트림 4,690행, CPU 한 스레드. 2026-09-26 재측정에서 1행 묶음 호출당 약 11 ms(p95 11.7 ms)로 수집 주기 0.1초보다 짧다. 128행 묶음 약 6,800행/초, 전체 일괄 0.28초. 기기 참고치다(평가관 "
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 173,
+   "kind": "absolute_path",
+   "text": "OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/press_guard/recalibrate.py --normal new_normal.csv --out site_model.json"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 74,
+   "kind": "posix_env_prefix",
+   "text": "OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/press_guard/train.py --rolling"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 75,
+   "kind": "posix_env_prefix",
+   "text": "OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python -m pytest -q yejun/press_guard/test_guard.py"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 76,
+   "kind": "posix_env_prefix",
+   "text": "OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/press_guard/predict.py --model yejun/press_guard/artifacts/guard_A.json --input new."
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 86,
+   "kind": "posix_export",
+   "text": "export OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 126,
+   "kind": "posix_env_prefix",
+   "text": "OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/press_guard/serve.py --port 8765   # http://127.0.0.1:8765"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 127,
+   "kind": "posix_env_prefix",
+   "text": "OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/press_guard/audit.py       # outputs/audit.json (실행 검증 16개)"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 128,
+   "kind": "posix_env_prefix",
+   "text": "OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/press_guard/benchmark.py   # outputs/benchmark.json (처리시간)"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 129,
+   "kind": "posix_env_prefix",
+   "text": "OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python -m pytest -q yejun/press_guard/test_guard.py yejun/press_guard/test_serve.py yejun/press_g"
+  },
+  {
+   "file": "yejun/press_guard/HISTORY.md",
+   "line": 173,
+   "kind": "posix_env_prefix",
+   "text": "OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/press_guard/recalibrate.py --normal new_normal.csv --out site_model.json"
+  }
+ ]
+}

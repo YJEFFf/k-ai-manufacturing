@@ -1,0 +1,48 @@
+Q11 시작 2026-09-28 17:01:05 기준=061fac8 PY=/opt/anaconda3/bin/python
+STEP Q11_clean_repro rc=0 wall=1251s maxrss_mb=767 load_start=11.51 load_end=5.20
+---- Q11_clean_repro stdout(끝 22줄)
+      통과 · 3.4초 · 53/53 통과. 코드 2622d9f2a5eb vs 동결 2622d9f2a5eb; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+[7/15] 진단 표(press_evidence) …
+      통과 · 16.8초 ·     B 12 0.099174 0.099174      180               11  0.061111       0.099126          False
+[8/15] 진단 보강 표·그림 …
+      통과 · 29.0초 · 완료 25.8초, 표 20개, 그림 5장
+[9/15] 지도학습 기준선(press_supervised) …
+      통과 · 291.2초 · done 288.7 s
+[10/15] 모델 선정 근거(press_selection) …
+      통과 · 118.8초 · 내부 점검: 통과 · 116.6 s
+[11/15] press_evidence 동결값 비교 …
+      통과 · 0.8초 · 통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 42개)
+[12/15] press_supervised 동결값 비교 …
+      통과 · 0.7초 · 통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+[13/15] press_advance 동결값 비교 …
+      통과 · 0.7초 · 통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+[14/15] press_selection 동결값 비교 …
+      통과 · 0.7초 · 통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 12개)
+[15/15] 보완 실험 E1~E3 동결값 비교 …
+      통과 · 2.1초 · 통과: 무결성·기대값 비교 E1, E3 · 건너뜀 E2(외부 입력 없음)
+
+15/15 단계 통과 · 1247.4초 · 요약 press_guard/outputs/reproduce_summary.json
+임시 폴더: /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/tmp.CTXcNNXxym (검사 후 삭제 가능)
+Q11 끝 2026-09-28 17:21:57
+---- 실제 임시 폴더: /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/tmp.CTXcNNXxym (macOS mktemp -d가 TMPDIR 대신 사용자 임시 폴더를 씀)
+     git 사본 여부: fatal: (현재 폴더 또는 상위 폴더 중 일부가) 깃 저장소가 아닙니다: .git / 커밋 산출물 삭제 뒤 재생성: press_guard/outputs 파일 63개
+== reproduce_summary: mode=quick python=3.12.2 15/15 통과 · 실패 0 · 1247.4초
+  [01] rc=0    25.3s  v1 선행(주 모델·기준모델·행별 예측)  | }  | U+FFFD 로그 0
+  [02] rc=0     1.0s  v1 동결값 비교  | 16/16 통과 (1~2단계 부분 비교, 필수 집계 9개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 b372  | U+FFFD 로그 0
+  [03] rc=0    60.0s  v2 학습·시간순 5회  |     B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3                | U+FFFD 로그 0
+  [04] rc=0   255.7s  v2 분석  | }  | U+FFFD 로그 0
+  [05] rc=0   441.2s  v2 실행 검증(audit)  | 16/16 통과 → /private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/tmp.CTXcNNXxym/clone/yejun/press_guard/out  | U+FFFD 로그 0
+  [06] rc=0     3.4s  v2 동결값 비교  | 53/53 통과. 코드 2622d9f2a5eb vs 동결 2622d9f2a5eb; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64b  | U+FFFD 로그 0
+  [07] rc=0    16.8s  진단 표(press_evidence)  |     B 12 0.099174 0.099174      180               11  0.061111       0.099126          False  | U+FFFD 로그 0
+  [08] rc=0    29.0s  진단 보강 표·그림  | 완료 25.8초, 표 20개, 그림 5장  | U+FFFD 로그 0
+  [09] rc=0   291.2s  지도학습 기준선(press_supervised)  | done 288.7 s  | U+FFFD 로그 0
+  [10] rc=0   118.8s  모델 선정 근거(press_selection)  | 내부 점검: 통과 · 116.6 s  | U+FFFD 로그 0
+  [11] rc=0     0.8s  press_evidence 동결값 비교  | 통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 42개)  | U+FFFD 로그 0
+  [12] rc=0     0.7s  press_supervised 동결값 비교  | 통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)  | U+FFFD 로그 0
+  [13] rc=0     0.7s  press_advance 동결값 비교  | 통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)  | U+FFFD 로그 0
+  [14] rc=0     0.7s  press_selection 동결값 비교  | 통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 12개)  | U+FFFD 로그 0
+  [15] rc=0     2.1s  보완 실험 E1~E3 동결값 비교  | 통과: 무결성·기대값 비교 E1, E3 · 건너뜀 E2(외부 입력 없음)  | U+FFFD 로그 0
+== 단계 로그·요약 last_line의 U+FFFD 합계 0 · 로그 경로 형식 press_guard/outputs/reproduce_logs/01.log
+---- 커밋 동결 해시 대조: 저장 모델·보정기 4/4 같음 {'guard_A.json': True, 'guard_B.json': True, 'probability_A.json': True, 'probability_B.json': True}
+     행 단위 예측 6/6 같음 {'predictions_normal_A.csv': True, 'predictions_normal_B.csv': True, 'predictions_abnormal_A.csv': True, 'predictions_abnormal_B.csv': True, 'test_predictions_A.csv': True, 'test_predictions_B.csv': True}
+임시 폴더 삭제: /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/tmp.CTXcNNXxym

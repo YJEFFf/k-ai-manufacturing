@@ -1,0 +1,46 @@
+== 기준 커밋 061fac8ae9a8373265434a5586cde956982db934
+== 입력 해시(diagnostics_manifest의 input_hashes·artifacts와 같아야 한다)
+9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e  yejun/press_submission/data/3_소성가공_예지보전/outlier_data.csv
+f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7  yejun/press_submission/data/3_소성가공_예지보전/press_data_normal.csv
+c938707f1dd16e7c239b8053e7f032d8fac828d6c753de2b898ba9130a594f10  yejun/press_guard/artifacts/guard_A.json
+b64ac3b30bc697034104287964f3154e88c8a50749ccdec04f6d4f8744fd6969  yejun/press_guard/artifacts/guard_B.json
+== [1] 손대지 않은 사본: 공용 검증 계약
+통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 42개)
+exit=0 (1s)
+== [2] 손대지 않은 사본: 변조 검출 시험
+......                                                                   [100%]
+6 passed in 0.81s
+(1s)
+== [3] build_tables.py 재실행
+exit=0 (7s)
+    B 11 0.090909 0.090909      180                9  0.050000       0.085628          False
+    B 12 0.099174 0.099174      180               11  0.061111       0.099126          False
+== [4] build_diagnostics.py 재실행
+exit=0 (14s)
+완료 12.3초, 표 20개, 그림 5장
+== [5] 재실행 산출물과 커밋 파일 해시 비교(표·그림·manifest)
+  다름: diagnostics_manifest.json
+  다름: manifest.json
+  같음 42, 다름 2
+== [5b] 2회차에 더한 표 4개와 정정된 표·그림(바이트 비교)
+  같음: operating_states.csv
+  같음: operating_states_summary.csv
+  같음: split_state_composition.csv
+  같음: normal_alarms_by_state.csv
+  같음: production_unit_evidence.csv
+  같음: sensor_relations.csv
+  같음: decision_table_diagnosis_v2.csv
+  같음: observability.csv
+  같음: failure_mode_map.csv
+  같음: figures/fig_d2a_timeline.png
+  같음: figures/fig_d2c_raw_examples.png
+  같음: figures/fig_d2d_relations.png
+== [5c] manifest 차이(elapsed_s 외 키가 다르면 안 된다)
+  manifest.json: 다른 키 ['elapsed_s']
+  diagnostics_manifest.json: 다른 키 ['elapsed_s']
+== [6] 재실행 뒤 공용 검증 계약
+통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 42개)
+exit=0
+== [7] 사본에 __pycache__가 생겼는가(0이어야 한다)
+       0
+== 전체 25초

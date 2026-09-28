@@ -1,0 +1,25 @@
+Q6c 시작 2026-09-28 16:57:56 원천=/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r3/Q6c_clone
+STEP Q6c_M0_clean rc=0 wall=6s maxrss_mb=193 load_start=35.06 load_end=36.58
+Q6c_M0_clean.out:합계 464개 · 17.0 MB
+Q6c_M0_clean.out:블라인드 검사 통과
+STEP Q6c_M1_drop_dependency_group rc=1 wall=5s maxrss_mb=197 load_start=36.58 load_end=39.57
+Q6c_M1_drop_dependency_group.out:합계 463개 · 17.0 MB
+Q6c_M1_drop_dependency_group.out:검사 실패: 실행 기록이 가리키는 파일이 목록에 없음: analysis/press_dayshift/v2_current_scale.csv
+Q6c_M1_drop_dependency_group.out:블라인드 검사 1건
+STEP Q6c_M2_exclude_digest rc=1 wall=5s maxrss_mb=193 load_start=39.57 load_end=43.13
+Q6c_M2_exclude_digest.out:합계 463개 · 17.0 MB
+Q6c_M2_exclude_digest.out:검사 실패: 필수 파일 없음: press_guard/outputs/expected/predictions_digest.json
+Q6c_M2_exclude_digest.out:블라인드 검사 1건
+STEP Q6c_M3_abs_path_json rc=1 wall=5s maxrss_mb=194 load_start=43.13 load_end=47.04
+Q6c_M3_abs_path_json.out:합계 464개 · 17.0 MB
+Q6c_M3_abs_path_json.out:검사 실패: 절대 경로 ['/Volumes/']: yejun/analysis/press_selection/manifest.json
+Q6c_M3_abs_path_json.out:블라인드 검사 1건
+STEP Q6c_M4_abs_path_csv rc=0 wall=5s maxrss_mb=194 load_start=47.04 load_end=50.24
+Q6c_M4_abs_path_csv.out:합계 464개 · 17.0 MB
+Q6c_M4_abs_path_csv.out:블라인드 검사 통과
+STEP Q6c_M5_copytest_nonempty rc=1 wall=4s maxrss_mb=197 load_start=50.24 load_end=51.99
+Q6c_M5_copytest_nonempty.out:합계 464개 · 17.0 MB
+Q6c_M5_copytest_nonempty.out:블라인드 검사 통과
+Q6c_M5_copytest_nonempty.err:/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r3/Q6c_manifest/nonempty가 비어 있지 않다
+되돌림 확인: git status 변경 0개
+Q6c 끝 2026-09-28 16:58:27

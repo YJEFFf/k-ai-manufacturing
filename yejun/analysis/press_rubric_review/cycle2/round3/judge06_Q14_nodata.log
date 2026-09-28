@@ -1,0 +1,4 @@
+Q14 — 원본 없이 README 한 명령(--data 없음), 잘못된 --data 경로 2026-09-28 17:52:41
+  a) 원본 없음: rc=1 · stderr 2줄 · Traceback 0 · 입력 자료 오류: /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r3/Q14_nodata/copy/yejun/press_submission/data/3_소성가공_예지보전/press_data_normal.csv 없음. README의 데이터 배치 절차를 따르거나 --roo
+  b) 없는 --data: rc=1 · Traceback 0 · 없는파일.zip: ZIP 파일이나 폴더가 아니다
+  단계 실행 여부: reproduce_logs 0개

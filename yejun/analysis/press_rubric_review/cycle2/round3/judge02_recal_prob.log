@@ -1,0 +1,15 @@
+HEAD 061fac8 · 기준 061fac8 · 사본 <임시>
+통과 고장 주입 vib_noise 4 2초 안 탐지율 ≥ 90%: 1.0
+교대 8시간 1단계 알림: 명목 30.9건 · 보정 95% 92.3건
+수락 · 모델 저장 /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r3_recal.ObOQP7/site/site.json · 보고서 /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r3_recal.ObOQP7/site/site_report.json
+600행 처리, 사건 1개(건 21) → /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r3_recal.ObOQP7/site/pred_abnormal.csv
+재보정+예측 22초
+  파일: pred_abnormal.csv
+  파일: site_report.json
+  파일: site.json
+행 600 경보 행 556
+  likelihood_ratio: 결측 600/600 
+  anomaly_probability: 결측 600/600 
+  record_likelihood_ratio: 결측 600/600 
+  record_probability: 결측 600/600 
+  probability_prior: 결측 0/600 (예: 0.01)

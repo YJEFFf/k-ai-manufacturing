@@ -1,0 +1,603 @@
+{
+ "tmp_dir": "/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge04_c2r3_api_fc5wplqp",
+ "port": 50121,
+ "static": {
+  "index_has_incident_queue": true,
+  "app_js_sha_eq_file": true
+ },
+ "overview": {
+  "audit_all_ok": true,
+  "expected_effect_rows": 27,
+  "shown_mid_rows": [
+   {
+    "alert_scenario": "명목",
+    "policy": "전건 확인",
+    "post_hoc": false,
+    "level2_per_8h": NaN,
+    "inspection_hours_per_shift": 0.9861664362,
+    "breakeven_loss_ratio": 23.6953315235
+   },
+   {
+    "alert_scenario": "비사후 추정(독립 폴드 2/1단계 비)",
+    "policy": "전건 확인",
+    "post_hoc": false,
+    "level2_per_8h": 3.2872214539,
+    "inspection_hours_per_shift": 2.0819069208,
+    "breakeven_loss_ratio": 50.0234776607
+   },
+   {
+    "alert_scenario": "비사후 추정(독립 폴드 2/1단계 비)",
+    "policy": "2단계만 출동",
+    "post_hoc": false,
+    "level2_per_8h": 3.2872214539,
+    "inspection_hours_per_shift": 1.0957404846,
+    "breakeven_loss_ratio": 26.3281461372
+   },
+   {
+    "alert_scenario": "비사후 추정 95% 상한",
+    "policy": "전건 확인",
+    "post_hoc": false,
+    "level2_per_8h": 12.6959721916,
+    "inspection_hours_per_shift": 5.2181571667,
+    "breakeven_loss_ratio": 125.3804220777
+   },
+   {
+    "alert_scenario": "비사후 추정 95% 상한",
+    "policy": "2단계만 출동",
+    "post_hoc": false,
+    "level2_per_8h": 12.6959721916,
+    "inspection_hours_per_shift": 4.2319907305,
+    "breakeven_loss_ratio": 101.6850905542
+   },
+   {
+    "alert_scenario": "관측",
+    "policy": "전건 확인",
+    "post_hoc": false,
+    "level2_per_8h": 0.0,
+    "inspection_hours_per_shift": 1.9887689796,
+    "breakeven_loss_ratio": 47.785585239
+   },
+   {
+    "alert_scenario": "관측",
+    "policy": "2단계만 출동",
+    "post_hoc": true,
+    "level2_per_8h": 0.0,
+    "inspection_hours_per_shift": 0.0,
+    "breakeven_loss_ratio": 0.0
+   },
+   {
+    "alert_scenario": "관측 95% 상한",
+    "policy": "전건 확인",
+    "post_hoc": false,
+    "level2_per_8h": 59.0851545069,
+    "inspection_hours_per_shift": 24.7676083345,
+    "breakeven_loss_ratio": 595.1091712327
+   },
+   {
+    "alert_scenario": "관측 95% 상한",
+    "policy": "2단계만 출동",
+    "post_hoc": true,
+    "level2_per_8h": 59.0851545069,
+    "inspection_hours_per_shift": 19.6950515023,
+    "breakeven_loss_ratio": 473.2271933
+   }
+  ],
+  "highlighted": [
+   {
+    "alert_scenario": "비사후 추정(독립 폴드 2/1단계 비)",
+    "level2_per_8h": 3.2872214539,
+    "inspection_hours_per_shift": 1.0957404846,
+    "breakeven_loss_ratio": 26.3281461372
+   },
+   {
+    "alert_scenario": "비사후 추정 95% 상한",
+    "level2_per_8h": 12.6959721916,
+    "inspection_hours_per_shift": 4.2319907305,
+    "breakeven_loss_ratio": 101.6850905542
+   }
+  ],
+  "posthoc_flag_json_type": "bool_",
+  "monitor_gain_columns": [
+   "alerted_by_window",
+   "alerted_units",
+   "alpha",
+   "band_high",
+   "band_low",
+   "first_review_window",
+   "gain",
+   "limit95",
+   "limit99",
+   "max_current_ratio",
+   "note",
+   "recalibration_review",
+   "reference_median",
+   "split",
+   "units",
+   "windows",
+   "windows_drift_up",
+   "windows_exceed",
+   "windows_exceed99",
+   "windows_low_load"
+  ],
+  "levels_rows": 42,
+  "decision_table_rows": 6
+ },
+ "analyze": {
+  "mixed_A_a1_pi1": {
+   "level_counts": {
+    "주의": 0,
+    "점검 요청": 1
+   },
+   "incidents": 1,
+   "cases": 21,
+   "warnings": [],
+   "lr_cap": 121.0,
+   "segments": 141,
+   "alarm_rows": 556,
+   "case_uid_unique": true,
+   "distinct_record_ids": 21,
+   "incident_levels": [
+    2
+   ],
+   "incident_cases": [
+    21
+   ],
+   "escalation_rows": [
+    4092
+   ],
+   "max_probability": [
+    0.55
+   ],
+   "capped_share": 1.0,
+   "quality_actions": [
+    "의심 시간창에 만든 가공품을 보류하고 전단면·버·치수·평탄도를 전수 확인한다(가설)"
+   ]
+  },
+  "mixed_B_a1_pi1": {
+   "level_counts": {
+    "주의": 3,
+    "점검 요청": 1
+   },
+   "incidents": 4,
+   "cases": 24,
+   "warnings": [],
+   "lr_cap": 121.0,
+   "segments": 201,
+   "alarm_rows": 572,
+   "case_uid_unique": true,
+   "distinct_record_ids": 24,
+   "incident_levels": [
+    1,
+    1,
+    1,
+    2
+   ],
+   "incident_cases": [
+    1,
+    1,
+    1,
+    21
+   ],
+   "escalation_rows": [
+    NaN,
+    NaN,
+    NaN,
+    6098.0
+   ],
+   "max_probability": [
+    0.55
+   ],
+   "capped_share": 1.0,
+   "quality_actions": [
+    "다음 샘플 검사를 앞당긴다(가설)",
+    "의심 시간창에 만든 가공품을 보류하고 전단면·버·치수·평탄도를 전수 확인한다(가설)"
+   ]
+  },
+  "mixed_B_a1_pi0.1": {
+   "level_counts": {
+    "주의": 3,
+    "점검 요청": 1
+   },
+   "incidents": 4,
+   "cases": 24,
+   "warnings": [],
+   "lr_cap": 121.0,
+   "segments": 201,
+   "alarm_rows": 572,
+   "case_uid_unique": true,
+   "distinct_record_ids": 24,
+   "incident_levels": [
+    1,
+    1,
+    1,
+    2
+   ],
+   "incident_cases": [
+    1,
+    1,
+    1,
+    21
+   ],
+   "escalation_rows": [
+    NaN,
+    NaN,
+    NaN,
+    6098.0
+   ],
+   "max_probability": [
+    0.108
+   ],
+   "capped_share": 1.0,
+   "quality_actions": [
+    "다음 샘플 검사를 앞당긴다(가설)",
+    "의심 시간창에 만든 가공품을 보류하고 전단면·버·치수·평탄도를 전수 확인한다(가설)"
+   ]
+  },
+  "mixed_B_a5_pi1": {
+   "level_counts": {
+    "주의": 4,
+    "점검 요청": 4
+   },
+   "incidents": 8,
+   "cases": 28,
+   "warnings": [],
+   "lr_cap": 121.0,
+   "segments": 201,
+   "alarm_rows": 580,
+   "case_uid_unique": true,
+   "distinct_record_ids": 28,
+   "incident_levels": [
+    2,
+    1,
+    2,
+    1,
+    2,
+    1,
+    1,
+    2
+   ],
+   "incident_cases": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    21
+   ],
+   "escalation_rows": [
+    112.0,
+    NaN,
+    905.0,
+    NaN,
+    1366.0,
+    NaN,
+    NaN,
+    6098.0
+   ],
+   "max_probability": [
+    0.007,
+    0.55
+   ],
+   "capped_share": 0.5,
+   "quality_actions": [
+    "다음 샘플 검사를 앞당긴다(가설)",
+    "의심 시간창에 만든 가공품을 보류하고 전단면·버·치수·평탄도를 전수 확인한다(가설)"
+   ]
+  },
+  "upload_continuous_B_plus_abnormal": {
+   "level_counts": {
+    "주의": 0,
+    "점검 요청": 9
+   },
+   "incidents": 9,
+   "cases": 9,
+   "warnings": [],
+   "lr_cap": 121.0,
+   "segments": 1,
+   "alarm_rows": 1475,
+   "case_uid_unique": true,
+   "distinct_record_ids": 1,
+   "incident_levels": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "incident_cases": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "escalation_rows": [
+    42,
+    207,
+    710,
+    1238,
+    2008,
+    2408,
+    2805,
+    3562,
+    5406
+   ],
+   "max_probability": [
+    0.55
+   ],
+   "capped_share": 1.0,
+   "quality_actions": [
+    "의심 시간창에 만든 가공품을 보류하고 전단면·버·치수·평탄도를 전수 확인한다(가설)"
+   ]
+  },
+  "upload_two_single_row_fa_2s_apart": {
+   "level_counts": {
+    "주의": 1,
+    "점검 요청": 0
+   },
+   "incidents": 1,
+   "cases": 2,
+   "warnings": [],
+   "lr_cap": 121.0,
+   "segments": 4,
+   "alarm_rows": 2,
+   "case_uid_unique": true,
+   "distinct_record_ids": 2,
+   "incident_levels": [
+    1
+   ],
+   "incident_cases": [
+    2
+   ],
+   "escalation_rows": [
+    140
+   ],
+   "max_probability": [
+    0.55
+   ],
+   "capped_share": 1.0,
+   "quality_actions": [
+    "다음 샘플 검사를 앞당긴다(가설)"
+   ]
+  },
+  "upload_abnormal_jitter_50ms": {
+   "level_counts": {
+    "주의": 16,
+    "점검 요청": 22
+   },
+   "incidents": 38,
+   "cases": 166,
+   "warnings": [
+    "수집 시각 간격 확인: 평균 기록 길이 1.5행. 이웃 행 간격이 0.1초 ± 20 ms를 벗어나면 기록이 쪼개져 파형·예측 오차 성분을 계산하지 못한다(미탐 증가)."
+   ],
+   "lr_cap": 121.0,
+   "segments": 403,
+   "alarm_rows": 220,
+   "case_uid_unique": true,
+   "distinct_record_ids": 166,
+   "incident_levels": [
+    2,
+    1,
+    2,
+    2,
+    2,
+    1,
+    1,
+    1,
+    2,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    1,
+    1,
+    1,
+    2,
+    2,
+    1,
+    2,
+    2,
+    2,
+    1,
+    2,
+    2,
+    1,
+    2,
+    1,
+    2,
+    2,
+    2,
+    2,
+    1,
+    1,
+    2,
+    1
+   ],
+   "incident_cases": [
+    4,
+    3,
+    8,
+    13,
+    4,
+    1,
+    1,
+    1,
+    6,
+    7,
+    4,
+    2,
+    2,
+    8,
+    8,
+    3,
+    4,
+    1,
+    15,
+    1,
+    1,
+    7,
+    6,
+    2,
+    1,
+    4,
+    9,
+    1,
+    1,
+    2,
+    2,
+    10,
+    3,
+    15,
+    1,
+    1,
+    3,
+    1
+   ],
+   "escalation_rows": [
+    1.0,
+    13.0,
+    17.0,
+    68.0,
+    86.0,
+    NaN,
+    NaN,
+    NaN,
+    136.0,
+    146.0,
+    154.0,
+    162.0,
+    179.0,
+    185.0,
+    197.0,
+    208.0,
+    212.0,
+    NaN,
+    261.0,
+    295.0,
+    NaN,
+    322.0,
+    332.0,
+    341.0,
+    NaN,
+    375.0,
+    386.0,
+    NaN,
+    427.0,
+    438.0,
+    450.0,
+    455.0,
+    480.0,
+    509.0,
+    NaN,
+    NaN,
+    561.0,
+    NaN
+   ],
+   "max_probability": [
+    0.55
+   ],
+   "capped_share": 1.0,
+   "quality_actions": [
+    "다음 샘플 검사를 앞당긴다(가설)",
+    "의심 시간창에 만든 가공품을 보류하고 전단면·버·치수·평탄도를 전수 확인한다(가설)"
+   ]
+  },
+  "upload_mixed_B_jitter_2ms": {
+   "level_counts": {
+    "주의": 3,
+    "점검 요청": 1
+   },
+   "incidents": 4,
+   "cases": 24,
+   "warnings": [],
+   "lr_cap": 121.0,
+   "segments": 201,
+   "alarm_rows": 572,
+   "case_uid_unique": true,
+   "distinct_record_ids": 24,
+   "incident_levels": [
+    1,
+    1,
+    1,
+    2
+   ],
+   "incident_cases": [
+    1,
+    1,
+    1,
+    21
+   ],
+   "escalation_rows": [
+    NaN,
+    NaN,
+    NaN,
+    6098.0
+   ],
+   "max_probability": [
+    0.55
+   ],
+   "capped_share": 1.0,
+   "quality_actions": [
+    "다음 샘플 검사를 앞당긴다(가설)",
+    "의심 시간창에 만든 가공품을 보류하고 전단면·버·치수·평탄도를 전수 확인한다(가설)"
+   ]
+  },
+  "upload_mixed_B_no_jitter": {
+   "level_counts": {
+    "주의": 3,
+    "점검 요청": 1
+   },
+   "incidents": 4,
+   "cases": 24,
+   "warnings": [],
+   "lr_cap": 121.0,
+   "segments": 201,
+   "alarm_rows": 572,
+   "case_uid_unique": true,
+   "distinct_record_ids": 24,
+   "incident_levels": [
+    1,
+    1,
+    1,
+    2
+   ],
+   "incident_cases": [
+    1,
+    1,
+    1,
+    21
+   ],
+   "escalation_rows": [
+    NaN,
+    NaN,
+    NaN,
+    6098.0
+   ],
+   "max_probability": [
+    0.55
+   ],
+   "capped_share": 1.0,
+   "quality_actions": [
+    "다음 샘플 검사를 앞당긴다(가설)",
+    "의심 시간창에 만든 가공품을 보류하고 전단면·버·치수·평탄도를 전수 확인한다(가설)"
+   ]
+  }
+ },
+ "server_stopped": {
+  "returncode": -15,
+  "port_closed": true
+ },
+ "elapsed_s": 44.4
+}

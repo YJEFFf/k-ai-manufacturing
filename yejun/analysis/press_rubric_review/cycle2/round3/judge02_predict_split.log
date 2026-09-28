@@ -1,0 +1,10 @@
+4690행 → /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r3_split.RHarRy/test_predictions_A.csv · SHA-256 b87f1e20aa7ff174… · 학습 실행과 같음
+split A: 11초
+b87f1e20aa7ff174eb6a7eb048f3125afc1d4e4078c83a8a32866fefcba602b8  <임시>/test_predictions_A.csv
+b87f1e20aa7ff174eb6a7eb048f3125afc1d4e4078c83a8a32866fefcba602b8  yejun/press_guard/outputs/test_predictions_A.csv
+6697행 → /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r3_split.RHarRy/test_predictions_B.csv · SHA-256 8ad05ed296e7749c… · 학습 실행과 같음
+split B: 12초
+8ad05ed296e7749cf00cd67a19307c8fdfa7832e95ff9e4f70546c654233d416  <임시>/test_predictions_B.csv
+8ad05ed296e7749cf00cd67a19307c8fdfa7832e95ff9e4f70546c654233d416  yejun/press_guard/outputs/test_predictions_B.csv
+A 행 4690 열 같음 True 값 같음 True 새 열 ['file_prior', 'anomaly_probability_file_prior']
+B 행 6697 열 같음 True 값 같음 True 새 열 ['file_prior', 'anomaly_probability_file_prior']

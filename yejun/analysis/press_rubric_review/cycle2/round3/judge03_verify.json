@@ -1,0 +1,1249 @@
+{
+ "head": "061fac8ae9a8373265434a5586cde956982db934",
+ "git_status_short_yejun": "?? yejun/analysis/press_rubric_review/cycle2/round3/",
+ "input_sha256": {
+  "normal": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+  "abnormal": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e"
+ },
+ "model_sha256_matches_manifest": {
+  "A": true,
+  "B": true
+ },
+ "S1_recount": {
+  "A_0.01": {
+   "tp": 556,
+   "fp": 0,
+   "fn": 44,
+   "normal_notified_segments": 0,
+   "abnormal_notified_segments": 21,
+   "matches_metrics_csv": true
+  },
+  "A_0.03": {
+   "tp": 569,
+   "fp": 1,
+   "fn": 31,
+   "normal_notified_segments": 1,
+   "abnormal_notified_segments": 21,
+   "matches_metrics_csv": true
+  },
+  "A_0.05": {
+   "tp": 569,
+   "fp": 1,
+   "fn": 31,
+   "normal_notified_segments": 1,
+   "abnormal_notified_segments": 21,
+   "matches_metrics_csv": true
+  },
+  "B_0.01": {
+   "tp": 569,
+   "fp": 3,
+   "fn": 31,
+   "normal_notified_segments": 3,
+   "abnormal_notified_segments": 21,
+   "matches_metrics_csv": true
+  },
+  "B_0.03": {
+   "tp": 569,
+   "fp": 7,
+   "fn": 31,
+   "normal_notified_segments": 5,
+   "abnormal_notified_segments": 21,
+   "matches_metrics_csv": true
+  },
+  "B_0.05": {
+   "tp": 569,
+   "fp": 11,
+   "fn": 31,
+   "normal_notified_segments": 7,
+   "abnormal_notified_segments": 21,
+   "matches_metrics_csv": true
+  }
+ },
+ "S2_R2_01": {
+  "independent_fits": [
+   "frozen_A",
+   "frozen_B",
+   "rolling_300_359",
+   "rolling_360_419",
+   "rolling_540_599"
+  ],
+  "duplicate_fits": {
+   "rolling_420_479": "frozen_B",
+   "rolling_480_539": "frozen_A"
+  },
+  "evaluations_per_alpha": 480,
+  "amp_quartile_bounds": [
+   119.74661022641826,
+   122.64225530372684,
+   177.80698588816068
+  ],
+  "vib_sd_quartile_bounds": [
+   0.059976002345205455,
+   0.0765278880979533,
+   0.1500181391750785
+  ],
+  "b_train_q75": 222.8632101180933,
+  "team_rows": 51,
+  "mine_rows": 51,
+  "unmatched": [],
+  "all_counts_match": true,
+  "max_abs_diff_ci_lift_p": 2.220446049250313e-16,
+  "rest_all_match": true,
+  "criterion": {
+   "a5_Bq75": {
+    "k": 10,
+    "n": 46,
+    "ci": [
+     0.1095,
+     0.3636
+    ],
+    "lift": 4.658,
+    "p": 1.8046765474051854e-06,
+    "rest": "4/254"
+   },
+   "a3_Bq75": {
+    "k": 6,
+    "n": 46,
+    "ci": [
+     0.0494,
+     0.2626
+    ],
+    "lift": 4.891,
+    "p": 0.00021256464008378694,
+    "rest": "2/254"
+   },
+   "a1_Bq75": {
+    "k": 2,
+    "n": 46,
+    "ci": [
+     0.0053,
+     0.1484
+    ],
+    "lift": 4.348,
+    "p": 0.06241610738255034,
+    "rest": "1/254"
+   },
+   "a5_ampQ4": {
+    "k": 14,
+    "n": 95,
+    "ci": [
+     0.083,
+     0.2349
+    ],
+    "lift": 4.161,
+    "p": 2.5016472324162605e-08,
+    "rest": null
+   },
+   "a5_ampQ1": {
+    "k": 0,
+    "n": 95,
+    "ci": [
+     0.0,
+     0.0381
+    ],
+    "lift": 0.0,
+    "p": 1.0,
+    "rest": null
+   },
+   "a5_ampQ2": {
+    "k": 0,
+    "n": 95,
+    "ci": [
+     0.0,
+     0.0381
+    ],
+    "lift": 0.0,
+    "p": 1.0,
+    "rest": null
+   },
+   "a5_short": {
+    "k": 0,
+    "n": 101,
+    "ci": [
+     0.0,
+     0.0359
+    ],
+    "lift": 0.0,
+    "p": 1.0,
+    "rest": null
+   },
+   "a5_vsdQ4": {
+    "k": 17,
+    "n": 118,
+    "ci": [
+     0.0862,
+     0.2206
+    ],
+    "lift": 4.068,
+    "p": 1.736698182925691e-11,
+    "rest": null
+   },
+   "a5_block_480": {
+    "k": 0,
+    "n": 120,
+    "ci": [
+     0.0,
+     0.0303
+    ],
+    "lift": 0.0,
+    "p": 1.0,
+    "rest": null
+   }
+  },
+  "team_small_sample_alpha1": true,
+  "team_vsd_note": [
+   "크기 성분 경보의 발화 경로와 겹친다"
+  ]
+ },
+ "N1_fp_block_state": {
+  "state_table_rows": 469,
+  "state_records_match_segments": true,
+  "by_state_matches_press_evidence": true,
+  "combined_by_state": {
+   "0.01": {
+    "부하": "3/154",
+    "저수준": "0/225",
+    "짧은 기록(<17)": "0/101"
+   },
+   "0.03": {
+    "부하": "10/154",
+    "저수준": "0/225",
+    "짧은 기록(<17)": "0/101"
+   },
+   "0.05": {
+    "부하": "17/154",
+    "저수준": "0/225",
+    "짧은 기록(<17)": "0/101"
+   }
+  },
+  "load_vs_rest_0.03": {
+   "load": "10/154",
+   "rest": "0/326",
+   "ci": [
+    0.03157543125795952,
+    0.11617453295680899
+   ],
+   "p": 9.42289052584932e-06
+  },
+  "load_vs_rest_0.05": {
+   "load": "17/154",
+   "rest": "0/326",
+   "ci": [
+    0.065635748625089,
+    0.1708546283593505
+   ],
+   "p": 2.153881321491725e-09
+  },
+  "stratified": [
+   {
+    "alpha": 0.03,
+    "exposure": "amp_hi_B",
+    "unit": "평가 단위(적합×구간)",
+    "per_block": {
+     "300~359": "3/12 대 0/48",
+     "360~419": "0/12 대 0/48",
+     "420~479": "3/16 대 1/44",
+     "480~539": "0/0 대 0/120",
+     "540~599": "0/18 대 3/162"
+    },
+    "mh_pooled_or": 8.806451612903226,
+    "cmh_p": 0.0036013950321305277,
+    "perm_p_within_block_greater": 0.004149792510374482,
+    "observed_exposed_fa": 6
+   },
+   {
+    "alpha": 0.03,
+    "exposure": "amp_Q4",
+    "unit": "평가 단위(적합×구간)",
+    "per_block": {
+     "300~359": "3/18 대 0/42",
+     "360~419": "0/26 대 0/34",
+     "420~479": "4/21 대 0/39",
+     "480~539": "0/0 대 0/120",
+     "540~599": "0/30 대 3/150"
+    },
+    "mh_pooled_or": 9.4,
+    "cmh_p": 0.007031231090161794,
+    "perm_p_within_block_greater": 0.005649717514124294,
+    "observed_exposed_fa": 7
+   },
+   {
+    "alpha": 0.03,
+    "exposure": "부하 상태 안 진폭 ≥ 중앙",
+    "unit": "평가 단위(부하 상태)",
+    "per_block": {
+     "high": "6/77",
+     "low": "4/77",
+     "median_amp": 203.5566059878347
+    },
+    "mh_pooled_or": NaN,
+    "cmh_p": NaN,
+    "perm_p_within_block_greater": 0.37276671390488664,
+    "observed_exposed_fa": 6,
+    "spearman_amp_fa_in_load": 0.1476138571469589,
+    "spearman_p": 0.06770928074437364
+   },
+   {
+    "alpha": 0.05,
+    "exposure": "amp_hi_B",
+    "unit": "평가 단위(적합×구간)",
+    "per_block": {
+     "300~359": "5/12 대 0/48",
+     "360~419": "0/12 대 2/48",
+     "420~479": "4/16 대 1/44",
+     "480~539": "0/0 대 0/120",
+     "540~599": "2/18 대 3/162"
+    },
+    "mh_pooled_or": 9.96153846153846,
+    "cmh_p": 2.880628911849925e-06,
+    "perm_p_within_block_greater": 4.999750012499375e-05,
+    "observed_exposed_fa": 11
+   },
+   {
+    "alpha": 0.05,
+    "exposure": "amp_Q4",
+    "unit": "평가 단위(적합×구간)",
+    "per_block": {
+     "300~359": "5/18 대 0/42",
+     "360~419": "2/26 대 0/34",
+     "420~479": "5/21 대 0/39",
+     "480~539": "0/0 대 0/120",
+     "540~599": "2/30 대 3/150"
+    },
+    "mh_pooled_or": 20.39285714285714,
+    "cmh_p": 1.7624178373365496e-06,
+    "perm_p_within_block_greater": 4.999750012499375e-05,
+    "observed_exposed_fa": 14
+   },
+   {
+    "alpha": 0.05,
+    "exposure": "부하 상태 안 진폭 ≥ 중앙",
+    "unit": "평가 단위(부하 상태)",
+    "per_block": {
+     "high": "12/77",
+     "low": "5/77",
+     "median_amp": 203.5566059878347
+    },
+    "mh_pooled_or": NaN,
+    "cmh_p": NaN,
+    "perm_p_within_block_greater": 0.0604549422249074,
+    "observed_exposed_fa": 12,
+    "spearman_amp_fa_in_load": 0.2626746749798791,
+    "spearman_p": 0.0009978300699092755
+   }
+  ],
+  "unique_amp_hiB_by_block": {
+   "300~359": "12/60 (오경보 5·0)",
+   "360~419": "12/60 (오경보 0·2)",
+   "420~479": "16/60 (오경보 4·1)",
+   "480~539": "0/60 (오경보 0·0)",
+   "540~599": "6/60 (오경보 1·1)"
+  },
+  "unique_state_by_block_load_share": {
+   "300~359": "30/60",
+   "360~419": "31/60",
+   "420~479": "30/60",
+   "480~539": "0/60",
+   "540~599": "21/60"
+  },
+  "unique_hiB_all_load": true
+ },
+ "S3_R2_02": {
+  "A_units_equal_records": true,
+  "B_units_equal_records": true,
+  "all_rows_match_team": true,
+  "rows": [
+   {
+    "split": "A",
+    "family": "vib_noise",
+    "level": 2.0,
+    "units": 75,
+    "detect_mean": 0.7653333333333333,
+    "spearman_amp": 0.3274734949252898,
+    "p_amp": 0.00413204036636721,
+    "det_Q1": 13.600000000000001,
+    "n_Q1": 19,
+    "det_Q2": 14.400000000000002,
+    "n_Q2": 19,
+    "det_Q3": 11.999999999999998,
+    "n_Q3": 18,
+    "det_Q4": 17.4,
+    "n_Q4": 19,
+    "match_team": true
+   },
+   {
+    "split": "A",
+    "family": "cur_noise",
+    "level": 0.1,
+    "units": 75,
+    "detect_mean": 0.9680000000000001,
+    "spearman_amp": -0.22275241857014813,
+    "p_amp": 0.05474416092682252,
+    "det_Q1": 18.8,
+    "n_Q1": 19,
+    "det_Q2": 18.8,
+    "n_Q2": 19,
+    "det_Q3": 17.2,
+    "n_Q3": 18,
+    "det_Q4": 17.8,
+    "n_Q4": 19,
+    "match_team": true
+   },
+   {
+    "split": "A",
+    "family": "cur_offset",
+    "level": 0.2,
+    "units": 75,
+    "detect_mean": 0.4,
+    "spearman_amp": -0.11440433343804832,
+    "p_amp": 0.32839921608655276,
+    "det_Q1": 8.0,
+    "n_Q1": 19,
+    "det_Q2": 9.0,
+    "n_Q2": 19,
+    "det_Q3": 7.0,
+    "n_Q3": 18,
+    "det_Q4": 6.0,
+    "n_Q4": 19,
+    "match_team": true
+   },
+   {
+    "split": "A",
+    "family": "cur_gain",
+    "level": 1.15,
+    "units": 75,
+    "detect_mean": 0.0,
+    "spearman_amp": NaN,
+    "p_amp": NaN,
+    "det_Q1": 0.0,
+    "n_Q1": 19,
+    "det_Q2": 0.0,
+    "n_Q2": 19,
+    "det_Q3": 0.0,
+    "n_Q3": 18,
+    "det_Q4": 0.0,
+    "n_Q4": 19,
+    "match_team": true
+   },
+   {
+    "split": "A",
+    "family": "cur_gain",
+    "level": 1.3,
+    "units": 75,
+    "detect_mean": 0.22666666666666666,
+    "spearman_amp": 0.22654278248798454,
+    "p_amp": 0.05064720201581331,
+    "det_Q1": 1.0,
+    "n_Q1": 19,
+    "det_Q2": 4.0,
+    "n_Q2": 19,
+    "det_Q3": 7.0,
+    "n_Q3": 18,
+    "det_Q4": 5.0,
+    "n_Q4": 19,
+    "match_team": true
+   },
+   {
+    "split": "B",
+    "family": "vib_noise",
+    "level": 2.0,
+    "units": 111,
+    "detect_mean": 0.9495495495495495,
+    "spearman_amp": 0.2740162386274365,
+    "p_amp": 0.0036122418317570213,
+    "det_Q1": 25.8,
+    "n_Q1": 28,
+    "det_Q2": 26.0,
+    "n_Q2": 28,
+    "det_Q3": 25.599999999999998,
+    "n_Q3": 27,
+    "det_Q4": 28.0,
+    "n_Q4": 28,
+    "match_team": true
+   },
+   {
+    "split": "B",
+    "family": "cur_noise",
+    "level": 0.1,
+    "units": 111,
+    "detect_mean": 0.9693693693693692,
+    "spearman_amp": -0.36685721534083465,
+    "p_amp": 7.484710245115101e-05,
+    "det_Q1": 27.8,
+    "n_Q1": 28,
+    "det_Q2": 27.8,
+    "n_Q2": 28,
+    "det_Q3": 26.400000000000002,
+    "n_Q3": 27,
+    "det_Q4": 25.6,
+    "n_Q4": 28,
+    "match_team": true
+   },
+   {
+    "split": "B",
+    "family": "cur_offset",
+    "level": 0.2,
+    "units": 111,
+    "detect_mean": 0.5225225225225225,
+    "spearman_amp": -0.3180400297037509,
+    "p_amp": 0.0006699288798859397,
+    "det_Q1": 20.0,
+    "n_Q1": 28,
+    "det_Q2": 16.0,
+    "n_Q2": 28,
+    "det_Q3": 14.0,
+    "n_Q3": 27,
+    "det_Q4": 8.0,
+    "n_Q4": 28,
+    "match_team": true
+   },
+   {
+    "split": "B",
+    "family": "cur_gain",
+    "level": 1.15,
+    "units": 111,
+    "detect_mean": 0.06306306306306306,
+    "spearman_amp": 0.2660402917771393,
+    "p_amp": 0.004769133071675599,
+    "det_Q1": 0.0,
+    "n_Q1": 28,
+    "det_Q2": 0.0,
+    "n_Q2": 28,
+    "det_Q3": 1.0,
+    "n_Q3": 27,
+    "det_Q4": 6.0,
+    "n_Q4": 28,
+    "match_team": true
+   },
+   {
+    "split": "B",
+    "family": "cur_gain",
+    "level": 1.3,
+    "units": 111,
+    "detect_mean": 0.5045045045045045,
+    "spearman_amp": 0.2395628714364746,
+    "p_amp": 0.011329459792593472,
+    "det_Q1": 9.0,
+    "n_Q1": 28,
+    "det_Q2": 14.0,
+    "n_Q2": 28,
+    "det_Q3": 14.0,
+    "n_Q3": 27,
+    "det_Q4": 19.0,
+    "n_Q4": 28,
+    "match_team": true
+   }
+  ],
+  "team_has_ci_columns": false,
+  "team_note": "사후 분석. 인공 신호. 사분위는 분할별 주입 대상 단위의 전류 진폭(√2×평균 제거 RMS). 여러 족·분할을 비교했으니 p값은 다중 비교를 고려해 읽는다",
+  "team_note_mentions_rng_or_e1": false,
+  "team_note_mentions_same_day": false,
+  "e1_records_sha_matches_manifest": true,
+  "e1_vs_team_seed": [
+   {
+    "split": "A",
+    "family": "vib_noise",
+    "level": 2.0,
+    "e1_detect": 0.744,
+    "judge_team_seed_detect": 0.7653333333333333,
+    "e1_Q1": 0.6631578947368421,
+    "e1_Q4": 0.8315789473684212,
+    "team_seed_Q1": 0.7157894736842106,
+    "team_seed_Q4": 0.9157894736842105,
+    "e1_spearman": 0.2801111204938638,
+    "e1_p": 0.014931735499411137,
+    "deterministic_identical": null
+   },
+   {
+    "split": "A",
+    "family": "cur_noise",
+    "level": 0.1,
+    "e1_detect": 0.9546666666666666,
+    "judge_team_seed_detect": 0.9680000000000001,
+    "e1_Q1": 0.9789473684210527,
+    "e1_Q4": 0.8947368421052632,
+    "team_seed_Q1": 0.9894736842105264,
+    "team_seed_Q4": 0.9368421052631579,
+    "e1_spearman": -0.23265043615189301,
+    "e1_p": 0.044577013543859165,
+    "deterministic_identical": null
+   },
+   {
+    "split": "A",
+    "family": "cur_offset",
+    "level": 0.2,
+    "e1_detect": 0.4,
+    "judge_team_seed_detect": 0.4,
+    "e1_Q1": 0.42105263157894735,
+    "e1_Q4": 0.3157894736842105,
+    "team_seed_Q1": 0.42105263157894735,
+    "team_seed_Q4": 0.3157894736842105,
+    "e1_spearman": -0.11440433343804832,
+    "e1_p": 0.32839921608655276,
+    "deterministic_identical": true
+   },
+   {
+    "split": "A",
+    "family": "cur_gain",
+    "level": 1.15,
+    "e1_detect": 0.0,
+    "judge_team_seed_detect": 0.0,
+    "e1_Q1": 0.0,
+    "e1_Q4": 0.0,
+    "team_seed_Q1": 0.0,
+    "team_seed_Q4": 0.0,
+    "e1_spearman": NaN,
+    "e1_p": NaN,
+    "deterministic_identical": true
+   },
+   {
+    "split": "A",
+    "family": "cur_gain",
+    "level": 1.3,
+    "e1_detect": 0.22666666666666666,
+    "judge_team_seed_detect": 0.22666666666666666,
+    "e1_Q1": 0.05263157894736842,
+    "e1_Q4": 0.2631578947368421,
+    "team_seed_Q1": 0.05263157894736842,
+    "team_seed_Q4": 0.2631578947368421,
+    "e1_spearman": 0.22654278248798454,
+    "e1_p": 0.05064720201581331,
+    "deterministic_identical": true
+   },
+   {
+    "split": "B",
+    "family": "vib_noise",
+    "level": 2.0,
+    "e1_detect": 0.9387387387387388,
+    "judge_team_seed_detect": 0.9495495495495495,
+    "e1_Q1": 0.9142857142857144,
+    "e1_Q4": 0.9857142857142858,
+    "team_seed_Q1": 0.9214285714285715,
+    "team_seed_Q4": 1.0,
+    "e1_spearman": 0.2553029349744238,
+    "e1_p": 0.006844770938245337,
+    "deterministic_identical": null
+   },
+   {
+    "split": "B",
+    "family": "cur_noise",
+    "level": 0.1,
+    "e1_detect": 0.9747747747747747,
+    "judge_team_seed_detect": 0.9693693693693692,
+    "e1_Q1": 0.9857142857142858,
+    "e1_Q4": 0.9571428571428572,
+    "team_seed_Q1": 0.9928571428571429,
+    "team_seed_Q4": 0.9142857142857144,
+    "e1_spearman": -0.11818358869387537,
+    "e1_p": 0.21668875076048166,
+    "deterministic_identical": null
+   },
+   {
+    "split": "B",
+    "family": "cur_offset",
+    "level": 0.2,
+    "e1_detect": 0.5225225225225225,
+    "judge_team_seed_detect": 0.5225225225225225,
+    "e1_Q1": 0.7142857142857143,
+    "e1_Q4": 0.2857142857142857,
+    "team_seed_Q1": 0.7142857142857143,
+    "team_seed_Q4": 0.2857142857142857,
+    "e1_spearman": -0.3180400297037509,
+    "e1_p": 0.0006699288798859397,
+    "deterministic_identical": true
+   },
+   {
+    "split": "B",
+    "family": "cur_gain",
+    "level": 1.15,
+    "e1_detect": 0.06306306306306306,
+    "judge_team_seed_detect": 0.06306306306306306,
+    "e1_Q1": 0.0,
+    "e1_Q4": 0.21428571428571427,
+    "team_seed_Q1": 0.0,
+    "team_seed_Q4": 0.21428571428571427,
+    "e1_spearman": 0.2660402917771393,
+    "e1_p": 0.004769133071675599,
+    "deterministic_identical": true
+   },
+   {
+    "split": "B",
+    "family": "cur_gain",
+    "level": 1.3,
+    "e1_detect": 0.5045045045045045,
+    "judge_team_seed_detect": 0.5045045045045045,
+    "e1_Q1": 0.32142857142857145,
+    "e1_Q4": 0.6785714285714286,
+    "team_seed_Q1": 0.32142857142857145,
+    "team_seed_Q4": 0.6785714285714286,
+    "e1_spearman": 0.2395628714364746,
+    "e1_p": 0.011329459792593472,
+    "deterministic_identical": true
+   }
+  ]
+ },
+ "N2_fn_robustness": {
+  "vib_noise_seed_sets": {
+   "A": {
+    "Q1_range": [
+     0.6210526315789474,
+     0.768421052631579
+    ],
+    "Q4_range": [
+     0.7999999999999999,
+     0.8631578947368422
+    ],
+    "rho_range": [
+     0.11208588152204263,
+     0.39328777092887374
+    ],
+    "p_range": [
+     0.000482021581615538,
+     0.33836043275430494
+    ],
+    "Q4_gt_Q1_all_sets": true,
+    "pooled50": {
+     "Q1": 0.6863157894736841,
+     "Q4": 0.8347368421052632,
+     "rho": 0.3946113275802429,
+     "p": 0.0004594417869834138
+    },
+    "pooled50_by_state": {
+     "부하": "0.861 (n=16)",
+     "저수준": "0.683 (n=59)"
+    }
+   },
+   "B": {
+    "Q1_range": [
+     0.9071428571428571,
+     0.9642857142857143
+    ],
+    "Q4_range": [
+     0.9857142857142858,
+     1.0
+    ],
+    "rho_range": [
+     0.08717389014149604,
+     0.28618807798585305
+    ],
+    "p_range": [
+     0.002326781058477653,
+     0.36294345155696217
+    ],
+    "Q4_gt_Q1_all_sets": true,
+    "pooled50": {
+     "Q1": 0.9457142857142858,
+     "Q4": 0.9921428571428572,
+     "rho": 0.5032050196137283,
+     "p": 1.8145400464157525e-08
+    },
+    "pooled50_by_state": {
+     "부하": "0.986 (n=37)",
+     "저수준": "0.939 (n=74)"
+    }
+   }
+  },
+  "interaction_bootstrap": {
+   "A": {
+    "observed_diff": 0.4418778283633381,
+    "ci95": [
+     0.08993874117672016,
+     0.77664123822381
+    ],
+    "share_le_0": 0.00775,
+    "boots": 4000
+   },
+   "B": {
+    "observed_diff": 0.5920562683311874,
+    "ci95": [
+     0.37642675563548916,
+     0.795416174825393
+    ],
+    "share_le_0": 0.0,
+    "boots": 4000
+   }
+  },
+  "bh": {
+   "A_vib_noise_2": {
+    "p": 0.0041320403663672,
+    "q": 0.0085844395290159,
+    "bonferroni": 0.037188363297304794
+   },
+   "A_cur_noise_0.1": {
+    "p": 0.0547441609268225,
+    "q": 0.06158718104267531,
+    "bonferroni": 0.4926974483414025
+   },
+   "A_cur_offset_0.2": {
+    "p": 0.3283992160865527,
+    "q": 0.3283992160865527,
+    "bonferroni": 1.0
+   },
+   "A_cur_gain_1.3": {
+    "p": 0.0506472020158133,
+    "q": 0.06158718104267531,
+    "bonferroni": 0.4558248181423197
+   },
+   "B_vib_noise_2": {
+    "p": 0.003612241831757,
+    "q": 0.0085844395290159,
+    "bonferroni": 0.032510176485813
+   },
+   "B_cur_noise_0.1": {
+    "p": 7.484710245115101e-05,
+    "q": 0.0006736239220603591,
+    "bonferroni": 0.0006736239220603591
+   },
+   "B_cur_offset_0.2": {
+    "p": 0.0006699288798859,
+    "q": 0.0030146799594865503,
+    "bonferroni": 0.0060293599189731005
+   },
+   "B_cur_gain_1.15": {
+    "p": 0.0047691330716755,
+    "q": 0.0085844395290159,
+    "bonferroni": 0.0429221976450795
+   },
+   "B_cur_gain_1.3": {
+    "p": 0.0113294597925934,
+    "q": 0.0169941896888901,
+    "bonferroni": 0.1019651381333406
+   }
+  }
+ },
+ "S4_R2_03": {
+  "refit": {
+   "A_full": {
+    "f1": 0.962,
+    "fn": 44,
+    "detected": 21
+   },
+   "A_drop_AI0": {
+    "f1": 0.957,
+    "fn": 49,
+    "detected": 20
+   },
+   "A_drop_AI1": {
+    "f1": 0.961,
+    "fn": 45,
+    "detected": 21
+   },
+   "A_current_only": {
+    "f1": 0.956,
+    "fn": 51,
+    "detected": 20
+   },
+   "A_vibration_only": {
+    "f1": 0.448,
+    "fn": 427,
+    "detected": 18
+   },
+   "B_full": {
+    "f1": 0.971,
+    "fn": 31,
+    "detected": 21
+   },
+   "B_drop_AI0": {
+    "f1": 0.958,
+    "fn": 47,
+    "detected": 21
+   },
+   "B_drop_AI1": {
+    "f1": 0.968,
+    "fn": 34,
+    "detected": 21
+   },
+   "B_current_only": {
+    "f1": 0.955,
+    "fn": 51,
+    "detected": 20
+   },
+   "B_vibration_only": {
+    "f1": 0.491,
+    "fn": 404,
+    "detected": 18
+   }
+  },
+  "explain": {
+   "A": {
+    "z_needed": 4.49,
+    "abnormal_rows_over": {
+     "AI0": 164,
+     "AI1": 23,
+     "AI2": 0
+    },
+    "p95": {
+     "AI0": 14.4,
+     "AI1": 4.1,
+     "AI2": 2.7
+    }
+   },
+   "B": {
+    "z_needed": 3.77,
+    "abnormal_rows_over": {
+     "AI0": 184,
+     "AI1": 36,
+     "AI2": 1
+    },
+    "p95": {
+     "AI0": 14.5,
+     "AI1": 4.1,
+     "AI2": 2.7
+    }
+   }
+  },
+  "univariate": {
+   "A_AI0_Vibration": 0.86,
+   "A_AI1_Vibration": 0.93,
+   "A_AI2_Current": 0.44,
+   "B_AI0_Vibration": 0.86,
+   "B_AI1_Vibration": 0.9,
+   "B_AI2_Current": 0.38
+  },
+  "swap": {
+   "A": {
+    "AI0_Vibration": [
+     61.0,
+     20
+    ],
+    "AI1_Vibration": [
+     46.0,
+     21
+    ],
+    "AI2_Current": [
+     427.0,
+     18
+    ]
+   },
+   "B": {
+    "AI0_Vibration": [
+     51.0,
+     20
+    ],
+    "AI1_Vibration": [
+     34.0,
+     21
+    ],
+    "AI2_Current": [
+     404.0,
+     18
+    ]
+   }
+  },
+  "readme_section_checks": {
+   "센서 순위": true,
+   "재적합 F1": true,
+   "AI0·AI1 제거 미탐": true,
+   "채널 교체": true,
+   "SHAP 이유": true,
+   "AUROC": true,
+   "문턱 z": true,
+   "넘는 행": true,
+   "p95": true,
+   "전류 AUROC": true,
+   "fmax 곱 항 없음": true,
+   "상호작용 네 개": true
+  },
+  "supervised_f1_0994_in_source": true
+ },
+ "S5_R2_04": {
+  "coupling_counts": {
+   "A": [
+    96,
+    14
+   ],
+   "B": [
+    145,
+    14
+   ]
+  },
+  "expected_in_title": "A 96·14, B 145·14",
+  "B_alpha1_score_threshold": 3.52,
+  "figures": [
+   "fig_coupling_v2.png",
+   "fig_false_alarm_cases_v2.png",
+   "fig_first_alarm_v2.png",
+   "fig_missed_example_v2.png",
+   "fig_position_vibration_v2.png",
+   "fig_probability_reliability_v2.png",
+   "fig_recall_by_position_v2.png",
+   "fig_sensor_importance_v2.png"
+  ],
+  "position_vibration_figure": true,
+  "figure_hashes_in_manifest": {
+   "fig_coupling_v2.png": true,
+   "fig_false_alarm_cases_v2.png": true,
+   "fig_first_alarm_v2.png": true,
+   "fig_missed_example_v2.png": true,
+   "fig_position_vibration_v2.png": true,
+   "fig_probability_reliability_v2.png": true,
+   "fig_recall_by_position_v2.png": true,
+   "fig_sensor_importance_v2.png": true
+  },
+  "intensity_bar_figure": false
+ },
+ "S6_R2_05": {
+  "rows": 12,
+  "checks": [
+   {
+    "line": 2,
+    "condition": "기록 시작 0.2초 안 × 진동이 동반되지 않은 이상",
+    "cite_exact": {
+     "press_guard/outputs/position_vibration_misses_v2.csv": true
+    },
+    "extra_paths": [],
+    "values_A_B_ok": [
+     true,
+     true
+    ]
+   },
+   {
+    "line": 3,
+    "condition": "기록 시작 0.2초 안(모든 이상 구간)",
+    "cite_exact": {
+     "press_guard/outputs/position_vibration_misses_v2.csv": true
+    },
+    "extra_paths": [],
+    "values_A_B_ok": [
+     true,
+     true
+    ]
+   },
+   {
+    "line": 4,
+    "condition": "기록 시작부터 있는 전류 오프셋",
+    "cite_exact": {
+     "analysis/press_supplement/e1_summary.csv": true
+    },
+    "extra_paths": [],
+    "values_A_B_ok": [
+     true,
+     true
+    ]
+   },
+   {
+    "line": 5,
+    "condition": "전류 진폭만 커지는 변화 × 운전 강도",
+    "cite_exact": {
+     "analysis/press_supplement/e1_summary.csv": true,
+     "press_guard/outputs/fn_intensity_v2.csv": true
+    },
+    "extra_paths": [],
+    "values_A_B_ok": [
+     true,
+     true
+    ]
+   },
+   {
+    "line": 6,
+    "condition": "4σ 미만 진동 이상 × 조용한 운전",
+    "cite_exact": {
+     "press_guard/outputs/fn_intensity_v2.csv": true
+    },
+    "extra_paths": [],
+    "values_A_B_ok": [
+     true,
+     true
+    ]
+   },
+   {
+    "line": 7,
+    "condition": "약한 전류 오프셋 × 고부하 운전",
+    "cite_exact": {
+     "press_guard/outputs/fn_intensity_v2.csv": true
+    },
+    "extra_paths": [],
+    "values_A_B_ok": [
+     true,
+     true
+    ]
+   },
+   {
+    "line": 8,
+    "condition": "단발 진동 충격 4σ",
+    "cite_exact": {
+     "analysis/press_selection/fp_mitigation_injection_v2.csv": true
+    },
+    "extra_paths": [],
+    "values_A_B_ok": [
+     true,
+     true
+    ]
+   },
+   {
+    "line": 9,
+    "condition": "고부하 운전(전류 진폭 ≥ B 정상 학습 q75)",
+    "cite_exact": {
+     "press_guard/outputs/fp_intensity_v2.csv": true
+    },
+    "extra_paths": [],
+    "values_A_B_ok": [
+     true,
+     true
+    ]
+   },
+   {
+    "line": 10,
+    "condition": "상부 진동(AI0) 단발 충격(구성비)",
+    "cite_exact": {
+     "press_guard/outputs/fp_events_v2.csv": true
+    },
+    "extra_paths": [],
+    "values_A_B_ok": [
+     true,
+     true
+    ]
+   },
+   {
+    "line": 11,
+    "condition": "문턱 근처 정상 구간과 운전 강도",
+    "cite_exact": {
+     "press_guard/outputs/near_miss_corr_v2.csv": true
+    },
+    "extra_paths": [],
+    "values_A_B_ok": [
+     true,
+     true
+    ]
+   },
+   {
+    "line": 12,
+    "condition": "전류 수준 상승",
+    "cite_exact": {
+     "analysis/press_dayshift/v2_current_scale.csv": true
+    },
+    "extra_paths": [],
+    "values_A_B_ok": [
+     true,
+     true
+    ]
+   },
+   {
+    "line": 13,
+    "condition": "거친 계측 정밀도",
+    "cite_exact": {
+     "press_guard/outputs/robustness_v2.csv": true
+    },
+    "extra_paths": [],
+    "values_A_B_ok": [
+     true,
+     true
+    ]
+   }
+  ],
+  "all_cites_exact": true,
+  "all_values_ok": true,
+  "has_ci_lift_columns": true,
+  "readme_table_rows": 12,
+  "readme_says_11_rows": true,
+  "readme_says_12_rows": true
+ },
+ "S7_R2_06": {
+  "fp_events_B_alpha1": [
+   423,
+   461,
+   570
+  ],
+  "near_miss_B_ratio_ge1_absolute": [
+   423,
+   461,
+   570
+  ],
+  "coupling_B_false_alarm_absolute": [
+   423,
+   461,
+   570
+  ],
+  "near_miss_abs_equals_rel_plus_cal_end": true,
+  "coupling_normal_abs_ok": true,
+  "readme_note": true
+ },
+ "N3_coupling_within_state": {
+  "A": {
+   "all": {
+    "n": 265,
+    "r": 0.951256391002543,
+    "table_r": 0.9512563910025432
+   },
+   "부하": {
+    "n": 178,
+    "r": 0.9168409615292312
+   },
+   "저수준": {
+    "n": 87,
+    "r": 0.37252128859949313
+   }
+  },
+  "B": {
+   "all": {
+    "n": 222,
+    "r": 0.9491519183643691,
+    "table_r": 0.9491519183643692
+   },
+   "부하": {
+    "n": 148,
+    "r": 0.9077671343737891
+   },
+   "저수준": {
+    "n": 74,
+    "r": 0.3531545708558891
+   }
+  },
+  "press_guard_readme_interaction_section_mentions_states": false,
+  "error_summary_mentions_operating_state": false
+ },
+ "S8_E3_fp_events_columns": {
+  "columns": [
+   "model",
+   "same_calibration_as",
+   "alpha",
+   "record",
+   "time",
+   "block",
+   "length",
+   "first_alarm_position",
+   "alarm_rows",
+   "reasons",
+   "magnitude_sensor",
+   "vib_maxz",
+   "current_amp",
+   "peak_score",
+   "independent"
+  ],
+  "has_r2": false,
+  "has_quartile_or_state": false,
+  "independent_documented_in_docstring": true
+ },
+ "head_after": "061fac8ae9a8373265434a5586cde956982db934",
+ "write_check": {
+  "files_hashed": 465,
+  "changed": [],
+  "pycache_before": [
+   "analysis/energy_followup/__pycache__",
+   "analysis/reselection/__pycache__",
+   "analysis/reselection/injection/__pycache__",
+   "power_submission/__pycache__",
+   "power_submission/powerguard/__pycache__"
+  ],
+  "pycache_after": [
+   "analysis/energy_followup/__pycache__",
+   "analysis/reselection/__pycache__",
+   "analysis/reselection/injection/__pycache__",
+   "power_submission/__pycache__",
+   "power_submission/powerguard/__pycache__"
+  ]
+ },
+ "timing_s": {
+  "S1": 10.4,
+  "S2": 34.8,
+  "N1": 4.3,
+  "S3": 34.7,
+  "N2": 176.4,
+  "S4": 9.3,
+  "S5": 0.1,
+  "S6": 0.1,
+  "S7": 0.0,
+  "N3": 5.6
+ },
+ "elapsed_s": 277.0
+}
