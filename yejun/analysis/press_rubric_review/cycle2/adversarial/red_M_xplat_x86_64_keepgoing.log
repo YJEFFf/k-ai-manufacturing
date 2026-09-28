@@ -1,0 +1,189 @@
+== platform: x86_64 Linux PRETTY_NAME="Debian GNU/Linux 13 (trixie)"
+Python 3.12.14
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: pip install --upgrade pip
+== pip done (53s)
+matplotlib==3.9.2
+numpy==1.26.4
+pandas==2.3.3
+pytest==9.0.3
+scikit-learn==1.8.0
+scipy==1.13.1
+threadpoolctl==3.7.0
+machine x86_64 Linux-6.8.0-50-generic-x86_64-with-glibc2.41
+blas openblas 0.3.23.dev Nehalem 4
+[1/23] v1 선행(주 모델·기준모델·행별 예측) …
+      통과 · 16.3초 ·   fig.savefig(out / "fig_segment_length.png", dpi=150)
+[2/23] v1 동결값 비교 …
+      통과 · 0.6초 · 16/16 통과 (1~2단계 부분 비교, 필수 집계 9개). 환경: Linux-6.8.0-50-generic-x86_64-with-glibc2.41 vs 동결 macOS-26.3.1-arm64-arm-64bit; 코
+[3/23] v2 학습·시간순 5회 …
+      통과 · 40.8초 ·     B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              180       
+[4/23] v2 분석 …
+      통과 · 332.5초 ·   fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+[5/23] v2 실행 검증(audit) …
+      통과 · 376.2초 · 16/16 통과 → /work/yejun/press_guard/outputs/audit.json
+[6/23] v2 동결값 비교 …
+OK   label_free_alert_probability_v2.csv  max|Δ|=5.3e-15
+OK   monitor_gain_v2.csv  max|Δ|=2.2e-16
+OK   expected_effect_v2.csv  max|Δ|=1.8e-12
+OK   fp_intensity_v2.csv  max|Δ|=9.7e-17
+OK   fn_intensity_v2.csv  max|Δ|=1e-16
+OK   error_condition_summary_v2.csv  max|Δ|=2.2e-16
+OK   incident_summary_v2.csv  max|Δ|=0
+FAIL predictions_normal_A.csv  (경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름)
+FAIL predictions_normal_B.csv  (경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름)
+OK   predictions_abnormal_A.csv
+OK   predictions_abnormal_B.csv
+OK   test_predictions_A.csv
+OK   test_predictions_B.csv
+
+      실패 · 1.9초 · 49/53 통과. 코드 8b9493a24860 vs 동결 8b9493a24860; 환경 Linux-6.8.0-50-generic-x86_64-with-glibc2.41 vs 동결 macOS-26.3.1-arm64-a
+49/53 통과. 코드 8b9493a24860 vs 동결 8b9493a24860; 환경 Linux-6.8.0-50-generic-x86_64-with-glibc2.41 vs 동결 macOS-26.3.1-arm64-arm-64bit
+[7/23] 진단 표(press_evidence) …
+      통과 · 11.7초 ·     B 12 0.099174 0.099174      180               11  0.061111       0.099126          False
+[8/23] 진단 보강 표·그림 …
+      통과 · 50.5초 ·   fig.savefig(path, dpi=150, bbox_inches="tight", metadata={"Software": None})
+[9/23] 지도학습 기준선(press_supervised) …
+      통과 · 218.6초 · done 217.5 s
+[10/23] 모델 선정 근거(press_selection) …
+      통과 · 105.9초 · 내부 점검: 통과 · 104.8 s
+[11/23] press_evidence 동결값 비교 …
+      실패 · 0.8초 · 실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 44개)
+[12/23] press_supervised 동결값 비교 …
+FAIL diagnostics_manifest.json: sources 변경(실행 기록과 다름) — yejun/analysis/press_supervised/random_rows.csv
+FAIL diagnostics_manifest.json: sources 변경(실행 기록과 다름) — yejun/analysis/press_supervised/grouped_records.csv
+FAIL diagnostics_manifest.json: cited 변경(실행 기록과 다름) — yejun/analysis/press_supervised/grouped_records.csv
+FAIL diagnostics_manifest.json: cited 변경(실행 기록과 다름) — yejun/analysis/press_supervised/random_rows.csv
+FAIL component_correlation.csv: spearman 최대 차이 1.31e-06 > 1e-09
+FAIL operating_states_summary.csv: 문자 열 value 불일치
+실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 44개)
+      실패 · 0.6초 · 실패: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+[13/23] press_advance 동결값 비교 …
+FAIL random_rows.csv: tp 최대 차이 1 > 1e-09
+FAIL grouped_records.csv: threshold_value 최대 차이 0.254 > 1e-09
+FAIL injection.csv: detect_rate_2s 최대 차이 0.0533 > 1e-09
+실패: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+      통과 · 0.6초 · 통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+[14/23] press_selection 동결값 비교 …
+      실패 · 0.6초 · 실패: press_selection 실행 기록 무결성·동결 기대값 비교(결과 12개)
+[15/23] 보완 실험 E1~E3 동결값 비교 …
+FAIL same_feature_alternatives.csv: row_auroc 최대 차이 4.07e-07 > 1e-09
+FAIL unified_comparison.csv: tp 최대 차이 3 > 1e-09
+FAIL unified_comparison.md: 내용 불일치
+실패: press_selection 실행 기록 무결성·동결 기대값 비교(결과 12개)
+      실패 · 1.2초 · 실패: 무결성·기대값 비교 E1, E3 · 건너뜀 E2(외부 입력 없음)
+[16/23] 시험: v2 …
+건너뜀 E2: 외부 입력 없음 ['/work/yejun/analysis/press_external/data/hydraulic.zip'] — 획득: python analysis/press_external/acquire.py (SHA-256은 analysis/press_external/acquisition.json)
+FAIL E1: 기준 모델 변경 또는 기록 없음 — guard_A.json
+FAIL E1: 기준 모델 변경 또는 기록 없음 — guard_B.json
+FAIL E3: 기준 모델 변경 또는 기록 없음 — guard_A.json
+실패: 무결성·기대값 비교 E1, E3 · 건너뜀 E2(외부 입력 없음)
+>       assert hashlib.sha256((HERE / "artifacts" / name).read_bytes()).hexdigest() == digest
+E       AssertionError: assert 'f0db8fc2c995...845c4f82e5d39' == '7fde4cd1bdfa...786c27abcaae8'
+E         
+E         - 7fde4cd1bdfa74e78e2d3f07c5dbd9c27619e19b2e94ceb8fab786c27abcaae8
+E         + f0db8fc2c9952d49eaf454437712bbb5a8aa0e68d2d9c9450ec845c4f82e5d39
+
+test_time_order.py:139: AssertionError
+=========================== short test summary info ============================
+FAILED test_analyze.py::test_verify_detects_tampering - AssertionError: asser...
+FAILED test_analyze.py::test_verify_compares_row_level_predictions - assert F...
+FAILED test_time_order.py::test_frozen_artifacts_are_unchanged[guard_A.json-c938707f1dd16e7c239b8053e7f032d8fac828d6c753de2b898ba9130a594f10]
+FAILED test_time_order.py::test_frozen_artifacts_are_unchanged[guard_B.json-b64ac3b30bc697034104287964f3154e88c8a50749ccdec04f6d4f8744fd6969]
+      실패 · 163.5초 · 6 failed, 124 passed, 2 skipped in 163.01s (0:02:43)
+[17/23] 시험: v1 …
+FAILED test_time_order.py::test_frozen_artifacts_are_unchanged[probability_A.json-1a8100e78046393d9292fc7c305b5ec57b46c4e2c73b03abeb596052a8705f8a]
+FAILED test_time_order.py::test_frozen_artifacts_are_unchanged[probability_B.json-7fde4cd1bdfa74e78e2d3f07c5dbd9c27619e19b2e94ceb8fab786c27abcaae8]
+6 failed, 124 passed, 2 skipped in 163.01s (0:02:43)
+../../../usr/local/lib/python3.12/site-packages/matplotlib/_fontconfig_pattern.py:89
+../../../usr/local/lib/python3.12/site-packages/matplotlib/_fontconfig_pattern.py:89
+../../../usr/local/lib/python3.12/site-packages/matplotlib/_fontconfig_pattern.py:89
+../../../usr/local/lib/python3.12/site-packages/matplotlib/_fontconfig_pattern.py:89
+  /usr/local/lib/python3.12/site-packages/matplotlib/_fontconfig_pattern.py:89: PyparsingDeprecationWarning: 'resetCache' deprecated - use 'reset_cache'
+    parser.resetCache()
+
+../../../usr/local/lib/python3.12/site-packages/matplotlib/_mathtext.py:45
+  /usr/local/lib/python3.12/site-packages/matplotlib/_mathtext.py:45: PyparsingDeprecationWarning: 'enablePackrat' deprecated - use 'enable_packrat'
+    ParserElement.enablePackrat()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_step3.py::test_label_bypass_passes_on_fitted_model - assert...
+1 failed, 43 passed, 2 skipped, 14 warnings in 5.52s
+      실패 · 6.0초 · 1 failed, 43 passed, 2 skipped, 14 warnings in 5.52s
+[18/23] 시험: press_advance …
+      통과 · 1.0초 · 8 passed in 0.62s
+[19/23] 시험: press_evidence …
+      실패 · 2.0초 · 1 failed, 5 passed in 1.58s
+[20/23] 시험: press_evidence …
+F.....                                                                   [100%]
+=================================== FAILURES ===================================
+__________________________ test_committed_run_passes ___________________________
+
+    def test_committed_run_passes():
+>       assert pc.verify(HERE) == []
+E       AssertionError: assert ['diagnostics... 열 value 불일치'] == []
+E         
+E         Left contains 6 more items, first extra item: 'diagnostics_manifest.json: sources 변경(실행 기록과 다름) — yejun/analysis/press_supervised/random_rows.csv'
+E         Use -v to get more diff
+
+analysis/press_evidence/test_contract.py:24: AssertionError
+=========================== short test summary info ============================
+FAILED analysis/press_evidence/test_contract.py::test_committed_run_passes - ...
+1 failed, 5 passed in 1.58s
+      통과 · 1.3초 · 4 passed in 0.87s
+[21/23] 시험: press_selection …
+      실패 · 1.2초 · 1 failed, 5 passed in 0.85s
+[22/23] 시험: press_supervised …
+F.....                                                                   [100%]
+=================================== FAILURES ===================================
+__________________________ test_committed_run_passes ___________________________
+
+    def test_committed_run_passes():
+>       assert pc.verify(HERE) == []
+E       AssertionError: assert ['same_featur...n.md: 내용 불일치'] == []
+E         
+E         Left contains 3 more items, first extra item: 'same_feature_alternatives.csv: row_auroc 최대 차이 4.07e-07 > 1e-09'
+E         Use -v to get more diff
+
+analysis/press_selection/test_contract.py:24: AssertionError
+=========================== short test summary info ============================
+FAILED analysis/press_selection/test_contract.py::test_committed_run_passes
+1 failed, 5 passed in 0.85s
+      실패 · 1.0초 · 1 failed, 5 passed in 0.60s
+[23/23] 시험: press_supplement …
+F.....                                                                   [100%]
+=================================== FAILURES ===================================
+__________________________ test_committed_run_passes ___________________________
+
+    def test_committed_run_passes():
+>       assert pc.verify(HERE) == []
+E       AssertionError: assert ['random_rows...0533 > 1e-09'] == []
+E         
+E         Left contains 3 more items, first extra item: 'random_rows.csv: tp 최대 차이 1 > 1e-09'
+E         Use -v to get more diff
+
+analysis/press_supervised/test_contract.py:24: AssertionError
+=========================== short test summary info ============================
+FAILED analysis/press_supervised/test_contract.py::test_committed_run_passes
+1 failed, 5 passed in 0.60s
+      실패 · 2.0초 · 2 failed, 8 passed, 3 skipped in 1.58s
+>       assert verify.main(["--out", str(run_copy), "--experiments", ",".join(AVAILABLE)]) == 0
+E       AssertionError: assert 1 == 0
+E        +  where 1 = <function main at 0x7ffff1043380>(['--out', '/tmp/pytest-of-root/pytest-6/test_expected_tampering_is_det0', '--experiments', 'E1,E3'])
+E        +    where <function main at 0x7ffff1043380> = verify.main
+
+analysis/press_supplement/test_contract.py:86: AssertionError
+----------------------------- Captured stdout call -----------------------------
+FAIL E1: 기준 모델 변경 또는 기록 없음 — guard_A.json
+FAIL E1: 기준 모델 변경 또는 기록 없음 — guard_B.json
+FAIL E3: 기준 모델 변경 또는 기록 없음 — guard_A.json
+실패: 무결성·기대값 비교 E1, E3
+=========================== short test summary info ============================
+FAILED analysis/press_supplement/test_contract.py::test_committed_run_is_consistent
+FAILED analysis/press_supplement/test_contract.py::test_expected_tampering_is_detected
+2 failed, 8 passed, 3 skipped in 1.58s
+
+12/23 단계 통과 · 1336.9초 · 요약 press_guard/outputs/reproduce_summary.json
+== reproduce exit 1 (1338s)

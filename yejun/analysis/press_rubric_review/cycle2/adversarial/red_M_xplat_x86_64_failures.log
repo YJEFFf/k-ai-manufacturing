@@ -1,0 +1,177 @@
+######## step 06
+$ /usr/local/bin/python /work/yejun/press_guard/verify.py
+OK   outputs.integrity
+OK   inputs.sha256
+OK   expected.integrity
+OK   configuration
+OK   analysis_summary.json
+OK   metrics.csv  max|Δ|=0
+OK   rolling.csv  max|Δ|=0
+OK   cases_A.csv  max|Δ|=7e-10
+OK   cases_B.csv  max|Δ|=6.9e-10
+OK   incidents_A.csv  max|Δ|=5.7e-12
+OK   incidents_B.csv  max|Δ|=5.7e-12
+OK   model_comparison_v2.csv  max|Δ|=8.9e-16
+OK   robustness_v2.csv  max|Δ|=0
+OK   sensitivity_v2.csv  max|Δ|=2.5e-11
+OK   ablation_v2.csv  max|Δ|=8.5e-12
+OK   error_conditions_v2.csv  max|Δ|=0
+OK   error_conditions_segments_v2.csv  max|Δ|=0
+OK   interaction_2x2_v2.csv  max|Δ|=0
+OK   records_first_alarm_v2.csv  max|Δ|=0
+OK   uncertainty_v2.csv  max|Δ|=0
+OK   workload_v2.csv  max|Δ|=0
+OK   decision_table_v2.csv  max|Δ|=0
+OK   probability_eval_v2.csv  max|Δ|=6e-10
+OK   probability_reliability_v2.csv  max|Δ|=3.8e-10
+FAIL probability_conversion_v2.csv  (alarm_rows_min_lr row 5: |Δ|=5.98e-09 > 1e-09)
+OK   alert_levels_v2.csv  max|Δ|=1.1e-13
+OK   alert_budget_design_v2.csv  max|Δ|=0
+OK   queue_mixed_ranks_v2.csv  max|Δ|=7e-10
+OK   queue_injection_ranks_v2.csv  max|Δ|=0
+OK   queue_key_selection_v2.csv  max|Δ|=0
+OK   sensor_importance_v2.csv  max|Δ|=1.1e-16
+OK   position_vibration_misses_v2.csv  max|Δ|=1.1e-16
+OK   coupling_fit_v2.csv  max|Δ|=3.6e-15
+OK   coupling_records_v2.csv  max|Δ|=1.4e-14
+OK   fp_events_v2.csv  max|Δ|=2.6e-13
+OK   near_miss_v2.csv  max|Δ|=1.6e-11
+FAIL near_miss_corr_v2.csv  (spearman row 3: |Δ|=0.000299 > 1e-09)
+OK   error_conditions_stats_v2.csv  max|Δ|=1.1e-16
+OK   alert_levels_injection_v2.csv  max|Δ|=0
+OK   quality_windows_v2.csv  max|Δ|=0
+OK   label_free_alert_probability_v2.csv  max|Δ|=5.3e-15
+OK   monitor_gain_v2.csv  max|Δ|=2.2e-16
+OK   expected_effect_v2.csv  max|Δ|=1.8e-12
+OK   fp_intensity_v2.csv  max|Δ|=9.7e-17
+OK   fn_intensity_v2.csv  max|Δ|=1e-16
+OK   error_condition_summary_v2.csv  max|Δ|=2.2e-16
+OK   incident_summary_v2.csv  max|Δ|=0
+FAIL predictions_normal_A.csv  (경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름)
+FAIL predictions_normal_B.csv  (경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름)
+OK   predictions_abnormal_A.csv
+OK   predictions_abnormal_B.csv
+OK   test_predictions_A.csv
+OK   test_predictions_B.csv
+49/53 통과. 코드 8b9493a24860 vs 동결 8b9493a24860; 환경 Linux-6.8.0-50-generic-x86_64-with-glibc2.41 vs 동결 macOS-26.3.1-arm64-arm-64bit
+######## step 11
+$ /usr/local/bin/python /work/yejun/analysis/package_contract.py --package /work/yejun/analysis/press_evidence
+FAIL diagnostics_manifest.json: sources 변경(실행 기록과 다름) — yejun/analysis/press_supervised/random_rows.csv
+FAIL diagnostics_manifest.json: sources 변경(실행 기록과 다름) — yejun/analysis/press_supervised/grouped_records.csv
+FAIL diagnostics_manifest.json: cited 변경(실행 기록과 다름) — yejun/analysis/press_supervised/grouped_records.csv
+FAIL diagnostics_manifest.json: cited 변경(실행 기록과 다름) — yejun/analysis/press_supervised/random_rows.csv
+FAIL component_correlation.csv: spearman 최대 차이 1.31e-06 > 1e-09
+FAIL operating_states_summary.csv: 문자 열 value 불일치
+실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 44개)
+######## step 12
+$ /usr/local/bin/python /work/yejun/analysis/package_contract.py --package /work/yejun/analysis/press_supervised
+FAIL random_rows.csv: tp 최대 차이 1 > 1e-09
+FAIL grouped_records.csv: threshold_value 최대 차이 0.254 > 1e-09
+FAIL injection.csv: detect_rate_2s 최대 차이 0.0533 > 1e-09
+실패: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+######## step 14
+$ /usr/local/bin/python /work/yejun/analysis/package_contract.py --package /work/yejun/analysis/press_selection
+FAIL same_feature_alternatives.csv: row_auroc 최대 차이 4.07e-07 > 1e-09
+FAIL unified_comparison.csv: tp 최대 차이 3 > 1e-09
+FAIL unified_comparison.md: 내용 불일치
+실패: press_selection 실행 기록 무결성·동결 기대값 비교(결과 12개)
+######## step 15
+$ /usr/local/bin/python /work/yejun/analysis/press_supplement/verify.py
+FAIL E1: 기준 모델 변경 또는 기록 없음 — guard_A.json
+FAIL E1: 기준 모델 변경 또는 기록 없음 — guard_B.json
+FAIL E3: 기준 모델 변경 또는 기록 없음 — guard_A.json
+실패: 무결성·기대값 비교 E1, E3 · 건너뜀 E2(외부 입력 없음)
+######## step 16
+$ /usr/local/bin/python -m pytest -q -p no:cacheprovider /work/yejun/press_guard
+OK   outputs.integrity
+OK   inputs.sha256
+OK   expected.integrity
+OK   configuration
+OK   analysis_summary.json
+OK   metrics.csv  max|Δ|=0
+OK   rolling.csv  max|Δ|=0
+OK   cases_A.csv  max|Δ|=7e-10
+OK   cases_B.csv  max|Δ|=6.9e-10
+OK   incidents_A.csv  max|Δ|=5.7e-12
+OK   incidents_B.csv  max|Δ|=5.7e-12
+OK   model_comparison_v2.csv  max|Δ|=8.9e-16
+OK   robustness_v2.csv  max|Δ|=0
+OK   sensitivity_v2.csv  max|Δ|=2.5e-11
+OK   ablation_v2.csv  max|Δ|=8.5e-12
+OK   error_conditions_v2.csv  max|Δ|=0
+OK   error_conditions_segments_v2.csv  max|Δ|=0
+OK   interaction_2x2_v2.csv  max|Δ|=0
+OK   records_first_alarm_v2.csv  max|Δ|=0
+OK   uncertainty_v2.csv  max|Δ|=0
+OK   workload_v2.csv  max|Δ|=0
+OK   decision_table_v2.csv  max|Δ|=0
+OK   probability_eval_v2.csv  max|Δ|=6e-10
+OK   probability_reliability_v2.csv  max|Δ|=3.8e-10
+FAIL probability_conversion_v2.csv  (alarm_rows_min_lr row 5: |Δ|=5.98e-09 > 1e-09)
+OK   alert_levels_v2.csv  max|Δ|=1.1e-13
+OK   alert_budget_design_v2.csv  max|Δ|=0
+OK   queue_mixed_ranks_v2.csv  max|Δ|=7e-10
+OK   queue_injection_ranks_v2.csv  max|Δ|=0
+OK   queue_key_selection_v2.csv  max|Δ|=0
+OK   sensor_importance_v2.csv  max|Δ|=1.1e-16
+OK   position_vibration_misses_v2.csv  max|Δ|=1.1e-16
+OK   coupling_fit_v2.csv  max|Δ|=3.6e-15
+OK   coupling_records_v2.csv  max|Δ|=1.4e-14
+OK   fp_events_v2.csv  max|Δ|=2.6e-13
+OK   near_miss_v2.csv  max|Δ|=1.6e-11
+FAIL near_miss_corr_v2.csv  (spearman row 3: |Δ|=0.000299 > 1e-09)
+OK   error_conditions_stats_v2.csv  max|Δ|=1.1e-16
+OK   alert_levels_injection_v2.csv  max|Δ|=0
+OK   quality_windows_v2.csv  max|Δ|=0
+OK   label_free_alert_probability_v2.csv  max|Δ|=5.3e-15
+OK   monitor_gain_v2.csv  max|Δ|=2.2e-16
+OK   expected_effect_v2.csv  max|Δ|=1.8e-12
+OK   fp_intensity_v2.csv  max|Δ|=9.7e-17
+OK   fn_intensity_v2.csv  max|Δ|=1e-16
+OK   error_condition_summary_v2.csv  max|Δ|=2.2e-16
+OK   incident_summary_v2.csv  max|Δ|=0
+FAIL predictions_normal_A.csv  (경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름)
+FAIL predictions_normal_B.csv  (경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름)
+OK   predictions_abnormal_A.csv
+OK   predictions_abnormal_B.csv
+OK   test_predictions_A.csv
+OK   test_predictions_B.csv
+49/53 통과. 코드 8b9493a24860 vs 동결 8b9493a24860; 환경 Linux-6.8.0-50-generic-x86_64-with-glibc2.41 vs 동결 macOS-26.3.1-arm64-arm-64bit
+        """행 단위 예측 파일 한 행을 바꾸면 verify의 예측 요약 대조가 실패한다(평가관 06 R5). 1e-9 수준의 부동소수 차이는 통과하고,
+        점수 한 행을 1.0 바꾸면 실패한다."""
+FAILED test_analyze.py::test_verify_detects_tampering - AssertionError: asser...
+FAILED test_analyze.py::test_verify_compares_row_level_predictions - assert F...
+FAILED test_time_order.py::test_frozen_artifacts_are_unchanged[guard_A.json-c938707f1dd16e7c239b8053e7f032d8fac828d6c753de2b898ba9130a594f10]
+FAILED test_time_order.py::test_frozen_artifacts_are_unchanged[guard_B.json-b64ac3b30bc697034104287964f3154e88c8a50749ccdec04f6d4f8744fd6969]
+FAILED test_time_order.py::test_frozen_artifacts_are_unchanged[probability_A.json-1a8100e78046393d9292fc7c305b5ec57b46c4e2c73b03abeb596052a8705f8a]
+FAILED test_time_order.py::test_frozen_artifacts_are_unchanged[probability_B.json-7fde4cd1bdfa74e78e2d3f07c5dbd9c27619e19b2e94ceb8fab786c27abcaae8]
+6 failed, 124 passed, 2 skipped in 163.01s (0:02:43)
+######## step 17
+$ /usr/local/bin/python -m pytest -q -p no:cacheprovider /work/yejun/press_submission/tests
+>       assert lb.passed.all() and (lb[lb.expect_equal].max_abs_score_diff == 0).all()
+E        +    where all = 0    True\n1    True\n2    True\n3    True\nName: passed, dtype: bool.all
+E        +      where 0    True\n1    True\n2    True\n3    True\nName: passed, dtype: bool =   split                             check  ...  alarm_segments_changed  passed\n0  test         timestamps_shifted_5_da...         0    True\n3  test              future_rows_appended  ...                  
+E        +      where 0    0.000000e+00\n1    0.000000e+00\n3    2.842171e-14\nName: max_abs_score_diff, dtype: float64 =   split                             check  ...  alarm_segments_changed  passed\n0  test         timestamps_shifted_5_da...         0    True\n3  test              future_rows_app
+FAILED tests/test_step3.py::test_label_bypass_passes_on_fitted_model - assert...
+1 failed, 43 passed, 2 skipped, 14 warnings in 5.52s
+######## step 19
+$ /usr/local/bin/python -m pytest -q -p no:cacheprovider /work/yejun/analysis/press_evidence/test_contract.py
+FAILED analysis/press_evidence/test_contract.py::test_committed_run_passes - ...
+1 failed, 5 passed in 1.58s
+######## step 21
+$ /usr/local/bin/python -m pytest -q -p no:cacheprovider /work/yejun/analysis/press_selection/test_contract.py
+FAILED analysis/press_selection/test_contract.py::test_committed_run_passes
+1 failed, 5 passed in 0.85s
+######## step 22
+$ /usr/local/bin/python -m pytest -q -p no:cacheprovider /work/yejun/analysis/press_supervised/test_contract.py
+FAILED analysis/press_supervised/test_contract.py::test_committed_run_passes
+1 failed, 5 passed in 0.60s
+######## step 23
+$ /usr/local/bin/python -m pytest -q -p no:cacheprovider /work/yejun/analysis/press_supplement/test_contract.py
+FAIL E1: 기준 모델 변경 또는 기록 없음 — guard_A.json
+FAIL E1: 기준 모델 변경 또는 기록 없음 — guard_B.json
+FAIL E3: 기준 모델 변경 또는 기록 없음 — guard_A.json
+실패: 무결성·기대값 비교 E1, E3
+FAILED analysis/press_supplement/test_contract.py::test_committed_run_is_consistent
+FAILED analysis/press_supplement/test_contract.py::test_expected_tampering_is_detected
+2 failed, 8 passed, 3 skipped in 1.58s

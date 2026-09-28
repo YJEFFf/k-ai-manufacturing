@@ -1,0 +1,23 @@
+기준 커밋 cc1aac2
+문서별: 전체 행 / 수치가 든 행 / 수치 문장(칸) / 작업 사본이 커밋과 같은가
+  yejun/press_guard/README.md: 220 / 109 / 200 / True
+  yejun/press_guard/OPERATIONS.md: 63 / 28 / 65 / True
+  yejun/press_guard/web/index.html: 31 / 15 / 43 / True
+  yejun/press_guard/web/app.js: 724 / 56 / 56 / True
+  yejun/press_submission/README.md: 84 / 30 / 34 / True
+  yejun/press_submission/outputs/diagnosis.md: 69 / 38 / 82 / True
+  yejun/analysis/press_evidence/README.md: 357 / 189 / 410 / True
+  yejun/analysis/press_selection/README.md: 212 / 118 / 224 / True
+  yejun/analysis/press_supervised/README.md: 90 / 46 / 95 / True
+  yejun/analysis/press_supplement/README.md: 128 / 50 / 142 / True
+  yejun/analysis/press_advance/README.md: 39 / 8 / 10 / True
+  합계: 2017 / 687 / 1361
+수치 토큰 합계: 3842
+표의 설명 열(중복 제거):
+  yejun/press_guard/outputs: CSV 42개, 설명 칸 145개(수치 포함 88개)
+  yejun/analysis/press_evidence: CSV 39개, 설명 칸 214개(수치 포함 147개)
+  yejun/analysis/press_selection: CSV 11개, 설명 칸 86개(수치 포함 41개)
+  yejun/analysis/press_supervised: CSV 3개, 설명 칸 0개(수치 포함 0개)
+  yejun/analysis/press_supplement: CSV 10개, 설명 칸 4개(수치 포함 0개)
+  yejun/analysis/press_advance: CSV 2개, 설명 칸 0개(수치 포함 0개)
+  yejun/press_submission/outputs: CSV 30개, 설명 칸 6개(수치 포함 3개)

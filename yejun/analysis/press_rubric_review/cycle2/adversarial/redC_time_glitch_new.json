@@ -1,0 +1,104 @@
+{
+  "A 없음": {
+    "status": {
+      "ok": 600
+    },
+    "alarm_rows": 556,
+    "abnormal_records_with_alarm": 21,
+    "rows_not_judged": 0,
+    "notifications": {
+      "사건 시작": 1,
+      "격상": 1
+    }
+  },
+  "A +10초": {
+    "status": {
+      "ok": 584,
+      "bad_time_order": 17
+    },
+    "alarm_rows": 544,
+    "abnormal_records_with_alarm": 20,
+    "rows_not_judged": 17,
+    "notifications": {
+      "수집 오류": 1,
+      "사건 시작": 1,
+      "격상": 1
+    }
+  },
+  "A +1시간": {
+    "status": {
+      "bad_time_order": 600,
+      "ok": 1
+    },
+    "alarm_rows": 0,
+    "abnormal_records_with_alarm": 0,
+    "rows_not_judged": 600,
+    "notifications": {
+      "수집 오류": 1
+    }
+  },
+  "A +1일": {
+    "status": {
+      "bad_time_order": 600,
+      "ok": 1
+    },
+    "alarm_rows": 0,
+    "abnormal_records_with_alarm": 0,
+    "rows_not_judged": 600,
+    "notifications": {
+      "수집 오류": 1
+    }
+  },
+  "B 없음": {
+    "status": {
+      "ok": 600
+    },
+    "alarm_rows": 569,
+    "abnormal_records_with_alarm": 21,
+    "rows_not_judged": 0,
+    "notifications": {
+      "사건 시작": 1,
+      "격상": 1
+    }
+  },
+  "B +10초": {
+    "status": {
+      "ok": 584,
+      "bad_time_order": 17
+    },
+    "alarm_rows": 554,
+    "abnormal_records_with_alarm": 20,
+    "rows_not_judged": 17,
+    "notifications": {
+      "사건 시작": 2,
+      "수집 오류": 1,
+      "격상": 1
+    }
+  },
+  "B +1시간": {
+    "status": {
+      "bad_time_order": 600,
+      "ok": 1
+    },
+    "alarm_rows": 0,
+    "abnormal_records_with_alarm": 0,
+    "rows_not_judged": 600,
+    "notifications": {
+      "사건 시작": 1,
+      "수집 오류": 1
+    }
+  },
+  "B +1일": {
+    "status": {
+      "bad_time_order": 600,
+      "ok": 1
+    },
+    "alarm_rows": 0,
+    "abnormal_records_with_alarm": 0,
+    "rows_not_judged": 600,
+    "notifications": {
+      "사건 시작": 1,
+      "수집 오류": 1
+    }
+  }
+}

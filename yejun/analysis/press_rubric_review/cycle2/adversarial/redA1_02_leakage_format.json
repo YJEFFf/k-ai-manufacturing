@@ -1,0 +1,261 @@
+{
+  "splits": [
+    {
+      "split": "A",
+      "overlap_rows": 0,
+      "records_shared": 0,
+      "gap_train_cal_s": 8.481999999999971,
+      "gap_cal_test_s": 4.356000000000222,
+      "all_rows_covered": true,
+      "train_rows": 11963,
+      "train_records": 360,
+      "train_first_row": 0,
+      "train_last_row": 11962,
+      "train_t_first": "2022-07-12 00:00:00.019",
+      "train_t_last": "2022-07-12 00:44:53.874",
+      "train_rec_first": 0,
+      "train_rec_last": 359,
+      "train_contiguous": true,
+      "cal_rows": 3947,
+      "cal_records": 120,
+      "cal_first_row": 11963,
+      "cal_last_row": 15909,
+      "cal_t_first": "2022-07-12 00:45:02.356",
+      "cal_t_last": "2022-07-12 01:00:45.704",
+      "cal_rec_first": 360,
+      "cal_rec_last": 479,
+      "cal_contiguous": true,
+      "test_rows": 4090,
+      "test_records": 120,
+      "test_first_row": 15910,
+      "test_last_row": 19999,
+      "test_t_first": "2022-07-12 01:00:50.060",
+      "test_t_last": "2022-07-12 01:16:55.828",
+      "test_rec_first": 480,
+      "test_rec_last": 599,
+      "test_contiguous": true
+    },
+    {
+      "split": "B",
+      "overlap_rows": 0,
+      "records_shared": 0,
+      "gap_train_cal_s": 3.2899999999999636,
+      "gap_cal_test_s": 3.187000000000353,
+      "all_rows_covered": true,
+      "train_rows": 10133,
+      "train_records": 300,
+      "train_first_row": 0,
+      "train_last_row": 10132,
+      "train_t_first": "2022-07-12 00:00:00.019",
+      "train_t_last": "2022-07-12 00:37:53.946",
+      "train_rec_first": 0,
+      "train_rec_last": 299,
+      "train_contiguous": true,
+      "cal_rows": 3770,
+      "cal_records": 120,
+      "cal_first_row": 10133,
+      "cal_last_row": 13902,
+      "cal_t_first": "2022-07-12 00:37:57.236",
+      "cal_t_last": "2022-07-12 00:52:44.509",
+      "cal_rec_first": 300,
+      "cal_rec_last": 419,
+      "cal_contiguous": true,
+      "test_rows": 6097,
+      "test_records": 180,
+      "test_first_row": 13903,
+      "test_last_row": 19999,
+      "test_t_first": "2022-07-12 00:52:47.696",
+      "test_t_last": "2022-07-12 01:16:55.828",
+      "test_rec_first": 420,
+      "test_rec_last": 599,
+      "test_contiguous": true
+    }
+  ],
+  "duplicate_rows": {
+    "rows": [
+      11564,
+      11565
+    ],
+    "records": [
+      346,
+      347
+    ]
+  },
+  "raw_decimals": [
+    {
+      "sensor": "AI0_Vibration",
+      "normal_decimals": {
+        "-1": 17,
+        "2": 3,
+        "3": 22,
+        "4": 183,
+        "5": 1816,
+        "6": 17958,
+        "16": 1
+      },
+      "abnormal_decimals": {
+        "5": 1,
+        "6": 7,
+        "7": 58,
+        "8": 264,
+        "9": 246,
+        "10": 23,
+        "11": 1
+      }
+    },
+    {
+      "sensor": "AI1_Vibration",
+      "normal_decimals": {
+        "-1": 17,
+        "1": 1,
+        "2": 1,
+        "3": 16,
+        "4": 195,
+        "5": 1855,
+        "6": 17914,
+        "16": 1
+      },
+      "abnormal_decimals": {
+        "6": 4,
+        "7": 34,
+        "8": 394,
+        "9": 151,
+        "10": 15,
+        "11": 2
+      }
+    },
+    {
+      "sensor": "AI2_Current",
+      "normal_decimals": {
+        "1": 2,
+        "2": 10,
+        "3": 114,
+        "4": 1042,
+        "5": 10213,
+        "6": 8618,
+        "14": 1
+      },
+      "abnormal_decimals": {
+        "1": 2,
+        "2": 7,
+        "4": 23,
+        "5": 275,
+        "6": 207,
+        "7": 16,
+        "13": 1,
+        "14": 40,
+        "15": 20,
+        "16": 9
+      }
+    }
+  ],
+  "current_grid_normal": {
+    "median_offset_steps": 0.2503518391897117,
+    "share_on_grid_1e3": 0.0013
+  },
+  "current_grid_abnormal": {
+    "median_offset_steps": 9.143582673232231e-06,
+    "share_on_grid_1e3": 1.0
+  },
+  "float32_normal_AI0_Vibration": {
+    "roundtrip_same": 0.0001,
+    "shortest_repr_match": 0.99995
+  },
+  "float32_normal_AI1_Vibration": {
+    "roundtrip_same": 0.00025,
+    "shortest_repr_match": 0.99995
+  },
+  "float32_normal_AI2_Current": {
+    "roundtrip_same": 0.0003,
+    "shortest_repr_match": 0.58625
+  },
+  "float32_abnormal_AI0_Vibration": {
+    "roundtrip_same": 0.0,
+    "shortest_repr_match": 0.4083333333333333
+  },
+  "float32_abnormal_AI1_Vibration": {
+    "roundtrip_same": 0.0,
+    "shortest_repr_match": 0.47333333333333333
+  },
+  "float32_abnormal_AI2_Current": {
+    "roundtrip_same": 0.0033333333333333335,
+    "shortest_repr_match": 0.45
+  },
+  "format_classifier": [
+    {
+      "features": "matched 격자 나머지(mod 2~16), 세 센서",
+      "model": "logistic",
+      "row_auroc_mean": 0.48181236111111114,
+      "row_auroc_min": 0.47432966666666665,
+      "row_auroc_max": 0.48667075
+    },
+    {
+      "features": "matched 격자 나머지(mod 2~16), 세 센서",
+      "model": "boosting",
+      "row_auroc_mean": 0.5006869305555556,
+      "row_auroc_min": 0.49519025,
+      "row_auroc_max": 0.5109192916666667
+    },
+    {
+      "features": "원값 저장 소수 자릿수(양자화 전), 세 센서",
+      "model": "boosting",
+      "row_auroc_mean": 0.99999925,
+      "row_auroc_min": 0.999999125,
+      "row_auroc_max": 0.9999993333333334
+    },
+    {
+      "features": "원값 전류 격자 나머지(양자화 전)",
+      "model": "boosting",
+      "row_auroc_mean": 0.9998869027777778,
+      "row_auroc_min": 0.99987725,
+      "row_auroc_max": 0.999902875
+    }
+  ],
+  "residue_tests_significant_p_lt_0.001": [],
+  "preprocess": [
+    {
+      "preprocess": "raw",
+      "split": "A",
+      "tp": 557,
+      "fp": 0,
+      "fn": 43,
+      "f1": 0.9628349178910977,
+      "normal_records": 0,
+      "abnormal_records": 21,
+      "threshold": 4.420375663818654
+    },
+    {
+      "preprocess": "raw",
+      "split": "B",
+      "tp": 569,
+      "fp": 3,
+      "fn": 31,
+      "f1": 0.9709897610921502,
+      "normal_records": 3,
+      "abnormal_records": 21,
+      "threshold": 3.5195485310073304
+    },
+    {
+      "preprocess": "matched",
+      "split": "A",
+      "tp": 556,
+      "fp": 0,
+      "fn": 44,
+      "f1": 0.9619377162629758,
+      "normal_records": 0,
+      "abnormal_records": 21,
+      "threshold": 4.417925848290811
+    },
+    {
+      "preprocess": "matched",
+      "split": "B",
+      "tp": 569,
+      "fp": 3,
+      "fn": 31,
+      "f1": 0.9709897610921502,
+      "normal_records": 3,
+      "abnormal_records": 21,
+      "threshold": 3.5199003630751498
+    }
+  ]
+}

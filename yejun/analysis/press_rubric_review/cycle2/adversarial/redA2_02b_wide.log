@@ -1,0 +1,2 @@
+기존 wide 표와 바이트 일치: True
+{"configs": 1440, "eligible": 1134, "v2_fn_sum": 75, "v2_rank_eligible": 90, "ties_at_75": 9, "best_eligible_fn_sum": 60, "v2_rank_fmax_eligible": 18, "fmax_eligible": 382, "best_fmax_fn_sum": 70, "configs_dominating_v2": 29, "dominating_by_rule": {"fisher": 17, "fmax": 12}, "eligible_fn_sum_quantiles": {"0": 60.0, "0.1": 77.0, "0.25": 92.0, "0.5": 136.0, "0.75": 175.75, "1": 586.0}}

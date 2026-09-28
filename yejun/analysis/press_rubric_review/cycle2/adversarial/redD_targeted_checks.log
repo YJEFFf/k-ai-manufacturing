@@ -1,0 +1,53 @@
+== 1) 파일:행 인용 대조
+fp_mitigation_injection_v2.csv:9 {'alpha': 0.01, 'family': 'vib_shock', 'level': 4.0}
+fp_mitigation_injection_v2.csv:10 {'alpha': 0.01, 'family': 'vib_shock', 'level': 6.0}
+fp_mitigation_injection_v2.csv:39 {'alpha': 0.01, 'family': 'vib_shock', 'level': 4.0}
+fp_mitigation_injection_v2.csv:40 {'alpha': 0.01, 'family': 'vib_shock', 'level': 6.0}
+robustness_v2.csv:3 {'split': 'normal_60_20_20', 'model': 'early6_ar2', 'input_variant': 'coarse', 'alpha': 0.01, 'normal_notified_segments': 0, 'normal_segments': 120}
+robustness_v2.csv:15 {'split': 'normal_60_20_20', 'model': 'early6_ar2', 'input_variant': 'matched', 'alpha': 0.01, 'normal_notified_segments': 0, 'normal_segments': 120}
+robustness_v2.csv:39 {'split': 'normal_50_20_30', 'model': 'early6_ar2', 'input_variant': 'coarse', 'alpha': 0.01, 'normal_notified_segments': 5, 'normal_segments': 180}
+robustness_v2.csv:51 {'split': 'normal_50_20_30', 'model': 'early6_ar2', 'input_variant': 'matched', 'alpha': 0.01, 'normal_notified_segments': 3, 'normal_segments': 180}
+uncertainty_v2.csv:23 {'split': 'normal_60_20_20', 'model': 'v2', 'alpha': 0.01, 'statistic': 'notified_segments', 'block_length': 5, 'observed': 0, 'boot_p2_5': 0.0, 'boot_p97_5': 0.0, 'degenerate_all_zero': True}
+uncertainty_v2.csv:24 {'split': 'normal_60_20_20', 'model': 'v2', 'alpha': 0.01, 'statistic': 'notified_segments', 'block_length': 10, 'observed': 0, 'boot_p2_5': 0.0, 'boot_p97_5': 0.0, 'degenerate_all_zero': True}
+uncertainty_v2.csv:25 {'split': 'normal_60_20_20', 'model': 'v2', 'alpha': 0.01, 'statistic': 'notified_segments', 'block_length': 20, 'observed': 0, 'boot_p2_5': 0.0, 'boot_p97_5': 0.0, 'degenerate_all_zero': True}
+uncertainty_v2.csv:65 {'split': 'normal_50_20_30', 'model': 'v2', 'alpha': 0.01, 'statistic': 'notified_segments', 'block_length': 5, 'observed': 3, 'boot_p2_5': 0.0, 'boot_p97_5': 6.0, 'degenerate_all_zero': False}
+uncertainty_v2.csv:66 {'split': 'normal_50_20_30', 'model': 'v2', 'alpha': 0.01, 'statistic': 'notified_segments', 'block_length': 10, 'observed': 3, 'boot_p2_5': 0.0, 'boot_p97_5': 6.0, 'degenerate_all_zero': False}
+uncertainty_v2.csv:67 {'split': 'normal_50_20_30', 'model': 'v2', 'alpha': 0.01, 'statistic': 'notified_segments', 'block_length': 20, 'observed': 3, 'boot_p2_5': 0.0, 'boot_p97_5': 5.0, 'degenerate_all_zero': False}
+fp_events_v2.csv:3 {'model': 'frozen_A', 'alpha': 0.05, 'record': 570, 'alarm_rows': 1, 'reasons': 'magnitude', 'magnitude_sensor': 'AI0_Vibration'}
+fp_events_v2.csv:12 {'model': 'frozen_B', 'alpha': 0.05, 'record': 423, 'alarm_rows': 2, 'reasons': 'magnitude', 'magnitude_sensor': 'AI0_Vibration'}
+fp_events_v2.csv:18 {'model': 'frozen_B', 'alpha': 0.05, 'record': 576, 'alarm_rows': 1, 'reasons': 'magnitude', 'magnitude_sensor': 'AI0_Vibration'}
+fp_events_v2.csv:22 {'model': 'rolling_test_300_359', 'alpha': 0.05, 'record': 301, 'alarm_rows': 1, 'reasons': 'magnitude', 'magnitude_sensor': 'AI0_Vibration'}
+fp_events_v2.csv:28 {'model': 'rolling_test_360_419', 'alpha': 0.05, 'record': 402, 'alarm_rows': 1, 'reasons': 'dynamics', 'magnitude_sensor': nan}
+fp_events_v2.csv:41 {'model': 'rolling_test_540_599', 'alpha': 0.05, 'record': 570, 'alarm_rows': 1, 'reasons': 'magnitude', 'magnitude_sensor': 'AI0_Vibration'}
+fp_events_v2.csv:42 {'model': 'rolling_test_540_599', 'alpha': 0.05, 'record': 576, 'alarm_rows': 1, 'reasons': 'magnitude', 'magnitude_sensor': 'AI0_Vibration'}
+v2_current_scale.csv 열: ['split_id', 'k', 'alpha', 'normal_segments', 'normal_notified_segments', 'normal_alarm_rows', 'abnormal_segments', 'abnormal_detected_segments', 'abnormal_fn_rows', 'abnormal_rows']
+v2_current_scale.csv:110 {'split_id': 'A', 'k': 1.5, 'alpha': 0.01, 'normal_segments': 120, 'normal_notified_segments': 0, 'normal_alarm_rows': 0, 'abnormal_segments': 21, 'abnormal_detected_segments': 21, 'abnormal_fn_rows': 38, 'abnormal_rows': 600}
+v2_current_scale.csv:167 {'split_id': 'B', 'k': 1.0, 'alpha': 0.01, 'normal_segments': 180, 'normal_notified_segments': 3, 'normal_alarm_rows': 3, 'abnormal_segments': 21, 'abnormal_detected_segments': 21, 'abnormal_fn_rows': 31, 'abnormal_rows': 600}
+v2_current_scale.csv:182 {'split_id': 'B', 'k': 1.05, 'alpha': 0.01, 'normal_segments': 180, 'normal_notified_segments': 4, 'normal_alarm_rows': 5, 'abnormal_segments': 21, 'abnormal_detected_segments': 21, 'abnormal_fn_rows': 31, 'abnormal_rows': 600}
+v2_current_scale.csv:221 {'split_id': 'B', 'k': 1.5, 'alpha': 0.01, 'normal_segments': 180, 'normal_notified_segments': 17, 'normal_alarm_rows': 29, 'abnormal_segments': 21, 'abnormal_detected_segments': 21, 'abnormal_fn_rows': 28, 'abnormal_rows': 600}
+e2_uci_metrics.csv:2 {'mode': 'local_normal_reference', 'cooler': 3, 'model': 'v2_4ch', 'n_train': 96, 'n_cal': 32, 'n_test': 352, 'alpha': 0.05, 'tp': 14, 'fp': 5, 'fn': 306, 'tn': 27, 'precision': 0.7368421052631579}
+e3_stability.csv:2 {'alpha': 0.01, 'n_train': 15, 'n_cal': 99, 'starts': 7, 'normal_minutes': 6.1433333333333335, 'elapsed_minutes_median': 14.41985, 'normal_notified_min': 0, 'normal_notified_median': 0.0, 'normal_notified_max': 1, 'abnormal_detected_min': 21, 'missed_rows_median': 40.0, 'missed_rows_max': 43}
+queue_injection_ranks_v2.csv 인용 9행:
+    split  alpha      family  level_value                        key  injected_cases  injected_below_best_false_alarm  injected_incidents_below_best_false_alarm
+33      A   0.03   vib_noise          2.0  level_evidence_share_peak              73                                4                                          1
+53      A   0.05   vib_noise          2.0  level_evidence_share_peak              74                                2                                          0
+61      B   0.01   cur_noise          0.1  level_evidence_share_peak             111                                1                                          0
+69      B   0.01  cur_offset          0.4  level_evidence_share_peak             111                                1                                          0
+81      B   0.03   cur_noise          0.1  level_evidence_share_peak             111                                1                                          0
+89      B   0.03  cur_offset          0.4  level_evidence_share_peak             111                                1                                          0
+93      B   0.03   vib_noise          2.0  level_evidence_share_peak             111                                3                                          0
+109     B   0.05  cur_offset          0.4  level_evidence_share_peak             111                               12                                          1
+113     B   0.05   vib_noise          2.0  level_evidence_share_peak             111                                3                                          0
+키별 '뒤처진 조건' 수: {'evidence_share_peak': 9, 'level_evidence_peak_share': 7, 'level_evidence_share_peak': 9, 'level_peak': 7} | 키 목록: ['evidence_share_peak', 'level_evidence_share_peak', 'level_evidence_peak_share', 'level_peak']
+
+== 2) v2 크기 성분의 실제 발화 경계(행 단위 예측)
+A: 크기 발화 행 173개, 발화 행 |z| 최소 4.677, 비발화 행 |z| 최대 4.444, 발화 행 g 최소 4.675, 결합 점수 경보 최소 4.683
+B: 크기 발화 행 199개, 발화 행 |z| 최소 3.776, 비발화 행 |z| 최대 3.755, 발화 행 g 최소 3.522, 결합 점수 경보 최소 3.561
+
+== 3) 저장 모델의 보정 정보
+A state.calibration: 길이 120, 상위 3 값 [4.418, 4.049, 3.504] (위치 [101, 63, 86])
+B state.calibration: 길이 120, 상위 3 값 [3.52, 3.51, 3.259] (위치 [3, 1, 67])
+
+== 4) π 1% 확률 상한(0.55) 행 수
+A: 이상 행 중 상한 555/600, 정상 경보 행 중 상한 0/0
+B: 이상 행 중 상한 568/600, 정상 경보 행 중 상한 3/3

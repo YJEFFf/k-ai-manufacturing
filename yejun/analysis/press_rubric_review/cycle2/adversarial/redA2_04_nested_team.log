@@ -1,0 +1,132 @@
+{
+ "universe_rows": 78,
+ "universe_equals_committed": true,
+ "nested_equals_committed": true,
+ "nested_all_v2": true,
+ "alarm_patterns": 31,
+ "eligible_patterns": 16,
+ "held_out_record_not_used_in_selection": true,
+ "eligible_ranking": [
+  {
+   "candidate": "advance:early6_ar2",
+   "aliases": [
+    "early:v2",
+    "early:v2_diff1"
+   ],
+   "fn_sum": 75
+  },
+  {
+   "candidate": "advance:early_w6_to_w8",
+   "aliases": [
+    "improve:early_w6_to_w8"
+   ],
+   "fn_sum": 157
+  },
+  {
+   "candidate": "improve:early_w5_to_w8",
+   "aliases": [],
+   "fn_sum": 159
+  },
+  {
+   "candidate": "advance:baseline_w8",
+   "aliases": [
+    "improve:baseline_w8",
+    "v1pkg:combined_w8"
+   ],
+   "fn_sum": 185
+  },
+  {
+   "candidate": "improve:baseline_persist2of3",
+   "aliases": [
+    "improve:loadnorm_persist2of3"
+   ],
+   "fn_sum": 216
+  },
+  {
+   "candidate": "v1pkg:combined_w10",
+   "aliases": [],
+   "fn_sum": 221
+  },
+  {
+   "candidate": "advance:maxz_ar2",
+   "aliases": [],
+   "fn_sum": 245
+  },
+  {
+   "candidate": "advance:ar2_only",
+   "aliases": [],
+   "fn_sum": 338
+  }
+ ],
+ "margin": {
+  "v2_fn_sum": 75,
+  "runner_up": "advance:early_w6_to_w8",
+  "runner_up_fn_sum": 157,
+  "gap": 82,
+  "per_record_gap": [
+   1,
+   4,
+   7,
+   4,
+   2,
+   0,
+   3,
+   3,
+   5,
+   2,
+   0,
+   8,
+   0,
+   0,
+   6,
+   10,
+   7,
+   4,
+   4,
+   6,
+   6
+  ],
+  "max_single_record_gap": 10,
+  "records_where_runner_up_better": 0,
+  "max_records_removable_without_flip": 16,
+  "note": "기록 k개를 빼서 선택이 뒤집히려면 뺀 기록의 (차점 − v2) 차이 합이 전체 차이 이상이어야 한다"
+ },
+ "excluded_by_normal_alert_constraint_near_v2": [
+  {
+   "candidate": "early:v2_joint",
+   "fn_sum": 71,
+   "normal_alerted_A": 0,
+   "normal_alerted_B": 4
+  }
+ ],
+ "team_rule_on_posthoc_pool_winner": {
+  "source": "mitigation",
+  "candidate": "v2_mag_persist2of3_fill",
+  "fn_A": 30,
+  "fn_B": 30,
+  "normal_A": 0,
+  "normal_B": 1,
+  "det_A": 21,
+  "det_B": 21,
+  "fn_sum": 60,
+  "eligible": true
+ }
+}
+      source               candidate  fn_A  fn_B  normal_A  normal_B  det_A  det_B  fn_sum  eligible
+  mitigation v2_mag_persist2of3_fill    30    30         0         1     21     21      60      True
+        rule                  fisher    32    31         0         1     21     21      63      True
+same_feature              5NN(v2 성분)    36    29         0         3     21     21      65      True
+same_feature             early+AR(2)    44    31         0         3     21     21      75      True
+same_feature        v2 (fmax, AR(2))    44    31         0         3     21     21      75      True
+        rule            tippett_fmax    44    31         0         3     21     21      75      True
+  mitigation                      v2    44    31         0         3     21     21      75      True
+        rule                stouffer    39    39         0         0     21     21      78      True
+same_feature                합(v2 성분)    40    39         0         2     21     21      79      True
+        rule                     sum    40    39         0         2     21     21      79      True
+        rule                    mean    42    42         0         0     21     21      84      True
+same_feature             early+AR(3)    50    40         0         3     21     21      90      True
+  mitigation      v2_mag_persist2of3    52    52         0         1     21     21     104      True
+same_feature             early+AR(1)    78    63         0         3     21     21     141      True
+  mitigation             v2_loadnorm    31    31         1         1     21     21      62     False
+same_feature             early+AR(4)    57    46         0         4     21     21     103     False
+same_feature               IF(v2 성분)   120   117         0         0     20     20     237     False

@@ -1,0 +1,74 @@
+{
+  "predictions_normal_A.csv": {
+    "rows_same": true,
+    "old_columns_same_order": true,
+    "added_columns": [
+      "record_current_rms",
+      "operating_state"
+    ],
+    "old_exact_sha256_same": true,
+    "numeric_columns": 21,
+    "numeric_bitwise_same": 21,
+    "numeric_outside_rtol_1e12": {}
+  },
+  "predictions_normal_B.csv": {
+    "rows_same": true,
+    "old_columns_same_order": true,
+    "added_columns": [
+      "record_current_rms",
+      "operating_state"
+    ],
+    "old_exact_sha256_same": true,
+    "numeric_columns": 21,
+    "numeric_bitwise_same": 21,
+    "numeric_outside_rtol_1e12": {}
+  },
+  "predictions_abnormal_A.csv": {
+    "rows_same": true,
+    "old_columns_same_order": true,
+    "added_columns": [
+      "record_current_rms",
+      "operating_state"
+    ],
+    "old_exact_sha256_same": true,
+    "numeric_columns": 21,
+    "numeric_bitwise_same": 21,
+    "numeric_outside_rtol_1e12": {}
+  },
+  "predictions_abnormal_B.csv": {
+    "rows_same": true,
+    "old_columns_same_order": true,
+    "added_columns": [
+      "record_current_rms",
+      "operating_state"
+    ],
+    "old_exact_sha256_same": true,
+    "numeric_columns": 21,
+    "numeric_bitwise_same": 21,
+    "numeric_outside_rtol_1e12": {}
+  },
+  "test_predictions_A.csv": {
+    "rows_same": true,
+    "old_columns_same_order": true,
+    "added_columns": [
+      "record_current_rms",
+      "operating_state"
+    ],
+    "old_exact_sha256_same": true,
+    "numeric_columns": 23,
+    "numeric_bitwise_same": 23,
+    "numeric_outside_rtol_1e12": {}
+  },
+  "test_predictions_B.csv": {
+    "rows_same": true,
+    "old_columns_same_order": true,
+    "added_columns": [
+      "record_current_rms",
+      "operating_state"
+    ],
+    "old_exact_sha256_same": true,
+    "numeric_columns": 23,
+    "numeric_bitwise_same": 23,
+    "numeric_outside_rtol_1e12": {}
+  }
+}

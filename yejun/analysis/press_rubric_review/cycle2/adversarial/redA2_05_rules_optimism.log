@@ -1,0 +1,135 @@
+   kind  alpha  k  alerted_record_instances  level2_instances  level2_ratio  implied_level2_per_8h
+forward   0.01  2                        69                 4        0.0580                   1.72
+forward   0.01  3                        69                 0        0.0000                   0.00
+forward   0.03  2                       345                74        0.2145                   6.35
+forward   0.03  3                       345                13        0.0377                   1.11
+forward   0.05  2                       671               163        0.2429                   7.19
+forward   0.05  3                       671                62        0.0924                   2.73
+reverse   0.01  2                        74                50        0.6757                  19.99
+reverse   0.01  3                        74                 0        0.0000                   0.00
+reverse   0.03  2                       248                68        0.2742                   8.11
+reverse   0.03  3                       248                 0        0.0000                   0.00
+reverse   0.05  2                       517               140        0.2708                   8.01
+reverse   0.05  3                       517                23        0.0445                   1.32
+ random   0.01  2                       516               137        0.2655                   7.85
+ random   0.01  3                       516                 6        0.0116                   0.34
+ random   0.03  2                      1448               401        0.2769                   8.19
+ random   0.03  3                      1448                68        0.0470                   1.39
+ random   0.05  2                      2826               776        0.2746                   8.12
+ random   0.05  3                      2826               227        0.0803                   2.38
+b_false_alarm_records_other_splits [{"record": 423, "alpha": 0.01, "size": 7, "min": 1, "max": 2, "splits_with_2plus_rows": 2}, {"record": 423, "alpha": 0.03, "size": 47, "min": 1, "max": 2, "splits_with_2plus_rows": 23}, {"record": 423, "alpha": 0.05, "size": 47, "min": 2, "max": 3, "splits_with_2plus_rows": 47}, {"record": 461, "alpha": 0.01, "size": 50, "min": 1, "max": 2, "splits_with_2plus_rows": 2}, {"record": 461, "alpha": 0.03, "size": 59, "min": 1, "max": 3, "splits_with_2plus_rows": 34}, {"record": 461, "alpha": 0.05, "size": 59, "min": 2, "max": 3, "splits_with_2plus_rows": 59}, {"record": 570, "alpha": 0.01, "size": 7, "min": 1, "max": 1, "splits_with_2plus_rows": 0}, {"record": 570, "alpha": 0.03, "size": 83, "min": 1, "max": 1, "splits_with_2plus_rows": 0}, {"record": 570, "alpha": 0.05, "size": 83, "min": 1, "max": 1, "splits_with_2plus_rows": 0}]
+abnormal_escalation_by_k {"A": {"records_ge2": 21, "records_ge3": 20, "escalation_delay_max_s_k2": 0.6000000000000001, "escalation_delay_max_s_k3": 0.7000000000000001, "min_alarm_rows_per_record": 2}, "B": {"records_ge2": 21, "records_ge3": 20, "escalation_delay_max_s_k2": 0.6000000000000001, "escalation_delay_max_s_k3": 0.7000000000000001, "min_alarm_rows_per_record": 2}}
+incident_gap {"abnormal_record_gaps_s": {"min": 1.78, "max": 8.572}, "abnormal_incidents_by_gap": {"1": 21, "2": 19, "3": 17, "5": 12, "8": 6, "9": 1, "10": 1, "20": 1, "60": 1}, "normal_multi_record_incidents_in_split_grid": 248, "normal_incident_rows": 1698, "normal_record_gaps_s": {"min": 0.0, "median": 4.22, "max": 16.643, "share_le_60": 1.0}}
+time_tolerance {"n": {"max_inner_deviation_s": 0.0, "min_boundary_deviation_s": 0.1, "min_positive_boundary_dt_s": 1.545, "duplicate_timestamp_boundaries": 1}, "a": {"max_inner_deviation_s": 0.0, "min_boundary_deviation_s": 1.68, "min_positive_boundary_dt_s": 1.78, "duplicate_timestamp_boundaries": 0}}
+state_boundary {"b_false_alarm_record_rms": {"423": 178.8, "461": 176.4, "570": 121.4}, "by_boundary": {"80": {"load_alerted": 3, "load_records": 145, "low_alerted": 0, "low_records": 0}, "85": {"load_alerted": 3, "load_records": 107, "low_alerted": 0, "low_records": 38}, "88": {"load_alerted": 3, "load_records": 55, "low_alerted": 0, "low_records": 90}, "91.9": {"load_alerted": 3, "load_records": 51, "low_alerted": 0, "low_records": 94}, "95": {"load_alerted": 3, "load_records": 46, "low_alerted": 0, "low_records": 99}, "100": {"load_alerted": 3, "load_records": 44, "low_alerted": 0, "low_records": 101}, "110": {"load_alerted": 3, "load_records": 39, "low_alerted": 0, "low_records": 106}}, "b_test_ge17_rms_quantiles": {"0.1": 82.9, "0.25": 85.0, "0.5": 86.4, "0.75": 115.4, "0.9": 169.3}}
+ar_order_bic_normal_only {"A": {"n_rows": 10559, "best_order_by_bic": 4, "ar1": {"bic": 81497.2, "rss_per_row": 2245.13, "coef": [0.1501, 0.9267]}, "ar2": {"bic": 49932.2, "rss_per_row": 112.87, "coef": [0.0998, 1.8321, -0.9739]}, "ar3": {"bic": 47273.6, "rss_per_row": 87.67, "coef": [0.1406, 1.3726, -0.1097, -0.4716]}, "ar4": {"bic": 45516.1, "rss_per_row": 74.16, "coef": [0.1874, 1.1893, -0.1557, 0.0681, -0.3919]}}, "B": {"n_rows": 8956, "best_order_by_bic": 4, "ar1": {"bic": 69084.3, "rss_per_row": 2234.36, "coef": [0.1242, 0.9264]}, "ar2": {"bic": 42477.9, "rss_per_row": 114.42, "coef": [0.0979, 1.8317, -0.9734]}, "ar3": {"bic": 40200.3, "rss_per_row": 88.64, "coef": [0.1393, 1.3707, -0.1063, -0.4733]}, "ar4": {"bic": 38682.2, "rss_per_row": 74.74, "coef": [0.1851, 1.1847, -0.1509, 0.0703, -0.3955]}}}
+{
+"0.01_forward_all": {
+"n": 83,
+"f1_median": 0.9647,
+"f1_q25": 0.9619,
+"f1_q75": 0.9656,
+"fn_median": 40.0,
+"fn_q75": 44.0,
+"normal_alert_rate_pooled": 0.0043,
+"normal_alert_rate_median": 0.0037,
+"share_zero_normal_alert": 0.398
+},
+"0.01_forward_c120": {
+"n": 28,
+"f1_median": 0.9647,
+"f1_q25": 0.9619,
+"f1_q75": 0.9656,
+"fn_median": 40.0,
+"fn_q75": 44.0,
+"normal_alert_rate_pooled": 0.0038,
+"normal_alert_rate_median": 0.0036,
+"share_zero_normal_alert": 0.393
+},
+"0.01_reverse_all": {
+"n": 83,
+"f1_median": 0.9674,
+"f1_q25": 0.961,
+"f1_q75": 0.9683,
+"fn_median": 36.0,
+"fn_q75": 45.0,
+"normal_alert_rate_pooled": 0.0046,
+"normal_alert_rate_median": 0.0037,
+"share_zero_normal_alert": 0.434
+},
+"0.01_window60_c120": {
+"n": 80,
+"f1_median": 0.9655,
+"f1_q25": 0.9619,
+"f1_q75": 0.9664,
+"fn_median": 40.0,
+"fn_q75": 44.0,
+"normal_alert_rate_pooled": 0.0044,
+"normal_alert_rate_median": 0.0,
+"share_zero_normal_alert": 0.762
+},
+"0.01_random": {
+"n": 400,
+"f1_median": 0.9682,
+"f1_q25": 0.9619,
+"f1_q75": 0.971,
+"fn_median": 35.0,
+"fn_q75": 44.0,
+"normal_alert_rate_pooled": 0.0086,
+"normal_alert_rate_median": 0.0056,
+"share_zero_normal_alert": 0.43
+},
+"A_B_rank_forward_c120_alpha1": {
+"A": {
+"f1_share_better": 0.6071428571428571,
+"fn_share_better": 0.6071428571428571,
+"normal_rate_share_better": 0.0
+},
+"B": {
+"f1_share_better": 0.0,
+"fn_share_better": 0.0,
+"normal_rate_share_worse": 0.0,
+"threshold": 3.5199003630751613,
+"threshold_rank_low": 2,
+"n": 28
+}
+},
+"hyper_grid_alpha1": {
+"all_1440": {
+"configs": 1440,
+"f1_A_median": 0.9446,
+"f1_B_median": 0.9478,
+"f1_A_q25": 0.9226,
+"f1_B_q25": 0.928,
+"v2_share_better_A": 0.144,
+"v2_share_better_B": 0.02
+},
+"fmax_480": {
+"configs": 480,
+"f1_A_median": 0.9381,
+"f1_B_median": 0.9486,
+"f1_A_q25": 0.914,
+"f1_B_q25": 0.9262,
+"v2_share_better_A": 0.075,
+"v2_share_better_B": 0.002
+},
+"fmax_AR2_96": {
+"configs": 96,
+"f1_A_median": 0.961,
+"f1_B_median": 0.9675,
+"f1_A_q25": 0.9542,
+"f1_B_q25": 0.9646,
+"v2_share_better_A": 0.375,
+"v2_share_better_B": 0.01
+},
+"fmax_noAR_96(v1 계열)": {
+"configs": 96,
+"f1_A_median": 0.9091,
+"f1_B_median": 0.9175,
+"f1_A_q25": 0.8845,
+"f1_B_q25": 0.9046,
+"v2_share_better_A": 0.0,
+"v2_share_better_B": 0.0
+}
+}
+}

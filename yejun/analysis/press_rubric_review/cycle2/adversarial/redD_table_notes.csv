@@ -1,0 +1,456 @@
+file,line,column,has_number,text
+yejun/press_guard/outputs/alert_budget_design_v2.csv,2,note,1,1단계 명목값(교환가능성 가정). 2단계는 관측값만 있다
+yejun/press_guard/outputs/alert_levels_injection_v2.csv,2,note,1,주입 없음 행은 주입 전 구간과 같은 위치의 정상 경보율(2초 창)이다
+yejun/press_guard/outputs/cases_A.csv,2,source,0,abnormal
+yejun/press_guard/outputs/cases_A.csv,2,evidence,0,dynamics+magnitude
+yejun/press_guard/outputs/cases_A.csv,3,evidence,0,dynamics+magnitude+waveform
+yejun/press_guard/outputs/cases_A.csv,5,evidence,0,dynamics+waveform
+yejun/press_guard/outputs/cases_A.csv,7,evidence,0,magnitude
+yejun/press_guard/outputs/cases_B.csv,2,source,0,normal
+yejun/press_guard/outputs/cases_B.csv,2,evidence,0,magnitude
+yejun/press_guard/outputs/cases_B.csv,5,source,0,abnormal
+yejun/press_guard/outputs/cases_B.csv,5,evidence,0,dynamics+magnitude
+yejun/press_guard/outputs/cases_B.csv,6,evidence,0,dynamics+magnitude+waveform
+yejun/press_guard/outputs/cases_B.csv,8,evidence,0,dynamics+waveform
+yejun/press_guard/outputs/coupling_fit_v2.csv,2,note,1,"정상 학습 기록구간(길이≥17, 사인 유사). 운전 강도(부하)라는 공통 요인으로 해석하는 가설"
+yejun/press_guard/outputs/decision_table_v2.csv,2,evidence,0,크기(진동 센서)
+yejun/press_guard/outputs/decision_table_v2.csv,2,source,1,"가이드북 6~7쪽: 펌프 내부 기어 마모 → 진동·소음 증가, 출력 유압 약화 → 불량품"
+yejun/press_guard/outputs/decision_table_v2.csv,3,evidence,0,크기(전류 센서)
+yejun/press_guard/outputs/decision_table_v2.csv,3,source,0,일반 공학 지식(가설)
+yejun/press_guard/outputs/decision_table_v2.csv,4,evidence,0,파형 또는 예측 오차(전류)
+yejun/press_guard/outputs/decision_table_v2.csv,5,evidence,0,"크기(진동) + 파형·예측 오차, 또는 구간 안에서 진동·전류 크기 모두"
+yejun/press_guard/outputs/decision_table_v2.csv,6,evidence,0,크기(전류) + 파형·예측 오차
+yejun/press_guard/outputs/decision_table_v2.csv,7,evidence,0,수집 오류(결측·비유한 값·시각 오류)
+yejun/press_guard/outputs/decision_table_v2.csv,7,source,0,수집 규칙
+yejun/press_guard/outputs/error_condition_summary_v2.csv,2,definition,1,"위치 0~1 행, 구간 진동 max|z| ≤ 정상 학습 q95(α 1%)"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,2,comparison,1,"진동 높은 구간 20/36·14/36, 단측 Fisher p 0.044·0.0074"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,2,evidence,1,"관측(이상 3구간, 사후)"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,2,source,1,"press_guard/outputs/position_vibration_misses_v2.csv:4-5,14-15"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,2,limitation,1,구간 3·19·20의 6행씩. 크기 성분만 있는 창이라 전류 파형 이상은 위치 2 이후에 잡힌다
+yejun/press_guard/outputs/error_condition_summary_v2.csv,2,ci_method,1,Clopper-Pearson 이항 95% 구간(관측 간 의존성 미반영)
+yejun/press_guard/outputs/error_condition_summary_v2.csv,2,proxy_definition,1,"기록구간 안 위치 0~1(0.2초 안): 크기 성분만 있는 초반 창; E1 주입 족(전류 잡음·오프셋·배율, 진동 잡음)과 시작 시점(t0)"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,3,definition,1,위치 0~1 행 대 위치 2 이상 행(α 1%)
+yejun/press_guard/outputs/error_condition_summary_v2.csv,3,comparison,1,"위치 2 이상 18/558·11/558, 단측 Fisher p 4.3e-23·2.7e-18"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,3,evidence,0,관측(사후)
+yejun/press_guard/outputs/error_condition_summary_v2.csv,3,source,1,"press_guard/outputs/position_vibration_misses_v2.csv:2-3,12-13"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,3,limitation,1,"초반 창 구조의 한계. 직전 기록의 위상으로 채울 수 없다(0.6 Hz 위상 시험, press_evidence)"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,3,proxy_definition,1,기록구간 안 위치 0~1(0.2초 안): 크기 성분만 있는 초반 창
+yejun/press_guard/outputs/error_condition_summary_v2.csv,4,definition,1,E1: 기록 시작(t0=0)부터 전류에 +0.8×진폭 계단
+yejun/press_guard/outputs/error_condition_summary_v2.csv,4,comparison,1,2초 안 탐지 3.3%·28.8%. 같은 세기를 10행째에 넣으면 100%·100%
+yejun/press_guard/outputs/error_condition_summary_v2.csv,4,evidence,0,주입(사전 등록 E1)
+yejun/press_guard/outputs/error_condition_summary_v2.csv,4,source,1,"analysis/press_supplement/e1_summary.csv:284,656; analysis/press_supplement/e1_summary.csv:278,650"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,4,limitation,0,변화 순간이 없으면 정상 학습 크기 범위가 흡수한다. 인공 신호
+yejun/press_guard/outputs/error_condition_summary_v2.csv,4,proxy_definition,0,"E1 주입 족(전류 잡음·오프셋·배율, 진동 잡음)과 시작 시점(t0)"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,5,definition,1,E1: 전류 ×1.15 배율(10행째부터). 주입 기록의 전류 진폭 사분위별
+yejun/press_guard/outputs/error_condition_summary_v2.csv,5,comparison,1,"2초 안 탐지 0.0%·6.3%. B는 진폭 Q1·Q2 0/56, Q4 6/28(Spearman 0.27)"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,5,evidence,0,주입(E1) + 사후 층화
+yejun/press_guard/outputs/error_condition_summary_v2.csv,5,source,1,"analysis/press_supplement/e1_summary.csv:338,710; press_guard/outputs/fn_intensity_v2.csv:5,10"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,5,limitation,1,정상 운전에서도 전류 진폭이 0.85~1.29배 오르내려 배율 변화를 구분하지 못한다
+yejun/press_guard/outputs/error_condition_summary_v2.csv,5,proxy_definition,0,전류 전체 배율 k(정상 운전변화 모의)
+yejun/press_guard/outputs/error_condition_summary_v2.csv,6,definition,1,"진동 두 센서 2σ 잡음(10행째부터, 반복 50회, 시드 0~49). 전류 진폭 Q1(조용함) 대 Q4"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,6,comparison,1,"전체 탐지 72.3%·95.0%(4σ는 100%). Spearman +0.29·+0.48, BH q 0.015·4.2e-07(진폭 9검정). 오프셋 0.2× 대비 ρ차 95% CI A [0.06, 0.72], B [0.55, 1.02]"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,6,evidence,0,주입(E1식) + 사후 층화
+yejun/press_guard/outputs/error_condition_summary_v2.csv,6,source,1,"press_guard/outputs/fn_intensity_v2.csv:2,7"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,6,limitation,1,E1의 74.4%·93.9%와 난수 반복이 다르다. 오류 수는 단위별 평균이며 반복을 독립 표본으로 세지 않는다. 같은 날 의존성은 남는다
+yejun/press_guard/outputs/error_condition_summary_v2.csv,6,ci_method,1,"정상 단위별 평균 탐지율 재표집 4,000회 백분위 95% 구간(시드 11). 같은 날 시간 의존성 미반영"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,7,definition,1,전류 +0.2×진폭 계단(10행째부터). 주입 기록의 전류 진폭 Q4(고부하) 대 Q1
+yejun/press_guard/outputs/error_condition_summary_v2.csv,7,comparison,1,"탐지 Q1 20/28 → Q4 8/28(B, Spearman -0.32, p 6.7e-04), A 8/19 → 6/19. 0.4×는 100%"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,7,source,1,"press_guard/outputs/fn_intensity_v2.csv:4,9"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,7,limitation,0,"고부하 운전에서 전류 계단형 약한 이상을 놓친다(가설, 인공 신호)"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,8,definition,1,10행째 한 행에만 진동 두 센서 ±4σ(반복 5회)
+yejun/press_guard/outputs/error_condition_summary_v2.csv,8,comparison,1,2초 안 탐지 29.3%·87.0%. 6σ는 99.5%·99.6%
+yejun/press_guard/outputs/error_condition_summary_v2.csv,8,evidence,0,"주입(사후, press_selection)"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,8,source,1,"analysis/press_selection/fp_mitigation_injection_v2.csv:9-10,39-40"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,8,limitation,1,A 평가 구간은 조용한 시간대라 문턱(max|z| 4.49)이 B(3.77)보다 높다
+yejun/press_guard/outputs/error_condition_summary_v2.csv,9,definition,1,"고유 정상 구간 300~599(독립 적합 5개 중 하나라도 경보), 길이 ≥17. A 열 α 1%, B 열 α 5%"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,9,comparison,1,"나머지 1/254(α 1%, p 0.062, 표본 부족)·4/254(α 5%, p 1.8e-06). α 3% 6/46 대 2/254. 진동 SD Q4 17/118(크기 경보 경로). 5적합 합침 α5% 부하 상태 17/154 대 나머지 0/326, 시간블록 CMH p 2.9e-06(MH OR 10.0). 부하 안 진폭 ≥203.6: 12/77 대 5/77"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,9,evidence,1,"관측(사후, 같은 날 77분)"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,9,source,1,"press_guard/outputs/fp_intensity_v2.csv:17,21-22,40,44-45,53-57,63,67-68,70"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,9,limitation,1,A·B 열은 분할이 아니라 α다. 부하 상태는 원 전류 RMS≥91.9의 신호 대리변수. 보정은 상태 혼합의 주변 보장이고 상태 조건부 보장이 아니다. 적합 겹침·시간 의존성은 남는다
+yejun/press_guard/outputs/error_condition_summary_v2.csv,9,proxy_definition,1,구간 진동 SD·전류 진폭(√2×평균 제거 RMS). 정상 운전에서 함께 움직인다(coupling_fit_v2 r 0.95)
+yejun/press_guard/outputs/error_condition_summary_v2.csv,10,definition,1,"α 5% 오경보 사건의 구성(동결 A·B + 시간순 5폴드, 같은 모델 중복 제거)"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,10,comparison,1,"A 열: AI0 크기 단독 15/17, B 열: 경보 1행 13/17. 고유 구간 14. 조건부 비율은 윗행"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,10,evidence,0,"관측(구성비, 의존 사건)"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,10,source,1,"press_guard/outputs/fp_events_v2.csv:3,12-18,22-28,41-42"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,10,limitation,1,구성비라 조건부 오경보율이 아니다. 사건이 같은 날 77분 안이라 독립이 아니다
+yejun/press_guard/outputs/error_condition_summary_v2.csv,11,definition,1,정상 평가 구간 최대 점수/α 1% 문턱과 조건의 Spearman(B)
+yejun/press_guard/outputs/error_condition_summary_v2.csv,11,comparison,1,"진동 max|z| 0.61, 진동 SD 0.54, 전류 진폭 0.50, 시간 -0.31"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,11,evidence,0,관측(연속 지표)
+yejun/press_guard/outputs/error_condition_summary_v2.csv,11,source,1,press_guard/outputs/near_miss_corr_v2.csv:6-9
+yejun/press_guard/outputs/error_condition_summary_v2.csv,11,limitation,1,B 열은 문턱의 0.9배 이상 구간 수(오경보 3 포함). A는 조용한 구간이라 해당 없음
+yejun/press_guard/outputs/error_condition_summary_v2.csv,11,proxy_definition,1,구간 진동 SD·전류 진폭(√2×평균 제거 RMS). 정상 운전에서 함께 움직인다(coupling_fit_v2 r 0.95); 60구간 블록(약 7~8분). 480~539가 가장 조용한 블록
+yejun/press_guard/outputs/error_condition_summary_v2.csv,12,definition,1,"정상 평가 전류 전체 ×k(재학습 없음, α 1%). A·B 열은 ×1.5"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,12,comparison,1,"B ×1.0 3, ×1.05 4, ×1.5 17/180. 변경 기록 없는 감시 초과 창은 설비 점검 요청, 기록 있으면 재보정 검토(monitor_gain_v2)"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,12,evidence,0,스트레스(모의)
+yejun/press_guard/outputs/error_condition_summary_v2.csv,12,source,1,"analysis/press_dayshift/v2_current_scale.csv:110,167,182,221"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,12,limitation,0,실제 부하 변화의 모양은 모른다
+yejun/press_guard/outputs/error_condition_summary_v2.csv,13,definition,1,"평가 입력만 coarse(4배 거친 정밀도)로 바꿈(재학습 없음, α 1%)"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,13,comparison,1,matched 0·3
+yejun/press_guard/outputs/error_condition_summary_v2.csv,13,evidence,0,스트레스
+yejun/press_guard/outputs/error_condition_summary_v2.csv,13,source,1,"press_guard/outputs/robustness_v2.csv:3,15,39,51"
+yejun/press_guard/outputs/error_condition_summary_v2.csv,13,limitation,0,계측 장비·설정이 바뀌면 재보정한다(recalibrate.py)
+yejun/press_guard/outputs/error_condition_summary_v2.csv,13,proxy_definition,0,입력 저장 정밀도(matched·coarse)
+yejun/press_guard/outputs/error_conditions_stats_v2.csv,29,note,0,크기 성분 경보의 발화 경로라 정의상 따라온다. 원인 조건은 운전 강도·시간대(coupling·near_miss)에서 찾는다
+yejun/press_guard/outputs/expected_effect_v2.csv,2,level2_basis,1,2단계 명목값은 없다
+yejun/press_guard/outputs/expected_effect_v2.csv,2,source_downtime,1,가이드북 7쪽(고장 시 최대 2~3일 가동 중단)
+yejun/press_guard/outputs/expected_effect_v2.csv,2,source_detect_basis,1,E1식 주입 2단계 2초 탐지율 최솟값(B α1%)
+yejun/press_guard/outputs/expected_effect_v2.csv,2,reading,1,"breakeven_loss_ratio: 가동 중단 1시간의 손실이 점검 인력 1시간 비용의 이 배수보다 크면 조기 경보 운영이 이득이다(0이면 점검 부담 없음). shift_share가 1을 넘으면 한 사람이 교대 시간 안에 처리할 수 없다. 현행 지연은 주기점검 간격의 절반(평균), Press Guard 지연은 대회 이상 기록 시작 기준이다. assume_* 열은 모두 가정이고 source_* 열은 출처가 있는 값이다"
+yejun/press_guard/outputs/expected_effect_v2.csv,3,source_detect_basis,1,대회 21/21의 95% 하한
+yejun/press_guard/outputs/expected_effect_v2.csv,4,source_detect_basis,1,대회 21/21 관측
+yejun/press_guard/outputs/expected_effect_v2.csv,5,level2_basis,1,"평가 300~359+360~419, α 5%: 2단계 1/1단계 7=0.143. 조건부 비를 B α1% 명목 알림에 적용하는 가정. 규칙 자체는 사후 선택; 같은 날 자료"
+yejun/press_guard/outputs/expected_effect_v2.csv,11,level2_basis,1,"평가 300~359+360~419, α 5%: 2단계 1/1단계 7=0.143. 조건부 비를 B α1% 명목 알림에 적용하는 가정. 규칙 자체는 사후 선택; 같은 날 자료. 비의 단측 이항 95% 상한 0.521(시간 의존성 미반영)"
+yejun/press_guard/outputs/expected_effect_v2.csv,17,level2_basis,1,"평가 300~359+360~419+540~599, α 5%: 2단계 1/1단계 9=0.111. 조건부 비를 B α1% 명목 알림에 적용하는 가정. 540~599 폴드는 보정 420~539와 평가 540~599가 B 평가와 겹치며 경보 기록 570도 포함. 규칙 자체는 사후 선택; 같은 날 자료"
+yejun/press_guard/outputs/expected_effect_v2.csv,23,level2_basis,1,"평가 300~359+360~419+540~599, α 5%: 2단계 1/1단계 9=0.111. 조건부 비를 B α1% 명목 알림에 적용하는 가정. 540~599 폴드는 보정 420~539와 평가 540~599가 B 평가와 겹치며 경보 기록 570도 포함. 규칙 자체는 사후 선택; 같은 날 자료. 비의 단측 이항 95% 상한 0.429(시간 의존성 미반영)"
+yejun/press_guard/outputs/expected_effect_v2.csv,29,level2_basis,1,"평가 420~599, α 3%: 2단계 2/1단계 5=0.400. 조건부 비를 B α1% 명목 알림에 적용하는 가정. 규칙 자체는 사후 선택; 같은 날 자료"
+yejun/press_guard/outputs/expected_effect_v2.csv,35,level2_basis,1,"평가 420~599, α 3%: 2단계 2/1단계 5=0.400. 조건부 비를 B α1% 명목 알림에 적용하는 가정. 규칙 자체는 사후 선택; 같은 날 자료. 비의 단측 이항 95% 상한 0.811(시간 의존성 미반영)"
+yejun/press_guard/outputs/expected_effect_v2.csv,41,level2_basis,1,"평가 420~599, α 5%: 2단계 3/1단계 7=0.429. 조건부 비를 B α1% 명목 알림에 적용하는 가정. 규칙 자체는 사후 선택; 같은 날 자료"
+yejun/press_guard/outputs/expected_effect_v2.csv,47,level2_basis,1,"평가 420~599, α 5%: 2단계 3/1단계 7=0.429. 조건부 비를 B α1% 명목 알림에 적용하는 가정. 규칙 자체는 사후 선택; 같은 날 자료. 비의 단측 이항 95% 상한 0.775(시간 의존성 미반영)"
+yejun/press_guard/outputs/expected_effect_v2.csv,53,level2_basis,1,2단계 규칙을 정하기 전에 본 대회 자료(표본 내)
+yejun/press_guard/outputs/fn_intensity_v2.csv,2,interaction_comparison,1,"ρ(전류 진폭, 진동 잡음 2σ 탐지) − ρ(전류 진폭, 전류 오프셋 0.2× 탐지)"
+yejun/press_guard/outputs/fn_intensity_v2.csv,2,quartile_ci_method,1,"정상 단위별 평균 탐지율 재표집 4,000회 백분위 95% 구간(시드 11). 같은 날 시간 의존성 미반영"
+yejun/press_guard/outputs/fn_intensity_v2.csv,2,note,1,"사후 분석·인공 신호. 잡음 족 50회(시드 0~49), 다른 족 1회. E1 진동 잡음 2σ 전체 탐지 A 74.4%·B 93.9%는 별도 난수 반복 결과이며 이 표와 동일한 실험 추정값이 아니다. 사분위는 분할별 주입 대상 단위의 전류 진폭(√2×평균 제거 RMS). BH는 유한 p값만 세며 분할·족 전체를 묶었다. 같은 날·중첩 단위 의존성 때문에 q값과 붓스트랩은 사후 기술 통계다"
+yejun/press_guard/outputs/fp_intensity_v2.csv,2,statistical_scope,0,같은 날·적합 간 구간 겹침. 독립 표본 가정 p값/구간은 기술적 비교이며 현장 검증이나 인과 효과가 아니다
+yejun/press_guard/outputs/fp_intensity_v2.csv,7,note,0,크기 성분 경보의 발화 경로와 겹친다
+yejun/press_guard/outputs/fp_intensity_v2.csv,17,note,1,"원 전류 RMS(ddof0), load≥91.9/low<91.9/short<17행. 실제 부하 관측값이 아닌 신호 대리변수"
+yejun/press_guard/outputs/fp_intensity_v2.csv,20,note,1,나머지 1/225
+yejun/press_guard/outputs/fp_intensity_v2.csv,21,note,1,나머지 1/254
+yejun/press_guard/outputs/fp_intensity_v2.csv,22,note,1,"60구간 블록 층화. CMH는 양측·연속성 보정, 블록 안 순열은 단측(20,000회). 적합 겹침·시간 의존성은 남아 있다"
+yejun/press_guard/outputs/fp_intensity_v2.csv,24,note,0,"부하 상태 안 강도 효과. Fisher는 중앙 이분화, Spearman은 연속 진폭. 동일 날의 의존 평가 단위"
+yejun/press_guard/outputs/fp_intensity_v2.csv,44,note,1,나머지 2/254
+yejun/press_guard/outputs/fp_intensity_v2.csv,67,note,1,나머지 4/254
+yejun/press_guard/outputs/incident_summary_v2.csv,2,note,1,사건: 경보가 이어진 알림 단위(공백 60초 이하). 사건 알림 = 사건 시작(1단계) + 격상(2단계). 근거 추가는 갱신이며 알림이 아니다
+yejun/press_guard/outputs/incidents_A.csv,2,source,0,abnormal
+yejun/press_guard/outputs/incidents_A.csv,2,evidence,0,dynamics+magnitude+waveform
+yejun/press_guard/outputs/incidents_B.csv,2,source,0,normal
+yejun/press_guard/outputs/incidents_B.csv,2,evidence,0,magnitude
+yejun/press_guard/outputs/incidents_B.csv,5,source,0,abnormal
+yejun/press_guard/outputs/incidents_B.csv,5,evidence,0,dynamics+magnitude+waveform
+yejun/press_guard/outputs/label_free_alert_probability_v2.csv,2,note,1,"π는 알림 단위당 이상 비율 가정. 교환가능성(같은 운전 조건의 정상) 가정. 주입은 실제 고장 탐지율이 아니다. nominal_lr_reference는 해당 α의 FAR=l/(n+1), min_rank_nominal_lr_reference는 최소 순위 FAR=1/(n+1) 시나리오이며 보편적 LR 상한이 아니다"
+yejun/press_guard/outputs/model_comparison_v2.csv,2,source,0,v1_package
+yejun/press_guard/outputs/model_comparison_v2.csv,182,source,0,v2_candidates
+yejun/press_guard/outputs/monitor_gain_v2.csv,2,note,1,감시 창 60단위. 전류 전체 배율 k의 인공 모의. 변경 기록 있음 열은 매 창 시작에 변경 기록을 둔 반사실 조건이다. incident_* 알림은 사건 시작+격상이며 alerted_units는 경보 알림 단위 수다. 조치: 관측 지속/운전 변경 재보정/전류 수준 이동 점검/열화 의심 점검. A 평가 구간은 가장 조용한 시간대라 알림이 늘지 않는다
+yejun/press_guard/outputs/probability_conversion_v2.csv,2,sbb_note,1,"참고값: 연속 p값을 정확히 관측하고 대립에서 p가 Beta(ξ,1) 족일 때의 회의적 환산. 알림은 p≤1/121 사건이라 상한이 아니다. label_free_min_rank_nominal_lr는 FAR=1/121 시나리오이며 LR의 보편적 상한이 아니다"
+yejun/press_guard/outputs/quality_windows_v2.csv,2,source,0,abnormal
+yejun/press_guard/outputs/quality_windows_v2.csv,2,note,1,가공품·로트·검사 자료 없는 제안. SPM은 가정. 품질 조치는 가이드북 6~7쪽 기전(기어 마모 → 출력 유압 약화 → 불량)에 근거한 가설
+yejun/press_guard/outputs/quality_windows_v2.csv,23,source,0,normal
+yejun/press_guard/outputs/queue_injection_ranks_v2.csv,2,incident_note,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+yejun/press_guard/outputs/queue_key_selection_v2.csv,2,key_terms,1,4
+yejun/press_guard/outputs/queue_key_selection_v2.csv,3,key_terms,1,3
+yejun/press_guard/outputs/queue_key_selection_v2.csv,5,key_terms,1,2
+yejun/press_guard/outputs/queue_mixed_ranks_v2.csv,2,source,0,abnormal
+yejun/press_guard/outputs/queue_mixed_ranks_v2.csv,2,evidence,0,dynamics+magnitude
+yejun/press_guard/outputs/queue_mixed_ranks_v2.csv,3,evidence,0,dynamics+magnitude+waveform
+yejun/press_guard/outputs/queue_mixed_ranks_v2.csv,5,evidence,0,dynamics+waveform
+yejun/press_guard/outputs/queue_mixed_ranks_v2.csv,7,evidence,0,magnitude
+yejun/press_guard/outputs/queue_mixed_ranks_v2.csv,23,source,0,normal
+yejun/press_guard/outputs/queue_mixed_ranks_v2.csv,93,evidence,0,dynamics
+yejun/analysis/press_evidence/abnormal_summary.csv,2,note,1,정상처럼 보이는 구간 0
+yejun/analysis/press_evidence/abnormal_summary.csv,3,note,1,A 학습 평균·SD(ddof=0) 표준화
+yejun/analysis/press_evidence/abnormal_summary.csv,4,note,1,길이 ≥10 구간만 적합
+yejun/analysis/press_evidence/abnormal_summary.csv,5,note,1,"구간 3, 19, 20, 진동 max|z| 0.93~1.54"
+yejun/analysis/press_evidence/abnormal_summary.csv,6,note,1,"구간 0, 5, 9, 10, 길이 3~8행"
+yejun/analysis/press_evidence/abnormal_summary.csv,7,note,1,"p=0.97, 길이≥17 구간"
+yejun/analysis/press_evidence/abnormal_summary.csv,8,note,1,p=0.97. 3분 안 진행·발생 시점 정보가 없다
+yejun/analysis/press_evidence/ar2_oscillator.csv,2,note,1,"사인 성분 적합 주파수는 정상 기록 대부분 0.600 Hz(v1 diagnosis). 같은 0.6 Hz 신호 가설을 AR은 3관측, 사인은 6·8관측으로 쓴다. 0.6 Hz의 물리 원인은 미확인(60 Hz 앨리어싱은 가설)"
+yejun/analysis/press_evidence/class_differences.csv,2,interpretation,0,분리 불가(교락 자체)
+yejun/analysis/press_evidence/class_differences.csv,2,note,0,라벨=파일=날짜
+yejun/analysis/press_evidence/class_differences.csv,2,team_rule,0,어떤 신호 차이도 고장의 인과 증거로 쓰지 않는다
+yejun/analysis/press_evidence/class_differences.csv,3,interpretation,0,수집 차이(저장 형식)
+yejun/analysis/press_evidence/class_differences.csv,3,note,1,matched 1e-4 반올림으로 제거
+yejun/analysis/press_evidence/class_differences.csv,4,note,0,matched 격자 반올림으로 제거
+yejun/analysis/press_evidence/class_differences.csv,5,interpretation,0,분리 불가
+yejun/analysis/press_evidence/class_differences.csv,5,note,1,×6.3
+yejun/analysis/press_evidence/class_differences.csv,6,note,1,×2.0
+yejun/analysis/press_evidence/class_differences.csv,7,note,1,구간 평균 제거 시 정상 0.017·이상 0.704
+yejun/analysis/press_evidence/class_differences.csv,8,note,1,구간 평균 제거 시 정상 0.318·이상 0.632
+yejun/analysis/press_evidence/class_differences.csv,9,note,1,부호 반전. 구간별(길이≥17) 중앙값 정상 0.28(음수 94/469)·이상 -0.35(음수 13/14)
+yejun/analysis/press_evidence/class_differences.csv,10,interpretation,0,분리 불가(영점·계측 가능성 포함)
+yejun/analysis/press_evidence/class_differences.csv,10,note,0,짧은 구간 표본평균이라 DC 오프셋과 같지 않다
+yejun/analysis/press_evidence/class_differences.csv,11,interpretation,0,분리 불가(고장 또는 표본화 시각 흔들림)
+yejun/analysis/press_evidence/class_differences.csv,11,note,1,"앨리어싱 가설(60 Hz 순시값, 독립 가우스 시각 흔들림)이면 R² 0.451은 RMS 약 2.4 ms, 정상 0.996은 약 0.16 ms 흔들림과 같은 크기(검증 불가)"
+yejun/analysis/press_evidence/class_differences.csv,12,note,1,0~5 Hz 격자 최소제곱
+yejun/analysis/press_evidence/class_differences.csv,13,note,1,"순수 사인 1.5, 가우스 잡음 3"
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,2,evidence,1,"행 0.1초 → 기록구간(정상 600·이상 21, 50행 구간 202·5개, 50행 초과 0) → 알림 단위(기록 안 50행 블록) → 평가 단위(행 F1·기록구간 탐지·정상 알림 구간). yejun/analysis/press_evidence/gaps.csv:2; yejun/press_guard/model.py:89"
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,2,decision,0,창·AR·보정·알림을 기록구간 안에서만 계산한다. 주 지표는 행 F1과 구간 단위 탐지·정상 알림을 함께 쓴다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,2,limitation,1,"기록구간은 수집 묶음이다. 기록 안(4.9초)에는 행정 정보가 없고, 기록 경계가 약 20초 주기 저수준·부하 범위의 전환과 맞물린다(기록 안 전환 0/469). 제품·독립 고장 단위가 아니다(가설). yejun/analysis/press_evidence/operating_states_summary.csv:72"
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,3,evidence,1,TimeStamp·센서 3열만 입력. 행 번호·Equipment_state·파일명은 제외. yejun/analysis/press_evidence/variable_dictionary.csv:7; yejun/press_submission/outputs/label_bypass.csv:2
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,3,decision,0,라벨·날짜·시각은 입력이 아니다(시각은 기록구간 경계에만 쓴다)
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,3,limitation,1,교락 자체는 제거할 수 없다(dayshift §6)
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,4,evidence,1,|Δt−0.1초|>1e-6이면 새 구간. 허용오차 1e-9~0.099초에서 600/21구간 불변. yejun/analysis/press_evidence/segment_rule_tolerance.csv:7
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,4,decision,0,현행 규칙 유지
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,4,limitation,1,0.1초 초과 1.5초 미만 간격이 없어서 규칙이 안정적이다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,5,evidence,1,시각 파싱 불가·비유한 값 행은 삭제하지 않고 status로 표시하고 앞뒤를 구간 경계로 둔다. 대회 자료에는 0행. yejun/press_submission/README.md:25
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,5,decision,0,현장 입력 대비 규칙으로 유지. 해당 행은 '수집 상태 확인'
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,5,limitation,1,대회 자료에는 없는 경로라 단위 테스트로만 확인(yejun/press_guard/test_guard.py:58)
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,6,evidence,1,00:43:33.196 완전 중복 1쌍. B 보정 최대 점수 순위 119·120/120. yejun/analysis/press_evidence/duplicate_rows.csv:2
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,6,decision,0,삭제하지 않는다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,6,limitation,0,없음
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,7,evidence,1,값 결측·비유한 값 정상 0·이상 0. 시간 적용률(기록 시간/경과 시간) 정상 43.3%·이상 36.2%. yejun/analysis/press_evidence/gaps.csv:3
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,7,decision,0,보간·채움을 하지 않는다. 공백은 구간 경계로만 쓴다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,7,limitation,1,"학습·보정·평가 어디에도 정상 상태 전환 순간이 없다(기록 안 관측 0/469). 공백이 전환을 체계적으로 가리는 결측 기제다. 동결 모델의 사후 전환 스트레스는 계단과 경사에서 경보율이 크게 다르다(속도 미관측, 가설). 전환을 포함한 정상 연속 자료로 재보정·재검증하기 전에는 대회 오경보 수치를 연속 수집 현장에 옮기지 않는다. yejun/analysis/press_evidence/state_transition_stress.csv:2"
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,8,evidence,1,이상 205/600행이 A 학습 범위 밖. 관행 1.5×IQR 적용 시 이상 246/600행(41%)·정상 비학습 206행(2.6%) 삭제. yejun/analysis/press_evidence/outliers.csv:5; yejun/analysis/press_evidence/outlier_rules.csv:8
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,8,decision,0,이상치를 제거하지 않는다(이상 신호 자체)
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,8,limitation,0,정상 극값도 그대로 학습 꼬리에 들어간다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,9,evidence,1,형식 규칙 판별력 raw AUROC 0.999 → matched 0.500. 소수 자릿수 하나로 무작위 행 분할 F1 0.994. yejun/press_submission/outputs/diagnosis.md:43; yejun/analysis/press_supervised/random_rows.csv:10
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,9,decision,1,"진동 1e-4, 전류 격자 1.1920929로 두 클래스에 같은 반올림"
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,9,limitation,0,형식 밖 클래스 차이(R4)는 남는다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,10,evidence,1,평균·척도·AR 계수·꼬리는 정상 학습 구간에서만 적합. yejun/press_guard/model.py:286
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,10,decision,0,학습 구간 적합 값을 보정·평가·현장에 그대로 쓴다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,10,limitation,1,가이드북 코드 20(31쪽)도 학습만 fit(차이 없음)
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,11,evidence,1,"위치 0~6은 6관측, 7부터 8관측 창. 파형 성분 제거 시 미탐 A 44→133·B 31→112, 조기 전환 제거 시 A 46·B 33. yejun/press_guard/model.py:321; yejun/press_guard/outputs/ablation_v2.csv:26"
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,11,decision,0,기록구간 안 창만 쓴다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,11,limitation,0,창 길이는 이상 자료를 본 뒤 고른 탐색적 설계다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,12,evidence,1,예측 오차 성분 제거 시 미탐 A 44→86·B 31→71. AR(2) 특성근 0.6064 Hz(사인과 같은 진동자). yejun/analysis/press_evidence/ar2_oscillator.csv:2; yejun/press_guard/outputs/ablation_v2.csv:20
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,12,decision,1,기록 안 3관측(현재+직전 2개)으로 예측 오차를 만든다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,12,limitation,1,위치 0·1에는 예측 오차가 없다(구조적 미탐)
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,13,evidence,1,"이상 행 2.9%, 평가셋 이상 비율 A 12.8%·B 9.0%, 전부 양성 F1 0.227·0.164. yejun/analysis/press_evidence/imbalance.csv:3"
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,13,decision,0,정상 자료만으로 학습·보정. 구간 단위 지표를 함께 쓰고 A·B F1을 같은 잣대로 비교하지 않는다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,13,limitation,1,이상 21구간은 한 에피소드라 불균형 처방의 일반화를 검증할 수 없다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,14,evidence,1,"A 360/480, B 300/420 구간 경계. 롤링 5겹 중 normal_420_479 = 동결 B, normal_480_539 = 동결 A(보정값 비트 단위 동일). 독립 폴드 3개(normal_300_359, normal_360_419, normal_540_599). yejun/press_submission/outputs/splits.csv:2; yejun/analysis/press_evidence/rolling_calibration_curve.csv:4"
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,14,decision,1,"오경보 판단의 주 근거는 B α=1% 3/180(구간 423, 461, 570)이다. 롤링 420~479의 2/60은 같은 모델의 같은 오경보(423·461)라 합산하지 않는다"
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,14,limitation,1,"모두 같은 날 77분 안이다. 새 날짜 검증이 아니다. 평가 구간의 운전 상태 구성이 보정과 다르다(저수준 A 보정 33/94(35%)·평가 75/96(78%), B 보정 29/90(32%)·평가 94/145(65%)). 모든 정상 알림은 부하 기록에서 나왔다: A 0/120은 부하 기록 21개, B 3/180은 부하 기록 51개에서 잰 값이다. yejun/analysis/press_evidence/split_state_composition.csv:4; yejun/analysis/press_evidence/normal_alarms_by_state.csv:11. 학습·보정·평가 어디에도 정상 상태 전환 순간이 없다(기록 안 관측 0/469). 공백이 전환을 체계적으로 가리는 결측 기제다. 동결 모델의 사후 전환 스트레스는 계단과 경사에서 경보율이 크게 다르다(속도 미관측, 가설). 전환을 포함한 정상 연속 자료로 재보정·재검증하기 전에는 대회 오경보 수치를 연속 수집 현장에 옮기지 않는다. yejun/analysis/press_evidence/state_transition_stress.csv:2"
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,15,evidence,1,"기록(알림 단위) 최대 점수로 보정, α 격자 k/121. 시간순 5겹 합산 2/300·8/300·14/300·28/300(k=1·3·6·12), k 1~12 중 12개가 90% 예측 구간 안. yejun/analysis/press_evidence/calibration_curve.csv:14; yejun/analysis/press_evidence/rolling_calibration_curve.csv:7"
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,15,decision,1,α=1%(보정 120단위의 최대값)를 기본 운영점으로 둔다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,15,limitation,1,"같은 날·교환가능성 가정 아래 보정 구간 상태 혼합에 대한 주변 보장이다. 새 날짜의 보장이 아니다. 부하 기록만 보면 B α=1% 3/51로 1/62보다 높지만 독립·고정위험 이항 p=0.049, 공유 보정 최대값 반영 Beta-Binomial 참고 p=0.091이다. 5% 수준 위반을 단정하지 않는다. 상태 조건부 보장은 아니다. yejun/analysis/press_evidence/normal_alarms_by_state.csv:57"
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,16,evidence,1,"정상 알림 수의 이동 블록 부트스트랩(블록 5·10·20, v2 α 1%). A 관측 0(퇴화, 모든 복제 0), B 관측 3(95% 0~6·0~6·0~5). yejun/press_guard/outputs/uncertainty_v2.csv:23-25; yejun/press_guard/outputs/uncertainty_v2.csv:65-67"
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,16,decision,0,"관측 건수를 주 결과로, 부트스트랩은 민감도로 둔다"
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,16,limitation,0,같은 날 자료 안의 변동만 반영한다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,17,evidence,1,날짜 이동·열 추가·6자리 재직렬화·미래 행 추가에 추론 불변. yejun/press_submission/outputs/label_bypass.csv:2
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,17,decision,0,라벨·날짜·파일명을 입력에서 제외한 효과를 불변성으로 확인
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,17,limitation,0,형식 밖 교락은 검사 대상이 아니다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,18,evidence,1,무작위 행 분할에서 저장 소수 자릿수(AI0 하나)만으로 F1 0.994. yejun/analysis/press_supervised/random_rows.csv:10
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,18,decision,0,무작위 행 분할을 평가에 쓰지 않는다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,19,evidence,1,이상 21구간을 1구간씩 떼는 21겹. 창+v2 성분 지도학습 로지스틱 F1 A 0.973·B 0.972 대 v2 0.962·0.971. yejun/analysis/press_supervised/grouped_records.csv:30
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,19,decision,0,선정 이유는 F1 우위가 아니라 라벨 불필요·전이·재보정이다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,19,limitation,1,21구간은 독립 고장이 아니다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,20,evidence,1,같은 날 정상 기록에 시작 시각을 아는 주입. v2 탐지 하한 전류 잡음 0.1σ·오프셋 0.4×진폭·진동 잡음 4σ. yejun/analysis/press_supplement/e1_detection_floor.csv:7
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,20,decision,0,"탐지 하한과 약점(기록 시작부터 있는 변화, 전류 배율)을 공개"
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,20,limitation,1,인공 신호. 실제 고장 모양의 보장이 아니다. 정상 좁은 대역 1.8·3.6 Hz와 이상 저주파형 모두 흰 잡음 대리와 모양이 다르다. yejun/analysis/press_evidence/observability.csv:2
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,21,evidence,1,UCI 펌프 누설에 v2 구조 AUROC 0.43~0.55(실패). yejun/analysis/press_supplement/e2_uci_metrics.csv:2
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,21,decision,0,적용 범위를 짧은 과도 변화로 좁힌다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,21,limitation,0,다른 설비·센서. 대회 성능과 합산하지 않는다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,22,evidence,1,사전 안정성 기준 충족 0/36. yejun/analysis/press_supplement/e3_stability.csv:2
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,22,decision,0,재보정은 고장 주입 수락 검사(recalibrate.py)와 함께 쓴다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,22,limitation,0,사전 기준 미충족을 그대로 공개한다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,23,evidence,1,구간 452의 33번째 행(00:57:07.947). yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv:2
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,23,decision,1,"기록구간 경계에서 분할(A 0~359/360~479/480~599, B 0~299/300~419/420~599)"
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,23,limitation,0,가이드북 방식 비판이 아니라 이 자료 구조와의 차이
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,24,evidence,1,50.1%. yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv:3
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,24,decision,0,창·AR은 기록구간 안에서만 만든다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,25,evidence,1,100.0%. yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv:4
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,25,decision,0,라벨 행을 쓰지 않는다(정상만 학습·보정)
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,26,evidence,1,중앙 22.0초(5~95% 13.7~36.5초). yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv:5
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,26,decision,0,선행시간을 주장하지 않는다(시작 시각을 아는 주입 E1으로 지연만 잰다)
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,27,evidence,1,"상·하부 원값 상관 +0.368 → -0.381, 절댓값 +0.221 → +0.356. yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv:6"
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,27,decision,0,원값을 쓰고 크기 성분에서만 |z|를 쓴다. 부호 반전을 기술 통계로 남긴다
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,28,evidence,1,학습 구간만 적합. yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv:7
+yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv,28,decision,0,같은 원칙(표준화 평균·SD를 학습 구간에서만)
+yejun/analysis/press_evidence/failure_mode_map.csv,2,evidence,1,"E1 v2 2초 탐지 s=2 A 74.4%·B 93.9%(e1_summary.csv:68·440), s=4 A 100.0%·B 100.0%(e1_summary.csv:86·458), s=1 A 1.9%·B 14.2%(e1_summary.csv:50·422)(하한 4σ)"
+yejun/analysis/press_evidence/failure_mode_map.csv,3,evidence,1,"E1 전류 잡음 0.1σ A 95.5%·B 97.5%(e1_summary.csv:158·530), 0.05σ A 39.5%·B 61.4%(e1_summary.csv:140·512)(하한 0.1σ)"
+yejun/analysis/press_evidence/failure_mode_map.csv,4,evidence,1,"E1 진동 잡음 s=4 A 100.0%·B 100.0%(e1_summary.csv:86·458), s=2 A 74.4%·B 93.9%(e1_summary.csv:68·440)"
+yejun/analysis/press_evidence/failure_mode_map.csv,5,evidence,1,"E1 오프셋 0.4×진폭 A 100.0%·B 100.0%(e1_summary.csv:266·638)(하한 0.4×진폭), 기록 시작부터 있는 오프셋 0.8 A 3.3%·B 28.8%(e1_summary.csv:284·656), 배율 1.15 A 0.0%·B 6.3%(e1_summary.csv:338·710), 1.5 A 72.0%·B 82.9%(e1_summary.csv:362·734). E2 UCI 펌프 내부 누설에 v2 구조 AUROC 0.43~0.55(실패, yejun/analysis/press_supplement/e2_uci_metrics.csv:2)"
+yejun/analysis/press_evidence/failure_mode_map.csv,6,evidence,1,"E1 전류 잡음 0.1σ A 95.5%·B 97.5%(e1_summary.csv:158·530), 배율 0.7 A 44.0%·B 45.0%(e1_summary.csv:314·686), 1.5 A 72.0%·B 82.9%(e1_summary.csv:362·734)"
+yejun/analysis/press_evidence/failure_mode_map.csv,7,evidence,1,"진단: 결측·비유한 값·시각 오류 0행. 저장 형식(진동 자릿수 6/8, 전류 격자 0.18%/100%)이 파일마다 다르다(class_differences.csv)"
+yejun/analysis/press_evidence/imbalance.csv,3,note,1,전부 양성으로 예측해도 F1 0.227
+yejun/analysis/press_evidence/imbalance.csv,4,note,1,전부 양성으로 예측해도 F1 0.164. A와 기준선이 달라 F1을 같은 잣대로 직접 비교하지 않는다
+yejun/analysis/press_evidence/normal_alarms_by_state.csv,56,note,1,보정 최대 점수 상위 10개의 상태. 부하>저수준 점수 단측 Mann–Whitney p
+yejun/analysis/press_evidence/normal_alarms_by_state.csv,57,note,1,"p_value는 위험 1/(61+1)을 고정한 독립 이항 근사. 공유 보정 최대값의 불확실성을 반영한 BetaBinomial(51,1,61) 단측 참고 p=0.091370(독립·연속·교환가능 점수 가정). 5% 수준 위반을 단정하지 않는다. 실제 시간 의존성·사후 상태 분류 한계는 남는다"
+yejun/analysis/press_evidence/normal_alarms_by_state.csv,58,note,0,사후 진단. 전류 RMS 성분 중앙은 value. 경보 기록 번호
+yejun/analysis/press_evidence/normal_alarms_by_state.csv,64,note,1,사후 진단. 전류 RMS 성분 중앙은 value. 경보 기록 번호 570
+yejun/analysis/press_evidence/normal_alarms_by_state.csv,73,note,1,사후 진단. 전류 RMS 성분 중앙은 value. 경보 기록 번호 423;461
+yejun/analysis/press_evidence/normal_alarms_by_state.csv,76,note,1,사후 진단. 전류 RMS 성분 중앙은 value. 경보 기록 번호 446;570
+yejun/analysis/press_evidence/normal_alarms_by_state.csv,77,note,1,사후 진단. 전류 RMS 성분 중앙은 value. 경보 기록 번호 423;426;461
+yejun/analysis/press_evidence/normal_alarms_by_state.csv,81,note,1,사후 진단. 전류 RMS 성분 중앙은 value. 경보 기록 번호 423;426;456;461;576
+yejun/analysis/press_evidence/normal_alarms_by_state.csv,89,note,1,사후 진단. 전류 RMS 성분 중앙은 value. 경보 기록 번호 301;303;342
+yejun/analysis/press_evidence/normal_alarms_by_state.csv,92,note,1,사후 진단. 전류 RMS 성분 중앙은 value. 경보 기록 번호 367;402;570
+yejun/analysis/press_evidence/normal_alarms_by_state.csv,93,note,1,사후 진단. 전류 RMS 성분 중앙은 value. 경보 기록 번호 301;303;310;342;355;576
+yejun/analysis/press_evidence/normal_alarms_by_state.csv,101,note,1,사후 진단. 전류 RMS 성분 중앙은 value. 경보 기록 번호 301;303;342;423;426;461
+yejun/analysis/press_evidence/normal_alarms_by_state.csv,104,note,1,사후 진단. 전류 RMS 성분 중앙은 value. 경보 기록 번호 367;402;446;570
+yejun/analysis/press_evidence/normal_alarms_by_state.csv,105,note,1,사후 진단. 전류 RMS 성분 중앙은 value. 경보 기록 번호 301;303;310;342;355;423;426;456;461;576
+yejun/analysis/press_evidence/observability.csv,2,interpretation,1,"10 Hz 순시값 표본(부호 대칭·평균 0, 이웃 표본 상관 낮음 lag-1 0.033). 1 Hz 이하 전력 비중 0.12(흰 잡음 0.20보다 낮다). 좁은 대역 성분 3.594 Hz, 0.6 Hz 1~8배 조화 R² 중앙 0.652, 성분 RMS/SD 0.57. 성분 진폭~전류 진폭 Spearman 0.037, 전류 배수 위상차 R 0.095(무작위 척도 0.070)라 위상 고정은 없다. 공통 원천의 접힘·부하 해석은 가설. RMS·포락선이 아니다. 5 Hz 위 성분은 접혀 들어온다"
+yejun/analysis/press_evidence/observability.csv,3,interpretation,1,"10 Hz 순시값 표본(부호 대칭·평균 0, 이웃 표본 상관 낮음 lag-1 0.319). 1 Hz 이하 전력 비중 0.07(흰 잡음 0.20보다 낮다). 좁은 대역 성분 1.793 Hz, 0.6 Hz 1~8배 조화 R² 중앙 0.913, 성분 RMS/SD 0.88. 성분 진폭~전류 진폭 Spearman 0.891, 전류 배수 위상차 R 0.031(무작위 척도 0.070)라 위상 고정은 없다. 공통 원천의 접힘·부하 해석은 가설. RMS·포락선이 아니다. 5 Hz 위 성분은 접혀 들어온다"
+yejun/analysis/press_evidence/observability.csv,4,interpretation,1,"0.6 Hz 사인형 순시값(lag-1 0.928이 순수 0.6 Hz 사인 0.930과 비슷, 사인 R² 중앙 0.996)"
+yejun/analysis/press_evidence/observability.csv,5,interpretation,1,"이웃 표본 상관이 높다(lag-1 0.718, 기록 평균 제거 0.704, 기록 13개 중 12개가 0.5 초과). 1 Hz 이하 전력 비중이 0.60다. 흰 잡음(0.20)의 약 3배인 느린(저주파) 변동이다. 접힌 광대역(흰 잡음형) 변화와 모양이 다르다. 원인은 미상(가설)"
+yejun/analysis/press_evidence/observability.csv,6,interpretation,1,"이웃 표본 상관이 높다(lag-1 0.651, 기록 평균 제거 0.632, 기록 13개 중 13개가 0.5 초과). 1 Hz 이하 전력 비중이 0.55다. 흰 잡음(0.20)의 약 3배인 느린(저주파) 변동이다. 접힌 광대역(흰 잡음형) 변화와 모양이 다르다. 원인은 미상(가설)"
+yejun/analysis/press_evidence/observability.csv,7,interpretation,1,"사인형이 깨졌다(사인 R² 중앙 0.451, 정상 0.996). lag-1 0.827"
+yejun/analysis/press_evidence/observability.csv,8,interpretation,0,비교 기준
+yejun/analysis/press_evidence/observability.csv,9,interpretation,1,1 Hz 이하 전력 비중 기대값(20관측 주기도표 0.5·1.0 Hz 두 칸 / 10칸)
+yejun/analysis/press_evidence/operating_states_summary.csv,2,note,1,성분 중앙(전류 RMS) [111.1]
+yejun/analysis/press_evidence/operating_states_summary.csv,2,basis,0,관측
+yejun/analysis/press_evidence/operating_states_summary.csv,3,note,1,"성분 중앙(전류 RMS) [83.7, 138.8]"
+yejun/analysis/press_evidence/operating_states_summary.csv,4,note,1,"성분 중앙(전류 RMS) [83.5, 112.8, 165.2]"
+yejun/analysis/press_evidence/operating_states_summary.csv,5,note,1,"성분 중앙(전류 RMS) [83.4, 102.3, 141.5, 172.1]"
+yejun/analysis/press_evidence/operating_states_summary.csv,6,note,1,"성분 중앙(전류 RMS) [83.4, 102.3, 135.4, 156.8, 175.1]"
+yejun/analysis/press_evidence/operating_states_summary.csv,7,note,1,"성분 중앙(전류 RMS) [83.4, 101.7, 126.7, 142.7, 162.1, 176.1]"
+yejun/analysis/press_evidence/operating_states_summary.csv,8,note,1,1:217.499 / 2:-224.109 / 3:-297.694 / 4:-326.219 / 5:-313.297 / 6:-300.218
+yejun/analysis/press_evidence/operating_states_summary.csv,9,note,1,1:217.499 / 2:-224.109 / 3:-298.247 / 4:-326.219 / 5:-309.544 / 6:-299.611
+yejun/analysis/press_evidence/operating_states_summary.csv,10,note,1,1:217.499 / 2:-224.109 / 3:-298.247 / 4:-326.171 / 5:-309.058 / 6:-314.403
+yejun/analysis/press_evidence/operating_states_summary.csv,11,note,1,1:217.499 / 2:-224.109 / 3:-298.247 / 4:-326.219 / 5:-313.297 / 6:-301.022
+yejun/analysis/press_evidence/operating_states_summary.csv,12,note,1,1:217.499 / 2:-224.109 / 3:-296.538 / 4:-326.230 / 5:-310.045 / 6:-314.434
+yejun/analysis/press_evidence/operating_states_summary.csv,13,note,1,"2차원 민감도, 시드 0·n_init 5"
+yejun/analysis/press_evidence/operating_states_summary.csv,19,note,1,이진 분류·상태별 분모는 2성분 기준을 그대로 유지한다
+yejun/analysis/press_evidence/operating_states_summary.csv,24,note,0,중앙은 로그 정규 성분의 exp(평균). 물리 행정 단계 해석은 가설
+yejun/analysis/press_evidence/operating_states_summary.csv,25,note,1,"실제 인접 기록 번호만 사용, 길이<17 기록을 가로질러 잇지 않는다. 생산 단계·인과의 증거가 아니다"
+yejun/analysis/press_evidence/operating_states_summary.csv,44,note,1,저수준 성분 로그 SD 0.036. 경계 90·92·95에서도 결론이 같다(split_state_composition.csv)
+yejun/analysis/press_evidence/operating_states_summary.csv,45,note,1,88~95 전체를 빈 골로 부르지 않는다. 90~95에도 21기록이 있다. 저수준 최대 91.457·부하 최소 91.997이며 둘째 골 115~125에도 6·7기록이 있다
+yejun/analysis/press_evidence/operating_states_summary.csv,46,note,1,"성분 중앙 [88.8, 155.5]. 경계가 흔들려 쓰지 않는다(전 구간 혼합의 경계를 쓴다)"
+yejun/analysis/press_evidence/operating_states_summary.csv,47,note,0,전류와 하부 진동이 같은 두 수준을 가른다
+yejun/analysis/press_evidence/operating_states_summary.csv,48,note,1,"AI0 SD 중앙 0.082, AI1 SD 중앙 0.151, 사인 R² 중앙 0.9984(최소 0.9944)"
+yejun/analysis/press_evidence/operating_states_summary.csv,49,note,1,"AI0 SD 중앙 0.047, AI1 SD 중앙 0.050, 사인 R² 중앙 0.9951(최소 0.9911)"
+yejun/analysis/press_evidence/operating_states_summary.csv,50,note,1,두 상태 모두 사인 R² 0.99 이상(파형은 같고 진폭만 다르다)
+yejun/analysis/press_evidence/operating_states_summary.csv,51,note,1,구간 470 이전(연속 저수준 구간 제외)
+yejun/analysis/press_evidence/operating_states_summary.csv,64,note,1,5초 간격 빈도 10~15:3 15~20:18 20~25:23 25~30:1 30~35:7 35~40:8 40~45:24 45~50:8 55~60:5 60~65:2 70~75:2 80~85:1 85~90:1. 15~25초와 40~45초에 몰린다(약 20초 주기의 1·2배)
+yejun/analysis/press_evidence/operating_states_summary.csv,69,note,1,"부하 연속 중앙 2(최대 8), 저수준 연속 중앙 1"
+yejun/analysis/press_evidence/operating_states_summary.csv,70,note,1,00:59:53~01:12:00. '가장 조용한 블록 480~539'의 정체. 가동 정지·무부하라는 해석은 가설
+yejun/analysis/press_evidence/operating_states_summary.csv,71,note,1,두 상태의 진폭 비는 1.75다. 기록 안에서 상태가 바뀌면 이 비가 커야 한다
+yejun/analysis/press_evidence/operating_states_summary.csv,72,note,1,"무작위 시각 수집 가정: 4.9초 기록이면 가로지름 48%, 실제 길이 반영 38.3%. 전환 속도는 미관측이므로 계단 가정의 민감도다"
+yejun/analysis/press_evidence/operating_states_summary.csv,73,note,1,"시드 0, 원기록 평균 중심에 상태 진폭 중앙비를 곱함. value2는 길이≥40 기록의 검정력. 부드러운 전환은 이 값으로 추정하지 않는다"
+yejun/analysis/press_evidence/operating_states_summary.csv,73,basis,0,사후 모의·가설
+yejun/analysis/press_evidence/operating_states_summary.csv,74,note,1,가정: 20.5초에 두 계단 전환. 기록 길이별 가로지름 확률 합 × 전체 평균 검정력의 근사. 관측 0
+yejun/analysis/press_evidence/operating_states_summary.csv,75,note,1,각 기록의 가로지름 확률 × 해당 기록 검정력의 합. 길이와 검정력의 연관을 반영. 관측 0
+yejun/analysis/press_evidence/operating_states_summary.csv,76,note,1,"바뀜 203·같음 170곳, Mann–Whitney p=0.28. 전환은 기록 사이 공백에서만 일어나고, 공백 길이와 무관하다"
+yejun/analysis/press_evidence/operating_states_summary.csv,77,note,1,AI0 SD~AI1 SD 0.427
+yejun/analysis/press_evidence/operating_states_summary.csv,78,note,1,AI0 SD~AI1 SD 0.365
+yejun/analysis/press_evidence/operating_states_summary.csv,79,note,0,전체 상관에는 두 상태 사이의 차이가 섞였다(sensor_relations.csv)
+yejun/analysis/press_evidence/operating_states_summary.csv,80,note,1,블록별 저수준 비율 00:00:0.38 00:10:0.40 00:20:0.32 00:30:0.35 00:40:0.34 00:50:0.31 01:00:1.00 01:10:0.51
+yejun/analysis/press_evidence/outliers.csv,4,note,0,전류는 사인형이라 행 단위 robust z는 참고치
+yejun/analysis/press_evidence/outliers.csv,5,note,1,학습 범위 밖 행이 있는 이상 구간 19/21(진동 기준 18/21). 결정: 이상치를 제거하지 않는다(이상 신호 자체). 정상 최솟값·최댓값이 각 1행뿐이라 포화·클리핑 흔적 없음
+yejun/analysis/press_evidence/phase_continuity.csv,2,interpretation,1,기록 안에서는 0.6 Hz 위상이 이어진다(방법 점검)
+yejun/analysis/press_evidence/phase_continuity.csv,3,interpretation,1,공백을 건너면 위상이 이어지지 않는다(섞은 귀무 95% 안)
+yejun/analysis/press_evidence/phase_continuity.csv,4,interpretation,0,공백 길이와 무관하게 귀무 범위
+yejun/analysis/press_evidence/phase_continuity.csv,6,interpretation,0,어느 주파수로도 위상 연속이 복원되지 않는다
+yejun/analysis/press_evidence/phase_continuity.csv,7,interpretation,1,시작 위상이 고르게 흩어진다(Rayleigh p=0.90)
+yejun/analysis/press_evidence/production_unit_evidence.csv,2,interpretation,1,"0.6 Hz 위상에 맞춘 트리거가 아니다. 기록 경계는 운전 상태 전환과 맞물린다(operating_states_summary.csv '기록-상태 동기화', 가설)"
+yejun/analysis/press_evidence/production_unit_evidence.csv,2,basis,0,관측
+yejun/analysis/press_evidence/production_unit_evidence.csv,3,interpretation,0,특정 위치(타격 순간)에 진동이 몰리지 않는다. 기록구간은 행정 단위가 아니다(가설)
+yejun/analysis/press_evidence/production_unit_evidence.csv,4,interpretation,0,전류는 거의 순수 사인이다. 행정(가압·복귀)을 가르는 파형 구조가 보이지 않는다
+yejun/analysis/press_evidence/production_unit_evidence.csv,5,interpretation,1,"기록 안(4.9초)에는 행정 정보가 없다. 기록 사이에는 약 20초 주기의 저수준·부하 범위 교대가 보이고, 기록 경계가 상태 전환과 맞물린다. 행정 수·제품 단위는 43% 시간 적용률로 셀 수 없다(가설)"
+yejun/analysis/press_evidence/production_unit_evidence.csv,5,basis,0,관측·가설
+yejun/analysis/press_evidence/production_unit_evidence.csv,6,interpretation,0,기록 안 간격은 모두 명목값과 같다
+yejun/analysis/press_evidence/production_unit_evidence.csv,7,interpretation,1,±49 ms 누적이 없다
+yejun/analysis/press_evidence/production_unit_evidence.csv,8,interpretation,1,"앨리어싱이라면 원 신호가 k·10 ± 0.6 Hz다. 상용 60 Hz 직입 구동이면 59.4·60.6 Hz(또는 시각이 명목값)여야 하고, 인버터 구동이면 50.6·40.6 Hz처럼 운전 주파수가 그 값이면 된다(가설, 전원 방식 정보 없음)"
+yejun/analysis/press_evidence/production_unit_evidence.csv,8,basis,0,가설
+yejun/analysis/press_evidence/production_unit_evidence.csv,9,interpretation,1,"0.6 Hz가 정확한 시각의 연속 기계 주기(분당 36회)라면 공백을 건너 위상이 이어져야 한다. 관측과 맞지 않는다(가설 약화, 확정 아님)"
+yejun/analysis/press_evidence/quality_index.csv,3,note,1,완전 중복 1행(R20) 때문에 정상만 100% 미만
+yejun/analysis/press_evidence/quality_index.csv,6,note,0,가이드북도 산출하지 않음(기준값 없음)
+yejun/analysis/press_evidence/quality_index.csv,7,note,1,유일성·유효성·일관성 중 100%가 아닌 지수 비율
+yejun/analysis/press_evidence/sensor_relations.csv,2,source,0,원본
+yejun/analysis/press_evidence/sensor_relations.csv,2,note,1,상·하부 진동 원값 상관의 부호가 반전된다(+0.368 → -0.381)
+yejun/analysis/press_evidence/sensor_relations.csv,3,note,1,진동–전류 순시값 상관은 0에 가깝다(위상이 다른 순시값 표본)
+yejun/analysis/press_evidence/sensor_relations.csv,5,note,1,가이드북 30쪽 '정상/이상 모두 양의 상관'은 절댓값 변환 뒤의 값이다. 원값의 부호 반전을 가린다
+yejun/analysis/press_evidence/sensor_relations.csv,14,note,1,"정상에서 진동 크기와 전류 진폭이 함께 오르내린다. 부하 수준이라는 공통 요인과 일관(가설, 부하 측정 없음). 두 운전 상태가 섞인 값이다: 상태 안에서는 부하 0.364, 저수준 -0.085(operating_states_summary.csv '상태 안 결합')"
+yejun/analysis/press_evidence/sensor_relations.csv,15,note,1,"정상에서 진동 크기와 전류 진폭이 함께 오르내린다. 부하 수준이라는 공통 요인과 일관(가설, 부하 측정 없음). 두 운전 상태가 섞인 값이다: 상태 안에서는 부하 0.915, 저수준 -0.300(operating_states_summary.csv '상태 안 결합')"
+yejun/analysis/press_evidence/sensor_relations.csv,16,note,1,"정상에서 진동 크기와 전류 진폭이 함께 오르내린다. 부하 수준이라는 공통 요인과 일관(가설, 부하 측정 없음). 두 운전 상태가 섞인 값이다: 상태 안에서는 부하 0.427, 저수준 0.365(operating_states_summary.csv '상태 안 결합')"
+yejun/analysis/press_evidence/sensor_relations.csv,17,note,1,이상 14구간에서는 결합이 깨진다. 고장 때문인지 날짜·운전 조건 때문인지 분리할 수 없다
+yejun/analysis/press_evidence/sensor_relations.csv,20,source,1,yejun/press_guard/outputs/coupling_fit_v2.csv:2
+yejun/analysis/press_evidence/sensor_relations.csv,20,note,1,"기울기 1.33, AI0 0.67·AI1 0.96, 60구간 블록별 0.93~0.97"
+yejun/analysis/press_evidence/sensor_relations.csv,21,source,1,yejun/press_guard/outputs/coupling_fit_v2.csv:3
+yejun/analysis/press_evidence/sensor_relations.csv,21,note,1,"기울기 1.32, AI0 0.65·AI1 0.96, 60구간 블록별 0.93~0.97"
+yejun/analysis/press_evidence/sensor_relations.csv,22,source,1,yejun/press_submission/outputs/load_normalization_meta.csv:2
+yejun/analysis/press_evidence/sensor_relations.csv,22,note,0,v1 진폭 정규화 후보의 메타값(모델 후보였고 채택하지 않음)
+yejun/analysis/press_evidence/sensor_relations.csv,23,source,1,yejun/press_submission/outputs/load_normalization_meta.csv:3
+yejun/analysis/press_evidence/split_context.csv,2,note,0,학습 구간은 적합에 쓴 자료(표본 내)
+yejun/analysis/press_evidence/split_context.csv,3,note,0,보정 자신
+yejun/analysis/press_evidence/state_transition_stress.csv,2,note,0,"사후 스트레스·가설. 동일 원기록 반복 사용, 실제 전환 속도 미관측. 이득 열은 저수준→부하 비(역방향은 역수)"
+yejun/analysis/press_evidence/variable_dictionary.csv,2,team_rule,0,행 번호. 순서 확인에만 쓰고 특징으로 쓰지 않는다
+yejun/analysis/press_evidence/variable_dictionary.csv,3,team_rule,0,라벨과 날짜·요일·시간대가 완전히 겹친다. 시각 차이를 고장 근거로 쓰지 않는다
+yejun/analysis/press_evidence/variable_dictionary.csv,4,team_rule,0,단위 미기재(g·mm/s 등 미확인). 정상 학습 표준화 척도로만 해석한다
+yejun/analysis/press_evidence/variable_dictionary.csv,6,team_rule,0,단위 미기재. 음수가 절반이라 RMS가 아닌 순시값 표본으로 추정(검증 불가). 정상 학습 표준화 척도로만 해석하고 A 등 물리 단위로 쓰지 않는다
+yejun/analysis/press_evidence/variable_dictionary.csv,7,team_rule,0,파일 단위 상수라 시점별 고장 라벨이 아니다. 고장 시작 시각·원인을 주장하지 않는다
+yejun/analysis/press_evidence/vibration_tones.csv,2,note,1,사후 진단·가설. 5초 기록의 주파수 격자 0.02 Hz는 분해능 향상이 아니다. 0.4 Hz 미만은 느린 흐름
+yejun/analysis/press_selection/combination_rules.csv,2,definition,0,fmax(g) = Tippett 최소 p(주 모델 v2)
+yejun/analysis/press_selection/combination_rules.csv,2,remark,1,"fmax 유지 이유: ① 사전 선택 유지 — 결합 규칙은 v1 계획부터 쓴 fmax이고, 이상 21구간을 본 뒤 대안(Fisher·합·5NN)으로 바꾸면 사후 선택이 한 번 더 는다. 대안이 대회 F1·주입 탐지에서 같거나 나은 경우가 있다는 사실은 공개한다(rule_transfer_injection_v2.csv) ② 경보마다 단독으로 문턱을 넘은 성분이 있어 근거→조치 판단표(model.DECISION_TABLE)가 성립한다. 참고: 결합 점수 하나를 한 번만 재보정하는 것은 성분별 문턱의 OR 규칙보다 나은 점이며 Fisher·합·5NN과의 차이는 아니다. g=−log10(정상 꼬리 확률)의 최댓값은 Tippett 최소 p 결합이다"
+yejun/analysis/press_selection/combination_rules.csv,3,definition,1,Fisher −2Σln p ~ χ²(2k)의 −log10 꼬리
+yejun/analysis/press_selection/combination_rules.csv,3,remark,1,"α=1%에서 A 미탐이 적고(44→32) B 정상 알림이 적다(3→1). α=1% 주입 전이는 A에서 fmax와 같거나 높고 B의 진동 잡음 2σ·전류 잡음 0.1σ·단발 충격 4σ·6σ에서 낮다(rule_transfer_injection_v2.csv). 대신 어느 성분도 단독으로 문턱을 넘지 않은 경보가 생긴다(A 12행, B 1행). 사후 비교라 채택하지 않는다"
+yejun/analysis/press_selection/combination_rules.csv,4,definition,1,Stouffer Σz/√k(z=Φ⁻¹(1−p))
+yejun/analysis/press_selection/combination_rules.csv,4,remark,1,"정상 알림은 적으나 미탐이 늘고(α=1%: A 39, B 39) 근거 없는 경보가 생긴다"
+yejun/analysis/press_selection/combination_rules.csv,5,definition,0,합 Σg
+yejun/analysis/press_selection/combination_rules.csv,5,remark,1,α=1%에서 A는 미탐이 조금 줄고(44→40) B는 늘며(31→39) B 정상 알림은 3→2다. 단독 성분 근거가 없는 경보가 생긴다
+yejun/analysis/press_selection/combination_rules.csv,6,definition,0,평균 Σg/k
+yejun/analysis/press_selection/combination_rules.csv,6,remark,1,정상 알림은 적으나 두 분할 모두 미탐이 늘고(α=1%: 42) A에서 근거 없는 경보가 생긴다
+yejun/analysis/press_selection/fp_mitigation_injection_v2.csv,2,definition,1,주입 없음(2초 창 안 경보율 = 오경보 기준선)
+yejun/analysis/press_selection/fp_mitigation_injection_v2.csv,3,definition,1,전류 잡음 level×σ(10행째부터)
+yejun/analysis/press_selection/fp_mitigation_injection_v2.csv,5,definition,1,전류 오프셋 level×√2×σ(10행째부터)
+yejun/analysis/press_selection/fp_mitigation_injection_v2.csv,7,definition,1,진동 두 센서 잡음 level×σ(10행째부터)
+yejun/analysis/press_selection/fp_mitigation_injection_v2.csv,9,definition,1,단발 진동 충격: 10행째 한 행에만 진동 두 센서 ±level×σ(부호 rng)
+yejun/analysis/press_selection/fp_mitigation_v2.csv,2,source,0,v2 성분(이 폴더 계산)
+yejun/analysis/press_selection/fp_mitigation_v2.csv,2,definition,0,주 모델(기준)
+yejun/analysis/press_selection/fp_mitigation_v2.csv,3,definition,1,크기 성분만 같은 기록구간 최근 3행 중 2번째 큰 값(v1 persistence_score). 위치 0·1은 크기 미판정
+yejun/analysis/press_selection/fp_mitigation_v2.csv,3,remark,1,위치 0·1에서 크기 성분이 빠져 그 위치 미탐이 늘어난다
+yejun/analysis/press_selection/fp_mitigation_v2.csv,4,definition,1,위와 같되 3행이 쌓이기 전(위치 0·1)은 원래 크기 성분
+yejun/analysis/press_selection/fp_mitigation_v2.csv,4,remark,1,사후로는 두 분할·모든 α에서 v2보다 정상 알림과 미탐이 같거나 적다. 원인은 문턱이다: 보정 기록구간 최대 점수를 만든 단발(1행) 크기 급등이 지속성으로 빠져 conformal 문턱이 낮아졌다(threshold 열). 대가로 1행짜리 진동 충격형 이상은 위치 2 이후 경보하지 않는다(주입 비용은 fp_mitigation_injection_v2.csv). 탐색 장부 뒤에 이미 본 이상 자료로 더한 사후 후보다. 채택하지 않는다
+yejun/analysis/press_selection/fp_mitigation_v2.csv,5,definition,1,"크기 성분을 전류 진폭 조건부 진동 잔차로 대체(v1 LoadNormalizer: 정상 학습 앞 80% 기록에서 AI0 trailing-17 표준편차 ~ 전류 trailing-17 진폭 선형 적합, 잔차/SD의 정상 꼬리). 17행 전은 원래 크기 [적합 5598행, 진폭–진동 상관 0.569, 꼬리 적합 True]"
+yejun/analysis/press_selection/fp_mitigation_v2.csv,5,remark,1,v1의 진폭 정규화를 옮긴 것. B에서 오경보 3→1(구간 423·461 제거)로 v1과 같은 방향이나 A에서 정상 알림 1(구간 570)이 생긴다
+yejun/analysis/press_selection/fp_mitigation_v2.csv,17,definition,1,"크기 성분을 전류 진폭 조건부 진동 잔차로 대체(v1 LoadNormalizer: 정상 학습 앞 80% 기록에서 AI0 trailing-17 표준편차 ~ 전류 trailing-17 진폭 선형 적합, 잔차/SD의 정상 꼬리). 17행 전은 원래 크기 [적합 4706행, 진폭–진동 상관 0.548, 꼬리 적합 True]"
+yejun/analysis/press_selection/fp_mitigation_v2.csv,26,source,0,"yejun/press_submission/outputs/load_normalization.csv(커밋, v1 기준선)"
+yejun/analysis/press_selection/fp_mitigation_v2.csv,26,definition,1,"v1 결합 fmax(크기, 사인8)에 적용. 기준 = main_combined_w8(reference)"
+yejun/analysis/press_selection/fp_mitigation_v2.csv,32,source,0,"yejun/press_submission/outputs/persistence.csv(커밋, v1 기준선)"
+yejun/analysis/press_selection/fp_mitigation_v2.csv,32,definition,1,"v1 결합 fmax(크기, 사인8)에 적용. 기준 = persist_k1n1"
+yejun/analysis/press_selection/fp_mitigation_v2.csv,38,source,0,yejun/analysis/press_improvement/candidate_metrics.csv(커밋)
+yejun/analysis/press_selection/fp_mitigation_v2.csv,38,definition,1,v1 결합에서 크기 성분만 2/3 지속성. 기준 = baseline_w8
+yejun/analysis/press_selection/paired_records.csv,2,comparison,0,v2 개선
+yejun/analysis/press_selection/paired_records.csv,7,comparison,0,동일
+yejun/analysis/press_selection/rule_transfer_injection_v2.csv,2,definition,1,주입 없음(2초 창 안 경보율 = 오경보 기준선)
+yejun/analysis/press_selection/rule_transfer_injection_v2.csv,3,definition,1,전류 잡음 level×σ(10행째부터)
+yejun/analysis/press_selection/rule_transfer_injection_v2.csv,5,definition,1,전류 오프셋 level×√2×σ(10행째부터)
+yejun/analysis/press_selection/rule_transfer_injection_v2.csv,7,definition,1,진동 두 센서 잡음 level×σ(10행째부터)
+yejun/analysis/press_selection/rule_transfer_injection_v2.csv,9,definition,1,단발 진동 충격: 10행째 한 행에만 진동 두 센서 ±level×σ(부호 rng)
+yejun/analysis/press_selection/same_feature_alternatives.csv,2,remark,1,"fmax 유지 이유: ① 사전 선택 유지 — 결합 규칙은 v1 계획부터 쓴 fmax이고, 이상 21구간을 본 뒤 대안(Fisher·합·5NN)으로 바꾸면 사후 선택이 한 번 더 는다. 대안이 대회 F1·주입 탐지에서 같거나 나은 경우가 있다는 사실은 공개한다(rule_transfer_injection_v2.csv) ② 경보마다 단독으로 문턱을 넘은 성분이 있어 근거→조치 판단표(model.DECISION_TABLE)가 성립한다. 참고: 결합 점수 하나를 한 번만 재보정하는 것은 성분별 문턱의 OR 규칙보다 나은 점이며 Fisher·합·5NN과의 차이는 아니다. g=−log10(정상 꼬리 확률)의 최댓값은 Tippett 최소 p 결합이다"
+yejun/analysis/press_selection/same_feature_alternatives.csv,3,remark,1,"같은 입력이면 5NN이 미탐을 조금 줄인다(α=1%: A 44→36, B 31→29, 정상 알림 같음). α=1% 주입 전이에서도 A는 모든 족에서 fmax와 같거나 높고 B는 단발 진동 충격 4σ에서만 낮다(rule_transfer_injection_v2.csv). 대신 단독으로 문턱을 넘은 성분이 없는 경보가 생겨 근거→조치 판단표가 끊긴다. 사후 비교라 채택하지 않는다"
+yejun/analysis/press_selection/same_feature_alternatives.csv,4,remark,1,"α=1%에서 미탐이 크게 늘고(A 120, B 117) 이상 1구간을 놓친다"
+yejun/analysis/press_selection/same_feature_alternatives.csv,5,remark,1,α=1%에서 A는 미탐이 조금 줄고(44→40) B는 늘며(31→39) B 정상 알림은 3→2다. 단독 성분 근거가 없는 경보가 생긴다
+yejun/analysis/press_selection/same_feature_alternatives.csv,6,remark,1,AR(2)보다 미탐이 많다
+yejun/analysis/press_selection/same_feature_alternatives.csv,7,remark,1,일반 구현으로 다시 적합한 AR(2). v2와 경보가 같음을 확인하는 대조
+yejun/analysis/press_selection/same_feature_alternatives.csv,9,remark,1,AR(2)보다 미탐이 많고 B 정상 알림이 늘어난다
+yejun/analysis/press_selection/search_ledger.csv,2,source,0,yejun/press_submission/outputs/model_comparison_all.csv
+yejun/analysis/press_selection/search_ledger.csv,3,source,0,yejun/press_submission/outputs/sensitivity.csv
+yejun/analysis/press_selection/search_ledger.csv,4,source,0,yejun/press_submission/outputs/ablation.csv
+yejun/analysis/press_selection/search_ledger.csv,5,source,0,yejun/press_submission/outputs/persistence.csv
+yejun/analysis/press_selection/search_ledger.csv,6,source,0,yejun/press_submission/outputs/load_normalization.csv
+yejun/analysis/press_selection/search_ledger.csv,7,source,0,yejun/analysis/press_improvement/candidate_metrics.csv
+yejun/analysis/press_selection/search_ledger.csv,8,source,0,yejun/analysis/press_advance/metrics.csv
+yejun/analysis/press_selection/search_ledger.csv,9,source,0,yejun/analysis/press_early/metrics.csv
+yejun/analysis/press_selection/search_ledger.csv,10,source,0,yejun/press_guard/outputs/ablation_v2.csv
+yejun/analysis/press_selection/search_ledger.csv,11,source,0,yejun/analysis/press_supervised/grouped_records.csv
+yejun/analysis/press_selection/search_ledger.csv,12,source,0,yejun/press_submission/outputs/lstm_guidebook_reproduction.json
+yejun/analysis/press_selection/selection_evidence.csv,2,source,0,search_ledger.csv
+yejun/analysis/press_selection/selection_evidence.csv,3,source,1,"judge_02_model.md §1.3, search_ledger.csv"
+yejun/analysis/press_selection/selection_evidence.csv,4,source,0,"same_feature_alternatives.csv, combination_rules.csv, fp_mitigation_v2.csv"
+yejun/analysis/press_selection/selection_evidence.csv,5,source,0,candidate_universe.csv
+yejun/analysis/press_selection/selection_evidence.csv,7,source,0,candidate_universe.csv(alarm_pattern)
+yejun/analysis/press_selection/selection_evidence.csv,8,source,0,yejun/analysis/press_advance/protocol.json(selection)
+yejun/analysis/press_selection/selection_evidence.csv,9,source,0,nested_selection.csv
+yejun/analysis/press_selection/selection_evidence.csv,12,source,0,paired_records.csv ← yejun/press_guard/outputs/records_first_alarm_v2.csv
+yejun/analysis/press_selection/selection_evidence.csv,13,source,0,paired_records.csv
+yejun/analysis/press_selection/selection_evidence.csv,20,source,0,yejun/press_submission/PLAN.md · yejun/press_submission/outputs/sensitivity.csv
+yejun/analysis/press_selection/selection_evidence.csv,21,source,0,yejun/analysis/press_improvement/config.json · yejun/analysis/press_improvement/candidate_metrics.csv
+yejun/analysis/press_selection/selection_evidence.csv,22,source,0,yejun/analysis/press_advance/protocol.json · yejun/analysis/press_advance/metrics.csv
+yejun/analysis/press_selection/selection_evidence.csv,23,source,0,yejun/analysis/press_early/protocol.json · yejun/analysis/press_early/metrics.csv
+yejun/analysis/press_selection/selection_evidence.csv,24,source,0,yejun/analysis/press_supplement/protocol.json · yejun/analysis/press_supplement/e1_summary.csv
+yejun/analysis/press_selection/selection_evidence.csv,25,source,0,yejun/press_guard/outputs/ablation_v2.csv
+yejun/analysis/press_selection/selection_evidence.csv,33,source,0,yejun/press_guard/outputs/rolling.csv
+yejun/analysis/press_selection/selection_evidence.csv,38,source,0,yejun/press_guard/outputs/metrics.csv
+yejun/analysis/press_selection/selection_evidence.csv,44,source,1,judge_02_model.md §4
+yejun/analysis/press_selection/selection_evidence.csv,45,source,1,"judge_02_model.md §4, model.py state['selection']"
+yejun/analysis/press_selection/unified_comparison.csv,2,note,1,"창 단위 지표(정상 창 4000, 이상 창 180). 가이드북 보고치 F1 0.7476. 주 비교와 분모·분할이 달라 직접 비교하지 않는다"
+yejun/analysis/press_selection/unified_comparison.csv,2,source,0,yejun/press_submission/outputs/lstm_guidebook_reproduction.json
+yejun/analysis/press_selection/unified_comparison.csv,3,note,0,v1 패키지 combined_w8과 같은 경보
+yejun/analysis/press_selection/unified_comparison.csv,3,source,0,이 폴더 계산(동결 v2 모델 꼬리) = press_guard/outputs/metrics.csv baseline_v1
+yejun/analysis/press_selection/unified_comparison.csv,4,note,1,사후 민감도(이상 21구간을 이미 본 뒤의 비교). 채택 근거가 아니다
+yejun/analysis/press_selection/unified_comparison.csv,4,source,0,same_feature_alternatives.csv
+yejun/analysis/press_selection/unified_comparison.csv,6,note,1,사후 민감도(이상 21구간을 이미 본 뒤의 비교). 채택 근거가 아니다. 근거 성분 없는 이상 경보 12행
+yejun/analysis/press_selection/unified_comparison.csv,6,source,0,combination_rules.csv
+yejun/analysis/press_selection/unified_comparison.csv,7,note,0,"행 확률: 정상 평가는 전체 모델, 이상은 뺀 겹 모델(OOF). 커밋 grouped_records.csv와 건수 일치 확인"
+yejun/analysis/press_selection/unified_comparison.csv,7,source,0,yejun/analysis/press_supervised/run.py(커밋 코드 재실행)
+yejun/analysis/press_selection/unified_comparison.csv,11,note,0,보정 문턱 F1과 사후 최적 F1(평가 라벨로 고른 낙관적 상한)이 거의 같다
+yejun/analysis/press_selection/unified_comparison.csv,15,note,1,사후 민감도(이상 21구간을 이미 본 뒤의 비교). 채택 근거가 아니다. 근거 성분 없는 이상 경보 1행
+yejun/analysis/press_supplement/e1_reference_segments.csv,2,source,0,abnormal
+yejun/analysis/press_supplement/e1_reference_segments.csv,23,source,0,normal_test_A
+yejun/analysis/press_supplement/e2_uci_comparison.csv,2,source,0,press_external(기존)
+yejun/analysis/press_supplement/e2_uci_comparison.csv,20,source,0,press_supplement E2
+yejun/press_submission/outputs/influence.csv,4,definition,1,평균 제거 RMS×√2(길이<17 신뢰 제한)
+yejun/press_submission/outputs/influence.csv,5,definition,0,구간 전체 사인 R²(사후)
+yejun/press_submission/outputs/influence.csv,6,definition,1,trailing-8 1−R² 중앙값(경보 특징)
+yejun/press_submission/outputs/load_normalization_meta.csv,2,note,1,trailing-17 온라인 특징만 사용. 실제 부하 측정이 아닌 전류 진폭 대리 지표.
+yejun/press_submission/outputs/segment_features.csv,2,source,0,normal_test
+yejun/press_submission/outputs/segment_features.csv,122,source,0,abnormal

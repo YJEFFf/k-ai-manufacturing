@@ -1,0 +1,88 @@
+[A] thr v1 4.417926 thr v2 4.417926 same=True  cal-max component {'g_magnitude': 4.417925848290822, 'g_waveform': 0.012964977164367649, 'g_dynamics': 0.48432300439600967}
+[A] v1 FN 99 v2 FN 44  v2 alarms ⊇ v1 alarms: True  rows v1=1&v2=0: 0
+      rows  v1_miss  v2_miss  gained
+bin                                 
+0-1     42       26       26       0
+2-4     59       36       11      25
+5-6     36       29        5      24
+7-9     52        0        0       0
+>=10   411        8        2       6
+[A] gained rows 55, share at positions 0-6 (v1 has no waveform score): 0.891; reasons {'dynamics': 42, 'waveform+dynamics': 11, 'waveform': 2}
+[A] improve/same/worse 18/3/0  sign-test p 3.81e-06
+     rows  v1  v2  d   tag
+rec                       
+0       4   2   1  1   imp
+1      50   7   4  3   imp
+2      47   7   3  4   imp
+3      31   7   5  2   imp
+4      18   3   2  1   imp
+5       3   1   1  0  same
+6      50   3   2  1   imp
+7      40   2   0  2   imp
+8      25   7   3  4   imp
+9       8   3   1  2   imp
+10      4   0   0  0  same
+11     50   5   1  4   imp
+12     42   1   1  0  same
+13     28   3   2  1   imp
+14     15   6   2  4   imp
+15     50   9   4  5   imp
+16     50   6   2  4   imp
+17     36   6   2  4   imp
+18     24   7   3  4   imp
+19     10   7   2  5   imp
+20     15   7   3  4   imp
+[A] lag-1 autocorr across records: Δ 0.359, v2 miss rate 0.118, record length 0.128
+[A] ΔF1 obs 0.0519  fp v1 0 v2 0
+    iid_records          [0.0364, 0.0749] sd 0.0097
+    circular_block_3     [0.0337, 0.0795] sd 0.0118
+    circular_block_5     [0.0344, 0.0766] sd 0.0109
+    circular_block_7     [0.0345, 0.0769] sd 0.0110
+    circular_block_10    [0.0354, 0.0704] sd 0.0092
+[A] within-record row autocorr lag1,2,3,5,10: {'v2_miss': [0.36, 0.111, 0.115, 0.051, -0.018], 'v1_miss': [0.672, 0.463, 0.337, 0.161, -0.044], 'v2_score': [0.546, 0.341, 0.225, 0.125, -0.071]}
+[A] ICC(v2 miss | record) 0.012 (n0 28.1)
+
+[B] thr v1 3.519900 thr v2 3.519900 same=True  cal-max component {'g_magnitude': 3.5199003630751613, 'g_waveform': nan, 'g_dynamics': 0.09275188477323253}
+[B] v1 FN 86 v2 FN 31  v2 alarms ⊇ v1 alarms: True  rows v1=1&v2=0: 0
+      rows  v1_miss  v2_miss  gained
+bin                                 
+0-1     42       20       20       0
+2-4     59       35        9      26
+5-6     36       27        2      25
+7-9     52        0        0       0
+>=10   411        4        0       4
+[B] gained rows 55, share at positions 0-6 (v1 has no waveform score): 0.927; reasons {'dynamics': 40, 'waveform+dynamics': 13, 'waveform': 2}
+[B] improve/same/worse 16/5/0  sign-test p 1.53e-05
+     rows  v1  v2  d   tag
+rec                       
+0       4   0   0  0  same
+1      50   5   2  3   imp
+2      47   7   3  4   imp
+3      31   7   5  2   imp
+4      18   3   2  1   imp
+5       3   1   1  0  same
+6      50   3   0  3   imp
+7      40   1   0  1   imp
+8      25   7   2  5   imp
+9       8   2   0  2   imp
+10      4   0   0  0  same
+11     50   5   1  4   imp
+12     42   1   1  0  same
+13     28   2   2  0  same
+14     15   6   1  5   imp
+15     50   7   2  5   imp
+16     50   5   1  4   imp
+17     36   3   0  3   imp
+18     24   7   3  4   imp
+19     10   7   2  5   imp
+20     15   7   3  4   imp
+[B] lag-1 autocorr across records: Δ 0.117, v2 miss rate 0.241, record length 0.128
+[B] ΔF1 obs 0.0507  fp v1 3 v2 3
+    iid_records          [0.0351, 0.0739] sd 0.0098
+    circular_block_3     [0.0342, 0.0760] sd 0.0107
+    circular_block_5     [0.0359, 0.0711] sd 0.0090
+    circular_block_7     [0.0366, 0.0703] sd 0.0090
+    circular_block_10    [0.0375, 0.0652] sd 0.0072
+[B] within-record row autocorr lag1,2,3,5,10: {'v2_miss': [0.473, 0.149, 0.086, -0.011, -0.012], 'v1_miss': [0.731, 0.515, 0.358, 0.125, -0.033], 'v2_score': [0.549, 0.346, 0.229, 0.128, -0.07]}
+[B] ICC(v2 miss | record) 0.035 (n0 28.1)
+

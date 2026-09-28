@@ -1,0 +1,58 @@
+오류 분석 산출물의 p값: 380 개; p<0.05: 61 ; 전역 귀무에서 기대 거짓 양성: 19.0
+    error_conditions_stats_v2.csv:fisher_p_greater {'p_values': 248, 'distinct_values': 31, 'lt05': 10, 'lt05_lt1_excluded': 10}
+    fp_intensity_v2.csv:fisher_p_greater {'p_values': 63, 'distinct_values': 30, 'lt05': 16, 'lt05_lt1_excluded': 16}
+    fp_intensity_v2.csv:cmh_p {'p_values': 6, 'distinct_values': 6, 'lt05': 4, 'lt05_lt1_excluded': 4}
+    fp_intensity_v2.csv:permutation_p_greater {'p_values': 6, 'distinct_values': 6, 'lt05': 4, 'lt05_lt1_excluded': 4}
+    fp_intensity_v2.csv:spearman_p {'p_values': 3, 'distinct_values': 3, 'lt05': 1, 'lt05_lt1_excluded': 1}
+    fn_intensity_v2.csv:p_amp {'p_values': 9, 'distinct_values': 9, 'lt05': 7, 'lt05_lt1_excluded': 7}
+    fn_intensity_v2.csv:p_vib_sd {'p_values': 9, 'distinct_values': 9, 'lt05': 5, 'lt05_lt1_excluded': 5}
+    position_vibration_misses_v2.csv:fisher_p_normal_vs_high {'p_values': 16, 'distinct_values': 7, 'lt05': 4, 'lt05_lt1_excluded': 4}
+    position_vibration_misses_v2.csv:fisher_p_greater {'p_values': 16, 'distinct_values': 7, 'lt05': 6, 'lt05_lt1_excluded': 6}
+    position_vibration_misses_v2.csv:fisher_p_pos01_vs_ge2_greater {'p_values': 4, 'distinct_values': 1, 'lt05': 4, 'lt05_lt1_excluded': 4}
+                                claim        p  bonferroni_all  bonferroni_36_position_table  survives_all
+   위치0-1 × 진동 정상 범위 미탐 A (README:155) 0.043889        1.000000                      1.000000         False
+   위치0-1 × 진동 정상 범위 미탐 B (README:155) 0.007389        1.000000                      0.265996         False
+ 고부하 고유 구간 α5% 단측 Fisher (README:162) 0.000002        0.000686                      0.000065          True
+           블록 층화 CMH α5% (README:142) 0.000003        0.001102                      0.000104          True
+             블록 안 순열 α5% (README:142) 0.000050        0.019000                      0.001800          True
+부하 안 진폭 중앙 이분 Fisher α5% (README:142) 0.060455        1.000000                      1.000000         False
+       부하 안 Spearman α5% (README:142) 0.000998        0.379240                      0.035928         False
+  A 진동 잡음 2σ×진폭 Spearman (README:141) 0.010823        1.000000                      0.389633         False
+[A] q90 경계 2.956: 진동 정상 범위 기록 3개(행 미탐 6/6) 대 높은 기록 18개(20/36); 행 Fisher p=0.0439; 기록 단위(0·1 모두 미탐) 3/3 대 7/18, p=0.0902
+[A] q95 경계 3.147: 진동 정상 범위 기록 3개(행 미탐 6/6) 대 높은 기록 18개(20/36); 행 Fisher p=0.0439; 기록 단위(0·1 모두 미탐) 3/3 대 7/18, p=0.0902
+[A] q99 경계 3.747: 진동 정상 범위 기록 3개(행 미탐 6/6) 대 높은 기록 18개(20/36); 행 Fisher p=0.0439; 기록 단위(0·1 모두 미탐) 3/3 대 7/18, p=0.0902
+[A] 위치 0·1에서 경보가 나려면 크기 |z| ≥ 4.677 (문턱 아래 최대 4.444); q95 경계 3.147 이하인 기록은 진동 |z|가 모두 그 아래 → 정의상 발화 불가. 그 행들의 실제 최대 크기 1.539
+[B] q90 경계 2.917: 진동 정상 범위 기록 3개(행 미탐 6/6) 대 높은 기록 18개(14/36); 행 Fisher p=0.0074; 기록 단위(0·1 모두 미탐) 3/3 대 6/18, p=0.0632
+[B] q95 경계 3.130: 진동 정상 범위 기록 3개(행 미탐 6/6) 대 높은 기록 18개(14/36); 행 Fisher p=0.0074; 기록 단위(0·1 모두 미탐) 3/3 대 6/18, p=0.0632
+[B] q99 경계 3.672: 진동 정상 범위 기록 3개(행 미탐 6/6) 대 높은 기록 18개(14/36); 행 Fisher p=0.0074; 기록 단위(0·1 모두 미탐) 3/3 대 6/18, p=0.0632
+[B] 위치 0·1에서 경보가 나려면 크기 |z| ≥ 3.776 (문턱 아래 최대 3.755); q95 경계 3.130 이하인 기록은 진동 |z|가 모두 그 아래 → 정의상 발화 불가. 그 행들의 실제 최대 크기 1.558
+
+α=0.01: 평가 단위 480(경보 3) → 고유 기록 300(경보 3); 두 번 이상 센 기록 120개; 여러 번 센 경보 기록 []
+   부하 상태: 단위 3/154 대 0/326 (Fisher p=3.26e-02) | 고유 3/112 대 0/188 (p=5.12e-02)
+block                                           30     60     100    150    300
+cut      exposed exposed_alarms other_alarms                                   
+B 학습 q75 46      2              1            0.1374 0.1040 0.0614 0.0395 0.0611
+평가 q75   59      2              1            0.1581 0.1266 0.0819 0.0645 0.0988
+평가 q90   24      2              1            0.0215 0.0110 0.0065 0.0109 0.0190
+평가 중앙    118     3              0            0.1694 0.1003 0.0411 0.0329 0.0605
+   경보 기록: [423, 461, 570]
+
+α=0.03: 평가 단위 480(경보 10) → 고유 기록 300(경보 8); 두 번 이상 센 기록 120개; 여러 번 센 경보 기록 [570]
+   부하 상태: 단위 10/154 대 0/326 (Fisher p=9.42e-06) | 고유 8/112 대 0/188 (p=3.21e-04)
+block                                           30     60     100    150    300
+cut      exposed exposed_alarms other_alarms                                   
+B 학습 q75 46      6              2            0.0028 0.0010 0.0005 0.0006 0.0001
+평가 q75   59      6              2            0.0083 0.0039 0.0019 0.0022 0.0010
+평가 q90   24      5              3            0.0005 0.0002 0.0002 0.0003 0.0001
+평가 중앙    118     8              0            0.0059 0.0035 0.0007 0.0009 0.0003
+   경보 기록: [301, 303, 342, 423, 426, 446, 461, 570]
+
+α=0.05: 평가 단위 480(경보 17) → 고유 기록 300(경보 14); 두 번 이상 센 기록 120개; 여러 번 센 경보 기록 [570, 576]
+   부하 상태: 단위 17/154 대 0/326 (Fisher p=2.15e-09) | 고유 14/112 대 0/188 (p=5.96e-07)
+block                                           30     60     100    150    300
+cut      exposed exposed_alarms other_alarms                                   
+B 학습 q75 46      10             4            0.0000 0.0000 0.0000 0.0000 0.0000
+평가 q75   59      11             3            0.0000 0.0001 0.0000 0.0000 0.0000
+평가 q90   24      9              5            0.0000 0.0000 0.0000 0.0000 0.0000
+평가 중앙    118     14             0            0.0003 0.0000 0.0000 0.0000 0.0000
+   경보 기록: [301, 303, 310, 342, 355, 367, 402, 423, 426, 446, 456, 461, 570, 576]

@@ -1,0 +1,363 @@
+{
+  "A": {
+    "sigma_current": 127.35440635287506,
+    "amplitude_sqrt2sigma": 180.10632869221018,
+    "ar2": [
+      0.10017176356137535,
+      1.833083212563616,
+      -0.9748619270345045
+    ],
+    "ar_resid_sd": 10.614358574194654,
+    "ar_resid_robust_sd": 9.718003900550201,
+    "ar_resid_sd_over_sigma": 0.08334504378893862,
+    "white_noise_gain": 2.304463026599467,
+    "sine_resid_sd": 3.5364121078506217,
+    "levels": [
+      {
+        "level": 0.02,
+        "injected_sd": 2.5470881270575014,
+        "injected_over_ar_resid_sd": 0.23996627862656858,
+        "injected_over_ar_resid_mad": 0.26209992845478214,
+        "injected_over_sine_resid_sd": 0.7202464105931318,
+        "ar_resid_sd_multiplier": 1.1427168148504008
+      },
+      {
+        "level": 0.05,
+        "injected_sd": 6.367720317643753,
+        "injected_over_ar_resid_sd": 0.5999156965664214,
+        "injected_over_ar_resid_mad": 0.6552498211369553,
+        "injected_over_sine_resid_sd": 1.8006160264828293,
+        "ar_resid_sd_multiplier": 1.7062417013385103
+      },
+      {
+        "level": 0.1,
+        "injected_sd": 12.735440635287507,
+        "injected_over_ar_resid_sd": 1.1998313931328428,
+        "injected_over_ar_resid_mad": 1.3104996422739106,
+        "injected_over_sine_resid_sd": 3.6012320529656585,
+        "ar_resid_sd_multiplier": 2.9402453934231643
+      },
+      {
+        "level": 0.2,
+        "injected_sd": 25.470881270575013,
+        "injected_over_ar_resid_sd": 2.3996627862656856,
+        "injected_over_ar_resid_mad": 2.620999284547821,
+        "injected_over_sine_resid_sd": 7.202464105931317,
+        "ar_resid_sd_multiplier": 5.619623821412297
+      },
+      {
+        "level": 0.4,
+        "injected_sd": 50.94176254115003,
+        "injected_over_ar_resid_sd": 4.799325572531371,
+        "injected_over_ar_resid_mad": 5.241998569095642,
+        "injected_over_sine_resid_sd": 14.404928211862634,
+        "ar_resid_sd_multiplier": 11.104984807587005
+      }
+    ],
+    "abs_residual_needed_for_alarm": 46.72926870876991,
+    "needed_over_ar_resid_sd": 4.402458083748637,
+    "threshold": 4.417925848290822,
+    "sigma_vib": [
+      0.07400105751231445,
+      0.12490306017921857
+    ]
+  },
+  "B": {
+    "sigma_current": 126.9367442149454,
+    "amplitude_sqrt2sigma": 179.51566523226032,
+    "ar2": [
+      0.09803182822501699,
+      1.832496243498945,
+      -0.9742301185717609
+    ],
+    "ar_resid_sd": 10.695861430096526,
+    "ar_resid_robust_sd": 9.732069119026301,
+    "ar_resid_sd_over_sigma": 0.08426134998377567,
+    "white_noise_gain": 2.303728891681938,
+    "sine_resid_sd": 3.5591965234225533,
+    "levels": [
+      {
+        "level": 0.02,
+        "injected_sd": 2.538734884298908,
+        "injected_over_ar_resid_sd": 0.2373567478310157,
+        "injected_over_ar_resid_mad": 0.2608628086431953,
+        "injected_over_sine_resid_sd": 0.7132887626720986,
+        "ar_resid_sd_multiplier": 1.139735215557533
+      },
+      {
+        "level": 0.05,
+        "injected_sd": 6.346837210747271,
+        "injected_over_ar_resid_sd": 0.5933918695775393,
+        "injected_over_ar_resid_mad": 0.6521570216079883,
+        "injected_over_sine_resid_sd": 1.7832219066802468,
+        "ar_resid_sd_multiplier": 1.6937317555880425
+      },
+      {
+        "level": 0.1,
+        "injected_sd": 12.693674421494542,
+        "injected_over_ar_resid_sd": 1.1867837391550786,
+        "injected_over_ar_resid_mad": 1.3043140432159765,
+        "injected_over_sine_resid_sd": 3.5664438133604937,
+        "ar_resid_sd_multiplier": 2.911169702980129
+      },
+      {
+        "level": 0.2,
+        "injected_sd": 25.387348842989084,
+        "injected_over_ar_resid_sd": 2.3735674783101572,
+        "injected_over_ar_resid_mad": 2.608628086431953,
+        "injected_over_sine_resid_sd": 7.132887626720987,
+        "ar_resid_sd_multiplier": 5.558744116992402
+      },
+      {
+        "level": 0.4,
+        "injected_sd": 50.77469768597817,
+        "injected_over_ar_resid_sd": 4.7471349566203145,
+        "injected_over_ar_resid_mad": 5.217256172863906,
+        "injected_over_sine_resid_sd": 14.265775253441975,
+        "ar_resid_sd_multiplier": 10.98173686776325
+      }
+    ],
+    "abs_residual_needed_for_alarm": 40.71220899526037,
+    "needed_over_ar_resid_sd": 3.806351574516701,
+    "threshold": 3.5199003630751613,
+    "sigma_vib": [
+      0.0735376304301641,
+      0.12323416341080737
+    ]
+  },
+  "rates": [
+    {
+      "split": "A",
+      "family": "cur_noise",
+      "level": 0.05,
+      "records": 75,
+      "reps": 5,
+      "trials": 375,
+      "rate": 0.39466666666666667,
+      "iid_lo": 0.34486697335875877,
+      "iid_hi": 0.44614306244401314,
+      "cluster_lo": 0.3413333333333334,
+      "cluster_hi": 0.4426666666666667,
+      "design_effect": 1.0628075092594682,
+      "records_never_detected": 7,
+      "records_always_detected": 0
+    },
+    {
+      "split": "A",
+      "family": "cur_noise",
+      "level": 0.1,
+      "records": 75,
+      "reps": 5,
+      "trials": 375,
+      "rate": 0.9546666666666667,
+      "iid_lo": 0.9284074882126516,
+      "iid_hi": 0.9733731909584006,
+      "cluster_lo": 0.9333333333333331,
+      "cluster_hi": 0.9733333333333334,
+      "design_effect": 1.0708005080335008,
+      "records_never_detected": 0,
+      "records_always_detected": 60
+    },
+    {
+      "split": "A",
+      "family": "cur_offset",
+      "level": 0.2,
+      "records": 75,
+      "reps": 1,
+      "trials": 75,
+      "rate": 0.4,
+      "iid_lo": 0.2885192274284213,
+      "iid_hi": 0.5196295307456509,
+      "cluster_lo": 0.29333333333333333,
+      "cluster_hi": 0.5066666666666667,
+      "design_effect": 1.0135135135135134,
+      "records_never_detected": 45,
+      "records_always_detected": 30
+    },
+    {
+      "split": "A",
+      "family": "cur_offset",
+      "level": 0.4,
+      "records": 75,
+      "reps": 1,
+      "trials": 75,
+      "rate": 1.0,
+      "iid_lo": 0.9520049359448577,
+      "iid_hi": 1.0,
+      "cluster_lo": 1.0,
+      "cluster_hi": 1.0,
+      "design_effect": null,
+      "records_never_detected": 0,
+      "records_always_detected": 75
+    },
+    {
+      "split": "A",
+      "family": "none",
+      "level": 0.0,
+      "records": 75,
+      "reps": 1,
+      "trials": 75,
+      "rate": 0.0,
+      "iid_lo": 0.0,
+      "iid_hi": 0.047995064055142256,
+      "cluster_lo": 0.0,
+      "cluster_hi": 0.0,
+      "design_effect": null,
+      "records_never_detected": 75,
+      "records_always_detected": 0
+    },
+    {
+      "split": "A",
+      "family": "vib_noise",
+      "level": 2.0,
+      "records": 75,
+      "reps": 5,
+      "trials": 375,
+      "rate": 0.744,
+      "iid_lo": 0.6966745372182429,
+      "iid_hi": 0.7874259709008374,
+      "cluster_lo": 0.704,
+      "cluster_hi": 0.7839999999999999,
+      "design_effect": 0.7821581662307469,
+      "records_never_detected": 0,
+      "records_always_detected": 14
+    },
+    {
+      "split": "A",
+      "family": "vib_noise",
+      "level": 4.0,
+      "records": 75,
+      "reps": 5,
+      "trials": 375,
+      "rate": 1.0,
+      "iid_lo": 0.9902112132637313,
+      "iid_hi": 1.0,
+      "cluster_lo": 1.0,
+      "cluster_hi": 1.0,
+      "design_effect": null,
+      "records_never_detected": 0,
+      "records_always_detected": 75
+    },
+    {
+      "split": "B",
+      "family": "cur_noise",
+      "level": 0.05,
+      "records": 111,
+      "reps": 5,
+      "trials": 555,
+      "rate": 0.6144144144144145,
+      "iid_lo": 0.5724971330999382,
+      "iid_hi": 0.6551067762232226,
+      "cluster_lo": 0.5675675675675675,
+      "cluster_hi": 0.6612612612612612,
+      "design_effect": 1.377001024025991,
+      "records_never_detected": 4,
+      "records_always_detected": 17
+    },
+    {
+      "split": "B",
+      "family": "cur_noise",
+      "level": 0.1,
+      "records": 111,
+      "reps": 5,
+      "trials": 555,
+      "rate": 0.9747747747747748,
+      "iid_lo": 0.9580382637185221,
+      "iid_hi": 0.9861420545246118,
+      "cluster_lo": 0.9585585585585586,
+      "cluster_hi": 0.9873873873873875,
+      "design_effect": 1.2004104952348944,
+      "records_never_detected": 0,
+      "records_always_detected": 99
+    },
+    {
+      "split": "B",
+      "family": "cur_offset",
+      "level": 0.2,
+      "records": 111,
+      "reps": 1,
+      "trials": 111,
+      "rate": 0.5225225225225225,
+      "iid_lo": 0.42560174597963574,
+      "iid_hi": 0.618211825336349,
+      "cluster_lo": 0.43243243243243246,
+      "cluster_hi": 0.6126126126126126,
+      "design_effect": 1.00909090909091,
+      "records_never_detected": 53,
+      "records_always_detected": 58
+    },
+    {
+      "split": "B",
+      "family": "cur_offset",
+      "level": 0.4,
+      "records": 111,
+      "reps": 1,
+      "trials": 111,
+      "rate": 1.0,
+      "iid_lo": 0.9673130059760523,
+      "iid_hi": 1.0,
+      "cluster_lo": 1.0,
+      "cluster_hi": 1.0,
+      "design_effect": null,
+      "records_never_detected": 0,
+      "records_always_detected": 111
+    },
+    {
+      "split": "B",
+      "family": "none",
+      "level": 0.0,
+      "records": 111,
+      "reps": 1,
+      "trials": 111,
+      "rate": 0.009009009009009009,
+      "iid_lo": 0.00022806235004637084,
+      "iid_hi": 0.04917341861152979,
+      "cluster_lo": 0.0,
+      "cluster_hi": 0.02702702702702703,
+      "design_effect": 1.0090909090909097,
+      "records_never_detected": 110,
+      "records_always_detected": 1
+    },
+    {
+      "split": "B",
+      "family": "vib_noise",
+      "level": 2.0,
+      "records": 111,
+      "reps": 5,
+      "trials": 555,
+      "rate": 0.9387387387387387,
+      "iid_lo": 0.9154425846780998,
+      "iid_hi": 0.9572053960832873,
+      "cluster_lo": 0.917117117117117,
+      "cluster_hi": 0.9585585585585586,
+      "design_effect": 1.1250731316780749,
+      "records_never_detected": 0,
+      "records_always_detected": 83
+    },
+    {
+      "split": "B",
+      "family": "vib_noise",
+      "level": 4.0,
+      "records": 111,
+      "reps": 5,
+      "trials": 555,
+      "rate": 1.0,
+      "iid_lo": 0.9933754103382061,
+      "iid_hi": 1.0,
+      "cluster_lo": 1.0,
+      "cluster_hi": 1.0,
+      "design_effect": null,
+      "records_never_detected": 0,
+      "records_always_detected": 111
+    }
+  ],
+  "observed_abnormal": {
+    "ar_resid_ratio_median": 20.23394217778963,
+    "ar_resid_ratio_min": 7.207179129732721,
+    "ar_resid_ratio_max": 30.583877140895083,
+    "records_with_value": 20,
+    "vib0_ratio_median": 5.336804556824822,
+    "vib1_ratio_median": 2.0076817932824693,
+    "cur_mean_over_A_median_abs": 0.530710759002218
+  }
+}

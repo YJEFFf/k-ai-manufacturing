@@ -1,0 +1,14 @@
+doc,line,token,kind,informative,matched,sources,context
+yejun/press_guard/README.md,107,555/600,fraction,1,0,,"- 이상 행 A 555/600·B 568/600과 B 오경보 3행이 모두 이 상한 값이다. 그래서 α 1% 경보 사이의 순위는 거의 주지 않는다(콘솔은 ""55%(모형 상한)""으로 표시)."
+yejun/press_guard/README.md,180,"35,55,63,71,83,91,95,111,115",number,1,0,,"대기열 한계가 있다. 주입 고장이 가장 앞선 오경보보다 뒤에 오는 경우가 9개 조건에서 나온다([queue_injection_ranks_v2.csv](outputs/queue_injection_ranks_v2.csv):35,55,63,71,83,91,95,111,115). B α 1%에서 전류 잡음 0.1σ 1건·오프셋 0.4 1건, 진동 잡음 2σ에서 A α 3% 4건·5% 2건·B α 3·5% 각 3건이다. 가장 큰 경우는"
+yejun/press_submission/README.md,37,"5,6,8,10,12,15,20",number,1,0,,"| `sensitivity.csv`, `sensitivity_params.csv` | 전처리 raw/matched/coarse × 분할 × 창 {5,6,8,10,12,15,20} 전 절차 재실행(구간 단위 conformal·cutoff), 성분별 꼬리 파라미터·g(1) |"
+yejun/analysis/press_evidence/README.md,47,600/20600,fraction,1,0,,"- **불균형:** 이상은 행 600/20,600=2.9%, 구간 21/621=3.4%, 기록시간 60초 대 2,000초다. 평가셋의 이상 비율은 행 기준 A 12.8%·B 9.0%이고, 전부 양성으로 예측할 때 F1은 0.227·0.164다. **A와 B의 F1은 기준선이 달라 같은 잣대로 직접 비교하지 않는다.** 대응: 정상 자료만으로 학습·보정하고 구간 단위를 주 지표로 쓴다."
+yejun/analysis/press_evidence/README.md,47,21/621,fraction,1,0,,"- **불균형:** 이상은 행 600/20,600=2.9%, 구간 21/621=3.4%, 기록시간 60초 대 2,000초다. 평가셋의 이상 비율은 행 기준 A 12.8%·B 9.0%이고, 전부 양성으로 예측할 때 F1은 0.227·0.164다. **A와 B의 F1은 기준선이 달라 같은 잣대로 직접 비교하지 않는다.** 대응: 정상 자료만으로 학습·보정하고 구간 단위를 주 지표로 쓴다."
+yejun/analysis/press_evidence/README.md,209,202/69,fraction,1,0,,"| 3σ, AI0 / AI1 / 전류 | 26 / 1 / 0 | 202 / 69 / 19 |"
+yejun/analysis/press_evidence/README.md,253,177/178,fraction,1,0,,| 짧은 공백 절반 / 긴 공백 절반 | 177 / 178 | 0.045 / 0.110 | 0.127 / 0.129 |
+yejun/analysis/press_evidence/README.md,321,"51,1,61",number,1,0,,"- 동결 B 보정 최대 점수 상위 10개는 모두 부하 기록이다(부하>저수준 단측 Mann–Whitney p=0.0024). 부하 상태의 B α=1% 3/51(5.9%)은 참고 기준 1/62보다 크다. 독립·고정위험 이항 단측 p=0.049는 공유 보정 문턱의 불확실성을 무시한다. 독립·연속·교환가능 점수 가정에서 보정 부하 61개 최대값을 공유하는 Beta-Binomial(51,1,61)의 단측 참고 p=0.0914다. 5% "
+yejun/analysis/press_supervised/README.md,6,359/360,fraction,1,0,,"- **정상 학습·보정·평가 구간은 v2와 같다**(A: 0~359 / 360~479 / 480~599, B: 0~299 / 300~419 / 420~599). 정상 평가 행은 어느 지도학습 모델의 학습에도 쓰지 않는다."
+yejun/analysis/press_supervised/README.md,6,479/480,fraction,1,0,,"- **정상 학습·보정·평가 구간은 v2와 같다**(A: 0~359 / 360~479 / 480~599, B: 0~299 / 300~419 / 420~599). 정상 평가 행은 어느 지도학습 모델의 학습에도 쓰지 않는다."
+yejun/analysis/press_supervised/README.md,6,299/300,fraction,1,0,,"- **정상 학습·보정·평가 구간은 v2와 같다**(A: 0~359 / 360~479 / 480~599, B: 0~299 / 300~419 / 420~599). 정상 평가 행은 어느 지도학습 모델의 학습에도 쓰지 않는다."
+yejun/analysis/press_supervised/README.md,6,419/420,fraction,1,0,,"- **정상 학습·보정·평가 구간은 v2와 같다**(A: 0~359 / 360~479 / 480~599, B: 0~299 / 300~419 / 420~599). 정상 평가 행은 어느 지도학습 모델의 학습에도 쓰지 않는다."
+yejun/analysis/press_supplement/README.md,111,"76,601",number,1,0,,"**UCI 원본(E2 입력).** `analysis/press_external/data/hydraulic.zip`(76,601,704바이트, SHA-256 `24128aad2ee45eea7e6b63ebbd9992cdf25d0483a2cebefbfc13bc69079af1f2`, CC BY 4.0)은 Git에서 뺐다. `acquire.py`가 UCI에서 받고 [acquisition.json](../press_external/acq"

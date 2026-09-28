@@ -1,0 +1,28 @@
+split    feature  threshold  abnormal_flagged  abnormal_records  normal_test_flagged  normal_test_records  normal_all_600_flagged
+    A     d2_max  69.141388                20                21                    0                  120                       3
+    A     d1_max  95.367432                20                21                    1                  120                       2
+    A v0_max_abs   0.332200                18                21                    0                  120                       1
+    A v1_max_abs   0.399800                17                21                    0                  120                       0
+    B     d2_max  67.949295                20                21                    1                  180                       6
+    B     d1_max  96.559525                20                21                    0                  180                       0
+    B v0_max_abs   0.277700                18                21                    3                  180                       6
+    B v1_max_abs   0.372500                17                21                    2                  180                       3
+d2_max 전체 정상 600기록 최대 73.90975979999999 | 이상 기록 중 이를 넘는 수 20 / 21
+data               abnormal   normal
+kurtosis    count    14.000  469.000
+            mean      2.871    1.538
+            std       1.585    0.091
+            min       1.636    1.346
+            5%        1.703    1.411
+            50%       2.453    1.545
+            95%       5.472    1.708
+            max       7.825    1.900
+max_over_sd count    14.000  469.000
+            mean      2.327    1.496
+            std       0.583    0.106
+            min       1.712    1.325
+            5%        1.718    1.351
+            50%       2.332    1.489
+            95%       3.129    1.698
+            max       3.768    1.895
+5.0 Hz가 최적인 이상 행 31 개, 기록 [1, 2, 3, 7, 8, 11, 12, 13, 15, 17] 위치 범위 7 49

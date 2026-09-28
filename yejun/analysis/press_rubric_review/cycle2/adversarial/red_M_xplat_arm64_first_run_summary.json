@@ -1,0 +1,140 @@
+{
+  "mode": "quick",
+  "python": "3.12.14",
+  "total_seconds": 1631.5,
+  "passed": 10,
+  "failed": 1,
+  "planned": 23,
+  "steps": [
+    {
+      "step": "v1 선행(주 모델·기준모델·행별 예측)",
+      "command": [
+        "/usr/local/bin/python",
+        "/work/yejun/press_submission/run_all.py",
+        "--steps",
+        "2"
+      ],
+      "returncode": 0,
+      "seconds": 33.7,
+      "last_line": "  fig.savefig(out / \"fig_segment_length.png\", dpi=150)",
+      "log": "press_guard/outputs/reproduce_logs/01.log"
+    },
+    {
+      "step": "v1 동결값 비교",
+      "command": [
+        "/usr/local/bin/python",
+        "/work/yejun/press_submission/verify.py",
+        "--out",
+        "outputs",
+        "--steps",
+        "2"
+      ],
+      "returncode": 0,
+      "seconds": 0.8,
+      "last_line": "16/16 통과 (1~2단계 부분 비교, 필수 집계 9개). 환경: Linux-6.8.0-50-generic-aarch64-with-glibc2.41 vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 b372a18b66af vs 동결 b372a18b66af",
+      "log": "press_guard/outputs/reproduce_logs/02.log"
+    },
+    {
+      "step": "v2 학습·시간순 5회",
+      "command": [
+        "/usr/local/bin/python",
+        "/work/yejun/press_guard/train.py",
+        "--rolling"
+      ],
+      "returncode": 0,
+      "seconds": 79.6,
+      "last_line": "    B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              180                          21                 21             0.0          0.7           ",
+      "log": "press_guard/outputs/reproduce_logs/03.log"
+    },
+    {
+      "step": "v2 분석",
+      "command": [
+        "/usr/local/bin/python",
+        "/work/yejun/press_guard/analyze.py"
+      ],
+      "returncode": 0,
+      "seconds": 445.0,
+      "last_line": "  fig.tight_layout(); fig.savefig(out / \"fig_missed_example_v2.png\", dpi=150); plt.close(fig)",
+      "log": "press_guard/outputs/reproduce_logs/04.log"
+    },
+    {
+      "step": "v2 실행 검증(audit)",
+      "command": [
+        "/usr/local/bin/python",
+        "/work/yejun/press_guard/audit.py"
+      ],
+      "returncode": 0,
+      "seconds": 581.3,
+      "last_line": "16/16 통과 → /work/yejun/press_guard/outputs/audit.json",
+      "log": "press_guard/outputs/reproduce_logs/05.log"
+    },
+    {
+      "step": "v2 동결값 비교",
+      "command": [
+        "/usr/local/bin/python",
+        "/work/yejun/press_guard/verify.py"
+      ],
+      "returncode": 0,
+      "seconds": 2.8,
+      "last_line": "53/53 통과. 코드 8b9493a24860 vs 동결 8b9493a24860; 환경 Linux-6.8.0-50-generic-aarch64-with-glibc2.41 vs 동결 macOS-26.3.1-arm64-arm-64bit",
+      "log": "press_guard/outputs/reproduce_logs/06.log"
+    },
+    {
+      "step": "진단 표(press_evidence)",
+      "command": [
+        "/usr/local/bin/python",
+        "/work/yejun/analysis/press_evidence/build_tables.py"
+      ],
+      "returncode": 0,
+      "seconds": 18.9,
+      "last_line": "    B 12 0.099174 0.099174      180               11  0.061111       0.099126          False",
+      "log": "press_guard/outputs/reproduce_logs/07.log"
+    },
+    {
+      "step": "진단 보강 표·그림",
+      "command": [
+        "/usr/local/bin/python",
+        "/work/yejun/analysis/press_evidence/build_diagnostics.py"
+      ],
+      "returncode": 0,
+      "seconds": 84.5,
+      "last_line": "  fig.savefig(path, dpi=150, bbox_inches=\"tight\", metadata={\"Software\": None})",
+      "log": "press_guard/outputs/reproduce_logs/08.log"
+    },
+    {
+      "step": "지도학습 기준선(press_supervised)",
+      "command": [
+        "/usr/local/bin/python",
+        "/work/yejun/analysis/press_supervised/run.py"
+      ],
+      "returncode": 0,
+      "seconds": 282.4,
+      "last_line": "done 281.2 s",
+      "log": "press_guard/outputs/reproduce_logs/09.log"
+    },
+    {
+      "step": "모델 선정 근거(press_selection)",
+      "command": [
+        "/usr/local/bin/python",
+        "/work/yejun/analysis/press_selection/run.py"
+      ],
+      "returncode": 0,
+      "seconds": 102.0,
+      "last_line": "내부 점검: 통과 · 101.0 s",
+      "log": "press_guard/outputs/reproduce_logs/10.log"
+    },
+    {
+      "step": "press_evidence 동결값 비교",
+      "command": [
+        "/usr/local/bin/python",
+        "/work/yejun/analysis/package_contract.py",
+        "--package",
+        "/work/yejun/analysis/press_evidence"
+      ],
+      "returncode": 1,
+      "seconds": 0.4,
+      "last_line": "실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 44개)",
+      "log": "press_guard/outputs/reproduce_logs/11.log"
+    }
+  ]
+}

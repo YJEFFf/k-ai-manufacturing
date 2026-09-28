@@ -1,0 +1,101 @@
+== (1) 분할 겹침·시간 순서
+                                        0                        1
+split                                   A                        B
+overlap_rows                            0                        0
+records_shared                          0                        0
+gap_train_cal_s                     8.482                     3.29
+gap_cal_test_s                      4.356                    3.187
+all_rows_covered                     True                     True
+train_rows                          11963                    10133
+train_records                         360                      300
+train_first_row                         0                        0
+train_last_row                      11962                    10132
+train_t_first     2022-07-12 00:00:00.019  2022-07-12 00:00:00.019
+train_t_last      2022-07-12 00:44:53.874  2022-07-12 00:37:53.946
+train_rec_first                         0                        0
+train_rec_last                        359                      299
+train_contiguous                     True                     True
+cal_rows                             3947                     3770
+cal_records                           120                      120
+cal_first_row                       11963                    10133
+cal_last_row                        15909                    13902
+cal_t_first       2022-07-12 00:45:02.356  2022-07-12 00:37:57.236
+cal_t_last        2022-07-12 01:00:45.704  2022-07-12 00:52:44.509
+cal_rec_first                         360                      300
+cal_rec_last                          479                      419
+cal_contiguous                       True                     True
+test_rows                            4090                     6097
+test_records                          120                      180
+test_first_row                      15910                    13903
+test_last_row                       19999                    19999
+test_t_first      2022-07-12 01:00:50.060  2022-07-12 00:52:47.696
+test_t_last       2022-07-12 01:16:55.828  2022-07-12 01:16:55.828
+test_rec_first                        480                      420
+test_rec_last                         599                      599
+test_contiguous                      True                     True
+완전 중복 행 2 [11564, 11565] 기록 번호 [346, 347]
+
+== (2) 원값 저장 형식
+AI0_Vibration 정상 자릿수 {-1: 17, 2: 3, 3: 22, 4: 183, 5: 1816, 6: 17958, 16: 1} | 이상 자릿수 {5: 1, 6: 7, 7: 58, 8: 264, 9: 246, 10: 23, 11: 1}
+AI1_Vibration 정상 자릿수 {-1: 17, 1: 1, 2: 1, 3: 16, 4: 195, 5: 1855, 6: 17914, 16: 1} | 이상 자릿수 {6: 4, 7: 34, 8: 394, 9: 151, 10: 15, 11: 2}
+AI2_Current 정상 자릿수 {1: 2, 2: 10, 3: 114, 4: 1042, 5: 10213, 6: 8618, 14: 1} | 이상 자릿수 {1: 2, 2: 7, 4: 23, 5: 275, 6: 207, 7: 16, 13: 1, 14: 40, 15: 20, 16: 9}
+normal 전류 격자(1.1920929) 나머지: 중앙 0.2503518391897117 <1e-3 비율 0.0013
+normal AI0_Vibration 고유값 19124 / 20000 최소 간격 9.999999999732445e-07 간격 분위(1,5,50%) [1.e-06 1.e-06 1.e-05]
+normal AI1_Vibration 고유값 19460 / 20000 최소 간격 9.999999999732445e-07 간격 분위(1,5,50%) [1.0e-06 1.0e-06 1.5e-05]
+abnormal 전류 격자(1.1920929) 나머지: 중앙 9.143582673232231e-06 <1e-3 비율 1.0
+abnormal AI0_Vibration 고유값 594 / 600 최소 간격 1.1039999999989947e-05 간격 분위(1,5,50%) [3.22276e-05 8.83000e-05 1.03756e-03]
+abnormal AI1_Vibration 고유값 597 / 600 최소 간격 1.1569999999988534e-05 간격 분위(1,5,50%) [2.25710e-05 8.10200e-05 9.89555e-04]
+normal AI0_Vibration float64→float32→float64 동일 비율 0.0001 | float32 최단 표기 값 일치율 0.99995
+normal AI1_Vibration float64→float32→float64 동일 비율 0.00025 | float32 최단 표기 값 일치율 0.99995
+normal AI2_Current float64→float32→float64 동일 비율 0.0003 | float32 최단 표기 값 일치율 0.58625
+abnormal AI0_Vibration float64→float32→float64 동일 비율 0.0 | float32 최단 표기 값 일치율 0.4083333333333333
+abnormal AI1_Vibration float64→float32→float64 동일 비율 0.0 | float32 최단 표기 값 일치율 0.47333333333333333
+abnormal AI2_Current float64→float32→float64 동일 비율 0.0033333333333333335 | float32 최단 표기 값 일치율 0.45
+
+== (3) matched 양자화 뒤 형식 흔적
+격자 복원 오차(정상, 이상) 0.0 0.0
+       sensor  modulus       chi2  dof        p  total_variation  abnormal_empty_residues  normal_empty_residues
+AI0_Vibration        2   0.027600    1 0.868052         0.004300                        0                      0
+AI0_Vibration        3   0.086324    2 0.957756         0.005417                        0                      0
+AI0_Vibration        4   0.299798    3 0.960067         0.009950                        0                      0
+AI0_Vibration        5   4.904005    4 0.297290         0.043417                        0                      0
+AI0_Vibration        8   2.961547    7 0.888537         0.031900                        0                      0
+AI0_Vibration       10   6.595519    9 0.679150         0.043417                        0                      0
+AI0_Vibration       16   6.522265   15 0.969578         0.046450                        0                      0
+AI0_Vibration      100 100.052439   99 0.451493         0.156117                        0                      0
+AI1_Vibration        2   0.617193    1 0.432092         0.017133                        0                      0
+AI1_Vibration        3   0.949708    2 0.621976         0.016850                        0                      0
+AI1_Vibration        4   2.066555    3 0.558709         0.025433                        0                      0
+AI1_Vibration        5   2.087308    4 0.719704         0.026967                        0                      0
+AI1_Vibration        8   4.171036    7 0.759880         0.035167                        0                      0
+AI1_Vibration       10   4.722409    9 0.857804         0.036917                        0                      0
+AI1_Vibration       16  17.218370   15 0.305979         0.066967                        0                      0
+AI1_Vibration      100 101.439093   99 0.413232         0.167783                        0                      0
+  AI2_Current        2   0.067319    1 0.795281         0.006233                        0                      0
+  AI2_Current        3   0.480296    2 0.786511         0.012233                        0                      0
+  AI2_Current        4   4.055323    3 0.255552         0.032333                        0                      0
+  AI2_Current        5   3.391321    4 0.494594         0.029117                        0                      0
+  AI2_Current        8  10.178769    7 0.178667         0.055300                        0                      0
+  AI2_Current       10   5.422091    9 0.796072         0.042867                        0                      0
+  AI2_Current       16  14.567599   15 0.482988         0.064533                        0                      0
+  AI2_Current      100 106.877842   99 0.276674         0.172033                        0                      0
+    data        sensor  unique_share_median  unique_share_q05  global_unique  rows
+  normal AI0_Vibration                 1.00          0.960000           3480 20000
+  normal AI1_Vibration                 1.00          0.960000           5197 20000
+  normal   AI2_Current                 0.94          0.840000            457 20000
+abnormal AI0_Vibration                 1.00          0.969750            580   600
+abnormal AI1_Vibration                 1.00          0.960000            579   600
+abnormal   AI2_Current                 0.92          0.866129            340   600
+
+== (3b) 끝자리 특징만 쓴 분류(기록 묶음 5겹)
+{'features': 'matched 격자 나머지(mod 2~16), 세 센서', 'model': 'logistic', 'row_auroc_mean': 0.48181236111111114, 'row_auroc_min': 0.47432966666666665, 'row_auroc_max': 0.48667075}
+{'features': 'matched 격자 나머지(mod 2~16), 세 센서', 'model': 'boosting', 'row_auroc_mean': 0.5006869305555556, 'row_auroc_min': 0.49519025, 'row_auroc_max': 0.5109192916666667}
+{'features': '원값 저장 소수 자릿수(양자화 전), 세 센서', 'model': 'boosting', 'row_auroc_mean': 0.99999925, 'row_auroc_min': 0.999999125, 'row_auroc_max': 0.9999993333333334}
+{'features': '원값 전류 격자 나머지(양자화 전)', 'model': 'boosting', 'row_auroc_mean': 0.9998869027777778, 'row_auroc_min': 0.99987725, 'row_auroc_max': 0.999902875}
+
+== (4) 전처리별 재적합(raw, matched) 결과
+preprocess split  tp  fp  fn       f1  normal_records  abnormal_records  threshold
+       raw     A 557   0  43 0.962835               0                21   4.420376
+       raw     B 569   3  31 0.970990               3                21   3.519549
+   matched     A 556   0  44 0.961938               0                21   4.417926
+   matched     B 569   3  31 0.970990               3                21   3.519900

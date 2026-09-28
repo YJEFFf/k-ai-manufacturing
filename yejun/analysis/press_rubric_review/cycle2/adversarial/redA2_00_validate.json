@@ -1,0 +1,20 @@
+{
+  "all_equal_team_api": true,
+  "committed_matches": "21/21",
+  "splits": [
+    "A",
+    "B",
+    "roll_300_359",
+    "roll_360_419",
+    "roll_420_479",
+    "roll_480_539",
+    "roll_540_599",
+    "rev_A",
+    "rev_B",
+    "grid_200_100",
+    "grid_150_150",
+    "grid_430_100"
+  ],
+  "elapsed_s": 101.5,
+  "ok": true
+}

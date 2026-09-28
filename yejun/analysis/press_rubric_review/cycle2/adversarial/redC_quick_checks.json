@@ -1,0 +1,30 @@
+{
+  "binom_p": 0.04929468006048789,
+  "betabinom_p": 0.09136977886977882,
+  "swap_between_false_alarm_and_missed_row": {
+    "score+p_value+anomaly_score+likelihood_ratio+anomaly_probability": {
+      "ok": true,
+      "note": "부동소수 차이만 있음",
+      "swapped_rows": [
+        112,
+        6105
+      ]
+    },
+    "anomaly_probability": {
+      "ok": true,
+      "note": "부동소수 차이만 있음",
+      "swapped_rows": [
+        112,
+        6105
+      ]
+    },
+    "record_current_rms": {
+      "ok": true,
+      "note": "부동소수 차이만 있음",
+      "swapped_rows": [
+        112,
+        6105
+      ]
+    }
+  }
+}

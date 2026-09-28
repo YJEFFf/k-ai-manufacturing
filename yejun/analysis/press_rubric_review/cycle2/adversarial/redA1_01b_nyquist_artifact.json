@@ -1,0 +1,94 @@
+{
+  "win6": {
+    "f_last": 5.0,
+    "sin_column": [
+      0.0,
+      1.2246467991473532e-16,
+      -2.4492935982947064e-16,
+      -1.4089627996560444e-15,
+      -4.898587196589413e-16,
+      6.123233995736766e-16
+    ],
+    "singular_values": [
+      2.449489742783178,
+      2.449489742783177,
+      1.5308790434960108e-15
+    ],
+    "sv_ratio": 6.249787524142002e-16,
+    "pinv_default_rcond": 1e-15,
+    "hat_trace": 1.9999999999999998,
+    "hat_rank_expected_exact_math": 2
+  },
+  "win8": {
+    "f_last": 5.0,
+    "sin_column": [
+      0.0,
+      1.2246467991473532e-16,
+      -2.4492935982947064e-16,
+      -1.4089627996560444e-15,
+      -4.898587196589413e-16,
+      6.123233995736766e-16,
+      2.817925599312089e-15,
+      -2.6954609193973537e-15
+    ],
+    "singular_values": [
+      2.82842712474619,
+      2.82842712474619,
+      3.736014367560028e-15
+    ],
+    "sv_ratio": 1.3208805469560333e-15,
+    "pinv_default_rcond": 1e-15,
+    "hat_trace": 2.9999999999999996,
+    "hat_rank_expected_exact_math": 2
+  },
+  "summary": [
+    {
+      "data": "normal",
+      "win": 6,
+      "scored_rows": 17082,
+      "team_best_at_5Hz": 0,
+      "differ_rows": 0,
+      "share_differ": 0.0,
+      "median_team_when_differ": NaN,
+      "median_clean_when_differ": NaN,
+      "max_abs_diff": 1.2387868508767497e-12
+    },
+    {
+      "data": "normal",
+      "win": 8,
+      "scored_rows": 15959,
+      "team_best_at_5Hz": 0,
+      "differ_rows": 0,
+      "share_differ": 0.0,
+      "median_team_when_differ": NaN,
+      "median_clean_when_differ": NaN,
+      "max_abs_diff": 2.4919302732406834e-13
+    },
+    {
+      "data": "abnormal",
+      "win": 6,
+      "scored_rows": 499,
+      "team_best_at_5Hz": 0,
+      "differ_rows": 0,
+      "share_differ": 0.0,
+      "median_team_when_differ": NaN,
+      "median_clean_when_differ": NaN,
+      "max_abs_diff": 1.1055378834612384e-11
+    },
+    {
+      "data": "abnormal",
+      "win": 8,
+      "scored_rows": 463,
+      "team_best_at_5Hz": 31,
+      "differ_rows": 31,
+      "share_differ": 0.06695464362850972,
+      "median_team_when_differ": 0.26146743431335573,
+      "median_clean_when_differ": 0.4066435371959984,
+      "max_abs_diff": 0.3095369575213618
+    }
+  ],
+  "alarm_flip_total": {
+    "normal": 0,
+    "abnormal": 0
+  }
+}

@@ -1,0 +1,1056 @@
+{
+  "predictions_abnormal_A.csv": {
+    "rows_old": 600,
+    "rows_new": 600,
+    "alarm_rows_old": 556,
+    "alarm_rows_new": 556,
+    "file_sha_same": false,
+    "exact_sha_same": false,
+    "columns_added": [
+      "record_current_rms",
+      "operating_state"
+    ],
+    "columns_removed": [],
+    "exact_columns_old": null,
+    "exact_columns_new": [
+      "row_id",
+      "record_id",
+      "timestamp",
+      "status",
+      "position",
+      "alarm",
+      "reason",
+      "action",
+      "waveform_window",
+      "magnitude_sensor",
+      "is_scored",
+      "criterion",
+      "model_id",
+      "protocol_version",
+      "alert_unit",
+      "beyond_calibration_length",
+      "notification",
+      "alert_level",
+      "escalation",
+      "incident_id",
+      "incident_notification",
+      "incident_escalation",
+      "incident_update",
+      "operating_state",
+      "probability_source"
+    ],
+    "numeric": {
+      "alpha": {
+        "status": "동일"
+      },
+      "anomaly_probability": {
+        "status": "동일"
+      },
+      "anomaly_score": {
+        "status": "동일"
+      },
+      "beyond_calibration_length": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          600,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "new": null
+      },
+      "current_residual": {
+        "status": "동일"
+      },
+      "g_dynamics": {
+        "status": "동일"
+      },
+      "g_magnitude": {
+        "status": "동일"
+      },
+      "g_waveform": {
+        "status": "동일"
+      },
+      "incident_escalation": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          600,
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "new": null
+      },
+      "incident_id": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          600,
+          556.0,
+          556.0,
+          0.0,
+          1.0
+        ],
+        "new": null
+      },
+      "incident_notification": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          600,
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "new": null
+      },
+      "incident_update": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          600,
+          2.0,
+          2.0,
+          0.0,
+          1.0
+        ],
+        "new": null
+      },
+      "is_scored": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          600,
+          600.0,
+          600.0,
+          1.0,
+          1.0
+        ],
+        "new": null
+      },
+      "likelihood_ratio": {
+        "status": "동일"
+      },
+      "magnitude": {
+        "status": "동일"
+      },
+      "p_value": {
+        "status": "동일"
+      },
+      "probability_prior": {
+        "status": "동일"
+      },
+      "record_current_rms": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": null,
+        "new": [
+          600,
+          44437.80686615152,
+          3877428.4607046302,
+          0.0,
+          144.97667981754483
+        ]
+      },
+      "record_likelihood_ratio": {
+        "status": "동일"
+      },
+      "record_probability": {
+        "status": "동일"
+      },
+      "score": {
+        "status": "동일"
+      },
+      "waveform_window": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          600,
+          4526.0,
+          34564.0,
+          6.0,
+          8.0
+        ],
+        "new": null
+      }
+    }
+  },
+  "predictions_abnormal_B.csv": {
+    "rows_old": 600,
+    "rows_new": 600,
+    "alarm_rows_old": 569,
+    "alarm_rows_new": 569,
+    "file_sha_same": false,
+    "exact_sha_same": false,
+    "columns_added": [
+      "record_current_rms",
+      "operating_state"
+    ],
+    "columns_removed": [],
+    "exact_columns_old": null,
+    "exact_columns_new": [
+      "row_id",
+      "record_id",
+      "timestamp",
+      "status",
+      "position",
+      "alarm",
+      "reason",
+      "action",
+      "waveform_window",
+      "magnitude_sensor",
+      "is_scored",
+      "criterion",
+      "model_id",
+      "protocol_version",
+      "alert_unit",
+      "beyond_calibration_length",
+      "notification",
+      "alert_level",
+      "escalation",
+      "incident_id",
+      "incident_notification",
+      "incident_escalation",
+      "incident_update",
+      "operating_state",
+      "probability_source"
+    ],
+    "numeric": {
+      "alpha": {
+        "status": "동일"
+      },
+      "anomaly_probability": {
+        "status": "동일"
+      },
+      "anomaly_score": {
+        "status": "동일"
+      },
+      "beyond_calibration_length": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          600,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "new": null
+      },
+      "current_residual": {
+        "status": "동일"
+      },
+      "g_dynamics": {
+        "status": "동일"
+      },
+      "g_magnitude": {
+        "status": "동일"
+      },
+      "g_waveform": {
+        "status": "동일"
+      },
+      "incident_escalation": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          600,
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "new": null
+      },
+      "incident_id": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          600,
+          569.0,
+          569.0,
+          0.0,
+          1.0
+        ],
+        "new": null
+      },
+      "incident_notification": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          600,
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "new": null
+      },
+      "incident_update": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          600,
+          2.0,
+          2.0,
+          0.0,
+          1.0
+        ],
+        "new": null
+      },
+      "is_scored": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          600,
+          600.0,
+          600.0,
+          1.0,
+          1.0
+        ],
+        "new": null
+      },
+      "likelihood_ratio": {
+        "status": "동일"
+      },
+      "magnitude": {
+        "status": "동일"
+      },
+      "p_value": {
+        "status": "동일"
+      },
+      "probability_prior": {
+        "status": "동일"
+      },
+      "record_current_rms": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": null,
+        "new": [
+          600,
+          44437.80686615152,
+          3877428.4607046302,
+          0.0,
+          144.97667981754483
+        ]
+      },
+      "record_likelihood_ratio": {
+        "status": "동일"
+      },
+      "record_probability": {
+        "status": "동일"
+      },
+      "score": {
+        "status": "동일"
+      },
+      "waveform_window": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          600,
+          4526.0,
+          34564.0,
+          6.0,
+          8.0
+        ],
+        "new": null
+      }
+    }
+  },
+  "predictions_normal_A.csv": {
+    "rows_old": 4090,
+    "rows_new": 4090,
+    "alarm_rows_old": 0,
+    "alarm_rows_new": 0,
+    "file_sha_same": false,
+    "exact_sha_same": false,
+    "columns_added": [
+      "record_current_rms",
+      "operating_state"
+    ],
+    "columns_removed": [],
+    "exact_columns_old": null,
+    "exact_columns_new": [
+      "row_id",
+      "record_id",
+      "timestamp",
+      "status",
+      "position",
+      "alarm",
+      "reason",
+      "action",
+      "waveform_window",
+      "magnitude_sensor",
+      "is_scored",
+      "criterion",
+      "model_id",
+      "protocol_version",
+      "alert_unit",
+      "beyond_calibration_length",
+      "notification",
+      "alert_level",
+      "escalation",
+      "incident_id",
+      "incident_notification",
+      "incident_escalation",
+      "incident_update",
+      "operating_state",
+      "probability_source"
+    ],
+    "numeric": {
+      "alpha": {
+        "status": "동일"
+      },
+      "anomaly_probability": {
+        "status": "동일"
+      },
+      "anomaly_score": {
+        "status": "동일"
+      },
+      "beyond_calibration_length": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          4090,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "new": null
+      },
+      "current_residual": {
+        "status": "동일"
+      },
+      "g_dynamics": {
+        "status": "동일"
+      },
+      "g_magnitude": {
+        "status": "동일"
+      },
+      "g_waveform": {
+        "status": "동일"
+      },
+      "incident_escalation": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          4090,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "new": null
+      },
+      "incident_id": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          4090,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "new": null
+      },
+      "incident_notification": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          4090,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "new": null
+      },
+      "incident_update": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          4090,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "new": null
+      },
+      "is_scored": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          4090,
+          4090.0,
+          4090.0,
+          1.0,
+          1.0
+        ],
+        "new": null
+      },
+      "likelihood_ratio": {
+        "status": "동일"
+      },
+      "magnitude": {
+        "status": "동일"
+      },
+      "p_value": {
+        "status": "동일"
+      },
+      "probability_prior": {
+        "status": "동일"
+      },
+      "record_current_rms": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": null,
+        "new": [
+          4090,
+          331310.4967231612,
+          31943106.036750935,
+          0.0,
+          196.92575383331751
+        ]
+      },
+      "record_likelihood_ratio": {
+        "status": "동일"
+      },
+      "record_probability": {
+        "status": "동일"
+      },
+      "score": {
+        "status": "동일"
+      },
+      "waveform_window": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          4090,
+          31072.0,
+          238688.0,
+          6.0,
+          8.0
+        ],
+        "new": null
+      }
+    }
+  },
+  "predictions_normal_B.csv": {
+    "rows_old": 6097,
+    "rows_new": 6097,
+    "alarm_rows_old": 3,
+    "alarm_rows_new": 3,
+    "file_sha_same": false,
+    "exact_sha_same": false,
+    "columns_added": [
+      "record_current_rms",
+      "operating_state"
+    ],
+    "columns_removed": [],
+    "exact_columns_old": null,
+    "exact_columns_new": [
+      "row_id",
+      "record_id",
+      "timestamp",
+      "status",
+      "position",
+      "alarm",
+      "reason",
+      "action",
+      "waveform_window",
+      "magnitude_sensor",
+      "is_scored",
+      "criterion",
+      "model_id",
+      "protocol_version",
+      "alert_unit",
+      "beyond_calibration_length",
+      "notification",
+      "alert_level",
+      "escalation",
+      "incident_id",
+      "incident_notification",
+      "incident_escalation",
+      "incident_update",
+      "operating_state",
+      "probability_source"
+    ],
+    "numeric": {
+      "alpha": {
+        "status": "동일"
+      },
+      "anomaly_probability": {
+        "status": "동일"
+      },
+      "anomaly_score": {
+        "status": "동일"
+      },
+      "beyond_calibration_length": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          6097,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "new": null
+      },
+      "current_residual": {
+        "status": "동일"
+      },
+      "g_dynamics": {
+        "status": "동일"
+      },
+      "g_magnitude": {
+        "status": "동일"
+      },
+      "g_waveform": {
+        "status": "동일"
+      },
+      "incident_escalation": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          6097,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "new": null
+      },
+      "incident_id": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          6097,
+          6.0,
+          14.0,
+          0.0,
+          3.0
+        ],
+        "new": null
+      },
+      "incident_notification": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          6097,
+          3.0,
+          3.0,
+          0.0,
+          1.0
+        ],
+        "new": null
+      },
+      "incident_update": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          6097,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "new": null
+      },
+      "is_scored": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          6097,
+          6097.0,
+          6097.0,
+          1.0,
+          1.0
+        ],
+        "new": null
+      },
+      "likelihood_ratio": {
+        "status": "동일"
+      },
+      "magnitude": {
+        "status": "동일"
+      },
+      "p_value": {
+        "status": "동일"
+      },
+      "probability_prior": {
+        "status": "동일"
+      },
+      "record_current_rms": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": null,
+        "new": [
+          6097,
+          534134.1377566389,
+          57240293.71816976,
+          0.0,
+          205.11505870542712
+        ]
+      },
+      "record_likelihood_ratio": {
+        "status": "동일"
+      },
+      "record_probability": {
+        "status": "동일"
+      },
+      "score": {
+        "status": "동일"
+      },
+      "waveform_window": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          6097,
+          46298.0,
+          355516.0,
+          6.0,
+          8.0
+        ],
+        "new": null
+      }
+    }
+  },
+  "test_predictions_A.csv": {
+    "rows_old": 4690,
+    "rows_new": 4690,
+    "alarm_rows_old": 556,
+    "alarm_rows_new": 556,
+    "file_sha_same": false,
+    "exact_sha_same": false,
+    "columns_added": [
+      "record_current_rms",
+      "operating_state"
+    ],
+    "columns_removed": [],
+    "exact_columns_old": null,
+    "exact_columns_new": [
+      "subset",
+      "label",
+      "row_id",
+      "record_id",
+      "timestamp",
+      "status",
+      "position",
+      "alarm",
+      "reason",
+      "action",
+      "waveform_window",
+      "magnitude_sensor",
+      "is_scored",
+      "criterion",
+      "model_id",
+      "protocol_version",
+      "alert_unit",
+      "beyond_calibration_length",
+      "notification",
+      "alert_level",
+      "escalation",
+      "incident_id",
+      "incident_notification",
+      "incident_escalation",
+      "incident_update",
+      "operating_state",
+      "probability_source"
+    ],
+    "numeric": {
+      "alpha": {
+        "status": "동일"
+      },
+      "anomaly_probability": {
+        "status": "동일"
+      },
+      "anomaly_probability_file_prior": {
+        "status": "동일"
+      },
+      "anomaly_score": {
+        "status": "동일"
+      },
+      "beyond_calibration_length": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          4690,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "new": null
+      },
+      "current_residual": {
+        "status": "동일"
+      },
+      "file_prior": {
+        "status": "동일"
+      },
+      "g_dynamics": {
+        "status": "동일"
+      },
+      "g_magnitude": {
+        "status": "동일"
+      },
+      "g_waveform": {
+        "status": "동일"
+      },
+      "incident_escalation": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          4690,
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "new": null
+      },
+      "incident_id": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          4690,
+          556.0,
+          556.0,
+          0.0,
+          1.0
+        ],
+        "new": null
+      },
+      "incident_notification": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          4690,
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "new": null
+      },
+      "incident_update": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          4690,
+          2.0,
+          2.0,
+          0.0,
+          1.0
+        ],
+        "new": null
+      },
+      "is_scored": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          4690,
+          4690.0,
+          4690.0,
+          1.0,
+          1.0
+        ],
+        "new": null
+      },
+      "likelihood_ratio": {
+        "status": "동일"
+      },
+      "magnitude": {
+        "status": "동일"
+      },
+      "p_value": {
+        "status": "동일"
+      },
+      "probability_prior": {
+        "status": "동일"
+      },
+      "record_current_rms": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": null,
+        "new": [
+          4690,
+          375748.3035893127,
+          35820534.49745557,
+          0.0,
+          196.92575383331751
+        ]
+      },
+      "record_likelihood_ratio": {
+        "status": "동일"
+      },
+      "record_probability": {
+        "status": "동일"
+      },
+      "score": {
+        "status": "동일"
+      },
+      "waveform_window": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          4690,
+          35598.0,
+          273252.0,
+          6.0,
+          8.0
+        ],
+        "new": null
+      }
+    }
+  },
+  "test_predictions_B.csv": {
+    "rows_old": 6697,
+    "rows_new": 6697,
+    "alarm_rows_old": 572,
+    "alarm_rows_new": 572,
+    "file_sha_same": false,
+    "exact_sha_same": false,
+    "columns_added": [
+      "record_current_rms",
+      "operating_state"
+    ],
+    "columns_removed": [],
+    "exact_columns_old": null,
+    "exact_columns_new": [
+      "subset",
+      "label",
+      "row_id",
+      "record_id",
+      "timestamp",
+      "status",
+      "position",
+      "alarm",
+      "reason",
+      "action",
+      "waveform_window",
+      "magnitude_sensor",
+      "is_scored",
+      "criterion",
+      "model_id",
+      "protocol_version",
+      "alert_unit",
+      "beyond_calibration_length",
+      "notification",
+      "alert_level",
+      "escalation",
+      "incident_id",
+      "incident_notification",
+      "incident_escalation",
+      "incident_update",
+      "operating_state",
+      "probability_source"
+    ],
+    "numeric": {
+      "alpha": {
+        "status": "동일"
+      },
+      "anomaly_probability": {
+        "status": "동일"
+      },
+      "anomaly_probability_file_prior": {
+        "status": "동일"
+      },
+      "anomaly_score": {
+        "status": "동일"
+      },
+      "beyond_calibration_length": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          6697,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "new": null
+      },
+      "current_residual": {
+        "status": "동일"
+      },
+      "file_prior": {
+        "status": "동일"
+      },
+      "g_dynamics": {
+        "status": "동일"
+      },
+      "g_magnitude": {
+        "status": "동일"
+      },
+      "g_waveform": {
+        "status": "동일"
+      },
+      "incident_escalation": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          6697,
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "new": null
+      },
+      "incident_id": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          6697,
+          575.0,
+          583.0,
+          0.0,
+          3.0
+        ],
+        "new": null
+      },
+      "incident_notification": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          6697,
+          4.0,
+          4.0,
+          0.0,
+          1.0
+        ],
+        "new": null
+      },
+      "incident_update": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          6697,
+          2.0,
+          2.0,
+          0.0,
+          1.0
+        ],
+        "new": null
+      },
+      "is_scored": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          6697,
+          6697.0,
+          6697.0,
+          1.0,
+          1.0
+        ],
+        "new": null
+      },
+      "likelihood_ratio": {
+        "status": "동일"
+      },
+      "magnitude": {
+        "status": "동일"
+      },
+      "p_value": {
+        "status": "동일"
+      },
+      "probability_prior": {
+        "status": "동일"
+      },
+      "record_current_rms": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": null,
+        "new": [
+          6697,
+          578571.9446227906,
+          61117722.178874396,
+          0.0,
+          205.11505870542712
+        ]
+      },
+      "record_likelihood_ratio": {
+        "status": "동일"
+      },
+      "record_probability": {
+        "status": "동일"
+      },
+      "score": {
+        "status": "동일"
+      },
+      "waveform_window": {
+        "status": "요약 열 이동(실수↔정확 비교)",
+        "old": [
+          6697,
+          50824.0,
+          390080.0,
+          6.0,
+          8.0
+        ],
+        "new": null
+      }
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "v2_fn_by_record_A": [
+    1,
+    4,
+    3,
+    5,
+    2,
+    1,
+    2,
+    0,
+    3,
+    1,
+    0,
+    1,
+    1,
+    2,
+    2,
+    4,
+    2,
+    2,
+    3,
+    2,
+    3
+  ],
+  "v2_fn_by_record_B": [
+    0,
+    2,
+    3,
+    5,
+    2,
+    1,
+    0,
+    0,
+    2,
+    0,
+    0,
+    1,
+    1,
+    2,
+    1,
+    2,
+    1,
+    0,
+    3,
+    2,
+    3
+  ],
+  "normal_alert_patterns": [
+    {
+      "normal_alerted_A": 0.0,
+      "normal_alerted_B": 0.0,
+      "configs": 11
+    },
+    {
+      "normal_alerted_A": 0.0,
+      "normal_alerted_B": 1.0,
+      "configs": 250
+    },
+    {
+      "normal_alerted_A": 0.0,
+      "normal_alerted_B": 2.0,
+      "configs": 83
+    },
+    {
+      "normal_alerted_A": 0.0,
+      "normal_alerted_B": 3.0,
+      "configs": 790
+    },
+    {
+      "normal_alerted_A": 0.0,
+      "normal_alerted_B": 4.0,
+      "configs": 240
+    },
+    {
+      "normal_alerted_A": 0.0,
+      "normal_alerted_B": 5.0,
+      "configs": 40
+    },
+    {
+      "normal_alerted_A": 0.0,
+      "normal_alerted_B": 6.0,
+      "configs": 16
+    },
+    {
+      "normal_alerted_A": 0.0,
+      "normal_alerted_B": 7.0,
+      "configs": 10
+    }
+  ]
+}

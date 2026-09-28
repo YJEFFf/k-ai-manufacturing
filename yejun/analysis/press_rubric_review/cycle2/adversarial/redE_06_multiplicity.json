@@ -1,0 +1,874 @@
+{
+  "families": {
+    "error_conditions_stats_v2.csv:fisher_p_greater": {
+      "p_values": 248,
+      "distinct_values": 31,
+      "lt05": 10,
+      "lt05_lt1_excluded": 10
+    },
+    "fp_intensity_v2.csv:fisher_p_greater": {
+      "p_values": 63,
+      "distinct_values": 30,
+      "lt05": 16,
+      "lt05_lt1_excluded": 16
+    },
+    "fp_intensity_v2.csv:cmh_p": {
+      "p_values": 6,
+      "distinct_values": 6,
+      "lt05": 4,
+      "lt05_lt1_excluded": 4
+    },
+    "fp_intensity_v2.csv:permutation_p_greater": {
+      "p_values": 6,
+      "distinct_values": 6,
+      "lt05": 4,
+      "lt05_lt1_excluded": 4
+    },
+    "fp_intensity_v2.csv:spearman_p": {
+      "p_values": 3,
+      "distinct_values": 3,
+      "lt05": 1,
+      "lt05_lt1_excluded": 1
+    },
+    "fn_intensity_v2.csv:p_amp": {
+      "p_values": 9,
+      "distinct_values": 9,
+      "lt05": 7,
+      "lt05_lt1_excluded": 7
+    },
+    "fn_intensity_v2.csv:p_vib_sd": {
+      "p_values": 9,
+      "distinct_values": 9,
+      "lt05": 5,
+      "lt05_lt1_excluded": 5
+    },
+    "position_vibration_misses_v2.csv:fisher_p_normal_vs_high": {
+      "p_values": 16,
+      "distinct_values": 7,
+      "lt05": 4,
+      "lt05_lt1_excluded": 4
+    },
+    "position_vibration_misses_v2.csv:fisher_p_greater": {
+      "p_values": 16,
+      "distinct_values": 7,
+      "lt05": 6,
+      "lt05_lt1_excluded": 6
+    },
+    "position_vibration_misses_v2.csv:fisher_p_pos01_vs_ge2_greater": {
+      "p_values": 4,
+      "distinct_values": 1,
+      "lt05": 4,
+      "lt05_lt1_excluded": 4
+    }
+  },
+  "total_p_values": 380,
+  "total_lt05": 61,
+  "cited": [
+    {
+      "claim": "위치0-1 × 진동 정상 범위 미탐 A (README:155)",
+      "p": 0.043889,
+      "bonferroni_all": 1.0,
+      "bonferroni_36_position_table": 1.0,
+      "survives_all": false
+    },
+    {
+      "claim": "위치0-1 × 진동 정상 범위 미탐 B (README:155)",
+      "p": 0.0073887878765927,
+      "bonferroni_all": 1.0,
+      "bonferroni_36_position_table": 0.2659963635573372,
+      "survives_all": false
+    },
+    {
+      "claim": "고부하 고유 구간 α5% 단측 Fisher (README:162)",
+      "p": 1.804677e-06,
+      "bonferroni_all": 0.00068577726,
+      "bonferroni_36_position_table": 6.4968372e-05,
+      "survives_all": true
+    },
+    {
+      "claim": "블록 층화 CMH α5% (README:142)",
+      "p": 2.9e-06,
+      "bonferroni_all": 0.0011020000000000001,
+      "bonferroni_36_position_table": 0.0001044,
+      "survives_all": true
+    },
+    {
+      "claim": "블록 안 순열 α5% (README:142)",
+      "p": 5e-05,
+      "bonferroni_all": 0.019,
+      "bonferroni_36_position_table": 0.0018000000000000002,
+      "survives_all": true
+    },
+    {
+      "claim": "부하 안 진폭 중앙 이분 Fisher α5% (README:142)",
+      "p": 0.0604549,
+      "bonferroni_all": 1.0,
+      "bonferroni_36_position_table": 1.0,
+      "survives_all": false
+    },
+    {
+      "claim": "부하 안 Spearman α5% (README:142)",
+      "p": 0.000998,
+      "bonferroni_all": 0.37923999999999997,
+      "bonferroni_36_position_table": 0.035928,
+      "survives_all": false
+    },
+    {
+      "claim": "A 진동 잡음 2σ×진폭 Spearman (README:141)",
+      "p": 0.0108231285365624,
+      "bonferroni_all": 1.0,
+      "bonferroni_36_position_table": 0.38963262731624637,
+      "survives_all": false
+    }
+  ],
+  "position_vibration": {
+    "A": {
+      "0.9": {
+        "cut": 2.955617815313935,
+        "records_low": 3,
+        "records_high": 18,
+        "rows_low_miss": "6/6",
+        "rows_high_miss": "20/36",
+        "p_row_fisher": 0.043888561218471366,
+        "rec_low_allmiss": "3/3",
+        "rec_high_allmiss": "7/18",
+        "p_record_fisher": 0.09022556390977444,
+        "magnitude_needed_absz": 4.677418279854822,
+        "low_records_max_vib_absz": 1.5386023595592453,
+        "low_rows01_max_magnitude": 1.5386023595592453,
+        "low_rows01_that_could_fire": 0
+      },
+      "0.95": {
+        "cut": 3.1471691319642567,
+        "records_low": 3,
+        "records_high": 18,
+        "rows_low_miss": "6/6",
+        "rows_high_miss": "20/36",
+        "p_row_fisher": 0.043888561218471366,
+        "rec_low_allmiss": "3/3",
+        "rec_high_allmiss": "7/18",
+        "p_record_fisher": 0.09022556390977444,
+        "magnitude_needed_absz": 4.677418279854822,
+        "low_records_max_vib_absz": 1.5386023595592453,
+        "low_rows01_max_magnitude": 1.5386023595592453,
+        "low_rows01_that_could_fire": 0
+      },
+      "0.99": {
+        "cut": 3.746778778968729,
+        "records_low": 3,
+        "records_high": 18,
+        "rows_low_miss": "6/6",
+        "rows_high_miss": "20/36",
+        "p_row_fisher": 0.043888561218471366,
+        "rec_low_allmiss": "3/3",
+        "rec_high_allmiss": "7/18",
+        "p_record_fisher": 0.09022556390977444,
+        "magnitude_needed_absz": 4.677418279854822,
+        "low_records_max_vib_absz": 1.5386023595592453,
+        "low_rows01_max_magnitude": 1.5386023595592453,
+        "low_rows01_that_could_fire": 0
+      }
+    },
+    "B": {
+      "0.9": {
+        "cut": 2.9169461290741623,
+        "records_low": 3,
+        "records_high": 18,
+        "rows_low_miss": "6/6",
+        "rows_high_miss": "14/36",
+        "p_row_fisher": 0.007388787876592755,
+        "rec_low_allmiss": "3/3",
+        "rec_high_allmiss": "6/18",
+        "p_record_fisher": 0.06315789473684211,
+        "magnitude_needed_absz": 3.775538202775787,
+        "low_records_max_vib_absz": 1.558158232637401,
+        "low_rows01_max_magnitude": 1.558158232637401,
+        "low_rows01_that_could_fire": 0
+      },
+      "0.95": {
+        "cut": 3.129618378799713,
+        "records_low": 3,
+        "records_high": 18,
+        "rows_low_miss": "6/6",
+        "rows_high_miss": "14/36",
+        "p_row_fisher": 0.007388787876592755,
+        "rec_low_allmiss": "3/3",
+        "rec_high_allmiss": "6/18",
+        "p_record_fisher": 0.06315789473684211,
+        "magnitude_needed_absz": 3.775538202775787,
+        "low_records_max_vib_absz": 1.558158232637401,
+        "low_rows01_max_magnitude": 1.558158232637401,
+        "low_rows01_that_could_fire": 0
+      },
+      "0.99": {
+        "cut": 3.672162557469682,
+        "records_low": 3,
+        "records_high": 18,
+        "rows_low_miss": "6/6",
+        "rows_high_miss": "14/36",
+        "p_row_fisher": 0.007388787876592755,
+        "rec_low_allmiss": "3/3",
+        "rec_high_allmiss": "6/18",
+        "p_record_fisher": 0.06315789473684211,
+        "magnitude_needed_absz": 3.775538202775787,
+        "low_records_max_vib_absz": 1.558158232637401,
+        "low_rows01_max_magnitude": 1.558158232637401,
+        "low_rows01_that_could_fire": 0
+      }
+    }
+  },
+  "fp_intensity": {
+    "0.01": {
+      "units": 480,
+      "unit_alarms": 3,
+      "unique_records": 300,
+      "unique_alarm_records": 3,
+      "records_counted_twice_or_more": 120,
+      "alarm_records_counted_more_than_once": [],
+      "load_units": "3/154",
+      "nonload_units": "0/326",
+      "load_unique": "3/112",
+      "nonload_unique": "0/188",
+      "fisher_units_load": 0.032587503603218,
+      "fisher_unique_load": 0.05115934546923751,
+      "unique_block_permutation": [
+        {
+          "cut": "B 학습 q75",
+          "cut_value": 222.8632101180933,
+          "block": 30,
+          "exposed": 46,
+          "exposed_alarms": 2,
+          "other_alarms": 1,
+          "perm_p": 0.13739313034348283
+        },
+        {
+          "cut": "B 학습 q75",
+          "cut_value": 222.8632101180933,
+          "block": 60,
+          "exposed": 46,
+          "exposed_alarms": 2,
+          "other_alarms": 1,
+          "perm_p": 0.104044797760112
+        },
+        {
+          "cut": "B 학습 q75",
+          "cut_value": 222.8632101180933,
+          "block": 100,
+          "exposed": 46,
+          "exposed_alarms": 2,
+          "other_alarms": 1,
+          "perm_p": 0.061396930153492325
+        },
+        {
+          "cut": "B 학습 q75",
+          "cut_value": 222.8632101180933,
+          "block": 150,
+          "exposed": 46,
+          "exposed_alarms": 2,
+          "other_alarms": 1,
+          "perm_p": 0.03954802259887006
+        },
+        {
+          "cut": "B 학습 q75",
+          "cut_value": 222.8632101180933,
+          "block": 300,
+          "exposed": 46,
+          "exposed_alarms": 2,
+          "other_alarms": 1,
+          "perm_p": 0.06114694265286735
+        },
+        {
+          "cut": "평가 q75",
+          "cut_value": 203.55660598783476,
+          "block": 30,
+          "exposed": 59,
+          "exposed_alarms": 2,
+          "other_alarms": 1,
+          "perm_p": 0.15809209539523023
+        },
+        {
+          "cut": "평가 q75",
+          "cut_value": 203.55660598783476,
+          "block": 60,
+          "exposed": 59,
+          "exposed_alarms": 2,
+          "other_alarms": 1,
+          "perm_p": 0.12664366781660916
+        },
+        {
+          "cut": "평가 q75",
+          "cut_value": 203.55660598783476,
+          "block": 100,
+          "exposed": 59,
+          "exposed_alarms": 2,
+          "other_alarms": 1,
+          "perm_p": 0.08189590520473976
+        },
+        {
+          "cut": "평가 q75",
+          "cut_value": 203.55660598783476,
+          "block": 150,
+          "exposed": 59,
+          "exposed_alarms": 2,
+          "other_alarms": 1,
+          "perm_p": 0.06449677516124194
+        },
+        {
+          "cut": "평가 q75",
+          "cut_value": 203.55660598783476,
+          "block": 300,
+          "exposed": 59,
+          "exposed_alarms": 2,
+          "other_alarms": 1,
+          "perm_p": 0.09884505774711265
+        },
+        {
+          "cut": "평가 중앙",
+          "cut_value": 124.30212036163336,
+          "block": 30,
+          "exposed": 118,
+          "exposed_alarms": 3,
+          "other_alarms": 0,
+          "perm_p": 0.16939153042347882
+        },
+        {
+          "cut": "평가 중앙",
+          "cut_value": 124.30212036163336,
+          "block": 60,
+          "exposed": 118,
+          "exposed_alarms": 3,
+          "other_alarms": 0,
+          "perm_p": 0.10029498525073746
+        },
+        {
+          "cut": "평가 중앙",
+          "cut_value": 124.30212036163336,
+          "block": 100,
+          "exposed": 118,
+          "exposed_alarms": 3,
+          "other_alarms": 0,
+          "perm_p": 0.041097945102744865
+        },
+        {
+          "cut": "평가 중앙",
+          "cut_value": 124.30212036163336,
+          "block": 150,
+          "exposed": 118,
+          "exposed_alarms": 3,
+          "other_alarms": 0,
+          "perm_p": 0.03289835508224589
+        },
+        {
+          "cut": "평가 중앙",
+          "cut_value": 124.30212036163336,
+          "block": 300,
+          "exposed": 118,
+          "exposed_alarms": 3,
+          "other_alarms": 0,
+          "perm_p": 0.06049697515124244
+        },
+        {
+          "cut": "평가 q90",
+          "cut_value": 245.8192105218314,
+          "block": 30,
+          "exposed": 24,
+          "exposed_alarms": 2,
+          "other_alarms": 1,
+          "perm_p": 0.021548922553872307
+        },
+        {
+          "cut": "평가 q90",
+          "cut_value": 245.8192105218314,
+          "block": 60,
+          "exposed": 24,
+          "exposed_alarms": 2,
+          "other_alarms": 1,
+          "perm_p": 0.010999450027498626
+        },
+        {
+          "cut": "평가 q90",
+          "cut_value": 245.8192105218314,
+          "block": 100,
+          "exposed": 24,
+          "exposed_alarms": 2,
+          "other_alarms": 1,
+          "perm_p": 0.006549672516374182
+        },
+        {
+          "cut": "평가 q90",
+          "cut_value": 245.8192105218314,
+          "block": 150,
+          "exposed": 24,
+          "exposed_alarms": 2,
+          "other_alarms": 1,
+          "perm_p": 0.010899455027248638
+        },
+        {
+          "cut": "평가 q90",
+          "cut_value": 245.8192105218314,
+          "block": 300,
+          "exposed": 24,
+          "exposed_alarms": 2,
+          "other_alarms": 1,
+          "perm_p": 0.01904904754762262
+        }
+      ],
+      "alarm_records": [
+        423,
+        461,
+        570
+      ],
+      "alarm_record_gaps": [
+        38,
+        109
+      ]
+    },
+    "0.03": {
+      "units": 480,
+      "unit_alarms": 10,
+      "unique_records": 300,
+      "unique_alarm_records": 8,
+      "records_counted_twice_or_more": 120,
+      "alarm_records_counted_more_than_once": [
+        570
+      ],
+      "load_units": "10/154",
+      "nonload_units": "0/326",
+      "load_unique": "8/112",
+      "nonload_unique": "0/188",
+      "fisher_units_load": 9.42289052584932e-06,
+      "fisher_unique_load": 0.000321047319190495,
+      "unique_block_permutation": [
+        {
+          "cut": "B 학습 q75",
+          "cut_value": 222.8632101180933,
+          "block": 30,
+          "exposed": 46,
+          "exposed_alarms": 6,
+          "other_alarms": 2,
+          "perm_p": 0.002849857507124644
+        },
+        {
+          "cut": "B 학습 q75",
+          "cut_value": 222.8632101180933,
+          "block": 60,
+          "exposed": 46,
+          "exposed_alarms": 6,
+          "other_alarms": 2,
+          "perm_p": 0.0010499475026248687
+        },
+        {
+          "cut": "B 학습 q75",
+          "cut_value": 222.8632101180933,
+          "block": 100,
+          "exposed": 46,
+          "exposed_alarms": 6,
+          "other_alarms": 2,
+          "perm_p": 0.0004999750012499375
+        },
+        {
+          "cut": "B 학습 q75",
+          "cut_value": 222.8632101180933,
+          "block": 150,
+          "exposed": 46,
+          "exposed_alarms": 6,
+          "other_alarms": 2,
+          "perm_p": 0.0006499675016249188
+        },
+        {
+          "cut": "B 학습 q75",
+          "cut_value": 222.8632101180933,
+          "block": 300,
+          "exposed": 46,
+          "exposed_alarms": 6,
+          "other_alarms": 2,
+          "perm_p": 9.99950002499875e-05
+        },
+        {
+          "cut": "평가 q75",
+          "cut_value": 203.55660598783476,
+          "block": 30,
+          "exposed": 59,
+          "exposed_alarms": 6,
+          "other_alarms": 2,
+          "perm_p": 0.008299585020748963
+        },
+        {
+          "cut": "평가 q75",
+          "cut_value": 203.55660598783476,
+          "block": 60,
+          "exposed": 59,
+          "exposed_alarms": 6,
+          "other_alarms": 2,
+          "perm_p": 0.0038998050097495125
+        },
+        {
+          "cut": "평가 q75",
+          "cut_value": 203.55660598783476,
+          "block": 100,
+          "exposed": 59,
+          "exposed_alarms": 6,
+          "other_alarms": 2,
+          "perm_p": 0.0019499025048747563
+        },
+        {
+          "cut": "평가 q75",
+          "cut_value": 203.55660598783476,
+          "block": 150,
+          "exposed": 59,
+          "exposed_alarms": 6,
+          "other_alarms": 2,
+          "perm_p": 0.0022498875056247186
+        },
+        {
+          "cut": "평가 q75",
+          "cut_value": 203.55660598783476,
+          "block": 300,
+          "exposed": 59,
+          "exposed_alarms": 6,
+          "other_alarms": 2,
+          "perm_p": 0.000999950002499875
+        },
+        {
+          "cut": "평가 중앙",
+          "cut_value": 124.30212036163336,
+          "block": 30,
+          "exposed": 118,
+          "exposed_alarms": 8,
+          "other_alarms": 0,
+          "perm_p": 0.0058997050147492625
+        },
+        {
+          "cut": "평가 중앙",
+          "cut_value": 124.30212036163336,
+          "block": 60,
+          "exposed": 118,
+          "exposed_alarms": 8,
+          "other_alarms": 0,
+          "perm_p": 0.0035498225088745564
+        },
+        {
+          "cut": "평가 중앙",
+          "cut_value": 124.30212036163336,
+          "block": 100,
+          "exposed": 118,
+          "exposed_alarms": 8,
+          "other_alarms": 0,
+          "perm_p": 0.0007499625018749063
+        },
+        {
+          "cut": "평가 중앙",
+          "cut_value": 124.30212036163336,
+          "block": 150,
+          "exposed": 118,
+          "exposed_alarms": 8,
+          "other_alarms": 0,
+          "perm_p": 0.0008999550022498875
+        },
+        {
+          "cut": "평가 중앙",
+          "cut_value": 124.30212036163336,
+          "block": 300,
+          "exposed": 118,
+          "exposed_alarms": 8,
+          "other_alarms": 0,
+          "perm_p": 0.00034998250087495624
+        },
+        {
+          "cut": "평가 q90",
+          "cut_value": 245.8192105218314,
+          "block": 30,
+          "exposed": 24,
+          "exposed_alarms": 5,
+          "other_alarms": 3,
+          "perm_p": 0.0004999750012499375
+        },
+        {
+          "cut": "평가 q90",
+          "cut_value": 245.8192105218314,
+          "block": 60,
+          "exposed": 24,
+          "exposed_alarms": 5,
+          "other_alarms": 3,
+          "perm_p": 0.00024998750062496874
+        },
+        {
+          "cut": "평가 q90",
+          "cut_value": 245.8192105218314,
+          "block": 100,
+          "exposed": 24,
+          "exposed_alarms": 5,
+          "other_alarms": 3,
+          "perm_p": 0.000199990000499975
+        },
+        {
+          "cut": "평가 q90",
+          "cut_value": 245.8192105218314,
+          "block": 150,
+          "exposed": 24,
+          "exposed_alarms": 5,
+          "other_alarms": 3,
+          "perm_p": 0.0002999850007499625
+        },
+        {
+          "cut": "평가 q90",
+          "cut_value": 245.8192105218314,
+          "block": 300,
+          "exposed": 24,
+          "exposed_alarms": 5,
+          "other_alarms": 3,
+          "perm_p": 0.00014999250037498125
+        }
+      ],
+      "alarm_records": [
+        301,
+        303,
+        342,
+        423,
+        426,
+        446,
+        461,
+        570
+      ],
+      "alarm_record_gaps": [
+        2,
+        39,
+        81,
+        3,
+        20,
+        15,
+        109
+      ]
+    },
+    "0.05": {
+      "units": 480,
+      "unit_alarms": 17,
+      "unique_records": 300,
+      "unique_alarm_records": 14,
+      "records_counted_twice_or_more": 120,
+      "alarm_records_counted_more_than_once": [
+        570,
+        576
+      ],
+      "load_units": "17/154",
+      "nonload_units": "0/326",
+      "load_unique": "14/112",
+      "nonload_unique": "0/188",
+      "fisher_units_load": 2.153881321491725e-09,
+      "fisher_unique_load": 5.958683064083251e-07,
+      "unique_block_permutation": [
+        {
+          "cut": "B 학습 q75",
+          "cut_value": 222.8632101180933,
+          "block": 30,
+          "exposed": 46,
+          "exposed_alarms": 10,
+          "other_alarms": 4,
+          "perm_p": 4.999750012499375e-05
+        },
+        {
+          "cut": "B 학습 q75",
+          "cut_value": 222.8632101180933,
+          "block": 60,
+          "exposed": 46,
+          "exposed_alarms": 10,
+          "other_alarms": 4,
+          "perm_p": 4.999750012499375e-05
+        },
+        {
+          "cut": "B 학습 q75",
+          "cut_value": 222.8632101180933,
+          "block": 100,
+          "exposed": 46,
+          "exposed_alarms": 10,
+          "other_alarms": 4,
+          "perm_p": 4.999750012499375e-05
+        },
+        {
+          "cut": "B 학습 q75",
+          "cut_value": 222.8632101180933,
+          "block": 150,
+          "exposed": 46,
+          "exposed_alarms": 10,
+          "other_alarms": 4,
+          "perm_p": 4.999750012499375e-05
+        },
+        {
+          "cut": "B 학습 q75",
+          "cut_value": 222.8632101180933,
+          "block": 300,
+          "exposed": 46,
+          "exposed_alarms": 10,
+          "other_alarms": 4,
+          "perm_p": 4.999750012499375e-05
+        },
+        {
+          "cut": "평가 q75",
+          "cut_value": 203.55660598783476,
+          "block": 30,
+          "exposed": 59,
+          "exposed_alarms": 11,
+          "other_alarms": 3,
+          "perm_p": 4.999750012499375e-05
+        },
+        {
+          "cut": "평가 q75",
+          "cut_value": 203.55660598783476,
+          "block": 60,
+          "exposed": 59,
+          "exposed_alarms": 11,
+          "other_alarms": 3,
+          "perm_p": 9.99950002499875e-05
+        },
+        {
+          "cut": "평가 q75",
+          "cut_value": 203.55660598783476,
+          "block": 100,
+          "exposed": 59,
+          "exposed_alarms": 11,
+          "other_alarms": 3,
+          "perm_p": 4.999750012499375e-05
+        },
+        {
+          "cut": "평가 q75",
+          "cut_value": 203.55660598783476,
+          "block": 150,
+          "exposed": 59,
+          "exposed_alarms": 11,
+          "other_alarms": 3,
+          "perm_p": 4.999750012499375e-05
+        },
+        {
+          "cut": "평가 q75",
+          "cut_value": 203.55660598783476,
+          "block": 300,
+          "exposed": 59,
+          "exposed_alarms": 11,
+          "other_alarms": 3,
+          "perm_p": 4.999750012499375e-05
+        },
+        {
+          "cut": "평가 중앙",
+          "cut_value": 124.30212036163336,
+          "block": 30,
+          "exposed": 118,
+          "exposed_alarms": 14,
+          "other_alarms": 0,
+          "perm_p": 0.0002999850007499625
+        },
+        {
+          "cut": "평가 중앙",
+          "cut_value": 124.30212036163336,
+          "block": 60,
+          "exposed": 118,
+          "exposed_alarms": 14,
+          "other_alarms": 0,
+          "perm_p": 4.999750012499375e-05
+        },
+        {
+          "cut": "평가 중앙",
+          "cut_value": 124.30212036163336,
+          "block": 100,
+          "exposed": 118,
+          "exposed_alarms": 14,
+          "other_alarms": 0,
+          "perm_p": 4.999750012499375e-05
+        },
+        {
+          "cut": "평가 중앙",
+          "cut_value": 124.30212036163336,
+          "block": 150,
+          "exposed": 118,
+          "exposed_alarms": 14,
+          "other_alarms": 0,
+          "perm_p": 4.999750012499375e-05
+        },
+        {
+          "cut": "평가 중앙",
+          "cut_value": 124.30212036163336,
+          "block": 300,
+          "exposed": 118,
+          "exposed_alarms": 14,
+          "other_alarms": 0,
+          "perm_p": 4.999750012499375e-05
+        },
+        {
+          "cut": "평가 q90",
+          "cut_value": 245.8192105218314,
+          "block": 30,
+          "exposed": 24,
+          "exposed_alarms": 9,
+          "other_alarms": 5,
+          "perm_p": 4.999750012499375e-05
+        },
+        {
+          "cut": "평가 q90",
+          "cut_value": 245.8192105218314,
+          "block": 60,
+          "exposed": 24,
+          "exposed_alarms": 9,
+          "other_alarms": 5,
+          "perm_p": 4.999750012499375e-05
+        },
+        {
+          "cut": "평가 q90",
+          "cut_value": 245.8192105218314,
+          "block": 100,
+          "exposed": 24,
+          "exposed_alarms": 9,
+          "other_alarms": 5,
+          "perm_p": 4.999750012499375e-05
+        },
+        {
+          "cut": "평가 q90",
+          "cut_value": 245.8192105218314,
+          "block": 150,
+          "exposed": 24,
+          "exposed_alarms": 9,
+          "other_alarms": 5,
+          "perm_p": 4.999750012499375e-05
+        },
+        {
+          "cut": "평가 q90",
+          "cut_value": 245.8192105218314,
+          "block": 300,
+          "exposed": 24,
+          "exposed_alarms": 9,
+          "other_alarms": 5,
+          "perm_p": 4.999750012499375e-05
+        }
+      ],
+      "alarm_records": [
+        301,
+        303,
+        310,
+        342,
+        355,
+        367,
+        402,
+        423,
+        426,
+        446,
+        456,
+        461,
+        570,
+        576
+      ],
+      "alarm_record_gaps": [
+        2,
+        7,
+        32,
+        13,
+        12,
+        35,
+        21,
+        3,
+        20,
+        10,
+        5,
+        109,
+        6
+      ]
+    }
+  }
+}

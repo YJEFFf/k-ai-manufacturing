@@ -1,0 +1,11 @@
+{
+  "경보 1행 두 기록 사이 결측 1행(2초 안)": {
+    "incident_starts": 2,
+    "escalations": 0
+  },
+  "이상 600행·시각 5% 결측": {
+    "incident_starts": 21,
+    "escalations": 21,
+    "bad_rows": 22
+  }
+}

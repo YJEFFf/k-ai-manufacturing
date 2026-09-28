@@ -1,0 +1,151 @@
+{
+  "record_one_liners": [
+    {
+      "split": "A",
+      "feature": "d2_max",
+      "threshold": 69.1413882,
+      "abnormal_flagged": 20,
+      "abnormal_records": 21,
+      "normal_test_flagged": 0,
+      "normal_test_records": 120,
+      "normal_all_600_flagged": 3
+    },
+    {
+      "split": "A",
+      "feature": "d1_max",
+      "threshold": 95.367432,
+      "abnormal_flagged": 20,
+      "abnormal_records": 21,
+      "normal_test_flagged": 1,
+      "normal_test_records": 120,
+      "normal_all_600_flagged": 2
+    },
+    {
+      "split": "A",
+      "feature": "v0_max_abs",
+      "threshold": 0.3322,
+      "abnormal_flagged": 18,
+      "abnormal_records": 21,
+      "normal_test_flagged": 0,
+      "normal_test_records": 120,
+      "normal_all_600_flagged": 1
+    },
+    {
+      "split": "A",
+      "feature": "v1_max_abs",
+      "threshold": 0.3998,
+      "abnormal_flagged": 17,
+      "abnormal_records": 21,
+      "normal_test_flagged": 0,
+      "normal_test_records": 120,
+      "normal_all_600_flagged": 0
+    },
+    {
+      "split": "B",
+      "feature": "d2_max",
+      "threshold": 67.94929529999999,
+      "abnormal_flagged": 20,
+      "abnormal_records": 21,
+      "normal_test_flagged": 1,
+      "normal_test_records": 180,
+      "normal_all_600_flagged": 6
+    },
+    {
+      "split": "B",
+      "feature": "d1_max",
+      "threshold": 96.5595249,
+      "abnormal_flagged": 20,
+      "abnormal_records": 21,
+      "normal_test_flagged": 0,
+      "normal_test_records": 180,
+      "normal_all_600_flagged": 0
+    },
+    {
+      "split": "B",
+      "feature": "v0_max_abs",
+      "threshold": 0.2777,
+      "abnormal_flagged": 18,
+      "abnormal_records": 21,
+      "normal_test_flagged": 3,
+      "normal_test_records": 180,
+      "normal_all_600_flagged": 6
+    },
+    {
+      "split": "B",
+      "feature": "v1_max_abs",
+      "threshold": 0.3725,
+      "abnormal_flagged": 17,
+      "abnormal_records": 21,
+      "normal_test_flagged": 2,
+      "normal_test_records": 180,
+      "normal_all_600_flagged": 3
+    }
+  ],
+  "kurtosis": {
+    "count": {
+      "abnormal": 14.0,
+      "normal": 469.0
+    },
+    "mean": {
+      "abnormal": 2.8709910374190666,
+      "normal": 1.5378325254091074
+    },
+    "std": {
+      "abnormal": 1.5847830541480237,
+      "normal": 0.09089553105054787
+    },
+    "min": {
+      "abnormal": 1.6358193872599218,
+      "normal": 1.3461012844078266
+    },
+    "25%": {
+      "abnormal": 1.9988933742173678,
+      "normal": 1.4630490142118384
+    },
+    "50%": {
+      "abnormal": 2.453184751141356,
+      "normal": 1.5447650197057607
+    },
+    "75%": {
+      "abnormal": 3.043498720282657,
+      "normal": 1.5765013193870385
+    },
+    "max": {
+      "abnormal": 7.824768576986136,
+      "normal": 1.9001746968862674
+    }
+  },
+  "rows_best_at_5Hz": [
+    15,
+    37,
+    38,
+    41,
+    42,
+    44,
+    53,
+    66,
+    73,
+    76,
+    98,
+    100,
+    111,
+    130,
+    131,
+    230,
+    240,
+    242,
+    255,
+    256,
+    296,
+    300,
+    337,
+    368,
+    397,
+    399,
+    434,
+    446,
+    447,
+    522,
+    523
+  ]
+}

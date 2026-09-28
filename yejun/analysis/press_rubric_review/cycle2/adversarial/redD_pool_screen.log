@@ -1,0 +1,15 @@
+기준 커밋 cc1aac2
+풀: CSV 156개, JSON 34개, 숫자 값 176,845개, 정수 행 16,686개
+문서: 수 토큰 / 정보 있는 토큰 / 그중 풀 일치 / 분수 / 분수 일치(같은 표 행)
+  yejun/press_guard/README.md: 300 / 150 / 149 / 51 / 50
+  yejun/press_guard/OPERATIONS.md: 63 / 11 / 11 / 8 / 8
+  yejun/press_guard/web/index.html: 45 / 8 / 8 / 3 / 3
+  yejun/press_submission/README.md: 41 / 11 / 10 / 4 / 4
+  yejun/press_submission/outputs/diagnosis.md: 87 / 67 / 67 / 6 / 6
+  yejun/analysis/press_evidence/README.md: 671 / 335 / 334 / 61 / 57
+  yejun/analysis/press_selection/README.md: 441 / 193 / 193 / 44 / 44
+  yejun/analysis/press_supervised/README.md: 131 / 51 / 51 / 9 / 5
+  yejun/analysis/press_supplement/README.md: 240 / 105 / 104 / 8 / 8
+  yejun/analysis/press_advance/README.md: 15 / 2 / 2 / 2 / 2
+  합계: 2034 / 933 / 929 / 196 / 187
+수동 확인 대상(정보 있는 토큰·분수 중 풀에 없음): 13개 → redD_pool_unmatched.csv

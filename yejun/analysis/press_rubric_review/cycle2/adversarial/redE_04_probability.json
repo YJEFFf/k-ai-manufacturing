@@ -1,0 +1,347 @@
+{
+  "A": {
+    "rows_cal": 3947,
+    "rows_test": 4090,
+    "rows_abn": 600,
+    "file_prior": 0.1279317697228145,
+    "fit_info": {
+      "floor": 0.04291028549820382,
+      "cap": 121.0,
+      "steps": 12,
+      "n0": 3947,
+      "n1": 600,
+      "pi_fit": 0.13195513525401364
+    },
+    "abn_rows_where_oof_lr_differs_from_in_sample": 45,
+    "abn_rows_oof_lower": 39,
+    "abn_rows_oof_higher": 6,
+    "file_vs_mine_abn_lr_maxabs": 9.71445146547012e-17,
+    "file_vs_mine_normal_lr_maxabs": 5.551115123125783e-17,
+    "file_probability_source": {
+      "deployment_calibrator": 4090,
+      "leave_one_record_out": 600
+    },
+    "file_prior_in_file": 0.1279317697228145,
+    "by_prior": [
+      {
+        "prior": "0.001",
+        "brier": 0.10351039412442899,
+        "logloss": 0.338886301852717,
+        "ece10": 0.11497942330827679,
+        "ece_q10": 0.11497942330827679,
+        "auroc": 0.9694127954360229,
+        "reliability": 0.09654332649950612,
+        "resolution": 0.10459836772303951,
+        "uncertainty": 0.11156523201840327,
+        "distinct": 33
+      },
+      {
+        "prior": "0.01(배포 기본)",
+        "brier": 0.03214095767850698,
+        "logloss": 0.12545004972374693,
+        "ece10": 0.06153370720921528,
+        "ece_q10": 0.06153370720921526,
+        "auroc": 0.9694127954360229,
+        "reliability": 0.025477011887530574,
+        "resolution": 0.1048985481009586,
+        "uncertainty": 0.11156523201840327,
+        "distinct": 33
+      },
+      {
+        "prior": "0.05",
+        "brier": 0.009308155012916385,
+        "logloss": 0.060269097373157526,
+        "ece10": 0.021499787630413592,
+        "ece_q10": 0.021499787630413582,
+        "auroc": 0.9694127954360229,
+        "reliability": 0.0026559736673385102,
+        "resolution": 0.10492725966843063,
+        "uncertainty": 0.11156523201840327,
+        "distinct": 33
+      },
+      {
+        "prior": "file_prior(라벨)",
+        "brier": 0.0072263221889069884,
+        "logloss": 0.04578887459491774,
+        "ece10": 0.007534523705139618,
+        "ece_q10": 0.007534523705139611,
+        "auroc": 0.9694127954360229,
+        "reliability": 0.0005088898797104737,
+        "resolution": 0.10482295046488377,
+        "uncertainty": 0.11156523201840327,
+        "distinct": 33
+      },
+      {
+        "prior": "0.3",
+        "brier": 0.006949485913480779,
+        "logloss": 0.04524612134983231,
+        "ece10": 0.012294855063858978,
+        "ece_q10": 0.015215650573559968,
+        "auroc": 0.9694127954360229,
+        "reliability": 0.0006030447893418006,
+        "resolution": 0.10522614185803496,
+        "uncertainty": 0.11156523201840327,
+        "distinct": 33
+      },
+      {
+        "prior": "0.5",
+        "brier": 0.007901839386873766,
+        "logloss": 0.06016437367423849,
+        "ece10": 0.03241822080992,
+        "ece_q10": 0.037489003387897214,
+        "auroc": 0.9694127954360229,
+        "reliability": 0.0013203246101197517,
+        "resolution": 0.10505561702061593,
+        "uncertainty": 0.11156523201840327,
+        "distinct": 33
+      }
+    ],
+    "team_style_median_normal": {
+      "brier": 0.007227797545144603,
+      "logloss": 0.04583012804817571,
+      "ece": 0.007494986707728503
+    },
+    "share_at_cap_all": 0.11833688699360341,
+    "share_at_floor_all": 0.8430703624733475,
+    "abn_rows_at_cap": 555,
+    "normal_rows_at_cap": 0,
+    "alarm_rows": 556,
+    "alarm_rows_at_cap": 555,
+    "distinct_lr_values": 33,
+    "rows_between_floor_and_cap": 181,
+    "probability_value_groups": 33,
+    "groups_with_both_labels": 0,
+    "rows_in_mixed_groups": 0,
+    "normal_floor_lr": 0.04291028549820382,
+    "abn_rows_lr_below_normal_floor": 18,
+    "abn_rows_lr_lt1": 31,
+    "ece_alarm_rows_file_prior": 0.05334163138537762,
+    "alarm_rows_mean_p_file_prior": 0.9466583686146224,
+    "alarm_rows_observed": 1.0,
+    "alarm_rows_observed_ci95": [
+      0.9933872855862602,
+      1.0
+    ],
+    "auroc_within_alarms": null,
+    "auroc_raw_score": 0.9775694784026079,
+    "auroc_probability": 0.9694127954360229,
+    "two_level_alarm_only_file_prior": {
+      "brier": 0.009282691618603983,
+      "logloss": 0.05210288864837264,
+      "ece": 0.00013278474265834036,
+      "brier_capped121": 0.009619775716502266,
+      "logloss_capped121": 0.058489581586689085,
+      "ece_capped121": 0.006344690952396127
+    },
+    "two_level_alarm_only_0.01": {
+      "brier": 0.009389490980718665,
+      "logloss": 0.06989148053105781,
+      "ece": 0.010313349293552905,
+      "brier_capped121": 0.03337467768419933,
+      "logloss_capped121": 0.1391687303155382,
+      "ece_capped121": 0.062075207346317635
+    },
+    "cap_sensitivity": {
+      "121.0": {
+        "p_at_cap_pi1": 0.5499999999999999,
+        "median_alarm_p_pi1": 0.5499999999999999,
+        "share_alarm_at_cap": 1.0
+      },
+      "500.0": {
+        "p_at_cap_pi1": 0.8347245409015025,
+        "median_alarm_p_pi1": 0.8347245409015025,
+        "share_alarm_at_cap": 1.0
+      },
+      "1000.0": {
+        "p_at_cap_pi1": 0.9099181073703366,
+        "median_alarm_p_pi1": 0.9099181073703366,
+        "share_alarm_at_cap": 1.0
+      },
+      "3948.0": {
+        "p_at_cap_pi1": 0.9755374351371385,
+        "median_alarm_p_pi1": 0.9755374351371385,
+        "share_alarm_at_cap": 1.0
+      },
+      "1000000000.0": {
+        "p_at_cap_pi1": 0.9999999010000098,
+        "median_alarm_p_pi1": 0.9999999010000098,
+        "share_alarm_at_cap": 1.0
+      }
+    }
+  },
+  "B": {
+    "rows_cal": 3770,
+    "rows_test": 6097,
+    "rows_abn": 600,
+    "file_prior": 0.08959235478572496,
+    "fit_info": {
+      "floor": 0.04236907170150596,
+      "cap": 121.0,
+      "steps": 14,
+      "n0": 3770,
+      "n1": 600,
+      "pi_fit": 0.13729977116704806
+    },
+    "abn_rows_where_oof_lr_differs_from_in_sample": 32,
+    "abn_rows_oof_lower": 31,
+    "abn_rows_oof_higher": 1,
+    "file_vs_mine_abn_lr_maxabs": 8.326672684688674e-17,
+    "file_vs_mine_normal_lr_maxabs": 8.326672684688674e-17,
+    "file_probability_source": {
+      "deployment_calibrator": 6097,
+      "leave_one_record_out": 600
+    },
+    "file_prior_in_file": 0.0895923547857249,
+    "by_prior": [
+      {
+        "prior": "0.001",
+        "brier": 0.07226032446409866,
+        "logloss": 0.23559568839319925,
+        "ece10": 0.08033701436422284,
+        "ece_q10": 0.08033701436422284,
+        "auroc": 0.9636307473620906,
+        "reliability": 0.06706224168047996,
+        "resolution": 0.07636665750822196,
+        "uncertainty": 0.08156556474967375,
+        "distinct": 32
+      },
+      {
+        "prior": "0.01(배포 기본)",
+        "brier": 0.022076229138505488,
+        "logloss": 0.08722510382482077,
+        "ece10": 0.042254675740718985,
+        "ece_q10": 0.042254675740719,
+        "auroc": 0.9636307473620906,
+        "reliability": 0.01702621194148399,
+        "resolution": 0.07651444630567639,
+        "uncertainty": 0.08156556474967375,
+        "distinct": 32
+      },
+      {
+        "prior": "0.05",
+        "brier": 0.006622670119325328,
+        "logloss": 0.043403872395681116,
+        "ece10": 0.013599486108677622,
+        "ece_q10": 0.0161887975983042,
+        "auroc": 0.9636307473620906,
+        "reliability": 0.0015781313822089676,
+        "resolution": 0.07652696715740666,
+        "uncertainty": 0.08156556474967375,
+        "distinct": 32
+      },
+      {
+        "prior": "file_prior(라벨)",
+        "brier": 0.005592514047599146,
+        "logloss": 0.037132059213768005,
+        "ece10": 0.006648792420829549,
+        "ece_q10": 0.012256876781623842,
+        "auroc": 0.9636307473620906,
+        "reliability": 0.0005539278002818766,
+        "resolution": 0.07653476734443988,
+        "uncertainty": 0.08156556474967375,
+        "distinct": 32
+      },
+      {
+        "prior": "0.3",
+        "brier": 0.005405191021174071,
+        "logloss": 0.0397103780155096,
+        "ece10": 0.014736517995853323,
+        "ece_q10": 0.018426909981425002,
+        "auroc": 0.9636307473620906,
+        "reliability": 0.0003491335970199112,
+        "resolution": 0.07653815066349802,
+        "uncertainty": 0.08156556474967375,
+        "distinct": 32
+      },
+      {
+        "prior": "0.5",
+        "brier": 0.006925432096532993,
+        "logloss": 0.05893546635415627,
+        "ece10": 0.03651149593783749,
+        "ece_q10": 0.04195568916167443,
+        "auroc": 0.9636307473620906,
+        "reliability": 0.0017820899336226659,
+        "resolution": 0.07653655724735635,
+        "uncertainty": 0.08156556474967375,
+        "distinct": 32
+      }
+    ],
+    "team_style_median_normal": {
+      "brier": 0.005593980836647775,
+      "logloss": 0.03718066599730949,
+      "ece": 0.0066009496663218484
+    },
+    "share_at_cap_all": 0.08526205763774825,
+    "share_at_floor_all": 0.7831865014185456,
+    "abn_rows_at_cap": 568,
+    "normal_rows_at_cap": 3,
+    "alarm_rows": 572,
+    "alarm_rows_at_cap": 571,
+    "distinct_lr_values": 32,
+    "rows_between_floor_and_cap": 881,
+    "probability_value_groups": 32,
+    "groups_with_both_labels": 1,
+    "rows_in_mixed_groups": 571,
+    "normal_floor_lr": 0.04236907170150596,
+    "abn_rows_lr_below_normal_floor": 21,
+    "abn_rows_lr_lt1": 31,
+    "ece_alarm_rows_file_prior": 0.07350581263510769,
+    "alarm_rows_mean_p_file_prior": 0.9212494321201371,
+    "alarm_rows_observed": 0.9947552447552448,
+    "alarm_rows_observed_ci95": [
+      0.9847497001331652,
+      0.9989170966527278
+    ],
+    "auroc_within_alarms": 0.4991212653778559,
+    "false_alarm_lr": [
+      121.0,
+      121.0,
+      121.0
+    ],
+    "auroc_raw_score": 0.975944590235635,
+    "auroc_probability": 0.9636307473620906,
+    "two_level_alarm_only_file_prior": {
+      "brier": 0.005054290704711628,
+      "logloss": 0.03234084342132554,
+      "ece": 0.0004216971015641734,
+      "brier_capped121": 0.005498642334104268,
+      "logloss_capped121": 0.03728003863932871,
+      "ece_capped121": 0.006264369375230576
+    },
+    "two_level_alarm_only_0.01": {
+      "brier": 0.005076159855189423,
+      "logloss": 0.03866461745902624,
+      "ece": 0.0048620815730857515,
+      "brier_capped121": 0.021965064525048237,
+      "logloss_capped121": 0.08672348128557861,
+      "ece_capped121": 0.04212894480311237
+    },
+    "cap_sensitivity": {
+      "121.0": {
+        "p_at_cap_pi1": 0.5499999999999999,
+        "median_alarm_p_pi1": 0.5499999999999999,
+        "share_alarm_at_cap": 1.0
+      },
+      "500.0": {
+        "p_at_cap_pi1": 0.8347245409015025,
+        "median_alarm_p_pi1": 0.8347245409015025,
+        "share_alarm_at_cap": 1.0
+      },
+      "1000.0": {
+        "p_at_cap_pi1": 0.9099181073703366,
+        "median_alarm_p_pi1": 0.9099181073703366,
+        "share_alarm_at_cap": 1.0
+      },
+      "3771.0": {
+        "p_at_cap_pi1": 0.9744186046511627,
+        "median_alarm_p_pi1": 0.9744186046511627,
+        "share_alarm_at_cap": 1.0
+      },
+      "1000000000.0": {
+        "p_at_cap_pi1": 0.9999999010000098,
+        "median_alarm_p_pi1": 0.9999999010000098,
+        "share_alarm_at_cap": 1.0
+      }
+    }
+  }
+}

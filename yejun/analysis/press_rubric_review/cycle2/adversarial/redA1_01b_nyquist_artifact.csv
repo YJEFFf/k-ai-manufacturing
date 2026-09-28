@@ -1,0 +1,5 @@
+data,win,scored_rows,team_best_at_5Hz,differ_rows,share_differ,median_team_when_differ,median_clean_when_differ,max_abs_diff
+normal,6,17082,0,0,0.0,,,1.2387868508767497e-12
+normal,8,15959,0,0,0.0,,,2.4919302732406834e-13
+abnormal,6,499,0,0,0.0,,,1.1055378834612384e-11
+abnormal,8,463,31,31,0.06695464362850972,0.26146743431335573,0.4066435371959984,0.3095369575213618

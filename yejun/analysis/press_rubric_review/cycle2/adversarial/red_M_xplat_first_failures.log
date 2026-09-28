@@ -1,0 +1,67 @@
+######## arm64 step 11
+$ /usr/local/bin/python /work/yejun/analysis/package_contract.py --package /work/yejun/analysis/press_evidence
+
+FAIL diagnostics_manifest.json: sources 변경(실행 기록과 다름) — yejun/analysis/press_supervised/grouped_records.csv
+FAIL diagnostics_manifest.json: cited 변경(실행 기록과 다름) — yejun/analysis/press_supervised/grouped_records.csv
+FAIL operating_states_summary.csv: 문자 열 value 불일치
+실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 44개)
+
+######## x86-64 first run step 06
+$ /usr/local/bin/python /work/yejun/press_guard/verify.py
+
+OK   outputs.integrity
+OK   inputs.sha256
+OK   expected.integrity
+OK   configuration
+OK   analysis_summary.json
+OK   metrics.csv  max|Δ|=0
+OK   rolling.csv  max|Δ|=0
+OK   cases_A.csv  max|Δ|=7e-10
+OK   cases_B.csv  max|Δ|=6.9e-10
+OK   incidents_A.csv  max|Δ|=5.7e-12
+OK   incidents_B.csv  max|Δ|=5.7e-12
+OK   model_comparison_v2.csv  max|Δ|=8.9e-16
+OK   robustness_v2.csv  max|Δ|=0
+OK   sensitivity_v2.csv  max|Δ|=2.5e-11
+OK   ablation_v2.csv  max|Δ|=8.5e-12
+OK   error_conditions_v2.csv  max|Δ|=0
+OK   error_conditions_segments_v2.csv  max|Δ|=0
+OK   interaction_2x2_v2.csv  max|Δ|=0
+OK   records_first_alarm_v2.csv  max|Δ|=0
+OK   uncertainty_v2.csv  max|Δ|=0
+OK   workload_v2.csv  max|Δ|=0
+OK   decision_table_v2.csv  max|Δ|=0
+OK   probability_eval_v2.csv  max|Δ|=6e-10
+OK   probability_reliability_v2.csv  max|Δ|=3.8e-10
+FAIL probability_conversion_v2.csv  (alarm_rows_min_lr row 5: |Δ|=5.98e-09 > 1e-09)
+OK   alert_levels_v2.csv  max|Δ|=1.1e-13
+OK   alert_budget_design_v2.csv  max|Δ|=0
+OK   queue_mixed_ranks_v2.csv  max|Δ|=7e-10
+OK   queue_injection_ranks_v2.csv  max|Δ|=0
+OK   queue_key_selection_v2.csv  max|Δ|=0
+OK   sensor_importance_v2.csv  max|Δ|=1.1e-16
+OK   position_vibration_misses_v2.csv  max|Δ|=1.1e-16
+OK   coupling_fit_v2.csv  max|Δ|=3.6e-15
+OK   coupling_records_v2.csv  max|Δ|=1.4e-14
+OK   fp_events_v2.csv  max|Δ|=2.6e-13
+OK   near_miss_v2.csv  max|Δ|=1.6e-11
+FAIL near_miss_corr_v2.csv  (spearman row 3: |Δ|=0.000299 > 1e-09)
+OK   error_conditions_stats_v2.csv  max|Δ|=1.1e-16
+OK   alert_levels_injection_v2.csv  max|Δ|=0
+OK   quality_windows_v2.csv  max|Δ|=0
+OK   label_free_alert_probability_v2.csv  max|Δ|=5.3e-15
+OK   monitor_gain_v2.csv  max|Δ|=2.2e-16
+OK   expected_effect_v2.csv  max|Δ|=1.8e-12
+OK   fp_intensity_v2.csv  max|Δ|=9.7e-17
+OK   fn_intensity_v2.csv  max|Δ|=1e-16
+OK   error_condition_summary_v2.csv  max|Δ|=2.2e-16
+OK   incident_summary_v2.csv  max|Δ|=0
+FAIL predictions_normal_A.csv  (경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름)
+FAIL predictions_normal_B.csv  (경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름)
+OK   predictions_abnormal_A.csv
+OK   predictions_abnormal_B.csv
+OK   test_predictions_A.csv
+OK   test_predictions_B.csv
+
+49/53 통과. 코드 8b9493a24860 vs 동결 8b9493a24860; 환경 Linux-6.8.0-50-generic-x86_64-with-glibc2.41 vs 동결 macOS-26.3.1-arm64-arm-64bit
+
