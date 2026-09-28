@@ -1,6 +1,6 @@
 section,item,split,value,source
 탐색 장부,"같은 이상 21구간에서 본 점수 규칙(단계별 이름 기준, 현재 HEAD)",-,"65개(선정 전 55, 선정 후 10)",search_ledger.csv
-탐색 장부,평가관 02 기준 커밋 dcd300a 시점,-,63개. 이후 3ad2452(지도학습 v2)가 가중 변형 2개(logistic_balanced·hgb_balanced)를 더해 현재 65개,"judge_02_model.md §1.3, search_ledger.csv"
+탐색 장부,커밋 dcd300a 시점,-,63개. 이후 3ad2452(지도학습 v2)가 가중 변형 2개(logistic_balanced·hgb_balanced)를 더해 현재 65개,"search_ledger.csv, git 기록(커밋 dcd300a의 표)"
 탐색 장부,이 폴더의 사후 대안(선정에 쓰지 않음),-,5NN·IF·합·AR(1)·AR(3)·AR(4)·Fisher·Stouffer·평균·지속성 2종·진폭 조건부 1종 = 12개,"same_feature_alternatives.csv, combination_rules.csv, fp_mitigation_v2.csv"
 후보 재계산,선정 전 후보 점수 규칙(원래 코드로 재계산),A,"39개, 커밋 표와 일치 39/39",candidate_universe.csv
 후보 재계산,선정 전 후보 점수 규칙(원래 코드로 재계산),B,"39개, 커밋 표와 일치 39/39",candidate_universe.csv
@@ -41,5 +41,5 @@ v1 대비 짝 비교,미탐 행 v1→v2 (Δ 95% 구간),B,86→31 (38~71행 감�
 α 트레이드오프,α=0.01,B,"v2 F1 0.971(미탐 31, 정상 알림 3) 대 v1 0.920(미탐 86, 정상 알림 3)",yejun/press_guard/outputs/metrics.csv
 α 트레이드오프,α=0.03,B,"v2 F1 0.968(미탐 31, 정상 알림 5) 대 v1 0.919(미탐 85, 정상 알림 4)",yejun/press_guard/outputs/metrics.csv
 α 트레이드오프,α=0.05,B,"v2 F1 0.964(미탐 31, 정상 알림 7) 대 v1 0.919(미탐 82, 정상 알림 6)",yejun/press_guard/outputs/metrics.csv
-한계,L1 독립 검증 없음,-,이상 21구간은 07-17 3분 연속 기록 하나이고 A·B가 공유한다. 정상과 이상은 다른 날이다,judge_02_model.md §4
-한계,L2 설계의 사후성,-,초반 창과 AR(2)는 같은 이상 자료에서 v1 미탐을 본 뒤 설계했다. 중첩 선택은 후보 사이의 선택 편향만 잰다,"judge_02_model.md §4, model.py state['selection']"
+한계,L1 독립 검증 없음,-,이상 21구간은 07-17 3분 연속 기록 하나이고 A·B가 공유한다. 정상과 이상은 다른 날이다,"press_guard/README.md 한계 절, analysis/press_evidence(날짜·수집 조건)"
+한계,L2 설계의 사후성,-,초반 창과 AR(2)는 같은 이상 자료에서 v1 미탐을 본 뒤 설계했다. 중첩 선택은 후보 사이의 선택 편향만 잰다,press_guard/model.py state['selection']

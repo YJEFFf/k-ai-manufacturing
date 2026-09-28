@@ -21,8 +21,8 @@
 
 --outcomes: 점검 결과를 기록한 대기열 CSV(콘솔 내보내기). "정상 확인"으로 닫히지 않은 건의 의심 시간창은 재보정 자료에서 뺀다
 (확인된 정상 구간만 정상 기준으로 쓴다, monitor.exclude_unconfirmed).
---windows: monitor.py의 창별 CSV에 outcome 열을 더한 파일. 변경 기록 없이 전류가 상승 이동했거나 열화가 의심되어
-"설비 점검 요청"인 창은 outcome이 "정상 확인"일 때만 남긴다. 결과가 비거나 열이 없어도 미확인으로 보고 기간 전체를 뺀다.
+--windows: monitor.py의 창별 CSV에 outcome 열을 더한 파일. 조치 대상 창(재보정 검토·설비 점검 요청)은 outcome이
+"정상 확인"일 때만 남긴다. 변경 기록이 있어도 확인을 대신하지 않는다. 결과가 비거나 열이 없으면 미확인으로 보고 기간 전체를 뺀다.
 --target-alerts-per-8h: 교대(8시간)당 1단계 알림 예산. 입력 자료의 단위 밀도로 명목·보정 95% 알림 수를 환산하고, 예산을 맞추려면
 필요한 α·보정 단위·정상 수집 시간을 보고서에 적는다(analyze.py의 alert_budget_design_v2.csv와 같은 식). 수락 여부는 바꾸지 않는다.
 """
@@ -140,7 +140,7 @@ def main(argv=None):
     ap.add_argument("--name", default="recalibrated", help="모델 split 이름(model_id에 붙는다)")
     ap.add_argument("--save-failed", action="store_true", help="수락 검사에 실패해도 모델을 저장한다(보고서에 실패가 남는다)")
     ap.add_argument("--outcomes", type=Path, help="점검 결과가 기록된 대기열 CSV. 정상 확인으로 닫히지 않은 건의 의심 시간창은 뺀다")
-    ap.add_argument("--windows", type=Path, help="monitor.py 창별 CSV(outcome 열). 설비 점검 요청 창은 정상 확인일 때만 남긴다")
+    ap.add_argument("--windows", type=Path, help="monitor.py 창별 CSV(outcome 열). 조치 대상 창은 정상 확인일 때만 남긴다")
     ap.add_argument("--target-alerts-per-8h", type=float, help="교대 8시간당 1단계 알림 예산(보고서의 설계 환산용)")
     args = ap.parse_args(argv)
     runtime.setup()

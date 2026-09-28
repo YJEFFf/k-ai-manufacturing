@@ -55,8 +55,8 @@ A,v2,0.01,abnormal,fn,amp_quartile,Q2,164,15,0.09146341463414634,154,5,0.0324675
 A,v2,0.01,abnormal,fn,amp_quartile,Q3,226,10,0.04424778761061947,216,6,0.027777777777777776,117.47617927304825,155.69316677531114,223.05575657943146,normal_train_segments,0.0
 A,v2,0.01,abnormal,fn,amp_quartile,Q4(≥q75),0,0,,0,0,,117.47617927304825,155.69316677531114,223.05575657943146,normal_train_segments,0.0
 A,v2,0.01,abnormal,fn,strongest_component,magnitude,72,29,0.4027777777777778,30,3,0.1,,,,,
-A,v2,0.01,abnormal,fn,strongest_component,waveform,382,5,0.013089005235602094,382,5,0.013089005235602094,,,,,
-A,v2,0.01,abnormal,fn,strongest_component,dynamics,146,10,0.0684931506849315,146,10,0.0684931506849315,,,,,
+A,v2,0.01,abnormal,fn,strongest_component,waveform,390,5,0.01282051282051282,390,5,0.01282051282051282,,,,,
+A,v2,0.01,abnormal,fn,strongest_component,dynamics,138,10,0.07246376811594203,138,10,0.07246376811594203,,,,,
 A,v2,0.01,abnormal,fn,strongest_component,none,0,0,,0,0,,,,,,
 A,v2,0.01,normal,fp,pos_bin,0,120,0,0.0,0,0,,,,,,
 A,v2,0.01,normal,fp,pos_bin,1,119,0,0.0,0,0,,,,,,
@@ -100,8 +100,8 @@ A,v2,0.03,abnormal,fn,amp_quartile,Q2,164,12,0.07317073170731707,154,4,0.0259740
 A,v2,0.03,abnormal,fn,amp_quartile,Q3,226,3,0.01327433628318584,216,1,0.004629629629629629,117.47617927304825,155.69316677531114,223.05575657943146,normal_train_segments,0.0
 A,v2,0.03,abnormal,fn,amp_quartile,Q4(≥q75),0,0,,0,0,,117.47617927304825,155.69316677531114,223.05575657943146,normal_train_segments,0.0
 A,v2,0.03,abnormal,fn,strongest_component,magnitude,72,23,0.3194444444444444,30,3,0.1,,,,,
-A,v2,0.03,abnormal,fn,strongest_component,waveform,382,1,0.002617801047120419,382,1,0.002617801047120419,,,,,
-A,v2,0.03,abnormal,fn,strongest_component,dynamics,146,7,0.04794520547945205,146,7,0.04794520547945205,,,,,
+A,v2,0.03,abnormal,fn,strongest_component,waveform,390,1,0.002564102564102564,390,1,0.002564102564102564,,,,,
+A,v2,0.03,abnormal,fn,strongest_component,dynamics,138,7,0.050724637681159424,138,7,0.050724637681159424,,,,,
 A,v2,0.03,abnormal,fn,strongest_component,none,0,0,,0,0,,,,,,
 A,v2,0.03,normal,fp,pos_bin,0,120,0,0.0,0,0,,,,,,
 A,v2,0.03,normal,fp,pos_bin,1,119,0,0.0,0,0,,,,,,
@@ -145,8 +145,8 @@ A,v2,0.05,abnormal,fn,amp_quartile,Q2,164,12,0.07317073170731707,154,4,0.0259740
 A,v2,0.05,abnormal,fn,amp_quartile,Q3,226,3,0.01327433628318584,216,1,0.004629629629629629,117.47617927304825,155.69316677531114,223.05575657943146,normal_train_segments,0.0
 A,v2,0.05,abnormal,fn,amp_quartile,Q4(≥q75),0,0,,0,0,,117.47617927304825,155.69316677531114,223.05575657943146,normal_train_segments,0.0
 A,v2,0.05,abnormal,fn,strongest_component,magnitude,72,23,0.3194444444444444,30,3,0.1,,,,,
-A,v2,0.05,abnormal,fn,strongest_component,waveform,382,1,0.002617801047120419,382,1,0.002617801047120419,,,,,
-A,v2,0.05,abnormal,fn,strongest_component,dynamics,146,7,0.04794520547945205,146,7,0.04794520547945205,,,,,
+A,v2,0.05,abnormal,fn,strongest_component,waveform,390,1,0.002564102564102564,390,1,0.002564102564102564,,,,,
+A,v2,0.05,abnormal,fn,strongest_component,dynamics,138,7,0.050724637681159424,138,7,0.050724637681159424,,,,,
 A,v2,0.05,abnormal,fn,strongest_component,none,0,0,,0,0,,,,,,
 A,v2,0.05,normal,fp,pos_bin,0,120,0,0.0,0,0,,,,,,
 A,v2,0.05,normal,fp,pos_bin,1,119,0,0.0,0,0,,,,,,
@@ -227,8 +227,8 @@ B,v2,0.01,abnormal,fn,amp_quartile,Q2,214,13,0.06074766355140187,202,5,0.0247524
 B,v2,0.01,abnormal,fn,amp_quartile,Q3,176,2,0.011363636363636364,168,0,0.0,116.72056294651262,158.06452023804113,222.8632101180933,normal_train_segments,0.0
 B,v2,0.01,abnormal,fn,amp_quartile,Q4(≥q75),0,0,,0,0,,116.72056294651262,158.06452023804113,222.8632101180933,normal_train_segments,0.0
 B,v2,0.01,abnormal,fn,strongest_component,magnitude,72,23,0.3194444444444444,30,3,0.1,,,,,
-B,v2,0.01,abnormal,fn,strongest_component,waveform,387,1,0.002583979328165375,387,1,0.002583979328165375,,,,,
-B,v2,0.01,abnormal,fn,strongest_component,dynamics,141,7,0.04964539007092199,141,7,0.04964539007092199,,,,,
+B,v2,0.01,abnormal,fn,strongest_component,waveform,395,1,0.002531645569620253,395,1,0.002531645569620253,,,,,
+B,v2,0.01,abnormal,fn,strongest_component,dynamics,133,7,0.05263157894736842,133,7,0.05263157894736842,,,,,
 B,v2,0.01,abnormal,fn,strongest_component,none,0,0,,0,0,,,,,,
 B,v2,0.01,normal,fp,pos_bin,0,180,0,0.0,0,0,,,,,,
 B,v2,0.01,normal,fp,pos_bin,1,179,0,0.0,0,0,,,,,,
@@ -272,8 +272,8 @@ B,v2,0.03,abnormal,fn,amp_quartile,Q2,214,13,0.06074766355140187,202,5,0.0247524
 B,v2,0.03,abnormal,fn,amp_quartile,Q3,176,2,0.011363636363636364,168,0,0.0,116.72056294651262,158.06452023804113,222.8632101180933,normal_train_segments,0.0
 B,v2,0.03,abnormal,fn,amp_quartile,Q4(≥q75),0,0,,0,0,,116.72056294651262,158.06452023804113,222.8632101180933,normal_train_segments,0.0
 B,v2,0.03,abnormal,fn,strongest_component,magnitude,72,23,0.3194444444444444,30,3,0.1,,,,,
-B,v2,0.03,abnormal,fn,strongest_component,waveform,387,1,0.002583979328165375,387,1,0.002583979328165375,,,,,
-B,v2,0.03,abnormal,fn,strongest_component,dynamics,141,7,0.04964539007092199,141,7,0.04964539007092199,,,,,
+B,v2,0.03,abnormal,fn,strongest_component,waveform,395,1,0.002531645569620253,395,1,0.002531645569620253,,,,,
+B,v2,0.03,abnormal,fn,strongest_component,dynamics,133,7,0.05263157894736842,133,7,0.05263157894736842,,,,,
 B,v2,0.03,abnormal,fn,strongest_component,none,0,0,,0,0,,,,,,
 B,v2,0.03,normal,fp,pos_bin,0,180,0,0.0,0,0,,,,,,
 B,v2,0.03,normal,fp,pos_bin,1,179,0,0.0,0,0,,,,,,
@@ -317,8 +317,8 @@ B,v2,0.05,abnormal,fn,amp_quartile,Q2,214,13,0.06074766355140187,202,5,0.0247524
 B,v2,0.05,abnormal,fn,amp_quartile,Q3,176,2,0.011363636363636364,168,0,0.0,116.72056294651262,158.06452023804113,222.8632101180933,normal_train_segments,0.0
 B,v2,0.05,abnormal,fn,amp_quartile,Q4(≥q75),0,0,,0,0,,116.72056294651262,158.06452023804113,222.8632101180933,normal_train_segments,0.0
 B,v2,0.05,abnormal,fn,strongest_component,magnitude,72,23,0.3194444444444444,30,3,0.1,,,,,
-B,v2,0.05,abnormal,fn,strongest_component,waveform,387,1,0.002583979328165375,387,1,0.002583979328165375,,,,,
-B,v2,0.05,abnormal,fn,strongest_component,dynamics,141,7,0.04964539007092199,141,7,0.04964539007092199,,,,,
+B,v2,0.05,abnormal,fn,strongest_component,waveform,395,1,0.002531645569620253,395,1,0.002531645569620253,,,,,
+B,v2,0.05,abnormal,fn,strongest_component,dynamics,133,7,0.05263157894736842,133,7,0.05263157894736842,,,,,
 B,v2,0.05,abnormal,fn,strongest_component,none,0,0,,0,0,,,,,,
 B,v2,0.05,normal,fp,pos_bin,0,180,0,0.0,0,0,,,,,,
 B,v2,0.05,normal,fp,pos_bin,1,179,0,0.0,0,0,,,,,,

@@ -777,9 +777,9 @@ def selection_evidence(ledger, universe, nested, nested_meta, paired_summary, si
     rows.append(dict(section="탐색 장부", item="같은 이상 21구간에서 본 점수 규칙(단계별 이름 기준, 현재 HEAD)", split="-",
                      value=f"{int(ledger.rules.sum())}개(선정 전 {int(before.rules.sum())}, 선정 후 {int(ledger.rules.sum() - before.rules.sum())})",
                      source="search_ledger.csv"))
-    rows.append(dict(section="탐색 장부", item="평가관 02 기준 커밋 dcd300a 시점", split="-",
+    rows.append(dict(section="탐색 장부", item="커밋 dcd300a 시점", split="-",
                      value="63개. 이후 3ad2452(지도학습 v2)가 가중 변형 2개(logistic_balanced·hgb_balanced)를 더해 현재 65개",
-                     source="judge_02_model.md §1.3, search_ledger.csv"))
+                     source="search_ledger.csv, git 기록(커밋 dcd300a의 표)"))
     rows.append(dict(section="탐색 장부", item="이 폴더의 사후 대안(선정에 쓰지 않음)", split="-",
                      value="5NN·IF·합·AR(1)·AR(3)·AR(4)·Fisher·Stouffer·평균·지속성 2종·진폭 조건부 1종 = 12개",
                      source="same_feature_alternatives.csv, combination_rules.csv, fp_mitigation_v2.csv"))
@@ -821,10 +821,10 @@ def selection_evidence(ledger, universe, nested, nested_meta, paired_summary, si
                          source=f"{p['protocol']} · {p['result']}"))
     rows += tradeoff_rows()
     rows.append(dict(section="한계", item="L1 독립 검증 없음", split="-",
-                     value="이상 21구간은 07-17 3분 연속 기록 하나이고 A·B가 공유한다. 정상과 이상은 다른 날이다", source="judge_02_model.md §4"))
+                     value="이상 21구간은 07-17 3분 연속 기록 하나이고 A·B가 공유한다. 정상과 이상은 다른 날이다", source="press_guard/README.md 한계 절, analysis/press_evidence(날짜·수집 조건)"))
     rows.append(dict(section="한계", item="L2 설계의 사후성", split="-",
                      value="초반 창과 AR(2)는 같은 이상 자료에서 v1 미탐을 본 뒤 설계했다. 중첩 선택은 후보 사이의 선택 편향만 잰다",
-                     source="judge_02_model.md §4, model.py state['selection']"))
+                     source="press_guard/model.py state['selection']"))
     return pd.DataFrame(rows)
 
 

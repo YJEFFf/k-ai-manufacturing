@@ -1,0 +1,6 @@
+x86_64 win 6 trace@5Hz default 2.0 stable 2.0
+x86_64 win 8 trace@5Hz default 3.0 stable 2.0
+arm64 win 6 trace@5Hz default 2.0 stable 2.0
+win 6 max|stable_mac - stable_x86| 1.4551915228366852e-11  max|default_mac - default_x86| (5 Hz 포함 전 격자) 1.4551915228366852e-11  5 Hz만 2.220446049250313e-16
+arm64 win 8 trace@5Hz default 3.0 stable 2.0
+win 8 max|stable_mac - stable_x86| 9.094947017729282e-12  max|default_mac - default_x86| (5 Hz 포함 전 격자) 9.094947017729282e-12  5 Hz만 1.6653345369377348e-16

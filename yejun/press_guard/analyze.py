@@ -520,6 +520,8 @@ def main():
     extra["fn_intensity_v2.csv"] = insights.fn_intensity(normal, models)
     extra["incident_summary_v2.csv"] = insights.incident_summary(normal, abnormal, models)
     extra["near_miss_v2.csv"], extra["near_miss_corr_v2.csv"] = insights.near_miss(normal, models)
+    extra["unit_results_v2.csv"] = insights.unit_results(normal, abnormal, models)
+    extra["probability_baselines_v2.csv"] = insights.probability_baselines(normal, models, args.out)
     extra["error_conditions_stats_v2.csv"] = insights.condition_stats(segc)
     for name, table in extra.items():
         table.to_csv(args.out / name, index=False)

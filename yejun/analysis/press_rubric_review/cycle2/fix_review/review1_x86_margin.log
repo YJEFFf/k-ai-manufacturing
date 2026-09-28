@@ -1,0 +1,14 @@
+                          file             column     abs_diff        bound    ratio       mac       x86
+ probability_conversion_v2.csv  alarm_rows_min_lr 5.982745e-09 3.423015e-09 1.747800  2.423015  2.423015
+       probability_eval_v2.csv           log_loss 6.812410e-10 1.032123e-09 0.660039  0.032123  0.032123
+       probability_eval_v2.csv                ece 5.681159e-10 1.003583e-09 0.566088  0.003583  0.003583
+ probability_conversion_v2.csv   alarm_rows_min_p 4.126497e-10 1.212117e-09 0.340437  0.212117  0.212117
+probability_reliability_v2.csv     mean_predicted 3.838672e-10 1.192537e-09 0.321891  0.192537  0.192537
+         near_miss_corr_v2.csv           spearman 2.986329e-04 1.000000e-03 0.298633  0.199897  0.200195
+       probability_eval_v2.csv              brier 2.147987e-10 1.005486e-09 0.213627  0.005486  0.005486
+ probability_conversion_v2.csv     iso_step_right 1.157918e-10 4.560817e-09 0.025388  3.560817  3.560817
+      queue_mixed_ranks_v2.csv         peak_score 7.033236e-10 4.446182e-08 0.015819 43.461820 43.461820
+                   cases_A.csv         peak_score 7.033236e-10 4.446182e-08 0.015819 43.461820 43.461820
+                   cases_B.csv         peak_score 6.907399e-10 4.491236e-08 0.015380 43.912356 43.912356
+              near_miss_v2.csv ratio_to_threshold 1.571721e-11 1.625130e-09 0.009671  0.625130  0.625130
+한계를 넘는 열: 1 | 한계의 10% 넘는 열: 7

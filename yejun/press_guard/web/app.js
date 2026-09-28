@@ -15,7 +15,18 @@
   const LEVEL = { 1: '주의', 2: '점검 요청' };
   const OPERATING_STATE = { load: '부하', low: '저수준', short: '판정 대기(17행 미만)' };
   const stateLabel = value => String(value || 'short').split('+').map(s => OPERATING_STATE[s] || s).join(' · ');
-  const normalStateReference = '대회 B α 1% 정상 참고: 부하 3/51 · 저수준 0/94(17행 이상 기록, 같은 날 사후 분석). 현장 오경보율 보장은 아닙니다.';
+  // 운전 상태별 대회 정상 알림 참고율: 동결 A·B와 시간순 폴드 등 보정값이 다른 적합 5개를 합친 평가 단위(fp_intensity_v2.csv).
+  // 분석한 α에 맞춰 보인다. 17행 미만(판정 대기)이면 상태 참고율을 쓰지 않는다.
+  function normalStateReference(c) {
+    const alpha = state.result ? Number(state.result.alpha) : 0.01;
+    const rows = ((state.overview && state.overview.state_reference) || []).filter(r => Math.abs(Number(r.alpha) - alpha) < 1e-9);
+    const cell = key => { const r = rows.find(x => x.value === key); return r ? `${fmt.int(r.false_alarms)}/${fmt.int(r.denominator)}` : '—'; };
+    const ref = `대회 정상 평가 α ${fmt.pct(alpha, 0)}(보정값이 다른 적합 5개 합침) 참고: 부하 ${cell('load')} · 저수준 ${cell('low')} · 17행 미만 ${cell('short')}. 같은 날 사후 분석이며 현장 오경보율 보장은 아닙니다.`;
+    const value = String((c && c.operating_state) || 'short');
+    return value.split('+').includes('short') && !value.split('+').some(s => s === 'load' || s === 'low')
+      ? `상태 판정 대기(기록 17행 미만): 상태 참고율을 쓰지 말고 같은 기록의 17행째(1.6초 뒤)나 다음 기록에서 상태를 확인하세요. ${ref}`
+      : ref;
+  }
   function operatingStateText(c) {
     let value = c.operating_state, rms = c.record_current_rms;
     if (state.sim) {
@@ -352,7 +363,7 @@
     summary.querySelectorAll('.case-tabs button').forEach(el => el.addEventListener('click', () => selectIncident(inc.incident_id, Number(el.dataset.case))));
     $('action').textContent = c.action || '—';
     const rule = ((state.overview && state.overview.decision_table) || []).find(r => r.action === c.action);
-    $('checklist').textContent = `먼저 운전 상태 확인: ${operatingStateText(c)}. ${normalStateReference} ` + (rule ? `점검 항목(가설): ${rule.checklist} · 고장 모드 후보 ${rule.failure_modes}` : '관측 이상에 대한 확인 순서입니다. 고장 원인 확정이나 자동 정지 명령이 아닙니다.');
+    $('checklist').textContent = `먼저 운전 상태 확인: ${operatingStateText(c)}. ${normalStateReference(c)} ` + (rule ? `점검 항목(가설): ${rule.checklist} · 고장 모드 후보 ${rule.failure_modes}` : '관측 이상에 대한 확인 순서입니다. 고장 원인 확정이나 자동 정지 명령이 아닙니다.');
     $('quality-action').textContent = inc.quality_action || '—';
     $('suspect').textContent = Number(inc.suspect_open) === 1
       ? `의심 생산 시간창(사건): ${inc.suspect_from ? fmt.time(inc.suspect_from) : '자료 처음'} ~ ${inc.suspect_to ? fmt.time(inc.suspect_to) : '진행 중'} (열림 · 다음 정상 기록을 확인할 때까지)`

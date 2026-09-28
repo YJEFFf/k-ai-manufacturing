@@ -15,7 +15,8 @@
    자동으로 재보정하지 않는다. 창의 알림 근거 구성(진동 크기·전류 성분 경보 행 비율)을 함께 적는다.
 4) 결과 기록: 대기열에 확인 시각·담당·결과·조치·상태 열을 둔다. 결과가 "정상 확인"인 건만 정상으로 닫힌다.
    재보정(recalibrate.py --outcomes)은 정상 확인으로 닫히지 않은 사건의 의심 시간창을 자료에서 뺀다.
-   --windows는 두 종류의 설비 점검 요청 창을 결과가 "정상 확인"일 때만 남긴다.
+   --windows는 조치 대상 창(재보정 검토·두 종류의 설비 점검 요청)을 결과가 "정상 확인"일 때만 남긴다. 변경 기록은 조치의 종류를
+   가를 뿐 정상 확인을 대신하지 않는다. 미확인 이상이 새 정상 기준에 들어가지 않게 하기 위해서다.
 """
 from __future__ import annotations
 
@@ -124,7 +125,7 @@ def monitor_windows(predictions, frame, alpha, n_cal, reference, window_units=60
                          exceed=bool(exceed), exceed99=bool(exceed99), operating_change=changed,
                          alarm_rows=n_alarm, share_magnitude=float(g.mag.sum() / n_alarm) if n_alarm else np.nan,
                          share_current=float(g.cur.sum() / n_alarm) if n_alarm else np.nan, recommended_action=action,
-                         recalibration_data="점검 '정상 확인' 뒤에만 재보정 자료" if action in (ACTION_INSPECT, ACTION_INSPECT_SHIFT) else "",
+                         recalibration_data="" if action == ACTION_OBSERVE else "결과 '정상 확인' 뒤에만 재보정 자료",
                          level1_notifications=int(g.note.sum()), level2_escalations=int(g.esc.sum()),
                          incident_notifications=int(g.note.sum() + g.esc.sum()), notification_unit="사건(시작·격상)",
                          current_ratio=ratio, band_low=reference.band_low, band_high=reference.band_high, drift_up=drift_up,
@@ -161,12 +162,13 @@ def gain_scenarios(model, reference, frame, alpha, gains=(1.0, 1.05, 1.1, 1.2, 1
 
 
 def exclude_unconfirmed_windows(frame, windows):
-    """설비 점검 요청 창은 outcome이 '정상 확인'일 때만 남긴다. 관측·변경 기록 창은 이 필터의 제외 대상이 아니다."""
+    """조치 대상 창(관측 지속이 아닌 창: 재보정 검토·설비 점검 요청)은 outcome이 '정상 확인'일 때만 남긴다.
+    변경 기록이 있어도 확인 없이 남기지 않는다. 관측 지속 창만 확인 없이 남는다."""
     required = {"start", "end", "recommended_action"}
     missing = required - set(windows.columns)
     if missing:
         raise ValueError("감시 창 CSV 필수 열 누락: " + ", ".join(sorted(missing)))
-    inspection = windows.recommended_action.fillna("").astype(str).str.startswith("설비 점검 요청")
+    inspection = windows.recommended_action.fillna("").astype(str).str.strip().ne(ACTION_OBSERVE)
     outcomes = windows.get("outcome", pd.Series("", index=windows.index)).fillna("").astype(str).str.strip()
     pending = windows[inspection & outcomes.ne("정상 확인")]
     start = pd.to_datetime(pending.start, format="mixed", utc=True, errors="coerce")

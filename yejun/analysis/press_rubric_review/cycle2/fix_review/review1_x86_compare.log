@@ -1,0 +1,30 @@
+## 모델 파일(x86 재학습 vs mac 동결)
+  guard_A.json: sha x86 d0f0a30e1149 mac c938707f1dd1 | 동등 True | 원소 최대 절대 차이 3.57e-11 | SHA-256은 다르지만 모든 원소가 동결 모델과 같음(|차이| ≤ 1e-10 + 1e-8·|값|: 기기 간
+  guard_B.json: sha x86 1a7c7afc0a79 mac b64ac3b30bc6 | 동등 True | 원소 최대 절대 차이 5.02e-11 | SHA-256은 다르지만 모든 원소가 동결 모델과 같음(|차이| ≤ 1e-10 + 1e-8·|값|: 기기 간
+  probability_A.json: sha x86 551f148ea43a mac 1a8100e78046 | 동등 True | 원소 최대 절대 차이 3.84e-11 | SHA-256은 다르지만 모든 원소가 동결 모델과 같음(|차이| ≤ 1e-10 + 1e-8·|값|: 기기 간
+  probability_B.json: sha x86 f0db8fc2c995 mac 7fde4cd1bdfa | 동등 True | 원소 최대 절대 차이 1.16e-10 | SHA-256은 다르지만 모든 원소가 동결 모델과 같음(|차이| ≤ 1e-10 + 1e-8·|값|: 기기 간
+## 학습 결과 표(verify.compare_csv, 1e-9 + 1e-9·|값|)
+  metrics.csv: 통과  max|Δ|=0
+  rolling.csv: 통과  max|Δ|=0
+  cases_A.csv: 통과  max|Δ|=7.03e-10
+  cases_B.csv: 통과  max|Δ|=6.91e-10
+  incidents_A.csv: 통과  max|Δ|=5.69e-12
+  incidents_B.csv: 통과  max|Δ|=5.68e-12
+## 행 단위 예측(verify.compare_predictions: SHA 다르면 정확 열 + 0.001 격자 ±1)
+  predictions_normal_A.csv: 통과  기기 간 부동소수 차이만 있음(행별 0.001 격자 한 칸 안)
+  predictions_normal_B.csv: 통과  기기 간 부동소수 차이만 있음(행별 0.001 격자 한 칸 안)
+  predictions_abnormal_A.csv: 통과  기기 간 부동소수 차이만 있음(행별 0.001 격자 한 칸 안)
+  predictions_abnormal_B.csv: 통과  기기 간 부동소수 차이만 있음(행별 0.001 격자 한 칸 안)
+  test_predictions_A.csv: 통과  기기 간 부동소수 차이만 있음(행별 0.001 격자 한 칸 안)
+  test_predictions_B.csv: 통과  기기 간 부동소수 차이만 있음(행별 0.001 격자 한 칸 안)
+## 행 단위 예측의 열별 최대 차이(x86 − mac 실행 파일)
+  predictions_normal_A.csv: sha 같음 False | 상위 차이 [('score', 0.00019392475513257956, 2), ('g_waveform', 0.00019392475513257956, 2), ('current_residual', 2.9256597144922125e-12, 0), ('g_dynamics', 4.1300296516055823e-13, 0)]
+  predictions_normal_B.csv: sha 같음 False | 상위 차이 [('score', 0.00022899788661512321, 2), ('g_waveform', 0.00022899788661512321, 4), ('likelihood_ratio', 1.0794424798454827e-09, 1), ('record_likelihood_ratio', 1.0794424798454827e-09, 6)]
+  predictions_abnormal_A.csv: sha 같음 False | 상위 차이 [('likelihood_ratio', 9.550757962273337e-10, 0), ('score', 7.033236215647776e-10, 0), ('g_waveform', 7.033236215647776e-10, 0), ('anomaly_probability', 9.363900280168203e-12, 0)]
+  predictions_abnormal_B.csv: sha 같음 False | 상위 차이 [('likelihood_ratio', 5.982744966104292e-09, 1), ('score', 6.907399097144662e-10, 0), ('g_waveform', 6.907399097144662e-10, 0), ('anomaly_probability', 5.757879936729715e-11, 0)]
+  test_predictions_A.csv: sha 같음 False | 상위 차이 [('score', 0.00019392475513257956, 2), ('g_waveform', 0.00019392475513257956, 2), ('likelihood_ratio', 9.550757962273337e-10, 0), ('anomaly_probability_file_prior', 9.442749360211167e-11, 0)]
+  test_predictions_B.csv: sha 같음 False | 상위 차이 [('score', 0.00022899788661512321, 2), ('g_waveform', 0.00022899788661512321, 4), ('likelihood_ratio', 5.982744966104292e-09, 2), ('record_likelihood_ratio', 1.0794424798454827e-09, 6)]
+## 분석 결과표 전체(verify.RESULTS: compare_csv, 순위 통계 열만 1e-3)와 analysis_summary.json
+  결과표 44개 중 실패 1개
+   실패 probability_conversion_v2.csv: alarm_rows_min_lr row 5: |Δ|=5.98e-09 > 3.42e-09
+  analysis_summary.json 같은가(verify와 같은 정확 비교, elapsed_s 제외): True | 다른 키: []

@@ -1,0 +1,29 @@
+== python analysis/press_evidence/build_tables.py -> exit 0 (12s)
+    B  9 0.074380 0.074380      180                8  0.044444       0.078762          False
+    B 10 0.082645 0.082645      180                9  0.050000       0.085628          False
+    B 11 0.090909 0.090909      180                9  0.050000       0.085628          False
+    B 12 0.099174 0.099174      180               11  0.061111       0.099126          False
+== python analysis/press_evidence/build_diagnostics.py -> exit 0 (54s)
+  fig.savefig(path, dpi=150, bbox_inches="tight", metadata={"Software": None})
+/work/yejun/analysis/press_evidence/figures.py:46: UserWarning: Glyph 50857 (\N{HANGUL SYLLABLE YONG}) missing from font(s) DejaVu Sans.
+  fig.savefig(path, dpi=150, bbox_inches="tight", metadata={"Software": None})
+완료 52.3초, 표 22개, 그림 5장
+== python analysis/package_contract.py --package analysis/press_evidence -> exit 0 (1s)
+통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 44개)
+== python analysis/package_contract.py --package analysis/press_supervised -> exit 0 (1s)
+참고 manifest.json: artifacts/guard_A.json: SHA-256은 다르지만 모든 원소가 동결 모델과 같음(|차이| ≤ 1e-10 + 1e-8·|값|: 기기 간 부동소수 차이)
+참고 manifest.json: artifacts/guard_B.json: SHA-256은 다르지만 모든 원소가 동결 모델과 같음(|차이| ≤ 1e-10 + 1e-8·|값|: 기기 간 부동소수 차이)
+통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+== python analysis/package_contract.py --package analysis/press_advance -> exit 0 (0s)
+통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+== python analysis/package_contract.py --package analysis/press_selection -> exit 0 (1s)
+참고 manifest.json: artifacts/guard_A.json: SHA-256은 다르지만 모든 원소가 동결 모델과 같음(|차이| ≤ 1e-10 + 1e-8·|값|: 기기 간 부동소수 차이)
+참고 manifest.json: artifacts/guard_B.json: SHA-256은 다르지만 모든 원소가 동결 모델과 같음(|차이| ≤ 1e-10 + 1e-8·|값|: 기기 간 부동소수 차이)
+참고 manifest.json: outputs/ablation_v2.csv: 해시는 다르지만 동결 사본과 허용오차 안(기기 간 부동소수 차이)
+통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 12개)
+== python analysis/press_supplement/verify.py -> exit 0 (2s)
+참고 E2: artifacts/guard_A.json: SHA-256은 다르지만 모든 원소가 동결 모델과 같음(|차이| ≤ 1e-10 + 1e-8·|값|: 기기 간 부동소수 차이)
+참고 E2: artifacts/guard_B.json: SHA-256은 다르지만 모든 원소가 동결 모델과 같음(|차이| ≤ 1e-10 + 1e-8·|값|: 기기 간 부동소수 차이)
+참고 E3: artifacts/guard_A.json: SHA-256은 다르지만 모든 원소가 동결 모델과 같음(|차이| ≤ 1e-10 + 1e-8·|값|: 기기 간 부동소수 차이)
+통과: 무결성·기대값 비교 E1, E2, E3
+PKG-DONE

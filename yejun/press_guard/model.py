@@ -19,7 +19,7 @@ BASE = HERE.parent / "press_submission"
 sys.path.insert(0, str(BASE))
 from press import data as D
 from press.calibrate import conformal_p, segment_max
-from press.scores import ExpTail, Scorer, _hats, window_index
+from press.scores import ExpTail, Scorer, FREQS, window_index
 from press.validation import code_sha256
 
 VERSION = "press-guard-v2.0"
@@ -38,10 +38,16 @@ SUSPECT_MAX_GAP_S = 60.0
 # 사건(incident): 경보가 난 알림 단위가 이어지고 단위 사이 공백이 이 값 이하면 한 사건이다(기록구간을 넘어서도 묶는다).
 # 사건마다 1단계 알림과 2단계 격상 알림을 한 번씩만 낸다. 근거 성분이 늘면 사건 기록만 갱신한다(새 알림 아님).
 INCIDENT_MAX_GAP_S = SUSPECT_MAX_GAP_S
+# 경보 없는 단위가 사건을 닫으려면 판정한 유효 행이 이만큼(8행 파형 창이 한 번 찬 길이) 있어야 한다. 수집 오류·기록 경계로 생긴
+# 더 짧은 조각은 성분이 다 차지 않아 정상 복귀의 근거가 못 된다(사건을 닫지도 잇지도 않는다).
+INCIDENT_MIN_CLEAR_ROWS = 8
 # 기록 경계: 이웃 행의 시각 간격이 0.1초에서 이 값보다 벗어나면 새 기록구간이다. v1(1 µs)은 대회 자료의 정확한 0.1초 간격에 맞춘 값이라
 # 수집 시각이 1 ms만 흔들려도 기록이 쪼개진다. 대회 자료의 기록 사이 공백은 1.5초 이상이라 20 ms에서도 구간이 같다.
 TIME_TOL_S = 0.02
 SHORT_RECORD_WARN = 5      # 평균 기록 길이가 이보다 짧으면 수집 시각 간격 경고
+# 수집 시각 순서: 기준(마지막으로 받아들인 시각)보다 이른 행은 판정을 보류한다. 그런 행이 정상 간격(0.1초 ± TIME_TOL_S)으로
+# 이만큼 이어지면 시계 재설정·지난 자료로 보고 새 기준으로 받아들인다. 한 행의 시각 오류가 뒤 자료 전체를 막지 않게 하는 값이다.
+REANCHOR_ROWS = 3
 # 사후 진단용 상태 대리변수. 정상 기록의 2성분 경계 91.886을 반올림한 값이며 경보·학습에는 쓰지 않는다.
 # 원 전류의 기록 평균 제거 RMS(ddof=0). 0.6 Hz 한 주기 이상(17행)을 본 뒤에만 상태를 표시한다.
 LOAD_STATE_RMS = 91.9
@@ -124,16 +130,35 @@ def alert_levels(record, block, alarm):
 class IncidentTracker:
     """행을 시간 순서대로 넣으면 사건 번호·사건 첫 알림·사건 격상·근거 추가를 돌려준다. 일괄 분석과 스트림이 같은 규칙을 쓴다."""
 
+    _FIELDS = ("unit", "unit_alarmed", "unit_start", "unit_rows", "prev_alarmed", "prev_end", "last_time", "open", "incident", "count", "components")
+
     def __init__(self):
-        self.unit = None; self.unit_alarmed = False; self.unit_start = None
+        self.unit = None; self.unit_alarmed = False; self.unit_start = None; self.unit_rows = 0
         self.prev_alarmed = False; self.prev_end = None; self.last_time = None
         self.open = False; self.incident = 0; self.count = 0; self.components = set()   # 사건 번호는 1부터
+        self.issued = 0              # 지금까지 발급한 가장 큰 사건 번호(되돌리지 않아 번호가 겹치지 않는다)
+        self._undo = None
 
-    def update(self, record, block, alarm, reason, time):
+    def undo(self):
+        """마지막 유효 행의 효과를 되돌린다(미래로 튄 한 행). 열린 사건은 되돌리고, 발급한 번호(issued)는 되돌리지 않는다."""
+        if self._undo is not None:
+            for k, v in self._undo.items():
+                setattr(self, k, set(v) if k == "components" else v)
+            self._undo = None
+
+    def update(self, record, block, alarm, reason, time, valid=True):
+        """valid=False(수집 오류 행)는 상태를 바꾸지 않는다. 오류 행은 정상 복귀의 근거가 아니므로 사건을 닫거나 나누지 않는다.
+        단위가 끝날 때 경보가 났거나 유효 행이 INCIDENT_MIN_CLEAR_ROWS 이상인 단위만 '앞 단위'(경보 여부·끝 시각)가 된다.
+        더 짧은 무경보 조각은 사건을 닫지도, 공백 기준 시각을 옮기지도 않는다."""
+        if not valid:
+            return 0, 0, 0, 0
+        self._undo = {k: (set(getattr(self, k)) if k == "components" else getattr(self, k)) for k in self._FIELDS}
         t = time if time is not None and not pd.isna(time) else self.last_time
         if (record, block) != self.unit:
-            self.prev_alarmed, self.prev_end = self.unit_alarmed, self.last_time
-            self.unit, self.unit_alarmed, self.unit_start = (record, block), False, t
+            if self.unit is not None and (self.unit_alarmed or self.unit_rows >= INCIDENT_MIN_CLEAR_ROWS):
+                self.prev_alarmed, self.prev_end = self.unit_alarmed, self.last_time
+            self.unit, self.unit_alarmed, self.unit_start, self.unit_rows = (record, block), False, t, 0
+        self.unit_rows += 1
         self.last_time = t
         if not alarm:
             return 0, 0, 0, 0
@@ -142,7 +167,7 @@ class IncidentTracker:
         if first_in_unit:
             gap = (self.unit_start - self.prev_end).total_seconds() if self.prev_end is not None and self.unit_start is not None else np.inf
             if not (self.open and self.prev_alarmed and 0 <= gap <= INCIDENT_MAX_GAP_S):
-                self.incident += 1; self.open = True; self.count = 0; self.components = set()
+                self.issued += 1; self.incident = self.issued; self.open = True; self.count = 0; self.components = set()
         self.count += 1
         notify = int(self.count == 1)
         escalate = int(self.count == ESCALATION_ALARM_ROWS)
@@ -152,12 +177,17 @@ class IncidentTracker:
         return self.incident, notify, escalate, update
 
 
-def incident_columns(record, block, alarm, reason, time):
-    """일괄 분석용: 행마다 (사건 번호, 사건 첫 알림, 사건 격상, 근거 추가). 경보 없는 단위가 끼면 사건이 닫힌다."""
+def incident_columns(record, block, alarm, reason, time, valid=None, order_event=None):
+    """일괄 분석용: 행마다 (사건 번호, 사건 첫 알림, 사건 격상, 근거 추가). 경보 없는 유효 단위(8행 이상)가 끼면 사건이 닫힌다.
+    수집 오류 행(valid=False)은 건너뛴다. order_event가 ORDER_SPIKE_SKIPPED인 행 앞의 유효 행은 미래로 튄 행이므로 그 효과를 되돌린다."""
     tr = IncidentTracker()
+    valid = np.ones(len(alarm), bool) if valid is None else np.asarray(valid, bool)
+    order_event = np.zeros(len(alarm), int) if order_event is None else np.asarray(order_event, int)
     out = np.zeros((len(alarm), 4), dtype=int)
-    for i, (r, b, a, why, t) in enumerate(zip(record, block, alarm, reason, time)):
-        out[i] = tr.update(r, b, bool(a), why, t)
+    for i, (r, b, a, why, t, ok, ev) in enumerate(zip(record, block, alarm, reason, time, valid, order_event)):
+        if ev == ORDER_SPIKE_SKIPPED and i > 0 and valid[i - 1]:
+            tr.undo()
+        out[i] = tr.update(r, b, bool(a), why, t, bool(ok))
     return out
 
 
@@ -201,21 +231,59 @@ def current_states(values, records):
     return np.asarray(rms, float), np.asarray(states, object)
 
 
-def timestamp_order(timestamp, time_floor=None):
-    """앞서 수신한 유효 시각의 최댓값보다 이른 행을 찾는다. 동률은 허용하며 미래 행을 참조하지 않는다.
+ORDER_OK, ORDER_HELD, ORDER_SPIKE_SKIPPED, ORDER_REANCHOR = 0, 1, 2, 3
 
-    time_floor는 이 입력 앞에서 관측한 최대 시각이다. 스트림은 보관하는 7행보다 앞선 기준 하나만 이어받는다.
-    시각을 파싱할 수 없는 행은 기준을 갱신하지 않는다. 센서 값 오류가 있어도 파싱 가능한 시각은 수신 순서 검사에 쓴다.
+
+class TimeOrder:
+    """수집 시각 순서 판정. 행을 받은 순서대로 넣으면 행마다 부호를 돌려준다. 일괄·스트림이 같은 상태를 이어 쓴다.
+
+    - 기준 시각은 마지막으로 받아들인 시각이다. 같거나 늦은 시각은 받아들인다(ORDER_OK, 동률 허용).
+    - 미래 시각 한 행(튐): 바로 앞에 받은 행이 정상 간격(0.1초 ± TIME_TOL_S)보다 크게 앞으로 뛰었고, 이 행이 그 앞의 시간축을
+      이으면 앞 행을 튄 행으로 보고 이 행부터 계속 판정한다(ORDER_SPIKE_SKIPPED, 보류 없음). 이 예외는 연속으로 쓰지 않는다.
+      튄 행 자체는 이미 판정했으므로(인과) 되돌리지 않는다. 사건 추적만 그 행의 효과를 되돌린다.
+    - 순서 뒤바뀜·시계 재설정·지난 자료: 기준보다 이른 행은 판정을 보류한다(ORDER_HELD). 정상 간격으로 REANCHOR_ROWS행 이어지면
+      셋째 행부터 새 기준으로 받아들인다(ORDER_REANCHOR, 보류 REANCHOR_ROWS − 1행). 역순·불규칙 간격이면 계속 보류하고 경고한다.
+    - 시각을 읽을 수 없는 행은 상태를 바꾸지 않는다. 센서 값 오류 행도 시각이 있으면 순서 판정에 쓴다.
     """
-    maximum = timestamp.cummax().ffill()
-    if time_floor is not None:
-        maximum = maximum.where(maximum.ge(time_floor), time_floor)
-    reversed_rows = timestamp.lt(maximum).to_numpy()
-    latest = maximum.iloc[-1] if len(maximum) and pd.notna(maximum.iloc[-1]) else time_floor
-    return reversed_rows, latest
+
+    def __init__(self):
+        self.ref = self.prev_ref = self.run_last = None
+        self.run = 0
+        self.jumped = False          # 기준 행이 정상 간격보다 크게 앞으로 뛰어 받아들인 행인가
+
+    def copy(self):
+        other = TimeOrder()
+        other.ref, other.prev_ref, other.run_last, other.run, other.jumped = self.ref, self.prev_ref, self.run_last, self.run, self.jumped
+        return other
+
+    def step(self, t):
+        if t is None or pd.isna(t):
+            return ORDER_OK
+        if self.ref is None or t >= self.ref:
+            jump = self.ref is not None and (t - self.ref).total_seconds() > D.DT + TIME_TOL_S
+            self.prev_ref, self.ref, self.run, self.run_last, self.jumped = self.ref, t, 0, None, jump
+            return ORDER_OK
+        if self.jumped and self.prev_ref is not None and t >= self.prev_ref:
+            self.ref, self.run, self.run_last, self.jumped = t, 0, None, False     # prev_ref는 그대로(튀기 전 시간축)
+            return ORDER_SPIKE_SKIPPED
+        steady = self.run_last is not None and abs((t - self.run_last).total_seconds() - D.DT) <= TIME_TOL_S
+        previous = self.run_last
+        self.run, self.run_last = (self.run + 1 if steady else 1), t
+        if self.run >= REANCHOR_ROWS:                                                # 새 시간축으로 받아들인다
+            self.prev_ref, self.ref, self.run, self.run_last, self.jumped = previous, t, 0, None, False
+            return ORDER_REANCHOR
+        return ORDER_HELD
 
 
-def layout(frame, *, time_floor=None):
+def timestamp_order(timestamp, state=None):
+    """행마다 순서 부호(ORDER_*)와 끝난 뒤의 순서 상태. state를 주면 복사해서 이어 쓴다(원본은 바꾸지 않는다)."""
+    order = TimeOrder() if state is None else state.copy()
+    codes = np.fromiter((order.step(t) for t in timestamp), dtype=np.int8, count=len(timestamp))
+    return codes, order
+
+
+def layout_with_order(frame, *, time_state=None):
+    """(상태, 기록구간 번호, 수집 시각 순서 부호). 순서 부호는 ORDER_* 값이다."""
     missing = [c for c in [D.TIME]+D.SENSORS if c not in frame]
     if missing:
         raise KeyError(f"필수 열 없음: {missing}")
@@ -225,13 +293,36 @@ def layout(frame, *, time_floor=None):
     status = np.full(len(frame),"ok",dtype=object)
     status[~np.isfinite(values).all(axis=1)] = "bad_value"
     status[timestamp.isna().to_numpy()] = "bad_timestamp"
-    reversed_rows, _ = timestamp_order(timestamp, time_floor)
-    status[reversed_rows] = "bad_time_order"
+    codes, _ = timestamp_order(timestamp, time_state)
+    status[codes == ORDER_HELD] = "bad_time_order"
     bad = status != "ok"
     boundary = timestamp.diff().dt.total_seconds().sub(D.DT).abs().gt(TIME_TOL_S).to_numpy() | bad
     boundary[1:] |= bad[:-1]
     if len(boundary): boundary[0] = False
-    return status,np.cumsum(boundary)
+    return status, np.cumsum(boundary), codes
+
+
+def layout(frame, *, time_state=None):
+    status, seg, _ = layout_with_order(frame, time_state=time_state)
+    return status, seg
+
+
+SINE_RCOND = 1e-10   # 사인 적합 기저의 유효 계수 판정(최대 특이값 대비). 5.0 Hz(나이퀴스트)에서는 사인 열이 부동소수 잡음(약 3e-15)뿐이다
+
+
+def stable_hats(win):
+    """주파수 격자별 사인 적합 투영 행렬. v1 _hats와 같은 격자·기저를 쓰되, 5.0 Hz(나이퀴스트)에서는 사인 열이 부동소수 잡음뿐인데
+    기본 pinv가 그 잡음을 유효 방향으로 받아 계수 3(8행 창)이 된다. rcond로 수학적 계수 2(cos·상수)를 쓴다. 대회 이상 31행의 파형 점수가
+    바뀌지만 경보는 α 1·3·5%에서 같다. 기기 간 점수 차이의 원인으로 확인한 것은 아니다(x86-64에서도 5 Hz 투영은 1.7e-16 안에서 같았다)."""
+    t = np.arange(win) * D.DT
+    hats = []
+    for f in FREQS:
+        A = np.column_stack([np.sin(2 * np.pi * f * t), np.cos(2 * np.pi * f * t), np.ones(win)])
+        hats.append(A @ np.linalg.pinv(A, rcond=SINE_RCOND))
+    return np.stack(hats)
+
+
+_HATS = {}
 
 
 def sine_score(current,seg,win):
@@ -243,7 +334,7 @@ def sine_score(current,seg,win):
     windows=np.stack([x[i-win+1:i+1] for i in idx])
     sst=((windows-windows.mean(axis=1,keepdims=True))**2).sum(axis=1)
     best=np.full(len(idx),np.inf)
-    for hat in _hats(win):
+    for hat in _HATS.setdefault(win, stable_hats(win)):
         residual=windows-np.einsum("ij,kj->ik",windows,hat,optimize=False)
         np.minimum(best,(residual*residual).sum(axis=1),out=best)
     np.divide(best,sst,out=best,where=sst>0)
@@ -324,20 +415,20 @@ class GuardModel:
                     waveform_window=np.where(pos < 7, 6, 8), score=np.fmax(np.fmax(gz, gs), ga),
                     magnitude_sensor=np.asarray(D.SENSORS)[np.abs(z).argmax(axis=1)])
 
-    def predict(self, frame, alpha=.01, prior=None, *, time_floor=None):
+    def predict(self, frame, alpha=.01, prior=None, *, time_state=None):
         if alpha not in ALPHAS:
             raise ValueError(f"alpha는 {ALPHAS} 중 하나여야 한다")
         from probability import DEFAULT_PRIOR, posterior
         prior = DEFAULT_PRIOR if prior is None else float(prior)
         if not 0 < prior < 1:
             raise ValueError("사전 비율은 0과 1 사이여야 한다")
-        status,seg = layout(frame, time_floor=time_floor)
+        status, seg, order_codes = layout_with_order(frame, time_state=time_state)
         if len(frame) == 0:
             return pd.DataFrame(columns=["row_id","record_id","timestamp","status","position","score","p_value","alarm","notification","reason","action",
                                          "is_scored","anomaly_score","criterion","model_id","protocol_version","alert_unit","beyond_calibration_length",
                                          "alert_level","escalation","likelihood_ratio","anomaly_probability","probability_prior",
                                          "record_likelihood_ratio","record_probability","incident_id","incident_notification",
-                                         "incident_escalation","incident_update","record_current_rms","operating_state"])
+                                         "incident_escalation","incident_update","record_current_rms","operating_state","time_order_event"])
         pos, _ = D.segment_positions(seg)
         clean = D.inputs_only(frame)
         for c in D.SENSORS:
@@ -374,7 +465,7 @@ class GuardModel:
         out["notification"] = first_alerts(seg, out.alert_unit, alarm)
         out["alert_level"], out["escalation"] = alert_levels(seg, out.alert_unit, alarm)
         times = pd.to_datetime(out.timestamp, format="mixed", utc=True, errors="coerce")
-        inc = incident_columns(seg, out.alert_unit.to_numpy(), alarm, out.reason.to_numpy(), times)
+        inc = incident_columns(seg, out.alert_unit.to_numpy(), alarm, out.reason.to_numpy(), times, status == "ok", order_codes)
         out["incident_id"], out["incident_notification"], out["incident_escalation"], out["incident_update"] = inc.T
         # 이상 확률: 경보와 무관한 별도 층. 보정기가 없으면 결측. LR은 사전 비율과 무관하고 확률은 prior에 조건부다.
         lr = self.probability.likelihood_ratio(comp["score"]) if self.probability is not None else np.full(len(frame), np.nan)
@@ -385,6 +476,7 @@ class GuardModel:
         out["record_likelihood_ratio"] = record_running_max(lr, seg)
         out["record_probability"] = posterior(out.record_likelihood_ratio.to_numpy(), prior)
         out["record_current_rms"], out["operating_state"] = state_rms, state_labels
+        out["time_order_event"] = order_codes.astype(int)      # 0 없음, 1 판정 보류, 2 앞 행의 미래 튐 건너뜀, 3 새 기준
         return out
 
     def save(self, path):
@@ -421,8 +513,8 @@ def load_bundle(model_path):
 class StreamDetector:
     """청크 크기에 무관한 추론. 센서 원본은 직전 7행만 유지한다.
 
-    역순은 앞서 수신한 최대 시각에 도달할 때까지 수집 오류로 판정을 보류한다. 잘못된 행·중복·샘플 누락은 경계가 된다.
-    센서 원본 7행 외에 그 앞의 최대 시각 하나를 유지한다. 시계 재설정은 확인 후 새 인스턴스로 시작한다.
+    수집 시각 순서는 TimeOrder 규칙을 따른다(튄 한 행은 건너뛰고, 이른 시각은 보류하다가 정상 간격으로 이어지면 새 기준).
+    잘못된 행·중복·샘플 누락은 경계가 된다. 센서 원본 7행 외에 그 앞까지의 순서 상태 하나를 유지한다.
     경보 단위(기록구간 안 50행 블록)의 첫 경보만 알리고,
     바로 앞 블록도 경보였으면 이어지는 이상으로 묶는다. 외부가 새 장치로 전환할 때는 새 인스턴스를 생성해야 한다.
     """
@@ -433,7 +525,7 @@ class StreamDetector:
         self.tail = pd.DataFrame(columns=[D.TIME]+D.SENSORS)
         self.tail_records = np.array([], dtype=int)
         self.tail_positions = np.array([], dtype=int)
-        self.tail_time_floor = None   # tail보다 앞에서 받은 최대 유효 시각(역행 중에도 감소하지 않음)
+        self.tail_time_state = None   # tail보다 앞의 행까지 반영한 수집 시각 순서 상태(TimeOrder)
         self.rows_seen = 0
         self.alert_record = None      # 현재 기록구간 번호와 그 안에서 경보가 난 블록
         self.alerted_blocks = set()
@@ -441,6 +533,7 @@ class StreamDetector:
         self.record_lr = np.nan       # 현재 기록구간의 지금까지 최대 우도비
         self.current_state = CurrentState()
         self.incidents = IncidentTracker()   # 기록구간을 넘는 사건 묶음(스트림 전체에서 이어진다)
+        self.last_valid = False              # 바로 앞 행이 사건 추적에 들어간 유효 행인가(튄 행 되돌리기)
 
     def push(self, frame):
         from probability import posterior
@@ -450,7 +543,7 @@ class StreamDetector:
         incoming = D.inputs_only(frame)
         n_old = len(self.tail)
         both = pd.concat([self.tail,incoming],ignore_index=True) if n_old else incoming
-        result = self.model.predict(both,self.alpha,self.prior,time_floor=self.tail_time_floor)
+        result = self.model.predict(both,self.alpha,self.prior,time_state=self.tail_time_state)
         rec = result.record_id.to_numpy().copy()
         positions = result.position.to_numpy().copy()
         if n_old:
@@ -483,7 +576,10 @@ class StreamDetector:
                 escalate = int(self.episode_alarms == ESCALATION_ALARM_ROWS)
                 self.alerted_blocks = {b for b in self.alerted_blocks if b >= r.alert_unit - 1} | {r.alert_unit}
             notifications.append(int(notify)); levels.append(level); escalations.append(escalate)
-            inc.append(self.incidents.update(r.record_id, r.alert_unit, bool(r.alarm), r.reason, t))
+            if r.time_order_event == ORDER_SPIKE_SKIPPED and self.last_valid:
+                self.incidents.undo()
+            inc.append(self.incidents.update(r.record_id, r.alert_unit, bool(r.alarm), r.reason, t, r.status == "ok"))
+            self.last_valid = r.status == "ok"
         result["notification"], result["alert_level"], result["escalation"] = notifications, levels, escalations
         result["record_likelihood_ratio"] = record_lr
         inc = np.asarray(inc, dtype=int).reshape(-1, 4)
@@ -494,7 +590,7 @@ class StreamDetector:
         dropped = len(both) - 7
         if dropped > 0:
             discarded_times = pd.to_datetime(both[D.TIME].iloc[:dropped], format="mixed", utc=True, errors="coerce")
-            _, self.tail_time_floor = timestamp_order(discarded_times, self.tail_time_floor)
+            _, self.tail_time_state = timestamp_order(discarded_times, self.tail_time_state)
         self.tail = both.iloc[-7:].copy().reset_index(drop=True)
         self.tail_records, self.tail_positions = rec[-7:].copy(), positions[-7:].copy()
         return result
@@ -623,11 +719,27 @@ def incidents(queue, predictions=None):
     return out
 
 
+def time_order_events(predictions):
+    """(판정 보류 행 수, 새 기준 채택 횟수, 미래로 튄 행을 건너뛴 횟수). time_order_event 열이 없는 옛 예측은 상태로 센다."""
+    if not len(predictions):
+        return 0, 0, 0
+    if "time_order_event" in predictions:
+        e = predictions.time_order_event.to_numpy()
+        return int((e == ORDER_HELD).sum()), int((e == ORDER_REANCHOR).sum()), int((e == ORDER_SPIKE_SKIPPED).sum())
+    held = predictions.status.eq("bad_time_order").to_numpy()
+    return int(held.sum()), int((predictions.status.eq("ok").to_numpy()[1:] & held[:-1]).sum()), 0
+
+
 def timing_warning(predictions):
-    """역순시각 판정보류와, 짧게 쪼개진 기록의 시각 간격 문제를 안내한다."""
-    reversed_rows = int(predictions.status.eq("bad_time_order").sum()) if len(predictions) else 0
-    warnings = ([f"역순 수집 시각 {reversed_rows}행: 앞서 수신한 최대 시각보다 이르므로 판정을 보류했습니다. 수집 PC 시각과 입력 순서를 확인하세요."]
-                if reversed_rows else [])
+    """수집 시각 순서 문제(판정 보류·새 기준 채택)와, 짧게 쪼개진 기록의 시각 간격 문제를 안내한다."""
+    held, resumed, skipped = time_order_events(predictions)
+    warnings = []
+    if held:
+        warnings.append(f"역순 수집 시각 {held}행: 기준 시각보다 이르므로 판정을 보류했습니다"
+                        + (f"(정상 간격으로 이어진 이른 시각을 새 기준으로 받아들인 곳 {resumed}곳)" if resumed else "")
+                        + ". 수집 PC 시각과 입력 순서를 확인하세요.")
+    if skipped:
+        warnings.append(f"미래로 튄 수집 시각 {skipped}곳: 튄 행 다음부터 원래 시간축으로 판정했습니다. 튄 행 주변은 기록이 끊겨 첫 창이 다시 찹니다.")
     ok = predictions[predictions.status.eq("ok")] if len(predictions) else predictions
     if len(ok) < 50:
         return " ".join(warnings)

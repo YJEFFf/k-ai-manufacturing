@@ -1,0 +1,749 @@
+A: 재적합 민감도·절제
+B: 재적합 민감도·절제
+A: 조건·불확실성·업무량 집계
+B: 조건·불확실성·업무량 집계
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 51204 (\N{HANGUL SYLLABLE JEON}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 52404 (\N{HANGUL SYLLABLE CE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 48764 (\N{HANGUL SYLLABLE BBAE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 53356 (\N{HANGUL SYLLABLE KEU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 50640 (\N{HANGUL SYLLABLE E}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 49436 (\N{HANGUL SYLLABLE SEO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 47448 (\N{HANGUL SYLLABLE RYU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 47564 (\N{HANGUL SYLLABLE MAN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 51652 (\N{HANGUL SYLLABLE JIN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 46041 (\N{HANGUL SYLLABLE DONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 48120 (\N{HANGUL SYLLABLE MI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 53456 (\N{HANGUL SYLLABLE TAM}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 54665 (\N{HANGUL SYLLABLE HAENG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 49468 (\N{HANGUL SYLLABLE SEN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 49457 (\N{HANGUL SYLLABLE SEONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 51116 (\N{HANGUL SYLLABLE JAE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 51201 (\N{HANGUL SYLLABLE JEOG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 54633 (\N{HANGUL SYLLABLE HAB}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 51208 (\N{HANGUL SYLLABLE JEOL}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 51228 (\N{HANGUL SYLLABLE JE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 51060 (\N{HANGUL SYLLABLE I}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 49345 (\N{HANGUL SYLLABLE SANG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 44396 (\N{HANGUL SYLLABLE GU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 44036 (\N{HANGUL SYLLABLE GAN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 54624 (\N{HANGUL SYLLABLE HAL}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 44368 (\N{HANGUL SYLLABLE GYO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 54924 (\N{HANGUL SYLLABLE HOE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 51473 (\N{HANGUL SYLLABLE JUNG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 50521 (\N{HANGUL SYLLABLE ANG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 44050 (\N{HANGUL SYLLABLE GABS}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 47197 (\N{HANGUL SYLLABLE ROG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 51032 (\N{HANGUL SYLLABLE YI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 52292 (\N{HANGUL SYLLABLE CAE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 45328 (\N{HANGUL SYLLABLE NEOL}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 54616 (\N{HANGUL SYLLABLE HA}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 45208 (\N{HANGUL SYLLABLE NA}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 47484 (\N{HANGUL SYLLABLE REUL}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 51221 (\N{HANGUL SYLLABLE JEONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 51004 (\N{HANGUL SYLLABLE EU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1262: UserWarning: Glyph 47196 (\N{HANGUL SYLLABLE RO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_sensor_importance_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 51204 (\N{HANGUL SYLLABLE JEON}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 47448 (\N{HANGUL SYLLABLE RYU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 51652 (\N{HANGUL SYLLABLE JIN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 54253 (\N{HANGUL SYLLABLE POG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 54217 (\N{HANGUL SYLLABLE PYEONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 44512 (\N{HANGUL SYLLABLE GYUN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 51228 (\N{HANGUL SYLLABLE JE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 44144 (\N{HANGUL SYLLABLE GEO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 46041 (\N{HANGUL SYLLABLE DONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 46160 (\N{HANGUL SYLLABLE DU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 49468 (\N{HANGUL SYLLABLE SEN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 49436 (\N{HANGUL SYLLABLE SEO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 54624 (\N{HANGUL SYLLABLE HAL}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 51221 (\N{HANGUL SYLLABLE JEONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 49345 (\N{HANGUL SYLLABLE SANG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 44032 (\N{HANGUL SYLLABLE GA}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 44396 (\N{HANGUL SYLLABLE GU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 44036 (\N{HANGUL SYLLABLE GAN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 51060 (\N{HANGUL SYLLABLE I}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 54617 (\N{HANGUL SYLLABLE HAG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 49845 (\N{HANGUL SYLLABLE SEUB}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 44208 (\N{HANGUL SYLLABLE GYEOL}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 54633 (\N{HANGUL SYLLABLE HAB}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 50868 (\N{HANGUL SYLLABLE UN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 50640 (\N{HANGUL SYLLABLE E}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 44284 (\N{HANGUL SYLLABLE GWA}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 51008 (\N{HANGUL SYLLABLE EUN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 54632 (\N{HANGUL SYLLABLE HAM}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 44760 (\N{HANGUL SYLLABLE GGE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 50880 (\N{HANGUL SYLLABLE UM}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 51649 (\N{HANGUL SYLLABLE JIG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 44256 (\N{HANGUL SYLLABLE GO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 48279 (\N{HANGUL SYLLABLE BEOS}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 50612 (\N{HANGUL SYLLABLE EO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 45212 (\N{HANGUL SYLLABLE NAN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 45796 (\N{HANGUL SYLLABLE DA}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 45824 (\N{HANGUL SYLLABLE DAE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 52377 (\N{HANGUL SYLLABLE CEOG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 46020 (\N{HANGUL SYLLABLE DO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 44600 (\N{HANGUL SYLLABLE GIL}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 50724 (\N{HANGUL SYLLABLE O}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 44221 (\N{HANGUL SYLLABLE GYEONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1278: UserWarning: Glyph 48372 (\N{HANGUL SYLLABLE BO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_coupling_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 51221 (\N{HANGUL SYLLABLE JEONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 49345 (\N{HANGUL SYLLABLE SANG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 54617 (\N{HANGUL SYLLABLE HAG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 49845 (\N{HANGUL SYLLABLE SEUB}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 51456 (\N{HANGUL SYLLABLE JUN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 44396 (\N{HANGUL SYLLABLE GU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 44036 (\N{HANGUL SYLLABLE GAN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 44221 (\N{HANGUL SYLLABLE GYEONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 48372 (\N{HANGUL SYLLABLE BO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 54665 (\N{HANGUL SYLLABLE HAENG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 51652 (\N{HANGUL SYLLABLE JIN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 46041 (\N{HANGUL SYLLABLE DONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 47197 (\N{HANGUL SYLLABLE ROG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 49884 (\N{HANGUL SYLLABLE SI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 51089 (\N{HANGUL SYLLABLE JAG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 54980 (\N{HANGUL SYLLABLE HU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 52488 (\N{HANGUL SYLLABLE CO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 49457 (\N{HANGUL SYLLABLE SEONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 51216 (\N{HANGUL SYLLABLE JEOM}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 49688 (\N{HANGUL SYLLABLE SU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 53356 (\N{HANGUL SYLLABLE KEU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 54028 (\N{HANGUL SYLLABLE PA}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 54805 (\N{HANGUL SYLLABLE HYEONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 50696 (\N{HANGUL SYLLABLE YE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 52769 (\N{HANGUL SYLLABLE CEUG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 50724 (\N{HANGUL SYLLABLE O}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 52264 (\N{HANGUL SYLLABLE CA}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 47928 (\N{HANGUL SYLLABLE MUN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 53553 (\N{HANGUL SYLLABLE TEOG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 54624 (\N{HANGUL SYLLABLE HAL}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 51032 (\N{HANGUL SYLLABLE YI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 48512 (\N{HANGUL SYLLABLE BU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 45800 (\N{HANGUL SYLLABLE DAN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 48156 (\N{HANGUL SYLLABLE BAL}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 49828 (\N{HANGUL SYLLABLE SEU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 51060 (\N{HANGUL SYLLABLE I}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 47564 (\N{HANGUL SYLLABLE MAN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 51012 (\N{HANGUL SYLLABLE EUL}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 45336 (\N{HANGUL SYLLABLE NEOM}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 51020 (\N{HANGUL SYLLABLE EUM}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 44228 (\N{HANGUL SYLLABLE GYE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 47196 (\N{HANGUL SYLLABLE RO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 44201 (\N{HANGUL SYLLABLE GYEOG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 46104 (\N{HANGUL SYLLABLE DOE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 51648 (\N{HANGUL SYLLABLE JI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1304: UserWarning: Glyph 50506 (\N{HANGUL SYLLABLE ANH}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_false_alarm_cases_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 50948 (\N{HANGUL SYLLABLE WI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 52824 (\N{HANGUL SYLLABLE CI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 48120 (\N{HANGUL SYLLABLE MI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 53456 (\N{HANGUL SYLLABLE TAM}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 54665 (\N{HANGUL SYLLABLE HAENG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 48708 (\N{HANGUL SYLLABLE BI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 50984 (\N{HANGUL SYLLABLE YUL}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 44396 (\N{HANGUL SYLLABLE GU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 44036 (\N{HANGUL SYLLABLE GAN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 54624 (\N{HANGUL SYLLABLE HAL}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 51652 (\N{HANGUL SYLLABLE JIN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 46041 (\N{HANGUL SYLLABLE DONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 51221 (\N{HANGUL SYLLABLE JEONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 49345 (\N{HANGUL SYLLABLE SANG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 48276 (\N{HANGUL SYLLABLE BEOM}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 45458 (\N{HANGUL SYLLABLE NOP}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 51008 (\N{HANGUL SYLLABLE EUN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 49688 (\N{HANGUL SYLLABLE SU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 51456 (\N{HANGUL SYLLABLE JUN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 51060 (\N{HANGUL SYLLABLE I}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 51064 (\N{HANGUL SYLLABLE IN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 51012 (\N{HANGUL SYLLABLE EUL}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 47784 (\N{HANGUL SYLLABLE MO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 46160 (\N{HANGUL SYLLABLE DU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 45459 (\N{HANGUL SYLLABLE NOH}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 52828 (\N{HANGUL SYLLABLE CIN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1320: UserWarning: Glyph 45796 (\N{HANGUL SYLLABLE DA}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_position_vibration_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 50696 (\N{HANGUL SYLLABLE YE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 52769 (\N{HANGUL SYLLABLE CEUG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 51060 (\N{HANGUL SYLLABLE I}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 49345 (\N{HANGUL SYLLABLE SANG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 54869 (\N{HANGUL SYLLABLE HWAG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 47456 (\N{HANGUL SYLLABLE RYUL}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 54217 (\N{HANGUL SYLLABLE PYEONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 44032 (\N{HANGUL SYLLABLE GA}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 51088 (\N{HANGUL SYLLABLE JA}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 47308 (\N{HANGUL SYLLABLE RYO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 48708 (\N{HANGUL SYLLABLE BI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 50984 (\N{HANGUL SYLLABLE YUL}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 51456 (\N{HANGUL SYLLABLE JUN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 44288 (\N{HANGUL SYLLABLE GWAN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 44396 (\N{HANGUL SYLLABLE GU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 44036 (\N{HANGUL SYLLABLE GAN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 52789 (\N{HANGUL SYLLABLE CEUNG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 51032 (\N{HANGUL SYLLABLE YI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 49888 (\N{HANGUL SYLLABLE SIN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 47280 (\N{HANGUL SYLLABLE ROE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 46020 (\N{HANGUL SYLLABLE DO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 47197 (\N{HANGUL SYLLABLE ROG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 44217 (\N{HANGUL SYLLABLE GYEOB}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 44368 (\N{HANGUL SYLLABLE GYO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 52264 (\N{HANGUL SYLLABLE CA}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/insights.py:1329: UserWarning: Glyph 54624 (\N{HANGUL SYLLABLE HAL}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+사이클2 보강 표·그림
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 47197 (\N{HANGUL SYLLABLE ROG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 44396 (\N{HANGUL SYLLABLE GU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 44036 (\N{HANGUL SYLLABLE GAN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 45236 (\N{HANGUL SYLLABLE NAE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 50948 (\N{HANGUL SYLLABLE WI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 52824 (\N{HANGUL SYLLABLE CI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 44288 (\N{HANGUL SYLLABLE GWAN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 52769 (\N{HANGUL SYLLABLE CEUG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 48264 (\N{HANGUL SYLLABLE BEON}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 54840 (\N{HANGUL SYLLABLE HO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 52488 (\N{HANGUL SYLLABLE CO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 44201 (\N{HANGUL SYLLABLE GYEOG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 54665 (\N{HANGUL SYLLABLE HAENG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 51116 (\N{HANGUL SYLLABLE JAE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 54788 (\N{HANGUL SYLLABLE HYEON}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 50984 (\N{HANGUL SYLLABLE YUL}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 44221 (\N{HANGUL SYLLABLE GYEONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 48372 (\N{HANGUL SYLLABLE BO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 48708 (\N{HANGUL SYLLABLE BI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 51221 (\N{HANGUL SYLLABLE JEONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 49345 (\N{HANGUL SYLLABLE SANG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 51456 (\N{HANGUL SYLLABLE JUN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 51060 (\N{HANGUL SYLLABLE I}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 51316 (\N{HANGUL SYLLABLE JON}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 44208 (\N{HANGUL SYLLABLE GYEOL}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 54633 (\N{HANGUL SYLLABLE HAB}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 46041 (\N{HANGUL SYLLABLE DONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 50669 (\N{HANGUL SYLLABLE YEOG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 54617 (\N{HANGUL SYLLABLE HAG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 48324 (\N{HANGUL SYLLABLE BYEOL}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 48120 (\N{HANGUL SYLLABLE MI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 48376 (\N{HANGUL SYLLABLE BON}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 51088 (\N{HANGUL SYLLABLE JA}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 47308 (\N{HANGUL SYLLABLE RYO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 51032 (\N{HANGUL SYLLABLE YI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 53456 (\N{HANGUL SYLLABLE TAM}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 49353 (\N{HANGUL SYLLABLE SAEG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 54217 (\N{HANGUL SYLLABLE PYEONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:409: UserWarning: Glyph 44032 (\N{HANGUL SYLLABLE GA}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_recall_by_position_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 47197 (\N{HANGUL SYLLABLE ROG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 49884 (\N{HANGUL SYLLABLE SI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 51089 (\N{HANGUL SYLLABLE JAG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 54980 (\N{HANGUL SYLLABLE HU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 52395 (\N{HANGUL SYLLABLE CEOS}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 44221 (\N{HANGUL SYLLABLE GYEONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 48372 (\N{HANGUL SYLLABLE BO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 52488 (\N{HANGUL SYLLABLE CO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 44396 (\N{HANGUL SYLLABLE GU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 44036 (\N{HANGUL SYLLABLE GAN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 51221 (\N{HANGUL SYLLABLE JEONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 49345 (\N{HANGUL SYLLABLE SANG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 51456 (\N{HANGUL SYLLABLE JUN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 51060 (\N{HANGUL SYLLABLE I}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 44060 (\N{HANGUL SYLLABLE GAE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 51032 (\N{HANGUL SYLLABLE YI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 51216 (\N{HANGUL SYLLABLE JEOM}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 49892 (\N{HANGUL SYLLABLE SIL}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 51228 (\N{HANGUL SYLLABLE JE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 44256 (\N{HANGUL SYLLABLE GO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 51109 (\N{HANGUL SYLLABLE JANG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 44033 (\N{HANGUL SYLLABLE GAG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 50500 (\N{HANGUL SYLLABLE A}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:423: UserWarning: Glyph 45784 (\N{HANGUL SYLLABLE NIM}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_first_alarm_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 51204 (\N{HANGUL SYLLABLE JEON}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 47448 (\N{HANGUL SYLLABLE RYU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 50896 (\N{HANGUL SYLLABLE WEON}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 44050 (\N{HANGUL SYLLABLE GABS}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 47197 (\N{HANGUL SYLLABLE ROG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 49884 (\N{HANGUL SYLLABLE SI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 51089 (\N{HANGUL SYLLABLE JAG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 54980 (\N{HANGUL SYLLABLE HU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 44036 (\N{HANGUL SYLLABLE GAN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 52488 (\N{HANGUL SYLLABLE CO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 51221 (\N{HANGUL SYLLABLE JEONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 49345 (\N{HANGUL SYLLABLE SANG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 51456 (\N{HANGUL SYLLABLE JUN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 45824 (\N{HANGUL SYLLABLE DAE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 48708 (\N{HANGUL SYLLABLE BI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 54200 (\N{HANGUL SYLLABLE PYEON}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 52264 (\N{HANGUL SYLLABLE CA}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 44221 (\N{HANGUL SYLLABLE GYEONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 48372 (\N{HANGUL SYLLABLE BO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 47928 (\N{HANGUL SYLLABLE MUN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 53553 (\N{HANGUL SYLLABLE TEOG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 50696 (\N{HANGUL SYLLABLE YE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 52769 (\N{HANGUL SYLLABLE CEUG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 50724 (\N{HANGUL SYLLABLE O}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 54028 (\N{HANGUL SYLLABLE PA}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 54805 (\N{HANGUL SYLLABLE HYEONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 49468 (\N{HANGUL SYLLABLE SEN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 49436 (\N{HANGUL SYLLABLE SEO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 53356 (\N{HANGUL SYLLABLE KEU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 48120 (\N{HANGUL SYLLABLE MI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 53456 (\N{HANGUL SYLLABLE TAM}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 54665 (\N{HANGUL SYLLABLE HAENG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 51060 (\N{HANGUL SYLLABLE I}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 44032 (\N{HANGUL SYLLABLE GA}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 51109 (\N{HANGUL SYLLABLE JANG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 47566 (\N{HANGUL SYLLABLE MANH}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 51008 (\N{HANGUL SYLLABLE EUN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 44396 (\N{HANGUL SYLLABLE GU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 44288 (\N{HANGUL SYLLABLE GWAN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 50948 (\N{HANGUL SYLLABLE WI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 52824 (\N{HANGUL SYLLABLE CI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 49457 (\N{HANGUL SYLLABLE SEONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 48516 (\N{HANGUL SYLLABLE BUN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 47564 (\N{HANGUL SYLLABLE MAN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 51316 (\N{HANGUL SYLLABLE JON}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 51116 (\N{HANGUL SYLLABLE JAE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 51652 (\N{HANGUL SYLLABLE JIN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 46041 (\N{HANGUL SYLLABLE DONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 48276 (\N{HANGUL SYLLABLE BEOM}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 54617 (\N{HANGUL SYLLABLE HAG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+/work/yejun/press_guard/analyze.py:447: UserWarning: Glyph 49845 (\N{HANGUL SYLLABLE SEUB}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+{
+ "input_hashes": {
+  "normal": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+  "abnormal": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e"
+ },
+ "comparison_rows": 228,
+ "models": [
+  "5nn_distance",
+  "ar2_only",
+  "combined_w8",
+  "early6_ar2",
+  "early_w6_to_w8",
+  "isolation_forest",
+  "lstm20",
+  "lstm20_plus_maxz",
+  "maxz_3",
+  "maxz_ar2",
+  "maxz_vib2",
+  "mlp_ae_w5",
+  "sine_w8",
+  "trailing_rms5"
+ ],
+ "fn_rows_at_position_0_1": {
+  "v1": {
+   "A": 26,
+   "B": 20
+  },
+  "v2": {
+   "A": 26,
+   "B": 20
+  }
+ },
+ "fn_rows_total": {
+  "v1": {
+   "A": 99,
+   "B": 86
+  },
+  "v2": {
+   "A": 44,
+   "B": 31
+  }
+ },
+ "robustness_rows": 72,
+ "sensitivity_rows": 72,
+ "ablation_rows": 60,
+ "condition_bounds": {
+  "A": {
+   "vib": [
+    0.081316,
+    0.128891,
+    0.185704
+   ],
+   "amp": [
+    117.476179,
+    155.693167,
+    223.055757
+   ],
+   "vib_high": 3.147169,
+   "r2_low": 0.994717
+  },
+  "B": {
+   "vib": [
+    0.082127,
+    0.130035,
+    0.182662
+   ],
+   "amp": [
+    116.720563,
+    158.06452,
+    222.86321
+   ],
+   "vib_high": 3.129618,
+   "r2_low": 0.994736
+  }
+ },
+ "files": [
+  "model_comparison_v2.csv",
+  "model_comparison_v2.md",
+  "robustness_v2.csv",
+  "sensitivity_v2.csv",
+  "ablation_v2.csv",
+  "error_conditions_v2.csv",
+  "error_conditions_segments_v2.csv",
+  "interaction_2x2_v2.csv",
+  "records_first_alarm_v2.csv",
+  "uncertainty_v2.csv",
+  "workload_v2.csv",
+  "decision_table_v2.csv",
+  "fig_recall_by_position_v2.png",
+  "fig_first_alarm_v2.png",
+  "fig_missed_example_v2.png",
+  "probability_eval_v2.csv",
+  "probability_reliability_v2.csv",
+  "probability_conversion_v2.csv",
+  "alert_levels_v2.csv",
+  "alert_budget_design_v2.csv",
+  "queue_mixed_ranks_v2.csv",
+  "queue_injection_ranks_v2.csv",
+  "queue_key_selection_v2.csv",
+  "sensor_importance_v2.csv",
+  "position_vibration_misses_v2.csv",
+  "coupling_fit_v2.csv",
+  "coupling_records_v2.csv",
+  "fp_events_v2.csv",
+  "near_miss_v2.csv",
+  "near_miss_corr_v2.csv",
+  "error_conditions_stats_v2.csv",
+  "alert_levels_injection_v2.csv",
+  "quality_windows_v2.csv",
+  "label_free_alert_probability_v2.csv",
+  "monitor_gain_v2.csv",
+  "expected_effect_v2.csv",
+  "fp_intensity_v2.csv",
+  "fn_intensity_v2.csv",
+  "error_condition_summary_v2.csv",
+  "incident_summary_v2.csv",
+  "unit_results_v2.csv",
+  "probability_baselines_v2.csv",
+  "fig_sensor_importance_v2.png",
+  "fig_coupling_v2.png",
+  "fig_false_alarm_cases_v2.png",
+  "fig_probability_reliability_v2.png",
+  "fig_position_vibration_v2.png"
+ ],
+ "external_inputs": {
+  "analysis/press_supplement/e1_summary.csv": "bbf0f95deefaead1a35e68324eac600907bf80eb5005d40f519bf5e23a20b7b9",
+  "analysis/press_dayshift/v2_current_scale.csv": "82b14ccd716bb1dcb54754d6ba613cf41f86107e054908dc0a4e0cbb6d496310"
+ },
+ "elapsed_s": 402.4
+}

@@ -86,8 +86,18 @@ def write_manifest(exp, out, start, config, **extra):
     return manifest
 
 
-def errors(exp, out, manifest=None):
-    """manifest와 현재 코드·원본·모델·외부 표·산출물의 불일치 목록. 비어 있으면 통과."""
+def _same_on_other_machine(path, recorded):
+    """다른 기기에서 다시 만든 press_guard 모델·결과 CSV가 동결 기기의 파일과 수치로 같은가(analysis/package_contract.equivalent_dependency)."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("pc_contract", YEJUN / "analysis" / "package_contract.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module.equivalent_dependency(path, recorded)
+
+
+def errors(exp, out, manifest=None, notes=None):
+    """manifest와 현재 코드·원본·모델·외부 표·산출물의 불일치 목록. 비어 있으면 통과.
+    기준 모델·외부 비교표가 해시만 다르고 동결 기기의 파일과 수치로 같으면 실패로 세지 않고 notes에 적는다."""
     out = Path(out)
     try:
         m = manifest if manifest is not None else json.loads((out / manifest_name(exp)).read_text(encoding="utf-8"))
@@ -97,11 +107,17 @@ def errors(exp, out, manifest=None):
     if m.get("experiment") != exp or m.get("protocol") != PROTOCOL_ID:
         bad.append(f"{exp}: 실험·프로토콜 식별자 불일치")
     now = current(exp)
+    paths = {"artifacts": {a: ARTIFACTS / a for a in EXPERIMENTS[exp]["artifacts"]}, "sources": EXPERIMENTS[exp]["sources"]}
     for group, label in (("code", "코드"), ("inputs", "원본"), ("artifacts", "기준 모델"), ("sources", "외부 비교표")):
         recorded = m.get(group) or {}
         for name, digest in now[group].items():
             if recorded.get(name) != digest:
-                bad.append(f"{exp}: {label} 변경 또는 기록 없음 — {name}")
+                same = (_same_on_other_machine(paths[group][name], recorded.get(name))
+                        if group in paths and name in paths[group] and recorded.get(name) else None)
+                if same is None:
+                    bad.append(f"{exp}: {label} 변경 또는 기록 없음 — {name}")
+                elif notes is not None:
+                    notes.append(f"{exp}: {same}")
     spec = EXPERIMENTS[exp]
     recorded = m.get("outputs") or {}
     for name in spec["outputs"]:

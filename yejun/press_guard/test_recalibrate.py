@@ -83,7 +83,8 @@ def test_unconfirmed_cases_are_excluded_from_recalibration(normal_csv, tmp_path)
 
 
 def test_monitor_windows_require_normal_confirmation(normal_csv):
-    """전류 이동·열화 점검 창은 결과가 비면 빠지고 정상 확인 뒤 남는다. 관측/변경 기록 창은 그대로 남는다."""
+    """조치 대상 창(전류 이동·열화 점검·변경 기록 재보정 검토)은 결과가 비면 빠지고 정상 확인 뒤 남는다. 관측 지속 창만 그대로 남는다.
+    변경 기록은 정상 확인을 대신하지 않는다(적대적 검수 C-04: 변경 기록 한 건으로 미확인 이상이 재보정 자료에 남던 문제)."""
     from monitor import (exclude_unconfirmed_windows, ACTION_INSPECT_SHIFT, ACTION_INSPECT,
                          ACTION_RECALIBRATE, ACTION_OBSERVE)
     frame = pd.read_csv(normal_csv)
@@ -91,12 +92,14 @@ def test_monitor_windows_require_normal_confirmation(normal_csv):
     windows = pd.DataFrame(dict(start=frame[D.TIME].iloc[starts].to_numpy(), end=frame[D.TIME].iloc[ends].to_numpy(),
                                 recommended_action=[ACTION_INSPECT_SHIFT, ACTION_INSPECT, ACTION_RECALIBRATE, ACTION_OBSERVE]))
     kept, info = exclude_unconfirmed_windows(frame, windows)
-    assert info["unconfirmed_windows"] == 2 and info["rows_removed"] == 100
-    assert frame[D.TIME].iloc[100] not in set(kept[D.TIME]) and frame[D.TIME].iloc[300] in set(kept[D.TIME])
+    assert info["unconfirmed_windows"] == 3 and info["rows_removed"] == 150
+    assert frame[D.TIME].iloc[100] not in set(kept[D.TIME]) and frame[D.TIME].iloc[300] not in set(kept[D.TIME])
+    assert frame[D.TIME].iloc[400] in set(kept[D.TIME])
     windows["outcome"] = ["정상 확인", "보류", "", ""]
     kept, info = exclude_unconfirmed_windows(frame, windows)
-    assert info["unconfirmed_windows"] == 1 and info["rows_removed"] == 50
+    assert info["unconfirmed_windows"] == 2 and info["rows_removed"] == 100
     assert frame[D.TIME].iloc[100] in set(kept[D.TIME]) and frame[D.TIME].iloc[200] not in set(kept[D.TIME])
+    assert frame[D.TIME].iloc[300] not in set(kept[D.TIME])
     windows["outcome"] = "정상 확인"
     kept, info = exclude_unconfirmed_windows(frame, windows)
     pd.testing.assert_frame_equal(kept, frame)

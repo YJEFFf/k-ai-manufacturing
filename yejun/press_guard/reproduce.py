@@ -1,7 +1,7 @@
 """한 명령 재현: 입력 확인 → v1 선행 → v2 학습·분석·실행 검증·동결값 비교 → 분석 패키지 재생성·검증 → 요약.
 
-    python yejun/press_guard/reproduce.py                 # 기본(빠른 경로): torch 없이 최종 모델 전체 + 분석 패키지. 약 10분
-    python yejun/press_guard/reproduce.py --full          # 전체: v1 1~5단계(LSTM, torch 필요)·후보 비교·보완 실험 E1~E3 재실행까지.
+    python yejun/press_guard/reproduce.py                 # 기본(빠른 경로): torch 없이 최종 모델 전체 + 진단 패키지 재생성, 나머지 분석 패키지는 동결값 비교
+    python yejun/press_guard/reproduce.py --full          # 전체: v1 1~5단계(LSTM, torch 필요)·후보 비교·지도학습 기준선·선정 근거·보완 실험 E1~E3 재실행까지.
                                                           #   LSTM 캐시가 있으면 약 25분, 새 사본(LSTM 처음부터 학습)은 약 63분
     python yejun/press_guard/reproduce.py --data "Dataset_소성가공 예지보전 AI 데이터셋.zip"   # 주최 측 ZIP(또는 두 CSV가 든 폴더)을 먼저 배치
     python yejun/press_guard/reproduce.py --tests         # 끝에 pytest·웹 회귀 시험까지
@@ -41,11 +41,15 @@ def steps(full, tests):
           ("v2 분석", [py, str(HERE / "analyze.py")], HERE),
           ("v2 실행 검증(audit)", [py, str(HERE / "audit.py")], HERE),
           ("v2 동결값 비교", [py, str(HERE / "verify.py")], HERE)]
+    if full:
+        # 지도학습 기준선(HGB)과 그것을 다시 돌리는 선정 근거 표는 결정 트리의 부동소수 분기 때문에 기기마다 TP가 ±1~3 달라진다
+        # (리눅스 x86-64 실측). 빠른 경로는 커밋된 결과의 무결성·동결값만 확인하고, 전체 모드에서 다시 만든다(보완 실험 E1~E3와 같은 방식).
+        # press_evidence가 지도학습 결과를 인용하므로 먼저 만든다.
+        s += [("지도학습 기준선(press_supervised)", [py, str(YEJUN / "analysis" / "press_supervised" / "run.py")], YEJUN),
+              ("모델 선정 근거(press_selection)", [py, str(YEJUN / "analysis" / "press_selection" / "run.py")], YEJUN)]
     ev = YEJUN / "analysis" / "press_evidence"
     s += [("진단 표(press_evidence)", [py, str(ev / "build_tables.py")], YEJUN),
-          ("진단 보강 표·그림", [py, str(ev / "build_diagnostics.py")], YEJUN),
-          ("지도학습 기준선(press_supervised)", [py, str(YEJUN / "analysis" / "press_supervised" / "run.py")], YEJUN),
-          ("모델 선정 근거(press_selection)", [py, str(YEJUN / "analysis" / "press_selection" / "run.py")], YEJUN)]
+          ("진단 보강 표·그림", [py, str(ev / "build_diagnostics.py")], YEJUN)]
     if contract.exists():
         for pkg in ("press_evidence", "press_supervised", "press_advance", "press_selection"):
             if (YEJUN / "analysis" / pkg / "contract.json").exists():

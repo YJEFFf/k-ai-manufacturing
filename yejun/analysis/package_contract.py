@@ -19,7 +19,11 @@ yejun/ 에서 실행한다(경로는 yejun 기준 또는 절대 경로). 종료 
     nested: {"inputs.files": "sha256"}처럼 {이름: {필드: 해시}} 묶음(이름은 "data" 규칙으로 찾는다)
 - local_outputs: Git에서 뺀 결과(행 단위 원표 등). 있으면 실행 기록 해시와 같아야 하고, 동결에는 사본 대신 해시·행 수·열만 남긴다.
   없으면(갓 받은 사본) 실패로 세지 않고 재실행으로 생긴다고 알린다.
-- tolerance: 수치 열 허용오차(기본 1e-9). meta_keys: JSON 비교에서 뺄 실행 메타 키.
+- tolerance: 수치 허용오차(기본 1e-9). |차이| ≤ tolerance + 1e-9·|동결 값|으로 본다. 문자 열의 칸도 양쪽이 수로 읽히면 같은 규칙으로 본다.
+- tolerances: {결과 파일: {열: 허용오차}}. 순위 통계처럼 기기마다 동률 근처 순위가 뒤바뀌는 열만 이유(tolerance_reasons)와 함께 둔다.
+- meta_keys: JSON 비교에서 뺄 실행 메타 키.
+- 다른 기기: 실행 기록의 press_guard 모델 해시가 다르면 동결 모델 사본과 원소 단위로 같은지(press_guard/equivalence.py),
+  press_guard 결과 CSV 해시가 다르면 그 해시가 press_guard 동결 사본의 해시이고 현재 파일이 그 사본과 허용오차 안인지 본다. 같으면 참고로 알린다.
 - run_options: 실행 기록 config 가운데 결과에 영향이 없는 키(비교하지 않고 따로 보인다).
 - commands: 재실행 명령(yejun 기준, --rerun과 README용).
 
@@ -60,9 +64,40 @@ def sha256(path) -> str:
     return h.hexdigest()
 
 
+RTOL = 1e-9
+GUARD = YEJUN / "press_guard"
+
+
+def _equivalence():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("pg_equivalence", GUARD / "equivalence.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def equivalent_dependency(p: Path, recorded: str) -> str | None:
+    """해시가 다른 의존 파일이 동결 기기의 같은 파일과 수치로 같으면 참고 문구, 아니면 None."""
+    p = Path(p).resolve()
+    try:
+        rel = p.relative_to(GUARD.resolve())
+    except ValueError:
+        return None
+    frozen = GUARD / "outputs" / "expected" / p.name
+    if not frozen.is_file() or sha256(frozen) != recorded:
+        return None
+    if rel.parts[0] == "artifacts":
+        ok, why = _equivalence().artifact_equivalent(p, frozen.parent)
+        return f"{rel.as_posix()}: {why}" if ok else None
+    if rel.parts[0] == "outputs" and p.suffix == ".csv":
+        return None if compare_csv(p, frozen, 1e-9) else f"{rel.as_posix()}: 해시는 다르지만 동결 사본과 허용오차 안(기기 간 부동소수 차이)"
+    return None
+
+
 def load_contract(pkg: Path) -> dict:
     c = json.loads((pkg / "contract.json").read_text(encoding="utf-8"))
     c.setdefault("tolerance", 1e-9)
+    c.setdefault("tolerances", {})
     c.setdefault("meta_keys", list(DEFAULT_META))
     c.setdefault("run_options", [])
     c.setdefault("commands", [])
@@ -99,8 +134,8 @@ def _get(d: dict, dotted: str):
     return d
 
 
-def integrity(pkg: Path, out: Path | None = None, contract: dict | None = None) -> list[str]:
-    """실행 기록(manifest)에 적힌 입력·코드·모델·인용·결과 해시가 현재 파일과 같은가."""
+def integrity(pkg: Path, out: Path | None = None, contract: dict | None = None, notes: list | None = None) -> list[str]:
+    """실행 기록(manifest)에 적힌 입력·코드·모델·인용·결과 해시가 현재 파일과 같은가. notes를 주면 기기 간 동등 판정을 적는다."""
     out = Path(out or pkg)
     c = contract or load_contract(pkg)
     bad, recorded_outputs = [], set()
@@ -123,7 +158,11 @@ def integrity(pkg: Path, out: Path | None = None, contract: dict | None = None) 
                 if p is None or not p.is_file():
                     bad.append(f"{name}: {group} 파일 없음 — {key}")
                 elif sha256(p) != digest:
-                    bad.append(f"{name}: {group} 변경(실행 기록과 다름) — {key}")
+                    same = equivalent_dependency(p, digest) if rule != "outputs" else None
+                    if same is None:
+                        bad.append(f"{name}: {group} 변경(실행 기록과 다름) — {key}")
+                    elif notes is not None:
+                        notes.append(f"{name}: {same}")
                 if rule == "outputs" and p is not None:
                     recorded_outputs.add(p.resolve())
         for key, target in spec.get("scalars", {}).items():
@@ -149,22 +188,52 @@ def integrity(pkg: Path, out: Path | None = None, contract: dict | None = None) 
     return bad
 
 
-def compare_csv(a: Path, b: Path, tol: float) -> str | None:
+def _as_float(values):
+    return pd.to_numeric(pd.Series(values, dtype=object), errors="coerce").to_numpy(float)
+
+
+def compare_csv(a: Path, b: Path, tol: float, overrides: dict | None = None) -> str | None:
+    """수치 열은 |차이| ≤ 허용 + 1e-9·|동결 값|. 문자 열은 양쪽 칸이 모두 수로 읽히면 같은 규칙, 아니면 정확 비교."""
     x, y = pd.read_csv(a), pd.read_csv(b)
+    overrides = overrides or {}
     if x.shape != y.shape or list(x.columns) != list(y.columns):
         return f"{a.name}: 모양·열 불일치 {x.shape} vs {y.shape}"
     for col in x.columns:
+        limit = float(overrides.get(col, tol))
         if pd.api.types.is_numeric_dtype(x[col]) and pd.api.types.is_numeric_dtype(y[col]):
             xv, yv = x[col].to_numpy(float), y[col].to_numpy(float)
             if any(not np.array_equal(f(xv), f(yv)) for f in (np.isnan, np.isposinf, np.isneginf)):
                 return f"{a.name}: {col} 결측·무한 위치 불일치"
             ok = np.isfinite(xv)
-            d = np.abs(xv[ok] - yv[ok])
-            if len(d) and d.max() > tol:
-                return f"{a.name}: {col} 최대 차이 {d.max():.3g} > {tol:g}"
-        elif not x[col].astype(str).equals(y[col].astype(str)):
+            d = np.abs(xv[ok] - yv[ok]); bound = limit + RTOL * np.abs(yv[ok])
+            if len(d) and (d > bound).any():
+                i = int(np.argmax(d - bound))
+                return f"{a.name}: {col} 최대 차이 {d[i]:.3g} > {bound[i]:.3g}"
+            continue
+        xs, ys = x[col].astype(str).to_numpy(), y[col].astype(str).to_numpy()
+        same = xs == ys
+        if same.all():
+            continue
+        xf, yf = _as_float(xs), _as_float(ys)
+        numeric = ~same & np.isfinite(xf) & np.isfinite(yf)
+        if (~same & ~numeric).any():
             return f"{a.name}: 문자 열 {col} 불일치"
+        d = np.abs(xf[numeric] - yf[numeric]); bound = limit + RTOL * np.abs(yf[numeric])
+        if (d > bound).any():
+            i = int(np.argmax(d - bound))
+            return f"{a.name}: 문자 열 {col}의 수 칸 차이 {d[i]:.3g} > {bound[i]:.3g}"
     return None
+
+
+def json_close(p, q, tol: float) -> bool:
+    """JSON 값 비교: 수는 |차이| ≤ tol + 1e-9·|동결 값|, 나머지는 정확 비교."""
+    if isinstance(p, dict) and isinstance(q, dict):
+        return p.keys() == q.keys() and all(json_close(p[k], q[k], tol) for k in q)
+    if isinstance(p, list) and isinstance(q, list):
+        return len(p) == len(q) and all(json_close(u, v, tol) for u, v in zip(p, q))
+    if isinstance(p, (int, float)) and isinstance(q, (int, float)) and not isinstance(p, bool) and not isinstance(q, bool):
+        return abs(p - q) <= tol + RTOL * abs(q)
+    return p == q
 
 
 def _strip(obj, keys):
@@ -210,9 +279,10 @@ def compare_expected(pkg: Path, out: Path | None = None, expected: Path | None =
             bad.append(f"결과 없음 — {rel}")
             continue
         if rel.endswith(".csv"):
-            reason = compare_csv(p, q, float(c["tolerance"]))
+            reason = compare_csv(p, q, float(c["tolerance"]), c["tolerances"].get(rel))
         elif rel.endswith(".json"):
-            same = _strip(json.loads(p.read_text(encoding="utf-8")), set(c["meta_keys"])) == _strip(json.loads(q.read_text(encoding="utf-8")), set(c["meta_keys"]))
+            same = json_close(_strip(json.loads(p.read_text(encoding="utf-8")), set(c["meta_keys"])),
+                              _strip(json.loads(q.read_text(encoding="utf-8")), set(c["meta_keys"])), float(c["tolerance"]))
             reason = None if same else f"{rel}: 내용 불일치"
         else:
             reason = None if p.read_bytes().replace(b"\r\n", b"\n") == q.read_bytes().replace(b"\r\n", b"\n") else f"{rel}: 내용 불일치"
@@ -374,9 +444,11 @@ def main(argv=None):
         return 0
     bad = rerun(pkg) if args.rerun else []
     c = load_contract(pkg)
-    bad += integrity(pkg, args.out, c)
+    same_notes = []
+    bad += integrity(pkg, args.out, c, same_notes)
     cmp_bad, notes = compare_expected(pkg, args.out, None, c)
     bad += cmp_bad
+    notes = same_notes + notes
     for msg in notes:
         print("참고", msg)
     for msg in bad:

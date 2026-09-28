@@ -1,0 +1,27 @@
+## A. package_contract.compare_csv 문자 열의 수치 비교
+  문자 열 '007' vs '7'(식별자 자릿수)                                 → 통과
+  문자 열 '1.10' vs '1.1'(판 번호)                                 → 통과
+  문자 열 '0.970990' vs '0.97099'                               → 통과
+  문자 열 '21/21' vs '20/21'                                    → 실패: now.csv: 문자 열 value 불일치
+  문자 열 '5' vs ' 5'(앞 공백)                                     → 통과
+  문자 열 'nan' vs 'NaN'                                        → 통과
+  수치 열 1e9 vs 1e9+0.9(상대 1e-9)                               → 통과
+  정수 열 3000000000 vs 3000000002                              → 통과
+  override 열(spearman 1e-4) 0.9 vs 0.90009                   → 통과
+## B. json_close
+  bool True vs 정수 1                                          → 같음
+  정수 1 vs 실수 1.0                                             → 같음
+  큰 정수 1.7e12 vs +1000                                       → 같음
+  None vs 0                                                  → 다름
+## C. equivalent_dependency / artifact_equivalent 변조(임시 사본)
+  모델 같은 값, 들여쓰기만 다름                                       → 통과(참고)
+  모델 보정값 한 개 상대 +5e-9                                     → 통과(참고)
+  모델 보정값 한 개 상대 +1e-6                                     → 실패
+  모델 AR 계수 상대 +1e-7                                       → 실패
+  모델 문자 필드(selection) 변경                                  → 실패
+  모델 키 하나 삭제(sampling_seconds)                            → 실패
+  모델 봉투 sha256만 변조(상태 그대로 → 불러오기는 실패할 파일)                 → 통과(참고)
+  결과 CSV rolling.csv 같은 값, 17자리 표기                            → 통과(참고)
+  결과 CSV rolling.csv 실수 한 칸 +1e-6                             → 실패
+  결과 CSV metrics.csv 정수 한 칸 +1                                → 실패
+  기록 해시가 동결 사본과 다를 때(다른 실행) → 실패

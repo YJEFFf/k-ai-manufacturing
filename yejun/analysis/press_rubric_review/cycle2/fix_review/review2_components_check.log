@@ -1,0 +1,12 @@
+A 위치 0~1: v2 g_waveform 있음 0/281, g_dynamics 있음 0/281, 창 [6] | v1 g_sine 있음 0/281
+A 위치 2~4: v2 g_waveform 있음 0/413, g_dynamics 있음 413/413, 창 [6] | v1 g_sine 있음 0/413
+A 위치 5~6: v2 g_waveform 있음 267/267, g_dynamics 있음 267/267, 창 [6] | v1 g_sine 있음 0/267
+A 위치 7~끝: v2 g_waveform 있음 3729/3729, g_dynamics 있음 3729/3729, 창 [8] | v1 g_sine 있음 3729/3729
+A v1 미탐→v2 탐지 55행의 reason 분포: {'dynamics': 42, 'waveform+dynamics': 11, 'waveform': 2}
+A v2 g_magnitude vs v1 g_maxz3 최대 |차| 0.00e+00
+B 위치 0~1: v2 g_waveform 있음 0/401, g_dynamics 있음 0/401, 창 [6] | v1 g_sine 있음 0/401
+B 위치 2~4: v2 g_waveform 있음 0/592, g_dynamics 있음 592/592, 창 [6] | v1 g_sine 있음 0/592
+B 위치 5~6: v2 g_waveform 있음 383/383, g_dynamics 있음 383/383, 창 [6] | v1 g_sine 있음 0/383
+B 위치 7~끝: v2 g_waveform 있음 5321/5321, g_dynamics 있음 5321/5321, 창 [8] | v1 g_sine 있음 5321/5321
+B v1 미탐→v2 탐지 55행의 reason 분포: {'dynamics': 40, 'waveform+dynamics': 13, 'waveform': 2}
+B v2 g_magnitude vs v1 g_maxz3 최대 |차| 0.00e+00

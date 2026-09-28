@@ -1,0 +1,26 @@
+# review2 입력 고정 기록
+스냅숏 복사 시각: 2026-09-29 02:19:20
+모델 사본(rsync) 시각: 2026-09-29 02:28:24
+저장소 HEAD: 2db34fd (커밋하지 않은 변경 포함 작업 트리)
+
+## 스냅숏 파일 SHA-256
+46b320b2c6bb5e10f713a1e720f7ade4c130894f50a47f1c5e0ce73be6002745  yejun/press_guard/outputs/probability_baselines_v2.csv
+867af780eaa96c84cf0fe3cbcc34daaf75676d539a65cfa30744add24c7be4c2  yejun/press_guard/outputs/test_predictions_A.csv
+a3671b9be5c1fa293fe1179b2c91159816893db683351396773b4e65b0a74794  yejun/press_guard/outputs/test_predictions_B.csv
+a980686b64806d60458c9c1b8e30bf6b3ee3831acb47216d82104ab351a22761  yejun/press_guard/outputs/unit_results_v2.csv
+af31d150a730b6eaa0be2ebef6569a90509189fa702bc29eb567c0d6cd7e59d8  yejun/press_guard/README.md
+9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e  yejun/press_submission/data/3_소성가공_예지보전/outlier_data.csv
+f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7  yejun/press_submission/data/3_소성가공_예지보전/press_data_normal.csv
+0656fc309cd75e0fa083cd74206b436871e19e7c8a6d9e4fd8d9256a7e7e8b4b  yejun/press_submission/outputs/predictions_A.csv
+a1f4fd3d8246c738aded9b464adffa94cf87769cae8e55f45483af7fd241a0ea  yejun/press_submission/outputs/predictions_B.csv
+81dc394c8b0b53618177e5822c7cc0f7ff7c7f060d08471c968b4cfaaa05411f  yejun/press_submission/press/data.py
+
+## 모델 사본 SHA-256
+c938707f1dd16e7c239b8053e7f032d8fac828d6c753de2b898ba9130a594f10  press_guard/artifacts/guard_A.json
+b64ac3b30bc697034104287964f3154e88c8a50749ccdec04f6d4f8744fd6969  press_guard/artifacts/guard_B.json
+1a8100e78046393d9292fc7c305b5ec57b46c4e2c73b03abeb596052a8705f8a  press_guard/artifacts/probability_A.json
+7fde4cd1bdfa74e78e2d3f07c5dbd9c27619e19b2e94ceb8fab786c27abcaae8  press_guard/artifacts/probability_B.json
+5310717e6fbc394bf379539a7f84d3d7e1018ace08af554facb757bea2ce3422  press_guard/model.py
+67007ee9c8a9a12c48707e77230907dac2c155a519edfe7868863065aa4f34dd  press_guard/probability.py
+
+## 02:32:11 재확인: 위 대상 파일 10개(README·표 2개·예측 4개·data.py·guard_A/B.json)는 저장소 작업 트리와 해시가 같았다.

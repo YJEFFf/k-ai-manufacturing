@@ -79,5 +79,11 @@
   "commands": [
     "python analysis/press_evidence/build_tables.py",
     "python analysis/press_evidence/build_diagnostics.py"
-  ]
+  ],
+  "tolerances": {
+    "component_correlation.csv": {
+      "spearman": 0.0001
+    }
+  },
+  "tolerance_reasons": "성분 점수의 스피어만 상관: 수학적으로 같은 점수의 순위가 기기마다 뒤바뀐다(리눅스 x86-64 실측 1.3e-6)"
 }

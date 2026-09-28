@@ -9,11 +9,11 @@
     "guard_B.json": "b64ac3b30bc697034104287964f3154e88c8a50749ccdec04f6d4f8744fd6969"
   },
   "code_sha256": {
-    "yejun/analysis/press_evidence/build_diagnostics.py": "1541ad6409c256694d12691f8abccf72ee6f29954708c719b222748784a8de11",
+    "yejun/analysis/press_evidence/build_diagnostics.py": "afb1860dcc85d3790f1d3cb1b6d5fe8ca922182c6104e35017c26a1f99995886",
     "yejun/analysis/press_evidence/figures.py": "23d94f96019af64612c3bcaed9fbc20cb20358adc3cc8cb2d94674d7c837d3e1",
     "yejun/analysis/press_evidence/build_tables.py": "2952b498504a76d0929ce2e25c4d6953ee2b1c5204b14d09e4564a4cb34327a8",
     "yejun/analysis/press_evidence/diagnostic_probes.py": "620f1e2c1dde23cc4ce5d03a7ccf30c4033b2af52d48039c597b32152a39fcf6",
-    "yejun/press_guard/model.py": "8b9493a248609180f139aa777ed0b1cbf29d3bfca5e5b98f2e588cbeb0cb3f6f",
+    "yejun/press_guard/model.py": "89d6ce4a721fbc34ce3baafa4fc056c20cea42ed737d7a9deeeb58ebc6d5af9e",
     "yejun/press_submission/press/diagnosis.py": "f7ecb071d7c9c9b25c670bcb6052f8201ca2e03e991b57f9fe13fec6346cf499",
     "yejun/press_submission/press/data.py": "81dc394c8b0b53618177e5822c7cc0f7ff7c7f060d08471c968b4cfaaa05411f"
   },
@@ -23,12 +23,12 @@
     "yejun/press_guard/outputs/ablation_v2.csv": "1a5b97c9a88ad908eed89ae91e673cea9275405498e2c63264c838cf60c3fbe0",
     "yejun/press_guard/outputs/uncertainty_v2.csv": "c10df72d1662caf044679acbe88c65c1384ba8c68b8d36188926f40ff07aec72",
     "yejun/press_submission/outputs/load_normalization_meta.csv": "4f933704fe30005e636edb55829870d8434330afc28313a55d9cda27a1b35938",
-    "yejun/analysis/press_supplement/e1_summary.csv": "ac599f2408e6eb8cf03c51ca8f83ffa34ba4cb11d48a168b23e43195ab980344",
+    "yejun/analysis/press_supplement/e1_summary.csv": "bbf0f95deefaead1a35e68324eac600907bf80eb5005d40f519bf5e23a20b7b9",
     "yejun/analysis/press_supplement/e1_detection_floor.csv": "e0c97954bf46b00895d2e5310ddceb15297aa38b4d995b22715eb1d2ecf96975",
     "yejun/analysis/press_supplement/e2_uci_metrics.csv": "9182c3046dbe0d43527b3ff1138944ac98a540529de37ef2d7ae4793887f6534",
     "yejun/analysis/press_supplement/e3_stability.csv": "4447e30b858fc32df317a565ebc86720e7759e802a3a9960f0c27e9c5005762c",
     "yejun/analysis/press_supervised/random_rows.csv": "b48137569867b7b0300fc1b9878bcd83c88f3895b190ae4bbe4158c113ee8b98",
-    "yejun/analysis/press_supervised/grouped_records.csv": "f33b034997209fbc9f2c767a4c9fcd9fe536ecad315ee80d66f55ed1851b1341",
+    "yejun/analysis/press_supervised/grouped_records.csv": "9c563208868faa646071c23c5a324c349b7340beabdd9098ce1be8872d46cbf3",
     "yejun/analysis/press_evidence/gaps.csv": "b19fbc020a5576e9919cd5b2c7ba8fc4d0aba0e1aca4d035bc1505458d73df82",
     "yejun/analysis/press_evidence/imbalance.csv": "25f925cd4096060404131c75ee6fcf5438a7a0e9bc09415dd1f7c43868ffa917",
     "yejun/analysis/press_evidence/outliers.csv": "704fb6abb05fb56e34ef97c1e68ce872d08ded3220076c3974ec815599711e0c",
@@ -54,18 +54,18 @@
     "yejun/analysis/press_evidence/split_state_composition.csv": "702f4b7da8c4504abaad46b14251d857ba1372725edd0fac83d73d5ce3694cbd",
     "yejun/analysis/press_evidence/state_transition_stress.csv": "7a788e5150112f30c5f5c01296e2c4033d540b0be20589b6554b1fb6f05c96a3",
     "yejun/analysis/press_evidence/variable_dictionary.csv": "224007654f59303461cc2ebefc9c5d3cf7d254cd024e563ebdec22b2fb22a4d5",
-    "yejun/analysis/press_supervised/grouped_records.csv": "f33b034997209fbc9f2c767a4c9fcd9fe536ecad315ee80d66f55ed1851b1341",
+    "yejun/analysis/press_supervised/grouped_records.csv": "9c563208868faa646071c23c5a324c349b7340beabdd9098ce1be8872d46cbf3",
     "yejun/analysis/press_supervised/random_rows.csv": "b48137569867b7b0300fc1b9878bcd83c88f3895b190ae4bbe4158c113ee8b98",
     "yejun/analysis/press_supplement/e1_detection_floor.csv": "e0c97954bf46b00895d2e5310ddceb15297aa38b4d995b22715eb1d2ecf96975",
-    "yejun/analysis/press_supplement/e1_summary.csv": "ac599f2408e6eb8cf03c51ca8f83ffa34ba4cb11d48a168b23e43195ab980344",
+    "yejun/analysis/press_supplement/e1_summary.csv": "bbf0f95deefaead1a35e68324eac600907bf80eb5005d40f519bf5e23a20b7b9",
     "yejun/analysis/press_supplement/e2_uci_metrics.csv": "9182c3046dbe0d43527b3ff1138944ac98a540529de37ef2d7ae4793887f6534",
     "yejun/analysis/press_supplement/e3_stability.csv": "4447e30b858fc32df317a565ebc86720e7759e802a3a9960f0c27e9c5005762c",
-    "yejun/press_guard/model.py": "8b9493a248609180f139aa777ed0b1cbf29d3bfca5e5b98f2e588cbeb0cb3f6f",
+    "yejun/press_guard/model.py": "89d6ce4a721fbc34ce3baafa4fc056c20cea42ed737d7a9deeeb58ebc6d5af9e",
     "yejun/press_guard/outputs/ablation_v2.csv": "1a5b97c9a88ad908eed89ae91e673cea9275405498e2c63264c838cf60c3fbe0",
     "yejun/press_guard/outputs/coupling_fit_v2.csv": "bc6786eb5d87b22bbc989430cf859dba4238d1629d82bae18d3ed8d2c297df70",
     "yejun/press_guard/outputs/uncertainty_v2.csv": "c10df72d1662caf044679acbe88c65c1384ba8c68b8d36188926f40ff07aec72",
     "yejun/press_guard/test_guard.py": "f5b8a0bdf415cb546d207352cdf5ca3fa5079f319571f3402c09c6c615b7cffd",
-    "yejun/press_submission/README.md": "6c2a9662b23e269dede3db74b272f12f11f03c63a677528f3e3830da652348e2",
+    "yejun/press_submission/README.md": "f60289d1ed2b8b12ede580442d416dc5f7755a268cfedb6685a1ff752c237aca",
     "yejun/press_submission/outputs/diagnosis.md": "a5f675ae7a993a792f2aef0de57feb8536cdb2fd7ea177c061ffbf165db29e0d",
     "yejun/press_submission/outputs/label_bypass.csv": "0dc378785b250b2d213cd0f17b5bd2543c7cea2afff29e1434d4d418c5249144",
     "yejun/press_submission/outputs/load_normalization_meta.csv": "4f933704fe30005e636edb55829870d8434330afc28313a55d9cda27a1b35938",
@@ -125,7 +125,7 @@
     "guidebook_protocol_vs_records.csv": "186a5d41bcec397efbb30ff0eb2b8717e0cc1d5ab6a0ec19c861db7bb7f68771",
     "variable_expected_signals.csv": "c8774f36b86d4ee0a7931a1b447a17d46686a49e282809ab1233220c14bed8f6",
     "failure_mode_map.csv": "be367c8be6aef2a6d4c9407db431d7c70bef6de699bb9f177e3eb1e6a844c0c7",
-    "decision_table_diagnosis_v2.csv": "fc118ef7d5d7a5d8fdf6eabe13f8a99d73152ad7412c1f727c5f902110ef6e7e",
+    "decision_table_diagnosis_v2.csv": "8612b34e7ca22c0ee1c1b6d2d715528fc9eaf5d939d9124ffab2e0b62a88494a",
     "yejun/analysis/press_evidence/figures/fig_d2a_timeline.png": "a36cb458e0cb02734db3721db603eb8c3b1dc6994b7bef81bb00dfa33f6a3e4b",
     "yejun/analysis/press_evidence/figures/fig_d2b_blocks.png": "62d298a07efdde16dcb784e42977f43e87f662028fce65440c73e6b8ec9df6a7",
     "yejun/analysis/press_evidence/figures/fig_d2c_raw_examples.png": "c2a83eacb491f8ace6e59104afe315d18e308e8e462f7b658363bacf66d48a7a",
@@ -191,5 +191,5 @@
       }
     ]
   },
-  "elapsed_s": 35.3
+  "elapsed_s": 34.5
 }

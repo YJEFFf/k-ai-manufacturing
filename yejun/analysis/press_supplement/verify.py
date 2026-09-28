@@ -137,7 +137,10 @@ def main(argv=None):
     experiments = [e for e in requested if e not in skipped]
     for exp, missing in skipped.items():
         print(f"건너뜀 {exp}: 외부 입력 없음 {missing} — 획득: python analysis/press_external/acquire.py (SHA-256은 analysis/press_external/acquisition.json)")
-    integrity = [msg for exp in experiments for msg in contract.errors(exp, args.out)]
+    same = []
+    integrity = [msg for exp in experiments for msg in contract.errors(exp, args.out, notes=same)]
+    for msg in same:
+        print("참고", msg)
     if args.freeze and skipped:
         print(f"동결 거부: 외부 입력이 없어 검사하지 못한 실험 {list(skipped)}", file=sys.stderr)
         return 2

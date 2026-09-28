@@ -1,0 +1,7 @@
+predictions_normal_A.csv     g_waveform                   합·제곱합 최대 상대 차이 3.41e-07
+predictions_normal_B.csv     g_waveform                   합·제곱합 최대 상대 차이 2.85e-07
+predictions_normal_A.csv     score                        합·제곱합 최대 상대 차이 2.15e-07
+predictions_normal_B.csv     score                        합·제곱합 최대 상대 차이 1.3e-07
+test_predictions_B.csv       g_waveform                   합·제곱합 최대 상대 차이 2.97e-08
+test_predictions_A.csv       g_waveform                   합·제곱합 최대 상대 차이 2.44e-08
+상대 1e-6 넘는 열: 0 / 94

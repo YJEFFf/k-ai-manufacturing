@@ -77,7 +77,16 @@ state.sim={row:6}; assert.match(operatingStateText(c), /저수준/); assert.does
 state.sim=null; assert.match(operatingStateText(c), /부하/);
 renderDetail(incidents[0], c);
 assert.match(document.getElementById('detail-summary').innerHTML, /운전 상태/);
-assert.match(document.getElementById('checklist').textContent, /3\/51.*0\/94/);
+state.overview={...(state.overview||{}), state_reference:[
+  {alpha:0.01,value:'load',false_alarms:3,denominator:154},{alpha:0.01,value:'low',false_alarms:0,denominator:225},{alpha:0.01,value:'short',false_alarms:0,denominator:101},
+  {alpha:0.05,value:'load',false_alarms:17,denominator:154},{alpha:0.05,value:'low',false_alarms:0,denominator:225},{alpha:0.05,value:'short',false_alarms:0,denominator:101}]};
+state.result={...state.result, alpha:0.01}; renderDetail(incidents[0], c);
+assert.match(document.getElementById('checklist').textContent, /α 1%.*부하 3\/154.*저수준 0\/225/);
+state.result={...state.result, alpha:0.05}; renderDetail(incidents[0], c);
+assert.match(document.getElementById('checklist').textContent, /α 5%.*부하 17\/154/);   // 분석한 α를 따른다(적대적 검수 C-07)
+renderDetail(incidents[0], {...c, operating_state:'short'});
+assert.match(document.getElementById('checklist').textContent, /판정 대기.*17행째/);   // 첫 경보 때 상태 미정(C-05)
+state.result={...state.result, alpha:0.01};
 // 감시표는 창별 두 입력 조건의 권장 조치를 그대로 표시한다.
 renderMonitorGain([{split:'B', gain:1.5, recalibration_review:true, alerted_by_window:'8/3/6',
   recommended_actions_no_change:'0:설비 점검 요청(전류 수준 이동: FM4·FM5 점검, 정상 확인이면 재보정)',

@@ -140,6 +140,7 @@ class Console:
                     quality_windows=self._table("quality_windows_v2.csv",lambda t:t.alpha.eq(.01)&t.source.eq("normal")),
                     monitor_gain=self._table("monitor_gain_v2.csv",lambda t:t.alpha.eq(.01)),
                     expected_effect=self._table("expected_effect_v2.csv"),
+                    state_reference=self._table("fp_intensity_v2.csv",lambda t:t.unit.eq("평가 단위(적합×구간)")&t.condition.eq("operating_state")),
                     benchmark=json.loads(benchmark.read_text(encoding="utf-8")) if benchmark.exists() else {})
 
 

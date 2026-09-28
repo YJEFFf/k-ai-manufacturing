@@ -1,0 +1,6 @@
+audit exit 0 (1290s)
+OK  B 날짜 이동·라벨 변경에 불변: 경보·점수 동일
+16/16 통과 → /work/yejun/press_guard/outputs/audit.json
+verify exit 1
+FAIL probability_conversion_v2.csv  (alarm_rows_min_lr row 5: |Δ|=5.98e-09 > 3.42e-09)
+56/57 통과. 코드 5310717e6fbc vs 동결 5310717e6fbc; 환경 Linux-6.8.0-50-generic-x86_64-with-glibc2.41 vs 동결 macOS-26.3.1-arm64-arm-64bit

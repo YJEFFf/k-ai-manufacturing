@@ -51,7 +51,7 @@ def operation_flow(path):
     arrow(ax, (.87, .78), (.69, .67), text="첫 경보", text_xy=(.76, .735))
     arrow(ax, (.87, .78), (.89, .67), text="격상", text_xy=(.915, .735))
     arrow(ax, (.77, .595), (.80, .595), color=RED, text="", ls="--")
-    box(ax, .55, .25, .2, .19, "4 판단표 점검", "운전 상태 → 근거 → 확인 대상\nB 정상 참고: 부하 3/51·저수준 0/94\n고장 모드 후보 FM1~FM6\n(decision_table_v2.csv)", color=BLUE, fill="#f1f5fa")
+    box(ax, .55, .25, .2, .19, "4 판단표 점검", "운전 상태 → 근거 → 확인 대상\n정상 참고(α1%): 부하 3/154·저수준 0/225\n고장 모드 후보 FM1~FM6\n(decision_table_v2.csv)", color=BLUE, fill="#f1f5fa")
     box(ax, .78, .27, .2, .17, "5 품질 조치", "의심 생산 시간창 가공품 보류\n전단면·버·치수·평탄도 전수 확인\n(quality_windows_v2.csv)", color=BLUE, fill="#f1f5fa")
     arrow(ax, (.89, .52), (.89, .44)); arrow(ax, (.83, .52), (.65, .44))
     arrow(ax, (.78, .355), (.75, .355))

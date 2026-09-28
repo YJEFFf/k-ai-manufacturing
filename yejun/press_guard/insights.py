@@ -1176,7 +1176,7 @@ def error_condition_summary(out, e1_summary, dayshift):
         (int(round((1 - sh["B"].v2_detect_2s) * sh["B"].units * sh["B"].reps)), int(sh["B"].units * sh["B"].reps)),
         1 - sh6["A"].v2_detect_2s, 1 - sh6["B"].v2_detect_2s,
         f"2초 안 탐지 {sh['A'].v2_detect_2s:.1%}·{sh['B'].v2_detect_2s:.1%}. 6σ는 {sh6['A'].v2_detect_2s:.1%}·{sh6['B'].v2_detect_2s:.1%}",
-        "주입(사후, press_selection)", _cite(SELECTION_INJECTION, (k | k6)), "A 평가 구간은 조용한 시간대라 문턱(max|z| 4.49)이 B(3.77)보다 높다")
+        "주입(사후, press_selection)", _cite(SELECTION_INJECTION, (k | k6)), "A의 α 1% 문턱(max|z| 4.49)이 B(3.77)보다 높은 것은 A 보정 최댓값이 B 오경보 기록 461이기 때문이다(둘째 값 423도 B 오경보). A 평가 구간은 가장 조용한 시간대다. A·B를 독립 검증 두 건으로 세지 않는다")
 
     # FP
     ah = fi[fi.condition.eq("amp_high") & fi.value.str.contains("B 정상 학습")]
@@ -1327,3 +1327,122 @@ def insight_figures(out, sens_imp, cfit, crec, prel, fa_events, normal, models, 
     ax.set_xlabel("예측 이상 확률(평가 자료 비율 기준)"); ax.set_ylabel("관측 이상 비율(95% 구간)"); ax.set_title("이상 확률 층의 신뢰도(이상 기록 21겹 교차)")
     ax.legend(frameon=False); ax.grid(color="#e6e5df")
     fig.tight_layout(); fig.savefig(out / "fig_probability_reliability_v2.png", dpi=150); plt.close(fig)
+
+
+# ---------- 단위별 결과·단순 규칙 기준선(적대적 검수 X-01·X-02, 재검수 정정) ----------
+V1_OUT = YEJUN / "press_submission" / "outputs"
+POS_BINS = (("0-1", 0, 1), ("2-6", 2, 6), (">=7", 7, 10 ** 6))
+OSC_COEF = 2 * np.cos(2 * np.pi * .6 * D.DT)      # 고정 0.6 Hz 공진 잔차의 계수(학습하지 않는다)
+V1_ALARM = {.01: "alarm", .03: "alarm_conformal_0.03", .05: "alarm_conformal_0.05"}
+
+
+def _fixed_rule(frame):
+    """학습 없는 고정 규칙의 성분: 전류 고정 0.6 Hz 공진 잔차 |x_t − 2cos(2π·0.6·0.1)x_{t−1} + x_{t−2}|(위치 2부터)와 두 진동의 절댓값."""
+    q = D.quantize(D.inputs_only(frame), "matched"); seg = layout(q)[1]
+    x = q[D.SENSORS].to_numpy(float)
+    pos, _ = D.segment_positions(seg)
+    osc = np.full(len(x), np.nan)
+    i = np.flatnonzero(pos >= 2)
+    osc[i] = np.abs(x[i, 2] - OSC_COEF * x[i - 1, 2] + x[i - 2, 2])
+    return np.column_stack([osc, np.abs(x[:, 0]), np.abs(x[:, 1])]), seg, pos
+
+
+def _unit_row(split, alpha, model, an, aa, sn, sa, pos_a, score_n, score_a, note):
+    an, aa, sn, sa = np.asarray(an, bool), np.asarray(aa, bool), np.asarray(sn), np.asarray(sa)
+    score_n, score_a, pos_a = np.asarray(score_n, float), np.asarray(score_a, float), np.asarray(pos_a)
+    tp, fp, fn = int(aa.sum()), int(an.sum()), int((~aa).sum())
+    rec_n = pd.Series(score_n).groupby(sn).max(); rec_a = pd.Series(score_a).groupby(sa).max()
+    y = np.r_[np.zeros(len(rec_n)), np.ones(len(rec_a))]; s = np.r_[rec_n.fillna(-np.inf), rec_a.fillna(-np.inf)]
+    row = dict(split=split, alpha=alpha, model=model, tp=tp, fp=fp, fn=fn, f1_rows=2 * tp / (2 * tp + fp + fn),
+               abnormal_records_detected=int(pd.Series(aa).groupby(sa).any().sum()), abnormal_records=int(len(np.unique(sa))),
+               normal_records_alerted=int(pd.Series(an).groupby(sn).any().sum()), normal_records=int(len(np.unique(sn))),
+               record_auroc=float(roc_auc_score(y, s)) if len(rec_n) and len(rec_a) else np.nan,
+               record_normal_max=float(rec_n.max()), record_abnormal_min=float(rec_a.min()))
+    for lab, lo, hi in POS_BINS:
+        m = (pos_a >= lo) & (pos_a <= hi)
+        row[f"missed_pos_{lab}"], row[f"rows_pos_{lab}"] = int((~aa & m).sum()), int(m.sum())
+    row["note"] = note
+    return row
+
+
+def unit_results(normal, abnormal, models):
+    """α별 v1·v2·단순 규칙의 행 단위(F1)와 기록 단위(21기록 탐지·정상 기록 알림·기록 최대 점수 AUROC) 결과, 이상 행의 기록 안 위치별 미탐.
+    기록 단위로는 세 방법이 거의 같고, v2의 개선은 주로 기록 시작 0.2~0.6초(위치 2~6) 행에서 나온다. 단순 규칙은 성분 척도를 정상 학습
+    최댓값으로 정하고, 보정 기록 최대 점수로 같은 conformal 문턱을 쓴다. 이상 자료를 본 뒤 만든 사후 비교 기준선이며 채택 후보가 아니다."""
+    rows = []
+    seg_all = D.segments(normal)
+    fa, sa, pos_a = _fixed_rule(abnormal)
+    for sid, model in models.items():
+        sp = D.split_normal(normal, seg_all, sid)
+        v1 = pd.read_csv(V1_OUT / f"predictions_{sid}.csv")
+        v1n, v1a = v1[v1.source.eq("normal_test")], v1[v1.source.eq("abnormal")]
+        ftr, _, _ = _fixed_rule(sp["train"]); fcal, scal, _ = _fixed_rule(sp["cal"]); ftest, stest, _ = _fixed_rule(sp["test"])
+        scale = np.nanmax(ftr, axis=0)
+        rule = lambda comp: np.fmax.reduce(comp / scale, axis=1)
+        cal_max = pd.Series(rule(fcal)).groupby(scal).max().to_numpy()
+        rn, ra = rule(ftest), rule(fa)
+        for alpha in ALPHAS:
+            pn, pa = model.predict(sp["test"], alpha), model.predict(abnormal, alpha)
+            rows.append(_unit_row(sid, alpha, "v2(최종)", pn.alarm.eq(1), pa.alarm.eq(1), pn.record_id, pa.record_id, pa.position.to_numpy(),
+                                  pn.score.to_numpy(), pa.score.to_numpy(), "저장 모델"))
+            rows.append(_unit_row(sid, alpha, "v1(기준)", v1n[V1_ALARM[alpha]].eq(1), v1a[V1_ALARM[alpha]].eq(1), v1n.record_id, v1a.record_id,
+                                  v1a.position_in_record.to_numpy(), v1n.combined_score.to_numpy(), v1a.combined_score.to_numpy(), "press_submission 예측 파일"))
+            rows.append(_unit_row(sid, alpha, "단순 규칙(학습 없음, 사후)", conformal_p(cal_max, rn) <= alpha, conformal_p(cal_max, ra) <= alpha,
+                                  stest, sa, pos_a, rn, ra, "고정 0.6 Hz 공진 잔차·진동 절댓값의 최댓값. 척도는 정상 학습 최댓값, 문턱은 같은 보정 기록 최대 점수"))
+    return pd.DataFrame(rows)
+
+
+# ---------- 같은 조건의 확률 기준선 비교(적대적 검수 X-04, 재검수 정정) ----------
+def _weighted_losses(y, p, prior):
+    """평가 비율 prior로 재가중한 Brier·log-loss·ECE(10구간). prior=None이면 파일 그대로(행마다 같은 가중)."""
+    y = np.asarray(y, int); p = np.clip(np.asarray(p, float), 0.0, 1.0)
+    w = np.full(len(y), 1.0 / len(y)) if prior is None else np.where(y == 1, prior / max((y == 1).sum(), 1), (1 - prior) / max((y == 0).sum(), 1))
+    pc = np.clip(p, 1e-9, 1 - 1e-9)
+    brier = float((w * (p - y) ** 2).sum()); logloss = float(-(w * (y * np.log(pc) + (1 - y) * np.log(1 - pc))).sum())
+    bins = np.minimum((p * 10).astype(int), 9)
+    ece = float(sum(abs((w[bins == b] * (p[bins == b] - y[bins == b])).sum()) for b in range(10)))
+    return brier, logloss, ece
+
+
+def probability_baselines(normal, models, out):
+    """예측 사전확률 π와 평가 비율을 맞춘 확률 비교. 평가 비율은 파일 그대로(구성비를 아는 파일 안 평가)와 1%(클래스별 분포를
+    그대로 두고 재가중한 배포 가정 시나리오) 두 가지다. 현재 확률 층·두 수준 교차 보정(경보 여부만, LR 상한 121)·경보 0/1·1−p(확률 아님)·
+    상수 π를 같은 행·같은 가중으로 채점한다. 1−p와 경보 0/1은 확률이 아닌 점수를 그대로 채점한 참고값이다. 현재 층의 이상 행 우도비와
+    두 수준의 적중률·오경보율은 기록 하나 빼기 교차 적합 값이다. log-loss는 [1e-9, 1−1e-9]로 자른다. 한 에피소드 안 평가이며 현장 확률 검증이 아니다."""
+    from probability import posterior
+    rows = []
+    for sid, model in models.items():
+        t = pd.read_csv(out / f"test_predictions_{sid}.csv")
+        ok = np.isfinite(t.likelihood_ratio) & np.isfinite(t.p_value)
+        t = t[ok].reset_index(drop=True)
+        y = t.label.to_numpy(int); alarm = t.alarm.to_numpy(bool)
+        cap = len(model.cal) + 1
+        rec = t.record_id.to_numpy()
+        lr2 = np.empty(len(t))
+        # 두 수준 교차 보정: 경보 적중률은 이상 기록 하나 빼기, 오경보율은 정상 평가 기록 하나 빼기로 정한다
+        # (보정 행은 α 1%에서 구조상 경보가 날 수 없어 오경보율 추정에 쓰지 않는다).
+        norm_alarm = pd.Series(alarm[y == 0]).groupby(rec[y == 0]).agg(["sum", "size"])
+        abn_alarm = pd.Series(alarm[y == 1]).groupby(rec[y == 1]).agg(["sum", "size"])
+        fpr_all = float(norm_alarm["sum"].sum() / norm_alarm["size"].sum()); tpr_all = float(abn_alarm["sum"].sum() / abn_alarm["size"].sum())
+
+        def two_level(a, tpr, fpr):
+            return np.where(a, min(cap, tpr / fpr) if fpr > 0 else cap, max(1 / cap, (1 - tpr) / (1 - fpr)))
+        for r in abn_alarm.index:
+            m = (y == 1) & (rec == r)
+            tpr = float((abn_alarm["sum"].sum() - abn_alarm.loc[r, "sum"]) / (abn_alarm["size"].sum() - abn_alarm.loc[r, "size"]))
+            lr2[m] = two_level(alarm[m], tpr, fpr_all)
+        for r in norm_alarm.index:
+            m = (y == 0) & (rec == r)
+            fpr = float((norm_alarm["sum"].sum() - norm_alarm.loc[r, "sum"]) / (norm_alarm["size"].sum() - norm_alarm.loc[r, "size"]))
+            lr2[m] = two_level(alarm[m], tpr_all, fpr)
+        file_ratio = float(y.mean())
+        for label, prior, weight in (("파일 비율", file_ratio, None), ("1%", .01, .01)):
+            methods = {"현재 확률 층(예측 π = 평가 비율)": posterior(t.likelihood_ratio.to_numpy(float), prior),
+                       "두 수준 교차 보정(경보 여부, LR 상한 121)": posterior(lr2, prior),
+                       "경보 0/1(미보정)": alarm.astype(float), "1−p(확률 아님)": 1 - t.p_value.to_numpy(float),
+                       "상수 π": np.full(len(t), prior)}
+            for name, p in methods.items():
+                b, l, e = _weighted_losses(y, p, weight)
+                rows.append(dict(split=sid, evaluation_prior=label, prior_value=prior, method=name, brier=b, log_loss=l, ece=e,
+                                 rows=len(t), abnormal_rows=int(y.sum()), normal_alarm_rate=fpr_all, abnormal_alarm_rate=tpr_all))
+    return pd.DataFrame(rows)

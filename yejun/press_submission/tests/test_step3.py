@@ -40,4 +40,5 @@ def test_label_bypass_passes_on_fitted_model():
     st["preprocess_spec"] = D.QUANTIZATION["matched"]
     stream = pd.concat([D.inputs_only(D.quantize(sp["test"], "matched")), D.inputs_only(D.quantize(abnormal, "matched"))], ignore_index=True)
     lb = label_bypass(st, stream, "test")
-    assert lb.passed.all() and (lb[lb.expect_equal].max_abs_score_diff == 0).all()
+    # 라벨·날짜·미래 행이 점수를 바꾸지 않는다. 미래 행을 덧붙이면 배열 길이가 달라 기기에 따라 부동소수 잡음(x86-64 실측 2.8e-14)이 생긴다.
+    assert lb.passed.all() and (lb[lb.expect_equal].max_abs_score_diff <= 1e-12).all()

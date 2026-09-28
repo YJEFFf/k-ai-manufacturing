@@ -1,0 +1,79 @@
+
+### S1 첫 행 미래 튐(+1h)
+  rows 13 | bad_time_order rows: [1, 2] | expected by stated intent: 명세상 튄 행만 건너뜀; 테스트 문서는 첫 행이면 2행 보류
+  status: .HH..........
+  record_id: [0, 1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3] 
+  time_order_events(held, resumed): (2, 1) | warning: 역순 수집 시각 2행: 기준 시각보다 이르므로 판정을 보류했습니다(정상 간격으로 이어진 이른 시각을 새 기준으로 받아들인 곳 1곳). 수집 PC 시각과 입력 순서를 확인하세요.
+  stream/causality: {'stream_1': True, 'stream_7': True, 'stream_128': True, 'stream_random': True, 'causal_prefix_fail': []}
+
+### S2 중간 한 행 미래 튐(+1h)
+  rows 16 | bad_time_order rows: [] | expected by stated intent: []
+  status: ................
+  record_id: [0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] 
+  time_order_events(held, resumed): (0, 0) | warning: 
+  stream/causality: {'stream_1': True, 'stream_7': True, 'stream_128': True, 'stream_random': True, 'causal_prefix_fail': []}
+
+### S3 두 행 연속 미래 튐
+  rows 17 | bad_time_order rows: [7, 8] | expected by stated intent: 명세 문구상 '한 행' 규칙 밖 → 이른 행 보류 후 3행째 새 기준(보류 2행)
+  status: .......HH........
+  record_id: [0, 0, 0, 0, 0, 1, 1, 2, 3, 4, 4, 4, 4, 4, 4, 4, 4] 
+  time_order_events(held, resumed): (2, 1) | warning: 역순 수집 시각 2행: 기준 시각보다 이르므로 판정을 보류했습니다(정상 간격으로 이어진 이른 시각을 새 기준으로 받아들인 곳 1곳). 수집 PC 시각과 입력 순서를 확인하세요.
+  stream/causality: {'stream_1': True, 'stream_7': True, 'stream_128': True, 'stream_random': True, 'causal_prefix_fail': []}
+
+### S4 과거로 한 행 튐(-1h)
+  rows 16 | bad_time_order rows: [5] | expected by stated intent: [5]
+  status: .....H..........
+  record_id: [0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] 
+  time_order_events(held, resumed): (1, 1) | warning: 역순 수집 시각 1행: 기준 시각보다 이르므로 판정을 보류했습니다(정상 간격으로 이어진 이른 시각을 새 기준으로 받아들인 곳 1곳). 수집 PC 시각과 입력 순서를 확인하세요.
+  stream/causality: {'stream_1': True, 'stream_7': True, 'stream_128': True, 'stream_random': True, 'causal_prefix_fail': []}
+
+### S5 시계 영구 후퇴(-1h)
+  rows 20 | bad_time_order rows: [10, 11] | expected by stated intent: [10, 11]
+  status: ..........HH........
+  record_id: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 3, 3, 3, 3, 3, 3, 3] 
+  time_order_events(held, resumed): (2, 1) | warning: 역순 수집 시각 2행: 기준 시각보다 이르므로 판정을 보류했습니다(정상 간격으로 이어진 이른 시각을 새 기준으로 받아들인 곳 1곳). 수집 PC 시각과 입력 순서를 확인하세요.
+  stream/causality: {'stream_1': True, 'stream_7': True, 'stream_128': True, 'stream_random': True, 'causal_prefix_fail': []}
+
+### S6 시각 결측·센서 오류 섞임
+  rows 12 | bad_time_order rows: [5, 7, 8] | expected by stated intent: (결측 행은 상태 불변)
+  status: ..T..HTHH...
+  record_id: [0, 0, 1, 2, 2, 3, 4, 5, 6, 7, 8, 8] 
+  time_order_events(held, resumed): (3, 1) | warning: 역순 수집 시각 3행: 기준 시각보다 이르므로 판정을 보류했습니다(정상 간격으로 이어진 이른 시각을 새 기준으로 받아들인 곳 1곳). 수집 PC 시각과 입력 순서를 확인하세요.
+  stream/causality: {'stream_1': True, 'stream_7': True, 'stream_128': True, 'stream_random': True, 'causal_prefix_fail': []}
+
+### S7 불규칙 간격의 과거 시각
+  rows 22 | bad_time_order rows: [10, 11, 12, 13, 14, 15, 16, 17] | expected by stated intent: [10, 11, 12, 13, 14, 15, 16, 17]
+  status: ..........HHHHHHHH....
+  record_id: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9, 9] 
+  time_order_events(held, resumed): (8, 1) | warning: 역순 수집 시각 8행: 기준 시각보다 이르므로 판정을 보류했습니다(정상 간격으로 이어진 이른 시각을 새 기준으로 받아들인 곳 1곳). 수집 PC 시각과 입력 순서를 확인하세요.
+  stream/causality: {'stream_1': True, 'stream_7': True, 'stream_128': True, 'stream_random': True, 'causal_prefix_fail': []}
+
+### S8 동률 시각
+  rows 8 | bad_time_order rows: [] | expected by stated intent: []
+  status: ........
+  record_id: [0, 0, 0, 1, 1, 2, 3, 3] 
+  time_order_events(held, resumed): (0, 0) | warning: 
+  stream/causality: {'stream_1': True, 'stream_7': True, 'stream_128': True, 'stream_random': True, 'causal_prefix_fail': []}
+
+### S9 한 기록이 역순으로 도착(14→5)
+  rows 20 | bad_time_order rows: [] | expected by stated intent: [6, 7, 8, 9, 10, 11, 12, 13, 14]
+  status: ....................
+  record_id: [0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 11, 11, 11, 11] 
+  time_order_events(held, resumed): (0, 0) | warning: 
+  stream/causality: {'stream_1': True, 'stream_7': True, 'stream_128': True, 'stream_random': True, 'causal_prefix_fail': []}
+
+### S10 미래 튐 뒤 감소 시각 3행(+30m,+20m,+10m)
+  rows 14 | bad_time_order rows: [] | expected by stated intent: 적어도 +20m·+10m(기준 +30m보다 이름) 보류
+  status: ..............
+  record_id: [0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 5, 5, 5, 5] 
+  time_order_events(held, resumed): (0, 0) | warning: 
+  stream/causality: {'stream_1': True, 'stream_7': True, 'stream_128': True, 'stream_random': True, 'causal_prefix_fail': []}
+
+### S11 이웃 행 맞바뀜(t3,t2)
+  rows 6 | bad_time_order rows: [] | expected by stated intent: 명세 해석: t3를 튄 행으로 보면 보류 없음
+  status: ......
+  record_id: [0, 0, 1, 2, 3, 3] 
+  time_order_events(held, resumed): (0, 0) | warning: 
+  stream/causality: {'stream_1': True, 'stream_7': True, 'stream_128': True, 'stream_random': True, 'causal_prefix_fail': []}
+
+### TimeOrder prefix causality violations in 300 random sequences: 0

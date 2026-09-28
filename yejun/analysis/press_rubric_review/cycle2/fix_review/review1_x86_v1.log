@@ -1,0 +1,176 @@
+/work/yejun/press_submission/press/diagnosis.py:234: UserWarning: Glyph 44396 (\N{HANGUL SYLLABLE GU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:234: UserWarning: Glyph 44036 (\N{HANGUL SYLLABLE GAN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:234: UserWarning: Glyph 45236 (\N{HANGUL SYLLABLE NAE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:234: UserWarning: Glyph 49884 (\N{HANGUL SYLLABLE SI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:234: UserWarning: Glyph 52488 (\N{HANGUL SYLLABLE CO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:234: UserWarning: Glyph 51204 (\N{HANGUL SYLLABLE JEON}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:234: UserWarning: Glyph 47448 (\N{HANGUL SYLLABLE RYU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:234: UserWarning: Glyph 50896 (\N{HANGUL SYLLABLE WEON}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:234: UserWarning: Glyph 44050 (\N{HANGUL SYLLABLE GABS}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:234: UserWarning: Glyph 51221 (\N{HANGUL SYLLABLE JEONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:234: UserWarning: Glyph 49345 (\N{HANGUL SYLLABLE SANG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:234: UserWarning: Glyph 52769 (\N{HANGUL SYLLABLE CEUG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:234: UserWarning: Glyph 49324 (\N{HANGUL SYLLABLE SA}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:234: UserWarning: Glyph 51064 (\N{HANGUL SYLLABLE IN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:234: UserWarning: Glyph 51201 (\N{HANGUL SYLLABLE JEOG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:234: UserWarning: Glyph 54633 (\N{HANGUL SYLLABLE HAB}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:234: UserWarning: Glyph 51060 (\N{HANGUL SYLLABLE I}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:235: UserWarning: Glyph 51204 (\N{HANGUL SYLLABLE JEON}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_current_waveform.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:235: UserWarning: Glyph 47448 (\N{HANGUL SYLLABLE RYU}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_current_waveform.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:235: UserWarning: Glyph 50896 (\N{HANGUL SYLLABLE WEON}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_current_waveform.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:235: UserWarning: Glyph 44050 (\N{HANGUL SYLLABLE GABS}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_current_waveform.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:235: UserWarning: Glyph 51221 (\N{HANGUL SYLLABLE JEONG}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_current_waveform.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:235: UserWarning: Glyph 49345 (\N{HANGUL SYLLABLE SANG}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_current_waveform.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:235: UserWarning: Glyph 44396 (\N{HANGUL SYLLABLE GU}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_current_waveform.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:235: UserWarning: Glyph 44036 (\N{HANGUL SYLLABLE GAN}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_current_waveform.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:235: UserWarning: Glyph 45236 (\N{HANGUL SYLLABLE NAE}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_current_waveform.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:235: UserWarning: Glyph 49884 (\N{HANGUL SYLLABLE SI}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_current_waveform.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:235: UserWarning: Glyph 52488 (\N{HANGUL SYLLABLE CO}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_current_waveform.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:235: UserWarning: Glyph 52769 (\N{HANGUL SYLLABLE CEUG}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_current_waveform.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:235: UserWarning: Glyph 49324 (\N{HANGUL SYLLABLE SA}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_current_waveform.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:235: UserWarning: Glyph 51064 (\N{HANGUL SYLLABLE IN}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_current_waveform.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:235: UserWarning: Glyph 51201 (\N{HANGUL SYLLABLE JEOG}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_current_waveform.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:235: UserWarning: Glyph 54633 (\N{HANGUL SYLLABLE HAB}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_current_waveform.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:235: UserWarning: Glyph 51060 (\N{HANGUL SYLLABLE I}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_current_waveform.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:244: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:244: UserWarning: Glyph 47197 (\N{HANGUL SYLLABLE ROG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:244: UserWarning: Glyph 44396 (\N{HANGUL SYLLABLE GU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:244: UserWarning: Glyph 44036 (\N{HANGUL SYLLABLE GAN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:244: UserWarning: Glyph 44600 (\N{HANGUL SYLLABLE GIL}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:244: UserWarning: Glyph 51060 (\N{HANGUL SYLLABLE I}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:244: UserWarning: Glyph 44288 (\N{HANGUL SYLLABLE GWAN}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:244: UserWarning: Glyph 52769 (\N{HANGUL SYLLABLE CEUG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:244: UserWarning: Glyph 49688 (\N{HANGUL SYLLABLE SU}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:244: UserWarning: Glyph 48128 (\N{HANGUL SYLLABLE MIL}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:244: UserWarning: Glyph 46020 (\N{HANGUL SYLLABLE DO}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:244: UserWarning: Glyph 51221 (\N{HANGUL SYLLABLE JEONG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:244: UserWarning: Glyph 49345 (\N{HANGUL SYLLABLE SANG}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/work/yejun/press_submission/press/diagnosis.py:245: UserWarning: Glyph 44592 (\N{HANGUL SYLLABLE GI}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_segment_length.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:245: UserWarning: Glyph 47197 (\N{HANGUL SYLLABLE ROG}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_segment_length.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:245: UserWarning: Glyph 44396 (\N{HANGUL SYLLABLE GU}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_segment_length.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:245: UserWarning: Glyph 44036 (\N{HANGUL SYLLABLE GAN}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_segment_length.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:245: UserWarning: Glyph 44600 (\N{HANGUL SYLLABLE GIL}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_segment_length.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:245: UserWarning: Glyph 51060 (\N{HANGUL SYLLABLE I}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_segment_length.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:245: UserWarning: Glyph 44288 (\N{HANGUL SYLLABLE GWAN}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_segment_length.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:245: UserWarning: Glyph 52769 (\N{HANGUL SYLLABLE CEUG}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_segment_length.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:245: UserWarning: Glyph 49688 (\N{HANGUL SYLLABLE SU}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_segment_length.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:245: UserWarning: Glyph 48128 (\N{HANGUL SYLLABLE MIL}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_segment_length.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:245: UserWarning: Glyph 46020 (\N{HANGUL SYLLABLE DO}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_segment_length.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:245: UserWarning: Glyph 51221 (\N{HANGUL SYLLABLE JEONG}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_segment_length.png", dpi=150)
+/work/yejun/press_submission/press/diagnosis.py:245: UserWarning: Glyph 49345 (\N{HANGUL SYLLABLE SANG}) missing from font(s) DejaVu Sans.
+  fig.savefig(out / "fig_segment_length.png", dpi=150)
+split A done in 6.0s: combined_w8 conformal 1% → normal 0/120, abnormal 21/21
+split B done in 4.9s: combined_w8 conformal 1% → normal 3/180, abnormal 21/21
+{
+  "input_hash_ok": true,
+  "input_rows_ok": true,
+  "segments_equal_vendor_blocks": true,
+  "segment_counts": {
+    "normal": 600,
+    "abnormal": 21
+  },
+  "segment_counts_ok": true,
+  "bad_rows": {
+    "normal": 0,
+    "abnormal": 0
+  },
+  "diagnosis_generated": true,
+  "format_rules_after_preprocess_max_separability": 0.5,
+  "conformal_mc_within_4se": true,
+  "step2": {
+    "A": {
+      "main_model": "combined_w8",
+      "degenerate": false,
+      "stream_equals_evaluation": true,
+      "shuffle_invariant": true,
+      "prediction_alarm_counts_equal_table": true,
+      "conformal_p_equals_threshold_alarms": true,
+      "artifact": "main_A.json",
+      "normal_notified": 0,
+      "abnormal_notified": 21,
+      "seconds": 6.0
+    },
+    "B": {
+      "main_model": "combined_w8",
+      "degenerate": false,
+      "stream_equals_evaluation": true,
+      "shuffle_invariant": true,
+      "prediction_alarm_counts_equal_table": true,
+      "conformal_p_equals_threshold_alarms": true,
+      "artifact": "main_B.json",
+      "normal_notified": 3,
+      "abnormal_notified": 21,
+      "seconds": 4.9
+    }
+  },
+  "step2_all_ok": true,
+  "outputs_free_of_raw_sensor_columns": true,
+  "raw_column_hits": {},
+  "steps_run": 2,
+  "external_checks_not_run_here": [
+    "tools/clean_repro.sh --with-lstm (캐시 사용 깨끗한 클론 재현)",
+    "tools/clean_repro.sh --retrain-lstm (캐시 없는 재학습 재현)",
+    "verify.py --out outputs (동결 기대값 비교)"
+  ],
+  "required_checks_ok": true,
+  "required_checks_failed": []
+}

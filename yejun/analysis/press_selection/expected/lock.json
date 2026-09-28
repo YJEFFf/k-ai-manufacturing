@@ -9,11 +9,11 @@
     "candidate_universe.csv": "d7455fcc88cc01d19ba858fc1747268b07ba2cc2942083b81becd22b13e34ebd",
     "nested_selection.csv": "bbfd441f4f89bf4614e5a5be792130f8ea6c39aa2943a9fd4a8e8c5e993e470c",
     "paired_records.csv": "b6b4c55cdce04cb3d9ee5d274c036dc78610d699631a68e449ec83ecc6ff9fb1",
-    "selection_evidence.csv": "ba4aff9231934f5a69378f2ced06a3e2d809e920bb1850c6e64a1165237c6f52",
-    "unified_comparison.csv": "03bfc81adde25e20b38bc14c68f13703953b64c4b0381c363ac96abcf1e7f467",
-    "unified_comparison.md": "36ead1390fba53ac1d4963ca9fea3ea7222611ea0b57fa9f8d4171ed4c5f6804",
+    "selection_evidence.csv": "066c5792b78296bca6189ff3682011477fe3d7b9bf1f3c219ec205b373937c96",
+    "unified_comparison.csv": "a86126e282230077811ff4749e7c68a0084c8a98e0f000fb29eab05d2d7b4d4b",
+    "unified_comparison.md": "2fe552da32095d9d515c6867a9765131454607939194f1d1499d4c1ca0be652e",
     "rule_transfer_injection_v2.csv": "f9cd350b775bbf5ca1293a8f5d8e9d937f8a62fbee809f9d61e341d1e6072d63",
-    "manifest.json": "801645b8aa4aa3128446cfdf102d70cb011ed432ffa2fff61c878f9b96438aa2"
+    "manifest.json": "58d9defdffd3c805ddb23710412a35c6fccacd35686694e9dd5a38adef03f1dc"
   },
   "images": [],
   "local": {},

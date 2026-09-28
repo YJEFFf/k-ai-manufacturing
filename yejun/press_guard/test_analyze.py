@@ -93,7 +93,7 @@ def test_verify_detects_tampering(tmp_path):
 
 def test_verify_compares_row_level_predictions(tmp_path):
     """행 단위 예측 파일 한 행을 바꾸면 verify의 예측 요약 대조가 실패한다(평가관 06 R5). 1e-9 수준의 부동소수 차이는 통과하고,
-    점수 한 행을 1.0 바꾸면 실패한다."""
+    점수 한 행을 1.0 바꾸거나 두 행의 점수를 맞바꾸면 실패한다(적대적 검수 C-03: 합·제곱합 요약은 맞바꿈을 놓쳤다)."""
     if not (OUT / "expected" / verify.DIGEST).is_file():
         pytest.skip("동결 예측 요약이 없다")
     out = tmp_path / "outputs"; (out / "expected").mkdir(parents=True)
@@ -110,8 +110,22 @@ def test_verify_compares_row_level_predictions(tmp_path):
     t["score"] = t.score + 1e-9                                          # 다른 기기의 부동소수 차이 수준
     t.to_csv(out / "test_predictions_A.csv", index=False)
     ok = {r["file"]: r for r in verify.compare_predictions(out, out / "expected")}
-    assert ok["test_predictions_A.csv"]["ok"] and ok["test_predictions_A.csv"].get("note") == "부동소수 차이만 있음"
+    assert ok["test_predictions_A.csv"]["ok"] and "부동소수 차이" in ok["test_predictions_A.csv"].get("note", "")
     t = pd.read_csv(OUT / "test_predictions_A.csv"); t.loc[5, "score"] += 1.0
+    t.to_csv(out / "test_predictions_A.csv", index=False)
+    assert not {r["file"]: r["ok"] for r in verify.compare_predictions(out, out / "expected")}["test_predictions_A.csv"]
+    t = pd.read_csv(OUT / "test_predictions_A.csv")
+    hi, lo = int(t.score.idxmax()), int(t.score.idxmin())
+    t.loc[[hi, lo], "score"] = t.loc[[lo, hi], "score"].to_numpy()          # 합·제곱합·최솟값·최댓값은 그대로인 맞바꿈
+    t.to_csv(out / "test_predictions_A.csv", index=False)
+    r = {r["file"]: r for r in verify.compare_predictions(out, out / "expected")}["test_predictions_A.csv"]
+    assert not r["ok"] and "score" in r["reason"]
+    t = pd.read_csv(OUT / "test_predictions_A.csv")
+    small = t.anomaly_probability < 1e-3
+    t.loc[small, "anomaly_probability"] *= 3                                  # 작은 값 열을 몇 배로(코드 검토 R1-05)
+    t.to_csv(out / "test_predictions_A.csv", index=False)
+    assert not {r["file"]: r["ok"] for r in verify.compare_predictions(out, out / "expected")}["test_predictions_A.csv"]
+    t = pd.read_csv(OUT / "test_predictions_A.csv"); t["score"] = t.score + 0.0009                   # 모든 행을 조금씩 옮기기
     t.to_csv(out / "test_predictions_A.csv", index=False)
     assert not {r["file"]: r["ok"] for r in verify.compare_predictions(out, out / "expected")}["test_predictions_A.csv"]
 
