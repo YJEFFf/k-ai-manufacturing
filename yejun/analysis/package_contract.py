@@ -335,6 +335,15 @@ def mutate_and_verify(pkg: Path, scenario: str, tmp: Path) -> list[str]:
     return verify(pkg, out, exp)
 
 
+PREREQUISITES = [DATA_DIR / name for name in DATA_FILES.values()] + [YEJUN / "press_guard" / "artifacts" / f"guard_{s}.json" for s in "AB"]
+FIRST_RUN_HINT = "먼저 python yejun/press_guard/reproduce.py 로 원본 배치(--data 주최 측 ZIP)와 학습을 한다"
+
+
+def missing_prerequisites():
+    """Git에서 뺀 선행 파일(대회 원본 CSV, 저장 모델)이 없으면 그 목록. 갓 받은 사본은 한 명령 재현을 먼저 돌려야 한다."""
+    return [str(p.relative_to(YEJUN)) for p in PREREQUISITES if not p.is_file()]
+
+
 def main(argv=None):
     for stream in (sys.stdout, sys.stderr):     # 한국어 Windows(CP949) 콘솔에서 못 쓰는 기호는 바꿔 쓴다
         try:
@@ -351,6 +360,10 @@ def main(argv=None):
     pkg = pkg.resolve()
     if not (pkg / "contract.json").is_file():
         print(f"계약 파일 없음: {pkg / 'contract.json'}", file=sys.stderr)
+        return 2
+    lacking = missing_prerequisites()
+    if lacking:
+        print(f"선행 파일 없음({', '.join(lacking)}). {FIRST_RUN_HINT}", file=sys.stderr)
         return 2
     if args.freeze:
         bad = freeze(pkg, args.out)

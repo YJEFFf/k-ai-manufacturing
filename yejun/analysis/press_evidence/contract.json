@@ -1,6 +1,6 @@
 {
   "package": "press_evidence",
-  "purpose": "진단·근거 보강 표(build_tables.py 17표, build_diagnostics.py 16표·그림 5장). 검증: python analysis/package_contract.py --package analysis/press_evidence",
+  "purpose": "진단·근거 보강 표(build_tables.py 17표, build_diagnostics.py 20표·그림 5장). 검증: python analysis/package_contract.py --package analysis/press_evidence",
   "outputs": [
     "variable_dictionary.csv",
     "imbalance.csv",
@@ -34,6 +34,10 @@
     "guidebook_protocol_vs_records.csv",
     "variable_expected_signals.csv",
     "failure_mode_map.csv",
+    "operating_states.csv",
+    "operating_states_summary.csv",
+    "split_state_composition.csv",
+    "normal_alarms_by_state.csv",
     "decision_table_diagnosis_v2.csv",
     "figures/fig_d2a_timeline.png",
     "figures/fig_d2b_blocks.png",

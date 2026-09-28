@@ -25,6 +25,7 @@ import pandas as pd
 
 import contract
 from contract import EXPERIMENTS, HERE, manifest_name
+from common import D, BASE, ARTIFACTS  # noqa: E402  선행 파일 확인용
 
 EXPECTED = HERE / "expected"
 TOL = 1e-9
@@ -125,6 +126,12 @@ def main(argv=None):
             stream.reconfigure(errors="replace")
         except (AttributeError, ValueError):
             pass
+    need = [D.data_dir(BASE) / n for n in D.FILES.values()] + [ARTIFACTS / f"guard_{s}.json" for s in "AB"]
+    lacking = [p.name for p in need if not p.is_file()]
+    if lacking:
+        print(f"선행 파일 없음({', '.join(lacking)}). 먼저 python yejun/press_guard/reproduce.py 로 원본 배치(--data 주최 측 ZIP)와 학습을 한다",
+              file=sys.stderr)
+        return 2
     requested = [e for e in args.experiments.split(",") if e]
     skipped = {exp: unavailable(exp) for exp in requested if unavailable(exp)}
     experiments = [e for e in requested if e not in skipped]

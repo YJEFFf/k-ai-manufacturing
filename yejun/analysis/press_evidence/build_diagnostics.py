@@ -1,4 +1,4 @@
-"""프레스 진단 보강 표 2 — 루브릭 사이클2 1회차 평가관 01(D1~D6)·평가관 05(O1(a)·O4).
+"""프레스 진단 보강 표 2 — 루브릭 사이클2 1회차 평가관 01(D1~D6)·평가관 05(O1(a)·O4), 2회차 평가관 01(R2-D1~D3)·05(R2-O10·O11).
 
 원본 CSV, 동결 v2 모델(press_guard/artifacts), 커밋된 분석 표만 읽는다. O1(a)만 `train.py --rolling`과 같은 5겹을
 GuardModel.fit으로 다시 적합한다(모델은 저장하지 않는다). 모델·문턱·분할은 바꾸지 않고, build_tables.py의 17개 표도 건드리지 않는다.
@@ -43,6 +43,7 @@ PAIRS = [("AI0_Vibration", "AI1_Vibration"), ("AI0_Vibration", "AI2_Current"), (
 LONG = 17                     # 구간 수준 통계의 최소 길이(press_guard/analyze.py의 AMP_MIN_LEN과 같다)
 ROLL_ENDS = (180, 240, 300, 360, 420)
 SEED_SIM, SEED_PERM = 0, 2
+ALPHA_GRID = (.01, .03, .05)
 CITED = {}                    # 결정표·교차 참조가 인용한 파일의 해시(manifest)
 # 가이드북 표 2·3(인쇄 10~11쪽): 평균, 표준편차, 최솟값, 중앙값, 최댓값
 GUIDE_STATS = {"normal": {"AI0_Vibration": (-0.000094, 0.070634, -0.314570, -0.000172, 0.351699),
@@ -69,6 +70,17 @@ def cite(path, pattern, regex=False):
             CITED[rel(path)] = D.sha256_file(path)
             return f"{rel(path)}:{i}"
     raise ValueError(f"인용할 행을 찾지 못함: {rel(path)} / {pattern!r}")
+
+
+def cite_rows(path, prefix):
+    """prefix(문자열 또는 튜플)로 시작하는 모든 행을 `경로:첫행-끝행`(이어진 경우) 또는 `경로:행,행`으로 인용한다."""
+    path = Path(path)
+    lines = [i for i, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1) if line.startswith(prefix)]
+    if not lines:
+        raise ValueError(f"인용할 행을 찾지 못함: {rel(path)} / {prefix!r}")
+    CITED[rel(path)] = D.sha256_file(path)
+    span = f"{lines[0]}-{lines[-1]}" if lines == list(range(lines[0], lines[-1] + 1)) and len(lines) > 1 else ",".join(map(str, lines))
+    return f"{rel(path)}:{span}"
 
 
 def segment_stats(frame, seg):
@@ -140,7 +152,7 @@ def frozen_false_alarms(normal, seg_n, sid="B"):
 
 
 # ---------- D1 센서 간 관계 ----------
-def sensor_relations(raw, seg_stats):
+def sensor_relations(raw, seg_stats, states=None):
     rows = []
     for subset, f in raw.items():
         for transform, x in (("원값", f[SENS]), ("절댓값(가이드북 코드 14)", f[SENS].abs())):
@@ -175,7 +187,13 @@ def sensor_relations(raw, seg_stats):
         elif r.section == "행 상관":
             notes.append("진동–전류 순시값 상관은 0에 가깝다(위상이 다른 순시값 표본)")
         elif r.section == "구간 수준 결합" and r.subset == "normal":
-            notes.append("정상에서 진동 크기와 전류 진폭이 함께 오르내린다. 부하 수준이라는 공통 요인과 일관(가설, 부하 측정 없음)")
+            within = ""
+            if states is not None:
+                a, b = ("sd0", "sd1") if r.pair == "AI0 SD~AI1 SD" else ("sd0" if r.pair.startswith("AI0") else "sd1", "cur_rms_dm")
+                w = {g: stats.spearmanr(x[a], x[b])[0] for g, x in states.groupby("state")}
+                within = (f". 두 운전 상태가 섞인 값이다: 상태 안에서는 부하 {w[LOADED]:.3f}, 저수준 {w[LOW]:.3f}"
+                          "(operating_states_summary.csv '상태 안 결합')")
+            notes.append("정상에서 진동 크기와 전류 진폭이 함께 오르내린다. 부하 수준이라는 공통 요인과 일관(가설, 부하 측정 없음)" + within)
         elif r.section == "구간 수준 결합":
             notes.append("이상 14구간에서는 결합이 깨진다. 고장 때문인지 날짜·운전 조건 때문인지 분리할 수 없다")
         else:
@@ -226,7 +244,7 @@ def production_unit(raw, seg, t, fits_n, mu, sd):
     phases = np.array([np.arctan2(*sine_coef(cur[r.start_row:r.start_row + r.length], .6)[[1, 0]]) for r in at06.itertuples()])
     rbar, p = rayleigh(phases)
     rows.append(dict(item="기록 시작 위상(최적 주파수 0.600 Hz 구간)", measure="평균 합성 길이 R̄ / Rayleigh p", value=rbar, value2=p, n=len(at06),
-                     reference="균일하면 R̄≈0", interpretation="행정 신호에 맞춰 시작하는 사건 트리거 수집이 아니다(시간 기반 수집과 일관, 가설)", basis="관측"))
+                     reference="균일하면 R̄≈0", interpretation="0.6 Hz 위상에 맞춘 트리거가 아니다. 기록 경계는 운전 상태 전환과 맞물린다(operating_states_summary.csv '기록-상태 동기화', 가설)", basis="관측"))
     pos = D.segment_positions(seg["normal"])[0]
     z = vib_maxz(n, mu, sd)
     groups = [z[(pos // 5) == b] for b in range(10)]
@@ -243,7 +261,8 @@ def production_unit(raw, seg, t, fits_n, mu, sd):
     ratio = np.array([np.hypot(*sine_coef(x[25:], .6)[:2]) / np.hypot(*sine_coef(x[:25], .6)[:2]) for x in segs50])
     rows.append(dict(item="앞 25행 대비 뒤 25행 진폭 비(같은 구간)", measure="중앙값 / 5~95백분위", value=float(np.median(ratio)),
                      value2=f"{np.quantile(ratio, .05):.3f}~{np.quantile(ratio, .95):.3f}", n=len(full), reference="변조가 없으면 1",
-                     interpretation="5초 안 진폭 변조가 없다. 제품·스트로크 단위는 열이 없을 뿐 아니라 신호로도 복원할 수 없다", basis="관측"))
+                     interpretation=("기록 안(4.9초)에는 행정 정보가 없다. 기록 사이에는 약 20초 주기의 2수준 교대가 보이고, 기록 경계가 상태 전환과 맞물린다. "
+                                     "행정 수·제품 단위는 43% 시간 적용률로 셀 수 없다(가설)"), basis="관측·가설"))
     exact, total, spans = 0, 0, []
     for k, f in raw.items():
         dt = t[k].diff().dt.total_seconds().to_numpy()[1:]
@@ -258,16 +277,18 @@ def production_unit(raw, seg, t, fits_n, mu, sd):
                      reference="앨리어싱이 60 Hz에서 나오려면 실제 간격 0.101초 또는 0.099초", interpretation="기록 안 간격은 모두 명목값과 같다", basis="관측"))
     rows.append(dict(item="50행 기록의 시간 폭", measure="최소 / 최대(초)", value=float(spans.min()), value2=float(spans.max()), n=len(spans),
                      reference="실제 간격이 0.101·0.099초면 49간격에 ±49 ms가 쌓인다", interpretation="±49 ms 누적이 없다", basis="관측"))
-    rows.append(dict(item="0.6 Hz 해석 조건(앨리어싱)", measure="필요 간격(초)", value=6.06 / 60, value2=5.94 / 60, n=np.nan,
-                     reference="또는 간격 0.100초에서 원 신호 59.4·60.6 Hz",
-                     interpretation="60 Hz 순시값의 앨리어싱이라면 시각이 명목값(실측이 아님)이거나 원 신호가 59.4·60.6 Hz다(가설, 검증 불가)", basis="가설"))
+    rows.append(dict(item="0.6 Hz 해석 조건(앨리어싱)", measure="상용 60 Hz 직입이라면 필요한 간격(초)", value=6.06 / 60, value2=5.94 / 60, n=np.nan,
+                     reference="일반형: 간격 0.100초(표본화 10 Hz)에서 원 신호가 k·10 ± 0.6 Hz(k 정수)이면 0.6 Hz로 보인다",
+                     interpretation=("앨리어싱이라면 원 신호가 k·10 ± 0.6 Hz다. 상용 60 Hz 직입 구동이면 59.4·60.6 Hz(또는 시각이 명목값)여야 하고, "
+                                     "인버터 구동이면 50.6·40.6 Hz처럼 운전 주파수가 그 값이면 된다(가설, 전원 방식 정보 없음)"), basis="가설"))
     rows.append(dict(item="0.6 Hz 해석 조건(물리 주기)", measure="분당 주기 수", value=.6 * 60, value2=np.nan, n=np.nan,
                      reference="phase_continuity.csv: 기록 사이 위상이 이어지지 않는다",
                      interpretation="0.6 Hz가 정확한 시각의 연속 기계 주기(분당 36회)라면 공백을 건너 위상이 이어져야 한다. 관측과 맞지 않는다(가설 약화, 확정 아님)",
                      basis="가설"))
     tab = pd.DataFrame(rows)
     tab["n"] = tab["n"].astype("Int64")
-    tab.attrs["note"] = "기록구간은 사건 트리거·스트로크 단위가 아니고, 전류는 거의 순수 0.6 Hz 사인이다. 모든 해석은 가설이며 물리 단위·원인을 단정하지 않는다"
+    tab.attrs["note"] = ("기록구간은 0.6 Hz 위상 트리거가 아니고, 기록 안(4.9초)에는 행정 정보가 없으며 전류는 거의 순수 0.6 Hz 사인이다. 기록 사이에는 약 20초 주기의 "
+                         "2수준 운전 상태 교대가 있고 기록 경계가 상태 전환과 맞물린다(operating_states*.csv). 모든 해석은 가설이며 물리 단위·원인을 단정하지 않는다")
     return tab
 
 
@@ -445,21 +466,59 @@ def rolling_calibration_curve(normal, seg_n):
 
 
 # ---------- O4 제조지식 ----------
-def observability(raw, seg):
+def spectrum_traits(x, seg):
+    """기록 20행 이상의 처음 20관측(평균 제거) 주기도표 평균에서 1 Hz 이하 전력 비중, 기록 평균 제거 lag-1, 기록별 lag-1 > 0.5 수."""
+    P, lag_rec = [], []
+    for r in np.unique(seg):
+        idx = np.flatnonzero(seg == r)
+        if len(idx) < 20:
+            continue
+        v = x[idx[:20]] - x[idx[:20]].mean()
+        P.append(np.abs(np.fft.rfft(v)) ** 2)
+        w = x[idx] - x[idx].mean()
+        lag_rec.append(float(np.corrcoef(w[1:], w[:-1])[0, 1]))
+    P = np.mean(P, 0)
+    f = np.fft.rfftfreq(20, D.DT)
+    same = np.r_[False, seg[1:] == seg[:-1]]
+    xm = x - pd.Series(x).groupby(seg).transform("mean").to_numpy()
+    return dict(records_ge20=len(lag_rec), share_power_le_1hz=float(P[(f > 0) & (f <= 1.0)].sum() / P[f > 0].sum()),
+                lag1_mean_removed=float(np.corrcoef(xm[1:][same[1:]], xm[:-1][same[1:]])[0, 1]),
+                records_lag1_gt_0_5=int(np.sum(np.asarray(lag_rec) > .5)))
+
+
+def observability(raw, seg, fits):
+    """관측 성질. 해석은 파일·센서별 값에서 쓴다(평가관 05 R2-O10: 이상 행에 정상 행 문구를 쓰지 않는다)."""
     rows = []
+    white = 2 / 10          # 흰 잡음(E1 진동 잡음 주입과 같은 모양)의 1 Hz 이하 전력 비중 기대값(0.5·1.0 Hz 두 칸 / 10칸)
     for k, f in raw.items():
         same = np.r_[False, seg[k][1:] == seg[k][:-1]]
         for c in SENS:
             x = f[c].to_numpy(float)
-            rows.append(dict(file=k, sensor=c, mean=float(x.mean()), sd=float(x.std()), share_negative=float((x < 0).mean()),
-                             lag1_within=float(np.corrcoef(x[1:][same[1:]], x[:-1][same[1:]])[0, 1]),
-                             interpretation=("10 Hz 순시값 표본(부호 대칭·평균 0, 이웃 표본 상관 낮음). RMS·포락선이 아니다. 5 Hz 위 성분은 접혀 들어온다"
-                                             if c != "AI2_Current" else "0.6 Hz 사인형 순시값(lag-1이 순수 0.6 Hz 사인과 비슷)")))
+            lag1 = float(np.corrcoef(x[1:][same[1:]], x[:-1][same[1:]])[0, 1])
+            tr = spectrum_traits(x, seg[k])
+            r2 = float(fits[k].r2.median())
+            if c != "AI2_Current" and k == "normal":
+                text = (f"10 Hz 순시값 표본(부호 대칭·평균 0, 이웃 표본 상관 낮음 lag-1 {lag1:.3f}). 1 Hz 이하 전력 비중 {tr['share_power_le_1hz']:.2f}"
+                        f"(흰 잡음 {white:.2f}보다 낮다). RMS·포락선이 아니다. 5 Hz 위 성분은 접혀 들어온다")
+            elif c != "AI2_Current":
+                text = (f"이웃 표본 상관이 높다(lag-1 {lag1:.3f}, 기록 평균 제거 {tr['lag1_mean_removed']:.3f}, 기록 {tr['records_ge20']}개 중 "
+                        f"{tr['records_lag1_gt_0_5']}개가 0.5 초과). 1 Hz 이하 전력 비중이 {tr['share_power_le_1hz']:.2f}다. 흰 잡음({white:.2f})의 약 "
+                        f"{tr['share_power_le_1hz'] / white:.0f}배인 느린(저주파) 변동이다. 접힌 광대역(흰 잡음형) 변화와 모양이 다르다. 원인은 미상(가설)")
+            elif k == "normal":
+                text = f"0.6 Hz 사인형 순시값(lag-1 {lag1:.3f}이 순수 0.6 Hz 사인 {math.cos(2 * math.pi * .06):.3f}과 비슷, 사인 R² 중앙 {r2:.3f})"
+            else:
+                text = f"사인형이 깨졌다(사인 R² 중앙 {r2:.3f}, 정상 {float(fits['normal'].r2.median()):.3f}). lag-1 {lag1:.3f}"
+            rows.append(dict(file=k, sensor=c, mean=float(x.mean()), sd=float(x.std()), share_negative=float((x < 0).mean()), lag1_within=lag1,
+                             lag1_mean_removed=tr["lag1_mean_removed"], share_power_le_1hz=tr["share_power_le_1hz"], records_ge20=tr["records_ge20"],
+                             records_lag1_gt_0_5=tr["records_lag1_gt_0_5"], sine_r2_median=r2 if c == "AI2_Current" else np.nan, interpretation=text))
     rows.append(dict(file="기준", sensor="순수 0.6 Hz 사인(10 Hz 표본)", mean=0.0, sd=np.nan, share_negative=.5, lag1_within=math.cos(2 * math.pi * .06),
                      interpretation="비교 기준"))
+    rows.append(dict(file="기준", sensor="흰 잡음(E1 진동 잡음 주입 모양)", mean=0.0, sd=np.nan, share_negative=.5, lag1_within=0.0,
+                     share_power_le_1hz=white, interpretation="1 Hz 이하 전력 비중 기대값(20관측 주기도표 0.5·1.0 Hz 두 칸 / 10칸)"))
     t = pd.DataFrame(rows)
     t.attrs["note"] = ("10 Hz 순시값 표본이라 나이퀴스트 5 Hz 위(베어링 결함·펌프 맥동·캐비테이션의 수십 Hz~kHz)는 식별할 수 없다. "
-                       "크기 성분은 광대역 에너지 변화만 본다. 정상 원본 기준(lag-1은 같은 기록구간 안 이웃 행)")
+                       "크기 성분은 광대역 에너지 변화만 본다. lag-1은 같은 기록구간 안 이웃 행. 1 Hz 이하 비중은 기록 20행 이상의 처음 20관측 주기도표 평균. "
+                       "이상 진동은 느린 변동이 큰 저주파형이라 E1 흰 잡음 대리 주입과 모양이 다르다(원인 미상)")
     return t
 
 
@@ -531,6 +590,13 @@ def e1_rate(e1, family, level, t0=10):
 
 
 def failure_mode_map():
+    obs = pd.read_csv(HERE / "observability.csv")
+    ob = obs[(obs.file == "abnormal") & obs.sensor.isin(VIB)].set_index("sensor")
+    on = obs[(obs.file == "normal") & obs.sensor.isin(VIB)].set_index("sensor")
+    spec = (f"관측 이상 진동은 1 Hz 이하 전력 비중 AI0 {ob.loc['AI0_Vibration', 'share_power_le_1hz']:.2f}·AI1 {ob.loc['AI1_Vibration', 'share_power_le_1hz']:.2f}"
+            f"(정상 {on.loc['AI0_Vibration', 'share_power_le_1hz']:.2f}·{on.loc['AI1_Vibration', 'share_power_le_1hz']:.2f}, 흰 잡음 0.20), 기록 평균 제거 lag-1 "
+            f"{ob.loc['AI0_Vibration', 'lag1_mean_removed']:.3f}·{ob.loc['AI1_Vibration', 'lag1_mean_removed']:.3f}인 저주파형이다. 이 행이 가정한 접힌 광대역 변화와 "
+            f"E1 흰 잡음 대리 주입과는 모양이 다르다(원인 미상, 가설). {cite_rows(HERE / 'observability.csv', ('abnormal,AI0_Vibration', 'abnormal,AI1_Vibration'))}")
     e1 = pd.read_csv(SUPP / "e1_summary.csv")
     e2 = pd.read_csv(SUPP / "e2_uci_metrics.csv")
     e2_local = e2[e2["mode"] == "local_normal_reference"].auroc
@@ -542,21 +608,21 @@ def failure_mode_map():
              reacting_component="크기(진동 max|z|)", e1_proxy="진동 잡음(vib_noise)",
              evidence=f"E1 v2 2초 탐지 s=2 {e1_rate(e1, 'vib_noise', 2)}, s=4 {e1_rate(e1, 'vib_noise', 4)}, s=1 {e1_rate(e1, 'vib_noise', 1)}(하한 {floor[('vib_noise', 'guard_v2')]:g}σ)",
              hypothesis_general_engineering="베어링 결함은 결함 주파수와 그 고조파의 진동을 키운다",
-             confirmed_in_this_data="이상 21구간 중 18구간이 진동 max|z| > 정상 q99(abnormal_segments.csv). 원인이 베어링인지는 알 수 없다",
+             confirmed_in_this_data="이상 21구간 중 18구간이 진동 max|z| > 정상 q99(abnormal_segments.csv). 원인이 베어링인지는 알 수 없다. " + spec,
              not_identifiable="결함 주파수·포락선 스펙트럼(10 Hz 표본으로 불가)"),
         dict(fm_id="FM2", failure_mode="캐비테이션·흡입 공기 혼입",
              expected_change_10hz="고주파 소음·진동(접힘으로 진동 분산 증가)과 토출 압력 맥동에 따른 전류 불규칙",
              reacting_component="크기, 예측 오차(AR(2) 잔차)·파형", e1_proxy="진동 잡음 + 전류 잡음(cur_noise)",
              evidence=f"E1 전류 잡음 0.1σ {e1_rate(e1, 'cur_noise', .1)}, 0.05σ {e1_rate(e1, 'cur_noise', .05)}(하한 {floor[('cur_noise', 'guard_v2')]:g}σ)",
              hypothesis_general_engineering="흡입측 압력 저하로 기포가 생기고 붕괴하며 광대역 소음과 압력 맥동을 만든다",
-             confirmed_in_this_data="이상 구간의 전류 사인 R² 중앙 0.451(정상 0.996, class_differences.csv). 캐비테이션 때문인지는 알 수 없다",
+             confirmed_in_this_data="이상 구간의 전류 사인 R² 중앙 0.451(정상 0.996, class_differences.csv). 캐비테이션 때문인지는 알 수 없다. " + spec,
              not_identifiable="캐비테이션 특유의 kHz 대역, 흡입 압력"),
         dict(fm_id="FM3", failure_mode="체결·정렬(커플링) 불량",
              expected_change_10hz="회전 1×·2× 성분(수십 Hz)이 접혀 진동 크기가 커지고, 상·하부 진동의 관계가 바뀔 수 있다",
              reacting_component="크기(상·하부 관계는 v2가 쓰지 않는다)", e1_proxy="진동 잡음",
              evidence=f"E1 진동 잡음 s=4 {e1_rate(e1, 'vib_noise', 4)}, s=2 {e1_rate(e1, 'vib_noise', 2)}",
              hypothesis_general_engineering="축 정렬 불량·풀림은 회전 주파수 배수의 진동과 방향별 진동 차이를 만든다",
-             confirmed_in_this_data="이상에서 상·하부 원값 상관이 +0.37 → −0.38로 반전(sensor_relations.csv). 날짜 교락으로 원인 분리 불가",
+             confirmed_in_this_data="이상에서 상·하부 원값 상관이 +0.37 → −0.38로 반전(sensor_relations.csv). 날짜 교락으로 원인 분리 불가. " + spec,
              not_identifiable="회전수·위상 차 스펙트럼, 축 방향 진동"),
         dict(fm_id="FM4", failure_mode="내부 누설·기어 마모(출력 유압 저하, 가이드북 7쪽)",
              expected_change_10hz="진동·소음 증가(가이드북 7쪽)와 같은 가압에 드는 전류의 진폭·수준 변화. 누설은 느린 수준 변화일 수 있다",
@@ -584,7 +650,224 @@ def failure_mode_map():
     ]
     t = pd.DataFrame(rows)
     t["basis_note"] = "hypothesis_general_engineering은 일반 공학 지식에 기반한 가설, confirmed_in_this_data는 이 자료로 확인한 것. 펌프 물리 모델로 검증하지 않았다"
-    t.attrs["note"] = "E1은 같은 날 정상 기록에 더한 인공 신호(α=1%, 계단형, t0=10행, 2초 안 탐지율)이며 실제 고장 모양의 보장이 아니다. E2는 다른 설비(UCI) 누설"
+    t.attrs["note"] = ("E1은 같은 날 정상 기록에 더한 인공 신호(α=1%, 계단형, t0=10행, 2초 안 탐지율)이며 실제 고장 모양의 보장이 아니다. E2는 다른 설비(UCI) 누설. "
+                       "관측 이상 진동은 저주파형이라 E1 진동 잡음(흰 잡음) 대리와 모양이 다르다(observability.csv)")
+    return t
+
+
+# ---------- 사이클2 2회차: 정상 운전 상태(평가관 01 R2-D1·R2-D2) ----------
+STATE_SEED = 0                  # GaussianMixture random_state(n_init=5)
+LOW, LOADED, SHORT_STATE = "저수준", "부하", "짧은 기록(<17)"
+PARTS = {"A 학습": ("A", 0, 360), "A 보정": ("A", 360, 480), "A 평가": ("A", 480, 600),
+         "B 학습": ("B", 0, 300), "B 보정": ("B", 300, 420), "B 평가": ("B", 420, 600)}
+STATE_THRESHOLDS = (90.0, 92.0, 95.0)   # 경계 민감도(전류 RMS, 구간 평균 제거)
+
+
+def _gmm(x, k):
+    from sklearn.mixture import GaussianMixture
+    return GaussianMixture(k, random_state=STATE_SEED, n_init=5).fit(x)
+
+
+def _crossings(gm, lo=None):
+    """2성분 혼합에서 저수준 성분 사후확률이 0.5를 지나는 전류 RMS(60~200 로그 격자)."""
+    grid = np.linspace(np.log(60), np.log(200), 14001).reshape(-1, 1)
+    lo = int(np.argmin(gm.means_.ravel())) if lo is None else lo
+    post = gm.predict_proba(grid)[:, lo]
+    xs = np.exp(grid[:, 0])
+    return xs[np.where(np.diff(np.sign(post - .5)) != 0)[0]], lo
+
+
+def operating_states(normal, seg_n, t_n, st_n):
+    """정상 기록(길이≥17)의 운전 상태. 로그 전류 RMS(구간 평균 제거)에 2성분 가우스 혼합을 맞춰 부하·저수준으로 나눈다.
+
+    기술 통계와 가설이다. 두 수준이 무엇(생산 주기·무부하)인지는 자료로 확인할 수 없다. 모델·분할·문턱은 바꾸지 않는다."""
+    cur = normal.AI2_Current.to_numpy(float)
+    start, end = t_n.groupby(seg_n).min(), t_n.groupby(seg_n).max()
+    L = st_n[st_n.n >= LONG].copy()
+    L["start"], L["end"] = start.loc[L.index], end.loc[L.index]
+    amp, r2, wr = [], [], []
+    for s in L.index:
+        x = cur[seg_n == s]
+        c = sine_coef(x, .6)
+        tt = np.arange(len(x)) * D.DT
+        res = x - np.column_stack([np.sin(2 * np.pi * .6 * tt), np.cos(2 * np.pi * .6 * tt), np.ones(len(x))]) @ c
+        amp.append(float(np.hypot(c[0], c[1])))
+        r2.append(float(1 - (res ** 2).sum() / ((x - x.mean()) ** 2).sum()))
+        w = [np.hypot(*sine_coef(x[i:i + 17], .6)[:2]) for i in range(len(x) - 16)]    # 17행(약 1주기) 이동 창의 0.6 Hz 진폭
+        wr.append(max(w) / min(w))
+    L["amp06"], L["r2_06"], L["win_amp_ratio"] = amp, r2, wr
+    xl = np.log(L.cur_rms_dm.to_numpy()).reshape(-1, 1)
+    gms = {k: _gmm(xl, k) for k in (1, 2, 3)}
+    gm2 = gms[2]
+    cross, lo = _crossings(gm2)
+    boundary = float([c for c in cross if c > np.exp(gm2.means_.ravel()[lo])][0])      # 저수준 봉우리 위쪽 경계
+    L["p_low"] = gm2.predict_proba(xl)[:, lo]
+    L["state"] = np.where(gm2.predict(xl) == lo, LOW, LOADED)
+    for thr in STATE_THRESHOLDS:
+        L[f"state_thr{thr:g}"] = np.where(L.cur_rms_dm < thr, LOW, LOADED)
+    tab = L.reset_index().rename(columns={"seg": "record", "index": "record", "n": "length", "cur_rms_dm": "current_rms_dm", "sd0": "AI0_sd", "sd1": "AI1_sd"})
+    tab["start"], tab["end"] = tab.start.dt.strftime("%H:%M:%S.%f").str[:-3], tab.end.dt.strftime("%H:%M:%S.%f").str[:-3]
+    tab = tab[["record", "start", "end", "length", "current_rms_dm", "AI0_sd", "AI1_sd", "amp06", "r2_06", "win_amp_ratio", "p_low", "state"]
+              + [f"state_thr{t:g}" for t in STATE_THRESHOLDS]]
+    tab.attrs["note"] = (f"정상 기록구간 중 길이 ≥{LONG} {len(tab)}개. 상태는 로그 전류 RMS(구간 평균 제거)의 2성분 가우스 혼합(시드 {STATE_SEED}, n_init 5)으로 "
+                         f"나눴다. 경계 {boundary:.1f}. state_thr* 열은 경계 민감도. 두 수준의 물리 의미는 가설이다")
+    ctx = dict(L=L, gms=gms, boundary=boundary, lo=lo, xl=xl, start=start, end=end)
+    return tab, ctx
+
+
+def operating_state_summary(st_n, ctx):
+    L, gms, boundary, xl = ctx["L"], ctx["gms"], ctx["boundary"], ctx["xl"]
+    rows = []
+    add = lambda sec, item, value, value2=np.nan, n=np.nan, note="", basis="관측": rows.append(
+        dict(section=sec, item=item, value=value, value2=value2, n=n, note=note, basis=basis))
+    means = {k: sorted(np.exp(g.means_.ravel()).round(1).tolist()) for k, g in gms.items()}
+    for k, g in gms.items():
+        add("2수준", f"가우스 혼합 {k}성분 BIC(로그 전류 RMS)", float(g.bic(xl)), n=len(L), note=f"성분 중앙(전류 RMS) {means[k]}")
+    low_sd = float(np.sqrt(gms[2].covariances_.ravel()[ctx["lo"]]))
+    add("2수준", "2성분 경계(저수준 사후확률 0.5)", boundary, n=len(L), note=f"저수준 성분 로그 SD {low_sd:.3f}. 경계 90·92·95에서도 결론이 같다(split_state_composition.csv)")
+    hist, edges = np.histogram(L.cur_rms_dm, bins=np.arange(70, 195, 5))
+    add("2수준", "전류 RMS 분포(5 간격) 80~100 구간 개수", " ".join(f"{int(a)}~{int(a) + 5}:{h}" for a, h in zip(edges[:-1], hist) if 80 <= a < 100),
+        n=len(L), note="두 봉우리 사이의 골이 88~95 근처에 있다")
+    tr = L[L.index < D.SPLITS["A"][1]]
+    xt = np.log(tr.cur_rms_dm.to_numpy()).reshape(-1, 1)
+    gt = _gmm(xt, 2)
+    ct, _ = _crossings(gt)
+    add("2수준", "A 학습 구간만으로 맞춘 2성분 경계", float(ct[0]) if len(ct) else np.nan, n=len(tr),
+        note=f"성분 중앙 {sorted(np.exp(gt.means_.ravel()).round(1).tolist())}. 경계가 흔들려 쓰지 않는다(전 구간 혼합의 경계를 쓴다)")
+    xs1 = np.log(L.sd1.to_numpy()).reshape(-1, 1)
+    gv = _gmm(xs1, 2)
+    agree = float(((gv.predict(xs1) == int(np.argmin(gv.means_.ravel()))) == (L.state == LOW).to_numpy()).mean())
+    add("2수준", "AI1 SD만으로 나눈 2성분과 상태 일치율", agree, n=len(L), note="전류와 하부 진동이 같은 두 수준을 가른다")
+    for state, g in L.groupby("state", sort=False):
+        add("상태별 값", f"{state}: 전류 RMS 중앙 / 0.6 Hz 진폭 중앙", float(g.cur_rms_dm.median()), float(g.amp06.median()), n=len(g),
+            note=f"AI0 SD 중앙 {g.sd0.median():.3f}, AI1 SD 중앙 {g.sd1.median():.3f}, 사인 R² 중앙 {g.r2_06.median():.4f}(최소 {g.r2_06.min():.4f})")
+    ratio = float(L[L.state == LOADED].amp06.median() / L[L.state == LOW].amp06.median())
+    add("상태별 값", "부하/저수준 0.6 Hz 진폭 비", ratio, n=len(L), note="두 상태 모두 사인 R² 0.99 이상(파형은 같고 진폭만 다르다)")
+    # 주기: 연속 저수준 구간(473~) 이전 기록의 상태 상관
+    pre = L[L.index < 470]
+    mid = ((pre.start - pre.start.iloc[0]).dt.total_seconds() + pre.n * .05).to_numpy()
+    sv = (pre.state == LOW).to_numpy().astype(float)
+    iu = np.triu_indices(len(mid), 1)
+    lagd = (mid[None, :] - mid[:, None])[iu]
+    for l0 in range(6, 84, 6):
+        m = (lagd >= l0) & (lagd < l0 + 6)
+        add("주기", f"기록 중앙 시각 차 {l0}~{l0 + 6}초 쌍의 상태 상관", float(np.corrcoef(sv[iu[0]][m], sv[iu[1]][m])[0, 1]), n=int(m.sum()),
+            note="구간 470 이전(연속 저수준 구간 제외)")
+    on = [i for i in range(1, len(sv)) if sv[i] == 1 and sv[i - 1] == 0]
+    iv = np.diff(pre.start.to_numpy()[on]) / np.timedelta64(1, "s")
+    h, _ = np.histogram(iv, bins=np.arange(0, 95, 5))
+    add("주기", "저수준 시작 간격 중앙 / 사분위", float(np.median(iv)), f"{np.percentile(iv, 25):.1f}~{np.percentile(iv, 75):.1f}", n=len(iv),
+        note="5초 간격 빈도 " + " ".join(f"{a}~{a + 5}:{c}" for a, c in zip(range(0, 90, 5), h) if c) + ". 15~25초와 40~45초에 몰린다(약 20초 주기의 1·2배)")
+    for lag in range(1, 5):
+        add("주기", f"기록 순서 {lag}칸 뒤 상태 상관", float(np.corrcoef(sv[:-lag], sv[lag:])[0, 1]), n=len(sv) - lag)
+    s = (L.state == LOW).to_numpy().astype(int)
+    runs, cur_s, ln, first = [], s[0], 1, L.index[0]
+    for i in range(1, len(s)):
+        if s[i] == cur_s:
+            ln += 1
+        else:
+            runs.append((cur_s, ln, first, L.index[i - 1])); cur_s, ln, first = s[i], 1, L.index[i]
+    runs.append((cur_s, ln, first, L.index[-1]))
+    rdf = pd.DataFrame(runs, columns=["low", "len", "first", "last"])
+    longest = rdf[rdf.low == 1].sort_values("len").iloc[-1]
+    add("주기", "상태 전환 횟수(길이≥17 기록 순서)", len(rdf) - 1, n=len(L),
+        note=f"부하 연속 중앙 {rdf[rdf.low == 0].len.median():.0f}(최대 {rdf[rdf.low == 0].len.max()}), 저수준 연속 중앙 {rdf[rdf.low == 1].len.median():.0f}")
+    add("연속 저수준", "가장 긴 저수준 연속(길이≥17 기록)", int(longest.len), f"구간 {int(longest['first'])}~{int(longest['last'])}", n=len(L),
+        note=f"{L.loc[int(longest['first']), 'start']:%H:%M:%S}~{L.loc[int(longest['last']), 'end']:%H:%M:%S}. '가장 조용한 블록 480~539'의 정체. 가동 정지·무부하라는 해석은 가설")
+    # 기록-상태 동기화
+    q = np.quantile(L.win_amp_ratio, [.5, .9, .99, 1])
+    add("기록-상태 동기화", "기록 안 17행 창 0.6 Hz 진폭의 최대/최소 비(중앙·90%·99%·최대)", float(q[-1]), " / ".join(f"{v:.3f}" for v in q), n=len(L),
+        note=f"두 상태의 진폭 비는 {ratio:.2f}다. 기록 안에서 상태가 바뀌면 이 비가 커야 한다")
+    add("기록-상태 동기화", "진폭 비 1.3 초과 기록", int((L.win_amp_ratio > 1.3).sum()), n=len(L),
+        note=f"무작위 시각 수집이면 약 {2 * 4.9 / 20.5:.0%}의 기록이 상태 전환을 가로질러야 한다(4.9초 기록, 약 20초 주기에 전환 2번)")
+    st_all = pd.Series(np.where(st_n.n >= LONG, np.where(st_n.index.isin(L.index[L.state == LOW]), LOW, LOADED), SHORT_STATE), index=st_n.index)
+    prev = st_all.shift(1)
+    ok = (st_all != SHORT_STATE) & (prev != SHORT_STATE) & prev.notna()
+    gap = (ctx["start"] - ctx["end"].shift(1)).dt.total_seconds()
+    chg, same = (st_all != prev) & ok, (st_all == prev) & ok
+    p = float(stats.mannwhitneyu(gap[chg], gap[same]).pvalue)
+    add("기록-상태 동기화", "직전 기록과 상태가 바뀐 공백 / 같은 공백의 길이 중앙(초)", float(gap[chg].median()), float(gap[same].median()),
+        n=int(chg.sum() + same.sum()), note=f"바뀜 {int(chg.sum())}·같음 {int(same.sum())}곳, Mann–Whitney p={p:.2f}. 전환은 기록 사이 공백에서만 일어나고, 공백 길이와 무관하다")
+    # 상태 안 결합
+    for state, g in L.groupby("state", sort=False):
+        a0, a1 = stats.spearmanr(g.sd0, g.cur_rms_dm)[0], stats.spearmanr(g.sd1, g.cur_rms_dm)[0]
+        add("상태 안 결합", f"{state}: AI0 SD~전류 RMS / AI1 SD~전류 RMS(Spearman)", float(a0), float(a1), n=len(g),
+            note=f"AI0 SD~AI1 SD {stats.spearmanr(g.sd0, g.sd1)[0]:.3f}")
+    add("상태 안 결합", "전체(두 상태 합침): AI0 SD~전류 RMS / AI1 SD~전류 RMS", float(stats.spearmanr(L.sd0, L.cur_rms_dm)[0]),
+        float(stats.spearmanr(L.sd1, L.cur_rms_dm)[0]), n=len(L), note="전체 상관에는 두 상태 사이의 차이가 섞였다(sensor_relations.csv)")
+    b10 = L.groupby(L.start.dt.floor("10min")).agg(records=("state", "size"), low_share=("state", lambda x: float((x == LOW).mean())))
+    b10["loaded_med"] = L[L.state == LOADED].groupby(L[L.state == LOADED].start.dt.floor("10min")).cur_rms_dm.median()
+    add("부하 수준 안 변동", "10분 블록별 부하 상태 전류 RMS 중앙 최소~최대", float(b10.loaded_med.min()), float(b10.loaded_med.max()), n=len(b10),
+        note="블록별 저수준 비율 " + " ".join(f"{k:%H:%M}:{v:.2f}" for k, v in b10.low_share.items()))
+    t = pd.DataFrame(rows)
+    t.attrs["note"] = ("정상 운전 상태의 구조(사후 기술 통계). 약 20초 주기의 2수준 교대와 기록-상태 동기화는 관측이고, 생산 주기·무부하 같은 해석은 가설이다. "
+                       "모델·분할·문턱은 바꾸지 않는다")
+    return t
+
+
+def split_state_composition(ctx):
+    L = ctx["L"]
+    rows, comp = [], {}
+    for part, (sid, lo, hi) in PARTS.items():
+        sub = L[(L.index >= lo) & (L.index < hi)]
+        comp[part] = (int((sub.state == LOW).sum()), len(sub))
+        rows.append(dict(part=part, split=sid, records_len17=len(sub), low=comp[part][0], low_share=comp[part][0] / len(sub),
+                         **{f"low_thr{t:g}": int((sub.cur_rms_dm < t).sum()) for t in STATE_THRESHOLDS}, fisher_cal_vs_eval_p=np.nan, odds_ratio=np.nan))
+    t = pd.DataFrame(rows)
+    for sid in D.SPLITS:
+        (lc, nc), (le, ne) = comp[f"{sid} 보정"], comp[f"{sid} 평가"]
+        odds, p = stats.fisher_exact([[lc, nc - lc], [le, ne - le]])
+        t.loc[t.part.eq(f"{sid} 평가"), ["fisher_cal_vs_eval_p", "odds_ratio"]] = [float(p), float(odds)]
+    t.attrs["note"] = (f"길이≥{LONG} 정상 기록의 저수준 비율(경계 {ctx['boundary']:.1f}, 2성분 혼합 분류). low_thr*는 경계 민감도. "
+                       "평가 구간에 저수준 기록이 몰려 있다(사후 분석). 분할은 바꾸지 않는다")
+    return t
+
+
+def normal_alarms_by_state(normal, seg_n, ctx, folds):
+    """정상 평가 기록의 알림(기록 최소 p ≤ α)을 운전 상태별로 센다: 동결 A·B, 동결과 독립인 롤링 3겹, 롤링 5겹 전체."""
+    L = ctx["L"]
+    state = L.state
+    minp = {}
+    for sid in D.SPLITS:
+        model = GuardModel.load(ART / f"guard_{sid}.json")
+        te = D.split_normal(normal, seg_n, sid)["test"]
+        mp = model.predict(te, .01).groupby("record_id").p_value.min().fillna(1.0)
+        minp[f"동결 {sid}"] = pd.Series(mp.to_numpy(), index=mp.index.to_numpy() + D.SPLITS[sid][2])
+    fold_minp = {f["fold"]: pd.Series(f["minp"], index=np.arange(len(f["minp"])) + f["train_end"] + 120) for f in folds}
+    minp["독립 롤링 3겹"] = pd.concat([fold_minp[f["fold"]] for f in folds if not f["same"]])
+    minp["롤링 5겹 전체"] = pd.concat(fold_minp.values())
+    rows = []
+    for group, mp in minp.items():
+        stt = state.reindex(mp.index).fillna(SHORT_STATE)
+        for alpha in ALPHA_GRID:
+            for g in (LOADED, LOW, SHORT_STATE):
+                m = stt == g
+                rows.append(dict(section="상태별 정상 알림", group=group, alpha=alpha, state=g, alerted=int((mp[m] <= alpha).sum()), records=int(m.sum()),
+                                 value=np.nan, p_value=np.nan, note=""))
+    pooled = pd.concat([minp["동결 A"], minp["동결 B"], minp["독립 롤링 3겹"]])
+    for thr in (90.0, 95.0):
+        stt = pd.Series(np.where(L.cur_rms_dm < thr, LOW, LOADED), index=L.index).reindex(pooled.index).fillna(SHORT_STATE)
+        for alpha in ALPHA_GRID:
+            for g in (LOADED, LOW, SHORT_STATE):
+                m = stt == g
+                rows.append(dict(section=f"경계 {thr:g} 민감도(동결 A·B + 독립 3겹)", group="합침", alpha=alpha, state=g, alerted=int((pooled[m] <= alpha).sum()),
+                                 records=int(m.sum()), value=np.nan, p_value=np.nan, note=""))
+    cal_idx = np.arange(D.SPLITS["B"][1], D.SPLITS["B"][2])
+    calB = pd.Series(GuardModel.load(ART / "guard_B.json").cal, index=cal_idx)
+    cst = state.reindex(cal_idx).fillna(SHORT_STATE)
+    top = cst[calB.sort_values(ascending=False).index[:10]].value_counts()
+    mw = stats.mannwhitneyu(calB[cst == LOADED], calB[cst == LOW], alternative="greater")
+    rows.append(dict(section="보정 문턱과 상태", group="동결 B 보정 120구간", alpha=np.nan, state=LOADED, alerted=int(top.get(LOADED, 0)), records=10,
+                     value=np.nan, p_value=float(mw.pvalue), note=f"보정 최대 점수 상위 10개의 상태. 부하>저수준 점수 단측 Mann–Whitney p"))
+    n_cal_loaded = int((cst == LOADED).sum())
+    stB = state.reindex(minp["동결 B"].index).fillna(SHORT_STATE)
+    xB, nB = int(((minp["동결 B"] <= .01) & (stB == LOADED)).sum()), int((stB == LOADED).sum())
+    rows.append(dict(section="보정 문턱과 상태", group="동결 B 평가 부하 기록(α 1%)", alpha=.01, state=LOADED, alerted=xB, records=nB, value=1 / (n_cal_loaded + 1),
+                     p_value=float(stats.binomtest(xB, nB, 1 / (n_cal_loaded + 1), alternative="greater").pvalue),
+                     note=f"참고: 부하 기록만의 교환가능 기준 1/({n_cal_loaded}+1)과 이항 단측 비교(보정의 부하 기록 {n_cal_loaded}개)"))
+    t = pd.DataFrame(rows)
+    t.attrs["note"] = ("사후 분석. 모든 정상 알림은 부하 상태 기록에서 나왔다. A 0/120은 부하 기록 21개, B 3/180은 부하 기록 51개에서 잰 값이다. "
+                       "길이 <17 기록은 상태를 정하지 않았다(짧은 기록)")
     return t
 
 
@@ -642,7 +925,8 @@ def decision_table(raw, seg, t, st, fb, ctx):
          f"행 0.1초 → 기록구간(정상 {int(gaps.loc['normal', 'segments'])}·이상 {int(gaps.loc['abnormal', 'segments'])}, 50행 구간 {int(gaps.loc['normal', 'segments_len50'])}·{int(gaps.loc['abnormal', 'segments_len50'])}개, 50행 초과 0) → 알림 단위(기록 안 50행 블록) → 평가 단위(행 F1·기록구간 탐지·정상 알림 구간). {cite(E / 'gaps.csv', 'normal,')}; {cite(GUARD / 'model.py', 'def alert_units')}",
          "창·AR·보정·알림을 기록구간 안에서만 계산한다. 주 지표는 행 F1과 구간 단위 탐지·정상 알림을 함께 쓴다",
          f"가이드북처럼 파일 전체를 연속으로 보면 20행 창의 {gp['20행 입력창이 기록 공백을 건너는 비율(코드 21, 32쪽)']}가 공백을 건넌다",
-         "기록구간은 수집 묶음이다. 스트로크·제품·독립 고장 단위가 아니다(production_unit_evidence.csv)"),
+         f"기록구간은 수집 묶음이다. 기록 안(4.9초)에는 행정 정보가 없고, 기록 경계가 약 20초 주기 2수준 운전 상태의 전환과 맞물린다(기록 안 전환 "
+         f"{ctx['states_sync']}). 제품·독립 고장 단위가 아니다(가설). {cite(E / 'operating_states_summary.csv', '진폭 비 1.3 초과 기록')}"),
         ("진단", "입력 열",
          f"TimeStamp·센서 3열만 입력. 행 번호·Equipment_state·파일명은 제외. {cite(E / 'variable_dictionary.csv', 'Equipment_state,')}; {cite(V1OUT / 'label_bypass.csv', 'timestamps_shifted_5_days')}",
          "라벨·날짜·시각은 입력이 아니다(시각은 기록구간 경계에만 쓴다)",
@@ -683,12 +967,18 @@ def decision_table(raw, seg, t, st, fb, ctx):
         ("검증", "A/B·시간순 분할",
          f"A 360/480, B 300/420 구간 경계. 롤링 5겹 중 {', '.join(f'{f} = 동결 {s}' for f, s in same)}(보정값 비트 단위 동일). 독립 폴드 {len(indep)}개({', '.join(indep)}). {cite(V1OUT / 'splits.csv', 'A,normal_60_20_20,train')}; {cite(E / 'rolling_calibration_curve.csv', 'normal_420_479')}",
          f"오경보 판단의 주 근거는 B α=1% 3/180(구간 {B_fa})이다. 롤링 420~479의 2/60은 같은 모델의 같은 오경보(423·461)라 합산하지 않는다",
-         "결과를 본 뒤 분할을 다시 고르지 않는다", "모두 같은 날 77분 안이다. 새 날짜 검증이 아니다"),
+         "결과를 본 뒤 분할을 다시 고르지 않는다",
+         f"모두 같은 날 77분 안이다. 새 날짜 검증이 아니다. 평가 구간의 운전 상태 구성이 보정과 다르다(저수준 A 보정 {ctx['comp']['A 보정']}·평가 {ctx['comp']['A 평가']}, "
+         f"B 보정 {ctx['comp']['B 보정']}·평가 {ctx['comp']['B 평가']}). 모든 정상 알림은 부하 기록에서 나왔다: A 0/120은 부하 기록 {ctx['loaded_n']['동결 A']}개, "
+         f"B 3/180은 부하 기록 {ctx['loaded_n']['동결 B']}개에서 잰 값이다. {cite(E / 'split_state_composition.csv', 'A 평가,')}; "
+         f"{cite(E / 'normal_alarms_by_state.csv', '상태별 정상 알림,동결 B,0.01,부하')}"),
         ("검증", "conformal 보정",
          f"기록(알림 단위) 최대 점수로 보정, α 격자 k/121. 시간순 5겹 합산 {int(pooled.loc[1, 'alerted'])}/300·{int(pooled.loc[3, 'alerted'])}/300·{int(pooled.loc[6, 'alerted'])}/300·{int(pooled.loc[12, 'alerted'])}/300(k=1·3·6·12), k 1~12 중 {int(pooled.within_pi90.sum())}개가 90% 예측 구간 안. {cite(E / 'calibration_curve.csv', 'B,1,')}; {cite(E / 'rolling_calibration_curve.csv', '합산(5겹)')}",
          "α=1%(보정 120단위의 최대값)를 기본 운영점으로 둔다", "행 단위 보정은 기록 안 자기상관으로 오경보가 부푼다", "같은 날·교환가능성 가정. 새 날짜의 보장이 아니다"),
         ("검증", "블록 부트스트랩",
-         f"정상 알림 수의 이동 블록 부트스트랩(블록 5·10·20). {cite(GUARD_OUT / 'uncertainty_v2.csv', 'A,normal_60_20_20,v1,0.01,normal,notified_segments,5')}",
+         f"정상 알림 수의 이동 블록 부트스트랩(블록 5·10·20, v2 α 1%). A 관측 0(퇴화, 모든 복제 0), B 관측 3(95% {ctx['boot_B']}). "
+         f"{cite_rows(GUARD_OUT / 'uncertainty_v2.csv', 'A,normal_60_20_20,v2,0.01,normal,notified_segments,')}; "
+         f"{cite_rows(GUARD_OUT / 'uncertainty_v2.csv', 'B,normal_50_20_30,v2,0.01,normal,notified_segments,')}",
          "관측 건수를 주 결과로, 부트스트랩은 민감도로 둔다", "0건은 퇴화로 표시한다", "같은 날 자료 안의 변동만 반영한다"),
         ("검증", "누설 검사",
          f"날짜 이동·열 추가·6자리 재직렬화·미래 행 추가에 추론 불변. {cite(V1OUT / 'label_bypass.csv', 'timestamps_shifted_5_days')}",
@@ -734,24 +1024,38 @@ def main():
     fits = {k: waveform_fits(raw[k], seg[k]) for k in raw}
     fb = frozen_false_alarms(normal, seg["normal"], "B")
     tables = {}
-    tables["sensor_relations.csv"] = sensor_relations(raw, st)
+    tables["operating_states.csv"], sctx = operating_states(normal, seg["normal"], t["normal"], st["normal"])
+    tables["operating_states_summary.csv"] = operating_state_summary(st["normal"], sctx)
+    tables["split_state_composition.csv"] = split_state_composition(sctx)
+    tables["sensor_relations.csv"] = sensor_relations(raw, st, sctx["L"])
     tables["operating_variation.csv"] = operating_variation(seg["normal"], t["normal"], st["normal"])
     tables["false_alarm_operating_level.csv"] = false_alarm_levels(fb, seg["normal"], t["normal"], st["normal"])
-    tables["observability.csv"] = observability(raw, seg)
+    tables["observability.csv"] = observability(raw, seg, fits)
     tables["production_unit_evidence.csv"] = production_unit(raw, seg, t, fits["normal"], mu, sd)
     tables["abnormal_segments.csv"], tables["abnormal_summary.csv"] = abnormal_segments(raw, seg, t, fits, mu, sd, st["abnormal"])
     tables["outlier_rules.csv"] = outlier_rules(raw, seg["normal"])
     tables["quality_index_weighted.csv"] = quality_weighted(raw)
     tables["guidebook_stats_match.csv"] = guidebook_stats(raw)
     tables["rolling_calibration_curve.csv"], folds = rolling_calibration_curve(normal, seg["normal"])
+    tables["normal_alarms_by_state.csv"] = normal_alarms_by_state(normal, seg["normal"], sctx, folds)
     tables["phase_continuity.csv"] = phase_continuity(normal, seg["normal"], t["normal"])
     tables["guidebook_protocol_vs_records.csv"] = guidebook_protocol(normal, seg["normal"], t["normal"], tables["sensor_relations.csv"])
     for name, tab in tables.items():          # 결정표·대응표가 이 표들을 인용하므로 먼저 쓴다
         tab.to_csv(HERE / name, index=False)
     tables["variable_expected_signals.csv"] = variable_expected_signals(raw, tables["observability.csv"])
     tables["failure_mode_map.csv"] = failure_mode_map()
+    comp = tables["split_state_composition.csv"].set_index("part")
+    nab = tables["normal_alarms_by_state.csv"]
+    nab1 = nab[nab.section.eq("상태별 정상 알림") & np.isclose(nab.alpha, .01) & nab.state.eq(LOADED)].set_index("group")
+    osum = tables["operating_states_summary.csv"].set_index("item")
+    ub = pd.read_csv(GUARD_OUT / "uncertainty_v2.csv")
+    ub = ub[ub.split_id.eq("B") & ub.model.eq("v2") & np.isclose(ub.alpha, .01) & ub.side.eq("normal") & ub.statistic.eq("notified_segments")]
     ctx = dict(outlier_rules=tables["outlier_rules.csv"], rolling_curve=tables["rolling_calibration_curve.csv"],
-               guidebook_protocol=tables["guidebook_protocol_vs_records.csv"])
+               guidebook_protocol=tables["guidebook_protocol_vs_records.csv"],
+               comp={p: f"{int(r.low)}/{int(r.records_len17)}({r.low_share:.0%})" for p, r in comp.iterrows()},
+               loaded_n={g: int(r.records) for g, r in nab1.iterrows()},
+               states_sync=f"{int(osum.loc['진폭 비 1.3 초과 기록', 'value'])}/{int(osum.loc['진폭 비 1.3 초과 기록', 'n'])}",
+               boot_B="·".join(f"{r.boot_p2_5:g}~{r.boot_p97_5:g}" for r in ub.itertuples()))
     tables["decision_table_diagnosis_v2.csv"] = decision_table(raw, seg, t, st, fb, ctx)
     notes = {}
     for name, tab in tables.items():
@@ -768,7 +1072,7 @@ def main():
               [V1OUT / "load_normalization_meta.csv", SUPP / "e1_summary.csv", SUPP / "e1_detection_floor.csv", SUPP / "e2_uci_metrics.csv",
                SUPP / "e3_stability.csv", SUPV / "random_rows.csv", SUPV / "grouped_records.csv"] + \
               [HERE / n for n in ("gaps.csv", "imbalance.csv", "outliers.csv", "quality_index.csv", "block_context.csv", "current_grid.csv", "class_differences.csv")]
-    D.dump_json(dict(purpose="루브릭 사이클2 1회차 평가관 01 D1~D6·평가관 05 O1(a)·O4 진단 보강 표와 그림",
+    D.dump_json(dict(purpose="루브릭 사이클2 1회차 평가관 01 D1~D6·평가관 05 O1(a)·O4, 2회차 평가관 01 R2-D1~D3·평가관 05 R2-O10·O11 진단 보강 표와 그림",
                      input_hashes={k: v["sha256"] for k, v in report["files"].items()},
                      artifacts={p.name: D.sha256_file(p) for p in sorted(ART.glob("guard_*.json"))},
                      code_sha256={rel(p): D.sha256_file(p) for p in (Path(__file__), HERE / "figures.py", HERE / "build_tables.py", GUARD / "model.py",
@@ -776,7 +1080,7 @@ def main():
                      sources={rel(p): D.sha256_file(p) for p in sources}, cited=dict(sorted(CITED.items())),
                      rolling_folds=[dict(fold=f["fold"], train_end=f["train_end"], n_cal=f["n_cal"], same_as_frozen=f["same"]) for f in folds],
                      outputs={name: D.sha256_file(HERE / name) for name in tables} | {rel(p): D.sha256_file(p) for p in fig_files},
-                     table_notes=notes, seeds=dict(simulation=SEED_SIM, permutation=SEED_PERM),
+                     table_notes=notes, seeds=dict(simulation=SEED_SIM, permutation=SEED_PERM, gaussian_mixture=STATE_SEED),
                      environment=dict(D.environment(), blas_runtime=blas), elapsed_s=round(time.monotonic() - start, 1)),
                 HERE / "diagnostics_manifest.json")
     print(f"완료 {time.monotonic() - start:.1f}초, 표 {len(tables)}개, 그림 {len(fig_files)}장")

@@ -24,13 +24,13 @@
 `yejun/`에서 실행한다(PowerShell은 첫 줄 대신 `$env:OMP_NUM_THREADS=1; $env:PYTHONDONTWRITEBYTECODE=1`). 시간은 이 기기(Apple M2) 실측이다.
 
 ```bash
-export OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
+export OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1        # PowerShell: $env:OMP_NUM_THREADS=1; $env:PYTHONDONTWRITEBYTECODE=1
 python analysis/press_advance/run_experiment.py                          # 약 7초, 결과를 이 폴더에 쓴다
 python analysis/package_contract.py --package analysis/press_advance     # 실행 기록 무결성 + 동결 기대값 비교
 python -m pytest -q analysis/press_advance/test_contract.py              # 변조·삭제 검출
 ```
 
-공용 검사기 [package_contract.py](../package_contract.py)가 [contract.json](contract.json)에 따라 다음을 확인한다(평가관 06 R8).
+공용 검사기 [package_contract.py](../package_contract.py)가 [contract.json](contract.json)에 따라 다음을 확인한다.
 - 실행 기록의 스크립트 해시·v1 코드 묶음 해시·입력 해시·결과 해시가 현재 파일과 같은가
 - `metrics.csv`·`primary.csv`가 [expected/](expected)의 동결값과 같은가(수치 허용오차 1e-9, 문자 정확 비교)
 - `segment_metrics.csv`는 있으면 실행 기록 해시와 같아야 하고, 동결에는 행 수·열만 남긴다. 없으면(갓 받은 사본) 실패가 아니라 참고로 알린다.

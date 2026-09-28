@@ -43,6 +43,17 @@ def scores(base, ar, frame, seg):
                 ar2_only=gar, maxz_ar2=np.fmax(gz, gar), early6_ar2=np.fmax(early, gar))
 
 
+def portable(value, base=HERE.parents[1]):
+    """실행 기록의 절대 경로를 yejun/ 기준 상대 경로로 적는다(다른 기기·제출 묶음에 개발 기기 경로가 남지 않게)."""
+    if isinstance(value, dict):
+        return {k: portable(v, base) for k, v in value.items()}
+    if isinstance(value, list):
+        return [portable(v, base) for v in value]
+    if isinstance(value, str) and value.startswith(str(base)):
+        return str(Path(value).relative_to(base))
+    return value
+
+
 def run():
     for stream in (sys.stdout, sys.stderr):     # 한국어 Windows(CP949) 콘솔에서 못 쓰는 기호는 바꿔 쓴다
         try:
@@ -81,7 +92,7 @@ def run():
     pd.concat(all_records, ignore_index=True).to_csv(HERE / "segment_metrics.csv", index=False)
     selected = metrics[metrics.criterion.eq("conformal") & metrics.alpha.eq(.01) & metrics.input_variant.eq("matched")]
     selected.to_csv(HERE / "primary.csv", index=False)
-    D.dump_json(dict(protocol=protocol, fit=fitted, inputs=report, code_sha256=code_sha256(),
+    D.dump_json(dict(protocol=protocol, fit=fitted, inputs=portable(report), code_sha256=code_sha256(),
                      script_sha256=D.sha256_file(Path(__file__)), environment=D.environment(),
                      outputs={name: D.sha256_file(HERE / name) for name in ("metrics.csv", "segment_metrics.csv", "primary.csv")},
                      elapsed_s=time.monotonic()-started), HERE / "manifest.json")

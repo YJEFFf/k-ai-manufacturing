@@ -37,6 +37,7 @@ MUTED, INK2 = "#b8b7b2", "#52514e"
 STAGE = {"학습": "#9ec5f4", "보정": "#3987e5", "평가": "#184f95"}     # 순서형 한 색상 단계
 QUIET = "#ecebe7"
 UNIT = "단위 미기재"
+STATE_COLOR = {"부하": "#5b3fa0", "저수준": "#b9a8e6", "짧은 기록(<17)": "#dcdbd5"}   # 운전 상태(한 색상 명암, 다른 범주색과 겹치지 않음)
 
 
 def _save(fig, name):
@@ -65,7 +66,7 @@ def timeline(raw, seg, t, tables):
     start = t["normal"].groupby(seg["normal"]).min(); end = t["normal"].groupby(seg["normal"]).max()
     s_min, e_min = _minutes(start, day0), _minutes(end, day0) + D.DT / 60
     assert len(s_min) == int(gaps.loc["normal", "segments"]) and len(np.unique(seg["abnormal"])) == int(gaps.loc["abnormal", "segments"])
-    rows = [("기록구간", None)] + [(f"분할 {sid}", sid) for sid in D.SPLITS] + [(f"롤링 {e + 120}~{e + 179}", e) for e in (180, 240, 300, 360, 420)]
+    rows = [("기록구간(운전 상태)", None)] + [(f"분할 {sid}", sid) for sid in D.SPLITS] + [(f"롤링 {e + 120}~{e + 179}", e) for e in (180, 240, 300, 360, 420)]
     roll = tables["rolling_calibration_curve.csv"]
     same = dict(roll[roll.same_as_frozen.fillna("").ne("") & roll.k.eq(1)][["train_end", "same_as_frozen"]].astype({"train_end": int}).values.tolist())
     for train_end, sid in same.items():      # '= 동결' 표시는 학습·보정 경계가 그 분할과 같은 폴드에만 붙는다
@@ -73,9 +74,19 @@ def timeline(raw, seg, t, tables):
     ax = axes[0]
     q0, q1 = s_min[480], e_min[539]
     ax.axvspan(q0, q1, color=QUIET, zorder=0)
-    ax.text((q0 + q1) / 2, len(rows) - .35, "가장 조용한 블록\n480~539", ha="center", va="bottom", fontsize=8, color=INK2)
+    ost = tables["operating_states.csv"]
+    summ = tables["operating_states_summary.csv"].set_index("item")
+    run = summ.loc["가장 긴 저수준 연속(길이≥17 기록)"]
+    ax.text((q0 + q1) / 2, len(rows) - .35, f"가장 조용한 블록 480~539\n(연속 저수준 {run.value2}, {int(run.value)}기록)", ha="center", va="bottom", fontsize=8, color=INK2)
     y = len(rows) - 1
-    ax.broken_barh(list(zip(s_min, e_min - s_min)), (y - .3, .6), color=INK2, linewidth=0)
+    state = pd.Series("짧은 기록(<17)", index=np.arange(len(s_min)))
+    state.loc[ost.record.to_numpy()] = ost.state.to_numpy()
+    lens = pd.Series(seg["normal"]).value_counts().sort_index()
+    assert ((lens >= 17).to_numpy() == state.ne("짧은 기록(<17)").to_numpy()).all()
+    assert int(state.eq("저수준").sum()) == int((ost.state == "저수준").sum())
+    for st_name, color in STATE_COLOR.items():
+        m = state.eq(st_name).to_numpy()
+        ax.broken_barh(list(zip(s_min[m], (e_min - s_min)[m])), (y - .3, .6), color=color, linewidth=0, label=f"{st_name} {int(m.sum())}")
     bound = lambda s: s_min[s] if s < len(s_min) else e_min[-1]
     for i, (label, key) in enumerate(rows[1:], 1):
         yy = y - i
@@ -96,9 +107,10 @@ def timeline(raw, seg, t, tables):
     ax.set_xticks(ticks); ax.set_xticklabels([f"00:{m:02d}" if m < 60 else f"01:{m - 60:02d}" for m in ticks])
     rec_s, ela_s = len(raw["normal"]) * D.DT, (t["normal"].max() - t["normal"].min()).total_seconds()
     ax.set_title(f"정상 2022-07-12(화): {len(s_min)}구간·{len(raw['normal']):,}행, 기록 {rec_s:,.0f}초 / 경과 {ela_s:,.0f}초({rec_s / ela_s:.1%})", loc="left")
-    for stage, c in STAGE.items():
-        ax.bar(0, 0, color=c, label=stage)
-    ax.legend(loc="upper left", bbox_to_anchor=(1.0, 1.0), frameon=False, title="분할 역할")
+    h_state, l_state = ax.get_legend_handles_labels()          # 한 범례에 운전 상태(기록 수)와 분할 역할을 함께 둔다
+    stage_handles = [plt.Rectangle((0, 0), 1, 1, color=c) for c in STAGE.values()]
+    ax.legend(h_state + stage_handles, [f"기록: {l}" for l in l_state] + [f"분할: {k}" for k in STAGE], loc="upper left",
+              bbox_to_anchor=(1.0, 1.0), frameon=False, fontsize=8)
     _clean(ax, "y")
     # 확대: 2분
     ax = axes[1]
@@ -124,7 +136,8 @@ def timeline(raw, seg, t, tables):
     rec_a, ela_a = len(raw["abnormal"]) * D.DT, (t["abnormal"].max() - t["abnormal"].min()).total_seconds()
     ax.set_title(f"이상 2022-07-17(일): {len(sa_m)}구간·{len(raw['abnormal'])}행, 기록 {rec_a:.0f}초 / 경과 {ela_a:.1f}초({rec_a / ela_a:.1%})", loc="left")
     _clean(ax, "y")
-    fig.suptitle("수집 타임라인 — 막대 하나가 기록구간 하나(공백은 기록 없음)", x=.01, ha="left", fontsize=11)
+    fig.suptitle("수집 타임라인 — 막대 하나가 기록구간 하나(공백은 기록 없음). 기록 색은 운전 상태(전류 RMS 2수준, 약 20초 주기로 교대, 가설 해석)",
+                 x=.01, ha="left", fontsize=10.5)
     return _save(fig, "fig_d2a_timeline.png")
 
 
@@ -171,14 +184,17 @@ def blocks(raw, seg):
 
 
 # ---------- (c) 원시 신호 예시 ----------
-def raw_examples(raw, seg):
+def raw_examples(raw, seg, tables):
     n, a = raw["normal"], raw["abnormal"]
+    ost = tables["operating_states.csv"].set_index("record")
     tr = n[seg["normal"] < D.SPLITS["A"][1]]
     mu, sdv = tr[D.SENSORS].mean(), tr[D.SENSORS].std(ddof=0)
     lens_n = pd.Series(seg["normal"]).value_counts(); lens_a = pd.Series(seg["abnormal"]).value_counts()
-    pick_n = [int(min(s for s in lens_n[lens_n == 50].index if s >= lo)) for lo in (0, 480)]
+    loaded50 = [int(s) for s in sorted(lens_n[lens_n == 50].index) if ost.loc[s, "state"] == "부하"]
+    pick_n = [loaded50[0], int(min(s for s in lens_n[lens_n == 50].index if s >= 480))]      # 부하 기록 하나, 가장 조용한 블록의 저수준 기록 하나
+    assert ost.loc[pick_n[0], "state"] == "부하" and ost.loc[pick_n[1], "state"] == "저수준"
     pick_a = sorted(int(s) for s in lens_a[lens_a == 50].index)[:2]
-    cases = [("정상", n, seg["normal"], s, NORMAL) for s in pick_n] + [("이상", a, seg["abnormal"], s, ABNORMAL) for s in pick_a]
+    cases = [(f"정상·{ost.loc[s, 'state']}", n, seg["normal"], s, NORMAL) for s in pick_n] + [("이상", a, seg["abnormal"], s, ABNORMAL) for s in pick_a]
     fig, axes = plt.subplots(3, 4, figsize=(11, 6), sharey="row", sharex=True)
     for j, (kind, f, sg, s, color) in enumerate(cases):
         sub = f[sg == s]
@@ -189,13 +205,16 @@ def raw_examples(raw, seg):
             ax = axes[i, j]
             ax.plot(tt, z[c].to_numpy(), color=color, linewidth=1.3)
             if i == 0:
-                ax.set_title(f"{kind} 구간 {s} ({pd.to_datetime(sub.TimeStamp.iloc[0]):%H:%M:%S}, 50행)", fontsize=9, loc="left")
+                rms = float(np.sqrt(np.mean((sub.AI2_Current - sub.AI2_Current.mean()) ** 2)))
+                if kind.startswith("정상"):
+                    assert abs(rms - float(ost.loc[s, "current_rms_dm"])) < 1e-9
+                ax.set_title(f"{kind} 구간 {s}\n{pd.to_datetime(sub.TimeStamp.iloc[0]):%H:%M:%S} · 전류 RMS {rms:.1f}", fontsize=8.5, loc="left")
             if j == 0:
                 ax.set_ylabel(f"{c}\n(A 학습 표준화 z)", fontsize=8)
             _clean(ax)
     for ax in axes[-1]:
         ax.set_xlabel("기록 안 시간(초)")
-    fig.suptitle("같은 척도의 원시 신호 예시 — 정상 2·이상 2 기록구간(각 4.9초). 가이드북 코드 12·13(26~27쪽)은 파일 전체를 행 번호로 이어 그려 "
+    fig.suptitle("같은 척도의 원시 신호 예시 — 정상 2(부하·저수준 상태)·이상 2 기록구간(각 4.9초). 가이드북 코드 12·13(26~27쪽)은 파일 전체를 행 번호로 이어 그려 "
                  "기록 공백(정상 599곳·이상 20곳)이 보이지 않고 센서·파일마다 세로 척도가 다르다", x=.01, ha="left", fontsize=9.5, wrap=True)
     return _save(fig, "fig_d2c_raw_examples.png")
 
@@ -219,11 +238,20 @@ def relations(raw, st, fb, tables):
     ax.legend(loc="upper center", bbox_to_anchor=(.5, -.16), ncol=2, frameon=False, markerscale=3, scatterpoints=1)
     _clean(ax)
     offsets = {423: (6, 5), 461: (6, -12), 570: (6, 4)}
+    ost = tables["operating_states.csv"].set_index("record")
+    summ = tables["operating_states_summary.csv"]
     for ax, col, pair in ((axes[1], "sd0", "AI0 SD~AI2 RMS"), (axes[2], "sd1", "AI1 SD~AI2 RMS")):
         sn, sa = st["normal"][st["normal"].n >= 17], st["abnormal"][st["abnormal"].n >= 17]
         rn, ra = stats.spearmanr(sn[col], sn.cur_rms_dm)[0], stats.spearmanr(sa[col], sa.cur_rms_dm)[0]
         assert abs(rn - get("normal", pair, sec="구간 수준 결합")) < 1e-12 and abs(ra - get("abnormal", pair, sec="구간 수준 결합")) < 1e-12
-        ax.scatter(sn.cur_rms_dm, sn[col], s=10, color=NORMAL, alpha=.5, linewidths=0, label=f"정상 {len(sn)}구간(순위상관 {rn:.2f})")
+        sstate = ost.state.reindex(sn.index)
+        for st_name in ("부하", "저수준"):
+            g = sn[sstate == st_name]
+            rw = stats.spearmanr(g[col], g.cur_rms_dm)[0]
+            ref = summ[summ.item.eq(f"{st_name}: AI0 SD~전류 RMS / AI1 SD~전류 RMS(Spearman)")].iloc[0]
+            assert abs(rw - float(ref.value if col == "sd0" else ref.value2)) < 1e-12
+            ax.scatter(g.cur_rms_dm, g[col], s=10, color=STATE_COLOR[st_name], alpha=.75, linewidths=0,
+                       label=f"정상 {st_name} {len(g)}구간(상태 안 {rw:.2f})")
         ax.scatter(sa.cur_rms_dm, sa[col], s=22, color=ABNORMAL, edgecolors="#fcfcfb", linewidths=.8, label=f"이상 {len(sa)}구간(순위상관 {ra:.2f})")
         fa = st["normal"].loc[fb]
         ax.scatter(fa.cur_rms_dm, fa[col], s=36, marker="D", color=FALSE_ALARM, edgecolors="#fcfcfb", linewidths=.8, label="B 오경보 구간(α=1%)")
@@ -234,10 +262,10 @@ def relations(raw, st, fb, tables):
             axis.set_major_formatter(FuncFormatter(lambda v, _: f"{v:g}"))
             axis.set_minor_formatter(FuncFormatter(lambda v, _: ""))
         ax.set_xlabel(f"구간 전류 RMS, 평균 제거({UNIT}, 로그)"); ax.set_ylabel(f"구간 {'AI0' if col == 'sd0' else 'AI1'} 진동 SD({UNIT}, 로그)")
-        ax.set_title(f"{'상부' if col == 'sd0' else '하부'} 진동–전류 진폭 결합(길이≥17 구간, Spearman)", loc="left", fontsize=9)
+        ax.set_title(f"{'상부' if col == 'sd0' else '하부'} 진동–전류 진폭 결합(길이≥17 구간, Spearman)\n정상 전체 {rn:.2f}는 두 운전 상태 사이의 차이를 포함", loc="left", fontsize=9)
         ax.xaxis.set_major_locator(FixedLocator([50, 70, 100, 150, 200]))
         ax.yaxis.set_major_locator(FixedLocator([.02, .05, .1, .2, .5, 1]))
-        ax.legend(loc="upper center", bbox_to_anchor=(.5, -.16), ncol=2, frameon=False, fontsize=7.5, scatterpoints=1)
+        ax.legend(loc="upper center", bbox_to_anchor=(.5, -.16), ncol=1, frameon=False, fontsize=7.5, scatterpoints=1)
         _clean(ax)
     fig.subplots_adjust(top=.80)
     fig.suptitle("센서 간 관계(기술 통계, 인과·고장 근거 아님)", x=.01, y=.99, ha="left", fontsize=11)
@@ -289,10 +317,10 @@ def format_leak(raw, text):
 
 
 def draw_all(raw, seg, t, st, mu=None, sd=None, fb=None, tables=None, text=None):
-    tables = tables or {n: pd.read_csv(HERE / n) for n in ("sensor_relations.csv", "rolling_calibration_curve.csv")}
+    tables = tables or {n: pd.read_csv(HERE / n) for n in ("sensor_relations.csv", "rolling_calibration_curve.csv", "operating_states.csv", "operating_states_summary.csv")}
     if text is None:
         text = {k: pd.read_csv(D.data_dir(BASE) / D.FILES[k], dtype=str, keep_default_na=False) for k in raw}
-    return [timeline(raw, seg, t, tables), blocks(raw, seg), raw_examples(raw, seg), relations(raw, st, fb, tables), format_leak(raw, text)]
+    return [timeline(raw, seg, t, tables), blocks(raw, seg), raw_examples(raw, seg, tables), relations(raw, st, fb, tables), format_leak(raw, text)]
 
 
 def main():

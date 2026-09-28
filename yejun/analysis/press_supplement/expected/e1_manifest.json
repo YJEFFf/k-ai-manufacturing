@@ -1,8 +1,8 @@
 {
   "experiment": "E1",
   "protocol": "press-supplement-v1",
-  "run_id": "e39803b2523f4e2a87df0a361ab1cf1d",
-  "created": "2026-09-27T18:45:05+0900",
+  "run_id": "9ec213e60bbb44cf84bb0aac8258310c",
+  "created": "2026-09-28T15:37:48+0900",
   "config": {
     "noise_seeds": [
       20260926,
@@ -27,18 +27,18 @@
     "analysis/press_supplement/common.py": "3cc480e147ba5e1b48c417a8cec104453093d761aabc943d8df2e23d60a7a08a",
     "analysis/press_supplement/contract.py": "4fc82363a768b3aa4acb6b4fbe0c9b547bb9091f4fb122fbab81d515c64ee78c",
     "analysis/press_supplement/protocol.json": "4c6bf75677b7f9a43b7faf9c7869d7ad5b6511a8ae1eb26ff0370ec6693ade81",
-    "press_guard/model.py": "1602db8f6a0845f1043e56c9721297f93418a20b87852b8ea50b3400dd18a761",
-    "press_guard/train.py": "5e5eac9a11bd3e2d3b08e101ff77248b9d6a5b68068ab17f59d197b0eb76e081",
+    "press_guard/model.py": "2622d9f2a5eb62245ddd0f9b0a27c6e3c7442ed4b11cbd118db5d8f2187614ee",
+    "press_guard/train.py": "c75264e7b819ed8407fb052e825487e852b1fba1912b2afbc805f728a34103c5",
     "analysis/press_supplement/fault_injection.py": "d6fb178bd6fc3ff15f3103d2e63f90b5fddc10c2b0061064ab8995d4d31cb531",
-    "press_submission/press/* (code_sha256)": "0fd0718e47ccf8a7797142b905b88df1f7b33457709d30f3b1fa904f16385004"
+    "press_submission/press/* (code_sha256)": "b372a18b66af93347e1aa410e472cbae7a15b534b75d28e132adb09cec79118e"
   },
   "inputs": {
     "normal": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
     "abnormal": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e"
   },
   "artifacts": {
-    "guard_A.json": "7873bb5dcaab78ef7b09d7c72caa0f620a9098bbc8ccfd297acf0ae37349db58",
-    "guard_B.json": "3bfd17a5b0b765be2a80b59c6d864444dcebf31210df9d5280f2557d3c254cd3"
+    "guard_A.json": "c938707f1dd16e7c239b8053e7f032d8fac828d6c753de2b898ba9130a594f10",
+    "guard_B.json": "b64ac3b30bc697034104287964f3154e88c8a50749ccdec04f6d4f8744fd6969"
   },
   "sources": {},
   "outputs": {
@@ -82,5 +82,5 @@
       }
     ]
   },
-  "elapsed_s": 392.5
+  "elapsed_s": 400.9
 }

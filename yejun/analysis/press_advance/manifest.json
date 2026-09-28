@@ -60,11 +60,11 @@
     }
   },
   "inputs": {
-    "data_dir": "/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission/data/3_소성가공_예지보전",
+    "data_dir": "press_submission/data/3_소성가공_예지보전",
     "verified": true,
     "files": {
       "normal": {
-        "path": "/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission/data/3_소성가공_예지보전/press_data_normal.csv",
+        "path": "press_submission/data/3_소성가공_예지보전/press_data_normal.csv",
         "sha256": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
         "rows": 20000,
         "sha256_expected": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
@@ -73,7 +73,7 @@
         "rows_ok": true
       },
       "abnormal": {
-        "path": "/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission/data/3_소성가공_예지보전/outlier_data.csv",
+        "path": "press_submission/data/3_소성가공_예지보전/outlier_data.csv",
         "sha256": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
         "rows": 600,
         "sha256_expected": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
@@ -83,8 +83,8 @@
       }
     }
   },
-  "code_sha256": "0fd0718e47ccf8a7797142b905b88df1f7b33457709d30f3b1fa904f16385004",
-  "script_sha256": "6fa58fd70aa55a96116cb56fb4c26122acd6cc0dc41be3a68f191aa76d492569",
+  "code_sha256": "b372a18b66af93347e1aa410e472cbae7a15b534b75d28e132adb09cec79118e",
+  "script_sha256": "3af1748cafaf3b19708017c759dce06e0c74a9e19fdd29961fcf4ccc6cabd4a1",
   "environment": {
     "python": "3.12.2",
     "platform": "macOS-26.3.1-arm64-arm-64bit",
@@ -102,5 +102,5 @@
     "segment_metrics.csv": "6a16bfe4f4864c2893d5f6184eebcdf4b86da40854ffa2c41a41db360a586e80",
     "primary.csv": "6d9441541980f22e1a5d369447a745ec2141947fd70377d42d0a9ab8ae439e80"
   },
-  "elapsed_s": 6.1638980830002765
+  "elapsed_s": 6.2244028750001235
 }

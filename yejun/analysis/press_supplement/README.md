@@ -108,11 +108,11 @@ python analysis/press_supplement/verify.py --rerun E1,E2,E3   # 임시 폴더에
 python -m pytest -q analysis/press_supplement/test_contract.py
 ```
 
-**UCI 원본(E2 입력).** `analysis/press_external/data/hydraulic.zip`(76,601,704바이트, SHA-256 `24128aad2ee45eea7e6b63ebbd9992cdf25d0483a2cebefbfc13bc69079af1f2`, CC BY 4.0)은 Git에서 뺐다. `acquire.py`가 UCI에서 받고 [acquisition.json](../press_external/acquisition.json)에 해시·CRC를 남긴다. ZIP이 없으면 verify와 계약 테스트는 E2 검사를 이유·획득 명령과 함께 건너뛰고(평가관 06 R6), E1·E3는 그대로 검사한다.
+**UCI 원본(E2 입력).** `analysis/press_external/data/hydraulic.zip`(76,601,704바이트, SHA-256 `24128aad2ee45eea7e6b63ebbd9992cdf25d0483a2cebefbfc13bc69079af1f2`, CC BY 4.0)은 Git에서 뺐다. `acquire.py`가 UCI에서 받고 [acquisition.json](../press_external/acquisition.json)에 해시·CRC를 남긴다. ZIP이 없으면 verify와 계약 테스트는 E2 검사를 이유·획득 명령과 함께 건너뛰고, E1·E3는 그대로 검사한다.
 
-세 실험 스크립트는 `--out`으로 산출물 폴더를 바꿀 수 있고, E2는 `--no-cache`로 변환 캐시 없이 돌릴 수 있다. `--no-cache` 실행은 결과 CSV가 바이트까지 같으므로, verify는 실행 설정의 `cache_used`를 비교하지 않고 "참고"로만 보인다(평가관 06 R7). 캐시 형식(`cache_version`)이 다르면 여전히 실패한다.
+세 실험 스크립트는 `--out`으로 산출물 폴더를 바꿀 수 있고, E2는 `--no-cache`로 변환 캐시 없이 돌릴 수 있다. `--no-cache` 실행은 결과 CSV가 바이트까지 같으므로, verify는 실행 설정의 `cache_used`를 비교하지 않고 "참고"로만 보인다. 캐시 형식(`cache_version`)이 다르면 여전히 실패한다.
 
-**실행 계약([contract.py](contract.py), 루브릭 검수 R9·R24).** 각 `e1~e3_manifest.json`에 다음을 남긴다.
+**실행 계약([contract.py](contract.py)).** 각 `e1~e3_manifest.json`에 다음을 남긴다.
 - 실제 의존 코드의 해시: 공용 `common.py`·`contract.py`·`protocol.json`, 실험 스크립트, `press_guard/model.py`·`train.py`, v1 `press` 패키지
 - 대회 원본과 UCI ZIP 해시
 - 기준 모델 해시: E1·E2는 `guard_A/B.json`, E3는 `guard_A.json`

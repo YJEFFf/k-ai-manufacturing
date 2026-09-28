@@ -71,12 +71,14 @@ SEED = 20260927          # 기록구간 부트스트랩(평가관 02 C3와 같�
 BOOT = 10_000
 V2_INPUT = "v2 세 성분 g(크기 max|z|, 초반 6→8 사인 1−R², AR(2) 전류 잔차; 정상 학습 꼬리 변환)"
 POSTHOC = "사후 민감도(이상 21구간을 이미 본 뒤의 비교). 채택 근거가 아니다"
-KEEP_FMAX = ("fmax 유지 이유: ① 경보마다 단독으로 문턱을 넘은 성분이 있어 근거→조치 판단표(model.DECISION_TABLE)가 성립한다 "
-             "② 결합 점수 하나를 한 번만 conformal 재보정하므로 성분 수만큼 다중검정으로 오경보가 부풀지 않는다 "
-             "③ g=−log10(정상 꼬리 확률)의 최댓값은 Tippett 최소 p 결합이며 성분마다 단조·가중치 없음으로 단순하다")
+KEEP_FMAX = ("fmax 유지 이유: ① 사전 선택 유지 — 결합 규칙은 v1 계획부터 쓴 fmax이고, 이상 21구간을 본 뒤 대안(Fisher·합·5NN)으로 바꾸면 "
+             "사후 선택이 한 번 더 는다. 대안이 대회 F1·주입 탐지에서 같거나 나은 경우가 있다는 사실은 공개한다(rule_transfer_injection_v2.csv) "
+             "② 경보마다 단독으로 문턱을 넘은 성분이 있어 근거→조치 판단표(model.DECISION_TABLE)가 성립한다. "
+             "참고: 결합 점수 하나를 한 번만 재보정하는 것은 성분별 문턱의 OR 규칙보다 나은 점이며 Fisher·합·5NN과의 차이는 아니다. "
+             "g=−log10(정상 꼬리 확률)의 최댓값은 Tippett 최소 p 결합이다")
 OUTPUTS = ("same_feature_alternatives.csv", "combination_rules.csv", "fp_mitigation_v2.csv", "fp_mitigation_injection_v2.csv", "search_ledger.csv",
            "candidate_universe.csv", "nested_selection.csv", "paired_records.csv", "selection_evidence.csv",
-           "unified_comparison.csv", "unified_comparison.md")
+           "unified_comparison.csv", "unified_comparison.md", "rule_transfer_injection_v2.csv")
 # 프로토콜(또는 계획)과 결과 파일이 처음 커밋된 곳. 실행 시 git 기록으로 다시 확인한다(git이 없으면 manifest에 미확인으로 남는다).
 PRECOMMIT = (
     dict(stage="v1 패키지", protocol="yejun/press_submission/PLAN.md", protocol_commit="4135c68", protocol_date="2026-09-24 16:29:59",
@@ -291,7 +293,8 @@ def same_feature_alternatives(ctxs):
 
 ALT_REMARK = {
     "v2 (fmax, AR(2))": KEEP_FMAX,
-    "5NN(v2 성분)": ("같은 입력이면 5NN이 미탐을 조금 줄인다(α=1%: A 44→36, B 31→29, 정상 알림 같음). 대신 단독으로 문턱을 넘은 성분이 없는 경보가 생겨 "
+    "5NN(v2 성분)": ("같은 입력이면 5NN이 미탐을 조금 줄인다(α=1%: A 44→36, B 31→29, 정상 알림 같음). 주입 전이에서도 A는 모든 족에서 fmax와 같거나 높고 "
+                    "B는 단발 진동 충격 4σ에서만 낮다(rule_transfer_injection_v2.csv). 대신 단독으로 문턱을 넘은 성분이 없는 경보가 생겨 "
                     "근거→조치 판단표가 끊긴다. 사후 비교라 채택하지 않는다"),
     "IF(v2 성분)": "α=1%에서 미탐이 크게 늘고(A 120, B 117) 이상 1구간을 놓친다",
     "합(v2 성분)": "α=1%에서 A는 미탐이 조금 줄고(44→40) B는 늘며(31→39) B 정상 알림은 3→2다. 단독 성분 근거가 없는 경보가 생긴다",
@@ -302,8 +305,8 @@ ALT_REMARK = {
 }
 RULE_REMARK = {
     "tippett_fmax": KEEP_FMAX,
-    "fisher": ("α=1%에서 A 미탐이 적고(44→32) B 정상 알림이 적다(3→1). 대신 어느 성분도 단독으로 문턱을 넘지 않은 경보가 생긴다"
-               "(A 12행, B 1행). 사후 비교라 채택하지 않는다"),
+    "fisher": ("α=1%에서 A 미탐이 적고(44→32) B 정상 알림이 적다(3→1). 주입 전이는 A에서 fmax와 같거나 높고 B의 진동 잡음 2σ·단발 충격 4σ에서 낮다"
+               "(rule_transfer_injection_v2.csv). 대신 어느 성분도 단독으로 문턱을 넘지 않은 경보가 생긴다(A 12행, B 1행). 사후 비교라 채택하지 않는다"),
     "stouffer": "정상 알림은 적으나 미탐이 늘고(α=1%: A 39, B 39) 근거 없는 경보가 생긴다",
     "sum": "α=1%에서 A는 미탐이 조금 줄고(44→40) B는 늘며(31→39) B 정상 알림은 3→2다. 단독 성분 근거가 없는 경보가 생긴다",
     "mean": "정상 알림은 적으나 두 분할 모두 미탐이 늘고(α=1%: 42) A에서 근거 없는 경보가 생긴다",
@@ -439,10 +442,28 @@ def vib_shock(frame, model, level, mask, rng):
     return out
 
 
+RULES_T = ("v2_fmax", "fisher", "stouffer", "sum", "5nn")
+RULE_T_TEXT = {"v2_fmax": "fmax = Tippett(v2 주 모델)", "fisher": "Fisher", "stouffer": "Stouffer", "sum": "합 Σg", "5nn": "5NN(v2 성분 공간)"}
+
+
+def rule_scores(comp, nn5):
+    """같은 특징 대안의 결합 점수(same_feature_alternatives·combination_rules와 같은 정의)."""
+    g = np.column_stack([comp[k] for k in COMP])
+    fu = fusions(g)
+    return {"v2_fmax": comp["score"], "fisher": fu["fisher"], "stouffer": fu["stouffer"], "sum": fu["sum"],
+            "5nn": nn5.kneighbors(np.nan_to_num(g, nan=0.0))[0].mean(1)}
+
+
 def fp_mitigation_injection(ctxs, normal, seg_all):
+    """E7 지속성 변형의 주입 비용과, 같은 주입에서 같은 특징 대안(Fisher·Stouffer·합·5NN)의 전이(평가관 02 2회차 R2-M1).
+    두 표 모두 사후 비교다."""
     R = _import_guard("recalibrate")
-    rows, checks = [], {}
+    rows, rule_rows, checks = [], [], {}
     for sid, C in ctxs.items():
+        nn5 = NearestNeighbors(n_neighbors=5).fit(np.nan_to_num(C.comps("train"), nan=0.0))
+        rule_cals = {k: segment_max(v, C.parts["cal"]["units"]) for k, v in rule_scores(C.parts["cal"]["comp"], nn5).items()}
+        assert np.array_equal(rule_cals["v2_fmax"], C.model.cal)
+        rule_per = {}
         test = D.split_normal(normal, seg_all, sid)["test"]
         units, in_unit, size = R.unit_layout(test)
         eligible = size >= R.MIN_UNIT_ROWS
@@ -454,6 +475,7 @@ def fp_mitigation_injection(ctxs, normal, seg_all):
         for family, level in INJ_FAMILIES:
             reps = INJ_REPS if family in ("cur_noise", "vib_noise", "vib_shock") else 1
             per = {(m, a): [] for m in cals for a in ALPHAS}
+            rper = {(m, a): [] for m in rule_cals for a in ALPHAS}
             for rep in range(reps):
                 rng = np.random.default_rng(rep)
                 if family == "none":
@@ -474,7 +496,12 @@ def fp_mitigation_injection(ctxs, normal, seg_all):
                         hit = alarm & window & eligible
                         f = pd.DataFrame(dict(u=units[eligible], hit=hit[eligible], d=np.where(hit, in_unit - R.T0, np.nan)[eligible])).groupby("u")
                         per[(m, a)].append((f.hit.any().to_numpy(), f.d.min().to_numpy()))
+                for m, sc in rule_scores(comp, nn5).items():
+                    for a in ALPHAS:
+                        hit = (np.nan_to_num(conformal_p(rule_cals[m], sc), nan=1.0) <= a) & window & eligible
+                        rper[(m, a)].append(pd.Series(hit[eligible]).groupby(units[eligible]).any().to_numpy())
             results[(family, level)] = (reps, per)
+            rule_per[(family, level)] = (reps, rper)
         for a in ALPHAS:
             none = {m: float(np.concatenate([h for h, _ in results[("none", 0.0)][1][(m, a)]]).mean()) for m in cals}
             for family, level in INJ_FAMILIES:
@@ -489,7 +516,17 @@ def fp_mitigation_injection(ctxs, normal, seg_all):
                 row["detect_diff"] = row["persist_fill_detect_2s"] - row["v2_detect_2s"]
                 row["status"] = "사후 비용 측정. 지속성 변형은 채택하지 않음"
                 rows.append(row)
-    return pd.DataFrame(rows), checks
+                reps_r, rper = rule_per[(family, level)]
+                rr = dict(split_id=sid, alpha=a, family=family, level=level, definition=INJ_TEXT[family], reps=reps_r, units=n_units)
+                for m in rule_cals:
+                    rr[f"{m}_detect_2s"] = float(np.concatenate(rper[(m, a)]).mean())
+                assert rr["v2_fmax_detect_2s"] == row["v2_detect_2s"]
+                alts = [m for m in rule_cals if m != "v2_fmax"]
+                rr["best_alternative"] = max(alts, key=lambda m: rr[f"{m}_detect_2s"])
+                rr["fmax_minus_best_alternative"] = rr["v2_fmax_detect_2s"] - rr[f"{rr['best_alternative']}_detect_2s"]
+                rr["status"] = "사후 비교(이상 21구간을 이미 본 뒤). 채택 근거가 아니다. 각 규칙은 자기 결합 점수를 정상 보정 최대로 재보정"
+                rule_rows.append(rr)
+    return pd.DataFrame(rows), pd.DataFrame(rule_rows), checks
 
 
 # ---------------------------------------------------------------- M4 선정 근거
@@ -931,7 +968,7 @@ def compute(out):
     checks.update(ch)
     rules = combination_rules(ctxs)
     mitigation = fp_mitigation(ctxs)
-    injection, ch = fp_mitigation_injection(ctxs, normal, seg_all)
+    injection, rule_transfer, ch = fp_mitigation_injection(ctxs, normal, seg_all)
     checks.update(ch)
     print(f"[{time.monotonic() - started:6.1f}s] M3·O3·E7", flush=True)
     universe, stats_, sig, _ = candidate_universe(normal, abnormal, seg_all)
@@ -951,7 +988,7 @@ def compute(out):
     unified = unified_comparison(ctxs, alternatives, rules, sup_rows)
     print(f"[{time.monotonic() - started:6.1f}s] M5", flush=True)
     tables = {"same_feature_alternatives.csv": alternatives, "combination_rules.csv": rules, "fp_mitigation_v2.csv": mitigation,
-              "fp_mitigation_injection_v2.csv": injection,
+              "fp_mitigation_injection_v2.csv": injection, "rule_transfer_injection_v2.csv": rule_transfer,
               "search_ledger.csv": ledger, "candidate_universe.csv": universe, "nested_selection.csv": nested,
               "paired_records.csv": paired, "selection_evidence.csv": evidence, "unified_comparison.csv": unified}
     out.mkdir(parents=True, exist_ok=True)
