@@ -8,7 +8,7 @@
   구성은 docs/fig_architecture.png, 운영 절차는 OPERATIONS.md에 있다.
 - 알림은 사건 단위다: 경보가 이어진 알림 단위(공백 60초 이하)가 한 사건이고, 사건마다 1단계(사건 시작)와 2단계(격상)를 한 번씩 알린다.
 - 알림 행·단계는 같은 CSV를 한 번에 분석(GuardModel.predict)한 결과와 같다(test_simulate.py). 수집 오류 행은 "수집 상태 확인"으로
-  기록하고 판정하지 않는다. 평균 기록 길이가 5행보다 짧으면 수집 시각 간격 경고를 낸다.
+  기록하고 판정하지 않는다. 평균 기록 길이가 8행(8행 파형 창)보다 짧으면 수집 시각 간격 경고를 낸다.
 """
 from pathlib import Path
 import argparse

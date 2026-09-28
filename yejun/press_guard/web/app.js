@@ -81,12 +81,12 @@
     const cursor = state.sim.row;
     if (simCache && simCache.source === full && simCache.row === cursor) return simCache.view;
     const points = full.points.filter(p => Number(p.row_id) <= cursor);
-    // 튄 행(시각 순서 부호 2 앞에서 기준 시각을 옮긴 행)은 품질 시간창의 경계가 되지 못한다(model.spike_rows와 같은 규칙).
+    // 튄 행(시각 순서 부호 2·4 앞에서 기준 시각을 옮긴 행)은 품질 시간창의 경계가 되지 못한다(model.spike_rows와 같은 규칙).
     const spike = new Set();
     let lastRef = null;
     for (const p of points) {
       const ev = Number(p.time_order_event);
-      if (ev === 2 && lastRef !== null) spike.add(lastRef);
+      if ((ev === 2 || ev === 4) && lastRef !== null) spike.add(lastRef);
       if (ev !== 1 && p.status !== 'bad_timestamp') lastRef = p.row_id;
     }
     const units = [];

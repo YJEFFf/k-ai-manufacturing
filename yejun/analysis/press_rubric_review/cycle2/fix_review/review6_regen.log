@@ -1,0 +1,26 @@
+# 검토 6 재생성 기록(모두 시스템 임시 폴더의 사본에서 실행, 저장소에서는 실행하지 않음)
+# <사본>/copy  = git archive 0b34a6b yejun + 원본 CSV 2개 + press_guard/artifacts/ = outputs/expected/의 동결 모델 사본 4개
+# <사본>/copy8 = 같은 방식의 두 번째 사본(8스레드 학습용, 모델 없음)
+
+## 1) 테스트 예측 재생성: predict.py --split A|B --out <사본>/preds/test_predictions_{A,B}.csv
+4690행 → <사본>/preds/test_predictions_A.csv · SHA-256 094dc1243e94d628… · 학습 실행과 같음
+OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python  --spli  2.51s user 0.20s system 93% cpu 2.899 total
+6697행 → <사본>/preds/test_predictions_B.csv · SHA-256 1eda4c5153f3420c… · 학습 실행과 같음
+OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python  --spli  2.94s user 0.17s system 99% cpu 3.118 total
+
+## 2) v1 행 예측 재생성: press_submission/run_all.py --steps 2 (v1 동결 manifest 대조)
+predictions_A.csv 동결 0656fc309cd75e0f 재생성 0656fc309cd75e0f 같음
+predictions_B.csv 동결 a1f4fd3d8246c738 재생성 a1f4fd3d8246c738 같음
+
+## 3) 8스레드 학습(README:236 '8스레드에서도 예측 파일이 비트 단위로 같았다'): PRESS_THREADS=8 python train.py (<사본>/copy8)
+PRESS_THREADS=8 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python train.py  84.85s user 13.88s system 433% cpu 22.759 total
+predictions_normal_A.csv 동결 digest와 같음 afa93c7048aef36f
+predictions_normal_B.csv 동결 digest와 같음 3a34d153659a9f63
+predictions_abnormal_A.csv 동결 digest와 같음 7bd79865934c7a4d
+predictions_abnormal_B.csv 동결 digest와 같음 61c9e79b477ef1a8
+test_predictions_A.csv 동결 digest와 같음 094dc1243e94d628
+test_predictions_B.csv 동결 digest와 같음 1eda4c5153f3420c
+
+## 4) README:33 '수집 시각이 ±1·2 ms 흔들려도 기록·미탐이 같다', 8행 경고: pytest test_guard.py -k 'jitter or short_records' (<사본>/copy)
+...                                                                      [100%]
+3 passed, 16 deselected in 1.61s

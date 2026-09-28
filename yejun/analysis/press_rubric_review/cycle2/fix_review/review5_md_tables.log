@@ -1,0 +1,14 @@
+## 3c6fbf3 제품 문서 7개
+불일치 행 0
+## 3c6fbf3 yejun 전체 .md
+analysis/press_plan_review/plan_snapshot.md:84: 칸 6 (머리 4) :: | P0-6 | 구간 정의·부하 지표 | 기록구간 = `|Δt−0.1|>1e-6` 분할(600/21) 하나만(`data.segments()`), 중복 타임스탬프 1건 처리 명시. `current_amp` = 평균 제거 RMS 또는 사인 진폭 | 진단 문서 구간 수 = 평가표 구간 수; 
+analysis/press_rubric_review/judge_01_data.md:11: 칸 5 (머리 3) :: | 생산단위 | 기록구간은 `|Δt−0.1|>1e-6`이면 끊는 단일 규칙으로 정의하며, v1과 v2가 같은 규칙을 쓴다. 정상 600구간·이상 21구간, 길이 1/37/50·3/28/50, 50행 구간 202·5개를 재현했다. 기록구간이 기동·스트로크·독립 고장이 아니라는 점을 명시한
+analysis/press_rubric_review/judge_01_data.md:25: 칸 7 (머리 5) :: | **D2 / P1** | 누락 진단(불균형·이상치·품질 지수) | 진단 산출물과 PLAN 어디에도 불균형·이상치 절이 없다. 가이드북 13쪽은 완전성·유일성·유효성 지수를 제시하고, 14쪽은 고장 자료 부족으로 지도학습이 불가능하다고 적는다. | 원본에서 생성하는 표를 추가한다. ①
+analysis/press_rubric_review/judge_01_data.md:26: 칸 7 (머리 5) :: | **D3 / P1** | 누락 진단(시간 관계 → 검증 해석) | A 평가 구간(480~599, 01:00:50~01:16:55)이 정상 전체에서 가장 조용한 시간대다. 60구간 블록으로 보면 480~539 블록의 진동 SD는 0.039/0.044로 0~479 블록의 0.069~0.
+analysis/press_rubric_review/judge_05_originality.md:14: 칸 8 (머리 4) :: | 앙상블 | 센서 크기·사인 6→8·AR(2)의 세 성분을 정상 기준 꼬리 척도로 맞춘 뒤 fmax로 결합한다. 결합 점수 하나를 다시 보정하므로 성분이 늘어도 다중검정 때문에 오경보가 부풀지 않는다(`model.py:116`~`:128`, `:143`). 성분 절제 결과가 있다(`p
+analysis/press_rubric_review/judge_05_originality.md:17: 칸 6 (머리 4) :: | 제조지식 결합 | 정상 전류가 0.600 Hz 사인으로 잘 맞는다는 진단(R² 중앙 0.996)을 파형 성분으로 옮겼다(`diagnosis.md:62`~`:67`, `model.py:46`). **judge05 확인:** 저장 AR(2)의 특성근은 A/B 모두 0.6064 Hz, |
+analysis/press_rubric_review/judge_05_originality.md:31: 칸 7 (머리 5) :: | O1 / P1 | 저평가 차별점 미기록(구현과 문서 사이의 공백) | `press_guard/model.py:1`, `:64`(AR(2)를 "정상 전류 동역학"이라고만 부름), 저장 `artifacts/guard_{A,B}.json`의 `ar2`, `diagnosis.md:64` |
+analysis/press_rubric_review/cycle2/fix_review/review_1_code.md:51: 칸 11 (머리 5) :: | R1-01 | 중대 | `press_guard/verify.py:12·39-42`(결과 CSV 허용 `1e-9 + 1e-9·|값|`, 예외는 `near_miss_corr_v2.csv`의 `spearman`뿐), 산출 `outputs/probability_conversion_v2.cs
+불일치 행 8
+## 110afa2 yejun 전체 .md(대조)
+불일치 행 11

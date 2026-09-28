@@ -1,0 +1,5 @@
+load averages: 3.50 2.91 3.06
+stable_hats(8) 한 번: 20.0 ms (주파수 1001개)
+현재 코드: 1행 push 호출당 p50 14.9 ms · p95 15.6 ms | 300행 일괄 predict 0.031초
+stable_hats에 lru_cache: 1행 push 호출당 p50 14.9 ms · p95 15.7 ms | 300행 일괄 predict 0.032초
+두 경우 스트림 예측이 비트 단위로 같다

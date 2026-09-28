@@ -1,0 +1,5 @@
+시행 200회, 튐 건너뜀(ORDER_SPIKE_SKIPPED) 행 합 606, 예외 0 []
+일괄≠스트림: [] 건수 0
+인과성 위반(앞부분 예측이 바뀜): [] 건수 0 (시행 40개에서 모든 prefix)
+사건 불변식 위반(사건 수): {'사건 시작 두 번 이상': 0, '격상 두 번 이상': 0, '시작 알림 없는 사건': 0} | 위반이 있는 시행 0/200 | 예(시행, 시작 중복, 격상 중복, 시작 없음): []
+REVIEW_ENV=$SCR/r5/yejun OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1   200  372.30s user 0.91s system 99% cpu 6:13.32 total

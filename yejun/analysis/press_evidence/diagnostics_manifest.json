@@ -13,7 +13,7 @@
     "yejun/analysis/press_evidence/figures.py": "23d94f96019af64612c3bcaed9fbc20cb20358adc3cc8cb2d94674d7c837d3e1",
     "yejun/analysis/press_evidence/build_tables.py": "c8e0689046757f50b71bc98974df9ec336371a563ca2275628baa1b8156cd328",
     "yejun/analysis/press_evidence/diagnostic_probes.py": "9b26c1fb1d7ea66996ded168fd0846da60416c4769e045f77841593787809d80",
-    "yejun/press_guard/model.py": "3ea9706175e85163c2bb3dff33eac8aebbbed6183b7d425f4489f99ae897023d",
+    "yejun/press_guard/model.py": "647e4fb519cd7343d4002b56abdb3459f61d391d64071d3457fdb2834a000496",
     "yejun/press_submission/press/diagnosis.py": "f7ecb071d7c9c9b25c670bcb6052f8201ca2e03e991b57f9fe13fec6346cf499",
     "yejun/press_submission/press/data.py": "81dc394c8b0b53618177e5822c7cc0f7ff7c7f060d08471c968b4cfaaa05411f"
   },
@@ -63,7 +63,7 @@
     "yejun/analysis/press_supplement/e1_summary.csv": "bbf0f95deefaead1a35e68324eac600907bf80eb5005d40f519bf5e23a20b7b9",
     "yejun/analysis/press_supplement/e2_uci_metrics.csv": "9182c3046dbe0d43527b3ff1138944ac98a540529de37ef2d7ae4793887f6534",
     "yejun/analysis/press_supplement/e3_stability.csv": "4447e30b858fc32df317a565ebc86720e7759e802a3a9960f0c27e9c5005762c",
-    "yejun/press_guard/model.py": "3ea9706175e85163c2bb3dff33eac8aebbbed6183b7d425f4489f99ae897023d",
+    "yejun/press_guard/model.py": "647e4fb519cd7343d4002b56abdb3459f61d391d64071d3457fdb2834a000496",
     "yejun/press_guard/outputs/ablation_v2.csv": "1a5b97c9a88ad908eed89ae91e673cea9275405498e2c63264c838cf60c3fbe0",
     "yejun/press_guard/outputs/coupling_fit_v2.csv": "bc6786eb5d87b22bbc989430cf859dba4238d1629d82bae18d3ed8d2c297df70",
     "yejun/press_guard/outputs/uncertainty_v2.csv": "c10df72d1662caf044679acbe88c65c1384ba8c68b8d36188926f40ff07aec72",
@@ -129,7 +129,7 @@
     "guidebook_protocol_vs_records.csv": "186a5d41bcec397efbb30ff0eb2b8717e0cc1d5ab6a0ec19c861db7bb7f68771",
     "variable_expected_signals.csv": "c8774f36b86d4ee0a7931a1b447a17d46686a49e282809ab1233220c14bed8f6",
     "failure_mode_map.csv": "e5cf3cd271698095b7132c30a3ccd1681e950765e719b228ad909102f4a72d37",
-    "decision_table_diagnosis_v2.csv": "7c28cd0bd2b811418c1b0167728a47712fc22777c8a066dcba3dddcc1e718de6",
+    "decision_table_diagnosis_v2.csv": "49adb9f4da26e2682614b4a904082d7590e34c1da5085612831656301f10ddf3",
     "yejun/analysis/press_evidence/figures/fig_d2a_timeline.png": "a36cb458e0cb02734db3721db603eb8c3b1dc6994b7bef81bb00dfa33f6a3e4b",
     "yejun/analysis/press_evidence/figures/fig_d2b_blocks.png": "62d298a07efdde16dcb784e42977f43e87f662028fce65440c73e6b8ec9df6a7",
     "yejun/analysis/press_evidence/figures/fig_d2c_raw_examples.png": "c2a83eacb491f8ace6e59104afe315d18e308e8e462f7b658363bacf66d48a7a",
@@ -197,5 +197,5 @@
       }
     ]
   },
-  "elapsed_s": 66.7
+  "elapsed_s": 65.4
 }

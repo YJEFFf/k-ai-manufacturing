@@ -48,9 +48,9 @@ SHORT_RECORD_WARN = 8      # 평균 기록 길이가 이보다 짧으면 수집 
 # 수집 시각 순서: 기준(마지막으로 받아들인 시각)보다 이른 행은 판정을 보류한다. 그런 행이 정상 간격(0.1초 ± TIME_TOL_S)으로
 # 이만큼 이어지면 시계 재설정·지난 자료로 보고 새 기준으로 받아들인다. 한 행의 시각 오류가 뒤 자료 전체를 막지 않게 하는 값이다.
 REANCHOR_ROWS = 3
-# 튄 행 바로 뒤가 새 기록의 첫 행(공백 뒤)이어도 튄 행으로 볼 앞 튐의 최소 크기. 대회 기록 사이 공백(1.5~16.6초)과 사건·품질 창의
-# 공백 한도(60초)보다 큰 앞 튐은 정상 수집으로 볼 수 없다. 이보다 작은 튐은 다음 표본이 올 때만 튐으로 본다(공백 안의 과거 행은 보류).
-SPIKE_MIN_JUMP_S = 60.0
+# 튄 행 뒤의 행이 튀기 전 기준에서 표본 1~SPIKE_SKIP_SAMPLES칸(0.1·k초 ± TIME_TOL_S) 뒤면 원래 시간축을 잇는 것으로 본다.
+# 튄 행이 끼어든 경우(1칸)와 표본 하나를 대신한 경우(2칸)를 받고, 기록 사이 공백 안의 과거 행·재전송은 보류한다(검토 3 R3-03, 검토 5 R5-01).
+SPIKE_SKIP_SAMPLES = 3
 # 사후 진단용 상태 대리변수. 정상 기록의 2성분 경계 91.886을 반올림한 값이며 경보·학습에는 쓰지 않는다.
 # 원 전류의 기록 평균 제거 RMS(ddof=0). 0.6 Hz 한 주기 이상(17행)을 본 뒤에만 상태를 표시한다.
 LOAD_STATE_RMS = 91.9
@@ -202,12 +202,12 @@ class IncidentTracker:
 
 
 def spike_rows(order_event, has_time):
-    """ORDER_SPIKE_SKIPPED 행마다 그 앞의 튄 행(기준 시각을 앞으로 옮긴 마지막 행) 번호. 둘 사이에는 시각 결측·보류 행만 있을 수 있다
+    """튄 행을 확인한 행(SPIKE_EVENTS)마다 그 앞의 튄 행(기준 시각을 앞으로 옮긴 마지막 행) 번호. 둘 사이에는 시각 결측·보류 행만 있을 수 있다
     (시각이 있는 다른 행을 받아들이면 기준이 바뀌어 튐 예외가 사라진다). 튄 행이 없으면 -1."""
     out = np.full(len(order_event), -1)
     last = -1
     for i, (ev, ok) in enumerate(zip(order_event, has_time)):
-        if ev == ORDER_SPIKE_SKIPPED:
+        if ev in SPIKE_EVENTS:
             out[i] = last
         if ev != ORDER_HELD and ok:
             last = i
@@ -216,7 +216,7 @@ def spike_rows(order_event, has_time):
 
 def incident_columns(record, block, alarm, reason, time, valid=None, order_event=None):
     """일괄 분석용: 행마다 (사건 번호, 사건 첫 알림, 사건 격상, 근거 추가). 경보 없는 유효 단위(8행 이상)가 끼면 사건이 닫힌다.
-    수집 오류 행(valid=False)은 건너뛴다. ORDER_SPIKE_SKIPPED 행에서는 그 앞의 튄 행이 사건 추적에 들어간 유효 행이었으면
+    수집 오류 행(valid=False)은 건너뛴다. 튄 행을 확인한 행(SPIKE_EVENTS)에서는 그 앞의 튄 행이 사건 추적에 들어간 유효 행이었으면
     그 행의 사건 배정·공백 효과를 되돌린다(사이에 수집 오류·보류 행이 끼어도 같다, 검토 3 R3-02)."""
     tr = IncidentTracker()
     valid = np.ones(len(alarm), bool) if valid is None else np.asarray(valid, bool)
@@ -225,7 +225,7 @@ def incident_columns(record, block, alarm, reason, time, valid=None, order_event
     spike = spike_rows(order_event, has_time)
     out = np.zeros((len(alarm), 4), dtype=int)
     for i, (r, b, a, why, t, ok, ev) in enumerate(zip(record, block, alarm, reason, time, valid, order_event)):
-        if ev == ORDER_SPIKE_SKIPPED and spike[i] >= 0 and valid[spike[i]]:
+        if ev in SPIKE_EVENTS and spike[i] >= 0 and valid[spike[i]]:
             tr.undo()
         out[i] = tr.update(r, b, bool(a), why, t, bool(ok))
     return out
@@ -271,32 +271,36 @@ def current_states(values, records):
     return np.asarray(rms, float), np.asarray(states, object)
 
 
-ORDER_OK, ORDER_HELD, ORDER_SPIKE_SKIPPED, ORDER_REANCHOR = 0, 1, 2, 3
+ORDER_OK, ORDER_HELD, ORDER_SPIKE_SKIPPED, ORDER_REANCHOR, ORDER_SPIKE_REANCHOR = 0, 1, 2, 3, 4
+SPIKE_EVENTS = (ORDER_SPIKE_SKIPPED, ORDER_SPIKE_REANCHOR)   # 앞의 튄 행을 확인한 부호(사건 추적이 그 행의 효과를 되돌린다)
 
 
 class TimeOrder:
     """수집 시각 순서 판정. 행을 받은 순서대로 넣으면 행마다 부호를 돌려준다. 일괄·스트림이 같은 상태를 이어 쓴다.
 
     - 기준 시각은 마지막으로 받아들인 시각이다. 같거나 늦은 시각은 받아들인다(ORDER_OK, 동률 허용).
-    - 미래 시각 한 행(튐): 바로 앞에 받은 행이 정상 간격(0.1초 ± TIME_TOL_S)보다 크게 앞으로 뛰었고, 이 행이 튀기 전 시간축을
-      이으면 앞 행을 튄 행으로 보고 이 행부터 계속 판정한다(ORDER_SPIKE_SKIPPED, 보류 없음). '잇는다'는 튀기 전 기준의 다음 표본
-      (0.1초 ± TIME_TOL_S 뒤)이거나, 튐이 SPIKE_MIN_JUMP_S보다 커서 정상 수집의 기록 사이 공백으로 볼 수 없을 때 그 기준에서
-      SPIKE_MIN_JUMP_S 안의 행(튄 행 바로 뒤의 새 기록)이다. 그 밖의 이른 시각(기록 사이 공백 안의 과거 행·재전송)은 아래처럼 보류한다.
-      이 예외는 연속으로 쓰지 않는다.
+    - 미래 시각 한 행(튐): 바로 앞에 받은 행이 정상 간격(0.1초 ± TIME_TOL_S)보다 크게 앞으로 뛰었고, 이 행이 튀기 전 기준에서
+      표본 1~SPIKE_SKIP_SAMPLES칸 뒤(튄 행이 끼어들었거나 표본 하나를 대신함)이면 앞 행을 튄 행으로 보고 이 행부터 계속 판정한다
+      (ORDER_SPIKE_SKIPPED, 보류 없음). 그 밖의 이른 시각(기록 사이 공백 안의 과거 행·재전송)은 아래처럼 보류한다. 이 예외는 연속으로 쓰지 않는다.
       튄 행 자체는 이미 판정했으므로(인과) 되돌리지 않는다. 사건 추적은 그 행의 사건 배정·공백 효과만 되돌린다.
     - 순서 뒤바뀜·시계 재설정·지난 자료: 기준보다 이른 행은 판정을 보류한다(ORDER_HELD). 정상 간격으로 REANCHOR_ROWS행 이어지면
       셋째 행부터 새 기준으로 받아들인다(ORDER_REANCHOR, 보류 REANCHOR_ROWS − 1행). 역순·불규칙 간격이면 계속 보류하고 경고한다.
+      앞으로 튄 행 바로 뒤에 새 기록이 오면(기록 끝의 튐) 그 새 기록은 보류되다가 이렇게 받아들여진다. 이때 새 시간축이 튀기 전
+      기준보다 뒤에서 시작했으면 튄 행을 확인한 것으로 보고 ORDER_SPIKE_REANCHOR를 낸다(사건 추적이 튄 행의 효과를 되돌린다).
     - 시각을 읽을 수 없는 행은 상태를 바꾸지 않는다. 센서 값 오류 행도 시각이 있으면 순서 판정에 쓴다.
     """
 
+    _STATE = ("ref", "prev_ref", "run_last", "run_first", "run", "jumped")
+
     def __init__(self):
-        self.ref = self.prev_ref = self.run_last = None
+        self.ref = self.prev_ref = self.run_last = self.run_first = None
         self.run = 0
         self.jumped = False          # 기준 행이 정상 간격보다 크게 앞으로 뛰어 받아들인 행인가
 
     def copy(self):
         other = TimeOrder()
-        other.ref, other.prev_ref, other.run_last, other.run, other.jumped = self.ref, self.prev_ref, self.run_last, self.run, self.jumped
+        for k in self._STATE:
+            setattr(other, k, getattr(self, k))
         return other
 
     def step(self, t):
@@ -304,21 +308,25 @@ class TimeOrder:
             return ORDER_OK
         if self.ref is None or t >= self.ref:
             jump = self.ref is not None and (t - self.ref).total_seconds() > D.DT + TIME_TOL_S
-            self.prev_ref, self.ref, self.run, self.run_last, self.jumped = self.ref, t, 0, None, jump
+            self.prev_ref, self.ref, self.run, self.run_last, self.run_first, self.jumped = self.ref, t, 0, None, None, jump
             return ORDER_OK
         if self.jumped and self.prev_ref is not None:
             since = (t - self.prev_ref).total_seconds()
-            next_sample = abs(since - D.DT) <= TIME_TOL_S
-            after_gap = (self.ref - self.prev_ref).total_seconds() > SPIKE_MIN_JUMP_S and D.DT - TIME_TOL_S <= since <= SPIKE_MIN_JUMP_S
-            if next_sample or after_gap:
-                self.ref, self.run, self.run_last, self.jumped = t, 0, None, False     # 튀기 전 시간축에서 이어 간다
+            k = round(since / D.DT)
+            if 1 <= k <= SPIKE_SKIP_SAMPLES and abs(since - k * D.DT) <= TIME_TOL_S:   # 튀기 전 시간축의 1~3칸 뒤 표본
+                self.ref, self.run, self.run_last, self.run_first, self.jumped = t, 0, None, None, False
                 return ORDER_SPIKE_SKIPPED
         steady = self.run_last is not None and abs((t - self.run_last).total_seconds() - D.DT) <= TIME_TOL_S
         previous = self.run_last
-        self.run, self.run_last = (self.run + 1 if steady else 1), t
+        if steady:
+            self.run += 1
+        else:
+            self.run, self.run_first = 1, t
+        self.run_last = t
         if self.run >= REANCHOR_ROWS:                                                # 새 시간축으로 받아들인다
-            self.prev_ref, self.ref, self.run, self.run_last, self.jumped = previous, t, 0, None, False
-            return ORDER_REANCHOR
+            spike = self.jumped and self.prev_ref is not None and self.run_first > self.prev_ref
+            self.prev_ref, self.ref, self.run, self.run_last, self.run_first, self.jumped = previous, t, 0, None, None, False
+            return ORDER_SPIKE_REANCHOR if spike else ORDER_REANCHOR
         return ORDER_HELD
 
 
@@ -626,7 +634,7 @@ class StreamDetector:
                 escalate = int(self.episode_alarms == ESCALATION_ALARM_ROWS)
                 self.alerted_blocks = {b for b in self.alerted_blocks if b >= r.alert_unit - 1} | {r.alert_unit}
             notifications.append(int(notify)); levels.append(level); escalations.append(escalate)
-            if r.time_order_event == ORDER_SPIKE_SKIPPED and self.ref_valid:
+            if r.time_order_event in SPIKE_EVENTS and self.ref_valid:
                 self.incidents.undo()
             inc.append(self.incidents.update(r.record_id, r.alert_unit, bool(r.alarm), r.reason, t, r.status == "ok"))
             if r.time_order_event != ORDER_HELD and not pd.isna(t):
@@ -775,12 +783,13 @@ def incidents(queue, predictions=None):
 
 
 def time_order_events(predictions):
-    """(판정 보류 행 수, 새 기준 채택 횟수, 미래로 튄 행을 건너뛴 횟수). time_order_event 열이 없는 옛 예측은 상태로 센다."""
+    """(판정 보류 행 수, 새 기준 채택 횟수, 미래로 튄 행을 확인한 횟수). 기록 끝의 튐(ORDER_SPIKE_REANCHOR)은 튐으로 센다.
+    time_order_event 열이 없는 옛 예측은 상태로 센다."""
     if not len(predictions):
         return 0, 0, 0
     if "time_order_event" in predictions:
         e = predictions.time_order_event.to_numpy()
-        return int((e == ORDER_HELD).sum()), int((e == ORDER_REANCHOR).sum()), int((e == ORDER_SPIKE_SKIPPED).sum())
+        return int((e == ORDER_HELD).sum()), int((e == ORDER_REANCHOR).sum()), int(np.isin(e, SPIKE_EVENTS).sum())
     held = predictions.status.eq("bad_time_order").to_numpy()
     return int(held.sum()), int((predictions.status.eq("ok").to_numpy()[1:] & held[:-1]).sum()), 0
 
@@ -794,7 +803,10 @@ def timing_warning(predictions):
                         + (f"(정상 간격으로 이어진 이른 시각을 새 기준으로 받아들인 곳 {resumed}곳)" if resumed else "")
                         + ". 수집 PC 시각과 입력 순서를 확인하세요.")
     if skipped:
-        warnings.append(f"미래로 튄 수집 시각 {skipped}곳: 튄 행 다음부터 원래 시간축으로 판정했습니다. 튄 행 주변은 기록이 끊겨 첫 창이 다시 찹니다.")
+        at_end = int((predictions.time_order_event.to_numpy() == ORDER_SPIKE_REANCHOR).sum()) if "time_order_event" in predictions else 0
+        warnings.append(f"미래로 튄 수집 시각 {skipped}곳: 튄 행 다음부터 원래 시간축으로 판정했습니다"
+                        + (f"(튄 행 바로 뒤가 새 기록인 {at_end}곳은 그 기록의 앞 {REANCHOR_ROWS - 1}행을 보류한 뒤 이었습니다)" if at_end else "")
+                        + ". 튄 행 주변은 기록이 끊겨 첫 창이 다시 찹니다.")
     ok = predictions[predictions.status.eq("ok")] if len(predictions) else predictions
     if len(ok) < 50:
         return " ".join(warnings)

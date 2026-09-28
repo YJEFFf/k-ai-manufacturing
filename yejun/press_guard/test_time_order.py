@@ -331,8 +331,9 @@ def test_past_row_after_record_start_is_held(inputs, late):
 
 @pytest.mark.parametrize("where", ["after", "before"])
 def test_spike_row_is_not_a_quality_window_bound(inputs, where):
-    """경보 없는 +1시간 튄 행이 경보 기록 바로 앞·뒤(기록 경계)에 와도 품질 의심 시간창은 튐이 없을 때와 같다(검토 3 R3-06).
-    튐이 기록 사이 공백으로 볼 수 없을 만큼 크면 튄 행 바로 뒤의 새 기록도 튀기 전 시간축을 잇는 것으로 본다(보류 없음)."""
+    """경보 없는 +1시간 튄 행이 경보 기록 바로 앞·뒤(기록 경계)에 와도 품질 의심 시간창이 열리지 않는다(검토 3 R3-06).
+    튄 행 바로 뒤가 새 기록이면 그 기록의 앞 2행을 보류한 뒤 새 기준을 잡고, 새 시간축이 튀기 전 기준보다 뒤라 튄 행으로 확인한다
+    (ORDER_SPIKE_REANCHOR). 창의 경계는 튐이 없을 때와 같거나(앞), 보류 2행만큼 늦다(뒤)."""
     model, false_alarm, clean, _, _ = inputs
     t0 = pd.Timestamp("2022-07-14")
     before, alarmed, after = at(clean, t0), at(false_alarm, t0 + pd.Timedelta(seconds=6)), at(clean, t0 + pd.Timedelta(seconds=13))
@@ -341,12 +342,67 @@ def test_spike_row_is_not_a_quality_window_bound(inputs, where):
     parts = [before, alarmed, spike, after] if where == "after" else [before, spike, alarmed, after]
     frame = pd.concat(parts, ignore_index=True)
     pred = model.predict(frame)
-    assert pred.time_order_event.tolist().count(2) == 1 and pred.status.eq("bad_time_order").sum() == 0
+    assert pred.time_order_event.tolist().count(4) == 1 and pred.status.eq("bad_time_order").sum() == 2
     got = cases(pred)
-    cols = ["suspect_from", "suspect_to", "suspect_open"]
-    assert got[cols].to_dict("records") == plain[cols].to_dict("records") and plain.suspect_open.tolist() == [0]
+    assert got.suspect_open.tolist() == plain.suspect_open.tolist() == [0]
+    assert got.suspect_from.tolist() == plain.suspect_from.tolist()
+    late = (pd.Timestamp(got.suspect_to.iloc[0]) - pd.Timestamp(plain.suspect_to.iloc[0])).total_seconds()
+    assert late == (.2 if where == "after" else 0)
     for chunk in (7, 128):
         assert_stream_matches(model, frame, pred, chunk)
+
+
+@pytest.mark.parametrize("seconds", [.5, 5, 30, 3600])
+@pytest.mark.parametrize("mode", ["replace", "insert"])
+def test_single_sample_timestamp_error_keeps_timeline(inputs, seconds, mode):
+    """기록 안의 한 표본 시각이 앞으로 틀리면(표본을 대신하거나 끼어듦) 보류 없이 원래 시간축으로 잇고 이상 한 번은 사건 하나다
+    (검토 5 R5-01: '다음 표본'만 인정하던 규칙은 표본을 대신한 튐에서 2행을 보류하고 사건을 나눴다)."""
+    model = load_bundle(HERE / "artifacts" / "guard_B.json")
+    _, _, _, _, abnormal = inputs
+    frame = D.inputs_only(abnormal).reset_index(drop=True)
+    t = pd.to_datetime(frame[D.TIME])
+    i = 305                                               # 기록 11(280~329) 안
+    wrong = (t[i] + pd.Timedelta(seconds=seconds)).strftime("%Y-%m-%d %H:%M:%S.%f")
+    if mode == "replace":
+        frame.loc[i, D.TIME] = wrong
+    else:
+        extra = frame.iloc[[i]].copy(); extra[D.TIME] = wrong
+        frame = pd.concat([frame.iloc[:i + 1], extra, frame.iloc[i + 1:]], ignore_index=True)
+    pred = model.predict(frame)
+    assert pred.status.eq("bad_time_order").sum() == 0 and pred.time_order_event.tolist().count(2) == 1
+    assert (pred.incident_id.max(), pred.incident_notification.sum(), pred.incident_escalation.sum()) == (1, 1, 1)
+    assert_stream_matches(model, frame, pred, 7)
+
+
+def test_record_end_spike_does_not_split_incident(inputs):
+    """기록 끝 표본의 시각이 튀면 다음 기록의 앞 2행을 보류하고, 새 기준을 잡을 때 튄 행을 확인해 사건 효과를 되돌린다."""
+    model = load_bundle(HERE / "artifacts" / "guard_B.json")
+    _, _, _, _, abnormal = inputs
+    frame = D.inputs_only(abnormal).reset_index(drop=True)
+    t = pd.to_datetime(frame[D.TIME])
+    frame.loc[329, D.TIME] = (t[329] + pd.Timedelta(seconds=5)).strftime("%Y-%m-%d %H:%M:%S.%f")   # 기록 11의 마지막 행
+    pred = model.predict(frame)
+    assert pred.status.eq("bad_time_order").sum() == 2 and pred.time_order_event.tolist().count(4) == 1
+    assert (pred.incident_id.max(), pred.incident_notification.sum(), pred.incident_escalation.sum()) == (1, 1, 1)
+    for chunk in (1, 7):
+        assert_stream_matches(model, frame, pred, chunk)
+
+
+@pytest.mark.parametrize("pause", [61, 600])
+def test_stale_row_after_long_pause_is_held(inputs, pause):
+    """60초 넘는 수집 중단 뒤 새 기록이 시작된 다음 공백 안의 과거 행이 와도 그 행만 보류한다(검토 5: R3-03이 긴 중단 뒤에 남았다)."""
+    model = load_bundle(HERE / "artifacts" / "guard_B.json")
+    _, _, _, _, abnormal = inputs
+    frame = D.inputs_only(abnormal).reset_index(drop=True)
+    t = pd.to_datetime(frame[D.TIME])
+    moved = t + pd.to_timedelta(np.where(np.arange(len(frame)) >= 330, pause, 0.0), unit="s")
+    frame[D.TIME] = moved.dt.strftime("%Y-%m-%d %H:%M:%S.%f")
+    stale = frame.iloc[[330]].copy(); stale[D.TIME] = (t[329] + pd.Timedelta(seconds=10)).strftime("%Y-%m-%d %H:%M:%S.%f")   # 공백 안 10초 지점
+    base = model.predict(frame)
+    pred = model.predict(pd.concat([frame.iloc[:331], stale, frame.iloc[331:]], ignore_index=True))
+    assert pred.status.iloc[331] == "bad_time_order" and pred.status.eq("bad_time_order").sum() == 1
+    assert not pred.time_order_event.isin([2, 4]).any()
+    assert (pred.incident_notification.sum(), pred.incident_escalation.sum()) == (base.incident_notification.sum(), base.incident_escalation.sum())
 
 
 def test_sine_projections_are_computed_once(monkeypatch):
@@ -396,3 +452,33 @@ def test_random_time_faults_keep_one_start_and_escalation_per_incident(inputs):
         assert (counts <= 1).all().all(), (trial, counts[(counts > 1).any(axis=1)])
         if trial < 4:
             assert_stream_matches(model, frame, pred, 128 if trial % 2 else 7)
+
+
+def test_random_single_timestamp_spikes_do_not_split_the_episode(inputs):
+    """한 표본의 시각만 앞으로 틀리는 오류(0.3초~1시간, 표본 대체·끼어듦, 기록 안·끝)를 무작위로 넣어도 이상 한 번의 경보 행은
+    모두 한 사건에 남는다(튄 행 자체의 경보만 예외). 검토 5 R5-01: 3c6fbf3 규칙은 80곳 중 24~28곳에서 사건을 나눴다."""
+    model = load_bundle(HERE / "artifacts" / "guard_B.json")
+    _, _, _, _, abnormal = inputs
+    rng = np.random.default_rng(20260930)
+    base = D.inputs_only(abnormal).reset_index(drop=True)
+    times = pd.to_datetime(base[D.TIME])
+    for trial in range(40):
+        stamps = times.dt.strftime("%Y-%m-%d %H:%M:%S.%f").tolist()
+        rows, spikes = list(range(len(base))), set()
+        for pos in sorted(rng.choice(np.arange(60, 580, 60), 3, replace=False) + rng.integers(0, 50, 3)):
+            wrong = (times[pos] + pd.Timedelta(seconds=float(rng.choice([.3, 2, 5, 30, 3600])))).strftime("%Y-%m-%d %H:%M:%S.%f")
+            if rng.random() < .5:
+                stamps[pos] = wrong
+                spikes.add(pos)
+            else:
+                rows.append(pos); stamps.append(wrong); spikes.add(len(stamps) - 1)
+        order = sorted(range(len(rows)), key=lambda k: (rows[k], k >= len(base)))      # 끼어든 행은 원래 행 바로 뒤
+        frame = base.iloc[[rows[k] for k in order]].reset_index(drop=True)
+        frame[D.TIME] = [stamps[k] for k in order]
+        is_spike = np.isin(order, list(spikes))
+        pred = model.predict(frame)
+        alarms = pred[pred.alarm.eq(1).to_numpy() & ~is_spike]
+        assert alarms.incident_id.nunique() == 1, (trial, alarms.incident_id.value_counts().to_dict())
+        assert (per_incident(pred) <= 1).all().all(), trial
+        if trial < 2:
+            assert_stream_matches(model, frame, pred, 7)

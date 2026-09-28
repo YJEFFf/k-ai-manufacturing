@@ -41,8 +41,9 @@ def test_browser_simulation_matches_independently_scored_prefixes():
         return console.analyze(dict(split="B", alpha=.01, prior=.01, dataset="upload", csv=data.to_csv(index=False)))
 
     full = analyze(frame)
-    assert full["points"][spike_at + 1]["time_order_event"] == 2
-    cutoffs = {0, len(parts[0]) - 1, len(frame) - 1, spike_at, spike_at + 1}
+    # 튄 행 바로 뒤가 새 기록(2초 공백)이라 그 기록의 앞 2행을 보류한 뒤 새 기준을 잡으며 튄 행을 확인한다(부호 1·1·4).
+    assert [full["points"][spike_at + k]["time_order_event"] for k in (1, 2, 3)] == [1, 1, 4]
+    cutoffs = {0, len(parts[0]) - 1, len(frame) - 1, spike_at, spike_at + 1, spike_at + 2, spike_at + 3}
     reverse_start = sum(map(len, parts)) + 1 + len(abnormal)
     cutoffs.update((reverse_start - 1, reverse_start, reverse_start + len(parts[0]) - 1))
     for case in full["cases"]:

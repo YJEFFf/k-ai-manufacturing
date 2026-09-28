@@ -1,0 +1,19 @@
+# 실행: OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 python review6_spike_example.py <사본>/copy/yejun
+== +30초로 행 24의 시각을 바꿈
+ row_id               timestamp         status  record_id  position  time_order_event  alarm
+     23 2022-07-17 10:51:18.624             ok          1        19                 0      1
+     24 2022-07-17 10:51:48.724             ok          2         0                 0      1
+     25 2022-07-17 10:51:18.824 bad_time_order          3         0                 1      0
+     26 2022-07-17 10:51:18.924 bad_time_order          4         0                 1      0
+     27 2022-07-17 10:51:19.024             ok          5         0                 3      1
+     28 2022-07-17 10:51:19.124             ok          5         1                 0      0
+경보 행: 원래 556 → 551 (튄 행 자신 1); 보류 2행; 사건 2개
+== +3600초로 행 24의 시각을 바꿈
+ row_id               timestamp status  record_id  position  time_order_event  alarm
+     23 2022-07-17 10:51:18.624     ok          1        19                 0      1
+     24 2022-07-17 11:51:18.724     ok          2         0                 0      1
+     25 2022-07-17 10:51:18.824     ok          3         0                 2      1
+     26 2022-07-17 10:51:18.924     ok          3         1                 0      1
+     27 2022-07-17 10:51:19.024     ok          3         2                 0      1
+     28 2022-07-17 10:51:19.124     ok          3         3                 0      1
+경보 행: 원래 556 → 555 (튄 행 자신 1); 보류 0행; 사건 2개

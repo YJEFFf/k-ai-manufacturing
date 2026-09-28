@@ -1,0 +1,460 @@
+# 검토 6 수치 대조 로그 — 커밋 0b34a6b
+# 실행: OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 python review6_check.py <사본>/copy/yejun <사본>/preds
+# <사본>/copy = git archive 0b34a6b yejun + 원본 CSV 2개. <사본>/preds = 동결 모델 사본으로 predict.py --split A/B 재생성(SHA-256이 동결 digest와 같음, 아래 P0 행)
+# v1 행 예측은 <사본>/copy/yejun/press_submission에서 run_all.py --steps 2로 재생성(SHA-256이 v1 동결 manifest와 같음, P0-v1 행)
+# 반올림: 문서 표기 자릿수로 사사오입한 값이 문서 값과 같으면 일치
+# 형식: ID | 문서:행 | 주장 | 문서 값 | 계산값(결과 파일) | 판정 | 비고
+
+P0-A | expected/predictions_digest.json | 재생성 test_predictions_A.csv SHA-256 = 동결 digest | (주장) | 094dc1243e94d628 | 일치
+P0-B | expected/predictions_digest.json | 재생성 test_predictions_B.csv SHA-256 = 동결 digest | (주장) | 1eda4c5153f3420c | 일치
+P0-v1A | press_submission/outputs/expected/manifest.json | 재생성 v1 predictions_A.csv SHA-256 = v1 동결 manifest | (주장) | 0656fc309cd75e0f | 일치
+P0-v1B | press_submission/outputs/expected/manifest.json | 재생성 v1 predictions_B.csv SHA-256 = v1 동결 manifest | (주장) | a1f4fd3d8246c738 | 일치
+R-Av1-f1 | press_guard/README.md:50 | A v1 행 F1 | 0.910082 | 0.910082 | 일치
+R-Av1-fn | press_guard/README.md:50 | A v1 미탐 행 | 99 | 99 | 일치
+R-Av1-nn | press_guard/README.md:50 | A v1 정상 알림 | 0/120 | 0/120 | 일치
+R-Av1-ab | press_guard/README.md:50 | A v1 이상 탐지 | 21/21 | 21/21 | 일치
+R-Av1-dl | press_guard/README.md:50 | A v1 최대 첫 경보 지연(초) | 0.7 | 0.7 | 일치
+R-Av2-f1 | press_guard/README.md:51 | A v2 행 F1 | 0.961938 | 0.961938 | 일치
+R-Av2-fn | press_guard/README.md:51 | A v2 미탐 행 | 44 | 44 | 일치
+R-Av2-nn | press_guard/README.md:51 | A v2 정상 알림 | 0/120 | 0/120 | 일치
+R-Av2-ab | press_guard/README.md:51 | A v2 이상 탐지 | 21/21 | 21/21 | 일치
+R-Av2-dl | press_guard/README.md:51 | A v2 최대 첫 경보 지연(초) | 0.5 | 0.5 | 일치
+R-Bv1-f1 | press_guard/README.md:52 | B v1 행 F1 | 0.920322 | 0.920322 | 일치
+R-Bv1-fn | press_guard/README.md:52 | B v1 미탐 행 | 86 | 86 | 일치
+R-Bv1-nn | press_guard/README.md:52 | B v1 정상 알림 | 3/180 | 3/180 | 일치
+R-Bv1-ab | press_guard/README.md:52 | B v1 이상 탐지 | 21/21 | 21/21 | 일치
+R-Bv1-dl | press_guard/README.md:52 | B v1 최대 첫 경보 지연(초) | 0.7 | 0.7 | 일치
+R-Bv2-f1 | press_guard/README.md:53 | B v2 행 F1 | 0.970990 | 0.97099 | 일치
+R-Bv2-fn | press_guard/README.md:53 | B v2 미탐 행 | 31 | 31 | 일치
+R-Bv2-nn | press_guard/README.md:53 | B v2 정상 알림 | 3/180 | 3/180 | 일치
+R-Bv2-ab | press_guard/README.md:53 | B v2 이상 탐지 | 21/21 | 21/21 | 일치
+R-Bv2-dl | press_guard/README.md:53 | B v2 최대 첫 경보 지연(초) | 0.5 | 0.5 | 일치
+R-file-f1-A | press_guard/README.md:77 | test_predictions_A label·alarm로 F1 | 0.961938 | 0.961938 | 일치
+R-file-f1-B | press_guard/README.md:77 | test_predictions_B label·alarm로 F1 | 0.970990 | 0.97099 | 일치
+R-file-rows-A | press_guard/README.md:77 | test_predictions_A 행 수 | 4,690 | 4690 | 일치
+R-file-rows-B | press_guard/README.md:77 | test_predictions_B 행 수 | 6,697 | 6697 | 일치
+R-file-same-abn | press_guard/README.md:77 | 이상 600행은 두 파일이 같다(입력 행·라벨) | (주장) | 입력 행 동일(점수는 모델별) | 일치
+R-fileprior-A | press_guard/README.md:90 | A 파일 이상 비율 | 0.128 | 0.127932 | 일치
+R-fileprior-B | press_guard/README.md:90 | B 파일 이상 비율 | 0.090 | 0.0895924 | 일치
+R-cols | press_guard/README.md:79-91 | 열 표가 예측 파일의 모든 열을 설명 | (주장) | 설명 없는 열: alpha,time_order_event | 불일치
+U-A-rec | press_guard/README.md:56 | A α1% 기록 단위 v1=v2(이상 21/21, 정상 알림 기록 수) | (주장) | v2 21/0, v1 21/0 | 일치
+U-A-auc | press_guard/README.md:56 | A 기록 최대 점수 AUROC | 1.0 | 1 | 일치
+U-B-rec | press_guard/README.md:56 | B α1% 기록 단위 v1=v2(이상 21/21, 정상 알림 기록 수) | (주장) | v2 21/3, v1 21/3 | 일치
+U-B-auc | press_guard/README.md:56 | B 기록 최대 점수 AUROC | 1.0 | 1 | 일치
+U-A-amin | press_guard/README.md:56 | A 이상 기록 최소(기록 최대 점수) | 12.3 | 12.2758 | 일치
+U-B-amin | press_guard/README.md:56 | B 이상 기록 최소 | 12.8 | 12.8201 | 일치
+U-A-nmax | press_guard/README.md:56 | A 정상 기록 최대 | 3.8 | 3.82209 | 일치
+U-B-nmax | press_guard/README.md:56 | B 정상 기록 최대 | 4.6 | 4.5942 | 일치
+U-A-v1rec | press_guard/README.md:56 | A unit_results v1 기록 최대·최소 = v1 예측 파일 | (주장) | v1 파일 정상 최대 3.8221, 이상 최소 12.2758 | 일치
+U-B-v1rec | press_guard/README.md:56 | B unit_results v1 기록 최대·최소 = v1 예측 파일 | (주장) | v1 파일 정상 최대 4.5942, 이상 최소 12.8201 | 일치
+U-B-same | press_guard/README.md:56 | B α1% v1·v2 오경보 기록이 같은 423·461·570 | (주장) | v1 [423, 461, 570], v2 [423, 461, 570] | 일치
+U-diff-35 | press_guard/README.md:56 | α 3·5%에서 v1·v2 정상 알림 기록 수 차이(문서 '1~2개') | 1~2 | 0~1 | 불일치(계산 0~1) | A3%·A5%·B3%·B5% 차이 [0, 1, 1, 1]
+U-rule-A-f1 | press_guard/README.md:57 | 단순 규칙 A 행 F1 | 0.890 | 0.889917 | 일치
+U-rule-B-f1 | press_guard/README.md:57 | 단순 규칙 B 행 F1 | 0.900 | 0.900457 | 일치
+U-rule-nn | press_guard/README.md:57 | 단순 규칙 정상 알림 A·B | 0/120·2/180 | 0/120·2/180 | 일치
+U-rule-ab | press_guard/README.md:57 | 단순 규칙 이상 기록 | 21/21·21/21 | 21/21·21/21 | 일치
+U-A-55 | press_guard/README.md:58 | A v1 대비 미탐 감소 | 55 | 55 | 일치
+U-A-26 | press_guard/README.md:58 | A 감소분 중 위치 2~6 | 49 | 49 | 일치
+U-A-7 | press_guard/README.md:58 | A 감소분 중 위치 7 이후 | 6 | 6 | 일치
+U-A-01 | press_guard/README.md:58 | A 위치 0~1 미탐 26행 v1=v2 | (주장) | v1 26, v2 26 | 일치
+U-B-55 | press_guard/README.md:58 | B v1 대비 미탐 감소 | 55 | 55 | 일치
+U-B-26 | press_guard/README.md:58 | B 감소분 중 위치 2~6 | 51 | 51 | 일치
+U-B-7 | press_guard/README.md:58 | B 감소분 중 위치 7 이후 | 4 | 4 | 일치
+U-B-01 | press_guard/README.md:58 | B 위치 0~1 미탐 20행 v1=v2 | (주장) | v1 20, v2 20 | 일치
+U-A-rule7 | press_guard/README.md:247 | A 단순 규칙−v2 미탐 차이가 주로 위치 7 이후 | (주장) | 전체 75, 0~1 -3, 2~6 -3, ≥7 81 | 일치
+U-B-rule7 | press_guard/README.md:247 | B 단순 규칙−v2 미탐 차이가 주로 위치 7 이후 | (주장) | 전체 76, 0~1 3, 2~6 1, ≥7 72 | 일치
+E1-cur_noise-v2 | press_guard/README.md:59 | E1 하한 cur_noise v2 | 0.1 | 0.1 | 일치
+E1-cur_noise-v1 | press_guard/README.md:59 | E1 하한 cur_noise v1 | 0.2 | 0.2 | 일치
+E1-cur_offset-v2 | press_guard/README.md:59 | E1 하한 cur_offset v2 | 0.4 | 0.4 | 일치
+E1-cur_offset-v1 | press_guard/README.md:59 | E1 하한 cur_offset v1 | 0.8 | 0.8 | 일치
+E1-vib_noise-v2 | press_guard/README.md:59 | E1 하한 vib_noise v2 | 4.0 | 4 | 일치
+E1-vib_noise-v1 | press_guard/README.md:59 | E1 하한 vib_noise v1 | 4.0 | 4 | 일치
+E1-grid | press_guard/README.md:59 | 하한값 바로 아래 격자가 1/2(2배 간격) | (주장) | cur_noise 격자 [0.02, 0.05, 0.1, 0.2, 0.4, 0.8] | 일치
+L-cp21 | press_guard/README.md:60 | 21/21 단측 95% 하한(Clopper–Pearson) | 0.867 | 0.867054 | 일치
+L-gapmin | press_guard/README.md:60 | 이상 기록 사이 공백 최소(초) | 1.8 | 1.78 | 일치
+L-gapmax | press_guard/README.md:60 | 이상 기록 사이 공백 최대(초) | 8.6 | 8.572 | 일치
+S1-크기 단독-recA | analysis/press_selection/README.md:28; press_guard/README.md:61 | 크기 단독 이상 기록 A | 18/21 | 18/21 | 일치
+S1-크기 단독-recB | analysis/press_selection/README.md:28; press_guard/README.md:61 | 크기 단독 이상 기록 B | 18/21 | 18/21 | 일치
+S1-크기 단독-f1A | analysis/press_selection/README.md:28 | 크기 단독 행 F1 A | 0.448 | 0.447607 | 일치
+S1-크기 단독-f1B | analysis/press_selection/README.md:28 | 크기 단독 행 F1 B | 0.491 | 0.490613 | 일치
+S1-파형 단독-recA | analysis/press_selection/README.md:29; press_guard/README.md:61 | 파형 단독 이상 기록 A | 18/21 | 18/21 | 일치
+S1-파형 단독-recB | analysis/press_selection/README.md:29; press_guard/README.md:61 | 파형 단독 이상 기록 B | 18/21 | 18/21 | 일치
+S1-파형 단독-f1A | analysis/press_selection/README.md:29 | 파형 단독 행 F1 A | 0.892 | 0.891967 | 일치
+S1-파형 단독-f1B | analysis/press_selection/README.md:29 | 파형 단독 행 F1 B | 0.891 | 0.890725 | 일치
+S1-예측 오차(AR(2)) 단독-recA | analysis/press_selection/README.md:30; press_guard/README.md:61 | 예측 오차(AR(2)) 단독 이상 기록 A | 20/21 | 20/21 | 일치
+S1-예측 오차(AR(2)) 단독-recB | analysis/press_selection/README.md:30; press_guard/README.md:61 | 예측 오차(AR(2)) 단독 이상 기록 B | 20/21 | 20/21 | 일치
+S1-예측 오차(AR(2)) 단독-f1A | analysis/press_selection/README.md:30 | 예측 오차(AR(2)) 단독 행 F1 A | 0.832 | 0.831548 | 일치
+S1-예측 오차(AR(2)) 단독-f1B | analysis/press_selection/README.md:30 | 예측 오차(AR(2)) 단독 행 F1 B | 0.840 | 0.839768 | 일치
+S1T-v2 (fmax, AR(2))-A | analysis/press_selection/README.md:24 | §1 표 v2 (fmax, AR(2)) A 칸(미탐·정상 알림·이상 탐지·F1·근거 없는 경보) | (주장) | (44, '0/120', '21/21', '0.962', 0) | 일치
+S1T-v2 (fmax, AR(2))-B | analysis/press_selection/README.md:24 | §1 표 v2 (fmax, AR(2)) B 칸(미탐·정상 알림·이상 탐지·F1·근거 없는 경보) | (주장) | (31, '3/180', '21/21', '0.971', 0) | 일치
+S1T-5NN(v2 성분)-A | analysis/press_selection/README.md:25 | §1 표 5NN(v2 성분) A 칸(미탐·정상 알림·이상 탐지·F1·근거 없는 경보) | (주장) | (36, '0/120', '21/21', '0.969', 8) | 일치
+S1T-5NN(v2 성분)-B | analysis/press_selection/README.md:25 | §1 표 5NN(v2 성분) B 칸(미탐·정상 알림·이상 탐지·F1·근거 없는 경보) | (주장) | (29, '3/180', '21/21', '0.973', 2) | 일치
+S1T-IF(v2 성분)-A | analysis/press_selection/README.md:26 | §1 표 IF(v2 성분) A 칸(미탐·정상 알림·이상 탐지·F1·근거 없는 경보) | (주장) | (120, '0/120', '20/21', '0.889', 3) | 일치
+S1T-IF(v2 성분)-B | analysis/press_selection/README.md:26 | §1 표 IF(v2 성분) B 칸(미탐·정상 알림·이상 탐지·F1·근거 없는 경보) | (주장) | (117, '0/180', '20/21', '0.892', 1) | 일치
+S1T-합(v2 성분)-A | analysis/press_selection/README.md:27 | §1 표 합(v2 성분) A 칸(미탐·정상 알림·이상 탐지·F1·근거 없는 경보) | (주장) | (40, '0/120', '21/21', '0.966', 4) | 일치
+S1T-합(v2 성분)-B | analysis/press_selection/README.md:27 | §1 표 합(v2 성분) B 칸(미탐·정상 알림·이상 탐지·F1·근거 없는 경보) | (주장) | (39, '2/180', '21/21', '0.965', 1) | 일치
+S1T-크기 단독-A | analysis/press_selection/README.md:28 | §1 표 크기 단독 A 칸(미탐·정상 알림·이상 탐지·F1·근거 없는 경보) | (주장) | (427, '0/120', '18/21', '0.448', 0) | 일치
+S1T-크기 단독-B | analysis/press_selection/README.md:28 | §1 표 크기 단독 B 칸(미탐·정상 알림·이상 탐지·F1·근거 없는 경보) | (주장) | (404, '3/180', '18/21', '0.491', 0) | 일치
+S1T-파형 단독-A | analysis/press_selection/README.md:29 | §1 표 파형 단독 A 칸(미탐·정상 알림·이상 탐지·F1·근거 없는 경보) | (주장) | (117, '0/120', '18/21', '0.892', 0) | 일치
+S1T-파형 단독-B | analysis/press_selection/README.md:29 | §1 표 파형 단독 B 칸(미탐·정상 알림·이상 탐지·F1·근거 없는 경보) | (주장) | (115, '4/180', '18/21', '0.891', 0) | 일치
+S1T-예측 오차(AR(2)) 단독-A | analysis/press_selection/README.md:30 | §1 표 예측 오차(AR(2)) 단독 A 칸(미탐·정상 알림·이상 탐지·F1·근거 없는 경보) | (주장) | (173, '0/120', '20/21', '0.832', 0) | 일치
+S1T-예측 오차(AR(2)) 단독-B | analysis/press_selection/README.md:30 | §1 표 예측 오차(AR(2)) 단독 B 칸(미탐·정상 알림·이상 탐지·F1·근거 없는 경보) | (주장) | (165, '1/180', '20/21', '0.840', 0) | 일치
+S1T-early+AR(1)-A | analysis/press_selection/README.md:31 | §1 표 early+AR(1) A 칸(미탐·정상 알림·이상 탐지·F1·근거 없는 경보) | (주장) | (78, '0/120', '21/21', '0.930', 0) | 일치
+S1T-early+AR(1)-B | analysis/press_selection/README.md:31 | §1 표 early+AR(1) B 칸(미탐·정상 알림·이상 탐지·F1·근거 없는 경보) | (주장) | (63, '3/180', '21/21', '0.942', 0) | 일치
+S1T-early+AR(3)-A | analysis/press_selection/README.md:32 | §1 표 early+AR(3) A 칸(미탐·정상 알림·이상 탐지·F1·근거 없는 경보) | (주장) | (50, '0/120', '21/21', '0.957', 0) | 일치
+S1T-early+AR(3)-B | analysis/press_selection/README.md:32 | §1 표 early+AR(3) B 칸(미탐·정상 알림·이상 탐지·F1·근거 없는 경보) | (주장) | (40, '3/180', '21/21', '0.963', 0) | 일치
+S1T-early+AR(4)-A | analysis/press_selection/README.md:33 | §1 표 early+AR(4) A 칸(미탐·정상 알림·이상 탐지·F1·근거 없는 경보) | (주장) | (57, '0/120', '21/21', '0.950', 0) | 일치
+S1T-early+AR(4)-B | analysis/press_selection/README.md:33 | §1 표 early+AR(4) B 칸(미탐·정상 알림·이상 탐지·F1·근거 없는 경보) | (주장) | (46, '4/180', '21/21', '0.957', 0) | 일치
+S1-better-A | analysis/press_selection/README.md:38; same_feature_alternatives.csv remark | A: v2가 단일 성분보다 기록(기록 F1)·행 모두 낫다 | (주장) | 기록 F1 v2 1.000 vs AR(2) 단독 0.976; 정상 알림 0 vs 0; 행 F1 0.962 vs 0.832 | 일치
+S1-better-B | analysis/press_selection/README.md:38; same_feature_alternatives.csv remark | B: v2가 단일 성분보다 기록(기록 F1)·행 모두 낫다 | (주장) | 기록 F1 v2 0.933 vs AR(2) 단독 0.952; 정상 알림 3 vs 1; 행 F1 0.971 vs 0.840 | 불일치
+S1-AR4-A | press_guard/README.md:62 | AR(4) 행 F1 A | 0.950 | 0.950131 | 일치
+S1-AR4-B | press_guard/README.md:62 | AR(4) 행 F1 B | 0.957 | 0.956822 | 일치
+T-A-1 | press_guard/README.md:64 | A α1% 문턱(보정 최댓값) | 4.418 | 4.41793 | 일치
+T-A-1r | press_guard/README.md:64 | A 보정 최댓값 기록 = 461, 둘째 = 423 | (주장) | [461, 423, 446, 426] | 일치
+T-A-2 | press_guard/README.md:64 | A 보정 둘째 값(423) | 4.049 | 4.04881 | 일치
+T-A-3 | press_guard/README.md:64 | 두 기록을 빼면 A 문턱(셋째 값) | 3.504 | 3.50394 | 일치
+T-A-570 | press_guard/README.md:64 | 문턱 3.504에서 A 평가 오경보 기록 = 570뿐 | (주장) | [570] | 일치
+T-A-top4 | press_guard/README.md:64 | A 보정 상위 4개 461·423·446·426이 모두 B α3% 오경보 기록 | (주장) | A 상위4 [461, 423, 446, 426], B α3% 오경보 [423, 426, 446, 461, 570] | 일치
+T-A-12 | press_guard/README.md:64 | A 평가 중 보정 중앙값 초과 구간 수 | 12 | 12 | 일치
+T-A-p | press_guard/README.md:64 | Mann–Whitney p | 2.9e-11 | 2.91945e-11 | 일치
+S-A-load | press_guard/README.md:65 | A 평가 부하 기록 수 | 21 | 21 | 일치
+S-B-load | press_guard/README.md:65 | B 평가 부하 기록 수 | 51 | 51 | 일치
+S-A 평가 | press_guard/README.md:65 | A 평가 저수준 비율(%) | 78 | 78.125% | 일치
+S-B 평가 | press_guard/README.md:65 | B 평가 저수준 비율(%) | 65 | 64.8276% | 일치
+S-A 보정 | press_guard/README.md:65 | A 보정 저수준 비율(%) | 35 | 35.1064% | 일치
+S-B 보정 | press_guard/README.md:65 | B 보정 저수준 비율(%) | 32 | 32.2222% | 일치
+RO-f1min | press_guard/README.md:66 | 시간순 5창 F1 최소 | 0.961938 | 0.961938 | 일치
+RO-f1max | press_guard/README.md:66 | 시간순 5창 F1 최대 | 0.971819 | 0.971819 | 일치
+RO-alerts | press_guard/README.md:66 | 시간순 5창 정상 알림 | 0·0·2·0·0 | 0·0·2·0·0 | 일치
+L2-zero-1 | press_guard/README.md:70 | 2단계 정상 평가 0건(α 1%, A·B·시간순 5창) | (주장) | [0, 0, 0, 0, 0, 0, 0] | 일치
+L2-zero-all | press_guard/README.md:70 | 2단계 정상 평가 '모두 0건'이 α 3·5%에도 성립 | (주장) | frozen_B α0.03 2건; frozen_B α0.05 3건; rolling_test_300_359 α0.03 1건; rolling_test_300_359 α0.05 1건; rolling_test_420_479 α0.03 2건; rolling_test_420_479 α0.05 3건 | 불일치 | 같은 문장의 주 추정 1/7은 α 5% 폴드의 2단계 1건에서 나온다
+L2-med | press_guard/README.md:70 | 이상 격상 지연 중앙(초) | 0.2 | 0.2 | 일치
+L2-max | press_guard/README.md:70 | 이상 격상 지연 최대(초) | 0.6 | 0.6 | 일치
+L2-after | press_guard/OPERATIONS.md:41 | 첫 경보 뒤 격상(초) 중앙~최대 | 0.1~0.2 | 0.1~0.2 | 일치
+EE-main | press_guard/README.md:70; press_guard/OPERATIONS.md:40 | 2단계 주추정(교대 8시간) | 4.2 | 4.22643 | 일치
+EE-main-u | press_guard/README.md:70; press_guard/OPERATIONS.md:40 | 주추정 95% 상한 | 15.4 | 15.405 | 일치
+EE-ratio | press_guard/README.md:70 | 주추정 비 | 1/7 | 1/7 | 일치
+EE-19 | press_guard/README.md:70; press_guard/OPERATIONS.md:40 | 1/9 민감도 | 3.3 | 3.28722 | 일치
+EE-19u | press_guard/README.md:70; press_guard/OPERATIONS.md:40 | 1/9 민감도 상한 | 12.7 | 12.696 | 일치
+EE-25 | press_guard/OPERATIONS.md:40 | 동결 B α3% 2/5 | 11.8 | 11.834 | 일치
+EE-37 | press_guard/OPERATIONS.md:40 | 동결 B α5% 3/7 | 12.7 | 12.6793 | 일치
+AL-A-u | press_guard/OPERATIONS.md:40 | A 정상 0/120의 2단계 95% 상한(교대) | 88 | 88.2293 | 일치
+AL-B-u | press_guard/OPERATIONS.md:40 | B 정상 0/180의 2단계 95% 상한(교대) | 59 | 59.0852 | 일치
+WL-nom | press_guard/OPERATIONS.md:39 | 1단계 명목(교대) | 30 | 29.585 | 일치
+WL-obs | press_guard/OPERATIONS.md:39 | B 관측 | 60 | 59.6631 | 일치
+WL-up | press_guard/OPERATIONS.md:39 | 이항 95% 상한 | 152 | 152.177 | 일치
+WL-postA | press_guard/OPERATIONS.md:39 | 사후 95% A | 44 | 44.39 | 일치
+WL-postB | press_guard/OPERATIONS.md:39 | 사후 95% B | 92 | 91.7907 | 일치
+INC-ab | press_guard/README.md:71 | 이상 21기록 사건·알림 | 1·2 | 1·2 | 일치
+INC-ab42 | press_guard/README.md:71 | 구간 단위 알림 | 42 | 42 | 일치
+INC-B-0.01 | press_guard/README.md:71 | B 정상 α0.01 사건(알림) | 3(3) | 3(3) | 일치
+INC-B-0.03 | press_guard/README.md:71 | B 정상 α0.03 사건(알림) | 5(7) | 5(7) | 일치
+INC-B-0.05 | press_guard/README.md:71 | B 정상 α0.05 사건(알림) | 7(10) | 7(10) | 일치
+INC-span | press_guard/README.md:71 | 이상 21기록 경과(분) | 2.76 | 2.75995 | 일치
+INC-dow | press_guard/README.md:73 | 07-17 일요일·07-12 화요일 | (주장) | Sunday | 일치
+ALR-0.03 | press_guard/README.md:72 | B α0.03 정상 알림 v2(v1) | 5(4) | 5(4) | 일치
+ALR-0.05 | press_guard/README.md:72 | B α0.05 정상 알림 v2(v1) | 7(6) | 7(6) | 일치
+ROB-coarse | press_guard/README.md:72; press_guard/README.md:179 | coarse B α1% v2(v1) | 5(4) | 5(4) | 일치
+PR-A-calibrated_isotonic-b | press_guard/README.md:106-111 | A calibrated_isotonic Brier | 0.0072 | 0.0072278 | 일치
+PR-A-calibrated_isotonic-l | press_guard/README.md:106-111 | A calibrated_isotonic log-loss | 0.046 | 0.0458301 | 일치
+PR-A-calibrated_isotonic-e | press_guard/README.md:106-111 | A calibrated_isotonic ECE | 0.0075 | 0.00749499 | 일치
+PR-A-prevalence_only-b | press_guard/README.md:106-111 | A prevalence_only Brier | 0.112 | 0.111565 | 일치
+PR-A-prevalence_only-l | press_guard/README.md:106-111 | A prevalence_only log-loss | 0.382 | 0.382436 | 일치
+PR-A-naive_1_minus_p-b | press_guard/README.md:106-111 | A naive_1_minus_p Brier | 0.012 | 0.0121155 | 일치
+PR-A-naive_1_minus_p-l | press_guard/README.md:106-111 | A naive_1_minus_p log-loss | 0.110 | 0.110112 | 일치
+PR-A-naive_1_minus_p-e | press_guard/README.md:106-111 | A naive_1_minus_p ECE | 0.036 | 0.0363619 | 일치
+PR-B-calibrated_isotonic-b | press_guard/README.md:106-111 | B calibrated_isotonic Brier | 0.0056 | 0.00559398 | 일치
+PR-B-calibrated_isotonic-l | press_guard/README.md:106-111 | B calibrated_isotonic log-loss | 0.037 | 0.0371807 | 일치
+PR-B-calibrated_isotonic-e | press_guard/README.md:106-111 | B calibrated_isotonic ECE | 0.0066 | 0.00660095 | 일치
+PR-B-prevalence_only-b | press_guard/README.md:106-111 | B prevalence_only Brier | 0.082 | 0.0815656 | 일치
+PR-B-prevalence_only-l | press_guard/README.md:106-111 | B prevalence_only log-loss | 0.302 | 0.301594 | 일치
+PR-B-naive_1_minus_p-b | press_guard/README.md:106-111 | B naive_1_minus_p Brier | 0.023 | 0.02305 | 일치
+PR-B-naive_1_minus_p-l | press_guard/README.md:106-111 | B naive_1_minus_p log-loss | 0.120 | 0.119829 | 일치
+PR-B-naive_1_minus_p-e | press_guard/README.md:106-111 | B naive_1_minus_p ECE | 0.078 | 0.0776677 | 일치
+PR-A-isotonic_uncapped-e | press_guard/README.md:113 | A isotonic_uncapped ECE | 0.0012 | 0.00118389 | 일치
+PR-A-isotonic_uncapped-b | press_guard/README.md:113 | A isotonic_uncapped Brier | 0.0069 | 0.00689122 | 일치
+PR-B-isotonic_uncapped-e | press_guard/README.md:113 | B isotonic_uncapped ECE | 0.0009 | 0.000891249 | 일치
+PR-B-isotonic_uncapped-b | press_guard/README.md:113 | B isotonic_uncapped Brier | 0.0052 | 0.00515163 | 일치
+PR-A-platt_logistic-e | press_guard/README.md:113 | A platt_logistic ECE | 0.0036 | 0.00358268 | 일치
+PR-A-platt_logistic-b | press_guard/README.md:113 | A platt_logistic Brier | 0.0074 | 0.00737486 | 일치
+PR-B-platt_logistic-e | press_guard/README.md:113 | B platt_logistic ECE | 0.0022 | 0.00214226 | 불일치(계산 0.0021)
+PR-B-platt_logistic-b | press_guard/README.md:113 | B platt_logistic Brier | 0.0055 | 0.00548565 | 일치
+PR-cap | press_guard/README.md:116 | π 1%·LR 121의 확률 | 0.55 | 0.55 | 일치
+PR-cap-A | press_guard/README.md:117 | A 이상 행 중 LR 상한(121) 행 | 555/600 | 555/600 | 일치
+PR-cap-B | press_guard/README.md:117 | B 이상 행 중 LR 상한(121) 행 | 568/600 | 568/600 | 일치
+PR-cap-fa | press_guard/README.md:117; press_guard/README.md:125 | B 오경보 3행 모두 LR 121(π1% 0.55) | (주장) | 3행 LR [121.0, 121.0, 121.0] | 일치
+PR-file-A-b | press_guard/README.md:118 | A π1% 확률을 파일 라벨로 Brier | 0.0321 | 0.032141 | 일치
+PR-file-A-e | press_guard/README.md:118 | A π1% 확률을 파일 라벨로 ECE | 0.0615 | 0.0615337 | 일치
+PR-fp-A-b | press_guard/README.md:118 | A 파일 비율 확률 Brier | 0.0072 | 0.00722632 | 일치
+PR-fp-A-e | press_guard/README.md:118 | A 파일 비율 확률 ECE | 0.0075 | 0.00753452 | 일치
+PR-file-B-b | press_guard/README.md:118 | B π1% 확률을 파일 라벨로 Brier | 0.0221 | 0.0220762 | 일치
+PR-file-B-e | press_guard/README.md:118 | B π1% 확률을 파일 라벨로 ECE | 0.0423 | 0.0422547 | 일치
+PR-fp-B-b | press_guard/README.md:118 | B 파일 비율 확률 Brier | 0.0056 | 0.00559251 | 일치
+PR-fp-B-e | press_guard/README.md:118 | B 파일 비율 확률 ECE | 0.0066 | 0.00664879 | 일치
+PB-A-cur | press_guard/README.md:120 | A 평가 1% 현재 층 Brier | 0.0025 | 0.00253309 | 일치
+PB-A-1mp | press_guard/README.md:120 | A 평가 1% 1−p Brier | 0.0083 | 0.00832468 | 일치
+PB-A-01 | press_guard/README.md:120 | A 평가 1% 경보 0/1 Brier | 0.0007 | 0.000733333 | 일치
+PB-A-two | press_guard/README.md:121 | A 평가 1% 두 수준 Brier | 0.0026 | 0.0026093 | 일치
+PB-A-min | press_guard/README.md:120 | A 평가 1%에서 Brier 최소 = 경보 0/1 | (주장) | 경보 0/1(미보정) | 일치
+PB-B-cur | press_guard/README.md:120 | B 평가 1% 현재 층 Brier | 0.0026 | 0.00259663 | 일치
+PB-B-1mp | press_guard/README.md:120 | B 평가 1% 1−p Brier | 0.0217 | 0.0217426 | 일치
+PB-B-01 | press_guard/README.md:120 | B 평가 1% 경보 0/1 Brier | 0.0010 | 0.00100379 | 일치
+PB-B-two | press_guard/README.md:121 | B 평가 1% 두 수준 Brier | 0.0026 | 0.00258415 | 일치
+PB-B-min | press_guard/README.md:120 | B 평가 1%에서 Brier 최소 = 경보 0/1 | (주장) | 경보 0/1(미보정) | 일치
+PC-A-thr | press_guard/README.md:123 | A 문턱 확률(π1%) | 0.30 | 0.301632 | 일치
+PC-B-thr | press_guard/README.md:123 | B 문턱 확률(π1%) | 0.007 | 0.00700262 | 일치
+PC-B-l | press_guard/README.md:123 | B 계단 왼쪽 | 2.896 | 2.89614 | 일치
+PC-B-thrs | press_guard/README.md:123 | B 문턱 점수 | 3.520 | 3.5199 | 일치
+PC-B-cnt | press_guard/README.md:123 | 계단 안 정상 보정·이상 행 | 9·1 | 9·1 | 일치
+PC-B-phat | press_guard/README.md:123 | 계단 P̂ | 0.10 | 0.1 | 일치
+PC-B-pifit | press_guard/README.md:123 | 적합 비율 | 0.137 | 0.1373 | 일치
+PC-B-lr | press_guard/README.md:123 | 문턱 LR | 0.70 | 0.698148 | 일치
+PC-B-r | press_guard/README.md:123 | 다음 계단 시작 | 3.561 | 3.56082 | 일치
+PC-A-min | press_guard/README.md:124 | A 경보 행 최소 LR | 108.9 | 108.893 | 일치
+PC-A-minp | press_guard/README.md:124 | A 최소 LR 확률(π1%) | 0.52 | 0.523793 | 일치
+PC-B-min | press_guard/README.md:124 | B 경보 행 최소 LR | 2.42 | 2.42301 | 일치
+PC-B-minp | press_guard/README.md:124 | B 최소 LR 확률 | 0.024 | 0.0238902 | 일치
+PC-A-min-pred | press_guard/README.md:124 | A 예측 파일에서 경보 행 최소 LR | 108.9 | 108.893 | 일치
+PC-A-lt1 | press_guard/README.md:124 | A 경보 행 중 LR<1 | 0 | 0 | 일치
+PC-B-min-pred | press_guard/README.md:124 | B 예측 파일에서 경보 행 최소 LR | 2.42 | 2.42301 | 일치
+PC-B-lt1 | press_guard/README.md:124 | B 경보 행 중 LR<1 | 0 | 0 | 일치
+LF-tpr | press_guard/README.md:134 | E1 전류 잡음 0.1σ 탐지율(%) | 95.5 | 95.4667% | 일치
+LF-n-01 | press_guard/README.md:134 | 명목 FAR·π0.1% | 10.4 | 10.3646% | 일치
+LF-n-1 | press_guard/README.md:134 | 명목 FAR·π1% | 53.8 | 53.8493% | 일치
+LF-c-01 | press_guard/README.md:135 | 보정 95% FAR·π0.1% | 3.7 | 3.73129% | 일치
+LF-c-1 | press_guard/README.md:135 | 보정 95% FAR·π1% | 28.1 | 28.1152% | 일치
+LF-eq | press_guard/README.md:136 | α1%에서 nominal_lr_reference = min_rank_nominal_lr_reference | (주장) | 115.5147 vs 115.5147 | 일치
+LF-sbb | press_guard/README.md:138 | SBB 우도비 | 9.3 | 9.28177 | 일치
+LF-sbbp | press_guard/README.md:138 | SBB π1% 확률(%) | 8.6 | 8.57187% | 일치
+SI-cur-A | press_guard/README.md:143 | 전류만 F1 A | 0.956 | 0.955614 | 일치
+SI-cur-B | press_guard/README.md:143 | 전류만 F1 B | 0.955 | 0.954783 | 일치
+SI-cur-d | press_guard/README.md:143 | 전류만 이상 탐지 | 20/21·20/21 | 20/21·20/21 | 일치
+SI-vib-A | press_guard/README.md:143 | 진동만 F1 A | 0.448 | 0.447607 | 일치
+SI-vib-B | press_guard/README.md:143 | 진동만 F1 B | 0.491 | 0.490613 | 일치
+SI-dAI0 | press_guard/README.md:143 | AI0 제거 미탐 A·B | 49·47 | 49·47 | 일치
+SI-dAI1 | press_guard/README.md:143 | AI1 제거 미탐 A·B | 45·34 | 45·34 | 일치
+SI-swap | press_guard/README.md:144 | 채널 교체 미탐 AI2·AI0·AI1 | 427·404, 61·51, 46·34 | 427·404, 61·51, 46·34 | 일치
+SI-auc-A-AI1_Vibration | press_guard/README.md:147,150 | 구간 SD 단변량 AUROC A AI1_Vibration | 0.93 | 0.927171 | 일치
+SI-auc-B-AI1_Vibration | press_guard/README.md:147,150 | 구간 SD 단변량 AUROC B AI1_Vibration | 0.90 | 0.897845 | 일치
+SI-auc-A-AI0_Vibration | press_guard/README.md:147,150 | 구간 SD 단변량 AUROC A AI0_Vibration | 0.86 | 0.863545 | 일치
+SI-auc-B-AI0_Vibration | press_guard/README.md:147,150 | 구간 SD 단변량 AUROC B AI0_Vibration | 0.86 | 0.861931 | 일치
+SI-auc-A-AI2_Current | press_guard/README.md:147,150 | 구간 SD 단변량 AUROC A AI2_Current | 0.44 | 0.436575 | 일치
+SI-auc-B-AI2_Current | press_guard/README.md:147,150 | 구간 SD 단변량 AUROC B AI2_Current | 0.38 | 0.380952 | 일치
+AB-no_waveform | press_guard/README.md:145 | no_waveform 미탐 A·B | 133·112 | 133·112 | 일치
+AB-no_dynamics | press_guard/README.md:145 | no_dynamics 미탐 A·B | 86·71 | 86·71 | 일치
+AB-no_magnitude | press_guard/README.md:145 | no_magnitude 미탐 A·B | 56·56 | 56·56 | 일치
+AB-no_early_switch | press_guard/README.md:145 | no_early_switch 미탐 A·B | 46·33 | 46·33 | 일치
+AB-nomag-det | press_guard/README.md:145 | 크기 제거 이상 탐지 A·B | 20/21·20/21 | 20/21·20/21 | 일치
+AB-nomag-fp | press_guard/README.md:145 | 크기 제거 B 정상 오경보 3→ | 1 | 1 | 일치
+CP-rA | press_guard/README.md:153 | 결합 r A | 0.95 | 0.951256 | 일치
+CP-rB | press_guard/README.md:153 | 결합 r B | 0.95 | 0.949152 | 일치
+CP-z-A | press_guard/README.md:153 | 이상 결합 잔차 z 중앙 A | 12.1 | 12.1392 | 일치
+CP-z-B | press_guard/README.md:153 | 이상 결합 잔차 z 중앙 B | 12.1 | 12.0973 | 일치
+PV-A | press_guard/README.md:152,168 | A 진동 정상 범위 × 위치 0~1 미탐 | 6/6 | 6/6 | 일치
+PV-B | press_guard/README.md:152,168 | B 진동 정상 범위 × 위치 0~1 미탐 | 6/6 | 6/6 | 일치
+FN-dA | press_guard/README.md:154 | fn_intensity dA | 0.407 | 0.407105 | 일치
+FN-lA | press_guard/README.md:154 | fn_intensity lA | 0.061 | 0.0612972 | 일치
+FN-hA | press_guard/README.md:154 | fn_intensity hA | 0.725 | 0.724689 | 일치
+FN-dB | press_guard/README.md:154 | fn_intensity dB | 0.799 | 0.798666 | 일치
+FN-lB | press_guard/README.md:154 | fn_intensity lB | 0.551 | 0.550864 | 일치
+FN-hB | press_guard/README.md:154 | fn_intensity hB | 1.023 | 1.02257 | 일치
+FN-q | press_guard/README.md:154 | fn_intensity q | 0.0146 | 0.0145664 | 일치
+FN-bon9 | press_guard/README.md:154 | fn_intensity bon9 | 0.0974 | 0.0974082 | 일치
+FN-bon18 | press_guard/README.md:154 | fn_intensity bon18 | 0.1948 | 0.194816 | 일치
+FN-boot | press_guard/README.md:154 | 재표집 횟수 | 4000 | 4000 | 일치
+FN-ntest | press_guard/README.md:154 | BH 검정 수(진폭·진동 SD까지) | 9·18 | 9·18 | 일치
+FP-load5 | press_guard/README.md:155; press_guard/README.md:175 | 5적합 합침 α5% 부하 | 17/154 | 17/154 | 일치
+FP-rest5 | press_guard/README.md:155; press_guard/README.md:175 | 저수준·짧은 기록 | 0/326 | 0/326 | 일치
+FP-or | press_guard/README.md:155 | MH OR | 9.96 | 9.96154 | 일치
+FP-cmh | press_guard/README.md:155; press_guard/README.md:175 | CMH p | 2.9e-6 | 2.88063e-06 | 일치
+FP-perm | press_guard/README.md:155 | 순열 p | 5.0e-5 | 4.99975e-05 | 일치
+FP-perm-floor | press_guard/README.md:155 | 순열 p 해상도 하한 1/(20000+1) | 5.0e-5 | 4.99975e-05 | 일치
+FP-within | press_guard/README.md:155 | 부하 안 진폭 ≥ 중앙 / 미만 | 12/77·5/77 | 12/77·5/77 | 일치
+FP-thr | press_guard/README.md:155 | 부하 안 진폭 중앙 | 203.6 | 203.557 | 일치
+FP-fisher | press_guard/README.md:155 | Fisher p | 0.060 | 0.0604549 | 일치
+FP-rho | press_guard/README.md:155 | Spearman ρ | 0.263 | 0.262675 | 일치
+FP-rhop | press_guard/README.md:155 | Spearman p | 0.001 | 0.00099783 | 일치
+FP-high1 | press_guard/README.md:175 | 고부하 α1% (나머지) | 2/46 (1/254) | 2/46 (1/254) | 일치
+FP-high5 | press_guard/README.md:175 | 고부하 α5% (나머지) | 10/46 (4/254) | 10/46 (4/254) | 일치
+FP-high5p | press_guard/README.md:175 | α5% 단측 p | 1.8e-6 | 1.80468e-06 | 일치
+FP-block | press_guard/README.md:175 | 480~539 블록 | 0/120 | 0/120 | 일치
+FP-state-load | press_guard/OPERATIONS.md:18 | 5적합 합침 α1% load | 3/154 | 3/154 | 일치
+FP-state-low | press_guard/OPERATIONS.md:18 | 5적합 합침 α1% low | 0/225 | 0/225 | 일치
+FP-state-short | press_guard/OPERATIONS.md:18 | 5적합 합침 α1% short | 0/101 | 0/101 | 일치
+FP-B-load | press_guard/README.md:156 | B α1% 부하·저수준 | 3/51(0/94) | 3/51(0/94) | 일치
+FP-rel | press_guard/README.md:157 | B 오경보 상대 기록 번호 | 3·41·150 | 3·41·150 | 일치
+EC-rows | press_guard/README.md:161,201 | 요약 행 수 | 12 | 12 | 일치
+EC-off08 | press_guard/README.md:170 | 기록 시작부터 오프셋 0.8 탐지 A·B(%) | 3.3·28.8 | 3.3·28.8 | 일치
+EC-gain | press_guard/README.md:171 | ×1.15 탐지 A·B(%) | 0·6.3 | 0·6.3 | 일치
+EC-gainQ | press_guard/README.md:171 | B 진폭 Q1·Q2 / Q4 | 0/56, 6/28 | 0/56, 6/28 | 일치
+EC-v2A | press_guard/README.md:172 | 진동 2σ Q1→Q4 A | 0.711 → 0.806 | 0.711 → 0.806 | 일치
+EC-v2B | press_guard/README.md:172 | 진동 2σ Q1→Q4 B | 0.939 → 0.992 | 0.939 → 0.992 | 일치
+EC-v2rho | press_guard/README.md:172 | Spearman A·B | 0.293·0.481 | 0.293·0.481 | 일치
+EC-v2all | press_guard/README.md:172 | 전체 A·B(%) | 72.3·95.0 | 72.3·95.0 | 일치
+EC-e1 | press_guard/README.md:172 | E1 진동 2σ A·B(%) | 74.4·93.9 | 74.4·93.9 | 일치
+EC-offQ4 | press_guard/README.md:173 | 오프셋 0.2 Q4 미탐 A·B | 13/19·20/28 | 13/19·20/28 | 일치
+EC-offB | press_guard/README.md:173 | B 탐지 Q1→Q4(ρ) | 20/28 → 8/28(−0.32) | 20/28 → 8/28(-0.32) | 일치
+EC-ai0 | press_guard/README.md:176 | AI0 단발 α5% 사건 / 경보 1행 | 15/17·13/17 | 15/17·13/17 | 일치
+EC-near | press_guard/README.md:177 | B 문턱 0.9배 이상 | 7/180 | 7/180 | 일치
+EC-nearrho | press_guard/README.md:177 | Spearman 진동 max|z|·전류 진폭·시간 | 0.61·0.50·-0.31 | 0.61·0.50·-0.31 | 일치
+EC-gain15 | press_guard/README.md:178 | ×1.5 A·B | 0/120·17/180 | 0/120·17/180 | 일치
+EC-mon13 | press_guard/README.md:178 | 감시 규칙 조치 시작 배율(B α1%) | 1.3 | 1.3 | 일치
+EC-coarse | press_guard/README.md:179 | coarse A·B (matched) | 0/120·5/180 (0·3) | 0/120·5/180 (0·3) | 일치
+Q-lines | press_guard/README.md:193 | 뒤처지는 조건의 파일 행 | 35,55,63,71,83,91,95,111,115 | 35,55,63,71,83,91,95,111,115 | 일치
+Q-enum | press_guard/README.md:193 | 본문 열거가 9개 조건을 모두 담는다 | (주장) | 본문에 없는 조건: B α0.03 cur_noise 0.1 1건; B α0.03 cur_offset 0.4 1건 | 불일치
+Q-max | press_guard/README.md:193 | 가장 큰 경우 B α5% 오프셋 | 12/111 | 12/111 | 일치
+Q-inc | press_guard/README.md:193 | 사건 단위 뒤처짐 조건·사건 | 2·2 | 2·2 | 일치
+Q-keys | press_guard/README.md:193 | 정렬 키 후보 수 | 4 | 4 | 일치
+OUT-14 | press_guard/README.md:200 | 모델 비교 모델 수 | 14 | 14 | 일치
+OUT-44 | press_guard/README.md:209 | expected 결과 CSV 수 | 44 | 44 | 일치
+OUT-audit | press_guard/README.md:218 | audit 검증 수 | 16 | 16 | 일치
+LIM-off | press_guard/README.md:241; press_guard/OPERATIONS.md:18; analysis/press_evidence/README.md:62 | |평균| > SD 정상·이상 | 0/530·9/17 | 0/530·9/17 | 일치
+LIM-dm | press_guard/README.md:241; analysis/press_evidence/README.md:72 | 평균 제거 경보 행 A·B | 556→555·569→567 | 556→555·569→567 | 일치
+LIM-272 | press_guard/README.md:241; analysis/press_evidence/README.md:75; analysis/press_rubric_review/cycle2/README.md:232 | +272 경보 기록 A·B | 114/120·179/180 | 114/120·179/180 | 일치
+LIM-81 | analysis/press_evidence/README.md:75; analysis/press_rubric_review/cycle2/README.md:232 | +81.4 경보 기록 A·B | 0/120·8/180 | 0/120·8/180 | 일치
+LIM-dmB | analysis/press_evidence/README.md:76 | 평균 제거 B 정상 경보 구간 | 3 → 4 | 3 → 4 | 일치
+LIM-dyn | analysis/press_evidence/README.md:75 | +272 경보 거의 모두 예측 오차 | (주장) | A 596/596, B 2576/2675 | 일치
+LIM-magcur | analysis/press_evidence/README.md:72 | 이상 파일 크기 경보 중 전류 최댓값 0행 | (주장) | A·B 0 | 일치
+LIM-j01 | press_guard/README.md:241; press_guard/OPERATIONS.md:14; analysis/press_evidence/README.md:286 | 0.1 ms 경보 기록 A·B(%) | 8·31 | 8·31 | 일치
+LIM-j02 | press_guard/OPERATIONS.md:14 | 0.2 ms A·B(%) | 71·90 | 71·90 | 일치
+LIM-lag2 | press_guard/README.md:241 | 이웃 기록 평균 상관(class_differences note) | 0.81 | 0.813 | 일치
+LIM-022 | press_guard/README.md:241; analysis/press_evidence/README.md:68 | 이상 적합 주파수 중앙(Hz) | 0.22 | 0.22 | 일치
+LIM-l2 | press_guard/README.md:243; press_guard/OPERATIONS.md:42 | 진동 2σ 2단계 A~B(%) | 38~79 | 38~79 | 일치
+OP-l1c | press_guard/OPERATIONS.md:42 | 전류 잡음 0.1σ 1단계 A·B(%) | 97·97 | 97·97 | 일치
+OP-l2c | press_guard/OPERATIONS.md:42 | 전류 잡음 0.1σ 2단계 A~B(%) | 90~93 | 90~93 | 일치
+OP-l1v | press_guard/OPERATIONS.md:42 | 진동 2σ 1단계 A~B(%) | 77~95 | 77~95 | 일치
+LIM-e2 | press_guard/README.md:246; analysis/press_evidence/README.md:284 | E2 현지 기준 AUROC 범위 | 0.43~0.55 | 0.43~0.55 | 일치
+OP-k3-a | press_guard/OPERATIONS.md:43 | 3건/교대 α(%) | 0.08 | 0.083819% | 일치
+OP-k3-n | press_guard/OPERATIONS.md:43 | 보정 단위(약) | 1,200 | 1200 | 일치
+OP-k3-h | press_guard/OPERATIONS.md:43 | 정상 수집 시간 | 2.7 | 2.66656 | 일치
+OP-447 | press_guard/OPERATIONS.md:14 | 경과 1시간당 단위 | 447 | 447.473 | 일치
+OP-23 | press_guard/OPERATIONS.md:14 | 174단위의 경과(분) | 23 | 23.331 | 일치
+OP-61 | press_guard/OPERATIONS.md:14 | 기록 0~479(480단위)의 실제 경과(분) | 61 | 60.7614 | 일치 | 대회 밀도 447단위/시로 환산하면 480/447.5×60 = 64.4분
+OP-e3 | press_guard/OPERATIONS.md:14 | E3 곡선에 학습 15·보정 99(α1%) 조건이 있다 | (주장) | 있음 | 일치
+R4-AI0 진동 SD-n | analysis/press_evidence/README.md:58 | AI0 진동 SD 정상 | 0.071 | 0.0706 | 일치
+R4-AI0 진동 SD-a | analysis/press_evidence/README.md:58 | AI0 진동 SD 이상 | 0.448 | 0.4479 | 일치
+R4-AI1 진동 SD-n | analysis/press_evidence/README.md:58 | AI1 진동 SD 정상 | 0.119 | 0.1189 | 일치
+R4-AI1 진동 SD-a | analysis/press_evidence/README.md:58 | AI1 진동 SD 이상 | 0.241 | 0.2412 | 일치
+R4-ratio0 | analysis/press_evidence/README.md:58; analysis/press_evidence/README.md:383 | AI0 SD 배율 | 6.3 | 6.34419 | 일치
+R4-ratio1 | analysis/press_evidence/README.md:58 | AI1 SD 배율 | 2.0 | 2.0286 | 일치
+R4-corr | analysis/press_evidence/README.md:60 | 상·하부 상관 정상·이상 | 0.37·-0.38 | 0.37·-0.38 | 일치
+R4-mean | analysis/press_evidence/README.md:61 | 전류 구간 평균 중앙값 | 0.6·22.9 | 0.6·22.9 | 일치
+R4-r2 | analysis/press_evidence/README.md:63 | R² 중앙 정상·이상 | 0.996·0.451 | 0.996·0.451 | 일치
+R4-grid | analysis/press_evidence/README.md:57 | 격자 일치율 정상(%) | 0.18 | 0.175% | 일치
+R4-50 | analysis/press_evidence/README.md:69 | 50행 치우친 기록 평균·SD | 155·232, 127·111 | 155·232, 127·111 | 일치
+R4-57 | analysis/press_evidence/README.md:68 | 0.22 Hz 사인 17행에서 |평균|>SD인 위상 비율(%) | 57 | 57.135% | 일치
+R4-24 | analysis/press_evidence/README.md:78 | R² 0.451에 해당하는 60 Hz 흔들림 RMS(ms, R²≈exp(-(2πfσ)²)) | 2.4 | 2.36703 | 일치
+J-none-A-1 | analysis/press_evidence/README.md:371-378 | 흔들림 none A 경보 기록(%) | 0 | 0% | 일치
+J-none-A-2 | analysis/press_evidence/README.md:371-378 | 흔들림 none A 경보 2행 이상(%) | 0 | 0% | 일치
+J-none-B-1 | analysis/press_evidence/README.md:371-378 | 흔들림 none B 경보 기록(%) | 2.1 | 2.06897% | 일치
+J-none-B-2 | analysis/press_evidence/README.md:371-378 | 흔들림 none B 경보 2행 이상(%) | 0 | 0% | 일치
+J-0.05-A-1 | analysis/press_evidence/README.md:371-378 | 흔들림 0.05 A 경보 기록(%) | 0 | 0% | 일치
+J-0.05-A-2 | analysis/press_evidence/README.md:371-378 | 흔들림 0.05 A 경보 2행 이상(%) | 0 | 0% | 일치
+J-0.05-B-1 | analysis/press_evidence/README.md:371-378 | 흔들림 0.05 B 경보 기록(%) | 3.7 | 3.72414% | 일치
+J-0.05-B-2 | analysis/press_evidence/README.md:371-378 | 흔들림 0.05 B 경보 2행 이상(%) | 0.6 | 0.551724% | 일치
+J-0.1-A-1 | analysis/press_evidence/README.md:371-378 | 흔들림 0.1 A 경보 기록(%) | 7.7 | 7.70833% | 일치
+J-0.1-A-2 | analysis/press_evidence/README.md:371-378 | 흔들림 0.1 A 경보 2행 이상(%) | 1.3 | 1.25% | 일치
+J-0.1-B-1 | analysis/press_evidence/README.md:371-378 | 흔들림 0.1 B 경보 기록(%) | 31.3 | 31.3103% | 일치
+J-0.1-B-2 | analysis/press_evidence/README.md:371-378 | 흔들림 0.1 B 경보 2행 이상(%) | 8.3 | 8.27586% | 일치
+J-0.2-A-1 | analysis/press_evidence/README.md:371-378 | 흔들림 0.2 A 경보 기록(%) | 71.0 | 71.0417% | 일치
+J-0.2-A-2 | analysis/press_evidence/README.md:371-378 | 흔들림 0.2 A 경보 2행 이상(%) | 48.5 | 48.5417% | 일치
+J-0.2-B-1 | analysis/press_evidence/README.md:371-378 | 흔들림 0.2 B 경보 기록(%) | 89.5 | 89.5172% | 일치
+J-0.2-B-2 | analysis/press_evidence/README.md:371-378 | 흔들림 0.2 B 경보 2행 이상(%) | 73.1 | 73.1034% | 일치
+J-0.5-A-1 | analysis/press_evidence/README.md:371-378 | 흔들림 0.5 A 경보 기록(%) | 100 | 100% | 일치
+J-0.5-A-2 | analysis/press_evidence/README.md:371-378 | 흔들림 0.5 A 경보 2행 이상(%) | 99.8 | 99.7917% | 일치
+J-0.5-B-1 | analysis/press_evidence/README.md:371-378 | 흔들림 0.5 B 경보 기록(%) | 100 | 100% | 일치
+J-0.5-B-2 | analysis/press_evidence/README.md:371-378 | 흔들림 0.5 B 경보 2행 이상(%) | 100 | 100% | 일치
+J-2.4-A-1 | analysis/press_evidence/README.md:371-378 | 흔들림 2.4 A 경보 기록(%) | 100 | 100% | 일치
+J-2.4-A-2 | analysis/press_evidence/README.md:371-378 | 흔들림 2.4 A 경보 2행 이상(%) | 100 | 100% | 일치
+J-2.4-B-1 | analysis/press_evidence/README.md:371-378 | 흔들림 2.4 B 경보 기록(%) | 100 | 100% | 일치
+J-2.4-B-2 | analysis/press_evidence/README.md:371-378 | 흔들림 2.4 B 경보 2행 이상(%) | 100 | 100% | 일치
+J-50.6-A-1 | analysis/press_evidence/README.md:371-378 | 흔들림 50.6 A 경보 기록(%) | 51.5 | 51.4583% | 일치
+J-50.6-A-2 | analysis/press_evidence/README.md:371-378 | 흔들림 50.6 A 경보 2행 이상(%) | 24.8 | 24.7917% | 일치
+J-50.6-B-1 | analysis/press_evidence/README.md:371-378 | 흔들림 50.6 B 경보 기록(%) | 76.6 | 76.5517% | 일치
+J-50.6-B-2 | analysis/press_evidence/README.md:371-378 | 흔들림 50.6 B 경보 2행 이상(%) | 54.3 | 54.3448% | 일치
+J-0.6-A-1 | analysis/press_evidence/README.md:371-378 | 흔들림 0.6 A 경보 기록(%) | 0 | 0% | 일치
+J-0.6-A-2 | analysis/press_evidence/README.md:371-378 | 흔들림 0.6 A 경보 2행 이상(%) | 0 | 0% | 일치
+J-0.6-B-1 | analysis/press_evidence/README.md:371-378 | 흔들림 0.6 B 경보 기록(%) | 2.3 | 2.34483% | 일치
+J-0.6-B-2 | analysis/press_evidence/README.md:371-378 | 흔들림 0.6 B 경보 2행 이상(%) | 0 | 0% | 일치
+J-none-A-r2 | analysis/press_evidence/README.md:371-378 | 흔들림 none A R² 중앙 | 0.995 | 0.995159 | 일치
+J-none-A-fr | analysis/press_evidence/README.md:371-378 | 흔들림 none A 0.6±0.05 Hz 안(%) | 100 | 100% | 일치
+J-none-B-r2 | analysis/press_evidence/README.md:371-378 | 흔들림 none B R² 중앙 | 0.995 | 0.995268 | 일치
+J-none-B-fr | analysis/press_evidence/README.md:371-378 | 흔들림 none B 0.6±0.05 Hz 안(%) | 100 | 100% | 일치
+J-0.05-A-r2 | analysis/press_evidence/README.md:371-378 | 흔들림 0.05 A R² 중앙 | 0.995 | 0.994845 | 일치
+J-0.05-A-fr | analysis/press_evidence/README.md:371-378 | 흔들림 0.05 A 0.6±0.05 Hz 안(%) | 100 | 100% | 일치
+J-0.05-B-r2 | analysis/press_evidence/README.md:371-378 | 흔들림 0.05 B R² 중앙 | 0.995 | 0.995092 | 일치
+J-0.05-B-fr | analysis/press_evidence/README.md:371-378 | 흔들림 0.05 B 0.6±0.05 Hz 안(%) | 100 | 100% | 일치
+J-0.1-A-r2 | analysis/press_evidence/README.md:371-378 | 흔들림 0.1 A R² 중앙 | 0.994 | 0.993984 | 일치
+J-0.1-A-fr | analysis/press_evidence/README.md:371-378 | 흔들림 0.1 A 0.6±0.05 Hz 안(%) | 100 | 100% | 일치
+J-0.1-B-r2 | analysis/press_evidence/README.md:371-378 | 흔들림 0.1 B R² 중앙 | 0.994 | 0.994365 | 일치
+J-0.1-B-fr | analysis/press_evidence/README.md:371-378 | 흔들림 0.1 B 0.6±0.05 Hz 안(%) | 100 | 100% | 일치
+J-0.2-A-r2 | analysis/press_evidence/README.md:371-378 | 흔들림 0.2 A R² 중앙 | 0.990 | 0.99033 | 일치
+J-0.2-A-fr | analysis/press_evidence/README.md:371-378 | 흔들림 0.2 A 0.6±0.05 Hz 안(%) | 100 | 100% | 일치
+J-0.2-B-r2 | analysis/press_evidence/README.md:371-378 | 흔들림 0.2 B R² 중앙 | 0.991 | 0.990789 | 일치
+J-0.2-B-fr | analysis/press_evidence/README.md:371-378 | 흔들림 0.2 B 0.6±0.05 Hz 안(%) | 100 | 100% | 일치
+J-0.5-A-r2 | analysis/press_evidence/README.md:371-378 | 흔들림 0.5 A R² 중앙 | 0.964 | 0.964025 | 일치
+J-0.5-A-fr | analysis/press_evidence/README.md:371-378 | 흔들림 0.5 A 0.6±0.05 Hz 안(%) | 100 | 100% | 일치
+J-0.5-B-r2 | analysis/press_evidence/README.md:371-378 | 흔들림 0.5 B R² 중앙 | 0.965 | 0.964814 | 일치
+J-0.5-B-fr | analysis/press_evidence/README.md:371-378 | 흔들림 0.5 B 0.6±0.05 Hz 안(%) | 99.7 | 99.7241% | 일치
+J-2.4-A-r2 | analysis/press_evidence/README.md:371-378 | 흔들림 2.4 A R² 중앙 | 0.480 | 0.479897 | 일치
+J-2.4-A-fr | analysis/press_evidence/README.md:371-378 | 흔들림 2.4 A 0.6±0.05 Hz 안(%) | 83.1 | 83.125% | 일치
+J-2.4-B-r2 | analysis/press_evidence/README.md:371-378 | 흔들림 2.4 B R² 중앙 | 0.472 | 0.472127 | 일치
+J-2.4-B-fr | analysis/press_evidence/README.md:371-378 | 흔들림 2.4 B 0.6±0.05 Hz 안(%) | 80.8 | 80.8276% | 일치
+J-50.6-A-r2 | analysis/press_evidence/README.md:371-378 | 흔들림 50.6 A R² 중앙 | 0.992 | 0.991831 | 일치
+J-50.6-A-fr | analysis/press_evidence/README.md:371-378 | 흔들림 50.6 A 0.6±0.05 Hz 안(%) | 100 | 100% | 일치
+J-50.6-B-r2 | analysis/press_evidence/README.md:371-378 | 흔들림 50.6 B R² 중앙 | 0.992 | 0.992305 | 일치
+J-50.6-B-fr | analysis/press_evidence/README.md:371-378 | 흔들림 50.6 B 0.6±0.05 Hz 안(%) | 100 | 100% | 일치
+J-0.6-A-r2 | analysis/press_evidence/README.md:371-378 | 흔들림 0.6 A R² 중앙 | 0.995 | 0.99506 | 일치
+J-0.6-A-fr | analysis/press_evidence/README.md:371-378 | 흔들림 0.6 A 0.6±0.05 Hz 안(%) | 100 | 100% | 일치
+J-0.6-B-r2 | analysis/press_evidence/README.md:371-378 | 흔들림 0.6 B R² 중앙 | 0.995 | 0.995232 | 일치
+J-0.6-B-fr | analysis/press_evidence/README.md:371-378 | 흔들림 0.6 B 0.6±0.05 Hz 안(%) | 100 | 100% | 일치
+J-8183 | analysis/press_evidence/README.md:381; analysis/press_rubric_review/cycle2/README.md:231 | 2.4 ms에서 0.6 Hz 유지 비율 범위(%) | 81~83 | 81~83 | 일치
+J-n | analysis/press_evidence/README.md:366 | 평가 기록 수 A·B | 96·145 | 96·145 | 일치
+FMT-FM1 | analysis/press_evidence/README.md:281-285 | 고장 모드 표 FM1 대리 주입 탐지율 | (주장) | 74%·94%·100%·100% | 일치
+FMT-FM2 | analysis/press_evidence/README.md:281-285 | 고장 모드 표 FM2 대리 주입 탐지율 | (주장) | 95%·97% | 일치
+FMT-FM4a | analysis/press_evidence/README.md:281-285 | 고장 모드 표 FM4a 대리 주입 탐지율 | (주장) | 100%·100%·3%·29%·0%·6% | 일치
+FMT-FM5 | analysis/press_evidence/README.md:281-285 | 고장 모드 표 FM5 대리 주입 탐지율 | (주장) | 95%·97%·72%·83% | 일치
+FM-18 | analysis/press_evidence/README.md:281,383 | 이상 구간 중 진동 q99 초과 | 18/21 | 18/21 | 일치
+S5-A-auc | analysis/press_selection/README.md:186-187 | §5 A auc | 0.978 | 0.977569 | 일치
+S5-A-ap | analysis/press_selection/README.md:186-187 | §5 A ap | 0.970 | 0.970475 | 일치
+S5-A-f1 | analysis/press_selection/README.md:186-187 | §5 A f1 | 0.962 | 0.961938 | 일치
+S5-A-oracle | analysis/press_selection/README.md:186-187 | §5 A oracle | 0.973 | 0.972696 | 일치
+S5-A-recf1 | analysis/press_selection/README.md:186-187 | §5 A recf1 | 1.000 | 1 | 일치
+S5-A-v1auc | analysis/press_selection/README.md:186-187 | §5 A v1auc | 0.939 | 0.939228 | 일치
+S5-A-v1ap | analysis/press_selection/README.md:186-187 | §5 A v1ap | 0.913 | 0.912597 | 일치
+S5-A-recf1eq | analysis/press_selection/README.md:184-187 | §5 A 기록구간 F1 v1 = v2 | (주장) | 1.0000 vs 1.0000 | 일치
+S5-A-recauc | analysis/press_selection/README.md:189 | §5 A 기록구간 AUROC v1·v2 모두 1.0 | (주장) | 1.0, 1.0 | 일치
+S5-B-auc | analysis/press_selection/README.md:186-187 | §5 B auc | 0.976 | 0.975945 | 일치
+S5-B-ap | analysis/press_selection/README.md:186-187 | §5 B ap | 0.966 | 0.965908 | 일치
+S5-B-f1 | analysis/press_selection/README.md:186-187 | §5 B f1 | 0.971 | 0.97099 | 일치
+S5-B-oracle | analysis/press_selection/README.md:186-187 | §5 B oracle | 0.971 | 0.97099 | 일치
+S5-B-recf1 | analysis/press_selection/README.md:186-187 | §5 B recf1 | 0.933 | 0.933333 | 일치
+S5-B-v1auc | analysis/press_selection/README.md:186-187 | §5 B v1auc | 0.934 | 0.934191 | 일치
+S5-B-v1ap | analysis/press_selection/README.md:186-187 | §5 B v1ap | 0.902 | 0.901612 | 일치
+S5-B-recf1eq | analysis/press_selection/README.md:184-187 | §5 B 기록구간 F1 v1 = v2 | (주장) | 0.9333 vs 0.9333 | 일치
+S5-B-recauc | analysis/press_selection/README.md:189 | §5 B 기록구간 AUROC v1·v2 모두 1.0 | (주장) | 1.0, 1.0 | 일치
+S5-sup-A | analysis/press_selection/README.md:191 | §5 지도학습(창+v2 성분) F1 범위 A | 0.915~0.973 | 0.915~0.973 | 일치 | unified_comparison.csv 값 [0.972603, 0.915009]
+S5-sup-B | analysis/press_selection/README.md:191 | §5 지도학습(창+v2 성분) F1 범위 B | 0.972~0.974 | 0.973~0.973 | 불일치(계산 0.973~0.973) | unified_comparison.csv 값 [0.972603, 0.973482]
+SUP-B-hgb | analysis/press_supervised/README.md:32 | 지도학습 B 창+v2 부스팅 F1 (미탐/정상 알림) | 0.974 (30 / 0) | 0.973 (31 / 0) | 불일치(계산 0.973 (31 / 0))
+SUP-B-log | analysis/press_supervised/README.md:33 | 지도학습 B 창+v2 로지스틱 F1 (미탐/정상 알림) | 0.972 (32 / 1) | 0.973 (32 / 0) | 불일치(계산 0.973 (32 / 0))
+SUP-all | analysis/press_supervised/README.md:64 | 창+v2 지도학습 F1 범위(클래스 가중 포함, 두 분할) | 0.830~0.974 | 0.830~0.973 | 불일치(계산 0.830~0.973)
+SUP-oracle | analysis/press_supervised/README.md:40 | 사후 최적 문턱 창+v2 지도학습 F1 범위 | 0.970~0.975 | 0.970~0.976 | 불일치(계산 0.970~0.976)
+SEL-65 | press_guard/README.md:44; analysis/press_selection/README.md:164 | 탐색 장부 규칙 수(선정 전·후) | 65(55·10) | 65(55·10) | 일치
+SEL-21 | press_guard/README.md:44; analysis/press_selection/README.md:167 | 중첩 선택 v2 선택 횟수 | 21/21 | 21/21 | 일치
+SEL-fn | analysis/press_selection/README.md:167 | 중첩 선택 뺀 기록 미탐 A·B | 44·31 | 44·31 | 일치
+R4-ar2 | analysis/press_evidence/README.md:74 | AR(2) 수준 이동 이득 1−φ1−φ2 (A) | 0.14 | 0.141779 | 일치
+OP-174 | press_guard/OPERATIONS.md:14 | α1% 최소 단위(학습·보정·수락) | 174(15·99·60) | 174(15·99·60) | 일치
+J-506-A | press_guard/README.md:241 | '앨리어싱 가설 아래' 0.1 ms 수치(8%·31%)가 주파수 조건 없이 성립(50.6 Hz 가설과 비교, A). OPERATIONS:14는 '상용 전원 대역'(=60.6 Hz 행)으로 조건을 적어 해당 없음 | (주장) | 50.6 Hz 0.1 ms 2.5% vs 60.6 Hz 7.7% | 불일치
+J-506-B | press_guard/README.md:241 | '앨리어싱 가설 아래' 0.1 ms 수치(8%·31%)가 주파수 조건 없이 성립(50.6 Hz 가설과 비교, B). OPERATIONS:14는 '상용 전원 대역'(=60.6 Hz 행)으로 조건을 적어 해당 없음 | (주장) | 50.6 Hz 0.1 ms 17.5% vs 60.6 Hz 31.3% | 불일치
+
+# 판정별 건수
+일치: 428
+불일치: 6
+불일치(계산 0~1): 1
+불일치(계산 0.0021): 1
+불일치(계산 0.973~0.973): 1
+불일치(계산 0.973 (31 / 0)): 1
+불일치(계산 0.973 (32 / 0)): 1
+불일치(계산 0.830~0.973): 1
+불일치(계산 0.970~0.976): 1
+합계: 441

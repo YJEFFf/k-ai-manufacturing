@@ -1,8 +1,8 @@
 {
   "experiment": "E1",
   "protocol": "press-supplement-v1",
-  "run_id": "5503bc3027324689ab4047d8043bed13",
-  "created": "2026-09-29T05:59:17+0900",
+  "run_id": "9d1cb6c49c3d4590bb8d2b105a2f3a15",
+  "created": "2026-09-29T08:13:04+0900",
   "config": {
     "noise_seeds": [
       20260926,
@@ -27,7 +27,7 @@
     "analysis/press_supplement/common.py": "3cc480e147ba5e1b48c417a8cec104453093d761aabc943d8df2e23d60a7a08a",
     "analysis/press_supplement/contract.py": "f8b722ca1c867580d3e5e28c62cf113f06b2fb5b0134e0b3a7ba3843dd4ca486",
     "analysis/press_supplement/protocol.json": "4c6bf75677b7f9a43b7faf9c7869d7ad5b6511a8ae1eb26ff0370ec6693ade81",
-    "press_guard/model.py": "3ea9706175e85163c2bb3dff33eac8aebbbed6183b7d425f4489f99ae897023d",
+    "press_guard/model.py": "647e4fb519cd7343d4002b56abdb3459f61d391d64071d3457fdb2834a000496",
     "press_guard/train.py": "498b2bd681729595965ee0bf938106eb313c7ee14a19a4e962fb8cbce55e0449",
     "analysis/press_supplement/fault_injection.py": "d6fb178bd6fc3ff15f3103d2e63f90b5fddc10c2b0061064ab8995d4d31cb531",
     "press_submission/press/* (code_sha256)": "b372a18b66af93347e1aa410e472cbae7a15b534b75d28e132adb09cec79118e"
@@ -82,5 +82,5 @@
       }
     ]
   },
-  "elapsed_s": 404.3
+  "elapsed_s": 403.3
 }

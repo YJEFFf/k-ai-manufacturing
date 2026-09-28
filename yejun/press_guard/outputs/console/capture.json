@@ -7,7 +7,7 @@
         1600,
         1500
       ],
-      "sha256": "9ff4ca480d6376dedcbd57f0308fbdfe00f580f9852b822b47b90ed5365e6ee4"
+      "sha256": "86a0425de98a74e12faba0b8eee68c58c0ec4c6d83c8f3527a09486c6b2c72c9"
     },
     "console_evidence_v2.png": {
       "url": "/?split=B&alpha=0.01&tab=evidence",
@@ -20,10 +20,10 @@
   },
   "web_code_sha256": {
     "index.html": "a50128f16628f3d8dd13660ecb96e65324360f17bbfa1f0a4c5243d290a6206b",
-    "app.js": "f1f942fa9353ceb35229f64ebb88f211fd9f234dd1c7ae6c2b7d45bc7eb170c0",
+    "app.js": "941430d6c6304148ef8d2dbbca01b946b916495fd77e227b6c90a329e8d83302",
     "style.css": "271dabddc6fa88a463fb2a3f73f726ffa56de6fa4f983cf0e97edbf5eb6d1012"
   },
   "serve_sha256": "d93182ae913498e0cd31229f0408b62052b47480f872a982dff1e7181b5a40b6",
-  "model_sha256": "3ea9706175e85163c2bb3dff33eac8aebbbed6183b7d425f4489f99ae897023d",
+  "model_sha256": "647e4fb519cd7343d4002b56abdb3459f61d391d64071d3457fdb2834a000496",
   "note": "그림은 글꼴·브라우저 판에 따라 달라져 verify 동결 대상이 아니다"
 }
