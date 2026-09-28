@@ -1,8 +1,8 @@
 {
   "experiment": "E3",
   "protocol": "press-supplement-v1",
-  "run_id": "509bfbfe5ac046b0987089953314db7a",
-  "created": "2026-09-29T03:38:51+0900",
+  "run_id": "c934b3d269924c39a8fce9217b68e032",
+  "created": "2026-09-29T06:03:13+0900",
   "config": {
     "configs": 184,
     "workers": 4,
@@ -36,7 +36,7 @@
     "analysis/press_supplement/common.py": "3cc480e147ba5e1b48c417a8cec104453093d761aabc943d8df2e23d60a7a08a",
     "analysis/press_supplement/contract.py": "f8b722ca1c867580d3e5e28c62cf113f06b2fb5b0134e0b3a7ba3843dd4ca486",
     "analysis/press_supplement/protocol.json": "4c6bf75677b7f9a43b7faf9c7869d7ad5b6511a8ae1eb26ff0370ec6693ade81",
-    "press_guard/model.py": "89d6ce4a721fbc34ce3baafa4fc056c20cea42ed737d7a9deeeb58ebc6d5af9e",
+    "press_guard/model.py": "3ea9706175e85163c2bb3dff33eac8aebbbed6183b7d425f4489f99ae897023d",
     "press_guard/train.py": "498b2bd681729595965ee0bf938106eb313c7ee14a19a4e962fb8cbce55e0449",
     "analysis/press_supplement/recalibration.py": "266fdbcbf2b25a012e6654dc95d1ff4d9ba5f3781bd13f8c345f2349bc9aaf8a",
     "press_submission/press/* (code_sha256)": "b372a18b66af93347e1aa410e472cbae7a15b534b75d28e132adb09cec79118e"
@@ -88,5 +88,5 @@
       }
     ]
   },
-  "elapsed_s": 200.8
+  "elapsed_s": 176.0
 }

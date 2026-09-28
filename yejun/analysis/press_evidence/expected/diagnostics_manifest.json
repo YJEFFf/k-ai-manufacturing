@@ -9,11 +9,11 @@
     "guard_B.json": "b64ac3b30bc697034104287964f3154e88c8a50749ccdec04f6d4f8744fd6969"
   },
   "code_sha256": {
-    "yejun/analysis/press_evidence/build_diagnostics.py": "afb1860dcc85d3790f1d3cb1b6d5fe8ca922182c6104e35017c26a1f99995886",
+    "yejun/analysis/press_evidence/build_diagnostics.py": "1755f90514ab137326ee7f4d2cbd08ac79c729fa886d6d4ee78376349a32e6b5",
     "yejun/analysis/press_evidence/figures.py": "23d94f96019af64612c3bcaed9fbc20cb20358adc3cc8cb2d94674d7c837d3e1",
-    "yejun/analysis/press_evidence/build_tables.py": "2952b498504a76d0929ce2e25c4d6953ee2b1c5204b14d09e4564a4cb34327a8",
-    "yejun/analysis/press_evidence/diagnostic_probes.py": "620f1e2c1dde23cc4ce5d03a7ccf30c4033b2af52d48039c597b32152a39fcf6",
-    "yejun/press_guard/model.py": "89d6ce4a721fbc34ce3baafa4fc056c20cea42ed737d7a9deeeb58ebc6d5af9e",
+    "yejun/analysis/press_evidence/build_tables.py": "c8e0689046757f50b71bc98974df9ec336371a563ca2275628baa1b8156cd328",
+    "yejun/analysis/press_evidence/diagnostic_probes.py": "9b26c1fb1d7ea66996ded168fd0846da60416c4769e045f77841593787809d80",
+    "yejun/press_guard/model.py": "3ea9706175e85163c2bb3dff33eac8aebbbed6183b7d425f4489f99ae897023d",
     "yejun/press_submission/press/diagnosis.py": "f7ecb071d7c9c9b25c670bcb6052f8201ca2e03e991b57f9fe13fec6346cf499",
     "yejun/press_submission/press/data.py": "81dc394c8b0b53618177e5822c7cc0f7ff7c7f060d08471c968b4cfaaa05411f"
   },
@@ -35,11 +35,13 @@
     "yejun/analysis/press_evidence/quality_index.csv": "2c09f0c14471692026ac9909d73fddf7076ac0e317dea11b8f7576976078fe91",
     "yejun/analysis/press_evidence/block_context.csv": "5e780a19fa57170ebb234f64c67fb469de436cb1e73095ee5933a066d5cbd154",
     "yejun/analysis/press_evidence/current_grid.csv": "de3ded79e0da43e754b9e2c05aa084f679193d58ff161b3a3877216b27a26f28",
-    "yejun/analysis/press_evidence/class_differences.csv": "7305ce3ca6e576bea7079bfd8a4deb8a611e65c3021e5c54e4c2486435ce05c1"
+    "yejun/analysis/press_evidence/class_differences.csv": "5f764c21d473bcb270916c1eac97dd92c1fa83a32e9b587890276d91d1a8e19c"
   },
   "cited": {
     "yejun/analysis/press_evidence/ar2_oscillator.csv": "d4e10ac087b2f5026e9062d7d030f73c6022f1298df1a50a75ff3eb7edfda2bc",
     "yejun/analysis/press_evidence/calibration_curve.csv": "741576f1e6c724e17c5c3abca29954e3e66bef2943e192b0911a83b8071e824c",
+    "yejun/analysis/press_evidence/class_differences.csv": "5f764c21d473bcb270916c1eac97dd92c1fa83a32e9b587890276d91d1a8e19c",
+    "yejun/analysis/press_evidence/current_offset.csv": "14124cad48bd704e31f22eeccc422766ecbdc1074937c7a637b73d24cb2c9f7a",
     "yejun/analysis/press_evidence/duplicate_rows.csv": "b00c711beb3262b67f6345b8426bb4f64f75103fbc3ba211d57baee82ca03a9d",
     "yejun/analysis/press_evidence/gaps.csv": "b19fbc020a5576e9919cd5b2c7ba8fc4d0aba0e1aca4d035bc1505458d73df82",
     "yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv": "186a5d41bcec397efbb30ff0eb2b8717e0cc1d5ab6a0ec19c861db7bb7f68771",
@@ -50,6 +52,7 @@
     "yejun/analysis/press_evidence/outlier_rules.csv": "b287d22b9ec8ed75c5280b89c0f940a39ebaf7b418c78576698c751d523c413f",
     "yejun/analysis/press_evidence/outliers.csv": "704fb6abb05fb56e34ef97c1e68ce872d08ded3220076c3974ec815599711e0c",
     "yejun/analysis/press_evidence/rolling_calibration_curve.csv": "b7581b4c800658685e8ec702e86e56f01779d92b5b42c66fd7adb53d8ca1956b",
+    "yejun/analysis/press_evidence/sampling_jitter_stress.csv": "d68f753303f44305bab817c3068cb44ac6ac75239265de08e3de5c416853cd4c",
     "yejun/analysis/press_evidence/segment_rule_tolerance.csv": "bb37d8d96c62cae9f0dc2ee35f33bfa763c766c5113e86d69e9a54b995698e9d",
     "yejun/analysis/press_evidence/split_state_composition.csv": "702f4b7da8c4504abaad46b14251d857ba1372725edd0fac83d73d5ce3694cbd",
     "yejun/analysis/press_evidence/state_transition_stress.csv": "7a788e5150112f30c5f5c01296e2c4033d540b0be20589b6554b1fb6f05c96a3",
@@ -60,11 +63,11 @@
     "yejun/analysis/press_supplement/e1_summary.csv": "bbf0f95deefaead1a35e68324eac600907bf80eb5005d40f519bf5e23a20b7b9",
     "yejun/analysis/press_supplement/e2_uci_metrics.csv": "9182c3046dbe0d43527b3ff1138944ac98a540529de37ef2d7ae4793887f6534",
     "yejun/analysis/press_supplement/e3_stability.csv": "4447e30b858fc32df317a565ebc86720e7759e802a3a9960f0c27e9c5005762c",
-    "yejun/press_guard/model.py": "89d6ce4a721fbc34ce3baafa4fc056c20cea42ed737d7a9deeeb58ebc6d5af9e",
+    "yejun/press_guard/model.py": "3ea9706175e85163c2bb3dff33eac8aebbbed6183b7d425f4489f99ae897023d",
     "yejun/press_guard/outputs/ablation_v2.csv": "1a5b97c9a88ad908eed89ae91e673cea9275405498e2c63264c838cf60c3fbe0",
     "yejun/press_guard/outputs/coupling_fit_v2.csv": "bc6786eb5d87b22bbc989430cf859dba4238d1629d82bae18d3ed8d2c297df70",
     "yejun/press_guard/outputs/uncertainty_v2.csv": "c10df72d1662caf044679acbe88c65c1384ba8c68b8d36188926f40ff07aec72",
-    "yejun/press_guard/test_guard.py": "f5b8a0bdf415cb546d207352cdf5ca3fa5079f319571f3402c09c6c615b7cffd",
+    "yejun/press_guard/test_guard.py": "e172a108abce80b9bf15631728782821c3b01280a72bbeadd0c381bcf5fd0334",
     "yejun/press_submission/README.md": "f60289d1ed2b8b12ede580442d416dc5f7755a268cfedb6685a1ff752c237aca",
     "yejun/press_submission/outputs/diagnosis.md": "a5f675ae7a993a792f2aef0de57feb8536cdb2fd7ea177c061ffbf165db29e0d",
     "yejun/press_submission/outputs/label_bypass.csv": "0dc378785b250b2d213cd0f17b5bd2543c7cea2afff29e1434d4d418c5249144",
@@ -113,6 +116,7 @@
     "vibration_tones.csv": "de16d47406726addb7441c2e94758c4e959bd9d04f95b1a3aca43aa340846351",
     "observability.csv": "f37d8cfcfc9bd75ffd0a992322a708ca002c8925312c9d615a93c8b63743bfa6",
     "state_transition_stress.csv": "7a788e5150112f30c5f5c01296e2c4033d540b0be20589b6554b1fb6f05c96a3",
+    "sampling_jitter_stress.csv": "d68f753303f44305bab817c3068cb44ac6ac75239265de08e3de5c416853cd4c",
     "production_unit_evidence.csv": "89b67af59bd2e8f6107a6e6f6b74ff502539805c943e7dcbb5a232f4c06c61c0",
     "abnormal_segments.csv": "b19eedfd8d07b2523221466e1e28ae1e18a44686bca2d2c28fc11f8ea67c0b42",
     "abnormal_summary.csv": "81b2464b8fb5ec745b491c562eca47d619b09d910ce7afd4a20b1fcf1bd58003",
@@ -124,8 +128,8 @@
     "phase_continuity.csv": "51d4f832068c689d4f2a56e4bdb3cfaf8892c165c4af48f976fef23010651503",
     "guidebook_protocol_vs_records.csv": "186a5d41bcec397efbb30ff0eb2b8717e0cc1d5ab6a0ec19c861db7bb7f68771",
     "variable_expected_signals.csv": "c8774f36b86d4ee0a7931a1b447a17d46686a49e282809ab1233220c14bed8f6",
-    "failure_mode_map.csv": "be367c8be6aef2a6d4c9407db431d7c70bef6de699bb9f177e3eb1e6a844c0c7",
-    "decision_table_diagnosis_v2.csv": "8612b34e7ca22c0ee1c1b6d2d715528fc9eaf5d939d9124ffab2e0b62a88494a",
+    "failure_mode_map.csv": "e5cf3cd271698095b7132c30a3ccd1681e950765e719b228ad909102f4a72d37",
+    "decision_table_diagnosis_v2.csv": "7c28cd0bd2b811418c1b0167728a47712fc22777c8a066dcba3dddcc1e718de6",
     "yejun/analysis/press_evidence/figures/fig_d2a_timeline.png": "a36cb458e0cb02734db3721db603eb8c3b1dc6994b7bef81bb00dfa33f6a3e4b",
     "yejun/analysis/press_evidence/figures/fig_d2b_blocks.png": "62d298a07efdde16dcb784e42977f43e87f662028fce65440c73e6b8ec9df6a7",
     "yejun/analysis/press_evidence/figures/fig_d2c_raw_examples.png": "c2a83eacb491f8ace6e59104afe315d18e308e8e462f7b658363bacf66d48a7a",
@@ -142,6 +146,7 @@
     "vibration_tones.csv": "50행 정상 202·이상 5기록의 센서별 진단. 고정 1.8/3.6 Hz 성분, 0.6 Hz 1~8배 조화, Hann 주기도표. 위상차는 전류의 3/6배에 대한 값. 인과·물리 원천을 확정하지 않는다",
     "observability.csv": "10 Hz 순시값 표본이라 나이퀴스트 5 Hz 위(베어링 결함·펌프 맥동·캐비테이션의 수십 Hz~kHz)는 식별할 수 없다. 크기 성분은 표본 진폭 변화를 보며 주파수 원인을 가리지 않는다. lag-1은 같은 기록구간 안 이웃 행. 1 Hz 이하 비중은 기록 20행 이상의 처음 20관측 주기도표 평균. 좁은 대역 열은 vibration_tones.csv의 50행 기록 진단. 정상 좁은 대역과 이상 저주파형 모두 E1 흰 잡음 대리 주입과 모양이 다르다(원인 미상)",
     "state_transition_stress.csv": "사후 스트레스 시험(현장 정상 전환 경보율 아님). 같은 평가 구간 50행 기록을 25행에서 전류 0.6 Hz 위상과 평균에 맞춰 잇기 200쌍/조건, 전류 위상 오프셋 0~16. 같은 상태 대조에는 진동 위상 이음매도 남는다. 이득은 전체 정상의 상태별 중앙값 비로 계단·10행·20행 경사를 적용하며 각 평가 원기록을 한 번씩 쓴다. 평가 데이터와 반복 원기록을 공유한다. 모델·문턱 불변",
+    "sampling_jitter_stress.csv": "사후 스트레스·가설. 앨리어싱 가설 아래 표본화 시각 흔들림이 동결 v2 정상 경보에 주는 영향. 원 주파수·흔들림 모양(표본마다 독립 가우스)은 가정이고 시각 열은 명목값이라 실제 흔들림을 잴 수 없다. 전류 사인 위상만 바꾸고 잔차·진동은 그대로 둔다. 모델·문턱 불변. level*_rate는 기록 단위 경보 비율이다(사건 단위 알림 수가 아니다). fit_frequency_*는 흔들린 기록의 최적 사인 주파수로, 이상 파일(class_differences.csv의 적합 주파수 행)과 비교한다",
     "production_unit_evidence.csv": "기록구간은 0.6 Hz 위상 트리거가 아니고, 기록 안(4.9초)에는 행정 정보가 없으며 전류는 거의 순수 0.6 Hz 사인이다. 기록 사이에는 약 20초 주기의 저수준·부하 범위 교대가 있고 기록 경계가 상태 전환과 맞물린다(operating_states*.csv). 모든 해석은 가설이며 물리 단위·원인을 단정하지 않는다",
     "abnormal_segments.csv": "라벨 일관성 점검(성능 주장 아님). 진동으로만 벗어나는 짧은 구간과 파형으로만 벗어나는 저진동 구간이 서로 다르다(R18 성분 상보성을 자료 쪽에서 뒷받침)",
     "outlier_rules.csv": "기준은 A 학습 구간(0~359). 관행 1.5×IQR로 진동 이상치를 지우면 이상 행 246/600(41%)와 정상 비학습 206행(2.6%)이 사라진다. 결정: 이상치를 제거하지 않는다(outliers.csv, R3)",
@@ -160,7 +165,8 @@
     "permutation": 2,
     "gaussian_mixture": 0,
     "state_transition": 20260928,
-    "observation_power": 0
+    "observation_power": 0,
+    "sampling_jitter": 20260929
   },
   "environment": {
     "python": "3.12.2",
@@ -191,5 +197,5 @@
       }
     ]
   },
-  "elapsed_s": 34.5
+  "elapsed_s": 66.7
 }

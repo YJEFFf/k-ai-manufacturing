@@ -1,0 +1,7 @@
+split  sigma_ms  records_ge17  records_alarmed  record_rate  all_records  incident_level1_notifications  incident_level2_escalations  alarm_rows  first_alarm_multi_component_share  recorded_minutes  elapsed_minutes
+    A       0.0            96                0        0.000          120                              0                            0           0                                NaN               6.8             16.1
+    A       0.1            96                7        0.073          120                              6                            3          14                              0.000               6.8             16.1
+    A       0.2            96               66        0.688          120                             31                           24         187                              0.045               6.8             16.1
+    B       0.0           145                3        0.021          180                              3                            0           3                              0.000              10.2             24.1
+    B       0.1           145               44        0.303          180                             31                           17          59                              0.000              10.2             24.1
+    B       0.2           145              128        0.883          180                             32                           30         524                              0.016              10.2             24.1

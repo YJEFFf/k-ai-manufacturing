@@ -1,0 +1,25 @@
+## 결과 CSV: 허용 대비 최대 비율 상위
+  probability_eval_v2.csv                  0.418  ece(1e-9 상대 규칙이면 0.57)
+  near_miss_corr_v2.csv                    0.299  spearman(1e-9 상대 규칙이면 0.30)
+  probability_conversion_v2.csv            0.0246  alarm_rows_min_lr(1e-9 상대 규칙이면 1.75)
+  probability_reliability_v2.csv           0.019  mean_predicted(1e-9 상대 규칙이면 0.32)
+  near_miss_v2.csv                         0.000247  ratio_to_threshold(1e-9 상대 규칙이면 0.01)
+  queue_mixed_ranks_v2.csv                 0.000162  peak_score(1e-9 상대 규칙이면 0.02)
+  cases_A.csv                              0.000162  peak_score(1e-9 상대 규칙이면 0.02)
+  cases_B.csv                              0.000157  peak_score(1e-9 상대 규칙이면 0.02)
+  sensitivity_v2.csv                       9.06e-05  threshold(1e-9 상대 규칙이면 0.01)
+  probability_baselines_v2.csv             6.9e-05  log_loss(1e-9 상대 규칙이면 0.00)
+
+## 행 단위 예측: SHA 같음 여부와 열별 허용 대비 최대 비율
+  predictions_normal_A.csv       SHA 같음 False | 정확 열 같음 True | 행별 최대 0.194 (score) | 요약 최대 0.00341 (g_waveform.제곱합)
+  predictions_normal_B.csv       SHA 같음 False | 정확 열 같음 True | 행별 최대 0.229 (score) | 요약 최대 0.00285 (g_waveform.제곱합)
+  predictions_abnormal_A.csv     SHA 같음 False | 정확 열 같음 True | 행별 최대 0.0579 (magnitude) | 요약 최대 0.000863 (current_residual.최솟값)
+  predictions_abnormal_B.csv     SHA 같음 False | 정확 열 같음 True | 행별 최대 0.0594 (g_dynamics) | 요약 최대 0.0002 (current_residual.최솟값)
+  test_predictions_A.csv         SHA 같음 False | 정확 열 같음 True | 행별 최대 0.194 (score) | 요약 최대 0.000879 (current_residual.최솟값)
+  test_predictions_B.csv         SHA 같음 False | 정확 열 같음 True | 행별 최대 0.229 (score) | 요약 최대 0.000541 (current_residual.최솟값)
+
+## 모델 4개: equivalence 허용 대비 최대 비율
+  guard_A.json         SHA 같음 False | 최대 비율 0.0161
+  guard_B.json         SHA 같음 False | 최대 비율 0.0293
+  probability_A.json   SHA 같음 False | 최대 비율 0.00149
+  probability_B.json   SHA 같음 False | 최대 비율 0.00324

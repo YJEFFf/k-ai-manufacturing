@@ -1,0 +1,5 @@
+# 검토 3: 검토 1의 review1_reversed_record.py를 수정 커밋(110afa2) 사본에 그대로 실행한 결과
+# REVIEW_ENV=<git archive 110afa2 사본의 yejun> OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python review1_reversed_record.py
+
+기록 5(3행)을 역순으로: bad_time_order 1행, 그 기록의 기록 수 3, 경보 1행(원래 순서 2행), time_order_events (1, 0, 1), 경고='역순 수집 시각 1행: 기준 시각보다 이르므로 판정을 보류했습니다. 수집 PC 시각과 입력 순서를 확인하세요. 미래로 튄 수집 시각 1곳: 튄 행 다음부터 원래 시간축으로 판정했습니다. 튄 행 주변은 기록이 끊겨 첫 창이 다시 찹니다.'
+기록 12(42행)을 역순으로: bad_time_order 40행, 그 기록의 기록 수 42, 경보 0행(원래 순서 41행), time_order_events (40, 0, 1), 경고='역순 수집 시각 40행: 기준 시각보다 이르므로 판정을 보류했습니다. 수집 PC 시각과 입력 순서를 확인하세요. 미래로 튄 수집 시각 1곳: 튄 행 다음부터 원래 시간축으로 판정했습니다. 튄 행 주변은 기록이 끊겨 첫 창이 다시 찹니다.'

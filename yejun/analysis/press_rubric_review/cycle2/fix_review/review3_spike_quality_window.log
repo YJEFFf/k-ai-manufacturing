@@ -1,0 +1,9 @@
+### 튐 없음: 경보 48행, 시각 순서 사건 {0: 126}, 사건 1
+ record_id                     suspect_from                suspect_to  suspect_seconds  suspect_open
+         1 2022-07-17T10:00:03.700000+00:00 2022-07-17T10:00:13+00:00              9.3             0
+### 경보 기록 바로 뒤에 튄 행: 경보 48행, 시각 순서 사건 {0: 126, 2: 1}, 사건 1
+ record_id                     suspect_from suspect_to  suspect_seconds  suspect_open
+         1 2022-07-17T10:00:03.700000+00:00                         NaN             1
+### 경보 기록 바로 앞에 튄 행: 경보 48행, 시각 순서 사건 {0: 126, 2: 1}, 사건 1
+ record_id suspect_from                suspect_to  suspect_seconds  suspect_open
+         2              2022-07-17T10:00:13+00:00              NaN             1

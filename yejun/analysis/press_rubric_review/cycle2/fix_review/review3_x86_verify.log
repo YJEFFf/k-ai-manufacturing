@@ -1,0 +1,64 @@
+$ /usr/local/bin/python /work/yejun/press_guard/verify.py
+
+OK   outputs.integrity
+OK   inputs.sha256
+OK   expected.integrity
+OK   configuration
+OK   analysis_summary.json
+OK   metrics.csv  max|Δ|=0
+OK   rolling.csv  max|Δ|=0
+OK   cases_A.csv  max|Δ|=7e-10
+OK   cases_B.csv  max|Δ|=6.9e-10
+OK   incidents_A.csv  max|Δ|=5.7e-12
+OK   incidents_B.csv  max|Δ|=5.7e-12
+OK   model_comparison_v2.csv  max|Δ|=8.9e-16
+OK   robustness_v2.csv  max|Δ|=0
+OK   sensitivity_v2.csv  max|Δ|=2.5e-11
+OK   ablation_v2.csv  max|Δ|=8.5e-12
+OK   error_conditions_v2.csv  max|Δ|=0
+OK   error_conditions_segments_v2.csv  max|Δ|=0
+OK   interaction_2x2_v2.csv  max|Δ|=0
+OK   records_first_alarm_v2.csv  max|Δ|=0
+OK   uncertainty_v2.csv  max|Δ|=0
+OK   workload_v2.csv  max|Δ|=0
+OK   decision_table_v2.csv  max|Δ|=0
+OK   probability_eval_v2.csv  max|Δ|=6.8e-10
+OK   probability_reliability_v2.csv  max|Δ|=3.8e-10
+OK   probability_conversion_v2.csv  max|Δ|=6e-09
+OK   alert_levels_v2.csv  max|Δ|=1.1e-13
+OK   alert_budget_design_v2.csv  max|Δ|=0
+OK   queue_mixed_ranks_v2.csv  max|Δ|=7e-10
+OK   queue_injection_ranks_v2.csv  max|Δ|=0
+OK   queue_key_selection_v2.csv  max|Δ|=0
+OK   sensor_importance_v2.csv  max|Δ|=1.1e-16
+OK   position_vibration_misses_v2.csv  max|Δ|=1.1e-16
+OK   coupling_fit_v2.csv  max|Δ|=3.6e-15
+OK   coupling_records_v2.csv  max|Δ|=1.4e-14
+OK   fp_events_v2.csv  max|Δ|=2.6e-13
+OK   near_miss_v2.csv  max|Δ|=1.6e-11
+OK   near_miss_corr_v2.csv  max|Δ|=0.0003
+OK   error_conditions_stats_v2.csv  max|Δ|=1.1e-16
+OK   alert_levels_injection_v2.csv  max|Δ|=0
+OK   quality_windows_v2.csv  max|Δ|=0
+OK   label_free_alert_probability_v2.csv  max|Δ|=5.3e-15
+OK   monitor_gain_v2.csv  max|Δ|=2.2e-16
+OK   expected_effect_v2.csv  max|Δ|=1.8e-12
+OK   fp_intensity_v2.csv  max|Δ|=9.7e-17
+OK   fn_intensity_v2.csv  max|Δ|=1e-16
+OK   error_condition_summary_v2.csv  max|Δ|=2.2e-16
+OK   incident_summary_v2.csv  max|Δ|=0
+OK   unit_results_v2.csv  max|Δ|=0
+OK   probability_baselines_v2.csv  max|Δ|=3.3e-13
+OK   artifacts/guard_A.json  [SHA-256은 다르지만 모든 원소가 동결 모델과 같음(|차이| ≤ 1e-10 + 1e-8·|값|: 기기 간 부동소수 차이)]
+OK   artifacts/guard_B.json  [SHA-256은 다르지만 모든 원소가 동결 모델과 같음(|차이| ≤ 1e-10 + 1e-8·|값|: 기기 간 부동소수 차이)]
+OK   artifacts/probability_A.json  [SHA-256은 다르지만 모든 원소가 동결 모델과 같음(|차이| ≤ 1e-10 + 1e-8·|값|: 기기 간 부동소수 차이)]
+OK   artifacts/probability_B.json  [SHA-256은 다르지만 모든 원소가 동결 모델과 같음(|차이| ≤ 1e-10 + 1e-8·|값|: 기기 간 부동소수 차이)]
+OK   predictions_normal_A.csv  [기기 간 부동소수 차이만 있음(행별·열 요약 허용오차 안)]
+OK   predictions_normal_B.csv  [기기 간 부동소수 차이만 있음(행별·열 요약 허용오차 안)]
+OK   predictions_abnormal_A.csv  [기기 간 부동소수 차이만 있음(행별·열 요약 허용오차 안)]
+OK   predictions_abnormal_B.csv  [기기 간 부동소수 차이만 있음(행별·열 요약 허용오차 안)]
+OK   test_predictions_A.csv  [기기 간 부동소수 차이만 있음(행별·열 요약 허용오차 안)]
+OK   test_predictions_B.csv  [기기 간 부동소수 차이만 있음(행별·열 요약 허용오차 안)]
+
+59/59 통과. 코드 89d6ce4a721f vs 동결 89d6ce4a721f; 환경 Linux-6.8.0-50-generic-x86_64-with-glibc2.41 vs 동결 macOS-26.3.1-arm64-arm-64bit
+

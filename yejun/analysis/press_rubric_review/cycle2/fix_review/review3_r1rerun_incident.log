@@ -1,0 +1,42 @@
+# 검토 3: 검토 1의 review1_incident.py를 수정 커밋(110afa2) 사본에 그대로 실행한 결과
+# REVIEW_ENV=<git archive 110afa2 사본의 yejun> OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python review1_incident.py
+
+
+## I1 미래 시각(+1h) 한 행을 이상 자료 중간에 끼운다(원래 행은 그대로 둔다)
+  원본(끼움 없음): alarms 569 | incidents 1 | 사건 시작 알림 1 | 격상 알림 1 | 사람에게 가는 알림 2 | records 21
+  spike before original row 100(기록 2, 기록 안 위치 46): bad_time_order 0 | 튄 행 status ok alarm 0 | 원래 행의 경보 감소 1행 | 기록 수 21→22
+    끼운 뒤: alarms 568 | incidents 1 | 사건 시작 알림 1 | 격상 알림 1 | 사람에게 가는 알림 2 | records 23
+   사건 시작 알림 행: [0] | stream chunk1/7 동일: True True
+  spike before original row 125(기록 3, 기록 안 위치 24): bad_time_order 0 | 튄 행 status ok alarm 0 | 원래 행의 경보 감소 2행 | 기록 수 21→22
+    끼운 뒤: alarms 567 | incidents 1 | 사건 시작 알림 1 | 격상 알림 1 | 사람에게 가는 알림 2 | records 23
+   사건 시작 알림 행: [0] | stream chunk1/7 동일: True True
+  spike before original row 350(기록 12, 기록 안 위치 20): bad_time_order 0 | 튄 행 status ok alarm 0 | 원래 행의 경보 감소 3행 | 기록 수 21→22
+    끼운 뒤: alarms 566 | incidents 1 | 사건 시작 알림 1 | 격상 알림 1 | 사람에게 가는 알림 2 | records 23
+   사건 시작 알림 행: [0] | stream chunk1/7 동일: True True
+
+## I2 8행 규칙: 두 이상 기록 사이 정상 구간의 기록이 짧게 쪼개지면(수집 시각 흔들림) 사건이 닫히지 않는다
+  정상 20분(기록 7행 조각): 정상 구간 경보 0행, 정상 구간 평균 기록 길이 6.3행, 경고=''
+    두 이상 기록(20분 간격): alarms 12 | incidents 2 | 사건 시작 알림 2 | 격상 알림 2 | 사람에게 가는 알림 4 | records 1919
+    둘째 이상 기록: 경보 8행, 사건 시작 알림 1, 격상 1, 사건 번호 [2]
+    사건 대기열: 2사건, 단계 [2, 2], 사건별 건 수 [1, 1]
+    stream chunk 7 동일: True
+  정상 20분(기록 8행 조각): 정상 구간 경보 0행, 정상 구간 평균 기록 길이 7.1행, 경고=''
+    두 이상 기록(20분 간격): alarms 12 | incidents 2 | 사건 시작 알림 2 | 격상 알림 2 | 사람에게 가는 알림 4 | records 1701
+    둘째 이상 기록: 경보 8행, 사건 시작 알림 1, 격상 1, 사건 번호 [2]
+    사건 대기열: 2사건, 단계 [2, 2], 사건별 건 수 [1, 1]
+    stream chunk 7 동일: True
+  정상 20분(기록 원래행 조각): 정상 구간 경보 0행, 정상 구간 평균 기록 길이 33.6행, 경고=''
+    두 이상 기록(20분 간격): alarms 12 | incidents 2 | 사건 시작 알림 2 | 격상 알림 2 | 사람에게 가는 알림 4 | records 360
+    둘째 이상 기록: 경보 8행, 사건 시작 알림 1, 격상 1, 사건 번호 [2]
+    사건 대기열: 2사건, 단계 [2, 2], 사건별 건 수 [1, 1]
+    stream chunk 7 동일: True
+    (대조) 같은 입력에서 INCIDENT_MIN_CLEAR_ROWS=1(이전 규칙): alarms 12 | incidents 2 | 사건 시작 알림 2 | 격상 알림 2 | 사람에게 가는 알림 4 | records 1919
+
+## I3 정상 기록 안에 센서 오류 행이 6행마다 끼면(진동 NaN) 유효 조각이 5행이라 사건이 닫히지 않는다
+  정상 20분: 오류 행 1868/12026, 정상 구간 경보 0, 경고='수집 시각 간격 확인: 평균 기록 길이 4.6행. 이웃 행 간격이 0.1초 ± 20 ms를'
+    두 이상 기록(20분 간격): alarms 12 | incidents 2 | 사건 시작 알림 2 | 격상 알림 2 | 사람에게 가는 알림 4 | records 4056
+    둘째 이상 기록: 사건 시작 알림 1, 격상 1
+
+## I4 긴 오류 구간(모든 센서 NaN, 시각은 0.1초 간격으로 연속) 사이의 두 이상 기록: 공백으로 판정
+    오류 600초 사이: alarms 12 | incidents 2 | 사건 시작 알림 2 | 격상 알림 2 | 사람에게 가는 알림 4 | records 6002
+    오류 40초 사이: alarms 12 | incidents 1 | 사건 시작 알림 1 | 격상 알림 1 | 사람에게 가는 알림 2 | records 402

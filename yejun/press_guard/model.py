@@ -44,10 +44,13 @@ INCIDENT_MIN_CLEAR_ROWS = 8
 # 기록 경계: 이웃 행의 시각 간격이 0.1초에서 이 값보다 벗어나면 새 기록구간이다. v1(1 µs)은 대회 자료의 정확한 0.1초 간격에 맞춘 값이라
 # 수집 시각이 1 ms만 흔들려도 기록이 쪼개진다. 대회 자료의 기록 사이 공백은 1.5초 이상이라 20 ms에서도 구간이 같다.
 TIME_TOL_S = 0.02
-SHORT_RECORD_WARN = 5      # 평균 기록 길이가 이보다 짧으면 수집 시각 간격 경고
+SHORT_RECORD_WARN = 8      # 평균 기록 길이가 이보다 짧으면 수집 시각 간격 경고(8행 파형 창이 거의 차지 않는다, 검토 3 F3: 7행 조각이면 경보 569→428행)
 # 수집 시각 순서: 기준(마지막으로 받아들인 시각)보다 이른 행은 판정을 보류한다. 그런 행이 정상 간격(0.1초 ± TIME_TOL_S)으로
 # 이만큼 이어지면 시계 재설정·지난 자료로 보고 새 기준으로 받아들인다. 한 행의 시각 오류가 뒤 자료 전체를 막지 않게 하는 값이다.
 REANCHOR_ROWS = 3
+# 튄 행 바로 뒤가 새 기록의 첫 행(공백 뒤)이어도 튄 행으로 볼 앞 튐의 최소 크기. 대회 기록 사이 공백(1.5~16.6초)과 사건·품질 창의
+# 공백 한도(60초)보다 큰 앞 튐은 정상 수집으로 볼 수 없다. 이보다 작은 튐은 다음 표본이 올 때만 튐으로 본다(공백 안의 과거 행은 보류).
+SPIKE_MIN_JUMP_S = 60.0
 # 사후 진단용 상태 대리변수. 정상 기록의 2성분 경계 91.886을 반올림한 값이며 경보·학습에는 쓰지 않는다.
 # 원 전류의 기록 평균 제거 RMS(ddof=0). 0.6 Hz 한 주기 이상(17행)을 본 뒤에만 상태를 표시한다.
 LOAD_STATE_RMS = 91.9
@@ -61,19 +64,26 @@ ACTIONS = dict(vibration="진동·부하 확인", vibration_and_current="진동�
 # failure_modes는 analysis/press_evidence/failure_mode_map.csv의 행(FM1 베어링, FM2 캐비테이션·흡입 공기, FM3 체결·정렬,
 # FM4 내부 누설·기어 마모, FM5 전기·전원, FM6 계측·배선)이다. 10 Hz 순시값으로는 고장 모드를 식별할 수 없어 후보 목록이다.
 GUIDEBOOK = "가이드북 6~7쪽: 펌프 내부 기어 마모 → 진동·소음 증가, 출력 유압 약화 → 불량품"
+# 계측 항목(센서 부착·영점·접지, 수집 표본화 시각)을 설비 점검 항목보다 앞에 둔다. 예측 오차(AR(2)) 성분은 전류 수준 이동에 반응하고
+# (current_offset.csv), 대회 이상 파일의 전류에는 기록 사이로 이어지는 수준 치우침이 있다(class_differences.csv). 앨리어싱 가설 아래
+# 파형·예측 오차 성분은 0.1 ms 수준의 표본화 시각 흔들림에도 반응한다(sampling_jitter_stress.csv, 모두 analysis/press_evidence).
+# 부착·케이블·접지 상태는 운전 중에 볼 수 있지만 전류 센서 영점은 무전류(정지) 상태에서 확인한다[가정].
+MEASUREMENT = "; 계측 항목은 일반 공학 지식(가설)"
 DECISION_TABLE = (
-    dict(evidence="크기(진동 센서)", check_target="펌프 상·하부 진동 증가: 기어 마모·체결·베어링·부하 변화(가설)", action=ACTIONS["vibration"],
-         checklist="펌프·모터 체결 볼트, 커플링 정렬, 베어링 온도·소음, 흡입측 공기 혼입(캐비테이션 소음), 작동유 레벨·온도",
-         failure_modes="FM1·FM2·FM3·FM4", source=GUIDEBOOK),
+    dict(evidence="크기(진동 센서)", check_target="펌프 상·하부 진동 증가: 기어 마모·체결·베어링·부하 변화 또는 센서 부착 이상(가설)", action=ACTIONS["vibration"],
+         checklist="진동 센서 부착·케이블(먼저), 펌프·모터 체결 볼트, 커플링 정렬, 베어링 온도·소음, 흡입측 공기 혼입(캐비테이션 소음), 작동유 레벨·온도",
+         failure_modes="FM1·FM2·FM3·FM4·FM6", source=GUIDEBOOK + MEASUREMENT),
     dict(evidence="크기(전류 센서)", check_target="전류 크기 변화: 부하(가압력) 증가 또는 계측 이상(가설)", action=ACTIONS["current_magnitude"],
-         checklist="가압력·금형 조건 변경 여부, 전원 전압·상 불평형, 전류 센서 배선·영점", failure_modes="FM5·FM6", source="일반 공학 지식(가설)"),
-    dict(evidence="파형 또는 예측 오차(전류)", check_target="전류 파형 흐트러짐: 모터·전원·계측 또는 출력 유압 불안정(가설)", action=ACTIONS["current_shape"],
-         checklist="출력 유압(압력계) 안정성, 릴리프 밸브, 모터 전원 품질·접촉기, 전류 센서 접지", failure_modes="FM4·FM5·FM6", source=GUIDEBOOK),
-    dict(evidence="크기(진동) + 파형·예측 오차, 또는 구간 안에서 진동·전류 크기 모두", check_target="진동과 전류가 함께 변함: 기어 마모로 출력 유압 약화 가능성(가설)",
-         action=ACTIONS["vibration_and_current"], checklist="위 진동·전류 항목 전부, 출력 유압 저하 여부, 작동유 필터 차압·오염",
-         failure_modes="FM1·FM2·FM3·FM4", source=GUIDEBOOK),
-    dict(evidence="크기(전류) + 파형·예측 오차", check_target="전류 크기와 파형이 함께 변함: 부하 급변·유압 회로 이상(가설)", action=ACTIONS["current_magnitude_and_shape"],
-         checklist="유압 회로 압력, 릴리프 밸브, 모터 권선·전원", failure_modes="FM4·FM5", source="일반 공학 지식(가설)"),
+         checklist="전류 센서 배선·영점(먼저), 가압력·금형 조건 변경 여부, 전원 전압·상 불평형", failure_modes="FM5·FM6", source="일반 공학 지식(가설)"),
+    dict(evidence="파형 또는 예측 오차(전류)", check_target="전류 파형 흐트러짐: 모터·전원·계측·수집 시각 또는 출력 유압 불안정(가설)", action=ACTIONS["current_shape"],
+         checklist="전류 센서 영점·접지·수집 장비 표본화 시각(먼저), 출력 유압(압력계) 안정성, 릴리프 밸브, 모터 전원 품질·접촉기", failure_modes="FM4·FM5·FM6",
+         source=GUIDEBOOK + MEASUREMENT),
+    dict(evidence="크기(진동) + 파형·예측 오차, 또는 구간 안에서 진동·전류 크기 모두",
+         check_target="진동과 전류가 함께 변함: 기어 마모로 출력 유압 약화 가능성 또는 계측·수집 변화(가설)",
+         action=ACTIONS["vibration_and_current"], checklist="센서 부착·영점·접지와 수집 설정(먼저), 위 진동·전류 항목 전부, 출력 유압 저하 여부, 작동유 필터 차압·오염",
+         failure_modes="FM1·FM2·FM3·FM4·FM6", source=GUIDEBOOK + MEASUREMENT),
+    dict(evidence="크기(전류) + 파형·예측 오차", check_target="전류 크기와 파형이 함께 변함: 부하 급변·유압 회로 이상 또는 계측 이상(가설)", action=ACTIONS["current_magnitude_and_shape"],
+         checklist="전류 센서 배선·영점·수집 설정(먼저), 유압 회로 압력, 릴리프 밸브, 모터 권선·전원", failure_modes="FM4·FM5·FM6", source="일반 공학 지식(가설)"),
     dict(evidence="수집 오류(결측·비유한 값·시각 오류)", check_target="수집 경로·센서 연결", action=ACTIONS["invalid"],
          checklist="센서 케이블·커넥터, 수집 PC 시각 동기화", failure_modes="FM6", source="수집 규칙"),
 )
@@ -128,23 +138,35 @@ def alert_levels(record, block, alarm):
 
 
 class IncidentTracker:
-    """행을 시간 순서대로 넣으면 사건 번호·사건 첫 알림·사건 격상·근거 추가를 돌려준다. 일괄 분석과 스트림이 같은 규칙을 쓴다."""
+    """행을 시간 순서대로 넣으면 사건 번호·사건 첫 알림·사건 격상·근거 추가를 돌려준다. 일괄 분석과 스트림이 같은 규칙을 쓴다.
 
-    _FIELDS = ("unit", "unit_alarmed", "unit_start", "unit_rows", "prev_alarmed", "prev_end", "last_time", "open", "incident", "count", "components")
+    상태는 둘로 나뉜다. 사건 배정(지금 어느 단위·사건에 있는가, 공백 계산용 시각)은 튄 행을 되돌릴 때 복원한다. 사건별 알림 상태
+    (누적 경보 행·근거 성분)는 이미 사람에게 나간 알림을 뜻하므로 되돌리지 않는다. 그래서 되돌린 뒤에도 한 사건에 시작·격상 알림이
+    두 번 나가지 않는다(검토 3 R3-01). 튄 행의 경보도 실제 측정값의 경보이므로 그 사건의 누적 경보에 남는다."""
+
+    _FIELDS = ("unit", "unit_alarmed", "unit_start", "unit_rows", "prev_alarmed", "prev_end", "last_time", "open", "incident")
 
     def __init__(self):
         self.unit = None; self.unit_alarmed = False; self.unit_start = None; self.unit_rows = 0
         self.prev_alarmed = False; self.prev_end = None; self.last_time = None
-        self.open = False; self.incident = 0; self.count = 0; self.components = set()   # 사건 번호는 1부터
+        self.open = False; self.incident = 0   # 사건 번호는 1부터
         self.issued = 0              # 지금까지 발급한 가장 큰 사건 번호(되돌리지 않아 번호가 겹치지 않는다)
+        self.alarms = {}             # 사건 번호 → 누적 경보 행(되돌리지 않는다)
+        self.evidence = {}           # 사건 번호 → 근거 성분(되돌리지 않는다)
         self._undo = None
 
     def undo(self):
-        """마지막 유효 행의 효과를 되돌린다(미래로 튄 한 행). 열린 사건은 되돌리고, 발급한 번호(issued)는 되돌리지 않는다."""
+        """마지막 유효 행의 사건 배정·공백 효과를 되돌린다(미래로 튄 한 행). 발급한 번호와 사건별 알림 상태는 되돌리지 않는다."""
         if self._undo is not None:
             for k, v in self._undo.items():
-                setattr(self, k, set(v) if k == "components" else v)
+                setattr(self, k, v)
             self._undo = None
+
+    def _prune(self):
+        """되돌리기로 돌아갈 수 있는 사건(현재·직전 배정)의 알림 상태만 남긴다."""
+        keep = {self.incident, (self._undo or {}).get("incident")}
+        for k in [k for k in self.alarms if k not in keep]:
+            del self.alarms[k], self.evidence[k]
 
     def update(self, record, block, alarm, reason, time, valid=True):
         """valid=False(수집 오류 행)는 상태를 바꾸지 않는다. 오류 행은 정상 복귀의 근거가 아니므로 사건을 닫거나 나누지 않는다.
@@ -152,7 +174,7 @@ class IncidentTracker:
         더 짧은 무경보 조각은 사건을 닫지도, 공백 기준 시각을 옮기지도 않는다."""
         if not valid:
             return 0, 0, 0, 0
-        self._undo = {k: (set(getattr(self, k)) if k == "components" else getattr(self, k)) for k in self._FIELDS}
+        self._undo = {k: getattr(self, k) for k in self._FIELDS}
         t = time if time is not None and not pd.isna(time) else self.last_time
         if (record, block) != self.unit:
             if self.unit is not None and (self.unit_alarmed or self.unit_rows >= INCIDENT_MIN_CLEAR_ROWS):
@@ -167,25 +189,43 @@ class IncidentTracker:
         if first_in_unit:
             gap = (self.unit_start - self.prev_end).total_seconds() if self.prev_end is not None and self.unit_start is not None else np.inf
             if not (self.open and self.prev_alarmed and 0 <= gap <= INCIDENT_MAX_GAP_S):
-                self.issued += 1; self.incident = self.issued; self.open = True; self.count = 0; self.components = set()
-        self.count += 1
-        notify = int(self.count == 1)
-        escalate = int(self.count == ESCALATION_ALARM_ROWS)
-        new = set(filter(None, str(reason).split("+"))) - self.components
-        update = int(bool(new) and self.count > 1 and bool(self.components))
-        self.components |= new
-        return self.incident, notify, escalate, update
+                self.issued += 1; self.incident = self.issued; self.open = True
+                self.alarms[self.incident], self.evidence[self.incident] = 0, set()
+                self._prune()
+        k = self.incident
+        self.alarms[k] += 1
+        count, seen = self.alarms[k], self.evidence[k]
+        new = set(filter(None, str(reason).split("+"))) - seen
+        update = int(bool(new) and count > 1 and bool(seen))
+        seen |= new
+        return k, int(count == 1), int(count == ESCALATION_ALARM_ROWS), update
+
+
+def spike_rows(order_event, has_time):
+    """ORDER_SPIKE_SKIPPED 행마다 그 앞의 튄 행(기준 시각을 앞으로 옮긴 마지막 행) 번호. 둘 사이에는 시각 결측·보류 행만 있을 수 있다
+    (시각이 있는 다른 행을 받아들이면 기준이 바뀌어 튐 예외가 사라진다). 튄 행이 없으면 -1."""
+    out = np.full(len(order_event), -1)
+    last = -1
+    for i, (ev, ok) in enumerate(zip(order_event, has_time)):
+        if ev == ORDER_SPIKE_SKIPPED:
+            out[i] = last
+        if ev != ORDER_HELD and ok:
+            last = i
+    return out
 
 
 def incident_columns(record, block, alarm, reason, time, valid=None, order_event=None):
     """일괄 분석용: 행마다 (사건 번호, 사건 첫 알림, 사건 격상, 근거 추가). 경보 없는 유효 단위(8행 이상)가 끼면 사건이 닫힌다.
-    수집 오류 행(valid=False)은 건너뛴다. order_event가 ORDER_SPIKE_SKIPPED인 행 앞의 유효 행은 미래로 튄 행이므로 그 효과를 되돌린다."""
+    수집 오류 행(valid=False)은 건너뛴다. ORDER_SPIKE_SKIPPED 행에서는 그 앞의 튄 행이 사건 추적에 들어간 유효 행이었으면
+    그 행의 사건 배정·공백 효과를 되돌린다(사이에 수집 오류·보류 행이 끼어도 같다, 검토 3 R3-02)."""
     tr = IncidentTracker()
     valid = np.ones(len(alarm), bool) if valid is None else np.asarray(valid, bool)
     order_event = np.zeros(len(alarm), int) if order_event is None else np.asarray(order_event, int)
+    has_time = pd.notna(pd.Series(list(time), dtype=object)).to_numpy()
+    spike = spike_rows(order_event, has_time)
     out = np.zeros((len(alarm), 4), dtype=int)
     for i, (r, b, a, why, t, ok, ev) in enumerate(zip(record, block, alarm, reason, time, valid, order_event)):
-        if ev == ORDER_SPIKE_SKIPPED and i > 0 and valid[i - 1]:
+        if ev == ORDER_SPIKE_SKIPPED and spike[i] >= 0 and valid[spike[i]]:
             tr.undo()
         out[i] = tr.update(r, b, bool(a), why, t, bool(ok))
     return out
@@ -238,9 +278,12 @@ class TimeOrder:
     """수집 시각 순서 판정. 행을 받은 순서대로 넣으면 행마다 부호를 돌려준다. 일괄·스트림이 같은 상태를 이어 쓴다.
 
     - 기준 시각은 마지막으로 받아들인 시각이다. 같거나 늦은 시각은 받아들인다(ORDER_OK, 동률 허용).
-    - 미래 시각 한 행(튐): 바로 앞에 받은 행이 정상 간격(0.1초 ± TIME_TOL_S)보다 크게 앞으로 뛰었고, 이 행이 그 앞의 시간축을
-      이으면 앞 행을 튄 행으로 보고 이 행부터 계속 판정한다(ORDER_SPIKE_SKIPPED, 보류 없음). 이 예외는 연속으로 쓰지 않는다.
-      튄 행 자체는 이미 판정했으므로(인과) 되돌리지 않는다. 사건 추적만 그 행의 효과를 되돌린다.
+    - 미래 시각 한 행(튐): 바로 앞에 받은 행이 정상 간격(0.1초 ± TIME_TOL_S)보다 크게 앞으로 뛰었고, 이 행이 튀기 전 시간축을
+      이으면 앞 행을 튄 행으로 보고 이 행부터 계속 판정한다(ORDER_SPIKE_SKIPPED, 보류 없음). '잇는다'는 튀기 전 기준의 다음 표본
+      (0.1초 ± TIME_TOL_S 뒤)이거나, 튐이 SPIKE_MIN_JUMP_S보다 커서 정상 수집의 기록 사이 공백으로 볼 수 없을 때 그 기준에서
+      SPIKE_MIN_JUMP_S 안의 행(튄 행 바로 뒤의 새 기록)이다. 그 밖의 이른 시각(기록 사이 공백 안의 과거 행·재전송)은 아래처럼 보류한다.
+      이 예외는 연속으로 쓰지 않는다.
+      튄 행 자체는 이미 판정했으므로(인과) 되돌리지 않는다. 사건 추적은 그 행의 사건 배정·공백 효과만 되돌린다.
     - 순서 뒤바뀜·시계 재설정·지난 자료: 기준보다 이른 행은 판정을 보류한다(ORDER_HELD). 정상 간격으로 REANCHOR_ROWS행 이어지면
       셋째 행부터 새 기준으로 받아들인다(ORDER_REANCHOR, 보류 REANCHOR_ROWS − 1행). 역순·불규칙 간격이면 계속 보류하고 경고한다.
     - 시각을 읽을 수 없는 행은 상태를 바꾸지 않는다. 센서 값 오류 행도 시각이 있으면 순서 판정에 쓴다.
@@ -263,9 +306,13 @@ class TimeOrder:
             jump = self.ref is not None and (t - self.ref).total_seconds() > D.DT + TIME_TOL_S
             self.prev_ref, self.ref, self.run, self.run_last, self.jumped = self.ref, t, 0, None, jump
             return ORDER_OK
-        if self.jumped and self.prev_ref is not None and t >= self.prev_ref:
-            self.ref, self.run, self.run_last, self.jumped = t, 0, None, False     # prev_ref는 그대로(튀기 전 시간축)
-            return ORDER_SPIKE_SKIPPED
+        if self.jumped and self.prev_ref is not None:
+            since = (t - self.prev_ref).total_seconds()
+            next_sample = abs(since - D.DT) <= TIME_TOL_S
+            after_gap = (self.ref - self.prev_ref).total_seconds() > SPIKE_MIN_JUMP_S and D.DT - TIME_TOL_S <= since <= SPIKE_MIN_JUMP_S
+            if next_sample or after_gap:
+                self.ref, self.run, self.run_last, self.jumped = t, 0, None, False     # 튀기 전 시간축에서 이어 간다
+                return ORDER_SPIKE_SKIPPED
         steady = self.run_last is not None and abs((t - self.run_last).total_seconds() - D.DT) <= TIME_TOL_S
         previous = self.run_last
         self.run, self.run_last = (self.run + 1 if steady else 1), t
@@ -334,7 +381,10 @@ def sine_score(current,seg,win):
     windows=np.stack([x[i-win+1:i+1] for i in idx])
     sst=((windows-windows.mean(axis=1,keepdims=True))**2).sum(axis=1)
     best=np.full(len(idx),np.inf)
-    for hat in _HATS.setdefault(win, stable_hats(win)):
+    hats = _HATS.get(win)
+    if hats is None:                  # setdefault(win, stable_hats(win))는 기본값을 매번 계산해 캐시가 되지 않는다(검토 3 R3-04)
+        hats = _HATS[win] = stable_hats(win)
+    for hat in hats:
         residual=windows-np.einsum("ij,kj->ik",windows,hat,optimize=False)
         np.minimum(best,(residual*residual).sum(axis=1),out=best)
     np.divide(best,sst,out=best,where=sst>0)
@@ -533,7 +583,7 @@ class StreamDetector:
         self.record_lr = np.nan       # 현재 기록구간의 지금까지 최대 우도비
         self.current_state = CurrentState()
         self.incidents = IncidentTracker()   # 기록구간을 넘는 사건 묶음(스트림 전체에서 이어진다)
-        self.last_valid = False              # 바로 앞 행이 사건 추적에 들어간 유효 행인가(튄 행 되돌리기)
+        self.ref_valid = False               # 기준 시각을 마지막으로 옮긴 행이 사건 추적에 들어간 유효 행인가(튄 행 되돌리기, spike_rows와 같은 규칙)
 
     def push(self, frame):
         from probability import posterior
@@ -576,10 +626,11 @@ class StreamDetector:
                 escalate = int(self.episode_alarms == ESCALATION_ALARM_ROWS)
                 self.alerted_blocks = {b for b in self.alerted_blocks if b >= r.alert_unit - 1} | {r.alert_unit}
             notifications.append(int(notify)); levels.append(level); escalations.append(escalate)
-            if r.time_order_event == ORDER_SPIKE_SKIPPED and self.last_valid:
+            if r.time_order_event == ORDER_SPIKE_SKIPPED and self.ref_valid:
                 self.incidents.undo()
             inc.append(self.incidents.update(r.record_id, r.alert_unit, bool(r.alarm), r.reason, t, r.status == "ok"))
-            self.last_valid = r.status == "ok"
+            if r.time_order_event != ORDER_HELD and not pd.isna(t):
+                self.ref_valid = r.status == "ok"
         result["notification"], result["alert_level"], result["escalation"] = notifications, levels, escalations
         result["record_likelihood_ratio"] = record_lr
         inc = np.asarray(inc, dtype=int).reshape(-1, 4)
@@ -618,7 +669,7 @@ def cases(predictions):
     """점검 대기열. 고장 사건 수가 아니라, 같은 기록구간에서 경보가 이어진 블록 묶음 하나가 한 건이다(대회 자료는 기록구간당 한 건).
 
     - level: 경보 행이 ESCALATION_ALARM_ROWS 이상이면 2(점검 요청), 아니면 1(주의). escalation_*: 격상 행과 기록 시작·첫 경보 기준 지연.
-    - suspect_from/to: 건 앞뒤로 가장 가까운 경보 없는 단위의 끝·시작 시각. 그사이 만든 가공품이 품질 확인 대상이다. 없거나
+    - suspect_from/to: 건 앞뒤로 가장 가까운 경보 없는 유효 단위(수집 오류·튄 행 제외)의 끝·시작 시각. 그사이 만든 가공품이 품질 확인 대상이다. 없거나
       SUSPECT_MAX_GAP_S보다 멀면 열림(진행 중·수집 공백).
     - priority_rank: 이상 라벨 없이 정한 정렬 키(PRIORITY_KEY).
     """
@@ -630,7 +681,11 @@ def cases(predictions):
     blocks_of_rows = pd.Series(block, index=p.index)
     time = pd.to_datetime(p.timestamp, format="mixed", utc=True, errors="coerce")
     unit_key = pd.Series(list(zip(p.record_id.to_numpy(), block)), index=p.index)
-    units = pd.DataFrame(dict(key=unit_key, t=time, a=p.alarm.eq(1), valid=p.status.eq("ok"), ep=episode)).groupby("key", sort=False).agg(
+    spike = np.zeros(len(p), bool)            # 튄 행은 시각이 틀려 품질 시간창의 경계가 되지 못한다(검토 3 R3-06)
+    if "time_order_event" in p:
+        target = spike_rows(p.time_order_event.to_numpy(), time.notna().to_numpy())
+        spike[target[target >= 0]] = True
+    units = pd.DataFrame(dict(key=unit_key, t=time, a=p.alarm.eq(1), valid=p.status.eq("ok") & ~spike, ep=episode)).groupby("key", sort=False).agg(
         start=("t", "min"), end=("t", "max"), alarmed=("a", "any"), valid=("valid", "all"), ep=("ep", "max")).reset_index()
     result = []
     for ep, group in p.groupby(episode, sort=True):

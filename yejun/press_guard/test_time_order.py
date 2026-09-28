@@ -201,15 +201,17 @@ def test_frozen_artifacts_are_unchanged(name, digest):
 
 
 def test_reversed_record_is_held_with_warning(inputs):
-    """역순으로 들어온 기록은 조용히 1행 기록으로 쪼개지지 않고 보류·경고된다(코드 검토 R1-03: 미래 튐 예외를 연달아 쓰던 문제)."""
+    """역순으로 들어온 기록은 조용히 1행 기록으로 쪼개지지 않고 보류·경고된다(코드 검토 R1-03: 미래 튐 예외를 연달아 쓰던 문제).
+    역순 기록의 첫 행(가장 늦은 시각)만 받아들이고 나머지는 모두 보류한다. 둘째 행은 튀기 전 기준의 다음 표본이 아니므로
+    튐 예외가 아니다(검토 3 R3-03)."""
     model, false_alarm, clean, _, _ = inputs
     forward = at(clean, "2022-07-14 00:00:00")
     backward = at(clean, "2022-07-14 00:00:10")[::-1].reset_index(drop=True)      # 시각이 거꾸로 가는 50행
     frame = pd.concat([forward, backward], ignore_index=True)
     pred = model.predict(frame)
     tail = pred.iloc[len(forward):]
-    assert tail.time_order_event.tolist()[:2] == [0, 2] and tail.status.iloc[2:].eq("bad_time_order").all()
-    assert f"역순 수집 시각 {len(backward) - 2}행" in timing_warning(pred)
+    assert tail.time_order_event.tolist()[:2] == [0, 1] and tail.status.iloc[1:].eq("bad_time_order").all()
+    assert f"역순 수집 시각 {len(backward) - 1}행" in timing_warning(pred)
     for chunk in (1, 7, 128):
         assert_stream_matches(model, frame, pred, chunk)
 
@@ -252,3 +254,145 @@ def test_alarmed_spike_row_does_not_split_incident(inputs):
     assert pred.incident_escalation.sum() == 1
     for chunk in (1, 7, 128):
         assert_stream_matches(model, frame, pred, chunk)
+
+
+def stamp(frame, times):
+    out = D.inputs_only(frame).copy().reset_index(drop=True)
+    out[D.TIME] = [pd.Timestamp(t).strftime("%Y-%m-%d %H:%M:%S.%f") if t is not None else "" for t in times]
+    return out
+
+
+def magnitude_rows(model, abnormal, k):
+    """1행 기록(크기 성분만)으로도 경보가 나는 이상 행 k개."""
+    base = pd.Timestamp("2022-07-17 10:00:00")
+    probe = model.predict(stamp(abnormal, [base + pd.Timedelta(seconds=10 * i) for i in range(len(abnormal))]))
+    return D.inputs_only(abnormal).iloc[np.flatnonzero(probe.alarm.eq(1).to_numpy())[:k]].reset_index(drop=True)
+
+
+def per_incident(pred):
+    return pred[pred.incident_id.gt(0)].groupby("incident_id")[["incident_notification", "incident_escalation"]].sum()
+
+
+@pytest.mark.parametrize("offsets", [(0, .2, .1, .3), (0, 5, .1, .2), (0, .25, .2, .3)], ids=["swap", "jump5s", "late150ms"])
+def test_undo_does_not_repeat_escalation(inputs, offsets):
+    """진행 중 사건 안에서 두 행이 맞바뀌거나 한 행이 튀거나 늦게 찍혀도 사건마다 시작·격상 알림은 한 번이다(검토 3 R3-01)."""
+    model, _, clean, _, abnormal = inputs
+    mag = magnitude_rows(model, abnormal, 4)
+    start = pd.Timestamp("2022-07-14 00:00:07")
+    frame = pd.concat([at(clean, "2022-07-14"), stamp(mag, [start + pd.Timedelta(seconds=o) for o in offsets])], ignore_index=True)
+    pred = model.predict(frame)
+    counts = per_incident(pred)
+    assert len(counts) == 1 and counts.incident_notification.tolist() == [1] and counts.incident_escalation.tolist() == [1]
+    assert incidents(cases(pred), pred).escalation_row.tolist() == pred.row_id[pred.incident_escalation.eq(1)].tolist()
+    for chunk in (1, 7, 128):
+        assert_stream_matches(model, frame, pred, chunk)
+    log = simulate.run(frame, model, chunk=1)
+    alerts = log[log.kind.isin(["사건 시작", "격상"])]                               # 보류 행의 '수집 오류' 알림은 따로 센다
+    assert alerts.groupby("incident_id").kind.apply(list).tolist() == [["사건 시작", "격상"]]
+
+
+@pytest.mark.parametrize("extra", ["nat", "held"])
+def test_invalid_row_between_spike_and_timeline_still_undoes(inputs, extra):
+    """튄 행과 원래 시간축 사이에 시각 결측·보류 행이 끼어도 진행 중인 사건이 쪼개지지 않는다(검토 3 R3-02)."""
+    model = load_bundle(HERE / "artifacts" / "guard_B.json")
+    _, _, _, _, abnormal = inputs
+    base = model.predict(abnormal)
+    src = int(base.index[base.alarm.eq(1) & base.reason.str.contains("magnitude")][0])
+    glitch = abnormal.iloc[[src]].copy()
+    glitch[D.TIME] = (pd.to_datetime(glitch[D.TIME]) + pd.Timedelta(hours=1)).dt.strftime("%Y-%m-%d %H:%M:%S.%f")
+    between = abnormal.iloc[[300]].copy()
+    between[D.TIME] = "" if extra == "nat" else (pd.to_datetime(between[D.TIME]) - pd.Timedelta(hours=1)).dt.strftime("%Y-%m-%d %H:%M:%S.%f")
+    control = model.predict(pd.concat([abnormal.iloc[:300], glitch, abnormal.iloc[300:]], ignore_index=True))
+    frame = pd.concat([abnormal.iloc[:300], glitch, between, abnormal.iloc[300:]], ignore_index=True)
+    pred = model.predict(frame)
+    assert pred.time_order_event.iloc[302] == 2 and pred.status.iloc[301] != "ok"
+    assert pred.incident_id.iloc[299] == pred.incident_id.iloc[302:][pred.alarm.iloc[302:].eq(1)].iloc[0]
+    assert (pred.incident_notification.sum(), pred.incident_escalation.sum()) == (control.incident_notification.sum(), control.incident_escalation.sum()) == (2, 1)
+    for chunk in (7, 128):
+        assert_stream_matches(model, frame, pred, chunk)
+
+
+@pytest.mark.parametrize("late", [6.0, 4.9], ids=["past_row_in_gap", "resent_last_row"])
+def test_past_row_after_record_start_is_held(inputs, late):
+    """기록 첫 행 바로 뒤에 기록 사이 공백 안의 과거 행(또는 앞 기록 마지막 행의 재전송)이 와도 첫 행을 튄 행으로 보지 않는다.
+    과거 행만 보류하고 이상 한 번은 사건 1개·시작 알림 1건이다(검토 3 R3-03)."""
+    model, _, clean, _, abnormal = inputs
+    mag = magnitude_rows(model, abnormal, 6)
+    t0, start = pd.Timestamp("2022-07-14"), pd.Timestamp("2022-07-14 00:00:07")
+    frame = pd.concat([at(clean, t0), stamp(mag.iloc[:1], [start]), stamp(clean.iloc[[10]], [t0 + pd.Timedelta(seconds=late)]),
+                       stamp(mag.iloc[1:], [start + pd.Timedelta(seconds=.1 * i) for i in range(1, len(mag))])], ignore_index=True)
+    pred = model.predict(frame)
+    row = len(clean) + 1
+    assert pred.status.iloc[row] == "bad_time_order" and pred.time_order_event.tolist().count(2) == 0
+    assert pred.incident_notification.sum() == 1 and pred.incident_id.max() == 1
+    for chunk in (1, 7, 128):
+        assert_stream_matches(model, frame, pred, chunk)
+
+
+@pytest.mark.parametrize("where", ["after", "before"])
+def test_spike_row_is_not_a_quality_window_bound(inputs, where):
+    """경보 없는 +1시간 튄 행이 경보 기록 바로 앞·뒤(기록 경계)에 와도 품질 의심 시간창은 튐이 없을 때와 같다(검토 3 R3-06).
+    튐이 기록 사이 공백으로 볼 수 없을 만큼 크면 튄 행 바로 뒤의 새 기록도 튀기 전 시간축을 잇는 것으로 본다(보류 없음)."""
+    model, false_alarm, clean, _, _ = inputs
+    t0 = pd.Timestamp("2022-07-14")
+    before, alarmed, after = at(clean, t0), at(false_alarm, t0 + pd.Timedelta(seconds=6)), at(clean, t0 + pd.Timedelta(seconds=13))
+    spike = stamp(clean.iloc[[5]], [t0 + pd.Timedelta(hours=1)])
+    plain = cases(model.predict(pd.concat([before, alarmed, after], ignore_index=True)))
+    parts = [before, alarmed, spike, after] if where == "after" else [before, spike, alarmed, after]
+    frame = pd.concat(parts, ignore_index=True)
+    pred = model.predict(frame)
+    assert pred.time_order_event.tolist().count(2) == 1 and pred.status.eq("bad_time_order").sum() == 0
+    got = cases(pred)
+    cols = ["suspect_from", "suspect_to", "suspect_open"]
+    assert got[cols].to_dict("records") == plain[cols].to_dict("records") and plain.suspect_open.tolist() == [0]
+    for chunk in (7, 128):
+        assert_stream_matches(model, frame, pred, chunk)
+
+
+def test_sine_projections_are_computed_once(monkeypatch):
+    """사인 투영(주파수 1,001개 pinv)은 창 길이마다 한 번만 계산한다(검토 3 R3-04: setdefault가 매번 다시 계산하던 문제)."""
+    import model as M
+    calls = []
+    monkeypatch.setattr(M, "_HATS", {})
+    original = M.stable_hats
+    monkeypatch.setattr(M, "stable_hats", lambda win: calls.append(win) or original(win))
+    x, seg = np.cos(np.arange(40) * .377), np.zeros(40, int)
+    first = M.sine_score(x, seg, 8)
+    for _ in range(3):
+        np.testing.assert_array_equal(M.sine_score(x, seg, 8), first)
+    M.sine_score(x, seg, 6)
+    assert calls == [8, 6]
+
+
+def test_random_time_faults_keep_one_start_and_escalation_per_incident(inputs):
+    """무작위 시각 오류(맞바뀜·작은 앞 튐·1시간 튐·1시간 뒤로·시각 결측)에도 사건마다 시작·격상 알림은 한 번 이하다.
+    80회 가운데 앞 4회는 스트림(청크 7·128)과 일괄 결과도 대조한다. 110afa2 규칙은 이 80회 중 2회에서 격상이 중복됐다(검토 3 R3-01)."""
+    model = load_bundle(HERE / "artifacts" / "guard_B.json")
+    _, _, _, _, abnormal = inputs
+    rng = np.random.default_rng(20260929)
+    base = D.inputs_only(abnormal).reset_index(drop=True)
+    times = pd.to_datetime(base[D.TIME])
+    for trial in range(80):
+        t = times.copy()
+        for _ in range(6):
+            i = int(rng.integers(1, len(base) - 2))
+            kind = rng.choice(["swap", "jump", "spike", "back", "swap"])
+            if kind == "swap":
+                t.iloc[[i, i + 1]] = t.iloc[[i + 1, i]].to_numpy()
+            elif kind == "jump":
+                t.iloc[i] += pd.Timedelta(seconds=float(rng.choice([.2, .3, 2, 5, 30])))
+            elif kind == "spike":
+                t.iloc[i] += pd.Timedelta(hours=1)
+            else:
+                t.iloc[i] -= pd.Timedelta(hours=1)
+        stamps = t.dt.strftime("%Y-%m-%d %H:%M:%S.%f").tolist()
+        for i in rng.choice(len(base), 3, replace=False):
+            if rng.random() < .5:
+                stamps[i] = ""
+        frame = base.copy()
+        frame[D.TIME] = stamps
+        pred = model.predict(frame)
+        counts = per_incident(pred)
+        assert (counts <= 1).all().all(), (trial, counts[(counts > 1).any(axis=1)])
+        if trial < 4:
+            assert_stream_matches(model, frame, pred, 128 if trial % 2 else 7)

@@ -31,21 +31,26 @@ def test_browser_simulation_matches_independently_scored_prefixes():
     recovered = parts[0].copy()
     resume = pd.Timestamp(abnormal[D.TIME].iloc[-1]) + pd.Timedelta(seconds=2)
     recovered[D.TIME] = (resume + pd.to_timedelta(np.arange(len(recovered)) * .1, unit="s")).astype(str)
-    frame = pd.concat(parts + [abnormal, parts[0], recovered], ignore_index=True)
+    # 경보 기록(3) 바로 뒤의 경보 없는 +1시간 튄 한 행: 튄 것으로 확인되기 전·후 모두 품질 시간창 경계가 두 구현에서 같아야 한다.
+    spike = parts[2].iloc[[5]].copy()
+    spike[D.TIME] = str(pd.Timestamp(parts[1][D.TIME].iloc[-1]) + pd.Timedelta(hours=1))
+    frame = pd.concat(parts[:2] + [spike] + parts[2:] + [abnormal, parts[0], recovered], ignore_index=True)
+    spike_at = len(parts[0]) + len(parts[1])
 
     def analyze(data):
         return console.analyze(dict(split="B", alpha=.01, prior=.01, dataset="upload", csv=data.to_csv(index=False)))
 
     full = analyze(frame)
-    cutoffs = {0, len(parts[0]) - 1, len(frame) - 1}
-    reverse_start = sum(map(len, parts)) + len(abnormal)
+    assert full["points"][spike_at + 1]["time_order_event"] == 2
+    cutoffs = {0, len(parts[0]) - 1, len(frame) - 1, spike_at, spike_at + 1}
+    reverse_start = sum(map(len, parts)) + 1 + len(abnormal)
     cutoffs.update((reverse_start - 1, reverse_start, reverse_start + len(parts[0]) - 1))
     for case in full["cases"]:
         cutoffs.update((case["first_row"] - 1, case["first_row"], case["row_to"]))
     for incident in full["incidents"]:
         if incident["escalation_row"] is not None:
             cutoffs.add(int(incident["escalation_row"]))
-    cutoffs.update(range(sum(map(len, parts)) + 49, len(frame), 50))
+    cutoffs.update(range(sum(map(len, parts)) + 1 + 49, len(frame), 50))
     prefixes = []
     for cursor in sorted(cutoffs):
         result = analyze(frame.iloc[:cursor + 1])

@@ -1,0 +1,127 @@
+## U0 대회 원자료의 시각 순서 사건
+  정상 전체: 행 20000, time_order_event 분포 {0: 20000}, 보류 0
+  이상 전체: 행 600, time_order_event 분포 {0: 600}, 보류 0
+
+## U1 진행 중 사건의 앞으로 튄 한 행 → 되돌린 뒤 같은 사건에 격상 두 번
+
+### U1a 이웃 두 행 맞바뀜(7.2가 7.1보다 먼저 도착)
+  시각 순서 사건(보류·새 기준·튐) (0, 0, 1) | 사건 1개 | 사건 시작 알림 1 | 격상 2 | 사건별(행·시작·격상): {1: {'rows': 4, 'notifications': 1, 'escalations': 2}}
+  한 사건에 시작·격상 알림이 두 번 이상인 사건: [1]
+          timestamp  time_order_event status  record_id  alarm     reason  incident_id  incident_notification  incident_escalation  incident_update
+38  10:00:07.000000                 0     ok          1      1  magnitude            1                      1                    0                0
+39  10:00:07.200000                 0     ok          2      1  magnitude            1                      0                    1                0
+40  10:00:07.100000                 2     ok          3      1  magnitude            1                      0                    1                0
+41  10:00:07.300000                 0     ok          4      1  magnitude            1                      0                    0                0
+  경고: 미래로 튄 수집 시각 1곳: 튄 행 다음부터 원래 시간축으로 판정했습니다. 튄 행 주변은 기록이 끊겨 첫 창이 다시 찹니다.
+  일괄=스트림(청크 1·7·128): [True, True, True]
+
+### U1a 대조: 같은 네 행을 제 순서로
+  시각 순서 사건(보류·새 기준·튐) (0, 0, 0) | 사건 1개 | 사건 시작 알림 1 | 격상 1 | 사건별(행·시작·격상): {1: {'rows': 4, 'notifications': 1, 'escalations': 1}}
+  한 사건에 시작·격상 알림이 두 번 이상인 사건: []
+  경고: (없음)
+  일괄=스트림(청크 1·7·128): [True, True, True]
+  사건 대기열(incidents): [{'incident_id': 1, 'cases': 4, 'level': 2, 'escalation_row': 40}] | 격상 행(예측): [39, 40]
+  모의 운용(simulate.run, 청크 1)의 사람에게 가는 알림: [{'row_id': 38, 'incident_id': 1, 'kind': '사건 시작'}, {'row_id': 39, 'incident_id': 1, 'kind': '격상'}, {'row_id': 40, 'incident_id': 1, 'kind': '격상'}]
+
+### U1b 첫 경보 다음 행이 +5초로 튐(원래 시간축은 7.1·7.2로 이어짐)
+  시각 순서 사건(보류·새 기준·튐) (0, 0, 1) | 사건 1개 | 사건 시작 알림 1 | 격상 2 | 사건별(행·시작·격상): {1: {'rows': 4, 'notifications': 1, 'escalations': 2}}
+  한 사건에 시작·격상 알림이 두 번 이상인 사건: [1]
+          timestamp  time_order_event status  record_id  alarm     reason  incident_id  incident_notification  incident_escalation  incident_update
+38  10:00:07.000000                 0     ok          1      1  magnitude            1                      1                    0                0
+39  10:00:12.000000                 0     ok          2      1  magnitude            1                      0                    1                0
+40  10:00:07.100000                 2     ok          3      1  magnitude            1                      0                    1                0
+41  10:00:07.200000                 0     ok          3      1  magnitude            1                      0                    0                0
+  경고: 미래로 튄 수집 시각 1곳: 튄 행 다음부터 원래 시간축으로 판정했습니다. 튄 행 주변은 기록이 끊겨 첫 창이 다시 찹니다.
+  일괄=스트림(청크 1·7·128): [True, True, True]
+
+### U1c 둘째 표본의 시각만 150 ms 늦음(7.0 → 7.25 → 7.2 → 7.3)
+  시각 순서 사건(보류·새 기준·튐) (0, 0, 1) | 사건 1개 | 사건 시작 알림 1 | 격상 2 | 사건별(행·시작·격상): {1: {'rows': 4, 'notifications': 1, 'escalations': 2}}
+  한 사건에 시작·격상 알림이 두 번 이상인 사건: [1]
+          timestamp  time_order_event status  record_id  alarm     reason  incident_id  incident_notification  incident_escalation  incident_update
+38  10:00:07.000000                 0     ok          1      1  magnitude            1                      1                    0                0
+39  10:00:07.250000                 0     ok          2      1  magnitude            1                      0                    1                0
+40  10:00:07.200000                 2     ok          3      1  magnitude            1                      0                    1                0
+41  10:00:07.300000                 0     ok          3      1  magnitude            1                      0                    0                0
+  경고: 미래로 튄 수집 시각 1곳: 튄 행 다음부터 원래 시간축으로 판정했습니다. 튄 행 주변은 기록이 끊겨 첫 창이 다시 찹니다.
+  일괄=스트림(청크 1·7·128): [True, True, True]
+
+## U2 튄 행과 원래 시간축 사이의 수집 오류 행
+
+### U2 대조: 경보 난 +1시간 튄 행만(저장소 시험과 같은 입력)
+  시각 순서 사건(보류·새 기준·튐) (0, 0, 1) | 사건 2개 | 사건 시작 알림 2 | 격상 1 | 사건별(행·시작·격상): {1: {'rows': 565, 'notifications': 1, 'escalations': 1}, 2: {'rows': 1, 'notifications': 1, 'escalations': 0}}
+  한 사건에 시작·격상 알림이 두 번 이상인 사건: []
+           timestamp  time_order_event status  record_id  alarm             reason  incident_id  incident_notification  incident_escalation  incident_update
+299     10:52:40.072                 0     ok         11      1  waveform+dynamics            1                      0                    0                0
+300  11:51:07.943000                 0     ok         12      1          magnitude            2                      1                    0                0
+301     10:52:40.172                 2     ok         13      0                               0                      0                    0                0
+302     10:52:40.272                 0     ok         13      0                               0                      0                    0                0
+  경고: 미래로 튄 수집 시각 1곳: 튄 행 다음부터 원래 시간축으로 판정했습니다. 튄 행 주변은 기록이 끊겨 첫 창이 다시 찹니다.
+  일괄=스트림(청크 1·7·128): [True, True, True]
+
+### U2a 튄 행 바로 뒤에 시각 결측 한 행
+  시각 순서 사건(보류·새 기준·튐) (0, 0, 1) | 사건 3개 | 사건 시작 알림 3 | 격상 2 | 사건별(행·시작·격상): {1: {'rows': 284, 'notifications': 1, 'escalations': 1}, 2: {'rows': 1, 'notifications': 1, 'escalations': 0}, 3: {'rows': 281, 'notifications': 1, 'escalations': 1}}
+  한 사건에 시작·격상 알림이 두 번 이상인 사건: []
+           timestamp  time_order_event         status  record_id  alarm             reason  incident_id  incident_notification  incident_escalation  incident_update
+299     10:52:40.072                 0             ok         11      1  waveform+dynamics            1                      0                    0                0
+300  11:51:07.943000                 0             ok         12      1          magnitude            2                      1                    0                0
+301                                  0  bad_timestamp         13      0      invalid_input            0                      0                    0                0
+302     10:52:40.172                 2             ok         14      0                               0                      0                    0                0
+303     10:52:40.272                 0             ok         14      0                               0                      0                    0                0
+  경고: 미래로 튄 수집 시각 1곳: 튄 행 다음부터 원래 시간축으로 판정했습니다. 튄 행 주변은 기록이 끊겨 첫 창이 다시 찹니다.
+  일괄=스트림(청크 1·7·128): [True, True, True]
+
+### U2b 튄 행 바로 뒤에 과거(−1시간) 한 행
+  시각 순서 사건(보류·새 기준·튐) (1, 0, 1) | 사건 3개 | 사건 시작 알림 3 | 격상 2 | 사건별(행·시작·격상): {1: {'rows': 284, 'notifications': 1, 'escalations': 1}, 2: {'rows': 1, 'notifications': 1, 'escalations': 0}, 3: {'rows': 281, 'notifications': 1, 'escalations': 1}}
+  한 사건에 시작·격상 알림이 두 번 이상인 사건: []
+           timestamp  time_order_event          status  record_id  alarm             reason  incident_id  incident_notification  incident_escalation  incident_update
+299     10:52:40.072                 0              ok         11      1  waveform+dynamics            1                      0                    0                0
+300  11:51:07.943000                 0              ok         12      1          magnitude            2                      1                    0                0
+301  09:52:40.172000                 1  bad_time_order         13      0      invalid_input            0                      0                    0                0
+302     10:52:40.172                 2              ok         14      0                               0                      0                    0                0
+303     10:52:40.272                 0              ok         14      0                               0                      0                    0                0
+  경고: 역순 수집 시각 1행: 기준 시각보다 이르므로 판정을 보류했습니다. 수집 PC 시각과 입력 순서를 확인하세요. 미래로 튄 수집 시각 1곳: 튄 행 다음부터 원래 시간축으로 판정했습니다. 튄 행 주변은 기록이 끊겨 첫 창이 다시 찹니다.
+  일괄=스트림(청크 1·7·128): [True, True, True]
+
+## U3 기록 첫 행 바로 뒤의 과거 한 행(기록 사이 공백 안의 시각)
+
+### U3 대조: 과거 행 없음
+  시각 순서 사건(보류·새 기준·튐) (0, 0, 0) | 사건 1개 | 사건 시작 알림 1 | 격상 1 | 사건별(행·시작·격상): {1: {'rows': 6, 'notifications': 1, 'escalations': 1}}
+  한 사건에 시작·격상 알림이 두 번 이상인 사건: []
+  경고: (없음)
+  일괄=스트림(청크 1·7·128): [True, True, True]
+
+### U3a 7.0초 행 뒤에 6.0초 행 한 개(1초 과거)
+  시각 순서 사건(보류·새 기준·튐) (0, 0, 1) | 사건 2개 | 사건 시작 알림 2 | 격상 1 | 사건별(행·시작·격상): {1: {'rows': 1, 'notifications': 1, 'escalations': 0}, 2: {'rows': 5, 'notifications': 1, 'escalations': 1}}
+  한 사건에 시작·격상 알림이 두 번 이상인 사건: []
+          timestamp  time_order_event status  record_id  alarm     reason  incident_id  incident_notification  incident_escalation  incident_update
+37  10:00:03.700000                 0     ok          0      0                       0                      0                    0                0
+38  10:00:07.000000                 0     ok          1      1  magnitude            1                      1                    0                0
+39  10:00:06.000000                 2     ok          2      0                       0                      0                    0                0
+40  10:00:07.100000                 0     ok          3      1  magnitude            2                      1                    0                0
+41  10:00:07.200000                 0     ok          3      1  magnitude            2                      0                    1                0
+  경고: 미래로 튄 수집 시각 1곳: 튄 행 다음부터 원래 시간축으로 판정했습니다. 튄 행 주변은 기록이 끊겨 첫 창이 다시 찹니다.
+  일괄=스트림(청크 1·7·128): [True, True, True]
+
+### U3b 대조: 과거 행 시각이 앞 기록 끝보다 이른 경우(3.0초)
+  시각 순서 사건(보류·새 기준·튐) (1, 0, 0) | 사건 1개 | 사건 시작 알림 1 | 격상 1 | 사건별(행·시작·격상): {1: {'rows': 6, 'notifications': 1, 'escalations': 1}}
+  한 사건에 시작·격상 알림이 두 번 이상인 사건: []
+          timestamp  time_order_event          status  record_id  alarm         reason  incident_id  incident_notification  incident_escalation  incident_update
+37  10:00:03.700000                 0              ok          0      0                           0                      0                    0                0
+38  10:00:07.000000                 0              ok          1      1      magnitude            1                      1                    0                0
+39  10:00:03.000000                 1  bad_time_order          2      0  invalid_input            0                      0                    0                0
+40  10:00:07.100000                 0              ok          3      1      magnitude            1                      0                    1                0
+41  10:00:07.200000                 0              ok          3      1      magnitude            1                      0                    0                0
+  경고: 역순 수집 시각 1행: 기준 시각보다 이르므로 판정을 보류했습니다. 수집 PC 시각과 입력 순서를 확인하세요.
+  일괄=스트림(청크 1·7·128): [True, True, True]
+
+### U3c 앞 기록의 마지막 행(3.7초)이 다음 기록 첫 행 뒤에 다시 도착(재전송)
+  시각 순서 사건(보류·새 기준·튐) (0, 0, 1) | 사건 2개 | 사건 시작 알림 2 | 격상 1 | 사건별(행·시작·격상): {1: {'rows': 1, 'notifications': 1, 'escalations': 0}, 2: {'rows': 5, 'notifications': 1, 'escalations': 1}}
+  한 사건에 시작·격상 알림이 두 번 이상인 사건: []
+          timestamp  time_order_event status  record_id  alarm     reason  incident_id  incident_notification  incident_escalation  incident_update
+37  10:00:03.700000                 0     ok          0      0                       0                      0                    0                0
+38  10:00:07.000000                 0     ok          1      1  magnitude            1                      1                    0                0
+39  10:00:03.700000                 2     ok          2      0                       0                      0                    0                0
+40  10:00:07.100000                 0     ok          3      1  magnitude            2                      1                    0                0
+41  10:00:07.200000                 0     ok          3      1  magnitude            2                      0                    1                0
+  경고: 미래로 튄 수집 시각 1곳: 튄 행 다음부터 원래 시간축으로 판정했습니다. 튄 행 주변은 기록이 끊겨 첫 창이 다시 찹니다.
+  일괄=스트림(청크 1·7·128): [True, True, True]

@@ -1,0 +1,3 @@
+                         records r2_med f_med f_near06 lag1_med res_lag1_med mean_gt_sd
+정상 B 평가(길이≥17)               145  0.995   0.6     100%    0.927         0.36         0%
+정상 B 평가 + 60.6 Hz 2.4 ms     725  0.482   0.6      84%    0.393       -0.114         0%

@@ -1,0 +1,15 @@
+F.........                                                               [100%]
+=================================== FAILURES ===================================
+__________________________ test_committed_run_passes ___________________________
+
+    def test_committed_run_passes():
+>       assert pc.verify(HERE) == []
+E       AssertionError: assert ['manifest.js...ess.csv', ...] == []
+E         
+E         Left contains 7 more items, first extra item: 'manifest.json: code_sha256 변경(실행 기록과 다름) — press_guard/model.py'
+E         Use -v to get more diff
+
+analysis/press_evidence/test_contract.py:24: AssertionError
+=========================== short test summary info ============================
+FAILED analysis/press_evidence/test_contract.py::test_committed_run_passes - ...
+1 failed, 9 passed in 2.52s

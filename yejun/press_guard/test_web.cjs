@@ -24,7 +24,7 @@ assert.doesNotThrow(()=>lineChart(box,long,['a','b','c'].map(key=>({...series[0]
 state.selected=3; renderDetail(null);
 assert.equal(state.selected,null); assert.equal(document.getElementById('replay').disabled,true);
 // 사건 대기열과 모의 운용: 커서가 격상 행에 이르기 전에는 1단계로 보이고, 첫 알림 전 사건은 대기열에 없다.
-const incidents=[{incident_id:1,first_row:10,level:2,escalation_row:12,priority_rank:1,evidence:'magnitude',first_timestamp:'t1',cases:2,max_probability:0.55,max_likelihood_ratio:121},
+const incidents=[{incident_id:1,first_row:10,level:2,escalation_row:12,priority_rank:1,evidence:'magnitude',first_timestamp:'t1',cases:2,max_probability:0.55,max_likelihood_ratio:121,action:'진동·부하 확인'},
                  {incident_id:2,first_row:30,level:1,escalation_row:null,priority_rank:2,evidence:'waveform',first_timestamp:'t2',cases:1,max_probability:0.2,max_likelihood_ratio:20}];
 const cases=[{case_uid:10,incident_id:1,record_id:0,row_from:0,row_to:11,first_row:10},
  {case_uid:12,incident_id:1,record_id:1,row_from:12,row_to:19,first_row:12},
@@ -44,6 +44,9 @@ state.levelFilter='2'; assert.equal(filteredIncidents().map(c=>c.incident_id).jo
 state.levelFilter='all'; state.sim=null;
 renderLevelKpis(); assert.equal(document.getElementById('k-case').textContent,'1'); assert.equal(document.getElementById('k-level1').textContent,'1');
 renderQueue(); assert.match(document.getElementById('queue').innerHTML,/badge l2">점검 요청/);
+// 대기열은 단계·근거·권장 확인만 보인다. 포화된 이상 확률(모형 상한)은 상세 패널에서 π 가정과 함께만 보인다.
+assert.match(document.getElementById('queue').innerHTML,/권장 확인: 진동·부하 확인/); assert.match(document.getElementById('queue').innerHTML,/권장 확인: —/);
+assert.doesNotMatch(document.getElementById('queue').innerHTML,/이상 확률|모형 상한/);
 // 같은 기록구간에 건이 둘이어도 행 범위로 따로 찾는다.
 assert.equal(caseRows({record_id:0,row_from:5,row_to:9}).map(p=>p.row_id).join(','),'5,6,7,8,9');
 assert.equal(caseRows({record_id:0,row_from:40,row_to:44})[0].row_id,40);

@@ -1,0 +1,55 @@
+....F...F..................................................s............ [ 50%]
+.................................F.....................................  [100%]
+=================================== FAILURES ===================================
+________________________ test_verify_detects_tampering _________________________
+
+tmp_path = PosixPath('/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/pytest-of-heoyejun/pytest-119/test_verify_detects_tampering0')
+
+    def test_verify_detects_tampering(tmp_path):
+        if not (OUT / "expected").is_dir():
+            pytest.skip("동결 기대값이 없다")
+        out = tmp_path / "outputs"
+        shutil.copytree(OUT, out)
+        art = tmp_path / "artifacts"; shutil.copytree(HERE / "artifacts", art)
+>       assert verify.main(["--out", str(out), "--artifacts", str(art)]) == 0
+E       AssertionError: assert 1 == 0
+E        +  where 1 = <function main at 0x117687880>(['--out', '/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/pytest-of-heoyejun/pytest-119/test_verify_detects_...ar/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/pytest-of-heoyejun/pytest-119/test_verify_detects_tampering0/artifacts'])
+E        +    where <function main at 0x117687880> = verify.main
+
+yejun/press_guard/test_analyze.py:84: AssertionError
+----------------------------- Captured stdout call -----------------------------
+FAIL outputs.integrity  (['model.py: 실행 후 변경', 'verify.py: 실행 후 변경', 'web/app.js: 실행 후 변경'])
+
+58/59 통과. 코드 89d6ce4a721f vs 동결 89d6ce4a721f; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+____________________ test_decision_table_is_the_action_rule ____________________
+
+    def test_decision_table_is_the_action_rule():
+        """판단표는 조치 규칙과 같은 원천(model.DECISION_TABLE)에서 나온다."""
+        from model import DECISION_TABLE, ACTIONS, action_for
+        t = pd.read_csv(OUT / "decision_table_v2.csv")
+>       assert t.to_dict("records") == [dict(r) for r in DECISION_TABLE]
+E       AssertionError: assert [{'action': '...시각 오류)', ...}] == [{'action': '...시각 오류)', ...}]
+E         
+E         At index 0 diff: {'evidence': '크기(진동 센서)', 'check_target': '펌프 상·하부 진동 증가: 기어 마모·체결·베어링·부하 변화(가설)', 'action': '진동·부하 확인', 'checklist': '펌프·모터 체결 볼트, 커플링 정렬, 베어링 온도·소음, 흡입측 공기 혼입(캐비테이션 소음), 작동유 레벨·온도', 'failure_modes': 'FM1·FM2·FM3·FM4', 'source': '가이드북 6~7쪽: 펌프 내부 기어 마모 → 진동·소음 증가, 출력 유압 약화 → 불량품'} != {'evidence': '크기(진동 센서)', 'check_target': '펌프 상·하부 진동 증가: 기어 마모·체결·베어링·부하 변화 또는 센서 부착 이상(가설)', 'action': '진동·부하 확인', 'checklist': '진동 센서 부착·케이블(먼저), 펌프·모터 체결 볼트, 커플링 정렬, 베어링 온도·소음, 흡입측 공기 혼입(캐비테이션 소음), 작동유 레벨·온도', 'failure_modes': 'FM1·FM2·FM3·FM4·FM6', 'source': '가이드북 6~7...
+E         
+E         ...Full output truncated (2 lines hidden), use '-vv' to show
+
+yejun/press_guard/test_analyze.py:176: AssertionError
+__________________ test_overview_lists_metrics_external_audit __________________
+
+console = <serve.Console object at 0x122a19a30>
+
+    def test_overview_lists_metrics_external_audit(console):
+        o = console.overview()
+>       assert len(o["metrics"]) == 12 and len(o["external"]) == 18
+E       AssertionError: assert (12 == 12 and 0 == 18)
+E        +  where 12 = len([{'abnormal_notified_segments': 21, 'abnormal_scored_rate': 1.0, 'abnormal_segments': 21, 'alpha': 0.01, ...}, {'abnor.....}, {'abnormal_notified_segments': 21, 'abnormal_scored_rate': 1.0, 'abnormal_segments': 21, 'alpha': 0.05, ...}, ...])
+E        +  and   0 = len([])
+
+yejun/press_guard/test_serve.py:120: AssertionError
+=========================== short test summary info ============================
+FAILED yejun/press_guard/test_analyze.py::test_verify_detects_tampering - Ass...
+FAILED yejun/press_guard/test_analyze.py::test_decision_table_is_the_action_rule
+FAILED yejun/press_guard/test_serve.py::test_overview_lists_metrics_external_audit
+3 failed, 139 passed, 1 skipped in 763.88s (0:12:43)
+OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python -m  -q   748.83s user 7.89s system 98% cpu 12:44.62 total

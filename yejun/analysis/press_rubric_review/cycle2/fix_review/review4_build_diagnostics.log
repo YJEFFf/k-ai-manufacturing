@@ -1,0 +1,2 @@
+완료 105.9초, 표 23개, 그림 5장
+OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python   101.41s user 6.22s system 99% cpu 1:48.19 total

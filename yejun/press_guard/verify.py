@@ -10,7 +10,7 @@ NaN·±inf 위치가 같고, 실수 열은 행마다(동결 때 float32로 저�
 상대 1e-6 안이어야 통과한다. 경보가 한 행이라도 바뀌거나, 행 사이 값을 맞바꾸거나, 작은 값 열을 몇 배로 바꾸면 실패한다.
 예외는 정상 기준 분포의 순위(ECDF)로 바꾼 점수 열(score·g_*)의 ECDF 구간(g ≤ 1.35, 꼬리 확률 약 5% 이상)이다. 상수만 다른 창처럼
 수학적으로 같은 점수들의 순위가 기기마다 한 칸씩 뒤바뀌므로(리눅스 x86-64 실측 최대 2.3e-4, 경보 불변) 행마다 1e-3, 열 요약은 상대 1e-4까지
-허용한다. 꼬리 구간은 연속식이라 순위가 흔들리지 않으므로 엄격 비교를 그대로 쓴다.
+허용한다(요약의 최솟값·최댓값이 ECDF 구간이면 행별과 같은 1e-3). 꼬리 구간은 연속식이라 순위가 흔들리지 않으므로 엄격 비교를 그대로 쓴다.
 결과 CSV는 |차이| ≤ 1e-9 + 1e-7·|값|(기기 간 실측 최대 상대 2.5e-9의 약 40배), 정수·문자 열은 정확 비교. 순위 통계 열만 COLUMN_TOLERANCE에 이유와 함께 따로 둔다.
 모델 파일은 동결 사본(expected/guard_*.json·probability_*.json)과 SHA-256이 같거나, 다른 기기면 모든 원소가 수치로 같아야 한다(equivalence.py).
 실행 메타데이터(elapsed_s·환경)는 비교하지 않는다.
@@ -38,7 +38,6 @@ RESULTS = ["metrics.csv", "rolling.csv", "cases_A.csv", "cases_B.csv", "incident
            "error_conditions_v2.csv", "error_conditions_segments_v2.csv", "interaction_2x2_v2.csv", "records_first_alarm_v2.csv", "uncertainty_v2.csv", "workload_v2.csv",
            "decision_table_v2.csv"] + list(INSIGHT_TABLES)
 META = ["manifest.json", "audit.json", "analysis_summary.json"]
-ARTIFACTS = ["guard_A.json", "guard_B.json"]
 TOL = 1e-9
 RTOL = 1e-7
 # 순위 통계 열: 기록 최대 점수 가운데 수학적으로 같은 값의 순위가 기기마다 뒤바뀌면 스피어만 상관이 조금 달라진다(리눅스 x86-64 실측 3e-4).
@@ -68,7 +67,7 @@ def _row_bound(column, frozen):
 
 
 def prediction_digest(path: Path) -> dict:
-    """전체·정확 비교 열·NaN/±inf 위치 해시, 실수 열별 [유한 개수, 합, 제곱합, 최솟값, 최댓값]과 행별 지문(0.001 격자)."""
+    """전체·정확 비교 열·NaN/±inf 위치 해시, 실수 열별 [유한 개수, 합, 제곱합, 최솟값, 최댓값]과 행별 값(float32, zlib·base64)."""
     x = pd.read_csv(path)
     exact = [c for c in x.columns if c in EXACT_COLUMNS or not pd.api.types.is_float_dtype(x[c])]
     numeric = [c for c in x.columns if c not in exact]
@@ -83,12 +82,6 @@ def prediction_digest(path: Path) -> dict:
     return dict(sha256=D.sha256_file(path), rows=int(len(x)), columns=list(x.columns), exact_columns=exact,
                 exact_sha256=hashlib.sha256(x[exact].astype(str).to_csv(index=False).encode()).hexdigest(),
                 nonfinite_sha256=nonfinite, numeric_summary=summary, row_values=rows, alarm_rows=int(x.alarm.sum()) if "alarm" in x else None)
-
-
-def _close(a, b):
-    if a[0] != b[0]:
-        return False
-    return all((u is None and w is None) or (u is not None and w is not None and np.isclose(u, w, rtol=1e-7, atol=1e-9)) for u, w in zip(a[1:], b[1:]))
 
 
 def compare_predictions(out: Path, exp: Path) -> list[dict]:
@@ -125,8 +118,15 @@ def compare_predictions(out: Path, exp: Path) -> list[dict]:
                     break
                 rtol = ECDF_SUMMARY_RTOL if c in ECDF_COLUMNS else ROW_RTOL
                 a, b = now["numeric_summary"][c], e["numeric_summary"][c]
-                if a[0] != b[0] or not all((u is None and w is None) or (u is not None and w is not None and abs(u - w) <= ROW_ATOL + rtol * max(abs(u), abs(w)))
-                                           for u, w in zip(a[1:], b[1:])):
+
+                def close(k, u, w):
+                    if u is None or w is None:
+                        return u is None and w is None
+                    bound = ROW_ATOL + rtol * max(abs(u), abs(w))
+                    if c in ECDF_COLUMNS and k >= 3 and w <= ECDF_G_MAX:     # 순위 구간의 최솟값·최댓값은 행별 허용과 같게(값이 작아 상대 허용이 너무 좁다)
+                        bound = max(bound, ECDF_ROW_ATOL)
+                    return abs(u - w) <= bound
+                if a[0] != b[0] or not all(close(k, u, w) for k, (u, w) in enumerate(zip(a, b)) if k):
                     reason = f"{c} 열 요약(개수·합·제곱합·최솟값·최댓값)이 동결 실행과 다름(상대 {rtol:g})"
                     break
         res.append(dict(file=name, ok=not reason, reason=reason, note="" if reason else "기기 간 부동소수 차이만 있음(행별·열 요약 허용오차 안)"))

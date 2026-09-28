@@ -13,6 +13,12 @@ from scipy import optimize, stats
 
 TRANSITION_SEED = 20260928
 POWER_SEED = 0
+JITTER_SEED = 20260929
+JITTER_REPEATS = 5
+# (원 주파수 가설 Hz, 표본화 시각 흔들림 RMS ms). 10 Hz 표본에서 0.6 Hz로 보이려면 원 신호가 k·10 ± 0.6 Hz다. 60.6 Hz는 상용 전원 대역
+# (60 Hz 직입이면 실제 표본화 주기가 명목과 약 1% 다른 경우와 같은 접힘), 50.6 Hz는 인버터 운전의 예, 0.6 Hz는 앨리어싱이 아닌 물리 주기 대조다.
+# 위상 오차는 2π·(원 주파수)·δt라 60·60.6 Hz의 차이(1%)는 결과에 거의 영향이 없다. 2.4 ms는 이상 파일의 전류 사인 R² 중앙값 0.451과 같은 크기(class_differences.csv)
+JITTER_CONDITIONS = ((None, 0.0), (60.6, .05), (60.6, .1), (60.6, .2), (60.6, .5), (60.6, 2.4), (50.6, .1), (50.6, .2), (0.6, 2.4))
 SPLICE_ROW = 25
 PAIR_COUNT = 200
 LOW, LOADED = "저수준", "부하"
@@ -142,6 +148,65 @@ def transition_stress(normal, segments, states, models, test_starts, alphas=(.01
     table.attrs["note"] = ("사후 스트레스 시험(현장 정상 전환 경보율 아님). 같은 평가 구간 50행 기록을 25행에서 전류 0.6 Hz 위상과 평균에 맞춰 잇기 "
                            "200쌍/조건, 전류 위상 오프셋 0~16. 같은 상태 대조에는 진동 위상 이음매도 남는다. 이득은 전체 정상의 상태별 중앙값 비로 "
                            "계단·10행·20행 경사를 적용하며 각 평가 원기록을 한 번씩 쓴다. 평가 데이터와 반복 원기록을 공유한다. 모델·문턱 불변")
+    return table
+
+
+def jitter_stress(normal, segments, models, test_starts, sine_fit, min_len=17, alpha=.01):
+    """표본화 시각 흔들림(지터) 민감도. 정상 평가 기록(길이 ≥ min_len)마다 전류 사인(최적 격자 주파수)과 상수를 적합하고
+    잔차는 그대로 둔 채, 사인 위상에 2π·(원 주파수)·δt(δt ~ N(0, σ), 표본마다 독립)를 더한다. 진동은 그대로다.
+
+    원 주파수·흔들림 모양은 가정이다(시각 열은 명목값이라 실제 흔들림을 잴 수 없다). 경보율은 가정별 민감도이며 현장 오경보율이 아니다.
+    """
+    current = SENSORS[2]
+    output = []
+    for sid, model in models.items():
+        test = normal[segments >= test_starts[sid]].reset_index(drop=True)
+        seg = segments[segments >= test_starts[sid]]
+        x0 = test[current].to_numpy(float)
+        lengths = pd.Series(seg).value_counts()
+        fits = {}
+        for s in sorted(lengths[lengths >= min_len].index):
+            idx = np.flatnonzero(seg == s)
+            frequency = sine_fit(x0[idx])[0]
+            coef = tone_coefficients(x0[idx], frequency)
+            fits[s] = (idx, frequency, coef, x0[idx] - tone_design(len(idx), frequency) @ coef)
+        keep = np.isin(seg, list(fits))
+        for frequency_hz, sigma_ms in JITTER_CONDITIONS:
+            rng = np.random.default_rng(JITTER_SEED)
+            repeats = JITTER_REPEATS if sigma_ms > 0 else 1
+            level1 = level2 = total = 0
+            first = {"magnitude": 0, "waveform": 0, "dynamics": 0}
+            r2, fitted_frequency = [], []
+            for _ in range(repeats):
+                x = x0.copy()
+                for s, (idx, f, coef, residual) in fits.items():
+                    phase = 2 * np.pi * f * np.arange(len(idx)) * .1
+                    if sigma_ms > 0:
+                        phase = phase + 2 * np.pi * frequency_hz * rng.normal(0, sigma_ms / 1e3, len(idx))
+                    x[idx] = coef[0] * np.cos(phase) + coef[1] * np.sin(phase) + coef[2] + residual
+                    frequency_fit, r2_fit = sine_fit(x[idx])[:2]
+                    r2.append(r2_fit); fitted_frequency.append(frequency_fit)
+                frame = test.copy()
+                frame[current] = x
+                prediction = model.predict(frame, alpha)
+                prediction = prediction[keep].assign(record=seg[keep])
+                alarms = prediction.groupby("record").alarm.sum()
+                level1 += int((alarms >= 1).sum()); level2 += int((alarms >= 2).sum()); total += len(alarms)
+                for _, rows in prediction[prediction.alarm.eq(1)].groupby("record"):
+                    row = rows.iloc[0]
+                    first[max(row.reason.split("+"), key=lambda c: row[f"g_{c}"])] += 1
+            output.append(dict(split=sid, alpha=alpha, source_frequency_hz=frequency_hz if frequency_hz else np.nan, jitter_rms_ms=sigma_ms,
+                               repeats=repeats, records=len(fits), record_trials=total, level1_alerted=level1, level2_alerted=level2,
+                               level1_rate=level1 / total, level2_rate=level2 / total, sine_r2_median=float(np.median(r2)),
+                               fit_frequency_median=float(np.median(fitted_frequency)),
+                               fit_frequency_near_06_share=float(np.mean(np.abs(np.asarray(fitted_frequency) - .6) <= .05)),
+                               first_magnitude=first["magnitude"], first_waveform=first["waveform"], first_dynamics=first["dynamics"],
+                               seed=JITTER_SEED))
+    table = pd.DataFrame(output)
+    table.attrs["note"] = ("사후 스트레스·가설. 앨리어싱 가설 아래 표본화 시각 흔들림이 동결 v2 정상 경보에 주는 영향. 원 주파수·흔들림 모양(표본마다 독립 가우스)은 "
+                           "가정이고 시각 열은 명목값이라 실제 흔들림을 잴 수 없다. 전류 사인 위상만 바꾸고 잔차·진동은 그대로 둔다. 모델·문턱 불변. "
+                           "level*_rate는 기록 단위 경보 비율이다(사건 단위 알림 수가 아니다). fit_frequency_*는 흔들린 기록의 최적 사인 주파수로, "
+                           "이상 파일(class_differences.csv의 적합 주파수 행)과 비교한다")
     return table
 
 

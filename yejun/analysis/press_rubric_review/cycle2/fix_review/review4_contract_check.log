@@ -1,0 +1,8 @@
+FAIL manifest.json: code_sha256 변경(실행 기록과 다름) — press_guard/model.py
+FAIL diagnostics_manifest.json: code_sha256 변경(실행 기록과 다름) — yejun/press_guard/model.py
+FAIL diagnostics_manifest.json: cited 변경(실행 기록과 다름) — yejun/press_guard/model.py
+FAIL class_differences.csv: 모양·열 불일치 (13, 9) vs (12, 9)
+FAIL 동결 목록에 없는 결과 — current_offset.csv
+FAIL 동결 목록에 없는 결과 — sampling_jitter_stress.csv
+FAIL failure_mode_map.csv: 문자 열 evidence 불일치
+실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 46개)

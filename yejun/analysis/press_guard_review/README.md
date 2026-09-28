@@ -88,7 +88,7 @@
 | 항목 | 수정 |
 |---|---|
 | F1 재적합 민감도 없음 | `analyze.py`에 raw/matched/coarse별 학습·보정·평가 재실행(`sensitivity_v2.csv`)과 matched 성분 절제(`ablation_v2.csv`, R15) 추가. matched 재적합 v2가 저장 모델 지표와 같음을 실행 중 assert |
-| F2 조건 정의·분모 | 사분위 경계를 정상 학습 구간 기준 하나로 통일하고 표에 저장, 진폭 신뢰 제한 행/구간 수 기록, 구간 단위 조건표(`error_conditions_segments_v2.csv`), 진동×파형 2×2(`interaction_2x2_v2.csv`) 추가. v1 analysis와 같은 정의(진동 두 센서 max|z| q95, R² q05) |
+| F2 조건 정의·분모 | 사분위 경계를 정상 학습 구간 기준 하나로 통일하고 표에 저장, 진폭 신뢰 제한 행/구간 수 기록, 구간 단위 조건표(`error_conditions_segments_v2.csv`), 진동×파형 2×2(`interaction_2x2_v2.csv`) 추가. v1 analysis와 같은 정의(진동 두 센서 max\|z\| q95, R² q05) |
 | F3 알림 검사에 성능 혼재 | audit를 "구간당 알림은 경보 유무와 일치(정확성)"와 "이상 21구간 모두 탐지(성능 회귀)"로 분리(16개). `contracts.AUDIT_NAMES` 갱신 |
 | F4 예측 CSV 계약 | `model_id`·`protocol_version`·`criterion`·`is_scored`·`anomaly_score` 열 추가, v1↔v2 열 대응을 README에 명시 |
 | F5 기록 표현 | press_early README 216행으로 정정, protocol.json의 "이상 라벨 미사용"을 계수·문턱에 한정하고 채택 기준이 이상 결과를 참조하는 탐색적 선택임을 명시. 실험 재실행으로 manifest 갱신(metrics 동일) |

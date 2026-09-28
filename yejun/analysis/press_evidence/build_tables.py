@@ -1,4 +1,4 @@
-"""프레스 진단·근거 보강 표 — 루브릭 검수(d9655af)의 R1~R4·R10·R14·R18~R22.
+"""프레스 진단·근거 보강 표 — 루브릭 검수(d9655af)의 R1~R4·R10·R14·R18~R22와 적대적 검수 J2(전류 수준 치우침).
 
 원본 CSV와 동결 v2 모델(press_guard/artifacts)만 읽는다. v1·v2 동결 기대값 밖의 분석용 표이며 보고서 서술이 아니다.
 모델·문턱·분할은 바꾸지 않는다. 이미 본 이상 21구간을 쓰는 기술 통계다.
@@ -17,7 +17,7 @@ from scipy import stats
 HERE = Path(__file__).resolve().parent
 YEJUN = HERE.parents[1]
 sys.path.insert(0, str(YEJUN / "press_guard"))
-from model import GuardModel, D, BASE, layout  # noqa: E402
+from model import GuardModel, D, BASE, layout, ACTIONS  # noqa: E402
 from analyze import segment_feature_table, condition_bounds, _wave, AMP_MIN_LEN  # noqa: E402
 from press.calibrate import conformal_p, segment_max  # noqa: E402
 from press.diagnosis import sine_fit, MIN_FIT_LEN  # noqa: E402
@@ -170,6 +170,24 @@ def quality_index(raw):
 
 
 # ---------- R4 형식 밖 클래스 차이 ----------
+# 구간 평균·SD를 비교할 최소 길이(1초, 적대적 검수 J2의 기준). 순수 0.6 Hz 사인도 10행이면 위상에 따라 |평균| > SD가 될 수 있고
+# (11행 이상이면 없다), 기록보다 주기가 긴 느린 변동(예: 0.22 Hz 사인은 17행에서 57%)도 |평균| > SD가 된다. 그래서 길이≥17·50행도 함께 적는다.
+OFFSET_MIN_LEN = 10
+
+
+def offset_stats(cur, seg, time):
+    """전류 구간 평균의 치우침(적대적 검수 J2): |평균| > SD 구간 수(길이 ≥10·≥17·50행), 모든 값이 양수인 구간 수, |평균| 최대,
+    시간순 이웃 구간 평균의 상관."""
+    g = pd.DataFrame(dict(seg=seg, cur=cur, time=time)).groupby("seg")
+    s = pd.DataFrame(dict(n=g.cur.size(), mean=g.cur.mean(), sd=g.cur.std(ddof=1), low=g.cur.min(), start=g.time.min())).sort_values("start")
+    over = lambda q: f"{int((q['mean'].abs() > q.sd).sum())}/{len(q)}"
+    long = s[s.n >= OFFSET_MIN_LEN]
+    m = long["mean"].to_numpy()
+    return dict(off_over_sd=over(long), off_over_sd17=over(s[s.n >= 17]), off_over_sd50=over(s[s.n >= 50]),
+                off_all_pos=f"{int((long.low > 0).sum())}/{len(long)}", off_max=float(long["mean"].abs().max()),
+                off_lag1=float(np.corrcoef(m[:-1], m[1:])[0, 1]))
+
+
 def class_differences(raw, text, seg_n, seg_a):
     n, a = raw["normal"], raw["abnormal"]
     q = {k: D.quantize(D.inputs_only(f), "matched") for k, f in raw.items()}
@@ -197,10 +215,13 @@ def class_differences(raw, text, seg_n, seg_a):
             corr=float(np.corrcoef(q[k].AI0_Vibration, q[k].AI1_Vibration)[0, 1]),
             corr_seg_median=float(np.median(cors)), corr_seg_neg=f"{int((np.asarray(cors) < 0).sum())}/{len(cors)}",
             cur_mean=float(pd.Series(cur).groupby(sg).mean()[lens[lens >= 17].index].median()),
-            r2=float(np.median(r2)), freq=float(np.median(fr)), kurt=float(np.mean(dm ** 4) / np.mean(dm ** 2) ** 2))
+            **offset_stats(cur, sg, pd.to_datetime(f.TimeStamp)),
+            r2=float(np.median(r2)), freq=float(np.median(fr)), freq06=float(np.mean(np.abs(np.asarray(fr) - .6) <= .05)),
+            kurt=float(np.mean(dm ** 4) / np.mean(dm ** 2) ** 2))
     fN, fA = feat["normal"], feat["abnormal"]
     sigma = lambda r2: float(np.sqrt(-np.log(r2)) / (2 * np.pi * 60) * 1e3)   # 60 Hz 앨리어싱 가정의 등가 시각 흔들림(ms)
-    alias = f"앨리어싱 가설(60 Hz 순시값, 독립 가우스 시각 흔들림)이면 R² {fA['r2']:.3f}은 RMS 약 {sigma(fA['r2']):.1f} ms, 정상 {fN['r2']:.3f}은 약 {sigma(fN['r2']):.2f} ms 흔들림과 같은 크기(검증 불가)"
+    alias = (f"앨리어싱 가설(60 Hz 순시값, 독립 가우스 시각 흔들림)이면 R² {fA['r2']:.3f}은 RMS 약 {sigma(fA['r2']):.1f} ms, 정상 {fN['r2']:.3f}은 약 {sigma(fN['r2']):.2f} ms 흔들림과 같은 크기(검증 불가). "
+             "R² 크기만 같을 뿐, 독립 흔들림은 이상 파일의 적합 주파수(아래 행)를 재현하지 못한다(sampling_jitter_stress.csv)")
     rows = [
         ("수집 날짜·요일·시간대", "2022-07-12(화) 00:00~01:17", "2022-07-17(일) 10:51~10:54", "아니오", "모든 성분·모델", "모든 성분·모델", "분리 불가(교락 자체)", "라벨=파일=날짜"),
         ("진동 저장 소수 자릿수(최빈)", fN["dec_vib"], fA["dec_vib"], "예", "-", "-", "수집 차이(저장 형식)", "matched 1e-4 반올림으로 제거"),
@@ -213,9 +234,19 @@ def class_differences(raw, text, seg_n, seg_a):
          f"구간 평균 제거 시 정상 {fN['lag1_dm']:.3f}·이상 {fA['lag1_dm']:.3f}"),
         ("상·하부 진동 상관(합동)", round(fN["corr"], 3), round(fA["corr"], 3), "아니오", "직접 사용 안 함", "AE·LSTM", "분리 불가",
          f"부호 반전. 구간별(길이≥17) 중앙값 정상 {fN['corr_seg_median']:.2f}(음수 {fN['corr_seg_neg']})·이상 {fA['corr_seg_median']:.2f}(음수 {fA['corr_seg_neg']})"),
-        ("전류 구간 평균 중앙값(길이≥17)", round(fN["cur_mean"], 2), round(fA["cur_mean"], 2), "아니오", "크기·예측 오차(상수항)", "5NN·IF·AE·LSTM", "분리 불가(영점·계측 가능성 포함)", "짧은 구간 표본평균이라 DC 오프셋과 같지 않다"),
+        ("전류 구간 평균 중앙값(길이≥17)", round(fN["cur_mean"], 2), round(fA["cur_mean"], 2), "아니오", "예측 오차(AR 상수항: 수준 이동에 반응)", "5NN·IF·AE·LSTM",
+         "분리 불가(영점·계측 가능성 포함)", "정상은 짧은 구간 표본평균의 흔들림 크기다. 이상의 치우침은 아래 행과 current_offset.csv"),
+        (f"전류 구간 |평균| > 구간 SD(길이≥{OFFSET_MIN_LEN})", fN["off_over_sd"], fA["off_over_sd"], "아니오",
+         "예측 오차(수준 이동에 반응). 이 이상 파일의 경보는 평균을 지워도 거의 같다(current_offset.csv)", "5NN·IF·AE·LSTM",
+         "분리 불가(영점 이동·계측·표본화 차이 가능성, FM6)",
+         f"길이≥17 정상 {fN['off_over_sd17']}·이상 {fA['off_over_sd17']}, 50행 {fN['off_over_sd50']}·{fA['off_over_sd50']}. "
+         f"모든 값이 양수인 구간 정상 {fN['off_all_pos']}·이상 {fA['off_all_pos']}. 구간 |평균| 최대 정상 {fN['off_max']:.1f}·이상 {fA['off_max']:.1f}. "
+         f"시간순 이웃 구간 평균의 상관 정상 {fN['off_lag1']:.3f}·이상 {fA['off_lag1']:.3f}(이상은 기록 사이에 이어지는 느린 수준 변화). "
+         "기록이 접힌 교류의 한 주기 이상이면 구간 평균은 0 근처여야 하지만, 기록보다 주기가 긴 느린 변동도 |평균| > SD가 된다(이상 적합 주파수 중앙 약 0.2 Hz). "
+         "원인은 가릴 수 없다"),
         ("전류 사인 적합 R² 중앙값(길이≥10)", round(fN["r2"], 4), round(fA["r2"], 4), "아니오", "파형·예측 오차", "LSTM·AE", "분리 불가(고장 또는 표본화 시각 흔들림)", alias),
-        ("전류 사인 적합 주파수 중앙값(Hz)", round(fN["freq"], 3), round(fA["freq"], 3), "아니오", "파형·예측 오차", "LSTM", "분리 불가", "0~5 Hz 격자 최소제곱"),
+        ("전류 사인 적합 주파수 중앙값(Hz)", round(fN["freq"], 3), round(fA["freq"], 3), "아니오", "파형·예측 오차", "LSTM", "분리 불가",
+         f"0~5 Hz 격자 최소제곱. 0.6 ± 0.05 Hz 안 기록 정상 {fN['freq06']:.0%}·이상 {fA['freq06']:.0%}(길이≥{MIN_FIT_LEN})"),
         ("전류 첨도(구간 평균 제거, 길이≥17)", round(fN["kurt"], 3), round(fA["kurt"], 3), "아니오", "간접(파형)", "-", "분리 불가", "순수 사인 1.5, 가우스 잡음 3"),
     ]
     cols = ["feature", "normal", "abnormal", "removed_by_matched", "v2_components_reacting", "v1_package_models_reacting", "interpretation", "note"]
@@ -330,6 +361,59 @@ def predictions(raw, seg_n):
         test = raw["normal"][part_masks(seg_n, sid)["test"]]
         out[sid] = dict(model=model, normal=model.predict(test, .01), abnormal=model.predict(raw["abnormal"], .01))
     return out
+
+
+# ---------- 이상 전류 수준 치우침과 v2 경보(적대적 검수 J2) ----------
+def remove_record_mean(frame, sensors):
+    f = frame.copy()
+    seg = D.segments(f)
+    for c in sensors:
+        x = f[c].astype(float)
+        f[c] = x - x.groupby(seg).transform("mean")
+    return f
+
+
+def shift_current(frame, delta):
+    f = frame.copy()
+    f[D.SENSORS[2]] = f[D.SENSORS[2]].astype(float) + delta
+    return f
+
+
+def record_means(frame, min_len=OFFSET_MIN_LEN):
+    """matched 전류의 기록 평균(길이 ≥ min_len)."""
+    x = D.quantize(D.inputs_only(frame), "matched")[D.SENSORS[2]].to_numpy(float)
+    g = pd.Series(x).groupby(D.segments(frame))
+    return g.mean()[g.size() >= min_len]
+
+
+def current_offset(raw, seg_n, preds):
+    """전류 수준 치우침과 동결 v2 경보(α1%). 분석 전용 반사실 변환이다(기록 전체 평균을 쓰므로 실시간 규칙이 아니다).
+    ① 이상 파일과 정상 평가 구간에서 기록마다 평균을 지운다. ② 정상 평가 구간의 전류를 이상 기록 |평균|의 중앙값·최댓값만큼 옮긴다
+    (예측 오차 성분이 수준 이동에 반응하는가, 적대적 검수 2차 R4-04)."""
+    level = record_means(raw["abnormal"]).abs()
+    shifts = [(f"전류 +{v:.1f}(이상 기록 |평균| {k})", float(v)) for k, v in (("중앙값", level.median()), ("최댓값", level.max()))]
+    rows = []
+    for sid, pr in preds.items():
+        model, test = pr["model"], raw["normal"][part_masks(seg_n, sid)["test"]]
+        runs = [("원자료", "abnormal", pr["abnormal"]), ("원자료", "normal_test", pr["normal"])]
+        for name, sensors in (("전류 기록 평균 제거", (D.SENSORS[2],)), ("세 센서 기록 평균 제거", tuple(D.SENSORS))):
+            runs += [(name, "abnormal", model.predict(remove_record_mean(raw["abnormal"], sensors), .01)),
+                     (name, "normal_test", model.predict(remove_record_mean(test, sensors), .01))]
+        runs += [(name, "normal_test", model.predict(shift_current(test, delta), .01)) for name, delta in shifts]
+        for name, data, p in runs:
+            al = p.alarm.to_numpy(bool)
+            has = lambda part: al & p.reason.str.contains(part).to_numpy()
+            rows.append(dict(split=sid, variant=name, data=data, alpha=.01, alarm_rows=int(al.sum()), rows=len(p),
+                             records_alarmed=int(p.groupby("record_id").alarm.max().sum()), records=int(p.record_id.nunique()),
+                             magnitude_rows=int(has("magnitude").sum()),
+                             magnitude_current_rows=int((has("magnitude") & (p.magnitude_sensor == D.SENSORS[2]).to_numpy()).sum()),
+                             waveform_rows=int(has("waveform").sum()), dynamics_rows=int(has("dynamics").sum()),
+                             current_shape_action_rows=int((al & (p.action == ACTIONS["current_shape"]).to_numpy()).sum())))
+    t = pd.DataFrame(rows)
+    t.attrs["note"] = ("α1%. 크기 성분은 세 센서 |z|의 최댓값이며 magnitude_current_rows는 그 최댓값이 전류에서 나온 경보 행이다. "
+                       "파형 성분은 상수항을 함께 적합해 평균 이동에 반응하지 않는다. 예측 오차 성분(AR(2))은 상수항 때문에 수준 이동 δ에 "
+                       "(1−φ1−φ2)·δ만큼 반응한다. current_shape_action_rows는 권장 확인이 '전류 파형·계측 확인'인 경보 행이다. 변환은 분석 전용이다")
+    return t
 
 
 def component_complementarity(preds):
@@ -472,6 +556,7 @@ def main():
         "current_grid.csv": current_grid(raw),
         "gaps.csv": gaps,
         "segment_rule_tolerance.csv": tol,
+        "current_offset.csv": current_offset(raw, seg_n, preds),
     }
     notes = {}
     for name, t in tables.items():
@@ -483,7 +568,7 @@ def main():
         blas = [{k: v for k, v in i.items() if k in ("internal_api", "version", "num_threads")} for i in threadpool_info()]
     except ImportError:
         blas = None
-    D.dump_json(dict(purpose="루브릭 검수 R1~R4·R10·R14·R18~R22 진단·근거 보강 표", input_hashes={k: v["sha256"] for k, v in report["files"].items()},
+    D.dump_json(dict(purpose="루브릭 검수 R1~R4·R10·R14·R18~R22·적대적 검수 J2 진단·근거 보강 표", input_hashes={k: v["sha256"] for k, v in report["files"].items()},
                      artifacts={p.name: D.sha256_file(p) for p in sorted(ART.glob("guard_*.json"))},
                      code_sha256={"build_tables.py": D.sha256_file(Path(__file__)), "press_guard/model.py": D.sha256_file(YEJUN / "press_guard" / "model.py"),
                                   "press_guard/analyze.py": D.sha256_file(YEJUN / "press_guard" / "analyze.py")},

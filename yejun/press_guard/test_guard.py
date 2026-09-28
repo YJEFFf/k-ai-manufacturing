@@ -180,7 +180,7 @@ def test_timestamp_jitter_keeps_records(data, jitter_ms):
 
 
 def test_short_records_raise_timing_warning(data):
-    """간격이 크게 흔들려 기록이 쪼개지면(평균 5행 미만) 수집 시각 간격 경고를 낸다."""
+    """간격이 크게 흔들려 기록이 쪼개지면(평균 8행 미만) 수집 시각 간격 경고를 낸다. 7행 조각(8행 파형 창이 차지 않음)도 경고한다."""
     from model import load_bundle, timing_warning
     _, a = data
     m = load_bundle(HERE / "artifacts" / "guard_B.json")
@@ -188,3 +188,7 @@ def test_short_records_raise_timing_warning(data):
     t = pd.to_datetime(j.TimeStamp)
     j["TimeStamp"] = (t + pd.to_timedelta(np.random.default_rng(1).uniform(-.05, .05, len(t)), unit="s")).astype(str)
     assert "수집 시각 간격" in timing_warning(m.predict(j, .01))
+    k = np.arange(len(a))
+    j["TimeStamp"] = (pd.Timestamp("2022-07-17") + pd.to_timedelta(k * .1 + (k // 7) * 3.0, unit="s")).astype(str)   # 7행마다 3초 공백
+    assert "평균 기록 길이 7.0행" in timing_warning(m.predict(j, .01))
+    assert "수집 시각 간격" not in timing_warning(m.predict(a, .01))

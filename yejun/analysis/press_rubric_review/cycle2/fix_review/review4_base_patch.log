@@ -1,0 +1,29 @@
+patching file yejun/analysis/press_evidence/README.md
+patching file yejun/analysis/press_evidence/build_diagnostics.py
+patching file yejun/analysis/press_evidence/build_tables.py
+patching file yejun/analysis/press_evidence/class_differences.csv
+patching file yejun/analysis/press_evidence/contract.json
+patching file yejun/analysis/press_evidence/diagnostic_probes.py
+patching file yejun/analysis/press_evidence/diagnostics_manifest.json
+patching file yejun/analysis/press_evidence/failure_mode_map.csv
+patching file yejun/analysis/press_evidence/manifest.json
+can't find file to patch at input line 538
+Perhaps you used the wrong -p or --strip option?
+The text leading up to this was:
+--------------------------
+|diff --git a/yejun/analysis/press_guard_review/README.md b/yejun/analysis/press_guard_review/README.md
+|index 4656d68..3daecec 100644
+|--- a/yejun/analysis/press_guard_review/README.md
+|+++ b/yejun/analysis/press_guard_review/README.md
+--------------------------
+File to patch: 
+Skip this patch? [y] 
+Skipping patch.
+1 out of 1 hunk ignored
+patching file yejun/press_guard/HISTORY.md
+patching file yejun/press_guard/OPERATIONS.md
+patching file yejun/press_guard/README.md
+patching file yejun/press_guard/model.py
+patching file yejun/press_guard/test_web.cjs
+patching file yejun/press_guard/verify.py
+patching file yejun/press_guard/web/app.js

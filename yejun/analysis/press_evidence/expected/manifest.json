@@ -1,5 +1,5 @@
 {
-  "purpose": "루브릭 검수 R1~R4·R10·R14·R18~R22 진단·근거 보강 표",
+  "purpose": "루브릭 검수 R1~R4·R10·R14·R18~R22·적대적 검수 J2 진단·근거 보강 표",
   "input_hashes": {
     "normal": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
     "abnormal": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e"
@@ -9,8 +9,8 @@
     "guard_B.json": "b64ac3b30bc697034104287964f3154e88c8a50749ccdec04f6d4f8744fd6969"
   },
   "code_sha256": {
-    "build_tables.py": "2952b498504a76d0929ce2e25c4d6953ee2b1c5204b14d09e4564a4cb34327a8",
-    "press_guard/model.py": "89d6ce4a721fbc34ce3baafa4fc056c20cea42ed737d7a9deeeb58ebc6d5af9e",
+    "build_tables.py": "c8e0689046757f50b71bc98974df9ec336371a563ca2275628baa1b8156cd328",
+    "press_guard/model.py": "3ea9706175e85163c2bb3dff33eac8aebbbed6183b7d425f4489f99ae897023d",
     "press_guard/analyze.py": "d8c7ad4884ab29401a1afbfa228b20adcf16543da44ee22b33a4febb7840c076"
   },
   "sources": {
@@ -21,7 +21,7 @@
     "imbalance.csv": "25f925cd4096060404131c75ee6fcf5438a7a0e9bc09415dd1f7c43868ffa917",
     "outliers.csv": "704fb6abb05fb56e34ef97c1e68ce872d08ded3220076c3974ec815599711e0c",
     "quality_index.csv": "2c09f0c14471692026ac9909d73fddf7076ac0e317dea11b8f7576976078fe91",
-    "class_differences.csv": "7305ce3ca6e576bea7079bfd8a4deb8a611e65c3021e5c54e4c2486435ce05c1",
+    "class_differences.csv": "5f764c21d473bcb270916c1eac97dd92c1fa83a32e9b587890276d91d1a8e19c",
     "split_context.csv": "9f3b99b623785085d030bd041dde55dc589fde88e46d8fb6df510c616eec39c1",
     "block_context.csv": "5e780a19fa57170ebb234f64c67fb469de436cb1e73095ee5933a066d5cbd154",
     "ar2_oscillator.csv": "d4e10ac087b2f5026e9062d7d030f73c6022f1298df1a50a75ff3eb7edfda2bc",
@@ -33,7 +33,8 @@
     "duplicate_rows.csv": "b00c711beb3262b67f6345b8426bb4f64f75103fbc3ba211d57baee82ca03a9d",
     "current_grid.csv": "de3ded79e0da43e754b9e2c05aa084f679193d58ff161b3a3877216b27a26f28",
     "gaps.csv": "b19fbc020a5576e9919cd5b2c7ba8fc4d0aba0e1aca4d035bc1505458d73df82",
-    "segment_rule_tolerance.csv": "bb37d8d96c62cae9f0dc2ee35f33bfa763c766c5113e86d69e9a54b995698e9d"
+    "segment_rule_tolerance.csv": "bb37d8d96c62cae9f0dc2ee35f33bfa763c766c5113e86d69e9a54b995698e9d",
+    "current_offset.csv": "14124cad48bd704e31f22eeccc422766ecbdc1074937c7a637b73d24cb2c9f7a"
   },
   "table_notes": {
     "block_context.csv": "v2A 열은 동결 A 모델 기준. 0~359는 A의 학습 자료라 표본 내 값이다. rolling은 해당 60구간을 평가로 둔 별도 재적합 결과(train.py --rolling)",
@@ -42,7 +43,8 @@
     "calibration_curve.csv": "기록구간 단위 정상 평가의 실현 경보율(기록 최소 p ≤ α). 같은 날·교환가능성 가정 아래의 주변 보장 점검이며 새 날짜 보장이 아니다. A 평가 구간은 보정보다 조용한 시간대라(R1) 실현율이 낮게 나오는 쪽으로 치우친다",
     "duplicate_rows.csv": "모든 값이 같은 완전 중복 1쌍. 삭제하지 않고 유지한다. 같은 시각이 경계가 되어 앞 구간(길이 2)과 뒤 구간(길이 1)으로 갈린다. 두 구간 모두 A 학습·B 보정에 있고 B 보정 최대 점수 순위가 119·120/120(최하위권)이라 α=1·3·5% 문턱(보정 최대 점수 1·3·6위)에 영향 없음",
     "current_grid.csv": "허용 1e-6 엄격 규칙의 이상 7.7%는 격자 상수 1.1920929의 유효숫자 한계에서 생긴 값이다. 최소제곱 간격(1.19209304)을 쓰면 이상 전류의 최대 잔차가 약 5.5e-6으로 float32 저장 정밀도(유효숫자 약 7자리) 수준이라 사실상 모두 격자 위에 있다. 엄격 규칙은 판별 의미가 없고, 격자 판정은 허용 1e-3 기준(정상 0.175%, 이상 100%)을 쓴다",
-    "segment_rule_tolerance.csv": "현행 규칙 |Δt−0.1|>1e-6. 0.1초 초과 1.5초 미만의 간격이 없어 허용오차를 1e-9~0.099초 어디로 바꿔도 600/21구간이다"
+    "segment_rule_tolerance.csv": "현행 규칙 |Δt−0.1|>1e-6. 0.1초 초과 1.5초 미만의 간격이 없어 허용오차를 1e-9~0.099초 어디로 바꿔도 600/21구간이다",
+    "current_offset.csv": "α1%. 크기 성분은 세 센서 |z|의 최댓값이며 magnitude_current_rows는 그 최댓값이 전류에서 나온 경보 행이다. 파형 성분은 상수항을 함께 적합해 평균 이동에 반응하지 않는다. 예측 오차 성분(AR(2))은 상수항 때문에 수준 이동 δ에 (1−φ1−φ2)·δ만큼 반응한다. current_shape_action_rows는 권장 확인이 '전류 파형·계측 확인'인 경보 행이다. 변환은 분석 전용이다"
   },
   "environment": {
     "python": "3.12.2",
@@ -73,5 +75,5 @@
       }
     ]
   },
-  "elapsed_s": 6.835855833000096
+  "elapsed_s": 9.223051084001781
 }

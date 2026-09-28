@@ -1,0 +1,82 @@
+        out = tmp_path / "outputs"
+        shutil.copytree(OUT, out)
+        art = tmp_path / "artifacts"; shutil.copytree(HERE / "artifacts", art)
+>       assert verify.main(["--out", str(out), "--artifacts", str(art)]) == 0
+E       AssertionError: assert 1 == 0
+E        +  where 1 = <function main at 0x143373880>(['--out', '/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/pytest-of-heoyejun/pytest-118/test_verify_detects_...ar/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/pytest-of-heoyejun/pytest-118/test_verify_detects_tampering0/artifacts'])
+E        +    where <function main at 0x143373880> = verify.main
+
+yejun/press_guard/test_analyze.py:84: AssertionError
+----------------------------- Captured stdout call -----------------------------
+FAIL outputs.integrity  (['model.py: 실행 후 변경', 'verify.py: 실행 후 변경', 'web/app.js: 실행 후 변경'])
+OK   inputs.sha256
+OK   expected.integrity
+OK   configuration
+OK   analysis_summary.json
+OK   metrics.csv  max|Δ|=0
+OK   rolling.csv  max|Δ|=0
+OK   cases_A.csv  max|Δ|=0
+OK   cases_B.csv  max|Δ|=0
+OK   incidents_A.csv  max|Δ|=0
+OK   incidents_B.csv  max|Δ|=0
+OK   model_comparison_v2.csv  max|Δ|=0
+OK   robustness_v2.csv  max|Δ|=0
+OK   sensitivity_v2.csv  max|Δ|=0
+OK   ablation_v2.csv  max|Δ|=0
+OK   error_conditions_v2.csv  max|Δ|=0
+OK   error_conditions_segments_v2.csv  max|Δ|=0
+OK   interaction_2x2_v2.csv  max|Δ|=0
+OK   records_first_alarm_v2.csv  max|Δ|=0
+OK   uncertainty_v2.csv  max|Δ|=0
+OK   workload_v2.csv  max|Δ|=0
+OK   decision_table_v2.csv  max|Δ|=0
+OK   probability_eval_v2.csv  max|Δ|=0
+OK   probability_reliability_v2.csv  max|Δ|=0
+OK   probability_conversion_v2.csv  max|Δ|=0
+OK   alert_levels_v2.csv  max|Δ|=0
+OK   alert_budget_design_v2.csv  max|Δ|=0
+OK   queue_mixed_ranks_v2.csv  max|Δ|=0
+OK   queue_injection_ranks_v2.csv  max|Δ|=0
+OK   queue_key_selection_v2.csv  max|Δ|=0
+OK   sensor_importance_v2.csv  max|Δ|=0
+OK   position_vibration_misses_v2.csv  max|Δ|=0
+OK   coupling_fit_v2.csv  max|Δ|=0
+OK   coupling_records_v2.csv  max|Δ|=0
+OK   fp_events_v2.csv  max|Δ|=0
+OK   near_miss_v2.csv  max|Δ|=0
+OK   near_miss_corr_v2.csv  max|Δ|=0
+OK   error_conditions_stats_v2.csv  max|Δ|=0
+OK   alert_levels_injection_v2.csv  max|Δ|=0
+OK   quality_windows_v2.csv  max|Δ|=0
+OK   label_free_alert_probability_v2.csv  max|Δ|=0
+OK   monitor_gain_v2.csv  max|Δ|=0
+OK   expected_effect_v2.csv  max|Δ|=0
+OK   fp_intensity_v2.csv  max|Δ|=0
+OK   fn_intensity_v2.csv  max|Δ|=0
+OK   error_condition_summary_v2.csv  max|Δ|=0
+OK   incident_summary_v2.csv  max|Δ|=0
+OK   unit_results_v2.csv  max|Δ|=0
+OK   probability_baselines_v2.csv  max|Δ|=0
+OK   artifacts/guard_A.json
+OK   artifacts/guard_B.json
+OK   artifacts/probability_A.json
+OK   artifacts/probability_B.json
+OK   predictions_normal_A.csv
+OK   predictions_normal_B.csv
+OK   predictions_abnormal_A.csv
+OK   predictions_abnormal_B.csv
+OK   test_predictions_A.csv
+OK   test_predictions_B.csv
+
+58/59 통과. 코드 89d6ce4a721f vs 동결 89d6ce4a721f; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED yejun/press_guard/test_analyze.py::test_error_condition_sums_match_metrics
+PASSED yejun/press_guard/test_analyze.py::test_records_first_alarm_consistent
+PASSED yejun/press_guard/test_analyze.py::test_comparison_contains_v1_and_v2_on_same_protocol
+PASSED yejun/press_guard/test_analyze.py::test_uncertainty_and_workload_observed_match
+FAILED yejun/press_guard/test_analyze.py::test_verify_detects_tampering - Ass...
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 4 passed in 2.94s
+OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python -m  -q   2.82s user 0.47s system 91% cpu 3.592 total
+tail -80  0.00s user 0.00s system 0% cpu 3.592 total

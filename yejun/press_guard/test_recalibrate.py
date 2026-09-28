@@ -1,5 +1,6 @@
 """recalibrate.py 계약: 단위 분할, α별 최소 보정 단위, 수락 검사 기록, 실패 시 저장 안 함."""
 import json
+from fractions import Fraction
 
 import numpy as np
 import pandas as pd
@@ -23,6 +24,7 @@ def test_recalibration_passes_and_saves(normal_csv, tmp_path):
     report = json.loads((tmp_path / "site_report.json").read_text(encoding="utf-8"))
     assert report["passed"] and report["model_saved"] and report["units"] == dict(total=480, train=300, cal=120, holdout=60, min_cal_for_alpha=99)
     assert {c["name"].split(" ")[0] for c in report["checks"]} >= {"정상", "고장"} and len(report["checks"]) == 4
+    assert report["coverage"]["flagged"] == [] and set(report["coverage"]["features"]) == {"current_rms", "vib0_sd", "vib1_sd"}
     model = GuardModel.load(out)
     assert len(model.cal) == 120 and model.state["split"] == "recalibrated"
 
@@ -124,3 +126,23 @@ def test_windows_option_filters_before_fitting(normal_csv, tmp_path):
     report = json.loads((tmp_path / "filtered_report.json").read_text(encoding="utf-8"))
     assert report["units"]["total"] == 420
     assert report["excluded_by_windows"]["rows_removed"] == len(drop)
+
+
+def test_coverage_null_is_exact_exchangeable_distribution():
+    """운전 범위 점검의 한도: 교환가능하면 보정 범위 밖 수락 단위 수의 정확한 분포(합 1, 평균 2m/(n+1))에서 구한다."""
+    for n, m in ((97, 48), (120, 60), (94, 96)):
+        pmf = recalibrate.outside_pmf(n, m)
+        assert sum(pmf) == 1 and sum(t * p for t, p in enumerate(pmf)) == Fraction(2 * m, n + 1)
+    assert recalibrate.outside_limit(97, 48, .95) == 3 and recalibrate.outside_limit(97, 48, 1 - .05 / 3) == 4
+
+
+def test_coverage_warns_when_holdout_state_is_outside_calibration(normal_csv):
+    """보정 자료가 덮지 못한 운전 상태(전류 2.5배)는 경고하고, 같은 날 정상 분할은 경고하지 않는다(수락 여부와 무관)."""
+    parts, _, _ = recalibrate.split_units(pd.read_csv(normal_csv), 120, 60)
+    same = recalibrate.coverage(parts["cal"], parts["holdout"])
+    assert same["flagged"] == [] and same["cal_units"] > 0 and same["holdout_units"] > 0
+    hot = parts["holdout"].copy()
+    hot["AI2_Current"] = hot["AI2_Current"] * 2.5
+    moved = recalibrate.coverage(parts["cal"], hot)
+    f = moved["features"]["current_rms"]
+    assert moved["flagged"] == ["current_rms"] and f["holdout_above"] == moved["holdout_units"] > f["limit"]

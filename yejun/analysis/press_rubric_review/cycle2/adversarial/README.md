@@ -106,6 +106,20 @@
 - **Windows는 실측하지 않았다.** x86-64 결과를 보면 같은 종류의 실패가 날 가능성이 높다.
 - 기록: [red_M_xplat_x86_64_keepgoing.log](red_M_xplat_x86_64_keepgoing.log), [red_M_xplat_x86_64_failures.log](red_M_xplat_x86_64_failures.log), [red_M_xplat_first_failures.log](red_M_xplat_first_failures.log), 요약 JSON 3개, 실행 스크립트 [red_M_xplat_run_in_container.sh](red_M_xplat_run_in_container.sh).
 
+## 보완 뒤 리눅스 재현(2026-09-29)
+
+1차 보완 커밋 110afa2를 같은 조건(git 없는 사본에 원본 CSV 두 개, `pip install -r requirements.txt`, `reproduce.py --tests --keep-going`)으로 다시 돌렸다. 두 컨테이너 모두 macOS의 colima 가상 머신에서 돌았다. x86-64는 Rosetta 에뮬레이션(AVX2까지)이라 실제 x86 하드웨어·AVX-512·Windows는 확인하지 못했다.
+
+| 환경 | 결과 | 걸린 시간 | 비고 |
+|---|---|---:|---|
+| 리눅스 arm64(Python 3.12.14) | 21/21 통과 | 1,979초 | v2 동결 59/59, 패키지 계약 4개, E1·E3(E2는 외부 자료 없음), 시험 v2 141 통과·2 건너뜀, v1 44 통과·2 건너뜀 |
+| 리눅스 x86-64(Rosetta) | 21/21 통과 | 4,087초 | 같음. audit 2,291초(에뮬레이션), v2 시험 1,130초 |
+
+- node가 없는 이미지라 웹 회귀 시험 단계가 없어 21단계다.
+- 새 검토자(검토 3)도 x86-64 사본에서 13/13 단계, verify 59/59를 따로 확인했다. 기기 간 차이가 가장 큰 결과 열은 허용 한계의 42%(값이 작은 ece)다.
+- 2차 보완 뒤의 재현은 [cycle2/README.md](../README.md)의 「보완 2차」 절에 적는다.
+- 기록: [linux_110afa2_arm64.log](linux_110afa2_arm64.log), [linux_110afa2_x86_64.log](linux_110afa2_x86_64.log), 요약 JSON 두 개(`linux_110afa2_*_summary.json`).
+
 ## 이 기록의 정정(2026-09-29, 코덱스 재검수 [recheck_20260929](../recheck_20260929/README.md)와 부모 재계산 [red_M_verify.log](red_M_verify.log) 5·6절)
 
 - **X-02의 "만"은 틀렸다.** v1 대비 미탐 감소 55행 중 위치 2~6이 A 49·B 51행이고, 위치 7 이후에서도 A 6·B 4행이 줄었다. "주로 기록 시작 직후"가 맞다.
@@ -120,6 +134,8 @@
 - 96.4와 「결함 0건」은 「내부 평가관이 찾은 결함을 모두 고쳤다」는 뜻으로만 쓴다.
 
 ## 처리 후보(예준 결정 전, 실행하지 않음)
+
+이 표를 쓴 뒤 코덱스 재검수의 보완 순서에 따라 결함 수정·교차 기기 재현·주장 재조정을 했다(보완 1·2차, [cycle2/README.md](../README.md)). 제출물 정리는 예준의 보고서·제출 작업 착수 지시 전이라 하지 않았다.
 
 | 묶음 | 내용 | 관련 |
 |---|---|---|

@@ -10,11 +10,11 @@
       "rows": 4690,
       "calls": 4690,
       "repeats": 3,
-      "seconds_best": 48.86,
-      "rows_per_second": 96.0,
-      "p50_ms": 11.282,
-      "p95_ms": 11.692,
-      "max_ms": 31.236
+      "seconds_best": 64.0692,
+      "rows_per_second": 73.2,
+      "p50_ms": 14.498,
+      "p95_ms": 15.027,
+      "max_ms": 34.152
     },
     {
       "label": "8행",
@@ -22,11 +22,11 @@
       "rows": 4690,
       "calls": 587,
       "repeats": 3,
-      "seconds_best": 6.796,
-      "rows_per_second": 690.1,
-      "p50_ms": 11.598,
-      "p95_ms": 12.02,
-      "max_ms": 26.673
+      "seconds_best": 8.75,
+      "rows_per_second": 536.0,
+      "p50_ms": 14.916,
+      "p95_ms": 15.423,
+      "max_ms": 30.2
     },
     {
       "label": "128행",
@@ -34,11 +34,11 @@
       "rows": 4690,
       "calls": 37,
       "repeats": 3,
-      "seconds_best": 0.6891,
-      "rows_per_second": 6806.0,
-      "p50_ms": 18.813,
-      "p95_ms": 19.699,
-      "max_ms": 19.85
+      "seconds_best": 0.8737,
+      "rows_per_second": 5367.9,
+      "p50_ms": 23.715,
+      "p95_ms": 24.553,
+      "max_ms": 26.535
     },
     {
       "label": "전체",
@@ -46,14 +46,14 @@
       "rows": 4690,
       "calls": 1,
       "repeats": 3,
-      "seconds_best": 0.279,
-      "rows_per_second": 16810.3,
-      "p50_ms": 282.234,
-      "p95_ms": 282.466,
-      "max_ms": 282.492
+      "seconds_best": 0.3428,
+      "rows_per_second": 13680.4,
+      "p50_ms": 354.045,
+      "p95_ms": 369.948,
+      "max_ms": 371.715
     }
   ],
-  "batch_predict_seconds": 0.2752,
+  "batch_predict_seconds": 0.2911,
   "environment": {
     "python": "3.12.2",
     "platform": "macOS-26.3.1-arm64-arm-64bit",
@@ -63,8 +63,28 @@
     "scikit_learn": "1.8.0",
     "scipy": "1.13.1",
     "matplotlib": "3.9.2",
-    "blas": null,
+    "blas": [
+      {
+        "api": "openblas",
+        "version": "0.3.23.dev",
+        "threads": 1,
+        "user_api": "blas"
+      },
+      {
+        "api": "openblas",
+        "version": "0.3.27",
+        "threads": 1,
+        "user_api": "blas"
+      },
+      {
+        "api": "openmp",
+        "version": null,
+        "threads": 1,
+        "user_api": "openmp"
+      }
+    ],
     "protocol_version": "v1",
+    "press_threads": "1",
     "processor": "arm",
     "omp_num_threads": "1"
   },

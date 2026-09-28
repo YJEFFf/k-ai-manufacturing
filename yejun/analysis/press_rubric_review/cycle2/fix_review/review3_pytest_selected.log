@@ -1,0 +1,10 @@
+# 검토 3: 수정 커밋 사본(저장 모델은 저장소 artifacts의 사본)에서 R1-02·R1-03·R1-04·R1-06 회귀 시험만 골라 실행
+# cd <사본>/yejun/press_guard && OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python -m pytest -v -p no:cacheprovider test_time_order.py -k 'frozen or reversed or short_fragments or alarmed_spike'
+test_time_order.py::test_frozen_artifacts_are_unchanged[guard_A.json-c938707f1dd16e7c239b8053e7f032d8fac828d6c753de2b898ba9130a594f10] PASSED [ 14%]
+test_time_order.py::test_frozen_artifacts_are_unchanged[guard_B.json-b64ac3b30bc697034104287964f3154e88c8a50749ccdec04f6d4f8744fd6969] PASSED [ 28%]
+test_time_order.py::test_frozen_artifacts_are_unchanged[probability_A.json-1a8100e78046393d9292fc7c305b5ec57b46c4e2c73b03abeb596052a8705f8a] PASSED [ 42%]
+test_time_order.py::test_frozen_artifacts_are_unchanged[probability_B.json-7fde4cd1bdfa74e78e2d3f07c5dbd9c27619e19b2e94ceb8fab786c27abcaae8] PASSED [ 57%]
+test_time_order.py::test_reversed_record_is_held_with_warning PASSED     [ 71%]
+test_time_order.py::test_short_fragments_do_not_bridge_long_gaps PASSED  [ 85%]
+test_time_order.py::test_alarmed_spike_row_does_not_split_incident PASSED [100%]
+================= 7 passed, 21 deselected in 83.74s (0:01:23) ==================

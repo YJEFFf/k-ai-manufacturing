@@ -2,6 +2,14 @@
 
 구현·검수 이력이다. 실행 설명은 [README.md](README.md), 운영 절차는 [OPERATIONS.md](OPERATIONS.md)에 있다. 아래 옛 기록의 명령·경로·수치는 당시 기준이다. 현재 값은 README와 outputs/를 따른다. 제출 묶음에는 넣지 않는다(tools/package_manifest.py).
 
+## 2026-09-29 적대적 검수와 보완(1·2차)
+
+앞선 채점을 모르는 적대적 검수(백지 채점 75.5·74.5, 중대 지적 8건)와 코덱스 재검수의 보완 순서를 따랐다. 근거와 처리표는 [적대적 검수](../analysis/press_rubric_review/cycle2/adversarial/README.md), [독립 검토](../analysis/press_rubric_review/cycle2/fix_review/), [처리 기록](../analysis/press_rubric_review/cycle2/README.md)에 있다.
+
+- 1차(110afa2): 수집 시각 순서를 상태 기계로 바꿨다(TimeOrder: 튄 미래 행 건너뛰기, 이른 시각 보류 뒤 정상 간격 3행이면 새 기준). 오류 행과 8행 미만 무경보 조각은 사건을 닫지 않는다. 5.0 Hz 사인 기저를 계수 2로 계산한다. 다른 기기의 동결 비교를 판정 열 정확·실수 행별 상대 1e-6(순위 구간 1e-3)·모델 원소 대조로 바꿨다. 단위별 결과·확률 기준선 표를 더했다. 리눅스 arm64·x86-64(에뮬레이션)에서 21/21단계가 통과했다.
+- 2차: 사건 추적의 되돌리기가 이미 나간 격상을 되돌리지 않게 하고, 되돌릴 대상을 튄 행으로 정했다. 튐 예외를 다음 표본(또는 60초 넘는 튐 뒤의 새 기록)으로 한정했다. 튄 행은 품질 시간창의 경계가 되지 않는다. 사인 투영 캐시를 고쳤다(1행 지연 p50 73.7 → 14.5 ms). 판단표는 계측(부착·영점·접지·수집 설정)을 먼저 보고 FM6을 후보에 넣는다. 대기열은 포화된 이상 확률 대신 권장 확인을 보인다. 재보정 도구에 운전 범위 점검 경고를 넣었다. 짧은 기록 경고 기준을 8행으로 올렸다. 전류 수준 치우침·수준 이동·표본화 흔들림 근거 표를 press_evidence에 더했다.
+- 주 지표(A F1 0.961938·B 0.970990, 정상 0/120·3/180, 이상 21/21)와 경보 규칙·문턱·분할은 그대로다.
+
 ## 2026-09-28 루브릭 사이클2 4회차 구현·독립 검수
 
 3회차의 실제 결함과 누락을 보완했다. [처리 기록](../analysis/press_rubric_review/cycle2/README.md)과 [검수 원칙](../analysis/press_rubric_review/cycle2/round4/review_protocol.md)에 근거를 남긴다. 이전 평가의 경쟁팀 순위 단정은 후속 채점에서 사용하지 않는다.
@@ -113,7 +121,7 @@ PYTHON=/opt/anaconda3/bin/python bash yejun/press_guard/tools/clean_repro.sh # �
 | `outputs/sensitivity_v2.csv` | 전처리(raw/matched/coarse)별로 **학습·보정·평가를 다시 실행**한 v1·v2 결과(PLAN §5.2 ①). matched 재적합 v2는 저장 모델 지표와 같음을 실행 중 확인 |
 | `outputs/ablation_v2.csv` | matched 재적합에서 v2 성분 절제: 센서 크기·파형·예측 오차·초반 창 전환을 각각 제거한 결과 |
 | `outputs/error_conditions_segments_v2.csv` | 구간 단위 조건표(길이·진동 산포·진폭·진동 수준·파형): 이상은 미탐 구간, 정상은 알림 구간. 진폭 조건에 신뢰 제한(길이<17) 구간 수 |
-| `outputs/interaction_2x2_v2.csv` | 진동 수준(진동 두 센서 max|z| > 정상 학습 q95) × 전류 파형(사인 R² < 정상 학습 q05) 교차표, v1·v2 경보 각각 |
+| `outputs/interaction_2x2_v2.csv` | 진동 수준(진동 두 센서 max\|z\| > 정상 학습 q95) × 전류 파형(사인 R² < 정상 학습 q05) 교차표, v1·v2 경보 각각 |
 | `outputs/error_conditions_v2.csv` | v1·v2의 미탐(이상)·오경보(정상) 조건: 구간 내 위치, 구간 길이, 진동 산포·전류 진폭 4분위, 가장 강한 성분. 분모 포함 |
 | `outputs/records_first_alarm_v2.csv` | 이상 21구간별 v1·v2 첫 경보 위치·미탐 행·첫 경보 근거 |
 | `outputs/uncertainty_v2.csv` | 이동 블록 부트스트랩: 정상 알림 구간 수(블록 5·10·20), 이상 미탐 행·탐지 구간(블록 3·5). 관측값이 주 결과 |

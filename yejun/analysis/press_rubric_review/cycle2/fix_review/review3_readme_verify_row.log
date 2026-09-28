@@ -1,0 +1,17 @@
+## 코드(verify.py)의 허용오차 상수
+  TOL = 1e-9
+  RTOL = 1e-7
+  ROW_RTOL, ROW_ATOL = 1e-6, 1e-9
+  ECDF_G_MAX, ECDF_ROW_ATOL, ECDF_SUMMARY_RTOL = 1.35, 1e-3, 1e-4
+  prediction_digest 설명: 전체·정확 비교 열·NaN/±inf 위치 해시, 실수 열별 [유한 개수, 합, 제곱합, 최솟값, 최댓값]과 행별 지문(0.001 격자).
+
+## README에서 verify 규칙을 적은 줄
+  208: | `expected/` | 동결 기대값: 결과 CSV 44개, manifest·audit·요약, 행 단위 예측 요약(`predictions_digest.json`, 행별 0.001 격자 지문 포함), 동결 모델 사본(`guard_*.json`·`probability_*.json`) |
+  218: | `python yejun/press_guard/verify.py` | 동결 기대값과 비교한다. 결과 CSV는 |차이| ≤ 1e-9 + 1e-9·|값|(순위 통계 열만 이유와 함께 따로), 정수·문자 열은 정확 비교다. 행 단위 예측은 SHA-256이 같으면 통과하고, 다르면(다른 기기) 판정 열(경보
+  235: - **실행 확인 범위.** 한 명령 재현과 전체 시험은 macOS arm64에서 실행했다. 다른 기기에서 다시 학습하면 점수의 부동소수 끝자리가 달라지므로, 동결 비교는 판정 열을 정확히, 점수를 행별 0.001 격자로 본다(검증 절). Windows에서는 실행하지 않았다.
+
+## GFM 렌더링: '검증' 표의 verify 행
+  칸 수: 2
+  첫 칸: `python yejun/press_guard/verify.py`
+  둘째 칸(렌더링된 내용 전체): '동결 기대값과 비교한다. 결과 CSV는'
+  원문 행의 이스케이프 안 된 '|' 수(행 끝 포함): 7

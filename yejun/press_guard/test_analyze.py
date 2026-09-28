@@ -128,6 +128,10 @@ def test_verify_compares_row_level_predictions(tmp_path):
     t = pd.read_csv(OUT / "test_predictions_A.csv"); t["score"] = t.score + 0.0009                   # 모든 행을 조금씩 옮기기
     t.to_csv(out / "test_predictions_A.csv", index=False)
     assert not {r["file"]: r["ok"] for r in verify.compare_predictions(out, out / "expected")}["test_predictions_A.csv"]
+    for shift, passes in ((5e-5, True), (2e-3, False)):         # 순위 구간 최솟값 행의 한 칸 뒤바뀜(검토 3)은 통과, 행별 허용 밖은 실패
+        t = pd.read_csv(OUT / "test_predictions_A.csv"); t.loc[t.score.idxmin(), "score"] += shift
+        t.to_csv(out / "test_predictions_A.csv", index=False)
+        assert {r["file"]: r["ok"] for r in verify.compare_predictions(out, out / "expected")}["test_predictions_A.csv"] is passes
 
 
 def test_refit_sensitivity_and_ablation_contract(tables):

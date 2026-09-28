@@ -37,10 +37,10 @@
     "press_threads": "1"
   },
   "resources": {
-    "peak_rss_mb": 238.8
+    "peak_rss_mb": 240.9
   },
   "code_hashes": {
-    "model.py": "89d6ce4a721fbc34ce3baafa4fc056c20cea42ed737d7a9deeeb58ebc6d5af9e",
+    "model.py": "3ea9706175e85163c2bb3dff33eac8aebbbed6183b7d425f4489f99ae897023d",
     "probability.py": "67007ee9c8a9a12c48707e77230907dac2c155a519edfe7868863065aa4f34dd",
     "insights.py": "1e54e8edc400b8b9e50077f4cdd272f931a5524c048b80839ec32f900d3d97d0",
     "monitor.py": "a970ef8c0a8e002864f8551b541ad23d55c39a09dad4147c83e4fd7c240ad37b",
@@ -48,16 +48,16 @@
     "runtime.py": "7ffd6d0f57f8d9e26e2303a943ae3630a792b9dff18b01a15006b2883f7c7f69",
     "train.py": "498b2bd681729595965ee0bf938106eb313c7ee14a19a4e962fb8cbce55e0449",
     "predict.py": "d7b92210df81dda577721e3bc9e48c76006106a7108f358a888714b494df0dc9",
-    "recalibrate.py": "392e4d3f1b3c8cc57015289b6092c452d270719d6329c496058db423d24d3723",
+    "recalibrate.py": "20daf8e3c38c5bdaa45bf7c499199cf744a52dc1c3e41aed48df094f35942dd3",
     "analyze.py": "d8c7ad4884ab29401a1afbfa228b20adcf16543da44ee22b33a4febb7840c076",
     "audit.py": "6deaa6120cdd38d061d1fe331fb605d5ac66aaaec1bc60199182b6995af25cd9",
-    "verify.py": "e35d070a27c185ab9d653f61349d0bba9d80a733f0aa299a05c58206744c8a11",
+    "verify.py": "c1feaded219c3bbf4f33da08922dcbb004344f7e70f953b54d1450da9fc841ec",
     "contracts.py": "79bf67f34fb671b388df16bee727e4b95177b1953afb9562634a3d4851c50502",
     "equivalence.py": "88cedf10e91354c5ed9b24255a64cc62cf56328aee77b17c364a1a6babb11e5b",
     "serve.py": "d93182ae913498e0cd31229f0408b62052b47480f872a982dff1e7181b5a40b6",
     "benchmark.py": "009ea99125a24d3951e4eeb2eba5b5a00dfefdac99a9676d69d8afef57e1d8ae",
     "tools/clean_repro.sh": "d35cd8c7581daf027e69dd3d38de90acc620b56590b2716dc3595f84e0862e3d",
-    "web/app.js": "73ba4539e8ad8b366298542f9aeee5c96711247e66bfc92779e45624826ae34f",
+    "web/app.js": "f1f942fa9353ceb35229f64ebb88f211fd9f234dd1c7ae6c2b7d45bc7eb170c0",
     "web/index.html": "a50128f16628f3d8dd13660ecb96e65324360f17bbfa1f0a4c5243d290a6206b",
     "web/style.css": "271dabddc6fa88a463fb2a3f73f726ffa56de6fa4f983cf0e97edbf5eb6d1012"
   },
@@ -85,9 +85,9 @@
     "test_predictions_B.csv": "1eda4c5153f3420c3ab7d69ed4b67779bc78532e042aec9d01b13d4be9d71846"
   },
   "exploratory": true,
-  "elapsed_s": 28.43573883400677,
+  "elapsed_s": 23.937674542001332,
   "analysis": {
-    "training_fingerprint": "de1b1b2fbe593048090fb14df48c778d0ef0acb1a5cd4cee959509e1a6ac6920",
+    "training_fingerprint": "de2a57726b24d407679b4252f1a27f815a1703331e57e2c71bc43a8392e3d52b",
     "config": {
       "reps": 2000
     },
@@ -111,7 +111,7 @@
       "records_first_alarm_v2.csv": "14ba376ea2f5789655b0af14c389b7b5aa4c758b5734293d4afdd3e952fb058b",
       "uncertainty_v2.csv": "c10df72d1662caf044679acbe88c65c1384ba8c68b8d36188926f40ff07aec72",
       "workload_v2.csv": "ad3be354fa8baa944fd7c4ee14eb8e950ca37259a68dec4440184cf7f920c74b",
-      "decision_table_v2.csv": "2368bebbb7df8a68db7b815fe78dc2881d33d36b5caa4335d3ac3dd4861324a7",
+      "decision_table_v2.csv": "cdac1fd3d6c26305498bf3d8958be221cefd46f9867d58fb028790e9e24826a1",
       "probability_eval_v2.csv": "941da19e4fd5f712236302718da8a28c21e0bf477813aa4912ebcae01cd4caaf",
       "probability_reliability_v2.csv": "89e79e7b5bc99d7c01b6cf66119e2d1a77d8fab5f010d1c38ce25963d019bad0",
       "probability_conversion_v2.csv": "a98514df92deb12bedadd83570bd27578a3e02a2076f1d7e83798a4baf509dcc",
@@ -139,7 +139,7 @@
       "incident_summary_v2.csv": "7184320225c2227630a5fb902b67cf3bf47915c313e8abd70ac7de6ba25c02f9",
       "unit_results_v2.csv": "a980686b64806d60458c9c1b8e30bf6b3ee3831acb47216d82104ab351a22761",
       "probability_baselines_v2.csv": "16664fa43d19dd0576a0d8721c071ccd36ddd6a66e4c01a6bb90b4091ae98f46",
-      "analysis_summary.json": "8af503f32af1a209d52bb03dc02078793b2e33504e84018ccea40c635c189c51",
+      "analysis_summary.json": "cde51a4017e224ee2051bdad0c8bfd91153dbd5963bdace8f118066e979d1193",
       "model_comparison_v2.md": "308ede3d08463847c84afacc104d05bcfdc2157e409288ac80a780011afaae41",
       "fig_recall_by_position_v2.png": "5f79f3f8505d10fdcb9f516ef5562651d904b1766f019a47dbcd3cbd8ed4fc5c",
       "fig_first_alarm_v2.png": "c629b9f2bb01600c2956cc37e2ead5a538dd6fca0aad8f06021ce395668aaf25",
@@ -151,7 +151,7 @@
       "fig_position_vibration_v2.png": "12e94aab84fadbfc9d43cfd127e0a361ae7a12cc8e9b3d3dca680337e27997cb"
     }
   },
-  "audit_sha256": "47b4757a5aa74d9bba0aae73366d1dc2d9b2bdc9d7a6809aebef9a2dea8ef629",
+  "audit_sha256": "181872d5deedef5393460f2e0f967c14fa9ca5e020dd825fa476096898104e88",
   "prediction_digest_sha256": "5a08f4f3e8e0ae16b9738eab84bbd40e6de4fd95631c74e6675643eacc9b2454",
   "frozen_artifacts": {
     "guard_A.json": "c938707f1dd16e7c239b8053e7f032d8fac828d6c753de2b898ba9130a594f10",

@@ -81,12 +81,20 @@
     const cursor = state.sim.row;
     if (simCache && simCache.source === full && simCache.row === cursor) return simCache.view;
     const points = full.points.filter(p => Number(p.row_id) <= cursor);
+    // 튄 행(시각 순서 부호 2 앞에서 기준 시각을 옮긴 행)은 품질 시간창의 경계가 되지 못한다(model.spike_rows와 같은 규칙).
+    const spike = new Set();
+    let lastRef = null;
+    for (const p of points) {
+      const ev = Number(p.time_order_event);
+      if (ev === 2 && lastRef !== null) spike.add(lastRef);
+      if (ev !== 1 && p.status !== 'bad_timestamp') lastRef = p.row_id;
+    }
     const units = [];
     for (const p of points) {
       const key = `${p.record_id}:${p.alert_unit ?? Math.floor(p.position / full.alert_unit_rows)}`;
       if (!units.length || units[units.length - 1].key !== key) units.push({ key, record: p.record_id, rows: [], flagged: [], valid: true });
       const unit = units[units.length - 1]; unit.rows.push(p);
-      unit.valid = unit.valid && p.status === 'ok';
+      unit.valid = unit.valid && p.status === 'ok' && !spike.has(p.row_id);
       if (Number(p.alarm) === 1) unit.flagged.push(p);
     }
     const extrema = (rows, key, minimum = false) => {
@@ -292,7 +300,7 @@
       return `<button type="button" class="queue-item${Number(c.incident_id) === state.selected ? ' selected' : ''}" data-incident="${c.incident_id}">
         <div class="queue-top"><span class="queue-id"><em class="badge l${lv}">${LEVEL[lv]}</em> 우선 ${fmt.int(c.priority_rank)} · 사건 ${fmt.int(c.incident_id)} · 건 ${fmt.int(c.cases)}</span><span class="queue-time">${esc(fmt.time(c.first_timestamp))}${span}</span></div>
         <div class="chips">${chips}</div>
-        <div class="queue-action">경보 ${fmt.int(c.alarm_rows)}/${fmt.int(c.observed_rows)}행 · 이상 확률 ${probText(c)}${ref}${done}</div>
+        <div class="queue-action">경보 ${fmt.int(c.alarm_rows)}/${fmt.int(c.observed_rows)}행 · 권장 확인: ${esc(c.action || '—')}${ref}${done}</div>
       </button>`;
     }).join('');
     queue.querySelectorAll('.queue-item').forEach(el => el.addEventListener('click', () => selectIncident(Number(el.dataset.incident))));
@@ -357,7 +365,7 @@
       ['문턱 대비 최대 점수', Number.isFinite(thr) && thr > 0 ? `${fmt.num(c.peak_score, 2)} / ${fmt.num(thr, 2)} (×${fmt.num(c.peak_score / thr, 1)})` : fmt.num(c.peak_score, 2)],
       ['최소 p값', `${fmt.num(c.min_p, 4)} (가능한 최솟값 ${fmt.num(state.result.min_p_attainable, 4)})`],
       ['근거', reasons || '—'],
-      ['이상 확률', `${probText(c)} (이상 행 비율 π ${fmt.pct(state.result.prior, 1)} 가정 · 우도비 ${fmt.num(c.max_likelihood_ratio, 1)})`],
+      ['이상 확률(참고)', `${probText(c)} (이상 행 비율 π ${fmt.pct(state.result.prior, 1)} 가정 · 우도비 ${fmt.num(c.max_likelihood_ratio, 1)})`],
     ].map(([k, v]) => `<div><span>${k}</span><b>${esc(v)}</b></div>`).join('') + (members.length > 1
       ? `<div class="case-tabs">${members.map((x, k) => `<button type="button" class="quiet${x.case_uid === c.case_uid ? ' on' : ''}" data-case="${x.case_uid}">건 ${k + 1} · 구간 ${fmt.int(x.record_id)}</button>`).join('')}</div>` : '');
     summary.querySelectorAll('.case-tabs button').forEach(el => el.addEventListener('click', () => selectIncident(inc.incident_id, Number(el.dataset.case))));

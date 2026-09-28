@@ -62,3 +62,35 @@ def test_observation_power_accounts_for_short_record_blindness():
     assert 0 < power["power"] < .5  # 17행은 창 하나뿐이므로 전환을 검출할 수 없다.
     assert power["long_record_power"] > power["power"]
     assert power["expected_detected_length_weighted"] > power["expected_detected_approx"]
+
+
+def test_jitter_stress_rebuilds_signal_without_jitter_and_touches_only_long_current_records(monkeypatch):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "press_submission"))
+    from press.diagnosis import sine_fit
+    rng = np.random.default_rng(1)
+    frames, segments = [], []
+    for record, n in enumerate((20, 5, 30)):          # 5행 기록은 min_len(17) 미만이라 바뀌면 안 된다
+        t = np.arange(n) * .1
+        frames.append(pd.DataFrame({"AI0_Vibration": rng.normal(0, .07, n), "AI1_Vibration": rng.normal(0, .1, n),
+                                    "AI2_Current": 2 + 120 * np.cos(2 * np.pi * .6 * t + record) + rng.normal(0, 1, n)}))
+        segments += [record] * n
+    normal, segments = pd.concat(frames, ignore_index=True), np.array(segments)
+    seen = []
+
+    class Recorder:                                   # 모델 대신 입력을 기록하고 경보 없음을 돌려준다
+        def predict(self, frame, alpha):
+            seen.append(frame.copy())
+            return pd.DataFrame({"alarm": np.zeros(len(frame), int), "reason": "", "g_magnitude": 0., "g_waveform": 0., "g_dynamics": 0.})
+
+    monkeypatch.setattr(probes, "JITTER_CONDITIONS", ((None, 0.0), (60.6, .2)))
+    monkeypatch.setattr(probes, "JITTER_REPEATS", 2)
+    table = probes.jitter_stress(normal, segments, {"A": Recorder()}, {"A": 0}, sine_fit)
+    assert len(seen) == 3 and table.records.tolist() == [2, 2] and table.record_trials.tolist() == [2, 4]
+    short = segments == 1
+    np.testing.assert_allclose(seen[0].AI2_Current, normal.AI2_Current, rtol=0, atol=1e-9)   # 흔들림 0이면 원 신호 그대로
+    for frame in seen[1:]:
+        pd.testing.assert_frame_equal(frame[["AI0_Vibration", "AI1_Vibration"]], normal[["AI0_Vibration", "AI1_Vibration"]])
+        np.testing.assert_array_equal(frame.AI2_Current[short], normal.AI2_Current[short])
+        changed = frame.AI2_Current.to_numpy() != normal.AI2_Current.to_numpy()
+        assert changed[~short].mean() > .9 and not changed[short].any()
+    assert not np.array_equal(seen[1].AI2_Current, seen[2].AI2_Current)                        # 반복마다 새 흔들림

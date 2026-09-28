@@ -1,7 +1,7 @@
 """프레스 진단 보강 표 2 — 루브릭 사이클2 1회차 평가관 01(D1~D6)·평가관 05(O1(a)·O4), 2회차 평가관 01(R2-D1~D3)·05(R2-O10·O11).
 
 원본 CSV, 동결 v2 모델(press_guard/artifacts), 커밋된 분석 표만 읽는다. O1(a)만 `train.py --rolling`과 같은 5겹을
-GuardModel.fit으로 다시 적합한다(모델은 저장하지 않는다). 모델·문턱·분할은 바꾸지 않고, build_tables.py의 17개 표도 건드리지 않는다.
+GuardModel.fit으로 다시 적합한다(모델은 저장하지 않는다). 모델·문턱·분할은 바꾸지 않고, build_tables.py의 18개 표도 건드리지 않는다.
 관계·해석은 모두 기술 통계 또는 가설이며 인과·고장 근거가 아니다. 대회 보고서가 아니다.
 
     python yejun/analysis/press_evidence/build_diagnostics.py
@@ -608,6 +608,19 @@ def failure_mode_map():
                    f"AI1 {ob.loc['AI1_Vibration', 'spectral_peaks_hz']}로 흩어진다. 정상은 약 1.8·3.6 Hz 두 곳에 몰린다. "
                    f"고정 주파수의 회전 성분 하나라는 해석은 지지되지 않는다(가설). 5초 5기록뿐이며 0.4 Hz 미만은 느린 흐름에 가깝다. "
                    f"{cite_rows(HERE / 'observability.csv', ('abnormal,AI0_Vibration', 'abnormal,AI1_Vibration'))}")
+    cd = pd.read_csv(HERE / "class_differences.csv").set_index("feature", drop=False)
+    off = cd.loc[[k for k in cd.index if k.startswith("전류 구간 |평균| > 구간 SD")][0]]
+    co = pd.read_csv(HERE / "current_offset.csv")
+    pick = lambda sid, variant, data: co[co.split.eq(sid) & co.variant.str.startswith(variant) & co.data.eq(data)].iloc[0]
+    offset_kept = ", ".join(f"{sid} {pick(sid, '원자료', 'abnormal').alarm_rows}→{pick(sid, '전류 기록 평균 제거', 'abnormal').alarm_rows}행·"
+                            f"{pick(sid, '전류 기록 평균 제거', 'abnormal').records_alarmed}/{pick(sid, '전류 기록 평균 제거', 'abnormal').records}구간"
+                            for sid in ("A", "B"))
+    top = co[co.variant.str.contains("최댓값")].iloc[0].variant
+    shifted = ", ".join(f"{sid} {pick(sid, top, 'normal_test').records_alarmed}/{pick(sid, top, 'normal_test').records}"
+                        f"(원자료 {pick(sid, '원자료', 'normal_test').records_alarmed})" for sid in ("A", "B"))
+    js = pd.read_csv(HERE / "sampling_jitter_stress.csv")
+    jit = lambda sid: js[js.split.eq(sid) & js.source_frequency_hz.eq(60.6) & js.jitter_rms_ms.eq(.1)].iloc[0]
+    jitter_text = ", ".join(f"{sid} {jit(sid).level1_rate:.0%}" for sid in ("A", "B"))
     e1 = pd.read_csv(SUPP / "e1_summary.csv")
     e2 = pd.read_csv(SUPP / "e2_uci_metrics.csv")
     e2_local = e2[e2["mode"] == "local_normal_reference"].auroc
@@ -653,10 +666,21 @@ def failure_mode_map():
              not_identifiable="전압·상별 전류·역률(측정 열 없음)"),
         dict(fm_id="FM6", failure_mode="계측·배선(센서 단선·접촉 불량·수집 이상)",
              expected_change_10hz="값 고정·스파이크·비유한 값·시각 오류, 저장 형식 변화",
-             reacting_component="입력 검증(status → '수집 상태 확인'), 크기(스파이크)", e1_proxy="없음(직접 주입하지 않음)",
-             evidence="진단: 결측·비유한 값·시각 오류 0행. 저장 형식(진동 자릿수 6/8, 전류 격자 0.18%/100%)이 파일마다 다르다(class_differences.csv)",
+             reacting_component="입력 검증(status → '수집 상태 확인'), 크기(스파이크), 파형·예측 오차(표본화 시각 흔들림·영점 이동)",
+             e1_proxy="E1 주입 없음. 사후 스트레스: 표본화 시각 흔들림(sampling_jitter_stress.csv)·전류 수준 이동(current_offset.csv)",
+             evidence=("진단: 결측·비유한 값·시각 오류 0행. 저장 형식(진동 자릿수 6/8, 전류 격자 0.18%/100%)이 파일마다 다르다(class_differences.csv). "
+                       f"이상 전류는 구간 |평균| > 구간 SD가 {off.abnormal}(정상 {off.normal})이고 이웃 구간 평균이 이어진다"
+                       f"({cite_rows(HERE / 'class_differences.csv', off.name)}). "
+                       f"정상 평가 전류를 {top.split('(')[0].replace('전류 ', '')}만큼 옮기면 경보 기록 {shifted}(주로 예측 오차, "
+                       f"{cite_rows(HERE / 'current_offset.csv', ('A,', 'B,'))}). "
+                       f"앨리어싱 가설 아래 표본화 시각 흔들림 0.1 ms RMS에서 정상 평가 기록의 경보 비율 {jitter_text}"
+                       f"({cite_rows(HERE / 'sampling_jitter_stress.csv', ('A,0.01,60.6,0.1,', 'B,0.01,60.6,0.1,'))})"),
              hypothesis_general_engineering="배선·접지 불량은 잡음·단속 신호를, 수집 설정 변화는 형식 변화를 만든다",
-             confirmed_in_this_data="정상·이상 파일의 저장 형식 차이를 matched 양자화로 제거했다. 계측 경로가 달랐을 가능성은 배제할 수 없다",
+             confirmed_in_this_data=("정상·이상 파일의 저장 형식 차이를 matched 양자화로 제거했다. 계측 경로가 달랐을 가능성은 배제할 수 없다. "
+                                     "이상 전류의 기록 사이로 이어지는 수준 치우침도 영점 이동·수집 설정 차이의 후보다(원인 미확인). "
+                                     f"이 이상 파일에서는 기록 평균을 지워도 v2 경보(α1%)가 거의 같다: {offset_kept}. "
+                                     "파형이 이미 흐트러져 있기 때문이며, 예측 오차 성분 자체는 수준 이동에 반응한다(위 근거). "
+                                     "독립 가우스 흔들림은 이상 파일의 R² 크기는 만들지만 적합 주파수(약 0.2 Hz)는 만들지 못한다(흔들린 정상 기록은 대부분 0.6 Hz 유지)"),
              not_identifiable="센서 교정 이력·수집 장비 설정"),
     ]
     t = pd.DataFrame(rows)
@@ -1105,6 +1129,8 @@ def main():
     tables["observability.csv"] = observability(raw, seg, fits, tables["vibration_tones.csv"])
     tables["state_transition_stress.csv"] = probes.transition_stress(normal, seg["normal"], tables["operating_states.csv"],
         {sid: GuardModel.load(ART / f"guard_{sid}.json") for sid in ("B", "A")}, {sid: D.SPLITS[sid][2] for sid in D.SPLITS})
+    tables["sampling_jitter_stress.csv"] = probes.jitter_stress(normal, seg["normal"], {sid: GuardModel.load(ART / f"guard_{sid}.json") for sid in ("A", "B")},
+                                                                {sid: D.SPLITS[sid][2] for sid in D.SPLITS}, sine_fit)
     tables["production_unit_evidence.csv"] = production_unit(raw, seg, t, fits["normal"], mu, sd)
     tables["abnormal_segments.csv"], tables["abnormal_summary.csv"] = abnormal_segments(raw, seg, t, fits, mu, sd, st["abnormal"])
     tables["outlier_rules.csv"] = outlier_rules(raw, seg["normal"])
@@ -1155,7 +1181,8 @@ def main():
                      rolling_folds=[dict(fold=f["fold"], train_end=f["train_end"], n_cal=f["n_cal"], same_as_frozen=f["same"]) for f in folds],
                      outputs={name: D.sha256_file(HERE / name) for name in tables} | {rel(p): D.sha256_file(p) for p in fig_files},
                      table_notes=notes, seeds=dict(simulation=SEED_SIM, permutation=SEED_PERM, gaussian_mixture=STATE_SEED,
-                                                  state_transition=probes.TRANSITION_SEED, observation_power=probes.POWER_SEED),
+                                                  state_transition=probes.TRANSITION_SEED, observation_power=probes.POWER_SEED,
+                                                  sampling_jitter=probes.JITTER_SEED),
                      environment=dict(D.environment(), blas_runtime=blas), elapsed_s=round(time.monotonic() - start, 1)),
                 HERE / "diagnostics_manifest.json")
     print(f"완료 {time.monotonic() - start:.1f}초, 표 {len(tables)}개, 그림 {len(fig_files)}장")
