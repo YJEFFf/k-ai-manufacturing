@@ -1,0 +1,381 @@
+{
+  "environment": {
+    "platform": "macOS-26.3.1-arm64-arm-64bit",
+    "python": "3.12.2 | packaged by conda-forge | (main, Feb 16 2024, 20:54:21) [Clang 16.0.6 ]",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3"
+  },
+  "X06_forward_timestamp": {
+    "A": {
+      "baseline": {
+        "alarm_rows": 556,
+        "detected_records": 21,
+        "status": {
+          "ok": 600
+        },
+        "incident_starts": 1,
+        "incident_escalations": 1
+      },
+      "all_rows_with_glitch": {
+        "alarm_rows": 0,
+        "detected_records": 0,
+        "status": {
+          "bad_time_order": 600,
+          "ok": 1
+        },
+        "incident_starts": 0,
+        "incident_escalations": 0
+      },
+      "original_600_rows_after_glitch": {
+        "alarm_rows": 0,
+        "detected_records": 0,
+        "status": {
+          "bad_time_order": 600
+        },
+        "incident_starts": 0,
+        "incident_escalations": 0
+      },
+      "stream_status_alarm_equal": true,
+      "notifications": {
+        "수집 오류": 1
+      },
+      "warning": "역순 수집 시각 600행: 앞서 수신한 최대 시각보다 이르므로 판정을 보류했습니다. 수집 PC 시각과 입력 순서를 확인하세요.",
+      "new_stream_recovery": {
+        "alarm_rows": 556,
+        "detected_records": 21,
+        "status": {
+          "ok": 600
+        },
+        "incident_starts": 1,
+        "incident_escalations": 1
+      }
+    },
+    "B": {
+      "baseline": {
+        "alarm_rows": 569,
+        "detected_records": 21,
+        "status": {
+          "ok": 600
+        },
+        "incident_starts": 1,
+        "incident_escalations": 1
+      },
+      "all_rows_with_glitch": {
+        "alarm_rows": 1,
+        "detected_records": 1,
+        "status": {
+          "bad_time_order": 600,
+          "ok": 1
+        },
+        "incident_starts": 1,
+        "incident_escalations": 0
+      },
+      "original_600_rows_after_glitch": {
+        "alarm_rows": 0,
+        "detected_records": 0,
+        "status": {
+          "bad_time_order": 600
+        },
+        "incident_starts": 0,
+        "incident_escalations": 0
+      },
+      "stream_status_alarm_equal": true,
+      "notifications": {
+        "사건 시작": 1,
+        "수집 오류": 1
+      },
+      "warning": "역순 수집 시각 600행: 앞서 수신한 최대 시각보다 이르므로 판정을 보류했습니다. 수집 PC 시각과 입력 순서를 확인하세요.",
+      "new_stream_recovery": {
+        "alarm_rows": 569,
+        "detected_records": 21,
+        "status": {
+          "ok": 600
+        },
+        "incident_starts": 1,
+        "incident_escalations": 1
+      }
+    },
+    "catchup_boundary_status": [
+      "ok",
+      "bad_time_order",
+      "bad_time_order",
+      "ok",
+      "ok"
+    ]
+  },
+  "C02_invalid_incident_boundary": {
+    "baseline": {
+      "alarm_rows": 569,
+      "detected_records": 21,
+      "status": {
+        "ok": 600
+      },
+      "incident_starts": 1,
+      "incident_escalations": 1
+    },
+    "missing_rows": 22,
+    "after_missing": {
+      "alarm_rows": 521,
+      "detected_records": 38,
+      "status": {
+        "ok": 578,
+        "bad_timestamp": 22
+      },
+      "incident_starts": 21,
+      "incident_escalations": 21
+    },
+    "all_notifications": {
+      "사건 시작": 21,
+      "격상": 21,
+      "수집 오류": 21
+    },
+    "tracker_two_alarm_rows_with_invalid_unit": [
+      [
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        1,
+        0,
+        0
+      ]
+    ],
+    "tracker_two_alarm_rows_without_invalid_unit": [
+      [
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        1,
+        0
+      ]
+    ]
+  },
+  "C03_float_row_swap": {
+    "swapped_rows": [
+      6105,
+      112
+    ],
+    "columns": [
+      "score",
+      "p_value",
+      "anomaly_score",
+      "likelihood_ratio",
+      "anomaly_probability"
+    ],
+    "file_sha_changed": true,
+    "exact_column_sha_unchanged": true,
+    "compare_predictions": [
+      {
+        "file": "probe.csv",
+        "ok": true,
+        "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름",
+        "note": "부동소수 차이만 있음"
+      }
+    ],
+    "scope": "Fallback comparator only; unchanged full-run manifest would reject changed file bytes."
+  },
+  "C04_recalibration_windows": {
+    "windows": [
+      {
+        "window": 0,
+        "units": 5,
+        "alerted_units": 5,
+        "alarm_rows": 138,
+        "recommended_action": "재보정 검토(운전 조건 변경)"
+      },
+      {
+        "window": 1,
+        "units": 5,
+        "alerted_units": 5,
+        "alarm_rows": 123,
+        "recommended_action": "설비 점검 요청(열화 의심)"
+      },
+      {
+        "window": 2,
+        "units": 5,
+        "alerted_units": 5,
+        "alarm_rows": 134,
+        "recommended_action": "설비 점검 요청(열화 의심)"
+      },
+      {
+        "window": 3,
+        "units": 5,
+        "alerted_units": 5,
+        "alarm_rows": 162,
+        "recommended_action": "설비 점검 요청(열화 의심)"
+      },
+      {
+        "window": 4,
+        "units": 1,
+        "alerted_units": 1,
+        "alarm_rows": 12,
+        "recommended_action": "설비 점검 요청(열화 의심)"
+      }
+    ],
+    "filter_result": {
+      "windows": 5,
+      "inspection_windows": 4,
+      "unconfirmed_windows": 4,
+      "rows_removed": 450,
+      "rows_kept": 150
+    },
+    "action_string_cases": {
+      "설비 점검 요청(열화 의심)": {
+        "windows": 1,
+        "inspection_windows": 1,
+        "unconfirmed_windows": 1,
+        "rows_removed": 600,
+        "rows_kept": 0
+      },
+      " 설비 점검 요청(열화 의심)": {
+        "windows": 1,
+        "inspection_windows": 0,
+        "unconfirmed_windows": 0,
+        "rows_removed": 0,
+        "rows_kept": 600
+      },
+      "재보정 검토(운전 조건 변경)": {
+        "windows": 1,
+        "inspection_windows": 0,
+        "unconfirmed_windows": 0,
+        "rows_removed": 0,
+        "rows_kept": 600
+      },
+      "재보정 검토(운전 조건 변경·수준 이동)": {
+        "windows": 1,
+        "inspection_windows": 0,
+        "unconfirmed_windows": 0,
+        "rows_removed": 0,
+        "rows_kept": 600
+      }
+    },
+    "scope": "Filter eligibility only; not an executed recalibration or accepted replacement model."
+  },
+  "C05_first_alarm_state": {
+    "A": {
+      "abnormal_first_alarm_states": {
+        "short": 21
+      },
+      "short_records_under_17": 7,
+      "records_reaching_state": 14,
+      "first_state_position": 16,
+      "elapsed_from_first_row_seconds": 1.6
+    },
+    "B": {
+      "abnormal_first_alarm_states": {
+        "short": 21
+      },
+      "short_records_under_17": 7,
+      "records_reaching_state": 14,
+      "first_state_position": 16,
+      "elapsed_from_first_row_seconds": 1.6
+    }
+  },
+  "A1_6_nyquist": {
+    "6": {
+      "singular_values": [
+        2.449489742783178,
+        2.449489742783177,
+        1.5308790434960108e-15
+      ],
+      "min_max_ratio": 6.249787524142002e-16,
+      "default_hat_trace": 1.9999999999999998,
+      "strict_hat_trace": 1.9999999999999998,
+      "product_hat_equal": true
+    },
+    "8": {
+      "singular_values": [
+        2.82842712474619,
+        2.82842712474619,
+        3.736014367560028e-15
+      ],
+      "min_max_ratio": 1.3208805469560333e-15,
+      "default_hat_trace": 2.9999999999999996,
+      "strict_hat_trace": 1.9999999999999998,
+      "product_hat_equal": true
+    },
+    "abnormal_win8": {
+      "changed_rows": 31,
+      "median_old_changed": 0.26146743431335573,
+      "median_corrected_changed": 0.40664353719599833,
+      "max_score_delta": 0.3095369575213619,
+      "changed_original_row_ids": [
+        15,
+        37,
+        38,
+        41,
+        42,
+        44,
+        53,
+        66,
+        73,
+        76,
+        98,
+        100,
+        111,
+        130,
+        131,
+        230,
+        240,
+        242,
+        255,
+        256,
+        296,
+        300,
+        337,
+        368,
+        397,
+        399,
+        434,
+        446,
+        447,
+        522,
+        523
+      ]
+    }
+  },
+  "C06_distinct_injection_experiments": {
+    "selection": [
+      {
+        "split_id": "A",
+        "alpha": 0.01,
+        "family": "vib_noise",
+        "level": 2.0,
+        "definition": "진동 두 센서 잡음 level×σ(10행째부터)",
+        "reps": 5,
+        "units": 75,
+        "v2_detect_2s": 0.7653333333333333,
+        "v2_delay_median_s": 0.7000000000000001,
+        "v2_none_alarm_rate": 0.0,
+        "persist_fill_detect_2s": 0.4133333333333333,
+        "persist_fill_delay_median_s": 0.9,
+        "persist_fill_none_alarm_rate": 0.0,
+        "detect_diff": -0.352,
+        "status": "사후 비용 측정. 지속성 변형은 채택하지 않음"
+      }
+    ],
+    "intensity": [
+      {
+        "detect_mean": 0.7232000000000001,
+        "injection_repeats": 50,
+        "injection_seed_start": 0.0,
+        "injection_seed_end": 49.0
+      }
+    ],
+    "source_note": "selection/run.py:418-422 fixes 5 repeats; selection/README.md:56 discloses 5 repeats, :139 different random draws vs E1."
+  }
+}

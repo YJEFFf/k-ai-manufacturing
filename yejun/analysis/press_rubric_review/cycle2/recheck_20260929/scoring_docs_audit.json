@@ -1,0 +1,1188 @@
+{
+  "head": "be0c8b224f1fe4732056ff7979b798abc9153567",
+  "product_baseline": "cc1aac2",
+  "method": "local source and CSV/HWPX read-only audit; alpha CLI rejects before any file access",
+  "official": [
+    {
+      "path": "관련 자료/경진대회 결과보고서 양식_일반국민,대학(원)생 부문.hwpx",
+      "guidance": [
+        {
+          "xml_text_element_index_0": 12,
+          "text": "□ 제1장. 데이터 이해 및 진단〔15점〕"
+        },
+        {
+          "xml_text_element_index_0": 23,
+          "text": " 제조공정의 어떤 상태를 나타내며 분석 목적에 어떻게 연결되는지를 설명합니다."
+        },
+        {
+          "xml_text_element_index_0": 25,
+          "text": "□ 제2장. AI 예측모델 개발 및 성능평가〔40점〕"
+        },
+        {
+          "xml_text_element_index_0": 34,
+          "text": "□ 계획서에 따라 베이스라인을 포함하여 2개 이상의 모델을 비교하고, 동일한 평가조건에서 어떤 차이가 나타났는지와 최종모델을 선택한 이유를 제시합니다. "
+        },
+        {
+          "xml_text_element_index_0": 36,
+          "text": "제3장. 영향요인 및 오류분석〔15점〕"
+        },
+        {
+          "xml_text_element_index_0": 46,
+          "text": "전체 평균 성능만 제시하지 않고, 모델이 잘 작동하는 조건과 실패하는 조건을 구분합니다."
+        },
+        {
+          "xml_text_element_index_0": 51,
+          "text": "제4장. 현장 활용방안〔10점〕"
+        },
+        {
+          "xml_text_element_index_0": 60,
+          "text": "□ 모델의 출력값이 실제로 어떤 현장 판단과 조치로 이어지는지 설명합니다. 문제에 따라 검사 우선순위, 안정 공정조건, 재검사 기준 또는 피크전력 저감방안을 구체화합니다."
+        },
+        {
+          "xml_text_element_index_0": 62,
+          "text": "□ 제5장. 창의성 및 차별성〔10점〕"
+        },
+        {
+          "xml_text_element_index_0": 72,
+          "text": "단순히 새로운 알고리즘을 사용했다는 설명보다, 제안한 방법이 성능·오류 감소·현장 활용에"
+        },
+        {
+          "xml_text_element_index_0": 73,
+          "text": " 어떤 기여를 했는지를 제2장과 제3장의 결과에 연결합니다."
+        },
+        {
+          "xml_text_element_index_0": 75,
+          "text": "□ 제6장. 코드 구성 및 재현성〔10점〕"
+        },
+        {
+          "xml_text_element_index_0": 85,
+          "text": "평가자가 제출자료를 이용하여 전처리부터 학습·추론·결과생성까지 실행할 수 있도록"
+        }
+      ]
+    },
+    {
+      "path": "관련 자료/제6회 K-인공지능 제조데이터 분석 경진대회 과제공개(일반국민,대학(원)생).hwpx",
+      "weights": [
+        {
+          "criterion": "데이터 이해 및 진단",
+          "weight": 15,
+          "xml_text_element_index_0": 149,
+          "source_text": [
+            " 1. 데이터 이해 및 진단",
+            "데이터의 생산단위, 변수 의미, 시간·설비·제품 간 관계, 결측·중복·이상치·불균형을 분석하고 전처리 및 검증전략을 제시",
+            "15"
+          ]
+        },
+        {
+          "criterion": "AI 예측모델 개발",
+          "weight": 40,
+          "xml_text_element_index_0": 152,
+          "source_text": [
+            " 2. AI 예측모델 개발",
+            "제조 이상 확률을 예측하는 모델을 개발하시오. 베이스라인을 포함하여 2개 이상의 모델을 비교(F1-score 등)하고 최종모델의 선정근거 설명",
+            "40"
+          ]
+        },
+        {
+          "criterion": "영향요인 및 오류분석",
+          "weight": 15,
+          "xml_text_element_index_0": 156,
+          "source_text": [
+            "영향요인 및 오류분석",
+            "주요 영향변수와 변수 간 상호작용을 분석하고, False Negative와 False Positive가 집중되는 공정조건을 도출",
+            "15"
+          ]
+        },
+        {
+          "criterion": "현장 활용방안",
+          "weight": 10,
+          "xml_text_element_index_0": 159,
+          "source_text": [
+            " 4. 현장 활용방안",
+            "예측결과를 사전경보, 품질검사 우선순위, 공정점검 또는 작업자 의사결정에",
+            " 활용하는 방안 제안",
+            "10"
+          ]
+        },
+        {
+          "criterion": "창의성·차별성",
+          "weight": 10,
+          "xml_text_element_index_0": 163,
+          "source_text": [
+            " 5. 창의성·차별성",
+            "불균형 학습, 앙상블, 불확실성 추정, 확률보정, 제조지식 결합 등 차별화된 방법 제안",
+            "10"
+          ]
+        },
+        {
+          "criterion": "코드 및 재현성",
+          "weight": 10,
+          "xml_text_element_index_0": 166,
+          "source_text": [
+            " 6. 코드 및 재현성",
+            "동일 환경에서 데이터 전처리부터 학습·추론·결과생성까지 자동 실행",
+            "10"
+          ]
+        }
+      ]
+    }
+  ],
+  "scores": [
+    {
+      "path": "red_J1_cold_score_academic.md",
+      "criterion_scores": [
+        12.0,
+        30.0,
+        10.5,
+        7.0,
+        7.5,
+        8.5
+      ],
+      "sum": 75.5,
+      "interpretation": "subjective LLM rubric score; not a statistical interval"
+    },
+    {
+      "path": "red_J2_cold_score_industry.md",
+      "criterion_scores": [
+        12.0,
+        29.0,
+        11.0,
+        7.0,
+        7.5,
+        8.0
+      ],
+      "sum": 74.5,
+      "interpretation": "subjective LLM rubric score; not a statistical interval"
+    }
+  ],
+  "score_agreement": {
+    "differences": [
+      0.0,
+      1.0,
+      0.5,
+      0.0,
+      0.0,
+      0.5
+    ],
+    "exact_matches": 3,
+    "within_0_5": 5,
+    "max_difference": 1.0
+  },
+  "alpha_cli_probe": {
+    "returncode": 2,
+    "stderr": "usage: recalibrate.py [-h] --normal NORMAL --out OUT [--report REPORT]\n                      [--alpha {0.01,0.03,0.05}] [--cal-units CAL_UNITS]\n                      [--holdout-units HOLDOUT_UNITS] [--name NAME]\n                      [--save-failed] [--outcomes OUTCOMES]\n                      [--windows WINDOWS]\n                      [--target-alerts-per-8h TARGET_ALERTS_PER_8H]\nrecalibrate.py: error: argument --alpha: invalid choice: 0.0008 (choose from 0.01, 0.03, 0.05)\n",
+    "files_created": []
+  },
+  "supervised_numbers_already_in_committed_review": {
+    "A": {
+      "threshold_min": 0.24779734867854206,
+      "threshold_max": 0.9969373067498059,
+      "record2": {
+        "threshold": 0.9902357649150365,
+        "fn": 47,
+        "rows": 47
+      },
+      "round1_features:logistic:balanced": {
+        "fn": 46,
+        "fp": 0,
+        "f1": 0.9601386481802426,
+        "normal_alerted": 0,
+        "detected": 21
+      },
+      "round1_features:hgb:balanced": {
+        "fn": 32,
+        "fp": 2,
+        "f1": 0.9709401709401709,
+        "normal_alerted": 2,
+        "detected": 21
+      }
+    },
+    "B": {
+      "threshold_min": 0.24681285600746045,
+      "threshold_max": 0.982404430040546,
+      "record2": {
+        "threshold": 0.24681285600746045,
+        "fn": 2,
+        "rows": 47
+      },
+      "round1_features:logistic:balanced": {
+        "fn": 49,
+        "fp": 0,
+        "f1": 0.9574283231972198,
+        "normal_alerted": 0,
+        "detected": 21
+      },
+      "round1_features:hgb:balanced": {
+        "fn": 38,
+        "fp": 0,
+        "f1": 0.9672977624784854,
+        "normal_alerted": 0,
+        "detected": 21
+      }
+    }
+  },
+  "forecasts": [
+    {
+      "criterion": "data",
+      "forecast_round": 1,
+      "low": 13.5,
+      "high": 14.0,
+      "next_score": 13.6,
+      "kind": "explicit",
+      "inside_declared_range": true,
+      "within_0_1": true,
+      "source": {
+        "path": "yejun/analysis/press_rubric_review/cycle2/round1/judge_01_data.md",
+        "start_line": 14,
+        "end_line": 14,
+        "text": "P1 세 건을 마치면 13.5~14점 수준이다."
+      }
+    },
+    {
+      "criterion": "data",
+      "forecast_round": 2,
+      "low": 14.5,
+      "high": 14.5,
+      "next_score": 14.4,
+      "kind": "explicit_point; original also gives 14.0~15.0",
+      "inside_declared_range": false,
+      "within_0_1": true,
+      "source": {
+        "path": "yejun/analysis/press_rubric_review/cycle2/round2/judge_01_data.md",
+        "start_line": 18,
+        "end_line": 18,
+        "text": "두 문장은 1회차 평가관(본인)이 D4에서 제시한 문구를 팀이 그대로 옮긴 것이다. 1회차 해석이 불완전했다. 평가 구간의 운전 상태 구성도 보정 구간과 크게 다르다(A 저수준 78% 대 35%). 이 두 가지로 0.9점을 뺐다. R2-D1·R2-D2를 마치면 14.5점(범위 14.0~15.0) 수준이다."
+      }
+    },
+    {
+      "criterion": "data",
+      "forecast_round": 3,
+      "low": 15.0,
+      "high": 15.0,
+      "next_score": 15.0,
+      "kind": "derived from zero remaining deductions",
+      "inside_declared_range": true,
+      "within_0_1": true,
+      "source": {
+        "path": "yejun/analysis/press_rubric_review/cycle2/round3/judge_01_data.md",
+        "start_line": 26,
+        "end_line": 26,
+        "text": "R3-D1을 마치면 14.7점 수준이다. 목록을 모두 마치면 이 항목에서 고칠 수 있는 감점은 남지 않는다."
+      }
+    },
+    {
+      "criterion": "model",
+      "forecast_round": 2,
+      "low": 38.0,
+      "high": 38.0,
+      "next_score": 38.1,
+      "kind": "approximate point",
+      "inside_declared_range": false,
+      "within_0_1": true,
+      "source": {
+        "path": "yejun/analysis/press_rubric_review/cycle2/round2/judge_02_model.md",
+        "start_line": 26,
+        "end_line": 26,
+        "text": "- R2-M1·R2-M2를 고치면 37.5점 안팎, P2까지 반영하면 38점 안팎이다. L1·L2 때문에 상한은 38.5점 정도다."
+      }
+    },
+    {
+      "criterion": "model",
+      "forecast_round": 3,
+      "low": 38.5,
+      "high": 38.5,
+      "next_score": 38.0,
+      "kind": "explicit",
+      "inside_declared_range": false,
+      "within_0_1": false,
+      "source": {
+        "path": "yejun/analysis/press_rubric_review/cycle2/round3/judge_02_model.md",
+        "start_line": 23,
+        "end_line": 23,
+        "text": "- 남은 P2 네 개를 모두 고치면 38.5점이다. L1·L2·L3 때문에 이것이 상한이다."
+      }
+    },
+    {
+      "criterion": "errors",
+      "forecast_round": 1,
+      "low": 13.0,
+      "high": 13.5,
+      "next_score": 13.0,
+      "kind": "explicit",
+      "inside_declared_range": true,
+      "within_0_1": true,
+      "source": {
+        "path": "yejun/analysis/press_rubric_review/cycle2/round1/judge_03_errors.md",
+        "start_line": 17,
+        "end_line": 17,
+        "text": "**상위 8팀 대비 위치: 4위권(중위).** 미탐·오경보 조건의 검증 깊이(고장 주입, 전류 배율·입력 정밀도 스트레스, 교락 공개)는 8팀 중 가장 앞선다. 그러나 평가위원이 이 항목에서 먼저 찾는 두 형식, 즉 변수별 중요도와 오류에 대한 상호작용 분석이 없어 SHAP·상호작용 그림을 갖춘 팀에 밀린다. E1·E2·E3·E5를 마치면 13~13.5점, 이 항목 1위권이다."
+      }
+    },
+    {
+      "criterion": "errors",
+      "forecast_round": 3,
+      "low": 14.55,
+      "high": 14.55,
+      "next_score": 14.5,
+      "kind": "derived:14.1+0.45",
+      "inside_declared_range": false,
+      "within_0_1": true,
+      "source": {
+        "path": "yejun/analysis/press_rubric_review/cycle2/round3/judge_03_errors.md",
+        "start_line": 49,
+        "end_line": 49,
+        "text": "| **합계** | **0.9** | = 15 − 14.1 (한계 0.45, 고칠 수 있음 0.45) |"
+      }
+    },
+    {
+      "criterion": "field",
+      "forecast_round": 1,
+      "low": 8.5,
+      "high": 8.5,
+      "next_score": 8.5,
+      "kind": "approximate point",
+      "inside_declared_range": true,
+      "within_0_1": true,
+      "source": {
+        "path": "yejun/analysis/press_rubric_review/cycle2/round1/judge_04_field.md",
+        "start_line": 23,
+        "end_line": 23,
+        "text": "- **개선 전망:** U1~U5를 완료하면 8.5 전후(2~3위권)가 된다."
+      }
+    },
+    {
+      "criterion": "field",
+      "forecast_round": 2,
+      "low": 9.0,
+      "high": 9.0,
+      "next_score": 9.1,
+      "kind": "approximate point",
+      "inside_declared_range": false,
+      "within_0_1": true,
+      "source": {
+        "path": "yejun/analysis/press_rubric_review/cycle2/round2/judge_04_field.md",
+        "start_line": 25,
+        "end_line": 25,
+        "text": "- **개선 전망:** R2 P1 5건을 마치면 9.0 전후(1위권)다."
+      }
+    },
+    {
+      "criterion": "field",
+      "forecast_round": 3,
+      "low": 9.4,
+      "high": 9.5,
+      "next_score": 9.5,
+      "kind": "explicit",
+      "inside_declared_range": true,
+      "within_0_1": true,
+      "source": {
+        "path": "yejun/analysis/press_rubric_review/cycle2/round3/judge_04_field.md",
+        "start_line": 28,
+        "end_line": 28,
+        "text": "- **개선 전망:** R3 P2 5건을 마치면 9.4~9.5다. 나머지 0.5점은 현장 자료 없이는 줄지 않는다."
+      }
+    },
+    {
+      "criterion": "originality",
+      "forecast_round": 1,
+      "low": 8.5,
+      "high": 9.0,
+      "next_score": 8.8,
+      "kind": "explicit",
+      "inside_declared_range": true,
+      "within_0_1": true,
+      "source": {
+        "path": "yejun/analysis/press_rubric_review/cycle2/round1/judge_05_originality.md",
+        "start_line": 16,
+        "end_line": 16,
+        "text": "- **전망.** P1 5건을 마치면 8.5~9.0점이다. 9.5점 이상은 새 날짜·설비 자료 없이는 불가능하다."
+      }
+    },
+    {
+      "criterion": "originality",
+      "forecast_round": 2,
+      "low": 9.0,
+      "high": 9.2,
+      "next_score": 9.2,
+      "kind": "explicit",
+      "inside_declared_range": true,
+      "within_0_1": true,
+      "source": {
+        "path": "yejun/analysis/press_rubric_review/cycle2/round2/judge_05_originality.md",
+        "start_line": 30,
+        "end_line": 30,
+        "text": "  - R2-O8을 고치면 9.0이다. P2까지 고치면 9.0~9.2다."
+      }
+    },
+    {
+      "criterion": "originality",
+      "forecast_round": 3,
+      "low": 9.4,
+      "high": 9.4,
+      "next_score": 9.4,
+      "kind": "explicit",
+      "inside_declared_range": true,
+      "within_0_1": true,
+      "source": {
+        "path": "yejun/analysis/press_rubric_review/cycle2/round3/judge_05_originality.md",
+        "start_line": 34,
+        "end_line": 34,
+        "text": "- **전망:** R3-O1~O3을 모두 고치면 9.4다. 9.5 이상은 새 날짜·설비 자료 없이는 불가능하다."
+      }
+    },
+    {
+      "criterion": "repro",
+      "forecast_round": 1,
+      "low": 9.5,
+      "high": 9.5,
+      "next_score": 9.0,
+      "kind": "approximate point",
+      "inside_declared_range": false,
+      "within_0_1": false,
+      "source": {
+        "path": "yejun/analysis/press_rubric_review/cycle2/round1/judge_06_repro.md",
+        "start_line": 19,
+        "end_line": 19,
+        "text": "- **전망.** R1~R4를 마치면 9.5 안팎이다. R5~R11까지 마치면 다른 OS 실측 한계만 남는다."
+      }
+    },
+    {
+      "criterion": "repro",
+      "forecast_round": 3,
+      "low": 10.0,
+      "high": 10.0,
+      "next_score": 10.0,
+      "kind": "derived:9.7+0.3",
+      "inside_declared_range": true,
+      "within_0_1": true,
+      "source": {
+        "path": "yejun/analysis/press_rubric_review/cycle2/round3/judge_06_repro.md",
+        "start_line": 42,
+        "end_line": 42,
+        "text": "| 제출 목록 문서의 죽은 링크 10개, 내부 검수 표기 4행(2회차 R2-08·1회차 R10 잔여) | −0.1 | 고칠 수 있음(R3-01) |"
+      }
+    }
+  ],
+  "forecast_summary": {
+    "n": 15,
+    "within_0_1": 13,
+    "literal_interval": 9,
+    "round4_literal_interval": 4,
+    "round4_within_0_1": 5,
+    "nonmatches": [
+      "model_round4",
+      "repro_round2"
+    ]
+  },
+  "historical_rank_instructions": [
+    "- 요구: 예측결과를 사전경보, 품질검사 우선순위, 공정점검 또는 작업자 의사결정에 활용하는 방안 제안. 출제배경: 초기 이상징후 놓침·정상 운전변화 오인, 오경보 감소. 주 근거: press_guard(OPERATIONS.md, docs/ 그림, model.py의 사건 층(IncidentTracker·incidents), serve.py·web/, simulate.py, monitor.py(조치 분기·명령행), recalibrate.py, outputs의 alert_levels*·incident_summary·incidents_*·quality_windows·monitor_gain·expected_effect(비사후 추정 행)·queue_*·decision_table, outputs/console/ 화면). 콘솔은 임시 포트로 띄워 API를 직접 호출해 확인하고 반드시 종료한다.",
+    "2. 점수(소수 첫째 자리, 범위 포함)와 상위 8팀 대비 위치를 판단한다.",
+    "   - \"다른 팀 결과물을 알 수 없다\" 같은 유보는 쓰지 않는다.",
+    "  - 형식: 기준 커밋, 점수와 요지, 상위 8팀 대비 위치, 감점 내역표, 2회차 항목 충족표, 강점(직접 확인, 파일:행), 수정·보완 목록, 수정 불가 한계, 직접 수행한 검증(스크립트·실행 시간)."
+  ],
+  "commit_tools": {
+    "6c61a88": "Claude Code",
+    "cc1aac2": "Codex"
+  },
+  "alpha1_v1_v2": [
+    {
+      "split": "A",
+      "rows": [
+        {
+          "split": "A",
+          "model": "guard_v2",
+          "alpha": "0.01",
+          "tp": "556",
+          "fp": "0",
+          "fn": "44",
+          "tn": "4090",
+          "f1": "0.9619377162629758",
+          "precision": "1.0",
+          "recall": "0.9266666666666666",
+          "normal_notified_segments": "0",
+          "normal_segments": "120",
+          "abnormal_notified_segments": "21",
+          "abnormal_segments": "21",
+          "delay_median_s": "0.1",
+          "delay_max_s": "0.5",
+          "normal_scored_rate": "1.0",
+          "abnormal_scored_rate": "1.0"
+        },
+        {
+          "split": "A",
+          "model": "baseline_v1",
+          "alpha": "0.01",
+          "tp": "501",
+          "fp": "0",
+          "fn": "99",
+          "tn": "4090",
+          "f1": "0.9100817438692098",
+          "precision": "1.0",
+          "recall": "0.835",
+          "normal_notified_segments": "0",
+          "normal_segments": "120",
+          "abnormal_notified_segments": "21",
+          "abnormal_segments": "21",
+          "delay_median_s": "0.1",
+          "delay_max_s": "0.7000000000000001",
+          "normal_scored_rate": "1.0",
+          "abnormal_scored_rate": "1.0"
+        }
+      ],
+      "record_alarm_counts_identical": true,
+      "max_first_alarm_delay_values": [
+        "0.5",
+        "0.7000000000000001"
+      ]
+    },
+    {
+      "split": "B",
+      "rows": [
+        {
+          "split": "B",
+          "model": "guard_v2",
+          "alpha": "0.01",
+          "tp": "569",
+          "fp": "3",
+          "fn": "31",
+          "tn": "6094",
+          "f1": "0.9709897610921502",
+          "precision": "0.9947552447552448",
+          "recall": "0.9483333333333334",
+          "normal_notified_segments": "3",
+          "normal_segments": "180",
+          "abnormal_notified_segments": "21",
+          "abnormal_segments": "21",
+          "delay_median_s": "0.0",
+          "delay_max_s": "0.5",
+          "normal_scored_rate": "1.0",
+          "abnormal_scored_rate": "1.0"
+        },
+        {
+          "split": "B",
+          "model": "baseline_v1",
+          "alpha": "0.01",
+          "tp": "514",
+          "fp": "3",
+          "fn": "86",
+          "tn": "6094",
+          "f1": "0.9203222918531782",
+          "precision": "0.9941972920696325",
+          "recall": "0.8566666666666667",
+          "normal_notified_segments": "3",
+          "normal_segments": "180",
+          "abnormal_notified_segments": "21",
+          "abnormal_segments": "21",
+          "delay_median_s": "0.0",
+          "delay_max_s": "0.7000000000000001",
+          "normal_scored_rate": "1.0",
+          "abnormal_scored_rate": "1.0"
+        }
+      ],
+      "record_alarm_counts_identical": true,
+      "max_first_alarm_delay_values": [
+        "0.5",
+        "0.7000000000000001"
+      ]
+    }
+  ],
+  "diagnostics_counts": {
+    "total": 27,
+    "csv": 22,
+    "png": 5
+  },
+  "package_source_citations_missing": [
+    {
+      "csv_line": 3,
+      "section": "탐색 장부",
+      "item": "평가관 02 기준 커밋 dcd300a 시점",
+      "split": "-",
+      "value": "63개. 이후 3ad2452(지도학습 v2)가 가중 변형 2개(logistic_balanced·hgb_balanced)를 더해 현재 65개",
+      "source": "judge_02_model.md §1.3, search_ledger.csv"
+    },
+    {
+      "csv_line": 44,
+      "section": "한계",
+      "item": "L1 독립 검증 없음",
+      "split": "-",
+      "value": "이상 21구간은 07-17 3분 연속 기록 하나이고 A·B가 공유한다. 정상과 이상은 다른 날이다",
+      "source": "judge_02_model.md §4"
+    },
+    {
+      "csv_line": 45,
+      "section": "한계",
+      "item": "L2 설계의 사후성",
+      "split": "-",
+      "value": "초반 창과 AR(2)는 같은 이상 자료에서 v1 미탐을 본 뒤 설계했다. 중첩 선택은 후보 사이의 선택 편향만 잰다",
+      "source": "judge_02_model.md §4, model.py state['selection']"
+    }
+  ],
+  "judge_02_model_in_package": false,
+  "original_marker_scope_hits": [],
+  "broader_marker_line_count": 71,
+  "broader_marker_file_count": 31,
+  "reproduce_summary_in_package": false,
+  "snippets": [
+    {
+      "path": "yejun/AGENTS.md",
+      "start_line": 7,
+      "end_line": 15,
+      "text": "## 현재 작업 단계 — 보고서 작성 금지 (예준 지시, 2026-09-25)\n\n- 현재는 대회 보고서 작성 전의 **구현·실험·디버깅·검수 단계**다. Codex와 Claude Code는 예준이 결과에 만족할 때까지 이 단계의 결함 수정과 재검수를 진행한다.\n- **예준이 보고서 작성을 시작하라고 명시적으로 지시하기 전에는 대회 보고서 작업을 절대 시작하지 않는다.** 초안, 장별 근거 문서, 제출용 서술·결론, 자동 보고서 생성, PDF·발표자료 작성도 포함한다. 삭제한 초안을 복구하거나 재생성하지 않는다.\n- 테스트 통과, 모델 구현 완료, 에이전트의 자체 완료 판단, 이전 플랜·커밋의 다음 작업을 보고서 착수 허가로 해석하지 않는다. 예준의 검토·만족 확인 후 명시적인 작성 시작 지시가 있어야 넘어간다.\n- 코드, 실험 결과 CSV/JSON, 분석용 표·그림, 오류 재현 및 검수 기록은 계속 작성·보존한다. 검수 결과를 대회 보고서 형식으로 미리 편집하지 않는다.\n- 이전 플랜의 W12 장별 근거 작성·보고서 전달·최종 제출물 조립 지시는 보류한다. 이 지시가 과거 계획과 인수인계보다 우선한다. 현재 남은 구현 검수는 `analysis/press_implementation_review/README.md`를 따른다.\n\n## 폴더 권한"
+    },
+    {
+      "path": "yejun/analysis/press_rubric_review/cycle2/judge_prompts.md",
+      "start_line": 64,
+      "end_line": 66,
+      "text": "- 보고서는 아직 없다. 팀 규칙상 작성 전 단계다.\n  - 보고서가 현재 산출물을 충실히 옮긴다고 가정하고, 근거 자체를 채점한다.\n  - 보고서가 없다는 이유로 감점하지 않는다."
+    },
+    {
+      "path": "yejun/analysis/press_rubric_review/cycle2/judge_prompts.md",
+      "start_line": 74,
+      "end_line": 95,
+      "text": "- 앞 회차의 '수정 불가 한계'는 한 번만 반영하고, 감점을 반복하지 않는다.\n\n## 할 일\n1. 산출물을 읽는다. 핵심 수치는 원본(대회 CSV: yejun/press_submission/data/3_소성가공_예지보전/)과 커밋된 코드로 직접 다시 계산해 대조한다.\n   - 검증 스크립트·로그·JSON은 yejun/analysis/press_rubric_review/cycle2/round4/judge__N___* 이름으로 둔다.\n   - 무거운 재실행·클론·가상환경은 시스템 임시 폴더에서 한다.\n2. 점수(소수 첫째 자리, 범위 포함)를 근거로 판단한다.\n   - 앞 회차 점수나 전망을 목표로 삼지 않는다. 새 결함이 확인되면 점수가 낮아질 수도 있다.\n   - 경쟁팀 결과를 보지 않은 상태에서 순위·수상 확률·수상 보장을 만들어 내지 않는다.\n   - 비교는 실제 구현·평가한 기준 모델과 명시된 조건에서만 한다. 내부 점수는 공식 심사 결과가 아니다.\n3. 만점 대비 감점 내역표를 만든다.\n   - 열: 감점 사유, 감점, 고칠 수 있음/한계.\n   - 감점 합계가 만점 − 점수와 같아야 한다.\n4. 3회차 항목 충족표를 만든다.\n   - 열: ID, 판정(충족/부분/미충족), 근거(파일:행 또는 재계산 값).\n5. 남은 수정·보완 목록을 만든다.\n   - 열: ID(현재 회차 접두), 우선(P0/P1/P2), 분류, 위치(파일:행), 해야 할 일, 완료 기준.\n   - P0은 결론을 뒤집는 사실 오류·핵심 재현 실패, P1은 운영·통계 해석에 실질적 영향을 주는 결함, P2는 국소 결함이다. 예상 점수 상승으로 우선순위를 정하지 않는다.\n   - 지금 자료로 고칠 수 있는 것만 넣는다. 고칠 수 없는 것은 '수정 불가 한계'로 분리한다.\n   - 이미 충족된 것을 다시 요구하지 않는다. 문체 취향처럼 점수에 영향이 없는 것은 넣지 않는다.\n   - 새 모델 채택·주 모델 교체·분할 재선택은 완료 기준이 될 수 없다. 사후 선택이 늘기 때문이다.\n   - 대회 보고서·발표자료 작성과 제출 ZIP 생성도 완료 기준이 될 수 없다. 예준 지시 전까지 금지다."
+    },
+    {
+      "path": "yejun/analysis/press_rubric_review/cycle2/round4/review_protocol.md",
+      "start_line": 5,
+      "end_line": 11,
+      "text": "- 데이터 15, 모델 40, 오류 15, 현장 10, 창의성 10, 재현성 10의 평가관을 각각 둔다.\n- 3회차 항목 완료 여부와 새로 확인한 실제 결함을 코드·산출물·독립 재계산으로 판정한다.\n- 이전 94.6점이나 97점 전망을 목표 점수로 삼지 않는다. 근거 없이 경쟁팀 순위나 수상 가능성을 단정하지 않는다.\n- 고칠 수 있는 결함과 현재 자료로 해소할 수 없는 한계를 나누며 같은 한계를 여러 이유로 중복 감점하지 않는다.\n- 주 지표·A/B 분할·경보 규칙·저장 모델을 보존한다. 새 분석은 사후 탐색/가설로 표시한다.\n- 합성 주입은 실제 고장이나 정상 전환의 관측값으로 바꾸어 표현하지 않는다.\n- 누적 검수로 인한 점수 상승보다, 정확한 반례·오류 수정·최종 사본의 재현을 우선한다."
+    },
+    {
+      "path": "yejun/analysis/press_rubric_review/cycle2/round3/judge_01_data.md",
+      "start_line": 53,
+      "end_line": 59,
+      "text": "| R3-D1 정상 상태 전환이 학습·보정·평가에 0회라는 검증 함의를 적지 않았다. 계단형 전환 모의에서 B α=1% 경보 43~97%다 | 0.30 | 고칠 수 있음 |\n| R3-D2 「2수준」 단순화: BIC를 1~3성분만 제시했다(최소는 4성분). 부하 쪽 하위 수준과 순서 전이를 적지 않았다. 「골 88~95」와 「약 48%」 비교 기준이 느슨하다 | 0.15 | 고칠 수 있음 |\n| R3-D3 변수 사전 AI2 행과 README 41행 「설비·제품 관계는 분석할 수 없다」가 주기 진단과 이어지지 않는다 | 0.05 | 고칠 수 있음 |\n| R3-D4 약 20초 교대를 눈으로 볼 수 있는 그림이 없다(fig_d2a 확대 패널이 상태 색 없음) | 0.05 | 고칠 수 있음 |\n| R3-D5 상태 분모가 최종 패키지 README와 결정표 conformal 행에 전달되지 않았다 | 0.05 | 고칠 수 있음 |\n| 수정 불가 한계(교락, 이상 한 에피소드, 현장 정보 부재, 정상 77분, 상태 해석 검증 불가) | 0 | 한계. 1회차에 한 번 반영했고 반복하지 않는다 |\n| **합계** | **0.60** | = 15 − 14.4 |"
+    },
+    {
+      "path": "yejun/analysis/press_rubric_review/cycle2/round3/judge_06_repro.md",
+      "start_line": 24,
+      "end_line": 24,
+      "text": "- '다른 OS·CPU 실측 없음'은 1회차에서 한 번 반영했으므로 다시 감점하지 않았다."
+    },
+    {
+      "path": "yejun/press_guard/README.md",
+      "start_line": 19,
+      "end_line": 24,
+      "text": "- **결과 위치:** `yejun/press_guard/outputs/`에 테스트 예측(`test_predictions_A.csv`·`test_predictions_B.csv`), 지표(`metrics.csv`), 단계별 요약(`reproduce_summary.json`)이 생긴다.\n- **검증:** 한 명령이 v1 선행 결과, v2 동결값 비교(verify), 분석 패키지 동결값 비교까지 실행한다. 한 단계라도 실패하면 종료 코드 1이다.\n- **실측 시간:** M2 한 스레드 기준 15단계에 약 9.5분이 걸린다(git 없는 사본에 주최 측 ZIP만 준 경우 572초). `--tests`는 node가 있으면 24단계, 없으면 23단계다(기존 구현 실측: torch 없는 새 가상환경과 새 클론에서 651초). 아래 상태 전환·반복 주입 분석을 추가한 구현의 시간은 `reproduce_summary.json`에서 확인한다.\n- **전체 모드:** `--full`은 v1 LSTM 비교(torch 필요, `requirements-lstm.txt`), 후보 비교, 보완 실험 E1~E3 재실행까지 한다.\n- **시험:** `--tests`는 끝에 pytest와 웹 회귀 시험을 돌린다.\n- **Windows:** PowerShell에서도 같은 명령이다. 모든 파일 입출력은 UTF-8이고 CP949 콘솔에서도 멈추지 않는다. 한글이 깨져 보이면 `chcp 65001`을 쓴다."
+    },
+    {
+      "path": "yejun/press_guard/README.md",
+      "start_line": 41,
+      "end_line": 63,
+      "text": "연속 수집 현장은 전환이 든 정상 연속 자료로 재보정·재검증하기 전에는 대회 오경보 수치를 옮기지 않는다. 정상 기록 안에는 두 신호 수준의 전환이 없고 수집 공백이 전환 순간을 가렸을 수 있다. [상태 전환 스트레스](../analysis/press_evidence/state_transition_stress.csv)는 이 한계를 사후 모의로 점검한다.\n\n설계(초반 창·AR(2))는 이미 본 이상 자료에서 v1의 미탐을 본 뒤 정했다. 선정 근거(탐색 장부 65항목, 중첩 선택 21/21, v1 대비 짝 비교)는 [press_selection](../analysis/press_selection/README.md)에 있다.\n\n## 결과(α=1%, matched)\n\n| 분할 | 모델 | 행 F1 | 미탐 행/600 | 정상 알림 구간 | 이상 탐지 구간 | 최대 첫 경보 지연 |\n|---|---|---:|---:|---:|---:|---:|\n| A | v1 | 0.910082 | 99 | 0/120 | 21/21 | 0.7초 |\n| A | v2 | **0.961938** | **44** | 0/120 | 21/21 | **0.5초** |\n| B | v1 | 0.920322 | 86 | 3/180 | 21/21 | 0.7초 |\n| B | v2 | **0.970990** | **31** | 3/180 | 21/21 | **0.5초** |\n\n- **A의 정상 0/120은 유리한 조건의 값이다.** A 평가 구간(480~599, 01:00~01:17)은 정상 77분 중 가장 조용한 시간대다. 최대 점수가 보정 중앙값을 넘는 구간이 12/120이다(교환가능하면 약 60, Mann–Whitney p=2.9e-11).\n- **상태별 분모:** A의 정상 0/120 중 부하 기록은 21개, B의 3/180 중 부하 기록은 51개다. 17행 이상 기록의 저수준 비율은 평가 A 78%·B 65%, 보정 A 35%·B 32%다([normal_alarms_by_state.csv](../analysis/press_evidence/normal_alarms_by_state.csv), [split_state_composition.csv](../analysis/press_evidence/split_state_composition.csv)).\n- **시간순 5창 비교(300~359 … 540~599):** F1 0.961938~0.971819, 정상 알림 0·0·2·0·0/60.\n  - 420~479 폴드는 B와, 480~539 폴드는 A와 학습·보정이 같아 보정값이 비트 단위로 같다.\n  - 420~479의 2/60은 B 오경보 3건 중 2건(구간 423·461)이다. 오경보 근거로 합산하지 않는다.\n  - 동결 모델과 독립인 폴드는 300~359·360~419·540~599 3개이고 모두 0/60이다.\n- **2단계:** 정상 평가(A·B, 시간순 5창)에서 모두 0건이다. 이상 21구간은 모두 격상했다(지연 중앙 0.2초, 최대 0.6초). 2단계 규칙은 대회 오경보(모두 경보 1행)를 본 뒤 정했으므로 이 0건은 표본 안 값이다. 주 추정은 A·B 평가 기록과 겹치지 않는 300~359·360~419 폴드의 α 5% 2단계/1단계 비 1/7을 1단계 명목에 곱한 교대 8시간 4.2건(95% 상한 15.4건)이다. 규칙 자체는 사후에 정했다. 기존 1/9(3.3건, 상한 12.7건)는 B 평가와 겹치는 540~599 폴드를 포함한 민감도 값으로 남긴다([expected_effect_v2.csv](outputs/expected_effect_v2.csv)).\n- **사건:** 대회 이상 21기록(2.76분)은 사건 1개, 알림 2건(1단계·2단계)이다. 구간 단위로는 알림 42건이다. B 정상 평가는 α 1% 사건 3개(알림 3), 3% 5개(7), 5% 7개(10)다([incident_summary_v2.csv](outputs/incident_summary_v2.csv)).\n- **알림률:** α 3%에서 B 정상 알림은 5/180, 5%에서 7/180이다(v1 4·6). coarse 입력 B는 5/180(v1 4)이다. 모든 조건에서 오경보가 같다고 말하지 않는다.\n- **이상 자료:** A/B는 같은 이상 21구간(07-17 일요일 3분)을 쓰고, 정상과 이상은 다른 날이다. 이미 본 자료의 탐색 평가이며 새 날짜·설비 성능의 근거가 아니다."
+    },
+    {
+      "path": "yejun/press_guard/README.md",
+      "start_line": 106,
+      "end_line": 114,
+      "text": "- **예측 파일로 채점할 때.** `anomaly_probability`는 현장 가정 π=1%라 우도비 표시 상한 121에서 0.55에 멈춘다.\n  - 이상 행 A 555/600·B 568/600과 B 오경보 3행이 모두 이 상한 값이다. 그래서 α 1% 경보 사이의 순위는 거의 주지 않는다(콘솔은 \"55%(모형 상한)\"으로 표시).\n  - 파일 라벨로 그대로 채점하면 Brier A 0.0321·B 0.0221, ECE 0.0615·0.0423이다. 사전 오즈만 파일 비율로 바꾼 `anomaly_probability_file_prior`는 0.0072·0.0056, ECE 0.0075·0.0066으로 위 교차 평가와 같다.\n- **확률의 조건.** 이 확률은 대회 이상 모양(한 날 3분)과 날짜 교락이 만든 분리를 담는다.\n  - 경보 문턱 점수에서의 확률은 분할마다 크게 다르다(π 1%에서 A 0.30, B 0.007). B의 0.007은 등방 회귀 계단의 경계값이다. 문턱 3.520 왼쪽 계단 [2.896, 3.520]에 정상 보정 9행과 이상 1행이 있어 P̂ 0.10이 적합 비율 0.137보다 낮고(LR 0.70), 다음 계단 3.561부터 P̂ 1.0이다.\n  - 실제 경보 행의 우도비는 모두 1 이상이다(LR<1 0행). 최소는 A 108.9(π 1%에서 0.52), B 2.42(0.024)다([probability_conversion_v2.csv](outputs/probability_conversion_v2.csv)).\n  - B 정상 오경보 3행도 LR 상한 121이라 π 1%에서 0.55로, 진짜 이상과 같은 최대 확률을 받는다. 확률 층으로 오경보를 거를 수 없다. 오경보 대응은 2단계 알림과 사건 묶음이 맡는다.\n  - 확률을 경보 기준으로 쓰지 않는다. 경보는 conformal p값으로만 정한다.\n- **재보정 모델.** 배포 A/B에는 라벨 확률 보정기가 있지만 `recalibrate.py`로 만든 새 모델에는 없다. 새 모델은 경보를 그대로 출력하며 `likelihood_ratio`, `anomaly_probability`, `record_likelihood_ratio`, `record_probability` 네 열은 결측이다. 이 경우 π는 확률 계산에 쓰이지 않고 CLI가 안내한다."
+    },
+    {
+      "path": "yejun/press_guard/README.md",
+      "start_line": 215,
+      "end_line": 219,
+      "text": "- **독립 검증이 없다.** 이상 21구간은 한 날 3분의 연속 기록이고, 모델 설계에 이미 본 자료다. 정상(화요일 심야)과 이상(일요일 오전)은 날짜·시간대·저장 형식이 겹친다. 형식은 제거했지만 신호 차이가 고장 때문인지 운전 조건 때문인지는 분리할 수 없다.\n- **현장 값을 모른다.** 이상 확률·알림 예산·기대효과는 사전 비율, 현장 알림률, 비용 가정에 조건부다.\n- **2단계 규칙은 사후에 정했다.** 대회 오경보가 모두 경보 1행이라는 관찰을 본 뒤 정했다. 약한 진동형 고장은 2단계로 늦게 가거나 1단계에만 남는다(E1식 진동 잡음 2σ, 2초 안 2단계 38~79%).\n- **10 Hz 순시값이다.** 베어링·캐비테이션처럼 수십 Hz 이상인 특징은 식별하지 못한다. 고장 모드는 후보 목록이다.\n- **약한 조건이 있다.** 기록 시작부터 있는 전류 오프셋, 전류 배율 변화, 느린 누설에는 약하다(보완 실험 E1·E2)."
+    },
+    {
+      "path": "yejun/press_guard/OPERATIONS.md",
+      "start_line": 12,
+      "end_line": 16,
+      "text": "| 단계 | 담당[가정] | 할 일 | 명령·파일 | 목표 시간[가정] |\n|---|---|---|---|---|\n| 0 정상 수집 | 보전 | 같은 설비·운전 조건에서 정상 운전 CSV를 모은다. α=1%면 최소 174단위(학습 15·보정 99·수락 검사 60)로, 대회 수집 밀도(경과 1시간에 약 447단위)에서 약 23분이다. 기본값과 대회 재보정 시험(학습 300·보정 120·수락 60)은 480단위, 경과 약 61분이다. 수집 시각 간격은 0.1초 ± 20 ms 안이어야 한다(밖이면 기록이 쪼개진다. 평균 기록 길이가 5행 미만이면 모든 명령이 경고한다) | CSV 열: `TimeStamp, AI0_Vibration, AI1_Vibration, AI2_Current` | 설치 전 |\n| 1 재보정·수락 검사 | 보전 | 학습·보정 후 수락 검사를 한다. (a) 정상 알림 단위 수가 보정 조건부 Beta-Binomial 95백분위 이하인가. (b) 주입 고장 3종의 2초 안 탐지율이 90% 이상인가. 통과할 때만 모델을 저장한다 | `python recalibrate.py --normal 정상.csv --out site.json --target-alerts-per-8h 3` → `site_report.json` | 1회 |\n| 2 운영 설정 | 보전·품질 | 모델과 α=1%(기본)를 정한다. 대회 모델에 라벨 확률 보정기가 있으면 π는 이상 **행 비율** 가정(기본 1%)이고 기록 확률은 같은 π를 쓰는 근사다. 정상 자료만으로 만든 재보정 모델에는 라벨 보정기가 없어 확률·우도비 열 4개가 비고 π는 쓰이지 않는다. 이 경우 라벨 없는 알림 단위 환산만 참고한다(아래 설명). 1단계는 화면 기록, 출동은 2단계로 한정한다 | `serve.py`(대회 모델 콘솔), `simulate.py --model site.json`(재보정 모델 모의 운용) | — |"
+    },
+    {
+      "path": "yejun/press_guard/outputs/error_condition_summary_v2.csv",
+      "start_line": 8,
+      "end_line": 10,
+      "text": "FN,단발 진동 충격 4σ,고장 모양,10행째 한 행에만 진동 두 센서 ±4σ(반복 5회),265.0,375,0.7066666666666667,0.6577459419302492,0.7522896093619422,0.00533333333333319,132.50000000000355,72.0,555,0.12972972972972974,0.10290726973887669,0.16056548441399981,0.003603603603603567,36.00000000000037,2초 안 탐지 29.3%·87.0%. 6σ는 99.5%·99.6%,\"주입(사후, press_selection)\",\"analysis/press_selection/fp_mitigation_injection_v2.csv:9-10,39-40\",A 평가 구간은 조용한 시간대라 문턱(max|z| 4.49)이 B(3.77)보다 높다,Clopper-Pearson 이항 95% 구간(관측 간 의존성 미반영),\"E1 주입 족(전류 잡음·오프셋·배율, 진동 잡음)과 시작 시점(t0)\"\nFP,고부하 운전(전류 진폭 ≥ B 정상 학습 q75),운전 강도(부하),\"고유 정상 구간 300~599(독립 적합 5개 중 하나라도 경보), 길이 ≥17. A 열 α 1%, B 열 α 5%\",2.0,46,0.043478260869565216,0.00530948284942997,0.14838677592011587,0.003937007874015748,11.043478260869565,10.0,46,0.21739130434782608,0.1094817001688192,0.3636243586153967,0.015748031496062992,13.804347826086957,\"나머지 1/254(α 1%, p 0.062, 표본 부족)·4/254(α 5%, p 1.8e-06). α 3% 6/46 대 2/254. 진동 SD Q4 17/118(크기 경보 경로). 5적합 합침 α5% 부하 상태 17/154 대 나머지 0/326, 시간블록 CMH p 2.9e-06(MH OR 10.0). 부하 안 진폭 ≥203.6: 12/77 대 5/77\",\"관측(사후, 같은 날 77분)\",\"press_guard/outputs/fp_intensity_v2.csv:17,21-22,40,44-45,53-57,63,67-68,70\",A·B 열은 분할이 아니라 α다. 부하 상태는 원 전류 RMS≥91.9의 신호 대리변수. 보정은 상태 혼합의 주변 보장이고 상태 조건부 보장이 아니다. 적합 겹침·시간 의존성은 남는다,Clopper-Pearson 이항 95% 구간(관측 간 의존성 미반영),구간 진동 SD·전류 진폭(√2×평균 제거 RMS). 정상 운전에서 함께 움직인다(coupling_fit_v2 r 0.95)\nFP,상부 진동(AI0) 단발 충격(구성비),운전 강도(부하),\"α 5% 오경보 사건의 구성(동결 A·B + 시간순 5폴드, 같은 모델 중복 제거)\",15.0,17,0.8823529411764706,0.6355908378987498,0.9854206831596976,,,13.0,17,0.7647058823529411,0.5010067267954199,0.9318922595626433,,,\"A 열: AI0 크기 단독 15/17, B 열: 경보 1행 13/17. 고유 구간 14. 조건부 비율은 윗행\",\"관측(구성비, 의존 사건)\",\"press_guard/outputs/fp_events_v2.csv:3,12-18,22-28,41-42\",구성비라 조건부 오경보율이 아니다. 사건이 같은 날 77분 안이라 독립이 아니다,Clopper-Pearson 이항 95% 구간(관측 간 의존성 미반영),구간 진동 SD·전류 진폭(√2×평균 제거 RMS). 정상 운전에서 함께 움직인다(coupling_fit_v2 r 0.95)"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv",
+      "start_line": 4,
+      "end_line": 7,
+      "text": "진단,기록구간 규칙,|Δt−0.1초|>1e-6이면 새 구간. 허용오차 1e-9~0.099초에서 600/21구간 불변. yejun/analysis/press_evidence/segment_rule_tolerance.csv:7,현행 규칙 유지,허용오차를 0.1초 이상으로 넓히면 중복 시각 경계 1개만 사라진다,0.1초 초과 1.5초 미만 간격이 없어서 규칙이 안정적이다\n전처리,무효 행 처리,시각 파싱 불가·비유한 값 행은 삭제하지 않고 status로 표시하고 앞뒤를 구간 경계로 둔다. 대회 자료에는 0행. yejun/press_submission/README.md:25,현장 입력 대비 규칙으로 유지. 해당 행은 '수집 상태 확인',삭제하면 구간이 이어 붙어 가짜 창이 생긴다,대회 자료에는 없는 경로라 단위 테스트로만 확인(yejun/press_guard/test_guard.py:58)\n전처리,중복 유지,00:43:33.196 완전 중복 1쌍. B 보정 최대 점수 순위 119·120/120. yejun/analysis/press_evidence/duplicate_rows.csv:2,삭제하지 않는다,삭제해도 α=1·3·5% 문턱(보정 최대 1·3·6위)은 같다,없음\n진단,결측·시간 적용률,값 결측·비유한 값 정상 0·이상 0. 시간 적용률(기록 시간/경과 시간) 정상 43.3%·이상 36.2%. yejun/analysis/press_evidence/gaps.csv:3,보간·채움을 하지 않는다. 공백은 구간 경계로만 쓴다,공백을 보간하면 관측하지 않은 신호를 만든다,\"학습·보정·평가 어디에도 정상 상태 전환 순간이 없다(기록 안 관측 0/469). 공백이 전환을 체계적으로 가리는 결측 기제다. 동결 모델의 사후 전환 스트레스는 계단과 경사에서 경보율이 크게 다르다(속도 미관측, 가설). 전환을 포함한 정상 연속 자료로 재보정·재검증하기 전에는 대회 오경보 수치를 연속 수집 현장에 옮기지 않는다. yejun/analysis/press_evidence/state_transition_stress.csv:2\""
+    },
+    {
+      "path": "yejun/press_guard/model.py",
+      "start_line": 31,
+      "end_line": 45,
+      "text": "# 2단계 경보: 건(경보가 이어진 블록 묶음)의 첫 경보는 1단계 \"주의\", 경보 행이 이 수에 이르면 2단계 \"점검 요청\"으로 격상해 다시 알린다.\n# 흔한 지속성 규칙(2표본)이다. 루브릭 사이클2 평가관 04의 사후 관찰(대회 B의 오경보는 모두 경보 1행)을 본 뒤 정했다.\nESCALATION_ALARM_ROWS = 2\nLEVEL_NAMES = {1: \"주의\", 2: \"점검 요청\"}\n# 의심 생산 시간창의 끝을 찾을 때, 경보 없는 단위가 이보다 멀리 떨어져 있으면 그사이 생산 상태를 모르므로 창을 열어 둔다.\n# 대회 자료의 기록구간 사이 공백은 1.5~16.6초다.\nSUSPECT_MAX_GAP_S = 60.0\n# 사건(incident): 경보가 난 알림 단위가 이어지고 단위 사이 공백이 이 값 이하면 한 사건이다(기록구간을 넘어서도 묶는다).\n# 사건마다 1단계 알림과 2단계 격상 알림을 한 번씩만 낸다. 근거 성분이 늘면 사건 기록만 갱신한다(새 알림 아님).\nINCIDENT_MAX_GAP_S = SUSPECT_MAX_GAP_S\n# 기록 경계: 이웃 행의 시각 간격이 0.1초에서 이 값보다 벗어나면 새 기록구간이다. v1(1 µs)은 대회 자료의 정확한 0.1초 간격에 맞춘 값이라\n# 수집 시각이 1 ms만 흔들려도 기록이 쪼개진다. 대회 자료의 기록 사이 공백은 1.5초 이상이라 20 ms에서도 구간이 같다.\nTIME_TOL_S = 0.02\nSHORT_RECORD_WARN = 5      # 평균 기록 길이가 이보다 짧으면 수집 시각 간격 경고\n# 사후 진단용 상태 대리변수. 정상 기록의 2성분 경계 91.886을 반올림한 값이며 경보·학습에는 쓰지 않는다."
+    },
+    {
+      "path": "yejun/press_guard/web/index.html",
+      "start_line": 27,
+      "end_line": 27,
+      "text": "<section id=\"external\" class=\"tab-page\" hidden><div class=\"section-intro\"><div class=\"eyebrow\">EXTERNAL HYDRAULIC TEST RIG</div><h2>다른 환경에서 확인한 성능과 실패 조건</h2><p>UCI 유압 시험대 2,205사이클을 확보했습니다. 안정 상태 1,449사이클로 펌프 누설 검출을 별도 평가했습니다.</p></div><div class=\"external-note\"><b>환경이 바뀌면 정상 기준도 확인해야 합니다.</b><p>정상 운전 양상을 학습한 기준이 다른 냉각 조건에서는 무너지는 사례를 확인했습니다. 아래는 별도 센서·별도 모델의 결과이며, 대회 모델의 추가 검증 점수로 합산하지 않습니다.</p></div><section class=\"panel full-panel\"><div class=\"panel-head\"><h3>정상 운전 형태 모델 · 조건별 결과</h3><a href=\"https://archive.ics.uci.edu/dataset/447/condition+monitoring+of+hydraulic+systems\" target=\"_blank\" rel=\"noreferrer\">UCI 원출처 ↗</a></div><div id=\"external-table\"></div><p class=\"fine\">압력·전력·유량·진동의 5초 평균을 사용한 정상 공분산 모델. 누설 없는 사이클로만 학습·보정, α 5%. 냉각 상태 3/20/100은 시험대의 효율 조건입니다. 제어된 시험대 사이클은 독립 실고장 사례가 아닙니다.</p></section><div class=\"external-note light\"><b>현장 적용 전 필요한 자료</b><p>같은 프레스의 다른 날짜 정상 운전, 부하·회전수·정비 이력, 새 고장 사례가 필요합니다. 공개 외부 자료는 이 항목을 대신하지 못합니다.</p></div></section>"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/README.md",
+      "start_line": 74,
+      "end_line": 75,
+      "text": "- **사전 안정 규칙을 만족한 설정은 36개 중 0개다**([e3_stability.csv](e3_stability.csv)의 `stable`이 모두 False). 따라서 사전 규칙으로는 재보정 최소 자료량을 확인하지 못했다. 막은 조건은 주입 탐지 ≥ 90%였고, 진동 잡음 s=2는 동결 모델도 71%라 이 조건을 넘지 못했다. 주입 세기를 탐지 결과를 보기 전에 정한 결과이며, 규칙을 바꿔 사전 결과를 뒤집지 않는다.\n- 결과를 본 뒤 정한 **사후 상대 기준**(모든 시작에서 정상 알림 ≤ 3, 이상 21/21, 주입 최소 탐지율 ≥ 동결 A − 10%p = 61%)으로 따로 보면, 평가한 격자에서 자료가 가장 적은 설정은 α=1% 학습 15 + 보정 99(정상 5.96~7.06분, 중앙값 6.14분, 경과 약 14분, 시작 7개)와 α=5% 학습 60 + 보정 40(약 5분)이다. 같은 날 자료와 조용한 평가 구간(위 E1 참고)에서 얻은 탐색값이므로, 새 날짜·설비에서 검증된 최소 수집량으로 쓰지 않는다."
+    },
+    {
+      "path": "yejun/analysis/press_evidence/README.md",
+      "start_line": 104,
+      "end_line": 114,
+      "text": "## 진단 보강 1 — 센서 관계·진단 그림·결정표·생산단위·라벨 일관성·관행 기준·보정 곡선·관측 가능성 (2026-09-27)\n\n표 16개와 그림 5장이다(보강 2의 표 4개는 아래 별도 절). [build_diagnostics.py](build_diagnostics.py)가 원본, 동결 모델, 커밋된 표에서 만든다. 위 17개 표는 바꾸지 않는다. O1(a)만 `train.py --rolling`과 같은 5겹을 다시 적합한다(모델은 저장하지 않는다). 관계·해석은 기술 통계 또는 가설이다. 인과나 고장 근거로 쓰지 않는다.\n\n```bash\npython analysis/press_evidence/build_diagnostics.py   # yejun/에서, 표 22개·그림 5장·manifest\n```\n\n- 해시는 [diagnostics_manifest.json](diagnostics_manifest.json)에 있다: 입력, 코드, 인용한 파일, 산출물.\n- 결정표의 `파일:행`은 실행할 때 찾아 넣는다. 인용한 파일이 바뀌면 다시 실행한다(찾지 못하면 실행이 실패한다).\n- 두 번 실행해 산출물 25개(표 20·그림 5)의 해시가 같음을 확인했다."
+    },
+    {
+      "path": "yejun/analysis/press_selection/README.md",
+      "start_line": 150,
+      "end_line": 151,
+      "text": "3. **대안이 있다.** 오경보 업무량은 점수를 바꾸지 않는 운영 규칙으로 다룬다.\n   - 예: `press_guard`의 2단계 경보(건 안의 경보 행 2개 이상이면 점검 요청)"
+    },
+    {
+      "path": "yejun/analysis/press_supervised/README.md",
+      "start_line": 37,
+      "end_line": 38,
+      "text": "- **부스팅의 conformal 문턱은 겹마다 크게 흔들린다.** A 창+v2 부스팅의 21겹 문턱은 0.248~0.997이다. 기록 2를 뺀 겹의 문턱은 0.990이고, 그 기록 47행을 모두 놓쳤다(부스팅 A 미탐 94행 중 47행). 확률이 0이나 1 근처로 몰리는 모델은 정상 보정 최대 확률 하나가 문턱이 되어 불안정하다.\n- **다른 특징 구성의 값과 다른 이유.** 검토 과정에서 다른 특징 구성으로 계산한 값(로지스틱 A 0.960·B 0.957, 부스팅 0.971·0.967)은 특징 구성이 다르다. 그 특징은 z, 이동 통계, 사인 1−R² 원값, AR 잔차, lag 곱이었다. 이 표는 창 특징 22개 + v2 꼬리 점수를 쓴다. 가중치 설정도 다르다. 그 특징 구성으로 다시 돌리면 그 값이 재현된다(0.9601·0.9574, 0.9709·0.9673). 어느 특징 구성에서도 결론(대회 F1로는 v2와 구분되지 않음)은 같다."
+    },
+    {
+      "path": "yejun/analysis/press_rubric_review/cycle2/round4/judge06_final_checks.py",
+      "start_line": 99,
+      "end_line": 105,
+      "text": "        markers.extend(dict(file=rel, line=i, text=s) for i, s in enumerate(body.splitlines(), 1)\n                       if re.search(r\"루브릭|사이클[ ]?2|평가관|press_rubric_review|press_implementation_review\", s))\n    elif path.name == \"requirements-lock.txt\":\n        markers.extend(dict(file=rel, line=i, text=s) for i, s in enumerate(path.read_text(encoding=\"utf-8\").splitlines(), 1)\n                       if re.search(r\"루브릭|사이클[ ]?2|평가관|press_rubric_review|press_implementation_review\", s))\nrecord(\"documents\", package_files=len(table), megabytes=float(table.bytes.sum() / 2 ** 20), local_links=len(links), broken=broken,\n       internal_markers=markers, package_blind_checks=package.blind_checks(table))"
+    },
+    {
+      "path": "yejun/analysis/press_rubric_review/cycle2/adversarial/README.md",
+      "start_line": 33,
+      "end_line": 45,
+      "text": "| 항목(배점) | 내부 4회차 | J1 학계 | J2 산업계 | 두 위원 평균 |\n|---|---:|---:|---:|---:|\n| 데이터 이해 및 진단(15) | 15.0 | 12.0 | 12.0 | 12.0 |\n| AI 예측모델 개발(40) | 38.0 | 30.0 | 29.0 | 29.5 |\n| 영향요인 및 오류분석(15) | 14.5 | 10.5 | 11.0 | 10.75 |\n| 현장 활용방안(10) | 9.5 | 7.0 | 7.0 | 7.0 |\n| 창의성·차별성(10) | 9.4 | 7.5 | 7.5 | 7.5 |\n| 코드 및 재현성(10) | 10.0 | 8.5 | 8.0 | 8.25 |\n| **합계(100)** | **96.4** | **75.5** | **74.5** | **75.0** |\n\n- 두 위원은 서로의 기록과 앞선 채점 기록을 읽지 않았다. 그런데 항목 점수가 0.5점 안에서 같다.\n- 차이가 가장 큰 항목은 모델(−8.5)이다. 두 위원은 독립 검증 부재, 표본 안 F1, 사실상 이진인 확률을 크게 깎았다. 내부 평가관은 이 한계를 1.0~2.0점으로 묶었다.\n- 두 위원 모두 경쟁팀 순위는 추정하지 않았다."
+    },
+    {
+      "path": "yejun/press_guard/recalibrate.py",
+      "start_line": 26,
+      "end_line": 27,
+      "text": "--target-alerts-per-8h: 교대(8시간)당 1단계 알림 예산. 입력 자료의 단위 밀도로 명목·보정 95% 알림 수를 환산하고, 예산을 맞추려면\n필요한 α·보정 단위·정상 수집 시간을 보고서에 적는다(analyze.py의 alert_budget_design_v2.csv와 같은 식). 수락 여부는 바꾸지 않는다."
+    },
+    {
+      "path": "yejun/press_guard/recalibrate.py",
+      "start_line": 137,
+      "end_line": 145,
+      "text": "    ap.add_argument(\"--alpha\", type=float, choices=ALPHAS, default=.01)\n    ap.add_argument(\"--cal-units\", type=int, default=120)\n    ap.add_argument(\"--holdout-units\", type=int, default=60)\n    ap.add_argument(\"--name\", default=\"recalibrated\", help=\"모델 split 이름(model_id에 붙는다)\")\n    ap.add_argument(\"--save-failed\", action=\"store_true\", help=\"수락 검사에 실패해도 모델을 저장한다(보고서에 실패가 남는다)\")\n    ap.add_argument(\"--outcomes\", type=Path, help=\"점검 결과가 기록된 대기열 CSV. 정상 확인으로 닫히지 않은 건의 의심 시간창은 뺀다\")\n    ap.add_argument(\"--windows\", type=Path, help=\"monitor.py 창별 CSV(outcome 열). 설비 점검 요청 창은 정상 확인일 때만 남긴다\")\n    ap.add_argument(\"--target-alerts-per-8h\", type=float, help=\"교대 8시간당 1단계 알림 예산(보고서의 설계 환산용)\")\n    args = ap.parse_args(argv)"
+    }
+  ],
+  "source_sha256": {
+    "관련 자료/경진대회 결과보고서 양식_일반국민,대학(원)생 부문.hwpx": "9a781cc1963000193199efd88ad92ac72eed875438b4e2727422aa01b12adedb",
+    "관련 자료/제6회 K-인공지능 제조데이터 분석 경진대회 과제공개(일반국민,대학(원)생).hwpx": "cfea6f3cf97c990d1dce2f7f7515c26976bcbfaf331f8fbd5d961f0e0322bb62",
+    "yejun/analysis/press_rubric_review/cycle2/round1/judge_01_data.md": "6dd78e751467321192ff8355c543c78d3474269ced215e613bd8737c8f3c6a11",
+    "yejun/analysis/press_rubric_review/cycle2/round2/judge_01_data.md": "ff434e9c81e53869c0e187b3c08bc01c7e2a7839e30953d7cef0b3e7113c00e4",
+    "yejun/analysis/press_rubric_review/cycle2/round3/judge_01_data.md": "a73d446866e47bfe3d614d4dda6a0398770afa06b3b9e700af5fbd98ce9003e3",
+    "yejun/analysis/press_rubric_review/cycle2/round2/judge_02_model.md": "9e2838df43cb5d009617b391756523bf5307bcce2da51dd5e9568ebd6102ab60",
+    "yejun/analysis/press_rubric_review/cycle2/round3/judge_02_model.md": "a34886c0cee8f7563166b4e29540c2ec3c34b93f01db875d9e2d74b3481411d6",
+    "yejun/analysis/press_rubric_review/cycle2/round1/judge_03_errors.md": "ca156fb87de9c0a523c5dfac79b9609b79b0b4ac3972c376fa802ca2f58d01c2",
+    "yejun/analysis/press_rubric_review/cycle2/round3/judge_03_errors.md": "e4694b5dc68c7d44916e68126f89f962faa75089c70f91bd432d59f83fa26ec4",
+    "yejun/analysis/press_rubric_review/cycle2/round1/judge_04_field.md": "4c23ce9025da96f03ab9d1b61ce9a5e08e8ccd7844c02a745c1f154847834fb6",
+    "yejun/analysis/press_rubric_review/cycle2/round2/judge_04_field.md": "f32f9d96cdef7a0f5aa473b53c97bede67312510753289ff264a72cf7e764744",
+    "yejun/analysis/press_rubric_review/cycle2/round3/judge_04_field.md": "1d66f91670f82da1b191b98fba5a0bb880132664caa3f6f9c608d686b7eb7f81",
+    "yejun/analysis/press_rubric_review/cycle2/round1/judge_05_originality.md": "4f3ce0885239b62bdaaddac9f11c60dc9a98a184175b5c8f2985c03f71dd1187",
+    "yejun/analysis/press_rubric_review/cycle2/round2/judge_05_originality.md": "b4172acb9a6d9aa5778ed78ec3cb498465d2244678fa7bd6ce404545b29b3006",
+    "yejun/analysis/press_rubric_review/cycle2/round3/judge_05_originality.md": "1f9af7d29c6fd2866b415e03dacbe85dc49eb27f1fcdb596415d95d087369f08",
+    "yejun/analysis/press_rubric_review/cycle2/round1/judge_06_repro.md": "ecdea6c953a9d6286fb51812b8644b8b48c89dbb51a1a3fd523d8d5d176fd5e0",
+    "yejun/analysis/press_rubric_review/cycle2/round3/judge_06_repro.md": "7e8b2d00461dfc89b0d4c3e8022b6ae5d1fc4533414c3651d7f03140172062b5",
+    "yejun/analysis/press_rubric_review/cycle2/adversarial/red_J1_cold_score_academic.md": "6b20adac99eadf812b5d91a5a887ac2f5c02927804a23e6aabdc08cfea4879b8",
+    "yejun/analysis/press_rubric_review/cycle2/adversarial/red_J2_cold_score_industry.md": "ad4374fbda0dc87b5bf4c014e361c68fe5c9e98d41d266227366886b86084f23",
+    "yejun/analysis/press_rubric_review/cycle2/round3/judge02_checks.json": "89a3b0f52a4094de00a9674b81147db045f5e8cfe89176dd46def207e4aea28d",
+    "yejun/press_guard/outputs/metrics.csv": "ed318a3b36ced09ee888e0fb5b8b548350e9bee1e39cff7779c19ab379a613d2",
+    "yejun/analysis/press_rubric_review/cycle2/round4/package_files_final.csv": "a7d3966b52922a1534e9b594929d2726e77fe0bf49b8e91e9ec310ce01ad0396",
+    "yejun/analysis/press_selection/selection_evidence.csv": "ba4aff9231934f5a69378f2ced06a3e2d809e920bb1850c6e64a1165237c6f52",
+    "yejun/press_guard/OPERATIONS.md": "cb6a8481f69a50ac8cdc4d7fa3fbd6f22d857697d0e7d95ecec56c52c35ffeda",
+    "yejun/press_guard/README.md": "bec969c543a5f7f31c8560fd528efb9f944bd0c478ce524c9a3b8f5b92ed16a7",
+    "yejun/press_guard/analyze.py": "1839a3a7bc02f1352d1d346f427154de50ef4d42bae33387333ad6e62457fb3f",
+    "yejun/press_guard/audit.py": "6deaa6120cdd38d061d1fe331fb605d5ac66aaaec1bc60199182b6995af25cd9",
+    "yejun/press_guard/benchmark.py": "009ea99125a24d3951e4eeb2eba5b5a00dfefdac99a9676d69d8afef57e1d8ae",
+    "yejun/press_guard/contracts.py": "d750be8d761ae414883dc3a35313248a67613cead949734ae0a92c6ae00542d9",
+    "yejun/press_guard/insights.py": "6eeb75f0daf73322d0e9a0877cdfb34e076a930bba798a9a9c691f1bbd1b9ddf",
+    "yejun/press_guard/model.py": "8b9493a248609180f139aa777ed0b1cbf29d3bfca5e5b98f2e588cbeb0cb3f6f",
+    "yejun/press_guard/monitor.py": "43b9be9c35df9ab01fb139b821c05f2d7aaaa6f414b4da7983839bdfc8694912",
+    "yejun/press_guard/outputs/ablation_v2.csv": "1a5b97c9a88ad908eed89ae91e673cea9275405498e2c63264c838cf60c3fbe0",
+    "yejun/press_guard/outputs/alert_budget_design_v2.csv": "5a69da064b0f244b0c7a8681724681d7795da7e5721e1a87e50fdf48e7fdccd4",
+    "yejun/press_guard/outputs/alert_levels_injection_v2.csv": "5d31ba08857d7312b7ceb68458f12391bd78bc18359c11b26c3148571d540fbe",
+    "yejun/press_guard/outputs/alert_levels_v2.csv": "7dbae870b4c31415ca62b4742a583b5f3c0ab5415c9a0de6f7c860a22ee3706b",
+    "yejun/press_guard/outputs/cases_A.csv": "ef37b26767971721908d787a95f5c8f48870ace303ad5448d412c597ff5134cf",
+    "yejun/press_guard/outputs/cases_B.csv": "c7dbfac4d10223fe585e996b1e89eafb986d6be2765a2d62dba528086a9092bb",
+    "yejun/press_guard/outputs/coupling_fit_v2.csv": "bc6786eb5d87b22bbc989430cf859dba4238d1629d82bae18d3ed8d2c297df70",
+    "yejun/press_guard/outputs/coupling_records_v2.csv": "e9ae50ceb437d34d5e04a48ef2f53160c0246a0898140a2d10a7caae2c0a9cbd",
+    "yejun/press_guard/outputs/decision_table_v2.csv": "2368bebbb7df8a68db7b815fe78dc2881d33d36b5caa4335d3ac3dd4861324a7",
+    "yejun/press_guard/outputs/error_condition_summary_v2.csv": "4a2af738f1404936c031103d352ebe590278c8779352ea1e076fb7d70b027a04",
+    "yejun/press_guard/outputs/error_conditions_segments_v2.csv": "083b122d791ca32eec08ae032edd3a6b8f74333987437ee8e356c449881f466d",
+    "yejun/press_guard/outputs/error_conditions_stats_v2.csv": "c68a3f5c84841ce54f9b30c8fa442189601e7fdb3c005d2e7d83273397769795",
+    "yejun/press_guard/outputs/error_conditions_v2.csv": "dbb330296c57e2d34831a99757f8c5fff1bfb7b9fab14c301eeace1db734d12c",
+    "yejun/press_guard/outputs/expected/ablation_v2.csv": "1a5b97c9a88ad908eed89ae91e673cea9275405498e2c63264c838cf60c3fbe0",
+    "yejun/press_guard/outputs/expected/alert_budget_design_v2.csv": "5a69da064b0f244b0c7a8681724681d7795da7e5721e1a87e50fdf48e7fdccd4",
+    "yejun/press_guard/outputs/expected/alert_levels_injection_v2.csv": "5d31ba08857d7312b7ceb68458f12391bd78bc18359c11b26c3148571d540fbe",
+    "yejun/press_guard/outputs/expected/alert_levels_v2.csv": "7dbae870b4c31415ca62b4742a583b5f3c0ab5415c9a0de6f7c860a22ee3706b",
+    "yejun/press_guard/outputs/expected/cases_A.csv": "ef37b26767971721908d787a95f5c8f48870ace303ad5448d412c597ff5134cf",
+    "yejun/press_guard/outputs/expected/cases_B.csv": "c7dbfac4d10223fe585e996b1e89eafb986d6be2765a2d62dba528086a9092bb",
+    "yejun/press_guard/outputs/expected/coupling_fit_v2.csv": "bc6786eb5d87b22bbc989430cf859dba4238d1629d82bae18d3ed8d2c297df70",
+    "yejun/press_guard/outputs/expected/coupling_records_v2.csv": "e9ae50ceb437d34d5e04a48ef2f53160c0246a0898140a2d10a7caae2c0a9cbd",
+    "yejun/press_guard/outputs/expected/decision_table_v2.csv": "2368bebbb7df8a68db7b815fe78dc2881d33d36b5caa4335d3ac3dd4861324a7",
+    "yejun/press_guard/outputs/expected/error_condition_summary_v2.csv": "4a2af738f1404936c031103d352ebe590278c8779352ea1e076fb7d70b027a04",
+    "yejun/press_guard/outputs/expected/error_conditions_segments_v2.csv": "083b122d791ca32eec08ae032edd3a6b8f74333987437ee8e356c449881f466d",
+    "yejun/press_guard/outputs/expected/error_conditions_stats_v2.csv": "c68a3f5c84841ce54f9b30c8fa442189601e7fdb3c005d2e7d83273397769795",
+    "yejun/press_guard/outputs/expected/error_conditions_v2.csv": "dbb330296c57e2d34831a99757f8c5fff1bfb7b9fab14c301eeace1db734d12c",
+    "yejun/press_guard/outputs/expected/expected_effect_v2.csv": "94b696d2dde0848987b55ea1558ca61fa91e90f1f6a60fd996be80fe3fcc7ec0",
+    "yejun/press_guard/outputs/expected/fn_intensity_v2.csv": "087f2e97bf7d3340d0fef027bb5a9a19ef4331fcd969b19ef33e6bb802353c0a",
+    "yejun/press_guard/outputs/expected/fp_events_v2.csv": "906dc07b4ae961f856ed155ab5b55d19157e0c4b782e9a1b087c9b6dcc3c70b7",
+    "yejun/press_guard/outputs/expected/fp_intensity_v2.csv": "ad196bfa8b075df50773f394b6278daf1bd08032d7ee9f13334ee687b3855186",
+    "yejun/press_guard/outputs/expected/incident_summary_v2.csv": "7184320225c2227630a5fb902b67cf3bf47915c313e8abd70ac7de6ba25c02f9",
+    "yejun/press_guard/outputs/expected/incidents_A.csv": "f8407df2d7360db72a5c646bf5883d076c584c52610080babb893a5dc54e3437",
+    "yejun/press_guard/outputs/expected/incidents_B.csv": "a45eed38e452a50188cf9a0d0b40c4b7dcf2909ca35000edcd49336ff6195e41",
+    "yejun/press_guard/outputs/expected/interaction_2x2_v2.csv": "542c63fa113dc357130570de1ff8b228ff31b4ccf3a752c0eb8aad7a350cc02f",
+    "yejun/press_guard/outputs/expected/label_free_alert_probability_v2.csv": "2da6d90199b5370d81a6306bd050487fd65fb15fced336fadafda41d041b4d21",
+    "yejun/press_guard/outputs/expected/metrics.csv": "ed318a3b36ced09ee888e0fb5b8b548350e9bee1e39cff7779c19ab379a613d2",
+    "yejun/press_guard/outputs/expected/model_comparison_v2.csv": "eadfbe41ac7add55f07b1e63300a0beec22e26513e415248455d489aac396f3a",
+    "yejun/press_guard/outputs/expected/monitor_gain_v2.csv": "c05d452df9093464de8045ed7e0a74551ca01f0c881ed39251f1feaf89c17fa4",
+    "yejun/press_guard/outputs/expected/near_miss_corr_v2.csv": "501fff1b330a2b4747175fcd19fc8afcd842f70010434f9e5024eefb49f96d77",
+    "yejun/press_guard/outputs/expected/near_miss_v2.csv": "0163b4257f5d1d63ff924317c6027b3d16b8c081bc42872a695796b22e2c79ce",
+    "yejun/press_guard/outputs/expected/position_vibration_misses_v2.csv": "9516a8a3596360a364ad00ba6f78cf57fb0e0569750733e67d7ca18b986db3d4",
+    "yejun/press_guard/outputs/expected/probability_conversion_v2.csv": "a98514df92deb12bedadd83570bd27578a3e02a2076f1d7e83798a4baf509dcc",
+    "yejun/press_guard/outputs/expected/probability_eval_v2.csv": "56da8e3dfd7b1d074d03833d43fe47eb11780c50993cd8247d503097c42b6a5c",
+    "yejun/press_guard/outputs/expected/probability_reliability_v2.csv": "89e79e7b5bc99d7c01b6cf66119e2d1a77d8fab5f010d1c38ce25963d019bad0",
+    "yejun/press_guard/outputs/expected/quality_windows_v2.csv": "e49101f8bfff159ae96f2a2f213eb2f379b6f49c803221ff39f7805f56f6a73d",
+    "yejun/press_guard/outputs/expected/queue_injection_ranks_v2.csv": "7cb1517b6da8fed30460e44be7bb64a0f2d411cf1a6eabe1dbfd2dc841cf46a2",
+    "yejun/press_guard/outputs/expected/queue_key_selection_v2.csv": "99563c11aa4a2eeb8e1633f2d511bd9e78975c9dd48617a083096ec17514b2de",
+    "yejun/press_guard/outputs/expected/queue_mixed_ranks_v2.csv": "b74d53bb1a4840275f56865d1aa11a37f63a850607b60a2d9ea79c4c670f25ea",
+    "yejun/press_guard/outputs/expected/records_first_alarm_v2.csv": "14ba376ea2f5789655b0af14c389b7b5aa4c758b5734293d4afdd3e952fb058b",
+    "yejun/press_guard/outputs/expected/robustness_v2.csv": "7e2e53ca6f308db82d82476bac7103f24d75be301d247b47cc7814445ec7be40",
+    "yejun/press_guard/outputs/expected/rolling.csv": "f7fd51580796b3e310b1a66d146e1703600119a10f557963cec3081c4e16c73b",
+    "yejun/press_guard/outputs/expected/sensitivity_v2.csv": "57d0bf076c4d2366688ce518f1f7a3f1f0490511dd755fafa81b21c32e2c375a",
+    "yejun/press_guard/outputs/expected/sensor_importance_v2.csv": "2da67dd64e99cc165e7c4d76d496c147f67c96a5012dffbcac8826f20f3c750b",
+    "yejun/press_guard/outputs/expected/uncertainty_v2.csv": "c10df72d1662caf044679acbe88c65c1384ba8c68b8d36188926f40ff07aec72",
+    "yejun/press_guard/outputs/expected/workload_v2.csv": "ad3be354fa8baa944fd7c4ee14eb8e950ca37259a68dec4440184cf7f920c74b",
+    "yejun/press_guard/outputs/expected_effect_v2.csv": "94b696d2dde0848987b55ea1558ca61fa91e90f1f6a60fd996be80fe3fcc7ec0",
+    "yejun/press_guard/outputs/fn_intensity_v2.csv": "087f2e97bf7d3340d0fef027bb5a9a19ef4331fcd969b19ef33e6bb802353c0a",
+    "yejun/press_guard/outputs/fp_events_v2.csv": "906dc07b4ae961f856ed155ab5b55d19157e0c4b782e9a1b087c9b6dcc3c70b7",
+    "yejun/press_guard/outputs/fp_intensity_v2.csv": "ad196bfa8b075df50773f394b6278daf1bd08032d7ee9f13334ee687b3855186",
+    "yejun/press_guard/outputs/incident_summary_v2.csv": "7184320225c2227630a5fb902b67cf3bf47915c313e8abd70ac7de6ba25c02f9",
+    "yejun/press_guard/outputs/incidents_A.csv": "f8407df2d7360db72a5c646bf5883d076c584c52610080babb893a5dc54e3437",
+    "yejun/press_guard/outputs/incidents_B.csv": "a45eed38e452a50188cf9a0d0b40c4b7dcf2909ca35000edcd49336ff6195e41",
+    "yejun/press_guard/outputs/interaction_2x2_v2.csv": "542c63fa113dc357130570de1ff8b228ff31b4ccf3a752c0eb8aad7a350cc02f",
+    "yejun/press_guard/outputs/label_free_alert_probability_v2.csv": "2da6d90199b5370d81a6306bd050487fd65fb15fced336fadafda41d041b4d21",
+    "yejun/press_guard/outputs/model_comparison_v2.csv": "eadfbe41ac7add55f07b1e63300a0beec22e26513e415248455d489aac396f3a",
+    "yejun/press_guard/outputs/model_comparison_v2.md": "308ede3d08463847c84afacc104d05bcfdc2157e409288ac80a780011afaae41",
+    "yejun/press_guard/outputs/monitor_gain_v2.csv": "c05d452df9093464de8045ed7e0a74551ca01f0c881ed39251f1feaf89c17fa4",
+    "yejun/press_guard/outputs/near_miss_corr_v2.csv": "501fff1b330a2b4747175fcd19fc8afcd842f70010434f9e5024eefb49f96d77",
+    "yejun/press_guard/outputs/near_miss_v2.csv": "0163b4257f5d1d63ff924317c6027b3d16b8c081bc42872a695796b22e2c79ce",
+    "yejun/press_guard/outputs/position_vibration_misses_v2.csv": "9516a8a3596360a364ad00ba6f78cf57fb0e0569750733e67d7ca18b986db3d4",
+    "yejun/press_guard/outputs/probability_conversion_v2.csv": "a98514df92deb12bedadd83570bd27578a3e02a2076f1d7e83798a4baf509dcc",
+    "yejun/press_guard/outputs/probability_eval_v2.csv": "56da8e3dfd7b1d074d03833d43fe47eb11780c50993cd8247d503097c42b6a5c",
+    "yejun/press_guard/outputs/probability_reliability_v2.csv": "89e79e7b5bc99d7c01b6cf66119e2d1a77d8fab5f010d1c38ce25963d019bad0",
+    "yejun/press_guard/outputs/quality_windows_v2.csv": "e49101f8bfff159ae96f2a2f213eb2f379b6f49c803221ff39f7805f56f6a73d",
+    "yejun/press_guard/outputs/queue_injection_ranks_v2.csv": "7cb1517b6da8fed30460e44be7bb64a0f2d411cf1a6eabe1dbfd2dc841cf46a2",
+    "yejun/press_guard/outputs/queue_key_selection_v2.csv": "99563c11aa4a2eeb8e1633f2d511bd9e78975c9dd48617a083096ec17514b2de",
+    "yejun/press_guard/outputs/queue_mixed_ranks_v2.csv": "b74d53bb1a4840275f56865d1aa11a37f63a850607b60a2d9ea79c4c670f25ea",
+    "yejun/press_guard/outputs/records_first_alarm_v2.csv": "14ba376ea2f5789655b0af14c389b7b5aa4c758b5734293d4afdd3e952fb058b",
+    "yejun/press_guard/outputs/robustness_v2.csv": "7e2e53ca6f308db82d82476bac7103f24d75be301d247b47cc7814445ec7be40",
+    "yejun/press_guard/outputs/rolling.csv": "f7fd51580796b3e310b1a66d146e1703600119a10f557963cec3081c4e16c73b",
+    "yejun/press_guard/outputs/sensitivity_v2.csv": "57d0bf076c4d2366688ce518f1f7a3f1f0490511dd755fafa81b21c32e2c375a",
+    "yejun/press_guard/outputs/sensor_importance_v2.csv": "2da67dd64e99cc165e7c4d76d496c147f67c96a5012dffbcac8826f20f3c750b",
+    "yejun/press_guard/outputs/uncertainty_v2.csv": "c10df72d1662caf044679acbe88c65c1384ba8c68b8d36188926f40ff07aec72",
+    "yejun/press_guard/outputs/workload_v2.csv": "ad3be354fa8baa944fd7c4ee14eb8e950ca37259a68dec4440184cf7f920c74b",
+    "yejun/press_guard/predict.py": "d7b92210df81dda577721e3bc9e48c76006106a7108f358a888714b494df0dc9",
+    "yejun/press_guard/probability.py": "67007ee9c8a9a12c48707e77230907dac2c155a519edfe7868863065aa4f34dd",
+    "yejun/press_guard/recalibrate.py": "448883f5c1d65e5b14877d838abcbd338df9970941683a425c0266e54b05042b",
+    "yejun/press_guard/reproduce.py": "3641826d624c820e8c118267c3b3a71d5ab0722548eb7c0b92fd3faae24df2d0",
+    "yejun/press_guard/requirements-lock.txt": "dd607e92d36771b7098ea58bf53a0cf6196386c8cd3028850320567b25eb4583",
+    "yejun/press_guard/requirements-lstm.txt": "2f9f6c9ee8e26a851c013f57741b8ecbe6170086c3e4cfd38a71197d75157f40",
+    "yejun/press_guard/requirements.txt": "cf2a59e9cc7ad18a015e5cd6092716f17be5ab797fc19ddf45ae077977375a43",
+    "yejun/press_guard/runtime.py": "7ffd6d0f57f8d9e26e2303a943ae3630a792b9dff18b01a15006b2883f7c7f69",
+    "yejun/press_guard/serve.py": "733a302c49af6327fe24e99d9a0ea70393ac605c07a1e4edb339ed0ecef86b35",
+    "yejun/press_guard/simulate.py": "44f9f0980f5cfbe519f540026dd8f740eea05f4c999b4d28c4b0998484826920",
+    "yejun/press_guard/test_analyze.py": "cb45e7c1bc6c2aec4b8521c91f26ac86e9b9701a6947215535dfab07c5daef37",
+    "yejun/press_guard/test_cli_probability.py": "d49b16f60763ebe81b47a8760e456e30f052aaf25bd8b6626b9dfad651428bab",
+    "yejun/press_guard/test_digest_integrity.py": "510aabd999eac9166a13de37fd1435543383c0678f20d65cc23397579e5042c8",
+    "yejun/press_guard/test_guard.py": "f5b8a0bdf415cb546d207352cdf5ca3fa5079f319571f3402c09c6c615b7cffd",
+    "yejun/press_guard/test_insights.py": "eb0ecbfff17f44f20ce468a148db4dd213943551717522757990c8dd57904eb7",
+    "yejun/press_guard/test_monitor.py": "60677b567216bcc1297a8fe0a793b30734b32346fe229a35b5ccee76d7dff40c",
+    "yejun/press_guard/test_packaging.py": "57a2a320291f828b1a9f52fe3aed1ba0cf4e8140690a2d22c8d9d0c1a01c6908",
+    "yejun/press_guard/test_portability.py": "2628436add29f2fd1d43890915c2f116279b56104c80cd6da5a109444ad26f41",
+    "yejun/press_guard/test_probability.py": "8a1d76fbab304a1391adfbf8dc8f84bc4557097250f39e85b46a5aba5db770af",
+    "yejun/press_guard/test_recalibrate.py": "580b35256cf4851180ed0f9ee2d6ea1a27781b138137095e99dbdcde7575d4ec",
+    "yejun/press_guard/test_review_regressions.py": "5c13c17dc67e34af9479da04f2d2222039e9e590922e43e5afa9e5110193ddaf",
+    "yejun/press_guard/test_serve.py": "a74d2e72a8667e75a9f55b200be56533c5905afed0024540f209aa52237aeb36",
+    "yejun/press_guard/test_simulate.py": "9f5a83ce4a1e1c0c04db4629f97b72a83ae633cce4372b71ba2f3a78fefabdb6",
+    "yejun/press_guard/test_simulation_view.py": "8a85057d61e0a781e44c14cc74dea820cad9cee827a88538fd96f5bb631537de",
+    "yejun/press_guard/test_state_incidents.py": "f84efa6b4d46e380a522e58a97ac2a22969187aaf78ba67242a8e1840c6d23c4",
+    "yejun/press_guard/test_time_order.py": "35b151ae04f1f40d33bb4b7cbe67ccf579a85760aff16cbac1068183d3fdfc65",
+    "yejun/press_guard/tools/capture_console.py": "59455927c7a10c35399daf477575707bd884a775c4292ffa085008eeb14fec6b",
+    "yejun/press_guard/tools/diagrams.py": "f1b4335e6163499cbf03774a8e5d079d77d0839d081383c789e6c898a0c163ed",
+    "yejun/press_guard/tools/package_manifest.py": "df0057895fe820f8f40acbc7d6112ecaca9e2e84338993ed0d5ad93703af390a",
+    "yejun/press_guard/train.py": "498b2bd681729595965ee0bf938106eb313c7ee14a19a4e962fb8cbce55e0449",
+    "yejun/press_guard/verify.py": "16b01179b98f1c2cb934fc17c77970a3d55a0953ec518af00de5e22602ec1d92",
+    "yejun/press_submission/PROVENANCE.md": "bc86cc453870fa93756cfd17be417795fe046c3b10dd1e0d2b26b39e4e01da7f",
+    "yejun/press_submission/README.md": "6c2a9662b23e269dede3db74b272f12f11f03c63a677528f3e3830da652348e2",
+    "yejun/press_submission/evidence/요청사항_준용.md": "7fecfbb4f3422f430d89b0a68a88dac75c94aabaa4f9f9902e7fca140fdb7fa3",
+    "yejun/press_submission/outputs/ablation.csv": "d523cb63cde49b29fe25a20500b5a80e33071b411d6477740171d71bb7411906",
+    "yejun/press_submission/outputs/alarm_components.csv": "8c2624778b54b2c7dcb4e3e25e17b50fcc9798df8c45f3658cf0682682d9043c",
+    "yejun/press_submission/outputs/conformal_mc.csv": "9ad41b2c95e1df78dc00b6f6b5a6c9c2017b49aaddbf577352692c5118d18183",
+    "yejun/press_submission/outputs/diagnosis.md": "a5f675ae7a993a792f2aef0de57feb8536cdb2fd7ea177c061ffbf165db29e0d",
+    "yejun/press_submission/outputs/error_conditions_fn.csv": "e2b5e291c4613ec65c6addf465065aeff637237a53ea535a989becb00d233ae5",
+    "yejun/press_submission/outputs/error_conditions_fp.csv": "8948a749e4ec8c2b841db0122669595f19fb353707b6bd7fffcc0196e0a3770c",
+    "yejun/press_submission/outputs/expected/ablation.csv": "d523cb63cde49b29fe25a20500b5a80e33071b411d6477740171d71bb7411906",
+    "yejun/press_submission/outputs/expected/alarm_components.csv": "8c2624778b54b2c7dcb4e3e25e17b50fcc9798df8c45f3658cf0682682d9043c",
+    "yejun/press_submission/outputs/expected/conformal_mc.csv": "9ad41b2c95e1df78dc00b6f6b5a6c9c2017b49aaddbf577352692c5118d18183",
+    "yejun/press_submission/outputs/expected/error_conditions_fn.csv": "e2b5e291c4613ec65c6addf465065aeff637237a53ea535a989becb00d233ae5",
+    "yejun/press_submission/outputs/expected/error_conditions_fp.csv": "8948a749e4ec8c2b841db0122669595f19fb353707b6bd7fffcc0196e0a3770c",
+    "yejun/press_submission/outputs/expected/influence.csv": "86938db821b384299ac29f74e808455d197eb8bae5bc641a044a62c810c9e550",
+    "yejun/press_submission/outputs/expected/interaction_2x2.csv": "ec1d0682ccdad3d13c37764ac111dab817c2387c19f537d63efbbff722c1190e",
+    "yejun/press_submission/outputs/expected/label_bypass.csv": "0dc378785b250b2d213cd0f17b5bd2543c7cea2afff29e1434d4d418c5249144",
+    "yejun/press_submission/outputs/expected/load_normalization.csv": "f9148915fbedf898a804e04469da67ea807e04d8ffd80e7272034b22a6d75900",
+    "yejun/press_submission/outputs/expected/load_normalization_meta.csv": "4f933704fe30005e636edb55829870d8434330afc28313a55d9cda27a1b35938",
+    "yejun/press_submission/outputs/expected/lstm_common_history_A.csv": "bf1977799a336067e8949213da425548e9240db879384a6390496f70a732889c",
+    "yejun/press_submission/outputs/expected/lstm_common_history_B.csv": "1a1790d69bbf21702bfa38464e381cfe91f8a9e53c49afe5a7b2481c727473a3",
+    "yejun/press_submission/outputs/expected/lstm_common_meta.csv": "f8f98d105f7cf0f38993437ba8e728c1b59495319a314fae70736b9470be66e8",
+    "yejun/press_submission/outputs/expected/lstm_guidebook_history.csv": "bf303b4ebd2ed5ed564297ede07e55554c38b0ba200f754bdeecc18779250ba9",
+    "yejun/press_submission/outputs/expected/model_comparison.csv": "69ceeb1b18bafc2061330ba242dabd9b489939c8517bcf84156803b0ce9e876f",
+    "yejun/press_submission/outputs/expected/model_comparison_all.csv": "21d43024c724604797eec94860d055d42166c2c89bf6ef470b6fa098e6d287f7",
+    "yejun/press_submission/outputs/expected/model_comparison_lstm.csv": "d0d18c5c8bb8ad06caffa28426a177325ee8a1f182e958125ba850753c4392f8",
+    "yejun/press_submission/outputs/expected/operating_points.csv": "fb51ae4056db6f0f7a48fc43134f242ad95167e2734d7065882dded7f459b25f",
+    "yejun/press_submission/outputs/expected/persistence.csv": "9bc1ef956e2af3d81d191bc442b0f94a99c00eb0060884823aa4bea44edade1f",
+    "yejun/press_submission/outputs/expected/preprocess_effect.csv": "0156e0621334b9fbc02e1d9c29d43ea342e3a07cb676efbb4967a6fdfa088414",
+    "yejun/press_submission/outputs/expected/quantization_frozen.csv": "a3d52f6bb10d880a5ed2be16e8f8dfdd4a9753536d353835bf989c920a5698a6",
+    "yejun/press_submission/outputs/expected/segment_features.csv": "36f3e636056008dcfb95a905429399c15ee81d2b3e1b25a17488acfcfef1d2db",
+    "yejun/press_submission/outputs/expected/sensitivity.csv": "03d5e3e7eb282eda5549d45128871290daa6b1f8151f5a941a77c2eef14e8d88",
+    "yejun/press_submission/outputs/expected/sensitivity_params.csv": "f88db959a5f0ab4c037c2b5e2e8b12265ac1d02f02d703d64394beac8f77eeab",
+    "yejun/press_submission/outputs/expected/splits.csv": "616f348579ff313e3bbc5e592a26f29a92f7c7ce6a3e5369980cddc4e6de1880",
+    "yejun/press_submission/outputs/expected/tail_params.csv": "86d33c25f7e46672c8579801437c849a72e608e259c411793485108aec0d19d3",
+    "yejun/press_submission/outputs/expected/thresholds_main.csv": "c2da6d95539bc43cf654ada62f42385cc496945c799ad8eaedbf4155c5006bfa",
+    "yejun/press_submission/outputs/expected/uncertainty.csv": "65dd946e37b6db7ae27ed100db12a5984a08b06c61ae88c5f93621ec683ba37d",
+    "yejun/press_submission/outputs/expected/waveform_segments.csv": "9b36afcc7ff9a017b623332d0d561228078a894db11eeabbbe0b1379cbabcee1",
+    "yejun/press_submission/outputs/expected/workload.csv": "e6d8b13dab52e7e8a6e6dd01db3298f6895eaa8c1933871897d2c4a19be2e61a",
+    "yejun/press_submission/outputs/field_decision_table.md": "d97ae3433953472d59ed5469c6cf76558e040752881e174de3d2297bf8691b21",
+    "yejun/press_submission/outputs/influence.csv": "86938db821b384299ac29f74e808455d197eb8bae5bc641a044a62c810c9e550",
+    "yejun/press_submission/outputs/interaction_2x2.csv": "ec1d0682ccdad3d13c37764ac111dab817c2387c19f537d63efbbff722c1190e",
+    "yejun/press_submission/outputs/label_bypass.csv": "0dc378785b250b2d213cd0f17b5bd2543c7cea2afff29e1434d4d418c5249144",
+    "yejun/press_submission/outputs/load_normalization.csv": "f9148915fbedf898a804e04469da67ea807e04d8ffd80e7272034b22a6d75900",
+    "yejun/press_submission/outputs/load_normalization_meta.csv": "4f933704fe30005e636edb55829870d8434330afc28313a55d9cda27a1b35938",
+    "yejun/press_submission/outputs/lstm_common_history_A.csv": "bf1977799a336067e8949213da425548e9240db879384a6390496f70a732889c",
+    "yejun/press_submission/outputs/lstm_common_history_B.csv": "1a1790d69bbf21702bfa38464e381cfe91f8a9e53c49afe5a7b2481c727473a3",
+    "yejun/press_submission/outputs/lstm_common_meta.csv": "f8f98d105f7cf0f38993437ba8e728c1b59495319a314fae70736b9470be66e8",
+    "yejun/press_submission/outputs/lstm_guidebook_history.csv": "bf303b4ebd2ed5ed564297ede07e55554c38b0ba200f754bdeecc18779250ba9",
+    "yejun/press_submission/outputs/model_comparison.csv": "69ceeb1b18bafc2061330ba242dabd9b489939c8517bcf84156803b0ce9e876f",
+    "yejun/press_submission/outputs/model_comparison.md": "d26c36449617890860f567502715b4547bd14027fcabf07f91192f9ff4a7acad",
+    "yejun/press_submission/outputs/model_comparison_all.csv": "21d43024c724604797eec94860d055d42166c2c89bf6ef470b6fa098e6d287f7",
+    "yejun/press_submission/outputs/model_comparison_all.md": "d3dc7bd867bcd04daabf9ce319a3e7665ec763caaf15058b4034e3bf0727c798",
+    "yejun/press_submission/outputs/model_comparison_cutoff.md": "af355eef23fc6bed1af0fa6f0906480940337400cf69f5f9b25666f1a34d568f",
+    "yejun/press_submission/outputs/model_comparison_lstm.csv": "d0d18c5c8bb8ad06caffa28426a177325ee8a1f182e958125ba850753c4392f8",
+    "yejun/press_submission/outputs/operating_points.csv": "fb51ae4056db6f0f7a48fc43134f242ad95167e2734d7065882dded7f459b25f",
+    "yejun/press_submission/outputs/persistence.csv": "9bc1ef956e2af3d81d191bc442b0f94a99c00eb0060884823aa4bea44edade1f",
+    "yejun/press_submission/outputs/preprocess_effect.csv": "0156e0621334b9fbc02e1d9c29d43ea342e3a07cb676efbb4967a6fdfa088414",
+    "yejun/press_submission/outputs/quantization_frozen.csv": "a3d52f6bb10d880a5ed2be16e8f8dfdd4a9753536d353835bf989c920a5698a6",
+    "yejun/press_submission/outputs/segment_features.csv": "36f3e636056008dcfb95a905429399c15ee81d2b3e1b25a17488acfcfef1d2db",
+    "yejun/press_submission/outputs/sensitivity.csv": "03d5e3e7eb282eda5549d45128871290daa6b1f8151f5a941a77c2eef14e8d88",
+    "yejun/press_submission/outputs/sensitivity_params.csv": "f88db959a5f0ab4c037c2b5e2e8b12265ac1d02f02d703d64394beac8f77eeab",
+    "yejun/press_submission/outputs/splits.csv": "616f348579ff313e3bbc5e592a26f29a92f7c7ce6a3e5369980cddc4e6de1880",
+    "yejun/press_submission/outputs/tail_params.csv": "86d33c25f7e46672c8579801437c849a72e608e259c411793485108aec0d19d3",
+    "yejun/press_submission/outputs/thresholds_main.csv": "c2da6d95539bc43cf654ada62f42385cc496945c799ad8eaedbf4155c5006bfa",
+    "yejun/press_submission/outputs/uncertainty.csv": "65dd946e37b6db7ae27ed100db12a5984a08b06c61ae88c5f93621ec683ba37d",
+    "yejun/press_submission/outputs/waveform_segments.csv": "9b36afcc7ff9a017b623332d0d561228078a894db11eeabbbe0b1379cbabcee1",
+    "yejun/press_submission/outputs/workload.csv": "e6d8b13dab52e7e8a6e6dd01db3298f6895eaa8c1933871897d2c4a19be2e61a",
+    "yejun/press_submission/predict.py": "148f8c21681cdf260b940fc21602448faa4cf34cba196e0f78f07baf62e047a8",
+    "yejun/press_submission/press/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "yejun/press_submission/press/analysis.py": "87df289c05a2e0cb70943e1c1e502503e68d28c20acd1b293468a3358ababbaa",
+    "yejun/press_submission/press/artifact.py": "a25447664ff1b30eb1930fa2a39b5c1d550a4ef1833512b5130eb7cf570d183e",
+    "yejun/press_submission/press/calibrate.py": "a2b7b686757cc513b6430637323c7d1059f485ff70c547492eefe9589b8eb17b",
+    "yejun/press_submission/press/data.py": "81dc394c8b0b53618177e5822c7cc0f7ff7c7f060d08471c968b4cfaaa05411f",
+    "yejun/press_submission/press/diagnosis.py": "f7ecb071d7c9c9b25c670bcb6052f8201ca2e03e991b57f9fe13fec6346cf499",
+    "yejun/press_submission/press/evaluate.py": "aa749026db25e3982a20019f6ca4b609794fc6cbfdcaaa2b639088cc4c948e63",
+    "yejun/press_submission/press/field.py": "de4e958a89181ae4b415a7820fa8b8df4007132031f1868feb9b94706664b9d9",
+    "yejun/press_submission/press/lstm_ae.py": "1d86d666bfae83cdba8fedf2533653b2c838573a8033d7ada5c6116d1a0f3234",
+    "yejun/press_submission/press/numbers.py": "13946eece21d9e730726a6e0ff0db329d32687eab387e86c51d09d4504b06087",
+    "yejun/press_submission/press/robustness.py": "c21ff3ebb89af34dc8d172e7465dc33ffb3a020c4432ef7fe6c816361fa8b413",
+    "yejun/press_submission/press/scores.py": "22ed1700eabadaadcec25c2602b40bd8a0a84879ad658e0ced2b05c2b87078ae",
+    "yejun/press_submission/press/uncertainty.py": "4f97fc6df689947602f5c349144303c609940aa588d98ce480b56fd39ea5b899",
+    "yejun/press_submission/press/validation.py": "87e9b6299981725fd59352805ff8e93cdfdb89f3ffd20b77216554070f682eb5",
+    "yejun/press_submission/requirements.txt": "6b9e62e52150fa2bdbd59fb0059934dda0346add55f477a2aad4abc8295dc425",
+    "yejun/press_submission/run_all.py": "431c0508c1d02440be866a87c87c8b9103f7100bf36ef9305ac8e28c55685b08",
+    "yejun/press_submission/tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "yejun/press_submission/tests/conftest.py": "8659c4f6af34a32f61ecc29774fd873cf628e7e0828ce9ff04773418357a6cc6",
+    "yejun/press_submission/tests/test_review_regressions.py": "6b6035629e422a1a4c62e5d7898c93ce91deb26ce5d0ea6a896ac71259b8c191",
+    "yejun/press_submission/tests/test_step1.py": "4c77eefbc3ff0a5835deda9464815e2b6094c9d22968176aad8f2904f9adba62",
+    "yejun/press_submission/tests/test_step2.py": "47922985b2c5b2b62c2fea3f3e248194980bb7234f0daf0b2cf40b673dc60e94",
+    "yejun/press_submission/tests/test_step3.py": "28e8af921c0fa621ce0825b50590c6a3f0c5a923ac6c8addf740be04d9654e43",
+    "yejun/press_submission/tests/test_step4.py": "1552bb361cdd3c4cf60ed3a2d04230cdc97dc842264cdd6bc377c38430447676",
+    "yejun/press_submission/tests/test_step5.py": "04ac2a98a09d6cff8c42e812abc9eeff52f274707f9cc31b4ecc3ae0b6fb1e9d",
+    "yejun/press_submission/tools/check_alignment.py": "002ab94f3a621aad8d252898445477110910ceb15665ff201d1af24db63339de",
+    "yejun/press_submission/tools/make_submission_zip.py": "894b427f85a8e0b355504855c87c8a1acbb8ad0539fb3a16f669901f04bcf405",
+    "yejun/press_submission/vendor/press_policy_audit.py": "4887e4c52bcb9022324225a113d1ca4e54b37a395a0707cd222a72683b4312a0",
+    "yejun/press_submission/verify.py": "89eaa5fc2b8cb0dea49ed9c2e3a7d792eb83f46274f2a97f9a14052507d4ec1f",
+    "yejun/analysis/press_advance/README.md": "bec7989d4ed4eb5c28ee64ecc8b333bb15e5af75f1301e33a3ee336babdf0e67",
+    "yejun/analysis/press_advance/expected/metrics.csv": "566bf7c95dfc737d0a05c90bb4b51b26263254f7af54186f66ed3d2295109477",
+    "yejun/analysis/press_advance/expected/primary.csv": "6d9441541980f22e1a5d369447a745ec2141947fd70377d42d0a9ab8ae439e80",
+    "yejun/analysis/press_advance/metrics.csv": "566bf7c95dfc737d0a05c90bb4b51b26263254f7af54186f66ed3d2295109477",
+    "yejun/analysis/press_advance/primary.csv": "6d9441541980f22e1a5d369447a745ec2141947fd70377d42d0a9ab8ae439e80",
+    "yejun/analysis/press_advance/run_experiment.py": "3af1748cafaf3b19708017c759dce06e0c74a9e19fdd29961fcf4ccc6cabd4a1",
+    "yejun/analysis/press_advance/test_contract.py": "f9c1d42af82b8e2f090e0de4f50205799a62ea8af5d0543fc94942d3d5501c00",
+    "yejun/analysis/press_evidence/README.md": "856ffd2afdf368610bb87fc04e8dc7a80d9c6da87fc0018a73ffb57e3e9d052c",
+    "yejun/analysis/press_evidence/abnormal_segments.csv": "b19eedfd8d07b2523221466e1e28ae1e18a44686bca2d2c28fc11f8ea67c0b42",
+    "yejun/analysis/press_evidence/abnormal_summary.csv": "81b2464b8fb5ec745b491c562eca47d619b09d910ce7afd4a20b1fcf1bd58003",
+    "yejun/analysis/press_evidence/amplitude_reliability.csv": "9c2b64ea9c3ab60bcb5bf20182eebb1ac5c643f848e53571783a2ad694a286cf",
+    "yejun/analysis/press_evidence/ar2_oscillator.csv": "d4e10ac087b2f5026e9062d7d030f73c6022f1298df1a50a75ff3eb7edfda2bc",
+    "yejun/analysis/press_evidence/block_context.csv": "5e780a19fa57170ebb234f64c67fb469de436cb1e73095ee5933a066d5cbd154",
+    "yejun/analysis/press_evidence/build_diagnostics.py": "1541ad6409c256694d12691f8abccf72ee6f29954708c719b222748784a8de11",
+    "yejun/analysis/press_evidence/build_tables.py": "2952b498504a76d0929ce2e25c4d6953ee2b1c5204b14d09e4564a4cb34327a8",
+    "yejun/analysis/press_evidence/calibration_curve.csv": "741576f1e6c724e17c5c3abca29954e3e66bef2943e192b0911a83b8071e824c",
+    "yejun/analysis/press_evidence/class_differences.csv": "7305ce3ca6e576bea7079bfd8a4deb8a611e65c3021e5c54e4c2486435ce05c1",
+    "yejun/analysis/press_evidence/component_combinations.csv": "d2d011db5fcfe8577d39601639ec0f19714e1ca7167b2ff99d62b7796d01b447",
+    "yejun/analysis/press_evidence/component_correlation.csv": "88c5d028b5b7e7f8f05874220fea17933640894104c2b3a81e77927109eb2999",
+    "yejun/analysis/press_evidence/current_grid.csv": "de3ded79e0da43e754b9e2c05aa084f679193d58ff161b3a3877216b27a26f28",
+    "yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv": "fc118ef7d5d7a5d8fdf6eabe13f8a99d73152ad7412c1f727c5f902110ef6e7e",
+    "yejun/analysis/press_evidence/diagnostic_probes.py": "620f1e2c1dde23cc4ce5d03a7ccf30c4033b2af52d48039c597b32152a39fcf6",
+    "yejun/analysis/press_evidence/duplicate_rows.csv": "b00c711beb3262b67f6345b8426bb4f64f75103fbc3ba211d57baee82ca03a9d",
+    "yejun/analysis/press_evidence/expected/abnormal_segments.csv": "b19eedfd8d07b2523221466e1e28ae1e18a44686bca2d2c28fc11f8ea67c0b42",
+    "yejun/analysis/press_evidence/expected/abnormal_summary.csv": "81b2464b8fb5ec745b491c562eca47d619b09d910ce7afd4a20b1fcf1bd58003",
+    "yejun/analysis/press_evidence/expected/amplitude_reliability.csv": "9c2b64ea9c3ab60bcb5bf20182eebb1ac5c643f848e53571783a2ad694a286cf",
+    "yejun/analysis/press_evidence/expected/ar2_oscillator.csv": "d4e10ac087b2f5026e9062d7d030f73c6022f1298df1a50a75ff3eb7edfda2bc",
+    "yejun/analysis/press_evidence/expected/block_context.csv": "5e780a19fa57170ebb234f64c67fb469de436cb1e73095ee5933a066d5cbd154",
+    "yejun/analysis/press_evidence/expected/calibration_curve.csv": "741576f1e6c724e17c5c3abca29954e3e66bef2943e192b0911a83b8071e824c",
+    "yejun/analysis/press_evidence/expected/class_differences.csv": "7305ce3ca6e576bea7079bfd8a4deb8a611e65c3021e5c54e4c2486435ce05c1",
+    "yejun/analysis/press_evidence/expected/component_combinations.csv": "d2d011db5fcfe8577d39601639ec0f19714e1ca7167b2ff99d62b7796d01b447",
+    "yejun/analysis/press_evidence/expected/component_correlation.csv": "88c5d028b5b7e7f8f05874220fea17933640894104c2b3a81e77927109eb2999",
+    "yejun/analysis/press_evidence/expected/current_grid.csv": "de3ded79e0da43e754b9e2c05aa084f679193d58ff161b3a3877216b27a26f28",
+    "yejun/analysis/press_evidence/expected/decision_table_diagnosis_v2.csv": "fc118ef7d5d7a5d8fdf6eabe13f8a99d73152ad7412c1f727c5f902110ef6e7e",
+    "yejun/analysis/press_evidence/expected/duplicate_rows.csv": "b00c711beb3262b67f6345b8426bb4f64f75103fbc3ba211d57baee82ca03a9d",
+    "yejun/analysis/press_evidence/expected/failure_mode_map.csv": "be367c8be6aef2a6d4c9407db431d7c70bef6de699bb9f177e3eb1e6a844c0c7",
+    "yejun/analysis/press_evidence/expected/false_alarm_operating_level.csv": "b1963ac44dd8d4b5edc7ec40f131caa5f92b7538962fe9644c450d56f9a4e031",
+    "yejun/analysis/press_evidence/expected/first_alarm_reason.csv": "b0b369c950f32fa988f4edfac3ad1504dbe81a7199cb64d1d8f50b47915bc17f",
+    "yejun/analysis/press_evidence/expected/gaps.csv": "b19fbc020a5576e9919cd5b2c7ba8fc4d0aba0e1aca4d035bc1505458d73df82",
+    "yejun/analysis/press_evidence/expected/guidebook_protocol_vs_records.csv": "186a5d41bcec397efbb30ff0eb2b8717e0cc1d5ab6a0ec19c861db7bb7f68771",
+    "yejun/analysis/press_evidence/expected/guidebook_stats_match.csv": "fe3a6755e6036044cb4b02554b731a53685614c2d080339fb9b3db757bfa6fee",
+    "yejun/analysis/press_evidence/expected/imbalance.csv": "25f925cd4096060404131c75ee6fcf5438a7a0e9bc09415dd1f7c43868ffa917",
+    "yejun/analysis/press_evidence/expected/normal_alarms_by_state.csv": "23d8135439f676eb182bca2ff2d0e99c4f6c6c6567cbc9d134b9cb200365b0b3",
+    "yejun/analysis/press_evidence/expected/observability.csv": "f37d8cfcfc9bd75ffd0a992322a708ca002c8925312c9d615a93c8b63743bfa6",
+    "yejun/analysis/press_evidence/expected/operating_states.csv": "d7519e54162bed4f5e11b184ea5b68681873c388ddf6d555972cb187497ab71c",
+    "yejun/analysis/press_evidence/expected/operating_states_summary.csv": "947563e49ff8679a5af15c17901f27cc888ce8e21c1837325ab3db234fd837ea",
+    "yejun/analysis/press_evidence/expected/operating_variation.csv": "1a9b95468647837a9a5de9ac70ae234403eaf2cb529f658a8b804a3469be5dec",
+    "yejun/analysis/press_evidence/expected/outlier_rules.csv": "b287d22b9ec8ed75c5280b89c0f940a39ebaf7b418c78576698c751d523c413f",
+    "yejun/analysis/press_evidence/expected/outliers.csv": "704fb6abb05fb56e34ef97c1e68ce872d08ded3220076c3974ec815599711e0c",
+    "yejun/analysis/press_evidence/expected/phase_continuity.csv": "51d4f832068c689d4f2a56e4bdb3cfaf8892c165c4af48f976fef23010651503",
+    "yejun/analysis/press_evidence/expected/production_unit_evidence.csv": "89b67af59bd2e8f6107a6e6f6b74ff502539805c943e7dcbb5a232f4c06c61c0",
+    "yejun/analysis/press_evidence/expected/quality_index.csv": "2c09f0c14471692026ac9909d73fddf7076ac0e317dea11b8f7576976078fe91",
+    "yejun/analysis/press_evidence/expected/quality_index_weighted.csv": "a213716f22ca4c1a23d34657d6188146adce6b0a9af2e286a0f5989f9d1abb8b",
+    "yejun/analysis/press_evidence/expected/rolling_calibration_curve.csv": "b7581b4c800658685e8ec702e86e56f01779d92b5b42c66fd7adb53d8ca1956b",
+    "yejun/analysis/press_evidence/expected/segment_rule_tolerance.csv": "bb37d8d96c62cae9f0dc2ee35f33bfa763c766c5113e86d69e9a54b995698e9d",
+    "yejun/analysis/press_evidence/expected/sensor_relations.csv": "1d8d494b0f2915c15a7e4c2ebaa0944fbad828db978fd433c8a6fb74a37d8247",
+    "yejun/analysis/press_evidence/expected/split_context.csv": "9f3b99b623785085d030bd041dde55dc589fde88e46d8fb6df510c616eec39c1",
+    "yejun/analysis/press_evidence/expected/split_state_composition.csv": "702f4b7da8c4504abaad46b14251d857ba1372725edd0fac83d73d5ce3694cbd",
+    "yejun/analysis/press_evidence/expected/state_transition_stress.csv": "7a788e5150112f30c5f5c01296e2c4033d540b0be20589b6554b1fb6f05c96a3",
+    "yejun/analysis/press_evidence/expected/variable_dictionary.csv": "224007654f59303461cc2ebefc9c5d3cf7d254cd024e563ebdec22b2fb22a4d5",
+    "yejun/analysis/press_evidence/expected/variable_expected_signals.csv": "c8774f36b86d4ee0a7931a1b447a17d46686a49e282809ab1233220c14bed8f6",
+    "yejun/analysis/press_evidence/expected/vibration_tones.csv": "de16d47406726addb7441c2e94758c4e959bd9d04f95b1a3aca43aa340846351",
+    "yejun/analysis/press_evidence/failure_mode_map.csv": "be367c8be6aef2a6d4c9407db431d7c70bef6de699bb9f177e3eb1e6a844c0c7",
+    "yejun/analysis/press_evidence/false_alarm_operating_level.csv": "b1963ac44dd8d4b5edc7ec40f131caa5f92b7538962fe9644c450d56f9a4e031",
+    "yejun/analysis/press_evidence/figures.py": "23d94f96019af64612c3bcaed9fbc20cb20358adc3cc8cb2d94674d7c837d3e1",
+    "yejun/analysis/press_evidence/first_alarm_reason.csv": "b0b369c950f32fa988f4edfac3ad1504dbe81a7199cb64d1d8f50b47915bc17f",
+    "yejun/analysis/press_evidence/gaps.csv": "b19fbc020a5576e9919cd5b2c7ba8fc4d0aba0e1aca4d035bc1505458d73df82",
+    "yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv": "186a5d41bcec397efbb30ff0eb2b8717e0cc1d5ab6a0ec19c861db7bb7f68771",
+    "yejun/analysis/press_evidence/guidebook_stats_match.csv": "fe3a6755e6036044cb4b02554b731a53685614c2d080339fb9b3db757bfa6fee",
+    "yejun/analysis/press_evidence/imbalance.csv": "25f925cd4096060404131c75ee6fcf5438a7a0e9bc09415dd1f7c43868ffa917",
+    "yejun/analysis/press_evidence/normal_alarms_by_state.csv": "23d8135439f676eb182bca2ff2d0e99c4f6c6c6567cbc9d134b9cb200365b0b3",
+    "yejun/analysis/press_evidence/observability.csv": "f37d8cfcfc9bd75ffd0a992322a708ca002c8925312c9d615a93c8b63743bfa6",
+    "yejun/analysis/press_evidence/operating_states.csv": "d7519e54162bed4f5e11b184ea5b68681873c388ddf6d555972cb187497ab71c",
+    "yejun/analysis/press_evidence/operating_states_summary.csv": "947563e49ff8679a5af15c17901f27cc888ce8e21c1837325ab3db234fd837ea",
+    "yejun/analysis/press_evidence/operating_variation.csv": "1a9b95468647837a9a5de9ac70ae234403eaf2cb529f658a8b804a3469be5dec",
+    "yejun/analysis/press_evidence/outlier_rules.csv": "b287d22b9ec8ed75c5280b89c0f940a39ebaf7b418c78576698c751d523c413f",
+    "yejun/analysis/press_evidence/outliers.csv": "704fb6abb05fb56e34ef97c1e68ce872d08ded3220076c3974ec815599711e0c",
+    "yejun/analysis/press_evidence/phase_continuity.csv": "51d4f832068c689d4f2a56e4bdb3cfaf8892c165c4af48f976fef23010651503",
+    "yejun/analysis/press_evidence/production_unit_evidence.csv": "89b67af59bd2e8f6107a6e6f6b74ff502539805c943e7dcbb5a232f4c06c61c0",
+    "yejun/analysis/press_evidence/quality_index.csv": "2c09f0c14471692026ac9909d73fddf7076ac0e317dea11b8f7576976078fe91",
+    "yejun/analysis/press_evidence/quality_index_weighted.csv": "a213716f22ca4c1a23d34657d6188146adce6b0a9af2e286a0f5989f9d1abb8b",
+    "yejun/analysis/press_evidence/rolling_calibration_curve.csv": "b7581b4c800658685e8ec702e86e56f01779d92b5b42c66fd7adb53d8ca1956b",
+    "yejun/analysis/press_evidence/segment_rule_tolerance.csv": "bb37d8d96c62cae9f0dc2ee35f33bfa763c766c5113e86d69e9a54b995698e9d",
+    "yejun/analysis/press_evidence/sensor_relations.csv": "1d8d494b0f2915c15a7e4c2ebaa0944fbad828db978fd433c8a6fb74a37d8247",
+    "yejun/analysis/press_evidence/split_context.csv": "9f3b99b623785085d030bd041dde55dc589fde88e46d8fb6df510c616eec39c1",
+    "yejun/analysis/press_evidence/split_state_composition.csv": "702f4b7da8c4504abaad46b14251d857ba1372725edd0fac83d73d5ce3694cbd",
+    "yejun/analysis/press_evidence/state_transition_stress.csv": "7a788e5150112f30c5f5c01296e2c4033d540b0be20589b6554b1fb6f05c96a3",
+    "yejun/analysis/press_evidence/test_contract.py": "0e6c64a14b1252bd8d758052ce6859fc2cce46c7da60a334874b17e90ee66402",
+    "yejun/analysis/press_evidence/test_diagnostics.py": "81c97adf54e779813a63b80e93a9c188711eb2af72b69ed07ad751663fa63a77",
+    "yejun/analysis/press_evidence/variable_dictionary.csv": "224007654f59303461cc2ebefc9c5d3cf7d254cd024e563ebdec22b2fb22a4d5",
+    "yejun/analysis/press_evidence/variable_expected_signals.csv": "c8774f36b86d4ee0a7931a1b447a17d46686a49e282809ab1233220c14bed8f6",
+    "yejun/analysis/press_evidence/vibration_tones.csv": "de16d47406726addb7441c2e94758c4e959bd9d04f95b1a3aca43aa340846351",
+    "yejun/analysis/press_supplement/README.md": "9f61d9467d90164babf9f4560119da9c56fed6ed0cbe9ffb5f558eac8fe4c749",
+    "yejun/analysis/press_supplement/common.py": "3cc480e147ba5e1b48c417a8cec104453093d761aabc943d8df2e23d60a7a08a",
+    "yejun/analysis/press_supplement/contract.py": "4fc82363a768b3aa4acb6b4fbe0c9b547bb9091f4fb122fbab81d515c64ee78c",
+    "yejun/analysis/press_supplement/e1_detection_floor.csv": "e0c97954bf46b00895d2e5310ddceb15297aa38b4d995b22715eb1d2ecf96975",
+    "yejun/analysis/press_supplement/e1_reference_segments.csv": "72dfc4e522c2b489598f6f0beae542e46a2aba0c294a896ad2e777b347f9ac65",
+    "yejun/analysis/press_supplement/e1_summary.csv": "ac599f2408e6eb8cf03c51ca8f83ffa34ba4cb11d48a168b23e43195ab980344",
+    "yejun/analysis/press_supplement/e2_uci_comparison.csv": "da3922e892ebb3fc5c8a5f5232790fb7cd451cf50be6d64a46123f5761849907",
+    "yejun/analysis/press_supplement/e2_uci_component_diagnostic_posthoc.csv": "dee030617bbb25a6a0ce8a51b7f2ae6c07d9538f96d78f63ab4c51fe8ff2736a",
+    "yejun/analysis/press_supplement/e2_uci_metrics.csv": "9182c3046dbe0d43527b3ff1138944ac98a540529de37ef2d7ae4793887f6534",
+    "yejun/analysis/press_supplement/e2_uci_strata.csv": "8c4ed7a17ffac423368393d6b83501615e20d8d1d18d05baa1166273aac6f818",
+    "yejun/analysis/press_supplement/e3_curve.csv": "1002608862a00c8863847a429d62dca22bfc2dea29146d6fdc457ca5cec9df11",
+    "yejun/analysis/press_supplement/e3_domain_shift.csv": "ed6540bc5291a0555e6f7030db2bdacd3f75dddffca524975ab620b1d9fdcac9",
+    "yejun/analysis/press_supplement/e3_stability.csv": "4447e30b858fc32df317a565ebc86720e7759e802a3a9960f0c27e9c5005762c",
+    "yejun/analysis/press_supplement/expected/e1_detection_floor.csv": "e0c97954bf46b00895d2e5310ddceb15297aa38b4d995b22715eb1d2ecf96975",
+    "yejun/analysis/press_supplement/expected/e1_reference_segments.csv": "72dfc4e522c2b489598f6f0beae542e46a2aba0c294a896ad2e777b347f9ac65",
+    "yejun/analysis/press_supplement/expected/e1_summary.csv": "ac599f2408e6eb8cf03c51ca8f83ffa34ba4cb11d48a168b23e43195ab980344",
+    "yejun/analysis/press_supplement/expected/e2_uci_comparison.csv": "da3922e892ebb3fc5c8a5f5232790fb7cd451cf50be6d64a46123f5761849907",
+    "yejun/analysis/press_supplement/expected/e2_uci_component_diagnostic_posthoc.csv": "dee030617bbb25a6a0ce8a51b7f2ae6c07d9538f96d78f63ab4c51fe8ff2736a",
+    "yejun/analysis/press_supplement/expected/e2_uci_metrics.csv": "9182c3046dbe0d43527b3ff1138944ac98a540529de37ef2d7ae4793887f6534",
+    "yejun/analysis/press_supplement/expected/e2_uci_strata.csv": "8c4ed7a17ffac423368393d6b83501615e20d8d1d18d05baa1166273aac6f818",
+    "yejun/analysis/press_supplement/expected/e3_curve.csv": "1002608862a00c8863847a429d62dca22bfc2dea29146d6fdc457ca5cec9df11",
+    "yejun/analysis/press_supplement/expected/e3_domain_shift.csv": "ed6540bc5291a0555e6f7030db2bdacd3f75dddffca524975ab620b1d9fdcac9",
+    "yejun/analysis/press_supplement/expected/e3_stability.csv": "4447e30b858fc32df317a565ebc86720e7759e802a3a9960f0c27e9c5005762c",
+    "yejun/analysis/press_supplement/fault_injection.py": "d6fb178bd6fc3ff15f3103d2e63f90b5fddc10c2b0061064ab8995d4d31cb531",
+    "yejun/analysis/press_supplement/figures.py": "17cb1f934a7d38e0bee85cb53fa377437ebdaeff2b97ce5aadbbf76d719c2e6c",
+    "yejun/analysis/press_supplement/recalibration.py": "266fdbcbf2b25a012e6654dc95d1ff4d9ba5f3781bd13f8c345f2349bc9aaf8a",
+    "yejun/analysis/press_supplement/test_contract.py": "cb3ba45a926d2751c8e8aa9861b6cb9b1ddb9d9d36971dc98c878f30301f04ef",
+    "yejun/analysis/press_supplement/uci_v2.py": "58c2e735cc9b0f6dbefeba72a6aaab09f35abfa752d3acb3d5cc68b92e6f5db7",
+    "yejun/analysis/press_supplement/verify.py": "17d114c48eb3c3950a55cc677ac6f25062414e99dcdfe12279148546028dca5d",
+    "yejun/analysis/press_supervised/README.md": "99c09b0a90b9b0c261adb542cb834806ddd61246151e94c115b3f70d5345a526",
+    "yejun/analysis/press_supervised/expected/grouped_records.csv": "f33b034997209fbc9f2c767a4c9fcd9fe536ecad315ee80d66f55ed1851b1341",
+    "yejun/analysis/press_supervised/expected/injection.csv": "4ae828005c9b6afebfb2ab21fb31de7d30ce0f408a7b44a2db3421ea5af568c5",
+    "yejun/analysis/press_supervised/expected/random_rows.csv": "b48137569867b7b0300fc1b9878bcd83c88f3895b190ae4bbe4158c113ee8b98",
+    "yejun/analysis/press_supervised/grouped_records.csv": "f33b034997209fbc9f2c767a4c9fcd9fe536ecad315ee80d66f55ed1851b1341",
+    "yejun/analysis/press_supervised/injection.csv": "4ae828005c9b6afebfb2ab21fb31de7d30ce0f408a7b44a2db3421ea5af568c5",
+    "yejun/analysis/press_supervised/random_rows.csv": "b48137569867b7b0300fc1b9878bcd83c88f3895b190ae4bbe4158c113ee8b98",
+    "yejun/analysis/press_supervised/run.py": "1146651afb60ed38fd65c6ff582610782a5700afc1ae4aa67db66050316f82c0",
+    "yejun/analysis/press_supervised/test_contract.py": "0e6c64a14b1252bd8d758052ce6859fc2cce46c7da60a334874b17e90ee66402",
+    "yejun/analysis/press_selection/README.md": "f62ea5ac3b09762d812b6f8a5c7af92be46cbacef97e978e5daec7cd08e051e3",
+    "yejun/analysis/press_selection/candidate_universe.csv": "d7455fcc88cc01d19ba858fc1747268b07ba2cc2942083b81becd22b13e34ebd",
+    "yejun/analysis/press_selection/combination_rules.csv": "5195a4cb5142f5c27c74be498fa3c3bb1f1246a386b3bae720140f98f9aa6c23",
+    "yejun/analysis/press_selection/expected/candidate_universe.csv": "d7455fcc88cc01d19ba858fc1747268b07ba2cc2942083b81becd22b13e34ebd",
+    "yejun/analysis/press_selection/expected/combination_rules.csv": "5195a4cb5142f5c27c74be498fa3c3bb1f1246a386b3bae720140f98f9aa6c23",
+    "yejun/analysis/press_selection/expected/fp_mitigation_injection_v2.csv": "8be37e61e482962c95a5936dc9a1010f330b936ff1f4ab0dc95c78d3a2ee4609",
+    "yejun/analysis/press_selection/expected/fp_mitigation_v2.csv": "b3b37b897a35545e2544ea55036e87bb7c69dedb9dabbdfe856a93b734aaad73",
+    "yejun/analysis/press_selection/expected/nested_selection.csv": "bbfd441f4f89bf4614e5a5be792130f8ea6c39aa2943a9fd4a8e8c5e993e470c",
+    "yejun/analysis/press_selection/expected/paired_records.csv": "b6b4c55cdce04cb3d9ee5d274c036dc78610d699631a68e449ec83ecc6ff9fb1",
+    "yejun/analysis/press_selection/expected/rule_transfer_injection_v2.csv": "f9cd350b775bbf5ca1293a8f5d8e9d937f8a62fbee809f9d61e341d1e6072d63",
+    "yejun/analysis/press_selection/expected/same_feature_alternatives.csv": "3b5862ad1fe24d007c7c09d79547d30a11eef6c21e2674db231b39ff4a69b543",
+    "yejun/analysis/press_selection/expected/search_ledger.csv": "15d53171217a9ec400423feea535d11daef08b7b74a5500c55e7a4d2c9f3cdc6",
+    "yejun/analysis/press_selection/expected/selection_evidence.csv": "ba4aff9231934f5a69378f2ced06a3e2d809e920bb1850c6e64a1165237c6f52",
+    "yejun/analysis/press_selection/expected/unified_comparison.csv": "03bfc81adde25e20b38bc14c68f13703953b64c4b0381c363ac96abcf1e7f467",
+    "yejun/analysis/press_selection/expected/unified_comparison.md": "36ead1390fba53ac1d4963ca9fea3ea7222611ea0b57fa9f8d4171ed4c5f6804",
+    "yejun/analysis/press_selection/fp_mitigation_injection_v2.csv": "8be37e61e482962c95a5936dc9a1010f330b936ff1f4ab0dc95c78d3a2ee4609",
+    "yejun/analysis/press_selection/fp_mitigation_v2.csv": "b3b37b897a35545e2544ea55036e87bb7c69dedb9dabbdfe856a93b734aaad73",
+    "yejun/analysis/press_selection/nested_selection.csv": "bbfd441f4f89bf4614e5a5be792130f8ea6c39aa2943a9fd4a8e8c5e993e470c",
+    "yejun/analysis/press_selection/paired_records.csv": "b6b4c55cdce04cb3d9ee5d274c036dc78610d699631a68e449ec83ecc6ff9fb1",
+    "yejun/analysis/press_selection/rule_transfer_injection_v2.csv": "f9cd350b775bbf5ca1293a8f5d8e9d937f8a62fbee809f9d61e341d1e6072d63",
+    "yejun/analysis/press_selection/run.py": "caa5a8db8cbd3151eb07b0e4c044b9c39ded012554fdd3e8364f166ff80bf38e",
+    "yejun/analysis/press_selection/same_feature_alternatives.csv": "3b5862ad1fe24d007c7c09d79547d30a11eef6c21e2674db231b39ff4a69b543",
+    "yejun/analysis/press_selection/search_ledger.csv": "15d53171217a9ec400423feea535d11daef08b7b74a5500c55e7a4d2c9f3cdc6",
+    "yejun/analysis/press_selection/test_contract.py": "0e6c64a14b1252bd8d758052ce6859fc2cce46c7da60a334874b17e90ee66402",
+    "yejun/analysis/press_selection/unified_comparison.csv": "03bfc81adde25e20b38bc14c68f13703953b64c4b0381c363ac96abcf1e7f467",
+    "yejun/analysis/press_selection/unified_comparison.md": "36ead1390fba53ac1d4963ca9fea3ea7222611ea0b57fa9f8d4171ed4c5f6804",
+    "yejun/analysis/package_contract.py": "0862fe840b90b6130d3481a24f809c5e270c93930346a947d18a30a616959fa7",
+    "yejun/analysis/press_dayshift/v2_current_scale.csv": "82b14ccd716bb1dcb54754d6ba613cf41f86107e054908dc0a4e0cbb6d496310",
+    "yejun/analysis/press_improvement/candidate_metrics.csv": "50b23aa04b80f3a81ddfbc09138e8e6f99b272e8daa2b3a2e44809a8a51e78f9",
+    "yejun/analysis/press_improvement/run_experiment.py": "742991d3ea8af58be6219e96b3868a03c4d93483c2e211506ea87380e8ce0fd6",
+    "yejun/analysis/press_early/metrics.csv": "9b754a610254cc31e79d55e5377c538a75f155840dab03434b8474c6601c2035",
+    "yejun/analysis/press_early/primary.csv": "d9e488a8dbb2542473cb7ad8461f51d280f500264d3e5c08528839c5808f09b5",
+    "yejun/analysis/press_early/run_experiment.py": "d0dda0fb9860d8d039e1cd77a0c8f49397136ee3d76b7f7378af06640e93a300",
+    "yejun/analysis/press_external/acquire.py": "8049a16bd78e1d618b7699bb1c49342e2a26e1977d92bc29420a7192efa03bd8",
+    "yejun/analysis/press_external/metrics.csv": "a4ec1890f3f9f9a35165e47cf0b4e8aed9a2406425114ff51a3be54dac216f09",
+    "yejun/analysis/press_external/partitions.csv": "f52dbba5e63d654103d634aa638b43ce368582972d1767fdcd13681ad7c6aa6c",
+    "yejun/press_submission/data/3_소성가공_예지보전/press_data_normal.csv": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+    "yejun/press_submission/data/3_소성가공_예지보전/outlier_data.csv": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+    "yejun/press_guard/outputs/test_predictions_A.csv": "2941bf9dde2c9b66308eb6e26d19e4a41f93de1441833c8b476e0534e47e98c8",
+    "yejun/press_guard/outputs/test_predictions_B.csv": "9bd02a7cf086ad9ff81542166c2af768aefee944d4385e343a2d771d8a2f5524",
+    "yejun/analysis/press_evidence/diagnostics_manifest.json": "f2bc81603ed8efea3665bce0f60c55076cb7163bda57fcf9bf9ea01b5f96bb94",
+    "yejun/AGENTS.md": "0fe3e76f27fc9a886ec0d566548b734f77ec3a65639c9fd5631ef6bc9879613c",
+    "yejun/analysis/press_rubric_review/cycle2/judge_prompts.md": "d0f1c3b9b3a6116f68469cddb1fe59991fdd33ae17815ae635978cd1709e2419",
+    "yejun/analysis/press_rubric_review/cycle2/round4/review_protocol.md": "a71e5e110af7c6616d29e2f26b4ff32b47494ac59e21cf0b4d683105869f4707",
+    "yejun/press_guard/web/index.html": "9c7b0708d481b536c6f56c265c3dfba9b221990fef49bf2ae91960a1be30a0d1",
+    "yejun/analysis/press_rubric_review/cycle2/round4/judge06_final_checks.py": "1e35ed3742d8d22037d6aca0094f9646b8109217bbdde7f6577dcb36cff4f099",
+    "yejun/analysis/press_rubric_review/cycle2/adversarial/README.md": "6fc74058092f2f8a32741591d0a2ef28bed92c75fd632dbd50f501bee3f4431b"
+  }
+}

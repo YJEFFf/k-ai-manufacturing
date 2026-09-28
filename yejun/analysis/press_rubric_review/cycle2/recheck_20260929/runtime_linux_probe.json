@@ -1,0 +1,419 @@
+{
+  "environment": {
+    "platform": "Linux-6.8.0-50-generic-x86_64-with-glibc2.41",
+    "python": "3.12.14",
+    "machine": "x86_64",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3"
+  },
+  "splits": {
+    "A": {
+      "frozen_model_inference": {
+        "exact_columns_equal": true,
+        "nonfinite_positions_equal": true,
+        "failed_float_summaries": {
+          "score": {
+            "expected": [
+              4090,
+              2469.9301861824906,
+              2158.555683214404,
+              0.0014544369986874,
+              3.8220926214884017
+            ],
+            "actual": [
+              4090,
+              2469.9298101250624,
+              2158.555219280482,
+              0.0014544369986874,
+              3.8220926214884017
+            ]
+          },
+          "g_waveform": {
+            "expected": [
+              3497,
+              1641.652379710085,
+              1359.8044651411221,
+              0.0028990021034027,
+              2.687449121976639
+            ],
+            "actual": [
+              3497,
+              1641.6521290082592,
+              1359.8041190045685,
+              0.0028990021034027,
+              2.687449121959471
+            ]
+          }
+        },
+        "host_row_comparison": {
+          "score": {
+            "rows_changed_gt_1e9": 2,
+            "max_abs_delta": 0.00019392475513257956
+          },
+          "g_waveform": {
+            "rows_changed_gt_1e9": 3,
+            "max_abs_delta": 0.00019392475513257956
+          },
+          "p_value": {
+            "rows_changed_gt_1e9": 0,
+            "max_abs_delta": 1.1102230246251565e-16
+          },
+          "likelihood_ratio": {
+            "rows_changed_gt_1e9": 0,
+            "max_abs_delta": 5.551115123125783e-17
+          }
+        },
+        "normal_alarm_rows": 0,
+        "abnormal_alarm_rows": 556
+      },
+      "local_refit_inference": {
+        "exact_columns_equal": true,
+        "nonfinite_positions_equal": true,
+        "failed_float_summaries": {
+          "score": {
+            "expected": [
+              4090,
+              2469.9301861824906,
+              2158.555683214404,
+              0.0014544369986874,
+              3.8220926214884017
+            ],
+            "actual": [
+              4090,
+              2469.9298101255845,
+              2158.555219282231,
+              0.0014544369986874,
+              3.8220926214884017
+            ]
+          },
+          "g_waveform": {
+            "expected": [
+              3497,
+              1641.652379710085,
+              1359.8044651411221,
+              0.0028990021034027,
+              2.687449121976639
+            ],
+            "actual": [
+              3497,
+              1641.652003653179,
+              1359.8040012089505,
+              0.0028990021034027,
+              2.687449121966952
+            ]
+          }
+        },
+        "host_row_comparison": {
+          "score": {
+            "rows_changed_gt_1e9": 2,
+            "max_abs_delta": 0.00019392475513257956
+          },
+          "g_waveform": {
+            "rows_changed_gt_1e9": 2,
+            "max_abs_delta": 0.00019392475513257956
+          },
+          "p_value": {
+            "rows_changed_gt_1e9": 0,
+            "max_abs_delta": 1.1102230246251565e-16
+          },
+          "likelihood_ratio": {
+            "rows_changed_gt_1e9": 0,
+            "max_abs_delta": 5.551115123125783e-17
+          }
+        },
+        "normal_alarm_rows": 0,
+        "abnormal_alarm_rows": 556
+      },
+      "artifacts": {
+        "guard_A.json": {
+          "host": "c938707f1dd16e7c239b8053e7f032d8fac828d6c753de2b898ba9130a594f10",
+          "retrained": "d0f0a30e11495d50f051d7f0165afc7d66f144460cd2f8facf84a38b4b3c88fe"
+        },
+        "probability_A.json": {
+          "host": "1a8100e78046393d9292fc7c305b5ec57b46c4e2c73b03abeb596052a8705f8a",
+          "retrained": "551f148ea43a80fd44fbf72ee1fd75d262b2e515f8ff02213e1a6d1885102c0c"
+        }
+      },
+      "nyquist_only_ablation_refit": {
+        "exact_columns_equal": true,
+        "nonfinite_positions_equal": true,
+        "failed_float_summaries": {
+          "score": {
+            "expected": [
+              4090,
+              2469.9301861824906,
+              2158.555683214404,
+              0.0014544369986874,
+              3.8220926214884017
+            ],
+            "actual": [
+              4090,
+              2469.9298101255845,
+              2158.555219282231,
+              0.0014544369986874,
+              3.8220926214884017
+            ]
+          },
+          "g_waveform": {
+            "expected": [
+              3497,
+              1641.652379710085,
+              1359.8044651411221,
+              0.0028990021034027,
+              2.687449121976639
+            ],
+            "actual": [
+              3497,
+              1641.652003653179,
+              1359.8040012089505,
+              0.0028990021034027,
+              2.687449121966952
+            ]
+          }
+        },
+        "host_row_comparison": {
+          "score": {
+            "rows_changed_gt_1e9": 2,
+            "max_abs_delta": 0.00019392475513257956
+          },
+          "g_waveform": {
+            "rows_changed_gt_1e9": 2,
+            "max_abs_delta": 0.00019392475513257956
+          },
+          "p_value": {
+            "rows_changed_gt_1e9": 0,
+            "max_abs_delta": 1.1102230246251565e-16
+          },
+          "likelihood_ratio": {
+            "rows_changed_gt_1e9": 0,
+            "max_abs_delta": 5.551115123125783e-17
+          }
+        },
+        "normal_alarm_rows": 0,
+        "abnormal_alarm_rows": 556
+      }
+    },
+    "B": {
+      "frozen_model_inference": {
+        "exact_columns_equal": true,
+        "nonfinite_positions_equal": true,
+        "failed_float_summaries": {
+          "score": {
+            "expected": [
+              6097,
+              4160.801269080723,
+              4215.442746887446,
+              0.0016315580545932,
+              4.594198685448777
+            ],
+            "actual": [
+              6097,
+              4160.800930510541,
+              4215.442266609208,
+              0.0016315580545932,
+              4.594198685448777
+            ]
+          },
+          "p_value": {
+            "expected": [
+              6097,
+              5546.842975206611,
+              5128.249026705826,
+              0.0082644628099173,
+              1.0
+            ],
+            "actual": [
+              6097,
+              5546.818181818182,
+              5128.205382146028,
+              0.0082644628099173,
+              1.0
+            ]
+          },
+          "g_waveform": {
+            "expected": [
+              5205,
+              2391.9016634144264,
+              2072.5037626285516,
+              0.0010190304343318,
+              2.9033458495936673
+            ],
+            "actual": [
+              5205,
+              2391.9015299852117,
+              2072.503423783857,
+              0.0010190304343318,
+              2.90334584959367
+            ]
+          },
+          "anomaly_score": {
+            "expected": [
+              6097,
+              550.1570247933881,
+              131.56307629260291,
+              0.0,
+              0.9917355371900828
+            ],
+            "actual": [
+              6097,
+              550.1818181818178,
+              131.5690185096646,
+              0.0,
+              0.9917355371900828
+            ]
+          }
+        },
+        "host_row_comparison": {
+          "score": {
+            "rows_changed_gt_1e9": 3,
+            "max_abs_delta": 0.00022899788661512321
+          },
+          "g_waveform": {
+            "rows_changed_gt_1e9": 5,
+            "max_abs_delta": 0.00022899788661512321
+          },
+          "p_value": {
+            "rows_changed_gt_1e9": 3,
+            "max_abs_delta": 0.008264462809917439
+          },
+          "likelihood_ratio": {
+            "rows_changed_gt_1e9": 0,
+            "max_abs_delta": 3.727463337988013e-10
+          }
+        },
+        "normal_alarm_rows": 3,
+        "abnormal_alarm_rows": 569
+      },
+      "local_refit_inference": {
+        "exact_columns_equal": true,
+        "nonfinite_positions_equal": true,
+        "failed_float_summaries": {
+          "score": {
+            "expected": [
+              6097,
+              4160.801269080723,
+              4215.442746887446,
+              0.0016315580545932,
+              4.594198685448777
+            ],
+            "actual": [
+              6097,
+              4160.800825138576,
+              4215.442198538942,
+              0.0016315580545932,
+              4.594198685448777
+            ]
+          },
+          "g_waveform": {
+            "expected": [
+              5205,
+              2391.9016634144264,
+              2072.5037626285516,
+              0.0010190304343318,
+              2.9033458495936673
+            ],
+            "actual": [
+              5205,
+              2391.9011789427527,
+              2072.5031719350377,
+              0.0010190304343318,
+              2.9033458496015703
+            ]
+          }
+        },
+        "host_row_comparison": {
+          "score": {
+            "rows_changed_gt_1e9": 2,
+            "max_abs_delta": 0.00022899788661512321
+          },
+          "g_waveform": {
+            "rows_changed_gt_1e9": 4,
+            "max_abs_delta": 0.00022899788661512321
+          },
+          "p_value": {
+            "rows_changed_gt_1e9": 0,
+            "max_abs_delta": 1.1102230246251565e-16
+          },
+          "likelihood_ratio": {
+            "rows_changed_gt_1e9": 1,
+            "max_abs_delta": 1.0794424243343315e-09
+          }
+        },
+        "normal_alarm_rows": 3,
+        "abnormal_alarm_rows": 569
+      },
+      "artifacts": {
+        "guard_B.json": {
+          "host": "b64ac3b30bc697034104287964f3154e88c8a50749ccdec04f6d4f8744fd6969",
+          "retrained": "1a7c7afc0a79d4b2c99a423f27dd7e869689fb7326b669c0b8c516ddc8d8580d"
+        },
+        "probability_B.json": {
+          "host": "7fde4cd1bdfa74e78e2d3f07c5dbd9c27619e19b2e94ceb8fab786c27abcaae8",
+          "retrained": "f0db8fc2c9952d49eaf454437712bbb5a8aa0e68d2d9c9450ec845c4f82e5d39"
+        }
+      },
+      "nyquist_only_ablation_refit": {
+        "exact_columns_equal": true,
+        "nonfinite_positions_equal": true,
+        "failed_float_summaries": {
+          "score": {
+            "expected": [
+              6097,
+              4160.801269080723,
+              4215.442746887446,
+              0.0016315580545932,
+              4.594198685448777
+            ],
+            "actual": [
+              6097,
+              4160.800825138576,
+              4215.442198538942,
+              0.0016315580545932,
+              4.594198685448777
+            ]
+          },
+          "g_waveform": {
+            "expected": [
+              5205,
+              2391.9016634144264,
+              2072.5037626285516,
+              0.0010190304343318,
+              2.9033458495936673
+            ],
+            "actual": [
+              5205,
+              2391.9011789427527,
+              2072.5031719350377,
+              0.0010190304343318,
+              2.9033458496015703
+            ]
+          }
+        },
+        "host_row_comparison": {
+          "score": {
+            "rows_changed_gt_1e9": 2,
+            "max_abs_delta": 0.00022899788661512321
+          },
+          "g_waveform": {
+            "rows_changed_gt_1e9": 4,
+            "max_abs_delta": 0.00022899788661512321
+          },
+          "p_value": {
+            "rows_changed_gt_1e9": 0,
+            "max_abs_delta": 1.1102230246251565e-16
+          },
+          "likelihood_ratio": {
+            "rows_changed_gt_1e9": 1,
+            "max_abs_delta": 1.0794424243343315e-09
+          }
+        },
+        "normal_alarm_rows": 3,
+        "abnormal_alarm_rows": 569
+      }
+    }
+  },
+  "nyquist_trace": {
+    "6": 1.9999999999999998,
+    "8": 3.0
+  }
+}

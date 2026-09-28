@@ -1,0 +1,51 @@
+{
+  "commands": [
+    {
+      "command": [
+        "docker",
+        "--context",
+        "colima",
+        "rm",
+        "-f",
+        "codex-press-runtime-recheck"
+      ],
+      "returncode": 0,
+      "stdout": "codex-press-runtime-recheck\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "colima",
+        "stop"
+      ],
+      "returncode": 0,
+      "stdout": "bash: line 1: cd: /Volumes/YJSSD/공모전/k-제조데이터: No such file or directory\nStopping 'docker.service', but its triggering units are still active:\ndocker.socket\ncolima\ntime=\"2026-09-29T00:56:34+09:00\" level=info msg=\"Sending SIGINT to hostagent process 64927\"\ntime=\"2026-09-29T00:56:34+09:00\" level=info msg=\"Waiting for the host agent and the driver processes to shut down\"\ntime=\"2026-09-29T00:56:34+09:00\" level=info msg=\"[hostagent] Received SIGINT, shutting down the host agent\"\ntime=\"2026-09-29T00:56:34+09:00\" level=info msg=\"[hostagent] Shutting down the host agent\"\ntime=\"2026-09-29T00:56:34+09:00\" level=info msg=\"[hostagent] Stopping forwarding \\\"/var/run/docker.sock\\\" (guest) to \\\"/Users/heoyejun/.colima/default/docker.sock\\\" (host)\"\ntime=\"2026-09-29T00:56:34+09:00\" level=info msg=\"[hostagent] Stopping forwarding \\\"/var/run/docker.sock\\\" (guest) to \\\"/Users/heoyejun/.colima/docker.sock\\\" (host)\"\ntime=\"2026-09-29T00:56:34+09:00\" level=info msg=\"[hostagent] Shutting down VZ\"\ntime=\"2026-09-29T00:56:34+09:00\" level=info msg=\"[hostagent] [VZ] - vm state change: stopped\"\n",
+      "stderr": "time=\"2026-09-29T00:56:32+09:00\" level=info msg=\"stopping colima\"\ntime=\"2026-09-29T00:56:32+09:00\" level=info msg=\"stopping ...\" context=docker\ntime=\"2026-09-29T00:56:32+09:00\" level=info msg=\"stopping ...\" context=vm\ntime=\"2026-09-29T00:56:35+09:00\" level=info msg=done\n"
+    },
+    {
+      "command": [
+        "docker",
+        "context",
+        "show"
+      ],
+      "returncode": 0,
+      "stdout": "default\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "colima",
+        "list"
+      ],
+      "returncode": 0,
+      "stdout": "PROFILE    STATUS     ARCH       CPUS    MEMORY    DISK     RUNTIME    ADDRESS\ndefault    Stopped    aarch64    4       6GiB      12GiB               \n",
+      "stderr": ""
+    }
+  ],
+  "removed_temp_paths": [
+    "/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press-review-linux-psm1_wtp",
+    "/tmp/press_review_runtime_context.json"
+  ],
+  "initial_colima_state": "Stopped",
+  "initial_docker_context": "default"
+}
