@@ -1,0 +1,52 @@
+P9 시작 2026-09-28 14:15:50 기준=f5679ca
+press_guard/artifacts: ls: press_guard/artifacts: No such file or directory
+STEP P9_contract_press_selection rc=1 wall=1s maxrss_mb=101 load_start=12.78 load_end=12.78
+---- P9_contract_press_selection stdout(끝 12줄)
+FAIL manifest.json: input_sha256 파일 없음 — normal
+FAIL manifest.json: input_sha256 파일 없음 — abnormal
+FAIL manifest.json: dependencies_sha256 파일 없음 — press_guard/artifacts/guard_A.json
+FAIL manifest.json: dependencies_sha256 파일 없음 — press_guard/artifacts/guard_B.json
+실패: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)
+STEP P9_contract_press_supervised rc=1 wall=0s maxrss_mb=100 load_start=12.78 load_end=12.78
+---- P9_contract_press_supervised stdout(끝 12줄)
+FAIL manifest.json: input_hashes 파일 없음 — normal
+FAIL manifest.json: input_hashes 파일 없음 — abnormal
+FAIL manifest.json: dependencies 파일 없음 — press_guard/artifacts/guard_A.json
+FAIL manifest.json: dependencies 파일 없음 — press_guard/artifacts/guard_B.json
+실패: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+STEP P9_contract_press_evidence rc=1 wall=1s maxrss_mb=101 load_start=12.78 load_end=12.78
+---- P9_contract_press_evidence stdout(끝 12줄)
+FAIL manifest.json: input_hashes 파일 없음 — normal
+FAIL manifest.json: input_hashes 파일 없음 — abnormal
+FAIL manifest.json: artifacts 파일 없음 — guard_A.json
+FAIL manifest.json: artifacts 파일 없음 — guard_B.json
+FAIL diagnostics_manifest.json: input_hashes 파일 없음 — normal
+FAIL diagnostics_manifest.json: input_hashes 파일 없음 — abnormal
+FAIL diagnostics_manifest.json: artifacts 파일 없음 — guard_A.json
+FAIL diagnostics_manifest.json: artifacts 파일 없음 — guard_B.json
+실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)
+STEP P9_contract_press_advance rc=1 wall=0s maxrss_mb=101 load_start=12.78 load_end=12.78
+---- P9_contract_press_advance stdout(끝 12줄)
+참고 Git 제외 결과 없음 — segment_metrics.csv(재실행으로 생긴다)
+FAIL manifest.json: inputs.files.normal 변경 또는 없음
+FAIL manifest.json: inputs.files.abnormal 변경 또는 없음
+실패: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+STEP P9_pytest_contracts rc=2 wall=1s maxrss_mb=126 load_start=12.78 load_end=12.78
+---- P9_pytest_contracts stdout(끝 6줄)
+  /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P9_fresh/clone/yejun/analysis/press_supervised/test_contract.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+=========================== short test summary info ============================
+ERROR analysis/press_supervised/test_contract.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.44s
+STEP P9_supp_verify rc=1 wall=1s maxrss_mb=185 load_start=12.78 load_end=17.36
+---- P9_supp_verify stdout(끝 6줄)
+건너뜀 E2: 외부 입력 없음 ['/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P9_fresh/clone/yejun/analysis/press_external/data/hydraulic.zip'] — 획득: python analysis/press_external/acquire.py (SHA-256은 analysis/press_external/acquisition.json)
+---- P9_supp_verify stderr(끝 6줄, 시간 측정 제외)
+    hashes = {k: D.sha256_file(D.data_dir(BASE) / name) for k, name in D.FILES.items()}
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P9_fresh/clone/yejun/press_submission/press/data.py", line 47, in sha256_file
+    with open(path, "rb") as f:
+         ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P9_fresh/clone/yejun/press_submission/data/3_소성가공_예지보전/press_data_normal.csv'
+P9 끝 2026-09-28 14:15:55

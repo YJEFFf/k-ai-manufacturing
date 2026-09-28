@@ -1,0 +1,17 @@
+{
+ "queue_buttons": [
+  "data-record=\"0\"",
+  "data-record=\"0\""
+ ],
+ "queue_buttons_share_record": true,
+ "clicked_row_is_priority1_case": "c2 (이상 600행, 점검 요청)",
+ "detail_shows_first_alarm": "4.1초 (42번째 관측)",
+ "detail_shows_alarm_rows": "1 / 50행",
+ "detail_is_c2": false,
+ "quality_action_shown": "다음 샘플 검사를 앞당긴다(가설)",
+ "saved_keys": [
+  "pg-outcome:B:0.01:upload:0:2026-09-27 08:00:04.100"
+ ],
+ "outcome_saved_to_c2": false,
+ "outcome_saved_to_c1": true
+}

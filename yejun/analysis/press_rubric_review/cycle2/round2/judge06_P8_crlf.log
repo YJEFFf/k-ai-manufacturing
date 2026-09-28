@@ -1,0 +1,46 @@
+P8 시작 2026-09-27 19:36:51 기준=f5679ca
+CRLF로 바뀐 파일 예: CSV text / CSV text
+STEP P8_contract_press_selection rc=1 wall=1s maxrss_mb=103 load_start=9.21 load_end=9.21
+---- P8_contract_press_selection stdout(끝 4줄)
+FAIL 동결 기대값이 동결 당시와 다름 — unified_comparison.csv
+FAIL 동결 기대값이 동결 당시와 다름 — unified_comparison.md
+FAIL 동결 기대값이 동결 당시와 다름 — manifest.json
+실패: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)
+STEP P8_contract_press_supervised rc=1 wall=2s maxrss_mb=106 load_start=9.21 load_end=9.21
+---- P8_contract_press_supervised stdout(끝 4줄)
+FAIL 동결 기대값이 동결 당시와 다름 — grouped_records.csv
+FAIL 동결 기대값이 동결 당시와 다름 — injection.csv
+FAIL 동결 기대값이 동결 당시와 다름 — manifest.json
+실패: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+STEP P8_contract_press_advance rc=1 wall=1s maxrss_mb=106 load_start=9.21 load_end=9.36
+---- P8_contract_press_advance stdout(끝 4줄)
+FAIL 동결 기대값이 동결 당시와 다름 — metrics.csv
+FAIL 동결 기대값이 동결 당시와 다름 — primary.csv
+FAIL 동결 기대값이 동결 당시와 다름 — manifest.json
+실패: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+STEP P8_contract_press_evidence rc=1 wall=1s maxrss_mb=106 load_start=9.36 load_end=9.36
+---- P8_contract_press_evidence stdout(끝 4줄)
+FAIL 동결 기대값이 동결 당시와 다름 — decision_table_diagnosis_v2.csv
+FAIL 동결 기대값이 동결 당시와 다름 — manifest.json
+FAIL 동결 기대값이 동결 당시와 다름 — diagnostics_manifest.json
+실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)
+STEP P8_supplement_verify rc=1 wall=3s maxrss_mb=189 load_start=9.36 load_end=9.36
+---- P8_supplement_verify stdout(끝 5줄)
+건너뜀 E2: 외부 입력 없음 ['/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P8_crlf/clone/yejun/analysis/press_external/data/hydraulic.zip'] — 획득: python analysis/press_external/acquire.py (SHA-256은 analysis/press_external/acquisition.json)
+---- P8_supplement_verify stderr(끝 5줄, 시간 측정 제외)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P8_crlf/clone/yejun/press_submission/press/data.py", line 47, in sha256_file
+    with open(path, "rb") as f:
+         ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P8_crlf/clone/yejun/press_submission/data/3_소성가공_예지보전/press_data_normal.csv'
+STEP P8_v2_expected_integrity rc=0 wall=3s maxrss_mb=185 load_start=9.36 load_end=9.73
+---- P8_v2_expected_integrity stdout(끝 3줄)
+39 건 ['metrics.csv: 실행 후 변경', 'rolling.csv: 실행 후 변경', 'cases_A.csv: 실행 후 변경']
+STEP P8_lf_contract_press_selection rc=1 wall=2s maxrss_mb=105 load_start=10.55 load_end=10.55
+---- P8_lf_contract_press_selection stdout(끝 2줄)
+FAIL manifest.json: dependencies_sha256 파일 없음 — press_guard/artifacts/guard_B.json
+실패: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)
+STEP P8_lf_v2_expected_integrity rc=0 wall=3s maxrss_mb=185 load_start=10.55 load_end=10.55
+---- P8_lf_v2_expected_integrity stdout(끝 3줄)
+0 건 []
+P8 끝 2026-09-27 19:37:11

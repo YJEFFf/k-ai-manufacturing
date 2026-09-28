@@ -1,0 +1,119 @@
+P6 시작 2026-09-28 14:33:41 원천 /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P2_venv/clone → 작업 사본 /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P6_tamper/work (복사 0.5s)
+[V] V0 기대대로 (기대 pass, rc=0, 3.8s) 변조 없음
+      OK   test_predictions_A.csv | OK   test_predictions_B.csv | 48/48 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+[V] V1 기대대로 (기대 fail, rc=1, 3.5s) test_predictions_A 정상 행 100 경보 0→1
+      FAIL test_predictions_A.csv  (경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름) | OK   test_predictions_B.csv | 46/48 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+[V] V2 기대대로 (기대 fail, rc=1, 3.1s) test_predictions_B 삭제
+      OK   test_predictions_A.csv | FAIL test_predictions_B.csv  (예측 파일 또는 동결 요약 없음) | 46/48 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+[V] V3 기대대로 (기대 fail, rc=1, 3.4s) workload_v2.csv units_per_elapsed_hour[6] +1e-6
+      OK   test_predictions_A.csv | OK   test_predictions_B.csv | 46/48 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+[V] V4 기대대로 (기대 fail, rc=1, 3.3s) 동결값 expected/metrics.csv delay_median_s[6] +1e-3
+      OK   test_predictions_A.csv | OK   test_predictions_B.csv | 46/48 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+[V] V5 기대대로 (기대 fail, rc=1, 3.0s) model.py 끝에 주석 한 줄
+      OK   test_predictions_A.csv | OK   test_predictions_B.csv | 47/48 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+[V] V6 기대대로 (기대 fail, rc=1, 3.8s) 저장 모델 guard_A.json AR(2) 계수 +1e-12
+      OK   test_predictions_A.csv | OK   test_predictions_B.csv | 47/48 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+[V] V7 compare_predictions 검출 단위: {"점수 두 행 맞바꿈": {"ok": true, "note": "부동소수 차이만 있음"}, "p값 한 행 +1e-4": {"ok": false, "note": ""}, "p값 한 행 +1e-2": {"ok": false, "note": ""}, "점수 한 행 +1e-4": {"ok": true, "note": "부동소수 차이만 있음"}, "점수 한 행 +1e-2": {"ok": false, "note": ""}, "우도비 한 행 ×1.001": {"ok": true, "note": "부동소수 차이만 있음"}, "인접 두 행 전체 맞바꿈": {"ok": false, "note": ""}}
+[C] press_evidence:C0 기대대로 (기대 pass, rc=0, 1.3s) 변조 없음
+      통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)
+[C] press_evidence:C1 기대대로 (기대 fail, rc=1, 1.3s) segment_rule_tolerance.csv tolerance_s[13] +1e-6(실행 기록 그대로)
+      FAIL diagnostics_manifest.json: cited 변경(실행 기록과 다름) — yejun/analysis/press_evidence/segment_rule_tolerance.csv | FAIL segment_rule_tolerance.csv: tolerance_s 최대 차이 1e-06 > 1e-09 | 실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)
+[C] press_evidence:C2 기대대로 (기대 fail, rc=1, 1.3s) segment_rule_tolerance.csv +1e-6 + 실행 기록 해시 위조(기록 True)
+      FAIL diagnostics_manifest.json: cited 변경(실행 기록과 다름) — yejun/analysis/press_evidence/segment_rule_tolerance.csv | FAIL segment_rule_tolerance.csv: tolerance_s 최대 차이 1e-06 > 1e-09 | 실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)
+[C] press_evidence:C3 기대와 다름 (기대 pass, rc=1, 1.3s) segment_rule_tolerance.csv +1e-12 + 실행 기록 해시 위조(허용오차 1e-9 안, 설계상 통과)
+      FAIL diagnostics_manifest.json: cited 변경(실행 기록과 다름) — yejun/analysis/press_evidence/segment_rule_tolerance.csv | 실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)
+[C] press_evidence:C4 기대대로 (기대 fail, rc=1, 1.4s) decision_table_diagnosis_v2.csv 삭제
+      FAIL 결과 없음 — decision_table_diagnosis_v2.csv | FAIL 결과 없음 — decision_table_diagnosis_v2.csv | 실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)
+[C] press_evidence:C5 기대대로 (기대 fail, rc=1, 1.5s) build_tables.py 끝에 주석 한 줄
+      FAIL manifest.json: code_sha256 변경(실행 기록과 다름) — build_tables.py | FAIL diagnostics_manifest.json: code_sha256 변경(실행 기록과 다름) — yejun/analysis/press_evidence/build_tables.py | 실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)
+[C] press_evidence:C6 기대대로 (기대 fail, rc=1, 1.4s) 동결값 expected/segment_rule_tolerance.csv +1e-3
+      FAIL 동결 기대값이 동결 당시와 다름 — segment_rule_tolerance.csv | FAIL segment_rule_tolerance.csv: tolerance_s 최대 차이 0.001 > 1e-09 | 실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)
+[C] press_evidence:C7 기대대로 (기대 fail, rc=1, 1.3s) 의존 파일 press_guard/model.py 끝에 빈 줄
+      FAIL diagnostics_manifest.json: code_sha256 변경(실행 기록과 다름) — yejun/press_guard/model.py | FAIL diagnostics_manifest.json: cited 변경(실행 기록과 다름) — yejun/press_guard/model.py | 실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)
+[C] press_supervised:C0 기대대로 (기대 pass, rc=0, 1.1s) 변조 없음
+      통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+[C] press_supervised:C1 기대대로 (기대 fail, rc=1, 1.1s) grouped_records.csv precision[48] +1e-6(실행 기록 그대로)
+      FAIL manifest.json: outputs 변경(실행 기록과 다름) — grouped_records.csv | FAIL grouped_records.csv: precision 최대 차이 1e-06 > 1e-09 | 실패: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+[C] press_supervised:C2 기대대로 (기대 fail, rc=1, 1.1s) grouped_records.csv +1e-6 + 실행 기록 해시 위조(기록 True)
+      FAIL grouped_records.csv: precision 최대 차이 1e-06 > 1e-09 | 실패: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+[C] press_supervised:C3 기대대로 (기대 pass, rc=0, 1.1s) grouped_records.csv +1e-12 + 실행 기록 해시 위조(허용오차 1e-9 안, 설계상 통과)
+      통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+[C] press_supervised:C4 기대대로 (기대 fail, rc=1, 1.1s) injection.csv 삭제
+      FAIL 결과 없음 — injection.csv | FAIL 결과 없음 — injection.csv | 실패: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+[C] press_supervised:C5 기대대로 (기대 fail, rc=1, 1.1s) run.py 끝에 주석 한 줄
+      FAIL manifest.json: code_sha256 변경(실행 기록과 다름) — run.py | 실패: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+[C] press_supervised:C6 기대대로 (기대 fail, rc=1, 1.1s) 동결값 expected/grouped_records.csv +1e-3
+      FAIL 동결 기대값이 동결 당시와 다름 — grouped_records.csv | FAIL grouped_records.csv: precision 최대 차이 0.001 > 1e-09 | 실패: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+[C] press_supervised:C7 기대대로 (기대 fail, rc=1, 1.1s) 의존 파일 analysis/press_supplement/common.py 끝에 빈 줄
+      FAIL manifest.json: dependencies 변경(실행 기록과 다름) — press_supplement/common.py | 실패: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+[C] press_advance:C0 기대대로 (기대 pass, rc=0, 1.3s) 변조 없음
+      참고 Git 제외 결과 없음 — segment_metrics.csv(재실행으로 생긴다) | 통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+[C] press_advance:C1 기대대로 (기대 fail, rc=1, 1.3s) primary.csv delay_median_s[5] +1e-6(실행 기록 그대로)
+      FAIL manifest.json: outputs 변경(실행 기록과 다름) — primary.csv | FAIL primary.csv: delay_median_s 최대 차이 1e-06 > 1e-09 | 실패: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+[C] press_advance:C2 기대대로 (기대 fail, rc=1, 1.3s) primary.csv +1e-6 + 실행 기록 해시 위조(기록 True)
+      참고 Git 제외 결과 없음 — segment_metrics.csv(재실행으로 생긴다) | FAIL primary.csv: delay_median_s 최대 차이 1e-06 > 1e-09 | 실패: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+[C] press_advance:C3 기대대로 (기대 pass, rc=0, 1.1s) primary.csv +1e-12 + 실행 기록 해시 위조(허용오차 1e-9 안, 설계상 통과)
+      참고 Git 제외 결과 없음 — segment_metrics.csv(재실행으로 생긴다) | 통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+[C] press_advance:C4 기대대로 (기대 fail, rc=1, 1.1s) primary.csv 삭제
+      FAIL 결과 없음 — primary.csv | FAIL 결과 없음 — primary.csv | 실패: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+[C] press_advance:C5 기대대로 (기대 fail, rc=1, 1.1s) run_experiment.py 끝에 주석 한 줄
+      참고 Git 제외 결과 없음 — segment_metrics.csv(재실행으로 생긴다) | FAIL manifest.json: script_sha256 변경(실행 기록과 다름) — analysis/press_advance/run_experiment.py | 실패: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+[C] press_advance:C6 기대대로 (기대 fail, rc=1, 1.1s) 동결값 expected/primary.csv +1e-3
+      FAIL 동결 기대값이 동결 당시와 다름 — primary.csv | FAIL primary.csv: delay_median_s 최대 차이 0.001 > 1e-09 | 실패: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+[C] press_selection:C0 기대대로 (기대 pass, rc=0, 1.2s) 변조 없음
+      통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)
+[C] press_selection:C1 기대대로 (기대 fail, rc=1, 1.1s) candidate_universe.csv f1_rows[39] +1e-6(실행 기록 그대로)
+      FAIL manifest.json: outputs 변경(실행 기록과 다름) — candidate_universe.csv | FAIL candidate_universe.csv: f1_rows 최대 차이 1e-06 > 1e-09 | 실패: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)
+[C] press_selection:C2 기대대로 (기대 fail, rc=1, 1.2s) candidate_universe.csv +1e-6 + 실행 기록 해시 위조(기록 True)
+      FAIL candidate_universe.csv: f1_rows 최대 차이 1e-06 > 1e-09 | 실패: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)
+[C] press_selection:C3 기대대로 (기대 pass, rc=0, 1.2s) candidate_universe.csv +1e-12 + 실행 기록 해시 위조(허용오차 1e-9 안, 설계상 통과)
+      통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)
+[C] press_selection:C4 기대대로 (기대 fail, rc=1, 1.2s) unified_comparison.csv 삭제
+      FAIL 결과 없음 — unified_comparison.csv | FAIL 결과 없음 — unified_comparison.csv | 실패: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)
+[C] press_selection:C5 기대대로 (기대 fail, rc=1, 1.2s) run.py 끝에 주석 한 줄
+      FAIL manifest.json: code_sha256 변경(실행 기록과 다름) — run.py | 실패: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)
+[C] press_selection:C6 기대대로 (기대 fail, rc=1, 1.1s) 동결값 expected/candidate_universe.csv +1e-3
+      FAIL 동결 기대값이 동결 당시와 다름 — candidate_universe.csv | FAIL candidate_universe.csv: f1_rows 최대 차이 0.001 > 1e-09 | 실패: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)
+[C] press_selection:C7 기대대로 (기대 fail, rc=1, 1.1s) 의존 파일 press_guard/model.py 끝에 빈 줄
+      FAIL manifest.json: dependencies_sha256 변경(실행 기록과 다름) — press_guard/model.py | 실패: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)
+[C] press_evidence:C8 기대대로 (기대 pass, rc=0, 1.3s) 그림 d2a를 d2b로 바꾸고 실행 기록 해시 위조(기록 True; 설계상 그림 내용은 비교하지 않음)
+      통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)
+[C] press_evidence:C9 기대대로 (기대 fail, rc=1, 1.2s) 그림 d2a 삭제
+      FAIL 결과 없음 — figures/fig_d2a_timeline.png | FAIL 그림 없음 — figures/fig_d2a_timeline.png | 실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)
+[C] press_evidence:C10 기대대로 (기대 pass, rc=0, 56.5s) --rerun(build_tables·build_diagnostics 제자리 재실행 후 비교)
+      -- python analysis/press_evidence/build_tables.py | -- python analysis/press_evidence/build_diagnostics.py | 통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개) · 제자리 재실행
+[S] S0a 기대대로 (기대 pass, rc=0, 3.7s) 보완 계약 시험(UCI ZIP 없음)
+      ..s..s.s.....                                                            [100%] | 10 passed, 3 skipped in 2.72s
+[S] S0b 기대대로 (기대 pass, rc=0, 7.5s) 보완 계약 시험(UCI ZIP 넣음)
+      .............                                                            [100%] | 13 passed in 6.35s
+[S] S1 기대대로 (기대 pass, rc=0, 3.6s) 변조 없음(E1·E2·E3, ZIP 있음)
+      통과: 무결성·기대값 비교 E1, E2, E3
+[S] S2 기대대로 (기대 fail, rc=1, 3.6s) e1_summary.csv delay_p90_s[391] +1e-6
+      FAIL E1: 산출물이 실행 기록과 다름 — e1_summary.csv | FAIL E1: e1_summary.csv: delay_p90_s 최대 차이 1e-06 > 1e-09 | 실패: 무결성·기대값 비교 E1, E2, E3
+[S] S3 기대대로 (기대 fail, rc=1, 3.7s) 동결값 expected/e3_curve.csv threshold_cal_max[92] +1e-3
+      FAIL E3: 동결 기대값이 동결 당시 기록과 다름 — e3_curve.csv | FAIL E3: e3_curve.csv: threshold_cal_max 최대 차이 0.001 > 1e-09 | 실패: 무결성·기대값 비교 E1, E2, E3
+[S] S4 기대대로 (기대 pass, rc=0, 3.6s) e2_manifest config.cache_used 반전(결과 무관 옵션)
+      참고 E2: 실행 옵션 cache_used = False (동결 True) — 결과에 영향이 없어 비교하지 않음 | 통과: 무결성·기대값 비교 E1, E2, E3
+[S] S5 기대대로 (기대 fail, rc=1, 3.2s) e2_manifest config.cache_version 변경
+      FAIL E2: 실행 설정이 동결 실행과 다름 | 실패: 무결성·기대값 비교 E1, E2, E3
+[S] S6a 기대대로 (기대 pass, rc=0, 126.4s) E2 uci_v2.py --no-cache 실행
+      press_supplement E2          unseen_cooler     100               v2_3ch 0.030581           0.011834 0.015625 0.507785 | press_supplement E2          unseen_cooler     100               v2_4ch 0.059347           0.041420 0.031250 0.507785 | press_supplement E2          unseen_cooler     100         v2_4ch_phase 0.059347           0.041420 0.031250 0.507785
+[S] S6b 기대대로 (기대 pass, rc=0, 2.6s) E2 --no-cache 결과를 verify(E2)
+      참고 E2: 실행 옵션 cache_used = False (동결 True) — 결과에 영향이 없어 비교하지 않음 | 통과: 무결성·기대값 비교 E2
+[A] A0 기대대로 (기대 pass, rc=0, 2.8s) 변조 없음
+      RESULT pass
+[A] A1 기대대로 (기대 pass, rc=0, 2.8s) v1 비교표 LSTM 행(lstm20) f1_all_rows +1e-06
+      RESULT pass
+[A] A2 기대대로 (기대 fail, rc=1, 2.8s) v1 비교표 LSTM 행(lstm20) f1_all_rows +0.01
+      RESULT fail 분석 원본 무결성 오류: ['model_comparison_all.csv: v1 동결값과 허용오차 밖(f1_all_rows row 144 (lstm20): |Δ|=0.01 > tol 0.001)']. v1 선행 단계를 먼저 실행한다: python press_subm
+[A] A3 기대대로 (기대 fail, rc=1, 2.8s) v1 행별 예측 삭제(선행 단계 누락 상황)
+      RESULT fail 분석 원본 무결성 오류: ['predictions_A.csv: 없음']. v1 선행 단계를 먼저 실행한다: python press_submission/run_all.py --steps 2 --no-baselines (또는 한 명령 재현: python press_gu
+[A] A4a 기대대로 (기대 pass, rc=0, 12.4s) 오류 메시지의 해결 명령 실행: python press_submission/run_all.py --steps 2 --no-baselines(yejun/에서)
+        "required_checks_ok": true, |   "required_checks_failed": [] | }
+[A] A4b 기대대로 (기대 pass, rc=0, 2.4s) 해결 명령 뒤 analyze 원본 검사
+      RESULT pass
+[A] A5a 기대대로 (기대 pass, rc=0, 16.0s) 대신 reproduce.py가 쓰는 명령: run_all.py --steps 2
+        "required_checks_ok": true, |   "required_checks_failed": [] | }
+[A] A5b 기대대로 (기대 pass, rc=0, 3.2s) 그 뒤 analyze 원본 검사
+      RESULT pass
+P6 끝 2026-09-28 14:39:14 · 시나리오 58개 중 기대와 다름 1개 · 333s

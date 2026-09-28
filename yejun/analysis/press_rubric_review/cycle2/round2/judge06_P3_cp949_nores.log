@@ -1,0 +1,135 @@
+P3 ì‹œì‘ 2026-09-28 14:16:19 ê¸°ì¤€=f5679ca PY=/opt/anaconda3/bin/python
+Á¶°Ç È®ÀÎ: ±âº» ÀÎÄÚµù CP949 | utf8_mode 0 | stdout cp949
+resource: Â÷´ÜµÊ import of resource halted; None in sys.modules
+STEP P3a_reproduce_tests rc=1 wall=1000s maxrss_mb=727 load_start=12.83 load_end=6.87
+---- P3a_reproduce_tests stdout(ë 30ì¤„)
+[4/23] v2 ºĞ¼® ¡¦
+      Åë°ú ¡¤ 139.4ÃÊ ¡¤ }
+[5/23] v2 ½ÇÇà °ËÁõ(audit) ¡¦
+      Åë°ú ¡¤ 276.3ÃÊ ¡¤ 16/16 ??? ?? /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r
+[6/23] v2 µ¿°á°ª ºñ±³ ¡¦
+      Åë°ú ¡¤ 2.5ÃÊ ¡¤ 48/48 ???. ??? 1602db8f6a08 vs ???? 1602db8f6a08; ??? macOS-26.3.1-arm64-arm-64bit vs ???? macOS-26.3.1-arm64-arm-64bit
+[7/23] Áø´Ü Ç¥(press_evidence) ¡¦
+      Åë°ú ¡¤ 11.9ÃÊ ¡¤     B 12 0.099174 0.099174      180               11  0.061111       0.099126          False
+[8/23] Áø´Ü º¸°­ Ç¥¡¤±×¸² ¡¦
+      Åë°ú ¡¤ 21.0ÃÊ ¡¤ ??? 18.2??, ? 16??, ??? 5??
+[9/23] ÁöµµÇĞ½À ±âÁØ¼±(press_supervised) ¡¦
+      Åë°ú ¡¤ 242.2ÃÊ ¡¤ done 239.8 s
+[10/23] ¸ğµ¨ ¼±Á¤ ±Ù°Å(press_selection) ¡¦
+      Åë°ú ¡¤ 116.8ÃÊ ¡¤ ???? ????: ??? ?? 114.2 s
+[11/23] press_evidence µ¿°á°ª ºñ±³ ¡¦
+      Åë°ú ¡¤ 0.9ÃÊ ¡¤ ???: press_evidence ???? ??? ?????????? ??“S ??(??? 38??)
+[12/23] press_supervised µ¿°á°ª ºñ±³ ¡¦
+      Åë°ú ¡¤ 0.7ÃÊ ¡¤ ???: press_supervised ???? ??? ?????????? ??“S ??(??? 3??)
+[13/23] press_advance µ¿°á°ª ºñ±³ ¡¦
+      Åë°ú ¡¤ 0.7ÃÊ ¡¤ ???: press_advance ???? ??? ?????????? ??“S ??(??? 2??)
+[14/23] press_selection µ¿°á°ª ºñ±³ ¡¦
+      Åë°ú ¡¤ 0.7ÃÊ ¡¤ ???: press_selection ???? ??? ?????????? ??“S ??(??? 11??)
+[15/23] º¸¿Ï ½ÇÇè E1~E3 µ¿°á°ª ºñ±³ ¡¦
+      Åë°ú ¡¤ 2.1ÃÊ ¡¤ ???: ????????“S ?? E1, E3 ?? ???? E2(??? ??? ????)
+[16/23] ½ÃÇè: v2 ¡¦
+      Åë°ú ¡¤ 126.0ÃÊ ¡¤ 77 passed, 1 skipped in 125.19s (0:02:05)
+[17/23] ½ÃÇè: v1 ¡¦
+      ½ÇÆĞ ¡¤ 12.6ÃÊ ¡¤ 2 failed, 47 passed in 11.10s
+
+16/23 ´Ü°è Åë°ú ¡¤ 999.3ÃÊ ¡¤ ¿ä¾à press_guard/outputs/reproduce_summary.json
+---- P3a_reproduce_tests stderr(ë 30ì¤„, ì‹œê°„ ì¸¡ì • ì œì™¸)
+self = <Popen: returncode: 7 args: ['bash', '/private/tmp/claude-501/-Volumes-YJSSD...>
+data = b'== clone: test-head \xe2\x86\x92 run_all --steps 3 ==\n'
+encoding = 'CP949', errors = 'strict'
+
+    def _translate_newlines(self, data, encoding, errors):
+>       data = data.decode(encoding, errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       UnicodeDecodeError: 'cp949' codec can't decode byte 0xe2 in position 20: illegal multibyte sequence
+E       decoding with 'CP949' codec failed
+
+/opt/anaconda3/lib/python3.12/subprocess.py:1086: UnicodeDecodeError
+=========================== short test summary info ============================
+FAILED tests/test_review_regressions.py::test_clean_repro_propagates_failure_and_declares_scope[0]
+FAILED tests/test_review_regressions.py::test_clean_repro_propagates_failure_and_declares_scope[7]
+2 failed, 47 passed in 11.10s
+== reproduce_summary: mode=quick python=3.12.2 16/23 í†µê³¼ Â· ì‹¤íŒ¨ 1 Â· 999.3ì´ˆ
+  [01] rc=0    12.2s  v1 ì„ í–‰(ì£¼ ëª¨ë¸Â·ê¸°ì¤€ëª¨ë¸Â·í–‰ë³„ ì˜ˆì¸¡)  | }
+  [02] rc=0     1.0s  v1 ë™ê²°ê°’ ë¹„êµ  | 16/16 ï¿½ï¿½ï¿½ (1~2ï¿½Ü°ï¿½ ï¿½Îºï¿½ ï¿½ï¿½, ï¿½Ê¼ï¿½ ï¿½ï¿½ï¿½ï¿½ 9ï¿½ï¿½). È¯ï¿½ï¿½: macOS-26.3.1-arm64-arm-64bit vs ï¿½ï¿½ï¿½ï¿½ macOS-26.3.1-arm64-arm-64bi
+  [03] rc=0    32.4s  v2 í•™ìŠµÂ·ì‹œê°„ìˆœ 5íšŒ  |     B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              
+  [04] rc=0   139.4s  v2 ë¶„ì„  | }
+  [05] rc=0   276.3s  v2 ì‹¤í–‰ ê²€ì¦(audit)  | 16/16 ï¿½ï¿½ï¿½ ï¿½ï¿½ /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpa
+  [06] rc=0     2.5s  v2 ë™ê²°ê°’ ë¹„êµ  | 48/48 ï¿½ï¿½ï¿½. ï¿½Úµï¿½ 1602db8f6a08 vs ï¿½ï¿½ï¿½ï¿½ 1602db8f6a08; È¯ï¿½ï¿½ macOS-26.3.1-arm64-arm-64bit vs ï¿½ï¿½ï¿½ï¿½ macOS-26.3.1-arm64-
+  [07] rc=0    11.9s  ì§„ë‹¨ í‘œ(press_evidence)  |     B 12 0.099174 0.099174      180               11  0.061111       0.099126          False
+  [08] rc=0    21.0s  ì§„ë‹¨ ë³´ê°• í‘œÂ·ê·¸ë¦¼  | ï¿½Ï·ï¿½ 18.2ï¿½ï¿½, Ç¥ 16ï¿½ï¿½, ï¿½×¸ï¿½ 5ï¿½ï¿½
+  [09] rc=0   242.2s  ì§€ë„í•™ìŠµ ê¸°ì¤€ì„ (press_supervised)  | done 239.8 s
+  [10] rc=0   116.8s  ëª¨ë¸ ì„ ì • ê·¼ê±°(press_selection)  | ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ ï¿½ï¿½ 114.2 s
+  [11] rc=0     0.9s  press_evidence ë™ê²°ê°’ ë¹„êµ  | ï¿½ï¿½ï¿½: press_evidence ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½á¼ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ë°ª ï¿½ï¿½(ï¿½ï¿½ï¿½ 38ï¿½ï¿½)
+  [12] rc=0     0.7s  press_supervised ë™ê²°ê°’ ë¹„êµ  | ï¿½ï¿½ï¿½: press_supervised ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½á¼ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ë°ª ï¿½ï¿½(ï¿½ï¿½ï¿½ 3ï¿½ï¿½)
+  [13] rc=0     0.7s  press_advance ë™ê²°ê°’ ë¹„êµ  | ï¿½ï¿½ï¿½: press_advance ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½á¼ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ë°ª ï¿½ï¿½(ï¿½ï¿½ï¿½ 2ï¿½ï¿½)
+  [14] rc=0     0.7s  press_selection ë™ê²°ê°’ ë¹„êµ  | ï¿½ï¿½ï¿½: press_selection ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½á¼ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ë°ª ï¿½ï¿½(ï¿½ï¿½ï¿½ 11ï¿½ï¿½)
+  [15] rc=0     2.1s  ë³´ì™„ ì‹¤í—˜ E1~E3 ë™ê²°ê°’ ë¹„êµ  | ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½á¼ºï¿½ï¿½ï¿½ï¿½ë°ª ï¿½ï¿½ E1, E3 ï¿½ï¿½ ï¿½Ç³Ê¶ï¿½ E2(ï¿½Üºï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½)
+  [16] rc=0   126.0s  ì‹œí—˜: v2  | 77 passed, 1 skipped in 125.19s (0:02:05)
+  [17] rc=1    12.6s  ì‹œí—˜: v1  | 2 failed, 47 passed in 11.10s
+STEP P3b1_predict_input rc=0 wall=2s maxrss_mb=193 load_start=6.87 load_end=7.04
+---- P3b1_predict_input stdout(ë 3ì¤„)
+600Çà Ã³¸®, Á¡°Ë ´ë±â 21°Ç ¡æ /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P3_cp949/x/pred_outlier.csv
+STEP P3b2_predict_splitA rc=0 wall=5s maxrss_mb=216 load_start=7.04 load_end=6.88
+---- P3b2_predict_splitA stdout(ë 3ì¤„)
+4690Çà ¡æ /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P3_cp949/x/test_predictions_A.csv ¡¤ SHA-256 d01201af44969941¡¦ ¡¤ ÇĞ½À ½ÇÇà°ú °°À½
+STEP P3b3_simulate rc=0 wall=19s maxrss_mb=194 load_start=6.88 load_end=6.84
+---- P3b3_simulate stdout(ë 4ì¤„)
+[2022-07-17 10:53:42.868] Ã¹ ¾Ë¸² ¡¤ ÁÖÀÇ ¡¤ ±¸°£ 19 ¡¤ dynamics ¡¤ Àü·ù ÆÄÇü¡¤°èÃø È®ÀÎ ¡¤ ÀÌ»ó È®·ü 55.0%
+[2022-07-17 10:53:42.968] °İ»ó ¡¤ Á¡°Ë ¿äÃ» ¡¤ ±¸°£ 19 ¡¤ dynamics ¡¤ Àü·ù ÆÄÇü¡¤°èÃø È®ÀÎ ¡¤ ÀÌ»ó È®·ü 55.0%
+[2022-07-17 10:53:52.440] Ã¹ ¾Ë¸² ¡¤ ÁÖÀÇ ¡¤ ±¸°£ 20 ¡¤ dynamics ¡¤ Àü·ù ÆÄÇü¡¤°èÃø È®ÀÎ ¡¤ ÀÌ»ó È®·ü 55.0%
+[2022-07-17 10:53:52.540] °İ»ó ¡¤ Á¡°Ë ¿äÃ» ¡¤ ±¸°£ 20 ¡¤ dynamics ¡¤ Àü·ù ÆÄÇü¡¤°èÃø È®ÀÎ ¡¤ ÀÌ»ó È®·ü 55.0%
+---- P3b3_simulate stderr(ë 4ì¤„, ì‹œê°„ ì¸¡ì • ì œì™¸)
+600Çà ¡¤ Ã¹ ¾Ë¸² 21 ¡¤ °İ»ó 21 ¡¤ ¼öÁı ¿À·ù 0 ¡¤ °è»ê p95 25.0 ms ¡¤ °æ°ú 16.1ÃÊ
+STEP P3b4_recalibrate rc=0 wall=6s maxrss_mb=228 load_start=6.84 load_end=7.11
+---- P3b4_recalibrate stdout(ë 6ì¤„)
+Åë°ú Á¤»ó ¾Ë¸² ´ÜÀ§ ¼ö°¡ º¸Á¤ Á¶°ÇºÎ Beta-Binomial 95¹éºĞÀ§ ÀÌÇÏ: 0 (ÇÑµµ 2 ¡¤ Á¤»ó¿¡¼­ °ÅºÎÇÒ È®·ü 3.6% ¡¤ ½ÇÁ¦ ¾Ë¸²·üÀÌ ¸í¸ñÀÇ 2¡¤3¹èÀÏ ¶§ °ÅºÎÇÒ È®·ü(°ËÁ¤·Â) 8%¡¤19%)
+Åë°ú °íÀå ÁÖÀÔ cur_noise 0.2 2ÃÊ ¾È Å½ÁöÀ² ¡Ã 90%: 1.0
+Åë°ú °íÀå ÁÖÀÔ cur_offset 0.4 2ÃÊ ¾È Å½ÁöÀ² ¡Ã 90%: 1.0
+Åë°ú °íÀå ÁÖÀÔ vib_noise 4 2ÃÊ ¾È Å½ÁöÀ² ¡Ã 90%: 1.0
+±³´ë 8½Ã°£ 1´Ü°è ¾Ë¸²: ¸í¸ñ 30.9°Ç ¡¤ º¸Á¤ 95% 92.3°Ç
+¼ö¶ô ¡¤ ¸ğµ¨ ÀúÀå /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P3_cp949/x/site_model.json ¡¤ º¸°í¼­ /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P3_cp949/x/site_report.json
+STEP P3b5_package_manifest rc=0 wall=1s maxrss_mb=108 load_start=7.11 load_end=7.11
+---- P3b5_package_manifest stdout(ë 14ì¤„)
+                  files  megabytes
+group                             
+baseline_v1          66       0.78
+candidates           13       0.15
+final_model          43       2.75
+final_outputs        89       1.56
+supporting          164       2.16
+test_predictions      2       4.31
+training_data         2       1.19
+ÇÕ°è 379°³ ¡¤ 12.9 MB
+ºí¶óÀÎµå °Ë»ç Åë°ú
+---- P3b6 ì›¹ ì½˜ì†”(CP949Â·resource ì°¨ë‹¨)
+GET /api/overview http=200 bytes=146004
+overview audit.all_ok= True | ê²€ì‚¬ 16 | metrics 12
+POST /api/analyze(mixed,B) http=200 bytes=6510247
+analyze stats= {'rows': 6697, 'segments': 201, 'scored': 6697, 'invalid': 0, 'alarm_rows': 572, 'notifications': 24, 'elapsed_s': 2.095826666999983} | 1Â·2ë‹¨ê³„ {'ì£¼ì˜': 3, 'ì ê²€ ìš”ì²­': 21}
+POST /api/analyze(upload outlier_data.csv) http=200 bytes=585705
+upload stats= {'rows': 600, 'segments': 21, 'scored': 600, 'invalid': 0, 'alarm_rows': 556, 'notifications': 21, 'elapsed_s': 0.16640895799991995} | ëŒ€ê¸°ì—´ 21
+---- ì„œë²„ ë¡œê·¸ ë(CP949 ì¶œë ¥ì„ UTF-8ë¡œ í’€ì–´ ì ìŒ)
+"GET /api/overview HTTP/1.1" 200 -
+"POST /api/analyze HTTP/1.1" 200 -
+"POST /api/analyze HTTP/1.1" 200 -
+STEP P3b7_v1_full_cp949 rc=0 wall=136s maxrss_mb=812 load_start=7.02 load_end=24.69
+---- P3b7_v1_full_cp949 stdout(ë 4ì¤„)
+  },
+  "required_checks_ok": true,
+  "required_checks_failed": []
+}
+---- P3b7_v1_full_cp949 stderr(ë 4ì¤„, ì‹œê°„ ì¸¡ì • ì œì™¸)
+/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P3_cp949/clone/yejun/press_submission/press/robustness.py:165: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
+  "dead_component_cases": int((~sens.waveform_only_alarm_possible.fillna(True).astype(bool)).sum()) if "waveform_only_alarm_possible" in sens else None,
+STEP P3b8_v1_verify_cp949 rc=2 wall=1s maxrss_mb=107 load_start=24.69 load_end=25.83
+---- P3b8_v1_verify_cp949 stdout(ë 3ì¤„)
+---- P3b8_v1_verify_cp949 stderr(ë 3ì¤„, ì‹œê°„ ì¸¡ì • ì œì™¸)
+outputs/expected °¡ ¾ø´Ù. ÇÊ¼ö °Ë»ç°¡ Åë°úÇÑ ½ÇÇà¿¡¼­ --freeze ·Î ¸ÕÀú µ¿°áÇÑ´Ù.
+STEP P3b9_supp_rerun_cp949 rc=0 wall=949s maxrss_mb=1094 load_start=25.83 load_end=4.69
+---- P3b9_supp_rerun_cp949 stdout(ë 8ì¤„)
+-- E1 Àç½ÇÇà: /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P3_cp949/clone/yejun/analysis/press_supplement/fault_injection.py --out /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P3_cp949/tmp/press_supplement_rerun_f06_xkgq/E1
+-- E2 Àç½ÇÇà: /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P3_cp949/clone/yejun/analysis/press_supplement/uci_v2.py --out /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P3_cp949/tmp/press_supplement_rerun_f06_xkgq/E2
+-- E3 Àç½ÇÇà: /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P3_cp949/clone/yejun/analysis/press_supplement/recalibration.py --out /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P3_cp949/tmp/press_supplement_rerun_f06_xkgq/E3
+Åë°ú: ¹«°á¼º¡¤±â´ë°ª ºñ±³ E1, E2, E3 ¡¤ Àç½ÇÇà E1,E2,E3
+P3 ë 2026-09-28 14:51:47

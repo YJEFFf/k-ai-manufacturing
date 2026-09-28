@@ -1,0 +1,38 @@
+P3c ì‹œì‘ 2026-09-28 14:46:52
+STEP P3c_test_press_advance rc=0 wall=1s maxrss_mb=125 load_start=3.89 load_end=3.89
+---- P3c_test_press_advance stdout(ë 2ì¤„)
+........                                                                 [100%]
+8 passed in 0.73s
+STEP P3c_test_press_evidence rc=0 wall=2s maxrss_mb=126 load_start=3.89 load_end=3.90
+---- P3c_test_press_evidence stdout(ë 2ì¤„)
+......                                                                   [100%]
+6 passed in 1.16s
+STEP P3c_test_press_selection rc=0 wall=1s maxrss_mb=128 load_start=3.90 load_end=3.90
+---- P3c_test_press_selection stdout(ë 2ì¤„)
+......                                                                   [100%]
+6 passed in 0.85s
+STEP P3c_test_press_supervised rc=0 wall=2s maxrss_mb=127 load_start=3.90 load_end=3.90
+---- P3c_test_press_supervised stdout(ë 2ì¤„)
+......                                                                   [100%]
+6 passed in 0.71s
+STEP P3c_test_press_supplement rc=0 wall=4s maxrss_mb=332 load_start=3.90 load_end=3.91
+---- P3c_test_press_supplement stdout(ë 2ì¤„)
+.............                                                            [100%]
+13 passed in 3.11s
+STEP P3c_test_web rc=0 wall=0s maxrss_mb=83 load_start=3.91 load_end=3.91
+---- P3c_test_web stdout(ë 2ì¤„)
+web regressions: 9 passed (null gap / empty replay hover / 50k rows / empty selection / sim visibility / escalation timing / level filter / level KPIs / outcome without storage)
+STEP P3c_test_v1_deselect rc=0 wall=21s maxrss_mb=533 load_start=3.91 load_end=8.58
+---- P3c_test_v1_deselect stdout(ë 2ì¤„)
+...............................................                          [100%]
+47 passed, 2 deselected in 19.47s
+STEP P3c_v1_verify_full_cp949 rc=0 wall=1s maxrss_mb=109 load_start=8.58 load_end=8.58
+---- P3c_v1_verify_full_cp949 stdout(ë 3ì¤„)
+OK   workload.csv  max|¥Ä|=0
+
+39/39 Åë°ú (1~5´Ü°è ÀüÃ¼ ºñ±³, ÇÊ¼ö Áı°è 32°³). È¯°æ: macOS-26.3.1-arm64-arm-64bit vs µ¿°á macOS-26.3.1-arm64-arm-64bit; ÄÚµå 0fd0718e47cc vs µ¿°á 0fd0718e47cc
+---- (CP949 ì¶œë ¥ì„ UTF-8ë¡œ í’€ì–´ ì ìŒ)
+
+39/39 í†µê³¼ (1~5ë‹¨ê³„ ì „ì²´ ë¹„êµ, í•„ìˆ˜ ì§‘ê³„ 32ê°œ). í™˜ê²½: macOS-26.3.1-arm64-arm-64bit vs ë™ê²° macOS-26.3.1-arm64-arm-64bit; ì½”ë“œ 0fd0718e47cc vs ë™ê²° 0fd0718e47cc
+47 passed, 2 deselected in 19.47s
+P3c ë 2026-09-28 14:47:24

@@ -1,0 +1,81 @@
+{
+ "source": "press_guard/outputs/alert_levels_v2.csv",
+ "nominal_level1_per_8h_B_a1": 29.58499308530684,
+ "units_per_8h_B": 3579.784163322128,
+ "zero_count_upper95_per_8h": {
+  "60": 174.34591777513737,
+  "120": 88.26101423939421,
+  "180": 59.08515450685116,
+  "300": 35.56902879024068,
+  "600": 17.828912339339904
+ },
+ "independent_folds": {
+  "alpha_0.01": {
+   "level1": 0,
+   "level2": 0,
+   "units": 180,
+   "per_fold": {
+    "rolling_test_300_359": [
+     0,
+     0
+    ],
+    "rolling_test_360_419": [
+     0,
+     0
+    ],
+    "rolling_test_540_599": [
+     0,
+     0
+    ]
+   }
+  },
+  "alpha_0.03": {
+   "level1": 4,
+   "level2": 1,
+   "units": 180,
+   "per_fold": {
+    "rolling_test_300_359": [
+     3,
+     1
+    ],
+    "rolling_test_360_419": [
+     0,
+     0
+    ],
+    "rolling_test_540_599": [
+     1,
+     0
+    ]
+   },
+   "ratio_l2_over_l1": 0.25,
+   "ratio_upper95": 0.7513953742698181,
+   "example_level2_per_8h_B_a1": 7.39624827132671,
+   "example_level2_upper95_per_8h_B_a1": 22.230026952104115
+  },
+  "alpha_0.05": {
+   "level1": 9,
+   "level2": 1,
+   "units": 180,
+   "per_fold": {
+    "rolling_test_300_359": [
+     5,
+     1
+    ],
+    "rolling_test_360_419": [
+     2,
+     0
+    ],
+    "rolling_test_540_599": [
+     2,
+     0
+    ]
+   },
+   "ratio_l2_over_l1": 0.1111111111111111,
+   "ratio_upper95": 0.42913554703143447,
+   "example_level2_per_8h_B_a1": 3.287221453922982,
+   "example_level2_upper95_per_8h_B_a1": 12.695972191584358
+  }
+ },
+ "note": "예시 추정은 '2단계/1단계 비가 α에 무관'이라는 평가관 가정에 기댄다. α 1%의 독립 폴드는 1단계 알림이 0건이라 비를 줄 수 없다. 사후 규칙 선택(평가관 04 1회차 관찰)과 무관한 자료는 독립 폴드 180단위뿐이다"
+}
+exit=0 elapsed=2s

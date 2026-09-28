@@ -1,0 +1,195 @@
+{
+ "note": "모든 경우가 같은 출력(recalibration_review)으로 끝나는지, 사유 문자열로 구별되는지 본다. 주입은 인공 신호다",
+ "masked_units": 37,
+ "nominal": [
+  {
+   "window": 0,
+   "alerted_units": 2,
+   "limit95": 2,
+   "limit99": 4,
+   "level1_notifications": 2,
+   "level2_escalations": 0,
+   "current_ratio": 0.8792507178008029,
+   "drift_up": false,
+   "recalibration_review": false,
+   "reason": ""
+  },
+  {
+   "window": 1,
+   "alerted_units": 0,
+   "limit95": 2,
+   "limit99": 4,
+   "level1_notifications": 0,
+   "level2_escalations": 0,
+   "current_ratio": 0.7616389202620547,
+   "drift_up": false,
+   "recalibration_review": false,
+   "reason": ""
+  },
+  {
+   "window": 2,
+   "alerted_units": 1,
+   "limit95": 2,
+   "limit99": 4,
+   "level1_notifications": 1,
+   "level2_escalations": 0,
+   "current_ratio": 0.7794073411027389,
+   "drift_up": false,
+   "recalibration_review": false,
+   "reason": ""
+  }
+ ],
+ "G_current_gain_1.3": [
+  {
+   "window": 0,
+   "alerted_units": 5,
+   "limit95": 2,
+   "limit99": 4,
+   "level1_notifications": 5,
+   "level2_escalations": 2,
+   "current_ratio": 1.143025933141044,
+   "drift_up": false,
+   "recalibration_review": true,
+   "reason": "99백분위 초과"
+  },
+  {
+   "window": 1,
+   "alerted_units": 0,
+   "limit95": 2,
+   "limit99": 4,
+   "level1_notifications": 0,
+   "level2_escalations": 0,
+   "current_ratio": 0.9901305963406711,
+   "drift_up": false,
+   "recalibration_review": false,
+   "reason": ""
+  },
+  {
+   "window": 2,
+   "alerted_units": 1,
+   "limit95": 2,
+   "limit99": 4,
+   "level1_notifications": 1,
+   "level2_escalations": 0,
+   "current_ratio": 1.0132295434335605,
+   "drift_up": false,
+   "recalibration_review": false,
+   "reason": ""
+  }
+ ],
+ "V_vib_noise_1sigma_last_window": [
+  {
+   "window": 0,
+   "alerted_units": 2,
+   "limit95": 2,
+   "limit99": 4,
+   "level1_notifications": 2,
+   "level2_escalations": 0,
+   "current_ratio": 0.8792507178008029,
+   "drift_up": false,
+   "recalibration_review": false,
+   "reason": ""
+  },
+  {
+   "window": 1,
+   "alerted_units": 0,
+   "limit95": 2,
+   "limit99": 4,
+   "level1_notifications": 0,
+   "level2_escalations": 0,
+   "current_ratio": 0.7616389202620547,
+   "drift_up": false,
+   "recalibration_review": false,
+   "reason": ""
+  },
+  {
+   "window": 2,
+   "alerted_units": 11,
+   "limit95": 2,
+   "limit99": 4,
+   "level1_notifications": 11,
+   "level2_escalations": 1,
+   "current_ratio": 0.7794073411027389,
+   "drift_up": false,
+   "recalibration_review": true,
+   "reason": "99백분위 초과"
+  }
+ ],
+ "V_vib_noise_2sigma_last_window": [
+  {
+   "window": 0,
+   "alerted_units": 2,
+   "limit95": 2,
+   "limit99": 4,
+   "level1_notifications": 2,
+   "level2_escalations": 0,
+   "current_ratio": 0.8792507178008029,
+   "drift_up": false,
+   "recalibration_review": false,
+   "reason": ""
+  },
+  {
+   "window": 1,
+   "alerted_units": 0,
+   "limit95": 2,
+   "limit99": 4,
+   "level1_notifications": 0,
+   "level2_escalations": 0,
+   "current_ratio": 0.7616389202620547,
+   "drift_up": false,
+   "recalibration_review": false,
+   "reason": ""
+  },
+  {
+   "window": 2,
+   "alerted_units": 37,
+   "limit95": 2,
+   "limit99": 4,
+   "level1_notifications": 37,
+   "level2_escalations": 33,
+   "current_ratio": 0.7794073411027389,
+   "drift_up": false,
+   "recalibration_review": true,
+   "reason": "99백분위 초과"
+  }
+ ],
+ "C_cur_offset_0.2_last_window": [
+  {
+   "window": 0,
+   "alerted_units": 2,
+   "limit95": 2,
+   "limit99": 4,
+   "level1_notifications": 2,
+   "level2_escalations": 0,
+   "current_ratio": 0.8792507178008029,
+   "drift_up": false,
+   "recalibration_review": false,
+   "reason": ""
+  },
+  {
+   "window": 1,
+   "alerted_units": 0,
+   "limit95": 2,
+   "limit99": 4,
+   "level1_notifications": 0,
+   "level2_escalations": 0,
+   "current_ratio": 0.7616389202620547,
+   "drift_up": false,
+   "recalibration_review": false,
+   "reason": ""
+  },
+  {
+   "window": 2,
+   "alerted_units": 18,
+   "limit95": 2,
+   "limit99": 4,
+   "level1_notifications": 18,
+   "level2_escalations": 7,
+   "current_ratio": 0.8081554281970067,
+   "drift_up": false,
+   "recalibration_review": true,
+   "reason": "99백분위 초과"
+  }
+ ]
+}
+exit=0 elapsed=8s

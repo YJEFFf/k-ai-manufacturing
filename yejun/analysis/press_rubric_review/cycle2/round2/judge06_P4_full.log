@@ -1,0 +1,57 @@
+P4 시작 2026-09-28 14:15:39 저장소 HEAD=f5679ca 기준=f5679ca PY=/opt/anaconda3/bin/python
+클론 HEAD=f5679ca; LSTM 캐시 0개 파일; 원본 CSV 0개
+STEP P4_full_reproduce rc=0 wall=3803s maxrss_mb=1109 load_start=14.65 load_end=6.18
+---- P4_full_reproduce stdout(끝 40줄)
+입력 배치: {'normal': '/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P4_full/clone/yejun/press_submission/data/3_소성가공_예지보전/press_data_normal.csv', 'abnormal': '/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P4_full/clone/yejun/press_submission/data/3_소성가공_예지보전/outlier_data.csv'}
+[1/16] v1 선행(주 모델·기준모델·행별 예측) …
+      통과 · 2461.4초 ·   "dead_component_cases": int((~sens.waveform_only_alarm_possible.fillna(True).astype(bool)).sum()) if "waveform_only_al
+[2/16] v1 동결값 비교 …
+      통과 · 0.5초 · 39/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 0fd0718e47cc 
+[3/16] 후보 비교(press_advance) …
+      통과 · 7.6초 ·        B     early6_ar2                         3                          21  31   3     0.970990                   1.0
+[4/16] v2 학습·시간순 5회 …
+      통과 · 25.3초 ·     B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              180       
+[5/16] v2 분석 …
+      통과 · 100.2초 · }
+[6/16] v2 실행 검증(audit) …
+      통과 · 192.1초 · 16/16 통과 → /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/
+[7/16] v2 동결값 비교 …
+      통과 · 2.4초 · 48/48 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+[8/16] 진단 표(press_evidence) …
+      통과 · 12.7초 ·     B 12 0.099174 0.099174      180               11  0.061111       0.099126          False
+[9/16] 진단 보강 표·그림 …
+      통과 · 20.5초 · 완료 18.0초, 표 16개, 그림 5장
+[10/16] 지도학습 기준선(press_supervised) …
+      통과 · 198.7초 · done 196.8 s
+[11/16] 모델 선정 근거(press_selection) …
+      통과 · 80.1초 · 내부 점검: 통과 · 78.0 s
+[12/16] press_evidence 동결값 비교 …
+      통과 · 0.5초 · 통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)
+[13/16] press_supervised 동결값 비교 …
+      통과 · 0.4초 · 통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+[14/16] press_advance 동결값 비교 …
+      통과 · 0.4초 · 통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+[15/16] press_selection 동결값 비교 …
+      통과 · 0.4초 · 통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)
+[16/16] 보완 실험 E1~E3 재실행·비교 …
+      통과 · 695.4초 · 통과: 무결성·기대값 비교 E1, E2, E3 · 재실행 E1,E2,E3
+
+16/16 단계 통과 · 3798.7초 · 요약 press_guard/outputs/reproduce_summary.json
+== reproduce_summary: mode=full python=3.12.2 16/16 통과 · 실패 0 · 3798.7초
+  [01] rc=0  2461.4s  v1 선행(주 모델·기준모델·행별 예측)  |   "dead_component_cases": int((~sens.waveform_only_alarm_possible.fillna(True).astype(bool)).sum()) if "wavefo
+  [02] rc=0     0.5s  v1 동결값 비교  | 39/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 0fd
+  [03] rc=0     7.6s  후보 비교(press_advance)  |        B     early6_ar2                         3                          21  31   3     0.970990            
+  [04] rc=0    25.3s  v2 학습·시간순 5회  |     B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              
+  [05] rc=0   100.2s  v2 분석  | }
+  [06] rc=0   192.1s  v2 실행 검증(audit)  | 16/16 통과 → /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/
+  [07] rc=0     2.4s  v2 동결값 비교  | 48/48 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64b
+  [08] rc=0    12.7s  진단 표(press_evidence)  |     B 12 0.099174 0.099174      180               11  0.061111       0.099126          False
+  [09] rc=0    20.5s  진단 보강 표·그림  | 완료 18.0초, 표 16개, 그림 5장
+  [10] rc=0   198.7s  지도학습 기준선(press_supervised)  | done 196.8 s
+  [11] rc=0    80.1s  모델 선정 근거(press_selection)  | 내부 점검: 통과 · 78.0 s
+  [12] rc=0     0.5s  press_evidence 동결값 비교  | 통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)
+  [13] rc=0     0.4s  press_supervised 동결값 비교  | 통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+  [14] rc=0     0.4s  press_advance 동결값 비교  | 통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+  [15] rc=0     0.4s  press_selection 동결값 비교  | 통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)
+  [16] rc=0   695.4s  보완 실험 E1~E3 재실행·비교  | 통과: 무결성·기대값 비교 E1, E2, E3 · 재실행 E1,E2,E3
+P4 끝 2026-09-28 15:19:03

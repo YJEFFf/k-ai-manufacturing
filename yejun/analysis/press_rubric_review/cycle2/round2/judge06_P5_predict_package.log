@@ -1,0 +1,111 @@
+P5 시작 2026-09-28 14:33:40 원천=/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P2_venv/clone 파이썬=/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P2_venv/venv/bin/python
+STEP P5a_predict_split_A rc=0 wall=5s maxrss_mb=187 load_start=7.02 load_end=7.66
+---- P5a_predict_split_A stdout(끝 2줄)
+4690행 → /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P5_package/x/predict_split_A.csv · SHA-256 d01201af44969941… · 학습 실행과 같음
+STEP P5a_predict_split_B rc=0 wall=6s maxrss_mb=188 load_start=7.66 load_end=8.16
+---- P5a_predict_split_B stdout(끝 2줄)
+6697행 → /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P5_package/x/predict_split_B.csv · SHA-256 e042763e2aeac168… · 학습 실행과 같음
+---- P5a 추론 전용 SHA-256 대조
+  A: predict=d01201af44969941 학습실행=d01201af44969941 커밋 동결요약=d01201af44969941 커밋 manifest=d01201af44969941 → 모두 같음 (4690행)
+  B: predict=e042763e2aeac168 학습실행=e042763e2aeac168 커밋 동결요약=e042763e2aeac168 커밋 manifest=e042763e2aeac168 → 모두 같음 (6697행)
+STEP P5b_package_manifest rc=0 wall=1s maxrss_mb=80 load_start=8.16 load_end=8.16
+---- P5b_package_manifest stdout(끝 14줄)
+                  files  megabytes
+group                             
+baseline_v1          66       0.78
+candidates           13       0.15
+final_model          43       2.75
+final_outputs        89       1.50
+supporting          164       2.11
+test_predictions      2       4.31
+training_data         2       1.19
+합계 379개 · 12.8 MB
+블라인드 검사 통과
+STEP P5b2_package_manifest_zip rc=2 wall=0s maxrss_mb=73 load_start=8.16 load_end=8.16
+---- P5b2_package_manifest_zip stdout(끝 2줄)
+---- P5b2_package_manifest_zip stderr(끝 2줄, 시간 측정 제외)
+ZIP 조립은 보류 중이다(yejun/AGENTS.md: 최종 제출물 조립은 예준의 명시적 지시 뒤에). 목록만 계산한다.
+---- P5 목록 복사: 379개 파일 → pkg/ (그룹별 {'supporting': 164, 'final_outputs': 89, 'baseline_v1': 66, 'final_model': 43, 'candidates': 13, 'test_predictions': 2, 'training_data': 2})
+     복사본 최상위: ['analysis', 'press_guard', 'press_submission']; analysis 아래: ['package_contract.py', 'press_advance', 'press_evidence', 'press_selection', 'press_supervised', 'press_supplement']
+STEP P5c1_readme_literal rc=2 wall=0s maxrss_mb=12 load_start=8.15 load_end=8.15
+---- P5c1_readme_literal stdout(끝 2줄)
+---- P5c1_readme_literal stderr(끝 2줄, 시간 측정 제외)
+/Library/Frameworks/Python.framework/Versions/3.12/Resources/Python.app/Contents/MacOS/Python: can't open file '/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P5_package/pkg/yejun/press_guard/reproduce.py': [Errno 2] No such file or directory
+STEP P5c2_pkg_predict_A rc=0 wall=4s maxrss_mb=188 load_start=8.15 load_end=8.14
+---- P5c2_pkg_predict_A stdout(끝 2줄)
+4690행 → /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P5_package/x/pkg_predict_A.csv · SHA-256 d01201af44969941… · 학습 실행과 같음
+     SHA-256 동봉본 d01201af44969941 / 재생성 d01201af44969941
+STEP P5c2_pkg_predict_B rc=0 wall=6s maxrss_mb=185 load_start=8.14 load_end=8.05
+---- P5c2_pkg_predict_B stdout(끝 2줄)
+6697행 → /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P5_package/x/pkg_predict_B.csv · SHA-256 e042763e2aeac168… · 학습 실행과 같음
+     SHA-256 동봉본 e042763e2aeac168 / 재생성 e042763e2aeac168
+STEP P5c3_pkg_reproduce rc=1 wall=652s maxrss_mb=652 load_start=8.05 load_end=5.06
+---- P5c3_pkg_reproduce stdout(끝 25줄)
+      실패 · 2.5초 · ValueError: 분석 원본 무결성 오류: ['model_comparison_all.csv: 없음']. v1 선행 단계를 먼저 실행한다: python press_submission/run_all.py --step
+[5/15] v2 실행 검증(audit) …
+      실패 · 318.4초 · 15/16 통과 → /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/
+[6/15] v2 동결값 비교 …
+      실패 · 1.7초 · 40/43 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+[7/15] 진단 표(press_evidence) …
+      통과 · 10.1초 ·     B 12 0.099174 0.099174      180               11  0.061111       0.099126          False
+[8/15] 진단 보강 표·그림 …
+      실패 · 3.8초 · FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f
+[9/15] 지도학습 기준선(press_supervised) …
+      통과 · 199.9초 · done 198.5 s
+[10/15] 모델 선정 근거(press_selection) …
+      실패 · 8.6초 · FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f
+[11/15] press_evidence 동결값 비교 …
+      실패 · 0.4초 · 실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)
+[12/15] press_supervised 동결값 비교 …
+      통과 · 0.4초 · 통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+[13/15] press_advance 동결값 비교 …
+      통과 · 0.4초 · 통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+[14/15] press_selection 동결값 비교 …
+      실패 · 0.4초 · 실패: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)
+[15/15] 보완 실험 E1~E3 동결값 비교 …
+      통과 · 1.3초 · 통과: 무결성·기대값 비교 E1, E3 · 건너뜀 E2(외부 입력 없음)
+
+8/15 단계 통과 · 648.8초 · 요약 press_guard/outputs/reproduce_summary.json
+---- P5c3_pkg_reproduce stderr(끝 25줄, 시간 측정 제외)
+FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/analysis/press_supplement/e1_summary.csv
+FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/analysis/press_supplement/e2_uci_metrics.csv
+FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/analysis/press_supplement/e3_stability.csv
+FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/press_guard/model.py
+FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/press_guard/outputs/ablation_v2.csv
+FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/press_guard/outputs/coupling_fit_v2.csv
+FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/press_guard/outputs/uncertainty_v2.csv
+FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/press_guard/test_guard.py
+FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/press_submission/README.md
+FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/press_submission/outputs/diagnosis.md
+FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/press_submission/outputs/label_bypass.csv
+FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/press_submission/outputs/load_normalization_meta.csv
+FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/press_submission/outputs/splits.csv
+실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)
+FAIL manifest.json: dependencies_sha256 파일 없음 — press_submission/outputs/model_comparison_all.csv
+FAIL manifest.json: dependencies_sha256 파일 없음 — press_submission/outputs/sensitivity.csv
+FAIL manifest.json: dependencies_sha256 파일 없음 — press_submission/outputs/ablation.csv
+FAIL manifest.json: dependencies_sha256 파일 없음 — press_submission/outputs/persistence.csv
+FAIL manifest.json: dependencies_sha256 파일 없음 — press_submission/outputs/load_normalization.csv
+FAIL manifest.json: dependencies_sha256 파일 없음 — press_submission/outputs/lstm_guidebook_reproduction.json
+FAIL manifest.json: dependencies_sha256 파일 없음 — analysis/press_improvement/candidate_metrics.csv
+FAIL manifest.json: dependencies_sha256 파일 없음 — analysis/press_improvement/run_experiment.py
+FAIL manifest.json: dependencies_sha256 파일 없음 — analysis/press_early/metrics.csv
+FAIL manifest.json: dependencies_sha256 파일 없음 — analysis/press_early/run_experiment.py
+실패: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)
+== reproduce_summary: mode=quick python=3.12.8 8/15 통과 · 실패 7 · 648.8초
+  [01] rc=0    30.0s  v1 선행(주 모델·기준모델·행별 예측)  | }
+  [02] rc=0     0.8s  v1 동결값 비교  | 16/16 통과 (1~2단계 부분 비교, 필수 집계 9개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 0fd0
+  [03] rc=0    70.2s  v2 학습·시간순 5회  |     B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              
+  [04] rc=1     2.5s  v2 분석  | ValueError: 분석 원본 무결성 오류: ['model_comparison_all.csv: 없음']. v1 선행 단계를 먼저 실행한다: python press_submission/run_all
+  [05] rc=1   318.4s  v2 실행 검증(audit)  | 15/16 통과 → /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/
+  [06] rc=1     1.7s  v2 동결값 비교  | 40/43 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64b
+  [07] rc=0    10.1s  진단 표(press_evidence)  |     B 12 0.099174 0.099174      180               11  0.061111       0.099126          False
+  [08] rc=1     3.8s  진단 보강 표·그림  | FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-501/-Volumes-YJSSD-----k------/69
+  [09] rc=0   199.9s  지도학습 기준선(press_supervised)  | done 198.5 s
+  [10] rc=1     8.6s  모델 선정 근거(press_selection)  | FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-501/-Volumes-YJSSD-----k------/69
+  [11] rc=1     0.4s  press_evidence 동결값 비교  | 실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)
+  [12] rc=0     0.4s  press_supervised 동결값 비교  | 통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+  [13] rc=0     0.4s  press_advance 동결값 비교  | 통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+  [14] rc=1     0.4s  press_selection 동결값 비교  | 실패: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)
+  [15] rc=0     1.3s  보완 실험 E1~E3 동결값 비교  | 통과: 무결성·기대값 비교 E1, E3 · 건너뜀 E2(외부 입력 없음)
+P5 끝 2026-09-28 14:44:56

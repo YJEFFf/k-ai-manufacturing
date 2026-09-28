@@ -1,0 +1,379 @@
+HEAD e9ed90fa50dc80c14f1d43aa0ea5319540d47eda · 기준 e9ed90fa50dc80c14f1d43aa0ea5319540d47eda · 사본 /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T//judge02_c2r2_repro.hRyv2t
+9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e  /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T//judge02_c2r2_repro.hRyv2t/yejun/press_submission/data/3_소성가공_예지보전/outlier_data.csv
+f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7  /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T//judge02_c2r2_repro.hRyv2t/yejun/press_submission/data/3_소성가공_예지보전/press_data_normal.csv
+[1/23] v1 선행(주 모델·기준모델·행별 예측) …
+      통과 · 11.3초 · }
+[2/23] v1 동결값 비교 …
+      통과 · 0.5초 · 16/16 통과 (1~2단계 부분 비교, 필수 집계 9개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 0fd0718e47cc v
+[3/23] v2 학습·시간순 5회 …
+      통과 · 28.1초 ·     B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              180       
+[4/23] v2 분석 …
+      통과 · 112.5초 · }
+[5/23] v2 실행 검증(audit) …
+      통과 · 184.1초 · 16/16 통과 → /private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/press_guard/outputs/
+[6/23] v2 동결값 비교 …
+      통과 · 1.9초 · 48/48 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+[7/23] 진단 표(press_evidence) …
+      통과 · 10.4초 ·     B 12 0.099174 0.099174      180               11  0.061111       0.099126          False
+[8/23] 진단 보강 표·그림 …
+      통과 · 19.8초 · 완료 17.6초, 표 16개, 그림 5장
+[9/23] 지도학습 기준선(press_supervised) …
+      통과 · 183.4초 · done 181.1 s
+[10/23] 모델 선정 근거(press_selection) …
+      통과 · 89.5초 · 내부 점검: 통과 · 87.9 s
+[11/23] press_evidence 동결값 비교 …
+      통과 · 0.6초 · 통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)
+[12/23] press_supervised 동결값 비교 …
+      통과 · 0.5초 · 통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+[13/23] press_advance 동결값 비교 …
+      통과 · 0.5초 · 통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+[14/23] press_selection 동결값 비교 …
+      통과 · 0.5초 · 통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)
+[15/23] 보완 실험 E1~E3 동결값 비교 …
+      통과 · 1.6초 · 통과: 무결성·기대값 비교 E1, E3 · 건너뜀 E2(외부 입력 없음)
+[16/23] 시험: v2 …
+      통과 · 122.6초 · 77 passed, 1 skipped in 121.67s (0:02:01)
+[17/23] 시험: v1 …
+      통과 · 15.2초 · 49 passed in 13.31s
+[18/23] 시험: press_advance …
+      통과 · 1.8초 · 8 passed in 1.00s
+[19/23] 시험: press_evidence …
+      통과 · 2.8초 · 6 passed in 1.82s
+[20/23] 시험: press_selection …
+      통과 · 2.3초 · 6 passed in 1.33s
+[21/23] 시험: press_supervised …
+      통과 · 1.8초 · 6 passed in 1.00s
+[22/23] 시험: press_supplement …
+      통과 · 4.5초 · 10 passed, 3 skipped in 3.44s
+[23/23] 시험: 웹 콘솔 …
+      통과 · 0.6초 · web regressions: 9 passed (null gap / empty replay hover / 50k rows / empty selection / sim visibility / escalation timi
+
+23/23 단계 통과 · 796.8초 · 요약 press_guard/outputs/reproduce_summary.json
+reproduce.py --tests 종료 코드 0 · 798초
+--- reproduce_summary.json
+{
+  "mode": "quick",
+  "python": "3.12.2",
+  "total_seconds": 796.8,
+  "passed": 23,
+  "failed": 0,
+  "planned": 23,
+  "steps": [
+    {
+      "step": "v1 선행(주 모델·기준모델·행별 예측)",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/press_submission/run_all.py",
+        "--steps",
+        "2"
+      ],
+      "returncode": 0,
+      "seconds": 11.3,
+      "last_line": "}",
+      "log": "press_guard/outputs/reproduce_logs/01.log"
+    },
+    {
+      "step": "v1 동결값 비교",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/press_submission/verify.py",
+        "--out",
+        "outputs",
+        "--steps",
+        "2"
+      ],
+      "returncode": 0,
+      "seconds": 0.5,
+      "last_line": "16/16 통과 (1~2단계 부분 비교, 필수 집계 9개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 0fd0718e47cc vs 동결 0fd0718e47cc",
+      "log": "press_guard/outputs/reproduce_logs/02.log"
+    },
+    {
+      "step": "v2 학습·시간순 5회",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/press_guard/train.py",
+        "--rolling"
+      ],
+      "returncode": 0,
+      "seconds": 28.1,
+      "last_line": "    B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              180                          21                 21             0.0          0.7           ",
+      "log": "press_guard/outputs/reproduce_logs/03.log"
+    },
+    {
+      "step": "v2 분석",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/press_guard/analyze.py"
+      ],
+      "returncode": 0,
+      "seconds": 112.5,
+      "last_line": "}",
+      "log": "press_guard/outputs/reproduce_logs/04.log"
+    },
+    {
+      "step": "v2 실행 검증(audit)",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/press_guard/audit.py"
+      ],
+      "returncode": 0,
+      "seconds": 184.1,
+      "last_line": "16/16 통과 → /private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/press_guard/outputs/audit.json",
+      "log": "press_guard/outputs/reproduce_logs/05.log"
+    },
+    {
+      "step": "v2 동결값 비교",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/press_guard/verify.py"
+      ],
+      "returncode": 0,
+      "seconds": 1.9,
+      "last_line": "48/48 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit",
+      "log": "press_guard/outputs/reproduce_logs/06.log"
+    },
+    {
+      "step": "진단 표(press_evidence)",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/analysis/press_evidence/build_tables.py"
+      ],
+      "returncode": 0,
+      "seconds": 10.4,
+      "last_line": "    B 12 0.099174 0.099174      180               11  0.061111       0.099126          False",
+      "log": "press_guard/outputs/reproduce_logs/07.log"
+    },
+    {
+      "step": "진단 보강 표·그림",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/analysis/press_evidence/build_diagnostics.py"
+      ],
+      "returncode": 0,
+      "seconds": 19.8,
+      "last_line": "완료 17.6초, 표 16개, 그림 5장",
+      "log": "press_guard/outputs/reproduce_logs/08.log"
+    },
+    {
+      "step": "지도학습 기준선(press_supervised)",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/analysis/press_supervised/run.py"
+      ],
+      "returncode": 0,
+      "seconds": 183.4,
+      "last_line": "done 181.1 s",
+      "log": "press_guard/outputs/reproduce_logs/09.log"
+    },
+    {
+      "step": "모델 선정 근거(press_selection)",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/analysis/press_selection/run.py"
+      ],
+      "returncode": 0,
+      "seconds": 89.5,
+      "last_line": "내부 점검: 통과 · 87.9 s",
+      "log": "press_guard/outputs/reproduce_logs/10.log"
+    },
+    {
+      "step": "press_evidence 동결값 비교",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/analysis/package_contract.py",
+        "--package",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/analysis/press_evidence"
+      ],
+      "returncode": 0,
+      "seconds": 0.6,
+      "last_line": "통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)",
+      "log": "press_guard/outputs/reproduce_logs/11.log"
+    },
+    {
+      "step": "press_supervised 동결값 비교",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/analysis/package_contract.py",
+        "--package",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/analysis/press_supervised"
+      ],
+      "returncode": 0,
+      "seconds": 0.5,
+      "last_line": "통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)",
+      "log": "press_guard/outputs/reproduce_logs/12.log"
+    },
+    {
+      "step": "press_advance 동결값 비교",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/analysis/package_contract.py",
+        "--package",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/analysis/press_advance"
+      ],
+      "returncode": 0,
+      "seconds": 0.5,
+      "last_line": "통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)",
+      "log": "press_guard/outputs/reproduce_logs/13.log"
+    },
+    {
+      "step": "press_selection 동결값 비교",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/analysis/package_contract.py",
+        "--package",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/analysis/press_selection"
+      ],
+      "returncode": 0,
+      "seconds": 0.5,
+      "last_line": "통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)",
+      "log": "press_guard/outputs/reproduce_logs/14.log"
+    },
+    {
+      "step": "보완 실험 E1~E3 동결값 비교",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/analysis/press_supplement/verify.py"
+      ],
+      "returncode": 0,
+      "seconds": 1.6,
+      "last_line": "통과: 무결성·기대값 비교 E1, E3 · 건너뜀 E2(외부 입력 없음)",
+      "log": "press_guard/outputs/reproduce_logs/15.log"
+    },
+    {
+      "step": "시험: v2",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/press_guard"
+      ],
+      "returncode": 0,
+      "seconds": 122.6,
+      "last_line": "77 passed, 1 skipped in 121.67s (0:02:01)",
+      "log": "press_guard/outputs/reproduce_logs/16.log"
+    },
+    {
+      "step": "시험: v1",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/press_submission/tests"
+      ],
+      "returncode": 0,
+      "seconds": 15.2,
+      "last_line": "49 passed in 13.31s",
+      "log": "press_guard/outputs/reproduce_logs/17.log"
+    },
+    {
+      "step": "시험: press_advance",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/analysis/press_advance/test_contract.py"
+      ],
+      "returncode": 0,
+      "seconds": 1.8,
+      "last_line": "8 passed in 1.00s",
+      "log": "press_guard/outputs/reproduce_logs/18.log"
+    },
+    {
+      "step": "시험: press_evidence",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/analysis/press_evidence/test_contract.py"
+      ],
+      "returncode": 0,
+      "seconds": 2.8,
+      "last_line": "6 passed in 1.82s",
+      "log": "press_guard/outputs/reproduce_logs/19.log"
+    },
+    {
+      "step": "시험: press_selection",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/analysis/press_selection/test_contract.py"
+      ],
+      "returncode": 0,
+      "seconds": 2.3,
+      "last_line": "6 passed in 1.33s",
+      "log": "press_guard/outputs/reproduce_logs/20.log"
+    },
+    {
+      "step": "시험: press_supervised",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/analysis/press_supervised/test_contract.py"
+      ],
+      "returncode": 0,
+      "seconds": 1.8,
+      "last_line": "6 passed in 1.00s",
+      "log": "press_guard/outputs/reproduce_logs/21.log"
+    },
+    {
+      "step": "시험: press_supplement",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/analysis/press_supplement/test_contract.py"
+      ],
+      "returncode": 0,
+      "seconds": 4.5,
+      "last_line": "10 passed, 3 skipped in 3.44s",
+      "log": "press_guard/outputs/reproduce_logs/22.log"
+    },
+    {
+      "step": "시험: 웹 콘솔",
+      "command": [
+        "node",
+        "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_repro.hRyv2t/yejun/press_guard/test_web.cjs"
+      ],
+      "returncode": 0,
+      "seconds": 0.6,
+      "last_line": "web regressions: 9 passed (null gap / empty replay hover / 50k rows / empty selection / sim visibility / escalation timing / level filter / level KPIs / outcome without storage)",
+      "log": "press_guard/outputs/reproduce_logs/23.log"
+    }
+  ]
+}--- 테스트 예측 파일 열·F1 확인
+A rows 4690 TP/FP/FN 556 0 44 F1 0.961938 prob cols ['likelihood_ratio', 'anomaly_probability', 'record_likelihood_ratio', 'record_probability', 'probability_prior', 'probability_source'] prob null 0 sources {'abnormal': array(['leave_one_record_out'], dtype=object), 'normal_test': array(['deployment_calibrator'], dtype=object)}
+B rows 6697 TP/FP/FN 569 3 31 F1 0.97099 prob cols ['likelihood_ratio', 'anomaly_probability', 'record_likelihood_ratio', 'record_probability', 'probability_prior', 'probability_source'] prob null 0 sources {'abnormal': array(['leave_one_record_out'], dtype=object), 'normal_test': array(['deployment_calibrator'], dtype=object)}
+사본 위치: /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T//judge02_c2r2_repro.hRyv2t
+
+--- 평가관 02 추가 확인(같은 재현 사본, 2026-09-27)
+$ cd <사본>/yejun/press_guard && OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python -m pytest -q -p no:cacheprovider -rs test_probability.py
+6 passed in 15.97s
+$ ... -m pytest -q -p no:cacheprovider -rs .
+77 passed, 1 skipped in 154.81s (SKIPPED test_portability.py:90: 주최 측 ZIP이 이 기기에 없다)
+$ shasum -a 256 outputs/test_predictions_{A,B}.csv
+d01201af449699416c0c890e5bd8ba53e9bd6df0c1f11a0f0d45008f860b723f  test_predictions_A.csv
+e042763e2aeac168fb76c08001f789cf4cfdc2477383f37aa5f394f469c3b980  test_predictions_B.csv
+(judge02_verify.py가 train.evaluate_pair로 따로 만든 파일의 SHA-256과 같다: judge02_checks.json K2 prediction_file.my_file_sha256)

@@ -1,0 +1,14 @@
+P10 시작 2026-09-28 14:33:40 원천=/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P2_venv/clone 파이썬=/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P2_venv/venv/bin/python 코어=8
+STEP P10a_train_novars rc=0 wall=23s maxrss_mb=218 load_start=7.02 load_end=8.05
+---- P10a_train_novars stdout(끝 1줄)
+    B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              180                          21                 21             0.0          0.7                 1.0                   1.0
+STEP P10b_train_press8 rc=0 wall=182s maxrss_mb=217 load_start=8.05 load_end=28.33
+---- P10b_train_press8 stdout(끝 1줄)
+    B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              180                          21                 21             0.0          0.7                 1.0                   1.0
+---- novars: manifest BLAS [('openblas', '0.3.23.dev', 1), ('openblas', '0.3.27', 1), ('openmp', None, 1)], press_threads=1, elapsed_s=20.930348041999878
+     저장 모델 동결 해시: {'guard_A.json': True, 'guard_B.json': True, 'probability_A.json': True, 'probability_B.json': True}
+     행 단위 예측 동결 해시: {'predictions_normal_A.csv': True, 'predictions_normal_B.csv': True, 'predictions_abnormal_A.csv': True, 'predictions_abnormal_B.csv': True, 'test_predictions_A.csv': True, 'test_predictions_B.csv': True}
+---- p8: manifest BLAS [('openblas', '0.3.23.dev', 8), ('openblas', '0.3.27', 8), ('openmp', None, 8)], press_threads=8, elapsed_s=179.83311158300012
+     저장 모델 동결 해시: {'guard_A.json': True, 'guard_B.json': True, 'probability_A.json': True, 'probability_B.json': True}
+     행 단위 예측 동결 해시: {'predictions_normal_A.csv': True, 'predictions_normal_B.csv': True, 'predictions_abnormal_A.csv': True, 'predictions_abnormal_B.csv': True, 'test_predictions_A.csv': True, 'test_predictions_B.csv': True}
+P10 끝 2026-09-28 14:37:05

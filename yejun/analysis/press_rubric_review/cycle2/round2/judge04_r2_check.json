@@ -1,0 +1,1130 @@
+{
+ "tmp_dir": "/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge04_c2r2_950t77o2",
+ "provenance": {
+  "head": "f5679ca5cf03426555edfad7ec7417f45d216f9a",
+  "status_before": "?? yejun/analysis/press_rubric_review/cycle2/round2/",
+  "python": "3.12.2",
+  "omp": "1",
+  "cache_dirs_before": [
+   "/Volumes/YJSSD/공모전/k-제조데이터/yejun/analysis/energy_followup/__pycache__",
+   "/Volumes/YJSSD/공모전/k-제조데이터/yejun/analysis/reselection/__pycache__",
+   "/Volumes/YJSSD/공모전/k-제조데이터/yejun/analysis/reselection/injection/__pycache__",
+   "/Volumes/YJSSD/공모전/k-제조데이터/yejun/power_submission/__pycache__",
+   "/Volumes/YJSSD/공모전/k-제조데이터/yejun/power_submission/powerguard/__pycache__",
+   "/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission/.pytest_cache",
+   "/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission/press/__pycache__"
+  ],
+  "status_after": "?? yejun/analysis/press_rubric_review/cycle2/round2/",
+  "cache_dirs_new": []
+ },
+ "retrain_from_raw": {
+  "returncode": 0,
+  "seconds": 38.5,
+  "stderr_tail": "",
+  "artifacts_eq_manifest": {
+   "guard_A.json": true,
+   "guard_B.json": true,
+   "probability_A.json": true,
+   "probability_B.json": true
+  },
+  "local_artifacts_eq_manifest": {
+   "guard_A.json": true,
+   "guard_B.json": true,
+   "probability_A.json": true,
+   "probability_B.json": true
+  },
+  "outputs_eq_manifest": {
+   "metrics.csv": true,
+   "rolling.csv": true,
+   "cases_A.csv": true,
+   "cases_B.csv": true,
+   "predictions_normal_A.csv": true,
+   "predictions_normal_B.csv": true,
+   "predictions_abnormal_A.csv": true,
+   "predictions_abnormal_B.csv": true,
+   "test_predictions_A.csv": true,
+   "test_predictions_B.csv": true
+  },
+  "committed_eq_manifest": {
+   "metrics.csv": true,
+   "rolling.csv": true,
+   "cases_A.csv": true,
+   "cases_B.csv": true,
+   "predictions_normal_A.csv": true,
+   "predictions_normal_B.csv": true,
+   "predictions_abnormal_A.csv": true,
+   "predictions_abnormal_B.csv": true,
+   "test_predictions_A.csv": true,
+   "test_predictions_B.csv": true
+  }
+ },
+ "U1_alert_levels": {
+  "rows_checked": 42,
+  "all_match": true,
+  "mismatches": [],
+  "frozen_B_a1": [
+   {
+    "model": "frozen_B",
+    "alpha": 0.01,
+    "level": 1,
+    "normal_alerted": 3,
+    "normal_units": 180,
+    "units_per_h": 447.47302041526603,
+    "nominal_8h": 29.58499308530684,
+    "observed_8h": 59.663069388702134,
+    "upper95_8h": 152.17670496766982,
+    "abnormal_detected": 21,
+    "abnormal_units": 21,
+    "delay_median_s": 0.0,
+    "delay_max_s": 0.5,
+    "esc_after_first_median_s": NaN,
+    "esc_after_first_max_s": NaN,
+    "match_csv": true
+   },
+   {
+    "model": "frozen_B",
+    "alpha": 0.01,
+    "level": 2,
+    "normal_alerted": 0,
+    "normal_units": 180,
+    "units_per_h": 447.47302041526603,
+    "nominal_8h": NaN,
+    "observed_8h": 0.0,
+    "upper95_8h": 59.08515450685132,
+    "abnormal_detected": 21,
+    "abnormal_units": 21,
+    "delay_median_s": 0.2,
+    "delay_max_s": 0.6000000000000001,
+    "esc_after_first_median_s": 0.1,
+    "esc_after_first_max_s": 0.2,
+    "match_csv": true
+   }
+  ],
+  "independent_folds_L1_to_L2": {
+   "alpha_0.01": {
+    "level1": 0,
+    "level2": 0,
+    "units": 180
+   },
+   "alpha_0.03": {
+    "level1": 4,
+    "level2": 1,
+    "units": 180
+   },
+   "alpha_0.05": {
+    "level1": 9,
+    "level2": 1,
+    "units": 180
+   }
+  },
+  "note": "독립 폴드(동결 모델과 보정값이 다른 300~359·360~419·540~599)에서 1단계 → 2단계 정상 알림 수. 2단계 규칙 선택 때 보지 않은 자료"
+ },
+ "U1_level2_bound_by_sample": {
+  "zero_of_120": {
+   "upper95_rate": 0.024655401055656334,
+   "per_8h": 88.24517339997783
+  },
+  "zero_of_180": {
+   "upper95_rate": 0.01650522819566269,
+   "per_8h": 59.0745500689518
+  },
+  "zero_of_300": {
+   "upper95_rate": 0.00993608194445772,
+   "per_8h": 35.56264496066294
+  },
+  "zero_of_600": {
+   "upper95_rate": 0.004980443380361299,
+   "per_8h": 17.82571245613246
+  }
+ },
+ "U1_budget_design": {
+  "rows": 10,
+  "all_match": true,
+  "units_per_elapsed_hour": 447.3927092119488,
+  "target3": [
+   {
+    "target_alerts_per_8h": 3,
+    "collection": "간헐 수집(대회 밀도)",
+    "units_per_hour": 447.3927092119488,
+    "alpha_required": 0.0008381897878052,
+    "calibration_units_required": 1193,
+    "normal_collection_hours": 2.666561111604582,
+    "note": "1단계 명목값(교환가능성 가정). 2단계는 관측값만 있다"
+   },
+   {
+    "target_alerts_per_8h": 3,
+    "collection": "연속 수집(50행 블록)",
+    "units_per_hour": 720.0,
+    "alpha_required": 0.0005208333333333,
+    "calibration_units_required": 1919,
+    "normal_collection_hours": 2.665277777777778,
+    "note": "1단계 명목값(교환가능성 가정). 2단계는 관측값만 있다"
+   }
+  ],
+  "model_alpha_choices": [
+   0.01,
+   0.03,
+   0.05
+  ],
+  "note": "설계표의 α(예: 3건 → 0.084%)는 모델이 받는 α 선택지(1·3·5%) 밖이다(recalibrate.budget_design advice에 명시)"
+ },
+ "U2_U5_queue_quality": {
+  "by_split_alpha": {
+   "A_a0.01": {
+    "cases": 21,
+    "false_alarm_records": [],
+    "fa_levels": [],
+    "fa_ranks": [],
+    "fa_window_s_independent": [],
+    "fa_window_s_code": [],
+    "abnormal_open": 21,
+    "abnormal_cases": 21,
+    "abnormal_level2": 21,
+    "matches_quality_csv": true,
+    "independent_eq_code": true,
+    "matches_mixed_rank_csv": true,
+    "spm20_60_pieces": []
+   },
+   "A_a0.03": {
+    "cases": 22,
+    "false_alarm_records": [
+     90
+    ],
+    "fa_levels": [
+     1
+    ],
+    "fa_ranks": [
+     22
+    ],
+    "fa_window_s_independent": [
+     10.513
+    ],
+    "fa_window_s_code": [
+     10.513
+    ],
+    "abnormal_open": 21,
+    "abnormal_cases": 21,
+    "abnormal_level2": 21,
+    "matches_quality_csv": true,
+    "independent_eq_code": true,
+    "matches_mixed_rank_csv": true,
+    "spm20_60_pieces": [
+     [
+      3.5,
+      10.51
+     ]
+    ]
+   },
+   "A_a0.05": {
+    "cases": 22,
+    "false_alarm_records": [
+     90
+    ],
+    "fa_levels": [
+     1
+    ],
+    "fa_ranks": [
+     22
+    ],
+    "fa_window_s_independent": [
+     10.513
+    ],
+    "fa_window_s_code": [
+     10.513
+    ],
+    "abnormal_open": 21,
+    "abnormal_cases": 21,
+    "abnormal_level2": 21,
+    "matches_quality_csv": true,
+    "independent_eq_code": true,
+    "matches_mixed_rank_csv": true,
+    "spm20_60_pieces": [
+     [
+      3.5,
+      10.51
+     ]
+    ]
+   },
+   "B_a0.01": {
+    "cases": 24,
+    "false_alarm_records": [
+     3,
+     41,
+     150
+    ],
+    "fa_levels": [
+     1,
+     1,
+     1
+    ],
+    "fa_ranks": [
+     22,
+     23,
+     24
+    ],
+    "fa_window_s_independent": [
+     15.208,
+     15.533,
+     10.513
+    ],
+    "fa_window_s_code": [
+     15.208,
+     15.533,
+     10.513
+    ],
+    "abnormal_open": 21,
+    "abnormal_cases": 21,
+    "abnormal_level2": 21,
+    "matches_quality_csv": true,
+    "independent_eq_code": true,
+    "matches_mixed_rank_csv": true,
+    "spm20_60_pieces": [
+     [
+      5.07,
+      15.21
+     ],
+     [
+      5.18,
+      15.53
+     ],
+     [
+      3.5,
+      10.51
+     ]
+    ]
+   },
+   "B_a0.03": {
+    "cases": 26,
+    "false_alarm_records": [
+     3,
+     6,
+     26,
+     41,
+     150
+    ],
+    "fa_levels": [
+     2,
+     1,
+     1,
+     2,
+     1
+    ],
+    "fa_ranks": [
+     22,
+     23,
+     24,
+     25,
+     26
+    ],
+    "fa_window_s_independent": [
+     15.208,
+     12.371,
+     10.268,
+     15.533,
+     10.513
+    ],
+    "fa_window_s_code": [
+     15.208,
+     12.371,
+     10.268,
+     15.533,
+     10.513
+    ],
+    "abnormal_open": 21,
+    "abnormal_cases": 21,
+    "abnormal_level2": 21,
+    "matches_quality_csv": true,
+    "independent_eq_code": true,
+    "matches_mixed_rank_csv": true,
+    "spm20_60_pieces": [
+     [
+      5.07,
+      15.21
+     ],
+     [
+      4.12,
+      12.37
+     ],
+     [
+      3.42,
+      10.27
+     ],
+     [
+      5.18,
+      15.53
+     ],
+     [
+      3.5,
+      10.51
+     ]
+    ]
+   },
+   "B_a0.05": {
+    "cases": 28,
+    "false_alarm_records": [
+     3,
+     6,
+     26,
+     36,
+     41,
+     150,
+     156
+    ],
+    "fa_levels": [
+     2,
+     1,
+     2,
+     1,
+     2,
+     1,
+     1
+    ],
+    "fa_ranks": [
+     22,
+     23,
+     24,
+     25,
+     26,
+     27,
+     28
+    ],
+    "fa_window_s_independent": [
+     15.208,
+     12.371,
+     10.268,
+     9.712,
+     15.533,
+     10.513,
+     9.816
+    ],
+    "fa_window_s_code": [
+     15.208,
+     12.371,
+     10.268,
+     9.712,
+     15.533,
+     10.513,
+     9.816
+    ],
+    "abnormal_open": 21,
+    "abnormal_cases": 21,
+    "abnormal_level2": 21,
+    "matches_quality_csv": true,
+    "independent_eq_code": true,
+    "matches_mixed_rank_csv": true,
+    "spm20_60_pieces": [
+     [
+      5.07,
+      15.21
+     ],
+     [
+      4.12,
+      12.37
+     ],
+     [
+      3.42,
+      10.27
+     ],
+     [
+      3.24,
+      9.71
+     ],
+     [
+      5.18,
+      15.53
+     ],
+     [
+      3.5,
+      10.51
+     ],
+     [
+      3.27,
+      9.82
+     ]
+    ]
+   }
+  },
+  "cases_B_rows": 24,
+  "cases_B_rank_unique": true,
+  "cases_B_ranks_are_1_to_n": true
+ },
+ "U5_injection_below_fa": [
+  {
+   "split": "A",
+   "alpha": 0.03,
+   "family": "vib_noise",
+   "level_value": 2.0,
+   "injected_cases": 73,
+   "injected_below_best_false_alarm": 4
+  },
+  {
+   "split": "A",
+   "alpha": 0.05,
+   "family": "vib_noise",
+   "level_value": 2.0,
+   "injected_cases": 74,
+   "injected_below_best_false_alarm": 2
+  },
+  {
+   "split": "B",
+   "alpha": 0.01,
+   "family": "cur_noise",
+   "level_value": 0.1,
+   "injected_cases": 111,
+   "injected_below_best_false_alarm": 1
+  },
+  {
+   "split": "B",
+   "alpha": 0.01,
+   "family": "cur_offset",
+   "level_value": 0.4,
+   "injected_cases": 111,
+   "injected_below_best_false_alarm": 1
+  },
+  {
+   "split": "B",
+   "alpha": 0.03,
+   "family": "cur_noise",
+   "level_value": 0.1,
+   "injected_cases": 111,
+   "injected_below_best_false_alarm": 1
+  },
+  {
+   "split": "B",
+   "alpha": 0.03,
+   "family": "cur_offset",
+   "level_value": 0.4,
+   "injected_cases": 111,
+   "injected_below_best_false_alarm": 1
+  },
+  {
+   "split": "B",
+   "alpha": 0.03,
+   "family": "vib_noise",
+   "level_value": 2.0,
+   "injected_cases": 111,
+   "injected_below_best_false_alarm": 3
+  },
+  {
+   "split": "B",
+   "alpha": 0.05,
+   "family": "cur_offset",
+   "level_value": 0.4,
+   "injected_cases": 111,
+   "injected_below_best_false_alarm": 12
+  },
+  {
+   "split": "B",
+   "alpha": 0.05,
+   "family": "vib_noise",
+   "level_value": 2.0,
+   "injected_cases": 111,
+   "injected_below_best_false_alarm": 3
+  }
+ ],
+ "U5_key_selection": [
+  {
+   "key": "level_evidence_share_peak",
+   "total_injected_below_best_false_alarm": 28,
+   "key_terms": 4
+  },
+  {
+   "key": "evidence_share_peak",
+   "total_injected_below_best_false_alarm": 38,
+   "key_terms": 3
+  },
+  {
+   "key": "level_evidence_peak_share",
+   "total_injected_below_best_false_alarm": 40,
+   "key_terms": 4
+  },
+  {
+   "key": "level_peak",
+   "total_injected_below_best_false_alarm": 42,
+   "key_terms": 2
+  }
+ ],
+ "alert_flood": {
+  "by_split_alpha": {
+   "A_a0.01": {
+    "abnormal_minutes": 2.76,
+    "abnormal_notifications_now": 42,
+    "abnormal_cases_now": 21,
+    "abnormal_incidents_if_grouped": 1,
+    "abnormal_notifications_if_grouped": 2,
+    "normal_notifications_now": 0,
+    "normal_incidents_if_grouped": 0,
+    "normal_notifications_if_grouped": 0
+   },
+   "A_a0.03": {
+    "abnormal_minutes": 2.76,
+    "abnormal_notifications_now": 42,
+    "abnormal_cases_now": 21,
+    "abnormal_incidents_if_grouped": 1,
+    "abnormal_notifications_if_grouped": 2,
+    "normal_notifications_now": 1,
+    "normal_incidents_if_grouped": 1,
+    "normal_notifications_if_grouped": 1
+   },
+   "A_a0.05": {
+    "abnormal_minutes": 2.76,
+    "abnormal_notifications_now": 42,
+    "abnormal_cases_now": 21,
+    "abnormal_incidents_if_grouped": 1,
+    "abnormal_notifications_if_grouped": 2,
+    "normal_notifications_now": 1,
+    "normal_incidents_if_grouped": 1,
+    "normal_notifications_if_grouped": 1
+   },
+   "B_a0.01": {
+    "abnormal_minutes": 2.76,
+    "abnormal_notifications_now": 42,
+    "abnormal_cases_now": 21,
+    "abnormal_incidents_if_grouped": 1,
+    "abnormal_notifications_if_grouped": 2,
+    "normal_notifications_now": 3,
+    "normal_incidents_if_grouped": 3,
+    "normal_notifications_if_grouped": 3
+   },
+   "B_a0.03": {
+    "abnormal_minutes": 2.76,
+    "abnormal_notifications_now": 42,
+    "abnormal_cases_now": 21,
+    "abnormal_incidents_if_grouped": 1,
+    "abnormal_notifications_if_grouped": 2,
+    "normal_notifications_now": 7,
+    "normal_incidents_if_grouped": 5,
+    "normal_notifications_if_grouped": 7
+   },
+   "B_a0.05": {
+    "abnormal_minutes": 2.76,
+    "abnormal_notifications_now": 42,
+    "abnormal_cases_now": 21,
+    "abnormal_incidents_if_grouped": 1,
+    "abnormal_notifications_if_grouped": 2,
+    "normal_notifications_now": 10,
+    "normal_incidents_if_grouped": 7,
+    "normal_notifications_if_grouped": 10
+   }
+  },
+  "rule": "[평가관 가정] 경보 단위가 이어지고 단위 사이 공백 ≤ 60초(SUSPECT_MAX_GAP_S)면 한 사건으로 묶고, 사건마다 1단계 1회·2단계 1회만 알림"
+ },
+ "stream": {
+  "S1_clean_lead": {
+   "lead_record": 8,
+   "lead_rows": 50,
+   "records": 1,
+   "first_alerts": [
+    50
+   ],
+   "escalations": [
+    51
+   ],
+   "escalation_rows_after_onset": [
+    1
+   ],
+   "level2_rows_after_onset": 599,
+   "chunk1_same": true,
+   "batch_same": true
+  },
+  "S2_false_alarm_lead": {
+   "lead_record": 3,
+   "lead_rows": 50,
+   "records": 1,
+   "first_alerts": [
+    41
+   ],
+   "escalations": [
+    50
+   ],
+   "escalation_rows_after_onset": [
+    0
+   ],
+   "level2_rows_after_onset": 600,
+   "chunk1_same": true,
+   "batch_same": true
+  },
+  "S3_one_continuous_record": {
+   "rows": 6697,
+   "records": 1,
+   "cases": 9,
+   "distinct_case_record_ids": 1,
+   "cases_sharing_a_record_id": 9,
+   "note": "콘솔(app.js)은 건을 record_id로 찾으므로(selectCase·결과 저장) 같은 record_id의 둘째 건부터는 상세·결과 기록에 닿지 않는다"
+  }
+ },
+ "U6_monitor": {
+  "B_a1_match_csv": true,
+  "gains": [
+   {
+    "gain": 1.0,
+    "alerted_by_window": "2/0/1",
+    "windows_exceed": 0,
+    "windows_exceed99": 0,
+    "windows_drift_up": 0,
+    "windows_low_load": 3,
+    "recalibration_review": false
+   },
+   {
+    "gain": 1.05,
+    "alerted_by_window": "3/0/1",
+    "windows_exceed": 1,
+    "windows_exceed99": 0,
+    "windows_drift_up": 0,
+    "windows_low_load": 2,
+    "recalibration_review": false
+   },
+   {
+    "gain": 1.1,
+    "alerted_by_window": "3/0/1",
+    "windows_exceed": 1,
+    "windows_exceed99": 0,
+    "windows_drift_up": 0,
+    "windows_low_load": 2,
+    "recalibration_review": false
+   },
+   {
+    "gain": 1.2,
+    "alerted_by_window": "4/0/1",
+    "windows_exceed": 1,
+    "windows_exceed99": 0,
+    "windows_drift_up": 0,
+    "windows_low_load": 0,
+    "recalibration_review": false
+   },
+   {
+    "gain": 1.3,
+    "alerted_by_window": "5/0/1",
+    "windows_exceed": 1,
+    "windows_exceed99": 1,
+    "windows_drift_up": 0,
+    "windows_low_load": 0,
+    "recalibration_review": true
+   },
+   {
+    "gain": 1.5,
+    "alerted_by_window": "12/0/5",
+    "windows_exceed": 2,
+    "windows_exceed99": 2,
+    "windows_drift_up": 1,
+    "windows_low_load": 0,
+    "recalibration_review": true
+   }
+  ],
+  "nominal_windows": [
+   {
+    "window": 0,
+    "units": 60,
+    "alerted_units": 2,
+    "limit95": 2,
+    "limit99": 4,
+    "current_ratio": 0.8792507178008029,
+    "band_low": 0.893726038897821,
+    "band_high": 1.265921414014301,
+    "low_load": true,
+    "level1_notifications": 2,
+    "level2_escalations": 0
+   },
+   {
+    "window": 1,
+    "units": 60,
+    "alerted_units": 0,
+    "limit95": 2,
+    "limit99": 4,
+    "current_ratio": 0.7616389202620547,
+    "band_low": 0.893726038897821,
+    "band_high": 1.265921414014301,
+    "low_load": true,
+    "level1_notifications": 0,
+    "level2_escalations": 0
+   },
+   {
+    "window": 2,
+    "units": 60,
+    "alerted_units": 1,
+    "limit95": 2,
+    "limit99": 4,
+    "current_ratio": 0.7794073411027389,
+    "band_low": 0.893726038897821,
+    "band_high": 1.265921414014301,
+    "low_load": true,
+    "level1_notifications": 1,
+    "level2_escalations": 0
+   }
+  ],
+  "has_cli": false
+ },
+ "U6_recalibrate": {
+  "target3": {
+   "returncode": 0,
+   "passed": true,
+   "saved": true,
+   "units": {
+    "total": 480,
+    "train": 300,
+    "cal": 120,
+    "holdout": 60,
+    "min_cal_for_alpha": 99
+   },
+   "checks": [
+    [
+     "정상 알림 단위 수가 보정 조건부 Beta-Binomial 95백분위 이하",
+     2,
+     2,
+     true
+    ],
+    [
+     "고장 주입 cur_noise 0.2 2초 안 탐지율 ≥ 90%",
+     1.0,
+     0.9,
+     true
+    ],
+    [
+     "고장 주입 cur_offset 0.4 2초 안 탐지율 ≥ 90%",
+     1.0,
+     0.9,
+     true
+    ],
+    [
+     "고장 주입 vib_noise 4 2초 안 탐지율 ≥ 90%",
+     1.0,
+     0.9,
+     true
+    ]
+   ],
+   "power": {
+    "2x": 0.07724432359434637,
+    "3x": 0.18641279789240556
+   },
+   "false_reject": 0.03580022178986453,
+   "budget": {
+    "nominal_alerts_per_8h": 31.337851153979987,
+    "calibrated95_alerts_per_8h": 93.4903218992847,
+    "target_alerts_per_8h": 3.0,
+    "alpha_required": 0.0007911642795138889,
+    "calibration_units_required": 1263,
+    "within_budget": false,
+    "advice": "1단계는 화면 기록만 하고 출동은 2단계(점검 요청)로 한정하거나, α≈0.079%에 맞춰 보정 단위 1263개(정상 수집 약 2.7시간)를 모은다. 현재 구현의 α 선택지는 1·3·5%다"
+   },
+   "stdout_tail": "통과 정상 알림 단위 수가 보정 조건부 Beta-Binomial 95백분위 이하: 2 (한도 2 · 정상에서 거부할 확률 3.6% · 실제 알림률이 명목의 2·3배일 때 거부할 확률(검정력) 8%·19%)\n통과 고장 주입 cur_noise 0.2 2초 안 탐지율 ≥ 90%: 1.0\n통과 고장 주입 cur_offset 0.4 2초 안 탐지율 ≥ 90%: 1.0\n통과 고장 주입 vib_noise 4 2초 안 탐지율 ≥ 90%: 1.0\n교대 8시간 1단계 알림: 명목 31.3건 · 보정 95% 93.5건 · 예산 3건 초과 → 1단계는 화면 기록만 하고 출동은 2단계(점검 요청)로 한정하거나, α≈0.079%에 맞춰 보정 단위 1263개(정상 수집 약 2.7시간)를 모은다. 현재 구현의 α 선택지는 1·3·5%다\n수락 · 모델 저장 /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge04_c2r2_950t77o2/site.json · 보고서 /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge04_c2r2_950t77o2/site_report.json\n"
+  },
+  "outcomes": {
+   "returncode": 0,
+   "cases": 18,
+   "unconfirmed": 9,
+   "excluded": {
+    "cases": 18,
+    "unconfirmed_cases": 9,
+    "rows_removed": 369,
+    "rows_kept": 15541
+   },
+   "rows_removed_independent": 369,
+   "passed": true
+  },
+  "refuse_cal50": {
+   "returncode": 2,
+   "model_exists": false,
+   "stderr": "재보정 중단: α=0.01에서 경보가 나려면 보정 단위가 99개 이상이어야 한다(요청 50개)"
+  }
+ },
+ "U7_simulate": {
+  "returncode": 0,
+  "seconds": 6.9,
+  "rows": 282,
+  "first_alert_rows_eq_batch": true,
+  "escalation_rows_eq_batch": true,
+  "events": {
+   "첫 알림": 6,
+   "격상": 5
+  },
+  "compute_ms_p95": 17.9869375006092,
+  "stderr_tail": "282행 · 첫 알림 6 · 격상 5 · 수집 오류 0 · 계산 p95 18.0 ms · 경과 5.3초",
+  "docstring_figure_path_exists": false
+ },
+ "U4_expected_effect": {
+  "rows": 15,
+  "formula_all_match": true,
+  "zero_burden_rows": [
+   {
+    "alert_scenario": "관측",
+    "policy": "2단계만 출동",
+    "case": "비관",
+    "level2_per_8h": 0.0,
+    "breakeven_loss_ratio": 0.0
+   },
+   {
+    "alert_scenario": "관측",
+    "policy": "2단계만 출동",
+    "case": "중간",
+    "level2_per_8h": 0.0,
+    "breakeven_loss_ratio": 0.0
+   },
+   {
+    "alert_scenario": "관측",
+    "policy": "2단계만 출동",
+    "case": "낙관",
+    "level2_per_8h": 0.0,
+    "breakeven_loss_ratio": 0.0
+   }
+  ],
+  "upper_L2_only": [
+   {
+    "case": "비관",
+    "level2_per_8h": 59.08515450685132,
+    "inspection_hours_per_shift": 29.54257725342566,
+    "shift_share": 3.6928221566782073,
+    "breakeven_loss_ratio": 10351.092408870732
+   },
+   {
+    "case": "중간",
+    "level2_per_8h": 59.08515450685132,
+    "inspection_hours_per_shift": 19.69505150228377,
+    "shift_share": 2.4618814377854714,
+    "breakeven_loss_ratio": 473.22719330004435
+   },
+   {
+    "case": "낙관",
+    "level2_per_8h": 59.08515450685132,
+    "inspection_hours_per_shift": 9.847525751141886,
+    "shift_share": 1.2309407188927357,
+    "breakeven_loss_ratio": 76.93379493079597
+   }
+  ],
+  "detect_basis_for_all_policies": [
+   "E1식 주입 2단계 2초 탐지율 최솟값(B α1%)",
+   "대회 21/21 관측",
+   "대회 21/21의 95% 하한"
+  ]
+ },
+ "U8_decision_table": {
+  "csv_eq_source": true,
+  "actions_all_in_table": true,
+  "checklist_nonempty": true,
+  "fm_ids_exist": true,
+  "guidebook": {
+   "pdf7": {
+    "printed_page": [
+     "6"
+    ],
+    "gear_type": true,
+    "gear_wear": false,
+    "output_pressure": false,
+    "defect": false,
+    "downtime_2_3_days": false,
+    "noise_by_operator": false
+   },
+   "pdf8": {
+    "printed_page": [
+     "7"
+    ],
+    "gear_type": false,
+    "gear_wear": true,
+    "output_pressure": true,
+    "defect": true,
+    "downtime_2_3_days": true,
+    "noise_by_operator": true
+   }
+  }
+ },
+ "U3_operations_refs": {
+  "refs": {
+   "../analysis/press_evidence/failure_mode_map.csv": true,
+   "docs/fig_architecture.png": true,
+   "docs/fig_operation_flow.png": true,
+   "monitor.py": true,
+   "outputs/alert_budget_design_v2.csv": true,
+   "outputs/alert_levels_injection_v2.csv": true,
+   "outputs/alert_levels_v2.csv": true,
+   "outputs/console/console_evidence_v2.png": true,
+   "outputs/console/console_workspace_v2.png": true,
+   "outputs/decision_table_v2.csv": true,
+   "outputs/expected_effect_v2.csv": true,
+   "outputs/monitor_gain_v2.csv": true,
+   "outputs/quality_windows_v2.csv": true,
+   "outputs/workload_v2.csv": true,
+   "serve.py": true,
+   "simulate.py": true,
+   "site_report.json": false,
+   "test_simulate.py": true,
+   "tools/capture_console.py": true
+  },
+  "all_exist": false,
+  "figures": {
+   "docs/fig_operation_flow.png": "5913db10f60bdbda57e780b02dbd93ff871f437cae4f1822817e2705e24b8107",
+   "docs/fig_architecture.png": "6e612b5a66ba46168c07527594e7316b4ca46fea2f31d30d2afe0d2c5da5a695"
+  },
+  "console_capture": {
+   "console_workspace_v2.png": {
+    "url": "/?split=B&alpha=0.01",
+    "size": [
+     1600,
+     1500
+    ],
+    "sha256": "40bc2bd6fb18a7dc1bbd07ccee62ad031a5cde66db5fb2b79484906ceb4f05bc"
+   },
+   "console_evidence_v2.png": {
+    "url": "/?split=B&alpha=0.01&tab=evidence",
+    "size": [
+     1600,
+     7400
+    ],
+    "sha256": "738de0855e4e9cb7e6d47175cb8830d8287d0cbb1a0fd18cdf04b18e8bfb9dcf"
+   }
+  },
+  "capture_hash_ok": {
+   "console_workspace_v2.png": true,
+   "console_evidence_v2.png": true
+  },
+  "capture_web_code_current": {
+   "index.html": true,
+   "app.js": true,
+   "style.css": true
+  }
+ },
+ "console_api": {
+  "port": 49802,
+  "index": {
+   "status": 200,
+   "has_levels": true,
+   "has_outcome_form": true,
+   "has_simulate": true,
+   "method_note_upper": true
+  },
+  "overview": {
+   "status": 200,
+   "keys": [
+    "alert_unit_rows",
+    "audit",
+    "benchmark",
+    "conditions",
+    "decision_table",
+    "escalation_alarm_rows",
+    "expected_effect",
+    "external",
+    "label_free",
+    "level_injection",
+    "level_names",
+    "levels",
+    "metrics",
+    "monitor_gain",
+    "outcome_columns",
+    "outcome_labels",
+    "outcomes",
+    "probability",
+    "probability_conversion",
+    "quality_actions",
+    "quality_windows",
+    "robustness",
+    "workload"
+   ],
+   "levels_rows": 42,
+   "quality_windows_rows": 3,
+   "monitor_gain_rows": 12,
+   "expected_effect_rows": 15,
+   "decision_checklist": true,
+   "outcome_columns": [
+    "confirmed_at",
+    "owner",
+    "outcome",
+    "measure",
+    "status"
+   ],
+   "audit_all_ok": true
+  },
+  "mixed_A": {
+   "status": 200,
+   "seconds": 1.37,
+   "level_counts": {
+    "주의": 0,
+    "점검 요청": 21
+   },
+   "cases": 21,
+   "notifications": 21,
+   "fa_ranks": [],
+   "fa_max_probability": [],
+   "abnormal_max_probability": [
+    0.55
+   ],
+   "abnormal_suspect_open": 21,
+   "fa_suspect_seconds": []
+  },
+  "mixed_B": {
+   "status": 200,
+   "seconds": 1.78,
+   "level_counts": {
+    "주의": 3,
+    "점검 요청": 21
+   },
+   "cases": 24,
+   "notifications": 24,
+   "fa_ranks": [
+    22,
+    23,
+    24
+   ],
+   "fa_max_probability": [
+    0.55,
+    0.55,
+    0.55
+   ],
+   "abnormal_max_probability": [
+    0.55
+   ],
+   "abnormal_suspect_open": 21,
+   "fa_suspect_seconds": [
+    15.208,
+    15.533,
+    10.513
+   ]
+  },
+  "mixed_B_prior0.001": {
+   "level_counts": {
+    "주의": 3,
+    "점검 요청": 21
+   },
+   "fa_max_probability": [
+    0.108,
+    0.108,
+    0.108
+   ],
+   "abnormal_max_probability": [
+    0.108
+   ]
+  },
+  "upload_continuous": {
+   "status": 200,
+   "rows": 6697,
+   "segments": 1,
+   "cases": 9,
+   "distinct_record_ids": 1,
+   "level_counts": {
+    "주의": 0,
+    "점검 요청": 9
+   },
+   "cases_first_rows": [
+    39,
+    206,
+    709,
+    1237,
+    2007,
+    2374,
+    2804,
+    3561,
+    5405
+   ],
+   "cases_alarm_rows": [
+    19,
+    69,
+    76,
+    128,
+    40,
+    46,
+    105,
+    272,
+    720
+   ]
+  },
+  "server_stopped": true
+ },
+ "elapsed_s": 120.8
+}

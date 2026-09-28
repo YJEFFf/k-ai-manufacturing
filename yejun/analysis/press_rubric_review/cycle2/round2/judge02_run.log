@@ -1,0 +1,78 @@
+[    0.4s] HEAD f5679ca 기준 e9ed90f → /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r2_verify_28vzia6r
+[    1.0s] 원본 확인 True 정상 구간 600 이상 구간 21
+[    1.0s] K1 주 수치 재계산
+[    4.3s] A [(0.01, 556, 0, 44, 0.961938, True, True), (0.03, 569, 1, 31, 0.97265, True, True), (0.05, 569, 1, 31, 0.97265, True, True)] 저장 모델 해시 일치 True
+[    7.4s] B [(0.01, 569, 3, 31, 0.97099, True, True), (0.03, 569, 7, 31, 0.967687, True, True), (0.05, 569, 11, 31, 0.964407, True, True)] 저장 모델 해시 일치 True
+[    7.4s] K2 이상 확률 층
+[   12.5s] A 배포=독립 True LOO=독립 True Brier(21겹) 0.00723 ECE 0.00749 문턱 LR 42.759 블록 {'fitted_p_at_threshold': 0.8666666671689142, 'pi_fit': 0.13195513525401364, 'between_thresholds': [4.417925848290822, 4.683399240858632], 'left_block': {'fitted_p': 0.8666666666666667, 'lr': 42.75916666666668, 'score_range': [3.549767891413232, 4.417925848290822], 'normal_cal_rows': 2, 'abnormal_rows': 13}, 'right_block': {'fitted_p': 1.0, 'lr': None, 'score_range': [4.683399240858632, 62.03744230345713], 'normal_cal_rows': 0, 'abnormal_rows': 556}, 'rows_within_0_25_of_threshold': {'normal_cal': 1, 'abnormal': 2}, 'normal_cal_rows_above_threshold_minus_0_5': 2} LR<1 경보행 {'normal_alarm_rows': 0, 'normal_alarm_rows_lr_lt_1': 0, 'abnormal_alarm_rows': 556, 'abnormal_alarm_rows_lr_lt_1': 0, 'abnormal_alarm_rows_lr_lt_1_deploy': 0, 'min_lr_alarm_rows': 108.8926909580834, 'min_p_pi1_alarm_rows': 0.5237927820177142, 'alarm_rows_lr_below_10': 0, 'alarm_rows_total': 556, 'normal_alarm_rows_lr': []}
+[   12.5s] A 예측 파일 {'columns': ['likelihood_ratio', 'anomaly_probability', 'probability_prior', 'record_likelihood_ratio', 'record_probability', 'probability_source'], 'rows': 4690, 'f1': 0.9619377162629758, 'abnormal_lr_equals_my_oof': True, 'normal_lr_equals_my_deploy': True, 'prob_equals_posterior_pi1': True, 'prior_values': [0.01], 'sources': {'abnormal': ['leave_one_record_out'], 'normal_test': ['deployment_calibrator']}, 'alarm_equals_without_probability': True, 'my_file_sha256': 'd01201af449699416c0c890e5bd8ba53e9bd6df0c1f11a0f0d45008f860b723f', 'abnormal_prob_pi1_max': 0.5499999999999999, 'abnormal_prob_pi1_median': 0.5499999999999999, 'abnormal_rows_lr_at_cap': 555, 'normal_rows_prob_pi1_max': 0.3016324635091206}
+[   12.5s] A 파일 확률(π=1%) 채점 {'brier': 0.0321, 'log_loss': 0.1255, 'ece': 0.0615, 'auroc': 0.9694, 'ap': 0.9704} 대회 비율 환산 {'brier': 0.0072, 'log_loss': 0.0458, 'ece': 0.0075, 'auroc': 0.9694, 'ap': 0.9704}
+[   19.0s] B 배포=독립 True LOO=독립 True Brier(21겹) 0.00559 ECE 0.0066 문턱 LR 0.698 블록 {'fitted_p_at_threshold': 0.10000002199606829, 'pi_fit': 0.13729977116704806, 'between_thresholds': [3.5199003630751613, 3.5608167697166433], 'left_block': {'fitted_p': 0.1, 'lr': 0.6981481481481482, 'score_range': [2.8961414111000883, 3.5199003630751613], 'normal_cal_rows': 9, 'abnormal_rows': 1}, 'right_block': {'fitted_p': 1.0, 'lr': None, 'score_range': [3.5608167697166433, 60.298741917918406], 'normal_cal_rows': 0, 'abnormal_rows': 569}, 'rows_within_0_25_of_threshold': {'normal_cal': 3, 'abnormal': 2}, 'normal_cal_rows_above_threshold_minus_0_5': 7} LR<1 경보행 {'normal_alarm_rows': 3, 'normal_alarm_rows_lr_lt_1': 0, 'abnormal_alarm_rows': 569, 'abnormal_alarm_rows_lr_lt_1': 0, 'abnormal_alarm_rows_lr_lt_1_deploy': 0, 'min_lr_alarm_rows': 2.4230148757371968, 'min_p_pi1_alarm_rows': 0.023890187830699555, 'alarm_rows_lr_below_10': 1, 'alarm_rows_total': 572, 'normal_alarm_rows_lr': [121.0, 121.0, 121.0]}
+[   19.0s] B 예측 파일 {'columns': ['likelihood_ratio', 'anomaly_probability', 'probability_prior', 'record_likelihood_ratio', 'record_probability', 'probability_source'], 'rows': 6697, 'f1': 0.9709897610921502, 'abnormal_lr_equals_my_oof': True, 'normal_lr_equals_my_deploy': True, 'prob_equals_posterior_pi1': True, 'prior_values': [0.01], 'sources': {'abnormal': ['leave_one_record_out'], 'normal_test': ['deployment_calibrator']}, 'alarm_equals_without_probability': True, 'my_file_sha256': 'e042763e2aeac168fb76c08001f789cf4cfdc2477383f37aa5f394f469c3b980', 'abnormal_prob_pi1_max': 0.5499999999999999, 'abnormal_prob_pi1_median': 0.5499999999999999, 'abnormal_rows_lr_at_cap': 568, 'normal_rows_prob_pi1_max': 0.5499999999999999}
+[   19.0s] B 파일 확률(π=1%) 채점 {'brier': 0.0221, 'log_loss': 0.0872, 'ece': 0.0423, 'auroc': 0.9636, 'ap': 0.9572} 대회 비율 환산 {'brier': 0.0056, 'log_loss': 0.0371, 'ece': 0.0066, 'auroc': 0.9636, 'ap': 0.9572}
+[   19.0s] K3 지도학습 기준선
+[   26.9s] A 팀 특징 부스팅 21겹 94 커밋 94 문턱 범위 (0.247797, 0.996937) 겹별 미탐 [0, 2, 47, 5, 2, 1, 0, 0, 2, 0, 0, 1, 1, 3, 1, 8, 14, 0, 3, 2, 2] 6s
+[   29.5s] A judge_features:logistic:balanced (46, 0, 0.9601, 0, 21)
+[   30.1s] A judge_features:logistic:unweighted (42, 0, 0.9637, 0, 21)
+[   34.3s] A judge_features:hgb:balanced (32, 2, 0.9709, 2, 21)
+[   39.0s] A judge_features:hgb:unweighted (27, 2, 0.9753, 2, 21)
+[   48.7s] B 팀 특징 부스팅 21겹 30 커밋 30 문턱 범위 (0.246813, 0.982404) 겹별 미탐 [0, 2, 2, 5, 2, 0, 0, 0, 2, 0, 0, 0, 1, 2, 1, 3, 1, 1, 3, 2, 3] 7s
+[   51.8s] B judge_features:logistic:balanced (49, 0, 0.9574, 0, 21)
+[   52.4s] B judge_features:logistic:unweighted (42, 0, 0.9637, 0, 21)
+[   57.9s] B judge_features:hgb:balanced (38, 0, 0.9673, 0, 21)
+[   63.7s] B judge_features:hgb:unweighted (30, 1, 0.9735, 1, 21)
+[   63.7s] K4 같은 특징 대안·결합 규칙
+[   66.1s] A 불일치 []
+[   66.1s] A   candidate  tp  fp  fn  normal_alerted  detected  no_evidence_abn
+         v2 556   0  44               0        21                0
+ 5NN(v2 성분) 564   0  36               0        21                8
+  IF(v2 성분) 480   0 120               0        20                3
+     fisher 568   0  32               0        21               12
+   stouffer 561   0  39               0        21               10
+        sum 560   0  40               0        21                4
+       mean 558   0  42               0        21                8
+early+AR(1) 522   0  78               0        21                0
+early+AR(3) 550   0  50               0        21                9
+early+AR(4) 543   0  57               0        21               10
+[   68.6s] B 불일치 []
+[   68.6s] B   candidate  tp  fp  fn  normal_alerted  detected  no_evidence_abn
+         v2 569   3  31               3        21                0
+ 5NN(v2 성분) 571   3  29               3        21                2
+  IF(v2 성분) 483   0 117               0        20                1
+     fisher 569   1  31               1        21                1
+   stouffer 561   0  39               0        21                1
+        sum 561   2  39               2        21                1
+       mean 558   0  42               0        21                0
+early+AR(1) 537   3  63               3        21                0
+early+AR(3) 560   3  40               3        21                6
+early+AR(4) 554   4  46               4        21                6
+[   68.6s] K5 결합 규칙 대안의 주입 전이
+[   69.1s] A none 0.0 {'level': 0.0, 'v2_fmax': 0.0, 'fisher': 0.0, 'stouffer': 0.0, 'sum': 0.0, '5nn': 0.0, 'committed_v2': 0.0}
+[   71.3s] A cur_noise 0.1 {'level': 0.1, 'v2_fmax': 0.968, 'fisher': 0.992, 'stouffer': 0.947, 'sum': 0.992, '5nn': 0.997, 'committed_v2': 0.968}
+[   73.5s] A cur_noise 0.2 {'level': 0.2, 'v2_fmax': 1.0, 'fisher': 1.0, 'stouffer': 1.0, 'sum': 1.0, '5nn': 1.0, 'committed_v2': 1.0}
+[   74.0s] A cur_offset 0.2 {'level': 0.2, 'v2_fmax': 0.4, 'fisher': 0.587, 'stouffer': 0.24, 'sum': 0.587, '5nn': 0.733, 'committed_v2': 0.4}
+[   74.4s] A cur_offset 0.4 {'level': 0.4, 'v2_fmax': 1.0, 'fisher': 1.0, 'stouffer': 1.0, 'sum': 1.0, '5nn': 1.0, 'committed_v2': 1.0}
+[   76.7s] A vib_noise 2.0 {'level': 2.0, 'v2_fmax': 0.765, 'fisher': 0.867, 'stouffer': 0.419, 'sum': 0.867, '5nn': 0.899, 'committed_v2': 0.765}
+[   78.7s] A vib_noise 4.0 {'level': 4.0, 'v2_fmax': 0.997, 'fisher': 1.0, 'stouffer': 0.989, 'sum': 1.0, '5nn': 1.0, 'committed_v2': 0.997}
+[   80.6s] A vib_shock 4.0 {'level': 4.0, 'v2_fmax': 0.293, 'fisher': 0.533, 'stouffer': 0.125, 'sum': 0.533, '5nn': 0.523, 'committed_v2': 0.293}
+[   82.4s] A vib_shock 6.0 {'level': 6.0, 'v2_fmax': 0.995, 'fisher': 1.0, 'stouffer': 0.499, 'sum': 1.0, '5nn': 1.0, 'committed_v2': 0.995}
+[   84.5s] A vib_shock 8.0 {'level': 8.0, 'v2_fmax': 1.0, 'fisher': 1.0, 'stouffer': 0.867, 'sum': 1.0, '5nn': 1.0, 'committed_v2': 1.0}
+[   85.2s] B none 0.0 {'level': 0.0, 'v2_fmax': 0.009, 'fisher': 0.0, 'stouffer': 0.0, 'sum': 0.009, '5nn': 0.009, 'committed_v2': 0.009}
+[   88.7s] B cur_noise 0.1 {'level': 0.1, 'v2_fmax': 0.969, 'fisher': 0.966, 'stouffer': 0.917, 'sum': 0.987, '5nn': 0.991, 'committed_v2': 0.969}
+[   92.7s] B cur_noise 0.2 {'level': 0.2, 'v2_fmax': 1.0, 'fisher': 1.0, 'stouffer': 1.0, 'sum': 1.0, '5nn': 1.0, 'committed_v2': 1.0}
+[   93.5s] B cur_offset 0.2 {'level': 0.2, 'v2_fmax': 0.523, 'fisher': 0.586, 'stouffer': 0.234, 'sum': 0.694, '5nn': 0.757, 'committed_v2': 0.523}
+[   94.2s] B cur_offset 0.4 {'level': 0.4, 'v2_fmax': 1.0, 'fisher': 1.0, 'stouffer': 1.0, 'sum': 1.0, '5nn': 1.0, 'committed_v2': 1.0}
+[   98.1s] B vib_noise 2.0 {'level': 2.0, 'v2_fmax': 0.95, 'fisher': 0.895, 'stouffer': 0.422, 'sum': 0.946, '5nn': 0.964, 'committed_v2': 0.95}
+[  101.7s] B vib_noise 4.0 {'level': 4.0, 'v2_fmax': 1.0, 'fisher': 1.0, 'stouffer': 0.964, 'sum': 1.0, '5nn': 1.0, 'committed_v2': 1.0}
+[  105.2s] B vib_shock 4.0 {'level': 4.0, 'v2_fmax': 0.87, 'fisher': 0.67, 'stouffer': 0.153, 'sum': 0.778, '5nn': 0.796, 'committed_v2': 0.87}
+[  108.5s] B vib_shock 6.0 {'level': 6.0, 'v2_fmax': 0.996, 'fisher': 0.993, 'stouffer': 0.476, 'sum': 0.996, '5nn': 0.996, 'committed_v2': 0.996}
+[  112.0s] B vib_shock 8.0 {'level': 8.0, 'v2_fmax': 1.0, 'fisher': 1.0, 'stouffer': 0.836, 'sum': 1.0, '5nn': 1.0, 'committed_v2': 1.0}
+[  112.0s] K6 선정 근거
+[  142.2s] 후보 39 패턴 31 정상 조건 통과 16 중첩 {'advance:early6_ar2': 21} {'A': 44, 'B': 31}
+[  142.2s] 짝 비교 {'A': {'better': 18, 'equal': 3, 'worse': 0, 'sign_p': 3.814697265625e-06, 'delta_f1': 0.05185597239376594, 'delta_f1_ci': [0.03651144041553089, 0.07422145084611378], 'fn_v1': 99, 'fn_v2': 44}, 'B': {'better': 16, 'equal': 5, 'worse': 0, 'sign_p': 1.52587890625e-05, 'delta_f1': 0.05066746923897203, 'delta_f1_ci': [0.034884307376404966, 0.07382699296741861], 'fn_v1': 86, 'fn_v2': 31}}
+[  142.2s] 장부 합 65 {'v1 비교': (10, 10, True), 'v1 창 민감도': (15, 15, True), 'v1 절제': (5, 5, True), 'v1 지속성': (3, 3, True), 'v1 진폭 정규화': (3, 3, True), 'improvement': (8, 8, True), 'advance(v2 선정)': (5, 5, True), 'early': (6, 6, True), 'v2 절제': (5, 5, True), '지도학습 기준선': (4, 4, True), '가이드북 LSTM-AE': (1, 1, True)}
+[  142.2s] K7 통합 비교표
+[  143.0s] A {'v2_auroc': 0.9776, 'v2_ap': 0.9705, 'v1_auroc': 0.9392, 'v1_ap': 0.9126, 'v2_oracle': 0.9727, 'v1_oracle': 0.9269} 커밋 {'v2_auroc': 0.9776, 'v2_ap': 0.9705, 'v1_auroc': 0.9392, 'v1_ap': 0.9126, 'v2_oracle': 0.9727, 'v1_oracle': 0.9269, 'v2_record_f1': 1.0, 'v1_record_f1': 1.0}
+[  144.2s] B {'v2_auroc': 0.9759, 'v2_ap': 0.9659, 'v1_auroc': 0.9342, 'v1_ap': 0.9016, 'v2_oracle': 0.971, 'v1_oracle': 0.9203} 커밋 {'v2_auroc': 0.9759, 'v2_ap': 0.9659, 'v1_auroc': 0.9342, 'v1_ap': 0.9016, 'v2_oracle': 0.971, 'v1_oracle': 0.9203, 'v2_record_f1': 0.9333, 'v1_record_f1': 0.9333}
+[  144.2s] 완료 → judge02_checks.json
+exit 0

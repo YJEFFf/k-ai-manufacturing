@@ -1,0 +1,82 @@
+P7 시작 2026-09-28 14:18:24 기준=f5679ca
+STEP P7a_gate_python3.13 rc=1 wall=0s maxrss_mb=29 load_start=11.98 load_end=11.98
+---- P7a_gate_python3.13 stdout(끝 3줄)
+---- P7a_gate_python3.13 stderr(끝 3줄, 시간 측정 제외)
+파이썬 3.13.13: 이 패키지는 3.10~3.12에서 실행·검증했다(권장 3.12, environment.yml). 3.13 이상은 고정한 numpy 1.26.4 설치 파일이 없다.
+STEP P7a_gate_python3.14 rc=1 wall=1s maxrss_mb=22 load_start=11.98 load_end=11.98
+---- P7a_gate_python3.14 stdout(끝 3줄)
+---- P7a_gate_python3.14 stderr(끝 3줄, 시간 측정 제외)
+파이썬 3.14.6: 이 패키지는 3.10~3.12에서 실행·검증했다(권장 3.12, environment.yml). 3.13 이상은 고정한 numpy 1.26.4 설치 파일이 없다.
+STEP P7b0_uv_py310 rc=0 wall=0s maxrss_mb=29 load_start=11.98 load_end=11.98
+---- P7b0_uv_py310 stdout(끝 2줄)
+---- P7b0_uv_py310 stderr(끝 2줄, 시간 측정 제외)
+Installed Python 3.10.20 in 225ms
+ + cpython-3.10.20-macos-aarch64-none (python3.10)
+STEP P7b1_venv310 rc=0 wall=1s maxrss_mb=29 load_start=11.98 load_end=11.98
+---- P7b1_venv310 stdout(끝 2줄)
+STEP P7b2_install310 rc=1 wall=2s maxrss_mb=59 load_start=11.98 load_end=11.98
+---- P7b2_install310 stdout(끝 6줄)
+---- P7b2_install310 stderr(끝 6줄, 시간 측정 제외)
+  × No solution found when resolving dependencies:
+  ╰─▶ Because the current Python version (3.10.20) does not satisfy
+      Python>=3.11 and scikit-learn==1.8.0 depends on Python>=3.11, we can
+      conclude that scikit-learn==1.8.0 cannot be used.
+      And because you require scikit-learn==1.8.0, we can conclude that your
+      requirements are unsatisfiable.
+STEP P7b3_install310_lock rc=1 wall=0s maxrss_mb=80 load_start=11.98 load_end=11.98
+---- P7b3_install310_lock stdout(끝 6줄)
+---- P7b3_install310_lock stderr(끝 6줄, 시간 측정 제외)
+  × No solution found when resolving dependencies:
+  ╰─▶ Because the current Python version (3.10.20) does not satisfy
+      Python>=3.11 and contourpy==1.3.3 depends on Python>=3.11, we can
+      conclude that contourpy==1.3.3 cannot be used.
+      And because you require contourpy==1.3.3, we can conclude that your
+      requirements are unsatisfiable.
+STEP P7c1_venv311 rc=0 wall=0s maxrss_mb=29 load_start=11.98 load_end=11.42
+---- P7c1_venv311 stdout(끝 2줄)
+STEP P7c2_install311_lock rc=0 wall=21s maxrss_mb=88 load_start=11.42 load_end=10.14
+---- P7c2_install311_lock stdout(끝 6줄)
+---- 3.11 설치 목록
+Using Python 3.11.15 environment at: /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P7_pyver/venv311 cloudpickle==3.1.2 contourpy==1.3.3 cycler==0.12.1 fonttools==4.66.0 iniconfig==2.3.0 joblib==1.6.0 kiwisolver==1.5.1 matplotlib==3.9.2 numpy==1.26.4 packaging==26.3 pandas==2.3.3 pillow==12.3.0 pluggy==1.6.0 pygments==2.21.0 pyparsing==3.3.3 pytest==9.0.3 python-dateutil==2.9.0.post0 pytz==2026.4 scikit-learn==1.8.0 scipy==1.13.1 six==1.17.0 threadpoolctl==3.7.0 tzdata==2026.4 
+STEP P7c3_reproduce311 rc=0 wall=963s maxrss_mb=731 load_start=10.14 load_end=25.55
+---- P7c3_reproduce311 stdout(끝 20줄)
+[7/15] 진단 표(press_evidence) …
+      통과 · 13.7초 ·     B 12 0.099174 0.099174      180               11  0.061111       0.099126          False
+[8/15] 진단 보강 표·그림 …
+      통과 · 22.2초 · 완료 18.1초, 표 16개, 그림 5장
+[9/15] 지도학습 기준선(press_supervised) …
+      통과 · 233.5초 · done 229.8 s
+[10/15] 모델 선정 근거(press_selection) …
+      통과 · 138.8초 · 내부 점검: 통과 · 134.8 s
+[11/15] press_evidence 동결값 비교 …
+      통과 · 2.7초 · 통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)
+[12/15] press_supervised 동결값 비교 …
+      통과 · 2.3초 · 통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+[13/15] press_advance 동결값 비교 …
+      통과 · 2.4초 · 통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+[14/15] press_selection 동결값 비교 …
+      통과 · 2.4초 · 통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)
+[15/15] 보완 실험 E1~E3 동결값 비교 …
+      통과 · 6.4초 · 통과: 무결성·기대값 비교 E1, E3 · 건너뜀 E2(외부 입력 없음)
+
+15/15 단계 통과 · 889.3초 · 요약 press_guard/outputs/reproduce_summary.json
+== reproduce_summary: mode=quick python=3.11.15 15/15 통과 · 실패 0 · 889.3초
+  [01] rc=0    17.7s  v1 선행(주 모델·기준모델·행별 예측)  | }
+  [02] rc=0     1.2s  v1 동결값 비교  | 16/16 통과 (1~2단계 부분 비교, 필수 집계 9개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 0fd0
+  [03] rc=0    36.5s  v2 학습·시간순 5회  |     B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              
+  [04] rc=0   138.0s  v2 분석  | }
+  [05] rc=0   267.8s  v2 실행 검증(audit)  | 16/16 통과 → /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/
+  [06] rc=0     3.6s  v2 동결값 비교  | 48/48 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64b
+  [07] rc=0    13.7s  진단 표(press_evidence)  |     B 12 0.099174 0.099174      180               11  0.061111       0.099126          False
+  [08] rc=0    22.2s  진단 보강 표·그림  | 완료 18.1초, 표 16개, 그림 5장
+  [09] rc=0   233.5s  지도학습 기준선(press_supervised)  | done 229.8 s
+  [10] rc=0   138.8s  모델 선정 근거(press_selection)  | 내부 점검: 통과 · 134.8 s
+  [11] rc=0     2.7s  press_evidence 동결값 비교  | 통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)
+  [12] rc=0     2.3s  press_supervised 동결값 비교  | 통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+  [13] rc=0     2.4s  press_advance 동결값 비교  | 통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+  [14] rc=0     2.4s  press_selection 동결값 비교  | 통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)
+  [15] rc=0     6.4s  보완 실험 E1~E3 동결값 비교  | 통과: 무결성·기대값 비교 E1, E3 · 건너뜀 E2(외부 입력 없음)
+---- 3.11 결과 대 커밋(3.12) 동결 해시
+  저장 모델·보정기: {'guard_A.json': True, 'guard_B.json': True, 'probability_A.json': True, 'probability_B.json': True}
+  행 단위 예측: {'predictions_normal_A.csv': True, 'predictions_normal_B.csv': True, 'predictions_abnormal_A.csv': True, 'predictions_abnormal_B.csv': True, 'test_predictions_A.csv': True, 'test_predictions_B.csv': True}
+P7 끝 2026-09-28 14:34:53

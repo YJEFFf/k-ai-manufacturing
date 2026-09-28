@@ -1,0 +1,78 @@
+{
+ "rows": [
+  {
+   "split": "A",
+   "family": "vib_noise",
+   "level": 2.0,
+   "reps": 5,
+   "units": 75,
+   "level1_detect_2s": 0.7653333333333333,
+   "level2_detect_2s": 0.384,
+   "csv_level1": 0.7653333333333333,
+   "csv_level2": 0.384,
+   "match": true
+  },
+  {
+   "split": "B",
+   "family": "vib_noise",
+   "level": 2.0,
+   "reps": 5,
+   "units": 111,
+   "level1_detect_2s": 0.9495495495495495,
+   "level2_detect_2s": 0.7891891891891892,
+   "csv_level1": 0.9495495495495496,
+   "csv_level2": 0.7891891891891892,
+   "match": true
+  },
+  {
+   "split": "A",
+   "family": "cur_offset",
+   "level": 0.2,
+   "reps": 1,
+   "units": 75,
+   "level1_detect_2s": 0.4,
+   "level2_detect_2s": 0.22666666666666666,
+   "csv_level1": 0.4,
+   "csv_level2": 0.2266666666666666,
+   "match": true
+  },
+  {
+   "split": "B",
+   "family": "cur_offset",
+   "level": 0.2,
+   "reps": 1,
+   "units": 111,
+   "level1_detect_2s": 0.5225225225225225,
+   "level2_detect_2s": 0.2972972972972973,
+   "csv_level1": 0.5225225225225225,
+   "csv_level2": 0.2972972972972973,
+   "match": true
+  },
+  {
+   "split": "B",
+   "family": "cur_noise",
+   "level": 0.1,
+   "reps": 5,
+   "units": 111,
+   "level1_detect_2s": 0.9693693693693693,
+   "level2_detect_2s": 0.9333333333333333,
+   "csv_level1": 0.9693693693693692,
+   "csv_level2": 0.9333333333333332,
+   "match": true
+  },
+  {
+   "split": "A",
+   "family": "cur_noise",
+   "level": 0.1,
+   "reps": 5,
+   "units": 75,
+   "level1_detect_2s": 0.968,
+   "level2_detect_2s": 0.904,
+   "csv_level1": 0.968,
+   "csv_level2": 0.904,
+   "match": true
+  }
+ ],
+ "all_match": true,
+ "seconds": 16.0
+}

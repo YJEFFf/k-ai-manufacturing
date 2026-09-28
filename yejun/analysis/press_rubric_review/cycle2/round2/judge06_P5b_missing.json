@@ -1,0 +1,110 @@
+{
+ "commit": "f5679ca",
+ "listed_files": 379,
+ "recorded_dependencies": 75,
+ "missing_committed_dependencies": {
+  "analysis/press_dayshift/v2_current_scale.csv": [
+   "press_guard analysis_summary.external_inputs"
+  ],
+  "analysis/press_early/metrics.csv": [
+   "press_selection/manifest.json:dependencies_sha256"
+  ],
+  "analysis/press_early/run_experiment.py": [
+   "press_selection/manifest.json:dependencies_sha256"
+  ],
+  "analysis/press_external/metrics.csv": [
+   "press_supplement/e2_manifest.json:sources"
+  ],
+  "analysis/press_external/partitions.csv": [
+   "press_supplement/e2_manifest.json:sources"
+  ],
+  "analysis/press_improvement/candidate_metrics.csv": [
+   "press_selection/manifest.json:dependencies_sha256"
+  ],
+  "analysis/press_improvement/run_experiment.py": [
+   "press_selection/manifest.json:dependencies_sha256"
+  ],
+  "press_submission/outputs/ablation.csv": [
+   "press_selection/manifest.json:dependencies_sha256"
+  ],
+  "press_submission/outputs/diagnosis.md": [
+   "press_evidence/diagnostics_manifest.json:cited"
+  ],
+  "press_submission/outputs/label_bypass.csv": [
+   "press_evidence/diagnostics_manifest.json:cited"
+  ],
+  "press_submission/outputs/load_normalization.csv": [
+   "press_selection/manifest.json:dependencies_sha256"
+  ],
+  "press_submission/outputs/load_normalization_meta.csv": [
+   "press_evidence/diagnostics_manifest.json:cited",
+   "press_evidence/diagnostics_manifest.json:sources"
+  ],
+  "press_submission/outputs/lstm_guidebook_reproduction.json": [
+   "press_selection/manifest.json:dependencies_sha256"
+  ],
+  "press_submission/outputs/model_comparison_all.csv": [
+   "press_guard manifest.analysis.sources",
+   "press_selection/manifest.json:dependencies_sha256"
+  ],
+  "press_submission/outputs/persistence.csv": [
+   "press_selection/manifest.json:dependencies_sha256"
+  ],
+  "press_submission/outputs/sensitivity.csv": [
+   "press_selection/manifest.json:dependencies_sha256"
+  ],
+  "press_submission/outputs/splits.csv": [
+   "press_evidence/diagnostics_manifest.json:cited"
+  ]
+ },
+ "excluded_by_regex_in_expected": [
+  "press_guard/outputs/expected/predictions_digest.json"
+ ],
+ "step_log_file_not_found": [
+  "<J06>/P5_package/pkg/press_guard/outputs/expected/predictions_digest.json",
+  "<J06>/P5_package/pkg/press_submission/outputs/load_normalization.csv",
+  "<J06>/P5_package/pkg/press_submission/outputs/load_normalization_meta.csv"
+ ],
+ "step_log_missing_lines": [
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/analysis/press_evidence/ar2_oscillator.csv",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/analysis/press_evidence/calibration_curve.csv",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/analysis/press_evidence/duplicate_rows.csv",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/analysis/press_evidence/gaps.csv",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/analysis/press_evidence/imbalance.csv",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/analysis/press_evidence/outlier_rules.csv",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/analysis/press_evidence/outliers.csv",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/analysis/press_evidence/rolling_calibration_curve.csv",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/analysis/press_evidence/segment_rule_tolerance.csv",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/analysis/press_evidence/variable_dictionary.csv",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/analysis/press_supervised/grouped_records.csv",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/analysis/press_supervised/random_rows.csv",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/analysis/press_supplement/e1_detection_floor.csv",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/analysis/press_supplement/e1_summary.csv",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/analysis/press_supplement/e2_uci_metrics.csv",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/analysis/press_supplement/e3_stability.csv",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/press_guard/model.py",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/press_guard/outputs/ablation_v2.csv",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/press_guard/outputs/coupling_fit_v2.csv",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/press_guard/outputs/uncertainty_v2.csv",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/press_guard/test_guard.py",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/press_submission/README.md",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/press_submission/outputs/diagnosis.md",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/press_submission/outputs/label_bypass.csv",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/press_submission/outputs/load_normalization_meta.csv",
+  "FAIL diagnostics_manifest.json: cited 파일 없음 — yejun/press_submission/outputs/splits.csv",
+  "FAIL diagnostics_manifest.json: code_sha256 파일 없음 — yejun/analysis/press_evidence/build_diagnostics.py",
+  "FAIL diagnostics_manifest.json: code_sha256 파일 없음 — yejun/analysis/press_evidence/build_tables.py",
+  "FAIL diagnostics_manifest.json: code_sha256 파일 없음 — yejun/analysis/press_evidence/figures.py",
+  "FAIL diagnostics_manifest.json: code_sha256 파일 없음 — yejun/press_guard/model.py",
+  "FAIL diagnostics_manifest.json: code_sha256 파일 없음 — yejun/press_submission/press/data.py",
+  "FAIL diagnostics_manifest.json: code_sha256 파일 없음 — yejun/press_submission/press/diagnosis.py",
+  "FAIL diagnostics_manifest.json: sources 파일 없음 — yejun/analysis/press_evidence/block_context.csv",
+  "FAIL diagnostics_manifest.json: sources 파일 없음 — yejun/analysis/press_evidence/class_differences.csv",
+  "FAIL diagnostics_manifest.json: sources 파일 없음 — yejun/analysis/press_evidence/current_grid.csv",
+  "FAIL diagnostics_manifest.json: sources 파일 없음 — yejun/analysis/press_evidence/gaps.csv",
+  "FAIL diagnostics_manifest.json: sources 파일 없음 — yejun/analysis/press_evidence/imbalance.csv",
+  "FAIL diagnostics_manifest.json: sources 파일 없음 — yejun/analysis/press_evidence/outliers.csv",
+  "FAIL diagnostics_manifest.json: sources 파일 없음 — yejun/analysis/press_evidence/quality_index.csv"
+ ]
+}

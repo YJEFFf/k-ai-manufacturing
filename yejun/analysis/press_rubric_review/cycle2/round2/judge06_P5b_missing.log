@@ -1,0 +1,20 @@
+목록 379개 · 실행 기록이 적은 의존 파일 75개 · 커밋돼 있는데 목록에 없는 의존 파일 17개
+  - analysis/press_dayshift/v2_current_scale.csv  ← press_guard analysis_summary.external_inputs
+  - analysis/press_early/metrics.csv  ← press_selection/manifest.json:dependencies_sha256
+  - analysis/press_early/run_experiment.py  ← press_selection/manifest.json:dependencies_sha256
+  - analysis/press_external/metrics.csv  ← press_supplement/e2_manifest.json:sources
+  - analysis/press_external/partitions.csv  ← press_supplement/e2_manifest.json:sources
+  - analysis/press_improvement/candidate_metrics.csv  ← press_selection/manifest.json:dependencies_sha256
+  - analysis/press_improvement/run_experiment.py  ← press_selection/manifest.json:dependencies_sha256
+  - press_submission/outputs/ablation.csv  ← press_selection/manifest.json:dependencies_sha256
+  - press_submission/outputs/diagnosis.md  ← press_evidence/diagnostics_manifest.json:cited
+  - press_submission/outputs/label_bypass.csv  ← press_evidence/diagnostics_manifest.json:cited
+  - press_submission/outputs/load_normalization.csv  ← press_selection/manifest.json:dependencies_sha256
+  - press_submission/outputs/load_normalization_meta.csv  ← press_evidence/diagnostics_manifest.json:cited, press_evidence/diagnostics_manifest.json:sources
+  - press_submission/outputs/lstm_guidebook_reproduction.json  ← press_selection/manifest.json:dependencies_sha256
+  - press_submission/outputs/model_comparison_all.csv  ← press_guard manifest.analysis.sources, press_selection/manifest.json:dependencies_sha256
+  - press_submission/outputs/persistence.csv  ← press_selection/manifest.json:dependencies_sha256
+  - press_submission/outputs/sensitivity.csv  ← press_selection/manifest.json:dependencies_sha256
+  - press_submission/outputs/splits.csv  ← press_evidence/diagnostics_manifest.json:cited
+EXCLUDE 정규식(/predictions_)에 걸려 빠진 동결값: ['press_guard/outputs/expected/predictions_digest.json']
+P5 복사본 단계 로그의 FileNotFoundError: ['<J06>/P5_package/pkg/press_guard/outputs/expected/predictions_digest.json', '<J06>/P5_package/pkg/press_submission/outputs/load_normalization.csv', '<J06>/P5_package/pkg/press_submission/outputs/load_normalization_meta.csv']

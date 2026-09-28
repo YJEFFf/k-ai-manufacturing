@@ -1,0 +1,34 @@
+[   2.9s] S1 {'A_0.01': True, 'A_0.03': True, 'A_0.05': True, 'B_0.01': True, 'B_0.03': True, 'B_0.05': True}
+[  19.4s] S2 E1 mismatches 0 {'A_AI0': True, 'A_AI1': True, 'A_AI2': True, 'A_AI0+AI1': None, 'A_all': None, 'B_AI0': True, 'B_AI1': True, 'B_AI2': True, 'B_AI0+AI1': None, 'B_all': None}
+[  21.2s] S3 E2 {'A': True, 'B': True} {'A': True, 'B': True}
+[  35.8s] S4 E3 {'fold_420_479_equals_B': True, 'fold_480_539_equals_A': True} True {'events': 17, 'unique_records': 14, 'ai0_magnitude_only': 15, 'length_ge30': 15, 'single_alarm_row': 13, 'block_480_539': 0, 'record_570_models': ['frozen_A', 'frozen_B', 'rolling_test_540_599'], 'sine_like_by_B_train_q05': 17} {'A': True, 'B': True}
+[  35.8s] N1 α=5% amp_Q {'Q1': (0, 95, 0.0, '1'), 'Q2': (0, 95, 0.0, '1'), 'Q3': (3, 94, 0.9, '0.68'), 'Q4': (14, 95, 4.16, '2.5e-08'), 'short(<17)': (0, 101, 0.0, '1')}
+[  35.9s] S5 E4 {'rows': 248, 'max_abs_diff_ci_fisher': 1.1102230246251565e-16, 'B_vib_high': {'k': 3, 'n': 8, 'ci': [0.0852334141372535, 0.7551367836334484], 'p': 5.858598539535079e-05}, 'row_table_has_ci_columns': False}
+[  35.9s] S6 E5 {0: True, 1: True, 2: True, 3: True, 4: True, 5: True, 6: {'cited_rows': 4, 'rows_meeting_condition_in_file': 17, 'cited_all': False}, 7: True, 8: True, 9: {'B_values': (3, 4, 17), 'A_value_cited': False}, 10: True}
+[  37.5s] S7 E7 {'A_0.01': True, 'A_0.03': True, 'A_0.05': True, 'B_0.01': True, 'B_0.03': True, 'B_0.05': True}
+/Volumes/YJSSD/공모전/k-제조데이터/yejun/analysis/press_rubric_review/cycle2/round2/judge03_verify.py:549: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  rho_a = stats.spearmanr(d.amp, d.det); rho_v = stats.spearmanr(d.vib_sd, d.det)
+/Volumes/YJSSD/공모전/k-제조데이터/yejun/analysis/press_rubric_review/cycle2/round2/judge03_verify.py:549: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  rho_a = stats.spearmanr(d.amp, d.det); rho_v = stats.spearmanr(d.vib_sd, d.det)
+/Volumes/YJSSD/공모전/k-제조데이터/yejun/analysis/press_rubric_review/cycle2/round2/judge03_verify.py:549: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  rho_a = stats.spearmanr(d.amp, d.det); rho_v = stats.spearmanr(d.vib_sd, d.det)
+[  38.0s] S8 N2 True
+[  38.0s]     A vib_noise 2.0 10 det 0.744 ρ_amp 0.28 p=0.015 ρ_vsd 0.22 p=0.064 {"Q1": "12.6/19=0.663", "Q2": "15.0/19=0.789", "Q3": "12.4/18=0.689", "Q4": "15.8/19=0.832"}
+[  38.0s]     A vib_noise 4.0 10 det 1.0 ρ_amp nan p=nan ρ_vsd nan p=nan {"Q1": "19.0/19=1.000", "Q2": "19.0/19=1.000", "Q3": "18.0/18=1.000", "Q4": "19.0/19=1.000"}
+[  38.0s]     A cur_noise 0.1 10 det 0.955 ρ_amp -0.23 p=0.045 ρ_vsd -0.34 p=0.0027 {"Q1": "18.6/19=0.979", "Q2": "18.4/19=0.968", "Q3": "17.6/18=0.978", "Q4": "17.0/19=0.895"}
+[  38.0s]     A cur_offset 0.2 10 det 0.4 ρ_amp -0.11 p=0.33 ρ_vsd 0.01 p=0.93 {"Q1": "8.0/19=0.421", "Q2": "9.0/19=0.474", "Q3": "7.0/18=0.389", "Q4": "6.0/19=0.316"}
+[  38.0s]     A cur_offset 0.8 0 det 0.033 ρ_amp 0.25 p=0.018 ρ_vsd 0.23 p=0.025 {"Q1": "0.0/23=0.000", "Q2": "0.0/23=0.000", "Q3": "0.0/23=0.000", "Q4": "3.0/23=0.130"}
+[  38.0s]     A cur_gain 1.15 10 det 0.0 ρ_amp nan p=nan ρ_vsd nan p=nan {"Q1": "0.0/19=0.000", "Q2": "0.0/19=0.000", "Q3": "0.0/18=0.000", "Q4": "0.0/19=0.000"}
+[  38.0s]     A cur_gain 1.3 10 det 0.227 ρ_amp 0.23 p=0.051 ρ_vsd 0.03 p=0.8 {"Q1": "1.0/19=0.053", "Q2": "4.0/19=0.211", "Q3": "7.0/18=0.389", "Q4": "5.0/19=0.263"}
+[  38.0s]     A cur_gain 1.5 10 det 0.72 ρ_amp 0.1 p=0.39 ρ_vsd -0.06 p=0.58 {"Q1": "10.0/19=0.526", "Q2": "16.0/19=0.842", "Q3": "16.0/18=0.889", "Q4": "12.0/19=0.632"}
+[  38.0s]     B vib_noise 2.0 10 det 0.939 ρ_amp 0.26 p=0.0068 ρ_vsd 0.26 p=0.0056 {"Q1": "25.6/28=0.914", "Q2": "26.0/28=0.929", "Q3": "25.0/27=0.926", "Q4": "27.6/28=0.986"}
+[  38.0s]     B vib_noise 4.0 10 det 1.0 ρ_amp nan p=nan ρ_vsd nan p=nan {"Q1": "28.0/28=1.000", "Q2": "28.0/28=1.000", "Q3": "27.0/27=1.000", "Q4": "28.0/28=1.000"}
+[  38.0s]     B cur_noise 0.1 10 det 0.975 ρ_amp -0.12 p=0.22 ρ_vsd -0.14 p=0.15 {"Q1": "27.6/28=0.986", "Q2": "27.4/28=0.979", "Q3": "26.4/27=0.978", "Q4": "26.8/28=0.957"}
+[  38.0s]     B cur_offset 0.2 10 det 0.523 ρ_amp -0.32 p=0.00067 ρ_vsd -0.18 p=0.06 {"Q1": "20.0/28=0.714", "Q2": "16.0/28=0.571", "Q3": "14.0/27=0.519", "Q4": "8.0/28=0.286"}
+[  38.0s]     B cur_offset 0.8 0 det 0.288 ρ_amp 0.07 p=0.39 ρ_vsd 0.37 p=9.4e-06 {"Q1": "12.0/35=0.343", "Q2": "1.0/35=0.029", "Q3": "14.0/34=0.412", "Q4": "13.0/35=0.371"}
+[  38.0s]     B cur_gain 1.15 10 det 0.063 ρ_amp 0.27 p=0.0048 ρ_vsd 0.26 p=0.0054 {"Q1": "0.0/28=0.000", "Q2": "0.0/28=0.000", "Q3": "1.0/27=0.037", "Q4": "6.0/28=0.214"}
+[  38.0s]     B cur_gain 1.3 10 det 0.505 ρ_amp 0.24 p=0.011 ρ_vsd 0.14 p=0.14 {"Q1": "9.0/28=0.321", "Q2": "14.0/28=0.500", "Q3": "14.0/27=0.519", "Q4": "19.0/28=0.679"}
+[  38.0s]     B cur_gain 1.5 10 det 0.829 ρ_amp 0.22 p=0.021 ρ_vsd -0.05 p=0.59 {"Q1": "18.0/28=0.643", "Q2": "25.0/28=0.893", "Q3": "24.0/27=0.889", "Q4": "25.0/28=0.893"}
+[  41.0s] S10 N3 {'A_1.05': (0, True, (0, 6), (0, 114), '1'), 'A_1.2': (0, True, (0, 6), (0, 114), '1'), 'A_1.5': (0, True, (0, 6), (0, 114), '1'), 'B_1.05': (4, True, (2, 22), (2, 158), '0.074'), 'B_1.2': (5, True, (2, 22), (3, 158), '0.11'), 'B_1.5': (17, True, (5, 22), (12, 158), '0.039')}
+[  41.2s] 쓰기 확인 444 개 파일, 바뀐 파일 [] __pycache__ True
+[  41.2s] 완료 41.2 초

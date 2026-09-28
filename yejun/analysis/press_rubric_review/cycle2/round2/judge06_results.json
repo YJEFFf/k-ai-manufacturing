@@ -1,0 +1,955 @@
+{
+ "commit": "f5679ca",
+ "runs": {
+  "P1_git없는사본_conda": {
+   "root": "/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P1_archive/copy",
+   "exists": true,
+   "reproduce": {
+    "mode": "quick",
+    "python": "3.12.14",
+    "passed": 15,
+    "planned": 15,
+    "failed": 0,
+    "total_seconds": 867.8,
+    "steps": [
+     [
+      "v1 선행(주 모델·기준모델·행별 예측)",
+      0,
+      18.8,
+      "}"
+     ],
+     [
+      "v1 동결값 비교",
+      0,
+      0.4,
+      "16/16 통과 (1~2단계 부분 비교, 필수 집계 9개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm6"
+     ],
+     [
+      "v2 학습·시간순 5회",
+      0,
+      35.2,
+      "    B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                    "
+     ],
+     [
+      "v2 분석",
+      0,
+      137.6,
+      "}"
+     ],
+     [
+      "v2 실행 검증(audit)",
+      0,
+      281.3,
+      "16/16 통과 → /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa7"
+     ],
+     [
+      "v2 동결값 비교",
+      0,
+      2.1,
+      "48/48 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-"
+     ],
+     [
+      "진단 표(press_evidence)",
+      0,
+      11.8,
+      "    B 12 0.099174 0.099174      180               11  0.061111       0.099126          Fal"
+     ],
+     [
+      "진단 보강 표·그림",
+      0,
+      19.0,
+      "완료 17.1초, 표 16개, 그림 5장"
+     ],
+     [
+      "지도학습 기준선(press_supervised)",
+      0,
+      237.6,
+      "done 236.0 s"
+     ],
+     [
+      "모델 선정 근거(press_selection)",
+      0,
+      119.3,
+      "내부 점검: 통과 · 117.6 s"
+     ],
+     [
+      "press_evidence 동결값 비교",
+      0,
+      0.6,
+      "통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)"
+     ],
+     [
+      "press_supervised 동결값 비교",
+      0,
+      0.8,
+      "통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)"
+     ],
+     [
+      "press_advance 동결값 비교",
+      0,
+      0.5,
+      "통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)"
+     ],
+     [
+      "press_selection 동결값 비교",
+      0,
+      0.5,
+      "통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)"
+     ],
+     [
+      "보완 실험 E1~E3 동결값 비교",
+      0,
+      2.3,
+      "통과: 무결성·기대값 비교 E1, E3 · 건너뜀 E2(외부 입력 없음)"
+     ]
+    ]
+   },
+   "artifacts_equal_committed_manifest": {
+    "guard_A.json": true,
+    "guard_B.json": true,
+    "probability_A.json": true,
+    "probability_B.json": true
+   },
+   "predictions_equal_committed_digest": {
+    "test_predictions_A.csv": true,
+    "test_predictions_B.csv": true,
+    "predictions_normal_A.csv": true,
+    "predictions_normal_B.csv": true,
+    "predictions_abnormal_A.csv": true,
+    "predictions_abnormal_B.csv": true
+   },
+   "test_predictions_f1_from_file": {
+    "A": {
+     "rows": 4690,
+     "normal_rows": 4090,
+     "abnormal_rows": 600,
+     "tp": 556,
+     "fp": 0,
+     "fn": 44,
+     "f1": 0.961938
+    },
+    "B": {
+     "rows": 6697,
+     "normal_rows": 6097,
+     "abnormal_rows": 600,
+     "tp": 569,
+     "fp": 3,
+     "fn": 31,
+     "f1": 0.97099
+    }
+   },
+   "abnormal_rows_same_ids_both_files": true,
+   "press_guard_tables": {
+    "total": 38,
+    "bytes_equal": 38,
+    "within_tol": 38,
+    "differ": {}
+   },
+   "analysis_packages": {
+    "press_evidence": {
+     "total": 33,
+     "bytes_equal": 29,
+     "within_tol": 33,
+     "differ": {
+      "abnormal_segments.csv": {
+       "ok": true,
+       "bytes_equal": false,
+       "max_abs_diff": 7.105427357601002e-15
+      },
+      "block_context.csv": {
+       "ok": true,
+       "bytes_equal": false,
+       "max_abs_diff": 1.1102230246251565e-16
+      },
+      "production_unit_evidence.csv": {
+       "ok": true,
+       "bytes_equal": false,
+       "max_abs_diff": 2.220446049250313e-16
+      },
+      "split_context.csv": {
+       "ok": true,
+       "bytes_equal": false,
+       "max_abs_diff": 1.1102230246251565e-16
+      }
+     }
+    },
+    "press_supervised": {
+     "total": 3,
+     "bytes_equal": 3,
+     "within_tol": 3,
+     "differ": {}
+    },
+    "press_selection": {
+     "total": 11,
+     "bytes_equal": 11,
+     "within_tol": 11,
+     "differ": {}
+    },
+    "press_advance": {
+     "total": 2,
+     "bytes_equal": 2,
+     "within_tol": 2,
+     "differ": {}
+    },
+    "press_supplement": {
+     "total": 10,
+     "bytes_equal": 10,
+     "within_tol": 10,
+     "differ": {}
+    }
+   },
+   "v1_tables": {
+    "committed": 30,
+    "present": 30,
+    "bytes_equal": 30,
+    "within_1e3": 30,
+    "differ": {}
+   },
+   "manifest_environment": {
+    "python": "3.12.14",
+    "blas": [
+     {
+      "api": "openblas",
+      "version": "0.3.23.dev",
+      "threads": 1,
+      "user_api": "blas"
+     },
+     {
+      "api": "openblas",
+      "version": "0.3.27",
+      "threads": 1,
+      "user_api": "blas"
+     },
+     {
+      "api": "openmp",
+      "version": null,
+      "threads": 1,
+      "user_api": "openmp"
+     }
+    ],
+    "press_threads": "1",
+    "platform": "macOS-26.3.1-arm64-arm-64bit"
+   }
+  },
+  "P2_새클론_torch없는venv": {
+   "root": "/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P2_venv/clone",
+   "exists": true,
+   "reproduce": {
+    "mode": "quick",
+    "python": "3.12.8",
+    "passed": 23,
+    "planned": 23,
+    "failed": 0,
+    "total_seconds": 968.7,
+    "steps": [
+     [
+      "v1 선행(주 모델·기준모델·행별 예측)",
+      0,
+      14.9,
+      "}"
+     ],
+     [
+      "v1 동결값 비교",
+      0,
+      0.5,
+      "16/16 통과 (1~2단계 부분 비교, 필수 집계 9개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm6"
+     ],
+     [
+      "v2 학습·시간순 5회",
+      0,
+      33.3,
+      "    B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                    "
+     ],
+     [
+      "v2 분석",
+      0,
+      138.5,
+      "}"
+     ],
+     [
+      "v2 실행 검증(audit)",
+      0,
+      263.4,
+      "16/16 통과 → /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa7"
+     ],
+     [
+      "v2 동결값 비교",
+      0,
+      2.3,
+      "48/48 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-"
+     ],
+     [
+      "진단 표(press_evidence)",
+      0,
+      12.4,
+      "    B 12 0.099174 0.099174      180               11  0.061111       0.099126          Fal"
+     ],
+     [
+      "진단 보강 표·그림",
+      0,
+      18.6,
+      "완료 16.6초, 표 16개, 그림 5장"
+     ],
+     [
+      "지도학습 기준선(press_supervised)",
+      0,
+      235.5,
+      "done 233.9 s"
+     ],
+     [
+      "모델 선정 근거(press_selection)",
+      0,
+      112.0,
+      "내부 점검: 통과 · 110.2 s"
+     ],
+     [
+      "press_evidence 동결값 비교",
+      0,
+      0.6,
+      "통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)"
+     ],
+     [
+      "press_supervised 동결값 비교",
+      0,
+      0.5,
+      "통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)"
+     ],
+     [
+      "press_advance 동결값 비교",
+      0,
+      0.5,
+      "통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)"
+     ],
+     [
+      "press_selection 동결값 비교",
+      0,
+      0.5,
+      "통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)"
+     ],
+     [
+      "보완 실험 E1~E3 동결값 비교",
+      0,
+      1.9,
+      "통과: 무결성·기대값 비교 E1, E3 · 건너뜀 E2(외부 입력 없음)"
+     ],
+     [
+      "시험: v2",
+      0,
+      118.3,
+      "77 passed, 1 skipped in 117.72s (0:01:57)"
+     ],
+     [
+      "시험: v1",
+      0,
+      7.4,
+      "44 passed, 2 skipped, 14 warnings in 6.83s"
+     ],
+     [
+      "시험: press_advance",
+      0,
+      0.9,
+      "8 passed in 0.54s"
+     ],
+     [
+      "시험: press_evidence",
+      0,
+      1.6,
+      "6 passed in 1.08s"
+     ],
+     [
+      "시험: press_selection",
+      0,
+      1.1,
+      "6 passed in 0.71s"
+     ],
+     [
+      "시험: press_supervised",
+      0,
+      0.9,
+      "6 passed in 0.56s"
+     ],
+     [
+      "시험: press_supplement",
+      0,
+      2.8,
+      "10 passed, 3 skipped in 2.30s"
+     ],
+     [
+      "시험: 웹 콘솔",
+      0,
+      0.4,
+      "web regressions: 9 passed (null gap / empty replay hover / 50k rows / empty selection / si"
+     ]
+    ]
+   },
+   "artifacts_equal_committed_manifest": {
+    "guard_A.json": true,
+    "guard_B.json": true,
+    "probability_A.json": true,
+    "probability_B.json": true
+   },
+   "predictions_equal_committed_digest": {
+    "test_predictions_A.csv": true,
+    "test_predictions_B.csv": true,
+    "predictions_normal_A.csv": true,
+    "predictions_normal_B.csv": true,
+    "predictions_abnormal_A.csv": true,
+    "predictions_abnormal_B.csv": true
+   },
+   "test_predictions_f1_from_file": {
+    "A": {
+     "rows": 4690,
+     "normal_rows": 4090,
+     "abnormal_rows": 600,
+     "tp": 556,
+     "fp": 0,
+     "fn": 44,
+     "f1": 0.961938
+    },
+    "B": {
+     "rows": 6697,
+     "normal_rows": 6097,
+     "abnormal_rows": 600,
+     "tp": 569,
+     "fp": 3,
+     "fn": 31,
+     "f1": 0.97099
+    }
+   },
+   "abnormal_rows_same_ids_both_files": true,
+   "press_guard_tables": {
+    "total": 38,
+    "bytes_equal": 38,
+    "within_tol": 38,
+    "differ": {}
+   },
+   "analysis_packages": {
+    "press_evidence": {
+     "total": 33,
+     "bytes_equal": 29,
+     "within_tol": 33,
+     "differ": {
+      "abnormal_segments.csv": {
+       "ok": true,
+       "bytes_equal": false,
+       "max_abs_diff": 7.105427357601002e-15
+      },
+      "block_context.csv": {
+       "ok": true,
+       "bytes_equal": false,
+       "max_abs_diff": 1.1102230246251565e-16
+      },
+      "production_unit_evidence.csv": {
+       "ok": true,
+       "bytes_equal": false,
+       "max_abs_diff": 2.220446049250313e-16
+      },
+      "split_context.csv": {
+       "ok": true,
+       "bytes_equal": false,
+       "max_abs_diff": 1.1102230246251565e-16
+      }
+     }
+    },
+    "press_supervised": {
+     "total": 3,
+     "bytes_equal": 3,
+     "within_tol": 3,
+     "differ": {}
+    },
+    "press_selection": {
+     "total": 11,
+     "bytes_equal": 11,
+     "within_tol": 11,
+     "differ": {}
+    },
+    "press_advance": {
+     "total": 2,
+     "bytes_equal": 2,
+     "within_tol": 2,
+     "differ": {}
+    },
+    "press_supplement": {
+     "total": 10,
+     "bytes_equal": 10,
+     "within_tol": 10,
+     "differ": {}
+    }
+   },
+   "v1_tables": {
+    "committed": 30,
+    "present": 30,
+    "bytes_equal": 30,
+    "within_1e3": 30,
+    "differ": {}
+   },
+   "manifest_environment": {
+    "python": "3.12.8",
+    "blas": [
+     {
+      "api": "openblas",
+      "version": "0.3.23.dev",
+      "threads": 1,
+      "user_api": "blas"
+     },
+     {
+      "api": "openblas",
+      "version": "0.3.27",
+      "threads": 1,
+      "user_api": "blas"
+     },
+     {
+      "api": "openmp",
+      "version": null,
+      "threads": 1,
+      "user_api": "openmp"
+     }
+    ],
+    "press_threads": "1",
+    "platform": "macOS-26.3.1-arm64-arm-64bit"
+   }
+  },
+  "P3_새클론_CP949_resource차단": {
+   "root": "/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P3_cp949/clone",
+   "exists": true,
+   "reproduce": {
+    "mode": "quick",
+    "python": "3.12.2",
+    "passed": 16,
+    "planned": 23,
+    "failed": 1,
+    "total_seconds": 999.3,
+    "steps": [
+     [
+      "v1 선행(주 모델·기준모델·행별 예측)",
+      0,
+      12.2,
+      "}"
+     ],
+     [
+      "v1 동결값 비교",
+      0,
+      1.0,
+      "16/16 ��� (1~2�ܰ� �κ� ��, �ʼ� ���� 9��). ȯ��: macOS-26.3.1-arm64-arm-64bit vs ���� macOS-2"
+     ],
+     [
+      "v2 학습·시간순 5회",
+      0,
+      32.4,
+      "    B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                    "
+     ],
+     [
+      "v2 분석",
+      0,
+      139.4,
+      "}"
+     ],
+     [
+      "v2 실행 검증(audit)",
+      0,
+      276.3,
+      "16/16 ��� �� /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9a"
+     ],
+     [
+      "v2 동결값 비교",
+      0,
+      2.5,
+      "48/48 ���. �ڵ� 1602db8f6a08 vs ���� 1602db8f6a08; ȯ�� macOS-26.3.1-arm64-arm-64bit vs ����"
+     ],
+     [
+      "진단 표(press_evidence)",
+      0,
+      11.9,
+      "    B 12 0.099174 0.099174      180               11  0.061111       0.099126          Fal"
+     ],
+     [
+      "진단 보강 표·그림",
+      0,
+      21.0,
+      "�Ϸ� 18.2��, ǥ 16��, �׸� 5��"
+     ],
+     [
+      "지도학습 기준선(press_supervised)",
+      0,
+      242.2,
+      "done 239.8 s"
+     ],
+     [
+      "모델 선정 근거(press_selection)",
+      0,
+      116.8,
+      "���� ����: ��� �� 114.2 s"
+     ],
+     [
+      "press_evidence 동결값 비교",
+      0,
+      0.9,
+      "���: press_evidence ���� ��� ���Ἲ������ ��밪 ��(��� 38��)"
+     ],
+     [
+      "press_supervised 동결값 비교",
+      0,
+      0.7,
+      "���: press_supervised ���� ��� ���Ἲ������ ��밪 ��(��� 3��)"
+     ],
+     [
+      "press_advance 동결값 비교",
+      0,
+      0.7,
+      "���: press_advance ���� ��� ���Ἲ������ ��밪 ��(��� 2��)"
+     ],
+     [
+      "press_selection 동결값 비교",
+      0,
+      0.7,
+      "���: press_selection ���� ��� ���Ἲ������ ��밪 ��(��� 11��)"
+     ],
+     [
+      "보완 실험 E1~E3 동결값 비교",
+      0,
+      2.1,
+      "���: ���Ἲ����밪 �� E1, E3 �� �ǳʶ� E2(�ܺ� �Է� ����)"
+     ],
+     [
+      "시험: v2",
+      0,
+      126.0,
+      "77 passed, 1 skipped in 125.19s (0:02:05)"
+     ],
+     [
+      "시험: v1",
+      1,
+      12.6,
+      "2 failed, 47 passed in 11.10s"
+     ]
+    ]
+   },
+   "artifacts_equal_committed_manifest": {
+    "guard_A.json": true,
+    "guard_B.json": true,
+    "probability_A.json": true,
+    "probability_B.json": true
+   },
+   "predictions_equal_committed_digest": {
+    "test_predictions_A.csv": true,
+    "test_predictions_B.csv": true,
+    "predictions_normal_A.csv": true,
+    "predictions_normal_B.csv": true,
+    "predictions_abnormal_A.csv": true,
+    "predictions_abnormal_B.csv": true
+   },
+   "test_predictions_f1_from_file": {
+    "A": {
+     "rows": 4690,
+     "normal_rows": 4090,
+     "abnormal_rows": 600,
+     "tp": 556,
+     "fp": 0,
+     "fn": 44,
+     "f1": 0.961938
+    },
+    "B": {
+     "rows": 6697,
+     "normal_rows": 6097,
+     "abnormal_rows": 600,
+     "tp": 569,
+     "fp": 3,
+     "fn": 31,
+     "f1": 0.97099
+    }
+   },
+   "abnormal_rows_same_ids_both_files": true,
+   "press_guard_tables": {
+    "total": 38,
+    "bytes_equal": 38,
+    "within_tol": 38,
+    "differ": {}
+   },
+   "analysis_packages": {
+    "press_evidence": {
+     "total": 33,
+     "bytes_equal": 33,
+     "within_tol": 33,
+     "differ": {}
+    },
+    "press_supervised": {
+     "total": 3,
+     "bytes_equal": 3,
+     "within_tol": 3,
+     "differ": {}
+    },
+    "press_selection": {
+     "total": 11,
+     "bytes_equal": 11,
+     "within_tol": 11,
+     "differ": {}
+    },
+    "press_advance": {
+     "total": 2,
+     "bytes_equal": 2,
+     "within_tol": 2,
+     "differ": {}
+    },
+    "press_supplement": {
+     "total": 10,
+     "bytes_equal": 10,
+     "within_tol": 10,
+     "differ": {}
+    }
+   },
+   "v1_tables": {
+    "committed": 30,
+    "present": 30,
+    "bytes_equal": 30,
+    "within_1e3": 30,
+    "differ": {}
+   },
+   "manifest_environment": {
+    "python": "3.12.2",
+    "blas": [
+     {
+      "api": "openblas",
+      "version": "0.3.23.dev",
+      "threads": 1,
+      "user_api": "blas"
+     },
+     {
+      "api": "openblas",
+      "version": "0.3.27",
+      "threads": 1,
+      "user_api": "blas"
+     },
+     {
+      "api": "openmp",
+      "version": null,
+      "threads": 1,
+      "user_api": "openmp"
+     }
+    ],
+    "press_threads": "1",
+    "platform": "macOS-26.3.1-arm64-arm-64bit"
+   }
+  },
+  "P4_새클론_full": {
+   "root": "/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P4_full/clone",
+   "exists": true,
+   "reproduce": {
+    "mode": "full",
+    "python": "3.12.2",
+    "passed": 16,
+    "planned": 16,
+    "failed": 0,
+    "total_seconds": 3798.7,
+    "steps": [
+     [
+      "v1 선행(주 모델·기준모델·행별 예측)",
+      0,
+      2461.4,
+      "  \"dead_component_cases\": int((~sens.waveform_only_alarm_possible.fillna(True).astype(bool"
+     ],
+     [
+      "v1 동결값 비교",
+      0,
+      0.5,
+      "39/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm"
+     ],
+     [
+      "후보 비교(press_advance)",
+      0,
+      7.6,
+      "       B     early6_ar2                         3                          21  31   3     "
+     ],
+     [
+      "v2 학습·시간순 5회",
+      0,
+      25.3,
+      "    B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                    "
+     ],
+     [
+      "v2 분석",
+      0,
+      100.2,
+      "}"
+     ],
+     [
+      "v2 실행 검증(audit)",
+      0,
+      192.1,
+      "16/16 통과 → /private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa7"
+     ],
+     [
+      "v2 동결값 비교",
+      0,
+      2.4,
+      "48/48 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-"
+     ],
+     [
+      "진단 표(press_evidence)",
+      0,
+      12.7,
+      "    B 12 0.099174 0.099174      180               11  0.061111       0.099126          Fal"
+     ],
+     [
+      "진단 보강 표·그림",
+      0,
+      20.5,
+      "완료 18.0초, 표 16개, 그림 5장"
+     ],
+     [
+      "지도학습 기준선(press_supervised)",
+      0,
+      198.7,
+      "done 196.8 s"
+     ],
+     [
+      "모델 선정 근거(press_selection)",
+      0,
+      80.1,
+      "내부 점검: 통과 · 78.0 s"
+     ],
+     [
+      "press_evidence 동결값 비교",
+      0,
+      0.5,
+      "통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)"
+     ],
+     [
+      "press_supervised 동결값 비교",
+      0,
+      0.4,
+      "통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)"
+     ],
+     [
+      "press_advance 동결값 비교",
+      0,
+      0.4,
+      "통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)"
+     ],
+     [
+      "press_selection 동결값 비교",
+      0,
+      0.4,
+      "통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)"
+     ],
+     [
+      "보완 실험 E1~E3 재실행·비교",
+      0,
+      695.4,
+      "통과: 무결성·기대값 비교 E1, E2, E3 · 재실행 E1,E2,E3"
+     ]
+    ]
+   },
+   "artifacts_equal_committed_manifest": {
+    "guard_A.json": true,
+    "guard_B.json": true,
+    "probability_A.json": true,
+    "probability_B.json": true
+   },
+   "predictions_equal_committed_digest": {
+    "test_predictions_A.csv": true,
+    "test_predictions_B.csv": true,
+    "predictions_normal_A.csv": true,
+    "predictions_normal_B.csv": true,
+    "predictions_abnormal_A.csv": true,
+    "predictions_abnormal_B.csv": true
+   },
+   "test_predictions_f1_from_file": {
+    "A": {
+     "rows": 4690,
+     "normal_rows": 4090,
+     "abnormal_rows": 600,
+     "tp": 556,
+     "fp": 0,
+     "fn": 44,
+     "f1": 0.961938
+    },
+    "B": {
+     "rows": 6697,
+     "normal_rows": 6097,
+     "abnormal_rows": 600,
+     "tp": 569,
+     "fp": 3,
+     "fn": 31,
+     "f1": 0.97099
+    }
+   },
+   "abnormal_rows_same_ids_both_files": true,
+   "press_guard_tables": {
+    "total": 38,
+    "bytes_equal": 38,
+    "within_tol": 38,
+    "differ": {}
+   },
+   "analysis_packages": {
+    "press_evidence": {
+     "total": 33,
+     "bytes_equal": 33,
+     "within_tol": 33,
+     "differ": {}
+    },
+    "press_supervised": {
+     "total": 3,
+     "bytes_equal": 3,
+     "within_tol": 3,
+     "differ": {}
+    },
+    "press_selection": {
+     "total": 11,
+     "bytes_equal": 11,
+     "within_tol": 11,
+     "differ": {}
+    },
+    "press_advance": {
+     "total": 2,
+     "bytes_equal": 2,
+     "within_tol": 2,
+     "differ": {}
+    },
+    "press_supplement": {
+     "total": 10,
+     "bytes_equal": 10,
+     "within_tol": 10,
+     "differ": {}
+    }
+   },
+   "v1_tables": {
+    "committed": 30,
+    "present": 30,
+    "bytes_equal": 29,
+    "within_1e3": 29,
+    "differ": {
+     "lstm_common_meta.csv": {
+      "ok": false,
+      "bytes_equal": false,
+      "max_abs_diff": 133.3
+     }
+    }
+   },
+   "manifest_environment": {
+    "python": "3.12.2",
+    "blas": [
+     {
+      "api": "openblas",
+      "version": "0.3.23.dev",
+      "threads": 1,
+      "user_api": "blas"
+     },
+     {
+      "api": "openblas",
+      "version": "0.3.27",
+      "threads": 1,
+      "user_api": "blas"
+     },
+     {
+      "api": "openmp",
+      "version": null,
+      "threads": 1,
+      "user_api": "openmp"
+     }
+    ],
+    "press_threads": "1",
+    "platform": "macOS-26.3.1-arm64-arm-64bit"
+   }
+  }
+ }
+}

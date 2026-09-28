@@ -1,0 +1,5 @@
+명령(yejun/press_guard/에서): OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python -m pytest -q -p no:cacheprovider test_simulate.py test_monitor.py test_recalibrate.py test_serve.py test_guard.py test_analyze.py::test_decision_table_is_the_action_rule ; node test_web.cjs
+..........................................                               [100%]
+42 passed in 133.41s (0:02:13)
+web regressions: 9 passed (null gap / empty replay hover / 50k rows / empty selection / sim visibility / escalation timing / level filter / level KPIs / outcome without storage)
+elapsed=136s

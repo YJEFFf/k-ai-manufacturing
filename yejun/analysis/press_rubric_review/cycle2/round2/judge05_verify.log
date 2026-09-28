@@ -1,0 +1,30 @@
+C0 HEAD f5679ca · 모델·확률 보정기·원본 해시 일치(guard_A.json, guard_B.json, probability_A.json, probability_B.json) · 미커밋 1건
+C1 A α1% 556/0/44 F1 0.961938 · B 569/3/31 F1 0.970990 (metrics.csv 일치, α 3·5%도)
+C2 AR(2) 암시 주파수 A 0.6064 Hz |r| 0.9874 · B 0.6064 Hz
+C3 A/B 곡선이 calibration_curve.csv와 일치: A [0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2] B [3, 3, 5, 7, 7, 7, 7, 7, 8, 9, 9, 11]
+C4 O1(a) 시간순 5겹 합산: k=1 2/300 [0,6], k=3 8/300 [3,13], k=6 14/300 [8,23], k=12 28/300 [20,41] · 커밋 표와 겹별 불일치 0건 · 합산·구간 일치 True/True · 모든 k 구간 안 True · 겹별 위로 벗어남 0건, 아래 5건
+C5 O1(b) α1%: P(실제>1%)=0.299, Beta(1,120) 95% 0.0247 · 사후 95% A 0.0124·B 0.0256 · 8시간 A 44(CP 88)·B 92(CP 152) — workload_v2.csv 일치
+C6 O7 수락 한도(보정 120·수락 60): α0.01 2→2(코드 2), 정상 거부 0.036→0.036, α0.03 4→4(코드 4), 정상 거부 0.042→0.042, α0.05 6→7(코드 7), 정상 거부 0.060→0.029
+C7 O3 결합 규칙 α1%(TP/FP/FN·정상 알림·근거 없는 이상 경보): A tippett_fmax 556/0/44 n0 r0, fisher 568/0/32 n0 r12, stouffer 561/0/39 n0 r10, sum 560/0/40 n0 r4, mean 558/0/42 n0 r8 | B tippett_fmax 569/3/31 n3 r0, fisher 569/1/31 n1 r1, stouffer 561/0/39 n0 r1, sum 561/2/39 n2 r1, mean 558/0/42 n0 r0 · combination_rules.csv와 불일치 0건(α 1·3·5% × 5규칙 × 2분할)
+C8 O2 라벨 없는 환산 216행 재계산 일치 · A α1% 전류 잡음 0.1σ: 명목 π0.1% 0.104·π1% 0.538, 보정 95% 0.037·0.281
+C8b 확률 층: A 저장 상한 121·모든 행 LR 최대 121.0·교차 최대 121.0, 21겹 Brier 0.0072 ECE 0.0075(커밋 0.0072/0.0075, 일치 True), 문턱 LR 42.759, 경보 행 중 LR<1: 이상 0/556·정상 0/0 | B 저장 상한 121·모든 행 LR 최대 121.0·교차 최대 121.0, 21겹 Brier 0.0056 ECE 0.0066(커밋 0.0056/0.0066, 일치 True), 문턱 LR 0.698, 경보 행 중 LR<1: 이상 0/569·정상 0/3
+C8c SBB 문장: 알림 p값은 모두 1/121인데 모의 P(이상|알림) 0.539(해석값 0.539) > SBB '상한' 0.086; 보정 표본 4000회 중 100.0%에서 상한을 넘음
+C9b O4(b) 위상: 양성 대조 R 1.000(202기록), 이웃 355쌍 R 0.060(공백 1.55~8.43초), 섞은 귀무 95% 0.091(커밋 0.091), 짧은/긴 공백 0.045/0.110, 시작 위상 R 0.016(452기록) · 커밋 R 일치 True
+C10 O4(a) 음수 비율·lag-1: normal/AI0_Vibration 0.501/0.033, normal/AI1_Vibration 0.542/0.319, abnormal/AI0_Vibration 0.463/0.718, abnormal/AI1_Vibration 0.497/0.651 · 커밋 표 일치 True
+통과 정상 알림 단위 수가 보정 조건부 Beta-Binomial 95백분위 이하: 2 (한도 2 · 정상에서 거부할 확률 3.6% · 실제 알림률이 명목의 2·3배일 때 거부할 확률(검정력) 8%·19%)
+통과 고장 주입 cur_noise 0.2 2초 안 탐지율 ≥ 90%: 1.0
+통과 고장 주입 cur_offset 0.4 2초 안 탐지율 ≥ 90%: 1.0
+통과 고장 주입 vib_noise 4 2초 안 탐지율 ≥ 90%: 1.0
+교대 8시간 1단계 알림: 명목 31.3건 · 보정 95% 93.5건
+수락 · 모델 저장 /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge05r2_recal_0_0szmtn/site.json · 보고서 /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge05r2_recal_0_0szmtn/site_report.json
+C11 O7 recalibrate 종료 코드 0, 통과 True: 정상 알림 단위 수가 보정 조건부 Beta-Binomial 95백분위 이하 = 2 (한도 2); 고장 주입 cur_noise 0.2 2초 안 탐지율 ≥ 90% = 1.0 (한도 0.9); 고장 주입 cur_offset 0.4 2초 안 탐지율 ≥ 90% = 1.0 (한도 0.9); 고장 주입 vib_noise 4 2초 안 탐지율 ≥ 90% = 1.0 (한도 0.9)
+C12 E1 하한: cur_noise/guard_v2 0.1, cur_noise/baseline_v1 0.2, cur_offset/guard_v2 0.4, cur_offset/baseline_v1 0.8, vib_noise/guard_v2 4.0, vib_noise/baseline_v1 4.0 · 일치 True
+C13 지도학습 재실행 코드 0, CSV 바이트 동일 {'random_rows.csv': True, 'grouped_records.csv': True, 'injection.csv': True} · 창+v2 지도학습−v2 F1 -0.047~+0.011(가중 변형 -0.132~+0.009) · 가중 로지스틱(창, 0.5) 무주입 경보 A 90.7%, B 83.8%
+C14 O4(c) 판단표 FM 참조 ['FM1', 'FM2', 'FM3', 'FM4', 'FM5', 'FM6'] ⊂ ['FM1', 'FM2', 'FM3', 'FM4', 'FM5', 'FM6']: True · '물리 모델로 검증' 긍정 문장 0건
+C15 '1−p'와 '확률'이 같은 줄: 4줄, 모두 '확률 아님' 표기 True
+C16 1 Hz 이하 전력 비중·평균 제거 lag-1: normal/AI0_Vibration 0.12/0.017(기록 452, lag-1>0.5 21), normal/AI1_Vibration 0.07/0.318(기록 452, lag-1>0.5 3), abnormal/AI0_Vibration 0.60/0.704(기록 13, lag-1>0.5 12), abnormal/AI1_Vibration 0.55/0.632(기록 13, lag-1>0.5 13) · 흰 잡음 기대 0.20 · 관측 가능성 표 이상 행 '이웃 표본 상관 낮음' 표기 True
+완료 208.4초 (구간별 {'C0': 0.1, 'C1_C2': 0.9, 'C3_C4': 9.1, 'C7': 1.4, 'C8_C8b': 1.5, 'C8c': 1.3, 'C9b_C10': 0.1, 'C11': 2.3, 'C13': 191.4, 'C16': 0.1}) → /Volumes/YJSSD/공모전/k-제조데이터/yejun/analysis/press_rubric_review/cycle2/round2/judge05_verify.json
+real 209.96
+user 202.94
+sys 5.70
+exit 0

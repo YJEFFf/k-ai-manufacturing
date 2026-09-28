@@ -1,0 +1,628 @@
+{
+ "source": "/private/tmp/claude-501/-Volumes-YJSSD-----k------/69347b62-83f2-47fa-8d8d-9aa723b0597a/scratchpad/judge06r2/P2_venv/clone",
+ "results": [
+  {
+   "group": "V",
+   "id": "V0",
+   "scenario": "변조 없음",
+   "expect": "pass",
+   "rc": 0,
+   "as_expected": true,
+   "seconds": 3.8,
+   "tail": "OK   test_predictions_A.csv | OK   test_predictions_B.csv | 48/48 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit"
+  },
+  {
+   "group": "V",
+   "id": "V1",
+   "scenario": "test_predictions_A 정상 행 100 경보 0→1",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 3.5,
+   "tail": "FAIL test_predictions_A.csv  (경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름) | OK   test_predictions_B.csv | 46/48 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit"
+  },
+  {
+   "group": "V",
+   "id": "V2",
+   "scenario": "test_predictions_B 삭제",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 3.1,
+   "tail": "OK   test_predictions_A.csv | FAIL test_predictions_B.csv  (예측 파일 또는 동결 요약 없음) | 46/48 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit"
+  },
+  {
+   "group": "V",
+   "id": "V3",
+   "scenario": "workload_v2.csv units_per_elapsed_hour[6] +1e-6",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 3.4,
+   "tail": "OK   test_predictions_A.csv | OK   test_predictions_B.csv | 46/48 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit"
+  },
+  {
+   "group": "V",
+   "id": "V4",
+   "scenario": "동결값 expected/metrics.csv delay_median_s[6] +1e-3",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 3.3,
+   "tail": "OK   test_predictions_A.csv | OK   test_predictions_B.csv | 46/48 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit"
+  },
+  {
+   "group": "V",
+   "id": "V5",
+   "scenario": "model.py 끝에 주석 한 줄",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 3.0,
+   "tail": "OK   test_predictions_A.csv | OK   test_predictions_B.csv | 47/48 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit"
+  },
+  {
+   "group": "V",
+   "id": "V6",
+   "scenario": "저장 모델 guard_A.json AR(2) 계수 +1e-12",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 3.8,
+   "tail": "OK   test_predictions_A.csv | OK   test_predictions_B.csv | 47/48 통과. 코드 1602db8f6a08 vs 동결 1602db8f6a08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit"
+  },
+  {
+   "group": "V",
+   "id": "V7",
+   "scenario": "compare_predictions 검출 단위(동결 요약만 대조, 실행 기록 해시 경로 제외)",
+   "probes": {
+    "점수 두 행 맞바꿈": {
+     "ok": true,
+     "note": "부동소수 차이만 있음"
+    },
+    "p값 한 행 +1e-4": {
+     "ok": false,
+     "note": ""
+    },
+    "p값 한 행 +1e-2": {
+     "ok": false,
+     "note": ""
+    },
+    "점수 한 행 +1e-4": {
+     "ok": true,
+     "note": "부동소수 차이만 있음"
+    },
+    "점수 한 행 +1e-2": {
+     "ok": false,
+     "note": ""
+    },
+    "우도비 한 행 ×1.001": {
+     "ok": true,
+     "note": "부동소수 차이만 있음"
+    },
+    "인접 두 행 전체 맞바꿈": {
+     "ok": false,
+     "note": ""
+    }
+   }
+  },
+  {
+   "group": "C",
+   "id": "press_evidence:C0",
+   "scenario": "변조 없음",
+   "expect": "pass",
+   "rc": 0,
+   "as_expected": true,
+   "seconds": 1.3,
+   "tail": "통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)"
+  },
+  {
+   "group": "C",
+   "id": "press_evidence:C1",
+   "scenario": "segment_rule_tolerance.csv tolerance_s[13] +1e-6(실행 기록 그대로)",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.3,
+   "tail": "FAIL diagnostics_manifest.json: cited 변경(실행 기록과 다름) — yejun/analysis/press_evidence/segment_rule_tolerance.csv | FAIL segment_rule_tolerance.csv: tolerance_s 최대 차이 1e-06 > 1e-09 | 실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)"
+  },
+  {
+   "group": "C",
+   "id": "press_evidence:C2",
+   "scenario": "segment_rule_tolerance.csv +1e-6 + 실행 기록 해시 위조(기록 True)",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.3,
+   "tail": "FAIL diagnostics_manifest.json: cited 변경(실행 기록과 다름) — yejun/analysis/press_evidence/segment_rule_tolerance.csv | FAIL segment_rule_tolerance.csv: tolerance_s 최대 차이 1e-06 > 1e-09 | 실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)"
+  },
+  {
+   "group": "C",
+   "id": "press_evidence:C3",
+   "scenario": "segment_rule_tolerance.csv +1e-12 + 실행 기록 해시 위조(허용오차 1e-9 안, 설계상 통과)",
+   "expect": "pass",
+   "rc": 1,
+   "as_expected": false,
+   "seconds": 1.3,
+   "tail": "FAIL diagnostics_manifest.json: cited 변경(실행 기록과 다름) — yejun/analysis/press_evidence/segment_rule_tolerance.csv | 실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)"
+  },
+  {
+   "group": "C",
+   "id": "press_evidence:C4",
+   "scenario": "decision_table_diagnosis_v2.csv 삭제",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.4,
+   "tail": "FAIL 결과 없음 — decision_table_diagnosis_v2.csv | FAIL 결과 없음 — decision_table_diagnosis_v2.csv | 실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)"
+  },
+  {
+   "group": "C",
+   "id": "press_evidence:C5",
+   "scenario": "build_tables.py 끝에 주석 한 줄",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.5,
+   "tail": "FAIL manifest.json: code_sha256 변경(실행 기록과 다름) — build_tables.py | FAIL diagnostics_manifest.json: code_sha256 변경(실행 기록과 다름) — yejun/analysis/press_evidence/build_tables.py | 실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)"
+  },
+  {
+   "group": "C",
+   "id": "press_evidence:C6",
+   "scenario": "동결값 expected/segment_rule_tolerance.csv +1e-3",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.4,
+   "tail": "FAIL 동결 기대값이 동결 당시와 다름 — segment_rule_tolerance.csv | FAIL segment_rule_tolerance.csv: tolerance_s 최대 차이 0.001 > 1e-09 | 실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)"
+  },
+  {
+   "group": "C",
+   "id": "press_evidence:C7",
+   "scenario": "의존 파일 press_guard/model.py 끝에 빈 줄",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.3,
+   "tail": "FAIL diagnostics_manifest.json: code_sha256 변경(실행 기록과 다름) — yejun/press_guard/model.py | FAIL diagnostics_manifest.json: cited 변경(실행 기록과 다름) — yejun/press_guard/model.py | 실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)"
+  },
+  {
+   "group": "C",
+   "id": "press_supervised:C0",
+   "scenario": "변조 없음",
+   "expect": "pass",
+   "rc": 0,
+   "as_expected": true,
+   "seconds": 1.1,
+   "tail": "통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)"
+  },
+  {
+   "group": "C",
+   "id": "press_supervised:C1",
+   "scenario": "grouped_records.csv precision[48] +1e-6(실행 기록 그대로)",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.1,
+   "tail": "FAIL manifest.json: outputs 변경(실행 기록과 다름) — grouped_records.csv | FAIL grouped_records.csv: precision 최대 차이 1e-06 > 1e-09 | 실패: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)"
+  },
+  {
+   "group": "C",
+   "id": "press_supervised:C2",
+   "scenario": "grouped_records.csv +1e-6 + 실행 기록 해시 위조(기록 True)",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.1,
+   "tail": "FAIL grouped_records.csv: precision 최대 차이 1e-06 > 1e-09 | 실패: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)"
+  },
+  {
+   "group": "C",
+   "id": "press_supervised:C3",
+   "scenario": "grouped_records.csv +1e-12 + 실행 기록 해시 위조(허용오차 1e-9 안, 설계상 통과)",
+   "expect": "pass",
+   "rc": 0,
+   "as_expected": true,
+   "seconds": 1.1,
+   "tail": "통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)"
+  },
+  {
+   "group": "C",
+   "id": "press_supervised:C4",
+   "scenario": "injection.csv 삭제",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.1,
+   "tail": "FAIL 결과 없음 — injection.csv | FAIL 결과 없음 — injection.csv | 실패: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)"
+  },
+  {
+   "group": "C",
+   "id": "press_supervised:C5",
+   "scenario": "run.py 끝에 주석 한 줄",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.1,
+   "tail": "FAIL manifest.json: code_sha256 변경(실행 기록과 다름) — run.py | 실패: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)"
+  },
+  {
+   "group": "C",
+   "id": "press_supervised:C6",
+   "scenario": "동결값 expected/grouped_records.csv +1e-3",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.1,
+   "tail": "FAIL 동결 기대값이 동결 당시와 다름 — grouped_records.csv | FAIL grouped_records.csv: precision 최대 차이 0.001 > 1e-09 | 실패: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)"
+  },
+  {
+   "group": "C",
+   "id": "press_supervised:C7",
+   "scenario": "의존 파일 analysis/press_supplement/common.py 끝에 빈 줄",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.1,
+   "tail": "FAIL manifest.json: dependencies 변경(실행 기록과 다름) — press_supplement/common.py | 실패: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)"
+  },
+  {
+   "group": "C",
+   "id": "press_advance:C0",
+   "scenario": "변조 없음",
+   "expect": "pass",
+   "rc": 0,
+   "as_expected": true,
+   "seconds": 1.3,
+   "tail": "참고 Git 제외 결과 없음 — segment_metrics.csv(재실행으로 생긴다) | 통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)"
+  },
+  {
+   "group": "C",
+   "id": "press_advance:C1",
+   "scenario": "primary.csv delay_median_s[5] +1e-6(실행 기록 그대로)",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.3,
+   "tail": "FAIL manifest.json: outputs 변경(실행 기록과 다름) — primary.csv | FAIL primary.csv: delay_median_s 최대 차이 1e-06 > 1e-09 | 실패: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)"
+  },
+  {
+   "group": "C",
+   "id": "press_advance:C2",
+   "scenario": "primary.csv +1e-6 + 실행 기록 해시 위조(기록 True)",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.3,
+   "tail": "참고 Git 제외 결과 없음 — segment_metrics.csv(재실행으로 생긴다) | FAIL primary.csv: delay_median_s 최대 차이 1e-06 > 1e-09 | 실패: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)"
+  },
+  {
+   "group": "C",
+   "id": "press_advance:C3",
+   "scenario": "primary.csv +1e-12 + 실행 기록 해시 위조(허용오차 1e-9 안, 설계상 통과)",
+   "expect": "pass",
+   "rc": 0,
+   "as_expected": true,
+   "seconds": 1.1,
+   "tail": "참고 Git 제외 결과 없음 — segment_metrics.csv(재실행으로 생긴다) | 통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)"
+  },
+  {
+   "group": "C",
+   "id": "press_advance:C4",
+   "scenario": "primary.csv 삭제",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.1,
+   "tail": "FAIL 결과 없음 — primary.csv | FAIL 결과 없음 — primary.csv | 실패: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)"
+  },
+  {
+   "group": "C",
+   "id": "press_advance:C5",
+   "scenario": "run_experiment.py 끝에 주석 한 줄",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.1,
+   "tail": "참고 Git 제외 결과 없음 — segment_metrics.csv(재실행으로 생긴다) | FAIL manifest.json: script_sha256 변경(실행 기록과 다름) — analysis/press_advance/run_experiment.py | 실패: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)"
+  },
+  {
+   "group": "C",
+   "id": "press_advance:C6",
+   "scenario": "동결값 expected/primary.csv +1e-3",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.1,
+   "tail": "FAIL 동결 기대값이 동결 당시와 다름 — primary.csv | FAIL primary.csv: delay_median_s 최대 차이 0.001 > 1e-09 | 실패: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)"
+  },
+  {
+   "group": "C",
+   "id": "press_selection:C0",
+   "scenario": "변조 없음",
+   "expect": "pass",
+   "rc": 0,
+   "as_expected": true,
+   "seconds": 1.2,
+   "tail": "통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)"
+  },
+  {
+   "group": "C",
+   "id": "press_selection:C1",
+   "scenario": "candidate_universe.csv f1_rows[39] +1e-6(실행 기록 그대로)",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.1,
+   "tail": "FAIL manifest.json: outputs 변경(실행 기록과 다름) — candidate_universe.csv | FAIL candidate_universe.csv: f1_rows 최대 차이 1e-06 > 1e-09 | 실패: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)"
+  },
+  {
+   "group": "C",
+   "id": "press_selection:C2",
+   "scenario": "candidate_universe.csv +1e-6 + 실행 기록 해시 위조(기록 True)",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.2,
+   "tail": "FAIL candidate_universe.csv: f1_rows 최대 차이 1e-06 > 1e-09 | 실패: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)"
+  },
+  {
+   "group": "C",
+   "id": "press_selection:C3",
+   "scenario": "candidate_universe.csv +1e-12 + 실행 기록 해시 위조(허용오차 1e-9 안, 설계상 통과)",
+   "expect": "pass",
+   "rc": 0,
+   "as_expected": true,
+   "seconds": 1.2,
+   "tail": "통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)"
+  },
+  {
+   "group": "C",
+   "id": "press_selection:C4",
+   "scenario": "unified_comparison.csv 삭제",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.2,
+   "tail": "FAIL 결과 없음 — unified_comparison.csv | FAIL 결과 없음 — unified_comparison.csv | 실패: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)"
+  },
+  {
+   "group": "C",
+   "id": "press_selection:C5",
+   "scenario": "run.py 끝에 주석 한 줄",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.2,
+   "tail": "FAIL manifest.json: code_sha256 변경(실행 기록과 다름) — run.py | 실패: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)"
+  },
+  {
+   "group": "C",
+   "id": "press_selection:C6",
+   "scenario": "동결값 expected/candidate_universe.csv +1e-3",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.1,
+   "tail": "FAIL 동결 기대값이 동결 당시와 다름 — candidate_universe.csv | FAIL candidate_universe.csv: f1_rows 최대 차이 0.001 > 1e-09 | 실패: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)"
+  },
+  {
+   "group": "C",
+   "id": "press_selection:C7",
+   "scenario": "의존 파일 press_guard/model.py 끝에 빈 줄",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.1,
+   "tail": "FAIL manifest.json: dependencies_sha256 변경(실행 기록과 다름) — press_guard/model.py | 실패: press_selection 실행 기록 무결성·동결 기대값 비교(결과 11개)"
+  },
+  {
+   "group": "C",
+   "id": "press_evidence:C8",
+   "scenario": "그림 d2a를 d2b로 바꾸고 실행 기록 해시 위조(기록 True; 설계상 그림 내용은 비교하지 않음)",
+   "expect": "pass",
+   "rc": 0,
+   "as_expected": true,
+   "seconds": 1.3,
+   "tail": "통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)"
+  },
+  {
+   "group": "C",
+   "id": "press_evidence:C9",
+   "scenario": "그림 d2a 삭제",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 1.2,
+   "tail": "FAIL 결과 없음 — figures/fig_d2a_timeline.png | FAIL 그림 없음 — figures/fig_d2a_timeline.png | 실패: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개)"
+  },
+  {
+   "group": "C",
+   "id": "press_evidence:C10",
+   "scenario": "--rerun(build_tables·build_diagnostics 제자리 재실행 후 비교)",
+   "expect": "pass",
+   "rc": 0,
+   "as_expected": true,
+   "seconds": 56.5,
+   "tail": "-- python analysis/press_evidence/build_tables.py | -- python analysis/press_evidence/build_diagnostics.py | 통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 38개) · 제자리 재실행"
+  },
+  {
+   "group": "S",
+   "id": "S0a",
+   "scenario": "보완 계약 시험(UCI ZIP 없음)",
+   "expect": "pass",
+   "rc": 0,
+   "as_expected": true,
+   "seconds": 3.7,
+   "tail": "..s..s.s.....                                                            [100%] | 10 passed, 3 skipped in 2.72s"
+  },
+  {
+   "group": "S",
+   "id": "S0b",
+   "scenario": "보완 계약 시험(UCI ZIP 넣음)",
+   "expect": "pass",
+   "rc": 0,
+   "as_expected": true,
+   "seconds": 7.5,
+   "tail": ".............                                                            [100%] | 13 passed in 6.35s"
+  },
+  {
+   "group": "S",
+   "id": "S1",
+   "scenario": "변조 없음(E1·E2·E3, ZIP 있음)",
+   "expect": "pass",
+   "rc": 0,
+   "as_expected": true,
+   "seconds": 3.6,
+   "tail": "통과: 무결성·기대값 비교 E1, E2, E3"
+  },
+  {
+   "group": "S",
+   "id": "S2",
+   "scenario": "e1_summary.csv delay_p90_s[391] +1e-6",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 3.6,
+   "tail": "FAIL E1: 산출물이 실행 기록과 다름 — e1_summary.csv | FAIL E1: e1_summary.csv: delay_p90_s 최대 차이 1e-06 > 1e-09 | 실패: 무결성·기대값 비교 E1, E2, E3"
+  },
+  {
+   "group": "S",
+   "id": "S3",
+   "scenario": "동결값 expected/e3_curve.csv threshold_cal_max[92] +1e-3",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 3.7,
+   "tail": "FAIL E3: 동결 기대값이 동결 당시 기록과 다름 — e3_curve.csv | FAIL E3: e3_curve.csv: threshold_cal_max 최대 차이 0.001 > 1e-09 | 실패: 무결성·기대값 비교 E1, E2, E3"
+  },
+  {
+   "group": "S",
+   "id": "S4",
+   "scenario": "e2_manifest config.cache_used 반전(결과 무관 옵션)",
+   "expect": "pass",
+   "rc": 0,
+   "as_expected": true,
+   "seconds": 3.6,
+   "tail": "참고 E2: 실행 옵션 cache_used = False (동결 True) — 결과에 영향이 없어 비교하지 않음 | 통과: 무결성·기대값 비교 E1, E2, E3"
+  },
+  {
+   "group": "S",
+   "id": "S5",
+   "scenario": "e2_manifest config.cache_version 변경",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 3.2,
+   "tail": "FAIL E2: 실행 설정이 동결 실행과 다름 | 실패: 무결성·기대값 비교 E1, E2, E3"
+  },
+  {
+   "group": "S",
+   "id": "S6a",
+   "scenario": "E2 uci_v2.py --no-cache 실행",
+   "expect": "pass",
+   "rc": 0,
+   "as_expected": true,
+   "seconds": 126.4,
+   "tail": "press_supplement E2          unseen_cooler     100               v2_3ch 0.030581           0.011834 0.015625 0.507785 | press_supplement E2          unseen_cooler     100               v2_4ch 0.059347           0.041420 0.031250 0.507785 | press_supplement E2          unseen_cooler     100         v2_4ch_phase 0.059347           0.041420 0.031250 0.507785"
+  },
+  {
+   "group": "S",
+   "id": "S6b",
+   "scenario": "E2 --no-cache 결과를 verify(E2)",
+   "expect": "pass",
+   "rc": 0,
+   "as_expected": true,
+   "seconds": 2.6,
+   "tail": "참고 E2: 실행 옵션 cache_used = False (동결 True) — 결과에 영향이 없어 비교하지 않음 | 통과: 무결성·기대값 비교 E2",
+   "bytes_equal_to_expected": {
+    "e2_uci_metrics.csv": true,
+    "e2_uci_strata.csv": true,
+    "e2_uci_component_diagnostic_posthoc.csv": true,
+    "e2_uci_comparison.csv": true
+   }
+  },
+  {
+   "group": "A",
+   "id": "A0",
+   "scenario": "변조 없음",
+   "expect": "pass",
+   "rc": 0,
+   "as_expected": true,
+   "seconds": 2.8,
+   "tail": "RESULT pass"
+  },
+  {
+   "group": "A",
+   "id": "A1",
+   "scenario": "v1 비교표 LSTM 행(lstm20) f1_all_rows +1e-06",
+   "expect": "pass",
+   "rc": 0,
+   "as_expected": true,
+   "seconds": 2.8,
+   "tail": "RESULT pass"
+  },
+  {
+   "group": "A",
+   "id": "A2",
+   "scenario": "v1 비교표 LSTM 행(lstm20) f1_all_rows +0.01",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 2.8,
+   "tail": "RESULT fail 분석 원본 무결성 오류: ['model_comparison_all.csv: v1 동결값과 허용오차 밖(f1_all_rows row 144 (lstm20): |Δ|=0.01 > tol 0.001)']. v1 선행 단계를 먼저 실행한다: python press_subm"
+  },
+  {
+   "group": "A",
+   "id": "A3",
+   "scenario": "v1 행별 예측 삭제(선행 단계 누락 상황)",
+   "expect": "fail",
+   "rc": 1,
+   "as_expected": true,
+   "seconds": 2.8,
+   "tail": "RESULT fail 분석 원본 무결성 오류: ['predictions_A.csv: 없음']. v1 선행 단계를 먼저 실행한다: python press_submission/run_all.py --steps 2 --no-baselines (또는 한 명령 재현: python press_gu",
+   "message_has_fix_command": true
+  },
+  {
+   "group": "A",
+   "id": "A4a",
+   "scenario": "오류 메시지의 해결 명령 실행: python press_submission/run_all.py --steps 2 --no-baselines(yejun/에서)",
+   "expect": "pass",
+   "rc": 0,
+   "as_expected": true,
+   "seconds": 12.4,
+   "tail": "  \"required_checks_ok\": true, |   \"required_checks_failed\": [] | }"
+  },
+  {
+   "group": "A",
+   "id": "A4b",
+   "scenario": "해결 명령 뒤 analyze 원본 검사",
+   "expect": "pass",
+   "rc": 0,
+   "as_expected": true,
+   "seconds": 2.4,
+   "tail": "RESULT pass"
+  },
+  {
+   "group": "A",
+   "id": "A5a",
+   "scenario": "대신 reproduce.py가 쓰는 명령: run_all.py --steps 2",
+   "expect": "pass",
+   "rc": 0,
+   "as_expected": true,
+   "seconds": 16.0,
+   "tail": "  \"required_checks_ok\": true, |   \"required_checks_failed\": [] | }"
+  },
+  {
+   "group": "A",
+   "id": "A5b",
+   "scenario": "그 뒤 analyze 원본 검사",
+   "expect": "pass",
+   "rc": 0,
+   "as_expected": true,
+   "seconds": 3.2,
+   "tail": "RESULT pass"
+  }
+ ],
+ "unexpected": 1
+}

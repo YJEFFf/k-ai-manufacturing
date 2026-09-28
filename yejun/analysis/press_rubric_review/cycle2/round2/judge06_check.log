@@ -1,0 +1,52 @@
+== P1_git없는사본_conda: 
+   재현 quick py3.12.14 15/15 통과 · 867.8초
+   저장 모델·보정기 동결 해시 일치: {'guard_A.json': True, 'guard_B.json': True, 'probability_A.json': True, 'probability_B.json': True}
+   행 단위 예측 동결 해시 일치: {'test_predictions_A.csv': True, 'test_predictions_B.csv': True, 'predictions_normal_A.csv': True, 'predictions_normal_B.csv': True, 'predictions_abnormal_A.csv': True, 'predictions_abnormal_B.csv': True}
+   파일만으로 F1: {'A': {'rows': 4690, 'normal_rows': 4090, 'abnormal_rows': 600, 'tp': 556, 'fp': 0, 'fn': 44, 'f1': 0.961938}, 'B': {'rows': 6697, 'normal_rows': 6097, 'abnormal_rows': 600, 'tp': 569, 'fp': 3, 'fn': 31, 'f1': 0.97099}}; 이상 행 식별 같음: True
+   press_guard 결과 38개: 바이트 같음 38, 허용오차 안 38; 다름 []
+   press_evidence: 29/33 바이트 같음, 허용오차 안 33; 다름 ['abnormal_segments.csv', 'block_context.csv', 'production_unit_evidence.csv', 'split_context.csv']
+   press_supervised: 3/3 바이트 같음, 허용오차 안 3; 다름 []
+   press_selection: 11/11 바이트 같음, 허용오차 안 11; 다름 []
+   press_advance: 2/2 바이트 같음, 허용오차 안 2; 다름 []
+   press_supplement: 10/10 바이트 같음, 허용오차 안 10; 다름 []
+   v1 결과 30/30개 생성: 바이트 같음 30, 1e-3 안 30; 다름 []
+   manifest 환경: {"python": "3.12.14", "blas": [{"api": "openblas", "version": "0.3.23.dev", "threads": 1, "user_api": "blas"}, {"api": "openblas", "version": "0.3.27", "threads": 1, "user_api": "blas"}, {"api": "openmp", "version": null, "threads": 1, "user_api": "openmp"}], "press_threads": "1", "platform": "macOS
+== P2_새클론_torch없는venv: 
+   재현 quick py3.12.8 23/23 통과 · 968.7초
+   저장 모델·보정기 동결 해시 일치: {'guard_A.json': True, 'guard_B.json': True, 'probability_A.json': True, 'probability_B.json': True}
+   행 단위 예측 동결 해시 일치: {'test_predictions_A.csv': True, 'test_predictions_B.csv': True, 'predictions_normal_A.csv': True, 'predictions_normal_B.csv': True, 'predictions_abnormal_A.csv': True, 'predictions_abnormal_B.csv': True}
+   파일만으로 F1: {'A': {'rows': 4690, 'normal_rows': 4090, 'abnormal_rows': 600, 'tp': 556, 'fp': 0, 'fn': 44, 'f1': 0.961938}, 'B': {'rows': 6697, 'normal_rows': 6097, 'abnormal_rows': 600, 'tp': 569, 'fp': 3, 'fn': 31, 'f1': 0.97099}}; 이상 행 식별 같음: True
+   press_guard 결과 38개: 바이트 같음 38, 허용오차 안 38; 다름 []
+   press_evidence: 29/33 바이트 같음, 허용오차 안 33; 다름 ['abnormal_segments.csv', 'block_context.csv', 'production_unit_evidence.csv', 'split_context.csv']
+   press_supervised: 3/3 바이트 같음, 허용오차 안 3; 다름 []
+   press_selection: 11/11 바이트 같음, 허용오차 안 11; 다름 []
+   press_advance: 2/2 바이트 같음, 허용오차 안 2; 다름 []
+   press_supplement: 10/10 바이트 같음, 허용오차 안 10; 다름 []
+   v1 결과 30/30개 생성: 바이트 같음 30, 1e-3 안 30; 다름 []
+   manifest 환경: {"python": "3.12.8", "blas": [{"api": "openblas", "version": "0.3.23.dev", "threads": 1, "user_api": "blas"}, {"api": "openblas", "version": "0.3.27", "threads": 1, "user_api": "blas"}, {"api": "openmp", "version": null, "threads": 1, "user_api": "openmp"}], "press_threads": "1", "platform": "macOS-
+== P3_새클론_CP949_resource차단: 
+   재현 quick py3.12.2 16/23 통과 · 999.3초
+   저장 모델·보정기 동결 해시 일치: {'guard_A.json': True, 'guard_B.json': True, 'probability_A.json': True, 'probability_B.json': True}
+   행 단위 예측 동결 해시 일치: {'test_predictions_A.csv': True, 'test_predictions_B.csv': True, 'predictions_normal_A.csv': True, 'predictions_normal_B.csv': True, 'predictions_abnormal_A.csv': True, 'predictions_abnormal_B.csv': True}
+   파일만으로 F1: {'A': {'rows': 4690, 'normal_rows': 4090, 'abnormal_rows': 600, 'tp': 556, 'fp': 0, 'fn': 44, 'f1': 0.961938}, 'B': {'rows': 6697, 'normal_rows': 6097, 'abnormal_rows': 600, 'tp': 569, 'fp': 3, 'fn': 31, 'f1': 0.97099}}; 이상 행 식별 같음: True
+   press_guard 결과 38개: 바이트 같음 38, 허용오차 안 38; 다름 []
+   press_evidence: 33/33 바이트 같음, 허용오차 안 33; 다름 []
+   press_supervised: 3/3 바이트 같음, 허용오차 안 3; 다름 []
+   press_selection: 11/11 바이트 같음, 허용오차 안 11; 다름 []
+   press_advance: 2/2 바이트 같음, 허용오차 안 2; 다름 []
+   press_supplement: 10/10 바이트 같음, 허용오차 안 10; 다름 []
+   v1 결과 30/30개 생성: 바이트 같음 30, 1e-3 안 30; 다름 []
+   manifest 환경: {"python": "3.12.2", "blas": [{"api": "openblas", "version": "0.3.23.dev", "threads": 1, "user_api": "blas"}, {"api": "openblas", "version": "0.3.27", "threads": 1, "user_api": "blas"}, {"api": "openmp", "version": null, "threads": 1, "user_api": "openmp"}], "press_threads": "1", "platform": "macOS-
+== P4_새클론_full: 
+   재현 full py3.12.2 16/16 통과 · 3798.7초
+   저장 모델·보정기 동결 해시 일치: {'guard_A.json': True, 'guard_B.json': True, 'probability_A.json': True, 'probability_B.json': True}
+   행 단위 예측 동결 해시 일치: {'test_predictions_A.csv': True, 'test_predictions_B.csv': True, 'predictions_normal_A.csv': True, 'predictions_normal_B.csv': True, 'predictions_abnormal_A.csv': True, 'predictions_abnormal_B.csv': True}
+   파일만으로 F1: {'A': {'rows': 4690, 'normal_rows': 4090, 'abnormal_rows': 600, 'tp': 556, 'fp': 0, 'fn': 44, 'f1': 0.961938}, 'B': {'rows': 6697, 'normal_rows': 6097, 'abnormal_rows': 600, 'tp': 569, 'fp': 3, 'fn': 31, 'f1': 0.97099}}; 이상 행 식별 같음: True
+   press_guard 결과 38개: 바이트 같음 38, 허용오차 안 38; 다름 []
+   press_evidence: 33/33 바이트 같음, 허용오차 안 33; 다름 []
+   press_supervised: 3/3 바이트 같음, 허용오차 안 3; 다름 []
+   press_selection: 11/11 바이트 같음, 허용오차 안 11; 다름 []
+   press_advance: 2/2 바이트 같음, 허용오차 안 2; 다름 []
+   press_supplement: 10/10 바이트 같음, 허용오차 안 10; 다름 []
+   v1 결과 30/30개 생성: 바이트 같음 29, 1e-3 안 29; 다름 ['lstm_common_meta.csv']
+   manifest 환경: {"python": "3.12.2", "blas": [{"api": "openblas", "version": "0.3.23.dev", "threads": 1, "user_api": "blas"}, {"api": "openblas", "version": "0.3.27", "threads": 1, "user_api": "blas"}, {"api": "openmp", "version": null, "threads": 1, "user_api": "openmp"}], "press_threads": "1", "platform": "macOS-

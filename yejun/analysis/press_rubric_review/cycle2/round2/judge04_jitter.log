@@ -1,0 +1,66 @@
+{
+ "raw_spacing_normal": {
+  "intervals": 19999,
+  "exact_0_1s": 19400,
+  "near_0_1s_not_exact": 0,
+  "gaps_over_50ms": 599
+ },
+ "raw_spacing_abnormal": {
+  "intervals": 599,
+  "exact_0_1s": 579,
+  "near_0_1s_not_exact": 0,
+  "gaps_over_50ms": 20
+ },
+ "jitter_pm0ms": {
+  "normal_records": 180,
+  "abnormal_records": 21,
+  "abnormal_rows_scored_with_dynamics": 558,
+  "abnormal_rows_scored_with_waveform": 499,
+  "abnormal_fn_rows": 31,
+  "abnormal_rows": 600,
+  "normal_alarm_rows": 3,
+  "normal_cases": 3,
+  "status_not_ok": 0,
+  "warnings": []
+ },
+ "jitter_pm1ms": {
+  "normal_records": 4115,
+  "abnormal_records": 398,
+  "abnormal_rows_scored_with_dynamics": 61,
+  "abnormal_rows_scored_with_waveform": 1,
+  "abnormal_fn_rows": 375,
+  "abnormal_rows": 600,
+  "normal_alarm_rows": 3,
+  "normal_cases": 3,
+  "status_not_ok": 0,
+  "warnings": []
+ },
+ "jitter_pm2ms": {
+  "normal_records": 4922,
+  "abnormal_records": 488,
+  "abnormal_rows_scored_with_dynamics": 18,
+  "abnormal_rows_scored_with_waveform": 0,
+  "abnormal_fn_rows": 398,
+  "abnormal_rows": 600,
+  "normal_alarm_rows": 3,
+  "normal_cases": 3,
+  "status_not_ok": 0,
+  "warnings": []
+ },
+ "recalibrate_jitter_pm1ms": {
+  "returncode": 1,
+  "stdout": "통과 정상 알림 단위 수가 보정 조건부 Beta-Binomial 95백분위 이하: 0 (한도 2 · 정상에서 거부할 확률 3.6% · 실제 알림률이 명목의 2·3배일 때 거부할 확률(검정력) 8%·19%)\n실패 고장 주입 cur_noise 0.2 2초 안 탐지율 ≥ 90%: nan (30행 이상 단위가 0개라 판정 불가(최소 10개))\n실패 고장 주입 cur_offset 0.4 2초 안 탐지율 ≥ 90%: nan (30행 이상 단위가 0개라 판정 불가(최소 10개))\n실패 고장 주입 vib_noise 4 2초 안 탐지율 ≥ 90%: nan (30행 이상 단위가 0개라 판정 불가(최소 10개))\n교대 8시간 1단계 알림: 명목 698.3건 · 보정 95% 2083.3건\n거부 · 모델 저장 안 함 · 보고서 /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge04_c2r2_jitter_gcq95pf_/site_report.json",
+  "stderr": "",
+  "units": {
+   "total": 10696,
+   "train": 10516,
+   "cal": 120,
+   "holdout": 60,
+   "min_cal_for_alpha": 99
+  },
+  "passed": false,
+  "saved": false,
+  "tmp": "/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge04_c2r2_jitter_gcq95pf_"
+ }
+}
+exit=0 elapsed=5s

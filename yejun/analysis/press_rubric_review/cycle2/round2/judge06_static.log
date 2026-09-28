@@ -1,0 +1,48 @@
+기준 f5679ca · 파이썬 79개(팀 시험 범위 47개)
+    2  패키지 밖|팀 시험 밖|read_text:no_encoding
+    6  패키지|팀 시험 밖|read_text:no_encoding
+    2  패키지|팀 시험 밖|subprocess_text:no_encoding
+   22  패키지|팀 시험 밖|write_text:no_encoding
+    2  패키지|팀 시험 범위|subprocess_text:no_encoding
+    1  패키지|팀 시험 범위|unix_module:resource:guarded
+    yejun/analysis/press_early/run_experiment.py:65 [read_text:no_encoding] protocol = json.loads((HERE / "protocol.json").read_text())
+    yejun/analysis/press_external/evaluate.py:55 [read_text:no_encoding] protocol = json.loads((HERE / "protocol.json").read_text())
+    yejun/analysis/press_selection/run.py:668 [subprocess_text:no_encoding] out = subprocess.run(["git", "log", "--diff-filter=A", "--format=%h %ad", "--date=format:%Y-%m-%d %H:%M:%S", "--", path],
+    yejun/press_guard/runtime.py:48 [unix_module:resource:guarded] import resource
+    yejun/press_guard/tools/capture_console.py:91 [subprocess_text:no_encoding] version = subprocess.run([chrome, "--version"], capture_output=True, text=True).stdout.strip()
+    yejun/press_submission/run_all.py:43 [subprocess_text:no_encoding] return subprocess.run(["git", "rev-parse", "--short", "HEAD"], capture_output=True, text=True, check=True,
+    yejun/press_submission/tests/test_review_regressions.py:25 [write_text:no_encoding] p.write_text(json.dumps(man))
+    yejun/press_submission/tests/test_review_regressions.py:45 [write_text:no_encoding] (out / "manifest.json").write_text(json.dumps(man))
+    yejun/press_submission/tests/test_review_regressions.py:50 [write_text:no_encoding] (out / "checks.json").write_text(json.dumps(checks))
+    yejun/press_submission/tests/test_review_regressions.py:71 [write_text:no_encoding] (out / "diagnosis.json").write_text(json.dumps(d))
+    yejun/press_submission/tests/test_review_regressions.py:87 [write_text:no_encoding] (out / "checks.json").write_text(json.dumps(c))
+    yejun/press_submission/tests/test_review_regressions.py:107 [write_text:no_encoding] (out / "expected" / "g.json").write_text(json.dumps(dict(g, cached=True, train_seconds=99.0)))
+    yejun/press_submission/tests/test_review_regressions.py:108 [write_text:no_encoding] (out / "g.json").write_text(json.dumps(g))
+    yejun/press_submission/tests/test_review_regressions.py:110 [write_text:no_encoding] (out / "g.json").write_text(json.dumps(dict(g, f1=0.62)))
+    yejun/press_submission/tests/test_review_regressions.py:122 [write_text:no_encoding] (out / "checks.json").write_text(json.dumps(checks))
+    yejun/press_submission/tests/test_review_regressions.py:142 [write_text:no_encoding] (out / name).write_text("tampered")
+    yejun/press_submission/tests/test_review_regressions.py:150 [write_text:no_encoding] p.write_text(json.dumps(man))
+    yejun/press_submission/tests/test_review_regressions.py:176 [write_text:no_encoding] b.write_text(json.dumps({"f1": 0.61, "tp": 10}))
+    yejun/press_submission/tests/test_review_regressions.py:177 [write_text:no_encoding] a.write_text(json.dumps({"f1": 0.6101, "tp": 10}))
+    yejun/press_submission/tests/test_review_regressions.py:179 [write_text:no_encoding] a.write_text(json.dumps({"f1": 0.6101, "tp": 11}))
+    yejun/press_submission/tests/test_review_regressions.py:181 [write_text:no_encoding] a.write_text(json.dumps({"f1": 0.6101, "tp": 10.0001}))
+    yejun/press_submission/tests/test_review_regressions.py:214 [write_text:no_encoding] fake_git.write_text('#!/bin/bash\nif [[ "$1" == clone ]]; then mkdir -p "$4/yejun/press_submission/outputs/expected"; '
+    yejun/press_submission/tests/test_review_regressions.py:217 [write_text:no_encoding] fake_python.write_text('#!/bin/bash\nif [[ "$1" == run_all.py ]]; then exit ' + str(run_status) + '; fi\n'
+    yejun/press_submission/tests/test_review_regressions.py:223 [subprocess_text:no_encoding] result = subprocess.run(["bash", str(script)], env=env, text=True, capture_output=True)
+    yejun/press_submission/tests/test_review_regressions.py:20 [read_text:no_encoding] man = json.loads(p.read_text())
+    yejun/press_submission/tests/test_review_regressions.py:42 [write_text:no_encoding] (art / name).write_text(json.dumps({"model_id": name, "state": {"u": 1.0}}))
+    yejun/press_submission/tests/test_review_regressions.py:70 [read_text:no_encoding] d = json.loads((out / "diagnosis.json").read_text()); d["structure"]["normal"]["rows"] = -123
+    yejun/press_submission/tests/test_review_regressions.py:86 [read_text:no_encoding] c = json.loads((out / "checks.json").read_text()); c["conformal_mc_within_4se"] = False
+    yejun/press_submission/tests/test_review_regressions.py:117 [read_text:no_encoding] checks = json.loads((out / "checks.json").read_text())
+    yejun/press_submission/tests/test_review_regressions.py:149 [read_text:no_encoding] p = out / "manifest.json"; man = json.loads(p.read_text()); man["code_sha256"] = "c" * 64
+    yejun/press_submission/tests/test_review_regressions.py:160 [write_text:no_encoding] art.write_text("tampered") if how == "tamper" else art.unlink()
+    yejun/press_submission/tests/test_review_regressions.py:37 [write_text:no_encoding] (out / name).write_text(json.dumps({"structure": {"normal": {"rows": 20000}}, "path": "/x"}))
+    yejun/press_submission/tests/test_review_regressions.py:39 [write_text:no_encoding] (out / name).write_text("test artifact")
+    yejun/press_submission/tests/test_review_regressions.py:228 [read_text:no_encoding] assert calls.read_text().splitlines()[-3:] == ["--steps", "3", "committed"]   # 클론에 커밋된 기대값을 쓴다
+    yejun/press_submission/vendor/press_policy_audit.py:187 [write_text:no_encoding] (args.output/'press_policy_manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2))
+문서:
+   14  absolute_path|yejun/press_guard/HISTORY.md
+    2  posix_env_prefix|yejun/analysis/press_selection/README.md
+    8  posix_env_prefix|yejun/press_guard/HISTORY.md
+    1  posix_env_prefix|yejun/press_submission/README.md
+    2  posix_env_prefix|yejun/press_submission/tools/clean_repro.sh
