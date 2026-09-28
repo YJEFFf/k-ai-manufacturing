@@ -1,7 +1,7 @@
 section,item,split,value,source
 탐색 장부,"같은 이상 21구간에서 본 점수 규칙(단계별 이름 기준, 현재 HEAD)",-,"65개(선정 전 55, 선정 후 10)",search_ledger.csv
 탐색 장부,커밋 dcd300a 시점,-,63개. 이후 3ad2452(지도학습 v2)가 가중 변형 2개(logistic_balanced·hgb_balanced)를 더해 현재 65개,"search_ledger.csv, git 기록(커밋 dcd300a의 표)"
-탐색 장부,이 폴더의 사후 대안(선정에 쓰지 않음),-,5NN·IF·합·AR(1)·AR(3)·AR(4)·Fisher·Stouffer·평균·지속성 2종·진폭 조건부 1종 = 12개,"same_feature_alternatives.csv, combination_rules.csv, fp_mitigation_v2.csv"
+탐색 장부,이 폴더의 사후 대안(선정에 쓰지 않음),-,5NN·IF·합·AR(1)·AR(3)·AR(4)·Fisher·Stouffer·평균·지속성 2종·진폭 조건부 1종·단일 성분 3종 = 15개,"same_feature_alternatives.csv, combination_rules.csv, fp_mitigation_v2.csv"
 후보 재계산,선정 전 후보 점수 규칙(원래 코드로 재계산),A,"39개, 커밋 표와 일치 39/39",candidate_universe.csv
 후보 재계산,선정 전 후보 점수 규칙(원래 코드로 재계산),B,"39개, 커밋 표와 일치 39/39",candidate_universe.csv
 후보 재계산,서로 다른 경보 패턴(A·B 이상·정상 경보 벡터 기준),-,31종,candidate_universe.csv(alarm_pattern)

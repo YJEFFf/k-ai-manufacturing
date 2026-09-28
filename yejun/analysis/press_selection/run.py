@@ -7,7 +7,7 @@
     ... run.py --check    # 임시 폴더에 다시 계산해 이 폴더 산출물과 해시 대조(파일을 바꾸지 않음)
 
 산출물(이 폴더)
-  same_feature_alternatives.csv   M3  v2 세 성분을 그대로 넣은 5NN·IF·합, AR 차수 1~4
+  same_feature_alternatives.csv   M3  v2 세 성분을 그대로 넣은 5NN·IF·합, AR 차수 1~4, 같은 보정 규칙의 단일 성분(크기·파형·예측 오차)
   combination_rules.csv           O3  Tippett(=fmax)·Fisher·Stouffer·합·평균, 근거 성분 없는 경보
   fp_mitigation_v2.csv            E7  크기 성분 지속성 2/3, 전류 진폭 조건부 진동 잔차(v1 방식 이식), v1 결과 대조
   search_ledger.csv               M4  같은 이상 21구간에서 본 점수 규칙 장부
@@ -267,6 +267,10 @@ def same_feature_alternatives(ctxs):
                            {k: -iso.score_samples(mats[k]) for k in ("cal", "test", "abn")}),
             "합(v2 성분)": ("같은 특징 대안", V2_INPUT + ". 성분 합(결측 성분 0)", {k: mats[k].sum(1) for k in ("cal", "test", "abn")}),
         }
+        # 같은 보정 규칙에서 성분 하나만 쓴 탐지기(적대적 채점 J1: 일반 시계열 기준선). 예측 오차 단독이 정상 학습 AR(2) 잔차 하나다.
+        for label, key, text in SINGLE_COMPONENTS:
+            one = {k: C.parts[k]["comp"][key] for k in ("cal", "test", "abn")}
+            cand[label] = ("단일 성분", text, one, {k: v[:, None] for k, v in one.items()})
         for order in (1, 2, 3, 4):
             ar = ARp(C.parts["train"], order)
             if order == 2:
@@ -291,6 +295,9 @@ def same_feature_alternatives(ctxs):
     return pd.DataFrame(rows), checks
 
 
+SINGLE_COMPONENTS = (("크기 단독", "g_magnitude", "세 센서 max|z|(정상 학습 꼬리) 하나"),
+                     ("파형 단독", "g_waveform", "전류 초반 6→8 사인 1−R²(정상 학습 꼬리) 하나"),
+                     ("예측 오차(AR(2)) 단독", "g_dynamics", "전류 AR(2) 잔차(정상 학습 적합·꼬리) 하나 — 일반 시계열 기준선"))
 ALT_REMARK = {
     "v2 (fmax, AR(2))": KEEP_FMAX,
     "5NN(v2 성분)": ("같은 입력이면 5NN이 미탐을 조금 줄인다(α=1%: A 44→36, B 31→29, 정상 알림 같음). α=1% 주입 전이에서도 A는 모든 족에서 fmax와 같거나 높고 "
@@ -302,6 +309,9 @@ ALT_REMARK = {
     "early+AR(2)": "일반 구현으로 다시 적합한 AR(2). v2와 경보가 같음을 확인하는 대조",
     "early+AR(3)": "AR(2)보다 미탐이 많다",
     "early+AR(4)": "AR(2)보다 미탐이 많고 B 정상 알림이 늘어난다",
+    "크기 단독": "같은 보정 규칙의 단일 성분(사후 비교). 이상 기록 3개를 놓치고 행 미탐이 크게 는다",
+    "파형 단독": "같은 보정 규칙의 단일 성분(사후 비교). 이상 기록 3개를 놓친다",
+    "예측 오차(AR(2)) 단독": "같은 보정 규칙의 일반 시계열 기준선(사후 비교). 이상 기록 1개를 놓친다. 세 성분을 fmax로 합친 v2가 기록·행 모두 낫다",
 }
 RULE_REMARK = {
     "tippett_fmax": KEEP_FMAX,
@@ -781,7 +791,7 @@ def selection_evidence(ledger, universe, nested, nested_meta, paired_summary, si
                      value="63개. 이후 3ad2452(지도학습 v2)가 가중 변형 2개(logistic_balanced·hgb_balanced)를 더해 현재 65개",
                      source="search_ledger.csv, git 기록(커밋 dcd300a의 표)"))
     rows.append(dict(section="탐색 장부", item="이 폴더의 사후 대안(선정에 쓰지 않음)", split="-",
-                     value="5NN·IF·합·AR(1)·AR(3)·AR(4)·Fisher·Stouffer·평균·지속성 2종·진폭 조건부 1종 = 12개",
+                     value="5NN·IF·합·AR(1)·AR(3)·AR(4)·Fisher·Stouffer·평균·지속성 2종·진폭 조건부 1종·단일 성분 3종 = 15개",
                      source="same_feature_alternatives.csv, combination_rules.csv, fp_mitigation_v2.csv"))
     for sid in ("A", "B"):
         u = universe[universe.split_id.eq(sid)]
@@ -901,6 +911,11 @@ def unified_comparison(ctxs, alternatives, rules, sup_rows):
             rows.append(dict(split_id=sid, model=label, family="같은 특징 대안(사후)", protocol="정상 보정 conformal α=1%",
                              input_condition=a.input_condition, uses_abnormal_labels="아니오",
                              **{k: a[k] for k in METRIC_COLS}, note=POSTHOC, source="same_feature_alternatives.csv"))
+        for label, _, _ in SINGLE_COMPONENTS:
+            a = alt.loc[label]
+            rows.append(dict(split_id=sid, model=label, family="단일 성분(같은 보정 규칙, 사후)", protocol="정상 보정 conformal α=1%",
+                             input_condition=a.input_condition, uses_abnormal_labels="아니오",
+                             **{k: a[k] for k in METRIC_COLS}, note=ALT_REMARK[label], source="same_feature_alternatives.csv"))
         fi = rules[rules.split_id.eq(sid) & np.isclose(rules.alpha, .01) & rules.rule.eq("fisher")].iloc[0]
         rows.append(dict(split_id=sid, model="Fisher 결합(v2 성분)", family="같은 특징 대안(사후)", protocol="정상 보정 conformal α=1%",
                          input_condition=V2_INPUT, uses_abnormal_labels="아니오", **{k: fi[k] for k in METRIC_COLS},
@@ -919,7 +934,8 @@ METRIC_COLS = ("tp", "fp", "fn", "precision", "recall", "f1_rows", "oracle_f1_ro
                "abnormal_detected", "abnormal_records", "delay_median_s", "delay_max_s", "record_f1", "record_auroc")
 UNIFIED_COLS = ("split_id", "model", "family", "protocol", "input_short", "input_condition", "uses_abnormal_labels") + METRIC_COLS + ("note", "source")
 INPUT_SHORT = {"가이드북 LSTM-AE(재현)": "세 센서 20행 창", "v1 기준선(크기+사인8)": "크기 + 사인8", "5NN(v2 성분)": "v2 세 성분",
-               "합(v2 성분)": "v2 세 성분", "Fisher 결합(v2 성분)": "v2 세 성분", "v2 최종(fmax)": "v2 세 성분"}
+               "합(v2 성분)": "v2 세 성분", "Fisher 결합(v2 성분)": "v2 세 성분", "v2 최종(fmax)": "v2 세 성분",
+               "크기 단독": "v2 크기 성분", "파형 단독": "v2 파형 성분", "예측 오차(AR(2)) 단독": "v2 예측 오차 성분"}
 
 
 def unified_markdown(u):
