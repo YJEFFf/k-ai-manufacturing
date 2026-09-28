@@ -1,0 +1,22 @@
+[
+  {
+    "script": "fault_injection.py",
+    "returncode": 0,
+    "seconds": 409.82
+  },
+  {
+    "script": "uci_v2.py",
+    "returncode": 0,
+    "seconds": 59.27
+  },
+  {
+    "script": "recalibration.py",
+    "returncode": 0,
+    "seconds": 178.78
+  },
+  {
+    "script": "figures.py",
+    "returncode": 0,
+    "seconds": 1.06
+  }
+]

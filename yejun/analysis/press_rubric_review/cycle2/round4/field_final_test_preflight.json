@@ -1,0 +1,11 @@
+{
+  "passed": 130,
+  "failed": 2,
+  "seconds": 220.13,
+  "regeneration_in_progress": true,
+  "failed_tests": [
+    "test_analyze.py::test_verify_detects_tampering",
+    "test_review_regressions.py::test_v1_rerun_does_not_break_v2_verify"
+  ],
+  "reason": "전체 재생성과 동시에 시험을 시작해 이전 코드 해시·아직 생성되지 않은 analysis 실행 기록을 비교했다. 최종 동결 뒤 이 두 시험을 재실행하고 별도 새 환경에서 132개 전체 시험을 수행한다."
+}

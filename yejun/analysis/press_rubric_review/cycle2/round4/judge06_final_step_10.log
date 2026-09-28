@@ -1,0 +1,8 @@
+$ /private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python /private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/analysis/press_selection/run.py
+
+[   5.4s] 문맥·주 수치 대조
+[  38.4s] M3·O3·E7
+[  54.3s] M4
+[  82.0s] M5
+내부 점검: 통과 · 82.2 s
+

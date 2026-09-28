@@ -1,0 +1,6 @@
+{"mutation": "baseline", "returncode": 0, "failure_lines": []}
+{"mutation": "alarm_rows", "returncode": 1, "failure_lines": ["FAIL expected.integrity  (['predictions_digest.json: 실행 후 변경'])"]}
+{"mutation": "sha256", "returncode": 1, "failure_lines": ["FAIL expected.integrity  (['predictions_digest.json: 실행 후 변경'])"]}
+{"mutation": "exact_sha256", "returncode": 1, "failure_lines": ["FAIL expected.integrity  (['predictions_digest.json: 실행 후 변경'])"]}
+{"files": 476, "local_links": 161, "broken": [], "internal_markers": [], "package_checks": []}
+Snapshot: /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/regenerated_snapshot_r9jedclr

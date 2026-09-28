@@ -23,6 +23,7 @@ import re
 import shutil
 import subprocess
 import sys
+from urllib.parse import unquote, urlsplit
 
 import pandas as pd
 
@@ -42,7 +43,7 @@ GROUPS = [
     ("dependency", "analysis/press_dayshift", ["v2_current_scale.csv"]),
     ("dependency", "analysis/press_improvement", ["candidate_metrics.csv", "run_experiment.py", "config.json"]),
     ("dependency", "analysis/press_early", ["metrics.csv", "primary.csv", "run_experiment.py", "protocol.json"]),
-    ("dependency", "analysis/press_external", ["acquire.py", "metrics.csv", "partitions.csv"]),
+    ("dependency", "analysis/press_external", ["acquire.py", "acquisition.json", "metrics.csv", "partitions.csv"]),
 ]
 # Git에서 뺀 파일 가운데 묶음에 넣을 것(실행하면 다시 생기지만, 테스트 예측과 저장 모델은 제출물이다)
 GENERATED = [
@@ -129,6 +130,29 @@ def blind_checks(table):
             hits = sorted(set(ABSOLUTE.findall(text)))
             if hits:
                 problems.append(f"절대 경로 {hits}: {rel}")
+    problems += document_link_checks(table)
+    return problems
+
+
+def document_link_checks(table):
+    """포함 문서의 상대 링크가 목록 안의 파일/폴더를 가리키는지 검사한다. 외부 URL·문서 내 앵커는 제외한다."""
+    included = {(REPO / rel).resolve() for rel in table.path}
+    problems = []
+    for rel in table.path:
+        path = REPO / rel
+        if path.suffix.lower() != ".md":
+            continue
+        content = re.sub(r"```.*?```", "", path.read_text(encoding="utf-8"), flags=re.S)
+        links = re.findall(r"!?\[[^\]]*\]\((<[^>]+>|[^\s)]+)(?:\s+[^)]*)?\)", content)
+        links += re.findall(r"^\s*\[[^\]]+\]:\s*(<[^>]+>|\S+)", content, flags=re.M)
+        for raw in links:
+            target = raw.strip("<>")
+            parsed = urlsplit(target)
+            if parsed.scheme or parsed.netloc or not parsed.path:
+                continue
+            resolved = (path.parent / unquote(parsed.path)).resolve()
+            if resolved not in included and not (resolved.is_dir() and any(resolved in p.parents for p in included)):
+                problems.append(f"문서 상대 링크가 목록에 없음: {rel} → {target}")
     return problems
 
 

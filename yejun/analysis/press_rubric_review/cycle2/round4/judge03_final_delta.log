@@ -1,0 +1,93 @@
+{
+  "head": "6c61a88d8de437182a2cdd25f640af556a23036a",
+  "prior_files_compared": 52,
+  "prior_files_byte_identical": 48,
+  "product_files_compared": 33,
+  "product_files_byte_identical": 30,
+  "changed": [
+    {
+      "path": "analysis/press_rubric_review/cycle2/round4/judge_03_errors.md",
+      "previous": "b0ba8b5307458b7a48ac5122f69b5e9ea53e4681fa9673b0ca30b2a048f8335f",
+      "current": "9341e4aaaf591f797ab89a51c67e2c8053acaca48b2ee602e21dc5a348936c4a"
+    },
+    {
+      "path": "analysis/press_supplement/e1_manifest.json",
+      "previous": "4da1e15f60123202ca19e8c06b236c3cf3cadc9d97ed0207e77f173f90a3ecf0",
+      "current": "11af225a5ca523e26543beef77189ac905dbeb6fe5d21c0661c3437d81eb16a1"
+    },
+    {
+      "path": "press_guard/README.md",
+      "previous": "b7c24713312ad7fae907e1380750ec24acbf9540b6ff3d4df4067d2c19fb5ff1",
+      "current": "bec969c543a5f7f31c8560fd528efb9f944bd0c478ce524c9a3b8f5b92ed16a7"
+    },
+    {
+      "path": "press_guard/model.py",
+      "previous": "b50a90f09641d5c5f199fa5a48609b665b3bedf2e58f561836fdaa084e76427d",
+      "current": "8b9493a248609180f139aa777ed0b1cbf29d3bfca5e5b98f2e588cbeb0cb3f6f"
+    }
+  ],
+  "missing": [],
+  "statistical_formula_ast_equal_to_baseline": {
+    "components": true,
+    "sine_score": true,
+    "ar_residual": true
+  },
+  "original_input_status": {
+    "normal": {
+      "rows": 20000,
+      "records": 600,
+      "status_counts": {
+        "ok": 20000
+      }
+    },
+    "abnormal": {
+      "rows": 600,
+      "records": 21,
+      "status_counts": {
+        "ok": 600
+      }
+    }
+  },
+  "primary_recount": [
+    {
+      "split": "A",
+      "tp": 556,
+      "fp": 0,
+      "fn": 44,
+      "normal_notified_segments": 0,
+      "abnormal_notified_segments": 21,
+      "f1": 0.9619377162629758
+    },
+    {
+      "split": "B",
+      "tp": 569,
+      "fp": 3,
+      "fn": 31,
+      "normal_notified_segments": 3,
+      "abnormal_notified_segments": 21,
+      "f1": 0.9709897610921502
+    }
+  ],
+  "model_sha256": {
+    "guard_A.json": "c938707f1dd16e7c239b8053e7f032d8fac828d6c753de2b898ba9130a594f10",
+    "guard_B.json": "b64ac3b30bc697034104287964f3154e88c8a50749ccdec04f6d4f8744fd6969",
+    "probability_A.json": "1a8100e78046393d9292fc7c305b5ec57b46c4e2c73b03abeb596052a8705f8a",
+    "probability_B.json": "7fde4cd1bdfa74e78e2d3f07c5dbd9c27619e19b2e94ceb8fab786c27abcaae8"
+  },
+  "e1_manifest_current_model_hash_valid": true,
+  "existing_59_csv_delta": {
+    "compared": 59,
+    "changed": []
+  },
+  "previous_full_checks_retained": 1607,
+  "long_injection_rerun": false,
+  "score": 14.5,
+  "score_range": [
+    14.2,
+    14.8
+  ],
+  "remaining_P0": 0,
+  "remaining_P1": 0,
+  "remaining_P2": 0,
+  "elapsed_s": 1.48
+}

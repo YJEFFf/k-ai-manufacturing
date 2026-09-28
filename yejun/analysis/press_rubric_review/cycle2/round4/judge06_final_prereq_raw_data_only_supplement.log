@@ -1,0 +1,12 @@
+$ /opt/anaconda3/bin/python -m pytest -q -rs -p no:cacheprovider yejun/analysis/press_supplement/test_contract.py
+sssssssssssss                                                            [100%]
+=========================== short test summary info ============================
+SKIPPED [1] yejun/analysis/press_supplement/test_contract.py:51: 먼저 python yejun/press_guard/reproduce.py 로 원본 배치(--data 주최 측 ZIP)와 학습을 한다: press_guard/artifacts/guard_A.json, press_guard/artifacts/guard_B.json
+SKIPPED [4] yejun/analysis/press_supplement/test_contract.py:58: 먼저 python yejun/press_guard/reproduce.py 로 원본 배치(--data 주최 측 ZIP)와 학습을 한다: press_guard/artifacts/guard_A.json, press_guard/artifacts/guard_B.json
+SKIPPED [3] yejun/analysis/press_supplement/test_contract.py:58: UCI 원본 ZIP 없음(Git 제외 73 MB). python analysis/press_external/acquire.py로 받으면 검사한다
+SKIPPED [1] yejun/analysis/press_supplement/test_contract.py:80: 먼저 python yejun/press_guard/reproduce.py 로 원본 배치(--data 주최 측 ZIP)와 학습을 한다: press_guard/artifacts/guard_A.json, press_guard/artifacts/guard_B.json
+SKIPPED [1] yejun/analysis/press_supplement/test_contract.py:92: 먼저 python yejun/press_guard/reproduce.py 로 원본 배치(--data 주최 측 ZIP)와 학습을 한다: press_guard/artifacts/guard_A.json, press_guard/artifacts/guard_B.json
+SKIPPED [1] yejun/analysis/press_supplement/test_contract.py:100: 먼저 python yejun/press_guard/reproduce.py 로 원본 배치(--data 주최 측 ZIP)와 학습을 한다: press_guard/artifacts/guard_A.json, press_guard/artifacts/guard_B.json
+SKIPPED [1] yejun/analysis/press_supplement/test_contract.py:114: 먼저 python yejun/press_guard/reproduce.py 로 원본 배치(--data 주최 측 ZIP)와 학습을 한다: press_guard/artifacts/guard_A.json, press_guard/artifacts/guard_B.json
+SKIPPED [1] yejun/analysis/press_supplement/test_contract.py:123: 먼저 python yejun/press_guard/reproduce.py 로 원본 배치(--data 주최 측 ZIP)와 학습을 한다: press_guard/artifacts/guard_A.json, press_guard/artifacts/guard_B.json
+13 skipped in 1.14s

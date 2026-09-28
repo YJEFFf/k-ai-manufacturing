@@ -1,0 +1,34 @@
+{
+  "status": "final_confirmed",
+  "score": 9.4,
+  "score_range": [
+    9.2,
+    9.6
+  ],
+  "remaining_originality_findings": {
+    "P0": 0,
+    "P1": 0,
+    "P2": 0
+  },
+  "head": "6c61a88d8de437182a2cdd25f640af556a23036a",
+  "target_files": 37,
+  "changed_since_final_verification": [],
+  "additional_reference_hashes": {
+    "press_guard/serve.py": "733a302c49af6327fe24e99d9a0ea70393ac605c07a1e4edb339ed0ecef86b35",
+    "analysis/press_rubric_review/cycle2/round4/judge04_prefix_regression.json": "d6b9d5eec83ea4681c56ce2ae793455ee1d3cbb19df85c85acbfa6259e66e435",
+    "analysis/press_rubric_review/cycle2/round4/judge04_time_reversal.json": "2db220eab66863301c2fd46c8f7dc26deb86f94a10fa56e1986ee21367494025",
+    "analysis/press_rubric_review/cycle2/round4/field_final_rerun.json": "c80d98857e8dd9b270125ef5d72b6348ca17c80548a78123f471d25e88dd9fbc",
+    "analysis/press_rubric_review/cycle2/round4/field_final_csv_delta.json": "e1b55aeeb596fa779e3f0ed0cc96e33553fa8bcab56565ec3dcad8d4da4e99ff"
+  },
+  "verification_sha256": {
+    "judge05_final_delta.json": "0634dfeb12effa5e91c98b8e27ee3fab73b487fef0cd22c763709fb505c3f2b6",
+    "judge05_pytest.log": "a8b4079f2459f69219f5327a7588599c34038c257ae596810327abe0c0a879f5",
+    "judge05_units_probe.json": "c4c3a1c3f12d3e2393c6a3f120fe7d1afd75b88b563246150432da8724b6505f",
+    "judge05_units_probe.log": "22eda6b61117fc362890a4e6a925c342d33779e4038ee46e808f560fafe2508f",
+    "judge05_units_probe.py": "23bd53c4044fb25cd32115f55f0a6fe9f52999bd3c0d8a01f35308bcf0467ca5",
+    "judge05_verify.json": "e9b018f017863efbbaf6beb65057826a83369da3441149ebd45a7261464cb539",
+    "judge05_verify.log": "f301c681d7bd110d5272b4392c8d18f035172ef8a243ce3634386f4134ca32df",
+    "judge05_verify.py": "6cec417eaf2b14bc585f7f1fa819e38864a6131afe6fcc454bf138f446de83a8"
+  },
+  "review_sha256": "0c890d92a824cf0711b58c374fda6857186916b2ef7ea84f5a93cbe2b4afccbb"
+}

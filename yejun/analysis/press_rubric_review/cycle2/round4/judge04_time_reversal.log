@@ -1,0 +1,51 @@
+{
+  "case": "three single-alarm records separated by a backward one-day timestamp jump",
+  "rows": 150,
+  "record_count": 101,
+  "statuses": {
+    "bad_time_order": 100,
+    "ok": 50
+  },
+  "warnings": "역순 수집 시각 100행: 앞서 수신한 최대 시각보다 이르므로 판정을 보류했습니다. 수집 PC 시각과 입력 순서를 확인하세요.",
+  "cases": [
+    {
+      "first_timestamp": "2022-07-14 00:00:04.100",
+      "alarm_rows": 1,
+      "level": 1,
+      "incident_id": 1
+    }
+  ],
+  "incidents": [
+    {
+      "incident_id": 1,
+      "cases": 1,
+      "level": 1,
+      "escalation_row": null
+    }
+  ],
+  "events": [
+    {
+      "timestamp": "2022-07-14 00:00:04.100",
+      "record_id": 0,
+      "kind": "사건 시작",
+      "notify": 1
+    },
+    {
+      "timestamp": "2022-07-13 00:00:00.000",
+      "record_id": 1,
+      "kind": "수집 오류",
+      "notify": 1
+    }
+  ],
+  "chunks_match_batch": {
+    "1": true,
+    "7": true,
+    "128": true
+  },
+  "seconds": 2.6108517499997106,
+  "reversed_records_merged": false,
+  "collection_problem_visible": true,
+  "reverse_quality_windows": [],
+  "negative_quality_window": false,
+  "quality_input_rejected_rows": 138
+}

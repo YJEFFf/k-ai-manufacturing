@@ -1,0 +1,58 @@
+$ /private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python /private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/analysis/press_supervised/run.py
+
+grouped A window
+grouped A window_plus_v2
+grouped B window
+grouped B window_plus_v2
+injection A none 0.0
+injection A vib_noise 0.25
+injection A vib_noise 0.5
+injection A vib_noise 1
+injection A vib_noise 2
+injection A vib_noise 4
+injection A vib_noise 8
+injection A cur_noise 0.02
+injection A cur_noise 0.05
+injection A cur_noise 0.1
+injection A cur_noise 0.2
+injection A cur_noise 0.4
+injection A cur_noise 0.8
+injection A cur_offset 0.05
+injection A cur_offset 0.1
+injection A cur_offset 0.2
+injection A cur_offset 0.4
+injection A cur_offset 0.8
+injection A cur_offset 1.6
+injection A cur_gain 0.5
+injection A cur_gain 0.7
+injection A cur_gain 0.85
+injection A cur_gain 1.15
+injection A cur_gain 1.3
+injection A cur_gain 1.5
+injection B none 0.0
+injection B vib_noise 0.25
+injection B vib_noise 0.5
+injection B vib_noise 1
+injection B vib_noise 2
+injection B vib_noise 4
+injection B vib_noise 8
+injection B cur_noise 0.02
+injection B cur_noise 0.05
+injection B cur_noise 0.1
+injection B cur_noise 0.2
+injection B cur_noise 0.4
+injection B cur_noise 0.8
+injection B cur_offset 0.05
+injection B cur_offset 0.1
+injection B cur_offset 0.2
+injection B cur_offset 0.4
+injection B cur_offset 0.8
+injection B cur_offset 1.6
+injection B cur_gain 0.5
+injection B cur_gain 0.7
+injection B cur_gain 0.85
+injection B cur_gain 1.15
+injection B cur_gain 1.3
+injection B cur_gain 1.5
+done 165.4 s
+

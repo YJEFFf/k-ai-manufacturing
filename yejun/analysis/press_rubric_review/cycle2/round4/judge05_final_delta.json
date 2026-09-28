@@ -1,0 +1,34 @@
+{
+  "previous_head": "6c61a88d8de437182a2cdd25f640af556a23036a",
+  "final_head": "6c61a88d8de437182a2cdd25f640af556a23036a",
+  "previous_elapsed_seconds": 14.964,
+  "previous_target_count": 37,
+  "changed_files": [
+    {
+      "file": "press_guard/model.py",
+      "previous_sha256": "b50a90f09641d5c5f199fa5a48609b665b3bedf2e58f561836fdaa084e76427d",
+      "final_sha256": "8b9493a248609180f139aa777ed0b1cbf29d3bfca5e5b98f2e588cbeb0cb3f6f"
+    },
+    {
+      "file": "press_guard/README.md",
+      "previous_sha256": "b7c24713312ad7fae907e1380750ec24acbf9540b6ff3d4df4067d2c19fb5ff1",
+      "final_sha256": "bec969c543a5f7f31c8560fd528efb9f944bd0c478ce524c9a3b8f5b92ed16a7"
+    },
+    {
+      "file": "press_guard/OPERATIONS.md",
+      "previous_sha256": "679373ef2c7d6302816cf2fc43ea2edf29be8bcb635c131382dbf43e5fb500b7",
+      "final_sha256": "cb6a8481f69a50ac8cdc4d7fa3fbd6f22d857697d0e7d95ecec56c52c35ffeda"
+    },
+    {
+      "file": "press_guard/web/app.js",
+      "previous_sha256": "e205ace4006312eaf653a7455df28f0f05ff704b7ccc6daa93dd093b18e95967",
+      "final_sha256": "125d98ca8d760f79a6e29c3661a163c9bed7390aaca374ef9ddcc8f09baa9f83"
+    },
+    {
+      "file": "press_guard/outputs/manifest.json",
+      "previous_sha256": "62b52a38a8798837bed0ecaf71d51f08211bc110db5ab57707bfb9e102d341f6",
+      "final_sha256": "d233093ea71fe2f114e81cb5b1d0770742fae91908201509eaf1f5e5d3f6c0d7"
+    }
+  ],
+  "unchanged_models": true
+}

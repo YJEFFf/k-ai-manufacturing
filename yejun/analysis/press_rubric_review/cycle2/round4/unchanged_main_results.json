@@ -1,0 +1,25 @@
+{
+  "base_commit": "6c61a88d8de437182a2cdd25f640af556a23036a",
+  "checks": {
+    "metrics.csv": {
+      "byte_equal": true,
+      "sha256": "ed318a3b36ced09ee888e0fb5b8b548350e9bee1e39cff7779c19ab379a613d2"
+    },
+    "rolling.csv": {
+      "byte_equal": true,
+      "sha256": "f7fd51580796b3e310b1a66d146e1703600119a10f557963cec3081c4e16c73b"
+    },
+    "probability_eval_v2.csv": {
+      "byte_equal": true,
+      "sha256": "56da8e3dfd7b1d074d03833d43fe47eb11780c50993cd8247d503097c42b6a5c"
+    },
+    "probability_reliability_v2.csv": {
+      "byte_equal": true,
+      "sha256": "89e79e7b5bc99d7c01b6cf66119e2d1a77d8fab5f010d1c38ce25963d019bad0"
+    },
+    "ablation_v2.csv": {
+      "byte_equal": true,
+      "sha256": "1a5b97c9a88ad908eed89ae91e673cea9275405498e2c63264c838cf60c3fbe0"
+    }
+  }
+}

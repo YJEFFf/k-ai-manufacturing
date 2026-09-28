@@ -1,0 +1,1969 @@
+{
+  "snapshot": "/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/regenerated_snapshot_r9jedclr",
+  "inventory": [
+    {
+      "path": "yejun/analysis/package_contract.py",
+      "sha256": "0862fe840b90b6130d3481a24f809c5e270c93930346a947d18a30a616959fa7"
+    },
+    {
+      "path": "yejun/analysis/press_advance/.gitignore",
+      "sha256": "d6fc3ed76907c880b16137d048eebf8658857130121579f49e6523ce8450983f"
+    },
+    {
+      "path": "yejun/analysis/press_advance/README.md",
+      "sha256": "bec7989d4ed4eb5c28ee64ecc8b333bb15e5af75f1301e33a3ee336babdf0e67"
+    },
+    {
+      "path": "yejun/analysis/press_advance/contract.json",
+      "sha256": "a907ffb78a5a0765921394233f35a0329c9d802b95c7a41e11a7b6d1e40225ce"
+    },
+    {
+      "path": "yejun/analysis/press_advance/expected/lock.json",
+      "sha256": "37e87f8639c3af93a1d43f7b236c387be761abd0d8a44707633ad15431d1c5df"
+    },
+    {
+      "path": "yejun/analysis/press_advance/expected/manifest.json",
+      "sha256": "37f92afbeedb5d784d09f156e5e7c857adc616c1c79b5c664dab0bfbcef37125"
+    },
+    {
+      "path": "yejun/analysis/press_advance/expected/metrics.csv",
+      "sha256": "566bf7c95dfc737d0a05c90bb4b51b26263254f7af54186f66ed3d2295109477"
+    },
+    {
+      "path": "yejun/analysis/press_advance/expected/primary.csv",
+      "sha256": "6d9441541980f22e1a5d369447a745ec2141947fd70377d42d0a9ab8ae439e80"
+    },
+    {
+      "path": "yejun/analysis/press_advance/manifest.json",
+      "sha256": "37f92afbeedb5d784d09f156e5e7c857adc616c1c79b5c664dab0bfbcef37125"
+    },
+    {
+      "path": "yejun/analysis/press_advance/metrics.csv",
+      "sha256": "566bf7c95dfc737d0a05c90bb4b51b26263254f7af54186f66ed3d2295109477"
+    },
+    {
+      "path": "yejun/analysis/press_advance/primary.csv",
+      "sha256": "6d9441541980f22e1a5d369447a745ec2141947fd70377d42d0a9ab8ae439e80"
+    },
+    {
+      "path": "yejun/analysis/press_advance/protocol.json",
+      "sha256": "0322e07ae82c780a219bb0f884331a284649f500f45d6fd496d0f311e0a4db52"
+    },
+    {
+      "path": "yejun/analysis/press_advance/run_experiment.py",
+      "sha256": "3af1748cafaf3b19708017c759dce06e0c74a9e19fdd29961fcf4ccc6cabd4a1"
+    },
+    {
+      "path": "yejun/analysis/press_advance/test_contract.py",
+      "sha256": "f9c1d42af82b8e2f090e0de4f50205799a62ea8af5d0543fc94942d3d5501c00"
+    },
+    {
+      "path": "yejun/analysis/press_dayshift/v2_current_scale.csv",
+      "sha256": "82b14ccd716bb1dcb54754d6ba613cf41f86107e054908dc0a4e0cbb6d496310"
+    },
+    {
+      "path": "yejun/analysis/press_early/metrics.csv",
+      "sha256": "9b754a610254cc31e79d55e5377c538a75f155840dab03434b8474c6601c2035"
+    },
+    {
+      "path": "yejun/analysis/press_early/primary.csv",
+      "sha256": "d9e488a8dbb2542473cb7ad8461f51d280f500264d3e5c08528839c5808f09b5"
+    },
+    {
+      "path": "yejun/analysis/press_early/protocol.json",
+      "sha256": "553b668dc616fe56aa7ade06f0b9327474830e73020e26156a1a844f3fb1ce93"
+    },
+    {
+      "path": "yejun/analysis/press_early/run_experiment.py",
+      "sha256": "d0dda0fb9860d8d039e1cd77a0c8f49397136ee3d76b7f7378af06640e93a300"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/README.md",
+      "sha256": "856ffd2afdf368610bb87fc04e8dc7a80d9c6da87fc0018a73ffb57e3e9d052c"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/abnormal_segments.csv",
+      "sha256": "b19eedfd8d07b2523221466e1e28ae1e18a44686bca2d2c28fc11f8ea67c0b42"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/abnormal_summary.csv",
+      "sha256": "81b2464b8fb5ec745b491c562eca47d619b09d910ce7afd4a20b1fcf1bd58003"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/amplitude_reliability.csv",
+      "sha256": "9c2b64ea9c3ab60bcb5bf20182eebb1ac5c643f848e53571783a2ad694a286cf"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/ar2_oscillator.csv",
+      "sha256": "d4e10ac087b2f5026e9062d7d030f73c6022f1298df1a50a75ff3eb7edfda2bc"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/block_context.csv",
+      "sha256": "5e780a19fa57170ebb234f64c67fb469de436cb1e73095ee5933a066d5cbd154"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/build_diagnostics.py",
+      "sha256": "1541ad6409c256694d12691f8abccf72ee6f29954708c719b222748784a8de11"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/build_tables.py",
+      "sha256": "2952b498504a76d0929ce2e25c4d6953ee2b1c5204b14d09e4564a4cb34327a8"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/calibration_curve.csv",
+      "sha256": "741576f1e6c724e17c5c3abca29954e3e66bef2943e192b0911a83b8071e824c"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/class_differences.csv",
+      "sha256": "7305ce3ca6e576bea7079bfd8a4deb8a611e65c3021e5c54e4c2486435ce05c1"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/component_combinations.csv",
+      "sha256": "d2d011db5fcfe8577d39601639ec0f19714e1ca7167b2ff99d62b7796d01b447"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/component_correlation.csv",
+      "sha256": "88c5d028b5b7e7f8f05874220fea17933640894104c2b3a81e77927109eb2999"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/contract.json",
+      "sha256": "5f576de98ae2d10caa5a618bfbcc7451024c15286bd1af624b6878fa04ca5344"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/current_grid.csv",
+      "sha256": "de3ded79e0da43e754b9e2c05aa084f679193d58ff161b3a3877216b27a26f28"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/decision_table_diagnosis_v2.csv",
+      "sha256": "dc63e4975a062c92b99db339fcb8150301f5c64869275e6a48fdbc56b5e00fe4"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/diagnostic_probes.py",
+      "sha256": "71f1f69f9abc0d1d8d9b466f47f13d94954bf451fa72079ba1b6f0de9be26550"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/diagnostics_manifest.json",
+      "sha256": "3827564b0cecf180babaa647ba98d1ae8872189efdd8812edae35292a7e05114"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/duplicate_rows.csv",
+      "sha256": "b00c711beb3262b67f6345b8426bb4f64f75103fbc3ba211d57baee82ca03a9d"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/abnormal_segments.csv",
+      "sha256": "b19eedfd8d07b2523221466e1e28ae1e18a44686bca2d2c28fc11f8ea67c0b42"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/abnormal_summary.csv",
+      "sha256": "81b2464b8fb5ec745b491c562eca47d619b09d910ce7afd4a20b1fcf1bd58003"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/amplitude_reliability.csv",
+      "sha256": "9c2b64ea9c3ab60bcb5bf20182eebb1ac5c643f848e53571783a2ad694a286cf"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/ar2_oscillator.csv",
+      "sha256": "d4e10ac087b2f5026e9062d7d030f73c6022f1298df1a50a75ff3eb7edfda2bc"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/block_context.csv",
+      "sha256": "5e780a19fa57170ebb234f64c67fb469de436cb1e73095ee5933a066d5cbd154"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/calibration_curve.csv",
+      "sha256": "741576f1e6c724e17c5c3abca29954e3e66bef2943e192b0911a83b8071e824c"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/class_differences.csv",
+      "sha256": "7305ce3ca6e576bea7079bfd8a4deb8a611e65c3021e5c54e4c2486435ce05c1"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/component_combinations.csv",
+      "sha256": "d2d011db5fcfe8577d39601639ec0f19714e1ca7167b2ff99d62b7796d01b447"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/component_correlation.csv",
+      "sha256": "88c5d028b5b7e7f8f05874220fea17933640894104c2b3a81e77927109eb2999"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/current_grid.csv",
+      "sha256": "de3ded79e0da43e754b9e2c05aa084f679193d58ff161b3a3877216b27a26f28"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/decision_table_diagnosis_v2.csv",
+      "sha256": "dc63e4975a062c92b99db339fcb8150301f5c64869275e6a48fdbc56b5e00fe4"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/diagnostics_manifest.json",
+      "sha256": "3827564b0cecf180babaa647ba98d1ae8872189efdd8812edae35292a7e05114"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/duplicate_rows.csv",
+      "sha256": "b00c711beb3262b67f6345b8426bb4f64f75103fbc3ba211d57baee82ca03a9d"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/failure_mode_map.csv",
+      "sha256": "be367c8be6aef2a6d4c9407db431d7c70bef6de699bb9f177e3eb1e6a844c0c7"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/false_alarm_operating_level.csv",
+      "sha256": "b1963ac44dd8d4b5edc7ec40f131caa5f92b7538962fe9644c450d56f9a4e031"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/first_alarm_reason.csv",
+      "sha256": "b0b369c950f32fa988f4edfac3ad1504dbe81a7199cb64d1d8f50b47915bc17f"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/gaps.csv",
+      "sha256": "b19fbc020a5576e9919cd5b2c7ba8fc4d0aba0e1aca4d035bc1505458d73df82"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/guidebook_protocol_vs_records.csv",
+      "sha256": "186a5d41bcec397efbb30ff0eb2b8717e0cc1d5ab6a0ec19c861db7bb7f68771"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/guidebook_stats_match.csv",
+      "sha256": "fe3a6755e6036044cb4b02554b731a53685614c2d080339fb9b3db757bfa6fee"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/imbalance.csv",
+      "sha256": "25f925cd4096060404131c75ee6fcf5438a7a0e9bc09415dd1f7c43868ffa917"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/lock.json",
+      "sha256": "908e939f0431607ec002adef94872423c6d326dab4378af31264d1a1facb83ce"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/manifest.json",
+      "sha256": "92b073a8a64687b541ec4ac99de42e30856f3f96602fb0866023a8ba34584ad5"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/normal_alarms_by_state.csv",
+      "sha256": "23d8135439f676eb182bca2ff2d0e99c4f6c6c6567cbc9d134b9cb200365b0b3"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/observability.csv",
+      "sha256": "f37d8cfcfc9bd75ffd0a992322a708ca002c8925312c9d615a93c8b63743bfa6"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/operating_states.csv",
+      "sha256": "d7519e54162bed4f5e11b184ea5b68681873c388ddf6d555972cb187497ab71c"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/operating_states_summary.csv",
+      "sha256": "947563e49ff8679a5af15c17901f27cc888ce8e21c1837325ab3db234fd837ea"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/operating_variation.csv",
+      "sha256": "1a9b95468647837a9a5de9ac70ae234403eaf2cb529f658a8b804a3469be5dec"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/outlier_rules.csv",
+      "sha256": "b287d22b9ec8ed75c5280b89c0f940a39ebaf7b418c78576698c751d523c413f"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/outliers.csv",
+      "sha256": "704fb6abb05fb56e34ef97c1e68ce872d08ded3220076c3974ec815599711e0c"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/phase_continuity.csv",
+      "sha256": "51d4f832068c689d4f2a56e4bdb3cfaf8892c165c4af48f976fef23010651503"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/production_unit_evidence.csv",
+      "sha256": "89b67af59bd2e8f6107a6e6f6b74ff502539805c943e7dcbb5a232f4c06c61c0"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/quality_index.csv",
+      "sha256": "2c09f0c14471692026ac9909d73fddf7076ac0e317dea11b8f7576976078fe91"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/quality_index_weighted.csv",
+      "sha256": "a213716f22ca4c1a23d34657d6188146adce6b0a9af2e286a0f5989f9d1abb8b"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/rolling_calibration_curve.csv",
+      "sha256": "b7581b4c800658685e8ec702e86e56f01779d92b5b42c66fd7adb53d8ca1956b"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/segment_rule_tolerance.csv",
+      "sha256": "bb37d8d96c62cae9f0dc2ee35f33bfa763c766c5113e86d69e9a54b995698e9d"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/sensor_relations.csv",
+      "sha256": "1d8d494b0f2915c15a7e4c2ebaa0944fbad828db978fd433c8a6fb74a37d8247"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/split_context.csv",
+      "sha256": "9f3b99b623785085d030bd041dde55dc589fde88e46d8fb6df510c616eec39c1"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/split_state_composition.csv",
+      "sha256": "702f4b7da8c4504abaad46b14251d857ba1372725edd0fac83d73d5ce3694cbd"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/state_transition_stress.csv",
+      "sha256": "7a788e5150112f30c5f5c01296e2c4033d540b0be20589b6554b1fb6f05c96a3"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/variable_dictionary.csv",
+      "sha256": "224007654f59303461cc2ebefc9c5d3cf7d254cd024e563ebdec22b2fb22a4d5"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/variable_expected_signals.csv",
+      "sha256": "c8774f36b86d4ee0a7931a1b447a17d46686a49e282809ab1233220c14bed8f6"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/expected/vibration_tones.csv",
+      "sha256": "de16d47406726addb7441c2e94758c4e959bd9d04f95b1a3aca43aa340846351"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/failure_mode_map.csv",
+      "sha256": "be367c8be6aef2a6d4c9407db431d7c70bef6de699bb9f177e3eb1e6a844c0c7"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/false_alarm_operating_level.csv",
+      "sha256": "b1963ac44dd8d4b5edc7ec40f131caa5f92b7538962fe9644c450d56f9a4e031"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/figures.py",
+      "sha256": "23d94f96019af64612c3bcaed9fbc20cb20358adc3cc8cb2d94674d7c837d3e1"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/figures/fig_d2a_timeline.png",
+      "sha256": "a36cb458e0cb02734db3721db603eb8c3b1dc6994b7bef81bb00dfa33f6a3e4b"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/figures/fig_d2b_blocks.png",
+      "sha256": "62d298a07efdde16dcb784e42977f43e87f662028fce65440c73e6b8ec9df6a7"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/figures/fig_d2c_raw_examples.png",
+      "sha256": "c2a83eacb491f8ace6e59104afe315d18e308e8e462f7b658363bacf66d48a7a"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/figures/fig_d2d_relations.png",
+      "sha256": "76ae49ae8a2eff9522d262a79481bd899f5e28e43be508f2ca007ce505373a60"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/figures/fig_d2e_format_leak.png",
+      "sha256": "ce23525f4de3d415d672d2a82819b09be7bb2bbce5e08c6814e2358bb7ac8b80"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/first_alarm_reason.csv",
+      "sha256": "b0b369c950f32fa988f4edfac3ad1504dbe81a7199cb64d1d8f50b47915bc17f"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/gaps.csv",
+      "sha256": "b19fbc020a5576e9919cd5b2c7ba8fc4d0aba0e1aca4d035bc1505458d73df82"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv",
+      "sha256": "186a5d41bcec397efbb30ff0eb2b8717e0cc1d5ab6a0ec19c861db7bb7f68771"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/guidebook_stats_match.csv",
+      "sha256": "fe3a6755e6036044cb4b02554b731a53685614c2d080339fb9b3db757bfa6fee"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/imbalance.csv",
+      "sha256": "25f925cd4096060404131c75ee6fcf5438a7a0e9bc09415dd1f7c43868ffa917"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/manifest.json",
+      "sha256": "92b073a8a64687b541ec4ac99de42e30856f3f96602fb0866023a8ba34584ad5"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/normal_alarms_by_state.csv",
+      "sha256": "23d8135439f676eb182bca2ff2d0e99c4f6c6c6567cbc9d134b9cb200365b0b3"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/observability.csv",
+      "sha256": "f37d8cfcfc9bd75ffd0a992322a708ca002c8925312c9d615a93c8b63743bfa6"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/operating_states.csv",
+      "sha256": "d7519e54162bed4f5e11b184ea5b68681873c388ddf6d555972cb187497ab71c"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/operating_states_summary.csv",
+      "sha256": "947563e49ff8679a5af15c17901f27cc888ce8e21c1837325ab3db234fd837ea"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/operating_variation.csv",
+      "sha256": "1a9b95468647837a9a5de9ac70ae234403eaf2cb529f658a8b804a3469be5dec"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/outlier_rules.csv",
+      "sha256": "b287d22b9ec8ed75c5280b89c0f940a39ebaf7b418c78576698c751d523c413f"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/outliers.csv",
+      "sha256": "704fb6abb05fb56e34ef97c1e68ce872d08ded3220076c3974ec815599711e0c"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/phase_continuity.csv",
+      "sha256": "51d4f832068c689d4f2a56e4bdb3cfaf8892c165c4af48f976fef23010651503"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/production_unit_evidence.csv",
+      "sha256": "89b67af59bd2e8f6107a6e6f6b74ff502539805c943e7dcbb5a232f4c06c61c0"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/quality_index.csv",
+      "sha256": "2c09f0c14471692026ac9909d73fddf7076ac0e317dea11b8f7576976078fe91"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/quality_index_weighted.csv",
+      "sha256": "a213716f22ca4c1a23d34657d6188146adce6b0a9af2e286a0f5989f9d1abb8b"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/rolling_calibration_curve.csv",
+      "sha256": "b7581b4c800658685e8ec702e86e56f01779d92b5b42c66fd7adb53d8ca1956b"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/segment_rule_tolerance.csv",
+      "sha256": "bb37d8d96c62cae9f0dc2ee35f33bfa763c766c5113e86d69e9a54b995698e9d"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/sensor_relations.csv",
+      "sha256": "1d8d494b0f2915c15a7e4c2ebaa0944fbad828db978fd433c8a6fb74a37d8247"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/split_context.csv",
+      "sha256": "9f3b99b623785085d030bd041dde55dc589fde88e46d8fb6df510c616eec39c1"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/split_state_composition.csv",
+      "sha256": "702f4b7da8c4504abaad46b14251d857ba1372725edd0fac83d73d5ce3694cbd"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/state_transition_stress.csv",
+      "sha256": "7a788e5150112f30c5f5c01296e2c4033d540b0be20589b6554b1fb6f05c96a3"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/test_contract.py",
+      "sha256": "0e6c64a14b1252bd8d758052ce6859fc2cce46c7da60a334874b17e90ee66402"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/test_diagnostics.py",
+      "sha256": "81c97adf54e779813a63b80e93a9c188711eb2af72b69ed07ad751663fa63a77"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/variable_dictionary.csv",
+      "sha256": "224007654f59303461cc2ebefc9c5d3cf7d254cd024e563ebdec22b2fb22a4d5"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/variable_expected_signals.csv",
+      "sha256": "c8774f36b86d4ee0a7931a1b447a17d46686a49e282809ab1233220c14bed8f6"
+    },
+    {
+      "path": "yejun/analysis/press_evidence/vibration_tones.csv",
+      "sha256": "de16d47406726addb7441c2e94758c4e959bd9d04f95b1a3aca43aa340846351"
+    },
+    {
+      "path": "yejun/analysis/press_external/acquire.py",
+      "sha256": "8049a16bd78e1d618b7699bb1c49342e2a26e1977d92bc29420a7192efa03bd8"
+    },
+    {
+      "path": "yejun/analysis/press_external/acquisition.json",
+      "sha256": "3d8b5488c36f5d2a07bd9b0adeffee0034f514d55b130e10206dbe20e4318cd1"
+    },
+    {
+      "path": "yejun/analysis/press_external/metrics.csv",
+      "sha256": "a4ec1890f3f9f9a35165e47cf0b4e8aed9a2406425114ff51a3be54dac216f09"
+    },
+    {
+      "path": "yejun/analysis/press_external/partitions.csv",
+      "sha256": "f52dbba5e63d654103d634aa638b43ce368582972d1767fdcd13681ad7c6aa6c"
+    },
+    {
+      "path": "yejun/analysis/press_improvement/candidate_metrics.csv",
+      "sha256": "50b23aa04b80f3a81ddfbc09138e8e6f99b272e8daa2b3a2e44809a8a51e78f9"
+    },
+    {
+      "path": "yejun/analysis/press_improvement/config.json",
+      "sha256": "19c5cdceb88e0f83f8202fa7d445e314dfd920cb3607e1a456360efa2fd4b6ed"
+    },
+    {
+      "path": "yejun/analysis/press_improvement/run_experiment.py",
+      "sha256": "742991d3ea8af58be6219e96b3868a03c4d93483c2e211506ea87380e8ce0fd6"
+    },
+    {
+      "path": "yejun/analysis/press_selection/README.md",
+      "sha256": "f62ea5ac3b09762d812b6f8a5c7af92be46cbacef97e978e5daec7cd08e051e3"
+    },
+    {
+      "path": "yejun/analysis/press_selection/candidate_universe.csv",
+      "sha256": "d7455fcc88cc01d19ba858fc1747268b07ba2cc2942083b81becd22b13e34ebd"
+    },
+    {
+      "path": "yejun/analysis/press_selection/combination_rules.csv",
+      "sha256": "5195a4cb5142f5c27c74be498fa3c3bb1f1246a386b3bae720140f98f9aa6c23"
+    },
+    {
+      "path": "yejun/analysis/press_selection/contract.json",
+      "sha256": "41844912afddd69cac36a5d6bf1ee06063e3b9e281ef056087323d5857970c75"
+    },
+    {
+      "path": "yejun/analysis/press_selection/expected/candidate_universe.csv",
+      "sha256": "d7455fcc88cc01d19ba858fc1747268b07ba2cc2942083b81becd22b13e34ebd"
+    },
+    {
+      "path": "yejun/analysis/press_selection/expected/combination_rules.csv",
+      "sha256": "5195a4cb5142f5c27c74be498fa3c3bb1f1246a386b3bae720140f98f9aa6c23"
+    },
+    {
+      "path": "yejun/analysis/press_selection/expected/fp_mitigation_injection_v2.csv",
+      "sha256": "8be37e61e482962c95a5936dc9a1010f330b936ff1f4ab0dc95c78d3a2ee4609"
+    },
+    {
+      "path": "yejun/analysis/press_selection/expected/fp_mitigation_v2.csv",
+      "sha256": "b3b37b897a35545e2544ea55036e87bb7c69dedb9dabbdfe856a93b734aaad73"
+    },
+    {
+      "path": "yejun/analysis/press_selection/expected/lock.json",
+      "sha256": "69113bd8884c4a888cbbdc0ec51210c762b6ac51d811d469f995377d02e8e953"
+    },
+    {
+      "path": "yejun/analysis/press_selection/expected/manifest.json",
+      "sha256": "f4d913ae2cf836d1d5eee7ffdca447753205aa82a3c789aca5cb50877c8d213e"
+    },
+    {
+      "path": "yejun/analysis/press_selection/expected/nested_selection.csv",
+      "sha256": "bbfd441f4f89bf4614e5a5be792130f8ea6c39aa2943a9fd4a8e8c5e993e470c"
+    },
+    {
+      "path": "yejun/analysis/press_selection/expected/paired_records.csv",
+      "sha256": "b6b4c55cdce04cb3d9ee5d274c036dc78610d699631a68e449ec83ecc6ff9fb1"
+    },
+    {
+      "path": "yejun/analysis/press_selection/expected/rule_transfer_injection_v2.csv",
+      "sha256": "f9cd350b775bbf5ca1293a8f5d8e9d937f8a62fbee809f9d61e341d1e6072d63"
+    },
+    {
+      "path": "yejun/analysis/press_selection/expected/same_feature_alternatives.csv",
+      "sha256": "3b5862ad1fe24d007c7c09d79547d30a11eef6c21e2674db231b39ff4a69b543"
+    },
+    {
+      "path": "yejun/analysis/press_selection/expected/search_ledger.csv",
+      "sha256": "15d53171217a9ec400423feea535d11daef08b7b74a5500c55e7a4d2c9f3cdc6"
+    },
+    {
+      "path": "yejun/analysis/press_selection/expected/selection_evidence.csv",
+      "sha256": "ba4aff9231934f5a69378f2ced06a3e2d809e920bb1850c6e64a1165237c6f52"
+    },
+    {
+      "path": "yejun/analysis/press_selection/expected/unified_comparison.csv",
+      "sha256": "03bfc81adde25e20b38bc14c68f13703953b64c4b0381c363ac96abcf1e7f467"
+    },
+    {
+      "path": "yejun/analysis/press_selection/expected/unified_comparison.md",
+      "sha256": "36ead1390fba53ac1d4963ca9fea3ea7222611ea0b57fa9f8d4171ed4c5f6804"
+    },
+    {
+      "path": "yejun/analysis/press_selection/fp_mitigation_injection_v2.csv",
+      "sha256": "8be37e61e482962c95a5936dc9a1010f330b936ff1f4ab0dc95c78d3a2ee4609"
+    },
+    {
+      "path": "yejun/analysis/press_selection/fp_mitigation_v2.csv",
+      "sha256": "b3b37b897a35545e2544ea55036e87bb7c69dedb9dabbdfe856a93b734aaad73"
+    },
+    {
+      "path": "yejun/analysis/press_selection/manifest.json",
+      "sha256": "f4d913ae2cf836d1d5eee7ffdca447753205aa82a3c789aca5cb50877c8d213e"
+    },
+    {
+      "path": "yejun/analysis/press_selection/nested_selection.csv",
+      "sha256": "bbfd441f4f89bf4614e5a5be792130f8ea6c39aa2943a9fd4a8e8c5e993e470c"
+    },
+    {
+      "path": "yejun/analysis/press_selection/paired_records.csv",
+      "sha256": "b6b4c55cdce04cb3d9ee5d274c036dc78610d699631a68e449ec83ecc6ff9fb1"
+    },
+    {
+      "path": "yejun/analysis/press_selection/rule_transfer_injection_v2.csv",
+      "sha256": "f9cd350b775bbf5ca1293a8f5d8e9d937f8a62fbee809f9d61e341d1e6072d63"
+    },
+    {
+      "path": "yejun/analysis/press_selection/run.py",
+      "sha256": "caa5a8db8cbd3151eb07b0e4c044b9c39ded012554fdd3e8364f166ff80bf38e"
+    },
+    {
+      "path": "yejun/analysis/press_selection/same_feature_alternatives.csv",
+      "sha256": "3b5862ad1fe24d007c7c09d79547d30a11eef6c21e2674db231b39ff4a69b543"
+    },
+    {
+      "path": "yejun/analysis/press_selection/search_ledger.csv",
+      "sha256": "15d53171217a9ec400423feea535d11daef08b7b74a5500c55e7a4d2c9f3cdc6"
+    },
+    {
+      "path": "yejun/analysis/press_selection/selection_evidence.csv",
+      "sha256": "ba4aff9231934f5a69378f2ced06a3e2d809e920bb1850c6e64a1165237c6f52"
+    },
+    {
+      "path": "yejun/analysis/press_selection/test_contract.py",
+      "sha256": "0e6c64a14b1252bd8d758052ce6859fc2cce46c7da60a334874b17e90ee66402"
+    },
+    {
+      "path": "yejun/analysis/press_selection/unified_comparison.csv",
+      "sha256": "03bfc81adde25e20b38bc14c68f13703953b64c4b0381c363ac96abcf1e7f467"
+    },
+    {
+      "path": "yejun/analysis/press_selection/unified_comparison.md",
+      "sha256": "36ead1390fba53ac1d4963ca9fea3ea7222611ea0b57fa9f8d4171ed4c5f6804"
+    },
+    {
+      "path": "yejun/analysis/press_supervised/README.md",
+      "sha256": "99c09b0a90b9b0c261adb542cb834806ddd61246151e94c115b3f70d5345a526"
+    },
+    {
+      "path": "yejun/analysis/press_supervised/contract.json",
+      "sha256": "f9b08073b6e72aaaca0050016012d2807c98dd3b3d795781ad1d593b7ec85939"
+    },
+    {
+      "path": "yejun/analysis/press_supervised/expected/grouped_records.csv",
+      "sha256": "f33b034997209fbc9f2c767a4c9fcd9fe536ecad315ee80d66f55ed1851b1341"
+    },
+    {
+      "path": "yejun/analysis/press_supervised/expected/injection.csv",
+      "sha256": "4ae828005c9b6afebfb2ab21fb31de7d30ce0f408a7b44a2db3421ea5af568c5"
+    },
+    {
+      "path": "yejun/analysis/press_supervised/expected/lock.json",
+      "sha256": "a63e2849ec9227bd424a78508d355b0707dab6625fd61a98f313cc74473275c3"
+    },
+    {
+      "path": "yejun/analysis/press_supervised/expected/manifest.json",
+      "sha256": "0736e4272734a268a9d0e1cde86746cd81686528119f9384094810f875c1a7c8"
+    },
+    {
+      "path": "yejun/analysis/press_supervised/expected/random_rows.csv",
+      "sha256": "b48137569867b7b0300fc1b9878bcd83c88f3895b190ae4bbe4158c113ee8b98"
+    },
+    {
+      "path": "yejun/analysis/press_supervised/grouped_records.csv",
+      "sha256": "f33b034997209fbc9f2c767a4c9fcd9fe536ecad315ee80d66f55ed1851b1341"
+    },
+    {
+      "path": "yejun/analysis/press_supervised/injection.csv",
+      "sha256": "4ae828005c9b6afebfb2ab21fb31de7d30ce0f408a7b44a2db3421ea5af568c5"
+    },
+    {
+      "path": "yejun/analysis/press_supervised/manifest.json",
+      "sha256": "0736e4272734a268a9d0e1cde86746cd81686528119f9384094810f875c1a7c8"
+    },
+    {
+      "path": "yejun/analysis/press_supervised/protocol.json",
+      "sha256": "efeadc304f390915e9b0e740674f7f982435073d2e280a99dd2312767edc3389"
+    },
+    {
+      "path": "yejun/analysis/press_supervised/random_rows.csv",
+      "sha256": "b48137569867b7b0300fc1b9878bcd83c88f3895b190ae4bbe4158c113ee8b98"
+    },
+    {
+      "path": "yejun/analysis/press_supervised/run.py",
+      "sha256": "1146651afb60ed38fd65c6ff582610782a5700afc1ae4aa67db66050316f82c0"
+    },
+    {
+      "path": "yejun/analysis/press_supervised/test_contract.py",
+      "sha256": "0e6c64a14b1252bd8d758052ce6859fc2cce46c7da60a334874b17e90ee66402"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/README.md",
+      "sha256": "9f61d9467d90164babf9f4560119da9c56fed6ed0cbe9ffb5f558eac8fe4c749"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/common.py",
+      "sha256": "3cc480e147ba5e1b48c417a8cec104453093d761aabc943d8df2e23d60a7a08a"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/contract.py",
+      "sha256": "4fc82363a768b3aa4acb6b4fbe0c9b547bb9091f4fb122fbab81d515c64ee78c"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/e1_detection_floor.csv",
+      "sha256": "e0c97954bf46b00895d2e5310ddceb15297aa38b4d995b22715eb1d2ecf96975"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/e1_manifest.json",
+      "sha256": "4da1e15f60123202ca19e8c06b236c3cf3cadc9d97ed0207e77f173f90a3ecf0"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/e1_reference_segments.csv",
+      "sha256": "72dfc4e522c2b489598f6f0beae542e46a2aba0c294a896ad2e777b347f9ac65"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/e1_summary.csv",
+      "sha256": "ac599f2408e6eb8cf03c51ca8f83ffa34ba4cb11d48a168b23e43195ab980344"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/e2_manifest.json",
+      "sha256": "c807149ced6729ddc0aaf223818d52d7012e4f3271b09d09cbb9215605b9b8ec"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/e2_uci_comparison.csv",
+      "sha256": "da3922e892ebb3fc5c8a5f5232790fb7cd451cf50be6d64a46123f5761849907"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/e2_uci_component_diagnostic_posthoc.csv",
+      "sha256": "dee030617bbb25a6a0ce8a51b7f2ae6c07d9538f96d78f63ab4c51fe8ff2736a"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/e2_uci_metrics.csv",
+      "sha256": "9182c3046dbe0d43527b3ff1138944ac98a540529de37ef2d7ae4793887f6534"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/e2_uci_strata.csv",
+      "sha256": "8c4ed7a17ffac423368393d6b83501615e20d8d1d18d05baa1166273aac6f818"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/e3_curve.csv",
+      "sha256": "1002608862a00c8863847a429d62dca22bfc2dea29146d6fdc457ca5cec9df11"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/e3_domain_shift.csv",
+      "sha256": "ed6540bc5291a0555e6f7030db2bdacd3f75dddffca524975ab620b1d9fdcac9"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/e3_manifest.json",
+      "sha256": "34534913626538961ee5ed4e587b55717de6f51252798e080756c6c4a5037de9"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/e3_stability.csv",
+      "sha256": "4447e30b858fc32df317a565ebc86720e7759e802a3a9960f0c27e9c5005762c"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/expected/e1_detection_floor.csv",
+      "sha256": "e0c97954bf46b00895d2e5310ddceb15297aa38b4d995b22715eb1d2ecf96975"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/expected/e1_manifest.json",
+      "sha256": "4da1e15f60123202ca19e8c06b236c3cf3cadc9d97ed0207e77f173f90a3ecf0"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/expected/e1_reference_segments.csv",
+      "sha256": "72dfc4e522c2b489598f6f0beae542e46a2aba0c294a896ad2e777b347f9ac65"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/expected/e1_summary.csv",
+      "sha256": "ac599f2408e6eb8cf03c51ca8f83ffa34ba4cb11d48a168b23e43195ab980344"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/expected/e2_manifest.json",
+      "sha256": "c807149ced6729ddc0aaf223818d52d7012e4f3271b09d09cbb9215605b9b8ec"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/expected/e2_uci_comparison.csv",
+      "sha256": "da3922e892ebb3fc5c8a5f5232790fb7cd451cf50be6d64a46123f5761849907"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/expected/e2_uci_component_diagnostic_posthoc.csv",
+      "sha256": "dee030617bbb25a6a0ce8a51b7f2ae6c07d9538f96d78f63ab4c51fe8ff2736a"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/expected/e2_uci_metrics.csv",
+      "sha256": "9182c3046dbe0d43527b3ff1138944ac98a540529de37ef2d7ae4793887f6534"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/expected/e2_uci_strata.csv",
+      "sha256": "8c4ed7a17ffac423368393d6b83501615e20d8d1d18d05baa1166273aac6f818"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/expected/e3_curve.csv",
+      "sha256": "1002608862a00c8863847a429d62dca22bfc2dea29146d6fdc457ca5cec9df11"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/expected/e3_domain_shift.csv",
+      "sha256": "ed6540bc5291a0555e6f7030db2bdacd3f75dddffca524975ab620b1d9fdcac9"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/expected/e3_manifest.json",
+      "sha256": "34534913626538961ee5ed4e587b55717de6f51252798e080756c6c4a5037de9"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/expected/e3_stability.csv",
+      "sha256": "4447e30b858fc32df317a565ebc86720e7759e802a3a9960f0c27e9c5005762c"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/fault_injection.py",
+      "sha256": "d6fb178bd6fc3ff15f3103d2e63f90b5fddc10c2b0061064ab8995d4d31cb531"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/fig_e1_detection.png",
+      "sha256": "ae3be62e11b41717e9c54c4ea3b707e8649b54f0194ad0d968eb47108f26f6f2"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/fig_e3_recalibration.png",
+      "sha256": "1698e5271286853e4f63ca7ccd8255285f38af749f76b5776c9b57dd90072bb5"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/figures.py",
+      "sha256": "17cb1f934a7d38e0bee85cb53fa377437ebdaeff2b97ce5aadbbf76d719c2e6c"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/protocol.json",
+      "sha256": "4c6bf75677b7f9a43b7faf9c7869d7ad5b6511a8ae1eb26ff0370ec6693ade81"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/recalibration.py",
+      "sha256": "266fdbcbf2b25a012e6654dc95d1ff4d9ba5f3781bd13f8c345f2349bc9aaf8a"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/test_contract.py",
+      "sha256": "cb3ba45a926d2751c8e8aa9861b6cb9b1ddb9d9d36971dc98c878f30301f04ef"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/uci_v2.py",
+      "sha256": "58c2e735cc9b0f6dbefeba72a6aaab09f35abfa752d3acb3d5cc68b92e6f5db7"
+    },
+    {
+      "path": "yejun/analysis/press_supplement/verify.py",
+      "sha256": "17d114c48eb3c3950a55cc677ac6f25062414e99dcdfe12279148546028dca5d"
+    },
+    {
+      "path": "yejun/press_guard/.gitignore",
+      "sha256": "573cdb7e99953f26b4cf2d5cf3e5bcabe0356f4637e4274e0553a3e9d73d91e6"
+    },
+    {
+      "path": "yejun/press_guard/OPERATIONS.md",
+      "sha256": "679373ef2c7d6302816cf2fc43ea2edf29be8bcb635c131382dbf43e5fb500b7"
+    },
+    {
+      "path": "yejun/press_guard/README.md",
+      "sha256": "b7c24713312ad7fae907e1380750ec24acbf9540b6ff3d4df4067d2c19fb5ff1"
+    },
+    {
+      "path": "yejun/press_guard/analyze.py",
+      "sha256": "1839a3a7bc02f1352d1d346f427154de50ef4d42bae33387333ad6e62457fb3f"
+    },
+    {
+      "path": "yejun/press_guard/artifacts/guard_A.json",
+      "sha256": "c938707f1dd16e7c239b8053e7f032d8fac828d6c753de2b898ba9130a594f10"
+    },
+    {
+      "path": "yejun/press_guard/artifacts/guard_B.json",
+      "sha256": "b64ac3b30bc697034104287964f3154e88c8a50749ccdec04f6d4f8744fd6969"
+    },
+    {
+      "path": "yejun/press_guard/artifacts/probability_A.json",
+      "sha256": "1a8100e78046393d9292fc7c305b5ec57b46c4e2c73b03abeb596052a8705f8a"
+    },
+    {
+      "path": "yejun/press_guard/artifacts/probability_B.json",
+      "sha256": "7fde4cd1bdfa74e78e2d3f07c5dbd9c27619e19b2e94ceb8fab786c27abcaae8"
+    },
+    {
+      "path": "yejun/press_guard/audit.py",
+      "sha256": "6deaa6120cdd38d061d1fe331fb605d5ac66aaaec1bc60199182b6995af25cd9"
+    },
+    {
+      "path": "yejun/press_guard/benchmark.py",
+      "sha256": "009ea99125a24d3951e4eeb2eba5b5a00dfefdac99a9676d69d8afef57e1d8ae"
+    },
+    {
+      "path": "yejun/press_guard/contracts.py",
+      "sha256": "d750be8d761ae414883dc3a35313248a67613cead949734ae0a92c6ae00542d9"
+    },
+    {
+      "path": "yejun/press_guard/docs/fig_architecture.png",
+      "sha256": "8558a05d2b8762af973462a23b76c1eaca353aa0b09ba2349774b74e3f636b10"
+    },
+    {
+      "path": "yejun/press_guard/docs/fig_operation_flow.png",
+      "sha256": "585e7232c783dc3e662b143645842b6a62b88e7354ed59f3fffa98a1eb98244a"
+    },
+    {
+      "path": "yejun/press_guard/environment.yml",
+      "sha256": "32c942ba3a4f4c39c2bd9a56dfd11735b2b8acc4aecfc6b241540af94d95813e"
+    },
+    {
+      "path": "yejun/press_guard/insights.py",
+      "sha256": "6eeb75f0daf73322d0e9a0877cdfb34e076a930bba798a9a9c691f1bbd1b9ddf"
+    },
+    {
+      "path": "yejun/press_guard/model.py",
+      "sha256": "b50a90f09641d5c5f199fa5a48609b665b3bedf2e58f561836fdaa084e76427d"
+    },
+    {
+      "path": "yejun/press_guard/monitor.py",
+      "sha256": "43b9be9c35df9ab01fb139b821c05f2d7aaaa6f414b4da7983839bdfc8694912"
+    },
+    {
+      "path": "yejun/press_guard/outputs/ablation_v2.csv",
+      "sha256": "1a5b97c9a88ad908eed89ae91e673cea9275405498e2c63264c838cf60c3fbe0"
+    },
+    {
+      "path": "yejun/press_guard/outputs/alert_budget_design_v2.csv",
+      "sha256": "5a69da064b0f244b0c7a8681724681d7795da7e5721e1a87e50fdf48e7fdccd4"
+    },
+    {
+      "path": "yejun/press_guard/outputs/alert_levels_injection_v2.csv",
+      "sha256": "5d31ba08857d7312b7ceb68458f12391bd78bc18359c11b26c3148571d540fbe"
+    },
+    {
+      "path": "yejun/press_guard/outputs/alert_levels_v2.csv",
+      "sha256": "7dbae870b4c31415ca62b4742a583b5f3c0ab5415c9a0de6f7c860a22ee3706b"
+    },
+    {
+      "path": "yejun/press_guard/outputs/analysis_summary.json",
+      "sha256": "60a37f5ce4e94d47d049dc93b43de5496c5e24c4ea48d6537ec1db417f09266a"
+    },
+    {
+      "path": "yejun/press_guard/outputs/audit.json",
+      "sha256": "98bc7c12ba223b28978e5f71f686958df4fc361e811b1721d956121bbaa6a53c"
+    },
+    {
+      "path": "yejun/press_guard/outputs/benchmark.json",
+      "sha256": "aa68c73e4630af60cdede1aac5acc72024988e4d479685d9d9745abf9daf9efc"
+    },
+    {
+      "path": "yejun/press_guard/outputs/cases_A.csv",
+      "sha256": "ef37b26767971721908d787a95f5c8f48870ace303ad5448d412c597ff5134cf"
+    },
+    {
+      "path": "yejun/press_guard/outputs/cases_B.csv",
+      "sha256": "c7dbfac4d10223fe585e996b1e89eafb986d6be2765a2d62dba528086a9092bb"
+    },
+    {
+      "path": "yejun/press_guard/outputs/console/capture.json",
+      "sha256": "4db7dda2b7a3656bb74b582bc800b4b14b805df8f723ffd3aa2decc0677ce7f0"
+    },
+    {
+      "path": "yejun/press_guard/outputs/console/console_evidence_v2.png",
+      "sha256": "06573db0732eac1f2be067ae299125a9dbea86cd0dadde6ff319f86ce6306849"
+    },
+    {
+      "path": "yejun/press_guard/outputs/console/console_workspace_v2.png",
+      "sha256": "cf3707b6a91813cd9af050e6e97a37e996a257a43f160f570e4e90d2ddf7572a"
+    },
+    {
+      "path": "yejun/press_guard/outputs/coupling_fit_v2.csv",
+      "sha256": "bc6786eb5d87b22bbc989430cf859dba4238d1629d82bae18d3ed8d2c297df70"
+    },
+    {
+      "path": "yejun/press_guard/outputs/coupling_records_v2.csv",
+      "sha256": "e9ae50ceb437d34d5e04a48ef2f53160c0246a0898140a2d10a7caae2c0a9cbd"
+    },
+    {
+      "path": "yejun/press_guard/outputs/decision_table_v2.csv",
+      "sha256": "2368bebbb7df8a68db7b815fe78dc2881d33d36b5caa4335d3ac3dd4861324a7"
+    },
+    {
+      "path": "yejun/press_guard/outputs/error_condition_summary_v2.csv",
+      "sha256": "4a2af738f1404936c031103d352ebe590278c8779352ea1e076fb7d70b027a04"
+    },
+    {
+      "path": "yejun/press_guard/outputs/error_conditions_segments_v2.csv",
+      "sha256": "083b122d791ca32eec08ae032edd3a6b8f74333987437ee8e356c449881f466d"
+    },
+    {
+      "path": "yejun/press_guard/outputs/error_conditions_stats_v2.csv",
+      "sha256": "c68a3f5c84841ce54f9b30c8fa442189601e7fdb3c005d2e7d83273397769795"
+    },
+    {
+      "path": "yejun/press_guard/outputs/error_conditions_v2.csv",
+      "sha256": "dbb330296c57e2d34831a99757f8c5fff1bfb7b9fab14c301eeace1db734d12c"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/ablation_v2.csv",
+      "sha256": "1a5b97c9a88ad908eed89ae91e673cea9275405498e2c63264c838cf60c3fbe0"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/alert_budget_design_v2.csv",
+      "sha256": "5a69da064b0f244b0c7a8681724681d7795da7e5721e1a87e50fdf48e7fdccd4"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/alert_levels_injection_v2.csv",
+      "sha256": "5d31ba08857d7312b7ceb68458f12391bd78bc18359c11b26c3148571d540fbe"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/alert_levels_v2.csv",
+      "sha256": "7dbae870b4c31415ca62b4742a583b5f3c0ab5415c9a0de6f7c860a22ee3706b"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/analysis_summary.json",
+      "sha256": "60a37f5ce4e94d47d049dc93b43de5496c5e24c4ea48d6537ec1db417f09266a"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/audit.json",
+      "sha256": "98bc7c12ba223b28978e5f71f686958df4fc361e811b1721d956121bbaa6a53c"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/cases_A.csv",
+      "sha256": "ef37b26767971721908d787a95f5c8f48870ace303ad5448d412c597ff5134cf"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/cases_B.csv",
+      "sha256": "c7dbfac4d10223fe585e996b1e89eafb986d6be2765a2d62dba528086a9092bb"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/coupling_fit_v2.csv",
+      "sha256": "bc6786eb5d87b22bbc989430cf859dba4238d1629d82bae18d3ed8d2c297df70"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/coupling_records_v2.csv",
+      "sha256": "e9ae50ceb437d34d5e04a48ef2f53160c0246a0898140a2d10a7caae2c0a9cbd"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/decision_table_v2.csv",
+      "sha256": "2368bebbb7df8a68db7b815fe78dc2881d33d36b5caa4335d3ac3dd4861324a7"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/error_condition_summary_v2.csv",
+      "sha256": "4a2af738f1404936c031103d352ebe590278c8779352ea1e076fb7d70b027a04"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/error_conditions_segments_v2.csv",
+      "sha256": "083b122d791ca32eec08ae032edd3a6b8f74333987437ee8e356c449881f466d"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/error_conditions_stats_v2.csv",
+      "sha256": "c68a3f5c84841ce54f9b30c8fa442189601e7fdb3c005d2e7d83273397769795"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/error_conditions_v2.csv",
+      "sha256": "dbb330296c57e2d34831a99757f8c5fff1bfb7b9fab14c301eeace1db734d12c"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/expected_effect_v2.csv",
+      "sha256": "94b696d2dde0848987b55ea1558ca61fa91e90f1f6a60fd996be80fe3fcc7ec0"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/fn_intensity_v2.csv",
+      "sha256": "087f2e97bf7d3340d0fef027bb5a9a19ef4331fcd969b19ef33e6bb802353c0a"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/fp_events_v2.csv",
+      "sha256": "906dc07b4ae961f856ed155ab5b55d19157e0c4b782e9a1b087c9b6dcc3c70b7"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/fp_intensity_v2.csv",
+      "sha256": "ad196bfa8b075df50773f394b6278daf1bd08032d7ee9f13334ee687b3855186"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/incident_summary_v2.csv",
+      "sha256": "7184320225c2227630a5fb902b67cf3bf47915c313e8abd70ac7de6ba25c02f9"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/incidents_A.csv",
+      "sha256": "f8407df2d7360db72a5c646bf5883d076c584c52610080babb893a5dc54e3437"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/incidents_B.csv",
+      "sha256": "a45eed38e452a50188cf9a0d0b40c4b7dcf2909ca35000edcd49336ff6195e41"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/interaction_2x2_v2.csv",
+      "sha256": "542c63fa113dc357130570de1ff8b228ff31b4ccf3a752c0eb8aad7a350cc02f"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/label_free_alert_probability_v2.csv",
+      "sha256": "2da6d90199b5370d81a6306bd050487fd65fb15fced336fadafda41d041b4d21"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/manifest.json",
+      "sha256": "b084aeb830bc2812aaea5c9809b10f526e012c833e13148f3e3ff8d0ae149261"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/metrics.csv",
+      "sha256": "ed318a3b36ced09ee888e0fb5b8b548350e9bee1e39cff7779c19ab379a613d2"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/model_comparison_v2.csv",
+      "sha256": "eadfbe41ac7add55f07b1e63300a0beec22e26513e415248455d489aac396f3a"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/monitor_gain_v2.csv",
+      "sha256": "c05d452df9093464de8045ed7e0a74551ca01f0c881ed39251f1feaf89c17fa4"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/near_miss_corr_v2.csv",
+      "sha256": "501fff1b330a2b4747175fcd19fc8afcd842f70010434f9e5024eefb49f96d77"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/near_miss_v2.csv",
+      "sha256": "0163b4257f5d1d63ff924317c6027b3d16b8c081bc42872a695796b22e2c79ce"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/position_vibration_misses_v2.csv",
+      "sha256": "9516a8a3596360a364ad00ba6f78cf57fb0e0569750733e67d7ca18b986db3d4"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/predictions_digest.json",
+      "sha256": "f636d3e25a7a208bfdaa21c151eba57b64a1ef709aa5fd46d37a921eb96167b7"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/probability_conversion_v2.csv",
+      "sha256": "a98514df92deb12bedadd83570bd27578a3e02a2076f1d7e83798a4baf509dcc"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/probability_eval_v2.csv",
+      "sha256": "56da8e3dfd7b1d074d03833d43fe47eb11780c50993cd8247d503097c42b6a5c"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/probability_reliability_v2.csv",
+      "sha256": "89e79e7b5bc99d7c01b6cf66119e2d1a77d8fab5f010d1c38ce25963d019bad0"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/quality_windows_v2.csv",
+      "sha256": "e49101f8bfff159ae96f2a2f213eb2f379b6f49c803221ff39f7805f56f6a73d"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/queue_injection_ranks_v2.csv",
+      "sha256": "7cb1517b6da8fed30460e44be7bb64a0f2d411cf1a6eabe1dbfd2dc841cf46a2"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/queue_key_selection_v2.csv",
+      "sha256": "99563c11aa4a2eeb8e1633f2d511bd9e78975c9dd48617a083096ec17514b2de"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/queue_mixed_ranks_v2.csv",
+      "sha256": "b74d53bb1a4840275f56865d1aa11a37f63a850607b60a2d9ea79c4c670f25ea"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/records_first_alarm_v2.csv",
+      "sha256": "14ba376ea2f5789655b0af14c389b7b5aa4c758b5734293d4afdd3e952fb058b"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/robustness_v2.csv",
+      "sha256": "7e2e53ca6f308db82d82476bac7103f24d75be301d247b47cc7814445ec7be40"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/rolling.csv",
+      "sha256": "f7fd51580796b3e310b1a66d146e1703600119a10f557963cec3081c4e16c73b"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/sensitivity_v2.csv",
+      "sha256": "57d0bf076c4d2366688ce518f1f7a3f1f0490511dd755fafa81b21c32e2c375a"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/sensor_importance_v2.csv",
+      "sha256": "2da67dd64e99cc165e7c4d76d496c147f67c96a5012dffbcac8826f20f3c750b"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/uncertainty_v2.csv",
+      "sha256": "c10df72d1662caf044679acbe88c65c1384ba8c68b8d36188926f40ff07aec72"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected/workload_v2.csv",
+      "sha256": "ad3be354fa8baa944fd7c4ee14eb8e950ca37259a68dec4440184cf7f920c74b"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected_effect_v2.csv",
+      "sha256": "94b696d2dde0848987b55ea1558ca61fa91e90f1f6a60fd996be80fe3fcc7ec0"
+    },
+    {
+      "path": "yejun/press_guard/outputs/fig_coupling_v2.png",
+      "sha256": "f44b76912c87b920e7bc8c0e52250cadb6e531e378d32dd0cddd4fbc45ed08c4"
+    },
+    {
+      "path": "yejun/press_guard/outputs/fig_false_alarm_cases_v2.png",
+      "sha256": "9b3e5e4373e920e63f4615e1853577dbc08a1116425dc7a26168440c80a659c0"
+    },
+    {
+      "path": "yejun/press_guard/outputs/fig_first_alarm_v2.png",
+      "sha256": "c629b9f2bb01600c2956cc37e2ead5a538dd6fca0aad8f06021ce395668aaf25"
+    },
+    {
+      "path": "yejun/press_guard/outputs/fig_missed_example_v2.png",
+      "sha256": "72c6c2bdcc18d1ebfcaa3177453c6fd4f552dd34637d7080a8a9ca491f39556c"
+    },
+    {
+      "path": "yejun/press_guard/outputs/fig_position_vibration_v2.png",
+      "sha256": "12e94aab84fadbfc9d43cfd127e0a361ae7a12cc8e9b3d3dca680337e27997cb"
+    },
+    {
+      "path": "yejun/press_guard/outputs/fig_probability_reliability_v2.png",
+      "sha256": "2eeb33fd988f37a892ec59f207a6111d09dd1bd2c524b30924018a014e9b2aec"
+    },
+    {
+      "path": "yejun/press_guard/outputs/fig_recall_by_position_v2.png",
+      "sha256": "5f79f3f8505d10fdcb9f516ef5562651d904b1766f019a47dbcd3cbd8ed4fc5c"
+    },
+    {
+      "path": "yejun/press_guard/outputs/fig_sensor_importance_v2.png",
+      "sha256": "8aaf303aec44a09cfc73099031cc36e4692b6ae7d118d429b5d9348c5ae95946"
+    },
+    {
+      "path": "yejun/press_guard/outputs/fn_intensity_v2.csv",
+      "sha256": "087f2e97bf7d3340d0fef027bb5a9a19ef4331fcd969b19ef33e6bb802353c0a"
+    },
+    {
+      "path": "yejun/press_guard/outputs/fp_events_v2.csv",
+      "sha256": "906dc07b4ae961f856ed155ab5b55d19157e0c4b782e9a1b087c9b6dcc3c70b7"
+    },
+    {
+      "path": "yejun/press_guard/outputs/fp_intensity_v2.csv",
+      "sha256": "ad196bfa8b075df50773f394b6278daf1bd08032d7ee9f13334ee687b3855186"
+    },
+    {
+      "path": "yejun/press_guard/outputs/incident_summary_v2.csv",
+      "sha256": "7184320225c2227630a5fb902b67cf3bf47915c313e8abd70ac7de6ba25c02f9"
+    },
+    {
+      "path": "yejun/press_guard/outputs/incidents_A.csv",
+      "sha256": "f8407df2d7360db72a5c646bf5883d076c584c52610080babb893a5dc54e3437"
+    },
+    {
+      "path": "yejun/press_guard/outputs/incidents_B.csv",
+      "sha256": "a45eed38e452a50188cf9a0d0b40c4b7dcf2909ca35000edcd49336ff6195e41"
+    },
+    {
+      "path": "yejun/press_guard/outputs/interaction_2x2_v2.csv",
+      "sha256": "542c63fa113dc357130570de1ff8b228ff31b4ccf3a752c0eb8aad7a350cc02f"
+    },
+    {
+      "path": "yejun/press_guard/outputs/label_free_alert_probability_v2.csv",
+      "sha256": "2da6d90199b5370d81a6306bd050487fd65fb15fced336fadafda41d041b4d21"
+    },
+    {
+      "path": "yejun/press_guard/outputs/manifest.json",
+      "sha256": "c9d33dfeb30e07e2ab45308832a6e2fbcad58b7543550a785014dbf50e665671"
+    },
+    {
+      "path": "yejun/press_guard/outputs/metrics.csv",
+      "sha256": "ed318a3b36ced09ee888e0fb5b8b548350e9bee1e39cff7779c19ab379a613d2"
+    },
+    {
+      "path": "yejun/press_guard/outputs/model_comparison_v2.csv",
+      "sha256": "eadfbe41ac7add55f07b1e63300a0beec22e26513e415248455d489aac396f3a"
+    },
+    {
+      "path": "yejun/press_guard/outputs/model_comparison_v2.md",
+      "sha256": "308ede3d08463847c84afacc104d05bcfdc2157e409288ac80a780011afaae41"
+    },
+    {
+      "path": "yejun/press_guard/outputs/monitor_gain_v2.csv",
+      "sha256": "c05d452df9093464de8045ed7e0a74551ca01f0c881ed39251f1feaf89c17fa4"
+    },
+    {
+      "path": "yejun/press_guard/outputs/near_miss_corr_v2.csv",
+      "sha256": "501fff1b330a2b4747175fcd19fc8afcd842f70010434f9e5024eefb49f96d77"
+    },
+    {
+      "path": "yejun/press_guard/outputs/near_miss_v2.csv",
+      "sha256": "0163b4257f5d1d63ff924317c6027b3d16b8c081bc42872a695796b22e2c79ce"
+    },
+    {
+      "path": "yejun/press_guard/outputs/position_vibration_misses_v2.csv",
+      "sha256": "9516a8a3596360a364ad00ba6f78cf57fb0e0569750733e67d7ca18b986db3d4"
+    },
+    {
+      "path": "yejun/press_guard/outputs/predictions_abnormal_A.csv",
+      "sha256": "bfea23552a9c9d5fe0bb44b11fdc6bda59ac7340a30f315349b72631583432e7"
+    },
+    {
+      "path": "yejun/press_guard/outputs/predictions_abnormal_B.csv",
+      "sha256": "1826e24db63c2d9c11496084db3679340936f83b63d8de4fdc4a7ca4046f304e"
+    },
+    {
+      "path": "yejun/press_guard/outputs/predictions_normal_A.csv",
+      "sha256": "d22b028d4e7c427fb19439e7a3d02182e4b87908f7475dab85b1c1639a59e224"
+    },
+    {
+      "path": "yejun/press_guard/outputs/predictions_normal_B.csv",
+      "sha256": "a50d0ac59cd29ff0f1dc0271b22a9db945f069c1cc25acd7f8ea44c1a9be10ce"
+    },
+    {
+      "path": "yejun/press_guard/outputs/probability_conversion_v2.csv",
+      "sha256": "a98514df92deb12bedadd83570bd27578a3e02a2076f1d7e83798a4baf509dcc"
+    },
+    {
+      "path": "yejun/press_guard/outputs/probability_eval_v2.csv",
+      "sha256": "56da8e3dfd7b1d074d03833d43fe47eb11780c50993cd8247d503097c42b6a5c"
+    },
+    {
+      "path": "yejun/press_guard/outputs/probability_reliability_v2.csv",
+      "sha256": "89e79e7b5bc99d7c01b6cf66119e2d1a77d8fab5f010d1c38ce25963d019bad0"
+    },
+    {
+      "path": "yejun/press_guard/outputs/quality_windows_v2.csv",
+      "sha256": "e49101f8bfff159ae96f2a2f213eb2f379b6f49c803221ff39f7805f56f6a73d"
+    },
+    {
+      "path": "yejun/press_guard/outputs/queue_injection_ranks_v2.csv",
+      "sha256": "7cb1517b6da8fed30460e44be7bb64a0f2d411cf1a6eabe1dbfd2dc841cf46a2"
+    },
+    {
+      "path": "yejun/press_guard/outputs/queue_key_selection_v2.csv",
+      "sha256": "99563c11aa4a2eeb8e1633f2d511bd9e78975c9dd48617a083096ec17514b2de"
+    },
+    {
+      "path": "yejun/press_guard/outputs/queue_mixed_ranks_v2.csv",
+      "sha256": "b74d53bb1a4840275f56865d1aa11a37f63a850607b60a2d9ea79c4c670f25ea"
+    },
+    {
+      "path": "yejun/press_guard/outputs/records_first_alarm_v2.csv",
+      "sha256": "14ba376ea2f5789655b0af14c389b7b5aa4c758b5734293d4afdd3e952fb058b"
+    },
+    {
+      "path": "yejun/press_guard/outputs/robustness_v2.csv",
+      "sha256": "7e2e53ca6f308db82d82476bac7103f24d75be301d247b47cc7814445ec7be40"
+    },
+    {
+      "path": "yejun/press_guard/outputs/rolling.csv",
+      "sha256": "f7fd51580796b3e310b1a66d146e1703600119a10f557963cec3081c4e16c73b"
+    },
+    {
+      "path": "yejun/press_guard/outputs/sensitivity_v2.csv",
+      "sha256": "57d0bf076c4d2366688ce518f1f7a3f1f0490511dd755fafa81b21c32e2c375a"
+    },
+    {
+      "path": "yejun/press_guard/outputs/sensor_importance_v2.csv",
+      "sha256": "2da67dd64e99cc165e7c4d76d496c147f67c96a5012dffbcac8826f20f3c750b"
+    },
+    {
+      "path": "yejun/press_guard/outputs/test_predictions_A.csv",
+      "sha256": "2941bf9dde2c9b66308eb6e26d19e4a41f93de1441833c8b476e0534e47e98c8"
+    },
+    {
+      "path": "yejun/press_guard/outputs/test_predictions_B.csv",
+      "sha256": "9bd02a7cf086ad9ff81542166c2af768aefee944d4385e343a2d771d8a2f5524"
+    },
+    {
+      "path": "yejun/press_guard/outputs/uncertainty_v2.csv",
+      "sha256": "c10df72d1662caf044679acbe88c65c1384ba8c68b8d36188926f40ff07aec72"
+    },
+    {
+      "path": "yejun/press_guard/outputs/workload_v2.csv",
+      "sha256": "ad3be354fa8baa944fd7c4ee14eb8e950ca37259a68dec4440184cf7f920c74b"
+    },
+    {
+      "path": "yejun/press_guard/predict.py",
+      "sha256": "d7b92210df81dda577721e3bc9e48c76006106a7108f358a888714b494df0dc9"
+    },
+    {
+      "path": "yejun/press_guard/probability.py",
+      "sha256": "67007ee9c8a9a12c48707e77230907dac2c155a519edfe7868863065aa4f34dd"
+    },
+    {
+      "path": "yejun/press_guard/recalibrate.py",
+      "sha256": "448883f5c1d65e5b14877d838abcbd338df9970941683a425c0266e54b05042b"
+    },
+    {
+      "path": "yejun/press_guard/reproduce.py",
+      "sha256": "3641826d624c820e8c118267c3b3a71d5ab0722548eb7c0b92fd3faae24df2d0"
+    },
+    {
+      "path": "yejun/press_guard/requirements-lock.txt",
+      "sha256": "dd607e92d36771b7098ea58bf53a0cf6196386c8cd3028850320567b25eb4583"
+    },
+    {
+      "path": "yejun/press_guard/requirements-lstm.txt",
+      "sha256": "2f9f6c9ee8e26a851c013f57741b8ecbe6170086c3e4cfd38a71197d75157f40"
+    },
+    {
+      "path": "yejun/press_guard/requirements.txt",
+      "sha256": "cf2a59e9cc7ad18a015e5cd6092716f17be5ab797fc19ddf45ae077977375a43"
+    },
+    {
+      "path": "yejun/press_guard/runtime.py",
+      "sha256": "7ffd6d0f57f8d9e26e2303a943ae3630a792b9dff18b01a15006b2883f7c7f69"
+    },
+    {
+      "path": "yejun/press_guard/serve.py",
+      "sha256": "432f7711b22c594fdc91f2ab1f92e8f146f1e0344f73e07d53ffed92702f4d7b"
+    },
+    {
+      "path": "yejun/press_guard/simulate.py",
+      "sha256": "44f9f0980f5cfbe519f540026dd8f740eea05f4c999b4d28c4b0998484826920"
+    },
+    {
+      "path": "yejun/press_guard/test_analyze.py",
+      "sha256": "cb45e7c1bc6c2aec4b8521c91f26ac86e9b9701a6947215535dfab07c5daef37"
+    },
+    {
+      "path": "yejun/press_guard/test_cli_probability.py",
+      "sha256": "d49b16f60763ebe81b47a8760e456e30f052aaf25bd8b6626b9dfad651428bab"
+    },
+    {
+      "path": "yejun/press_guard/test_digest_integrity.py",
+      "sha256": "510aabd999eac9166a13de37fd1435543383c0678f20d65cc23397579e5042c8"
+    },
+    {
+      "path": "yejun/press_guard/test_guard.py",
+      "sha256": "f5b8a0bdf415cb546d207352cdf5ca3fa5079f319571f3402c09c6c615b7cffd"
+    },
+    {
+      "path": "yejun/press_guard/test_insights.py",
+      "sha256": "eb0ecbfff17f44f20ce468a148db4dd213943551717522757990c8dd57904eb7"
+    },
+    {
+      "path": "yejun/press_guard/test_monitor.py",
+      "sha256": "60677b567216bcc1297a8fe0a793b30734b32346fe229a35b5ccee76d7dff40c"
+    },
+    {
+      "path": "yejun/press_guard/test_packaging.py",
+      "sha256": "57a2a320291f828b1a9f52fe3aed1ba0cf4e8140690a2d22c8d9d0c1a01c6908"
+    },
+    {
+      "path": "yejun/press_guard/test_portability.py",
+      "sha256": "2628436add29f2fd1d43890915c2f116279b56104c80cd6da5a109444ad26f41"
+    },
+    {
+      "path": "yejun/press_guard/test_probability.py",
+      "sha256": "8a1d76fbab304a1391adfbf8dc8f84bc4557097250f39e85b46a5aba5db770af"
+    },
+    {
+      "path": "yejun/press_guard/test_recalibrate.py",
+      "sha256": "580b35256cf4851180ed0f9ee2d6ea1a27781b138137095e99dbdcde7575d4ec"
+    },
+    {
+      "path": "yejun/press_guard/test_review_regressions.py",
+      "sha256": "5c13c17dc67e34af9479da04f2d2222039e9e590922e43e5afa9e5110193ddaf"
+    },
+    {
+      "path": "yejun/press_guard/test_serve.py",
+      "sha256": "a74d2e72a8667e75a9f55b200be56533c5905afed0024540f209aa52237aeb36"
+    },
+    {
+      "path": "yejun/press_guard/test_simulate.py",
+      "sha256": "9f5a83ce4a1e1c0c04db4629f97b72a83ae633cce4372b71ba2f3a78fefabdb6"
+    },
+    {
+      "path": "yejun/press_guard/test_state_incidents.py",
+      "sha256": "f84efa6b4d46e380a522e58a97ac2a22969187aaf78ba67242a8e1840c6d23c4"
+    },
+    {
+      "path": "yejun/press_guard/test_web.cjs",
+      "sha256": "c77397ad02ada84a0ed3f3c460963225162df3e622b1ab41e59cab6d79f5ad33"
+    },
+    {
+      "path": "yejun/press_guard/tools/capture_console.py",
+      "sha256": "59455927c7a10c35399daf477575707bd884a775c4292ffa085008eeb14fec6b"
+    },
+    {
+      "path": "yejun/press_guard/tools/clean_repro.sh",
+      "sha256": "d35cd8c7581daf027e69dd3d38de90acc620b56590b2716dc3595f84e0862e3d"
+    },
+    {
+      "path": "yejun/press_guard/tools/diagrams.py",
+      "sha256": "f1b4335e6163499cbf03774a8e5d079d77d0839d081383c789e6c898a0c163ed"
+    },
+    {
+      "path": "yejun/press_guard/tools/package_manifest.py",
+      "sha256": "df0057895fe820f8f40acbc7d6112ecaca9e2e84338993ed0d5ad93703af390a"
+    },
+    {
+      "path": "yejun/press_guard/train.py",
+      "sha256": "498b2bd681729595965ee0bf938106eb313c7ee14a19a4e962fb8cbce55e0449"
+    },
+    {
+      "path": "yejun/press_guard/verify.py",
+      "sha256": "16b01179b98f1c2cb934fc17c77970a3d55a0953ec518af00de5e22602ec1d92"
+    },
+    {
+      "path": "yejun/press_guard/web/app.js",
+      "sha256": "2519d882229639b551c5d90bf2fe99291406fb1bbb9c051458e2f6b4f2e3e9fd"
+    },
+    {
+      "path": "yejun/press_guard/web/index.html",
+      "sha256": "9c7b0708d481b536c6f56c265c3dfba9b221990fef49bf2ae91960a1be30a0d1"
+    },
+    {
+      "path": "yejun/press_guard/web/style.css",
+      "sha256": "271dabddc6fa88a463fb2a3f73f726ffa56de6fa4f983cf0e97edbf5eb6d1012"
+    },
+    {
+      "path": "yejun/press_submission/PROVENANCE.md",
+      "sha256": "bc86cc453870fa93756cfd17be417795fe046c3b10dd1e0d2b26b39e4e01da7f"
+    },
+    {
+      "path": "yejun/press_submission/README.md",
+      "sha256": "6c2a9662b23e269dede3db74b272f12f11f03c63a677528f3e3830da652348e2"
+    },
+    {
+      "path": "yejun/press_submission/data/3_소성가공_예지보전/outlier_data.csv",
+      "sha256": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e"
+    },
+    {
+      "path": "yejun/press_submission/data/3_소성가공_예지보전/press_data_normal.csv",
+      "sha256": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7"
+    },
+    {
+      "path": "yejun/press_submission/evidence/요청사항_준용.md",
+      "sha256": "7fecfbb4f3422f430d89b0a68a88dac75c94aabaa4f9f9902e7fca140fdb7fa3"
+    },
+    {
+      "path": "yejun/press_submission/outputs/ablation.csv",
+      "sha256": "d523cb63cde49b29fe25a20500b5a80e33071b411d6477740171d71bb7411906"
+    },
+    {
+      "path": "yejun/press_submission/outputs/alarm_components.csv",
+      "sha256": "8c2624778b54b2c7dcb4e3e25e17b50fcc9798df8c45f3658cf0682682d9043c"
+    },
+    {
+      "path": "yejun/press_submission/outputs/checks.json",
+      "sha256": "a313d78d55bc22a5cf3ba3d03e8541979aba06f1b65fa04bea9c6e15ee860921"
+    },
+    {
+      "path": "yejun/press_submission/outputs/conformal_mc.csv",
+      "sha256": "9ad41b2c95e1df78dc00b6f6b5a6c9c2017b49aaddbf577352692c5118d18183"
+    },
+    {
+      "path": "yejun/press_submission/outputs/diagnosis.json",
+      "sha256": "f5cadd1ee7f854de37e0cfc05aca1f4f4b362ac3ada9a9b9e6a96d833d5b3e8d"
+    },
+    {
+      "path": "yejun/press_submission/outputs/diagnosis.md",
+      "sha256": "a5f675ae7a993a792f2aef0de57feb8536cdb2fd7ea177c061ffbf165db29e0d"
+    },
+    {
+      "path": "yejun/press_submission/outputs/error_conditions_fn.csv",
+      "sha256": "e2b5e291c4613ec65c6addf465065aeff637237a53ea535a989becb00d233ae5"
+    },
+    {
+      "path": "yejun/press_submission/outputs/error_conditions_fp.csv",
+      "sha256": "8948a749e4ec8c2b841db0122669595f19fb353707b6bd7fffcc0196e0a3770c"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/ablation.csv",
+      "sha256": "d523cb63cde49b29fe25a20500b5a80e33071b411d6477740171d71bb7411906"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/alarm_components.csv",
+      "sha256": "8c2624778b54b2c7dcb4e3e25e17b50fcc9798df8c45f3658cf0682682d9043c"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/checks.json",
+      "sha256": "a313d78d55bc22a5cf3ba3d03e8541979aba06f1b65fa04bea9c6e15ee860921"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/conformal_mc.csv",
+      "sha256": "9ad41b2c95e1df78dc00b6f6b5a6c9c2017b49aaddbf577352692c5118d18183"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/diagnosis.json",
+      "sha256": "f5cadd1ee7f854de37e0cfc05aca1f4f4b362ac3ada9a9b9e6a96d833d5b3e8d"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/error_conditions_fn.csv",
+      "sha256": "e2b5e291c4613ec65c6addf465065aeff637237a53ea535a989becb00d233ae5"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/error_conditions_fp.csv",
+      "sha256": "8948a749e4ec8c2b841db0122669595f19fb353707b6bd7fffcc0196e0a3770c"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/influence.csv",
+      "sha256": "86938db821b384299ac29f74e808455d197eb8bae5bc641a044a62c810c9e550"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/interaction_2x2.csv",
+      "sha256": "ec1d0682ccdad3d13c37764ac111dab817c2387c19f537d63efbbff722c1190e"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/label_bypass.csv",
+      "sha256": "0dc378785b250b2d213cd0f17b5bd2543c7cea2afff29e1434d4d418c5249144"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/load_normalization.csv",
+      "sha256": "f9148915fbedf898a804e04469da67ea807e04d8ffd80e7272034b22a6d75900"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/load_normalization_meta.csv",
+      "sha256": "4f933704fe30005e636edb55829870d8434330afc28313a55d9cda27a1b35938"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/lstm_common_history_A.csv",
+      "sha256": "bf1977799a336067e8949213da425548e9240db879384a6390496f70a732889c"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/lstm_common_history_B.csv",
+      "sha256": "1a1790d69bbf21702bfa38464e381cfe91f8a9e53c49afe5a7b2481c727473a3"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/lstm_common_meta.csv",
+      "sha256": "f8f98d105f7cf0f38993437ba8e728c1b59495319a314fae70736b9470be66e8"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/lstm_guidebook_history.csv",
+      "sha256": "bf303b4ebd2ed5ed564297ede07e55554c38b0ba200f754bdeecc18779250ba9"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/lstm_guidebook_reproduction.json",
+      "sha256": "4f38e6964cf61f7bfa5a9fd30af125a7aef077f60c33a243973668d917bd464e"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/manifest.json",
+      "sha256": "be16d506b9aaf3d6b41d7d4c0f518f5155e7a53dbe0ebaaf6541a94d9492e4a8"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/model_comparison.csv",
+      "sha256": "69ceeb1b18bafc2061330ba242dabd9b489939c8517bcf84156803b0ce9e876f"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/model_comparison_all.csv",
+      "sha256": "21d43024c724604797eec94860d055d42166c2c89bf6ef470b6fa098e6d287f7"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/model_comparison_lstm.csv",
+      "sha256": "d0d18c5c8bb8ad06caffa28426a177325ee8a1f182e958125ba850753c4392f8"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/operating_points.csv",
+      "sha256": "fb51ae4056db6f0f7a48fc43134f242ad95167e2734d7065882dded7f459b25f"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/persistence.csv",
+      "sha256": "9bc1ef956e2af3d81d191bc442b0f94a99c00eb0060884823aa4bea44edade1f"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/preprocess_effect.csv",
+      "sha256": "0156e0621334b9fbc02e1d9c29d43ea342e3a07cb676efbb4967a6fdfa088414"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/quantization_frozen.csv",
+      "sha256": "a3d52f6bb10d880a5ed2be16e8f8dfdd4a9753536d353835bf989c920a5698a6"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/segment_features.csv",
+      "sha256": "36f3e636056008dcfb95a905429399c15ee81d2b3e1b25a17488acfcfef1d2db"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/sensitivity.csv",
+      "sha256": "03d5e3e7eb282eda5549d45128871290daa6b1f8151f5a941a77c2eef14e8d88"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/sensitivity_params.csv",
+      "sha256": "f88db959a5f0ab4c037c2b5e2e8b12265ac1d02f02d703d64394beac8f77eeab"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/splits.csv",
+      "sha256": "616f348579ff313e3bbc5e592a26f29a92f7c7ce6a3e5369980cddc4e6de1880"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/tail_params.csv",
+      "sha256": "86d33c25f7e46672c8579801437c849a72e608e259c411793485108aec0d19d3"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/thresholds_main.csv",
+      "sha256": "c2da6d95539bc43cf654ada62f42385cc496945c799ad8eaedbf4155c5006bfa"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/uncertainty.csv",
+      "sha256": "65dd946e37b6db7ae27ed100db12a5984a08b06c61ae88c5f93621ec683ba37d"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/waveform_segments.csv",
+      "sha256": "9b36afcc7ff9a017b623332d0d561228078a894db11eeabbbe0b1379cbabcee1"
+    },
+    {
+      "path": "yejun/press_submission/outputs/expected/workload.csv",
+      "sha256": "e6d8b13dab52e7e8a6e6dd01db3298f6895eaa8c1933871897d2c4a19be2e61a"
+    },
+    {
+      "path": "yejun/press_submission/outputs/field_decision_table.md",
+      "sha256": "d97ae3433953472d59ed5469c6cf76558e040752881e174de3d2297bf8691b21"
+    },
+    {
+      "path": "yejun/press_submission/outputs/fig_current_waveform.png",
+      "sha256": "881450e3419bcaf582a403fe45da1ba87862517c8517dc29da1a65e405752579"
+    },
+    {
+      "path": "yejun/press_submission/outputs/fig_error_examples.png",
+      "sha256": "d391c7b3c2b5d35c0d6977e820bc9d3e265986f3fd821f60e62707fe38871d3e"
+    },
+    {
+      "path": "yejun/press_submission/outputs/fig_recall_by_position.png",
+      "sha256": "988341eac536ddf5c6b4800235e5a8db0609b40847a34f1c061e37efd7f0071a"
+    },
+    {
+      "path": "yejun/press_submission/outputs/fig_segment_length.png",
+      "sha256": "4cec977dbfbad67e97a1f7aedf8179ac2de5a0ce3b49527e6aea9e1c99f0f02a"
+    },
+    {
+      "path": "yejun/press_submission/outputs/fig_vibration_vs_waveform.png",
+      "sha256": "d116ad04b5153c69cc8a1b9a3f6907c874007c29f6eb8d4a740553c1c4246890"
+    },
+    {
+      "path": "yejun/press_submission/outputs/influence.csv",
+      "sha256": "86938db821b384299ac29f74e808455d197eb8bae5bc641a044a62c810c9e550"
+    },
+    {
+      "path": "yejun/press_submission/outputs/interaction_2x2.csv",
+      "sha256": "ec1d0682ccdad3d13c37764ac111dab817c2387c19f537d63efbbff722c1190e"
+    },
+    {
+      "path": "yejun/press_submission/outputs/label_bypass.csv",
+      "sha256": "0dc378785b250b2d213cd0f17b5bd2543c7cea2afff29e1434d4d418c5249144"
+    },
+    {
+      "path": "yejun/press_submission/outputs/load_normalization.csv",
+      "sha256": "f9148915fbedf898a804e04469da67ea807e04d8ffd80e7272034b22a6d75900"
+    },
+    {
+      "path": "yejun/press_submission/outputs/load_normalization_meta.csv",
+      "sha256": "4f933704fe30005e636edb55829870d8434330afc28313a55d9cda27a1b35938"
+    },
+    {
+      "path": "yejun/press_submission/outputs/lstm_common_history_A.csv",
+      "sha256": "bf1977799a336067e8949213da425548e9240db879384a6390496f70a732889c"
+    },
+    {
+      "path": "yejun/press_submission/outputs/lstm_common_history_B.csv",
+      "sha256": "1a1790d69bbf21702bfa38464e381cfe91f8a9e53c49afe5a7b2481c727473a3"
+    },
+    {
+      "path": "yejun/press_submission/outputs/lstm_common_meta.csv",
+      "sha256": "f8f98d105f7cf0f38993437ba8e728c1b59495319a314fae70736b9470be66e8"
+    },
+    {
+      "path": "yejun/press_submission/outputs/lstm_guidebook_history.csv",
+      "sha256": "bf303b4ebd2ed5ed564297ede07e55554c38b0ba200f754bdeecc18779250ba9"
+    },
+    {
+      "path": "yejun/press_submission/outputs/lstm_guidebook_reproduction.json",
+      "sha256": "4f38e6964cf61f7bfa5a9fd30af125a7aef077f60c33a243973668d917bd464e"
+    },
+    {
+      "path": "yejun/press_submission/outputs/manifest.json",
+      "sha256": "be16d506b9aaf3d6b41d7d4c0f518f5155e7a53dbe0ebaaf6541a94d9492e4a8"
+    },
+    {
+      "path": "yejun/press_submission/outputs/model_comparison.csv",
+      "sha256": "69ceeb1b18bafc2061330ba242dabd9b489939c8517bcf84156803b0ce9e876f"
+    },
+    {
+      "path": "yejun/press_submission/outputs/model_comparison.md",
+      "sha256": "d26c36449617890860f567502715b4547bd14027fcabf07f91192f9ff4a7acad"
+    },
+    {
+      "path": "yejun/press_submission/outputs/model_comparison_all.csv",
+      "sha256": "21d43024c724604797eec94860d055d42166c2c89bf6ef470b6fa098e6d287f7"
+    },
+    {
+      "path": "yejun/press_submission/outputs/model_comparison_all.md",
+      "sha256": "d3dc7bd867bcd04daabf9ce319a3e7665ec763caaf15058b4034e3bf0727c798"
+    },
+    {
+      "path": "yejun/press_submission/outputs/model_comparison_cutoff.md",
+      "sha256": "af355eef23fc6bed1af0fa6f0906480940337400cf69f5f9b25666f1a34d568f"
+    },
+    {
+      "path": "yejun/press_submission/outputs/model_comparison_lstm.csv",
+      "sha256": "d0d18c5c8bb8ad06caffa28426a177325ee8a1f182e958125ba850753c4392f8"
+    },
+    {
+      "path": "yejun/press_submission/outputs/numbers.json",
+      "sha256": "2f6e2292b84b4d4aa5652b56c905f13e488d67eeb04e4dcd84f23e93ad92726a"
+    },
+    {
+      "path": "yejun/press_submission/outputs/operating_points.csv",
+      "sha256": "fb51ae4056db6f0f7a48fc43134f242ad95167e2734d7065882dded7f459b25f"
+    },
+    {
+      "path": "yejun/press_submission/outputs/persistence.csv",
+      "sha256": "9bc1ef956e2af3d81d191bc442b0f94a99c00eb0060884823aa4bea44edade1f"
+    },
+    {
+      "path": "yejun/press_submission/outputs/predictions_A.csv",
+      "sha256": "0656fc309cd75e0fa083cd74206b436871e19e7c8a6d9e4fd8d9256a7e7e8b4b"
+    },
+    {
+      "path": "yejun/press_submission/outputs/predictions_B.csv",
+      "sha256": "a1f4fd3d8246c738aded9b464adffa94cf87769cae8e55f45483af7fd241a0ea"
+    },
+    {
+      "path": "yejun/press_submission/outputs/preprocess_effect.csv",
+      "sha256": "0156e0621334b9fbc02e1d9c29d43ea342e3a07cb676efbb4967a6fdfa088414"
+    },
+    {
+      "path": "yejun/press_submission/outputs/quantization_frozen.csv",
+      "sha256": "a3d52f6bb10d880a5ed2be16e8f8dfdd4a9753536d353835bf989c920a5698a6"
+    },
+    {
+      "path": "yejun/press_submission/outputs/segment_features.csv",
+      "sha256": "36f3e636056008dcfb95a905429399c15ee81d2b3e1b25a17488acfcfef1d2db"
+    },
+    {
+      "path": "yejun/press_submission/outputs/sensitivity.csv",
+      "sha256": "03d5e3e7eb282eda5549d45128871290daa6b1f8151f5a941a77c2eef14e8d88"
+    },
+    {
+      "path": "yejun/press_submission/outputs/sensitivity_params.csv",
+      "sha256": "f88db959a5f0ab4c037c2b5e2e8b12265ac1d02f02d703d64394beac8f77eeab"
+    },
+    {
+      "path": "yejun/press_submission/outputs/splits.csv",
+      "sha256": "616f348579ff313e3bbc5e592a26f29a92f7c7ce6a3e5369980cddc4e6de1880"
+    },
+    {
+      "path": "yejun/press_submission/outputs/tail_params.csv",
+      "sha256": "86d33c25f7e46672c8579801437c849a72e608e259c411793485108aec0d19d3"
+    },
+    {
+      "path": "yejun/press_submission/outputs/thresholds_main.csv",
+      "sha256": "c2da6d95539bc43cf654ada62f42385cc496945c799ad8eaedbf4155c5006bfa"
+    },
+    {
+      "path": "yejun/press_submission/outputs/uncertainty.csv",
+      "sha256": "65dd946e37b6db7ae27ed100db12a5984a08b06c61ae88c5f93621ec683ba37d"
+    },
+    {
+      "path": "yejun/press_submission/outputs/waveform_segments.csv",
+      "sha256": "9b36afcc7ff9a017b623332d0d561228078a894db11eeabbbe0b1379cbabcee1"
+    },
+    {
+      "path": "yejun/press_submission/outputs/workload.csv",
+      "sha256": "e6d8b13dab52e7e8a6e6dd01db3298f6895eaa8c1933871897d2c4a19be2e61a"
+    },
+    {
+      "path": "yejun/press_submission/predict.py",
+      "sha256": "148f8c21681cdf260b940fc21602448faa4cf34cba196e0f78f07baf62e047a8"
+    },
+    {
+      "path": "yejun/press_submission/press/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "yejun/press_submission/press/analysis.py",
+      "sha256": "87df289c05a2e0cb70943e1c1e502503e68d28c20acd1b293468a3358ababbaa"
+    },
+    {
+      "path": "yejun/press_submission/press/artifact.py",
+      "sha256": "a25447664ff1b30eb1930fa2a39b5c1d550a4ef1833512b5130eb7cf570d183e"
+    },
+    {
+      "path": "yejun/press_submission/press/calibrate.py",
+      "sha256": "a2b7b686757cc513b6430637323c7d1059f485ff70c547492eefe9589b8eb17b"
+    },
+    {
+      "path": "yejun/press_submission/press/data.py",
+      "sha256": "81dc394c8b0b53618177e5822c7cc0f7ff7c7f060d08471c968b4cfaaa05411f"
+    },
+    {
+      "path": "yejun/press_submission/press/diagnosis.py",
+      "sha256": "f7ecb071d7c9c9b25c670bcb6052f8201ca2e03e991b57f9fe13fec6346cf499"
+    },
+    {
+      "path": "yejun/press_submission/press/evaluate.py",
+      "sha256": "aa749026db25e3982a20019f6ca4b609794fc6cbfdcaaa2b639088cc4c948e63"
+    },
+    {
+      "path": "yejun/press_submission/press/field.py",
+      "sha256": "de4e958a89181ae4b415a7820fa8b8df4007132031f1868feb9b94706664b9d9"
+    },
+    {
+      "path": "yejun/press_submission/press/lstm_ae.py",
+      "sha256": "1d86d666bfae83cdba8fedf2533653b2c838573a8033d7ada5c6116d1a0f3234"
+    },
+    {
+      "path": "yejun/press_submission/press/numbers.py",
+      "sha256": "13946eece21d9e730726a6e0ff0db329d32687eab387e86c51d09d4504b06087"
+    },
+    {
+      "path": "yejun/press_submission/press/robustness.py",
+      "sha256": "c21ff3ebb89af34dc8d172e7465dc33ffb3a020c4432ef7fe6c816361fa8b413"
+    },
+    {
+      "path": "yejun/press_submission/press/scores.py",
+      "sha256": "22ed1700eabadaadcec25c2602b40bd8a0a84879ad658e0ced2b05c2b87078ae"
+    },
+    {
+      "path": "yejun/press_submission/press/uncertainty.py",
+      "sha256": "4f97fc6df689947602f5c349144303c609940aa588d98ce480b56fd39ea5b899"
+    },
+    {
+      "path": "yejun/press_submission/press/validation.py",
+      "sha256": "87e9b6299981725fd59352805ff8e93cdfdb89f3ffd20b77216554070f682eb5"
+    },
+    {
+      "path": "yejun/press_submission/requirements.txt",
+      "sha256": "6b9e62e52150fa2bdbd59fb0059934dda0346add55f477a2aad4abc8295dc425"
+    },
+    {
+      "path": "yejun/press_submission/run_all.py",
+      "sha256": "431c0508c1d02440be866a87c87c8b9103f7100bf36ef9305ac8e28c55685b08"
+    },
+    {
+      "path": "yejun/press_submission/tests/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "yejun/press_submission/tests/conftest.py",
+      "sha256": "8659c4f6af34a32f61ecc29774fd873cf628e7e0828ce9ff04773418357a6cc6"
+    },
+    {
+      "path": "yejun/press_submission/tests/test_review_regressions.py",
+      "sha256": "6b6035629e422a1a4c62e5d7898c93ce91deb26ce5d0ea6a896ac71259b8c191"
+    },
+    {
+      "path": "yejun/press_submission/tests/test_step1.py",
+      "sha256": "4c77eefbc3ff0a5835deda9464815e2b6094c9d22968176aad8f2904f9adba62"
+    },
+    {
+      "path": "yejun/press_submission/tests/test_step2.py",
+      "sha256": "47922985b2c5b2b62c2fea3f3e248194980bb7234f0daf0b2cf40b673dc60e94"
+    },
+    {
+      "path": "yejun/press_submission/tests/test_step3.py",
+      "sha256": "28e8af921c0fa621ce0825b50590c6a3f0c5a923ac6c8addf740be04d9654e43"
+    },
+    {
+      "path": "yejun/press_submission/tests/test_step4.py",
+      "sha256": "1552bb361cdd3c4cf60ed3a2d04230cdc97dc842264cdd6bc377c38430447676"
+    },
+    {
+      "path": "yejun/press_submission/tests/test_step5.py",
+      "sha256": "04ac2a98a09d6cff8c42e812abc9eeff52f274707f9cc31b4ecc3ae0b6fb1e9d"
+    },
+    {
+      "path": "yejun/press_submission/tools/check_alignment.py",
+      "sha256": "002ab94f3a621aad8d252898445477110910ceb15665ff201d1af24db63339de"
+    },
+    {
+      "path": "yejun/press_submission/tools/clean_repro.sh",
+      "sha256": "fd66c8b2338e6fa5984d3c7e8bd8d15288f4d347da391303e8b35e5d732ef5f7"
+    },
+    {
+      "path": "yejun/press_submission/tools/make_submission_zip.py",
+      "sha256": "894b427f85a8e0b355504855c87c8a1acbb8ad0539fb3a16f669901f04bcf405"
+    },
+    {
+      "path": "yejun/press_submission/vendor/press_policy_audit.py",
+      "sha256": "4887e4c52bcb9022324225a113d1ca4e54b37a395a0707cd222a72683b4312a0"
+    },
+    {
+      "path": "yejun/press_submission/verify.py",
+      "sha256": "89eaa5fc2b8cb0dea49ed9c2e3a7d792eb83f46274f2a97f9a14052507d4ec1f"
+    }
+  ],
+  "full_verify": [
+    {
+      "mutation": "baseline",
+      "returncode": 0,
+      "failure_lines": []
+    },
+    {
+      "mutation": "alarm_rows",
+      "returncode": 1,
+      "failure_lines": [
+        "FAIL expected.integrity  (['predictions_digest.json: 실행 후 변경'])"
+      ]
+    },
+    {
+      "mutation": "sha256",
+      "returncode": 1,
+      "failure_lines": [
+        "FAIL expected.integrity  (['predictions_digest.json: 실행 후 변경'])"
+      ]
+    },
+    {
+      "mutation": "exact_sha256",
+      "returncode": 1,
+      "failure_lines": [
+        "FAIL expected.integrity  (['predictions_digest.json: 실행 후 변경'])"
+      ]
+    }
+  ],
+  "documents": {
+    "files": 476,
+    "local_links": 161,
+    "broken": [],
+    "internal_markers": [],
+    "package_checks": []
+  },
+  "nonfinite_probe_returncode": 0
+}

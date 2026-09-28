@@ -1,0 +1,59 @@
+{
+  "case": "three single-alarm records separated by a backward one-day timestamp jump",
+  "rows": 150,
+  "record_count": 3,
+  "statuses": {
+    "ok": 150
+  },
+  "warnings": "",
+  "cases": [
+    {
+      "first_timestamp": "2022-07-14 00:00:04.100",
+      "alarm_rows": 1,
+      "level": 1,
+      "incident_id": 1
+    },
+    {
+      "first_timestamp": "2022-07-13 00:00:04.100",
+      "alarm_rows": 1,
+      "level": 1,
+      "incident_id": 1
+    },
+    {
+      "first_timestamp": "2022-07-12 00:00:04.100",
+      "alarm_rows": 1,
+      "level": 1,
+      "incident_id": 1
+    }
+  ],
+  "incidents": [
+    {
+      "incident_id": 1,
+      "cases": 3,
+      "level": 2,
+      "escalation_row": 91
+    }
+  ],
+  "events": [
+    {
+      "timestamp": "2022-07-14 00:00:04.100",
+      "record_id": 0,
+      "kind": "사건 시작",
+      "notify": 1
+    },
+    {
+      "timestamp": "2022-07-13 00:00:04.100",
+      "record_id": 1,
+      "kind": "격상",
+      "notify": 1
+    }
+  ],
+  "chunks_match_batch": {
+    "1": true,
+    "7": true,
+    "128": true
+  },
+  "seconds": 2.96370083399961,
+  "reversed_records_merged": true,
+  "collection_problem_visible": false
+}

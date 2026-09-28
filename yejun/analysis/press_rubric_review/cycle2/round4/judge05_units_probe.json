@@ -1,0 +1,25 @@
+{
+  "two_nonoverlap_folds": [
+    {
+      "window": "300~359",
+      "alpha": 0.05,
+      "alerted_records": 5,
+      "case_escalations": 1,
+      "incident_starts": 5,
+      "incident_escalations": 1
+    },
+    {
+      "window": "360~419",
+      "alpha": 0.05,
+      "alerted_records": 2,
+      "case_escalations": 0,
+      "incident_starts": 2,
+      "incident_escalations": 0
+    }
+  ],
+  "current_rms_causal_max_error": 8.526512829121202e-14,
+  "normal_rows": 6097,
+  "elapsed_seconds": 2.6433090409991564,
+  "script_sha256": "23bd53c4044fb25cd32115f55f0a6fe9f52999bd3c0d8a01f35308bcf0467ca5",
+  "note": "현재 주추정 120기록에서는 건·사건 2단계 건수가 같다. 다른 연속 입력에서도 같다는 보장은 아니다."
+}

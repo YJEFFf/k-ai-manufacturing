@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "model_and_probability_artifacts_unchanged": true,
+  "metrics_and_rolling_unchanged": true,
+  "artifact_sha256": {
+    "probability_A.json": "1a8100e78046393d9292fc7c305b5ec57b46c4e2c73b03abeb596052a8705f8a",
+    "guard_A.json": "c938707f1dd16e7c239b8053e7f032d8fac828d6c753de2b898ba9130a594f10",
+    "probability_B.json": "7fde4cd1bdfa74e78e2d3f07c5dbd9c27619e19b2e94ceb8fab786c27abcaae8",
+    "guard_B.json": "b64ac3b30bc697034104287964f3154e88c8a50749ccdec04f6d4f8744fd6969"
+  }
+}

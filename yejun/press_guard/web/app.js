@@ -1,6 +1,6 @@
 // Press Guard v2 웹 콘솔 — serve.py의 /api/overview, /api/analyze에 연결한다.
 // 로컬 기록 재생·CSV 분석·모의 운용용이다. 설비 제어 명령을 보내지 않으며 고장 원인·잔여수명을 추정하지 않는다.
-// 이상 확률은 경보와 별도인 보정 층의 값이며 사전 비율 π 가정에 조건부다.
+// 이상 확률은 경보와 별도인 보정 층의 값이며 이상 행 비율 π 가정에 조건부다. 기록 확률은 같은 π를 쓰는 근사다.
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
@@ -13,16 +13,28 @@
   const ALARM = '#b3412e';
   const state = { overview: null, result: null, selected: null, selectedCase: null, filter: 'all', levelFilter: 'all', sort: 'priority', upload: null, replay: null, cursor: null, busy: false, sim: null };
   const LEVEL = { 1: '주의', 2: '점검 요청' };
+  const OPERATING_STATE = { load: '부하', low: '저수준', short: '판정 대기(17행 미만)' };
+  const stateLabel = value => String(value || 'short').split('+').map(s => OPERATING_STATE[s] || s).join(' · ');
+  const normalStateReference = '대회 B α 1% 정상 참고: 부하 3/51 · 저수준 0/94(17행 이상 기록, 같은 날 사후 분석). 현장 오경보율 보장은 아닙니다.';
+  function operatingStateText(c) {
+    let value = c.operating_state, rms = c.record_current_rms;
+    if (state.sim) {
+      const visible = caseRows(c).filter(p => p.row_id <= state.sim.row);
+      const last = visible[visible.length - 1];
+      value = last ? last.operating_state : 'short'; rms = last ? last.record_current_rms : null;
+    }
+    return `${stateLabel(value)} · 전류 RMS ${fmt.num(rms, 1)}`;
+  }
   // 점검 결과는 이 브라우저에만 저장한다(저장이 막혀 있어도 화면은 동작한다).
   const store = {
     get(k) { try { const v = window.localStorage && window.localStorage.getItem(k); return v ? JSON.parse(v) : null; } catch (e) { return null; } },
     set(k, v) { try { if (window.localStorage) window.localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } },
   };
   // 대기열의 단위는 사건(incident)이다: 경보가 이어진 알림 단위(공백 60초 이하)를 묶는다. 건(case)은 사건 안의 기록구간 묶음이고 case_uid(첫 경보 행)로 구분한다.
-  const incidentsOf = () => (state.result && state.result.incidents) || [];
-  const casesOf = inc => (state.result ? state.result.cases : []).filter(c => Number(c.incident_id) === Number(inc.incident_id)).sort((a, b) => a.first_row - b.first_row);
+  const incidentsOf = () => (viewNow() || {}).incidents || [];
+  const casesOf = inc => ((viewNow() || {}).cases || []).filter(c => Number(c.incident_id) === Number(inc.incident_id)).sort((a, b) => a.first_row - b.first_row);
   const outcomeKey = inc => `pg-outcome:${state.result.split}:${state.result.alpha}:${state.result.dataset}:inc${inc.incident_id}:${inc.first_timestamp}`;
-  const outcomeOf = c => (state.result && store.get(outcomeKey(c))) || { confirmed_at: '', owner: '', outcome: '', measure: '', status: '열림' };
+  const outcomeOf = c => (!state.sim && state.result && store.get(outcomeKey(c))) || { confirmed_at: '', owner: '', outcome: '', measure: '', status: '열림' };
   // 모의 운용 중에는 커서까지 들어온 행만 보인다.
   const simVisible = c => !state.sim || c.first_row <= state.sim.row;
   const levelNow = c => (state.sim && Number(c.level) === 2 && !(c.escalation_row <= state.sim.row)) ? 1 : Number(c.level);
@@ -30,7 +42,7 @@
   const probText = x => {
     if (!Number.isFinite(numberOrNaN(x.max_probability))) return '보정기 없음';
     const capped = state.result && state.result.lr_cap != null && Number(x.max_likelihood_ratio) >= Number(state.result.lr_cap) - 1e-6;
-    return capped ? `≥${fmt.pct(x.max_probability, 1)}(상한)` : fmt.pct(x.max_probability, 1);
+    return capped ? `${fmt.pct(x.max_probability, 1)}(모형 상한)` : fmt.pct(x.max_probability, 1);
   };
   const SENSOR_LABEL = { AI0_Vibration: '진동', AI1_Vibration: '진동', AI2_Current: '전류' };
   // 크기 성분은 최대 편차가 난 센서까지 붙여 보인다(진동·전류).
@@ -49,6 +61,107 @@
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const numberOrNaN = v => v == null || v === '' ? NaN : Number(v);
   const setMessage = (text, error = false) => { const m = $('message'); m.textContent = text; m.classList.toggle('error', !!error); };
+
+  // 모의 화면의 집계는 관측된 접두부만 쓴다. 미래 경보 단위의 건 합류·분모·근거도 앞당기지 않는다.
+  let simCache = null;
+  function viewNow() {
+    const full = state.result;
+    if (!full || !state.sim) return full;
+    const cursor = state.sim.row;
+    if (simCache && simCache.source === full && simCache.row === cursor) return simCache.view;
+    const points = full.points.filter(p => Number(p.row_id) <= cursor);
+    const units = [];
+    for (const p of points) {
+      const key = `${p.record_id}:${p.alert_unit ?? Math.floor(p.position / full.alert_unit_rows)}`;
+      if (!units.length || units[units.length - 1].key !== key) units.push({ key, record: p.record_id, rows: [], flagged: [], valid: true });
+      const unit = units[units.length - 1]; unit.rows.push(p);
+      unit.valid = unit.valid && p.status === 'ok';
+      if (Number(p.alarm) === 1) unit.flagged.push(p);
+    }
+    const extrema = (rows, key, minimum = false) => {
+      let value = null;
+      for (const row of rows) {
+        const v = numberOrNaN(row[key]);
+        if (Number.isFinite(v)) value = value == null ? v : (minimum ? Math.min(value, v) : Math.max(value, v));
+      }
+      return value;
+    };
+    const union = values => [...new Set(values.flatMap(v => String(v || '').split('+')).filter(Boolean))].sort();
+    const rank = rows => {
+      const ordered = [...rows].sort((a, b) => b.level - a.level || b.evidence_count - a.evidence_count
+        || b.alarm_share - a.alarm_share || b.peak_score - a.peak_score || a.first_row - b.first_row);
+      ordered.forEach((r, i) => { r.priority_rank = i + 1; });
+    };
+    const timestampMs = value => {
+      let s = String(value || '').replace(' ', 'T');
+      if (!/(?:Z|[+-]\d{2}:?\d{2})$/i.test(s)) s += 'Z';
+      return Date.parse(s);
+    };
+    const actions = full.decision_actions || {}, quality = full.quality_actions || (state.overview || {}).quality_actions || {};
+    const escalationCount = full.escalation_alarm_rows || 2;
+    const actionFor = (sensors, reasons) => {
+      const vibration = sensors.some(s => s !== 'AI2_Current'), current = sensors.includes('AI2_Current');
+      const shape = reasons.includes('waveform') || reasons.includes('dynamics');
+      return (vibration ? (shape || current ? actions.vibration_and_current : actions.vibration)
+        : current ? (shape ? actions.current_magnitude_and_shape : actions.current_magnitude) : actions.current_shape) || '';
+    };
+    const groups = [];
+    units.forEach((unit, i) => {
+      if (!unit.flagged.length) return;
+      const previous = units[i - 1];
+      if (previous && previous.flagged.length && previous.record === unit.record) groups[groups.length - 1].push(i);
+      else groups.push([i]);
+    });
+    const cases = groups.map(indices => {
+      const rows = indices.flatMap(i => units[i].rows), flagged = indices.flatMap(i => units[i].flagged);
+      const first = flagged[0], last = rows[rows.length - 1], reasons = union(flagged.map(p => p.reason));
+      const sensors = union(flagged.filter(p => String(p.reason).split('+').includes('magnitude')).map(p => p.magnitude_sensor));
+      const before = units.slice(0, indices[0]).filter(u => !u.flagged.length && u.valid).pop();
+      const after = units.slice(indices[indices.length - 1] + 1).find(u => !u.flagged.length && u.valid);
+      let from = before ? before.rows[before.rows.length - 1].timestamp : '', to = after ? after.rows[0].timestamp : '';
+      const maxGap = full.suspect_max_gap_s ?? 60;
+      const fromGap = timestampMs(rows[0].timestamp) - timestampMs(from), toGap = timestampMs(to) - timestampMs(last.timestamp);
+      if (!(fromGap >= 0 && fromGap <= maxGap * 1000)) from = '';
+      if (!(toGap >= 0 && toGap <= maxGap * 1000)) to = '';
+      const level = flagged.length >= escalationCount ? 2 : 1;
+      return { case_uid: first.row_id, incident_id: first.incident_id, row_from: rows[0].row_id, row_to: last.row_id,
+        record_id: first.record_id, first_row: first.row_id, first_timestamp: first.timestamp,
+        first_alarm_position: first.position, detection_delay_s: first.position * .1,
+        alarm_rows: flagged.length, observed_rows: rows.length, alarm_share: flagged.length / rows.length,
+        peak_score: extrema(flagged, 'score'), min_p: extrema(flagged, 'p_value', true), evidence: reasons.join('+'), evidence_count: reasons.length,
+        magnitude_sensors: sensors.join('+'), action: actionFor(sensors, reasons), level, level_name: LEVEL[level],
+        escalation_row: level === 2 ? flagged[escalationCount - 1].row_id : null, suspect_from: from, suspect_to: to,
+        suspect_open: Number(!from || !to), quality_action: quality[level] || '',
+        operating_state: last.operating_state, record_current_rms: last.record_current_rms,
+        first_alarm_operating_state: first.operating_state, max_probability: extrema(flagged, 'anomaly_probability'),
+        max_likelihood_ratio: extrema(flagged, 'likelihood_ratio'), reference_label: first.reference_label };
+    });
+    rank(cases);
+    const grouped = new Map();
+    cases.forEach(c => { if (!grouped.has(c.incident_id)) grouped.set(c.incident_id, []); grouped.get(c.incident_id).push(c); });
+    const incidents = [...grouped].map(([id, members]) => {
+      const first = members[0], last = members[members.length - 1], evidence = union(members.map(c => c.evidence));
+      const alarms = members.reduce((s, c) => s + c.alarm_rows, 0), observed = members.reduce((s, c) => s + c.observed_rows, 0);
+      const level = alarms >= escalationCount ? 2 : 1;
+      const escalation = points.find(p => Number(p.incident_id) === Number(id) && Number(p.incident_escalation) === 1);
+      return { incident_id: id, first_row: first.first_row, first_timestamp: first.first_timestamp, last_case_timestamp: last.first_timestamp,
+        cases: members.length, case_uids: members.map(c => c.case_uid).join('+'), records: members.map(c => c.record_id).join('+'),
+        level, level_name: LEVEL[level], evidence: evidence.join('+'), evidence_count: evidence.length,
+        alarm_rows: alarms, observed_rows: observed, alarm_share: alarms / observed, peak_score: extrema(members, 'peak_score'),
+        max_probability: extrema(members, 'max_probability'), max_likelihood_ratio: extrema(members, 'max_likelihood_ratio'),
+        operating_state: [...new Set(members.map(c => c.operating_state))].join('+'), suspect_from: first.suspect_from, suspect_to: last.suspect_to,
+        suspect_open: Number(members.some(c => c.suspect_open)), quality_action: quality[level] || '',
+        action: [...members].sort((a, b) => a.priority_rank - b.priority_rank)[0].action,
+        escalation_row: escalation ? escalation.row_id : null, reference_label: extrema(members, 'reference_label') };
+    });
+    rank(incidents);
+    const stats = { rows: points.length, segments: new Set(points.map(p => p.record_id)).size,
+      scored: points.filter(p => Number.isFinite(numberOrNaN(p.score))).length,
+      invalid: points.filter(p => p.status !== 'ok').length, alarm_rows: points.filter(p => Number(p.alarm) === 1).length };
+    const view = { ...full, points, cases, incidents, stats };
+    simCache = { source: full, row: cursor, view };
+    return view;
+  }
 
   async function api(path, body) {
     const res = await fetch(path, body === undefined ? {} : { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
@@ -87,7 +200,7 @@
       stopReplay(); stopSim(false);
       renderResult();
       const src = dataset === 'upload' ? state.upload.name : result.source_name;
-      setMessage(`${src} · ${fmt.int(result.stats.rows)}행 · 정상 기준 ${result.split} (보정 구간 ${result.calibration_segments}개) · α ${fmt.pct(result.alpha, 0)} · 이상 확률 π ${fmt.pct(result.prior, 1)}${result.probability_available ? '' : '(보정기 없음)'} · 처리 ${fmt.num(result.stats.elapsed_s, 2)}초`);
+      setMessage(`${src} · ${fmt.int(result.stats.rows)}행 · 정상 기준 ${result.split} (보정 구간 ${result.calibration_segments}개) · α ${fmt.pct(result.alpha, 0)} · ${result.probability_available ? `이상 행 비율 π ${fmt.pct(result.prior, 1)}` : '라벨 확률 보정기 없음 · 확률 4열 비움 · π 미사용'} · 처리 ${fmt.num(result.stats.elapsed_s, 2)}초`);
     } catch (err) {
       setMessage(`분석 실패: ${err.message}`, true);
     } finally {
@@ -117,15 +230,18 @@
   });
 
   // ---------- 결과 ----------
-  function renderResult() {
-    const r = state.result;
+  function renderStats() {
+    const r = viewNow();
     const s = r.stats;
     renderLevelKpis();
     $('k-alarm').textContent = fmt.int(s.alarm_rows);
     $('k-coverage').textContent = s.rows ? fmt.pct(s.scored / s.rows, 1) : '—';
-    $('k-quality').textContent = (r.warnings && r.warnings.length) ? r.warnings[0] : (s.invalid ? `수집 오류 ${fmt.int(s.invalid)}행은 판정 보류` : '수집 오류 행 없음');
+    $('k-quality').textContent = (!state.sim && r.warnings && r.warnings.length) ? r.warnings[0] : (s.invalid ? `수집 오류 ${fmt.int(s.invalid)}행은 판정 보류` : '수집 오류 행 없음');
     $('k-segment').textContent = fmt.int(s.segments);
     $('k-rows').textContent = `${fmt.int(s.rows)}행 · 0.1초 간격 관측`;
+  }
+  function renderResult() {
+    renderStats();
     renderQueue();
     const first = filteredIncidents()[0];
     if (first) selectIncident(first.incident_id); else renderDetail(null);
@@ -189,11 +305,16 @@
   }
 
   // 건의 행 범위(연속 입력에서는 한 기록구간에 여러 건이 있을 수 있어 기록 번호가 아니라 행 범위로 찾는다)
-  function caseRows(c) { return c ? state.result.points.filter(p => p.row_id >= c.row_from && p.row_id <= c.row_to) : []; }
-  function currentRows() { return caseRows((state.result ? state.result.cases : []).find(c => Number(c.case_uid) === state.selectedCase)); }
+  function caseRows(c) { return c ? viewNow().points.filter(p => p.row_id >= c.row_from && p.row_id <= c.row_to) : []; }
+  function currentRows() { return caseRows(((viewNow() || {}).cases || []).find(c => Number(c.case_uid) === state.selectedCase)); }
 
   function renderDetail(inc, c) {
     const summary = $('detail-summary');
+    if (state.sim && inc) {
+      inc = incidentsOf().find(x => Number(x.incident_id) === Number(inc.incident_id));
+      const members = inc ? casesOf(inc) : [];
+      c = members.find(x => c && Number(x.case_uid) === Number(c.case_uid)) || members[0];
+    }
     if (!inc || !c) {
       state.selected = null; state.selectedCase = null; stopReplay(); hideTooltip();
       $('scrubber').disabled = true; $('replay').disabled = true;
@@ -209,7 +330,7 @@
     }
     const rows = caseRows(c);
     const members = casesOf(inc);
-    $('scrubber').disabled = false; $('replay').disabled = false;
+    $('scrubber').disabled = !!state.sim; $('replay').disabled = !!state.sim;
     $('detail-title').textContent = `사건 ${fmt.int(inc.incident_id)} · 건 ${members.findIndex(x => x.case_uid === c.case_uid) + 1}/${members.length} · 구간 ${fmt.int(c.record_id)} · ${fmt.int(rows.length)}관측`;
     $('reference').textContent = c.reference_label == null ? '참조 라벨 없음' : (Number(c.reference_label) === 1 ? '참조 라벨: 이상 기록' : '참조 라벨: 정상 기록');
     const reasons = String(c.evidence).split('+').filter(Boolean).map(e => reasonLabel(e, c)).join(' + ');
@@ -218,18 +339,20 @@
     const lv = levelNow(inc);
     summary.innerHTML = [
       ['사건 단계', `${LEVEL[lv]}${lv === 2 ? ' · 현장 점검' : ' · 화면 확인·기록'} · 건 ${members.length}개`],
+      [state.sim ? '현재까지 운전 상태' : '운전 상태(건 끝)', operatingStateText(c)],
+      ['첫 경보 때 운전 상태', stateLabel(c.first_alarm_operating_state)],
       ['첫 경보', `${fmt.num(c.detection_delay_s, 1)}초 (${fmt.int(c.first_alarm_position + 1)}번째 관측)`],
       ['경보 관측(이 건)', `${fmt.int(c.alarm_rows)} / ${fmt.int(c.observed_rows)}행`],
       ['문턱 대비 최대 점수', Number.isFinite(thr) && thr > 0 ? `${fmt.num(c.peak_score, 2)} / ${fmt.num(thr, 2)} (×${fmt.num(c.peak_score / thr, 1)})` : fmt.num(c.peak_score, 2)],
       ['최소 p값', `${fmt.num(c.min_p, 4)} (가능한 최솟값 ${fmt.num(state.result.min_p_attainable, 4)})`],
       ['근거', reasons || '—'],
-      ['이상 확률', `${probText(c)} (π ${fmt.pct(state.result.prior, 1)} 가정 · 우도비 ${fmt.num(c.max_likelihood_ratio, 1)})`],
+      ['이상 확률', `${probText(c)} (이상 행 비율 π ${fmt.pct(state.result.prior, 1)} 가정 · 우도비 ${fmt.num(c.max_likelihood_ratio, 1)})`],
     ].map(([k, v]) => `<div><span>${k}</span><b>${esc(v)}</b></div>`).join('') + (members.length > 1
       ? `<div class="case-tabs">${members.map((x, k) => `<button type="button" class="quiet${x.case_uid === c.case_uid ? ' on' : ''}" data-case="${x.case_uid}">건 ${k + 1} · 구간 ${fmt.int(x.record_id)}</button>`).join('')}</div>` : '');
     summary.querySelectorAll('.case-tabs button').forEach(el => el.addEventListener('click', () => selectIncident(inc.incident_id, Number(el.dataset.case))));
     $('action').textContent = c.action || '—';
     const rule = ((state.overview && state.overview.decision_table) || []).find(r => r.action === c.action);
-    $('checklist').textContent = rule ? `점검 항목(가설): ${rule.checklist} · 고장 모드 후보 ${rule.failure_modes}` : '관측 이상에 대한 확인 순서입니다. 고장 원인 확정이나 자동 정지 명령이 아닙니다.';
+    $('checklist').textContent = `먼저 운전 상태 확인: ${operatingStateText(c)}. ${normalStateReference} ` + (rule ? `점검 항목(가설): ${rule.checklist} · 고장 모드 후보 ${rule.failure_modes}` : '관측 이상에 대한 확인 순서입니다. 고장 원인 확정이나 자동 정지 명령이 아닙니다.');
     $('quality-action').textContent = inc.quality_action || '—';
     $('suspect').textContent = Number(inc.suspect_open) === 1
       ? `의심 생산 시간창(사건): ${inc.suspect_from ? fmt.time(inc.suspect_from) : '자료 처음'} ~ ${inc.suspect_to ? fmt.time(inc.suspect_to) : '진행 중'} (열림 · 다음 정상 기록을 확인할 때까지)`
@@ -347,6 +470,7 @@
 
   // ---------- 점검 결과 기록(사건 단위) ----------
   function fillOutcome(inc) {
+    if (state.sim) { $('outcome').hidden = true; return; }
     const o = outcomeOf(inc);
     $('outcome').hidden = false;
     $('o-owner').value = o.owner || ''; $('o-outcome').value = o.outcome || ''; $('o-measure').value = o.measure || '';
@@ -368,15 +492,26 @@
 
   // ---------- 모의 운용: 분석한 기록을 10배속(초당 100행)으로 흘려 알림이 쌓이는 순서를 본다 ----------
   // 알림 시점·단계는 서버의 StreamDetector(인과 순차 추론) 결과이며 simulate.py와 같다. 사건마다 1단계(시작)·2단계(격상)를 한 번씩 알린다.
+  function renderSimView() {
+    renderStats();
+    const list = filteredIncidents();
+    const inc = list.find(c => Number(c.incident_id) === state.selected) || list[0];
+    const members = inc ? casesOf(inc) : [];
+    const c = members.find(x => Number(x.case_uid) === state.selectedCase) || members[0];
+    state.selected = inc ? Number(inc.incident_id) : null;
+    state.selectedCase = c ? Number(c.case_uid) : null;
+    renderQueue(); renderDetail(inc, c);
+  }
   function stopSim(render = true) {
     if (!state.sim) return;
     clearInterval(state.sim.timer); state.sim = null;
     $('sim-bar').hidden = true; $('simulate').textContent = '▶ 모의 운용';
-    if (render && state.result) { renderLevelKpis(); renderQueue(); }
+    if (render && state.result) renderSimView();
   }
   function startSim() {
     if (!state.result || state.busy) return;
     if (state.sim) { stopSim(); return; }
+    stopReplay();
     const points = state.result.points, rowsPerTick = 10;
     const events = [];
     incidentsOf().forEach(c => { events.push({ row: c.first_row, text: `주의 · 사건 ${c.incident_id}` }); if (Number(c.level) === 2 && c.escalation_row != null) events.push({ row: c.escalation_row, text: `점검 요청 · 사건 ${c.incident_id}` }); });
@@ -387,12 +522,12 @@
       const sim = state.sim; if (!sim) return;
       sim.row = Math.min(points.length - 1, sim.row + rowsPerTick);
       $('sim-clock').textContent = `${fmt.time(points[sim.row].timestamp)} · ${fmt.int(sim.row + 1)} / ${fmt.int(points.length)}행`;
-      let changed = false;
-      while (sim.next < events.length && events[sim.next].row <= sim.row) { $('sim-last').textContent = `최근 알림: ${events[sim.next].text}`; sim.next += 1; changed = true; }
-      if (changed) { renderLevelKpis(); renderQueue(); }
-      if (sim.row >= points.length - 1) { $('sim-last').textContent += ' · 끝'; clearInterval(sim.timer); setTimeout(() => stopSim(), 1500); }
+      while (sim.next < events.length && events[sim.next].row <= sim.row) { $('sim-last').textContent = `최근 알림: ${events[sim.next].text}`; sim.next += 1; }
+      renderSimView();
+      if (sim.row >= points.length - 1) { $('sim-last').textContent += ' · 끝'; clearInterval(sim.timer); setTimeout(() => { if (state.sim === sim) stopSim(); }, 1500); }
     }, 100);
-    renderLevelKpis(); renderQueue();
+    $('sim-last').textContent = '관측 시작 대기 · 점검 결과 기록은 모의 종료 후 가능';
+    renderSimView();
   }
   $('simulate').addEventListener('click', startSim);
   $('sim-stop').addEventListener('click', () => stopSim());
@@ -514,18 +649,25 @@
   function renderMonitorGain(rows) {
     const el = $('monitor-gain');
     if (!rows.length) { el.innerHTML = '<div class="empty">감시 모의표(outputs/monitor_gain_v2.csv)가 없습니다.</div>'; return; }
-    el.innerHTML = `<table><thead><tr><th>정상 기준</th><th>전류 배율</th><th>창별 알림 단위(60단위씩)</th><th>한도 95·99%</th><th>전류 수준 최대 비(기준 범위)</th><th>재보정 검토</th></tr></thead><tbody>${
-      rows.map(r => `<tr${r.recalibration_review ? ' class="highlight"' : ''}><td>${esc(r.split)}</td><td>×${fmt.num(r.gain, 2)}</td><td>${esc(r.alerted_by_window)}</td><td>${fmt.int(r.limit95)} · ${fmt.int(r.limit99)}</td><td>${fmt.num(r.max_current_ratio, 2)} (${fmt.num(r.band_low, 2)}~${fmt.num(r.band_high, 2)})</td><td>${r.recalibration_review ? `발동(창 ${fmt.int(r.first_review_window + 1)})` : '—'}</td></tr>`).join('')
+    el.innerHTML = `<table><thead><tr><th>정상 기준</th><th>전류 배율</th><th>창별 알림 단위(60단위씩)</th><th>사건 알림 시작·격상</th><th>한도 95·99%</th><th>전류 수준 최대 비(기준 범위)</th><th>창별 권장 조치 · 변경 기록 없음</th><th>창별 권장 조치 · 변경 기록 있음</th></tr></thead><tbody>${
+      rows.map(r => `<tr${r.recalibration_review ? ' class="highlight"' : ''}><td>${esc(r.split)}</td><td>×${fmt.num(r.gain, 2)}</td><td>${esc(r.alerted_by_window)}</td><td>${fmt.int(r.incident_level1_notifications)} · ${fmt.int(r.incident_level2_escalations)}</td><td>${fmt.int(r.limit95)} · ${fmt.int(r.limit99)}</td><td>${fmt.num(r.max_current_ratio, 2)} (${fmt.num(r.band_low, 2)}~${fmt.num(r.band_high, 2)})</td><td>${esc(r.recommended_actions_no_change || '산출물 재생성 필요')}</td><td>${esc(r.recommended_actions_with_change || '산출물 재생성 필요')}</td></tr>`).join('')
     }</tbody></table>`;
   }
 
   function renderEffect(rows) {
     const el = $('effect');
     if (!rows.length) { el.innerHTML = '<div class="empty">기대효과표(outputs/expected_effect_v2.csv)가 없습니다.</div>'; return; }
-    // 강조는 비사후 추정 행이다. "관측·2단계만 출동"은 사후에 정한 2단계 규칙의 표본 내 0건이라 결론으로 쓰지 않는다.
+    // 강조는 규칙 선택 자료와 겹치지 않는 폴드의 주추정이다. 규칙 자체는 사후이며 같은 날 추정이다.
     const shown = rows.filter(r => r.case === '중간');
+    const basisNote = r => {
+      if (!(r.post_hoc === true || r.post_hoc === 'True')) return '';
+      const overlap = r.evaluation_overlaps_rule_selection;
+      const basis = overlap === false || overlap === 'False' ? '선택 자료 비중첩'
+        : overlap === true || overlap === 'True' ? '선택 자료 중첩' : '같은 날 추정';
+      return ` <small>(사후 규칙·${basis})</small>`;
+    };
     el.innerHTML = `<table><thead><tr><th>알림 수(B, α 1%)</th><th>운영 방식</th><th>교대 8시간 알림 1·2단계</th><th>교대당 점검 시간</th><th>연간 줄이는 가동 중단</th><th>손익분기 배수</th></tr></thead><tbody>${
-      shown.map(r => `<tr${String(r.alert_scenario).startsWith('비사후') && r.policy === '2단계만 출동' ? ' class="highlight"' : ''}><td>${esc(r.alert_scenario)}${r.post_hoc === true || r.post_hoc === 'True' ? ' <small>(사후 규칙·표본 내)</small>' : ''}</td><td>${esc(r.policy)}</td><td>${fmt.num(r.level1_per_8h, 0)} · ${r.level2_per_8h == null ? '—' : fmt.num(r.level2_per_8h, 1)}건</td><td>${fmt.num(r.inspection_hours_per_shift, 1)}시간${Number(r.shift_share) > 1 ? ' (교대 초과)' : ''}</td><td>${fmt.num(r.downtime_hours_avoided_per_year, 1)}시간/년</td><td>${Number.isFinite(Number(r.breakeven_loss_ratio)) ? '×' + fmt.num(r.breakeven_loss_ratio, 1) : '—'}</td></tr>`).join('')
+      shown.map(r => `<tr${r.estimate_role === 'primary' && r.policy === '2단계만 출동' ? ' class="highlight"' : ''}><td>${esc(r.alert_scenario)}${basisNote(r)}</td><td>${esc(r.policy)}</td><td>${fmt.num(r.level1_per_8h, 0)} · ${r.level2_per_8h == null ? '—' : fmt.num(r.level2_per_8h, 1)}건</td><td>${fmt.num(r.inspection_hours_per_shift, 1)}시간${Number(r.shift_share) > 1 ? ' (교대 초과)' : ''}</td><td>${fmt.num(r.downtime_hours_avoided_per_year, 1)}시간/년</td><td>${Number.isFinite(Number(r.breakeven_loss_ratio)) ? '×' + fmt.num(r.breakeven_loss_ratio, 1) : '—'}</td></tr>`).join('')
     }</tbody></table>`;
   }
 

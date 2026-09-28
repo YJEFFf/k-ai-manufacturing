@@ -1,0 +1,9 @@
+{"column": "current_residual", "row": 0, "change": "NaN_to_posinf", "caught": true, "result": {"file": "test_predictions_B.csv", "ok": false, "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름", "note": ""}}
+{"column": "current_residual", "row": 0, "change": "NaN_to_neginf", "caught": true, "result": {"file": "test_predictions_B.csv", "ok": false, "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름", "note": ""}}
+{"column": "current_residual", "row": 0, "change": "NaN_position_swap", "caught": true, "result": {"file": "test_predictions_B.csv", "ok": false, "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름", "note": ""}}
+{"column": "g_waveform", "row": 0, "change": "NaN_to_posinf", "caught": true, "result": {"file": "test_predictions_B.csv", "ok": false, "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름", "note": ""}}
+{"column": "g_waveform", "row": 0, "change": "NaN_to_neginf", "caught": true, "result": {"file": "test_predictions_B.csv", "ok": false, "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름", "note": ""}}
+{"column": "g_waveform", "row": 0, "change": "NaN_position_swap", "caught": true, "result": {"file": "test_predictions_B.csv", "ok": false, "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름", "note": ""}}
+{"column": "g_dynamics", "row": 0, "change": "NaN_to_posinf", "caught": true, "result": {"file": "test_predictions_B.csv", "ok": false, "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름", "note": ""}}
+{"column": "g_dynamics", "row": 0, "change": "NaN_to_neginf", "caught": true, "result": {"file": "test_predictions_B.csv", "ok": false, "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름", "note": ""}}
+{"column": "g_dynamics", "row": 0, "change": "NaN_position_swap", "caught": true, "result": {"file": "test_predictions_B.csv", "ok": false, "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름", "note": ""}}

@@ -1,0 +1,203 @@
+{
+  "returncode": 0,
+  "seconds": 806.69,
+  "destination": "/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_round4_copy_du9rs2ab",
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "press_guard/tools/package_manifest.py",
+    "--out",
+    "/Volumes/YJSSD/공모전/k-제조데이터/yejun/analysis/press_rubric_review/cycle2/round4/package_files_final.csv",
+    "--copy-test",
+    "/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_round4_copy_du9rs2ab"
+  ],
+  "summary": {
+    "mode": "quick",
+    "python": "3.12.2",
+    "total_seconds": 803.6,
+    "passed": 15,
+    "failed": 0,
+    "planned": 15,
+    "steps": [
+      {
+        "step": "v1 선행(주 모델·기준모델·행별 예측)",
+        "command": [
+          "/opt/anaconda3/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_round4_copy_du9rs2ab/yejun/press_submission/run_all.py",
+          "--steps",
+          "2"
+        ],
+        "returncode": 0,
+        "seconds": 10.5,
+        "last_line": "}",
+        "log": "press_guard/outputs/reproduce_logs/01.log"
+      },
+      {
+        "step": "v1 동결값 비교",
+        "command": [
+          "/opt/anaconda3/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_round4_copy_du9rs2ab/yejun/press_submission/verify.py",
+          "--out",
+          "outputs",
+          "--steps",
+          "2"
+        ],
+        "returncode": 0,
+        "seconds": 0.4,
+        "last_line": "16/16 통과 (1~2단계 부분 비교, 필수 집계 9개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 b372a18b66af vs 동결 b372a18b66af",
+        "log": "press_guard/outputs/reproduce_logs/02.log"
+      },
+      {
+        "step": "v2 학습·시간순 5회",
+        "command": [
+          "/opt/anaconda3/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_round4_copy_du9rs2ab/yejun/press_guard/train.py",
+          "--rolling"
+        ],
+        "returncode": 0,
+        "seconds": 26.3,
+        "last_line": "    B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              180                          21                 21             0.0          0.7           ",
+        "log": "press_guard/outputs/reproduce_logs/03.log"
+      },
+      {
+        "step": "v2 분석",
+        "command": [
+          "/opt/anaconda3/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_round4_copy_du9rs2ab/yejun/press_guard/analyze.py"
+        ],
+        "returncode": 0,
+        "seconds": 195.9,
+        "last_line": "}",
+        "log": "press_guard/outputs/reproduce_logs/04.log"
+      },
+      {
+        "step": "v2 실행 검증(audit)",
+        "command": [
+          "/opt/anaconda3/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_round4_copy_du9rs2ab/yejun/press_guard/audit.py"
+        ],
+        "returncode": 0,
+        "seconds": 252.3,
+        "last_line": "16/16 통과 → /private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_round4_copy_du9rs2ab/yejun/press_guard/outputs/audit.json",
+        "log": "press_guard/outputs/reproduce_logs/05.log"
+      },
+      {
+        "step": "v2 동결값 비교",
+        "command": [
+          "/opt/anaconda3/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_round4_copy_du9rs2ab/yejun/press_guard/verify.py"
+        ],
+        "returncode": 0,
+        "seconds": 2.0,
+        "last_line": "53/53 통과. 코드 8b9493a24860 vs 동결 8b9493a24860; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit",
+        "log": "press_guard/outputs/reproduce_logs/06.log"
+      },
+      {
+        "step": "진단 표(press_evidence)",
+        "command": [
+          "/opt/anaconda3/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_round4_copy_du9rs2ab/yejun/analysis/press_evidence/build_tables.py"
+        ],
+        "returncode": 0,
+        "seconds": 9.7,
+        "last_line": "    B 12 0.099174 0.099174      180               11  0.061111       0.099126          False",
+        "log": "press_guard/outputs/reproduce_logs/07.log"
+      },
+      {
+        "step": "진단 보강 표·그림",
+        "command": [
+          "/opt/anaconda3/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_round4_copy_du9rs2ab/yejun/analysis/press_evidence/build_diagnostics.py"
+        ],
+        "returncode": 0,
+        "seconds": 47.0,
+        "last_line": "완료 45.2초, 표 22개, 그림 5장",
+        "log": "press_guard/outputs/reproduce_logs/08.log"
+      },
+      {
+        "step": "지도학습 기준선(press_supervised)",
+        "command": [
+          "/opt/anaconda3/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_round4_copy_du9rs2ab/yejun/analysis/press_supervised/run.py"
+        ],
+        "returncode": 0,
+        "seconds": 172.8,
+        "last_line": "done 171.0 s",
+        "log": "press_guard/outputs/reproduce_logs/09.log"
+      },
+      {
+        "step": "모델 선정 근거(press_selection)",
+        "command": [
+          "/opt/anaconda3/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_round4_copy_du9rs2ab/yejun/analysis/press_selection/run.py"
+        ],
+        "returncode": 0,
+        "seconds": 83.6,
+        "last_line": "내부 점검: 통과 · 82.1 s",
+        "log": "press_guard/outputs/reproduce_logs/10.log"
+      },
+      {
+        "step": "press_evidence 동결값 비교",
+        "command": [
+          "/opt/anaconda3/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_round4_copy_du9rs2ab/yejun/analysis/package_contract.py",
+          "--package",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_round4_copy_du9rs2ab/yejun/analysis/press_evidence"
+        ],
+        "returncode": 0,
+        "seconds": 0.5,
+        "last_line": "통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 44개)",
+        "log": "press_guard/outputs/reproduce_logs/11.log"
+      },
+      {
+        "step": "press_supervised 동결값 비교",
+        "command": [
+          "/opt/anaconda3/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_round4_copy_du9rs2ab/yejun/analysis/package_contract.py",
+          "--package",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_round4_copy_du9rs2ab/yejun/analysis/press_supervised"
+        ],
+        "returncode": 0,
+        "seconds": 0.4,
+        "last_line": "통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)",
+        "log": "press_guard/outputs/reproduce_logs/12.log"
+      },
+      {
+        "step": "press_advance 동결값 비교",
+        "command": [
+          "/opt/anaconda3/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_round4_copy_du9rs2ab/yejun/analysis/package_contract.py",
+          "--package",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_round4_copy_du9rs2ab/yejun/analysis/press_advance"
+        ],
+        "returncode": 0,
+        "seconds": 0.4,
+        "last_line": "통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)",
+        "log": "press_guard/outputs/reproduce_logs/13.log"
+      },
+      {
+        "step": "press_selection 동결값 비교",
+        "command": [
+          "/opt/anaconda3/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_round4_copy_du9rs2ab/yejun/analysis/package_contract.py",
+          "--package",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_round4_copy_du9rs2ab/yejun/analysis/press_selection"
+        ],
+        "returncode": 0,
+        "seconds": 0.5,
+        "last_line": "통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 12개)",
+        "log": "press_guard/outputs/reproduce_logs/14.log"
+      },
+      {
+        "step": "보완 실험 E1~E3 동결값 비교",
+        "command": [
+          "/opt/anaconda3/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_round4_copy_du9rs2ab/yejun/analysis/press_supplement/verify.py"
+        ],
+        "returncode": 0,
+        "seconds": 1.4,
+        "last_line": "통과: 무결성·기대값 비교 E1, E3 · 건너뜀 E2(외부 입력 없음)",
+        "log": "press_guard/outputs/reproduce_logs/15.log"
+      }
+    ]
+  }
+}

@@ -62,13 +62,15 @@ def main(argv=None):
     ap.add_argument("--split", choices=tuple(D.SPLITS), default="A")
     ap.add_argument("--model", type=Path, help="모델 JSON(기본: artifacts/guard_<split>.json, 재보정 모델도 가능)")
     ap.add_argument("--alpha", type=float, choices=ALPHAS, default=.01)
-    ap.add_argument("--prior", type=float, default=None, help="이상 확률의 사전 비율(기본 1%)")
+    ap.add_argument("--prior", type=float, default=None, help="이상 행 비율 π 가정(기본 1%%). 기록 확률은 같은 π를 쓰는 근사")
     ap.add_argument("--speed", type=float, default=0.0, help="1=수집 속도, 10=10배속, 0=대기 없음")
     ap.add_argument("--chunk", type=int, default=1)
     ap.add_argument("--log", type=Path, help="알림 기록 CSV")
     args = ap.parse_args(argv)
     runtime.setup()
     model = load_bundle(args.model or HERE / "artifacts" / f"guard_{args.split}.json")
+    if model.probability is None:
+        print("안내: 라벨 확률 보정기가 없어 확률·우도비 열 4개는 비어 있고 --prior(π)는 쓰이지 않습니다.", file=sys.stderr)
     frame = pd.read_csv(args.csv)
 
     def show(ev):

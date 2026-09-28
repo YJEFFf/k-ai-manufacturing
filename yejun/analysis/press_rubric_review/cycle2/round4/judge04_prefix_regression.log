@@ -1,0 +1,24 @@
+{
+  "ok": true,
+  "scenarios": [
+    {
+      "name": "single_alarm_pair",
+      "prefixes": 8
+    },
+    {
+      "name": "continuous_joined_normal",
+      "prefixes": 42
+    },
+    {
+      "name": "B_normal_alpha5",
+      "prefixes": 32
+    },
+    {
+      "name": "clock_reversal",
+      "prefixes": 5
+    }
+  ],
+  "prefixes": 87,
+  "failures": []
+}
+

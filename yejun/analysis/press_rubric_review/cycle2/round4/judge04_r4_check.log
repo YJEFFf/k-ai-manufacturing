@@ -1,0 +1,13 @@
+PASS R3_04_raw_state_and_R3_02_pair: 3.94s
+PASS R3_02_stored_incidents_independent: 3.78s
+PASS R3_01_actions_R3_05_incident_monitor: 1.72s
+PASS R3_01_20_exclusion_combinations: 0.04s
+PASS R3_03_raw_fold_and_effect_math: 4.69s
+PASS R3_05_incident_queue_30_conditions: 25.62s
+PASS direct_CLI_and_web_regression: 9.00s
+"GET /api/overview HTTP/1.1" 200 -
+"POST /api/analyze HTTP/1.1" 200 -
+"POST /api/analyze HTTP/1.1" 200 -
+"POST /api/analyze HTTP/1.1" 200 -
+PASS actual_HTTP_API: 2.21s
+DONE all_ok=True seconds=51.654

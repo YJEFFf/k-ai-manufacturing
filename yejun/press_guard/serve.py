@@ -11,10 +11,10 @@ import threading
 import numpy as np
 import pandas as pd
 
-from model import StreamDetector, cases, incidents, timing_warning, D, HERE, ALPHAS, DECISION_TABLE, ALERT_UNIT_ROWS, QUALITY_ACTIONS, LEVEL_NAMES, ESCALATION_ALARM_ROWS, load_bundle
+from model import StreamDetector, cases, incidents, timing_warning, D, HERE, ALPHAS, DECISION_TABLE, ALERT_UNIT_ROWS, QUALITY_ACTIONS, LEVEL_NAMES, ESCALATION_ALARM_ROWS, ACTIONS, SUSPECT_MAX_GAP_S, load_bundle
 from monitor import OUTCOME_COLUMNS, OUTCOME_LABELS, OUTCOMES
 import runtime
-PRIORS = (.001, .01, .1)   # 이상 확률 표시용 사전 비율 선택지(경보와 무관)
+PRIORS = (.001, .01, .1)   # 이상 행 비율 π 가정(기록 확률은 같은 π를 쓰는 근사, 경보와 무관)
 
 MAX_UPLOAD=8*1024*1024
 MAX_ROWS=50000
@@ -77,9 +77,14 @@ class Console:
                     stats=dict(rows=len(frame),segments=int(predictions.record_id.nunique()),
                                scored=int(predictions.score.notna().sum()),invalid=int(predictions.status.ne("ok").sum()),
                                alarm_rows=int(predictions.alarm.sum()),notifications=int(predictions.notification.sum()),
+                               case_notifications=int(predictions.notification.sum()),
+                               incident_starts=int(predictions.incident_notification.sum()),
+                               incident_escalations=int(predictions.incident_escalation.sum()),
+                               incident_notifications=int(predictions.incident_notification.sum() + predictions.incident_escalation.sum()),
                                elapsed_s=duration),
                     calibration_segments=len(self.models[split].cal),threshold=score_threshold(self.models[split].cal,alpha),
                     min_p_attainable=1/(len(self.models[split].cal)+1),alert_unit_rows=ALERT_UNIT_ROWS,prior=prior,
+                    decision_actions=ACTIONS,quality_actions=QUALITY_ACTIONS,suspect_max_gap_s=SUSPECT_MAX_GAP_S,escalation_alarm_rows=ESCALATION_ALARM_ROWS,
                     probability_available=self.models[split].probability is not None,
                     level_counts={LEVEL_NAMES[k]:int(incident_queue.level.eq(k).sum()) if len(incident_queue) else 0 for k in LEVEL_NAMES},
                     lr_cap=self.models[split].probability.lr_cap if self.models[split].probability is not None else None,

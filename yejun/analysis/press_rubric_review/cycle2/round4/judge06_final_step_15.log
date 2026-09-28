@@ -1,0 +1,5 @@
+$ /private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python /private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/analysis/press_supplement/verify.py
+
+건너뜀 E2: 외부 입력 없음 ['/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/analysis/press_external/data/hydraulic.zip'] — 획득: python analysis/press_external/acquire.py (SHA-256은 analysis/press_external/acquisition.json)
+통과: 무결성·기대값 비교 E1, E3 · 건너뜀 E2(외부 입력 없음)
+

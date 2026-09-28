@@ -6,6 +6,7 @@ import importlib.util
 import json
 from pathlib import Path
 import shutil
+import sys
 
 import numpy as np
 import pytest
@@ -23,6 +24,15 @@ UCI = EXPERIMENTS["E2"]["extra_inputs"]["uci_hydraulic_zip"]
 HAS_UCI = UCI.is_file()
 needs_uci = pytest.mark.skipif(not HAS_UCI, reason="UCI 원본 ZIP 없음(Git 제외 73 MB). python analysis/press_external/acquire.py로 받으면 검사한다")
 AVAILABLE = [e for e in EXPERIMENTS if e != "E2" or HAS_UCI]
+
+
+@pytest.fixture(autouse=True)
+def require_generated_inputs():
+    sys.path.insert(0, str(HERE.parent))
+    import package_contract as pc
+    lacking = pc.missing_prerequisites()
+    if lacking:
+        pytest.skip(pc.FIRST_RUN_HINT + ": " + ", ".join(lacking))
 
 
 @pytest.fixture

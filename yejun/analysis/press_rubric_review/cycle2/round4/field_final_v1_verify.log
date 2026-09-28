@@ -1,0 +1,41 @@
+OK   inputs.sha256
+OK   checks.required
+OK   outputs.integrity
+OK   code.matches_manifest
+OK   expected.integrity
+OK   execution.scope
+OK   configuration
+OK   ablation.csv  max|Δ|=0
+OK   alarm_components.csv  max|Δ|=0
+OK   conformal_mc.csv  max|Δ|=0
+OK   diagnosis.json
+OK   error_conditions_fn.csv  max|Δ|=0
+OK   error_conditions_fp.csv  max|Δ|=0
+OK   influence.csv  max|Δ|=0
+OK   interaction_2x2.csv  max|Δ|=0
+OK   label_bypass.csv  max|Δ|=0
+OK   load_normalization.csv  max|Δ|=0
+OK   load_normalization_meta.csv  max|Δ|=0
+OK   lstm_common_history_A.csv  max|Δ|=0
+OK   lstm_common_history_B.csv  max|Δ|=0
+OK   lstm_common_meta.csv  max|Δ|=0
+OK   lstm_guidebook_history.csv  max|Δ|=0
+OK   lstm_guidebook_reproduction.json
+OK   model_comparison.csv  max|Δ|=0
+OK   model_comparison_all.csv  max|Δ|=0
+OK   model_comparison_lstm.csv  max|Δ|=0
+OK   operating_points.csv  max|Δ|=0
+OK   persistence.csv  max|Δ|=0
+OK   preprocess_effect.csv  max|Δ|=0
+OK   quantization_frozen.csv  max|Δ|=0
+OK   segment_features.csv  max|Δ|=0
+OK   sensitivity.csv  max|Δ|=0
+OK   sensitivity_params.csv  max|Δ|=0
+OK   splits.csv  max|Δ|=0
+OK   tail_params.csv  max|Δ|=0
+OK   thresholds_main.csv  max|Δ|=0
+OK   uncertainty.csv  max|Δ|=0
+OK   waveform_segments.csv  max|Δ|=0
+OK   workload.csv  max|Δ|=0
+
+39/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 b372a18b66af vs 동결 b372a18b66af

@@ -116,13 +116,20 @@ def timeline(raw, seg, t, tables):
     ax = axes[1]
     lo, hi = 30.0, 32.0
     m = (s_min >= lo) & (e_min <= hi)
-    ax.broken_barh(list(zip(s_min[m], e_min[m] - s_min[m])), (-.3, .6), color=INK2, linewidth=0)
+    for st_name, color in STATE_COLOR.items():
+        subset = m & state.eq(st_name).to_numpy()
+        ax.broken_barh(list(zip(s_min[subset], e_min[subset] - s_min[subset])), (-.3, .6), color=color, linewidth=0)
+    rms = raw["normal"].AI2_Current.groupby(seg["normal"]).apply(lambda x: float(np.sqrt(np.mean((x - x.mean()) ** 2))))
+    assert np.allclose(rms.loc[ost.record], ost.current_rms_dm, rtol=0, atol=1e-10)
+    for record in np.flatnonzero(m):
+        ax.text((s_min[record] + e_min[record]) / 2, .36, f"{record}\n{rms.loc[record]:.0f}", ha="center", va="bottom", fontsize=7, color=INK2)
+    ax.set_ylim(-.45, 1.2)
     gap = (start.to_numpy()[1:] - end.to_numpy()[:-1]) / np.timedelta64(1, "s")      # 앞 기록 마지막 행 → 다음 기록 첫 행
     gap = gap[gap > 0]                                                                   # 중복 시각 경계(0초) 1곳 제외
     assert abs(np.median(gap) - float(gaps.loc["normal", "gap_median_s"])) < 1e-9 and abs(gap.min() - float(gaps.loc["normal", "gap_min_s"])) < 1e-9
     ax.set_xlim(lo, hi); ax.set_yticks([])
     ax.set_xticks(np.arange(lo, hi + .01, .25)); ax.set_xticklabels([f"00:{int(v):02d}:{int(round((v % 1) * 60)):02d}" for v in np.arange(lo, hi + .01, .25)])
-    ax.set_title(f"확대 00:30~00:32: 기록 {int(m.sum())}개(각 ≤4.9초). 기록 사이 공백 중앙 {np.median(gap):.1f}초(전체 {gap.min():.2f}~{gap.max():.1f}초, {len(gap)}곳)", loc="left")
+    ax.set_title(f"확대 00:30~00:32: {int(m.sum())}기록, 위 숫자는 기록 번호 / 전류 RMS. 공백 중앙 {np.median(gap):.1f}초(전체 {gap.min():.2f}~{gap.max():.1f}초)", loc="left")
     _clean(ax, "y")
     # 이상 3분
     ax = axes[2]
@@ -136,7 +143,7 @@ def timeline(raw, seg, t, tables):
     rec_a, ela_a = len(raw["abnormal"]) * D.DT, (t["abnormal"].max() - t["abnormal"].min()).total_seconds()
     ax.set_title(f"이상 2022-07-17(일): {len(sa_m)}구간·{len(raw['abnormal'])}행, 기록 {rec_a:.0f}초 / 경과 {ela_a:.1f}초({rec_a / ela_a:.1%})", loc="left")
     _clean(ax, "y")
-    fig.suptitle("수집 타임라인 — 막대 하나가 기록구간 하나(공백은 기록 없음). 기록 색은 운전 상태(전류 RMS 2수준, 약 20초 주기로 교대, 가설 해석)",
+    fig.suptitle("수집 타임라인 — 막대 하나가 기록구간 하나. 기록 색은 저수준·부하 범위(약 20초 주기로 교대, 물리 해석은 가설)",
                  x=.01, ha="left", fontsize=10.5)
     return _save(fig, "fig_d2a_timeline.png")
 

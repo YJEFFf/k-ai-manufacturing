@@ -1,0 +1,51 @@
+{
+  "base_commit": "6c61a88d8de437182a2cdd25f640af556a23036a",
+  "scores": {
+    "data": 15.0,
+    "model": 38.0,
+    "errors": 14.5,
+    "field": 9.5,
+    "originality": 9.4,
+    "reproducibility": 10.0
+  },
+  "total": 96.4,
+  "remaining_confirmed_fixable_findings": {
+    "P0": 0,
+    "P1": 0,
+    "P2": 0
+  },
+  "requested_two_tests_passed": 2,
+  "python_tests_distinct_scope": 224,
+  "python_tests_by_suite": {
+    "v2": 132,
+    "v1": 49,
+    "analysis": 43
+  },
+  "fresh_environment": {
+    "steps_passed": 24,
+    "steps_total": 24,
+    "pytest_passed": 216,
+    "pytest_skipped": 5,
+    "web_passed": true,
+    "skip_scope": "optional torch and UCI; covered separately on the host"
+  },
+  "host_optional_suites": {
+    "v1_passed": 49,
+    "supplement_passed": 13,
+    "additional_distinct_tests": 8
+  },
+  "listed_file_copy": {
+    "files": 479,
+    "steps_passed": 15,
+    "steps_total": 15
+  },
+  "product_files_unchanged_since_copy": 479,
+  "main_f1": {
+    "A": 0.9619377162629758,
+    "B": 0.9709897610921502
+  },
+  "main_models_and_probability_artifacts_unchanged": true,
+  "meaning": "Independent internal review of implementation and experiments, not an official contest score or award guarantee.",
+  "handoff": "User requested completion of the frozen rerun, the two failed-test rechecks, and the complete suite before Claude handoff. Details are in cycle2/README.md and the commit body.",
+  "execution_logs": "Raw stdout/stderr is preserved verbatim, including tabular trailing whitespace. Source/document whitespace checks exclude *.log."
+}

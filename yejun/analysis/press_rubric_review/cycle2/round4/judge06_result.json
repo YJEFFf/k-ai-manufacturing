@@ -1,0 +1,104 @@
+{
+  "judge": "06",
+  "scope": "코드 및 재현성",
+  "score": 10.0,
+  "maximum": 10.0,
+  "deduction_total": 0.0,
+  "remaining_P0": [],
+  "remaining_P1": [],
+  "remaining_P2": [],
+  "reviewed_at": "2026-09-28T21:18:20.575972+09:00",
+  "baseline_git_head": "6c61a88d8de437182a2cdd25f640af556a23036a",
+  "evaluated_source": "final uncommitted working tree; source SHA-256 inventory in judge06_final_setup.json",
+  "workspace_inventory_checked": 416,
+  "workspace_changed_since_snapshot": [],
+  "fresh_pipeline_passed": 24,
+  "fresh_pipeline_failed": 0,
+  "fresh_python_passed": 216,
+  "fresh_python_skipped": 5,
+  "v2_tests_passed": 132,
+  "v2_tests_skipped": 0,
+  "web_suite_passed": true,
+  "skip_reasons": {
+    "v1": {
+      "reported_skips": 2,
+      "reason": "torch is deliberately absent in lock environment: one LSTM module plus one cache-signature test"
+    },
+    "supplement": {
+      "reported_skips": 3,
+      "reason": "UCI hydraulic ZIP is not included in the primary-data-only snapshot"
+    }
+  },
+  "wall_seconds": 941.77,
+  "pipeline_seconds": 893.4,
+  "nonfinite_probes_caught": 9,
+  "exact_column_probes_caught": 7,
+  "frozen_digest_probes_caught": 3,
+  "frozen_artifacts_identical": 4,
+  "prediction_files_identical": 6,
+  "relative_links_checked": 161,
+  "relative_links_broken": 0,
+  "metric_A": {
+    "name": "independent_metrics_A",
+    "rows": 4690,
+    "abnormal_rows": 600,
+    "TP": 556,
+    "FP": 0,
+    "FN": 44,
+    "F1": 0.9619377162629758,
+    "normal_records": 120,
+    "normal_alert_records": 0,
+    "prediction_escalation_rows": [
+      4092
+    ],
+    "incident_escalation_rows": [
+      4092
+    ],
+    "escalation_matches": true,
+    "escalation_missing_for_level1": 0,
+    "level1_incidents": 0
+  },
+  "metric_B": {
+    "name": "independent_metrics_B",
+    "rows": 6697,
+    "abnormal_rows": 600,
+    "TP": 569,
+    "FP": 3,
+    "FN": 31,
+    "F1": 0.9709897610921502,
+    "normal_records": 180,
+    "normal_alert_records": 3,
+    "prediction_escalation_rows": [
+      6098
+    ],
+    "incident_escalation_rows": [
+      6098
+    ],
+    "escalation_matches": true,
+    "escalation_missing_for_level1": 3,
+    "level1_incidents": 3
+  },
+  "supplementary_owner_tests": {
+    "v1": 49,
+    "supplement": 13,
+    "source": "host_final_optional_tests.json"
+  },
+  "owner_package_copy_test": {
+    "steps_passed": 15,
+    "files": 479,
+    "seconds": 806.69,
+    "source": "package_copy_final.json"
+  },
+  "unique_python_test_scope_with_owner_optional_tests": 224,
+  "final_prerequisite_checks": {
+    "calls": 10,
+    "conditions": [
+      "no_inputs",
+      "raw_data_only"
+    ],
+    "skipped_per_condition": 39,
+    "all_returncodes": 0,
+    "tracebacks": 0,
+    "source": "judge06_final_prerequisites.json"
+  }
+}

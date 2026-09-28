@@ -1,6 +1,6 @@
 {
   "package": "press_evidence",
-  "purpose": "진단·근거 보강 표(build_tables.py 17표, build_diagnostics.py 20표·그림 5장). 검증: python analysis/package_contract.py --package analysis/press_evidence",
+  "purpose": "진단·근거 보강 표(build_tables.py 17표, build_diagnostics.py 22표·그림 5장). 검증: python analysis/package_contract.py --package analysis/press_evidence",
   "outputs": [
     "variable_dictionary.csv",
     "imbalance.csv",
@@ -23,6 +23,8 @@
     "operating_variation.csv",
     "false_alarm_operating_level.csv",
     "observability.csv",
+    "vibration_tones.csv",
+    "state_transition_stress.csv",
     "production_unit_evidence.csv",
     "abnormal_segments.csv",
     "abnormal_summary.csv",

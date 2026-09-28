@@ -1,0 +1,154 @@
+{
+  "head": "6c61a88d8de437182a2cdd25f640af556a23036a",
+  "prior_files_compared": 52,
+  "prior_files_byte_identical": 48,
+  "product_files_compared": 33,
+  "product_files_byte_identical": 30,
+  "changed": [
+    {
+      "path": "analysis/press_rubric_review/cycle2/round4/judge_03_errors.md",
+      "previous": "b0ba8b5307458b7a48ac5122f69b5e9ea53e4681fa9673b0ca30b2a048f8335f",
+      "current": "9341e4aaaf591f797ab89a51c67e2c8053acaca48b2ee602e21dc5a348936c4a"
+    },
+    {
+      "path": "analysis/press_supplement/e1_manifest.json",
+      "previous": "4da1e15f60123202ca19e8c06b236c3cf3cadc9d97ed0207e77f173f90a3ecf0",
+      "current": "11af225a5ca523e26543beef77189ac905dbeb6fe5d21c0661c3437d81eb16a1"
+    },
+    {
+      "path": "press_guard/README.md",
+      "previous": "b7c24713312ad7fae907e1380750ec24acbf9540b6ff3d4df4067d2c19fb5ff1",
+      "current": "bec969c543a5f7f31c8560fd528efb9f944bd0c478ce524c9a3b8f5b92ed16a7"
+    },
+    {
+      "path": "press_guard/model.py",
+      "previous": "b50a90f09641d5c5f199fa5a48609b665b3bedf2e58f561836fdaa084e76427d",
+      "current": "8b9493a248609180f139aa777ed0b1cbf29d3bfca5e5b98f2e588cbeb0cb3f6f"
+    }
+  ],
+  "missing": [],
+  "unchanged_product_files": [
+    "analysis/press_evidence/README.md",
+    "analysis/press_evidence/normal_alarms_by_state.csv",
+    "analysis/press_evidence/operating_states.csv",
+    "analysis/press_selection/fp_mitigation_injection_v2.csv",
+    "analysis/press_supplement/e1_summary.csv",
+    "press_guard/artifacts/guard_A.json",
+    "press_guard/artifacts/guard_B.json",
+    "press_guard/artifacts/probability_A.json",
+    "press_guard/artifacts/probability_B.json",
+    "press_guard/insights.py",
+    "press_guard/outputs/ablation_v2.csv",
+    "press_guard/outputs/coupling_fit_v2.csv",
+    "press_guard/outputs/coupling_records_v2.csv",
+    "press_guard/outputs/error_condition_summary_v2.csv",
+    "press_guard/outputs/fig_coupling_v2.png",
+    "press_guard/outputs/fig_false_alarm_cases_v2.png",
+    "press_guard/outputs/fig_first_alarm_v2.png",
+    "press_guard/outputs/fig_missed_example_v2.png",
+    "press_guard/outputs/fig_position_vibration_v2.png",
+    "press_guard/outputs/fig_probability_reliability_v2.png",
+    "press_guard/outputs/fig_recall_by_position_v2.png",
+    "press_guard/outputs/fig_sensor_importance_v2.png",
+    "press_guard/outputs/fn_intensity_v2.csv",
+    "press_guard/outputs/fp_events_v2.csv",
+    "press_guard/outputs/fp_intensity_v2.csv",
+    "press_guard/outputs/near_miss_corr_v2.csv",
+    "press_guard/outputs/near_miss_v2.csv",
+    "press_guard/outputs/position_vibration_misses_v2.csv",
+    "press_guard/outputs/sensor_importance_v2.csv",
+    "press_guard/test_insights.py"
+  ],
+  "statistical_formula_ast_equal_to_baseline": {
+    "components": true,
+    "sine_score": true,
+    "ar_residual": true
+  },
+  "original_input_status": {
+    "normal": {
+      "rows": 20000,
+      "records": 600,
+      "status_counts": {
+        "ok": 20000
+      }
+    },
+    "abnormal": {
+      "rows": 600,
+      "records": 21,
+      "status_counts": {
+        "ok": 600
+      }
+    }
+  },
+  "primary_recount": [
+    {
+      "split": "A",
+      "tp": 556,
+      "fp": 0,
+      "fn": 44,
+      "normal_notified_segments": 0,
+      "abnormal_notified_segments": 21,
+      "f1": 0.9619377162629758
+    },
+    {
+      "split": "B",
+      "tp": 569,
+      "fp": 3,
+      "fn": 31,
+      "normal_notified_segments": 3,
+      "abnormal_notified_segments": 21,
+      "f1": 0.9709897610921502
+    }
+  ],
+  "model_sha256": {
+    "guard_A.json": "c938707f1dd16e7c239b8053e7f032d8fac828d6c753de2b898ba9130a594f10",
+    "guard_B.json": "b64ac3b30bc697034104287964f3154e88c8a50749ccdec04f6d4f8744fd6969",
+    "probability_A.json": "1a8100e78046393d9292fc7c305b5ec57b46c4e2c73b03abeb596052a8705f8a",
+    "probability_B.json": "7fde4cd1bdfa74e78e2d3f07c5dbd9c27619e19b2e94ceb8fab786c27abcaae8"
+  },
+  "e1_manifest_output_checks": {
+    "outputs/e1_summary.csv": true,
+    "outputs/e1_detection_floor.csv": true,
+    "outputs/e1_reference_segments.csv": true,
+    "local_outputs/predictions_e1_records.csv": true
+  },
+  "e1_manifest_current_model_hash_valid": true,
+  "existing_59_csv_delta": {
+    "compared": 59,
+    "changed": []
+  },
+  "existing_112_table_delta": {
+    "compared": 112,
+    "byte_identical": 111,
+    "changed": [
+      "analysis/press_evidence/decision_table_diagnosis_v2.csv"
+    ],
+    "all_statistical_values_unchanged": true,
+    "difference_reason": "역순시각 처리 함수가 추가되어 model.py의 함수 인용 행번호 두 곳만 이동했다. 옛 평가관 사본의 SHA가 직전 스냅샷과 일치함을 확인한 뒤 셀별 비교했다.",
+    "differences": [
+      {
+        "csv_line": 10,
+        "column": "evidence",
+        "before": "평균·척도·AR 계수·꼬리는 정상 학습 구간에서만 적합. yejun/press_guard/model.py:270",
+        "after": "평균·척도·AR 계수·꼬리는 정상 학습 구간에서만 적합. yejun/press_guard/model.py:286"
+      },
+      {
+        "csv_line": 11,
+        "column": "evidence",
+        "before": "위치 0~6은 6관측, 7부터 8관측 창. 파형 성분 제거 시 미탐 A 44→133·B 31→112, 조기 전환 제거 시 A 46·B 33. yejun/press_guard/model.py:305; yejun/press_guard/outputs/ablation_v2.csv:26",
+        "after": "위치 0~6은 6관측, 7부터 8관측 창. 파형 성분 제거 시 미탐 A 44→133·B 31→112, 조기 전환 제거 시 A 46·B 33. yejun/press_guard/model.py:321; yejun/press_guard/outputs/ablation_v2.csv:26"
+      }
+    ]
+  },
+  "previous_full_checks_retained": 1607,
+  "long_injection_rerun": false,
+  "score": 14.5,
+  "score_range": [
+    14.2,
+    14.8
+  ],
+  "remaining_P0": 0,
+  "remaining_P1": 0,
+  "remaining_P2": 0,
+  "elapsed_s": 1.48
+}

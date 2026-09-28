@@ -1,0 +1,93 @@
+{
+  "scratch": "/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge01_r4_evidence_ssb8_tvk",
+  "steps": [
+    {
+      "name": "initial_contract",
+      "exit_code": 0,
+      "elapsed_s": 0.4589712500019232,
+      "log": "/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge01_r4_evidence_ssb8_tvk/initial_contract.log"
+    },
+    {
+      "name": "build_tables",
+      "exit_code": 0,
+      "elapsed_s": 7.658182416998898,
+      "log": "/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge01_r4_evidence_ssb8_tvk/build_tables.log"
+    },
+    {
+      "name": "build_diagnostics",
+      "exit_code": 0,
+      "elapsed_s": 35.38841066700115,
+      "log": "/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge01_r4_evidence_ssb8_tvk/build_diagnostics.log"
+    },
+    {
+      "name": "final_contract",
+      "exit_code": 0,
+      "elapsed_s": 0.46471983400260797,
+      "log": "/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge01_r4_evidence_ssb8_tvk/final_contract.log"
+    },
+    {
+      "name": "targeted_tests",
+      "exit_code": 0,
+      "elapsed_s": 1.7612954579999496,
+      "log": "/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge01_r4_evidence_ssb8_tvk/targeted_tests.log"
+    }
+  ],
+  "identical": [
+    "variable_dictionary.csv",
+    "imbalance.csv",
+    "outliers.csv",
+    "quality_index.csv",
+    "class_differences.csv",
+    "split_context.csv",
+    "block_context.csv",
+    "ar2_oscillator.csv",
+    "amplitude_reliability.csv",
+    "component_combinations.csv",
+    "component_correlation.csv",
+    "first_alarm_reason.csv",
+    "calibration_curve.csv",
+    "duplicate_rows.csv",
+    "current_grid.csv",
+    "gaps.csv",
+    "segment_rule_tolerance.csv",
+    "sensor_relations.csv",
+    "operating_variation.csv",
+    "false_alarm_operating_level.csv",
+    "observability.csv",
+    "vibration_tones.csv",
+    "state_transition_stress.csv",
+    "production_unit_evidence.csv",
+    "abnormal_segments.csv",
+    "abnormal_summary.csv",
+    "outlier_rules.csv",
+    "quality_index_weighted.csv",
+    "guidebook_stats_match.csv",
+    "rolling_calibration_curve.csv",
+    "phase_continuity.csv",
+    "guidebook_protocol_vs_records.csv",
+    "variable_expected_signals.csv",
+    "failure_mode_map.csv",
+    "operating_states.csv",
+    "operating_states_summary.csv",
+    "split_state_composition.csv",
+    "normal_alarms_by_state.csv",
+    "decision_table_diagnosis_v2.csv",
+    "figures/fig_d2a_timeline.png",
+    "figures/fig_d2b_blocks.png",
+    "figures/fig_d2c_raw_examples.png",
+    "figures/fig_d2d_relations.png",
+    "figures/fig_d2e_format_leak.png"
+  ],
+  "changed": [],
+  "manifest_changed_keys": {
+    "manifest.json": [
+      "elapsed_s"
+    ],
+    "diagnostics_manifest.json": [
+      "elapsed_s"
+    ]
+  },
+  "source_changed_during_rerun": [],
+  "bytecode_directories": [],
+  "elapsed_s": 45.88708900000347
+}

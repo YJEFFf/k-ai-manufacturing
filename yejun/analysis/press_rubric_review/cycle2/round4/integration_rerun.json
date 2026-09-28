@@ -1,0 +1,87 @@
+[
+  {
+    "step": "supplement_freeze",
+    "returncode": 0,
+    "seconds": 1.26
+  },
+  {
+    "step": "supplement_verify",
+    "returncode": 0,
+    "seconds": 1.27
+  },
+  {
+    "step": "analyze",
+    "returncode": 0,
+    "seconds": 174.03
+  },
+  {
+    "step": "audit",
+    "returncode": 0,
+    "seconds": 188.61
+  },
+  {
+    "step": "guard_freeze",
+    "returncode": 0,
+    "seconds": 1.56
+  },
+  {
+    "step": "guard_verify",
+    "returncode": 0,
+    "seconds": 1.57
+  },
+  {
+    "step": "supervised",
+    "returncode": 0,
+    "seconds": 138.07
+  },
+  {
+    "step": "selection",
+    "returncode": 0,
+    "seconds": 67.29
+  },
+  {
+    "step": "evidence_tables",
+    "returncode": 0,
+    "seconds": 7.66
+  },
+  {
+    "step": "evidence_diagnostics",
+    "returncode": 0,
+    "seconds": 33.98
+  },
+  {
+    "step": "press_supervised_freeze",
+    "returncode": 0,
+    "seconds": 0.39
+  },
+  {
+    "step": "press_supervised_verify",
+    "returncode": 0,
+    "seconds": 0.41
+  },
+  {
+    "step": "press_selection_freeze",
+    "returncode": 0,
+    "seconds": 0.4
+  },
+  {
+    "step": "press_selection_verify",
+    "returncode": 0,
+    "seconds": 0.42
+  },
+  {
+    "step": "press_evidence_freeze",
+    "returncode": 0,
+    "seconds": 0.42
+  },
+  {
+    "step": "press_evidence_verify",
+    "returncode": 0,
+    "seconds": 0.46
+  },
+  {
+    "step": "advance_verify",
+    "returncode": 0,
+    "seconds": 0.45
+  }
+]

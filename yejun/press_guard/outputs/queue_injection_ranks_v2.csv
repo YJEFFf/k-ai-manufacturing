@@ -1,121 +1,121 @@
-split,alpha,family,level_value,key,injected_cases,false_alarm_cases,injected_below_best_false_alarm
-A,0.01,cur_noise,0.1,evidence_share_peak,74,0,0
-A,0.01,cur_noise,0.1,level_evidence_share_peak,74,0,0
-A,0.01,cur_noise,0.1,level_evidence_peak_share,74,0,0
-A,0.01,cur_noise,0.1,level_peak,74,0,0
-A,0.01,cur_noise,0.2,evidence_share_peak,75,0,0
-A,0.01,cur_noise,0.2,level_evidence_share_peak,75,0,0
-A,0.01,cur_noise,0.2,level_evidence_peak_share,75,0,0
-A,0.01,cur_noise,0.2,level_peak,75,0,0
-A,0.01,cur_offset,0.4,evidence_share_peak,75,0,0
-A,0.01,cur_offset,0.4,level_evidence_share_peak,75,0,0
-A,0.01,cur_offset,0.4,level_evidence_peak_share,75,0,0
-A,0.01,cur_offset,0.4,level_peak,75,0,0
-A,0.01,vib_noise,2.0,evidence_share_peak,64,0,0
-A,0.01,vib_noise,2.0,level_evidence_share_peak,64,0,0
-A,0.01,vib_noise,2.0,level_evidence_peak_share,64,0,0
-A,0.01,vib_noise,2.0,level_peak,64,0,0
-A,0.01,vib_noise,4.0,evidence_share_peak,75,0,0
-A,0.01,vib_noise,4.0,level_evidence_share_peak,75,0,0
-A,0.01,vib_noise,4.0,level_evidence_peak_share,75,0,0
-A,0.01,vib_noise,4.0,level_peak,75,0,0
-A,0.03,cur_noise,0.1,evidence_share_peak,74,1,0
-A,0.03,cur_noise,0.1,level_evidence_share_peak,74,1,0
-A,0.03,cur_noise,0.1,level_evidence_peak_share,74,1,0
-A,0.03,cur_noise,0.1,level_peak,74,1,0
-A,0.03,cur_noise,0.2,evidence_share_peak,75,1,0
-A,0.03,cur_noise,0.2,level_evidence_share_peak,75,1,0
-A,0.03,cur_noise,0.2,level_evidence_peak_share,75,1,0
-A,0.03,cur_noise,0.2,level_peak,75,1,0
-A,0.03,cur_offset,0.4,evidence_share_peak,75,1,0
-A,0.03,cur_offset,0.4,level_evidence_share_peak,75,1,0
-A,0.03,cur_offset,0.4,level_evidence_peak_share,75,1,0
-A,0.03,cur_offset,0.4,level_peak,75,1,0
-A,0.03,vib_noise,2.0,evidence_share_peak,73,1,4
-A,0.03,vib_noise,2.0,level_evidence_share_peak,73,1,4
-A,0.03,vib_noise,2.0,level_evidence_peak_share,73,1,2
-A,0.03,vib_noise,2.0,level_peak,73,1,2
-A,0.03,vib_noise,4.0,evidence_share_peak,75,1,0
-A,0.03,vib_noise,4.0,level_evidence_share_peak,75,1,0
-A,0.03,vib_noise,4.0,level_evidence_peak_share,75,1,0
-A,0.03,vib_noise,4.0,level_peak,75,1,0
-A,0.05,cur_noise,0.1,evidence_share_peak,74,1,0
-A,0.05,cur_noise,0.1,level_evidence_share_peak,74,1,0
-A,0.05,cur_noise,0.1,level_evidence_peak_share,74,1,0
-A,0.05,cur_noise,0.1,level_peak,74,1,0
-A,0.05,cur_noise,0.2,evidence_share_peak,75,1,0
-A,0.05,cur_noise,0.2,level_evidence_share_peak,75,1,0
-A,0.05,cur_noise,0.2,level_evidence_peak_share,75,1,0
-A,0.05,cur_noise,0.2,level_peak,75,1,0
-A,0.05,cur_offset,0.4,evidence_share_peak,75,1,0
-A,0.05,cur_offset,0.4,level_evidence_share_peak,75,1,0
-A,0.05,cur_offset,0.4,level_evidence_peak_share,75,1,0
-A,0.05,cur_offset,0.4,level_peak,75,1,0
-A,0.05,vib_noise,2.0,evidence_share_peak,74,1,2
-A,0.05,vib_noise,2.0,level_evidence_share_peak,74,1,2
-A,0.05,vib_noise,2.0,level_evidence_peak_share,74,1,0
-A,0.05,vib_noise,2.0,level_peak,74,1,0
-A,0.05,vib_noise,4.0,evidence_share_peak,75,1,0
-A,0.05,vib_noise,4.0,level_evidence_share_peak,75,1,0
-A,0.05,vib_noise,4.0,level_evidence_peak_share,75,1,0
-A,0.05,vib_noise,4.0,level_peak,75,1,0
-B,0.01,cur_noise,0.1,evidence_share_peak,111,3,1
-B,0.01,cur_noise,0.1,level_evidence_share_peak,111,3,1
-B,0.01,cur_noise,0.1,level_evidence_peak_share,111,3,0
-B,0.01,cur_noise,0.1,level_peak,111,3,0
-B,0.01,cur_noise,0.2,evidence_share_peak,111,3,0
-B,0.01,cur_noise,0.2,level_evidence_share_peak,111,3,0
-B,0.01,cur_noise,0.2,level_evidence_peak_share,111,3,0
-B,0.01,cur_noise,0.2,level_peak,111,3,0
-B,0.01,cur_offset,0.4,evidence_share_peak,111,3,1
-B,0.01,cur_offset,0.4,level_evidence_share_peak,111,3,1
-B,0.01,cur_offset,0.4,level_evidence_peak_share,111,3,0
-B,0.01,cur_offset,0.4,level_peak,111,3,0
-B,0.01,vib_noise,2.0,evidence_share_peak,110,3,0
-B,0.01,vib_noise,2.0,level_evidence_share_peak,110,3,0
-B,0.01,vib_noise,2.0,level_evidence_peak_share,110,3,0
-B,0.01,vib_noise,2.0,level_peak,110,3,0
-B,0.01,vib_noise,4.0,evidence_share_peak,111,3,0
-B,0.01,vib_noise,4.0,level_evidence_share_peak,111,3,0
-B,0.01,vib_noise,4.0,level_evidence_peak_share,111,3,0
-B,0.01,vib_noise,4.0,level_peak,111,3,0
-B,0.03,cur_noise,0.1,evidence_share_peak,111,5,1
-B,0.03,cur_noise,0.1,level_evidence_share_peak,111,5,1
-B,0.03,cur_noise,0.1,level_evidence_peak_share,111,5,3
-B,0.03,cur_noise,0.1,level_peak,111,5,4
-B,0.03,cur_noise,0.2,evidence_share_peak,111,5,0
-B,0.03,cur_noise,0.2,level_evidence_share_peak,111,5,0
-B,0.03,cur_noise,0.2,level_evidence_peak_share,111,5,0
-B,0.03,cur_noise,0.2,level_peak,111,5,0
-B,0.03,cur_offset,0.4,evidence_share_peak,111,5,11
-B,0.03,cur_offset,0.4,level_evidence_share_peak,111,5,1
-B,0.03,cur_offset,0.4,level_evidence_peak_share,111,5,1
-B,0.03,cur_offset,0.4,level_peak,111,5,1
-B,0.03,vib_noise,2.0,evidence_share_peak,111,5,3
-B,0.03,vib_noise,2.0,level_evidence_share_peak,111,5,3
-B,0.03,vib_noise,2.0,level_evidence_peak_share,111,5,16
-B,0.03,vib_noise,2.0,level_peak,111,5,16
-B,0.03,vib_noise,4.0,evidence_share_peak,111,5,0
-B,0.03,vib_noise,4.0,level_evidence_share_peak,111,5,0
-B,0.03,vib_noise,4.0,level_evidence_peak_share,111,5,0
-B,0.03,vib_noise,4.0,level_peak,111,5,0
-B,0.05,cur_noise,0.1,evidence_share_peak,111,7,0
-B,0.05,cur_noise,0.1,level_evidence_share_peak,111,7,0
-B,0.05,cur_noise,0.1,level_evidence_peak_share,111,7,2
-B,0.05,cur_noise,0.1,level_peak,111,7,3
-B,0.05,cur_noise,0.2,evidence_share_peak,111,7,0
-B,0.05,cur_noise,0.2,level_evidence_share_peak,111,7,0
-B,0.05,cur_noise,0.2,level_evidence_peak_share,111,7,0
-B,0.05,cur_noise,0.2,level_peak,111,7,0
-B,0.05,cur_offset,0.4,evidence_share_peak,111,7,12
-B,0.05,cur_offset,0.4,level_evidence_share_peak,111,7,12
-B,0.05,cur_offset,0.4,level_evidence_peak_share,111,7,1
-B,0.05,cur_offset,0.4,level_peak,111,7,1
-B,0.05,vib_noise,2.0,evidence_share_peak,111,7,3
-B,0.05,vib_noise,2.0,level_evidence_share_peak,111,7,3
-B,0.05,vib_noise,2.0,level_evidence_peak_share,111,7,15
-B,0.05,vib_noise,2.0,level_peak,111,7,15
-B,0.05,vib_noise,4.0,evidence_share_peak,111,7,0
-B,0.05,vib_noise,4.0,level_evidence_share_peak,111,7,0
-B,0.05,vib_noise,4.0,level_evidence_peak_share,111,7,0
-B,0.05,vib_noise,4.0,level_peak,111,7,0
+split,alpha,family,level_value,key,injected_cases,false_alarm_cases,injected_below_best_false_alarm,injected_incidents,false_alarm_incidents,injected_incidents_below_best_false_alarm,incident_note
+A,0.01,cur_noise,0.1,evidence_share_peak,74,0,0,20,0,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.01,cur_noise,0.1,level_evidence_share_peak,74,0,0,20,0,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.01,cur_noise,0.1,level_evidence_peak_share,74,0,0,20,0,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.01,cur_noise,0.1,level_peak,74,0,0,20,0,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.01,cur_noise,0.2,evidence_share_peak,75,0,0,20,0,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.01,cur_noise,0.2,level_evidence_share_peak,75,0,0,20,0,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.01,cur_noise,0.2,level_evidence_peak_share,75,0,0,20,0,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.01,cur_noise,0.2,level_peak,75,0,0,20,0,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.01,cur_offset,0.4,evidence_share_peak,75,0,0,20,0,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.01,cur_offset,0.4,level_evidence_share_peak,75,0,0,20,0,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.01,cur_offset,0.4,level_evidence_peak_share,75,0,0,20,0,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.01,cur_offset,0.4,level_peak,75,0,0,20,0,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.01,vib_noise,2.0,evidence_share_peak,64,0,0,24,0,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.01,vib_noise,2.0,level_evidence_share_peak,64,0,0,24,0,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.01,vib_noise,2.0,level_evidence_peak_share,64,0,0,24,0,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.01,vib_noise,2.0,level_peak,64,0,0,24,0,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.01,vib_noise,4.0,evidence_share_peak,75,0,0,20,0,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.01,vib_noise,4.0,level_evidence_share_peak,75,0,0,20,0,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.01,vib_noise,4.0,level_evidence_peak_share,75,0,0,20,0,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.01,vib_noise,4.0,level_peak,75,0,0,20,0,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.03,cur_noise,0.1,evidence_share_peak,74,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.03,cur_noise,0.1,level_evidence_share_peak,74,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.03,cur_noise,0.1,level_evidence_peak_share,74,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.03,cur_noise,0.1,level_peak,74,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.03,cur_noise,0.2,evidence_share_peak,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.03,cur_noise,0.2,level_evidence_share_peak,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.03,cur_noise,0.2,level_evidence_peak_share,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.03,cur_noise,0.2,level_peak,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.03,cur_offset,0.4,evidence_share_peak,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.03,cur_offset,0.4,level_evidence_share_peak,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.03,cur_offset,0.4,level_evidence_peak_share,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.03,cur_offset,0.4,level_peak,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.03,vib_noise,2.0,evidence_share_peak,73,1,4,20,1,1,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.03,vib_noise,2.0,level_evidence_share_peak,73,1,4,20,1,1,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.03,vib_noise,2.0,level_evidence_peak_share,73,1,2,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.03,vib_noise,2.0,level_peak,73,1,2,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.03,vib_noise,4.0,evidence_share_peak,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.03,vib_noise,4.0,level_evidence_share_peak,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.03,vib_noise,4.0,level_evidence_peak_share,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.03,vib_noise,4.0,level_peak,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.05,cur_noise,0.1,evidence_share_peak,74,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.05,cur_noise,0.1,level_evidence_share_peak,74,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.05,cur_noise,0.1,level_evidence_peak_share,74,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.05,cur_noise,0.1,level_peak,74,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.05,cur_noise,0.2,evidence_share_peak,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.05,cur_noise,0.2,level_evidence_share_peak,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.05,cur_noise,0.2,level_evidence_peak_share,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.05,cur_noise,0.2,level_peak,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.05,cur_offset,0.4,evidence_share_peak,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.05,cur_offset,0.4,level_evidence_share_peak,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.05,cur_offset,0.4,level_evidence_peak_share,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.05,cur_offset,0.4,level_peak,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.05,vib_noise,2.0,evidence_share_peak,74,1,2,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.05,vib_noise,2.0,level_evidence_share_peak,74,1,2,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.05,vib_noise,2.0,level_evidence_peak_share,74,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.05,vib_noise,2.0,level_peak,74,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.05,vib_noise,4.0,evidence_share_peak,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.05,vib_noise,4.0,level_evidence_share_peak,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.05,vib_noise,4.0,level_evidence_peak_share,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+A,0.05,vib_noise,4.0,level_peak,75,1,0,20,1,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.01,cur_noise,0.1,evidence_share_peak,111,3,1,31,3,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.01,cur_noise,0.1,level_evidence_share_peak,111,3,1,31,3,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.01,cur_noise,0.1,level_evidence_peak_share,111,3,0,31,3,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.01,cur_noise,0.1,level_peak,111,3,0,31,3,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.01,cur_noise,0.2,evidence_share_peak,111,3,0,31,3,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.01,cur_noise,0.2,level_evidence_share_peak,111,3,0,31,3,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.01,cur_noise,0.2,level_evidence_peak_share,111,3,0,31,3,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.01,cur_noise,0.2,level_peak,111,3,0,31,3,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.01,cur_offset,0.4,evidence_share_peak,111,3,1,31,3,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.01,cur_offset,0.4,level_evidence_share_peak,111,3,1,31,3,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.01,cur_offset,0.4,level_evidence_peak_share,111,3,0,31,3,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.01,cur_offset,0.4,level_peak,111,3,0,31,3,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.01,vib_noise,2.0,evidence_share_peak,110,3,0,32,3,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.01,vib_noise,2.0,level_evidence_share_peak,110,3,0,32,3,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.01,vib_noise,2.0,level_evidence_peak_share,110,3,0,32,3,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.01,vib_noise,2.0,level_peak,110,3,0,32,3,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.01,vib_noise,4.0,evidence_share_peak,111,3,0,31,3,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.01,vib_noise,4.0,level_evidence_share_peak,111,3,0,31,3,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.01,vib_noise,4.0,level_evidence_peak_share,111,3,0,31,3,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.01,vib_noise,4.0,level_peak,111,3,0,31,3,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.03,cur_noise,0.1,evidence_share_peak,111,5,1,31,5,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.03,cur_noise,0.1,level_evidence_share_peak,111,5,1,31,5,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.03,cur_noise,0.1,level_evidence_peak_share,111,5,3,31,5,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.03,cur_noise,0.1,level_peak,111,5,4,31,5,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.03,cur_noise,0.2,evidence_share_peak,111,5,0,31,5,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.03,cur_noise,0.2,level_evidence_share_peak,111,5,0,31,5,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.03,cur_noise,0.2,level_evidence_peak_share,111,5,0,31,5,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.03,cur_noise,0.2,level_peak,111,5,0,31,5,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.03,cur_offset,0.4,evidence_share_peak,111,5,11,31,5,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.03,cur_offset,0.4,level_evidence_share_peak,111,5,1,31,5,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.03,cur_offset,0.4,level_evidence_peak_share,111,5,1,31,5,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.03,cur_offset,0.4,level_peak,111,5,1,31,5,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.03,vib_noise,2.0,evidence_share_peak,111,5,3,31,5,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.03,vib_noise,2.0,level_evidence_share_peak,111,5,3,31,5,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.03,vib_noise,2.0,level_evidence_peak_share,111,5,16,31,5,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.03,vib_noise,2.0,level_peak,111,5,16,31,5,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.03,vib_noise,4.0,evidence_share_peak,111,5,0,31,5,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.03,vib_noise,4.0,level_evidence_share_peak,111,5,0,31,5,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.03,vib_noise,4.0,level_evidence_peak_share,111,5,0,31,5,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.03,vib_noise,4.0,level_peak,111,5,0,31,5,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.05,cur_noise,0.1,evidence_share_peak,111,7,0,31,7,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.05,cur_noise,0.1,level_evidence_share_peak,111,7,0,31,7,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.05,cur_noise,0.1,level_evidence_peak_share,111,7,2,31,7,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.05,cur_noise,0.1,level_peak,111,7,3,31,7,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.05,cur_noise,0.2,evidence_share_peak,111,7,0,31,7,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.05,cur_noise,0.2,level_evidence_share_peak,111,7,0,31,7,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.05,cur_noise,0.2,level_evidence_peak_share,111,7,0,31,7,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.05,cur_noise,0.2,level_peak,111,7,0,31,7,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.05,cur_offset,0.4,evidence_share_peak,111,7,12,31,7,1,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.05,cur_offset,0.4,level_evidence_share_peak,111,7,12,31,7,1,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.05,cur_offset,0.4,level_evidence_peak_share,111,7,1,31,7,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.05,cur_offset,0.4,level_peak,111,7,1,31,7,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.05,vib_noise,2.0,evidence_share_peak,111,7,3,31,7,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.05,vib_noise,2.0,level_evidence_share_peak,111,7,3,31,7,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.05,vib_noise,2.0,level_evidence_peak_share,111,7,15,31,7,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.05,vib_noise,2.0,level_peak,111,7,15,31,7,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.05,vib_noise,4.0,evidence_share_peak,111,7,0,31,7,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.05,vib_noise,4.0,level_evidence_share_peak,111,7,0,31,7,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.05,vib_noise,4.0,level_evidence_peak_share,111,7,0,31,7,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)
+B,0.05,vib_noise,4.0,level_peak,111,7,0,31,7,0,각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)

@@ -73,7 +73,8 @@ def model_comparison(out):
              "모델마다 입력이 다르다(입력 조건 열). v2와 같은 세 성분을 넣은 대안(5NN·합·Fisher 등)은 analysis/press_selection에 있다.", "",
              "| 분할 | 모델 | 입력 조건 | 출처 | 이상 탐지 구간 | 정상 알림 구간 | 미탐 행 | 오경보 행 | F1(전체 행) | 판정 가능 | 첫 경보 중앙값/최대(초) |", "|---|---|---|---|---:|---:|---:|---:|---:|---:|---|"]
     for r in main.sort_values(["split_id", "f1_all_rows"], ascending=[True, False])[cols].itertuples(index=False):
-        lines.append(f"| {r.split_id} | {'**' + r.model + '**' if r.model == FINAL else r.model} | {r.input_features} | {r.source} | {int(r.abnormal_notified_segments)}/21 | {int(r.normal_notified_segments)}/{int(r.normal_segments)} | {int(r.fn)} | {int(r.fp)} | {r.f1_all_rows:.4f} | {r.abnormal_row_coverage:.2f} | {r.delay_median_s:.1f}/{r.delay_max_s:.1f} |")
+        features = r.input_features.replace("|", r"\|")
+        lines.append(f"| {r.split_id} | {'**' + r.model + '**' if r.model == FINAL else r.model} | {features} | {r.source} | {int(r.abnormal_notified_segments)}/21 | {int(r.normal_notified_segments)}/{int(r.normal_segments)} | {int(r.fn)} | {int(r.fp)} | {r.f1_all_rows:.4f} | {r.abnormal_row_coverage:.2f} | {r.delay_median_s:.1f}/{r.delay_max_s:.1f} |")
     (out / "model_comparison_v2.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     return both
 

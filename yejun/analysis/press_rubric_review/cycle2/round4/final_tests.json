@@ -1,0 +1,20 @@
+[
+  {
+    "step": "press_guard_tests",
+    "returncode": 0,
+    "seconds": 82.04,
+    "tail": [
+      "........................................................................ [ 63%]",
+      "..........................................                               [100%]",
+      "114 passed in 81.57s (0:01:21)"
+    ]
+  },
+  {
+    "step": "web_tests",
+    "returncode": 0,
+    "seconds": 0.18,
+    "tail": [
+      "web regressions passed: charts, incidents, causal state, probability cap, monitor actions and primary estimate"
+    ]
+  }
+]

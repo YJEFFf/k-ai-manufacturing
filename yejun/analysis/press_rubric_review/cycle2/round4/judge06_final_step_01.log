@@ -1,0 +1,60 @@
+$ /private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python /private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/press_submission/run_all.py --steps 2
+
+split A done in 3.1s: combined_w8 conformal 1% → normal 0/120, abnormal 21/21
+split B done in 2.6s: combined_w8 conformal 1% → normal 3/180, abnormal 21/21
+{
+  "input_hash_ok": true,
+  "input_rows_ok": true,
+  "segments_equal_vendor_blocks": true,
+  "segment_counts": {
+    "normal": 600,
+    "abnormal": 21
+  },
+  "segment_counts_ok": true,
+  "bad_rows": {
+    "normal": 0,
+    "abnormal": 0
+  },
+  "diagnosis_generated": true,
+  "format_rules_after_preprocess_max_separability": 0.5,
+  "conformal_mc_within_4se": true,
+  "step2": {
+    "A": {
+      "main_model": "combined_w8",
+      "degenerate": false,
+      "stream_equals_evaluation": true,
+      "shuffle_invariant": true,
+      "prediction_alarm_counts_equal_table": true,
+      "conformal_p_equals_threshold_alarms": true,
+      "artifact": "main_A.json",
+      "normal_notified": 0,
+      "abnormal_notified": 21,
+      "seconds": 3.1
+    },
+    "B": {
+      "main_model": "combined_w8",
+      "degenerate": false,
+      "stream_equals_evaluation": true,
+      "shuffle_invariant": true,
+      "prediction_alarm_counts_equal_table": true,
+      "conformal_p_equals_threshold_alarms": true,
+      "artifact": "main_B.json",
+      "normal_notified": 3,
+      "abnormal_notified": 21,
+      "seconds": 2.6
+    }
+  },
+  "step2_all_ok": true,
+  "outputs_free_of_raw_sensor_columns": true,
+  "raw_column_hits": {},
+  "steps_run": 2,
+  "external_checks_not_run_here": [
+    "tools/clean_repro.sh --with-lstm (캐시 사용 깨끗한 클론 재현)",
+    "tools/clean_repro.sh --retrain-lstm (캐시 없는 재학습 재현)",
+    "verify.py --out outputs (동결 기대값 비교)"
+  ],
+  "required_checks_ok": true,
+  "required_checks_failed": []
+}
+
+Matplotlib is building the font cache; this may take a moment.

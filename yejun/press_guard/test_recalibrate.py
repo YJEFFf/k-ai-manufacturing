@@ -80,3 +80,44 @@ def test_unconfirmed_cases_are_excluded_from_recalibration(normal_csv, tmp_path)
     kept, info = exclude_unconfirmed(frame, outcomes)
     assert info == dict(cases=2, unconfirmed_cases=1, rows_removed=51, rows_kept=len(frame) - 51)
     assert t.iloc[2000] not in set(kept[D.TIME]) and t.iloc[100] in set(kept[D.TIME])
+
+
+def test_monitor_windows_require_normal_confirmation(normal_csv):
+    """전류 이동·열화 점검 창은 결과가 비면 빠지고 정상 확인 뒤 남는다. 관측/변경 기록 창은 그대로 남는다."""
+    from monitor import (exclude_unconfirmed_windows, ACTION_INSPECT_SHIFT, ACTION_INSPECT,
+                         ACTION_RECALIBRATE, ACTION_OBSERVE)
+    frame = pd.read_csv(normal_csv)
+    starts, ends = [100, 200, 300, 400], [149, 249, 349, 449]
+    windows = pd.DataFrame(dict(start=frame[D.TIME].iloc[starts].to_numpy(), end=frame[D.TIME].iloc[ends].to_numpy(),
+                                recommended_action=[ACTION_INSPECT_SHIFT, ACTION_INSPECT, ACTION_RECALIBRATE, ACTION_OBSERVE]))
+    kept, info = exclude_unconfirmed_windows(frame, windows)
+    assert info["unconfirmed_windows"] == 2 and info["rows_removed"] == 100
+    assert frame[D.TIME].iloc[100] not in set(kept[D.TIME]) and frame[D.TIME].iloc[300] in set(kept[D.TIME])
+    windows["outcome"] = ["정상 확인", "보류", "", ""]
+    kept, info = exclude_unconfirmed_windows(frame, windows)
+    assert info["unconfirmed_windows"] == 1 and info["rows_removed"] == 50
+    assert frame[D.TIME].iloc[100] in set(kept[D.TIME]) and frame[D.TIME].iloc[200] not in set(kept[D.TIME])
+    windows["outcome"] = "정상 확인"
+    kept, info = exclude_unconfirmed_windows(frame, windows)
+    pd.testing.assert_frame_equal(kept, frame)
+    assert info["rows_removed"] == 0
+    windows.loc[0, "outcome"] = ""
+    windows.loc[0, "start"] = "bad-time"
+    with pytest.raises(ValueError, match="start/end"):
+        exclude_unconfirmed_windows(frame, windows)
+
+
+def test_windows_option_filters_before_fitting(normal_csv, tmp_path):
+    """실제 CLI가 미확인 점검 창을 빼고 보고서에 제외 수를 남긴다."""
+    from monitor import ACTION_INSPECT_SHIFT
+    frame = pd.read_csv(normal_csv)
+    seg = D.segments(frame)
+    drop = frame[seg < 60]
+    windows = tmp_path / "windows.csv"
+    pd.DataFrame([dict(start=drop[D.TIME].iloc[0], end=drop[D.TIME].iloc[-1],
+                       recommended_action=ACTION_INSPECT_SHIFT, outcome="")]).to_csv(windows, index=False)
+    out = tmp_path / "filtered.json"
+    assert recalibrate.main(["--normal", str(normal_csv), "--windows", str(windows), "--out", str(out)]) in (0, 1)
+    report = json.loads((tmp_path / "filtered_report.json").read_text(encoding="utf-8"))
+    assert report["units"]["total"] == 420
+    assert report["excluded_by_windows"]["rows_removed"] == len(drop)

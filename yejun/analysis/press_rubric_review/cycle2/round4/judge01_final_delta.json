@@ -1,0 +1,57 @@
+{
+  "previous_copy_sha_matches_prechange_snapshot": true,
+  "previous_copy_decision_sha256": "dc63e4975a062c92b99db339fcb8150301f5c64869275e6a48fdbc56b5e00fe4",
+  "final_decision_sha256": "fc118ef7d5d7a5d8fdf6eabe13f8a99d73152ad7412c1f727c5f902110ef6e7e",
+  "decision_differences": [
+    {
+      "csv_line": 10,
+      "column": "evidence",
+      "before": "평균·척도·AR 계수·꼬리는 정상 학습 구간에서만 적합. yejun/press_guard/model.py:270",
+      "after": "평균·척도·AR 계수·꼬리는 정상 학습 구간에서만 적합. yejun/press_guard/model.py:286"
+    },
+    {
+      "csv_line": 11,
+      "column": "evidence",
+      "before": "위치 0~6은 6관측, 7부터 8관측 창. 파형 성분 제거 시 미탐 A 44→133·B 31→112, 조기 전환 제거 시 A 46·B 33. yejun/press_guard/model.py:305; yejun/press_guard/outputs/ablation_v2.csv:26",
+      "after": "위치 0~6은 6관측, 7부터 8관측 창. 파형 성분 제거 시 미탐 A 44→133·B 31→112, 조기 전환 제거 시 A 46·B 33. yejun/press_guard/model.py:321; yejun/press_guard/outputs/ablation_v2.csv:26"
+    }
+  ],
+  "outputs_compared": 44,
+  "byte_identical": 43,
+  "changed": [
+    "decision_table_diagnosis_v2.csv"
+  ],
+  "diagnostic_computation_ast_unchanged": true,
+  "diagnostic_text_diff": [
+    "--- ",
+    "+++ ",
+    "@@ -49,7 +49,7 @@",
+    " ",
+    " ",
+    " def gain_transition(values, gains, ramp_rows, at=SPLICE_ROW):",
+    "-    \"\"\"기록 평균을 보존하는 편차 이득. ramp_rows=1은 계단이다.\"\"\"",
+    "+    \"\"\"기록 평균을 기준으로 시간별 편차 이득을 적용한다. ramp_rows=1은 계단이다.\"\"\"",
+    "     if ramp_rows < 1:",
+    "         raise ValueError(\"경사 길이는 양수여야 한다\")",
+    "     weight = np.clip((np.arange(len(values)) - at + 1) / ramp_rows, 0, 1)"
+  ],
+  "final_artifacts_match": {
+    "probability_A.json": true,
+    "guard_A.json": true,
+    "probability_B.json": true,
+    "guard_B.json": true
+  },
+  "final_artifact_sha256": {
+    "probability_A.json": "1a8100e78046393d9292fc7c305b5ec57b46c4e2c73b03abeb596052a8705f8a",
+    "guard_A.json": "c938707f1dd16e7c239b8053e7f032d8fac828d6c753de2b898ba9130a594f10",
+    "probability_B.json": "7fde4cd1bdfa74e78e2d3f07c5dbd9c27619e19b2e94ceb8fab786c27abcaae8",
+    "guard_B.json": "b64ac3b30bc697034104287964f3154e88c8a50749ccdec04f6d4f8744fd6969"
+  },
+  "compare_passed": true,
+  "artifacts_identical_to_initial_judge_copy": {
+    "probability_A.json": true,
+    "guard_A.json": true,
+    "probability_B.json": true,
+    "guard_B.json": true
+  }
+}

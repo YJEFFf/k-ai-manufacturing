@@ -1,8 +1,8 @@
 {
   "package": "press_selection",
   "files": {
-    "same_feature_alternatives.csv": "de329f5f5a3fdcadafc17a485f58391bf0e0be91a0d652ae17513587ac8973b8",
-    "combination_rules.csv": "301b48cfa98fcb6717e4f3a71b4f3e73467e2aae9f1824206139abb80cf3b55d",
+    "same_feature_alternatives.csv": "3b5862ad1fe24d007c7c09d79547d30a11eef6c21e2674db231b39ff4a69b543",
+    "combination_rules.csv": "5195a4cb5142f5c27c74be498fa3c3bb1f1246a386b3bae720140f98f9aa6c23",
     "fp_mitigation_v2.csv": "b3b37b897a35545e2544ea55036e87bb7c69dedb9dabbdfe856a93b734aaad73",
     "fp_mitigation_injection_v2.csv": "8be37e61e482962c95a5936dc9a1010f330b936ff1f4ab0dc95c78d3a2ee4609",
     "search_ledger.csv": "15d53171217a9ec400423feea535d11daef08b7b74a5500c55e7a4d2c9f3cdc6",
@@ -13,7 +13,7 @@
     "unified_comparison.csv": "03bfc81adde25e20b38bc14c68f13703953b64c4b0381c363ac96abcf1e7f467",
     "unified_comparison.md": "36ead1390fba53ac1d4963ca9fea3ea7222611ea0b57fa9f8d4171ed4c5f6804",
     "rule_transfer_injection_v2.csv": "f9cd350b775bbf5ca1293a8f5d8e9d937f8a62fbee809f9d61e341d1e6072d63",
-    "manifest.json": "3e7d3b4d5ecadb894ea0adb88e1a4e3793ffc55a35a2c84c507a8f0f0f1d6ace"
+    "manifest.json": "801645b8aa4aa3128446cfdf102d70cb011ed432ffa2fff61c878f9b96438aa2"
   },
   "images": [],
   "local": {},

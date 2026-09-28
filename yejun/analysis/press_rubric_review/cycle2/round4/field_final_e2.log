@@ -1,0 +1,45 @@
+대회 자료 재현: [{'split': 'A', 'tp': 556, 'fp': 0, 'fn': 44, 'f1': 0.9619377162629758}, {'split': 'B', 'tp': 569, 'fp': 3, 'fn': 31, 'f1': 0.9709897610921502}]
+사인 점수 102.7s
+local_normal_reference 3
+local_normal_reference 20
+local_normal_reference 100
+unseen_cooler 3
+unseen_cooler 20
+unseen_cooler 100
+             source                   mode  cooler                model       f1  normal_alarm_rate   recall    auroc
+ press_external(기존) local_normal_reference       3 hydraulic_efficiency 0.042813           0.000000 0.021875 0.968848
+ press_external(기존) local_normal_reference       3        marginal_maxz 0.048780           0.000000 0.025000 0.770117
+ press_external(기존) local_normal_reference       3     normal_signature 0.516129           0.062500 0.350000 0.944238
+press_supplement E2 local_normal_reference       3               v2_3ch 0.082596           0.156250 0.043750 0.425586
+press_supplement E2 local_normal_reference       3               v2_4ch 0.082596           0.156250 0.043750 0.425586
+press_supplement E2 local_normal_reference       3         v2_4ch_phase 0.100592           0.031250 0.053125 0.450586
+ press_external(기존) local_normal_reference      20 hydraulic_efficiency 0.998440           0.031250 1.000000 1.000000
+ press_external(기존) local_normal_reference      20        marginal_maxz 0.996885           0.062500 1.000000 1.000000
+ press_external(기존) local_normal_reference      20     normal_signature 0.998440           0.031250 1.000000 1.000000
+press_supplement E2 local_normal_reference      20               v2_3ch 0.036697           0.031250 0.018750 0.446875
+press_supplement E2 local_normal_reference      20               v2_4ch 0.030675           0.031250 0.015625 0.445898
+press_supplement E2 local_normal_reference      20         v2_4ch_phase 0.036697           0.031250 0.018750 0.448145
+ press_external(기존) local_normal_reference     100 hydraulic_efficiency 1.000000           0.000000 1.000000 1.000000
+ press_external(기존) local_normal_reference     100        marginal_maxz 1.000000           0.000000 1.000000 1.000000
+ press_external(기존) local_normal_reference     100     normal_signature 1.000000           0.000000 1.000000 1.000000
+press_supplement E2 local_normal_reference     100               v2_3ch 0.048780           0.000000 0.025000 0.551057
+press_supplement E2 local_normal_reference     100               v2_4ch 0.030769           0.000000 0.015625 0.517693
+press_supplement E2 local_normal_reference     100         v2_4ch_phase 0.036810           0.000000 0.018750 0.497151
+ press_external(기존)          unseen_cooler       3 hydraulic_efficiency 0.822622           0.862500 1.000000 0.962422
+ press_external(기존)          unseen_cooler       3        marginal_maxz 0.800000           1.000000 1.000000 0.961836
+ press_external(기존)          unseen_cooler       3     normal_signature 0.800000           1.000000 1.000000 0.920703
+press_supplement E2          unseen_cooler       3               v2_3ch 0.702703           1.000000 0.812500 0.016572
+press_supplement E2          unseen_cooler       3               v2_4ch 0.335079           0.981250 0.300000 0.017451
+press_supplement E2          unseen_cooler       3         v2_4ch_phase 0.788804           0.975000 0.968750 0.856592
+ press_external(기존)          unseen_cooler      20 hydraulic_efficiency 0.000000           0.000000 0.000000 0.927168
+ press_external(기존)          unseen_cooler      20        marginal_maxz 0.000000           0.000000 0.000000 0.791289
+ press_external(기존)          unseen_cooler      20     normal_signature 0.670807           0.006250 0.506250 0.991387
+press_supplement E2          unseen_cooler      20               v2_3ch 0.136752           0.043750 0.075000 0.551777
+press_supplement E2          unseen_cooler      20               v2_4ch 0.142045           0.043750 0.078125 0.551777
+press_supplement E2          unseen_cooler      20         v2_4ch_phase 0.142045           0.043750 0.078125 0.551777
+ press_external(기존)          unseen_cooler     100 hydraulic_efficiency 0.000000           0.000000 0.000000 0.986372
+ press_external(기존)          unseen_cooler     100        marginal_maxz 0.000000           0.000000 0.000000 0.663304
+ press_external(기존)          unseen_cooler     100     normal_signature 0.843215           0.704142 1.000000 0.994027
+press_supplement E2          unseen_cooler     100               v2_3ch 0.030581           0.011834 0.015625 0.507785
+press_supplement E2          unseen_cooler     100               v2_4ch 0.059347           0.041420 0.031250 0.507785
+press_supplement E2          unseen_cooler     100         v2_4ch_phase 0.059347           0.041420 0.031250 0.507785

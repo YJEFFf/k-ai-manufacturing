@@ -13,6 +13,13 @@ sys.path.insert(0, str(HERE.parent))
 import package_contract as pc  # noqa: E402
 
 
+@pytest.fixture(autouse=True)
+def require_generated_inputs():
+    lacking = pc.missing_prerequisites()
+    if lacking:
+        pytest.skip(pc.FIRST_RUN_HINT + ": " + ", ".join(lacking))
+
+
 def test_committed_run_passes():
     assert pc.verify(HERE) == []
 

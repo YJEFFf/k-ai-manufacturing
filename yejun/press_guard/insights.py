@@ -20,7 +20,7 @@ import pandas as pd
 from scipy import stats
 from sklearn.metrics import roc_auc_score
 
-from model import GuardModel, D, sine_score, layout, ALERT_UNIT_ROWS
+from model import GuardModel, D, sine_score, layout, ALERT_UNIT_ROWS, LOAD_STATE_RMS, STATE_MIN_ROWS
 import runtime
 from press.scores import ExpTail, window_index
 from press.calibrate import conformal_p, segment_max
@@ -362,7 +362,7 @@ def _lr_variant(cal_scores, test_scores, abn_scores, abn_records, folds, kind):
 
 
 def probability_evaluation(normal, abnormal, models):
-    from probability import ProbabilityCalibrator, posterior, expected_calibration_error, alert_evidence_bound, sellke_bayes_factor
+    from probability import ProbabilityCalibrator, posterior, expected_calibration_error, min_rank_nominal_likelihood_ratio, sellke_bayes_factor
     from sklearn.metrics import brier_score_loss, log_loss, average_precision_score
     rows, rel, conv = [], [], []
     for sid, model in models.items():
@@ -396,7 +396,7 @@ def probability_evaluation(normal, abnormal, models):
                                  log_loss=log_loss(yr, q), ece=expected_calibration_error(yr, q), auroc=roc_auc_score(yr, q) if name != "prevalence_only" else .5,
                                  ap=average_precision_score(yr, q) if name != "prevalence_only" else pi_rec))
             if cv == "21fold":
-                # 비교: 상한(121)이 없는 등방 회귀와 Platt. 상한은 증거력 제한이라 최상위 구간 확률을 낮춰 ECE를 키운다(평가관 02 M1의 Platt 값과 차이의 이유).
+                # 비교: 표시 상한(121)이 없는 등방 회귀와 Platt. 표시 정책으로 최상위 구간 확률을 낮추면 ECE가 커질 수 있다.
                 for kind in ("isotonic_uncapped", "platt_logistic"):
                     vn, va = _lr_variant(cal_scores, st, sa, ra, folds, kind)
                     q = np.clip(posterior(np.r_[vn, va], pi_rows), 1e-9, 1 - 1e-9)
@@ -431,9 +431,11 @@ def probability_evaluation(normal, abnormal, models):
                              false_alarm_rows=int(len(alarm_lr_n)), false_alarm_max_lr=float(alarm_lr_n.max()) if len(alarm_lr_n) else np.nan,
                              false_alarm_max_p=float(posterior(alarm_lr_n.max(), pi)) if len(alarm_lr_n) else np.nan,
                              lr_cap=deploy.lr_cap, p_at_cap=float(posterior(deploy.lr_cap, pi)),
-                             label_free_alert_lr=alert_evidence_bound(len(model.cal), det), label_free_alert_p=float(posterior(alert_evidence_bound(len(model.cal), det), pi)),
+                             label_free_nominal_far=1 / (len(model.cal) + 1),
+                             label_free_min_rank_nominal_lr=min_rank_nominal_likelihood_ratio(len(model.cal), det),
+                             label_free_min_rank_nominal_p=float(posterior(min_rank_nominal_likelihood_ratio(len(model.cal), det), pi)),
                              sbb_reference_lr=sbb, sbb_reference_p=float(posterior(sbb, pi)),
-                             sbb_note="참고값: 연속 p값을 정확히 관측하고 대립에서 p가 Beta(ξ,1) 족일 때의 회의적 환산. 알림은 p≤1/121 사건이라 상한이 아니다(알림 우도비 상한은 label_free_alert_lr)"))
+                             sbb_note="참고값: 연속 p값을 정확히 관측하고 대립에서 p가 Beta(ξ,1) 족일 때의 회의적 환산. 알림은 p≤1/121 사건이라 상한이 아니다. label_free_min_rank_nominal_lr는 FAR=1/121 시나리오이며 LR의 보편적 상한이 아니다"))
     return pd.DataFrame(rows), pd.DataFrame(rel), pd.DataFrame(conv)
 
 
@@ -547,8 +549,9 @@ INJECTED = (("cur_noise", .1), ("cur_noise", .2), ("cur_offset", .4), ("vib_nois
 
 
 def queue_rankings(normal, abnormal, models):
-    """혼합 대기열(정상 평가 + 이상)의 순위와, 주입 고장 대 정상 오경보 순위를 정렬 키 후보마다 센다. 키 선택에는 이상 라벨을 쓰지 않는다."""
-    from model import PRIORITY_KEYS, priority_ranks, cases as make_cases
+    """건·사건 단위 주입 고장 대 정상 오경보 순위. 사건은 각 입력의 원래 시간 순서에서 먼저 묶는다.
+    정렬 키는 고정된 사후 운영 규칙이다. 여기서 만든 인공 신호를 실제 고장 사건으로 해석하지 않는다."""
+    from model import PRIORITY_KEYS, priority_ranks, cases as make_cases, incidents
     from recalibrate import inject, unit_layout
     mixed_rows, inj_rows = [], []
     for sid, model in models.items():
@@ -558,6 +561,7 @@ def queue_rankings(normal, abnormal, models):
         mask = (size >= 30) & (in_unit >= 10)
         for alpha in ALPHAS:
             pn, pa = model.predict(test, alpha), model.predict(abnormal, alpha)
+            normal_incidents = incidents(make_cases(pn), pn)
             shifted = pa.copy(); shifted["record_id"] += int(pn.record_id.max()) + 1; shifted["row_id"] += len(pn)
             q = make_cases(pd.concat([pn, shifted], ignore_index=True))
             if len(q):
@@ -577,14 +581,36 @@ def queue_rankings(normal, abnormal, models):
                 if not len(q2):
                     continue
                 injected = q2.record_id > pn.record_id.max()
+                # 정상·주입 입력을 이어 붙이면 사건 번호가 충돌하고 시간도 역행한다.
+                # 각 입력 안에서 묶은 사건을 합쳐 순위만 비교한다. 주입 기록을 포함하는 사건만 센다.
+                injected_records = set(pi.loc[mask, "record_id"].astype(int))
+                all_injected_incidents = incidents(make_cases(pi), pi)
+                if len(all_injected_incidents):
+                    member = all_injected_incidents.records.map(
+                        lambda value: bool(set(map(int, str(value).split("+"))) & injected_records))
+                    injected_incidents = all_injected_incidents[member]
+                else:
+                    injected_incidents = all_injected_incidents
+                incident_queue = pd.concat([normal_incidents.assign(source="normal"),
+                                            injected_incidents.assign(source="injected")], ignore_index=True)
+                is_injected_incident = incident_queue.source.eq("injected")
                 for key in PRIORITY_KEYS:
                     rank = priority_ranks(q2, key)
                     best_fa = rank[~injected].min() if (~injected).any() else np.inf
+                    incident_rank = priority_ranks(incident_queue, key)
+                    best_fa_incident = incident_rank[~is_injected_incident].min() if (~is_injected_incident).any() else np.inf
                     inj_rows.append(dict(split=sid, alpha=alpha, family=fam, level_value=lv, key=key, injected_cases=int(injected.sum()),
                                          false_alarm_cases=int((~injected).sum()),
-                                         injected_below_best_false_alarm=int((rank[injected] > best_fa).sum()) if np.isfinite(best_fa) else 0))
+                                         injected_below_best_false_alarm=int((rank[injected] > best_fa).sum()) if np.isfinite(best_fa) else 0,
+                                         injected_incidents=int(is_injected_incident.sum()),
+                                         false_alarm_incidents=int((~is_injected_incident).sum()),
+                                         injected_incidents_below_best_false_alarm=int((incident_rank[is_injected_incident] > best_fa_incident).sum())
+                                         if np.isfinite(best_fa_incident) else 0,
+                                         incident_note="각 입력의 시간 순서에서 사건을 묶은 뒤 순위 비교. 주입 기록을 포함한 사건 기준(인공 신호)"))
     inj = pd.DataFrame(inj_rows)
     summary = inj.groupby("key").injected_below_best_false_alarm.sum().rename("total_injected_below_best_false_alarm").reset_index()
+    summary = summary.merge(inj.groupby("key").injected_incidents_below_best_false_alarm.sum().rename(
+        "total_injected_incidents_below_best_false_alarm"), on="key")
     summary["key_terms"] = summary.key.map(lambda k: len(PRIORITY_KEYS[k]))
     return pd.DataFrame(mixed_rows), inj, summary.sort_values(["total_injected_below_best_false_alarm", "key_terms"]).reset_index(drop=True)
 
@@ -628,7 +654,7 @@ def label_free_alert_probability(models, e1_summary, observed):
     """P(이상 | 알림) = π·TPR / (π·TPR + (1−π)·FAR). 라벨 적합 없이 정상 보정과 주입 탐지율만 쓴다.
 
     FAR: 명목(l/(n+1)), 보정 조건부 95%(Beta(l, n+1−l)), 관측을 더한 사후 95%. TPR: E1 2초 탐지율(계단형, 10행째 시작),
-    대회 21/21의 95% 하한. 알림 한 건의 우도비는 (n+1)·TPR을 넘지 못한다(명목 FAR에서 같아진다)."""
+    대회 21/21의 95% 하한. LR=TPR/FAR는 각 가정의 환산값이다. 실제 FAR의 하한이 없으므로 보편적 LR 상한을 뜻하지 않는다."""
     e1 = pd.read_csv(e1_summary)
     e1 = e1[e1.model.eq("guard_v2") & e1["shape"].eq("step") & e1.t0.eq(10)]
     rows = []
@@ -646,9 +672,11 @@ def label_free_alert_probability(models, e1_summary, observed):
                 for tb, tpr in tprs.items():
                     for pi in (1e-4, 1e-3, 1e-2):
                         rows.append(dict(split=sid, alpha=alpha, far_basis=fb, far=far, tpr_basis=tb, tpr=tpr, prior=pi, likelihood_ratio=tpr / far,
-                                         lr_bound=(n + 1) * tpr, p_anomaly_given_alert=pi * tpr / (pi * tpr + (1 - pi) * far)))
+                                         nominal_far=fars["nominal"], nominal_lr_reference=tpr / fars["nominal"],
+                                         min_rank_nominal_lr_reference=(n + 1) * tpr,
+                                         p_anomaly_given_alert=pi * tpr / (pi * tpr + (1 - pi) * far)))
     out = pd.DataFrame(rows)
-    out["note"] = "π는 알림 단위당 이상 비율 가정. 교환가능성(같은 운전 조건의 정상) 가정. 주입은 인공 신호라 실제 고장 탐지율이 아니다"
+    out["note"] = "π는 알림 단위당 이상 비율 가정. 교환가능성(같은 운전 조건의 정상) 가정. 주입은 실제 고장 탐지율이 아니다. nominal_lr_reference는 해당 α의 FAR=l/(n+1), min_rank_nominal_lr_reference는 최소 순위 FAR=1/(n+1) 시나리오이며 보편적 LR 상한이 아니다"
     return out
 
 
@@ -665,7 +693,9 @@ def monitor_gain(normal, models):
             g["reference_median"], g["band_low"], g["band_high"] = ref.median, ref.band_low, ref.band_high
             rows.append(g)
     out = pd.concat(rows, ignore_index=True)
-    out["note"] = "감시 창 60단위. 전류 전체에 배율 k(analysis/press_dayshift와 같은 모의). A 평가 구간은 가장 조용한 시간대라 알림이 늘지 않는다"
+    out["note"] = ("감시 창 60단위. 전류 전체 배율 k의 인공 모의. 변경 기록 있음 열은 매 창 시작에 변경 기록을 둔 반사실 조건이다. "
+                   "incident_* 알림은 사건 시작+격상이며 alerted_units는 경보 알림 단위 수다. 조치: 관측 지속/운전 변경 재보정/"
+                   "전류 수준 이동 점검/열화 의심 점검. A 평가 구간은 가장 조용한 시간대라 알림이 늘지 않는다")
     return out
 
 
@@ -689,23 +719,43 @@ def expected_effect(levels, injection):
     최솟값(비관), 대회 21/21의 95% 하한(중간), 관측 21/21(낙관)이다. 절감액을 사실로 말하지 않는다."""
     lv = levels[levels.model.eq("frozen_B") & levels.alpha.eq(.01)].set_index("level")
     inj = injection[injection.split.eq("B") & injection.alpha.eq(.01) & injection.family.ne("none")]
-    # 2단계 교대 알림의 비사후 추정: 1단계 명목 × 독립 폴드(동결 모델과 보정값이 다른 시간순 폴드) α 5%의 2단계/1단계 비.
-    # 2단계 규칙은 대회 오경보를 본 뒤 정해 "관측" 행의 2단계 0건은 표본 내 값이다(post_hoc).
-    ind = levels[levels.independent & levels.model.str.startswith("rolling") & levels.alpha.eq(.05)].groupby("level").normal_alerted_segments.sum()
-    k2, k1 = int(ind.get(2, 0)), int(ind.get(1, 0))
-    ratio, ratio_hi = (k2 / k1, float(stats.beta.ppf(.95, k2 + 1, k1 - k2))) if k1 else (np.nan, np.nan)
     nominal = lv.loc[1, "nominal_alerts_per_8h_elapsed"]
-    alerts = {"명목": (nominal, np.nan),
-              "비사후 추정(독립 폴드 2/1단계 비)": (nominal, nominal * ratio),
-              "비사후 추정 95% 상한": (nominal, nominal * ratio_hi),
-              "관측": (lv.loc[1, "alerts_per_8h_elapsed"], lv.loc[2, "alerts_per_8h_elapsed"]),
-              "관측 95% 상한": (lv.loc[1, "upper95_alerts_per_8h_elapsed"], lv.loc[2, "upper95_alerts_per_8h_elapsed"])}
-    basis = {"비사후 추정(독립 폴드 2/1단계 비)": f"독립 시간순 폴드 α 5%: 2단계 {k2} / 1단계 {k1} = {ratio:.3f}",
-             "비사후 추정 95% 상한": f"같은 비의 단측 95% 상한 {ratio_hi:.3f}"}
+    # 규칙은 B 평가 구간 420~599의 오경보를 본 뒤 정했다. 보정값이 다르다는 사실만으로
+    # 선택 자료와 분리된 검증이 되지 않는다. 주추정은 평가가 420보다 앞인 두 폴드만 사용한다.
+    # α5%에서 잰 조건부 비를 α1% 명목 업무량으로 옮기는 가정도 출처 열에 남긴다.
+    alerts = [("명목", nominal, np.nan, dict(estimate_role="reference", evaluation_overlaps_rule_selection=False,
+              rule_selected_post_hoc=False, level2_basis="2단계 명목값은 없다"))]
+    rolling = levels[levels.independent & levels.model.str.startswith("rolling") & levels.alpha.eq(.05)]
+    nonoverlap = rolling[rolling.normal_window.isin(["300~359", "360~419"])]
+    sources = [("비중첩 폴드 추정", nonoverlap, "primary", False, .05),
+               ("민감도(겹치는 폴드 포함)", rolling, "sensitivity", True, .05),
+               ("민감도(동결 B α3%)", levels[levels.model.eq("frozen_B") & levels.alpha.eq(.03)], "sensitivity", True, .03),
+               ("민감도(동결 B α5%)", levels[levels.model.eq("frozen_B") & levels.alpha.eq(.05)], "sensitivity", True, .05)]
+    for name, source, role, overlap, alpha in sources:
+        count = source.groupby("level").normal_alerted_segments.sum()
+        k2, k1 = int(count.get(2, 0)), int(count.get(1, 0))
+        ratio = k2 / k1 if k1 else np.nan
+        ratio_hi = (float(stats.beta.ppf(.95, k2 + 1, k1 - k2)) if k2 < k1 else 1.0) if k1 else np.nan
+        windows = "+".join(source.normal_window.drop_duplicates())
+        overlap_note = ("540~599 폴드는 보정 420~539와 평가 540~599가 B 평가와 겹치며 경보 기록 570도 포함. "
+                        if name == "민감도(겹치는 폴드 포함)" else "")
+        basis = (f"평가 {windows}, α {alpha:.0%}: 2단계 {k2}/1단계 {k1}={ratio:.3f}. "
+                 f"조건부 비를 B α1% 명목 알림에 적용하는 가정. {overlap_note}규칙 자체는 사후 선택; 같은 날 자료")
+        meta = dict(estimate_role=role, evaluation_overlaps_rule_selection=overlap, rule_selected_post_hoc=True,
+                    ratio_numerator=k2, ratio_denominator=k1, ratio_level2_given_level1=ratio,
+                    ratio_upper95=ratio_hi, ratio_source_alpha=alpha, ratio_source_windows=windows, level2_basis=basis)
+        point_name = name + "(주추정)" if role == "primary" else name
+        alerts.append((point_name, nominal, nominal * ratio, meta))
+        alerts.append((name + " 95% 상한", nominal, nominal * ratio_hi,
+                       {**meta, "level2_basis": basis + f". 비의 단측 이항 95% 상한 {ratio_hi:.3f}(시간 의존성 미반영)"}))
+    observed_meta = dict(estimate_role="reference", evaluation_overlaps_rule_selection=True,
+                         rule_selected_post_hoc=True, level2_basis="2단계 규칙을 정하기 전에 본 대회 자료(표본 내)")
+    alerts += [("관측", lv.loc[1, "alerts_per_8h_elapsed"], lv.loc[2, "alerts_per_8h_elapsed"], observed_meta),
+               ("관측 95% 상한", lv.loc[1, "upper95_alerts_per_8h_elapsed"], lv.loc[2, "upper95_alerts_per_8h_elapsed"], observed_meta)]
     detect = (float(inj.level2_detect_2s.min()), .05 ** (1 / 21), 1.0)
     detect_basis = ("E1식 주입 2단계 2초 탐지율 최솟값(B α1%)", "대회 21/21의 95% 하한", "대회 21/21 관측")
     rows = []
-    for name, (a1, a2) in alerts.items():
+    for name, a1, a2, meta in alerts:
         for policy in ("전건 확인", "2단계만 출동"):
             if policy == "2단계만 출동" and not np.isfinite(a2):
                 continue            # 2단계는 명목값이 없다
@@ -717,8 +767,7 @@ def expected_effect(levels, injection):
                 inspect_h = hours_per_shift * A["shifts_per_day"] * A["days_per_year"]
                 downtime = DOWNTIME_DAYS[0] if k == 0 else DOWNTIME_DAYS[1]
                 avoided_h = A["failures_per_year"] * detect[k] * A["avoided_fraction"] * downtime * A["shifts_per_day"] * 8
-                rows.append(dict(alert_scenario=name, post_hoc=name.startswith("관측") and policy == "2단계만 출동",
-                                 level2_basis=basis.get(name, "2단계 규칙을 정하기 전에 본 대회 자료(표본 내)" if name.startswith("관측") else ""),
+                rows.append(dict(alert_scenario=name, post_hoc=meta["rule_selected_post_hoc"], **meta,
                                  policy=policy, case=case, level1_per_8h=a1, level2_per_8h=a2,
                                  assume_minutes_level1=m1 if policy == "전건 확인" else 0, assume_minutes_level2=m2,
                                  assume_shifts_per_day=A["shifts_per_day"], assume_days_per_year=A["days_per_year"],
@@ -771,13 +820,61 @@ def _independent_evaluations(normal, models, rolling):
         frame = normal[(seg_all >= lo) & (seg_all < hi)]
         q = D.quantize(D.inputs_only(frame), "matched"); seg = layout(q)[1]
         feat = _record_features(q, seg, m).set_index("record")
+        # 진폭 분석은 기존 matched 특징을 유지한다. 운전 상태는 원 전류의 평균 제거
+        # RMS(ddof=0)를 사용해 press_evidence·실시간 모델의 공통 경계와 맞춘다.
+        raw = _record_features(D.inputs_only(frame), seg, m).set_index("record")
         for alpha in ALPHAS:
             fa = m.predict(frame, alpha).groupby("record_id").alarm.max()
             for r, v in fa.items():
                 f = feat.loc[r]
+                rms = float(raw.loc[r].current_amp / np.sqrt(2))
+                state = "short" if int(f.length) < STATE_MIN_ROWS else ("load" if rms >= LOAD_STATE_RMS else "low")
                 rows.append(dict(model=name, alpha=alpha, absolute_record=int(lo + r), length=int(f.length), current_amp=float(f.current_amp),
-                                 vib_sd=float(f.vib_sd), false_alarm=int(v)))
+                                 record_current_rms=rms, operating_state=state, vib_sd=float(f.vib_sd), false_alarm=int(v)))
     return pd.DataFrame(rows)
+
+
+def _cmh_statistics(tables):
+    """2×2 층별 표의 MH 공통 OR와 연속성 보정 CMH. 새 통계 패키지 의존성 없이 계산한다.
+    배열의 행은 노출 유무, 열은 경보 유무다. 두 주변 합이 모두 양수인 정보 있는 층만 받는다.
+    statsmodels StratifiedTable.test_null_odds(correction=True)와 같은 0.5 보정이다."""
+    if not len(tables):
+        return np.nan, np.nan, np.nan
+    t = np.asarray(tables, dtype=float)
+    a, b, c, d = t[:, 0, 0], t[:, 0, 1], t[:, 1, 0], t[:, 1, 1]
+    n = t.sum(axis=(1, 2))
+    delta = np.sum(a - (a + b) * (a + c) / n)
+    variance = np.sum((a + b) * (a + c) * (b + d) * (c + d) / (n ** 2 * (n - 1)))
+    statistic = (abs(delta) - .5) ** 2 / variance if variance > 0 else np.nan
+    numerator, denominator = np.sum(a * d / n), np.sum(b * c / n)
+    odds = numerator / denominator if denominator > 0 else (np.inf if numerator > 0 else np.nan)
+    return float(odds), float(statistic), float(stats.chi2.sf(statistic, 1))
+
+
+def _block_amplitude_stats(frame, exposure, permutations=20000, seed=3):
+    """60구간 블록 안 노출 순열. 블록별 노출/경보 주변 합을 고정한다.
+    적합 간 겹침과 블록 안 시간 의존성은 제거하지 못하므로 p값은 사후 기술 통계다."""
+    x = np.asarray(exposure, bool)
+    y = frame.false_alarm.to_numpy(bool)
+    labels = frame.absolute_record.to_numpy() // 60
+    blocks = [np.flatnonzero(labels == label) for label in np.unique(labels)]
+    tables = []
+    rng = np.random.default_rng(seed)
+    permutation_counts = np.zeros(permutations, dtype=int)
+    for ix in blocks:
+        a = int((x[ix] & y[ix]).sum()); b = int((x[ix] & ~y[ix]).sum())
+        c = int((~x[ix] & y[ix]).sum()); d = int((~x[ix] & ~y[ix]).sum())
+        table = np.array([[a, b], [c, d]])
+        if table.sum(axis=0).min() > 0 and table.sum(axis=1).min() > 0:
+            tables.append(table)
+        # 매 행마다 독립 순열. 한 블록씩 처리해 20,000×전체 표를 보관하지 않는다.
+        shuffled = rng.permuted(np.broadcast_to(x[ix], (permutations, len(ix))), axis=1)
+        permutation_counts += shuffled[:, y[ix]].sum(axis=1)
+    odds, statistic, p = _cmh_statistics(tables)
+    observed = int((x & y).sum())
+    return dict(mh_pooled_or=odds, cmh_statistic=statistic, cmh_p=p, cmh_continuity_correction=.5,
+                cmh_informative_blocks=len(tables), permutation_p_greater=float((1 + (permutation_counts >= observed).sum()) / (permutations + 1)),
+                permutation_repeats=permutations, permutation_seed=seed)
 
 
 def fp_intensity(normal, models, rolling):
@@ -785,7 +882,7 @@ def fp_intensity(normal, models, rolling):
     사분위 경계는 α 1% 평가 단위(길이 ≥17)의 분포다. 진동 SD 사분위는 크기 성분의 발화 경로와 겹친다."""
     ev = _independent_evaluations(normal, models, rolling)
     base = ev[ev.alpha.eq(.01)]
-    amp_q = base[base.length >= 17].current_amp.quantile([.25, .5, .75]).to_numpy()
+    amp_q = base[base.length >= STATE_MIN_ROWS].current_amp.quantile([.25, .5, .75]).to_numpy()
     vsd_q = base.vib_sd.dropna().quantile([.25, .5, .75]).to_numpy()
     split_b = D.split_normal(normal, D.segments(normal), "B")["train"]
     qb = D.quantize(D.inputs_only(split_b), "matched")
@@ -793,12 +890,12 @@ def fp_intensity(normal, models, rolling):
     b_q75 = float(ftr[ftr.length >= 17].current_amp.quantile(.75))
     rows = []
     for alpha in ALPHAS:
-        g = ev[ev.alpha.eq(alpha)].copy()
+        g = ev[ev.alpha.eq(alpha)].copy().reset_index(drop=True)
         g["amp_quartile"] = np.where(g.length < 17, "짧은 기록(<17)", pd.cut(g.current_amp, [-np.inf, *amp_q, np.inf], labels=["Q1", "Q2", "Q3", "Q4"]).astype(str))
         g["vib_sd_quartile"] = pd.cut(g.vib_sd, [-np.inf, *vsd_q, np.inf], labels=["Q1", "Q2", "Q3", "Q4"]).astype(str)
         g["block"] = (g.absolute_record // 60 * 60).astype(str) + "~" + (g.absolute_record // 60 * 60 + 59).astype(str)
         tot_k, tot_n = int(g.false_alarm.sum()), len(g)
-        for cond in ("amp_quartile", "vib_sd_quartile", "block"):
+        for cond in ("amp_quartile", "vib_sd_quartile", "block", "operating_state"):
             for v, gg in g.groupby(cond):
                 k, n = int(gg.false_alarm.sum()), len(gg)
                 lo, hi = clopper(k, n)
@@ -806,8 +903,13 @@ def fp_intensity(normal, models, rolling):
                 rows.append(dict(unit="평가 단위(적합×구간)", alpha=alpha, condition=cond, value=v, false_alarms=k, denominator=n, rate=k / n,
                                  ci_low=lo, ci_high=hi, lift=(k / n) / (tot_k / tot_n) if tot_k else np.nan, fisher_p_greater=float(pf),
                                  small_sample=tot_k < 5,
-                                 note="크기 성분 경보의 발화 경로와 겹친다" if cond == "vib_sd_quartile" else ""))
-        u = g.groupby("absolute_record").agg(fa=("false_alarm", "max"), amp=("current_amp", "first"), length=("length", "first"))
+                                 comparison_false_alarms=tot_k - k, comparison_denominator=tot_n - n,
+                                 state_rms_threshold=LOAD_STATE_RMS if cond == "operating_state" else np.nan,
+                                 state_min_rows=STATE_MIN_ROWS if cond == "operating_state" else np.nan,
+                                 note=("크기 성분 경보의 발화 경로와 겹친다" if cond == "vib_sd_quartile" else
+                                       "원 전류 RMS(ddof0), load≥91.9/low<91.9/short<17행. 실제 부하 관측값이 아닌 신호 대리변수" if cond == "operating_state" else "")))
+        u = g.groupby("absolute_record").agg(fa=("false_alarm", "max"), amp=("current_amp", "first"), length=("length", "first"),
+                                             state=("operating_state", "first"))
         for lab, cut in (("전류 진폭 ≥ 평가 분포 q75", amp_q[2]), ("전류 진폭 ≥ B 정상 학습 q75", b_q75)):
             hi_ = (u.length >= 17) & (u.amp >= cut)
             k1, n1 = int(u[hi_].fa.sum()), int(hi_.sum()); k0, n0 = int(u[~hi_].fa.sum()), int((~hi_).sum())
@@ -815,9 +917,36 @@ def fp_intensity(normal, models, rolling):
             pf = stats.fisher_exact([[k1, n1 - k1], [k0, n0 - k0]], alternative="greater").pvalue
             rows.append(dict(unit="고유 구간(300~599, 한 적합이라도 경보)", alpha=alpha, condition="amp_high", value=f"{lab} ({cut:.1f})", false_alarms=k1,
                              denominator=n1, rate=k1 / n1, ci_low=lo1, ci_high=hi1, lift=(k1 / n1) / ((k1 + k0) / (n1 + n0)) if k1 + k0 else np.nan,
-                             fisher_p_greater=float(pf), small_sample=(k1 + k0) < 5, note=f"나머지 {k0}/{n0}"))
+                             fisher_p_greater=float(pf), small_sample=(k1 + k0) < 5, note=f"나머지 {k0}/{n0}",
+                             comparison_false_alarms=k0, comparison_denominator=n0, exposed_all_load=bool(u.loc[hi_, "state"].eq("load").all())))
+        for label, cut in (("B 정상 학습 q75", b_q75), ("평가 분포 q75", amp_q[2])):
+            exposed = (g.length >= STATE_MIN_ROWS) & (g.current_amp >= cut)
+            k1, n1 = int(g.loc[exposed, "false_alarm"].sum()), int(exposed.sum())
+            k0, n0 = tot_k - k1, tot_n - n1
+            lo1, hi1 = clopper(k1, n1)
+            rows.append(dict(unit="평가 단위(적합×구간)", alpha=alpha, condition="amp_high_block_stratified", value=label,
+                             threshold=cut, false_alarms=k1, denominator=n1, rate=k1 / n1, ci_low=lo1, ci_high=hi1,
+                             comparison_false_alarms=k0, comparison_denominator=n0,
+                             lift=(k1 / n1) / (tot_k / tot_n) if tot_k else np.nan, small_sample=tot_k < 5,
+                             **_block_amplitude_stats(g, exposed),
+                             note="60구간 블록 층화. CMH는 양측·연속성 보정, 블록 안 순열은 단측(20,000회). 적합 겹침·시간 의존성은 남아 있다"))
+        load = g[g.operating_state.eq("load")]
+        median = float(load.current_amp.median())
+        above = load.current_amp >= median
+        k1, n1 = int(load.loc[above, "false_alarm"].sum()), int(above.sum())
+        k0, n0 = int(load.loc[~above, "false_alarm"].sum()), int((~above).sum())
+        lo1, hi1 = clopper(k1, n1)
+        rho, p_rho = stats.spearmanr(load.current_amp, load.false_alarm)
+        rows.append(dict(unit="평가 단위(부하 상태)", alpha=alpha, condition="amp_within_load", value="부하 상태 안 전류 진폭 ≥ 중앙",
+                         threshold=median, false_alarms=k1, denominator=n1, rate=k1 / n1, ci_low=lo1, ci_high=hi1,
+                         comparison_false_alarms=k0, comparison_denominator=n0,
+                         lift=(k1 / n1) / ((k1 + k0) / (n1 + n0)) if k1 + k0 else np.nan,
+                         fisher_p_greater=float(stats.fisher_exact([[k1, n1 - k1], [k0, n0 - k0]], alternative="greater").pvalue),
+                         spearman_amp=float(rho), spearman_p=float(p_rho), small_sample=k1 + k0 < 5,
+                         note="부하 상태 안 강도 효과. Fisher는 중앙 이분화, Spearman은 연속 진폭. 동일 날의 의존 평가 단위"))
     out = pd.DataFrame(rows)
     out["post_hoc"] = True
+    out["statistical_scope"] = "같은 날·적합 간 구간 겹침. 독립 표본 가정 p값/구간은 기술적 비교이며 현장 검증이나 인과 효과가 아니다"
     return out
 
 
@@ -825,10 +954,49 @@ def fp_intensity(normal, models, rolling):
 FN_FAMILIES = (("vib_noise", 2.0), ("cur_noise", .1), ("cur_offset", .2), ("cur_gain", 1.15), ("cur_gain", 1.3))
 
 
-def fn_intensity(normal, models, reps=5):
+def _bh_adjust(pvalues):
+    """유한 p값 전체를 한 검정군으로 묶은 Benjamini-Hochberg q값. 미정의 p값은 검정 수에서 뺀다."""
+    p = np.asarray(pvalues, float)
+    out = np.full(p.shape, np.nan)
+    valid = np.flatnonzero(np.isfinite(p))
+    order = valid[np.argsort(p[valid], kind="stable")]
+    if len(order):
+        adjusted = p[order] * len(order) / np.arange(1, len(order) + 1)
+        out[order] = np.minimum(1, np.minimum.accumulate(adjusted[::-1])[::-1])
+    return out
+
+
+def _row_spearman(x, y):
+    """행마다 평균 순위를 이용한 Spearman. 재표집으로 생긴 동률도 평균 순위로 처리한다."""
+    rx, ry = stats.rankdata(x, axis=1), stats.rankdata(y, axis=1)
+    rx -= rx.mean(axis=1, keepdims=True); ry -= ry.mean(axis=1, keepdims=True)
+    denominator = np.sqrt((rx * rx).sum(axis=1) * (ry * ry).sum(axis=1))
+    return np.divide((rx * ry).sum(axis=1), denominator, out=np.full(len(rx), np.nan), where=denominator > 0)
+
+
+def _paired_spearman_bootstrap(amp, vibration_detection, offset_detection, repeats=4000, seed=11):
+    """같은 단위를 재표집하여 두 Spearman 상관의 차이를 계산한다. 주입 반복은 표본 단위로 세지 않는다."""
+    amp, vib, offset = map(lambda values: np.asarray(values, float), (amp, vibration_detection, offset_detection))
+    if not (len(amp) == len(vib) == len(offset)) or repeats < 1:
+        raise ValueError("상호작용 붓스트랩은 동일 단위의 두 탐지 벡터와 양의 반복 수가 필요하다")
+    index = np.random.default_rng(seed).integers(0, len(amp), size=(repeats, len(amp)))
+    delta = _row_spearman(amp[index], vib[index]) - _row_spearman(amp[index], offset[index])
+    delta = delta[np.isfinite(delta)]
+    observed = stats.spearmanr(amp, vib).statistic - stats.spearmanr(amp, offset).statistic
+    low, high = np.quantile(delta, [.025, .975]) if len(delta) else (np.nan, np.nan)
+    return dict(interaction_rho_difference=float(observed), interaction_ci_low=float(low), interaction_ci_high=float(high),
+                interaction_bootstrap_repeats=repeats, interaction_bootstrap_valid=len(delta), interaction_bootstrap_seed=seed,
+                interaction_bootstrap_share_le_zero=float((delta <= 0).mean()) if len(delta) else np.nan,
+                interaction_comparison="ρ(전류 진폭, 진동 잡음 2σ 탐지) − ρ(전류 진폭, 전류 오프셋 0.2× 탐지)")
+
+
+def fn_intensity(normal, models, reps=50):
     """E1과 같은 계단 주입(30행 이상 단위의 10행째부터, α 1%, 2초 안)의 단위별 탐지를 주입받은 기록의 운전 강도(전류 진폭·진동 SD)로 나눈다.
-    잡음 족은 반복 5회(난수 0~4) 평균이다. E1의 난수와 달라 잡음 족 값은 E1과 소수 둘째 자리에서 다를 수 있다."""
+    잡음 족은 기본 50회(난수 0~49)의 단위별 평균이다. E1의 별도 난수 결과와 구분한다.
+    진동형−전류 계단형 교차 효과는 동일 단위를 함께 재표집한 Spearman 차이(4,000회)로 본다."""
     from recalibrate import inject, unit_layout, T0, WINDOW, MIN_UNIT_ROWS
+    if reps < 1:
+        raise ValueError("잡음 주입 반복 수는 양수여야 한다")
     rows = []
     for sid, model in models.items():
         test = D.inputs_only(D.split_normal(normal, D.segments(normal), sid)["test"])
@@ -842,6 +1010,8 @@ def fn_intensity(normal, models, reps=5):
         amp = unit_rec.loc[el_units].map(feat.current_amp).to_numpy()
         vsd = unit_rec.loc[el_units].map(feat.vib_sd).to_numpy()
         amp_q = pd.qcut(amp, 4, labels=["Q1", "Q2", "Q3", "Q4"])
+        outcomes = {}
+        start = len(rows)
         for fam, lv in FN_FAMILIES:
             n_rep = reps if fam in ("cur_noise", "vib_noise") else 1
             det = np.zeros(len(el_units))
@@ -856,16 +1026,38 @@ def fn_intensity(normal, models, reps=5):
                 win = (pr.alarm.to_numpy() == 1) & (in_unit >= T0) & (in_unit < T0 + WINDOW)
                 det += pd.Series(win).groupby(units).any().reindex(el_units).to_numpy(float)
             det /= n_rep
+            outcomes[(fam, lv)] = det.copy()
             ra, pa_ = stats.spearmanr(amp, det) if det.std() > 0 else (np.nan, np.nan)
             rv, pv = stats.spearmanr(vsd, det) if det.std() > 0 else (np.nan, np.nan)
             row = dict(split=sid, family=fam, level_value=lv, units=len(el_units), detect_mean=float(det.mean()),
-                       spearman_amp=float(ra), p_amp=float(pa_), spearman_vib_sd=float(rv), p_vib_sd=float(pv))
+                       spearman_amp=float(ra), p_amp=float(pa_), spearman_vib_sd=float(rv), p_vib_sd=float(pv),
+                       injection_repeats=n_rep, injection_seed_start=0 if n_rep > 1 else np.nan,
+                       injection_seed_end=n_rep - 1 if n_rep > 1 else np.nan)
             for qlab in ("Q1", "Q2", "Q3", "Q4"):
                 m = np.asarray(amp_q == qlab)
                 row[f"detected_amp_{qlab}"] = float(det[m].sum()); row[f"units_amp_{qlab}"] = int(m.sum())
+                # 평균 탐지 수는 소수이므로 이항 CI가 아니다. 정상 단위의 평균 탐지율을
+                # 재표집해 반복 주입의 의존성을 보존한 미탐 평균 구간을 둔다.
+                ix = np.random.default_rng(11).integers(0, m.sum(), size=(4000, m.sum()))
+                lo, hi = np.quantile(1 - det[m][ix].mean(axis=1), [.025, .975])
+                row[f"miss_amp_{qlab}_ci_low"], row[f"miss_amp_{qlab}_ci_high"] = float(lo), float(hi)
             rows.append(row)
+        interaction = _paired_spearman_bootstrap(amp, outcomes[("vib_noise", 2.0)], outcomes[("cur_offset", .2)])
+        rows[start].update(interaction)
     out = pd.DataFrame(rows)
-    out["note"] = "사후 분석. 인공 신호. 사분위는 분할별 주입 대상 단위의 전류 진폭(√2×평균 제거 RMS). 여러 족·분할을 비교했으니 p값은 다중 비교를 고려해 읽는다"
+    out["q_amp_bh"] = _bh_adjust(out.p_amp)
+    out["n_tests_amp"] = int(np.isfinite(out.p_amp).sum())
+    all_p = np.r_[out.p_amp, out.p_vib_sd]
+    all_q = _bh_adjust(all_p)
+    out["q_amp_joint_bh"], out["q_vib_sd_joint_bh"] = all_q[:len(out)], all_q[len(out):]
+    out["n_tests_amp_vib_sd"] = int(np.isfinite(all_p).sum())
+    out["p_amp_bonferroni"] = np.minimum(1, out.p_amp * out.n_tests_amp)
+    out["p_amp_joint_bonferroni"] = np.minimum(1, out.p_amp * out.n_tests_amp_vib_sd)
+    out["quartile_ci_method"] = "정상 단위별 평균 탐지율 재표집 4,000회 백분위 95% 구간(시드 11). 같은 날 시간 의존성 미반영"
+    out["note"] = (f"사후 분석·인공 신호. 잡음 족 {reps}회(시드 0~{reps - 1}), 다른 족 1회. "
+                   "E1 진동 잡음 2σ 전체 탐지 A 74.4%·B 93.9%는 별도 난수 반복 결과이며 이 표와 동일한 실험 추정값이 아니다. "
+                   "사분위는 분할별 주입 대상 단위의 전류 진폭(√2×평균 제거 RMS). BH는 유한 p값만 세며 분할·족 전체를 묶었다. "
+                   "같은 날·중첩 단위 의존성 때문에 q값과 붓스트랩은 사후 기술 통계다")
     return out
 
 
@@ -912,7 +1104,8 @@ def error_condition_summary(out, e1_summary, dayshift):
             rate = k / n if n else np.nan
             rec.update({f"errors_{lab}": k, f"denominator_{lab}": n, f"rate_{lab}": rate, f"ci_low_{lab}": lo, f"ci_high_{lab}": hi,
                         f"comparison_rate_{lab}": comp, f"lift_{lab}": rate / comp if comp and np.isfinite(comp) and comp > 0 else np.nan})
-        rec.update(comparison=comparison, evidence=evidence, source=source, limitation=limitation)
+        rec.update(comparison=comparison, evidence=evidence, source=source, limitation=limitation,
+                   ci_method="Clopper-Pearson 이항 95% 구간(관측 간 의존성 미반영)" if a[1] or b[1] else "해당 없음")
         rows.append(rec)
 
     # FN 1: 수집 재개 직후 × 진동 동반 없음
@@ -952,12 +1145,20 @@ def error_condition_summary(out, e1_summary, dayshift):
         "주입(E1) + 사후 층화", f"{src}; {_cite(fn_path, fn.family.eq('cur_gain') & np.isclose(fn.level_value, 1.15))}",
         "정상 운전에서도 전류 진폭이 0.85~1.29배 오르내려 배율 변화를 구분하지 못한다")
     v = fn[fn.family.eq("vib_noise") & np.isclose(fn.level_value, 2.0)].set_index("split")
-    add("FN", "4σ 미만 진동 이상 × 조용한 운전", "고장 모양 × 운전 강도", "진동 두 센서 2σ 잡음(10행째부터, 반복 5회). 주입 기록의 전류 진폭 Q1(조용함) 대 Q4",
-        (round(float(v.loc["A"].units_amp_Q1 - v.loc["A"].detected_amp_Q1), 1), int(v.loc["A"].units_amp_Q1)),
-        (round(float(v.loc["B"].units_amp_Q1 - v.loc["B"].detected_amp_Q1), 1), int(v.loc["B"].units_amp_Q1)),
+    add("FN", "4σ 미만 진동 이상 × 조용한 운전", "고장 모양 × 운전 강도",
+        f"진동 두 센서 2σ 잡음(10행째부터, 반복 {int(v.loc['A'].injection_repeats)}회, 시드 0~{int(v.loc['A'].injection_seed_end)}). 전류 진폭 Q1(조용함) 대 Q4",
+        (round(float(v.loc["A"].units_amp_Q1 - v.loc["A"].detected_amp_Q1), 2), int(v.loc["A"].units_amp_Q1)),
+        (round(float(v.loc["B"].units_amp_Q1 - v.loc["B"].detected_amp_Q1), 2), int(v.loc["B"].units_amp_Q1)),
         1 - v.loc["A"].detected_amp_Q4 / v.loc["A"].units_amp_Q4, 1 - v.loc["B"].detected_amp_Q4 / v.loc["B"].units_amp_Q4,
-        f"전체 탐지 {v.loc['A'].detect_mean:.1%}·{v.loc['B'].detect_mean:.1%}(4σ는 100%). 탐지와 전류 진폭 Spearman +{v.loc['A'].spearman_amp:.2f}·+{v.loc['B'].spearman_amp:.2f}",
-        "주입(E1식) + 사후 층화", _cite(fn_path, fn.family.eq("vib_noise")), "조용한 운전에서 진동형 약한 이상을 놓친다(가설). 2단계 격상은 더 늦다(alert_levels_injection_v2)")
+        f"전체 탐지 {v.loc['A'].detect_mean:.1%}·{v.loc['B'].detect_mean:.1%}(4σ는 100%). Spearman +{v.loc['A'].spearman_amp:.2f}·+{v.loc['B'].spearman_amp:.2f}, "
+        f"BH q {v.loc['A'].q_amp_bh:.2g}·{v.loc['B'].q_amp_bh:.2g}(진폭 {int(v.loc['A'].n_tests_amp)}검정). "
+        f"오프셋 0.2× 대비 ρ차 95% CI A [{v.loc['A'].interaction_ci_low:.2f}, {v.loc['A'].interaction_ci_high:.2f}], "
+        f"B [{v.loc['B'].interaction_ci_low:.2f}, {v.loc['B'].interaction_ci_high:.2f}]",
+        "주입(E1식) + 사후 층화", _cite(fn_path, fn.family.eq("vib_noise")),
+        "E1의 74.4%·93.9%와 난수 반복이 다르다. 오류 수는 단위별 평균이며 반복을 독립 표본으로 세지 않는다. 같은 날 의존성은 남는다")
+    rows[-1]["ci_method"] = v.loc["A"].quartile_ci_method
+    for sid in "AB":
+        rows[-1][f"ci_low_{sid}"], rows[-1][f"ci_high_{sid}"] = v.loc[sid].miss_amp_Q1_ci_low, v.loc[sid].miss_amp_Q1_ci_high
     o = fn[fn.family.eq("cur_offset") & np.isclose(fn.level_value, .2)].set_index("split")
     add("FN", "약한 전류 오프셋 × 고부하 운전", "고장 모양 × 운전 강도", "전류 +0.2×진폭 계단(10행째부터). 주입 기록의 전류 진폭 Q4(고부하) 대 Q1",
         (int(o.loc["A"].units_amp_Q4 - o.loc["A"].detected_amp_Q4), int(o.loc["A"].units_amp_Q4)),
@@ -980,15 +1181,24 @@ def error_condition_summary(out, e1_summary, dayshift):
     # FP
     ah = fi[fi.condition.eq("amp_high") & fi.value.str.contains("B 정상 학습")]
     hi = {a: ah[ah.alpha.eq(a)].iloc[0] for a in ALPHAS}
-    rest = {a: tuple(int(x) for x in hi[a].note.replace("나머지 ", "").split("/")) for a in ALPHAS}
+    rest = {a: (int(hi[a].comparison_false_alarms), int(hi[a].comparison_denominator)) for a in ALPHAS}
     ev5 = fi[fi.alpha.eq(.05) & fi.condition.eq("vib_sd_quartile") & fi.value.eq("Q4")].iloc[0]
+    states = fi[fi.condition.eq("operating_state") & fi.value.eq("load")].set_index("alpha")
+    block = fi[fi.condition.eq("amp_high_block_stratified") & fi.value.eq("B 정상 학습 q75")].set_index("alpha")
+    within = fi[fi.condition.eq("amp_within_load") & fi.alpha.eq(.05)].iloc[0]
+    state5 = states.loc[.05]
     add("FP", "고부하 운전(전류 진폭 ≥ B 정상 학습 q75)", "운전 강도(부하)", "고유 정상 구간 300~599(독립 적합 5개 중 하나라도 경보), 길이 ≥17. A 열 α 1%, B 열 α 5%",
         (int(hi[.01].false_alarms), int(hi[.01].denominator)), (int(hi[.05].false_alarms), int(hi[.05].denominator)),
         rest[.01][0] / rest[.01][1], rest[.05][0] / rest[.05][1],
         f"나머지 {rest[.01][0]}/{rest[.01][1]}(α 1%, p {hi[.01].fisher_p_greater:.2g}, 표본 부족)·{rest[.05][0]}/{rest[.05][1]}(α 5%, p {hi[.05].fisher_p_greater:.1e}). "
-        f"α 3% {int(hi[.03].false_alarms)}/{int(hi[.03].denominator)} 대 {rest[.03][0]}/{rest[.03][1]}. 진동 SD Q4 {int(ev5.false_alarms)}/{int(ev5.denominator)}(크기 경보 경로와 겹침)",
-        "관측(사후, 같은 날 77분)", _cite(fi_path, (fi.condition.eq("amp_high") & fi.value.str.contains("B 정상 학습")) | (fi.alpha.eq(.05) & fi.condition.eq("vib_sd_quartile"))),
-        "A·B 열은 분할이 아니라 α다. 부하는 신호 대리변수다. 480~539 블록 0/120")
+        f"α 3% {int(hi[.03].false_alarms)}/{int(hi[.03].denominator)} 대 {rest[.03][0]}/{rest[.03][1]}. 진동 SD Q4 {int(ev5.false_alarms)}/{int(ev5.denominator)}(크기 경보 경로). "
+        f"5적합 합침 α5% 부하 상태 {int(state5.false_alarms)}/{int(state5.denominator)} 대 나머지 {int(state5.comparison_false_alarms)}/{int(state5.comparison_denominator)}, "
+        f"시간블록 CMH p {block.loc[.05].cmh_p:.2g}(MH OR {block.loc[.05].mh_pooled_or:.1f}). "
+        f"부하 안 진폭 ≥{within.threshold:.1f}: {int(within.false_alarms)}/{int(within.denominator)} 대 {int(within.comparison_false_alarms)}/{int(within.comparison_denominator)}",
+        "관측(사후, 같은 날 77분)", _cite(fi_path, (fi.condition.eq("amp_high") & fi.value.str.contains("B 정상 학습")) |
+            (fi.alpha.eq(.05) & fi.condition.eq("vib_sd_quartile")) | (fi.condition.eq("operating_state") & fi.value.eq("load")) |
+            (fi.condition.eq("amp_high_block_stratified") & fi.value.eq("B 정상 학습 q75")) | (fi.alpha.eq(.05) & fi.condition.eq("amp_within_load"))),
+        "A·B 열은 분할이 아니라 α다. 부하 상태는 원 전류 RMS≥91.9의 신호 대리변수. 보정은 상태 혼합의 주변 보장이고 상태 조건부 보장이 아니다. 적합 겹침·시간 의존성은 남는다")
     ind = fp[fp.independent & fp.alpha.eq(.05)]
     single = int(((ind.reasons == "magnitude") & (ind.magnitude_sensor == "AI0_Vibration")).sum())
     add("FP", "상부 진동(AI0) 단발 충격(구성비)", "운전 강도(부하)", "α 5% 오경보 사건의 구성(동결 A·B + 시간순 5폴드, 같은 모델 중복 제거)",
@@ -1006,7 +1216,8 @@ def error_condition_summary(out, e1_summary, dayshift):
     add("FP", "전류 수준 상승", "전류 수준 이동", "정상 평가 전류 전체 ×k(재학습 없음, α 1%). A·B 열은 ×1.5",
         (int(ds[ka].normal_notified_segments.iloc[0]), int(ds[ka].normal_segments.iloc[0])),
         (int(d.loc[1.5].normal_notified_segments), int(d.loc[1.5].normal_segments)), np.nan, d.loc[1.0].normal_notified_segments / d.loc[1.0].normal_segments,
-        f"B ×1.0 {int(d.loc[1.0].normal_notified_segments)}, ×1.05 {int(d.loc[1.05].normal_notified_segments)}, ×1.5 {int(d.loc[1.5].normal_notified_segments)}/180. 감시 규칙은 ×1.3부터 재보정 검토(monitor_gain_v2)",
+        f"B ×1.0 {int(d.loc[1.0].normal_notified_segments)}, ×1.05 {int(d.loc[1.05].normal_notified_segments)}, ×1.5 {int(d.loc[1.5].normal_notified_segments)}/180. "
+        "변경 기록 없는 감시 초과 창은 설비 점검 요청, 기록 있으면 재보정 검토(monitor_gain_v2)",
         "스트레스(모의)", _cite(dayshift, ka | kb), "실제 부하 변화의 모양은 모른다")
     k = rb.criterion.eq("conformal") & rb.alpha.eq(.01) & rb.version.eq("v2") & rb.input_variant.isin(["matched", "coarse"])
     c = rb[k].set_index(["split_id", "input_variant"])

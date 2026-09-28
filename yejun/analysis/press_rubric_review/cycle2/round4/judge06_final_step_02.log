@@ -1,0 +1,21 @@
+$ /private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python /private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/press_submission/verify.py --out outputs --steps 2
+
+OK   inputs.sha256
+OK   checks.required
+OK   outputs.integrity
+OK   code.matches_manifest
+OK   expected.integrity
+OK   execution.scope
+OK   configuration
+OK   conformal_mc.csv  max|Δ|=0
+OK   diagnosis.json
+OK   model_comparison.csv  max|Δ|=0
+OK   operating_points.csv  max|Δ|=0
+OK   preprocess_effect.csv  max|Δ|=0
+OK   splits.csv  max|Δ|=0
+OK   tail_params.csv  max|Δ|=0
+OK   thresholds_main.csv  max|Δ|=0
+OK   waveform_segments.csv  max|Δ|=0
+
+16/16 통과 (1~2단계 부분 비교, 필수 집계 9개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 b372a18b66af vs 동결 b372a18b66af
+

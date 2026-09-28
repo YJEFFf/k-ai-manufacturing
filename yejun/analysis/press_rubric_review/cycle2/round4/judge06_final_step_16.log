@@ -1,0 +1,6 @@
+$ /private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python -m pytest -q -p no:cacheprovider /private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/press_guard
+
+........................................................................ [ 54%]
+............................................................             [100%]
+132 passed in 94.81s (0:01:34)
+

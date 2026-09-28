@@ -1,6 +1,6 @@
 {
   "predictions_normal_A.csv": {
-    "sha256": "e59073e9d1d8d5c88e54cbe1523233a3223d613e3b24cd4c87d83b493a94d468",
+    "sha256": "d22b028d4e7c427fb19439e7a3d02182e4b87908f7475dab85b1c1639a59e224",
     "rows": 4090,
     "columns": [
       "row_id",
@@ -40,9 +40,55 @@
       "probability_prior",
       "record_likelihood_ratio",
       "record_probability",
+      "record_current_rms",
+      "operating_state",
       "probability_source"
     ],
-    "exact_sha256": "9bdd2f1e222fca8827477e9c0975c024c2b37e049457562fc3a3fd47329136f8",
+    "exact_columns": [
+      "row_id",
+      "record_id",
+      "timestamp",
+      "status",
+      "position",
+      "alarm",
+      "reason",
+      "action",
+      "waveform_window",
+      "magnitude_sensor",
+      "is_scored",
+      "criterion",
+      "model_id",
+      "protocol_version",
+      "alert_unit",
+      "beyond_calibration_length",
+      "notification",
+      "alert_level",
+      "escalation",
+      "incident_id",
+      "incident_notification",
+      "incident_escalation",
+      "incident_update",
+      "operating_state",
+      "probability_source"
+    ],
+    "exact_sha256": "48fe7a52acb09df60a99b442ede986555b2cde9a1b27f61213d8be9d5aa288e1",
+    "nonfinite_sha256": {
+      "score": "b096b03c6956ae6f0fb46540a8cefa6093b2064d852bb6338464e8ebf69dd69e",
+      "p_value": "b096b03c6956ae6f0fb46540a8cefa6093b2064d852bb6338464e8ebf69dd69e",
+      "alpha": "b096b03c6956ae6f0fb46540a8cefa6093b2064d852bb6338464e8ebf69dd69e",
+      "magnitude": "b096b03c6956ae6f0fb46540a8cefa6093b2064d852bb6338464e8ebf69dd69e",
+      "current_residual": "0674328528a39f42615555c672be21a0657e30427114a99098820bb64414af1c",
+      "g_magnitude": "b096b03c6956ae6f0fb46540a8cefa6093b2064d852bb6338464e8ebf69dd69e",
+      "g_waveform": "280ab5b72c1255a8af30176cebe11efb4be2e196467f67d6eff1f304934e7a28",
+      "g_dynamics": "0674328528a39f42615555c672be21a0657e30427114a99098820bb64414af1c",
+      "anomaly_score": "b096b03c6956ae6f0fb46540a8cefa6093b2064d852bb6338464e8ebf69dd69e",
+      "likelihood_ratio": "b096b03c6956ae6f0fb46540a8cefa6093b2064d852bb6338464e8ebf69dd69e",
+      "anomaly_probability": "b096b03c6956ae6f0fb46540a8cefa6093b2064d852bb6338464e8ebf69dd69e",
+      "probability_prior": "b096b03c6956ae6f0fb46540a8cefa6093b2064d852bb6338464e8ebf69dd69e",
+      "record_likelihood_ratio": "b096b03c6956ae6f0fb46540a8cefa6093b2064d852bb6338464e8ebf69dd69e",
+      "record_probability": "b096b03c6956ae6f0fb46540a8cefa6093b2064d852bb6338464e8ebf69dd69e",
+      "record_current_rms": "b096b03c6956ae6f0fb46540a8cefa6093b2064d852bb6338464e8ebf69dd69e"
+    },
     "numeric_summary": {
       "score": [
         4090,
@@ -100,61 +146,12 @@
         3.8609101852604966e-05,
         2.5491136291358476
       ],
-      "waveform_window": [
-        4090,
-        31072.0,
-        238688.0,
-        6.0,
-        8.0
-      ],
-      "is_scored": [
-        4090,
-        4090.0,
-        4090.0,
-        1.0,
-        1.0
-      ],
       "anomaly_score": [
         4090,
         195.5123966942147,
         32.733214944334385,
         0.0,
         0.975206611570248
-      ],
-      "beyond_calibration_length": [
-        4090,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "incident_id": [
-        4090,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "incident_notification": [
-        4090,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "incident_escalation": [
-        4090,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "incident_update": [
-        4090,
-        0.0,
-        0.0,
-        0.0,
-        0.0
       ],
       "likelihood_ratio": [
         4090,
@@ -190,12 +187,19 @@
         3.006105453896202,
         0.0004332494408182,
         0.3016324635091206
+      ],
+      "record_current_rms": [
+        4090,
+        331310.4967231612,
+        31943106.036750935,
+        0.0,
+        196.92575383331751
       ]
     },
     "alarm_rows": 0
   },
   "predictions_normal_B.csv": {
-    "sha256": "f38cc5eb4905249f1c3c0bfcd40ac91e2070dce8a74a5c4af96547026ee89139",
+    "sha256": "a50d0ac59cd29ff0f1dc0271b22a9db945f069c1cc25acd7f8ea44c1a9be10ce",
     "rows": 6097,
     "columns": [
       "row_id",
@@ -235,9 +239,55 @@
       "probability_prior",
       "record_likelihood_ratio",
       "record_probability",
+      "record_current_rms",
+      "operating_state",
       "probability_source"
     ],
-    "exact_sha256": "ffec3b230504c1426c805b0cd1a366ce080f7e5397fc5c5a1f5f0de3686ff987",
+    "exact_columns": [
+      "row_id",
+      "record_id",
+      "timestamp",
+      "status",
+      "position",
+      "alarm",
+      "reason",
+      "action",
+      "waveform_window",
+      "magnitude_sensor",
+      "is_scored",
+      "criterion",
+      "model_id",
+      "protocol_version",
+      "alert_unit",
+      "beyond_calibration_length",
+      "notification",
+      "alert_level",
+      "escalation",
+      "incident_id",
+      "incident_notification",
+      "incident_escalation",
+      "incident_update",
+      "operating_state",
+      "probability_source"
+    ],
+    "exact_sha256": "b2ce5d20a4dfce2c94a421bafd4fe7bac4625c9e61be20e86394a4a87b0b727d",
+    "nonfinite_sha256": {
+      "score": "c8f05b38ba4ddc210dfb0efffc3ce4dc9aee0346fc9079636eacf18306dd5737",
+      "p_value": "c8f05b38ba4ddc210dfb0efffc3ce4dc9aee0346fc9079636eacf18306dd5737",
+      "alpha": "c8f05b38ba4ddc210dfb0efffc3ce4dc9aee0346fc9079636eacf18306dd5737",
+      "magnitude": "c8f05b38ba4ddc210dfb0efffc3ce4dc9aee0346fc9079636eacf18306dd5737",
+      "current_residual": "fd8ee31793b365758ee9bb50bd250f775e84816153cbc081507e319e60f934d7",
+      "g_magnitude": "c8f05b38ba4ddc210dfb0efffc3ce4dc9aee0346fc9079636eacf18306dd5737",
+      "g_waveform": "08a7eb2e1ee613209a1a34a96c41a2aaf025786ed8059ae0b3bbc2a9e282b497",
+      "g_dynamics": "fd8ee31793b365758ee9bb50bd250f775e84816153cbc081507e319e60f934d7",
+      "anomaly_score": "c8f05b38ba4ddc210dfb0efffc3ce4dc9aee0346fc9079636eacf18306dd5737",
+      "likelihood_ratio": "c8f05b38ba4ddc210dfb0efffc3ce4dc9aee0346fc9079636eacf18306dd5737",
+      "anomaly_probability": "c8f05b38ba4ddc210dfb0efffc3ce4dc9aee0346fc9079636eacf18306dd5737",
+      "probability_prior": "c8f05b38ba4ddc210dfb0efffc3ce4dc9aee0346fc9079636eacf18306dd5737",
+      "record_likelihood_ratio": "c8f05b38ba4ddc210dfb0efffc3ce4dc9aee0346fc9079636eacf18306dd5737",
+      "record_probability": "c8f05b38ba4ddc210dfb0efffc3ce4dc9aee0346fc9079636eacf18306dd5737",
+      "record_current_rms": "c8f05b38ba4ddc210dfb0efffc3ce4dc9aee0346fc9079636eacf18306dd5737"
+    },
     "numeric_summary": {
       "score": [
         6097,
@@ -295,61 +345,12 @@
         0.0001821896122799,
         3.4306126938342856
       ],
-      "waveform_window": [
-        6097,
-        46298.0,
-        355516.0,
-        6.0,
-        8.0
-      ],
-      "is_scored": [
-        6097,
-        6097.0,
-        6097.0,
-        1.0,
-        1.0
-      ],
       "anomaly_score": [
         6097,
         550.1570247933881,
         131.56307629260291,
         0.0,
         0.9917355371900828
-      ],
-      "beyond_calibration_length": [
-        6097,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "incident_id": [
-        6097,
-        6.0,
-        14.0,
-        0.0,
-        3.0
-      ],
-      "incident_notification": [
-        6097,
-        3.0,
-        3.0,
-        0.0,
-        1.0
-      ],
-      "incident_escalation": [
-        6097,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "incident_update": [
-        6097,
-        0.0,
-        0.0,
-        0.0,
-        0.0
       ],
       "likelihood_ratio": [
         6097,
@@ -385,12 +386,19 @@
         15.743981800944713,
         0.0004277873408988,
         0.5499999999999999
+      ],
+      "record_current_rms": [
+        6097,
+        534134.1377566389,
+        57240293.71816976,
+        0.0,
+        205.11505870542712
       ]
     },
     "alarm_rows": 3
   },
   "predictions_abnormal_A.csv": {
-    "sha256": "8097cc639c769a564b2d1c08fcb79b9f4e6dab38a45d0c2d5baa332ee8ebd33f",
+    "sha256": "bfea23552a9c9d5fe0bb44b11fdc6bda59ac7340a30f315349b72631583432e7",
     "rows": 600,
     "columns": [
       "row_id",
@@ -430,9 +438,55 @@
       "probability_prior",
       "record_likelihood_ratio",
       "record_probability",
+      "record_current_rms",
+      "operating_state",
       "probability_source"
     ],
-    "exact_sha256": "3c8d96347d73127aea33e5c56e6c4eb4243a2926d7874cd1068b8a208668bafd",
+    "exact_columns": [
+      "row_id",
+      "record_id",
+      "timestamp",
+      "status",
+      "position",
+      "alarm",
+      "reason",
+      "action",
+      "waveform_window",
+      "magnitude_sensor",
+      "is_scored",
+      "criterion",
+      "model_id",
+      "protocol_version",
+      "alert_unit",
+      "beyond_calibration_length",
+      "notification",
+      "alert_level",
+      "escalation",
+      "incident_id",
+      "incident_notification",
+      "incident_escalation",
+      "incident_update",
+      "operating_state",
+      "probability_source"
+    ],
+    "exact_sha256": "f1b95cb80b5c0c1b376c78619e6f93a5112f497e7b87458778ff9a6ddbd3f6fa",
+    "nonfinite_sha256": {
+      "score": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea",
+      "p_value": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea",
+      "alpha": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea",
+      "magnitude": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea",
+      "current_residual": "5fbbfa4fec5d94c8b4d24da533890af88598db0bb73b14d600fdb30bbb830b44",
+      "g_magnitude": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea",
+      "g_waveform": "563cdd882b12263d35687deadfd92e1285acbce9df6f2a793e78009a1015bae9",
+      "g_dynamics": "5fbbfa4fec5d94c8b4d24da533890af88598db0bb73b14d600fdb30bbb830b44",
+      "anomaly_score": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea",
+      "likelihood_ratio": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea",
+      "anomaly_probability": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea",
+      "probability_prior": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea",
+      "record_likelihood_ratio": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea",
+      "record_probability": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea",
+      "record_current_rms": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea"
+    },
     "numeric_summary": {
       "score": [
         600,
@@ -490,61 +544,12 @@
         7.72216363882458e-05,
         62.03744230345713
       ],
-      "waveform_window": [
-        600,
-        4526.0,
-        34564.0,
-        6.0,
-        8.0
-      ],
-      "is_scored": [
-        600,
-        600.0,
-        600.0,
-        1.0,
-        1.0
-      ],
       "anomaly_score": [
         600,
         569.1239669421489,
         562.3365890308039,
         0.0,
         0.9917355371900828
-      ],
-      "beyond_calibration_length": [
-        600,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "incident_id": [
-        600,
-        556.0,
-        556.0,
-        0.0,
-        1.0
-      ],
-      "incident_notification": [
-        600,
-        1.0,
-        1.0,
-        0.0,
-        1.0
-      ],
-      "incident_escalation": [
-        600,
-        1.0,
-        1.0,
-        0.0,
-        1.0
-      ],
-      "incident_update": [
-        600,
-        2.0,
-        2.0,
-        0.0,
-        1.0
       ],
       "likelihood_ratio": [
         600,
@@ -580,12 +585,19 @@
         173.35291871235134,
         0.000382727629124,
         0.5499999999999999
+      ],
+      "record_current_rms": [
+        600,
+        44437.80686615152,
+        3877428.4607046302,
+        0.0,
+        144.97667981754483
       ]
     },
     "alarm_rows": 556
   },
   "predictions_abnormal_B.csv": {
-    "sha256": "aaad2b2e49ca36d52c5a4134f1fc46323083378cd86dc05c25a769e4544ed118",
+    "sha256": "1826e24db63c2d9c11496084db3679340936f83b63d8de4fdc4a7ca4046f304e",
     "rows": 600,
     "columns": [
       "row_id",
@@ -625,9 +637,55 @@
       "probability_prior",
       "record_likelihood_ratio",
       "record_probability",
+      "record_current_rms",
+      "operating_state",
       "probability_source"
     ],
-    "exact_sha256": "5d0fbf2d101a4bc5dba26149b13883dc86e5d69c10647f9c136eafd412150da4",
+    "exact_columns": [
+      "row_id",
+      "record_id",
+      "timestamp",
+      "status",
+      "position",
+      "alarm",
+      "reason",
+      "action",
+      "waveform_window",
+      "magnitude_sensor",
+      "is_scored",
+      "criterion",
+      "model_id",
+      "protocol_version",
+      "alert_unit",
+      "beyond_calibration_length",
+      "notification",
+      "alert_level",
+      "escalation",
+      "incident_id",
+      "incident_notification",
+      "incident_escalation",
+      "incident_update",
+      "operating_state",
+      "probability_source"
+    ],
+    "exact_sha256": "6ac87f0a9c43d06108309a2f1f4216c74cf969104d840cfc8eccd392ae568606",
+    "nonfinite_sha256": {
+      "score": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea",
+      "p_value": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea",
+      "alpha": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea",
+      "magnitude": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea",
+      "current_residual": "5fbbfa4fec5d94c8b4d24da533890af88598db0bb73b14d600fdb30bbb830b44",
+      "g_magnitude": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea",
+      "g_waveform": "563cdd882b12263d35687deadfd92e1285acbce9df6f2a793e78009a1015bae9",
+      "g_dynamics": "5fbbfa4fec5d94c8b4d24da533890af88598db0bb73b14d600fdb30bbb830b44",
+      "anomaly_score": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea",
+      "likelihood_ratio": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea",
+      "anomaly_probability": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea",
+      "probability_prior": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea",
+      "record_likelihood_ratio": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea",
+      "record_probability": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea",
+      "record_current_rms": "bd50e12c55dda3ee443c1cb6d71c7bcf6351c4ec96f7bc8d6adec015d1192eea"
+    },
     "numeric_summary": {
       "score": [
         600,
@@ -685,61 +743,12 @@
         0.0004556174168438,
         60.298741917918406
       ],
-      "waveform_window": [
-        600,
-        4526.0,
-        34564.0,
-        6.0,
-        8.0
-      ],
-      "is_scored": [
-        600,
-        600.0,
-        600.0,
-        1.0,
-        1.0
-      ],
       "anomaly_score": [
         600,
         569.9834710743803,
         562.7694829588143,
         0.0,
         0.9917355371900828
-      ],
-      "beyond_calibration_length": [
-        600,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "incident_id": [
-        600,
-        569.0,
-        569.0,
-        0.0,
-        1.0
-      ],
-      "incident_notification": [
-        600,
-        1.0,
-        1.0,
-        0.0,
-        1.0
-      ],
-      "incident_escalation": [
-        600,
-        1.0,
-        1.0,
-        0.0,
-        1.0
-      ],
-      "incident_update": [
-        600,
-        2.0,
-        2.0,
-        0.0,
-        1.0
       ],
       "likelihood_ratio": [
         600,
@@ -775,12 +784,19 @@
         174.24001398203055,
         0.0003729632650096,
         0.5499999999999999
+      ],
+      "record_current_rms": [
+        600,
+        44437.80686615152,
+        3877428.4607046302,
+        0.0,
+        144.97667981754483
       ]
     },
     "alarm_rows": 569
   },
   "test_predictions_A.csv": {
-    "sha256": "b87f1e20aa7ff174eb6a7eb048f3125afc1d4e4078c83a8a32866fefcba602b8",
+    "sha256": "2941bf9dde2c9b66308eb6e26d19e4a41f93de1441833c8b476e0534e47e98c8",
     "rows": 4690,
     "columns": [
       "subset",
@@ -822,11 +838,61 @@
       "probability_prior",
       "record_likelihood_ratio",
       "record_probability",
+      "record_current_rms",
+      "operating_state",
       "probability_source",
       "file_prior",
       "anomaly_probability_file_prior"
     ],
-    "exact_sha256": "245157340a20f9b0e0d529dedcf02fddbe0bfbdbf8cfcd601cf8edb5f2cd1a8e",
+    "exact_columns": [
+      "subset",
+      "label",
+      "row_id",
+      "record_id",
+      "timestamp",
+      "status",
+      "position",
+      "alarm",
+      "reason",
+      "action",
+      "waveform_window",
+      "magnitude_sensor",
+      "is_scored",
+      "criterion",
+      "model_id",
+      "protocol_version",
+      "alert_unit",
+      "beyond_calibration_length",
+      "notification",
+      "alert_level",
+      "escalation",
+      "incident_id",
+      "incident_notification",
+      "incident_escalation",
+      "incident_update",
+      "operating_state",
+      "probability_source"
+    ],
+    "exact_sha256": "2376e732cc3fba2b1c4dfdaa8eca1670e92419d7acdb0850472370f93e206c6a",
+    "nonfinite_sha256": {
+      "score": "8165b61c7d94aec9ebef3cd8d1eb9f11c5ee2dcc7fa44833ccac2b3f61966c16",
+      "p_value": "8165b61c7d94aec9ebef3cd8d1eb9f11c5ee2dcc7fa44833ccac2b3f61966c16",
+      "alpha": "8165b61c7d94aec9ebef3cd8d1eb9f11c5ee2dcc7fa44833ccac2b3f61966c16",
+      "magnitude": "8165b61c7d94aec9ebef3cd8d1eb9f11c5ee2dcc7fa44833ccac2b3f61966c16",
+      "current_residual": "1173aa5bd6d26246de03f129ecd5f4e6c939bf9f546dd4e8b67eed66c7c88413",
+      "g_magnitude": "8165b61c7d94aec9ebef3cd8d1eb9f11c5ee2dcc7fa44833ccac2b3f61966c16",
+      "g_waveform": "37620c969eac963efab7d9631ff45047b1541d24ac9d96c64bd8d4ddf6532181",
+      "g_dynamics": "1173aa5bd6d26246de03f129ecd5f4e6c939bf9f546dd4e8b67eed66c7c88413",
+      "anomaly_score": "8165b61c7d94aec9ebef3cd8d1eb9f11c5ee2dcc7fa44833ccac2b3f61966c16",
+      "likelihood_ratio": "8165b61c7d94aec9ebef3cd8d1eb9f11c5ee2dcc7fa44833ccac2b3f61966c16",
+      "anomaly_probability": "8165b61c7d94aec9ebef3cd8d1eb9f11c5ee2dcc7fa44833ccac2b3f61966c16",
+      "probability_prior": "8165b61c7d94aec9ebef3cd8d1eb9f11c5ee2dcc7fa44833ccac2b3f61966c16",
+      "record_likelihood_ratio": "8165b61c7d94aec9ebef3cd8d1eb9f11c5ee2dcc7fa44833ccac2b3f61966c16",
+      "record_probability": "8165b61c7d94aec9ebef3cd8d1eb9f11c5ee2dcc7fa44833ccac2b3f61966c16",
+      "record_current_rms": "8165b61c7d94aec9ebef3cd8d1eb9f11c5ee2dcc7fa44833ccac2b3f61966c16",
+      "file_prior": "8165b61c7d94aec9ebef3cd8d1eb9f11c5ee2dcc7fa44833ccac2b3f61966c16",
+      "anomaly_probability_file_prior": "8165b61c7d94aec9ebef3cd8d1eb9f11c5ee2dcc7fa44833ccac2b3f61966c16"
+    },
     "numeric_summary": {
       "score": [
         4690,
@@ -884,61 +950,12 @@
         3.8609101852604966e-05,
         62.03744230345713
       ],
-      "waveform_window": [
-        4690,
-        35598.0,
-        273252.0,
-        6.0,
-        8.0
-      ],
-      "is_scored": [
-        4690,
-        4690.0,
-        4690.0,
-        1.0,
-        1.0
-      ],
       "anomaly_score": [
         4690,
         764.6363636363635,
         595.0698039751383,
         0.0,
         0.9917355371900828
-      ],
-      "beyond_calibration_length": [
-        4690,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "incident_id": [
-        4690,
-        556.0,
-        556.0,
-        0.0,
-        1.0
-      ],
-      "incident_notification": [
-        4690,
-        1.0,
-        1.0,
-        0.0,
-        1.0
-      ],
-      "incident_escalation": [
-        4690,
-        1.0,
-        1.0,
-        0.0,
-        1.0
-      ],
-      "incident_update": [
-        4690,
-        2.0,
-        2.0,
-        0.0,
-        1.0
       ],
       "likelihood_ratio": [
         4690,
@@ -975,6 +992,13 @@
         0.000382727629124,
         0.5499999999999999
       ],
+      "record_current_rms": [
+        4690,
+        375748.3035893127,
+        35820534.49745557,
+        0.0,
+        196.92575383331751
+      ],
       "file_prior": [
         4690,
         600.0,
@@ -993,7 +1017,7 @@
     "alarm_rows": 556
   },
   "test_predictions_B.csv": {
-    "sha256": "8ad05ed296e7749cf00cd67a19307c8fdfa7832e95ff9e4f70546c654233d416",
+    "sha256": "9bd02a7cf086ad9ff81542166c2af768aefee944d4385e343a2d771d8a2f5524",
     "rows": 6697,
     "columns": [
       "subset",
@@ -1035,11 +1059,61 @@
       "probability_prior",
       "record_likelihood_ratio",
       "record_probability",
+      "record_current_rms",
+      "operating_state",
       "probability_source",
       "file_prior",
       "anomaly_probability_file_prior"
     ],
-    "exact_sha256": "396c2ed7a121193fdb4cb63864ed7836f05ceb3eda1f9165406bcdf1d475e5bb",
+    "exact_columns": [
+      "subset",
+      "label",
+      "row_id",
+      "record_id",
+      "timestamp",
+      "status",
+      "position",
+      "alarm",
+      "reason",
+      "action",
+      "waveform_window",
+      "magnitude_sensor",
+      "is_scored",
+      "criterion",
+      "model_id",
+      "protocol_version",
+      "alert_unit",
+      "beyond_calibration_length",
+      "notification",
+      "alert_level",
+      "escalation",
+      "incident_id",
+      "incident_notification",
+      "incident_escalation",
+      "incident_update",
+      "operating_state",
+      "probability_source"
+    ],
+    "exact_sha256": "e92bda3036e712466819292d48691400c02d1d126e044acf1b0e8823f4607e7d",
+    "nonfinite_sha256": {
+      "score": "aeef7f9dd7e657b72714ba9c531853793cc2a322b311a43811df71a214d94f9d",
+      "p_value": "aeef7f9dd7e657b72714ba9c531853793cc2a322b311a43811df71a214d94f9d",
+      "alpha": "aeef7f9dd7e657b72714ba9c531853793cc2a322b311a43811df71a214d94f9d",
+      "magnitude": "aeef7f9dd7e657b72714ba9c531853793cc2a322b311a43811df71a214d94f9d",
+      "current_residual": "2c5b0fb1debc49546cf95eeba2762be261386ee7042691733129bfb1a4a972de",
+      "g_magnitude": "aeef7f9dd7e657b72714ba9c531853793cc2a322b311a43811df71a214d94f9d",
+      "g_waveform": "16b6131da99d2831426c5f309b07082719dac2ed2d57a6c97e993727c00d380e",
+      "g_dynamics": "2c5b0fb1debc49546cf95eeba2762be261386ee7042691733129bfb1a4a972de",
+      "anomaly_score": "aeef7f9dd7e657b72714ba9c531853793cc2a322b311a43811df71a214d94f9d",
+      "likelihood_ratio": "aeef7f9dd7e657b72714ba9c531853793cc2a322b311a43811df71a214d94f9d",
+      "anomaly_probability": "aeef7f9dd7e657b72714ba9c531853793cc2a322b311a43811df71a214d94f9d",
+      "probability_prior": "aeef7f9dd7e657b72714ba9c531853793cc2a322b311a43811df71a214d94f9d",
+      "record_likelihood_ratio": "aeef7f9dd7e657b72714ba9c531853793cc2a322b311a43811df71a214d94f9d",
+      "record_probability": "aeef7f9dd7e657b72714ba9c531853793cc2a322b311a43811df71a214d94f9d",
+      "record_current_rms": "aeef7f9dd7e657b72714ba9c531853793cc2a322b311a43811df71a214d94f9d",
+      "file_prior": "aeef7f9dd7e657b72714ba9c531853793cc2a322b311a43811df71a214d94f9d",
+      "anomaly_probability_file_prior": "aeef7f9dd7e657b72714ba9c531853793cc2a322b311a43811df71a214d94f9d"
+    },
     "numeric_summary": {
       "score": [
         6697,
@@ -1097,61 +1171,12 @@
         0.0001821896122799,
         60.298741917918406
       ],
-      "waveform_window": [
-        6697,
-        50824.0,
-        390080.0,
-        6.0,
-        8.0
-      ],
-      "is_scored": [
-        6697,
-        6697.0,
-        6697.0,
-        1.0,
-        1.0
-      ],
       "anomaly_score": [
         6697,
         1120.1404958677683,
         694.3325592514173,
         0.0,
         0.9917355371900828
-      ],
-      "beyond_calibration_length": [
-        6697,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "incident_id": [
-        6697,
-        575.0,
-        583.0,
-        0.0,
-        3.0
-      ],
-      "incident_notification": [
-        6697,
-        4.0,
-        4.0,
-        0.0,
-        1.0
-      ],
-      "incident_escalation": [
-        6697,
-        1.0,
-        1.0,
-        0.0,
-        1.0
-      ],
-      "incident_update": [
-        6697,
-        2.0,
-        2.0,
-        0.0,
-        1.0
       ],
       "likelihood_ratio": [
         6697,
@@ -1187,6 +1212,13 @@
         189.9839957829752,
         0.0003729632650096,
         0.5499999999999999
+      ],
+      "record_current_rms": [
+        6697,
+        578571.9446227906,
+        61117722.178874396,
+        0.0,
+        205.11505870542712
       ],
       "file_prior": [
         6697,

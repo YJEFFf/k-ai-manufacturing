@@ -1,0 +1,40 @@
+[
+  {
+    "name": "v1",
+    "command": [
+      "/opt/anaconda3/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "-ra",
+      "-p",
+      "no:cacheprovider",
+      "press_submission/tests"
+    ],
+    "returncode": 0,
+    "seconds": 10.85,
+    "last_lines": [
+      ".................................................                        [100%]",
+      "49 passed in 9.33s"
+    ]
+  },
+  {
+    "name": "supplement",
+    "command": [
+      "/opt/anaconda3/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "-ra",
+      "-p",
+      "no:cacheprovider",
+      "analysis/press_supplement/test_contract.py"
+    ],
+    "returncode": 0,
+    "seconds": 3.41,
+    "last_lines": [
+      ".............                                                            [100%]",
+      "13 passed in 2.82s"
+    ]
+  }
+]

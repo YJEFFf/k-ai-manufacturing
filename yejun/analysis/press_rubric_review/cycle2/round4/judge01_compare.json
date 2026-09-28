@@ -1,0 +1,1887 @@
+{
+  "checks": [
+    {
+      "name": "states 469 row identity",
+      "ok": true,
+      "detail": "(469, 469)"
+    },
+    {
+      "name": "states 469 length",
+      "ok": true,
+      "detail": "0.0"
+    },
+    {
+      "name": "states 469 current_rms_dm",
+      "ok": true,
+      "detail": "0.0"
+    },
+    {
+      "name": "states 469 AI0_sd",
+      "ok": true,
+      "detail": "1.1102230246251565e-16"
+    },
+    {
+      "name": "states 469 AI1_sd",
+      "ok": true,
+      "detail": "1.1102230246251565e-16"
+    },
+    {
+      "name": "states 469 amp06",
+      "ok": true,
+      "detail": "3.979039320256561e-13"
+    },
+    {
+      "name": "states 469 r2_06",
+      "ok": true,
+      "detail": "3.3306690738754696e-16"
+    },
+    {
+      "name": "states 469 win_amp_ratio",
+      "ok": true,
+      "detail": "1.3322676295501878e-15"
+    },
+    {
+      "name": "states 469 p_low",
+      "ok": true,
+      "detail": "0.0"
+    },
+    {
+      "name": "states 469 state",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "states 469 state_thr90",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "states 469 state_thr92",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "states 469 state_thr95",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "states 469 substate4",
+      "ok": true,
+      "detail": "0.0"
+    },
+    {
+      "name": "states 469 substate4_center",
+      "ok": true,
+      "detail": "0.0"
+    },
+    {
+      "name": "states start",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "states end",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 가우스 혼합 1성분 BIC(로그 전류 RMS) value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 가우스 혼합 2성분 BIC(로그 전류 RMS) value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 가우스 혼합 3성분 BIC(로그 전류 RMS) value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 가우스 혼합 4성분 BIC(로그 전류 RMS) value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 가우스 혼합 5성분 BIC(로그 전류 RMS) value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 가우스 혼합 6성분 BIC(로그 전류 RMS) value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 가우스 혼합 1성분 BIC(로그 전류 RMS·AI1 SD) value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 가우스 혼합 2성분 BIC(로그 전류 RMS·AI1 SD) value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 가우스 혼합 3성분 BIC(로그 전류 RMS·AI1 SD) value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 가우스 혼합 4성분 BIC(로그 전류 RMS·AI1 SD) value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 가우스 혼합 5성분 BIC(로그 전류 RMS·AI1 SD) value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 가우스 혼합 6성분 BIC(로그 전류 RMS·AI1 SD) value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 시드 0 BIC 최소 성분 수 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 시드 1 BIC 최소 성분 수 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 시드 2 BIC 최소 성분 수 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 시드 3 BIC 최소 성분 수 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 시드 4 BIC 최소 성분 수 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 2성분 저수준과 2성분 저수준 Jaccard value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 3성분 저수준과 2성분 저수준 Jaccard value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 4성분 저수준과 2성분 저수준 Jaccard value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 5성분 저수준과 2성분 저수준 Jaccard value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 6성분 저수준과 2성분 저수준 Jaccard value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 0: 전류 RMS 성분 중앙 / 혼합 가중치 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 0: 전류 RMS 성분 중앙 / 혼합 가중치 value2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 1: 전류 RMS 성분 중앙 / 혼합 가중치 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 1: 전류 RMS 성분 중앙 / 혼합 가중치 value2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 2: 전류 RMS 성분 중앙 / 혼합 가중치 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 2: 전류 RMS 성분 중앙 / 혼합 가중치 value2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 3: 전류 RMS 성분 중앙 / 혼합 가중치 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 3: 전류 RMS 성분 중앙 / 혼합 가중치 value2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 0→0 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 0→0 value2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 0→0 n",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 0→1 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 0→1 value2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 0→1 n",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 0→2 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 0→2 value2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 0→2 n",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 0→3 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 0→3 value2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 0→3 n",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 1→0 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 1→0 value2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 1→0 n",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 1→1 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 1→1 value2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 1→1 n",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 1→2 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 1→2 value2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 1→2 n",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 1→3 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 1→3 value2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 1→3 n",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 2→0 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 2→0 value2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 2→0 n",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 2→1 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 2→1 value2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 2→1 n",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 2→2 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 2→2 value2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 2→2 n",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 2→3 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 2→3 value2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 2→3 n",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 3→0 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 3→0 value2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 3→0 n",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 3→1 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 3→1 value2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 3→1 n",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 3→2 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 3→2 value2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 3→2 n",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 3→3 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 3→3 value2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 하위 수준 3→3 n",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 진폭 비 1.3 초과 기록 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 기록 안 17행 창 0.6 Hz 진폭의 최대/최소 비(중앙·90%·99%·최대) value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 전환 관측 검정력(기록당 계단 4위치, 진폭 비>1.3) value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 전환 관측 검정력(기록당 계단 4위치, 진폭 비>1.3) value2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 무작위 시각 수집의 기대 가로지름 / 평균 검정력 반영 기대 탐지 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 무작위 시각 수집의 기대 가로지름 / 평균 검정력 반영 기대 탐지 value2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "summary 기록 길이별 검정력 가중 기대 탐지 value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "transition 84 row identity",
+      "ok": true,
+      "detail": "(84, 84)"
+    },
+    {
+      "name": "transition 84 records",
+      "ok": true,
+      "detail": "0.0"
+    },
+    {
+      "name": "transition 84 source_records",
+      "ok": true,
+      "detail": "0.0"
+    },
+    {
+      "name": "transition 84 target_records",
+      "ok": true,
+      "detail": "0.0"
+    },
+    {
+      "name": "transition 84 pre_alerted",
+      "ok": true,
+      "detail": "0.0"
+    },
+    {
+      "name": "transition 84 post_alerted",
+      "ok": true,
+      "detail": "0.0"
+    },
+    {
+      "name": "transition 84 post2s_alerted",
+      "ok": true,
+      "detail": "0.0"
+    },
+    {
+      "name": "transition 84 post_rate",
+      "ok": true,
+      "detail": "0.0"
+    },
+    {
+      "name": "transition 84 phase_mismatch_median_deg",
+      "ok": true,
+      "detail": "1.021405182655144e-13"
+    },
+    {
+      "name": "transition 84 first_post_reasons",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "narrowband 414 row identity",
+      "ok": true,
+      "detail": "(414, 414)"
+    },
+    {
+      "name": "narrowband 414 tone_frequency_hz",
+      "ok": true,
+      "detail": "1.6351364706679306e-12"
+    },
+    {
+      "name": "narrowband 414 row identity",
+      "ok": true,
+      "detail": "(414, 414)"
+    },
+    {
+      "name": "narrowband 414 tone_amplitude",
+      "ok": true,
+      "detail": "2.220446049250313e-16"
+    },
+    {
+      "name": "narrowband 414 current_amplitude",
+      "ok": true,
+      "detail": "2.5579538487363607e-13"
+    },
+    {
+      "name": "narrowband 414 harmonic_r2",
+      "ok": true,
+      "detail": "3.0531133177191805e-16"
+    },
+    {
+      "name": "narrowband 414 tone_rms_over_sd",
+      "ok": true,
+      "detail": "1.2212453270876722e-15"
+    },
+    {
+      "name": "narrowband 414 phase_difference",
+      "ok": true,
+      "detail": "1.0658141036401503e-14"
+    },
+    {
+      "name": "narrowband 414 spectral_peak_hz",
+      "ok": true,
+      "detail": "0.0"
+    },
+    {
+      "name": "observability abnormal|AI0_Vibration records_50rows",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "observability abnormal|AI0_Vibration tone_frequency_hz_median",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "observability abnormal|AI0_Vibration harmonic_r2_median",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "observability abnormal|AI0_Vibration tone_rms_over_sd_median",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "observability abnormal|AI0_Vibration tone_amp_current_spearman",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "observability abnormal|AI0_Vibration phase_lock_R",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "observability abnormal|AI1_Vibration records_50rows",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "observability abnormal|AI1_Vibration tone_frequency_hz_median",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "observability abnormal|AI1_Vibration harmonic_r2_median",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "observability abnormal|AI1_Vibration tone_rms_over_sd_median",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "observability abnormal|AI1_Vibration tone_amp_current_spearman",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "observability abnormal|AI1_Vibration phase_lock_R",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "observability normal|AI0_Vibration records_50rows",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "observability normal|AI0_Vibration tone_frequency_hz_median",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "observability normal|AI0_Vibration harmonic_r2_median",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "observability normal|AI0_Vibration tone_rms_over_sd_median",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "observability normal|AI0_Vibration tone_amp_current_spearman",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "observability normal|AI0_Vibration phase_lock_R",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "observability normal|AI1_Vibration records_50rows",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "observability normal|AI1_Vibration tone_frequency_hz_median",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "observability normal|AI1_Vibration harmonic_r2_median",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "observability normal|AI1_Vibration tone_rms_over_sd_median",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "observability normal|AI1_Vibration tone_amp_current_spearman",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "observability normal|AI1_Vibration phase_lock_R",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "FM3 distinguishes narrowband aliasing",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "normal B 0.01 저수준",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "normal B 0.01 부하",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "normal B 0.01 짧은 기록(<17)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "normal B 0.03 저수준",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "normal B 0.03 부하",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "normal B 0.03 짧은 기록(<17)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "normal B 0.05 저수준",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "normal B 0.05 부하",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "normal B 0.05 짧은 기록(<17)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "normal A 0.01 저수준",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "normal A 0.01 부하",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "normal A 0.01 짧은 기록(<17)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "normal A 0.03 저수준",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "normal A 0.03 부하",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "normal A 0.03 짧은 기록(<17)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "normal A 0.05 저수준",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "normal A 0.05 부하",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "normal A 0.05 짧은 기록(<17)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms A 0.01 0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms A 0.01 1",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms A 0.01 2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms A 0.01 3",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms A 0.03 0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms A 0.03 1",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms A 0.03 2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms A 0.03 3",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms A 0.05 0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms A 0.05 1",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms A 0.05 2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms A 0.05 3",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms B 0.01 0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms B 0.01 1",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms B 0.01 2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms B 0.01 3",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms B 0.03 0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms B 0.03 1",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms B 0.03 2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms B 0.03 3",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms B 0.05 0",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms B 0.05 1",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms B 0.05 2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "substate alarms B 0.05 3",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "shared threshold p",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "binomial retained only as independent approximation",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "split A 학습",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "split A 보정",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "split A 평가",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "split B 학습",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "split B 보정",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "split B 평가",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "split Fisher A",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "split Fisher B",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "AI2 meaning link",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/gaps.csv:2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/press_guard/model.py:89",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/operating_states_summary.csv:72",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/variable_dictionary.csv:7",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/press_submission/outputs/label_bypass.csv:2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/segment_rule_tolerance.csv:7",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/press_submission/README.md:25",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/press_guard/test_guard.py:58",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/duplicate_rows.csv:2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/gaps.csv:3",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/state_transition_stress.csv:2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/outliers.csv:5",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/outlier_rules.csv:8",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/press_submission/outputs/diagnosis.md:43",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_supervised/random_rows.csv:10",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/press_guard/model.py:286",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/press_guard/model.py:321",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/press_guard/outputs/ablation_v2.csv:26",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/ar2_oscillator.csv:2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/press_guard/outputs/ablation_v2.csv:20",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/imbalance.csv:3",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_supervised/grouped_records.csv:30",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/press_submission/outputs/splits.csv:2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/rolling_calibration_curve.csv:4",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/split_state_composition.csv:4",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/normal_alarms_by_state.csv:11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/state_transition_stress.csv:2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/calibration_curve.csv:14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/rolling_calibration_curve.csv:7",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/normal_alarms_by_state.csv:57",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/press_guard/outputs/uncertainty_v2.csv:23",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/press_guard/outputs/uncertainty_v2.csv:65",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/press_submission/outputs/label_bypass.csv:2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_supervised/random_rows.csv:10",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_supervised/grouped_records.csv:30",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_supplement/e1_detection_floor.csv:7",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/observability.csv:2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_supplement/e2_uci_metrics.csv:2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_supplement/e3_stability.csv:2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv:2",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv:3",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv:4",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv:5",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv:6",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "citation yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv:7",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "decision transition link two required rows",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "decision conditional guarantee limit",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "README revised relationships",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "guard README state denominators",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "guard continuous transition constraint",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json input_hashes normal",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json input_hashes abnormal",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json artifacts guard_A.json",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json artifacts guard_B.json",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json code_sha256 build_tables.py",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json code_sha256 press_guard/model.py",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json code_sha256 press_guard/analyze.py",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json sources press_guard/outputs/rolling.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json outputs variable_dictionary.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json outputs imbalance.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json outputs outliers.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json outputs quality_index.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json outputs class_differences.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json outputs split_context.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json outputs block_context.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json outputs ar2_oscillator.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json outputs amplitude_reliability.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json outputs component_combinations.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json outputs component_correlation.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json outputs first_alarm_reason.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json outputs calibration_curve.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json outputs duplicate_rows.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json outputs current_grid.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json outputs gaps.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest manifest.json outputs segment_rule_tolerance.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json input_hashes normal",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json input_hashes abnormal",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json artifacts guard_A.json",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json artifacts guard_B.json",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json code_sha256 yejun/analysis/press_evidence/build_diagnostics.py",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json code_sha256 yejun/analysis/press_evidence/figures.py",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json code_sha256 yejun/analysis/press_evidence/build_tables.py",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json code_sha256 yejun/analysis/press_evidence/diagnostic_probes.py",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json code_sha256 yejun/press_guard/model.py",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json code_sha256 yejun/press_submission/press/diagnosis.py",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json code_sha256 yejun/press_submission/press/data.py",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json sources yejun/press_guard/outputs/coupling_fit_v2.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json sources yejun/press_guard/outputs/rolling.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json sources yejun/press_guard/outputs/ablation_v2.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json sources yejun/press_guard/outputs/uncertainty_v2.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json sources yejun/press_submission/outputs/load_normalization_meta.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json sources yejun/analysis/press_supplement/e1_summary.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json sources yejun/analysis/press_supplement/e1_detection_floor.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json sources yejun/analysis/press_supplement/e2_uci_metrics.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json sources yejun/analysis/press_supplement/e3_stability.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json sources yejun/analysis/press_supervised/random_rows.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json sources yejun/analysis/press_supervised/grouped_records.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json sources yejun/analysis/press_evidence/gaps.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json sources yejun/analysis/press_evidence/imbalance.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json sources yejun/analysis/press_evidence/outliers.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json sources yejun/analysis/press_evidence/quality_index.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json sources yejun/analysis/press_evidence/block_context.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json sources yejun/analysis/press_evidence/current_grid.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json sources yejun/analysis/press_evidence/class_differences.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/analysis/press_evidence/ar2_oscillator.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/analysis/press_evidence/calibration_curve.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/analysis/press_evidence/duplicate_rows.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/analysis/press_evidence/gaps.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/analysis/press_evidence/imbalance.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/analysis/press_evidence/normal_alarms_by_state.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/analysis/press_evidence/observability.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/analysis/press_evidence/operating_states_summary.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/analysis/press_evidence/outlier_rules.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/analysis/press_evidence/outliers.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/analysis/press_evidence/rolling_calibration_curve.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/analysis/press_evidence/segment_rule_tolerance.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/analysis/press_evidence/split_state_composition.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/analysis/press_evidence/state_transition_stress.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/analysis/press_evidence/variable_dictionary.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/analysis/press_supervised/grouped_records.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/analysis/press_supervised/random_rows.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/analysis/press_supplement/e1_detection_floor.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/analysis/press_supplement/e1_summary.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/analysis/press_supplement/e2_uci_metrics.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/analysis/press_supplement/e3_stability.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/press_guard/model.py",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/press_guard/outputs/ablation_v2.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/press_guard/outputs/coupling_fit_v2.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/press_guard/outputs/uncertainty_v2.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/press_guard/test_guard.py",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/press_submission/README.md",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/press_submission/outputs/diagnosis.md",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/press_submission/outputs/label_bypass.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/press_submission/outputs/load_normalization_meta.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json cited yejun/press_submission/outputs/splits.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs operating_states.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs operating_states_summary.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs split_state_composition.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs sensor_relations.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs operating_variation.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs false_alarm_operating_level.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs vibration_tones.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs observability.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs state_transition_stress.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs production_unit_evidence.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs abnormal_segments.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs abnormal_summary.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs outlier_rules.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs quality_index_weighted.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs guidebook_stats_match.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs rolling_calibration_curve.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs normal_alarms_by_state.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs phase_continuity.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs guidebook_protocol_vs_records.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs variable_expected_signals.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs failure_mode_map.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs decision_table_diagnosis_v2.csv",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs yejun/analysis/press_evidence/figures/fig_d2a_timeline.png",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs yejun/analysis/press_evidence/figures/fig_d2b_blocks.png",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs yejun/analysis/press_evidence/figures/fig_d2c_raw_examples.png",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs yejun/analysis/press_evidence/figures/fig_d2d_relations.png",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest diagnostics_manifest.json outputs yejun/analysis/press_evidence/figures/fig_d2e_format_leak.png",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "contract includes transitions and tones",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "frozen numeric parameters B",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "frozen numeric parameters A",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "passed": 365,
+  "failed": 0,
+  "citations": [
+    "yejun/analysis/press_evidence/gaps.csv:2",
+    "yejun/press_guard/model.py:89",
+    "yejun/analysis/press_evidence/operating_states_summary.csv:72",
+    "yejun/analysis/press_evidence/variable_dictionary.csv:7",
+    "yejun/press_submission/outputs/label_bypass.csv:2",
+    "yejun/analysis/press_evidence/segment_rule_tolerance.csv:7",
+    "yejun/press_submission/README.md:25",
+    "yejun/press_guard/test_guard.py:58",
+    "yejun/analysis/press_evidence/duplicate_rows.csv:2",
+    "yejun/analysis/press_evidence/gaps.csv:3",
+    "yejun/analysis/press_evidence/state_transition_stress.csv:2",
+    "yejun/analysis/press_evidence/outliers.csv:5",
+    "yejun/analysis/press_evidence/outlier_rules.csv:8",
+    "yejun/press_submission/outputs/diagnosis.md:43",
+    "yejun/analysis/press_supervised/random_rows.csv:10",
+    "yejun/press_guard/model.py:286",
+    "yejun/press_guard/model.py:321",
+    "yejun/press_guard/outputs/ablation_v2.csv:26",
+    "yejun/analysis/press_evidence/ar2_oscillator.csv:2",
+    "yejun/press_guard/outputs/ablation_v2.csv:20",
+    "yejun/analysis/press_evidence/imbalance.csv:3",
+    "yejun/analysis/press_supervised/grouped_records.csv:30",
+    "yejun/press_submission/outputs/splits.csv:2",
+    "yejun/analysis/press_evidence/rolling_calibration_curve.csv:4",
+    "yejun/analysis/press_evidence/split_state_composition.csv:4",
+    "yejun/analysis/press_evidence/normal_alarms_by_state.csv:11",
+    "yejun/analysis/press_evidence/state_transition_stress.csv:2",
+    "yejun/analysis/press_evidence/calibration_curve.csv:14",
+    "yejun/analysis/press_evidence/rolling_calibration_curve.csv:7",
+    "yejun/analysis/press_evidence/normal_alarms_by_state.csv:57",
+    "yejun/press_guard/outputs/uncertainty_v2.csv:23",
+    "yejun/press_guard/outputs/uncertainty_v2.csv:65",
+    "yejun/press_submission/outputs/label_bypass.csv:2",
+    "yejun/analysis/press_supervised/random_rows.csv:10",
+    "yejun/analysis/press_supervised/grouped_records.csv:30",
+    "yejun/analysis/press_supplement/e1_detection_floor.csv:7",
+    "yejun/analysis/press_evidence/observability.csv:2",
+    "yejun/analysis/press_supplement/e2_uci_metrics.csv:2",
+    "yejun/analysis/press_supplement/e3_stability.csv:2",
+    "yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv:2",
+    "yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv:3",
+    "yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv:4",
+    "yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv:5",
+    "yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv:6",
+    "yejun/analysis/press_evidence/guidebook_protocol_vs_records.csv:7"
+  ],
+  "final_files": {
+    "yejun/analysis/press_evidence/build_diagnostics.py": "1541ad6409c256694d12691f8abccf72ee6f29954708c719b222748784a8de11",
+    "yejun/analysis/press_evidence/diagnostic_probes.py": "620f1e2c1dde23cc4ce5d03a7ccf30c4033b2af52d48039c597b32152a39fcf6",
+    "yejun/analysis/press_evidence/build_tables.py": "2952b498504a76d0929ce2e25c4d6953ee2b1c5204b14d09e4564a4cb34327a8",
+    "yejun/analysis/press_evidence/figures.py": "23d94f96019af64612c3bcaed9fbc20cb20358adc3cc8cb2d94674d7c837d3e1",
+    "yejun/analysis/press_evidence/README.md": "856ffd2afdf368610bb87fc04e8dc7a80d9c6da87fc0018a73ffb57e3e9d052c",
+    "yejun/press_guard/model.py": "8b9493a248609180f139aa777ed0b1cbf29d3bfca5e5b98f2e588cbeb0cb3f6f",
+    "yejun/press_guard/README.md": "bec969c543a5f7f31c8560fd528efb9f944bd0c478ce524c9a3b8f5b92ed16a7"
+  }
+}

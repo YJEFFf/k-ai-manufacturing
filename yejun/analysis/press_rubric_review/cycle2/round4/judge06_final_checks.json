@@ -1,0 +1,268 @@
+[
+  {
+    "name": "bit_identical_artifacts",
+    "all_identical": true,
+    "files": {
+      "probability_A.json": {
+        "expected": "1a8100e78046393d9292fc7c305b5ec57b46c4e2c73b03abeb596052a8705f8a",
+        "actual": "1a8100e78046393d9292fc7c305b5ec57b46c4e2c73b03abeb596052a8705f8a",
+        "identical": true
+      },
+      "guard_A.json": {
+        "expected": "c938707f1dd16e7c239b8053e7f032d8fac828d6c753de2b898ba9130a594f10",
+        "actual": "c938707f1dd16e7c239b8053e7f032d8fac828d6c753de2b898ba9130a594f10",
+        "identical": true
+      },
+      "probability_B.json": {
+        "expected": "7fde4cd1bdfa74e78e2d3f07c5dbd9c27619e19b2e94ceb8fab786c27abcaae8",
+        "actual": "7fde4cd1bdfa74e78e2d3f07c5dbd9c27619e19b2e94ceb8fab786c27abcaae8",
+        "identical": true
+      },
+      "guard_B.json": {
+        "expected": "b64ac3b30bc697034104287964f3154e88c8a50749ccdec04f6d4f8744fd6969",
+        "actual": "b64ac3b30bc697034104287964f3154e88c8a50749ccdec04f6d4f8744fd6969",
+        "identical": true
+      }
+    }
+  },
+  {
+    "name": "bit_identical_predictions",
+    "all_identical": true,
+    "files": {
+      "predictions_normal_A.csv": {
+        "expected": "d22b028d4e7c427fb19439e7a3d02182e4b87908f7475dab85b1c1639a59e224",
+        "actual": "d22b028d4e7c427fb19439e7a3d02182e4b87908f7475dab85b1c1639a59e224",
+        "identical": true
+      },
+      "predictions_normal_B.csv": {
+        "expected": "a50d0ac59cd29ff0f1dc0271b22a9db945f069c1cc25acd7f8ea44c1a9be10ce",
+        "actual": "a50d0ac59cd29ff0f1dc0271b22a9db945f069c1cc25acd7f8ea44c1a9be10ce",
+        "identical": true
+      },
+      "predictions_abnormal_B.csv": {
+        "expected": "1826e24db63c2d9c11496084db3679340936f83b63d8de4fdc4a7ca4046f304e",
+        "actual": "1826e24db63c2d9c11496084db3679340936f83b63d8de4fdc4a7ca4046f304e",
+        "identical": true
+      },
+      "predictions_abnormal_A.csv": {
+        "expected": "bfea23552a9c9d5fe0bb44b11fdc6bda59ac7340a30f315349b72631583432e7",
+        "actual": "bfea23552a9c9d5fe0bb44b11fdc6bda59ac7340a30f315349b72631583432e7",
+        "identical": true
+      },
+      "test_predictions_A.csv": {
+        "expected": "2941bf9dde2c9b66308eb6e26d19e4a41f93de1441833c8b476e0534e47e98c8",
+        "actual": "2941bf9dde2c9b66308eb6e26d19e4a41f93de1441833c8b476e0534e47e98c8",
+        "identical": true
+      },
+      "test_predictions_B.csv": {
+        "expected": "9bd02a7cf086ad9ff81542166c2af768aefee944d4385e343a2d771d8a2f5524",
+        "actual": "9bd02a7cf086ad9ff81542166c2af768aefee944d4385e343a2d771d8a2f5524",
+        "identical": true
+      }
+    }
+  },
+  {
+    "name": "stored_model_preserved_since_round3",
+    "baseline_commit": "061fac8",
+    "all_identical": true,
+    "files": {
+      "guard_A.json": true,
+      "guard_B.json": true,
+      "probability_A.json": true,
+      "probability_B.json": true
+    }
+  },
+  {
+    "name": "independent_metrics_A",
+    "rows": 4690,
+    "abnormal_rows": 600,
+    "TP": 556,
+    "FP": 0,
+    "FN": 44,
+    "F1": 0.9619377162629758,
+    "normal_records": 120,
+    "normal_alert_records": 0,
+    "prediction_escalation_rows": [
+      4092
+    ],
+    "incident_escalation_rows": [
+      4092
+    ],
+    "escalation_matches": true,
+    "escalation_missing_for_level1": 0,
+    "level1_incidents": 0
+  },
+  {
+    "name": "independent_metrics_B",
+    "rows": 6697,
+    "abnormal_rows": 600,
+    "TP": 569,
+    "FP": 3,
+    "FN": 31,
+    "F1": 0.9709897610921502,
+    "normal_records": 180,
+    "normal_alert_records": 3,
+    "prediction_escalation_rows": [
+      6098
+    ],
+    "incident_escalation_rows": [
+      6098
+    ],
+    "escalation_matches": true,
+    "escalation_missing_for_level1": 3,
+    "level1_incidents": 3
+  },
+  {
+    "name": "immutable_sources_and_frozen_files",
+    "checked": 268,
+    "changed": []
+  },
+  {
+    "name": "documents",
+    "package_files": 480,
+    "megabytes": 20.136013984680176,
+    "local_links": 161,
+    "broken": [],
+    "internal_markers": [],
+    "package_blind_checks": []
+  },
+  {
+    "name": "full_verify_digest_tamper_alarm_rows",
+    "returncode": 1,
+    "failure_lines": [
+      "FAIL expected.integrity  (['predictions_digest.json: 실행 후 변경'])"
+    ]
+  },
+  {
+    "name": "full_verify_digest_tamper_sha256",
+    "returncode": 1,
+    "failure_lines": [
+      "FAIL expected.integrity  (['predictions_digest.json: 실행 후 변경'])"
+    ]
+  },
+  {
+    "name": "full_verify_digest_tamper_exact_sha256",
+    "returncode": 1,
+    "failure_lines": [
+      "FAIL expected.integrity  (['predictions_digest.json: 실행 후 변경'])"
+    ]
+  },
+  {
+    "name": "exact_column_swap_incident_id",
+    "caught": true,
+    "result": [
+      {
+        "file": "test_predictions_B.csv",
+        "ok": false,
+        "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "name": "exact_column_swap_incident_notification",
+    "caught": true,
+    "result": [
+      {
+        "file": "test_predictions_B.csv",
+        "ok": false,
+        "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "name": "exact_column_swap_incident_escalation",
+    "caught": true,
+    "result": [
+      {
+        "file": "test_predictions_B.csv",
+        "ok": false,
+        "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "name": "exact_column_swap_magnitude_sensor",
+    "caught": true,
+    "result": [
+      {
+        "file": "test_predictions_B.csv",
+        "ok": false,
+        "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "name": "exact_column_swap_timestamp",
+    "caught": true,
+    "result": [
+      {
+        "file": "test_predictions_B.csv",
+        "ok": false,
+        "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "name": "exact_column_swap_probability_source",
+    "caught": true,
+    "result": [
+      {
+        "file": "test_predictions_B.csv",
+        "ok": false,
+        "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "name": "exact_column_swap_operating_state",
+    "caught": true,
+    "result": [
+      {
+        "file": "test_predictions_B.csv",
+        "ok": false,
+        "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "name": "documented_float_tolerance_score",
+    "result": [
+      {
+        "file": "test_predictions_B.csv",
+        "ok": true,
+        "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름",
+        "note": "부동소수 차이만 있음"
+      }
+    ]
+  },
+  {
+    "name": "documented_float_tolerance_likelihood_ratio",
+    "result": [
+      {
+        "file": "test_predictions_B.csv",
+        "ok": true,
+        "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름",
+        "note": "부동소수 차이만 있음"
+      }
+    ]
+  },
+  {
+    "name": "saved_model_inference_A",
+    "returncode": 0,
+    "identical": true,
+    "stdout": "4690행 → /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_inference_only_A.csv · SHA-256 2941bf9dde2c9b66… · 학습 실행과 같음"
+  },
+  {
+    "name": "saved_model_inference_B",
+    "returncode": 0,
+    "identical": true,
+    "stdout": "6697행 → /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_inference_only_B.csv · SHA-256 9bd02a7cf086ad9f… · 학습 실행과 같음"
+  }
+]

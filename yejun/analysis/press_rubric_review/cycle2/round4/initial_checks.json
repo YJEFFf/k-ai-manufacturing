@@ -1,0 +1,23 @@
+{
+  "base_commit": "6c61a88d8de437182a2cdd25f640af556a23036a",
+  "git_pull": "already up to date",
+  "initial_worktree": "clean",
+  "pytest": {
+    "passed": 84,
+    "seconds": 72.0
+  },
+  "frozen_comparison": {
+    "passed": 53,
+    "total": 53
+  },
+  "targeted_state_incident_digest_tests": {
+    "passed": 29,
+    "seconds": 43.38
+  },
+  "unchanged_model_artifact_sha256": {
+    "guard_A.json": "c938707f1dd16e7c239b8053e7f032d8fac828d6c753de2b898ba9130a594f10",
+    "guard_B.json": "b64ac3b30bc697034104287964f3154e88c8a50749ccdec04f6d4f8744fd6969",
+    "probability_A.json": "1a8100e78046393d9292fc7c305b5ec57b46c4e2c73b03abeb596052a8705f8a",
+    "probability_B.json": "7fde4cd1bdfa74e78e2d3f07c5dbd9c27619e19b2e94ceb8fab786c27abcaae8"
+  }
+}

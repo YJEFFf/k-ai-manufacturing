@@ -1,0 +1,7057 @@
+{
+  "head": "6c61a88d8de437182a2cdd25f640af556a23036a",
+  "initial_hashes": {
+    "press_guard/insights.py": "6eeb75f0daf73322d0e9a0877cdfb34e076a930bba798a9a9c691f1bbd1b9ddf",
+    "press_guard/test_insights.py": "eb0ecbfff17f44f20ce468a148db4dd213943551717522757990c8dd57904eb7",
+    "press_guard/model.py": "b50a90f09641d5c5f199fa5a48609b665b3bedf2e58f561836fdaa084e76427d",
+    "press_guard/README.md": "b7c24713312ad7fae907e1380750ec24acbf9540b6ff3d4df4067d2c19fb5ff1",
+    "analysis/press_evidence/README.md": "856ffd2afdf368610bb87fc04e8dc7a80d9c6da87fc0018a73ffb57e3e9d052c",
+    "analysis/press_evidence/normal_alarms_by_state.csv": "23d8135439f676eb182bca2ff2d0e99c4f6c6c6567cbc9d134b9cb200365b0b3",
+    "analysis/press_evidence/operating_states.csv": "d7519e54162bed4f5e11b184ea5b68681873c388ddf6d555972cb187497ab71c",
+    "analysis/press_selection/fp_mitigation_injection_v2.csv": "8be37e61e482962c95a5936dc9a1010f330b936ff1f4ab0dc95c78d3a2ee4609",
+    "analysis/press_supplement/e1_summary.csv": "ac599f2408e6eb8cf03c51ca8f83ffa34ba4cb11d48a168b23e43195ab980344",
+    "analysis/press_supplement/e1_manifest.json": "4da1e15f60123202ca19e8c06b236c3cf3cadc9d97ed0207e77f173f90a3ecf0",
+    "press_guard/outputs/fp_intensity_v2.csv": "ad196bfa8b075df50773f394b6278daf1bd08032d7ee9f13334ee687b3855186",
+    "press_guard/outputs/fn_intensity_v2.csv": "087f2e97bf7d3340d0fef027bb5a9a19ef4331fcd969b19ef33e6bb802353c0a",
+    "press_guard/outputs/error_condition_summary_v2.csv": "4a2af738f1404936c031103d352ebe590278c8779352ea1e076fb7d70b027a04",
+    "press_guard/outputs/sensor_importance_v2.csv": "2da67dd64e99cc165e7c4d76d496c147f67c96a5012dffbcac8826f20f3c750b",
+    "press_guard/outputs/ablation_v2.csv": "1a5b97c9a88ad908eed89ae91e673cea9275405498e2c63264c838cf60c3fbe0",
+    "press_guard/outputs/position_vibration_misses_v2.csv": "9516a8a3596360a364ad00ba6f78cf57fb0e0569750733e67d7ca18b986db3d4",
+    "press_guard/outputs/coupling_fit_v2.csv": "bc6786eb5d87b22bbc989430cf859dba4238d1629d82bae18d3ed8d2c297df70",
+    "press_guard/outputs/coupling_records_v2.csv": "e9ae50ceb437d34d5e04a48ef2f53160c0246a0898140a2d10a7caae2c0a9cbd",
+    "press_guard/outputs/fp_events_v2.csv": "906dc07b4ae961f856ed155ab5b55d19157e0c4b782e9a1b087c9b6dcc3c70b7",
+    "press_guard/outputs/near_miss_v2.csv": "0163b4257f5d1d63ff924317c6027b3d16b8c081bc42872a695796b22e2c79ce",
+    "press_guard/outputs/near_miss_corr_v2.csv": "501fff1b330a2b4747175fcd19fc8afcd842f70010434f9e5024eefb49f96d77",
+    "press_guard/artifacts/guard_A.json": "c938707f1dd16e7c239b8053e7f032d8fac828d6c753de2b898ba9130a594f10",
+    "press_guard/artifacts/guard_B.json": "b64ac3b30bc697034104287964f3154e88c8a50749ccdec04f6d4f8744fd6969",
+    "press_guard/artifacts/probability_A.json": "1a8100e78046393d9292fc7c305b5ec57b46c4e2c73b03abeb596052a8705f8a",
+    "press_guard/artifacts/probability_B.json": "7fde4cd1bdfa74e78e2d3f07c5dbd9c27619e19b2e94ceb8fab786c27abcaae8"
+  },
+  "input_sha256": {
+    "normal": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+    "abnormal": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e"
+  },
+  "model_manifest_matches": {
+    "A": true,
+    "B": true
+  },
+  "all_model_hashes_unchanged_from_baseline": {
+    "guard_A.json": true,
+    "guard_B.json": true,
+    "probability_A.json": true,
+    "probability_B.json": true
+  },
+  "primary_recount": [
+    {
+      "split": "A",
+      "alpha": 0.01,
+      "tp": 556,
+      "fp": 0,
+      "fn": 44,
+      "normal_notified_segments": 0,
+      "abnormal_notified_segments": 21
+    },
+    {
+      "split": "A",
+      "alpha": 0.03,
+      "tp": 569,
+      "fp": 1,
+      "fn": 31,
+      "normal_notified_segments": 1,
+      "abnormal_notified_segments": 21
+    },
+    {
+      "split": "A",
+      "alpha": 0.05,
+      "tp": 569,
+      "fp": 1,
+      "fn": 31,
+      "normal_notified_segments": 1,
+      "abnormal_notified_segments": 21
+    },
+    {
+      "split": "B",
+      "alpha": 0.01,
+      "tp": 569,
+      "fp": 3,
+      "fn": 31,
+      "normal_notified_segments": 3,
+      "abnormal_notified_segments": 21
+    },
+    {
+      "split": "B",
+      "alpha": 0.03,
+      "tp": 569,
+      "fp": 7,
+      "fn": 31,
+      "normal_notified_segments": 5,
+      "abnormal_notified_segments": 21
+    },
+    {
+      "split": "B",
+      "alpha": 0.05,
+      "tp": 569,
+      "fp": 11,
+      "fn": 31,
+      "normal_notified_segments": 7,
+      "abnormal_notified_segments": 21
+    }
+  ],
+  "FP": {
+    "rows": 69,
+    "evaluation_count": 480,
+    "unique_count": 300,
+    "fits": [
+      "frozen_A",
+      "frozen_B",
+      "rolling_test_300_359",
+      "rolling_test_360_419",
+      "rolling_test_540_599"
+    ],
+    "duplicates": {
+      "rolling_test_420_479": "frozen_B",
+      "rolling_test_480_539": "frozen_A"
+    },
+    "quartiles": [
+      119.74661022641826,
+      122.64225530372686,
+      177.8069858881607
+    ],
+    "b_train_q75": 222.8632101180933,
+    "block_results": [
+      {
+        "alpha": 0.01,
+        "exposure": "B 정상 학습 q75",
+        "mh_pooled_or": 14.666666666666664,
+        "cmh_statistic": 1.5830125024806512,
+        "cmh_p": 0.2083272999430723,
+        "cmh_continuity_correction": 0.5,
+        "cmh_informative_blocks": 2,
+        "permutation_p_greater": 0.10649467526623668,
+        "permutation_repeats": 20000,
+        "permutation_seed": 3,
+        "exact_conditional_p": 0.10757062146892657,
+        "block_tables": [
+          {
+            "block": 5,
+            "table": [
+              [
+                0.0,
+                12.0
+              ],
+              [
+                0.0,
+                48.0
+              ]
+            ]
+          },
+          {
+            "block": 6,
+            "table": [
+              [
+                0.0,
+                12.0
+              ],
+              [
+                0.0,
+                48.0
+              ]
+            ]
+          },
+          {
+            "block": 7,
+            "table": [
+              [
+                2.0,
+                14.0
+              ],
+              [
+                0.0,
+                44.0
+              ]
+            ]
+          },
+          {
+            "block": 8,
+            "table": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                120.0
+              ]
+            ]
+          },
+          {
+            "block": 9,
+            "table": [
+              [
+                0.0,
+                18.0
+              ],
+              [
+                1.0,
+                161.0
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "alpha": 0.01,
+        "exposure": "평가 분포 q75",
+        "mh_pooled_or": 7.800000000000001,
+        "cmh_statistic": 0.6842832358799718,
+        "cmh_p": 0.4081156976921211,
+        "cmh_continuity_correction": 0.5,
+        "cmh_informative_blocks": 2,
+        "permutation_p_greater": 0.19384030798460078,
+        "permutation_repeats": 20000,
+        "permutation_seed": 3,
+        "exact_conditional_p": 0.1957627118644068,
+        "block_tables": [
+          {
+            "block": 5,
+            "table": [
+              [
+                0.0,
+                18.0
+              ],
+              [
+                0.0,
+                42.0
+              ]
+            ]
+          },
+          {
+            "block": 6,
+            "table": [
+              [
+                0.0,
+                26.0
+              ],
+              [
+                0.0,
+                34.0
+              ]
+            ]
+          },
+          {
+            "block": 7,
+            "table": [
+              [
+                2.0,
+                19.0
+              ],
+              [
+                0.0,
+                39.0
+              ]
+            ]
+          },
+          {
+            "block": 8,
+            "table": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                120.0
+              ]
+            ]
+          },
+          {
+            "block": 9,
+            "table": [
+              [
+                0.0,
+                30.0
+              ],
+              [
+                1.0,
+                149.0
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "alpha": 0.03,
+        "exposure": "B 정상 학습 q75",
+        "mh_pooled_or": 8.806451612903226,
+        "cmh_statistic": 8.47460031576374,
+        "cmh_p": 0.0036013950321305277,
+        "cmh_continuity_correction": 0.5,
+        "cmh_informative_blocks": 3,
+        "permutation_p_greater": 0.0031998400079996,
+        "permutation_repeats": 20000,
+        "permutation_seed": 3,
+        "exact_conditional_p": 0.00415242421904436,
+        "block_tables": [
+          {
+            "block": 5,
+            "table": [
+              [
+                3.0,
+                9.0
+              ],
+              [
+                0.0,
+                48.0
+              ]
+            ]
+          },
+          {
+            "block": 6,
+            "table": [
+              [
+                0.0,
+                12.0
+              ],
+              [
+                0.0,
+                48.0
+              ]
+            ]
+          },
+          {
+            "block": 7,
+            "table": [
+              [
+                3.0,
+                13.0
+              ],
+              [
+                1.0,
+                43.0
+              ]
+            ]
+          },
+          {
+            "block": 8,
+            "table": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                120.0
+              ]
+            ]
+          },
+          {
+            "block": 9,
+            "table": [
+              [
+                0.0,
+                18.0
+              ],
+              [
+                3.0,
+                159.0
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "alpha": 0.03,
+        "exposure": "평가 분포 q75",
+        "mh_pooled_or": 9.4,
+        "cmh_statistic": 7.264973383220324,
+        "cmh_p": 0.007031231090161794,
+        "cmh_continuity_correction": 0.5,
+        "cmh_informative_blocks": 3,
+        "permutation_p_greater": 0.00519974001299935,
+        "permutation_repeats": 20000,
+        "permutation_seed": 3,
+        "exact_conditional_p": 0.005261402155091176,
+        "block_tables": [
+          {
+            "block": 5,
+            "table": [
+              [
+                3.0,
+                15.0
+              ],
+              [
+                0.0,
+                42.0
+              ]
+            ]
+          },
+          {
+            "block": 6,
+            "table": [
+              [
+                0.0,
+                26.0
+              ],
+              [
+                0.0,
+                34.0
+              ]
+            ]
+          },
+          {
+            "block": 7,
+            "table": [
+              [
+                4.0,
+                17.0
+              ],
+              [
+                0.0,
+                39.0
+              ]
+            ]
+          },
+          {
+            "block": 8,
+            "table": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                120.0
+              ]
+            ]
+          },
+          {
+            "block": 9,
+            "table": [
+              [
+                0.0,
+                30.0
+              ],
+              [
+                3.0,
+                147.0
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "alpha": 0.05,
+        "exposure": "B 정상 학습 q75",
+        "mh_pooled_or": 9.96153846153846,
+        "cmh_statistic": 21.894469731051892,
+        "cmh_p": 2.880628911849925e-06,
+        "cmh_continuity_correction": 0.5,
+        "cmh_informative_blocks": 4,
+        "permutation_p_greater": 4.999750012499375e-05,
+        "permutation_repeats": 20000,
+        "permutation_seed": 3,
+        "exact_conditional_p": 1.804216258035487e-05,
+        "block_tables": [
+          {
+            "block": 5,
+            "table": [
+              [
+                5.0,
+                7.0
+              ],
+              [
+                0.0,
+                48.0
+              ]
+            ]
+          },
+          {
+            "block": 6,
+            "table": [
+              [
+                0.0,
+                12.0
+              ],
+              [
+                2.0,
+                46.0
+              ]
+            ]
+          },
+          {
+            "block": 7,
+            "table": [
+              [
+                4.0,
+                12.0
+              ],
+              [
+                1.0,
+                43.0
+              ]
+            ]
+          },
+          {
+            "block": 8,
+            "table": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                120.0
+              ]
+            ]
+          },
+          {
+            "block": 9,
+            "table": [
+              [
+                2.0,
+                16.0
+              ],
+              [
+                3.0,
+                159.0
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "alpha": 0.05,
+        "exposure": "평가 분포 q75",
+        "mh_pooled_or": 20.39285714285714,
+        "cmh_statistic": 22.83804922594348,
+        "cmh_p": 1.7624178373365496e-06,
+        "cmh_continuity_correction": 0.5,
+        "cmh_informative_blocks": 4,
+        "permutation_p_greater": 9.99950002499875e-05,
+        "permutation_repeats": 20000,
+        "permutation_seed": 3,
+        "exact_conditional_p": 2.6975740160197066e-06,
+        "block_tables": [
+          {
+            "block": 5,
+            "table": [
+              [
+                5.0,
+                13.0
+              ],
+              [
+                0.0,
+                42.0
+              ]
+            ]
+          },
+          {
+            "block": 6,
+            "table": [
+              [
+                2.0,
+                24.0
+              ],
+              [
+                0.0,
+                34.0
+              ]
+            ]
+          },
+          {
+            "block": 7,
+            "table": [
+              [
+                5.0,
+                16.0
+              ],
+              [
+                0.0,
+                39.0
+              ]
+            ]
+          },
+          {
+            "block": 8,
+            "table": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                120.0
+              ]
+            ]
+          },
+          {
+            "block": 9,
+            "table": [
+              [
+                2.0,
+                28.0
+              ],
+              [
+                3.0,
+                147.0
+              ]
+            ]
+          }
+        ]
+      }
+    ],
+    "state_totals": [
+      {
+        "alpha": 0.01,
+        "state": "load",
+        "alerts": 3,
+        "records": 154
+      },
+      {
+        "alpha": 0.01,
+        "state": "low",
+        "alerts": 0,
+        "records": 225
+      },
+      {
+        "alpha": 0.01,
+        "state": "short",
+        "alerts": 0,
+        "records": 101
+      },
+      {
+        "alpha": 0.03,
+        "state": "load",
+        "alerts": 10,
+        "records": 154
+      },
+      {
+        "alpha": 0.03,
+        "state": "low",
+        "alerts": 0,
+        "records": 225
+      },
+      {
+        "alpha": 0.03,
+        "state": "short",
+        "alerts": 0,
+        "records": 101
+      },
+      {
+        "alpha": 0.05,
+        "state": "load",
+        "alerts": 17,
+        "records": 154
+      },
+      {
+        "alpha": 0.05,
+        "state": "low",
+        "alerts": 0,
+        "records": 225
+      },
+      {
+        "alpha": 0.05,
+        "state": "short",
+        "alerts": 0,
+        "records": 101
+      }
+    ],
+    "evidence_group_candidates": [
+      "동결 A",
+      "동결 B",
+      "독립 롤링 3겹",
+      "롤링 5겹 전체",
+      "합침",
+      "동결 B 보정 120구간",
+      "동결 B 평가 부하 기록(α 1%)"
+    ],
+    "evidence_matches": []
+  },
+  "interaction_A": {
+    "interaction_rho_difference": 0.4071045495779281,
+    "interaction_ci_low": 0.061297232693742626,
+    "interaction_ci_high": 0.7246890894852485,
+    "interaction_bootstrap_repeats": 4000,
+    "interaction_bootstrap_valid": 4000,
+    "interaction_bootstrap_seed": 11,
+    "interaction_bootstrap_share_le_zero": 0.009
+  },
+  "interaction_B": {
+    "interaction_rho_difference": 0.7986656225754232,
+    "interaction_ci_low": 0.5508637677386162,
+    "interaction_ci_high": 1.0225720295703218,
+    "interaction_bootstrap_repeats": 4000,
+    "interaction_bootstrap_valid": 4000,
+    "interaction_bootstrap_seed": 11,
+    "interaction_bootstrap_share_le_zero": 0.0
+  },
+  "FN": [
+    {
+      "split": "A",
+      "family": "vib_noise",
+      "level": 2.0,
+      "units": 75,
+      "detect_mean": 0.7232000000000001,
+      "spearman_amp": 0.29270021613987973,
+      "p_amp": 0.010823128536562405,
+      "spearman_vib_sd": 0.6319819396738279,
+      "p_vib_sd": 1.1970175094462308e-09,
+      "injection_repeats": 50,
+      "injection_seed_start": 0,
+      "injection_seed_end": 49,
+      "detected_amp_Q1": 13.499999999999998,
+      "units_amp_Q1": 19,
+      "miss_amp_Q1_ci_low": 0.25473684210526315,
+      "miss_amp_Q1_ci_high": 0.32947368421052625,
+      "detected_amp_Q2": 13.120000000000001,
+      "units_amp_Q2": 19,
+      "miss_amp_Q2_ci_low": 0.2726052631578948,
+      "miss_amp_Q2_ci_high": 0.3442105263157895,
+      "detected_amp_Q3": 12.299999999999999,
+      "units_amp_Q3": 18,
+      "miss_amp_Q3_ci_low": 0.28555555555555556,
+      "miss_amp_Q3_ci_high": 0.3466666666666667,
+      "detected_amp_Q4": 15.320000000000002,
+      "units_amp_Q4": 19,
+      "miss_amp_Q4_ci_low": 0.148421052631579,
+      "miss_amp_Q4_ci_high": 0.24107894736842128
+    },
+    {
+      "split": "A",
+      "family": "cur_noise",
+      "level": 0.1,
+      "units": 75,
+      "detect_mean": 0.9463999999999997,
+      "spearman_amp": -0.3809758216702154,
+      "p_amp": 0.0007460827113947484,
+      "spearman_vib_sd": -0.5878172946090506,
+      "p_vib_sd": 2.9456395090172546e-08,
+      "injection_repeats": 50,
+      "injection_seed_start": 0,
+      "injection_seed_end": 49,
+      "detected_amp_Q1": 18.24,
+      "units_amp_Q1": 19,
+      "miss_amp_Q1_ci_low": 0.02631578947368418,
+      "miss_amp_Q1_ci_high": 0.053684210526315786,
+      "detected_amp_Q2": 18.560000000000002,
+      "units_amp_Q2": 19,
+      "miss_amp_Q2_ci_low": 0.013684210526315854,
+      "miss_amp_Q2_ci_high": 0.03368421052631565,
+      "detected_amp_Q3": 17.4,
+      "units_amp_Q3": 18,
+      "miss_amp_Q3_ci_low": 0.018888888888888844,
+      "miss_amp_Q3_ci_high": 0.051111111111110996,
+      "detected_amp_Q4": 16.78,
+      "units_amp_Q4": 19,
+      "miss_amp_Q4_ci_low": 0.08842105263157896,
+      "miss_amp_Q4_ci_high": 0.1463157894736843
+    },
+    {
+      "split": "A",
+      "family": "cur_offset",
+      "level": 0.2,
+      "units": 75,
+      "detect_mean": 0.4,
+      "spearman_amp": -0.11440433343804832,
+      "p_amp": 0.32839921608655276,
+      "spearman_vib_sd": 0.010057523818729522,
+      "p_vib_sd": 0.931752666697085,
+      "injection_repeats": 1,
+      "injection_seed_start": NaN,
+      "injection_seed_end": NaN,
+      "detected_amp_Q1": 8.0,
+      "units_amp_Q1": 19,
+      "miss_amp_Q1_ci_low": 0.368421052631579,
+      "miss_amp_Q1_ci_high": 0.7894736842105263,
+      "detected_amp_Q2": 9.0,
+      "units_amp_Q2": 19,
+      "miss_amp_Q2_ci_low": 0.3157894736842105,
+      "miss_amp_Q2_ci_high": 0.736842105263158,
+      "detected_amp_Q3": 7.0,
+      "units_amp_Q3": 18,
+      "miss_amp_Q3_ci_low": 0.38888888888888884,
+      "miss_amp_Q3_ci_high": 0.8333333333333334,
+      "detected_amp_Q4": 6.0,
+      "units_amp_Q4": 19,
+      "miss_amp_Q4_ci_low": 0.4736842105263158,
+      "miss_amp_Q4_ci_high": 0.8947368421052632
+    },
+    {
+      "split": "A",
+      "family": "cur_gain",
+      "level": 1.15,
+      "units": 75,
+      "detect_mean": 0.0,
+      "spearman_amp": NaN,
+      "p_amp": NaN,
+      "spearman_vib_sd": NaN,
+      "p_vib_sd": NaN,
+      "injection_repeats": 1,
+      "injection_seed_start": NaN,
+      "injection_seed_end": NaN,
+      "detected_amp_Q1": 0.0,
+      "units_amp_Q1": 19,
+      "miss_amp_Q1_ci_low": 1.0,
+      "miss_amp_Q1_ci_high": 1.0,
+      "detected_amp_Q2": 0.0,
+      "units_amp_Q2": 19,
+      "miss_amp_Q2_ci_low": 1.0,
+      "miss_amp_Q2_ci_high": 1.0,
+      "detected_amp_Q3": 0.0,
+      "units_amp_Q3": 18,
+      "miss_amp_Q3_ci_low": 1.0,
+      "miss_amp_Q3_ci_high": 1.0,
+      "detected_amp_Q4": 0.0,
+      "units_amp_Q4": 19,
+      "miss_amp_Q4_ci_low": 1.0,
+      "miss_amp_Q4_ci_high": 1.0
+    },
+    {
+      "split": "A",
+      "family": "cur_gain",
+      "level": 1.3,
+      "units": 75,
+      "detect_mean": 0.22666666666666666,
+      "spearman_amp": 0.22654278248798454,
+      "p_amp": 0.05064720201581331,
+      "spearman_vib_sd": 0.029421140582855134,
+      "p_vib_sd": 0.802147148281118,
+      "injection_repeats": 1,
+      "injection_seed_start": NaN,
+      "injection_seed_end": NaN,
+      "detected_amp_Q1": 1.0,
+      "units_amp_Q1": 19,
+      "miss_amp_Q1_ci_low": 0.8421052631578947,
+      "miss_amp_Q1_ci_high": 1.0,
+      "detected_amp_Q2": 4.0,
+      "units_amp_Q2": 19,
+      "miss_amp_Q2_ci_low": 0.5789473684210527,
+      "miss_amp_Q2_ci_high": 0.9473684210526316,
+      "detected_amp_Q3": 7.0,
+      "units_amp_Q3": 18,
+      "miss_amp_Q3_ci_low": 0.38888888888888884,
+      "miss_amp_Q3_ci_high": 0.8333333333333334,
+      "detected_amp_Q4": 5.0,
+      "units_amp_Q4": 19,
+      "miss_amp_Q4_ci_low": 0.5263157894736843,
+      "miss_amp_Q4_ci_high": 0.8947368421052632
+    },
+    {
+      "split": "B",
+      "family": "vib_noise",
+      "level": 2.0,
+      "units": 111,
+      "detect_mean": 0.9502702702702703,
+      "spearman_amp": 0.4806255928716722,
+      "p_amp": 9.358298256115994e-08,
+      "spearman_vib_sd": 0.6896973253014349,
+      "p_vib_sd": 5.718162627806655e-17,
+      "injection_repeats": 50,
+      "injection_seed_start": 0,
+      "injection_seed_end": 49,
+      "detected_amp_Q1": 26.28,
+      "units_amp_Q1": 28,
+      "miss_amp_Q1_ci_low": 0.04714285714285704,
+      "miss_amp_Q1_ci_high": 0.07642857142857129,
+      "detected_amp_Q2": 26.240000000000006,
+      "units_amp_Q2": 28,
+      "miss_amp_Q2_ci_low": 0.04999999999999993,
+      "miss_amp_Q2_ci_high": 0.07642857142857129,
+      "detected_amp_Q3": 25.18,
+      "units_amp_Q3": 27,
+      "miss_amp_Q3_ci_low": 0.05111111111111111,
+      "miss_amp_Q3_ci_high": 0.08444444444444443,
+      "detected_amp_Q4": 27.78,
+      "units_amp_Q4": 28,
+      "miss_amp_Q4_ci_low": 0.0028571428571427804,
+      "miss_amp_Q4_ci_high": 0.014285714285714235
+    },
+    {
+      "split": "B",
+      "family": "cur_noise",
+      "level": 0.1,
+      "units": 111,
+      "detect_mean": 0.9753153153153153,
+      "spearman_amp": -0.4998956570579162,
+      "p_amp": 2.3250413454443905e-08,
+      "spearman_vib_sd": -0.5187410209317591,
+      "p_vib_sd": 5.46682870155253e-09,
+      "injection_repeats": 50,
+      "injection_seed_start": 0,
+      "injection_seed_end": 49,
+      "detected_amp_Q1": 27.560000000000002,
+      "units_amp_Q1": 28,
+      "miss_amp_Q1_ci_low": 0.007857142857142896,
+      "miss_amp_Q1_ci_high": 0.024285714285714244,
+      "detected_amp_Q2": 27.68,
+      "units_amp_Q2": 28,
+      "miss_amp_Q2_ci_low": 0.0071428571428571175,
+      "miss_amp_Q2_ci_high": 0.01571428571428579,
+      "detected_amp_Q3": 26.520000000000003,
+      "units_amp_Q3": 27,
+      "miss_amp_Q3_ci_low": 0.010370370370370363,
+      "miss_amp_Q3_ci_high": 0.026666666666666616,
+      "detected_amp_Q4": 26.5,
+      "units_amp_Q4": 28,
+      "miss_amp_Q4_ci_low": 0.04357142857142837,
+      "miss_amp_Q4_ci_high": 0.0635714285714285
+    },
+    {
+      "split": "B",
+      "family": "cur_offset",
+      "level": 0.2,
+      "units": 111,
+      "detect_mean": 0.5225225225225225,
+      "spearman_amp": -0.3180400297037509,
+      "p_amp": 0.0006699288798859397,
+      "spearman_vib_sd": -0.17900306096600493,
+      "p_vib_sd": 0.06013829770612017,
+      "injection_repeats": 1,
+      "injection_seed_start": NaN,
+      "injection_seed_end": NaN,
+      "detected_amp_Q1": 20.0,
+      "units_amp_Q1": 28,
+      "miss_amp_Q1_ci_low": 0.1428571428571429,
+      "miss_amp_Q1_ci_high": 0.4642857142857143,
+      "detected_amp_Q2": 16.0,
+      "units_amp_Q2": 28,
+      "miss_amp_Q2_ci_low": 0.25,
+      "miss_amp_Q2_ci_high": 0.6071428571428572,
+      "detected_amp_Q3": 14.0,
+      "units_amp_Q3": 27,
+      "miss_amp_Q3_ci_low": 0.2962962962962963,
+      "miss_amp_Q3_ci_high": 0.6666666666666667,
+      "detected_amp_Q4": 8.0,
+      "units_amp_Q4": 28,
+      "miss_amp_Q4_ci_low": 0.5357142857142857,
+      "miss_amp_Q4_ci_high": 0.8571428571428572
+    },
+    {
+      "split": "B",
+      "family": "cur_gain",
+      "level": 1.15,
+      "units": 111,
+      "detect_mean": 0.06306306306306306,
+      "spearman_amp": 0.2660402917771393,
+      "p_amp": 0.004769133071675599,
+      "spearman_vib_sd": 0.2625702010148288,
+      "p_vib_sd": 0.005368336374318667,
+      "injection_repeats": 1,
+      "injection_seed_start": NaN,
+      "injection_seed_end": NaN,
+      "detected_amp_Q1": 0.0,
+      "units_amp_Q1": 28,
+      "miss_amp_Q1_ci_low": 1.0,
+      "miss_amp_Q1_ci_high": 1.0,
+      "detected_amp_Q2": 0.0,
+      "units_amp_Q2": 28,
+      "miss_amp_Q2_ci_low": 1.0,
+      "miss_amp_Q2_ci_high": 1.0,
+      "detected_amp_Q3": 1.0,
+      "units_amp_Q3": 27,
+      "miss_amp_Q3_ci_low": 0.8888888888888888,
+      "miss_amp_Q3_ci_high": 1.0,
+      "detected_amp_Q4": 6.0,
+      "units_amp_Q4": 28,
+      "miss_amp_Q4_ci_low": 0.641964285714286,
+      "miss_amp_Q4_ci_high": 0.9285714285714286
+    },
+    {
+      "split": "B",
+      "family": "cur_gain",
+      "level": 1.3,
+      "units": 111,
+      "detect_mean": 0.5045045045045045,
+      "spearman_amp": 0.2395628714364746,
+      "p_amp": 0.011329459792593472,
+      "spearman_vib_sd": 0.1400261854170943,
+      "p_vib_sd": 0.14270296040863753,
+      "injection_repeats": 1,
+      "injection_seed_start": NaN,
+      "injection_seed_end": NaN,
+      "detected_amp_Q1": 9.0,
+      "units_amp_Q1": 28,
+      "miss_amp_Q1_ci_low": 0.5,
+      "miss_amp_Q1_ci_high": 0.8571428571428572,
+      "detected_amp_Q2": 14.0,
+      "units_amp_Q2": 28,
+      "miss_amp_Q2_ci_low": 0.3214285714285714,
+      "miss_amp_Q2_ci_high": 0.6785714285714286,
+      "detected_amp_Q3": 14.0,
+      "units_amp_Q3": 27,
+      "miss_amp_Q3_ci_low": 0.2962962962962963,
+      "miss_amp_Q3_ci_high": 0.6666666666666667,
+      "detected_amp_Q4": 19.0,
+      "units_amp_Q4": 28,
+      "miss_amp_Q4_ci_low": 0.1428571428571429,
+      "miss_amp_Q4_ci_high": 0.5
+    }
+  ],
+  "shock_reference": [
+    {
+      "split": "A",
+      "level": 4.0,
+      "units": 75,
+      "repeats": 5,
+      "detect": 0.29333333333333333,
+      "misses": 265,
+      "bernoulli_trial_ci": [
+        0.6577459419302492,
+        0.7522896093619422
+      ],
+      "unit_bootstrap_miss_ci": [
+        0.6293333333333333,
+        0.7786666666666666
+      ]
+    },
+    {
+      "split": "A",
+      "level": 6.0,
+      "units": 75,
+      "repeats": 5,
+      "detect": 0.9946666666666667,
+      "misses": 2,
+      "bernoulli_trial_ci": [
+        0.000646545270222208,
+        0.01913208910356802
+      ],
+      "unit_bootstrap_miss_ci": [
+        0.0,
+        0.016000000000000014
+      ]
+    },
+    {
+      "split": "B",
+      "level": 4.0,
+      "units": 111,
+      "repeats": 5,
+      "detect": 0.8702702702702703,
+      "misses": 72,
+      "bernoulli_trial_ci": [
+        0.10290726973887669,
+        0.16056548441399981
+      ],
+      "unit_bootstrap_miss_ci": [
+        0.09189189189189184,
+        0.16936936936936953
+      ]
+    },
+    {
+      "split": "B",
+      "level": 6.0,
+      "units": 111,
+      "repeats": 5,
+      "detect": 0.9963963963963964,
+      "misses": 2,
+      "bernoulli_trial_ci": [
+        0.0004367114396893033,
+        0.012956326914484909
+      ],
+      "unit_bootstrap_miss_ci": [
+        0.0,
+        0.009009009009009028
+      ]
+    }
+  ],
+  "E1_record_hash_matches": true,
+  "E1_comparison": [
+    {
+      "split": "A",
+      "family": "vib_noise",
+      "level": 2.0,
+      "mean": 0.744
+    },
+    {
+      "split": "A",
+      "family": "cur_noise",
+      "level": 0.1,
+      "mean": 0.9546666666666666
+    },
+    {
+      "split": "A",
+      "family": "cur_offset",
+      "level": 0.2,
+      "mean": 0.4
+    },
+    {
+      "split": "A",
+      "family": "cur_gain",
+      "level": 1.15,
+      "mean": 0.0
+    },
+    {
+      "split": "A",
+      "family": "cur_gain",
+      "level": 1.3,
+      "mean": 0.22666666666666666
+    },
+    {
+      "split": "B",
+      "family": "vib_noise",
+      "level": 2.0,
+      "mean": 0.9387387387387388
+    },
+    {
+      "split": "B",
+      "family": "cur_noise",
+      "level": 0.1,
+      "mean": 0.9747747747747747
+    },
+    {
+      "split": "B",
+      "family": "cur_offset",
+      "level": 0.2,
+      "mean": 0.5225225225225225
+    },
+    {
+      "split": "B",
+      "family": "cur_gain",
+      "level": 1.15,
+      "mean": 0.06306306306306306
+    },
+    {
+      "split": "B",
+      "family": "cur_gain",
+      "level": 1.3,
+      "mean": 0.5045045045045045
+    }
+  ],
+  "ablation": [
+    {
+      "split": "A",
+      "variant": "v2",
+      "fn": 44,
+      "fp": 0,
+      "abnormal_notified_segments": 21,
+      "normal_notified_segments": 0,
+      "matching_csv_models": [
+        "v2"
+      ]
+    },
+    {
+      "split": "A",
+      "variant": "v2_no_waveform",
+      "fn": 133,
+      "fp": 0,
+      "abnormal_notified_segments": 21,
+      "normal_notified_segments": 0,
+      "matching_csv_models": [
+        "no_waveform"
+      ]
+    },
+    {
+      "split": "A",
+      "variant": "v2_no_dynamics",
+      "fn": 86,
+      "fp": 0,
+      "abnormal_notified_segments": 21,
+      "normal_notified_segments": 0,
+      "matching_csv_models": [
+        "no_dynamics"
+      ]
+    },
+    {
+      "split": "A",
+      "variant": "v2_no_magnitude",
+      "fn": 56,
+      "fp": 0,
+      "abnormal_notified_segments": 20,
+      "normal_notified_segments": 0,
+      "matching_csv_models": [
+        "no_magnitude"
+      ]
+    },
+    {
+      "split": "B",
+      "variant": "v2",
+      "fn": 31,
+      "fp": 3,
+      "abnormal_notified_segments": 21,
+      "normal_notified_segments": 3,
+      "matching_csv_models": [
+        "v2"
+      ]
+    },
+    {
+      "split": "B",
+      "variant": "v2_no_waveform",
+      "fn": 112,
+      "fp": 3,
+      "abnormal_notified_segments": 21,
+      "normal_notified_segments": 3,
+      "matching_csv_models": [
+        "no_waveform"
+      ]
+    },
+    {
+      "split": "B",
+      "variant": "v2_no_dynamics",
+      "fn": 71,
+      "fp": 3,
+      "abnormal_notified_segments": 21,
+      "normal_notified_segments": 3,
+      "matching_csv_models": [
+        "no_dynamics"
+      ]
+    },
+    {
+      "split": "B",
+      "variant": "v2_no_magnitude",
+      "fn": 56,
+      "fp": 1,
+      "abnormal_notified_segments": 20,
+      "normal_notified_segments": 1,
+      "matching_csv_models": [
+        "no_magnitude"
+      ]
+    }
+  ],
+  "ablation_csv_variants": [
+    "v2",
+    "no_magnitude",
+    "no_waveform",
+    "no_dynamics",
+    "no_early_switch"
+  ],
+  "summary_citations": [
+    {
+      "row": 2,
+      "condition": "기록 시작 0.2초 안 × 진동이 동반되지 않은 이상",
+      "citations": {
+        "press_guard/outputs/position_vibration_misses_v2.csv": [
+          4,
+          5,
+          14,
+          15
+        ]
+      }
+    },
+    {
+      "row": 3,
+      "condition": "기록 시작 0.2초 안(모든 이상 구간)",
+      "citations": {
+        "press_guard/outputs/position_vibration_misses_v2.csv": [
+          2,
+          3,
+          12,
+          13
+        ]
+      }
+    },
+    {
+      "row": 4,
+      "condition": "기록 시작부터 있는 전류 오프셋",
+      "citations": {
+        "analysis/press_supplement/e1_summary.csv": [
+          278,
+          650
+        ]
+      }
+    },
+    {
+      "row": 5,
+      "condition": "전류 진폭만 커지는 변화 × 운전 강도",
+      "citations": {
+        "analysis/press_supplement/e1_summary.csv": [
+          338,
+          710
+        ],
+        "press_guard/outputs/fn_intensity_v2.csv": [
+          5,
+          10
+        ]
+      }
+    },
+    {
+      "row": 6,
+      "condition": "4σ 미만 진동 이상 × 조용한 운전",
+      "citations": {
+        "press_guard/outputs/fn_intensity_v2.csv": [
+          2,
+          7
+        ]
+      }
+    },
+    {
+      "row": 7,
+      "condition": "약한 전류 오프셋 × 고부하 운전",
+      "citations": {
+        "press_guard/outputs/fn_intensity_v2.csv": [
+          4,
+          9
+        ]
+      }
+    },
+    {
+      "row": 8,
+      "condition": "단발 진동 충격 4σ",
+      "citations": {
+        "analysis/press_selection/fp_mitigation_injection_v2.csv": [
+          9,
+          10,
+          39,
+          40
+        ]
+      }
+    },
+    {
+      "row": 9,
+      "condition": "고부하 운전(전류 진폭 ≥ B 정상 학습 q75)",
+      "citations": {
+        "press_guard/outputs/fp_intensity_v2.csv": [
+          17,
+          21,
+          22,
+          40,
+          44,
+          45,
+          53,
+          54,
+          55,
+          56,
+          57,
+          63,
+          67,
+          68,
+          70
+        ]
+      }
+    },
+    {
+      "row": 10,
+      "condition": "상부 진동(AI0) 단발 충격(구성비)",
+      "citations": {
+        "press_guard/outputs/fp_events_v2.csv": [
+          3,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          41,
+          42
+        ]
+      }
+    },
+    {
+      "row": 11,
+      "condition": "문턱 근처 정상 구간과 운전 강도",
+      "citations": {
+        "press_guard/outputs/near_miss_corr_v2.csv": [
+          6,
+          7,
+          8,
+          9
+        ]
+      }
+    },
+    {
+      "row": 12,
+      "condition": "전류 수준 상승",
+      "citations": {
+        "analysis/press_dayshift/v2_current_scale.csv": [
+          110,
+          167,
+          182,
+          221
+        ]
+      }
+    },
+    {
+      "row": 13,
+      "condition": "거친 계측 정밀도",
+      "citations": {
+        "press_guard/outputs/robustness_v2.csv": [
+          3,
+          15,
+          39,
+          51
+        ]
+      }
+    }
+  ],
+  "shared_threshold_reference_p": 0.09136977886977882,
+  "final_hashes": {
+    "press_guard/insights.py": "6eeb75f0daf73322d0e9a0877cdfb34e076a930bba798a9a9c691f1bbd1b9ddf",
+    "press_guard/test_insights.py": "eb0ecbfff17f44f20ce468a148db4dd213943551717522757990c8dd57904eb7",
+    "press_guard/model.py": "b50a90f09641d5c5f199fa5a48609b665b3bedf2e58f561836fdaa084e76427d",
+    "press_guard/README.md": "b7c24713312ad7fae907e1380750ec24acbf9540b6ff3d4df4067d2c19fb5ff1",
+    "analysis/press_evidence/README.md": "856ffd2afdf368610bb87fc04e8dc7a80d9c6da87fc0018a73ffb57e3e9d052c",
+    "analysis/press_evidence/normal_alarms_by_state.csv": "23d8135439f676eb182bca2ff2d0e99c4f6c6c6567cbc9d134b9cb200365b0b3",
+    "analysis/press_evidence/operating_states.csv": "d7519e54162bed4f5e11b184ea5b68681873c388ddf6d555972cb187497ab71c",
+    "analysis/press_selection/fp_mitigation_injection_v2.csv": "8be37e61e482962c95a5936dc9a1010f330b936ff1f4ab0dc95c78d3a2ee4609",
+    "analysis/press_supplement/e1_summary.csv": "ac599f2408e6eb8cf03c51ca8f83ffa34ba4cb11d48a168b23e43195ab980344",
+    "analysis/press_supplement/e1_manifest.json": "4da1e15f60123202ca19e8c06b236c3cf3cadc9d97ed0207e77f173f90a3ecf0",
+    "press_guard/outputs/fp_intensity_v2.csv": "ad196bfa8b075df50773f394b6278daf1bd08032d7ee9f13334ee687b3855186",
+    "press_guard/outputs/fn_intensity_v2.csv": "087f2e97bf7d3340d0fef027bb5a9a19ef4331fcd969b19ef33e6bb802353c0a",
+    "press_guard/outputs/error_condition_summary_v2.csv": "4a2af738f1404936c031103d352ebe590278c8779352ea1e076fb7d70b027a04",
+    "press_guard/outputs/sensor_importance_v2.csv": "2da67dd64e99cc165e7c4d76d496c147f67c96a5012dffbcac8826f20f3c750b",
+    "press_guard/outputs/ablation_v2.csv": "1a5b97c9a88ad908eed89ae91e673cea9275405498e2c63264c838cf60c3fbe0",
+    "press_guard/outputs/position_vibration_misses_v2.csv": "9516a8a3596360a364ad00ba6f78cf57fb0e0569750733e67d7ca18b986db3d4",
+    "press_guard/outputs/coupling_fit_v2.csv": "bc6786eb5d87b22bbc989430cf859dba4238d1629d82bae18d3ed8d2c297df70",
+    "press_guard/outputs/coupling_records_v2.csv": "e9ae50ceb437d34d5e04a48ef2f53160c0246a0898140a2d10a7caae2c0a9cbd",
+    "press_guard/outputs/fp_events_v2.csv": "906dc07b4ae961f856ed155ab5b55d19157e0c4b782e9a1b087c9b6dcc3c70b7",
+    "press_guard/outputs/near_miss_v2.csv": "0163b4257f5d1d63ff924317c6027b3d16b8c081bc42872a695796b22e2c79ce",
+    "press_guard/outputs/near_miss_corr_v2.csv": "501fff1b330a2b4747175fcd19fc8afcd842f70010434f9e5024eefb49f96d77",
+    "press_guard/artifacts/guard_A.json": "c938707f1dd16e7c239b8053e7f032d8fac828d6c753de2b898ba9130a594f10",
+    "press_guard/artifacts/guard_B.json": "b64ac3b30bc697034104287964f3154e88c8a50749ccdec04f6d4f8744fd6969",
+    "press_guard/artifacts/probability_A.json": "1a8100e78046393d9292fc7c305b5ec57b46c4e2c73b03abeb596052a8705f8a",
+    "press_guard/artifacts/probability_B.json": "7fde4cd1bdfa74e78e2d3f07c5dbd9c27619e19b2e94ceb8fab786c27abcaae8"
+  },
+  "changed_files_during_review": [],
+  "head_after": "6c61a88d8de437182a2cdd25f640af556a23036a",
+  "checks": [
+    {
+      "name": "primary/A/0.01/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/A/0.01/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/A/0.01/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/A/0.01/normal_notified_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/A/0.01/abnormal_notified_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/A/0.03/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/A/0.03/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/A/0.03/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/A/0.03/normal_notified_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/A/0.03/abnormal_notified_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/A/0.05/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/A/0.05/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/A/0.05/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/A/0.05/normal_notified_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/A/0.05/abnormal_notified_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/B/0.01/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/B/0.01/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/B/0.01/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/B/0.01/normal_notified_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/B/0.01/abnormal_notified_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/B/0.03/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/B/0.03/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/B/0.03/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/B/0.03/normal_notified_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/B/0.03/abnormal_notified_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/B/0.05/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/B/0.05/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/B/0.05/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/B/0.05/normal_notified_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "primary/B/0.05/abnormal_notified_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/2/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/2/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/2/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/2/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/2/ci_high",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-17
+    },
+    {
+      "name": "FP/2/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/2/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/2/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/2/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/3/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/3/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/3/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/3/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/3/ci_high",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-17
+    },
+    {
+      "name": "FP/3/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/3/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/3/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/3/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/4/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/4/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/4/rate",
+      "ok": true,
+      "max_abs_error": 2.6020852139652106e-17
+    },
+    {
+      "name": "FP/4/ci_low",
+      "ok": true,
+      "max_abs_error": 9.047667129391535e-17
+    },
+    {
+      "name": "FP/4/ci_high",
+      "ok": true,
+      "max_abs_error": 4.85722573273506e-17
+    },
+    {
+      "name": "FP/4/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/4/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/4/lift",
+      "ok": true,
+      "max_abs_error": 2.220446049250313e-16
+    },
+    {
+      "name": "FP/4/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/5/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/5/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/5/rate",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-17
+    },
+    {
+      "name": "FP/5/ci_low",
+      "ok": true,
+      "max_abs_error": 7.762887554996212e-17
+    },
+    {
+      "name": "FP/5/ci_high",
+      "ok": true,
+      "max_abs_error": 8.326672684688674e-17
+    },
+    {
+      "name": "FP/5/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/5/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/5/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/5/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 8.326672684688674e-17
+    },
+    {
+      "name": "FP/6/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/6/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/6/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/6/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/6/ci_high",
+      "ok": true,
+      "max_abs_error": 1.3877787807814457e-17
+    },
+    {
+      "name": "FP/6/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/6/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/6/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/6/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/7/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/7/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/7/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/7/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/7/ci_high",
+      "ok": true,
+      "max_abs_error": 5.204170427930421e-17
+    },
+    {
+      "name": "FP/7/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/7/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/7/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/7/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/8/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/8/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/8/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/8/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/8/ci_high",
+      "ok": true,
+      "max_abs_error": 5.204170427930421e-17
+    },
+    {
+      "name": "FP/8/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/8/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/8/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/8/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/9/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/9/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/9/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/9/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/9/ci_high",
+      "ok": true,
+      "max_abs_error": 5.204170427930421e-17
+    },
+    {
+      "name": "FP/9/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/9/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/9/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/9/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/10/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/10/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/10/rate",
+      "ok": true,
+      "max_abs_error": 2.42861286636753e-17
+    },
+    {
+      "name": "FP/10/ci_low",
+      "ok": true,
+      "max_abs_error": 9.194034422677078e-17
+    },
+    {
+      "name": "FP/10/ci_high",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FP/10/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/10/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/10/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/10/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 7.632783294297951e-17
+    },
+    {
+      "name": "FP/11/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/11/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/11/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/11/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/11/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/11/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/11/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/11/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/11/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/12/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/12/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/12/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/12/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/12/ci_high",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-18
+    },
+    {
+      "name": "FP/12/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/12/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/12/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/12/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/13/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/13/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/13/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/13/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/13/ci_high",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-18
+    },
+    {
+      "name": "FP/13/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/13/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/13/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/13/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/14/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/14/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/14/rate",
+      "ok": true,
+      "max_abs_error": 3.469446951953614e-17
+    },
+    {
+      "name": "FP/14/ci_low",
+      "ok": true,
+      "max_abs_error": 9.627715291671279e-17
+    },
+    {
+      "name": "FP/14/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/14/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/14/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/14/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/14/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 7.632783294297951e-17
+    },
+    {
+      "name": "FP/15/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/15/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/15/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/15/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/15/ci_high",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-17
+    },
+    {
+      "name": "FP/15/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/15/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/15/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/15/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/16/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/16/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/16/rate",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FP/16/ci_low",
+      "ok": true,
+      "max_abs_error": 6.144715812561596e-17
+    },
+    {
+      "name": "FP/16/ci_high",
+      "ok": true,
+      "max_abs_error": 9.367506770274758e-17
+    },
+    {
+      "name": "FP/16/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/16/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/16/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/16/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/17/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/17/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/17/rate",
+      "ok": true,
+      "max_abs_error": 7.979727989493313e-17
+    },
+    {
+      "name": "FP/17/ci_low",
+      "ok": true,
+      "max_abs_error": 7.112366251504909e-17
+    },
+    {
+      "name": "FP/17/ci_high",
+      "ok": true,
+      "max_abs_error": 4.163336342344337e-17
+    },
+    {
+      "name": "FP/17/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/17/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/17/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/17/state_rms_threshold",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/17/state_min_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/17/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/18/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/18/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/18/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/18/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/18/ci_high",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FP/18/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/18/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/18/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/18/state_rms_threshold",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/18/state_min_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/18/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/19/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/19/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/19/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/19/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/19/ci_high",
+      "ok": true,
+      "max_abs_error": 1.3877787807814457e-17
+    },
+    {
+      "name": "FP/19/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/19/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/19/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/19/state_rms_threshold",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/19/state_min_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/19/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/20/all_load",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "FP/20/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/20/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/20/rate",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-17
+    },
+    {
+      "name": "FP/20/ci_low",
+      "ok": true,
+      "max_abs_error": 2.5587171270657905e-17
+    },
+    {
+      "name": "FP/20/ci_high",
+      "ok": true,
+      "max_abs_error": 1.3877787807814457e-17
+    },
+    {
+      "name": "FP/20/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/20/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/20/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/20/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/21/all_load",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "FP/21/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/21/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/21/rate",
+      "ok": true,
+      "max_abs_error": 1.3877787807814457e-17
+    },
+    {
+      "name": "FP/21/ci_low",
+      "ok": true,
+      "max_abs_error": 6.765421556309548e-17
+    },
+    {
+      "name": "FP/21/ci_high",
+      "ok": true,
+      "max_abs_error": 8.326672684688674e-17
+    },
+    {
+      "name": "FP/21/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/21/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/21/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/21/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 3.469446951953614e-17
+    },
+    {
+      "name": "FP/22/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/22/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/22/rate",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FP/22/ci_low",
+      "ok": true,
+      "max_abs_error": 7.28583859910259e-17
+    },
+    {
+      "name": "FP/22/ci_high",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "FP/22/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/22/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/22/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/22/mh_pooled_or",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/22/cmh_statistic",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/22/cmh_p",
+      "ok": true,
+      "max_abs_error": 3.608224830031759e-15
+    },
+    {
+      "name": "FP/22/cmh_continuity_correction",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/22/cmh_informative_blocks",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/22/permutation_p_greater",
+      "ok": true,
+      "max_abs_error": 8.326672684688674e-17
+    },
+    {
+      "name": "FP/22/permutation_repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/22/permutation_seed",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/22/threshold",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/23/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/23/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/23/rate",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-17
+    },
+    {
+      "name": "FP/23/ci_low",
+      "ok": true,
+      "max_abs_error": 7.762887554996212e-17
+    },
+    {
+      "name": "FP/23/ci_high",
+      "ok": true,
+      "max_abs_error": 8.326672684688674e-17
+    },
+    {
+      "name": "FP/23/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/23/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/23/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/23/mh_pooled_or",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/23/cmh_statistic",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/23/cmh_p",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/23/cmh_continuity_correction",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/23/cmh_informative_blocks",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/23/permutation_p_greater",
+      "ok": true,
+      "max_abs_error": 8.326672684688674e-17
+    },
+    {
+      "name": "FP/23/permutation_repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/23/permutation_seed",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/23/threshold",
+      "ok": true,
+      "max_abs_error": 2.842170943040401e-14
+    },
+    {
+      "name": "FP/24/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/24/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/24/rate",
+      "ok": true,
+      "max_abs_error": 7.632783294297951e-17
+    },
+    {
+      "name": "FP/24/ci_low",
+      "ok": true,
+      "max_abs_error": 1.951563910473908e-17
+    },
+    {
+      "name": "FP/24/ci_high",
+      "ok": true,
+      "max_abs_error": 1.3877787807814457e-17
+    },
+    {
+      "name": "FP/24/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/24/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/24/lift",
+      "ok": true,
+      "max_abs_error": 2.220446049250313e-16
+    },
+    {
+      "name": "FP/24/threshold",
+      "ok": true,
+      "max_abs_error": 5.684341886080802e-14
+    },
+    {
+      "name": "FP/24/spearman_amp",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "FP/24/spearman_p",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FP/24/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/25/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/25/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/25/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/25/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/25/ci_high",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-17
+    },
+    {
+      "name": "FP/25/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/25/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/25/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/25/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/26/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/26/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/26/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/26/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/26/ci_high",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-17
+    },
+    {
+      "name": "FP/26/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/26/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/26/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/26/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/27/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/27/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/27/rate",
+      "ok": true,
+      "max_abs_error": 7.632783294297951e-17
+    },
+    {
+      "name": "FP/27/ci_low",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FP/27/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/27/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/27/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/27/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/27/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/28/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/28/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/28/rate",
+      "ok": true,
+      "max_abs_error": 8.326672684688674e-17
+    },
+    {
+      "name": "FP/28/ci_low",
+      "ok": true,
+      "max_abs_error": 1.0408340855860843e-17
+    },
+    {
+      "name": "FP/28/ci_high",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "FP/28/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/28/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/28/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/28/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 1.3444106938820255e-17
+    },
+    {
+      "name": "FP/29/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/29/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/29/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/29/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/29/ci_high",
+      "ok": true,
+      "max_abs_error": 1.3877787807814457e-17
+    },
+    {
+      "name": "FP/29/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/29/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/29/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/29/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/30/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/30/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/30/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/30/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/30/ci_high",
+      "ok": true,
+      "max_abs_error": 5.204170427930421e-17
+    },
+    {
+      "name": "FP/30/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/30/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/30/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/30/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/31/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/31/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/31/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/31/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/31/ci_high",
+      "ok": true,
+      "max_abs_error": 5.204170427930421e-17
+    },
+    {
+      "name": "FP/31/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/31/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/31/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/31/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/32/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/32/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/32/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/32/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/32/ci_high",
+      "ok": true,
+      "max_abs_error": 5.204170427930421e-17
+    },
+    {
+      "name": "FP/32/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/32/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/32/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/32/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/33/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/33/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/33/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/33/ci_low",
+      "ok": true,
+      "max_abs_error": 6.245004513516506e-17
+    },
+    {
+      "name": "FP/33/ci_high",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "FP/33/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/33/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/33/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/33/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/34/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/34/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/34/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/34/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/34/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/34/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/34/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/34/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/34/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/35/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/35/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/35/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/35/ci_low",
+      "ok": true,
+      "max_abs_error": 2.42861286636753e-17
+    },
+    {
+      "name": "FP/35/ci_high",
+      "ok": true,
+      "max_abs_error": 8.326672684688674e-17
+    },
+    {
+      "name": "FP/35/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/35/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/35/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/35/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/36/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/36/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/36/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/36/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/36/ci_high",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-18
+    },
+    {
+      "name": "FP/36/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/36/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/36/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/36/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/37/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/37/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/37/rate",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-17
+    },
+    {
+      "name": "FP/37/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/37/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/37/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/37/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/37/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/37/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/38/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/38/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/38/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/38/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/38/ci_high",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-17
+    },
+    {
+      "name": "FP/38/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/38/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/38/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/38/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/39/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/39/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/39/rate",
+      "ok": true,
+      "max_abs_error": 6.591949208711867e-17
+    },
+    {
+      "name": "FP/39/ci_low",
+      "ok": true,
+      "max_abs_error": 3.469446951953614e-17
+    },
+    {
+      "name": "FP/39/ci_high",
+      "ok": true,
+      "max_abs_error": 4.85722573273506e-17
+    },
+    {
+      "name": "FP/39/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/39/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/39/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/39/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/40/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/40/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/40/rate",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "FP/40/ci_low",
+      "ok": true,
+      "max_abs_error": 2.0816681711721685e-17
+    },
+    {
+      "name": "FP/40/ci_high",
+      "ok": true,
+      "max_abs_error": 8.326672684688674e-17
+    },
+    {
+      "name": "FP/40/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/40/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/40/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/40/state_rms_threshold",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/40/state_min_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/40/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/41/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/41/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/41/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/41/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/41/ci_high",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FP/41/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/41/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/41/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/41/state_rms_threshold",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/41/state_min_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/41/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/42/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/42/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/42/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/42/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/42/ci_high",
+      "ok": true,
+      "max_abs_error": 1.3877787807814457e-17
+    },
+    {
+      "name": "FP/42/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/42/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/42/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/42/state_rms_threshold",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/42/state_min_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/42/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/43/all_load",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "FP/43/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/43/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/43/rate",
+      "ok": true,
+      "max_abs_error": 4.163336342344337e-17
+    },
+    {
+      "name": "FP/43/ci_low",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "FP/43/ci_high",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "FP/43/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/43/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/43/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/43/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 8.912141857830846e-17
+    },
+    {
+      "name": "FP/44/all_load",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "FP/44/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/44/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/44/rate",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FP/44/ci_low",
+      "ok": true,
+      "max_abs_error": 7.632783294297951e-17
+    },
+    {
+      "name": "FP/44/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/44/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/44/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/44/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/44/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 8.692590917902532e-17
+    },
+    {
+      "name": "FP/45/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/45/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/45/rate",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-17
+    },
+    {
+      "name": "FP/45/ci_low",
+      "ok": true,
+      "max_abs_error": 4.163336342344337e-17
+    },
+    {
+      "name": "FP/45/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/45/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/45/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/45/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/45/mh_pooled_or",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/45/cmh_statistic",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/45/cmh_p",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "FP/45/cmh_continuity_correction",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/45/cmh_informative_blocks",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/45/permutation_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/45/permutation_repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/45/permutation_seed",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/45/threshold",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/46/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/46/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/46/rate",
+      "ok": true,
+      "max_abs_error": 8.326672684688674e-17
+    },
+    {
+      "name": "FP/46/ci_low",
+      "ok": true,
+      "max_abs_error": 1.0408340855860843e-17
+    },
+    {
+      "name": "FP/46/ci_high",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "FP/46/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/46/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/46/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/46/mh_pooled_or",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/46/cmh_statistic",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/46/cmh_p",
+      "ok": true,
+      "max_abs_error": 9.367506770274758e-17
+    },
+    {
+      "name": "FP/46/cmh_continuity_correction",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/46/cmh_informative_blocks",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/46/permutation_p_greater",
+      "ok": true,
+      "max_abs_error": 5.0306980803327406e-17
+    },
+    {
+      "name": "FP/46/permutation_repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/46/permutation_seed",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/46/threshold",
+      "ok": true,
+      "max_abs_error": 2.842170943040401e-14
+    },
+    {
+      "name": "FP/47/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/47/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/47/rate",
+      "ok": true,
+      "max_abs_error": 1.3877787807814457e-17
+    },
+    {
+      "name": "FP/47/ci_low",
+      "ok": true,
+      "max_abs_error": 3.8163916471489756e-17
+    },
+    {
+      "name": "FP/47/ci_high",
+      "ok": true,
+      "max_abs_error": 8.326672684688674e-17
+    },
+    {
+      "name": "FP/47/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/47/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/47/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/47/threshold",
+      "ok": true,
+      "max_abs_error": 5.684341886080802e-14
+    },
+    {
+      "name": "FP/47/spearman_amp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/47/spearman_p",
+      "ok": true,
+      "max_abs_error": 4.163336342344337e-17
+    },
+    {
+      "name": "FP/47/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FP/48/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/48/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/48/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/48/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/48/ci_high",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-17
+    },
+    {
+      "name": "FP/48/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/48/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/48/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/48/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/49/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/49/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/49/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/49/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/49/ci_high",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-17
+    },
+    {
+      "name": "FP/49/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/49/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/49/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/49/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/50/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/50/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/50/rate",
+      "ok": true,
+      "max_abs_error": 7.632783294297951e-17
+    },
+    {
+      "name": "FP/50/ci_low",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FP/50/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/50/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/50/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/50/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/50/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/51/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/51/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/51/rate",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FP/51/ci_low",
+      "ok": true,
+      "max_abs_error": 4.163336342344337e-17
+    },
+    {
+      "name": "FP/51/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/51/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/51/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/51/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/51/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/52/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/52/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/52/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/52/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/52/ci_high",
+      "ok": true,
+      "max_abs_error": 1.3877787807814457e-17
+    },
+    {
+      "name": "FP/52/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/52/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/52/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/52/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/53/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/53/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/53/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/53/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/53/ci_high",
+      "ok": true,
+      "max_abs_error": 5.204170427930421e-17
+    },
+    {
+      "name": "FP/53/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/53/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/53/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/53/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/54/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/54/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/54/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/54/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/54/ci_high",
+      "ok": true,
+      "max_abs_error": 5.204170427930421e-17
+    },
+    {
+      "name": "FP/54/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/54/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/54/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/54/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/55/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/55/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/55/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/55/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/55/ci_high",
+      "ok": true,
+      "max_abs_error": 5.204170427930421e-17
+    },
+    {
+      "name": "FP/55/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/55/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/55/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/55/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/56/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/56/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/56/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/56/ci_low",
+      "ok": true,
+      "max_abs_error": 1.3877787807814457e-17
+    },
+    {
+      "name": "FP/56/ci_high",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FP/56/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/56/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/56/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/56/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/57/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/57/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/57/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/57/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/57/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/57/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/57/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/57/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/57/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/58/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/58/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/58/rate",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "FP/58/ci_low",
+      "ok": true,
+      "max_abs_error": 1.0408340855860843e-17
+    },
+    {
+      "name": "FP/58/ci_high",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FP/58/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/58/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/58/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/58/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FP/59/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/59/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/59/rate",
+      "ok": true,
+      "max_abs_error": 3.469446951953614e-17
+    },
+    {
+      "name": "FP/59/ci_low",
+      "ok": true,
+      "max_abs_error": 9.627715291671279e-17
+    },
+    {
+      "name": "FP/59/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/59/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/59/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/59/lift",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "FP/59/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/60/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/60/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/60/rate",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "FP/60/ci_low",
+      "ok": true,
+      "max_abs_error": 1.0408340855860843e-17
+    },
+    {
+      "name": "FP/60/ci_high",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FP/60/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/60/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/60/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/60/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FP/61/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/61/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/61/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/61/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/61/ci_high",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-17
+    },
+    {
+      "name": "FP/61/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/61/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/61/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/61/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/62/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/62/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/62/rate",
+      "ok": true,
+      "max_abs_error": 7.632783294297951e-17
+    },
+    {
+      "name": "FP/62/ci_low",
+      "ok": true,
+      "max_abs_error": 3.8163916471489756e-17
+    },
+    {
+      "name": "FP/62/ci_high",
+      "ok": true,
+      "max_abs_error": 9.71445146547012e-17
+    },
+    {
+      "name": "FP/62/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/62/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/62/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/62/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/63/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/63/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/63/rate",
+      "ok": true,
+      "max_abs_error": 8.326672684688674e-17
+    },
+    {
+      "name": "FP/63/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/63/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/63/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/63/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/63/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/63/state_rms_threshold",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/63/state_min_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/63/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 4.1359030627651384e-25
+    },
+    {
+      "name": "FP/64/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/64/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/64/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/64/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/64/ci_high",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FP/64/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/64/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/64/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/64/state_rms_threshold",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/64/state_min_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/64/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/65/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/65/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/65/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/65/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/65/ci_high",
+      "ok": true,
+      "max_abs_error": 1.3877787807814457e-17
+    },
+    {
+      "name": "FP/65/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/65/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/65/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/65/state_rms_threshold",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/65/state_min_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/65/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/66/all_load",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "FP/66/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/66/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/66/rate",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "FP/66/ci_low",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-17
+    },
+    {
+      "name": "FP/66/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/66/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/66/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/66/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/66/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/67/all_load",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "FP/67/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/67/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/67/rate",
+      "ok": true,
+      "max_abs_error": 8.326672684688674e-17
+    },
+    {
+      "name": "FP/67/ci_low",
+      "ok": true,
+      "max_abs_error": 1.3877787807814457e-17
+    },
+    {
+      "name": "FP/67/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/67/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/67/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/67/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/67/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 2.117582368135751e-22
+    },
+    {
+      "name": "FP/68/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/68/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/68/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/68/ci_low",
+      "ok": true,
+      "max_abs_error": 1.3877787807814457e-17
+    },
+    {
+      "name": "FP/68/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/68/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/68/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/68/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/68/mh_pooled_or",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/68/cmh_statistic",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/68/cmh_p",
+      "ok": true,
+      "max_abs_error": 4.304409679709541e-17
+    },
+    {
+      "name": "FP/68/cmh_continuity_correction",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/68/cmh_informative_blocks",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/68/permutation_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/68/permutation_repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/68/permutation_seed",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/68/threshold",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/69/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/69/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/69/rate",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FP/69/ci_low",
+      "ok": true,
+      "max_abs_error": 4.163336342344337e-17
+    },
+    {
+      "name": "FP/69/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/69/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/69/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/69/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/69/mh_pooled_or",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/69/cmh_statistic",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/69/cmh_p",
+      "ok": true,
+      "max_abs_error": 2.2581051340852393e-17
+    },
+    {
+      "name": "FP/69/cmh_continuity_correction",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/69/cmh_informative_blocks",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/69/permutation_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/69/permutation_repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/69/permutation_seed",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/69/threshold",
+      "ok": true,
+      "max_abs_error": 2.842170943040401e-14
+    },
+    {
+      "name": "FP/70/false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/70/denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/70/rate",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "FP/70/ci_low",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FP/70/ci_high",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FP/70/comparison_false_alarms",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/70/comparison_denominator",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/70/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/70/threshold",
+      "ok": true,
+      "max_abs_error": 5.684341886080802e-14
+    },
+    {
+      "name": "FP/70/spearman_amp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FP/70/spearman_p",
+      "ok": true,
+      "max_abs_error": 7.546047120499111e-17
+    },
+    {
+      "name": "FP/70/fisher_p_greater",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "A/record_equals_unit",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/units",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/detect_mean",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/spearman_amp",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/p_amp",
+      "ok": true,
+      "max_abs_error": 5.204170427930421e-18
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/spearman_vib_sd",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/p_vib_sd",
+      "ok": true,
+      "max_abs_error": 2.0679515313825692e-25
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/injection_repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/injection_seed_start",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/injection_seed_end",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/detected_amp_Q1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/units_amp_Q1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/miss_amp_Q1_ci_low",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/miss_amp_Q1_ci_high",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/detected_amp_Q2",
+      "ok": true,
+      "max_abs_error": 1.7763568394002505e-15
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/units_amp_Q2",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/miss_amp_Q2_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/miss_amp_Q2_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/detected_amp_Q3",
+      "ok": true,
+      "max_abs_error": 1.7763568394002505e-15
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/units_amp_Q3",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/miss_amp_Q3_ci_low",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/miss_amp_Q3_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/detected_amp_Q4",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/units_amp_Q4",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/miss_amp_Q4_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/vib_noise/2.0/miss_amp_Q4_ci_high",
+      "ok": true,
+      "max_abs_error": 8.326672684688674e-17
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/units",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/detect_mean",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/spearman_amp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/p_amp",
+      "ok": true,
+      "max_abs_error": 4.83554168928535e-17
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/spearman_vib_sd",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/p_vib_sd",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/injection_repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/injection_seed_start",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/injection_seed_end",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/detected_amp_Q1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/units_amp_Q1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/miss_amp_Q1_ci_low",
+      "ok": true,
+      "max_abs_error": 7.979727989493313e-17
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/miss_amp_Q1_ci_high",
+      "ok": true,
+      "max_abs_error": 8.326672684688674e-17
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/detected_amp_Q2",
+      "ok": true,
+      "max_abs_error": 3.552713678800501e-15
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/units_amp_Q2",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/miss_amp_Q2_ci_low",
+      "ok": true,
+      "max_abs_error": 5.377642775528102e-17
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/miss_amp_Q2_ci_high",
+      "ok": true,
+      "max_abs_error": 4.85722573273506e-17
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/detected_amp_Q3",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/units_amp_Q3",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/miss_amp_Q3_ci_low",
+      "ok": true,
+      "max_abs_error": 4.5102810375396984e-17
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/miss_amp_Q3_ci_high",
+      "ok": true,
+      "max_abs_error": 9.71445146547012e-17
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/detected_amp_Q4",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/units_amp_Q4",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/miss_amp_Q4_ci_low",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FN/A/cur_noise/0.1/miss_amp_Q4_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/units",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/detect_mean",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/spearman_amp",
+      "ok": true,
+      "max_abs_error": 1.3877787807814457e-17
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/p_amp",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/spearman_vib_sd",
+      "ok": true,
+      "max_abs_error": 2.2551405187698492e-17
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/p_vib_sd",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/injection_repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/injection_seed_start",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/injection_seed_end",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/detected_amp_Q1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/units_amp_Q1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/miss_amp_Q1_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/miss_amp_Q1_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/detected_amp_Q2",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/units_amp_Q2",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/miss_amp_Q2_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/miss_amp_Q2_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/detected_amp_Q3",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/units_amp_Q3",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/miss_amp_Q3_ci_low",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/miss_amp_Q3_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/detected_amp_Q4",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/units_amp_Q4",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/miss_amp_Q4_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_offset/0.2/miss_amp_Q4_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/units",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/detect_mean",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/spearman_amp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/p_amp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/spearman_vib_sd",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/p_vib_sd",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/injection_repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/injection_seed_start",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/injection_seed_end",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/detected_amp_Q1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/units_amp_Q1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/miss_amp_Q1_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/miss_amp_Q1_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/detected_amp_Q2",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/units_amp_Q2",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/miss_amp_Q2_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/miss_amp_Q2_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/detected_amp_Q3",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/units_amp_Q3",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/miss_amp_Q3_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/miss_amp_Q3_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/detected_amp_Q4",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/units_amp_Q4",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/miss_amp_Q4_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.15/miss_amp_Q4_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/units",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/detect_mean",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/spearman_amp",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/p_amp",
+      "ok": true,
+      "max_abs_error": 1.3877787807814457e-17
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/spearman_vib_sd",
+      "ok": true,
+      "max_abs_error": 3.469446951953614e-17
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/p_vib_sd",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/injection_repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/injection_seed_start",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/injection_seed_end",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/detected_amp_Q1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/units_amp_Q1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/miss_amp_Q1_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/miss_amp_Q1_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/detected_amp_Q2",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/units_amp_Q2",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/miss_amp_Q2_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/miss_amp_Q2_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/detected_amp_Q3",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/units_amp_Q3",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/miss_amp_Q3_ci_low",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/miss_amp_Q3_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/detected_amp_Q4",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/units_amp_Q4",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/miss_amp_Q4_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/A/cur_gain/1.3/miss_amp_Q4_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "interaction/A/interaction_rho_difference",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "interaction/A/interaction_ci_low",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "interaction/A/interaction_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "interaction/A/interaction_bootstrap_repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "interaction/A/interaction_bootstrap_valid",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "interaction/A/interaction_bootstrap_seed",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "interaction/A/interaction_bootstrap_share_le_zero",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "shock/A/4.0",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "shock/A/6.0",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "B/record_equals_unit",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/units",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/detect_mean",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/spearman_amp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/p_amp",
+      "ok": true,
+      "max_abs_error": 1.3234889800848443e-23
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/spearman_vib_sd",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/p_vib_sd",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/injection_repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/injection_seed_start",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/injection_seed_end",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/detected_amp_Q1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/units_amp_Q1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/miss_amp_Q1_ci_low",
+      "ok": true,
+      "max_abs_error": 4.163336342344337e-17
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/miss_amp_Q1_ci_high",
+      "ok": true,
+      "max_abs_error": 9.71445146547012e-17
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/detected_amp_Q2",
+      "ok": true,
+      "max_abs_error": 3.552713678800501e-15
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/units_amp_Q2",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/miss_amp_Q2_ci_low",
+      "ok": true,
+      "max_abs_error": 3.469446951953614e-17
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/miss_amp_Q2_ci_high",
+      "ok": true,
+      "max_abs_error": 9.71445146547012e-17
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/detected_amp_Q3",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/units_amp_Q3",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/miss_amp_Q3_ci_low",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-18
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/miss_amp_Q3_ci_high",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/detected_amp_Q4",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/units_amp_Q4",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/miss_amp_Q4_ci_low",
+      "ok": true,
+      "max_abs_error": 8.023096076392733e-17
+    },
+    {
+      "name": "FN/B/vib_noise/2.0/miss_amp_Q4_ci_high",
+      "ok": true,
+      "max_abs_error": 3.469446951953614e-17
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/units",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/detect_mean",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/spearman_amp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/p_amp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/spearman_vib_sd",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/p_vib_sd",
+      "ok": true,
+      "max_abs_error": 8.271806125530277e-25
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/injection_repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/injection_seed_start",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/injection_seed_end",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/detected_amp_Q1",
+      "ok": true,
+      "max_abs_error": 3.552713678800501e-15
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/units_amp_Q1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/miss_amp_Q1_ci_low",
+      "ok": true,
+      "max_abs_error": 9.540979117872439e-17
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/miss_amp_Q1_ci_high",
+      "ok": true,
+      "max_abs_error": 4.5102810375396984e-17
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/detected_amp_Q2",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/units_amp_Q2",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/miss_amp_Q2_ci_low",
+      "ok": true,
+      "max_abs_error": 1.734723475976807e-17
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/miss_amp_Q2_ci_high",
+      "ok": true,
+      "max_abs_error": 9.020562075079397e-17
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/detected_amp_Q3",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/units_amp_Q3",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/miss_amp_Q3_ci_low",
+      "ok": true,
+      "max_abs_error": 6.245004513516506e-17
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/miss_amp_Q3_ci_high",
+      "ok": true,
+      "max_abs_error": 1.734723475976807e-17
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/detected_amp_Q4",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/units_amp_Q4",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/miss_amp_Q4_ci_low",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-17
+    },
+    {
+      "name": "FN/B/cur_noise/0.1/miss_amp_Q4_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/units",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/detect_mean",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/spearman_amp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/p_amp",
+      "ok": true,
+      "max_abs_error": 3.968179951296946e-17
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/spearman_vib_sd",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/p_vib_sd",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-17
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/injection_repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/injection_seed_start",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/injection_seed_end",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/detected_amp_Q1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/units_amp_Q1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/miss_amp_Q1_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/miss_amp_Q1_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/detected_amp_Q2",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/units_amp_Q2",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/miss_amp_Q2_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/miss_amp_Q2_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/detected_amp_Q3",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/units_amp_Q3",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/miss_amp_Q3_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/miss_amp_Q3_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/detected_amp_Q4",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/units_amp_Q4",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/miss_amp_Q4_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_offset/0.2/miss_amp_Q4_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/units",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/detect_mean",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/spearman_amp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/p_amp",
+      "ok": true,
+      "max_abs_error": 9.8879238130678e-17
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/spearman_vib_sd",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/p_vib_sd",
+      "ok": true,
+      "max_abs_error": 6.678685382510707e-17
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/injection_repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/injection_seed_start",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/injection_seed_end",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/detected_amp_Q1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/units_amp_Q1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/miss_amp_Q1_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/miss_amp_Q1_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/detected_amp_Q2",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/units_amp_Q2",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/miss_amp_Q2_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/miss_amp_Q2_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/detected_amp_Q3",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/units_amp_Q3",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/miss_amp_Q3_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/miss_amp_Q3_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/detected_amp_Q4",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/units_amp_Q4",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/miss_amp_Q4_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.15/miss_amp_Q4_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/units",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/detect_mean",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/spearman_amp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/p_amp",
+      "ok": true,
+      "max_abs_error": 7.112366251504909e-17
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/spearman_vib_sd",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/p_vib_sd",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/injection_repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/injection_seed_start",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/injection_seed_end",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/detected_amp_Q1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/units_amp_Q1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/miss_amp_Q1_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/miss_amp_Q1_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/detected_amp_Q2",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/units_amp_Q2",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/miss_amp_Q2_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/miss_amp_Q2_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/detected_amp_Q3",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/units_amp_Q3",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/miss_amp_Q3_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/miss_amp_Q3_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/detected_amp_Q4",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/units_amp_Q4",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/miss_amp_Q4_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "FN/B/cur_gain/1.3/miss_amp_Q4_ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "interaction/B/interaction_rho_difference",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "interaction/B/interaction_ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "interaction/B/interaction_ci_high",
+      "ok": true,
+      "max_abs_error": 2.220446049250313e-16
+    },
+    {
+      "name": "interaction/B/interaction_bootstrap_repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "interaction/B/interaction_bootstrap_valid",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "interaction/B/interaction_bootstrap_seed",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "interaction/B/interaction_bootstrap_share_le_zero",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "shock/B/4.0",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "shock/B/6.0",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "BH/amp",
+      "ok": true,
+      "max_abs_error": 1.0061396160665481e-16
+    },
+    {
+      "name": "BH/amp_count",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "Bonferroni/amp",
+      "ok": true,
+      "max_abs_error": 7.979727989493313e-16
+    },
+    {
+      "name": "BH/joint_amp",
+      "ok": true,
+      "max_abs_error": 1.0061396160665481e-16
+    },
+    {
+      "name": "BH/joint_vib",
+      "ok": true,
+      "max_abs_error": 1.214306433183765e-16
+    },
+    {
+      "name": "BH/joint_count",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "Bonferroni/joint",
+      "ok": true,
+      "max_abs_error": 1.7069679003611782e-15
+    },
+    {
+      "name": "E1_deterministic/A/cur_offset/0.2",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "E1_deterministic/A/cur_gain/1.15",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "E1_deterministic/A/cur_gain/1.3",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "E1_deterministic/B/cur_offset/0.2",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "E1_deterministic/B/cur_gain/1.15",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "E1_deterministic/B/cur_gain/1.3",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "ablation/A/v2/matching_row_count",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "ablation/A/v2_no_waveform/matching_row_count",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "ablation/A/v2_no_dynamics/matching_row_count",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "ablation/A/v2_no_magnitude/matching_row_count",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "ablation/B/v2/matching_row_count",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "ablation/B/v2_no_waveform/matching_row_count",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "ablation/B/v2_no_dynamics/matching_row_count",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "ablation/B/v2_no_magnitude/matching_row_count",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "summary/count",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/readme_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "cite/2/press_guard/outputs/position_vibration_misses_v2.csv",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "summary/2/A/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/2/A/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/2/A/CI",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "summary/2/B/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/2/B/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/2/B/CI",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "cite/3/press_guard/outputs/position_vibration_misses_v2.csv",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "summary/3/A/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/3/A/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/3/A/CI",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/3/B/rate",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "summary/3/B/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/3/B/CI",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "cite/4/analysis/press_supplement/e1_summary.csv",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "cite/4/analysis/press_supplement/e1_summary.csv",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "summary/4/A/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/4/A/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/4/A/CI",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "summary/4/B/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/4/B/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/4/B/CI",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "cite/5/analysis/press_supplement/e1_summary.csv",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "cite/5/press_guard/outputs/fn_intensity_v2.csv",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "summary/5/A/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/5/A/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/5/A/CI",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "summary/5/B/rate",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "summary/5/B/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/5/B/CI",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "cite/6/press_guard/outputs/fn_intensity_v2.csv",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "summary/6/A/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/6/A/lift",
+      "ok": true,
+      "max_abs_error": 8.881784197001252e-16
+    },
+    {
+      "name": "summary/6/A/fractional_mean",
+      "ok": true,
+      "max_abs_error": 1.7763568394002505e-15
+    },
+    {
+      "name": "summary/6/A/bootstrap_method",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "summary/6/A/CI",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/6/B/rate",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "summary/6/B/lift",
+      "ok": true,
+      "max_abs_error": 8.43769498715119e-14
+    },
+    {
+      "name": "summary/6/B/fractional_mean",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-15
+    },
+    {
+      "name": "summary/6/B/bootstrap_method",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "summary/6/B/CI",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "cite/7/press_guard/outputs/fn_intensity_v2.csv",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "summary/7/A/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/7/A/lift",
+      "ok": true,
+      "max_abs_error": 2.220446049250313e-16
+    },
+    {
+      "name": "summary/7/A/CI",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "summary/7/B/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/7/B/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/7/B/CI",
+      "ok": true,
+      "max_abs_error": 2.220446049250313e-16
+    },
+    {
+      "name": "cite/8/analysis/press_selection/fp_mitigation_injection_v2.csv",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "summary/8/A/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/8/A/lift",
+      "ok": true,
+      "max_abs_error": 2.2453150450019166e-12
+    },
+    {
+      "name": "summary/8/A/CI",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/8/B/rate",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "summary/8/B/lift",
+      "ok": true,
+      "max_abs_error": 6.679101716144942e-13
+    },
+    {
+      "name": "summary/8/B/CI",
+      "ok": true,
+      "max_abs_error": 9.71445146547012e-17
+    },
+    {
+      "name": "cite/9/press_guard/outputs/fp_intensity_v2.csv",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "summary/9/A/rate",
+      "ok": true,
+      "max_abs_error": 1.3877787807814457e-17
+    },
+    {
+      "name": "summary/9/A/lift",
+      "ok": true,
+      "max_abs_error": 1.3500311979441904e-13
+    },
+    {
+      "name": "summary/9/A/CI",
+      "ok": true,
+      "max_abs_error": 8.326672684688674e-17
+    },
+    {
+      "name": "summary/9/B/rate",
+      "ok": true,
+      "max_abs_error": 8.326672684688674e-17
+    },
+    {
+      "name": "summary/9/B/lift",
+      "ok": true,
+      "max_abs_error": 7.993605777301127e-14
+    },
+    {
+      "name": "summary/9/B/CI",
+      "ok": true,
+      "max_abs_error": 1.3877787807814457e-17
+    },
+    {
+      "name": "cite/10/press_guard/outputs/fp_events_v2.csv",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "summary/10/A/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/10/A/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/10/A/CI",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "summary/10/B/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/10/B/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/10/B/CI",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "cite/11/press_guard/outputs/near_miss_corr_v2.csv",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "summary/11/A/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/11/A/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/11/A/CI",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/11/B/rate",
+      "ok": true,
+      "max_abs_error": 9.020562075079397e-17
+    },
+    {
+      "name": "summary/11/B/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/11/B/CI",
+      "ok": true,
+      "max_abs_error": 4.85722573273506e-17
+    },
+    {
+      "name": "cite/12/analysis/press_dayshift/v2_current_scale.csv",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "summary/12/A/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/12/A/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/12/A/CI",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-17
+    },
+    {
+      "name": "summary/12/B/rate",
+      "ok": true,
+      "max_abs_error": 4.163336342344337e-17
+    },
+    {
+      "name": "summary/12/B/lift",
+      "ok": true,
+      "max_abs_error": 2.220446049250313e-14
+    },
+    {
+      "name": "summary/12/B/CI",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "cite/13/press_guard/outputs/robustness_v2.csv",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "summary/13/A/rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/13/A/lift",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/13/A/CI",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-17
+    },
+    {
+      "name": "summary/13/B/rate",
+      "ok": true,
+      "max_abs_error": 7.632783294297951e-17
+    },
+    {
+      "name": "summary/13/B/lift",
+      "ok": true,
+      "max_abs_error": 6.8833827526759706e-15
+    },
+    {
+      "name": "summary/13/B/CI",
+      "ok": true,
+      "max_abs_error": 9.71445146547012e-17
+    },
+    {
+      "name": "summary/AI0_events",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/single_row_events",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/2/A/position_source",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/3/A/position_source",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/6/A/fn_source",
+      "ok": true,
+      "max_abs_error": 1.7763568394002505e-15
+    },
+    {
+      "name": "summary/7/A/fn_source",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/2/B/position_source",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/3/B/position_source",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary/6/B/fn_source",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-15
+    },
+    {
+      "name": "summary/7/B/fn_source",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "IDs/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "IDs/near_miss",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "IDs/coupling",
+      "ok": true,
+      "max_abs_error": 0.0
+    }
+  ],
+  "checks_total": 1128,
+  "checks_failed": [],
+  "elapsed_s": 98.45
+}

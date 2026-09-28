@@ -1,0 +1,21 @@
+{
+  "status": {
+    "ok": 176
+  },
+  "cases": [
+    {
+      "first_timestamp": "2022-07-13 00:00:04.100",
+      "suspect_from": "2022-07-14T00:00:03.700000+00:00",
+      "suspect_to": "2022-07-11T00:00:00+00:00",
+      "suspect_seconds": -259203.7,
+      "suspect_open": 0
+    },
+    {
+      "first_timestamp": "2022-07-12 00:00:04.000",
+      "suspect_from": "2022-07-14T00:00:03.700000+00:00",
+      "suspect_to": "2022-07-11T00:00:00+00:00",
+      "suspect_seconds": -259203.7,
+      "suspect_open": 0
+    }
+  ]
+}

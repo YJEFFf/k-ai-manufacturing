@@ -1,0 +1,27 @@
+[
+  {
+    "step": "train",
+    "returncode": 0,
+    "seconds": 26.07
+  },
+  {
+    "step": "analyze",
+    "returncode": 0,
+    "seconds": 184.76
+  },
+  {
+    "step": "audit",
+    "returncode": 0,
+    "seconds": 199.95
+  },
+  {
+    "step": "freeze",
+    "returncode": 0,
+    "seconds": 1.61
+  },
+  {
+    "step": "verify",
+    "returncode": 0,
+    "seconds": 1.68
+  }
+]

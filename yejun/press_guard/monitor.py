@@ -9,12 +9,13 @@
    10분 블록 전류가 0.85~1.29배 오르내리므로 좁은 한계를 두지 않는다. 그래서 몇 % 수준의 이동은 잡지 못한다.
    범위 아래(저부하)는 참고로만 적는다. 대회에서 가장 조용한 시간대(A 평가 구간)는 알림이 늘지 않았다.
 3) 조치 분기: 한 창이 99백분위를 넘거나, 95백분위 초과 또는 상승 이동이 연속 2개 창에서 나면 조치 대상이다.
-   - 운전 조건 변경 기록(작업자 입력: 금형·가압력·생산품 변경)이 그 창에 있거나 전류 수준이 상승 이동했으면 "재보정 검토"
-     (정상 운전변화일 가능성).
+   - 조치 대상이 아니면 "관측 지속"이다. 운전 조건 변경 기록(작업자 입력: 금형·가압력·생산품 변경)이 그 창에 있으면 "재보정 검토(운전 조건 변경)"다.
+   - 변경 기록 없이 전류 수준이 상승 이동했으면 "설비 점검 요청(전류 수준 이동: FM4·FM5 점검, 정상 확인이면 재보정)"이다.
    - 변경 기록도 수준 이동도 없으면 "설비 점검 요청(열화 의심)". 점검 결과가 "정상 확인"일 때만 그 기간을 재보정 자료로 쓴다.
    자동으로 재보정하지 않는다. 창의 알림 근거 구성(진동 크기·전류 성분 경보 행 비율)을 함께 적는다.
 4) 결과 기록: 대기열에 확인 시각·담당·결과·조치·상태 열을 둔다. 결과가 "정상 확인"인 건만 정상으로 닫힌다.
-   재보정(recalibrate.py --outcomes)은 정상 확인으로 닫히지 않은 건의 의심 시간창을 자료에서 뺀다.
+   재보정(recalibrate.py --outcomes)은 정상 확인으로 닫히지 않은 사건의 의심 시간창을 자료에서 뺀다.
+   --windows는 두 종류의 설비 점검 요청 창을 결과가 "정상 확인"일 때만 남긴다.
 """
 from __future__ import annotations
 
@@ -30,7 +31,7 @@ OUTCOME_COLUMNS = ("confirmed_at", "owner", "outcome", "measure", "status")   # 
 OUTCOME_LABELS = dict(confirmed_at="확인 시각", owner="담당", outcome="결과", measure="조치", status="상태")
 OUTCOMES = ("정상 확인", "이상 확인", "보류")
 STATUSES = ("열림", "닫힘")
-CONSECUTIVE = 2          # 재보정 검토로 넘기는 연속 창 수
+CONSECUTIVE = 2          # 관측에서 조치 대상으로 넘기는 연속 창 수
 BLOCK_RECORDS = 60       # 전류 수준 기준 범위를 잴 블록 크기(기록구간 수)
 MIN_AMP_ROWS = 10        # 진폭을 잴 최소 기록 길이
 
@@ -76,20 +77,25 @@ class Reference:
         return dict(median=self.median, band_low=self.band_low, band_high=self.band_high, blocks=self.blocks)
 
 
-ACTION_RECALIBRATE = "재보정 검토(운전 조건 변경·수준 이동)"
+ACTION_OBSERVE = "관측 지속"
+ACTION_RECALIBRATE = "재보정 검토(운전 조건 변경)"
+ACTION_INSPECT_SHIFT = "설비 점검 요청(전류 수준 이동: FM4·FM5 점검, 정상 확인이면 재보정)"
 ACTION_INSPECT = "설비 점검 요청(열화 의심)"
 
 
 def monitor_windows(predictions, frame, alpha, n_cal, reference, window_units=60, operating_changes=()):
-    """감시 창별 알림 단위 수·한계·초과, 1·2단계 알림 수, 근거 구성, 전류 수준 비·이동, 권장 조치.
-    operating_changes: 운전 조건 변경 시각 목록(작업자 입력). 창의 시간 범위에 있으면 그 창의 초과를 운전변화로 본다."""
+    """감시 창별 알림 단위 수·한계·초과, 사건 1·2단계 알림 수, 근거 구성, 전류 수준 비·이동, 권장 조치.
+    operating_changes: 운전 조건 변경 시각 목록(작업자 입력). 창의 시간 범위에 있으면 그 창의 초과를 운전변화로 본다.
+    recalibration_review는 기존 열 이름을 유지한 조치 대상 여부이며, 재보정 허가를 뜻하지 않는다."""
+    if window_units < 1:
+        raise ValueError("감시 창의 알림 단위 수는 1 이상이어야 한다")
     p = predictions
     block = p.alert_unit.to_numpy() if "alert_unit" in p else p.position.to_numpy() // ALERT_UNIT_ROWS
     unit = alert_units(p.record_id.to_numpy(), np.asarray(block) * ALERT_UNIT_ROWS)
     reason = p.reason.astype(str) if "reason" in p else pd.Series("", index=p.index)
     alarm_rows = p.alarm.to_numpy() == 1
-    per_unit = pd.DataFrame(dict(unit=unit, record=p.record_id.to_numpy(), alarm=p.alarm.to_numpy(), note=p.notification.to_numpy(),
-                                 esc=p.escalation.to_numpy() if "escalation" in p else 0,
+    per_unit = pd.DataFrame(dict(unit=unit, record=p.record_id.to_numpy(), alarm=p.alarm.to_numpy(), note=p.incident_notification.to_numpy(),
+                                 esc=p.incident_escalation.to_numpy(),
                                  t=pd.to_datetime(p.timestamp, format="mixed", utc=True, errors="coerce"),
                                  mag=alarm_rows & reason.str.contains("magnitude").to_numpy(),
                                  cur=alarm_rows & reason.str.contains("waveform|dynamics").to_numpy(), arows=alarm_rows)).groupby("unit").agg(
@@ -111,14 +117,16 @@ def monitor_windows(predictions, frame, alpha, n_cal, reference, window_units=60
         run_drift = run_drift + 1 if drift_up else 0
         review = exceed99 or run_exceed >= CONSECUTIVE or run_drift >= CONSECUTIVE
         changed = bool(((changes >= g.t0.min()) & (changes <= g.t1.max())).any()) if len(changes) else False
-        action = "관측 지속" if not review else (ACTION_RECALIBRATE if (changed or run_drift >= 1) else ACTION_INSPECT)
+        action = (ACTION_OBSERVE if not review else ACTION_RECALIBRATE if changed else
+                  ACTION_INSPECT_SHIFT if drift_up else ACTION_INSPECT)
         n_alarm = int(g.arows.sum())
         rows.append(dict(window=int(w), start=str(g.t0.min()), end=str(g.t1.max()), units=m, alerted_units=k, limit95=limit95, limit99=limit99,
                          exceed=bool(exceed), exceed99=bool(exceed99), operating_change=changed,
                          alarm_rows=n_alarm, share_magnitude=float(g.mag.sum() / n_alarm) if n_alarm else np.nan,
                          share_current=float(g.cur.sum() / n_alarm) if n_alarm else np.nan, recommended_action=action,
-                         recalibration_data="점검 '정상 확인' 뒤에만 재보정 자료" if action == ACTION_INSPECT else "",
+                         recalibration_data="점검 '정상 확인' 뒤에만 재보정 자료" if action in (ACTION_INSPECT, ACTION_INSPECT_SHIFT) else "",
                          level1_notifications=int(g.note.sum()), level2_escalations=int(g.esc.sum()),
+                         incident_notifications=int(g.note.sum() + g.esc.sum()), notification_unit="사건(시작·격상)",
                          current_ratio=ratio, band_low=reference.band_low, band_high=reference.band_high, drift_up=drift_up,
                          low_load=bool(np.isfinite(ratio) and ratio < reference.band_low), recalibration_review=bool(review),
                          reason="+".join(n for n, yes in (("99백분위 초과", exceed99), ("95백분위 연속 초과", run_exceed >= CONSECUTIVE),
@@ -127,19 +135,51 @@ def monitor_windows(predictions, frame, alpha, n_cal, reference, window_units=60
 
 
 def gain_scenarios(model, reference, frame, alpha, gains=(1.0, 1.05, 1.1, 1.2, 1.3, 1.5), window_units=60, operating_changes=()):
-    """정상 운전변화 모의: 전류 전체에 배율 k를 곱한 정상 평가 자료에서 감시 규칙이 무엇을 내는지(analysis/press_dayshift와 같은 배율)."""
+    """전류 배율 대리 주입에서 감시 규칙의 조치. 배율 변화의 실제 원인은 알 수 없다.
+    변경 기록 없음과 모든 창 시작에 변경 기록이 있는 반사실 조건을 같은 예측으로 비교한다."""
     rows = []
     for k in gains:
         f = D.inputs_only(frame).copy()
         f[D.SENSORS[2]] = pd.to_numeric(f[D.SENSORS[2]], errors="coerce") * k
-        win = monitor_windows(model.predict(f, alpha), f, alpha, len(model.cal), reference, window_units, operating_changes)
+        pred = model.predict(f, alpha)
+        win = monitor_windows(pred, f, alpha, len(model.cal), reference, window_units)
+        changed = monitor_windows(pred, f, alpha, len(model.cal), reference, window_units, [*win.start, *operating_changes])
+        actions = lambda w: " / ".join(f"{r.window}:{r.recommended_action}" for r in w.itertuples())
         rows.append(dict(gain=k, windows=len(win), alerted_units=int(win.alerted_units.sum()), units=int(win.units.sum()),
                          alerted_by_window="/".join(map(str, win.alerted_units)), limit95=int(win.limit95.iloc[0]), limit99=int(win.limit99.iloc[0]),
                          windows_exceed=int(win.exceed.sum()), windows_exceed99=int(win.exceed99.sum()), windows_drift_up=int(win.drift_up.sum()),
                          windows_low_load=int(win.low_load.sum()),
                          max_current_ratio=float(win.current_ratio.max()), recalibration_review=bool(win.recalibration_review.any()),
-                         first_review_window=int(win.window[win.recalibration_review].min()) if win.recalibration_review.any() else -1))
+                         first_review_window=int(win.window[win.recalibration_review].min()) if win.recalibration_review.any() else -1,
+                         recommended_actions_no_change=actions(win), recommended_actions_with_change=actions(changed),
+                         incident_level1_notifications=int(win.level1_notifications.sum()),
+                         incident_level2_escalations=int(win.level2_escalations.sum()),
+                         incident_notifications=int(win.incident_notifications.sum()),
+                         incident_level1_by_window="/".join(map(str, win.level1_notifications)),
+                         incident_level2_by_window="/".join(map(str, win.level2_escalations))))
     return pd.DataFrame(rows)
+
+
+def exclude_unconfirmed_windows(frame, windows):
+    """설비 점검 요청 창은 outcome이 '정상 확인'일 때만 남긴다. 관측·변경 기록 창은 이 필터의 제외 대상이 아니다."""
+    required = {"start", "end", "recommended_action"}
+    missing = required - set(windows.columns)
+    if missing:
+        raise ValueError("감시 창 CSV 필수 열 누락: " + ", ".join(sorted(missing)))
+    inspection = windows.recommended_action.fillna("").astype(str).str.startswith("설비 점검 요청")
+    outcomes = windows.get("outcome", pd.Series("", index=windows.index)).fillna("").astype(str).str.strip()
+    pending = windows[inspection & outcomes.ne("정상 확인")]
+    start = pd.to_datetime(pending.start, format="mixed", utc=True, errors="coerce")
+    end = pd.to_datetime(pending.end, format="mixed", utc=True, errors="coerce")
+    if start.isna().any() or end.isna().any() or (end < start).any():
+        raise ValueError("미확인 점검 창의 start/end는 유효하고 시간 순서가 맞아야 한다")
+    t = pd.to_datetime(frame[D.TIME], format="mixed", utc=True, errors="coerce")
+    drop = np.zeros(len(frame), dtype=bool)
+    for lo, hi in zip(start, end):
+        drop |= t.between(lo, hi).to_numpy()
+    kept = frame[~drop].reset_index(drop=True)
+    return kept, dict(windows=len(windows), inspection_windows=int(inspection.sum()), unconfirmed_windows=len(pending),
+                      rows_removed=int(drop.sum()), rows_kept=len(kept))
 
 
 def exclude_unconfirmed(frame, outcomes):
@@ -197,6 +237,8 @@ def main(argv=None):
     args = ap.parse_args(argv)
     runtime.setup()
     model = load_bundle(args.model or HERE / "artifacts" / f"guard_{args.split}.json")
+    if model.probability is None:
+        print("안내: 라벨 확률 보정기가 없어 확률·우도비 열 4개는 비어 있고 사전 비율 π는 쓰이지 않습니다.", file=sys.stderr)
     if args.reference:
         reference = Reference.from_frame(pd.read_csv(args.reference))
     else:

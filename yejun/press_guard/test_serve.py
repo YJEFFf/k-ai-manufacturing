@@ -52,6 +52,8 @@ def test_analyze_contract_and_cache(console):
     assert cs.case_uid.is_unique and set(cs.incident_id) == set(inc.incident_id)
     assert inc[inc.reference_label.eq(1)].shape[0] == 1 and inc[inc.reference_label.eq(1)].cases.iloc[0] == 21
     assert result["lr_cap"] == 121 and result["warnings"] == []
+    assert result["stats"]["incident_notifications"] == result["stats"]["incident_starts"] + result["stats"]["incident_escalations"]
+    assert {"record_current_rms", "operating_state", "first_alarm_operating_state"} <= set(result["cases"][0])
     assert all(c["level"] == 2 for c in result["cases"] if c["reference_label"] == 1)     # 이상 21구간은 모두 격상
     assert console.analyze({"split": "A", "alpha": .01, "dataset": "mixed"}) is result   # 캐시
     json.dumps(result, allow_nan=False)   # NaN 없이 직렬화 가능
@@ -64,6 +66,33 @@ def test_upload_equals_builtin(console):
     built = console.analyze({"split": "B", "alpha": .03, "dataset": "mixed"})
     assert up["stats"]["alarm_rows"] == built["stats"]["alarm_rows"] and len(up["cases"]) == len(built["cases"])
     assert "reference_label" not in up["cases"][0] and up["threshold"] == built["threshold"]
+
+
+def test_normal_false_alarms_show_load_state(console):
+    result = console.analyze({"split": "B", "alpha": .01, "dataset": "normal"})
+    assert len(result["cases"]) == 3
+    assert all(c["operating_state"] == "load" and c["record_current_rms"] >= 91.9 for c in result["cases"])
+    assert all(c["operating_state"] == "load" for c in result["incidents"])
+
+
+def test_single_alarm_cases_escalate_once_in_console(console):
+    """경보 1행 건 둘을 2초 간격으로 이으면 콘솔 사건 단계·품질 조치가 simulate의 격상과 같다."""
+    import simulate
+    sp = D.split_normal(console.normal, D.segments(console.normal), "B")
+    seg = D.segments(sp["test"])
+    first = D.inputs_only(sp["test"][seg == 3]).copy()
+    second = D.inputs_only(sp["test"][seg == 41]).copy()
+    start = pd.to_datetime(first[D.TIME].iloc[-1]) + pd.Timedelta(seconds=2)
+    second[D.TIME] = [(start + pd.Timedelta(seconds=i * D.DT)).strftime("%Y-%m-%d %H:%M:%S.%f") for i in range(len(second))]
+    frame = pd.concat([first, second], ignore_index=True)
+    result = console.analyze({"split": "B", "alpha": .01, "dataset": "upload", "csv": frame.to_csv(index=False)})
+    events = simulate.run(frame, console.models["B"], .01, chunk=7)
+    escalations = events[events.kind.eq("격상")]
+    assert len(escalations) == 1 and result["level_counts"]["점검 요청"] == 1
+    assert len(result["incidents"]) == 1 and all(c["alarm_rows"] == 1 for c in result["cases"])
+    incident = result["incidents"][0]
+    assert incident["level"] == 2 and incident["escalation_row"] == int(escalations.row_id.iloc[0])
+    assert "전수" in incident["quality_action"] and result["stats"]["incident_notifications"] == 2
 
 
 def test_prior_changes_probability_not_alarms(console):

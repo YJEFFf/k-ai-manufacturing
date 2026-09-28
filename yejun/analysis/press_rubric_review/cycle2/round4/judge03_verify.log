@@ -1,0 +1,15 @@
+[2.5s] Primary predictions verified
+[12.7s] FP verified 69 rows, blocks via statsmodels and exact hypergeometric convolution
+[26.6s] FN A vib_noise 2.0 mean 0.7232
+[40.5s] FN A cur_noise 0.1 mean 0.9464
+[40.8s] FN A cur_offset 0.2 mean 0.4
+[41.1s] FN A cur_gain 1.15 mean 0.0
+[41.4s] FN A cur_gain 1.3 mean 0.226667
+[68.4s] FN B vib_noise 2.0 mean 0.95027
+[88.4s] FN B cur_noise 0.1 mean 0.975315
+[88.8s] FN B cur_offset 0.2 mean 0.522523
+[89.2s] FN B cur_gain 1.15 mean 0.063063
+[89.6s] FN B cur_gain 1.3 mean 0.504505
+[97.1s] FN, paired bootstrap, BH and E1 checked
+[98.4s] Component ablations checked
+[98.5s] DONE 1128 checks, failed 0 elapsed 98.45

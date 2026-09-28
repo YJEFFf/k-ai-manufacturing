@@ -10,6 +10,7 @@ train.py가 쓴 outputs/test_predictions_<split>.csv와 같은 파일을 만든�
 from pathlib import Path
 import argparse
 import json
+import sys
 
 import pandas as pd
 
@@ -35,7 +36,7 @@ def split_file(split, chunk=128):
     return test_prediction_file(pn, pa)
 
 
-def main():
+def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--model", type=Path, default=HERE / "artifacts" / "guard_A.json")
     ap.add_argument("--input", type=Path)
@@ -44,8 +45,8 @@ def main():
     ap.add_argument("--cases", type=Path)
     ap.add_argument("--alpha", type=float, choices=[.01, .03, .05], default=.01)
     ap.add_argument("--chunk", type=int, default=128)
-    ap.add_argument("--prior", type=float, default=None, help="이상 확률의 사전 비율(알림 단위의 이상 비율 가정, 기본 1%%). 경보에는 영향 없음")
-    args = ap.parse_args()
+    ap.add_argument("--prior", type=float, default=None, help="이상 행 비율 π 가정(기본 1%%). 기록 확률은 같은 π를 쓰는 근사이며 경보에는 영향 없음")
+    args = ap.parse_args(argv)
     runtime.setup()
     if args.chunk < 1:
         ap.error("chunk는 양수여야 한다")
@@ -62,7 +63,10 @@ def main():
         verdict = "학습 실행 기록 없음" if recorded is None else ("학습 실행과 같음" if recorded == digest else "학습 실행과 다름")
         print(f"{len(result)}행 → {args.out} · SHA-256 {digest[:16]}… · {verdict}")
         return 0 if recorded in (None, digest) else 1
-    result = stream(load_bundle(args.model), pd.read_csv(args.input), args.alpha, args.prior, args.chunk)
+    model = load_bundle(args.model)
+    if model.probability is None:
+        print("안내: 라벨 확률 보정기가 없어 확률·우도비 열 4개는 비어 있고 --prior(π)는 쓰이지 않습니다.", file=sys.stderr)
+    result = stream(model, pd.read_csv(args.input), args.alpha, args.prior, args.chunk)
     result.to_csv(args.out, index=False)
     queue = cases(result) if len(result) else pd.DataFrame()
     if args.cases:

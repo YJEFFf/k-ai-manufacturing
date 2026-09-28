@@ -1,0 +1,8 @@
+$ /opt/anaconda3/bin/python -m pytest -q -rs -p no:cacheprovider yejun/analysis/press_advance/test_contract.py
+ssssssss                                                                 [100%]
+=========================== short test summary info ============================
+SKIPPED [1] yejun/analysis/press_advance/test_contract.py:23: 먼저 python yejun/press_guard/reproduce.py 로 원본 배치(--data 주최 측 ZIP)와 학습을 한다: press_guard/artifacts/guard_A.json, press_guard/artifacts/guard_B.json
+SKIPPED [5] yejun/analysis/press_advance/test_contract.py:27: 먼저 python yejun/press_guard/reproduce.py 로 원본 배치(--data 주최 측 ZIP)와 학습을 한다: press_guard/artifacts/guard_A.json, press_guard/artifacts/guard_B.json
+SKIPPED [1] yejun/analysis/press_advance/test_contract.py:32: 먼저 python yejun/press_guard/reproduce.py 로 원본 배치(--data 주최 측 ZIP)와 학습을 한다: press_guard/artifacts/guard_A.json, press_guard/artifacts/guard_B.json
+SKIPPED [1] yejun/analysis/press_advance/test_contract.py:44: 먼저 python yejun/press_guard/reproduce.py 로 원본 배치(--data 주최 측 ZIP)와 학습을 한다: press_guard/artifacts/guard_A.json, press_guard/artifacts/guard_B.json
+8 skipped in 0.50s

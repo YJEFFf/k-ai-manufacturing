@@ -1,12 +1,6 @@
-# ③ 프레스 유압펌프 이상 탐지 — 제출 패키지
+# ③ 프레스 유압펌프 이상 탐지 — 기준 모델 패키지
 
-실행 기준은 [PLAN.md](PLAN.md)다. 현재는 **구현·실험·디버깅·검수 단계**다. 2026-09-25 예준 지시로 대회 보고서 초안과 자동 생성 코드를 삭제했다. **예준이 검수 결과에 만족하고 보고서 작성 시작을 명시적으로 지시하기 전에는 보고서 작업을 절대 진행하지 않는다.** 이전 단계 완료 기록은 보고서 착수 허가가 아니다.
-
-2026-09-25 [Claude 2차 수정에 대한 Codex 재검수](../analysis/press_implementation_review/codex_recheck_2.md): 테스트 **49개**, 깨끗한 클론의 1~3단계 **27/27** 및 1~5단계 **39/39** 통과(LSTM 캐시 사용). 실제 코드 변경·모델 파일 변조/삭제·새 클론 안내·미커밋 기대값 제외를 확인했고 추가 구현 결함은 발견하지 못했다. 구현 코드·`outputs/`·`outputs/expected/`는 유지했다.
-
-2026-09-25 [Claude 재검수 2차](../analysis/press_implementation_review/claude_recheck_2.md): Codex 재검수 주장을 전부 재현하고, 실행 후 코드 변경 검출(`code.matches_manifest`)·artifact 해시 대조·새 클론 안내·`clean_repro.sh` 기대값 출처를 보완했다. 테스트 **49개**, 전체 집계 비교 **39/39** 통과. 당시 `outputs/`는 표준 환경 재실행으로 갱신했다(그림·diagnosis는 `e43d96b`와 바이트 동일).
-
-2026-09-25 [Codex 재검수·수정](../analysis/press_implementation_review/codex_recheck.md): Claude 수정 후에도 남은 필수 검사 누락·불완전 동결·파일 변조·재현 실패 전파 문제를 수정했다. 테스트 **46개**, 캐시 사용 전체 집계 비교 **38/38** 통과. 주 모델 A 21/21·0/120 및 B 21/21·3/180 독립 재집계 일치. `outputs/`는 이번 실행으로 갱신했고 `outputs/expected/`는 이전 기대값을 유지한 채 비교했다. 현재 확인 범위에서 미해결 구현 오류는 발견하지 못했다. 보고서 작성은 별도 지시 전까지 보류한다.
+정상 자료 기반 기준 모델(combined_w8), LSTM 비교와 진단·검증 코드를 제공한다. 최종 모델의 전체 실행은 [Press Guard v2](../press_guard/README.md)를 따른다.
 
 ## 실행
 
@@ -60,7 +54,7 @@ python predict.py --model artifacts/main_A.json --input <입력.csv> --out predi
 
 진단 참조(2026-09-27, v1 산출물은 동결 그대로 둔다):
 - `diagnosis.md`의 `current_on_grid_strict`(허용 1e-6) 행(이상 0.077, AUROC 0.538)은 격자 상수의 유효숫자 한계에서 생긴 값이라 판별 의미가 없다. 격자 판정은 허용 1e-3 기준을 쓴다 → [analysis/press_evidence/current_grid.csv](../analysis/press_evidence/current_grid.csv).
-- `PLAN.md` §7의 "W13 문의 초안"은 진행하지 않는다. 주최 측이 출제 데이터 문의에 답하지 않아 팀 결정으로 바꿨다(숨은 시험 자료를 가정하지 않음) → [analysis/press_dayshift/README.md](../analysis/press_dayshift/README.md) §6의 4번.
+- 숨은 시험 자료를 가정하지 않고 공개된 정상·이상 기록으로 탐색 평가한다. 날짜·시간대의 교락을 해소할 현장 자료는 없다.
 
 ## 주 모델과 경보 기준 (PLAN §3·§4)
 - 성분: 3센서 max-abs-z, 전류 trailing-8 사인 적합 1−R². 각 성분을 정상 학습 참조의 q95 초과분 지수 꼬리로 변환해 fmax로 결합. 사인이 없는 행(구간 첫 7행·SST=0)은 max-z만.

@@ -1,0 +1,339 @@
+{
+  "returncode": 0,
+  "seconds": 941.77,
+  "load_end": [
+    2.76953125,
+    4.4580078125,
+    4.99365234375
+  ],
+  "workspace_head_after": "6c61a88d8de437182a2cdd25f640af556a23036a",
+  "summary": {
+    "mode": "quick",
+    "python": "3.12.8",
+    "total_seconds": 893.4,
+    "passed": 24,
+    "failed": 0,
+    "planned": 24,
+    "steps": [
+      {
+        "step": "v1 선행(주 모델·기준모델·행별 예측)",
+        "command": [
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/press_submission/run_all.py",
+          "--steps",
+          "2"
+        ],
+        "returncode": 0,
+        "seconds": 24.6,
+        "last_line": "Matplotlib is building the font cache; this may take a moment.",
+        "log": "press_guard/outputs/reproduce_logs/01.log"
+      },
+      {
+        "step": "v1 동결값 비교",
+        "command": [
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/press_submission/verify.py",
+          "--out",
+          "outputs",
+          "--steps",
+          "2"
+        ],
+        "returncode": 0,
+        "seconds": 0.3,
+        "last_line": "16/16 통과 (1~2단계 부분 비교, 필수 집계 9개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 b372a18b66af vs 동결 b372a18b66af",
+        "log": "press_guard/outputs/reproduce_logs/02.log"
+      },
+      {
+        "step": "v2 학습·시간순 5회",
+        "command": [
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/press_guard/train.py",
+          "--rolling"
+        ],
+        "returncode": 0,
+        "seconds": 26.3,
+        "last_line": "    B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              180                          21                 21             0.0          0.7           ",
+        "log": "press_guard/outputs/reproduce_logs/03.log"
+      },
+      {
+        "step": "v2 분석",
+        "command": [
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/press_guard/analyze.py"
+        ],
+        "returncode": 0,
+        "seconds": 193.2,
+        "last_line": "}",
+        "log": "press_guard/outputs/reproduce_logs/04.log"
+      },
+      {
+        "step": "v2 실행 검증(audit)",
+        "command": [
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/press_guard/audit.py"
+        ],
+        "returncode": 0,
+        "seconds": 232.3,
+        "last_line": "16/16 통과 → /private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/press_guard/outputs/audit.json",
+        "log": "press_guard/outputs/reproduce_logs/05.log"
+      },
+      {
+        "step": "v2 동결값 비교",
+        "command": [
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/press_guard/verify.py"
+        ],
+        "returncode": 0,
+        "seconds": 1.5,
+        "last_line": "53/53 통과. 코드 8b9493a24860 vs 동결 8b9493a24860; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit",
+        "log": "press_guard/outputs/reproduce_logs/06.log"
+      },
+      {
+        "step": "진단 표(press_evidence)",
+        "command": [
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/analysis/press_evidence/build_tables.py"
+        ],
+        "returncode": 0,
+        "seconds": 11.9,
+        "last_line": "    B 12 0.099174 0.099174      180               11  0.061111       0.099126          False",
+        "log": "press_guard/outputs/reproduce_logs/07.log"
+      },
+      {
+        "step": "진단 보강 표·그림",
+        "command": [
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/analysis/press_evidence/build_diagnostics.py"
+        ],
+        "returncode": 0,
+        "seconds": 46.0,
+        "last_line": "완료 44.6초, 표 22개, 그림 5장",
+        "log": "press_guard/outputs/reproduce_logs/08.log"
+      },
+      {
+        "step": "지도학습 기준선(press_supervised)",
+        "command": [
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/analysis/press_supervised/run.py"
+        ],
+        "returncode": 0,
+        "seconds": 166.7,
+        "last_line": "done 165.4 s",
+        "log": "press_guard/outputs/reproduce_logs/09.log"
+      },
+      {
+        "step": "모델 선정 근거(press_selection)",
+        "command": [
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/analysis/press_selection/run.py"
+        ],
+        "returncode": 0,
+        "seconds": 83.3,
+        "last_line": "내부 점검: 통과 · 82.2 s",
+        "log": "press_guard/outputs/reproduce_logs/10.log"
+      },
+      {
+        "step": "press_evidence 동결값 비교",
+        "command": [
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/analysis/package_contract.py",
+          "--package",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/analysis/press_evidence"
+        ],
+        "returncode": 0,
+        "seconds": 0.4,
+        "last_line": "통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 44개)",
+        "log": "press_guard/outputs/reproduce_logs/11.log"
+      },
+      {
+        "step": "press_supervised 동결값 비교",
+        "command": [
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/analysis/package_contract.py",
+          "--package",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/analysis/press_supervised"
+        ],
+        "returncode": 0,
+        "seconds": 0.3,
+        "last_line": "통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)",
+        "log": "press_guard/outputs/reproduce_logs/12.log"
+      },
+      {
+        "step": "press_advance 동결값 비교",
+        "command": [
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/analysis/package_contract.py",
+          "--package",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/analysis/press_advance"
+        ],
+        "returncode": 0,
+        "seconds": 0.3,
+        "last_line": "통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)",
+        "log": "press_guard/outputs/reproduce_logs/13.log"
+      },
+      {
+        "step": "press_selection 동결값 비교",
+        "command": [
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/analysis/package_contract.py",
+          "--package",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/analysis/press_selection"
+        ],
+        "returncode": 0,
+        "seconds": 0.3,
+        "last_line": "통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 12개)",
+        "log": "press_guard/outputs/reproduce_logs/14.log"
+      },
+      {
+        "step": "보완 실험 E1~E3 동결값 비교",
+        "command": [
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/analysis/press_supplement/verify.py"
+        ],
+        "returncode": 0,
+        "seconds": 1.0,
+        "last_line": "통과: 무결성·기대값 비교 E1, E3 · 건너뜀 E2(외부 입력 없음)",
+        "log": "press_guard/outputs/reproduce_logs/15.log"
+      },
+      {
+        "step": "시험: v2",
+        "command": [
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/press_guard"
+        ],
+        "returncode": 0,
+        "seconds": 95.1,
+        "last_line": "132 passed in 94.81s (0:01:34)",
+        "log": "press_guard/outputs/reproduce_logs/16.log"
+      },
+      {
+        "step": "시험: v1",
+        "command": [
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/press_submission/tests"
+        ],
+        "returncode": 0,
+        "seconds": 5.1,
+        "last_line": "44 passed, 2 skipped, 14 warnings in 4.72s",
+        "log": "press_guard/outputs/reproduce_logs/17.log"
+      },
+      {
+        "step": "시험: press_advance",
+        "command": [
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/analysis/press_advance/test_contract.py"
+        ],
+        "returncode": 0,
+        "seconds": 0.4,
+        "last_line": "8 passed in 0.28s",
+        "log": "press_guard/outputs/reproduce_logs/18.log"
+      },
+      {
+        "step": "시험: press_evidence",
+        "command": [
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/analysis/press_evidence/test_contract.py"
+        ],
+        "returncode": 0,
+        "seconds": 0.9,
+        "last_line": "6 passed in 0.65s",
+        "log": "press_guard/outputs/reproduce_logs/19.log"
+      },
+      {
+        "step": "시험: press_evidence",
+        "command": [
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/analysis/press_evidence/test_diagnostics.py"
+        ],
+        "returncode": 0,
+        "seconds": 0.8,
+        "last_line": "4 passed in 0.57s",
+        "log": "press_guard/outputs/reproduce_logs/20.log"
+      },
+      {
+        "step": "시험: press_selection",
+        "command": [
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/analysis/press_selection/test_contract.py"
+        ],
+        "returncode": 0,
+        "seconds": 0.6,
+        "last_line": "6 passed in 0.37s",
+        "log": "press_guard/outputs/reproduce_logs/21.log"
+      },
+      {
+        "step": "시험: press_supervised",
+        "command": [
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/analysis/press_supervised/test_contract.py"
+        ],
+        "returncode": 0,
+        "seconds": 0.4,
+        "last_line": "6 passed in 0.26s",
+        "log": "press_guard/outputs/reproduce_logs/22.log"
+      },
+      {
+        "step": "시험: press_supplement",
+        "command": [
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/analysis/press_supplement/test_contract.py"
+        ],
+        "returncode": 0,
+        "seconds": 1.5,
+        "last_line": "10 passed, 3 skipped in 1.21s",
+        "log": "press_guard/outputs/reproduce_logs/23.log"
+      },
+      {
+        "step": "시험: 웹 콘솔",
+        "command": [
+          "node",
+          "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/final_source_no_git/yejun/press_guard/test_web.cjs"
+        ],
+        "returncode": 0,
+        "seconds": 0.2,
+        "last_line": "web regressions passed: charts, incidents, causal state, probability cap, monitor actions and primary estimate",
+        "log": "press_guard/outputs/reproduce_logs/24.log"
+      }
+    ]
+  }
+}

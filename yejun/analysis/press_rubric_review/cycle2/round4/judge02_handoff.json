@@ -1,0 +1,421 @@
+{
+  "head": "6c61a88d8de437182a2cdd25f640af556a23036a",
+  "score": 38.0,
+  "scope": "기존 모델 검수 이후 변경 영향·해시·저장 모델 추론만 재확인",
+  "checks": {
+    "probability.py_byte_identical": {
+      "pass": true,
+      "detail": "67007ee9c8a9a12c48707e77230907dac2c155a519edfe7868863065aa4f34dd"
+    },
+    "train.py_byte_identical": {
+      "pass": true,
+      "detail": "498b2bd681729595965ee0bf938106eb313c7ee14a19a4e962fb8cbce55e0449"
+    },
+    "model_fit_and_score_math_ast_identical": {
+      "pass": true,
+      "detail": {
+        "sine_score": true,
+        "ar_residual": true,
+        "GuardModel.fit": true,
+        "GuardModel.components": true
+      }
+    },
+    "four_artifacts_unchanged": {
+      "pass": true,
+      "detail": {
+        "guard_A.json": {
+          "final_sha256": "c938707f1dd16e7c239b8053e7f032d8fac828d6c753de2b898ba9130a594f10",
+          "previous_independent_refit_sha256": "c938707f1dd16e7c239b8053e7f032d8fac828d6c753de2b898ba9130a594f10",
+          "same": true
+        },
+        "probability_A.json": {
+          "final_sha256": "1a8100e78046393d9292fc7c305b5ec57b46c4e2c73b03abeb596052a8705f8a",
+          "previous_independent_refit_sha256": "1a8100e78046393d9292fc7c305b5ec57b46c4e2c73b03abeb596052a8705f8a",
+          "same": true
+        },
+        "guard_B.json": {
+          "final_sha256": "b64ac3b30bc697034104287964f3154e88c8a50749ccdec04f6d4f8744fd6969",
+          "previous_independent_refit_sha256": "b64ac3b30bc697034104287964f3154e88c8a50749ccdec04f6d4f8744fd6969",
+          "same": true
+        },
+        "probability_B.json": {
+          "final_sha256": "7fde4cd1bdfa74e78e2d3f07c5dbd9c27619e19b2e94ceb8fab786c27abcaae8",
+          "previous_independent_refit_sha256": "7fde4cd1bdfa74e78e2d3f07c5dbd9c27619e19b2e94ceb8fab786c27abcaae8",
+          "same": true
+        }
+      }
+    },
+    "model_related_csv_byte_identical": {
+      "pass": true,
+      "detail": {
+        "compared": 58,
+        "changed": []
+      }
+    },
+    "original_rows_and_boundaries_unaffected": {
+      "pass": true,
+      "detail": {
+        "normal": {
+          "rows": 20000,
+          "all_ok": true,
+          "record_boundary_equals_frozen_v1_rule": true
+        },
+        "abnormal": {
+          "rows": 600,
+          "all_ok": true,
+          "record_boundary_equals_frozen_v1_rule": true
+        }
+      }
+    },
+    "final_saved_model_predict_A": {
+      "pass": true,
+      "detail": {
+        "hashes": {
+          "generated": "2941bf9dde2c9b66308eb6e26d19e4a41f93de1441833c8b476e0534e47e98c8",
+          "saved": "2941bf9dde2c9b66308eb6e26d19e4a41f93de1441833c8b476e0534e47e98c8",
+          "manifest": "2941bf9dde2c9b66308eb6e26d19e4a41f93de1441833c8b476e0534e47e98c8",
+          "digest": "2941bf9dde2c9b66308eb6e26d19e4a41f93de1441833c8b476e0534e47e98c8",
+          "judge02_prior": "2941bf9dde2c9b66308eb6e26d19e4a41f93de1441833c8b476e0534e47e98c8"
+        },
+        "returncode": 0,
+        "stdout": "4690행 → /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_handoff_h2y2q6xz/test_predictions_A.csv · SHA-256 2941bf9dde2c9b66… · 학습 실행과 같음",
+        "stderr": ""
+      }
+    },
+    "final_saved_model_predict_B": {
+      "pass": true,
+      "detail": {
+        "hashes": {
+          "generated": "9bd02a7cf086ad9ff81542166c2af768aefee944d4385e343a2d771d8a2f5524",
+          "saved": "9bd02a7cf086ad9ff81542166c2af768aefee944d4385e343a2d771d8a2f5524",
+          "manifest": "9bd02a7cf086ad9ff81542166c2af768aefee944d4385e343a2d771d8a2f5524",
+          "digest": "9bd02a7cf086ad9ff81542166c2af768aefee944d4385e343a2d771d8a2f5524",
+          "judge02_prior": "9bd02a7cf086ad9ff81542166c2af768aefee944d4385e343a2d771d8a2f5524"
+        },
+        "returncode": 0,
+        "stdout": "6697행 → /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_handoff_h2y2q6xz/test_predictions_B.csv · SHA-256 9bd02a7cf086ad9f… · 학습 실행과 같음",
+        "stderr": ""
+      }
+    },
+    "final_web_vm_regressions": {
+      "pass": true,
+      "detail": {
+        "stdout": "web regressions passed: charts, incidents, causal state, probability cap, monitor actions and primary estimate",
+        "stderr": ""
+      }
+    },
+    "root_final_pipeline_record": {
+      "pass": true,
+      "detail": {
+        "steps": 23,
+        "source": "field_final_rerun.json",
+        "note": "루트 실행 기록을 읽어 확인; 평가관02가 다시 실행한 것이 아님"
+      }
+    }
+  },
+  "final_source_sha256": {
+    "press_guard/model.py": "8b9493a248609180f139aa777ed0b1cbf29d3bfca5e5b98f2e588cbeb0cb3f6f",
+    "press_guard/probability.py": "67007ee9c8a9a12c48707e77230907dac2c155a519edfe7868863065aa4f34dd",
+    "press_guard/train.py": "498b2bd681729595965ee0bf938106eb313c7ee14a19a4e962fb8cbce55e0449",
+    "press_guard/predict.py": "d7b92210df81dda577721e3bc9e48c76006106a7108f358a888714b494df0dc9",
+    "press_guard/serve.py": "733a302c49af6327fe24e99d9a0ea70393ac605c07a1e4edb339ed0ecef86b35",
+    "press_guard/web/app.js": "125d98ca8d760f79a6e29c3661a163c9bed7390aaca374ef9ddcc8f09baa9f83",
+    "press_guard/README.md": "bec969c543a5f7f31c8560fd528efb9f944bd0c478ce524c9a3b8f5b92ed16a7",
+    "press_guard/OPERATIONS.md": "cb6a8481f69a50ac8cdc4d7fa3fbd6f22d857697d0e7d95ecec56c52c35ffeda"
+  },
+  "csv_hash_comparison": [
+    {
+      "path": "yejun/analysis/press_selection/candidate_universe.csv",
+      "previous_sha256": "d7455fcc88cc01d19ba858fc1747268b07ba2cc2942083b81becd22b13e34ebd",
+      "final_sha256": "d7455fcc88cc01d19ba858fc1747268b07ba2cc2942083b81becd22b13e34ebd"
+    },
+    {
+      "path": "yejun/analysis/press_selection/combination_rules.csv",
+      "previous_sha256": "5195a4cb5142f5c27c74be498fa3c3bb1f1246a386b3bae720140f98f9aa6c23",
+      "final_sha256": "5195a4cb5142f5c27c74be498fa3c3bb1f1246a386b3bae720140f98f9aa6c23"
+    },
+    {
+      "path": "yejun/analysis/press_selection/fp_mitigation_injection_v2.csv",
+      "previous_sha256": "8be37e61e482962c95a5936dc9a1010f330b936ff1f4ab0dc95c78d3a2ee4609",
+      "final_sha256": "8be37e61e482962c95a5936dc9a1010f330b936ff1f4ab0dc95c78d3a2ee4609"
+    },
+    {
+      "path": "yejun/analysis/press_selection/fp_mitigation_v2.csv",
+      "previous_sha256": "b3b37b897a35545e2544ea55036e87bb7c69dedb9dabbdfe856a93b734aaad73",
+      "final_sha256": "b3b37b897a35545e2544ea55036e87bb7c69dedb9dabbdfe856a93b734aaad73"
+    },
+    {
+      "path": "yejun/analysis/press_selection/nested_selection.csv",
+      "previous_sha256": "bbfd441f4f89bf4614e5a5be792130f8ea6c39aa2943a9fd4a8e8c5e993e470c",
+      "final_sha256": "bbfd441f4f89bf4614e5a5be792130f8ea6c39aa2943a9fd4a8e8c5e993e470c"
+    },
+    {
+      "path": "yejun/analysis/press_selection/paired_records.csv",
+      "previous_sha256": "b6b4c55cdce04cb3d9ee5d274c036dc78610d699631a68e449ec83ecc6ff9fb1",
+      "final_sha256": "b6b4c55cdce04cb3d9ee5d274c036dc78610d699631a68e449ec83ecc6ff9fb1"
+    },
+    {
+      "path": "yejun/analysis/press_selection/rule_transfer_injection_v2.csv",
+      "previous_sha256": "f9cd350b775bbf5ca1293a8f5d8e9d937f8a62fbee809f9d61e341d1e6072d63",
+      "final_sha256": "f9cd350b775bbf5ca1293a8f5d8e9d937f8a62fbee809f9d61e341d1e6072d63"
+    },
+    {
+      "path": "yejun/analysis/press_selection/same_feature_alternatives.csv",
+      "previous_sha256": "3b5862ad1fe24d007c7c09d79547d30a11eef6c21e2674db231b39ff4a69b543",
+      "final_sha256": "3b5862ad1fe24d007c7c09d79547d30a11eef6c21e2674db231b39ff4a69b543"
+    },
+    {
+      "path": "yejun/analysis/press_selection/search_ledger.csv",
+      "previous_sha256": "15d53171217a9ec400423feea535d11daef08b7b74a5500c55e7a4d2c9f3cdc6",
+      "final_sha256": "15d53171217a9ec400423feea535d11daef08b7b74a5500c55e7a4d2c9f3cdc6"
+    },
+    {
+      "path": "yejun/analysis/press_selection/selection_evidence.csv",
+      "previous_sha256": "ba4aff9231934f5a69378f2ced06a3e2d809e920bb1850c6e64a1165237c6f52",
+      "final_sha256": "ba4aff9231934f5a69378f2ced06a3e2d809e920bb1850c6e64a1165237c6f52"
+    },
+    {
+      "path": "yejun/analysis/press_selection/unified_comparison.csv",
+      "previous_sha256": "03bfc81adde25e20b38bc14c68f13703953b64c4b0381c363ac96abcf1e7f467",
+      "final_sha256": "03bfc81adde25e20b38bc14c68f13703953b64c4b0381c363ac96abcf1e7f467"
+    },
+    {
+      "path": "yejun/analysis/press_supervised/grouped_records.csv",
+      "previous_sha256": "f33b034997209fbc9f2c767a4c9fcd9fe536ecad315ee80d66f55ed1851b1341",
+      "final_sha256": "f33b034997209fbc9f2c767a4c9fcd9fe536ecad315ee80d66f55ed1851b1341"
+    },
+    {
+      "path": "yejun/analysis/press_supervised/injection.csv",
+      "previous_sha256": "4ae828005c9b6afebfb2ab21fb31de7d30ce0f408a7b44a2db3421ea5af568c5",
+      "final_sha256": "4ae828005c9b6afebfb2ab21fb31de7d30ce0f408a7b44a2db3421ea5af568c5"
+    },
+    {
+      "path": "yejun/analysis/press_supervised/random_rows.csv",
+      "previous_sha256": "b48137569867b7b0300fc1b9878bcd83c88f3895b190ae4bbe4158c113ee8b98",
+      "final_sha256": "b48137569867b7b0300fc1b9878bcd83c88f3895b190ae4bbe4158c113ee8b98"
+    },
+    {
+      "path": "yejun/press_guard/outputs/ablation_v2.csv",
+      "previous_sha256": "1a5b97c9a88ad908eed89ae91e673cea9275405498e2c63264c838cf60c3fbe0",
+      "final_sha256": "1a5b97c9a88ad908eed89ae91e673cea9275405498e2c63264c838cf60c3fbe0"
+    },
+    {
+      "path": "yejun/press_guard/outputs/alert_budget_design_v2.csv",
+      "previous_sha256": "5a69da064b0f244b0c7a8681724681d7795da7e5721e1a87e50fdf48e7fdccd4",
+      "final_sha256": "5a69da064b0f244b0c7a8681724681d7795da7e5721e1a87e50fdf48e7fdccd4"
+    },
+    {
+      "path": "yejun/press_guard/outputs/alert_levels_injection_v2.csv",
+      "previous_sha256": "5d31ba08857d7312b7ceb68458f12391bd78bc18359c11b26c3148571d540fbe",
+      "final_sha256": "5d31ba08857d7312b7ceb68458f12391bd78bc18359c11b26c3148571d540fbe"
+    },
+    {
+      "path": "yejun/press_guard/outputs/alert_levels_v2.csv",
+      "previous_sha256": "7dbae870b4c31415ca62b4742a583b5f3c0ab5415c9a0de6f7c860a22ee3706b",
+      "final_sha256": "7dbae870b4c31415ca62b4742a583b5f3c0ab5415c9a0de6f7c860a22ee3706b"
+    },
+    {
+      "path": "yejun/press_guard/outputs/cases_A.csv",
+      "previous_sha256": "ef37b26767971721908d787a95f5c8f48870ace303ad5448d412c597ff5134cf",
+      "final_sha256": "ef37b26767971721908d787a95f5c8f48870ace303ad5448d412c597ff5134cf"
+    },
+    {
+      "path": "yejun/press_guard/outputs/cases_B.csv",
+      "previous_sha256": "c7dbfac4d10223fe585e996b1e89eafb986d6be2765a2d62dba528086a9092bb",
+      "final_sha256": "c7dbfac4d10223fe585e996b1e89eafb986d6be2765a2d62dba528086a9092bb"
+    },
+    {
+      "path": "yejun/press_guard/outputs/coupling_fit_v2.csv",
+      "previous_sha256": "bc6786eb5d87b22bbc989430cf859dba4238d1629d82bae18d3ed8d2c297df70",
+      "final_sha256": "bc6786eb5d87b22bbc989430cf859dba4238d1629d82bae18d3ed8d2c297df70"
+    },
+    {
+      "path": "yejun/press_guard/outputs/coupling_records_v2.csv",
+      "previous_sha256": "e9ae50ceb437d34d5e04a48ef2f53160c0246a0898140a2d10a7caae2c0a9cbd",
+      "final_sha256": "e9ae50ceb437d34d5e04a48ef2f53160c0246a0898140a2d10a7caae2c0a9cbd"
+    },
+    {
+      "path": "yejun/press_guard/outputs/decision_table_v2.csv",
+      "previous_sha256": "2368bebbb7df8a68db7b815fe78dc2881d33d36b5caa4335d3ac3dd4861324a7",
+      "final_sha256": "2368bebbb7df8a68db7b815fe78dc2881d33d36b5caa4335d3ac3dd4861324a7"
+    },
+    {
+      "path": "yejun/press_guard/outputs/error_condition_summary_v2.csv",
+      "previous_sha256": "4a2af738f1404936c031103d352ebe590278c8779352ea1e076fb7d70b027a04",
+      "final_sha256": "4a2af738f1404936c031103d352ebe590278c8779352ea1e076fb7d70b027a04"
+    },
+    {
+      "path": "yejun/press_guard/outputs/error_conditions_segments_v2.csv",
+      "previous_sha256": "083b122d791ca32eec08ae032edd3a6b8f74333987437ee8e356c449881f466d",
+      "final_sha256": "083b122d791ca32eec08ae032edd3a6b8f74333987437ee8e356c449881f466d"
+    },
+    {
+      "path": "yejun/press_guard/outputs/error_conditions_stats_v2.csv",
+      "previous_sha256": "c68a3f5c84841ce54f9b30c8fa442189601e7fdb3c005d2e7d83273397769795",
+      "final_sha256": "c68a3f5c84841ce54f9b30c8fa442189601e7fdb3c005d2e7d83273397769795"
+    },
+    {
+      "path": "yejun/press_guard/outputs/error_conditions_v2.csv",
+      "previous_sha256": "dbb330296c57e2d34831a99757f8c5fff1bfb7b9fab14c301eeace1db734d12c",
+      "final_sha256": "dbb330296c57e2d34831a99757f8c5fff1bfb7b9fab14c301eeace1db734d12c"
+    },
+    {
+      "path": "yejun/press_guard/outputs/expected_effect_v2.csv",
+      "previous_sha256": "94b696d2dde0848987b55ea1558ca61fa91e90f1f6a60fd996be80fe3fcc7ec0",
+      "final_sha256": "94b696d2dde0848987b55ea1558ca61fa91e90f1f6a60fd996be80fe3fcc7ec0"
+    },
+    {
+      "path": "yejun/press_guard/outputs/fn_intensity_v2.csv",
+      "previous_sha256": "087f2e97bf7d3340d0fef027bb5a9a19ef4331fcd969b19ef33e6bb802353c0a",
+      "final_sha256": "087f2e97bf7d3340d0fef027bb5a9a19ef4331fcd969b19ef33e6bb802353c0a"
+    },
+    {
+      "path": "yejun/press_guard/outputs/fp_events_v2.csv",
+      "previous_sha256": "906dc07b4ae961f856ed155ab5b55d19157e0c4b782e9a1b087c9b6dcc3c70b7",
+      "final_sha256": "906dc07b4ae961f856ed155ab5b55d19157e0c4b782e9a1b087c9b6dcc3c70b7"
+    },
+    {
+      "path": "yejun/press_guard/outputs/fp_intensity_v2.csv",
+      "previous_sha256": "ad196bfa8b075df50773f394b6278daf1bd08032d7ee9f13334ee687b3855186",
+      "final_sha256": "ad196bfa8b075df50773f394b6278daf1bd08032d7ee9f13334ee687b3855186"
+    },
+    {
+      "path": "yejun/press_guard/outputs/incident_summary_v2.csv",
+      "previous_sha256": "7184320225c2227630a5fb902b67cf3bf47915c313e8abd70ac7de6ba25c02f9",
+      "final_sha256": "7184320225c2227630a5fb902b67cf3bf47915c313e8abd70ac7de6ba25c02f9"
+    },
+    {
+      "path": "yejun/press_guard/outputs/incidents_A.csv",
+      "previous_sha256": "f8407df2d7360db72a5c646bf5883d076c584c52610080babb893a5dc54e3437",
+      "final_sha256": "f8407df2d7360db72a5c646bf5883d076c584c52610080babb893a5dc54e3437"
+    },
+    {
+      "path": "yejun/press_guard/outputs/incidents_B.csv",
+      "previous_sha256": "a45eed38e452a50188cf9a0d0b40c4b7dcf2909ca35000edcd49336ff6195e41",
+      "final_sha256": "a45eed38e452a50188cf9a0d0b40c4b7dcf2909ca35000edcd49336ff6195e41"
+    },
+    {
+      "path": "yejun/press_guard/outputs/interaction_2x2_v2.csv",
+      "previous_sha256": "542c63fa113dc357130570de1ff8b228ff31b4ccf3a752c0eb8aad7a350cc02f",
+      "final_sha256": "542c63fa113dc357130570de1ff8b228ff31b4ccf3a752c0eb8aad7a350cc02f"
+    },
+    {
+      "path": "yejun/press_guard/outputs/label_free_alert_probability_v2.csv",
+      "previous_sha256": "2da6d90199b5370d81a6306bd050487fd65fb15fced336fadafda41d041b4d21",
+      "final_sha256": "2da6d90199b5370d81a6306bd050487fd65fb15fced336fadafda41d041b4d21"
+    },
+    {
+      "path": "yejun/press_guard/outputs/metrics.csv",
+      "previous_sha256": "ed318a3b36ced09ee888e0fb5b8b548350e9bee1e39cff7779c19ab379a613d2",
+      "final_sha256": "ed318a3b36ced09ee888e0fb5b8b548350e9bee1e39cff7779c19ab379a613d2"
+    },
+    {
+      "path": "yejun/press_guard/outputs/model_comparison_v2.csv",
+      "previous_sha256": "eadfbe41ac7add55f07b1e63300a0beec22e26513e415248455d489aac396f3a",
+      "final_sha256": "eadfbe41ac7add55f07b1e63300a0beec22e26513e415248455d489aac396f3a"
+    },
+    {
+      "path": "yejun/press_guard/outputs/monitor_gain_v2.csv",
+      "previous_sha256": "c05d452df9093464de8045ed7e0a74551ca01f0c881ed39251f1feaf89c17fa4",
+      "final_sha256": "c05d452df9093464de8045ed7e0a74551ca01f0c881ed39251f1feaf89c17fa4"
+    },
+    {
+      "path": "yejun/press_guard/outputs/near_miss_corr_v2.csv",
+      "previous_sha256": "501fff1b330a2b4747175fcd19fc8afcd842f70010434f9e5024eefb49f96d77",
+      "final_sha256": "501fff1b330a2b4747175fcd19fc8afcd842f70010434f9e5024eefb49f96d77"
+    },
+    {
+      "path": "yejun/press_guard/outputs/near_miss_v2.csv",
+      "previous_sha256": "0163b4257f5d1d63ff924317c6027b3d16b8c081bc42872a695796b22e2c79ce",
+      "final_sha256": "0163b4257f5d1d63ff924317c6027b3d16b8c081bc42872a695796b22e2c79ce"
+    },
+    {
+      "path": "yejun/press_guard/outputs/position_vibration_misses_v2.csv",
+      "previous_sha256": "9516a8a3596360a364ad00ba6f78cf57fb0e0569750733e67d7ca18b986db3d4",
+      "final_sha256": "9516a8a3596360a364ad00ba6f78cf57fb0e0569750733e67d7ca18b986db3d4"
+    },
+    {
+      "path": "yejun/press_guard/outputs/probability_conversion_v2.csv",
+      "previous_sha256": "a98514df92deb12bedadd83570bd27578a3e02a2076f1d7e83798a4baf509dcc",
+      "final_sha256": "a98514df92deb12bedadd83570bd27578a3e02a2076f1d7e83798a4baf509dcc"
+    },
+    {
+      "path": "yejun/press_guard/outputs/probability_eval_v2.csv",
+      "previous_sha256": "56da8e3dfd7b1d074d03833d43fe47eb11780c50993cd8247d503097c42b6a5c",
+      "final_sha256": "56da8e3dfd7b1d074d03833d43fe47eb11780c50993cd8247d503097c42b6a5c"
+    },
+    {
+      "path": "yejun/press_guard/outputs/probability_reliability_v2.csv",
+      "previous_sha256": "89e79e7b5bc99d7c01b6cf66119e2d1a77d8fab5f010d1c38ce25963d019bad0",
+      "final_sha256": "89e79e7b5bc99d7c01b6cf66119e2d1a77d8fab5f010d1c38ce25963d019bad0"
+    },
+    {
+      "path": "yejun/press_guard/outputs/quality_windows_v2.csv",
+      "previous_sha256": "e49101f8bfff159ae96f2a2f213eb2f379b6f49c803221ff39f7805f56f6a73d",
+      "final_sha256": "e49101f8bfff159ae96f2a2f213eb2f379b6f49c803221ff39f7805f56f6a73d"
+    },
+    {
+      "path": "yejun/press_guard/outputs/queue_injection_ranks_v2.csv",
+      "previous_sha256": "7cb1517b6da8fed30460e44be7bb64a0f2d411cf1a6eabe1dbfd2dc841cf46a2",
+      "final_sha256": "7cb1517b6da8fed30460e44be7bb64a0f2d411cf1a6eabe1dbfd2dc841cf46a2"
+    },
+    {
+      "path": "yejun/press_guard/outputs/queue_key_selection_v2.csv",
+      "previous_sha256": "99563c11aa4a2eeb8e1633f2d511bd9e78975c9dd48617a083096ec17514b2de",
+      "final_sha256": "99563c11aa4a2eeb8e1633f2d511bd9e78975c9dd48617a083096ec17514b2de"
+    },
+    {
+      "path": "yejun/press_guard/outputs/queue_mixed_ranks_v2.csv",
+      "previous_sha256": "b74d53bb1a4840275f56865d1aa11a37f63a850607b60a2d9ea79c4c670f25ea",
+      "final_sha256": "b74d53bb1a4840275f56865d1aa11a37f63a850607b60a2d9ea79c4c670f25ea"
+    },
+    {
+      "path": "yejun/press_guard/outputs/records_first_alarm_v2.csv",
+      "previous_sha256": "14ba376ea2f5789655b0af14c389b7b5aa4c758b5734293d4afdd3e952fb058b",
+      "final_sha256": "14ba376ea2f5789655b0af14c389b7b5aa4c758b5734293d4afdd3e952fb058b"
+    },
+    {
+      "path": "yejun/press_guard/outputs/robustness_v2.csv",
+      "previous_sha256": "7e2e53ca6f308db82d82476bac7103f24d75be301d247b47cc7814445ec7be40",
+      "final_sha256": "7e2e53ca6f308db82d82476bac7103f24d75be301d247b47cc7814445ec7be40"
+    },
+    {
+      "path": "yejun/press_guard/outputs/rolling.csv",
+      "previous_sha256": "f7fd51580796b3e310b1a66d146e1703600119a10f557963cec3081c4e16c73b",
+      "final_sha256": "f7fd51580796b3e310b1a66d146e1703600119a10f557963cec3081c4e16c73b"
+    },
+    {
+      "path": "yejun/press_guard/outputs/sensitivity_v2.csv",
+      "previous_sha256": "57d0bf076c4d2366688ce518f1f7a3f1f0490511dd755fafa81b21c32e2c375a",
+      "final_sha256": "57d0bf076c4d2366688ce518f1f7a3f1f0490511dd755fafa81b21c32e2c375a"
+    },
+    {
+      "path": "yejun/press_guard/outputs/sensor_importance_v2.csv",
+      "previous_sha256": "2da67dd64e99cc165e7c4d76d496c147f67c96a5012dffbcac8826f20f3c750b",
+      "final_sha256": "2da67dd64e99cc165e7c4d76d496c147f67c96a5012dffbcac8826f20f3c750b"
+    },
+    {
+      "path": "yejun/press_guard/outputs/uncertainty_v2.csv",
+      "previous_sha256": "c10df72d1662caf044679acbe88c65c1384ba8c68b8d36188926f40ff07aec72",
+      "final_sha256": "c10df72d1662caf044679acbe88c65c1384ba8c68b8d36188926f40ff07aec72"
+    },
+    {
+      "path": "yejun/press_guard/outputs/workload_v2.csv",
+      "previous_sha256": "ad3be354fa8baa944fd7c4ee14eb8e950ca37259a68dec4440184cf7f920c74b",
+      "final_sha256": "ad3be354fa8baa944fd7c4ee14eb8e950ca37259a68dec4440184cf7f920c74b"
+    },
+    {
+      "path": "yejun/press_guard/outputs/test_predictions_A.csv",
+      "previous_sha256": "2941bf9dde2c9b66308eb6e26d19e4a41f93de1441833c8b476e0534e47e98c8",
+      "final_sha256": "2941bf9dde2c9b66308eb6e26d19e4a41f93de1441833c8b476e0534e47e98c8"
+    },
+    {
+      "path": "yejun/press_guard/outputs/test_predictions_B.csv",
+      "previous_sha256": "9bd02a7cf086ad9ff81542166c2af768aefee944d4385e343a2d771d8a2f5524",
+      "final_sha256": "9bd02a7cf086ad9ff81542166c2af768aefee944d4385e343a2d771d8a2f5524"
+    }
+  ],
+  "elapsed_s": 9.91998916599914,
+  "pass_count": 10,
+  "check_count": 10
+}

@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "press_guard/test_analyze.py::test_verify_detects_tampering",
+    "press_guard/test_review_regressions.py::test_v1_rerun_does_not_break_v2_verify"
+  ],
+  "returncode": 0,
+  "seconds": 3.88,
+  "after_guard_freeze": true,
+  "output": "..                                                                       [100%]\n2 passed in 3.31s\n"
+}

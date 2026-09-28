@@ -1,0 +1,7 @@
+A: 정상 학습·보정 / 저장·복원 일치
+B: 정상 학습·보정 / 저장·복원 일치
+split       model  alpha  tp  fp  fn   tn       f1  precision   recall  normal_notified_segments  normal_segments  abnormal_notified_segments  abnormal_segments  delay_median_s  delay_max_s  normal_scored_rate  abnormal_scored_rate
+    A    guard_v2   0.01 556   0  44 4090 0.961938   1.000000 0.926667                         0              120                          21                 21             0.1          0.5                 1.0                   1.0
+    A baseline_v1   0.01 501   0  99 4090 0.910082   1.000000 0.835000                         0              120                          21                 21             0.1          0.7                 1.0                   1.0
+    B    guard_v2   0.01 569   3  31 6094 0.970990   0.994755 0.948333                         3              180                          21                 21             0.0          0.5                 1.0                   1.0
+    B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              180                          21                 21             0.0          0.7                 1.0                   1.0

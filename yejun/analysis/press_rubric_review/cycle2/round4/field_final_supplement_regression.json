@@ -1,0 +1,55 @@
+{
+  "all_unchanged": true,
+  "files": [
+    {
+      "path": "analysis/press_supplement/e1_detection_floor.csv",
+      "sha256": "e0c97954bf46b00895d2e5310ddceb15297aa38b4d995b22715eb1d2ecf96975",
+      "same_as_inherited_commit": true
+    },
+    {
+      "path": "analysis/press_supplement/e1_reference_segments.csv",
+      "sha256": "72dfc4e522c2b489598f6f0beae542e46a2aba0c294a896ad2e777b347f9ac65",
+      "same_as_inherited_commit": true
+    },
+    {
+      "path": "analysis/press_supplement/e1_summary.csv",
+      "sha256": "ac599f2408e6eb8cf03c51ca8f83ffa34ba4cb11d48a168b23e43195ab980344",
+      "same_as_inherited_commit": true
+    },
+    {
+      "path": "analysis/press_supplement/e2_uci_comparison.csv",
+      "sha256": "da3922e892ebb3fc5c8a5f5232790fb7cd451cf50be6d64a46123f5761849907",
+      "same_as_inherited_commit": true
+    },
+    {
+      "path": "analysis/press_supplement/e2_uci_component_diagnostic_posthoc.csv",
+      "sha256": "dee030617bbb25a6a0ce8a51b7f2ae6c07d9538f96d78f63ab4c51fe8ff2736a",
+      "same_as_inherited_commit": true
+    },
+    {
+      "path": "analysis/press_supplement/e2_uci_metrics.csv",
+      "sha256": "9182c3046dbe0d43527b3ff1138944ac98a540529de37ef2d7ae4793887f6534",
+      "same_as_inherited_commit": true
+    },
+    {
+      "path": "analysis/press_supplement/e2_uci_strata.csv",
+      "sha256": "8c4ed7a17ffac423368393d6b83501615e20d8d1d18d05baa1166273aac6f818",
+      "same_as_inherited_commit": true
+    },
+    {
+      "path": "analysis/press_supplement/e3_curve.csv",
+      "sha256": "1002608862a00c8863847a429d62dca22bfc2dea29146d6fdc457ca5cec9df11",
+      "same_as_inherited_commit": true
+    },
+    {
+      "path": "analysis/press_supplement/e3_domain_shift.csv",
+      "sha256": "ed6540bc5291a0555e6f7030db2bdacd3f75dddffca524975ab620b1d9fdcac9",
+      "same_as_inherited_commit": true
+    },
+    {
+      "path": "analysis/press_supplement/e3_stability.csv",
+      "sha256": "4447e30b858fc32df317a565ebc86720e7759e802a3a9960f0c27e9c5005762c",
+      "same_as_inherited_commit": true
+    }
+  ]
+}

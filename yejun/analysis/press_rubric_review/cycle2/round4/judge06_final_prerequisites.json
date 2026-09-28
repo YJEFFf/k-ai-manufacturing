@@ -1,0 +1,102 @@
+[
+  {
+    "condition": "no_inputs",
+    "package": "evidence",
+    "returncode": 0,
+    "skipped": true,
+    "guidance": true,
+    "traceback": false,
+    "last_line": "6 skipped in 0.34s",
+    "log": "judge06_final_prereq_no_inputs_evidence.log"
+  },
+  {
+    "condition": "no_inputs",
+    "package": "advance",
+    "returncode": 0,
+    "skipped": true,
+    "guidance": true,
+    "traceback": false,
+    "last_line": "8 skipped in 0.34s",
+    "log": "judge06_final_prereq_no_inputs_advance.log"
+  },
+  {
+    "condition": "no_inputs",
+    "package": "supervised",
+    "returncode": 0,
+    "skipped": true,
+    "guidance": true,
+    "traceback": false,
+    "last_line": "6 skipped in 0.33s",
+    "log": "judge06_final_prereq_no_inputs_supervised.log"
+  },
+  {
+    "condition": "no_inputs",
+    "package": "selection",
+    "returncode": 0,
+    "skipped": true,
+    "guidance": true,
+    "traceback": false,
+    "last_line": "6 skipped in 0.33s",
+    "log": "judge06_final_prereq_no_inputs_selection.log"
+  },
+  {
+    "condition": "no_inputs",
+    "package": "supplement",
+    "returncode": 0,
+    "skipped": true,
+    "guidance": true,
+    "traceback": false,
+    "last_line": "13 skipped in 1.15s",
+    "log": "judge06_final_prereq_no_inputs_supplement.log"
+  },
+  {
+    "condition": "raw_data_only",
+    "package": "evidence",
+    "returncode": 0,
+    "skipped": true,
+    "guidance": true,
+    "traceback": false,
+    "last_line": "6 skipped in 0.34s",
+    "log": "judge06_final_prereq_raw_data_only_evidence.log"
+  },
+  {
+    "condition": "raw_data_only",
+    "package": "advance",
+    "returncode": 0,
+    "skipped": true,
+    "guidance": true,
+    "traceback": false,
+    "last_line": "8 skipped in 0.34s",
+    "log": "judge06_final_prereq_raw_data_only_advance.log"
+  },
+  {
+    "condition": "raw_data_only",
+    "package": "supervised",
+    "returncode": 0,
+    "skipped": true,
+    "guidance": true,
+    "traceback": false,
+    "last_line": "6 skipped in 0.33s",
+    "log": "judge06_final_prereq_raw_data_only_supervised.log"
+  },
+  {
+    "condition": "raw_data_only",
+    "package": "selection",
+    "returncode": 0,
+    "skipped": true,
+    "guidance": true,
+    "traceback": false,
+    "last_line": "6 skipped in 0.33s",
+    "log": "judge06_final_prereq_raw_data_only_selection.log"
+  },
+  {
+    "condition": "raw_data_only",
+    "package": "supplement",
+    "returncode": 0,
+    "skipped": true,
+    "guidance": true,
+    "traceback": false,
+    "last_line": "13 skipped in 1.14s",
+    "log": "judge06_final_prereq_raw_data_only_supplement.log"
+  }
+]

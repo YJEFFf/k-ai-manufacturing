@@ -57,10 +57,16 @@ def v2_segment_max(model, frame):
 
 # ---------- R2 변수 사전 ----------
 def variable_dictionary(raw, text):
+    from sklearn.mixture import GaussianMixture
     n, a = raw["normal"], raw["abnormal"]
     dn = {c: decimals(text["normal"][c]) for c in D.SENSORS}
     da = {c: decimals(text["abnormal"][c]) for c in D.SENSORS}
     cur = n.AI2_Current.to_numpy(float)
+    groups = pd.Series(cur).groupby(D.segments(n))
+    record_rms = groups.apply(lambda x: float(np.sqrt(np.mean((x - x.mean()) ** 2))))[groups.size() >= 17]
+    log_rms = np.log(record_rms.to_numpy()).reshape(-1, 1)
+    mixture = GaussianMixture(2, random_state=0, n_init=5).fit(log_rms)
+    low = mixture.predict(log_rms) == int(np.argmin(mixture.means_.ravel()))
     rows = [
         dict(column="Unnamed: 0", guidebook_meaning="(표 1에 없음)", guidebook_type="-", unit_in_guidebook="-",
              stored_precision="정수", observed=f"0~{len(n) - 1}, 0~{len(a) - 1}의 행 번호(파일마다 0부터)",
@@ -78,6 +84,9 @@ def variable_dictionary(raw, text):
         obs = f"정상 평균 {x.mean():.4g}·SD {x.std(ddof=1):.4g}, 이상 평균 {y.mean():.4g}·SD {y.std(ddof=1):.4g}"
         if c == "AI2_Current":
             obs += f". 정상 음수 비율 {(cur < 0).mean():.1%}, 정상 기록은 0.6 Hz 사인형"
+            obs += (f". 기록 전류 RMS(평균 제거)는 저수준(중앙 {record_rms[low].median():.0f})과 부하 범위"
+                    f"({record_rms[~low].min():.0f}~{record_rms[~low].max():.0f})로 나뉘며 약 20초 주기로 교대한다"
+                    "(operating_states_summary.csv, 생산 주기 해석은 가설)")
             rule = "단위 미기재. 음수가 절반이라 RMS가 아닌 순시값 표본으로 추정(검증 불가). 정상 학습 표준화 척도로만 해석하고 A 등 물리 단위로 쓰지 않는다"
         else:
             rule = "단위 미기재(g·mm/s 등 미확인). 정상 학습 표준화 척도로만 해석한다"

@@ -1,7 +1,7 @@
 {
   "package": "press_evidence",
   "files": {
-    "variable_dictionary.csv": "a3deb159b45ef67210f09ef880b3591284df5307d1fbe573b57ca5bcb129a581",
+    "variable_dictionary.csv": "224007654f59303461cc2ebefc9c5d3cf7d254cd024e563ebdec22b2fb22a4d5",
     "imbalance.csv": "25f925cd4096060404131c75ee6fcf5438a7a0e9bc09415dd1f7c43868ffa917",
     "outliers.csv": "704fb6abb05fb56e34ef97c1e68ce872d08ded3220076c3974ec815599711e0c",
     "quality_index.csv": "2c09f0c14471692026ac9909d73fddf7076ac0e317dea11b8f7576976078fe91",
@@ -21,8 +21,10 @@
     "sensor_relations.csv": "1d8d494b0f2915c15a7e4c2ebaa0944fbad828db978fd433c8a6fb74a37d8247",
     "operating_variation.csv": "1a9b95468647837a9a5de9ac70ae234403eaf2cb529f658a8b804a3469be5dec",
     "false_alarm_operating_level.csv": "b1963ac44dd8d4b5edc7ec40f131caa5f92b7538962fe9644c450d56f9a4e031",
-    "observability.csv": "12519d63856c0d5255f226fc4a9a96ff99eaba0d677eb39e58c7421999a7b3b1",
-    "production_unit_evidence.csv": "b1cece0eedbb4d768f1e7e71d24164d5e1a9b4e16c9a36fcb52956b52ced6594",
+    "observability.csv": "f37d8cfcfc9bd75ffd0a992322a708ca002c8925312c9d615a93c8b63743bfa6",
+    "vibration_tones.csv": "de16d47406726addb7441c2e94758c4e959bd9d04f95b1a3aca43aa340846351",
+    "state_transition_stress.csv": "7a788e5150112f30c5f5c01296e2c4033d540b0be20589b6554b1fb6f05c96a3",
+    "production_unit_evidence.csv": "89b67af59bd2e8f6107a6e6f6b74ff502539805c943e7dcbb5a232f4c06c61c0",
     "abnormal_segments.csv": "b19eedfd8d07b2523221466e1e28ae1e18a44686bca2d2c28fc11f8ea67c0b42",
     "abnormal_summary.csv": "81b2464b8fb5ec745b491c562eca47d619b09d910ce7afd4a20b1fcf1bd58003",
     "outlier_rules.csv": "b287d22b9ec8ed75c5280b89c0f940a39ebaf7b418c78576698c751d523c413f",
@@ -32,14 +34,14 @@
     "phase_continuity.csv": "51d4f832068c689d4f2a56e4bdb3cfaf8892c165c4af48f976fef23010651503",
     "guidebook_protocol_vs_records.csv": "186a5d41bcec397efbb30ff0eb2b8717e0cc1d5ab6a0ec19c861db7bb7f68771",
     "variable_expected_signals.csv": "c8774f36b86d4ee0a7931a1b447a17d46686a49e282809ab1233220c14bed8f6",
-    "failure_mode_map.csv": "761161fe9c7650eae2a00681bdbf17d2af6b1fc72ca426145057b94c300e393b",
-    "operating_states.csv": "d82f1a77969a7e757e88550ea8121c1e08ee128351caaca0517575071c54d7ae",
-    "operating_states_summary.csv": "27eea96a9fceb80116f63e25ba8d99c9d4b58be7dd853b5bcb0076c908df7cf6",
+    "failure_mode_map.csv": "be367c8be6aef2a6d4c9407db431d7c70bef6de699bb9f177e3eb1e6a844c0c7",
+    "operating_states.csv": "d7519e54162bed4f5e11b184ea5b68681873c388ddf6d555972cb187497ab71c",
+    "operating_states_summary.csv": "947563e49ff8679a5af15c17901f27cc888ce8e21c1837325ab3db234fd837ea",
     "split_state_composition.csv": "702f4b7da8c4504abaad46b14251d857ba1372725edd0fac83d73d5ce3694cbd",
-    "normal_alarms_by_state.csv": "1fe5fe5a38ddb7e5750a2ebd73c5983b2c6811e343adde865919283fabbd0e1b",
-    "decision_table_diagnosis_v2.csv": "8fd56e617edc2b1f8e316b5fc89abfe7e4d18a370c3c734423308a9d36c7f726",
-    "manifest.json": "bbbdb2a9790a5c248d9e9a5f93605493c32180e5703fed1ebed54ec4e817f58a",
-    "diagnostics_manifest.json": "de470e81b017bebcbe296f2a1b27c780839d0017a8da936b393b06ec424b420c"
+    "normal_alarms_by_state.csv": "23d8135439f676eb182bca2ff2d0e99c4f6c6c6567cbc9d134b9cb200365b0b3",
+    "decision_table_diagnosis_v2.csv": "fc118ef7d5d7a5d8fdf6eabe13f8a99d73152ad7412c1f727c5f902110ef6e7e",
+    "manifest.json": "cc7c5df5252354479873c2d671b298c458211463fa7899fcf29ffbf81c9261f0",
+    "diagnostics_manifest.json": "f2bc81603ed8efea3665bce0f60c55076cb7163bda57fcf9bf9ea01b5f96bb94"
   },
   "images": [
     "figures/fig_d2a_timeline.png",

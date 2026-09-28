@@ -1,0 +1,14 @@
+$ /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/bin/python -c import sys,importlib.util,json; print(json.dumps({'version':sys.version,'prefix':sys.prefix,'base_prefix':sys.base_prefix,'torch_present':bool(importlib.util.find_spec('torch')),'sys_path':sys.path},indent=2))
+{
+  "version": "3.12.8 (v3.12.8:2dc476bcb91, Dec  3 2024, 14:43:19) [Clang 13.0.0 (clang-1300.0.29.30)]",
+  "prefix": "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv",
+  "base_prefix": "/Library/Frameworks/Python.framework/Versions/3.12",
+  "torch_present": false,
+  "sys_path": [
+    "",
+    "/Library/Frameworks/Python.framework/Versions/3.12/lib/python312.zip",
+    "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12",
+    "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/lib-dynload",
+    "/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge06r4_aev7r1e_/clean_venv/lib/python3.12/site-packages"
+  ]
+}

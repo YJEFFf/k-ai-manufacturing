@@ -2,7 +2,7 @@
 
     OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 python yejun/press_guard/recalibrate.py \
         --normal new_normal.csv --out site_model.json --report site_report.json [--alpha 0.01] [--cal-units 120] [--holdout-units 60]
-        [--outcomes cases_with_outcomes.csv] [--target-alerts-per-8h 3]
+        [--outcomes cases_with_outcomes.csv] [--windows monitor_windows_with_outcomes.csv] [--target-alerts-per-8h 3]
 
 절차. 보정·알림 단위는 기록구간 안의 50행 블록이다(model.alert_units). 대회처럼 간헐 수집이면 기록구간 하나가 한 단위다.
 1) 시간 순서대로 학습 / 보정 / 수락 검사로 나눈다. 수락 검사는 맨 뒤 --holdout-units개, 보정은 그 앞 --cal-units개, 나머지가 학습이다.
@@ -17,9 +17,12 @@
        주입 세기는 보완 실험 E1에서 동결 모델이 두 분할 모두 95% 이상 잡은 세기다(결과를 본 뒤 정한 운영 기준, analysis/press_supplement).
 5) 모두 통과하면 모델을 저장한다. 실패하면 저장하지 않고 종료 코드 1을 돌려준다(--save-failed면 저장하되 보고서에 실패를 남긴다).
 이 검사는 새 자료의 정상 알림 수준과 인공 이상 반응을 확인할 뿐이며, 실제 고장 탐지 성능을 보장하지 않는다.
+정상 자료만 쓰므로 라벨 확률 보정기는 만들지 않는다. 저장 모델의 확률·우도비 열 4개는 비고 사전 비율 π는 쓰이지 않는다.
 
 --outcomes: 점검 결과를 기록한 대기열 CSV(콘솔 내보내기). "정상 확인"으로 닫히지 않은 건의 의심 시간창은 재보정 자료에서 뺀다
 (확인된 정상 구간만 정상 기준으로 쓴다, monitor.exclude_unconfirmed).
+--windows: monitor.py의 창별 CSV에 outcome 열을 더한 파일. 변경 기록 없이 전류가 상승 이동했거나 열화가 의심되어
+"설비 점검 요청"인 창은 outcome이 "정상 확인"일 때만 남긴다. 결과가 비거나 열이 없어도 미확인으로 보고 기간 전체를 뺀다.
 --target-alerts-per-8h: 교대(8시간)당 1단계 알림 예산. 입력 자료의 단위 밀도로 명목·보정 95% 알림 수를 환산하고, 예산을 맞추려면
 필요한 α·보정 단위·정상 수집 시간을 보고서에 적는다(analyze.py의 alert_budget_design_v2.csv와 같은 식). 수락 여부는 바꾸지 않는다.
 """
@@ -34,7 +37,7 @@ import pandas as pd
 from scipy import stats
 
 from model import GuardModel, D, ALPHAS, ALERT_UNIT_ROWS, TIME_TOL_S, SHORT_RECORD_WARN, alert_units, layout
-from monitor import alert_limit, exclude_unconfirmed, budget_design
+from monitor import alert_limit, exclude_unconfirmed, exclude_unconfirmed_windows, budget_design
 import runtime
 
 MIN_TRAIN_UNITS = 15          # 보완 실험 E3에서 확인한 가장 작은 학습 단위 수
@@ -137,6 +140,7 @@ def main(argv=None):
     ap.add_argument("--name", default="recalibrated", help="모델 split 이름(model_id에 붙는다)")
     ap.add_argument("--save-failed", action="store_true", help="수락 검사에 실패해도 모델을 저장한다(보고서에 실패가 남는다)")
     ap.add_argument("--outcomes", type=Path, help="점검 결과가 기록된 대기열 CSV. 정상 확인으로 닫히지 않은 건의 의심 시간창은 뺀다")
+    ap.add_argument("--windows", type=Path, help="monitor.py 창별 CSV(outcome 열). 설비 점검 요청 창은 정상 확인일 때만 남긴다")
     ap.add_argument("--target-alerts-per-8h", type=float, help="교대 8시간당 1단계 알림 예산(보고서의 설계 환산용)")
     args = ap.parse_args(argv)
     runtime.setup()
@@ -149,6 +153,9 @@ def main(argv=None):
         excluded = None
         if args.outcomes:
             frame, excluded = exclude_unconfirmed(frame, pd.read_csv(args.outcomes))
+        excluded_windows = None
+        if args.windows:
+            frame, excluded_windows = exclude_unconfirmed_windows(frame, pd.read_csv(args.windows))
         status, seg0 = layout(frame)
         ok_rows = int((status == "ok").sum())
         mean_len = ok_rows / max(len(np.unique(seg0[status == "ok"])), 1)
@@ -174,6 +181,7 @@ def main(argv=None):
                   usage={k: usage(v) for k, v in parts.items()}, calibration_units=len(model.cal),
                   checks=checks, passed=passed, model_saved=bool(saved), model_path=str(args.out) if saved else None,
                   excluded_by_outcomes=excluded,
+                  excluded_by_windows=excluded_windows,
                   budget=budget_design(frame, args.alpha, len(model.cal), args.target_alerts_per_8h),
                   note="같은 자료 안의 정상 알림 수준과 인공 이상 반응 확인이다. 실제 고장 탐지 성능·다른 날짜의 오경보율을 보장하지 않는다.")
     report_path.parent.mkdir(parents=True, exist_ok=True)

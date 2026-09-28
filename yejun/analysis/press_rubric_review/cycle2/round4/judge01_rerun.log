@@ -1,0 +1,6 @@
+initial_contract exit 0 0.46 seconds
+build_tables exit 0 7.66 seconds
+build_diagnostics exit 0 35.39 seconds
+final_contract exit 0 0.46 seconds
+targeted_tests exit 0 1.76 seconds
+identical 44 changed [] manifest changes {'manifest.json': ['elapsed_s'], 'diagnostics_manifest.json': ['elapsed_s']} source changed []

@@ -1,0 +1,46 @@
+[
+  {
+    "package": "press_advance",
+    "returncode": 0,
+    "tail": [
+      "통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)"
+    ]
+  },
+  {
+    "package": "press_evidence",
+    "returncode": 0,
+    "tail": [
+      "통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 44개)"
+    ]
+  },
+  {
+    "package": "press_selection",
+    "returncode": 0,
+    "tail": [
+      "통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 12개)"
+    ]
+  },
+  {
+    "package": "press_supervised",
+    "returncode": 0,
+    "tail": [
+      "통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)"
+    ]
+  },
+  {
+    "package": "press_supplement",
+    "returncode": 0,
+    "tail": [
+      "통과: 무결성·기대값 비교 E1, E2, E3"
+    ]
+  },
+  {
+    "package": "press_submission",
+    "returncode": 0,
+    "tail": [
+      "OK   workload.csv  max|Δ|=0",
+      "",
+      "39/39 통과 (1~5단계 전체 비교, 필수 집계 32개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 b372a18b66af vs 동결 b372a18b66af"
+    ]
+  }
+]

@@ -6,12 +6,12 @@
     P(이상 | s; π) = π·LR(s) / (π·LR(s) + 1 − π)
 
 - P̂: 정상 보정 구간 행(0)과 이상 기록 행(1)에 맞춘 등방(isotonic) 회귀. π_fit은 그 적합 자료의 이상 비율이다.
-- LR(우도비)은 사전 비율과 무관하다. π는 현장의 이상 비율에 대한 가정이다(기본 1%).
-- 증거력 상한: 알림은 보정 단위 n개의 conformal 순위로 정한다. 정상에서 한 알림 단위가 최상위가 될 확률은
-  1/(n+1)이므로, 한 알림이 줄 수 있는 우도비는 (n+1)×탐지율을 넘지 못한다. 행 확률도 그 행이 속한 알림 단위가
-  낼 수 있는 증거보다 크게 말하지 않도록 LR을 (n+1)에서 자른다(보정 120단위면 121). 행 사이 자기상관 때문에
-  행 수를 표본 수로 쓰면 증거를 과대평가한다.
-- 낮은 점수 쪽: 이상 행이 하나도 없는 구간(P̂=0)은 등방 회귀의 가장 작은 유한 LR로 둔다(0으로 확신하지 않음).
+- LR(우도비)은 사전 비율과 무관하다. 행 확률의 π는 현장의 이상 행 비율 가정이다(기본 1%).
+  기록 확률은 같은 π를 쓰는 근사다. 알림 단위 이상 비율은 라벨 없는 환산에만 쓴다.
+- LR 표시 상한: 보정 단위 n개의 conformal 순위에서 착안해 행 LR을 n+1에서 자르는 보수적 표시 정책이다
+  (보정 120단위면 121). 이는 행 LR의 이론상 상한이나 표시 확률이 실제 고장 확률의 하한이라는 보장이 아니다.
+  행 자기상관과 제한된 보정 자료를 고려한 정책이며, 라벨 없는 알림 단위 환산의 가정과 행 LR 보정은 구별한다.
+- 낮은 점수 쪽: LR은 등방 회귀의 가장 작은 유한 LR 이상으로 둔다. P̂=0부터 첫 양수까지의 보간에서도 단조성을 유지한다.
 - 이상 자료는 한 날 3분의 연속 기록이라 LR은 그 이상 모양에서 나온 점수 분포에 맞춰져 있다.
 """
 from __future__ import annotations
@@ -50,7 +50,7 @@ class ProbabilityCalibrator:
 
     @classmethod
     def fit(cls, normal_scores, abnormal_scores, *, calibration_units, split="custom", source=None):
-        """calibration_units: 이 모델의 conformal 보정 단위 수(증거력 상한 n+1)."""
+        """calibration_units: 이 모델의 conformal 보정 단위 수. n+1은 행 LR 표시 정책의 상한이다."""
         s0 = np.asarray(normal_scores, float); s1 = np.asarray(abnormal_scores, float)
         s0, s1 = s0[np.isfinite(s0)], s1[np.isfinite(s1)]
         x = np.r_[s0, s1]; y = np.r_[np.zeros(len(s0)), np.ones(len(s1))]
@@ -75,7 +75,7 @@ class ProbabilityCalibrator:
         p = self.fitted(scores)
         inner = np.clip(p, EPS, 1 - EPS)
         lr = inner / (1 - inner) / (self.pi_fit / (1 - self.pi_fit))
-        lr = np.where(p <= 0, self.lr_floor, np.minimum(lr, self.lr_cap))   # 증거력 상한은 conformal 순위 한계
+        lr = np.clip(lr, self.lr_floor, self.lr_cap)   # 보간 구간도 같은 표시 범위를 적용해 단조성을 보존한다.
         return np.where(np.isfinite(p), lr, np.nan)
 
     def probability(self, scores, prior=DEFAULT_PRIOR):
@@ -124,8 +124,12 @@ def expected_calibration_error(y, p, bins=10):
     return float(total)
 
 
-def alert_evidence_bound(calibration_units, detection_rate=1.0):
-    """라벨 적합 없이 쓰는 알림 한 건의 우도비 상한: 정상에서 알림 확률 = 1/(n+1)(conformal), 이상에서 ≤ 탐지율."""
+def min_rank_nominal_likelihood_ratio(calibration_units, detection_rate=1.0):
+    """FAR를 최소 순위의 명목값 1/(n+1), TPR을 detection_rate로 고정한 시나리오의 LR.
+
+    실제 FAR가 더 작으면 LR은 이 값보다 클 수 있다. conformal FAR 보장이 LR의 보편적 상한을 주지는 않는다.
+    α가 커서 허용 순위가 l>1이면 해당 α의 명목 FAR는 l/(n+1)이므로 별도로 계산해야 한다.
+    """
     return (calibration_units + 1) * detection_rate
 
 
@@ -133,6 +137,6 @@ def sellke_bayes_factor(p):
     """Sellke–Bayarri–Berger 최소 베이즈 인수 −e·p·ln p(p < 1/e). 참고값이다.
 
     연속 p값을 정확히 관측하고, 대립에서 p가 Beta(ξ,1) 족을 따를 때의 회의적 환산이다. conformal 알림은 "p ≤ 1/(n+1)"이라는
-    사건이라 이 값이 알림 한 건의 우도비 상한이 아니다. 알림의 상한은 alert_evidence_bound((n+1)×탐지율)다."""
+    사건이라 이 값이 알림 한 건의 우도비 상한이 아니다. 명목 FAR를 고정한 시나리오는 min_rank_nominal_likelihood_ratio를 쓴다."""
     p = float(p)
     return -math.e * p * math.log(p) if 0 < p < 1 / math.e else 1.0

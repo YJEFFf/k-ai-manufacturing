@@ -1,0 +1,26 @@
+{
+  "ok": true,
+  "scenarios": [
+    {
+      "name": "single_alarm_pair",
+      "prefixes": 8
+    },
+    {
+      "name": "continuous_joined_normal",
+      "prefixes": 42
+    },
+    {
+      "name": "B_normal_alpha5",
+      "prefixes": 32
+    },
+    {
+      "name": "clock_reversal",
+      "prefixes": 5
+    }
+  ],
+  "prefixes": 87,
+  "failures": [],
+  "seconds": 4.970595749997301,
+  "app_js_sha256": "125d98ca8d760f79a6e29c3661a163c9bed7390aaca374ef9ddcc8f09baa9f83",
+  "model_py_sha256": "8b9493a248609180f139aa777ed0b1cbf29d3bfca5e5b98f2e588cbeb0cb3f6f"
+}

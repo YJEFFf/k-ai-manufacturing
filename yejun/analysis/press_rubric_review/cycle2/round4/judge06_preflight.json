@@ -1,0 +1,314 @@
+{
+  "phase": "preflight before final regeneration",
+  "python": "3.12.2 | packaged by conda-forge | (main, Feb 16 2024, 20:54:21) [Clang 16.0.6 ]",
+  "probes": [
+    {
+      "name": "snapshot",
+      "files": 465,
+      "excluded": [
+        "yejun/press_submission/data/3_소성가공_예지보전/press_data_normal.csv",
+        "yejun/press_submission/data/3_소성가공_예지보전/outlier_data.csv",
+        "yejun/press_guard/artifacts/guard_A.json",
+        "yejun/press_guard/artifacts/guard_B.json",
+        "yejun/press_guard/artifacts/probability_A.json",
+        "yejun/press_guard/artifacts/probability_B.json",
+        "yejun/press_guard/outputs/test_predictions_A.csv",
+        "yejun/press_guard/outputs/test_predictions_B.csv"
+      ],
+      "git_present": false
+    },
+    {
+      "name": "prerequisite_no_inputs_evidence",
+      "returncode": 0,
+      "seconds": 1.0,
+      "skipped": true,
+      "guidance": true,
+      "traceback": false,
+      "tail": "6 skipped in 0.52s",
+      "log": "judge06_preflight_no_inputs_evidence.log"
+    },
+    {
+      "name": "prerequisite_no_inputs_advance",
+      "returncode": 0,
+      "seconds": 0.94,
+      "skipped": true,
+      "guidance": true,
+      "traceback": false,
+      "tail": "8 skipped in 0.48s",
+      "log": "judge06_preflight_no_inputs_advance.log"
+    },
+    {
+      "name": "prerequisite_no_inputs_supervised",
+      "returncode": 0,
+      "seconds": 0.98,
+      "skipped": true,
+      "guidance": true,
+      "traceback": false,
+      "tail": "6 skipped in 0.51s",
+      "log": "judge06_preflight_no_inputs_supervised.log"
+    },
+    {
+      "name": "prerequisite_no_inputs_selection",
+      "returncode": 0,
+      "seconds": 0.95,
+      "skipped": true,
+      "guidance": true,
+      "traceback": false,
+      "tail": "6 skipped in 0.50s",
+      "log": "judge06_preflight_no_inputs_selection.log"
+    },
+    {
+      "name": "prerequisite_no_inputs_supplement",
+      "returncode": 0,
+      "seconds": 2.26,
+      "skipped": true,
+      "guidance": true,
+      "traceback": false,
+      "tail": "13 skipped in 1.71s",
+      "log": "judge06_preflight_no_inputs_supplement.log"
+    },
+    {
+      "name": "prerequisite_raw_data_only_evidence",
+      "returncode": 0,
+      "seconds": 0.97,
+      "skipped": true,
+      "guidance": true,
+      "traceback": false,
+      "tail": "6 skipped in 0.48s",
+      "log": "judge06_preflight_raw_data_only_evidence.log"
+    },
+    {
+      "name": "prerequisite_raw_data_only_advance",
+      "returncode": 0,
+      "seconds": 0.97,
+      "skipped": true,
+      "guidance": true,
+      "traceback": false,
+      "tail": "8 skipped in 0.50s",
+      "log": "judge06_preflight_raw_data_only_advance.log"
+    },
+    {
+      "name": "prerequisite_raw_data_only_supervised",
+      "returncode": 0,
+      "seconds": 0.98,
+      "skipped": true,
+      "guidance": true,
+      "traceback": false,
+      "tail": "6 skipped in 0.50s",
+      "log": "judge06_preflight_raw_data_only_supervised.log"
+    },
+    {
+      "name": "prerequisite_raw_data_only_selection",
+      "returncode": 0,
+      "seconds": 0.96,
+      "skipped": true,
+      "guidance": true,
+      "traceback": false,
+      "tail": "6 skipped in 0.48s",
+      "log": "judge06_preflight_raw_data_only_selection.log"
+    },
+    {
+      "name": "prerequisite_raw_data_only_supplement",
+      "returncode": 0,
+      "seconds": 2.29,
+      "skipped": true,
+      "guidance": true,
+      "traceback": false,
+      "tail": "13 skipped in 1.72s",
+      "log": "judge06_preflight_raw_data_only_supplement.log"
+    },
+    {
+      "name": "documents",
+      "package_files": 473,
+      "local_links": 159,
+      "broken": [
+        {
+          "document": "yejun/analysis/press_evidence/README.md",
+          "target": "vibration_tones.csv",
+          "included": false
+        }
+      ],
+      "internal_markers": [],
+      "package_blind_checks": [
+        "문서 상대 링크가 목록에 없음: yejun/analysis/press_evidence/README.md → vibration_tones.csv"
+      ]
+    },
+    {
+      "name": "broken_document_probe",
+      "caught": true,
+      "failures": [
+        "문서 상대 링크가 목록에 없음: yejun/press_guard/README.md → judge06_missing_file.csv",
+        "문서 상대 링크가 목록에 없음: yejun/analysis/press_evidence/README.md → vibration_tones.csv"
+      ]
+    },
+    {
+      "name": "scratch_digest_baseline",
+      "errors": []
+    },
+    {
+      "name": "digest_tamper_alarm_rows",
+      "caught": true,
+      "errors": [
+        "predictions_digest.json: 실행 후 변경"
+      ]
+    },
+    {
+      "name": "digest_tamper_sha256",
+      "caught": true,
+      "errors": [
+        "predictions_digest.json: 실행 후 변경"
+      ]
+    },
+    {
+      "name": "digest_tamper_exact_sha256",
+      "caught": true,
+      "errors": [
+        "predictions_digest.json: 실행 후 변경"
+      ]
+    },
+    {
+      "name": "prediction_baseline",
+      "result": [
+        {
+          "file": "test_predictions_B.csv",
+          "ok": true
+        }
+      ],
+      "exact_columns": [
+        "subset",
+        "label",
+        "row_id",
+        "record_id",
+        "timestamp",
+        "status",
+        "position",
+        "alarm",
+        "reason",
+        "action",
+        "waveform_window",
+        "magnitude_sensor",
+        "is_scored",
+        "criterion",
+        "model_id",
+        "protocol_version",
+        "alert_unit",
+        "beyond_calibration_length",
+        "notification",
+        "alert_level",
+        "escalation",
+        "incident_id",
+        "incident_notification",
+        "incident_escalation",
+        "incident_update",
+        "operating_state",
+        "probability_source"
+      ]
+    },
+    {
+      "name": "exact_column_swap_incident_id",
+      "caught": true,
+      "result": [
+        {
+          "file": "test_predictions_B.csv",
+          "ok": false,
+          "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "exact_column_swap_incident_notification",
+      "caught": true,
+      "result": [
+        {
+          "file": "test_predictions_B.csv",
+          "ok": false,
+          "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "exact_column_swap_incident_escalation",
+      "caught": true,
+      "result": [
+        {
+          "file": "test_predictions_B.csv",
+          "ok": false,
+          "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "exact_column_swap_magnitude_sensor",
+      "caught": true,
+      "result": [
+        {
+          "file": "test_predictions_B.csv",
+          "ok": false,
+          "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "exact_column_swap_timestamp",
+      "caught": true,
+      "result": [
+        {
+          "file": "test_predictions_B.csv",
+          "ok": false,
+          "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "exact_column_swap_probability_source",
+      "caught": true,
+      "result": [
+        {
+          "file": "test_predictions_B.csv",
+          "ok": false,
+          "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "documented_float_tolerance_score",
+      "result": [
+        {
+          "file": "test_predictions_B.csv",
+          "ok": true,
+          "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름",
+          "note": "부동소수 차이만 있음"
+        }
+      ]
+    },
+    {
+      "name": "documented_float_tolerance_likelihood_ratio",
+      "result": [
+        {
+          "file": "test_predictions_B.csv",
+          "ok": true,
+          "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름",
+          "note": "부동소수 차이만 있음"
+        }
+      ]
+    },
+    {
+      "name": "unknown_text_column_swap",
+      "caught": true,
+      "result": [
+        {
+          "file": "test_predictions_B.csv",
+          "ok": false,
+          "reason": "경보·알림 열 또는 실수 열 요약(상대 1e-7)이 동결 실행과 다름",
+          "note": ""
+        }
+      ]
+    }
+  ]
+}

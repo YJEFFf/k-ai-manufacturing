@@ -1,0 +1,99 @@
+COMMAND /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r4_verify_0jnuytdd/yejun/press_guard/recalibrate.py exit 0
+통과 정상 알림 단위 수가 보정 조건부 Beta-Binomial 95백분위 이하: 0 (한도 2 · 정상에서 거부할 확률 3.6% · 실제 알림률이 명목의 2·3배일 때 거부할 확률(검정력) 8%·19%)
+통과 고장 주입 cur_noise 0.2 2초 안 탐지율 ≥ 90%: 1.0
+통과 고장 주입 cur_offset 0.4 2초 안 탐지율 ≥ 90%: 1.0
+통과 고장 주입 vib_noise 4 2초 안 탐지율 ≥ 90%: 1.0
+교대 8시간 1단계 알림: 명목 30.9건 · 보정 95% 92.3건
+수락 · 모델 저장 /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r4_verify_0jnuytdd/cli_review/site.json · 보고서 /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r4_verify_0jnuytdd/cli_review/site_report.json
+
+COMMAND /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r4_verify_0jnuytdd/yejun/press_guard/predict.py exit 0
+600행 처리, 사건 1개(건 21) → /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r4_verify_0jnuytdd/cli_review/abnormal_prior0.001.csv
+안내: 라벨 확률 보정기가 없어 확률·우도비 열 4개는 비어 있고 --prior(π)는 쓰이지 않습니다.
+COMMAND /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r4_verify_0jnuytdd/yejun/press_guard/predict.py exit 0
+600행 처리, 사건 1개(건 21) → /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r4_verify_0jnuytdd/cli_review/abnormal_prior0.01.csv
+안내: 라벨 확률 보정기가 없어 확률·우도비 열 4개는 비어 있고 --prior(π)는 쓰이지 않습니다.
+COMMAND /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r4_verify_0jnuytdd/yejun/press_guard/simulate.py exit 0
+[2022-07-17 10:51:08.043] 사건 시작 · 주의 · 구간 0 · magnitude · 진동·부하 확인
+[2022-07-17 10:51:08.143] 격상 · 점검 요청 · 구간 0 · magnitude+dynamics · 진동·전류 함께 점검
+안내: 라벨 확률 보정기가 없어 확률·우도비 열 4개는 비어 있고 --prior(π)는 쓰이지 않습니다.
+600행 · 사건 1 · 격상 1 · 근거 추가 1 · 수집 오류 0 · 계산 p95 65.4 ms · 경과 0.2초
+COMMAND /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r4_verify_0jnuytdd/yejun/press_guard/monitor.py exit 0
+window  units  alerted_units  limit95  limit99  level1_notifications  level2_escalations  current_ratio recommended_action
+      0     21             21        1        2                     1                   1       0.888276    설비 점검 요청(열화 의심)
+안내: 라벨 확률 보정기가 없어 확률·우도비 열 4개는 비어 있고 사전 비율 π는 쓰이지 않습니다.
+{
+  "temporary_snapshot": "/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/judge02_c2r4_verify_0jnuytdd",
+  "recalibrated_prediction": {
+    "rows": [
+      600,
+      600
+    ],
+    "alarms": [
+      556,
+      556
+    ],
+    "missing": [
+      {
+        "likelihood_ratio": 600,
+        "anomaly_probability": 600,
+        "record_likelihood_ratio": 600,
+        "record_probability": 600
+      },
+      {
+        "likelihood_ratio": 600,
+        "anomaly_probability": 600,
+        "record_likelihood_ratio": 600,
+        "record_probability": 600
+      }
+    ],
+    "two_priors_have_same_alarm": true
+  },
+  "with_calibrator_prior_change": {
+    "same_alarm": true,
+    "same_score": true,
+    "same_likelihood_ratio": true,
+    "probability_increases": true
+  },
+  "synthetic_floor_counterexample_before_fix": {
+    "normal_fit_scores": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "abnormal_fit_scores": [
+      2,
+      3,
+      4
+    ],
+    "query": [
+      1.0,
+      1.1,
+      1.5,
+      2.0
+    ],
+    "lr": [
+      1.3333333333333333,
+      0.0701754385964913,
+      0.4444444444444444,
+      1.3333333333333333
+    ],
+    "probability": [
+      0.013289036544850497,
+      0.0007083407118824162,
+      0.004469273743016759,
+      0.013289036544850497
+    ],
+    "nondecreasing": false
+  },
+  "nominal_lr_counterexample": {
+    "scope": "수학적 가정 반례; 관측 또는 현장 추정 아님",
+    "tpr_assumed": 0.955,
+    "nominal_far": 0.008264462809917356,
+    "smaller_far_allowed_by_upper_bound": 0.004132231404958678,
+    "nominal_lr": 115.55499999999999,
+    "smaller_far_lr": 231.10999999999999,
+    "primary_reference": "https://arxiv.org/pdf/2107.07511"
+  },
+  "elapsed_s": 10.29021791699779
+}

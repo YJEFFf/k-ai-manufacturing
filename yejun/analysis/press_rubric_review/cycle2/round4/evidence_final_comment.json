@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "outputs": 44,
+  "all_output_bytes_unchanged": true,
+  "change": "gain_transition 주석의 평균 보존 표현을 원래 평균을 기준으로 한 시간별 편차 이득으로 정정"
+}

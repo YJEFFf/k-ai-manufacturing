@@ -1,0 +1,23 @@
+{
+  "compared": 112,
+  "byte_identical": 111,
+  "changed": [
+    "analysis/press_evidence/decision_table_diagnosis_v2.csv"
+  ],
+  "all_statistical_values_unchanged": true,
+  "difference_reason": "역순시각 처리 함수가 추가되어 model.py의 함수 인용 행번호 두 곳만 이동했다. 옛 평가관 사본의 SHA가 직전 스냅샷과 일치함을 확인한 뒤 셀별 비교했다.",
+  "differences": [
+    {
+      "csv_line": 10,
+      "column": "evidence",
+      "before": "평균·척도·AR 계수·꼬리는 정상 학습 구간에서만 적합. yejun/press_guard/model.py:270",
+      "after": "평균·척도·AR 계수·꼬리는 정상 학습 구간에서만 적합. yejun/press_guard/model.py:286"
+    },
+    {
+      "csv_line": 11,
+      "column": "evidence",
+      "before": "위치 0~6은 6관측, 7부터 8관측 창. 파형 성분 제거 시 미탐 A 44→133·B 31→112, 조기 전환 제거 시 A 46·B 33. yejun/press_guard/model.py:305; yejun/press_guard/outputs/ablation_v2.csv:26",
+      "after": "위치 0~6은 6관측, 7부터 8관측 창. 파형 성분 제거 시 미탐 A 44→133·B 31→112, 조기 전환 제거 시 A 46·B 33. yejun/press_guard/model.py:321; yejun/press_guard/outputs/ablation_v2.csv:26"
+    }
+  ]
+}

@@ -40,7 +40,7 @@ def operation_flow(path):
     w, h = .2, .14
     top = [(.02, "0 정상 수집", "같은 설비·운전 조건 정상 CSV\n보정 ≥99단위+수락 60단위\n시각 간격 0.1초 ± 20 ms"),
            (.27, "1 재보정·수락 검사", "recalibrate.py\n정상 알림 Beta-Binomial 한도\n주입 3종 2초 탐지 ≥90%"),
-           (.52, "2 운영 설정", "재보정 모델·α 1%·사전 비율 π\n1단계=기록, 2단계=출동"),
+           (.52, "2 운영 설정", "재보정 모델·α 1%\n라벨 보정기 있을 때만 행 비율 π\n1단계=기록, 2단계=출동"),
            (.77, "3 실시간 감시", "StreamDetector(10 Hz)\n사건 대기열(공백 60초 이하 묶음)")]
     for x, t, b in top:
         box(ax, x, .78, w, h, t, b)
@@ -51,7 +51,7 @@ def operation_flow(path):
     arrow(ax, (.87, .78), (.69, .67), text="첫 경보", text_xy=(.76, .735))
     arrow(ax, (.87, .78), (.89, .67), text="격상", text_xy=(.915, .735))
     arrow(ax, (.77, .595), (.80, .595), color=RED, text="", ls="--")
-    box(ax, .55, .27, .2, .17, "4 판단표 점검", "근거 → 확인 대상 → 점검 항목\n고장 모드 후보 FM1~FM6\n(decision_table_v2.csv)", color=BLUE, fill="#f1f5fa")
+    box(ax, .55, .25, .2, .19, "4 판단표 점검", "운전 상태 → 근거 → 확인 대상\nB 정상 참고: 부하 3/51·저수준 0/94\n고장 모드 후보 FM1~FM6\n(decision_table_v2.csv)", color=BLUE, fill="#f1f5fa")
     box(ax, .78, .27, .2, .17, "5 품질 조치", "의심 생산 시간창 가공품 보류\n전단면·버·치수·평탄도 전수 확인\n(quality_windows_v2.csv)", color=BLUE, fill="#f1f5fa")
     arrow(ax, (.89, .52), (.89, .44)); arrow(ax, (.83, .52), (.65, .44))
     arrow(ax, (.78, .355), (.75, .355))
@@ -59,8 +59,8 @@ def operation_flow(path):
     arrow(ax, (.55, .355), (.50, .355))
     box(ax, .05, .27, .2, .17, "7 정상 복귀 확인", "다음 정상 기록에서 알림이\n멎는지 확인. 멎지 않으면\n2단계 유지", color=GREEN)
     arrow(ax, (.30, .355), (.25, .355))
-    box(ax, .05, .03, .27, .16, "8 교대·주간 감시", "monitor.py: 창별 알림 단위 수 vs Beta-Binomial\n변경 기록·수준 이동 있음 → 재보정 검토\n없음 → 설비 점검 요청(열화 의심)", color=MUTED, fill="#f5f7f8")
-    box(ax, .40, .03, .27, .16, "9 재보정·교체", "미확인 사건의 의심 시간창은 뺌(--outcomes)\n점검 요청 창은 '정상 확인' 뒤에만 사용\n수락 통과 모델로 교체 → 1로 돌아감", color=MUTED, fill="#f5f7f8")
+    box(ax, .05, .02, .27, .18, "8 교대·주간 감시", "한도 안 → 관측 지속\n변경 기록 있음 → 재보정 검토\n무기록 전류 상승 → FM4·FM5 점검\n무기록·이동 없음 → 열화 점검", color=MUTED, fill="#f5f7f8")
+    box(ax, .40, .03, .27, .16, "9 재보정·교체", "미확인 사건의 의심 시간창은 뺌(--outcomes)\n점검 창(--windows)은 '정상 확인' 뒤 사용\n수락 통과 모델로 교체 → 1로 돌아감", color=MUTED, fill="#f5f7f8")
     arrow(ax, (.15, .27), (.15, .19)); arrow(ax, (.32, .11), (.40, .11), text="검토", text_xy=(.36, .135))
     box(ax, .72, .03, .26, .16, "예외: 수집 오류", "결측·비유한 값·시각 오류 행은 판정 보류\n'수집 상태 확인'(FM6): 케이블·커넥터\n수집 PC 시각 동기화", color=RED, fill="#fbeeea")
     ax.text(.02, .985, "Press Guard 운영 흐름 — 제안(가정 표시 *: 현장 합의로 정할 값)", fontsize=11, fontweight="bold", color=INK, va="top")
@@ -73,7 +73,7 @@ def architecture(path):
     ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.axis("off")
     items = [(.025, "센서", "AI0·AI1 진동(상·하부)\nAI2 전류\n10 Hz 순시값"),
              (.225, "수집 PC", "CSV 파일 또는 스트림\nTimeStamp + 3개 값\n시각 동기화"),
-             (.425, "Press Guard", "StreamDetector\n(직전 7행만 보관)\n점수·p값·경보·2단계\n이상 확률(사전 비율 π)"),
+             (.425, "Press Guard", "StreamDetector\n(직전 7행+누적 통계)\n점수·p값·경보·2단계\n이상 확률(보정기 있을 때)"),
              (.625, "알림 채널", "점검 콘솔 대기열\n경광등·메신저\nCMMS 작업요청\n(on_alert 콜백)"),
              (.825, "기록·감시", "결과 CSV\n(확인 시각·담당·결과)\nmonitor.py 교대 감시\n재보정 자료 선별")]
     w = .15

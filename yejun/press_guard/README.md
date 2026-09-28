@@ -18,7 +18,7 @@ python yejun/press_guard/reproduce.py --data "Dataset_소성가공 예지보전 
 
 - **결과 위치:** `yejun/press_guard/outputs/`에 테스트 예측(`test_predictions_A.csv`·`test_predictions_B.csv`), 지표(`metrics.csv`), 단계별 요약(`reproduce_summary.json`)이 생긴다.
 - **검증:** 한 명령이 v1 선행 결과, v2 동결값 비교(verify), 분석 패키지 동결값 비교까지 실행한다. 한 단계라도 실패하면 종료 코드 1이다.
-- **실측 시간:** M2 한 스레드 기준 15단계에 약 9.5분이 걸린다(git 없는 사본에 주최 측 ZIP만 준 경우 572초). `--tests`를 붙이면 23단계에 약 11분이다(torch 없는 새 가상환경과 새 클론에서 651초).
+- **실측 시간:** M2 한 스레드 기준 15단계에 약 9.5분이 걸린다(git 없는 사본에 주최 측 ZIP만 준 경우 572초). `--tests`는 node가 있으면 24단계, 없으면 23단계다(기존 구현 실측: torch 없는 새 가상환경과 새 클론에서 651초). 아래 상태 전환·반복 주입 분석을 추가한 구현의 시간은 `reproduce_summary.json`에서 확인한다.
 - **전체 모드:** `--full`은 v1 LSTM 비교(torch 필요, `requirements-lstm.txt`), 후보 비교, 보완 실험 E1~E3 재실행까지 한다.
 - **시험:** `--tests`는 끝에 pytest와 웹 회귀 시험을 돌린다.
 - **Windows:** PowerShell에서도 같은 명령이다. 모든 파일 입출력은 UTF-8이고 CP949 콘솔에서도 멈추지 않는다. 한글이 깨져 보이면 `chcp 65001`을 쓴다.
@@ -33,9 +33,12 @@ python yejun/press_guard/reproduce.py --data "Dataset_소성가공 예지보전 
 | 성분 | ① 크기: 세 센서 max\|z\|(위치 0부터) ② 파형: 전류 사인 적합 1−R²(위치 5부터 6행 창, 7부터 8행 창) ③ 동역학: AR(2) 전류 예측 오차(위치 2부터) |
 | 결합 | 성분마다 정상 학습 꼬리로 g=−log10(꼬리 확률)을 만들고 최댓값(fmax = 정상 꼬리 확률의 Tippett 최소 p 결합)을 쓴다. 경보마다 문턱을 넘은 성분이 있어 근거 → 조치로 이어진다 |
 | 보정·경보 | 정상 보정 기록구간의 최대 점수로 conformal p값. α ∈ {1, 3, 5}%는 **알림 단위(기록구간, 연속 입력은 50행 블록)당** 비율이다 |
+| 운전 상태(사후 진단) | 원 전류의 기록 안 누적 평균 제거 RMS. 17행 미만은 `short`, 17행 이상에서 RMS ≥ 91.9는 `load`, 나머지는 `low`다. 신호 대리변수이며 실제 가압력·금형 상태의 측정값이 아니다 |
 | 사건·2단계 알림 | 경보가 난 알림 단위가 이어지고 사이 공백이 60초 이하면 한 사건이다(기록구간을 넘어 묶는다). 사건의 첫 경보가 1단계 "주의", 사건 안 경보가 2행에 이르면 2단계 "점검 요청"으로 격상한다. 사건마다 두 알림을 한 번씩만 낸다. 근거 성분이 늘면 사건 기록만 갱신한다 |
-| 이상 확률 | 경보와 분리된 층([probability.py](probability.py)). 정상 보정 행과 이상 행에 맞춘 등방 회귀로 우도비(LR)를 구하고, 사전 비율 π로 확률을 낸다. LR 상한은 보정 단위 수+1(=121)이다 |
+| 이상 확률 | 경보와 분리된 층([probability.py](probability.py)). 정상 보정 행과 이상 행에 맞춘 등방 회귀로 우도비(LR)를 구하고, 사전 비율 π로 확률을 낸다. LR은 보정 단위 수+1(=121)에서 잘라 표시한다. 이 값은 보수적 표시 정책이며 행 LR의 이론상 상한은 아니다 |
 | 조치 | 근거 → 확인 대상 → 권장 확인 → 점검 항목 → 고장 모드 후보(FM1~FM6)를 한 원천(`model.DECISION_TABLE`)에 둔다. 품질 조치는 단계별로 다르다 |
+
+연속 수집 현장은 전환이 든 정상 연속 자료로 재보정·재검증하기 전에는 대회 오경보 수치를 옮기지 않는다. 정상 기록 안에는 두 신호 수준의 전환이 없고 수집 공백이 전환 순간을 가렸을 수 있다. [상태 전환 스트레스](../analysis/press_evidence/state_transition_stress.csv)는 이 한계를 사후 모의로 점검한다.
 
 설계(초반 창·AR(2))는 이미 본 이상 자료에서 v1의 미탐을 본 뒤 정했다. 선정 근거(탐색 장부 65항목, 중첩 선택 21/21, v1 대비 짝 비교)는 [press_selection](../analysis/press_selection/README.md)에 있다.
 
@@ -49,11 +52,12 @@ python yejun/press_guard/reproduce.py --data "Dataset_소성가공 예지보전 
 | B | v2 | **0.970990** | **31** | 3/180 | 21/21 | **0.5초** |
 
 - **A의 정상 0/120은 유리한 조건의 값이다.** A 평가 구간(480~599, 01:00~01:17)은 정상 77분 중 가장 조용한 시간대다. 최대 점수가 보정 중앙값을 넘는 구간이 12/120이다(교환가능하면 약 60, Mann–Whitney p=2.9e-11).
+- **상태별 분모:** A의 정상 0/120 중 부하 기록은 21개, B의 3/180 중 부하 기록은 51개다. 17행 이상 기록의 저수준 비율은 평가 A 78%·B 65%, 보정 A 35%·B 32%다([normal_alarms_by_state.csv](../analysis/press_evidence/normal_alarms_by_state.csv), [split_state_composition.csv](../analysis/press_evidence/split_state_composition.csv)).
 - **시간순 5창 비교(300~359 … 540~599):** F1 0.961938~0.971819, 정상 알림 0·0·2·0·0/60.
   - 420~479 폴드는 B와, 480~539 폴드는 A와 학습·보정이 같아 보정값이 비트 단위로 같다.
   - 420~479의 2/60은 B 오경보 3건 중 2건(구간 423·461)이다. 오경보 근거로 합산하지 않는다.
   - 동결 모델과 독립인 폴드는 300~359·360~419·540~599 3개이고 모두 0/60이다.
-- **2단계:** 정상 평가(A·B, 시간순 5창)에서 모두 0건이다. 이상 21구간은 모두 격상했다(지연 중앙 0.2초, 최대 0.6초). 2단계 규칙은 대회 오경보(모두 경보 1행)를 본 뒤 정했으므로 이 0건은 표본 안 값이다. 사후 선택과 무관한 추정은 독립 폴드 α 5%의 2단계/1단계 비 1/9를 1단계 명목에 곱한 교대 8시간 3.3건(95% 상한 12.7건)이다([expected_effect_v2.csv](outputs/expected_effect_v2.csv)).
+- **2단계:** 정상 평가(A·B, 시간순 5창)에서 모두 0건이다. 이상 21구간은 모두 격상했다(지연 중앙 0.2초, 최대 0.6초). 2단계 규칙은 대회 오경보(모두 경보 1행)를 본 뒤 정했으므로 이 0건은 표본 안 값이다. 주 추정은 A·B 평가 기록과 겹치지 않는 300~359·360~419 폴드의 α 5% 2단계/1단계 비 1/7을 1단계 명목에 곱한 교대 8시간 4.2건(95% 상한 15.4건)이다. 규칙 자체는 사후에 정했다. 기존 1/9(3.3건, 상한 12.7건)는 B 평가와 겹치는 540~599 폴드를 포함한 민감도 값으로 남긴다([expected_effect_v2.csv](outputs/expected_effect_v2.csv)).
 - **사건:** 대회 이상 21기록(2.76분)은 사건 1개, 알림 2건(1단계·2단계)이다. 구간 단위로는 알림 42건이다. B 정상 평가는 α 1% 사건 3개(알림 3), 3% 5개(7), 5% 7개(10)다([incident_summary_v2.csv](outputs/incident_summary_v2.csv)).
 - **알림률:** α 3%에서 B 정상 알림은 5/180, 5%에서 7/180이다(v1 4·6). coarse 입력 B는 5/180(v1 4)이다. 모든 조건에서 오경보가 같다고 말하지 않는다.
 - **이상 자료:** A/B는 같은 이상 21구간(07-17 일요일 3분)을 쓰고, 정상과 이상은 다른 날이다. 이미 본 자료의 탐색 평가이며 새 날짜·설비 성능의 근거가 아니다.
@@ -65,13 +69,14 @@ python yejun/press_guard/reproduce.py --data "Dataset_소성가공 예지보전 
 | 열 | 뜻 |
 |---|---|
 | `subset`, `label` | 정상 평가(`normal_test`, 0) / 이상(`abnormal`, 1). 평가용이며 모델 입력이 아니다 |
-| `row_id`, `record_id`, `position`, `timestamp`, `status` | 행 번호, 기록구간 번호, 기록구간 안 위치(0.1초 단위), 원래 시각, 수집 상태(`ok`·`bad_value`·`bad_timestamp`) |
+| `row_id`, `record_id`, `position`, `timestamp`, `status` | 행 번호, 기록구간 번호, 기록구간 안 위치(0.1초 단위), 원래 시각, 수집 상태(`ok`·`bad_value`·`bad_timestamp`·`bad_time_order`) |
 | `score`, `p_value`, `alarm` | 결합 점수, conformal p값, 경보(p≤α) |
 | `notification`, `alert_level`, `escalation` | 건(기록구간 안 경보가 이어진 블록 묶음)의 첫 경보, 단계(0·1 주의·2 점검 요청), 건의 격상 행 |
 | `incident_id`, `incident_notification`, `incident_escalation`, `incident_update` | 사건 번호(경보 행만), 사건 알림(1단계), 사건 격상 알림(2단계), 근거 추가(갱신, 알림 아님). 사람에게 보내는 알림은 사건 두 열이다 |
 | `reason`, `action` | 문턱을 넘은 성분(magnitude·waveform·dynamics), 권장 확인 |
 | `magnitude`, `current_residual`, `g_magnitude`, `g_waveform`, `g_dynamics`, `magnitude_sensor`, `waveform_window` | 성분 원값·꼬리 점수·크기 최대 센서·파형 창 |
-| `likelihood_ratio`, `anomaly_probability`, `record_likelihood_ratio`, `record_probability`, `probability_prior`, `probability_source` | 행·기록구간(지금까지 최대) 우도비와 이상 확률. π는 현장 가정 1%이고 단위는 행 비율(기록 확률도 같은 π를 쓴다). 이상 행은 그 기록을 뺀 교차 적합 값(`leave_one_record_out`) |
+| `likelihood_ratio`, `anomaly_probability`, `record_likelihood_ratio`, `record_probability`, `probability_prior`, `probability_source` | 행·기록구간(지금까지 최대) 우도비와 이상 확률. π는 현장 가정 1%이고 단위는 행 비율(기록 확률은 같은 행 비율 π를 사용하는 근사다). 이상 행은 그 기록을 뺀 교차 적합 값(`leave_one_record_out`) |
+| `record_current_rms`, `operating_state` | 원 전류의 기록 안 누적 RMS와 상태 대리변수. 매 행까지 관측한 값만 사용하며 청크 경계와 무관하다. 건 대기열에는 마지막 관측 상태와 `first_alarm_operating_state`를 구분한다 |
 | `file_prior`, `anomaly_probability_file_prior` | 이 파일의 이상 행 비율(A 0.128·B 0.090)을 사전 비율로 쓴 같은 우도비의 확률. 파일 라벨로 확률을 채점할 때 쓴다 |
 | `anomaly_score`, `criterion`, `model_id`, `protocol_version`, `alert_unit`, `beyond_calibration_length`, `is_scored` | 1−p(정렬용, 확률 아님), 규칙, 모델 이름, 판, 알림 단위, 보정 길이 초과 여부, 점수 계산 여부 |
 
@@ -96,23 +101,27 @@ python yejun/press_guard/predict.py --input 새기록.csv --out 예측.csv --cas
   | B | 1−p(확률 아님) | 0.023 | 0.120 | 0.078 |
 
   - 비교용 두 방법(배포하지 않음)도 같은 교차 평가로 쟀다: 상한 없는 등방 회귀는 ECE A 0.0012·B 0.0009(Brier 0.0069·0.0052), Platt은 0.0036·0.0022(0.0074·0.0055).
-  - 배포 확률의 ECE가 더 큰 것은 LR 상한(121) 때문이다. 알림 한 건이 conformal 순위로 줄 수 있는 증거보다 크게 말하지 않도록 최상위 구간의 확률을 낮춘 결과이며, 보수적인 쪽으로의 어긋남이다.
+  - 배포 확률의 ECE가 더 큰 것은 LR 상한(121) 때문이다. conformal 보정 단위 수에서 착안해 최상위 구간의 확률을 낮춘 표시 정책이다. 기록 단위의 순위 성질이 행 단위 LR의 이론상 상한을 보장하지는 않으며, 실제 고장확률의 하한으로도 해석하지 않는다.
   - 신뢰도 곡선은 [fig_probability_reliability_v2.png](outputs/fig_probability_reliability_v2.png)에 있다.
-- **예측 파일로 채점할 때.** `anomaly_probability`는 현장 가정 π=1%라 우도비 상한 121에서 0.55에 멈춘다.
-  - 이상 행 A 555/600·B 568/600과 B 오경보 3행이 모두 이 상한 값이다. 그래서 α 1% 경보 사이의 순위는 거의 주지 않는다(콘솔은 "≥55%(상한)"으로 표시).
+- **예측 파일로 채점할 때.** `anomaly_probability`는 현장 가정 π=1%라 우도비 표시 상한 121에서 0.55에 멈춘다.
+  - 이상 행 A 555/600·B 568/600과 B 오경보 3행이 모두 이 상한 값이다. 그래서 α 1% 경보 사이의 순위는 거의 주지 않는다(콘솔은 "55%(모형 상한)"으로 표시).
   - 파일 라벨로 그대로 채점하면 Brier A 0.0321·B 0.0221, ECE 0.0615·0.0423이다. 사전 오즈만 파일 비율로 바꾼 `anomaly_probability_file_prior`는 0.0072·0.0056, ECE 0.0075·0.0066으로 위 교차 평가와 같다.
 - **확률의 조건.** 이 확률은 대회 이상 모양(한 날 3분)과 날짜 교락이 만든 분리를 담는다.
   - 경보 문턱 점수에서의 확률은 분할마다 크게 다르다(π 1%에서 A 0.30, B 0.007). B의 0.007은 등방 회귀 계단의 경계값이다. 문턱 3.520 왼쪽 계단 [2.896, 3.520]에 정상 보정 9행과 이상 1행이 있어 P̂ 0.10이 적합 비율 0.137보다 낮고(LR 0.70), 다음 계단 3.561부터 P̂ 1.0이다.
   - 실제 경보 행의 우도비는 모두 1 이상이다(LR<1 0행). 최소는 A 108.9(π 1%에서 0.52), B 2.42(0.024)다([probability_conversion_v2.csv](outputs/probability_conversion_v2.csv)).
   - B 정상 오경보 3행도 LR 상한 121이라 π 1%에서 0.55로, 진짜 이상과 같은 최대 확률을 받는다. 확률 층으로 오경보를 거를 수 없다. 오경보 대응은 2단계 알림과 사건 묶음이 맡는다.
   - 확률을 경보 기준으로 쓰지 않는다. 경보는 conformal p값으로만 정한다.
+- **재보정 모델.** 배포 A/B에는 라벨 확률 보정기가 있지만 `recalibrate.py`로 만든 새 모델에는 없다. 새 모델은 경보를 그대로 출력하며 `likelihood_ratio`, `anomaly_probability`, `record_likelihood_ratio`, `record_probability` 네 열은 결측이다. 이 경우 π는 확률 계산에 쓰이지 않고 CLI가 안내한다.
 - **라벨 없는 환산**([label_free_alert_probability_v2.csv](outputs/label_free_alert_probability_v2.csv)):
 
   P(이상|알림) = π·TPR / (π·TPR + (1−π)·FAR)
 
+  여기의 π만 알림 단위의 이상 비율이다. 위 행 확률과 기록 확률 근사에 사용하는 행 비율과 단위가 다르다.
+
   - 명목 FAR 1/121과 E1 전류 잡음 0.1σ 탐지율 95.5%를 쓰면 π 0.1%에서 10.4%, π 1%에서 53.8%다.
   - 보정 조건부 95% FAR를 쓰면 3.7%, 28.1%다.
-  - 알림 한 건의 우도비 상한은 (보정 단위 수+1)×탐지율이다(`lr_bound`). 명목 FAR에서 이 상한과 같아진다.
+  - 해당 α의 명목 FAR=l/(n+1)을 고정한 우도비는 `nominal_lr_reference`다. 최소 순위 l=1의 별도 참고값은 (n+1)×탐지율(`min_rank_nominal_lr_reference`)이며 α 1%에서 두 값이 같다.
+  - 이들은 FAR를 고정한 시나리오다. 실제 FAR가 더 작으면 우도비는 더 클 수 있으므로 보편적 상한으로 해석하지 않는다. 위 행 확률의 표시 상한 121도 별도 운영 정책이다.
   - 참고로 Sellke–Bayarri–Berger 환산(우도비 9.3, π 1%에서 8.6%)은 연속 p값을 정확히 관측하고 대립에서 p가 Beta(ξ,1) 족일 때의 회의적 환산이다. conformal 알림은 "p ≤ 1/121"이라는 사건이라 이 값은 알림의 상한이 아니다(`sbb_reference_*` 열).
 
 ## 영향변수와 상호작용
@@ -120,6 +129,7 @@ python yejun/press_guard/predict.py --input 새기록.csv --out 예측.csv --cas
 - **센서 순위: 전류(AI2) ≫ 상부 진동(AI0) > 하부 진동(AI1).** 두 방법의 값이 같은 방향이다([sensor_importance_v2.csv](outputs/sensor_importance_v2.csv), [그림](outputs/fig_sensor_importance_v2.png)).
   - 재적합 절제(α 1%): 전류만 쓰면 F1 0.956·0.955(20/21), 진동만 쓰면 0.448·0.491(18/21). AI0를 빼면 미탐 44→49·31→47, AI1을 빼면 45·34.
   - 채널 교체(이상 기록의 한 채널을 정상 기록으로 바꿈, 20회): AI2 미탐 427·404행(18/21), AI0 61·51, AI1 46·34.
+- **성분 절제(α 1%, 재적합).** 파형을 빼면 미탐 44→133·31→112, 예측 오차를 빼면 86·71, 크기를 빼면 56·56이며 이상 탐지는 20/21로 줄어든다. 파형 > 예측 오차 > 크기 순이다. 크기 성분은 21/21 탐지에 기여하지만 B 정상 오경보도 3→1로 줄어 오경보 원천이기도 하다. 초반 창 전환을 빼면 미탐은 46·33이다([ablation_v2.csv](outputs/ablation_v2.csv)).
 - **SHAP·행 순열을 쓰지 않는 이유.** 점수는 창 기반 시계열 성분과 fmax 결합이다. 행 순열은 기록 안 시간 구조를 깬다. 지도학습 중요도는 저장 형식 변수를 1순위로 올린다(소수 자릿수 하나로 F1 0.994, [press_supervised](../analysis/press_supervised/README.md)).
 - **단변량 판별력과 모델 기여가 뒤바뀌는 이유.** 구간 SD의 단변량 AUROC는 AI1 0.93·0.90이 AI0 0.86·0.86보다 높다. 그러나 크기 성분은 행의 |z|가 문턱(α 1%에서 A 4.49·B 3.77)을 넘어야 발화한다.
   - 문턱을 넘는 이상 행: AI0 164·184, AI1 23·36, 전류 0·1.
@@ -128,8 +138,9 @@ python yejun/press_guard/predict.py --input 새기록.csv --out 예측.csv --cas
 - **상호작용.** fmax(OR) 결합이라 모델 안에 곱 상호작용 항은 없다. 상호작용은 오류 쪽에서 본다.
   - ① 위치 × 진동 수준: 진동이 정상 범위인 이상 구간은 기록 시작 0.2초를 모두 놓친다([position_vibration_misses_v2.csv](outputs/position_vibration_misses_v2.csv), [그림](outputs/fig_position_vibration_v2.png)).
   - ② 진동–전류 진폭 결합: 정상 운전에서 r 0.95로 함께 움직이고, 이상 구간은 결합 잔차 z 중앙 12.1로 벗어난다([coupling_fit_v2.csv](outputs/coupling_fit_v2.csv)).
-  - ③ 고장 모양 × 운전 강도: 진동형 약한 이상은 조용한 운전에서, 전류 계단형 약한 이상은 고부하 운전에서 놓친다([fn_intensity_v2.csv](outputs/fn_intensity_v2.csv)).
-  - ④ 오경보 × 운전 강도: 오경보는 고부하 구간에 몰린다([fp_intensity_v2.csv](outputs/fp_intensity_v2.csv)).
+  - ③ 고장 모양 × 운전 강도: 진동형 약한 이상은 조용한 운전에서, 전류 계단형 약한 이상은 고부하 운전에서 놓친다. 잡음 50회(시드 0~49)의 단위별 평균과 BH 보정(진폭 9개, 진동 SD까지 18개)을 쓴다. 같은 단위를 함께 재표집한 4,000회에서 ρ(진동 잡음 2σ)−ρ(전류 오프셋 0.2×)는 A +0.407 [0.061, 0.725], B +0.799 [0.551, 1.023]이다. A 진동 잡음의 BH q=0.0146이지만 Bonferroni는 9검정 p=0.0974, 18검정 p=0.1948로 유의하지 않다. 같은 날 시간 의존성은 반영하지 못한 사후 기술 통계다([fn_intensity_v2.csv](outputs/fn_intensity_v2.csv)).
+  - ④ 오경보 × 운전 강도: 5적합 합침 α 5%에서 부하 상태 17/154, 저수준·짧은 기록 0/326이다. 60구간 시간 블록으로 층화한 고진폭 효과는 MH OR 9.96, CMH p=2.9e-6, 20,000회 블록 안 순열 p=5.0e-5(해상도 하한)이다. 부하 상태 안 진폭 중앙 203.6 이상은 12/77, 미만은 5/77로 이 구분만의 Fisher p=0.060이며 Spearman ρ=0.263(p=0.001)이다. 적합 겹침과 시간 의존성은 남는다([fp_intensity_v2.csv](outputs/fp_intensity_v2.csv)).
+- **운전 상태와 보정.** 보정은 여러 신호 상태가 섞인 분포에 대한 주변 보장이다. B α 1%에서 부하 상태만 보면 3/51(저수준 0/94)로 상태 조건부 오경보율까지 보장하지 않는다. 신호 RMS 경계는 사후 진단 기준이다.
 - **구간 번호.** `fp_events_v2`의 `record`와 `near_miss_v2`·`coupling_records_v2`의 `absolute_record`는 정상 CSV 전체 번호다. 두 표의 `record`는 평가 구간 안 상대 번호다(B 오경보 3·41·150 = 절대 423·461·570).
 
 ## 미탐·오경보가 몰리는 조건(요약)
@@ -145,10 +156,10 @@ python yejun/press_guard/predict.py --input 새기록.csv --out 예측.csv --cas
 | 미탐 | 기록 시작 0.2초 안 전체 | 26/42 · 20/42 | 위치 2 이상 18/558·11/558(관측) |
 | 미탐 | 기록 시작부터 있는 전류 오프셋 0.8×진폭 | 탐지 3.3% · 28.8% | 10행째에 넣으면 100%(E1 주입) |
 | 미탐 | 전류 진폭만 ×1.15 × 운전 강도 | 탐지 0% · 6.3% | B 진폭 Q1·Q2 0/56, Q4 6/28(E1 + 사후 층화) |
-| 미탐 | 4σ 미만 진동(2σ) × 조용한 운전 | 탐지 Q1 → Q4: A 0.72 → 0.92, B 0.92 → 1.00 | 탐지와 전류 진폭 Spearman +0.33·+0.27(주입 + 층화) |
+| 미탐 | 4σ 미만 진동(2σ) × 조용한 운전 | 탐지 Q1 → Q4: A 0.711 → 0.806, B 0.939 → 0.992 | 잡음 50회(시드 0~49), Spearman +0.293·+0.481. 전체 A 72.3%·B 95.0%; E1의 74.4%·93.9%는 별도 난수 반복 결과(주입 + 층화) |
 | 미탐 | 약한 전류 오프셋 0.2× × 고부하 운전 | Q4 미탐 13/19 · 20/28 | B 탐지 Q1 20/28 → Q4 8/28(Spearman −0.32)(주입 + 층화) |
 | 미탐 | 단발 진동 충격 4σ | 탐지 29.3% · 87.0% | 6σ는 99.5%·99.6%(사후 주입, press_selection) |
-| 오경보 | 고부하 운전(전류 진폭 ≥ B 정상 학습 q75), 고유 정상 구간 300~599 | α 1% 2/46, α 5% 10/46 | 나머지 1/254, 4/254(α 5% 단측 p 1.8e-6). 480~539 블록 0/120(관측, 사후) |
+| 오경보 | 고부하 운전(전류 진폭 ≥ B 정상 학습 q75), 고유 정상 구간 300~599 | α 1% 2/46, α 5% 10/46 | 나머지 1/254, 4/254(α 5% 단측 p 1.8e-6). 480~539 블록 0/120. 적합별 합침 α 5% 부하 17/154 대 나머지 0/326(관측, 사후) |
 | 오경보 | 상부 진동(AI0) 단발 충격(구성비) | α 5% 사건 17건 중 15건 | 경보 1행 13건. 구성비이며 조건부 비율은 윗행(관측) |
 | 오경보 | 문턱 근처 정상 구간 | B 7/180이 문턱의 0.9배 이상 | Spearman 진동 max\|z\| 0.61·전류 진폭 0.50·시간 −0.31(관측) |
 | 오경보 | 전류 수준 상승(전류 배율) | ×1.5 A 0/120 · B 17/180 | B ×1.05 4/180. 감시 규칙이 ×1.3부터 조치(스트레스) |
@@ -160,11 +171,13 @@ python yejun/press_guard/predict.py --input 새기록.csv --out 예측.csv --cas
 |---|---|---|
 | 점검 콘솔 | `serve.py`, `web/` | 사전 비율 선택, 사건 단위 1·2단계 건수와 대기열(단계 → 근거 수 → 경보 비율 → 최대 점수, 이상 라벨 없이 정함), 사건 안 건 목록(건 번호 = 첫 경보 행), 의심 생산 시간창·품질 조치·점검 항목, 사건 단위 점검 결과 기록과 CSV 내보내기, 10배속 모의 운용, 수집 시각 간격 경고. `python yejun/press_guard/serve.py --port 8765` |
 | 모의 운용 | `simulate.py` | CSV를 10 Hz(`--speed 1`) 또는 배속으로 흘려 사건 알림(시작·격상)을 즉시 출력·기록한다. 알림 행이 일괄 분석과 같다 |
-| 운영 감시 | `monitor.py` | 창별 알림 단위 수를 보정 조건부 Beta-Binomial 95·99% 한도와 비교하고, 근거 구성과 전류 수준 이동을 본다. 한도를 넘으면 운전 조건 변경 기록·수준 이동이 있을 때 "재보정 검토", 없을 때 "설비 점검 요청(열화 의심)"이다. 명령: `python yejun/press_guard/monitor.py --csv 교대.csv --split B --changes 변경기록.csv --out 창별.csv` |
-| 재보정 | `recalibrate.py` | 새 정상 CSV로 학습·보정·수락 검사를 한다. 정상 알림은 Beta-Binomial 95백분위(α 5%에서 6→7, 정상 거부 5% 이하), 주입 3종은 2초 탐지 90%. 검정력·알림 예산 환산·결과 기록으로 자료를 거르는 `--outcomes`를 둔다 |
+| 운영 감시 | `monitor.py` | 창별 알림 단위 수를 보정 조건부 Beta-Binomial 95·99% 한도와 비교하고, 근거 구성과 전류 수준 이동을 본다. 한도 안은 관측 지속, 초과하고 변경 기록이 있으면 재보정 검토, 기록 없이 전류 수준이 이동하면 FM4·FM5 설비 점검 요청, 둘 다 없으면 열화 의심 점검이다. 점검 창은 정상 확인 이후에만 재보정 자료로 쓴다. 명령: `python yejun/press_guard/monitor.py --csv 교대.csv --split B --changes 변경기록.csv --out 창별.csv` |
+| 재보정 | `recalibrate.py` | 새 정상 CSV로 학습·보정·수락 검사를 한다. 정상 알림은 Beta-Binomial 95백분위(α 5%에서 6→7, 정상 거부 5% 이하), 주입 3종은 2초 탐지 90%. 검정력·알림 예산 환산·결과 기록으로 자료를 거르는 `--outcomes`와 감시 창의 조치·확인 결과를 읽는 `--windows`를 둔다 |
 | 운영 절차 | [OPERATIONS.md](OPERATIONS.md) | 정상 수집 → 재보정 → 1·2단계 → 판단표 → 품질 → 기록 → 복귀 확인 → 교대 감시 → 재보정, 흐름도·구성도 |
 
-대기열 한계가 있다. 주입 고장이 가장 앞선 오경보보다 뒤에 오는 경우가 9개 조건에서 나온다([queue_injection_ranks_v2.csv](outputs/queue_injection_ranks_v2.csv):35,55,63,71,83,91,95,111,115). B α 1%에서 전류 잡음 0.1σ 1건·오프셋 0.4 1건, 진동 잡음 2σ에서 A α 3% 4건·5% 2건·B α 3·5% 각 3건이다. 가장 큰 경우는 B α 5% 오프셋 12건(111건 중)이다. 계단형 전류 변화는 변화 순간에만 경보가 나 경보 행 비율이 낮기 때문이다. 정렬 키 후보 4개의 비교는 [queue_key_selection_v2.csv](outputs/queue_key_selection_v2.csv)에 있다.
+모의 운용의 대기열·근거·경보 비율·품질 조치·시간창은 재생 시점까지 받은 행으로만 집계한다. 사건 안에 나중에 합류할 건도 해당 경보가 들어온 뒤 표시한다. 역순 수집 시각은 앞서 받은 최대 시각에 도달할 때까지 `bad_time_order`로 판정을 보류하고 경고한다. 오류 행은 정상 복귀나 품질 시간창의 끝을 확정하는 근거로 쓰지 않는다. 의도적인 시계 재설정은 수집 상태를 확인한 뒤 새 스트림으로 시작한다.
+
+대기열 한계가 있다. 주입 고장이 가장 앞선 오경보보다 뒤에 오는 경우가 9개 조건에서 나온다([queue_injection_ranks_v2.csv](outputs/queue_injection_ranks_v2.csv):35,55,63,71,83,91,95,111,115). B α 1%에서 전류 잡음 0.1σ 1건·오프셋 0.4 1건, 진동 잡음 2σ에서 A α 3% 4건·5% 2건·B α 3·5% 각 3건이다. 가장 큰 경우는 B α 5% 오프셋 12건(111건 중)이다. 계단형 전류 변화는 변화 순간에만 경보가 나 경보 행 비율이 낮기 때문이다. 사건 단위로 묶으면 채택 키에서 뒤처지는 조건은 A α 3% 진동 잡음 2σ 1사건, B α 5% 오프셋 0.4× 1사건의 2조건·2사건이다. 정상 입력과 주입 입력은 각각 시간순으로 사건을 묶은 뒤 순위만 비교했다. 정렬 키 후보 4개의 비교는 [queue_key_selection_v2.csv](outputs/queue_key_selection_v2.csv)에 있다.
 
 ## 산출물
 
@@ -172,7 +185,7 @@ python yejun/press_guard/predict.py --input 새기록.csv --out 예측.csv --cas
 |---|---|
 | `metrics.csv`, `rolling.csv`, `cases_{A,B}.csv`, `incidents_{A,B}.csv` | α별 행 지표·구간 알림, 시간순 5창, 혼합 대기열(건, 한 순위), 사건 대기열 |
 | `model_comparison_v2.csv`·`.md`, `robustness_v2.csv`, `sensitivity_v2.csv`, `ablation_v2.csv` | 14개 모델 비교, 입력 정밀도 강건성, 전처리 재적합, 성분 절제 |
-| `error_condition_summary_v2.csv` | FN·FP가 몰리는 조건 11행 요약: 공정조건 대리변수(수집 재개 직후·운전 강도·시간대·전류 수준·계측 정밀도·고장 모양), 오류/분모, 근거 종류(관측·주입·스트레스), 파일:행 |
+| `error_condition_summary_v2.csv` | FN·FP가 몰리는 조건 12행 요약: 공정조건 대리변수(수집 재개 직후·운전 강도·시간대·전류 수준·계측 정밀도·고장 모양), 오류/분모, 근거 종류(관측·주입·스트레스), 파일:행 |
 | `error_conditions_v2.csv`, `error_conditions_segments_v2.csv`, `error_conditions_stats_v2.csv`, `interaction_2x2_v2.csv`, `records_first_alarm_v2.csv` | 미탐·오경보 조건(행·구간, 위치 2 이상 층 `*_pos_ge2` 포함), 신뢰구간·lift·Fisher, 구간 특징 분리표, 구간별 첫 경보 |
 | `sensor_importance_v2.csv`, `position_vibration_misses_v2.csv`, `coupling_fit_v2.csv`, `coupling_records_v2.csv`, `fp_events_v2.csv`, `near_miss_v2.csv`, `near_miss_corr_v2.csv`, `fp_intensity_v2.csv`, `fn_intensity_v2.csv` | 센서 중요도(재적합 절제·채널 교체), 위치×진동 미탐, 진동–전류 결합, 오경보 사건 모음, 근접 오경보, 운전 강도별 조건부 오경보율, 고장 모양 × 운전 강도 미탐 |
 | `uncertainty_v2.csv`, `workload_v2.csv`, `alert_levels_v2.csv`, `alert_levels_injection_v2.csv`, `alert_budget_design_v2.csv`, `incident_summary_v2.csv` | 블록 부트스트랩, 업무량(명목·관측·이항·보정 사후 95%), 단계별 업무량·지연(대회·시간순·주입), 알림 예산 역산, 사건 수·알림 수 |
@@ -189,11 +202,11 @@ python yejun/press_guard/predict.py --input 새기록.csv --out 예측.csv --cas
 | 명령 | 확인하는 것 |
 |---|---|
 | `python yejun/press_guard/audit.py` | 실행 검증 16개. 코드·모델·입력 해시, 입력 묶음 1·7·128행과 전체 추론 동일, 독립 집계, p값 순위 규칙, 알림 정확성, 이상 21구간 탐지, 날짜 이동·라벨 변경 불변 |
-| `python yejun/press_guard/verify.py` | 동결 기대값과 비교한다. 결과 CSV(수치 1e-9), 실행 기록, 행 단위 예측 요약을 본다. 행 단위 예측은 SHA-256이 같거나, 경보·알림·단계·근거·조치 등 정확 비교 열의 해시가 같고 실수 열마다 개수·합·제곱합·최솟값·최댓값이 상대 1e-7 안이어야 통과한다(다른 기기의 부동소수 차이 허용). 경보가 한 행이라도 바뀌면 실패하고, 같은 기기에서는 manifest 해시가 모든 바이트 변경을 잡는다. `--freeze`는 audit를 통과한 실행만 동결한다 |
+| `python yejun/press_guard/verify.py` | 동결 기대값과 비교한다. 결과 CSV(수치 1e-9), 실행 기록, 행 단위 예측 요약을 본다. 행 단위 예측은 SHA-256이 같거나, 실수가 아닌 모든 열(사건 번호·알림·격상·시각·상태 포함)과 실수 열의 NaN·±inf 위치 해시가 같고 실수 열마다 개수·합·제곱합·최솟값·최댓값이 상대 1e-7 안이어야 통과한다(다른 기기의 부동소수 차이 허용). 경보가 한 행이라도 바뀌면 실패하고, 같은 기기에서는 manifest 해시가 모든 바이트 변경을 잡는다. 동결 manifest에 예측 요약 자체의 해시도 저장한다. `--freeze`는 audit를 통과한 실행만 동결한다 |
 | `python -m pytest -q yejun/press_guard` | 모델·스트림·서버·분석·재보정·감시·모의 운용·이식성(인코딩·resource·CP949) 시험 |
 | `node yejun/press_guard/test_web.cjs` | 콘솔 그래프·단계 표시·모의 운용·결과 양식 회귀 |
 | `bash yejun/press_guard/tools/clean_repro.sh` | git 클론(또는 git 없는 사본)에 원본만 복사해 `reproduce.py`를 실행한다 |
-| `python yejun/press_guard/tools/package_manifest.py` | 최종 패키지 파일 목록·SHA-256·블라인드 검사(절대 경로·필수 파일). ZIP은 만들지 않는다 |
+| `python yejun/press_guard/tools/package_manifest.py` | 최종 패키지 파일 목록·SHA-256·블라인드 검사(절대 경로·필수 파일·실행 기록 인용·문서 상대 링크). `--copy-test <빈 폴더>`는 목록만 복사해 한 명령 재현을 수행한다. ZIP은 만들지 않는다 |
 
 실행 환경은 [requirements.txt](requirements.txt)(torch 없음), [requirements-lock.txt](requirements-lock.txt)(전이 의존성 고정, 파이썬 3.12.8 새 가상환경에서 확인), [environment.yml](environment.yml)이다. BLAS·OpenMP 스레드는 코드에서 1개로 고정한다(`PRESS_THREADS`로 변경). 결과는 스레드 수와 무관하다(8스레드에서도 예측 파일이 비트 단위로 같았다). manifest에 BLAS 이름·판·스레드 수를 남긴다.
 

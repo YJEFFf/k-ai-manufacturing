@@ -1,0 +1,2617 @@
+{
+  "influence_details": {
+    "A": {
+      "sensor_refit": [
+        {
+          "variant": "full",
+          "tp": 556,
+          "fp": 0,
+          "fn": 44,
+          "f1": 0.9619377162629758,
+          "normal_alerted_segments": 0,
+          "abnormal_detected_segments": 21
+        },
+        {
+          "variant": "drop_AI0",
+          "tp": 551,
+          "fp": 0,
+          "fn": 49,
+          "f1": 0.9574283231972198,
+          "normal_alerted_segments": 0,
+          "abnormal_detected_segments": 20
+        },
+        {
+          "variant": "drop_AI1",
+          "tp": 555,
+          "fp": 0,
+          "fn": 45,
+          "f1": 0.961038961038961,
+          "normal_alerted_segments": 0,
+          "abnormal_detected_segments": 21
+        },
+        {
+          "variant": "drop_AI2_from_magnitude",
+          "tp": 556,
+          "fp": 0,
+          "fn": 44,
+          "f1": 0.9619377162629758,
+          "normal_alerted_segments": 0,
+          "abnormal_detected_segments": 21
+        },
+        {
+          "variant": "current_only",
+          "tp": 549,
+          "fp": 0,
+          "fn": 51,
+          "f1": 0.9556135770234987,
+          "normal_alerted_segments": 0,
+          "abnormal_detected_segments": 20
+        },
+        {
+          "variant": "vibration_only",
+          "tp": 173,
+          "fp": 0,
+          "fn": 427,
+          "f1": 0.4476067270375162,
+          "normal_alerted_segments": 0,
+          "abnormal_detected_segments": 18
+        }
+      ],
+      "swap": [
+        {
+          "sensor": "AI0_Vibration",
+          "fn": 61.0,
+          "abnormal_detected_segments": 20.0,
+          "fn_min": 61,
+          "fn_max": 61,
+          "detected_min": 20,
+          "detected_max": 20,
+          "repeats": 20
+        },
+        {
+          "sensor": "AI1_Vibration",
+          "fn": 46.0,
+          "abnormal_detected_segments": 21.0,
+          "fn_min": 46,
+          "fn_max": 46,
+          "detected_min": 21,
+          "detected_max": 21,
+          "repeats": 20
+        },
+        {
+          "sensor": "AI2_Current",
+          "fn": 427.0,
+          "abnormal_detected_segments": 18.0,
+          "fn_min": 427,
+          "fn_max": 427,
+          "detected_min": 18,
+          "detected_max": 18,
+          "repeats": 20
+        }
+      ],
+      "univariate": {
+        "AI0_Vibration": 0.8635454181672668,
+        "AI1_Vibration": 0.927170868347339,
+        "AI2_Current": 0.4365746298519408
+      },
+      "z_threshold": 4.492,
+      "rows_over_threshold": [
+        164,
+        23,
+        0
+      ],
+      "z_p95": [
+        14.371400621653168,
+        4.075572451727421,
+        2.702456912993328
+      ],
+      "coupling_abnormal_residual_median": 12.139170074714876
+    },
+    "B": {
+      "sensor_refit": [
+        {
+          "variant": "full",
+          "tp": 569,
+          "fp": 3,
+          "fn": 31,
+          "f1": 0.9709897610921502,
+          "normal_alerted_segments": 3,
+          "abnormal_detected_segments": 21
+        },
+        {
+          "variant": "drop_AI0",
+          "tp": 553,
+          "fp": 2,
+          "fn": 47,
+          "f1": 0.9575757575757575,
+          "normal_alerted_segments": 2,
+          "abnormal_detected_segments": 21
+        },
+        {
+          "variant": "drop_AI1",
+          "tp": 566,
+          "fp": 4,
+          "fn": 34,
+          "f1": 0.9675213675213675,
+          "normal_alerted_segments": 4,
+          "abnormal_detected_segments": 21
+        },
+        {
+          "variant": "drop_AI2_from_magnitude",
+          "tp": 569,
+          "fp": 3,
+          "fn": 31,
+          "f1": 0.9709897610921502,
+          "normal_alerted_segments": 3,
+          "abnormal_detected_segments": 21
+        },
+        {
+          "variant": "current_only",
+          "tp": 549,
+          "fp": 1,
+          "fn": 51,
+          "f1": 0.9547826086956521,
+          "normal_alerted_segments": 1,
+          "abnormal_detected_segments": 20
+        },
+        {
+          "variant": "vibration_only",
+          "tp": 196,
+          "fp": 3,
+          "fn": 404,
+          "f1": 0.490613266583229,
+          "normal_alerted_segments": 3,
+          "abnormal_detected_segments": 18
+        }
+      ],
+      "swap": [
+        {
+          "sensor": "AI0_Vibration",
+          "fn": 51.0,
+          "abnormal_detected_segments": 20.0,
+          "fn_min": 51,
+          "fn_max": 51,
+          "detected_min": 20,
+          "detected_max": 20,
+          "repeats": 20
+        },
+        {
+          "sensor": "AI1_Vibration",
+          "fn": 34.0,
+          "abnormal_detected_segments": 21.0,
+          "fn_min": 34,
+          "fn_max": 34,
+          "detected_min": 21,
+          "detected_max": 21,
+          "repeats": 20
+        },
+        {
+          "sensor": "AI2_Current",
+          "fn": 404.0,
+          "abnormal_detected_segments": 18.0,
+          "fn_min": 404,
+          "fn_max": 404,
+          "detected_min": 18,
+          "detected_max": 18,
+          "repeats": 20
+        }
+      ],
+      "univariate": {
+        "AI0_Vibration": 0.8619313647246607,
+        "AI1_Vibration": 0.8978451715881883,
+        "AI2_Current": 0.38095238095238104
+      },
+      "z_threshold": 3.7744,
+      "rows_over_threshold": [
+        184,
+        36,
+        1
+      ],
+      "z_p95": [
+        14.461087837751242,
+        4.131918392369155,
+        2.711362110995512
+      ],
+      "coupling_abnormal_residual_median": 12.09728043683393
+    }
+  },
+  "checks": [
+    {
+      "name": "sensor/A/full/0.01/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/full/0.01/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/full/0.01/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/full/0.01/f1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/full/0.01/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/full/0.01/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/full/0.03/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/full/0.03/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/full/0.03/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/full/0.03/f1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/full/0.03/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/full/0.03/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/full/0.05/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/full/0.05/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/full/0.05/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/full/0.05/f1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/full/0.05/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/full/0.05/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI0/0.01/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI0/0.01/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI0/0.01/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI0/0.01/f1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI0/0.01/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI0/0.01/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI0/0.03/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI0/0.03/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI0/0.03/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI0/0.03/f1",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "sensor/A/drop_AI0/0.03/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI0/0.03/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI0/0.05/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI0/0.05/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI0/0.05/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI0/0.05/f1",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "sensor/A/drop_AI0/0.05/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI0/0.05/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI1/0.01/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI1/0.01/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI1/0.01/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI1/0.01/f1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI1/0.01/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI1/0.01/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI1/0.03/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI1/0.03/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI1/0.03/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI1/0.03/f1",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "sensor/A/drop_AI1/0.03/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI1/0.03/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI1/0.05/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI1/0.05/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI1/0.05/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI1/0.05/f1",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "sensor/A/drop_AI1/0.05/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI1/0.05/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI2_from_magnitude/0.01/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI2_from_magnitude/0.01/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI2_from_magnitude/0.01/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI2_from_magnitude/0.01/f1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI2_from_magnitude/0.01/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI2_from_magnitude/0.01/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI2_from_magnitude/0.03/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI2_from_magnitude/0.03/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI2_from_magnitude/0.03/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI2_from_magnitude/0.03/f1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI2_from_magnitude/0.03/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI2_from_magnitude/0.03/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI2_from_magnitude/0.05/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI2_from_magnitude/0.05/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI2_from_magnitude/0.05/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI2_from_magnitude/0.05/f1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI2_from_magnitude/0.05/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/drop_AI2_from_magnitude/0.05/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/current_only/0.01/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/current_only/0.01/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/current_only/0.01/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/current_only/0.01/f1",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "sensor/A/current_only/0.01/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/current_only/0.01/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/current_only/0.03/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/current_only/0.03/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/current_only/0.03/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/current_only/0.03/f1",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "sensor/A/current_only/0.03/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/current_only/0.03/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/current_only/0.05/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/current_only/0.05/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/current_only/0.05/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/current_only/0.05/f1",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "sensor/A/current_only/0.05/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/current_only/0.05/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/vibration_only/0.01/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/vibration_only/0.01/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/vibration_only/0.01/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/vibration_only/0.01/f1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/vibration_only/0.01/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/vibration_only/0.01/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/vibration_only/0.03/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/vibration_only/0.03/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/vibration_only/0.03/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/vibration_only/0.03/f1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/vibration_only/0.03/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/vibration_only/0.03/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/vibration_only/0.05/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/vibration_only/0.05/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/vibration_only/0.05/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/vibration_only/0.05/f1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/vibration_only/0.05/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/A/vibration_only/0.05/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/A/AI0_Vibration/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/A/AI0_Vibration/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/A/AI0_Vibration/fn_min",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/A/AI0_Vibration/fn_max",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/A/AI0_Vibration/detected_min",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/A/AI0_Vibration/detected_max",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/A/AI0_Vibration/repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/A/AI1_Vibration/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/A/AI1_Vibration/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/A/AI1_Vibration/fn_min",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/A/AI1_Vibration/fn_max",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/A/AI1_Vibration/detected_min",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/A/AI1_Vibration/detected_max",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/A/AI1_Vibration/repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/A/AI2_Current/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/A/AI2_Current/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/A/AI2_Current/fn_min",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/A/AI2_Current/fn_max",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/A/AI2_Current/detected_min",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/A/AI2_Current/detected_max",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/A/AI2_Current/repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "AUROC/A/AI0_Vibration",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "AUROC/A/AI1_Vibration",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "AUROC/A/AI2_Current",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "no_early/A/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "no_early/A/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/2/missed_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/2/rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/2/miss_rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/2/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/2/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/2/records",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/2/vib_threshold_train_q95",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/3/missed_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/3/rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/3/miss_rate",
+      "ok": true,
+      "max_abs_error": 3.469446951953614e-17
+    },
+    {
+      "name": "position/3/ci_low",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "position/3/ci_high",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "position/3/records",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/3/vib_threshold_train_q95",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/4/missed_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/4/rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/4/miss_rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/4/ci_low",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "position/4/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/4/records",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/4/vib_threshold_train_q95",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/5/missed_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/5/rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/5/miss_rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/5/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/5/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/5/records",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/5/vib_threshold_train_q95",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/6/missed_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/6/rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/6/miss_rate",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "position/6/ci_low",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "position/6/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/6/records",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/6/vib_threshold_train_q95",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/7/missed_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/7/rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/7/miss_rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/7/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/7/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/7/records",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/7/vib_threshold_train_q95",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/8/missed_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/8/rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/8/miss_rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/8/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/8/ci_high",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "position/8/records",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/8/vib_threshold_train_q95",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/9/missed_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/9/rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/9/miss_rate",
+      "ok": true,
+      "max_abs_error": 8.153200337090993e-17
+    },
+    {
+      "name": "position/9/ci_low",
+      "ok": true,
+      "max_abs_error": 7.784571598445922e-17
+    },
+    {
+      "name": "position/9/ci_high",
+      "ok": true,
+      "max_abs_error": 6.591949208711867e-17
+    },
+    {
+      "name": "position/9/records",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/9/vib_threshold_train_q95",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/10/missed_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/10/rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/10/miss_rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/10/ci_low",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "position/10/ci_high",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "position/10/records",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/10/vib_threshold_train_q95",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/11/missed_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/11/rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/11/miss_rate",
+      "ok": true,
+      "max_abs_error": 3.469446951953614e-17
+    },
+    {
+      "name": "position/11/ci_low",
+      "ok": true,
+      "max_abs_error": 7.806255641895632e-17
+    },
+    {
+      "name": "position/11/ci_high",
+      "ok": true,
+      "max_abs_error": 1.3877787807814457e-17
+    },
+    {
+      "name": "position/11/records",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/11/vib_threshold_train_q95",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "coupling/A/records",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "coupling/A/r",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "coupling/A/slope",
+      "ok": true,
+      "max_abs_error": 2.220446049250313e-16
+    },
+    {
+      "name": "coupling/A/intercept",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "coupling/A/resid_sd",
+      "ok": true,
+      "max_abs_error": 8.326672684688674e-17
+    },
+    {
+      "name": "coupling/A/abnormal_residuals",
+      "ok": true,
+      "max_abs_error": 7.105427357601002e-15
+    },
+    {
+      "name": "sensor/B/full/0.01/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/full/0.01/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/full/0.01/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/full/0.01/f1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/full/0.01/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/full/0.01/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/full/0.03/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/full/0.03/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/full/0.03/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/full/0.03/f1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/full/0.03/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/full/0.03/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/full/0.05/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/full/0.05/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/full/0.05/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/full/0.05/f1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/full/0.05/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/full/0.05/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI0/0.01/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI0/0.01/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI0/0.01/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI0/0.01/f1",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "sensor/B/drop_AI0/0.01/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI0/0.01/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI0/0.03/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI0/0.03/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI0/0.03/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI0/0.03/f1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI0/0.03/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI0/0.03/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI0/0.05/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI0/0.05/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI0/0.05/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI0/0.05/f1",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "sensor/B/drop_AI0/0.05/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI0/0.05/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI1/0.01/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI1/0.01/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI1/0.01/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI1/0.01/f1",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "sensor/B/drop_AI1/0.01/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI1/0.01/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI1/0.03/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI1/0.03/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI1/0.03/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI1/0.03/f1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI1/0.03/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI1/0.03/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI1/0.05/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI1/0.05/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI1/0.05/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI1/0.05/f1",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "sensor/B/drop_AI1/0.05/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI1/0.05/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI2_from_magnitude/0.01/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI2_from_magnitude/0.01/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI2_from_magnitude/0.01/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI2_from_magnitude/0.01/f1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI2_from_magnitude/0.01/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI2_from_magnitude/0.01/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI2_from_magnitude/0.03/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI2_from_magnitude/0.03/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI2_from_magnitude/0.03/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI2_from_magnitude/0.03/f1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI2_from_magnitude/0.03/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI2_from_magnitude/0.03/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI2_from_magnitude/0.05/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI2_from_magnitude/0.05/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI2_from_magnitude/0.05/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI2_from_magnitude/0.05/f1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI2_from_magnitude/0.05/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/drop_AI2_from_magnitude/0.05/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/current_only/0.01/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/current_only/0.01/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/current_only/0.01/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/current_only/0.01/f1",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "sensor/B/current_only/0.01/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/current_only/0.01/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/current_only/0.03/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/current_only/0.03/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/current_only/0.03/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/current_only/0.03/f1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/current_only/0.03/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/current_only/0.03/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/current_only/0.05/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/current_only/0.05/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/current_only/0.05/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/current_only/0.05/f1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/current_only/0.05/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/current_only/0.05/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/vibration_only/0.01/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/vibration_only/0.01/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/vibration_only/0.01/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/vibration_only/0.01/f1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/vibration_only/0.01/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/vibration_only/0.01/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/vibration_only/0.03/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/vibration_only/0.03/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/vibration_only/0.03/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/vibration_only/0.03/f1",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "sensor/B/vibration_only/0.03/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/vibration_only/0.03/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/vibration_only/0.05/tp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/vibration_only/0.05/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/vibration_only/0.05/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/vibration_only/0.05/f1",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/vibration_only/0.05/normal_alerted_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "sensor/B/vibration_only/0.05/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/B/AI0_Vibration/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/B/AI0_Vibration/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/B/AI0_Vibration/fn_min",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/B/AI0_Vibration/fn_max",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/B/AI0_Vibration/detected_min",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/B/AI0_Vibration/detected_max",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/B/AI0_Vibration/repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/B/AI1_Vibration/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/B/AI1_Vibration/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/B/AI1_Vibration/fn_min",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/B/AI1_Vibration/fn_max",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/B/AI1_Vibration/detected_min",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/B/AI1_Vibration/detected_max",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/B/AI1_Vibration/repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/B/AI2_Current/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/B/AI2_Current/abnormal_detected_segments",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/B/AI2_Current/fn_min",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/B/AI2_Current/fn_max",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/B/AI2_Current/detected_min",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/B/AI2_Current/detected_max",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "swap/B/AI2_Current/repeats",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "AUROC/B/AI0_Vibration",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "AUROC/B/AI1_Vibration",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "AUROC/B/AI2_Current",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "no_early/B/fn",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "no_early/B/fp",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/12/missed_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/12/rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/12/miss_rate",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "position/12/ci_low",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "position/12/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/12/records",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/12/vib_threshold_train_q95",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/13/missed_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/13/rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/13/miss_rate",
+      "ok": true,
+      "max_abs_error": 1.734723475976807e-17
+    },
+    {
+      "name": "position/13/ci_low",
+      "ok": true,
+      "max_abs_error": 3.469446951953614e-18
+    },
+    {
+      "name": "position/13/ci_high",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-18
+    },
+    {
+      "name": "position/13/records",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/13/vib_threshold_train_q95",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/14/missed_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/14/rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/14/miss_rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/14/ci_low",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "position/14/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/14/records",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/14/vib_threshold_train_q95",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/15/missed_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/15/rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/15/miss_rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/15/ci_low",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "position/15/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/15/records",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/15/vib_threshold_train_q95",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/16/missed_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/16/rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/16/miss_rate",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "position/16/ci_low",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "position/16/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/16/records",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/16/vib_threshold_train_q95",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/17/missed_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/17/rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/17/miss_rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/17/ci_low",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "position/17/ci_high",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/17/records",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/17/vib_threshold_train_q95",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/18/missed_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/18/rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/18/miss_rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/18/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/18/ci_high",
+      "ok": true,
+      "max_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "position/18/records",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/18/vib_threshold_train_q95",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/19/missed_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/19/rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/19/miss_rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/19/ci_low",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/19/ci_high",
+      "ok": true,
+      "max_abs_error": 6.938893903907228e-17
+    },
+    {
+      "name": "position/19/records",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/19/vib_threshold_train_q95",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/20/missed_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/20/rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/20/miss_rate",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/20/ci_low",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "position/20/ci_high",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "position/20/records",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/20/vib_threshold_train_q95",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/21/missed_rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/21/rows",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/21/miss_rate",
+      "ok": true,
+      "max_abs_error": 1.734723475976807e-17
+    },
+    {
+      "name": "position/21/ci_low",
+      "ok": true,
+      "max_abs_error": 8.066464163292153e-17
+    },
+    {
+      "name": "position/21/ci_high",
+      "ok": true,
+      "max_abs_error": 3.8163916471489756e-17
+    },
+    {
+      "name": "position/21/records",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "position/21/vib_threshold_train_q95",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "coupling/B/records",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "coupling/B/r",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "name": "coupling/B/slope",
+      "ok": true,
+      "max_abs_error": 2.220446049250313e-16
+    },
+    {
+      "name": "coupling/B/intercept",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "coupling/B/resid_sd",
+      "ok": true,
+      "max_abs_error": 5.551115123125783e-17
+    },
+    {
+      "name": "coupling/B/abnormal_residuals",
+      "ok": true,
+      "max_abs_error": 1.3100631690576847e-14
+    },
+    {
+      "name": "citations_exact/2",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "citations_exact/3",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "citations_exact/4",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "citations_exact/5",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "citations_exact/6",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "citations_exact/7",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "citations_exact/8",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "citations_exact/9",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "citations_exact/10",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "citations_exact/11",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "citations_exact/12",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "citations_exact/13",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "summary_source_numbers/2/A",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary_source_numbers/3/A",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary_source_numbers/4/A",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary_source_numbers/5/A",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary_source_numbers/6/A",
+      "ok": true,
+      "max_abs_error": 1.7763568394002505e-15
+    },
+    {
+      "name": "summary_source_numbers/7/A",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary_source_numbers/8/A",
+      "ok": true,
+      "max_abs_error": 9.020562075079397e-17
+    },
+    {
+      "name": "summary_source_numbers/9/A",
+      "ok": true,
+      "max_abs_error": 4.7704895589362195e-17
+    },
+    {
+      "name": "summary_source_numbers/10/A",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary_source_numbers/11/A",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary_source_numbers/12/A",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary_source_numbers/13/A",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary_source_numbers/2/B",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary_source_numbers/3/B",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary_source_numbers/4/B",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary_source_numbers/5/B",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary_source_numbers/6/B",
+      "ok": true,
+      "max_abs_error": 1.1102230246251565e-15
+    },
+    {
+      "name": "summary_source_numbers/7/B",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary_source_numbers/8/B",
+      "ok": true,
+      "max_abs_error": 6.678685382510707e-17
+    },
+    {
+      "name": "summary_source_numbers/9/B",
+      "ok": true,
+      "max_abs_error": 9.020562075079397e-17
+    },
+    {
+      "name": "summary_source_numbers/10/B",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary_source_numbers/11/B",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "summary_source_numbers/12/B",
+      "ok": true,
+      "max_abs_error": 6.591949208711867e-17
+    },
+    {
+      "name": "summary_source_numbers/13/B",
+      "ok": true,
+      "max_abs_error": 6.591949208711867e-17
+    },
+    {
+      "name": "states/0.01/load/frozen_A",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "states/0.01/load/frozen_B",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "states/0.01/low/frozen_A",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "states/0.01/low/frozen_B",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "states/0.01/short/frozen_A",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "states/0.01/short/frozen_B",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "states/0.03/load/frozen_A",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "states/0.03/load/frozen_B",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "states/0.03/low/frozen_A",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "states/0.03/low/frozen_B",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "states/0.03/short/frozen_A",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "states/0.03/short/frozen_B",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "states/0.05/load/frozen_A",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "states/0.05/load/frozen_B",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "states/0.05/low/frozen_A",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "states/0.05/low/frozen_B",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "states/0.05/short/frozen_A",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "states/0.05/short/frozen_B",
+      "ok": true,
+      "max_abs_error": 0.0
+    },
+    {
+      "name": "README/component_values",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "README/repeats50",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "README/BH_Bonferroni",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "README/E1_difference",
+      "ok": true,
+      "max_abs_error": null
+    },
+    {
+      "name": "README/summary_count",
+      "ok": true,
+      "max_abs_error": null
+    }
+  ],
+  "failed": [],
+  "elapsed_s": 10.79
+}

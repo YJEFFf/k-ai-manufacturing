@@ -1,0 +1,6 @@
+raw states, BIC, period, transition power complete {'observed': 0, 'ratio_max': 1.1087670432638577, 'power': 0.5303837953091685, 'power_long': 0.6865942028985508, 'expected_crossing': 179.5317073170732, 'expected_detected_approx': 95.2207083051641, 'expected_detected_length_weighted': 106.8829268292683}
+narrowband raw reconstruction complete
+frozen alerts and causal state verified
+B transition stress complete
+A transition stress complete
+DONE 20 checks 0 failures 36.0 seconds

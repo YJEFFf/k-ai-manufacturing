@@ -42,6 +42,10 @@ INCIDENT_MAX_GAP_S = SUSPECT_MAX_GAP_S
 # 수집 시각이 1 ms만 흔들려도 기록이 쪼개진다. 대회 자료의 기록 사이 공백은 1.5초 이상이라 20 ms에서도 구간이 같다.
 TIME_TOL_S = 0.02
 SHORT_RECORD_WARN = 5      # 평균 기록 길이가 이보다 짧으면 수집 시각 간격 경고
+# 사후 진단용 상태 대리변수. 정상 기록의 2성분 경계 91.886을 반올림한 값이며 경보·학습에는 쓰지 않는다.
+# 원 전류의 기록 평균 제거 RMS(ddof=0). 0.6 Hz 한 주기 이상(17행)을 본 뒤에만 상태를 표시한다.
+LOAD_STATE_RMS = 91.9
+STATE_MIN_ROWS = 17
 QUALITY_ACTIONS = {1: "다음 샘플 검사를 앞당긴다(가설)",
                    2: "의심 시간창에 만든 가공품을 보류하고 전단면·버·치수·평탄도를 전수 확인한다(가설)"}
 ACTIONS = dict(vibration="진동·부하 확인", vibration_and_current="진동·전류 함께 점검",
@@ -137,7 +141,7 @@ class IncidentTracker:
         self.unit_alarmed = True
         if first_in_unit:
             gap = (self.unit_start - self.prev_end).total_seconds() if self.prev_end is not None and self.unit_start is not None else np.inf
-            if not (self.open and self.prev_alarmed and gap <= INCIDENT_MAX_GAP_S):
+            if not (self.open and self.prev_alarmed and 0 <= gap <= INCIDENT_MAX_GAP_S):
                 self.incident += 1; self.open = True; self.count = 0; self.components = set()
         self.count += 1
         notify = int(self.count == 1)
@@ -163,7 +167,55 @@ def record_running_max(values, record):
     return v.groupby(np.asarray(record)).cummax().groupby(np.asarray(record)).ffill().to_numpy()
 
 
-def layout(frame):
+class CurrentState:
+    """원 전류의 인과적 누적 RMS. 일괄·스트림에서 같은 행 순서로 Welford 갱신한다."""
+
+    def __init__(self):
+        self.n = 0
+        self.mean = self.m2 = 0.0
+
+    def update(self, value):
+        if not np.isfinite(value):
+            return np.nan, "short"
+        self.n += 1
+        delta = value - self.mean
+        self.mean += delta / self.n
+        self.m2 += delta * (value - self.mean)
+        rms = float(np.sqrt(max(0.0, self.m2 / self.n)))
+        state = "short" if self.n < STATE_MIN_ROWS else ("load" if rms >= LOAD_STATE_RMS else "low")
+        return rms, state
+
+
+def current_states(values, records):
+    """기록 경계마다 초기화한 누적 RMS와 상태(경보 결정에 사용하지 않음)."""
+    rms, states = [], []
+    previous = None
+    current = CurrentState()
+    for value, record in zip(values, records):
+        if record != previous:
+            current = CurrentState()
+            previous = record
+        value_rms, state = current.update(value)
+        rms.append(value_rms)
+        states.append(state)
+    return np.asarray(rms, float), np.asarray(states, object)
+
+
+def timestamp_order(timestamp, time_floor=None):
+    """앞서 수신한 유효 시각의 최댓값보다 이른 행을 찾는다. 동률은 허용하며 미래 행을 참조하지 않는다.
+
+    time_floor는 이 입력 앞에서 관측한 최대 시각이다. 스트림은 보관하는 7행보다 앞선 기준 하나만 이어받는다.
+    시각을 파싱할 수 없는 행은 기준을 갱신하지 않는다. 센서 값 오류가 있어도 파싱 가능한 시각은 수신 순서 검사에 쓴다.
+    """
+    maximum = timestamp.cummax().ffill()
+    if time_floor is not None:
+        maximum = maximum.where(maximum.ge(time_floor), time_floor)
+    reversed_rows = timestamp.lt(maximum).to_numpy()
+    latest = maximum.iloc[-1] if len(maximum) and pd.notna(maximum.iloc[-1]) else time_floor
+    return reversed_rows, latest
+
+
+def layout(frame, *, time_floor=None):
     missing = [c for c in [D.TIME]+D.SENSORS if c not in frame]
     if missing:
         raise KeyError(f"필수 열 없음: {missing}")
@@ -173,6 +225,8 @@ def layout(frame):
     status = np.full(len(frame),"ok",dtype=object)
     status[~np.isfinite(values).all(axis=1)] = "bad_value"
     status[timestamp.isna().to_numpy()] = "bad_timestamp"
+    reversed_rows, _ = timestamp_order(timestamp, time_floor)
+    status[reversed_rows] = "bad_time_order"
     bad = status != "ok"
     boundary = timestamp.diff().dt.total_seconds().sub(D.DT).abs().gt(TIME_TOL_S).to_numpy() | bad
     boundary[1:] |= bad[:-1]
@@ -270,24 +324,25 @@ class GuardModel:
                     waveform_window=np.where(pos < 7, 6, 8), score=np.fmax(np.fmax(gz, gs), ga),
                     magnitude_sensor=np.asarray(D.SENSORS)[np.abs(z).argmax(axis=1)])
 
-    def predict(self, frame, alpha=.01, prior=None):
+    def predict(self, frame, alpha=.01, prior=None, *, time_floor=None):
         if alpha not in ALPHAS:
             raise ValueError(f"alpha는 {ALPHAS} 중 하나여야 한다")
         from probability import DEFAULT_PRIOR, posterior
         prior = DEFAULT_PRIOR if prior is None else float(prior)
         if not 0 < prior < 1:
             raise ValueError("사전 비율은 0과 1 사이여야 한다")
-        status,seg = layout(frame)
+        status,seg = layout(frame, time_floor=time_floor)
         if len(frame) == 0:
             return pd.DataFrame(columns=["row_id","record_id","timestamp","status","position","score","p_value","alarm","notification","reason","action",
                                          "is_scored","anomaly_score","criterion","model_id","protocol_version","alert_unit","beyond_calibration_length",
                                          "alert_level","escalation","likelihood_ratio","anomaly_probability","probability_prior",
                                          "record_likelihood_ratio","record_probability","incident_id","incident_notification",
-                                         "incident_escalation","incident_update"])
+                                         "incident_escalation","incident_update","record_current_rms","operating_state"])
         pos, _ = D.segment_positions(seg)
         clean = D.inputs_only(frame)
         for c in D.SENSORS:
             clean[c] = pd.to_numeric(clean[c], errors="coerce").where(status == "ok")
+        state_rms, state_labels = current_states(clean[D.SENSORS[2]].to_numpy(float), seg)
         clean = D.quantize(clean, "matched")
         comp = self.components(clean, seg)
         p = conformal_p(self.cal, comp["score"])
@@ -329,6 +384,7 @@ class GuardModel:
         # 기록구간 확률: 기록 안에서 지금까지의 최대 우도비(인과). 확률은 점수에 단조이므로 기록 최대 점수의 확률과 같다.
         out["record_likelihood_ratio"] = record_running_max(lr, seg)
         out["record_probability"] = posterior(out.record_likelihood_ratio.to_numpy(), prior)
+        out["record_current_rms"], out["operating_state"] = state_rms, state_labels
         return out
 
     def save(self, path):
@@ -365,7 +421,9 @@ def load_bundle(model_path):
 class StreamDetector:
     """청크 크기에 무관한 추론. 센서 원본은 직전 7행만 유지한다.
 
-    잘못된 행·역순·중복·샘플 누락은 경계가 된다. 경보 단위(기록구간 안 50행 블록)의 첫 경보만 알리고,
+    역순은 앞서 수신한 최대 시각에 도달할 때까지 수집 오류로 판정을 보류한다. 잘못된 행·중복·샘플 누락은 경계가 된다.
+    센서 원본 7행 외에 그 앞의 최대 시각 하나를 유지한다. 시계 재설정은 확인 후 새 인스턴스로 시작한다.
+    경보 단위(기록구간 안 50행 블록)의 첫 경보만 알리고,
     바로 앞 블록도 경보였으면 이어지는 이상으로 묶는다. 외부가 새 장치로 전환할 때는 새 인스턴스를 생성해야 한다.
     """
     def __init__(self, model, alpha=.01, prior=None):
@@ -375,11 +433,13 @@ class StreamDetector:
         self.tail = pd.DataFrame(columns=[D.TIME]+D.SENSORS)
         self.tail_records = np.array([], dtype=int)
         self.tail_positions = np.array([], dtype=int)
+        self.tail_time_floor = None   # tail보다 앞에서 받은 최대 유효 시각(역행 중에도 감소하지 않음)
         self.rows_seen = 0
         self.alert_record = None      # 현재 기록구간 번호와 그 안에서 경보가 난 블록
         self.alerted_blocks = set()
         self.episode_alarms = 0       # 현재 건의 누적 경보 행(격상 판단)
         self.record_lr = np.nan       # 현재 기록구간의 지금까지 최대 우도비
+        self.current_state = CurrentState()
         self.incidents = IncidentTracker()   # 기록구간을 넘는 사건 묶음(스트림 전체에서 이어진다)
 
     def push(self, frame):
@@ -390,7 +450,7 @@ class StreamDetector:
         incoming = D.inputs_only(frame)
         n_old = len(self.tail)
         both = pd.concat([self.tail,incoming],ignore_index=True) if n_old else incoming
-        result = self.model.predict(both,self.alpha,self.prior)
+        result = self.model.predict(both,self.alpha,self.prior,time_floor=self.tail_time_floor)
         rec = result.record_id.to_numpy().copy()
         positions = result.position.to_numpy().copy()
         if n_old:
@@ -402,11 +462,15 @@ class StreamDetector:
         result["beyond_calibration_length"] = (positions >= ALERT_UNIT_ROWS).astype(int)
         result = result.iloc[n_old:].copy().reset_index(drop=True)
         result["row_id"] = np.arange(self.rows_seen,self.rows_seen+len(incoming))
-        notifications, levels, escalations, record_lr, inc = [], [], [], [], []
+        notifications, levels, escalations, record_lr, inc, state_rms, state_labels = [], [], [], [], [], [], []
         times = pd.to_datetime(result.timestamp, format="mixed", utc=True, errors="coerce")
-        for r, t in zip(result.itertuples(), times):
+        raw_current = pd.to_numeric(incoming[D.SENSORS[2]], errors="coerce").to_numpy(float)
+        for r, t, value in zip(result.itertuples(), times, raw_current):
             if r.record_id != self.alert_record:
                 self.alert_record, self.alerted_blocks, self.record_lr = r.record_id, set(), np.nan
+                self.current_state = CurrentState()
+            rms, state = self.current_state.update(value if r.status == "ok" else np.nan)
+            state_rms.append(rms); state_labels.append(state)
             self.record_lr = np.fmax(self.record_lr, r.likelihood_ratio)
             record_lr.append(self.record_lr)
             notify = bool(r.alarm) and r.alert_unit not in self.alerted_blocks and r.alert_unit - 1 not in self.alerted_blocks
@@ -425,7 +489,12 @@ class StreamDetector:
         inc = np.asarray(inc, dtype=int).reshape(-1, 4)
         result["incident_id"], result["incident_notification"], result["incident_escalation"], result["incident_update"] = inc.T
         result["record_probability"] = posterior(np.asarray(record_lr, float), result.probability_prior.to_numpy(float))
+        result["record_current_rms"], result["operating_state"] = state_rms, state_labels
         self.rows_seen += len(incoming)
+        dropped = len(both) - 7
+        if dropped > 0:
+            discarded_times = pd.to_datetime(both[D.TIME].iloc[:dropped], format="mixed", utc=True, errors="coerce")
+            _, self.tail_time_floor = timestamp_order(discarded_times, self.tail_time_floor)
         self.tail = both.iloc[-7:].copy().reset_index(drop=True)
         self.tail_records, self.tail_positions = rec[-7:].copy(), positions[-7:].copy()
         return result
@@ -465,8 +534,8 @@ def cases(predictions):
     blocks_of_rows = pd.Series(block, index=p.index)
     time = pd.to_datetime(p.timestamp, format="mixed", utc=True, errors="coerce")
     unit_key = pd.Series(list(zip(p.record_id.to_numpy(), block)), index=p.index)
-    units = pd.DataFrame(dict(key=unit_key, t=time, a=p.alarm.eq(1), ep=episode)).groupby("key", sort=False).agg(
-        start=("t", "min"), end=("t", "max"), alarmed=("a", "any"), ep=("ep", "max")).reset_index()
+    units = pd.DataFrame(dict(key=unit_key, t=time, a=p.alarm.eq(1), valid=p.status.eq("ok"), ep=episode)).groupby("key", sort=False).agg(
+        start=("t", "min"), end=("t", "max"), alarmed=("a", "any"), valid=("valid", "all"), ep=("ep", "max")).reset_index()
     result = []
     for ep, group in p.groupby(episode, sort=True):
         if ep == 0:
@@ -480,14 +549,14 @@ def cases(predictions):
         level = 2 if len(flagged) >= ESCALATION_ALARM_ROWS else 1
         second = flagged.iloc[ESCALATION_ALARM_ROWS - 1] if level == 2 else None
         members = np.flatnonzero(units.ep.to_numpy() == ep)
-        before = units.iloc[:members.min()]; before = before[~before.alarmed]
-        after = units.iloc[members.max() + 1:]; after = after[~after.alarmed]
+        before = units.iloc[:members.min()]; before = before[~before.alarmed & before.valid]
+        after = units.iloc[members.max() + 1:]; after = after[~after.alarmed & after.valid]
         start = before.end.iloc[-1] if len(before) else pd.NaT
         end = after.start.iloc[0] if len(after) else pd.NaT
         ep_start, ep_end = units.start.iloc[members.min()], units.end.iloc[members.max()]
-        if pd.notna(start) and (ep_start - start).total_seconds() > SUSPECT_MAX_GAP_S:
-            start = pd.NaT          # 앞 정상 기록이 너무 멀다(수집 공백): 시작을 모른다
-        if pd.notna(end) and (end - ep_end).total_seconds() > SUSPECT_MAX_GAP_S:
+        if pd.notna(start) and not 0 <= (ep_start - start).total_seconds() <= SUSPECT_MAX_GAP_S:
+            start = pd.NaT          # 역순이거나 앞 정상 기록이 너무 멀면 시작을 모른다
+        if pd.notna(end) and not 0 <= (end - ep_end).total_seconds() <= SUSPECT_MAX_GAP_S:
             end = pd.NaT
         result.append(dict(case_uid=int(first.row_id), incident_id=int(first.incident_id) if "incident_id" in first else 0,
                            row_from=int(group.row_id.min()), row_to=int(group.row_id.max()),
@@ -507,6 +576,9 @@ def cases(predictions):
                            suspect_seconds=float((end - start).total_seconds()) if pd.notna(start) and pd.notna(end) else np.nan,
                            suspect_open=int(pd.isna(start) or pd.isna(end)), quality_action=QUALITY_ACTIONS[level],
                            evidence_count=len(reasons),
+                           record_current_rms=float(group.record_current_rms.iloc[-1]) if "record_current_rms" in group else np.nan,
+                           operating_state=str(group.operating_state.iloc[-1]) if "operating_state" in group else "short",
+                           first_alarm_operating_state=str(first.get("operating_state", "short")),
                            max_likelihood_ratio=float(flagged.likelihood_ratio.max()) if "likelihood_ratio" in flagged else np.nan,
                            max_probability=float(flagged.anomaly_probability.max()) if "anomaly_probability" in flagged else np.nan))
     queue = pd.DataFrame(result)
@@ -516,7 +588,7 @@ def cases(predictions):
 
 def incidents(queue, predictions=None):
     """사건 대기열: 건(case)을 사건 번호로 묶는다. 사건마다 1·2단계 알림은 한 번씩이다. 순위는 건과 같은 규칙(이상 라벨 없이 정함).
-    predictions를 주면 사건 격상 행(escalation_row)을 붙인다."""
+    단계는 사건 전체 경보 행의 누적으로 정한다. 격상 행은 건의 시간순 누적으로 복원하고, predictions가 있으면 직접 대조한다."""
     if not len(queue) or "incident_id" not in queue:
         return pd.DataFrame()
     esc = {}
@@ -526,28 +598,42 @@ def incidents(queue, predictions=None):
     rows = []
     for inc, g in queue.sort_values("first_row").groupby("incident_id", sort=True):
         ev = sorted(set("+".join(g.evidence).split("+")) - {""})
-        level = int(g.level.max())
+        alarm_rows = int(g.alarm_rows.sum())
+        level = 2 if alarm_rows >= ESCALATION_ALARM_ROWS else 1
+        escalation_row = np.nan
+        before = 0
+        for case in g.itertuples():
+            if before + case.alarm_rows >= ESCALATION_ALARM_ROWS:
+                escalation_row = case.first_row if before == ESCALATION_ALARM_ROWS - 1 else case.escalation_row
+                break
+            before += case.alarm_rows
+        escalation_row = esc.get(int(inc), escalation_row)
         opened = int(g.suspect_open.max())
         rows.append(dict(incident_id=int(inc), first_row=int(g.first_row.min()), first_timestamp=g.first_timestamp.iloc[0], last_case_timestamp=g.first_timestamp.iloc[-1],
                          cases=len(g), case_uids="+".join(map(str, g.case_uid)), records="+".join(map(str, g.record_id)), level=level, level_name=LEVEL_NAMES[level],
-                         evidence="+".join(ev), evidence_count=len(ev), alarm_rows=int(g.alarm_rows.sum()), observed_rows=int(g.observed_rows.sum()),
+                         evidence="+".join(ev), evidence_count=len(ev), alarm_rows=alarm_rows, observed_rows=int(g.observed_rows.sum()),
+                         operating_state="+".join(dict.fromkeys(g.operating_state.astype(str))) if "operating_state" in g else "short",
                          alarm_share=float(g.alarm_rows.sum() / g.observed_rows.sum()), peak_score=float(g.peak_score.max()),
                          max_probability=float(g.max_probability.max()) if g.max_probability.notna().any() else np.nan,
                          max_likelihood_ratio=float(g.max_likelihood_ratio.max()) if g.max_likelihood_ratio.notna().any() else np.nan,
                          suspect_from=g.suspect_from.iloc[0], suspect_to=g.suspect_to.iloc[-1], suspect_open=opened, quality_action=QUALITY_ACTIONS[level],
-                         action=g.sort_values("priority_rank").action.iloc[0], escalation_row=esc.get(int(inc), np.nan)))
+                         action=g.sort_values("priority_rank").action.iloc[0], escalation_row=escalation_row))
     out = pd.DataFrame(rows)
     out["priority_rank"] = priority_ranks(out)
     return out
 
 
 def timing_warning(predictions):
-    """수집 시각 간격 점검: 평균 기록 길이가 SHORT_RECORD_WARN행보다 짧으면 시각 흔들림·간격 문제로 기록이 쪼개졌을 수 있다."""
+    """역순시각 판정보류와, 짧게 쪼개진 기록의 시각 간격 문제를 안내한다."""
+    reversed_rows = int(predictions.status.eq("bad_time_order").sum()) if len(predictions) else 0
+    warnings = ([f"역순 수집 시각 {reversed_rows}행: 앞서 수신한 최대 시각보다 이르므로 판정을 보류했습니다. 수집 PC 시각과 입력 순서를 확인하세요."]
+                if reversed_rows else [])
     ok = predictions[predictions.status.eq("ok")] if len(predictions) else predictions
     if len(ok) < 50:
-        return ""
+        return " ".join(warnings)
     mean_len = len(ok) / max(ok.record_id.nunique(), 1)
     if mean_len >= SHORT_RECORD_WARN:
-        return ""
-    return (f"수집 시각 간격 확인: 평균 기록 길이 {mean_len:.1f}행. 이웃 행 간격이 0.1초 ± {TIME_TOL_S * 1000:.0f} ms를 벗어나면 기록이 쪼개져 "
-            "파형·예측 오차 성분을 계산하지 못한다(미탐 증가).")
+        return " ".join(warnings)
+    warnings.append(f"수집 시각 간격 확인: 평균 기록 길이 {mean_len:.1f}행. 이웃 행 간격이 0.1초 ± {TIME_TOL_S * 1000:.0f} ms를 벗어나면 기록이 쪼개져 "
+                    "파형·예측 오차 성분을 계산하지 못한다(미탐 증가).")
+    return " ".join(warnings)

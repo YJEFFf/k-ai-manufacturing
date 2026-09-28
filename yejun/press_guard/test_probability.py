@@ -1,4 +1,4 @@
-"""이상 확률 층 계약(루브릭 사이클2 평가관 02 M1): 경보와 분리, 단조성, 사전 비율 변환, 증거력 상한, 교차 적합 누설 차단, 저장·복원."""
+"""이상 확률 층 계약: 경보와 분리, 단조성, 사전 비율 변환, 표시 범위, 교차 적합 누설 차단, 저장·복원."""
 import json
 
 import numpy as np
@@ -6,7 +6,7 @@ import pandas as pd
 import pytest
 
 from model import D, HERE, StreamDetector, load_bundle
-from probability import ProbabilityCalibrator, alert_evidence_bound, posterior, sellke_bayes_factor
+from probability import ProbabilityCalibrator, min_rank_nominal_likelihood_ratio, posterior, sellke_bayes_factor
 from train import oof_likelihood_ratio
 
 
@@ -39,7 +39,7 @@ def test_monotone_in_score_and_prior(bundle):
     s = np.linspace(-2, 40, 400)
     lr = cal.likelihood_ratio(s)
     assert np.all(np.diff(lr) >= -1e-12)
-    assert lr.max() <= len(bundle.cal) + 1 and lr.min() > 0      # 증거력 상한 = 보정 단위 수 + 1
+    assert lr.max() <= len(bundle.cal) + 1 and lr.min() > 0      # 운영 표시 정책: 보정 단위 수 + 1에서 자른다.
     p_lo, p_hi = cal.probability(s, prior=.001), cal.probability(s, prior=.1)
     assert np.all(p_hi >= p_lo) and np.all((0 < p_lo) & (p_hi < 1))
 
@@ -50,7 +50,28 @@ def test_prior_conversion_formula():
         p = posterior(lr, pi)
         assert np.allclose(p / (1 - p), lr * pi / (1 - pi))          # 사후 오즈 = LR × 사전 오즈
         assert np.isclose(posterior(1.0, pi), pi)
-    assert np.isclose(alert_evidence_bound(120), 121) and np.isclose(1 / sellke_bayes_factor(1 / 121), 9.28, atol=.01)
+    assert np.isclose(min_rank_nominal_likelihood_ratio(120), 121)
+    assert np.isclose(1 / sellke_bayes_factor(1 / 121), 9.28, atol=.01)
+
+
+def test_zero_isotonic_endpoint_remains_monotone_under_interpolation():
+    """P̂=0만 floor로 올리면 첫 양수로의 보간 구간에서 LR이 오히려 급락한다."""
+    cal = ProbabilityCalibrator.fit([0, 1, 2, 3], [2, 3, 4], calibration_units=120)
+    scores = np.linspace(0, 4, 401)
+    assert np.any(cal.y == 0) and np.any(cal.y == 1)
+    lr = cal.likelihood_ratio(scores)
+    assert np.all(np.diff(lr) >= -1e-12)
+    assert np.all((lr >= cal.lr_floor) & (lr <= cal.lr_cap))
+    assert cal.probability([1.1])[0] >= cal.probability([1.0])[0]
+    assert np.isnan(cal.likelihood_ratio([np.nan, np.inf, -np.inf])).all()
+
+
+def test_nominal_lr_reference_is_not_a_universal_upper_bound():
+    """FAR의 상한은 LR의 상한을 뜻하지 않는다. 이 수치는 관측치가 아닌 산술 반례다."""
+    tpr = .955
+    nominal = min_rank_nominal_likelihood_ratio(120, tpr)
+    assert nominal == pytest.approx(tpr / (1 / 121))
+    assert tpr / (1 / 242) > nominal
 
 
 def test_out_of_fold_has_no_leakage(bundle, data):

@@ -1,0 +1,11 @@
+{
+  "reports": {
+    "yejun/analysis/press_rubric_review/cycle2/round4/judge_01_data.md": "0447b2b5409dfa1e266545b3a7cb7ef254bdb9fe035f35a532fd4c873b95b1ae",
+    "yejun/analysis/press_rubric_review/cycle2/round4/judge_02_model.md": "d88547a7fccc7f316c7fdf41e4d72ede5d1e62a4cb94e29dcc0cc73221475fbc",
+    "yejun/analysis/press_rubric_review/cycle2/round4/judge_03_errors.md": "9341e4aaaf591f797ab89a51c67e2c8053acaca48b2ee602e21dc5a348936c4a",
+    "yejun/analysis/press_rubric_review/cycle2/round4/judge_04_field.md": "df3cc9ad40a0f9b357639ec8e5fdb7d2b1b0f08739aad2daec4a6d3bf6153aa2",
+    "yejun/analysis/press_rubric_review/cycle2/round4/judge_05_originality.md": "0c890d92a824cf0711b58c374fda6857186916b2ef7ea84f5a93cbe2b4afccbb",
+    "yejun/analysis/press_rubric_review/cycle2/round4/judge_06_repro.md": "a802e7774bd46856559d13b6d1d6b879894ca5b34fc37a31ed79be2b8d75d9e0"
+  },
+  "product_snapshot": "final_product_snapshot_check.json"
+}

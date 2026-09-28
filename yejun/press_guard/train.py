@@ -81,7 +81,7 @@ def test_prediction_file(pn, pa):
     return both[["subset", "label"] + [c for c in both.columns if c not in ("subset", "label")]]
 
 
-def combine_streams(pn, pa):
+def combine_streams(pn, pa, return_predictions=False):
     """정상 평가와 이상을 한 흐름으로 이어 대기열 순위를 한 번에 매긴다(구간·행 번호가 겹치지 않게 옮긴다)."""
     shifted = pa.copy()
     shifted["record_id"] += int(pn.record_id.max()) + 1
@@ -95,7 +95,7 @@ def combine_streams(pn, pa):
     if len(queue):
         queue.insert(0, "source", np.where(queue.record_id > pn.record_id.max(), "abnormal", "normal"))
         queue.loc[queue.source.eq("abnormal"), "record_id"] -= int(pn.record_id.max()) + 1
-    return queue
+    return (queue, both) if return_predictions else queue
 
 
 def evaluate_pair(model, calibration, normal, abnormal, sid, out=None, oof_lr=None):
@@ -111,10 +111,10 @@ def evaluate_pair(model, calibration, normal, abnormal, sid, out=None, oof_lr=No
             pn.to_csv(out/f"predictions_normal_{sid}.csv",index=False)
             pa.to_csv(out/f"predictions_abnormal_{sid}.csv",index=False)
             test_prediction_file(pn, pa).to_csv(out/f"test_predictions_{sid}.csv",index=False)
-            queue = combine_streams(pn, pa)
+            queue, combined = combine_streams(pn, pa, return_predictions=True)
             queue.to_csv(out/f"cases_{sid}.csv",index=False)
             # 사건 대기열: 정상 평가 뒤에 이상 기록을 이어 붙인 한 흐름(두 날 사이 공백이 60초를 넘어 서로 다른 사건이 된다)
-            incident_queue = incidents(queue)
+            incident_queue = incidents(queue, combined)
             if len(incident_queue):
                 incident_queue.insert(1, "source", incident_queue.case_uids.map(lambda u: "abnormal" if int(str(u).split("+")[0]) >= len(pn) else "normal"))
             incident_queue.to_csv(out/f"incidents_{sid}.csv",index=False)
