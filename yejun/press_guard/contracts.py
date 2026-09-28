@@ -6,7 +6,7 @@ from model import D, HERE, GuardModel, VERSION
 
 CODE_FILES = ("model.py", "probability.py", "insights.py", "monitor.py", "simulate.py", "runtime.py", "train.py", "predict.py", "recalibrate.py", "analyze.py",
               "audit.py", "verify.py", "contracts.py", "serve.py", "benchmark.py", "tools/clean_repro.sh", "web/app.js", "web/index.html", "web/style.css")
-TRAIN_TABLES = ("metrics.csv", "rolling.csv", "cases_A.csv", "cases_B.csv")
+TRAIN_TABLES = ("metrics.csv", "rolling.csv", "cases_A.csv", "cases_B.csv", "incidents_A.csv", "incidents_B.csv")
 PREDICTIONS = tuple(f"predictions_{kind}_{sid}.csv" for kind in ("normal", "abnormal") for sid in ("A", "B")) + ("test_predictions_A.csv", "test_predictions_B.csv")
 ANALYSIS_TABLES = ("model_comparison_v2.csv", "robustness_v2.csv", "sensitivity_v2.csv", "ablation_v2.csv", "error_conditions_v2.csv",
                    "error_conditions_segments_v2.csv", "interaction_2x2_v2.csv", "records_first_alarm_v2.csv", "uncertainty_v2.csv", "workload_v2.csv",
@@ -17,11 +17,11 @@ INSIGHT_TABLES = ("probability_eval_v2.csv", "probability_reliability_v2.csv", "
                   "sensor_importance_v2.csv", "position_vibration_misses_v2.csv", "coupling_fit_v2.csv", "coupling_records_v2.csv",
                   "fp_events_v2.csv", "near_miss_v2.csv", "near_miss_corr_v2.csv", "error_conditions_stats_v2.csv",
                   "alert_levels_injection_v2.csv", "quality_windows_v2.csv", "label_free_alert_probability_v2.csv", "monitor_gain_v2.csv",
-                  "expected_effect_v2.csv", "error_condition_summary_v2.csv")
-INSIGHT_FILES = list(INSIGHT_TABLES) + ["fig_sensor_importance_v2.png", "fig_coupling_v2.png", "fig_false_alarm_cases_v2.png", "fig_probability_reliability_v2.png"]
+                  "expected_effect_v2.csv", "fp_intensity_v2.csv", "fn_intensity_v2.csv", "error_condition_summary_v2.csv", "incident_summary_v2.csv")
+INSIGHT_FILES = list(INSIGHT_TABLES) + ["fig_sensor_importance_v2.png", "fig_coupling_v2.png", "fig_false_alarm_cases_v2.png", "fig_probability_reliability_v2.png", "fig_position_vibration_v2.png"]
 ANALYSIS_FILES = ANALYSIS_TABLES + INSIGHT_TABLES + ("analysis_summary.json", "model_comparison_v2.md", "fig_recall_by_position_v2.png",
                                     "fig_first_alarm_v2.png", "fig_missed_example_v2.png", "fig_sensor_importance_v2.png", "fig_coupling_v2.png",
-                                    "fig_false_alarm_cases_v2.png", "fig_probability_reliability_v2.png")
+                                    "fig_false_alarm_cases_v2.png", "fig_probability_reliability_v2.png", "fig_position_vibration_v2.png")
 MODEL_ARTIFACTS = ("guard_A.json", "guard_B.json")
 PROBABILITY_ARTIFACTS = ("probability_A.json", "probability_B.json")   # 경보와 무관한 이상 확률 층
 ARTIFACTS = MODEL_ARTIFACTS + PROBABILITY_ARTIFACTS

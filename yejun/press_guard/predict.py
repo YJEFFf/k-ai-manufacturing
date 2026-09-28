@@ -13,7 +13,7 @@ import json
 
 import pandas as pd
 
-from model import StreamDetector, cases, D, HERE, load_bundle
+from model import StreamDetector, cases, incidents, timing_warning, D, HERE, load_bundle
 import runtime
 
 
@@ -68,7 +68,10 @@ def main():
     if args.cases:
         args.cases.parent.mkdir(parents=True, exist_ok=True)
         queue.to_csv(args.cases, index=False)
-    print(f"{len(result)}행 처리, 점검 대기 {len(queue)}건 → {args.out}")
+    warn = timing_warning(result) if len(result) else ""
+    if warn:
+        print("경고: " + warn)
+    print(f"{len(result)}행 처리, 사건 {len(incidents(queue)) if len(queue) else 0}개(건 {len(queue)}) → {args.out}")
     return 0
 
 

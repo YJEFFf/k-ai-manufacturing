@@ -38,6 +38,20 @@ EXTERNAL_CHECKS = ["tools/clean_repro.sh --with-lstm (캐시 사용 깨끗한 �
 MAIN_ALPHA = 0.01
 
 
+def portable(value):
+    """실행 기록용 경로: 패키지 상위(yejun/) 안의 절대 경로는 상대 경로로 적는다(다른 기기·제출 묶음에서 개발 기기 경로가 남지 않게)."""
+    if isinstance(value, dict):
+        return {k: portable(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [portable(v) for v in value]
+    if isinstance(value, (str, Path)):
+        text = str(value)
+        base = str(D.PACKAGE_DIR.parent)
+        if text.startswith(base):
+            return str(Path(text).relative_to(D.PACKAGE_DIR.parent))
+    return value
+
+
 def git_commit() -> str | None:
     try:
         return subprocess.run(["git", "rev-parse", "--short", "HEAD"], capture_output=True, text=True, check=True,
@@ -327,8 +341,8 @@ def main(argv=None):
     checks["required_checks_failed"] = failed
     D.dump_json(checks, out / "checks.json")   # manifest보다 먼저 써서 해시에 포함한다
     manifest = dict(protocol_version=D.PROTOCOL_VERSION, git_commit=git_commit(), code_sha256=code_hash, run_id=run_id, execution_sha256=identity, torch=torch_version,
-                    args={k: str(v) for k, v in vars(args).items()}, environment=env, omp_num_threads=os.environ.get("OMP_NUM_THREADS"),
-                    inputs=ctx["load_report"], timings_s=timings,
+                    args={k: portable(str(v)) for k, v in vars(args).items()}, environment=env, omp_num_threads=os.environ.get("OMP_NUM_THREADS"),
+                    inputs=portable(ctx["load_report"]), timings_s=timings,
                     outputs={name: D.sha256_file(out / name) for name in sorted(output_names(args.steps) | {"checks.json"}) if (out / name).is_file()},
                     artifacts={name: D.sha256_file(art_dir / name) for name in sorted(artifact_names(args.steps)) if (art_dir / name).is_file()})
     D.dump_json(manifest, out / "manifest.json")

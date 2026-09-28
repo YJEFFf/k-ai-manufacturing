@@ -21,12 +21,20 @@ def test_stream_alerts_equal_batch(stream_frame):
     model = load_bundle(HERE / "artifacts" / "guard_B.json")
     log = simulate.run(stream_frame, model, .01, chunk=1)
     batch = model.predict(stream_frame, .01)
-    first = batch.index[batch.notification.eq(1)].tolist()
-    esc = batch.index[batch.escalation.eq(1)].tolist()
-    assert log[log.kind.eq("첫 알림")].row_id.tolist() == first
-    assert log[log.kind.eq("격상")].row_id.tolist() == esc
-    assert (log[log.kind.eq("격상")].level == 2).all() and (log[log.kind.eq("첫 알림")].level == 1).all()
-    assert len(first) >= 2 and len(esc) >= 1
+    assert log[log.kind.eq("사건 시작")].row_id.tolist() == batch.index[batch.incident_notification.eq(1)].tolist()
+    assert log[log.kind.eq("격상")].row_id.tolist() == batch.index[batch.incident_escalation.eq(1)].tolist()
+    assert log[log.kind.eq("근거 추가")].row_id.tolist() == batch.index[batch.incident_update.eq(1)].tolist()
+    assert (log[log.kind.eq("격상")].level == 2).all() and (log[log.kind.eq("사건 시작")].level == 1).all()
+    assert log[log.kind.eq("근거 추가")].notify.eq(0).all()
+
+
+def test_abnormal_minutes_are_one_incident():
+    """평가관 04 R2-03: 대회 이상 21기록(2.76분)은 사건 1개, 알림 2건(사건 시작·격상)이다. 구간 단위 알림은 그대로 21건이다."""
+    _, abnormal, _ = D.load()
+    model = load_bundle(HERE / "artifacts" / "guard_B.json")
+    log = simulate.run(D.inputs_only(abnormal), model, .01, chunk=64)
+    assert log[log.notify.eq(1)].kind.tolist() == ["사건 시작", "격상"] and log.incident_id.nunique() == 1
+    assert model.predict(abnormal, .01).notification.sum() == 21
 
 
 def test_false_alarm_then_anomaly_escalates(stream_frame):
@@ -44,7 +52,8 @@ def test_false_alarm_then_anomaly_escalates(stream_frame):
     log = simulate.run(joined, model, .01, chunk=7)
     p = model.predict(joined, .01)
     assert p.record_id.nunique() == 1
-    assert log.kind.tolist().count("격상") >= 1 and log[log.kind.eq("격상")].row_id.iloc[0] >= len(fa) - 1
+    assert log.kind.tolist().count("격상") == 1 and log[log.kind.eq("격상")].row_id.iloc[0] >= len(fa) - 1
+    assert log.kind.tolist().count("사건 시작") == 1                      # 오경보 1행과 이어진 이상은 같은 사건
     assert (p.alert_level.iloc[len(fa):] == 2).any()
 
 

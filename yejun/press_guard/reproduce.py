@@ -1,7 +1,8 @@
 """한 명령 재현: 입력 확인 → v1 선행 → v2 학습·분석·실행 검증·동결값 비교 → 분석 패키지 재생성·검증 → 요약.
 
     python yejun/press_guard/reproduce.py                 # 기본(빠른 경로): torch 없이 최종 모델 전체 + 분석 패키지. 약 10분
-    python yejun/press_guard/reproduce.py --full          # 전체: v1 1~5단계(LSTM, torch 필요)·후보 비교·보완 실험 E1~E3 재실행까지. 약 25분
+    python yejun/press_guard/reproduce.py --full          # 전체: v1 1~5단계(LSTM, torch 필요)·후보 비교·보완 실험 E1~E3 재실행까지.
+                                                          #   LSTM 캐시가 있으면 약 25분, 새 사본(LSTM 처음부터 학습)은 약 63분
     python yejun/press_guard/reproduce.py --data "Dataset_소성가공 예지보전 AI 데이터셋.zip"   # 주최 측 ZIP(또는 두 CSV가 든 폴더)을 먼저 배치
     python yejun/press_guard/reproduce.py --tests         # 끝에 pytest·웹 회귀 시험까지
 
@@ -84,7 +85,7 @@ def main(argv=None):
         except ImportError:
             raise SystemExit("--full은 v1 LSTM 비교를 다시 만들어 torch가 필요하다(pip install -r yejun/press_guard/requirements-lstm.txt). 빠른 경로는 torch 없이 돈다.")
     env = {**os.environ, "PYTHONDONTWRITEBYTECODE": "1", "OMP_NUM_THREADS": os.environ.get("OMP_NUM_THREADS", "1"),
-           "PRESS_THREADS": os.environ.get("PRESS_THREADS", "1")}
+           "PRESS_THREADS": os.environ.get("PRESS_THREADS", "1"), "PYTHONIOENCODING": "utf-8"}   # 단계 로그를 UTF-8로 받는다(CP949 콘솔)
     log_dir = HERE / "outputs" / "reproduce_logs"
     log_dir.mkdir(parents=True, exist_ok=True)
     results, start = [], time.monotonic()

@@ -1,0 +1,9 @@
+# 줄바꿈 고정: Windows Git(core.autocrlf=true)으로 받아도 작업 트리가 LF라 동결값·실행 기록의 바이트 해시가 같다.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.pdf binary
+*.zip binary
+*.npz binary
+*.xlsx binary
+*.pptx binary

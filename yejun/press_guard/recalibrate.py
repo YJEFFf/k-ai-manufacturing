@@ -33,7 +33,7 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
-from model import GuardModel, D, ALPHAS, ALERT_UNIT_ROWS, alert_units, layout
+from model import GuardModel, D, ALPHAS, ALERT_UNIT_ROWS, TIME_TOL_S, SHORT_RECORD_WARN, alert_units, layout
 from monitor import alert_limit, exclude_unconfirmed, budget_design
 import runtime
 
@@ -122,7 +122,7 @@ def acceptance(model, holdout, alpha, n_cal):
         enough = n_eligible >= MIN_INJECTION_UNITS
         checks.append(dict(name=f"고장 주입 {family} {level:g} 2초 안 탐지율 ≥ {DETECT_RATE:.0%}", value=rate, units=n_eligible,
                            limit=DETECT_RATE, ok=bool(enough and rate >= DETECT_RATE),
-                           note="" if enough else f"30행 이상 단위가 {n_eligible}개라 판정 불가(최소 {MIN_INJECTION_UNITS}개)"))
+                           note="" if enough else f"30행 이상 단위가 {n_eligible}개라 판정 불가(최소 {MIN_INJECTION_UNITS}개). 기록이 짧으면 수집 시각 간격을 확인한다"))
     return checks
 
 
@@ -149,7 +149,17 @@ def main(argv=None):
         excluded = None
         if args.outcomes:
             frame, excluded = exclude_unconfirmed(frame, pd.read_csv(args.outcomes))
-        parts, total, n_train = split_units(frame, args.cal_units, args.holdout_units)
+        status, seg0 = layout(frame)
+        ok_rows = int((status == "ok").sum())
+        mean_len = ok_rows / max(len(np.unique(seg0[status == "ok"])), 1)
+        timing = (f" 수집 시각 간격 확인: 평균 기록 길이 {mean_len:.1f}행(0.1초 ± {TIME_TOL_S * 1000:.0f} ms 밖의 간격은 기록 경계가 된다)"
+                  if ok_rows >= 50 and mean_len < SHORT_RECORD_WARN else "")
+        if timing:
+            print("경고:" + timing, file=sys.stderr)
+        try:
+            parts, total, n_train = split_units(frame, args.cal_units, args.holdout_units)
+        except ValueError as exc:
+            raise ValueError(str(exc) + timing) from None
     except (ValueError, KeyError, OSError, pd.errors.ParserError) as exc:
         print(f"재보정 중단: {exc}", file=sys.stderr)
         return 2

@@ -3,7 +3,7 @@
 - 스레드: BLAS·OpenMP 스레드를 1개로 고정한다(PRESS_THREADS로 바꿀 수 있다). 결과는 스레드 수와 무관하게 같았지만
   (루브릭 검수 R24·평가관 06), 여러 작업이 동시에 돌 때 과다 구독으로 4~5배 느려진다.
 - 표준출력: 한국어 Windows(CP949) 콘솔에서 쓸 수 없는 기호는 바꿔 써서 멈추지 않게 한다. 파일 입출력은 모두 UTF-8이다.
-- 파이썬: 3.10~3.12에서 실행·검증했다. 3.13 이상은 고정한 numpy 1.26.4 휠이 없어 설치되지 않는다.
+- 파이썬: 3.11~3.12에서 실행·검증했다. 3.10은 scikit-learn 1.8.0·contourpy 1.3.3이 설치되지 않고, 3.13 이상은 numpy 1.26.4 휠이 없다.
 """
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ import sys
 import zipfile
 from pathlib import Path
 
-SUPPORTED = ((3, 10), (3, 12))
+SUPPORTED = ((3, 11), (3, 12))
 _LIMITS = None
 
 
@@ -38,8 +38,8 @@ def setup(threads=None):
 def check_python():
     v = sys.version_info[:2]
     if not SUPPORTED[0] <= v <= SUPPORTED[1]:
-        raise SystemExit(f"파이썬 {platform.python_version()}: 이 패키지는 3.10~3.12에서 실행·검증했다(권장 3.12, environment.yml). "
-                         "3.13 이상은 고정한 numpy 1.26.4 설치 파일이 없다.")
+        raise SystemExit(f"파이썬 {platform.python_version()}: 이 패키지는 3.11~3.12에서 실행·검증했다(권장 3.12, environment.yml). "
+                         "3.10은 scikit-learn 1.8.0이, 3.13 이상은 numpy 1.26.4가 설치되지 않는다. conda env create -f yejun/press_guard/environment.yml")
 
 
 def peak_rss_mb():

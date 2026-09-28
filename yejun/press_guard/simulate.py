@@ -5,9 +5,10 @@
 
 - --speed 1은 수집 속도(0.1초에 1행), 10은 10배속, 0은 기다리지 않고 처리한다. 행이 들어온 뒤 알림을 내기까지의 계산 시간도 기록한다.
 - 설비 제어 명령을 보내지 않는다. 알림 전달(화면·경광등·메신저·CMMS 작업 요청)은 run(on_alert=...) 콜백으로 붙인다.
-  구성은 outputs/fig_architecture_v2.png, 운영 절차는 OPERATIONS.md에 있다.
+  구성은 docs/fig_architecture.png, 운영 절차는 OPERATIONS.md에 있다.
+- 알림은 사건 단위다: 경보가 이어진 알림 단위(공백 60초 이하)가 한 사건이고, 사건마다 1단계(사건 시작)와 2단계(격상)를 한 번씩 알린다.
 - 알림 행·단계는 같은 CSV를 한 번에 분석(GuardModel.predict)한 결과와 같다(test_simulate.py). 수집 오류 행은 "수집 상태 확인"으로
-  기록하고 판정하지 않는다.
+  기록하고 판정하지 않는다. 평균 기록 길이가 5행보다 짧으면 수집 시각 간격 경고를 낸다.
 """
 from pathlib import Path
 import argparse
@@ -16,12 +17,13 @@ import time
 
 import pandas as pd
 
-from model import StreamDetector, LEVEL_NAMES, D, HERE, ALPHAS, load_bundle
+from model import StreamDetector, LEVEL_NAMES, D, HERE, ALPHAS, load_bundle, timing_warning
 import runtime
 
 
 def run(frame, model, alpha=.01, prior=None, chunk=1, speed=0.0, on_alert=None, clock=time.perf_counter, sleep=time.sleep):
-    """frame을 chunk행씩 흘려 넣는다. 알림(첫 알림·격상)과 수집 오류 시작을 사건 표로 돌려준다."""
+    """frame을 chunk행씩 흘려 넣는다. 사건 단위 알림(사건 시작 = 1단계, 격상 = 2단계)과 근거 추가(갱신, 알림 아님),
+    수집 오류 시작을 사건 표로 돌려준다. notify=1인 행이 실제로 사람에게 보내는 알림이다."""
     stream = StreamDetector(model, alpha, prior)
     events, start, invalid_open = [], clock(), False
     for i in range(0, len(frame), chunk):
@@ -30,27 +32,28 @@ def run(frame, model, alpha=.01, prior=None, chunk=1, speed=0.0, on_alert=None, 
         res = stream.push(part)
         compute_ms = (clock() - t_in) * 1000
         for r in res.itertuples():
-            kind = None
             if r.status != "ok":
-                kind = None if invalid_open else "수집 오류"
+                kind, notify = (None, 0) if invalid_open else ("수집 오류", 1)
                 invalid_open = True
             else:
                 invalid_open = False
-                kind = "첫 알림" if r.notification else ("격상" if r.escalation else None)
+                kind, notify = (("사건 시작", 1) if r.incident_notification else ("격상", 1) if r.incident_escalation else
+                                ("근거 추가", 0) if r.incident_update else (None, 0))
             if kind is None:
                 continue
-            ev = dict(row_id=int(r.row_id), timestamp=r.timestamp, record_id=int(r.record_id), position=int(r.position), kind=kind,
-                      level=int(r.alert_level), level_name=LEVEL_NAMES.get(int(r.alert_level), "수집 상태 확인"),
-                      evidence=r.reason, action=r.action, anomaly_probability=float(r.anomaly_probability), compute_ms=compute_ms)
+            level = 2 if kind == "격상" else (1 if kind == "사건 시작" else int(r.alert_level))
+            ev = dict(row_id=int(r.row_id), timestamp=r.timestamp, incident_id=int(r.incident_id), record_id=int(r.record_id), position=int(r.position),
+                      kind=kind, notify=notify, level=level, level_name=LEVEL_NAMES.get(level, "수집 상태 확인"), evidence=r.reason, action=r.action,
+                      anomaly_probability=float(r.anomaly_probability), compute_ms=compute_ms)
             events.append(ev)
-            if on_alert:
+            if on_alert and notify:
                 on_alert(ev)
         if speed > 0:
             wait = start + (i + len(part)) * D.DT / speed - clock()
             if wait > 0:
                 sleep(wait)
-    return pd.DataFrame(events, columns=["row_id", "timestamp", "record_id", "position", "kind", "level", "level_name", "evidence",
-                                         "action", "anomaly_probability", "compute_ms"])
+    return pd.DataFrame(events, columns=["row_id", "timestamp", "incident_id", "record_id", "position", "kind", "notify", "level", "level_name",
+                                         "evidence", "action", "anomaly_probability", "compute_ms"])
 
 
 def main(argv=None):
@@ -77,7 +80,10 @@ def main(argv=None):
     if args.log:
         log.to_csv(args.log, index=False)
     kinds = log.kind.value_counts().to_dict() if len(log) else {}
-    print(f"{len(frame):,}행 · 첫 알림 {kinds.get('첫 알림', 0)} · 격상 {kinds.get('격상', 0)} · 수집 오류 {kinds.get('수집 오류', 0)} · "
+    warn = timing_warning(model.predict(frame, args.alpha))
+    if warn:
+        print(warn, file=sys.stderr)
+    print(f"{len(frame):,}행 · 사건 {kinds.get('사건 시작', 0)} · 격상 {kinds.get('격상', 0)} · 근거 추가 {kinds.get('근거 추가', 0)} · 수집 오류 {kinds.get('수집 오류', 0)} · "
           f"계산 p95 {log.compute_ms.quantile(.95) if len(log) else float('nan'):.1f} ms · 경과 {time.perf_counter() - t:.1f}초", file=sys.stderr)
     return 0
 

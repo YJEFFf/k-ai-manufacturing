@@ -110,15 +110,19 @@
     "label_free_alert_probability_v2.csv",
     "monitor_gain_v2.csv",
     "expected_effect_v2.csv",
+    "fp_intensity_v2.csv",
+    "fn_intensity_v2.csv",
     "error_condition_summary_v2.csv",
+    "incident_summary_v2.csv",
     "fig_sensor_importance_v2.png",
     "fig_coupling_v2.png",
     "fig_false_alarm_cases_v2.png",
-    "fig_probability_reliability_v2.png"
+    "fig_probability_reliability_v2.png",
+    "fig_position_vibration_v2.png"
   ],
   "external_inputs": {
     "analysis/press_supplement/e1_summary.csv": "ac599f2408e6eb8cf03c51ca8f83ffa34ba4cb11d48a168b23e43195ab980344",
     "analysis/press_dayshift/v2_current_scale.csv": "82b14ccd716bb1dcb54754d6ba613cf41f86107e054908dc0a4e0cbb6d496310"
   },
-  "elapsed_s": 92.0
+  "elapsed_s": 112.7
 }

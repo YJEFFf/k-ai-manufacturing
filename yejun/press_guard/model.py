@@ -35,6 +35,13 @@ LEVEL_NAMES = {1: "주의", 2: "점검 요청"}
 # 의심 생산 시간창의 끝을 찾을 때, 경보 없는 단위가 이보다 멀리 떨어져 있으면 그사이 생산 상태를 모르므로 창을 열어 둔다.
 # 대회 자료의 기록구간 사이 공백은 1.5~16.6초다.
 SUSPECT_MAX_GAP_S = 60.0
+# 사건(incident): 경보가 난 알림 단위가 이어지고 단위 사이 공백이 이 값 이하면 한 사건이다(기록구간을 넘어서도 묶는다).
+# 사건마다 1단계 알림과 2단계 격상 알림을 한 번씩만 낸다. 근거 성분이 늘면 사건 기록만 갱신한다(새 알림 아님).
+INCIDENT_MAX_GAP_S = SUSPECT_MAX_GAP_S
+# 기록 경계: 이웃 행의 시각 간격이 0.1초에서 이 값보다 벗어나면 새 기록구간이다. v1(1 µs)은 대회 자료의 정확한 0.1초 간격에 맞춘 값이라
+# 수집 시각이 1 ms만 흔들려도 기록이 쪼개진다. 대회 자료의 기록 사이 공백은 1.5초 이상이라 20 ms에서도 구간이 같다.
+TIME_TOL_S = 0.02
+SHORT_RECORD_WARN = 5      # 평균 기록 길이가 이보다 짧으면 수집 시각 간격 경고
 QUALITY_ACTIONS = {1: "다음 샘플 검사를 앞당긴다(가설)",
                    2: "의심 시간창에 만든 가공품을 보류하고 전단면·버·치수·평탄도를 전수 확인한다(가설)"}
 ACTIONS = dict(vibration="진동·부하 확인", vibration_and_current="진동·전류 함께 점검",
@@ -110,6 +117,46 @@ def alert_levels(record, block, alarm):
     return level, (alarm & (count == ESCALATION_ALARM_ROWS)).astype(int)
 
 
+class IncidentTracker:
+    """행을 시간 순서대로 넣으면 사건 번호·사건 첫 알림·사건 격상·근거 추가를 돌려준다. 일괄 분석과 스트림이 같은 규칙을 쓴다."""
+
+    def __init__(self):
+        self.unit = None; self.unit_alarmed = False; self.unit_start = None
+        self.prev_alarmed = False; self.prev_end = None; self.last_time = None
+        self.open = False; self.incident = 0; self.count = 0; self.components = set()   # 사건 번호는 1부터
+
+    def update(self, record, block, alarm, reason, time):
+        t = time if time is not None and not pd.isna(time) else self.last_time
+        if (record, block) != self.unit:
+            self.prev_alarmed, self.prev_end = self.unit_alarmed, self.last_time
+            self.unit, self.unit_alarmed, self.unit_start = (record, block), False, t
+        self.last_time = t
+        if not alarm:
+            return 0, 0, 0, 0
+        first_in_unit = not self.unit_alarmed
+        self.unit_alarmed = True
+        if first_in_unit:
+            gap = (self.unit_start - self.prev_end).total_seconds() if self.prev_end is not None and self.unit_start is not None else np.inf
+            if not (self.open and self.prev_alarmed and gap <= INCIDENT_MAX_GAP_S):
+                self.incident += 1; self.open = True; self.count = 0; self.components = set()
+        self.count += 1
+        notify = int(self.count == 1)
+        escalate = int(self.count == ESCALATION_ALARM_ROWS)
+        new = set(filter(None, str(reason).split("+"))) - self.components
+        update = int(bool(new) and self.count > 1 and bool(self.components))
+        self.components |= new
+        return self.incident, notify, escalate, update
+
+
+def incident_columns(record, block, alarm, reason, time):
+    """일괄 분석용: 행마다 (사건 번호, 사건 첫 알림, 사건 격상, 근거 추가). 경보 없는 단위가 끼면 사건이 닫힌다."""
+    tr = IncidentTracker()
+    out = np.zeros((len(alarm), 4), dtype=int)
+    for i, (r, b, a, why, t) in enumerate(zip(record, block, alarm, reason, time)):
+        out[i] = tr.update(r, b, bool(a), why, t)
+    return out
+
+
 def record_running_max(values, record):
     """기록구간 안에서 지금까지의 최댓값(결측은 직전 값 유지). 기록구간 확률용."""
     v = pd.Series(np.asarray(values, float))
@@ -127,7 +174,7 @@ def layout(frame):
     status[~np.isfinite(values).all(axis=1)] = "bad_value"
     status[timestamp.isna().to_numpy()] = "bad_timestamp"
     bad = status != "ok"
-    boundary = timestamp.diff().dt.total_seconds().sub(D.DT).abs().gt(D.GAP_TOL).to_numpy() | bad
+    boundary = timestamp.diff().dt.total_seconds().sub(D.DT).abs().gt(TIME_TOL_S).to_numpy() | bad
     boundary[1:] |= bad[:-1]
     if len(boundary): boundary[0] = False
     return status,np.cumsum(boundary)
@@ -235,7 +282,8 @@ class GuardModel:
             return pd.DataFrame(columns=["row_id","record_id","timestamp","status","position","score","p_value","alarm","notification","reason","action",
                                          "is_scored","anomaly_score","criterion","model_id","protocol_version","alert_unit","beyond_calibration_length",
                                          "alert_level","escalation","likelihood_ratio","anomaly_probability","probability_prior",
-                                         "record_likelihood_ratio","record_probability"])
+                                         "record_likelihood_ratio","record_probability","incident_id","incident_notification",
+                                         "incident_escalation","incident_update"])
         pos, _ = D.segment_positions(seg)
         clean = D.inputs_only(frame)
         for c in D.SENSORS:
@@ -270,6 +318,9 @@ class GuardModel:
         out["beyond_calibration_length"] = (pos >= ALERT_UNIT_ROWS).astype(int)   # 대회 보정 기록구간(최대 50행)보다 긴 연속 입력
         out["notification"] = first_alerts(seg, out.alert_unit, alarm)
         out["alert_level"], out["escalation"] = alert_levels(seg, out.alert_unit, alarm)
+        times = pd.to_datetime(out.timestamp, format="mixed", utc=True, errors="coerce")
+        inc = incident_columns(seg, out.alert_unit.to_numpy(), alarm, out.reason.to_numpy(), times)
+        out["incident_id"], out["incident_notification"], out["incident_escalation"], out["incident_update"] = inc.T
         # 이상 확률: 경보와 무관한 별도 층. 보정기가 없으면 결측. LR은 사전 비율과 무관하고 확률은 prior에 조건부다.
         lr = self.probability.likelihood_ratio(comp["score"]) if self.probability is not None else np.full(len(frame), np.nan)
         out["likelihood_ratio"] = lr
@@ -329,6 +380,7 @@ class StreamDetector:
         self.alerted_blocks = set()
         self.episode_alarms = 0       # 현재 건의 누적 경보 행(격상 판단)
         self.record_lr = np.nan       # 현재 기록구간의 지금까지 최대 우도비
+        self.incidents = IncidentTracker()   # 기록구간을 넘는 사건 묶음(스트림 전체에서 이어진다)
 
     def push(self, frame):
         from probability import posterior
@@ -350,8 +402,9 @@ class StreamDetector:
         result["beyond_calibration_length"] = (positions >= ALERT_UNIT_ROWS).astype(int)
         result = result.iloc[n_old:].copy().reset_index(drop=True)
         result["row_id"] = np.arange(self.rows_seen,self.rows_seen+len(incoming))
-        notifications, levels, escalations, record_lr = [], [], [], []
-        for r in result.itertuples():
+        notifications, levels, escalations, record_lr, inc = [], [], [], [], []
+        times = pd.to_datetime(result.timestamp, format="mixed", utc=True, errors="coerce")
+        for r, t in zip(result.itertuples(), times):
             if r.record_id != self.alert_record:
                 self.alert_record, self.alerted_blocks, self.record_lr = r.record_id, set(), np.nan
             self.record_lr = np.fmax(self.record_lr, r.likelihood_ratio)
@@ -366,8 +419,11 @@ class StreamDetector:
                 escalate = int(self.episode_alarms == ESCALATION_ALARM_ROWS)
                 self.alerted_blocks = {b for b in self.alerted_blocks if b >= r.alert_unit - 1} | {r.alert_unit}
             notifications.append(int(notify)); levels.append(level); escalations.append(escalate)
+            inc.append(self.incidents.update(r.record_id, r.alert_unit, bool(r.alarm), r.reason, t))
         result["notification"], result["alert_level"], result["escalation"] = notifications, levels, escalations
         result["record_likelihood_ratio"] = record_lr
+        inc = np.asarray(inc, dtype=int).reshape(-1, 4)
+        result["incident_id"], result["incident_notification"], result["incident_escalation"], result["incident_update"] = inc.T
         result["record_probability"] = posterior(np.asarray(record_lr, float), result.probability_prior.to_numpy(float))
         self.rows_seen += len(incoming)
         self.tail = both.iloc[-7:].copy().reset_index(drop=True)
@@ -433,7 +489,9 @@ def cases(predictions):
             start = pd.NaT          # 앞 정상 기록이 너무 멀다(수집 공백): 시작을 모른다
         if pd.notna(end) and (end - ep_end).total_seconds() > SUSPECT_MAX_GAP_S:
             end = pd.NaT
-        result.append(dict(record_id=int(first.record_id), first_row=int(first.row_id), first_timestamp=first.timestamp,
+        result.append(dict(case_uid=int(first.row_id), incident_id=int(first.incident_id) if "incident_id" in first else 0,
+                           row_from=int(group.row_id.min()), row_to=int(group.row_id.max()),
+                           record_id=int(first.record_id), first_row=int(first.row_id), first_timestamp=first.timestamp,
                            first_alarm_position=int(first.position), detection_delay_s=float(first.position*D.DT),
                            alarm_rows=len(flagged), observed_rows=len(group), peak_score=float(flagged.score.max()),
                            min_p=float(flagged.p_value.min()), evidence="+".join(reasons),
@@ -454,3 +512,42 @@ def cases(predictions):
     queue = pd.DataFrame(result)
     queue["priority_rank"] = priority_ranks(queue)
     return queue
+
+
+def incidents(queue, predictions=None):
+    """사건 대기열: 건(case)을 사건 번호로 묶는다. 사건마다 1·2단계 알림은 한 번씩이다. 순위는 건과 같은 규칙(이상 라벨 없이 정함).
+    predictions를 주면 사건 격상 행(escalation_row)을 붙인다."""
+    if not len(queue) or "incident_id" not in queue:
+        return pd.DataFrame()
+    esc = {}
+    if predictions is not None and "incident_escalation" in predictions:
+        e = predictions[predictions.incident_escalation.eq(1)]
+        esc = dict(zip(e.incident_id.astype(int), e.row_id.astype(int)))
+    rows = []
+    for inc, g in queue.sort_values("first_row").groupby("incident_id", sort=True):
+        ev = sorted(set("+".join(g.evidence).split("+")) - {""})
+        level = int(g.level.max())
+        opened = int(g.suspect_open.max())
+        rows.append(dict(incident_id=int(inc), first_row=int(g.first_row.min()), first_timestamp=g.first_timestamp.iloc[0], last_case_timestamp=g.first_timestamp.iloc[-1],
+                         cases=len(g), case_uids="+".join(map(str, g.case_uid)), records="+".join(map(str, g.record_id)), level=level, level_name=LEVEL_NAMES[level],
+                         evidence="+".join(ev), evidence_count=len(ev), alarm_rows=int(g.alarm_rows.sum()), observed_rows=int(g.observed_rows.sum()),
+                         alarm_share=float(g.alarm_rows.sum() / g.observed_rows.sum()), peak_score=float(g.peak_score.max()),
+                         max_probability=float(g.max_probability.max()) if g.max_probability.notna().any() else np.nan,
+                         max_likelihood_ratio=float(g.max_likelihood_ratio.max()) if g.max_likelihood_ratio.notna().any() else np.nan,
+                         suspect_from=g.suspect_from.iloc[0], suspect_to=g.suspect_to.iloc[-1], suspect_open=opened, quality_action=QUALITY_ACTIONS[level],
+                         action=g.sort_values("priority_rank").action.iloc[0], escalation_row=esc.get(int(inc), np.nan)))
+    out = pd.DataFrame(rows)
+    out["priority_rank"] = priority_ranks(out)
+    return out
+
+
+def timing_warning(predictions):
+    """수집 시각 간격 점검: 평균 기록 길이가 SHORT_RECORD_WARN행보다 짧으면 시각 흔들림·간격 문제로 기록이 쪼개졌을 수 있다."""
+    ok = predictions[predictions.status.eq("ok")] if len(predictions) else predictions
+    if len(ok) < 50:
+        return ""
+    mean_len = len(ok) / max(ok.record_id.nunique(), 1)
+    if mean_len >= SHORT_RECORD_WARN:
+        return ""
+    return (f"수집 시각 간격 확인: 평균 기록 길이 {mean_len:.1f}행. 이웃 행 간격이 0.1초 ± {TIME_TOL_S * 1000:.0f} ms를 벗어나면 기록이 쪼개져 "
+            "파형·예측 오차 성분을 계산하지 못한다(미탐 증가).")

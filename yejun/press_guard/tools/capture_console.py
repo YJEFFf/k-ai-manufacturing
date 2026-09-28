@@ -88,7 +88,7 @@ def main():
                 if not target.exists():
                     raise SystemExit(f"{name}: 캡처 실패")
             print(f"{name}: {target.stat().st_size:,} bytes", flush=True)
-        version = subprocess.run([chrome, "--version"], capture_output=True, text=True).stdout.strip()
+        version = subprocess.run([chrome, "--version"], capture_output=True, text=True, encoding="utf-8", errors="replace").stdout.strip()
         record = dict(chrome=version, shots={n: dict(url=p, size=list(s), sha256=sha(OUT / n)) for n, p, s in SHOTS},
                       web_code_sha256={f: sha(HERE / "web" / f) for f in ("index.html", "app.js", "style.css")},
                       serve_sha256=sha(HERE / "serve.py"), model_sha256=sha(HERE / "model.py"),

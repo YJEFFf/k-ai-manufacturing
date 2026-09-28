@@ -8,8 +8,11 @@
    정상 기준 자료를 60구간 블록으로 나눈 블록 중앙값 비의 범위 위로 벗어나면 "상승 이동"이다. 대회 정상 하루 안에서도
    10분 블록 전류가 0.85~1.29배 오르내리므로 좁은 한계를 두지 않는다. 그래서 몇 % 수준의 이동은 잡지 못한다.
    범위 아래(저부하)는 참고로만 적는다. 대회에서 가장 조용한 시간대(A 평가 구간)는 알림이 늘지 않았다.
-3) 재보정 검토: 한 창이 99백분위를 넘거나, 95백분위 초과 또는 상승 이동이 연속 2개 창에서 나면 "재보정 검토"다.
-   자동으로 재보정하지 않는다.
+3) 조치 분기: 한 창이 99백분위를 넘거나, 95백분위 초과 또는 상승 이동이 연속 2개 창에서 나면 조치 대상이다.
+   - 운전 조건 변경 기록(작업자 입력: 금형·가압력·생산품 변경)이 그 창에 있거나 전류 수준이 상승 이동했으면 "재보정 검토"
+     (정상 운전변화일 가능성).
+   - 변경 기록도 수준 이동도 없으면 "설비 점검 요청(열화 의심)". 점검 결과가 "정상 확인"일 때만 그 기간을 재보정 자료로 쓴다.
+   자동으로 재보정하지 않는다. 창의 알림 근거 구성(진동 크기·전류 성분 경보 행 비율)을 함께 적는다.
 4) 결과 기록: 대기열에 확인 시각·담당·결과·조치·상태 열을 둔다. 결과가 "정상 확인"인 건만 정상으로 닫힌다.
    재보정(recalibrate.py --outcomes)은 정상 확인으로 닫히지 않은 건의 의심 시간창을 자료에서 뺀다.
 """
@@ -73,14 +76,26 @@ class Reference:
         return dict(median=self.median, band_low=self.band_low, band_high=self.band_high, blocks=self.blocks)
 
 
-def monitor_windows(predictions, frame, alpha, n_cal, reference, window_units=60):
-    """감시 창별 알림 단위 수·한계·초과, 1·2단계 알림 수, 전류 수준 비·이동, 재보정 검토 여부."""
+ACTION_RECALIBRATE = "재보정 검토(운전 조건 변경·수준 이동)"
+ACTION_INSPECT = "설비 점검 요청(열화 의심)"
+
+
+def monitor_windows(predictions, frame, alpha, n_cal, reference, window_units=60, operating_changes=()):
+    """감시 창별 알림 단위 수·한계·초과, 1·2단계 알림 수, 근거 구성, 전류 수준 비·이동, 권장 조치.
+    operating_changes: 운전 조건 변경 시각 목록(작업자 입력). 창의 시간 범위에 있으면 그 창의 초과를 운전변화로 본다."""
     p = predictions
     block = p.alert_unit.to_numpy() if "alert_unit" in p else p.position.to_numpy() // ALERT_UNIT_ROWS
     unit = alert_units(p.record_id.to_numpy(), np.asarray(block) * ALERT_UNIT_ROWS)
+    reason = p.reason.astype(str) if "reason" in p else pd.Series("", index=p.index)
+    alarm_rows = p.alarm.to_numpy() == 1
     per_unit = pd.DataFrame(dict(unit=unit, record=p.record_id.to_numpy(), alarm=p.alarm.to_numpy(), note=p.notification.to_numpy(),
-                                 esc=p.escalation.to_numpy() if "escalation" in p else 0)).groupby("unit").agg(
-        record=("record", "first"), alarm=("alarm", "max"), note=("note", "sum"), esc=("esc", "sum"))
+                                 esc=p.escalation.to_numpy() if "escalation" in p else 0,
+                                 t=pd.to_datetime(p.timestamp, format="mixed", utc=True, errors="coerce"),
+                                 mag=alarm_rows & reason.str.contains("magnitude").to_numpy(),
+                                 cur=alarm_rows & reason.str.contains("waveform|dynamics").to_numpy(), arows=alarm_rows)).groupby("unit").agg(
+        record=("record", "first"), alarm=("alarm", "max"), note=("note", "sum"), esc=("esc", "sum"), t0=("t", "min"), t1=("t", "max"),
+        mag=("mag", "sum"), cur=("cur", "sum"), arows=("arows", "sum"))
+    changes = pd.to_datetime(pd.Series(list(operating_changes), dtype=object), format="mixed", utc=True, errors="coerce").dropna()
     per_unit["window"] = np.arange(len(per_unit)) // window_units
     amp = record_amplitude(frame)
     rows, run_exceed, run_drift = [], 0, 0
@@ -95,7 +110,14 @@ def monitor_windows(predictions, frame, alpha, n_cal, reference, window_units=60
         run_exceed = run_exceed + 1 if exceed else 0
         run_drift = run_drift + 1 if drift_up else 0
         review = exceed99 or run_exceed >= CONSECUTIVE or run_drift >= CONSECUTIVE
-        rows.append(dict(window=int(w), units=m, alerted_units=k, limit95=limit95, limit99=limit99, exceed=bool(exceed), exceed99=bool(exceed99),
+        changed = bool(((changes >= g.t0.min()) & (changes <= g.t1.max())).any()) if len(changes) else False
+        action = "관측 지속" if not review else (ACTION_RECALIBRATE if (changed or run_drift >= 1) else ACTION_INSPECT)
+        n_alarm = int(g.arows.sum())
+        rows.append(dict(window=int(w), start=str(g.t0.min()), end=str(g.t1.max()), units=m, alerted_units=k, limit95=limit95, limit99=limit99,
+                         exceed=bool(exceed), exceed99=bool(exceed99), operating_change=changed,
+                         alarm_rows=n_alarm, share_magnitude=float(g.mag.sum() / n_alarm) if n_alarm else np.nan,
+                         share_current=float(g.cur.sum() / n_alarm) if n_alarm else np.nan, recommended_action=action,
+                         recalibration_data="점검 '정상 확인' 뒤에만 재보정 자료" if action == ACTION_INSPECT else "",
                          level1_notifications=int(g.note.sum()), level2_escalations=int(g.esc.sum()),
                          current_ratio=ratio, band_low=reference.band_low, band_high=reference.band_high, drift_up=drift_up,
                          low_load=bool(np.isfinite(ratio) and ratio < reference.band_low), recalibration_review=bool(review),
@@ -104,13 +126,13 @@ def monitor_windows(predictions, frame, alpha, n_cal, reference, window_units=60
     return pd.DataFrame(rows)
 
 
-def gain_scenarios(model, reference, frame, alpha, gains=(1.0, 1.05, 1.1, 1.2, 1.3, 1.5), window_units=60):
+def gain_scenarios(model, reference, frame, alpha, gains=(1.0, 1.05, 1.1, 1.2, 1.3, 1.5), window_units=60, operating_changes=()):
     """정상 운전변화 모의: 전류 전체에 배율 k를 곱한 정상 평가 자료에서 감시 규칙이 무엇을 내는지(analysis/press_dayshift와 같은 배율)."""
     rows = []
     for k in gains:
         f = D.inputs_only(frame).copy()
         f[D.SENSORS[2]] = pd.to_numeric(f[D.SENSORS[2]], errors="coerce") * k
-        win = monitor_windows(model.predict(f, alpha), f, alpha, len(model.cal), reference, window_units)
+        win = monitor_windows(model.predict(f, alpha), f, alpha, len(model.cal), reference, window_units, operating_changes)
         rows.append(dict(gain=k, windows=len(win), alerted_units=int(win.alerted_units.sum()), units=int(win.units.sum()),
                          alerted_by_window="/".join(map(str, win.alerted_units)), limit95=int(win.limit95.iloc[0]), limit99=int(win.limit99.iloc[0]),
                          windows_exceed=int(win.exceed.sum()), windows_exceed99=int(win.exceed99.sum()), windows_drift_up=int(win.drift_up.sum()),
@@ -154,3 +176,46 @@ def budget_design(frame, alpha, n_cal, target=None):
                    advice=(f"1단계는 화면 기록만 하고 출동은 2단계(점검 요청)로 한정하거나, α≈{a:.3%}에 맞춰 보정 단위 {n_req}개"
                            f"(정상 수집 약 {n_req / uph:.1f}시간)를 모은다. 현재 구현의 α 선택지는 1·3·5%다"))
     return out
+
+
+def main(argv=None):
+    """교대 감시 명령: 한 교대(또는 임의 기간)의 CSV를 저장 모델로 추론해 창별 표를 쓴다."""
+    import argparse
+    import sys
+    from pathlib import Path
+    from model import load_bundle, HERE, ALPHAS, timing_warning
+    import runtime
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--csv", type=Path, required=True, help="감시할 기간의 CSV(TimeStamp, AI0_Vibration, AI1_Vibration, AI2_Current)")
+    ap.add_argument("--split", choices=tuple(D.SPLITS), default="B")
+    ap.add_argument("--model", type=Path, help="모델 JSON(기본 artifacts/guard_<split>.json, 재보정 모델도 가능)")
+    ap.add_argument("--reference", type=Path, help="정상 기준 CSV(학습+보정). 기본은 대회 정상 자료의 해당 분할 학습+보정")
+    ap.add_argument("--alpha", type=float, choices=ALPHAS, default=.01)
+    ap.add_argument("--window", type=int, default=60, help="감시 창의 알림 단위 수")
+    ap.add_argument("--changes", type=Path, help="운전 조건 변경 기록 CSV(열 time)")
+    ap.add_argument("--out", type=Path, help="창별 표 CSV")
+    args = ap.parse_args(argv)
+    runtime.setup()
+    model = load_bundle(args.model or HERE / "artifacts" / f"guard_{args.split}.json")
+    if args.reference:
+        reference = Reference.from_frame(pd.read_csv(args.reference))
+    else:
+        normal, _, _ = D.load()
+        sp = D.split_normal(normal, D.segments(normal), args.split)
+        reference = Reference.from_frame(pd.concat([sp["train"], sp["cal"]], ignore_index=True))
+    frame = pd.read_csv(args.csv)
+    pred = model.predict(frame, args.alpha)
+    changes = pd.read_csv(args.changes).time.tolist() if args.changes else ()
+    win = monitor_windows(pred, frame, args.alpha, len(model.cal), reference, args.window, changes)
+    if args.out:
+        win.to_csv(args.out, index=False)
+    warn = timing_warning(pred)
+    if warn:
+        print(warn, file=sys.stderr)
+    cols = ["window", "units", "alerted_units", "limit95", "limit99", "level1_notifications", "level2_escalations", "current_ratio", "recommended_action"]
+    print(win[cols].to_string(index=False))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

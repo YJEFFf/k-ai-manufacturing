@@ -33,6 +33,16 @@ POS_BINS = [(0, 0, "0"), (1, 1, "1"), (2, 4, "2–4"), (5, 6, "5–6"), (7, 9, "
 LEN_BINS = [(1, 4, "≤4"), (5, 9, "5–9"), (10, 29, "10–29"), (30, 10**9, "≥30")]
 COLOR_V1, COLOR_V2 = "#b07510", "#178cc2"   # dataviz 검증기 통과(색각 이상 분리·대비)
 V1_ALARM = {.01: "alarm", .03: "alarm_conformal_0.03", .05: "alarm_conformal_0.05"}
+# 모델별 입력 조건(비교 공정성: v2와 입력이 다른 기준모델을 구분한다. 같은 특징 대안은 analysis/press_selection)
+INPUT_FEATURES = {
+    "early6_ar2": "v2 세 성분: 센서 크기 max|z| + 전류 사인 1−R²(6→8행 창) + AR(2) 전류 예측 오차",
+    "early_w6_to_w8": "센서 크기 + 전류 사인 1−R²(6→8행 창)", "maxz_ar2": "센서 크기 + AR(2) 전류 예측 오차",
+    "combined_w8": "센서 크기 + 전류 사인 1−R²(8행 창)(v1)", "sine_w8": "전류 사인 1−R²(8행 창)", "ar2_only": "AR(2) 전류 예측 오차",
+    "maxz_3": "센서 3개 z의 max|z|(한 행)", "maxz_vib2": "진동 2개 z의 max|z|(한 행)",
+    "isolation_forest": "센서 3개 z(한 행)", "5nn_distance": "센서 3개 z(한 행)",
+    "mlp_ae_w5": "센서 3개 z 5행 창", "trailing_rms5": "센서 3개 z 5행 창 RMS",
+    "lstm20": "센서 3개 20행 창(LSTM-AE)", "lstm20_plus_maxz": "센서 3개 20행 창(LSTM-AE) + max|z|",
+}
 
 
 def _bin(v, bins):
@@ -52,16 +62,18 @@ def model_comparison(out):
     adv = pd.read_csv(ADVANCE / "metrics.csv"); adv = adv[adv.input_variant.eq("matched")].drop(columns=["input_variant"]); adv["source"] = "v2_candidates"
     adv = adv[~adv.model.eq(BASELINE)]   # baseline_w8은 v1 combined_w8과 같은 점수 함수(수치 동일)라 중복 제외
     both = pd.concat([v1, adv], ignore_index=True, sort=False)
+    both["input_features"] = both.model.map(INPUT_FEATURES).fillna("")
     both["is_final_model"] = both.model.eq(FINAL)
     both["is_main_model"] = both.model.eq("combined_w8")
     both.to_csv(out / "model_comparison_v2.csv", index=False)
     main = both[both.calibration_unit.eq("recording_segments") & both.criterion.eq("conformal") & both.alpha.eq(.01)]
-    cols = ["split_id", "model", "source", "abnormal_notified_segments", "normal_notified_segments", "normal_segments", "fn", "fp", "f1_all_rows", "abnormal_row_coverage", "delay_median_s", "delay_max_s"]
+    cols = ["split_id", "model", "input_features", "source", "abnormal_notified_segments", "normal_notified_segments", "normal_segments", "fn", "fp", "f1_all_rows", "abnormal_row_coverage", "delay_median_s", "delay_max_s"]
     lines = ["# 통합 모델 비교 — 구간 conformal α=1%, matched (분석용 표)", "",
              "v1 패키지 실행(기준모델·LSTM 포함)과 v2 후보 고정 비교를 같은 입력·분할·보정 구간에서 합쳤다. 이미 본 이상 21구간 기준의 탐색 평가다.", "",
-             "| 분할 | 모델 | 출처 | 이상 탐지 구간 | 정상 알림 구간 | 미탐 행 | 오경보 행 | F1(전체 행) | 판정 가능 | 첫 경보 중앙값/최대(초) |", "|---|---|---|---:|---:|---:|---:|---:|---:|---|"]
+             "모델마다 입력이 다르다(입력 조건 열). v2와 같은 세 성분을 넣은 대안(5NN·합·Fisher 등)은 analysis/press_selection에 있다.", "",
+             "| 분할 | 모델 | 입력 조건 | 출처 | 이상 탐지 구간 | 정상 알림 구간 | 미탐 행 | 오경보 행 | F1(전체 행) | 판정 가능 | 첫 경보 중앙값/최대(초) |", "|---|---|---|---|---:|---:|---:|---:|---:|---:|---|"]
     for r in main.sort_values(["split_id", "f1_all_rows"], ascending=[True, False])[cols].itertuples(index=False):
-        lines.append(f"| {r.split_id} | {'**' + r.model + '**' if r.model == FINAL else r.model} | {r.source} | {int(r.abnormal_notified_segments)}/21 | {int(r.normal_notified_segments)}/{int(r.normal_segments)} | {int(r.fn)} | {int(r.fp)} | {r.f1_all_rows:.4f} | {r.abnormal_row_coverage:.2f} | {r.delay_median_s:.1f}/{r.delay_max_s:.1f} |")
+        lines.append(f"| {r.split_id} | {'**' + r.model + '**' if r.model == FINAL else r.model} | {r.input_features} | {r.source} | {int(r.abnormal_notified_segments)}/21 | {int(r.normal_notified_segments)}/{int(r.normal_segments)} | {int(r.fn)} | {int(r.fp)} | {r.f1_all_rows:.4f} | {r.abnormal_row_coverage:.2f} | {r.delay_median_s:.1f}/{r.delay_max_s:.1f} |")
     (out / "model_comparison_v2.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     return both
 
@@ -503,6 +515,9 @@ def main():
     extra["label_free_alert_probability_v2.csv"] = insights.label_free_alert_probability(models, E1_SUMMARY, observed)
     extra["monitor_gain_v2.csv"] = insights.monitor_gain(normal, models)
     extra["expected_effect_v2.csv"] = insights.expected_effect(extra["alert_levels_v2.csv"], extra["alert_levels_injection_v2.csv"])
+    extra["fp_intensity_v2.csv"] = insights.fp_intensity(normal, models, rolling)
+    extra["fn_intensity_v2.csv"] = insights.fn_intensity(normal, models)
+    extra["incident_summary_v2.csv"] = insights.incident_summary(normal, abnormal, models)
     extra["near_miss_v2.csv"], extra["near_miss_corr_v2.csv"] = insights.near_miss(normal, models)
     extra["error_conditions_stats_v2.csv"] = insights.condition_stats(segc)
     for name, table in extra.items():
@@ -510,7 +525,7 @@ def main():
     # 위 표들과 E1·전류 배율 모의에서 FN·FP 집중 조건을 모은 요약(파일:행 인용)
     insights.error_condition_summary(args.out, E1_SUMMARY, DAYSHIFT).to_csv(args.out / "error_condition_summary_v2.csv", index=False)
     insights.insight_figures(args.out, extra["sensor_importance_v2.csv"], extra["coupling_fit_v2.csv"], extra["coupling_records_v2.csv"],
-                             extra["probability_reliability_v2.csv"], extra["fp_events_v2.csv"], normal, models)
+                             extra["probability_reliability_v2.csv"], extra["fp_events_v2.csv"], normal, models, extra["position_vibration_misses_v2.csv"])
     print("사이클2 보강 표·그림", flush=True)
     cond.to_csv(args.out / "error_conditions_v2.csv", index=False)
     segc.to_csv(args.out / "error_conditions_segments_v2.csv", index=False)

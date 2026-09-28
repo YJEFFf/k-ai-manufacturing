@@ -17,12 +17,12 @@ from press.validation import (SPLIT_CHECKS, artifact_names, check_required, code
 
 def _stamp(out: Path):
     p = out / "manifest.json"
-    man = json.loads(p.read_text())
+    man = json.loads(p.read_text(encoding="utf-8"))
     steps = int(man["args"]["steps"])
     art = out.parent / "artifacts"
     man["outputs"] = {n: file_hash(out / n) for n in output_names(steps) | {"checks.json"} if (out / n).is_file()}
     man["artifacts"] = {n: file_hash(art / n) for n in artifact_names(steps) if (art / n).is_file()}
-    p.write_text(json.dumps(man))
+    p.write_text(json.dumps(man), encoding="utf-8")
 
 
 def _mini_outputs(tmp_path: Path, steps=1) -> Path:
@@ -34,20 +34,20 @@ def _mini_outputs(tmp_path: Path, steps=1) -> Path:
         if name.endswith(".csv"):
             a.to_csv(out / name, index=False)
         elif name.endswith(".json"):
-            (out / name).write_text(json.dumps({"structure": {"normal": {"rows": 20000}}, "path": "/x"}))
+            (out / name).write_text(json.dumps({"structure": {"normal": {"rows": 20000}}, "path": "/x"}), encoding="utf-8")
         else:
-            (out / name).write_text("test artifact")
+            (out / name).write_text("test artifact", encoding="utf-8")
     art = out.parent / "artifacts"; art.mkdir()
     for name in artifact_names(steps):
-        (art / name).write_text(json.dumps({"model_id": name, "state": {"u": 1.0}}))
+        (art / name).write_text(json.dumps({"model_id": name, "state": {"u": 1.0}}), encoding="utf-8")
     man = {"inputs": {"verified": True, "files": {"normal": {"sha256": "h"}}},
            "environment": {"platform": "p"}, "code_sha256": code_sha256(), "args": {"steps": str(steps)}}
-    (out / "manifest.json").write_text(json.dumps(man))
+    (out / "manifest.json").write_text(json.dumps(man), encoding="utf-8")
     checks = {k: True for k in required_check_names(steps)}
     checks.update(steps_run=steps, required_checks_ok=True, required_checks_failed=[])
     if steps >= 2:
         checks["step2"] = {s: {k: True for k in SPLIT_CHECKS} for s in ("A", "B")}
-    (out / "checks.json").write_text(json.dumps(checks))
+    (out / "checks.json").write_text(json.dumps(checks), encoding="utf-8")
     _stamp(out)
     for name in result_names(steps) | {"checks.json", "manifest.json"}:
         shutil.copy2(out / name, exp / name)
@@ -67,8 +67,8 @@ def test_verify_fails_on_missing_result(tmp_path):            # R1: 결과 파�
 
 def test_verify_fails_on_corrupted_diagnosis(tmp_path):       # R1: 진단 수치 변조
     out = _mini_outputs(tmp_path)
-    d = json.loads((out / "diagnosis.json").read_text()); d["structure"]["normal"]["rows"] = -123
-    (out / "diagnosis.json").write_text(json.dumps(d))
+    d = json.loads((out / "diagnosis.json").read_text(encoding="utf-8")); d["structure"]["normal"]["rows"] = -123
+    (out / "diagnosis.json").write_text(json.dumps(d), encoding="utf-8")
     assert verify.main(["--out", str(out)]) == 1
 
 
@@ -83,8 +83,8 @@ def test_verify_inf_vs_nan_differs(tmp_path):                 # R1: ±inf와 NaN
 
 def test_verify_fails_on_required_check(tmp_path):            # R1: 필수 검사 false
     out = _mini_outputs(tmp_path, steps=5)
-    c = json.loads((out / "checks.json").read_text()); c["conformal_mc_within_4se"] = False
-    (out / "checks.json").write_text(json.dumps(c))
+    c = json.loads((out / "checks.json").read_text(encoding="utf-8")); c["conformal_mc_within_4se"] = False
+    (out / "checks.json").write_text(json.dumps(c), encoding="utf-8")
     _stamp(out)
     assert verify.main(["--out", str(out)]) == 1
     assert verify.main(["--out", str(out), "--freeze"]) == 2   # 동결도 거부
@@ -104,22 +104,22 @@ def test_verify_tolerance_per_row(tmp_path):                  # 파일 단위가
 def test_verify_ignores_runtime_metadata(tmp_path):           # R6: 실행 메타데이터는 비교하지 않음
     out = _mini_outputs(tmp_path)
     g = {"f1": 0.61, "tn": 10, "cached": False, "train_seconds": 1.0}
-    (out / "expected" / "g.json").write_text(json.dumps(dict(g, cached=True, train_seconds=99.0)))
-    (out / "g.json").write_text(json.dumps(g))
+    (out / "expected" / "g.json").write_text(json.dumps(dict(g, cached=True, train_seconds=99.0)), encoding="utf-8")
+    (out / "g.json").write_text(json.dumps(g), encoding="utf-8")
     assert verify.compare_json(out / "g.json", out / "expected" / "g.json")["ok"]
-    (out / "g.json").write_text(json.dumps(dict(g, f1=0.62)))
+    (out / "g.json").write_text(json.dumps(dict(g, f1=0.62)), encoding="utf-8")
     assert not verify.compare_json(out / "g.json", out / "expected" / "g.json")["ok"]
 
 
 @pytest.mark.parametrize("missing", ["conformal_mc_within_4se", "required_checks_ok", "all"])
 def test_missing_checks_cannot_pass_or_freeze(tmp_path, missing):
     out = _mini_outputs(tmp_path, steps=5)
-    checks = json.loads((out / "checks.json").read_text())
+    checks = json.loads((out / "checks.json").read_text(encoding="utf-8"))
     if missing == "all":
         checks = {"steps_run": 5}
     else:
         checks.pop(missing)
-    (out / "checks.json").write_text(json.dumps(checks))
+    (out / "checks.json").write_text(json.dumps(checks), encoding="utf-8")
     _stamp(out)  # 새 실행이 불완전한 검사를 기록한 경우도 거부해야 한다.
     assert verify.main(["--out", str(out)]) == 1
     assert verify.main(["--out", str(out), "--freeze"]) == 2
@@ -139,15 +139,15 @@ def test_freeze_requires_complete_outputs_and_preserves_old_snapshot(tmp_path):
 @pytest.mark.parametrize("name", ["predictions_A.csv", "numbers.json"])
 def test_changed_unfrozen_outputs_fail_integrity(tmp_path, name):
     out = _mini_outputs(tmp_path, steps=5)
-    (out / name).write_text("tampered")
+    (out / name).write_text("tampered", encoding="utf-8")
     assert verify.main(["--out", str(out)]) == 1
 
 
 def test_code_changed_after_run_fails_verify_and_freeze(tmp_path):   # 실행 후 코드 변경 → 산출물은 이 코드의 결과가 아니다
     out = _mini_outputs(tmp_path, steps=5)
     assert verify.main(["--out", str(out)]) == 0
-    p = out / "manifest.json"; man = json.loads(p.read_text()); man["code_sha256"] = "c" * 64
-    p.write_text(json.dumps(man))
+    p = out / "manifest.json"; man = json.loads(p.read_text(encoding="utf-8")); man["code_sha256"] = "c" * 64
+    p.write_text(json.dumps(man), encoding="utf-8")
     assert verify.main(["--out", str(out)]) == 1
     assert verify.main(["--out", str(out), "--freeze"]) == 2
 
@@ -157,7 +157,7 @@ def test_changed_artifact_fails_integrity(tmp_path, how):        # predict.py가
     out = _mini_outputs(tmp_path, steps=2)
     assert verify.main(["--out", str(out)]) == 0
     art = tmp_path / "artifacts" / "main_A.json"
-    art.write_text("tampered") if how == "tamper" else art.unlink()
+    art.write_text("tampered", encoding="utf-8") if how == "tamper" else art.unlink()
     assert verify.main(["--out", str(out)]) == 1
     assert verify.main(["--out", str(out), "--freeze"]) == 2
 
@@ -173,12 +173,12 @@ def test_partial_run_needs_explicit_comparison_scope(tmp_path):
 
 def test_lstm_json_tolerance_and_exact_counts(tmp_path):
     a, b = tmp_path / "lstm_guidebook_reproduction.json", tmp_path / "expected.json"
-    b.write_text(json.dumps({"f1": 0.61, "tp": 10}))
-    a.write_text(json.dumps({"f1": 0.6101, "tp": 10}))
+    b.write_text(json.dumps({"f1": 0.61, "tp": 10}), encoding="utf-8")
+    a.write_text(json.dumps({"f1": 0.6101, "tp": 10}), encoding="utf-8")
     assert verify.compare_json(a, b)["ok"]
-    a.write_text(json.dumps({"f1": 0.6101, "tp": 11}))
+    a.write_text(json.dumps({"f1": 0.6101, "tp": 11}), encoding="utf-8")
     assert not verify.compare_json(a, b)["ok"]
-    a.write_text(json.dumps({"f1": 0.6101, "tp": 10.0001}))
+    a.write_text(json.dumps({"f1": 0.6101, "tp": 10.0001}), encoding="utf-8")
     assert not verify.compare_json(a, b)["ok"]
 
 
@@ -212,20 +212,22 @@ def test_clean_repro_propagates_failure_and_declares_scope(tmp_path, run_status)
     bin_dir = tmp_path / "bin"; bin_dir.mkdir()
     fake_git = bin_dir / "git"
     fake_git.write_text('#!/bin/bash\nif [[ "$1" == clone ]]; then mkdir -p "$4/yejun/press_submission/outputs/expected"; '
-                        'echo committed > "$4/yejun/press_submission/outputs/expected/marker"; else echo test-head; fi\n')
+                        'echo committed > "$4/yejun/press_submission/outputs/expected/marker"; else echo test-head; fi\n', encoding="utf-8")
     fake_python = bin_dir / "python3"
     fake_python.write_text('#!/bin/bash\nif [[ "$1" == run_all.py ]]; then exit ' + str(run_status) + '; fi\n'
-                           'printf "%s\\n" "$@" > "$VERIFY_CALL"; cat outputs/expected/marker >> "$VERIFY_CALL"\n')
+                           'printf "%s\\n" "$@" > "$VERIFY_CALL"; cat outputs/expected/marker >> "$VERIFY_CALL"\n', encoding="utf-8")
     fake_git.chmod(0o755); fake_python.chmod(0o755)
     scratch = tmp_path / "scratch"; scratch.mkdir()
     calls = tmp_path / "verify_call"
     env = dict(os.environ, PATH=str(bin_dir) + os.pathsep + os.environ["PATH"], TMPDIR=str(scratch), VERIFY_CALL=str(calls))
-    result = subprocess.run(["bash", str(script)], env=env, text=True, capture_output=True)
+    if shutil.which("bash") is None:
+        pytest.skip("bash가 없는 환경(Windows)에서는 clean_repro.sh를 시험하지 않는다")
+    result = subprocess.run(["bash", str(script)], env=env, text=True, encoding="utf-8", errors="replace", capture_output=True)
     assert result.returncode == run_status, result.stdout + result.stderr
     if run_status:
         assert not calls.exists()
     else:
-        assert calls.read_text().splitlines()[-3:] == ["--steps", "3", "committed"]   # 클론에 커밋된 기대값을 쓴다
+        assert calls.read_text(encoding="utf-8").splitlines()[-3:] == ["--steps", "3", "committed"]   # 클론에 커밋된 기대값을 쓴다
 
 
 def test_persistence_missing_resets_window():                  # R3

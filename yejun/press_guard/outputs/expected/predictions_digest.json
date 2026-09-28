@@ -1,6 +1,6 @@
 {
   "predictions_normal_A.csv": {
-    "sha256": "a0f444e2a25500ab1ebadfc8f8a9e208855191c2f36f7e5c0a83336135f8cde7",
+    "sha256": "e59073e9d1d8d5c88e54cbe1523233a3223d613e3b24cd4c87d83b493a94d468",
     "rows": 4090,
     "columns": [
       "row_id",
@@ -31,6 +31,10 @@
       "notification",
       "alert_level",
       "escalation",
+      "incident_id",
+      "incident_notification",
+      "incident_escalation",
+      "incident_update",
       "likelihood_ratio",
       "anomaly_probability",
       "probability_prior",
@@ -124,6 +128,34 @@
         0.0,
         0.0
       ],
+      "incident_id": [
+        4090,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "incident_notification": [
+        4090,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "incident_escalation": [
+        4090,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "incident_update": [
+        4090,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
       "likelihood_ratio": [
         4090,
         226.5185134935992,
@@ -163,7 +195,7 @@
     "alarm_rows": 0
   },
   "predictions_normal_B.csv": {
-    "sha256": "766e20f562cf8d935a9ab8871734e107b298e872f3af76ef3c046c7ebc4cd8d6",
+    "sha256": "f38cc5eb4905249f1c3c0bfcd40ac91e2070dce8a74a5c4af96547026ee89139",
     "rows": 6097,
     "columns": [
       "row_id",
@@ -194,6 +226,10 @@
       "notification",
       "alert_level",
       "escalation",
+      "incident_id",
+      "incident_notification",
+      "incident_escalation",
+      "incident_update",
       "likelihood_ratio",
       "anomaly_probability",
       "probability_prior",
@@ -287,6 +323,34 @@
         0.0,
         0.0
       ],
+      "incident_id": [
+        6097,
+        6.0,
+        14.0,
+        0.0,
+        3.0
+      ],
+      "incident_notification": [
+        6097,
+        3.0,
+        3.0,
+        0.0,
+        1.0
+      ],
+      "incident_escalation": [
+        6097,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "incident_update": [
+        6097,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
       "likelihood_ratio": [
         6097,
         653.0470032148194,
@@ -326,7 +390,7 @@
     "alarm_rows": 3
   },
   "predictions_abnormal_A.csv": {
-    "sha256": "e51f0fd7eecfca0fa31a6b15beef7fee5729826aa6f9998cd690a3114a00a9ba",
+    "sha256": "8097cc639c769a564b2d1c08fcb79b9f4e6dab38a45d0c2d5baa332ee8ebd33f",
     "rows": 600,
     "columns": [
       "row_id",
@@ -357,6 +421,10 @@
       "notification",
       "alert_level",
       "escalation",
+      "incident_id",
+      "incident_notification",
+      "incident_escalation",
+      "incident_update",
       "likelihood_ratio",
       "anomaly_probability",
       "probability_prior",
@@ -450,6 +518,34 @@
         0.0,
         0.0
       ],
+      "incident_id": [
+        600,
+        556.0,
+        556.0,
+        0.0,
+        1.0
+      ],
+      "incident_notification": [
+        600,
+        1.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "incident_escalation": [
+        600,
+        1.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "incident_update": [
+        600,
+        2.0,
+        2.0,
+        0.0,
+        1.0
+      ],
       "likelihood_ratio": [
         600,
         67745.1755721657,
@@ -489,7 +585,7 @@
     "alarm_rows": 556
   },
   "predictions_abnormal_B.csv": {
-    "sha256": "cce233ba2b27cdfc51bd7cb52c18d7afc58ef6aab8001c821550f3194a01c6a7",
+    "sha256": "aaad2b2e49ca36d52c5a4134f1fc46323083378cd86dc05c25a769e4544ed118",
     "rows": 600,
     "columns": [
       "row_id",
@@ -520,6 +616,10 @@
       "notification",
       "alert_level",
       "escalation",
+      "incident_id",
+      "incident_notification",
+      "incident_escalation",
+      "incident_update",
       "likelihood_ratio",
       "anomaly_probability",
       "probability_prior",
@@ -613,6 +713,34 @@
         0.0,
         0.0
       ],
+      "incident_id": [
+        600,
+        569.0,
+        569.0,
+        0.0,
+        1.0
+      ],
+      "incident_notification": [
+        600,
+        1.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "incident_escalation": [
+        600,
+        1.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "incident_update": [
+        600,
+        2.0,
+        2.0,
+        0.0,
+        1.0
+      ],
       "likelihood_ratio": [
         600,
         68732.30847006678,
@@ -652,7 +780,7 @@
     "alarm_rows": 569
   },
   "test_predictions_A.csv": {
-    "sha256": "d01201af449699416c0c890e5bd8ba53e9bd6df0c1f11a0f0d45008f860b723f",
+    "sha256": "b87f1e20aa7ff174eb6a7eb048f3125afc1d4e4078c83a8a32866fefcba602b8",
     "rows": 4690,
     "columns": [
       "subset",
@@ -685,12 +813,18 @@
       "notification",
       "alert_level",
       "escalation",
+      "incident_id",
+      "incident_notification",
+      "incident_escalation",
+      "incident_update",
       "likelihood_ratio",
       "anomaly_probability",
       "probability_prior",
       "record_likelihood_ratio",
       "record_probability",
-      "probability_source"
+      "probability_source",
+      "file_prior",
+      "anomaly_probability_file_prior"
     ],
     "exact_sha256": "245157340a20f9b0e0d529dedcf02fddbe0bfbdbf8cfcd601cf8edb5f2cd1a8e",
     "numeric_summary": {
@@ -778,6 +912,34 @@
         0.0,
         0.0
       ],
+      "incident_id": [
+        4690,
+        556.0,
+        556.0,
+        0.0,
+        1.0
+      ],
+      "incident_notification": [
+        4690,
+        1.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "incident_escalation": [
+        4690,
+        1.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "incident_update": [
+        4690,
+        2.0,
+        2.0,
+        0.0,
+        1.0
+      ],
       "likelihood_ratio": [
         4690,
         67971.6940856593,
@@ -812,12 +974,26 @@
         176.35902416624756,
         0.000382727629124,
         0.5499999999999999
+      ],
+      "file_prior": [
+        4690,
+        600.0,
+        76.75906183368869,
+        0.1279317697228145,
+        0.1279317697228145
+      ],
+      "anomaly_probability_file_prior": [
+        4690,
+        564.6630838228951,
+        508.0026499015424,
+        0.005529819625886,
+        0.946668405267962
       ]
     },
     "alarm_rows": 556
   },
   "test_predictions_B.csv": {
-    "sha256": "e042763e2aeac168fb76c08001f789cf4cfdc2477383f37aa5f394f469c3b980",
+    "sha256": "8ad05ed296e7749cf00cd67a19307c8fdfa7832e95ff9e4f70546c654233d416",
     "rows": 6697,
     "columns": [
       "subset",
@@ -850,12 +1026,18 @@
       "notification",
       "alert_level",
       "escalation",
+      "incident_id",
+      "incident_notification",
+      "incident_escalation",
+      "incident_update",
       "likelihood_ratio",
       "anomaly_probability",
       "probability_prior",
       "record_likelihood_ratio",
       "record_probability",
-      "probability_source"
+      "probability_source",
+      "file_prior",
+      "anomaly_probability_file_prior"
     ],
     "exact_sha256": "396c2ed7a121193fdb4cb63864ed7836f05ceb3eda1f9165406bcdf1d475e5bb",
     "numeric_summary": {
@@ -943,6 +1125,34 @@
         0.0,
         0.0
       ],
+      "incident_id": [
+        6697,
+        575.0,
+        583.0,
+        0.0,
+        3.0
+      ],
+      "incident_notification": [
+        6697,
+        4.0,
+        4.0,
+        0.0,
+        1.0
+      ],
+      "incident_escalation": [
+        6697,
+        1.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "incident_update": [
+        6697,
+        2.0,
+        2.0,
+        0.0,
+        1.0
+      ],
       "likelihood_ratio": [
         6697,
         69385.3554732816,
@@ -977,6 +1187,20 @@
         189.9839957829752,
         0.0003729632650096,
         0.5499999999999999
+      ],
+      "file_prior": [
+        6697,
+        599.9999999999997,
+        53.75541287143493,
+        0.0895923547857249,
+        0.0895923547857249
+      ],
+      "anomaly_probability_file_prior": [
+        6697,
+        555.4730371577043,
+        486.1940956279633,
+        0.0036217839357573,
+        0.9225256363012568
       ]
     },
     "alarm_rows": 572

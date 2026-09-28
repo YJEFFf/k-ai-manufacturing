@@ -1,13 +1,13 @@
 {
   "protocol_version": "v1",
-  "git_commit": "3ad2452",
-  "code_sha256": "0fd0718e47ccf8a7797142b905b88df1f7b33457709d30f3b1fa904f16385004",
-  "run_id": "3ad2452+878658870c294666",
-  "execution_sha256": "878658870c294666dc2632ef40325572dffe043b72f57666066277cc07995f5b",
+  "git_commit": "f5679ca",
+  "code_sha256": "b372a18b66af93347e1aa410e472cbae7a15b534b75d28e132adb09cec79118e",
+  "run_id": "f5679ca+e16aebd515d3e103",
+  "execution_sha256": "e16aebd515d3e103f2bf0a95209606da79fce1dd2bd396a696ce4c021d2e11c0",
   "torch": "2.5.1",
   "args": {
-    "root": "/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission",
-    "out": "/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission/outputs",
+    "root": "press_submission",
+    "out": "press_submission/outputs",
     "artifacts": "None",
     "preprocess": "matched",
     "no_verify": "False",
@@ -34,11 +34,11 @@
   },
   "omp_num_threads": "1",
   "inputs": {
-    "data_dir": "/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission/data/3_소성가공_예지보전",
+    "data_dir": "press_submission/data/3_소성가공_예지보전",
     "verified": true,
     "files": {
       "normal": {
-        "path": "/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission/data/3_소성가공_예지보전/press_data_normal.csv",
+        "path": "press_submission/data/3_소성가공_예지보전/press_data_normal.csv",
         "sha256": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
         "rows": 20000,
         "sha256_expected": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
@@ -47,7 +47,7 @@
         "rows_ok": true
       },
       "abnormal": {
-        "path": "/Volumes/YJSSD/공모전/k-제조데이터/yejun/press_submission/data/3_소성가공_예지보전/outlier_data.csv",
+        "path": "press_submission/data/3_소성가공_예지보전/outlier_data.csv",
         "sha256": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
         "rows": 600,
         "sha256_expected": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
@@ -58,17 +58,17 @@
     }
   },
   "timings_s": {
-    "step1_s": 1.55,
-    "step2_s": 5.78,
-    "step3_s": 30.82,
-    "step4_s": 3.53,
-    "step5_s": 2.04,
-    "total_s": 43.76
+    "step1_s": 1.57,
+    "step2_s": 5.82,
+    "step3_s": 31.25,
+    "step4_s": 3.66,
+    "step5_s": 2.13,
+    "total_s": 44.48
   },
   "outputs": {
     "ablation.csv": "d523cb63cde49b29fe25a20500b5a80e33071b411d6477740171d71bb7411906",
     "alarm_components.csv": "8c2624778b54b2c7dcb4e3e25e17b50fcc9798df8c45f3658cf0682682d9043c",
-    "checks.json": "6cd7e39e298ea459d61e87c8f91c565ffda472b23868536f6a825da4baa3fd05",
+    "checks.json": "a313d78d55bc22a5cf3ba3d03e8541979aba06f1b65fa04bea9c6e15ee860921",
     "conformal_mc.csv": "9ad41b2c95e1df78dc00b6f6b5a6c9c2017b49aaddbf577352692c5118d18183",
     "diagnosis.json": "f5cadd1ee7f854de37e0cfc05aca1f4f4b362ac3ada9a9b9e6a96d833d5b3e8d",
     "diagnosis.md": "a5f675ae7a993a792f2aef0de57feb8536cdb2fd7ea177c061ffbf165db29e0d",
@@ -96,7 +96,7 @@
     "model_comparison_all.md": "d3dc7bd867bcd04daabf9ce319a3e7665ec763caaf15058b4034e3bf0727c798",
     "model_comparison_cutoff.md": "af355eef23fc6bed1af0fa6f0906480940337400cf69f5f9b25666f1a34d568f",
     "model_comparison_lstm.csv": "d0d18c5c8bb8ad06caffa28426a177325ee8a1f182e958125ba850753c4392f8",
-    "numbers.json": "5493a43487262dcef38d92a3afd094e9b0a104549ddc9a1082478ed9692c788e",
+    "numbers.json": "2f6e2292b84b4d4aa5652b56c905f13e488d67eeb04e4dcd84f23e93ad92726a",
     "operating_points.csv": "fb51ae4056db6f0f7a48fc43134f242ad95167e2734d7065882dded7f459b25f",
     "persistence.csv": "9bc1ef956e2af3d81d191bc442b0f94a99c00eb0060884823aa4bea44edade1f",
     "predictions_A.csv": "0656fc309cd75e0fa083cd74206b436871e19e7c8a6d9e4fd8d9256a7e7e8b4b",
@@ -116,7 +116,7 @@
     "workload.csv": "e6d8b13dab52e7e8a6e6dd01db3298f6895eaa8c1933871897d2c4a19be2e61a"
   },
   "artifacts": {
-    "main_A.json": "b90a98a59eeb77303d251e8017ddc8793e09d522490ad68872d5a05b49523635",
-    "main_B.json": "8c784575bb43fec045f4bf85598fc91dbe383273f07cfeeebf4cdd870747f168"
+    "main_A.json": "aeacc000f05cf2466963487eebcffafbe772d20fb5804bf7d35ed921554682e9",
+    "main_B.json": "c934e1064ba6a1cdbc705dbe42a00f0dcd9e3787f68d3c39adeeb338decf151e"
   }
 }

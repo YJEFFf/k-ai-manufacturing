@@ -12,7 +12,10 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 ANALYSIS = HERE.parent / "analysis"
-PACKAGES = [HERE, HERE / "tools"] + [ANALYSIS / p for p in ("press_supplement", "press_evidence", "press_supervised", "press_advance", "press_selection")]
+V1 = HERE.parent / "press_submission"
+# vendor/는 준용 원본의 해시 고정 사본(press/data.py VENDOR_SHA256)이라 고치지 않는다. 그 명령행 main은 우리 경로에서 실행되지 않는다.
+PACKAGES = [HERE, HERE / "tools"] + [ANALYSIS / p for p in ("press_supplement", "press_evidence", "press_supervised", "press_advance", "press_selection")] \
+    + [V1, V1 / "press", V1 / "tests", V1 / "tools"]
 
 
 def python_files():
@@ -48,6 +51,9 @@ def test_text_io_declares_encoding():
         for call in calls(src, r"\.(read_text|write_text)\("):
             if "encoding=" not in call:
                 bad.append(f"{f.name}: {call[:60]}")
+        for call in calls(src, r"subprocess\.run\("):
+            if "text=True" in call and "encoding=" not in call and "git" not in call:
+                bad.append(f"{f.name}: {call[:60]}")
         for call in calls(src, r"(?<![\w.])open\("):
             binary = re.search(r"""["'][rwax+]*b[rwax+]*["']""", call)
             if not binary and "encoding=" not in call:
@@ -73,9 +79,10 @@ def test_cp949_console_does_not_crash():
 def test_python_version_gate(monkeypatch):
     import runtime
     import pytest
-    monkeypatch.setattr(sys, "version_info", (3, 13, 0, "final", 0))
-    with pytest.raises(SystemExit, match="3.10~3.12"):
-        runtime.check_python()
+    for bad in ((3, 10, 12, "final", 0), (3, 13, 0, "final", 0)):
+        monkeypatch.setattr(sys, "version_info", bad)
+        with pytest.raises(SystemExit, match="3.11~3.12"):
+            runtime.check_python()
     monkeypatch.setattr(sys, "version_info", (3, 12, 8, "final", 0))
     runtime.check_python()
 

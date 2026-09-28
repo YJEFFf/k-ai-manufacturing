@@ -36,7 +36,7 @@
     "protocol_version": "v1",
     "press_threads": "1"
   },
-  "run_fingerprint": "4dccae7e12d4641382a589813876e236d1dc467f62402b3d8964aeca22dbc45f",
+  "run_fingerprint": "d360a4dfffcfdba8de799c420769723fecea021e5fcc53545238ec32f2ab936f",
   "checks": [
     {
       "name": "실행 코드·선행 산출물이 manifest와 같음",
@@ -51,7 +51,7 @@
     {
       "name": "v1 의존 코드가 학습 당시와 같음",
       "ok": true,
-      "detail": "0fd0718e47cc"
+      "detail": "b372a18b66af"
     },
     {
       "name": "입력 자료 해시가 학습 당시와 같음",
@@ -120,5 +120,5 @@
     }
   ],
   "all_ok": true,
-  "elapsed_s": 171.9
+  "elapsed_s": 182.6
 }

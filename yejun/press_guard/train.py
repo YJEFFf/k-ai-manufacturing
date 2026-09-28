@@ -8,7 +8,7 @@ import time
 import numpy as np
 import pandas as pd
 
-from model import GuardModel, StreamDetector, cases, record_running_max, D, BASE, HERE, ALPHAS
+from model import GuardModel, StreamDetector, cases, incidents, incident_columns, record_running_max, D, BASE, HERE, ALPHAS
 from probability import ProbabilityCalibrator, posterior, DEFAULT_PRIOR
 from press.calibrate import conformal_p, segment_max
 from press.scores import sine_score
@@ -73,6 +73,11 @@ def test_prediction_file(pn, pa):
     """제출용 테스트 예측 파일(분할별 1개): 정상 평가 기록 + 이상 기록. 정답 구분 열(subset·label)로 파일만으로 F1을 다시 계산할 수 있다.
     이상 600행은 두 분할이 같다. 이상 행의 확률 열은 그 기록을 뺀 교차 적합 값이다(probability_source)."""
     both = pd.concat([pn.assign(subset="normal_test", label=0), pa.assign(subset="abnormal", label=1)], ignore_index=True)
+    # anomaly_probability는 현장 가정 π=1%(행 비율)라 우도비 상한 121에서 0.55에 멈춘다. 파일 라벨로 확률을 채점할 때는
+    # 사전 비율을 이 파일의 이상 행 비율로 바꾼 열을 쓴다(같은 우도비, 사전 오즈만 교체).
+    file_prior = float(both.label.mean())
+    both["file_prior"] = file_prior
+    both["anomaly_probability_file_prior"] = posterior(both.likelihood_ratio.to_numpy(float), file_prior)
     return both[["subset", "label"] + [c for c in both.columns if c not in ("subset", "label")]]
 
 
@@ -82,6 +87,10 @@ def combine_streams(pn, pa):
     shifted["record_id"] += int(pn.record_id.max()) + 1
     shifted["row_id"] += len(pn)
     both = pd.concat([pn, shifted], ignore_index=True)
+    # 사건 번호는 한 흐름으로 다시 매긴다(정상 평가와 이상은 서로 다른 날이라 사이 공백이 60초를 넘는다)
+    inc = incident_columns(both.record_id.to_numpy(), both.alert_unit.to_numpy(), both.alarm.to_numpy(), both.reason.to_numpy(),
+                           pd.to_datetime(both.timestamp, format="mixed", utc=True, errors="coerce"))
+    both["incident_id"], both["incident_notification"], both["incident_escalation"], both["incident_update"] = inc.T
     queue = cases(both)
     if len(queue):
         queue.insert(0, "source", np.where(queue.record_id > pn.record_id.max(), "abnormal", "normal"))
@@ -102,7 +111,13 @@ def evaluate_pair(model, calibration, normal, abnormal, sid, out=None, oof_lr=No
             pn.to_csv(out/f"predictions_normal_{sid}.csv",index=False)
             pa.to_csv(out/f"predictions_abnormal_{sid}.csv",index=False)
             test_prediction_file(pn, pa).to_csv(out/f"test_predictions_{sid}.csv",index=False)
-            combine_streams(pn, pa).to_csv(out/f"cases_{sid}.csv",index=False)
+            queue = combine_streams(pn, pa)
+            queue.to_csv(out/f"cases_{sid}.csv",index=False)
+            # 사건 대기열: 정상 평가 뒤에 이상 기록을 이어 붙인 한 흐름(두 날 사이 공백이 60초를 넘어 서로 다른 사건이 된다)
+            incident_queue = incidents(queue)
+            if len(incident_queue):
+                incident_queue.insert(1, "source", incident_queue.case_uids.map(lambda u: "abnormal" if int(str(u).split("+")[0]) >= len(pn) else "normal"))
+            incident_queue.to_csv(out/f"incidents_{sid}.csv",index=False)
         for frame,pred in ((normal,pn),(abnormal,pa)):
             score = baseline(model,frame)
             pred["score"],pred["p_value"] = score,conformal_p(ref,score)

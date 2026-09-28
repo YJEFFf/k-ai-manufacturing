@@ -24,7 +24,7 @@ from model import D, HERE
 import runtime
 from contracts import (TRAIN_TABLES, ANALYSIS_TABLES, INSIGHT_TABLES, PREDICTIONS, execution_errors, read_json, check_files, audit_errors)
 
-RESULTS = ["metrics.csv", "rolling.csv", "cases_A.csv", "cases_B.csv", "model_comparison_v2.csv", "robustness_v2.csv", "sensitivity_v2.csv", "ablation_v2.csv",
+RESULTS = ["metrics.csv", "rolling.csv", "cases_A.csv", "cases_B.csv", "incidents_A.csv", "incidents_B.csv", "model_comparison_v2.csv", "robustness_v2.csv", "sensitivity_v2.csv", "ablation_v2.csv",
            "error_conditions_v2.csv", "error_conditions_segments_v2.csv", "interaction_2x2_v2.csv", "records_first_alarm_v2.csv", "uncertainty_v2.csv", "workload_v2.csv",
            "decision_table_v2.csv"] + list(INSIGHT_TABLES)
 META = ["manifest.json", "audit.json", "analysis_summary.json"]

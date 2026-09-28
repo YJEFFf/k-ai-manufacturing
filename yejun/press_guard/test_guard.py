@@ -161,3 +161,30 @@ def test_calibration_unit_is_alert_unit(data):
     assert len(m.cal) == 20
     same = GuardModel.fit(sp["train"], sp["cal"], split="A")
     assert len(same.cal) == 120
+
+
+
+@pytest.mark.parametrize("jitter_ms", [1, 2])
+def test_timestamp_jitter_keeps_records(data, jitter_ms):
+    """평가관 04 2회차 R2-05: 수집 시각이 ±1·2 ms 흔들려도 기록 경계(0.1초 ± 20 ms)와 미탐이 흔들림 없는 결과와 같다."""
+    from model import load_bundle, timing_warning
+    _, a = data
+    m = load_bundle(HERE / "artifacts" / "guard_B.json")
+    j = a.copy()
+    t = pd.to_datetime(j.TimeStamp)
+    j["TimeStamp"] = (t + pd.to_timedelta(np.random.default_rng(0).uniform(-jitter_ms, jitter_ms, len(t)) / 1000, unit="s")).astype(str)
+    p0, pj = m.predict(a, .01), m.predict(j, .01)
+    assert pj.record_id.nunique() == p0.record_id.nunique() == 21
+    assert (pj.alarm == 0).sum() == (p0.alarm == 0).sum() == 31
+    assert timing_warning(pj) == ""
+
+
+def test_short_records_raise_timing_warning(data):
+    """간격이 크게 흔들려 기록이 쪼개지면(평균 5행 미만) 수집 시각 간격 경고를 낸다."""
+    from model import load_bundle, timing_warning
+    _, a = data
+    m = load_bundle(HERE / "artifacts" / "guard_B.json")
+    j = a.copy()
+    t = pd.to_datetime(j.TimeStamp)
+    j["TimeStamp"] = (t + pd.to_timedelta(np.random.default_rng(1).uniform(-.05, .05, len(t)), unit="s")).astype(str)
+    assert "수집 시각 간격" in timing_warning(m.predict(j, .01))

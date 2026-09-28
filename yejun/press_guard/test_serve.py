@@ -46,7 +46,12 @@ def test_analyze_contract_and_cache(console):
             "max_probability", "max_likelihood_ratio"} <= set(result["cases"][0])
     assert {"alert_level", "escalation", "likelihood_ratio", "anomaly_probability", "record_probability"} <= set(result["points"][0])
     assert result["prior"] == .01 and result["probability_available"] is True
-    assert sum(result["level_counts"].values()) == len(result["cases"])
+    assert sum(result["level_counts"].values()) == len(result["incidents"])
+    # 사건 묶음(평가관 04 2회차 R2-03·R2-04): 이상 21구간은 사건 하나, 건은 첫 경보 행(case_uid)으로 구분된다
+    inc = pd.DataFrame(result["incidents"]); cs = pd.DataFrame(result["cases"])
+    assert cs.case_uid.is_unique and set(cs.incident_id) == set(inc.incident_id)
+    assert inc[inc.reference_label.eq(1)].shape[0] == 1 and inc[inc.reference_label.eq(1)].cases.iloc[0] == 21
+    assert result["lr_cap"] == 121 and result["warnings"] == []
     assert all(c["level"] == 2 for c in result["cases"] if c["reference_label"] == 1)     # 이상 21구간은 모두 격상
     assert console.analyze({"split": "A", "alpha": .01, "dataset": "mixed"}) is result   # 캐시
     json.dumps(result, allow_nan=False)   # NaN 없이 직렬화 가능

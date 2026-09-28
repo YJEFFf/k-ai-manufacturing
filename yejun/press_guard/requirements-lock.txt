@@ -1,5 +1,7 @@
-# 전이 의존성까지 고정(torch 제외). 파이썬 3.12.8 새 가상환경(macOS arm64)에서 v1 2단계·v2 전체·시험 통과를 확인한 조합
+# 전이 의존성까지 고정(torch 제외). 파이썬 3.11·3.12 새 가상환경(macOS arm64)에서 v1 2단계·v2 전체·시험 통과를 확인한 조합
 # (루브릭 사이클2 평가관 06 Phase D). 설치: pip install -r requirements-lock.txt
+cloudpickle==3.1.2
+colorama==0.4.6 ; sys_platform == "win32"
 contourpy==1.3.3
 cycler==0.12.1
 fonttools==4.66.0

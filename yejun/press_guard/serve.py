@@ -11,7 +11,7 @@ import threading
 import numpy as np
 import pandas as pd
 
-from model import StreamDetector, cases, D, HERE, ALPHAS, DECISION_TABLE, ALERT_UNIT_ROWS, QUALITY_ACTIONS, LEVEL_NAMES, ESCALATION_ALARM_ROWS, load_bundle
+from model import StreamDetector, cases, incidents, timing_warning, D, HERE, ALPHAS, DECISION_TABLE, ALERT_UNIT_ROWS, QUALITY_ACTIONS, LEVEL_NAMES, ESCALATION_ALARM_ROWS, load_bundle
 from monitor import OUTCOME_COLUMNS, OUTCOME_LABELS, OUTCOMES
 import runtime
 PRIORS = (.001, .01, .1)   # 이상 확률 표시용 사전 비율 선택지(경보와 무관)
@@ -62,6 +62,7 @@ class Console:
         predictions=pd.concat([stream.push(frame.iloc[i:i+128]) for i in range(0,len(frame),128)],ignore_index=True)
         duration=time.perf_counter()-start
         queue=cases(predictions)
+        incident_queue=incidents(queue,predictions)
         plot=predictions.copy()
         for c in D.SENSORS:
             plot[c]=pd.to_numeric(frame[c],errors="coerce").to_numpy()
@@ -70,6 +71,8 @@ class Console:
             if len(queue):
                 lookup=plot.groupby("record_id").reference_label.first()
                 queue["reference_label"]=queue.record_id.map(lookup)
+                if len(incident_queue):
+                    incident_queue["reference_label"]=incident_queue.incident_id.map(queue.groupby("incident_id").reference_label.max())
         result=dict(split=split,alpha=alpha,dataset=kind,source_name="사용자 CSV" if kind=="upload" else "대회 공개 기록 · 평가 구간",
                     stats=dict(rows=len(frame),segments=int(predictions.record_id.nunique()),
                                scored=int(predictions.score.notna().sum()),invalid=int(predictions.status.ne("ok").sum()),
@@ -78,8 +81,11 @@ class Console:
                     calibration_segments=len(self.models[split].cal),threshold=score_threshold(self.models[split].cal,alpha),
                     min_p_attainable=1/(len(self.models[split].cal)+1),alert_unit_rows=ALERT_UNIT_ROWS,prior=prior,
                     probability_available=self.models[split].probability is not None,
-                    level_counts={LEVEL_NAMES[k]:int(queue.level.eq(k).sum()) if len(queue) else 0 for k in LEVEL_NAMES},
+                    level_counts={LEVEL_NAMES[k]:int(incident_queue.level.eq(k).sum()) if len(incident_queue) else 0 for k in LEVEL_NAMES},
+                    lr_cap=self.models[split].probability.lr_cap if self.models[split].probability is not None else None,
+                    warnings=[w for w in (timing_warning(predictions),) if w],
                     cases=json.loads(queue.to_json(orient="records")),
+                    incidents=json.loads(incident_queue.to_json(orient="records")),
                     points=json.loads(plot.to_json(orient="records",double_precision=12)))
         if kind!="upload": self.cache[key]=result
         return result

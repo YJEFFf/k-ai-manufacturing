@@ -130,6 +130,9 @@ def alert_evidence_bound(calibration_units, detection_rate=1.0):
 
 
 def sellke_bayes_factor(p):
-    """Sellke–Bayarri–Berger 최소 베이즈 인수 −e·p·ln p(p < 1/e). 이 값의 역수가 p값 하나가 줄 수 있는 우도비의 보수적 상한이다."""
+    """Sellke–Bayarri–Berger 최소 베이즈 인수 −e·p·ln p(p < 1/e). 참고값이다.
+
+    연속 p값을 정확히 관측하고, 대립에서 p가 Beta(ξ,1) 족을 따를 때의 회의적 환산이다. conformal 알림은 "p ≤ 1/(n+1)"이라는
+    사건이라 이 값이 알림 한 건의 우도비 상한이 아니다. 알림의 상한은 alert_evidence_bound((n+1)×탐지율)다."""
     p = float(p)
     return -math.e * p * math.log(p) if 0 < p < 1 / math.e else 1.0

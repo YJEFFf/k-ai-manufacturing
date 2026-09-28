@@ -15,7 +15,7 @@ cd yejun/press_submission
 python -m pip install -r requirements.txt
 # 데이터 배치: data/3_소성가공_예지보전/press_data_normal.csv, outlier_data.csv (Git 제외)
 #   로컬 원본: ../../데이터셋/프레스_유압펌프_예지보전/data/3_소성가공_예지보전/ 에서 복사하거나 --root로 그 폴더를 지정
-OMP_NUM_THREADS=1 python run_all.py --root . --out outputs            # LSTM 캐시가 있으면 약 1분, 없으면 첫 실행 30~40분(CPU 학습); --steps 3 이면 40초
+python run_all.py --root . --out outputs            # 스레드는 코드가 1개로 고정. LSTM 캐시가 있으면 약 1분, 없으면 첫 실행 30~40분(CPU 학습); --steps 3 이면 40초
 python -m pytest -q tests                                              # 정확성 검사
 python verify.py --out outputs                                         # run_all 실행 뒤 outputs/expected 대비 허용오차 검사 (--freeze 로 동결)
 python predict.py --model artifacts/main_A.json --input <입력.csv> --out predictions.csv   # 저장 상태만으로 추론

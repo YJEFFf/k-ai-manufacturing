@@ -2,6 +2,14 @@
 
 구현·검수 이력이다. 실행 설명은 [README.md](README.md), 운영 절차는 [OPERATIONS.md](OPERATIONS.md)에 있다. 아래 옛 기록의 명령·경로·수치는 당시 기준이다. 현재 값은 README와 outputs/를 따른다. 제출 묶음에는 넣지 않는다(tools/package_manifest.py).
 
+## 2026-09-28 루브릭 사이클2 2회차 반영
+
+2회차 점수는 합계 89.4/100이다(1회차 77.5). 처리 목록은 [cycle2/README.md](../analysis/press_rubric_review/cycle2/README.md)에 있다. press_guard 쪽 변경은 다음과 같다.
+- 사건(incident) 층: 경보 단위가 이어지고 공백이 60초 이하면 한 사건이고, 사건마다 1·2단계 알림을 한 번씩 낸다(model.IncidentTracker, 일괄 = 스트림). 콘솔 대기열·결과 기록·simulate가 사건 단위다. 건은 case_uid(첫 경보 행)로 구분한다.
+- 기록 경계 허용 오차: 0.1초 ± 20 ms(TIME_TOL_S). 수집 시각이 ±1·2 ms 흔들려도 결과가 같다. 평균 기록 길이 5행 미만이면 경고한다.
+- 감시 조치 분기와 명령행(monitor.py), 비사후 2단계 업무량 추정, 운전 강도별 오류 표, 12행 오류 요약, 확률 설명 정정, 재현 목록 도구 개편.
+- 주 지표·경보 규칙·분할은 그대로다.
+
 ## 2026-09-27 루브릭 사이클2 1회차 반영
 
 평가관 6명(데이터·모델·오류·현장·창의성·재현성)의 1회차 보완 목록을 반영했다. 원문은 [analysis/press_rubric_review/cycle2/round1/](../analysis/press_rubric_review/cycle2/round1/)에 있다. 주 지표(A F1 0.961938·B 0.970990, 정상 0/120·3/180, 이상 21/21)와 경보 규칙은 바꾸지 않았다.

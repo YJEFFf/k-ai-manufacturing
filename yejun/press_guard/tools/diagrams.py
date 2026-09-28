@@ -38,16 +38,16 @@ def operation_flow(path):
     fig, ax = plt.subplots(figsize=(11.5, 7.2))
     ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.axis("off")
     w, h = .2, .14
-    top = [(.02, "0 정상 수집", "같은 설비·운전 조건 정상 CSV\n보정 ≥99단위(α 1%)+수락 60단위"),
+    top = [(.02, "0 정상 수집", "같은 설비·운전 조건 정상 CSV\n보정 ≥99단위+수락 60단위\n시각 간격 0.1초 ± 20 ms"),
            (.27, "1 재보정·수락 검사", "recalibrate.py\n정상 알림 Beta-Binomial 한도\n주입 3종 2초 탐지 ≥90%"),
            (.52, "2 운영 설정", "재보정 모델·α 1%·사전 비율 π\n1단계=기록, 2단계=출동"),
-           (.77, "3 실시간 감시", "StreamDetector(10 Hz)\n점검 콘솔 대기열")]
+           (.77, "3 실시간 감시", "StreamDetector(10 Hz)\n사건 대기열(공백 60초 이하 묶음)")]
     for x, t, b in top:
         box(ax, x, .78, w, h, t, b)
     for (x1, *_), (x2, *_) in zip(top, top[1:]):
         arrow(ax, (x1 + w, .85), (x2, .85))
-    box(ax, .60, .52, .17, .15, "1단계 주의", "경보 1행 · 화면 확인·기록\n다음 샘플 검사 앞당김", color=AMBER, fill="#fdf6e7")
-    box(ax, .80, .52, .18, .15, "2단계 점검 요청", "건 안 경보 2행 이상\n현장 점검(목표: 10분 안 시작*)", color=RED, fill="#fbeeea")
+    box(ax, .60, .52, .17, .15, "1단계 주의", "사건 시작 · 화면 확인·기록\n다음 샘플 검사 앞당김", color=AMBER, fill="#fdf6e7")
+    box(ax, .80, .52, .18, .15, "2단계 점검 요청", "사건 안 경보 2행 · 한 번만\n현장 점검(목표: 10분 안 시작*)", color=RED, fill="#fbeeea")
     arrow(ax, (.87, .78), (.69, .67), text="첫 경보", text_xy=(.76, .735))
     arrow(ax, (.87, .78), (.89, .67), text="격상", text_xy=(.915, .735))
     arrow(ax, (.77, .595), (.80, .595), color=RED, text="", ls="--")
@@ -59,8 +59,8 @@ def operation_flow(path):
     arrow(ax, (.55, .355), (.50, .355))
     box(ax, .05, .27, .2, .17, "7 정상 복귀 확인", "다음 정상 기록에서 알림이\n멎는지 확인. 멎지 않으면\n2단계 유지", color=GREEN)
     arrow(ax, (.30, .355), (.25, .355))
-    box(ax, .05, .03, .27, .16, "8 교대·주간 감시", "monitor.py: 창별 알림 단위 수 vs\nBeta-Binomial 95·99%, 전류 수준 이동\n99% 초과·연속 2창 → 재보정 검토", color=MUTED, fill="#f5f7f8")
-    box(ax, .40, .03, .27, .16, "9 재보정·교체", "'정상 확인'으로 닫힌 구간만 사용\nrecalibrate.py --outcomes\n수락 통과 모델로 교체 → 1로 돌아감", color=MUTED, fill="#f5f7f8")
+    box(ax, .05, .03, .27, .16, "8 교대·주간 감시", "monitor.py: 창별 알림 단위 수 vs Beta-Binomial\n변경 기록·수준 이동 있음 → 재보정 검토\n없음 → 설비 점검 요청(열화 의심)", color=MUTED, fill="#f5f7f8")
+    box(ax, .40, .03, .27, .16, "9 재보정·교체", "미확인 사건의 의심 시간창은 뺌(--outcomes)\n점검 요청 창은 '정상 확인' 뒤에만 사용\n수락 통과 모델로 교체 → 1로 돌아감", color=MUTED, fill="#f5f7f8")
     arrow(ax, (.15, .27), (.15, .19)); arrow(ax, (.32, .11), (.40, .11), text="검토", text_xy=(.36, .135))
     box(ax, .72, .03, .26, .16, "예외: 수집 오류", "결측·비유한 값·시각 오류 행은 판정 보류\n'수집 상태 확인'(FM6): 케이블·커넥터\n수집 PC 시각 동기화", color=RED, fill="#fbeeea")
     ax.text(.02, .985, "Press Guard 운영 흐름 — 제안(가정 표시 *: 현장 합의로 정할 값)", fontsize=11, fontweight="bold", color=INK, va="top")
