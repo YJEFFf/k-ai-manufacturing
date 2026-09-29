@@ -1,0 +1,23 @@
+# 검토 9: 873e4e1의 test_time_order.py를 세 사본(v5=873e4e1, v4t=8b65130, v3t=c7d8bba)에 넣고 새·보강 시험만 실행(-k: error_row_inside·collection_units_split_where·late_stamped_record_end·early_stamped_record_start·displaced_row_group·short_gaps_between_records).
+# c7d8bba 사본은 CollectionUnits가 없어 import 줄에서 뺐다(단위 시험은 NameError로 실패로 센다). 새로 더한 5개 = displaced_row_group ×2 + short_gaps ×3.
+=== v5
+20 passed, 51 deselected in 27.07s
+=== v4t
+FAILED test_time_order.py::test_collection_units_split_where_interval_is_not_explained_by_arrived_rows
+FAILED test_time_order.py::test_displaced_row_group_does_not_merge_incidents[2]
+FAILED test_time_order.py::test_displaced_row_group_does_not_merge_incidents[3]
+FAILED test_time_order.py::test_short_gaps_between_records_still_close_incidents[0.3]
+FAILED test_time_order.py::test_short_gaps_between_records_still_close_incidents[0.45]
+FAILED test_time_order.py::test_short_gaps_between_records_still_close_incidents[0.5]
+6 failed, 14 passed, 51 deselected in 34.74s
+=== v3t
+FAILED test_time_order.py::test_error_row_inside_record_does_not_split_incident[nat]
+FAILED test_time_order.py::test_error_row_inside_record_does_not_split_incident[sensor]
+FAILED test_time_order.py::test_error_row_inside_record_does_not_split_incident[0.03]
+FAILED test_time_order.py::test_error_row_inside_record_does_not_split_incident[5]
+FAILED test_time_order.py::test_error_row_inside_short_normal_record_keeps_second_alert[nat]
+FAILED test_time_order.py::test_error_row_inside_short_normal_record_keeps_second_alert[sensor]
+FAILED test_time_order.py::test_error_row_inside_short_normal_record_keeps_second_alert[0.03]
+FAILED test_time_order.py::test_error_row_inside_short_normal_record_keeps_second_alert[5]
+FAILED test_time_order.py::test_collection_units_split_where_interval_is_not_explained_by_arrived_rows
+9 failed, 11 passed, 51 deselected in 33.35s

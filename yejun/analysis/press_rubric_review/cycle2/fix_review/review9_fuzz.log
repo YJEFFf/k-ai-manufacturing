@@ -1,0 +1,7 @@
+# 판 873e4e1 · 사본 /private/tmp/claude-501/r9/v5/yejun · 시행 80
+오류 종류별 개수: {'jitter_burst': 25, 'attach_late': 24, 'attach_early': 22, 'resend_fwd': 22, 'nan': 22, 'dup': 22, 'blank_rows': 19, 'nat': 19, 'spike': 19, 'clock_back': 18, 'drop': 18, 'insert_spike': 18, 'jitter': 18, 'reverse_resend': 15}
+일괄 ≠ 스트림 시행: 0 / 80
+접두부 불일치: 0 / 590
+사건마다 알림 두 번: 0 · 시작 없는 사건: 0
+부호 합계: 보류 229 · 튄 행 확인 46 · 새 기준 33
+위반 시행 없음

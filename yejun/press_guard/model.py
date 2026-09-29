@@ -41,11 +41,11 @@ INCIDENT_MAX_GAP_S = SUSPECT_MAX_GAP_S
 # 경보 없는 단위가 사건을 닫으려면 판정한 유효 행이 이만큼(8행 파형 창이 한 번 찬 길이) 있어야 한다. 수집 오류·기록 경계로 생긴
 # 더 짧은 조각은 성분이 다 차지 않아 정상 복귀의 근거가 못 된다(사건을 닫지도 잇지도 않는다).
 INCIDENT_MIN_CLEAR_ROWS = 8
-# 사건 추적 단위의 연속 판정 허용오차: 받아들인 두 행의 간격이 0.1초 × j(j는 1 이상, 그사이 도착한 행 수 이하) ± 이 값이면 같은 단위다.
-# 오류 행·시각 결측 행·판정 보류 행·확인된 튄 행·50 ms 이하 흔들림은 기록구간을 자르지만 사건 단위는 자르지 않는다(검토 7 R7-01). 기록 사이
-# 공백·표본 누락·시각이 틀려 옮겨진 행은 간격이 도착한 행 수로 설명되지 않아 단위를 나눈다(검토 8 R8-01·02: 공백 길이 기준은 옮겨진 행 묶음과
-# 짧은 공백의 연속 운전에서 두 이상을 합쳤다).
-UNIT_TOL_S = 0.05
+# 사건 추적 단위의 연속 판정 허용오차: 받아들인 두 행의 간격이 0.1초 × j ± 이 값이고, j가 그사이 도착한 행 수(보류·튄 행을 뺀 수 ~ 전체)와
+# 맞으면 같은 단위다(같은 시각 중복도 이어짐). 시각 결측·센서 오류·보류·확인된 튄 행·40 ms 이하 흔들림은 기록구간을 자르지만 사건 단위는 자르지
+# 않는다(검토 7 R7-01). 기록 사이 공백·표본 누락·시각이 틀려 옮겨진 행은 간격이 도착한 행 수와 맞지 않아 단위를 나눈다(검토 8 R8-01·02).
+# 반올림한 j에 대해 반 표본(50 ms) 허용은 늘 참이라 검사가 되지 않으므로 그보다 작게 둔다(검토 9 R9-01·D9-02).
+UNIT_TOL_S = 0.04
 # 기록 경계: 이웃 행의 시각 간격이 0.1초에서 이 값보다 벗어나면 새 기록구간이다. v1(1 µs)은 대회 자료의 정확한 0.1초 간격에 맞춘 값이라
 # 수집 시각이 1 ms만 흔들려도 기록이 쪼개진다. 대회 자료의 기록 사이 공백은 1.5초 이상이라 20 ms에서도 구간이 같다.
 TIME_TOL_S = 0.02
@@ -222,37 +222,51 @@ def spike_rows(order_event, has_time):
 
 class CollectionUnits:
     """사건 추적 단위: (연속 수집 번호, 그 안의 5초 블록). 받아들인 행(시각 있음·보류 아님)이 앞에 받아들인 행과 0.1초 × j ± UNIT_TOL_S
-    간격이면(j는 1 이상이고 그사이 도착한 행 수 이하) 같은 연속 수집이다. 그사이의 시각 결측·보류·튄 행, 센서 오류 행, 작은 흔들림은
-    간격이 도착한 행 수로 설명되므로 단위를 나누지 않는다. 기록 사이 공백·표본 누락·시각 역행·시각이 틀려 옮겨진 행은 설명되지 않아 새 단위다.
+    간격이고 j가 그사이 도착한 표본 수로 설명되면 같은 연속 수집이다. 도착한 행 k개(이 행 포함) 가운데 보류 행과 확인된 튄 행은 표본이 아닐 수
+    있으므로(재전송·끼어듦) j는 k − 보류 − 튄 행 이상이면 된다. 위쪽은 k에서 표본일 수 없는 보류 행(기준보다 한 표본 넘게 이른 재전송·지난 자료)을
+    뺀 수다. 시각 결측·센서 오류 행은 표본 자리를 차지한 것으로 본다. 같은 시각 중복(간격 1 ms 이하)도 이어진다. 기록 사이 공백·표본 누락·시각 역행·시각이 틀려 옮겨진 행은 설명되지 않아 새 단위다.
     연속 수집 안에서는 ALERT_UNIT_ROWS × 0.1초마다 새 블록을 연다. 튄 행을 확인하면 undo()로 그 행이 옮긴 상태를 되돌린다."""
 
-    _STATE = ("run", "run_start", "last", "last_index")
+    _STATE = ("run", "run_start", "last", "last_index", "held", "extra", "undone")
 
     def __init__(self):
-        self.run, self.run_start, self.last, self.last_index = -1, None, None, None
+        self.run, self.run_start, self.last, self.last_index, self.held, self.extra, self.undone = -1, None, None, None, 0, 0, 0
         self.index, self._undo = -1, None
 
-    def step(self, t, accepted):
-        """행마다 한 번 부른다(받아들이지 않은 행 포함). 돌려주는 값: (연속 수집 번호, 블록)."""
+    def step(self, t, accepted, held=False):
+        """행마다 한 번 부른다(받아들이지 않은 행 포함, held는 판정 보류 행). 돌려주는 값: (연속 수집 번호, 블록)."""
         self.index += 1
+        if held:
+            self.held += 1
+            # 기준보다 한 표본 넘게 이른 보류 행은 재전송·지난 자료라 표본 자리가 아니다(조금 이르게 찍힌 표본만 자리를 차지할 수 있다)
+            self.extra += not (self.last is not None and t is not None and not pd.isna(t) and t > self.last - pd.Timedelta(seconds=D.DT))
         if accepted:
             self._undo = {k: getattr(self, k) for k in self._STATE}
             same = False
             if self.last is not None:
                 gap = (t - self.last).total_seconds()
                 j = int(round(gap / D.DT))
-                same = 1 <= j <= self.index - self.last_index and abs(gap - j * D.DT) <= UNIT_TOL_S
+                arrived = self.index - self.last_index
+                if j == 0:
+                    same = abs(gap) <= 1e-3        # 같은 시각 중복(재전송)만. 0.04초처럼 짧은 간격은 옮겨진 행일 수 있다
+                else:
+                    same = abs(gap - j * D.DT) <= UNIT_TOL_S + 1e-9 and arrived - self.held - self.undone <= j <= arrived - self.extra
             if not same:
                 self.run, self.run_start = self.run + 1, t
-            self.last, self.last_index = t, self.index
+            self.last, self.last_index, self.held, self.extra, self.undone = t, self.index, 0, 0, 0
         if self.last is None:
             return -1, 0
         return self.run, int((self.last - self.run_start).total_seconds() / (ALERT_UNIT_ROWS * D.DT) + 1e-9)
 
     def undo(self):
+        """튄 행의 효과를 되돌린다. 튄 행 뒤에 온 보류 행 수는 남기고, 튄 행은 표본이 아닐 수 있는 행으로 센다."""
         if self._undo is not None:
+            held_after, extra_after = self.held, self.extra
             for k, v in self._undo.items():
                 setattr(self, k, v)
+            self.held += held_after
+            self.extra += extra_after
+            self.undone += 1
             self._undo = None
 
 
@@ -272,7 +286,7 @@ def incident_columns(alarm, reason, time, valid=None, order_event=None):
             units.undo()
             if valid[spike[i]]:
                 tr.undo()
-        run, block = units.step(t, bool(ht) and ev != ORDER_HELD)
+        run, block = units.step(t, bool(ht) and ev != ORDER_HELD, ev == ORDER_HELD)
         out[i] = tr.update(run, block, bool(a), why, t, bool(ok))
     return out
 
@@ -689,7 +703,7 @@ class StreamDetector:
                 if self.ref_valid:
                     self.incidents.undo()
             accepted = not pd.isna(t) and r.time_order_event != ORDER_HELD
-            run, block = self.units.step(t, accepted)
+            run, block = self.units.step(t, accepted, r.time_order_event == ORDER_HELD)
             inc.append(self.incidents.update(run, block, bool(r.alarm), r.reason, t, r.status == "ok"))
             if accepted:
                 self.ref_valid = r.status == "ok"

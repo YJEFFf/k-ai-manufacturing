@@ -550,26 +550,32 @@ def test_error_row_inside_short_normal_record_keeps_second_alert(weak_parts, kin
 
 
 def test_collection_units_split_where_interval_is_not_explained_by_arrived_rows():
-    """사건 단위 규칙(CollectionUnits): 받아들인 두 행의 간격이 0.1초 × j ± 50 ms(j는 그사이 도착한 행 수 이하)면 같은 단위다.
-    시각 결측 행·흔들림·끼어든 행은 단위를 나누지 않고, 표본 누락·짧은 공백·시각이 틀려 옮겨진 행 묶음·시각 역행은 나눈다(검토 8 R8-01·02)."""
+    """사건 단위 규칙(CollectionUnits): 받아들인 두 행의 간격이 0.1초 × j ± 40 ms이고 j가 그사이 도착한 표본 수로 설명되면 같은 단위다.
+    시각 결측 행·사양 안 흔들림(행마다 ±20 ms)·끼어든 행·같은 시각 중복은 단위를 나누지 않고, 표본 누락·짧은 공백·옮겨진 행 묶음·
+    시각 역행·공백 안의 시각 결측 행(공백을 정확히 메우지 않음)·재전송은 나눈다(검토 8 R8-01·02, 검토 9 R9-01·03)."""
     t0 = pd.Timestamp("2022-07-22 10:00:00", tz="UTC")
-    def run(xs, accepted=None):
+    def run(xs, held=()):
         units = CollectionUnits()
-        return [units.step(None if x is None else t0 + pd.Timedelta(seconds=x), x is not None if accepted is None else accepted[k])
+        return [units.step(None if x is None else t0 + pd.Timedelta(seconds=x), x is not None and k not in held, k in held)[0]
                 for k, x in enumerate(xs)]
-    # 30·45 ms 흔들림, 시각 결측 한 행(뒤 행 간격 0.2초 = 도착 2행) → 한 단위
-    assert {r for r, _ in run([0, .1, .23, .3, .445, .5, None, .7, .8])} == {0}
-    # 끼어든 행(보류로 받아들이지 않음) 뒤 0.1초 → 한 단위
-    assert {r for r, _ in run([0, .1, 5.2, .2, .3], [True, True, False, True, True])} == {0}
-    # 표본 2개 누락(0.3초, 도착 1행) → 새 단위
-    assert [r for r, _ in run([0, .1, .4, .5])] == [0, 0, 1, 1]
-    # 0.3초 공백으로 이어진 기록, 공백 안으로 옮겨진 2행 묶음(뒤 기록 0.2초 앞) → 각각 새 단위
-    assert [r for r, _ in run([0, .1, .2, .5, .6])] == [0, 0, 0, 1, 1]
-    assert [r for r, _ in run([0, .1, .2, 2.7, 2.8, 3.0, 3.1])] == [0, 0, 0, 1, 1, 2, 2]
-    # 시각 역행 → 새 단위
-    assert [r for r, _ in run([0, .1, .2, -5.0, -4.9])] == [0, 0, 0, 1, 1]
+    # 이웃 두 행이 20 ms씩 반대로 흔들림(간격 0.14·0.06초), 30 ms 한 행, 시각 결측 한 행, 같은 시각 중복 → 한 단위
+    assert set(run([0, .1, .22, .28, .4, .53, .6, None, .8, .8, .9])) == {0}
+    # 조금 이르게 찍혀 보류된 표본(−0.05초) 뒤 → 한 단위
+    assert set(run([0, .1, .2, .15, .4], held={3})) == {0}
+    # 표본 2개 누락(0.3초, 사이 도착 없음) → 새 단위
+    assert run([0, .1, .4, .5]) == [0, 0, 1, 1]
+    # 0.3초 공백, 공백 안으로 옮겨진 2행 묶음, 시각 역행 → 새 단위
+    assert run([0, .1, .2, .5, .6]) == [0, 0, 0, 1, 1]
+    assert run([0, .1, .2, 2.7, 2.8, 3.0, 3.1]) == [0, 0, 0, 1, 1, 2, 2]
+    assert run([0, .1, .2, -5.0, -4.9]) == [0, 0, 0, 1, 1]
+    # 1.5초 공백 안의 시각 결측 15행(공백을 메우지 않음) → 새 단위. 정확히 메우면(1.6초) 연속 수집으로 본다
+    assert run([0, .1, .2] + [None] * 15 + [1.7, 1.8])[-2:] == [1, 1]
+    assert run([0, .1, .2] + [None] * 15 + [1.8, 1.9])[-2:] == [0, 0]
+    # 0.3초 공백 안에 지난 두 행 재전송(보류) → 새 단위
+    assert run([0, .1, .2, 0, .1, .5, .6], held={3, 4})[-2:] == [1, 1]
     # 5초마다 새 블록
-    assert [b for _, b in run([i * .1 for i in range(101)])][::50] == [0, 1, 2]
+    units = CollectionUnits()
+    assert [units.step(t0 + pd.Timedelta(seconds=i * .1), True)[1] for i in range(101)][::50] == [0, 1, 2]
 
 
 @pytest.mark.parametrize("late", [2.55, 2.7, 2.95])
@@ -628,4 +634,34 @@ def test_short_gaps_between_records_still_close_incidents(weak_parts, gap):
     pred = model.predict(frame)
     assert (pred.incident_id.max(), pred.incident_notification.sum(), pred.incident_escalation.sum()) == (3, 3, 3)
     assert_stream_matches(model, frame, pred, 7)
+
+
+
+
+@pytest.mark.parametrize("fill", ["blank", "resend"])
+def test_rows_inside_gap_do_not_bridge_records(weak_parts, fill):
+    """기록 사이 공백(1.5초)에 시각이 빈 행 15개나 앞 기록의 지난 행 15개가 역순으로(계속 보류) 끼어도 두 이상은 따로 사건이다(검토 9 R9-01: 도착한 행 수를
+    j의 상한으로만 쓴 5차 판은 공백을 이어 붙여 둘째 이상의 알림을 없앴다)."""
+    model, (r11, r12, _), (quiet, _) = weak_parts
+    frame = _chain([r11, quiet.iloc[:30], r12], "2022-07-24", gap=1.5)
+    cut = len(r11) + 30
+    extra = D.inputs_only(quiet.iloc[:15]).copy()
+    extra[D.TIME] = "" if fill == "blank" else frame[D.TIME].iloc[cut - 16:cut - 1].to_numpy()[::-1]   # 마지막 행보다 이르고 역순이라 계속 보류된다
+    f = pd.concat([frame.iloc[:cut], extra, frame.iloc[cut:]], ignore_index=True)
+    assert (model.predict(frame).incident_id.max()) == 2
+    pred = model.predict(f)
+    assert (pred.incident_id.max(), pred.incident_notification.sum(), pred.incident_escalation.sum()) == (2, 2, 2)
+    assert_stream_matches(model, f, pred, 7)
+
+
+def test_duplicate_row_before_onset_does_not_split_incident(weak_parts):
+    """이상 시작 바로 앞 정상 행이 같은 시각으로 한 번 더 와도 사건은 하나다(검토 9 R9-03: 간격 0에서 단위가 나뉘어 앞 정상 조각이 사건을 닫았다)."""
+    model, (r11, r12, r13), (quiet, _) = weak_parts
+    middle = pd.concat([D.inputs_only(quiet.iloc[:10]), D.inputs_only(r12)], ignore_index=True)
+    frame = _chain([r11, middle, r13], "2022-07-21")
+    at = len(r11) + 9
+    f = pd.concat([frame.iloc[:at + 1], frame.iloc[[at]], frame.iloc[at + 1:]], ignore_index=True)
+    pred = model.predict(f)
+    assert (pred.incident_id.max(), pred.incident_notification.sum(), pred.incident_escalation.sum()) == (1, 1, 1)
+    assert_stream_matches(model, f, pred, 7)
 
