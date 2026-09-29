@@ -41,11 +41,6 @@ INCIDENT_MAX_GAP_S = SUSPECT_MAX_GAP_S
 # 경보 없는 단위가 사건을 닫으려면 판정한 유효 행이 이만큼(8행 파형 창이 한 번 찬 길이) 있어야 한다. 수집 오류·기록 경계로 생긴
 # 더 짧은 조각은 성분이 다 차지 않아 정상 복귀의 근거가 못 된다(사건을 닫지도 잇지도 않는다).
 INCIDENT_MIN_CLEAR_ROWS = 8
-# 사건 추적 단위의 연속 판정 허용오차: 받아들인 두 행의 간격이 0.1초 × j ± 이 값이고, j가 그사이 도착한 행 수(보류·튄 행을 뺀 수 ~ 전체)와
-# 맞으면 같은 단위다(같은 시각 중복도 이어짐). 시각 결측·센서 오류·보류·확인된 튄 행·40 ms 이하 흔들림은 기록구간을 자르지만 사건 단위는 자르지
-# 않는다(검토 7 R7-01). 기록 사이 공백·표본 누락·시각이 틀려 옮겨진 행은 간격이 도착한 행 수와 맞지 않아 단위를 나눈다(검토 8 R8-01·02).
-# 반올림한 j에 대해 반 표본(50 ms) 허용은 늘 참이라 검사가 되지 않으므로 그보다 작게 둔다(검토 9 R9-01·D9-02).
-UNIT_TOL_S = 0.04
 # 기록 경계: 이웃 행의 시각 간격이 0.1초에서 이 값보다 벗어나면 새 기록구간이다. v1(1 µs)은 대회 자료의 정확한 0.1초 간격에 맞춘 값이라
 # 수집 시각이 1 ms만 흔들려도 기록이 쪼개진다. 대회 자료의 기록 사이 공백은 1.5초 이상이라 20 ms에서도 구간이 같다.
 TIME_TOL_S = 0.02
@@ -174,8 +169,9 @@ class IncidentTracker:
             del self.alarms[k], self.evidence[k]
 
     def update(self, record, block, alarm, reason, time, valid=True):
-        """valid=False(수집 오류 행)는 상태를 바꾸지 않는다. 오류 행은 정상 복귀의 근거가 아니다. 단위(record, block)는 CollectionUnits가
-        도착한 행 수로 설명되지 않는 간격에서만 나누므로 오류 행이 기록을 잘라도 사건 단위는 그대로다(유효 행 수는 오류 행만큼 준다).
+        """valid=False(수집 오류 행)는 상태를 바꾸지 않는다. 오류 행은 정상 복귀의 근거가 아니다. 단위(record, block)는 건 대기열과 같은
+        (기록구간, 50행 블록)이다. 그래서 오류 행·흔들림이 기록을 자르면 단위도 잘려 사건이 나뉘거나 합쳐질 수 있다(검토 7 R7-01, 알려진 한계.
+        사건 단위를 기록과 따로 정한 4~6차 규칙은 검토 8~10이 찾은 회귀와 건 대기열과의 불일치(R10-03) 때문에 되돌렸다).
         단위가 끝날 때 경보가 났거나 유효 행이 INCIDENT_MIN_CLEAR_ROWS 이상인 단위만 '앞 단위'(경보 여부·끝 시각)가 된다.
         더 짧은 무경보 조각은 사건을 닫지도, 공백 기준 시각을 옮기지도 않는다."""
         if not valid:
@@ -220,74 +216,20 @@ def spike_rows(order_event, has_time):
     return out
 
 
-class CollectionUnits:
-    """사건 추적 단위: (연속 수집 번호, 그 안의 5초 블록). 받아들인 행(시각 있음·보류 아님)이 앞에 받아들인 행과 0.1초 × j ± UNIT_TOL_S
-    간격이고 j가 그사이 도착한 표본 수로 설명되면 같은 연속 수집이다. 도착한 행 k개(이 행 포함) 가운데 보류 행과 확인된 튄 행은 표본이 아닐 수
-    있으므로(재전송·끼어듦) j는 k − 보류 − 튄 행 이상이면 된다. 위쪽은 k에서 표본일 수 없는 보류 행(기준보다 한 표본 넘게 이른 재전송·지난 자료)을
-    뺀 수다. 시각 결측·센서 오류 행은 표본 자리를 차지한 것으로 본다. 같은 시각 중복(간격 1 ms 이하)도 이어진다. 기록 사이 공백·표본 누락·시각 역행·시각이 틀려 옮겨진 행은 설명되지 않아 새 단위다.
-    연속 수집 안에서는 ALERT_UNIT_ROWS × 0.1초마다 새 블록을 연다. 튄 행을 확인하면 undo()로 그 행이 옮긴 상태를 되돌린다."""
-
-    _STATE = ("run", "run_start", "last", "last_index", "held", "extra", "undone")
-
-    def __init__(self):
-        self.run, self.run_start, self.last, self.last_index, self.held, self.extra, self.undone = -1, None, None, None, 0, 0, 0
-        self.index, self._undo = -1, None
-
-    def step(self, t, accepted, held=False):
-        """행마다 한 번 부른다(받아들이지 않은 행 포함, held는 판정 보류 행). 돌려주는 값: (연속 수집 번호, 블록)."""
-        self.index += 1
-        if held:
-            self.held += 1
-            # 기준보다 한 표본 넘게 이른 보류 행은 재전송·지난 자료라 표본 자리가 아니다(조금 이르게 찍힌 표본만 자리를 차지할 수 있다)
-            self.extra += not (self.last is not None and t is not None and not pd.isna(t) and t > self.last - pd.Timedelta(seconds=D.DT))
-        if accepted:
-            self._undo = {k: getattr(self, k) for k in self._STATE}
-            same = False
-            if self.last is not None:
-                gap = (t - self.last).total_seconds()
-                j = int(round(gap / D.DT))
-                arrived = self.index - self.last_index
-                if j == 0:
-                    same = abs(gap) <= 1e-3        # 같은 시각 중복(재전송)만. 0.04초처럼 짧은 간격은 옮겨진 행일 수 있다
-                else:
-                    same = abs(gap - j * D.DT) <= UNIT_TOL_S + 1e-9 and arrived - self.held - self.undone <= j <= arrived - self.extra
-            if not same:
-                self.run, self.run_start = self.run + 1, t
-            self.last, self.last_index, self.held, self.extra, self.undone = t, self.index, 0, 0, 0
-        if self.last is None:
-            return -1, 0
-        return self.run, int((self.last - self.run_start).total_seconds() / (ALERT_UNIT_ROWS * D.DT) + 1e-9)
-
-    def undo(self):
-        """튄 행의 효과를 되돌린다. 튄 행 뒤에 온 보류 행 수는 남기고, 튄 행은 표본이 아닐 수 있는 행으로 센다."""
-        if self._undo is not None:
-            held_after, extra_after = self.held, self.extra
-            for k, v in self._undo.items():
-                setattr(self, k, v)
-            self.held += held_after
-            self.extra += extra_after
-            self.undone += 1
-            self._undo = None
-
-
-def incident_columns(alarm, reason, time, valid=None, order_event=None):
+def incident_columns(record, block, alarm, reason, time, valid=None, order_event=None):
     """일괄 분석용: 행마다 (사건 번호, 사건 첫 알림, 사건 격상, 근거 추가). 경보 없는 유효 단위(8행 이상)가 끼면 사건이 닫힌다.
-    단위는 CollectionUnits(간격이 도착한 행 수로 설명되지 않는 곳에서만 나뉨)다. 수집 오류 행(valid=False)은 건너뛴다.
-    튄 행을 확인한 행(SPIKE_EVENTS)에서는 단위 상태를 되돌리고, 그 앞의 튄 행이 사건 추적에 들어간 유효 행이었으면
-    그 행의 사건 배정·공백 효과도 되돌린다(사이에 수집 오류·보류 행이 끼어도 같다, 검토 3 R3-02)."""
-    tr, units = IncidentTracker(), CollectionUnits()
+    수집 오류 행(valid=False)은 건너뛴다. 튄 행을 확인한 행(SPIKE_EVENTS)에서는 그 앞의 튄 행이 사건 추적에 들어간 유효 행이었으면
+    그 행의 사건 배정·공백 효과를 되돌린다(사이에 수집 오류·보류 행이 끼어도 같다, 검토 3 R3-02)."""
+    tr = IncidentTracker()
     valid = np.ones(len(alarm), bool) if valid is None else np.asarray(valid, bool)
     order_event = np.zeros(len(alarm), int) if order_event is None else np.asarray(order_event, int)
     has_time = pd.notna(pd.Series(list(time), dtype=object)).to_numpy()
     spike = spike_rows(order_event, has_time)
     out = np.zeros((len(alarm), 4), dtype=int)
-    for i, (a, why, t, ok, ev, ht) in enumerate(zip(alarm, reason, time, valid, order_event, has_time)):
-        if ev in SPIKE_EVENTS and spike[i] >= 0:
-            units.undo()
-            if valid[spike[i]]:
-                tr.undo()
-        run, block = units.step(t, bool(ht) and ev != ORDER_HELD, ev == ORDER_HELD)
-        out[i] = tr.update(run, block, bool(a), why, t, bool(ok))
+    for i, (r, b, a, why, t, ok, ev) in enumerate(zip(record, block, alarm, reason, time, valid, order_event)):
+        if ev in SPIKE_EVENTS and spike[i] >= 0 and valid[spike[i]]:
+            tr.undo()
+        out[i] = tr.update(r, b, bool(a), why, t, bool(ok))
     return out
 
 
@@ -586,7 +528,7 @@ class GuardModel:
         out["notification"] = first_alerts(seg, out.alert_unit, alarm)
         out["alert_level"], out["escalation"] = alert_levels(seg, out.alert_unit, alarm)
         times = pd.to_datetime(out.timestamp, format="mixed", utc=True, errors="coerce")
-        inc = incident_columns(alarm, out.reason.to_numpy(), times, status == "ok", order_codes)
+        inc = incident_columns(seg, out.alert_unit.to_numpy(), alarm, out.reason.to_numpy(), times, status == "ok", order_codes)
         out["incident_id"], out["incident_notification"], out["incident_escalation"], out["incident_update"] = inc.T
         # 이상 확률: 경보와 무관한 별도 층. 보정기가 없으면 결측. LR은 사전 비율과 무관하고 확률은 prior에 조건부다.
         lr = self.probability.likelihood_ratio(comp["score"]) if self.probability is not None else np.full(len(frame), np.nan)
@@ -654,7 +596,6 @@ class StreamDetector:
         self.record_lr = np.nan       # 현재 기록구간의 지금까지 최대 우도비
         self.current_state = CurrentState()
         self.incidents = IncidentTracker()   # 기록구간을 넘는 사건 묶음(스트림 전체에서 이어진다)
-        self.units = CollectionUnits()       # 사건 추적 단위(간격이 도착한 행 수로 설명되지 않는 곳에서 나뉜다)
         self.ref_valid = False               # 기준 시각을 마지막으로 옮긴 행이 사건 추적에 들어간 유효 행인가(튄 행 되돌리기, spike_rows와 같은 규칙)
 
     def push(self, frame):
@@ -698,14 +639,10 @@ class StreamDetector:
                 escalate = int(self.episode_alarms == ESCALATION_ALARM_ROWS)
                 self.alerted_blocks = {b for b in self.alerted_blocks if b >= r.alert_unit - 1} | {r.alert_unit}
             notifications.append(int(notify)); levels.append(level); escalations.append(escalate)
-            if r.time_order_event in SPIKE_EVENTS:
-                self.units.undo()
-                if self.ref_valid:
-                    self.incidents.undo()
-            accepted = not pd.isna(t) and r.time_order_event != ORDER_HELD
-            run, block = self.units.step(t, accepted, r.time_order_event == ORDER_HELD)
-            inc.append(self.incidents.update(run, block, bool(r.alarm), r.reason, t, r.status == "ok"))
-            if accepted:
+            if r.time_order_event in SPIKE_EVENTS and self.ref_valid:
+                self.incidents.undo()
+            inc.append(self.incidents.update(r.record_id, r.alert_unit, bool(r.alarm), r.reason, t, r.status == "ok"))
+            if r.time_order_event != ORDER_HELD and not pd.isna(t):
                 self.ref_valid = r.status == "ok"
         result["notification"], result["alert_level"], result["escalation"] = notifications, levels, escalations
         result["record_likelihood_ratio"] = record_lr

@@ -1062,7 +1062,8 @@ def level2_split_ratio(normal, seg_all):
         times = pd.to_datetime(p.timestamp, format="mixed", utc=True, errors="coerce")
         for alpha in ALPHAS:
             alarm = p.p_value.to_numpy() <= alpha
-            inc = incident_columns(alarm, p.reason.to_numpy(), times, p.status.eq("ok").to_numpy(), p.time_order_event.to_numpy())
+            inc = incident_columns(p.record_id.to_numpy(), p.alert_unit.to_numpy(), alarm, p.reason.to_numpy(), times,
+                                   p.status.eq("ok").to_numpy(), p.time_order_event.to_numpy())
             rows.append(dict(kind=kind, split=name, alpha=alpha, test_records=len(te), alarm_rows=int(alarm.sum()),
                              level1=int(inc[:, 1].sum()), level2=int(inc[:, 2].sum())))
     t = pd.DataFrame(rows)

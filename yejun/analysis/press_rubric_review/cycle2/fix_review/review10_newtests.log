@@ -1,0 +1,20 @@
+# 검토 10: 새 시험 효력. 873e4e1 사본(/private/tmp/claude-501/r10/v5t)에 a489001의 test_time_order.py를 넣어 실행
+E       TypeError: CollectionUnits.step() takes 3 positional arguments but 4 were given
+test_time_order.py:559: TypeError
+E       assert (1, 1, 1) == (2, 2, 2)
+E         
+E         At index 0 diff: 1 != 2
+E         Use -v to get more diff
+E       assert (1, 1, 1) == (2, 2, 2)
+E         
+E         At index 0 diff: 1 != 2
+E         Use -v to get more diff
+E       assert (2, 2, 2) == (1, 1, 1)
+E         
+E         At index 0 diff: 2 != 1
+E         Use -v to get more diff
+FAILED test_time_order.py::test_collection_units_split_where_interval_is_not_explained_by_arrived_rows
+FAILED test_time_order.py::test_rows_inside_gap_do_not_bridge_records[blank]
+FAILED test_time_order.py::test_rows_inside_gap_do_not_bridge_records[resend]
+FAILED test_time_order.py::test_duplicate_row_before_onset_does_not_split_incident
+4 failed, 1 passed, 69 deselected in 6.47s

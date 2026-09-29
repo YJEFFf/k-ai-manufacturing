@@ -1,0 +1,13 @@
+# 검토 10: 재현 사본(/private/tmp/claude-501/r10/v6r, 한 명령 재현 뒤 출력이 있는 상태)에서 pytest press_guard 전체. 출력 없는 사본(/private/tmp/claude-501/r10/v6)에서는 행 단위 예측 파일이 필요한 5개가 FileNotFoundError로 실패했다(환경 탓)
+........................................................................ [ 75%]
+...............................................                          [100%]
+190 passed, 1 skipped in 325.19s (0:05:25)
+## 출력 없는 사본
+            Whether the type of the content passed to the file/buffer is string or
+            passed to a binary file/buffer, a wrapper is inserted.
+FAILED test_analyze.py::test_verify_detects_tampering - AssertionError: asser...
+FAILED test_analyze.py::test_verify_compares_row_level_predictions - FileNotF...
+FAILED test_analyze.py::test_prediction_contract_columns - FileNotFoundError:...
+FAILED test_review_regressions.py::test_integrity_rejects_real_mutations[prediction_missing]
+FAILED test_review_regressions.py::test_v1_rerun_does_not_break_v2_verify - F...
+5 failed, 185 passed, 1 skipped in 349.94s (0:05:49)

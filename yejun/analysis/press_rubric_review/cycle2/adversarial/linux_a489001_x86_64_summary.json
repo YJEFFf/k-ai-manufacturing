@@ -1,0 +1,296 @@
+{
+ "mode": "quick",
+ "python": "3.12.14",
+ "total_seconds": 1941.4,
+ "passed": 21,
+ "failed": 0,
+ "planned": 21,
+ "steps": [
+  {
+   "step": "v1 선행(주 모델·기준모델·행별 예측)",
+   "command": [
+    "/usr/local/bin/python",
+    "/work/yejun/press_submission/run_all.py",
+    "--steps",
+    "2"
+   ],
+   "returncode": 0,
+   "seconds": 24.9,
+   "last_line": "  fig.savefig(out / \"fig_segment_length.png\", dpi=150)",
+   "log": "press_guard/outputs/reproduce_logs/01.log"
+  },
+  {
+   "step": "v1 동결값 비교",
+   "command": [
+    "/usr/local/bin/python",
+    "/work/yejun/press_submission/verify.py",
+    "--out",
+    "outputs",
+    "--steps",
+    "2"
+   ],
+   "returncode": 0,
+   "seconds": 1.1,
+   "last_line": "16/16 통과 (1~2단계 부분 비교, 필수 집계 9개). 환경: Linux-6.8.0-50-generic-x86_64-with-glibc2.41 vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 b372a18b66af vs 동결 b372a18b66af",
+   "log": "press_guard/outputs/reproduce_logs/02.log"
+  },
+  {
+   "step": "v2 학습·시간순 5회",
+   "command": [
+    "/usr/local/bin/python",
+    "/work/yejun/press_guard/train.py",
+    "--rolling"
+   ],
+   "returncode": 0,
+   "seconds": 63.7,
+   "last_line": "    B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              180                          21                 21             0.0          0.7           ",
+   "log": "press_guard/outputs/reproduce_logs/03.log"
+  },
+  {
+   "step": "v2 분석",
+   "command": [
+    "/usr/local/bin/python",
+    "/work/yejun/press_guard/analyze.py"
+   ],
+   "returncode": 0,
+   "seconds": 500.9,
+   "last_line": "  fig.tight_layout(); fig.savefig(out / \"fig_missed_example_v2.png\", dpi=150); plt.close(fig)",
+   "log": "press_guard/outputs/reproduce_logs/04.log"
+  },
+  {
+   "step": "v2 실행 검증(audit)",
+   "command": [
+    "/usr/local/bin/python",
+    "/work/yejun/press_guard/audit.py"
+   ],
+   "returncode": 0,
+   "seconds": 517.6,
+   "last_line": "16/16 통과 → /work/yejun/press_guard/outputs/audit.json",
+   "log": "press_guard/outputs/reproduce_logs/05.log"
+  },
+  {
+   "step": "v2 동결값 비교",
+   "command": [
+    "/usr/local/bin/python",
+    "/work/yejun/press_guard/verify.py"
+   ],
+   "returncode": 0,
+   "seconds": 4.3,
+   "last_line": "59/59 통과. 코드 7cf9d74a294a vs 동결 7cf9d74a294a; 환경 Linux-6.8.0-50-generic-x86_64-with-glibc2.41 vs 동결 macOS-26.3.1-arm64-arm-64bit",
+   "log": "press_guard/outputs/reproduce_logs/06.log"
+  },
+  {
+   "step": "진단 표(press_evidence)",
+   "command": [
+    "/usr/local/bin/python",
+    "/work/yejun/analysis/press_evidence/build_tables.py"
+   ],
+   "returncode": 0,
+   "seconds": 28.2,
+   "last_line": "    B 12 0.099174 0.099174      180               11  0.061111       0.099126          False",
+   "log": "press_guard/outputs/reproduce_logs/07.log"
+  },
+  {
+   "step": "진단 보강 표·그림",
+   "command": [
+    "/usr/local/bin/python",
+    "/work/yejun/analysis/press_evidence/build_diagnostics.py"
+   ],
+   "returncode": 0,
+   "seconds": 161.6,
+   "last_line": "  fig.savefig(path, dpi=150, bbox_inches=\"tight\", metadata={\"Software\": None})",
+   "log": "press_guard/outputs/reproduce_logs/08.log"
+  },
+  {
+   "step": "press_evidence 동결값 비교",
+   "command": [
+    "/usr/local/bin/python",
+    "/work/yejun/analysis/package_contract.py",
+    "--package",
+    "/work/yejun/analysis/press_evidence"
+   ],
+   "returncode": 0,
+   "seconds": 1.6,
+   "last_line": "통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 46개)",
+   "log": "press_guard/outputs/reproduce_logs/09.log"
+  },
+  {
+   "step": "press_supervised 동결값 비교",
+   "command": [
+    "/usr/local/bin/python",
+    "/work/yejun/analysis/package_contract.py",
+    "--package",
+    "/work/yejun/analysis/press_supervised"
+   ],
+   "returncode": 0,
+   "seconds": 1.3,
+   "last_line": "통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)",
+   "log": "press_guard/outputs/reproduce_logs/10.log"
+  },
+  {
+   "step": "press_advance 동결값 비교",
+   "command": [
+    "/usr/local/bin/python",
+    "/work/yejun/analysis/package_contract.py",
+    "--package",
+    "/work/yejun/analysis/press_advance"
+   ],
+   "returncode": 0,
+   "seconds": 1.0,
+   "last_line": "통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)",
+   "log": "press_guard/outputs/reproduce_logs/11.log"
+  },
+  {
+   "step": "press_selection 동결값 비교",
+   "command": [
+    "/usr/local/bin/python",
+    "/work/yejun/analysis/package_contract.py",
+    "--package",
+    "/work/yejun/analysis/press_selection"
+   ],
+   "returncode": 0,
+   "seconds": 1.4,
+   "last_line": "통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 13개)",
+   "log": "press_guard/outputs/reproduce_logs/12.log"
+  },
+  {
+   "step": "보완 실험 E1~E3 동결값 비교",
+   "command": [
+    "/usr/local/bin/python",
+    "/work/yejun/analysis/press_supplement/verify.py"
+   ],
+   "returncode": 0,
+   "seconds": 2.3,
+   "last_line": "통과: 무결성·기대값 비교 E1, E3 · 건너뜀 E2(외부 입력 없음)",
+   "log": "press_guard/outputs/reproduce_logs/13.log"
+  },
+  {
+   "step": "시험: v2",
+   "command": [
+    "/usr/local/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "/work/yejun/press_guard"
+   ],
+   "returncode": 0,
+   "seconds": 599.0,
+   "last_line": "189 passed, 2 skipped in 598.20s (0:09:58)",
+   "log": "press_guard/outputs/reproduce_logs/14.log"
+  },
+  {
+   "step": "시험: v1",
+   "command": [
+    "/usr/local/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "/work/yejun/press_submission/tests"
+   ],
+   "returncode": 0,
+   "seconds": 10.3,
+   "last_line": "44 passed, 2 skipped, 14 warnings in 9.41s",
+   "log": "press_guard/outputs/reproduce_logs/15.log"
+  },
+  {
+   "step": "시험: press_advance",
+   "command": [
+    "/usr/local/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "/work/yejun/analysis/press_advance/test_contract.py"
+   ],
+   "returncode": 0,
+   "seconds": 1.8,
+   "last_line": "8 passed in 1.17s",
+   "log": "press_guard/outputs/reproduce_logs/16.log"
+  },
+  {
+   "step": "시험: press_evidence",
+   "command": [
+    "/usr/local/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "/work/yejun/analysis/press_evidence/test_contract.py"
+   ],
+   "returncode": 0,
+   "seconds": 3.9,
+   "last_line": "6 passed in 3.19s",
+   "log": "press_guard/outputs/reproduce_logs/17.log"
+  },
+  {
+   "step": "시험: press_evidence",
+   "command": [
+    "/usr/local/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "/work/yejun/analysis/press_evidence/test_diagnostics.py"
+   ],
+   "returncode": 0,
+   "seconds": 2.8,
+   "last_line": "5 passed, 14 warnings in 2.08s",
+   "log": "press_guard/outputs/reproduce_logs/18.log"
+  },
+  {
+   "step": "시험: press_selection",
+   "command": [
+    "/usr/local/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "/work/yejun/analysis/press_selection/test_contract.py"
+   ],
+   "returncode": 0,
+   "seconds": 3.6,
+   "last_line": "6 passed in 3.02s",
+   "log": "press_guard/outputs/reproduce_logs/19.log"
+  },
+  {
+   "step": "시험: press_supervised",
+   "command": [
+    "/usr/local/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "/work/yejun/analysis/press_supervised/test_contract.py"
+   ],
+   "returncode": 0,
+   "seconds": 2.8,
+   "last_line": "6 passed in 2.19s",
+   "log": "press_guard/outputs/reproduce_logs/20.log"
+  },
+  {
+   "step": "시험: press_supplement",
+   "command": [
+    "/usr/local/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "/work/yejun/analysis/press_supplement/test_contract.py"
+   ],
+   "returncode": 0,
+   "seconds": 7.5,
+   "last_line": "10 passed, 3 skipped in 6.69s",
+   "log": "press_guard/outputs/reproduce_logs/21.log"
+  }
+ ]
+}

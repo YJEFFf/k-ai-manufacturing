@@ -1,0 +1,6 @@
+# 판 a489001 · 사본 /private/tmp/claude-501/r10/v6/yejun · 시행 60
+오류 종류별 개수: {'nat': 17, 'insert_spike': 17, 'swap': 15, 'near_held': 13, 'blank': 13, 'late3': 13, 'late2': 12, 'spike_jit': 10, 'spike': 10, 'dup_ms': 7} · 흔들림 ±10 ms 13회 · ±20 ms 13회
+일괄 ≠ 스트림 시행: 0 / 60
+접두부 불일치: 0 / 469
+사건마다 알림 두 번: 0 · 시작 없는 사건: 0 · 보류 행 합 70
+위반 시행: 없음

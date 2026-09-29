@@ -1,0 +1,15 @@
+# 검토 10: review7_sweep.py(한 행 오류 32종 × 대회 이상 파일 600행 + 맥락 자료)를 a489001·c7d8bba 사본에서 돌리고 review7_sweep_compare.py로 맞댐. 판 이름은 비교 도구의 고정 출력이다: 'c7d8bba' = a489001, '3c6fbf3' = c7d8bba
+## a489001 실행 요약
+19637건 → /private/tmp/claude-501/r10/sweep_v6.csv
+## c7d8bba 실행 요약
+19637건 → /private/tmp/claude-501/r10/sweep_v3.csv
+## 대조
+대조 19637건 (c7d8bba 19637, 3c6fbf3 19637)
+split             : 나빠짐     0건 · 나아짐     0건
+held              : 나빠짐     0건 · 나아짐     0건
+extra_starts      : 나빠짐     0건 · 나아짐     0건
+body_extra_starts : 나빠짐     0건 · 나아짐     0건
+alarm_loss        : 나빠짐     0건 · 나아짐     0건
+dup_alerts        : 나빠짐     0건 · 나아짐     0건
+c7d8bba: 이상 파일 전수 19189건 · 사건 분할 0 · 본체 추가 시작 0 · 중복 알림 0 · 보류 생긴 곳 5230 · 보류 합 5694 · 경보 감소 합 51409
+3c6fbf3: 이상 파일 전수 19189건 · 사건 분할 0 · 본체 추가 시작 0 · 중복 알림 0 · 보류 생긴 곳 5230 · 보류 합 5694 · 경보 감소 합 51409
