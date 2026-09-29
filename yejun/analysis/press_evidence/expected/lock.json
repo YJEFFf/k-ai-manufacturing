@@ -41,9 +41,9 @@
     "operating_states_summary.csv": "947563e49ff8679a5af15c17901f27cc888ce8e21c1837325ab3db234fd837ea",
     "split_state_composition.csv": "702f4b7da8c4504abaad46b14251d857ba1372725edd0fac83d73d5ce3694cbd",
     "normal_alarms_by_state.csv": "23d8135439f676eb182bca2ff2d0e99c4f6c6c6567cbc9d134b9cb200365b0b3",
-    "decision_table_diagnosis_v2.csv": "6e5259ab112e5127826f75462aaeb01ffebc8c0479b0f70946f16c1695a4567b",
-    "manifest.json": "96d985710aff2c6d49d4c3275e448b21143f1c9af4564275ab4abb4548ad632c",
-    "diagnostics_manifest.json": "8e9891707179b11cd38a0ae3ecabb3567f406be6bdef02bf2f817147c8993626"
+    "decision_table_diagnosis_v2.csv": "4f621e61ded16b5e0b62e16c1a98659451b71c744a95833a9f43d59bd3d752d6",
+    "manifest.json": "e04c280f169223276369a28540d148dc310353cecc191f1569ff75aef19adebb",
+    "diagnostics_manifest.json": "04c13d3e366cc73f7b70118286e2ef22084db728be8c74598b8ba9c5d3e57acd"
   },
   "images": [
     "figures/fig_d2a_timeline.png",

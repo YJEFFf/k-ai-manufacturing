@@ -44,6 +44,8 @@ INCIDENT_MIN_CLEAR_ROWS = 8
 # 기록 경계: 이웃 행의 시각 간격이 0.1초에서 이 값보다 벗어나면 새 기록구간이다. v1(1 µs)은 대회 자료의 정확한 0.1초 간격에 맞춘 값이라
 # 수집 시각이 1 ms만 흔들려도 기록이 쪼개진다. 대회 자료의 기록 사이 공백은 1.5초 이상이라 20 ms에서도 구간이 같다.
 TIME_TOL_S = 0.02
+SAMPLE_NS = round(D.DT * 1_000_000_000)
+TIME_TOL_NS = round(TIME_TOL_S * 1_000_000_000)
 SHORT_RECORD_WARN = 8      # 평균 기록 길이가 이보다 짧으면 수집 시각 간격 경고(8행 파형 창이 거의 차지 않는다, 검토 3 F3: 7행 조각이면 경보 569→428행)
 # 수집 시각 순서: 기준(마지막으로 받아들인 시각)보다 이른 행은 판정을 보류한다. 그런 행이 정상 간격(0.1초 ± TIME_TOL_S)으로
 # 이만큼 이어지면 시계 재설정·지난 자료로 보고 새 기준으로 받아들인다. 한 행의 시각 오류가 뒤 자료 전체를 막지 않게 하는 값이다.
@@ -144,7 +146,8 @@ class IncidentTracker:
     (누적 경보 행·근거 성분)는 이미 사람에게 나간 알림을 뜻하므로 되돌리지 않는다. 그래서 되돌린 뒤에도 한 사건에 시작·격상 알림이
     두 번 나가지 않는다(검토 3 R3-01). 튄 행의 경보도 실제 측정값의 경보이므로 그 사건의 누적 경보에 남는다."""
 
-    _FIELDS = ("unit", "unit_alarmed", "unit_start", "unit_rows", "prev_alarmed", "prev_end", "last_time", "open", "incident")
+    _FIELDS = ("unit", "unit_alarmed", "unit_start", "unit_rows", "prev_alarmed", "prev_end", "last_time", "open", "incident",
+               "piece_rows", "piece_alarmed", "invalid_rows", "last_sample", "last_alarm")
 
     def __init__(self):
         self.unit = None; self.unit_alarmed = False; self.unit_start = None; self.unit_rows = 0
@@ -154,6 +157,9 @@ class IncidentTracker:
         self.alarms = {}             # 사건 번호 → 누적 경보 행(되돌리지 않는다)
         self.evidence = {}           # 사건 번호 → 근거 성분(되돌리지 않는다)
         self._undo = None
+        self.piece_rows = 0; self.piece_alarmed = False
+        self.invalid_rows = 0; self.last_sample = None; self.last_alarm = False
+        self._restored = False
 
     def undo(self):
         """마지막 유효 행의 사건 배정·공백 효과를 되돌린다(미래로 튄 한 행). 발급한 번호와 사건별 알림 상태는 되돌리지 않는다."""
@@ -161,6 +167,7 @@ class IncidentTracker:
             for k, v in self._undo.items():
                 setattr(self, k, v)
             self._undo = None
+            self._restored = True
 
     def _prune(self):
         """되돌리기로 돌아갈 수 있는 사건(현재·직전 배정)의 알림 상태만 남긴다."""
@@ -168,22 +175,54 @@ class IncidentTracker:
         for k in [k for k in self.alarms if k not in keep]:
             del self.alarms[k], self.evidence[k]
 
-    def update(self, record, block, alarm, reason, time, valid=True):
-        """valid=False(수집 오류 행)는 상태를 바꾸지 않는다. 오류 행은 정상 복귀의 근거가 아니다. 단위(record, block)는 건 대기열과 같은
-        (기록구간, 50행 블록)이다. 그래서 오류 행·흔들림이 기록을 자르면 단위도 잘려 사건이 나뉘거나 합쳐질 수 있다(검토 7 R7-01, 알려진 한계.
-        사건 단위를 기록과 따로 정한 4~6차 규칙은 검토 8~10이 찾은 회귀와 건 대기열과의 불일치(R10-03) 때문에 되돌렸다).
+    def update(self, record, block, alarm, reason, time, valid=True, sample=None):
+        """단위(record, block)는 건 대기열과 같은 (기록구간, 50행 블록)이다. 오류 한 행 앞뒤가 원래 표본 간격으로 이어지면
+        잘린 조각의 경보·유효 행 수를 이어 받는다. 결측·보류 행과 같은 시각·센서값의 재전송은 정상 복귀 행 수에 더하지 않는다.
+        두 간격의 합으로 확인한 작은 시각 흔들림은 가운데 행에 경보가 없을 때만 복원한다(이미 내보낸 알림은 바꾸지 않는다).
         단위가 끝날 때 경보가 났거나 유효 행이 INCIDENT_MIN_CLEAR_ROWS 이상인 단위만 '앞 단위'(경보 여부·끝 시각)가 된다.
-        더 짧은 무경보 조각은 사건을 닫지도, 공백 기준 시각을 옮기지도 않는다."""
+        더 짧은 무경보 조각은 사건을 닫지도, 공백 기준 시각을 옮기지도 않는다. 긴 입력의 50행 블록 경계는 그대로 유지한다."""
         if not valid:
+            self.invalid_rows = min(2, self.invalid_rows + 1)
             return 0, 0, 0, 0
-        self._undo = {k: getattr(self, k) for k in self._FIELDS}
         t = time if time is not None and not pd.isna(time) else self.last_time
-        if (record, block) != self.unit:
-            if self.unit is not None and (self.unit_alarmed or self.unit_rows >= INCIDENT_MIN_CLEAR_ROWS):
-                self.prev_alarmed, self.prev_end = self.unit_alarmed, self.last_time
-            self.unit, self.unit_alarmed, self.unit_start, self.unit_rows = (record, block), False, t, 0
-        self.unit_rows += 1
+        sample = tuple(sample) if sample is not None else None
+        duplicate = t == self.last_time and sample is not None and sample == self.last_sample
+        changed = (record, block) != self.unit
+        new_record = self.unit is not None and record != self.unit[0] and block == 0
+        gap_ns = (t - self.last_time).value if t is not None and self.last_time is not None else None
+        join = False
+        if new_record and gap_ns is not None:
+            steps = range(1, SPIKE_SKIP_SAMPLES + 1) if self._restored else (1, 2) if self.invalid_rows == 1 else ()
+            join = duplicate or any(abs(gap_ns - k * SAMPLE_NS) <= TIME_TOL_NS for k in steps)
+            before = self._undo
+            if (not join and not self.invalid_rows and self.piece_rows == 1 and not self.last_alarm and before is not None
+                    and before["unit"] is not None and before["unit"][0] != self.unit[0]
+                    and not before["invalid_rows"] and before["last_time"] is not None):
+                first_ns = (self.last_time - before["last_time"]).value
+                if (first_ns > 0 and gap_ns > 0 and abs(first_ns - SAMPLE_NS) > TIME_TOL_NS
+                        and abs(gap_ns - SAMPLE_NS) > TIME_TOL_NS
+                        and abs(first_ns + gap_ns - 2 * SAMPLE_NS) <= TIME_TOL_NS):
+                    # 가운데 무경보 한 행은 유효 관측으로 세되, 그 시각 때문에 잘린 단위 배정만 복원한다.
+                    for k, v in before.items():
+                        setattr(self, k, v)
+                    self.unit_rows += 1
+                    join = True
+        self._undo = {k: getattr(self, k) for k in self._FIELDS}
+        if changed:
+            if not join or self.piece_rows >= ALERT_UNIT_ROWS:
+                # 이어 붙인 앞 조각의 경보가 온전한 무경보 50행 블록까지 덮지 않게 한다.
+                ended_alarm = self.piece_alarmed if self.piece_rows >= ALERT_UNIT_ROWS else self.unit_alarmed
+                ended_rows = self.piece_rows if self.piece_rows >= ALERT_UNIT_ROWS else self.unit_rows
+                if self.unit is not None and (ended_alarm or ended_rows >= INCIDENT_MIN_CLEAR_ROWS):
+                    self.prev_alarmed, self.prev_end = ended_alarm, self.last_time
+                self.unit_alarmed, self.unit_start, self.unit_rows = False, t, 0
+            self.unit, self.piece_rows, self.piece_alarmed = (record, block), 0, False
+        self.unit_rows += int(not duplicate)
+        self.piece_rows += 1
+        self.piece_alarmed |= alarm
         self.last_time = t
+        self.last_sample, self.last_alarm = sample, alarm
+        self.invalid_rows = 0; self._restored = False
         if not alarm:
             return 0, 0, 0, 0
         first_in_unit = not self.unit_alarmed
@@ -216,7 +255,7 @@ def spike_rows(order_event, has_time):
     return out
 
 
-def incident_columns(record, block, alarm, reason, time, valid=None, order_event=None):
+def incident_columns(record, block, alarm, reason, time, valid=None, order_event=None, samples=None):
     """일괄 분석용: 행마다 (사건 번호, 사건 첫 알림, 사건 격상, 근거 추가). 경보 없는 유효 단위(8행 이상)가 끼면 사건이 닫힌다.
     수집 오류 행(valid=False)은 건너뛴다. 튄 행을 확인한 행(SPIKE_EVENTS)에서는 그 앞의 튄 행이 사건 추적에 들어간 유효 행이었으면
     그 행의 사건 배정·공백 효과를 되돌린다(사이에 수집 오류·보류 행이 끼어도 같다, 검토 3 R3-02)."""
@@ -226,10 +265,11 @@ def incident_columns(record, block, alarm, reason, time, valid=None, order_event
     has_time = pd.notna(pd.Series(list(time), dtype=object)).to_numpy()
     spike = spike_rows(order_event, has_time)
     out = np.zeros((len(alarm), 4), dtype=int)
+    samples = [None] * len(alarm) if samples is None else samples
     for i, (r, b, a, why, t, ok, ev) in enumerate(zip(record, block, alarm, reason, time, valid, order_event)):
         if ev in SPIKE_EVENTS and spike[i] >= 0 and valid[spike[i]]:
             tr.undo()
-        out[i] = tr.update(r, b, bool(a), why, t, bool(ok))
+        out[i] = tr.update(r, b, bool(a), why, t, bool(ok), samples[i])
     return out
 
 
@@ -312,16 +352,16 @@ class TimeOrder:
         if t is None or pd.isna(t):
             return ORDER_OK
         if self.ref is None or t >= self.ref:
-            jump = self.ref is not None and (t - self.ref).total_seconds() > D.DT + TIME_TOL_S
+            jump = self.ref is not None and (t - self.ref).value > SAMPLE_NS + TIME_TOL_NS
             self.prev_ref, self.ref, self.run, self.run_last, self.run_first, self.jumped = self.ref, t, 0, None, None, jump
             return ORDER_OK
         if self.jumped and self.prev_ref is not None:
-            since = (t - self.prev_ref).total_seconds()
-            k = round(since / D.DT)
-            if 1 <= k <= SPIKE_SKIP_SAMPLES and abs(since - k * D.DT) <= TIME_TOL_S:   # 튀기 전 시간축의 1~3칸 뒤 표본
+            since = (t - self.prev_ref).value
+            k = round(since / SAMPLE_NS)
+            if 1 <= k <= SPIKE_SKIP_SAMPLES and abs(since - k * SAMPLE_NS) <= TIME_TOL_NS:   # 튀기 전 시간축의 1~3칸 뒤 표본
                 self.ref, self.run, self.run_last, self.run_first, self.jumped = t, 0, None, None, False
                 return ORDER_SPIKE_SKIPPED
-        steady = self.run_last is not None and abs((t - self.run_last).total_seconds() - D.DT) <= TIME_TOL_S
+        steady = self.run_last is not None and abs((t - self.run_last).value - SAMPLE_NS) <= TIME_TOL_NS
         previous = self.run_last
         if steady:
             self.run += 1
@@ -356,7 +396,8 @@ def layout_with_order(frame, *, time_state=None):
     codes, _ = timestamp_order(timestamp, time_state)
     status[codes == ORDER_HELD] = "bad_time_order"
     bad = status != "ok"
-    boundary = timestamp.diff().dt.total_seconds().sub(D.DT).abs().gt(TIME_TOL_S).to_numpy() | bad
+    # 정수 시간 차로 비교해 정확히 80·120 ms인 간격도 포함한다. 초(float)로 빼면 0.1 - 0.08이 0.02보다 커진다.
+    boundary = timestamp.diff().sub(pd.Timedelta(SAMPLE_NS, unit="ns")).abs().gt(pd.Timedelta(TIME_TOL_NS, unit="ns")).to_numpy() | bad
     boundary[1:] |= bad[:-1]
     if len(boundary): boundary[0] = False
     return status, np.cumsum(boundary), codes
@@ -528,7 +569,8 @@ class GuardModel:
         out["notification"] = first_alerts(seg, out.alert_unit, alarm)
         out["alert_level"], out["escalation"] = alert_levels(seg, out.alert_unit, alarm)
         times = pd.to_datetime(out.timestamp, format="mixed", utc=True, errors="coerce")
-        inc = incident_columns(seg, out.alert_unit.to_numpy(), alarm, out.reason.to_numpy(), times, status == "ok", order_codes)
+        samples = frame[D.SENSORS].apply(pd.to_numeric, errors="coerce").to_numpy(float)
+        inc = incident_columns(seg, out.alert_unit.to_numpy(), alarm, out.reason.to_numpy(), times, status == "ok", order_codes, samples)
         out["incident_id"], out["incident_notification"], out["incident_escalation"], out["incident_update"] = inc.T
         # 이상 확률: 경보와 무관한 별도 층. 보정기가 없으면 결측. LR은 사전 비율과 무관하고 확률은 prior에 조건부다.
         lr = self.probability.likelihood_ratio(comp["score"]) if self.probability is not None else np.full(len(frame), np.nan)
@@ -620,8 +662,9 @@ class StreamDetector:
         result["row_id"] = np.arange(self.rows_seen,self.rows_seen+len(incoming))
         notifications, levels, escalations, record_lr, inc, state_rms, state_labels = [], [], [], [], [], [], []
         times = pd.to_datetime(result.timestamp, format="mixed", utc=True, errors="coerce")
-        raw_current = pd.to_numeric(incoming[D.SENSORS[2]], errors="coerce").to_numpy(float)
-        for r, t, value in zip(result.itertuples(), times, raw_current):
+        samples = incoming[D.SENSORS].apply(pd.to_numeric, errors="coerce").to_numpy(float)
+        for r, t, sample in zip(result.itertuples(), times, samples):
+            value = sample[2]
             if r.record_id != self.alert_record:
                 self.alert_record, self.alerted_blocks, self.record_lr = r.record_id, set(), np.nan
                 self.current_state = CurrentState()
@@ -641,7 +684,7 @@ class StreamDetector:
             notifications.append(int(notify)); levels.append(level); escalations.append(escalate)
             if r.time_order_event in SPIKE_EVENTS and self.ref_valid:
                 self.incidents.undo()
-            inc.append(self.incidents.update(r.record_id, r.alert_unit, bool(r.alarm), r.reason, t, r.status == "ok"))
+            inc.append(self.incidents.update(r.record_id, r.alert_unit, bool(r.alarm), r.reason, t, r.status == "ok", sample))
             if r.time_order_event != ORDER_HELD and not pd.isna(t):
                 self.ref_valid = r.status == "ok"
         result["notification"], result["alert_level"], result["escalation"] = notifications, levels, escalations

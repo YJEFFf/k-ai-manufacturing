@@ -10,7 +10,7 @@
   },
   "code_sha256": {
     "build_tables.py": "c8e0689046757f50b71bc98974df9ec336371a563ca2275628baa1b8156cd328",
-    "press_guard/model.py": "2901a4029c669f59847d029b3b2d51c83e758c21ecdbccd783510624d87b41cb",
+    "press_guard/model.py": "710bea85ce08b3777941e339c88f2616417b71f3636cc4e6ce2679d604ff87f5",
     "press_guard/analyze.py": "d8c7ad4884ab29401a1afbfa228b20adcf16543da44ee22b33a4febb7840c076"
   },
   "sources": {
@@ -75,5 +75,5 @@
       }
     ]
   },
-  "elapsed_s": 9.48583408400009
+  "elapsed_s": 10.551165332999972
 }

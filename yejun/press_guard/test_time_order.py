@@ -6,7 +6,8 @@ import pandas as pd
 import pytest
 
 import simulate
-from model import D, HERE, IncidentTracker, incident_columns, StreamDetector, cases, incidents, layout, load_bundle, time_order_events, timing_warning
+from model import (D, HERE, IncidentTracker, incident_columns, StreamDetector, TimeOrder, ORDER_HELD, ORDER_REANCHOR,
+                   ORDER_SPIKE_SKIPPED, cases, incidents, layout, load_bundle, time_order_events, timing_warning)
 
 
 @pytest.fixture(scope="module")
@@ -33,6 +34,51 @@ def assert_stream_matches(model, frame, expected, chunk):
         assert len(detector.tail) <= 7
     actual = pd.concat(parts, ignore_index=True)
     pd.testing.assert_frame_equal(actual, expected, rtol=1e-11, atol=1e-11)
+
+
+@pytest.mark.parametrize("interval_ns, records", [(79_999_999, 3), (80_000_000, 1), (80_000_001, 1),
+                                                (119_999_999, 1), (120_000_000, 1), (120_000_001, 3)])
+def test_sampling_tolerance_includes_exact_boundaries(inputs, interval_ns, records):
+    """허용 간격은 80~120 ms(양 끝 포함)이며 그 밖의 1 ns도 기록 경계다."""
+    _, _, quiet, _, _ = inputs
+    frame = quiet.iloc[:3].copy()
+    frame[D.TIME] = (pd.Timestamp("2022-07-20") + pd.to_timedelta(np.arange(3) * interval_ns, unit="ns")).astype(str)
+    assert np.unique(layout(frame)[1]).size == records
+
+
+@pytest.mark.parametrize("split", ["A", "B"])
+def test_exact_80_120_ms_preserves_abnormal_detection(inputs, split):
+    """시각만 ±10 ms 교대로 바꾸면 간격은 정확히 80·120 ms다. 21기록의 점수·알림이 원자료와 같아야 한다."""
+    model = load_bundle(HERE / "artifacts" / f"guard_{split}.json")
+    abnormal = inputs[-1]
+    frame = D.inputs_only(abnormal).copy()
+    pos = D.segment_positions(D.segments(frame))[0]
+    frame[D.TIME] = (pd.to_datetime(frame[D.TIME]) + pd.to_timedelta(np.where(pos % 2, -10, 10), unit="ms")).astype(str)
+    base, pred = model.predict(abnormal), model.predict(frame)
+    assert pred.loc[pred.alarm.eq(1), "record_id"].nunique() == 21
+    pd.testing.assert_frame_equal(pred.drop(columns="timestamp"), base.drop(columns="timestamp"))
+    assert_stream_matches(model, frame, pred, 7)
+
+
+def test_exact_80_120_ms_allows_clock_reanchor(inputs):
+    model, false_alarm, _, _, _ = inputs
+    old = at(false_alarm, "2022-07-13")
+    old[D.TIME] = (pd.to_datetime(old[D.TIME]) + pd.to_timedelta(np.where(np.arange(len(old)) % 2, -10, 10), unit="ms")).astype(str)
+    frame = pd.concat([at(false_alarm, "2022-07-14"), old], ignore_index=True)
+    pred = model.predict(frame)
+    assert pred.time_order_event.iloc[50:53].tolist() == [ORDER_HELD, ORDER_HELD, ORDER_REANCHOR]
+    assert pred.status.iloc[52:].eq("ok").all()
+    assert_stream_matches(model, frame, pred, 7)
+
+
+@pytest.mark.parametrize("steps", [1, 2, 3])
+@pytest.mark.parametrize("offset_ns", [-20_000_000, 20_000_000])
+def test_spike_recovery_includes_tolerance_boundaries(steps, offset_ns):
+    order = TimeOrder()
+    start = pd.Timestamp("2022-07-20", tz="UTC")
+    order.step(start)
+    order.step(start + pd.Timedelta(seconds=5))
+    assert order.step(start + pd.Timedelta(steps * 100_000_000 + offset_ns, unit="ns")) == ORDER_SPIKE_SKIPPED
 
 
 @pytest.mark.parametrize("chunk", [1, 7, 128])
@@ -521,7 +567,6 @@ def weak_parts(inputs):
     return model, [abnormal[seg == k].reset_index(drop=True) for k in (11, 12, 13)], [test[rec == q].reset_index(drop=True) for q in quiet[:2]]
 
 
-@pytest.mark.xfail(strict=True, reason="알려진 한계(검토 7 R7-01): 사건 단위가 건 대기열과 같은 (기록구간, 50행 블록)이라 오류 한 행이 기록을 자르면 사건이 나뉘거나 합쳐진다. 기록과 따로 정한 4~6차 규칙은 회귀(검토 8~10) 때문에 되돌렸다")
 @pytest.mark.parametrize("kind", ["nat", "sensor", .03, 5])
 def test_error_row_inside_record_does_not_split_incident(weak_parts, kind):
     """경보 없는 앞 조각(10행) 뒤에 이상이 이어지는 기록에서, 첫 이상 행의 오류 한 행(시각·센서 결측, 30 ms 흔들림, +5초 튐)이
@@ -534,9 +579,10 @@ def test_error_row_inside_record_does_not_split_incident(weak_parts, kind):
     pred = model.predict(_fault(frame, len(r11) + 10, kind))
     assert (pred.incident_id.max(), pred.incident_notification.sum(), pred.incident_escalation.sum()) == (1, 1, 1)
     assert_stream_matches(model, _fault(frame, len(r11) + 10, kind), pred, 7)
+    for stop in (len(r11) + 11, len(r11) + 12, len(r11) + 19):
+        pd.testing.assert_frame_equal(model.predict(_fault(frame, len(r11) + 10, kind).iloc[:stop]), pred.iloc[:stop])
 
 
-@pytest.mark.xfail(strict=True, reason="알려진 한계(검토 7 R7-01): 사건 단위가 건 대기열과 같은 (기록구간, 50행 블록)이라 오류 한 행이 기록을 자르면 사건이 나뉘거나 합쳐진다. 기록과 따로 정한 4~6차 규칙은 회귀(검토 8~10) 때문에 되돌렸다")
 @pytest.mark.parametrize("kind", ["nat", "sensor", .03, 5])
 def test_error_row_inside_short_normal_record_keeps_second_alert(weak_parts, kind):
     """두 이상 사이 정상 기록(14행) 가운데의 오류 한 행이 기록을 8행 미만 조각 둘로 잘라도 정상 복귀(유효 8행 이상)로 보고
@@ -549,6 +595,8 @@ def test_error_row_inside_short_normal_record_keeps_second_alert(weak_parts, kin
     second = pred.iloc[len(r11) + 14:]
     assert pred.incident_id.max() == 2 and (second.incident_notification.sum(), second.incident_escalation.sum()) == (1, 1)
     assert_stream_matches(model, _fault(frame, len(r11) + 7, kind), pred, 7)
+    for stop in (len(r11) + 8, len(r11) + 9, len(r11) + 16):
+        pd.testing.assert_frame_equal(model.predict(_fault(frame, len(r11) + 7, kind).iloc[:stop]), pred.iloc[:stop])
 
 
 @pytest.mark.parametrize("late", [2.55, 2.7, 2.95])
@@ -627,7 +675,6 @@ def test_rows_inside_gap_do_not_bridge_records(weak_parts, fill):
     assert_stream_matches(model, f, pred, 7)
 
 
-@pytest.mark.xfail(strict=True, reason="알려진 한계(검토 7 R7-01): 사건 단위가 건 대기열과 같은 (기록구간, 50행 블록)이라 같은 시각 중복 한 행(검토 9 R9-03)도 기록을 자르면 사건이 나뉘거나 합쳐진다. 기록과 따로 정한 4~6차 규칙은 회귀(검토 8~10) 때문에 되돌렸다")
 def test_duplicate_row_before_onset_does_not_split_incident(weak_parts):
     """이상 시작 바로 앞 정상 행이 같은 시각으로 한 번 더 와도 사건은 하나다(검토 9 R9-03: 간격 0에서 단위가 나뉘어 앞 정상 조각이 사건을 닫았다)."""
     model, (r11, r12, r13), (quiet, _) = weak_parts
@@ -638,6 +685,37 @@ def test_duplicate_row_before_onset_does_not_split_incident(weak_parts):
     pred = model.predict(f)
     assert (pred.incident_id.max(), pred.incident_notification.sum(), pred.incident_escalation.sum()) == (1, 1, 1)
     assert_stream_matches(model, f, pred, 7)
+
+
+def test_duplicate_row_does_not_add_normal_recovery_evidence(weak_parts):
+    """정상 관측 7행에 동일 행 재전송을 더해도 정상 복귀 8행으로 세지 않는다."""
+    model, (r11, r12, _), (quiet, _) = weak_parts
+    frame = _chain([r11, quiet.iloc[:7], r12], "2022-07-22")
+    at = len(r11) + 3
+    frame = pd.concat([frame.iloc[:at + 1], frame.iloc[[at]], frame.iloc[at + 1:]], ignore_index=True)
+    pred = model.predict(frame)
+    assert (pred.incident_notification.sum(), pred.incident_escalation.sum()) == (1, 1)
+    assert_stream_matches(model, frame, pred, 1)
+
+
+@pytest.mark.parametrize("missing", [[6], [6, 57]])
+def test_joined_fragment_keeps_full_quiet_block_as_recovery(inputs, missing):
+    """오류 앞 경보를 이어받아도 오류 뒤의 온전한 정상 50행 블록은 다음 사건을 분리한다. 건·사건 대기열도 같은 단계다."""
+    model, _, quiet, _, _ = inputs
+    frame = at(pd.concat([quiet] * 3, ignore_index=True).iloc[:120], "2022-07-25")
+    frame.loc[missing, D.TIME] = ""
+    pred = model.predict(frame)
+    alarm = np.zeros(len(pred), bool)
+    alarm[[0, 60]] = True
+    pred["alarm"] = alarm.astype(int)
+    pred["reason"] = np.where(alarm, "magnitude", "")
+    inc = incident_columns(pred.record_id, pred.alert_unit, alarm, pred.reason,
+                           pd.to_datetime(pred.timestamp, format="mixed", utc=True, errors="coerce"),
+                           pred.status.eq("ok"), pred.time_order_event)
+    pred["incident_id"], pred["incident_notification"], pred["incident_escalation"], pred["incident_update"] = inc.T
+    assert pred.loc[alarm, "incident_id"].tolist() == [1, 2]
+    queue = incidents(cases(pred), pred)
+    assert queue.incident_id.tolist() == [1, 2] and queue.level.tolist() == [1, 1]
 
 
 def test_incident_queue_matches_row_alerts_in_long_continuous_record(inputs):
@@ -668,4 +746,3 @@ def test_incident_queue_matches_row_alerts_in_long_continuous_record(inputs):
             assert set(p.incident_id[a].astype(int)) == set(queue.incident_id.astype(int))
             escalated = set(p.incident_id[p.incident_escalation.eq(1)].astype(int))
             assert all((r.level == 2) == (int(r.incident_id) in escalated) for r in queue.itertuples())
-

@@ -37,10 +37,10 @@
     "press_threads": "1"
   },
   "resources": {
-    "peak_rss_mb": 239.3
+    "peak_rss_mb": 241.6
   },
   "code_hashes": {
-    "model.py": "2901a4029c669f59847d029b3b2d51c83e758c21ecdbccd783510624d87b41cb",
+    "model.py": "710bea85ce08b3777941e339c88f2616417b71f3636cc4e6ce2679d604ff87f5",
     "probability.py": "67007ee9c8a9a12c48707e77230907dac2c155a519edfe7868863065aa4f34dd",
     "insights.py": "1e54e8edc400b8b9e50077f4cdd272f931a5524c048b80839ec32f900d3d97d0",
     "monitor.py": "a970ef8c0a8e002864f8551b541ad23d55c39a09dad4147c83e4fd7c240ad37b",
@@ -85,9 +85,9 @@
     "test_predictions_B.csv": "1eda4c5153f3420c3ab7d69ed4b67779bc78532e042aec9d01b13d4be9d71846"
   },
   "exploratory": true,
-  "elapsed_s": 24.593858709002234,
+  "elapsed_s": 25.51597420799999,
   "analysis": {
-    "training_fingerprint": "1d0d75bf0dafe221269c4f7c480c2041aeb7a07abfe4ce7648a8a1cfc106529e",
+    "training_fingerprint": "63ee624188c1d0201785468b6ee83d99cc23dab137cdd946e74d8ed4ba00b013",
     "config": {
       "reps": 2000
     },
@@ -139,7 +139,7 @@
       "incident_summary_v2.csv": "7184320225c2227630a5fb902b67cf3bf47915c313e8abd70ac7de6ba25c02f9",
       "unit_results_v2.csv": "a980686b64806d60458c9c1b8e30bf6b3ee3831acb47216d82104ab351a22761",
       "probability_baselines_v2.csv": "16664fa43d19dd0576a0d8721c071ccd36ddd6a66e4c01a6bb90b4091ae98f46",
-      "analysis_summary.json": "cdf83a82d7f7c3782d35463f5e2ead8d09d757e786227de9c088336c7d490c81",
+      "analysis_summary.json": "39d6b71983509a3de91b8167ffd592556591fa50b4cd1ea48f6554d9f6a563da",
       "model_comparison_v2.md": "308ede3d08463847c84afacc104d05bcfdc2157e409288ac80a780011afaae41",
       "fig_recall_by_position_v2.png": "5f79f3f8505d10fdcb9f516ef5562651d904b1766f019a47dbcd3cbd8ed4fc5c",
       "fig_first_alarm_v2.png": "c629b9f2bb01600c2956cc37e2ead5a538dd6fca0aad8f06021ce395668aaf25",
@@ -151,7 +151,7 @@
       "fig_position_vibration_v2.png": "12e94aab84fadbfc9d43cfd127e0a361ae7a12cc8e9b3d3dca680337e27997cb"
     }
   },
-  "audit_sha256": "cb0edbfb20d25cdde2c3db6197e57e9e065c61b63b681215a1641ab1d3f8cd56",
+  "audit_sha256": "defd18e998345614bfebd8cc8ccecb6d3cf87bdf174902937ac109ab1b05fe6f",
   "prediction_digest_sha256": "5a08f4f3e8e0ae16b9738eab84bbd40e6de4fd95631c74e6675643eacc9b2454",
   "frozen_artifacts": {
     "guard_A.json": "c938707f1dd16e7c239b8053e7f032d8fac828d6c753de2b898ba9130a594f10",
