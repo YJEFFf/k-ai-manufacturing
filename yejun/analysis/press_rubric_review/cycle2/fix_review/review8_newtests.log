@@ -1,0 +1,35 @@
+# OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 python review8_newtests.py <8b65130 실험 사본 yejun> <c7d8bba 사본 yejun>
+# 8b65130
+PASSED test_r8_new.py::test_error_row_inside_record_does_not_split_incident[nat]
+PASSED test_r8_new.py::test_error_row_inside_record_does_not_split_incident[sensor]
+PASSED test_r8_new.py::test_error_row_inside_record_does_not_split_incident[0.03]
+PASSED test_r8_new.py::test_error_row_inside_record_does_not_split_incident[5]
+PASSED test_r8_new.py::test_error_row_inside_short_normal_record_keeps_second_alert[nat]
+PASSED test_r8_new.py::test_error_row_inside_short_normal_record_keeps_second_alert[sensor]
+PASSED test_r8_new.py::test_error_row_inside_short_normal_record_keeps_second_alert[0.03]
+PASSED test_r8_new.py::test_error_row_inside_short_normal_record_keeps_second_alert[5]
+PASSED test_r8_new.py::test_collection_units_split_only_at_real_gaps_and_isolate_displaced_rows
+PASSED test_r8_new.py::test_late_stamped_record_end_does_not_merge_incidents[2.55]
+PASSED test_r8_new.py::test_late_stamped_record_end_does_not_merge_incidents[2.7]
+PASSED test_r8_new.py::test_late_stamped_record_end_does_not_merge_incidents[2.95]
+PASSED test_r8_new.py::test_early_stamped_record_start_does_not_merge_incidents[2.55]
+PASSED test_r8_new.py::test_early_stamped_record_start_does_not_merge_incidents[2.7]
+PASSED test_r8_new.py::test_early_stamped_record_start_does_not_merge_incidents[2.95]
+15 passed, 51 deselected in 16.76s
+# c7d8bba
+PASSED test_r8_new.py::test_late_stamped_record_end_does_not_merge_incidents[2.55]
+PASSED test_r8_new.py::test_late_stamped_record_end_does_not_merge_incidents[2.7]
+PASSED test_r8_new.py::test_late_stamped_record_end_does_not_merge_incidents[2.95]
+PASSED test_r8_new.py::test_early_stamped_record_start_does_not_merge_incidents[2.55]
+PASSED test_r8_new.py::test_early_stamped_record_start_does_not_merge_incidents[2.7]
+PASSED test_r8_new.py::test_early_stamped_record_start_does_not_merge_incidents[2.95]
+FAILED test_r8_new.py::test_error_row_inside_record_does_not_split_incident[nat]
+FAILED test_r8_new.py::test_error_row_inside_record_does_not_split_incident[sensor]
+FAILED test_r8_new.py::test_error_row_inside_record_does_not_split_incident[0.03]
+FAILED test_r8_new.py::test_error_row_inside_record_does_not_split_incident[5]
+FAILED test_r8_new.py::test_error_row_inside_short_normal_record_keeps_second_alert[nat]
+FAILED test_r8_new.py::test_error_row_inside_short_normal_record_keeps_second_alert[sensor]
+FAILED test_r8_new.py::test_error_row_inside_short_normal_record_keeps_second_alert[0.03]
+FAILED test_r8_new.py::test_error_row_inside_short_normal_record_keeps_second_alert[5]
+FAILED test_r8_new.py::test_collection_units_split_only_at_real_gaps_and_isolate_displaced_rows
+9 failed, 6 passed, 51 deselected in 14.69s

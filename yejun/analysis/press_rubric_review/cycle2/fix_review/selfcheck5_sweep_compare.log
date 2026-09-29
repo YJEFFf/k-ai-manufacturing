@@ -1,0 +1,10 @@
+# 5차 수정본(CollectionUnits: 간격이 도착한 행 수로 설명되는가, 0.1초 × j ± 50 ms) 자체 점검. review7_sweep.py(4 workers) → review7_sweep_compare.py <5차>.csv <c7d8bba>.csv. 판 이름은 고정 출력: 'c7d8bba' = 5차 수정본, '3c6fbf3' = c7d8bba
+대조 19637건 (c7d8bba 19637, 3c6fbf3 19637)
+split             : 나빠짐     0건 · 나아짐     0건
+held              : 나빠짐     0건 · 나아짐     0건
+extra_starts      : 나빠짐     0건 · 나아짐     0건
+body_extra_starts : 나빠짐     0건 · 나아짐     0건
+alarm_loss        : 나빠짐     0건 · 나아짐     0건
+dup_alerts        : 나빠짐     0건 · 나아짐     0건
+c7d8bba: 이상 파일 전수 19189건 · 사건 분할 0 · 본체 추가 시작 0 · 중복 알림 0 · 보류 생긴 곳 5230 · 보류 합 5694 · 경보 감소 합 51409
+3c6fbf3: 이상 파일 전수 19189건 · 사건 분할 0 · 본체 추가 시작 0 · 중복 알림 0 · 보류 생긴 곳 5230 · 보류 합 5694 · 경보 감소 합 51409

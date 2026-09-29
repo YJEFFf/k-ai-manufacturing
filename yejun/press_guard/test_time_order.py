@@ -549,35 +549,33 @@ def test_error_row_inside_short_normal_record_keeps_second_alert(weak_parts, kin
     assert_stream_matches(model, _fault(frame, len(r11) + 7, kind), pred, 7)
 
 
-def test_collection_units_split_only_at_real_gaps_and_isolate_displaced_rows():
-    """사건 단위 규칙(CollectionUnits): 기록 안 흔들림·표본 누락·시각 결측 행은 흐름을 나누지 않는다. 공백 뒤 첫 행 다음 행이 정상 간격이
-    아니면 첫 행만 따로 단위가 된다(늦게 찍혀 다음 기록 앞에 붙은 행). 흐름 끝에 정상 간격이 아닌 간격으로 붙은 행 뒤에 공백이 오면 displaced다."""
+def test_collection_units_split_where_interval_is_not_explained_by_arrived_rows():
+    """사건 단위 규칙(CollectionUnits): 받아들인 두 행의 간격이 0.1초 × j ± 50 ms(j는 그사이 도착한 행 수 이하)면 같은 단위다.
+    시각 결측 행·흔들림·끼어든 행은 단위를 나누지 않고, 표본 누락·짧은 공백·시각이 틀려 옮겨진 행 묶음·시각 역행은 나눈다(검토 8 R8-01·02)."""
     t0 = pd.Timestamp("2022-07-22 10:00:00", tz="UTC")
-    at_s = lambda x: None if x is None else t0 + pd.Timedelta(seconds=x)
-    def run(xs):
+    def run(xs, accepted=None):
         units = CollectionUnits()
-        return [units.step(at_s(x), x is not None) for x in xs]
-    # 기록 안: 30 ms 흔들림, 표본 2개 누락(0.3초), 시각 결측 한 행 → 한 흐름·한 블록
-    out = run([0, .1, .23, .3, .6, .7, None, .9, 1.0])
-    assert {(r, b) for r, b, _ in out} == {(0, 0)} and not any(d for _, _, d in out)
-    # 공백(3초) 뒤 첫 행 다음이 0.2초 뒤 → 첫 행 혼자, 다음 행부터 새 흐름
-    out = run([0, .1, .2, 2.9, 3.1, 3.2, 3.3])
-    assert [r for r, _, _ in out] == [0, 0, 0, 1, 2, 2, 2]
-    # 공백 뒤 첫 행 다음이 정상 간격이면 한 흐름
-    assert [r for r, _, _ in run([0, .1, 3.1, 3.2, 3.3])] == [0, 0, 1, 1, 1]
-    # 흐름 끝에 0.25초 간격으로 붙은 행 뒤 공백 → 공백 뒤 첫 행에서 displaced
-    out = run([0, .1, .2, .45, 3.2, 3.3])
-    assert [r for r, _, _ in out] == [0, 0, 0, 0, 1, 1] and [d for _, _, d in out] == [False] * 4 + [True, False]
-    # 정상 간격으로 끝난 기록 뒤 공백은 displaced가 아니다
-    assert not any(d for _, _, d in run([0, .1, .2, 3.2, 3.3]))
+        return [units.step(None if x is None else t0 + pd.Timedelta(seconds=x), x is not None if accepted is None else accepted[k])
+                for k, x in enumerate(xs)]
+    # 30·45 ms 흔들림, 시각 결측 한 행(뒤 행 간격 0.2초 = 도착 2행) → 한 단위
+    assert {r for r, _ in run([0, .1, .23, .3, .445, .5, None, .7, .8])} == {0}
+    # 끼어든 행(보류로 받아들이지 않음) 뒤 0.1초 → 한 단위
+    assert {r for r, _ in run([0, .1, 5.2, .2, .3], [True, True, False, True, True])} == {0}
+    # 표본 2개 누락(0.3초, 도착 1행) → 새 단위
+    assert [r for r, _ in run([0, .1, .4, .5])] == [0, 0, 1, 1]
+    # 0.3초 공백으로 이어진 기록, 공백 안으로 옮겨진 2행 묶음(뒤 기록 0.2초 앞) → 각각 새 단위
+    assert [r for r, _ in run([0, .1, .2, .5, .6])] == [0, 0, 0, 1, 1]
+    assert [r for r, _ in run([0, .1, .2, 2.7, 2.8, 3.0, 3.1])] == [0, 0, 0, 1, 1, 2, 2]
+    # 시각 역행 → 새 단위
+    assert [r for r, _ in run([0, .1, .2, -5.0, -4.9])] == [0, 0, 0, 1, 1]
     # 5초마다 새 블록
-    assert [b for _, b, _ in run([i * .1 for i in range(101)])][::50] == [0, 1, 2]
+    assert [b for _, b in run([i * .1 for i in range(101)])][::50] == [0, 1, 2]
 
 
 @pytest.mark.parametrize("late", [2.55, 2.7, 2.95])
 def test_late_stamped_record_end_does_not_merge_incidents(weak_parts, late):
-    """이상 기록 끝 행이 늦게 찍혀 다음 정상 기록 앞 0.05~0.45초에 붙어도 두 이상은 따로 사건이다(정상 간격이 아니므로 그 행만 따로 단위).
-    사건 단위를 수집 공백으로만 나눈 첫 판에서는 그 행의 경보가 정상 기록 전체를 경보 단위로 만들어 두 이상이 합쳐졌다(둘째 알림 없음)."""
+    """이상 기록 끝 행이 늦게 찍혀 다음 정상 기록 앞 0.05~0.45초에 붙어도 두 이상은 따로 사건이다(간격이 도착한 행 수로 설명되지 않아
+    그 행은 따로 단위). 사건 단위를 수집 공백 0.5초로만 나눈 4차 초안에서는 그 행의 경보가 정상 기록 전체를 경보 단위로 만들어 두 이상이 합쳐졌다."""
     model, (r11, r12, _), (_, quiet) = weak_parts
     frame = _chain([r11, quiet.iloc[:14], r12], "2022-07-22")
     f = _fault(frame, len(r11) - 1, late)
@@ -591,8 +589,7 @@ def test_late_stamped_record_end_does_not_merge_incidents(weak_parts, late):
 @pytest.mark.parametrize("early", [2.55, 2.7, 2.95])
 def test_early_stamped_record_start_does_not_merge_incidents(inputs, weak_parts, early):
     """이상 기록 첫 행(1행으로도 경보가 나는 행)이 이르게 찍혀 앞 정상 기록 끝 0.05~0.45초 뒤에 붙어도 두 이상은 따로 사건이고 둘째 이상에
-    시작·격상 알림이 한 번씩 나간다. 붙은 행은 도착 때 앞 사건에 이어지지만(이미 판정), 바로 뒤 실제 공백에서 그 연결을 되돌려 정상 기록이
-    정상 복귀 근거로 남는다(undo_link). 그래서 둘째 이상의 시작 알림은 붙은 행 다음 경보 행에서 나간다."""
+    시작·격상 알림이 한 번씩 나간다(붙은 행은 따로 단위라 정상 기록이 정상 복귀 근거로 남는다)."""
     model, (r11, r12, _), (_, quiet) = weak_parts
     _, _, _, _, abnormal = inputs
     second = pd.concat([D.inputs_only(magnitude_rows(model, abnormal, 1)), D.inputs_only(r12)], ignore_index=True)
@@ -605,4 +602,30 @@ def test_early_stamped_record_start_does_not_merge_incidents(inputs, weak_parts,
     assert pred.incident_id.max() == 2 and (tail.incident_notification.sum(), tail.incident_escalation.sum()) == (1, 1)
     for chunk in (1, 7):
         assert_stream_matches(model, f, pred, chunk)
+
+
+@pytest.mark.parametrize("rows", [2, 3])
+def test_displaced_row_group_does_not_merge_incidents(weak_parts, rows):
+    """이상 기록 끝 2·3행이 같은 크기로 늦게 찍혀 다음 정상 기록 앞 0.3초에 붙어도 두 이상은 따로 사건이다(검토 8 R8-01: 붙은 묶음끼리는
+    정상 간격이라 4차 수정본의 한 행 규칙이 풀려 합쳐졌다)."""
+    model, (r11, r12, _), (_, quiet) = weak_parts
+    frame = _chain([r11, quiet.iloc[:14], r12], "2022-07-22")
+    t = pd.to_datetime(frame[D.TIME])
+    f = frame.copy()
+    for row in range(len(r11) - rows, len(r11)):
+        f.loc[row, D.TIME] = (t[row] + pd.Timedelta(seconds=2.7)).strftime("%Y-%m-%d %H:%M:%S.%f")
+    pred = model.predict(f)
+    assert (pred.incident_id.max(), pred.incident_notification.sum(), pred.incident_escalation.sum()) == (2, 2, 2)
+    assert_stream_matches(model, f, pred, 7)
+
+
+@pytest.mark.parametrize("gap", [.3, .45, .5])
+def test_short_gaps_between_records_still_close_incidents(weak_parts, gap):
+    """기록 사이 공백이 0.5초 이하인 연속 운전에서도 30행 정상 기록이 두 이상 사이의 정상 복귀 근거가 된다(검토 8 R8-02: 공백 0.5초 이하를
+    한 흐름·5초 블록으로 묶은 4차 수정본은 이상 셋을 한 사건으로 합쳤다. c7d8bba는 사건 셋)."""
+    model, (r11, r12, r13), (quiet, _) = weak_parts
+    frame = _chain([r11, quiet.iloc[:30], r12, quiet.iloc[:30], r13], "2022-07-23", gap=gap)
+    pred = model.predict(frame)
+    assert (pred.incident_id.max(), pred.incident_notification.sum(), pred.incident_escalation.sum()) == (3, 3, 3)
+    assert_stream_matches(model, frame, pred, 7)
 

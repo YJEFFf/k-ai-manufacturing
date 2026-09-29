@@ -1,0 +1,24 @@
+== 8b65130 리눅스 x86-64 컨테이너(pg-x86, Rosetta 에뮬레이션, 파이썬 3.12.14): reproduce.py --tests --keep-going 단계 결과
+      통과 · 26.9초 ·   fig.savefig(out / "fig_segment_length.png", dpi=150)
+      통과 · 1.1초 · 16/16 통과 (1~2단계 부분 비교, 필수 집계 9개). 환경: Linux-6.8.0-50-generic-x86_64-with-glibc2.41 vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 b372a18b66af vs 동결 b372a18b66af
+      통과 · 67.6초 ·     B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              180                          21                 21             0.0          0.7           
+      통과 · 380.0초 ·   fig.tight_layout(); fig.savefig(out / "fig_missed_example_v2.png", dpi=150); plt.close(fig)
+      통과 · 408.4초 · 16/16 통과 → /work/yejun/press_guard/outputs/audit.json
+      통과 · 2.6초 · 59/59 통과. 코드 32f5d5440979 vs 동결 32f5d5440979; 환경 Linux-6.8.0-50-generic-x86_64-with-glibc2.41 vs 동결 macOS-26.3.1-arm64-arm-64bit
+      통과 · 19.8초 ·     B 12 0.099174 0.099174      180               11  0.061111       0.099126          False
+      통과 · 142.6초 ·   fig.savefig(path, dpi=150, bbox_inches="tight", metadata={"Software": None})
+      통과 · 1.2초 · 통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 46개)
+      통과 · 1.1초 · 통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+      통과 · 0.9초 · 통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+      통과 · 1.2초 · 통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 13개)
+      통과 · 2.1초 · 통과: 무결성·기대값 비교 E1, E3 · 건너뜀 E2(외부 입력 없음)
+      통과 · 634.6초 · 181 passed, 2 skipped in 633.89s (0:10:33)
+      통과 · 6.4초 · 44 passed, 2 skipped, 14 warnings in 5.84s
+      통과 · 1.0초 · 8 passed in 0.63s
+      통과 · 2.0초 · 6 passed in 1.64s
+      통과 · 1.7초 · 5 passed, 14 warnings in 1.26s
+      통과 · 1.9초 · 6 passed in 1.54s
+      통과 · 1.6초 · 6 passed in 1.22s
+      통과 · 4.0초 · 10 passed, 3 skipped in 3.55s
+
+21/21 단계 통과 · 1708.9초

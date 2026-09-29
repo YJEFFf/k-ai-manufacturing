@@ -1,0 +1,52 @@
+# OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 python review8_draft.py <8b65130 실험 사본 yejun> <임시 draft 폴더>
+# 재구성한 초안(외톨이 첫 행 분리·displaced 둘 다 없음)
+PASSED test_r8_new.py::test_error_row_inside_record_does_not_split_incident[nat]
+PASSED test_r8_new.py::test_error_row_inside_record_does_not_split_incident[sensor]
+PASSED test_r8_new.py::test_error_row_inside_record_does_not_split_incident[0.03]
+PASSED test_r8_new.py::test_error_row_inside_record_does_not_split_incident[5]
+PASSED test_r8_new.py::test_error_row_inside_short_normal_record_keeps_second_alert[nat]
+PASSED test_r8_new.py::test_error_row_inside_short_normal_record_keeps_second_alert[sensor]
+PASSED test_r8_new.py::test_error_row_inside_short_normal_record_keeps_second_alert[0.03]
+PASSED test_r8_new.py::test_error_row_inside_short_normal_record_keeps_second_alert[5]
+FAILED test_r8_new.py::test_collection_units_split_only_at_real_gaps_and_isolate_displaced_rows
+FAILED test_r8_new.py::test_late_stamped_record_end_does_not_merge_incidents[2.55]
+FAILED test_r8_new.py::test_late_stamped_record_end_does_not_merge_incidents[2.7]
+FAILED test_r8_new.py::test_late_stamped_record_end_does_not_merge_incidents[2.95]
+FAILED test_r8_new.py::test_early_stamped_record_start_does_not_merge_incidents[2.55]
+FAILED test_r8_new.py::test_early_stamped_record_start_does_not_merge_incidents[2.7]
+FAILED test_r8_new.py::test_early_stamped_record_start_does_not_merge_incidents[2.95]
+7 failed, 8 passed, 51 deselected in 6.13s
+# displaced(undo_link)만 뺀 판
+PASSED test_r8_new.py::test_error_row_inside_record_does_not_split_incident[nat]
+PASSED test_r8_new.py::test_error_row_inside_record_does_not_split_incident[sensor]
+PASSED test_r8_new.py::test_error_row_inside_record_does_not_split_incident[0.03]
+PASSED test_r8_new.py::test_error_row_inside_record_does_not_split_incident[5]
+PASSED test_r8_new.py::test_error_row_inside_short_normal_record_keeps_second_alert[nat]
+PASSED test_r8_new.py::test_error_row_inside_short_normal_record_keeps_second_alert[sensor]
+PASSED test_r8_new.py::test_error_row_inside_short_normal_record_keeps_second_alert[0.03]
+PASSED test_r8_new.py::test_error_row_inside_short_normal_record_keeps_second_alert[5]
+PASSED test_r8_new.py::test_late_stamped_record_end_does_not_merge_incidents[2.55]
+PASSED test_r8_new.py::test_late_stamped_record_end_does_not_merge_incidents[2.7]
+PASSED test_r8_new.py::test_late_stamped_record_end_does_not_merge_incidents[2.95]
+FAILED test_r8_new.py::test_collection_units_split_only_at_real_gaps_and_isolate_displaced_rows
+FAILED test_r8_new.py::test_early_stamped_record_start_does_not_merge_incidents[2.55]
+FAILED test_r8_new.py::test_early_stamped_record_start_does_not_merge_incidents[2.7]
+FAILED test_r8_new.py::test_early_stamped_record_start_does_not_merge_incidents[2.95]
+4 failed, 11 passed, 51 deselected in 12.22s
+# 외톨이 첫 행 분리만 뺀 판
+PASSED test_r8_new.py::test_error_row_inside_record_does_not_split_incident[nat]
+PASSED test_r8_new.py::test_error_row_inside_record_does_not_split_incident[sensor]
+PASSED test_r8_new.py::test_error_row_inside_record_does_not_split_incident[0.03]
+PASSED test_r8_new.py::test_error_row_inside_record_does_not_split_incident[5]
+PASSED test_r8_new.py::test_error_row_inside_short_normal_record_keeps_second_alert[nat]
+PASSED test_r8_new.py::test_error_row_inside_short_normal_record_keeps_second_alert[sensor]
+PASSED test_r8_new.py::test_error_row_inside_short_normal_record_keeps_second_alert[0.03]
+PASSED test_r8_new.py::test_error_row_inside_short_normal_record_keeps_second_alert[5]
+PASSED test_r8_new.py::test_early_stamped_record_start_does_not_merge_incidents[2.55]
+PASSED test_r8_new.py::test_early_stamped_record_start_does_not_merge_incidents[2.7]
+PASSED test_r8_new.py::test_early_stamped_record_start_does_not_merge_incidents[2.95]
+FAILED test_r8_new.py::test_collection_units_split_only_at_real_gaps_and_isolate_displaced_rows
+FAILED test_r8_new.py::test_late_stamped_record_end_does_not_merge_incidents[2.55]
+FAILED test_r8_new.py::test_late_stamped_record_end_does_not_merge_incidents[2.7]
+FAILED test_r8_new.py::test_late_stamped_record_end_does_not_merge_incidents[2.95]
+4 failed, 11 passed, 51 deselected in 12.45s

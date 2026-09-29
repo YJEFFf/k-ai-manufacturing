@@ -1,0 +1,14 @@
+# REVIEW_ENV=<사본> OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 python review8_sweep_subset.py --out <판>.csv --workers 1 (두 판) → python review8_sweep_subset.py --compare <8b65130 csv> <c7d8bba csv>
+위치 83+14곳 · 3097건 → /private/tmp/claude-501/review8/sub_new.csv
+위치 83+14곳 · 3097건 → /private/tmp/claude-501/review8/sub_old.csv
+대조 3097건 (8b65130 3097, c7d8bba 3097)
+split             : 8b65130이 큼     0건 · 작음     0건
+body_incidents    : 8b65130이 큼     0건 · 작음     0건
+held              : 8b65130이 큼     0건 · 작음     0건
+extra_starts      : 8b65130이 큼     0건 · 작음     0건
+body_extra_starts : 8b65130이 큼     0건 · 작음     0건
+alarm_loss        : 8b65130이 큼     0건 · 작음     0건
+dup_alerts        : 8b65130이 큼     0건 · 작음     0건
+escalations       : 8b65130이 큼     0건 · 작음     0건
+8b65130: 3097건 · 사건 분할 1 · 본체 추가 시작 1 · 중복 알림 0 · 보류 합 1782 · 경보 감소 합 4509
+c7d8bba: 3097건 · 사건 분할 1 · 본체 추가 시작 1 · 중복 알림 0 · 보류 합 1782 · 경보 감소 합 4509

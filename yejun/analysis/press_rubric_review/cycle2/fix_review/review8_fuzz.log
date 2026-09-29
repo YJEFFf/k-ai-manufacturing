@@ -1,0 +1,9 @@
+# REVIEW_ENV=<8b65130 실험 사본> OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 python review8_fuzz.py --trials 200 --workers 2
+# 판 8b65130 · 시행 200 · 행 합 30107 · 오류 826개
+오류 종류 분포 {'spike_small': 92, 'move': 75, 'attach_early': 73, 'drop': 72, 'jitter': 70, 'nat': 68, 'nan': 67, 'attach_late': 67, 'clock_back': 64, 'dup': 64, 'insert_spike': 61, 'spike': 53}
+부호 합 {0: 29763, 2: 237, 1: 92, 4: 13, 3: 2}
+(a) 일괄≠스트림 시행 0 []
+(b) 접두부 불일치 시행 0 · 대조한 접두부 4127곳 []
+(c) 시작·격상 중복 사건이 있는 시행 0 · (d) 시작 없는 사건이 있는 시행 0
+R8DONE
+# 걸린 시간 650초
