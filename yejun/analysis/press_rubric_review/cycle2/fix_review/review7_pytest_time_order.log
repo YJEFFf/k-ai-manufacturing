@@ -1,0 +1,3 @@
+# 명령: <사본>/press_guard에서 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider test_time_order.py
+...................................................                      [100%]
+51 passed in 121.41s (0:02:01)

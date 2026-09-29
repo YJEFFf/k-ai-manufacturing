@@ -36,7 +36,7 @@
     "protocol_version": "v1",
     "press_threads": "1"
   },
-  "run_fingerprint": "0fc2c5852c6367c2c39478fead414cc0ba2625f1195287be39cc585b16facbee",
+  "run_fingerprint": "3da628613476ace99e618f20cca3a88be2cbae7d2546ff7d5a7e60dd98151e18",
   "checks": [
     {
       "name": "실행 코드·선행 산출물이 manifest와 같음",
@@ -120,5 +120,5 @@
     }
   ],
   "all_ok": true,
-  "elapsed_s": 187.3
+  "elapsed_s": 238.2
 }

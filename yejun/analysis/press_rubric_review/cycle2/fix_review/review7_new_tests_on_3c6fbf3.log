@@ -1,0 +1,26 @@
+# 명령: <3c6fbf3 사본>/press_guard에 c7d8bba의 test_time_order.py를 test_time_order_c7d8bba.py로 복사해 새·고친 시험 14개만 실행(실행 뒤 삭제): OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider test_time_order_c7d8bba.py -k "quality_window_bound or single_sample_timestamp_error or record_end_spike or stale_row_after_long_pause or random_single_timestamp_spikes" (마지막 25줄)
+            order = sorted(range(len(rows)), key=lambda k: (rows[k], k >= len(base)))      # 끼어든 행은 원래 행 바로 뒤
+            frame = base.iloc[[rows[k] for k in order]].reset_index(drop=True)
+            frame[D.TIME] = [stamps[k] for k in order]
+            is_spike = np.isin(order, list(spikes))
+            pred = model.predict(frame)
+            alarms = pred[pred.alarm.eq(1).to_numpy() & ~is_spike]
+>           assert alarms.incident_id.nunique() == 1, (trial, alarms.incident_id.value_counts().to_dict())
+E           AssertionError: (11, {1: 195, 2: 365})
+E           assert 2 == 1
+E            +  where 2 = nunique()
+E            +    where nunique = 0      1\n1      1\n2      1\n3      1\n4      1\n      ..\n597    2\n598    2\n599    2\n600    2\n601    2\nName: incident_id, Length: 560, dtype: int64.nunique
+E            +      where 0      1\n1      1\n2      1\n3      1\n4      1\n      ..\n597    2\n598    2\n599    2\n600    2\n601    2\nName: incident_id, Length: 560, dtype: int64 =      row_id  record_id  ... operating_state time_order_event\n0         0          0  ...           short              ...           short                0\n601     601         28  ...           short                0\n\n[560 rows x 40 columns].incident_id
+
+test_time_order_c7d8bba.py:481: AssertionError
+=========================== short test summary info ============================
+FAILED test_time_order_c7d8bba.py::test_spike_row_is_not_a_quality_window_bound[after]
+FAILED test_time_order_c7d8bba.py::test_spike_row_is_not_a_quality_window_bound[before]
+FAILED test_time_order_c7d8bba.py::test_single_sample_timestamp_error_keeps_timeline[replace-0.5]
+FAILED test_time_order_c7d8bba.py::test_single_sample_timestamp_error_keeps_timeline[replace-5]
+FAILED test_time_order_c7d8bba.py::test_single_sample_timestamp_error_keeps_timeline[replace-30]
+FAILED test_time_order_c7d8bba.py::test_record_end_spike_does_not_split_incident
+FAILED test_time_order_c7d8bba.py::test_stale_row_after_long_pause_is_held[61]
+FAILED test_time_order_c7d8bba.py::test_stale_row_after_long_pause_is_held[600]
+FAILED test_time_order_c7d8bba.py::test_random_single_timestamp_spikes_do_not_split_the_episode
+9 failed, 5 passed, 37 deselected in 12.23s

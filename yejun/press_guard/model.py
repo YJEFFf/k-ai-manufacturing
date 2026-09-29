@@ -41,6 +41,10 @@ INCIDENT_MAX_GAP_S = SUSPECT_MAX_GAP_S
 # 경보 없는 단위가 사건을 닫으려면 판정한 유효 행이 이만큼(8행 파형 창이 한 번 찬 길이) 있어야 한다. 수집 오류·기록 경계로 생긴
 # 더 짧은 조각은 성분이 다 차지 않아 정상 복귀의 근거가 못 된다(사건을 닫지도 잇지도 않는다).
 INCIDENT_MIN_CLEAR_ROWS = 8
+# 사건 추적의 단위는 실제 수집 공백(이 값 초과)이나 시각 역행에서만 새로 연다. 오류 행·판정 보류 행·20 ms 넘는 흔들림(표본 1~4개 누락 포함)은
+# 기록구간을 자르지만 사건 단위는 자르지 않는다(검토 7 R7-01: 오류 한 행이 약한 이상의 사건을 나누거나 두 이상을 합쳤다). 대회 기록 사이 공백은 1.5초 이상이다.
+# 시각이 틀려 공백 안으로 옮겨져 이웃 기록에 이 값 안으로 붙은 한 행은 CollectionUnits·IncidentTracker.undo_link가 따로 다룬다.
+UNIT_GAP_S = 0.5
 # 기록 경계: 이웃 행의 시각 간격이 0.1초에서 이 값보다 벗어나면 새 기록구간이다. v1(1 µs)은 대회 자료의 정확한 0.1초 간격에 맞춘 값이라
 # 수집 시각이 1 ms만 흔들려도 기록이 쪼개진다. 대회 자료의 기록 사이 공백은 1.5초 이상이라 20 ms에서도 구간이 같다.
 TIME_TOL_S = 0.02
@@ -144,12 +148,14 @@ class IncidentTracker:
     (누적 경보 행·근거 성분)는 이미 사람에게 나간 알림을 뜻하므로 되돌리지 않는다. 그래서 되돌린 뒤에도 한 사건에 시작·격상 알림이
     두 번 나가지 않는다(검토 3 R3-01). 튄 행의 경보도 실제 측정값의 경보이므로 그 사건의 누적 경보에 남는다."""
 
-    _FIELDS = ("unit", "unit_alarmed", "unit_start", "unit_rows", "prev_alarmed", "prev_end", "last_time", "open", "incident")
+    _FIELDS = ("unit", "unit_alarmed", "unit_start", "unit_rows", "prev_alarmed", "prev_end", "last_time", "open", "incident",
+               "linked_over_clear")
 
     def __init__(self):
         self.unit = None; self.unit_alarmed = False; self.unit_start = None; self.unit_rows = 0
         self.prev_alarmed = False; self.prev_end = None; self.last_time = None
         self.open = False; self.incident = 0   # 사건 번호는 1부터
+        self.linked_over_clear = False   # 직전 유효 행이 무경보 유효 행이 INCIDENT_MIN_CLEAR_ROWS 이상 쌓인 단위의 첫 경보로 앞 사건에 이어졌는가
         self.issued = 0              # 지금까지 발급한 가장 큰 사건 번호(되돌리지 않아 번호가 겹치지 않는다)
         self.alarms = {}             # 사건 번호 → 누적 경보 행(되돌리지 않는다)
         self.evidence = {}           # 사건 번호 → 근거 성분(되돌리지 않는다)
@@ -162,6 +168,14 @@ class IncidentTracker:
                 setattr(self, k, v)
             self._undo = None
 
+    def undo_link(self):
+        """직전 유효 행이 정상 복귀 근거(무경보 유효 INCIDENT_MIN_CLEAR_ROWS행 이상)가 쌓인 단위의 첫 경보로 앞 사건에 이어졌으면 그 배정을
+        되돌린다. 그 행이 흐름 끝에 정상 간격이 아닌 간격으로 붙었고 바로 뒤에 실제 공백이 왔을 때(시각이 이르게 찍혀 앞 기록 끝에 붙은 행)만
+        부른다. 그러면 앞 기록은 정상 복귀 근거로 남고, 뒤 기록의 경보는 새 사건을 연다. 그 행이 이미 낸 알림은 그대로다(시작 알림은 내지 않은 행이다)."""
+        if self.linked_over_clear:
+            self.undo()
+        self.linked_over_clear = False
+
     def _prune(self):
         """되돌리기로 돌아갈 수 있는 사건(현재·직전 배정)의 알림 상태만 남긴다."""
         keep = {self.incident, (self._undo or {}).get("incident")}
@@ -169,12 +183,14 @@ class IncidentTracker:
             del self.alarms[k], self.evidence[k]
 
     def update(self, record, block, alarm, reason, time, valid=True):
-        """valid=False(수집 오류 행)는 상태를 바꾸지 않는다. 오류 행은 정상 복귀의 근거가 아니므로 사건을 닫거나 나누지 않는다.
+        """valid=False(수집 오류 행)는 상태를 바꾸지 않는다. 오류 행은 정상 복귀의 근거가 아니다. 단위(record, block)는 CollectionUnits가
+        실제 수집 공백으로만 나누므로 오류 행이 기록을 잘라도 사건 단위는 그대로다(유효 행 수는 오류 행만큼 준다).
         단위가 끝날 때 경보가 났거나 유효 행이 INCIDENT_MIN_CLEAR_ROWS 이상인 단위만 '앞 단위'(경보 여부·끝 시각)가 된다.
         더 짧은 무경보 조각은 사건을 닫지도, 공백 기준 시각을 옮기지도 않는다."""
         if not valid:
             return 0, 0, 0, 0
         self._undo = {k: getattr(self, k) for k in self._FIELDS}
+        self.linked_over_clear = False
         t = time if time is not None and not pd.isna(time) else self.last_time
         if (record, block) != self.unit:
             if self.unit is not None and (self.unit_alarmed or self.unit_rows >= INCIDENT_MIN_CLEAR_ROWS):
@@ -192,6 +208,8 @@ class IncidentTracker:
                 self.issued += 1; self.incident = self.issued; self.open = True
                 self.alarms[self.incident], self.evidence[self.incident] = 0, set()
                 self._prune()
+            else:
+                self.linked_over_clear = self.unit_rows - 1 >= INCIDENT_MIN_CLEAR_ROWS
         k = self.incident
         self.alarms[k] += 1
         count, seen = self.alarms[k], self.evidence[k]
@@ -214,20 +232,75 @@ def spike_rows(order_event, has_time):
     return out
 
 
-def incident_columns(record, block, alarm, reason, time, valid=None, order_event=None):
+class CollectionUnits:
+    """사건 추적 단위: (수집 흐름 번호, 흐름 안 5초 블록). 기준 시각에 들어간 행(시각 있음·보류 아님)끼리의 간격이 UNIT_GAP_S를 넘거나
+    시각이 거꾸로 가면 새 흐름이다. 흐름 안에서는 ALERT_UNIT_ROWS × 0.1초마다 새 블록을 연다(연속 수집에서도 사건이 닫힐 수 있게).
+
+    시각이 틀려 공백 안으로 옮겨진 한 행이 이웃 기록에 UNIT_GAP_S 안으로 붙으면 그 기록의 단위에 섞여, 경보 한 행이 정상 기록 전체를
+    경보 단위로 만든다(두 이상이 한 사건으로 합쳐짐). 그래서 정상 간격(바로 다음 행, 0.1초 ± TIME_TOL_S)이 아닌 간격을 두 가지로 본다.
+    - 공백 뒤 첫 행 다음에 받아들인 행이 정상 간격이 아니면 그 행부터 새 흐름이다. 첫 행은 혼자 한 단위다(늦게 찍혀 다음 기록 앞에 붙은 행).
+    - 흐름에 정상 간격이 아닌 간격으로 붙은 행 바로 뒤에 공백(UNIT_GAP_S 초과)이 오면 step이 displaced=True를 돌려준다(이르게 찍혀 앞 기록
+      끝에 붙은 행일 수 있다). 사건 추적은 그 행이 정상 기록을 경보 단위로 만들며 앞 사건에 이어졌을 때만 그 배정을 되돌린다(undo_link).
+    기록 안의 흔들림·오류 행(앞뒤가 모두 공백이 아님)은 단위를 나누지 않는다. 튄 행을 확인하면 undo()로 그 행이 옮긴 흐름 상태를 되돌린다."""
+
+    _STATE = ("run", "run_start", "run_rows", "last", "last_index", "last_irregular")
+
+    def __init__(self):
+        self.run, self.run_start, self.run_rows, self.last, self.last_index, self.last_irregular = -1, None, 0, None, None, False
+        self.index, self._undo = -1, None
+
+    def step(self, t, accepted):
+        """행마다 한 번 부른다(받아들이지 않은 행 포함). 돌려주는 값: (흐름, 블록, displaced)."""
+        self.index += 1
+        displaced = False
+        if accepted:
+            self._undo = {k: getattr(self, k) for k in self._STATE}
+            gap = None if self.last is None else (t - self.last).total_seconds()
+            adjacent = self.last_index is not None and self.index - self.last_index == 1
+            regular = gap is not None and adjacent and abs(gap - D.DT) <= TIME_TOL_S
+            if gap is None or gap > UNIT_GAP_S or gap < 0 or (self.run_rows == 1 and not regular):
+                displaced = gap is not None and gap > UNIT_GAP_S and self.last_irregular
+                self.run, self.run_start, self.run_rows, irregular = self.run + 1, t, 0, False
+            else:
+                irregular = adjacent and not regular
+            self.run_rows += 1
+            self.last, self.last_index, self.last_irregular = t, self.index, irregular
+        if self.last is None:
+            return -1, 0, False
+        return self.run, int((self.last - self.run_start).total_seconds() / (ALERT_UNIT_ROWS * D.DT) + 1e-9), displaced
+
+    def undo(self):
+        if self._undo is not None:
+            for k, v in self._undo.items():
+                setattr(self, k, v)
+            self._undo = None
+
+
+def incident_columns(alarm, reason, time, valid=None, order_event=None):
     """일괄 분석용: 행마다 (사건 번호, 사건 첫 알림, 사건 격상, 근거 추가). 경보 없는 유효 단위(8행 이상)가 끼면 사건이 닫힌다.
-    수집 오류 행(valid=False)은 건너뛴다. 튄 행을 확인한 행(SPIKE_EVENTS)에서는 그 앞의 튄 행이 사건 추적에 들어간 유효 행이었으면
-    그 행의 사건 배정·공백 효과를 되돌린다(사이에 수집 오류·보류 행이 끼어도 같다, 검토 3 R3-02)."""
-    tr = IncidentTracker()
+    단위는 CollectionUnits(실제 수집 공백·시각 역행에서만 나뉨)다. 수집 오류 행(valid=False)은 건너뛴다.
+    튄 행을 확인한 행(SPIKE_EVENTS)에서는 단위 상태를 되돌리고, 그 앞의 튄 행이 사건 추적에 들어간 유효 행이었으면
+    그 행의 사건 배정·공백 효과도 되돌린다(사이에 수집 오류·보류 행이 끼어도 같다, 검토 3 R3-02).
+    앞 기록 끝에 정상 간격이 아닌 간격으로 붙은 유효 행 뒤에 공백이 오면(displaced) 그 행의 앞 사건 연결을 되돌린다(undo_link)."""
+    tr, units = IncidentTracker(), CollectionUnits()
     valid = np.ones(len(alarm), bool) if valid is None else np.asarray(valid, bool)
     order_event = np.zeros(len(alarm), int) if order_event is None else np.asarray(order_event, int)
     has_time = pd.notna(pd.Series(list(time), dtype=object)).to_numpy()
     spike = spike_rows(order_event, has_time)
     out = np.zeros((len(alarm), 4), dtype=int)
-    for i, (r, b, a, why, t, ok, ev) in enumerate(zip(record, block, alarm, reason, time, valid, order_event)):
-        if ev in SPIKE_EVENTS and spike[i] >= 0 and valid[spike[i]]:
-            tr.undo()
-        out[i] = tr.update(r, b, bool(a), why, t, bool(ok))
+    ref_ok = False      # 마지막으로 받아들인 행이 유효 행인가(그 행이 사건 추적의 마지막 갱신이다)
+    for i, (a, why, t, ok, ev, ht) in enumerate(zip(alarm, reason, time, valid, order_event, has_time)):
+        if ev in SPIKE_EVENTS and spike[i] >= 0:
+            units.undo()
+            if valid[spike[i]]:
+                tr.undo()
+        accepted = bool(ht) and ev != ORDER_HELD
+        run, block, displaced = units.step(t, accepted)
+        if displaced and ev not in SPIKE_EVENTS and ref_ok:
+            tr.undo_link()
+        out[i] = tr.update(run, block, bool(a), why, t, bool(ok))
+        if accepted:
+            ref_ok = bool(ok)
     return out
 
 
@@ -279,14 +352,17 @@ class TimeOrder:
     """수집 시각 순서 판정. 행을 받은 순서대로 넣으면 행마다 부호를 돌려준다. 일괄·스트림이 같은 상태를 이어 쓴다.
 
     - 기준 시각은 마지막으로 받아들인 시각이다. 같거나 늦은 시각은 받아들인다(ORDER_OK, 동률 허용).
-    - 미래 시각 한 행(튐): 바로 앞에 받은 행이 정상 간격(0.1초 ± TIME_TOL_S)보다 크게 앞으로 뛰었고, 이 행이 튀기 전 기준에서
-      표본 1~SPIKE_SKIP_SAMPLES칸 뒤(튄 행이 끼어들었거나 표본 하나를 대신함)이면 앞 행을 튄 행으로 보고 이 행부터 계속 판정한다
-      (ORDER_SPIKE_SKIPPED, 보류 없음). 그 밖의 이른 시각(기록 사이 공백 안의 과거 행·재전송)은 아래처럼 보류한다. 이 예외는 연속으로 쓰지 않는다.
+    - 미래 시각 한 행(튐): 기준 행(마지막으로 받아들인 행, 사이에 시각 결측·보류 행이 있어도 된다)이 그 앞 기준보다 정상 간격
+      (0.1초 ± TIME_TOL_S)보다 크게 앞으로 뛰었고, 이 행이 튀기 전 기준에서 표본 1~SPIKE_SKIP_SAMPLES칸 뒤(튄 행이 끼어들었거나 표본
+      하나를 대신함)이면 기준 행을 튄 행으로 보고 이 행부터 계속 판정한다(ORDER_SPIKE_SKIPPED, 보류 없음). 늦게 도착한 앞 기록의 행도
+      이 조건을 채우면 새 기록의 정상 첫 행이 튄 행으로 판정된다(알려진 한계). 그 밖의 이른 시각(기록 사이 공백 안의 과거 행·재전송)은
+      아래처럼 보류한다. 이 예외는 연속으로 쓰지 않는다(두 행 이상 연속으로 튀면 확인하지 못한다).
       튄 행 자체는 이미 판정했으므로(인과) 되돌리지 않는다. 사건 추적은 그 행의 사건 배정·공백 효과만 되돌린다.
     - 순서 뒤바뀜·시계 재설정·지난 자료: 기준보다 이른 행은 판정을 보류한다(ORDER_HELD). 정상 간격으로 REANCHOR_ROWS행 이어지면
       셋째 행부터 새 기준으로 받아들인다(ORDER_REANCHOR, 보류 REANCHOR_ROWS − 1행). 역순·불규칙 간격이면 계속 보류하고 경고한다.
-      앞으로 튄 행 바로 뒤에 새 기록이 오면(기록 끝의 튐) 그 새 기록은 보류되다가 이렇게 받아들여진다. 이때 새 시간축이 튀기 전
-      기준보다 뒤에서 시작했으면 튄 행을 확인한 것으로 보고 ORDER_SPIKE_REANCHOR를 낸다(사건 추적이 튄 행의 효과를 되돌린다).
+      앞으로 튄 행 바로 뒤에 새 기록이 오면(기록 끝·첫 행의 튐) 그 새 기록은 보류되다가 이렇게 받아들여진다(보통 2행, 다음 기록이 짧으면
+      그 뒤 기록까지 3~5행). 이때 새 시간축이 튀기 전 기준보다 뒤에서 시작했으면 튄 행을 확인한 것으로 보고 ORDER_SPIKE_REANCHOR를 낸다
+      (사건 추적이 튄 행의 효과를 되돌린다). 튄 시각이 다음 기록 셋째 행보다 이르면 보류 1~2행뿐 확인하지 않는다.
     - 시각을 읽을 수 없는 행은 상태를 바꾸지 않는다. 센서 값 오류 행도 시각이 있으면 순서 판정에 쓴다.
     """
 
@@ -523,7 +599,7 @@ class GuardModel:
         out["notification"] = first_alerts(seg, out.alert_unit, alarm)
         out["alert_level"], out["escalation"] = alert_levels(seg, out.alert_unit, alarm)
         times = pd.to_datetime(out.timestamp, format="mixed", utc=True, errors="coerce")
-        inc = incident_columns(seg, out.alert_unit.to_numpy(), alarm, out.reason.to_numpy(), times, status == "ok", order_codes)
+        inc = incident_columns(alarm, out.reason.to_numpy(), times, status == "ok", order_codes)
         out["incident_id"], out["incident_notification"], out["incident_escalation"], out["incident_update"] = inc.T
         # 이상 확률: 경보와 무관한 별도 층. 보정기가 없으면 결측. LR은 사전 비율과 무관하고 확률은 prior에 조건부다.
         lr = self.probability.likelihood_ratio(comp["score"]) if self.probability is not None else np.full(len(frame), np.nan)
@@ -534,7 +610,7 @@ class GuardModel:
         out["record_likelihood_ratio"] = record_running_max(lr, seg)
         out["record_probability"] = posterior(out.record_likelihood_ratio.to_numpy(), prior)
         out["record_current_rms"], out["operating_state"] = state_rms, state_labels
-        out["time_order_event"] = order_codes.astype(int)      # 0 없음, 1 판정 보류, 2 앞 행의 미래 튐 건너뜀, 3 새 기준
+        out["time_order_event"] = order_codes.astype(int)      # 0 없음, 1 판정 보류, 2 앞 행을 튄 행으로 확인, 3 새 기준, 4 새 기준을 잡으며 앞 튄 행을 확인
         return out
 
     def save(self, path):
@@ -571,7 +647,7 @@ def load_bundle(model_path):
 class StreamDetector:
     """청크 크기에 무관한 추론. 센서 원본은 직전 7행만 유지한다.
 
-    수집 시각 순서는 TimeOrder 규칙을 따른다(튄 한 행은 건너뛰고, 이른 시각은 보류하다가 정상 간격으로 이어지면 새 기준).
+    수집 시각 순서는 TimeOrder 규칙을 따른다(튄 한 행도 판정하되 그 뒤로 원래 시간축을 잇고, 이른 시각은 보류하다가 정상 간격으로 이어지면 새 기준).
     잘못된 행·중복·샘플 누락은 경계가 된다. 센서 원본 7행 외에 그 앞까지의 순서 상태 하나를 유지한다.
     경보 단위(기록구간 안 50행 블록)의 첫 경보만 알리고,
     바로 앞 블록도 경보였으면 이어지는 이상으로 묶는다. 외부가 새 장치로 전환할 때는 새 인스턴스를 생성해야 한다.
@@ -591,7 +667,8 @@ class StreamDetector:
         self.record_lr = np.nan       # 현재 기록구간의 지금까지 최대 우도비
         self.current_state = CurrentState()
         self.incidents = IncidentTracker()   # 기록구간을 넘는 사건 묶음(스트림 전체에서 이어진다)
-        self.ref_valid = False               # 기준 시각을 마지막으로 옮긴 행이 사건 추적에 들어간 유효 행인가(튄 행 되돌리기, spike_rows와 같은 규칙)
+        self.units = CollectionUnits()       # 사건 추적 단위(실제 수집 공백·시각 역행에서만 나뉜다)
+        self.ref_valid = False               # 기준 시각을 마지막으로 옮긴 행이 사건 추적에 들어간 유효 행인가(튄 행·붙은 행 되돌리기, spike_rows와 같은 규칙)
 
     def push(self, frame):
         from probability import posterior
@@ -634,10 +711,16 @@ class StreamDetector:
                 escalate = int(self.episode_alarms == ESCALATION_ALARM_ROWS)
                 self.alerted_blocks = {b for b in self.alerted_blocks if b >= r.alert_unit - 1} | {r.alert_unit}
             notifications.append(int(notify)); levels.append(level); escalations.append(escalate)
-            if r.time_order_event in SPIKE_EVENTS and self.ref_valid:
-                self.incidents.undo()
-            inc.append(self.incidents.update(r.record_id, r.alert_unit, bool(r.alarm), r.reason, t, r.status == "ok"))
-            if r.time_order_event != ORDER_HELD and not pd.isna(t):
+            if r.time_order_event in SPIKE_EVENTS:
+                self.units.undo()
+                if self.ref_valid:
+                    self.incidents.undo()
+            accepted = not pd.isna(t) and r.time_order_event != ORDER_HELD
+            run, block, displaced = self.units.step(t, accepted)
+            if displaced and r.time_order_event not in SPIKE_EVENTS and self.ref_valid:
+                self.incidents.undo_link()
+            inc.append(self.incidents.update(run, block, bool(r.alarm), r.reason, t, r.status == "ok"))
+            if accepted:
                 self.ref_valid = r.status == "ok"
         result["notification"], result["alert_level"], result["escalation"] = notifications, levels, escalations
         result["record_likelihood_ratio"] = record_lr
@@ -803,10 +886,17 @@ def timing_warning(predictions):
                         + (f"(정상 간격으로 이어진 이른 시각을 새 기준으로 받아들인 곳 {resumed}곳)" if resumed else "")
                         + ". 수집 PC 시각과 입력 순서를 확인하세요.")
     if skipped:
-        at_end = int((predictions.time_order_event.to_numpy() == ORDER_SPIKE_REANCHOR).sum()) if "time_order_event" in predictions else 0
-        warnings.append(f"미래로 튄 수집 시각 {skipped}곳: 튄 행 다음부터 원래 시간축으로 판정했습니다"
-                        + (f"(튄 행 바로 뒤가 새 기록인 {at_end}곳은 그 기록의 앞 {REANCHOR_ROWS - 1}행을 보류한 뒤 이었습니다)" if at_end else "")
-                        + ". 튄 행 주변은 기록이 끊겨 첫 창이 다시 찹니다.")
+        e = predictions.time_order_event.to_numpy() if "time_order_event" in predictions else np.zeros(0, int)
+        held_before = []
+        for i in np.flatnonzero(e == ORDER_SPIKE_REANCHOR):       # 새 기준 앞에 이어진 보류 행 수
+            j = i - 1
+            while j >= 0 and e[j] == ORDER_HELD:
+                j -= 1
+            held_before.append(i - 1 - j)
+        span = (f"{min(held_before)}행" if min(held_before) == max(held_before) else f"{min(held_before)}~{max(held_before)}행") if held_before else ""
+        warnings.append(f"튄 수집 시각 {skipped}곳: 튄 행으로 보고 그 뒤부터 원래 시간축으로 판정했습니다"
+                        + (f"(튄 행 바로 뒤가 새 기록인 {len(held_before)}곳은 그 뒤 {span}을 보류한 뒤 이었습니다)" if held_before else "")
+                        + ". 늦게 도착한 행 때문에 정상 행을 튄 행으로 본 경우도 여기에 셉니다. 튄 행 주변은 기록이 끊겨 첫 창이 다시 찹니다.")
     ok = predictions[predictions.status.eq("ok")] if len(predictions) else predictions
     if len(ok) < 50:
         return " ".join(warnings)

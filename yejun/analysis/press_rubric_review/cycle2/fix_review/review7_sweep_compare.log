@@ -1,0 +1,18 @@
+# 명령: REVIEW_ENV=<사본>|<3c6fbf3 사본> OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 python review7_sweep.py --out <임시>/sweep_<판>.csv --workers 4
+19637건 → <임시>/sweep_c7d8bba.csv
+c7d8bba rc=0 704s
+19637건 → <임시>/sweep_3c6fbf3.csv
+3c6fbf3 rc=0 789s
+# 명령: python review7_sweep_compare.py <임시>/sweep_c7d8bba.csv <임시>/sweep_3c6fbf3.csv
+대조 19637건 (c7d8bba 19637, 3c6fbf3 19637)
+split             : 나빠짐     0건 · 나아짐  1638건
+held              : 나빠짐   158건 · 나아짐  7371건
+    나빠진 곳: {('insert_after', 60.1, 'record_last'): 23, ('insert_after', 3600.0, 'record_last'): 23, ('replace', 59.9, 'record_first'): 22, ('replace', 60.1, 'record_first'): 22, ('replace', 60.1, 'record_last'): 23, ('replace', 3600.0, 'record_first'): 22, ('replace', 3600.0, 'record_last'): 23}
+extra_starts      : 나빠짐     0건 · 나아짐  1638건
+body_extra_starts : 나빠짐     0건 · 나아짐  1638건
+alarm_loss        : 나빠짐   137건 · 나아짐  6559건
+    나빠진 곳: {('insert_after', 60.1, 'record_last'): 20, ('insert_after', 3600.0, 'record_last'): 20, ('replace', 59.9, 'record_first'): 19, ('replace', 60.1, 'record_first'): 19, ('replace', 60.1, 'record_last'): 20, ('replace', 3600.0, 'record_first'): 19, ('replace', 3600.0, 'record_last'): 20}
+dup_alerts        : 나빠짐     0건 · 나아짐     0건
+c7d8bba: 이상 파일 전수 19189건 · 사건 분할 0 · 본체 추가 시작 0 · 중복 알림 0 · 보류 생긴 곳 5230 · 보류 합 5694 · 경보 감소 합 51409
+3c6fbf3: 이상 파일 전수 19189건 · 사건 분할 1626 · 본체 추가 시작 1626 · 중복 알림 0 · 보류 생긴 곳 12344 · 보류 합 18920 · 경보 감소 합 63885
+    분할: {('insert_after', 5.0): 4, ('replace', 0.35): 169, ('replace', 0.5): 169, ('replace', 1.0): 169, ('replace', 2.0): 170, ('replace', 5.0): 178, ('replace', 10.0): 192, ('replace', 16.7): 195, ('replace', 30.0): 195, ('replace', 59.9): 185}

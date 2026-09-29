@@ -118,6 +118,7 @@
 - node가 없는 이미지라 웹 회귀 시험 단계가 없어 21단계다.
 - 새 검토자(검토 3)도 x86-64 사본에서 13/13 단계, verify 59/59를 따로 확인했다. 기기 간 차이가 가장 큰 결과 열은 허용 한계의 42%(값이 작은 ece)다.
 - **2차 보완 커밋 3c6fbf3**도 같은 조건으로 다시 돌렸다. arm64 21/21(686초), x86-64 21/21(1,412초)이다. 사인 투영 캐시를 고쳐 audit(193·413초)와 v2 시험(193·405초, 154 통과·2 건너뜀)이 크게 줄었다. 기록: [linux_3c6fbf3_arm64.log](linux_3c6fbf3_arm64.log), [linux_3c6fbf3_x86_64.log](linux_3c6fbf3_x86_64.log), 요약 JSON 두 개.
+- **3차 보완 커밋 c7d8bba**도 같은 조건으로 돌렸다. arm64 21/21(784.5초, 빠른 경로 1~13단계 496.9초), x86-64 21/21(1,622.6초, 1,038.6초)이다. v2 시험은 166 통과·2 건너뜀(275.6·548.8초)이다. 기록: [linux_c7d8bba_arm64.log](linux_c7d8bba_arm64.log), [linux_c7d8bba_x86_64.log](linux_c7d8bba_x86_64.log), 요약 JSON 두 개.
 - 기록: [linux_110afa2_arm64.log](linux_110afa2_arm64.log), [linux_110afa2_x86_64.log](linux_110afa2_x86_64.log), 요약 JSON 두 개(`linux_110afa2_*_summary.json`).
 
 ## 이 기록의 정정(2026-09-29, 코덱스 재검수 [recheck_20260929](../recheck_20260929/README.md)와 부모 재계산 [red_M_verify.log](red_M_verify.log) 5·6절)

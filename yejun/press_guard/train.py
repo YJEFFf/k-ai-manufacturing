@@ -88,8 +88,8 @@ def combine_streams(pn, pa, return_predictions=False):
     shifted["row_id"] += len(pn)
     both = pd.concat([pn, shifted], ignore_index=True)
     # 사건 번호는 한 흐름으로 다시 매긴다(정상 평가와 이상은 서로 다른 날이라 사이 공백이 60초를 넘는다)
-    inc = incident_columns(both.record_id.to_numpy(), both.alert_unit.to_numpy(), both.alarm.to_numpy(), both.reason.to_numpy(),
-                           pd.to_datetime(both.timestamp, format="mixed", utc=True, errors="coerce"))
+    inc = incident_columns(both.alarm.to_numpy(), both.reason.to_numpy(), pd.to_datetime(both.timestamp, format="mixed", utc=True, errors="coerce"),
+                           both.status.eq("ok").to_numpy(), both.time_order_event.to_numpy())
     both["incident_id"], both["incident_notification"], both["incident_escalation"], both["incident_update"] = inc.T
     queue = cases(both)
     if len(queue):

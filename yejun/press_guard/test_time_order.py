@@ -6,7 +6,7 @@ import pandas as pd
 import pytest
 
 import simulate
-from model import D, HERE, IncidentTracker, StreamDetector, cases, incidents, layout, load_bundle, time_order_events, timing_warning
+from model import D, HERE, CollectionUnits, IncidentTracker, StreamDetector, cases, incidents, layout, load_bundle, time_order_events, timing_warning
 
 
 @pytest.fixture(scope="module")
@@ -482,3 +482,127 @@ def test_random_single_timestamp_spikes_do_not_split_the_episode(inputs):
         assert (per_incident(pred) <= 1).all().all(), trial
         if trial < 2:
             assert_stream_matches(model, frame, pred, 7)
+
+
+def _chain(parts, start, gap=3.0):
+    """부분마다 0.1초 간격, 부분 사이 gap초 공백의 시각을 붙인다."""
+    frames, times, t = [], [], pd.Timestamp(start)
+    for part in parts:
+        n = len(part)
+        times += list(t + pd.to_timedelta(np.arange(n) * .1, unit="s"))
+        t = times[-1] + pd.Timedelta(seconds=gap)
+        frames.append(D.inputs_only(part))
+    frame = pd.concat(frames, ignore_index=True)
+    frame[D.TIME] = pd.Series(times).dt.strftime("%Y-%m-%d %H:%M:%S.%f")
+    return frame
+
+
+def _fault(frame, row, kind):
+    f = frame.copy()
+    t = pd.to_datetime(f[D.TIME])
+    if kind == "nat":
+        f.loc[row, D.TIME] = ""
+    elif kind == "sensor":
+        f.loc[row, D.SENSORS[0]] = np.nan
+    else:
+        f.loc[row, D.TIME] = (t[row] + pd.Timedelta(seconds=kind)).strftime("%Y-%m-%d %H:%M:%S.%f")
+    return f
+
+
+@pytest.fixture(scope="module")
+def weak_parts(inputs):
+    model = load_bundle(HERE / "artifacts" / "guard_B.json")
+    _, _, _, normal, abnormal = inputs
+    seg = D.segments(abnormal)
+    test = D.inputs_only(D.split_normal(normal, D.segments(normal), "B")["test"]).reset_index(drop=True)
+    pred = model.predict(test)
+    rec = pred.record_id.to_numpy()
+    quiet = [r for r in np.unique(rec) if pred.alarm[rec == r].sum() == 0 and (rec == r).sum() >= 30]
+    return model, [abnormal[seg == k].reset_index(drop=True) for k in (11, 12, 13)], [test[rec == q].reset_index(drop=True) for q in quiet[:2]]
+
+
+@pytest.mark.parametrize("kind", ["nat", "sensor", .03, 5])
+def test_error_row_inside_record_does_not_split_incident(weak_parts, kind):
+    """경보 없는 앞 조각(10행) 뒤에 이상이 이어지는 기록에서, 첫 이상 행의 오류 한 행(시각·센서 결측, 30 ms 흔들림, +5초 튐)이
+    기록을 잘라도 사건은 하나다(검토 7 R7-01: 잘린 무경보 조각이 사건을 닫아 사건 둘·알림 넷이 됐다)."""
+    model, (r11, r12, r13), (quiet, _) = weak_parts
+    middle = pd.concat([D.inputs_only(quiet.iloc[:10]), D.inputs_only(r12)], ignore_index=True)
+    frame = _chain([r11, middle, r13], "2022-07-21")
+    base = model.predict(frame)
+    assert (base.incident_id.max(), base.incident_notification.sum(), base.incident_escalation.sum()) == (1, 1, 1)
+    pred = model.predict(_fault(frame, len(r11) + 10, kind))
+    assert (pred.incident_id.max(), pred.incident_notification.sum(), pred.incident_escalation.sum()) == (1, 1, 1)
+    assert_stream_matches(model, _fault(frame, len(r11) + 10, kind), pred, 7)
+
+
+@pytest.mark.parametrize("kind", ["nat", "sensor", .03, 5])
+def test_error_row_inside_short_normal_record_keeps_second_alert(weak_parts, kind):
+    """두 이상 사이 정상 기록(14행) 가운데의 오류 한 행이 기록을 8행 미만 조각 둘로 잘라도 정상 복귀(유효 8행 이상)로 보고
+    둘째 이상에 시작·격상 알림을 낸다(검토 7 R7-01: 두 이상이 한 사건으로 합쳐져 둘째 알림이 없었다)."""
+    model, (r11, r12, _), (_, quiet) = weak_parts
+    frame = _chain([r11, quiet.iloc[:14], r12], "2022-07-22")
+    base = model.predict(frame)
+    assert (base.incident_id.max(), base.incident_notification.sum(), base.incident_escalation.sum()) == (2, 2, 2)
+    pred = model.predict(_fault(frame, len(r11) + 7, kind))
+    second = pred.iloc[len(r11) + 14:]
+    assert pred.incident_id.max() == 2 and (second.incident_notification.sum(), second.incident_escalation.sum()) == (1, 1)
+    assert_stream_matches(model, _fault(frame, len(r11) + 7, kind), pred, 7)
+
+
+def test_collection_units_split_only_at_real_gaps_and_isolate_displaced_rows():
+    """사건 단위 규칙(CollectionUnits): 기록 안 흔들림·표본 누락·시각 결측 행은 흐름을 나누지 않는다. 공백 뒤 첫 행 다음 행이 정상 간격이
+    아니면 첫 행만 따로 단위가 된다(늦게 찍혀 다음 기록 앞에 붙은 행). 흐름 끝에 정상 간격이 아닌 간격으로 붙은 행 뒤에 공백이 오면 displaced다."""
+    t0 = pd.Timestamp("2022-07-22 10:00:00", tz="UTC")
+    at_s = lambda x: None if x is None else t0 + pd.Timedelta(seconds=x)
+    def run(xs):
+        units = CollectionUnits()
+        return [units.step(at_s(x), x is not None) for x in xs]
+    # 기록 안: 30 ms 흔들림, 표본 2개 누락(0.3초), 시각 결측 한 행 → 한 흐름·한 블록
+    out = run([0, .1, .23, .3, .6, .7, None, .9, 1.0])
+    assert {(r, b) for r, b, _ in out} == {(0, 0)} and not any(d for _, _, d in out)
+    # 공백(3초) 뒤 첫 행 다음이 0.2초 뒤 → 첫 행 혼자, 다음 행부터 새 흐름
+    out = run([0, .1, .2, 2.9, 3.1, 3.2, 3.3])
+    assert [r for r, _, _ in out] == [0, 0, 0, 1, 2, 2, 2]
+    # 공백 뒤 첫 행 다음이 정상 간격이면 한 흐름
+    assert [r for r, _, _ in run([0, .1, 3.1, 3.2, 3.3])] == [0, 0, 1, 1, 1]
+    # 흐름 끝에 0.25초 간격으로 붙은 행 뒤 공백 → 공백 뒤 첫 행에서 displaced
+    out = run([0, .1, .2, .45, 3.2, 3.3])
+    assert [r for r, _, _ in out] == [0, 0, 0, 0, 1, 1] and [d for _, _, d in out] == [False] * 4 + [True, False]
+    # 정상 간격으로 끝난 기록 뒤 공백은 displaced가 아니다
+    assert not any(d for _, _, d in run([0, .1, .2, 3.2, 3.3]))
+    # 5초마다 새 블록
+    assert [b for _, b, _ in run([i * .1 for i in range(101)])][::50] == [0, 1, 2]
+
+
+@pytest.mark.parametrize("late", [2.55, 2.7, 2.95])
+def test_late_stamped_record_end_does_not_merge_incidents(weak_parts, late):
+    """이상 기록 끝 행이 늦게 찍혀 다음 정상 기록 앞 0.05~0.45초에 붙어도 두 이상은 따로 사건이다(정상 간격이 아니므로 그 행만 따로 단위).
+    사건 단위를 수집 공백으로만 나눈 첫 판에서는 그 행의 경보가 정상 기록 전체를 경보 단위로 만들어 두 이상이 합쳐졌다(둘째 알림 없음)."""
+    model, (r11, r12, _), (_, quiet) = weak_parts
+    frame = _chain([r11, quiet.iloc[:14], r12], "2022-07-22")
+    f = _fault(frame, len(r11) - 1, late)
+    pred = model.predict(f)
+    assert pred.alarm.iloc[len(r11) - 1] == 1
+    assert (pred.incident_id.max(), pred.incident_notification.sum(), pred.incident_escalation.sum()) == (2, 2, 2)
+    for chunk in (1, 7):
+        assert_stream_matches(model, f, pred, chunk)
+
+
+@pytest.mark.parametrize("early", [2.55, 2.7, 2.95])
+def test_early_stamped_record_start_does_not_merge_incidents(inputs, weak_parts, early):
+    """이상 기록 첫 행(1행으로도 경보가 나는 행)이 이르게 찍혀 앞 정상 기록 끝 0.05~0.45초 뒤에 붙어도 두 이상은 따로 사건이고 둘째 이상에
+    시작·격상 알림이 한 번씩 나간다. 붙은 행은 도착 때 앞 사건에 이어지지만(이미 판정), 바로 뒤 실제 공백에서 그 연결을 되돌려 정상 기록이
+    정상 복귀 근거로 남는다(undo_link). 그래서 둘째 이상의 시작 알림은 붙은 행 다음 경보 행에서 나간다."""
+    model, (r11, r12, _), (_, quiet) = weak_parts
+    _, _, _, _, abnormal = inputs
+    second = pd.concat([D.inputs_only(magnitude_rows(model, abnormal, 1)), D.inputs_only(r12)], ignore_index=True)
+    frame = _chain([r11, quiet.iloc[:14], second], "2022-07-22")
+    first = len(r11) + 14
+    f = _fault(frame, first, -early)
+    pred = model.predict(f)
+    assert pred.alarm.iloc[first] == 1
+    tail = pred.iloc[first:]
+    assert pred.incident_id.max() == 2 and (tail.incident_notification.sum(), tail.incident_escalation.sum()) == (1, 1)
+    for chunk in (1, 7):
+        assert_stream_matches(model, f, pred, chunk)
+
