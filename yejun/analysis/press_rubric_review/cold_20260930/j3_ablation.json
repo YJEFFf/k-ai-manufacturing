@@ -1,0 +1,131 @@
+{
+ "full": {
+  "A": {
+   "fn": 44,
+   "fp": 0,
+   "f1": 0.9619,
+   "normal_rec": 0,
+   "abn_rec": 21
+  },
+  "B": {
+   "fn": 31,
+   "fp": 3,
+   "f1": 0.971,
+   "normal_rec": 3,
+   "abn_rec": 21
+  }
+ },
+ "no_waveform": {
+  "A": {
+   "fn": 133,
+   "fp": 0,
+   "f1": 0.8754,
+   "normal_rec": 0,
+   "abn_rec": 21
+  },
+  "B": {
+   "fn": 112,
+   "fp": 3,
+   "f1": 0.8946,
+   "normal_rec": 3,
+   "abn_rec": 21
+  }
+ },
+ "no_dynamics": {
+  "A": {
+   "fn": 86,
+   "fp": 0,
+   "f1": 0.9228,
+   "normal_rec": 0,
+   "abn_rec": 21
+  },
+  "B": {
+   "fn": 71,
+   "fp": 3,
+   "f1": 0.9346,
+   "normal_rec": 3,
+   "abn_rec": 21
+  }
+ },
+ "no_magnitude": {
+  "A": {
+   "fn": 56,
+   "fp": 0,
+   "f1": 0.951,
+   "normal_rec": 0,
+   "abn_rec": 20
+  },
+  "B": {
+   "fn": 56,
+   "fp": 1,
+   "f1": 0.9502,
+   "normal_rec": 1,
+   "abn_rec": 20
+  }
+ },
+ "no_AI0": {
+  "A": {
+   "fn": 49,
+   "fp": 0,
+   "f1": 0.9574,
+   "normal_rec": 0,
+   "abn_rec": 20
+  },
+  "B": {
+   "fn": 47,
+   "fp": 2,
+   "f1": 0.9576,
+   "normal_rec": 2,
+   "abn_rec": 21
+  }
+ },
+ "no_AI1": {
+  "A": {
+   "fn": 45,
+   "fp": 0,
+   "f1": 0.961,
+   "normal_rec": 0,
+   "abn_rec": 21
+  },
+  "B": {
+   "fn": 34,
+   "fp": 4,
+   "f1": 0.9675,
+   "normal_rec": 4,
+   "abn_rec": 21
+  }
+ },
+ "current_only": {
+  "A": {
+   "fn": 51,
+   "fp": 0,
+   "f1": 0.9556,
+   "normal_rec": 0,
+   "abn_rec": 20
+  },
+  "B": {
+   "fn": 51,
+   "fp": 1,
+   "f1": 0.9548,
+   "normal_rec": 1,
+   "abn_rec": 20
+  }
+ },
+ "vibration_only": {
+  "A": {
+   "fn": 427,
+   "fp": 0,
+   "f1": 0.4476,
+   "normal_rec": 0,
+   "abn_rec": 18
+  },
+  "B": {
+   "fn": 404,
+   "fp": 3,
+   "f1": 0.4906,
+   "normal_rec": 3,
+   "abn_rec": 18
+  }
+ },
+ "seconds": 12.4
+}

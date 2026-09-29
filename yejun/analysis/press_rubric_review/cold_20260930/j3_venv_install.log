@@ -1,0 +1,2 @@
+$T/venv/bin/python -m pip install -q -r   11.92s user 2.36s system 92% cpu 15.486 total
+EXIT 0

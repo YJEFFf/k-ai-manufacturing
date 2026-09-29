@@ -1,0 +1,20 @@
+{
+ "A": {
+  "threshold": 1.0507,
+  "tp": 481,
+  "fp": 0,
+  "fn": 119,
+  "f1": 0.8899,
+  "normal_records_alerted": 0,
+  "abnormal_records_detected": 21
+ },
+ "B": {
+  "threshold": 0.9839,
+  "tp": 493,
+  "fp": 2,
+  "fn": 107,
+  "f1": 0.9005,
+  "normal_records_alerted": 2,
+  "abnormal_records_detected": 21
+ }
+}

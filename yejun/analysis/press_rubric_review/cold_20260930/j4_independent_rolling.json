@@ -1,0 +1,42 @@
+{
+ "300-359": {
+  "f1": 0.966408,
+  "tp": 561,
+  "fn": 39,
+  "fp": 0,
+  "normal_records_alerted": "0/60",
+  "abnormal_records_detected": "21/21"
+ },
+ "360-419": {
+  "f1": 0.965517,
+  "tp": 560,
+  "fn": 40,
+  "fp": 0,
+  "normal_records_alerted": "0/60",
+  "abnormal_records_detected": "21/21"
+ },
+ "420-479": {
+  "f1": 0.971819,
+  "tp": 569,
+  "fn": 31,
+  "fp": 2,
+  "normal_records_alerted": "2/60",
+  "abnormal_records_detected": "21/21"
+ },
+ "480-539": {
+  "f1": 0.961938,
+  "tp": 556,
+  "fn": 44,
+  "fp": 0,
+  "normal_records_alerted": "0/60",
+  "abnormal_records_detected": "21/21"
+ },
+ "540-599": {
+  "f1": 0.961938,
+  "tp": 556,
+  "fn": 44,
+  "fp": 0,
+  "normal_records_alerted": "0/60",
+  "abnormal_records_detected": "21/21"
+ }
+}

@@ -1,0 +1,124 @@
+{
+ "A": {
+  "rows": 4690,
+  "tp": 556,
+  "fp": 0,
+  "fn": 44,
+  "f1": 0.961938,
+  "normal_records_alerted": "0/120",
+  "abnormal_records_detected": "21/21",
+  "first_alarm_delay_max_s": 0.5,
+  "first_alarm_delay_median_s": 0.1,
+  "normal_incident_starts": 0,
+  "normal_incident_escalations": 0,
+  "abnormal_incident_starts": 1,
+  "abnormal_incident_escalations": 1,
+  "abnormal_row_alarms": 556,
+  "prob_cap_rows_abnormal": 555,
+  "normal_alarm_prob_max": null,
+  "columns": 45
+ },
+ "B": {
+  "rows": 6697,
+  "tp": 569,
+  "fp": 3,
+  "fn": 31,
+  "f1": 0.97099,
+  "normal_records_alerted": "3/180",
+  "abnormal_records_detected": "21/21",
+  "first_alarm_delay_max_s": 0.5,
+  "first_alarm_delay_median_s": 0.0,
+  "normal_incident_starts": 3,
+  "normal_incident_escalations": 0,
+  "abnormal_incident_starts": 1,
+  "abnormal_incident_escalations": 1,
+  "abnormal_row_alarms": 569,
+  "prob_cap_rows_abnormal": 568,
+  "normal_alarm_prob_max": 0.5499999999999999,
+  "columns": 45
+ },
+ "outputs_csv_vs_commit": {
+  "same": 44,
+  "differ": [],
+  "missing": []
+ },
+ "press_evidence_csv_vs_commit": {
+  "same": 41,
+  "differ": []
+ },
+ "reproduce_summary": {
+  "mode": "quick",
+  "python": "3.12.2",
+  "total_seconds": 581.1,
+  "passed": 13,
+  "failed": 0,
+  "planned": 13,
+  "steps": [
+   [
+    "v1 선행(주 모델·기준모델·행별 예측)",
+    0,
+    10.1
+   ],
+   [
+    "v1 동결값 비교",
+    0,
+    0.4
+   ],
+   [
+    "v2 학습·시간순 5회",
+    0,
+    26.3
+   ],
+   [
+    "v2 분석",
+    0,
+    201.3
+   ],
+   [
+    "v2 실행 검증(audit)",
+    0,
+    238.2
+   ],
+   [
+    "v2 동결값 비교",
+    0,
+    2.0
+   ],
+   [
+    "진단 표(press_evidence)",
+    0,
+    13.2
+   ],
+   [
+    "진단 보강 표·그림",
+    0,
+    86.0
+   ],
+   [
+    "press_evidence 동결값 비교",
+    0,
+    0.6
+   ],
+   [
+    "press_supervised 동결값 비교",
+    0,
+    0.5
+   ],
+   [
+    "press_advance 동결값 비교",
+    0,
+    0.5
+   ],
+   [
+    "press_selection 동결값 비교",
+    0,
+    0.6
+   ],
+   [
+    "보완 실험 E1~E3 동결값 비교",
+    0,
+    1.5
+   ]
+  ]
+ }
+}

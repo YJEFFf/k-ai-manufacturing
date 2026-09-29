@@ -1,0 +1,678 @@
+{
+ "data": {
+  "rows": {
+   "normal": 20000,
+   "abnormal": 600
+  },
+  "labels": {
+   "normal": {
+    "0": 20000
+   },
+   "abnormal": {
+    "1": 600
+   }
+  },
+  "missing": {
+   "normal": 0,
+   "abnormal": 0
+  },
+  "dup_timestamps": {
+   "normal": 1,
+   "abnormal": 0
+  },
+  "dup_rows_sensors": {
+   "normal": 1,
+   "abnormal": 0
+  },
+  "time_range": {
+   "normal": [
+    "2022-07-12 00:00:00.019000",
+    "2022-07-12 01:16:55.828000",
+    "Tuesday"
+   ],
+   "abnormal": [
+    "2022-07-17 10:51:07.943000",
+    "2022-07-17 10:53:53.540000",
+    "Sunday"
+   ]
+  },
+  "records": {
+   "normal": 600,
+   "abnormal": 21
+  },
+  "record_len": {
+   "normal": {
+    "min": 1,
+    "median": 37.0,
+    "max": 50,
+    "n_len_lt8": 50,
+    "n_len50": 202
+   },
+   "abnormal": {
+    "min": 3,
+    "median": 28.0,
+    "max": 50,
+    "lens": [
+     4,
+     50,
+     47,
+     31,
+     18,
+     3,
+     50,
+     40,
+     25,
+     8,
+     4,
+     50,
+     42,
+     28,
+     15,
+     50,
+     50,
+     36,
+     24,
+     10,
+     15
+    ]
+   }
+  },
+  "between_record_gap_s": {
+   "normal": [
+    1.545,
+    4.2225,
+    16.643
+   ],
+   "abnormal": [
+    1.78,
+    5.3525,
+    8.572
+   ]
+  },
+  "within_gap_ms_range": {
+   "normal": [
+    0.0,
+    100.0
+   ],
+   "abnormal": [
+    100.0,
+    100.0
+   ]
+  },
+  "same_as_1us_rule": {
+   "normal": true,
+   "abnormal": true
+  },
+  "decimals": {
+   "normal": {
+    "AI0_Vibration": {
+     "6": 17958,
+     "5": 1829,
+     "4": 183,
+     "3": 22
+    },
+    "AI1_Vibration": {
+     "6": 17914,
+     "5": 1870,
+     "4": 195,
+     "3": 16
+    },
+    "AI2_Current": {
+     "5": 10213,
+     "6": 8618,
+     "4": 1042,
+     "3": 114
+    }
+   },
+   "abnormal": {
+    "AI0_Vibration": {
+     "8": 264,
+     "9": 246,
+     "7": 58,
+     "10": 23
+    },
+    "AI1_Vibration": {
+     "8": 394,
+     "9": 151,
+     "7": 34,
+     "10": 15
+    },
+    "AI2_Current": {
+     "5": 275,
+     "6": 207,
+     "14": 40,
+     "4": 23
+    }
+   }
+  },
+  "sensor_stats": {
+   "normal": {
+    "AI0_Vibration": {
+     "mean": -0.0001,
+     "std": 0.0706,
+     "min": -0.3146,
+     "max": 0.3517
+    },
+    "AI1_Vibration": {
+     "mean": -0.0001,
+     "std": 0.1189,
+     "min": -0.3665,
+     "max": 0.3998
+    },
+    "AI2_Current": {
+     "mean": 1.4462,
+     "std": 122.6645,
+     "min": -271.5683,
+     "max": 273.235
+    }
+   },
+   "abnormal": {
+    "AI0_Vibration": {
+     "mean": 0.0076,
+     "std": 0.4479,
+     "min": -1.5027,
+     "max": 1.8032
+    },
+    "AI1_Vibration": {
+     "mean": -0.0081,
+     "std": 0.2412,
+     "min": -0.7513,
+     "max": 0.5093
+    },
+    "AI2_Current": {
+     "mean": 57.3297,
+     "std": 153.1726,
+     "min": -399.3512,
+     "max": 538.826
+    }
+   }
+  }
+ },
+ "format_leak_current_decimals_ge_k": {
+  "k": 7,
+  "f1": 0.25036390101892286,
+  "tp": 86,
+  "fp": 1,
+  "fn": 514
+ },
+ "splits": {
+  "A": {
+   "train_records": 360,
+   "cal_records": 120,
+   "test_records": 120,
+   "test_rows": 4090,
+   "ar2": [
+    0.10017176356137535,
+    1.833083212563616,
+    -0.9748619270345045
+   ],
+   "scaler_mean": [
+    -0.00021,
+    -0.00028,
+    1.65635
+   ],
+   "scaler_sd": [
+    0.074,
+    0.1249,
+    127.35441
+   ],
+   "v2_a1": {
+    "tp": 556,
+    "fp": 0,
+    "fn": 44,
+    "tn": 4090,
+    "f1": 0.961938,
+    "precision": 1.0,
+    "recall": 0.926667,
+    "normal_records_alerted": 0,
+    "normal_records": 120,
+    "normal_alerted_ids": [],
+    "abnormal_records_detected": 21,
+    "miss_by_pos": {
+     "0": 13,
+     "1": 13,
+     "2": 4,
+     "3": 2,
+     "4": 5,
+     "5": 2,
+     "6": 3,
+     "7": 2
+    }
+   },
+   "v2_a3": {
+    "tp": 569,
+    "fp": 1,
+    "fn": 31,
+    "tn": 4089,
+    "f1": 0.97265,
+    "precision": 0.998246,
+    "recall": 0.948333,
+    "normal_records_alerted": 1,
+    "normal_records": 120,
+    "normal_alerted_ids": [
+     570
+    ],
+    "abnormal_records_detected": 21,
+    "miss_by_pos": {
+     "0": 10,
+     "1": 10,
+     "2": 4,
+     "3": 1,
+     "4": 4,
+     "5": 1,
+     "6": 1,
+     "7": 0
+    }
+   },
+   "v2_a5": {
+    "tp": 569,
+    "fp": 1,
+    "fn": 31,
+    "tn": 4089,
+    "f1": 0.97265,
+    "precision": 0.998246,
+    "recall": 0.948333,
+    "normal_records_alerted": 1,
+    "normal_records": 120,
+    "normal_alerted_ids": [
+     570
+    ],
+    "abnormal_records_detected": 21,
+    "miss_by_pos": {
+     "0": 10,
+     "1": 10,
+     "2": 4,
+     "3": 1,
+     "4": 4,
+     "5": 1,
+     "6": 1,
+     "7": 0
+    }
+   },
+   "v2_cal_top3": [
+    4.4179,
+    4.0488,
+    3.5039
+   ],
+   "v2_cal_top3_record": [
+    461,
+    423,
+    446
+   ],
+   "v2_record_max": {
+    "normal_test_max": 3.822,
+    "abnormal_min": 12.276,
+    "record_auroc": 1.0
+   },
+   "v2_test_above_cal_median": 12,
+   "v2_mw_test_vs_cal_p": 2.919449474846108e-11,
+   "v1_a1": {
+    "tp": 501,
+    "fp": 0,
+    "fn": 99,
+    "tn": 4090,
+    "f1": 0.910082,
+    "precision": 1.0,
+    "recall": 0.835,
+    "normal_records_alerted": 0,
+    "normal_records": 120,
+    "normal_alerted_ids": [],
+    "abnormal_records_detected": 21,
+    "miss_by_pos": {
+     "0": 13,
+     "1": 13,
+     "2": 12,
+     "3": 12,
+     "4": 12,
+     "5": 14,
+     "6": 15,
+     "7": 8
+    }
+   },
+   "v1_a3": {
+    "tp": 514,
+    "fp": 1,
+    "fn": 86,
+    "tn": 4089,
+    "f1": 0.921973,
+    "precision": 0.998058,
+    "recall": 0.856667,
+    "normal_records_alerted": 1,
+    "normal_records": 120,
+    "normal_alerted_ids": [
+     570
+    ],
+    "abnormal_records_detected": 21,
+    "miss_by_pos": {
+     "0": 10,
+     "1": 10,
+     "2": 12,
+     "3": 11,
+     "4": 12,
+     "5": 14,
+     "6": 13,
+     "7": 4
+    }
+   },
+   "v1_a5": {
+    "tp": 516,
+    "fp": 2,
+    "fn": 84,
+    "tn": 4088,
+    "f1": 0.923077,
+    "precision": 0.996139,
+    "recall": 0.86,
+    "normal_records_alerted": 2,
+    "normal_records": 120,
+    "normal_alerted_ids": [
+     570,
+     576
+    ],
+    "abnormal_records_detected": 21,
+    "miss_by_pos": {
+     "0": 10,
+     "1": 10,
+     "2": 12,
+     "3": 11,
+     "4": 12,
+     "5": 14,
+     "6": 12,
+     "7": 3
+    }
+   },
+   "v1_cal_top3": [
+    4.4179,
+    4.0488,
+    3.2694
+   ],
+   "v1_cal_top3_record": [
+    461,
+    423,
+    426
+   ],
+   "v1_record_max": {
+    "normal_test_max": 3.822,
+    "abnormal_min": 12.276,
+    "record_auroc": 1.0
+   }
+  },
+  "B": {
+   "train_records": 300,
+   "cal_records": 120,
+   "test_records": 180,
+   "test_rows": 6097,
+   "ar2": [
+    0.09803182822501699,
+    1.832496243498945,
+    -0.9742301185717609
+   ],
+   "scaler_mean": [
+    -0.00014,
+    -0.00012,
+    1.65467
+   ],
+   "scaler_sd": [
+    0.07354,
+    0.12323,
+    126.93674
+   ],
+   "v2_a1": {
+    "tp": 569,
+    "fp": 3,
+    "fn": 31,
+    "tn": 6094,
+    "f1": 0.97099,
+    "precision": 0.994755,
+    "recall": 0.948333,
+    "normal_records_alerted": 3,
+    "normal_records": 180,
+    "normal_alerted_ids": [
+     423,
+     461,
+     570
+    ],
+    "abnormal_records_detected": 21,
+    "miss_by_pos": {
+     "0": 10,
+     "1": 10,
+     "2": 4,
+     "3": 1,
+     "4": 4,
+     "5": 1,
+     "6": 1,
+     "7": 0
+    }
+   },
+   "v2_a3": {
+    "tp": 569,
+    "fp": 7,
+    "fn": 31,
+    "tn": 6090,
+    "f1": 0.967687,
+    "precision": 0.987847,
+    "recall": 0.948333,
+    "normal_records_alerted": 5,
+    "normal_records": 180,
+    "normal_alerted_ids": [
+     423,
+     426,
+     446,
+     461,
+     570
+    ],
+    "abnormal_records_detected": 21,
+    "miss_by_pos": {
+     "0": 10,
+     "1": 10,
+     "2": 4,
+     "3": 1,
+     "4": 4,
+     "5": 1,
+     "6": 1,
+     "7": 0
+    }
+   },
+   "v2_a5": {
+    "tp": 569,
+    "fp": 11,
+    "fn": 31,
+    "tn": 6086,
+    "f1": 0.964407,
+    "precision": 0.981034,
+    "recall": 0.948333,
+    "normal_records_alerted": 7,
+    "normal_records": 180,
+    "normal_alerted_ids": [
+     423,
+     426,
+     446,
+     456,
+     461,
+     570,
+     576
+    ],
+    "abnormal_records_detected": 21,
+    "miss_by_pos": {
+     "0": 10,
+     "1": 10,
+     "2": 4,
+     "3": 1,
+     "4": 4,
+     "5": 1,
+     "6": 1,
+     "7": 0
+    }
+   },
+   "v2_cal_top3": [
+    3.5199,
+    3.5099,
+    3.2589
+   ],
+   "v2_cal_top3_record": [
+    303,
+    301,
+    367
+   ],
+   "v2_record_max": {
+    "normal_test_max": 4.594,
+    "abnormal_min": 12.82,
+    "record_auroc": 1.0
+   },
+   "v2_test_above_cal_median": 50,
+   "v2_mw_test_vs_cal_p": 0.0016527201406200606,
+   "v1_a1": {
+    "tp": 514,
+    "fp": 3,
+    "fn": 86,
+    "tn": 6094,
+    "f1": 0.920322,
+    "precision": 0.994197,
+    "recall": 0.856667,
+    "normal_records_alerted": 3,
+    "normal_records": 180,
+    "normal_alerted_ids": [
+     423,
+     461,
+     570
+    ],
+    "abnormal_records_detected": 21,
+    "miss_by_pos": {
+     "0": 10,
+     "1": 10,
+     "2": 12,
+     "3": 11,
+     "4": 12,
+     "5": 14,
+     "6": 13,
+     "7": 4
+    }
+   },
+   "v1_a3": {
+    "tp": 515,
+    "fp": 6,
+    "fn": 85,
+    "tn": 6091,
+    "f1": 0.918822,
+    "precision": 0.988484,
+    "recall": 0.858333,
+    "normal_records_alerted": 4,
+    "normal_records": 180,
+    "normal_alerted_ids": [
+     423,
+     426,
+     461,
+     570
+    ],
+    "abnormal_records_detected": 21,
+    "miss_by_pos": {
+     "0": 10,
+     "1": 10,
+     "2": 12,
+     "3": 11,
+     "4": 12,
+     "5": 14,
+     "6": 12,
+     "7": 4
+    }
+   },
+   "v1_a5": {
+    "tp": 518,
+    "fp": 9,
+    "fn": 82,
+    "tn": 6088,
+    "f1": 0.919255,
+    "precision": 0.982922,
+    "recall": 0.863333,
+    "normal_records_alerted": 6,
+    "normal_records": 180,
+    "normal_alerted_ids": [
+     423,
+     426,
+     456,
+     461,
+     570,
+     576
+    ],
+    "abnormal_records_detected": 21,
+    "miss_by_pos": {
+     "0": 10,
+     "1": 10,
+     "2": 12,
+     "3": 10,
+     "4": 12,
+     "5": 13,
+     "6": 12,
+     "7": 3
+    }
+   },
+   "v1_cal_top3": [
+    3.5199,
+    3.5099,
+    3.2589
+   ],
+   "v1_cal_top3_record": [
+    303,
+    301,
+    367
+   ],
+   "v1_record_max": {
+    "normal_test_max": 4.594,
+    "abnormal_min": 12.82,
+    "record_auroc": 1.0
+   }
+  }
+ },
+ "cluster_bootstrap_f1": {
+  "A": {
+   "f1_point": 0.961938,
+   "f1_ci95": [
+    0.9481,
+    0.9724
+   ],
+   "note": "정상 평가 기록과 이상 21기록을 따로 복원 추출(4000회). 이상 21기록은 한 에피소드라 이 구간도 낙관적이다"
+  },
+  "B": {
+   "f1_point": 0.97099,
+   "f1_ci95": [
+    0.9565,
+    0.9821
+   ],
+   "note": "정상 평가 기록과 이상 21기록을 따로 복원 추출(4000회). 이상 21기록은 한 에피소드라 이 구간도 낙관적이다"
+  }
+ },
+ "conformal_far_check": {
+  "A": {
+   "nominal": 0.00826,
+   "k": 0,
+   "n": 120,
+   "expected": 0.99,
+   "p_ge_k_binom": 1.0,
+   "cp_upper95": 0.0247
+  },
+  "B": {
+   "nominal": 0.00826,
+   "k": 3,
+   "n": 180,
+   "expected": 1.49,
+   "p_ge_k_binom": 0.1875,
+   "cp_upper95": 0.0425
+  }
+ },
+ "simple_rule_approx": {
+  "A": {
+   "f1": 0.9247,
+   "tp": 516,
+   "fp": 0,
+   "normal_rec": 0,
+   "abn_rec": 21
+  },
+  "B": {
+   "f1": 0.9216,
+   "tp": 517,
+   "fp": 5,
+   "normal_rec": 3,
+   "abn_rec": 21
+  }
+ },
+ "seconds": 2.9
+}

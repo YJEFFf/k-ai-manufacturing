@@ -1,0 +1,4 @@
+건너뜀 E2: 외부 입력 없음 ['/private/tmp/j3_repro.ioMcBr/yejun/analysis/press_external/data/hydraulic.zip'] — 획득: python analysis/press_external/acquire.py (SHA-256은 analysis/press_external/acquisition.json)
+-- E1 재실행: /private/tmp/j3_repro.ioMcBr/yejun/analysis/press_supplement/fault_injection.py --out /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_supplement_rerun_41ek7l0p/E1
+-- E3 재실행: /private/tmp/j3_repro.ioMcBr/yejun/analysis/press_supplement/recalibration.py --out /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_supplement_rerun_41ek7l0p/E3
+통과: 무결성·기대값 비교 E1, E3 · 재실행 E1,E3 · 건너뜀 E2(외부 입력 없음)

@@ -1,0 +1,58 @@
+{
+ "matched": {
+  "A": {
+   "tp": 481,
+   "fn": 119,
+   "fp": 0,
+   "f1": 0.8899,
+   "normal_records_alerted": "0/120",
+   "abnormal_records_detected": "21/21",
+   "learned_scales": [
+    0.3517,
+    0.3805,
+    38.5829
+   ]
+  },
+  "B": {
+   "tp": 493,
+   "fn": 107,
+   "fp": 2,
+   "f1": 0.9005,
+   "normal_records_alerted": "2/180",
+   "abnormal_records_detected": "21/21",
+   "learned_scales": [
+    0.3517,
+    0.3805,
+    38.5829
+   ]
+  }
+ },
+ "raw": {
+  "A": {
+   "tp": 481,
+   "fn": 119,
+   "fp": 0,
+   "f1": 0.8899,
+   "normal_records_alerted": "0/120",
+   "abnormal_records_detected": "21/21",
+   "learned_scales": [
+    0.3517,
+    0.3805,
+    38.5333
+   ]
+  },
+  "B": {
+   "tp": 494,
+   "fn": 106,
+   "fp": 3,
+   "f1": 0.9006,
+   "normal_records_alerted": "3/180",
+   "abnormal_records_detected": "21/21",
+   "learned_scales": [
+    0.3517,
+    0.3805,
+    38.5333
+   ]
+  }
+ }
+}

@@ -1,0 +1,83 @@
+{
+ "head_start": "d5a3446f65a190ed71c867a712283aa5d00dffa2",
+ "head_end": "d5a3446f65a190ed71c867a712283aa5d00dffa2",
+ "machine": "macOS 26.3.1 arm64, Apple M2 8-core; load average about 6-7 (other judges running)",
+ "temp_root": "/private/tmp/j3_repro.ioMcBr (mktemp -d; deleted after work)",
+ "runs": [
+  {
+   "name": "quick reproduce (git-less copy, anaconda python 3.12.2)",
+   "cmd": "OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python yejun/press_guard/reproduce.py",
+   "result": "13/13 passed, exit 0",
+   "seconds": 574.3,
+   "log": "j3_reproduce_quick.log"
+  },
+  {
+   "name": "regeneration determinism",
+   "cmd": "diff -rq committed(git archive) vs regenerated for press_guard, press_evidence, press_submission",
+   "result": "all result CSV/PNG byte-identical; only 7 run-record JSON differ (elapsed, fingerprint, git_commit null, v1 quick path steps 1-2)"
+  },
+  {
+   "name": "fresh venv + tests",
+   "cmd": "python -m venv; pip install -r requirements-lock.txt; reproduce.py --tests",
+   "result": "install ok (15.5 s, 388 MB); 22/22 passed; v2 pytest 208 passed 1 skipped; v1 44 passed 2 skipped; analysis tests pass; web regression pass",
+   "seconds": 939.3,
+   "log": "j3_reproduce_venv_tests.log"
+  },
+  {
+   "name": "organizer ZIP placement",
+   "cmd": "runtime.install_data(<contest zip>) then D.load() in fresh copy without CSVs",
+   "result": "SHA-256 ok, 20000/600 rows"
+  },
+  {
+   "name": "predict CLI on unlabeled CSV",
+   "cmd": "predict.py --input <400 rows, no label> --cases ... --model artifacts/guard_B.json",
+   "result": "400 rows, 381 alarm rows, 1 incident, 1 escalation, 14 cases",
+   "seconds": 1.6
+  },
+  {
+   "name": "console",
+   "cmd": "serve.py --port 26289; GET /; GET /api/overview; POST /api/analyze {split B, alpha .01, prior .01}; kill",
+   "result": "200 (18808 B); audit_ok True; 572 alarm rows, 4 incidents, 1 escalation; server stopped"
+  },
+  {
+   "name": "package reruns",
+   "cmd": "j3_reruns.sh",
+   "result": "press_advance rerun+contract pass; press_supervised rerun+contract pass (no TP drift on this machine); press_selection --check match + internal checks pass; press_supplement verify --rerun E1,E3 pass (E2 skipped: no UCI zip)",
+   "seconds": {
+    "advance": 12,
+    "supervised": 197,
+    "selection": 506,
+    "supplement_E1_E3": 788,
+    "total": 1503
+   },
+   "log": "j3_reruns_summary.log"
+  }
+ ],
+ "independent_scripts": [
+  {
+   "script": "j3_independent.py",
+   "output": "j3_independent.json",
+   "seconds": 2.9,
+   "result": "v2/v1 TP/FP/FN/F1 exact match at alpha 1/3/5%; thresholds; record AUROC 1.0; MW p; format leak F1 0.998; duplicate row; cluster bootstrap F1 CI A [0.948,0.972] B [0.957,0.982]"
+  },
+  {
+   "script": "j3_checks2.py",
+   "output": "j3_checks2.json",
+   "seconds": 5.0,
+   "result": "length-conditional FAR (50-row units above nominal); probability layer refit exact match (Brier/ECE/cap counts); all 21 abnormal records >=2 alarm rows; team test prediction rescoring match"
+  },
+  {
+   "script": "j3_simple_rule.py",
+   "output": "j3_simple_rule.json",
+   "seconds": 2,
+   "result": "A F1 0.8899 (481/0/119), B 0.9005 (493/2/107), 21/21 - match"
+  },
+  {
+   "script": "j3_ablation.py",
+   "output": "j3_ablation.json",
+   "seconds": 12.3,
+   "result": "8 component/sensor ablations x 2 splits - all match README"
+  }
+ ],
+ "blinding": "Did not open press_rubric_review except official_task_extract.txt and own j3_/J3_ files; no review/audit/recheck/implementation folders, power_*, HISTORY.md, yejun/*.md, power_submission, claude/, J4_/j4_ files; git used only for hash check, archive, and grep of committed submission files."
+}

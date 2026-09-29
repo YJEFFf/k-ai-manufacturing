@@ -1,0 +1,336 @@
+== 한 명령 재현(git 없는 사본, reproduce.py 기본 경로) (j4_quick.log)
+start 00:35:59
+[1/13] v1 선행(주 모델·기준모델·행별 예측) …
+      통과 · 10.1초 · }
+[2/13] v1 동결값 비교 …
+      통과 · 0.4초 · 16/16 통과 (1~2단계 부분 비교, 필수 집계 9개). 환경: macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit; 코드 b372a18b66af v
+[3/13] v2 학습·시간순 5회 …
+      통과 · 26.3초 ·     B baseline_v1   0.01 514   3  86 6094 0.920322   0.994197 0.856667                         3              180       
+[4/13] v2 분석 …
+      통과 · 201.3초 · }
+[5/13] v2 실행 검증(audit) …
+      통과 · 238.2초 · 16/16 통과 → /private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/j4_press.Lvjzv9vj6f/yejun/press_guard/outputs/audit.
+[6/13] v2 동결값 비교 …
+      통과 · 2.0초 · 59/59 통과. 코드 710bea85ce08 vs 동결 710bea85ce08; 환경 macOS-26.3.1-arm64-arm-64bit vs 동결 macOS-26.3.1-arm64-arm-64bit
+[7/13] 진단 표(press_evidence) …
+      통과 · 13.2초 ·     B 12 0.099174 0.099174      180               11  0.061111       0.099126          False
+[8/13] 진단 보강 표·그림 …
+      통과 · 86.0초 · 완료 84.2초, 표 23개, 그림 5장
+[9/13] press_evidence 동결값 비교 …
+      통과 · 0.6초 · 통과: press_evidence 실행 기록 무결성·동결 기대값 비교(결과 46개)
+[10/13] press_supervised 동결값 비교 …
+      통과 · 0.5초 · 통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+[11/13] press_advance 동결값 비교 …
+      통과 · 0.5초 · 통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+[12/13] press_selection 동결값 비교 …
+      통과 · 0.6초 · 통과: press_selection 실행 기록 무결성·동결 기대값 비교(결과 13개)
+[13/13] 보완 실험 E1~E3 동결값 비교 …
+      통과 · 1.5초 · 통과: 무결성·기대값 비교 E1, E3 · 건너뜀 E2(외부 입력 없음)
+
+13/13 단계 통과 · 581.1초 · 요약 press_guard/outputs/reproduce_summary.json
+      582.35 real       564.48 user        14.18 sys
+           813613056  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              851850  page reclaims
+                 248  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                 540  voluntary context switches
+              124293  involuntary context switches
+         12866668008  instructions retired
+          4301983021  cycles elapsed
+           139428848  peak memory footprint
+exit 0 end 00:45:42
+
+== 시험(pytest·node) (j4_tests.log)
+start 00:52:11
+208 passed, 1 skipped in 297.04s (0:04:57)
+pytest v2 exit 0 00:57:09
+49 passed in 8.78s
+pytest v1 exit 0 00:57:19
+8 passed in 0.66s
+pytest analysis/press_advance/test_contract.py exit 0 00:57:21
+6 passed in 1.12s
+pytest analysis/press_evidence/test_contract.py exit 0 00:57:22
+5 passed in 1.45s
+pytest analysis/press_evidence/test_diagnostics.py exit 0 00:57:24
+6 passed in 0.73s
+pytest analysis/press_selection/test_contract.py exit 0 00:57:26
+6 passed in 0.52s
+pytest analysis/press_supervised/test_contract.py exit 0 00:57:27
+13 passed in 2.48s
+pytest analysis/press_supplement/test_contract.py exit 0 00:57:30
+web regressions passed: charts, incidents, causal state, probability cap, monitor actions and primary estimate
+node web exit 0 00:57:30
+<anonymous_script>:1
+SyntaxError: Unexpected end of JSON input
+    at JSON.parse (<anonymous>)
+    at Object.<anonymous> (/private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/j4_press.Lvjzv9vj6f/yejun/press_guard/test_web_prefix.cjs:3:19)
+    at Module._compile (node:internal/modules/cjs/loader:1554:14)
+    at Object..js (node:internal/modules/cjs/loader:1706:10)
+    at Module.load (node:internal/modules/cjs/loader:1289:32)
+    at Function._load (node:internal/modules/cjs/loader:1108:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:220:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:170:5)
+    at node:internal/main/run_main_module:36:49
+Node.js v22.14.0
+node prefix exit 1 00:57:30
+
+== 재실행(E1~E3·지도학습·선정 근거) (j4_reruns.log)
+start 00:58:17
+-- E1 재실행: /private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/j4_press.Lvjzv9vj6f/yejun/analysis/press_supplement/fault_injection.py --out /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_supplement_rerun_0g_ep_am/E1
+-- E2 재실행: /private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/j4_press.Lvjzv9vj6f/yejun/analysis/press_supplement/uci_v2.py --out /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_supplement_rerun_0g_ep_am/E2
+-- E3 재실행: /private/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/j4_press.Lvjzv9vj6f/yejun/analysis/press_supplement/recalibration.py --out /var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/press_supplement_rerun_0g_ep_am/E3
+통과: 무결성·기대값 비교 E1, E2, E3 · 재실행 E1,E2,E3
+supplement rerun exit 0 01:13:46
+grouped A window
+grouped A window_plus_v2
+grouped B window
+grouped B window_plus_v2
+injection A none 0.0
+injection A vib_noise 0.25
+injection A vib_noise 0.5
+injection A vib_noise 1
+injection A vib_noise 2
+injection A vib_noise 4
+injection A vib_noise 8
+injection A cur_noise 0.02
+injection A cur_noise 0.05
+injection A cur_noise 0.1
+injection A cur_noise 0.2
+injection A cur_noise 0.4
+injection A cur_noise 0.8
+injection A cur_offset 0.05
+injection A cur_offset 0.1
+injection A cur_offset 0.2
+injection A cur_offset 0.4
+injection A cur_offset 0.8
+injection A cur_offset 1.6
+injection A cur_gain 0.5
+injection A cur_gain 0.7
+injection A cur_gain 0.85
+injection A cur_gain 1.15
+injection A cur_gain 1.3
+injection A cur_gain 1.5
+injection B none 0.0
+injection B vib_noise 0.25
+injection B vib_noise 0.5
+injection B vib_noise 1
+injection B vib_noise 2
+injection B vib_noise 4
+injection B vib_noise 8
+injection B cur_noise 0.02
+injection B cur_noise 0.05
+injection B cur_noise 0.1
+injection B cur_noise 0.2
+injection B cur_noise 0.4
+injection B cur_noise 0.8
+injection B cur_offset 0.05
+injection B cur_offset 0.1
+injection B cur_offset 0.2
+injection B cur_offset 0.4
+injection B cur_offset 0.8
+injection B cur_offset 1.6
+injection B cur_gain 0.5
+injection B cur_gain 0.7
+injection B cur_gain 0.85
+injection B cur_gain 1.15
+injection B cur_gain 1.3
+injection B cur_gain 1.5
+done 176.9 s
+supervised run exit 0 01:16:45
+통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+supervised contract exit 0 01:16:45
+[   5.7s] 문맥·주 수치 대조
+[  40.9s] M3·O3·E7
+[  57.2s] M4
+[  87.8s] M5
+[ 429.1s] 2단계 비 분할 민감도
+대조: 일치 / 내부 점검: 통과
+selection check exit 0 01:23:57
+
+== 모의 운용 simulate.py 출력 (simulate_stdout.txt)
+[2022-07-12 00:53:17.156] 사건 시작 · 주의 · 구간 3 · magnitude · 진동·부하 확인 · 이상 확률 55.0%
+[2022-07-12 00:58:21.587] 사건 시작 · 주의 · 구간 41 · magnitude · 진동·부하 확인 · 이상 확률 55.0%
+[2022-07-12 01:12:44.412] 사건 시작 · 주의 · 구간 150 · magnitude · 진동·부하 확인 · 이상 확률 55.0%
+[2022-07-12 01:17:25.828] 사건 시작 · 주의 · 구간 180 · magnitude · 진동·부하 확인 · 이상 확률 55.0%
+[2022-07-12 01:17:25.928] 격상 · 점검 요청 · 구간 180 · magnitude · 진동·부하 확인 · 이상 확률 55.0%
+6,697행 · 사건 4 · 격상 1 · 근거 추가 2 · 수집 오류 0 · 계산 p95 20.9 ms · 경과 128.1초
+/opt/anaconda3/bin/python yejun/press_guard/simulate.py --csv "$F/shift_B.csv  129.07s user 0.47s system 99% cpu 2:09.68 total
+tail -20  0.00s user 0.00s system 0% cpu 2:09.68 total
+
+row_id,timestamp,incident_id,record_id,position,kind,notify,level,level_name,evidence,action,anomaly_probability,compute_ms
+112,2022-07-12 00:53:17.156,1,3,41,사건 시작,1,1,주의,magnitude,진동·부하 확인,0.5499999999999999,20.428499999979977
+1366,2022-07-12 00:58:21.587,2,41,40,사건 시작,1,1,주의,magnitude,진동·부하 확인,0.5499999999999999,21.053875000689004
+5088,2022-07-12 01:12:44.412,3,150,11,사건 시작,1,1,주의,magnitude,진동·부하 확인,0.5499999999999999,18.48283400067885
+6097,2022-07-12 01:17:25.828,4,180,0,사건 시작,1,1,주의,magnitude,진동·부하 확인,0.5499999999999999,14.628166999500536
+6098,2022-07-12 01:17:25.928,4,180,1,격상,1,2,점검 요청,magnitude,진동·부하 확인,0.5499999999999999,14.96070899975166
+6099,2022-07-12 01:17:26.028,4,180,2,근거 추가,0,2,점검 요청,magnitude+dynamics,진동·전류 함께 점검,0.5499999999999999,10.764417000245885
+6107,2022-07-12 01:17:35.209,4,181,6,근거 추가,0,2,점검 요청,waveform+dynamics,전류 파형·계측 확인,0.5499999999999999,14.357541000208585
+
+[exited with code 0]
+
+== 콘솔 서버 로그 (serve.log)
+Press Guard: http://127.0.0.1:25082 (Ctrl+C 종료)
+"GET / HTTP/1.1" 200 -
+"GET / HTTP/1.1" 200 -
+"GET /api/overview HTTP/1.1" 200 -
+"POST /api/analyze HTTP/1.1" 200 -
+"POST /api/analyze HTTP/1.1" 200 -
+"POST /api/analyze HTTP/1.1" 400 -
+"POST /api/analyze HTTP/1.1" 400 -
+
+== 재보정 보고서(site_report.json) (site_report.json)
+{
+  "input": "/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/j4_press.Lvjzv9vj6f/j4_field/site_normal.csv",
+  "input_sha256": "65e98e2838282138bfcbbdb1dc837995ab09112068db44ae2e46a4698f161809",
+  "alpha": 0.01,
+  "alert_unit_max_rows": 50,
+  "units": {
+    "total": 480,
+    "train": 300,
+    "cal": 120,
+    "holdout": 60,
+    "min_cal_for_alpha": 99
+  },
+  "usage": {
+    "train": {
+      "rows": 10133,
+      "sensor_minutes": 16.888333333333335,
+      "elapsed_minutes": 37.898783333333334
+    },
+    "cal": {
+      "rows": 3770,
+      "sensor_minutes": 6.283333333333333,
+      "elapsed_minutes": 14.787883333333333
+    },
+    "holdout": {
+      "rows": 2007,
+      "sensor_minutes": 3.345,
+      "elapsed_minutes": 7.9668
+    }
+  },
+  "calibration_units": 120,
+  "checks": [
+    {
+      "name": "정상 알림 단위 수가 보정 조건부 Beta-Binomial 95백분위 이하",
+      "value": 2,
+      "units": 60,
+      "nominal_rate": 0.008264462809917356,
+      "limit": 2,
+      "ok": true,
+      "false_reject_rate": 0.03580022178986453,
+      "power_if_rate_multiplied": {
+        "2x": 0.07724432359434637,
+        "3x": 0.18641279789240556
+      },
+      "note": "한도 2 · 정상에서 거부할 확률 3.6% · 실제 알림률이 명목의 2·3배일 때 거부할 확률(검정력) 8%·19%"
+    },
+    {
+      "name": "고장 주입 cur_noise 0.2 2초 안 탐지율 ≥ 90%",
+      "value": 1.0,
+      "units": 36,
+      "limit": 0.9,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "name": "고장 주입 cur_offset 0.4 2초 안 탐지율 ≥ 90%",
+      "value": 1.0,
+      "units": 36,
+      "limit": 0.9,
+      "ok": true,
+      "note": ""
+    },
+    {
+      "name": "고장 주입 vib_noise 4 2초 안 탐지율 ≥ 90%",
+      "value": 1.0,
+      "units": 36,
+      "limit": 0.9,
+      "ok": true,
+      "note": ""
+    }
+  ],
+  "passed": true,
+  "coverage": {
+    "min_rows": 17,
+    "cal_units": 90,
+    "holdout_units": 49,
+    "family_alpha": 0.05,
+    "features": {
+      "current_rms": {
+        "cal_min": 76.09428584846341,
+        "cal_max": 184.74782443829875,
+        "holdout_below": 0,
+        "holdout_above": 0,
+        "limit": 5,
+        "flagged": false
+      },
+      "vib0_sd": {
+        "cal_min": 0.025063696591452793,
+        "cal_max": 0.1087474623652965,
+        "holdout_below": 0,
+        "holdout_above": 4,
+        "limit": 5,
+        "flagged": false
+      },
+      "vib1_sd": {
+        "cal_min": 0.03814721610981031,
+        "cal_max": 0.21730477947251878,
+        "holdout_below": 1,
+        "holdout_above": 1,
+        "limit": 5,
+        "flagged": false
+      }
+    },
+    "flagged": [],
+    "expected_outside": 1.0769230769230769
+  },
+  "model_saved": true,
+  "model_path": "/var/folders/xt/9xpl5dmn4c77_6wn8rwjqjsh0000gn/T/j4_press.Lvjzv9vj6f/j4_field/site.json",
+  "excluded_by_outcomes": null,
+  "excluded_by_windows": null,
+  "budget": {
+    "units_per_elapsed_hour": 473.98499870394727,
+    "nominal_rate": 0.008264462809917356,
+    "calibrated95_rate": 0.024655401055656376,
+    "nominal_alerts_per_8h": 31.337851153979987,
+    "calibrated95_alerts_per_8h": 93.4903218992847,
+    "note": "같은 운전 조건·수집 밀도의 정상(교환가능성) 가정. 2단계는 명목값이 없고 관측값만 있다",
+    "target_alerts_per_8h": 3.0,
+    "alpha_required": 0.0007911642795138889,
+    "calibration_units_required": 1263,
+    "normal_collection_hours_required": 2.6646412934027777,
+    "within_budget": false,
+    "advice": "1단계는 화면 기록만 하고 출동은 2단계(점검 요청)로 한정하거나, α≈0.079%에 맞춰 보정 단위 1263개(정상 수집 약 2.7시간)를 모은다. 현재 구현의 α 선택지는 1·3·5%다"
+  },
+  "note": "같은 자료 안의 정상 알림 수준과 인공 이상 반응 확인이다. 실제 고장 탐지 성능·다른 날짜의 오경보율을 보장하지 않는다."
+}
+
+== 교대 감시 창별 표(monitor_windows.csv) (monitor_windows.csv)
+window,start,end,units,alerted_units,limit95,limit99,exceed,exceed99,operating_change,alarm_rows,share_magnitude,share_current,recommended_action,recalibration_data,level1_notifications,level2_escalations,incident_notifications,notification_unit,current_ratio,band_low,band_high,drift_up,low_load,recalibration_review,reason
+0,2022-07-12 00:52:47.696000+00:00,2022-07-12 01:00:45.704000+00:00,60,2,2,4,False,False,False,2,1.0,0.0,관측 지속,,2,0,2,사건(시작·격상),0.8792507178008029,0.893726038897821,1.265921414014301,False,True,False,
+1,2022-07-12 01:00:50.060000+00:00,2022-07-12 01:08:53.076000+00:00,60,0,2,4,False,False,True,0,,,관측 지속,,0,0,0,사건(시작·격상),0.7616389202620547,0.893726038897821,1.265921414014301,False,True,False,
+2,2022-07-12 01:08:57.709000+00:00,2022-07-12 01:16:55.828000+00:00,60,1,2,4,False,False,False,1,1.0,0.0,관측 지속,,1,0,1,사건(시작·격상),0.7794073411027389,0.893726038897821,1.265921414014301,False,True,False,
+3,2022-07-12 01:17:25.828000+00:00,2022-07-12 01:20:11.425000+00:00,21,21,1,2,True,True,False,569,0.3444639718804921,0.9560632688927944,설비 점검 요청(열화 의심),결과 '정상 확인' 뒤에만 재보정 자료,1,1,2,사건(시작·격상),0.7913463516969441,0.893726038897821,1.265921414014301,False,True,True,99백분위 초과
+
+== 모의 운용 알림 기록(sim_alerts_B.csv) (sim_alerts_B.csv)
+row_id,timestamp,incident_id,record_id,position,kind,notify,level,level_name,evidence,action,anomaly_probability,compute_ms
+112,2022-07-12 00:53:17.156,1,3,41,사건 시작,1,1,주의,magnitude,진동·부하 확인,0.5499999999999999,20.428499999979977
+1366,2022-07-12 00:58:21.587,2,41,40,사건 시작,1,1,주의,magnitude,진동·부하 확인,0.5499999999999999,21.053875000689004
+5088,2022-07-12 01:12:44.412,3,150,11,사건 시작,1,1,주의,magnitude,진동·부하 확인,0.5499999999999999,18.48283400067885
+6097,2022-07-12 01:17:25.828,4,180,0,사건 시작,1,1,주의,magnitude,진동·부하 확인,0.5499999999999999,14.628166999500536
+6098,2022-07-12 01:17:25.928,4,180,1,격상,1,2,점검 요청,magnitude,진동·부하 확인,0.5499999999999999,14.96070899975166
+6099,2022-07-12 01:17:26.028,4,180,2,근거 추가,0,2,점검 요청,magnitude+dynamics,진동·전류 함께 점검,0.5499999999999999,10.764417000245885
+6107,2022-07-12 01:17:35.209,4,181,6,근거 추가,0,2,점검 요청,waveform+dynamics,전류 파형·계측 확인,0.5499999999999999,14.357541000208585
+
+== J4 주석
+- 위 "node prefix exit 1"은 J4 호출 오류다. test_web_prefix.cjs는 stdin으로 JSON을 받는 보조 스크립트이며(1행 주석), pytest의 test_simulation_view.py가 호출해 통과했다(v2 208 통과에 포함). 결함으로 세지 않았다.
+- 1 건너뜀은 test_portability.py:97 "주최 측 ZIP이 이 기기에 없다"(사본에 ZIP 없음). ZIP 배치 경로는 J4가 runtime.install_data로 따로 확인했다(두 CSV SHA-256 일치).

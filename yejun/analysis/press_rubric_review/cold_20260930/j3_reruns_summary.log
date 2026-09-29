@@ -1,0 +1,7 @@
+advance_run rc=0 sec=11 ::        B     early6_ar2                         3                          21  31   3     0.970990                   1.00             0.0          0.5
+advance_check rc=0 sec=1 :: 통과: press_advance 실행 기록 무결성·동결 기대값 비교(결과 2개)
+supervised_run rc=0 sec=197 :: done 195.0 s
+supervised_check rc=0 sec=0 :: 통과: press_supervised 실행 기록 무결성·동결 기대값 비교(결과 3개)
+selection_check rc=0 sec=506 :: 대조: 일치 / 내부 점검: 통과
+supplement_rerun rc=0 sec=788 :: 통과: 무결성·기대값 비교 E1, E3 · 재실행 E1,E3 · 건너뜀 E2(외부 입력 없음)
+ALLDONE

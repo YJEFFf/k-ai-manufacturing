@@ -1,0 +1,97 @@
+# P1 실행 로그 발췌 (작업 사본 /private/tmp/p1_power_OwPnAJ, 기준 커밋 d5a3446)
+
+## pip install (마지막 3줄)
+
+Successfully installed cloudpickle-3.1.2 contourpy-1.4.0 cycler-0.12.1 fonttools-4.66.0 iniconfig-2.3.0 joblib-1.6.0 kiwisolver-1.5.1 lightgbm-4.7.0 llvmlite-0.49.0 matplotlib-3.11.2 narwhals-2.26.0 numba-0.67.0 numpy-2.5.3 packaging-26.3 pandas-3.0.6 pillow-12.3.0 pluggy-1.6.0 pygments-2.21.0 pyparsing-3.3.3 pytest-9.1.1 python-dateutil-2.9.0.post0 scikit-learn-1.9.1 scipy-1.18.1 shap-0.52.0 six-1.17.0 slicer-0.0.8 threadpoolctl-3.7.0 tqdm-4.70.1
+exit=0
+
+## run_all.py --stages predict
+[predict] 시작
+[predict] 완료 11.6s
+전체 완료 28.8s
+real 39.52
+user 2.92
+sys 0.28
+
+## pytest -q tests
+......................................................................   [100%]
+70 passed in 10.97s
+exit=0 secs=11
+
+## run_all.py --stages predict,peak
+[predict] 시작
+[predict] 완료 0.9s
+[peak] 시작
+[peak] 완료 51.1s
+전체 완료 53.4s
+
+## verify.py (부분 실행 뒤)
+일치 98/98
+시험 예측 파일 SHA-256 일치
+그림 모두 있음
+신선도 경고: 마지막 전체 실행(2026-09-27T00:12:45) 밖에서 쓰인 파일 98개(예: ['analysis/ablation_copy_day_contrib.csv', 'analysis/ablations.csv', 'analysis/analysis_summary.json'])
+## verify.py --require-fresh (부분 실행 뒤)
+일치 98/98
+시험 예측 파일 SHA-256 일치
+그림 모두 있음
+신선도 경고: 마지막 전체 실행(2026-09-27T00:12:45) 밖에서 쓰인 파일 98개(예: ['analysis/ablation_copy_day_contrib.csv', 'analysis/ablations.csv', 'analysis/analysis_summary.json'])
+ - 산출물이 마지막 전체 실행에서 만들어지지 않았다
+
+## run_all.py (ablation 제외 전 단계) — 단계 완료 줄
+[diagnostics] 완료 1.7s
+[models] 완료 509.7s
+[predict] 완료 0.6s
+[peak] 완료 54.6s
+[analysis] 완료 127.5s
+[field] 완료 7.0s
+[external] 완료 45.0s
+[figures] 완료 3.8s
+[digest] 완료 0.1s
+전체 완료 751.3s
+exit=0 secs=752
+
+## verify.py (ablation 제외 재실행 뒤)
+일치 98/98
+시험 예측 파일 SHA-256 일치
+그림 모두 있음
+신선도 경고: 마지막 전체 실행(2026-09-27T00:12:45) 밖에서 쓰인 파일 98개(예: ['analysis/ablation_copy_day_contrib.csv', 'analysis/ablations.csv', 'analysis/analysis_summary.json'])
+
+## 제출 ZIP(make_submission.py) 풀어서: --stages predict / verify.py
+[predict] 시작
+[predict] 완료 1.2s
+전체 완료 2.9s
+일치 98/98
+시험 예측 파일 SHA-256 일치
+그림 모두 있음
+신선도 경고: 전체 실행 기록 없음 — run_all.py(모든 단계)를 실행한다(일부 단계만 실행하면 신선도 확인은 실패한다)
+require-fresh exit=1 (설계대로)
+
+## run_all.py --kamp-dir <데이터셋> (전 단계, ablation 포함) — 단계 완료 줄
+start 2026년  9월 30일 수요일 00시 52분 52초 KST
+[diagnostics] 완료 1.8s
+[models] 완료 549.6s
+[predict] 완료 0.6s
+[peak] 완료 62.3s
+[analysis] 완료 132.2s
+[ablation] 완료 3367.7s
+[field] 완료 6.7s
+[external] 완료 41.6s
+[figures] 완료 2.8s
+[digest] 완료 0.1s
+전체 완료 4167.0s
+exit=0 secs=4168 end 2026년  9월 30일 수요일 02시 02분 20초 KST
+(figures 단계 경고: 'findfont: Failed to find font weight bold for AppleGothic' 3회)
+
+## verify.py --require-fresh (전체 실행 뒤)
+일치 98/98
+시험 예측 파일 SHA-256 일치
+그림 모두 있음
+신선도 확인: 모든 비교 파일이 마지막 전체 실행(2026-09-30T00:52:52~2026-09-30T02:02:19) 중에 쓰였다
+exit=0
+
+## 해시
+artifacts/models/manifest.json efa3d8d30ede7e7aceb16e0bc9c4436235a740b759ac9958ee73ab3b6271f939 (제출본과 동일)
+outputs/test/predictions_test.csv d8e791d1429701ea6a4df1caefa0f5e153b2747141dd8013a68a4133be2cdec4 (expected와 동일)
+
+## HEAD
+시작·끝 모두 d5a3446f65a190ed71c867a712283aa5d00dffa2

@@ -1,0 +1,312 @@
+{
+ "normal": {
+  "rows": 20000,
+  "columns": [
+   "Unnamed: 0",
+   "TimeStamp",
+   "AI0_Vibration",
+   "AI1_Vibration",
+   "AI2_Current",
+   "Equipment_state"
+  ],
+  "label_counts": {
+   "0": 20000
+  },
+  "missing": 0,
+  "dup_timestamp": 1,
+  "dup_rows_sensor_time": 1,
+  "first": "2022-07-12 00:00:00.019",
+  "last": "2022-07-12 01:16:55.828",
+  "elapsed_s": 4615.809,
+  "monotonic": true,
+  "records_tol_1e-06": 600,
+  "record_len_tol_1e-06": {
+   "min": 1,
+   "median": 37.0,
+   "max": 50,
+   "mean": 33.333333333333336
+  },
+  "records_tol_0.02": 600,
+  "record_len_tol_0.02": {
+   "min": 1,
+   "median": 37.0,
+   "max": 50,
+   "mean": 33.333333333333336
+  },
+  "between_record_gap_s": {
+   "min": 0.0,
+   "median": 4.22,
+   "max": 16.643
+  },
+  "within_gap_exact_0.1_share": 0.9700485024251213,
+  "decimals": {
+   "AI0_Vibration": {
+    "0": 4,
+    "1": 13,
+    "2": 3,
+    "3": 22,
+    "4": 183,
+    "5": 1816,
+    "6": 17958,
+    "16": 1
+   },
+   "AI1_Vibration": {
+    "0": 2,
+    "1": 16,
+    "2": 1,
+    "3": 16,
+    "4": 195,
+    "5": 1855,
+    "6": 17914,
+    "16": 1
+   },
+   "AI2_Current": {
+    "1": 2,
+    "2": 10,
+    "3": 114,
+    "4": 1042,
+    "5": 10213,
+    "6": 8618,
+    "14": 1
+   }
+  },
+  "describe": {
+   "AI0_Vibration": {
+    "mean": -9.380765000000027e-05,
+    "sd": 0.07063373666381961,
+    "min": -0.31457,
+    "max": 0.351699
+   },
+   "AI1_Vibration": {
+    "mean": -9.274240000000003e-05,
+    "sd": 0.1188876827423073,
+    "min": -0.366498,
+    "max": 0.399782
+   },
+   "AI2_Current": {
+    "mean": 1.4462092726,
+    "sd": 122.66449357672178,
+    "min": -271.56833,
+    "max": 273.235
+   }
+  }
+ },
+ "abnormal": {
+  "rows": 600,
+  "columns": [
+   "Unnamed: 0",
+   "TimeStamp",
+   "AI0_Vibration",
+   "AI1_Vibration",
+   "AI2_Current",
+   "Equipment_state"
+  ],
+  "label_counts": {
+   "1": 600
+  },
+  "missing": 0,
+  "dup_timestamp": 0,
+  "dup_rows_sensor_time": 0,
+  "first": "2022-07-17 10:51:07.943",
+  "last": "2022-07-17 10:53:53.540",
+  "elapsed_s": 165.597,
+  "monotonic": true,
+  "records_tol_1e-06": 21,
+  "record_len_tol_1e-06": {
+   "min": 3,
+   "median": 28.0,
+   "max": 50,
+   "mean": 28.571428571428573
+  },
+  "records_tol_0.02": 21,
+  "record_len_tol_0.02": {
+   "min": 3,
+   "median": 28.0,
+   "max": 50,
+   "mean": 28.571428571428573
+  },
+  "between_record_gap_s": {
+   "min": 1.78,
+   "median": 5.3525,
+   "max": 8.572
+  },
+  "within_gap_exact_0.1_share": 0.9666110183639399,
+  "decimals": {
+   "AI0_Vibration": {
+    "5": 1,
+    "6": 7,
+    "7": 58,
+    "8": 264,
+    "9": 246,
+    "10": 23,
+    "11": 1
+   },
+   "AI1_Vibration": {
+    "6": 4,
+    "7": 34,
+    "8": 394,
+    "9": 151,
+    "10": 15,
+    "11": 2
+   },
+   "AI2_Current": {
+    "1": 2,
+    "2": 7,
+    "4": 23,
+    "5": 275,
+    "6": 207,
+    "7": 16,
+    "13": 1,
+    "14": 40,
+    "15": 20,
+    "16": 9
+   }
+  },
+  "describe": {
+   "AI0_Vibration": {
+    "mean": 0.007577742062533333,
+    "sd": 0.44792806747493313,
+    "min": -1.5027352,
+    "max": 1.8032037
+   },
+   "AI1_Vibration": {
+    "mean": -0.008137206515450001,
+    "sd": 0.2412263780678154,
+    "min": -0.7512533,
+    "max": 0.50932143
+   },
+   "AI2_Current": {
+    "mean": 57.32974096633334,
+    "sd": 153.17261944641655,
+    "min": -399.35117,
+    "max": 538.82605
+   }
+  }
+ },
+ "records_per_elapsed_hour": 467.95697135648373,
+ "rows_per_elapsed_hour": 15598.565711882791,
+ "alerts_per_8h_at_1_over_121": 30.93930389133777,
+ "current_level_bias_len_ge10": {
+  "normal": "0/530",
+  "abnormal": "9/17"
+ },
+ "record_sd_auroc_test_vs_abnormal": {
+  "A": {
+   "AI0_Vibration": 0.856,
+   "AI1_Vibration": 0.919,
+   "AI2_Current": 0.433
+  },
+  "B": {
+   "AI0_Vibration": 0.857,
+   "AI1_Vibration": 0.893,
+   "AI2_Current": 0.379
+  }
+ },
+ "j4_simple_maxabsz_raw": {
+  "A": {
+   "threshold": 4.492,
+   "normal_records_alerted": "0/120",
+   "abnormal_records_detected": "18/21",
+   "row_tp": 173,
+   "row_fn": 427,
+   "row_fp": 0,
+   "row_f1": 0.4476,
+   "record_auroc": 0.9758
+  },
+  "B": {
+   "threshold": 3.774,
+   "normal_records_alerted": "3/180",
+   "abnormal_records_detected": "18/21",
+   "row_tp": 196,
+   "row_fn": 404,
+   "row_fp": 3,
+   "row_f1": 0.4906,
+   "record_auroc": 0.9585
+  }
+ },
+ "j4_simple_maxabsz_matched": {
+  "A": {
+   "threshold": 4.492,
+   "normal_records_alerted": "0/120",
+   "abnormal_records_detected": "18/21",
+   "row_tp": 173,
+   "row_fn": 427,
+   "row_fp": 0,
+   "row_f1": 0.4476,
+   "record_auroc": 0.9758
+  },
+  "B": {
+   "threshold": 3.774,
+   "normal_records_alerted": "3/180",
+   "abnormal_records_detected": "18/21",
+   "row_tp": 196,
+   "row_fn": 404,
+   "row_fp": 3,
+   "row_f1": 0.4906,
+   "record_auroc": 0.9585
+  }
+ },
+ "split_part_vibration_sd": {
+  "A_cal": {
+   "AI0_Vibration": 0.076,
+   "AI1_Vibration": 0.137
+  },
+  "A_test": {
+   "AI0_Vibration": 0.053,
+   "AI1_Vibration": 0.073
+  },
+  "B_cal": {
+   "AI0_Vibration": 0.076,
+   "AI1_Vibration": 0.138
+  },
+  "B_test": {
+   "AI0_Vibration": 0.061,
+   "AI1_Vibration": 0.097
+  }
+ },
+ "abnormal_record_lengths": [
+  4,
+  50,
+  47,
+  31,
+  18,
+  3,
+  50,
+  40,
+  25,
+  8,
+  4,
+  50,
+  42,
+  28,
+  15,
+  50,
+  50,
+  36,
+  24,
+  10,
+  15
+ ],
+ "abnormal_between_gaps_s": [
+  1.78,
+  1.99,
+  2.58,
+  2.82,
+  3.21,
+  3.52,
+  4.01,
+  4.26,
+  4.59,
+  5.26,
+  5.44,
+  5.73,
+  6.05,
+  6.39,
+  7.61,
+  8.39,
+  8.46,
+  8.48,
+  8.55,
+  8.57
+ ]
+}

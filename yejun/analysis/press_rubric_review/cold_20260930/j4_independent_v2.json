@@ -1,0 +1,80 @@
+{
+ "normal_records": 600,
+ "abnormal_records": 21,
+ "A": {
+  "0.01": {
+   "tp": 556,
+   "fn": 44,
+   "fp": 0,
+   "f1": 0.961938,
+   "normal_records_alerted": "0/120",
+   "abnormal_records_detected": "21/21",
+   "first_alarm_delay_max_s": 0.5,
+   "missed_rows_pos01": 26
+  },
+  "0.03": {
+   "tp": 569,
+   "fn": 31,
+   "fp": 1,
+   "f1": 0.97265,
+   "normal_records_alerted": "1/120",
+   "abnormal_records_detected": "21/21",
+   "first_alarm_delay_max_s": 0.5,
+   "missed_rows_pos01": 20
+  },
+  "0.05": {
+   "tp": 569,
+   "fn": 31,
+   "fp": 1,
+   "f1": 0.97265,
+   "normal_records_alerted": "1/120",
+   "abnormal_records_detected": "21/21",
+   "first_alarm_delay_max_s": 0.5,
+   "missed_rows_pos01": 20
+  },
+  "threshold_cal_max": 4.4179,
+  "ar2": [
+   0.1002,
+   1.8331,
+   -0.9749
+  ]
+ },
+ "B": {
+  "0.01": {
+   "tp": 569,
+   "fn": 31,
+   "fp": 3,
+   "f1": 0.97099,
+   "normal_records_alerted": "3/180",
+   "abnormal_records_detected": "21/21",
+   "first_alarm_delay_max_s": 0.5,
+   "missed_rows_pos01": 20
+  },
+  "0.03": {
+   "tp": 569,
+   "fn": 31,
+   "fp": 7,
+   "f1": 0.967687,
+   "normal_records_alerted": "5/180",
+   "abnormal_records_detected": "21/21",
+   "first_alarm_delay_max_s": 0.5,
+   "missed_rows_pos01": 20
+  },
+  "0.05": {
+   "tp": 569,
+   "fn": 31,
+   "fp": 11,
+   "f1": 0.964407,
+   "normal_records_alerted": "7/180",
+   "abnormal_records_detected": "21/21",
+   "first_alarm_delay_max_s": 0.5,
+   "missed_rows_pos01": 20
+  },
+  "threshold_cal_max": 3.5199,
+  "ar2": [
+   0.098,
+   1.8325,
+   -0.9742
+  ]
+ }
+}
