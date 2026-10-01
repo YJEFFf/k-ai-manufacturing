@@ -1,0 +1,5 @@
+epochs_run=60 fit_s=234 thr=0.01405 P=R@valid≈0.777
+confusion [[TN FP][FN TP]]: [[3895, 105], [44, 136]] acc=0.9644 F1=0.6461
+normal test windows 57-60 min: n=0 FP=0 (nan)
+normal test windows 60-72 min: n=2898 FP=21 (0.007)
+normal test windows 72-78 min: n=1102 FP=84 (0.076)

@@ -1,0 +1,16 @@
+held-out normal (50-77 min) alarm rate: {'MCD': 0.008, 'IForest': 0.041, 'physics': 0.016, 'maxAI0': 0.033} n= 122
+        family  severity  MCD  IForest  physics  maxAI0
+      vib_gain      0.25 0.01     0.09     0.14    0.12
+      vib_gain      0.50 0.01     0.24     0.30    0.21
+      vib_gain      1.00 0.01     0.51     0.54    0.43
+      vib_gain      2.00 0.02     0.98     0.99    0.68
+   lowfreq_osc      0.05 0.02     0.02     0.02    0.08
+   lowfreq_osc      0.10 0.00     0.10     0.07    0.17
+   lowfreq_osc      0.20 0.00     1.00     1.00    0.66
+   lowfreq_osc      0.40 0.25     1.00     1.00    1.00
+current_ripple      0.02 0.01     0.09     0.19    0.03
+current_ripple      0.05 0.01     0.26     0.89    0.03
+current_ripple      0.10 0.03     0.43     1.00    0.03
+current_ripple      0.20 0.64     0.58     1.00    0.03
+normal_load_up      0.10 0.01     0.20     0.05    0.03
+normal_load_up      0.20 0.01     0.39     0.36    0.03

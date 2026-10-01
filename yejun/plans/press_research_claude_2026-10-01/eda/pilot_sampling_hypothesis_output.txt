@@ -1,0 +1,12 @@
+long bursts (>=45 rows): 236
+current frequency [cycles/sample]: median 0.059997 (IQR 0.059888-0.060081)
+AI1 tone well-fitted (R2>0.8): n=113, ratio median 2.9849
+Spearman(load amplitude, ratio): rho=-0.413 p=5.49e-06
+  load amp 100-160: n= 16 ratio 2.9980 -> slip if S1k 0.07 % | if S10 (fs~9.9 Hz) 0.0007 %
+  load amp 160-220: n= 38 ratio 2.9924 -> slip if S1k 0.25 % | if S10 (fs~9.9 Hz) 0.0025 %
+  load amp 220-300: n= 59 ratio 2.9818 -> slip if S1k 0.61 % | if S10 (fs~9.9 Hz) 0.0061 %
+load periodogram (burst start times, 1-30 s) top periods: [(2.9, 0.137), (19.597, 0.108), (5.724, 0.1), (2.13, 0.091), (3.339, 0.089), (20.322, 0.077)]
+permutation null max power p95: 0.058
+spectral window check: pure square wave with period 2.9 s sampled at the real burst times -> [(2.9, 0.793), (4.54, 0.329), (2.13, 0.256), (10.52, 0.132), (1.68, 0.103)]
+spectral window check: pure square wave with period 19.6 s sampled at the real burst times -> [(19.6, 0.814), (13.56, 0.349), (5.69, 0.262), (5.05, 0.155), (3.32, 0.137)]
+within-burst current sine-fit R2 (>=45 rows): min 0.9943

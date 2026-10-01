@@ -1,0 +1,6 @@
+== normal: bursts(>=10 rows)=530
+  current fixed 0.0600 cyc/sample fit: amplitude median 143.8, R2 median 0.996 (min 0.989, max 1.000), |offset| median 0.6
+  dominant vib freq [cyc/sample] AI0 median 0.354, AI1 median 0.180; corr(AI0,AI1) median 0.28, share negative 0.22
+== abnormal: bursts(>=10 rows)=17
+  current fixed 0.0600 cyc/sample fit: amplitude median 41.7, R2 median 0.100 (min 0.001, max 0.622), |offset| median 78.7
+  dominant vib freq [cyc/sample] AI0 median 0.102, AI1 median 0.070; corr(AI0,AI1) median -0.35, share negative 0.82
