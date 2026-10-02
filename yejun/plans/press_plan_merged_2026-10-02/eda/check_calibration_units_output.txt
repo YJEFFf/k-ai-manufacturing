@@ -1,0 +1,49 @@
+bursts all=599  >=10 rows=530
+
+[1] >=10-row normal bursts by 10-min block x load bin
+load_bin  noload<130  mid130-180  press>180  All
+block                                           
+0                 31          17         30   78
+1                 26          12         27   65
+2                 21          14         34   69
+3                 25          13         28   66
+4                 22          15         32   69
+5                 20          12         36   68
+6                 70           0          0   70
+7                 22          12         11   45
+All              237          95        198  530
+
+[2] longest consecutive no-load runs (last-row time)
+ t_start_min  t_end_min  n_bursts   dur_s
+        60.0       72.0        84 721.704
+         3.4        4.0         4  34.729
+        21.2       21.5         2  20.496
+        45.6       45.9         2  20.440
+        16.2       16.6         2  20.409
+        32.4       32.7         2  20.344
+   no-load runs >=  60s ending before 60 min: 0 runs, 0 bursts
+   no-load runs >= 120s ending before 60 min: 0 runs, 0 bursts
+   no-load runs >= 180s ending before 60 min: 0 runs, 0 bursts
+   bursts in 60-72 min (long standby window): 82
+
+[3] leave-one-10-min-block-out calibration size and resolution 1/(n+1)
+ test_block  pooled_n  noload<130  mid130-180  press>180  standby_60_72_n  pooled_n_res%  noload<130_res%  mid130-180_res%  press>180_res%  standby_60_72_n_res%
+          0       452         206          78        168               82           0.22             0.48             1.27            0.59                  1.20
+          1       465         211          83        171               82           0.21             0.47             1.19            0.58                  1.20
+          2       461         216          81        164               82           0.22             0.46             1.22            0.61                  1.20
+          3       464         212          82        170               82           0.22             0.47             1.20            0.58                  1.20
+          4       461         215          80        166               82           0.22             0.46             1.23            0.60                  1.20
+          5       462         217          83        162               82           0.22             0.46             1.19            0.61                  1.20
+          6       460         167          95        198               12           0.22             0.60             1.04            0.50                  7.69
+          7       485         215          83        187               70           0.21             0.46             1.19            0.53                  1.41
+   alpha_op/2 = 0.50 % ; bins whose resolution > 0.50 % cannot reach the stage-2 per-channel level
+
+[4] time split calibration 40-60 min: n=137, no-load=42, standby(60-72)=0 by construction; no-load runs >=180 s inside: 0
+
+[5] exposure definitions for FA/h (normal file)
+   wall clock first->last burst (last-row time): 1.281 h
+   sum of inter-burst intervals <= 12 s: 1.006 h  (gaps > 12 s: 70, max 21.5 s)
+   sum of inter-burst intervals <= 20 s: 1.246 h  (gaps > 20 s: 6, max 21.5 s)
+   sum of inter-burst intervals <= 30 s: 1.281 h  (gaps > 30 s: 0, max 21.5 s)
+   nominal rows x 0.1 s: 0.556 h ; bursts x median period: 1.126 h
+   gap last-row -> next first-row: min 1.55 s, max 16.64 s
