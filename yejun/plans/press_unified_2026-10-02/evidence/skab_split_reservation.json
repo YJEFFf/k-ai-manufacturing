@@ -1,0 +1,220 @@
+{
+  "purpose": "file split reservation before reading sensor CSVs; not executed training",
+  "repository": "https://github.com/waico/SKAB",
+  "revision": "b2c0d46c2971dcbfe71e26087b6d231998bb91c2",
+  "revision_date_utc": "2024-08-11T20:53:38Z",
+  "checked_date_kst": "2026-10-02",
+  "inventory_source": "https://api.github.com/repos/waico/SKAB/git/trees/b2c0d46c2971dcbfe71e26087b6d231998bb91c2?recursive=1",
+  "inventory_scope": "read repository tree, README, data README and root LICENSE only; no sensor CSV read",
+  "license_observed": "GPL-3.0 in this revision root LICENSE and README; do not mix Kaggle distribution terms",
+  "assignment_rule": "within each directory, sort SHA256(UTF8(press-unified-v1|relative_path)); allocate fit/dev/cal/test counts in group_counts; anomaly-free reserved to fit",
+  "group_counts": {
+    "valve1": {
+      "fit": 8,
+      "dev": 3,
+      "cal": 2,
+      "test": 3
+    },
+    "valve2": {
+      "fit": 1,
+      "dev": 1,
+      "cal": 1,
+      "test": 1
+    },
+    "other": {
+      "fit": 7,
+      "dev": 3,
+      "cal": 2,
+      "test": 2
+    }
+  },
+  "files": [
+    {
+      "path": "data/valve1/8.csv",
+      "group": "valve1",
+      "split": "fit"
+    },
+    {
+      "path": "data/valve1/4.csv",
+      "group": "valve1",
+      "split": "fit"
+    },
+    {
+      "path": "data/valve1/5.csv",
+      "group": "valve1",
+      "split": "fit"
+    },
+    {
+      "path": "data/valve1/0.csv",
+      "group": "valve1",
+      "split": "fit"
+    },
+    {
+      "path": "data/valve1/7.csv",
+      "group": "valve1",
+      "split": "fit"
+    },
+    {
+      "path": "data/valve1/6.csv",
+      "group": "valve1",
+      "split": "fit"
+    },
+    {
+      "path": "data/valve1/13.csv",
+      "group": "valve1",
+      "split": "fit"
+    },
+    {
+      "path": "data/valve1/12.csv",
+      "group": "valve1",
+      "split": "fit"
+    },
+    {
+      "path": "data/valve1/14.csv",
+      "group": "valve1",
+      "split": "dev"
+    },
+    {
+      "path": "data/valve1/9.csv",
+      "group": "valve1",
+      "split": "dev"
+    },
+    {
+      "path": "data/valve1/15.csv",
+      "group": "valve1",
+      "split": "dev"
+    },
+    {
+      "path": "data/valve1/1.csv",
+      "group": "valve1",
+      "split": "cal"
+    },
+    {
+      "path": "data/valve1/2.csv",
+      "group": "valve1",
+      "split": "cal"
+    },
+    {
+      "path": "data/valve1/3.csv",
+      "group": "valve1",
+      "split": "test"
+    },
+    {
+      "path": "data/valve1/10.csv",
+      "group": "valve1",
+      "split": "test"
+    },
+    {
+      "path": "data/valve1/11.csv",
+      "group": "valve1",
+      "split": "test"
+    },
+    {
+      "path": "data/valve2/0.csv",
+      "group": "valve2",
+      "split": "fit"
+    },
+    {
+      "path": "data/valve2/3.csv",
+      "group": "valve2",
+      "split": "dev"
+    },
+    {
+      "path": "data/valve2/1.csv",
+      "group": "valve2",
+      "split": "cal"
+    },
+    {
+      "path": "data/valve2/2.csv",
+      "group": "valve2",
+      "split": "test"
+    },
+    {
+      "path": "data/other/6.csv",
+      "group": "other",
+      "split": "fit"
+    },
+    {
+      "path": "data/other/14.csv",
+      "group": "other",
+      "split": "fit"
+    },
+    {
+      "path": "data/other/4.csv",
+      "group": "other",
+      "split": "fit"
+    },
+    {
+      "path": "data/other/8.csv",
+      "group": "other",
+      "split": "fit"
+    },
+    {
+      "path": "data/other/11.csv",
+      "group": "other",
+      "split": "fit"
+    },
+    {
+      "path": "data/other/12.csv",
+      "group": "other",
+      "split": "fit"
+    },
+    {
+      "path": "data/other/13.csv",
+      "group": "other",
+      "split": "fit"
+    },
+    {
+      "path": "data/other/5.csv",
+      "group": "other",
+      "split": "dev"
+    },
+    {
+      "path": "data/other/3.csv",
+      "group": "other",
+      "split": "dev"
+    },
+    {
+      "path": "data/other/7.csv",
+      "group": "other",
+      "split": "dev"
+    },
+    {
+      "path": "data/other/2.csv",
+      "group": "other",
+      "split": "cal"
+    },
+    {
+      "path": "data/other/1.csv",
+      "group": "other",
+      "split": "cal"
+    },
+    {
+      "path": "data/other/10.csv",
+      "group": "other",
+      "split": "test"
+    },
+    {
+      "path": "data/other/9.csv",
+      "group": "other",
+      "split": "test"
+    },
+    {
+      "path": "data/anomaly-free/anomaly-free.csv",
+      "group": "anomaly-free",
+      "split": "fit"
+    }
+  ],
+  "counts": {
+    "fit": 17,
+    "dev": 7,
+    "cal": 5,
+    "test": 6
+  },
+  "caveats": [
+    "Same testbed; file separation does not establish different-machine generalization.",
+    "data/README.md valve file numbering differs from actual tree; physical fault attribution must be audited.",
+    "If hidden duplicate experiments or unusable metadata appear, amend split before reading test outcomes, log the reason; do not shift difficult test files to development.",
+    "File labels within fit/dev/cal may be inspected for normal intervals; test labels are for final evaluation only."
+  ]
+}

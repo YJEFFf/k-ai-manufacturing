@@ -1,0 +1,49 @@
+{
+  "purpose": "planning provenance, not source data",
+  "sources": [
+    {
+      "id": "notice86",
+      "url": "https://www.kamp-ai.kr/noticeDetail?NOTICE_SEQ=86",
+      "checked_date_kst": "2026-10-02",
+      "http_status": 200,
+      "method": "Direct HTTPS GET using Python urllib after web open failed",
+      "html_sha256": "5437460bb02f8206e051311c60466ebaa6672645e115f5c57827a7f09cc2f41f",
+      "html_bytes": 221587,
+      "checked_claims": [
+        "2026년 과제 ③의 프레스 진동·전류 이상 탐지 및 오경보 분석 요구",
+        "2026-09-22 추가 외부 데이터 사용 조항: 사유·방법·출처 명시 및 공개 가능 조건",
+        "제출 마감 2026-10-08 23:59 KST",
+        "예측결과 파일 포함 제출물 구성, 공통 고정 시험 분할은 확인하지 못함"
+      ],
+      "scope": "HTML body only; linked attachments were not redownloaded; raw HTML kept temporarily, not included in git"
+    },
+    {
+      "id": "contest38",
+      "url": "https://www.kamp-ai.kr/contestDetail?CPT_SEQ=38",
+      "checked_date_kst": "2026-10-02",
+      "http_status": 200,
+      "method": "Direct HTTPS GET using Python urllib after web open failed",
+      "html_sha256": "fadac6720dd76920452d613368e63f7ff75089cc2f44e3035077e29c09ab226e",
+      "html_bytes": 151183,
+      "checked_claims": [
+        "대회 안내의 보조 확인; 페이지 전체 행사 기간을 과제 제출 마감으로 대체하지 않음"
+      ],
+      "scope": "HTML body only; linked attachments were not redownloaded; raw HTML kept temporarily, not included in git"
+    },
+    {
+      "id": "dataset48",
+      "url": "https://www.kamp-ai.kr/aidataDetail?DATASET_SEQ=48",
+      "checked_date_kst": "2026-10-02",
+      "http_status": 200,
+      "method": "Direct HTTPS GET using Python urllib after web open failed",
+      "html_sha256": "3a05d57d7ebe954fbeec8c161e8994f0dcfa2cc3950742a5f4e23df0e866b69a",
+      "html_bytes": 58516,
+      "checked_claims": [
+        "세 센서 변수명, 정상 20000행과 이상 600행",
+        "수집 원리 설명 및 콘텐츠 변경허용 표기",
+        "실제 ADC 취득 주파수·센서 감도·단위는 확인되지 않음"
+      ],
+      "scope": "HTML body only; linked attachments were not redownloaded; raw HTML kept temporarily, not included in git"
+    }
+  ]
+}
