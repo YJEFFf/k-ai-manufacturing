@@ -1,0 +1,15 @@
+{
+  "tested_utc": "2026-10-02T20:58:51.832622+00:00",
+  "tests": 6,
+  "failures": 0,
+  "errors": 0,
+  "successful": true,
+  "code_sha256": {
+    "core.py": "9c97a1f21e1469d8270316e8039a6fec0ef9e32cb9ba7a2abbd95179bdd2ad68",
+    "diagnose.py": "40d378b58a2481f42f8bc1d9bd2132af8482608d31b2c0ca669db3f128a56cb3",
+    "revise.py": "274347ef9577ac6e0c5ac77a50c5f0f57e6a3eff13b04cc978bef6674b99b1d7",
+    "run.py": "4ce9c3e0672ad893fd56d742ff7b2c30ab25dd2c3e725eac9b7a909d7b7317d7",
+    "test_contracts.py": "21c624ba10c9175b0f8aa1b8e4fec43e458c5a536f61bc6a4253b9841fc8a399",
+    "test_revision.py": "fe70b3ba74092e9e8cf786c29196969dc1f6f2d2d80ec89f54ecbeebad17968e"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "mode": "post_diagnosis_development",
+  "started_utc": "2026-10-02T21:00:05.599103+00:00",
+  "design": {
+    "version": "bounded-post-diagnosis-v2",
+    "status": "Exploratory revision designed AFTER v1 development and P2 diagnosis; no fresh press holdout claim",
+    "frozen_before": "First v2 candidate scoring run",
+    "reference": "Registered B1 retained unchanged; S0 supplies the matched global-scale ablation",
+    "models": {
+      "B1": "Original master v1 comparator",
+      "S0_global_B1": "B1 with all length-specific centers/scales disabled",
+      "S1_global_C1": "C1 degree 1 with all length-specific centers/scales disabled",
+      "S2_lower_C1": "S1 but condition only AI1; AI0 uses the global two-sided vibration score. Current score unchanged",
+      "S3_shrink_C1": "C1 degree 1 with partial pooling of every global/conditional length center and scale",
+      "S4_shrink_B1": "B1 with the identical partial pooling rule, to isolate its contribution",
+      "S5_vibration_knn_current": "Global-scaled 4 vibration axes, k=5 mean Euclidean distance; multiply by fit 95th percentile global two-sided vibration score / fit leave-parent-out distance 95th percentile. Max with unchanged global current score"
+    },
+    "partial_pooling": {
+      "prior_count": 30,
+      "weight": "n/(n+30), using only finite fit observations in each length bin; no fitted hyperparameter",
+      "center": "(1-w)*global_center+w*local_center",
+      "scale_squared": "(1-w)*global_scale^2+w*local_scale^2+w*(1-w)*(local_center-global_center)^2",
+      "missing_or_unscalable_local": "Use global; one observation cannot define a local scale",
+      "interpretation": "Heuristic stabilizer of robust location/scale, not a posterior or variance guarantee"
+    },
+    "injections": "Reuse the exact v1 fit-only generator, original parent gate, amplitude grid and seeds; no easier synthetic targets introduced",
+    "selection": "Unchanged master/v1 practical admission gates. Additional matched S0 comparison reported without replacing B1 reference. No parameter sweep or tuning from outcomes",
+    "audit": "P2 and provided abnormal are descriptive regression checks after the decision file; they were already seen in v1",
+    "claim_limit": "Any passed v2 candidate is provisional pending frozen external capture-group verification; no same-press independent fault generalization"
+  },
+  "design_sha256": "c36620bb7bc767648f4b1588132c6de0351dd6885c7771685632891db61a7f3b",
+  "master_protocol_sha256": "daedfe0705d0a2f0d12fced334e195c4c3643a095e92d9c88f766fd398ad38b8",
+  "code_sha256": {
+    "core.py": "9c97a1f21e1469d8270316e8039a6fec0ef9e32cb9ba7a2abbd95179bdd2ad68",
+    "diagnose.py": "40d378b58a2481f42f8bc1d9bd2132af8482608d31b2c0ca669db3f128a56cb3",
+    "revise.py": "274347ef9577ac6e0c5ac77a50c5f0f57e6a3eff13b04cc978bef6674b99b1d7",
+    "run.py": "4ce9c3e0672ad893fd56d742ff7b2c30ab25dd2c3e725eac9b7a909d7b7317d7",
+    "test_contracts.py": "21c624ba10c9175b0f8aa1b8e4fec43e458c5a536f61bc6a4253b9841fc8a399",
+    "test_revision.py": "fe70b3ba74092e9e8cf786c29196969dc1f6f2d2d80ec89f54ecbeebad17968e"
+  },
+  "inputs": {
+    "normal_sha256": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+    "abnormal_sha256": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+    "deduplicate": "same timestamp and all three sensor values; preserve source-row mapping",
+    "within_record_interval_ns_inclusive": [
+      80000000,
+      120000000
+    ],
+    "close_timeout_s": 0.5,
+    "primary_vibration_preprocessing": "subtract mean of each completed record, identically for both classes",
+    "physical_sampling_rate": null,
+    "physical_sensor_units": null,
+    "minimum_records_for_length_scale": 30,
+    "length_strata": [
+      [
+        1,
+        9
+      ],
+      [
+        10,
+        19
+      ],
+      [
+        20,
+        39
+      ],
+      [
+        40,
+        50
+      ]
+    ],
+    "robust_scale": "1.4826 MAD, fallback IQR/1.349, else omit feature",
+    "outside_length_strata": "global fallback; separate coverage"
+  },
+  "environment": {
+    "python": "3.12.8",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scipy": "1.13.1"
+  },
+  "revision_sha256": "f071d2a23395d593c11df692f06a008436d18277e7aad6a0dad7bc549ab94bac",
+  "data_contract": {
+    "original_rows": 20000,
+    "retained_rows": 19999,
+    "duplicate_rows": [
+      11565
+    ],
+    "records": 599,
+    "source_mapping_rows": 20000
+  },
+  "completed_utc": "2026-10-02T21:00:12.327578+00:00",
+  "elapsed_s": 6.72828195799957,
+  "synthetic_score_rows": 322077,
+  "selection_sha256": "2432d11d4b00ef23a050fd366a0aaae2d1539cf87834430745750d7db347c25b"
+}

@@ -1,0 +1,35 @@
+{
+  "version": "press-master-validation-v1",
+  "basis_commit": "d772d8e6447d4cde4ce161a234e18197411ca35d",
+  "scope": "Core conditional-model verification, not complete product implementation",
+  "freeze": "Written before this package's first model-performance run; original press data and Claude's approximate outcomes already known",
+  "models": ["B1", "C1d1", "C1d2", "C2d1", "C2d2", "B3k5", "B3k10"],
+  "alpha": [0.05, 0.03, 0.01],
+  "seeds": [11, 29, 47],
+  "disambiguation": {
+    "fit_condition": "Amplitude quantiles from all fit parents with n>=20 and R2>=0.95; regression uses parents inside inclusive amplitude support, minimum 30 after trimming",
+    "length_center_scale": "Separate robust center/scale for a feature when at least 30 finite fit values exist in a length bin; otherwise global; zero MAD then IQR then omit",
+    "conditional_residual_scale": "Same length rule, estimated from condition-eligible fit parents only",
+    "B3_imputation": "Fit-global log-feature median before length standardization; unscalable global axes removed; a locally unscalable component is neutral zero after imputation",
+    "generator_amplitude": "Shared degree-1 fit-only conditional median RMS when the ORIGINAL parent satisfies the gate; otherwise fit length-bin (>=30) or global median. Exponentiated fitted log RMS including residual median. Same generator for all candidates",
+    "D2_sigma": "Population SD of AC vibration, equal to AC RMS. No physical unit or unregistered waveform decomposition is inferred",
+    "targets": "D1 and D2 each inject AI0 and AI1 separately, equal target weighting in family POD. Loss cells keep each channel separate",
+    "ten_minute_blocks": "Fixed [20,30), [30,40), [40,50), [50,60) minutes, assigned by completed-record end; boundary-purged folds remain unchanged",
+    "loss_cap": "Check every fold x family/target x registered amplitude x ORIGINAL condition stratum both seed-mean and each seed; <20 distinct parents is indeterminate",
+    "direction": "Path A normal improvement in each fold; path B at least the SAME two development families improve >=10 pp pooled and have nonnegative gain in both folds",
+    "quality": "Nonfinite input unsupported; exactly flat n>=2 channels flagged separately; one-sample AC undefined, current score retained. Any-request POD and mechanical-score POD both preserved; loss gate conservatively uses mechanical-score POD"
+  },
+  "development": {
+    "D1": {"family": "band_noise", "targets": [0,1], "band_cycles_per_sample": [0.15,0.45], "amplitudes": [0,0.1,0.25,0.5,1,2], "selection": [0.5,1], "shape": "Real FFT of seeded white noise, retain inclusive band, inverse real FFT, demean and normalize population RMS; no available bin => unsupported"},
+    "D2": {"family": "damped_impulse", "targets": [0,1], "amplitudes": [0,0.5,1,2,4,8], "selection": [2,4], "shape": "One impulse at seeded uniform sample; causal exp(-(t-onset)/tau); tau=clip(median fit length/10,1,5); demean, normalize maximum absolute AC sample"},
+    "D3": {"family": "current_residual", "targets": [2], "amplitudes": [0,0.25,0.5,1,2], "selection": [0.5,1], "shape": "Seeded white noise projected orthogonally to intercept and sin/cos at 0.06 cycles/sample, normalize RMS; n<4 unsupported; scale from fit sine-residual RMS, same length rule"}
+  },
+  "loss": {
+    "L1": {"family": "amplitude_decrease", "targets": [0,1,2], "multipliers": [0.75,0.5,0.25,0], "selection": [0.5,0.25], "shape": "Vibration AC multiplied with DC preserved; whole current waveform multiplied"},
+    "L2": {"family": "compound_unavailable", "targets": [0,1], "current_modes": ["flat", "distorted"], "amplitudes": [0.5,1], "selection": [0.5,1], "shape": "D1 plus current held at original mean, or replaced by alternating +/- waveform normalized to original raw RMS. Gate failure required; count failed generation separately"}
+  },
+  "rng": "SHA256 JSON([purpose,fold,original_parent,family,target,current_mode,seed]) first 8 bytes little endian -> numpy default_rng; no amplitude in key",
+  "coverage": "Nonzero changed signal after AC preprocessing required; failed/unsupported cells retain original parent denominators and a conservative detection=0 rate beside supported-only rate. Selection uses conservative rate",
+  "data_access": "Initial selection reads P0/P1 only. P2 and provided abnormal opened by separate audit command after selection record. P2 already explored historically; never blind. External test data and H1/H2 remain unopened by this package",
+  "B2": "Not implemented in this focused conditional verification; common-input B2 audit remains a separate optional historical reference, never a v2 restoration path"
+}

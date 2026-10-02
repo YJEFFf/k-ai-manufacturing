@@ -1,0 +1,29 @@
+{
+  "final_model": null,
+  "final_release_ready": false,
+  "reference_retained": "B1 is the experiment comparator, not an approved final detector",
+  "unique_configurations": 13,
+  "new_candidates": 12,
+  "new_candidates_eligible": 0,
+  "normal_development_parents": 313,
+  "normal_retrospective_audit_parents": 126,
+  "provided_abnormal_records": 21,
+  "provided_abnormal_episodes": 1,
+  "synthetic_seed_values": [
+    11,
+    29,
+    47
+  ],
+  "synthetic_seeds_are_not_independent_faults": true,
+  "external_model_test_opened": false,
+  "heldout_H1_H2_generated": false,
+  "v1": "Implemented master plus frozen disambiguations; press was already explored",
+  "v2": "Exploratory follow-up designed after v1 outcomes including P2; not a fresh holdout",
+  "product_v2_restoration": false,
+  "limits": [
+    "No final candidate has met the registered joint burden/sensitivity/loss gates",
+    "POD is response to declared synthetic perturbations, not actual independent fault recall",
+    "P2 F1 uses 126 normal and the same 21 provided abnormal records; do not average folds",
+    "External data are acquired and structurally audited, but external model performance is pending"
+  ]
+}

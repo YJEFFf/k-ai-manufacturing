@@ -1,0 +1,713 @@
+{
+  "status": "pass",
+  "checked_utc": "2026-10-02T23:24:37.710331+00:00",
+  "scope": "Aggregate arithmetic, admission logic, frozen inputs/code, numerical replay and artifact hygiene",
+  "checks": 176,
+  "failures": [],
+  "check_results": [
+    {
+      "name": "syntax test_contracts.py",
+      "passed": true
+    },
+    {
+      "name": "syntax verify_results.py",
+      "passed": true
+    },
+    {
+      "name": "syntax run.py",
+      "passed": true
+    },
+    {
+      "name": "syntax reproduce.py",
+      "passed": true
+    },
+    {
+      "name": "syntax revise.py",
+      "passed": true
+    },
+    {
+      "name": "syntax core.py",
+      "passed": true
+    },
+    {
+      "name": "syntax summarize.py",
+      "passed": true
+    },
+    {
+      "name": "syntax diagnose.py",
+      "passed": true
+    },
+    {
+      "name": "syntax test_revision.py",
+      "passed": true
+    },
+    {
+      "name": "link ../../plans/press_master_2026-10-03/README.md",
+      "passed": true
+    },
+    {
+      "name": "link ../../plans/press_master_2026-10-03/07_validation_revision.md",
+      "passed": true
+    },
+    {
+      "name": "link ../../plans/press_master_2026-10-03/protocol.json",
+      "passed": true
+    },
+    {
+      "name": "link design_v1.json",
+      "passed": true
+    },
+    {
+      "name": "link design_v2.json",
+      "passed": true
+    },
+    {
+      "name": "link evidence/comparison.csv",
+      "passed": true
+    },
+    {
+      "name": "link evidence/v1/selection.json",
+      "passed": true
+    },
+    {
+      "name": "link evidence/v2/selection.json",
+      "passed": true
+    },
+    {
+      "name": "link evidence/conclusions.json",
+      "passed": true
+    },
+    {
+      "name": "link evidence/v1/development_family_pod.csv",
+      "passed": true
+    },
+    {
+      "name": "link evidence/v2/development_family_pod.csv",
+      "passed": true
+    },
+    {
+      "name": "link evidence/v1/fit_associations.csv",
+      "passed": true
+    },
+    {
+      "name": "link evidence/diagnosis/length_ablation.csv",
+      "passed": true
+    },
+    {
+      "name": "link evidence/representative_target_pod.csv",
+      "passed": true
+    },
+    {
+      "name": "link evidence/diagnosis/normal_state_shift.csv",
+      "passed": true
+    },
+    {
+      "name": "link evidence/v1/loss_cells.csv",
+      "passed": true
+    },
+    {
+      "name": "link evidence/diagnosis/threshold_components.csv",
+      "passed": true
+    },
+    {
+      "name": "link ../../plans/press_master_2026-10-03/requirements-audit-lock.txt",
+      "passed": true
+    },
+    {
+      "name": "link evidence/reproduction.json",
+      "passed": true
+    },
+    {
+      "name": "link evidence/history/implementation_correction.json",
+      "passed": true
+    },
+    {
+      "name": "link ../../plans/press_master_2026-10-03/03_data_sources.md",
+      "passed": true
+    },
+    {
+      "name": "execution status agrees with evidence normal_development_records",
+      "passed": true
+    },
+    {
+      "name": "execution status agrees with evidence normal_retrospective_audit_records",
+      "passed": true
+    },
+    {
+      "name": "execution status agrees with evidence provided_abnormal_records",
+      "passed": true
+    },
+    {
+      "name": "execution status agrees with evidence provided_abnormal_episodes",
+      "passed": true
+    },
+    {
+      "name": "execution status agrees with evidence unique_configurations_evaluated",
+      "passed": true
+    },
+    {
+      "name": "execution status agrees with evidence new_candidates_evaluated",
+      "passed": true
+    },
+    {
+      "name": "execution status agrees with evidence new_candidates_meeting_all_admission_gates",
+      "passed": true
+    },
+    {
+      "name": "execution status agrees with evidence final_model",
+      "passed": true
+    },
+    {
+      "name": "execution status agrees with evidence final_release_ready",
+      "passed": true
+    },
+    {
+      "name": "v1 original scoring code core.py",
+      "passed": true
+    },
+    {
+      "name": "v1 original scoring code diagnose.py",
+      "passed": true
+    },
+    {
+      "name": "v1 original scoring code revise.py",
+      "passed": true
+    },
+    {
+      "name": "v1 original scoring code run.py",
+      "passed": true
+    },
+    {
+      "name": "v1 original scoring code test_contracts.py",
+      "passed": true
+    },
+    {
+      "name": "v1 original scoring code test_revision.py",
+      "passed": true
+    },
+    {
+      "name": "v1 original master protocol",
+      "passed": true
+    },
+    {
+      "name": "v1 disambiguations",
+      "passed": true
+    },
+    {
+      "name": "v1 audit references preceding decision",
+      "passed": true
+    },
+    {
+      "name": "v1  blocks conserve all records and requests",
+      "passed": true
+    },
+    {
+      "name": "v1  rates use real normal denominator",
+      "passed": true
+    },
+    {
+      "name": "v1  request accounting",
+      "passed": true
+    },
+    {
+      "name": "v1 audit_ blocks conserve all records and requests",
+      "passed": true
+    },
+    {
+      "name": "v1 audit_ rates use real normal denominator",
+      "passed": true
+    },
+    {
+      "name": "v1 audit_ request accounting",
+      "passed": true
+    },
+    {
+      "name": "v1 curve POD arithmetic",
+      "passed": true
+    },
+    {
+      "name": "v1 parent/target/strength/seed weighted POD band_noise",
+      "passed": true
+    },
+    {
+      "name": "v1 parent/target/strength/seed weighted POD damped_impulse",
+      "passed": true
+    },
+    {
+      "name": "v1 parent/target/strength/seed weighted POD current_residual",
+      "passed": true
+    },
+    {
+      "name": "v1 loss cells match independent curve aggregates",
+      "passed": true
+    },
+    {
+      "name": "v1 admission recomputation B1",
+      "passed": true
+    },
+    {
+      "name": "v1 admission recomputation C1d1",
+      "passed": true
+    },
+    {
+      "name": "v1 admission recomputation C1d2",
+      "passed": true
+    },
+    {
+      "name": "v1 admission recomputation C2d1",
+      "passed": true
+    },
+    {
+      "name": "v1 admission recomputation C2d2",
+      "passed": true
+    },
+    {
+      "name": "v1 admission recomputation B3k5",
+      "passed": true
+    },
+    {
+      "name": "v1 admission recomputation B3k10",
+      "passed": true
+    },
+    {
+      "name": "v1 new winner cannot bypass gates",
+      "passed": true
+    },
+    {
+      "name": "v2 original scoring code core.py",
+      "passed": true
+    },
+    {
+      "name": "v2 original scoring code diagnose.py",
+      "passed": true
+    },
+    {
+      "name": "v2 original scoring code revise.py",
+      "passed": true
+    },
+    {
+      "name": "v2 original scoring code run.py",
+      "passed": true
+    },
+    {
+      "name": "v2 original scoring code test_contracts.py",
+      "passed": true
+    },
+    {
+      "name": "v2 original scoring code test_revision.py",
+      "passed": true
+    },
+    {
+      "name": "v2 original master protocol",
+      "passed": true
+    },
+    {
+      "name": "v2 disambiguations",
+      "passed": true
+    },
+    {
+      "name": "v2 revision freeze",
+      "passed": true
+    },
+    {
+      "name": "v2 audit references preceding decision",
+      "passed": true
+    },
+    {
+      "name": "v2  blocks conserve all records and requests",
+      "passed": true
+    },
+    {
+      "name": "v2  rates use real normal denominator",
+      "passed": true
+    },
+    {
+      "name": "v2  request accounting",
+      "passed": true
+    },
+    {
+      "name": "v2 audit_ blocks conserve all records and requests",
+      "passed": true
+    },
+    {
+      "name": "v2 audit_ rates use real normal denominator",
+      "passed": true
+    },
+    {
+      "name": "v2 audit_ request accounting",
+      "passed": true
+    },
+    {
+      "name": "v2 curve POD arithmetic",
+      "passed": true
+    },
+    {
+      "name": "v2 parent/target/strength/seed weighted POD band_noise",
+      "passed": true
+    },
+    {
+      "name": "v2 parent/target/strength/seed weighted POD damped_impulse",
+      "passed": true
+    },
+    {
+      "name": "v2 parent/target/strength/seed weighted POD current_residual",
+      "passed": true
+    },
+    {
+      "name": "v2 loss cells match independent curve aggregates",
+      "passed": true
+    },
+    {
+      "name": "v2 admission recomputation B1",
+      "passed": true
+    },
+    {
+      "name": "v2 admission recomputation S0_global_B1",
+      "passed": true
+    },
+    {
+      "name": "v2 admission recomputation S1_global_C1",
+      "passed": true
+    },
+    {
+      "name": "v2 admission recomputation S2_lower_C1",
+      "passed": true
+    },
+    {
+      "name": "v2 admission recomputation S3_shrink_C1",
+      "passed": true
+    },
+    {
+      "name": "v2 admission recomputation S4_shrink_B1",
+      "passed": true
+    },
+    {
+      "name": "v2 admission recomputation S5_vibration_knn_current",
+      "passed": true
+    },
+    {
+      "name": "v2 new winner cannot bypass gates",
+      "passed": true
+    },
+    {
+      "name": "fresh replay passed",
+      "passed": true
+    },
+    {
+      "name": "replay source core.py",
+      "passed": true
+    },
+    {
+      "name": "replay source diagnose.py",
+      "passed": true
+    },
+    {
+      "name": "replay source reproduce.py",
+      "passed": true
+    },
+    {
+      "name": "replay source revise.py",
+      "passed": true
+    },
+    {
+      "name": "replay source run.py",
+      "passed": true
+    },
+    {
+      "name": "replay source summarize.py",
+      "passed": true
+    },
+    {
+      "name": "replay source test_contracts.py",
+      "passed": true
+    },
+    {
+      "name": "replay source test_revision.py",
+      "passed": true
+    },
+    {
+      "name": "replay source verify_results.py",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/comparison.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/conclusions.json",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/diagnosis/abnormal_by_length.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/diagnosis/length_ablation.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/diagnosis/normal_state_shift.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/diagnosis/threshold_components.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/representative_target_pod.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v1/audit_normal_summary.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v1/audit_strata.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v1/audit_timeblocks.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v1/development_family_pod.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v1/development_fold_pod.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v1/fit_associations.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v1/injection_checks.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v1/loss_cells.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v1/model_parameters.json",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v1/normal_strata.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v1/normal_summary.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v1/normal_timeblocks.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v1/provided_abnormal.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v1/selection.json",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v1/synthetic_curves.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v2/audit_normal_summary.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v2/audit_strata.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v2/audit_timeblocks.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v2/development_family_pod.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v2/development_fold_pod.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v2/injection_checks.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v2/loss_cells.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v2/model_parameters.json",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v2/normal_strata.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v2/normal_summary.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v2/normal_timeblocks.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v2/provided_abnormal.csv",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v2/selection.json",
+      "passed": true
+    },
+    {
+      "name": "replay output still intact evidence/v2/synthetic_curves.csv",
+      "passed": true
+    },
+    {
+      "name": "tracked candidate artifacts below 1 MB",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/representative_target_pod.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/comparison.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v1/development_fold_pod.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v1/normal_strata.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v1/provided_abnormal.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v1/development_family_pod.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v1/loss_cells.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v1/audit_normal_summary.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v1/fit_associations.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v1/audit_timeblocks.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v1/normal_timeblocks.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v1/injection_checks.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v1/normal_summary.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v1/synthetic_curves.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v1/audit_strata.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v2/development_fold_pod.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v2/normal_strata.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v2/provided_abnormal.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v2/development_family_pod.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v2/loss_cells.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v2/audit_normal_summary.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v2/audit_timeblocks.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v2/normal_timeblocks.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v2/injection_checks.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v2/normal_summary.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v2/synthetic_curves.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/v2/audit_strata.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/history/v1_provided_abnormal_before_namespace_fix.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/history/v2_provided_abnormal_before_namespace_fix.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/diagnosis/length_ablation.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/diagnosis/abnormal_by_length.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/diagnosis/threshold_components.csv",
+      "passed": true
+    },
+    {
+      "name": "aggregate-only CSV evidence/diagnosis/normal_state_shift.csv",
+      "passed": true
+    }
+  ]
+}

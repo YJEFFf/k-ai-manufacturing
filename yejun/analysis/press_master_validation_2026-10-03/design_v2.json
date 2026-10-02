@@ -1,0 +1,27 @@
+{
+  "version": "bounded-post-diagnosis-v2",
+  "status": "Exploratory revision designed AFTER v1 development and P2 diagnosis; no fresh press holdout claim",
+  "frozen_before": "First v2 candidate scoring run",
+  "reference": "Registered B1 retained unchanged; S0 supplies the matched global-scale ablation",
+  "models": {
+    "B1": "Original master v1 comparator",
+    "S0_global_B1": "B1 with all length-specific centers/scales disabled",
+    "S1_global_C1": "C1 degree 1 with all length-specific centers/scales disabled",
+    "S2_lower_C1": "S1 but condition only AI1; AI0 uses the global two-sided vibration score. Current score unchanged",
+    "S3_shrink_C1": "C1 degree 1 with partial pooling of every global/conditional length center and scale",
+    "S4_shrink_B1": "B1 with the identical partial pooling rule, to isolate its contribution",
+    "S5_vibration_knn_current": "Global-scaled 4 vibration axes, k=5 mean Euclidean distance; multiply by fit 95th percentile global two-sided vibration score / fit leave-parent-out distance 95th percentile. Max with unchanged global current score"
+  },
+  "partial_pooling": {
+    "prior_count": 30,
+    "weight": "n/(n+30), using only finite fit observations in each length bin; no fitted hyperparameter",
+    "center": "(1-w)*global_center+w*local_center",
+    "scale_squared": "(1-w)*global_scale^2+w*local_scale^2+w*(1-w)*(local_center-global_center)^2",
+    "missing_or_unscalable_local": "Use global; one observation cannot define a local scale",
+    "interpretation": "Heuristic stabilizer of robust location/scale, not a posterior or variance guarantee"
+  },
+  "injections": "Reuse the exact v1 fit-only generator, original parent gate, amplitude grid and seeds; no easier synthetic targets introduced",
+  "selection": "Unchanged master/v1 practical admission gates. Additional matched S0 comparison reported without replacing B1 reference. No parameter sweep or tuning from outcomes",
+  "audit": "P2 and provided abnormal are descriptive regression checks after the decision file; they were already seen in v1",
+  "claim_limit": "Any passed v2 candidate is provisional pending frozen external capture-group verification; no same-press independent fault generalization"
+}
