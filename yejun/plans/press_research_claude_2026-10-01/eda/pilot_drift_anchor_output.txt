@@ -1,0 +1,10 @@
+① start time   : top period 2.9005 s power 0.142
+① last-row time: top period 2.9005 s power 0.852
+   refined last-row period 2.9006 s (power 0.863)
+   segment  0-20 min: power at 2.9006 s = 0.802
+   segment 20-40 min: power at 2.9006 s = 0.947
+   segment 40-60 min: power at 2.9006 s = 0.914
+② loaded v1: Theil-Sen slope +0.0275 log/10min (95% CI +0.0206..+0.0343), Kendall tau 0.351 p 1.0e-12, n=187
+② loaded v0: Theil-Sen slope +0.0237 log/10min (95% CI +0.0142..+0.0339), Kendall tau 0.217 p 1.0e-05, n=187
+③ standby 60-72 min FPR (threshold = 99% of 40-60 min calibration): one-sided 0.000, two-sided 0.169 (n=83)
+   resume 72-77 min FPR one-sided 0.000

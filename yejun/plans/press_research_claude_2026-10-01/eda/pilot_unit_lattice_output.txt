@@ -1,0 +1,18 @@
+normal   AI2_Current   step LSB*1e2   : share |k-round(k)|<0.05 = 0.213 (float32-corr 1.000; random ctrl 0.105); counts -2278080..2292061
+normal   AI2_Current   step LSB*1e6   : share |k-round(k)|<0.05 = 0.098 (float32-corr 0.098; random ctrl 0.109); counts -228..229
+normal   AI0_Vibration step LSB/0.1080: share |k-round(k)|<0.05 = 0.097 (float32-corr 0.097; random ctrl 0.100); counts -28499..31863
+normal   AI0_Vibration step LSB/0.1030: share |k-round(k)|<0.05 = 0.102 (float32-corr 0.102; random ctrl 0.102); counts -27180..30388
+normal   AI1_Vibration step LSB/0.1080: share |k-round(k)|<0.05 = 0.098 (float32-corr 0.099; random ctrl 0.104); counts -33204..36219
+normal   AI1_Vibration step LSB/0.1030: share |k-round(k)|<0.05 = 0.100 (float32-corr 0.100; random ctrl 0.104); counts -31666..34542
+abnormal AI2_Current   step LSB*1e2   : share |k-round(k)|<0.05 = 0.248 (float32-corr 1.000; random ctrl 0.115); counts -3350000..4520001
+abnormal AI2_Current   step LSB*1e6   : share |k-round(k)|<0.05 = 1.000 (float32-corr 1.000; random ctrl 0.118); counts -335..452
+abnormal AI0_Vibration step LSB/0.1080: share |k-round(k)|<0.05 = 0.000 (float32-corr 0.000; random ctrl 0.097); counts -136143..163365
+abnormal AI0_Vibration step LSB/0.1030: share |k-round(k)|<0.05 = 0.110 (float32-corr 0.110; random ctrl 0.103); counts -129840..155802
+abnormal AI1_Vibration step LSB/0.1080: share |k-round(k)|<0.05 = 0.092 (float32-corr 0.097; random ctrl 0.082); counts -68061..46143
+abnormal AI1_Vibration step LSB/0.1030: share |k-round(k)|<0.05 = 0.000 (float32-corr 0.000; random ctrl 0.088); counts -64910..44007
+normal upper-tone amp min 0.0096 p1 0.0129 median 0.0509 | lower-tone amp p1 0.0091 median 0.1059
+quiet abnormal bursts:
+    file        t     up     lo   rms0
+abnormal 10:51:31 0.0083 0.0197 0.0458
+abnormal 10:53:42 0.0040 0.0377 0.0321
+abnormal 10:53:52 0.0071 0.0230 0.0433

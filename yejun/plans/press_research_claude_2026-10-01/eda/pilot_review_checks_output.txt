@@ -1,0 +1,4 @@
+normal 0-60 min A60 p0.5 112.6 p99.5 261.0 | abnormal A60 median 41.7, below p0.5: 17/17
+one-liner on guidebook split (row-level approx): thr 0.3517 TP 199 FP 0 FN 0 TN 4019 F1 1.000
+load-unknown rule: env(0-40 min max upper RMS) 0.148 | abnormal 14/17 (x1.5: 13) | normal 40-77 min FA 0/251
+extreme fast path max|AI0| > 3 x normal max (1.055): abnormal bursts 9/21
