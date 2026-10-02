@@ -1,0 +1,385 @@
+{
+  "revision": "b2c0d46c2971dcbfe71e26087b6d231998bb91c2",
+  "rule": "Union shared datetime+all sensors OR overlapping acquisition time intervals. Preserve original test groups; anomaly-free component to fit; remaining components cal > dev > fit. No model outcomes used.",
+  "exact_overlap_edges": [
+    {
+      "a": "data/anomaly-free/anomaly-free.csv",
+      "b": "data/other/5.csv",
+      "shared_rows": 572
+    },
+    {
+      "a": "data/other/10.csv",
+      "b": "data/other/11.csv",
+      "shared_rows": 21
+    },
+    {
+      "a": "data/other/12.csv",
+      "b": "data/other/13.csv",
+      "shared_rows": 349
+    },
+    {
+      "a": "data/other/2.csv",
+      "b": "data/other/3.csv",
+      "shared_rows": 120
+    },
+    {
+      "a": "data/other/3.csv",
+      "b": "data/other/4.csv",
+      "shared_rows": 228
+    }
+  ],
+  "overlapping_time_edges": [
+    [
+      "data/anomaly-free/anomaly-free.csv",
+      "data/other/5.csv"
+    ],
+    [
+      "data/other/10.csv",
+      "data/other/11.csv"
+    ],
+    [
+      "data/other/12.csv",
+      "data/other/13.csv"
+    ],
+    [
+      "data/other/2.csv",
+      "data/other/3.csv"
+    ],
+    [
+      "data/other/3.csv",
+      "data/other/4.csv"
+    ]
+  ],
+  "group_count": 30,
+  "split_file_counts": {
+    "fit": 16,
+    "cal": 7,
+    "test": 7,
+    "dev": 5
+  },
+  "split_group_counts": {
+    "fit": 14,
+    "dev": 5,
+    "cal": 5,
+    "test": 6
+  },
+  "files": [
+    {
+      "path": "data/anomaly-free/anomaly-free.csv",
+      "group_id": "7b2f6827c74d1076",
+      "split": "fit",
+      "previous_split": "fit",
+      "rows": 9405,
+      "time_start": "2020-02-08 13:30:47",
+      "time_end": "2020-02-08 16:16:47"
+    },
+    {
+      "path": "data/other/1.csv",
+      "group_id": "2fd92ad112a22e47",
+      "split": "cal",
+      "previous_split": "cal",
+      "rows": 745,
+      "time_start": "2020-03-01 15:44:06",
+      "time_end": "2020-03-01 15:57:06"
+    },
+    {
+      "path": "data/other/10.csv",
+      "group_id": "6b8ca5244e7e31f4",
+      "split": "test",
+      "previous_split": "test",
+      "rows": 1327,
+      "time_start": "2020-02-08 17:47:44",
+      "time_end": "2020-02-08 18:11:02"
+    },
+    {
+      "path": "data/other/11.csv",
+      "group_id": "6b8ca5244e7e31f4",
+      "split": "test",
+      "previous_split": "fit",
+      "rows": 1190,
+      "time_start": "2020-02-08 18:10:42",
+      "time_end": "2020-02-08 18:31:36"
+    },
+    {
+      "path": "data/other/12.csv",
+      "group_id": "514bf360295861be",
+      "split": "fit",
+      "previous_split": "fit",
+      "rows": 1048,
+      "time_start": "2020-02-08 18:34:51",
+      "time_end": "2020-02-08 18:54:54"
+    },
+    {
+      "path": "data/other/13.csv",
+      "group_id": "514bf360295861be",
+      "split": "fit",
+      "previous_split": "fit",
+      "rows": 923,
+      "time_start": "2020-02-08 18:47:32",
+      "time_end": "2020-02-08 19:06:26"
+    },
+    {
+      "path": "data/other/14.csv",
+      "group_id": "055445d9f97143be",
+      "split": "fit",
+      "previous_split": "fit",
+      "rows": 905,
+      "time_start": "2020-02-08 19:16:28",
+      "time_end": "2020-02-08 19:32:19"
+    },
+    {
+      "path": "data/other/2.csv",
+      "group_id": "0ee3941db589dcc3",
+      "split": "cal",
+      "previous_split": "cal",
+      "rows": 780,
+      "time_start": "2020-03-01 16:28:16",
+      "time_end": "2020-03-01 16:45:59"
+    },
+    {
+      "path": "data/other/3.csv",
+      "group_id": "0ee3941db589dcc3",
+      "split": "cal",
+      "previous_split": "dev",
+      "rows": 1137,
+      "time_start": "2020-03-01 16:43:54",
+      "time_end": "2020-03-01 17:03:52"
+    },
+    {
+      "path": "data/other/4.csv",
+      "group_id": "0ee3941db589dcc3",
+      "split": "cal",
+      "previous_split": "fit",
+      "rows": 1191,
+      "time_start": "2020-03-01 16:59:53",
+      "time_end": "2020-03-01 17:20:49"
+    },
+    {
+      "path": "data/other/5.csv",
+      "group_id": "7b2f6827c74d1076",
+      "split": "fit",
+      "previous_split": "dev",
+      "rows": 1155,
+      "time_start": "2020-02-08 16:06:48",
+      "time_end": "2020-02-08 16:26:56"
+    },
+    {
+      "path": "data/other/6.csv",
+      "group_id": "a317753ef343c520",
+      "split": "fit",
+      "previous_split": "fit",
+      "rows": 1147,
+      "time_start": "2020-02-08 16:27:09",
+      "time_end": "2020-02-08 16:47:09"
+    },
+    {
+      "path": "data/other/7.csv",
+      "group_id": "ad6f50be30f6c00f",
+      "split": "dev",
+      "previous_split": "dev",
+      "rows": 1090,
+      "time_start": "2020-02-08 16:47:11",
+      "time_end": "2020-02-08 17:06:12"
+    },
+    {
+      "path": "data/other/8.csv",
+      "group_id": "215b8b5fb8f83138",
+      "split": "fit",
+      "previous_split": "fit",
+      "rows": 1147,
+      "time_start": "2020-02-08 17:07:11",
+      "time_end": "2020-02-08 17:27:13"
+    },
+    {
+      "path": "data/other/9.csv",
+      "group_id": "c4df9843d2fbf4be",
+      "split": "test",
+      "previous_split": "test",
+      "rows": 1144,
+      "time_start": "2020-02-08 17:27:19",
+      "time_end": "2020-02-08 17:47:18"
+    },
+    {
+      "path": "data/valve1/0.csv",
+      "group_id": "1726d9a7a6e610ab",
+      "split": "fit",
+      "previous_split": "fit",
+      "rows": 1147,
+      "time_start": "2020-03-09 10:14:33",
+      "time_end": "2020-03-09 10:34:32"
+    },
+    {
+      "path": "data/valve1/1.csv",
+      "group_id": "6d2c5c7e153ecda0",
+      "split": "cal",
+      "previous_split": "cal",
+      "rows": 1145,
+      "time_start": "2020-03-09 10:34:33",
+      "time_end": "2020-03-09 10:54:33"
+    },
+    {
+      "path": "data/valve1/10.csv",
+      "group_id": "25f00ca1530d89d8",
+      "split": "test",
+      "previous_split": "test",
+      "rows": 1146,
+      "time_start": "2020-03-09 13:34:39",
+      "time_end": "2020-03-09 13:54:38"
+    },
+    {
+      "path": "data/valve1/11.csv",
+      "group_id": "5461f93e66791b9f",
+      "split": "test",
+      "previous_split": "test",
+      "rows": 1141,
+      "time_start": "2020-03-09 13:54:39",
+      "time_end": "2020-03-09 14:14:39"
+    },
+    {
+      "path": "data/valve1/12.csv",
+      "group_id": "eccaece346cbd444",
+      "split": "fit",
+      "previous_split": "fit",
+      "rows": 1140,
+      "time_start": "2020-03-09 14:14:40",
+      "time_end": "2020-03-09 14:34:40"
+    },
+    {
+      "path": "data/valve1/13.csv",
+      "group_id": "3c0650ecb21fbc05",
+      "split": "fit",
+      "previous_split": "fit",
+      "rows": 1140,
+      "time_start": "2020-03-09 14:34:41",
+      "time_end": "2020-03-09 14:54:40"
+    },
+    {
+      "path": "data/valve1/14.csv",
+      "group_id": "3029d2151fd9c24c",
+      "split": "dev",
+      "previous_split": "dev",
+      "rows": 1139,
+      "time_start": "2020-03-09 14:54:41",
+      "time_end": "2020-03-09 15:14:40"
+    },
+    {
+      "path": "data/valve1/15.csv",
+      "group_id": "5e3d51583b19e233",
+      "split": "dev",
+      "previous_split": "dev",
+      "rows": 1150,
+      "time_start": "2020-03-09 15:14:41",
+      "time_end": "2020-03-09 15:34:41"
+    },
+    {
+      "path": "data/valve1/2.csv",
+      "group_id": "ae534245f6026414",
+      "split": "cal",
+      "previous_split": "cal",
+      "rows": 1075,
+      "time_start": "2020-03-09 10:54:34",
+      "time_end": "2020-03-09 11:14:33"
+    },
+    {
+      "path": "data/valve1/3.csv",
+      "group_id": "f385f758ee4f1550",
+      "split": "test",
+      "previous_split": "test",
+      "rows": 1148,
+      "time_start": "2020-03-09 11:14:34",
+      "time_end": "2020-03-09 11:34:35"
+    },
+    {
+      "path": "data/valve1/4.csv",
+      "group_id": "6361199509f6b599",
+      "split": "fit",
+      "previous_split": "fit",
+      "rows": 1095,
+      "time_start": "2020-03-09 11:34:36",
+      "time_end": "2020-03-09 11:54:35"
+    },
+    {
+      "path": "data/valve1/5.csv",
+      "group_id": "643778d318da5130",
+      "split": "fit",
+      "previous_split": "fit",
+      "rows": 1154,
+      "time_start": "2020-03-09 11:54:36",
+      "time_end": "2020-03-09 12:14:35"
+    },
+    {
+      "path": "data/valve1/6.csv",
+      "group_id": "2b0c607695d498a7",
+      "split": "fit",
+      "previous_split": "fit",
+      "rows": 1154,
+      "time_start": "2020-03-09 12:14:36",
+      "time_end": "2020-03-09 12:34:35"
+    },
+    {
+      "path": "data/valve1/7.csv",
+      "group_id": "0b804368c6a93551",
+      "split": "fit",
+      "previous_split": "fit",
+      "rows": 1094,
+      "time_start": "2020-03-09 12:34:37",
+      "time_end": "2020-03-09 12:54:37"
+    },
+    {
+      "path": "data/valve1/8.csv",
+      "group_id": "2bc58bda8e65d7d1",
+      "split": "fit",
+      "previous_split": "fit",
+      "rows": 1144,
+      "time_start": "2020-03-09 12:54:39",
+      "time_end": "2020-03-09 13:14:37"
+    },
+    {
+      "path": "data/valve1/9.csv",
+      "group_id": "6039dac903056836",
+      "split": "dev",
+      "previous_split": "dev",
+      "rows": 1148,
+      "time_start": "2020-03-09 13:14:38",
+      "time_end": "2020-03-09 13:34:38"
+    },
+    {
+      "path": "data/valve2/0.csv",
+      "group_id": "7581bd2e1a27df93",
+      "split": "fit",
+      "previous_split": "fit",
+      "rows": 1125,
+      "time_start": "2020-03-09 15:56:30",
+      "time_end": "2020-03-09 16:16:29"
+    },
+    {
+      "path": "data/valve2/1.csv",
+      "group_id": "11908bba9d4f01e5",
+      "split": "cal",
+      "previous_split": "cal",
+      "rows": 1063,
+      "time_start": "2020-03-09 16:16:30",
+      "time_end": "2020-03-09 16:36:30"
+    },
+    {
+      "path": "data/valve2/2.csv",
+      "group_id": "58390fe5ca11567a",
+      "split": "test",
+      "previous_split": "test",
+      "rows": 1129,
+      "time_start": "2020-03-09 16:36:31",
+      "time_end": "2020-03-09 16:56:30"
+    },
+    {
+      "path": "data/valve2/3.csv",
+      "group_id": "579af06a868d18be",
+      "split": "dev",
+      "previous_split": "dev",
+      "rows": 995,
+      "time_start": "2020-03-09 16:56:31",
+      "time_end": "2020-03-09 17:14:09"
+    }
+  ],
+  "test_access": "Downloaded and hashed. Datetime and sensor values canonicalized for overlap; labels checked only for duplicate-annotation conflicts. No test sensor summaries or model results inspected. Some files were structurally inspected before group repair; not a claim of fully unseen raw files.",
+  "caveat": "Conservative same-capture grouping; absence of exact/time overlaps does not prove independent equipment, runs or near-duplicates. Use file/group weighting and inspect further provenance before stronger claims."
+}

@@ -1,0 +1,325 @@
+{
+  "version": "press-master-2026-10-03-v1",
+  "status": "research design frozen before new model experiments; press data already explored",
+  "input": {
+    "normal_sha256": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+    "abnormal_sha256": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+    "deduplicate": "same timestamp and all three sensor values; preserve source-row mapping",
+    "within_record_interval_ns_inclusive": [
+      80000000,
+      120000000
+    ],
+    "close_timeout_s": 0.5,
+    "primary_vibration_preprocessing": "subtract mean of each completed record, identically for both classes",
+    "physical_sampling_rate": null,
+    "physical_sensor_units": null,
+    "minimum_records_for_length_scale": 30,
+    "length_strata": [
+      [
+        1,
+        9
+      ],
+      [
+        10,
+        19
+      ],
+      [
+        20,
+        39
+      ],
+      [
+        40,
+        50
+      ]
+    ],
+    "robust_scale": "1.4826 MAD, fallback IQR/1.349, else omit feature",
+    "outside_length_strata": "global fallback; separate coverage"
+  },
+  "folds_minutes": {
+    "P0": {
+      "fit": [
+        0,
+        10
+      ],
+      "cal": [
+        10,
+        20
+      ],
+      "evaluation": [
+        20,
+        40
+      ],
+      "role": "development"
+    },
+    "P1": {
+      "fit": [
+        0,
+        20
+      ],
+      "cal": [
+        20,
+        40
+      ],
+      "evaluation": [
+        40,
+        60
+      ],
+      "role": "development"
+    },
+    "P2": {
+      "fit": [
+        0,
+        40
+      ],
+      "cal": [
+        40,
+        60
+      ],
+      "evaluation": [
+        60,
+        null
+      ],
+      "role": "retrospective audit, not blind"
+    }
+  },
+  "models": {
+    "B1": {
+      "type": "global robust maximum deviation",
+      "settings": 1
+    },
+    "B2": {
+      "type": "v2 structure refit on common folds",
+      "settings": 1
+    },
+    "B3": {
+      "type": "mean distance to k nearest reference records",
+      "k": [
+        5,
+        10
+      ],
+      "parent_dedup_for_augmentation": true,
+      "distance": "Euclidean on 7 common standardized axes; drop unscalable axes, fit-median impute",
+      "fit_diagnostics": "exclude all children of query parent"
+    },
+    "C1": {
+      "type": "two-sided conditional vibration residual plus current deviation",
+      "degree": [
+        1,
+        2
+      ],
+      "ridge": 0.001
+    },
+    "C2": {
+      "type": "upper-sided conditional vibration residual plus current deviation",
+      "degree": [
+        1,
+        2
+      ],
+      "ridge": 0.001
+    },
+    "O1": {
+      "type": "HistGradientBoostingClassifier, synthetic exposure",
+      "max_depth": 2,
+      "max_iter": 100,
+      "learning_rate": 0.05,
+      "min_samples_leaf": 10,
+      "l2_regularization": 1.0,
+      "early_stopping": false
+    }
+  },
+  "condition_proxy": {
+    "frequency_cycles_per_sample": 0.06,
+    "minimum_n": 20,
+    "minimum_r2": 0.95,
+    "fit_amplitude_quantiles": [
+      0.01,
+      0.99
+    ],
+    "fallback": "global vibration, retain current anomaly score",
+    "minimum_fit_parents": 30,
+    "regression_objective": "mean squared error + 0.001 * sum of squared non-intercept coefficients",
+    "polynomial_scaling": "form log A and squared log A columns first; standardize each with fit mean/std"
+  },
+  "calibration": {
+    "method": "split empirical rank of one combined score",
+    "real_normal_only": true,
+    "primary_alpha": 0.05,
+    "secondary_alpha": [
+      0.01,
+      0.03
+    ],
+    "tie_rule": "count calibration scores >= query, plus one in numerator and denominator",
+    "guarantee": "none under unverified dependence/drift; report realized rates",
+    "request_comparison": "p_normal_tail <= alpha"
+  },
+  "random_seeds": [
+    11,
+    29,
+    47
+  ],
+  "augmentation": {
+    "ratios": [
+      0.0,
+      0.5,
+      1.0
+    ],
+    "normal_learner": "B3 k=5",
+    "exposure_learner": "O1",
+    "calibration_augmented": false,
+    "crop_lengths": [
+      20,
+      30,
+      40
+    ],
+    "development_families": [
+      "band_noise",
+      "damped_impulse",
+      "current_residual"
+    ],
+    "heldout_families": [
+      "off_tone",
+      "channel_relation"
+    ],
+    "loss_families": [
+      "amplitude_decrease",
+      "current_loss",
+      "flat_sensor",
+      "compound_unavailable"
+    ],
+    "ramp_records": [
+      20,
+      60
+    ],
+    "longer_synthetic_streams": "separate simulation only",
+    "heldout_seeds": [
+      101,
+      211,
+      307
+    ],
+    "heldout_parents": "P2 evaluation; generated after final selection",
+    "rng_key": "purpose, fold, original parent, family, seed; shared base realization across amplitude grid"
+  },
+  "probability": {
+    "dataset_label_diagnostic": true,
+    "normal_score_fit_minutes": [
+      0,
+      40
+    ],
+    "normal_head_fit_minutes": [
+      40,
+      50
+    ],
+    "normal_threshold_cal_minutes": [
+      50,
+      60
+    ],
+    "normal_evaluation_minutes": [
+      60,
+      null
+    ],
+    "abnormal_head_record_ids": [
+      0,
+      13
+    ],
+    "abnormal_evaluation_record_ids": [
+      14,
+      20
+    ],
+    "interval_ids_inclusive": true,
+    "reference_positive_prior_q": 0.1,
+    "q_sensitivity": [
+      0.01,
+      0.05,
+      0.1,
+      0.2
+    ],
+    "head": "nonnegative-slope logistic, L2 coefficient 1, standardized score; total weights normalized to number of head-fit records",
+    "synthetic_probability_separate": true,
+    "field_fault_probability_claim": false,
+    "head_objective": "sum(w_i * BCE_i)/N + 0.5 * a^2; a >= 0; no intercept penalty",
+    "weights": "w0=N*(1-q)/n0; w1=N*q/n1",
+    "score_standardization": "q-weighted head-fit mean/std only",
+    "q_sensitivity_fit": "refit head for each q using same registered objective"
+  },
+  "policy": {
+    "primary": "one request per threshold-positive record",
+    "secondary": "2-of-3, reset after gap >30s, resolve after 2 normal records",
+    "slow_challenger": "EWMA lambda=0.2, its own complete policy calibration",
+    "baseline_adaptation": "off by default; confirmed-normal delayed feedback only"
+  },
+  "selection": {
+    "data": "P0/P1 and development injections only",
+    "minimum_normal_requests_reduced": 3,
+    "maximum_additional_requests_per_10min": 1,
+    "minimum_pod_gain_pp_in_two_development_families": 10,
+    "maximum_pod_loss_pp_per_preregistered_loss_cell": 5,
+    "minimum_distinct_parents_per_pod_cell": 20,
+    "require_direction_consistency": "both development-fold means; per-seed normal-burden and loss limits must also pass",
+    "tie_order": [
+      "fewer assumptions",
+      "fewer fitted parameters",
+      "lower measured cost"
+    ],
+    "test_based_reselection": false,
+    "development_amplitudes": {
+      "band_noise": [
+        0.5,
+        1.0
+      ],
+      "damped_impulse": [
+        2,
+        4
+      ],
+      "current_residual": [
+        0.5,
+        1.0
+      ]
+    },
+    "loss_multipliers": [
+      0.5,
+      0.25
+    ],
+    "compound_band_noise_amplitudes": [
+      0.5,
+      1.0
+    ],
+    "condition_strata": "before injection; post-injection gate changes reported separately",
+    "reference": "B1 for candidate selection; same unaugmented learner for added augmentation effect, also retain B1 comparison",
+    "aggregation": "mean of 3 seeds within original parent; equal weights for two registered amplitudes within family; pool folds by parent count",
+    "eligible_candidate_order": [
+      "fewest total normal requests including quality/abstention",
+      "highest minimum representative POD across 3 development families",
+      "fewest assumptions",
+      "fewest fitted parameters and stored references",
+      "lowest measured cost"
+    ]
+  },
+  "external": {
+    "skab_revision": "b2c0d46c2971dcbfe71e26087b6d231998bb91c2",
+    "skab_reservation": "evidence/skab_group_reservation.json",
+    "skab_label_conflicts": "mask from normal training/calibration; retain ambiguous coverage and evaluation bounds",
+    "beihang_version": 1,
+    "beihang_development_run": "Healthy state/1.csv",
+    "beihang_reserved": "Healthy state/2.csv and all nine fault files",
+    "beihang_primary_channels": [
+      "X vibration",
+      "Y vibration",
+      "Z vibration",
+      "Speed"
+    ],
+    "espset_version": 3,
+    "espset_group": "esp_id",
+    "weight_transfer": false,
+    "raw_data_pooling": false,
+    "skab_label_mask": "cache/skab_label_conflicts.json; regenerated by reserve_skab_groups.py",
+    "skab_unit": {
+      "samples": 20,
+      "overlap": false,
+      "anchor": "first observation in deduplicated capture group, independent of labels",
+      "gap_reset": "greater than 1.5 times fit median sampling interval",
+      "cal": "one score per complete unambiguously normal block",
+      "evaluation": "same block score and decision unit; unfinished blocks retained in coverage"
+    },
+    "espset_reservation": "evidence/espset_group_reservation.json"
+  }
+}

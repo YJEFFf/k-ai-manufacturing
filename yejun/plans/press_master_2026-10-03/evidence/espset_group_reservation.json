@@ -1,0 +1,51 @@
+{
+  "doi": "10.17632/m268jsw339.3",
+  "assignment": "Sort SHA256(UTF8(press-master-v1|str(esp_id))); first 5 fit, next 2 dev, next 2 cal, last 2 test; all spectra/features of an esp_id stay together.",
+  "files": [
+    {
+      "esp_id": "5",
+      "split": "fit"
+    },
+    {
+      "esp_id": "0",
+      "split": "fit"
+    },
+    {
+      "esp_id": "4",
+      "split": "fit"
+    },
+    {
+      "esp_id": "1",
+      "split": "fit"
+    },
+    {
+      "esp_id": "2",
+      "split": "fit"
+    },
+    {
+      "esp_id": "9",
+      "split": "dev"
+    },
+    {
+      "esp_id": "8",
+      "split": "dev"
+    },
+    {
+      "esp_id": "6",
+      "split": "cal"
+    },
+    {
+      "esp_id": "7",
+      "split": "cal"
+    },
+    {
+      "esp_id": "3",
+      "split": "test"
+    },
+    {
+      "esp_id": "10",
+      "split": "test"
+    }
+  ],
+  "scope": "IDs and labels seen for structural counts. No feature statistics/model outcomes. Do not interpret as unseen raw data or temporal test."
+}

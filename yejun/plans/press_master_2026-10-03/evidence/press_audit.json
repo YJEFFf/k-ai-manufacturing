@@ -1,0 +1,255 @@
+{
+  "environment": {
+    "python": "3.12.8",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3"
+  },
+  "scope": "source data audit and historical baseline recalculation, not v3 performance",
+  "normal": {
+    "sha256": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+    "rows": 20000,
+    "retained_rows": 19999,
+    "duplicate_zero_based_rows": [
+      11565
+    ],
+    "finite_values": true,
+    "duplicate_timestamps": 1,
+    "nonpositive_deltas": 1,
+    "first": "2022-07-12 00:00:00.019000",
+    "last": "2022-07-12 01:16:55.828000",
+    "duration_s": 4615.809,
+    "records_gap500": 599,
+    "records_strict": 599,
+    "same_partition_after_dedup": true,
+    "record_length_counts": {
+      "1": 9,
+      "2": 7,
+      "3": 8,
+      "4": 5,
+      "5": 5,
+      "6": 7,
+      "7": 8,
+      "8": 12,
+      "9": 8,
+      "10": 9,
+      "11": 10,
+      "12": 10,
+      "13": 13,
+      "14": 8,
+      "15": 7,
+      "16": 4,
+      "17": 6,
+      "18": 6,
+      "19": 5,
+      "20": 8,
+      "21": 8,
+      "22": 12,
+      "23": 11,
+      "24": 11,
+      "25": 10,
+      "26": 10,
+      "27": 10,
+      "28": 4,
+      "29": 8,
+      "30": 6,
+      "31": 4,
+      "32": 9,
+      "33": 5,
+      "34": 10,
+      "35": 10,
+      "36": 12,
+      "37": 8,
+      "38": 13,
+      "39": 7,
+      "40": 8,
+      "41": 5,
+      "42": 10,
+      "43": 8,
+      "44": 9,
+      "45": 7,
+      "46": 6,
+      "47": 3,
+      "48": 8,
+      "49": 10,
+      "50": 202
+    },
+    "records_lt10": 69,
+    "records_ge10": 530,
+    "records_ge20": 452,
+    "record_start_spacing_median_s": 7.958,
+    "record_end_spacing_max_s": 21.543,
+    "logged_within_record_span_s": 1940.0
+  },
+  "forward_folds": {
+    "P0": {
+      "fit": {
+        "n_records": 81,
+        "n_rows": 3141,
+        "first_id": 0,
+        "last_id": 80,
+        "lt10": 3,
+        "min_tail_p": 0.012195121951219513
+      },
+      "cal": {
+        "n_records": 77,
+        "n_rows": 2419,
+        "first_id": 81,
+        "last_id": 157,
+        "lt10": 12,
+        "min_tail_p": 0.01282051282051282
+      },
+      "evaluation": {
+        "n_records": 157,
+        "n_rows": 5023,
+        "first_id": 159,
+        "last_id": 315,
+        "lt10": 23,
+        "min_tail_p": 0.006329113924050633
+      },
+      "boundary_record_ids": [
+        158,
+        316
+      ]
+    },
+    "P1": {
+      "fit": {
+        "n_records": 158,
+        "n_rows": 5560,
+        "first_id": 0,
+        "last_id": 157,
+        "lt10": 15,
+        "min_tail_p": 0.006289308176100629
+      },
+      "cal": {
+        "n_records": 157,
+        "n_rows": 5023,
+        "first_id": 159,
+        "last_id": 315,
+        "lt10": 23,
+        "min_tail_p": 0.006329113924050633
+      },
+      "evaluation": {
+        "n_records": 156,
+        "n_rows": 4996,
+        "first_id": 317,
+        "last_id": 472,
+        "lt10": 20,
+        "min_tail_p": 0.006369426751592357
+      },
+      "boundary_record_ids": [
+        158,
+        316
+      ]
+    },
+    "P2": {
+      "fit": {
+        "n_records": 316,
+        "n_rows": 10633,
+        "first_id": 0,
+        "last_id": 315,
+        "lt10": 38,
+        "min_tail_p": 0.0031545741324921135
+      },
+      "cal": {
+        "n_records": 156,
+        "n_rows": 4996,
+        "first_id": 317,
+        "last_id": 472,
+        "lt10": 20,
+        "min_tail_p": 0.006369426751592357
+      },
+      "evaluation": {
+        "n_records": 126,
+        "n_rows": 4320,
+        "first_id": 473,
+        "last_id": 598,
+        "lt10": 11,
+        "min_tail_p": 0.007874015748031496
+      },
+      "boundary_record_ids": [
+        316
+      ]
+    }
+  },
+  "abnormal": {
+    "sha256": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+    "rows": 600,
+    "retained_rows": 600,
+    "duplicate_zero_based_rows": [],
+    "finite_values": true,
+    "duplicate_timestamps": 0,
+    "nonpositive_deltas": 0,
+    "first": "2022-07-17 10:51:07.943000",
+    "last": "2022-07-17 10:53:53.540000",
+    "duration_s": 165.597,
+    "records_gap500": 21,
+    "records_strict": 21,
+    "same_partition_after_dedup": true,
+    "record_length_counts": {
+      "3": 1,
+      "4": 2,
+      "8": 1,
+      "10": 1,
+      "15": 2,
+      "18": 1,
+      "24": 1,
+      "25": 1,
+      "28": 1,
+      "31": 1,
+      "36": 1,
+      "40": 1,
+      "42": 1,
+      "47": 1,
+      "50": 5
+    },
+    "records_lt10": 4,
+    "records_ge10": 17,
+    "records_ge20": 13,
+    "record_start_spacing_median_s": 8.1295,
+    "record_end_spacing_max_s": 13.446,
+    "logged_within_record_span_s": 57.9
+  },
+  "historical_guide_windows": {
+    "threshold_raw": 0.351699,
+    "normal_windows": 4000,
+    "abnormal_windows": 180,
+    "window_only": {
+      "tp": 125,
+      "fp": 0,
+      "fn": 55,
+      "f1": 0.819672131147541
+    },
+    "full_record_broadcast_retrospective": {
+      "tp": 180,
+      "fp": 0,
+      "fn": 0,
+      "f1": 1.0
+    },
+    "always_normal_accuracy": 0.9569377990430622,
+    "warning": "Different information sets. Full-record labels are not causal window predictions."
+  },
+  "median_abs_record_mean_raw_units": {
+    "normal": {
+      "AI0_Vibration": 0.0010082095607235149,
+      "AI1_Vibration": 0.0010172322190611675
+    },
+    "abnormal": {
+      "AI0_Vibration": 0.0445644990875,
+      "AI1_Vibration": 0.03602448746933333
+    }
+  },
+  "sampling_hypotheses": {
+    "physical_sampling_rate": "unknown; timing/quantization fits do not uniquely identify ADC settings",
+    "if_1kHz_rows_duration_s": 19.999,
+    "if_1kHz_duty_fraction": 0.004332718273221444,
+    "if_10Hz_rows_duration_s": 1999.9,
+    "warning": "These two are conditional calculations, not measurements of physical coverage."
+  },
+  "sample_size_scenarios": {
+    "binomial_iid_zero_fp_n_for_upper_1pct_at95": 299,
+    "binomial_iid_all_hits_n_for_lower_90pct_at95": 29,
+    "poisson_stationary_zero_fa_hours_for_upper_one_per8h_at95": 23.965858188431927,
+    "poisson_if_zero_fa_in_full_normal_upper_per_hour": 2.336456336211998,
+    "warning": "Planning calculations conditional on iid Bernoulli / homogeneous Poisson assumptions. Not confidence guarantees for correlated press records."
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "rows": 6032,
+  "columns": [
+    "id",
+    "esp_id",
+    "label",
+    "median(8,13)",
+    "rms(98,102)",
+    "median(98,102)",
+    "peak1x",
+    "peak2x",
+    "a",
+    "b"
+  ],
+  "unique_esp_ids": 11,
+  "label_counts": {
+    "Normal": 4801,
+    "Unbalance": 576,
+    "Faulty sensor": 295,
+    "Rubbing": 290,
+    "Misalignment": 70
+  },
+  "rows_per_esp_min": 252,
+  "rows_per_esp_max": 830,
+  "units_with_multiple_labels": 11,
+  "duplicate_unit_sample_ids": 0,
+  "scope": "metadata/ID/label counts only; no feature statistics or model outcomes; not a time-domain dataset"
+}

@@ -1,0 +1,7 @@
+# Python 3.12; audit/acquisition tools only, not the future detector environment.
+numpy==1.26.4
+pandas==2.3.3
+# Imported by the preserved historical recalculation helper.
+scipy==1.13.1
+scikit-learn==1.8.0
+py7zr==1.1.3

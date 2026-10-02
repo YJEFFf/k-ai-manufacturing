@@ -1,0 +1,64 @@
+{
+  "dataset": "ESPset",
+  "doi": "10.17632/m268jsw339.3",
+  "version": 3,
+  "license": "CC-BY-4.0",
+  "source": "https://data.mendeley.com/datasets/m268jsw339/3",
+  "metadata": {
+    "url": "https://data.mendeley.com/public-api/datasets/m268jsw339",
+    "path": "plans/press_master_2026-10-03/cache/espset_metadata.json",
+    "bytes": 7203,
+    "sha256": "6578a06b3b82460f8eb2e42562bfde35d98d745644c1cb5cf21b047868f994b0",
+    "checked_at_utc": "2026-10-02T17:33:32Z",
+    "hash_basis": "locally computed SHA-256; no independent expected hash",
+    "publisher_hash_verified": false
+  },
+  "title": "ESPset",
+  "creators": [
+    "Marcos Pellegrini",
+    "Flavio Varejao",
+    "Alexandre Rodrigues",
+    "Lucas Henrique Sousa Mello",
+    "Luciano Silva"
+  ],
+  "license_url": "http://creativecommons.org/licenses/by/4.0",
+  "publish_date": "2025-09-16T22:18:44.043Z",
+  "changes": "Original ZIPs unchanged. Derived metadata/ID/label counts and whole-pump split reservation; no fitted model or feature statistics.",
+  "files": [
+    {
+      "url": "https://data.mendeley.com/public-files/datasets/m268jsw339/files/c87909f4-a672-4723-917f-75a967e150cf/file_downloaded",
+      "path": "plans/press_master_2026-10-03/data/espset/features.zip",
+      "bytes": 264453,
+      "sha256": "b8214c10ba5b5b211c00a058f2fffa3ed7ccc46f67219b4769c907baec9a724d",
+      "checked_at_utc": "2026-10-02T17:33:32Z",
+      "hash_basis": "publisher metadata",
+      "publisher_hash_verified": true,
+      "members": [
+        {
+          "name": "features.csv",
+          "bytes": 673955,
+          "crc32": "d2c71c4c"
+        }
+      ],
+      "crc_checked": true
+    },
+    {
+      "url": "https://data.mendeley.com/public-files/datasets/m268jsw339/files/30e870eb-73b2-498d-9ba3-141d124b7772/file_downloaded",
+      "path": "plans/press_master_2026-10-03/data/espset/spectrum.zip",
+      "bytes": 115059855,
+      "sha256": "9dc76031d97c6ba54a1428dabac50178ce54cacfd1f190df128d9cfd1a6901b5",
+      "checked_at_utc": "2026-10-02T17:33:32Z",
+      "hash_basis": "publisher metadata",
+      "publisher_hash_verified": true,
+      "members": [
+        {
+          "name": "spectrum.csv",
+          "bytes": 1825132400,
+          "crc32": "1d30e719"
+        }
+      ],
+      "crc_checked": true
+    }
+  ],
+  "scope": "archives acquired and CRC verified; no model fitted"
+}

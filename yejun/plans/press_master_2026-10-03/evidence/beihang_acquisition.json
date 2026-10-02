@@ -1,0 +1,93 @@
+{
+  "dataset": "Beihang aviation piston pump",
+  "doi": "10.17632/xw8gjjk9km.1",
+  "source": "https://data.mendeley.com/datasets/xw8gjjk9km/1",
+  "license": "CC-BY-4.0",
+  "metadata": {
+    "url": "https://data.mendeley.com/public-api/datasets/xw8gjjk9km",
+    "path": "plans/press_master_2026-10-03/cache/beihang_metadata.json",
+    "bytes": 3439,
+    "sha256": "36f2187c537aadefce91fac4026f090a3b51b29b1368e3cb67b6ad7fefdaa1dc",
+    "checked_at_utc": "2026-10-02T17:33:32Z",
+    "hash_basis": "locally computed SHA-256; no independent expected hash",
+    "publisher_hash_verified": false
+  },
+  "files": [
+    {
+      "url": "https://data.mendeley.com/public-files/datasets/xw8gjjk9km/files/76881f33-1750-4fc3-8d6b-e348dfa9b495/file_downloaded",
+      "path": "plans/press_master_2026-10-03/data/beihang/Experimental Data for Aviation Piston Pumps Processed_Retaining Valid Segments.zip",
+      "bytes": 196394316,
+      "sha256": "65499ab3d3fb79c012cb3792024105290d6860d773778c9028b02e93c68ab8d9",
+      "checked_at_utc": "2026-10-02T17:33:32Z",
+      "hash_basis": "publisher metadata",
+      "publisher_hash_verified": true,
+      "filename": "Experimental Data for Aviation Piston Pumps Processed_Retaining Valid Segments.zip",
+      "file_id": "76881f33-1750-4fc3-8d6b-e348dfa9b495",
+      "crc_checked": true,
+      "members": [
+        {
+          "name": "Experimental Data Processing_Retaining Valid Segments/Healthy state/1.csv",
+          "bytes": 60824901,
+          "crc32": "7a7d8b0f"
+        },
+        {
+          "name": "Experimental Data Processing_Retaining Valid Segments/Healthy state/2.csv",
+          "bytes": 56610710,
+          "crc32": "a5003282"
+        },
+        {
+          "name": "Experimental Data Processing_Retaining Valid Segments/Wear of the regulation valve/1.csv",
+          "bytes": 70601763,
+          "crc32": "2d67b3b3"
+        },
+        {
+          "name": "Experimental Data Processing_Retaining Valid Segments/Wear of the regulation valve/2.csv",
+          "bytes": 94265755,
+          "crc32": "202bf893"
+        },
+        {
+          "name": "Experimental Data Processing_Retaining Valid Segments/Wear of the regulation valve/3.csv",
+          "bytes": 98553090,
+          "crc32": "9c1c1e84"
+        },
+        {
+          "name": "Experimental Data Processing_Retaining Valid Segments/Wear of the servo piston/1.csv",
+          "bytes": 57361646,
+          "crc32": "8327da33"
+        },
+        {
+          "name": "Experimental Data Processing_Retaining Valid Segments/Wear of the servo piston/2.csv",
+          "bytes": 48005409,
+          "crc32": "a72e574f"
+        },
+        {
+          "name": "Experimental Data Processing_Retaining Valid Segments/Wear of the servo piston/3.csv",
+          "bytes": 53490249,
+          "crc32": "013490fe"
+        },
+        {
+          "name": "Experimental Data Processing_Retaining Valid Segments/Wear of the swashplate bearing bush/1.csv",
+          "bytes": 66804026,
+          "crc32": "5d114143"
+        },
+        {
+          "name": "Experimental Data Processing_Retaining Valid Segments/Wear of the swashplate bearing bush/2.csv",
+          "bytes": 120951583,
+          "crc32": "baa2977b"
+        },
+        {
+          "name": "Experimental Data Processing_Retaining Valid Segments/Wear of the swashplate bearing bush/3.csv",
+          "bytes": 76109873,
+          "crc32": "34302fb0"
+        }
+      ]
+    }
+  ],
+  "citation": "Ma, Jiming (2025), Experimental Data for Aviation Piston Pumps, Mendeley Data, V1, doi:10.17632/xw8gjjk9km.1",
+  "creators": [
+    "jiming ma"
+  ],
+  "license_url": "http://creativecommons.org/licenses/by/4.0",
+  "changes": "Original archive unchanged. Only healthy-run-1 timing/missingness and all CSV headers audited; no new model outcomes.",
+  "access_scope": "Archive acquired and CRC verified; no fitted model or test performance."
+}

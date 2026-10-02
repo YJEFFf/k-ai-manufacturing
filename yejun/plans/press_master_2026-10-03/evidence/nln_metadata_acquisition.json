@@ -1,0 +1,19 @@
+{
+  "source": "https://data.4tu.nl/file/2b61183e-c14f-4131-829b-cc4822c369d0/8d84b13f-98f7-4baf-a7ea-60dee1e8876f",
+  "doi": "10.4121/2b61183e-c14f-4131-829b-cc4822c369d0.v4",
+  "license": "CC0-1.0",
+  "scope": "Range-fetched archive index and first block; only two metadata documents extracted. Fixed target reparse attributes cleared in memory, content unchanged.",
+  "transferred_ranges_bytes": 6208256,
+  "files": [
+    {
+      "path": "data/nln_emp/metadata/README.txt",
+      "bytes": 2525,
+      "sha256": "bc56976f3e670cc24f2569ae9427e3212044fe0627c5df24cddf930c9cf59776"
+    },
+    {
+      "path": "data/nln_emp/metadata/Appendices/Other/measurement overview.xlsx",
+      "bytes": 24268,
+      "sha256": "3801d821f13d80d7bb8c6b86ce01d9f953732b520979bb4a12dabff1e00c8b76"
+    }
+  ]
+}

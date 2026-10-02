@@ -1,0 +1,23 @@
+① sensitivity scan of within-burst differences (share on LSB/S lattice, tol 0.05 counts)
+   normal   AI0_Vibration: best S = 0.1050 V/g share 0.816 | top3 [(0.105, 0.816), (0.09, 0.128), (0.12, 0.108)] | jitter control 0.102 | n diffs 19399
+   normal   AI1_Vibration: best S = 0.1050 V/g share 0.813 | top3 [(0.105, 0.813), (0.09, 0.126), (0.12, 0.106)] | jitter control 0.102 | n diffs 19398
+   abnormal AI0_Vibration: best S = 0.1080 V/g share 1.000 | top3 [(0.108, 1.0), (0.09, 0.152), (0.092, 0.126)] | jitter control 0.092 | n diffs 579
+   abnormal AI1_Vibration: best S = 0.1030 V/g share 1.000 | top3 [(0.103, 1.0), (0.118, 0.119), (0.1105, 0.119)] | jitter control 0.090 | n diffs 579
+   normal   AI0_Vibration: |burst mean| median 1.01e-03 g, p90 1.69e-02; file mean -0.0001
+   normal   AI1_Vibration: |burst mean| median 1.02e-03 g, p90 1.15e-02; file mean -0.0001
+   abnormal AI0_Vibration: |burst mean| median 4.46e-02 g, p90 8.40e-02; file mean +0.0076
+   abnormal AI1_Vibration: |burst mean| median 3.60e-02 g, p90 7.69e-02; file mean -0.0081
+
+② guidebook test windows: normal 4000 (rows 15880–19898), abnormal 180 (rows 300–498); all-normal accuracy 0.9569 (whole-file row ratio 0.9709)
+   threshold 0.3517 | window own 20 rows              : TP 125 FP 0 FN  55 F1 0.820
+   threshold 0.3517 | burst decision (atomic snapshot): TP 180 FP 0 FN   0 F1 1.000
+   threshold 0.3517 | last row of window only         : TP  50 FP 0 FN 130 F1 0.435
+   abnormal bursts over threshold 18/21; under-threshold bursts (id, first row, last row): [(3, 101, 131), (19, 575, 584), (20, 585, 599)]
+
+③ loaded-burst residual (AI1) 10-min block medians: [-0.097, -0.016, 0.014, 0.032, 0.039, 0.061] | strictly increasing: True | exact one-sided permutation p for a perfectly increasing order of 6 blocks = 1/720 = 0.0014
+   lag-1 autocorrelation of residual series (time order) 0.26
+
+④ rules after vibration alignment (burst-mean removal; abnormal also rescaled to the 105 mV/g convention: upper x0.108/0.105, lower x0.103/0.105)
+   raw (as exported)                 : one-line rule 18/21 (thr 0.3517) | upper-RMS envelope rule abnormal 14/17, normal 40-77 min 0/251
+   burst-mean removed                : one-line rule 18/21 (thr 0.3333) | upper-RMS envelope rule abnormal 14/17, normal 40-77 min 0/251
+   mean removed + abnormal rescaled  : one-line rule 18/21 (thr 0.3333) | upper-RMS envelope rule abnormal 14/17, normal 40-77 min 0/251

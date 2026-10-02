@@ -1,0 +1,163 @@
+{
+  "base_commit": "b9dd7bd68c1c23265d3816fbc1878cfab9dab42c",
+  "recorded_at_utc": "2026-10-02T17:22:45.056226+00:00",
+  "scope": "Input plan and audit dependency inventory. Hashing a research document does not mean every citation in it was revalidated. See source_receipts.json for actual new source access.",
+  "new_work_scope": "Plan synthesis, primary-source checks, acquisition and structural audits; no new detector fitting or contest report.",
+  "input_files": [
+    {
+      "path": "yejun/plans/press_unified_2026-10-02/01_comparison.md",
+      "bytes": 19720,
+      "sha256": "68e5cc5890d5444d3dde7cae7859c120e5a080e998867d534e5a767fc2bf2923"
+    },
+    {
+      "path": "yejun/plans/press_unified_2026-10-02/02_protocol.md",
+      "bytes": 30125,
+      "sha256": "ea0a070e032c7c20ac77e3524966bea604fa6a9200f3d148d6752c81c7a0e20e"
+    },
+    {
+      "path": "yejun/plans/press_unified_2026-10-02/03_sources.md",
+      "bytes": 12812,
+      "sha256": "222d614fa2350f5163a5e0de3957de5c24d1bfcc568421f1ffa3f1f9592cea0b"
+    },
+    {
+      "path": "yejun/plans/press_unified_2026-10-02/04_execution.md",
+      "bytes": 10901,
+      "sha256": "1e8ee42124fe44f1ac9406c3bdd74d4ed6808f2f2628e9740e9672cde5187492"
+    },
+    {
+      "path": "yejun/plans/press_unified_2026-10-02/README.md",
+      "bytes": 17431,
+      "sha256": "5d6286ccdec302e32d8fab46f3dfb52a331b884c6b6ffdab3cf913519bdd91ea"
+    },
+    {
+      "path": "yejun/plans/press_plan_merged_2026-10-02/01_comparison.md",
+      "bytes": 14750,
+      "sha256": "390dead38b6899bb3289935f2846f9f59f35fe2b3a5b54cbfab7924b780c69b4"
+    },
+    {
+      "path": "yejun/plans/press_plan_merged_2026-10-02/02_merged_plan.md",
+      "bytes": 45382,
+      "sha256": "047453ea8f468de2570b3fb5b8bec55b182a544d499240e4a156691ed4b385a0"
+    },
+    {
+      "path": "yejun/plans/press_plan_merged_2026-10-02/03_execution.md",
+      "bytes": 23813,
+      "sha256": "b27dd14ff39811c130b0a2c9899d2b79ee05c55f785edaf18acff4aca15b1408"
+    },
+    {
+      "path": "yejun/plans/press_plan_merged_2026-10-02/04_sources_merged.md",
+      "bytes": 19408,
+      "sha256": "d15fdd3966cbfac5735c34d88535abb3197b4b50f153e9047dc16455ce27a76a"
+    },
+    {
+      "path": "yejun/plans/press_plan_merged_2026-10-02/README.md",
+      "bytes": 6982,
+      "sha256": "f708dad946d5b4ea2223063433c7b106fc8757105d59a6401006635127804085"
+    },
+    {
+      "path": "yejun/plans/press_research_2026-10-01/01_sources_and_data.md",
+      "bytes": 35105,
+      "sha256": "b90d27dc2a6f397792060826b21533aadbdc15a919c098df5638416af5b299cd"
+    },
+    {
+      "path": "yejun/plans/press_research_2026-10-01/02_research_options.md",
+      "bytes": 24848,
+      "sha256": "a596160d348fc198a5dea3551d8ab797ff7bd4d7d45b81a5babdc5485c7d54cf"
+    },
+    {
+      "path": "yejun/plans/press_research_2026-10-01/03_validation_and_execution_plan.md",
+      "bytes": 26807,
+      "sha256": "d056c97d9c59f69a99447a98d33a1c14cafd736a6d3f653cfe760103d0a6aebf"
+    },
+    {
+      "path": "yejun/plans/press_research_2026-10-01/04_augmentation_plan.md",
+      "bytes": 19193,
+      "sha256": "d31e066dd1500eaa4c33b963b81d601712df6f897a1eca26c2020d8daa87154c"
+    },
+    {
+      "path": "yejun/plans/press_research_2026-10-01/README.md",
+      "bytes": 20569,
+      "sha256": "43d00682a813158d22ab220a8ca4da1d69a7e8ab61a67e09cb6089c2476fab19"
+    },
+    {
+      "path": "yejun/plans/press_research_claude_2026-10-01/01_data_diagnosis.md",
+      "bytes": 29976,
+      "sha256": "da75c6ffb3b483fbd220d0fa40f356cd9e59a399d85307c2ab082e67a228bfd4"
+    },
+    {
+      "path": "yejun/plans/press_research_claude_2026-10-01/02_research_sources.md",
+      "bytes": 97232,
+      "sha256": "55b3f273582d10c95980b29cc9ffb508e432608d6c67b9c1286bef272fe03a88"
+    },
+    {
+      "path": "yejun/plans/press_research_claude_2026-10-01/03_approach_options.md",
+      "bytes": 16985,
+      "sha256": "fd2e9085a40c9192d36f71e8d1a7727afa56794142ad6f0104d23e9fa63d6e9b"
+    },
+    {
+      "path": "yejun/plans/press_research_claude_2026-10-01/04_evaluation_protocol.md",
+      "bytes": 20211,
+      "sha256": "d2d40511be03e3dc89f532b1e6b49856a9e32a54fac0af9a334e88b8011abc60"
+    },
+    {
+      "path": "yejun/plans/press_research_claude_2026-10-01/05_execution_plan.md",
+      "bytes": 13122,
+      "sha256": "4bbf7802c280204ea7ced0a239903505dd811e3261dbbbd1cd01677a6a526866"
+    },
+    {
+      "path": "yejun/plans/press_research_claude_2026-10-01/06_review_response.md",
+      "bytes": 10704,
+      "sha256": "196a83a90cf000b52505da4247fa9d5c7d9b06d52032d700e98996cf2f61ea80"
+    },
+    {
+      "path": "yejun/plans/press_research_claude_2026-10-01/README.md",
+      "bytes": 9543,
+      "sha256": "d5ed4da5f104f47ece64708492f24a91f9ceec97a92f2779b3846ac31f48b7b9"
+    },
+    {
+      "path": "yejun/AGENTS.md",
+      "bytes": 6082,
+      "sha256": "0fe3e76f27fc9a886ec0d566548b734f77ec3a65639c9fd5631ef6bc9879613c"
+    },
+    {
+      "path": "yejun/plans/press_unified_2026-10-02/evidence/skab_split_reservation.json",
+      "bytes": 5004,
+      "sha256": "5f51d4631898cdaaf1c8e58a27917edbf97f6ec7223a6e78ada9d77b02505f88"
+    },
+    {
+      "path": "yejun/plans/press_research_claude_2026-10-01/sources/R2_datasets_licensing.md",
+      "bytes": 67277,
+      "sha256": "901d321f4fc2b550cbf3dc1243675d26edaa7804fa644af3d45c3d2313e2d2fa"
+    },
+    {
+      "path": "yejun/plans/press_plan_merged_2026-10-02/eda/check_judge_findings.py",
+      "bytes": 6897,
+      "sha256": "d6320587a7efa0a36af3e8bbb6d2d9624c4c72aa5ea0e08922c1fc86b77896bd"
+    },
+    {
+      "path": "yejun/plans/press_research_claude_2026-10-01/eda/eda_facts.py",
+      "bytes": 6767,
+      "sha256": "b8f79800eda63c0f2789334e1c9f25ed16de9d787957ab045896f94bf0d25306"
+    },
+    {
+      "path": "yejun/plans/press_research_claude_2026-10-01/eda/fastsine.py",
+      "bytes": 1016,
+      "sha256": "5aed540321bfe72259ba3d2118aeb79e615bfd82535a23c6d42e90c057c828d5"
+    },
+    {
+      "path": "yejun/analysis/press_rubric_review/official_task_extract.txt",
+      "bytes": 8638,
+      "sha256": "aa261ea7e01f3ae5c363d74b93f05846f5a8f26376d8b51eef359b6fd3b6ee76"
+    },
+    {
+      "path": "yejun/analysis/press_external/acquisition.json",
+      "bytes": 2536,
+      "sha256": "3d8b5488c36f5d2a07bd9b0adeffee0034f514d55b130e10206dbe20e4318cd1"
+    },
+    {
+      "path": "yejun/analysis/press_external/partitions.csv",
+      "bytes": 111700,
+      "sha256": "f52dbba5e63d654103d634aa638b43ce368582972d1767fdcd13681ad7c6aa6c"
+    }
+  ]
+}

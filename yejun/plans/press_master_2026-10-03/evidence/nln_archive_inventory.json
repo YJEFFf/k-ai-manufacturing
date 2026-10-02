@@ -1,0 +1,335 @@
+{
+  "source": "https://data.4tu.nl/file/2b61183e-c14f-4131-829b-cc4822c369d0/8d84b13f-98f7-4baf-a7ea-60dee1e8876f",
+  "doi": "10.4121/2b61183e-c14f-4131-829b-cc4822c369d0.v4",
+  "scope": "Range-fetched directory only; sensor archive not acquired",
+  "archive_bytes": 20803099256,
+  "solid": true,
+  "blocks": 3,
+  "uncompressed": 20812722100,
+  "files": [
+    {
+      "name": "Appendices",
+      "uncompressed": 0,
+      "compressed": 0,
+      "is_directory": true
+    },
+    {
+      "name": "Appendices/Other",
+      "uncompressed": 0,
+      "compressed": 0,
+      "is_directory": true
+    },
+    {
+      "name": "Appendices/Other/Datasheets",
+      "uncompressed": 0,
+      "compressed": 0,
+      "is_directory": true
+    },
+    {
+      "name": "Appendices/Reports",
+      "uncompressed": 0,
+      "compressed": 0,
+      "is_directory": true
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports",
+      "uncompressed": 0,
+      "compressed": 0,
+      "is_directory": true
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 2",
+      "uncompressed": 0,
+      "compressed": 0,
+      "is_directory": true
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 4",
+      "uncompressed": 0,
+      "compressed": 0,
+      "is_directory": true
+    },
+    {
+      "name": "Appendices/Reports/Balance reports",
+      "uncompressed": 0,
+      "compressed": 0,
+      "is_directory": true
+    },
+    {
+      "name": "Dataset",
+      "uncompressed": 0,
+      "compressed": 0,
+      "is_directory": true
+    },
+    {
+      "name": "Appendices/Other/Datasheets/Motor_MG160MA_datasheet.pdf",
+      "uncompressed": 1393629,
+      "compressed": 5159648,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Other/Datasheets/Motor_MG180MB_datasheet.pdf",
+      "uncompressed": 736171,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Other/Datasheets/Pump_NK80-160_datasheet.pdf",
+      "uncompressed": 813331,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Other/Datasheets/Pump_NK80-250_datasheet.pdf",
+      "uncompressed": 808178,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Other/measurement overview.xlsx",
+      "uncompressed": 24268,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 2/Nr 1 - Motor 2 Heatlhy 1  7-7-20 10.22.04.pdf",
+      "uncompressed": 390600,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 2/Nr 10 - Motor 2 bearing contaminated 27-7-20 15.06.58.pdf",
+      "uncompressed": 315461,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 2/Nr 11 - Motor 2 BSF 29-7-20 12.55.57.pdf",
+      "uncompressed": 322235,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 2/Nr 12 - Motor 2 Soft-foot 1 29-7-20 16.46.59.pdf",
+      "uncompressed": 483642,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 2/Nr 13 - Motor 2 Soft-foot 2 30-7-20 9.57.31.pdf",
+      "uncompressed": 335029,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 2/Nr 14 - Motor 2 After Soft-foot 30-7-20 12.10.30.pdf",
+      "uncompressed": 324313,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 2/Nr 15 - Motor 2 Loose foot pump 30-7-20 14..pdf",
+      "uncompressed": 317478,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 2/Nr 16 - Motor 2 Broken rotor bar 3-8-20 12.10.56.pdf",
+      "uncompressed": 336366,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 2/Nr 17 - Motor 2 Winding short 4-8-20 10.34.33.pdf",
+      "uncompressed": 334239,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 2/Nr 18 - Motor 2 Original motor back 5-8-20.pdf",
+      "uncompressed": 379197,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 2/Nr 2 - Motor 2 Impeller 1 15-07-20 14.01.42.pdf",
+      "uncompressed": 328690,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 2/Nr 3 - Motor 2 Impeller 2 16-7-20 10.26.37.pdf",
+      "uncompressed": 357339,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 2/Nr 4 - Motor 2 Impeller 3 20-7-20 8.27.59.pdf",
+      "uncompressed": 355907,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 2/Nr 5 - Motor 2 BPFO 1 1 20-7-20 13.48.37.pdf",
+      "uncompressed": 331363,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 2/Nr 6 - Motor 2 BPFO 3 21-7-20 13.19.04.pdf",
+      "uncompressed": 319368,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 2/Nr 7 - Motor 2 BPFI 1 27-7-20 8.30.35.pdf",
+      "uncompressed": 318993,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 2/Nr 8 - Motor 2 BPFI 2 27-7-20 11.11.53.pdf",
+      "uncompressed": 316052,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 2/Nr 9 - Motor 2 BPFI 3 27-7-20 13.15.23.pdf",
+      "uncompressed": 314632,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 4/Nr 1 - Motor 4 Healthy 1 14-7-20 15.26.36.pdf",
+      "uncompressed": 317871,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 4/Nr 10 - Motor 4 Parallel 4 27-7-20 8.45.19.pdf",
+      "uncompressed": 329914,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 4/Nr 11 - Motor 4 Combination 4 27-7-20 10.22.42.pdf",
+      "uncompressed": 331686,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 4/Nr 12 - Motor 4 Combination 3 27-7-20 12.53.29.pdf",
+      "uncompressed": 333212,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 4/Nr 13 - Motor 4 Combination 2 27-7-20 13.23.01.pdf",
+      "uncompressed": 329911,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 4/Nr 14 - Motor 4 Combination 1 27-7-20 14.37.10.pdf",
+      "uncompressed": 337962,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 4/Nr 15 - Motor 4 Unbalance 27-7-20 15.44.20.pdf",
+      "uncompressed": 332047,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 4/Nr 16 - Motor 4 Cavitation 30-7-20 13.27.55.pdf",
+      "uncompressed": 317484,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 4/Nr 17 - Motor 4 Original motor 4-8-20.pdf",
+      "uncompressed": 327719,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 4/Nr 2 - Motor 4 Angular 1 16-7-20 13.21.31.pdf",
+      "uncompressed": 438194,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 4/Nr 3 - Motor 4 Angular 2 16-7-20 15.12.14.pdf",
+      "uncompressed": 408381,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 4/Nr 4 - Motor 4 Angular 3 20-7-20 9.50.31.pdf",
+      "uncompressed": 408712,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 4/Nr 5 - Motor 4 Angular 4 20-7-20 11.23.30.pdf",
+      "uncompressed": 565246,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 4/Nr 6 - Motor 4 Angular 5 20-7-20 14.32.54.pdf",
+      "uncompressed": 338099,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 4/Nr 7 - Motor 4 Parallel 1 21-7-20 11.12.44.pdf",
+      "uncompressed": 326020,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 4/Nr 8 - Motor 4 Parallel 2 21-7-20 13.37.23.pdf",
+      "uncompressed": 318748,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Alignment reports/Motor 4/Nr 9 - Motor 4 Parallel 3 21-7-20 14.59.21.pdf",
+      "uncompressed": 318614,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Balance reports/Balance Impeller 1.pdf",
+      "uncompressed": 11341,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Balance reports/Balance Impeller 2.pdf",
+      "uncompressed": 11323,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Appendices/Reports/Balance reports/Balance Impeller 3.pdf",
+      "uncompressed": 11329,
+      "compressed": null,
+      "is_directory": false
+    },
+    {
+      "name": "Dataset/Dataset.7z",
+      "uncompressed": 20796649281,
+      "compressed": 20797936891,
+      "is_directory": false
+    },
+    {
+      "name": "README.txt",
+      "uncompressed": 2525,
+      "compressed": 1171,
+      "is_directory": false
+    }
+  ]
+}
