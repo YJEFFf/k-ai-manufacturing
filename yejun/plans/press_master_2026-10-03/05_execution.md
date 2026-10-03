@@ -18,19 +18,29 @@ python3.12 -m venv /tmp/press-master-audit
 
 [실행 기록](evidence/audit_run.json)은 실제 환경·실행한 단계·반환값을, [검증 기록](evidence/verification.json)은 문서 링크·설정·분할·수치·해시 검사를 보관한다. [입력 계보](evidence/provenance.json)는 비교한 문서와 재계산 의존 파일의 기준 커밋·SHA-256을 고정한다. 이 검사를 모두 통과해도 새 탐지 모델의 성능 검증을 통과했다는 뜻은 아니다.
 
+## 실행 전 명세 검사
+
+이번 후속 설계는 실제 센서값으로 새 성능을 계산하지 않고 문서·JSON·수식의 가상 입력 반례를 검사했다. 다음 명령은 위에서 준비한 같은 환경을 사용하며 정상 cal이나 외부 test를 열지 않는다.
+
+```sh
+/tmp/press-master-audit/bin/python yejun/plans/press_master_2026-10-03/scripts/verify_plan_contracts.py
+```
+
+[설계 검사 결과](evidence/plan_contract_verification.json)는 입력 문서·설정·검사 코드의 해시와 통과/실패를 기록한다. [검토 기록](evidence/plan_review.json)은 발견한 설계 공백과 처리 위치를 연결한다. 이 검사가 통과해도 K1·증강·운영 정책의 실제 성능 통과로 바꾸지 않는다. 제품 구현 후에는 이 명세의 가상 반례를 실제 구현 함수에도 적용해야 한다.
+
 ## 구현 위치와 계약
 
-새 구현 위치는 `yejun/press_v3/`로 정한다. 기존 `press_guard`·`press_submission`의 결과와 인터페이스를 보존하고 비교 어댑터로 재사용한다. 공용 원본과 `claude/`는 읽기 전용이다. 설정은 이번 [protocol.json](protocol.json)을 복사해 버전·해시를 연결한다. 이후 변경은 변경 이유·결과 열람 여부·시험의 개발 전환 여부를 기록한다.
+새 구현 위치는 `yejun/press_v3/`로 정한다. 기존 `press_guard`·`press_submission`은 참고 이력이며 현재 제품으로 복귀하지 않는다. 공용 원본과 `claude/`는 읽기 전용이다. 설정은 원래 [protocol.json](protocol.json) 해시와 현재 [execution_contracts.json](execution_contracts.json)을 연결한다. [08 명세](08_execution_contracts.md)가 후속 수식·정책·예외 처리의 기준이다. 이후 변경은 이유·결과 열람 여부·시험의 개발 전환 여부를 기록한다.
 
 | 모듈 | 책임 | 핵심 산출물 |
 |---|---|---|
 | data | 해시, 원행 대응, 중복, 기록 경계, 시각·품질 상태 | input_manifest, record_map, exclusions |
 | features | AC 특징, 조건 대리값, 미정의·길이 처리 | feature_schema, fitted_preprocessing |
-| models | B1/B2/B3/C1/C2/O1, 고정 시드 | fitted_model, model_card_facts |
+| models | B1/C1d1 참조, K1, kNN A0/A1/A2, 고정 시드 | fitted_model, model_card_facts |
 | calibration | 실제 정상 순위, 별도 라벨/합성 확률 | calibration_ids, score_reference, probability_definition |
 | augment | 부모 계보, crop·잔차·주입 | augmentation_manifest, rejected_generations |
 | policy | 즉시 요청, 지속성, 공백·해제·유보 | request_log, policy_definition |
-| external | SKAB 그룹, Beihang 시간축, ESPset ID, UCI 회귀 | source_use_manifest, external_splits |
+| external | SKAB 그룹과 두 구조, 조건부 K1, Beihang 보조 | source_use_manifest, external_splits |
 | evaluate | 같은 시점의 지표, 조건별 오류, 선택 규칙 | model_comparison, family_curves, selection_record |
 | reproduce | 환경·버전·실행·검증 연결 | run_manifest, reproduction_summary |
 
@@ -54,7 +64,7 @@ python3.12 -m venv /tmp/press-master-audit
 
 ### 증강과 오류 분석
 
-현재 수행한 주입은 평가용 스트레스다. 정상 학습 증강은 A0/A1 반복 계약과 A2 crop부터 실행한다. A3 잔차와 O1 합성 노출은 추가 근거가 있을 때의 확대 항목이다. 개발 결과를 보고 성공 조건을 바꾸지 않는다. 각 실험은 실제 정상 요청·개발 POD·손실 셀·실행비용을 함께 남긴다. 보류 계열은 선택 후 열어 감사한다.
+현재 수행한 주입은 평가용 스트레스다. 정상 학습 증강은 A0/A1 반복 계약과 A2 crop만 실행한다. A3 잔차와 O1 합성 노출은 현재 범위에서 제외한다. 개발 결과를 보고 성공 조건을 바꾸지 않는다. 각 실험은 실제 정상 요청·개발 POD·손실 셀·실행비용을 함께 남긴다. 보류 계열은 동결 후 열어 감사하며 통과 후보가 없어도 고정 참조의 반응 범위는 남긴다.
 
 필수 오류 표는 시간 구간×전류 조건, 길이×조건화 가능 여부, 진동 방향×전류 변화, 품질 요청×기계 근거 요청이다. 전류 조건과 진동의 상호작용은 조건부 잔차와 전역 잔차의 차이로 먼저 설명한다. GBM이 채택되면 지원 범위 안의 2원 반응을 보조로 제시하되 서로 상관된 조건의 불가능한 조합을 인과 효과처럼 해석하지 않는다.
 
@@ -64,9 +74,9 @@ python3.12 -m venv /tmp/press-master-audit
 
 외부 주 검증은 SKAB의 수정 그룹 분할이다. fit/dev/cal 어댑터와 두 구조 대조를 다음 필수 작업으로 앞당겼다. 새 회차 검증이 데이터 부족을 보완하는 핵심이기 때문이다. 후보·특징 대응·정책은 dev에서 정하고, 실제 정상 cal로 보정한 뒤 test를 한 번 공개한다. 프레스에서 아직 최종 후보가 채택되지 않았다는 사실을 유지한다.
 
-다음 순서는 Beihang의 진동·속도 조건 실험, ESPset의 펌프 ID 보조 검증이다. 서로 다른 표현에서 같은 가중치를 썼다고 하지 않는다. 외부 데이터별 구조에 맞춘 재적합 절차의 비교다. 모델 하나의 모든 분야 우승을 요구하지 않고 어느 조건에서 실패하는지 보존한다.
+Beihang의 진동·속도 조건 실험은 08의 고정한 보조 명세로 진행한다. ESPset의 추가 모델 검증은 현재 실행 범위 밖이며 파일·ID 예약만 보존한다. 외부에서는 자료별 구조에 맞춘 재적합 절차를 비교하며 같은 가중치를 전이했다고 하지 않는다. 어느 조건에서 실패하는지 보존한다.
 
-기존 UCI는 누설·냉각 조건 실패를 재현하는 회귀 분석이다. 새 외부 실험이 실패했다고 UCI로 이름만 바꿔 성공 외부 시험으로 대체하지 않는다. 접근·주석·이용 조건 때문에 외부 실행이 막히면 그 데이터의 질문만 미완료로 표시하고 다른 자료의 완료 상태를 분리한다.
+기존 UCI 결과는 누설·냉각 조건 실패의 참고 이력이고 이번에는 추가 모델을 실행하지 않는다. SKAB 실패를 UCI 성공으로 대체하지 않는다. 접근·주석·이용 조건 때문에 외부 실행이 막히면 그 자료의 질문만 미완료로 표시한다.
 
 ### 운영 연결과 재현
 

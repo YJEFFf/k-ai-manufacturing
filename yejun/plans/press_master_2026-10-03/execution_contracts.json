@@ -1,0 +1,562 @@
+{
+  "version": "press-execution-contracts-2026-10-03-r3",
+  "status": "design_frozen_before_future_execution_not_performance_validated",
+  "basis_commit": "2e1ce59611aed5604eb4aaef50a3d3dcf58c67a2",
+  "authoritative_document": "08_execution_contracts.md",
+  "original_protocol_sha256": "daedfe0705d0a2f0d12fced334e195c4c3643a095e92d9c88f766fd398ad38b8",
+  "historical_disambiguation": "../../analysis/press_master_validation_2026-10-03/design_v1.json",
+  "original_admission_thresholds_changed": false,
+  "data_access": {
+    "press_P2": "already explored retrospective audit",
+    "press_abnormal": "one already explored episode",
+    "SKAB_test_model_performance": "sealed until freeze",
+    "H1_H2": "not generated until freeze",
+    "new_performance_computed_in_design_revision": false,
+    "synthetic_contract_checks": "small invented arrays only"
+  },
+  "stages": [
+    {
+      "id": "E1",
+      "depends_on": [],
+      "action": "SKAB fit/dev/cal G and C",
+      "success": "input and evaluation contracts, dev tables including failures"
+    },
+    {
+      "id": "E2",
+      "depends_on": [
+        "E1"
+      ],
+      "action": "B1/C1d1/K1 press development",
+      "success": "unchanged admission and loss results or explicit unsupported result"
+    },
+    {
+      "id": "E3",
+      "depends_on": [
+        "E2"
+      ],
+      "action": "A0/A1/A2 press development",
+      "success": "two ratios and all seeds, parent and identity checks"
+    },
+    {
+      "id": "E4",
+      "depends_on": [
+        "E3"
+      ],
+      "action": "candidate selection, probability, operational development",
+      "success": "candidate or null and full policy decisions"
+    },
+    {
+      "id": "E5",
+      "depends_on": [
+        "E4"
+      ],
+      "action": "frozen H1/H2 and SKAB test",
+      "success": "all frozen references and selected candidates including failed results"
+    },
+    {
+      "id": "E6",
+      "depends_on": [
+        "E5"
+      ],
+      "action": "cold reproduction and claim audit",
+      "success": "calculation and model qualification reported separately"
+    }
+  ],
+  "budget": {
+    "new_score_calibration_candidates": [
+      "K1"
+    ],
+    "normal_augmentation_ratios": [
+      0.5,
+      1
+    ],
+    "seeds": [
+      11,
+      29,
+      47
+    ],
+    "deployment_seed": 11,
+    "skab_required_structures": [
+      "G",
+      "C"
+    ],
+    "skab_optional_structure": "K1 only if press K1 admitted",
+    "skab_max_structures": 3,
+    "policy_candidates": [
+      "I0",
+      "P23"
+    ],
+    "excluded": [
+      "A3",
+      "O1",
+      "EWMA",
+      "new neural models",
+      "new relationship features",
+      "automatic baseline updates",
+      "SKAB crop augmentation",
+      "ESPset model expansion",
+      "UCI model replay",
+      "NLN full sensor download"
+    ]
+  },
+  "K1": {
+    "fit_models": [
+      "B1",
+      "C1d1"
+    ],
+    "changes_length_scaling": false,
+    "changes_score_features": false,
+    "gate": "fit gate AND both conditional vibration residuals and B1/C1 scores finite",
+    "baseline_cal": "all real normal cal with finite B1 scores",
+    "conditional_cal": "real normal cal with g=1",
+    "minimum_conditional_cal": 39,
+    "alpha": [
+      0.05,
+      0.03,
+      0.01
+    ],
+    "conditional_required": "max(39, ceil(1/alpha)-1)",
+    "baseline_required": "ceil(1/alpha)-1",
+    "rank": "(1+count(reference>=query))/(n+1)",
+    "predicate": "p<=alpha",
+    "route": "conditional iff g=1 and conditional cal supported, otherwise exact B1",
+    "union_or_min_of_p": false,
+    "calibration_used_for_fit": false,
+    "primary_supported_in_both_folds_required": true,
+    "overall_alpha_guarantee": false,
+    "guaranteed_contract": "g=0 and finite/alpha-supported B1 implies identical score, p and decision; common unsupported wrapper otherwise",
+    "nonfinite_baseline_query": "unsupported with quality request before rank computation"
+  },
+  "selection": {
+    "reference": "B1",
+    "augmentation_effect_reference": "A0",
+    "historical_failed_candidates_reentered": false,
+    "minimum_normal_reduction": 3,
+    "maximum_ten_minute_increase": 1,
+    "minimum_gain_pp": 10,
+    "minimum_improved_families": 2,
+    "maximum_loss_pp": 5,
+    "minimum_distinct_supported_parents": 20,
+    "augmentation_each_seed_must_pass": true,
+    "indeterminate_cell_passes": false,
+    "rate_tolerance": 1e-10,
+    "eligible_order": [
+      "normal_requests_ascending",
+      "minimum_family_POD_descending",
+      "fixed_complexity_rank",
+      "numeric_state_elements",
+      "reference_bytes",
+      "median_inference_time",
+      "candidate_id_lexical"
+    ],
+    "complexity_rank": {
+      "B1": 0,
+      "A0": 1,
+      "K1": 2,
+      "A2": 3
+    },
+    "cost": {
+      "threads": 1,
+      "warmup_sweeps": 5,
+      "measured_sweeps": 20,
+      "input": "fixed ordered development records",
+      "include_features": true,
+      "include_disk_io": false
+    },
+    "no_candidate": {
+      "selected_candidate": null,
+      "comparison_reference": "B1",
+      "improvement_established": false,
+      "continue_fixed_reference_audits": true,
+      "restore_v2": false
+    },
+    "augmented_normal_order": "exact integer sum across training seeds divided by 3"
+  },
+  "skab": {
+    "reservation": "evidence/skab_group_reservation.json",
+    "conflicts": "evidence/skab_label_consistency.json",
+    "group_counts": {
+      "fit": 14,
+      "dev": 5,
+      "cal": 5,
+      "test": 6
+    },
+    "samples_per_block": 20,
+    "overlap": false,
+    "interval_estimator": "median of fit-group medians of positive timestamp differences",
+    "gap_multiplier": 1.5,
+    "block_anchor": "first observation after every gap",
+    "completion": "last sample arrival",
+    "partial_blocks": "abstain and retain coverage/burden/bounds",
+    "normal_fit_cal": "complete finite all-normal nonconflicting blocks",
+    "features": [
+      "log median V0_RMS",
+      "log median V1_RMS",
+      "log abs(median Current)",
+      "log MAD Current"
+    ],
+    "log_floor_fraction": 1e-06,
+    "center": "median",
+    "scale": [
+      "1.4826 MAD",
+      "IQR/1.349",
+      "omit"
+    ],
+    "conditional_degree": 1,
+    "ridge_mean_loss_penalty": 0.001,
+    "intercept_penalized": false,
+    "minimum_trimmed_fit_parents": 30,
+    "condition_quantiles": [
+      0.01,
+      0.99
+    ],
+    "constant_current_block_is_automatically_error": false,
+    "negative_rms_is_error": true,
+    "calibration_weighting": "one equal weight per pooled real normal cal block",
+    "alpha_guarantee": false,
+    "label_interval": "row min/max observed anomaly; block max lower/max upper; missing or invalid row=(0,1)",
+    "primary_metrics": "unambiguous conflict-free blocks plus full-block bounds",
+    "events": "nonconflicting 0-to-1 onset and contiguous 1 run within same continuous segment",
+    "event_deadline": "last positive raw observation",
+    "late_detection": "separate through first completed block after event",
+    "changepoint": "separate diagnostic, never move annotation",
+    "group_aggregation": [
+      "pooled blocks",
+      "individual groups",
+      "equal group mean with available denominators and exclusions"
+    ],
+    "external_improvement_claim": "no group normal-rate worsening, no lost confirmed event, no common-event latency worsening, at least one strict improvement; undefined required comparison means not_established",
+    "normal_label_exception": {
+      "source_path": "data/anomaly-free/anomaly-free.csv",
+      "sha256": "7641a8742957100ef424dd97adfb3eeab27d4d180645fe2b3c49b7f7146ae9a6",
+      "anomaly": 0,
+      "changepoint": 0,
+      "basis": "pinned data/README normal-mode description; never overrides overlapping conflicting annotation"
+    },
+    "right_censored_event": "known onset eligible for detection by observation-end; report separately from completed events; not eternal missed fault",
+    "left_censored_or_ambiguous_onset": "exclude from new-onset recall, retain counts and observed reaction",
+    "K1_mapping": "use G/C scores and SKAB current-level gate; no press sinusoid gate"
+  },
+  "augmentation": {
+    "learner": "B3 k=5",
+    "groups": [
+      "A0",
+      "A1",
+      "A2"
+    ],
+    "target_children": "floor(r*N_fit)",
+    "crop_lengths": [
+      20,
+      30,
+      40
+    ],
+    "proper_crop": true,
+    "allocation": "balanced among eligible real-fit parents, fixed allocation permutation, no redistribution of failures",
+    "eligible_parent": "at least one candidate crop length strictly less than parent length",
+    "rng": "NumPy PCG64, SHA256 compact ensure_ascii JSON([normal_crop,fold,parent_key,seed]) first 8 bytes little-endian",
+    "ratio_in_rng_key": false,
+    "length_sampling": "uniform over lengths with unselected legal starts",
+    "start_sampling": "uniform over remaining positions",
+    "duplicate_operation_allowed": false,
+    "A1": "full original copies on the corresponding successful A2 parent allocation",
+    "A1_equals_A0_required": true,
+    "scaling": "real fit only; transform children using child length",
+    "calibration": "real cal only",
+    "parent_neighbor_rule": "minimum reference distance per distinct parent, exclude query parent and all children, mean nearest 5 parents",
+    "external_augmentation_claim": false,
+    "training_seeds": [
+      11,
+      29,
+      47
+    ],
+    "evaluation_injection_seeds": [
+      11,
+      29,
+      47
+    ],
+    "seed_crossing": "full 3 training x 3 injection product; same perturbation across training seeds"
+  },
+  "policy": {
+    "raw_model_selection_unit": "one threshold decision per completed record",
+    "alpha": 0.05,
+    "immediate": "I0",
+    "persistence": "P23",
+    "state": [
+      "active",
+      "last at most 3 valid bits",
+      "consecutive negatives"
+    ],
+    "P23_start": "current bit=1 and >=2 positives in last at most 3 valid bits; may trigger on second bit",
+    "I0_start": "current bit=1",
+    "resolve_after_negatives": 2,
+    "clear_history_on_resolve": true,
+    "clock": "decision_available_time",
+    "reset_gap_seconds": 30,
+    "reset_gap_comparison": ">",
+    "gap_close": "previous decision +30 seconds",
+    "EOF": "right censor at last decision",
+    "unsupported": "immediate quality ticket; close mechanical unknown; reset history",
+    "finite_quality_flag": "keep mechanical and quality reasons; at most one new ticket at timestamp",
+    "selectors": {
+      "press": {
+        "minimum_total_normal_ticket_reduction": 1,
+        "normal_counts_nonincreasing_each_fold": true,
+        "occupancy_nonincreasing_each_fold": true,
+        "require_SKAB_G_C_and_active_K1_counterexample_checks": true,
+        "no_lost_I0_detected_event": true,
+        "maximum_extra_valid_decisions": 1,
+        "data": [
+          "P0/P1 real normal",
+          "single-parent D1/D2/D3 L1/L2 replays",
+          "T1",
+          "SKAB dev confirmed events"
+        ],
+        "minimum_usable_events_each_press_fold": 1,
+        "minimum_SKAB_dev_confirmed_event": 1
+      },
+      "skab": {
+        "minimum_total_normal_ticket_reduction": 1,
+        "no_group_count_or_occupancy_or_ambiguous_normal_bound_increase": true,
+        "no_lost_I0_detected_event": true,
+        "maximum_extra_valid_decisions": 1,
+        "minimum_confirmed_event": 1
+      },
+      "ties_or_undefined": "I0"
+    },
+    "field_delay_SLA_claim": false,
+    "primary_external_structural_comparison_policy": "I0",
+    "quality_ticket_duration": "not invented; one ticket at quality decision",
+    "normal_occupancy": "intersection with intervals whose current block is definitely normal; possible-normal upper includes ambiguous labels; calendar proxy only"
+  },
+  "future_injections": {
+    "existing_development_and_loss": "unchanged design_v1, including fit-only scales and all-parent conservative POD",
+    "unsupported_nonzero": "keep full parent denominator, detection=0; supported-only supplementary",
+    "single_parent_policy_deadline": "changed parent decision_available_time",
+    "T1": {
+      "lengths": [
+        20,
+        60
+      ],
+      "amplitudes": [
+        0,
+        0.25,
+        0.5
+      ],
+      "targets": [
+        0,
+        1
+      ],
+      "shape": "preserve DC, AC *= 1+a*j/(L-1)",
+      "windows": "nonoverlapping from evaluation start independently for each L",
+      "gap_limit_seconds": 30,
+      "incomplete_window": "unsupported",
+      "replay": "one changed window in original full stream per scenario",
+      "start": "first sample of second changed record",
+      "deadline": "last changed record decision_available_time",
+      "stochastic": false
+    },
+    "H1": {
+      "fit": "P2 fit only",
+      "parents": "P2 evaluation after freeze",
+      "minimum_n": 20,
+      "fft_n": 512,
+      "power_range": [
+        0.01,
+        0.49
+      ],
+      "fit_tone": "one maximum normalized-mean-power frequency per vibration channel, lowest-frequency tie",
+      "candidate_frequencies": [
+        0.1,
+        0.25,
+        0.4
+      ],
+      "avoid_within": 0.02,
+      "test_all_remaining_frequencies": true,
+      "amplitudes": [
+        0,
+        0.1,
+        0.25,
+        0.5,
+        1
+      ],
+      "seeds": [
+        101,
+        211,
+        307
+      ],
+      "shape": "demeaned seeded-phase sine normalized RMS, existing fit-only reference scale",
+      "phase_distribution": "Uniform[0,2*pi)"
+    },
+    "H2": {
+      "parents": "P2 evaluation after freeze",
+      "minimum_n": 20,
+      "phase_radians": [
+        "0",
+        "-pi/3",
+        "-pi/6",
+        "pi/6",
+        "pi/3"
+      ],
+      "targets": [
+        0,
+        1
+      ],
+      "preserve_DC": true,
+      "preserve_even_Nyquist": true,
+      "rotate_last_bin_when_odd": true,
+      "inverse_length": "original n",
+      "preserves": "AC RMS and Fourier magnitudes, not peak",
+      "minimum_rotatable_energy_fraction": 1e-12,
+      "relative_tolerance": 1e-10,
+      "absolute_tolerance_factor": 1e-12,
+      "stochastic": false,
+      "expected_RMS_only_model_behavior": "invariant score, report negative control rather than new sensitivity",
+      "selection_use": false,
+      "numerical_boundary": "preserve raw prediction, do not count within-tolerance score jitter crossing a tie as new phase sensitivity"
+    },
+    "heldout_rng": "compact ensure_ascii JSON([heldout,P2,parent_key,H1,target,frequency_string,seed]) SHA256 first 8 bytes little-endian -> PCG64; frequency_string in 0.10/0.25/0.40; amplitude excluded"
+  },
+  "probability": {
+    "preserve_original_split_and_objective": true,
+    "selection_before_diagnostic": true,
+    "primary_q": 0.1,
+    "q": [
+      0.01,
+      0.05,
+      0.1,
+      0.2
+    ],
+    "K1_input": "fit-only sC if g else sB, never cal-derived p or cal-dependent route",
+    "normal_threshold_cal_separate_from_main_P2": true,
+    "method": "L-BFGS-B with analytic gradient",
+    "start": "a=0,b=logit(q)",
+    "bounds": "a>=0; b unbounded",
+    "maxiter": 10000,
+    "ftol": 1e-12,
+    "gtol": 1e-08,
+    "projected_gradient_acceptance": 1e-06,
+    "constant_score": "constant q and uninformative",
+    "missing_class": "unsupported with constant-q reference",
+    "optimizer_failure": "explicit failure, not successful calibrated probability",
+    "primary_claim": "100% evaluation support and both q-weighted Brier and log loss strictly better than constant q at q=0.1",
+    "rescue_tuning": false,
+    "models_without_admitted_candidate": [
+      "B1",
+      "C1d1"
+    ],
+    "field_probability_claim": false,
+    "missing_head_score": "exclude with reason, recompute n0/n1 and declared q weights",
+    "missing_evaluation_probability": "null with full denominator and class coverage; supported-only losses on same subset; no overall gain claim unless 100% support",
+    "stable_BCE": "logaddexp(0,eta)-y*eta, no training probability clipping"
+  },
+  "beihang": {
+    "scope": "optional secondary condition evidence, never press reselection",
+    "channels": [
+      "X vibration",
+      "Y vibration",
+      "Z vibration",
+      "Speed"
+    ],
+    "window_seconds": 1,
+    "anchor": "common overlap start for each file",
+    "fit_fractions": [
+      0.6,
+      0.2,
+      0.2
+    ],
+    "boundary_purge": "one window index floor(boundary-t0) at each 60%/80% boundary; whole-role windows only",
+    "interval_fit": "channel-specific median positive interval from first 60%",
+    "gap_multiplier": 1.5,
+    "minimum_samples_per_channel": 2,
+    "features": "log AC RMS each vibration, log abs median speed, log speed MAD",
+    "structures": [
+      "G",
+      "C"
+    ],
+    "condition": "positive speed within fit 1%-99%, degree1 ridge .001, >=30 trimmed parents",
+    "cal": "last 20% Healthy state/1.csv",
+    "test": "Healthy state/2.csv plus nine wear files",
+    "speed_bins": "fit quartiles, merge equal boundaries; outside separate",
+    "natural_failure_onset_claim": false,
+    "common_overlap": "max channel first times to min channel last times",
+    "paired_empty_cells": "exclude only the empty time/value pair as padding with count; one-sided empty is input error; never whole-row dropna"
+  },
+  "artifacts": {
+    "freeze_required": [
+      "input_hashes",
+      "split_and_conflict_hashes",
+      "protocol_hashes",
+      "code_environment_hashes",
+      "fitted_state_and_calibration",
+      "selected_candidate_or_null",
+      "comparators",
+      "augmentation_lineage_seed_ratio",
+      "alpha_and_policy",
+      "label_event_denominator_rules",
+      "heldout_generators_and_seeds",
+      "evaluation_model_list",
+      "claim_rules"
+    ],
+    "required_outputs": [
+      "input_manifest",
+      "record_map",
+      "fitted_state",
+      "predictions",
+      "request_log",
+      "event_table",
+      "selection_record",
+      "result_tables",
+      "source_use_manifest",
+      "run_manifest"
+    ],
+    "performance_test_candidate_reselection": false,
+    "freeze_test_models_press": [
+      "B1",
+      "C1d1",
+      "selected candidate if present, deduplicated"
+    ],
+    "freeze_test_models_SKAB": [
+      "G",
+      "C",
+      "K1 only if press K1 admitted"
+    ],
+    "cache_keys": [
+      "input",
+      "code",
+      "current_contract",
+      "parent_lineage",
+      "environment",
+      "seed"
+    ],
+    "reloading_required": true,
+    "cold_reproduction_required": true,
+    "same_environment_aggregate_comparison": "exact",
+    "cross_backend_score_rtol": 1e-10,
+    "cross_backend_score_atol": 1e-12,
+    "decision_difference_allowed": false,
+    "public_git_raw_data": false,
+    "report_and_slides_authorized": false
+  },
+  "completion_states": {
+    "design_closed": true,
+    "implementation_complete": false,
+    "candidate_admitted": false,
+    "external_evaluated": false,
+    "field_validated": false
+  },
+  "numerics": {
+    "dtype": "float64",
+    "ddof": 0,
+    "quantile_method": "linear",
+    "rank_rounding": false,
+    "nonfinite_json": "null plus reason code",
+    "constant_regressor_std_divisor": 1
+  },
+  "input_quality": {
+    "parse_time_conflict_nonfinite": "fail affected capture numeric evaluation; preserve rows and incomplete denominators",
+    "exact_duplicate": "deduplicate only equal timestamp and all numeric sensors",
+    "short_finite_record": "partial features or abstain, never drop",
+    "press_flat": "n>=2 and an exactly constant channel, keep other finite score",
+    "physical_clipping_claim": false
+  }
+}

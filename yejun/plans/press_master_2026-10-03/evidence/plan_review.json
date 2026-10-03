@@ -1,0 +1,428 @@
+{
+  "version": "press-plan-review-2026-10-03-r3",
+  "basis_commit": "2e1ce59611aed5604eb4aaef50a3d3dcf58c67a2",
+  "reviewer": "Codex single-author review; no independent-agent consensus claimed",
+  "scope": "All master plan prose and numeric contracts, historical disambiguations and aggregate outcomes; no new data performance",
+  "source_files_reviewed": [
+    "README.md",
+    "01_comparison.md",
+    "02_protocol.md",
+    "03_data_sources.md",
+    "04_augmentation.md",
+    "05_execution.md",
+    "06_review.md",
+    "07_validation_revision.md",
+    "08_execution_contracts.md",
+    "protocol.json",
+    "execution_revision.json",
+    "execution_contracts.json",
+    "../../analysis/press_master_validation_2026-10-03/design_v1.json",
+    "../../analysis/press_master_validation_2026-10-03/design_v2.json"
+  ],
+  "passes": [
+    "authority and completed-state consistency",
+    "equations, support and invariants",
+    "split, labels, events and denominators",
+    "augmentation, RNG, duplicates and failure branches",
+    "candidate/policy selection, ties and no-candidate path",
+    "freeze, fitted artifact and reproduction contracts"
+  ],
+  "findings": [
+    {
+      "id": "P01",
+      "issue": "추가 보정법이 미정",
+      "status": "resolved_in_design",
+      "resolution": "K1 수식·게이트·CB/CC·표본 부족과 적합 역할을 고정했다.",
+      "document": "08_execution_contracts.md",
+      "section": "K1 조건 불가 판정을 유지하는 보정 대조"
+    },
+    {
+      "id": "P02",
+      "issue": "운영 정책의 채택 규칙이 불완전",
+      "status": "resolved_in_design",
+      "resolution": "정상 티켓 감소·점유·기존 탐지 보존·추가 1판정·판단 불가 처리를 고정했다.",
+      "document": "08_execution_contracts.md",
+      "section": "알림 정책과 선택 규칙"
+    },
+    {
+      "id": "P03",
+      "issue": "06 서두가 구현 미실행으로 남음",
+      "status": "resolved_in_design",
+      "resolution": "13설정 실행과 새 후보 12개 탈락, 남은 미실행 범위를 일치시켰다.",
+      "document": "06_review.md",
+      "section": "06_review.md"
+    },
+    {
+      "id": "P04",
+      "issue": "현재 문서와 원명세의 우선순위",
+      "status": "resolved_in_design",
+      "resolution": "원명세 SHA를 보존하고 현재 순서/세부 계약/상태 파일의 책임을 명시했다.",
+      "document": "08_execution_contracts.md",
+      "section": "기준 문서와 실행 범위"
+    },
+    {
+      "id": "P05",
+      "issue": "C1 주력·v2 필수·외부 4구조 등 낡은 지시",
+      "status": "resolved_in_design",
+      "resolution": "현재 필수·조건부·제외 범위를 01~07 및 README에서 정리했다.",
+      "document": "08_execution_contracts.md",
+      "section": "기준 문서와 실행 범위"
+    },
+    {
+      "id": "P06",
+      "issue": "fallback 점수만 같고 판정이 바뀜",
+      "status": "resolved_in_design",
+      "resolution": "K1 fallback은 동일 B1 점수·정상 참조·p·판정을 사용한다.",
+      "document": "08_execution_contracts.md",
+      "section": "K1 조건 불가 판정을 유지하는 보정 대조"
+    },
+    {
+      "id": "P07",
+      "issue": "희소 조건별 보정의 예외",
+      "status": "resolved_in_design",
+      "resolution": "39와 α 해상도를 모두 요구하고 분할 미지원이면 채택 판단 불가다.",
+      "document": "08_execution_contracts.md",
+      "section": "K1 조건 불가 판정을 유지하는 보정 대조"
+    },
+    {
+      "id": "P08",
+      "issue": "두 5% 경로를 전체 5%로 오해",
+      "status": "resolved_in_design",
+      "resolution": "상호 배타 경로·OR 금지·혼합 오류율 보장 없음으로 고정했다.",
+      "document": "08_execution_contracts.md",
+      "section": "이 방법이 보장하지 않는 것"
+    },
+    {
+      "id": "P09",
+      "issue": "즉시/지속 요청 묶음이 다를 가능성",
+      "status": "resolved_in_design",
+      "resolution": "동일 해제·초기화·티켓 규칙에 시작 조건만 다르게 두었다.",
+      "document": "08_execution_contracts.md",
+      "section": "같은 입력을 받는 두 상태 기계"
+    },
+    {
+      "id": "P10",
+      "issue": "짧은 변화와 사건 종료 뒤 탐지 처리",
+      "status": "resolved_in_design",
+      "resolution": "단발 주입은 원래 전체 스트림에서 하나씩 재생하고 판정 기한을 정했다.",
+      "document": "08_execution_contracts.md",
+      "section": "개발 선택과 현장 적용을 구분"
+    },
+    {
+      "id": "P11",
+      "issue": "공백·품질·종료의 시간 점유",
+      "status": "resolved_in_design",
+      "resolution": "30초 엄격 부등호, 이전 판정 기준 타이머, EOF 검열, 품질과 기계 이유 병기를 정했다.",
+      "document": "08_execution_contracts.md",
+      "section": "같은 입력을 받는 두 상태 기계"
+    },
+    {
+      "id": "P12",
+      "issue": "SKAB 특징·상수 전류·보정 가중치",
+      "status": "resolved_in_design",
+      "resolution": "4 log 특징, 블록 MAD, 음수 RMS, 상수 Current, pooled block 보정을 고정했다.",
+      "document": "08_execution_contracts.md",
+      "section": "SKAB의 블록과 외부 평가"
+    },
+    {
+      "id": "P13",
+      "issue": "라벨 충돌을 단일 정답 또는 단순 삭제로 처리",
+      "status": "resolved_in_design",
+      "resolution": "관측/블록 라벨 범위와 전체 confusion/F1 범위를 식으로 정했다.",
+      "document": "08_execution_contracts.md",
+      "section": "라벨과 사건"
+    },
+    {
+      "id": "P14",
+      "issue": "SKAB 사건 정의와 검열",
+      "status": "resolved_in_design",
+      "resolution": "anomaly 사건과 changepoint를 분리하고 좌/우 검열·기존/늦은 알림을 정했다.",
+      "document": "08_execution_contracts.md",
+      "section": "라벨과 사건"
+    },
+    {
+      "id": "P15",
+      "issue": "긴 외부 파일이 합계 결론을 지배",
+      "status": "resolved_in_design",
+      "resolution": "합산·개별 그룹·동일 그룹 평균과 미정의 분모를 함께 요구했다.",
+      "document": "08_execution_contracts.md",
+      "section": "집계와 외부 결론"
+    },
+    {
+      "id": "P16",
+      "issue": "외부 성공의 의미가 불명확",
+      "status": "resolved_in_design",
+      "resolution": "그룹·사건의 비악화와 엄격 개선, 판단 불가/혼합 결과의 표기를 정했다.",
+      "document": "08_execution_contracts.md",
+      "section": "집계와 외부 결론"
+    },
+    {
+      "id": "P17",
+      "issue": "A2 crop 수·길이·위치·짧은 부모 미정",
+      "status": "resolved_in_design",
+      "resolution": "정수 목표 수, 생성 가능 부모 균형 할당, proper crop, 중복 없는 길이/위치 샘플링을 정했다.",
+      "document": "08_execution_contracts.md",
+      "section": "정상 증강의 완전한 대조"
+    },
+    {
+      "id": "P18",
+      "issue": "A1 대조와 부모 가중치의 과장",
+      "status": "resolved_in_design",
+      "resolution": "같은 부모 배정의 원본 반복, 부모별 최소 거리, A2 기하학적 효과의 잔존을 명시했다.",
+      "document": "08_execution_contracts.md",
+      "section": "정상 증강의 완전한 대조"
+    },
+    {
+      "id": "P19",
+      "issue": "증강 seed 사후 선택",
+      "status": "resolved_in_design",
+      "resolution": "모든 seed의 통과, 평균 요약, 최종 seed 11 고정을 정했다.",
+      "document": "08_execution_contracts.md",
+      "section": "후보 수와 최종 선택"
+    },
+    {
+      "id": "P20",
+      "issue": "실패한 합성 부모가 분모에서 빠질 위험",
+      "status": "resolved_in_design",
+      "resolution": "전체 부모 탐지 0과 지원 부모 전용 보조표를 구분했다.",
+      "document": "08_execution_contracts.md",
+      "section": "아직 만들지 않은 평가 변화의 정의"
+    },
+    {
+      "id": "P21",
+      "issue": "H1 톤 선택·위상·강도 기준 미정",
+      "status": "resolved_in_design",
+      "resolution": "fit-only 512 FFT 톤 규칙, 모든 잔여 후보 주파수, 고정 난수·fit 참조를 정했다.",
+      "document": "08_execution_contracts.md",
+      "section": "H1 다른 협대역 출현"
+    },
+    {
+      "id": "P22",
+      "issue": "H2 실수 FFT·홀수/짝수·진폭 의미",
+      "status": "resolved_in_design",
+      "resolution": "DC/짝수 Nyquist 보존, 홀수 마지막 회전, 원 길이 역변환, RMS와 peak 구분을 정했다.",
+      "document": "08_execution_contracts.md",
+      "section": "H2 위상 변화와 관측 불변성"
+    },
+    {
+      "id": "P23",
+      "issue": "RMS 모델의 H2 민감도를 성과 조건으로 오해",
+      "status": "resolved_in_design",
+      "resolution": "예상된 점수 불변성과 반응 범위 음성 대조로 명시했다.",
+      "document": "08_execution_contracts.md",
+      "section": "H2 위상 변화와 관측 불변성"
+    },
+    {
+      "id": "P24",
+      "issue": "T1 파형·시작·종료·구간 선택 미정",
+      "status": "resolved_in_design",
+      "resolution": "AC 곱셈 ramp, 비중첩 창, 단일 변화 원스트림 재생, 관측 기한을 정했다.",
+      "document": "08_execution_contracts.md",
+      "section": "T1 지속 변화"
+    },
+    {
+      "id": "P25",
+      "issue": "K1 p를 확률 헤드에 넣을 때 미래 cal 사용",
+      "status": "resolved_in_design",
+      "resolution": "헤드 입력은 fit-only raw score이며 cal route/p 사용을 금지했다.",
+      "document": "08_execution_contracts.md",
+      "section": "확률 출력과 선정의 연결"
+    },
+    {
+      "id": "P26",
+      "issue": "0.55 문제의 해결 판정과 최적화 실패 처리",
+      "status": "resolved_in_design",
+      "resolution": "고정 q/목적함수/solver·수렴 검사·상수 대비 두 손실·실패 상태를 정했다.",
+      "document": "08_execution_contracts.md",
+      "section": "확률 출력과 선정의 연결"
+    },
+    {
+      "id": "P27",
+      "issue": "동률의 가정 수·실행비용 정의 미정",
+      "status": "resolved_in_design",
+      "resolution": "복잡도 순위와 상태 크기·동일 CPU 측정·최종 ID 동률 규칙을 정했다.",
+      "document": "08_execution_contracts.md",
+      "section": "후보 수와 최종 선택"
+    },
+    {
+      "id": "P28",
+      "issue": "모든 후보 탈락 시 뒤 시험의 실행 공백",
+      "status": "resolved_in_design",
+      "resolution": "선택 null을 유지한 채 고정 참조의 확률·보류·외부 감사를 완료하게 했다.",
+      "document": "08_execution_contracts.md",
+      "section": "후보 수와 최종 선택"
+    },
+    {
+      "id": "P29",
+      "issue": "Beihang 시간창·경계·특징·조건 기준 미정",
+      "status": "resolved_in_design",
+      "resolution": "두 고정 구조와 공통 시간 범위·창 하나 경계 제외·fit 간격/속도 구간을 정했다.",
+      "document": "08_execution_contracts.md",
+      "section": "Beihang 보조 실행의 경계"
+    },
+    {
+      "id": "P30",
+      "issue": "요약 파라미터를 재로딩 가능한 모델로 오해",
+      "status": "resolved_in_design",
+      "resolution": "fitted_state 필수 값과 체크포인트 재로딩 대조를 명시했다.",
+      "document": "08_execution_contracts.md",
+      "section": "동결 파일과 완료 판정"
+    },
+    {
+      "id": "P31",
+      "issue": "시험 공개·후보 목록·재시도 처리 미정",
+      "status": "resolved_in_design",
+      "resolution": "완전한 동결 manifest, 참조/선택 모델 목록, 버그 수정과 재선택 구분을 정했다.",
+      "document": "08_execution_contracts.md",
+      "section": "동결 파일과 완료 판정"
+    },
+    {
+      "id": "P32",
+      "issue": "실행 가능한 범위와 미정 연구 후보 혼재",
+      "status": "excluded_from_scope",
+      "resolution": "A3/O1/EWMA/관계 특징/ESPset 등은 현재 범위에서 제외했다.",
+      "document": "08_execution_contracts.md",
+      "section": "기준 문서와 실행 범위"
+    },
+    {
+      "id": "P33",
+      "issue": "입력 품질 오류와 짧은 기록의 처리 혼재",
+      "status": "resolved_in_design",
+      "resolution": "수집 계약 실패와 축소 특징/품질 요청을 구분하고 Q1의 검증 범위를 정했다.",
+      "document": "08_execution_contracts.md",
+      "section": "공통 수치와 입력 오류"
+    },
+    {
+      "id": "P34",
+      "issue": "수치 관례·직렬화·확률 반올림 미정",
+      "status": "resolved_in_design",
+      "resolution": "float64·ddof0·linear quantile·순위 부등호·null 사유 코드를 정했다.",
+      "document": "08_execution_contracts.md",
+      "section": "공통 수치와 입력 오류"
+    },
+    {
+      "id": "P35",
+      "issue": "설계 검사와 모델 통과 상태 혼동",
+      "status": "resolved_in_design",
+      "resolution": "설계/구현/후보/외부/현장 상태를 따로 두고 가상 입력 검사 범위를 명시했다.",
+      "document": "08_execution_contracts.md",
+      "section": "동결 파일과 완료 판정"
+    },
+    {
+      "id": "P36",
+      "issue": "SKAB 정상 파일의 라벨 열 부재",
+      "status": "resolved_in_design",
+      "resolution": "고정 경로·해시·원 데이터 설명에 한해 0/0 출처 주석을 부여하며 충돌 마스크는 유지한다.",
+      "document": "08_execution_contracts.md",
+      "section": "라벨과 사건"
+    },
+    {
+      "id": "P37",
+      "issue": "Beihang 정상 패딩과 센서 결측의 혼동",
+      "status": "resolved_in_design",
+      "resolution": "양쪽 빈 시간/값 쌍만 채널별 패딩 제외하고 한쪽 결측은 입력 오류로 둔다.",
+      "document": "08_execution_contracts.md",
+      "section": "Beihang 보조 실행의 경계"
+    },
+    {
+      "id": "P38",
+      "issue": "FFT 수치 동점 해제를 새 민감도로 오해",
+      "status": "resolved_in_design",
+      "resolution": "RMS 모델의 허용오차 이내 점수 차이는 numerical_boundary로 분리한다.",
+      "document": "08_execution_contracts.md",
+      "section": "H2 위상 변화와 관측 불변성"
+    },
+    {
+      "id": "P39",
+      "issue": "우측 검열 사건이 평가에서 전부 빠질 위험",
+      "status": "resolved_in_design",
+      "resolution": "발생이 확정된 사건은 관측 종료까지 탐지를 평가하고 완료 사건과 별도로 집계한다.",
+      "document": "08_execution_contracts.md",
+      "section": "라벨과 사건"
+    },
+    {
+      "id": "P40",
+      "issue": "비유한 질의 점수가 최소 순위가 될 위험",
+      "status": "resolved_in_design",
+      "resolution": "K1은 sB가 비유한이면 순위 계산 전에 유보하며 조건부 점수만 미정의면 유한 B1로 처리한다.",
+      "document": "08_execution_contracts.md",
+      "section": "가설과 고정 수식"
+    },
+    {
+      "id": "P41",
+      "issue": "확률 누락·극단 logit·지원 분모 처리",
+      "status": "resolved_in_design",
+      "resolution": "안정 BCE, 유한 헤드 학습 수, 평가 null과 100% 지원의 이익 판정 조건을 정했다.",
+      "document": "08_execution_contracts.md",
+      "section": "확률 출력과 선정의 연결"
+    },
+    {
+      "id": "P42",
+      "issue": "증강 학습 seed와 평가 주입 seed의 혼동",
+      "status": "resolved_in_design",
+      "resolution": "학습 3판 각각에 공통 평가 주입 3seed를 모두 적용하고 정상 요청 평균은 정수 합/3으로 비교한다.",
+      "document": "08_execution_contracts.md",
+      "section": "후보 수와 최종 선택"
+    }
+  ],
+  "remaining_unknowns": [
+    {
+      "kind": "execution_result",
+      "question": "K1 실제 조건 cal 수와 정상/민감도/손실 기준 통과 여부",
+      "resolution_method": "E2 fixed experiment"
+    },
+    {
+      "kind": "execution_result",
+      "question": "정상 crop 생성 성공률과 모든 seed의 A0/B1 대비 이익",
+      "resolution_method": "E3 fixed comparison"
+    },
+    {
+      "kind": "execution_result",
+      "question": "SKAB·Beihang의 실제 지원률·외부 성능",
+      "resolution_method": "E1/E5 and fixed secondary adapter"
+    },
+    {
+      "kind": "execution_result",
+      "question": "확률 헤드의 수렴·상수 대비 이익과 운영 정책의 실제 손실·지연",
+      "resolution_method": "E4 fixed diagnostics"
+    },
+    {
+      "kind": "execution_result",
+      "question": "실제 시간·메모리·다른 환경 재로딩과 재현",
+      "resolution_method": "E6 observed runtime and artifact validation"
+    },
+    {
+      "kind": "external_evidence",
+      "question": "프레스 취득률·단위·게인·운전 상태·독립 정비/고장 사건",
+      "resolution_method": "Existing additional-collection specification; do not synthesize independent episodes"
+    },
+    {
+      "kind": "external_evidence",
+      "question": "현장 미탐 비용·허용 지연·최종 제출 패키지의 자료 사용 조건",
+      "resolution_method": "Separate field acceptance and actual package-specific provenance/terms check; no deployment/submission-complete claim"
+    }
+  ],
+  "primary_sources_rechecked": [
+    {
+      "url": "https://numpy.org/doc/1.26/reference/generated/numpy.fft.rfft.html",
+      "scope": "Real FFT Hermitian symmetry and DC/even Nyquist rules only"
+    },
+    {
+      "url": "https://arxiv.org/abs/2104.08279",
+      "scope": "Abstract and bibliography only; no theorem claimed for K1"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/waico/SKAB/b2c0d46c2971dcbfe71e26087b6d231998bb91c2/README.md",
+      "scope": "Sensor and separate anomaly/changepoint definitions; no leaderboard comparisons"
+    },
+    {
+      "url": "https://github.com/waico/SKAB/blob/b2c0d46c2971dcbfe71e26087b6d231998bb91c2/data/README.md",
+      "scope": "Existing pinned local source snapshot read again: anomaly-free CSV is normal-mode experiment"
+    }
+  ],
+  "new_performance_run": false,
+  "blind_test_opened": false,
+  "absolute_error_free_guarantee": false,
+  "design_blocking_issues_remaining": 0,
+  "verification": "evidence/plan_contract_verification.json"
+}

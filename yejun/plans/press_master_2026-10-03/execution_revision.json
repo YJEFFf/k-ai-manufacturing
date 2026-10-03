@@ -1,8 +1,8 @@
 {
-  "version": "press-master-execution-revision-2026-10-03-r2",
-  "basis_commit": "d772d8e6447d4cde4ce161a234e18197411ca35d",
-  "scope": "Execution priorities after core reproduction and bounded exploratory improvements; original numeric protocol remains archived as the comparison contract",
-  "authoritative_execution_document": "07_validation_revision.md",
+  "version": "press-master-execution-revision-2026-10-03-r3",
+  "basis_commit": "2e1ce59611aed5604eb4aaef50a3d3dcf58c67a2",
+  "scope": "Execution plan closed by static review after core experiments; no new performance evaluation in this revision",
+  "authoritative_execution_document": "08_execution_contracts.md",
   "original_numeric_protocol": "protocol.json",
   "validation_package": "../../analysis/press_master_validation_2026-10-03/",
   "current_status": {
@@ -27,9 +27,9 @@
   "next_required_action": "Implement SKAB fit/dev/cal group adapter and two fixed structures using the existing capture reservation and conflict mask; keep test performance sealed",
   "required_order": [
     "SKAB fit/dev/cal input and evaluation contract",
-    "Length/condition-route calibration attribution; at most one explicitly specified new correction hypothesis",
-    "A0/A1/A2 normal augmentation comparison with unchanged parent/scaling/calibration rules",
-    "Declared dataset-label probability diagnostic and immediate versus 2-of-3 development evaluation",
+    "K1 fixed gate-route calibration comparison preserving B1 fallback decisions",
+    "A0/A1/A2 with fixed proper-crop allocation, parent distances and all-seed admission",
+    "Declared dataset-label probability diagnostic and fixed I0/P23 state machines and selection rules",
     "Freeze candidates and full decision policy; evaluate H1/H2 and SKAB test",
     "Cold reproduction and claim-level audit"
   ],
@@ -48,24 +48,38 @@
     "source_of_scales": "fit only",
     "calibration": "unambiguously normal real cal blocks only",
     "copy_press_sinusoid_gate": false,
-    "claim": "External structural comparison, not transfer of an admitted final press detector"
+    "claim": "External structural comparison, not transfer of an admitted final press detector",
+    "current_features": "Natural logs of all four raw summary features; real fit positive-median floors only",
+    "maximum_structures_after_press_selection": 3,
+    "conditional_third_structure": "K1 only if press K1 passes unchanged development admission",
+    "event_and_ambiguity_contract": "08_execution_contracts.md and execution_contracts.json"
   },
   "external_priority": [
     "SKAB required",
-    "Beihang condition evidence",
-    "ESPset optional unit evidence",
-    "UCI historical regression only"
+    "Beihang fixed secondary condition evidence",
+    "ESPset acquired/reserved, no current model run",
+    "UCI historical evidence only"
   ],
   "optional_only": [
-    "A3",
-    "O1",
-    "generative models",
-    "extra neural models",
-    "automatic baseline updates",
-    "expanded UI",
-    "full NLN sensor acquisition",
-    "historical model replay"
+    "Beihang fixed secondary experiment"
   ],
   "no_candidate_passes": "Retain the comparison and failure evidence; do not relax observed gates or claim a final improved/field-ready model",
-  "report_or_slides_authorized": false
+  "report_or_slides_authorized": false,
+  "execution_order_document": "07_validation_revision.md",
+  "current_numeric_contract": "execution_contracts.json",
+  "design_revision_performance_run": false,
+  "excluded_from_current_execution": [
+    "A3",
+    "O1",
+    "EWMA",
+    "new neural models",
+    "new relationship features",
+    "automatic baseline updates",
+    "SKAB crop augmentation",
+    "ESPset model expansion",
+    "UCI model replay",
+    "NLN full sensor download"
+  ],
+  "design_review": "evidence/plan_review.json",
+  "design_verification": "evidence/plan_contract_verification.json"
 }
