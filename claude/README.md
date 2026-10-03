@@ -3,6 +3,14 @@
 제6회 K-인공지능 제조데이터 분석 경진대회(일반국민/대학(원)생) 준비 중 Claude Code로 진행한 분석입니다.
 예준님(Codex) 작업과 섞이지 않게 이 폴더에만 둡니다.
 
+> **최신 (10/4) — train/valid/test 분석과 보고서 계획:** [`code/press/tvt/README.md`](code/press/tvt/README.md), [`report/plan_report_v4.md`](report/plan_report_v4.md).
+> - 예준 v1·v2·v3·베이스라인과 규칙 R1(사건 지속)·R2(교차 확인)를 같은 분할에서 비교했다
+> - valid에서 선택을 해시로 잠근 뒤 test를 채점했다. 잠금 규칙이 고른 v2+R1은 A 1.000·B 0.9954다
+> - 최종 v2+R1+R2(valid 공동 1위 3개 중 가장 단순, test 확인 후 결정)는 A·B 1.000이다
+> - 규칙은 아래 초기 탐색에서 착안했다. 경위는 tvt README에 있다
+>
+> **초기 탐색 (10/3) — 케이스 분할 분석 · 예준 v2 오답 수정:** [`code/press/cases/README.md`](code/press/cases/README.md). 예준 Press Guard v2를 그대로 재현(A 0.9619·B 0.9710)한 뒤 오답 원인 2개(기록 시작 직후 미탐, 진동 크기 단독 오경보)에 '사건 지속'·'교차 확인'을 얹어 α1% **실시간 A 0.9992·B 1.000, 기록 단위 A·B 1.000**. 오답을 본 뒤 만든 사후 규칙이라 새 고장 성능 근거는 아님.
+>
 > **제출 파이프라인 (③ 프레스):** `python code/press/pipeline/run_all.py` 한 번 → 모델 비교·예측 파일·오류분석·진단 ([`code/press/pipeline/README.md`](code/press/pipeline/README.md)). 보고서용 수치: [`notes/프레스_결과요약_보고서용.md`](notes/프레스_결과요약_보고서용.md)
 >
 > **먼저 읽을 것 (③ 프레스, 9/23~):** [`notes/프레스_분석방향_아이디어.md`](notes/프레스_분석방향_아이디어.md) — 분석 방향, 수상작·논문 조사, 아래 검증 결과 전부.

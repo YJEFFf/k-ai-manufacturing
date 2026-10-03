@@ -1,0 +1,62 @@
+{
+  "A": {
+    "missed_rows": 22,
+    "missed_by_position": {
+      "0": 6,
+      "1": 6,
+      "2": 2,
+      "3": 2,
+      "4": 3,
+      "5": 2,
+      "6": 1
+    },
+    "missed_records": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      9
+    ],
+    "false_alarm_rows": 1,
+    "false_alarms": [
+      {
+        "record": "valid:normal:101",
+        "position": 40,
+        "prefix_r2": 0.997,
+        "waveform_normal": true
+      }
+    ]
+  },
+  "B": {
+    "missed_rows": 15,
+    "missed_by_position": {
+      "0": 4,
+      "1": 4,
+      "2": 2,
+      "3": 1,
+      "4": 3,
+      "5": 1
+    },
+    "missed_records": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      8
+    ],
+    "false_alarm_rows": 1,
+    "false_alarms": [
+      {
+        "record": "valid:normal:3",
+        "position": 4,
+        "prefix_r2": null,
+        "waveform_normal": false
+      }
+    ]
+  }
+}
