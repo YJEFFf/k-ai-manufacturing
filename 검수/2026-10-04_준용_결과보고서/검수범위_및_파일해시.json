@@ -1,0 +1,31 @@
+{
+  "review_date": "2026-10-04",
+  "report": "관련 자료/TalkFile_결과보고서_북적북적.hwpx.hwpx",
+  "report_pages_in_hwp_export": 31,
+  "nonempty_extracted_paragraphs": 701,
+  "bibliography_entries": 25,
+  "report_figures": 11,
+  "code_repo": "https://github.com/YJEFFf/k-ai-manufacturing",
+  "code_branch": "claude/press-cases",
+  "code_commit": "e436fa822da1420e8da8d493fb1265d1f65cefe3",
+  "remote_main_at_review": "cdf03da5340b8856b37bd5e58880d4239efd9d70",
+  "skill": {
+    "name": "adversarial-review",
+    "source": "https://github.com/event4u-app/agent-config/tree/30481f6605ade9ff06bbc9ca300ab8614781321c/src/skills/adversarial-review",
+    "source_commit": "30481f6605ade9ff06bbc9ca300ab8614781321c"
+  },
+  "original_report_modified": false,
+  "model_retraining_performed": false,
+  "code_snapshot_for_reaudit": "../review-source-e436fa8",
+  "reaudit_command": "python \"검수/2026-10-04_준용_결과보고서/verify_numbers.py\" --repo . --source ../review-source-e436fa8 --out ../reaudit.json",
+  "code_snapshot_note": "Run from the repository root. Extract claude/ from code_commit into the snapshot directory. See 읽어주세요.txt for commands. Report paths are relative to the repository root; claude/ hashes refer to code_commit.",
+  "source_sha256_basis": "The HWPX hash covers the original file bytes. Each claude/ hash covers the Git blob bytes returned by git show code_commit:path, before any Windows checkout/archive newline conversion.",
+  "source_sha256": {
+    "관련 자료/TalkFile_결과보고서_북적북적.hwpx.hwpx": "1d5a47d0f2548cabf77f724225d1f75dac929ac375d006d9d87283cfb59e498b",
+    "claude/code/press/tvt/outputs/tvt_test.csv": "1d3e56f7ac1b2e2f7631eb6cb9040dde6e7a6bb38c6528d765b8f08ba439eca1",
+    "claude/code/press/domain/outputs/06_operating_regime_records.csv": "6437692f85152354cb81a5666f7d7937a7ad40efe4126bb27cd7bbeb79de6e3e",
+    "claude/code/press/tvt/lib.py": "7c4055385dee3fc23a58534590f8b522187843346397c86166135d1954aaba71",
+    "claude/code/press/tvt/evalcore.py": "58a5034f258123d6b31293702f7942c3c9eea103f9e2dcf66421ecb42bfeba06"
+  },
+  "full_article_read_limitations": "See per-entry coverage in the bibliography ledger. Full paid texts and full ISO/ISA standards were not all accessed."
+}
