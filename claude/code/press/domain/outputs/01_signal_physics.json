@@ -1,0 +1,1424 @@
+{
+  "meta": {
+    "input": "cases/common.load_both(matched=True)",
+    "normal_rows": 20000,
+    "abnormal_rows": 600,
+    "normal_records": 600,
+    "abnormal_records": 21,
+    "assumption_grid_tolerance_hz": "60 ± 0.2 (가정, 출처 확인 중)",
+    "f_grid": "0.3~0.9 Hz, 0.0005 Hz (공칭 시간축 t = n × 0.1 s)",
+    "seed": 0
+  },
+  "1_alias_sampling_interval": {
+    "timestamp_check": {
+      "normal": {
+        "within_record_intervals": 19400,
+        "distinct_values_us": {
+          "100000": 19400
+        },
+        "all_exactly_100ms": true,
+        "timestamp_resolution": "1 ms (원본 문자열 소수 셋째 자리)",
+        "record_start_ms_mod4_share": {
+          "0": 0.49,
+          "1": 0.132,
+          "2": 0.15,
+          "3": 0.228
+        }
+      },
+      "abnormal": {
+        "within_record_intervals": 579,
+        "distinct_values_us": {
+          "100000": 579
+        },
+        "all_exactly_100ms": true,
+        "timestamp_resolution": "1 ms (원본 문자열 소수 셋째 자리)",
+        "record_start_ms_mod4_share": {
+          "0": 0.333,
+          "1": 0.19,
+          "2": 0.143,
+          "3": 0.333
+        }
+      }
+    },
+    "normal_records_ge30": {
+      "n_records": 360,
+      "f_alias": {
+        "n": 360,
+        "min": 0.594,
+        "q05": 0.5975,
+        "q25": 0.599,
+        "median": 0.6,
+        "q75": 0.601,
+        "q95": 0.6025,
+        "max": 0.607
+      },
+      "f_alias_iqr": 0.002,
+      "f_alias_sd": 0.00166,
+      "r2": {
+        "n": 360,
+        "min": 0.99413,
+        "q05": 0.99472,
+        "q25": 0.99528,
+        "median": 0.9963,
+        "q75": 0.99848,
+        "q95": 0.99934,
+        "max": 0.9996
+      },
+      "r2_share_ge_0_99": 1.0,
+      "r2_share_ge_0_9": 1.0,
+      "at_grid_edge": 0,
+      "crlb_se_median_hz": 0.00073,
+      "lag1_autocorr_of_f_across_records": -0.039,
+      "spearman_f_vs_time": -0.033,
+      "spearman_f_vs_current_amp": -0.109,
+      "pooled_common_f": {
+        "f": 0.59998,
+        "one_sigma_range": [
+          0.59994,
+          0.60002
+        ],
+        "note": "기록마다 진폭·위상·절편 별도, 주파수만 공통. 잔차가 고조파로 백색이 아니라 범위는 과소평가일 수 있음"
+      },
+      "pooled_f_by_time_block": [
+        {
+          "block": 0,
+          "records": 72,
+          "t_start_min": 0.0,
+          "t_end_min": 13.0,
+          "f_pooled": 0.59978
+        },
+        {
+          "block": 1,
+          "records": 72,
+          "t_start_min": 13.1,
+          "t_end_min": 29.7,
+          "f_pooled": 0.60032
+        },
+        {
+          "block": 2,
+          "records": 72,
+          "t_start_min": 29.8,
+          "t_end_min": 45.0,
+          "f_pooled": 0.60002
+        },
+        {
+          "block": 3,
+          "records": 72,
+          "t_start_min": 45.2,
+          "t_end_min": 61.1,
+          "f_pooled": 0.59998
+        },
+        {
+          "block": 4,
+          "records": 72,
+          "t_start_min": 61.2,
+          "t_end_min": 76.9,
+          "f_pooled": 0.59966
+        }
+      ],
+      "pooled_f_block_range_hz": 0.00066,
+      "reference_common_F0_hz": 0.6064
+    },
+    "interval_candidates_from_median": {
+      "f_alias_nominal_hz": 0.6,
+      "cycles_per_sample": 0.06,
+      "exact_interval_ms": {
+        "fs_below_10": 101.0,
+        "fs_above_10": 99.0
+      },
+      "exact_fs_hz": {
+        "fs_below_10": 9.90099,
+        "fs_above_10": 10.10101
+      },
+      "formula_fs_eq_60_minus_fa_over_6_ms": {
+        "fs_below_10": 101.0101,
+        "fs_above_10": 99.0099
+      },
+      "required_line_hz_if_fs_exactly_10": {
+        "low": 59.4,
+        "high": 60.6
+      },
+      "deviation_vs_tolerance": 3.0
+    },
+    "interval_candidates_from_iqr": {
+      "q25": {
+        "f_alias_nominal_hz": 0.599,
+        "cycles_per_sample": 0.0599,
+        "exact_interval_ms": {
+          "fs_below_10": 100.9983,
+          "fs_above_10": 99.0017
+        },
+        "exact_fs_hz": {
+          "fs_below_10": 9.90115,
+          "fs_above_10": 10.10084
+        },
+        "formula_fs_eq_60_minus_fa_over_6_ms": {
+          "fs_below_10": 101.0084,
+          "fs_above_10": 99.0115
+        },
+        "required_line_hz_if_fs_exactly_10": {
+          "low": 59.401,
+          "high": 60.599
+        },
+        "deviation_vs_tolerance": 2.99
+      },
+      "q75": {
+        "f_alias_nominal_hz": 0.601,
+        "cycles_per_sample": 0.0601,
+        "exact_interval_ms": {
+          "fs_below_10": 101.0017,
+          "fs_above_10": 98.9983
+        },
+        "exact_fs_hz": {
+          "fs_below_10": 9.90083,
+          "fs_above_10": 10.10118
+        },
+        "formula_fs_eq_60_minus_fa_over_6_ms": {
+          "fs_below_10": 101.0118,
+          "fs_above_10": 99.0083
+        },
+        "required_line_hz_if_fs_exactly_10": {
+          "low": 59.399,
+          "high": 60.601
+        },
+        "deviation_vs_tolerance": 3.0
+      }
+    },
+    "interval_candidates_from_pooled": {
+      "f_alias_nominal_hz": 0.59998,
+      "cycles_per_sample": 0.059998,
+      "exact_interval_ms": {
+        "fs_below_10": 101.0,
+        "fs_above_10": 99.0
+      },
+      "exact_fs_hz": {
+        "fs_below_10": 9.90099,
+        "fs_above_10": 10.10101
+      },
+      "formula_fs_eq_60_minus_fa_over_6_ms": {
+        "fs_below_10": 101.0101,
+        "fs_above_10": 99.0099
+      },
+      "required_line_hz_if_fs_exactly_10": {
+        "low": 59.4,
+        "high": 60.6
+      },
+      "deviation_vs_tolerance": 3.0
+    },
+    "odd_harmonics_in_current_residual": {
+      "records": 202,
+      "background_psd": 0.034,
+      "harmonics": {
+        "h2": {
+          "line_hz": 120,
+          "folded_hz": 1.2,
+          "bin_hz": 1.2,
+          "psd_over_background": 5.7
+        },
+        "h3": {
+          "line_hz": 180,
+          "folded_hz": 1.8,
+          "bin_hz": 1.8,
+          "psd_over_background": 2131.2
+        },
+        "h4": {
+          "line_hz": 240,
+          "folded_hz": 2.4,
+          "bin_hz": 2.4,
+          "psd_over_background": 1.1
+        },
+        "h5": {
+          "line_hz": 300,
+          "folded_hz": 3.0,
+          "bin_hz": 3.0,
+          "psd_over_background": 485.4
+        },
+        "h6": {
+          "line_hz": 360,
+          "folded_hz": 3.6,
+          "bin_hz": 3.6,
+          "psd_over_background": 1.0
+        },
+        "h7": {
+          "line_hz": 420,
+          "folded_hz": 4.2,
+          "bin_hz": 4.2,
+          "psd_over_background": 391.1
+        },
+        "h9": {
+          "line_hz": 540,
+          "folded_hz": 4.6,
+          "bin_hz": 4.6,
+          "psd_over_background": 0.9
+        }
+      },
+      "note": "h차 고조파(60h Hz)는 h·f_a 위치로 접힌다. 홀수(3·5·7차)만 크고 짝수는 배경 수준이면 교류 파형의 반파 대칭과 일치"
+    },
+    "sampling_jitter_upper_bound": {
+      "model": "잔차분산(기본+3·5·7차 제거) = a + b·(A²/2), b=(2π·60·σ_t)²",
+      "slope": 0.0001432,
+      "slope_se": 2.06e-05,
+      "intercept_resid_var": 0.32,
+      "sigma_t_upper_ms": 0.036,
+      "resid_sd_fundamental_only_median": 5.78,
+      "note": "b 상한(기울기+2SE)으로 계산. 진폭 비례 잔차를 전부 시각 흔들림으로 돌린 보수적 상한. 기본파만 적합한 잔차(SD 약 5.8)는 대부분 3·5·7차 고조파이고, 고조파를 빼면 잔차 분산이 수 단위로 줄어든다"
+    },
+    "abnormal_records_ge30": {
+      "n_records": 10,
+      "r2": {
+        "n": 10,
+        "min": 0.0699,
+        "q05": 0.1007,
+        "q25": 0.1785,
+        "median": 0.2091,
+        "q75": 0.2991,
+        "q95": 0.5352,
+        "max": 0.5611
+      },
+      "records_r2_ge_0_9": 0,
+      "wide_band_0_005_to_5hz_max_r2": 0.783,
+      "wide_band_records_r2_ge_0_9": 0,
+      "per_record": [
+        {
+          "rec": 1,
+          "n": 50,
+          "f_0p3_0p9": 0.3,
+          "r2": 0.177,
+          "f_wide": 0.225,
+          "r2_wide": 0.309
+        },
+        {
+          "rec": 2,
+          "n": 47,
+          "f_0p3_0p9": 0.3,
+          "r2": 0.504,
+          "f_wide": 0.23,
+          "r2_wide": 0.641
+        },
+        {
+          "rec": 3,
+          "n": 31,
+          "f_0p3_0p9": 0.6885,
+          "r2": 0.07,
+          "f_wide": 4.4425,
+          "r2_wide": 0.291
+        },
+        {
+          "rec": 6,
+          "n": 50,
+          "f_0p3_0p9": 0.8665,
+          "r2": 0.232,
+          "f_wide": 0.18,
+          "r2_wide": 0.519
+        },
+        {
+          "rec": 7,
+          "n": 40,
+          "f_0p3_0p9": 0.3,
+          "r2": 0.313,
+          "f_wide": 0.1075,
+          "r2_wide": 0.622
+        },
+        {
+          "rec": 11,
+          "n": 50,
+          "f_0p3_0p9": 0.47,
+          "r2": 0.138,
+          "f_wide": 0.0675,
+          "r2_wide": 0.321
+        },
+        {
+          "rec": 12,
+          "n": 42,
+          "f_0p3_0p9": 0.3,
+          "r2": 0.186,
+          "f_wide": 0.1425,
+          "r2_wide": 0.535
+        },
+        {
+          "rec": 15,
+          "n": 50,
+          "f_0p3_0p9": 0.391,
+          "r2": 0.184,
+          "f_wide": 0.095,
+          "r2_wide": 0.766
+        },
+        {
+          "rec": 16,
+          "n": 50,
+          "f_0p3_0p9": 0.421,
+          "r2": 0.258,
+          "f_wide": 0.005,
+          "r2_wide": 0.441
+        },
+        {
+          "rec": 17,
+          "n": 36,
+          "f_0p3_0p9": 0.3,
+          "r2": 0.561,
+          "f_wide": 0.1925,
+          "r2_wide": 0.783
+        }
+      ],
+      "conclusion": "R² ≥ 0.9인 이상 기록이 없어 겉보기 주파수(→표본 간격) 추정 불가"
+    }
+  },
+  "2_3_vibration_spectrum_and_phase": {
+    "normal": {
+      "records_ge32": 350,
+      "upper": {
+        "flatness_0p4_4p8": 0.3495,
+        "max_over_min_0p4_4p8": 1038.71,
+        "band_share_of_mean_psd": {
+          "0-1Hz": 0.073,
+          "1-2Hz": 0.3812,
+          "2-3.5Hz": 0.2324,
+          "3.5-5Hz": 0.3134
+        },
+        "band_share_per_record_median": {
+          "0-1Hz": 0.0272,
+          "1-2Hz": 0.3553,
+          "2-3.5Hz": 0.2089,
+          "3.5-5Hz": 0.3168
+        },
+        "lag1_median": 0.011,
+        "psd_1p2hz_over_median_other": 4.095
+      },
+      "lower": {
+        "flatness_0p4_4p8": 0.1364,
+        "max_over_min_0p4_4p8": 8228.869,
+        "band_share_of_mean_psd": {
+          "0-1Hz": 0.0111,
+          "1-2Hz": 0.7138,
+          "2-3.5Hz": 0.208,
+          "3.5-5Hz": 0.0671
+        },
+        "band_share_per_record_median": {
+          "0-1Hz": 0.0134,
+          "1-2Hz": 0.6097,
+          "2-3.5Hz": 0.2387,
+          "3.5-5Hz": 0.0991
+        },
+        "lag1_median": 0.257,
+        "psd_1p2hz_over_median_other": 0.679
+      },
+      "ul_corr": {
+        "n": 350,
+        "min": -0.575,
+        "q05": -0.288,
+        "q25": 0.063,
+        "median": 0.281,
+        "q75": 0.468,
+        "q95": 0.591,
+        "max": 0.762
+      },
+      "ul_corr_negative_share": 0.197
+    },
+    "abnormal": {
+      "records_ge32": 9,
+      "upper": {
+        "flatness_0p4_4p8": 0.2676,
+        "max_over_min_0p4_4p8": 129.113,
+        "band_share_of_mean_psd": {
+          "0-1Hz": 0.2624,
+          "1-2Hz": 0.6747,
+          "2-3.5Hz": 0.0391,
+          "3.5-5Hz": 0.0238
+        },
+        "band_share_per_record_median": {
+          "0-1Hz": 0.4087,
+          "1-2Hz": 0.4433,
+          "2-3.5Hz": 0.0589,
+          "3.5-5Hz": 0.037
+        },
+        "lag1_median": 0.694
+      },
+      "lower": {
+        "flatness_0p4_4p8": 0.548,
+        "max_over_min_0p4_4p8": 34.505,
+        "band_share_of_mean_psd": {
+          "0-1Hz": 0.3711,
+          "1-2Hz": 0.4357,
+          "2-3.5Hz": 0.1486,
+          "3.5-5Hz": 0.0447
+        },
+        "band_share_per_record_median": {
+          "0-1Hz": 0.4122,
+          "1-2Hz": 0.2545,
+          "2-3.5Hz": 0.0896,
+          "3.5-5Hz": 0.0315
+        },
+        "lag1_median": 0.663
+      },
+      "ul_corr": {
+        "n": 9,
+        "min": -0.681,
+        "q05": -0.661,
+        "q25": -0.59,
+        "median": -0.357,
+        "q75": -0.256,
+        "q95": -0.114,
+        "max": -0.088
+      },
+      "ul_corr_negative_share": 1.0
+    },
+    "white_noise_reference": {
+      "normal": {
+        "flatness_q01": 0.9973,
+        "flatness_q05": 0.9979,
+        "flatness_median": 0.9988,
+        "band_share_median": {
+          "0-1Hz": 0.1611,
+          "1-2Hz": 0.2049,
+          "2-3.5Hz": 0.3267,
+          "3.5-5Hz": 0.307
+        },
+        "band_share_q025": {
+          "0-1Hz": 0.1515,
+          "1-2Hz": 0.1935,
+          "2-3.5Hz": 0.314,
+          "3.5-5Hz": 0.295
+        },
+        "band_share_q975": {
+          "0-1Hz": 0.1716,
+          "1-2Hz": 0.2171,
+          "2-3.5Hz": 0.3402,
+          "3.5-5Hz": 0.3201
+        }
+      },
+      "abnormal": {
+        "flatness_q01": 0.8977,
+        "flatness_q05": 0.9138,
+        "flatness_median": 0.9512,
+        "band_share_median": {
+          "0-1Hz": 0.157,
+          "1-2Hz": 0.2025,
+          "2-3.5Hz": 0.3238,
+          "3.5-5Hz": 0.3101
+        },
+        "band_share_q025": {
+          "0-1Hz": 0.102,
+          "1-2Hz": 0.1321,
+          "2-3.5Hz": 0.2468,
+          "3.5-5Hz": 0.2303
+        },
+        "band_share_q975": {
+          "0-1Hz": 0.2342,
+          "1-2Hz": 0.2755,
+          "2-3.5Hz": 0.4128,
+          "3.5-5Hz": 0.4027
+        }
+      }
+    },
+    "abnormal_dominant_freq": {
+      "upper": {
+        "0.2": 1,
+        "0.4": 1,
+        "0.6": 1,
+        "0.8": 1,
+        "1": 4,
+        "1.2": 1
+      },
+      "lower": {
+        "0.2": 4,
+        "0.4": 1,
+        "0.6": 1,
+        "0.8": 1,
+        "1": 1,
+        "1.2": 1
+      },
+      "upper_median_hz": 1.0,
+      "lower_median_hz": 0.4,
+      "upper_share_below_1hz": 0.444,
+      "lower_share_below_1hz": 0.778
+    },
+    "normal_peak_freq_spread": {
+      "upper": {
+        "n": 350,
+        "min": 0.2,
+        "q05": 1.0,
+        "q25": 1.8,
+        "median": 3.6,
+        "q75": 3.6,
+        "q95": 3.6,
+        "max": 3.8
+      },
+      "lower": {
+        "n": 350,
+        "min": 0.2,
+        "q05": 1.8,
+        "q25": 1.8,
+        "median": 1.8,
+        "q75": 3.6,
+        "q95": 3.6,
+        "max": 3.6
+      },
+      "note": "백색이면 기록별 최대 PSD 위치가 0.2~5 Hz에 고르게 퍼진다"
+    },
+    "phase": {
+      "normal": {
+        "0-1Hz": {
+          "phase_deg_lower_minus_upper": -9.3,
+          "coherence_mean": 0.266,
+          "coherence_band": 0.049
+        },
+        "1-2Hz": {
+          "phase_deg_lower_minus_upper": 55.4,
+          "coherence_mean": 0.405,
+          "coherence_band": 0.337
+        },
+        "2-3.5Hz": {
+          "phase_deg_lower_minus_upper": 27.2,
+          "coherence_mean": 0.507,
+          "coherence_band": 0.276
+        },
+        "3.5-5Hz": {
+          "phase_deg_lower_minus_upper": -42.9,
+          "coherence_mean": 0.403,
+          "coherence_band": 0.459
+        },
+        "0.8-1.2Hz bins": {
+          "phase_deg_lower_minus_upper": -167.2,
+          "coherence_mean": 0.366,
+          "coherence_band": 0.299
+        }
+      },
+      "abnormal": {
+        "0-1Hz": {
+          "phase_deg_lower_minus_upper": -160.6,
+          "coherence_mean": 0.428,
+          "coherence_band": 0.377
+        },
+        "1-2Hz": {
+          "phase_deg_lower_minus_upper": -115.0,
+          "coherence_mean": 0.712,
+          "coherence_band": 0.76
+        },
+        "2-3.5Hz": {
+          "phase_deg_lower_minus_upper": -126.8,
+          "coherence_mean": 0.358,
+          "coherence_band": 0.234
+        },
+        "3.5-5Hz": {
+          "phase_deg_lower_minus_upper": 177.8,
+          "coherence_mean": 0.665,
+          "coherence_band": 0.667
+        },
+        "0.8-1.2Hz bins": {
+          "phase_deg_lower_minus_upper": -122.1,
+          "coherence_mean": 0.759,
+          "coherence_band": 0.756
+        }
+      },
+      "abnormal_dominant_band": "0.8-1.2Hz bins",
+      "abnormal_per_record_phase_deg": [
+        -138.0,
+        -111.2,
+        -147.6,
+        -177.1,
+        -133.4,
+        -134.5,
+        -146.2,
+        -136.4,
+        -118.0
+      ],
+      "abnormal_per_record_circular_mean_deg": -137.8,
+      "abnormal_per_record_resultant_length": 0.953,
+      "abnormal_per_record_share_within_45deg_of_180": 0.556,
+      "note": "교차 스펙트럼 = conj(상부)·하부 → 위상은 '하부 − 상부'. coherence는 기록을 앙상블로 평균(한 기록 안 단일 구간 coherence는 항상 1이라 무의미)"
+    }
+  },
+  "2b_normal_vibration_tones": {
+    "lower_tone_vs_current_h3": {
+      "expected_if_locked_hz": 1.7999,
+      "compared_with_current_harmonic": true,
+      "spearman_tone_amp_vs_current_amp": 0.874,
+      "high_load(cur_amp>180)": {
+        "records": 136,
+        "vib_tone_f": 1.79,
+        "vib_tone_ci95": [
+          1.7891,
+          1.7909
+        ],
+        "diff_vib_minus_expected": -0.0099,
+        "tone_amp_median": 0.2343,
+        "tone_r2_median": 0.922,
+        "current_harmonic_f": 1.8001,
+        "current_harmonic_ci95": [
+          1.7992,
+          1.8014
+        ],
+        "diff_vib_minus_current": -0.0101
+      },
+      "low_load(cur_amp<130)": {
+        "records": 162,
+        "vib_tone_f": 1.7993,
+        "vib_tone_ci95": [
+          1.7945,
+          1.8032
+        ],
+        "diff_vib_minus_expected": -0.0006,
+        "tone_amp_median": 0.0288,
+        "tone_r2_median": 0.179,
+        "current_harmonic_f": 1.8002,
+        "current_harmonic_ci95": [
+          1.7997,
+          1.8009
+        ],
+        "diff_vib_minus_current": -0.0009
+      },
+      "all": {
+        "records": 360,
+        "vib_tone_f": 1.7908,
+        "vib_tone_ci95": [
+          1.7901,
+          1.7918
+        ],
+        "diff_vib_minus_expected": -0.0091,
+        "tone_amp_median": 0.1034,
+        "tone_r2_median": 0.734,
+        "current_harmonic_f": 1.8001,
+        "current_harmonic_ci95": [
+          1.7996,
+          1.8006
+        ],
+        "diff_vib_minus_current": -0.0093
+      },
+      "tone_amp_high_over_low": 8.14
+    },
+    "upper_tone_vs_6fa": {
+      "expected_if_locked_hz": 3.5999,
+      "compared_with_current_harmonic": false,
+      "spearman_tone_amp_vs_current_amp": 0.225,
+      "high_load(cur_amp>180)": {
+        "records": 136,
+        "vib_tone_f": 3.5841,
+        "vib_tone_ci95": [
+          3.5787,
+          3.5898
+        ],
+        "diff_vib_minus_expected": -0.0158,
+        "tone_amp_median": 0.0513,
+        "tone_r2_median": 0.189
+      },
+      "low_load(cur_amp<130)": {
+        "records": 162,
+        "vib_tone_f": 3.5999,
+        "vib_tone_ci95": [
+          3.5969,
+          3.6031
+        ],
+        "diff_vib_minus_expected": 0.0,
+        "tone_amp_median": 0.0439,
+        "tone_r2_median": 0.449
+      },
+      "all": {
+        "records": 360,
+        "vib_tone_f": 3.5914,
+        "vib_tone_ci95": [
+          3.5893,
+          3.593
+        ],
+        "diff_vib_minus_expected": -0.0085,
+        "tone_amp_median": 0.0504,
+        "tone_r2_median": 0.351
+      },
+      "tone_amp_high_over_low": 1.17
+    },
+    "note": "겉보기 주파수(공칭 Hz). 전류 3차 고조파(180 Hz)는 3·f_a=1.80, 6차(360 Hz)는 3.60에 접힌다. 진동 톤이 전류 고조파와 같은 주파수면 전기적으로 묶인 성분(또는 크로스토크), 다르면 별개 원천. 물리 주파수는 접힘 때문에 하나로 정할 수 없다(f·Δ mod 1 이 같은 모든 주파수가 후보)"
+  },
+  "4_vibration_sd_meaning": {
+    "normal_upper_sd_ge20": {
+      "n": 452,
+      "min": 0.0231,
+      "q05": 0.0343,
+      "q25": 0.0484,
+      "median": 0.0705,
+      "q75": 0.0839,
+      "q95": 0.0994,
+      "max": 0.149,
+      "cv_across_records": 0.317
+    },
+    "normal_lower_sd_ge20": {
+      "n": 452,
+      "min": 0.0311,
+      "q05": 0.0402,
+      "q25": 0.0517,
+      "median": 0.0906,
+      "q75": 0.1599,
+      "q95": 0.2031,
+      "max": 0.2224,
+      "cv_across_records": 0.559
+    },
+    "normal_sd_by_length": {
+      "2-9": {
+        "records": 60,
+        "upper_median": 0.0545,
+        "lower_median": 0.0828
+      },
+      "10-19": {
+        "records": 78,
+        "upper_median": 0.0675,
+        "lower_median": 0.0848
+      },
+      "20-29": {
+        "records": 92,
+        "upper_median": 0.0705,
+        "lower_median": 0.1041
+      },
+      "30-39": {
+        "records": 84,
+        "upper_median": 0.0678,
+        "lower_median": 0.0692
+      },
+      "40-49": {
+        "records": 74,
+        "upper_median": 0.0665,
+        "lower_median": 0.0842
+      },
+      "50-50": {
+        "records": 202,
+        "upper_median": 0.0719,
+        "lower_median": 0.094
+      }
+    },
+    "normal_spearman_length_vs_sd": {
+      "upper": 0.08,
+      "lower": 0.015,
+      "note": "고부하(전류 진폭 큼) 기록이 길이와 얽혀 있을 수 있어 부하 효과가 섞인다"
+    },
+    "normal_prefix_sd_ratio_50row_records": {
+      "records": 202,
+      "upper": {
+        "first5": {
+          "median_ratio": 0.998,
+          "iid_expected": 0.945
+        },
+        "first10": {
+          "median_ratio": 0.963,
+          "iid_expected": 0.978
+        },
+        "first20": {
+          "median_ratio": 1.001,
+          "iid_expected": 0.992
+        },
+        "first30": {
+          "median_ratio": 0.997,
+          "iid_expected": 0.996
+        },
+        "first40": {
+          "median_ratio": 0.995,
+          "iid_expected": 0.999
+        }
+      },
+      "lower": {
+        "first5": {
+          "median_ratio": 1.034,
+          "iid_expected": 0.945
+        },
+        "first10": {
+          "median_ratio": 1.019,
+          "iid_expected": 0.978
+        },
+        "first20": {
+          "median_ratio": 1.008,
+          "iid_expected": 0.992
+        },
+        "first30": {
+          "median_ratio": 1.0,
+          "iid_expected": 0.996
+        },
+        "first40": {
+          "median_ratio": 0.999,
+          "iid_expected": 0.999
+        }
+      }
+    },
+    "normal_half_split_consistency": {
+      "upper": {
+        "sd_of_log_half_ratio": 0.176,
+        "iid_gauss_theory": 0.204,
+        "iid_theory_with_observed_kurtosis": 0.182,
+        "kurtosis_median": 2.57
+      },
+      "lower": {
+        "sd_of_log_half_ratio": 0.144,
+        "iid_gauss_theory": 0.204,
+        "iid_theory_with_observed_kurtosis": 0.147,
+        "kurtosis_median": 2.0
+      }
+    },
+    "pooled_within_record_kurtosis": {
+      "normal": {
+        "upper": 2.6,
+        "lower": 2.19
+      },
+      "abnormal": {
+        "upper": 4.53,
+        "lower": 4.15
+      }
+    },
+    "abnormal_over_normal_sd_multiple": {
+      "upper": {
+        "records_ge20": 5.34,
+        "records_ge2": 5.65,
+        "pooled_rows": 6.34,
+        "abnormal_records_ge20_below_normal_median": 1,
+        "abnormal_records_ge20": 13
+      },
+      "lower": {
+        "records_ge20": 2.55,
+        "records_ge2": 2.82,
+        "pooled_rows": 2.03,
+        "abnormal_records_ge20_below_normal_median": 1,
+        "abnormal_records_ge20": 13
+      }
+    }
+  },
+  "5_load_vs_vibration": {
+    "min_rows": 20,
+    "records": {
+      "train": 269,
+      "test": 92,
+      "valid": 91,
+      "abnormal": 13
+    },
+    "normal_spearman": {
+      "sd_lower_vs_cur_amp": 0.871,
+      "sd_lower_vs_cur_rms": 0.866,
+      "sd_upper_vs_cur_amp": 0.74,
+      "sd_upper_vs_cur_rms": 0.739
+    },
+    "normal_spearman_train_only": {
+      "sd_lower_vs_cur_amp": 0.93,
+      "sd_upper_vs_cur_amp": 0.723
+    },
+    "models": {
+      "sd_lower~cur_amp": {
+        "ols_slope_loglog": 1.727,
+        "ols_slope_se": 0.03,
+        "ols_r2_train": 0.927,
+        "resid_sd_log_train_ols": 0.1477,
+        "resid_sd_log_train_iso": 0.12,
+        "train_x_range": [
+          113.1,
+          262.0
+        ],
+        "abnormal_x_outside_train_range": 13,
+        "z": {
+          "train": {
+            "ols": {
+              "median": -0.04,
+              "q05": -1.62,
+              "q95": 1.53,
+              "max": 3.49,
+              "share_gt3": 0.004
+            },
+            "iso": {
+              "median": 0.0,
+              "max": 3.45,
+              "share_gt3": 0.011
+            }
+          },
+          "valid": {
+            "ols": {
+              "median": 0.42,
+              "q05": -1.29,
+              "q95": 1.9,
+              "max": 2.96,
+              "share_gt3": 0.0
+            },
+            "iso": {
+              "median": 0.66,
+              "max": 3.96,
+              "share_gt3": 0.022
+            }
+          },
+          "test": {
+            "ols": {
+              "median": -1.49,
+              "q05": -3.25,
+              "q95": 0.63,
+              "max": 1.16,
+              "share_gt3": 0.0
+            },
+            "iso": {
+              "median": -1.29,
+              "max": 0.97,
+              "share_gt3": 0.0
+            }
+          },
+          "abnormal": {
+            "ols": {
+              "median": 22.25,
+              "q05": 14.51,
+              "q95": 46.52,
+              "max": 57.06,
+              "share_gt3": 1.0
+            },
+            "iso": {
+              "median": 12.5,
+              "max": 15.26,
+              "share_gt3": 0.923
+            }
+          }
+        },
+        "abnormal_unexplained_factor_median": 26.76
+      },
+      "sd_upper~cur_amp": {
+        "ols_slope_loglog": 0.625,
+        "ols_slope_se": 0.042,
+        "ols_r2_train": 0.457,
+        "resid_sd_log_train_ols": 0.2075,
+        "resid_sd_log_train_iso": 0.1687,
+        "train_x_range": [
+          113.1,
+          262.0
+        ],
+        "abnormal_x_outside_train_range": 13,
+        "z": {
+          "train": {
+            "ols": {
+              "median": 0.0,
+              "q05": -1.77,
+              "q95": 1.59,
+              "max": 3.48,
+              "share_gt3": 0.004
+            },
+            "iso": {
+              "median": 0.01,
+              "max": 3.84,
+              "share_gt3": 0.011
+            }
+          },
+          "valid": {
+            "ols": {
+              "median": 0.04,
+              "q05": -1.85,
+              "q95": 1.53,
+              "max": 2.21,
+              "share_gt3": 0.0
+            },
+            "iso": {
+              "median": 0.07,
+              "max": 1.89,
+              "share_gt3": 0.0
+            }
+          },
+          "test": {
+            "ols": {
+              "median": -1.49,
+              "q05": -3.2,
+              "q95": 1.31,
+              "max": 2.31,
+              "share_gt3": 0.0
+            },
+            "iso": {
+              "median": -2.45,
+              "max": 2.7,
+              "share_gt3": 0.0
+            }
+          },
+          "abnormal": {
+            "ols": {
+              "median": 12.81,
+              "q05": 6.14,
+              "q95": 19.26,
+              "max": 21.25,
+              "share_gt3": 0.923
+            },
+            "iso": {
+              "median": 12.83,
+              "max": 17.66,
+              "share_gt3": 0.923
+            }
+          }
+        },
+        "abnormal_unexplained_factor_median": 14.26
+      },
+      "sd_lower~cur_rms": {
+        "ols_slope_loglog": 1.726,
+        "ols_slope_se": 0.03,
+        "ols_r2_train": 0.924,
+        "resid_sd_log_train_ols": 0.1508,
+        "resid_sd_log_train_iso": 0.1224,
+        "train_x_range": [
+          78.5,
+          187.5
+        ],
+        "abnormal_x_outside_train_range": 4,
+        "z": {
+          "train": {
+            "ols": {
+              "median": -0.07,
+              "q05": -1.54,
+              "q95": 1.56,
+              "max": 3.52,
+              "share_gt3": 0.004
+            },
+            "iso": {
+              "median": 0.0,
+              "max": 3.36,
+              "share_gt3": 0.011
+            }
+          },
+          "valid": {
+            "ols": {
+              "median": 0.4,
+              "q05": -1.3,
+              "q95": 1.47,
+              "max": 3.59,
+              "share_gt3": 0.011
+            },
+            "iso": {
+              "median": 0.58,
+              "max": 3.86,
+              "share_gt3": 0.022
+            }
+          },
+          "test": {
+            "ols": {
+              "median": -1.46,
+              "q05": -3.16,
+              "q95": 0.8,
+              "max": 1.34,
+              "share_gt3": 0.0
+            },
+            "iso": {
+              "median": -1.13,
+              "max": 0.93,
+              "share_gt3": 0.0
+            }
+          },
+          "abnormal": {
+            "ols": {
+              "median": 8.09,
+              "q05": 3.87,
+              "q95": 13.51,
+              "max": 15.93,
+              "share_gt3": 1.0
+            },
+            "iso": {
+              "median": 9.69,
+              "max": 14.94,
+              "share_gt3": 0.923
+            }
+          }
+        },
+        "abnormal_unexplained_factor_median": 3.39
+      },
+      "sd_upper~cur_rms": {
+        "ols_slope_loglog": 0.627,
+        "ols_slope_se": 0.042,
+        "ols_r2_train": 0.459,
+        "resid_sd_log_train_ols": 0.2072,
+        "resid_sd_log_train_iso": 0.1724,
+        "train_x_range": [
+          78.5,
+          187.5
+        ],
+        "abnormal_x_outside_train_range": 4,
+        "z": {
+          "train": {
+            "ols": {
+              "median": 0.01,
+              "q05": -1.78,
+              "q95": 1.58,
+              "max": 3.51,
+              "share_gt3": 0.004
+            },
+            "iso": {
+              "median": 0.0,
+              "max": 3.75,
+              "share_gt3": 0.007
+            }
+          },
+          "valid": {
+            "ols": {
+              "median": 0.03,
+              "q05": -1.9,
+              "q95": 1.51,
+              "max": 2.06,
+              "share_gt3": 0.0
+            },
+            "iso": {
+              "median": 0.05,
+              "max": 2.36,
+              "share_gt3": 0.0
+            }
+          },
+          "test": {
+            "ols": {
+              "median": -1.52,
+              "q05": -3.17,
+              "q95": 1.28,
+              "max": 2.37,
+              "share_gt3": 0.0
+            },
+            "iso": {
+              "median": -2.16,
+              "max": 2.68,
+              "share_gt3": 0.0
+            }
+          },
+          "abnormal": {
+            "ols": {
+              "median": 9.2,
+              "q05": 2.43,
+              "q95": 12.78,
+              "max": 14.23,
+              "share_gt3": 0.923
+            },
+            "iso": {
+              "median": 10.19,
+              "max": 17.87,
+              "share_gt3": 0.923
+            }
+          }
+        },
+        "abnormal_unexplained_factor_median": 6.73
+      }
+    },
+    "normal_z_time_trend": {
+      "z_ols_sd_lower_cur_amp": {
+        "spearman_vs_record_index": -0.122,
+        "median_by_split": {
+          "train": -0.04,
+          "valid": 0.42,
+          "test": -1.49
+        }
+      },
+      "z_ols_sd_upper_cur_amp": {
+        "spearman_vs_record_index": -0.217,
+        "median_by_split": {
+          "train": 0.0,
+          "valid": 0.04,
+          "test": -1.49
+        }
+      }
+    },
+    "current_level": {
+      "normal_cur_rms": {
+        "n": 452,
+        "min": 77.5,
+        "q05": 81.6,
+        "q25": 85.4,
+        "median": 102.6,
+        "q75": 152.6,
+        "q95": 180.5,
+        "max": 187.5
+      },
+      "abnormal_cur_rms": {
+        "n": 13,
+        "min": 57.9,
+        "q05": 61.2,
+        "q25": 73.6,
+        "median": 93.1,
+        "q75": 119.7,
+        "q95": 132.5,
+        "max": 134.6
+      },
+      "abnormal_cur_sine_r2": {
+        "n": 13,
+        "min": 0.0,
+        "q05": 0.005,
+        "q25": 0.013,
+        "median": 0.069,
+        "q75": 0.11,
+        "q95": 0.392,
+        "max": 0.617
+      },
+      "abnormal_abs_mean_over_rms": {
+        "n": 13,
+        "min": 0.03,
+        "q05": 0.06,
+        "q25": 0.28,
+        "median": 0.6,
+        "q75": 1.68,
+        "q95": 2.37,
+        "max": 2.51
+      }
+    },
+    "note": "z = (log 진동 SD − 정상 학습 회귀 예측) / 정상 학습 잔차 SD. unexplained_factor = exp(z 중앙값 × 잔차 SD) = 부하로 설명되지 않는 진동 SD 배수. 이상 기록은 전류 사인 적합이 깨져(20행 이상 13기록, 고정 F0 사인 R² 중앙값 0.07·최대 0.62) cur_amp가 부하를 뜻하지 않으므로 cur_rms 모델을 주로 본다"
+  },
+  "6_acquisition_structure": {
+    "normal": {
+      "records": 600,
+      "length": {
+        "n": 600,
+        "min": 1.0,
+        "q05": 5.0,
+        "q25": 20.0,
+        "median": 37.0,
+        "q75": 50.0,
+        "q95": 50.0,
+        "max": 50.0
+      },
+      "length_share_50": 0.337,
+      "length_share_lt10": 0.117,
+      "length_max": 50,
+      "gap_last_to_next_first_s": {
+        "n": 599,
+        "min": 0.0,
+        "q05": 1.729,
+        "q25": 2.401,
+        "median": 4.22,
+        "q75": 5.807,
+        "q95": 8.559,
+        "max": 16.643
+      },
+      "gap_iqr_s": 3.406,
+      "gap_zero_count": 1,
+      "start_to_start_s": {
+        "n": 599,
+        "min": 0.1,
+        "q05": 6.508,
+        "q25": 7.277,
+        "median": 7.958,
+        "q75": 8.057,
+        "q95": 9.495,
+        "max": 17.643
+      },
+      "start_to_start_iqr_s": 0.781,
+      "measured_share": 0.4333,
+      "span_s": 4615.9,
+      "spearman_length_vs_following_gap": -0.745,
+      "phase_lock_scan_4_to_12s": {
+        "start_best_period_s": 8.016,
+        "start_R": 0.652,
+        "end_best_period_s": 6.7825,
+        "end_R": 0.484,
+        "null_R_approx": 0.041,
+        "note": "R = |평균 exp(2πi·시각/P)|. 1이면 모든 시각이 같은 위상, 무작위면 약 1/√n"
+      },
+      "length_acf_lag1_10": [
+        0.3,
+        -0.292,
+        -0.489,
+        -0.242,
+        0.299,
+        0.571,
+        0.192,
+        -0.199,
+        -0.334,
+        -0.118
+      ],
+      "start_to_start_acf_lag1_10": [
+        0.046,
+        0.026,
+        -0.017,
+        -0.048,
+        0.156,
+        0.061,
+        0.099,
+        0.029,
+        -0.007,
+        0.045
+      ],
+      "length_sequence_dominant_period_records": 6.32,
+      "length_sequence_dominant_period_s": 48.6,
+      "beat_period_from_start_end_locks_s": 44.1,
+      "start_R_truncated_vs_full": [
+        0.754,
+        0.553
+      ],
+      "end_R_truncated_vs_full": [
+        0.465,
+        0.521
+      ],
+      "first_40_lengths": [
+        41,
+        37,
+        24,
+        10,
+        50,
+        50,
+        50,
+        41,
+        26,
+        13,
+        50,
+        50,
+        40,
+        25,
+        14,
+        50,
+        50,
+        36,
+        36,
+        23,
+        22,
+        11,
+        50,
+        50,
+        36,
+        26,
+        12,
+        50,
+        50,
+        42,
+        27,
+        13,
+        2,
+        50,
+        50,
+        38,
+        37,
+        24,
+        12,
+        12
+      ]
+    },
+    "abnormal": {
+      "records": 21,
+      "length": {
+        "n": 21,
+        "min": 3.0,
+        "q05": 4.0,
+        "q25": 15.0,
+        "median": 28.0,
+        "q75": 47.0,
+        "q95": 50.0,
+        "max": 50.0
+      },
+      "length_share_50": 0.238,
+      "length_share_lt10": 0.19,
+      "length_max": 50,
+      "gap_last_to_next_first_s": {
+        "n": 20,
+        "min": 1.78,
+        "q05": 1.98,
+        "q25": 3.442,
+        "median": 5.352,
+        "q75": 7.804,
+        "q95": 8.547,
+        "max": 8.572
+      },
+      "gap_iqr_s": 4.362,
+      "gap_zero_count": 0,
+      "start_to_start_s": {
+        "n": 20,
+        "min": 6.68,
+        "q05": 6.88,
+        "q25": 8.072,
+        "median": 8.13,
+        "q75": 8.486,
+        "q95": 9.491,
+        "max": 9.855
+      },
+      "start_to_start_iqr_s": 0.414,
+      "measured_share": 0.3621,
+      "span_s": 165.7,
+      "spearman_length_vs_following_gap": -0.96,
+      "phase_lock_scan_4_to_12s": {
+        "start_best_period_s": 8.193,
+        "start_R": 0.926,
+        "end_best_period_s": 6.785,
+        "end_R": 0.864,
+        "null_R_approx": 0.218,
+        "note": "R = |평균 exp(2πi·시각/P)|. 1이면 모든 시각이 같은 위상, 무작위면 약 1/√n"
+      }
+    },
+    "interpretation_estimate": "추정: 기록 길이 상한 50행(공칭 5 s)과 '시작 시각 + n×100 ms' 형태의 기록 안 타임스탬프는 PLC가 표본을 최대 50개 버퍼로 모아 블록 단위로 올리고 수집기가 블록 시작 시각만 실제로 찍는 구조와 맞는다. 시작은 약 8 s 격자, 끝은 약 6.8 s 격자에 묶여 두 주기의 맥놀이로 길이가 톱니 모양(50→13)으로 줄었다 다시 50으로 돌아온다. 원인 주기의 정체(통신 폴링, 버퍼 플러시, 프레스 행정 등)는 데이터로 확인 불가."
+  }
+}

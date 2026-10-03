@@ -1,0 +1,2885 @@
+{
+  "note": "test 채점(잠금 선택 v2+R1, 최종 v2+R1+R2) 이후에 추가한 사후 비교다. tvt/ 산출물은 읽기만 했고 잠금 선택과 최종 모델 결정에 영향이 없다",
+  "settings": {
+    "alpha": 0.01,
+    "alphas_ops": [
+      0.01,
+      0.03,
+      0.05
+    ],
+    "cusum_k_grid": [
+      0.5,
+      1.0,
+      1.5,
+      2.0,
+      3.0,
+      5.0
+    ],
+    "ewma_lambda_grid": [
+      0.1,
+      0.2,
+      0.3,
+      0.5
+    ],
+    "ewma_z0": "검증 정상 행 v2 점수 평균 μ0",
+    "mu0": {
+      "A": 0.839156,
+      "B": 0.850037
+    },
+    "v2_cal_max": {
+      "A": 4.417926,
+      "B": 3.5199
+    },
+    "gap_s": 60.0,
+    "tie": 0.002,
+    "selection": "검증 실시간 행 F1(A·B 평균) 최고, 0.002 이내 동률이면 큰 k·큰 λ",
+    "n_boot": 10000,
+    "seed": 0,
+    "splice_gap_s": 5.0,
+    "row_s": 0.1
+  },
+  "checks": {
+    "selection_sha256_ok": true,
+    "rows_A_sha256_ok": true,
+    "A_calibrate_matches_v2_p_full": true,
+    "A_calibrate_matches_v2_p_loo": true,
+    "rows_B_sha256_ok": true,
+    "B_calibrate_matches_v2_p_full": true,
+    "B_calibrate_matches_v2_p_loo": true,
+    "A_v2+H1+H2_matches_test_predictions_csv": true,
+    "A_v2+H1_matches_test_predictions_csv": true,
+    "A_v2_matches_test_predictions_csv": true,
+    "B_v2+H1+H2_matches_test_predictions_csv": true,
+    "B_v2+H1_matches_test_predictions_csv": true,
+    "B_v2_matches_test_predictions_csv": true
+  },
+  "selection": {
+    "CUSUM-reset": {
+      "kind": "cusum",
+      "carry": false,
+      "param": 3.0,
+      "valid_f1_mean": 0.975967,
+      "valid_f1_best": 0.975967,
+      "tied_params": [
+        2.0,
+        3.0
+      ],
+      "param_name": "k",
+      "at_grid_edge": false,
+      "cal_threshold_a1": {
+        "A": 1.417926,
+        "B": 0.5199
+      },
+      "cal_zero_share": {
+        "A": 0.9417,
+        "B": 0.95
+      }
+    },
+    "CUSUM-carry": {
+      "kind": "cusum",
+      "carry": true,
+      "param": 5.0,
+      "valid_f1_mean": 0.998185,
+      "valid_f1_best": 0.998185,
+      "tied_params": [
+        3.0,
+        5.0
+      ],
+      "param_name": "k",
+      "at_grid_edge": true,
+      "cal_threshold_a1": {
+        "A": 0.0,
+        "B": 0.0
+      },
+      "cal_zero_share": {
+        "A": 1.0,
+        "B": 1.0
+      }
+    },
+    "EWMA-reset": {
+      "kind": "ewma",
+      "carry": false,
+      "param": 0.5,
+      "valid_f1_mean": 0.972222,
+      "valid_f1_best": 0.973174,
+      "tied_params": [
+        0.1,
+        0.2,
+        0.3,
+        0.5
+      ],
+      "param_name": "lambda",
+      "at_grid_edge": true,
+      "cal_threshold_a1": {
+        "A": 2.705668,
+        "B": 2.621234
+      },
+      "cal_zero_share": {
+        "A": 0.0,
+        "B": 0.0
+      }
+    },
+    "EWMA-carry": {
+      "kind": "ewma",
+      "carry": true,
+      "param": 0.5,
+      "valid_f1_mean": 0.995472,
+      "valid_f1_best": 0.995476,
+      "tied_params": [
+        0.1,
+        0.2,
+        0.3,
+        0.5
+      ],
+      "param_name": "lambda",
+      "at_grid_edge": true,
+      "cal_threshold_a1": {
+        "A": 2.705668,
+        "B": 2.617314
+      },
+      "cal_zero_share": {
+        "A": 0.0,
+        "B": 0.0
+      }
+    }
+  },
+  "comparison": [
+    {
+      "detector": "v2",
+      "key": "v2",
+      "split": "A",
+      "regime": "valid",
+      "param": NaN,
+      "f1": 0.956685,
+      "tp": 254,
+      "fp": 1,
+      "fn": 22,
+      "normal_fa_records": 1,
+      "normal_records": 120,
+      "abnormal_detected_records": 10,
+      "abnormal_records": 10,
+      "first_row_records": 4,
+      "delay_rows_median": 1.5,
+      "delay_rows_max": 5.0,
+      "delay_s_median": 0.15000000000000002,
+      "delay_s_max": 0.5
+    },
+    {
+      "detector": "v2",
+      "key": "v2",
+      "split": "A",
+      "regime": "test",
+      "param": NaN,
+      "f1": 0.964856,
+      "tp": 302,
+      "fp": 0,
+      "fn": 22,
+      "normal_fa_records": 0,
+      "normal_records": 120,
+      "abnormal_detected_records": 11,
+      "abnormal_records": 11,
+      "first_row_records": 4,
+      "delay_rows_median": 1.0,
+      "delay_rows_max": 3.0,
+      "delay_s_median": 0.1,
+      "delay_s_max": 0.3
+    },
+    {
+      "detector": "v2+R1",
+      "key": "v2+H1",
+      "split": "A",
+      "regime": "valid",
+      "param": NaN,
+      "f1": 0.996377,
+      "tp": 275,
+      "fp": 1,
+      "fn": 1,
+      "normal_fa_records": 1,
+      "normal_records": 120,
+      "abnormal_detected_records": 10,
+      "abnormal_records": 10,
+      "first_row_records": 9,
+      "delay_rows_median": 0.0,
+      "delay_rows_max": 1.0,
+      "delay_s_median": 0.0,
+      "delay_s_max": 0.1
+    },
+    {
+      "detector": "v2+R1",
+      "key": "v2+H1",
+      "split": "A",
+      "regime": "test",
+      "param": NaN,
+      "f1": 1.0,
+      "tp": 324,
+      "fp": 0,
+      "fn": 0,
+      "normal_fa_records": 0,
+      "normal_records": 120,
+      "abnormal_detected_records": 11,
+      "abnormal_records": 11,
+      "first_row_records": 11,
+      "delay_rows_median": 0.0,
+      "delay_rows_max": 0.0,
+      "delay_s_median": 0.0,
+      "delay_s_max": 0.0
+    },
+    {
+      "detector": "v2+R1+R2(최종)",
+      "key": "v2+H1+H2",
+      "split": "A",
+      "regime": "valid",
+      "param": NaN,
+      "f1": 0.998185,
+      "tp": 275,
+      "fp": 0,
+      "fn": 1,
+      "normal_fa_records": 0,
+      "normal_records": 120,
+      "abnormal_detected_records": 10,
+      "abnormal_records": 10,
+      "first_row_records": 9,
+      "delay_rows_median": 0.0,
+      "delay_rows_max": 1.0,
+      "delay_s_median": 0.0,
+      "delay_s_max": 0.1
+    },
+    {
+      "detector": "v2+R1+R2(최종)",
+      "key": "v2+H1+H2",
+      "split": "A",
+      "regime": "test",
+      "param": NaN,
+      "f1": 1.0,
+      "tp": 324,
+      "fp": 0,
+      "fn": 0,
+      "normal_fa_records": 0,
+      "normal_records": 120,
+      "abnormal_detected_records": 11,
+      "abnormal_records": 11,
+      "first_row_records": 11,
+      "delay_rows_median": 0.0,
+      "delay_rows_max": 0.0,
+      "delay_s_median": 0.0,
+      "delay_s_max": 0.0
+    },
+    {
+      "detector": "CUSUM-reset(k=3)",
+      "key": "CUSUM-reset",
+      "split": "A",
+      "regime": "valid",
+      "param": 3.0,
+      "f1": 0.974074,
+      "tp": 263,
+      "fp": 1,
+      "fn": 13,
+      "normal_fa_records": 1,
+      "normal_records": 120,
+      "abnormal_detected_records": 10,
+      "abnormal_records": 10,
+      "first_row_records": 4,
+      "delay_rows_median": 1.0,
+      "delay_rows_max": 5.0,
+      "delay_s_median": 0.1,
+      "delay_s_max": 0.5
+    },
+    {
+      "detector": "CUSUM-reset(k=3)",
+      "key": "CUSUM-reset",
+      "split": "A",
+      "regime": "test",
+      "param": 3.0,
+      "f1": 0.977918,
+      "tp": 310,
+      "fp": 0,
+      "fn": 14,
+      "normal_fa_records": 0,
+      "normal_records": 120,
+      "abnormal_detected_records": 11,
+      "abnormal_records": 11,
+      "first_row_records": 4,
+      "delay_rows_median": 1.0,
+      "delay_rows_max": 3.0,
+      "delay_s_median": 0.1,
+      "delay_s_max": 0.3
+    },
+    {
+      "detector": "CUSUM-carry(k=5)",
+      "key": "CUSUM-carry",
+      "split": "A",
+      "regime": "valid",
+      "param": 5.0,
+      "f1": 0.998185,
+      "tp": 275,
+      "fp": 0,
+      "fn": 1,
+      "normal_fa_records": 0,
+      "normal_records": 120,
+      "abnormal_detected_records": 10,
+      "abnormal_records": 10,
+      "first_row_records": 9,
+      "delay_rows_median": 0.0,
+      "delay_rows_max": 1.0,
+      "delay_s_median": 0.0,
+      "delay_s_max": 0.1
+    },
+    {
+      "detector": "CUSUM-carry(k=5)",
+      "key": "CUSUM-carry",
+      "split": "A",
+      "regime": "test",
+      "param": 5.0,
+      "f1": 1.0,
+      "tp": 324,
+      "fp": 0,
+      "fn": 0,
+      "normal_fa_records": 0,
+      "normal_records": 120,
+      "abnormal_detected_records": 11,
+      "abnormal_records": 11,
+      "first_row_records": 11,
+      "delay_rows_median": 0.0,
+      "delay_rows_max": 0.0,
+      "delay_s_median": 0.0,
+      "delay_s_max": 0.0
+    },
+    {
+      "detector": "EWMA-reset(lambda=0.5)",
+      "key": "EWMA-reset",
+      "split": "A",
+      "regime": "valid",
+      "param": 0.5,
+      "f1": 0.972171,
+      "tp": 262,
+      "fp": 1,
+      "fn": 14,
+      "normal_fa_records": 1,
+      "normal_records": 120,
+      "abnormal_detected_records": 10,
+      "abnormal_records": 10,
+      "first_row_records": 4,
+      "delay_rows_median": 1.0,
+      "delay_rows_max": 5.0,
+      "delay_s_median": 0.1,
+      "delay_s_max": 0.5
+    },
+    {
+      "detector": "EWMA-reset(lambda=0.5)",
+      "key": "EWMA-reset",
+      "split": "A",
+      "regime": "test",
+      "param": 0.5,
+      "f1": 0.976303,
+      "tp": 309,
+      "fp": 0,
+      "fn": 15,
+      "normal_fa_records": 0,
+      "normal_records": 120,
+      "abnormal_detected_records": 11,
+      "abnormal_records": 11,
+      "first_row_records": 4,
+      "delay_rows_median": 1.0,
+      "delay_rows_max": 3.0,
+      "delay_s_median": 0.1,
+      "delay_s_max": 0.3
+    },
+    {
+      "detector": "EWMA-carry(lambda=0.5)",
+      "key": "EWMA-carry",
+      "split": "A",
+      "regime": "valid",
+      "param": 0.5,
+      "f1": 0.994555,
+      "tp": 274,
+      "fp": 1,
+      "fn": 2,
+      "normal_fa_records": 1,
+      "normal_records": 120,
+      "abnormal_detected_records": 10,
+      "abnormal_records": 10,
+      "first_row_records": 9,
+      "delay_rows_median": 0.0,
+      "delay_rows_max": 1.0,
+      "delay_s_median": 0.0,
+      "delay_s_max": 0.1
+    },
+    {
+      "detector": "EWMA-carry(lambda=0.5)",
+      "key": "EWMA-carry",
+      "split": "A",
+      "regime": "test",
+      "param": 0.5,
+      "f1": 1.0,
+      "tp": 324,
+      "fp": 0,
+      "fn": 0,
+      "normal_fa_records": 0,
+      "normal_records": 120,
+      "abnormal_detected_records": 11,
+      "abnormal_records": 11,
+      "first_row_records": 11,
+      "delay_rows_median": 0.0,
+      "delay_rows_max": 0.0,
+      "delay_s_median": 0.0,
+      "delay_s_max": 0.0
+    },
+    {
+      "detector": "v2",
+      "key": "v2",
+      "split": "B",
+      "regime": "valid",
+      "param": NaN,
+      "f1": 0.97026,
+      "tp": 261,
+      "fp": 1,
+      "fn": 15,
+      "normal_fa_records": 1,
+      "normal_records": 120,
+      "abnormal_detected_records": 10,
+      "abnormal_records": 10,
+      "first_row_records": 6,
+      "delay_rows_median": 0.0,
+      "delay_rows_max": 5.0,
+      "delay_s_median": 0.0,
+      "delay_s_max": 0.5
+    },
+    {
+      "detector": "v2",
+      "key": "v2",
+      "split": "B",
+      "regime": "test",
+      "param": NaN,
+      "f1": 0.970079,
+      "tp": 308,
+      "fp": 3,
+      "fn": 16,
+      "normal_fa_records": 3,
+      "normal_records": 180,
+      "abnormal_detected_records": 11,
+      "abnormal_records": 11,
+      "first_row_records": 5,
+      "delay_rows_median": 1.0,
+      "delay_rows_max": 3.0,
+      "delay_s_median": 0.1,
+      "delay_s_max": 0.3
+    },
+    {
+      "detector": "v2+R1",
+      "key": "v2+H1",
+      "split": "B",
+      "regime": "valid",
+      "param": NaN,
+      "f1": 0.998192,
+      "tp": 276,
+      "fp": 1,
+      "fn": 0,
+      "normal_fa_records": 1,
+      "normal_records": 120,
+      "abnormal_detected_records": 10,
+      "abnormal_records": 10,
+      "first_row_records": 10,
+      "delay_rows_median": 0.0,
+      "delay_rows_max": 0.0,
+      "delay_s_median": 0.0,
+      "delay_s_max": 0.0
+    },
+    {
+      "detector": "v2+R1",
+      "key": "v2+H1",
+      "split": "B",
+      "regime": "test",
+      "param": NaN,
+      "f1": 0.995392,
+      "tp": 324,
+      "fp": 3,
+      "fn": 0,
+      "normal_fa_records": 3,
+      "normal_records": 180,
+      "abnormal_detected_records": 11,
+      "abnormal_records": 11,
+      "first_row_records": 11,
+      "delay_rows_median": 0.0,
+      "delay_rows_max": 0.0,
+      "delay_s_median": 0.0,
+      "delay_s_max": 0.0
+    },
+    {
+      "detector": "v2+R1+R2(최종)",
+      "key": "v2+H1+H2",
+      "split": "B",
+      "regime": "valid",
+      "param": NaN,
+      "f1": 0.998192,
+      "tp": 276,
+      "fp": 1,
+      "fn": 0,
+      "normal_fa_records": 1,
+      "normal_records": 120,
+      "abnormal_detected_records": 10,
+      "abnormal_records": 10,
+      "first_row_records": 10,
+      "delay_rows_median": 0.0,
+      "delay_rows_max": 0.0,
+      "delay_s_median": 0.0,
+      "delay_s_max": 0.0
+    },
+    {
+      "detector": "v2+R1+R2(최종)",
+      "key": "v2+H1+H2",
+      "split": "B",
+      "regime": "test",
+      "param": NaN,
+      "f1": 1.0,
+      "tp": 324,
+      "fp": 0,
+      "fn": 0,
+      "normal_fa_records": 0,
+      "normal_records": 180,
+      "abnormal_detected_records": 11,
+      "abnormal_records": 11,
+      "first_row_records": 11,
+      "delay_rows_median": 0.0,
+      "delay_rows_max": 0.0,
+      "delay_s_median": 0.0,
+      "delay_s_max": 0.0
+    },
+    {
+      "detector": "CUSUM-reset(k=3)",
+      "key": "CUSUM-reset",
+      "split": "B",
+      "regime": "valid",
+      "param": 3.0,
+      "f1": 0.97786,
+      "tp": 265,
+      "fp": 1,
+      "fn": 11,
+      "normal_fa_records": 1,
+      "normal_records": 120,
+      "abnormal_detected_records": 10,
+      "abnormal_records": 10,
+      "first_row_records": 6,
+      "delay_rows_median": 0.0,
+      "delay_rows_max": 5.0,
+      "delay_s_median": 0.0,
+      "delay_s_max": 0.5
+    },
+    {
+      "detector": "CUSUM-reset(k=3)",
+      "key": "CUSUM-reset",
+      "split": "B",
+      "regime": "test",
+      "param": 3.0,
+      "f1": 0.974922,
+      "tp": 311,
+      "fp": 3,
+      "fn": 13,
+      "normal_fa_records": 3,
+      "normal_records": 180,
+      "abnormal_detected_records": 11,
+      "abnormal_records": 11,
+      "first_row_records": 5,
+      "delay_rows_median": 1.0,
+      "delay_rows_max": 3.0,
+      "delay_s_median": 0.1,
+      "delay_s_max": 0.3
+    },
+    {
+      "detector": "CUSUM-carry(k=5)",
+      "key": "CUSUM-carry",
+      "split": "B",
+      "regime": "valid",
+      "param": 5.0,
+      "f1": 0.998185,
+      "tp": 275,
+      "fp": 0,
+      "fn": 1,
+      "normal_fa_records": 0,
+      "normal_records": 120,
+      "abnormal_detected_records": 10,
+      "abnormal_records": 10,
+      "first_row_records": 9,
+      "delay_rows_median": 0.0,
+      "delay_rows_max": 1.0,
+      "delay_s_median": 0.0,
+      "delay_s_max": 0.1
+    },
+    {
+      "detector": "CUSUM-carry(k=5)",
+      "key": "CUSUM-carry",
+      "split": "B",
+      "regime": "test",
+      "param": 5.0,
+      "f1": 1.0,
+      "tp": 324,
+      "fp": 0,
+      "fn": 0,
+      "normal_fa_records": 0,
+      "normal_records": 180,
+      "abnormal_detected_records": 11,
+      "abnormal_records": 11,
+      "first_row_records": 11,
+      "delay_rows_median": 0.0,
+      "delay_rows_max": 0.0,
+      "delay_s_median": 0.0,
+      "delay_s_max": 0.0
+    },
+    {
+      "detector": "EWMA-reset(lambda=0.5)",
+      "key": "EWMA-reset",
+      "split": "B",
+      "regime": "valid",
+      "param": 0.5,
+      "f1": 0.972274,
+      "tp": 263,
+      "fp": 2,
+      "fn": 13,
+      "normal_fa_records": 1,
+      "normal_records": 120,
+      "abnormal_detected_records": 10,
+      "abnormal_records": 10,
+      "first_row_records": 5,
+      "delay_rows_median": 0.5,
+      "delay_rows_max": 5.0,
+      "delay_s_median": 0.05,
+      "delay_s_max": 0.5
+    },
+    {
+      "detector": "EWMA-reset(lambda=0.5)",
+      "key": "EWMA-reset",
+      "split": "B",
+      "regime": "test",
+      "param": 0.5,
+      "f1": 0.976378,
+      "tp": 310,
+      "fp": 1,
+      "fn": 14,
+      "normal_fa_records": 1,
+      "normal_records": 180,
+      "abnormal_detected_records": 11,
+      "abnormal_records": 11,
+      "first_row_records": 4,
+      "delay_rows_median": 1.0,
+      "delay_rows_max": 3.0,
+      "delay_s_median": 0.1,
+      "delay_s_max": 0.3
+    },
+    {
+      "detector": "EWMA-carry(lambda=0.5)",
+      "key": "EWMA-carry",
+      "split": "B",
+      "regime": "valid",
+      "param": 0.5,
+      "f1": 0.99639,
+      "tp": 276,
+      "fp": 2,
+      "fn": 0,
+      "normal_fa_records": 1,
+      "normal_records": 120,
+      "abnormal_detected_records": 10,
+      "abnormal_records": 10,
+      "first_row_records": 10,
+      "delay_rows_median": 0.0,
+      "delay_rows_max": 0.0,
+      "delay_s_median": 0.0,
+      "delay_s_max": 0.0
+    },
+    {
+      "detector": "EWMA-carry(lambda=0.5)",
+      "key": "EWMA-carry",
+      "split": "B",
+      "regime": "test",
+      "param": 0.5,
+      "f1": 0.998459,
+      "tp": 324,
+      "fp": 1,
+      "fn": 0,
+      "normal_fa_records": 1,
+      "normal_records": 180,
+      "abnormal_detected_records": 11,
+      "abnormal_records": 11,
+      "first_row_records": 11,
+      "delay_rows_median": 0.0,
+      "delay_rows_max": 0.0,
+      "delay_s_median": 0.0,
+      "delay_s_max": 0.0
+    }
+  ],
+  "v2_test_miss_positions": {
+    "A": {
+      "fn_rows": 22,
+      "fn_rows_pos_le_6": 20,
+      "by_position": {
+        "0": 7,
+        "1": 7,
+        "2": 2,
+        "4": 2,
+        "6": 2,
+        "19": 1,
+        "25": 1
+      }
+    },
+    "B": {
+      "fn_rows": 16,
+      "fn_rows_pos_le_6": 16,
+      "by_position": {
+        "0": 6,
+        "1": 6,
+        "2": 2,
+        "4": 1,
+        "6": 1
+      }
+    }
+  },
+  "first_alarm_delay": [
+    {
+      "rec": "test:abnormal:10",
+      "rows_in_record": 4,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2"
+    },
+    {
+      "rec": "test:abnormal:11",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2"
+    },
+    {
+      "rec": "test:abnormal:12",
+      "rows_in_record": 42,
+      "first_alarm_row": 1,
+      "first_alarm_s": 0.1,
+      "split": "A",
+      "key": "v2"
+    },
+    {
+      "rec": "test:abnormal:13",
+      "rows_in_record": 28,
+      "first_alarm_row": 2,
+      "first_alarm_s": 0.2,
+      "split": "A",
+      "key": "v2"
+    },
+    {
+      "rec": "test:abnormal:14",
+      "rows_in_record": 15,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2"
+    },
+    {
+      "rec": "test:abnormal:15",
+      "rows_in_record": 50,
+      "first_alarm_row": 2,
+      "first_alarm_s": 0.2,
+      "split": "A",
+      "key": "v2"
+    },
+    {
+      "rec": "test:abnormal:16",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2"
+    },
+    {
+      "rec": "test:abnormal:17",
+      "rows_in_record": 36,
+      "first_alarm_row": 1,
+      "first_alarm_s": 0.1,
+      "split": "A",
+      "key": "v2"
+    },
+    {
+      "rec": "test:abnormal:18",
+      "rows_in_record": 24,
+      "first_alarm_row": 3,
+      "first_alarm_s": 0.3,
+      "split": "A",
+      "key": "v2"
+    },
+    {
+      "rec": "test:abnormal:19",
+      "rows_in_record": 10,
+      "first_alarm_row": 2,
+      "first_alarm_s": 0.2,
+      "split": "A",
+      "key": "v2"
+    },
+    {
+      "rec": "test:abnormal:20",
+      "rows_in_record": 15,
+      "first_alarm_row": 3,
+      "first_alarm_s": 0.3,
+      "split": "A",
+      "key": "v2"
+    },
+    {
+      "rec": "test:abnormal:10",
+      "rows_in_record": 4,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2+H1"
+    },
+    {
+      "rec": "test:abnormal:11",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2+H1"
+    },
+    {
+      "rec": "test:abnormal:12",
+      "rows_in_record": 42,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2+H1"
+    },
+    {
+      "rec": "test:abnormal:13",
+      "rows_in_record": 28,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2+H1"
+    },
+    {
+      "rec": "test:abnormal:14",
+      "rows_in_record": 15,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2+H1"
+    },
+    {
+      "rec": "test:abnormal:15",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2+H1"
+    },
+    {
+      "rec": "test:abnormal:16",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2+H1"
+    },
+    {
+      "rec": "test:abnormal:17",
+      "rows_in_record": 36,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2+H1"
+    },
+    {
+      "rec": "test:abnormal:18",
+      "rows_in_record": 24,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2+H1"
+    },
+    {
+      "rec": "test:abnormal:19",
+      "rows_in_record": 10,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2+H1"
+    },
+    {
+      "rec": "test:abnormal:20",
+      "rows_in_record": 15,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2+H1"
+    },
+    {
+      "rec": "test:abnormal:10",
+      "rows_in_record": 4,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2+H1+H2"
+    },
+    {
+      "rec": "test:abnormal:11",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2+H1+H2"
+    },
+    {
+      "rec": "test:abnormal:12",
+      "rows_in_record": 42,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2+H1+H2"
+    },
+    {
+      "rec": "test:abnormal:13",
+      "rows_in_record": 28,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2+H1+H2"
+    },
+    {
+      "rec": "test:abnormal:14",
+      "rows_in_record": 15,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2+H1+H2"
+    },
+    {
+      "rec": "test:abnormal:15",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2+H1+H2"
+    },
+    {
+      "rec": "test:abnormal:16",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2+H1+H2"
+    },
+    {
+      "rec": "test:abnormal:17",
+      "rows_in_record": 36,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2+H1+H2"
+    },
+    {
+      "rec": "test:abnormal:18",
+      "rows_in_record": 24,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2+H1+H2"
+    },
+    {
+      "rec": "test:abnormal:19",
+      "rows_in_record": 10,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2+H1+H2"
+    },
+    {
+      "rec": "test:abnormal:20",
+      "rows_in_record": 15,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "v2+H1+H2"
+    },
+    {
+      "rec": "test:abnormal:10",
+      "rows_in_record": 4,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "CUSUM-reset"
+    },
+    {
+      "rec": "test:abnormal:11",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "CUSUM-reset"
+    },
+    {
+      "rec": "test:abnormal:12",
+      "rows_in_record": 42,
+      "first_alarm_row": 1,
+      "first_alarm_s": 0.1,
+      "split": "A",
+      "key": "CUSUM-reset"
+    },
+    {
+      "rec": "test:abnormal:13",
+      "rows_in_record": 28,
+      "first_alarm_row": 2,
+      "first_alarm_s": 0.2,
+      "split": "A",
+      "key": "CUSUM-reset"
+    },
+    {
+      "rec": "test:abnormal:14",
+      "rows_in_record": 15,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "CUSUM-reset"
+    },
+    {
+      "rec": "test:abnormal:15",
+      "rows_in_record": 50,
+      "first_alarm_row": 2,
+      "first_alarm_s": 0.2,
+      "split": "A",
+      "key": "CUSUM-reset"
+    },
+    {
+      "rec": "test:abnormal:16",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "CUSUM-reset"
+    },
+    {
+      "rec": "test:abnormal:17",
+      "rows_in_record": 36,
+      "first_alarm_row": 1,
+      "first_alarm_s": 0.1,
+      "split": "A",
+      "key": "CUSUM-reset"
+    },
+    {
+      "rec": "test:abnormal:18",
+      "rows_in_record": 24,
+      "first_alarm_row": 3,
+      "first_alarm_s": 0.3,
+      "split": "A",
+      "key": "CUSUM-reset"
+    },
+    {
+      "rec": "test:abnormal:19",
+      "rows_in_record": 10,
+      "first_alarm_row": 2,
+      "first_alarm_s": 0.2,
+      "split": "A",
+      "key": "CUSUM-reset"
+    },
+    {
+      "rec": "test:abnormal:20",
+      "rows_in_record": 15,
+      "first_alarm_row": 3,
+      "first_alarm_s": 0.3,
+      "split": "A",
+      "key": "CUSUM-reset"
+    },
+    {
+      "rec": "test:abnormal:10",
+      "rows_in_record": 4,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "CUSUM-carry"
+    },
+    {
+      "rec": "test:abnormal:11",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "CUSUM-carry"
+    },
+    {
+      "rec": "test:abnormal:12",
+      "rows_in_record": 42,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "CUSUM-carry"
+    },
+    {
+      "rec": "test:abnormal:13",
+      "rows_in_record": 28,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "CUSUM-carry"
+    },
+    {
+      "rec": "test:abnormal:14",
+      "rows_in_record": 15,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "CUSUM-carry"
+    },
+    {
+      "rec": "test:abnormal:15",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "CUSUM-carry"
+    },
+    {
+      "rec": "test:abnormal:16",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "CUSUM-carry"
+    },
+    {
+      "rec": "test:abnormal:17",
+      "rows_in_record": 36,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "CUSUM-carry"
+    },
+    {
+      "rec": "test:abnormal:18",
+      "rows_in_record": 24,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "CUSUM-carry"
+    },
+    {
+      "rec": "test:abnormal:19",
+      "rows_in_record": 10,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "CUSUM-carry"
+    },
+    {
+      "rec": "test:abnormal:20",
+      "rows_in_record": 15,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "CUSUM-carry"
+    },
+    {
+      "rec": "test:abnormal:10",
+      "rows_in_record": 4,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "EWMA-reset"
+    },
+    {
+      "rec": "test:abnormal:11",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "EWMA-reset"
+    },
+    {
+      "rec": "test:abnormal:12",
+      "rows_in_record": 42,
+      "first_alarm_row": 1,
+      "first_alarm_s": 0.1,
+      "split": "A",
+      "key": "EWMA-reset"
+    },
+    {
+      "rec": "test:abnormal:13",
+      "rows_in_record": 28,
+      "first_alarm_row": 2,
+      "first_alarm_s": 0.2,
+      "split": "A",
+      "key": "EWMA-reset"
+    },
+    {
+      "rec": "test:abnormal:14",
+      "rows_in_record": 15,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "EWMA-reset"
+    },
+    {
+      "rec": "test:abnormal:15",
+      "rows_in_record": 50,
+      "first_alarm_row": 3,
+      "first_alarm_s": 0.3,
+      "split": "A",
+      "key": "EWMA-reset"
+    },
+    {
+      "rec": "test:abnormal:16",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "EWMA-reset"
+    },
+    {
+      "rec": "test:abnormal:17",
+      "rows_in_record": 36,
+      "first_alarm_row": 1,
+      "first_alarm_s": 0.1,
+      "split": "A",
+      "key": "EWMA-reset"
+    },
+    {
+      "rec": "test:abnormal:18",
+      "rows_in_record": 24,
+      "first_alarm_row": 3,
+      "first_alarm_s": 0.3,
+      "split": "A",
+      "key": "EWMA-reset"
+    },
+    {
+      "rec": "test:abnormal:19",
+      "rows_in_record": 10,
+      "first_alarm_row": 2,
+      "first_alarm_s": 0.2,
+      "split": "A",
+      "key": "EWMA-reset"
+    },
+    {
+      "rec": "test:abnormal:20",
+      "rows_in_record": 15,
+      "first_alarm_row": 3,
+      "first_alarm_s": 0.3,
+      "split": "A",
+      "key": "EWMA-reset"
+    },
+    {
+      "rec": "test:abnormal:10",
+      "rows_in_record": 4,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "EWMA-carry"
+    },
+    {
+      "rec": "test:abnormal:11",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "EWMA-carry"
+    },
+    {
+      "rec": "test:abnormal:12",
+      "rows_in_record": 42,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "EWMA-carry"
+    },
+    {
+      "rec": "test:abnormal:13",
+      "rows_in_record": 28,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "EWMA-carry"
+    },
+    {
+      "rec": "test:abnormal:14",
+      "rows_in_record": 15,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "EWMA-carry"
+    },
+    {
+      "rec": "test:abnormal:15",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "EWMA-carry"
+    },
+    {
+      "rec": "test:abnormal:16",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "EWMA-carry"
+    },
+    {
+      "rec": "test:abnormal:17",
+      "rows_in_record": 36,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "EWMA-carry"
+    },
+    {
+      "rec": "test:abnormal:18",
+      "rows_in_record": 24,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "EWMA-carry"
+    },
+    {
+      "rec": "test:abnormal:19",
+      "rows_in_record": 10,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "EWMA-carry"
+    },
+    {
+      "rec": "test:abnormal:20",
+      "rows_in_record": 15,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "A",
+      "key": "EWMA-carry"
+    },
+    {
+      "rec": "test:abnormal:10",
+      "rows_in_record": 4,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2"
+    },
+    {
+      "rec": "test:abnormal:11",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2"
+    },
+    {
+      "rec": "test:abnormal:12",
+      "rows_in_record": 42,
+      "first_alarm_row": 1,
+      "first_alarm_s": 0.1,
+      "split": "B",
+      "key": "v2"
+    },
+    {
+      "rec": "test:abnormal:13",
+      "rows_in_record": 28,
+      "first_alarm_row": 2,
+      "first_alarm_s": 0.2,
+      "split": "B",
+      "key": "v2"
+    },
+    {
+      "rec": "test:abnormal:14",
+      "rows_in_record": 15,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2"
+    },
+    {
+      "rec": "test:abnormal:15",
+      "rows_in_record": 50,
+      "first_alarm_row": 2,
+      "first_alarm_s": 0.2,
+      "split": "B",
+      "key": "v2"
+    },
+    {
+      "rec": "test:abnormal:16",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2"
+    },
+    {
+      "rec": "test:abnormal:17",
+      "rows_in_record": 36,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2"
+    },
+    {
+      "rec": "test:abnormal:18",
+      "rows_in_record": 24,
+      "first_alarm_row": 3,
+      "first_alarm_s": 0.3,
+      "split": "B",
+      "key": "v2"
+    },
+    {
+      "rec": "test:abnormal:19",
+      "rows_in_record": 10,
+      "first_alarm_row": 2,
+      "first_alarm_s": 0.2,
+      "split": "B",
+      "key": "v2"
+    },
+    {
+      "rec": "test:abnormal:20",
+      "rows_in_record": 15,
+      "first_alarm_row": 3,
+      "first_alarm_s": 0.3,
+      "split": "B",
+      "key": "v2"
+    },
+    {
+      "rec": "test:abnormal:10",
+      "rows_in_record": 4,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2+H1"
+    },
+    {
+      "rec": "test:abnormal:11",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2+H1"
+    },
+    {
+      "rec": "test:abnormal:12",
+      "rows_in_record": 42,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2+H1"
+    },
+    {
+      "rec": "test:abnormal:13",
+      "rows_in_record": 28,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2+H1"
+    },
+    {
+      "rec": "test:abnormal:14",
+      "rows_in_record": 15,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2+H1"
+    },
+    {
+      "rec": "test:abnormal:15",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2+H1"
+    },
+    {
+      "rec": "test:abnormal:16",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2+H1"
+    },
+    {
+      "rec": "test:abnormal:17",
+      "rows_in_record": 36,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2+H1"
+    },
+    {
+      "rec": "test:abnormal:18",
+      "rows_in_record": 24,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2+H1"
+    },
+    {
+      "rec": "test:abnormal:19",
+      "rows_in_record": 10,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2+H1"
+    },
+    {
+      "rec": "test:abnormal:20",
+      "rows_in_record": 15,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2+H1"
+    },
+    {
+      "rec": "test:abnormal:10",
+      "rows_in_record": 4,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2+H1+H2"
+    },
+    {
+      "rec": "test:abnormal:11",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2+H1+H2"
+    },
+    {
+      "rec": "test:abnormal:12",
+      "rows_in_record": 42,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2+H1+H2"
+    },
+    {
+      "rec": "test:abnormal:13",
+      "rows_in_record": 28,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2+H1+H2"
+    },
+    {
+      "rec": "test:abnormal:14",
+      "rows_in_record": 15,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2+H1+H2"
+    },
+    {
+      "rec": "test:abnormal:15",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2+H1+H2"
+    },
+    {
+      "rec": "test:abnormal:16",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2+H1+H2"
+    },
+    {
+      "rec": "test:abnormal:17",
+      "rows_in_record": 36,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2+H1+H2"
+    },
+    {
+      "rec": "test:abnormal:18",
+      "rows_in_record": 24,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2+H1+H2"
+    },
+    {
+      "rec": "test:abnormal:19",
+      "rows_in_record": 10,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2+H1+H2"
+    },
+    {
+      "rec": "test:abnormal:20",
+      "rows_in_record": 15,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "v2+H1+H2"
+    },
+    {
+      "rec": "test:abnormal:10",
+      "rows_in_record": 4,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "CUSUM-reset"
+    },
+    {
+      "rec": "test:abnormal:11",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "CUSUM-reset"
+    },
+    {
+      "rec": "test:abnormal:12",
+      "rows_in_record": 42,
+      "first_alarm_row": 1,
+      "first_alarm_s": 0.1,
+      "split": "B",
+      "key": "CUSUM-reset"
+    },
+    {
+      "rec": "test:abnormal:13",
+      "rows_in_record": 28,
+      "first_alarm_row": 2,
+      "first_alarm_s": 0.2,
+      "split": "B",
+      "key": "CUSUM-reset"
+    },
+    {
+      "rec": "test:abnormal:14",
+      "rows_in_record": 15,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "CUSUM-reset"
+    },
+    {
+      "rec": "test:abnormal:15",
+      "rows_in_record": 50,
+      "first_alarm_row": 2,
+      "first_alarm_s": 0.2,
+      "split": "B",
+      "key": "CUSUM-reset"
+    },
+    {
+      "rec": "test:abnormal:16",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "CUSUM-reset"
+    },
+    {
+      "rec": "test:abnormal:17",
+      "rows_in_record": 36,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "CUSUM-reset"
+    },
+    {
+      "rec": "test:abnormal:18",
+      "rows_in_record": 24,
+      "first_alarm_row": 3,
+      "first_alarm_s": 0.3,
+      "split": "B",
+      "key": "CUSUM-reset"
+    },
+    {
+      "rec": "test:abnormal:19",
+      "rows_in_record": 10,
+      "first_alarm_row": 2,
+      "first_alarm_s": 0.2,
+      "split": "B",
+      "key": "CUSUM-reset"
+    },
+    {
+      "rec": "test:abnormal:20",
+      "rows_in_record": 15,
+      "first_alarm_row": 3,
+      "first_alarm_s": 0.3,
+      "split": "B",
+      "key": "CUSUM-reset"
+    },
+    {
+      "rec": "test:abnormal:10",
+      "rows_in_record": 4,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "CUSUM-carry"
+    },
+    {
+      "rec": "test:abnormal:11",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "CUSUM-carry"
+    },
+    {
+      "rec": "test:abnormal:12",
+      "rows_in_record": 42,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "CUSUM-carry"
+    },
+    {
+      "rec": "test:abnormal:13",
+      "rows_in_record": 28,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "CUSUM-carry"
+    },
+    {
+      "rec": "test:abnormal:14",
+      "rows_in_record": 15,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "CUSUM-carry"
+    },
+    {
+      "rec": "test:abnormal:15",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "CUSUM-carry"
+    },
+    {
+      "rec": "test:abnormal:16",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "CUSUM-carry"
+    },
+    {
+      "rec": "test:abnormal:17",
+      "rows_in_record": 36,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "CUSUM-carry"
+    },
+    {
+      "rec": "test:abnormal:18",
+      "rows_in_record": 24,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "CUSUM-carry"
+    },
+    {
+      "rec": "test:abnormal:19",
+      "rows_in_record": 10,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "CUSUM-carry"
+    },
+    {
+      "rec": "test:abnormal:20",
+      "rows_in_record": 15,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "CUSUM-carry"
+    },
+    {
+      "rec": "test:abnormal:10",
+      "rows_in_record": 4,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "EWMA-reset"
+    },
+    {
+      "rec": "test:abnormal:11",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "EWMA-reset"
+    },
+    {
+      "rec": "test:abnormal:12",
+      "rows_in_record": 42,
+      "first_alarm_row": 1,
+      "first_alarm_s": 0.1,
+      "split": "B",
+      "key": "EWMA-reset"
+    },
+    {
+      "rec": "test:abnormal:13",
+      "rows_in_record": 28,
+      "first_alarm_row": 2,
+      "first_alarm_s": 0.2,
+      "split": "B",
+      "key": "EWMA-reset"
+    },
+    {
+      "rec": "test:abnormal:14",
+      "rows_in_record": 15,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "EWMA-reset"
+    },
+    {
+      "rec": "test:abnormal:15",
+      "rows_in_record": 50,
+      "first_alarm_row": 2,
+      "first_alarm_s": 0.2,
+      "split": "B",
+      "key": "EWMA-reset"
+    },
+    {
+      "rec": "test:abnormal:16",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "EWMA-reset"
+    },
+    {
+      "rec": "test:abnormal:17",
+      "rows_in_record": 36,
+      "first_alarm_row": 1,
+      "first_alarm_s": 0.1,
+      "split": "B",
+      "key": "EWMA-reset"
+    },
+    {
+      "rec": "test:abnormal:18",
+      "rows_in_record": 24,
+      "first_alarm_row": 3,
+      "first_alarm_s": 0.3,
+      "split": "B",
+      "key": "EWMA-reset"
+    },
+    {
+      "rec": "test:abnormal:19",
+      "rows_in_record": 10,
+      "first_alarm_row": 2,
+      "first_alarm_s": 0.2,
+      "split": "B",
+      "key": "EWMA-reset"
+    },
+    {
+      "rec": "test:abnormal:20",
+      "rows_in_record": 15,
+      "first_alarm_row": 3,
+      "first_alarm_s": 0.3,
+      "split": "B",
+      "key": "EWMA-reset"
+    },
+    {
+      "rec": "test:abnormal:10",
+      "rows_in_record": 4,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "EWMA-carry"
+    },
+    {
+      "rec": "test:abnormal:11",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "EWMA-carry"
+    },
+    {
+      "rec": "test:abnormal:12",
+      "rows_in_record": 42,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "EWMA-carry"
+    },
+    {
+      "rec": "test:abnormal:13",
+      "rows_in_record": 28,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "EWMA-carry"
+    },
+    {
+      "rec": "test:abnormal:14",
+      "rows_in_record": 15,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "EWMA-carry"
+    },
+    {
+      "rec": "test:abnormal:15",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "EWMA-carry"
+    },
+    {
+      "rec": "test:abnormal:16",
+      "rows_in_record": 50,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "EWMA-carry"
+    },
+    {
+      "rec": "test:abnormal:17",
+      "rows_in_record": 36,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "EWMA-carry"
+    },
+    {
+      "rec": "test:abnormal:18",
+      "rows_in_record": 24,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "EWMA-carry"
+    },
+    {
+      "rec": "test:abnormal:19",
+      "rows_in_record": 10,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "EWMA-carry"
+    },
+    {
+      "rec": "test:abnormal:20",
+      "rows_in_record": 15,
+      "first_alarm_row": 0,
+      "first_alarm_s": 0.0,
+      "split": "B",
+      "key": "EWMA-carry"
+    }
+  ],
+  "uncertainty": {
+    "event_sample": {
+      "abnormal_records_total": 21,
+      "abnormal_test_records": 11,
+      "event_start": "2022-07-17 10:51:07.943000",
+      "event_end": "2022-07-17 10:53:53.540000",
+      "event_span_s": 165.597,
+      "test_span_s": 84.214,
+      "independent_event_samples": 1,
+      "note": "이상 21기록(검증 10·시험 11)은 2022-07-17 한 고장 사건의 연속 구간이다. 기록 단위 구간은 '이 사건 안에서 기록을 다시 뽑는다면'의 변동만 반영하고, 다른 고장 사건으로의 일반화 불확실성(사건 단위 표본 1)은 반영하지 못한다"
+    },
+    "clopper_pearson": [
+      {
+        "split": "A",
+        "model": "v2",
+        "normal_fa_records": "0/120",
+        "fa_rate_upper95_one_sided": 0.0247,
+        "fa_rate_ci95_two_sided": [
+          0.0,
+          0.0303
+        ],
+        "fa_nominal_alpha_grid": 0.0083,
+        "fa_expected_records_at_nominal": 0.99,
+        "fa_binom_p_ge_k_at_nominal": 1.0,
+        "abnormal_detected_records": "11/11",
+        "detect_rate_lower95_one_sided": 0.7616,
+        "detect_rate_ci95_two_sided": [
+          0.7151,
+          1.0
+        ]
+      },
+      {
+        "split": "A",
+        "model": "v2+R1",
+        "normal_fa_records": "0/120",
+        "fa_rate_upper95_one_sided": 0.0247,
+        "fa_rate_ci95_two_sided": [
+          0.0,
+          0.0303
+        ],
+        "fa_nominal_alpha_grid": 0.0083,
+        "fa_expected_records_at_nominal": 0.99,
+        "fa_binom_p_ge_k_at_nominal": 1.0,
+        "abnormal_detected_records": "11/11",
+        "detect_rate_lower95_one_sided": 0.7616,
+        "detect_rate_ci95_two_sided": [
+          0.7151,
+          1.0
+        ]
+      },
+      {
+        "split": "A",
+        "model": "v2+R1+R2(최종)",
+        "normal_fa_records": "0/120",
+        "fa_rate_upper95_one_sided": 0.0247,
+        "fa_rate_ci95_two_sided": [
+          0.0,
+          0.0303
+        ],
+        "fa_nominal_alpha_grid": 0.0083,
+        "fa_expected_records_at_nominal": 0.99,
+        "fa_binom_p_ge_k_at_nominal": 1.0,
+        "abnormal_detected_records": "11/11",
+        "detect_rate_lower95_one_sided": 0.7616,
+        "detect_rate_ci95_two_sided": [
+          0.7151,
+          1.0
+        ]
+      },
+      {
+        "split": "B",
+        "model": "v2",
+        "normal_fa_records": "3/180",
+        "fa_rate_upper95_one_sided": 0.0425,
+        "fa_rate_ci95_two_sided": [
+          0.0035,
+          0.0479
+        ],
+        "fa_nominal_alpha_grid": 0.0083,
+        "fa_expected_records_at_nominal": 1.49,
+        "fa_binom_p_ge_k_at_nominal": 0.1875,
+        "abnormal_detected_records": "11/11",
+        "detect_rate_lower95_one_sided": 0.7616,
+        "detect_rate_ci95_two_sided": [
+          0.7151,
+          1.0
+        ]
+      },
+      {
+        "split": "B",
+        "model": "v2+R1",
+        "normal_fa_records": "3/180",
+        "fa_rate_upper95_one_sided": 0.0425,
+        "fa_rate_ci95_two_sided": [
+          0.0035,
+          0.0479
+        ],
+        "fa_nominal_alpha_grid": 0.0083,
+        "fa_expected_records_at_nominal": 1.49,
+        "fa_binom_p_ge_k_at_nominal": 0.1875,
+        "abnormal_detected_records": "11/11",
+        "detect_rate_lower95_one_sided": 0.7616,
+        "detect_rate_ci95_two_sided": [
+          0.7151,
+          1.0
+        ]
+      },
+      {
+        "split": "B",
+        "model": "v2+R1+R2(최종)",
+        "normal_fa_records": "0/180",
+        "fa_rate_upper95_one_sided": 0.0165,
+        "fa_rate_ci95_two_sided": [
+          0.0,
+          0.0203
+        ],
+        "fa_nominal_alpha_grid": 0.0083,
+        "fa_expected_records_at_nominal": 1.49,
+        "fa_binom_p_ge_k_at_nominal": 1.0,
+        "abnormal_detected_records": "11/11",
+        "detect_rate_lower95_one_sided": 0.7616,
+        "detect_rate_ci95_two_sided": [
+          0.7151,
+          1.0
+        ]
+      }
+    ],
+    "bootstrap": {
+      "A": {
+        "v2": {
+          "point": 0.964856,
+          "ci95": [
+            0.945946,
+            0.977408
+          ],
+          "mean": 0.963882,
+          "share_f1_eq_1": 0.0,
+          "records": {
+            "normal": 120,
+            "abnormal": 11
+          },
+          "n_boot": 10000,
+          "seed": 0,
+          "split": "A"
+        },
+        "v2+H1": {
+          "point": 1.0,
+          "ci95": [
+            1.0,
+            1.0
+          ],
+          "mean": 1.0,
+          "share_f1_eq_1": 1.0,
+          "records": {
+            "normal": 120,
+            "abnormal": 11
+          },
+          "n_boot": 10000,
+          "seed": 0,
+          "split": "A"
+        },
+        "v2+H1+H2": {
+          "point": 1.0,
+          "ci95": [
+            1.0,
+            1.0
+          ],
+          "mean": 1.0,
+          "share_f1_eq_1": 1.0,
+          "records": {
+            "normal": 120,
+            "abnormal": 11
+          },
+          "n_boot": 10000,
+          "seed": 0,
+          "split": "A"
+        },
+        "diff_final_minus_v2": {
+          "point": 0.035144,
+          "ci95": [
+            0.022592,
+            0.054054
+          ],
+          "share_le_0": 0.0
+        }
+      },
+      "B": {
+        "v2": {
+          "point": 0.970079,
+          "ci95": [
+            0.948489,
+            0.983193
+          ],
+          "mean": 0.969068,
+          "share_f1_eq_1": 0.0,
+          "records": {
+            "normal": 180,
+            "abnormal": 11
+          },
+          "n_boot": 10000,
+          "seed": 0,
+          "split": "B"
+        },
+        "v2+H1": {
+          "point": 0.995392,
+          "ci95": [
+            0.988763,
+            1.0
+          ],
+          "mean": 0.995282,
+          "share_f1_eq_1": 0.0466,
+          "records": {
+            "normal": 180,
+            "abnormal": 11
+          },
+          "n_boot": 10000,
+          "seed": 0,
+          "split": "B"
+        },
+        "v2+H1+H2": {
+          "point": 1.0,
+          "ci95": [
+            1.0,
+            1.0
+          ],
+          "mean": 1.0,
+          "share_f1_eq_1": 1.0,
+          "records": {
+            "normal": 180,
+            "abnormal": 11
+          },
+          "n_boot": 10000,
+          "seed": 0,
+          "split": "B"
+        },
+        "diff_final_minus_v2": {
+          "point": 0.029921,
+          "ci95": [
+            0.016807,
+            0.051511
+          ],
+          "share_le_0": 0.0
+        }
+      }
+    },
+    "note_overlap": "A 시험 정상 기록(480~599)은 B 시험 정상 기록(420~599)에 포함된다. A·B 구간을 합쳐 독립 표본처럼 다루면 안 된다"
+  },
+  "operations": [
+    {
+      "split": "A",
+      "model": "v2",
+      "alpha": 0.01,
+      "normal_rows": 4090,
+      "measured_s": 409.0,
+      "calendar_s": 965.8,
+      "normal_records": 120,
+      "alarm_rows": 0,
+      "alarm_records": 0,
+      "alarm_events": 0,
+      "events_per_h_measured": 0.0,
+      "events_per_h_calendar": 0.0,
+      "poisson_upper95_count": 2.996,
+      "events_per_h_upper95_measured": 26.37,
+      "events_per_h_upper95_calendar": 11.17,
+      "records_per_h_calendar": 447.3,
+      "nominal_fa_records_per_h_calendar": 3.7
+    },
+    {
+      "split": "A",
+      "model": "v2",
+      "alpha": 0.03,
+      "normal_rows": 4090,
+      "measured_s": 409.0,
+      "calendar_s": 965.8,
+      "normal_records": 120,
+      "alarm_rows": 1,
+      "alarm_records": 1,
+      "alarm_events": 1,
+      "events_per_h_measured": 8.802,
+      "events_per_h_calendar": 3.728,
+      "poisson_upper95_count": 4.744,
+      "events_per_h_upper95_measured": 41.76,
+      "events_per_h_upper95_calendar": 17.68,
+      "records_per_h_calendar": 447.3,
+      "nominal_fa_records_per_h_calendar": 11.09
+    },
+    {
+      "split": "A",
+      "model": "v2",
+      "alpha": 0.05,
+      "normal_rows": 4090,
+      "measured_s": 409.0,
+      "calendar_s": 965.8,
+      "normal_records": 120,
+      "alarm_rows": 1,
+      "alarm_records": 1,
+      "alarm_events": 1,
+      "events_per_h_measured": 8.802,
+      "events_per_h_calendar": 3.728,
+      "poisson_upper95_count": 4.744,
+      "events_per_h_upper95_measured": 41.76,
+      "events_per_h_upper95_calendar": 17.68,
+      "records_per_h_calendar": 447.3,
+      "nominal_fa_records_per_h_calendar": 22.18
+    },
+    {
+      "split": "A",
+      "model": "v2+R1",
+      "alpha": 0.01,
+      "normal_rows": 4090,
+      "measured_s": 409.0,
+      "calendar_s": 965.8,
+      "normal_records": 120,
+      "alarm_rows": 0,
+      "alarm_records": 0,
+      "alarm_events": 0,
+      "events_per_h_measured": 0.0,
+      "events_per_h_calendar": 0.0,
+      "poisson_upper95_count": 2.996,
+      "events_per_h_upper95_measured": 26.37,
+      "events_per_h_upper95_calendar": 11.17,
+      "records_per_h_calendar": 447.3,
+      "nominal_fa_records_per_h_calendar": 3.7
+    },
+    {
+      "split": "A",
+      "model": "v2+R1",
+      "alpha": 0.03,
+      "normal_rows": 4090,
+      "measured_s": 409.0,
+      "calendar_s": 965.8,
+      "normal_records": 120,
+      "alarm_rows": 1,
+      "alarm_records": 1,
+      "alarm_events": 1,
+      "events_per_h_measured": 8.802,
+      "events_per_h_calendar": 3.728,
+      "poisson_upper95_count": 4.744,
+      "events_per_h_upper95_measured": 41.76,
+      "events_per_h_upper95_calendar": 17.68,
+      "records_per_h_calendar": 447.3,
+      "nominal_fa_records_per_h_calendar": 11.09
+    },
+    {
+      "split": "A",
+      "model": "v2+R1",
+      "alpha": 0.05,
+      "normal_rows": 4090,
+      "measured_s": 409.0,
+      "calendar_s": 965.8,
+      "normal_records": 120,
+      "alarm_rows": 1,
+      "alarm_records": 1,
+      "alarm_events": 1,
+      "events_per_h_measured": 8.802,
+      "events_per_h_calendar": 3.728,
+      "poisson_upper95_count": 4.744,
+      "events_per_h_upper95_measured": 41.76,
+      "events_per_h_upper95_calendar": 17.68,
+      "records_per_h_calendar": 447.3,
+      "nominal_fa_records_per_h_calendar": 22.18
+    },
+    {
+      "split": "A",
+      "model": "v2+R1+R2(최종)",
+      "alpha": 0.01,
+      "normal_rows": 4090,
+      "measured_s": 409.0,
+      "calendar_s": 965.8,
+      "normal_records": 120,
+      "alarm_rows": 0,
+      "alarm_records": 0,
+      "alarm_events": 0,
+      "events_per_h_measured": 0.0,
+      "events_per_h_calendar": 0.0,
+      "poisson_upper95_count": 2.996,
+      "events_per_h_upper95_measured": 26.37,
+      "events_per_h_upper95_calendar": 11.17,
+      "records_per_h_calendar": 447.3,
+      "nominal_fa_records_per_h_calendar": 3.7
+    },
+    {
+      "split": "A",
+      "model": "v2+R1+R2(최종)",
+      "alpha": 0.03,
+      "normal_rows": 4090,
+      "measured_s": 409.0,
+      "calendar_s": 965.8,
+      "normal_records": 120,
+      "alarm_rows": 0,
+      "alarm_records": 0,
+      "alarm_events": 0,
+      "events_per_h_measured": 0.0,
+      "events_per_h_calendar": 0.0,
+      "poisson_upper95_count": 2.996,
+      "events_per_h_upper95_measured": 26.37,
+      "events_per_h_upper95_calendar": 11.17,
+      "records_per_h_calendar": 447.3,
+      "nominal_fa_records_per_h_calendar": 11.09
+    },
+    {
+      "split": "A",
+      "model": "v2+R1+R2(최종)",
+      "alpha": 0.05,
+      "normal_rows": 4090,
+      "measured_s": 409.0,
+      "calendar_s": 965.8,
+      "normal_records": 120,
+      "alarm_rows": 0,
+      "alarm_records": 0,
+      "alarm_events": 0,
+      "events_per_h_measured": 0.0,
+      "events_per_h_calendar": 0.0,
+      "poisson_upper95_count": 2.996,
+      "events_per_h_upper95_measured": 26.37,
+      "events_per_h_upper95_calendar": 11.17,
+      "records_per_h_calendar": 447.3,
+      "nominal_fa_records_per_h_calendar": 22.18
+    },
+    {
+      "split": "A",
+      "model": "CUSUM-reset",
+      "alpha": 0.01,
+      "normal_rows": 4090,
+      "measured_s": 409.0,
+      "calendar_s": 965.8,
+      "normal_records": 120,
+      "alarm_rows": 0,
+      "alarm_records": 0,
+      "alarm_events": 0,
+      "events_per_h_measured": 0.0,
+      "events_per_h_calendar": 0.0,
+      "poisson_upper95_count": 2.996,
+      "events_per_h_upper95_measured": 26.37,
+      "events_per_h_upper95_calendar": 11.17,
+      "records_per_h_calendar": 447.3,
+      "nominal_fa_records_per_h_calendar": 3.7
+    },
+    {
+      "split": "A",
+      "model": "CUSUM-carry",
+      "alpha": 0.01,
+      "normal_rows": 4090,
+      "measured_s": 409.0,
+      "calendar_s": 965.8,
+      "normal_records": 120,
+      "alarm_rows": 0,
+      "alarm_records": 0,
+      "alarm_events": 0,
+      "events_per_h_measured": 0.0,
+      "events_per_h_calendar": 0.0,
+      "poisson_upper95_count": 2.996,
+      "events_per_h_upper95_measured": 26.37,
+      "events_per_h_upper95_calendar": 11.17,
+      "records_per_h_calendar": 447.3,
+      "nominal_fa_records_per_h_calendar": 3.7
+    },
+    {
+      "split": "A",
+      "model": "EWMA-reset",
+      "alpha": 0.01,
+      "normal_rows": 4090,
+      "measured_s": 409.0,
+      "calendar_s": 965.8,
+      "normal_records": 120,
+      "alarm_rows": 0,
+      "alarm_records": 0,
+      "alarm_events": 0,
+      "events_per_h_measured": 0.0,
+      "events_per_h_calendar": 0.0,
+      "poisson_upper95_count": 2.996,
+      "events_per_h_upper95_measured": 26.37,
+      "events_per_h_upper95_calendar": 11.17,
+      "records_per_h_calendar": 447.3,
+      "nominal_fa_records_per_h_calendar": 3.7
+    },
+    {
+      "split": "A",
+      "model": "EWMA-carry",
+      "alpha": 0.01,
+      "normal_rows": 4090,
+      "measured_s": 409.0,
+      "calendar_s": 965.8,
+      "normal_records": 120,
+      "alarm_rows": 0,
+      "alarm_records": 0,
+      "alarm_events": 0,
+      "events_per_h_measured": 0.0,
+      "events_per_h_calendar": 0.0,
+      "poisson_upper95_count": 2.996,
+      "events_per_h_upper95_measured": 26.37,
+      "events_per_h_upper95_calendar": 11.17,
+      "records_per_h_calendar": 447.3,
+      "nominal_fa_records_per_h_calendar": 3.7
+    },
+    {
+      "split": "B",
+      "model": "v2",
+      "alpha": 0.01,
+      "normal_rows": 6097,
+      "measured_s": 609.7,
+      "calendar_s": 1448.1,
+      "normal_records": 180,
+      "alarm_rows": 3,
+      "alarm_records": 3,
+      "alarm_events": 3,
+      "events_per_h_measured": 17.714,
+      "events_per_h_calendar": 7.458,
+      "poisson_upper95_count": 7.754,
+      "events_per_h_upper95_measured": 45.78,
+      "events_per_h_upper95_calendar": 19.28,
+      "records_per_h_calendar": 447.5,
+      "nominal_fa_records_per_h_calendar": 3.7
+    },
+    {
+      "split": "B",
+      "model": "v2",
+      "alpha": 0.03,
+      "normal_rows": 6097,
+      "measured_s": 609.7,
+      "calendar_s": 1448.1,
+      "normal_records": 180,
+      "alarm_rows": 7,
+      "alarm_records": 5,
+      "alarm_events": 4,
+      "events_per_h_measured": 23.618,
+      "events_per_h_calendar": 9.944,
+      "poisson_upper95_count": 9.154,
+      "events_per_h_upper95_measured": 54.05,
+      "events_per_h_upper95_calendar": 22.76,
+      "records_per_h_calendar": 447.5,
+      "nominal_fa_records_per_h_calendar": 11.09
+    },
+    {
+      "split": "B",
+      "model": "v2",
+      "alpha": 0.05,
+      "normal_rows": 6097,
+      "measured_s": 609.7,
+      "calendar_s": 1448.1,
+      "normal_records": 180,
+      "alarm_rows": 11,
+      "alarm_records": 7,
+      "alarm_events": 4,
+      "events_per_h_measured": 23.618,
+      "events_per_h_calendar": 9.944,
+      "poisson_upper95_count": 9.154,
+      "events_per_h_upper95_measured": 54.05,
+      "events_per_h_upper95_calendar": 22.76,
+      "records_per_h_calendar": 447.5,
+      "nominal_fa_records_per_h_calendar": 22.19
+    },
+    {
+      "split": "B",
+      "model": "v2+R1",
+      "alpha": 0.01,
+      "normal_rows": 6097,
+      "measured_s": 609.7,
+      "calendar_s": 1448.1,
+      "normal_records": 180,
+      "alarm_rows": 3,
+      "alarm_records": 3,
+      "alarm_events": 3,
+      "events_per_h_measured": 17.714,
+      "events_per_h_calendar": 7.458,
+      "poisson_upper95_count": 7.754,
+      "events_per_h_upper95_measured": 45.78,
+      "events_per_h_upper95_calendar": 19.28,
+      "records_per_h_calendar": 447.5,
+      "nominal_fa_records_per_h_calendar": 3.7
+    },
+    {
+      "split": "B",
+      "model": "v2+R1",
+      "alpha": 0.03,
+      "normal_rows": 6097,
+      "measured_s": 609.7,
+      "calendar_s": 1448.1,
+      "normal_records": 180,
+      "alarm_rows": 21,
+      "alarm_records": 7,
+      "alarm_events": 4,
+      "events_per_h_measured": 23.618,
+      "events_per_h_calendar": 9.944,
+      "poisson_upper95_count": 9.154,
+      "events_per_h_upper95_measured": 54.05,
+      "events_per_h_upper95_calendar": 22.76,
+      "records_per_h_calendar": 447.5,
+      "nominal_fa_records_per_h_calendar": 11.09
+    },
+    {
+      "split": "B",
+      "model": "v2+R1",
+      "alpha": 0.05,
+      "normal_rows": 6097,
+      "measured_s": 609.7,
+      "calendar_s": 1448.1,
+      "normal_records": 180,
+      "alarm_rows": 32,
+      "alarm_records": 10,
+      "alarm_events": 4,
+      "events_per_h_measured": 23.618,
+      "events_per_h_calendar": 9.944,
+      "poisson_upper95_count": 9.154,
+      "events_per_h_upper95_measured": 54.05,
+      "events_per_h_upper95_calendar": 22.76,
+      "records_per_h_calendar": 447.5,
+      "nominal_fa_records_per_h_calendar": 22.19
+    },
+    {
+      "split": "B",
+      "model": "v2+R1+R2(최종)",
+      "alpha": 0.01,
+      "normal_rows": 6097,
+      "measured_s": 609.7,
+      "calendar_s": 1448.1,
+      "normal_records": 180,
+      "alarm_rows": 0,
+      "alarm_records": 0,
+      "alarm_events": 0,
+      "events_per_h_measured": 0.0,
+      "events_per_h_calendar": 0.0,
+      "poisson_upper95_count": 2.996,
+      "events_per_h_upper95_measured": 17.69,
+      "events_per_h_upper95_calendar": 7.45,
+      "records_per_h_calendar": 447.5,
+      "nominal_fa_records_per_h_calendar": 3.7
+    },
+    {
+      "split": "B",
+      "model": "v2+R1+R2(최종)",
+      "alpha": 0.03,
+      "normal_rows": 6097,
+      "measured_s": 609.7,
+      "calendar_s": 1448.1,
+      "normal_records": 180,
+      "alarm_rows": 1,
+      "alarm_records": 1,
+      "alarm_events": 1,
+      "events_per_h_measured": 5.905,
+      "events_per_h_calendar": 2.486,
+      "poisson_upper95_count": 4.744,
+      "events_per_h_upper95_measured": 28.01,
+      "events_per_h_upper95_calendar": 11.79,
+      "records_per_h_calendar": 447.5,
+      "nominal_fa_records_per_h_calendar": 11.09
+    },
+    {
+      "split": "B",
+      "model": "v2+R1+R2(최종)",
+      "alpha": 0.05,
+      "normal_rows": 6097,
+      "measured_s": 609.7,
+      "calendar_s": 1448.1,
+      "normal_records": 180,
+      "alarm_rows": 9,
+      "alarm_records": 2,
+      "alarm_events": 1,
+      "events_per_h_measured": 5.905,
+      "events_per_h_calendar": 2.486,
+      "poisson_upper95_count": 4.744,
+      "events_per_h_upper95_measured": 28.01,
+      "events_per_h_upper95_calendar": 11.79,
+      "records_per_h_calendar": 447.5,
+      "nominal_fa_records_per_h_calendar": 22.19
+    },
+    {
+      "split": "B",
+      "model": "CUSUM-reset",
+      "alpha": 0.01,
+      "normal_rows": 6097,
+      "measured_s": 609.7,
+      "calendar_s": 1448.1,
+      "normal_records": 180,
+      "alarm_rows": 3,
+      "alarm_records": 3,
+      "alarm_events": 3,
+      "events_per_h_measured": 17.714,
+      "events_per_h_calendar": 7.458,
+      "poisson_upper95_count": 7.754,
+      "events_per_h_upper95_measured": 45.78,
+      "events_per_h_upper95_calendar": 19.28,
+      "records_per_h_calendar": 447.5,
+      "nominal_fa_records_per_h_calendar": 3.7
+    },
+    {
+      "split": "B",
+      "model": "CUSUM-carry",
+      "alpha": 0.01,
+      "normal_rows": 6097,
+      "measured_s": 609.7,
+      "calendar_s": 1448.1,
+      "normal_records": 180,
+      "alarm_rows": 0,
+      "alarm_records": 0,
+      "alarm_events": 0,
+      "events_per_h_measured": 0.0,
+      "events_per_h_calendar": 0.0,
+      "poisson_upper95_count": 2.996,
+      "events_per_h_upper95_measured": 17.69,
+      "events_per_h_upper95_calendar": 7.45,
+      "records_per_h_calendar": 447.5,
+      "nominal_fa_records_per_h_calendar": 3.7
+    },
+    {
+      "split": "B",
+      "model": "EWMA-reset",
+      "alpha": 0.01,
+      "normal_rows": 6097,
+      "measured_s": 609.7,
+      "calendar_s": 1448.1,
+      "normal_records": 180,
+      "alarm_rows": 1,
+      "alarm_records": 1,
+      "alarm_events": 1,
+      "events_per_h_measured": 5.905,
+      "events_per_h_calendar": 2.486,
+      "poisson_upper95_count": 4.744,
+      "events_per_h_upper95_measured": 28.01,
+      "events_per_h_upper95_calendar": 11.79,
+      "records_per_h_calendar": 447.5,
+      "nominal_fa_records_per_h_calendar": 3.7
+    },
+    {
+      "split": "B",
+      "model": "EWMA-carry",
+      "alpha": 0.01,
+      "normal_rows": 6097,
+      "measured_s": 609.7,
+      "calendar_s": 1448.1,
+      "normal_records": 180,
+      "alarm_rows": 1,
+      "alarm_records": 1,
+      "alarm_events": 1,
+      "events_per_h_measured": 5.905,
+      "events_per_h_calendar": 2.486,
+      "poisson_upper95_count": 4.744,
+      "events_per_h_upper95_measured": 28.01,
+      "events_per_h_upper95_calendar": 11.79,
+      "records_per_h_calendar": 447.5,
+      "nominal_fa_records_per_h_calendar": 3.7
+    }
+  ],
+  "splice_release": {
+    "A": [
+      {
+        "model": "v2",
+        "normal_rows": 4090,
+        "alarm_rows": 0,
+        "leading_alarm_rows": 0,
+        "release_after_s": 0.0,
+        "released": true,
+        "alarm_rows_first_record": 0,
+        "rows_first_record": 50,
+        "fa_records": 0,
+        "state_at_fault_end": null
+      },
+      {
+        "model": "v2+H1",
+        "normal_rows": 4090,
+        "alarm_rows": 7,
+        "leading_alarm_rows": 7,
+        "release_after_s": 0.7,
+        "released": true,
+        "alarm_rows_first_record": 7,
+        "rows_first_record": 50,
+        "fa_records": 1,
+        "state_at_fault_end": null
+      },
+      {
+        "model": "v2+H1+H2",
+        "normal_rows": 4090,
+        "alarm_rows": 7,
+        "leading_alarm_rows": 7,
+        "release_after_s": 0.7,
+        "released": true,
+        "alarm_rows_first_record": 7,
+        "rows_first_record": 50,
+        "fa_records": 1,
+        "state_at_fault_end": null
+      },
+      {
+        "model": "CUSUM-reset",
+        "normal_rows": 4090,
+        "alarm_rows": 0,
+        "leading_alarm_rows": 0,
+        "release_after_s": 0.0,
+        "released": true,
+        "alarm_rows_first_record": 0,
+        "rows_first_record": 50,
+        "fa_records": 0,
+        "state_at_fault_end": 279.375
+      },
+      {
+        "model": "CUSUM-carry",
+        "normal_rows": 4090,
+        "alarm_rows": 2920,
+        "leading_alarm_rows": 2920,
+        "release_after_s": 681.387,
+        "released": true,
+        "alarm_rows_first_record": 50,
+        "rows_first_record": 50,
+        "fa_records": 86,
+        "state_at_fault_end": 13011.287
+      },
+      {
+        "model": "EWMA-reset",
+        "normal_rows": 4090,
+        "alarm_rows": 0,
+        "leading_alarm_rows": 0,
+        "release_after_s": 0.0,
+        "released": true,
+        "alarm_rows_first_record": 0,
+        "rows_first_record": 50,
+        "fa_records": 0,
+        "state_at_fault_end": 16.008
+      },
+      {
+        "model": "EWMA-carry",
+        "normal_rows": 4090,
+        "alarm_rows": 2,
+        "leading_alarm_rows": 2,
+        "release_after_s": 0.2,
+        "released": true,
+        "alarm_rows_first_record": 2,
+        "rows_first_record": 50,
+        "fa_records": 1,
+        "state_at_fault_end": 16.009
+      }
+    ],
+    "B": [
+      {
+        "model": "v2",
+        "normal_rows": 6097,
+        "alarm_rows": 3,
+        "leading_alarm_rows": 0,
+        "release_after_s": 0.0,
+        "released": true,
+        "alarm_rows_first_record": 0,
+        "rows_first_record": 38,
+        "fa_records": 3,
+        "state_at_fault_end": null
+      },
+      {
+        "model": "v2+H1",
+        "normal_rows": 6097,
+        "alarm_rows": 10,
+        "leading_alarm_rows": 7,
+        "release_after_s": 0.7,
+        "released": true,
+        "alarm_rows_first_record": 7,
+        "rows_first_record": 38,
+        "fa_records": 4,
+        "state_at_fault_end": null
+      },
+      {
+        "model": "v2+H1+H2",
+        "normal_rows": 6097,
+        "alarm_rows": 7,
+        "leading_alarm_rows": 7,
+        "release_after_s": 0.7,
+        "released": true,
+        "alarm_rows_first_record": 7,
+        "rows_first_record": 38,
+        "fa_records": 1,
+        "state_at_fault_end": null
+      },
+      {
+        "model": "CUSUM-reset",
+        "normal_rows": 6097,
+        "alarm_rows": 3,
+        "leading_alarm_rows": 0,
+        "release_after_s": 0.0,
+        "released": true,
+        "alarm_rows_first_record": 0,
+        "rows_first_record": 38,
+        "fa_records": 3,
+        "state_at_fault_end": 280.277
+      },
+      {
+        "model": "CUSUM-carry",
+        "normal_rows": 6097,
+        "alarm_rows": 3068,
+        "leading_alarm_rows": 3068,
+        "release_after_s": 730.66,
+        "released": true,
+        "alarm_rows_first_record": 38,
+        "rows_first_record": 38,
+        "fa_records": 91,
+        "state_at_fault_end": 13087.016
+      },
+      {
+        "model": "EWMA-reset",
+        "normal_rows": 6097,
+        "alarm_rows": 1,
+        "leading_alarm_rows": 0,
+        "release_after_s": 0.0,
+        "released": true,
+        "alarm_rows_first_record": 0,
+        "rows_first_record": 38,
+        "fa_records": 1,
+        "state_at_fault_end": 16.173
+      },
+      {
+        "model": "EWMA-carry",
+        "normal_rows": 6097,
+        "alarm_rows": 4,
+        "leading_alarm_rows": 3,
+        "release_after_s": 0.3,
+        "released": true,
+        "alarm_rows_first_record": 3,
+        "rows_first_record": 38,
+        "fa_records": 2,
+        "state_at_fault_end": 16.174
+      }
+    ]
+  }
+}

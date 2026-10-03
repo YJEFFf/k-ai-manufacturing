@@ -1,0 +1,7549 @@
+{
+  "note": "test 채점 이후의 사후 비교. 잠근 선택(tvt_selection.json)·최종 모델(v2+H1+H2)에 영향 없음",
+  "config": {
+    "window": 8,
+    "window_sensitivity": [
+      6,
+      12
+    ],
+    "min_rows": 3,
+    "cum_var": 0.9,
+    "features": [
+      "vu_lrms",
+      "vl_lrms",
+      "cur_lrms",
+      "vu_ac1",
+      "vl_ac1",
+      "ul_corr",
+      "cur_res"
+    ],
+    "feature_ko": {
+      "vu_lrms": "상부 진동 RMS",
+      "vl_lrms": "하부 진동 RMS",
+      "cur_lrms": "전류 RMS(부하)",
+      "vu_ac1": "상부 진동 lag-1",
+      "vl_ac1": "하부 진동 lag-1",
+      "ul_corr": "상·하부 진동 상관",
+      "cur_res": "전류 사인 잔차 비율"
+    },
+    "standardize": "창 길이 n(3~8)별 정상 학습 평균·표준편차",
+    "t2_limit": "k(m+1)(m-1)/(m(m-k)) F(k,m-k;1-α) — 새 관측용",
+    "spe_limit": "Jackson–Mudholkar",
+    "classical_alarm": "T² 또는 SPE가 (1-α) 한계 초과(OR) ⇔ min(p_T², p_SPE) ≤ α",
+    "conformal": "score = max(−log10 tail_T², −log10 tail_SPE) (ExpTail 식), 검증 정상 기록 최댓값 conformal p, 검증 정상 LOO",
+    "load_variant": "창 길이별 z(진동 RMS) ~ z(전류 RMS) 정상 학습 OLS 잔차를 재표준화",
+    "nt_variant": "사후 변형: T²·SPE 꼬리 확률을 창 길이 n별 정상 학습 분포로 계산(검증 A 진단 후 추가, test 결과를 본 뒤)",
+    "seed": 0
+  },
+  "info": {
+    "A": {
+      "train_rows_scored": 11248,
+      "models": {
+        "mspc": {
+          "k": 5,
+          "explained_cum": [
+            0.5183,
+            0.6853,
+            0.8036,
+            0.8922,
+            0.9481,
+            0.9846,
+            1.0
+          ],
+          "eigenvalues": [
+            3.6106,
+            1.163,
+            0.8243,
+            0.6173,
+            0.389,
+            0.2544,
+            0.1074
+          ],
+          "loadings": {
+            "PC1": {
+              "vu_lrms": -0.308,
+              "vl_lrms": -0.485,
+              "cur_lrms": -0.492,
+              "vu_ac1": -0.152,
+              "vl_ac1": -0.383,
+              "ul_corr": -0.257,
+              "cur_res": 0.438
+            },
+            "PC2": {
+              "vu_lrms": -0.439,
+              "vl_lrms": 0.039,
+              "cur_lrms": 0.07,
+              "vu_ac1": 0.714,
+              "vl_ac1": 0.068,
+              "ul_corr": -0.506,
+              "cur_res": -0.175
+            },
+            "PC3": {
+              "vu_lrms": -0.035,
+              "vl_lrms": 0.087,
+              "cur_lrms": 0.044,
+              "vu_ac1": -0.514,
+              "vl_ac1": 0.568,
+              "ul_corr": -0.631,
+              "cur_res": 0.068
+            },
+            "PC4": {
+              "vu_lrms": 0.831,
+              "vl_lrms": -0.106,
+              "cur_lrms": -0.134,
+              "vu_ac1": 0.341,
+              "vl_ac1": -0.02,
+              "ul_corr": -0.343,
+              "cur_res": 0.215
+            },
+            "PC5": {
+              "vu_lrms": -0.105,
+              "vl_lrms": -0.211,
+              "cur_lrms": -0.175,
+              "vu_ac1": 0.289,
+              "vl_ac1": 0.693,
+              "ul_corr": 0.4,
+              "cur_res": 0.437
+            }
+          },
+          "h0": 0.2656,
+          "limits": {
+            "99%": {
+              "t2": 15.101,
+              "spe": 1.899
+            },
+            "97%": {
+              "t2": 12.385,
+              "spe": 1.375
+            },
+            "95%": {
+              "t2": 11.079,
+              "spe": 1.145
+            }
+          },
+          "classical_99": {
+            "t2_limit": 15.101,
+            "spe_limit": 1.899,
+            "train_normal_rows": {
+              "t2": 0.0138,
+              "spe": 0.02,
+              "either": 0.0329
+            },
+            "valid_normal_rows": {
+              "t2": 0.0127,
+              "spe": 0.0205,
+              "either": 0.0326,
+              "records_any": 0.4914
+            },
+            "valid_abnormal_rows": {
+              "t2": 0.9531,
+              "spe": 0.9922,
+              "either": 0.9961,
+              "records_any": 1.0
+            },
+            "test_normal_rows": {
+              "t2": 0.0743,
+              "spe": 0.0325,
+              "either": 0.1039,
+              "records_any": 0.7479
+            },
+            "test_abnormal_rows": {
+              "t2": 0.9669,
+              "spe": 1.0,
+              "either": 1.0,
+              "records_any": 1.0
+            }
+          },
+          "calibration": {
+            "global_tail": {
+              "n_records": 120,
+              "records_without_score": 4,
+              "top_records": {
+                "valid:normal:83": 13.308,
+                "valid:normal:4": 5.203,
+                "valid:normal:102": 4.618
+              }
+            },
+            "per_window_tail_nt": {
+              "n_records": 120,
+              "records_without_score": 4,
+              "top_records": {
+                "valid:normal:12": 3.783,
+                "valid:normal:80": 3.782,
+                "valid:normal:83": 3.584
+              }
+            }
+          },
+          "contributions": {
+            "abnormal_test": {
+              "t2": {
+                "vu_lrms": {
+                  "mean": 25.313,
+                  "share": 0.258
+                },
+                "vl_lrms": {
+                  "mean": 9.681,
+                  "share": 0.104
+                },
+                "cur_lrms": {
+                  "mean": 9.554,
+                  "share": 0.1
+                },
+                "vu_ac1": {
+                  "mean": 6.168,
+                  "share": 0.068
+                },
+                "vl_ac1": {
+                  "mean": 14.469,
+                  "share": 0.149
+                },
+                "ul_corr": {
+                  "mean": 3.518,
+                  "share": 0.058
+                },
+                "cur_res": {
+                  "mean": 26.619,
+                  "share": 0.265
+                }
+              },
+              "t2_rank": [
+                "cur_res",
+                "vu_lrms",
+                "vl_ac1",
+                "vl_lrms",
+                "cur_lrms",
+                "vu_ac1",
+                "ul_corr"
+              ],
+              "spe": {
+                "vu_lrms": {
+                  "mean": 0.196,
+                  "share": 0.009
+                },
+                "vl_lrms": {
+                  "mean": 12.078,
+                  "share": 0.439
+                },
+                "cur_lrms": {
+                  "mean": 1.859,
+                  "share": 0.122
+                },
+                "vu_ac1": {
+                  "mean": 0.05,
+                  "share": 0.002
+                },
+                "vl_ac1": {
+                  "mean": 0.685,
+                  "share": 0.034
+                },
+                "ul_corr": {
+                  "mean": 0.018,
+                  "share": 0.001
+                },
+                "cur_res": {
+                  "mean": 8.1,
+                  "share": 0.394
+                }
+              },
+              "spe_rank": [
+                "vl_lrms",
+                "cur_res",
+                "cur_lrms",
+                "vl_ac1",
+                "vu_lrms",
+                "vu_ac1",
+                "ul_corr"
+              ],
+              "mean_signed_z": {
+                "vu_lrms": 1.64,
+                "vl_lrms": -0.25,
+                "cur_lrms": -2.81,
+                "vu_ac1": 1.16,
+                "vl_ac1": 0.26,
+                "ul_corr": -1.37,
+                "cur_res": 7.11
+              },
+              "rows": 302,
+              "spe_dominant_share": 0.295,
+              "mean_t2": 95.32,
+              "mean_spe": 22.99
+            },
+            "normal_test": {
+              "t2": {
+                "vu_lrms": {
+                  "mean": 1.109,
+                  "share": 0.153
+                },
+                "vl_lrms": {
+                  "mean": 0.209,
+                  "share": 0.04
+                },
+                "cur_lrms": {
+                  "mean": 0.23,
+                  "share": 0.043
+                },
+                "vu_ac1": {
+                  "mean": 1.163,
+                  "share": 0.174
+                },
+                "vl_ac1": {
+                  "mean": 2.529,
+                  "share": 0.291
+                },
+                "ul_corr": {
+                  "mean": 2.21,
+                  "share": 0.247
+                },
+                "cur_res": {
+                  "mean": 0.328,
+                  "share": 0.052
+                }
+              },
+              "t2_rank": [
+                "vl_ac1",
+                "ul_corr",
+                "vu_ac1",
+                "vu_lrms",
+                "cur_res",
+                "cur_lrms",
+                "vl_lrms"
+              ],
+              "spe": {
+                "vu_lrms": {
+                  "mean": 0.003,
+                  "share": 0.006
+                },
+                "vl_lrms": {
+                  "mean": 0.162,
+                  "share": 0.325
+                },
+                "cur_lrms": {
+                  "mean": 0.147,
+                  "share": 0.348
+                },
+                "vu_ac1": {
+                  "mean": 0.001,
+                  "share": 0.001
+                },
+                "vl_ac1": {
+                  "mean": 0.013,
+                  "share": 0.025
+                },
+                "ul_corr": {
+                  "mean": 0.001,
+                  "share": 0.002
+                },
+                "cur_res": {
+                  "mean": 0.15,
+                  "share": 0.294
+                }
+              },
+              "spe_rank": [
+                "vl_lrms",
+                "cur_res",
+                "cur_lrms",
+                "vl_ac1",
+                "vu_lrms",
+                "vu_ac1",
+                "ul_corr"
+              ],
+              "mean_signed_z": {
+                "vu_lrms": -0.82,
+                "vl_lrms": -0.96,
+                "cur_lrms": -0.71,
+                "vu_ac1": -0.49,
+                "vl_ac1": -1.15,
+                "ul_corr": -0.98,
+                "cur_res": 0.54
+              },
+              "rows": 3851,
+              "spe_dominant_share": 0.35,
+              "mean_t2": 7.78,
+              "mean_spe": 0.48
+            }
+          },
+          "calibration_anatomy": {
+            "record": "valid:normal:83",
+            "global_record": 443,
+            "length": 4,
+            "pos": 2,
+            "window_rows": 3,
+            "score": 13.308,
+            "t2": 16.39,
+            "spe": 30.63,
+            "g_t2": 2.01,
+            "g_spe": 13.31,
+            "z": {
+              "vu_lrms": -0.91,
+              "vl_lrms": -0.7,
+              "cur_lrms": -6.9,
+              "vu_ac1": 1.26,
+              "vl_ac1": 0.67,
+              "ul_corr": -1.79,
+              "cur_res": 0.0
+            },
+            "train_score_q999_by_window": {
+              "3": 9.35,
+              "4": 5.82,
+              "5": 4.17,
+              "6": 3.4,
+              "7": 2.14,
+              "8": 3.12
+            }
+          }
+        },
+        "mspc_load": {
+          "k": 5,
+          "explained_cum": [
+            0.3646,
+            0.5563,
+            0.699,
+            0.8166,
+            0.9198,
+            0.9729,
+            1.0
+          ],
+          "eigenvalues": [
+            2.5392,
+            1.3355,
+            0.9941,
+            0.8189,
+            0.7185,
+            0.3702,
+            0.1886
+          ],
+          "loadings": {
+            "PC1": {
+              "vu_lrms": -0.036,
+              "vl_lrms": -0.06,
+              "cur_lrms": -0.58,
+              "vu_ac1": -0.227,
+              "vl_ac1": -0.468,
+              "ul_corr": -0.302,
+              "cur_res": 0.545
+            },
+            "PC2": {
+              "vu_lrms": -0.668,
+              "vl_lrms": -0.375,
+              "cur_lrms": 0.047,
+              "vu_ac1": 0.493,
+              "vl_ac1": -0.037,
+              "ul_corr": -0.4,
+              "cur_res": -0.084
+            },
+            "PC3": {
+              "vu_lrms": 0.04,
+              "vl_lrms": -0.829,
+              "cur_lrms": 0.08,
+              "vu_ac1": -0.207,
+              "vl_ac1": -0.182,
+              "ul_corr": 0.477,
+              "cur_res": 0.019
+            },
+            "PC4": {
+              "vu_lrms": -0.313,
+              "vl_lrms": -0.111,
+              "cur_lrms": 0.108,
+              "vu_ac1": -0.731,
+              "vl_ac1": 0.495,
+              "ul_corr": -0.314,
+              "cur_res": 0.028
+            },
+            "PC5": {
+              "vu_lrms": 0.658,
+              "vl_lrms": -0.387,
+              "cur_lrms": 0.001,
+              "vu_ac1": 0.215,
+              "vl_ac1": 0.314,
+              "ul_corr": -0.517,
+              "cur_res": 0.075
+            }
+          },
+          "h0": 0.2818,
+          "limits": {
+            "99%": {
+              "t2": 15.101,
+              "spe": 2.816
+            },
+            "97%": {
+              "t2": 12.385,
+              "spe": 2.065
+            },
+            "95%": {
+              "t2": 11.079,
+              "spe": 1.732
+            }
+          },
+          "classical_99": {
+            "t2_limit": 15.101,
+            "spe_limit": 2.816,
+            "train_normal_rows": {
+              "t2": 0.0217,
+              "spe": 0.018,
+              "either": 0.0389
+            },
+            "valid_normal_rows": {
+              "t2": 0.0189,
+              "spe": 0.0234,
+              "either": 0.041,
+              "records_any": 0.4397
+            },
+            "valid_abnormal_rows": {
+              "t2": 0.9648,
+              "spe": 0.9883,
+              "either": 0.9961,
+              "records_any": 1.0
+            },
+            "test_normal_rows": {
+              "t2": 0.0548,
+              "spe": 0.1288,
+              "either": 0.1735,
+              "records_any": 0.8067
+            },
+            "test_abnormal_rows": {
+              "t2": 0.9404,
+              "spe": 0.9967,
+              "either": 1.0,
+              "records_any": 1.0
+            }
+          },
+          "calibration": {
+            "global_tail": {
+              "n_records": 120,
+              "records_without_score": 4,
+              "top_records": {
+                "valid:normal:83": 11.376,
+                "valid:normal:80": 4.478,
+                "valid:normal:4": 4.36
+              }
+            },
+            "per_window_tail_nt": {
+              "n_records": 120,
+              "records_without_score": 4,
+              "top_records": {
+                "valid:normal:80": 4.398,
+                "valid:normal:83": 4.049,
+                "valid:normal:84": 3.49
+              }
+            }
+          },
+          "contributions": {
+            "abnormal_test": {
+              "t2": {
+                "vu_lrms": {
+                  "mean": 27.825,
+                  "share": 0.234
+                },
+                "vl_lrms": {
+                  "mean": 76.187,
+                  "share": 0.411
+                },
+                "cur_lrms": {
+                  "mean": 10.196,
+                  "share": 0.103
+                },
+                "vu_ac1": {
+                  "mean": 2.083,
+                  "share": 0.029
+                },
+                "vl_ac1": {
+                  "mean": 2.559,
+                  "share": 0.054
+                },
+                "ul_corr": {
+                  "mean": 8.752,
+                  "share": 0.104
+                },
+                "cur_res": {
+                  "mean": 4.873,
+                  "share": 0.066
+                }
+              },
+              "t2_rank": [
+                "vl_lrms",
+                "vu_lrms",
+                "cur_lrms",
+                "ul_corr",
+                "cur_res",
+                "vl_ac1",
+                "vu_ac1"
+              ],
+              "spe": {
+                "vu_lrms": {
+                  "mean": 0.452,
+                  "share": 0.013
+                },
+                "vl_lrms": {
+                  "mean": 0.053,
+                  "share": 0.002
+                },
+                "cur_lrms": {
+                  "mean": 1.826,
+                  "share": 0.11
+                },
+                "vu_ac1": {
+                  "mean": 1.995,
+                  "share": 0.056
+                },
+                "vl_ac1": {
+                  "mean": 5.831,
+                  "share": 0.157
+                },
+                "ul_corr": {
+                  "mean": 2.748,
+                  "share": 0.075
+                },
+                "cur_res": {
+                  "mean": 18.366,
+                  "share": 0.587
+                }
+              },
+              "spe_rank": [
+                "cur_res",
+                "vl_ac1",
+                "ul_corr",
+                "vu_ac1",
+                "cur_lrms",
+                "vu_lrms",
+                "vl_lrms"
+              ],
+              "mean_signed_z": {
+                "vu_lrms": 3.3,
+                "vl_lrms": 6.05,
+                "cur_lrms": -2.81,
+                "vu_ac1": 1.16,
+                "vl_ac1": 0.26,
+                "ul_corr": -1.37,
+                "cur_res": 7.11
+              },
+              "rows": 302,
+              "spe_dominant_share": 0.596,
+              "mean_t2": 132.48,
+              "mean_spe": 31.27
+            },
+            "normal_test": {
+              "t2": {
+                "vu_lrms": {
+                  "mean": 1.238,
+                  "share": 0.173
+                },
+                "vl_lrms": {
+                  "mean": 2.037,
+                  "share": 0.22
+                },
+                "cur_lrms": {
+                  "mean": 0.545,
+                  "share": 0.098
+                },
+                "vu_ac1": {
+                  "mean": 0.781,
+                  "share": 0.14
+                },
+                "vl_ac1": {
+                  "mean": 0.654,
+                  "share": 0.115
+                },
+                "ul_corr": {
+                  "mean": 1.157,
+                  "share": 0.161
+                },
+                "cur_res": {
+                  "mean": 0.549,
+                  "share": 0.092
+                }
+              },
+              "t2_rank": [
+                "vl_lrms",
+                "vu_lrms",
+                "ul_corr",
+                "vu_ac1",
+                "vl_ac1",
+                "cur_res",
+                "cur_lrms"
+              ],
+              "spe": {
+                "vu_lrms": {
+                  "mean": 0.022,
+                  "share": 0.015
+                },
+                "vl_lrms": {
+                  "mean": 0.001,
+                  "share": 0.002
+                },
+                "cur_lrms": {
+                  "mean": 0.208,
+                  "share": 0.224
+                },
+                "vu_ac1": {
+                  "mean": 0.086,
+                  "share": 0.059
+                },
+                "vl_ac1": {
+                  "mean": 0.403,
+                  "share": 0.283
+                },
+                "ul_corr": {
+                  "mean": 0.162,
+                  "share": 0.112
+                },
+                "cur_res": {
+                  "mean": 0.391,
+                  "share": 0.305
+                }
+              },
+              "spe_rank": [
+                "vl_ac1",
+                "cur_res",
+                "cur_lrms",
+                "ul_corr",
+                "vu_ac1",
+                "vu_lrms",
+                "vl_lrms"
+              ],
+              "mean_signed_z": {
+                "vu_lrms": -0.57,
+                "vl_lrms": -0.77,
+                "cur_lrms": -0.71,
+                "vu_ac1": -0.49,
+                "vl_ac1": -1.15,
+                "ul_corr": -0.98,
+                "cur_res": 0.54
+              },
+              "rows": 3851,
+              "spe_dominant_share": 0.561,
+              "mean_t2": 6.96,
+              "mean_spe": 1.27
+            }
+          },
+          "calibration_anatomy": {
+            "record": "valid:normal:83",
+            "global_record": 443,
+            "length": 4,
+            "pos": 2,
+            "window_rows": 3,
+            "score": 11.376,
+            "t2": 21.47,
+            "spe": 28.56,
+            "g_t2": 2.27,
+            "g_spe": 11.38,
+            "z": {
+              "vu_lrms": 0.33,
+              "vl_lrms": 2.27,
+              "cur_lrms": -6.9,
+              "vu_ac1": 1.26,
+              "vl_ac1": 0.67,
+              "ul_corr": -1.79,
+              "cur_res": 0.0
+            },
+            "train_score_q999_by_window": {
+              "3": 8.37,
+              "4": 3.99,
+              "5": 3.04,
+              "6": 4.51,
+              "7": 2.39,
+              "8": 3.34
+            }
+          },
+          "load_regression": {
+            "n3_vu_lrms": {
+              "slope": 0.1795,
+              "r2": 0.0322
+            },
+            "n3_vl_lrms": {
+              "slope": 0.4026,
+              "r2": 0.1621
+            },
+            "n4_vu_lrms": {
+              "slope": 0.312,
+              "r2": 0.0973
+            },
+            "n4_vl_lrms": {
+              "slope": 0.6632,
+              "r2": 0.4398
+            },
+            "n5_vu_lrms": {
+              "slope": 0.3955,
+              "r2": 0.1564
+            },
+            "n5_vl_lrms": {
+              "slope": 0.8273,
+              "r2": 0.6844
+            },
+            "n6_vu_lrms": {
+              "slope": 0.4413,
+              "r2": 0.1948
+            },
+            "n6_vl_lrms": {
+              "slope": 0.8883,
+              "r2": 0.789
+            },
+            "n7_vu_lrms": {
+              "slope": 0.4712,
+              "r2": 0.2221
+            },
+            "n7_vl_lrms": {
+              "slope": 0.9046,
+              "r2": 0.8183
+            },
+            "n8_vu_lrms": {
+              "slope": 0.4548,
+              "r2": 0.2069
+            },
+            "n8_vl_lrms": {
+              "slope": 0.9159,
+              "r2": 0.8389
+            }
+          }
+        }
+      },
+      "load_drift": {
+        "train/high": {
+          "records": 178,
+          "rows": 6939,
+          "classical_exceed": 0.0147,
+          "mean_z": {
+            "vu_lrms": 0.37,
+            "vl_lrms": 0.61,
+            "cur_lrms": 0.59,
+            "vu_ac1": 0.02,
+            "vl_ac1": 0.51,
+            "ul_corr": 0.21,
+            "cur_res": -0.45
+          }
+        },
+        "train/low": {
+          "records": 101,
+          "rows": 3785,
+          "classical_exceed": 0.0645,
+          "mean_z": {
+            "vu_lrms": -0.68,
+            "vl_lrms": -1.12,
+            "cur_lrms": -1.08,
+            "vu_ac1": -0.01,
+            "vl_ac1": -0.94,
+            "ul_corr": -0.39,
+            "cur_res": 0.83
+          }
+        },
+        "train/unknown": {
+          "records": 81,
+          "rows": 524,
+          "classical_exceed": 0.0458,
+          "mean_z": {
+            "vu_lrms": 0.06,
+            "vl_lrms": 0.05,
+            "cur_lrms": -0.0,
+            "vu_ac1": -0.17,
+            "vl_ac1": -0.02,
+            "ul_corr": 0.02,
+            "cur_res": 0.03
+          }
+        },
+        "valid/high": {
+          "records": 61,
+          "rows": 2274,
+          "classical_exceed": 0.0158,
+          "mean_z": {
+            "vu_lrms": 0.54,
+            "vl_lrms": 0.78,
+            "cur_lrms": 0.68,
+            "vu_ac1": 0.1,
+            "vl_ac1": 0.54,
+            "ul_corr": 0.4,
+            "cur_res": -0.48
+          }
+        },
+        "valid/low": {
+          "records": 33,
+          "rows": 1257,
+          "classical_exceed": 0.0597,
+          "mean_z": {
+            "vu_lrms": -1.01,
+            "vl_lrms": -0.99,
+            "cur_lrms": -1.07,
+            "vu_ac1": 0.06,
+            "vl_ac1": -0.98,
+            "ul_corr": -0.77,
+            "cur_res": 0.84
+          }
+        },
+        "valid/unknown": {
+          "records": 26,
+          "rows": 180,
+          "classical_exceed": 0.0556,
+          "mean_z": {
+            "vu_lrms": 0.18,
+            "vl_lrms": 0.15,
+            "cur_lrms": 0.1,
+            "vu_ac1": 0.2,
+            "vl_ac1": -0.05,
+            "ul_corr": 0.03,
+            "cur_res": -0.02
+          }
+        },
+        "test/high": {
+          "records": 21,
+          "rows": 776,
+          "classical_exceed": 0.0193,
+          "mean_z": {
+            "vu_lrms": 0.39,
+            "vl_lrms": 0.42,
+            "cur_lrms": 0.45,
+            "vu_ac1": -0.01,
+            "vl_ac1": 0.34,
+            "ul_corr": 0.19,
+            "cur_res": -0.35
+          }
+        },
+        "test/low": {
+          "records": 75,
+          "rows": 2902,
+          "classical_exceed": 0.1244,
+          "mean_z": {
+            "vu_lrms": -1.14,
+            "vl_lrms": -1.32,
+            "cur_lrms": -1.02,
+            "vu_ac1": -0.61,
+            "vl_ac1": -1.55,
+            "ul_corr": -1.28,
+            "cur_res": 0.79
+          }
+        },
+        "test/unknown": {
+          "records": 24,
+          "rows": 173,
+          "classical_exceed": 0.1387,
+          "mean_z": {
+            "vu_lrms": -0.91,
+            "vl_lrms": -1.09,
+            "cur_lrms": -0.72,
+            "vu_ac1": -0.64,
+            "vl_ac1": -1.21,
+            "ul_corr": -1.14,
+            "cur_res": 0.34
+          }
+        }
+      },
+      "weakness": {
+        "mspc": {
+          "abnormal_detect_by_pos": {
+            "pos0-1(점수없음)": {
+              "rows": 22,
+              "detected": 0,
+              "rate": 0.0
+            },
+            "pos2-6(창3~7행)": {
+              "rows": 52,
+              "detected": 3,
+              "rate": 0.0577
+            },
+            "pos7+(창8행)": {
+              "rows": 250,
+              "detected": 122,
+              "rate": 0.488
+            }
+          },
+          "normal_false_alarm_by_load": {
+            "high": {
+              "rows": 818,
+              "false_alarms": 0,
+              "records_with_fa": 0,
+              "records": 21
+            },
+            "low": {
+              "rows": 3052,
+              "false_alarms": 0,
+              "records_with_fa": 0,
+              "records": 75
+            },
+            "unknown": {
+              "rows": 220,
+              "false_alarms": 0,
+              "records_with_fa": 0,
+              "records": 24
+            }
+          },
+          "normal_false_alarm_by_pos": {
+            "pos0-1(점수없음)": {
+              "rows": 239,
+              "false_alarms": 0,
+              "rate": 0.0
+            },
+            "pos2-6(창3~7행)": {
+              "rows": 585,
+              "false_alarms": 0,
+              "rate": 0.0
+            },
+            "pos7+(창8행)": {
+              "rows": 3266,
+              "false_alarms": 0,
+              "rate": 0.0
+            }
+          },
+          "abnormal_first_alarm_pos": {
+            "test:abnormal:10": null,
+            "test:abnormal:11": 6,
+            "test:abnormal:12": 6,
+            "test:abnormal:13": 7,
+            "test:abnormal:14": 6,
+            "test:abnormal:15": 7,
+            "test:abnormal:16": 11,
+            "test:abnormal:17": 7,
+            "test:abnormal:18": 13,
+            "test:abnormal:19": 7,
+            "test:abnormal:20": 8
+          },
+          "abnormal_records_missed": 1
+        },
+        "mspc_nt": {
+          "abnormal_detect_by_pos": {
+            "pos0-1(점수없음)": {
+              "rows": 22,
+              "detected": 0,
+              "rate": 0.0
+            },
+            "pos2-6(창3~7행)": {
+              "rows": 52,
+              "detected": 31,
+              "rate": 0.5962
+            },
+            "pos7+(창8행)": {
+              "rows": 250,
+              "detected": 247,
+              "rate": 0.988
+            }
+          },
+          "normal_false_alarm_by_load": {
+            "high": {
+              "rows": 818,
+              "false_alarms": 0,
+              "records_with_fa": 0,
+              "records": 21
+            },
+            "low": {
+              "rows": 3052,
+              "false_alarms": 4,
+              "records_with_fa": 4,
+              "records": 75
+            },
+            "unknown": {
+              "rows": 220,
+              "false_alarms": 0,
+              "records_with_fa": 0,
+              "records": 24
+            }
+          },
+          "normal_false_alarm_by_pos": {
+            "pos0-1(점수없음)": {
+              "rows": 239,
+              "false_alarms": 0,
+              "rate": 0.0
+            },
+            "pos2-6(창3~7행)": {
+              "rows": 585,
+              "false_alarms": 4,
+              "rate": 0.0068
+            },
+            "pos7+(창8행)": {
+              "rows": 3266,
+              "false_alarms": 0,
+              "rate": 0.0
+            }
+          },
+          "abnormal_first_alarm_pos": {
+            "test:abnormal:10": null,
+            "test:abnormal:11": 4,
+            "test:abnormal:12": 3,
+            "test:abnormal:13": 3,
+            "test:abnormal:14": 4,
+            "test:abnormal:15": 3,
+            "test:abnormal:16": 4,
+            "test:abnormal:17": 4,
+            "test:abnormal:18": 6,
+            "test:abnormal:19": 4,
+            "test:abnormal:20": 4
+          },
+          "abnormal_records_missed": 1
+        },
+        "mspc_load": {
+          "abnormal_detect_by_pos": {
+            "pos0-1(점수없음)": {
+              "rows": 22,
+              "detected": 0,
+              "rate": 0.0
+            },
+            "pos2-6(창3~7행)": {
+              "rows": 52,
+              "detected": 9,
+              "rate": 0.1731
+            },
+            "pos7+(창8행)": {
+              "rows": 250,
+              "detected": 171,
+              "rate": 0.684
+            }
+          },
+          "normal_false_alarm_by_load": {
+            "high": {
+              "rows": 818,
+              "false_alarms": 0,
+              "records_with_fa": 0,
+              "records": 21
+            },
+            "low": {
+              "rows": 3052,
+              "false_alarms": 0,
+              "records_with_fa": 0,
+              "records": 75
+            },
+            "unknown": {
+              "rows": 220,
+              "false_alarms": 0,
+              "records_with_fa": 0,
+              "records": 24
+            }
+          },
+          "normal_false_alarm_by_pos": {
+            "pos0-1(점수없음)": {
+              "rows": 239,
+              "false_alarms": 0,
+              "rate": 0.0
+            },
+            "pos2-6(창3~7행)": {
+              "rows": 585,
+              "false_alarms": 0,
+              "rate": 0.0
+            },
+            "pos7+(창8행)": {
+              "rows": 3266,
+              "false_alarms": 0,
+              "rate": 0.0
+            }
+          },
+          "abnormal_first_alarm_pos": {
+            "test:abnormal:10": null,
+            "test:abnormal:11": 6,
+            "test:abnormal:12": 6,
+            "test:abnormal:13": 6,
+            "test:abnormal:14": 6,
+            "test:abnormal:15": 6,
+            "test:abnormal:16": 11,
+            "test:abnormal:17": 6,
+            "test:abnormal:18": 7,
+            "test:abnormal:19": 5,
+            "test:abnormal:20": 6
+          },
+          "abnormal_records_missed": 1
+        },
+        "mspc_cl": {
+          "abnormal_detect_by_pos": {
+            "pos0-1(점수없음)": {
+              "rows": 22,
+              "detected": 0,
+              "rate": 0.0
+            },
+            "pos2-6(창3~7행)": {
+              "rows": 52,
+              "detected": 52,
+              "rate": 1.0
+            },
+            "pos7+(창8행)": {
+              "rows": 250,
+              "detected": 250,
+              "rate": 1.0
+            }
+          },
+          "normal_false_alarm_by_load": {
+            "high": {
+              "rows": 818,
+              "false_alarms": 15,
+              "records_with_fa": 7,
+              "records": 21
+            },
+            "low": {
+              "rows": 3052,
+              "false_alarms": 361,
+              "records_with_fa": 70,
+              "records": 75
+            },
+            "unknown": {
+              "rows": 220,
+              "false_alarms": 24,
+              "records_with_fa": 12,
+              "records": 24
+            }
+          },
+          "normal_false_alarm_by_pos": {
+            "pos0-1(점수없음)": {
+              "rows": 239,
+              "false_alarms": 0,
+              "rate": 0.0
+            },
+            "pos2-6(창3~7행)": {
+              "rows": 585,
+              "false_alarms": 134,
+              "rate": 0.2291
+            },
+            "pos7+(창8행)": {
+              "rows": 3266,
+              "false_alarms": 266,
+              "rate": 0.0814
+            }
+          },
+          "abnormal_first_alarm_pos": {
+            "test:abnormal:10": 2,
+            "test:abnormal:11": 2,
+            "test:abnormal:12": 2,
+            "test:abnormal:13": 2,
+            "test:abnormal:14": 2,
+            "test:abnormal:15": 2,
+            "test:abnormal:16": 2,
+            "test:abnormal:17": 2,
+            "test:abnormal:18": 2,
+            "test:abnormal:19": 2,
+            "test:abnormal:20": 2
+          },
+          "abnormal_records_missed": 0
+        },
+        "v2": {
+          "abnormal_detect_by_pos": {
+            "pos0-1(점수없음)": {
+              "rows": 22,
+              "detected": 8,
+              "rate": 0.3636
+            },
+            "pos2-6(창3~7행)": {
+              "rows": 52,
+              "detected": 46,
+              "rate": 0.8846
+            },
+            "pos7+(창8행)": {
+              "rows": 250,
+              "detected": 248,
+              "rate": 0.992
+            }
+          },
+          "normal_false_alarm_by_load": {
+            "high": {
+              "rows": 818,
+              "false_alarms": 0,
+              "records_with_fa": 0,
+              "records": 21
+            },
+            "low": {
+              "rows": 3052,
+              "false_alarms": 0,
+              "records_with_fa": 0,
+              "records": 75
+            },
+            "unknown": {
+              "rows": 220,
+              "false_alarms": 0,
+              "records_with_fa": 0,
+              "records": 24
+            }
+          },
+          "normal_false_alarm_by_pos": {
+            "pos0-1(점수없음)": {
+              "rows": 239,
+              "false_alarms": 0,
+              "rate": 0.0
+            },
+            "pos2-6(창3~7행)": {
+              "rows": 585,
+              "false_alarms": 0,
+              "rate": 0.0
+            },
+            "pos7+(창8행)": {
+              "rows": 3266,
+              "false_alarms": 0,
+              "rate": 0.0
+            }
+          },
+          "abnormal_first_alarm_pos": {
+            "test:abnormal:10": 0,
+            "test:abnormal:11": 0,
+            "test:abnormal:12": 1,
+            "test:abnormal:13": 2,
+            "test:abnormal:14": 0,
+            "test:abnormal:15": 2,
+            "test:abnormal:16": 0,
+            "test:abnormal:17": 1,
+            "test:abnormal:18": 3,
+            "test:abnormal:19": 2,
+            "test:abnormal:20": 3
+          },
+          "abnormal_records_missed": 0
+        }
+      },
+      "v2_false_alarm_rows": []
+    },
+    "B": {
+      "train_rows_scored": 9536,
+      "models": {
+        "mspc": {
+          "k": 5,
+          "explained_cum": [
+            0.5167,
+            0.6864,
+            0.8029,
+            0.8922,
+            0.9475,
+            0.9847,
+            1.0
+          ],
+          "eigenvalues": [
+            3.5993,
+            1.1822,
+            0.8114,
+            0.6223,
+            0.3848,
+            0.2593,
+            0.1065
+          ],
+          "loadings": {
+            "PC1": {
+              "vu_lrms": -0.306,
+              "vl_lrms": -0.486,
+              "cur_lrms": -0.493,
+              "vu_ac1": -0.142,
+              "vl_ac1": -0.391,
+              "ul_corr": -0.252,
+              "cur_res": 0.436
+            },
+            "PC2": {
+              "vu_lrms": -0.431,
+              "vl_lrms": 0.042,
+              "cur_lrms": 0.068,
+              "vu_ac1": 0.708,
+              "vl_ac1": 0.08,
+              "ul_corr": -0.518,
+              "cur_res": -0.177
+            },
+            "PC3": {
+              "vu_lrms": -0.048,
+              "vl_lrms": 0.099,
+              "cur_lrms": 0.047,
+              "vu_ac1": -0.541,
+              "vl_ac1": 0.542,
+              "ul_corr": -0.627,
+              "cur_res": 0.076
+            },
+            "PC4": {
+              "vu_lrms": 0.833,
+              "vl_lrms": -0.1,
+              "cur_lrms": -0.143,
+              "vu_ac1": 0.328,
+              "vl_ac1": -0.001,
+              "ul_corr": -0.347,
+              "cur_res": 0.218
+            },
+            "PC5": {
+              "vu_lrms": -0.116,
+              "vl_lrms": -0.201,
+              "cur_lrms": -0.161,
+              "vu_ac1": 0.275,
+              "vl_ac1": 0.7,
+              "ul_corr": 0.387,
+              "cur_res": 0.453
+            }
+          },
+          "h0": 0.2638,
+          "limits": {
+            "99%": {
+              "t2": 15.104,
+              "spe": 1.931
+            },
+            "97%": {
+              "t2": 12.387,
+              "spe": 1.396
+            },
+            "95%": {
+              "t2": 11.081,
+              "spe": 1.161
+            }
+          },
+          "classical_99": {
+            "t2_limit": 15.104,
+            "spe_limit": 1.931,
+            "train_normal_rows": {
+              "t2": 0.0124,
+              "spe": 0.0199,
+              "either": 0.0316
+            },
+            "valid_normal_rows": {
+              "t2": 0.009,
+              "spe": 0.0223,
+              "either": 0.0305,
+              "records_any": 0.4464
+            },
+            "valid_abnormal_rows": {
+              "t2": 0.9531,
+              "spe": 0.9922,
+              "either": 0.9961,
+              "records_any": 1.0
+            },
+            "test_normal_rows": {
+              "t2": 0.0486,
+              "spe": 0.0274,
+              "either": 0.0737,
+              "records_any": 0.676
+            },
+            "test_abnormal_rows": {
+              "t2": 0.9669,
+              "spe": 1.0,
+              "either": 1.0,
+              "records_any": 1.0
+            }
+          },
+          "calibration": {
+            "global_tail": {
+              "n_records": 120,
+              "records_without_score": 8,
+              "top_records": {
+                "valid:normal:6": 5.429,
+                "valid:normal:64": 5.205,
+                "valid:normal:5": 4.795
+              }
+            },
+            "per_window_tail_nt": {
+              "n_records": 120,
+              "records_without_score": 8,
+              "top_records": {
+                "valid:normal:6": 4.206,
+                "valid:normal:72": 3.81,
+                "valid:normal:2": 3.345
+              }
+            }
+          },
+          "contributions": {
+            "abnormal_test": {
+              "t2": {
+                "vu_lrms": {
+                  "mean": 24.806,
+                  "share": 0.25
+                },
+                "vl_lrms": {
+                  "mean": 9.452,
+                  "share": 0.097
+                },
+                "cur_lrms": {
+                  "mean": 9.62,
+                  "share": 0.096
+                },
+                "vu_ac1": {
+                  "mean": 5.865,
+                  "share": 0.063
+                },
+                "vl_ac1": {
+                  "mean": 16.189,
+                  "share": 0.16
+                },
+                "ul_corr": {
+                  "mean": 3.459,
+                  "share": 0.055
+                },
+                "cur_res": {
+                  "mean": 29.208,
+                  "share": 0.279
+                }
+              },
+              "t2_rank": [
+                "cur_res",
+                "vu_lrms",
+                "vl_ac1",
+                "cur_lrms",
+                "vl_lrms",
+                "vu_ac1",
+                "ul_corr"
+              ],
+              "spe": {
+                "vu_lrms": {
+                  "mean": 0.192,
+                  "share": 0.008
+                },
+                "vl_lrms": {
+                  "mean": 12.003,
+                  "share": 0.442
+                },
+                "cur_lrms": {
+                  "mean": 1.883,
+                  "share": 0.124
+                },
+                "vu_ac1": {
+                  "mean": 0.06,
+                  "share": 0.002
+                },
+                "vl_ac1": {
+                  "mean": 0.845,
+                  "share": 0.042
+                },
+                "ul_corr": {
+                  "mean": 0.016,
+                  "share": 0.001
+                },
+                "cur_res": {
+                  "mean": 7.727,
+                  "share": 0.38
+                }
+              },
+              "spe_rank": [
+                "vl_lrms",
+                "cur_res",
+                "cur_lrms",
+                "vl_ac1",
+                "vu_lrms",
+                "vu_ac1",
+                "ul_corr"
+              ],
+              "mean_signed_z": {
+                "vu_lrms": 1.64,
+                "vl_lrms": -0.23,
+                "cur_lrms": -2.83,
+                "vu_ac1": 1.16,
+                "vl_ac1": 0.28,
+                "ul_corr": -1.34,
+                "cur_res": 7.19
+              },
+              "rows": 302,
+              "spe_dominant_share": 0.272,
+              "mean_t2": 98.6,
+              "mean_spe": 22.73
+            },
+            "normal_test": {
+              "t2": {
+                "vu_lrms": {
+                  "mean": 1.038,
+                  "share": 0.162
+                },
+                "vl_lrms": {
+                  "mean": 0.242,
+                  "share": 0.05
+                },
+                "cur_lrms": {
+                  "mean": 0.262,
+                  "share": 0.053
+                },
+                "vu_ac1": {
+                  "mean": 1.086,
+                  "share": 0.181
+                },
+                "vl_ac1": {
+                  "mean": 1.952,
+                  "share": 0.251
+                },
+                "ul_corr": {
+                  "mean": 1.784,
+                  "share": 0.232
+                },
+                "cur_res": {
+                  "mean": 0.403,
+                  "share": 0.072
+                }
+              },
+              "t2_rank": [
+                "vl_ac1",
+                "ul_corr",
+                "vu_ac1",
+                "vu_lrms",
+                "cur_res",
+                "cur_lrms",
+                "vl_lrms"
+              ],
+              "spe": {
+                "vu_lrms": {
+                  "mean": 0.003,
+                  "share": 0.006
+                },
+                "vl_lrms": {
+                  "mean": 0.153,
+                  "share": 0.332
+                },
+                "cur_lrms": {
+                  "mean": 0.133,
+                  "share": 0.323
+                },
+                "vu_ac1": {
+                  "mean": 0.001,
+                  "share": 0.002
+                },
+                "vl_ac1": {
+                  "mean": 0.016,
+                  "share": 0.033
+                },
+                "ul_corr": {
+                  "mean": 0.001,
+                  "share": 0.002
+                },
+                "cur_res": {
+                  "mean": 0.145,
+                  "share": 0.302
+                }
+              },
+              "spe_rank": [
+                "vl_lrms",
+                "cur_res",
+                "cur_lrms",
+                "vl_ac1",
+                "vu_lrms",
+                "vu_ac1",
+                "ul_corr"
+              ],
+              "mean_signed_z": {
+                "vu_lrms": -0.54,
+                "vl_lrms": -0.62,
+                "cur_lrms": -0.49,
+                "vu_ac1": -0.33,
+                "vl_ac1": -0.77,
+                "ul_corr": -0.66,
+                "cur_res": 0.38
+              },
+              "rows": 5738,
+              "spe_dominant_share": 0.401,
+              "mean_t2": 6.77,
+              "mean_spe": 0.45
+            }
+          },
+          "calibration_anatomy": {
+            "record": "valid:normal:6",
+            "global_record": 306,
+            "length": 35,
+            "pos": 2,
+            "window_rows": 3,
+            "score": 5.429,
+            "t2": 10.24,
+            "spe": 11.29,
+            "g_t2": 1.19,
+            "g_spe": 5.43,
+            "z": {
+              "vu_lrms": -2.11,
+              "vl_lrms": 0.23,
+              "cur_lrms": -3.84,
+              "vu_ac1": -0.26,
+              "vl_ac1": 0.37,
+              "ul_corr": 0.88,
+              "cur_res": 0.0
+            },
+            "train_score_q999_by_window": {
+              "3": 9.96,
+              "4": 6.04,
+              "5": 4.23,
+              "6": 3.55,
+              "7": 2.12,
+              "8": 3.18
+            }
+          }
+        },
+        "mspc_load": {
+          "k": 5,
+          "explained_cum": [
+            0.3637,
+            0.5561,
+            0.7015,
+            0.8182,
+            0.9198,
+            0.9727,
+            1.0
+          ],
+          "eigenvalues": [
+            2.5329,
+            1.3402,
+            1.0123,
+            0.8134,
+            0.7074,
+            0.3681,
+            0.1903
+          ],
+          "loadings": {
+            "PC1": {
+              "vu_lrms": 0.038,
+              "vl_lrms": 0.058,
+              "cur_lrms": 0.581,
+              "vu_ac1": 0.215,
+              "vl_ac1": 0.478,
+              "ul_corr": 0.296,
+              "cur_res": -0.544
+            },
+            "PC2": {
+              "vu_lrms": -0.665,
+              "vl_lrms": -0.349,
+              "cur_lrms": 0.043,
+              "vu_ac1": 0.502,
+              "vl_ac1": -0.028,
+              "ul_corr": -0.415,
+              "cur_res": -0.089
+            },
+            "PC3": {
+              "vu_lrms": 0.01,
+              "vl_lrms": 0.832,
+              "cur_lrms": -0.082,
+              "vu_ac1": 0.216,
+              "vl_ac1": 0.175,
+              "ul_corr": -0.473,
+              "cur_res": -0.016
+            },
+            "PC4": {
+              "vu_lrms": -0.389,
+              "vl_lrms": -0.039,
+              "cur_lrms": 0.108,
+              "vu_ac1": -0.751,
+              "vl_ac1": 0.441,
+              "ul_corr": -0.276,
+              "cur_res": 0.024
+            },
+            "PC5": {
+              "vu_lrms": 0.618,
+              "vl_lrms": -0.418,
+              "cur_lrms": 0.014,
+              "vu_ac1": 0.116,
+              "vl_ac1": 0.362,
+              "ul_corr": -0.54,
+              "cur_res": 0.083
+            }
+          },
+          "h0": 0.2833,
+          "limits": {
+            "99%": {
+              "t2": 15.104,
+              "spe": 2.806
+            },
+            "97%": {
+              "t2": 12.387,
+              "spe": 2.06
+            },
+            "95%": {
+              "t2": 11.081,
+              "spe": 1.728
+            }
+          },
+          "classical_99": {
+            "t2_limit": 15.104,
+            "spe_limit": 2.806,
+            "train_normal_rows": {
+              "t2": 0.021,
+              "spe": 0.018,
+              "either": 0.0381
+            },
+            "valid_normal_rows": {
+              "t2": 0.0192,
+              "spe": 0.0221,
+              "either": 0.0399,
+              "records_any": 0.4643
+            },
+            "valid_abnormal_rows": {
+              "t2": 0.9648,
+              "spe": 0.9883,
+              "either": 0.9961,
+              "records_any": 1.0
+            },
+            "test_normal_rows": {
+              "t2": 0.0399,
+              "spe": 0.0889,
+              "either": 0.123,
+              "records_any": 0.6704
+            },
+            "test_abnormal_rows": {
+              "t2": 0.9437,
+              "spe": 0.9967,
+              "either": 1.0,
+              "records_any": 1.0
+            }
+          },
+          "calibration": {
+            "global_tail": {
+              "n_records": 120,
+              "records_without_score": 8,
+              "top_records": {
+                "valid:normal:6": 4.951,
+                "valid:normal:18": 4.929,
+                "valid:normal:64": 4.41
+              }
+            },
+            "per_window_tail_nt": {
+              "n_records": 120,
+              "records_without_score": 8,
+              "top_records": {
+                "valid:normal:32": 3.551,
+                "valid:normal:18": 3.459,
+                "valid:normal:12": 2.972
+              }
+            }
+          },
+          "contributions": {
+            "abnormal_test": {
+              "t2": {
+                "vu_lrms": {
+                  "mean": 27.584,
+                  "share": 0.234
+                },
+                "vl_lrms": {
+                  "mean": 76.469,
+                  "share": 0.413
+                },
+                "cur_lrms": {
+                  "mean": 10.23,
+                  "share": 0.104
+                },
+                "vu_ac1": {
+                  "mean": 1.923,
+                  "share": 0.027
+                },
+                "vl_ac1": {
+                  "mean": 2.636,
+                  "share": 0.054
+                },
+                "ul_corr": {
+                  "mean": 8.379,
+                  "share": 0.102
+                },
+                "cur_res": {
+                  "mean": 4.964,
+                  "share": 0.067
+                }
+              },
+              "t2_rank": [
+                "vl_lrms",
+                "vu_lrms",
+                "cur_lrms",
+                "ul_corr",
+                "cur_res",
+                "vl_ac1",
+                "vu_ac1"
+              ],
+              "spe": {
+                "vu_lrms": {
+                  "mean": 0.5,
+                  "share": 0.013
+                },
+                "vl_lrms": {
+                  "mean": 0.058,
+                  "share": 0.002
+                },
+                "cur_lrms": {
+                  "mean": 1.846,
+                  "share": 0.109
+                },
+                "vu_ac1": {
+                  "mean": 2.002,
+                  "share": 0.055
+                },
+                "vl_ac1": {
+                  "mean": 6.186,
+                  "share": 0.162
+                },
+                "ul_corr": {
+                  "mean": 2.761,
+                  "share": 0.073
+                },
+                "cur_res": {
+                  "mean": 18.841,
+                  "share": 0.585
+                }
+              },
+              "spe_rank": [
+                "cur_res",
+                "vl_ac1",
+                "ul_corr",
+                "vu_ac1",
+                "cur_lrms",
+                "vu_lrms",
+                "vl_lrms"
+              ],
+              "mean_signed_z": {
+                "vu_lrms": 3.32,
+                "vl_lrms": 6.1,
+                "cur_lrms": -2.83,
+                "vu_ac1": 1.16,
+                "vl_ac1": 0.28,
+                "ul_corr": -1.34,
+                "cur_res": 7.19
+              },
+              "rows": 302,
+              "spe_dominant_share": 0.629,
+              "mean_t2": 132.19,
+              "mean_spe": 32.19
+            },
+            "normal_test": {
+              "t2": {
+                "vu_lrms": {
+                  "mean": 1.094,
+                  "share": 0.17
+                },
+                "vl_lrms": {
+                  "mean": 1.679,
+                  "share": 0.202
+                },
+                "cur_lrms": {
+                  "mean": 0.491,
+                  "share": 0.097
+                },
+                "vu_ac1": {
+                  "mean": 0.808,
+                  "share": 0.157
+                },
+                "vl_ac1": {
+                  "mean": 0.583,
+                  "share": 0.11
+                },
+                "ul_corr": {
+                  "mean": 1.085,
+                  "share": 0.172
+                },
+                "cur_res": {
+                  "mean": 0.489,
+                  "share": 0.092
+                }
+              },
+              "t2_rank": [
+                "vl_lrms",
+                "vu_lrms",
+                "ul_corr",
+                "vu_ac1",
+                "vl_ac1",
+                "cur_lrms",
+                "cur_res"
+              ],
+              "spe": {
+                "vu_lrms": {
+                  "mean": 0.018,
+                  "share": 0.015
+                },
+                "vl_lrms": {
+                  "mean": 0.001,
+                  "share": 0.002
+                },
+                "cur_lrms": {
+                  "mean": 0.181,
+                  "share": 0.235
+                },
+                "vu_ac1": {
+                  "mean": 0.063,
+                  "share": 0.052
+                },
+                "vl_ac1": {
+                  "mean": 0.32,
+                  "share": 0.271
+                },
+                "ul_corr": {
+                  "mean": 0.12,
+                  "share": 0.1
+                },
+                "cur_res": {
+                  "mean": 0.33,
+                  "share": 0.325
+                }
+              },
+              "spe_rank": [
+                "cur_res",
+                "vl_ac1",
+                "cur_lrms",
+                "ul_corr",
+                "vu_ac1",
+                "vu_lrms",
+                "vl_lrms"
+              ],
+              "mean_signed_z": {
+                "vu_lrms": -0.36,
+                "vl_lrms": -0.44,
+                "cur_lrms": -0.49,
+                "vu_ac1": -0.33,
+                "vl_ac1": -0.77,
+                "ul_corr": -0.66,
+                "cur_res": 0.38
+              },
+              "rows": 5738,
+              "spe_dominant_share": 0.545,
+              "mean_t2": 6.23,
+              "mean_spe": 1.03
+            }
+          },
+          "calibration_anatomy": {
+            "record": "valid:normal:6",
+            "global_record": 306,
+            "length": 35,
+            "pos": 2,
+            "window_rows": 3,
+            "score": 4.951,
+            "t2": 11.89,
+            "spe": 11.42,
+            "g_t2": 1.33,
+            "g_spe": 4.95,
+            "z": {
+              "vu_lrms": -1.68,
+              "vl_lrms": 2.12,
+              "cur_lrms": -3.84,
+              "vu_ac1": -0.26,
+              "vl_ac1": 0.37,
+              "ul_corr": 0.88,
+              "cur_res": 0.0
+            },
+            "train_score_q999_by_window": {
+              "3": 8.68,
+              "4": 4.07,
+              "5": 2.98,
+              "6": 4.09,
+              "7": 2.05,
+              "8": 3.65
+            }
+          },
+          "load_regression": {
+            "n3_vu_lrms": {
+              "slope": 0.1143,
+              "r2": 0.0131
+            },
+            "n3_vl_lrms": {
+              "slope": 0.4367,
+              "r2": 0.1907
+            },
+            "n4_vu_lrms": {
+              "slope": 0.2677,
+              "r2": 0.0716
+            },
+            "n4_vl_lrms": {
+              "slope": 0.6539,
+              "r2": 0.4275
+            },
+            "n5_vu_lrms": {
+              "slope": 0.3544,
+              "r2": 0.1256
+            },
+            "n5_vl_lrms": {
+              "slope": 0.8268,
+              "r2": 0.6836
+            },
+            "n6_vu_lrms": {
+              "slope": 0.3997,
+              "r2": 0.1598
+            },
+            "n6_vl_lrms": {
+              "slope": 0.8864,
+              "r2": 0.7858
+            },
+            "n7_vu_lrms": {
+              "slope": 0.4397,
+              "r2": 0.1933
+            },
+            "n7_vl_lrms": {
+              "slope": 0.9022,
+              "r2": 0.814
+            },
+            "n8_vu_lrms": {
+              "slope": 0.454,
+              "r2": 0.2061
+            },
+            "n8_vl_lrms": {
+              "slope": 0.9153,
+              "r2": 0.8377
+            }
+          }
+        }
+      },
+      "load_drift": {
+        "train/high": {
+          "records": 148,
+          "rows": 5823,
+          "classical_exceed": 0.0141,
+          "mean_z": {
+            "vu_lrms": 0.37,
+            "vl_lrms": 0.63,
+            "cur_lrms": 0.61,
+            "vu_ac1": 0.02,
+            "vl_ac1": 0.52,
+            "ul_corr": 0.22,
+            "cur_res": -0.47
+          }
+        },
+        "train/low": {
+          "records": 86,
+          "rows": 3256,
+          "classical_exceed": 0.063,
+          "mean_z": {
+            "vu_lrms": -0.67,
+            "vl_lrms": -1.12,
+            "cur_lrms": -1.09,
+            "vu_ac1": -0.01,
+            "vl_ac1": -0.93,
+            "ul_corr": -0.39,
+            "cur_res": 0.83
+          }
+        },
+        "train/unknown": {
+          "records": 66,
+          "rows": 457,
+          "classical_exceed": 0.0306,
+          "mean_z": {
+            "vu_lrms": 0.04,
+            "vl_lrms": -0.01,
+            "cur_lrms": -0.07,
+            "vu_ac1": -0.18,
+            "vl_ac1": -0.05,
+            "ul_corr": 0.01,
+            "cur_res": 0.08
+          }
+        },
+        "valid/high": {
+          "records": 61,
+          "rows": 2305,
+          "classical_exceed": 0.0117,
+          "mean_z": {
+            "vu_lrms": 0.49,
+            "vl_lrms": 0.75,
+            "cur_lrms": 0.63,
+            "vu_ac1": 0.08,
+            "vl_ac1": 0.55,
+            "ul_corr": 0.38,
+            "cur_res": -0.5
+          }
+        },
+        "valid/low": {
+          "records": 29,
+          "rows": 1064,
+          "classical_exceed": 0.0648,
+          "mean_z": {
+            "vu_lrms": -0.8,
+            "vl_lrms": -0.97,
+            "cur_lrms": -1.14,
+            "vu_ac1": 0.19,
+            "vl_ac1": -0.85,
+            "ul_corr": -0.56,
+            "cur_res": 0.82
+          }
+        },
+        "valid/unknown": {
+          "records": 30,
+          "rows": 167,
+          "classical_exceed": 0.0719,
+          "mean_z": {
+            "vu_lrms": 0.29,
+            "vl_lrms": 0.39,
+            "cur_lrms": 0.34,
+            "vu_ac1": 0.1,
+            "vl_ac1": 0.2,
+            "ul_corr": 0.13,
+            "cur_res": -0.26
+          }
+        },
+        "test/high": {
+          "records": 51,
+          "rows": 1861,
+          "classical_exceed": 0.0183,
+          "mean_z": {
+            "vu_lrms": 0.51,
+            "vl_lrms": 0.61,
+            "cur_lrms": 0.56,
+            "vu_ac1": 0.05,
+            "vl_ac1": 0.47,
+            "ul_corr": 0.29,
+            "cur_res": -0.43
+          }
+        },
+        "test/low": {
+          "records": 94,
+          "rows": 3624,
+          "classical_exceed": 0.0996,
+          "mean_z": {
+            "vu_lrms": -1.08,
+            "vl_lrms": -1.25,
+            "cur_lrms": -1.02,
+            "vu_ac1": -0.53,
+            "vl_ac1": -1.41,
+            "ul_corr": -1.14,
+            "cur_res": 0.8
+          }
+        },
+        "test/unknown": {
+          "records": 35,
+          "rows": 253,
+          "classical_exceed": 0.1107,
+          "mean_z": {
+            "vu_lrms": -0.53,
+            "vl_lrms": -0.72,
+            "cur_lrms": -0.52,
+            "vu_ac1": -0.36,
+            "vl_ac1": -0.87,
+            "ul_corr": -0.78,
+            "cur_res": 0.26
+          }
+        }
+      },
+      "weakness": {
+        "mspc": {
+          "abnormal_detect_by_pos": {
+            "pos0-1(점수없음)": {
+              "rows": 22,
+              "detected": 0,
+              "rate": 0.0
+            },
+            "pos2-6(창3~7행)": {
+              "rows": 52,
+              "detected": 33,
+              "rate": 0.6346
+            },
+            "pos7+(창8행)": {
+              "rows": 250,
+              "detected": 237,
+              "rate": 0.948
+            }
+          },
+          "normal_false_alarm_by_load": {
+            "high": {
+              "rows": 1963,
+              "false_alarms": 0,
+              "records_with_fa": 0,
+              "records": 51
+            },
+            "low": {
+              "rows": 3812,
+              "false_alarms": 0,
+              "records_with_fa": 0,
+              "records": 94
+            },
+            "unknown": {
+              "rows": 322,
+              "false_alarms": 1,
+              "records_with_fa": 1,
+              "records": 35
+            }
+          },
+          "normal_false_alarm_by_pos": {
+            "pos0-1(점수없음)": {
+              "rows": 359,
+              "false_alarms": 0,
+              "rate": 0.0
+            },
+            "pos2-6(창3~7행)": {
+              "rows": 880,
+              "false_alarms": 1,
+              "rate": 0.0011
+            },
+            "pos7+(창8행)": {
+              "rows": 4858,
+              "false_alarms": 0,
+              "rate": 0.0
+            }
+          },
+          "abnormal_first_alarm_pos": {
+            "test:abnormal:10": null,
+            "test:abnormal:11": 5,
+            "test:abnormal:12": 2,
+            "test:abnormal:13": 3,
+            "test:abnormal:14": 3,
+            "test:abnormal:15": 3,
+            "test:abnormal:16": 4,
+            "test:abnormal:17": 5,
+            "test:abnormal:18": 7,
+            "test:abnormal:19": 2,
+            "test:abnormal:20": 2
+          },
+          "abnormal_records_missed": 1
+        },
+        "mspc_nt": {
+          "abnormal_detect_by_pos": {
+            "pos0-1(점수없음)": {
+              "rows": 22,
+              "detected": 0,
+              "rate": 0.0
+            },
+            "pos2-6(창3~7행)": {
+              "rows": 52,
+              "detected": 30,
+              "rate": 0.5769
+            },
+            "pos7+(창8행)": {
+              "rows": 250,
+              "detected": 247,
+              "rate": 0.988
+            }
+          },
+          "normal_false_alarm_by_load": {
+            "high": {
+              "rows": 1963,
+              "false_alarms": 0,
+              "records_with_fa": 0,
+              "records": 51
+            },
+            "low": {
+              "rows": 3812,
+              "false_alarms": 1,
+              "records_with_fa": 1,
+              "records": 94
+            },
+            "unknown": {
+              "rows": 322,
+              "false_alarms": 0,
+              "records_with_fa": 0,
+              "records": 35
+            }
+          },
+          "normal_false_alarm_by_pos": {
+            "pos0-1(점수없음)": {
+              "rows": 359,
+              "false_alarms": 0,
+              "rate": 0.0
+            },
+            "pos2-6(창3~7행)": {
+              "rows": 880,
+              "false_alarms": 1,
+              "rate": 0.0011
+            },
+            "pos7+(창8행)": {
+              "rows": 4858,
+              "false_alarms": 0,
+              "rate": 0.0
+            }
+          },
+          "abnormal_first_alarm_pos": {
+            "test:abnormal:10": null,
+            "test:abnormal:11": 4,
+            "test:abnormal:12": 3,
+            "test:abnormal:13": 3,
+            "test:abnormal:14": 4,
+            "test:abnormal:15": 3,
+            "test:abnormal:16": 4,
+            "test:abnormal:17": 4,
+            "test:abnormal:18": 6,
+            "test:abnormal:19": 5,
+            "test:abnormal:20": 4
+          },
+          "abnormal_records_missed": 1
+        },
+        "mspc_load": {
+          "abnormal_detect_by_pos": {
+            "pos0-1(점수없음)": {
+              "rows": 22,
+              "detected": 0,
+              "rate": 0.0
+            },
+            "pos2-6(창3~7행)": {
+              "rows": 52,
+              "detected": 32,
+              "rate": 0.6154
+            },
+            "pos7+(창8행)": {
+              "rows": 250,
+              "detected": 243,
+              "rate": 0.972
+            }
+          },
+          "normal_false_alarm_by_load": {
+            "high": {
+              "rows": 1963,
+              "false_alarms": 0,
+              "records_with_fa": 0,
+              "records": 51
+            },
+            "low": {
+              "rows": 3812,
+              "false_alarms": 4,
+              "records_with_fa": 4,
+              "records": 94
+            },
+            "unknown": {
+              "rows": 322,
+              "false_alarms": 2,
+              "records_with_fa": 2,
+              "records": 35
+            }
+          },
+          "normal_false_alarm_by_pos": {
+            "pos0-1(점수없음)": {
+              "rows": 359,
+              "false_alarms": 0,
+              "rate": 0.0
+            },
+            "pos2-6(창3~7행)": {
+              "rows": 880,
+              "false_alarms": 6,
+              "rate": 0.0068
+            },
+            "pos7+(창8행)": {
+              "rows": 4858,
+              "false_alarms": 0,
+              "rate": 0.0
+            }
+          },
+          "abnormal_first_alarm_pos": {
+            "test:abnormal:10": 3,
+            "test:abnormal:11": 3,
+            "test:abnormal:12": 3,
+            "test:abnormal:13": 2,
+            "test:abnormal:14": 2,
+            "test:abnormal:15": 3,
+            "test:abnormal:16": 5,
+            "test:abnormal:17": 5,
+            "test:abnormal:18": 6,
+            "test:abnormal:19": 3,
+            "test:abnormal:20": 4
+          },
+          "abnormal_records_missed": 0
+        },
+        "mspc_cl": {
+          "abnormal_detect_by_pos": {
+            "pos0-1(점수없음)": {
+              "rows": 22,
+              "detected": 0,
+              "rate": 0.0
+            },
+            "pos2-6(창3~7행)": {
+              "rows": 52,
+              "detected": 52,
+              "rate": 1.0
+            },
+            "pos7+(창8행)": {
+              "rows": 250,
+              "detected": 250,
+              "rate": 1.0
+            }
+          },
+          "normal_false_alarm_by_load": {
+            "high": {
+              "rows": 1963,
+              "false_alarms": 34,
+              "records_with_fa": 20,
+              "records": 51
+            },
+            "low": {
+              "rows": 3812,
+              "false_alarms": 361,
+              "records_with_fa": 85,
+              "records": 94
+            },
+            "unknown": {
+              "rows": 322,
+              "false_alarms": 28,
+              "records_with_fa": 16,
+              "records": 35
+            }
+          },
+          "normal_false_alarm_by_pos": {
+            "pos0-1(점수없음)": {
+              "rows": 359,
+              "false_alarms": 0,
+              "rate": 0.0
+            },
+            "pos2-6(창3~7행)": {
+              "rows": 880,
+              "false_alarms": 161,
+              "rate": 0.183
+            },
+            "pos7+(창8행)": {
+              "rows": 4858,
+              "false_alarms": 262,
+              "rate": 0.0539
+            }
+          },
+          "abnormal_first_alarm_pos": {
+            "test:abnormal:10": 2,
+            "test:abnormal:11": 2,
+            "test:abnormal:12": 2,
+            "test:abnormal:13": 2,
+            "test:abnormal:14": 2,
+            "test:abnormal:15": 2,
+            "test:abnormal:16": 2,
+            "test:abnormal:17": 2,
+            "test:abnormal:18": 2,
+            "test:abnormal:19": 2,
+            "test:abnormal:20": 2
+          },
+          "abnormal_records_missed": 0
+        },
+        "v2": {
+          "abnormal_detect_by_pos": {
+            "pos0-1(점수없음)": {
+              "rows": 22,
+              "detected": 10,
+              "rate": 0.4545
+            },
+            "pos2-6(창3~7행)": {
+              "rows": 52,
+              "detected": 48,
+              "rate": 0.9231
+            },
+            "pos7+(창8행)": {
+              "rows": 250,
+              "detected": 250,
+              "rate": 1.0
+            }
+          },
+          "normal_false_alarm_by_load": {
+            "high": {
+              "rows": 1963,
+              "false_alarms": 3,
+              "records_with_fa": 3,
+              "records": 51
+            },
+            "low": {
+              "rows": 3812,
+              "false_alarms": 0,
+              "records_with_fa": 0,
+              "records": 94
+            },
+            "unknown": {
+              "rows": 322,
+              "false_alarms": 0,
+              "records_with_fa": 0,
+              "records": 35
+            }
+          },
+          "normal_false_alarm_by_pos": {
+            "pos0-1(점수없음)": {
+              "rows": 359,
+              "false_alarms": 0,
+              "rate": 0.0
+            },
+            "pos2-6(창3~7행)": {
+              "rows": 880,
+              "false_alarms": 0,
+              "rate": 0.0
+            },
+            "pos7+(창8행)": {
+              "rows": 4858,
+              "false_alarms": 3,
+              "rate": 0.0006
+            }
+          },
+          "abnormal_first_alarm_pos": {
+            "test:abnormal:10": 0,
+            "test:abnormal:11": 0,
+            "test:abnormal:12": 1,
+            "test:abnormal:13": 2,
+            "test:abnormal:14": 0,
+            "test:abnormal:15": 2,
+            "test:abnormal:16": 0,
+            "test:abnormal:17": 0,
+            "test:abnormal:18": 3,
+            "test:abnormal:19": 2,
+            "test:abnormal:20": 3
+          },
+          "abnormal_records_missed": 0
+        }
+      },
+      "v2_false_alarm_rows": [
+        {
+          "rec": "test:normal:3",
+          "pos": 41,
+          "v2_p": 0.008264,
+          "mspc_p": 0.4132,
+          "mspc_nt_p": 0.1405,
+          "mspc_load_p": 0.4545,
+          "mspc_cl_p": 0.006548,
+          "mspc_load_cl_p": 0.01219
+        },
+        {
+          "rec": "test:normal:41",
+          "pos": 40,
+          "v2_p": 0.008264,
+          "mspc_p": 0.9339,
+          "mspc_nt_p": 0.9339,
+          "mspc_load_p": 0.9339,
+          "mspc_cl_p": 0.6121,
+          "mspc_load_cl_p": 0.6762
+        },
+        {
+          "rec": "test:normal:150",
+          "pos": 11,
+          "v2_p": 0.008264,
+          "mspc_p": 0.1983,
+          "mspc_nt_p": 0.157,
+          "mspc_load_p": 0.2727,
+          "mspc_cl_p": 0.00566,
+          "mspc_load_cl_p": 0.001993
+        }
+      ]
+    }
+  },
+  "headline": {
+    "A": {
+      "mspc": {
+        "valid_rt": 0.5903307888040712,
+        "test_rt": 0.5567928730512249,
+        "test_rec": 0.9937888198757764
+      },
+      "mspc+H1": {
+        "valid_rt": 0.9487666034155597,
+        "test_rt": 1.0,
+        "test_rec": 1.0
+      },
+      "mspc_cl": {
+        "valid_rt": 0.7822085889570553,
+        "test_rt": 0.5886939571150097,
+        "test_rec": 0.16260978670012546
+      },
+      "mspc_load": {
+        "valid_rt": 0.6872037914691943,
+        "test_rt": 0.7142857142857143,
+        "test_rec": 0.9937888198757764
+      },
+      "mspc_nt": {
+        "valid_rt": 0.91796875,
+        "test_rt": 0.9174917491749175,
+        "test_rec": 0.8215661103979461
+      },
+      "mspc_nt+H1": {
+        "valid_rt": 0.9797421731123389,
+        "test_rt": 0.9938650306748467,
+        "test_rec": 0.8275862068965517
+      },
+      "v2+H1+H2": {
+        "valid_rt": 0.9981851179673321,
+        "test_rt": 1.0,
+        "test_rec": 1.0
+      },
+      "v2": {
+        "valid_rt": 0.9566854990583804,
+        "test_rt": 0.9648562300319489,
+        "test_rec": 1.0
+      },
+      "maxz3": {
+        "valid_rt": 0.4945652173913043,
+        "test_rt": 0.4039408866995074,
+        "test_rec": 0.9598715890850722
+      }
+    },
+    "B": {
+      "mspc": {
+        "valid_rt": 0.91796875,
+        "test_rt": 0.907563025210084,
+        "test_rec": 0.9876543209876543
+      },
+      "mspc+H1": {
+        "valid_rt": 0.977859778597786,
+        "test_rt": 0.9984591679506933,
+        "test_rec": 0.9938650306748467
+      },
+      "mspc_cl": {
+        "valid_rt": 0.7981220657276995,
+        "test_rt": 0.5757864632983795,
+        "test_rec": 0.12713360800470866
+      },
+      "mspc_load": {
+        "valid_rt": 0.9115913555992141,
+        "test_rt": 0.9090909090909091,
+        "test_rec": 0.7807228915662651
+      },
+      "mspc_nt": {
+        "valid_rt": 0.91796875,
+        "test_rt": 0.920265780730897,
+        "test_rec": 0.960960960960961
+      },
+      "mspc_nt+H1": {
+        "valid_rt": 0.9797421731123389,
+        "test_rt": 0.9984591679506933,
+        "test_rec": 0.9671641791044776
+      },
+      "v2+H1+H2": {
+        "valid_rt": 0.9981916817359855,
+        "test_rt": 1.0,
+        "test_rec": 1.0
+      },
+      "v2": {
+        "valid_rt": 0.9702602230483272,
+        "test_rt": 0.9700787401574803,
+        "test_rec": 0.8181818181818182
+      },
+      "maxz3": {
+        "valid_rt": 0.5572916666666666,
+        "test_rt": 0.42788461538461536,
+        "test_rec": 0.7796610169491526
+      }
+    }
+  },
+  "results": [
+    {
+      "split": "A",
+      "model": "mspc",
+      "base": "mspc",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 116,
+      "realtime_fp": 1,
+      "realtime_fn": 160,
+      "realtime_f1": 0.5903,
+      "record_tp": 261,
+      "record_fp": 4,
+      "record_fn": 15,
+      "record_f1": 0.9649
+    },
+    {
+      "split": "A",
+      "model": "mspc",
+      "base": "mspc",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 125,
+      "realtime_fp": 0,
+      "realtime_fn": 199,
+      "realtime_f1": 0.5568,
+      "record_tp": 320,
+      "record_fp": 0,
+      "record_fn": 4,
+      "record_f1": 0.9938
+    },
+    {
+      "split": "A",
+      "model": "mspc",
+      "base": "mspc",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 237,
+      "realtime_fp": 3,
+      "realtime_fn": 39,
+      "realtime_f1": 0.9186,
+      "record_tp": 273,
+      "record_fp": 73,
+      "record_fn": 3,
+      "record_f1": 0.8778
+    },
+    {
+      "split": "A",
+      "model": "mspc",
+      "base": "mspc",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 284,
+      "realtime_fp": 1,
+      "realtime_fn": 40,
+      "realtime_f1": 0.9327,
+      "record_tp": 324,
+      "record_fp": 40,
+      "record_fn": 0,
+      "record_f1": 0.9419
+    },
+    {
+      "split": "A",
+      "model": "mspc",
+      "base": "mspc",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 247,
+      "realtime_fp": 6,
+      "realtime_fn": 29,
+      "realtime_f1": 0.9338,
+      "record_tp": 273,
+      "record_fp": 186,
+      "record_fn": 3,
+      "record_f1": 0.7429
+    },
+    {
+      "split": "A",
+      "model": "mspc",
+      "base": "mspc",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 296,
+      "realtime_fp": 34,
+      "realtime_fn": 28,
+      "realtime_f1": 0.9052,
+      "record_tp": 324,
+      "record_fp": 762,
+      "record_fn": 0,
+      "record_f1": 0.4596
+    },
+    {
+      "split": "A",
+      "model": "mspc+H1",
+      "base": "mspc",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 250,
+      "realtime_fp": 1,
+      "realtime_fn": 26,
+      "realtime_f1": 0.9488,
+      "record_tp": 272,
+      "record_fp": 4,
+      "record_fn": 4,
+      "record_f1": 0.9855
+    },
+    {
+      "split": "A",
+      "model": "mspc+H1",
+      "base": "mspc",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 0,
+      "realtime_fn": 0,
+      "realtime_f1": 1.0,
+      "record_tp": 324,
+      "record_fp": 0,
+      "record_fn": 0,
+      "record_f1": 1.0
+    },
+    {
+      "split": "A",
+      "model": "mspc+H1",
+      "base": "mspc",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 265,
+      "realtime_fp": 3,
+      "realtime_fn": 11,
+      "realtime_f1": 0.9743,
+      "record_tp": 276,
+      "record_fp": 73,
+      "record_fn": 0,
+      "record_f1": 0.8832
+    },
+    {
+      "split": "A",
+      "model": "mspc+H1",
+      "base": "mspc",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 1,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9985,
+      "record_tp": 324,
+      "record_fp": 40,
+      "record_fn": 0,
+      "record_f1": 0.9419
+    },
+    {
+      "split": "A",
+      "model": "mspc+H1",
+      "base": "mspc",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 274,
+      "realtime_fp": 6,
+      "realtime_fn": 2,
+      "realtime_f1": 0.9856,
+      "record_tp": 276,
+      "record_fp": 186,
+      "record_fn": 0,
+      "record_f1": 0.748
+    },
+    {
+      "split": "A",
+      "model": "mspc+H1",
+      "base": "mspc",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 109,
+      "realtime_fn": 0,
+      "realtime_f1": 0.856,
+      "record_tp": 324,
+      "record_fp": 774,
+      "record_fn": 0,
+      "record_f1": 0.4557
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl",
+      "base": "mspc_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 255,
+      "realtime_fp": 121,
+      "realtime_fn": 21,
+      "realtime_f1": 0.7822,
+      "record_tp": 276,
+      "record_fp": 2049,
+      "record_fn": 0,
+      "record_f1": 0.2122
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl",
+      "base": "mspc_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 302,
+      "realtime_fp": 400,
+      "realtime_fn": 22,
+      "realtime_f1": 0.5887,
+      "record_tp": 324,
+      "record_fp": 3337,
+      "record_fn": 0,
+      "record_f1": 0.1626
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl",
+      "base": "mspc_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 256,
+      "realtime_fp": 248,
+      "realtime_fn": 20,
+      "realtime_f1": 0.6564,
+      "record_tp": 276,
+      "record_fp": 2822,
+      "record_fn": 0,
+      "record_f1": 0.1636
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl",
+      "base": "mspc_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 302,
+      "realtime_fp": 785,
+      "realtime_fn": 22,
+      "realtime_f1": 0.4281,
+      "record_tp": 324,
+      "record_fp": 3583,
+      "record_fn": 0,
+      "record_f1": 0.1532
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl",
+      "base": "mspc_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 256,
+      "realtime_fp": 351,
+      "realtime_fn": 20,
+      "realtime_f1": 0.5798,
+      "record_tp": 276,
+      "record_fp": 3045,
+      "record_fn": 0,
+      "record_f1": 0.1535
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl",
+      "base": "mspc_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 302,
+      "realtime_fp": 1033,
+      "realtime_fn": 22,
+      "realtime_f1": 0.3641,
+      "record_tp": 324,
+      "record_fp": 3775,
+      "record_fn": 0,
+      "record_f1": 0.1465
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl+H1",
+      "base": "mspc_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 274,
+      "realtime_fp": 293,
+      "realtime_fn": 2,
+      "realtime_f1": 0.6501,
+      "record_tp": 276,
+      "record_fp": 2049,
+      "record_fn": 0,
+      "record_f1": 0.2122
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl+H1",
+      "base": "mspc_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 841,
+      "realtime_fn": 0,
+      "realtime_f1": 0.4352,
+      "record_tp": 324,
+      "record_fp": 3342,
+      "record_fn": 0,
+      "record_f1": 0.1624
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl+H1",
+      "base": "mspc_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 274,
+      "realtime_fp": 537,
+      "realtime_fn": 2,
+      "realtime_f1": 0.5041,
+      "record_tp": 276,
+      "record_fp": 2822,
+      "record_fn": 0,
+      "record_f1": 0.1636
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl+H1",
+      "base": "mspc_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 1293,
+      "realtime_fn": 0,
+      "realtime_f1": 0.3338,
+      "record_tp": 324,
+      "record_fp": 3596,
+      "record_fn": 0,
+      "record_f1": 0.1527
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl+H1",
+      "base": "mspc_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 274,
+      "realtime_fp": 721,
+      "realtime_fn": 2,
+      "realtime_f1": 0.4312,
+      "record_tp": 276,
+      "record_fp": 3045,
+      "record_fn": 0,
+      "record_f1": 0.1535
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl+H1",
+      "base": "mspc_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 1521,
+      "realtime_fn": 0,
+      "realtime_f1": 0.2988,
+      "record_tp": 324,
+      "record_fp": 3791,
+      "record_fn": 0,
+      "record_f1": 0.146
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl_t2",
+      "base": "mspc_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 244,
+      "realtime_fp": 47,
+      "realtime_fn": 32,
+      "realtime_f1": 0.8607,
+      "record_tp": 276,
+      "record_fp": 920,
+      "record_fn": 0,
+      "record_f1": 0.375
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl_t2",
+      "base": "mspc_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 292,
+      "realtime_fp": 286,
+      "realtime_fn": 32,
+      "realtime_f1": 0.6475,
+      "record_tp": 324,
+      "record_fp": 2587,
+      "record_fn": 0,
+      "record_f1": 0.2003
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl_t2",
+      "base": "mspc_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 250,
+      "realtime_fp": 116,
+      "realtime_fn": 26,
+      "realtime_f1": 0.7788,
+      "record_tp": 276,
+      "record_fp": 1461,
+      "record_fn": 0,
+      "record_f1": 0.2742
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl_t2",
+      "base": "mspc_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 296,
+      "realtime_fp": 600,
+      "realtime_fn": 28,
+      "realtime_f1": 0.4852,
+      "record_tp": 324,
+      "record_fp": 3106,
+      "record_fn": 0,
+      "record_f1": 0.1726
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl_t2",
+      "base": "mspc_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 250,
+      "realtime_fp": 172,
+      "realtime_fn": 26,
+      "realtime_f1": 0.7163,
+      "record_tp": 276,
+      "record_fp": 1826,
+      "record_fn": 0,
+      "record_f1": 0.2321
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl_t2",
+      "base": "mspc_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 297,
+      "realtime_fp": 805,
+      "realtime_fn": 27,
+      "realtime_f1": 0.4165,
+      "record_tp": 324,
+      "record_fp": 3343,
+      "record_fn": 0,
+      "record_f1": 0.1624
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl_spe",
+      "base": "mspc_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 254,
+      "realtime_fp": 76,
+      "realtime_fn": 22,
+      "realtime_f1": 0.8383,
+      "record_tp": 273,
+      "record_fp": 1434,
+      "record_fn": 3,
+      "record_f1": 0.2753
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl_spe",
+      "base": "mspc_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 302,
+      "realtime_fp": 125,
+      "realtime_fn": 22,
+      "realtime_f1": 0.8043,
+      "record_tp": 324,
+      "record_fp": 2249,
+      "record_fn": 0,
+      "record_f1": 0.2237
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl_spe",
+      "base": "mspc_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 254,
+      "realtime_fp": 140,
+      "realtime_fn": 22,
+      "realtime_f1": 0.7582,
+      "record_tp": 273,
+      "record_fp": 2320,
+      "record_fn": 3,
+      "record_f1": 0.1903
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl_spe",
+      "base": "mspc_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 302,
+      "realtime_fp": 229,
+      "realtime_fn": 22,
+      "realtime_f1": 0.7064,
+      "record_tp": 324,
+      "record_fp": 2884,
+      "record_fn": 0,
+      "record_f1": 0.1835
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl_spe",
+      "base": "mspc_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 255,
+      "realtime_fp": 200,
+      "realtime_fn": 21,
+      "realtime_f1": 0.6977,
+      "record_tp": 276,
+      "record_fp": 2659,
+      "record_fn": 0,
+      "record_f1": 0.1719
+    },
+    {
+      "split": "A",
+      "model": "mspc_cl_spe",
+      "base": "mspc_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 302,
+      "realtime_fp": 304,
+      "realtime_fn": 22,
+      "realtime_f1": 0.6495,
+      "record_tp": 324,
+      "record_fp": 3283,
+      "record_fn": 0,
+      "record_f1": 0.1648
+    },
+    {
+      "split": "A",
+      "model": "mspc_nt",
+      "base": "mspc_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 235,
+      "realtime_fp": 1,
+      "realtime_fn": 41,
+      "realtime_f1": 0.918,
+      "record_tp": 269,
+      "record_fp": 50,
+      "record_fn": 7,
+      "record_f1": 0.9042
+    },
+    {
+      "split": "A",
+      "model": "mspc_nt",
+      "base": "mspc_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 278,
+      "realtime_fp": 4,
+      "realtime_fn": 46,
+      "realtime_f1": 0.9175,
+      "record_tp": 320,
+      "record_fp": 135,
+      "record_fn": 4,
+      "record_f1": 0.8216
+    },
+    {
+      "split": "A",
+      "model": "mspc_nt",
+      "base": "mspc_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 236,
+      "realtime_fp": 3,
+      "realtime_fn": 40,
+      "realtime_f1": 0.9165,
+      "record_tp": 269,
+      "record_fp": 103,
+      "record_fn": 7,
+      "record_f1": 0.8302
+    },
+    {
+      "split": "A",
+      "model": "mspc_nt",
+      "base": "mspc_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 279,
+      "realtime_fp": 7,
+      "realtime_fn": 45,
+      "realtime_f1": 0.9148,
+      "record_tp": 320,
+      "record_fp": 198,
+      "record_fn": 4,
+      "record_f1": 0.7601
+    },
+    {
+      "split": "A",
+      "model": "mspc_nt",
+      "base": "mspc_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 238,
+      "realtime_fp": 6,
+      "realtime_fn": 38,
+      "realtime_f1": 0.9154,
+      "record_tp": 273,
+      "record_fp": 193,
+      "record_fn": 3,
+      "record_f1": 0.7358
+    },
+    {
+      "split": "A",
+      "model": "mspc_nt",
+      "base": "mspc_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 287,
+      "realtime_fp": 22,
+      "realtime_fn": 37,
+      "realtime_f1": 0.9068,
+      "record_tp": 320,
+      "record_fp": 499,
+      "record_fn": 4,
+      "record_f1": 0.5599
+    },
+    {
+      "split": "A",
+      "model": "mspc_nt+H1",
+      "base": "mspc_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 266,
+      "realtime_fp": 1,
+      "realtime_fn": 10,
+      "realtime_f1": 0.9797,
+      "record_tp": 272,
+      "record_fp": 50,
+      "record_fn": 4,
+      "record_f1": 0.9097
+    },
+    {
+      "split": "A",
+      "model": "mspc_nt+H1",
+      "base": "mspc_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 4,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9939,
+      "record_tp": 324,
+      "record_fp": 135,
+      "record_fn": 0,
+      "record_f1": 0.8276
+    },
+    {
+      "split": "A",
+      "model": "mspc_nt+H1",
+      "base": "mspc_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 267,
+      "realtime_fp": 3,
+      "realtime_fn": 9,
+      "realtime_f1": 0.978,
+      "record_tp": 272,
+      "record_fp": 103,
+      "record_fn": 4,
+      "record_f1": 0.8356
+    },
+    {
+      "split": "A",
+      "model": "mspc_nt+H1",
+      "base": "mspc_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 14,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9789,
+      "record_tp": 324,
+      "record_fp": 198,
+      "record_fn": 0,
+      "record_f1": 0.766
+    },
+    {
+      "split": "A",
+      "model": "mspc_nt+H1",
+      "base": "mspc_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 269,
+      "realtime_fp": 6,
+      "realtime_fn": 7,
+      "realtime_f1": 0.9764,
+      "record_tp": 276,
+      "record_fp": 193,
+      "record_fn": 0,
+      "record_f1": 0.7409
+    },
+    {
+      "split": "A",
+      "model": "mspc_nt+H1",
+      "base": "mspc_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 83,
+      "realtime_fn": 0,
+      "realtime_f1": 0.8865,
+      "record_tp": 324,
+      "record_fp": 511,
+      "record_fn": 0,
+      "record_f1": 0.5591
+    },
+    {
+      "split": "A",
+      "model": "mspc_load",
+      "base": "mspc_load",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 145,
+      "realtime_fp": 1,
+      "realtime_fn": 131,
+      "realtime_f1": 0.6872,
+      "record_tp": 269,
+      "record_fp": 4,
+      "record_fn": 7,
+      "record_f1": 0.98
+    },
+    {
+      "split": "A",
+      "model": "mspc_load",
+      "base": "mspc_load",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 180,
+      "realtime_fp": 0,
+      "realtime_fn": 144,
+      "realtime_f1": 0.7143,
+      "record_tp": 320,
+      "record_fp": 0,
+      "record_fn": 4,
+      "record_f1": 0.9938
+    },
+    {
+      "split": "A",
+      "model": "mspc_load",
+      "base": "mspc_load",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 240,
+      "realtime_fp": 3,
+      "realtime_fn": 36,
+      "realtime_f1": 0.9249,
+      "record_tp": 273,
+      "record_fp": 74,
+      "record_fn": 3,
+      "record_f1": 0.8764
+    },
+    {
+      "split": "A",
+      "model": "mspc_load",
+      "base": "mspc_load",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 281,
+      "realtime_fp": 11,
+      "realtime_fn": 43,
+      "realtime_f1": 0.9123,
+      "record_tp": 324,
+      "record_fp": 328,
+      "record_fn": 0,
+      "record_f1": 0.6639
+    },
+    {
+      "split": "A",
+      "model": "mspc_load",
+      "base": "mspc_load",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 247,
+      "realtime_fp": 8,
+      "realtime_fn": 29,
+      "realtime_f1": 0.9303,
+      "record_tp": 273,
+      "record_fp": 185,
+      "record_fn": 3,
+      "record_f1": 0.7439
+    },
+    {
+      "split": "A",
+      "model": "mspc_load",
+      "base": "mspc_load",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 294,
+      "realtime_fp": 67,
+      "realtime_fn": 30,
+      "realtime_f1": 0.8584,
+      "record_tp": 324,
+      "record_fp": 1453,
+      "record_fn": 0,
+      "record_f1": 0.3084
+    },
+    {
+      "split": "A",
+      "model": "mspc_load+H1",
+      "base": "mspc_load",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 255,
+      "realtime_fp": 1,
+      "realtime_fn": 21,
+      "realtime_f1": 0.9586,
+      "record_tp": 272,
+      "record_fp": 4,
+      "record_fn": 4,
+      "record_f1": 0.9855
+    },
+    {
+      "split": "A",
+      "model": "mspc_load+H1",
+      "base": "mspc_load",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 0,
+      "realtime_fn": 0,
+      "realtime_f1": 1.0,
+      "record_tp": 324,
+      "record_fp": 0,
+      "record_fn": 0,
+      "record_f1": 1.0
+    },
+    {
+      "split": "A",
+      "model": "mspc_load+H1",
+      "base": "mspc_load",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 268,
+      "realtime_fp": 3,
+      "realtime_fn": 8,
+      "realtime_f1": 0.9799,
+      "record_tp": 276,
+      "record_fp": 74,
+      "record_fn": 0,
+      "record_f1": 0.8818
+    },
+    {
+      "split": "A",
+      "model": "mspc_load+H1",
+      "base": "mspc_load",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 18,
+      "realtime_fn": 0,
+      "realtime_f1": 0.973,
+      "record_tp": 324,
+      "record_fp": 328,
+      "record_fn": 0,
+      "record_f1": 0.6639
+    },
+    {
+      "split": "A",
+      "model": "mspc_load+H1",
+      "base": "mspc_load",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 274,
+      "realtime_fp": 22,
+      "realtime_fn": 2,
+      "realtime_f1": 0.958,
+      "record_tp": 276,
+      "record_fp": 185,
+      "record_fn": 0,
+      "record_f1": 0.749
+    },
+    {
+      "split": "A",
+      "model": "mspc_load+H1",
+      "base": "mspc_load",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 219,
+      "realtime_fn": 0,
+      "realtime_f1": 0.7474,
+      "record_tp": 324,
+      "record_fp": 1465,
+      "record_fn": 0,
+      "record_f1": 0.3067
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl",
+      "base": "mspc_load_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 255,
+      "realtime_fp": 152,
+      "realtime_fn": 21,
+      "realtime_f1": 0.7467,
+      "record_tp": 276,
+      "record_fp": 1816,
+      "record_fn": 0,
+      "record_f1": 0.2331
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl",
+      "base": "mspc_load_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 302,
+      "realtime_fp": 668,
+      "realtime_fn": 22,
+      "realtime_f1": 0.4668,
+      "record_tp": 324,
+      "record_fp": 3485,
+      "record_fn": 0,
+      "record_f1": 0.1568
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl",
+      "base": "mspc_load_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 256,
+      "realtime_fp": 299,
+      "realtime_fn": 20,
+      "realtime_f1": 0.6161,
+      "record_tp": 276,
+      "record_fp": 2521,
+      "record_fn": 0,
+      "record_f1": 0.1796
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl",
+      "base": "mspc_load_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 302,
+      "realtime_fp": 1116,
+      "realtime_fn": 22,
+      "realtime_f1": 0.3467,
+      "record_tp": 324,
+      "record_fp": 3818,
+      "record_fn": 0,
+      "record_f1": 0.1451
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl",
+      "base": "mspc_load_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 256,
+      "realtime_fp": 427,
+      "realtime_fn": 20,
+      "realtime_f1": 0.5339,
+      "record_tp": 276,
+      "record_fp": 3021,
+      "record_fn": 0,
+      "record_f1": 0.1545
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl",
+      "base": "mspc_load_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 302,
+      "realtime_fp": 1389,
+      "realtime_fn": 22,
+      "realtime_f1": 0.2998,
+      "record_tp": 324,
+      "record_fp": 3883,
+      "record_fn": 0,
+      "record_f1": 0.143
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl+H1",
+      "base": "mspc_load_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 274,
+      "realtime_fp": 369,
+      "realtime_fn": 2,
+      "realtime_f1": 0.5963,
+      "record_tp": 276,
+      "record_fp": 1816,
+      "record_fn": 0,
+      "record_f1": 0.2331
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl+H1",
+      "base": "mspc_load_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 1137,
+      "realtime_fn": 0,
+      "realtime_f1": 0.363,
+      "record_tp": 324,
+      "record_fp": 3501,
+      "record_fn": 0,
+      "record_f1": 0.1562
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl+H1",
+      "base": "mspc_load_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 274,
+      "realtime_fp": 605,
+      "realtime_fn": 2,
+      "realtime_f1": 0.4745,
+      "record_tp": 276,
+      "record_fp": 2522,
+      "record_fn": 0,
+      "record_f1": 0.1796
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl+H1",
+      "base": "mspc_load_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 1605,
+      "realtime_fn": 0,
+      "realtime_f1": 0.2876,
+      "record_tp": 324,
+      "record_fp": 3826,
+      "record_fn": 0,
+      "record_f1": 0.1448
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl+H1",
+      "base": "mspc_load_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 274,
+      "realtime_fp": 794,
+      "realtime_fn": 2,
+      "realtime_f1": 0.4077,
+      "record_tp": 276,
+      "record_fp": 3022,
+      "record_fn": 0,
+      "record_f1": 0.1544
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl+H1",
+      "base": "mspc_load_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 1878,
+      "realtime_fn": 0,
+      "realtime_f1": 0.2565,
+      "record_tp": 324,
+      "record_fp": 3888,
+      "record_fn": 0,
+      "record_f1": 0.1429
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl_t2",
+      "base": "mspc_load_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 247,
+      "realtime_fp": 70,
+      "realtime_fn": 29,
+      "realtime_f1": 0.8331,
+      "record_tp": 276,
+      "record_fp": 1017,
+      "record_fn": 0,
+      "record_f1": 0.3518
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl_t2",
+      "base": "mspc_load_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 284,
+      "realtime_fp": 211,
+      "realtime_fn": 40,
+      "realtime_f1": 0.6935,
+      "record_tp": 324,
+      "record_fp": 1949,
+      "record_fn": 0,
+      "record_f1": 0.2495
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl_t2",
+      "base": "mspc_load_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 250,
+      "realtime_fp": 149,
+      "realtime_fn": 26,
+      "realtime_f1": 0.7407,
+      "record_tp": 276,
+      "record_fp": 1433,
+      "record_fn": 0,
+      "record_f1": 0.2781
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl_t2",
+      "base": "mspc_load_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 292,
+      "realtime_fp": 398,
+      "realtime_fn": 32,
+      "realtime_f1": 0.5759,
+      "record_tp": 324,
+      "record_fp": 2613,
+      "record_fn": 0,
+      "record_f1": 0.1987
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl_t2",
+      "base": "mspc_load_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 250,
+      "realtime_fp": 203,
+      "realtime_fn": 26,
+      "realtime_f1": 0.6859,
+      "record_tp": 276,
+      "record_fp": 1726,
+      "record_fn": 0,
+      "record_f1": 0.2423
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl_t2",
+      "base": "mspc_load_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 297,
+      "realtime_fp": 551,
+      "realtime_fn": 27,
+      "realtime_f1": 0.5068,
+      "record_tp": 324,
+      "record_fp": 2896,
+      "record_fn": 0,
+      "record_f1": 0.1828
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl_spe",
+      "base": "mspc_load_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 253,
+      "realtime_fp": 87,
+      "realtime_fn": 23,
+      "realtime_f1": 0.8214,
+      "record_tp": 273,
+      "record_fp": 1433,
+      "record_fn": 3,
+      "record_f1": 0.2755
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl_spe",
+      "base": "mspc_load_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 301,
+      "realtime_fp": 496,
+      "realtime_fn": 23,
+      "realtime_f1": 0.537,
+      "record_tp": 324,
+      "record_fp": 3339,
+      "record_fn": 0,
+      "record_f1": 0.1625
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl_spe",
+      "base": "mspc_load_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 255,
+      "realtime_fp": 163,
+      "realtime_fn": 21,
+      "realtime_f1": 0.7349,
+      "record_tp": 273,
+      "record_fp": 2185,
+      "record_fn": 3,
+      "record_f1": 0.1997
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl_spe",
+      "base": "mspc_load_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 301,
+      "realtime_fp": 832,
+      "realtime_fn": 23,
+      "realtime_f1": 0.4132,
+      "record_tp": 324,
+      "record_fp": 3724,
+      "record_fn": 0,
+      "record_f1": 0.1482
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl_spe",
+      "base": "mspc_load_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 255,
+      "realtime_fp": 248,
+      "realtime_fn": 21,
+      "realtime_f1": 0.6547,
+      "record_tp": 273,
+      "record_fp": 2702,
+      "record_fn": 3,
+      "record_f1": 0.1679
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_cl_spe",
+      "base": "mspc_load_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 302,
+      "realtime_fp": 1013,
+      "realtime_fn": 22,
+      "realtime_f1": 0.3685,
+      "record_tp": 324,
+      "record_fp": 3759,
+      "record_fn": 0,
+      "record_f1": 0.147
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_nt",
+      "base": "mspc_load_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 235,
+      "realtime_fp": 1,
+      "realtime_fn": 41,
+      "realtime_f1": 0.918,
+      "record_tp": 269,
+      "record_fp": 49,
+      "record_fn": 7,
+      "record_f1": 0.9057
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_nt",
+      "base": "mspc_load_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 276,
+      "realtime_fp": 6,
+      "realtime_fn": 48,
+      "realtime_f1": 0.9109,
+      "record_tp": 320,
+      "record_fp": 252,
+      "record_fn": 4,
+      "record_f1": 0.7143
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_nt",
+      "base": "mspc_load_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 237,
+      "realtime_fp": 3,
+      "realtime_fn": 39,
+      "realtime_f1": 0.9186,
+      "record_tp": 269,
+      "record_fp": 103,
+      "record_fn": 7,
+      "record_f1": 0.8302
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_nt",
+      "base": "mspc_load_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 283,
+      "realtime_fp": 33,
+      "realtime_fn": 41,
+      "realtime_f1": 0.8844,
+      "record_tp": 324,
+      "record_fp": 798,
+      "record_fn": 0,
+      "record_f1": 0.4481
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_nt",
+      "base": "mspc_load_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 239,
+      "realtime_fp": 7,
+      "realtime_fn": 37,
+      "realtime_f1": 0.9157,
+      "record_tp": 269,
+      "record_fp": 237,
+      "record_fn": 7,
+      "record_f1": 0.688
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_nt",
+      "base": "mspc_load_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 289,
+      "realtime_fp": 69,
+      "realtime_fn": 35,
+      "realtime_f1": 0.8475,
+      "record_tp": 324,
+      "record_fp": 1581,
+      "record_fn": 0,
+      "record_f1": 0.2907
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_nt+H1",
+      "base": "mspc_load_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 268,
+      "realtime_fp": 1,
+      "realtime_fn": 8,
+      "realtime_f1": 0.9835,
+      "record_tp": 272,
+      "record_fp": 49,
+      "record_fn": 4,
+      "record_f1": 0.9112
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_nt+H1",
+      "base": "mspc_load_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 6,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9908,
+      "record_tp": 324,
+      "record_fp": 252,
+      "record_fn": 0,
+      "record_f1": 0.72
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_nt+H1",
+      "base": "mspc_load_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 268,
+      "realtime_fp": 3,
+      "realtime_fn": 8,
+      "realtime_f1": 0.9799,
+      "record_tp": 272,
+      "record_fp": 103,
+      "record_fn": 4,
+      "record_f1": 0.8356
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_nt+H1",
+      "base": "mspc_load_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 95,
+      "realtime_fn": 0,
+      "realtime_f1": 0.8721,
+      "record_tp": 324,
+      "record_fp": 805,
+      "record_fn": 0,
+      "record_f1": 0.446
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_nt+H1",
+      "base": "mspc_load_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 268,
+      "realtime_fp": 14,
+      "realtime_fn": 8,
+      "realtime_f1": 0.9606,
+      "record_tp": 272,
+      "record_fp": 237,
+      "record_fn": 4,
+      "record_f1": 0.693
+    },
+    {
+      "split": "A",
+      "model": "mspc_load_nt+H1",
+      "base": "mspc_load_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 185,
+      "realtime_fn": 0,
+      "realtime_f1": 0.7779,
+      "record_tp": 324,
+      "record_fp": 1588,
+      "record_fn": 0,
+      "record_f1": 0.2898
+    },
+    {
+      "split": "A",
+      "model": "mspc_w6",
+      "base": "mspc_w6",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 64,
+      "realtime_fp": 1,
+      "realtime_fn": 212,
+      "realtime_f1": 0.3754,
+      "record_tp": 269,
+      "record_fp": 4,
+      "record_fn": 7,
+      "record_f1": 0.98
+    },
+    {
+      "split": "A",
+      "model": "mspc_w6",
+      "base": "mspc_w6",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 58,
+      "realtime_fp": 0,
+      "realtime_fn": 266,
+      "realtime_f1": 0.3037,
+      "record_tp": 320,
+      "record_fp": 0,
+      "record_fn": 4,
+      "record_f1": 0.9938
+    },
+    {
+      "split": "A",
+      "model": "mspc_w6",
+      "base": "mspc_w6",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 212,
+      "realtime_fp": 3,
+      "realtime_fn": 64,
+      "realtime_f1": 0.8635,
+      "record_tp": 273,
+      "record_fp": 73,
+      "record_fn": 3,
+      "record_f1": 0.8778
+    },
+    {
+      "split": "A",
+      "model": "mspc_w6",
+      "base": "mspc_w6",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 243,
+      "realtime_fp": 0,
+      "realtime_fn": 81,
+      "realtime_f1": 0.8571,
+      "record_tp": 324,
+      "record_fp": 0,
+      "record_fn": 0,
+      "record_f1": 1.0
+    },
+    {
+      "split": "A",
+      "model": "mspc_w6",
+      "base": "mspc_w6",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 239,
+      "realtime_fp": 7,
+      "realtime_fn": 37,
+      "realtime_f1": 0.9157,
+      "record_tp": 273,
+      "record_fp": 153,
+      "record_fn": 3,
+      "record_f1": 0.7778
+    },
+    {
+      "split": "A",
+      "model": "mspc_w6",
+      "base": "mspc_w6",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 280,
+      "realtime_fp": 6,
+      "realtime_fn": 44,
+      "realtime_f1": 0.918,
+      "record_tp": 324,
+      "record_fp": 188,
+      "record_fn": 0,
+      "record_f1": 0.7751
+    },
+    {
+      "split": "A",
+      "model": "mspc_w6+H1",
+      "base": "mspc_w6",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 234,
+      "realtime_fp": 1,
+      "realtime_fn": 42,
+      "realtime_f1": 0.9159,
+      "record_tp": 272,
+      "record_fp": 4,
+      "record_fn": 4,
+      "record_f1": 0.9855
+    },
+    {
+      "split": "A",
+      "model": "mspc_w6+H1",
+      "base": "mspc_w6",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 0,
+      "realtime_fn": 0,
+      "realtime_f1": 1.0,
+      "record_tp": 324,
+      "record_fp": 0,
+      "record_fn": 0,
+      "record_f1": 1.0
+    },
+    {
+      "split": "A",
+      "model": "mspc_w6+H1",
+      "base": "mspc_w6",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 261,
+      "realtime_fp": 3,
+      "realtime_fn": 15,
+      "realtime_f1": 0.9667,
+      "record_tp": 276,
+      "record_fp": 73,
+      "record_fn": 0,
+      "record_f1": 0.8832
+    },
+    {
+      "split": "A",
+      "model": "mspc_w6+H1",
+      "base": "mspc_w6",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 0,
+      "realtime_fn": 0,
+      "realtime_f1": 1.0,
+      "record_tp": 324,
+      "record_fp": 0,
+      "record_fn": 0,
+      "record_f1": 1.0
+    },
+    {
+      "split": "A",
+      "model": "mspc_w6+H1",
+      "base": "mspc_w6",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 267,
+      "realtime_fp": 14,
+      "realtime_fn": 9,
+      "realtime_f1": 0.9587,
+      "record_tp": 276,
+      "record_fp": 153,
+      "record_fn": 0,
+      "record_f1": 0.783
+    },
+    {
+      "split": "A",
+      "model": "mspc_w6+H1",
+      "base": "mspc_w6",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 13,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9803,
+      "record_tp": 324,
+      "record_fp": 188,
+      "record_fn": 0,
+      "record_f1": 0.7751
+    },
+    {
+      "split": "A",
+      "model": "mspc_w12",
+      "base": "mspc_w12",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 208,
+      "realtime_fp": 1,
+      "realtime_fn": 68,
+      "realtime_f1": 0.8577,
+      "record_tp": 269,
+      "record_fp": 4,
+      "record_fn": 7,
+      "record_f1": 0.98
+    },
+    {
+      "split": "A",
+      "model": "mspc_w12",
+      "base": "mspc_w12",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 243,
+      "realtime_fp": 0,
+      "realtime_fn": 81,
+      "realtime_f1": 0.8571,
+      "record_tp": 320,
+      "record_fp": 0,
+      "record_fn": 4,
+      "record_f1": 0.9938
+    },
+    {
+      "split": "A",
+      "model": "mspc_w12",
+      "base": "mspc_w12",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 240,
+      "realtime_fp": 3,
+      "realtime_fn": 36,
+      "realtime_f1": 0.9249,
+      "record_tp": 273,
+      "record_fp": 75,
+      "record_fn": 3,
+      "record_f1": 0.875
+    },
+    {
+      "split": "A",
+      "model": "mspc_w12",
+      "base": "mspc_w12",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 291,
+      "realtime_fp": 8,
+      "realtime_fn": 33,
+      "realtime_f1": 0.9342,
+      "record_tp": 324,
+      "record_fp": 235,
+      "record_fn": 0,
+      "record_f1": 0.7339
+    },
+    {
+      "split": "A",
+      "model": "mspc_w12",
+      "base": "mspc_w12",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 251,
+      "realtime_fp": 6,
+      "realtime_fn": 25,
+      "realtime_f1": 0.9418,
+      "record_tp": 276,
+      "record_fp": 189,
+      "record_fn": 0,
+      "record_f1": 0.7449
+    },
+    {
+      "split": "A",
+      "model": "mspc_w12",
+      "base": "mspc_w12",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 300,
+      "realtime_fp": 74,
+      "realtime_fn": 24,
+      "realtime_f1": 0.8596,
+      "record_tp": 324,
+      "record_fp": 1208,
+      "record_fn": 0,
+      "record_f1": 0.3491
+    },
+    {
+      "split": "A",
+      "model": "mspc_w12+H1",
+      "base": "mspc_w12",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 263,
+      "realtime_fp": 1,
+      "realtime_fn": 13,
+      "realtime_f1": 0.9741,
+      "record_tp": 272,
+      "record_fp": 4,
+      "record_fn": 4,
+      "record_f1": 0.9855
+    },
+    {
+      "split": "A",
+      "model": "mspc_w12+H1",
+      "base": "mspc_w12",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 0,
+      "realtime_fn": 0,
+      "realtime_f1": 1.0,
+      "record_tp": 324,
+      "record_fp": 0,
+      "record_fn": 0,
+      "record_f1": 1.0
+    },
+    {
+      "split": "A",
+      "model": "mspc_w12+H1",
+      "base": "mspc_w12",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 267,
+      "realtime_fp": 3,
+      "realtime_fn": 9,
+      "realtime_f1": 0.978,
+      "record_tp": 276,
+      "record_fp": 75,
+      "record_fn": 0,
+      "record_f1": 0.8804
+    },
+    {
+      "split": "A",
+      "model": "mspc_w12+H1",
+      "base": "mspc_w12",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 15,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9774,
+      "record_tp": 324,
+      "record_fp": 235,
+      "record_fn": 0,
+      "record_f1": 0.7339
+    },
+    {
+      "split": "A",
+      "model": "mspc_w12+H1",
+      "base": "mspc_w12",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 274,
+      "realtime_fp": 6,
+      "realtime_fn": 2,
+      "realtime_f1": 0.9856,
+      "record_tp": 276,
+      "record_fp": 189,
+      "record_fn": 0,
+      "record_f1": 0.7449
+    },
+    {
+      "split": "A",
+      "model": "mspc_w12+H1",
+      "base": "mspc_w12",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 196,
+      "realtime_fn": 0,
+      "realtime_f1": 0.7678,
+      "record_tp": 324,
+      "record_fp": 1220,
+      "record_fn": 0,
+      "record_f1": 0.3469
+    },
+    {
+      "split": "A",
+      "model": "v2",
+      "base": "v2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 254,
+      "realtime_fp": 1,
+      "realtime_fn": 22,
+      "realtime_f1": 0.9567,
+      "record_tp": 276,
+      "record_fp": 50,
+      "record_fn": 0,
+      "record_f1": 0.9169
+    },
+    {
+      "split": "A",
+      "model": "v2",
+      "base": "v2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 302,
+      "realtime_fp": 0,
+      "realtime_fn": 22,
+      "realtime_f1": 0.9649,
+      "record_tp": 324,
+      "record_fp": 0,
+      "record_fn": 0,
+      "record_f1": 1.0
+    },
+    {
+      "split": "A",
+      "model": "v2",
+      "base": "v2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 261,
+      "realtime_fp": 4,
+      "realtime_fn": 15,
+      "realtime_f1": 0.9649,
+      "record_tp": 276,
+      "record_fp": 144,
+      "record_fn": 0,
+      "record_f1": 0.7931
+    },
+    {
+      "split": "A",
+      "model": "v2",
+      "base": "v2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 308,
+      "realtime_fp": 1,
+      "realtime_fn": 16,
+      "realtime_f1": 0.9731,
+      "record_tp": 324,
+      "record_fp": 44,
+      "record_fn": 0,
+      "record_f1": 0.9364
+    },
+    {
+      "split": "A",
+      "model": "v2",
+      "base": "v2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 261,
+      "realtime_fp": 10,
+      "realtime_fn": 15,
+      "realtime_f1": 0.9543,
+      "record_tp": 276,
+      "record_fp": 264,
+      "record_fn": 0,
+      "record_f1": 0.6765
+    },
+    {
+      "split": "A",
+      "model": "v2",
+      "base": "v2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 308,
+      "realtime_fp": 1,
+      "realtime_fn": 16,
+      "realtime_f1": 0.9731,
+      "record_tp": 324,
+      "record_fp": 44,
+      "record_fn": 0,
+      "record_f1": 0.9364
+    },
+    {
+      "split": "A",
+      "model": "v2+H1",
+      "base": "v2",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 275,
+      "realtime_fp": 1,
+      "realtime_fn": 1,
+      "realtime_f1": 0.9964,
+      "record_tp": 276,
+      "record_fp": 50,
+      "record_fn": 0,
+      "record_f1": 0.9169
+    },
+    {
+      "split": "A",
+      "model": "v2+H1",
+      "base": "v2",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 0,
+      "realtime_fn": 0,
+      "realtime_f1": 1.0,
+      "record_tp": 324,
+      "record_fp": 0,
+      "record_fn": 0,
+      "record_f1": 1.0
+    },
+    {
+      "split": "A",
+      "model": "v2+H1",
+      "base": "v2",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 276,
+      "realtime_fp": 11,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9805,
+      "record_tp": 276,
+      "record_fp": 144,
+      "record_fn": 0,
+      "record_f1": 0.7931
+    },
+    {
+      "split": "A",
+      "model": "v2+H1",
+      "base": "v2",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 1,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9985,
+      "record_tp": 324,
+      "record_fp": 44,
+      "record_fn": 0,
+      "record_f1": 0.9364
+    },
+    {
+      "split": "A",
+      "model": "v2+H1",
+      "base": "v2",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 276,
+      "realtime_fp": 31,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9468,
+      "record_tp": 276,
+      "record_fp": 264,
+      "record_fn": 0,
+      "record_f1": 0.6765
+    },
+    {
+      "split": "A",
+      "model": "v2+H1",
+      "base": "v2",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 1,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9985,
+      "record_tp": 324,
+      "record_fp": 44,
+      "record_fn": 0,
+      "record_f1": 0.9364
+    },
+    {
+      "split": "A",
+      "model": "v2+H1+H2",
+      "base": "v2",
+      "h1": true,
+      "h2": true,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 275,
+      "realtime_fp": 0,
+      "realtime_fn": 1,
+      "realtime_f1": 0.9982,
+      "record_tp": 276,
+      "record_fp": 0,
+      "record_fn": 0,
+      "record_f1": 1.0
+    },
+    {
+      "split": "A",
+      "model": "v2+H1+H2",
+      "base": "v2",
+      "h1": true,
+      "h2": true,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 0,
+      "realtime_fn": 0,
+      "realtime_f1": 1.0,
+      "record_tp": 324,
+      "record_fp": 0,
+      "record_fn": 0,
+      "record_f1": 1.0
+    },
+    {
+      "split": "A",
+      "model": "v2+H1+H2",
+      "base": "v2",
+      "h1": true,
+      "h2": true,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 276,
+      "realtime_fp": 1,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9982,
+      "record_tp": 276,
+      "record_fp": 44,
+      "record_fn": 0,
+      "record_f1": 0.9262
+    },
+    {
+      "split": "A",
+      "model": "v2+H1+H2",
+      "base": "v2",
+      "h1": true,
+      "h2": true,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 0,
+      "realtime_fn": 0,
+      "realtime_f1": 1.0,
+      "record_tp": 324,
+      "record_fp": 0,
+      "record_fn": 0,
+      "record_f1": 1.0
+    },
+    {
+      "split": "A",
+      "model": "v2+H1+H2",
+      "base": "v2",
+      "h1": true,
+      "h2": true,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 276,
+      "realtime_fp": 10,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9822,
+      "record_tp": 276,
+      "record_fp": 90,
+      "record_fn": 0,
+      "record_f1": 0.8598
+    },
+    {
+      "split": "A",
+      "model": "v2+H1+H2",
+      "base": "v2",
+      "h1": true,
+      "h2": true,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 0,
+      "realtime_fn": 0,
+      "realtime_f1": 1.0,
+      "record_tp": 324,
+      "record_fp": 0,
+      "record_fn": 0,
+      "record_f1": 1.0
+    },
+    {
+      "split": "A",
+      "model": "maxz3",
+      "base": "maxz3",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 91,
+      "realtime_fp": 1,
+      "realtime_fn": 185,
+      "realtime_f1": 0.4946,
+      "record_tp": 245,
+      "record_fp": 50,
+      "record_fn": 31,
+      "record_f1": 0.8581
+    },
+    {
+      "split": "A",
+      "model": "maxz3",
+      "base": "maxz3",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 82,
+      "realtime_fp": 0,
+      "realtime_fn": 242,
+      "realtime_f1": 0.4039,
+      "record_tp": 299,
+      "record_fp": 0,
+      "record_fn": 25,
+      "record_f1": 0.9599
+    },
+    {
+      "split": "A",
+      "model": "maxz3",
+      "base": "maxz3",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 109,
+      "realtime_fp": 5,
+      "realtime_fn": 167,
+      "realtime_f1": 0.559,
+      "record_tp": 245,
+      "record_fp": 124,
+      "record_fn": 31,
+      "record_f1": 0.7597
+    },
+    {
+      "split": "A",
+      "model": "maxz3",
+      "base": "maxz3",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 89,
+      "realtime_fp": 1,
+      "realtime_fn": 235,
+      "realtime_f1": 0.43,
+      "record_tp": 299,
+      "record_fp": 44,
+      "record_fn": 25,
+      "record_f1": 0.8966
+    },
+    {
+      "split": "A",
+      "model": "maxz3",
+      "base": "maxz3",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 116,
+      "realtime_fp": 9,
+      "realtime_fn": 160,
+      "realtime_f1": 0.5786,
+      "record_tp": 245,
+      "record_fp": 252,
+      "record_fn": 31,
+      "record_f1": 0.6339
+    },
+    {
+      "split": "A",
+      "model": "maxz3",
+      "base": "maxz3",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 95,
+      "realtime_fp": 2,
+      "realtime_fn": 229,
+      "realtime_f1": 0.4513,
+      "record_tp": 299,
+      "record_fp": 94,
+      "record_fn": 25,
+      "record_f1": 0.834
+    },
+    {
+      "split": "B",
+      "model": "mspc",
+      "base": "mspc",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 235,
+      "realtime_fp": 1,
+      "realtime_fn": 41,
+      "realtime_f1": 0.918,
+      "record_tp": 273,
+      "record_fp": 35,
+      "record_fn": 3,
+      "record_f1": 0.9349
+    },
+    {
+      "split": "B",
+      "model": "mspc",
+      "base": "mspc",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 270,
+      "realtime_fp": 1,
+      "realtime_fn": 54,
+      "realtime_f1": 0.9076,
+      "record_tp": 320,
+      "record_fp": 4,
+      "record_fn": 4,
+      "record_f1": 0.9877
+    },
+    {
+      "split": "B",
+      "model": "mspc",
+      "base": "mspc",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 237,
+      "realtime_fp": 3,
+      "realtime_fn": 39,
+      "realtime_f1": 0.9186,
+      "record_tp": 273,
+      "record_fp": 94,
+      "record_fn": 3,
+      "record_f1": 0.8491
+    },
+    {
+      "split": "B",
+      "model": "mspc",
+      "base": "mspc",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 283,
+      "realtime_fp": 3,
+      "realtime_fn": 41,
+      "realtime_f1": 0.9279,
+      "record_tp": 324,
+      "record_fp": 92,
+      "record_fn": 0,
+      "record_f1": 0.8757
+    },
+    {
+      "split": "B",
+      "model": "mspc",
+      "base": "mspc",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 245,
+      "realtime_fp": 6,
+      "realtime_fn": 31,
+      "realtime_f1": 0.9298,
+      "record_tp": 273,
+      "record_fp": 187,
+      "record_fn": 3,
+      "record_f1": 0.7418
+    },
+    {
+      "split": "B",
+      "model": "mspc",
+      "base": "mspc",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 295,
+      "realtime_fp": 15,
+      "realtime_fn": 29,
+      "realtime_f1": 0.9306,
+      "record_tp": 324,
+      "record_fp": 408,
+      "record_fn": 0,
+      "record_f1": 0.6136
+    },
+    {
+      "split": "B",
+      "model": "mspc+H1",
+      "base": "mspc",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 265,
+      "realtime_fp": 1,
+      "realtime_fn": 11,
+      "realtime_f1": 0.9779,
+      "record_tp": 276,
+      "record_fp": 35,
+      "record_fn": 0,
+      "record_f1": 0.9404
+    },
+    {
+      "split": "B",
+      "model": "mspc+H1",
+      "base": "mspc",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 1,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9985,
+      "record_tp": 324,
+      "record_fp": 4,
+      "record_fn": 0,
+      "record_f1": 0.9939
+    },
+    {
+      "split": "B",
+      "model": "mspc+H1",
+      "base": "mspc",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 265,
+      "realtime_fp": 3,
+      "realtime_fn": 11,
+      "realtime_f1": 0.9743,
+      "record_tp": 276,
+      "record_fp": 94,
+      "record_fn": 0,
+      "record_f1": 0.8545
+    },
+    {
+      "split": "B",
+      "model": "mspc+H1",
+      "base": "mspc",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 3,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9954,
+      "record_tp": 324,
+      "record_fp": 92,
+      "record_fn": 0,
+      "record_f1": 0.8757
+    },
+    {
+      "split": "B",
+      "model": "mspc+H1",
+      "base": "mspc",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 270,
+      "realtime_fp": 6,
+      "realtime_fn": 6,
+      "realtime_f1": 0.9783,
+      "record_tp": 276,
+      "record_fp": 187,
+      "record_fn": 0,
+      "record_f1": 0.747
+    },
+    {
+      "split": "B",
+      "model": "mspc+H1",
+      "base": "mspc",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 29,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9572,
+      "record_tp": 324,
+      "record_fp": 408,
+      "record_fn": 0,
+      "record_f1": 0.6136
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl",
+      "base": "mspc_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 255,
+      "realtime_fp": 108,
+      "realtime_fn": 21,
+      "realtime_f1": 0.7981,
+      "record_tp": 276,
+      "record_fp": 1811,
+      "record_fn": 0,
+      "record_f1": 0.2336
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl",
+      "base": "mspc_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 302,
+      "realtime_fp": 423,
+      "realtime_fn": 22,
+      "realtime_f1": 0.5758,
+      "record_tp": 324,
+      "record_fp": 4449,
+      "record_fn": 0,
+      "record_f1": 0.1271
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl",
+      "base": "mspc_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 256,
+      "realtime_fp": 226,
+      "realtime_fn": 20,
+      "realtime_f1": 0.6755,
+      "record_tp": 276,
+      "record_fp": 2420,
+      "record_fn": 0,
+      "record_f1": 0.1857
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl",
+      "base": "mspc_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 302,
+      "realtime_fp": 849,
+      "realtime_fn": 22,
+      "realtime_f1": 0.4095,
+      "record_tp": 324,
+      "record_fp": 5015,
+      "record_fn": 0,
+      "record_f1": 0.1144
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl",
+      "base": "mspc_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 256,
+      "realtime_fp": 320,
+      "realtime_fn": 20,
+      "realtime_f1": 0.6009,
+      "record_tp": 276,
+      "record_fp": 3007,
+      "record_fn": 0,
+      "record_f1": 0.1551
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl",
+      "base": "mspc_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 302,
+      "realtime_fp": 1151,
+      "realtime_fn": 22,
+      "realtime_f1": 0.3399,
+      "record_tp": 324,
+      "record_fp": 5317,
+      "record_fn": 0,
+      "record_f1": 0.1086
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl+H1",
+      "base": "mspc_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 274,
+      "realtime_fp": 280,
+      "realtime_fn": 2,
+      "realtime_f1": 0.6602,
+      "record_tp": 276,
+      "record_fp": 1811,
+      "record_fn": 0,
+      "record_f1": 0.2336
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl+H1",
+      "base": "mspc_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 923,
+      "realtime_fn": 0,
+      "realtime_f1": 0.4125,
+      "record_tp": 324,
+      "record_fp": 4454,
+      "record_fn": 0,
+      "record_f1": 0.127
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl+H1",
+      "base": "mspc_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 274,
+      "realtime_fp": 463,
+      "realtime_fn": 2,
+      "realtime_f1": 0.541,
+      "record_tp": 276,
+      "record_fp": 2420,
+      "record_fn": 0,
+      "record_f1": 0.1857
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl+H1",
+      "base": "mspc_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 1512,
+      "realtime_fn": 0,
+      "realtime_f1": 0.3,
+      "record_tp": 324,
+      "record_fp": 5028,
+      "record_fn": 0,
+      "record_f1": 0.1142
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl+H1",
+      "base": "mspc_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 274,
+      "realtime_fp": 637,
+      "realtime_fn": 2,
+      "realtime_f1": 0.4617,
+      "record_tp": 276,
+      "record_fp": 3010,
+      "record_fn": 0,
+      "record_f1": 0.155
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl+H1",
+      "base": "mspc_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 1828,
+      "realtime_fn": 0,
+      "realtime_f1": 0.2617,
+      "record_tp": 324,
+      "record_fp": 5330,
+      "record_fn": 0,
+      "record_f1": 0.1084
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl_t2",
+      "base": "mspc_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 244,
+      "realtime_fp": 32,
+      "realtime_fn": 32,
+      "realtime_f1": 0.8841,
+      "record_tp": 276,
+      "record_fp": 806,
+      "record_fn": 0,
+      "record_f1": 0.4065
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl_t2",
+      "base": "mspc_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 292,
+      "realtime_fp": 279,
+      "realtime_fn": 32,
+      "realtime_f1": 0.6525,
+      "record_tp": 324,
+      "record_fp": 3073,
+      "record_fn": 0,
+      "record_f1": 0.1741
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl_t2",
+      "base": "mspc_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 250,
+      "realtime_fp": 91,
+      "realtime_fn": 26,
+      "realtime_f1": 0.8104,
+      "record_tp": 276,
+      "record_fp": 1372,
+      "record_fn": 0,
+      "record_f1": 0.2869
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl_t2",
+      "base": "mspc_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 297,
+      "realtime_fp": 593,
+      "realtime_fn": 27,
+      "realtime_f1": 0.4893,
+      "record_tp": 324,
+      "record_fp": 3760,
+      "record_fn": 0,
+      "record_f1": 0.147
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl_t2",
+      "base": "mspc_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 250,
+      "realtime_fp": 136,
+      "realtime_fn": 26,
+      "realtime_f1": 0.7553,
+      "record_tp": 276,
+      "record_fp": 1748,
+      "record_fn": 0,
+      "record_f1": 0.24
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl_t2",
+      "base": "mspc_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 297,
+      "realtime_fp": 830,
+      "realtime_fn": 27,
+      "realtime_f1": 0.4094,
+      "record_tp": 324,
+      "record_fp": 4179,
+      "record_fn": 0,
+      "record_f1": 0.1342
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl_spe",
+      "base": "mspc_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 254,
+      "realtime_fp": 79,
+      "realtime_fn": 22,
+      "realtime_f1": 0.8342,
+      "record_tp": 273,
+      "record_fp": 1370,
+      "record_fn": 3,
+      "record_f1": 0.2845
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl_spe",
+      "base": "mspc_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 302,
+      "realtime_fp": 157,
+      "realtime_fn": 22,
+      "realtime_f1": 0.7714,
+      "record_tp": 324,
+      "record_fp": 3002,
+      "record_fn": 0,
+      "record_f1": 0.1775
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl_spe",
+      "base": "mspc_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 254,
+      "realtime_fp": 144,
+      "realtime_fn": 22,
+      "realtime_f1": 0.7537,
+      "record_tp": 273,
+      "record_fp": 1972,
+      "record_fn": 3,
+      "record_f1": 0.2166
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl_spe",
+      "base": "mspc_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 302,
+      "realtime_fp": 306,
+      "realtime_fn": 22,
+      "realtime_f1": 0.6481,
+      "record_tp": 324,
+      "record_fp": 4037,
+      "record_fn": 0,
+      "record_f1": 0.1383
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl_spe",
+      "base": "mspc_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 255,
+      "realtime_fp": 205,
+      "realtime_fn": 21,
+      "realtime_f1": 0.6929,
+      "record_tp": 276,
+      "record_fp": 2703,
+      "record_fn": 0,
+      "record_f1": 0.1696
+    },
+    {
+      "split": "B",
+      "model": "mspc_cl_spe",
+      "base": "mspc_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 302,
+      "realtime_fp": 404,
+      "realtime_fn": 22,
+      "realtime_f1": 0.5864,
+      "record_tp": 324,
+      "record_fp": 4523,
+      "record_fn": 0,
+      "record_f1": 0.1253
+    },
+    {
+      "split": "B",
+      "model": "mspc_nt",
+      "base": "mspc_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 235,
+      "realtime_fp": 1,
+      "realtime_fn": 41,
+      "realtime_f1": 0.918,
+      "record_tp": 269,
+      "record_fp": 35,
+      "record_fn": 7,
+      "record_f1": 0.9276
+    },
+    {
+      "split": "B",
+      "model": "mspc_nt",
+      "base": "mspc_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 277,
+      "realtime_fp": 1,
+      "realtime_fn": 47,
+      "realtime_f1": 0.9203,
+      "record_tp": 320,
+      "record_fp": 22,
+      "record_fn": 4,
+      "record_f1": 0.961
+    },
+    {
+      "split": "B",
+      "model": "mspc_nt",
+      "base": "mspc_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 237,
+      "realtime_fp": 3,
+      "realtime_fn": 39,
+      "realtime_f1": 0.9186,
+      "record_tp": 269,
+      "record_fp": 94,
+      "record_fn": 7,
+      "record_f1": 0.8419
+    },
+    {
+      "split": "B",
+      "model": "mspc_nt",
+      "base": "mspc_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 282,
+      "realtime_fp": 12,
+      "realtime_fn": 42,
+      "realtime_f1": 0.9126,
+      "record_tp": 320,
+      "record_fp": 351,
+      "record_fn": 4,
+      "record_f1": 0.6432
+    },
+    {
+      "split": "B",
+      "model": "mspc_nt",
+      "base": "mspc_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 239,
+      "realtime_fp": 7,
+      "realtime_fn": 37,
+      "realtime_f1": 0.9157,
+      "record_tp": 273,
+      "record_fp": 223,
+      "record_fn": 3,
+      "record_f1": 0.7073
+    },
+    {
+      "split": "B",
+      "model": "mspc_nt",
+      "base": "mspc_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 287,
+      "realtime_fp": 31,
+      "realtime_fn": 37,
+      "realtime_f1": 0.8941,
+      "record_tp": 320,
+      "record_fp": 688,
+      "record_fn": 4,
+      "record_f1": 0.4805
+    },
+    {
+      "split": "B",
+      "model": "mspc_nt+H1",
+      "base": "mspc_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 266,
+      "realtime_fp": 1,
+      "realtime_fn": 10,
+      "realtime_f1": 0.9797,
+      "record_tp": 272,
+      "record_fp": 35,
+      "record_fn": 4,
+      "record_f1": 0.9331
+    },
+    {
+      "split": "B",
+      "model": "mspc_nt+H1",
+      "base": "mspc_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 1,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9985,
+      "record_tp": 324,
+      "record_fp": 22,
+      "record_fn": 0,
+      "record_f1": 0.9672
+    },
+    {
+      "split": "B",
+      "model": "mspc_nt+H1",
+      "base": "mspc_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 268,
+      "realtime_fp": 3,
+      "realtime_fn": 8,
+      "realtime_f1": 0.9799,
+      "record_tp": 272,
+      "record_fp": 94,
+      "record_fn": 4,
+      "record_f1": 0.8474
+    },
+    {
+      "split": "B",
+      "model": "mspc_nt+H1",
+      "base": "mspc_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 33,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9515,
+      "record_tp": 324,
+      "record_fp": 358,
+      "record_fn": 0,
+      "record_f1": 0.6441
+    },
+    {
+      "split": "B",
+      "model": "mspc_nt+H1",
+      "base": "mspc_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 269,
+      "realtime_fp": 14,
+      "realtime_fn": 7,
+      "realtime_f1": 0.9624,
+      "record_tp": 276,
+      "record_fp": 223,
+      "record_fn": 0,
+      "record_f1": 0.7123
+    },
+    {
+      "split": "B",
+      "model": "mspc_nt+H1",
+      "base": "mspc_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 99,
+      "realtime_fn": 0,
+      "realtime_f1": 0.8675,
+      "record_tp": 324,
+      "record_fp": 700,
+      "record_fn": 0,
+      "record_f1": 0.4807
+    },
+    {
+      "split": "B",
+      "model": "mspc_load",
+      "base": "mspc_load",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 232,
+      "realtime_fp": 1,
+      "realtime_fn": 44,
+      "realtime_f1": 0.9116,
+      "record_tp": 269,
+      "record_fp": 35,
+      "record_fn": 7,
+      "record_f1": 0.9276
+    },
+    {
+      "split": "B",
+      "model": "mspc_load",
+      "base": "mspc_load",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 275,
+      "realtime_fp": 6,
+      "realtime_fn": 49,
+      "realtime_f1": 0.9091,
+      "record_tp": 324,
+      "record_fp": 182,
+      "record_fn": 0,
+      "record_f1": 0.7807
+    },
+    {
+      "split": "B",
+      "model": "mspc_load",
+      "base": "mspc_load",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 239,
+      "realtime_fp": 4,
+      "realtime_fn": 37,
+      "realtime_f1": 0.921,
+      "record_tp": 273,
+      "record_fp": 87,
+      "record_fn": 3,
+      "record_f1": 0.8585
+    },
+    {
+      "split": "B",
+      "model": "mspc_load",
+      "base": "mspc_load",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 282,
+      "realtime_fp": 11,
+      "realtime_fn": 42,
+      "realtime_f1": 0.9141,
+      "record_tp": 324,
+      "record_fp": 331,
+      "record_fn": 0,
+      "record_f1": 0.6619
+    },
+    {
+      "split": "B",
+      "model": "mspc_load",
+      "base": "mspc_load",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 249,
+      "realtime_fp": 8,
+      "realtime_fn": 27,
+      "realtime_f1": 0.9343,
+      "record_tp": 273,
+      "record_fp": 196,
+      "record_fn": 3,
+      "record_f1": 0.7329
+    },
+    {
+      "split": "B",
+      "model": "mspc_load",
+      "base": "mspc_load",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 296,
+      "realtime_fp": 98,
+      "realtime_fn": 28,
+      "realtime_f1": 0.8245,
+      "record_tp": 324,
+      "record_fp": 1935,
+      "record_fn": 0,
+      "record_f1": 0.2509
+    },
+    {
+      "split": "B",
+      "model": "mspc_load+H1",
+      "base": "mspc_load",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 265,
+      "realtime_fp": 1,
+      "realtime_fn": 11,
+      "realtime_f1": 0.9779,
+      "record_tp": 272,
+      "record_fp": 35,
+      "record_fn": 4,
+      "record_f1": 0.9331
+    },
+    {
+      "split": "B",
+      "model": "mspc_load+H1",
+      "base": "mspc_load",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 6,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9908,
+      "record_tp": 324,
+      "record_fp": 182,
+      "record_fn": 0,
+      "record_f1": 0.7807
+    },
+    {
+      "split": "B",
+      "model": "mspc_load+H1",
+      "base": "mspc_load",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 268,
+      "realtime_fp": 11,
+      "realtime_fn": 8,
+      "realtime_f1": 0.9658,
+      "record_tp": 276,
+      "record_fp": 87,
+      "record_fn": 0,
+      "record_f1": 0.8638
+    },
+    {
+      "split": "B",
+      "model": "mspc_load+H1",
+      "base": "mspc_load",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 11,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9833,
+      "record_tp": 324,
+      "record_fp": 331,
+      "record_fn": 0,
+      "record_f1": 0.6619
+    },
+    {
+      "split": "B",
+      "model": "mspc_load+H1",
+      "base": "mspc_load",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 274,
+      "realtime_fp": 22,
+      "realtime_fn": 2,
+      "realtime_f1": 0.958,
+      "record_tp": 276,
+      "record_fp": 196,
+      "record_fn": 0,
+      "record_f1": 0.738
+    },
+    {
+      "split": "B",
+      "model": "mspc_load+H1",
+      "base": "mspc_load",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 303,
+      "realtime_fn": 0,
+      "realtime_f1": 0.6814,
+      "record_tp": 324,
+      "record_fp": 1947,
+      "record_fn": 0,
+      "record_f1": 0.2497
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl",
+      "base": "mspc_load_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 255,
+      "realtime_fp": 141,
+      "realtime_fn": 21,
+      "realtime_f1": 0.7589,
+      "record_tp": 276,
+      "record_fp": 1816,
+      "record_fn": 0,
+      "record_f1": 0.2331
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl",
+      "base": "mspc_load_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 302,
+      "realtime_fp": 706,
+      "realtime_fn": 22,
+      "realtime_f1": 0.4535,
+      "record_tp": 324,
+      "record_fp": 4381,
+      "record_fn": 0,
+      "record_f1": 0.1289
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl",
+      "base": "mspc_load_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 256,
+      "realtime_fp": 264,
+      "realtime_fn": 20,
+      "realtime_f1": 0.6432,
+      "record_tp": 276,
+      "record_fp": 2521,
+      "record_fn": 0,
+      "record_f1": 0.1796
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl",
+      "base": "mspc_load_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 302,
+      "realtime_fp": 1215,
+      "realtime_fn": 22,
+      "realtime_f1": 0.3281,
+      "record_tp": 324,
+      "record_fp": 5091,
+      "record_fn": 0,
+      "record_f1": 0.1129
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl",
+      "base": "mspc_load_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 256,
+      "realtime_fp": 370,
+      "realtime_fn": 20,
+      "realtime_f1": 0.5676,
+      "record_tp": 276,
+      "record_fp": 2818,
+      "record_fn": 0,
+      "record_f1": 0.1638
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl",
+      "base": "mspc_load_cl",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 302,
+      "realtime_fp": 1551,
+      "realtime_fn": 22,
+      "realtime_f1": 0.2774,
+      "record_tp": 324,
+      "record_fp": 5452,
+      "record_fn": 0,
+      "record_f1": 0.1062
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl+H1",
+      "base": "mspc_load_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 274,
+      "realtime_fp": 359,
+      "realtime_fn": 2,
+      "realtime_f1": 0.6029,
+      "record_tp": 276,
+      "record_fp": 1818,
+      "record_fn": 0,
+      "record_f1": 0.2329
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl+H1",
+      "base": "mspc_load_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 1261,
+      "realtime_fn": 0,
+      "realtime_f1": 0.3394,
+      "record_tp": 324,
+      "record_fp": 4389,
+      "record_fn": 0,
+      "record_f1": 0.1286
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl+H1",
+      "base": "mspc_load_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 274,
+      "realtime_fp": 561,
+      "realtime_fn": 2,
+      "realtime_f1": 0.4932,
+      "record_tp": 276,
+      "record_fp": 2524,
+      "record_fn": 0,
+      "record_f1": 0.1795
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl+H1",
+      "base": "mspc_load_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 1857,
+      "realtime_fn": 0,
+      "realtime_f1": 0.2587,
+      "record_tp": 324,
+      "record_fp": 5099,
+      "record_fn": 0,
+      "record_f1": 0.1128
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl+H1",
+      "base": "mspc_load_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 274,
+      "realtime_fp": 722,
+      "realtime_fn": 2,
+      "realtime_f1": 0.4308,
+      "record_tp": 276,
+      "record_fp": 2827,
+      "record_fn": 0,
+      "record_f1": 0.1634
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl+H1",
+      "base": "mspc_load_cl",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 2232,
+      "realtime_fn": 0,
+      "realtime_f1": 0.225,
+      "record_tp": 324,
+      "record_fp": 5457,
+      "record_fn": 0,
+      "record_f1": 0.1061
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl_t2",
+      "base": "mspc_load_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 247,
+      "realtime_fp": 68,
+      "realtime_fn": 29,
+      "realtime_f1": 0.8359,
+      "record_tp": 276,
+      "record_fp": 1023,
+      "record_fn": 0,
+      "record_f1": 0.3505
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl_t2",
+      "base": "mspc_load_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 285,
+      "realtime_fp": 229,
+      "realtime_fn": 39,
+      "realtime_f1": 0.6802,
+      "record_tp": 324,
+      "record_fp": 2324,
+      "record_fn": 0,
+      "record_f1": 0.218
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl_t2",
+      "base": "mspc_load_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 250,
+      "realtime_fp": 128,
+      "realtime_fn": 26,
+      "realtime_f1": 0.7645,
+      "record_tp": 276,
+      "record_fp": 1420,
+      "record_fn": 0,
+      "record_f1": 0.2799
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl_t2",
+      "base": "mspc_load_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 293,
+      "realtime_fp": 441,
+      "realtime_fn": 31,
+      "realtime_f1": 0.5539,
+      "record_tp": 324,
+      "record_fp": 3188,
+      "record_fn": 0,
+      "record_f1": 0.1689
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl_t2",
+      "base": "mspc_load_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 251,
+      "realtime_fp": 183,
+      "realtime_fn": 25,
+      "realtime_f1": 0.707,
+      "record_tp": 276,
+      "record_fp": 1700,
+      "record_fn": 0,
+      "record_f1": 0.2451
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl_t2",
+      "base": "mspc_load_cl_t2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 296,
+      "realtime_fp": 621,
+      "realtime_fn": 28,
+      "realtime_f1": 0.477,
+      "record_tp": 324,
+      "record_fp": 3758,
+      "record_fn": 0,
+      "record_f1": 0.1471
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl_spe",
+      "base": "mspc_load_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 253,
+      "realtime_fp": 78,
+      "realtime_fn": 23,
+      "realtime_f1": 0.8336,
+      "record_tp": 273,
+      "record_fp": 1415,
+      "record_fn": 3,
+      "record_f1": 0.278
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl_spe",
+      "base": "mspc_load_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 301,
+      "realtime_fp": 510,
+      "realtime_fn": 23,
+      "realtime_f1": 0.5304,
+      "record_tp": 324,
+      "record_fp": 4003,
+      "record_fn": 0,
+      "record_f1": 0.1393
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl_spe",
+      "base": "mspc_load_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 255,
+      "realtime_fp": 146,
+      "realtime_fn": 21,
+      "realtime_f1": 0.7533,
+      "record_tp": 273,
+      "record_fp": 2294,
+      "record_fn": 3,
+      "record_f1": 0.1921
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl_spe",
+      "base": "mspc_load_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 301,
+      "realtime_fp": 884,
+      "realtime_fn": 23,
+      "realtime_f1": 0.3989,
+      "record_tp": 324,
+      "record_fp": 4681,
+      "record_fn": 0,
+      "record_f1": 0.1216
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl_spe",
+      "base": "mspc_load_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 255,
+      "realtime_fp": 207,
+      "realtime_fn": 21,
+      "realtime_f1": 0.6911,
+      "record_tp": 273,
+      "record_fp": 2579,
+      "record_fn": 3,
+      "record_f1": 0.1746
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_cl_spe",
+      "base": "mspc_load_cl_spe",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 302,
+      "realtime_fp": 1107,
+      "realtime_fn": 22,
+      "realtime_f1": 0.3485,
+      "record_tp": 324,
+      "record_fp": 5106,
+      "record_fn": 0,
+      "record_f1": 0.1126
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_nt",
+      "base": "mspc_load_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 238,
+      "realtime_fp": 1,
+      "realtime_fn": 38,
+      "realtime_f1": 0.9243,
+      "record_tp": 269,
+      "record_fp": 14,
+      "record_fn": 7,
+      "record_f1": 0.9624
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_nt",
+      "base": "mspc_load_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 283,
+      "realtime_fp": 27,
+      "realtime_fn": 41,
+      "realtime_f1": 0.8927,
+      "record_tp": 324,
+      "record_fp": 709,
+      "record_fn": 0,
+      "record_f1": 0.4775
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_nt",
+      "base": "mspc_load_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 242,
+      "realtime_fp": 3,
+      "realtime_fn": 34,
+      "realtime_f1": 0.929,
+      "record_tp": 273,
+      "record_fp": 69,
+      "record_fn": 3,
+      "record_f1": 0.8835
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_nt",
+      "base": "mspc_load_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 291,
+      "realtime_fp": 83,
+      "realtime_fn": 33,
+      "realtime_f1": 0.8338,
+      "record_tp": 324,
+      "record_fp": 1900,
+      "record_fn": 0,
+      "record_f1": 0.2543
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_nt",
+      "base": "mspc_load_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 242,
+      "realtime_fp": 9,
+      "realtime_fn": 34,
+      "realtime_f1": 0.9184,
+      "record_tp": 273,
+      "record_fp": 195,
+      "record_fn": 3,
+      "record_f1": 0.7339
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_nt",
+      "base": "mspc_load_nt",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 292,
+      "realtime_fp": 132,
+      "realtime_fn": 32,
+      "realtime_f1": 0.7807,
+      "record_tp": 324,
+      "record_fp": 2361,
+      "record_fn": 0,
+      "record_f1": 0.2154
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_nt+H1",
+      "base": "mspc_load_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 268,
+      "realtime_fp": 1,
+      "realtime_fn": 8,
+      "realtime_f1": 0.9835,
+      "record_tp": 272,
+      "record_fp": 14,
+      "record_fn": 4,
+      "record_f1": 0.968
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_nt+H1",
+      "base": "mspc_load_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 69,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9038,
+      "record_tp": 324,
+      "record_fp": 716,
+      "record_fn": 0,
+      "record_f1": 0.4751
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_nt+H1",
+      "base": "mspc_load_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 269,
+      "realtime_fp": 3,
+      "realtime_fn": 7,
+      "realtime_f1": 0.9818,
+      "record_tp": 276,
+      "record_fp": 69,
+      "record_fn": 0,
+      "record_f1": 0.8889
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_nt+H1",
+      "base": "mspc_load_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 231,
+      "realtime_fn": 0,
+      "realtime_f1": 0.7372,
+      "record_tp": 324,
+      "record_fp": 1912,
+      "record_fn": 0,
+      "record_f1": 0.2531
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_nt+H1",
+      "base": "mspc_load_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 269,
+      "realtime_fp": 23,
+      "realtime_fn": 7,
+      "realtime_f1": 0.9472,
+      "record_tp": 276,
+      "record_fp": 195,
+      "record_fn": 0,
+      "record_f1": 0.739
+    },
+    {
+      "split": "B",
+      "model": "mspc_load_nt+H1",
+      "base": "mspc_load_nt",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 378,
+      "realtime_fn": 0,
+      "realtime_f1": 0.6316,
+      "record_tp": 324,
+      "record_fp": 2373,
+      "record_fn": 0,
+      "record_f1": 0.2145
+    },
+    {
+      "split": "B",
+      "model": "mspc_w6",
+      "base": "mspc_w6",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 206,
+      "realtime_fp": 1,
+      "realtime_fn": 70,
+      "realtime_f1": 0.853,
+      "record_tp": 273,
+      "record_fp": 35,
+      "record_fn": 3,
+      "record_f1": 0.9349
+    },
+    {
+      "split": "B",
+      "model": "mspc_w6",
+      "base": "mspc_w6",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 226,
+      "realtime_fp": 1,
+      "realtime_fn": 98,
+      "realtime_f1": 0.8203,
+      "record_tp": 320,
+      "record_fp": 4,
+      "record_fn": 4,
+      "record_f1": 0.9877
+    },
+    {
+      "split": "B",
+      "model": "mspc_w6",
+      "base": "mspc_w6",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 224,
+      "realtime_fp": 3,
+      "realtime_fn": 52,
+      "realtime_f1": 0.8907,
+      "record_tp": 273,
+      "record_fp": 94,
+      "record_fn": 3,
+      "record_f1": 0.8491
+    },
+    {
+      "split": "B",
+      "model": "mspc_w6",
+      "base": "mspc_w6",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 251,
+      "realtime_fp": 4,
+      "realtime_fn": 73,
+      "realtime_f1": 0.867,
+      "record_tp": 324,
+      "record_fp": 87,
+      "record_fn": 0,
+      "record_f1": 0.8816
+    },
+    {
+      "split": "B",
+      "model": "mspc_w6",
+      "base": "mspc_w6",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 234,
+      "realtime_fp": 6,
+      "realtime_fn": 42,
+      "realtime_f1": 0.907,
+      "record_tp": 273,
+      "record_fp": 158,
+      "record_fn": 3,
+      "record_f1": 0.7723
+    },
+    {
+      "split": "B",
+      "model": "mspc_w6",
+      "base": "mspc_w6",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 272,
+      "realtime_fp": 5,
+      "realtime_fn": 52,
+      "realtime_f1": 0.9052,
+      "record_tp": 324,
+      "record_fp": 126,
+      "record_fn": 0,
+      "record_f1": 0.8372
+    },
+    {
+      "split": "B",
+      "model": "mspc_w6+H1",
+      "base": "mspc_w6",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 260,
+      "realtime_fp": 1,
+      "realtime_fn": 16,
+      "realtime_f1": 0.9683,
+      "record_tp": 276,
+      "record_fp": 35,
+      "record_fn": 0,
+      "record_f1": 0.9404
+    },
+    {
+      "split": "B",
+      "model": "mspc_w6+H1",
+      "base": "mspc_w6",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 1,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9985,
+      "record_tp": 324,
+      "record_fp": 4,
+      "record_fn": 0,
+      "record_f1": 0.9939
+    },
+    {
+      "split": "B",
+      "model": "mspc_w6+H1",
+      "base": "mspc_w6",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 263,
+      "realtime_fp": 3,
+      "realtime_fn": 13,
+      "realtime_f1": 0.9705,
+      "record_tp": 276,
+      "record_fp": 94,
+      "record_fn": 0,
+      "record_f1": 0.8545
+    },
+    {
+      "split": "B",
+      "model": "mspc_w6+H1",
+      "base": "mspc_w6",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 11,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9833,
+      "record_tp": 324,
+      "record_fp": 87,
+      "record_fn": 0,
+      "record_f1": 0.8816
+    },
+    {
+      "split": "B",
+      "model": "mspc_w6+H1",
+      "base": "mspc_w6",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 267,
+      "realtime_fp": 6,
+      "realtime_fn": 9,
+      "realtime_f1": 0.9727,
+      "record_tp": 276,
+      "record_fp": 158,
+      "record_fn": 0,
+      "record_f1": 0.7775
+    },
+    {
+      "split": "B",
+      "model": "mspc_w6+H1",
+      "base": "mspc_w6",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 12,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9818,
+      "record_tp": 324,
+      "record_fp": 126,
+      "record_fn": 0,
+      "record_f1": 0.8372
+    },
+    {
+      "split": "B",
+      "model": "mspc_w12",
+      "base": "mspc_w12",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 239,
+      "realtime_fp": 1,
+      "realtime_fn": 37,
+      "realtime_f1": 0.9264,
+      "record_tp": 273,
+      "record_fp": 35,
+      "record_fn": 3,
+      "record_f1": 0.9349
+    },
+    {
+      "split": "B",
+      "model": "mspc_w12",
+      "base": "mspc_w12",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 288,
+      "realtime_fp": 6,
+      "realtime_fn": 36,
+      "realtime_f1": 0.932,
+      "record_tp": 324,
+      "record_fp": 142,
+      "record_fn": 0,
+      "record_f1": 0.8203
+    },
+    {
+      "split": "B",
+      "model": "mspc_w12",
+      "base": "mspc_w12",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 239,
+      "realtime_fp": 3,
+      "realtime_fn": 37,
+      "realtime_f1": 0.9228,
+      "record_tp": 273,
+      "record_fp": 87,
+      "record_fn": 3,
+      "record_f1": 0.8585
+    },
+    {
+      "split": "B",
+      "model": "mspc_w12",
+      "base": "mspc_w12",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 290,
+      "realtime_fp": 8,
+      "realtime_fn": 34,
+      "realtime_f1": 0.9325,
+      "record_tp": 324,
+      "record_fp": 217,
+      "record_fn": 0,
+      "record_f1": 0.7491
+    },
+    {
+      "split": "B",
+      "model": "mspc_w12",
+      "base": "mspc_w12",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 247,
+      "realtime_fp": 7,
+      "realtime_fn": 29,
+      "realtime_f1": 0.9321,
+      "record_tp": 276,
+      "record_fp": 168,
+      "record_fn": 0,
+      "record_f1": 0.7667
+    },
+    {
+      "split": "B",
+      "model": "mspc_w12",
+      "base": "mspc_w12",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 298,
+      "realtime_fp": 21,
+      "realtime_fn": 26,
+      "realtime_f1": 0.9269,
+      "record_tp": 324,
+      "record_fp": 541,
+      "record_fn": 0,
+      "record_f1": 0.545
+    },
+    {
+      "split": "B",
+      "model": "mspc_w12+H1",
+      "base": "mspc_w12",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 267,
+      "realtime_fp": 1,
+      "realtime_fn": 9,
+      "realtime_f1": 0.9816,
+      "record_tp": 276,
+      "record_fp": 35,
+      "record_fn": 0,
+      "record_f1": 0.9404
+    },
+    {
+      "split": "B",
+      "model": "mspc_w12+H1",
+      "base": "mspc_w12",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 13,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9803,
+      "record_tp": 324,
+      "record_fp": 142,
+      "record_fn": 0,
+      "record_f1": 0.8203
+    },
+    {
+      "split": "B",
+      "model": "mspc_w12+H1",
+      "base": "mspc_w12",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 267,
+      "realtime_fp": 3,
+      "realtime_fn": 9,
+      "realtime_f1": 0.978,
+      "record_tp": 276,
+      "record_fp": 87,
+      "record_fn": 0,
+      "record_f1": 0.8638
+    },
+    {
+      "split": "B",
+      "model": "mspc_w12+H1",
+      "base": "mspc_w12",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 15,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9774,
+      "record_tp": 324,
+      "record_fp": 217,
+      "record_fn": 0,
+      "record_f1": 0.7491
+    },
+    {
+      "split": "B",
+      "model": "mspc_w12+H1",
+      "base": "mspc_w12",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 270,
+      "realtime_fp": 14,
+      "realtime_fn": 6,
+      "realtime_f1": 0.9643,
+      "record_tp": 276,
+      "record_fp": 168,
+      "record_fn": 0,
+      "record_f1": 0.7667
+    },
+    {
+      "split": "B",
+      "model": "mspc_w12+H1",
+      "base": "mspc_w12",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 42,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9391,
+      "record_tp": 324,
+      "record_fp": 541,
+      "record_fn": 0,
+      "record_f1": 0.545
+    },
+    {
+      "split": "B",
+      "model": "v2",
+      "base": "v2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 261,
+      "realtime_fp": 1,
+      "realtime_fn": 15,
+      "realtime_f1": 0.9703,
+      "record_tp": 276,
+      "record_fp": 50,
+      "record_fn": 0,
+      "record_f1": 0.9169
+    },
+    {
+      "split": "B",
+      "model": "v2",
+      "base": "v2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 308,
+      "realtime_fp": 3,
+      "realtime_fn": 16,
+      "realtime_f1": 0.9701,
+      "record_tp": 324,
+      "record_fp": 144,
+      "record_fn": 0,
+      "record_f1": 0.8182
+    },
+    {
+      "split": "B",
+      "model": "v2",
+      "base": "v2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 261,
+      "realtime_fp": 4,
+      "realtime_fn": 15,
+      "realtime_f1": 0.9649,
+      "record_tp": 276,
+      "record_fp": 120,
+      "record_fn": 0,
+      "record_f1": 0.8214
+    },
+    {
+      "split": "B",
+      "model": "v2",
+      "base": "v2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 308,
+      "realtime_fp": 7,
+      "realtime_fn": 16,
+      "realtime_f1": 0.964,
+      "record_tp": 324,
+      "record_fp": 212,
+      "record_fn": 0,
+      "record_f1": 0.7535
+    },
+    {
+      "split": "B",
+      "model": "v2",
+      "base": "v2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 261,
+      "realtime_fp": 7,
+      "realtime_fn": 15,
+      "realtime_f1": 0.9596,
+      "record_tp": 276,
+      "record_fp": 261,
+      "record_fn": 0,
+      "record_f1": 0.679
+    },
+    {
+      "split": "B",
+      "model": "v2",
+      "base": "v2",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 308,
+      "realtime_fp": 11,
+      "realtime_fn": 16,
+      "realtime_f1": 0.958,
+      "record_tp": 324,
+      "record_fp": 312,
+      "record_fn": 0,
+      "record_f1": 0.675
+    },
+    {
+      "split": "B",
+      "model": "v2+H1",
+      "base": "v2",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 276,
+      "realtime_fp": 1,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9982,
+      "record_tp": 276,
+      "record_fp": 50,
+      "record_fn": 0,
+      "record_f1": 0.9169
+    },
+    {
+      "split": "B",
+      "model": "v2+H1",
+      "base": "v2",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 3,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9954,
+      "record_tp": 324,
+      "record_fp": 144,
+      "record_fn": 0,
+      "record_f1": 0.8182
+    },
+    {
+      "split": "B",
+      "model": "v2+H1",
+      "base": "v2",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 276,
+      "realtime_fp": 11,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9805,
+      "record_tp": 276,
+      "record_fp": 120,
+      "record_fn": 0,
+      "record_f1": 0.8214
+    },
+    {
+      "split": "B",
+      "model": "v2+H1",
+      "base": "v2",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 21,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9686,
+      "record_tp": 324,
+      "record_fp": 212,
+      "record_fn": 0,
+      "record_f1": 0.7535
+    },
+    {
+      "split": "B",
+      "model": "v2+H1",
+      "base": "v2",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 276,
+      "realtime_fp": 14,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9753,
+      "record_tp": 276,
+      "record_fp": 261,
+      "record_fn": 0,
+      "record_f1": 0.679
+    },
+    {
+      "split": "B",
+      "model": "v2+H1",
+      "base": "v2",
+      "h1": true,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 32,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9529,
+      "record_tp": 324,
+      "record_fp": 312,
+      "record_fn": 0,
+      "record_f1": 0.675
+    },
+    {
+      "split": "B",
+      "model": "v2+H1+H2",
+      "base": "v2",
+      "h1": true,
+      "h2": true,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 276,
+      "realtime_fp": 1,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9982,
+      "record_tp": 276,
+      "record_fp": 50,
+      "record_fn": 0,
+      "record_f1": 0.9169
+    },
+    {
+      "split": "B",
+      "model": "v2+H1+H2",
+      "base": "v2",
+      "h1": true,
+      "h2": true,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 0,
+      "realtime_fn": 0,
+      "realtime_f1": 1.0,
+      "record_tp": 324,
+      "record_fp": 0,
+      "record_fn": 0,
+      "record_f1": 1.0
+    },
+    {
+      "split": "B",
+      "model": "v2+H1+H2",
+      "base": "v2",
+      "h1": true,
+      "h2": true,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 276,
+      "realtime_fp": 1,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9982,
+      "record_tp": 276,
+      "record_fp": 50,
+      "record_fn": 0,
+      "record_f1": 0.9169
+    },
+    {
+      "split": "B",
+      "model": "v2+H1+H2",
+      "base": "v2",
+      "h1": true,
+      "h2": true,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 1,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9985,
+      "record_tp": 324,
+      "record_fp": 44,
+      "record_fn": 0,
+      "record_f1": 0.9364
+    },
+    {
+      "split": "B",
+      "model": "v2+H1+H2",
+      "base": "v2",
+      "h1": true,
+      "h2": true,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 276,
+      "realtime_fp": 2,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9964,
+      "record_tp": 276,
+      "record_fp": 96,
+      "record_fn": 0,
+      "record_f1": 0.8519
+    },
+    {
+      "split": "B",
+      "model": "v2+H1+H2",
+      "base": "v2",
+      "h1": true,
+      "h2": true,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 324,
+      "realtime_fp": 9,
+      "realtime_fn": 0,
+      "realtime_f1": 0.9863,
+      "record_tp": 324,
+      "record_fp": 44,
+      "record_fn": 0,
+      "record_f1": 0.9364
+    },
+    {
+      "split": "B",
+      "model": "maxz3",
+      "base": "maxz3",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "valid",
+      "realtime_tp": 107,
+      "realtime_fp": 1,
+      "realtime_fn": 169,
+      "realtime_f1": 0.5573,
+      "record_tp": 245,
+      "record_fp": 50,
+      "record_fn": 31,
+      "record_f1": 0.8581
+    },
+    {
+      "split": "B",
+      "model": "maxz3",
+      "base": "maxz3",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.01,
+      "regime": "test",
+      "realtime_tp": 89,
+      "realtime_fp": 3,
+      "realtime_fn": 235,
+      "realtime_f1": 0.4279,
+      "record_tp": 299,
+      "record_fp": 144,
+      "record_fn": 25,
+      "record_f1": 0.7797
+    },
+    {
+      "split": "B",
+      "model": "maxz3",
+      "base": "maxz3",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "valid",
+      "realtime_tp": 111,
+      "realtime_fp": 4,
+      "realtime_fn": 165,
+      "realtime_f1": 0.5678,
+      "record_tp": 245,
+      "record_fp": 120,
+      "record_fn": 31,
+      "record_f1": 0.7644
+    },
+    {
+      "split": "B",
+      "model": "maxz3",
+      "base": "maxz3",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.03,
+      "regime": "test",
+      "realtime_tp": 90,
+      "realtime_fp": 6,
+      "realtime_fn": 234,
+      "realtime_f1": 0.4286,
+      "record_tp": 299,
+      "record_fp": 168,
+      "record_fn": 25,
+      "record_f1": 0.756
+    },
+    {
+      "split": "B",
+      "model": "maxz3",
+      "base": "maxz3",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "valid",
+      "realtime_tp": 116,
+      "realtime_fp": 7,
+      "realtime_fn": 160,
+      "realtime_f1": 0.5815,
+      "record_tp": 245,
+      "record_fp": 243,
+      "record_fn": 31,
+      "record_f1": 0.6414
+    },
+    {
+      "split": "B",
+      "model": "maxz3",
+      "base": "maxz3",
+      "h1": false,
+      "h2": false,
+      "alpha": 0.05,
+      "regime": "test",
+      "realtime_tp": 95,
+      "realtime_fp": 9,
+      "realtime_fn": 229,
+      "realtime_f1": 0.4439,
+      "record_tp": 299,
+      "record_fp": 268,
+      "record_fn": 25,
+      "record_f1": 0.6712
+    }
+  ]
+}
