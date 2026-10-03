@@ -1,0 +1,8 @@
+{
+  "stage": "source structure inspection, before any target model scores",
+  "changes": [
+    "SKAB observed gap-separated runs are all shorter than the proposed 32 samples. Keep final partial windows >=4, consistently with target spectral eligibility; never bridge gaps.",
+    "One Beihang fault CSV uses Chinese time/value headers. Map explicit X/Y/Z vibration aliases while preserving each time axis."
+  ],
+  "model_outcomes_seen": false
+}

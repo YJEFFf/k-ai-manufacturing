@@ -1,0 +1,10 @@
+{
+  "git_head": "ab6dab3f7e2e9fbd2f7c3d1a8902500246577976",
+  "dependency_sha256": {
+    "press_guard/model.py": "710bea85ce08b3777941e339c88f2616417b71f3636cc4e6ce2679d604ff87f5",
+    "press_submission/press/scores.py": "22ed1700eabadaadcec25c2602b40bd8a0a84879ad658e0ced2b05c2b87078ae",
+    "press_submission/press/data.py": "81dc394c8b0b53618177e5822c7cc0f7ff7c7f060d08471c968b4cfaaa05411f",
+    "analysis/press_master_validation_2026-10-03/core.py": "9c97a1f21e1469d8270316e8039a6fec0ef9e32cb9ba7a2abbd95179bdd2ad68"
+  },
+  "root_readme_left_untouched": true
+}

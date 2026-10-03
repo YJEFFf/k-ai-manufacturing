@@ -1,0 +1,20 @@
+{
+  "scope": "Two registered shared-vibration training routes only; no claim that all possible transfer learning is ineffective.",
+  "technical_training_connection": {
+    "uci": "implemented and trained",
+    "skab": "implemented and trained",
+    "beihang": "implemented and trained",
+    "espset": "implemented and trained"
+  },
+  "direct_three_sensor_row_concatenation": "not performed; missing current and differing physical inputs were not fabricated",
+  "normal_pooling_vibration_view": "every source and both amount settings have lower mean F1 than target-only kNN",
+  "pretraining_vibration_view": "some mean gains against 600-step target-only control, but all source-setting means below the 300-step target-only reference; mixed seed/fold directions",
+  "target_scratch_vibration_mean_f1": 0.5353403783187921,
+  "fixed_target_base_mean_f1": 0.8955627705627706,
+  "external_integrated_comparisons_above_same_fold_fixed_base": 0,
+  "external_integrated_comparisons": 180,
+  "interpretation_of_small_integrated_gains": "SKAB normal pooling cancels one extra P0 false positive introduced by the spectral branch; at best ties the fixed target-only base, does not surpass it.",
+  "recommendation": "Do not adopt any of the four or their mixture as proven beneficial training augmentation on this evidence. Retain as technically usable transfer sources, with this experiment and its negative results preserved.",
+  "target_validation_limit": "all three folds reuse the same previously explored abnormal episode; no new independent fault generalization evidence",
+  "new_model_selection": "out of scope; no existing final-model decision changed"
+}

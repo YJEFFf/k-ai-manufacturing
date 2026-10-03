@@ -1,0 +1,9 @@
+{
+  "complete": true,
+  "elapsed_seconds": 48.47711483400053,
+  "arms": 216,
+  "metric_rows": 1305,
+  "model_reload_checks": 216,
+  "final_model_selected": false,
+  "training_utility_experiment_only": true
+}

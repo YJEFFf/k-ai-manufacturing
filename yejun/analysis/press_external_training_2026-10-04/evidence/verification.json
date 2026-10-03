@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "checks": 6198,
+  "recalculated_metric_rows": 1305,
+  "prediction_rows": 129340,
+  "target_training_role_checks": true,
+  "all_model_reload_checks": true,
+  "duplicate_control_full_scores_exact": true
+}

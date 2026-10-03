@@ -1,0 +1,6 @@
+{
+  "duplicate_control_metric_rows": 54,
+  "duplicate_control_exact": true,
+  "autoencoder_control": "same seed, architecture, 300+300 updates and target fine-tuning batches",
+  "all_folds_share_the_same_abnormal_episode": true
+}

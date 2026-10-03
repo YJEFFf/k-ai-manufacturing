@@ -1,0 +1,601 @@
+{
+  "sources": {
+    "uci": {
+      "raw_cycles": 2205,
+      "healthy_cycles": 10,
+      "normal_definition": "cooler=100, valve=100, pump leakage=0, accumulator=130, stable flag=0",
+      "sensor": "VS1, vibration magnitude, 1 Hz",
+      "unused_electrical": "EPS1 is power, not current",
+      "dropped_samples_per_cycle": 28,
+      "examples": 2205,
+      "confirmed_normal_examples": 10,
+      "source_groups": 2205,
+      "confirmed_normal_groups": 10,
+      "representation_sha256": "e446870e65a182a9cdc672632a7de96973b0914231e2b17e0386894de50694c9",
+      "examples_are_independent_failures": false,
+      "cache_sha256": "b6844557f4803b78afde8a6d86136a21abc5388e9ae990b50e6ec805aae62ad1"
+    },
+    "skab": {
+      "files": 35,
+      "captures": 30,
+      "raw_rows": 46806,
+      "unique_observations": 45516,
+      "conflicts": 237,
+      "leftover_rows": 76,
+      "sensors": "two RMS-envelope channels; not raw vibration",
+      "previous_split_roles": "all converted to external training for this separate experiment",
+      "examples": 4890,
+      "confirmed_normal_examples": 3426,
+      "source_groups": 30,
+      "confirmed_normal_groups": 30,
+      "representation_sha256": "d1889ffd2cd443fe572c4c5854985dd3a3bf2ecc9f7e53ba12b36b4da16af1e9",
+      "examples_are_independent_failures": false,
+      "cache_sha256": "02de15754839b52d0cebac639686283db874cb2a24ff1d654bb693df72156a04"
+    },
+    "beihang": {
+      "files": 11,
+      "healthy_files": 2,
+      "inventory": [
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Healthy state/1.csv",
+          "axis": "X vibration",
+          "raw_samples": 270509,
+          "contiguous_segments": 1,
+          "candidate_windows": 8453,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": true
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Healthy state/1.csv",
+          "axis": "Y vibration",
+          "raw_samples": 270509,
+          "contiguous_segments": 1,
+          "candidate_windows": 8453,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": true
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Healthy state/1.csv",
+          "axis": "Z vibration",
+          "raw_samples": 270509,
+          "contiguous_segments": 1,
+          "candidate_windows": 8453,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": true
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Healthy state/2.csv",
+          "axis": "X vibration",
+          "raw_samples": 252000,
+          "contiguous_segments": 1,
+          "candidate_windows": 7875,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": true
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Healthy state/2.csv",
+          "axis": "Y vibration",
+          "raw_samples": 252000,
+          "contiguous_segments": 1,
+          "candidate_windows": 7875,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": true
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Healthy state/2.csv",
+          "axis": "Z vibration",
+          "raw_samples": 252000,
+          "contiguous_segments": 1,
+          "candidate_windows": 7875,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": true
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the regulation valve/1.csv",
+          "axis": "X vibration",
+          "raw_samples": 403781,
+          "contiguous_segments": 1,
+          "candidate_windows": 12618,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the regulation valve/1.csv",
+          "axis": "Y vibration",
+          "raw_samples": 403781,
+          "contiguous_segments": 1,
+          "candidate_windows": 12618,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the regulation valve/1.csv",
+          "axis": "Z vibration",
+          "raw_samples": 403781,
+          "contiguous_segments": 1,
+          "candidate_windows": 12618,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the regulation valve/2.csv",
+          "axis": "X vibration",
+          "raw_samples": 549150,
+          "contiguous_segments": 1,
+          "candidate_windows": 17160,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000012221,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the regulation valve/2.csv",
+          "axis": "Y vibration",
+          "raw_samples": 549150,
+          "contiguous_segments": 1,
+          "candidate_windows": 17160,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000012221,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the regulation valve/2.csv",
+          "axis": "Z vibration",
+          "raw_samples": 549150,
+          "contiguous_segments": 1,
+          "candidate_windows": 17160,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000012221,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the regulation valve/3.csv",
+          "axis": "X vibration",
+          "raw_samples": 594600,
+          "contiguous_segments": 1,
+          "candidate_windows": 18581,
+          "retained_windows": 256,
+          "positive_dt_median": 0.001000000000000334,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the regulation valve/3.csv",
+          "axis": "Y vibration",
+          "raw_samples": 594600,
+          "contiguous_segments": 1,
+          "candidate_windows": 18581,
+          "retained_windows": 256,
+          "positive_dt_median": 0.001000000000000334,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the regulation valve/3.csv",
+          "axis": "Z vibration",
+          "raw_samples": 594600,
+          "contiguous_segments": 1,
+          "candidate_windows": 18581,
+          "retained_windows": 256,
+          "positive_dt_median": 0.001000000000000334,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the servo piston/1.csv",
+          "axis": "X vibration",
+          "raw_samples": 328917,
+          "contiguous_segments": 1,
+          "candidate_windows": 10278,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the servo piston/1.csv",
+          "axis": "Y vibration",
+          "raw_samples": 328917,
+          "contiguous_segments": 1,
+          "candidate_windows": 10278,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the servo piston/1.csv",
+          "axis": "Z vibration",
+          "raw_samples": 328917,
+          "contiguous_segments": 1,
+          "candidate_windows": 10278,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the servo piston/2.csv",
+          "axis": "X vibration",
+          "raw_samples": 275981,
+          "contiguous_segments": 1,
+          "candidate_windows": 8624,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the servo piston/2.csv",
+          "axis": "Y vibration",
+          "raw_samples": 275981,
+          "contiguous_segments": 1,
+          "candidate_windows": 8624,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the servo piston/2.csv",
+          "axis": "Z vibration",
+          "raw_samples": 275981,
+          "contiguous_segments": 1,
+          "candidate_windows": 8624,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the servo piston/3.csv",
+          "axis": "X vibration",
+          "raw_samples": 306984,
+          "contiguous_segments": 1,
+          "candidate_windows": 9593,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the servo piston/3.csv",
+          "axis": "Y vibration",
+          "raw_samples": 306984,
+          "contiguous_segments": 1,
+          "candidate_windows": 9593,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the servo piston/3.csv",
+          "axis": "Z vibration",
+          "raw_samples": 306984,
+          "contiguous_segments": 1,
+          "candidate_windows": 9593,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the swashplate bearing bush/1.csv",
+          "axis": "X vibration",
+          "raw_samples": 382260,
+          "contiguous_segments": 1,
+          "candidate_windows": 11945,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the swashplate bearing bush/1.csv",
+          "axis": "Y vibration",
+          "raw_samples": 382260,
+          "contiguous_segments": 1,
+          "candidate_windows": 11945,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the swashplate bearing bush/1.csv",
+          "axis": "Z vibration",
+          "raw_samples": 382260,
+          "contiguous_segments": 1,
+          "candidate_windows": 11945,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the swashplate bearing bush/2.csv",
+          "axis": "振动X_m/s2",
+          "raw_samples": 475602,
+          "contiguous_segments": 1,
+          "candidate_windows": 14862,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the swashplate bearing bush/2.csv",
+          "axis": "振动Y_m/s2",
+          "raw_samples": 475602,
+          "contiguous_segments": 1,
+          "candidate_windows": 14862,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the swashplate bearing bush/2.csv",
+          "axis": "振动Z_m/s2",
+          "raw_samples": 475602,
+          "contiguous_segments": 1,
+          "candidate_windows": 14862,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the swashplate bearing bush/3.csv",
+          "axis": "X vibration",
+          "raw_samples": 434929,
+          "contiguous_segments": 1,
+          "candidate_windows": 13591,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the swashplate bearing bush/3.csv",
+          "axis": "Y vibration",
+          "raw_samples": 434929,
+          "contiguous_segments": 1,
+          "candidate_windows": 13591,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": false
+        },
+        {
+          "file": "Experimental Data Processing_Retaining Valid Segments/Wear of the swashplate bearing bush/3.csv",
+          "axis": "Z vibration",
+          "raw_samples": 434929,
+          "contiguous_segments": 1,
+          "candidate_windows": 13591,
+          "retained_windows": 256,
+          "positive_dt_median": 0.0010000000000047748,
+          "healthy": false
+        }
+      ],
+      "sensors": "independent raw vibration axes; no fabricated current channel",
+      "examples": 8448,
+      "confirmed_normal_examples": 1536,
+      "source_groups": 11,
+      "confirmed_normal_groups": 2,
+      "representation_sha256": "a6453b2b7e43999782822f5614fe2086ec07fe4b624cfaad6e945ec5802532d7",
+      "examples_are_independent_failures": false,
+      "cache_sha256": "725594afb66fdcd30ab487c5279bfd6e74a6ccb6d8091b4e596896351f0aa50a"
+    },
+    "espset": {
+      "spectrum_rows": 6032,
+      "frequency_bins": 12103,
+      "labels": {
+        "Normal": 4801,
+        "Unbalance": 576,
+        "Faulty sensor": 295,
+        "Rubbing": 290,
+        "Misalignment": 70
+      },
+      "alignment": "sequential id verified against spectrum row ordinal",
+      "sensors": "speed-normalized vibration velocity spectrum; no time waveform reconstructed",
+      "examples": 6032,
+      "confirmed_normal_examples": 4801,
+      "source_groups": 11,
+      "confirmed_normal_groups": 11,
+      "representation_sha256": "f291d0ccd1429ecebdf16dd480b7a30b99bf263d02d2aa2d3ae2a60cfd85cb7c",
+      "examples_are_independent_failures": false,
+      "cache_sha256": "dfecc519b73e5bc419a52f2cbd659ae5c39a6bcff9d7f8c501deb0084bcbd31b"
+    }
+  },
+  "inputs": [
+    {
+      "path": "analysis/press_external/data/hydraulic.zip",
+      "sha256": "24128aad2ee45eea7e6b63ebbd9992cdf25d0483a2cebefbfc13bc69079af1f2",
+      "bytes": 76601704
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/valve1/8.csv",
+      "sha256": "0c4afb92248b5b35b4c9d734a91ed8318346901f04579074903730569e60416c",
+      "bytes": 110305
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/valve1/4.csv",
+      "sha256": "983aed9dc09991a57911091373c580e1b86d06aa983cd51678f108fd8d709654",
+      "bytes": 105634
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/valve1/5.csv",
+      "sha256": "78974991ec87b7f9b9b6b2944f4b525468a9beb36c59b06cd7650d9a15eca14a",
+      "bytes": 111575
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/valve1/0.csv",
+      "sha256": "16af3f71313a23dd33d9b7b8065d836d05c3f9257588881cc7fbe07c076d9dc8",
+      "bytes": 110346
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/valve1/7.csv",
+      "sha256": "ca2c9c6d6fa302c642acec6fbedac495bd12fececeee0a755d45a54e340e0f30",
+      "bytes": 105941
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/valve1/6.csv",
+      "sha256": "97469c0e0c9c0e0ee5d30794f1f36c6785df5816a112a8b16c59637e8c894685",
+      "bytes": 111676
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/valve1/13.csv",
+      "sha256": "d6cb6a97437215d3066a87e1fcc5fa4e68017629c043c5315920e3cf1060841c",
+      "bytes": 110455
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/valve1/12.csv",
+      "sha256": "90adfa9bc86d4556e6a4ce734436fd5685af79c189cd9828f8df75a7f468ce07",
+      "bytes": 110061
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/valve1/14.csv",
+      "sha256": "5f0bb9bc33c5e6c259263e32e25915c4d24c82b0a94554d48808626da05c1d71",
+      "bytes": 110181
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/valve1/9.csv",
+      "sha256": "2aa1ae1b2ff505caecda24802b877dc686924bbbeeb7e7db4faa261efb5ed5bd",
+      "bytes": 110586
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/valve1/15.csv",
+      "sha256": "75cc86ab25d7091eee024739fa06d048753480d5d7d1507077231cab4f1b7a7e",
+      "bytes": 111352
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/valve1/1.csv",
+      "sha256": "fe4493bf805baef4e6dfb864094275d8cc2ea80a16b3735e2752b18b6aefd812",
+      "bytes": 110330
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/valve1/2.csv",
+      "sha256": "90492413469261886c8896c327241448df5da73fd7739cabfec8dd82de3c0ce4",
+      "bytes": 103507
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/valve1/3.csv",
+      "sha256": "cb6afea108eddfd8447307e405f86bbb764b8d8e9130d7849a46e1303e19b8b2",
+      "bytes": 110534
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/valve1/10.csv",
+      "sha256": "ee16be8e4b870c779491e3d1dc9e0ecbfaf29eb013e032abff7a33f2cbbfe2ad",
+      "bytes": 110623
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/valve1/11.csv",
+      "sha256": "89660fae4ed5c918db014409bbbc29f498fd99c7e956fab2620d18dea700a973",
+      "bytes": 110166
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/valve2/0.csv",
+      "sha256": "a6670e7a68c7c6ba62c649bd9d350633e80db624578e9529f2b736ced5e32bde",
+      "bytes": 109156
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/valve2/3.csv",
+      "sha256": "86927555d5c523e587d41500bd5dee4e2468289ec1b988ac17755aeae697d7f8",
+      "bytes": 96048
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/valve2/1.csv",
+      "sha256": "b35d27f664eb0851ab73e5eb06633404c7eeaf532edff7e40c68eb9379f2012b",
+      "bytes": 102680
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/valve2/2.csv",
+      "sha256": "2c3005cf28b88db715b7f4694e826ff252cba4dbb1eba679b040961f80477e60",
+      "bytes": 109005
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/other/6.csv",
+      "sha256": "eb8f05622a62c855040ea358b87be35fb1a4a3720ba0610569bab384db4b6e04",
+      "bytes": 107422
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/other/14.csv",
+      "sha256": "c7f361e55397cc9efd4a76b6876111eda79b650d10aeb007342ca5972152eaef",
+      "bytes": 85828
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/other/4.csv",
+      "sha256": "56ca23f4eb61d1347d079eb9a35c60a59b8b64e160c00dd0c2ec69e0df0b2a4b",
+      "bytes": 112334
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/other/8.csv",
+      "sha256": "12c138ed99c198e0a7ece886fe01bfd16bbdde206fad6c5d74322b6b9d6488d0",
+      "bytes": 107600
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/other/11.csv",
+      "sha256": "98a2fff3b6516205ae2e12f2dd30d7f08465fe4321a1bd5cf823396985ecb37b",
+      "bytes": 112720
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/other/12.csv",
+      "sha256": "b0882efbcf2669223ae78bee61c9f10074a9b2375f0e86b8957ae5ce4aad1e72",
+      "bytes": 99534
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/other/13.csv",
+      "sha256": "b3f1da02064d11234836a9fa1a2536bb0d3b6c6998ab60b0b71869b98e94d860",
+      "bytes": 87634
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/other/5.csv",
+      "sha256": "7347b326df3a92c0810c69add0e5621939af7a1c1cb4755081d088e72d36920f",
+      "bytes": 108203
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/other/3.csv",
+      "sha256": "f3c19a89f74f62a475c246b9263f161f7a734dd88304de803939cebaa55c7ebd",
+      "bytes": 107404
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/other/7.csv",
+      "sha256": "1bee14f49bfc817ba2c335fb427baa71153d8f8ab52e72652f15f74e4b77daec",
+      "bytes": 102054
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/other/2.csv",
+      "sha256": "951c326bf36366fa7615b8f28d22f80b3878036069a690f42b3e223737a6a8d1",
+      "bytes": 73661
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/other/1.csv",
+      "sha256": "3beaf861bdfe9b4f4eff8e7567c1dd3f506fbd0ce667fc9399d04bd2dc70623d",
+      "bytes": 70326
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/other/10.csv",
+      "sha256": "72683644f6f17689f619076a66a9ec02cbc0502bd669924c4c33951d1bdad9b0",
+      "bytes": 124516
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/other/9.csv",
+      "sha256": "11c4514b0bc706acff637fea6707ad9258ac878fe9dff3d0b11d2b618d94d8ea",
+      "bytes": 108481
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/skab/data/anomaly-free/anomaly-free.csv",
+      "sha256": "7641a8742957100ef424dd97adfb3eeab27d4d180645fe2b3c49b7f7146ae9a6",
+      "bytes": 814703
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/beihang/Experimental Data for Aviation Piston Pumps Processed_Retaining Valid Segments.zip",
+      "sha256": "65499ab3d3fb79c012cb3792024105290d6860d773778c9028b02e93c68ab8d9",
+      "bytes": 196394316
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/espset/features.zip",
+      "sha256": "b8214c10ba5b5b211c00a058f2fffa3ed7ccc46f67219b4769c907baec9a724d",
+      "bytes": 264453
+    },
+    {
+      "path": "plans/press_master_2026-10-03/data/espset/spectrum.zip",
+      "sha256": "9dc76031d97c6ba54a1428dabac50178ce54cacfd1f190df128d9cfd1a6901b5",
+      "bytes": 115059855
+    }
+  ],
+  "code_sha256": "0e69f397ebe231d2752a598cb557a784b5b75949d9d892f55f788f51ff52b726",
+  "representation_code_sha256": "63fa48e9821a8ff72cdf85bfeb6d3e90a1ef8bb141145654d59e2424b627b15a",
+  "protocol_sha256": "74c30ff467d0b7ca56231747c0dd3eb0b47d462d56ff77f113a6a92c91c589f4",
+  "external_inputs_are_training_only": true
+}

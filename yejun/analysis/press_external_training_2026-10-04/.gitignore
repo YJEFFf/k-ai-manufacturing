@@ -1,0 +1,5 @@
+/cache/
+/artifacts/
+/.pytest_cache/
+/evidence/predictions*.csv.gz
+/evidence/predictions*.jsonl.gz

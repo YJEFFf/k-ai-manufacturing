@@ -1,0 +1,40 @@
+{
+  "created_utc": "2026-10-03T16:41:09.225176+00:00",
+  "protocol_sha256": "74c30ff467d0b7ca56231747c0dd3eb0b47d462d56ff77f113a6a92c91c589f4",
+  "code": {
+    "basis.py": "63fa48e9821a8ff72cdf85bfeb6d3e90a1ef8bb141145654d59e2424b627b15a",
+    "data.py": "0e69f397ebe231d2752a598cb557a784b5b75949d9d892f55f788f51ff52b726",
+    "run.py": "50f3979b5c48fe0212ef45dcdd3998cef2944a93279a0b68c01e81a45f6e7529"
+  },
+  "source_audit_sha256": "0708f900972e6f0d9b7d16cbf054241cf23292f16994d842cd28ed2a28a7fd88",
+  "target_audit": {
+    "normal": {
+      "original_rows": 20000,
+      "retained_rows": 19999,
+      "duplicate_rows": [
+        11565
+      ],
+      "records": 599,
+      "source_mapping_rows": 20000
+    },
+    "abnormal": {
+      "original_rows": 600,
+      "retained_rows": 600,
+      "duplicate_rows": [],
+      "records": 21,
+      "source_mapping_rows": 600
+    }
+  },
+  "environment": {
+    "python": "3.12.2",
+    "platform": "macOS-26.3.1-arm64-arm-64bit",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scipy": "1.13.1",
+    "sklearn": "1.8.0",
+    "torch": "2.5.1",
+    "device": "cpu",
+    "threads": 1
+  },
+  "purpose": "external data used for TRAINING, target data only for calibration/evaluation"
+}

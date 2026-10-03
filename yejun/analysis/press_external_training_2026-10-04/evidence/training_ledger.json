@@ -1,0 +1,6212 @@
+[
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "target_only",
+    "ratio": 0,
+    "seed": 11,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 158,
+    "reference_examples": 158,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "uci",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 10,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 158,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "6d5fc1734ca4f8729028f45f4741bbd44bd7d5f5ad6ae5ca68ffbde3d04e3764"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 168,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "uci",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 10,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 632,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "6d5fc1734ca4f8729028f45f4741bbd44bd7d5f5ad6ae5ca68ffbde3d04e3764"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 168,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "skab",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 158,
+        "selected": 158,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "791a9616efe5977d987235cd24648d2e93ef0fa583567fdcba8cb41167fb6a74"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 316,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "skab",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 632,
+        "selected": 632,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "920c592996ea239aacdc34cae0cd32c3800c45fd6ef6aea9605269ef3de73ca0"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 790,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "beihang",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 158,
+        "selected": 158,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "aa27faa3ebaa739b41729102cba04f2a9ee4181ca8bad0b8cab3169acdcc53e8"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 316,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "beihang",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 632,
+        "selected": 632,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "2f6a0a6688874cdad8d855e13c5c254b49607217c1a14e4b722f1bdbffb33383"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 790,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "espset",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 158,
+        "selected": 158,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "9cf424c3c2ce7e7f9f0996f786c1e118701ea70ef6af68fbd729b3d9e297b96d"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 316,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "espset",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 632,
+        "selected": 632,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "58506abb76ee75ec37b66de01566a1581d77640642fec103e9ece6e1507a83cb"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 790,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "all_four",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 129,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 40,
+        "selected": 40,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "9e36beaff279b983a09330fc770d1ae5aa50690a97bef9177938dfee5469b79b"
+      },
+      {
+        "source": "espset",
+        "requested": 40,
+        "selected": 40,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "6c29187f8060b7fb5af2e88887c53d92ecbfa41a259989c206ef68d12c9bdc6a"
+      },
+      {
+        "source": "skab",
+        "requested": 39,
+        "selected": 39,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "982a95c02e44ce24da77bdb11e60c50725390ccf2e496fd8a7e9d97fd8238648"
+      },
+      {
+        "source": "uci",
+        "requested": 39,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "6d5fc1734ca4f8729028f45f4741bbd44bd7d5f5ad6ae5ca68ffbde3d04e3764"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 287,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "all_four",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 484,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 158,
+        "selected": 158,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "aa27faa3ebaa739b41729102cba04f2a9ee4181ca8bad0b8cab3169acdcc53e8"
+      },
+      {
+        "source": "espset",
+        "requested": 158,
+        "selected": 158,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "9cf424c3c2ce7e7f9f0996f786c1e118701ea70ef6af68fbd729b3d9e297b96d"
+      },
+      {
+        "source": "skab",
+        "requested": 158,
+        "selected": 158,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "791a9616efe5977d987235cd24648d2e93ef0fa583567fdcba8cb41167fb6a74"
+      },
+      {
+        "source": "uci",
+        "requested": 158,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "6d5fc1734ca4f8729028f45f4741bbd44bd7d5f5ad6ae5ca68ffbde3d04e3764"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 642,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "target_repeat_control",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 158,
+    "reference_examples": 158,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "target_only",
+    "ratio": 0,
+    "seed": 11,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.01703648641705513
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.008350047282874584
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "uci",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 158,
+        "selected": 158,
+        "available": 2205,
+        "groups": 158,
+        "ids_sha256": "ec54baae2e61b4a0eb715181c3b1ca54669bb7d7062a08de8f408e2c41e3e524"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.0012222491204738617
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.016181042417883873
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "uci",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 632,
+        "selected": 632,
+        "available": 2205,
+        "groups": 632,
+        "ids_sha256": "2b0206bcd7397705808b0aa2b0ad16e6a51de8f23df2a4fcc804cc18ea5f2411"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 632,
+      "consumed_distinct_examples": 632,
+      "final_batch_loss": 0.0011266217334195971
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.016170449554920197
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "skab",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 158,
+        "selected": 158,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "6417e83d9c6b16867a80a8c84b3257e564ec552e63a2d42e65a071e4b302abdb"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.01459578052163124
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.011197320185601711
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "skab",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 632,
+        "selected": 632,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "f3e52d2b50a1e45c38f426100efc445479b26f038be892cb7e9e1342ef389ad6"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 632,
+      "consumed_distinct_examples": 632,
+      "final_batch_loss": 0.013352584093809128
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.010948590002954006
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "beihang",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 158,
+        "selected": 158,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "58ac4b46656e5d422cd1c1333629c88484e0a679c828497a5dd9b57682f7f501"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.007876265794038773
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.012212784960865974
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "beihang",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 632,
+        "selected": 632,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "085c0ff92e9bab4bcab13f428a6d835f5e7c60bea1599398b8ee7be11971529d"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 632,
+      "consumed_distinct_examples": 632,
+      "final_batch_loss": 0.007743168622255325
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.012331893667578697
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "espset",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 158,
+        "selected": 158,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "3737a2de8e2ae3599b9aeecad14ca76411e037a1007fa18b2c364023ff12a66d"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.005320112220942974
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.01635916158556938
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "espset",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 632,
+        "selected": 632,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "9c098d37327bd09e484c614de4884fd6702b3b7de8bbb5dc31726e7345f351ee"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 632,
+      "consumed_distinct_examples": 632,
+      "final_batch_loss": 0.005543821025639772
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.016423311084508896
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "all_four",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 40,
+        "selected": 40,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "27ae7baa269fe76f97fa167abbc94f83e5422275e3399053f0fc7afd9a22d745"
+      },
+      {
+        "source": "espset",
+        "requested": 40,
+        "selected": 40,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "568d9edb0071e3b86580d8ea54167bb532a70cfc38eece78b515689cd9eea139"
+      },
+      {
+        "source": "skab",
+        "requested": 39,
+        "selected": 39,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "776654434895456f2bb3c9f1ac2990b7a21a068cb6818db348b8723e72112c63"
+      },
+      {
+        "source": "uci",
+        "requested": 39,
+        "selected": 39,
+        "available": 2205,
+        "groups": 39,
+        "ids_sha256": "699f919a5a2e67be705fad1074221977283a3d2a061a5e005e6851a61ca4bb3b"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.009206459857523441
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.011744113638997078
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "all_four",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 158,
+        "selected": 158,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "58ac4b46656e5d422cd1c1333629c88484e0a679c828497a5dd9b57682f7f501"
+      },
+      {
+        "source": "espset",
+        "requested": 158,
+        "selected": 158,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "3737a2de8e2ae3599b9aeecad14ca76411e037a1007fa18b2c364023ff12a66d"
+      },
+      {
+        "source": "skab",
+        "requested": 158,
+        "selected": 158,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "6417e83d9c6b16867a80a8c84b3257e564ec552e63a2d42e65a071e4b302abdb"
+      },
+      {
+        "source": "uci",
+        "requested": 158,
+        "selected": 158,
+        "available": 2205,
+        "groups": 158,
+        "ids_sha256": "ec54baae2e61b4a0eb715181c3b1ca54669bb7d7062a08de8f408e2c41e3e524"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 632,
+      "consumed_distinct_examples": 632,
+      "final_batch_loss": 0.009291956201195717
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.012105670757591724
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "target_scratch_reference",
+    "ratio": 0,
+    "seed": 11,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 158,
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.016627537086606026
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "target_only",
+    "ratio": 0,
+    "seed": 29,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 158,
+    "reference_examples": 158,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "uci",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 10,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 158,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "5e2eed3d658d0c6fbd0f56fdaa9e3996016c78cf28da99cfd6428f5863750548"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 168,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "uci",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 10,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 632,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "5e2eed3d658d0c6fbd0f56fdaa9e3996016c78cf28da99cfd6428f5863750548"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 168,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "skab",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 158,
+        "selected": 158,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "293894808c10f78aa3f7302f41650854cd6ac70a9e5d5968b6208e701e35c6df"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 316,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "skab",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 632,
+        "selected": 632,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "f6084496404b4f770e97ec85156aa8c53eeed64ba9c57cb87b01a1f5046133b6"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 790,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "beihang",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 158,
+        "selected": 158,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "304641b2f59c7c8fb5f1127cc64d84c83f87be5d83d5c8395be820c81064133c"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 316,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "beihang",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 632,
+        "selected": 632,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "9ab99df1df0713b0ab54503db4501c7568b413cb21c4e2ddbfe0edebfd1c94f3"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 790,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "espset",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 158,
+        "selected": 158,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "be7282692f463915fc2403a908c189fa88894aec3bc05797f26b279a91ceb304"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 316,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "espset",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 632,
+        "selected": 632,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "8435a92480addadecc4496400bd0f4404adf84652362a71fbdf53bc7a28e7065"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 790,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "all_four",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 129,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 40,
+        "selected": 40,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "0db8e8bd0a9068de9f069eb2c427ce547eb3defecfd04ddf39b4c1de2f089f51"
+      },
+      {
+        "source": "espset",
+        "requested": 40,
+        "selected": 40,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "7765129a32691462686ca502ca895ef88e142a66ab7343580ee283a89883b97c"
+      },
+      {
+        "source": "skab",
+        "requested": 39,
+        "selected": 39,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "7871a77e9bae441b69350c1e50fd41f3dee87bccbde285a112f5dcdbdaa75b22"
+      },
+      {
+        "source": "uci",
+        "requested": 39,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "5e2eed3d658d0c6fbd0f56fdaa9e3996016c78cf28da99cfd6428f5863750548"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 287,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "all_four",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 484,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 158,
+        "selected": 158,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "304641b2f59c7c8fb5f1127cc64d84c83f87be5d83d5c8395be820c81064133c"
+      },
+      {
+        "source": "espset",
+        "requested": 158,
+        "selected": 158,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "be7282692f463915fc2403a908c189fa88894aec3bc05797f26b279a91ceb304"
+      },
+      {
+        "source": "skab",
+        "requested": 158,
+        "selected": 158,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "293894808c10f78aa3f7302f41650854cd6ac70a9e5d5968b6208e701e35c6df"
+      },
+      {
+        "source": "uci",
+        "requested": 158,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "5e2eed3d658d0c6fbd0f56fdaa9e3996016c78cf28da99cfd6428f5863750548"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 642,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "target_repeat_control",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 158,
+    "reference_examples": 158,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "target_only",
+    "ratio": 0,
+    "seed": 29,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.013951728120446205
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.008228514343500137
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "uci",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 158,
+        "selected": 158,
+        "available": 2205,
+        "groups": 158,
+        "ids_sha256": "646b4b0aaadc01594b860f05a16f1abb017774f1b7a048ab58461fdd5e80e44a"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.0011951993219554424
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.01344039011746645
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "uci",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 632,
+        "selected": 632,
+        "available": 2205,
+        "groups": 632,
+        "ids_sha256": "0f535fa4ababf0901c08b53cb5314b975e3cfff80445cf3d659d8b4d30d8679a"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 632,
+      "consumed_distinct_examples": 632,
+      "final_batch_loss": 0.0014163765590637922
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.013405723497271538
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "skab",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 158,
+        "selected": 158,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "e216eaa5a1ed45d05404f6145276c8846aa93a3044bdc1ab52ac0fb0b46e7140"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.014912609942257404
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.0092078298330307
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "skab",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 632,
+        "selected": 632,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "bac033d3e1ac85d957030cea0a940abe6635329cbd0dccd421104ce1f63b61c9"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 632,
+      "consumed_distinct_examples": 632,
+      "final_batch_loss": 0.014219583943486214
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.00920837465673685
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "beihang",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 158,
+        "selected": 158,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "3d63d38fbed04448e9215e55156265ad9dfbcbd8a6b84dd07ce79ebb64fc1921"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.008135628886520863
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.009393490850925446
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "beihang",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 632,
+        "selected": 632,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "57ea88e3423be48feec46f8331e5f8201f1aef63b3b4864d8231f43110747ec7"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 632,
+      "consumed_distinct_examples": 632,
+      "final_batch_loss": 0.0079001160338521
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.009398330003023148
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "espset",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 158,
+        "selected": 158,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "c7f4cde320435edfee54510ca027ee6d8319939fd0827bfdc737b642e76c4d1e"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.005807308945804834
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.011364450678229332
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "espset",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 632,
+        "selected": 632,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "4e990f6bbc52e91507254712817c2d5c1519956f884195674eefb92bd9c62b6d"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 632,
+      "consumed_distinct_examples": 632,
+      "final_batch_loss": 0.005572474095970392
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.012102133594453335
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "all_four",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 40,
+        "selected": 40,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "cb09ed8089e7443cfe0501ab1ba5d48751f249161d9236ccc56a746a5a98a968"
+      },
+      {
+        "source": "espset",
+        "requested": 40,
+        "selected": 40,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "09b24f851439b32aeb1acd261279f2cc882d4a3b7f374615327dcafd97ecf62b"
+      },
+      {
+        "source": "skab",
+        "requested": 39,
+        "selected": 39,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "7a6cc614223f4c1b6de41672d48c4bdb99ec6a6b9345372b2d4308ba2a2c1591"
+      },
+      {
+        "source": "uci",
+        "requested": 39,
+        "selected": 39,
+        "available": 2205,
+        "groups": 39,
+        "ids_sha256": "c4fa70d5134e045cb25c5fc9933a89def957e66825e63e64bdf2d7805414c262"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.010785545222461224
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.009993266314268112
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "all_four",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 158,
+        "selected": 158,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "3d63d38fbed04448e9215e55156265ad9dfbcbd8a6b84dd07ce79ebb64fc1921"
+      },
+      {
+        "source": "espset",
+        "requested": 158,
+        "selected": 158,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "c7f4cde320435edfee54510ca027ee6d8319939fd0827bfdc737b642e76c4d1e"
+      },
+      {
+        "source": "skab",
+        "requested": 158,
+        "selected": 158,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "e216eaa5a1ed45d05404f6145276c8846aa93a3044bdc1ab52ac0fb0b46e7140"
+      },
+      {
+        "source": "uci",
+        "requested": 158,
+        "selected": 158,
+        "available": 2205,
+        "groups": 158,
+        "ids_sha256": "646b4b0aaadc01594b860f05a16f1abb017774f1b7a048ab58461fdd5e80e44a"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 632,
+      "consumed_distinct_examples": 632,
+      "final_batch_loss": 0.009617832489311695
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.00984716322273016
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "target_scratch_reference",
+    "ratio": 0,
+    "seed": 29,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 158,
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.014930040575563908
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "target_only",
+    "ratio": 0,
+    "seed": 47,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 158,
+    "reference_examples": 158,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "uci",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 10,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 158,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "c30f66058a5f6ccbd1af19bfde7afc48aaa99b22b5b37ee441aecea749dd5897"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 168,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "uci",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 10,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 632,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "c30f66058a5f6ccbd1af19bfde7afc48aaa99b22b5b37ee441aecea749dd5897"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 168,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "skab",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 158,
+        "selected": 158,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "5ff361f328df1eb1c576c14b9a66fc1b0cce3ee55deda08fd7d2792806a11396"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 316,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "skab",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 632,
+        "selected": 632,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "0d0499c56c61683f0950a0a2baa5cb99d52eeb24c9da153c4e5f68f91ef15e14"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 790,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "beihang",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 158,
+        "selected": 158,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "ccc15b349826b5ed0064620f24512fc652e78c0616d90e97e6bfa06e38697485"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 316,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "beihang",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 632,
+        "selected": 632,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "d10e47e8e462276bb5cf1110c4da172da4b0f1cb8e2bb9d2510c87d3a8f1d2f9"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 790,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "espset",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 158,
+        "selected": 158,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "cdf22382397a84717d7a3c681a7f9c88aa58c9ff7a8d534aa76709141d574e68"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 316,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "espset",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 632,
+        "selected": 632,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "345dbec25b4b96a1082e4d95ed1acf214f1ce6e7e72f933f985376f97b3a5e4a"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 790,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "all_four",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 129,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 40,
+        "selected": 40,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "b377b88ca4371526033c908cf49793615c97be5e74c6626ca0044d83d53907ef"
+      },
+      {
+        "source": "espset",
+        "requested": 40,
+        "selected": 40,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "ee0298cac9ae7f3308ad8c8d95939221151eb281557e1b538bc9674847f5608c"
+      },
+      {
+        "source": "skab",
+        "requested": 39,
+        "selected": 39,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "33c6a88d73dd59c81b03bf6c13afc58c75d326aa6463a85e50d03e7710d3dfef"
+      },
+      {
+        "source": "uci",
+        "requested": 39,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "c30f66058a5f6ccbd1af19bfde7afc48aaa99b22b5b37ee441aecea749dd5897"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 287,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "all_four",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 484,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 158,
+        "selected": 158,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "ccc15b349826b5ed0064620f24512fc652e78c0616d90e97e6bfa06e38697485"
+      },
+      {
+        "source": "espset",
+        "requested": 158,
+        "selected": 158,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "cdf22382397a84717d7a3c681a7f9c88aa58c9ff7a8d534aa76709141d574e68"
+      },
+      {
+        "source": "skab",
+        "requested": 158,
+        "selected": 158,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "5ff361f328df1eb1c576c14b9a66fc1b0cce3ee55deda08fd7d2792806a11396"
+      },
+      {
+        "source": "uci",
+        "requested": 158,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "c30f66058a5f6ccbd1af19bfde7afc48aaa99b22b5b37ee441aecea749dd5897"
+      }
+    ],
+    "target_channel_examples": 158,
+    "reference_examples": 642,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pooled_knn",
+    "source": "target_repeat_control",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 158,
+    "reference_examples": 158,
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "target_only",
+    "ratio": 0,
+    "seed": 47,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.014342892915010452
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.006722929421812296
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "uci",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 158,
+        "selected": 158,
+        "available": 2205,
+        "groups": 158,
+        "ids_sha256": "fd6f9bb049a5f99d343f6426b717a252ee5e77e6013dbc01e3aa15eda0bd2d89"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.0013436764711514115
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.015398205257952213
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "uci",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 632,
+        "selected": 632,
+        "available": 2205,
+        "groups": 632,
+        "ids_sha256": "93b408033ca98f55eb00f66894b036086dbd55d8eb96d705f5e968e080996e98"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 632,
+      "consumed_distinct_examples": 632,
+      "final_batch_loss": 0.0013189371675252914
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.01537016499787569
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "skab",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 158,
+        "selected": 158,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "8d442718a847c161eb8c491437f8e4390581695d2cd4d5d3bfecf29e4a8e81af"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.01435491256415844
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.008788860403001308
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "skab",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 632,
+        "selected": 632,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "dd71e194c647688e8c83b75183a143004a9e604f29d19088fde5431591245173"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 632,
+      "consumed_distinct_examples": 632,
+      "final_batch_loss": 0.013742949813604355
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.008984802290797234
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "beihang",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 158,
+        "selected": 158,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "d7ff6cca1b5a719c452e2ac7db5a4a1bf22c8c3358c946aa1fedc2cbf26a168f"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.009247427806258202
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.010748603381216526
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "beihang",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 632,
+        "selected": 632,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "a045f082c7c531399eefe15d19e4e60a64ac4802c6c344c52935a90bc297312e"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 632,
+      "consumed_distinct_examples": 632,
+      "final_batch_loss": 0.008983708918094635
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.01084345392882824
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "espset",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 158,
+        "selected": 158,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "17d19c81f8eb41231290fc88e692c6a1156b9a0d19c95accb70ea92a9b4b464c"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.003147734561935067
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.012963429093360901
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "espset",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 632,
+        "selected": 632,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "f585caf492b25f9557bcabb2cb68b3b205ed212cc5549d1a5a043b555826b902"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 632,
+      "consumed_distinct_examples": 632,
+      "final_batch_loss": 0.002053068019449711
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.013033092021942139
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "all_four",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 158,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 40,
+        "selected": 40,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "7d760382584cff5f8a9fcde5b68c028586aaa2e20ca5fb67f9f132c229ec5962"
+      },
+      {
+        "source": "espset",
+        "requested": 40,
+        "selected": 40,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "0ec0c2b678a252130900d33d07f935d87c1b90ef9f384224af10b5025e770603"
+      },
+      {
+        "source": "skab",
+        "requested": 39,
+        "selected": 39,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "e97293b5dd8fb9dd779856a286dad2f030825f90d8cb41ad7fd62787cdec3d0e"
+      },
+      {
+        "source": "uci",
+        "requested": 39,
+        "selected": 39,
+        "available": 2205,
+        "groups": 39,
+        "ids_sha256": "0e64dc8778e10d1a9cdb77562b6729a50a6debeaf97bf4a4ec841c7a8d8f6874"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.008244951255619526
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.010438619181513786
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "all_four",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 632,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 158,
+        "selected": 158,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "d7ff6cca1b5a719c452e2ac7db5a4a1bf22c8c3358c946aa1fedc2cbf26a168f"
+      },
+      {
+        "source": "espset",
+        "requested": 158,
+        "selected": 158,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "17d19c81f8eb41231290fc88e692c6a1156b9a0d19c95accb70ea92a9b4b464c"
+      },
+      {
+        "source": "skab",
+        "requested": 158,
+        "selected": 158,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "8d442718a847c161eb8c491437f8e4390581695d2cd4d5d3bfecf29e4a8e81af"
+      },
+      {
+        "source": "uci",
+        "requested": 158,
+        "selected": 158,
+        "available": 2205,
+        "groups": 158,
+        "ids_sha256": "fd6f9bb049a5f99d343f6426b717a252ee5e77e6013dbc01e3aa15eda0bd2d89"
+      }
+    ],
+    "target_channel_examples": 158,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 632,
+      "consumed_distinct_examples": 632,
+      "final_batch_loss": 0.008301563560962677
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.010576074942946434
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P0",
+    "method": "pretrained_ae",
+    "source": "target_scratch_reference",
+    "ratio": 0,
+    "seed": 47,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 158,
+    "finetune": {
+      "steps": 300,
+      "available_examples": 158,
+      "consumed_distinct_examples": 158,
+      "final_batch_loss": 0.015642665326595306
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "target_only",
+    "ratio": 0,
+    "seed": 11,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 302,
+    "reference_examples": 302,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "uci",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 10,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 302,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "6d5fc1734ca4f8729028f45f4741bbd44bd7d5f5ad6ae5ca68ffbde3d04e3764"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 312,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "uci",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 10,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 1208,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "6d5fc1734ca4f8729028f45f4741bbd44bd7d5f5ad6ae5ca68ffbde3d04e3764"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 312,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "skab",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 302,
+        "selected": 302,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "6b22e6c9252e0438de281ae64895e97a5ee1979f16627f5421d4e67c8586150c"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 604,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "skab",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 1208,
+        "selected": 1208,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "f36e0cbe2c14663a478a955dca0db6006c0a1e8b5287d58b436e59bce66fb0ee"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 1510,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "beihang",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 302,
+        "selected": 302,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "c35fe033f12dfed4e703be019d15aa2a0de71ba18841a8a3bce86cb76ec29fa4"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 604,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "beihang",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 1208,
+        "selected": 1208,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "cee0724038db50488eedc9e11d8f52bf32dfee38b53c6f152d21b66b8f8989d9"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 1510,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "espset",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 302,
+        "selected": 302,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "7d4f54c353732509abd5b4b3e2eb463efe08e41c29c9008fc5f39bc321914cbf"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 604,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "espset",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 1208,
+        "selected": 1208,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "e1cd83465abbb5b1918f87e4edcfdc554134112d99dae75ce32485d6b7edcf54"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 1510,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "all_four",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 237,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 76,
+        "selected": 76,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "c513a66936270f4f83c9a40c154b1767571dfc65739ee3fe56166e99f1cb8b5d"
+      },
+      {
+        "source": "espset",
+        "requested": 76,
+        "selected": 76,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "c150016d21145bbc45edeea596c65e4350e0b54bb22b120ccf4766d4aff6ec4e"
+      },
+      {
+        "source": "skab",
+        "requested": 75,
+        "selected": 75,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "c3f88e815ff5bb6141a8fbfc62fbaf59c5158ebb0c6f9e04afb972615bc3d37d"
+      },
+      {
+        "source": "uci",
+        "requested": 75,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "6d5fc1734ca4f8729028f45f4741bbd44bd7d5f5ad6ae5ca68ffbde3d04e3764"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 539,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "all_four",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 916,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 302,
+        "selected": 302,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "c35fe033f12dfed4e703be019d15aa2a0de71ba18841a8a3bce86cb76ec29fa4"
+      },
+      {
+        "source": "espset",
+        "requested": 302,
+        "selected": 302,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "7d4f54c353732509abd5b4b3e2eb463efe08e41c29c9008fc5f39bc321914cbf"
+      },
+      {
+        "source": "skab",
+        "requested": 302,
+        "selected": 302,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "6b22e6c9252e0438de281ae64895e97a5ee1979f16627f5421d4e67c8586150c"
+      },
+      {
+        "source": "uci",
+        "requested": 302,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "6d5fc1734ca4f8729028f45f4741bbd44bd7d5f5ad6ae5ca68ffbde3d04e3764"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 1218,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "target_repeat_control",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 302,
+    "reference_examples": 302,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "target_only",
+    "ratio": 0,
+    "seed": 11,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.015979167073965073
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.006872852798551321
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "uci",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 302,
+        "selected": 302,
+        "available": 2205,
+        "groups": 302,
+        "ids_sha256": "4342c139e10c9398ff3dab5f25e57cba739690f339f15d3a94af1c545a187657"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.0010356680722907186
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.013213491067290306
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "uci",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 1208,
+        "selected": 1208,
+        "available": 2205,
+        "groups": 1208,
+        "ids_sha256": "c46f891ac197a77487930d761144a918f92a34471a7cc926a094f02161594e47"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 1208,
+      "consumed_distinct_examples": 1208,
+      "final_batch_loss": 0.0012684017419815063
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.01315717026591301
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "skab",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 302,
+        "selected": 302,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "34a062f6f656e1f4bddb392f9434dda1a79e5d6ff7309c2c7a6605b8e6fcb2a0"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.012821953743696213
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.008658697828650475
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "skab",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 1208,
+        "selected": 1208,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "48282fd023ebb9d9f05b56c15e3dafa760be019fd5f100fc45da15d4a3d8cc23"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 1208,
+      "consumed_distinct_examples": 1208,
+      "final_batch_loss": 0.01478624902665615
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.008648422546684742
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "beihang",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 302,
+        "selected": 302,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "cd7f010147bde47cb93530f81b51945e4c260c48d1e62d48b2f557290089bb2b"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.007864195853471756
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.009710421785712242
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "beihang",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 1208,
+        "selected": 1208,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "b478db1f992d07e25050240bbb29b8e7a5ee2b997628ca582806598bbe7baa47"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 1208,
+      "consumed_distinct_examples": 1208,
+      "final_batch_loss": 0.007962634786963463
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.009786194190382957
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "espset",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 302,
+        "selected": 302,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "d5241e025380a805d8396d351b833db833868e062e80ec223bfb4bac3ba60234"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.0036967506166547537
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.013718895614147186
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "espset",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 1208,
+        "selected": 1208,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "70a87c2187ab3a4f0d4285d6c65416406c60cdc8ef3136e73bdfd151a44ea439"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 1208,
+      "consumed_distinct_examples": 1208,
+      "final_batch_loss": 0.005418378859758377
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.0137788075953722
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "all_four",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 76,
+        "selected": 76,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "87fb444c43189003ff437183f3d0e196a17be402d578747af507b453c26b544b"
+      },
+      {
+        "source": "espset",
+        "requested": 76,
+        "selected": 76,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "8b74791bbd9e34f7f5d92639e259af89e263bee656163debef6eec6d631fb226"
+      },
+      {
+        "source": "skab",
+        "requested": 75,
+        "selected": 75,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "660a60c707676d25cae247ae3e16c9f373a151853b701b9cf9547abb6d50a8f6"
+      },
+      {
+        "source": "uci",
+        "requested": 75,
+        "selected": 75,
+        "available": 2205,
+        "groups": 75,
+        "ids_sha256": "fa02c6efe0b22495ce8be57048eebee1cd83bd1fa17b67b98c9423d6f2f91ec8"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.009258013218641281
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.009411118924617767
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "all_four",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 302,
+        "selected": 302,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "cd7f010147bde47cb93530f81b51945e4c260c48d1e62d48b2f557290089bb2b"
+      },
+      {
+        "source": "espset",
+        "requested": 302,
+        "selected": 302,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "d5241e025380a805d8396d351b833db833868e062e80ec223bfb4bac3ba60234"
+      },
+      {
+        "source": "skab",
+        "requested": 302,
+        "selected": 302,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "34a062f6f656e1f4bddb392f9434dda1a79e5d6ff7309c2c7a6605b8e6fcb2a0"
+      },
+      {
+        "source": "uci",
+        "requested": 302,
+        "selected": 302,
+        "available": 2205,
+        "groups": 302,
+        "ids_sha256": "4342c139e10c9398ff3dab5f25e57cba739690f339f15d3a94af1c545a187657"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 1208,
+      "consumed_distinct_examples": 1208,
+      "final_batch_loss": 0.011071464978158474
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.009229784831404686
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "target_scratch_reference",
+    "ratio": 0,
+    "seed": 11,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 302,
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.013890007510781288
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "target_only",
+    "ratio": 0,
+    "seed": 29,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 302,
+    "reference_examples": 302,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "uci",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 10,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 302,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "5e2eed3d658d0c6fbd0f56fdaa9e3996016c78cf28da99cfd6428f5863750548"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 312,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "uci",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 10,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 1208,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "5e2eed3d658d0c6fbd0f56fdaa9e3996016c78cf28da99cfd6428f5863750548"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 312,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "skab",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 302,
+        "selected": 302,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "7fb6dfbff1e522a814ad963d64faef525941c102a5e2a2b4f42e03526264423a"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 604,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "skab",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 1208,
+        "selected": 1208,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "b28108588dce9c6ae58f96e6272c84daf0a4f7aa1821ae282c1be7af03038f03"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 1510,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "beihang",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 302,
+        "selected": 302,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "270cf3aa54391da28fe9b680cb88b94233010b0537a744458cdd9fc0084008c0"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 604,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "beihang",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 1208,
+        "selected": 1208,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "15026763b15f6c3848b7232aa2eedb0d86f0d755617b37c033fd411beceea334"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 1510,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "espset",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 302,
+        "selected": 302,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "b0b20ca7bb7fd08ee22e635bcbf964af5ec5ec50ecefa706bb930c8c5769908a"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 604,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "espset",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 1208,
+        "selected": 1208,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "ddeb2bc9006f97d3e213b32969a86c793f46a87746eea360b1955b67fdacd6c1"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 1510,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "all_four",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 237,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 76,
+        "selected": 76,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "4938473b85cf1994f105fa5643b2e012fe8de653509803af63fe8196e5996889"
+      },
+      {
+        "source": "espset",
+        "requested": 76,
+        "selected": 76,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "b775ff44071379251e0abcf512b16cc1889aab09afc5347dca65e81903a70c26"
+      },
+      {
+        "source": "skab",
+        "requested": 75,
+        "selected": 75,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "c2575dca9a2f397ba64e22ebd172a0e4a632564e7d3531bdd12cb26170862794"
+      },
+      {
+        "source": "uci",
+        "requested": 75,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "5e2eed3d658d0c6fbd0f56fdaa9e3996016c78cf28da99cfd6428f5863750548"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 539,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "all_four",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 916,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 302,
+        "selected": 302,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "270cf3aa54391da28fe9b680cb88b94233010b0537a744458cdd9fc0084008c0"
+      },
+      {
+        "source": "espset",
+        "requested": 302,
+        "selected": 302,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "b0b20ca7bb7fd08ee22e635bcbf964af5ec5ec50ecefa706bb930c8c5769908a"
+      },
+      {
+        "source": "skab",
+        "requested": 302,
+        "selected": 302,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "7fb6dfbff1e522a814ad963d64faef525941c102a5e2a2b4f42e03526264423a"
+      },
+      {
+        "source": "uci",
+        "requested": 302,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "5e2eed3d658d0c6fbd0f56fdaa9e3996016c78cf28da99cfd6428f5863750548"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 1218,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "target_repeat_control",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 302,
+    "reference_examples": 302,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "target_only",
+    "ratio": 0,
+    "seed": 29,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.014129966497421265
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.008438577875494957
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "uci",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 302,
+        "selected": 302,
+        "available": 2205,
+        "groups": 302,
+        "ids_sha256": "8bec7f61288f7a323cfb6c47d11d3050367e1260ce51974af2c14c737e5413b5"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.0010317981941625476
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.013811720535159111
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "uci",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 1208,
+        "selected": 1208,
+        "available": 2205,
+        "groups": 1208,
+        "ids_sha256": "d8b1289a12b76dceaaa9b37ba81ccd2db6051c0a21a5b8329fb441c842a1fe24"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 1208,
+      "consumed_distinct_examples": 1208,
+      "final_batch_loss": 0.0011590523645281792
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.013922041282057762
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "skab",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 302,
+        "selected": 302,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "e7aaddb5c73f20e63e9e3b8e492283b02f2b7f6edeca120d572b1a157c1a7637"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.015698550269007683
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.009609012864530087
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "skab",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 1208,
+        "selected": 1208,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "1977983f07755bd8f35c862e01887fdda10ab3a92a908aec24f8f00a755dfab1"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 1208,
+      "consumed_distinct_examples": 1208,
+      "final_batch_loss": 0.014497751370072365
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.009682618081569672
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "beihang",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 302,
+        "selected": 302,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "65bfb027b1ffe0948d3f95d3a8e91d8ace1763a8cd427fc6b572f16705f63061"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.008580981753766537
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.010013516992330551
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "beihang",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 1208,
+        "selected": 1208,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "446df01d2b4009f4a987ad161e09b17ff9ebc2a836b831a8046ec4f2ec3bef8e"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 1208,
+      "consumed_distinct_examples": 1208,
+      "final_batch_loss": 0.00725120073184371
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.010050084441900253
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "espset",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 302,
+        "selected": 302,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "df0f38b661ea5b4e2b8396f3c1053624b1aff9056d605f6a6c9f8bf9536ec08f"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.006513641215860844
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.012399918399751186
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "espset",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 1208,
+        "selected": 1208,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "780edcd6a65708b22f761a7d963d2d5c598bf5fc0ad99ca5ea4e009ae4e4e816"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 1208,
+      "consumed_distinct_examples": 1208,
+      "final_batch_loss": 0.006727791856974363
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.012339968234300613
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "all_four",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 76,
+        "selected": 76,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "113dfded9d28d9b800a481c6d549e6c088bd04079e9b8eb5c24dd794ddbca981"
+      },
+      {
+        "source": "espset",
+        "requested": 76,
+        "selected": 76,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "44ee4874ac8fbe768ca9a8d06277973b809f9a27d4a13e2fb25c3a5c64299451"
+      },
+      {
+        "source": "skab",
+        "requested": 75,
+        "selected": 75,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "230b67917dfb2287e54d119a18643141312764d0a0dc2dcee06989014ff146d9"
+      },
+      {
+        "source": "uci",
+        "requested": 75,
+        "selected": 75,
+        "available": 2205,
+        "groups": 75,
+        "ids_sha256": "72b5f702c35087e00bc836b96980e119780611cdea52b88b8d050b6175dc3a01"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.012067218311131
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.010402875952422619
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "all_four",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 302,
+        "selected": 302,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "65bfb027b1ffe0948d3f95d3a8e91d8ace1763a8cd427fc6b572f16705f63061"
+      },
+      {
+        "source": "espset",
+        "requested": 302,
+        "selected": 302,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "df0f38b661ea5b4e2b8396f3c1053624b1aff9056d605f6a6c9f8bf9536ec08f"
+      },
+      {
+        "source": "skab",
+        "requested": 302,
+        "selected": 302,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "e7aaddb5c73f20e63e9e3b8e492283b02f2b7f6edeca120d572b1a157c1a7637"
+      },
+      {
+        "source": "uci",
+        "requested": 302,
+        "selected": 302,
+        "available": 2205,
+        "groups": 302,
+        "ids_sha256": "8bec7f61288f7a323cfb6c47d11d3050367e1260ce51974af2c14c737e5413b5"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 1208,
+      "consumed_distinct_examples": 1208,
+      "final_batch_loss": 0.011426352895796299
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.010358118452131748
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "target_scratch_reference",
+    "ratio": 0,
+    "seed": 29,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 302,
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.01451205275952816
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "target_only",
+    "ratio": 0,
+    "seed": 47,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 302,
+    "reference_examples": 302,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "uci",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 10,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 302,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "c30f66058a5f6ccbd1af19bfde7afc48aaa99b22b5b37ee441aecea749dd5897"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 312,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "uci",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 10,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 1208,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "c30f66058a5f6ccbd1af19bfde7afc48aaa99b22b5b37ee441aecea749dd5897"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 312,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "skab",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 302,
+        "selected": 302,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "0812d6ab7fa09bbd358a9f488eeda08edbf798e454b2247eade45bc809ac2d31"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 604,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "skab",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 1208,
+        "selected": 1208,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "7b8c28e93b47d755cdaad1079c2748bf0a9f7ea2ed51e2e4e9febde6401e3793"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 1510,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "beihang",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 302,
+        "selected": 302,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "4bc3a375c9fb921bd1018345ad0c7035a57c27a587f0e7a7308ca66a91b3d543"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 604,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "beihang",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 1208,
+        "selected": 1208,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "8f6d149474de9fba971097605310181ff3ce2b50fa38ca6287545878c7981dca"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 1510,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "espset",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 302,
+        "selected": 302,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "6bec79b49a2c85ae3781ced3ec9b1a0ceaa25a1038de5cb61ce2cb4b8533c144"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 604,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "espset",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 1208,
+        "selected": 1208,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "b9a53bbcd24d51fc689830bf12d80963e50d0162b7ba20d1ae1ddb11251c5868"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 1510,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "all_four",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 237,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 76,
+        "selected": 76,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "23f15db2aa3c5f828dec2a402e7502688204cdc31c4299889c114ee69db6b7d6"
+      },
+      {
+        "source": "espset",
+        "requested": 76,
+        "selected": 76,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "94f49f9c5807e67bfc3d57f33b109d6a2146fa5c888320b852e756a04e4d227d"
+      },
+      {
+        "source": "skab",
+        "requested": 75,
+        "selected": 75,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "c820324835139b2421559188a5ca3a40946bc3ca0abccabcb4d3b46378ce7f00"
+      },
+      {
+        "source": "uci",
+        "requested": 75,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "c30f66058a5f6ccbd1af19bfde7afc48aaa99b22b5b37ee441aecea749dd5897"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 539,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "all_four",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 916,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 302,
+        "selected": 302,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "4bc3a375c9fb921bd1018345ad0c7035a57c27a587f0e7a7308ca66a91b3d543"
+      },
+      {
+        "source": "espset",
+        "requested": 302,
+        "selected": 302,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "6bec79b49a2c85ae3781ced3ec9b1a0ceaa25a1038de5cb61ce2cb4b8533c144"
+      },
+      {
+        "source": "skab",
+        "requested": 302,
+        "selected": 302,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "0812d6ab7fa09bbd358a9f488eeda08edbf798e454b2247eade45bc809ac2d31"
+      },
+      {
+        "source": "uci",
+        "requested": 302,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "c30f66058a5f6ccbd1af19bfde7afc48aaa99b22b5b37ee441aecea749dd5897"
+      }
+    ],
+    "target_channel_examples": 302,
+    "reference_examples": 1218,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pooled_knn",
+    "source": "target_repeat_control",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 302,
+    "reference_examples": 302,
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "target_only",
+    "ratio": 0,
+    "seed": 47,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.015378840267658234
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.007834353484213352
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "uci",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 302,
+        "selected": 302,
+        "available": 2205,
+        "groups": 302,
+        "ids_sha256": "19b15283ae4da1032cadfa84c8f4345076111054785a4f8db50f01d864679a2f"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.0009732739999890327
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.014484645798802376
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "uci",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 1208,
+        "selected": 1208,
+        "available": 2205,
+        "groups": 1208,
+        "ids_sha256": "d6c4b425577c761ebbf6d55adfebc9813c1256eb38db4669a3c59445861f6d09"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 1208,
+      "consumed_distinct_examples": 1208,
+      "final_batch_loss": 0.0013195808278396726
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.014475074596703053
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "skab",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 302,
+        "selected": 302,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "46b2f1c2853a8df938ee4da451a739cac7453f6e08200d0dd01a5bbe489067d7"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.014395405538380146
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.009109854698181152
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "skab",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 1208,
+        "selected": 1208,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "3cdcacddaa30e80b3869b03fa67a2ed49a9947744df6ee28d1cf439f9fd4b799"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 1208,
+      "consumed_distinct_examples": 1208,
+      "final_batch_loss": 0.014257950708270073
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.009187189862132072
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "beihang",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 302,
+        "selected": 302,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "a1283d150ba6a11dc4bf5ed3c268ade3ca43a4dde049094b33048e1db84b49d3"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.007544173859059811
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.010463949292898178
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "beihang",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 1208,
+        "selected": 1208,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "5681b561ca6f2f118e5adfc6247b8020c24863bf33c9fba16f88a988db5bf07b"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 1208,
+      "consumed_distinct_examples": 1208,
+      "final_batch_loss": 0.007731340825557709
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.010393689386546612
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "espset",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 302,
+        "selected": 302,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "fe1d7d04838877b1808aad74e2094e6c87ff64108a5af925747b4bdaf8b92f1a"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.0021255933679640293
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.01222052052617073
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "espset",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 1208,
+        "selected": 1208,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "5808c0f9b0331065ded29aa334dc067dfb63d1317fa96527d6bdcdd160be04f1"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 1208,
+      "consumed_distinct_examples": 1208,
+      "final_batch_loss": 0.002671768656000495
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.012166508473455906
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "all_four",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 302,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 76,
+        "selected": 76,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "f1d9284d6b11b8d23e47cb7679207d8689c95651db8a662a3d4f6fc617ec36f2"
+      },
+      {
+        "source": "espset",
+        "requested": 76,
+        "selected": 76,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "c8ddc71b8e9c4b50d4169b528d1824a370477b9e7628ebb413dc1072a38f1c85"
+      },
+      {
+        "source": "skab",
+        "requested": 75,
+        "selected": 75,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "ab29f6644458bbe8ab442933f61d6cc6f39bbc4126c38bd62bae3af042e048d4"
+      },
+      {
+        "source": "uci",
+        "requested": 75,
+        "selected": 75,
+        "available": 2205,
+        "groups": 75,
+        "ids_sha256": "ace9cef4bbd0f9d72ff758ba2e417a3ac5f62503b7b2bbb2c8fb3cdef7965124"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.007478863466531038
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.010254627093672752
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "all_four",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 1208,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 302,
+        "selected": 302,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "a1283d150ba6a11dc4bf5ed3c268ade3ca43a4dde049094b33048e1db84b49d3"
+      },
+      {
+        "source": "espset",
+        "requested": 302,
+        "selected": 302,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "fe1d7d04838877b1808aad74e2094e6c87ff64108a5af925747b4bdaf8b92f1a"
+      },
+      {
+        "source": "skab",
+        "requested": 302,
+        "selected": 302,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "46b2f1c2853a8df938ee4da451a739cac7453f6e08200d0dd01a5bbe489067d7"
+      },
+      {
+        "source": "uci",
+        "requested": 302,
+        "selected": 302,
+        "available": 2205,
+        "groups": 302,
+        "ids_sha256": "19b15283ae4da1032cadfa84c8f4345076111054785a4f8db50f01d864679a2f"
+      }
+    ],
+    "target_channel_examples": 302,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 1208,
+      "consumed_distinct_examples": 1208,
+      "final_batch_loss": 0.00852330680936575
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.010242192074656487
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P1",
+    "method": "pretrained_ae",
+    "source": "target_scratch_reference",
+    "ratio": 0,
+    "seed": 47,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 302,
+    "finetune": {
+      "steps": 300,
+      "available_examples": 302,
+      "consumed_distinct_examples": 302,
+      "final_batch_loss": 0.014406819827854633
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "target_only",
+    "ratio": 0,
+    "seed": 11,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 606,
+    "reference_examples": 606,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "uci",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 10,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 606,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "6d5fc1734ca4f8729028f45f4741bbd44bd7d5f5ad6ae5ca68ffbde3d04e3764"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 616,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "uci",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 10,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 2424,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "6d5fc1734ca4f8729028f45f4741bbd44bd7d5f5ad6ae5ca68ffbde3d04e3764"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 616,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "skab",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 606,
+        "selected": 606,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "8a633fc03772e556053d500448cd24c8b5f28725d7a52059574c02a3e052b89c"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 1212,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "skab",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 2424,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 2424,
+        "selected": 2424,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "c848e613c78e973ca5046b604ba1ddc10ba84036fc2e8d8513541673cbb59381"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 3030,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "beihang",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 606,
+        "selected": 606,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "0d1c196c7259488a85efd48bb7eae3f659d53a65002836bfcb7864d899b3cd38"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 1212,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "beihang",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 1536,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 2424,
+        "selected": 1536,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "26fa938d9459e8a41a259dc6bcd0bce160c02e7e0d140cfd00499e640a255ade"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 2142,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "espset",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 606,
+        "selected": 606,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "763ce6455b18e12c6d26e623c8f397a0cf6c63d64c72b63ae1cac82dcbc13841"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 1212,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "espset",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 2424,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 2424,
+        "selected": 2424,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "f737ccee82227b0b21a379aa648b4769c224996299cb2a6b5781994dfab19aca"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 3030,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "all_four",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 465,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 152,
+        "selected": 152,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "f5894cf448852e68a44bcb551978a33fe375b42ad0aed8cdb39a523daccd330b"
+      },
+      {
+        "source": "espset",
+        "requested": 152,
+        "selected": 152,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "fcd288094f069a6d6c56065f266dd2be50a3d9a9c147667dbd6be420b97f2f24"
+      },
+      {
+        "source": "skab",
+        "requested": 151,
+        "selected": 151,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "c3663b5921cfe06470669245b3f4b82db019d2978f6d095114287ccc590d83dc"
+      },
+      {
+        "source": "uci",
+        "requested": 151,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "6d5fc1734ca4f8729028f45f4741bbd44bd7d5f5ad6ae5ca68ffbde3d04e3764"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 1071,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "all_four",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 1828,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 606,
+        "selected": 606,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "0d1c196c7259488a85efd48bb7eae3f659d53a65002836bfcb7864d899b3cd38"
+      },
+      {
+        "source": "espset",
+        "requested": 606,
+        "selected": 606,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "763ce6455b18e12c6d26e623c8f397a0cf6c63d64c72b63ae1cac82dcbc13841"
+      },
+      {
+        "source": "skab",
+        "requested": 606,
+        "selected": 606,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "8a633fc03772e556053d500448cd24c8b5f28725d7a52059574c02a3e052b89c"
+      },
+      {
+        "source": "uci",
+        "requested": 606,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "6d5fc1734ca4f8729028f45f4741bbd44bd7d5f5ad6ae5ca68ffbde3d04e3764"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 2434,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "target_repeat_control",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 606,
+    "reference_examples": 606,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "target_only",
+    "ratio": 0,
+    "seed": 11,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.015806682407855988
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.007235730066895485
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "uci",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 606,
+        "selected": 606,
+        "available": 2205,
+        "groups": 606,
+        "ids_sha256": "61ff9e9d9c2649bd7af5adc1cb0bb841c46411211c8e2ec4a896e8962a37f42d"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.0014086177106946707
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.0141410818323493
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "uci",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 2205,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 2424,
+        "selected": 2205,
+        "available": 2205,
+        "groups": 2205,
+        "ids_sha256": "1ec6b30a6c33437cc608923e5950cbd7fe4a7dc53d5ea33252dd5b80933d2b11"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 2205,
+      "consumed_distinct_examples": 2205,
+      "final_batch_loss": 0.0009927775245159864
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.014037012122571468
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "skab",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 606,
+        "selected": 606,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "0ef21ba9e5248298ecf509c34c54ce633cd952c11fa3dc237996149ff9395097"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.013082506135106087
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.008931399323046207
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "skab",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 2424,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 2424,
+        "selected": 2424,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "b8b0cf26fdab8acd4ad5d04779b11ee1adafa4685dafcd4d9d72e0e468187f3b"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 2424,
+      "consumed_distinct_examples": 2423,
+      "final_batch_loss": 0.01449616253376007
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.008962328545749187
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "beihang",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 606,
+        "selected": 606,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "c523684f3d00ea797dbbc17871ef358471ed9f7afc83d444f530112e8a1a9d65"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.008138836361467838
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.010112475603818893
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "beihang",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 2424,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 2424,
+        "selected": 2424,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "93fd89209da6cf2b3bfb295d5d40e006cd14d787c2c71895ef633aef6d4bc0b9"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 2424,
+      "consumed_distinct_examples": 2423,
+      "final_batch_loss": 0.009192459285259247
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.010058737359941006
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "espset",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 606,
+        "selected": 606,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "a83e92423a7eeba680096adb286e0494710e5b85b3c249691b9e46a852a1814e"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.005314739421010017
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.014814993366599083
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "espset",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 2424,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 2424,
+        "selected": 2424,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "07d9dc568aa545f60805b0babfcae364a0728482a68d14bb17071a04eda39325"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 2424,
+      "consumed_distinct_examples": 2423,
+      "final_batch_loss": 0.005252751521766186
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.014653739519417286
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "all_four",
+    "ratio": 1,
+    "seed": 11,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 152,
+        "selected": 152,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "b477afe77614dcfadabef9ff393973d6c4aa2b0472586ca6babc85d545b04f1c"
+      },
+      {
+        "source": "espset",
+        "requested": 152,
+        "selected": 152,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "4bfd72d06d6d83c3a06a450b1301394ae26099d13d12ca8bd33dff1949ca9fee"
+      },
+      {
+        "source": "skab",
+        "requested": 151,
+        "selected": 151,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "e786288a9aa99e2062841402cd55c1a27e963cb0dc37941aef83ee842a1689d6"
+      },
+      {
+        "source": "uci",
+        "requested": 151,
+        "selected": 151,
+        "available": 2205,
+        "groups": 151,
+        "ids_sha256": "3d56365f5cb8122195b24afe719d4f27ee6967baa2bdcab864939f77b8cb9214"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.011255999095737934
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.009760025888681412
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "all_four",
+    "ratio": 4,
+    "seed": 11,
+    "external_examples": 2424,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 606,
+        "selected": 606,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "c523684f3d00ea797dbbc17871ef358471ed9f7afc83d444f530112e8a1a9d65"
+      },
+      {
+        "source": "espset",
+        "requested": 606,
+        "selected": 606,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "a83e92423a7eeba680096adb286e0494710e5b85b3c249691b9e46a852a1814e"
+      },
+      {
+        "source": "skab",
+        "requested": 606,
+        "selected": 606,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "0ef21ba9e5248298ecf509c34c54ce633cd952c11fa3dc237996149ff9395097"
+      },
+      {
+        "source": "uci",
+        "requested": 606,
+        "selected": 606,
+        "available": 2205,
+        "groups": 606,
+        "ids_sha256": "61ff9e9d9c2649bd7af5adc1cb0bb841c46411211c8e2ec4a896e8962a37f42d"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 2424,
+      "consumed_distinct_examples": 2423,
+      "final_batch_loss": 0.010430434718728065
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.009568808600306511
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "target_scratch_reference",
+    "ratio": 0,
+    "seed": 11,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 606,
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.015071827918291092
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "target_only",
+    "ratio": 0,
+    "seed": 29,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 606,
+    "reference_examples": 606,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "uci",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 10,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 606,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "5e2eed3d658d0c6fbd0f56fdaa9e3996016c78cf28da99cfd6428f5863750548"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 616,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "uci",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 10,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 2424,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "5e2eed3d658d0c6fbd0f56fdaa9e3996016c78cf28da99cfd6428f5863750548"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 616,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "skab",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 606,
+        "selected": 606,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "4051005ac6f334332fe8c51f7149f757bac9c11204bf715c62cb612cfff95160"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 1212,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "skab",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 2424,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 2424,
+        "selected": 2424,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "21efc751d24f797823cab730a70a6e8a25889fd9386d79237de39b61ea1964be"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 3030,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "beihang",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 606,
+        "selected": 606,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "ea90ea7c5348e704b867dc5f102bc97a6181f86cd95ef60c896583b8cb847be3"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 1212,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "beihang",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 1536,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 2424,
+        "selected": 1536,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "81538ec2206a69270706843158d4fcbc2f0e7e1b7415b10461f3672f709cc1dd"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 2142,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "espset",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 606,
+        "selected": 606,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "6e493dfb32a26835c65792c24d1124f330e5581f552df34e9625d395cb60ab67"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 1212,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "espset",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 2424,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 2424,
+        "selected": 2424,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "a8f3186e46c83d8730615703d63c0269184eb464be8d186914b5a40b77b4a6ea"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 3030,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "all_four",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 465,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 152,
+        "selected": 152,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "eb0c0fdf90060d0c65e9fa1222bf254d77b23890993ab884309d4ef6e616dd1d"
+      },
+      {
+        "source": "espset",
+        "requested": 152,
+        "selected": 152,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "8a88b1793d7a35f804d90268c71f9bbb8861f73fd466f4e11c7bc640acf9a45a"
+      },
+      {
+        "source": "skab",
+        "requested": 151,
+        "selected": 151,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "99ec2703dad0ffd2e803814035e104bf71abbe091959cc278892352b1302ef3b"
+      },
+      {
+        "source": "uci",
+        "requested": 151,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "5e2eed3d658d0c6fbd0f56fdaa9e3996016c78cf28da99cfd6428f5863750548"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 1071,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "all_four",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 1828,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 606,
+        "selected": 606,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "ea90ea7c5348e704b867dc5f102bc97a6181f86cd95ef60c896583b8cb847be3"
+      },
+      {
+        "source": "espset",
+        "requested": 606,
+        "selected": 606,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "6e493dfb32a26835c65792c24d1124f330e5581f552df34e9625d395cb60ab67"
+      },
+      {
+        "source": "skab",
+        "requested": 606,
+        "selected": 606,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "4051005ac6f334332fe8c51f7149f757bac9c11204bf715c62cb612cfff95160"
+      },
+      {
+        "source": "uci",
+        "requested": 606,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "5e2eed3d658d0c6fbd0f56fdaa9e3996016c78cf28da99cfd6428f5863750548"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 2434,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "target_repeat_control",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 606,
+    "reference_examples": 606,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "target_only",
+    "ratio": 0,
+    "seed": 29,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.014675258658826351
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.009048810228705406
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "uci",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 606,
+        "selected": 606,
+        "available": 2205,
+        "groups": 606,
+        "ids_sha256": "368feabb3c933ae70830ba343d9e10ce3249a0377ef0119be60839a0679ab343"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.0013753827661275864
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.014024995267391205
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "uci",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 2205,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 2424,
+        "selected": 2205,
+        "available": 2205,
+        "groups": 2205,
+        "ids_sha256": "b1ee02501a280d2518f3f0814ba9a54d86b3db0ae17de362a343120cd786670f"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 2205,
+      "consumed_distinct_examples": 2203,
+      "final_batch_loss": 0.0010885929223150015
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.014135688543319702
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "skab",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 606,
+        "selected": 606,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "f25df51bc0b98dec93a97b6b0aeac7b8768154b36622bfea6251ce32930f1dfb"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.01452658325433731
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.009927765466272831
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "skab",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 2424,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 2424,
+        "selected": 2424,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "3852657ee8bb50d1f33085d5acc755eadd4825530991612675012d6f2f158b0e"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 2424,
+      "consumed_distinct_examples": 2421,
+      "final_batch_loss": 0.01645759865641594
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.009866373613476753
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "beihang",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 606,
+        "selected": 606,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "20379c33ce3c36a88d073a1c992b6566b5e734725832cd3b6fec792edcc3ebe6"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.008657297119498253
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.010177792981266975
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "beihang",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 2424,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 2424,
+        "selected": 2424,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "550c8d671d5ea58917fda38bdcfa9c31b1cae755c0af701a3f770998747d2812"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 2424,
+      "consumed_distinct_examples": 2421,
+      "final_batch_loss": 0.007891295477747917
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.010198484174907207
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "espset",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 606,
+        "selected": 606,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "1321ac34d12d16f7c385e9ec6f7cba40be6e719604a03c8b765988e6a4b48adc"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.005892667919397354
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.012007484212517738
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "espset",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 2424,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 2424,
+        "selected": 2424,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "4095cbceedca72fab7cd86fbc9464c23e60a9856b0dbd37496db4cc5c649eb39"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 2424,
+      "consumed_distinct_examples": 2421,
+      "final_batch_loss": 0.006953910458832979
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.012111131101846695
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "all_four",
+    "ratio": 1,
+    "seed": 29,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 152,
+        "selected": 152,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "f055adfbe88b44b6a4cfe8bb904f34b67c8c8ccac39eb3c929c6d5a0ea24db31"
+      },
+      {
+        "source": "espset",
+        "requested": 152,
+        "selected": 152,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "2932916f1c1f71b1022de12774c2ef4798f292b3d17f51b710f428abde6a9cac"
+      },
+      {
+        "source": "skab",
+        "requested": 151,
+        "selected": 151,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "fed22627cab6259ff44879b835a168ab47d071ae5ca73fba8d3350f27ad87e21"
+      },
+      {
+        "source": "uci",
+        "requested": 151,
+        "selected": 151,
+        "available": 2205,
+        "groups": 151,
+        "ids_sha256": "b31a965a22a9a49ac6908c1de83c4cdf28844aff59b491ba7bcb4f3141601669"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.010890177451074123
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.01062096282839775
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "all_four",
+    "ratio": 4,
+    "seed": 29,
+    "external_examples": 2424,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 606,
+        "selected": 606,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "20379c33ce3c36a88d073a1c992b6566b5e734725832cd3b6fec792edcc3ebe6"
+      },
+      {
+        "source": "espset",
+        "requested": 606,
+        "selected": 606,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "1321ac34d12d16f7c385e9ec6f7cba40be6e719604a03c8b765988e6a4b48adc"
+      },
+      {
+        "source": "skab",
+        "requested": 606,
+        "selected": 606,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "f25df51bc0b98dec93a97b6b0aeac7b8768154b36622bfea6251ce32930f1dfb"
+      },
+      {
+        "source": "uci",
+        "requested": 606,
+        "selected": 606,
+        "available": 2205,
+        "groups": 606,
+        "ids_sha256": "368feabb3c933ae70830ba343d9e10ce3249a0377ef0119be60839a0679ab343"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 2424,
+      "consumed_distinct_examples": 2421,
+      "final_batch_loss": 0.011324679479002953
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.010671596974134445
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "target_scratch_reference",
+    "ratio": 0,
+    "seed": 29,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 606,
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.01473461464047432
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "target_only",
+    "ratio": 0,
+    "seed": 47,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 606,
+    "reference_examples": 606,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "uci",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 10,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 606,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "c30f66058a5f6ccbd1af19bfde7afc48aaa99b22b5b37ee441aecea749dd5897"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 616,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "uci",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 10,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 2424,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "c30f66058a5f6ccbd1af19bfde7afc48aaa99b22b5b37ee441aecea749dd5897"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 616,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "skab",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 606,
+        "selected": 606,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "2a99cc49e7815a601d12c256df4e475734908d1d4cc33eaef428730ca9c7cbc3"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 1212,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "skab",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 2424,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 2424,
+        "selected": 2424,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "633902c87f21b13005dc5ab15b10588b0b5082de5311a50e65d300ec19232385"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 3030,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "beihang",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 606,
+        "selected": 606,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "962b6192f2c843abe89c5d33dea8b259c9d68dc288677d034f7441c945eed458"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 1212,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "beihang",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 1536,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 2424,
+        "selected": 1536,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "eef9b55d857de29583ac169acfd515cc54e887f249c8f707d8e4043d08ebac7b"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 2142,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "espset",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 606,
+        "selected": 606,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "fa257d77257ac10d6df693629fdeb121743fcb2b850e02889f6f150edc4e353e"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 1212,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "espset",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 2424,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 2424,
+        "selected": 2424,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "a94cca2c4b931ffd177cdd6133948a2683b4e20c2872ca68369e907b8d6feb12"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 3030,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "all_four",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 465,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 152,
+        "selected": 152,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "dfffeeba09631ca2f4f19cb6c8cf4df20a78ba8ad6ec4e409a395a50448c4ba2"
+      },
+      {
+        "source": "espset",
+        "requested": 152,
+        "selected": 152,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "b5eb6b8f816df43348b7fe6321f05780e3de0f40bdde875e18fb466bd8dc9d16"
+      },
+      {
+        "source": "skab",
+        "requested": 151,
+        "selected": 151,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "0304bbc25754948dd6d682094ba879bc258c982ecbffb10d66f7ee8ba5a73118"
+      },
+      {
+        "source": "uci",
+        "requested": 151,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "c30f66058a5f6ccbd1af19bfde7afc48aaa99b22b5b37ee441aecea749dd5897"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 1071,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "all_four",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 1828,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 606,
+        "selected": 606,
+        "available": 1536,
+        "groups": 2,
+        "ids_sha256": "962b6192f2c843abe89c5d33dea8b259c9d68dc288677d034f7441c945eed458"
+      },
+      {
+        "source": "espset",
+        "requested": 606,
+        "selected": 606,
+        "available": 4801,
+        "groups": 11,
+        "ids_sha256": "fa257d77257ac10d6df693629fdeb121743fcb2b850e02889f6f150edc4e353e"
+      },
+      {
+        "source": "skab",
+        "requested": 606,
+        "selected": 606,
+        "available": 3426,
+        "groups": 30,
+        "ids_sha256": "2a99cc49e7815a601d12c256df4e475734908d1d4cc33eaef428730ca9c7cbc3"
+      },
+      {
+        "source": "uci",
+        "requested": 606,
+        "selected": 10,
+        "available": 10,
+        "groups": 10,
+        "ids_sha256": "c30f66058a5f6ccbd1af19bfde7afc48aaa99b22b5b37ee441aecea749dd5897"
+      }
+    ],
+    "target_channel_examples": 606,
+    "reference_examples": 2434,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pooled_knn",
+    "source": "target_repeat_control",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 606,
+    "reference_examples": 606,
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "target_only",
+    "ratio": 0,
+    "seed": 47,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.014390716329216957
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.0077213626354932785
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "uci",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 606,
+        "selected": 606,
+        "available": 2205,
+        "groups": 606,
+        "ids_sha256": "76ced604ffdab4e6e72f31f3203a06d7ec2916ed08a50d027568870c3a5d0091"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.0010940866777673364
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.015305864624679089
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "uci",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 2205,
+    "parts": [
+      {
+        "source": "uci",
+        "requested": 2424,
+        "selected": 2205,
+        "available": 2205,
+        "groups": 2205,
+        "ids_sha256": "51d4085e15d9e9ac857825eb53ac5fbd9d5c265de9b6fb7377b4ee1d1a2f5067"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 2205,
+      "consumed_distinct_examples": 2205,
+      "final_batch_loss": 0.0012585470685735345
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.015292903408408165
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "skab",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 606,
+        "selected": 606,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "b4981ff512ce7a81dee74a7cf0bdaa6ebbe329c8da5c811810f2dca67ce6301c"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.011910326778888702
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.009780566208064556
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "skab",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 2424,
+    "parts": [
+      {
+        "source": "skab",
+        "requested": 2424,
+        "selected": 2424,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "d6c3f6ed6c9fdaa30a390cd8454901286c6fd5e6d447e0309255683d7941f3f9"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 2424,
+      "consumed_distinct_examples": 2423,
+      "final_batch_loss": 0.013574146665632725
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.009694893844425678
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "beihang",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 606,
+        "selected": 606,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "0790868f4edf86f45bc5a3344588dd15d08e08ee56b8e8b1cd4e56464aea62b2"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.007865730673074722
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.011328025721013546
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "beihang",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 2424,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 2424,
+        "selected": 2424,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "7e9f1dd493d6099a53b1d82d60525f31b23f3763057b2f472141111e88e8e3aa"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 2424,
+      "consumed_distinct_examples": 2423,
+      "final_batch_loss": 0.008250405080616474
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.011293902061879635
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "espset",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 606,
+        "selected": 606,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "46d3558dc0585ad279c8bdbbb9352c57736635ed069e01abb5e254d870a01e73"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.0021382004488259554
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.013027310371398926
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "espset",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 2424,
+    "parts": [
+      {
+        "source": "espset",
+        "requested": 2424,
+        "selected": 2424,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "8cd640675054956c852e6cbd3603cfdde36ec05c05441eb615f29934778869d6"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 2424,
+      "consumed_distinct_examples": 2423,
+      "final_batch_loss": 0.003249717876315117
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.012914953753352165
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "all_four",
+    "ratio": 1,
+    "seed": 47,
+    "external_examples": 606,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 152,
+        "selected": 152,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "f392c102f20bb7fe04ee414a6acedd0eace2a97bcc8bf01d6525c2980b63d055"
+      },
+      {
+        "source": "espset",
+        "requested": 152,
+        "selected": 152,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "c573590b4d3559712777c90b4fc34c602fc68cae5467a86c882b37fe5354447d"
+      },
+      {
+        "source": "skab",
+        "requested": 151,
+        "selected": 151,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "88df92f877cc73513faef0c34b528552f13f8202e34601aae092116d92130f7e"
+      },
+      {
+        "source": "uci",
+        "requested": 151,
+        "selected": 151,
+        "available": 2205,
+        "groups": 151,
+        "ids_sha256": "0b362bff68329b082acbcf936005d1a09c1336fc2202e973e410a8c74310f22c"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.007491211406886578
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.011379647068679333
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "all_four",
+    "ratio": 4,
+    "seed": 47,
+    "external_examples": 2424,
+    "parts": [
+      {
+        "source": "beihang",
+        "requested": 606,
+        "selected": 606,
+        "available": 8448,
+        "groups": 11,
+        "ids_sha256": "0790868f4edf86f45bc5a3344588dd15d08e08ee56b8e8b1cd4e56464aea62b2"
+      },
+      {
+        "source": "espset",
+        "requested": 606,
+        "selected": 606,
+        "available": 6032,
+        "groups": 11,
+        "ids_sha256": "46d3558dc0585ad279c8bdbbb9352c57736635ed069e01abb5e254d870a01e73"
+      },
+      {
+        "source": "skab",
+        "requested": 606,
+        "selected": 606,
+        "available": 4890,
+        "groups": 30,
+        "ids_sha256": "b4981ff512ce7a81dee74a7cf0bdaa6ebbe329c8da5c811810f2dca67ce6301c"
+      },
+      {
+        "source": "uci",
+        "requested": 606,
+        "selected": 606,
+        "available": 2205,
+        "groups": 606,
+        "ids_sha256": "76ced604ffdab4e6e72f31f3203a06d7ec2916ed08a50d027568870c3a5d0091"
+      }
+    ],
+    "target_channel_examples": 606,
+    "pretrain": {
+      "steps": 300,
+      "available_examples": 2424,
+      "consumed_distinct_examples": 2423,
+      "final_batch_loss": 0.007576583418995142
+    },
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.011409926228225231
+    },
+    "reload_exact": true
+  },
+  {
+    "fold": "P2",
+    "method": "pretrained_ae",
+    "source": "target_scratch_reference",
+    "ratio": 0,
+    "seed": 47,
+    "external_examples": 0,
+    "parts": [],
+    "target_channel_examples": 606,
+    "finetune": {
+      "steps": 300,
+      "available_examples": 606,
+      "consumed_distinct_examples": 606,
+      "final_batch_loss": 0.015374869108200073
+    },
+    "reload_exact": true
+  }
+]

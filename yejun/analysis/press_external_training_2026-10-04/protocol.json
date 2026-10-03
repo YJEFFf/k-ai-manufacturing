@@ -1,0 +1,111 @@
+{
+  "question": "Does external TRAINING data improve a detector evaluated on the supplied press data? No external benchmark evaluation or final-model selection.",
+  "status": "registered before this experiment's model outcomes; target and some external outcomes were previously explored",
+  "sources": [
+    "uci",
+    "skab",
+    "beihang",
+    "espset",
+    "all_four"
+  ],
+  "folds": [
+    "P0",
+    "P1",
+    "P2"
+  ],
+  "seeds": [
+    11,
+    29,
+    47
+  ],
+  "external_to_target_channel_example_ratios": [
+    1,
+    4
+  ],
+  "target": {
+    "source": "original competition CSVs, canonical exact-duplicate removal and recording boundaries from master core",
+    "fit": "normal only, existing P0/P1/P2 forward time partitions",
+    "calibration": "same real target normal calibration records in every arm; never augmented",
+    "evaluation": "each fold's later normal records plus all 21 provided abnormal records; same single abnormal episode across folds",
+    "quantization": "existing matched input precision, both classes identically",
+    "unit": "completed recording; no claim about early row detection",
+    "test_independence": "retrospective comparison, NOT a new unseen test; no anomaly labels used in fit, pretraining or thresholds"
+  },
+  "shared_representation": {
+    "type": "16-bin square-root normalized positive-frequency energy distribution per vibration channel",
+    "source_window_samples": 32,
+    "minimum_target_samples": 4,
+    "frequency_axis": "relative to each signal's available frequency range, NOT matched physical Hz",
+    "time_signal": "subtract own window mean, rFFT, discard DC, square magnitudes, integrate frequency-bin mass into 16 equal relative bands, normalize total and take square root",
+    "espset": "use supplied spectrum amplitudes; discard first/DC bin, square magnitudes and apply the same relative-band integration; never reconstruct an unobserved time waveform",
+    "flat_signal": "all-zero feature vector",
+    "physical_limits": "SKAB and UCI are low-rate vibration magnitude/envelope sequences; Beihang and press are waveform-like; ESPset spectra are speed-normalized velocity. Representation compatibility is an empirical transfer hypothesis, not sensor equivalence.",
+    "short_target_record": "retain in denominator; vibration-only view abstains and counts as no alarm; integrated view falls back to the fixed target detector"
+  },
+  "external_usage": {
+    "normal_pool": "UCI all four components nominal AND stable; SKAB every observation unambiguously normal, excluding conflicts; Beihang Healthy state files; ESPset Normal label",
+    "pretraining_pool": "all external vibration examples without using their fault labels as target labels",
+    "skab": "deduplicate shared captures using existing 30-group mapping; split on gaps >1.5 median positive interval within group; preserve label-conflict audit; retain final partial segment/window with >=4 samples because the observed contiguous segments are shorter than 32; fewer than 4 samples excluded from source training only",
+    "beihang": "each axis has its own time-value pair; split time reversals/gaps before nonoverlapping 32-sample windows; at most 256 evenly spaced windows per file/axis; explicitly map the Chinese X/Y/Z vibration header aliases in swashplate bearing bush run 2",
+    "uci": "one 32-sample VS1 window per 60-sample cycle; EPS1 power is never substituted for target current",
+    "sampling": "without replacement; shuffled round-robin across acquisition groups; all_four has equal per-source quotas, unmet quotas not filled by another source",
+    "old_external_reservations": "external files, including formerly reserved groups, are training-only for this separate user-requested experiment; previous results remain preserved and are not re-labelled as unseen tests"
+  },
+  "methods": {
+    "pooled_knn": {
+      "k": 5,
+      "training": "target normal vibration examples plus selected external normal examples",
+      "duplicate_control": "repeat target examples by identity then deduplicate; identical predictions required",
+      "fit_reference_scores": "exclude both vibration channels from the query's own target recording"
+    },
+    "pretrained_ae": {
+      "architecture": [
+        16,
+        12,
+        4,
+        12,
+        16
+      ],
+      "activation": "SiLU, linear output",
+      "loss": "MSE reconstruction",
+      "optimizer": "Adam",
+      "learning_rate": 0.001,
+      "batch_size": 64,
+      "pretrain_steps": 300,
+      "finetune_steps": 300,
+      "pretrain": "selected external unlabeled vibration examples",
+      "finetune": "target fit normal vibration examples only",
+      "compute_control": "same initialization, 300 target-only pretrain steps then 300 target-only finetune steps; reset optimizer between phases for all arms",
+      "scratch_reference": "300 target-only steps",
+      "device": "CPU, one thread, deterministic algorithms"
+    }
+  },
+  "views": {
+    "vibration_only": "maximum of the two channel anomaly scores; all target records retained",
+    "integrated": "maximum of fixed target-only Press Guard v2 score and vibration score converted with fit-only ExpTail; normal calibration rerun identically for every arm; v2 is a fixed reference, not selected as final by this study",
+    "base_reference": "Press Guard v2 refitted on the same P0/P1/P2 fit/cal records"
+  },
+  "metrics": {
+    "primary_alpha": 0.05,
+    "secondary_alpha": [
+      0.01,
+      0.03
+    ],
+    "report": [
+      "F1",
+      "TP",
+      "FP",
+      "FN",
+      "precision",
+      "recall",
+      "AUROC",
+      "AP",
+      "supported_records",
+      "actual_external_examples",
+      "source_groups"
+    ],
+    "threshold": "(1 + number of target calibration scores >= query)/(n_target_cal + 1) <= alpha; ties conservative"
+  },
+  "interpretation": "Report paired differences against the same method's target-only control, seed and fold stability, and the unaugmented fixed base. Do not select the best seed, pool reused abnormal episodes as independent failures, or infer universal unusability from these two transfer routes. No field-generalization claim.",
+  "termination": "Run the registered arms and summarize training utility; no new external validation project, probability head, web UI, or final submission model in this task."
+}
