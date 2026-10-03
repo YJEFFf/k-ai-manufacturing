@@ -1,0 +1,421 @@
+{
+  "completed_utc": "2026-10-03T15:21:41.633958+00:00",
+  "same_environment_new_install": true,
+  "separate_environment": "analysis\\press_plan_execution_2026-10-03\\cache\\cold_env",
+  "cold_full_pipeline_passed": true,
+  "comparisons": [
+    {
+      "file": "augmentation_family_gain.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "augmentation_generation.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "augmentation_loss_cells.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "development_curves.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "development_generation.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "heldout_curves.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "junyong_historical_headline.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "junyong_historical_metrics.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "junyong_window_selection.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "press_common_metrics.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "press_family_pod.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "press_fold_family_pod.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "press_loss_cells.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "press_normal_summary.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "press_normal_timeblocks.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "press_P2_policies.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "press_policy_normal.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "press_policy_ramps.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "press_policy_single_summary.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "probability_metrics.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "skab_cal_contributions.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "skab_dev_bounds.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "skab_dev_changepoints.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "skab_dev_events.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "skab_dev_groups.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "skab_dev_macro.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "skab_dev_pooled.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "skab_development_input.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "skab_test_bounds.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "skab_test_changepoints.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "skab_test_events.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "skab_test_groups.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "skab_test_macro.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "skab_test_pooled.csv",
+      "category": "aggregate_csv",
+      "equal": true
+    },
+    {
+      "file": "heldout_predictions.csv.gz",
+      "category": "prediction_csv_decompressed",
+      "equal": true
+    },
+    {
+      "file": "junyong_common_P2_predictions.csv.gz",
+      "category": "prediction_csv_decompressed",
+      "equal": true
+    },
+    {
+      "file": "press_development_predictions.csv.gz",
+      "category": "prediction_csv_decompressed",
+      "equal": true
+    },
+    {
+      "file": "press_development_synthetic.csv.gz",
+      "category": "prediction_csv_decompressed",
+      "equal": true
+    },
+    {
+      "file": "press_P2_predictions.csv.gz",
+      "category": "prediction_csv_decompressed",
+      "equal": true
+    },
+    {
+      "file": "press_policy_normal_requests.csv.gz",
+      "category": "prediction_csv_decompressed",
+      "equal": true
+    },
+    {
+      "file": "press_policy_single_events.csv.gz",
+      "category": "prediction_csv_decompressed",
+      "equal": true
+    },
+    {
+      "file": "probability_predictions.csv.gz",
+      "category": "prediction_csv_decompressed",
+      "equal": true
+    },
+    {
+      "file": "skab_cal_reference.csv.gz",
+      "category": "prediction_csv_decompressed",
+      "equal": true
+    },
+    {
+      "file": "skab_dev_predictions.csv.gz",
+      "category": "prediction_csv_decompressed",
+      "equal": true
+    },
+    {
+      "file": "skab_dev_requests.csv.gz",
+      "category": "prediction_csv_decompressed",
+      "equal": true
+    },
+    {
+      "file": "skab_test_predictions.csv.gz",
+      "category": "prediction_csv_decompressed",
+      "equal": true
+    },
+    {
+      "file": "skab_test_requests.csv.gz",
+      "category": "prediction_csv_decompressed",
+      "equal": true
+    },
+    {
+      "file": "unknown_predictions.csv.gz",
+      "category": "prediction_csv_decompressed",
+      "equal": true
+    },
+    {
+      "file": "selection.json",
+      "category": "decision_json",
+      "equal": true
+    },
+    {
+      "file": "press_policy_selection.json",
+      "category": "decision_json",
+      "equal": true
+    },
+    {
+      "file": "skab_policy_selection.json",
+      "category": "decision_json",
+      "equal": true
+    },
+    {
+      "file": "probability_heads.json",
+      "category": "decision_json",
+      "equal": true
+    },
+    {
+      "file": "skab_external_claim.json",
+      "category": "decision_json",
+      "equal": true
+    },
+    {
+      "file": "verification.json",
+      "category": "decision_json",
+      "equal": true
+    }
+  ],
+  "passed": 54,
+  "total": 54,
+  "all_equal": true,
+  "before_import_fix_comparisons": [
+    {
+      "file": "augmentation_family_gain.csv",
+      "equal": true
+    },
+    {
+      "file": "augmentation_generation.csv",
+      "equal": true
+    },
+    {
+      "file": "augmentation_loss_cells.csv",
+      "equal": true
+    },
+    {
+      "file": "development_curves.csv",
+      "equal": true
+    },
+    {
+      "file": "development_generation.csv",
+      "equal": true
+    },
+    {
+      "file": "heldout_curves.csv",
+      "equal": true
+    },
+    {
+      "file": "junyong_historical_headline.csv",
+      "equal": true
+    },
+    {
+      "file": "junyong_historical_metrics.csv",
+      "equal": true
+    },
+    {
+      "file": "junyong_window_selection.csv",
+      "equal": true
+    },
+    {
+      "file": "press_common_metrics.csv",
+      "equal": true
+    },
+    {
+      "file": "press_family_pod.csv",
+      "equal": true
+    },
+    {
+      "file": "press_fold_family_pod.csv",
+      "equal": true
+    },
+    {
+      "file": "press_loss_cells.csv",
+      "equal": true
+    },
+    {
+      "file": "press_normal_summary.csv",
+      "equal": true
+    },
+    {
+      "file": "press_normal_timeblocks.csv",
+      "equal": true
+    },
+    {
+      "file": "press_P2_policies.csv",
+      "equal": true
+    },
+    {
+      "file": "press_policy_normal.csv",
+      "equal": true
+    },
+    {
+      "file": "press_policy_ramps.csv",
+      "equal": true
+    },
+    {
+      "file": "press_policy_single_summary.csv",
+      "equal": true
+    },
+    {
+      "file": "probability_metrics.csv",
+      "equal": true
+    },
+    {
+      "file": "skab_cal_contributions.csv",
+      "equal": true
+    },
+    {
+      "file": "skab_dev_bounds.csv",
+      "equal": true
+    },
+    {
+      "file": "skab_dev_changepoints.csv",
+      "equal": true
+    },
+    {
+      "file": "skab_dev_events.csv",
+      "equal": true
+    },
+    {
+      "file": "skab_dev_groups.csv",
+      "equal": true
+    },
+    {
+      "file": "skab_dev_macro.csv",
+      "equal": true
+    },
+    {
+      "file": "skab_dev_pooled.csv",
+      "equal": true
+    },
+    {
+      "file": "skab_development_input.csv",
+      "equal": true
+    },
+    {
+      "file": "skab_test_bounds.csv",
+      "equal": true
+    },
+    {
+      "file": "skab_test_changepoints.csv",
+      "equal": true
+    },
+    {
+      "file": "skab_test_events.csv",
+      "equal": true
+    },
+    {
+      "file": "skab_test_groups.csv",
+      "equal": true
+    },
+    {
+      "file": "skab_test_macro.csv",
+      "equal": true
+    },
+    {
+      "file": "skab_test_pooled.csv",
+      "equal": true
+    }
+  ],
+  "import_fix_preserved_all_numeric_tables": true,
+  "cost_timing_excluded": "Timing is measured separately, not a deterministic value; no eligible tied candidates"
+}

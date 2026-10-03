@@ -1,0 +1,388 @@
+{
+  "checks": [
+    {
+      "check": "frozen_inputs_code_environment_and_artifacts",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "no_candidate_is_not_baseline_adoption",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "original_20000_rows_and_one_duplicate_preserved",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "P2_B1_n",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "P2_B1_tp",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "P2_B1_fp",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "P2_B1_fn",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "P2_B1_tn",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "P2_B1_f1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "P2_B1_precision",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "P2_B1_recall",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "P2_B1_accuracy",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "P2_C1d1_n",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "P2_C1d1_tp",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "P2_C1d1_fp",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "P2_C1d1_fn",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "P2_C1d1_tn",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "P2_C1d1_f1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "P2_C1d1_precision",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "P2_C1d1_recall",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "P2_C1d1_accuracy",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "historical_B1_normal_requests",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "historical_C1d1_normal_requests",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "historical_B1_registered_sensitivity",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "historical_C1d1_registered_sensitivity",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P0_B1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P0_C1d1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P0_K1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P0_A0",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P0_A1_r05_s11",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P0_A2_r05_s11",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P0_A1_r10_s11",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P0_A2_r10_s11",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P0_A1_r05_s29",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P0_A2_r05_s29",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P0_A1_r10_s29",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P0_A2_r10_s29",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P0_A1_r05_s47",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P0_A2_r05_s47",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P0_A1_r10_s47",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P0_A2_r10_s47",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P1_B1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P1_C1d1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P1_K1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P1_A0",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P1_A1_r05_s11",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P1_A2_r05_s11",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P1_A1_r10_s11",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P1_A2_r10_s11",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P1_A1_r05_s29",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P1_A2_r05_s29",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P1_A1_r10_s29",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P1_A2_r10_s29",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P1_A1_r05_s47",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P1_A2_r05_s47",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P1_A1_r10_s47",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "refit_and_reload_P1_A2_r10_s47",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "skab_dev_C_counts",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "skab_dev_C_partials_not_dropped",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "skab_dev_G_counts",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "skab_dev_G_partials_not_dropped",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "skab_test_C_counts",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "skab_test_C_partials_not_dropped",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "skab_test_G_counts",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "skab_test_G_partials_not_dropped",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "development_did_not_open_test",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "external_test_only_after_freeze",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "probability_optimizer_contracts",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "H2_RMS_only_negative_control",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "junyong_read_only",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "junyong_full_metric_grid_reproduced",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "unknown_CSV_all_rows_mapped",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "label_filename_independent_B1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "label_filename_independent_C1d1",
+      "passed": true,
+      "details": null
+    }
+  ],
+  "passed": 74,
+  "total": 74,
+  "all_passed": true,
+  "environment": {
+    "python": "3.14.7",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "numpy": "2.5.3",
+    "pandas": "2.3.3",
+    "scipy": "1.18.1",
+    "sklearn": "1.9.1",
+    "threads": 1
+  },
+  "candidate_admitted": false,
+  "field_validated": false
+}

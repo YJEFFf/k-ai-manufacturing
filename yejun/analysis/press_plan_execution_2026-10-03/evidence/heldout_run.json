@@ -1,0 +1,20 @@
+{
+  "freeze_sha256": "cebd75f8e7e267b6ddb1cbc399b87d2b860957ac048c88f01b6391f27181d8f7",
+  "completed_utc": "2026-10-03T15:17:29.936198+00:00",
+  "abnormal_contract": {
+    "original_rows": 600,
+    "retained_rows": 600,
+    "duplicate_rows": [],
+    "records": 21,
+    "source_mapping_rows": 600
+  },
+  "original_P2_parents": 126,
+  "H1_supported": true,
+  "H2_invariance_passed": true,
+  "no_reselection": true,
+  "compared_press_models": [
+    "B1",
+    "C1d1"
+  ],
+  "no_independent_press_fault_claim": true
+}

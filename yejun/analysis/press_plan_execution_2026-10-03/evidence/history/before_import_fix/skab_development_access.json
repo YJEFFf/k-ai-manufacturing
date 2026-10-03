@@ -1,0 +1,170 @@
+[
+  {
+    "path": "data/anomaly-free/anomaly-free.csv",
+    "role": "fit",
+    "at_utc": "2026-10-03T15:12:54.395705+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/other/5.csv",
+    "role": "fit",
+    "at_utc": "2026-10-03T15:12:54.663950+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/other/1.csv",
+    "role": "cal",
+    "at_utc": "2026-10-03T15:12:54.696282+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/other/12.csv",
+    "role": "fit",
+    "at_utc": "2026-10-03T15:12:54.713708+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/other/13.csv",
+    "role": "fit",
+    "at_utc": "2026-10-03T15:12:54.737120+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/other/14.csv",
+    "role": "fit",
+    "at_utc": "2026-10-03T15:12:54.761640+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/other/2.csv",
+    "role": "cal",
+    "at_utc": "2026-10-03T15:12:54.788366+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/other/3.csv",
+    "role": "cal",
+    "at_utc": "2026-10-03T15:12:54.809466+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/other/4.csv",
+    "role": "cal",
+    "at_utc": "2026-10-03T15:12:54.835535+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/other/6.csv",
+    "role": "fit",
+    "at_utc": "2026-10-03T15:12:54.865928+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/other/7.csv",
+    "role": "dev",
+    "at_utc": "2026-10-03T15:12:54.897907+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/other/8.csv",
+    "role": "fit",
+    "at_utc": "2026-10-03T15:12:54.925020+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/valve1/0.csv",
+    "role": "fit",
+    "at_utc": "2026-10-03T15:12:54.957476+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/valve1/1.csv",
+    "role": "cal",
+    "at_utc": "2026-10-03T15:12:54.989581+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/valve1/12.csv",
+    "role": "fit",
+    "at_utc": "2026-10-03T15:12:55.021741+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/valve1/13.csv",
+    "role": "fit",
+    "at_utc": "2026-10-03T15:12:55.053806+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/valve1/14.csv",
+    "role": "dev",
+    "at_utc": "2026-10-03T15:12:55.085096+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/valve1/15.csv",
+    "role": "dev",
+    "at_utc": "2026-10-03T15:12:55.118919+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/valve1/2.csv",
+    "role": "cal",
+    "at_utc": "2026-10-03T15:12:55.147250+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/valve1/4.csv",
+    "role": "fit",
+    "at_utc": "2026-10-03T15:12:55.175522+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/valve1/5.csv",
+    "role": "fit",
+    "at_utc": "2026-10-03T15:12:55.203926+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/valve1/6.csv",
+    "role": "fit",
+    "at_utc": "2026-10-03T15:12:55.234724+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/valve1/7.csv",
+    "role": "fit",
+    "at_utc": "2026-10-03T15:12:55.266641+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/valve1/8.csv",
+    "role": "fit",
+    "at_utc": "2026-10-03T15:12:55.292999+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/valve1/9.csv",
+    "role": "dev",
+    "at_utc": "2026-10-03T15:12:55.325587+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/valve2/0.csv",
+    "role": "fit",
+    "at_utc": "2026-10-03T15:12:55.358268+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/valve2/1.csv",
+    "role": "cal",
+    "at_utc": "2026-10-03T15:12:55.388624+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/valve2/3.csv",
+    "role": "dev",
+    "at_utc": "2026-10-03T15:12:55.416379+00:00",
+    "purpose": "model_input"
+  }
+]

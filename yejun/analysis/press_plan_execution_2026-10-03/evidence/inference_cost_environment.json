@@ -1,0 +1,9 @@
+{
+  "python": "3.14.7",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "numpy": "2.5.3",
+  "pandas": "2.3.3",
+  "scipy": "1.18.1",
+  "sklearn": "1.9.1",
+  "threads": 1
+}

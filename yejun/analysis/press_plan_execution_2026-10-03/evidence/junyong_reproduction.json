@@ -1,0 +1,28 @@
+{
+  "source_unchanged": true,
+  "source_sha256": {
+    "analysis.py": "d79e94d51a93a13bf7f08bc55ec3ad420779eed1e6e70d5ff92e55f8e2e7307a",
+    "data.py": "f95f3e1fddeeb8f68df3100dad2831d7273cb4e36bbae4a47730ae17d107e594",
+    "diagnosis.py": "828b70771a173d1045bc332d249194c6c7f6065c9c548d85e45c5f35f78a5429",
+    "evaluate.py": "0cd565da0062deb6fd3fb6f012349f598c139e0af09df1eda42af38be41c9abd",
+    "run_all.py": "3e54190db9347cd144388930736b00e34766f659fb808c4ca33ee38304d5d579",
+    "scores.py": "230cf028f9ae69015edcacc947337eaf360ca042991894d9f78e236de787297f",
+    "select_w.py": "418a8c71185794c88aa3a003a2cc5de1fba1bdb14c1b1a2f952925a4c10c4bff",
+    "vendor\\press_policy_audit.py": "4887e4c52bcb9022324225a113d1ca4e54b37a395a0707cd222a72683b4312a0",
+    "vendor\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "cells": 108,
+  "expected_cells": 108,
+  "exact_count_comparison": {
+    "tn": true,
+    "fp": true,
+    "fn": true,
+    "tp": true,
+    "normal_notified_segments": true,
+    "abnormal_notified_segments": true
+  },
+  "max_abs_f1_difference": 1.1102230246251565e-16,
+  "reproduced_at_utc": "2026-10-03T15:17:23.995703+00:00",
+  "own_output_directory": true,
+  "note": "Historical 1%/3%/5% order-statistic thresholds; original 600 normal segments retained here"
+}

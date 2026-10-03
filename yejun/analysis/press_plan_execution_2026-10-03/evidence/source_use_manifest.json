@@ -1,0 +1,41 @@
+{
+  "plan_basis_commit": "d48e8afca6cda51efe5cbf276dea2ddb0972c673",
+  "press": {
+    "source": "https://www.kamp-ai.kr/cptFileDownload",
+    "post_fileSeq": 8079,
+    "integrity": "Original archive SHA-256 plus both original CSV SHA-256 values match the archived protocol",
+    "use": "P0/P1 development, retrospective P2, one already-explored abnormal capture, explicitly synthetic changes",
+    "normal_raw_rows": 20000,
+    "normal_retained_rows": 19999,
+    "normal_records": 599,
+    "abnormal_raw_rows": 600,
+    "abnormal_records": 21,
+    "independent_positive_capture_episodes": 1,
+    "public_git_raw_redistribution": false
+  },
+  "skab": {
+    "source": "https://github.com/waico/SKAB",
+    "revision": "b2c0d46c2971dcbfe71e26087b6d231998bb91c2",
+    "citation": "Katser, Iurii D.; Kozitsin, Vyacheslav O. (2020), Skoltech Anomaly Benchmark (SKAB), doi:10.34740/KAGGLE/DSV/1693952",
+    "license_record": "GPL-3.0 as recorded in the pinned distribution and prior acquisition receipt; original README, data/README and LICENSE retained in local data/skab",
+    "split_groups": {"fit": 14, "dev": 5, "cal": 5, "test": 6},
+    "use": "Separately refit global/conditional structures; original press weights and raw data are not pooled into SKAB",
+    "conflicting_observations_excluded_from_normal_fit_cal": 237,
+    "public_git_raw_redistribution": false,
+    "upstream_model_code_imported": false
+  },
+  "junyong": {
+    "source_directory": "claude/code/press/pipeline",
+    "latest_source_commit": "cee2267",
+    "use": "Read-only original 108-cell reproduction and fixed-window structural comparator on common P2",
+    "source_changed": false,
+    "bytecode_creation_disabled": true,
+    "fixed_w8_was_historically_exploratory": true
+  },
+  "excluded_or_optional": {
+    "Beihang": "Optional auxiliary experiment not executed",
+    "ESPset_UCI_NLN": "No new model experiment in the current contracted scope",
+    "field_validation": "Not performed",
+    "competition_report_slides_submission": "Not performed"
+  }
+}

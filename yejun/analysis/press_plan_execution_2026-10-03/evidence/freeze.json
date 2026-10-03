@@ -1,0 +1,310 @@
+{
+  "frozen_utc": "2026-10-03T15:17:24.631160+00:00",
+  "selected_candidate": null,
+  "comparison_reference": "B1",
+  "press_test_models": [
+    "B1",
+    "C1d1"
+  ],
+  "skab_test_models": [
+    "G",
+    "C"
+  ],
+  "additional_user_requested_comparator": "Junyong_fixed_w8, same P2 fit/cal/record/time/alpha; never selection",
+  "code_sha256": {
+    "claude\\code\\press\\pipeline\\analysis.py": "d79e94d51a93a13bf7f08bc55ec3ad420779eed1e6e70d5ff92e55f8e2e7307a",
+    "claude\\code\\press\\pipeline\\data.py": "f95f3e1fddeeb8f68df3100dad2831d7273cb4e36bbae4a47730ae17d107e594",
+    "claude\\code\\press\\pipeline\\diagnosis.py": "828b70771a173d1045bc332d249194c6c7f6065c9c548d85e45c5f35f78a5429",
+    "claude\\code\\press\\pipeline\\evaluate.py": "0cd565da0062deb6fd3fb6f012349f598c139e0af09df1eda42af38be41c9abd",
+    "claude\\code\\press\\pipeline\\run_all.py": "3e54190db9347cd144388930736b00e34766f659fb808c4ca33ee38304d5d579",
+    "claude\\code\\press\\pipeline\\scores.py": "230cf028f9ae69015edcacc947337eaf360ca042991894d9f78e236de787297f",
+    "claude\\code\\press\\pipeline\\select_w.py": "418a8c71185794c88aa3a003a2cc5de1fba1bdb14c1b1a2f952925a4c10c4bff",
+    "claude\\code\\press\\pipeline\\vendor\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "claude\\code\\press\\pipeline\\vendor\\press_policy_audit.py": "4887e4c52bcb9022324225a113d1ca4e54b37a395a0707cd222a72683b4312a0",
+    "yejun\\analysis\\press_master_validation_2026-10-03\\core.py": "9c97a1f21e1469d8270316e8039a6fec0ef9e32cb9ba7a2abbd95179bdd2ad68",
+    "yejun\\analysis\\press_master_validation_2026-10-03\\run.py": "4ce9c3e0672ad893fd56d742ff7b2c30ab25dd2c3e725eac9b7a909d7b7317d7",
+    "yejun\\analysis\\press_plan_execution_2026-10-03\\benchmark.py": "ebc504e38e3e71316da820d90bb0ba1ca2c7d0a51b9e9ec48205f826902abd5f",
+    "yejun\\analysis\\press_plan_execution_2026-10-03\\common.py": "4b6e7727c229e13e9d4b959f70d0e5c44bdb1a70a3d40d6700ab00c77e8f72eb",
+    "yejun\\analysis\\press_plan_execution_2026-10-03\\compare_junyong.py": "3868d27bf996b3dc47495ca6b6844ee8401f71fe556e23a7406642652d8a36e4",
+    "yejun\\analysis\\press_plan_execution_2026-10-03\\diagnostics.py": "985290e57ab0ce0c78649285975a7d31a0ec14a5e616aaf5132b0b07cf36b908",
+    "yejun\\analysis\\press_plan_execution_2026-10-03\\heldout.py": "dd7b9c005fea96b66a7cae90eacd278c75df30196bbf10ac0825da8faed7efe0",
+    "yejun\\analysis\\press_plan_execution_2026-10-03\\predict.py": "73cf36a1a559b8c9657d90f41c20e4e5c7f001139abc45f87f87ff7fddb8d56a",
+    "yejun\\analysis\\press_plan_execution_2026-10-03\\prepare_data.py": "42eaa617801983298ec88a247c1fb979342bbe32753bde71bf147451c3d02aa7",
+    "yejun\\analysis\\press_plan_execution_2026-10-03\\press.py": "a2a1444dbd071a1c25586eba6b7f1eae96f21b704586bdb26f827a6724648451",
+    "yejun\\analysis\\press_plan_execution_2026-10-03\\run_all.py": "b47ee3381766013d69e45d5c916b9a5eaeda042b0daee73c57b3eff77637d82e",
+    "yejun\\analysis\\press_plan_execution_2026-10-03\\skab.py": "5dda98e1c11b8f6da20fd444700f33d479c14026d3c85002b08827b6967a82f9",
+    "yejun\\analysis\\press_plan_execution_2026-10-03\\test_execution.py": "6f07926e23fc23775492feefa8a36dac6df1e27795fb8ee5c04e39fa47eb0131",
+    "yejun\\analysis\\press_plan_execution_2026-10-03\\verify_results.py": "0bb2cd904722f5db590adac8737acb44ded3b11089eb89cf8e9d9e6f32f75bd1"
+  },
+  "environment": {
+    "python": "3.14.7",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "numpy": "2.5.3",
+    "pandas": "2.3.3",
+    "scipy": "1.18.1",
+    "sklearn": "1.9.1",
+    "threads": 1
+  },
+  "input_sha256": {
+    "data\\press\\outlier_data.csv": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+    "data\\press\\press_data_normal.csv": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+    "data\\skab\\data\\anomaly-free\\anomaly-free.csv": "7641a8742957100ef424dd97adfb3eeab27d4d180645fe2b3c49b7f7146ae9a6",
+    "data\\skab\\data\\other\\1.csv": "3beaf861bdfe9b4f4eff8e7567c1dd3f506fbd0ce667fc9399d04bd2dc70623d",
+    "data\\skab\\data\\other\\10.csv": "72683644f6f17689f619076a66a9ec02cbc0502bd669924c4c33951d1bdad9b0",
+    "data\\skab\\data\\other\\11.csv": "98a2fff3b6516205ae2e12f2dd30d7f08465fe4321a1bd5cf823396985ecb37b",
+    "data\\skab\\data\\other\\12.csv": "b0882efbcf2669223ae78bee61c9f10074a9b2375f0e86b8957ae5ce4aad1e72",
+    "data\\skab\\data\\other\\13.csv": "b3f1da02064d11234836a9fa1a2536bb0d3b6c6998ab60b0b71869b98e94d860",
+    "data\\skab\\data\\other\\14.csv": "c7f361e55397cc9efd4a76b6876111eda79b650d10aeb007342ca5972152eaef",
+    "data\\skab\\data\\other\\2.csv": "951c326bf36366fa7615b8f28d22f80b3878036069a690f42b3e223737a6a8d1",
+    "data\\skab\\data\\other\\3.csv": "f3c19a89f74f62a475c246b9263f161f7a734dd88304de803939cebaa55c7ebd",
+    "data\\skab\\data\\other\\4.csv": "56ca23f4eb61d1347d079eb9a35c60a59b8b64e160c00dd0c2ec69e0df0b2a4b",
+    "data\\skab\\data\\other\\5.csv": "7347b326df3a92c0810c69add0e5621939af7a1c1cb4755081d088e72d36920f",
+    "data\\skab\\data\\other\\6.csv": "eb8f05622a62c855040ea358b87be35fb1a4a3720ba0610569bab384db4b6e04",
+    "data\\skab\\data\\other\\7.csv": "1bee14f49bfc817ba2c335fb427baa71153d8f8ab52e72652f15f74e4b77daec",
+    "data\\skab\\data\\other\\8.csv": "12c138ed99c198e0a7ece886fe01bfd16bbdde206fad6c5d74322b6b9d6488d0",
+    "data\\skab\\data\\other\\9.csv": "11c4514b0bc706acff637fea6707ad9258ac878fe9dff3d0b11d2b618d94d8ea",
+    "data\\skab\\data\\valve1\\0.csv": "16af3f71313a23dd33d9b7b8065d836d05c3f9257588881cc7fbe07c076d9dc8",
+    "data\\skab\\data\\valve1\\1.csv": "fe4493bf805baef4e6dfb864094275d8cc2ea80a16b3735e2752b18b6aefd812",
+    "data\\skab\\data\\valve1\\10.csv": "ee16be8e4b870c779491e3d1dc9e0ecbfaf29eb013e032abff7a33f2cbbfe2ad",
+    "data\\skab\\data\\valve1\\11.csv": "89660fae4ed5c918db014409bbbc29f498fd99c7e956fab2620d18dea700a973",
+    "data\\skab\\data\\valve1\\12.csv": "90adfa9bc86d4556e6a4ce734436fd5685af79c189cd9828f8df75a7f468ce07",
+    "data\\skab\\data\\valve1\\13.csv": "d6cb6a97437215d3066a87e1fcc5fa4e68017629c043c5315920e3cf1060841c",
+    "data\\skab\\data\\valve1\\14.csv": "5f0bb9bc33c5e6c259263e32e25915c4d24c82b0a94554d48808626da05c1d71",
+    "data\\skab\\data\\valve1\\15.csv": "75cc86ab25d7091eee024739fa06d048753480d5d7d1507077231cab4f1b7a7e",
+    "data\\skab\\data\\valve1\\2.csv": "90492413469261886c8896c327241448df5da73fd7739cabfec8dd82de3c0ce4",
+    "data\\skab\\data\\valve1\\3.csv": "cb6afea108eddfd8447307e405f86bbb764b8d8e9130d7849a46e1303e19b8b2",
+    "data\\skab\\data\\valve1\\4.csv": "983aed9dc09991a57911091373c580e1b86d06aa983cd51678f108fd8d709654",
+    "data\\skab\\data\\valve1\\5.csv": "78974991ec87b7f9b9b6b2944f4b525468a9beb36c59b06cd7650d9a15eca14a",
+    "data\\skab\\data\\valve1\\6.csv": "97469c0e0c9c0e0ee5d30794f1f36c6785df5816a112a8b16c59637e8c894685",
+    "data\\skab\\data\\valve1\\7.csv": "ca2c9c6d6fa302c642acec6fbedac495bd12fececeee0a755d45a54e340e0f30",
+    "data\\skab\\data\\valve1\\8.csv": "0c4afb92248b5b35b4c9d734a91ed8318346901f04579074903730569e60416c",
+    "data\\skab\\data\\valve1\\9.csv": "2aa1ae1b2ff505caecda24802b877dc686924bbbeeb7e7db4faa261efb5ed5bd",
+    "data\\skab\\data\\valve2\\0.csv": "a6670e7a68c7c6ba62c649bd9d350633e80db624578e9529f2b736ced5e32bde",
+    "data\\skab\\data\\valve2\\1.csv": "b35d27f664eb0851ab73e5eb06633404c7eeaf532edff7e40c68eb9379f2012b",
+    "data\\skab\\data\\valve2\\2.csv": "2c3005cf28b88db715b7f4694e826ff252cba4dbb1eba679b040961f80477e60",
+    "data\\skab\\data\\valve2\\3.csv": "86927555d5c523e587d41500bd5dee4e2468289ec1b988ac17755aeae697d7f8"
+  },
+  "protocol_and_selection_sha256": {
+    "yejun\\plans\\press_master_2026-10-03\\protocol.json": "daedfe0705d0a2f0d12fced334e195c4c3643a095e92d9c88f766fd398ad38b8",
+    "yejun\\plans\\press_master_2026-10-03\\execution_contracts.json": "3e50805208759ee67e454edf31e4ba3fed6d60b82f6ce4f212fc50912b1752be",
+    "yejun\\plans\\press_master_2026-10-03\\execution_revision.json": "4c9bf812ce905ce8e1885e4c0fb938b3d8750e2c302006291f1c2677a0f905a5",
+    "yejun\\plans\\press_master_2026-10-03\\evidence\\skab_group_reservation.json": "933a174d9e24c7aa78a9df8c1ebfb3007195d2484f641c870914a83d43a2d83c",
+    "yejun\\plans\\press_master_2026-10-03\\evidence\\skab_label_consistency.json": "4fd920bd4637b669e560bc8c1bd967472661d2fc80ec0c8026c2c78ec490df92",
+    "yejun\\analysis\\press_plan_execution_2026-10-03\\evidence\\selection.json": "cb7adc2284db91bed85ae6516fb8f70f7467e320cea8acce85bc05579fb88361",
+    "yejun\\analysis\\press_plan_execution_2026-10-03\\evidence\\press_policy_selection.json": "e0d3ed985bebe1a4acfe9cd9bfc6ded1309fe33d32a22c826e08c4e4ac2e399a",
+    "yejun\\analysis\\press_plan_execution_2026-10-03\\evidence\\skab_policy_selection.json": "ee5f2806964bc0cfb22594fa7b708f752cb688740e5084d616f2cbe3e2c3e252",
+    "yejun\\analysis\\press_plan_execution_2026-10-03\\evidence\\probability_heads.json": "f56e54d09d54257652e120aa3f5367c5db963bc88f648606034a8148cb0e5084"
+  },
+  "artifact_sha256": {
+    "artifacts\\press_frozen.pkl": "8041252c9ce774454c72f3ce005619323ba0e2513b4fbe451dd1093981fbeb4a",
+    "artifacts\\skab.pkl": "40ea82035d684df37b1b50f1cc54962c57016126ab8984984bc0b98a25b9b624",
+    "artifacts\\probability.pkl": "42f9b8768ab40310754e05af54f5d1789e5cee59ac21288735417139dfd3523a",
+    "artifacts\\press_development.pkl": "caaa1dc932b0585c2f6d1ca3e4d747e1601edb7f01e721827cb05240e1f50129"
+  },
+  "seed": 11,
+  "alpha": 0.05,
+  "heldout_generators": {
+    "existing_development_and_loss": "unchanged design_v1, including fit-only scales and all-parent conservative POD",
+    "unsupported_nonzero": "keep full parent denominator, detection=0; supported-only supplementary",
+    "single_parent_policy_deadline": "changed parent decision_available_time",
+    "T1": {
+      "lengths": [
+        20,
+        60
+      ],
+      "amplitudes": [
+        0,
+        0.25,
+        0.5
+      ],
+      "targets": [
+        0,
+        1
+      ],
+      "shape": "preserve DC, AC *= 1+a*j/(L-1)",
+      "windows": "nonoverlapping from evaluation start independently for each L",
+      "gap_limit_seconds": 30,
+      "incomplete_window": "unsupported",
+      "replay": "one changed window in original full stream per scenario",
+      "start": "first sample of second changed record",
+      "deadline": "last changed record decision_available_time",
+      "stochastic": false
+    },
+    "H1": {
+      "fit": "P2 fit only",
+      "parents": "P2 evaluation after freeze",
+      "minimum_n": 20,
+      "fft_n": 512,
+      "power_range": [
+        0.01,
+        0.49
+      ],
+      "fit_tone": "one maximum normalized-mean-power frequency per vibration channel, lowest-frequency tie",
+      "candidate_frequencies": [
+        0.1,
+        0.25,
+        0.4
+      ],
+      "avoid_within": 0.02,
+      "test_all_remaining_frequencies": true,
+      "amplitudes": [
+        0,
+        0.1,
+        0.25,
+        0.5,
+        1
+      ],
+      "seeds": [
+        101,
+        211,
+        307
+      ],
+      "shape": "demeaned seeded-phase sine normalized RMS, existing fit-only reference scale",
+      "phase_distribution": "Uniform[0,2*pi)"
+    },
+    "H2": {
+      "parents": "P2 evaluation after freeze",
+      "minimum_n": 20,
+      "phase_radians": [
+        "0",
+        "-pi/3",
+        "-pi/6",
+        "pi/6",
+        "pi/3"
+      ],
+      "targets": [
+        0,
+        1
+      ],
+      "preserve_DC": true,
+      "preserve_even_Nyquist": true,
+      "rotate_last_bin_when_odd": true,
+      "inverse_length": "original n",
+      "preserves": "AC RMS and Fourier magnitudes, not peak",
+      "minimum_rotatable_energy_fraction": 1e-12,
+      "relative_tolerance": 1e-10,
+      "absolute_tolerance_factor": 1e-12,
+      "stochastic": false,
+      "expected_RMS_only_model_behavior": "invariant score, report negative control rather than new sensitivity",
+      "selection_use": false,
+      "numerical_boundary": "preserve raw prediction, do not count within-tolerance score jitter crossing a tie as new phase sensitivity"
+    },
+    "heldout_rng": "compact ensure_ascii JSON([heldout,P2,parent_key,H1,target,frequency_string,seed]) SHA256 first 8 bytes little-endian -> PCG64; frequency_string in 0.10/0.25/0.40; amplitude excluded"
+  },
+  "label_event_denominators": {
+    "reservation": "evidence/skab_group_reservation.json",
+    "conflicts": "evidence/skab_label_consistency.json",
+    "group_counts": {
+      "fit": 14,
+      "dev": 5,
+      "cal": 5,
+      "test": 6
+    },
+    "samples_per_block": 20,
+    "overlap": false,
+    "interval_estimator": "median of fit-group medians of positive timestamp differences",
+    "gap_multiplier": 1.5,
+    "block_anchor": "first observation after every gap",
+    "completion": "last sample arrival",
+    "partial_blocks": "abstain and retain coverage/burden/bounds",
+    "normal_fit_cal": "complete finite all-normal nonconflicting blocks",
+    "features": [
+      "log median V0_RMS",
+      "log median V1_RMS",
+      "log abs(median Current)",
+      "log MAD Current"
+    ],
+    "log_floor_fraction": 1e-06,
+    "center": "median",
+    "scale": [
+      "1.4826 MAD",
+      "IQR/1.349",
+      "omit"
+    ],
+    "conditional_degree": 1,
+    "ridge_mean_loss_penalty": 0.001,
+    "intercept_penalized": false,
+    "minimum_trimmed_fit_parents": 30,
+    "condition_quantiles": [
+      0.01,
+      0.99
+    ],
+    "constant_current_block_is_automatically_error": false,
+    "negative_rms_is_error": true,
+    "calibration_weighting": "one equal weight per pooled real normal cal block",
+    "alpha_guarantee": false,
+    "label_interval": "row min/max observed anomaly; block max lower/max upper; missing or invalid row=(0,1)",
+    "primary_metrics": "unambiguous conflict-free blocks plus full-block bounds",
+    "events": "nonconflicting 0-to-1 onset and contiguous 1 run within same continuous segment",
+    "event_deadline": "last positive raw observation",
+    "late_detection": "separate through first completed block after event",
+    "changepoint": "separate diagnostic, never move annotation",
+    "group_aggregation": [
+      "pooled blocks",
+      "individual groups",
+      "equal group mean with available denominators and exclusions"
+    ],
+    "external_improvement_claim": "no group normal-rate worsening, no lost confirmed event, no common-event latency worsening, at least one strict improvement; undefined required comparison means not_established",
+    "normal_label_exception": {
+      "source_path": "data/anomaly-free/anomaly-free.csv",
+      "sha256": "7641a8742957100ef424dd97adfb3eeab27d4d180645fe2b3c49b7f7146ae9a6",
+      "anomaly": 0,
+      "changepoint": 0,
+      "basis": "pinned data/README normal-mode description; never overrides overlapping conflicting annotation"
+    },
+    "right_censored_event": "known onset eligible for detection by observation-end; report separately from completed events; not eternal missed fault",
+    "left_censored_or_ambiguous_onset": "exclude from new-onset recall, retain counts and observed reaction",
+    "K1_mapping": "use G/C scores and SKAB current-level gate; no press sinusoid gate"
+  },
+  "claim_rules": {
+    "reference": "B1",
+    "augmentation_effect_reference": "A0",
+    "historical_failed_candidates_reentered": false,
+    "minimum_normal_reduction": 3,
+    "maximum_ten_minute_increase": 1,
+    "minimum_gain_pp": 10,
+    "minimum_improved_families": 2,
+    "maximum_loss_pp": 5,
+    "minimum_distinct_supported_parents": 20,
+    "augmentation_each_seed_must_pass": true,
+    "indeterminate_cell_passes": false,
+    "rate_tolerance": 1e-10,
+    "eligible_order": [
+      "normal_requests_ascending",
+      "minimum_family_POD_descending",
+      "fixed_complexity_rank",
+      "numeric_state_elements",
+      "reference_bytes",
+      "median_inference_time",
+      "candidate_id_lexical"
+    ],
+    "complexity_rank": {
+      "B1": 0,
+      "A0": 1,
+      "K1": 2,
+      "A2": 3
+    },
+    "cost": {
+      "threads": 1,
+      "warmup_sweeps": 5,
+      "measured_sweeps": 20,
+      "input": "fixed ordered development records",
+      "include_features": true,
+      "include_disk_io": false
+    },
+    "no_candidate": {
+      "selected_candidate": null,
+      "comparison_reference": "B1",
+      "improvement_established": false,
+      "continue_fixed_reference_audits": true,
+      "restore_v2": false
+    },
+    "augmented_normal_order": "exact integer sum across training seeds divided by 3"
+  },
+  "augmentation_lineage_sha256": "990cba8e0cd290d1792436e047cc4034c4d64ed911b8da556b164a3a39e1bc88",
+  "heldout_lineage": [],
+  "test_reselection_allowed": false,
+  "P2_is_already_explored": true,
+  "press_abnormal_independent_episodes": 1,
+  "external_test_performance_opened": false
+}

@@ -1,0 +1,12 @@
+{
+  "improvement_established": false,
+  "checks": {
+    "normal_denominators_complete": true,
+    "all_groups_have_confirmed_events": true,
+    "normal_rate_nonincreasing": false,
+    "no_lost_event": true,
+    "latency_nonincreasing": true,
+    "at_least_one_strict": false
+  },
+  "qualification": "Other SKAB capture groups; not independent press faults"
+}

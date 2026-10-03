@@ -1,0 +1,11 @@
+fold,family,scenarios,supported,I0_detected,P23_detected,lost,max_extra_decisions
+P0,amplitude_decrease,2826,2802,903,66,903,
+P0,band_noise,1884,1836,35,0,35,
+P0,compound_unavailable,3768,3672,2651,312,2651,
+P0,current_residual,942,906,89,9,89,
+P0,damped_impulse,1884,1860,99,1,99,
+P1,amplitude_decrease,2808,2760,807,51,807,
+P1,band_noise,1872,1800,39,0,39,
+P1,compound_unavailable,3744,3600,2635,264,2635,
+P1,current_residual,936,882,149,2,149,
+P1,damped_impulse,1872,1824,102,0,102,

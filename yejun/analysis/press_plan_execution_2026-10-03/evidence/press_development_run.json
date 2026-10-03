@@ -1,0 +1,22 @@
+{
+  "input": {
+    "original_rows": 20000,
+    "retained_rows": 19999,
+    "duplicate_rows": [
+      11565
+    ],
+    "records": 599,
+    "source_mapping_rows": 20000
+  },
+  "completed_utc": "2026-10-03T15:16:46.683255+00:00",
+  "runtime_s": 27.8377147000283,
+  "A1_identity_rows": 276066,
+  "synthetic_rows": 736176,
+  "K1_conditional_cal": {
+    "P0": 49,
+    "P1": 106
+  },
+  "source_rows_preserved": true,
+  "P2_used_for_selection": false,
+  "provided_abnormal_used_for_selection": false
+}

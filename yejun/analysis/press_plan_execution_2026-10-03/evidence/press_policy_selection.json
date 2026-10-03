@@ -1,0 +1,23 @@
+{
+  "model": "B1",
+  "policy": "I0",
+  "checks": {
+    "reduces_tickets": true,
+    "no_fold_ticket_increase": true,
+    "no_fold_occupancy_increase": true,
+    "single_no_lost_event": false,
+    "ramp_no_lost_event": false,
+    "single_delay_cap": true,
+    "ramp_delay_cap": false,
+    "supported_each_fold": true,
+    "external_counterexamples_pass": true
+  },
+  "single_events": 22536,
+  "single_supported": 21942,
+  "single_lost": 7509,
+  "ramp_scenarios": 132,
+  "ramp_supported": 108,
+  "ramp_lost": 47,
+  "ramp_zero_controls": 44,
+  "not_a_field_delay_SLA": true
+}

@@ -1,0 +1,16 @@
+{
+  "pre_holdout_corrections": [
+    "Unit tests caught an H2 mutable NumPy view that made generated change appear zero. Copy the original channel before mutation.",
+    "Unit tests caught floating-point weighted variance on an exactly constant score. Detect exact constant input before optimization.",
+    "Policy delay counts valid decisions, and zero-amplitude T1 controls are excluded from changed-event admission checks."
+  ],
+  "post_holdout_correction": {
+    "id": "E6-IMPORT-001",
+    "discovered_after_first_model_test": true,
+    "failure": "Legacy directory at sys.path[0] shadowed the new verify_results.py; orchestration stopped before E6.",
+    "fix": "Append the legacy directory so current package modules retain precedence; add entrypoint regression test.",
+    "model_or_selection_algorithm_changed": false,
+    "preserved_results": "history/before_import_fix/",
+    "required_rerun": "All current development, frozen comparisons and verification; compare prior numeric tables; no candidate reselection based on test."
+  }
+}

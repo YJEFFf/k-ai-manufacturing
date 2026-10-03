@@ -1,0 +1,32 @@
+{
+  "C": {
+    "policy": "P23",
+    "checks": {
+      "reduces_normal_tickets": true,
+      "normal_tickets_nonincreasing": true,
+      "normal_occupancy_s_nonincreasing": true,
+      "normal_ticket_upper_nonincreasing": true,
+      "possible_normal_occupancy_s_nonincreasing": true,
+      "has_confirmed_event": true,
+      "no_lost_event": true,
+      "at_most_one_extra_decision": true
+    },
+    "events": 5,
+    "lost_events": 0
+  },
+  "G": {
+    "policy": "P23",
+    "checks": {
+      "reduces_normal_tickets": true,
+      "normal_tickets_nonincreasing": true,
+      "normal_occupancy_s_nonincreasing": true,
+      "normal_ticket_upper_nonincreasing": true,
+      "possible_normal_occupancy_s_nonincreasing": true,
+      "has_confirmed_event": true,
+      "no_lost_event": true,
+      "at_most_one_extra_decision": true
+    },
+    "events": 5,
+    "lost_events": 0
+  }
+}

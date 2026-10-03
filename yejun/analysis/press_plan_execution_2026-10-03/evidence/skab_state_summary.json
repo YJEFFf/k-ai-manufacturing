@@ -1,0 +1,14 @@
+{
+  "dt": 1.0,
+  "normal_fit": 456,
+  "normal_cal": 105,
+  "conditional_fit": 446,
+  "conditional_available": true,
+  "conflicting_observations": 237,
+  "groups": {
+    "fit": 14,
+    "dev": 5,
+    "cal": 5
+  },
+  "test_opened": false
+}

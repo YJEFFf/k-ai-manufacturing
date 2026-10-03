@@ -1,0 +1,44 @@
+[
+  {
+    "path": "data/other/10.csv",
+    "role": "test",
+    "at_utc": "2026-10-03T15:14:07.733963+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/other/11.csv",
+    "role": "test",
+    "at_utc": "2026-10-03T15:14:07.768391+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/other/9.csv",
+    "role": "test",
+    "at_utc": "2026-10-03T15:14:07.799386+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/valve1/10.csv",
+    "role": "test",
+    "at_utc": "2026-10-03T15:14:07.830941+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/valve1/11.csv",
+    "role": "test",
+    "at_utc": "2026-10-03T15:14:07.863908+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/valve1/3.csv",
+    "role": "test",
+    "at_utc": "2026-10-03T15:14:07.895446+00:00",
+    "purpose": "model_input"
+  },
+  {
+    "path": "data/valve2/2.csv",
+    "role": "test",
+    "at_utc": "2026-10-03T15:14:07.925721+00:00",
+    "purpose": "model_input"
+  }
+]

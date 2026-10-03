@@ -1,0 +1,11 @@
+model,metric,equal_group_mean,groups_available,groups_undefined,exclusion_reason
+C,f1,0.15340852130325816,5,0,zero required denominator
+C,precision,0.6666666666666666,4,1,zero required denominator
+C,recall,0.1020102990691226,5,0,zero required denominator
+C,normal_tickets_per_100,68.55030619331214,5,0,zero required denominator
+C,event_recall,0.0,5,0,zero required denominator
+G,f1,0.029166666666666664,5,0,zero required denominator
+G,precision,0.1875,4,1,zero required denominator
+G,recall,0.016233766233766232,5,0,zero required denominator
+G,normal_tickets_per_100,69.72243734085313,5,0,zero required denominator
+G,event_recall,0.0,5,0,zero required denominator

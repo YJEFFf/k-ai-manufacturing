@@ -1,0 +1,7 @@
+{
+  "created_utc": "2026-10-03T15:28:56.970859+00:00",
+  "source_sha256": "2b27bea3d3036f8c735a959b9742d9e7872ab4ac2b1eeb6cea2fa43c56d0b23c",
+  "scope": "Route/calibration contribution aggregation and separate probability diagnostic threshold; no model changes",
+  "frozen_artifacts_unchanged": true,
+  "selected_candidate": null
+}
