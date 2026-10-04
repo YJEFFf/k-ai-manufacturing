@@ -1,0 +1,97 @@
+{
+  "f_true_assumption": "참 주파수 60±f_a Hz(전원 앨리어싱), 기본 f_a+60. 데이터로 검증되지 않음(diagnosis.md)",
+  "sigma0_equals_clean": true,
+  "sigma0_equals_clean_by_kind": {
+    "jitter": true,
+    "jitter_sign_flip": true,
+    "jitter_control_no_alias": true
+  },
+  "nominal_resample_identity_maxabs": {
+    "f_a+60": 6.356515314109856e-11,
+    "60-f_a": 5.5784710184525466e-11
+  },
+  "nominal_resample_identity_ok": true,
+  "affine_sine_misfit_maxabs_diff": 1.4751394550316377e-13,
+  "affine_sine_misfit_invariant": true,
+  "affine_sine_alarms_equal_clean": true,
+  "model_comparison_found": true,
+  "clean_fused_matches_model_comparison": true,
+  "alias_f_long_median": 0.6,
+  "alias_f_long_range": [
+    0.365,
+    0.63
+  ],
+  "short_segments": 11,
+  "segments_shorter_than_w": 6,
+  "f_short": 0.6,
+  "tolerance_sigma_ms": {
+    "jitter": {
+      "fused_acat@0.01": 0.1,
+      "fused_acat@0.05": 0.1,
+      "sine_only@0.01": 0.1,
+      "sine_only@0.05": 0.1
+    },
+    "jitter_sign_flip": {
+      "fused_acat@0.01": 0.1,
+      "fused_acat@0.05": 0.1,
+      "sine_only@0.01": 0.1,
+      "sine_only@0.05": 0.1
+    },
+    "jitter_control_no_alias": {
+      "fused_acat@0.01": null,
+      "fused_acat@0.05": null,
+      "sine_only@0.01": null,
+      "sine_only@0.05": 3.0
+    }
+  },
+  "tolerance_sigma_ms_fine": {
+    "jitter": {
+      "fused_acat@0.01": 0.1,
+      "fused_acat@0.05": 0.1,
+      "sine_only@0.01": 0.05,
+      "sine_only@0.05": 0.05
+    },
+    "jitter_sign_flip": {
+      "fused_acat@0.01": 0.1,
+      "fused_acat@0.05": 0.1,
+      "sine_only@0.01": 0.05,
+      "sine_only@0.05": 0.05
+    },
+    "jitter_control_no_alias": {
+      "fused_acat@0.01": null,
+      "fused_acat@0.05": null,
+      "sine_only@0.01": null,
+      "sine_only@0.05": 3.0
+    }
+  },
+  "tolerance_note": "NaN/null = 격자(σ≤3ms) 안에서 α를 넘지 않음",
+  "jitter_mixed_reps": [
+    {
+      "model": "fused_acat",
+      "alpha": 0.01,
+      "sigma_ms": 0.05,
+      "mean_segments": 0.8,
+      "max_fraction": 0.016666666666666666,
+      "reps_exceeding_alpha": 1,
+      "exceeds_alpha_mean": false
+    },
+    {
+      "model": "fused_acat",
+      "alpha": 0.05,
+      "sigma_ms": 0.05,
+      "mean_segments": 5.6,
+      "max_fraction": 0.075,
+      "reps_exceeding_alpha": 2,
+      "exceeds_alpha_mean": false
+    }
+  ],
+  "all_passed": true,
+  "checked": [
+    "sigma0_equals_clean",
+    "nominal_resample_identity_ok",
+    "affine_sine_misfit_invariant",
+    "affine_sine_alarms_equal_clean",
+    "clean_fused_matches_model_comparison"
+  ],
+  "seconds": 28.8
+}

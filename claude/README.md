@@ -3,7 +3,14 @@
 제6회 K-인공지능 제조데이터 분석 경진대회(일반국민/대학(원)생) 준비 중 Claude Code로 진행한 분석입니다.
 예준님(Codex) 작업과 섞이지 않게 이 폴더에만 둡니다.
 
-> **최신 (10/4) — train/valid/test 분석과 보고서 계획:** [`code/press/tvt/README.md`](code/press/tvt/README.md), [`report/plan_report_v4.md`](report/plan_report_v4.md).
+> **최신 (10/4) — 제출 코드 패키지와 결과보고서 v5**
+> - 제출 코드: [`submission/package_files/README.md`](submission/package_files/README.md). 압축을 풀고 `python run_all.py` 하나로 전처리 → 학습 → test 예측 → 보고서 수치 19개 대조까지 돈다
+> - 새 가상환경(파이썬 3.13, 패키지 판 고정)에서 전체 실행해 19/19 일치, 약 56분. `--quick`은 약 13분
+> - zip 만들기: `python claude/submission/make_package.py --repo .` (레포 루트에서. 원본 CSV 2개를 `claude/data/3_소성가공_예지보전/`에 먼저 넣는다)
+> - 보고서 원고: [`report/final_v5.md`](report/final_v5.md), 판단 기록: [`report/logs/decision_log_v5.md`](report/logs/decision_log_v5.md)
+> - 코드는 동작을 바꾸지 않고 줄이고 한글 주석을 달았다(고치기 전후 산출물 해시 같음)
+>
+> **train/valid/test 분석과 보고서 계획 (10/3~4):** [`code/press/tvt/README.md`](code/press/tvt/README.md), [`report/plans/plan_report_v4.md`](report/plans/plan_report_v4.md).
 > - 예준 v1·v2·v3·베이스라인과 규칙 R1(사건 지속)·R2(교차 확인)를 같은 분할에서 비교했다
 > - valid에서 선택을 해시로 잠근 뒤 test를 채점했다. 잠금 규칙이 고른 v2+R1은 A 1.000·B 0.9954다
 > - 최종 v2+R1+R2(valid 공동 1위 3개 중 가장 단순, test 확인 후 결정)는 A·B 1.000이다
@@ -41,6 +48,9 @@
 | `code/press/` | ③ 프레스 탐색 스크립트 05~07 (결과는 `code/press/outputs/`, 큰 CSV 제외) |
 | `notes/프레스_결과요약_보고서용.md` | 보고서 장별 수치·문장 |
 | `notes/프레스_실행계획_2026-09-23.md` | 파이프라인 계획 (Architect·Critic 리뷰 3회 반영) |
+| `code/press/tvt/` · `code/press/domain/` | ③ 프레스 train/valid/test 모델 · 사후 분석 01~06 |
+| `submission/` | 제출 코드 패키지 재료(`package_files/`)와 zip 만드는 스크립트 |
+| `report/` | 보고서 원고 `final_v5.md`, 그림·조립·검증 스크립트, `drafts/`·`plans/`·`logs/` |
 | `code/` | ② 용접 분석 파이프라인 (01~04 + 공통 모듈 `wlib.py`) |
 | `code/outputs/` | 실행 결과 보고서(`*_report.md`)·그림·요약. 큰 CSV는 제외(재실행하면 생김) |
 | `data/` | 원본 데이터 자리 (git에 올리지 않음) |

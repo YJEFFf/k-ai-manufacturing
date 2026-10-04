@@ -1,33 +1,9 @@
-"""신호 물리 점검 — 표본 간격(앨리어싱), 진동 저주파 스펙트럼, 상·하부 위상, 진동 SD의 의미,
-부하–진동 관계, 수집 구조.
+"""신호 물리 점검: 표본 간격(앨리어싱), 진동 저주파 스펙트럼·상하부 위상, 진동 SD의 의미, 부하–진동 관계, 수집 구조.
 
-목적
- 1. 전류(펌프 모터 전력선, 60 Hz 교류 순시값 추정)의 겉보기 사인 주파수 f_a로 실제 표본 간격을 역산한다.
-    60 Hz를 fs로 찍으면 f_a = |60 − 6·fs|. 계통이 정확히 60 Hz라면 표본 간격 후보 2개, 반대로 fs가 정확히
-    10 Hz라면 필요한 계통 주파수(60 ± f_a)를 계산해 계통 허용 범위(60±0.2 Hz, '가정')와 비교한다.
-    기록 안 타임스탬프 간격이 정말 0.100 s인지, 이상 기록에서도 같은 추정이 가능한지(R² ≥ 0.9) 본다.
- 2. 진동(상부 AI0·하부 AI1) 저주파 스펙트럼: 기록 안에서만 Hann 창 periodogram(0.2 Hz 격자),
-    정상/이상 평균 PSD, 대역 에너지 비율, 이상 기록의 우세 주파수, 정상의 백색성(평탄도) 검사.
- 3. 상·하부 위상: 기록별 상관 분포, 기록 앙상블 평균 교차 스펙트럼으로 위상차·coherence.
- 4. 진동 SD의 의미: 안티앨리어싱 없는 10 Hz 점 표본이면 표본 분산 ≈ 원 진동 전체 분산(RMS²)이라는 점을
-    길이별 안정성·반분 일치도·첨도로 점검. 정상 대비 이상 SD 배수(중앙값 기준).
- 5. 부하–진동: 전류 사인 진폭(cases/common.sine_fit)·전류 RMS(std)를 부하 대리변수로, 정상 학습 기록
-    (분할 A 0~359)에서 log 진동 SD ~ log 전류 회귀(OLS, 단조 회귀) → 검증·시험·이상 기록 잔차를 정상 잔차 SD
-    단위(z)로 표시.
- 6. 수집 구조: 기록 길이·공백·시작-시작 간격 분포, 자기상관, 주기 고정(위상 잠금) 검사, 측정 비율.
-
-입력
- - cases/common.py 의 load_both(matched=True): 두 파일 저장 정밀도를 맞춘 자료(형식 누수 제거).
-   열 TimeStamp, AI0_Vibration(상부), AI1_Vibration(하부), AI2_Current, rec(기록 번호), pos, t.
-
-출력 (domain/outputs/)
- - 01_signal_physics.json          : 항목 1~6 전체 수치
- - 01_signal_physics_records.csv   : 기록별 표(겉보기 주파수·R²·진동 SD·전류 진폭/RMS·부하 정규화 z 등)
- - 01_signal_physics_psd.csv       : 0~5 Hz 0.2 Hz 격자 평균 PSD(정상/이상 × 상/하부)와 교차 스펙트럼 위상·coherence
- - 01_signal_physics_summary.md    : 요약(별도 작성)
-
+입력은 cases/common.load_both(matched=True)로 읽은 정상·이상 원자료(저장 정밀도를 맞춘 것)다.
+출력은 domain/outputs/01_signal_physics.json, _records.csv(기록별 표), _psd.csv(평균 PSD·위상)이고 _summary.md는 따로 썼다.
+보고서 1.4·1.5·2.2절의 근거다. test 채점 이후의 사후 분석이며 백색잡음 모의는 seed 0.
 실행: PYTHONIOENCODING=utf-8 python code/press/domain/01_signal_physics.py
-무작위 요소(백색잡음 기준 모의)는 seed 0 고정.
 """
 import json
 import sys
@@ -36,6 +12,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from scipy import signal, stats
+from scipy.special import gammaln
 from sklearn.isotonic import IsotonicRegression
 
 HERE = Path(__file__).resolve().parent
@@ -43,27 +20,29 @@ sys.path.insert(0, str(HERE.parent / "cases"))
 from common import F0, SENSORS, lag1, load_both, sine_fit  # noqa: E402
 
 OUT = HERE / "outputs"
-FS_NOM = 10.0                     # 타임스탬프상 표본 주파수
-DT_NOM = 0.1
-LINE = 60.0                       # 계통 공칭 주파수
+FS_NOM = 10.0                     # 타임스탬프상 표본 주파수(Hz)
+DT_NOM = 0.1                      # 공칭 표본 간격(s)
+LINE = 60.0                       # 계통 공칭 주파수(Hz)
 GRID_TOL = 0.2                    # 가정: 한국 계통 주파수 허용 범위 ±0.2 Hz (출처 확인 중)
-F_GRID = np.round(np.arange(0.3, 0.9 + 1e-9, 0.0005), 4)   # 과제 지정 격자
-F_WIDE = np.round(np.arange(0.005, 4.995 + 1e-9, 0.0025), 4)  # 이상 보조 탐색(0 Hz·나이퀴스트 제외)
-NFFT = 50                         # 0.2 Hz 격자
+F_GRID = np.round(np.arange(0.3, 0.9 + 1e-9, 0.0005), 4)      # 겉보기 주파수 탐색 격자(과제 지정)
+F_WIDE = np.round(np.arange(0.005, 4.995 + 1e-9, 0.0025), 4)  # 이상 기록 보조 탐색(0 Hz·나이퀴스트 제외)
+NFFT = 50                         # 10 Hz / 50 = 0.2 Hz 주파수 격자
 BANDS = [(0.0, 1.0), (1.0, 2.0), (2.0, 3.5), (3.5, 5.01)]
-SPLIT_A = (360, 480)              # 학습 <360, 검증 360~479, 시험 ≥480
-RNG = np.random.default_rng(0)
+BAND_KEYS = [f"{lo:g}-{min(hi, 5):g}Hz" for lo, hi in BANDS]
+SPLIT_A = (360, 480)              # 분할 A: 학습 <360, 검증 360~479, 시험 ≥480
+RNG = np.random.default_rng(0)    # 백색잡음 기준 모의 전용
 UP, LO, CUR = SENSORS
 
 
 def r(x, k=4):
-    """JSON용 반올림 (numpy 스칼라 → float)."""
+    """JSON용 반올림. numpy 스칼라는 float로, NaN은 None으로."""
     if x is None or (isinstance(x, float) and np.isnan(x)):
         return None
     return round(float(x), k)
 
 
 def qsum(s, k=4):
+    """분포 요약: 개수, 최소·5·25·50·75·95%·최대."""
     s = pd.Series(s).dropna()
     return dict(n=int(s.size), min=r(s.min(), k), q05=r(s.quantile(.05), k), q25=r(s.quantile(.25), k),
                 median=r(s.median(), k), q75=r(s.quantile(.75), k), q95=r(s.quantile(.95), k), max=r(s.max(), k))
@@ -71,12 +50,13 @@ def qsum(s, k=4):
 
 # ---------------------------------------------------------------- 1. 앨리어싱
 def grid_sine(x, freqs, dt=DT_NOM):
-    """절편 + 사인 + 코사인 최소제곱을 주파수 격자 전체에 한 번에. (R², 진폭, 위상, 잔차 SD) 배열."""
+    """절편 + 사인 + 코사인 최소제곱을 주파수 격자 전체에 한 번에 푼다. (R², 진폭, 위상, 잔차 SD) 배열."""
     x = np.asarray(x, float)
     n = len(x)
     t = np.arange(n) * dt
     w = 2 * np.pi * freqs[:, None] * t[None, :]
     S, C = np.sin(w), np.cos(w)
+    # 주파수마다 3×3 정규방정식 G·b = Xᵀx를 쌓아 한 번에 푼다. SSE = x·x − b·(Xᵀx)
     G = np.empty((len(freqs), 3, 3))
     G[:, 0, 0] = n
     G[:, 0, 1] = G[:, 1, 0] = S.sum(1)
@@ -91,22 +71,27 @@ def grid_sine(x, freqs, dt=DT_NOM):
     return 1 - sse / sst, np.hypot(b[:, 1], b[:, 2]), np.arctan2(b[:, 2], b[:, 1]), np.sqrt(np.maximum(sse, 0) / n)
 
 
-def harmonic_resid_var(x, f, orders=(1, 3, 5, 7)):
-    """f와 그 홀수 고조파(3·5·7차, 접힌 위치) + 절편 적합 뒤 잔차 분산."""
-    n = len(x)
-    t = np.arange(n) * DT_NOM
-    cols = [np.ones(n)]
+def harmonic_fit(x, f, orders=(1,)):
+    """절편 + f의 orders차 사인·코사인 최소제곱. (잔차, 계수[절편, sin1, cos1, ...])."""
+    t = np.arange(len(x)) * DT_NOM
+    cols = [np.ones(len(x))]
     for h in orders:
         cols += [np.sin(2 * np.pi * h * f * t), np.cos(2 * np.pi * h * f * t)]
     X = np.column_stack(cols)
     b, *_ = np.linalg.lstsq(X, x, rcond=None)
-    res = x - X @ b
-    return float(res.var()), float(np.hypot(b[1], b[2]))
+    return x - X @ b, b
 
 
-def alias_section(normal, abnormal, recs_n, recs_a):
+def sse_curve(x, grid):
+    """격자 주파수별 사인 적합 잔차 제곱합. 기록별 곡선을 더해 최소를 찾으면 '주파수만 공통'인 합동 적합이 된다."""
+    r2 = grid_sine(x, grid)[0]
+    return (1 - r2) * ((x - x.mean()) ** 2).sum()
+
+
+def alias_section(normal, abnormal, recs):
+    """1. 전류 겉보기 주파수 f_a로 실제 표본 간격을 역산하고, 이상 기록에서도 같은 추정이 되는지 본다."""
     out = {}
-    # 1-0 타임스탬프 간격(기록 안)
+    # 1-0 기록 안 타임스탬프 간격이 모두 100 ms인지, 기록 시작 ms를 4로 나눈 나머지 분포
     ts_diff = {}
     for name, d in (("normal", normal), ("abnormal", abnormal)):
         ts = pd.to_datetime(d.TimeStamp)
@@ -122,61 +107,54 @@ def alias_section(normal, abnormal, recs_n, recs_a):
             record_start_ms_mod4_share={str(k): r(v, 3) for k, v in (start_ms % 4).value_counts(normalize=True).sort_index().items()})
     out["timestamp_check"] = ts_diff
 
-    # 1-1 기록별 겉보기 주파수 (≥30행, 0.3~0.9 Hz, 0.0005 Hz 격자)
+    # 1-1 30행 이상 기록마다 F_GRID에서 R²가 가장 큰 겉보기 주파수
     rows = []
-    for name, d, recs in (("normal", normal, recs_n), ("abnormal", abnormal, recs_a)):
-        for k in recs:
-            g = d[d.rec == k]
+    for name, d in (("normal", normal), ("abnormal", abnormal)):
+        for k, g in d.groupby("rec"):
             if len(g) < 30:
                 continue
             x = g[CUR].to_numpy()
-            r2, amp, ph, rs = grid_sine(x, F_GRID)
+            r2, amp, _, rs = grid_sine(x, F_GRID)
             j = int(np.argmax(r2))
             row = dict(set=name, rec=int(k), n=len(x), f_alias=F_GRID[j], f_r2=r2[j], f_amp=amp[j], f_resid_sd=rs[j],
                        f_at_grid_edge=bool(j in (0, len(F_GRID) - 1)))
             if name == "abnormal":
-                r2w, *_ = grid_sine(x, F_WIDE)
+                r2w = grid_sine(x, F_WIDE)[0]
                 jw = int(np.argmax(r2w))
                 row.update(f_wide=F_WIDE[jw], f_wide_r2=r2w[jw])
             rows.append(row)
     F = pd.DataFrame(rows)
-    fn = F[F.set == "normal"].copy()
-    fa = F[F.set == "abnormal"].copy()
+    fn = F[F.set == "normal"]
+    fa = F[F.set == "abnormal"]
+    cur = {k: g[CUR].to_numpy() for k, g in recs.items()}
 
-    # CRLB(백색잡음 가정) 표준오차, 공칭 Hz 단위
+    # 주파수 추정 표준오차의 CRLB(백색잡음 가정): var(ω̂) = 12σ²/(A²·N(N²−1)). 표본당 rad를 공칭 Hz로 바꾼다
     N = fn.n.to_numpy()
     crlb = np.sqrt(12 * fn.f_resid_sd.to_numpy() ** 2 / (fn.f_amp.to_numpy() ** 2 * N * (N ** 2 - 1))) / (2 * np.pi) * FS_NOM
 
-    # 공통 주파수 합동 추정(기록마다 진폭·위상·절편은 따로): 0.59~0.61, 0.00002 Hz 격자
+    # 공통 주파수 합동 추정(0.59~0.61 Hz, 0.00002 Hz 격자). 1σ 범위는 SSE가 최소 + s² 이하인 격자점
     pool_grid = np.round(np.arange(0.590, 0.610 + 1e-12, 0.00002), 5)
-    sse = np.zeros(len(pool_grid))
-    dof = 0
-    for k in fn.rec:
-        x = normal.loc[normal.rec == k, CUR].to_numpy()
-        r2, *_ = grid_sine(x, pool_grid)
-        sse += (1 - r2) * ((x - x.mean()) ** 2).sum()
-        dof += len(x) - 3
+    curves = {k: sse_curve(cur[k], pool_grid) for k in fn.rec}
+    sse = sum(curves.values())
+    dof = int((fn.n - 3).sum())                     # 기록마다 절편·사인·코사인 3모수
     jp = int(np.argmin(sse))
     s2 = sse[jp] / (dof - 1)
     inside = pool_grid[sse <= sse[jp] + s2]
     f_pool = float(pool_grid[jp])
 
-    # 시간 블록별(정상 5등분) 합동 주파수 → 77분간 주파수 표류
+    # 정상 기록을 시간순 5등분해 블록마다 합동 주파수를 구한다(77분간 주파수 표류)
     blocks = []
     edges = np.quantile(fn.rec, np.linspace(0, 1, 6))
     for b in range(5):
         ks = fn.rec[(fn.rec >= edges[b]) & ((fn.rec < edges[b + 1]) if b < 4 else (fn.rec <= edges[b + 1]))]
-        sse_b = np.zeros(len(pool_grid))
-        for k in ks:
-            x = normal.loc[normal.rec == k, CUR].to_numpy()
-            r2, *_ = grid_sine(x, pool_grid)
-            sse_b += (1 - r2) * ((x - x.mean()) ** 2).sum()
+        sse_b = sum(curves[k] for k in ks)
         t0 = normal.loc[normal.rec == ks.iloc[0], "t"].iloc[0]
         t1 = normal.loc[normal.rec == ks.iloc[-1], "t"].iloc[0]
         blocks.append(dict(block=b, records=int(ks.size), t_start_min=r(t0 / 60, 1), t_end_min=r(t1 / 60, 1),
                            f_pooled=r(pool_grid[int(np.argmin(sse_b))], 5)))
 
-    # 후보 표본 간격
+    # f_a를 표본 간격으로 바꾼다. 60 Hz를 fs로 찍으면 f_a = |60 − 6·fs| 이므로 fs 후보는 10 Hz 위·아래 두 개다.
+    # 거꾸로 fs가 정확히 10 Hz라면 계통이 60 ± f_a Hz여야 하므로 허용 범위(GRID_TOL)와 견준다
     def candidates(f_a):
         c = f_a / FS_NOM                                   # 표본당 cycle (타임스탬프 가정과 무관한 불변량)
         return dict(
@@ -189,37 +167,31 @@ def alias_section(normal, abnormal, recs_n, recs_a):
 
     q25, q50, q75 = fn.f_alias.quantile([.25, .5, .75])
 
-    # 홀수 고조파: 50행 정상 기록, f=0.6 기본파 제거 뒤 잔차 PSD
+    # 홀수 고조파: 50행 정상 기록에서 기본파(f = q50)를 뺀 잔차의 평균 PSD
     P = []
     for k in fn.rec[fn.n == 50]:
-        x = normal.loc[normal.rec == k, CUR].to_numpy()
-        r2, amp, ph, _ = grid_sine(x, np.array([q50]))
-        t = np.arange(len(x)) * DT_NOM
-        X = np.column_stack([np.ones(len(x)), np.sin(2 * np.pi * q50 * t), np.cos(2 * np.pi * q50 * t)])
-        b, *_ = np.linalg.lstsq(X, x, rcond=None)
-        fr, p = signal.periodogram(x - X @ b, fs=FS_NOM, window="hann", nfft=NFFT, detrend=False)
+        fr, p = signal.periodogram(harmonic_fit(cur[k], q50)[0], fs=FS_NOM, window="hann", nfft=NFFT, detrend=False)
         P.append(p)
     P = np.mean(P, 0)
     harm = {}
+    # 배경 = 고조파가 접혀 들어오는 bin을 뺀 0.1 Hz 초과 bin의 중앙값
     base = np.median(P[(fr > 0.1) & ~np.isin(np.round(fr, 1), [0.4, 0.6, 0.8, 1.6, 1.8, 2.0, 2.8, 3.0, 3.2, 4.0, 4.2, 4.4])])
     for h in (2, 3, 4, 5, 6, 7, 9):
-        fh = abs(((h * q50 / FS_NOM + 0.5) % 1) - 0.5) * FS_NOM   # 접힌 위치
+        fh = abs(((h * q50 / FS_NOM + 0.5) % 1) - 0.5) * FS_NOM   # h·f_a를 0~5 Hz 안으로 접은 위치
         i = int(np.argmin(np.abs(fr - fh)))
         harm[f"h{h}"] = dict(line_hz=h * 60, folded_hz=r(fh, 3), bin_hz=r(fr[i], 1), psd_over_background=r(P[i] / base, 1))
 
-    # 표본 시각 흔들림 상한: 고조파 제거 잔차 분산 = a + b·(A²/2) → b = (2π·60·σ_t)²
+    # 표본 시각 흔들림 σ_t의 상한. 시각 오차 δ는 60 Hz 성분에 크기 2π·60·A·δ인 잡음을 더하므로
+    # 고조파(1·3·5·7차) 제거 잔차 분산 = a + b·(A²/2), b = (2π·60·σ_t)². 기울기 + 2SE로 σ_t를 역산한다
     jit = []
-    for k in fn.rec:
-        x = normal.loc[normal.rec == k, CUR].to_numpy()
-        f = float(fn.loc[fn.rec == k, "f_alias"].iloc[0])
-        v, A = harmonic_resid_var(x, f)
-        jit.append((v, A ** 2 / 2))
+    for k, f in zip(fn.rec, fn.f_alias):
+        res, b = harmonic_fit(cur[k], float(f), (1, 3, 5, 7))
+        jit.append((float(res.var()), float(np.hypot(b[1], b[2])) ** 2 / 2))
     jit = np.array(jit)
     lr = stats.linregress(jit[:, 1], jit[:, 0])
     b_ub = max(lr.slope + 2 * lr.stderr, 0.0)
     sigma_t_ms = np.sqrt(b_ub) / (2 * np.pi * LINE) * 1000
 
-    # 이상 기록
     out["normal_records_ge30"] = dict(
         n_records=int(len(fn)), f_alias=qsum(fn.f_alias, 5), f_alias_iqr=r(q75 - q25, 5), f_alias_sd=r(fn.f_alias.std(), 5),
         r2=qsum(fn.f_r2, 5), r2_share_ge_0_99=r((fn.f_r2 >= 0.99).mean(), 3), r2_share_ge_0_9=r((fn.f_r2 >= 0.9).mean(), 3),
@@ -257,88 +229,93 @@ def alias_section(normal, abnormal, recs_n, recs_a):
 
 # ---------------------------------------------------------------- 2·3. 진동 스펙트럼·위상
 def psd_rec(x):
+    """기록 하나의 Hann 창 periodogram(평균 제거, 0.2 Hz 격자)."""
     x = np.asarray(x, float)
     return signal.periodogram(x - x.mean(), fs=FS_NOM, window="hann", nfft=NFFT, detrend=False, scaling="density")
 
 
 def csd_rec(x, y):
+    """기록 하나의 교차 스펙트럼 conj(X)·Y. 구간을 나누지 않고 기록 전체를 한 구간으로 쓴다."""
     x = np.asarray(x, float) - np.mean(x)
     y = np.asarray(y, float) - np.mean(y)
     return signal.csd(x, y, fs=FS_NOM, window="hann", nperseg=len(x), nfft=NFFT, detrend=False, scaling="density")
 
 
 def flatness(p):
+    """스펙트럼 평탄도 = 기하평균 / 산술평균. 백색이면 1에 가깝다."""
     p = np.asarray(p, float)
     return float(np.exp(np.mean(np.log(p))) / np.mean(p))
 
 
 def band_share(fr, p):
+    """BANDS 대역별 에너지 비율(4자리 반올림)."""
     df = fr[1] - fr[0]
     tot = p.sum() * df
-    return {f"{lo:g}-{min(hi, 5):g}Hz": r(p[(fr >= lo) & (fr < hi)].sum() * df / tot, 4) for lo, hi in BANDS}
+    return {k: r(p[(fr >= lo) & (fr < hi)].sum() * df / tot, 4) for k, (lo, hi) in zip(BAND_KEYS, BANDS)}
+
+
+def side_stats(fr, P, lags):
+    """센서 하나(상부 또는 하부)의 기록별 PSD 묶음 P로 평탄도·대역 비율·lag-1 중앙값을 낸다."""
+    mid = (fr >= 0.4) & (fr <= 4.8)   # 평균 제거·Hann 창의 영향을 받는 0~0.2 Hz와 나이퀴스트 제외
+    mp = P.mean(0)
+    shares = [band_share(fr, p) for p in P]
+    return dict(flatness_0p4_4p8=r(flatness(mp[mid]), 4),
+                max_over_min_0p4_4p8=r(mp[mid].max() / mp[mid].min(), 3),
+                band_share_of_mean_psd=band_share(fr, mp),
+                band_share_per_record_median={k: r(np.median([s[k] for s in shares]), 4) for k in BAND_KEYS},
+                lag1_median=r(np.median(lags), 3))
 
 
 def spectrum_section(normal, abnormal):
-    res, per_rec, mean_psd = {}, [], {}
-    fr = None
-    lens = {}
+    """2·3. 32행 이상 기록의 상·하부 진동 PSD와 교차 스펙트럼을 기록 평균해 모양·백색성·위상·coherence를 본다."""
+    res, per_rec, mean_psd, lens, sxy_rec = {}, [], {}, {}, {}
     for name, d in (("normal", normal), ("abnormal", abnormal)):
-        recs = [k for k, g in d.groupby("rec") if len(g) >= 32]
-        lens[name] = [int((d.rec == k).sum()) for k in recs]
-        Pu, Pl, Sxy, corr = [], [], [], []
-        for k in recs:
-            g = d[d.rec == k]
+        Pu, Pl, Sxy, corr, lag_u, lag_l = [], [], [], [], [], []
+        lens[name] = []
+        for k, g in d.groupby("rec"):
+            if len(g) < 32:
+                continue
+            lens[name].append(len(g))
             u, l_ = g[UP].to_numpy(), g[LO].to_numpy()
             fr, pu = psd_rec(u)
-            _, pl = psd_rec(l_)
-            _, sxy = csd_rec(u, l_)
+            pl = psd_rec(l_)[1]
             Pu.append(pu)
             Pl.append(pl)
-            Sxy.append(sxy)
+            Sxy.append(csd_rec(u, l_)[1])
             corr.append(np.corrcoef(u, l_)[0, 1])
+            lag_u.append(lag1(g[UP]))
+            lag_l.append(lag1(g[LO]))
             m = fr >= 0.2
             per_rec.append(dict(set=name, rec=int(k), n=len(g),
                                 upper_peak_hz=r(fr[m][np.argmax(pu[m])], 1), lower_peak_hz=r(fr[m][np.argmax(pl[m])], 1),
                                 upper_lag1=r(lag1(u), 3), lower_lag1=r(lag1(l_), 3), ul_corr=r(corr[-1], 3)))
         Pu, Pl, Sxy = np.array(Pu), np.array(Pl), np.array(Sxy)
-        mean_psd[name] = dict(upper=Pu.mean(0), lower=Pl.mean(0), sxy=Sxy.mean(0))
-        coh = np.abs(Sxy.mean(0)) ** 2 / (Pu.mean(0) * Pl.mean(0))
-        mean_psd[name]["coh"] = coh
-        mid = (fr >= 0.4) & (fr <= 4.8)   # 평균 제거·Hann 창의 영향을 받는 0~0.2 Hz와 나이퀴스트 제외
-        res[name] = dict(
-            records_ge32=len(recs),
-            upper=dict(flatness_0p4_4p8=r(flatness(Pu.mean(0)[mid]), 4),
-                       max_over_min_0p4_4p8=r(Pu.mean(0)[mid].max() / Pu.mean(0)[mid].min(), 3),
-                       band_share_of_mean_psd=band_share(fr, Pu.mean(0)),
-                       band_share_per_record_median={k: r(np.median([band_share(fr, p)[k] for p in Pu]), 4)
-                                                     for k in band_share(fr, Pu[0])},
-                       lag1_median=r(np.median([lag1(d.loc[d.rec == k, UP]) for k in recs]), 3)),
-            lower=dict(flatness_0p4_4p8=r(flatness(Pl.mean(0)[mid]), 4),
-                       max_over_min_0p4_4p8=r(Pl.mean(0)[mid].max() / Pl.mean(0)[mid].min(), 3),
-                       band_share_of_mean_psd=band_share(fr, Pl.mean(0)),
-                       band_share_per_record_median={k: r(np.median([band_share(fr, p)[k] for p in Pl]), 4)
-                                                     for k in band_share(fr, Pl[0])},
-                       lag1_median=r(np.median([lag1(d.loc[d.rec == k, LO]) for k in recs]), 3)),
-            ul_corr=qsum(corr, 3), ul_corr_negative_share=r(np.mean(np.array(corr) < 0), 3))
+        sxy_rec[name] = Sxy
+        # coherence는 기록을 앙상블로 평균해야 뜻이 있다(한 구간짜리 coherence는 항상 1)
+        mean_psd[name] = dict(upper=Pu.mean(0), lower=Pl.mean(0), sxy=Sxy.mean(0),
+                              coh=np.abs(Sxy.mean(0)) ** 2 / (Pu.mean(0) * Pl.mean(0)))
+        res[name] = dict(records_ge32=len(Pu), upper=side_stats(fr, Pu, lag_u), lower=side_stats(fr, Pl, lag_l),
+                         ul_corr=qsum(corr, 3), ul_corr_negative_share=r(np.mean(np.array(corr) < 0), 3))
+    mid = (fr >= 0.4) & (fr <= 4.8)
 
-    # 백색잡음 기준(같은 기록 길이, seed 0, 500회): 평탄도·대역 비율의 귀무 분포
+    # 백색잡음 기준: 같은 기록 길이의 N(0,1) 잡음으로 평탄도·대역 비율의 귀무 분포를 만든다(seed 0, 500회)
     def null(lengths, reps=500):
         fl, sh = [], []
         for _ in range(reps):
             P = np.mean([psd_rec(RNG.standard_normal(n))[1] for n in lengths], 0)
-            fl.append(flatness(P[(fr >= 0.4) & (fr <= 4.8)]))
+            fl.append(flatness(P[mid]))
             sh.append(list(band_share(fr, P).values()))
         sh = np.array(sh)
         return dict(flatness_q01=r(np.quantile(fl, .01), 4), flatness_q05=r(np.quantile(fl, .05), 4), flatness_median=r(np.median(fl), 4),
-                    band_share_median={k: r(v, 4) for k, v in zip(band_share(fr, P).keys(), np.median(sh, 0))},
-                    band_share_q025={k: r(v, 4) for k, v in zip(band_share(fr, P).keys(), np.quantile(sh, .025, 0))},
-                    band_share_q975={k: r(v, 4) for k, v in zip(band_share(fr, P).keys(), np.quantile(sh, .975, 0))})
+                    band_share_median={k: r(v, 4) for k, v in zip(BAND_KEYS, np.median(sh, 0))},
+                    band_share_q025={k: r(v, 4) for k, v in zip(BAND_KEYS, np.quantile(sh, .025, 0))},
+                    band_share_q975={k: r(v, 4) for k, v in zip(BAND_KEYS, np.quantile(sh, .975, 0))})
     res["white_noise_reference"] = {name: null(lens[name]) for name in lens}
 
-    # 2배 계통 주파수(120 Hz) 자기 소음이 접히는 위치(2·f_a ≈ 1.2 Hz)의 정상 진동 PSD 돌출 여부
+    # 2배 계통 주파수(120 Hz) 자기 소음이 접히는 위치(2·f_a ≈ 1.2 Hz)에서 정상 진동 PSD가 튀어나오는지
     for s in ("upper", "lower"):
         p = mean_psd["normal"][s]
-        nb = (fr >= 0.4) & (fr <= 4.8) & (np.round(fr, 1) != 1.2)
+        nb = mid & (np.round(fr, 1) != 1.2)
         res["normal"][s]["psd_1p2hz_over_median_other"] = r(p[np.isclose(fr, 1.2)][0] / np.median(p[nb]), 3)
 
     pr = pd.DataFrame(per_rec)
@@ -352,15 +329,15 @@ def spectrum_section(normal, abnormal):
     res["normal_peak_freq_spread"] = dict(upper=qsum(nm.upper_peak_hz, 1), lower=qsum(nm.lower_peak_hz, 1),
                                           note="백색이면 기록별 최대 PSD 위치가 0.2~5 Hz에 고르게 퍼진다")
 
-    # 3. 위상: 이상 우세 대역 = 이상 평균 PSD(상·하부 각각 합 1로 정규화해 더한 값)가 최댓값의 절반 이상인
-    #    0.2 Hz 이상 bin들. 과제 지정 4대역 결과도 함께 낸다.
+    # 3. 위상: 이상 우세 대역 = 상·하부 이상 평균 PSD를 각각 합 1로 정규화해 더한 값이 최댓값의 절반 이상인 0.2 Hz 이상 bin.
+    # 교차 스펙트럼을 대역 안에서 더한 뒤 각도를 재고, 과제 지정 4대역도 같이 낸다
     abn = mean_psd["abnormal"]
     nrm = mean_psd["normal"]
     score = abn["upper"] / abn["upper"].sum() + abn["lower"] / abn["lower"].sum()
     score[fr < 0.2] = 0
     dom_mask = score >= 0.5 * score.max()
     dom_band = f"{fr[dom_mask].min():.1f}-{fr[dom_mask].max():.1f}Hz bins"
-    cand = {f"{lo:g}-{min(hi, 5):g}Hz": (fr >= max(lo, 0.2)) & (fr < hi) for lo, hi in BANDS}
+    cand = {k: (fr >= max(lo, 0.2)) & (fr < hi) for k, (lo, hi) in zip(BAND_KEYS, BANDS)}
     cand[dom_band] = dom_mask
     phase = {}
     for name, mp in (("normal", nrm), ("abnormal", abn)):
@@ -371,14 +348,8 @@ def spectrum_section(normal, abnormal):
                                coherence_mean=r(mp["coh"][m].mean(), 3),
                                coherence_band=r(np.abs(sxy) ** 2 / (mp["upper"][m].sum() * mp["lower"][m].sum()), 3))
         phase[name] = rows
-    # 이상 기록별 우세 대역 위상(원형 평균·집중도)
-    per_phase = []
-    for k, g in abnormal.groupby("rec"):
-        if len(g) < 32:
-            continue
-        _, sxy = csd_rec(g[UP].to_numpy(), g[LO].to_numpy())
-        per_phase.append(np.angle(sxy[cand[dom_band]].sum()))
-    per_phase = np.array(per_phase)
+    # 이상 기록별 우세 대역 위상의 원형 통계. 합성 길이 R̄ = |평균 e^{iθ}|, 1이면 모든 기록이 같은 위상
+    per_phase = np.array([np.angle(s[dom_mask].sum()) for s in sxy_rec["abnormal"]])
     Rbar = np.abs(np.exp(1j * per_phase).mean())
     phase["abnormal_dominant_band"] = dom_band
     phase["abnormal_per_record_phase_deg"] = [r(np.degrees(v), 1) for v in per_phase]
@@ -398,22 +369,17 @@ def spectrum_section(normal, abnormal):
 
 
 # ---------------------------------------------------------------- 2b. 정상 진동의 협대역 성분(톤)
-def tone_section(normal, cases, F, f_pool, reps=200):
-    """정상 진동 PSD의 돌출 성분(하부 ≈1.8 Hz, 상부 ≈3.6 Hz)이 전류 고조파(3·f_a, 6·f_a)에 정확히 묶여 있는지,
-    부하(전류 진폭)에 따라 어떻게 변하는지 본다. 주파수는 기록마다 진폭·위상·절편을 따로 두고 주파수만 공통인
-    합동 최소제곱, 신뢰구간은 기록 단위 부트스트랩(seed 0)."""
+def tone_section(recs, cases, F, f_pool, reps=200):
+    """2b. 정상 진동의 돌출 톤(하부 ≈1.8 Hz, 상부 ≈3.6 Hz)이 전류 고조파(3·f_a, 6·f_a)에 묶였는지, 부하에 따라 어떻게 변하는지 본다."""
     fn = F[F.set == "normal"][["rec", "f_alias"]]
     c = cases[cases.set == "normal"].merge(fn, on="rec")          # 30행 이상 정상 기록
     groups = {"high_load(cur_amp>180)": c.cur_amp > 180, "low_load(cur_amp<130)": c.cur_amp < 130, "all": c.cur_amp > 0}
     rng = np.random.default_rng(0)
 
     def sse_curves(series, grid):
-        out = []
-        for x in series:
-            r2, *_ = grid_sine(x, grid)
-            out.append((1 - r2) * ((x - x.mean()) ** 2).sum())
-        return np.array(out)
+        return np.array([sse_curve(x, grid) for x in series])
 
+    # 합동 주파수(곡선 합의 최소)와 기록 단위 부트스트랩 95% 구간(seed 0)
     def pooled_ci(curves, grid):
         f_hat = grid[np.argmin(curves.sum(0))]
         bs = [grid[np.argmin(curves[rng.integers(0, len(curves), len(curves))].sum(0))] for _ in range(reps)]
@@ -425,12 +391,11 @@ def tone_section(normal, cases, F, f_pool, reps=200):
              ("upper_tone_vs_6fa", UP, 6, np.round(np.arange(3.55, 3.65 + 1e-9, 0.0001), 4), False))
     for name, col, h, grid, with_current in specs:
         res = dict(expected_if_locked_hz=r(h * f_pool, 4), compared_with_current_harmonic=with_current)
-        # 기록별 톤 진폭(넓은 창에서 최대 R² 주파수 적합)
+        # 기록별 톤 진폭: 넓힌 격자에서 R²가 가장 큰 주파수의 사인 진폭
         wide = np.round(np.arange(grid[0] - 0.25, grid[-1] + 0.25, 0.0005), 4)
         amp_tone, r2_tone = [], []
         for k in c.rec:
-            x = normal.loc[normal.rec == k, col].to_numpy()
-            r2, amp, *_ = grid_sine(x, wide)
+            r2, amp, *_ = grid_sine(recs[k][col].to_numpy(), wide)
             j = int(np.argmax(r2))
             amp_tone.append(amp[j])
             r2_tone.append(r2[j])
@@ -439,22 +404,13 @@ def tone_section(normal, cases, F, f_pool, reps=200):
         res["spearman_tone_amp_vs_current_amp"] = r(stats.spearmanr(c.cur_amp, c[f"{name}_amp"]).statistic, 3)
         for gname, m in groups.items():
             ks = c.rec[m].to_numpy()
-            vib = [normal.loc[normal.rec == k, col].to_numpy() for k in ks]
-            cv = sse_curves(vib, grid)
-            fv, civ = pooled_ci(cv, grid)
+            fv, civ = pooled_ci(sse_curves([recs[k][col].to_numpy() for k in ks], grid), grid)
             res[gname] = dict(records=int(len(ks)), vib_tone_f=fv, vib_tone_ci95=civ,
                               diff_vib_minus_expected=r(fv - h * f_pool, 4),
                               tone_amp_median=r(np.median(c.loc[m, f"{name}_amp"]), 4), tone_r2_median=r(np.median(c.loc[m, f"{name}_r2"]), 3))
             if with_current:
-                # 같은 기록의 전류에서 기본파(기록별 f_a)를 뺀 잔차 → h차 고조파 위치
-                cres = []
-                for k in ks:
-                    x = normal.loc[normal.rec == k, CUR].to_numpy()
-                    f = float(c.loc[c.rec == k, "f_alias"].iloc[0])
-                    t = np.arange(len(x)) * DT_NOM
-                    X = np.column_stack([np.ones(len(x)), np.sin(2 * np.pi * f * t), np.cos(2 * np.pi * f * t)])
-                    b, *_ = np.linalg.lstsq(X, x, rcond=None)
-                    cres.append(x - X @ b)
+                # 같은 기록의 전류에서 기본파(기록별 f_a)를 뺀 잔차로 h차 고조파 위치를 같은 방식으로 잰다
+                cres = [harmonic_fit(recs[k][CUR].to_numpy(), float(f))[0] for k, f in zip(ks, c.f_alias[m])]
                 fc, cic = pooled_ci(sse_curves(cres, grid), grid)
                 res[gname].update(current_harmonic_f=fc, current_harmonic_ci95=cic, diff_vib_minus_current=r(fv - fc, 4))
         hi, lo_ = res["high_load(cur_amp>180)"], res["low_load(cur_amp<130)"]
@@ -467,7 +423,8 @@ def tone_section(normal, cases, F, f_pool, reps=200):
 
 
 # ---------------------------------------------------------------- 4. 진동 SD의 의미
-def sd_section(normal, abnormal, cases):
+def sd_section(normal, abnormal, recs, cases):
+    """4. 진동 SD가 무엇을 재는지 점검한다. 안티앨리어싱 없는 10 Hz 점 표본이면 표본 분산 ≈ 원 진동 전체 분산(RMS²)이다."""
     out = {}
     cn = cases[cases.set == "normal"]
     ca = cases[cases.set == "abnormal"]
@@ -475,7 +432,7 @@ def sd_section(normal, abnormal, cases):
     for s, col in (("upper", "sd_upper"), ("lower", "sd_lower")):
         v = cn.loc[cn.n >= 20, col]
         out[f"normal_{s}_sd_ge20"] = dict(**qsum(v, 4), cv_across_records=r(v.std() / v.mean(), 3))
-    # 4-2 길이 구간별 SD 중앙값 (백색이면 길이에 무관; 저주파 성분이 크면 짧은 기록일수록 작아짐)
+    # 4-2 길이 구간별 SD 중앙값. 백색이면 길이와 무관하고, 저주파 성분이 크면 짧은 기록일수록 작다
     bins = [(2, 9), (10, 19), (20, 29), (30, 39), (40, 49), (50, 50)]
     lenmap = {}
     for lo_, hi_ in bins:
@@ -486,41 +443,40 @@ def sd_section(normal, abnormal, cases):
     out["normal_spearman_length_vs_sd"] = dict(
         upper=r(stats.spearmanr(cn.n, cn.sd_upper).statistic, 3), lower=r(stats.spearmanr(cn.n, cn.sd_lower).statistic, 3),
         note="고부하(전류 진폭 큼) 기록이 길이와 얽혀 있을 수 있어 부하 효과가 섞인다")
-    # 4-3 50행 기록: 앞 k행 SD / 50행 SD (iid 정규면 c4(k)/c4(50) 근처)
+    # 4-3 50행 기록의 앞 k행 SD / 50행 SD. iid 정규면 c4(k)/c4(50) 근처다(c4 = 표본 SD의 편향 계수)
     def c4(n):
-        from scipy.special import gammaln
         return np.sqrt(2 / (n - 1)) * np.exp(gammaln(n / 2) - gammaln((n - 1) / 2))
     pref = {}
-    full = [k for k, g in normal.groupby("rec") if len(g) == 50]
+    full = [k for k, g in recs.items() if len(g) == 50]
     for s, col in (("upper", UP), ("lower", LO)):
         rows = {}
         for k_ in (5, 10, 20, 30, 40):
-            ratio = [normal.loc[normal.rec == k, col].to_numpy()[:k_].std(ddof=1) / normal.loc[normal.rec == k, col].std(ddof=1)
-                     for k in full]
+            ratio = [recs[k][col].to_numpy()[:k_].std(ddof=1) / recs[k][col].std(ddof=1) for k in full]
             rows[f"first{k_}"] = dict(median_ratio=r(np.median(ratio), 3), iid_expected=r(c4(k_) / c4(50), 3))
         pref[s] = rows
     out["normal_prefix_sd_ratio_50row_records"] = dict(records=len(full), **pref)
-    # 4-4 반분 일치도: log(SD 앞 25 / SD 뒤 25)의 SD vs iid 정규 이론 sqrt(2·1/(2·24)) (첨도 보정판도)
+    # 4-4 반분 일치도: log(앞 25행 SD / 뒤 25행 SD)의 SD를 iid 정규 이론값과 견준다.
+    # 반쪽마다 var(log s) ≈ 1/(2·24)라 차의 SD는 sqrt(2/(2·24)), 첨도 κ를 넣으면 var(log s) ≈ (κ − 1)/(4n)
     half = {}
     for s, col in (("upper", UP), ("lower", LO)):
         lr_, ku = [], []
         for k in full:
-            x = normal.loc[normal.rec == k, col].to_numpy()
+            x = recs[k][col].to_numpy()
             lr_.append(np.log(x[:25].std(ddof=1) / x[25:].std(ddof=1)))
             ku.append(stats.kurtosis(x, fisher=False))
         kmed = float(np.median(ku))
         th_gauss = np.sqrt(2 / (2 * 24))
-        th_kurt = np.sqrt(2 * (kmed - 1 + 2 / 24) / (4 * 25))   # var(log s) ≈ (κ − 1)/(4n) 근사
+        th_kurt = np.sqrt(2 * (kmed - 1 + 2 / 24) / (4 * 25))
         half[s] = dict(sd_of_log_half_ratio=r(np.std(lr_, ddof=1), 3), iid_gauss_theory=r(th_gauss, 3),
                        iid_theory_with_observed_kurtosis=r(th_kurt, 3), kurtosis_median=r(kmed, 2))
     out["normal_half_split_consistency"] = half
-    # 4-5 첨도(기록 안 표준화 뒤 모은 표본): 가우스 3, 단일 사인 1.5
+    # 4-5 기록 안에서 표준화한 뒤 모은 표본의 첨도. 가우스는 3, 단일 사인은 1.5
     kurt = {}
     for name, d in (("normal", normal), ("abnormal", abnormal)):
         z = d.groupby("rec").filter(lambda g: len(g) >= 20).groupby("rec")[[UP, LO]].transform(lambda v: (v - v.mean()) / v.std())
         kurt[name] = dict(upper=r(stats.kurtosis(z[UP], fisher=False), 2), lower=r(stats.kurtosis(z[LO], fisher=False), 2))
     out["pooled_within_record_kurtosis"] = kurt
-    # 4-6 정상 대비 이상 SD 배수 (기록 중앙값 기준, 20행 이상 / 전체 기록 / 행 단위 SD)
+    # 4-6 정상 대비 이상 SD 배수(기록 중앙값 기준 20행 이상·2행 이상, 그리고 행 전체 SD)
     mult = {}
     for s, col, sens in (("upper", "sd_upper", UP), ("lower", "sd_lower", LO)):
         mult[s] = dict(
@@ -535,6 +491,8 @@ def sd_section(normal, abnormal, cases):
 
 # ---------------------------------------------------------------- 5. 부하–진동
 def load_section(cases):
+    """5. 부하 정규화: 정상 학습 기록(분할 A)에서 log 진동 SD ~ log 전류(진폭 또는 RMS)를 OLS·단조 회귀로 맞추고,
+    모든 기록의 잔차를 학습 잔차 SD 단위 z로 나타낸다. log-log라 기울기는 '진동 ∝ 부하^b'의 지수다."""
     c = cases[cases.n >= 20].copy()
     c["split"] = np.where(c.set == "abnormal", "abnormal",
                           np.where(c.rec < SPLIT_A[0], "train", np.where(c.rec < SPLIT_A[1], "valid", "test")))
@@ -553,7 +511,7 @@ def load_section(cases):
             lx, ly = np.log(tr[x]), np.log(tr[y])
             fit = stats.linregress(lx, ly)
             res_tr = ly - (fit.intercept + fit.slope * lx)
-            s_ols = res_tr.std(ddof=2)
+            s_ols = res_tr.std(ddof=2)                     # 모수 2개(절편·기울기)를 뺀 자유도
             iso = IsotonicRegression(increasing=True, out_of_bounds="clip").fit(lx, ly)
             s_iso = (ly - iso.predict(lx)).std(ddof=1)
             key = f"{y}~{x}"
@@ -598,6 +556,7 @@ def load_section(cases):
 
 # ---------------------------------------------------------------- 6. 수집 구조
 def acq_section(normal, abnormal):
+    """6. 수집 구조: 기록 길이·공백·시작 간격 분포, 자기상관, 기록 시작·끝 시각의 주기 고정(위상 잠금) 여부."""
     out = {}
     for name, d in (("normal", normal), ("abnormal", abnormal)):
         g = d.groupby("rec")
@@ -610,6 +569,7 @@ def acq_section(normal, abnormal):
         span = d.t.iloc[-1] - d.t.iloc[0] + DT_NOM
         Ls = pd.Series(L.astype(float))
         s2 = pd.Series(s2s)
+        # 후보 주기 P(4~12 s)마다 시각을 위상 2π·t/P로 바꿔 합성 길이 R을 잰다. 시각이 P 격자에 묶여 있으면 R이 1에 가깝다
         P = np.arange(4.0, 12.0, 0.0005)
         ray = lambda x: np.abs(np.exp(2j * np.pi * x[None, :] / P[:, None]).mean(1))
         rs, re = ray(st), ray(end)
@@ -634,6 +594,7 @@ def acq_section(normal, abnormal):
             o["length_sequence_dominant_period_records"] = r(1 / f[kk], 2)
             o["length_sequence_dominant_period_s"] = r(1 / f[kk] * s2s.mean(), 1)
             Ps, Pe = P[js], P[je]
+            # 시작·끝이 서로 다른 주기에 묶이면 두 주기의 맥놀이 1/|1/Pe − 1/Ps| 마다 기록 길이가 한 바퀴 돈다
             o["beat_period_from_start_end_locks_s"] = r(1 / abs(1 / Pe - 1 / Ps), 1)
             o["start_R_truncated_vs_full"] = [r(np.abs(np.exp(2j * np.pi * st[L < 50] / Ps).mean()), 3),
                                               r(np.abs(np.exp(2j * np.pi * st[L == 50] / Ps).mean()), 3)]
@@ -651,12 +612,13 @@ def acq_section(normal, abnormal):
 
 # ---------------------------------------------------------------- 기록 표
 def record_table(normal, abnormal):
+    """2행 이상 기록마다 진동 SD와 전류 부하 지표(고정 F0 사인 진폭·RMS·평균·R²)."""
     rows = []
     for name, d in (("normal", normal), ("abnormal", abnormal)):
         for k, g in d.groupby("rec"):
             if len(g) < 2:
                 continue
-            amp, off, res, r2 = sine_fit(g[CUR].to_numpy())
+            amp, _, _, r2 = sine_fit(g[CUR].to_numpy())
             rows.append(dict(set=name, rec=int(k), n=len(g), t0=g.t.iloc[0],
                              sd_upper=g[UP].std(), sd_lower=g[LO].std(),
                              cur_amp=amp, cur_rms=g[CUR].std(), cur_mean=g[CUR].mean(), cur_sine_r2=r2))
@@ -666,35 +628,34 @@ def record_table(normal, abnormal):
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     normal, abnormal = load_both(matched=True)
-    recs_n = sorted(normal.rec.unique())
-    recs_a = sorted(abnormal.rec.unique())
+    recs = dict(list(normal.groupby("rec")))         # 정상 기록 번호 → 그 기록의 행
 
     result = dict(meta=dict(
         input="cases/common.load_both(matched=True)", normal_rows=len(normal), abnormal_rows=len(abnormal),
-        normal_records=len(recs_n), abnormal_records=len(recs_a),
+        normal_records=len(recs), abnormal_records=abnormal.rec.nunique(),
         assumption_grid_tolerance_hz=f"60 ± {GRID_TOL} (가정, 출처 확인 중)",
         f_grid="0.3~0.9 Hz, 0.0005 Hz (공칭 시간축 t = n × 0.1 s)", seed=0))
 
-    alias, F = alias_section(normal, abnormal, recs_n, recs_a)
+    alias, F = alias_section(normal, abnormal, recs)
     result["1_alias_sampling_interval"] = alias
     spec, pr, psd_tab = spectrum_section(normal, abnormal)
     result["2_3_vibration_spectrum_and_phase"] = spec
     cases = record_table(normal, abnormal)
     result["2b_normal_vibration_tones"] = tone_section(
-        normal, cases, F, alias["normal_records_ge30"]["pooled_common_f"]["f"])
-    result["4_vibration_sd_meaning"] = sd_section(normal, abnormal, cases)
+        recs, cases, F, alias["normal_records_ge30"]["pooled_common_f"]["f"])
+    result["4_vibration_sd_meaning"] = sd_section(normal, abnormal, recs, cases)
     load_res, lc = load_section(cases)
     result["5_load_vs_vibration"] = load_res
     result["6_acquisition_structure"] = acq_section(normal, abnormal)
 
-    # 기록별 표 병합
+    # 기록별 표: 부하 지표 + 겉보기 주파수 + 스펙트럼 + 부하 정규화 z
     tab = cases.merge(F.drop(columns=["n"]), on=["set", "rec"], how="left") \
                .merge(pr.drop(columns=["n"]), on=["set", "rec"], how="left") \
                .merge(lc[["set", "rec", "split"] + [c for c in lc.columns if c.startswith("z_")]], on=["set", "rec"], how="left")
     tab.to_csv(OUT / "01_signal_physics_records.csv", index=False, encoding="utf-8-sig")
     psd_tab.to_csv(OUT / "01_signal_physics_psd.csv", index=False, encoding="utf-8-sig")
     (OUT / "01_signal_physics.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(json.dumps(result, ensure_ascii=False, indent=1))
+    print("저장:", OUT / "01_signal_physics.json")
 
 
 if __name__ == "__main__":

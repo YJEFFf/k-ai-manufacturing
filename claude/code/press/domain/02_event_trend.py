@@ -1,37 +1,8 @@
-"""이상 사건 안 추세 분석 — 냉간 기동(예열)·진행성 고장·정상상태 고장 가설 비교.
-
-질문
- 1. 이상 21기록(2022-07-17 일 10:51~10:53, 2분 46초)을 시간순으로 놓았을 때 정상 기준 대비 이탈 정도가
-    줄어드는가 (a: 냉간 기동·예열 — 작동유 저온 고점도 → 흡입 캐비테이션 등이 데워지며 가라앉음),
-    커지는가 (b: 진행성 고장), 변화가 없는가 (c: 정상상태 고장)?
- 2. 이상 파일 첫 기록·첫 행부터 이상인가? 사건 안에서 정상 범위로 돌아오는 기록이 있는가?
- 3. 정상 77분(2022-07-12 화 00:00~01:17)은 정상상태(stationary) 기준선으로 쓸 수 있는가?
- 4. 정상·이상의 운전 조건(요일·시각·계측 설정) 차이는 데이터로 분리되는가?
-
-방법
- - 입력: cases/common.py load_both(matched=True). 저장 정밀도를 맞춰 형식 누수를 지운 자료.
- - 기록별 특징 13종: case_table 9종 + 전류 RMS(std) + 전류 실효값(영점 기준 sqrt(mean x²))
-   + 상/하부 진동 SD 비 + 전류 평균/RMS(직류 비).
- - 이탈 정도: 정상 600기록 분포 대비 robust z = (x − 중앙값) / (1.4826·MAD).
-   척도형 특징(SD·진폭·RMS·비율)은 로그, 사인 R²는 log(1−R²)에서 계산한다(척도 모수는 곱으로 변하므로
-   위·아래 이탈을 같은 무게로 보려면 로그가 맞다). 추세의 대상은 |z| = 정상에서 떨어진 거리.
- - 추세 검정: Spearman ρ, Theil–Sen 기울기(분당), Mann–Kendall(직접 구현, 동률 보정·연속성 보정),
-   앞 7기록 vs 뒤 7기록 Mann–Whitney(정확 검정). 특징 13종을 한 가족으로 Holm 보정.
-   21기록 전체와 10행 이상 17기록을 따로 낸다(10행 미만은 R²·lag1·상관이 불안정; 3행 기록은 사인 3모수
-   적합이라 R²=1이 자동으로 나온다).
- - 검정력: 실제 기록 시각에 선형 추세 + 정규 잡음을 넣은 모의실험(seed 고정)으로 MK 80% 검정력에 필요한
-   '사건 전체 변화량(잡음 SD 배수)'을 구하고, 특징별 잡음 크기로 환산한다.
- - 첫 기록 판정에는 길이를 맞춘 정상 기준(정상 기록을 같은 행 수로 자른 특징 분포)을 함께 쓴다.
-   짧은 기록의 특징을 50행 기록 분포와 비교하면 길이 효과를 이상으로 착각하기 때문이다.
-
-출력 (domain/outputs/)
- - 02_event_trend.json           : 전체 결과
- - 02_event_trend.csv            : 추세 검정표 (부분집합 × 대상 × 특징)
- - 02_event_trend_records.csv    : 이상 21기록 특징·z·정상 범위 여부
- - 02_event_trend_normal_bins.csv: 정상 10분 구간 중앙값(특징별 z·원값)
- - 02_event_trend_normal_bins2min.csv: 정상 2분 구간 중앙값(운전 구간 탐지용)
- - 02_event_trend_summary.md     : 요약
-실행: PYTHONIOENCODING=utf-8 python 02_event_trend.py
+"""이상 사건(21기록, 2분 46초) 안의 추세로 냉간 기동(예열)·진행성 고장·정상상태 고장 가설을 견주고,
+사건 시작·정상 복귀, 정상 77분의 안정성, 운전 조건 차이를 함께 본다.
+입력은 cases/common.load_both(matched=True)(저장 정밀도를 맞춘 정상·이상 원자료)다.
+출력은 domain/outputs/02_event_trend.json·.csv·_records.csv·_normal_bins.csv·_normal_bins2min.csv·_summary.md다.
+보고서 2.2절의 근거이며 test 채점 이후의 사후 분석이다. 실행: PYTHONIOENCODING=utf-8 python 02_event_trend.py
 """
 import json
 import sys
@@ -45,17 +16,17 @@ from statsmodels.stats.multitest import multipletests
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "cases"))
-from common import SENSORS, case_table, load_both  # noqa: E402
+from common import SENSORS, case_table, lag1, load_both  # noqa: E402
 
 OUT = HERE / "outputs"
-SEED = 20220717
-MIN_LEN = 10          # 안정 특징을 위한 최소 행 수
+SEED = 20220717       # 검정력 모의실험 난수
+MIN_LEN = 10          # 10행 미만 기록은 R²·lag1·상관이 불안정해 따로 본다
 K = 7                 # 앞·뒤 비교 기록 수
 ALPHA = 0.05
 N_SIM = 4000          # 검정력 모의실험 반복 수
 CUR = SENSORS[2]
 
-# 특징 이름: (한국어 이름, z 계산 척도)
+# 특징: (한국어 이름, z 계산 척도). 척도형(SD·진폭·RMS·비율)은 곱으로 변하므로 로그에서, 사인 R²는 log(1−R²)에서 z를 잰다
 FEATS = {
     "vib_upper_sd": ("상부 진동 SD", "log"),
     "vib_lower_sd": ("하부 진동 SD", "log"),
@@ -83,11 +54,8 @@ NAME = {**{f: v[0] for f, v in FEATS.items()}, **{c: v[0] for c, v in COMPOSITES
 
 # ───────────────────────────── 특징·기준 ─────────────────────────────
 def record_features(df: pd.DataFrame) -> pd.DataFrame:
-    """case_table 특징 + 전류 RMS·실효값·직류 비·진동 SD 비·기록 중앙 시각(분).
-
-    교류 순시값의 물리적 실효값은 영점 기준 sqrt(mean(x²))다. std는 기록 평균을 뺀 값이라
-    직류 성분(평균 이동)이 생기면 둘이 갈라진다. 둘 다 둔다.
-    """
+    """기록별 특징 13종(case_table + 전류 RMS·실효값·직류 비·진동 SD 비)과 기록 중앙 시각(분)."""
+    # 교류의 물리적 실효값은 영점 기준 sqrt(mean x²)다. std는 기록 평균을 빼므로 직류 성분이 생기면 둘이 갈라진다
     ct = case_table(df).set_index("rec")
     g = df.groupby("rec")[CUR]
     ct["cur_rms"] = g.std(ddof=0)
@@ -100,7 +68,7 @@ def record_features(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def tf(name: str, x) -> np.ndarray:
-    """z 계산 척도로 변환. 0 SD(1행 기록 등)는 1e-6으로 바닥을 깐다."""
+    """z 계산 척도로 바꾼다. 0 SD(1행 기록 등)는 1e-6을 바닥으로 깐다."""
     x = np.asarray(x, float)
     kind = FEATS[name][1]
     with np.errstate(divide="ignore", invalid="ignore"):
@@ -112,7 +80,7 @@ def tf(name: str, x) -> np.ndarray:
 
 
 def reference(ref: pd.DataFrame) -> dict:
-    """정상 기록 분포의 중앙값·robust 척도(변환 척도)와 1·99% 분위(원 척도)."""
+    """정상 기록 분포의 중앙값과 robust 척도 1.4826·MAD(변환 척도), 1·99% 분위(원 척도)."""
     out = {}
     for f in F:
         raw = ref[f].dropna().to_numpy()
@@ -125,32 +93,37 @@ def reference(ref: pd.DataFrame) -> dict:
 
 
 def zscore(ref: dict, f: str, x) -> np.ndarray:
+    """robust z = (tf(x) − 정상 중앙값) / (1.4826·MAD)."""
     return (tf(f, x) - ref[f]["med"]) / ref[f]["scale"]
 
 
-def pct(ref: dict, f: str, x: float) -> float:
-    """정상 분포에서 x의 백분위(중간 순위, 0~100)."""
-    s = ref[f]["sorted"]
-    if not np.isfinite(x):
-        return np.nan
+def midrank_pct(s: np.ndarray, x) -> float:
+    """정렬된 배열 s에서 x의 백분위(동률은 중간 순위, 0~100)."""
     return 100.0 * (np.searchsorted(s, x, "left") + np.searchsorted(s, x, "right")) / 2 / s.size
 
 
+def pct(ref: dict, f: str, x: float) -> float:
+    """정상 기록 분포에서 특징 f 값 x의 백분위."""
+    return midrank_pct(ref[f]["sorted"], x) if np.isfinite(x) else np.nan
+
+
 def inside(ref: dict, f: str, x: float):
+    """x가 정상 1~99% 분위 안이면 True, 값이 없으면 None."""
     if not np.isfinite(x):
         return None
     return bool(ref[f]["q01"] <= x <= ref[f]["q99"])
 
 
 def truncated_reference(normal: pd.DataFrame, L: int) -> dict:
-    """길이 맞춤 기준: L행 이상인 정상 기록을 앞 L행으로 잘라 특징 분포를 만든다."""
+    """길이 맞춤 기준: L행 이상인 정상 기록을 앞 L행으로 잘라 특징 분포를 만든다.
+    짧은 이상 기록을 50행 기록 분포와 견주면 길이 효과를 이상으로 착각하기 때문이다."""
     size = normal.groupby("rec").pos.transform("size")
     return reference(record_features(normal[(size >= L) & (normal.pos < L)]))
 
 
 # ───────────────────────────── 추세 검정 ─────────────────────────────
 def mann_kendall(y) -> dict:
-    """Mann–Kendall 추세 검정(양측). 동률 보정 분산, 연속성 보정 Z."""
+    """Mann–Kendall 추세 검정(양측). S = 뒤−앞 쌍의 부호 합, 분산은 동률 묶음만큼 빼고 Z는 연속성 보정(S ∓ 1)."""
     y = np.asarray(y, float)
     n = y.size
     iu = np.triu_indices(n, 1)
@@ -159,12 +132,6 @@ def mann_kendall(y) -> dict:
     var = (n * (n - 1) * (2 * n + 5) - (c * (c - 1) * (2 * c + 5)).sum()) / 18.0
     z = 0.0 if s == 0 else (s - np.sign(s)) / np.sqrt(var)
     return dict(S=s, Z=float(z), p=float(2 * stats.norm.sf(abs(z))), tau=s / (n * (n - 1) / 2))
-
-
-def lag1(x) -> float:
-    x = np.asarray(x, float) - np.mean(x)
-    d = (x * x).sum()
-    return float((x[1:] * x[:-1]).sum() / d) if d > 0 else np.nan
 
 
 def trend(t, y) -> dict:
@@ -178,8 +145,8 @@ def trend(t, y) -> dict:
     front, back = y[:K], y[-K:]
     mw = stats.mannwhitneyu(back, front, alternative="two-sided", method="exact")
     resid = y - (ts.intercept + ts.slope * t)
-    # 연속 기록은 한 사건의 조각이라 독립이 아니다. 추세 제거 잔차의 lag-1 자기상관 r1로
-    # MK 분산을 AR(1) 팽창계수 (1+r1)/(1−r1)만큼 키운 보수적 p도 함께 낸다(r1≤0이면 보정 없음).
+    # 연속 기록은 한 사건의 조각이라 독립이 아니다. 추세를 뺀 잔차의 lag-1 자기상관 r1로
+    # MK 분산을 AR(1) 팽창계수 (1+r1)/(1−r1)배 키운 보수적 p도 낸다(r1 ≤ 0이면 보정 없음)
     r1 = lag1(resid)
     vif = (1 + r1) / (1 - r1) if np.isfinite(r1) and r1 > 0 else 1.0
     z_ar1 = mk["Z"] / np.sqrt(vif)
@@ -208,7 +175,7 @@ def verdict(tau: float, p: float, p_holm: float, p_ar1_holm: float = 0.0) -> str
 
 
 def mk_power(t, rng, alphas=(ALPHA, ALPHA / len(F))) -> dict:
-    """실제 기록 시각에서 y = Δ·(t 정규화) + N(0,1) 모의실험. MK 검정력 80%에 필요한 Δ(잡음 SD 배수)."""
+    """실제 기록 시각에 y = Δ·(0~1로 맞춘 t) + N(0,1)을 넣어 MK 검정력 80%에 필요한 사건 전체 변화량 Δ(잡음 SD 배수)를 찾는다."""
     t = np.asarray(t, float)
     u = (t - t.min()) / (t.max() - t.min())
     n = u.size
@@ -228,7 +195,7 @@ def mk_power(t, rng, alphas=(ALPHA, ALPHA / len(F))) -> dict:
         pw = np.array(curve[a])
         hit = np.nonzero(pw >= 0.8)[0]
         need[f"alpha_{a:.4f}"] = float(deltas[hit[0]]) if hit.size else None
-    # Spearman 해석적 근사(Fieller: SE = sqrt(1.06/(n−3))): 80% 검정력의 최소 |ρ|
+    # Spearman은 Fisher z 근사(Fieller의 SE = sqrt(1.06/(n−3)))로 유의 문턱과 검정력 80%에 필요한 최소 |ρ|를 구한다
     rho80 = {f"alpha_{a:.4f}": float(np.tanh((stats.norm.isf(a / 2) + stats.norm.isf(0.2)) * np.sqrt(1.06 / (n - 3))))
              for a in alphas}
     rho_crit = {f"alpha_{a:.4f}": float(np.tanh(stats.norm.isf(a / 2) * np.sqrt(1.06 / (n - 3)))) for a in alphas}
@@ -246,7 +213,7 @@ def apparent_freq(x):
     k = np.arange(x.size)
     w = 2 * np.pi * FGRID[:, None] / 10.0 * k[None, :]
     X = np.stack([np.ones_like(w), np.sin(w), np.cos(w)], axis=2)          # (F, n, 3)
-    xtx = np.einsum("fni,fnj->fij", X, X) + 1e-9 * np.eye(3)
+    xtx = np.einsum("fni,fnj->fij", X, X) + 1e-9 * np.eye(3)   # 짧은 기록에서 특이 행렬을 막는 작은 릿지
     b = np.linalg.solve(xtx, np.einsum("fni,n->fi", X, x)[..., None])[..., 0]
     r = x[None, :] - np.einsum("fni,fi->fn", X, b)
     sst = ((x - x.mean()) ** 2).sum()
@@ -257,6 +224,7 @@ def apparent_freq(x):
 
 # ───────────────────────────── 보조 ─────────────────────────────
 def holm(p) -> np.ndarray:
+    """Holm 보정 p. NaN은 가족에서 빼고 NaN으로 둔다."""
     p = np.asarray(p, float)
     out = np.full(p.shape, np.nan)
     ok = np.isfinite(p)
@@ -268,10 +236,10 @@ def holm(p) -> np.ndarray:
 def clean(o):
     """JSON 직렬화: numpy → 파이썬, NaN → None, 실수는 유효숫자 6자리."""
     if isinstance(o, dict):
-        return {str(k): clean(v) for k, v in o.items() if not (isinstance(v, np.ndarray) and k == "sorted")}
+        return {str(k): clean(v) for k, v in o.items()}
     if isinstance(o, (list, tuple)):
         return [clean(v) for v in o]
-    if isinstance(o, (np.integer,)):
+    if isinstance(o, np.integer):
         return int(o)
     if isinstance(o, (float, np.floating)):
         o = float(o)
@@ -282,8 +250,9 @@ def clean(o):
 
 
 # ───────────────────────────── 본 분석 ─────────────────────────────
-def section_event(nf, af, ref600):
-    """1·2. 이상 사건 안 추세와 가설 판정."""
+def section_event(af, ref600):
+    """1·2. 이상 기록의 |z|(정상에서 떨어진 거리)와 원값의 시간 추세를 검정하고 가설로 판정한다.
+    21기록 전체와 10행 이상 17기록을 따로 본다(3행 기록은 사인 3모수 적합이라 R² = 1이 저절로 나온다)."""
     rows = []
     for f in F:
         af[f"z_{f}"] = zscore(ref600, f, af[f])
@@ -299,7 +268,7 @@ def section_event(nf, af, ref600):
                 r = trend(d.t_mid_min.to_numpy(), d[col].to_numpy())
                 block.append(dict(subset=sname, target=target, feature=f,
                                   name=NAME[f], **r))
-            # Holm: 같은 부분집합·대상 안 특징 13종이 한 가족(종합 지수는 가족 밖)
+            # Holm 가족은 같은 부분집합·대상 안 특징 13종이다(종합 지수는 가족 밖)
             fam = [i for i, b in enumerate(block) if b["feature"] in FEATS]
             for key in ("spearman_p", "mk_p", "mk_p_ar1", "mw_p"):
                 adj = holm([block[i][key] for i in fam])
@@ -364,22 +333,21 @@ def section_onset(normal, abnormal, af, ref600):
     first_rec["n_feat_outside_len"] = int(sum(v["inside_len_1_99"] is False for v in first_rec["features"].values()))
     first_rec["n_feat_outside_600"] = int(sum(v["inside600_1_99"] is False for v in first_rec["features"].values()))
 
-    # 첫 기록의 행 하나하나: 정상 전체 행 / 정상 기록 첫 행 분포 대비 백분위
+    # 첫 기록의 행 하나하나를 정상 전체 행·정상 기록 첫 행 분포와 견준 백분위
     rows_all = {s: np.sort(normal[s].to_numpy()) for s in SENSORS}
     rows_pos0 = {s: np.sort(normal.loc[normal.pos == 0, s].to_numpy()) for s in SENSORS}
-    p_of = lambda arr, x: 100.0 * (np.searchsorted(arr, x, "left") + np.searchsorted(arr, x, "right")) / 2 / arr.size
     normal_range = {s: dict(min=float(normal[s].min()), max=float(normal[s].max()),
                             q01=float(normal[s].quantile(0.01)), q99=float(normal[s].quantile(0.99))) for s in SENSORS}
+    su, sl = normal.AI0_Vibration.std(), normal.AI1_Vibration.std()
     first_rows = []
     for i in range(int(r0.n)):
         rr = abnormal.iloc[i]
         d = dict(row=i, ts=str(rr.TimeStamp))
         for s in SENSORS:
-            pa, p0 = p_of(rows_all[s], rr[s]), p_of(rows_pos0[s], rr[s])
+            pa, p0 = midrank_pct(rows_all[s], rr[s]), midrank_pct(rows_pos0[s], rr[s])
             d[s] = dict(value=float(rr[s]), pct_all_rows=pa, pct_first_rows=p0, outside_1_99=bool(pa < 1 or pa > 99),
                         outside_normal_min_max=bool(rr[s] < normal_range[s]["min"] or rr[s] > normal_range[s]["max"]))
-        # 상·하부 진동 동시 크기: 정상 행에서 (|상부|/SD상, |하부|/SD하) 둘 다 이 값 이상인 비율
-        su, sl = normal.AI0_Vibration.std(), normal.AI1_Vibration.std()
+        # 상·하부 진동 동시 크기: 정상 행 중 |상부|/SD상, |하부|/SD하 가 둘 다 이 행 이상인 비율
         ju, jl = abs(rr.AI0_Vibration) / su, abs(rr.AI1_Vibration) / sl
         d["joint_vib_exceed_share"] = float(((normal.AI0_Vibration.abs() / su >= ju)
                                              & (normal.AI1_Vibration.abs() / sl >= jl)).mean())
@@ -412,11 +380,8 @@ def section_onset(normal, abnormal, af, ref600):
 
 
 def low_activity_segment(nf: pd.DataFrame, t_start: pd.Timestamp):
-    """정상 77분 안의 저진동·저부하 구간 탐지.
-
-    10행 이상 기록의 2분 구간 중앙값에서 상부 진동 SD가 전체 중앙값의 0.6배 미만인 구간이
-    가장 길게 이어지는 범위를 고른다(규칙은 정상 자료로만 정함, 이상 자료는 보지 않음).
-    """
+    """정상 77분 안의 저진동·저부하 구간. 10행 이상 기록의 2분 구간 중앙값 상부 진동 SD가 전체 중앙값의
+    0.6배 미만으로 가장 길게 이어지는 범위다(정상 자료만 보고 정한 규칙)."""
     d = nf[nf.n >= MIN_LEN].copy()
     d["bin2"] = (d.t_mid_min // 2).astype(int) * 2
     b2 = d.groupby("bin2").agg(n_records=("n", "size"), vib_upper_sd=("vib_upper_sd", "median"),
@@ -425,7 +390,7 @@ def low_activity_segment(nf: pd.DataFrame, t_start: pd.Timestamp):
                                cur_sine_r2=("cur_sine_r2", "median"))
     thr = 0.6 * float(d.vib_upper_sd.median())
     low = [int(b) for b in b2.index[b2.vib_upper_sd < thr]]
-    runs, cur = [], []
+    runs, cur = [], []                              # 2분씩 이어지는 저진동 구간 묶음
     for b in low:
         if cur and b != cur[-1] + 2:
             runs.append(cur)
@@ -444,7 +409,8 @@ def low_activity_segment(nf: pd.DataFrame, t_start: pd.Timestamp):
 
 
 def section_normal(nf, af, ref600, t_start):
-    """4. 정상 77분 안정성: 시간 추세·10분 구간 중앙값·파일 시작 첫 10기록 vs 나머지·운전 구간(생산/저부하)."""
+    """4. 정상 77분 안정성: 시간 추세, 10분 구간 중앙값, 파일 첫 10기록 대 나머지, 운전 구간(생산/저부하)별 비교.
+    안정 기준은 |ρ| < 0.2이고 10분 구간 중앙값 범위가 1 robust SD 미만인 것이다."""
     nf = nf.sort_values("t_mid_min").reset_index(drop=True)
     for f in F:
         nf[f"z_{f}"] = zscore(ref600, f, nf[f])
@@ -520,7 +486,7 @@ def section_normal(nf, af, ref600, t_start):
 
 
 def section_conditions(normal, abnormal, nf, af):
-    """5. 운전·계측 조건: 시각·요일 + 전류 겉보기 주파수(기록별 최적 사인)."""
+    """5. 운전·계측 조건: 날짜·요일·시각과 전류 겉보기 주파수(10행 이상 기록별 최적 사인)."""
     def freq_table(df, recs):
         out = []
         for k, g in df.groupby("rec"):
@@ -557,7 +523,7 @@ def main():
     af = record_features(abnormal).sort_values("t_mid_min").reset_index(drop=True)
     ref600 = reference(nf)
 
-    tests = section_event(nf, af, ref600)
+    tests = section_event(af, ref600)
     power = section_power(af, tests, rng)
     rec_tab, onset = section_onset(normal, abnormal, af, ref600)
     stab, bins, bins2, first10, regime = section_normal(nf, af, ref600, pd.to_datetime(normal.TimeStamp.iloc[0]))
@@ -602,16 +568,18 @@ def main():
         conditions=cond,
     )
     (OUT / "02_event_trend.json").write_text(json.dumps(clean(result), ensure_ascii=False, indent=1), encoding="utf-8")
-    write_summary(tests, hyp, power, onset, stab, regime, cond, af, first10)
-    print_console(hyp, power, onset, stab, cond)
+    write_summary(tests, power, onset, stab, regime, cond, af, first10)
+    pd.set_option("display.width", 250)
+    print("== 가설 판정표 (|z| 추세) ==")
+    print(hyp[["feature", "all21_spearman_rho", "all21_mk_p", "all21_mk_p_holm", "all21_ts_slope_per_min",
+               "ge10_spearman_rho", "ge10_mk_p", "ge10_mk_p_holm", "ge10_ts_slope_per_min",
+               "ge10_front_median", "ge10_back_median", "ge10_mw_p", "ge10_verdict"]].round(4).to_string())
 
 
 def viscosity_note() -> dict:
-    """냉간 기동 가설의 사전 개연성 점검용 일반론 계산(가정 명시).
-
-    가정: ISO VG46 광유(40°C 46 cSt, 100°C 6.8 cSt — 점도지수 약 100의 대표값). 실제 유종·유온은 자료에 없다.
-    Walther식 log10(log10(ν+0.7)) = A − B·log10(T[K])로 보간.
-    """
+    """냉간 기동 가설의 사전 개연성을 보는 일반론 계산. 실제 유종·유온은 자료에 없다.
+    가정: ISO VG46 광유(40°C 46 cSt, 100°C 6.8 cSt, 점도지수 약 100의 대표값).
+    Walther식 log10(log10(ν + 0.7)) = A − B·log10(T[K])로 두 점을 잇고 다른 온도를 보간한다."""
     t1, t2, v1, v2 = 313.15, 373.15, 46.0, 6.8
     w = lambda v: np.log10(np.log10(v + 0.7))
     b = (w(v1) - w(v2)) / (np.log10(t2) - np.log10(t1))
@@ -623,38 +591,8 @@ def viscosity_note() -> dict:
                 ratio_to_40C={str(c): nu(c) / v1 for c in temps})
 
 
-def print_console(hyp, power, onset, stab, cond):
-    pd.set_option("display.width", 250)
-    pd.set_option("display.max_columns", 30)
-    print("== 가설 판정표 (|z| 추세) ==")
-    print(hyp[["feature", "all21_spearman_rho", "all21_mk_p", "all21_mk_p_holm", "all21_ts_slope_per_min",
-               "ge10_spearman_rho", "ge10_mk_p", "ge10_mk_p_holm", "ge10_ts_slope_per_min",
-               "ge10_front_median", "ge10_back_median", "ge10_mw_p", "ge10_verdict"]].round(4).to_string())
-    print("== 검정력 ==")
-    for s, v in power.items():
-        print(s, v["n"], round(v["t_span_min"], 3), v["delta80_noise_sd"], v["spearman_rho_crit"], v["spearman_rho80"])
-    print("== 첫 기록 ==")
-    fr = onset["first_record"]
-    print(fr["n_feat_outside_len"], fr["n_feat_outside_600"])
-    for f, v in fr["features"].items():
-        print(f, {k: (round(x, 4) if isinstance(x, float) else x) for k, x in v.items()})
-    for r in onset["first_record_rows"]:
-        print(r["row"], r["ts"], {s: (round(r[s]["value"], 3), round(r[s]["pct_all_rows"], 2), round(r[s]["pct_first_rows"], 2)) for s in SENSORS},
-              round(r["joint_vib_exceed_share"], 5))
-    print("== 정상 복귀 ==")
-    for f, v in onset["back_to_normal"].items():
-        print(f, v)
-    print(onset["back_summary"])
-    print("== 정상 안정성 ==")
-    print(stab.round(4).to_string())
-    print("== 운전 구간 ==")
-    print(stab[["feature", "stable", "prod_stable", "prod_spearman_rho", "prod_bin_median_range_z", "prod_median_raw", "low_median_raw", "low_minus_prod_z", "bin_range_over_abnormal"]].round(4).to_string())
-    print("== 조건 ==")
-    print(json.dumps(clean({k: v for k, v in cond.items()}), ensure_ascii=False)[:3000])
-
-
-def write_summary(tests, hyp, power, onset, stab, regime, cond, af, first10):
-    """요약 md. 수치는 모두 이번 실행 결과에서 끌어온다(해석 문장은 이 자료의 결과를 전제로 쓴 것)."""
+def write_summary(tests, power, onset, stab, regime, cond, af, first10):
+    """요약 md를 쓴다. 수치는 이번 실행 결과에서 끌어오고, 해석 문장은 이 자료의 결과를 전제로 쓴 것이다."""
     T = tests.set_index(["subset", "target", "feature"])
     S10 = f"ge{MIN_LEN}"
     g = lambda s, f, k, tg="absz": T.loc[(s, tg, f), k]
@@ -678,19 +616,17 @@ def write_summary(tests, hyp, power, onset, stab, regime, cond, af, first10):
     sig = {s: [f for f in F if g(s, f, "mk_p_holm") < ALPHA] for s in ("all21", S10)}
     sig_ar1 = {s: [f for f in F if g(s, f, "mk_p_ar1_holm") < ALPHA] for s in ("all21", S10)}
     dec_raw = sorted({f for s in ("all21", S10) for f in F if g(s, f, "mk_tau") < 0 and g(s, f, "mk_p") < ALPHA})
-    inc_sig = sorted(set(sig["all21"]) | set(sig[S10]), key=F.index)
     names = lambda fs: ", ".join(NAME[f] for f in fs) if fs else "없음"
     sig_ar1_all = sorted(set(sig_ar1["all21"]) | set(sig_ar1[S10]), key=F.index)
     wd = {"Monday": "월", "Tuesday": "화", "Wednesday": "수", "Thursday": "목", "Friday": "금", "Saturday": "토", "Sunday": "일"}
-    pw21, pw10 = power["all21"], power[S10]
+    pw21 = power["all21"]
     share = lambda s, f, a: power[s]["per_feature"][f][a]["share_of_front_median"]
 
     # ── 3. 시작·복귀
     fr, rows, nr = onset["first_record"], onset["first_record_rows"], onset["normal_row_range"]
     bs, back = onset["back_summary"], onset["back_to_normal"]
     out_first = [NAME[f] for f, v in fr["features"].items() if v["inside_len_1_99"] is False]
-    sens_kr = {"AI0_Vibration": "상부 진동", "AI1_Vibration": "하부 진동", "AI2_Current": "전류"}
-    row_tab = ["| 행 | 시각 | 상부 진동 | 하부 진동 | 전류 | 상·하부 동시 크기를 넘는 정상 행 비율 |", "|---|---|---:|---:|---:|---:|"]
+    row_tab =["| 행 | 시각 | 상부 진동 | 하부 진동 | 전류 | 상·하부 동시 크기를 넘는 정상 행 비율 |", "|---|---|---:|---:|---:|---:|"]
     for r in rows:
         cell = lambda s: f"{r[s]['value']:.3f}{' **범위 밖**' if r[s]['outside_normal_min_max'] else ''} ({r[s]['pct_all_rows']:.1f}%)"
         row_tab.append(f"| {r['row']} | {r['ts'][11:]} | {cell('AI0_Vibration')} | {cell('AI1_Vibration')} | {cell('AI2_Current')} "

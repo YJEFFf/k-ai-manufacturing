@@ -1,55 +1,8 @@
-"""다변량 통계적 공정 관리(MSPC) 기준선: 창 특징 PCA + Hotelling T² / SPE(Q).
-
-이 분석은 test 채점(tvt/03_score_test.py) 이후에 덧붙이는 사후 비교다. 잠근 선택(tvt_selection.json)과
-최종 모델(v2+H1+H2 = 보고서 R1·R2)에는 영향을 주지 않는다. 분할·평가 틀은 tvt/와 같다.
-
-[분할 — 바꾸지 않음]
-- 정상 기록 A 학습 0~359 / 검증 360~479 / 시험 480~599, B 학습 0~299 / 검증 300~419 / 시험 420~599
-- 이상 21기록: 앞 10기록 = 검증, 뒤 11기록 = 시험. 학습(표준화·회귀·PCA·꼬리 분포)은 정상 학습 기록만 쓴다
-
-[창 특징 — 실시간 계산 가능]
-각 행에서 같은 기록 안 그 행까지(포함)의 최근 w행(고정 w = 8, 조정하지 않음)을 창으로 본다. 창이 3행 미만(기록 위치 0·1)이면
-특징·점수가 없고(NaN) 경보도 없다. w = 8 은 예준 v2 파형 창(sine8)·교차 확인 R²(8행)과 같은 값이며 0.8초, 겉보기 전류 주기의 약 절반이다.
-특징 7개는 프레스 상태 감시에서 흔히 쓰는 '에너지·스펙트럼 모양·센서 간 결합·부하·전기 파형' 다섯 축에서 하나씩 골랐다.
-이상 자료를 보고 고르지 않았다(다만 앞선 사후 분석 cases/ 에서 전류 파형이 강하게 갈린다는 점은 이미 알려져 있었다).
-  1. vu_lrms  상부 진동 창 RMS(평균 제거 = 표준편차)의 log10           — 진동 에너지(마모·풀림·충격 증가/감쇠)
-  2. vl_lrms  하부 진동 창 RMS의 log10                                 — 같은 축, 프레임 하부
-  3. cur_lrms 전류 창 RMS의 log10. 고정 F0 사인+절편 적합 진폭/√2       — 모터 부하 대리변수
-     창 8행은 겉보기 주기의 절반이라 단순 표준편차는 위상에 따라 흔들린다. 정상 학습 기록(0~299)에서 기록 전체 RMS와의 상관이
-     창 표준편차 0.71, 사인 진폭 0.99 (n=8)여서 위상에 무관한 사인 진폭을 썼다(학습 정상만으로 정한 선택).
-  4. vu_ac1   상부 진동 lag-1 자기상관                                  — 진동 스펙트럼 모양(저주파 쏠림 ↔ 광대역 충격)
-  5. vl_ac1   하부 진동 lag-1 자기상관
-  6. ul_corr  상·하부 진동 상관                                         — 프레임 상·하부 구조 결합(체결·정렬 상태)
-  7. cur_res  전류 사인 적합 잔차 비율 log10(잔차 RMS / 진폭 + 1e-3)     — 전류 파형 왜곡(전기·구동계 이상, THD 대용)
-  수치 처리: 진동 RMS는 +1e-4(양자화 단위), 전류는 +1.19(양자화 단위)를 더해 log를 취한다. 분산 0 창의 상관·자기상관은 정의되지 않아
-  표준화 후 0(학습 평균)으로 둔다. 창 3행에서는 3모수 사인 적합이 정확히 맞아 cur_res 가 상수이므로 그 길이에서는 정보가 없다(z = 0).
-
-[MSPC]
-- 표준화: 창 길이 n(3~8)별로 정상 학습 행의 평균·표준편차를 따로 쓴다. 짧은 창의 추정량은 분산이 커서, 한 표준화로 묶으면 기록 시작
-  직후 행이 일괄로 튄다. Nomikos–MacGregor 배치 MSPC의 '시점별 평균 궤적 차감'을 창 길이별로 줄인 것이다
-- PCA: 표준화 행렬(정상 학습 행)의 공분산 고유분해, 누적 분산 90%에 처음 닿는 성분 수 k
-- T² = Σ t_a²/λ_a (k개 성분), SPE(Q) = ‖z − ẑ‖² (잔차 공간)
-- 고전 관리 한계(α 1%면 99%): T²는 새 관측용 F 한계 k(m+1)(m−1)/(m(m−k))·F(k, m−k), SPE는 Jackson–Mudholkar.
-  두 관리도 중 하나라도 넘으면 경보(OR). 평가 틀에 넣기 위해 두 한계를 p값 min(p_T², p_SPE)로 바꿔 p ≤ α 를 경보로 쓴다(한계와 동치)
-- conformal(우리 틀과 같음): T²·SPE 각각을 정상 학습 분포의 꼬리 확률로 바꾸고(예준 press.scores.ExpTail과 같은 식: q95까지 경험분포,
-  그 위는 지수 꼬리) 최솟값(= 최대 이탈)을 점수 −log10 p_min 으로 쓴다. 검증 정상 기록별 최댓값으로 conformal p
-  = (1 + #{cal ≥ s})/(n+1) (예준 press.calibrate.conformal_p 와 같은 식), 검증 정상 행은 자기 기록을 뺀 보정(LOO)
-- mspc_load(부하 정규화): 창 길이별로 표준화한 진동 RMS 두 개를 전류 RMS(부하 대리변수)에 정상 학습 행에서 선형 회귀하고, 그 잔차를
-  다시 표준화해 진동 RMS 자리에 넣는다(log-log 회귀 = 진동 ∝ 부하^b). 나머지 특징·PCA·한계·보정은 같다
-- (사후 변형) *_nt: 꼬리 확률을 창 길이 n별 정상 학습 분포로 계산한다. 주 사양의 test 결과를 본 뒤, 검증 A의 conformal 문턱이 4행짜리
-  정상 기록의 창 3행 SPE 하나로 정해진다는 진단에서 추가했다. 배치 MSPC의 시점별 한계와 같은 생각이며 참고용이다
-
-[평가]
-- tvt/cache/rows_{A,B}.pkl 복사본에 (subset, ts, pos)로 맞춰 열을 붙이고 tvt/evalcore.evaluate 로 채점한다. 원본 캐시는 건드리지 않는다
-- 사건 지속(H1)은 함께 본다. 교차 확인(H2)은 'magnitude' 성분 열이 필요해 생략했다
-- 기준 비교로 같은 함수로 v2, v2+H1, v2+H1+H2, maxz3 도 다시 채점한다(이전 결과와 같은지 확인)
-- 기여 분석: 이상 시험 행에서 T² 완전분해 기여(Alcala & Qin 2009, 합 = T²)와 SPE 기여(잔차 제곱)의 특징별 평균, 이탈 방향(평균 z)
-- 약점 진단(사후): 기록 위치별 이상 탐지율, 부하 상태(기록 전체 전류 RMS ≥ 91.9 = 고부하, 예준 v2 진단 경계)별 정상 오경보,
-  학습·검증·시험 구간 × 부하 상태별 고전 한계 초과율(운전 조건 이동), conformal 문턱을 정한 검증 정상 기록 해부
-- 민감도(선택에 안 씀): w = 6·12
-
-실행: PYTHONIOENCODING=utf-8 python domain/03_mspc.py   (code/press 에서. 난수는 쓰지 않지만 seed 0 고정)
-출력: domain/outputs/03_mspc.json, 03_mspc.csv, 03_mspc_summary.md
+"""다변량 통계적 공정 관리(MSPC) 기준선: 행마다 최근 8행 창의 특징 7개 → PCA → Hotelling T²·SPE 경보를 tvt와 같은 틀로 채점한다.
+입력은 cases/common.load_both(matched=True) 원자료, tvt/cache/rows_{A,B}.pkl 행 표(복사본에 열만 붙임), tvt/outputs/tvt_scores_meta.json이다.
+출력은 domain/outputs/03_mspc.json(설정·PCA·한계·진단·기여·전체 결과), 03_mspc.csv(모델 × 분할 × α × valid/test), 03_mspc_summary.md다.
+보고서 2.4·3.1절의 근거다. test 채점 이후의 사후 비교라 잠근 선택과 최종 모델(v2+H1+H2 = 보고서 R1·R2)에는 영향이 없다.
+실행: PYTHONIOENCODING=utf-8 python domain/03_mspc.py (code/press 에서)
 """
 from __future__ import annotations
 
@@ -73,27 +26,30 @@ OUT = HERE / "outputs"
 CACHE = PRESS / "tvt" / "cache"
 META = PRESS / "tvt" / "outputs" / "tvt_scores_meta.json"
 
-W = 8                      # 창 길이(고정)
+W = 8                      # 창 길이(고정). v2 파형 창·교차 확인 R²와 같은 8행 = 0.8초, 겉보기 전류 주기의 약 절반
 W_SENS = (6, 12)           # 민감도용(선택에 안 씀)
-MIN_ROWS = 3               # 창이 이보다 짧으면 점수 없음
-CUM_VAR = 0.90             # PCA 누적 분산 기준
-EPS_V, EPS_C, EPS_R = 1e-4, 1.1920929, 1e-3
+MIN_ROWS = 3               # 창이 이보다 짧으면(기록 위치 0·1) 점수·경보 없음
+CUM_VAR = 0.90             # PCA 성분 수 k = 누적 분산 90%에 처음 닿는 수
+EPS_V, EPS_C, EPS_R = 1e-4, 1.1920929, 1e-3   # log 바닥: 진동·전류 양자화 단위, 잔차 비율
 LOAD_STATE_RMS = 91.9      # 사후 진단용 부하 상태 경계(예준 v2 LOAD_STATE_RMS, 기록 평균 제거 전류 RMS). 경보·학습에는 안 씀
 STATE_MIN_ROWS = 17        # 겉보기 전류 한 주기 이상 본 기록만 부하 상태를 매긴다(예준 v2와 같음)
+# 특징 7개는 프레스 상태 감시의 흔한 축에서 이상 자료를 보지 않고 하나씩 골랐다.
+# 진동 에너지(상·하부 창 RMS), 부하(전류 RMS), 스펙트럼 모양(상·하부 lag-1), 프레임 상·하부 결합(상관), 전류 파형 왜곡(사인 잔차 비율)
 FEATURES = ["vu_lrms", "vl_lrms", "cur_lrms", "vu_ac1", "vl_ac1", "ul_corr", "cur_res"]
 FEATURE_KO = {"vu_lrms": "상부 진동 RMS", "vl_lrms": "하부 진동 RMS", "cur_lrms": "전류 RMS(부하)",
               "vu_ac1": "상부 진동 lag-1", "vl_ac1": "하부 진동 lag-1", "ul_corr": "상·하부 진동 상관",
               "cur_res": "전류 사인 잔차 비율"}
-VIB_RMS, CUR_RMS = [0, 1], 2
-np.random.seed(0)
+VIB_RMS, CUR_RMS = [0, 1], 2   # FEATURES 안 위치
+np.random.seed(0)              # 난수는 쓰지 않지만 기록용으로 고정
 
 
 # ---------------------------------------------------------------- 특징
 def window_features(df: pd.DataFrame, w: int) -> tuple[np.ndarray, np.ndarray]:
-    """행별 창 특징(그 행까지의 같은 기록 최근 w행). 반환: (특징 행렬 [행, 7], 창 길이 n; n<3이면 특징 NaN)."""
+    """행별 창 특징. 창은 같은 기록 안 그 행까지의 최근 w행이다. 반환은 (특징 [행, 7], 창 길이 n)이고 n < 3이면 특징 NaN."""
     v0, v1, c = (df[s].to_numpy(float) for s in SENSORS)
     F = np.full((len(df), len(FEATURES)), np.nan)
     nwin = np.zeros(len(df), int)
+    # 창 길이 m마다 고정 F0 사인 + 절편 설계행렬과 유사역행렬을 미리 만든다
     pinv = {}
     for m in range(MIN_ROWS, w + 1):
         k = np.arange(m)
@@ -113,6 +69,9 @@ def window_features(df: pd.DataFrame, w: int) -> tuple[np.ndarray, np.ndarray]:
             beta = P @ x
             amp = float(np.hypot(beta[1], beta[2]))
             rstd = float(np.sqrt(np.mean((x - X @ beta) ** 2)))
+            # 전류 RMS는 창 SD 대신 사인 진폭/√2다. 8행 창은 겉보기 주기의 절반이라 SD가 위상에 따라 흔들린다
+            # (정상 학습 기록에서 기록 전체 RMS와의 상관: 창 SD 0.71, 사인 진폭 0.99).
+            # 분산 0 창의 상관·자기상관은 NaN으로 두고 표준화 뒤 0(학습 평균)으로 채운다. 창 3행에선 사인이 정확히 맞아 cur_res가 상수다
             F[idx[j]] = [np.log10(sa + EPS_V), np.log10(sb + EPS_V), np.log10(amp / np.sqrt(2) + EPS_C),
                          lag1(a) if sa > 0 else np.nan, lag1(b) if sb > 0 else np.nan,
                          np.corrcoef(a, b)[0, 1] if sa > 0 and sb > 0 else np.nan,
@@ -122,7 +81,8 @@ def window_features(df: pd.DataFrame, w: int) -> tuple[np.ndarray, np.ndarray]:
 
 # ---------------------------------------------------------------- 꼬리 변환·보정
 class Tail:
-    """예준 press.scores.ExpTail과 같은 식: 정상 학습 참조 R의 q95까지는 −log10((#R≥s+1)/(n+1)), 그 위는 지수 꼬리 외삽."""
+    """점수 s → −log10(꼬리 확률). 정상 학습 참조 R의 q95까지는 경험분포 −log10((#R≥s + 1)/(n + 1)),
+    그 위는 평균 초과량 β인 지수 꼬리로 외삽한다(예준 press.scores.ExpTail과 같은 식)."""
 
     def __init__(self, ref, q=0.95):
         r = np.sort(np.asarray(ref, float)[np.isfinite(ref)])
@@ -156,7 +116,8 @@ def conformal_p(cal_values, scores):
 
 
 def calibrate(table: pd.DataFrame, score: np.ndarray):
-    """검증 정상 기록 최댓값으로 conformal p(전체), 검증 정상 행은 자기 기록을 뺀 보정(LOO). tvt/01_scores.py calibrate 와 같다."""
+    """검증 정상 기록별 최댓값을 보정 집합으로 conformal p를 낸다. 검증 정상 행은 자기 기록을 뺀 보정(LOO)을 쓴다.
+    기록 최댓값으로 보정하므로 '기록 하나에 수십 행을 검정하는' 다중 검정 문제가 막힌다(tvt/01_scores.py calibrate와 같다)."""
     vn = ((table.part == "valid") & (table.subset == "normal")).to_numpy()
     sv, rv = score[vn], table.rec.to_numpy()[vn]
     cal = pd.Series(np.where(np.isfinite(sv), sv, -np.inf)).groupby(rv).max()
@@ -176,13 +137,20 @@ class MSPC:
     def __init__(self, load: bool):
         self.load = load
 
-    def _std(self, F, nwin):
+    def _z(self, F, nwin):
+        """창 길이 n별 정상 학습 평균·SD로 표준화한다. 짧은 창은 추정량 분산이 커서 한 표준화로 묶으면
+        기록 시작 직후 행이 일괄로 튄다(배치 MSPC의 '시점별 평균 궤적 차감'을 창 길이별로 줄인 것)."""
         Z = np.zeros_like(F)
         for n in range(MIN_ROWS, self.w + 1):
             m = nwin == n
             sd = self.sd[n]
             Z[m] = np.where(sd > 1e-9, (F[m] - self.mu[n]) / np.where(sd > 1e-9, sd, 1.0), 0.0)
         Z[~np.isfinite(Z)] = 0.0                       # 정의 안 되는 상관·자기상관 = 학습 평균
+        return Z
+
+    def _std(self, F, nwin):
+        """표준화 z. mspc_load면 진동 RMS z 두 개를 전류 RMS z에 대한 회귀 잔차(재표준화)로 바꾼다."""
+        Z = self._z(F, nwin)
         if self.load:
             for n in range(MIN_ROWS, self.w + 1):
                 m = nwin == n
@@ -192,6 +160,7 @@ class MSPC:
         return Z
 
     def fit(self, F, nwin, w):
+        """정상 학습 행으로 표준화·(부하 회귀)·PCA·고전 한계 모수·꼬리 분포를 만든다."""
         self.w = w
         ok = nwin >= MIN_ROWS
         F, nwin = F[ok], nwin[ok]
@@ -201,9 +170,8 @@ class MSPC:
             self.mu[n] = np.nanmean(F[m], axis=0)
             self.sd[n] = np.nanstd(F[m], axis=0, ddof=1)
         if self.load:
-            saved, self.load = self.load, False
-            Z0 = self._std(F, nwin)
-            self.load = saved
+            # 창 길이별 OLS z(진동 RMS) ~ z(전류 RMS). 둘 다 log라 진동 ∝ 부하^b 관계를 빼는 셈이다
+            Z0 = self._z(F, nwin)
             self.reg, self.reg_info = {}, {}
             for n in range(MIN_ROWS, w + 1):
                 m = nwin == n
@@ -217,43 +185,47 @@ class MSPC:
                     self.reg_info[f"n{n}_{FEATURES[j]}"] = dict(slope=round(float(b), 4),
                                                                 r2=round(float(1 - r.var() / y.var()), 4))
         Z = self._std(F, nwin)
-        mrows, p = Z.shape
-        S = Z.T @ Z / (mrows - 1)
+        mrows = len(Z)
+        S = Z.T @ Z / (mrows - 1)                      # 학습 행의 z는 평균 0이라 따로 중심화하지 않는다
         lam, P = np.linalg.eigh(S)
         order = np.argsort(lam)[::-1]
         lam, P = lam[order], P[:, order]
         cum = np.cumsum(lam) / lam.sum()
-        k = int(np.searchsorted(cum, CUM_VAR) + 1)
+        k = int(np.searchsorted(cum, CUM_VAR) + 1)     # 누적 분산이 90%에 처음 닿는 성분 수
         self.lam_all, self.P_all, self.k, self.cum = lam, P, k, cum
         self.P, self.lam = P[:, :k], lam[:k]
         self.m = mrows
-        # 고전 한계 모수
+        # 고전 한계 모수: 잔차 공간 고유값의 1·2·3제곱 합 θ와 Jackson–Mudholkar 지수 h0
         th = [float((lam[k:] ** i).sum()) for i in (1, 2, 3)]
         self.theta = th
         self.h0 = 1 - 2 * th[0] * th[2] / (3 * th[1] ** 2)
         t2, spe = self._indices(Z)
         self.tail_t2, self.tail_spe = Tail(t2), Tail(spe)
-        # 사후 변형(_nt): 창 길이 n별 꼬리. 짧은 창의 T²·SPE가 정상에서도 꼬리가 두꺼워(검증 A 진단) n마다 따로 꼬리 확률로 바꾼다
+        # 사후 변형(_nt): 짧은 창의 T²·SPE는 정상에서도 꼬리가 두꺼워(검증 A 진단) 창 길이 n마다 따로 꼬리 확률로 바꾼다
         self.tails_n = {n: (Tail(t2[nwin == n]), Tail(spe[nwin == n])) for n in range(MIN_ROWS, w + 1)}
-        self.train_t2, self.train_spe, self.train_n = t2, spe, nwin
+        self.train_t2, self.train_spe = t2, spe
         return self
 
     def _indices(self, Z):
+        """T² = Σ t_a²/λ_a (k개 성분), SPE = 잔차 공간 ‖z − ẑ‖²."""
         T = Z @ self.P
         t2 = (T ** 2 / self.lam).sum(1)
         E = Z - T @ self.P.T
         return t2, (E ** 2).sum(1)
 
     def t2_limit(self, conf):
+        """새 관측용 T² 한계 k(m+1)(m−1)/(m(m−k))·F(k, m−k)."""
         k, m = self.k, self.m
         return k * (m + 1) * (m - 1) / (m * (m - k)) * stats.f.ppf(conf, k, m - k)
 
     def spe_limit(self, conf):
-        t1, t2, t3 = self.theta
+        """Jackson–Mudholkar SPE 한계."""
+        t1, t2, _ = self.theta
         h0 = self.h0
         c = stats.norm.ppf(conf)
         return t1 * (c * np.sqrt(2 * t2 * h0 ** 2) / t1 + 1 + t2 * h0 * (h0 - 1) / t1 ** 2) ** (1 / h0)
 
+    # 두 한계식을 거꾸로 풀어 p값으로 바꾼다. p ≤ α ⇔ (1−α) 한계 초과라 평가 틀에 그대로 넣을 수 있다
     def p_t2(self, t2):
         k, m = self.k, self.m
         return stats.f.sf(t2 * m * (m - k) / (k * (m + 1) * (m - 1)), k, m - k)
@@ -265,7 +237,7 @@ class MSPC:
         return stats.norm.sf(c)
 
     def score(self, F, nwin):
-        """행별 지표. 창 3행 미만은 NaN."""
+        """행별 지표. conformal 점수는 두 꼬리 −log10 p 중 큰 값, 고전 p는 min(p_T², p_SPE)(OR 경보). 창 3행 미만은 NaN."""
         ok = nwin >= MIN_ROWS
         out = {k: np.full(len(F), np.nan) for k in ("t2", "spe", "g_t2", "g_spe", "score", "score_nt",
                                                     "p_cl", "p_cl_t2", "p_cl_spe")}
@@ -294,6 +266,7 @@ class MSPC:
 
 # ---------------------------------------------------------------- 자료 맞춤
 def raw_frames():
+    """정상·이상 원자료에 캐시 행 표와 맞출 키(subset, ts)를 붙인다."""
     normal, abnormal = load_both(matched=True)
     for df, sub in ((normal, "normal"), (abnormal, "abnormal")):
         df["subset"] = sub
@@ -312,11 +285,8 @@ def align(table: pd.DataFrame, raw: pd.DataFrame) -> np.ndarray:
 
 
 # ---------------------------------------------------------------- 평가
-def fmt_counts(d):
-    return {k: (round(v, 4) if isinstance(v, float) else v) for k, v in d.items()}
-
-
 def run_eval(table, cands, sid, r2_ref, rows):
+    """후보마다 α·valid/test별로 tvt/evalcore.evaluate 채점 결과(실시간·기록 단위)를 rows에 쌓는다."""
     for cand in cands:
         for alpha in ALPHAS:
             for regime in ("valid", "test"):
@@ -345,22 +315,22 @@ def add_columns(table, name, sc, idx):
     return pd.concat([table, pd.DataFrame(cols, index=table.index)], axis=1), cal, cal_nt
 
 
-def load_state(table):
-    """사후 진단용 기록 부하 상태: 기록 전체 전류의 평균 제거 RMS ≥ 91.9 → high, 17행 미만 기록은 unknown."""
-    g = table.groupby("rec").current
-    rms = g.transform(lambda x: x.std(ddof=0))
-    n = g.transform("size")
+def load_state(current: pd.Series, rec) -> np.ndarray:
+    """사후 진단용 기록 부하 상태: 기록 전체 전류의 평균 제거 RMS ≥ 91.9면 high, 17행 미만 기록은 unknown."""
+    g = current.groupby(rec)
+    rms, n = g.transform(lambda x: x.std(ddof=0)), g.transform("size")
     return np.where(n < STATE_MIN_ROWS, "unknown", np.where(rms >= LOAD_STATE_RMS, "high", "low"))
 
 
 def pos_bucket(pos):
+    """기록 위치 구간: 점수 없음(0·1), 창이 덜 찬 2~6, 창이 찬 7 이상."""
     return np.where(pos < MIN_ROWS - 1, "pos0-1(점수없음)", np.where(pos < W - 1, f"pos2-{W - 2}(창3~{W - 1}행)", f"pos{W - 1}+(창{W}행)"))
 
 
-def weakness(table, sid, r2_ref, models):
+def weakness(table, r2_ref, models):
     """α 1% 시험, 규칙 없는 자체 경보: 이상 행 탐지율(기록 위치별), 정상 행 오경보(부하 상태별), 기록별 첫 경보 위치."""
     out = {}
-    state = pd.Series(load_state(table), index=table.index)
+    state = pd.Series(load_state(table.current, table.rec), index=table.index)
     for name in models:
         pr = evalcore.predict_rows(table, (name, name, False, False, False, 1), 0.01, "test", r2_ref)
         key = table[["subset", "ts", "pos"]].assign(state=state.to_numpy())
@@ -398,7 +368,7 @@ def contribution_summary(model, sc, idx, table):
             share = C[m] / np.maximum(C[m].sum(1, keepdims=True), 1e-12)
             d[nm_] = {f: dict(mean=round(float(C[m, j].mean()), 3), share=round(float(share[:, j].mean()), 3))
                       for j, f in enumerate(FEATURES)}
-            d[nm_ + "_rank"] = [f for f in sorted(FEATURES, key=lambda f: -d[nm_][f]["mean"])]
+            d[nm_ + "_rank"] = sorted(FEATURES, key=lambda f: -d[nm_][f]["mean"])
         g1, g2 = sc["g_t2"][idx][m], sc["g_spe"][idx][m]
         d["mean_signed_z"] = {f: round(float(Z[m, j].mean()), 2) for j, f in enumerate(FEATURES)}   # 이탈 방향(+ 증가, − 감소)
         d["rows"] = int(m.sum())
@@ -442,12 +412,10 @@ def calibration_anatomy(sc, idx, nwin, table, cal, lo, train_mask):
                                             for n in range(MIN_ROWS, int(nwin.max()) + 1)})
 
 
-def load_drift(model, sc, raw, nwin, lo, hi, conf=0.99):
-    """정상 학습·검증·시험 구간 × 기록 부하 상태별 고전 99% 한계 초과율과 특징 평균 z(사후 진단, 부하 상태는 기록 전체 RMS)."""
+def load_drift(model, sc, raw, lo, hi, conf=0.99):
+    """정상 학습·검증·시험 구간 × 기록 부하 상태별 고전 99% 한계 초과율과 특징 평균 z(운전 조건 이동 진단)."""
     nm = (raw.subset == "normal").to_numpy()
-    g = raw[nm].groupby("rec").AI2_Current
-    rms, ln = g.transform(lambda x: x.std(ddof=0)).to_numpy(), g.transform("size").to_numpy()
-    state = np.where(ln < STATE_MIN_ROWS, "unknown", np.where(rms >= LOAD_STATE_RMS, "high", "low"))
+    state = load_state(raw[nm].AI2_Current, raw[nm].rec)
     rec = raw.rec.to_numpy()[nm]
     part = np.where(rec < lo, "train", np.where(rec < hi, "valid", "test"))
     t2, spe, Z = sc["t2"][nm], sc["spe"][nm], sc["Z"][nm]
@@ -468,18 +436,21 @@ def main():
     meta = json.loads(META.read_text(encoding="utf-8"))
     normal, abnormal = raw_frames()
     raw = pd.concat([normal, abnormal], ignore_index=True)
+    # 창 특징을 raw 행 순서(정상 다음 이상)로 잇는다: (F_정상, n_정상) + (F_이상, n_이상) → (F, n)
     feats = {w: window_features(normal, w) + window_features(abnormal, w) for w in (W, *W_SENS)}
     feats = {w: (np.vstack([f[0], f[2]]), np.concatenate([f[1], f[3]])) for w, f in feats.items()}
 
     rows, info = [], {}
     for sid, (lo, hi) in SPLITS.items():
         r2_ref = meta[sid]["r2_ref"]
+        # 캐시 행 표 복사본에서 v2·maxz3 점수 열만 남기고 MSPC 열을 붙인다(원본 캐시는 건드리지 않음)
         table = pd.read_pickle(CACHE / f"rows_{sid}.pkl")
         keep = [c for c in table.columns if "|" not in c or c.split("|")[0] in ("v2", "maxz3")]
         table = table[keep].copy()
         idx = align(table, raw)
         train = ((raw.subset == "normal") & (raw.rec < lo)).to_numpy()
-        info[sid] = dict(train_rows_scored=None, models={})
+        # 점수가 있는 학습 행 수(위치 2 이상)는 창 길이와 무관하다
+        info[sid] = dict(train_rows_scored=int((feats[W][1][train] >= MIN_ROWS).sum()), models={})
         cands = []
         for w in (W, *W_SENS):
             F, nwin = feats[w]
@@ -488,8 +459,6 @@ def main():
                 model = MSPC(load).fit(F[train], nwin[train], w)
                 sc = model.score(F, nwin)
                 table, cal, cal_nt = add_columns(table, name, sc, idx)
-                okt = nwin[train] >= MIN_ROWS
-                info[sid]["train_rows_scored"] = int(okt.sum())
                 if w == W:
                     mi = dict(k=model.k, explained_cum=[round(float(v), 4) for v in model.cum],
                               eigenvalues=[round(float(v), 4) for v in model.lam_all],
@@ -508,8 +477,9 @@ def main():
                     if load:
                         mi["load_regression"] = model.reg_info
                     else:
-                        info[sid]["load_drift"] = load_drift(model, sc, raw, nwin, lo, hi)
+                        info[sid]["load_drift"] = load_drift(model, sc, raw, lo, hi)
                     info[sid]["models"][name] = mi
+                    # 후보 튜플은 evalcore 규약 (이름, 기반 점수 열, H1 사건 지속, H2 교차 확인, 기록 단위 전용, 복잡도)
                     cands += [(name, name, False, False, False, 1), (name + "+H1", name, True, False, False, 2),
                               (name + "_cl", name + "_cl", False, False, False, 1), (name + "_cl+H1", name + "_cl", True, False, False, 2),
                               (name + "_cl_t2", name + "_cl_t2", False, False, False, 1),
@@ -517,11 +487,12 @@ def main():
                               (name + "_nt", name + "_nt", False, False, False, 2), (name + "_nt+H1", name + "_nt", True, False, False, 3)]
                 else:
                     cands += [(name, name, False, False, False, 1), (name + "+H1", name, True, False, False, 2)]
+        # 기준 비교: 같은 평가 함수로 v2 계열과 베이스라인을 다시 채점한다(이전 결과와 같아야 한다)
         cands += [("v2", "v2", False, False, False, 3), ("v2+H1", "v2", True, False, False, 4),
                   ("v2+H1+H2", "v2", True, True, False, 5), ("maxz3", "maxz3", False, False, False, 1)]
         run_eval(table, cands, sid, r2_ref, rows)
-        info[sid]["weakness"] = weakness(table, sid, r2_ref, ["mspc", "mspc_nt", "mspc_load", "mspc_cl", "v2"])
-        # v2 오경보가 났던 시험 정상 기록에서 MSPC 점수·경보
+        info[sid]["weakness"] = weakness(table, r2_ref, ["mspc", "mspc_nt", "mspc_load", "mspc_cl", "v2"])
+        # v2 오경보가 났던 시험 정상 행에서 MSPC 각 사양의 p
         p = table["v2|p_full"].to_numpy()
         fa = table[((table.part == "test") & (table.subset == "normal")).to_numpy() & (p <= 0.01)]
 
@@ -552,7 +523,7 @@ def main():
         results=res.round(4).to_dict(orient="records"))
     (OUT / "03_mspc.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2, default=str), encoding="utf-8")
     (OUT / "03_mspc_summary.md").write_text(summary["md"], encoding="utf-8")
-    print(summary["md"])
+    print("저장:", OUT / "03_mspc_summary.md")
 
 
 # ---------------------------------------------------------------- 요약
@@ -582,25 +553,30 @@ B01, B26, B7 = "pos0-1(점수없음)", f"pos2-{W - 2}(창3~{W - 1}행)", f"pos{W
 
 
 def _row(res, model, regime, alpha, sid):
+    """결과표에서 (모델, valid/test, α, 분할) 한 행. 없으면 None."""
     r = res[(res.model == model) & (res.regime == regime) & (res.alpha == alpha) & (res.split == sid)]
     return r.iloc[0] if len(r) else None
 
 
 def _f(res, model, regime, alpha, unit, sid):
+    """F1(실시간 또는 기록 단위). 없으면 NaN."""
     r = _row(res, model, regime, alpha, sid)
     v = None if r is None else r.get(f"{unit}_f1")
     return np.nan if v is None or pd.isna(v) else float(v)
 
 
 def _c(res, model, regime, alpha, unit, sid, k):
+    """오경보(fp)·미탐(fn) 같은 개수."""
     return int(_row(res, model, regime, alpha, sid)[f"{unit}_{k}"])
 
 
 def f3(x):
+    """소수 셋째 자리 문자열, 값이 없으면 —."""
     return "—" if x is None or (isinstance(x, float) and np.isnan(x)) else f"{x:.3f}"
 
 
 def summarize(res, info):
+    """요약 md 본문과 headline(주요 모델의 α 1% F1)을 만든다."""
     A, B = info["A"], info["B"]
     L = []
     w = L.append

@@ -14,7 +14,10 @@ import pandas as pd  # noqa: E402
 from data import SENSORS, load  # noqa: E402
 from scores import FREQS  # noqa: E402
 
-plt.rcParams["font.family"] = ["Malgun Gothic", "AppleGothic", "NanumGothic", "DejaVu Sans"]
+from matplotlib import font_manager  # noqa: E402
+
+plt.rcParams["font.family"] = [f for f in ("Malgun Gothic", "AppleGothic", "NanumGothic")
+                               if f in {x.name for x in font_manager.fontManager.ttflist}] + ["DejaVu Sans"]
 plt.rcParams["axes.unicode_minus"] = False
 
 

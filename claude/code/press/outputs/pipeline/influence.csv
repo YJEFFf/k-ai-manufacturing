@@ -1,25 +1,66 @@
-split,source,kind,item,share,n
-normal_50_20_30,abnormal,alarm_reason,sine,0.6358024691358025,486
-normal_50_20_30,abnormal,alarm_reason,both,0.2448559670781893,486
-normal_50_20_30,abnormal,alarm_reason,maxz,0.11934156378600823,486
-normal_50_20_30,abnormal,maxz_sensor,AI0_Vibration,0.9378531073446328,177
-normal_50_20_30,abnormal,maxz_sensor,AI1_Vibration,0.062146892655367235,177
-normal_50_20_30,normal_test,alarm_reason,maxz,1.0,1
-normal_50_20_30,normal_test,maxz_sensor,AI0_Vibration,1.0,1
-normal_60_20_20,abnormal,alarm_reason,sine,0.5177111716621253,367
-normal_60_20_20,abnormal,alarm_reason,maxz,0.30517711171662126,367
-normal_60_20_20,abnormal,alarm_reason,both,0.1771117166212534,367
-normal_60_20_20,abnormal,maxz_sensor,AI0_Vibration,0.9378531073446328,177
-normal_60_20_20,abnormal,maxz_sensor,AI1_Vibration,0.062146892655367235,177
+split,source,kind,item,value,n
+normal_50_20_30,abnormal,alarm_reason,전류 파형,0.4576271186440678,531
+normal_50_20_30,abnormal,alarm_reason,진동/전류 크기+센서 조합+시계열 재구성+전류 파형,0.2711864406779661,531
+normal_50_20_30,abnormal,alarm_reason,진동/전류 크기+센서 조합,0.07532956685499058,531
+normal_50_20_30,abnormal,alarm_reason,시계열 재구성+전류 파형,0.06779661016949153,531
+normal_50_20_30,abnormal,alarm_reason,센서 조합+시계열 재구성+전류 파형,0.060263653483992465,531
+normal_50_20_30,abnormal,alarm_reason,진동/전류 크기+센서 조합+시계열 재구성,0.032015065913371,531
+normal_50_20_30,abnormal,alarm_reason,시계열 재구성,0.02071563088512241,531
+normal_50_20_30,abnormal,alarm_reason,센서 조합,0.003766478342749529,531
+normal_50_20_30,abnormal,alarm_reason,진동/전류 크기+센서 조합+전류 파형,0.003766478342749529,531
+normal_50_20_30,abnormal,alarm_reason,센서 조합+시계열 재구성,0.003766478342749529,531
+normal_50_20_30,abnormal,alarm_reason,센서 조합+전류 파형,0.003766478342749529,531
+normal_50_20_30,abnormal,maxz_sensor,AI0_Vibration,0.9113300492610837,203
+normal_50_20_30,abnormal,maxz_sensor,AI1_Vibration,0.08866995073891626,203
+normal_50_20_30,normal_test,alarm_reason,진동/전류 크기+센서 조합,0.6666666666666666,3
+normal_50_20_30,normal_test,alarm_reason,진동/전류 크기+센서 조합+시계열 재구성,0.3333333333333333,3
+normal_50_20_30,normal_test,maxz_sensor,AI0_Vibration,1.0,3
+normal_60_20_20,abnormal,alarm_reason,전류 파형,0.49053030303030304,528
+normal_60_20_20,abnormal,alarm_reason,진동/전류 크기+센서 조합+시계열 재구성+전류 파형,0.24431818181818182,528
+normal_60_20_20,abnormal,alarm_reason,시계열 재구성+전류 파형,0.08901515151515152,528
+normal_60_20_20,abnormal,alarm_reason,진동/전류 크기+센서 조합,0.07386363636363637,528
+normal_60_20_20,abnormal,alarm_reason,센서 조합+시계열 재구성+전류 파형,0.03977272727272727,528
+normal_60_20_20,abnormal,alarm_reason,진동/전류 크기+센서 조합+시계열 재구성,0.026515151515151516,528
+normal_60_20_20,abnormal,alarm_reason,시계열 재구성,0.020833333333333332,528
+normal_60_20_20,abnormal,alarm_reason,센서 조합+시계열 재구성,0.007575757575757576,528
+normal_60_20_20,abnormal,alarm_reason,센서 조합+전류 파형,0.003787878787878788,528
+normal_60_20_20,abnormal,alarm_reason,진동/전류 크기,0.001893939393939394,528
+normal_60_20_20,abnormal,alarm_reason,진동/전류 크기+센서 조합+전류 파형,0.001893939393939394,528
+normal_60_20_20,abnormal,maxz_sensor,AI0_Vibration,0.9293478260869565,184
+normal_60_20_20,abnormal,maxz_sensor,AI1_Vibration,0.07065217391304347,184
+normal_50_20_30,budget=0.01,ablation,ablate_maxz,0.0,-2
+normal_50_20_30,budget=0.01,ablation,ablate_knn5,0.0,0
+normal_50_20_30,budget=0.01,ablation,ablate_ae5,0.0,0
+normal_50_20_30,budget=0.01,ablation,ablate_sine,-3.0,0
+normal_50_20_30,budget=0.03,ablation,ablate_maxz,0.0,1
+normal_50_20_30,budget=0.03,ablation,ablate_knn5,0.0,0
+normal_50_20_30,budget=0.03,ablation,ablate_ae5,0.0,1
+normal_50_20_30,budget=0.03,ablation,ablate_sine,-3.0,0
+normal_50_20_30,budget=0.05,ablation,ablate_maxz,0.0,-1
+normal_50_20_30,budget=0.05,ablation,ablate_knn5,0.0,1
+normal_50_20_30,budget=0.05,ablation,ablate_ae5,0.0,1
+normal_50_20_30,budget=0.05,ablation,ablate_sine,-3.0,-2
+normal_60_20_20,budget=0.01,ablation,ablate_maxz,0.0,1
+normal_60_20_20,budget=0.01,ablation,ablate_knn5,0.0,0
+normal_60_20_20,budget=0.01,ablation,ablate_ae5,0.0,0
+normal_60_20_20,budget=0.01,ablation,ablate_sine,-3.0,0
+normal_60_20_20,budget=0.03,ablation,ablate_maxz,0.0,0
+normal_60_20_20,budget=0.03,ablation,ablate_knn5,0.0,0
+normal_60_20_20,budget=0.03,ablation,ablate_ae5,0.0,0
+normal_60_20_20,budget=0.03,ablation,ablate_sine,-3.0,0
+normal_60_20_20,budget=0.05,ablation,ablate_maxz,0.0,0
+normal_60_20_20,budget=0.05,ablation,ablate_knn5,0.0,0
+normal_60_20_20,budget=0.05,ablation,ablate_ae5,0.0,0
+normal_60_20_20,budget=0.05,ablation,ablate_sine,-3.0,0
 normal_50_20_30,segment,univariate_auroc,vib0_std,0.8619047619047618,201
-normal_50_20_30,segment,univariate_auroc,vib1_std,0.8981481481481481,201
+normal_50_20_30,segment,univariate_auroc,vib1_std,0.898148148148148,201
 normal_50_20_30,segment,univariate_auroc,current_amp,0.7023809523809523,201
-normal_50_20_30,segment,univariate_auroc,sine_1mR2_median,0.9137566137566138,201
+normal_50_20_30,segment,univariate_auroc,sine_misfit_median,0.9285714285714286,201
 normal_50_20_30,segment,univariate_auroc,maxz_max,0.9584656084656084,201
 normal_50_20_30,segment,univariate_auroc,length,0.41388888888888886,201
-normal_60_20_20,segment,univariate_auroc,vib0_std,0.8634920634920634,141
+normal_60_20_20,segment,univariate_auroc,vib0_std,0.8634920634920635,141
 normal_60_20_20,segment,univariate_auroc,vib1_std,0.9273809523809523,141
 normal_60_20_20,segment,univariate_auroc,current_amp,0.751984126984127,141
-normal_60_20_20,segment,univariate_auroc,sine_1mR2_median,0.9392857142857143,141
+normal_60_20_20,segment,univariate_auroc,sine_misfit_median,0.9285714285714286,141
 normal_60_20_20,segment,univariate_auroc,maxz_max,0.9757936507936508,141
 normal_60_20_20,segment,univariate_auroc,length,0.4093253968253968,141

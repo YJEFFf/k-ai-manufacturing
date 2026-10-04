@@ -1,7 +1,8 @@
-"""보고서 수치 근거표(facts.csv)를 원본 산출물에서 다시 읽어 만든다.
+"""보고서 수치 근거표(facts.csv)를 분석 산출물에서 다시 읽어 만든다.
 
-각 행: id, value(원값), shown(본문 표시형), source(파일), locator(키·행열)
-check_facts.py가 본문 숫자를 이 표의 shown 값과 대조한다.
+입력: code/press/{cases,tvt,domain}/outputs, code/press/outputs/{alias,requantize}, 아래 EXT 표(외부 문헌·가이드북 수치)
+출력: report/facts.csv — 각 행 id, value(원값), shown(본문 표시형), source(파일), locator(키·행열)
+실행: python report/facts_build.py  → 이어서 check_facts.py가 본문 숫자를 shown 값과 대조한다
 """
 from __future__ import annotations
 
@@ -14,11 +15,16 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 CASES = ROOT / "code/press/cases/outputs"
 TVT = ROOT / "code/press/tvt/outputs"
+DOM = ROOT / "code/press/domain/outputs"
+REQ = ROOT / "code/press/outputs/requantize"
 ALIAS = ROOT / "code/press/outputs/alias/segment_sine_fit.csv"
+FX = CASES / "facts_extra.json"
+SEP = CASES / "feature_separation.csv"
 rows = []
 
 
 def add(fid, value, shown, source, locator):
+    """근거 한 행을 쌓는다. source가 절대 경로면 볼트 기준 상대 경로로 적는다."""
     rows.append(dict(id=fid, value=value, shown=str(shown), source=str(Path(source).relative_to(ROOT)) if Path(source).is_absolute() else source,
                      locator=locator))
 
@@ -28,63 +34,62 @@ def fmt(x, d):
 
 
 # ---- 1장: 데이터 ----
-fx = json.loads((CASES / "facts_extra.json").read_text(encoding="utf-8"))
+fx = json.loads(FX.read_text(encoding="utf-8"))
 for side in ("normal", "abnormal"):
     f = fx[side]
-    src = CASES / "facts_extra.json"
-    add(f"{side}.rows", f["rows"], f"{f['rows']:,}", src, f"{side}.rows")
-    add(f"{side}.records", f["records"], f["records"], src, f"{side}.records")
-    add(f"{side}.measured_pct", f["measured_share"], fmt(f["measured_share"] * 100, 1), src, f"{side}.measured_share")
-    add(f"{side}.measured_pct0", f["measured_share"], fmt(f["measured_share"] * 100, 0), src, f"{side}.measured_share")
-    add(f"{side}.vib_upper_sd", f["vib_upper_sd"], fmt(f["vib_upper_sd"], 3), src, f"{side}.vib_upper_sd")
-    add(f"{side}.vib_lower_sd", f["vib_lower_sd"], fmt(f["vib_lower_sd"], 3), src, f"{side}.vib_lower_sd")
-    add(f"{side}.current_mean", f["current_mean"], fmt(f["current_mean"], 1), src, f"{side}.current_mean")
-    add(f"{side}.corr_median", f["upper_lower_corr_median"], fmt(f["upper_lower_corr_median"], 2), src, f"{side}.upper_lower_corr_median")
-    add(f"{side}.ratio_median", f["upper_over_lower_sd_median"], fmt(f["upper_over_lower_sd_median"], 2), src, f"{side}.upper_over_lower_sd_median")
-    add(f"{side}.rec_mean_min", f["record_current_mean_min"], fmt(f["record_current_mean_min"], 1), src, f"{side}.record_current_mean_min")
-    add(f"{side}.rec_mean_max", f["record_current_mean_max"], fmt(f["record_current_mean_max"], 1), src, f"{side}.record_current_mean_max")
-    add(f"{side}.ge10", f["records_ge10"], f["records_ge10"], src, f"{side}.records_ge10")
-    add(f"{side}.ge10_offset", f["records_ge10_abs_mean_gt_sd"], f["records_ge10_abs_mean_gt_sd"], src, f"{side}.records_ge10_abs_mean_gt_sd")
-add("normal.exactly50", fx["normal"]["records_exactly_50"], fx["normal"]["records_exactly_50"], CASES / "facts_extra.json", "normal.records_exactly_50")
-add("normal.over50", fx["normal"]["records_over_50"], fx["normal"]["records_over_50"], CASES / "facts_extra.json", "normal.records_over_50")
-add("normal.negative_pct", fx["normal"]["current_negative_share"], fmt(fx["normal"]["current_negative_share"] * 100, 1), CASES / "facts_extra.json", "normal.current_negative_share")
-add("abnormal.corr_negative_pct", fx["abnormal"]["upper_lower_corr_negative_share"], fmt(fx["abnormal"]["upper_lower_corr_negative_share"] * 100, 0), CASES / "facts_extra.json", "abnormal.upper_lower_corr_negative_share")
-add("normal.duplicate", fx["normal"]["duplicate_rows"], fx["normal"]["duplicate_rows"], CASES / "facts_extra.json", "normal.duplicate_rows")
-add("normal.span_min", fx["normal"]["span_s"] / 60, fmt(fx["normal"]["span_s"] / 60, 0), CASES / "facts_extra.json", "normal.span_s/60")
-add("normal.measured_min", fx["normal"]["measured_s"] / 60, fmt(fx["normal"]["measured_s"] / 60, 0), CASES / "facts_extra.json", "normal.measured_s/60")
-add("ratio.upper_sd", fx["abnormal"]["vib_upper_sd"] / fx["normal"]["vib_upper_sd"], fmt(fx["abnormal"]["vib_upper_sd"] / fx["normal"]["vib_upper_sd"], 1), CASES / "facts_extra.json", "abnormal/normal vib_upper_sd")
+    add(f"{side}.rows", f["rows"], f"{f['rows']:,}", FX, f"{side}.rows")
+    add(f"{side}.records", f["records"], f["records"], FX, f"{side}.records")
+    add(f"{side}.measured_pct", f["measured_share"], fmt(f["measured_share"] * 100, 1), FX, f"{side}.measured_share")
+    add(f"{side}.measured_pct0", f["measured_share"], fmt(f["measured_share"] * 100, 0), FX, f"{side}.measured_share")
+    add(f"{side}.vib_upper_sd", f["vib_upper_sd"], fmt(f["vib_upper_sd"], 3), FX, f"{side}.vib_upper_sd")
+    add(f"{side}.vib_lower_sd", f["vib_lower_sd"], fmt(f["vib_lower_sd"], 3), FX, f"{side}.vib_lower_sd")
+    add(f"{side}.current_mean", f["current_mean"], fmt(f["current_mean"], 1), FX, f"{side}.current_mean")
+    add(f"{side}.corr_median", f["upper_lower_corr_median"], fmt(f["upper_lower_corr_median"], 2), FX, f"{side}.upper_lower_corr_median")
+    add(f"{side}.ratio_median", f["upper_over_lower_sd_median"], fmt(f["upper_over_lower_sd_median"], 2), FX, f"{side}.upper_over_lower_sd_median")
+    add(f"{side}.rec_mean_min", f["record_current_mean_min"], fmt(f["record_current_mean_min"], 1), FX, f"{side}.record_current_mean_min")
+    add(f"{side}.rec_mean_max", f["record_current_mean_max"], fmt(f["record_current_mean_max"], 1), FX, f"{side}.record_current_mean_max")
+    add(f"{side}.ge10", f["records_ge10"], f["records_ge10"], FX, f"{side}.records_ge10")
+    add(f"{side}.ge10_offset", f["records_ge10_abs_mean_gt_sd"], f["records_ge10_abs_mean_gt_sd"], FX, f"{side}.records_ge10_abs_mean_gt_sd")
+nf, af = fx["normal"], fx["abnormal"]
+add("normal.exactly50", nf["records_exactly_50"], nf["records_exactly_50"], FX, "normal.records_exactly_50")
+add("normal.over50", nf["records_over_50"], nf["records_over_50"], FX, "normal.records_over_50")
+add("normal.negative_pct", nf["current_negative_share"], fmt(nf["current_negative_share"] * 100, 1), FX, "normal.current_negative_share")
+add("abnormal.corr_negative_pct", af["upper_lower_corr_negative_share"], fmt(af["upper_lower_corr_negative_share"] * 100, 0), FX, "abnormal.upper_lower_corr_negative_share")
+add("normal.duplicate", nf["duplicate_rows"], nf["duplicate_rows"], FX, "normal.duplicate_rows")
+add("normal.span_min", nf["span_s"] / 60, fmt(nf["span_s"] / 60, 0), FX, "normal.span_s/60")
+add("normal.measured_min", nf["measured_s"] / 60, fmt(nf["measured_s"] / 60, 0), FX, "normal.measured_s/60")
+ratio = af["vib_upper_sd"] / nf["vib_upper_sd"]
+add("ratio.upper_sd", ratio, fmt(ratio, 1), FX, "abnormal/normal vib_upper_sd")
 fl = fx["format_leak"]
-add("leak.raw_f1", fl["raw"]["f1"], fmt(fl["raw"]["f1"], 3), CASES / "facts_extra.json", "format_leak.raw.f1")
-add("leak.matched_f1", fl["matched"]["f1"], fmt(fl["matched"]["f1"], 3), CASES / "facts_extra.json", "format_leak.matched.f1")
+add("leak.raw_f1", fl["raw"]["f1"], fmt(fl["raw"]["f1"], 3), FX, "format_leak.raw.f1")
+add("leak.matched_f1", fl["matched"]["f1"], fmt(fl["matched"]["f1"], 3), FX, "format_leak.matched.f1")
 for side, key in (("normal", "normal_digits_share"), ("abnormal", "abnormal_digits_share")):
     for tag in ("raw", "matched"):
         for dg, v in fl[tag][key].items():
-            add(f"leak.{tag}.{side}.digits{dg}", v, fmt(v * 100, 1), CASES / "facts_extra.json", f"format_leak.{tag}.{key}.{dg}")
-add("abnormal.abs_mean_median", fx["abnormal"]["record_abs_mean_median"], fmt(fx["abnormal"]["record_abs_mean_median"], 1), CASES / "facts_extra.json", "abnormal.record_abs_mean_median")
-REQ = ROOT / "code/press/outputs/requantize"
+            add(f"leak.{tag}.{side}.digits{dg}", v, fmt(v * 100, 1), FX, f"format_leak.{tag}.{key}.{dg}")
+add("abnormal.abs_mean_median", af["record_abs_mean_median"], fmt(af["record_abs_mean_median"], 1), FX, "abnormal.record_abs_mean_median")
 pm = pd.read_csv(REQ / "policy_metrics_by_variant.csv")
 pm = pm[(pm.budget == 0.01) & (pm.calibration_unit == "rows")]
 for r in pm.itertuples():
     add(f"requant.{r.variant}.{r.split}.{r.model}.f1", r.f1_all_rows, fmt(r.f1_all_rows, 3), REQ / "policy_metrics_by_variant.csv", f"{r.variant}/{r.split}/{r.model}/α0.01 rows")
-sr = pd.read_csv(REQ / "shortcut_rules.csv")
-for r in sr.itertuples():
+for r in pd.read_csv(REQ / "shortcut_rules.csv").itertuples():
     add(f"shortcut.{r.variant}.{r.rule}.f1", r.f1, fmt(r.f1, 3), REQ / "shortcut_rules.csv", f"{r.variant}/{r.rule}")
 leak = json.loads((CASES / "leak_demo.json").read_text(encoding="utf-8"))
 add("leak.f1_all", leak["f1"], fmt(leak["f1"], 3), CASES / "leak_demo.json", "f1")
 alias = pd.read_csv(ALIAS)
-add("alias.normal", alias[alias.set == "normal"].f_alias.median(), fmt(alias[alias.set == "normal"].f_alias.median(), 2), ALIAS, "set=normal f_alias median")
-add("alias.abnormal", alias[alias.set != "normal"].f_alias.median(), fmt(alias[alias.set != "normal"].f_alias.median(), 2), ALIAS, "set!=normal f_alias median")
+fa_normal, fa_abnormal = alias[alias.set == "normal"].f_alias.median(), alias[alias.set != "normal"].f_alias.median()
+add("alias.normal", fa_normal, fmt(fa_normal, 2), ALIAS, "set=normal f_alias median")
+add("alias.abnormal", fa_abnormal, fmt(fa_abnormal, 2), ALIAS, "set!=normal f_alias median")
 
 # ---- 2장: 케이스 특징 ----
-sep = pd.read_csv(CASES / "feature_separation.csv").set_index("feature")
+sep = pd.read_csv(SEP).set_index("feature")
 for feat in sep.index:
-    add(f"auroc.{feat}", sep.loc[feat, "auroc"], fmt(sep.loc[feat, "auroc"], 3), CASES / "feature_separation.csv", f"{feat}.auroc")
-    add(f"outside.{feat}", sep.loc[feat, "abnormal_outside_normal"], int(sep.loc[feat, "abnormal_outside_normal"]), CASES / "feature_separation.csv", f"{feat}.abnormal_outside_normal")
-add("r2.normal_median", sep.loc["cur_sine_r2", "normal_median"], fmt(sep.loc["cur_sine_r2", "normal_median"], 3), CASES / "feature_separation.csv", "cur_sine_r2.normal_median")
-add("r2.abnormal_median", sep.loc["cur_sine_r2", "abnormal_median"], fmt(sep.loc["cur_sine_r2", "abnormal_median"], 3), CASES / "feature_separation.csv", "cur_sine_r2.abnormal_median")
-add("r2.abnormal_max", sep.loc["cur_sine_r2", "abnormal_max"], fmt(sep.loc["cur_sine_r2", "abnormal_max"], 3), CASES / "feature_separation.csv", "cur_sine_r2.abnormal_max")
-add("lag1.normal_median", sep.loc["vib_upper_lag1", "normal_median"], fmt(sep.loc["vib_upper_lag1", "normal_median"], 3), CASES / "feature_separation.csv", "vib_upper_lag1.normal_median")
-add("lag1.abnormal_median", sep.loc["vib_upper_lag1", "abnormal_median"], fmt(sep.loc["vib_upper_lag1", "abnormal_median"], 3), CASES / "feature_separation.csv", "vib_upper_lag1.abnormal_median")
+    add(f"auroc.{feat}", sep.loc[feat, "auroc"], fmt(sep.loc[feat, "auroc"], 3), SEP, f"{feat}.auroc")
+    add(f"outside.{feat}", sep.loc[feat, "abnormal_outside_normal"], int(sep.loc[feat, "abnormal_outside_normal"]), SEP, f"{feat}.abnormal_outside_normal")
+for fid, feat, col in (("r2.normal_median", "cur_sine_r2", "normal_median"), ("r2.abnormal_median", "cur_sine_r2", "abnormal_median"),
+                       ("r2.abnormal_max", "cur_sine_r2", "abnormal_max"), ("lag1.normal_median", "vib_upper_lag1", "normal_median"),
+                       ("lag1.abnormal_median", "vib_upper_lag1", "abnormal_median")):
+    add(fid, sep.loc[feat, col], fmt(sep.loc[feat, col], 3), SEP, f"{feat}.{col}")
 pre = pd.read_csv(CASES / "precursor_scan.csv")
 add("precursor.count", len(pre), len(pre), CASES / "precursor_scan.csv", "rows")
 add("precursor.r2_min", pre.cur_sine_r2.min(), fmt(pre.cur_sine_r2.min(), 3), CASES / "precursor_scan.csv", "cur_sine_r2 min")
@@ -96,9 +101,8 @@ valid = pd.read_csv(TVT / "tvt_valid.csv")
 for mode in ("realtime", "record"):
     for (model, split, alpha), r in test[test["mode"] == mode].groupby(["model", "split", "alpha"]):
         r = r.iloc[0]
-        for k in ("f1",):
-            add(f"test.{mode}.{model}.{split}.{alpha}.f1", r.f1, fmt(r.f1, 3), TVT / "tvt_test.csv", f"{mode}/{model}/{split}/{alpha}")
-            add(f"test.{mode}.{model}.{split}.{alpha}.f1_4", r.f1, fmt(r.f1, 4), TVT / "tvt_test.csv", f"{mode}/{model}/{split}/{alpha}")
+        add(f"test.{mode}.{model}.{split}.{alpha}.f1", r.f1, fmt(r.f1, 3), TVT / "tvt_test.csv", f"{mode}/{model}/{split}/{alpha}")
+        add(f"test.{mode}.{model}.{split}.{alpha}.f1_4", r.f1, fmt(r.f1, 4), TVT / "tvt_test.csv", f"{mode}/{model}/{split}/{alpha}")
         for k in ("tp", "fp", "fn"):
             add(f"test.{mode}.{model}.{split}.{alpha}.{k}", r[k], int(r[k]), TVT / "tvt_test.csv", f"{mode}/{model}/{split}/{alpha}/{k}")
 for mode in ("realtime", "record"):
@@ -114,8 +118,8 @@ add("leak.f1_test", hyp["hypotheses"]["H4"]["test"]["A"]["f1"], fmt(hyp["hypothe
 for s in ("A", "B"):
     e = hyp["v2_test_errors"][s]
     add(f"v2err.{s}.missed", e["missed_rows"], e["missed_rows"], TVT / "tvt_hypotheses.json", f"v2_test_errors.{s}.missed_rows")
-    add(f"v2err.{s}.pos01", e["missed_by_position"].get("0", 0) + e["missed_by_position"].get("1", 0),
-        e["missed_by_position"].get("0", 0) + e["missed_by_position"].get("1", 0), TVT / "tvt_hypotheses.json", f"v2_test_errors.{s}.pos0+1")
+    pos01 = e["missed_by_position"].get("0", 0) + e["missed_by_position"].get("1", 0)   # 기록 첫 두 행의 미탐
+    add(f"v2err.{s}.pos01", pos01, pos01, TVT / "tvt_hypotheses.json", f"v2_test_errors.{s}.pos0+1")
     for fa in e["false_alarms"]:
         add(f"v2err.{s}.fa_pos.{fa['position']}", fa["position"], fa["position"], TVT / "tvt_hypotheses.json", f"v2_test_errors.{s}.false_alarms")
         add(f"v2err.{s}.fa_r2.{fa['position']}", fa["prefix_r2"], fmt(fa["prefix_r2"], 3), TVT / "tvt_hypotheses.json", f"v2_test_errors.{s}.false_alarms")
@@ -141,7 +145,7 @@ add("yejun.uci.auroc_hi", 0.55, "0.55", "yejun/analysis/press_supplement/e2_uci_
 add("guide.tons", 1000, "1000", "가이드북 p8", "1000톤")
 add("guide.days", "2~3", "2~3", "가이드북 p8", "최대 2~3일")
 
-# ---- 검증 실험 (04_validation.py) ----
+# ---- 검증 실험 (04_validation.py). --quick 실행에서는 이 산출물이 없어 건너뛴다 ----
 vs = TVT / "validation_summary.json"
 if vs.exists():
     j = json.loads(vs.read_text(encoding="utf-8"))["judgments"]
@@ -152,28 +156,29 @@ if vs.exists():
     for _, r in pod.iterrows():
         for col, name in (("v2|detected", "v2"), ("v2+R1|detected", "v2R1"), ("v2+R1+R2|detected", "final"), ("v3_B1|detected", "v3B1")):
             add(f"pod.{r.split}.{r.family}.{r.target}.{r.strength}.{name}", r[col], fmt(r[col], 3), TVT / "validation_v1_pod.csv", f"{r.split}/{r.family}/{r.target}/{r.strength}/{name}")
-    v5 = pd.read_csv(TVT / "validation_v5.csv")
-    for r in v5.itertuples():
-        add(f"v5.{r.split}.{r.test}.{r.level}.{r.variant}.alerted", r.alerted, int(r.alerted), TVT / "validation_v5.csv", f"{r.split}/{r.test}/{r.level}/{r.variant}")
-        add(f"v5.{r.split}.{r.test}.{r.level}.{r.variant}.records", r.records, int(r.records), TVT / "validation_v5.csv", f"{r.split}/{r.test}/{r.level}/{r.variant}")
-        add(f"v5.{r.split}.{r.test}.{r.level}.{r.variant}.pct", r.rate, fmt(r.rate * 100, 1), TVT / "validation_v5.csv", f"{r.split}/{r.test}/{r.level}/{r.variant}")
-    sp = pd.read_csv(TVT / "validation_v3split.csv")
-    for r in sp.itertuples():
-        add(f"v3split.{r.fold}.{r.variant}.f1", r.f1, fmt(r.f1, 3), TVT / "validation_v3split.csv", f"{r.fold}/{r.variant}")
-        add(f"v3split.{r.fold}.{r.variant}.f1_4", r.f1, fmt(r.f1, 4), TVT / "validation_v3split.csv", f"{r.fold}/{r.variant}")
-        add(f"v3split.{r.fold}.{r.variant}.normal_alerted", r.normal_alerted_records, int(r.normal_alerted_records), TVT / "validation_v3split.csv", f"{r.fold}/{r.variant}")
+    for r in pd.read_csv(TVT / "validation_v5.csv").itertuples():
+        key = f"{r.split}/{r.test}/{r.level}/{r.variant}"
+        add(f"v5.{r.split}.{r.test}.{r.level}.{r.variant}.alerted", r.alerted, int(r.alerted), TVT / "validation_v5.csv", key)
+        add(f"v5.{r.split}.{r.test}.{r.level}.{r.variant}.records", r.records, int(r.records), TVT / "validation_v5.csv", key)
+        add(f"v5.{r.split}.{r.test}.{r.level}.{r.variant}.pct", r.rate, fmt(r.rate * 100, 1), TVT / "validation_v5.csv", key)
+    for r in pd.read_csv(TVT / "validation_v3split.csv").itertuples():
+        key = f"{r.fold}/{r.variant}"
+        add(f"v3split.{r.fold}.{r.variant}.f1", r.f1, fmt(r.f1, 3), TVT / "validation_v3split.csv", key)
+        add(f"v3split.{r.fold}.{r.variant}.f1_4", r.f1, fmt(r.f1, 4), TVT / "validation_v3split.csv", key)
+        add(f"v3split.{r.fold}.{r.variant}.normal_alerted", r.normal_alerted_records, int(r.normal_alerted_records), TVT / "validation_v3split.csv", key)
+    # 같은 탐지율을 백분율 표시형으로도 등록한다(위 pod.* 와 행 순서를 지키려고 따로 돈다)
     for _, r in pod.iterrows():
         for col, name in (("v2|detected", "v2"), ("v2+R1|detected", "v2R1"), ("v2+R1+R2|detected", "final")):
             add(f"podpct.{r.split}.{r.family}.{r.target}.{r.strength}.{name}", r[col], fmt(r[col] * 100, 1), TVT / "validation_v1_pod.csv", f"{r.split}/{r.family}/{r.target}/{r.strength}/{name} %")
     cost = pd.read_csv(TVT / "validation_cost.csv")
-    add("cost.share_le8", (cost.latched_rows_next <= 8).mean(), fmt((cost.latched_rows_next <= 8).mean() * 100, 1), TVT / "validation_cost.csv", "latched_rows_next<=8 share")
-    add("cost.share_le8_notshort", ((cost.latched_rows_next <= 8) & ~cost.next_short).mean(), fmt(((cost.latched_rows_next <= 8) & ~cost.next_short).mean() * 100, 1), TVT / "validation_cost.csv", "<=8 & not next_short share")
-    add("cost.share_le7", (cost.latched_rows_next <= 7).mean(), fmt((cost.latched_rows_next <= 7).mean() * 100, 1), TVT / "validation_cost.csv", "latched_rows_next<=7 share")
-    strict = ((cost.latched_rows_next <= 7) & ~cost.next_short).mean()
-    add("cost.share_le7_notshort", strict, fmt(strict * 100, 1), TVT / "validation_cost.csv", "latched_rows_next<=7 & not next_short / all")
+    le8, le7, short = cost.latched_rows_next <= 8, cost.latched_rows_next <= 7, cost.next_short
+    for fid, v, loc in (("cost.share_le8", le8.mean(), "latched_rows_next<=8 share"), ("cost.share_le8_notshort", (le8 & ~short).mean(), "<=8 & not next_short share"),
+                        ("cost.share_le7", le7.mean(), "latched_rows_next<=7 share"),
+                        ("cost.share_le7_notshort", (le7 & ~short).mean(), "latched_rows_next<=7 & not next_short / all")):
+        add(fid, v, fmt(v * 100, 1), TVT / "validation_cost.csv", loc)
     add("cost.chain_rows_max", cost.chain_rows.max(), int(cost.chain_rows.max()), TVT / "validation_cost.csv", "chain_rows max")
     add("cost.chain_records_max", cost.chain_records.max(), int(cost.chain_records.max()), TVT / "validation_cost.csv", "chain_records max")
-    add("cost.next_short", int(cost.next_short.sum()), int(cost.next_short.sum()), TVT / "validation_cost.csv", "next_short count")
+    add("cost.next_short", int(short.sum()), int(short.sum()), TVT / "validation_cost.csv", "next_short count")
     add("cost.median_rows", cost.latched_rows_next.median(), fmt(cost.latched_rows_next.median(), 0), TVT / "validation_cost.csv", "latched_rows_next median")
     add("cost.max_rows", cost.latched_rows_next.max(), int(cost.latched_rows_next.max()), TVT / "validation_cost.csv", "latched_rows_next max")
     add("cost.chain2", int((cost.chain_records >= 2).sum()), int((cost.chain_records >= 2).sum()), TVT / "validation_cost.csv", "chain_records>=2 count")
@@ -186,17 +191,15 @@ if vs.exists():
         for col in lm.columns:
             add(f"loss.{s}.{tg}.{m}.{col}", r[col], fmt(r[col] * 100, 0), TVT / "validation_loss.csv", f"{s}/{tg}/{m}/{col} %")
 
-# ---- v5: 도메인·사후 분석(code/press/domain/outputs) — JSON·CSV의 모든 숫자를 표시 형식별로 등록 ----
-DOM = ROOT / "code/press/domain/outputs"
 
-
+# ---- v5: 도메인·사후 분석(domain/outputs) — JSON·CSV의 모든 숫자를 표시 형식별로 등록 ----
 def add_number(fid, v, source):
-    """소수 0~4자리, 비율이면 백분율 0~2자리, 부호 없는 값까지 표시 후보로 등록한다."""
-    if isinstance(v, bool) or v is None:
+    """숫자 하나를 본문에 나올 수 있는 표시형(소수 0~4자리, 부호 없는 값, 비율이면 백분율 0~2자리)으로 모두 등록한다."""
+    if isinstance(v, bool):     # True/False는 숫자로 치지 않는다
         return
     try:
         x = float(v)
-    except (TypeError, ValueError):
+    except (TypeError, ValueError):     # 문자열·None
         return
     if not np.isfinite(x):
         return
@@ -205,11 +208,12 @@ def add_number(fid, v, source):
         shown.add(str(int(x)))
     if -1 <= x <= 1:
         shown |= {f"{x * 100:.{d}f}" for d in range(3)} | {f"{abs(x) * 100:.{d}f}" for d in range(3)}
-    for s in shown:
+    for s in sorted(shown):     # 정렬: set 순회 순서는 실행마다 달라 facts.csv가 바이트 단위로 재현되지 않는다
         add(fid, x, s, source, fid)
 
 
 def walk(node, prefix, source):
+    """JSON을 끝까지 내려가며 잎 값마다 add_number를 부른다. id는 키 경로(a.b[0].c)."""
     if isinstance(node, dict):
         for k, v in node.items():
             walk(v, f"{prefix}.{k}", source)
@@ -282,6 +286,10 @@ EXT = [
     ("prob.raw_brier_A", 0.0321, "0.0321", "yejun README: π 1% 파일 라벨 채점 Brier A"),
     ("prob.raw_brier_B", 0.0221, "0.0221", "B"),
     ("regB.pct_hi", 99.6, "99.6", "06 records B 학습 기준 분위"),
+    ("env.python", 3.13, "3.13", "실행 환경 파이썬 판"),
+    ("env.python_old", 3.12, "3.12", "팀원 예전 환경 파일 판"),
+    ("run.full_min", 56, "56", "새 환경 run_all.py 전체 56.2분"),
+    ("run.checks", 19, "19", "run_all.py 결과 대조 19/19"),
 ]
 for fid, v, shown, src in EXT:
     add(fid, v, shown, "report/research", src)

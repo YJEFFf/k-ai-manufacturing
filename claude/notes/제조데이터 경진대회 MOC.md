@@ -1,7 +1,7 @@
 ---
 title: 제조데이터 경진대회 MOC
 created: 2026-09-21
-updated: 2026-10-02
+updated: 2026-10-04
 tags: [moc/contest, contest/k-ai-manufacturing]
 source: 제6회 K-인공지능 제조데이터 분석 경진대회 과제공개 hwpx (KAMP)
 status: seed
@@ -30,15 +30,24 @@ status: seed
 ## 서면평가 (100)
 데이터 이해·진단 15 · AI 예측모델 40 (베이스라인 포함 2개 이상 비교, F1 등) · 영향요인·오류분석 15 (FN/FP 집중 조건) · 현장활용 10 · 창의성 10 · 코드·재현성 10 (전처리→추론까지 자동 실행)
 
-## 폴더
+## 폴더 구조
+(2026-10-04 정리. 노트 간 `[[링크]]`는 파일 이름으로 찾으므로 폴더를 옮겨도 그대로 동작한다)
+- `제조데이터 경진대회 MOC.md` 이 허브 (루트)
 - `00_공고_양식/` 과제공개 hwpx, 결과보고서 양식 hwpx
+- `notes/` 작업 노트 — 핸드오프(`HANDOFF_*`), 데이터셋 실사, 주제 추천, 용접 전략, 프레스 분석방향·실행계획·결과요약, 가이드북 원문 확인, 외부 데이터, 문의 메일
 - `data/1_사출성형기` ~ `data/5_자원최적화` — 원본 데이터 (Obsidian 색인 제외)
+- `code/` 분석·파이프라인 코드
+- `submission/` 제출 코드 패키지 — `북적북적_code.zip`(만드는 법 `python submission/make_package.py --repo <팀 레포>`, 재료 `package_files/`: run_all.py·README·requirements)
+- `report/` 최종 원고 `final_v5.md`, 결과보고서 `결과보고서_북적북적.hwpx`·`.pdf`, 조립·검증 스크립트(`*.py`, `facts.csv`), `figures/`·`research/`·`console_source/`·`_archive/`·`_workspace/`
+  - `report/drafts/` 초안 v1~v5·백업본(r0·r1), 이전 v4 원고 `final.md`
+  - `report/plans/` 보고서 계획 v1·v4·v5 · `report/logs/` 판단 기록·검토 기록·v5 진행표
 
 ## 진행
-- **2026-10-04 결과보고서 v5(31쪽)** → `report/결과보고서_북적북적.hwpx`·`.pdf` (원고 `report/final_v5.md`). 출제 의도(과제 ③ 과업 ②: 정상 운전변화 오경보 억제)·설비 물리(파인블랭킹 유압 계통, 기어펌프 고장 서명, 10Hz 관측 가능성)·진단 매트릭스·운전 상태별 오경보·표준 기법(PCA 관리도, CUSUM·EWMA, 지도학습 대조)·불확실성 상한·참고문헌 25개 추가. critic 2회(REVISE→조건부 PASS) 반영, 윤문 후 수치 동일. 조사 `report/research/`, 사후 분석 `code/press/domain/`(01~06), 판단 기록 `report/decision_log_v5.md`. 이전 18쪽판은 `report/_archive/`
-- **2026-10-04 결과보고서 hwpx·PDF 초안(18쪽, v4판)** → `report/결과보고서_북적북적.hwpx`·`.pdf` (원고 `report/final.md`, 조립 `report/build_hwpx.py`). critic 3회차 PASS, 윤문 후 수치 동일, hwpx 본문 숫자 대조 통과. 남은 일: 만족도 조사 캡처 교체, zip 구성 줄(10/7), 서명
+- **2026-10-04 제출 코드 패키지·재현성** → `submission/북적북적_code.zip`(283개 파일, 3.1MB). 압축을 풀고 `python run_all.py` 하나로 전처리~test 예측~보고서 수치 19개 대조까지 돈다. 새 가상환경(파이썬 3.13, 판 고정)에서 19/19 일치·56분 확인. 코드 간결화·한글 주석(산출물 해시 동일), 보고서 6장 교체·2.4절 딥러닝 미채택 근거 추가(32쪽, 참고문헌 27개). 팀 레포 `claude/press-cases`·PR #3에 반영. 남은 일: 만족도 조사 캡처를 실제 화면으로 교체, 발표자료
+- **2026-10-04 결과보고서 v5(31쪽)** → `report/결과보고서_북적북적.hwpx`·`.pdf` (원고 `report/final_v5.md`). 출제 의도(과제 ③ 과업 ②: 정상 운전변화 오경보 억제)·설비 물리(파인블랭킹 유압 계통, 기어펌프 고장 서명, 10Hz 관측 가능성)·진단 매트릭스·운전 상태별 오경보·표준 기법(PCA 관리도, CUSUM·EWMA, 지도학습 대조)·불확실성 상한·참고문헌 25개 추가. critic 2회(REVISE→조건부 PASS) 반영, 윤문 후 수치 동일. 조사 `report/research/`, 사후 분석 `code/press/domain/`(01~06), 판단 기록 `report/logs/decision_log_v5.md`. 이전 18쪽판은 `report/_archive/`
+- **2026-10-04 결과보고서 hwpx·PDF 초안(18쪽, v4판)** → `report/_archive/결과보고서_북적북적_v4판.hwpx`·`.pdf` (원고 `report/drafts/final.md`, 조립 `report/build_hwpx.py`). critic 3회차 PASS, 윤문 후 수치 동일, hwpx 본문 숫자 대조 통과. 남은 일: 만족도 조사 캡처 교체, zip 구성 줄(10/7), 서명
 - **2026-10-03 train/valid/test 분석** → `code/press/tvt/README.md`: 예준 v1·v2·v3·베이스라인 + 가설 H1(사건 지속)·H2(교차 확인)를 valid로 선택·등록하고 test 1회 채점. 최종 v2+R1+R2(valid 공동 1위 3개 중 가장 단순, test 확인 후 결정) test F1 A·B 1.000, 잠금 규칙의 v2+R1은 A 1.000·B 0.9954, 예준 v2 0.965·0.970. R1·R2 기준 충족, v3 조건부 성분 미충족
-- **2026-10-04 보고서 계획 v4 확정** → `report/plan_report_v4.md` (ralplan 4회차 합의). 서사 "1.000 → 의심 → 예준 v3식 검증(V0~V5)", 공개 문장 P1~P5, 일정 10/4 실험·10/5 초안+예준 검토·10/6 검증·윤문·10/7 hwpx·zip·10/8 제출
+- **2026-10-04 보고서 계획 v4 확정** → `report/plans/plan_report_v4.md` (ralplan 4회차 합의). 서사 "1.000 → 의심 → 예준 v3식 검증(V0~V5)", 공개 문장 P1~P5, 일정 10/4 실험·10/5 초안+예준 검토·10/6 검증·윤문·10/7 hwpx·zip·10/8 제출
 - **2026-10-03 케이스 분할 분석·v2 오답 수정** → `code/press/cases/README.md`: 예준 v2 재현(A 0.9619·B 0.9710) 후 오답 원인 2개(기록 시작 직후 미탐, 크기 단독 오경보)에 '사건 지속'·'교차 확인'을 얹어 α1% 실시간 A 0.9992·B 1.000, 기록 단위 둘 다 1.000. 사후 규칙이라 새 고장 성능 근거는 아님
 - **2026-10-02 레포 점검** (main `b9dd7bd`, 9/25 이후 `yejun/` 커밋 60여 건, 대부분 AI 에이전트 산출) — 레포에 있는 것만 적음
   - 작업 대상은 ③ 프레스 중심. ⑤ 전력도 `yejun/power_submission/`에 별도 패키지가 있음

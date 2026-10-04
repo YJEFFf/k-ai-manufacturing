@@ -237,6 +237,7 @@ status: final — critic 2회 검토(1회차 REVISE→수정, 2회차 조건부 
 - 공정 산업의 표준인 PCA 관리도(Hotelling T²·SPE)[19]는 교과서 99% 한계를 그대로 쓰면 valid 정상 기록의 49%(A)·45%(B)에서 한 행 이상 한계를 넘어, 기록 단위 운영에는 맞지 않았다(test 기록 F1 0.163·0.127). 창이 겹쳐 생기는 자기상관, 부하의 이봉 분포, 기록마다 수십 번 반복되는 검정 때문이다. 같은 특징을 conformal로 보정하면 고부하 정상 오경보는 0이 되지만 기록 위치 0~1은 점수가 없고 2~6행은 둔하다.
 - 표준 순차 검출인 CUSUM[20]·EWMA[21]도 기록 경계에서 상태를 이어 가면 R1 수준이 된다. 기록마다 0으로 되돌리면 v2보다 조금 오르는 데 그친다(CUSUM 0.978·0.975). 이득의 핵심은 수집 공백을 넘는 기억이다. 둘의 차이는 경보 해제에서 난다(2.5절). 단, 상태를 이어 가는 CUSUM에서 valid로 고른 k=5는 격자 끝값이고 정상 점수 최댓값(A 4.42·B 3.52)보다 커서 α 보정이 퇴화했다(사실상 누적값이 0을 넘으면 경보). B test 1.000은 이 높은 문턱 덕이다.
 - 가이드북 LSTM 오토인코더는 자체 결과로 F1 74.76%, 오경보율 1.95%(계산값)를 보였다. 그 결과는 이상 라벨로 임곗값을 고르고 창이 수집 공백을 가로지르는 조건이라, 같은 조건에서 다시 잰 위 표의 0.289·0.238과 직접 비교하지 않는다.
+- 딥러닝을 최종 모델로 고르지 않은 이유: 가이드북 방식 LSTM 오토인코더와 MLP 오토인코더도 같은 조건에서 비교했고, test 실시간 행 F1이 각각 0.289·0.238, 0.498·0.498로 낮았다. 이 데이터는 고장이 약 3분짜리 한 사건뿐이고, 기록이 최대 50행(5초)으로 끊겨 긴 시계열을 학습할 연속 구간이 없으며, 초당 10회 표본이라 빠른 진동 정보가 처음부터 없다(1.5절). 다변량 시계열 이상탐지 연구에서도 단순한 방법이 딥러닝과 비슷하거나 낫다는 결과가 보고됐다[22][23]. 그래서 깊은 모델 대신 물리적으로 해석되는 성분과 규칙을 택했다.
 - 지도학습 대조(사후): 라벨로 학습하는 지도학습(1초 창 통계 또는 기록 특징 + HistGradientBoosting·RandomForest·LogisticRegression, 기록 단위 그룹 5겹 교차검증)을 형식 누수를 지운 자료로 돌리면 F1 0.793~0.970이 쉽게 나온다. 그런데 같은 파이프라인이 고장이 없는 같은 날 정상끼리도 약 1시간 떨어진 블록이면 ROC-AUC 중앙값 0.75~0.87로 가른다(인접 블록 0.48~0.58). 이상–정상 분리(0.93~1.00)는 같은 날 안의 표류보다 크고 한결같지만 정상과 이상은 5일 떨어진 다른 세션이라 그 원인이 고장인지 세션 차이인지 가를 수 없다[12]. 가이드북도 고장 데이터가 부족하다는 이유로 정상만 학습하는 방식을 택했다. 정상만 학습한 우리 모델도 세션 차이를 완전히 배제하지는 못한다(2.6절 V5).
 
 [그림 8: 같은 조건의 모델 비교]
@@ -251,7 +252,7 @@ status: final — critic 2회 검토(1회차 REVISE→수정, 2회차 조건부 
 - R1을 CUSUM·EWMA 대신 유지한 이유(사후 비교): 고장 뒤 정상 기록을 이어 붙인 가상 흐름에서 R1은 7행(0.7초) 만에 경보가 풀렸고 상태를 이어 가는 CUSUM은 11.4~12.2분 동안 경보가 이어졌다. R1의 해제는 고장 규모가 아니라 전류 파형의 정상 확인에 묶여 있다. EWMA는 0.2~0.3초로 더 빨리 풀렸지만 상태를 넘기는 힘이 점수 크기에 달려 약한 이상에서는 다음 기록까지 남지 않을 수 있다. CUSUM의 11.4~12.2분은 상한·리셋이 없는 표준형 기준이고 정상 확인 리셋을 붙이면 해제 부분은 R1과 같은 구조가 된다. F1로는 셋을 가를 수 없었다.
 - α 민감도(최종 모델, test B): α 1% 오경보 0행(F1 1.000), 3% 1행(0.998), 5% 9행(0.986). A는 세 수준 모두 1.000이다. 운영 α는 1%로 둔다.
 - 첫 경보 지연(최종 모델): test 이상 11기록 모두 기록 첫 행(0.0초)에서 경보가 났다. test는 valid→test를 한 흐름으로 돌려 R1이 직전 이상 기록의 판정을 이어받으므로, test 이상 11기록에는 사건 시작이 없다. 이 지연은 사건이 이어지는 구조에서만 성립한다. 기록마다 새로 판단하는 v2는 최대 3행(0.3초) 늦었다. 이상 파일이 이미 이상 상태로 시작해 사건 시작 시점은 없고 파일 첫 기록에서 최종 모델의 첫 경보는 valid A 1행(0.1초), B 0행이었다.
-- 불확실성: 정상 오경보 기록 0/120(A)·0/180(B)의 Clopper–Pearson 단측 95% 상한[22]은 2.47%·1.65%로 설계값(1/121 = 0.83%)보다 크다. 이상 기록 탐지 11/11의 95% 하한은 76.2%다. 이상 11기록은 한 사건의 연속 구간이라 사건 단위 표본은 1이다. 문턱은 valid 정상 기록의 conformal 순위로 정했지만 R1이 경보를 더하고 시간순 분할이라 오경보율을 α로 보장하지는 않으므로, 실제 오경보율을 분할마다 보고했다.
+- 불확실성: 정상 오경보 기록 0/120(A)·0/180(B)의 Clopper–Pearson 단측 95% 상한[24]은 2.47%·1.65%로 설계값(1/121 = 0.83%)보다 크다. 이상 기록 탐지 11/11의 95% 하한은 76.2%다. 이상 11기록은 한 사건의 연속 구간이라 사건 단위 표본은 1이다. 문턱은 valid 정상 기록의 conformal 순위로 정했지만 R1이 경보를 더하고 시간순 분할이라 오경보율을 α로 보장하지는 않으므로, 실제 오경보율을 분할마다 보고했다.
 - 경보 운영 지표: 정상 test 구간은 달력 시간으로 16.1분(A)·24.1분(B)뿐이다. 최종 모델의 경보 사건은 0건이지만 포아송 95% 상한은 시간당 11.2·7.5건이다. 산업 경보 관리 기준(운전원당 시간당 약 6건 이하면 수용 가능성이 매우 높음)[18]과 맞춰 보려면 더 긴 정상 기록이 필요하다.
 - 이상 확률: 경보와 별도로 팀원 v2의 확률 층이 이상 확률을 낸다. v2 점수를 정상 보정 행(0)과 이상 기록 행(1)에 등방 회귀로 맞춰 우도비를 구하고 사전 오즈(현장 가정 1%)에 곱해 확률로 바꾼다. 이상 라벨을 쓰므로 이상 기록을 하나씩 떼어 내는 교차 적합으로 쟀다. 사전 비율을 평가 파일의 이상 비율(A 12.8%·B 9.0%)로 맞추면 행 단위 Brier는 A 0.0072·B 0.0056으로 유병률만 쓴 예측(0.112·0.082)보다 낮다. 현장 가정 1%로 낸 확률을 파일 라벨로 바로 채점하면 0.0321·0.0221이다. 다만 같은 3분 사건 안에서 맞추고 잰 값이고 경보 여부만 쓰는 보정과 차이가 작아 경보를 넘어 더하는 정보는 작다. 운영 판단은 conformal 경보로 하고 확률은 설명용으로 쓴다.
 
@@ -269,7 +270,7 @@ status: final — critic 2회 검토(1회차 REVISE→수정, 2회차 조건부 
 | R2가 진동형 고장을 숨기지 않나 | V1b 진동 단독 주입(대역 잡음·감쇠 충격) | 최종 모델 탐지율이 v2+R1보다 최대 23.7%p 낮다(B 상부 감쇠 충격 강도 4: 0.350→0.113). R2가 없는 v2+R1도 진동 주입을 A 0.0~8.9%, B 3.5~35.0%만 잡는다 | 기준(5%p) 초과 → 적용 조건 |
 | 줄어드는 고장·센서 끊김은 | V2 진폭 감소(0.75~0배) | 최종 모델·v2 모두 0~2%. 팀원 v3 B1은 진폭 0을 99% 이상 탐지 | 못 잡음 → 적용 조건 |
 | 수집 조건 차이를 잡는 것 아닌가 | V5 ① 정상 test 전류를 팀원 스트레스 시험의 이동량(+81.4·+272.4, 팀원이 이상 기록 평균에서 잡은 값. 우리 기준 \|평균\| 중앙값 97.2와 다름)만큼 옮김 ② 표본화 시각 흔들림(60.6Hz 앨리어싱 가정) ③ 이상 기록 평균 제거 | ① +81.4에서 A 0/120(둔감)·B 7/180(3.9%, 민감), +272.4에서 A 118/120·B 180/180 ② 0.1ms에서 정상 기록 경보율 A 8.8%·B 35.2%. 같은 조건의 v2가 37/480·227/725로 팀원 결과와 같다. R1이 민감도를 키운다(0.2ms A 71.0%→86.7%, 0.1ms B 227→255/725) ③ 평균을 지워도 21/21 탐지 | ③ 전류 수준 차이에는 의존하지 않음(파형·시각 교락은 배제 못 함). ①② 수집 조건에 민감 → 적용 조건 |
-| 다른 설비에서도 되나 | 외부 데이터 | SKAB(펌프 시험대)는 교류 전류 파형이 없고 연속 수집이라 R1·R2를 같은 뜻으로 옮길 수 없어 적용하지 않았다. UCI 유압 시험대 데이터[23](Helwig 등[24])로 한 팀원 실험에서 v2 구조를 그대로 옮기면 AUROC 0.43~0.55로 실패했다 | 검증 못 함 |
+| 다른 설비에서도 되나 | 외부 데이터 | SKAB(펌프 시험대)는 교류 전류 파형이 없고 연속 수집이라 R1·R2를 같은 뜻으로 옮길 수 없어 적용하지 않았다. UCI 유압 시험대 데이터[25](Helwig 등[26])로 한 팀원 실험에서 v2 구조를 그대로 옮기면 AUROC 0.43~0.55로 실패했다 | 검증 못 함 |
 
 - V5 ②의 표본별 시각 흔들림은 1.4절의 일정한 간격 어긋남과는 다른 현상이다. 실제 데이터의 흔들림 상한은 0.036ms로 추정돼 0.1ms 조건보다 작지만 현장에 옮길 때는 표본 시각을 실측해 확인해야 한다.
 
@@ -362,7 +363,7 @@ status: final — critic 2회 검토(1회차 REVISE→수정, 2회차 조건부 
 
 ## ◦ 4.1 상태감시 표준 구조에 맞춘 운영 흐름
 
-- 상태감시 데이터 처리 표준 ISO 13374-1의 6개 처리 블록[25]에 이 시스템을 맞추면 다음과 같다. 이 대회 범위는 데이터 획득부터 상태 감지까지이고 건강 평가는 진단 매트릭스 수준까지다.
+- 상태감시 데이터 처리 표준 ISO 13374-1의 6개 처리 블록[27]에 이 시스템을 맞추면 다음과 같다. 이 대회 범위는 데이터 획득부터 상태 감지까지이고 건강 평가는 진단 매트릭스 수준까지다.
 
 | 블록 | 이 시스템 | 비고 |
 |---|---|---|
@@ -422,31 +423,31 @@ status: final — critic 2회 검토(1회차 REVISE→수정, 2회차 조건부 
 
 # □ 제6장. 코드 구성 및 재현성〔10점〕
 
-◦ 데이터 배치: 원본 CSV 2개(`press_data_normal.csv`, `outlier_data.csv`)를 두 곳에 둔다. 팀원 코드는 해시가 원본과 다르면 멈춘다.
-  - `data/3_소성가공_예지보전/`: 우리 진단 스크립트(cases, domain, 주파수 진단)가 읽는다
-  - `yejun/press_submission/data/3_소성가공_예지보전/`: 팀원 v1·v2·v3 코드와 train/valid/test 파이프라인이 읽는다
-◦ 실행 순서(zip 루트에서, 새 환경에서 순서대로)
-  - 1장·2.2절 데이터 진단
-    * `python code/press/cases/01_case_features.py`: 기록 단위 특징, 형식 누수, 전조 후보
-    * `python code/press/cases/03_facts_extra.py`: 측정 비율·기록 구조·형식 누수 보조 수치
-    * `python code/press/06_alias_frequency_audit.py`: 전류 사인 적합 겉보기 주파수
-  - 2·3장 모델(train/valid/test)
-    * `python code/press/tvt/01_scores.py --repo .`: 학습, 모든 후보 점수, valid 보정
-    * `python code/press/tvt/02_select_on_valid.py`: valid 채점, 선택, 해시 잠금
-    * `python code/press/tvt/03_score_test.py --repo .`: 잠금 확인 후 test 채점, 판정
-    * `python code/press/tvt/04_validation.py --repo .`: 검증 실험(2.6절)
-    * `python code/press/tvt/05_test_predictions.py`: test 행 단위 예측 파일, 첫 경보 지연
-  - 도메인·사후 분석(test 채점 이후 추가, 잠금 선택과 무관)
-    * `python code/press/domain/01_signal_physics.py` ~ `06_operating_regime.py`: 01 신호 물리, 02 사건 안 추세, 03 PCA 관리도, 04 순차 검출·불확실성·경보 지표, 05 지도학습 대조, 06 운전 상태별 오경보(번호 순서대로)
-  - 초기 탐색 기록(참고): `code/press/cases/02_error_fix_score.py`는 팀원 v2의 행별 예측(`cases/v2_predictions/`, 팀원 `press_guard/train.py` 출력)으로 v2 오류를 분해한다
+◦ 실행: 압축을 풀고 패키지를 설치한 뒤 명령 하나로 전처리부터 학습·추론·test 예측 파일·보고서 수치 대조까지 끝난다.
+  * `pip install -r requirements.txt`
+  * conda를 쓰면 `conda env create -f environment.yml`
+  * `python run_all.py` (전체) 또는 `python run_all.py --quick` (진단·모델·예측·대조만)
+◦ 환경: 파이썬 3.13, CPU, 패키지 판은 결과를 만든 환경 그대로 고정했다. 팀원 모듈의 예전 환경 파일(파이썬 3.12)은 빼고 판을 하나로 맞췄다. 설치 뒤에는 인터넷이 필요 없다.
 ◦ 재현 확인
-  - 팀원 v2 원래 평가 F1 A 0.961938·B 0.970990, 팀원 v3 비교 기준 결과가 같은 코드로 그대로 나온다. 팀원 v2의 흔들림 시험 결과도 그대로 재현됐다.
-  - 02·03을 두 번 실행해 산출물 해시가 같다.
-  - train·valid·test 사이 시각 겹침은 0이다.
-  - 도메인 분석은 tvt 결과를 다시 계산해 같은 값(v2 0.965/0.970, 최종 1.000/1.000)이 나오는지 확인한 뒤 진행한다.
-◦ 제출 예측 파일: `code/press/tvt/outputs/test_predictions_A.csv`·`_B.csv`(열: subset, label, rec, pos, ts, 최종·잠금·v2 모델의 실시간·기록 단위 경보). 무작위가 있는 스크립트는 seed를 고정했다(스크립트 첫머리 또는 호출하는 팀원 모듈에 고정).
-◦ 보고서 이름과 코드 이름 대응: R1 = H1, R2 = H2
-◦ zip 구성: [환경 파일, README, 원본 CSV 2개, 팀원 v2·v3 코드, 우리 코드, test 예측 CSV — 10/7 확정]
+  - 새 가상환경에 설치해 `run_all.py` 전체를 실행했다. 보고서 수치 대조 19개 모두 일치, 걸린 시간 약 56분이다.
+  - 제출 예측 파일과 최종 모델 점수는 바이트 단위로 같다. 가이드북 방식 LSTM 오토인코더(비교용)만 학습 난수 때문에 소폭 변동할 수 있어 허용 오차를 두었다.
+  - 원본 CSV 2개는 시작할 때 해시로 확인하고, 무작위가 있는 곳은 seed를 고정했다.
+  - 팀원 v2 원래 평가 F1 A 0.961938·B 0.970990이 같은 코드로 그대로 나오고, train·valid·test 사이 시각 겹침은 0이다.
+
+| 단계 | 스크립트 | 하는 일 | 보고서 |
+|---|---|---|---|
+| 1 진단 | cases/01·03, 06_alias_frequency_audit | 기록 구조, 형식 누수, 겉보기 주파수 | 1장 |
+| 2 모델 | tvt/01 → 02 → 03 → 05 | 정상 학습, valid 보정·선택·해시 잠금, 잠금 확인 후 test 채점, 예측 파일 | 2.3~2.5절 |
+| 3 검증 | tvt/04 | 인공 고장 주입, 분할 변경, 수집 조건 흔들림 | 2.6절 |
+| 4 사후 분석 | domain/01~06 | 신호 물리, 사건 안 추세, PCA 관리도, CUSUM·EWMA·불확실성, 지도학습 대조, 운전 상태별 오경보 | 1.4~1.6, 2.2, 2.4, 2.5, 3.1, 3.2절 |
+
+◦ 압축 파일 구성
+  - `run_all.py` 실행, `README.md` 설명서, `expected_results.json` 대조 기준
+  - `requirements.txt`·`environment.yml` 환경, `data/` 원본 CSV 2개
+  - `code/press/` 우리 코드, `yejun/` 팀원 v1·v2·v3 모듈
+◦ 제출 예측 파일: `predictions/` 폴더의 `test_predictions_A.csv`·`_B.csv`
+  - 열: subset, label, rec, pos, ts, 최종·잠금·v2 모델의 실시간·기록 단위 경보
+◦ 보고서 이름과 코드 이름 대응: R1 = H1, R2 = H2. 4단계는 test 채점 이후 추가한 분석이며 모델 선택에 쓰지 않았다.
 ◦ 데이터 출처: 중소벤처기업부, Korea AI Manufacturing Platform(KAMP), 소성가공 예지보전 AI 데이터셋, 스마트제조혁신추진단(㈜인터엑스), 2022.12.23, https://www.kamp-ai.kr/aidataDetail?DATASET_SEQ=48
 
 ◦ 참고문헌
@@ -471,9 +472,11 @@ status: final — critic 2회 검토(1회차 REVISE→수정, 2회차 조건부 
     * [19] MacGregor, J. F., Kourti, T. Statistical process control of multivariate processes. Control Eng. Pract. 3(3):403–414, 1995.
     * [20] Page, E. S. Continuous inspection schemes. Biometrika 41(1–2):100–115, 1954.
     * [21] Roberts, S. W. Control chart tests based on geometric moving averages. Technometrics 1(3):239–250, 1959.
-    * [22] Clopper, C. J., Pearson, E. S. The use of confidence or fiducial limits illustrated in the case of the binomial. Biometrika 26(4):404–413, 1934.
-    * [23] Helwig, N., Pignanelli, E., Schütze, A. Condition Monitoring of Hydraulic Systems [Dataset]. UCI Machine Learning Repository, 2018.
-    * [24] Helwig, N., Pignanelli, E., Schütze, A. Condition monitoring of a complex hydraulic system using multivariate statistics. Proc. IEEE I2MTC, 210–215, 2015.
-    * [25] ISO 13374-1:2003 Condition monitoring and diagnostics of machines — Data processing, communication and presentation — Part 1
+    * [22] Audibert, J. et al. Do deep neural networks contribute to multivariate time series anomaly detection? Pattern Recognition 132:108945, 2022.
+    * [23] Sarfraz, M. S. et al. Position: Quo vadis, unsupervised time series anomaly detection? Proc. ICML, PMLR 235:43461–43476, 2024.
+    * [24] Clopper, C. J., Pearson, E. S. The use of confidence or fiducial limits illustrated in the case of the binomial. Biometrika 26(4):404–413, 1934.
+    * [25] Helwig, N., Pignanelli, E., Schütze, A. Condition Monitoring of Hydraulic Systems [Dataset]. UCI Machine Learning Repository, 2018.
+    * [26] Helwig, N., Pignanelli, E., Schütze, A. Condition monitoring of a complex hydraulic system using multivariate statistics. Proc. IEEE I2MTC, 210–215, 2015.
+    * [27] ISO 13374-1:2003 Condition monitoring and diagnostics of machines — Data processing, communication and presentation — Part 1
 
 ※ 경진대회 만족도 조사 완료 페이지 캡처: [제출 전 삽입]

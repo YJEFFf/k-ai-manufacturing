@@ -1,0 +1,100 @@
+{
+  "normal": {
+    "rows": 20000,
+    "start": "2022-07-12 00:00:00.019000",
+    "end": "2022-07-12 01:16:55.828000",
+    "weekday": "Tuesday",
+    "span_s": 4615.8,
+    "measured_s": 2000.0,
+    "measured_share": 0.4333,
+    "records": 600,
+    "records_exactly_50": 202,
+    "records_over_50": 0,
+    "records_under_8": 50,
+    "records_under_10": 70,
+    "record_current_mean_min": -235.6,
+    "record_current_mean_max": 222.5,
+    "records_ge10": 530,
+    "records_ge10_abs_mean_gt_sd": 0,
+    "current_mean": 1.4,
+    "current_negative_share": 0.495,
+    "vib_upper_sd": 0.071,
+    "vib_lower_sd": 0.119,
+    "records_ge20": 452,
+    "upper_lower_corr_median": 0.28,
+    "upper_lower_corr_negative_share": 0.2,
+    "upper_over_lower_sd_median": 0.72,
+    "duplicate_rows": 1
+  },
+  "abnormal": {
+    "rows": 600,
+    "start": "2022-07-17 10:51:07.943000",
+    "end": "2022-07-17 10:53:53.540000",
+    "weekday": "Sunday",
+    "span_s": 165.6,
+    "measured_s": 60.0,
+    "measured_share": 0.3623,
+    "records": 21,
+    "records_exactly_50": 5,
+    "records_over_50": 0,
+    "records_under_8": 3,
+    "records_under_10": 4,
+    "record_current_mean_min": -184.8,
+    "record_current_mean_max": 272.4,
+    "records_ge10": 17,
+    "records_ge10_abs_mean_gt_sd": 9,
+    "current_mean": 57.3,
+    "current_negative_share": 0.34,
+    "vib_upper_sd": 0.448,
+    "vib_lower_sd": 0.241,
+    "records_ge20": 13,
+    "upper_lower_corr_median": -0.36,
+    "upper_lower_corr_negative_share": 0.92,
+    "upper_over_lower_sd_median": 1.55,
+    "record_abs_mean_median": 97.2
+  },
+  "format_leak": {
+    "raw": {
+      "f1": 0.992,
+      "tp": 592,
+      "fp": 1,
+      "fn": 8,
+      "normal_digits_share": {
+        "0": 0.0002,
+        "2": 0.0001,
+        "3": 0.0011,
+        "4": 0.0092,
+        "5": 0.0915,
+        "6": 0.8979,
+        "16": 0.0001
+      },
+      "abnormal_digits_share": {
+        "5": 0.0017,
+        "6": 0.0117,
+        "7": 0.0967,
+        "8": 0.44,
+        "9": 0.41,
+        "10": 0.0383,
+        "11": 0.0017
+      }
+    },
+    "matched": {
+      "f1": 0.0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 600,
+      "normal_digits_share": {
+        "1": 0.0011,
+        "2": 0.009,
+        "3": 0.0948,
+        "4": 0.8951
+      },
+      "abnormal_digits_share": {
+        "1": 0.0017,
+        "2": 0.005,
+        "3": 0.0917,
+        "4": 0.9017
+      }
+    }
+  }
+}

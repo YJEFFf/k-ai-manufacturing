@@ -1,36 +1,9 @@
-"""06 정상 운전 상태(운전 모드) 추정과 상태별 오경보·미탐 조건 분석 — test 채점 이후 사후 분석.
+"""정상 77분을 운전 상태(정숙 구간, 변동 구간 저·중·고부하)로 나누고, 상태별 오경보와 이상 기록의 미탐 조건을 본다(과제 ③).
 
-과제 ③ "정상적인 운전변화를 이상으로 판단하는 오경보를 줄이고, 미탐지·오경보 발생조건을 분석하시오"에 답하기 위한 분석이다.
-tvt/ 의 잠금 선택(tvt_selection.json)과 test 채점이 끝난 뒤 추가했으며, 잠금 산출물을 읽기만 하고 바꾸지 않는다.
-따라서 이 분석은 모델 선택·문턱·규칙 상수에 영향을 주지 않는다.
-
-운전 상태를 나누는 방법과 근거
-1) 부하 대리변수: 기록(약 8초, 최대 50행)마다 모터 전류를 고정 주파수 사인으로 적합한 진폭 cur_amp(공통 함수 case_table).
-   전류 RMS(sqrt(mean(i²)))를 보조로 쓴다. 정상에서는 두 값의 상관이 1.00이고, 이상 기록은 사인 적합이 깨지므로 RMS만 쓴다.
-   - 사인 진폭은 짧은 기록에서 불안정하다(주기 약 16.5표본). 8행 미만 기록(50개)은 부하 등급을 매기지 않고 '짧은 기록'으로 둔다.
-     8행은 tvt 교차 확인(R2)이 전류 파형을 보기 시작하는 최소 길이(R2_MIN_LEN)와 같다.
-2) 운전 구간(시간 연속 구간): 기록 순서대로 [log 상부 진동 SD, log 하부 진동 SD, log 전류 진폭]을 표준화하고,
-   평균·분산이 함께 바뀌는 지점을 정확 최적 분할(optimal partitioning, 가우스 비용 n·Σlog σ²)로 찾는다.
-   벌점은 BIC형 (2d+1)·ln N (d=3), 최소 구간 10기록. 벌점 ×0.5~×4, 최소 구간 5~20기록으로 바꿔도 경계가 같은지 확인한다.
-   변동 부하 구간(기록마다 저·중·고 부하가 번갈아 나옴)과 정숙 구간(저부하가 연속, 진동 작음)이 나뉜다.
-3) 부하 등급: 8행 이상 정상 기록 전체(77분)의 cur_amp에 1차원 가우스 혼합(3성분, random_state 0)을 맞추고,
-   사후확률이 바뀌는 경계로 저(기저)·중(부분)·고부하를 나눈다. 단순 3분위(경계 약 121·192)는 기록의 약 45%가 몰린
-   무부하 군집(110~130)의 한가운데를 잘라 같은 운전 상태를 저·중으로 쪼개므로 주 기준으로 쓰지 않고 민감도로만 보고한다.
-   정숙 구간 기록은 구간 이름으로 묶는다.
-   최종 상태 = 정숙 구간 / 변동 구간·저부하 / 변동 구간·중부하 / 변동 구간·고부하 / 변동 구간·짧은 기록.
-   실제 운전 모드 정보(금형·스트로크·가동 기록)는 데이터에 없으므로 이 상태는 신호로 추정한 것이다.
-4) 학습 분포와의 거리: 평가 기록의 상·하부 진동 SD와 전류 진폭이 학습 기록 분포의 몇 % 분위인지 보고
-   상위 1% 밖·상위 1~5%·하위 1% 밖·몸통으로 나눈다. 보조로 k=5 최근접 거리(학습 99% 분위 초과 = 새로운 기록).
-5) 이상 기록: 전류 RMS를 정상 상태별 RMS 범위와 비교하고, 정상의 부하-진동 관계(log 진동 SD ~ log 전류 RMS 회귀)에서
-   얼마나 벗어나는지(표준화 잔차) 본다. 같은 표에 v2·최종 모델의 실시간 미탐 행 수를 붙인다.
-
-오경보 계산은 tvt/evalcore.predict_rows를 그대로 쓴다(검증 정상 행 = 자기 기록을 뺀 LOO p, 시험 행 = 전체 보정 p,
-사건 지속 H1은 정상 흐름 안에서 직전 기록 판정만 이어받는다). 실시간 행 경보를 센다.
-R1 = H1(사건 지속), R2 = H2(교차 확인: 크기 성분만 넘고 전류 파형 정상이면 보류). 최종 모델 = v2+H1+H2.
-
+입력: 두 CSV(cases/common.load_both), tvt 캐시 rows_{A,B}.pkl·tvt_scores_meta.json. 오경보는 tvt/evalcore.predict_rows로 다시 계산한다.
+출력: outputs/06_operating_regime.json · .csv(상태×모델 오경보 긴 표) · _records.csv(정상 기록별 상태·오경보) · _summary.md
+보고서 1.6·3.2절의 근거. test 채점 이후의 사후 분석이라 모델 선택·문턱·규칙 상수에 영향이 없다.
 실행: PYTHONIOENCODING=utf-8 python 06_operating_regime.py   (약 15초)
-출력: outputs/06_operating_regime.json, outputs/06_operating_regime.csv(상태×모델 오경보 긴 표),
-      outputs/06_operating_regime_records.csv(정상 기록별 상태·오경보), outputs/06_operating_regime_summary.md
 """
 from __future__ import annotations
 
@@ -47,34 +20,41 @@ HERE = Path(__file__).resolve().parent
 PRESS = HERE.parent
 sys.path.insert(0, str(PRESS / "tvt"))
 sys.path.insert(0, str(PRESS / "cases"))
-from common import case_table, load_both  # noqa: E402
+from common import SPLITS, case_table, load_both  # noqa: E402
 from evalcore import _p, candidates, predict_rows  # noqa: E402
 
 TVT_OUT = PRESS / "tvt" / "outputs"
 TVT_CACHE = PRESS / "tvt" / "cache"
 OUT = HERE / "outputs"
 
-SPLIT_BOUNDS = {"A": (360, 480), "B": (300, 420)}       # 학습 끝·검증 끝(정상 기록 번호). tvt/lib.SPLITS와 같음
+# common.SPLITS = 분할별 (학습 끝, 검증 끝) 정상 기록 번호. tvt/lib.SPLITS와 같다
 MODELS = ["maxz3", "knn5", "mlp_ae5", "lstm20", "iforest", "v1", "v2", "v2+H1", "v2+H2", "v2+H1+H2"]
 ALPHAS = (0.01, 0.03, 0.05)
-MIN_ROWS = 8                    # 부하 등급을 매기는 최소 기록 길이(= tvt R2_MIN_LEN)
-CP_MIN_SIZE = 10
+# 사인 진폭은 짧은 기록에서 불안정하다(주기 약 16.5표본). 8행 미만은 부하 등급 없이 '짧은 기록'으로 둔다.
+# 8행은 R2(교차 확인)가 전류 파형을 보기 시작하는 최소 길이(tvt R2_MIN_LEN)와 같다
+MIN_ROWS = 8
+CP_MIN_SIZE = 10                # 변화점 검출의 최소 구간 길이(기록)
 GUIDE_ROWS = (16000, 19000)     # 가이드북 p.27 정상 그래프에서 진동·전류 폭이 줄어 보이는 행 범위
-TAIL_FEATS = ["vib_upper_sd", "vib_lower_sd", "cur_amp"]
+TAIL_FEATS = ["vib_upper_sd", "vib_lower_sd", "cur_amp"]   # 학습 분포 대비 위치를 볼 특징
 STATE_ORDER = ["quiet", "busy_low", "busy_mid", "busy_high", "busy_short"]
 STATE_KO = {"quiet": "정숙 구간(연속 저부하)", "busy_low": "변동 구간·저부하", "busy_mid": "변동 구간·중부하",
             "busy_high": "변동 구간·고부하", "busy_short": "변동 구간·짧은 기록(n<8)", "all": "전체"}
 TAIL_ORDER = ["upper_out", "upper_tail", "body", "lower_out", "short"]
 TAIL_KO = {"upper_out": "학습 상위 1% 밖", "upper_tail": "학습 상위 1~5%", "body": "학습 몸통",
            "lower_out": "학습 하위 1% 밖", "short": "짧은 기록(n<8)"}
+# 코드 이름 H1 = 보고서 R1(사건 지속), H2 = R2(교차 확인: 크기 성분만 넘고 전류 파형이 정상이면 보류)
 MODEL_KO = {"v2+H1": "v2+R1", "v2+H2": "v2+R2", "v2+H1+H2": "최종(v2+R1+R2)"}
 
 
 # ================================================================ 기록 표
 def record_table(df: pd.DataFrame) -> pd.DataFrame:
-    """기록별 특징(case_table) + 원 행 번호·시각·전류 RMS."""
+    """기록별 특징(case_table) + 원 행 번호·시각·전류 RMS.
+
+    부하 대리변수는 고정 주파수 사인 진폭 cur_amp다. 전류 RMS는 정상에서 cur_amp와 상관 1.00이라 보조로 두고,
+    사인 적합이 깨지는 이상 기록에는 RMS만 쓴다.
+    """
     ct = case_table(df)
-    row = df["Unnamed: 0"] if "Unnamed: 0" in df else pd.Series(df.index, index=df.index)
+    row = df["Unnamed: 0"]          # CSV 첫 열 = 원 행 번호
     ct["row0"] = row.groupby(df.rec).first().to_numpy()
     ct["row1"] = row.groupby(df.rec).last().to_numpy()
     ts = pd.to_datetime(df.TimeStamp).astype("datetime64[ns]")
@@ -88,42 +68,48 @@ def record_table(df: pd.DataFrame) -> pd.DataFrame:
 
 # ================================================================ 변화점 검출
 def optimal_partition(X: np.ndarray, beta: float, min_size: int) -> list[int]:
-    """평균·분산 변화(대각 가우스 비용)의 정확 최적 분할. 반환: 구간 끝 인덱스(배타) 목록."""
+    """평균·분산이 함께 바뀌는 지점의 정확 최적 분할(optimal partitioning). 반환은 구간 끝 인덱스(배타) 목록.
+
+    구간 비용은 대각 가우스 음의 로그우도 n·Σ log σ²이고, 구간마다 벌점 beta를 더한 총비용을 동적 계획법으로 최소화한다.
+    """
     N, d = X.shape
+    # 누적합으로 임의 구간의 평균·분산을 O(1)에 구한다
     cs = np.vstack([np.zeros(d), np.cumsum(X, 0)])
     cs2 = np.vstack([np.zeros(d), np.cumsum(X ** 2, 0)])
-    F = np.full(N + 1, np.inf)
-    F[0] = -beta
-    last = np.zeros(N + 1, int)
+    F = np.full(N + 1, np.inf)          # F[j] = 앞 j개 기록을 나누는 최소 총비용
+    F[0] = -beta                        # 벌점이 구간 수가 아니라 변화점 수만큼 붙도록 한 번 미리 뺀다
+    last = np.zeros(N + 1, int)         # 최적 분할에서 j 직전 구간의 시작점
     for j in range(min_size, N + 1):
-        cand = np.array([0] + list(range(min_size, j - min_size + 1)))
+        cand = np.array([0] + list(range(min_size, j - min_size + 1)))   # 양쪽 구간이 min_size 이상인 시작점만
         cand = cand[np.isfinite(F[cand])]
         m = (j - cand)[:, None].astype(float)
         mu = (cs[j] - cs[cand]) / m
-        var = np.maximum((cs2[j] - cs2[cand]) / m - mu ** 2, 1e-3)
+        var = np.maximum((cs2[j] - cs2[cand]) / m - mu ** 2, 1e-3)    # 분산 하한으로 log 발산을 막는다
         tot = F[cand] + m[:, 0] * np.log(var).sum(1) + beta
         k = int(np.argmin(tot))
         F[j], last[j] = tot[k], cand[k]
     ends, j = [], N
-    while j > 0:
+    while j > 0:                        # 끝에서부터 되짚어 구간 끝을 모은다
         ends.append(j)
         j = last[j]
     return sorted(ends)
 
 
 def segment_regimes(rt: pd.DataFrame):
+    """기록 순서대로 운전 구간(시간 연속 구간)을 나눈다. 반환은 (주 경계, 민감도 경계, 기록별 구간 번호, 벌점)."""
     ok = rt[rt.n >= MIN_ROWS].reset_index(drop=True)
     X = np.column_stack([np.log(ok.vib_upper_sd), np.log(ok.vib_lower_sd), np.log(ok.cur_amp)])
     X = (X - X.mean(0)) / X.std(0)
     N, d = X.shape
-    base_beta = (2 * d + 1) * np.log(N)
+    base_beta = (2 * d + 1) * np.log(N)   # BIC형 벌점. 구간 하나에 평균 d·분산 d·변화점 1개 = 2d+1개 모수
 
-    def bounds(mult, min_size):
+    def bounds(mult, min_size):           # (첫 기록, 끝 기록) 목록
         ends = optimal_partition(X, mult * base_beta, min_size)
         starts = [0] + ends[:-1]
         return [(int(ok.rec[s]), int(ok.rec[e - 1])) for s, e in zip(starts, ends)]
 
     main = bounds(1.0, CP_MIN_SIZE)
+    # 벌점 ×0.5~×4, 최소 구간 5~20기록으로 바꿔도 경계가 유지되는지 본다
     sens = {f"벌점x{m}_최소{s}": bounds(m, s) for m in (0.5, 1.0, 2.0, 4.0) for s in (5, 10, 20)}
     starts = [b[0] for b in main]
     starts[0] = 0
@@ -132,7 +118,11 @@ def segment_regimes(rt: pd.DataFrame):
 
 
 def gmm_load_bounds(x: np.ndarray):
-    """전류 진폭 1차원 3성분 가우스 혼합. 기저·고부하 평균 사이에서 사후확률 최대 성분이 바뀌는 두 경계."""
+    """전류 진폭 1차원 3성분 가우스 혼합으로 저(기저)·중(부분)·고부하 경계를 정한다.
+
+    기저·고부하 평균 사이를 촘촘히 훑어 사후확률 최대 성분이 바뀌는 두 점을 경계로 쓴다.
+    단순 3분위는 기록의 약 45%가 몰린 무부하 군집(110~130)을 반으로 잘라 같은 상태를 저·중으로 쪼개서 민감도로만 쓴다.
+    """
     g = GaussianMixture(3, random_state=0, n_init=10).fit(x[:, None])
     means = np.sort(g.means_.ravel())
     grid = np.linspace(means[0], means[-1], 20001)
@@ -142,19 +132,20 @@ def gmm_load_bounds(x: np.ndarray):
     return [float(v) for v in b], [float(v) for v in means], float(g.bic(x[:, None]))
 
 
-def classify(rt, ok, b1, b2, prefix):
+def classify(rt, ok, b1, b2):
+    """부하 등급(short·low·mid·high)과 최종 상태. 정숙 구간 기록은 부하와 상관없이 'quiet'로 묶는다."""
     load = np.select([~ok, rt.cur_amp < b1, rt.cur_amp < b2], ["short", "low", "mid"], "high")
     return load, np.where(rt.regime == "quiet", "quiet", "busy_" + load)
 
 
 # ================================================================ 행 표 ↔ 원 기록 번호
 def map_rows_to_records(table: pd.DataFrame, rt: pd.DataFrame, rt_ab: pd.DataFrame, split: str) -> dict:
-    """tvt 행 표의 rec('valid:normal:k', 'test:abnormal:k')를 원 기록 번호로 바꾼다. 시작 시각과 행 수로 확인."""
+    """tvt 행 표의 rec('valid:normal:k', 'test:abnormal:k')를 원 기록 번호로 바꾼다. 시작 시각과 행 수로 확인한다."""
     t0 = table.groupby("rec", sort=False).ts.first().astype("int64")
     nrow = table.groupby("rec", sort=False).size()
     by_ts = {"normal": dict(zip(rt.ts0.astype("int64"), rt.rec)), "abnormal": dict(zip(rt_ab.ts0.astype("int64"), rt_ab.rec))}
     n_by = {"normal": dict(zip(rt.rec, rt.n)), "abnormal": dict(zip(rt_ab.rec, rt_ab.n))}
-    train_end, valid_end = SPLIT_BOUNDS[split]
+    train_end, valid_end = SPLITS[split]
     out = {}
     for r, ts in t0.items():
         part, subset, k = r.split(":")
@@ -167,20 +158,25 @@ def map_rows_to_records(table: pd.DataFrame, rt: pd.DataFrame, rt_ab: pd.DataFra
 
 
 def partition_of(rec: int, split: str) -> str:
-    tr, va = SPLIT_BOUNDS[split]
+    """정상 기록 번호가 그 분할에서 train·valid·test 중 어디인지."""
+    tr, va = SPLITS[split]
     return "train" if rec < tr else ("valid" if rec < va else "test")
 
 
 # ================================================================ 오경보·미탐
 def run_predictions(tables, rmaps, cands, meta):
-    """모델·α·분할·평가 구간별 실시간 예측을 기록 단위로 합친다(정상: 경보 행, 이상: 미탐 행)."""
-    fa_rows, miss_rows = [], []
+    """모델·α·분할·평가 구간별 실시간 예측을 기록 단위로 합친다(정상: 경보 행, 이상: 미탐 행). 원 예측도 함께 돌려준다.
+
+    evalcore.predict_rows를 그대로 쓴다. 검증 정상 행은 LOO p, 시험 행은 전체 보정 p이고, R1은 흐름 안에서 직전 기록 판정만 이어받는다.
+    """
+    fa_rows, miss_rows, preds = [], [], {}
     for s, t in tables.items():
         r2_ref = meta[s]["r2_ref"]
         for alpha in ALPHAS:
             for name in MODELS:
                 for regime in ("valid", "test"):
                     p = predict_rows(t, cands[name], alpha, regime, r2_ref)
+                    preds[(s, alpha, name, regime)] = p
                     p = p.assign(alarm=p.alarm_realtime.astype(bool))
                     g = p.groupby(["subset", "rec"]).agg(n_rows=("alarm", "size"), alarms=("alarm", "sum"))
                     for (subset, r), x in g.iterrows():
@@ -189,7 +185,7 @@ def run_predictions(tables, rmaps, cands, meta):
                             fa_rows.append({**d, "fa_rows": int(x.alarms)})
                         else:
                             miss_rows.append({**d, "miss_rows": int(x.n_rows - x.alarms)})
-    return pd.DataFrame(fa_rows), pd.DataFrame(miss_rows)
+    return pd.DataFrame(fa_rows), pd.DataFrame(miss_rows), preds
 
 
 def summarize(per_rec: pd.DataFrame, key: str) -> pd.DataFrame:
@@ -208,15 +204,14 @@ def summarize(per_rec: pd.DataFrame, key: str) -> pd.DataFrame:
     return out
 
 
-def r1_latch_extra(tables, rmaps, rt, cands, meta):
-    """최종(v2+R1+R2)에만 있고 v2+R2에는 없는 정상 경보 = R1이 직전 기록에서 이어받은 경보. 어느 기록 뒤에 붙었는지."""
+def r1_latch_extra(preds, rmaps, rt):
+    """최종(v2+R1+R2)에만 있고 v2+R2에는 없는 정상 경보 = R1이 직전 기록에서 이어받은 경보. 어느 기록 뒤에 붙었는지 본다."""
     state = dict(zip(rt.rec, rt.state))
     out = []
-    for s, t in tables.items():
+    for s in SPLITS:
         for alpha in ALPHAS:
             for regime in ("valid", "test"):
-                a = predict_rows(t, cands["v2+H1+H2"], alpha, regime, meta[s]["r2_ref"])
-                b = predict_rows(t, cands["v2+H2"], alpha, regime, meta[s]["r2_ref"])
+                a, b = preds[(s, alpha, "v2+H1+H2", regime)], preds[(s, alpha, "v2+H2", regime)]
                 extra = (a.subset == "normal").to_numpy() & a.alarm_realtime.astype(bool).to_numpy() & ~b.alarm_realtime.astype(bool).to_numpy()
                 for r, g in a[extra].groupby("rec"):
                     orig = rmaps[s][r]
@@ -242,8 +237,9 @@ def v2_component_anatomy(tables, rmaps, rt, meta):
                 for c in comps:
                     cp = _p(t, mask, part, f"v2|cp_full|{c}", f"v2|cp_loo|{c}")
                     act[c] = np.isfinite(cp) & (cp <= alpha)
+                # R2 보류 조건(evalcore.own_alarm과 같은 식): 크기 성분만 문턱을 넘고, 기록 앞부분 전류 파형 R²가 기준 이상
                 mag_only = act["magnitude"] & ~np.any([act[c] for c in comps if c != "magnitude"], axis=0)
-                r2 = sub.prefix_r2.to_numpy()
+                r2 = sub.prefix_r2.to_numpy()          # 기록 앞 8행 미만이면 NaN
                 wave_ok = r2 >= r2_ref
                 st = np.array([state[rmaps[s][r]] for r in sub.rec])
                 for k in STATE_ORDER:
@@ -265,6 +261,7 @@ def train_percentile(rt: pd.DataFrame, ok: pd.Series, split: str) -> pd.DataFram
 
 
 def tail_class(pct: pd.DataFrame, ok: pd.Series) -> np.ndarray:
+    """세 특징 중 가장 극단인 분위로 학습 상위 1% 밖·상위 1~5%·하위 1% 밖·몸통을 나눈다. 위쪽 판정이 먼저다."""
     hi, lo = pct.max(axis=1), pct.min(axis=1)
     return np.select([~ok, hi > 99, hi > 95, lo < 1], ["short", "upper_out", "upper_tail", "lower_out"], "body")
 
@@ -275,8 +272,8 @@ def knn_novelty(rt: pd.DataFrame, ok: pd.Series, split: str, k: int = 5) -> pd.S
     F = np.log(sub[TAIL_FEATS].to_numpy())
     tr = sub[f"part_{split}"].to_numpy() == "train"
     Z = (F - F[tr].mean(0)) / F[tr].std(0)
-    D = np.sqrt(((Z[:, None, :] - Z[None, tr, :]) ** 2).sum(-1))
-    for j, i in enumerate(np.flatnonzero(tr)):
+    D = np.sqrt(((Z[:, None, :] - Z[None, tr, :]) ** 2).sum(-1))   # 모든 기록 × 학습 기록 거리
+    for j, i in enumerate(np.flatnonzero(tr)):                       # 학습 기록 i의 자기 거리(0)를 지운다
         D[i, j] = np.inf
     return pd.Series(np.sort(D, 1)[:, :k].mean(1), index=sub.rec.to_numpy())
 
@@ -298,21 +295,23 @@ def low_load_run(sub: pd.DataFrame):
 
 # ================================================================ 보조
 def med(x):
+    """중앙값(소수 4자리). 빈 집합이면 None."""
     return None if len(x) == 0 else round(float(np.median(x)), 4)
 
 
 def main():
+    """운전 상태 추정 → 상태별 오경보 → 학습·평가 분포 비교 → 이상 기록의 부하 위치 순으로 계산해 저장한다."""
     OUT.mkdir(parents=True, exist_ok=True)
     normal, abnormal = load_both(matched=True)
     rt = record_table(normal)
     rt_ab = record_table(abnormal)
     ok = rt.n >= MIN_ROWS
 
-    # ---- 1. 운전 구간·부하 등급
+    # ---- 1. 운전 구간·부하 등급. 실제 운전 모드 정보는 데이터에 없어 신호로 추정한 상태다
     regimes, sens, seg_id, beta = segment_regimes(rt)
     rt["regime_id"] = seg_id
     seg_stats = []
-    for i, _ in enumerate(regimes):
+    for i in range(len(regimes)):
         m = rt.regime_id == i
         mo = m & ok
         seg_stats.append(dict(regime_id=i, first_rec=int(rt.rec[m].min()), last_rec=int(rt.rec[m].max()),
@@ -323,14 +322,14 @@ def main():
                               cur_amp_median=med(rt.cur_amp[mo]), cur_amp_iqr=round(float(stats.iqr(rt.cur_amp[mo])), 2),
                               cur_rms_median=med(rt.cur_rms[mo]),
                               vib_upper_sd_median=med(rt.vib_upper_sd[mo]), vib_lower_sd_median=med(rt.vib_lower_sd[mo])))
-    quiet_id = int(np.argmin([s["vib_upper_sd_median"] for s in seg_stats]))
+    quiet_id = int(np.argmin([s["vib_upper_sd_median"] for s in seg_stats]))   # 상부 진동이 가장 작은 구간 = 정숙 구간
     rt["regime"] = np.where(rt.regime_id == quiet_id, "quiet", "busy")
 
     (b1, b2), gmm_means, gmm_bic = gmm_load_bounds(rt.cur_amp[ok].to_numpy())
-    t1, t2 = (float(v) for v in np.quantile(rt.cur_amp[ok], [1 / 3, 2 / 3]))
-    rt["load"], rt["state"] = classify(rt, ok, b1, b2, "")
-    rt["load_tertile"], rt["state_tertile"] = classify(rt, ok, t1, t2, "")
-    for s in SPLIT_BOUNDS:
+    t1, t2 = (float(v) for v in np.quantile(rt.cur_amp[ok], [1 / 3, 2 / 3]))   # 민감도용 단순 3분위 경계
+    rt["load"], rt["state"] = classify(rt, ok, b1, b2)
+    rt["load_tertile"], rt["state_tertile"] = classify(rt, ok, t1, t2)
+    for s in SPLITS:
         rt[f"part_{s}"] = [partition_of(r, s) for r in rt.rec]
     hist_counts, hist_edges = np.histogram(rt.cur_amp[ok], bins=np.arange(100, 300, 5))
     base_share = float(((rt.cur_amp[ok] >= 110) & (rt.cur_amp[ok] < 130)).mean())
@@ -348,18 +347,18 @@ def main():
         mannwhitney_p_vib_upper=float(stats.mannwhitneyu(rt.vib_upper_sd[qm], rt.vib_upper_sd[bl]).pvalue),
         mannwhitney_p_cur_amp=float(stats.mannwhitneyu(rt.cur_amp[qm], rt.cur_amp[bl]).pvalue))
 
-    # ---- 1b. 가이드북 16,000~19,000행
-    gm = (rt.row1 >= GUIDE_ROWS[0]) & (rt.row0 <= GUIDE_ROWS[1])
+    # ---- 1b. 가이드북 p.27이 설명 없이 보여 준 16,000~19,000행이 어느 운전 상태인지
+    gm = (rt.row1 >= GUIDE_ROWS[0]) & (rt.row0 <= GUIDE_ROWS[1])      # 그 행 범위와 겹치는 기록
     g_ok, o_ok = gm & ok, ~gm & ok
-    rowidx = normal["Unnamed: 0"].to_numpy() if "Unnamed: 0" in normal else normal.index.to_numpy()
+    rowidx = normal["Unnamed: 0"].to_numpy()
     in_g = (rowidx >= GUIDE_ROWS[0]) & (rowidx <= GUIDE_ROWS[1])
 
-    def row_level(m):
+    def row_level(m):                     # 행 값의 1~99% 분위 폭(그래프에서 눈에 보이는 폭)
         c, v0, v1 = (normal[k].to_numpy()[m] for k in ("AI2_Current", "AI0_Vibration", "AI1_Vibration"))
         w = lambda a: round(float(np.percentile(a, 99) - np.percentile(a, 1)), 4)  # noqa: E731
         return dict(rows=int(m.sum()), current_p1_p99_width=w(c), vib_upper_p1_p99_width=w(v0), vib_lower_p1_p99_width=w(v1))
 
-    def rec_meds(m):
+    def rec_meds(m):                      # 기록 특징 중앙값
         return {k: med(rt[k][m]) for k in ("cur_amp", "cur_rms", "vib_upper_sd", "vib_lower_sd")}
     guide = dict(
         rows=list(GUIDE_ROWS), first_rec=int(rt.rec[gm].min()), last_rec=int(rt.rec[gm].max()), n_records=int(gm.sum()),
@@ -370,43 +369,45 @@ def main():
         record_medians=dict(guide=rec_meds(g_ok), rest=rec_meds(o_ok), rest_busy_low=rec_meds(o_ok & (rt.state == "busy_low"))),
         record_cur_amp_iqr=dict(guide=round(float(stats.iqr(rt.cur_amp[g_ok])), 2), rest=round(float(stats.iqr(rt.cur_amp[o_ok])), 2)),
         row_level=dict(guide=row_level(in_g), rest=row_level(~in_g)),
-        partition={s: rt.loc[gm, f"part_{s}"].value_counts().to_dict() for s in SPLIT_BOUNDS},
-        quiet_partition={s: rt.loc[rt.regime == "quiet", f"part_{s}"].value_counts().to_dict() for s in SPLIT_BOUNDS})
+        partition={s: rt.loc[gm, f"part_{s}"].value_counts().to_dict() for s in SPLITS},
+        quiet_partition={s: rt.loc[rt.regime == "quiet", f"part_{s}"].value_counts().to_dict() for s in SPLITS})
 
-    # ---- 2. 상태별 오경보
+    # ---- 2. 상태별 오경보. 실시간 행 경보를 기록·상태 단위로 센다
     meta = json.loads((TVT_OUT / "tvt_scores_meta.json").read_text(encoding="utf-8"))
     cands = {c[0]: c for c in candidates(meta["A"]["complexity"])}
-    tables = {s: pd.read_pickle(TVT_CACHE / f"rows_{s}.pkl") for s in SPLIT_BOUNDS}
+    tables = {s: pd.read_pickle(TVT_CACHE / f"rows_{s}.pkl") for s in SPLITS}
     rmaps = {s: map_rows_to_records(t, rt, rt_ab, s) for s, t in tables.items()}
-    per_rec, miss = run_predictions(tables, rmaps, cands, meta)
+    per_rec, miss, preds = run_predictions(tables, rmaps, cands, meta)
     per_rec = per_rec.merge(rt[["rec", "state", "state_tertile"]], on="rec")
     fa = summarize(per_rec, "state")
     fa_tert = summarize(per_rec.drop(columns="state").rename(columns={"state_tertile": "state"}), "state")
     anat = v2_component_anatomy(tables, rmaps, rt, meta)
-    latch = r1_latch_extra(tables, rmaps, rt, cands, meta)
+    latch = r1_latch_extra(preds, rmaps, rt)
 
-    chk =fa[(fa.alpha == 0.01) & (fa.state == "all") & (fa.part == "test")].set_index(["split", "model"]).fa_rows
+    # 재현 확인. B test α 1% 오경보 행이 tvt README(v2 3행 → 최종 0행)와 같아야 한다
+    chk = fa[(fa.alpha == 0.01) & (fa.state == "all") & (fa.part == "test")].set_index(["split", "model"]).fa_rows
     sanity = dict(B_test_v2_fa_rows=int(chk[("B", "v2")]), B_test_final_fa_rows=int(chk[("B", "v2+H1+H2")]),
                   A_test_final_fa_rows=int(chk[("A", "v2+H1+H2")]))
     assert sanity["B_test_v2_fa_rows"] == 3 and sanity["B_test_final_fa_rows"] == 0, sanity   # tvt README와 같아야 함
 
     fa_list = {}
-    for s in SPLIT_BOUNDS:
+    for s in SPLITS:
         for name in MODELS:
             d = per_rec[(per_rec.split == s) & (per_rec.alpha == 0.01) & (per_rec.model == name) & (per_rec.fa_rows > 0)]
             fa_list[f"{s}|{name}"] = [dict(part=r.part, rec=int(r.rec), state=r.state, fa_rows=int(r.fa_rows),
                                            cur_amp=round(float(rt.cur_amp[r.rec]), 1), vib_upper_sd=round(float(rt.vib_upper_sd[r.rec]), 4),
                                            vib_lower_sd=round(float(rt.vib_lower_sd[r.rec]), 4)) for r in d.itertuples()]
 
-    # ---- 3. 학습 vs 평가 분포
+    # ---- 3. 학습 vs 평가 분포. 평가 기록이 학습 분포의 어디에 있고, 그 위치별로 오경보가 얼마나 나는지
     shift, tail_frames = {}, []
-    for s in SPLIT_BOUNDS:
+    for s in SPLITS:
         pct = train_percentile(rt, ok, s)
         for c in TAIL_FEATS:
             rt[f"trainpct_{s}_{c}"] = pct[c].round(1)
         rt[f"tail_{s}"] = tail_class(pct, ok)
         nov = knn_novelty(rt, ok, s)
         rt[f"novelty_{s}"] = rt.rec.map(nov)
+        # 학습 기록끼리의 k-최근접 거리 99% 분위를 넘으면 '학습 때 못 본 기록'으로 본다
         tr_nov = nov[rt.set_index("rec").loc[nov.index, f"part_{s}"].to_numpy() == "train"]
         thr99 = float(np.quantile(tr_nov, 0.99))
         rt[f"novel_{s}"] = rt[f"novelty_{s}"] > thr99
@@ -432,11 +433,13 @@ def main():
     fa_tail = summarize(pd.concat(tail_frames, ignore_index=True), "tail")
 
     # ---- 4. 이상 기록의 부하 대리변수(전류 RMS)와 부하-진동 관계
+    # 이상 기록은 사인 적합이 깨져 진폭 대신 RMS를 쓴다. 정상 상태별 RMS 범위와 비교한다
     ref = rt[ok]
     state_rms = {k: dict(min=round(float(v.min()), 1), p25=round(float(v.quantile(.25)), 1), median=round(float(v.median()), 1),
                          p75=round(float(v.quantile(.75)), 1), max=round(float(v.max()), 1))
                  for k, v in ref.groupby("state").cur_rms}
     rms_t1, rms_t2 = (float(v) for v in np.quantile(ref.cur_rms, [1 / 3, 2 / 3]))
+    # 정상의 부하-진동 관계 log 진동 SD ~ log 전류 RMS를 직선으로 맞춘다. 이상 기록이 이 관계에서 벗어난 정도를 표준화 잔차 z로 본다
     resid_fit = {}
     for c in ("vib_lower_sd", "vib_upper_sd"):
         x, y = np.log(ref.cur_rms.to_numpy()), np.log(ref[c].to_numpy())
@@ -448,7 +451,7 @@ def main():
     miss1 = miss[miss.alpha == 0.01].pivot_table(index="rec", columns=["split", "model"], values="miss_rows", aggfunc="sum")
     ab_rows = []
     for r in rt_ab.itertuples():
-        near = min(state_rms, key=lambda k: abs(state_rms[k]["median"] - r.cur_rms))
+        near = min(state_rms, key=lambda k: abs(state_rms[k]["median"] - r.cur_rms))   # RMS 중앙값이 가장 가까운 정상 상태
         z = {c: (np.log(getattr(r, c)) - (f["intercept"] + f["slope"] * np.log(r.cur_rms))) / f["resid_sd"]
              if getattr(r, c) > 0 else np.nan for c, f in resid_fit.items()}
         ab_rows.append(dict(abn_rec=int(r.rec), part="valid" if r.rec < 10 else "test", n=int(r.n), ts0=str(r.ts0),
@@ -459,7 +462,7 @@ def main():
                             rms_load_tertile="low" if r.cur_rms < rms_t1 else ("mid" if r.cur_rms < rms_t2 else "high"),
                             nearest_state_by_median=near,
                             z_vib_lower_given_rms=round(float(z["vib_lower_sd"]), 2), z_vib_upper_given_rms=round(float(z["vib_upper_sd"]), 2),
-                            **{f"miss1_{s}_{MODEL_KO.get(m, m)}": int(miss1.loc[r.rec, (s, m)]) for s in SPLIT_BOUNDS for m in ("v2", "v2+H1+H2")}))
+                            **{f"miss1_{s}_{MODEL_KO.get(m, m)}": int(miss1.loc[r.rec, (s, m)]) for s in SPLITS for m in ("v2", "v2+H1+H2")}))
     ab = pd.DataFrame(ab_rows)
     big = ab.n >= MIN_ROWS
     abn_summary = dict(
@@ -521,13 +524,13 @@ def main():
 def interpret(res, fa, fa_tail, anat, miss, rt):
     """해석 문단. 문장 틀은 결과를 보고 썼고, 수치는 실행 결과에서 다시 채운다."""
     vt = fa[fa.part == "valid+test"]
-    singles = ["maxz3", "knn5", "mlp_ae5", "lstm20", "iforest", "v1", "v2"]
+    singles = ["maxz3", "knn5", "mlp_ae5", "lstm20", "iforest", "v1", "v2"]   # 규칙(R1·R2)을 붙이지 않은 단일 모델
 
-    def rec_rate(state, model, alpha=0.05):
+    def rec_rate(state, model, alpha=0.05):         # (오경보 기록, 기록) A·B 합
         d = vt[(vt.state == state) & (vt.model == model) & (vt.alpha == alpha)]
         return int(d.fa_records.sum()), int(d.n_records.sum())
 
-    def rows(model, alpha, split=None, state="all"):
+    def rows(model, alpha, split=None, state="all"):   # 오경보 행 합. split=None이면 A·B 합
         d = vt[(vt.state == state) & (vt.model == model) & (vt.alpha == alpha)]
         d = d if split is None else d[d.split == split]
         return int(d.fa_rows.sum())
@@ -547,7 +550,7 @@ def interpret(res, fa, fa_tail, anat, miss, rt):
     tv = res["train_vs_eval"]
     tail = fa_tail[(fa_tail.part == "valid+test") & (fa_tail.model == "v2")]
 
-    def tail_fa(split, t, alpha):
+    def tail_fa(split, t, alpha):                   # v2 '오경보 기록/기록' 문자열
         d = tail[(tail["split"] == split) & (tail["tail"] == t) & (tail["alpha"] == alpha)]
         return f"{int(d.fa_records.sum())}/{int(d.n_records.sum())}"
 
@@ -559,16 +562,17 @@ def interpret(res, fa, fa_tail, anat, miss, rt):
     sm = res["abnormal_load"]["summary"]
     ka, kb = tv["A"]["ks"]["vib_upper_sd|train_vs_test"], tv["B"]["ks"]["vib_upper_sd|train_vs_test"]
     kva, kvb = tv["A"]["ks"]["vib_upper_sd|train_vs_valid"], tv["B"]["ks"]["vib_upper_sd|train_vs_valid"]
-    sc = {s: tv[s]["state_counts"]["test"] for s in SPLIT_BOUNDS}
-    ntest = {s: sum(sc[s].values()) for s in SPLIT_BOUNDS}
-    qlow = {s: tv[s]["quiet_tail_counts"].get("lower_out", 0) for s in SPLIT_BOUNDS}
-    lowvib_v2 = {s: sum(ab[k][f"miss1_{s}_v2"] for k in (3, 19, 20)) for s in SPLIT_BOUNDS}
-    lowvib_fin = {s: sum(ab[k][f"miss1_{s}_{MODEL_KO['v2+H1+H2']}"] for k in (3, 19, 20)) for s in SPLIT_BOUNDS}
+    sc = {s: tv[s]["state_counts"]["test"] for s in SPLITS}
+    ntest = {s: sum(sc[s].values()) for s in SPLITS}
+    qlow = {s: tv[s]["quiet_tail_counts"].get("lower_out", 0) for s in SPLITS}
+    # 기록 3·19·20 = 진동이 정상보다 작은 이상 기록(5절 표)
+    lowvib_v2 = {s: sum(ab[k][f"miss1_{s}_v2"] for k in (3, 19, 20)) for s in SPLITS}
+    lowvib_fin = {s: sum(ab[k][f"miss1_{s}_{MODEL_KO['v2+H1+H2']}"] for k in (3, 19, 20)) for s in SPLITS}
     # α 1% v2 오경보 기록과 그 상부 진동 SD의 학습 분위(분할별)
-    v2fa = [(s, d["rec"]) for s in SPLIT_BOUNDS for d in res["false_alarm_records_alpha1"][f"{s}|v2"]]
+    v2fa = [(s, d["rec"]) for s in SPLITS for d in res["false_alarm_records_alpha1"][f"{s}|v2"]]
     v2fa_recs = sorted({r for _, r in v2fa})
     v2fa_pct = [float(rt.loc[rt.rec == r, f"trainpct_{s}_vib_upper_sd"].iloc[0]) for s, r in v2fa]
-    lat5 = [d for d in res["r1_latch_extra_alarms"] if d["alpha"] == 0.05]
+    lat5 = [d for d in res["r1_latch_extra_alarms"] if d["alpha"] == 0.05]   # R1이 이어받아 늘린 오경보(α 5%)
     lat_txt = ", ".join(sorted({f"{STATE_KO[d['prev_state']].split('·')[-1]} 기록 {d['prev_rec']} → {STATE_KO[d['state']].split('·')[-1]} 기록 {d['rec']} 앞 {d['rows']}행"
                                 for d in lat5})) or "없음"
     lat_parts = ", ".join(f"{d['split']} {d['part']}" for d in lat5)
@@ -649,17 +653,20 @@ def interpret(res, fa, fa_tail, anat, miss, rt):
 
 # ================================================================ 요약 md
 def cell(d, m):
+    """표 칸 '오경보 행 / 오경보 기록'."""
     return f"{int(d.fa_rows[m])} / {int(d.fa_records[m])}"
 
 
 def write_summary(res, fa, fa_tert, fa_tail, anat):
+    """결과를 요약 md로 쓴다. 문장 틀은 고정이고 수치만 결과에서 채운다."""
     L = []
     w = L.append
     seg, qid = res["regimes"], res["quiet_regime_id"]
     g = res["guidebook_rows_16000_19000"]
     me = res["method"]
     b1, b2 = me["load_bounds_gmm"]
-    sel = lambda f, **kw: f.loc[np.logical_and.reduce([f[k] == v for k, v in kw.items()])]  # noqa: E731
+    sel = lambda f, **kw: f.loc[np.logical_and.reduce([f[k] == v for k, v in kw.items()])]  # noqa: E731  열=값 조건을 모두 만족하는 행
+    num = lambda v, d: "-" if v is None else f"{v:.{d}f}"  # noqa: E731
 
     w("---")
     w("title: 프레스 정상 운전 상태별 오경보 분석 (06_operating_regime)")
@@ -680,6 +687,7 @@ def write_summary(res, fa, fa_tert, fa_tail, anat):
     w("")
     w("- 부하 대리변수: 기록(약 8초)마다 전류 사인 진폭 cur_amp, 보조로 전류 RMS. 진동 수준: 상·하부 진동 SD")
     w(f"- 운전 구간: [log 상부 SD, log 하부 SD, log 전류 진폭]의 평균·분산 변화점을 최적 분할로 찾음(벌점 (2d+1)·ln N = {me['changepoint']['penalty']}, 최소 10기록)")
+    # 민감도 12조합 중 주 경계와 똑같은 조합 수, 정숙 구간 시작·끝이 유지된 조합 수
     sens = res["changepoint_sensitivity"]
     main_b = [[s["first_rec"], s["last_rec"]] for s in seg]
     main_b[0][0] = 0
@@ -701,16 +709,15 @@ def write_summary(res, fa, fa_tert, fa_tail, anat):
     w("| 상태 | 기록 수 | 전류 진폭 | 전류 RMS | 상부 진동 SD | 하부 진동 SD |")
     w("|---|---:|---:|---:|---:|---:|")
     for p in res["state_profile"]:
-        f = lambda v, d: "-" if v is None else f"{v:.{d}f}"  # noqa: E731
-        w(f"| {STATE_KO[p['state']]} | {p['n_records']} | {f(p['cur_amp_median'], 1)} | {f(p['cur_rms_median'], 1)} | "
-          f"{f(p['vib_upper_sd_median'], 4)} | {f(p['vib_lower_sd_median'], 4)} |")
+        w(f"| {STATE_KO[p['state']]} | {p['n_records']} | {num(p['cur_amp_median'], 1)} | {num(p['cur_rms_median'], 1)} | "
+          f"{num(p['vib_upper_sd_median'], 4)} | {num(p['vib_lower_sd_median'], 4)} |")
     w("")
     lc = res["lowload_quiet_vs_busy"]
     w("- 변동 구간에서는 전류 진폭이 기록마다 기저(약 118)·부분(약 174)·고부하(약 244) 사이를 오간다. 하부 진동 SD가 부하를 거의 그대로 따른다(정상 기록 상관 0.97)")
     w(f"- 정숙 구간은 전류 진폭이 약 121에 고정되고(IQR {seg[qid]['cur_amp_iqr']}) 상·하부 진동이 모두 작다. "
       f"변동 구간의 저부하 기록과 비교하면 부하는 비슷하고({lc['quiet']['cur_amp']:.1f} vs {lc['busy_low']['cur_amp']:.1f}) "
       f"상부 진동은 더 작다({lc['quiet']['vib_upper_sd']:.4f} vs {lc['busy_low']['vib_upper_sd']:.4f}, Mann-Whitney p={lc['mannwhitney_p_vib_upper']:.1e})")
-    run_tr = {s: res["train_vs_eval"][s]["low_load_runs"]["train"] for s in SPLIT_BOUNDS}
+    run_tr = {s: res["train_vs_eval"][s]["low_load_runs"]["train"] for s in SPLITS}
     w(f"- 정숙 구간이 다른 점은 기록 하나의 값보다 **저부하가 약 {seg[qid]['minutes']:.0f}분 끊기지 않고 이어진다**는 데 있다. "
       f"변동 구간에서 저부하 기록이 이어지는 길이는 학습 구간 최장 {run_tr['A']['records']}기록({run_tr['A']['minutes']}분)이다(4.1절)")
     w("")
@@ -745,12 +752,12 @@ def write_summary(res, fa, fa_tert, fa_tail, anat):
     w("정상 valid+test 기록, 실시간 행 경보. valid 정상 행은 자기 기록을 뺀 LOO p, test 행은 전체 보정 p (evalcore와 같다).")
     w("칸 = **오경보 행 / 오경보 기록**. R1 = 사건 지속(H1), R2 = 교차 확인(H2).")
     w("")
-    for alpha in ALPHAS:
-        w(f"### 3.{ALPHAS.index(alpha) + 1} α {int(alpha * 100)}%")
+    for i, alpha in enumerate(ALPHAS, 1):
+        w(f"### 3.{i} α {int(alpha * 100)}%")
         w("")
         w("| 분할 | 상태 | 기록 / 행 | " + " | ".join(MODEL_KO.get(m, m) for m in MODELS) + " |")
         w("|---|---|---|" + "---:|" * len(MODELS))
-        for s in SPLIT_BOUNDS:
+        for s in SPLITS:
             for st in STATE_ORDER + ["all"]:
                 d = sel(fa, split=s, alpha=alpha, part="valid+test", state=st).set_index("model")
                 if d.empty:
@@ -777,7 +784,7 @@ def write_summary(res, fa, fa_tert, fa_tail, anat):
     show = ("v2", "v2+H2", "v2+H1+H2", "mlp_ae5", "knn5", "lstm20", "maxz3")
     w("| 분할 | 구간 | 상태 | 기록 | " + " | ".join(MODEL_KO.get(m, m) for m in show) + " |")
     w("|---|---|---|---:|" + "---:|" * len(show))
-    for s in SPLIT_BOUNDS:
+    for s in SPLITS:
         for part in ("valid", "test"):
             for st in STATE_ORDER:
                 d = sel(fa, split=s, alpha=0.01, part=part, state=st).set_index("model")
@@ -796,7 +803,6 @@ def write_summary(res, fa, fa_tert, fa_tail, anat):
         if r.v2_alarm_rows:
             w(f"| {r.split} | {int(r.alpha * 100)}% | {STATE_KO[r.state]} | {r.v2_alarm_rows} | {r.magnitude_fired} | {r.waveform_fired} | "
               f"{r.dynamics_fired} | {r.magnitude_only} | {r.magnitude_only_before_8rows} | {r.held_by_R2} |")
-    tot = anat.groupby("alpha")[["v2_alarm_rows", "magnitude_only", "held_by_R2", "waveform_fired"]].sum()
     w("")
     w("- 정숙 구간·변동 구간 저부하에서는 어느 α에서도 v2 경보가 없다. 파형 성분이 정상 기록에서 켜진 행은 0이다")
     w("")
@@ -850,7 +856,7 @@ def write_summary(res, fa, fa_tert, fa_tail, anat):
         w("")
         w("| 분할 | 학습 대비 위치 | 기록 | " + " | ".join(MODEL_KO.get(m, m) for m in MODELS) + " |")
         w("|---|---|---:|" + "---:|" * len(MODELS))
-        for s in SPLIT_BOUNDS:
+        for s in SPLITS:
             for t in TAIL_ORDER:
                 d = sel(fa_tail, split=s, alpha=alpha, part="valid+test", tail=t).set_index("model")
                 if d.empty:

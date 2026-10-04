@@ -1,76 +1,9 @@
-"""05_supervised_confound.py — 경쟁팀식 지도학습 재현과 세션 교락 시험
+"""경쟁팀식 지도학습(1초 창 통계 + 부스팅, F1 0.944)을 재현하고, 그 점수가 고장이 아니라 세션 차이로도 나오는지 대조 실험으로 본다.
 
-왜 하는가
----------
-공개된 다른 참가팀 분석(MinSeok-Good/press-equipment-anomaly-detection)은 1초 창 통계(센서별
-mean/std/RMS/min/max) + CatBoost + StratifiedGroupKFold(기록 단위 그룹)로 F1 0.944를 보고했다.
-그런데 이 데이터의 정상(2022-07-12 화 00:00~01:17)과 이상(2022-07-17 일 10:51~10:53)은 날짜·요일·
-시각대·저장 형식이 모두 다르다. 라벨이 '세션'과 완전히 겹치기 때문에(교락), 지도학습 점수가
-높다는 사실만으로는 모델이 '고장'을 배웠는지 '세션(날짜·운전 조건·수집 설정)'을 배웠는지 가를 수 없다.
-이 스크립트는 그 점을 대조 실험으로 보인다.
-
-실험
-----
-1. 지도학습 재현 — 표현 2개 × 모델 3개 × StratifiedGroupKFold 5겹(그룹 = 기록) × seed 10개
-   - 표현 (a) window: 기록 안 비중첩 1초(10행) 창의 센서별 mean/std/RMS/min/max (15개). 10행이 다 찬 창만 쓴다
-     (10행 미만 기록은 창이 없다: 정상 70기록, 이상 4기록 제외)
-   - 표현 (b) case: common.case_table 의 기록 단위 특징 10개(n·t0 제외 — 둘 다 세션/수집 정보라서)
-   - 자료: matched(정밀도 맞춤, 형식 누수 제거) / raw(원본 그대로) / raw+digits(진동 유효 소수 자릿수
-     평균을 특징으로 추가) / raw digits-only(자릿수 특징만)
-2. 세션 교락 시험
-   2a 가짜 라벨: 정상 파일 하나 안에서 고장이 없는 두 집단을 같은 파이프라인으로 분류한다
-      - half_time   : 기록 0~299(앞 38분) vs 300~599(뒤 38분)
-      - half_random : 무작위 300기록 vs 나머지 (영가설 대조. 기댓값 ROC-AUC 0.5)
-      - block21_time: 연속 21기록(약 3분, 이상 사건과 같은 크기·같은 '연속 구간' 구조) vs 나머지 579
-      - block21_random: 무작위 21기록 vs 나머지 (영가설 대조)
-      time 판본이 random 판본보다 높게 나오면, 같은 날 정상끼리도 '시간 인접성(세션)'만으로 분류가 된다는
-      뜻이다. 기록 단위 그룹 교차검증은 같은 3분 구간의 이웃 기록을 학습·평가 양쪽에 나눠 넣으므로 이 단서를
-      막지 못한다(이상 21기록도 한 사건의 조각이라 같은 구조).
-   2a′ 블록 쌍 분리도 지도: 정상 기록 0~587을 21기록(약 2.7분) 블록 28개로 나누고, 모든 블록 쌍 378개를 같은
-      파이프라인(seed 0, 5겹 그룹 CV)으로 분류한다. 같은 기준으로 '이상 21기록 vs 각 정상 블록' 28쌍도 분류한다.
-      → 같은 날 정상끼리 시간 간격이 벌어질수록 얼마나 잘 갈리는지(시간 표류의 크기)와, 이상-정상 분리가 그 분포의
-      어디쯤인지 본다. 이상은 정상보다 5일 뒤라서 이 데이터 안의 최대 간격(약 75분)보다 훨씬 멀다
-   2b 고장 무관 특징만으로 정상/이상 분류 (아래 근거 참조)
-   2c 순열 중요도: 모델이 어느 특징·센서 묶음에 기대는지 (평가 겹에서 PR-AUC 감소량)
-   2d 수집 조건 이동 반응: 보고서 V5와 같은 조작(전류 +81.4·+272.4 이동, 60.6 Hz 가정 0.1 ms 표본화 시각
-      흔들림)을 정상 평가 기록에 가했을 때 지도학습 모델이 이상으로 판정하는 기록 비율
-
-'고장 무관' 특징의 근거 (2b)
----------------------------
-Tier 0 — 정의상 고장과 무관한 수집 메타데이터(로거가 정하는 값, 설비 물리량이 아님)
-  - n            : 기록 길이(행 수). 로거가 최대 50행씩 끊어 저장하고 수집 공백으로 잘린다
-  - gap_prev     : 직전 기록 끝에서 이 기록 시작까지 공백(초). 로거의 저장 주기
-  - clock_sin/cos: 기록 시작 시각의 0.1초 격자 안 위치(ms mod 100)를 각도로. 로거 시계의 위상
-  - tphase_sin/cos: 기록 시작 시각을 0.6064 Hz 시계로 본 위상. 시각만의 함수라 고장 정보가 들어갈 수 없다
-Tier 1 — 조건부 고장 무관(가정: 모터가 계통 전원 60 Hz에 직결)
-  - cur_offset_abs : |전류 절편| / 진폭. 교류 전류는 물리적으로 평균 0이다. 표본 평균이 0에서 벗어나는 것은
-                     (i) 겉보기 주파수와 기록 길이가 맞지 않아 주기를 다 못 덮었거나 (ii) 센서 DC 편차 때문이다.
-                     둘 다 수집 쪽 요인이다. 단 인버터 스위치 고장처럼 실제 DC 성분을 만드는 고장도 있어 '조건부'다
-  - cur_freq_hat   : 전류 겉보기 주파수(0.02~5 Hz 격자 탐색, 20행 이상 기록만). 60 Hz를 10 Hz로 찍은 앨리어스라
-                     직결 구동이면 전원 주파수(계통)와 표본화 간격(로거)만이 정한다. 인버터 구동이면 운전 지령으로도
-                     바뀐다(운전 조건). 다만 이상 파일은 전류가 사인 꼴이 아니어서(R² 중앙값 0.1) 추정치가 곧
-                     '파형 붕괴'를 반영할 수 있다 — 고장 신호와 겹칠 수 있다는 한계를 그대로 적는다
-  - cur_phase0_sin/cos: 0.6064 Hz 사인 적합의 기록 시작 위상. 기록을 언제 시작했느냐(로거)가 정한다
-  시각대(00시 vs 10시)·날짜는 완벽히 가르지만 자명하므로 시험에서 뺐다.
-
-설정
-----
-- catboost가 설치돼 있지 않다. 경쟁팀 CatBoost 대신 sklearn HistGradientBoosting(max_iter 150, 학습률 0.1,
-  min_samples_leaf 5)을 쓰고, RandomForest(나무 200), LogisticRegression(표준화)을 함께 본다.
-  셋 다 class_weight='balanced', 결측은 HGB는 자체 처리·나머지는 중앙값 대치. 판정 문턱 0.5
-- 지표: seed마다 5겹 OOF 확률을 모아 F1·PR-AUC(average precision)·ROC-AUC·balanced accuracy를 계산하고
-  10 seed의 평균±표준편차를 낸다. seed는 겹 배정(shuffle)과 모델 난수를 함께 정한다
-- 순열 중요도: seed 0~2 × 5겹, 평가 겹에서 반복 10회(RF는 5회). 단일 특징과 함께 센서(또는 특징 묶음) 단위로
-  열을 같이 섞는 묶음 순열 중요도를 낸다(std·RMS처럼 서로 대신할 수 있는 특징의 중요도가 쪼개지는 문제 보완)
-- seed(또는 seed×겹, 블록 쌍) 단위 프로세스 병렬(joblib, N_JOBS=10). 각 작업이 seed를 직접 받으므로 결과는
-  병렬 수와 무관하다
-
-실행
-----
-    cd code/press/domain
-    PYTHONIOENCODING=utf-8 python 05_supervised_confound.py            # 전체 (약 10~15분)
-    PYTHONIOENCODING=utf-8 python 05_supervised_confound.py --md-only  # JSON에서 요약 md만 다시 쓴다
-출력: outputs/05_supervised_confound.json · .csv(seed별 결과) · _summary.md
+정상(07-12 00시)과 이상(07-17 10시)은 날짜·시각대·저장 형식이 모두 달라 라벨과 세션이 겹친다(교락).
+입력: data/3_소성가공_예지보전 두 CSV(cases/common.load). 출력: outputs/05_supervised_confound.json · .csv(seed별 결과) · _summary.md
+보고서 2.4절의 근거. test 채점 이후의 사후 분석이다.
+실행: PYTHONIOENCODING=utf-8 python 05_supervised_confound.py [--md-only: JSON에서 요약 md만 다시 쓴다]
 """
 from __future__ import annotations
 
@@ -102,22 +35,23 @@ warnings.filterwarnings("ignore")
 
 OUT = HERE / "outputs"
 STEM = "05_supervised_confound"
-SEEDS = list(range(10))
-PI_SEEDS = [0, 1, 2]
+SEEDS = list(range(10))     # seed가 겹 배정(shuffle)과 모델 난수를 함께 정한다
+PI_SEEDS = [0, 1, 2]        # 순열 중요도용 seed
 N_SPLITS = 5
-N_JOBS = 10  # seed(또는 seed×겹) 단위 프로세스 병렬. 결과는 병렬 수와 무관하다
-WIN = 10
+N_JOBS = 10  # seed(또는 seed×겹, 블록 쌍) 단위 프로세스 병렬. 작업마다 seed를 직접 받으므로 결과는 병렬 수와 무관하다
+WIN = 10     # 창 길이 10행 = 1초
 BLOCK = 21  # 이상 기록 수와 같은 블록 크기
 MODELS = ["HGB", "RF", "LR"]
 F0_HZ = F0 * 10  # 정상 전류 겉보기 주파수 0.6064 Hz
 CUR = SENSORS[2]
 SHORT = {"AI0_Vibration": "up", "AI1_Vibration": "lo", "AI2_Current": "cur"}
 WIN_FEATS = [f"{SHORT[s]}_{k}" for s in SENSORS for k in ("mean", "std", "rms", "min", "max")]
+# 기록 단위 특징 10개. case_table의 n·t0은 세션·수집 정보라 뺀다
 CASE_FEATS = ["vib_upper_sd", "vib_lower_sd", "upper_lower_log_ratio", "upper_lower_corr", "vib_upper_lag1",
               "vib_lower_lag1", "cur_amp", "cur_offset_ratio", "cur_resid_ratio", "cur_sine_r2"]
-DIG_FEATS = ["dig_up", "dig_lo"]
-TIER0 = ["n", "gap_prev", "clock_sin", "clock_cos", "tphase_sin", "tphase_cos"]
-TIER1 = ["cur_offset_abs", "cur_freq_hat", "cur_phase0_sin", "cur_phase0_cos"]
+DIG_FEATS = ["dig_up", "dig_lo"]   # 진동 값의 유효 소수 자릿수. 원본 두 파일의 저장 형식 차이(누수 통로)
+TIER0 = ["n", "gap_prev", "clock_sin", "clock_cos", "tphase_sin", "tphase_cos"]   # 정의상 고장 무관(meta_table 참고)
+TIER1 = ["cur_offset_abs", "cur_freq_hat", "cur_phase0_sin", "cur_phase0_cos"]   # 조건부 고장 무관
 WIN_GROUPS = {"상부진동(up_*)": [f for f in WIN_FEATS if f.startswith("up_")],
               "하부진동(lo_*)": [f for f in WIN_FEATS if f.startswith("lo_")],
               "전류(cur_*)": [f for f in WIN_FEATS if f.startswith("cur_")]}
@@ -125,30 +59,30 @@ CASE_GROUPS = {"진동 크기": ["vib_upper_sd", "vib_lower_sd"],
                "진동 모양": ["upper_lower_log_ratio", "upper_lower_corr", "vib_upper_lag1", "vib_lower_lag1"],
                "전류 크기": ["cur_amp"],
                "전류 파형": ["cur_offset_ratio", "cur_resid_ratio", "cur_sine_r2"]}
-FREQ_GRID = np.arange(0.02, 5.0, 0.002)
+FREQ_GRID = np.arange(0.02, 5.0, 0.002)   # 전류 겉보기 주파수 탐색 격자(Hz)
 STRESS = {"none": None, "cur_shift_+81.4": 81.4, "cur_shift_+272.4": 272.4, "jitter_0.1ms_60.6Hz": 0.1}
 STRESS_MIN_LEN = 17  # 보고서 V5와 같이 17행 이상 기록만 센다
-if "--quick" in sys.argv:  # 점검용: seed 1개, 출력은 QUICK_OUT 폴더
+if "--quick" in sys.argv:  # 점검용. seed 1개, 출력은 QUICK_OUT 폴더
     import os
     SEEDS, PI_SEEDS, OUT = [0], [0], Path(os.environ["QUICK_OUT"])
 
 
 # ───────────────────────── 자료 ─────────────────────────
 def decimals(s: pd.Series) -> np.ndarray:
-    """CSV에 적힌 문자열 그대로의 유효 소수 자릿수(지수 표기 1e-05 등도 처리)."""
+    """CSV에 적힌 문자열 그대로의 유효 소수 자릿수(1e-05 같은 지수 표기도 처리)."""
     return s.map(lambda v: max(0, -Decimal(str(v).strip()).as_tuple().exponent)).to_numpy(float)
 
 
 def load_raw(name: str) -> pd.DataFrame:
-    """원본 그대로 + 진동 소수 자릿수 열(dig_up, dig_lo)."""
+    """정밀도를 맞추지 않은 원본 + 진동 소수 자릿수 열(dig_up, dig_lo)."""
     df = load(name, matched=False)
-    s = pd.read_csv(DATA / name, usecols=SENSORS[:2], dtype=str)
+    s = pd.read_csv(DATA / name, usecols=SENSORS[:2], dtype=str)   # 자릿수는 숫자로 읽기 전 문자열에서 센다
     df["dig_up"], df["dig_lo"] = decimals(s[SENSORS[0]]), decimals(s[SENSORS[1]])
     return df
 
 
 def window_table(df: pd.DataFrame, extra=()) -> pd.DataFrame:
-    """기록 안 비중첩 10행 창(1초)의 센서별 mean/std/RMS/min/max. 10행이 다 찬 창만."""
+    """기록 안 비중첩 10행 창(1초)의 센서별 mean/std/RMS/min/max. 10행이 다 찬 창만 쓴다(10행 미만 기록은 빠진다)."""
     d = df.assign(win=df["pos"] // WIN)
     d = d[d.groupby(["rec", "win"])["pos"].transform("size") == WIN]
     keys = [d["rec"], d["win"]]
@@ -167,6 +101,7 @@ def window_table(df: pd.DataFrame, extra=()) -> pd.DataFrame:
 
 
 def case_rep(df: pd.DataFrame, extra=()) -> pd.DataFrame:
+    """기록 단위 표현(common.case_table). extra 열은 기록 평균으로 붙인다."""
     ct = case_table(df)
     for c in extra:
         ct[c] = df.groupby("rec")[c].mean().reindex(ct["rec"]).to_numpy()
@@ -174,8 +109,8 @@ def case_rep(df: pd.DataFrame, extra=()) -> pd.DataFrame:
 
 
 def freq_scan(x: np.ndarray) -> float:
-    """사인+절편 적합 R²가 최대인 겉보기 주파수(Hz, 0.02~5 Hz 격자). 정규방정식을 주파수별로 한꺼번에 푼다."""
-    x = np.asarray(x, float)
+    """사인+절편 적합 R²가 최대인 겉보기 주파수(Hz, 0.02~5 Hz 격자)."""
+    # 주파수마다 lstsq를 부르면 느려서, 3×3 정규방정식을 격자 전체에 대해 한 번에 푼다. 잔차 제곱합이 최소인 주파수가 R² 최대다
     m = len(x)
     w = 2 * np.pi * FREQ_GRID[:, None] * np.arange(m)[None, :] / 10
     S, C = np.sin(w), np.cos(w)
@@ -186,17 +121,29 @@ def freq_scan(x: np.ndarray) -> float:
     G[:, 1, 1], G[:, 2, 2] = (S * S).sum(1), (C * C).sum(1)
     G[:, 1, 2] = G[:, 2, 1] = (S * C).sum(1)
     b = np.stack([np.full(len(FREQ_GRID), x.sum()), S @ x, C @ x], 1)
-    coef = np.linalg.solve(G + 1e-9 * np.eye(3), b[..., None])[..., 0]
+    coef = np.linalg.solve(G + 1e-9 * np.eye(3), b[..., None])[..., 0]   # 1e-9는 특이 행렬 방지
     rss = (x ** 2).sum() - (coef * b).sum(1)
-    return float(FREQ_GRID[np.argmax(-rss)])
+    return float(FREQ_GRID[np.argmin(rss)])
 
 
 def meta_table(df: pd.DataFrame) -> pd.DataFrame:
-    """기록마다 Tier 0(수집 메타데이터)·Tier 1(조건부) 특징."""
+    """기록마다 '고장과 무관해야 할' 특징. 2b 시험에서 이것만으로 정상/이상이 갈리는지 본다.
+
+    Tier 0 — 정의상 고장 무관. 로거가 정하는 수집 메타데이터이고 설비 물리량이 아니다.
+      n(기록 길이, 로거가 최대 50행씩 끊고 수집 공백에서 잘림), gap_prev(직전 기록과의 공백, 저장 주기),
+      clock(시작 시각의 0.1초 격자 안 위치 ms mod 100, 로거 시계 위상), tphase(시작 시각을 0.6064 Hz 시계로 본 위상, 시각만의 함수).
+    Tier 1 — 조건부 고장 무관. 모터가 60 Hz 계통에 직결돼 있다는 가정이 필요하다.
+      cur_offset_abs(|전류 절편|/진폭): 교류 전류는 평균이 0이라 절편은 주기를 다 못 덮었거나 센서 DC 편차일 때 생긴다.
+        단 인버터 스위치 고장처럼 실제 DC 성분을 만드는 고장도 있다.
+      cur_freq_hat(겉보기 주파수, 20행 이상만): 60 Hz를 10 Hz로 찍은 앨리어스라 직결이면 전원 주파수와 표본화 간격이 정한다.
+        이상 파일은 전류가 사인 꼴이 아니어서(R² 중앙값 0.1) 추정치에 파형 붕괴가 섞일 수 있다.
+      cur_phase0(0.6064 Hz 사인의 기록 시작 위상): 기록을 언제 시작했는지(로거)가 정한다.
+    시각대(00시 vs 10시)·날짜는 완벽히 가르지만 자명해서 넣지 않았다.
+    """
     ts = pd.to_datetime(df["TimeStamp"])
     g = df.assign(ts=ts).groupby("rec")
     st, en, n = g["ts"].first(), g["ts"].last(), g.size()
-    gap = (st - en.shift()).dt.total_seconds() - 0.1
+    gap = (st - en.shift()).dt.total_seconds() - 0.1          # 정상 표본 간격 0.1초를 뺀 순수 공백
     clock = 2 * np.pi * ((st.dt.microsecond / 1000.0) % 100.0) / 100.0
     epoch = (st - pd.Timestamp("2022-07-01")).dt.total_seconds()
     tph = 2 * np.pi * ((epoch * F0_HZ) % 1.0)
@@ -206,7 +153,7 @@ def meta_table(df: pd.DataFrame) -> pd.DataFrame:
         x = cur[idx]
         k = np.arange(len(x))
         X = np.column_stack([np.ones(len(x)), np.sin(2 * np.pi * F0 * k), np.cos(2 * np.pi * F0 * k)])
-        b, *_ = np.linalg.lstsq(X, x, rcond=None)
+        b, *_ = np.linalg.lstsq(X, x, rcond=None)      # 고정 주파수 F0 사인 + 절편 적합
         amp = np.hypot(b[1], b[2])
         ph0 = np.arctan2(b[2], b[1])
         rows.append(dict(rec=r, cur_offset_abs=abs(b[0]) / amp if amp > 0 else np.nan,
@@ -220,6 +167,7 @@ def meta_table(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def stack(tab_n: pd.DataFrame, tab_a: pd.DataFrame, feats):
+    """정상·이상 표를 쌓아 X, y(이상=1), 그룹(기록 번호. 이상은 +100000으로 정상과 겹치지 않게)을 만든다."""
     X = np.vstack([tab_n[feats].to_numpy(float), tab_a[feats].to_numpy(float)])
     y = np.r_[np.zeros(len(tab_n)), np.ones(len(tab_a))].astype(int)
     g = np.r_[tab_n["rec"].to_numpy(), tab_a["rec"].to_numpy() + 100000]
@@ -228,7 +176,8 @@ def stack(tab_n: pd.DataFrame, tab_a: pd.DataFrame, feats):
 
 # ───────────────────────── 모델·검증 ─────────────────────────
 def make_model(name: str, seed: int):
-    if name == "HGB":  # CatBoost 대체
+    """HGB·RF·LR. 셋 다 class_weight=balanced, 결측은 HGB가 자체 처리하고 나머지는 중앙값으로 채운다."""
+    if name == "HGB":  # catboost가 설치돼 있지 않아 경쟁팀 CatBoost 대신 쓴다
         return HistGradientBoostingClassifier(max_iter=150, learning_rate=0.1, min_samples_leaf=5,
                                               class_weight="balanced", random_state=seed)
     if name == "RF":  # seed 단위로 프로세스 병렬을 쓰므로 나무 적합은 단일 스레드
@@ -239,10 +188,12 @@ def make_model(name: str, seed: int):
 
 
 def folds(y, g, seed):
+    """기록 단위 그룹 5겹(라벨 비율 층화). 같은 기록의 창은 학습·평가에 나뉘지 않는다."""
     return list(StratifiedGroupKFold(n_splits=N_SPLITS, shuffle=True, random_state=seed).split(np.zeros(len(y)), y, g))
 
 
 def oof(X, y, g, model, seed):
+    """5겹 out-of-fold 양성 확률."""
     p = np.full(len(y), np.nan)
     for tr, te in folds(y, g, seed):
         p[te] = make_model(model, seed).fit(X[tr], y[tr]).predict_proba(X[te])[:, 1]
@@ -250,28 +201,29 @@ def oof(X, y, g, model, seed):
 
 
 def metrics(y, p, thr=0.5) -> dict:
+    """F1·balanced acc는 문턱 0.5 판정으로, PR-AUC·ROC-AUC는 확률 그대로 잰다."""
     yhat = (p >= thr).astype(int)
     return dict(f1=f1_score(y, yhat, zero_division=0), pr_auc=average_precision_score(y, p),
                 roc_auc=roc_auc_score(y, p), bal_acc=balanced_accuracy_score(y, yhat))
 
 
+# 아래 _*_one 함수는 joblib 작업자 프로세스에서 돈다. 작업자에는 모듈 첫머리의 경고 끄기가 적용되지 않아 다시 끈다
 def _cv_one(X, y, g, model, seed) -> dict:
+    """seed 하나의 OOF 지표."""
     warnings.filterwarnings("ignore")
     return dict(n=len(y), n_pos=int(y.sum()), n_pos_groups=int(len(np.unique(g[y == 1]))), prevalence=float(y.mean()),
                 **metrics(y, oof(X, y, g, model, seed)))
 
 
-def run_cv(exp, variant, rep, X, y_of_seed, g, models=MODELS, seeds=SEEDS, mask_of_seed=None) -> list:
-    """seed마다 (선택적으로 표본 부분집합을 고른 뒤) 5겹 OOF 지표를 낸다. seed 단위 프로세스 병렬."""
+def run_cv(exp, variant, rep, X, y_of_seed, g) -> list:
+    """모델별로 seed 10개의 5겹 OOF 지표를 낸다. y_of_seed는 가짜 라벨처럼 seed마다 라벨이 바뀌는 경우를 위한 함수다."""
+    # to_numpy·vstack 결과는 F 순서다. 메모리 배치에 따라 LR 수치 끝자리가 달라질 수 있어, 기존 결과와 같은 C 순서로 넘긴다
+    X = np.ascontiguousarray(X)
     rows = []
-    for model in models:
+    for model in MODELS:
         t = time.time()
-        jobs = []
-        for seed in seeds:
-            msk = np.ones(len(g), bool) if mask_of_seed is None else mask_of_seed(seed)
-            jobs.append(delayed(_cv_one)(X[msk], y_of_seed(seed)[msk], g[msk], model, seed))
-        res = Parallel(n_jobs=N_JOBS)(jobs)
-        rows += [dict(exp=exp, variant=variant, rep=rep, model=model, seed=s, **r) for s, r in zip(seeds, res)]
+        res = Parallel(n_jobs=N_JOBS)(delayed(_cv_one)(X, y_of_seed(seed), g, model, seed) for seed in SEEDS)
+        rows += [dict(exp=exp, variant=variant, rep=rep, model=model, seed=s, **r) for s, r in zip(SEEDS, res)]
         print(f"  {exp:16s} {variant:16s} {rep:6s} {model:3s} "
               f"AUC {np.mean([r['roc_auc'] for r in res]):.3f} ({time.time() - t:.0f}s)", flush=True)
     return rows
@@ -285,16 +237,16 @@ def _pair_one(X, g, blk, i, j, model, seed=0) -> dict:
     return metrics(y, oof(X[m], y, g[m], model, seed))
 
 
-GAP_BINS = [(1, 1), (2, 4), (5, 9), (10, 19), (20, 27)]
+GAP_BINS = [(1, 1), (2, 4), (5, 9), (10, 19), (20, 27)]   # 블록 간격 구간(블록 1개 ≈ 2.7분)
 
 
 def block_pair_summary(pair_df: pd.DataFrame) -> list:
     """블록 쌍 ROC-AUC 분포 요약. 이상-vs-블록 AUC가 정상 블록끼리 분포의 몇 분위인지도 낸다."""
+    q = lambda s, p: float(np.quantile(s, p))
     out = []
     for (rep, model), d in pair_df.groupby(["rep", "model"], sort=False):
         bb = d[d.variant == "block_vs_block"]
         ab = d[d.variant == "abnormal_vs_block"]
-        q = lambda s, p: float(np.quantile(s, p))
         row = dict(rep=rep, model=model, n_block_pairs=len(bb), n_abnormal_pairs=len(ab),
                    bb_auc_median=q(bb.roc_auc, .5), bb_auc_q10=q(bb.roc_auc, .1), bb_auc_q90=q(bb.roc_auc, .9),
                    bb_auc_max=float(bb.roc_auc.max()), bb_share_auc_ge_0_9=float((bb.roc_auc >= .9).mean()),
@@ -314,6 +266,7 @@ def block_pair_summary(pair_df: pd.DataFrame) -> list:
 
 
 def summarize(df: pd.DataFrame, keys, cols) -> pd.DataFrame:
+    """seed별 지표를 묶어 평균·표준편차를 낸다. 표본 수 열은 seed마다 같아 첫 값을 쓴다."""
     agg = df.groupby(keys, sort=False)[cols].agg(["mean", "std"])
     agg.columns = [f"{a}_{b}" for a, b in agg.columns]
     first = df.groupby(keys, sort=False)[["n", "n_pos", "n_pos_groups", "prevalence"]].first()
@@ -322,15 +275,17 @@ def summarize(df: pd.DataFrame, keys, cols) -> pd.DataFrame:
 
 # ───────────────────────── 순열 중요도 ─────────────────────────
 def _pi_one(X, y, feats, groups_map, model, seed, k_fold, tr, te, n_rep):
+    """한 겹에서 단일 특징·묶음 순열 중요도(평가 겹 PR-AUC 감소량)."""
     warnings.filterwarnings("ignore")
     rng = np.random.default_rng([seed, k_fold])
     m = make_model(model, seed).fit(X[tr], y[tr])
     Xte, yte = X[te], y[te]
     r = permutation_importance(m, Xte, yte, scoring="average_precision", n_repeats=n_rep, random_state=seed)
     base = average_precision_score(yte, m.predict_proba(Xte)[:, 1])
+    # std·RMS처럼 서로 대신하는 특징은 하나씩 섞으면 중요도가 쪼개져 작게 나온다. 센서(묶음) 단위로 열을 같이 섞어 본다
     grouped = {}
     for k, cols in groups_map.items():
-        ci = [feats.index(c) for c in cols if c in feats]
+        ci = [feats.index(c) for c in cols]
         drops = []
         for _ in range(n_rep):
             Xp = Xte.copy()
@@ -340,27 +295,32 @@ def _pi_one(X, y, feats, groups_map, model, seed, k_fold, tr, te, n_rep):
     return dict(zip(feats, r.importances_mean)), grouped
 
 
-def perm_importance(X, y, g, feats, groups_map, model, seeds=PI_SEEDS) -> dict:
+def perm_importance(X, y, g, feats, groups_map, model) -> dict:
+    """seed 0~2 × 5겹 순열 중요도의 평균·표준편차. 반복은 10회(RF는 느려서 5회)."""
     n_rep = 5 if model == "RF" else 10
-    tasks = [(seed, k, tr, te) for seed in seeds for k, (tr, te) in enumerate(folds(y, g, seed))]
+    tasks = [(seed, k, tr, te) for seed in PI_SEEDS for k, (tr, te) in enumerate(folds(y, g, seed))]
     res = Parallel(n_jobs=N_JOBS)(delayed(_pi_one)(X, y, feats, groups_map, model, s, k, tr, te, n_rep) for s, k, tr, te in tasks)
     single = {f: [r[0][f] for r in res] for f in feats}
     grouped = {k: [r[1][k] for r in res] for k in groups_map}
     fmt = lambda d: {k: dict(mean=float(np.mean(v)), sd=float(np.std(v))) for k, v in d.items()}
     single, grouped = fmt(single), fmt(grouped)
-    return dict(model=model, n_repeats=n_rep, seeds=seeds,
+    return dict(model=model, n_repeats=n_rep, seeds=PI_SEEDS,
                 single=dict(sorted(single.items(), key=lambda kv: -kv[1]["mean"])),
                 grouped=dict(sorted(grouped.items(), key=lambda kv: -kv[1]["mean"])))
 
 
 # ───────────────────────── 수집 조건 조작(V5와 같은 종류) ─────────────────────────
 def shift_current(df, amount):
+    """전류 전체를 amount만큼 옮긴다(센서 오프셋·영점 변화 흉내)."""
     return df.assign(**{CUR: df[CUR] + amount})
 
 
 def jitter_current(df, sigma_ms, rng, f_hz=60.6, min_len=STRESS_MIN_LEN):
-    """정상 전류를 0.6064 Hz 사인 + 잔차로 나눈 뒤, 사인 위상에 60.6 Hz × N(0, σ) 시각 흔들림을 넣어 다시 합친다.
-    보고서 V5(예준 jitter_stress)와 같은 생성 원리. 차이: 기록별 적합 주파수 대신 고정 F0를 쓴다."""
+    """정상 전류에 표본화 시각 흔들림을 넣는다. 보고서 V5(예준 jitter_stress)와 같은 생성 원리다.
+
+    0.6064 Hz 사인 + 잔차로 나눈 뒤 사인 위상에만 60.6 Hz × N(0, σ) 시각 오차를 더해 다시 합친다.
+    V5와 달리 기록별 적합 주파수 대신 고정 F0를 쓴다.
+    """
     x = df[CUR].to_numpy(float).copy()
     for _, idx in df.groupby("rec").indices.items():
         if len(idx) < min_len:
@@ -370,14 +330,17 @@ def jitter_current(df, sigma_ms, rng, f_hz=60.6, min_len=STRESS_MIN_LEN):
         X = np.column_stack([np.cos(w), np.sin(w), np.ones(len(idx))])
         c, *_ = np.linalg.lstsq(X, x[idx], rcond=None)
         resid = x[idx] - X @ c
+        # 실제 전류는 60.6 Hz라 시각 오차 δ는 겉보기 0.6 Hz가 아니라 원 주파수 기준 위상 2π·60.6·δ로 나타난다
         ph = w + 2 * np.pi * f_hz * rng.normal(0, sigma_ms / 1e3, len(idx))
         x[idx] = c[0] * np.cos(ph) + c[1] * np.sin(ph) + c[2] + resid
     return df.assign(**{CUR: x})
 
 
 def stress_test(normal, X, y, g, rep, feats, fixed_tabs) -> list:
-    """matched 지도학습 모델(5겹)을 학습 겹으로 적합한 뒤, 평가 겹의 정상 기록(17행 이상)에 조작을 가해 경보율을 잰다.
-    기록 경보 = 창 하나라도(window) 또는 기록 확률이(case) 0.5 이상."""
+    """matched 지도학습 모델을 학습 겹으로 적합하고, 평가 겹 정상 기록(17행 이상)을 조작했을 때 이상 판정 비율을 잰다.
+
+    기록 경보는 window면 창 하나라도, case면 기록 확률이 0.5 이상일 때다.
+    """
     long_recs = normal.groupby("rec").size().pipe(lambda s: s[s >= STRESS_MIN_LEN].index.to_numpy())
     rows = []
     for model in MODELS:
@@ -389,6 +352,7 @@ def stress_test(normal, X, y, g, rep, feats, fixed_tabs) -> list:
 
 
 def _stress_one(normal, X, y, g, rep, feats, fixed_tabs, model, seed, long_recs) -> dict:
+    """seed 하나에서 조작별 (경보 기록 수, 기록 수). 흔들림은 seed마다 새로 만든다."""
     warnings.filterwarnings("ignore")
     tabs = dict(fixed_tabs)
     jd = jitter_current(normal, STRESS["jitter_0.1ms_60.6Hz"], np.random.default_rng(seed))
@@ -408,12 +372,15 @@ def _stress_one(normal, X, y, g, rep, feats, fixed_tabs, model, seed, long_recs)
 
 # ───────────────────────── 본 실행 ─────────────────────────
 def main():
+    """실험 1(지도학습 재현)과 2a~2d(세션 교락 시험)를 돌려 JSON·CSV·요약 md를 쓴다."""
     t_all = time.time()
     OUT.mkdir(parents=True, exist_ok=True)
     print("자료 적재 …", flush=True)
     nm, am = load("press_data_normal.csv", True), load("outlier_data.csv", True)
     nr, ar = load_raw("press_data_normal.csv"), load_raw("outlier_data.csv")
 
+    # 자료 4종 × 표현 2종. matched = 정밀도를 맞춰 형식 누수를 지운 자료, raw = 원본,
+    # raw+digits = 원본 + 진동 소수 자릿수, raw digits-only = 자릿수 특징만
     tabs = {
         ("matched", "window"): (window_table(nm), window_table(am), WIN_FEATS),
         ("matched", "case"): (case_rep(nm), case_rep(am), CASE_FEATS),
@@ -427,7 +394,7 @@ def main():
     tabs[("raw digits-only", "window")] = (rw_n, rw_a, DIG_FEATS)
     tabs[("raw digits-only", "case")] = (rc_n, rc_a, DIG_FEATS)
 
-    # 원본 형식 차이 사실(누수 통로)
+    # 원본 두 파일의 저장 형식 차이(누수 통로). grid는 전류 값이 1.1920929 격자 위에 있는 행 비율
     grid = lambda d: float((np.abs(d[CUR] / 1.1920929 - np.round(d[CUR] / 1.1920929)) < 1e-3).mean())
     facts = dict(
         windows=dict(normal=int(len(tabs[("matched", "window")][0])), abnormal=int(len(tabs[("matched", "window")][1])),
@@ -441,20 +408,22 @@ def main():
     )
 
     rows = []
-    # 1. 지도학습 재현
+    # 1. 지도학습 재현. 자료 × 표현 × 모델 3개 × 5겹 그룹 CV × seed 10개
     print("1. 지도학습 재현", flush=True)
     for (variant, rep), (tn, ta, feats) in tabs.items():
         X, y, g = stack(tn, ta, feats)
         rows += run_cv("supervised", variant, rep, X, lambda s, y=y: y, g)
 
-    # 2a. 가짜 라벨 (정상 파일 안)
+    # 2a. 가짜 라벨. 고장이 없는 정상 파일 안에서 두 집단을 같은 파이프라인으로 가른다.
+    # time 판본이 random 판본보다 잘 갈리면 '시간 인접성(세션)'만으로도 분류가 된다는 뜻이다.
+    # 기록 단위 그룹 CV는 같은 구간의 이웃 기록을 학습·평가에 나눠 넣어 이 단서를 막지 못한다(이상 21기록도 같은 구조)
     print("2a. 가짜 라벨", flush=True)
     recs = np.arange(nm["rec"].nunique())
     block_starts = {s: int(np.random.default_rng(1000 + s).integers(0, len(recs) - BLOCK + 1)) for s in SEEDS}
     label_sets = {
-        "half_time": lambda s: recs[recs >= 300],
-        "half_random": lambda s: np.random.default_rng(2000 + s).choice(recs, 300, replace=False),
-        "block21_time": lambda s: np.arange(block_starts[s], block_starts[s] + BLOCK),
+        "half_time": lambda s: recs[recs >= 300],                                                  # 뒤 38분 vs 앞 38분
+        "half_random": lambda s: np.random.default_rng(2000 + s).choice(recs, 300, replace=False),  # 영가설 대조(AUC 0.5 기대)
+        "block21_time": lambda s: np.arange(block_starts[s], block_starts[s] + BLOCK),             # 이상 사건 크기의 연속 21기록
         "block21_random": lambda s: np.random.default_rng(3000 + s).choice(recs, BLOCK, replace=False),
     }
     fake_tabs = {"window": (tabs[("matched", "window")][0], WIN_FEATS), "case": (tabs[("matched", "case")][0], CASE_FEATS)}
@@ -462,8 +431,8 @@ def main():
         for rep, (tab, feats) in fake_tabs.items():
             X, g = tab[feats].to_numpy(float), tab["rec"].to_numpy()
             rows += run_cv("fake_label", lab, rep, X, lambda s, g=g, fn=fn: np.isin(g, fn(s)).astype(int), g)
-    # 2a′ 블록 쌍 분리도 지도: 정상 기록 0~587을 21기록(약 2.7분) 블록 28개로 나누고 모든 블록 쌍(378)을 같은
-    # 파이프라인으로 분류한다. 같은 기준으로 '이상 21기록 vs 각 정상 블록'(28)도 분류해 두 분포를 비교한다.
+    # 2a′ 블록 쌍 분리도 지도. 정상 기록 0~587을 21기록(약 2.7분) 블록 28개로 나누고 모든 블록 쌍(378)을 분류한다.
+    # 같은 기준으로 '이상 21기록 vs 각 정상 블록'(28)도 분류해, 같은 날 표류의 크기와 이상-정상 분리를 한 분포 위에서 비교한다
     print("2a'. 블록 쌍 분리도 지도", flush=True)
     nb = len(recs) // BLOCK
     rec_t0 = tabs[("matched", "case")][0].set_index("rec")["t0"]
@@ -485,14 +454,14 @@ def main():
     pair_df = pd.DataFrame(pair_rows)
     pair_summary = block_pair_summary(pair_df)
 
-    # 2b. 고장 무관 특징
+    # 2b. 고장과 무관해야 할 특징(Tier 0·1)만으로 정상/이상이 갈리는지
     print("2b. 고장 무관 특징", flush=True)
     mt_n, mt_a = meta_table(nm), meta_table(am)
     uni = []
     for f in TIER0 + TIER1:
         a, b = mt_n[f].dropna().to_numpy(), mt_a[f].dropna().to_numpy()
         u = mannwhitneyu(b, a, alternative="two-sided")
-        auc = u.statistic / (len(a) * len(b))
+        auc = u.statistic / (len(a) * len(b))      # Mann-Whitney U를 표본 수 곱으로 나누면 단변량 ROC-AUC다
         uni.append(dict(feature=f, tier="Tier0" if f in TIER0 else "Tier1", n_normal=len(a), n_abnormal=len(b),
                         median_normal=float(np.median(a)), median_abnormal=float(np.median(b)),
                         auc_abnormal_higher=float(auc), auc_sep=float(max(auc, 1 - auc)), p_mannwhitney=float(u.pvalue)))
@@ -500,7 +469,7 @@ def main():
         X, y, g = stack(mt_n, mt_a, feats)
         rows += run_cv("fault_irrelevant", name, "case", X, lambda s, y=y: y, g)
 
-    # 2c. 순열 중요도
+    # 2c. 순열 중요도. 지도학습 모델과 가짜 라벨(앞/뒤 절반) 모델이 어느 특징·센서 묶음에 기대는지
     print("2c. 순열 중요도", flush=True)
     pi = {}
     for (variant, rep), models in ((("matched", "window"), ["HGB", "RF"]), (("matched", "case"), ["HGB", "RF"]),
@@ -520,7 +489,8 @@ def main():
         pi[f"fake_label|half_time|{rep}|HGB"] = perm_importance(X, y, g, feats, WIN_GROUPS if rep == "window" else CASE_GROUPS, "HGB")
         print(f"  half_time {rep} HGB", flush=True)
 
-    # 2d. 수집 조건 이동 반응
+    # 2d. 수집 조건 이동 반응. 보고서 V5와 같은 조작(전류 +81.4·+272.4 이동, 0.1 ms 표본화 흔들림)을 지도학습 모델에 넣는다.
+    # 이동 조작은 seed와 무관해 미리 만들고, 흔들림은 seed마다 작업자 안에서 만든다
     print("2d. 수집 조건 이동 반응", flush=True)
     srows = []
     for rep in ("window", "case"):
@@ -565,10 +535,26 @@ def main():
 
 # ───────────────────────── 요약 md ─────────────────────────
 def ms(r, k, d=3):
+    """'평균 ± 표준편차' 문자열."""
     return f"{r[f'{k}_mean']:.{d}f} ± {r[f'{k}_std']:.{d}f}"
 
 
+def _one(rows, **kw):
+    """조건에 맞는 요약 행을 하나 찾는다. 0개나 2개 이상이면 멈춘다."""
+    hit = [r for r in rows if all(r.get(k) == v for k, v in kw.items())]
+    assert len(hit) == 1, (kw, len(hit))
+    return hit[0]
+
+
+def _by_model(rows, metric, d=3, sd=True, **kw):
+    """HGB / RF / LR 값을 ' / '로 잇는다. sd=False면 평균만."""
+    return " / ".join((ms(_one(rows, model=m, **kw), metric, d) if sd else f"{_one(rows, model=m, **kw)[metric + '_mean']:.{d}f}")
+                      for m in MODELS)
+
+
 def render(out: dict) -> str:
+    """JSON 결과로 요약 md를 만든다. 문장 틀은 고정이고 수치만 결과에서 채운다."""
+    # 부록·본문에 그대로 넣는 전체 표
     L = []
     L.append("| 자료 | 표현 | 모델 | 표본(이상) | F1 | PR-AUC | ROC-AUC | balanced acc |")
     L.append("|---|---|---|---|---|---|---|---|")
@@ -581,7 +567,7 @@ def render(out: dict) -> str:
     fake = "\n".join(L)
     L = ["| 표현 | 모델 | 정상 블록 쌍 AUC 중앙값 [10%, 90%] | 정상 쌍 AUC ≥ 0.9 비율 | 간격별 중앙값 (1 / 2-4 / 5-9 / 10-19 / 20-27 블록) | 이상 vs 정상 블록 AUC 중앙값 (최소) |",
          "|---|---|---|---|---|---|"]
-    for r in out.get("block_pair", []):
+    for r in out["block_pair"]:
         gaps = " / ".join(f"{r[f'bb_auc_median_gap{lo}-{hi}']:.2f}" for lo, hi in GAP_BINS)
         L.append(f"| {r['rep']} | {r['model']} | {r['bb_auc_median']:.3f} [{r['bb_auc_q10']:.2f}, {r['bb_auc_q90']:.2f}] | "
                  f"{r['bb_share_auc_ge_0_9']:.3f} | {gaps} | {r['ab_auc_median']:.3f} ({r['ab_auc_min']:.3f}) |")
@@ -604,25 +590,11 @@ def render(out: dict) -> str:
     for r in out["stress"]:
         L.append(f"| {r['variant']} | {r['rep']} | {r['model']} | {r['alarm_rate_mean']:.3f} ± {r['alarm_rate_sd']:.3f} | {r['records']} |")
     stress = "\n".join(L)
-    return MD_TEMPLATE(out, sup, fake, dist, uni, multi, pim, stress)
 
-
-def _one(rows, **kw):
-    hit = [r for r in rows if all(r.get(k) == v for k, v in kw.items())]
-    assert len(hit) == 1, (kw, len(hit))
-    return hit[0]
-
-
-def _by_model(rows, metric, d=3, sd=True, **kw):
-    return " / ".join((ms(_one(rows, model=m, **kw), metric, d) if sd else f"{_one(rows, model=m, **kw)[metric + '_mean']:.{d}f}")
-                      for m in MODELS)
-
-
-def MD_TEMPLATE(out, sup, fake, dist, uni, multi, pim, stress) -> str:
     S, FK, FI, ST, BP = out["supervised"], out["fake_label"], out["fault_irrelevant"], out["stress"], out["block_pair"]
     fx = out["facts"]
 
-    def rng_(rows, metric, **kw):
+    def rng_(rows, metric, **kw):           # 세 모델 평균값의 (최소, 최대)
         v = [_one(rows, model=m, **kw)[metric + "_mean"] for m in MODELS]
         return min(v), max(v)
 
@@ -670,7 +642,7 @@ def MD_TEMPLATE(out, sup, fake, dist, uni, multi, pim, stress) -> str:
     brc = rng_(FK, "roc_auc", variant="block21_random", rep="case")
     t0 = rng_(FI["multivariate"], "roc_auc", variant="Tier0")
     t1r = rng_(FI["multivariate"], "roc_auc", variant="Tier1")
-    span = lambda key: (min(r[key] for r in BP), max(r[key] for r in BP))
+    span = lambda key: (min(r[key] for r in BP), max(r[key] for r in BP))  # 표현·모델 6조합의 (최소, 최대)
     bb_far, bb_adj, bb_share = span("bb_auc_median_gap20-27"), span("bb_auc_median_gap1-1"), span("bb_share_auc_ge_0_9")
     ab_med, ab_pct = span("ab_auc_median"), span("ab_median_percentile_in_bb")
     far_min = _one(BP, rep="window", model="RF")["minutes_gap20-27"]
@@ -688,7 +660,6 @@ def MD_TEMPLATE(out, sup, fake, dist, uni, multi, pim, stress) -> str:
     g_mw = pi["supervised|matched|window|HGB"]["grouped"]
     g_mc = pi["supervised|matched|case|HGB"]["grouped"]
     g_dg = pi["supervised|raw+digits|window|HGB"]["grouped"]
-    top_mw = list(pi["supervised|matched|window|HGB"]["single"])[0]
     ud = {r["feature"]: r for r in FI["univariate"]}
     f2 = lambda t: f"{t[0]:.2f}~{t[1]:.2f}"
     f3 = lambda t: f"{t[0]:.3f}~{t[1]:.3f}"
@@ -829,6 +800,7 @@ matched 지도학습 모델을 5겹 학습 겹으로 적합했다. 평가 겹의
 
 
 def write_md(out: dict):
+    """요약 md를 쓴다. --md-only면 저장된 JSON에서 이것만 다시 돈다."""
     (OUT / f"{STEM}_summary.md").write_text(render(out), encoding="utf-8")
 
 

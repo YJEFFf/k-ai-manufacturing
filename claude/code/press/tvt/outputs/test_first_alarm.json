@@ -1,0 +1,26 @@
+{
+  "A": {
+    "f1_check": {
+      "tp": 324,
+      "fp": 0,
+      "fn": 0,
+      "f1": 1.0
+    },
+    "records": 11,
+    "first_alarm_s_median": 0.0,
+    "first_alarm_s_max": 0.0,
+    "records_alarm_at_first_row": 11
+  },
+  "B": {
+    "f1_check": {
+      "tp": 324,
+      "fp": 0,
+      "fn": 0,
+      "f1": 1.0
+    },
+    "records": 11,
+    "first_alarm_s_median": 0.0,
+    "first_alarm_s_max": 0.0,
+    "records_alarm_at_first_row": 11
+  }
+}

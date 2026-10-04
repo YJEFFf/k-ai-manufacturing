@@ -1,7 +1,9 @@
-"""본문(md 또는 hwpx에서 뽑은 텍스트)의 숫자를 facts.csv와 대조한다.
+"""보고서 원고의 숫자가 모두 근거표(facts.csv)나 허용 목록에 있는지 확인한다.
 
-허용 목록: 장·절 번호, 배점, 날짜·시각, α, 설계 상수(규칙 값·분할 경계·주입 강도·seed), 모델·규칙 이름의 숫자.
-사용: python check_facts.py draft_v1.md   → 근거 없는 숫자를 줄 번호와 함께 출력, 없으면 종료 코드 0
+입력: 원고 md(기본 final_v5.md), 같은 폴더의 facts.csv(facts_build.py가 만든다)
+출력: 근거 없는 숫자를 줄 번호와 함께 출력, 마지막 줄에 "근거 없는 숫자: N개". 0개면 종료 코드 0
+실행: python report/check_facts.py [원고.md]
+허용 목록: 장·절 번호, 배점, 날짜·시각, α, 설계 상수(규칙 값·분할 경계·주입 강도·seed), 모델·규칙 이름의 숫자
 """
 from __future__ import annotations
 
@@ -12,7 +14,8 @@ from pathlib import Path
 import pandas as pd
 
 HERE = Path(__file__).resolve().parent
-FACTS = pd.read_csv(HERE / "facts.csv", encoding="utf-8-sig")
+# 문자열로 읽어야 "0.40" 같은 표시형이 0.4로 바뀌지 않는다
+SHOWN = set(pd.read_csv(HERE / "facts.csv", encoding="utf-8-sig", usecols=["shown"], dtype=str)["shown"])
 
 # 설계 상수·표기용 숫자 (근거: 계획 v4·코드 상수·양식)
 WHITELIST = {
@@ -34,19 +37,11 @@ WHITELIST = {
     # 데이터 출처 표기 날짜(KAMP 양식)
     "2022.12",
 }
+# 이름·번호 속 숫자(v2, R1, 제2장, 그림 3, 2.4절, ISO 10816 등)는 대조 전에 지운다
 NAME_PATTERN = re.compile(r"(?:v|R|FM|D|V|H|P|AR\(|k|B3k|lag-|C[12]d|O)\d+|\d+_[a-z]+\.py|제\d장|〔\d+점〕|그림 \d+|\d+행 창|[A-Z]\d"
                           r"|\[\d+\]|ISO \d+(?:-\d+)?(?::\d+)?|ISA-\d+\.\d+|VG \d+|\d\.\d절|\d\.\d·\d\.\d절")
 REF_LINE = re.compile(r"^\s*\* \[\d+\]")   # 참고문헌 줄(서지 숫자)은 대조하지 않는다
 NUM = re.compile(r"(?<![\w.])[-−+]?\d[\d,]*(?:\.\d+)?(?:e-\d+)?")
-
-
-def allowed_values():
-    shown = set(FACTS["shown"].astype(str))
-    extra = set()
-    for s in shown:
-        extra.add(s.lstrip("+-−"))
-        extra.add(s.replace(",", ""))
-    return shown | extra | WHITELIST
 
 
 def main(path):
@@ -54,18 +49,18 @@ def main(path):
     if text.startswith("---"):
         head, body = text[3:].split("---", 1)
         text = "\n" * (head.count("\n") + 1) + body   # 머리말 제외(줄 번호 유지)
-    ok = allowed_values()
+    # 근거표 값은 부호를 뗀 형태와 천 단위 쉼표를 뗀 형태도 인정한다
+    ok = SHOWN | {s.lstrip("+-−") for s in SHOWN} | {s.replace(",", "") for s in SHOWN} | WHITELIST
     bad = []
     for no, line in enumerate(text.splitlines(), 1):
         if REF_LINE.match(line):
             continue
-        clean = NAME_PATTERN.sub(" ", line)
-        for m in NUM.finditer(clean):
+        for m in NUM.finditer(NAME_PATTERN.sub(" ", line)):
             tok = m.group().replace("−", "-").lstrip("+")
-            tok_n = tok.lstrip("-").replace(",", "") if tok.count(",") and "." not in tok else tok.lstrip("-")
-            if tok_n in ok or tok in ok:
-                continue
-            bad.append((no, m.group(), line.strip()[:110]))
+            # 천 단위 쉼표가 든 정수(20,600)는 쉼표를 떼고 대조한다. 소수점이 있으면 그대로 둔다
+            tok_n = tok.lstrip("-").replace(",", "") if "," in tok and "." not in tok else tok.lstrip("-")
+            if tok_n not in ok and tok not in ok:
+                bad.append((no, m.group(), line.strip()[:110]))
     for no, tok, line in bad:
         print(f"{no:4d}  {tok:>10}  | {line}")
     print(f"근거 없는 숫자: {len(bad)}개")
@@ -73,4 +68,4 @@ def main(path):
 
 
 if __name__ == "__main__":
-    sys.exit(main(sys.argv[1] if len(sys.argv) > 1 else HERE / "draft_v1.md"))
+    sys.exit(main(sys.argv[1] if len(sys.argv) > 1 else HERE / "final_v5.md"))

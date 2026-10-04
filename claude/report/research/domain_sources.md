@@ -9,7 +9,7 @@ status: seed
 
 # 도메인 근거 조사 — 파인블랭킹 프레스 유압펌프
 
-관련 노트: [[제조데이터 경진대회 MOC]] · [[peer_and_methods]] · [[organizer_intent]] · 보고서 원고 `report/final.md`
+관련 노트: [[제조데이터 경진대회 MOC]] · [[peer_and_methods]] · [[organizer_intent]] · 보고서 원고 `report/final_v5.md`
 
 ## 표기 규칙
 
