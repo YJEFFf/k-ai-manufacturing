@@ -22,8 +22,8 @@ SRC = HERE / (sys.argv[1] if len(sys.argv) > 1 else "final_v5.md")
 OUT = HERE / (sys.argv[2] if len(sys.argv) > 2 else "결과보고서_북적북적.hwpx")
 # v5 본문 등장 순서의 그림 번호 → 파일
 FIGS = {1: "fig1_structure.png", 2: "fig8_observability.png", 3: "fig0_leak.png", 4: "fig2_collection.png",
-        5: "fig9_regime_timeline.png", 6: "fig3_flow.png", 7: "fig10_load_vibration.png", 8: "fig5_models.png",
-        9: "fig4_miss_position.png", 10: "fig6_rules.png", 11: "fig7_console.png"}
+        5: "fig9_regime_timeline.png", 6: "fig3_flow.png", 7: "fig10_load_vibration.png", 8: "fig11_model_structure.png",
+        9: "fig5_models.png", 10: "fig4_miss_position.png", 11: "fig6_rules.png", 12: "fig7_console.png", 13: "fig12_alarm_card.png"}
 FIG_WIDTH_MM = 150
 # 내어쓰기(실측: 0.005pt/단위, 문단 왼쪽 56.6pt). 둘째 줄이 기호 뒤 첫 글자와 맞도록 PDF에서 잰 값
 DASH_INDENT = -7020    # "   - " 14pt (양식 값 -7720은 3.5pt 어긋남)
@@ -115,8 +115,10 @@ def main():
         styles["*"] = ({**styles["*"][0], "Indentation": STAR_INDENT}, styles["*"][1])   # 양식 값(-6084)은 "       * " 폭보다 좁아 둘째 줄이 기호 왼쪽으로 나간다
         styles["-"] = ({**styles["-"][0], "Indentation": DASH_INDENT}, styles["-"][1])
         styles["·"] = ({**styles["-"][0], "Indentation": DOT_INDENT}, styles["-"][1])   # 하위 본문 항목: 양식 - 단계와 같은 14pt, 한 단계 깊게
-        styles["h"] = (styles["o"][0], {**styles["o"][1], "Bold": 1})
-        styles["cap"] = styles["center"] = ({**styles["*"][0], "AlignType": 3, "Indentation": 0}, styles["*"][1])   # 그림과 그림 설명: 가운데
+        # 소절 제목과 그림은 "다음 문단과 함께": 제목만, 또는 그림만 쪽 끝에 남지 않게 한다
+        styles["h"] = ({**styles["o"][0], "KeepWithNext": 1}, {**styles["o"][1], "Bold": 1})
+        styles["cap"] = ({**styles["*"][0], "AlignType": 3, "Indentation": 0}, styles["*"][1])   # 그림과 그림 설명: 가운데
+        styles["center"] = ({**styles["cap"][0], "KeepWithNext": 1}, styles["cap"][1])
         # 표 칸·표지: 양식에 예시가 없어 직접 정한다(Height는 1/100pt 단위, 1000 = 10pt)
         styles["cell"] = ({"AlignType": 1, "LeftMargin": 0, "Indentation": 0, "LineSpacing": 130, "LineSpacingType": 0,
                            "PrevSpacing": 0, "NextSpacing": 0}, {**styles["*"][1], "Height": 1000})
@@ -236,7 +238,10 @@ def main():
         for heading, blocks in chapters:
             hwp.MoveDocBegin(); assert hwp.find(heading), heading
             hwp.MoveParaEnd(); hwp.BreakPara()
-            for b in blocks:
+            for i, b in enumerate(blocks):
+                # 소절 제목(장 첫 소절 제외)과 보조 참고문헌 앞은 한 줄 띄운다
+                if i > 0 and b[0] == "p" and (b[1] == "h" or b[2].startswith("보조 참고문헌")):
+                    apply("o"); hwp.BreakPara()
                 if b[0] == "p":
                     apply(b[1]); hwp.insert_text(marker[b[1]] + b[2]); hwp.BreakPara()
                 elif b[0] == "table":
@@ -251,7 +256,7 @@ def main():
                         ps.ColWidth.SetItem(j, wj)
                     ps.TableProperties.Width = text_width
                     hwp.HAction.Execute("TableCreate", ps.HSet)
-                    tp = hwp.CreateSet("Table"); tp.SetItem("TreatAsChar", 0)   # 글자처럼 취급이면 쪽 경계에서 나뉘지 않고 잘린다
+                    tp = hwp.CreateSet("Table"); tp.SetItem("TreatAsChar", 1)   # 글자처럼 취급: 표가 본문 순서대로 놓이고 남은 자리가 모자라면 표째 다음 쪽으로(한 쪽보다 긴 표는 잘리므로 layout_check로 확인)
                     tp.SetItem("OutsideMarginTop", hwp.MiliToHwpUnit(1)); tp.SetItem("OutsideMarginBottom", hwp.MiliToHwpUnit(3))
                     hwp.ParentCtrl.Properties = tp
                     # 머리 행(첫 행)을 블록으로 잡아 회색으로 칠한 뒤 첫 칸으로 돌아와 칸마다 글을 넣는다
@@ -287,9 +292,14 @@ def main():
 
 
 def survey_on_new_page(x: str) -> tuple[str, int]:
-    """section0.xml에서 만족도 조사 제목 문단 바로 앞의 빈 문단을 지우고, 제목 문단에 쪽 나눔(pageBreak="1")을 건다.
-    빈 문단 = 글자도 표·그림·컨트롤도 없는 <hp:p>. 반환: (고친 XML, 지운 문단 수)"""
-    head = x.rfind("<hp:p ", 0, x.index("경진대회 만족도 조사 완료"))   # 제목 문단의 여는 태그 위치
+    """만족도 조사 제목 문단을 새 쪽에서 시작하게 한다. 반환: (고친 XML, 지운 문단 수)"""
+    return new_page_at(x, x.index("경진대회 만족도 조사 완료"))
+
+
+def new_page_at(x: str, pos: int) -> tuple[str, int]:
+    """pos가 든 문단 바로 앞의 빈 문단을 지우고, 그 문단에 쪽 나눔(pageBreak="1")을 건다.
+    빈 문단이 앞 쪽에 남아 쪽 나눔 앞에 빈 쪽을 만드는 것을 막는다. 빈 문단 = 글자도 표·그림·컨트롤도 없는 <hp:p>"""
+    head = x.rfind("<hp:p ", 0, pos)   # 그 문단의 여는 태그 위치
     removed = 0
     while x[:head].endswith("</hp:p>"):      # 바로 앞 문단이 비어 있는 동안 하나씩 지운다
         start = x.rfind("<hp:p ", 0, head)
@@ -304,15 +314,30 @@ def survey_on_new_page(x: str) -> tuple[str, int]:
     return x[:head] + re.sub(r'pageBreak="\d"', 'pageBreak="1"', x[head:tag_end]) + x[tag_end:], removed
 
 
+# 장 제목과 참고문헌은 새 쪽에서 시작한다(10/5 한글에서 빈 줄로 맞춘 배치를 쪽 나눔으로 옮김. 빈 줄은 글이 바뀌면 어긋난다)
+NEW_PAGE = [f"제{n}장." for n in range(1, 7)] + ["주요 참고문헌"]
+
+
+def break_before(x: str, text: str) -> str:
+    """text가 든 문단을 새 쪽에서 시작하게 한다(바로 앞 빈 문단은 지움)."""
+    assert x.count(text) == 1, text
+    return new_page_at(x, x.index(text))[0]
+
+
 def patch_hwpx(path: Path):
-    """hwpx(zip) 안 XML을 직접 고친다: 마지막 저장자(PC 사용자 이름)를 비우고, 만족도 조사를 새 쪽에서 시작하게 한다.
+    """hwpx(zip) 안 XML을 직접 고친다: 마지막 저장자(PC 사용자 이름)를 비우고, 각 장·참고문헌·만족도 조사를 새 쪽에서 시작하게 한다.
     항목 순서·압축 방식은 원래 ZipInfo 그대로 둔다(mimetype 먼저, 무압축)."""
     with zipfile.ZipFile(path) as z:
         infos = z.infolist(); data = {i.filename: z.read(i.filename) for i in infos}
     data["Contents/content.hpf"] = re.sub(rb'(<opf:meta name="lastsaveby" content="text">)[^<]*(</opf:meta>)', rb"\1\2",
                                           data["Contents/content.hpf"])
     x, removed = survey_on_new_page(data["Contents/section0.xml"].decode("utf-8"))
+    for text in NEW_PAGE:
+        x = break_before(x, text)
+    # 표는 쪽 경계에서 나누지 않는다(남은 자리가 모자라면 표째 다음 쪽으로)
+    x = re.sub(r'(<hp:tbl [^>]*?)pageBreak="CELL"', r'\1pageBreak="NONE"', x)
     x = re.sub("—(?=[a-z])", "--", x)    # 한글 자동 고침이 명령 옵션 --quick 의 -- 를 긴 줄표로 바꾼 것을 되돌린다
+    x = re.sub("(?<= )–(?=[a-z])", "-", x)   # 같은 이유로 pip install -r, conda env create -f 의 - 가 반각 줄표(–)로 바뀐 것
     data["Contents/section0.xml"] = x.encode("utf-8")
     tmp = path.with_suffix(".tmp")
     with zipfile.ZipFile(tmp, "w") as dst:

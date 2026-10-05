@@ -1,0 +1,22 @@
+rec,n,t0,kind,upper_high,upper_low,lower_high,lower_low,wave_broken,offset,corr_negative
+0,4,0.0,판단 보류(10행 미만),True,False,True,False,True,True,False
+1,50,8.781,상·하부 진동 모두 큼,True,False,True,False,True,True,False
+2,47,15.672,상·하부 진동 모두 큼,True,False,True,False,True,True,False
+3,31,23.791,"진동 정상·작음, 전류만 이상",False,False,False,False,True,True,False
+4,18,32.056,상·하부 진동 모두 큼,True,False,True,False,True,True,False
+5,3,40.15,판단 보류(10행 미만),True,False,True,False,False,True,True
+6,50,48.741,상·하부 진동 모두 큼,True,False,True,False,True,True,True
+7,40,56.464,상·하부 진동 모두 큼,True,False,True,False,True,True,True
+8,25,64.624,상·하부 진동 모두 큼,True,False,True,False,True,True,True
+9,8,73.075,판단 보류(10행 미만),True,False,True,False,True,True,False
+10,4,81.383,판단 보류(10행 미만),True,False,True,False,False,True,True
+11,50,90.229,상부 진동만 큼,True,False,False,False,True,True,False
+12,42,97.712,상부 진동만 큼,True,False,False,False,True,True,False
+13,28,105.826,상·하부 진동 모두 큼,True,False,True,False,True,True,True
+14,15,113.966,상부 진동만 큼,True,False,False,False,True,True,True
+15,50,123.821,상·하부 진동 모두 큼,True,False,True,False,True,True,True
+16,50,130.501,상부 진동만 큼,True,False,False,False,True,True,False
+17,36,138.61,상·하부 진동 모두 큼,True,False,True,False,True,True,False
+18,24,146.696,상부 진동만 큼,True,False,False,False,True,True,False
+19,10,154.725,"진동 정상·작음, 전류만 이상",False,False,False,False,True,True,False
+20,15,164.197,"진동 정상·작음, 전류만 이상",False,True,False,True,True,True,False

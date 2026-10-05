@@ -1,0 +1,7 @@
+split,model,test_abnormal_rows,no_score_rows
+A,lstm20,324,177
+A,mlp_ae5,324,44
+A,v2,324,0
+B,lstm20,324,177
+B,mlp_ae5,324,44
+B,v2,324,0

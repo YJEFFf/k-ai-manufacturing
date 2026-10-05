@@ -33,7 +33,7 @@ CUM_VAR = 0.90             # PCA 성분 수 k = 누적 분산 90%에 처음 닿�
 EPS_V, EPS_C, EPS_R = 1e-4, 1.1920929, 1e-3   # log 바닥: 진동·전류 양자화 단위, 잔차 비율
 LOAD_STATE_RMS = 91.9      # 사후 진단용 부하 상태 경계(예준 v2 LOAD_STATE_RMS, 기록 평균 제거 전류 RMS). 경보·학습에는 안 씀
 STATE_MIN_ROWS = 17        # 겉보기 전류 한 주기 이상 본 기록만 부하 상태를 매긴다(예준 v2와 같음)
-# 특징 7개는 프레스 상태 감시의 흔한 축에서 이상 자료를 보지 않고 하나씩 골랐다.
+# 특징 7개는 프레스 상태 감시에서 흔히 쓰는 축(크기·파형·시간 구조)에서 골랐다.
 # 진동 에너지(상·하부 창 RMS), 부하(전류 RMS), 스펙트럼 모양(상·하부 lag-1), 프레임 상·하부 결합(상관), 전류 파형 왜곡(사인 잔차 비율)
 FEATURES = ["vu_lrms", "vl_lrms", "cur_lrms", "vu_ac1", "vl_ac1", "ul_corr", "cur_res"]
 FEATURE_KO = {"vu_lrms": "상부 진동 RMS", "vl_lrms": "하부 진동 RMS", "cur_lrms": "전류 RMS(부하)",

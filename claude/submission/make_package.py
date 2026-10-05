@@ -21,6 +21,8 @@ PRESS = PROJ / "code" / "press"
 NAME = "북적북적_code"
 # 산출물·캐시·웹·문서·시험 폴더는 넣지 않는다(실행하면 다시 생긴다)
 SKIP_DIRS = {"__pycache__", ".pytest_cache", "outputs", "cache", "web", "docs", "tests", ".omc"}
+# 실행에 안 쓰는 팀 내부 작업 지시 문서(보고서 수치와 다른 옛 수치가 적혀 있어 심사에서 혼동을 준다)
+SKIP_FILES = {"요청사항_준용.md"}
 # 팀원 v3 코드(core.py)가 import할 때 읽는 protocol.json이 있는 폴더
 MASTER_PLAN = Path("plans") / "press_master_2026-10-03"
 
@@ -40,7 +42,7 @@ def copy_tree(src: Path, dst: Path, skip_dirs=SKIP_DIRS, skip_prefix=("test_",))
     for p in src.rglob("*"):
         rel = p.relative_to(src)
         if (p.is_dir() or skip_dirs & set(rel.parts[:-1]) or p.name.startswith(skip_prefix)
-                or p.suffix in (".pyc", ".log", ".pkl") or is_env_file(p.name)):
+                or p.suffix in (".pyc", ".log", ".pkl") or is_env_file(p.name) or p.name in SKIP_FILES):
             continue
         out = dst / rel
         Path(long_path(out.parent)).mkdir(parents=True, exist_ok=True)
@@ -49,6 +51,11 @@ def copy_tree(src: Path, dst: Path, skip_dirs=SKIP_DIRS, skip_prefix=("test_",))
 
 def sha256(p: Path) -> str:
     return hashlib.sha256(p.read_bytes()).hexdigest()
+
+
+def sha256_lf(p: Path) -> str:
+    """run_all.py와 같은 규칙: 줄바꿈을 LF로 맞춘 뒤의 해시(OS마다 다른 CSV 줄바꿈을 무시)."""
+    return hashlib.sha256(p.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
 
 
 def csv_value(path, where, column):
@@ -77,8 +84,8 @@ def build_expected():
                                where=where, column="f1", value=csv_value(tvt / "tvt_test.csv", where, "f1"), tol=tol, quick=True, report=rep))
     # 제출 예측 파일은 숫자 비교가 아니라 바이트 단위(sha256)로 같아야 한다
     for s in ("A", "B"):
-        checks.append(dict(name=f"제출 test 예측 파일 {s}(바이트 단위 동일)", kind="sha256", file=f"predictions/test_predictions_{s}.csv",
-                           value=sha256(tvt / f"test_predictions_{s}.csv"), quick=True, report="(제출물)"))
+        checks.append(dict(name=f"제출 test 예측 파일 {s}(줄바꿈을 맞춘 바이트 동일)", kind="sha256", file=f"predictions/test_predictions_{s}.csv",
+                           value=sha256_lf(tvt / f"test_predictions_{s}.csv"), quick=True, report="(제출물)"))
     fx = json.loads((cases / "facts_extra.json").read_text(encoding="utf-8"))
     checks.append(dict(name="형식 누수: 자릿수 규칙 행 F1(원본)", kind="json", file="code/press/cases/outputs/facts_extra.json",
                        path=["format_leak", "raw", "f1"], value=fx["format_leak"]["raw"]["f1"], quick=True, report="(1.6절)"))
@@ -103,7 +110,23 @@ def build_expected():
     for model, label in (("v2", "기반 모델 v2"), ("v2+H1+H2", "최종 v2+R1+R2")):
         where = dict(split="B", regime="test", model=model)
         checks.append(dict(name=f"test 기록 수 F1 {label} B", kind="csv", file="code/press/tvt/outputs/tvt_record_count.csv",
-                           where=where, column="rec_f1", value=csv_value(tvt / "tvt_record_count.csv", where, "rec_f1"), report="(2.4절 표 †)"))
+                           where=where, column="rec_f1", value=csv_value(tvt / "tvt_record_count.csv", where, "rec_f1"), quick=True, report="(2.4절 표 †)"))
+    # 이상 기록 양상(domain/07, 사후, 4.2절): 상·하부 진동이 모두 큰 기록 수
+    ap_ = json.loads((dom / "07_anomaly_patterns.json").read_text(encoding="utf-8"))
+    checks.append(dict(name="이상 양상: 상·하부 진동 모두 큰 기록 수", kind="json", file="code/press/domain/outputs/07_anomaly_patterns.json",
+                       path=["counts", "상·하부 진동 모두 큼"], value=ap_["counts"]["상·하부 진동 모두 큼"], report="(4.2절)"))
+    # 이상 확률(08, valid로만 보정): test Brier(파일 이상 비율을 사전으로)
+    pr = json.loads((tvt / "tvt_probability.json").read_text(encoding="utf-8"))
+    checks.append(dict(name="이상 확률 test Brier B(파일 비율 사전)", kind="json", file="code/press/tvt/outputs/tvt_probability.json",
+                       path=["B", "brier_fileprior"], value=pr["B"]["brier_fileprior"], tol=1e-6, quick=True, report="(2.5절)"))
+    # R1을 기준선에도 붙인 비교(사후, 2.4절)와 LSTM 창 때문에 점수 없는 행
+    for model, col, label in (("iforest+H1", "test_f1", "IsolationForest+R1 test F1 B"), ("knn5+H1", "test_fp", "5NN+R1 test 오경보 행 B")):
+        where = dict(split="B", model=model)
+        checks.append(dict(name=label, kind="csv", file="code/press/tvt/outputs/tvt_r1_baselines.csv", where=where, column=col,
+                           value=csv_value(tvt / "tvt_r1_baselines.csv", where, col), quick=True, report="(2.4절 †)"))
+    where = dict(split="A", model="lstm20")
+    checks.append(dict(name="LSTM 20행 창 때문에 점수 없는 test 이상 행 A", kind="csv", file="code/press/tvt/outputs/tvt_unscored.csv", where=where,
+                       column="no_score_rows", value=csv_value(tvt / "tvt_unscored.csv", where, "no_score_rows"), quick=True, report="(2.4절)"))
     return dict(note="보고서 작성 때(2026-10-04) 볼트 산출물에서 뽑은 값. run_all.py가 실행 뒤 같은 위치의 값과 비교한다",
                 checks=checks)
 

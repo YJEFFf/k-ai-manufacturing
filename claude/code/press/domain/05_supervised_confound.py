@@ -1,4 +1,4 @@
-"""경쟁팀식 지도학습(1초 창 통계 + 부스팅, F1 0.944)을 재현하고, 그 점수가 고장이 아니라 세션 차이로도 나오는지 대조 실험으로 본다.
+"""공개된 방식의 지도학습(1초 창 통계 + 부스팅, F1 0.944)을 재현하고, 그 점수가 고장이 아니라 세션 차이로도 나오는지 대조 실험으로 본다.
 
 정상(07-12 00시)과 이상(07-17 10시)은 날짜·시각대·저장 형식이 모두 달라 라벨과 세션이 겹친다(교락).
 입력: data/3_소성가공_예지보전 두 CSV(cases/common.load). 출력: outputs/05_supervised_confound.json · .csv(seed별 결과) · _summary.md
@@ -177,7 +177,7 @@ def stack(tab_n: pd.DataFrame, tab_a: pd.DataFrame, feats):
 # ───────────────────────── 모델·검증 ─────────────────────────
 def make_model(name: str, seed: int):
     """HGB·RF·LR. 셋 다 class_weight=balanced, 결측은 HGB가 자체 처리하고 나머지는 중앙값으로 채운다."""
-    if name == "HGB":  # catboost가 설치돼 있지 않아 경쟁팀 CatBoost 대신 쓴다
+    if name == "HGB":  # catboost가 설치돼 있지 않아 공개 분석의 CatBoost 대신 쓴다
         return HistGradientBoostingClassifier(max_iter=150, learning_rate=0.1, min_samples_leaf=5,
                                               class_weight="balanced", random_state=seed)
     if name == "RF":  # seed 단위로 프로세스 병렬을 쓰므로 나무 적합은 단일 스레드
@@ -518,7 +518,7 @@ def main():
                   threshold=0.5, metric_note="seed마다 5겹 OOF 확률을 모아 계산, 10 seed 평균±표준편차",
                   window_feats=WIN_FEATS, case_feats=CASE_FEATS, digit_feats=DIG_FEATS, tier0=TIER0, tier1=TIER1,
                   block21_starts=block_starts, block_size=BLOCK, n_blocks=nb,
-                  competitor=dict(repo="MinSeok-Good/press-equipment-anomaly-detection", f1=0.944),
+                  competitor=dict(repo="공개된 지도학습 분석(이름 생략)", f1=0.944),
                   runtime_s=round(time.time() - t_all, 1)),
         facts=facts,
         supervised=summ[summ.exp == "supervised"].to_dict("records"),
@@ -670,7 +670,7 @@ title: 프레스 — 지도학습 재현과 세션 교락 시험
 created: 2026-10-04
 updated: 2026-10-04
 tags: [contest/k-ai-manufacturing]
-source: Claude Code 세션 2026-10-04 (경쟁팀 공개 분석 MinSeok-Good/press-equipment-anomaly-detection 재현 + 교락 대조 실험)
+source: Claude Code 세션 2026-10-04 (공개된 지도학습 분석 방식 재현 + 교락 대조 실험)
 status: seed
 ---
 
@@ -678,7 +678,7 @@ status: seed
 
 > 상위: [[제조데이터 경진대회 MOC]] · 코드 `code/press/domain/05_supervised_confound.py` · 수치 `outputs/05_supervised_confound.json`·`.csv`
 
-**한 줄 결론**: 형식 누수를 지운 자료로도 라벨로 학습하면 F1 {min(mw[0], mc[0]):.2f}~{max(mw[1], mc[1]):.2f}이 쉽게 나온다(경쟁팀 0.944와 같은 수준). 그런데 같은 파이프라인이 **고장이 전혀 없는 같은 날 정상 구간끼리도** 간격이 1시간쯤 벌어지면 ROC-AUC 중앙값 {f2(bb_far)}로 가른다. 이상-정상 분리({f2(ab_med)})는 이보다 크고 한결같지만, 정상과 이상은 5일 떨어진 다른 세션이다. 따라서 지도학습 고득점으로는 '고장 탐지 능력'과 '세션(날짜·운전 조건·수집 설정) 구분 능력'을 가를 수 없다.
+**한 줄 결론**: 형식 누수를 지운 자료로도 라벨로 학습하면 F1 {min(mw[0], mc[0]):.2f}~{max(mw[1], mc[1]):.2f}이 쉽게 나온다(공개 분석 0.944와 같은 수준). 그런데 같은 파이프라인이 **고장이 전혀 없는 같은 날 정상 구간끼리도** 간격이 1시간쯤 벌어지면 ROC-AUC 중앙값 {f2(bb_far)}로 가른다. 이상-정상 분리({f2(ab_med)})는 이보다 크고 한결같지만, 정상과 이상은 5일 떨어진 다른 세션이다. 따라서 지도학습 고득점으로는 '고장 탐지 능력'과 '세션(날짜·운전 조건·수집 설정) 구분 능력'을 가를 수 없다.
 
 ## 실행
 
@@ -692,12 +692,12 @@ PYTHONIOENCODING=utf-8 python 05_supervised_confound.py --md-only  # 이 문서�
 - 검증: StratifiedGroupKFold 5겹(그룹 = 기록) × seed 10개(0~9). seed마다 OOF 확률을 모아 지표를 계산하고 평균 ± 표준편차를 냈다
 - 표현: window = 기록 안 비중첩 1초(10행) 창의 센서별 mean/std/RMS/min/max 15개(정상 {fx['windows']['normal']}창/{fx['windows']['normal_records_with_window']}기록, 이상 {fx['windows']['abnormal']}창/{fx['windows']['abnormal_records_with_window']}기록. 10행 미만 기록은 창이 없다). case = `common.case_table` 기록 특징 10개(n·t0 제외, 정상 600·이상 21기록)
 
-## 1. 경쟁팀식 지도학습 재현
+## 1. 공개된 방식의 지도학습 재현
 
 {nl.join(t1)}
 
-- 형식 누수를 지운 matched 자료에서 window F1 {f3(mw)}(PR-AUC {f3(mwp)}), case F1 {f3(mc)}이다. 경쟁팀 F1 0.944와 같은 수준이다
-- 원본 그대로(raw)의 창 통계도 F1 {f3(rw)}로 matched와 거의 같다. 창 통계를 받는 트리·선형 모델은 값의 크기로만 나누므로 자릿수 정보를 쓰지 못한다. **경쟁팀식 창 통계 점수는 자릿수 누수 때문이 아니다**
+- 형식 누수를 지운 matched 자료에서 window F1 {f3(mw)}(PR-AUC {f3(mwp)}), case F1 {f3(mc)}이다. 공개 분석 F1 0.944와 같은 수준이다
+- 원본 그대로(raw)의 창 통계도 F1 {f3(rw)}로 matched와 거의 같다. 창 통계를 받는 트리·선형 모델은 값의 크기로만 나누므로 자릿수 정보를 쓰지 못한다. **공개된 방식의 창 통계 점수는 자릿수 누수 때문이 아니다**
 - 자릿수 특징을 넣으면 1.000에 붙는다. 자릿수 2개만으로도 F1 {f3(dg)}이다. 원본 이상 파일 상부 진동은 {fx['vib_upper_digits_gt6_share']['abnormal']:.1%}가 7자리 이상이고, 정상은 {fx['vib_upper_digits_gt6_share']['normal']:.3%}다
 - 형식 누수 통로가 하나 더 있다. **원본 이상 파일 전류는 {fx['current_on_grid_share']['abnormal']:.0%}가 1.1920929 격자 위**에 있고, 정상은 {fx['current_on_grid_share']['normal']:.2%}만 그렇다. matched에서는 둘 다 격자로 맞춰 지워진다
 
@@ -756,7 +756,7 @@ matched 지도학습 모델을 5겹 학습 겹으로 적합했다. 평가 겹의
 
 {nl.join(t7)}
 
-- 경쟁팀식 창 통계 모델은 **전류를 +81.4 옮기기만 해도 정상 기록의 {min(sh81w):.0%}~{max(sh81w):.0%}를 이상으로 판정**한다. 이 조작은 센서 오프셋·영점 변화 같은 수집 조건 변화에 해당한다. 같은 이동에서 우리 정상 학습 모델은 A 0%·B 3.9%였다(보고서 V5)
+- 공개된 방식의 창 통계 모델은 **전류를 +81.4 옮기기만 해도 정상 기록의 {min(sh81w):.0%}~{max(sh81w):.0%}를 이상으로 판정**한다. 이 조작은 센서 오프셋·영점 변화 같은 수집 조건 변화에 해당한다. 같은 이동에서 우리 정상 학습 모델은 A 0%·B 3.9%였다(보고서 V5)
 - 반대로 0.1 ms 표본화 시각 흔들림에는 창 통계 모델이 둔감하다({pr(jw)}, 조작 없을 때와 같은 수준). 창 통계는 위상·파형 정보를 보지 않는다. 우리 모델은 이 조작에 민감했다(A 8.8%·B 35.2%)
 - case 지도학습 모델은 두 조작 모두에 둔감했다(+81.4 이동 {pr(sh81c)}, 흔들림 {pr(jc)}). 이 모델은 이동에 둔감한 전류 사인 R²에 기댄다(2c). 0.1 ms 흔들림으로는 R²가 이상 수준(≤0.62)까지 떨어지지 않는다
 - 어느 방식이든 **어떤 수집 조건 변화에는 민감하다**. 지도학습이라고 수집 조건 문제에서 자유롭지 않다. 민감한 방향만 다르다
@@ -777,7 +777,7 @@ matched 지도학습 모델을 5겹 학습 겹으로 적합했다. 평가 겹의
 - **정상만 학습한 우리 모델도 세션 차이를 완전히 배제하지 못한다.** 이상 점수는 '학습한 정상 분포에서 얼마나 먼가'를 잰다. 날짜나 수집 설정이 바뀐 정상도 멀게 나타난다. 보고서 V5에서도 **수집 조건에 민감**했다(전류 수준 +81.4 이동에 B 3.9%, 0.1 ms 표본화 흔들림에 정상 기록 경보율 A 8.8%·B 35.2%). 이상 파일의 전류 파형 붕괴가 고장 때문인지 계측 때문인지는 여전히 분리되지 않는다. Tier 1 결과와 같은 문제다
 - 이 시험이 보인 것은 '지도학습 점수로는 가를 수 없다'까지다. '정상 학습이 고장을 잡았다'는 적극적 증거는 아니다. 이를 가르려면 같은 날·같은 수집 설정의 정상-이상 자료나, 다른 날 정상 자료(세션 간 표류 측정)가 필요하다
 - 블록 쌍 지도는 75분 안의 표류만 잰다. 5일 간격으로 외삽하는 것은 검증할 수 없다. 블록 쌍은 seed 0 하나로 쟀다(쌍 378개가 반복 역할을 한다)
-- 경쟁팀 CatBoost를 sklearn HGB로 대체했다. 창은 기록 안 비중첩 10행으로 정했다(경쟁팀의 정확한 창 구성은 확인하지 않았다). 수치가 같은 수준이라는 것이지 정확히 재현했다는 뜻은 아니다
+- 공개 분석의 CatBoost를 sklearn HGB로 대체했다. 창은 기록 안 비중첩 10행으로 정했다(공개 분석의 정확한 창 구성은 확인하지 않았다). 수치가 같은 수준이라는 것이지 정확히 재현했다는 뜻은 아니다
 - Tier 분류는 '직결 구동' 가정에 기댄다. 인버터 구동이면 겉보기 주파수가 운전 지령(운전 조건)에 따라 바뀐다. 그 경우에도 고장 고유 신호는 아니다
 - 이상은 단일 사건(21기록, 약 3분)이다. 모든 지도학습 수치는 이 사건 하나에 대한 것이다
 

@@ -1,7 +1,7 @@
 """명령 하나로 전처리 → 학습 → 추론 → 결과 생성 → 보고서 수치 대조까지 실행한다.
 
     python run_all.py           # 전체: 데이터 진단, 모델(train/valid/test), test 예측 파일, 검증 실험, 사후 분석, 결과 대조
-    python run_all.py --quick   # 핵심만: 데이터 진단, 모델, test 예측 파일, 결과 대조
+    python run_all.py --quick   # 핵심만: 데이터 진단, 모델, test 예측 파일, 2.4절 사후 계산 2개, 결과 대조
 
 - 모든 단계는 이 폴더(압축을 푼 위치)를 기준으로 상대 경로만 쓴다. 인터넷 연결이 필요 없다
 - 단계마다 로그를 logs/<단계>.log 에 남기고, 끝나면 logs/run_summary.json 에 단계별 시간과 대조 결과를 쓴다
@@ -44,6 +44,7 @@ STEPS = [
     ("2_모델_valid선택", "code/press/tvt/02_select_on_valid.py", [], True, "valid 채점, 모델 선택, 선택 결과 해시 잠금"),
     ("2_모델_test채점", "code/press/tvt/03_score_test.py", ["--repo", "."], True, "잠금 확인 후 test 채점"),
     ("2_모델_test예측파일", "code/press/tvt/05_test_predictions.py", [], True, "test 행 단위 예측 파일, 첫 경보 지연"),
+    ("2_모델_이상확률", "code/press/tvt/08_probability.py", ["--repo", "."], True, "v2 점수를 이상 확률로(valid로만 보정, 경보·선택과 무관), 예측 파일에 열 추가"),
     ("3_검증_실험", "code/press/tvt/04_validation.py", ["--repo", "."], False, "인공 고장 주입·분할 변경·수집 조건 흔들림 검증(보고서 2.6절)"),
     ("4_사후_신호물리", "code/press/domain/01_signal_physics.py", [], False, "표본 간격·진동 스펙트럼·부하 관계(사후)"),
     ("4_사후_사건추세", "code/press/domain/02_event_trend.py", [], False, "이상 사건 안 추세(사후)"),
@@ -51,12 +52,19 @@ STEPS = [
     ("4_사후_순차검출", "code/press/domain/04_sequential_uncertainty.py", [], False, "CUSUM·EWMA·불확실성·경보 지표(사후)"),
     ("4_사후_지도학습대조", "code/press/domain/05_supervised_confound.py", [], False, "지도학습 대조와 세션 교락 시험(사후)"),
     ("4_사후_운전상태", "code/press/domain/06_operating_regime.py", [], False, "운전 상태별 오경보(사후)"),
-    ("4_사후_기록수F1", "code/press/tvt/06_record_count.py", [], False, "기록 하나를 1개로 센 F1(사후, 선택에 쓰지 않음)"),
+    ("4_사후_이상양상", "code/press/domain/07_anomaly_patterns.py", [], False, "이상 기록 양상별 먼저 볼 곳(사후)"),
+    ("4_사후_기록수F1", "code/press/tvt/06_record_count.py", [], True, "기록 하나를 1개로 센 F1(사후, 선택에 쓰지 않음)"),
+    ("4_사후_R1기준선", "code/press/tvt/07_r1_on_baselines.py", [], True, "R1을 기준선에도 붙인 비교, 창 때문에 점수 없는 행(사후, 선택에 쓰지 않음)"),
 ]
 
 
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def sha256_lf(path: Path) -> str:
+    """줄바꿈을 LF로 맞춘 뒤의 해시. 예측 CSV는 OS마다 줄바꿈(Windows CRLF, macOS·Linux LF)이 달라 내용이 같아도 바이트가 다르다."""
+    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
 
 
 def check_environment():
@@ -119,7 +127,7 @@ def compare(quick):
         f = ROOT / item["file"]
         try:
             if item["kind"] == "sha256":
-                got = sha256(f)
+                got = sha256_lf(f)
                 ok, shown = got == item["value"], got[:12]
             else:
                 if item["kind"] == "json":
@@ -138,7 +146,7 @@ def compare(quick):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--quick", action="store_true", help="핵심 단계만(진단·모델·test 예측·대조)")
+    ap.add_argument("--quick", action="store_true", help="핵심 단계만(진단·모델·test 예측·2.4절 사후 계산·대조)")
     a = ap.parse_args()
     try:
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")

@@ -107,6 +107,90 @@ _v2b = rcount.query("split == 'B' and regime == 'test' and model == 'v2'").iloc[
 assert (round(_v2b.rec_f1, 3), _v2b.rec_tp, _v2b.rec_fp) == (0.88, 11, 3), _v2b
 assert set(rcount.query("regime == 'test' and model == 'v2+H1+H2'").rec_f1) == {1.0}
 
+# ---- 2.4절 †: R1을 기준선에도 붙인 비교, 창 때문에 점수 없는 행(tvt/07, 사후) ----
+R1B = TVT / "tvt_r1_baselines.csv"
+r1b = pd.read_csv(R1B)
+for r in r1b.itertuples():
+    loc = f"{r.model}/{r.split}"
+    for col in ("valid_f1", "test_f1", "test_only_f1"):
+        add(f"r1base.{loc}.{col}", getattr(r, col), fmt(getattr(r, col), 3), R1B, f"{loc}/{col}")
+    for col in ("test_tp", "test_fp", "test_fn"):
+        add(f"r1base.{loc}.{col}", getattr(r, col), int(getattr(r, col)), R1B, f"{loc}/{col}")
+for model, v in r1b.groupby("model").valid_f1.mean().items():
+    add(f"r1base.{model}.valid_mean", v, fmt(v, 3), R1B, f"{model}/valid_f1 A·B 평균")
+_ifb = r1b.query("split == 'B' and model == 'iforest+H1'").iloc[0]
+assert (_ifb.test_f1, round(_ifb.test_only_f1, 3)) == (1.0, 0.609), _ifb
+UNS = TVT / "tvt_unscored.csv"
+for r in pd.read_csv(UNS).itertuples():
+    add(f"unscored.{r.model}.{r.split}", r.no_score_rows, int(r.no_score_rows), UNS, f"{r.model}/{r.split}")
+    add(f"unscored.{r.model}.{r.split}.pct", 100 * r.no_score_rows / r.test_abnormal_rows, fmt(100 * r.no_score_rows / r.test_abnormal_rows, 1),
+        UNS, f"{r.model}/{r.split} 비율(%)")
+add("lstm.unscored_prefix", 19, "19", "code/press/tvt/lib.py", "20행 창은 기록 앞 19행에 점수가 없다")
+
+# ---- 2.5절: 이상 확률(tvt/08, valid로만 보정, test로 채점) ----
+PRB = TVT / "tvt_probability.json"
+prb = json.loads(PRB.read_text(encoding="utf-8"))
+for s, v in prb.items():
+    add(f"prob.{s}.pi_file_pct", 100 * v["pi_file"], fmt(100 * v["pi_file"], 1), PRB, f"{s}/pi_file(%)")
+    for k in ("brier_fileprior", "brier_site1pct", "brier_constant"):
+        for d in (3, 4):
+            add(f"prob.{s}.{k}.{d}", v[k], fmt(v[k], d), PRB, f"{s}/{k}")
+    add(f"prob.{s}.max_pct", 100 * v["max_prob_site1pct"], fmt(100 * v["max_prob_site1pct"], 0), PRB, f"{s}/max_prob_site1pct(%)")
+    add(f"prob.{s}.units", v["calibration_units"], int(v["calibration_units"]), PRB, f"{s}/calibration_units")
+assert prb["B"]["brier_fileprior"] < prb["B"]["brier_constant"]
+add("script.tvt08", 8, "08", "code/press/tvt/08_probability.py", "6장 단계 표의 스크립트 번호")
+
+# ---- 4.2절: 이상 기록 양상(domain/07, 사후) ----
+APT = ROOT / "code/press/domain/outputs/07_anomaly_patterns.json"
+apt = json.loads(APT.read_text(encoding="utf-8"))
+for kind, n in apt["counts"].items():
+    add(f"pattern.{kind}", n, int(n), APT, f"counts/{kind}")
+add("pattern.judged", sum(n for k, n in apt["counts"].items() if not k.startswith("판단 보류")), "17", APT, "10행 이상 기록 수")
+assert apt["wave_broken_share"] == 1.0 and apt["offset_share"] == 1.0
+
+# ---- 3회차(10/5): 2.4 표 PCA·CUSUM·EWMA 미탐·오경보, 3.2 합산 비율과 Clopper–Pearson 양측 95% 구간, 3.1 0.865 대상 기록 수 ----
+from scipy.stats import beta as _beta
+
+
+def cp_pct(k, n):
+    lo = 0.0 if k == 0 else _beta.ppf(0.025, k, n - k + 1)
+    hi = 1.0 if k == n else _beta.ppf(0.975, k + 1, n - k)
+    return 100 * lo, 100 * hi
+
+
+MS = DOM / "03_mspc.csv"
+ms = pd.read_csv(MS)
+for r in ms.query("alpha == 0.01 and regime == 'test' and model in ['mspc', 'mspc+H1']").itertuples():
+    for col in ("realtime_fn", "realtime_fp"):
+        add(f"mspc.{r.model}.{r.split}.{col}", getattr(r, col), int(getattr(r, col)), MS, f"{r.model}/{r.split}/test/{col}")
+SQ = DOM / "04_sequential_uncertainty.csv"
+for r in pd.read_csv(SQ).query("regime == 'test' and key in ['CUSUM-carry', 'EWMA-carry']").itertuples():
+    for col in ("fn", "fp"):
+        add(f"seq.{r.key}.{r.split}.{col}", getattr(r, col), int(getattr(r, col)), SQ, f"{r.key}/{r.split}/test/{col}")
+OR = DOM / "06_operating_regime.csv"
+orx = pd.read_csv(OR).query("scheme == 'gmm' and grouping == 'state' and split == 'B' and alpha == 0.05 and part == 'valid+test'")
+seven = ["maxz3", "knn5", "mlp_ae5", "lstm20", "iforest", "v1", "v2"]
+pairs = {}
+for state in ("busy_high", "all"):
+    g = orx[(orx.state == state) & orx.model.isin(seven)]
+    assert g.model.nunique() == 7, (state, g.model.unique())
+    pairs[state] = (int(g.fa_records.sum()), int(g.n_records.sum()))
+for model in ("v2", "v2+H2"):
+    g = orx[(orx.state == "busy_high") & (orx.model == model)].iloc[0]
+    pairs[model] = (int(g.fa_records), int(g.n_records))
+assert pairs["busy_high"] == (52, 371) and pairs["all"] == (79, 2100) and pairs["v2"] == (9, 53) and pairs["v2+H2"] == (1, 53), pairs
+for name, (k, n) in pairs.items():
+    lo, hi = cp_pct(k, n)
+    add(f"regB.cp.{name}.k", k, k, OR, f"{name} fa_records 합"); add(f"regB.cp.{name}.n", n, n, OR, f"{name} n_records 합")
+    for d in (1, 2):
+        add(f"regB.cp.{name}.lo.{d}", lo, fmt(lo, d), OR, f"{name} Clopper–Pearson 하한(%)")
+        add(f"regB.cp.{name}.hi.{d}", hi, fmt(hi, d), OR, f"{name} Clopper–Pearson 상한(%)")
+SR = ROOT / "submission/북적북적_code/yejun/analysis/press_evidence/sensor_relations.csv"
+sr = pd.read_csv(SR)
+n469 = sr[(sr.astype(str).apply(lambda c: c.str.contains("AI1 SD")).any(axis=1)) & (sr.astype(str).apply(lambda c: c.str.contains("AI2 RMS")).any(axis=1))]
+assert 469 in set(pd.to_numeric(n469.stack(), errors="coerce").dropna().astype(int)), "sensor_relations에서 469를 찾지 못함"
+add("yejun.corr_lower_current.n", 469, "469", SR, "구간 수준 결합 AI1 SD~AI2 RMS 정상 기록 수")
+
 # ---- 2·3장: 모델 비교 ----
 test = pd.read_csv(TVT / "tvt_test.csv")
 valid = pd.read_csv(TVT / "tvt_valid.csv")
@@ -300,9 +384,9 @@ EXT = [
     ("regB.pct_hi", 99.6, "99.6", "06 records B 학습 기준 분위"),
     ("env.python", 3.13, "3.13", "실행 환경 파이썬 판"),
     ("env.python_old", 3.12, "3.12", "팀원 예전 환경 파일 판"),
-    ("run.full_min", 80, "80", "새 환경(bj_full2) run_all.py 전체 80분, 10/5"),
-    ("run.checks", 21, "21", "run_all.py 결과 대조 21/21"),
-    ("run.full_min_solo", 56, "56", "10/4 단독 실행 run_all.py 전체 56.2분"),
+    ("run.full_min", 56, "56", "새 환경(C:/Temp/bj_v3) run_all.py 전체 55.7분, 10/6, 최종 zip"),
+    ("run.checks", 26, "26", "run_all.py 결과 대조 26/26"),
+    ("run.cpu_cores", 16, "16", "검증 PC Core Ultra 7 155H 16코어"),
 ]
 for fid, v, shown, src in EXT:
     add(fid, v, shown, "report/research", src)

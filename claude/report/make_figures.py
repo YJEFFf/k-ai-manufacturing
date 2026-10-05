@@ -275,7 +275,65 @@ def fig_load_vibration():
     save(fig, "fig10_load_vibration.png")
 
 
+def fig_model_structure():
+    """[그림 8] 최종 모델 구조: 센서 3개 → v2 세 성분 → conformal 문턱 → R2 교차 확인 → R1 사건 지속 → 2단계 경보, 아래에 확률 층."""
+    fig, ax = plt.subplots(figsize=(7.8, 3.9))
+    ax.set_xlim(0, 13.2); ax.set_ylim(0, 5.9); ax.axis("off")
+    for i, name in enumerate(["상부 진동", "하부 진동", "모터 전류"]):
+        box(ax, (0.1, 3.95 - i * 1.15), 1.45, 0.75, name, size=8.4)
+    comps = ["크기\n세 센서의\n표준화 최댓값", "파형\n최근 6~8행 전류의\n사인 적합 1-R²", "동역학\nAR(2) 예측 오차"]
+    for i, c in enumerate(comps):
+        box(ax, (2.05, 3.8 - i * 1.15), 2.45, 1.05, c, fc="#e8f0fb", ec=A, size=7.6)
+    # 입력 연결(2.3절 설정표): 크기는 세 센서 모두, 파형·동역학은 전류만 쓴다
+    for i in range(3):
+        arrow(ax, (1.55, 4.32 - i * 1.15), (2.05, 4.32))
+    for j in (1, 2):
+        arrow(ax, (1.55, 4.32 - 2 * 1.15), (2.05, 4.32 - j * 1.15))
+    box(ax, (5.0, 2.45), 2.1, 1.75, "성분별 꼬리 점수\n(꼬리 확률의 -log10)\n중 최댓값 →\nconformal 문턱\n(valid 정상, α 1%)", size=7.2)
+    for i in range(3):
+        arrow(ax, (4.5, 4.32 - i * 1.15), (5.0, 3.32))
+    box(ax, (7.55, 2.45), 2.2, 1.75, "R2 교차 확인\n크기 단독이고\n전류 파형이\n정상이면 보류", fc="#fdeee6", ec=B, size=7.4)
+    box(ax, (10.2, 2.45), 2.9, 1.75, "R1 사건 지속\n직전 기록(60초 안)이\n확인된 이상이면\n첫 행부터 유지,\n파형 정상 확인 시 해제", fc="#fdeee6", ec=B, size=7.2)
+    arrow(ax, (7.1, 3.32), (7.55, 3.32)); arrow(ax, (9.75, 3.32), (10.2, 3.32))
+    box(ax, (10.2, 0.2), 2.9, 1.5, "경보\n사건 첫 경보 = 1단계 주의\n사건 안 2행 = 2단계\n점검 요청", fc="white", ec=INK2, size=7.2, weight="bold")
+    arrow(ax, (11.65, 2.45), (11.65, 1.7))
+    box(ax, (2.05, 0.2), 7.7, 1.2, "확률 층(경보와 별도)\nv2 점수 → 단조 회귀(valid로만 맞춤) → 우도비 → 사전 비율\n→ 이상 확률(예측 파일 열)",
+        fc="#f3f2ef", size=7.2)
+    arrow(ax, (6.05, 2.45), (6.05, 1.4))
+    ax.text(4.55, 5.55, "기반 모델 v2(정상만 학습)", ha="center", fontsize=8.5, color=A)
+    ax.text(10.35, 5.55, "규칙(경보 운영)", ha="center", fontsize=8.5, color=B)
+    save(fig, "fig11_model_structure.png")
+
+
+def fig_alarm_card():
+    """[그림 13] 최종 모델 경보 카드 예시(분할 B test): 이상 기록 하나와, v2는 울렸지만 R2가 보류한 정상 기록 하나."""
+    t = pd.read_pickle(ROOT / "code/press/tvt/cache/rows_B.pkl")
+    pred = pd.read_csv(TVT / "test_predictions_B.csv")
+    t = t[t.part == "test"].merge(pred[["subset", "rec", "pos", "final_v2_R1_R2_realtime", "v2_realtime"]], on=["subset", "rec", "pos"])
+    held = pred[(pred.subset == "normal") & pred.v2_realtime & ~pred.final_v2_R1_R2_realtime].rec.unique()
+    cases = [("abnormal", "test:abnormal:11", "(a) 이상 기록 11(상부 진동만 큰 양상)\nv2가 끊긴 행까지 R1이 채워 기록 전체가 경보 → 2단계"),
+             ("normal", held[0], f"(b) 분할 B 정상 기록 {420 + int(held[0].split(':')[-1])}(test)\nv2는 크기만 넘어 경보, 최종 모델은 R2로 보류")]
+    lanes = [("크기 문턱", "magnitude", A), ("파형 문턱", "waveform", A), ("동역학 문턱", "dynamics", A), ("v2 경보", None, INK2), ("최종 경보", None, B)]
+    fig, axes = plt.subplots(1, 2, figsize=(7.8, 2.6), sharey=True)
+    for ax, (sub, rec, title) in zip(axes, cases):
+        r = t[(t.subset == sub) & (t.rec == rec)].sort_values("pos")
+        for i, (name, comp, col) in enumerate(lanes):
+            if comp:     # 성분 꼬리 확률이 α 1% 이하인 행(그 성분이 문턱을 넘음)
+                on = r.pos[r[f"v2|cp_full|{comp}"] <= 0.01]
+            else:
+                on = r.pos[r["v2_realtime" if name == "v2 경보" else "final_v2_R1_R2_realtime"].astype(bool)]
+            y = len(lanes) - 1 - i
+            ax.broken_barh([(p - 0.5, 1) for p in on], (y - 0.38, 0.76), color=col, lw=0)
+            ax.plot([r.pos.min() - 0.5, r.pos.max() + 0.5], [y - 0.42, y - 0.42], color="#e6e5e1", lw=0.6)
+        ax.set_xlim(r.pos.min() - 0.5, r.pos.max() + 0.5)
+        ax.set_title(title, fontsize=7.8, loc="left", color=INK)
+        ax.set_xlabel("기록 안 위치(행, 0.1초)", fontsize=8)
+    axes[0].set_yticks(range(len(lanes)), [n for n, _, _ in lanes][::-1], fontsize=8)
+    axes[0].tick_params(axis="y", length=0)
+    save(fig, "fig12_alarm_card.png")
+
+
 if __name__ == "__main__":
     fig_structure(); fig_collection(); fig_flow(); fig_miss_position(); fig_models(); fig_rules(); fig_leak(); fig_console()
-    fig_observability(); fig_regime_timeline(); fig_load_vibration()
+    fig_observability(); fig_regime_timeline(); fig_load_vibration(); fig_model_structure(); fig_alarm_card()
     print(sorted(p.name for p in FIG.glob("*.png")))
