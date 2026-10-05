@@ -1,7 +1,7 @@
 ---
 title: 제조데이터 경진대회 MOC
 created: 2026-09-21
-updated: 2026-10-04
+updated: 2026-10-05
 tags: [moc/contest, contest/k-ai-manufacturing]
 source: 제6회 K-인공지능 제조데이터 분석 경진대회 과제공개 hwpx (KAMP)
 status: seed
@@ -43,7 +43,7 @@ status: seed
   - `report/plans/` 보고서 계획 v1·v4·v5 · `report/logs/` 판단 기록·검토 기록·v5 진행표
 
 ## 진행
-- **2026-10-04 제출 코드 패키지·재현성** → `submission/북적북적_code.zip`(283개 파일, 3.1MB). 압축을 풀고 `python run_all.py` 하나로 전처리~test 예측~보고서 수치 19개 대조까지 돈다. 새 가상환경(파이썬 3.13, 판 고정)에서 19/19 일치·56분 확인. 코드 간결화·한글 주석(산출물 해시 동일), 보고서 6장 교체·2.4절 딥러닝 미채택 근거 추가(32쪽, 참고문헌 27개). 팀 레포 `claude/press-cases`·PR #3에 반영. 남은 일: 만족도 조사 캡처를 실제 화면으로 교체, 발표자료
+- **2026-10-04 제출 코드 패키지·재현성** → `submission/북적북적_code.zip`(283개 파일, 3.1MB). 압축을 풀고 `python run_all.py` 하나로 전처리~test 예측~보고서 수치 19개 대조까지 돈다. 새 가상환경(파이썬 3.13, 판 고정)에서 19/19 일치·56분 확인. 코드 간결화·한글 주석(산출물 해시 동일), 보고서 6장 교체·2.4절 딥러닝 미채택 근거 추가(32쪽, 참고문헌 27개). 팀 레포 `claude/press-cases`·PR #3에 반영(10/5 보고서 PDF·hwpx와 코드 zip도 올림). 남은 일: 만족도 조사 캡처를 실제 화면으로 교체, 발표자료
 - **2026-10-04 결과보고서 v5(31쪽)** → `report/결과보고서_북적북적.hwpx`·`.pdf` (원고 `report/final_v5.md`). 출제 의도(과제 ③ 과업 ②: 정상 운전변화 오경보 억제)·설비 물리(파인블랭킹 유압 계통, 기어펌프 고장 서명, 10Hz 관측 가능성)·진단 매트릭스·운전 상태별 오경보·표준 기법(PCA 관리도, CUSUM·EWMA, 지도학습 대조)·불확실성 상한·참고문헌 25개 추가. critic 2회(REVISE→조건부 PASS) 반영, 윤문 후 수치 동일. 조사 `report/research/`, 사후 분석 `code/press/domain/`(01~06), 판단 기록 `report/logs/decision_log_v5.md`. 이전 18쪽판은 `report/_archive/`
 - **2026-10-04 결과보고서 hwpx·PDF 초안(18쪽, v4판)** → `report/_archive/결과보고서_북적북적_v4판.hwpx`·`.pdf` (원고 `report/drafts/final.md`, 조립 `report/build_hwpx.py`). critic 3회차 PASS, 윤문 후 수치 동일, hwpx 본문 숫자 대조 통과. 남은 일: 만족도 조사 캡처 교체, zip 구성 줄(10/7), 서명
 - **2026-10-03 train/valid/test 분석** → `code/press/tvt/README.md`: 예준 v1·v2·v3·베이스라인 + 가설 H1(사건 지속)·H2(교차 확인)를 valid로 선택·등록하고 test 1회 채점. 최종 v2+R1+R2(valid 공동 1위 3개 중 가장 단순, test 확인 후 결정) test F1 A·B 1.000, 잠금 규칙의 v2+R1은 A 1.000·B 0.9954, 예준 v2 0.965·0.970. R1·R2 기준 충족, v3 조건부 성분 미충족
