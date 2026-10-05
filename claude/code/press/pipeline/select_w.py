@@ -1,45 +1,59 @@
-"""창 길이 w를 정상 데이터만으로 고르는 규칙 (이상 데이터 미사용).
+"""사인 창 길이 w를 정상 데이터만으로 고르는 규칙 (이상 데이터 미사용).
 
-1. 정상 학습 구간을 시간순으로 학습-A(앞 80% 구간) / 학습-B(뒤 20%)로 나눈다
-2. 학습-A로 스케일러·ECDF를 만든 결합 점수에서, 정상 보정 구간 1% 구간 예산 문턱을 정한다
-3. 학습-B에서 알림 구간 비율을 잰다. 모든 후보가 판정하는 행(구간 내 max(W)번째 관측 이후)만 센다
-4. 비율이 가장 낮은 w (동률이면 작은 w)
+규칙: 정상 학습 구간 전류의 1−R² 상위 1% 문턱을 넘는 백색잡음 창이 99% 이상인 가장 작은 w.
+    즉 "정상 파형과 무작위 잡음을 1% 오경보 수준에서 99% 이상 가를 수 있는 가장 짧은 창".
+    창이 짧으면 사인+상수+주파수 탐색(사실상 파라미터 4개)이 잡음까지 맞춰 판별력을 잃는다(w=5: 잡음 R² 중앙 0.91).
+보조 근거(휴리스틱): 정상 학습 전류의 앨리어싱 주파수 추정치와 그 반주기(관측 수)를 함께 기록한다.
 
-한계: 라벨 없는 규칙은 검출력을 보지 못한다. "오경보가 가장 안정적인 창"을 고를 뿐이다.
+2026-09-24 이전 규칙(정상 알림 비율 최소)은 점수 포화 결함 때문에 폐기했다 (프레스_실행계획 참고).
 """
 import numpy as np
 import pandas as pd
 
-from scores import Scorer
+from scores import FREQS, _hats, sine_misfit, sine_score
 
-CANDIDATES = (5, 6, 8, 10, 12)
-BUDGET = 0.01
+CANDIDATES = tuple(range(4, 17))
+Q_NORMAL = 0.99
+TARGET_REJECT = 0.99
+N_NOISE = 10000
+SEED = 0
 
 
-def select_w(yj, train, cal, candidates=CANDIDATES, budget=BUDGET):
-    tb = yj.blocks(train)
-    ids = np.unique(tb)
-    cut = ids[int(len(ids) * 0.8)]
-    train_a = train[tb < cut].reset_index(drop=True)
-    train_b = train[tb >= cut].reset_index(drop=True)
-    scorer = Scorer(train_a, yj.blocks, wins=candidates, baselines=False)
-    s_cal, _ = scorer.score(cal, yj)
-    s_b, _ = scorer.score(train_b, yj)
-    gb = yj.blocks(train_b)
-    pos = pd.Series(np.arange(len(gb))).groupby(gb).cumcount().to_numpy()  # 구간 내 위치(0부터)
-    judged = pos >= max(candidates) - 1
+def alias_frequency(train, groups, min_len=20):
+    """정상 학습 구간(길이 >= min_len)마다 전체 구간 사인 피팅 주파수의 중앙값."""
+    x = train["AI2_Current"].to_numpy(float)
+    freqs = []
+    for g in np.unique(groups):
+        seg = x[groups == g]
+        if len(seg) < min_len:
+            continue
+        t = np.arange(len(seg)) * 0.1
+        best = (np.inf, 0.0)
+        for f in FREQS:
+            A = np.column_stack([np.sin(2 * np.pi * f * t), np.cos(2 * np.pi * f * t), np.ones(len(seg))])
+            c, *_ = np.linalg.lstsq(A, seg, rcond=None)
+            sse = ((seg - A @ c) ** 2).sum()
+            if sse < best[0]:
+                best = (sse, f)
+        freqs.append(best[1])
+    return float(np.median(freqs)), len(freqs)
+
+
+def select_w(train, blocks, candidates=CANDIDATES):
+    groups = blocks(train)
+    rng = np.random.default_rng(SEED)
     rows = []
     for w in candidates:
-        key = f"maxz_plus_sine_{w}"
-        thr = yj.cutoff_at_budget(yj.segment_max(s_cal[key], yj.blocks(cal)), budget)
-        alarm = np.isfinite(s_b[key]) & (s_b[key] > thr) & judged
-        seg_alarm = pd.Series(alarm).groupby(gb).any()
-        seg_judged = pd.Series(judged).groupby(gb).any()
-        rows.append(dict(w=w, threshold=thr, train_b_segments=int(seg_judged.sum()),
-                         train_b_alarm_segments=int(seg_alarm[seg_judged].sum()),
-                         train_b_alarm_fraction=float(seg_alarm[seg_judged].mean()),
-                         train_b_alarm_rows=int(alarm.sum()), train_b_judged_rows=int(judged.sum())))
+        s = sine_score(train, groups, w)
+        thr = float(np.nanquantile(s, Q_NORMAL))
+        noise = sine_misfit(rng.normal(size=(N_NOISE, w)))
+        rows.append(dict(w=w, normal_misfit_q99=thr, noise_misfit_median=float(np.median(noise)),
+                         noise_reject_rate=float((noise > thr).mean())))
     table = pd.DataFrame(rows)
-    best = table.sort_values(["train_b_alarm_fraction", "train_b_alarm_rows", "w"]).iloc[0]
-    tie = int((table.train_b_alarm_fraction == best.train_b_alarm_fraction).sum())
-    return int(best.w), table, tie
+    ok = table[table.noise_reject_rate >= TARGET_REJECT]
+    w_rule = int(ok.w.min()) if len(ok) else int(table.loc[table.noise_reject_rate.idxmax(), "w"])
+    f_alias, n_seg = alias_frequency(train, groups)
+    info = dict(w_rule=w_rule, alias_freq_hz=f_alias, alias_segments=n_seg,
+                half_period_obs=10 / (2 * f_alias) if f_alias > 0 else float("nan"))
+    table["selected"] = table.w == w_rule
+    return w_rule, table, info

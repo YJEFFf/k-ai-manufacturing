@@ -1,0 +1,162 @@
+{
+  "hypotheses": {
+    "H1": {
+      "statement": "고장 상태는 수집 공백(수 초)을 넘어 이어진다. 직전 기록이 확인된 이상이면 새 기록 첫 행부터 경보를 유지하면(사건 지속) 기록 시작 직후 미탐이 준다",
+      "test_criterion": "A·B 모두 시험 미탐 행(v2+H1) < 미탐 행(v2) 이고 시험 오경보 행(v2+H1) ≤ 오경보 행(v2)",
+      "supported": true,
+      "test": {
+        "A": {
+          "v2": {
+            "fn": 22,
+            "fp": 0
+          },
+          "v2+H1": {
+            "fn": 0,
+            "fp": 0
+          }
+        },
+        "B": {
+          "v2": {
+            "fn": 16,
+            "fp": 3
+          },
+          "v2+H1": {
+            "fn": 0,
+            "fp": 3
+          }
+        }
+      }
+    },
+    "H2": {
+      "statement": "고부하 정상에서 진동 크기 성분만 문턱을 넘을 때 전류 파형은 정상이다. 크기 단독 + 파형 정상인 경보를 보류하면(교차 확인) 탐지를 잃지 않고 오경보가 준다",
+      "test_criterion": "A·B 모두 시험 오경보 행(v2+H2) ≤ 오경보 행(v2) 이고 시험 TP(v2+H2) = TP(v2)",
+      "supported": true,
+      "test": {
+        "A": {
+          "v2": {
+            "tp": 302,
+            "fp": 0
+          },
+          "v2+H2": {
+            "tp": 302,
+            "fp": 0
+          }
+        },
+        "B": {
+          "v2": {
+            "tp": 308,
+            "fp": 3
+          },
+          "v2+H2": {
+            "tp": 308,
+            "fp": 0
+          }
+        }
+      }
+    },
+    "H3": {
+      "statement": "전류 크기(부하)에 따라 진동 정상 범위를 바꾸는 예준 v3 조건부 성분을 v2에 더하면 성능이 오른다",
+      "test_criterion": "시험 실시간 F1 A·B 평균: v2+C1d1 > v2",
+      "supported": false,
+      "test": {
+        "A": {
+          "v2": 0.964856,
+          "v2+C1d1": 0.968153
+        },
+        "B": {
+          "v2": 0.970079,
+          "v2+C1d1": 0.955039
+        }
+      }
+    },
+    "H4": {
+      "statement": "정상·이상 파일의 저장 형식 차이(진동 소수 자릿수)만으로 이상을 가를 수 있다(형식 누수). 그래서 정밀도 맞춤(matched)이 필요하다",
+      "test_criterion": "시험 행에서 '진동 AI0 소수 자릿수 > 6이면 이상' 규칙의 F1 ≥ 0.9",
+      "supported": true,
+      "test": {
+        "A": {
+          "tp": 321,
+          "fp": 1,
+          "fn": 3,
+          "f1": 0.9938080495356038
+        },
+        "B": {
+          "tp": 321,
+          "fp": 1,
+          "fn": 3,
+          "f1": 0.9938080495356038
+        }
+      }
+    }
+  },
+  "v2_test_errors": {
+    "A": {
+      "missed_rows": 22,
+      "missed_by_position": {
+        "0": 7,
+        "1": 7,
+        "2": 2,
+        "4": 2,
+        "6": 2,
+        "19": 1,
+        "25": 1
+      },
+      "missed_records": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "false_alarm_rows": 0,
+      "false_alarms": []
+    },
+    "B": {
+      "missed_rows": 16,
+      "missed_by_position": {
+        "0": 6,
+        "1": 6,
+        "2": 2,
+        "4": 1,
+        "6": 1
+      },
+      "missed_records": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        18,
+        19,
+        20
+      ],
+      "false_alarm_rows": 3,
+      "false_alarms": [
+        {
+          "record": "test:normal:3",
+          "position": 41,
+          "prefix_r2": 0.9949,
+          "waveform_normal": true
+        },
+        {
+          "record": "test:normal:41",
+          "position": 40,
+          "prefix_r2": 0.997,
+          "waveform_normal": true
+        },
+        {
+          "record": "test:normal:150",
+          "position": 11,
+          "prefix_r2": 0.9978,
+          "waveform_normal": true
+        }
+      ]
+    }
+  }
+}

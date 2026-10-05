@@ -1,0 +1,26 @@
+{
+  "A": {
+    "calibration_units": 120,
+    "fit_normal_rows": 3947,
+    "fit_abnormal_rows": 276,
+    "test_rows": 4414,
+    "pi_file": 0.07340280924331671,
+    "brier_fileprior": 0.00455822965246579,
+    "brier_site1pct": 0.018248764793228133,
+    "brier_constant": 0.06801483683850597,
+    "max_prob_site1pct": 0.55,
+    "lr_cap": 121.0
+  },
+  "B": {
+    "calibration_units": 120,
+    "fit_normal_rows": 3770,
+    "fit_abnormal_rows": 276,
+    "test_rows": 6421,
+    "pi_file": 0.05045942999532783,
+    "brier_fileprior": 0.0038062105835938325,
+    "brier_site1pct": 0.01245366929081327,
+    "brier_constant": 0.04791327591987444,
+    "max_prob_site1pct": 0.55,
+    "lr_cap": 121.0
+  }
+}

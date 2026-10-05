@@ -3,7 +3,23 @@
 제6회 K-인공지능 제조데이터 분석 경진대회(일반국민/대학(원)생) 준비 중 Claude Code로 진행한 분석입니다.
 예준님(Codex) 작업과 섞이지 않게 이 폴더에만 둡니다.
 
-> **최신 (10/3) — 케이스 분할 분석 · 예준 v2 오답 수정:** [`code/press/cases/README.md`](code/press/cases/README.md). 예준 Press Guard v2를 그대로 재현(A 0.9619·B 0.9710)한 뒤 오답 원인 2개(기록 시작 직후 미탐, 진동 크기 단독 오경보)에 '사건 지속'·'교차 확인'을 얹어 α1% **실시간 A 0.9992·B 1.000, 기록 단위 A·B 1.000**. 오답을 본 뒤 만든 사후 규칙이라 새 고장 성능 근거는 아님.
+> **최신 (10/6) — 최종본: 결과보고서 42쪽, 제출 코드 zip**
+> - 결과보고서: [`report/결과보고서_북적북적.pdf`](report/결과보고서_북적북적.pdf) (42쪽, 그림 13장, 참고문헌 주요 11·보조 15. 한글 원본 `.hwpx`도 같은 폴더)
+> - **예준 확인 요청:** [`report/logs/검토요청_예준.md`](report/logs/검토요청_예준.md) — PDF를 직접 읽고 PR #3 댓글로 답해 주세요(답마다 쪽 번호, 10/7 12:00까지)
+> - 10/6 3회차 보강: 이상 확률(valid로만 보정, 예측 파일 열), 이상 양상별 먼저 볼 곳(예준 제안, 4.2절), 모델 구조도(그림 8)·경보 카드(그림 13), 미탐·오경보 행 열, 비율 신뢰구간. 내역은 [`report/logs/review_response_2026-10-05.md`](report/logs/review_response_2026-10-05.md) 끝 절
+> - 제출 코드 zip: [`submission/북적북적_code.zip`](submission/북적북적_code.zip) (288개 파일, 3.2MB, 원본 CSV 2개와 test 예측결과 `predictions/` 포함. 풀어서 `python run_all.py`)
+> - 새 가상환경(파이썬 3.13, 패키지 판 고정)에서 전체 실행해 대조 26/26 일치, 55.7분. `--quick`은 대조 19개, 약 13분
+> - 진행 상황: 보고서·코드 zip 완료. 남은 일은 만족도 조사 캡처 교체(지금은 양식의 예시 그림), 발표자료, 10/8 KAMP 제출
+> - zip 만들기: `python claude/submission/make_package.py --repo .` (레포 루트에서. 원본 CSV 2개를 `claude/data/3_소성가공_예지보전/`에 먼저 넣는다)
+> - 보고서 원고: [`report/final_v5.md`](report/final_v5.md), 판단 기록: [`report/logs/decision_log_v5.md`](report/logs/decision_log_v5.md), 진행표: [`report/logs/round3_progress.md`](report/logs/round3_progress.md)
+>
+> **train/valid/test 분석과 보고서 계획 (10/3~4):** [`code/press/tvt/README.md`](code/press/tvt/README.md), [`report/plans/plan_report_v4.md`](report/plans/plan_report_v4.md).
+> - 예준 v1·v2·v3·베이스라인과 규칙 R1(사건 지속)·R2(교차 확인)를 같은 분할에서 비교했다
+> - valid에서 선택을 해시로 잠근 뒤 test를 채점했다. 잠금 규칙이 고른 v2+R1은 A 1.000·B 0.9954다
+> - 최종 v2+R1+R2(valid 공동 1위 3개 중 가장 단순, test 확인 후 결정)는 A·B 1.000이다
+> - 규칙은 아래 초기 탐색에서 착안했다. 경위는 tvt README에 있다
+>
+> **초기 탐색 (10/3) — 케이스 분할 분석 · 예준 v2 오답 수정:** [`code/press/cases/README.md`](code/press/cases/README.md). 예준 Press Guard v2를 그대로 재현(A 0.9619·B 0.9710)한 뒤 오답 원인 2개(기록 시작 직후 미탐, 진동 크기 단독 오경보)에 '사건 지속'·'교차 확인'을 얹어 α1% **실시간 A 0.9992·B 1.000, 기록 단위 A·B 1.000**. 오답을 본 뒤 만든 사후 규칙이라 새 고장 성능 근거는 아님.
 >
 > **제출 파이프라인 (③ 프레스):** `python code/press/pipeline/run_all.py` 한 번 → 모델 비교·예측 파일·오류분석·진단 ([`code/press/pipeline/README.md`](code/press/pipeline/README.md)). 보고서용 수치: [`notes/프레스_결과요약_보고서용.md`](notes/프레스_결과요약_보고서용.md)
 >
@@ -35,6 +51,9 @@
 | `code/press/` | ③ 프레스 탐색 스크립트 05~07 (결과는 `code/press/outputs/`, 큰 CSV 제외) |
 | `notes/프레스_결과요약_보고서용.md` | 보고서 장별 수치·문장 |
 | `notes/프레스_실행계획_2026-09-23.md` | 파이프라인 계획 (Architect·Critic 리뷰 3회 반영) |
+| `code/press/tvt/` · `code/press/domain/` | ③ 프레스 train/valid/test 모델 · 사후 분석 01~06 |
+| `submission/` | 제출 코드 패키지 재료(`package_files/`)와 zip 만드는 스크립트 |
+| `report/` | 보고서 원고 `final_v5.md`, 그림·조립·검증 스크립트, `drafts/`·`plans/`·`logs/` |
 | `code/` | ② 용접 분석 파이프라인 (01~04 + 공통 모듈 `wlib.py`) |
 | `code/outputs/` | 실행 결과 보고서(`*_report.md`)·그림·요약. 큰 CSV는 제외(재실행하면 생김) |
 | `data/` | 원본 데이터 자리 (git에 올리지 않음) |

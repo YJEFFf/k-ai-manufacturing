@@ -1,0 +1,10 @@
+# 결과를 만든 환경(파이썬 3.13, Windows 11, CPU)의 판을 그대로 고정했다
+# 설치: pip install -r requirements.txt
+numpy==2.5.2
+pandas==3.0.5
+scipy==1.18.1
+scikit-learn==1.9.1
+statsmodels==0.15.0
+torch==2.14.0
+matplotlib==3.11.1
+threadpoolctl==3.7.0

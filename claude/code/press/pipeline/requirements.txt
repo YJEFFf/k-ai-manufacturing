@@ -1,4 +1,7 @@
 numpy>=2.0
 pandas>=2.2
+scipy>=1.11
 scikit-learn>=1.5
 matplotlib>=3.8
+# LSTM-AE 베이스라인(가이드북 재현). CPU 빌드: pip install torch --index-url https://download.pytorch.org/whl/cpu (확인: 2.14.0+cpu)
+torch>=2.4

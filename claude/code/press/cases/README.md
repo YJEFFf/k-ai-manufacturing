@@ -13,21 +13,15 @@ status: seed
 
 ## 실행
 
-데이터: `claude/data/3_소성가공_예지보전/`(레포) 또는 `data/3_소성가공_예지보전/`(볼트)에 `press_data_normal.csv`, `outlier_data.csv`.
+제출 zip에서는 루트의 `run_all.py`가 1단계로 `01_case_features.py`·`03_facts_extra.py`를 돌린다. `02_error_fix_score.py`는 보고서 공개 문장의 "초기 탐색"(규칙 R1·R2를 착안한 오답 해부)이라 `run_all.py`에 넣지 않았다. 따로 보려면 압축을 푼 폴더 루트에서 돌린다. 원본 데이터는 `data/3_소성가공_예지보전/`, v2 행별 예측은 `code/press/cases/v2_predictions/`에 이미 들어 있다.
 
 ```bash
-# 0) 예준 v2 행별 예측 재현 (레포 루트에서. 예준 코드는 데이터를 yejun/press_submission/data/3_소성가공_예지보전/ 에서 읽는다)
-python yejun/press_guard/train.py --out /tmp/v2_out --artifacts /tmp/v2_art   # F1 A 0.961938 · B 0.970990 재현 확인
-mkdir -p claude/code/press/cases/v2_predictions
-cp /tmp/v2_out/test_predictions_A.csv /tmp/v2_out/test_predictions_B.csv claude/code/press/cases/v2_predictions/
-# 1) 케이스 특징
-cd claude/code/press/cases
-python 01_case_features.py
-# 2) 오답 해부 + 수정 + 재채점
-python 02_error_fix_score.py
+python code/press/cases/01_case_features.py     # 케이스 특징
+python code/press/cases/02_error_fix_score.py   # 초기 탐색: 오답 해부 + 수정 + 재채점
 ```
 
-`v2_predictions/`와 `outputs/predictions_fixed_*.csv`(행 단위)는 git에 올리지 않는다. 위 명령으로 다시 생긴다.
+- 아래 표는 초기 탐색 때 v2의 원래 평가 행으로 잰 값이다. 보고서의 test 값(2.4절)과는 분할이 달라 숫자가 다르다
+- `v2_predictions/`를 다시 만들려면 팀 레포에서 `yejun/press_guard/train.py`로 v2를 다시 학습한다(F1 A 0.961938 · B 0.970990, 이 zip의 `run_all.py`와는 별개)
 
 ## 결과 (α = 1%, 예준과 같은 분할·평가 행)
 
