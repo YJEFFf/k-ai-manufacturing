@@ -4,11 +4,12 @@
 예준님(Codex) 작업과 섞이지 않게 이 폴더에만 둡니다.
 
 > **최신 (10/5) — 제출 코드 패키지와 결과보고서 v5**
-> - 결과보고서: [`report/결과보고서_북적북적.pdf`](report/결과보고서_북적북적.pdf) (32쪽, 한글 원본 `.hwpx`도 같은 폴더)
-> - 제출 코드 zip: [`submission/북적북적_code.zip`](submission/북적북적_code.zip) (3.1MB, 원본 CSV 2개 포함. 풀어서 `python run_all.py`)
+> - 결과보고서: [`report/결과보고서_북적북적.pdf`](report/결과보고서_북적북적.pdf) (33쪽, 한글 원본 `.hwpx`도 같은 폴더)
+> - 10/5 예준 검수 반영: 지적별 판정과 이유는 [`report/logs/review_response_2026-10-05.md`](report/logs/review_response_2026-10-05.md)
+> - 제출 코드 zip: [`submission/북적북적_code.zip`](submission/북적북적_code.zip) (3.2MB, 원본 CSV 2개와 test 예측결과 `predictions/` 포함. 풀어서 `python run_all.py`)
 > - 진행 상황: 보고서·코드 zip 완료. 남은 일은 만족도 조사 캡처 교체(지금은 양식의 예시 그림), 발표자료, 10/8 KAMP 제출
-> - 제출 코드: [`submission/package_files/README.md`](submission/package_files/README.md). 압축을 풀고 `python run_all.py` 하나로 전처리 → 학습 → test 예측 → 보고서 수치 19개 대조까지 돈다
-> - 새 가상환경(파이썬 3.13, 패키지 판 고정)에서 전체 실행해 19/19 일치, 약 56분. `--quick`은 약 13분
+> - 제출 코드: [`submission/package_files/README.md`](submission/package_files/README.md). 압축을 풀고 `python run_all.py` 하나로 전처리 → 학습 → test 예측 → 보고서 수치 21개 대조까지 돈다
+> - 새 가상환경(파이썬 3.13, 패키지 판 고정)에서 전체 실행해 21/21 일치, 약 56~80분(PC 부하에 따라). `--quick`은 약 13분
 > - zip 만들기: `python claude/submission/make_package.py --repo .` (레포 루트에서. 원본 CSV 2개를 `claude/data/3_소성가공_예지보전/`에 먼저 넣는다)
 > - 보고서 원고: [`report/final_v5.md`](report/final_v5.md), 판단 기록: [`report/logs/decision_log_v5.md`](report/logs/decision_log_v5.md)
 > - 코드는 동작을 바꾸지 않고 줄이고 한글 주석을 달았다(고치기 전후 산출물 해시 같음)

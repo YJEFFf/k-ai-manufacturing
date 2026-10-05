@@ -125,7 +125,7 @@ def fig_miss_position():
 
 # 모델 비교 그림의 막대 순서와 표시 이름(내부 이름 H1·H2 = 보고서의 R1·R2)
 NAMES = {"iforest": "IsolationForest", "lstm20": "LSTM-AE(20행)", "maxz3": "max|z|", "knn5": "5NN", "mlp_ae5": "MLP-AE(5행)",
-         "v1": "팀원 v1", "v2": "팀원 v2", "v2+C1d1": "v2+v3 조건부", "v2+H1": "v2+R1(잠금 선택)", "v2+H1+H2": "v2+R1+R2(최종)"}
+         "v1": "v1", "v2": "기반 모델 v2", "v2+C1d1": "v2+v3 조건부", "v2+H1": "v2+R1(잠금 선택)", "v2+H1+H2": "v2+R1+R2(최종)"}
 
 
 def fig_models():
@@ -186,7 +186,7 @@ def fig_leak():
 
 
 def fig_console():
-    """[그림 11] 팀원 콘솔 화면 캡처의 위쪽 1300픽셀만 잘라 쓴다."""
+    """[그림 11] Press Guard 콘솔 화면 캡처의 위쪽 1300픽셀만 잘라 쓴다."""
     from PIL import Image
     img = Image.open(HERE / "console_source" / "console_workspace_v2.png")
     img.crop((0, 0, img.width, min(img.height, 1300))).save(FIG / "fig7_console.png")
@@ -199,9 +199,9 @@ def fig_observability():
     rows = [  # (이름, 시작 Hz, 끝 Hz, 색, 근거)
         ("프레스 행정 주기(수십~최대 100spm)", 0.3, 1.7, A, "추정"),
         ("모터 회전 1X·2X(4극 가정 약 29·59Hz)", 28, 60, GREY, "가정"),
-        ("전원 60Hz와 홀수 고조파 180·300·420Hz", 60, 420, B, "전류에서 확인"),
+        ("전원 60Hz와 홀수 고조파 180·300·420Hz", 60, 420, B, "전류 고조파와 부합(가설)"),
         ("기어 맞물림(잇수 9~12 × 회전, 약 260~350Hz)", 260, 350, GREY, "가정"),
-        ("캐비테이션 광대역(kHz)", 1000, 20000, GREY, "문헌"),
+        ("캐비테이션 고주파 광대역", 1000, 20000, GREY, "추정"),
     ]
     fig, ax = plt.subplots(figsize=(7.4, 3.0))
     ax.axvspan(0.1, 5, color="#e8f0fb", lw=0)
@@ -215,7 +215,7 @@ def fig_observability():
         ax.annotate("", xy=(f_app, 2.5 - 0.35), xytext=(f_src, 2.5 - 0.1),
                     arrowprops=dict(arrowstyle="-|>", color=B, lw=0.9, ls="--", connectionstyle="arc3,rad=0.25"))
         ax.plot(f_app, 2.15, "v", color=B, ms=4)
-    ax.text(fa * 1.15, 1.75, f"접힘: 60Hz→{fa:.2f}Hz, 180Hz→{3*fa:.2f}Hz", fontsize=7.6, color=B)
+    ax.text(fa * 1.15, 1.75, f"접힘(가설): 60Hz 계열→{fa:.2f}Hz, 180Hz→{3*fa:.2f}Hz", fontsize=7.6, color=B)
     ax.set_xscale("log"); ax.set_xlim(0.1, 30000); ax.set_ylim(0, len(rows) + 0.6); ax.set_yticks([])
     ax.set_xticks([0.1, 1, 5, 10, 100, 1000, 10000], ["0.1", "1", "5", "10", "100", "1k", "10k"])
     ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())

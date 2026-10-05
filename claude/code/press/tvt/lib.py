@@ -37,7 +37,7 @@ def repo_arg(argv=None):
     """--repo 인자 또는 PRESS_REPO 환경변수에서 팀 레포 경로를 받는다."""
     ap = argparse.ArgumentParser()
     ap.add_argument("--repo", type=Path, default=os.environ.get("PRESS_REPO"),
-                    help="팀 레포(YJEFFf/k-ai-manufacturing) 클론 경로. 데이터는 yejun/press_submission/data/3_소성가공_예지보전/")
+                    help="팀 레포 클론 경로. 데이터는 yejun/press_submission/data/3_소성가공_예지보전/")
     args = ap.parse_args(argv)
     if args.repo is None:
         raise SystemExit("--repo 또는 PRESS_REPO 환경변수로 팀 레포 경로를 지정한다")

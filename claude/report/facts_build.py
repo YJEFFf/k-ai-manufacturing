@@ -95,6 +95,18 @@ add("precursor.count", len(pre), len(pre), CASES / "precursor_scan.csv", "rows")
 add("precursor.r2_min", pre.cur_sine_r2.min(), fmt(pre.cur_sine_r2.min(), 3), CASES / "precursor_scan.csv", "cur_sine_r2 min")
 add("precursor.r2_max", pre.cur_sine_r2.max(), fmt(pre.cur_sine_r2.max(), 3), CASES / "precursor_scan.csv", "cur_sine_r2 max")
 
+# ---- 2.4절 † 열: 기록 하나를 1개로 센 F1(tvt/06, 사후) ----
+RC = TVT / "tvt_record_count.csv"
+rcount = pd.read_csv(RC)
+for r in rcount.itertuples():
+    loc = f"{r.regime}/{r.model}/{r.split}"
+    add(f"reccount.{loc}.f1", r.rec_f1, fmt(r.rec_f1, 3), RC, loc)
+    add(f"reccount.{loc}.tp", r.rec_tp, int(r.rec_tp), RC, loc + "/tp")
+    add(f"reccount.{loc}.fp", r.rec_fp, int(r.rec_fp), RC, loc + "/fp")
+_v2b = rcount.query("split == 'B' and regime == 'test' and model == 'v2'").iloc[0]
+assert (round(_v2b.rec_f1, 3), _v2b.rec_tp, _v2b.rec_fp) == (0.88, 11, 3), _v2b
+assert set(rcount.query("regime == 'test' and model == 'v2+H1+H2'").rec_f1) == {1.0}
+
 # ---- 2·3장: 모델 비교 ----
 test = pd.read_csv(TVT / "tvt_test.csv")
 valid = pd.read_csv(TVT / "tvt_valid.csv")
@@ -288,8 +300,9 @@ EXT = [
     ("regB.pct_hi", 99.6, "99.6", "06 records B 학습 기준 분위"),
     ("env.python", 3.13, "3.13", "실행 환경 파이썬 판"),
     ("env.python_old", 3.12, "3.12", "팀원 예전 환경 파일 판"),
-    ("run.full_min", 56, "56", "새 환경 run_all.py 전체 56.2분"),
-    ("run.checks", 19, "19", "run_all.py 결과 대조 19/19"),
+    ("run.full_min", 80, "80", "새 환경(bj_full2) run_all.py 전체 80분, 10/5"),
+    ("run.checks", 21, "21", "run_all.py 결과 대조 21/21"),
+    ("run.full_min_solo", 56, "56", "10/4 단독 실행 run_all.py 전체 56.2분"),
 ]
 for fid, v, shown, src in EXT:
     add(fid, v, shown, "report/research", src)

@@ -66,11 +66,11 @@ def build_expected():
     meta = json.loads((tvt / "tvt_scores_meta.json").read_text(encoding="utf-8"))
     checks = []
     for s in ("A", "B"):
-        checks.append(dict(name=f"팀원 v2 원래 평가 재현 F1 {s}", kind="json", file="code/press/tvt/outputs/tvt_scores_meta.json",
+        checks.append(dict(name=f"기반 모델 v2 원래 평가 재현 F1 {s}", kind="json", file="code/press/tvt/outputs/tvt_scores_meta.json",
                            path=[s, "v2_original_protocol", "f1"], value=meta[s]["v2_original_protocol"]["f1"], quick=True, report="(6장)"))
     # LSTM은 학습 난수 때문에 값이 조금 흔들려 허용 오차를 넓게 둔다
     for model, label, tol, rep in (("v2+H1+H2", "최종 v2+R1+R2", 1e-9, "(2.4절 표)"), ("v2+H1", "잠금 선택 v2+R1", 1e-9, "(2.5절)"),
-                                   ("v2", "팀원 v2", 1e-9, "(2.4절 표)"), ("lstm20", "LSTM 오토인코더", 0.05, "(2.4절 표, 학습 난수로 소폭 변동 가능)")):
+                                   ("v2", "기반 모델 v2", 1e-9, "(2.4절 표)"), ("lstm20", "LSTM 오토인코더", 0.05, "(2.4절 표, 학습 난수로 소폭 변동 가능)")):
         for s in ("A", "B"):
             where = dict(split=s, alpha="0.01", model=model, mode="realtime")
             checks.append(dict(name=f"test 실시간 행 F1 {label} {s}", kind="csv", file="code/press/tvt/outputs/tvt_test.csv",
@@ -99,6 +99,11 @@ def build_expected():
         where = dict(scheme="gmm", grouping="state", split="B", alpha="0.05", part="valid+test", state="busy_high", model=model)
         checks.append(dict(name=f"분할 B 고부하 정상 오경보 기록 {label}(α 5%)", kind="csv", file="code/press/domain/outputs/06_operating_regime.csv",
                            where=where, column="fa_records", value=csv_value(dom / "06_operating_regime.csv", where, "fa_records"), report="(3.2절 표)"))
+    # 기록 하나를 1개로 센 F1(사후, 2.4절 표 † 열)
+    for model, label in (("v2", "기반 모델 v2"), ("v2+H1+H2", "최종 v2+R1+R2")):
+        where = dict(split="B", regime="test", model=model)
+        checks.append(dict(name=f"test 기록 수 F1 {label} B", kind="csv", file="code/press/tvt/outputs/tvt_record_count.csv",
+                           where=where, column="rec_f1", value=csv_value(tvt / "tvt_record_count.csv", where, "rec_f1"), report="(2.4절 표 †)"))
     return dict(note="보고서 작성 때(2026-10-04) 볼트 산출물에서 뽑은 값. run_all.py가 실행 뒤 같은 위치의 값과 비교한다",
                 checks=checks)
 
@@ -128,6 +133,10 @@ def main():
     # 실행 파일·문서·환경 파일(파이썬 3.13)
     for f in (HERE / "package_files").iterdir():
         shutil.copy2(f, stage / f.name)
+    # 제출 예측 파일(공고 필수 "테스트데이터 예측결과 파일"). run_all.py도 실행 끝에 같은 파일을 다시 만든다
+    (stage / "predictions").mkdir()
+    for s in ("A", "B"):
+        shutil.copy2(PRESS / "tvt" / "outputs" / f"test_predictions_{s}.csv", stage / "predictions" / f"test_predictions_{s}.csv")
     (stage / "expected_results.json").write_text(json.dumps(build_expected(), ensure_ascii=False, indent=2), encoding="utf-8")
     # 압축: 최상위 폴더 이름을 북적북적_code로 둔다
     zpath = HERE / f"{NAME}.zip"

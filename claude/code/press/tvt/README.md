@@ -44,7 +44,7 @@ status: seed
 
 ## 결과 (α 1%)
 
-| 모델 | valid F1 (A·B 평균) | test 실시간 F1 A / B | test 기록 단위 F1 A / B |
+| 모델 | valid F1 (A·B 평균) | test 실시간 F1 A / B | test 기록 판정 F1 A / B(행 가중) |
 |---|---:|---:|---:|
 | **v2 + R1 + R2** (최종, valid 공동 1위 3개 중 가장 단순) | 0.9982 | **1.000 / 1.000** | **1.000 / 1.000** |
 | v2 + R1 (잠금 규칙의 선택) | 0.9973 | 1.000 / 0.9954 | 1.000 / 0.818 |
@@ -76,7 +76,8 @@ status: seed
 python 01_scores.py --repo <레포>      # 모든 후보 점수 (LSTM 학습 포함, 처음 약 10분)
 python 02_select_on_valid.py           # valid 채점·선택·판정 기준 기록·잠금
 python 03_score_test.py --repo <레포>  # 잠금 확인 후 test 1회 채점·가설 판정
+python 06_record_count.py             # (사후) 기록 하나를 1개로 센 F1. 선택에 쓰지 않음
 ```
 
 - pandas 3은 시각을 마이크로초로 읽는다. v3 코드는 나노초를 가정하므로 `01`에서 나노초로 바꿔 넘긴다
-- 출력: `outputs/tvt_valid.csv`, `tvt_selection.json`(+`.sha256`), `tvt_test.csv`, `tvt_hypotheses.json`, `tvt_summary.md`, `tvt_scores_meta.json`
+- 출력: `outputs/tvt_valid.csv`, `tvt_selection.json`(+`.sha256`), `tvt_test.csv`, `tvt_hypotheses.json`, `tvt_summary.md`, `tvt_scores_meta.json`, `tvt_record_count.csv`(06)

@@ -26,7 +26,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "data" / "3_소성가공_예지보전"
-# 팀원 모듈(press_submission)은 자기 폴더 아래 이 위치에서 원본을 읽는다
+# v2 모듈(press_submission)은 자기 폴더 아래 이 위치에서 원본을 읽는다
 TEAM_DATA = ROOT / "yejun" / "press_submission" / "data" / "3_소성가공_예지보전"
 LOGS = ROOT / "logs"
 PRED = ROOT / "predictions"
@@ -51,6 +51,7 @@ STEPS = [
     ("4_사후_순차검출", "code/press/domain/04_sequential_uncertainty.py", [], False, "CUSUM·EWMA·불확실성·경보 지표(사후)"),
     ("4_사후_지도학습대조", "code/press/domain/05_supervised_confound.py", [], False, "지도학습 대조와 세션 교락 시험(사후)"),
     ("4_사후_운전상태", "code/press/domain/06_operating_regime.py", [], False, "운전 상태별 오경보(사후)"),
+    ("4_사후_기록수F1", "code/press/tvt/06_record_count.py", [], False, "기록 하나를 1개로 센 F1(사후, 선택에 쓰지 않음)"),
 ]
 
 
@@ -83,7 +84,7 @@ def check_environment():
 
 
 def place_data():
-    """원본 CSV 해시를 확인하고 팀원 모듈이 읽는 위치에 복사한다."""
+    """원본 CSV 해시를 확인하고 v2 모듈이 읽는 위치에 복사한다."""
     TEAM_DATA.mkdir(parents=True, exist_ok=True)
     for name, digest in CSV_SHA256.items():
         src = DATA / name
@@ -100,7 +101,7 @@ def place_data():
 def run_step(name, script, args):
     """단계 하나를 별도 프로세스로 돌리고 (종료 코드, 걸린 초)를 돌려준다. 출력은 logs/<단계>.log 로."""
     LOGS.mkdir(exist_ok=True)
-    # UTF-8 강제: 한국어 윈도우 기본 인코딩(CP949)에서 한글 출력·파일 읽기가 깨지지 않게. PRESS_REPO: 팀원 모듈 위치
+    # UTF-8 강제: 한국어 윈도우 기본 인코딩(CP949)에서 한글 출력·파일 읽기가 깨지지 않게. PRESS_REPO: v1·v2·v3 모듈 위치
     env = dict(os.environ, PYTHONIOENCODING="utf-8", PYTHONUTF8="1", PRESS_REPO=str(ROOT), MPLBACKEND="Agg")
     t0 = time.time()
     with open(LOGS / f"{name}.log", "w", encoding="utf-8") as log:
