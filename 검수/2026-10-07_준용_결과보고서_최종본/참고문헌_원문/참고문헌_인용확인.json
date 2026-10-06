@@ -1,0 +1,879 @@
+{
+  "작성일": "2026-10-07",
+  "기준_보고서": "claude/report/final_v5.md (커밋 74e6be3) / 결과보고서 PDF = claude/report/결과보고서_북적북적.pdf (42쪽)",
+  "읽는_법": "보고서_위치의 쪽수는 결과보고서 PDF 쪽. 원문_위치의 'PDF n쪽'은 파일을 표지부터 센 뷰어 쪽이고 괄호는 인쇄 쪽. 원문_문장의 '원문'은 원문 그대로(…는 생략), '해석'은 한국어 번역이다(한국어 원문은 해석 생략). 원문이 없거나 잘못 참고한 인용은 참고문헌_확인필요.md에 있다.",
+  "여기에_없는_번호": {
+    "23": "내삽 표시 문제(문헌 값만 여기 수록)"
+  },
+  "참고문헌": [
+    {
+      "번호": 1,
+      "문헌": "Kapoor, S., Narayanan, A. (2023). Leakage and the reproducibility crisis in machine-learning-based science. Patterns 4(9), 100804.",
+      "파일": "원문/01_Kapoor_Narayanan_2023_Leakage_Reproducibility.pdf",
+      "인용": [
+        {
+          "보고서_위치": "1.6절 데이터 결함 진단, 결과보고서 PDF 8쪽",
+          "보고서_문장": "누수는 ML 성능을 부풀리는 대표적 원인이다[1].",
+          "원문_위치": "PDF 3쪽(논문 2쪽), Introduction의 'Leakage.' 문단, 왼쪽 단 위",
+          "원문_문장": [
+            {
+              "원문": "Data leakage is a spurious relationship between the independent variables and the target variable that arises as an artifact of the data collection, sampling, or pre-processing strategy.",
+              "해석": "데이터 누수는 자료 수집·표본 추출·전처리 방식에서 생긴 인공물로, 독립변수와 목표변수 사이에 나타나는 거짓 관계다."
+            },
+            {
+              "원문": "Because the spurious relationship will not be present in the distribution about which scientific claims are made, leakage usually leads to inflated estimates of model performance.",
+              "해석": "이 거짓 관계는 과학적 주장의 대상이 되는 분포에는 존재하지 않으므로, 누수는 대개 모델 성능을 부풀려 추정하게 만든다."
+            },
+            {
+              "원문": "Data leakage has long been recognized as a leading cause of errors in ML applications.",
+              "해석": "데이터 누수는 오래전부터 머신러닝 응용에서 오류의 주요 원인으로 알려져 왔다."
+            }
+          ],
+          "찾기_검색어": "inflated estimates",
+          "판정": "뒷받침함",
+          "비고": "'대표적 원인'에 해당하는 셋째 문장은 저자들이 이 논문의 참고문헌 9번을 인용한 문장이다. 보조 근거: PDF 1쪽 Highlights 'Data leakage is a flaw in machine learning that leads to overoptimistic results'."
+        },
+        {
+          "보고서_위치": "2.4절 같은 조건의 모델 비교(지도학습 대조), 결과보고서 PDF 20쪽",
+          "보고서_문장": "이상–정상 분리(0.93~1.00)는 같은 날 안의 표류보다 크고 한결같지만 정상과 이상은 5일 떨어진 다른 세션이라 그 원인이 고장인지 세션 차이인지 가를 수 없다[1].",
+          "원문_위치": "PDF 3쪽(논문 2쪽), Introduction의 'Leakage.' 문단, 왼쪽 단 위",
+          "원문_문장": [
+            {
+              "원문": "Data leakage is a spurious relationship between the independent variables and the target variable that arises as an artifact of the data collection, sampling, or pre-processing strategy.",
+              "해석": "데이터 누수는 자료 수집·표본 추출·전처리 방식에서 생긴 인공물로, 독립변수와 목표변수 사이에 나타나는 거짓 관계다."
+            }
+          ],
+          "찾기_검색어": "artifact of the data collection",
+          "판정": "뒷받침함",
+          "비고": "원문은 '자료 수집에서 생긴 거짓 관계'라는 일반 정의만 준다. 이 데이터에서 세션 차이를 가를 수 없다는 판단은 팀 분석이다."
+        }
+      ]
+    },
+    {
+      "번호": 2,
+      "문헌": "Kim, S. et al. (2022). Towards a rigorous evaluation of time-series anomaly detection. AAAI 36(7):7194–7201.",
+      "파일": "원문/02_Kim_2022_Rigorous_Evaluation_Time_Series_Anomaly.pdf",
+      "인용": [
+        {
+          "보고서_위치": "1.7절 전처리와 검증 전략, 결과보고서 PDF 10쪽",
+          "보고서_문장": "이상 구간에서 한 점만 맞혀도 구간 전체를 맞힌 것으로 치는 point-adjust 방식은 성능을 부풀리므로 쓰지 않았다[2].",
+          "원문_위치": "PDF 1쪽(논문 7194쪽), Abstract와 1. Introduction 오른쪽 단",
+          "원문_문장": [
+            {
+              "원문": "In this paper, we theoretically and experimentally reveal that the PA protocol has a great possibility of overestimating the detection performance; even a random anomaly score can easily turn into a state-of-the-art TAD method.",
+              "해석": "이 논문에서 우리는 PA(point adjustment) 방식이 탐지 성능을 과대평가할 가능성이 크다는 것을 이론과 실험으로 밝힌다. 무작위 이상 점수조차 쉽게 최고 수준의 시계열 이상탐지 기법이 될 수 있다."
+            },
+            {
+              "원문": "PA works as follows: if at least one moment in a contiguous anomaly segment is detected as an anomaly, the entire segment is then considered to be correctly predicted as anomaly.",
+              "해석": "PA는 이렇게 작동한다. 연속된 이상 구간에서 한 시점이라도 이상으로 탐지되면 그 구간 전체를 이상으로 올바르게 예측한 것으로 간주한다."
+            }
+          ],
+          "찾기_검색어": "PA works as follows",
+          "판정": "뒷받침함"
+        }
+      ]
+    },
+    {
+      "번호": 3,
+      "문헌": "ISO 13379-1:2012 Condition monitoring and diagnostics of machines — Data interpretation and diagnostics techniques — Part 1: General guidelines.",
+      "파일": "공개미리보기/03_ISO_13379-1_2012_공개미리보기.pdf",
+      "인용": [
+        {
+          "보고서_위치": "2.1절 고장 모드 진단 매트릭스와 목표 설정, 결과보고서 PDF 11쪽",
+          "보고서_문장": "ISO 13379-1의 고장 모드–증상 분석 틀[3]로, 1.3절의 고장 모드마다 이 데이터의 관찰과 맞는지 따졌다.",
+          "원문_위치": "공개 미리보기 PDF 8쪽(표준 본문 2쪽), 4.3 Failure mode symptoms analysis → 4.3.1",
+          "원문_문장": [
+            {
+              "원문": "The steps given in c), d), e), f), g), h) and i) may be followed using the FMSA (failure mode symptoms analysis) methodology explained in 4.3.",
+              "해석": "c)~i)의 단계는 4.3에서 설명하는 FMSA(고장 모드–증상 분석) 방법론으로 수행할 수 있다."
+            },
+            {
+              "원문": "4.3.1 Process of failure mode symptoms analysis — The aim of this process is to select monitoring technologies and strategies that maximize the confidence level in the diagnosis and prognosis of any given failure mode.",
+              "해석": "4.3.1 고장 모드–증상 분석 절차 — 이 절차의 목적은 각 고장 모드의 진단과 예지에서 신뢰 수준을 최대로 높이는 감시 기술과 전략을 고르는 것이다."
+            }
+          ],
+          "찾기_검색어": "Failure mode symptoms analysis",
+          "판정": "뒷받침함",
+          "비고": "표준 전체가 아닌 공개 미리보기로 확인했다. 틀(FMSA)의 존재와 목적만 확인했고 표준 절차를 그대로 따랐다는 뜻은 아니다."
+        }
+      ]
+    },
+    {
+      "번호": 4,
+      "문헌": "Laxhammar, R., Falkman, G. (2015). Inductive conformal anomaly detection for sequential detection of anomalous sub-trajectories. Ann. Math. Artif. Intell. 74:67–94 (온라인 선공개 2013).",
+      "파일": "원문/04_Laxhammar_Falkman_2015_ICAD_Ann_Math_Artif_Intell.pdf",
+      "인용": [
+        {
+          "보고서_위치": "2.3절 모델 구성, 결과보고서 PDF 14쪽",
+          "보고서_문장": "각 성분을 정상 꼬리 확률의 −log10 척도로 바꿔 최댓값(가장 드문 성분)을 점수로 쓰고 valid 정상 기록의 최대 점수로 conformal 문턱을 정한다[4].",
+          "원문_위치": "PDF 10–11쪽, 3.4 The inductive conformal anomaly detector와 Algorithm 2 / PDF 11쪽, 3.5 Offline and semi-offline inductive conformal anomaly detection",
+          "원문_문장": [
+            {
+              "원문": "More specifically, the training set is split into the proper training set (z1,..., zm) of size m < l and the calibration set (zm+1,..., zl) of size l − m. Further, the nonconformity score αi is precomputed for each example zi : i = m + 1,..., l of the calibration set relative to the proper training set.",
+              "해석": "구체적으로, 학습 자료를 크기 m의 본 학습 집합과 크기 l − m의 보정 집합으로 나눈다. 그리고 보정 집합의 각 예제마다 본 학습 집합에 대한 비순응(nonconformity) 점수를 미리 계산해 둔다."
+            },
+            {
+              "원문": "Given a test example zl+1, ICAD calculates the nonconformity score αl+1 for zl+1 relative to the proper training set. Next, pl+1 is estimated by comparing αl+1 with the precomputed nonconformity scores (αm+1,...,αl)",
+              "해석": "시험 예제가 들어오면 ICAD는 본 학습 집합에 대한 그 예제의 비순응 점수를 계산하고, 이를 미리 계산해 둔 보정 집합 점수들과 비교해 p값을 추정한다."
+            },
+            {
+              "원문": "Algorithm 2 The Inductive Conformal Anomaly Detector (ICAD) — Input: Nonconformity measure A, anomaly threshold ϵ ∈ (0, 1), … 3: if pl+1 < ϵ then 4: Anomϵl+1 ← 1",
+              "해석": "알고리즘 2 귀납적 conformal 이상탐지기(ICAD) — 입력: 비순응 척도 A, 이상 문턱 ϵ … p값이 ϵ보다 작으면 이상(1)으로 판정한다."
+            },
+            {
+              "원문": "For each test example zn : n = l + 1,..., N the offline ICAD reuses the same proper training set (z1,..., zm) and sequence of precomputed nonconformity scores (αm+1,...,αl). Similar to the offline CAD, the unconditional probability that zn is classified as a conformal anomaly is bounded by ϵ under the assumption that (zm+1,..., zl) and zn are IID. Yet, the empirical rate of detected anomalies for the offline ICAD may still be significantly higher than ϵ since the sequence of random variables Anomϵl+1,..., AnomϵN are not independent.",
+              "해석": "오프라인 ICAD는 모든 시험 예제에 같은 본 학습 집합과 같은 보정 점수를 다시 쓴다. 보정 집합과 시험 예제가 IID라는 가정 아래, 한 예제가 이상으로 분류될 무조건부 확률은 ϵ 이하로 제한된다. 그러나 판정들이 서로 독립이 아니므로, 실제로 탐지되는 이상의 비율은 ϵ보다 크게 높을 수 있다."
+            }
+          ],
+          "찾기_검색어": "calibration set / 3.4 The inductive",
+          "판정": "뒷받침함",
+          "비고": "보고서는 오프라인 ICAD 방식(정상 학습 = 본 학습 집합, valid 정상 = 보정 집합, 보정 집합 고정)에 해당한다. 'valid 정상 기록의 최대 점수'를 보정 점수로 쓰는 기록 단위 설계는 팀 설계다. 3.5절이 말하듯 고정 보정 집합에서는 실제 오경보율이 ϵ보다 높을 수 있는데, 보고서 2.5절도 '오경보율을 α로 보장하지는 않으므로 실제 오경보율을 분할마다 보고했다'고 적어 이와 맞는다. 받은 파일은 2013년 온라인 선공개판(DOI 10.1007/s10472-013-9381-7, 28쪽)이라 권호 쪽수(74:67–94)가 찍혀 있지 않다."
+        },
+        {
+          "보고서_위치": "2.3절 모델·규칙 설정 표 '점수·경보 문턱' 행, 결과보고서 PDF 15쪽",
+          "보고서_문장": "| 점수·경보 문턱 | 세 성분의 꼬리 점수(꼬리 확률의 −log10 척도) | 최댓값을 점수로, conformal 문턱 α 1% | valid 정상 기록별 최대 점수 | v2 설계, 방식은 [4] |",
+          "원문_위치": "PDF 11쪽, Algorithm 2",
+          "원문_문장": [
+            {
+              "원문": "Algorithm 2 The Inductive Conformal Anomaly Detector (ICAD) — Input: Nonconformity measure A, anomaly threshold ϵ ∈ (0, 1), … 3: if pl+1 < ϵ then 4: Anomϵl+1 ← 1",
+              "해석": "알고리즘 2 귀납적 conformal 이상탐지기(ICAD) — 입력: 비순응 척도 A, 이상 문턱 ϵ … p값이 ϵ보다 작으면 이상(1)으로 판정한다."
+            }
+          ],
+          "찾기_검색어": "Algorithm 2",
+          "판정": "뒷받침함",
+          "비고": "표의 α 1%가 Algorithm 2의 이상 문턱 ϵ에 해당한다."
+        }
+      ]
+    },
+    {
+      "번호": 5,
+      "문헌": "ANSI/ISA-18.2-2009 Management of Alarm Systems for the Process Industries (보고서 참고문헌에는 exida 백서 Table 1도 병기).",
+      "파일": "원문/05_ANSI_ISA-18.2-2009_Management_of_Alarm_Systems.pdf (원표준), 재인용출처/05_exida_Alarm_Management_ISA18_재인용백서.pdf (백서)",
+      "인용": [
+        {
+          "보고서_위치": "2.3절 모델 구성, 규칙 R1의 '근거' 항목, 결과보고서 PDF 14쪽",
+          "보고서_문장": "산업 경보 관리로 보면 조건이 사라진 뒤에도 경보를 일정 기준까지 유지하는 OFF-delay·래치 계열이다[5]. 운전원 리셋 대신 전류 파형의 정상 확인으로 자동 해제한다는 점이 표준 래치와 다르다.",
+          "원문_위치": "원표준 PDF 15쪽(인쇄 15쪽) 3.1.16 / PDF 17쪽 3.1.48 / PDF 18쪽 3.1.60 / PDF 49쪽 10.4.3 Alarm On-Delay and Off-Delay",
+          "원문_문장": [
+            {
+              "원문": "3.1.16 Alarm off-delay (Debounce) — The time a process measurement remains in the normal state before the alarm is cleared.",
+              "해석": "3.1.16 경보 off-delay(디바운스) — 공정 측정값이 정상 상태로 돌아온 뒤 경보가 해제되기 전까지 정상 상태로 머무는 시간."
+            },
+            {
+              "원문": "The off-delay is used to reduce chattering alarms by locking in the alarm indication for a certain holding period after it has cleared.",
+              "해석": "off-delay는 (조건이) 해제된 뒤에도 일정 유지 시간 동안 경보 표시를 붙잡아 두어, 켜졌다 꺼졌다를 반복하는 경보(chattering)를 줄이는 데 쓴다."
+            },
+            {
+              "원문": "3.1.48 Latching alarm — An alarm that remains in alarm state after the process has returned to normal and requires an operator reset before it will clear.",
+              "해석": "3.1.48 래치 경보 — 공정이 정상으로 돌아온 뒤에도 경보 상태로 남아 있고, 해제되려면 운전원의 리셋이 필요한 경보."
+            },
+            {
+              "원문": "3.1.60 Reset — The operator action that unlatches a latched alarm.",
+              "해석": "3.1.60 리셋 — 래치된 경보를 풀어 주는 운전원의 조치."
+            }
+          ],
+          "찾기_검색어": "Alarm off-delay / Latching alarm",
+          "판정": "뒷받침함",
+          "비고": "off-delay는 정해진 시간만큼, 래치는 운전원 리셋까지 경보를 유지한다. 보고서의 'R1은 운전원 리셋 대신 전류 파형 정상 확인으로 자동 해제한다는 점이 표준 래치와 다르다'도 3.1.48의 정의와 맞는다. 다만 표준에서 off-delay의 목적은 chattering 경보 감소이고, R1의 목적(수집 공백을 넘어 사건 유지)과는 다르다."
+        },
+        {
+          "보고서_위치": "2.5절 최종 모델 선정(경보 운영 지표), 결과보고서 PDF 22쪽",
+          "보고서_문장": "산업 경보 관리 기준(운전원당 시간당 약 6건 이하면 수용 가능성이 매우 높음)[5]과 맞춰 보려면 더 긴 정상 기록이 필요하다.",
+          "원문_위치": "백서 PDF 8쪽, Table 1 - ISA-18.2 Alarm Performance Metrics",
+          "원문_문장": [
+            {
+              "원문": "Table 1 - ISA-18.2 Alarm Performance Metrics — Based upon at least 30 days of data",
+              "해석": "표 1 - ISA-18.2 경보 성능 지표 — 최소 30일간의 자료 기준"
+            },
+            {
+              "원문": "Annunciated Alarms Per Hour per Operating Position: ~6 (average) [Target Value: Very Likely to be Acceptable], ~12 (average) [Target Value: Maximum Manageable]",
+              "해석": "운전 위치(운전원)당 시간당 표시 경보 수: 평균 약 6건[목표값: 수용 가능성이 매우 높음], 평균 약 12건[목표값: 감당 가능한 최대]"
+            }
+          ],
+          "찾기_검색어": "Annunciated Alarms Per Hour",
+          "판정": "뒷받침함",
+          "비고": "원표준이 아니라 보고서가 참고문헌에 밝힌 재인용 백서로 확인했다. 지표는 30일 이상 자료 기준의 운영 포지션별 전체 경보량이다. 원표준에서도 같은 값을 확인했다(16.5.1 Figure 12, PDF 73쪽).",
+          "원표준_확인": {
+            "원표준 위치": "원표준 PDF 73쪽 16.5.1 Average Annunciated Alarm Rate per Operating Position, Figure 12 / PDF 76쪽 16.9 Figure 14",
+            "원표준 문장": [
+              {
+                "원문": "Very Likely to be Acceptable: ~6 Alarms per hour (average) / Maximum Manageable: ~12 Alarms per hour (average) (Figure 12 – Average Alarm Rates)",
+                "해석": "수용 가능성이 매우 높음: 시간당 평균 약 6건 / 감당 가능한 최대: 시간당 평균 약 12건 (그림 12 – 평균 경보율)"
+              },
+              {
+                "원문": "Recommended targets for the average annunciated alarm rate per operating position (i.e., the span of control and alarm responsibility of a single operator) based upon one month of data are shown in Figure 12.",
+                "해석": "운전 위치(운전원 한 명이 맡는 제어·경보 범위)당 평균 표시 경보율의 권장 목표를 한 달 자료 기준으로 그림 12에 제시한다."
+              }
+            ]
+          }
+        },
+        {
+          "보고서_위치": "4.3절 경보 운영 기준(경보량 목표), 결과보고서 PDF 34쪽",
+          "보고서_문장": "운전원 한 명의 경보 예산(시간당 약 6건)[5]의 약 60%에 해당하는 참고치(묶음 전 기록 수 기준)라 다른 경보와 합쳐 관리해야 한다.",
+          "원문_위치": "백서 PDF 8쪽, Table 1",
+          "원문_문장": [
+            {
+              "원문": "Annunciated Alarms Per Hour per Operating Position: ~6 (average)",
+              "해석": "운전 위치(운전원)당 시간당 표시 경보 수: 평균 약 6건"
+            }
+          ],
+          "찾기_검색어": "Annunciated Alarms Per Hour",
+          "판정": "뒷받침함",
+          "비고": "보고서의 시간당 3.7은 기록 수 기준이라 표의 경보 수와 단위가 다르다는 점은 보고서에 이미 '참고치'로 밝혀져 있다. 원표준에서도 같은 값을 확인했다(16.5.1 Figure 12, PDF 73쪽).",
+          "원표준_확인": {
+            "원표준 위치": "원표준 PDF 73쪽 16.5.1 Average Annunciated Alarm Rate per Operating Position, Figure 12 / PDF 76쪽 16.9 Figure 14",
+            "원표준 문장": [
+              {
+                "원문": "Very Likely to be Acceptable: ~6 Alarms per hour (average) / Maximum Manageable: ~12 Alarms per hour (average) (Figure 12 – Average Alarm Rates)",
+                "해석": "수용 가능성이 매우 높음: 시간당 평균 약 6건 / 감당 가능한 최대: 시간당 평균 약 12건 (그림 12 – 평균 경보율)"
+              },
+              {
+                "원문": "Recommended targets for the average annunciated alarm rate per operating position (i.e., the span of control and alarm responsibility of a single operator) based upon one month of data are shown in Figure 12.",
+                "해석": "운전 위치(운전원 한 명이 맡는 제어·경보 범위)당 평균 표시 경보율의 권장 목표를 한 달 자료 기준으로 그림 12에 제시한다."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "번호": 6,
+      "문헌": "MacGregor, J. F., Kourti, T. (1995). Statistical process control of multivariate processes. Control Eng. Pract. 3(3):403–414.",
+      "파일": "원문/06_MacGregor_Kourti_1995_Multivariate_SPC.pdf",
+      "인용": [
+        {
+          "보고서_위치": "2.4절 같은 조건의 모델 비교, 결과보고서 PDF 18쪽",
+          "보고서_문장": "공정 산업의 표준인 PCA 관리도(Hotelling T²·SPE)[6]는 교과서 99% 한계를 그대로 쓰면 valid 정상 기록의 49%(A)·45%(B)에서 한 행 이상 한계를 넘어, 기록 단위 운영에는 맞지 않았다(test 기록 판정 F1 0.163·0.127).",
+          "원문_위치": "PDF 4쪽(논문 406쪽), 3.2 Quality Control Charts Based on Principal Components, 식 (15)·(17)",
+          "원문_문장": [
+            {
+              "원문": "Multivariate control charts based on Hotelling's T2 can be plotted based on the first A PC's",
+              "해석": "앞의 A개 주성분을 바탕으로 Hotelling T² 기반의 다변량 관리도를 그릴 수 있다."
+            },
+            {
+              "원문": "Such new events can be detected by computing the squared prediction error (SPEy) of the residuals of new observations (Kresta et al., 1991).",
+              "해석": "이런 새로운 사건은 새 관측값 잔차의 제곱 예측 오차(SPE)를 계산해 탐지할 수 있다(Kresta 외, 1991)."
+            },
+            {
+              "원문": "This statistic is also referred to as the Q-statistic (Jackson, 1991), or distance to the model.",
+              "해석": "이 통계량은 Q 통계량(Jackson, 1991) 또는 모델까지의 거리라고도 부른다."
+            }
+          ],
+          "찾기_검색어": "squared prediction error",
+          "판정": "뒷받침함",
+          "비고": "문헌은 PCA 기반 T²·SPE 관리도의 방법 근거다. 49%·45% 같은 결과는 팀 실험 값이다. 스캔 OCR이라 기호(T², ŷ)가 깨져 보일 수 있다."
+        }
+      ]
+    },
+    {
+      "번호": 7,
+      "문헌": "Page, E. S. (1954). Continuous inspection schemes. Biometrika 41(1–2):100–115.",
+      "파일": "원문/07_Page_1954_Continuous_Inspection_Schemes.pdf",
+      "인용": [
+        {
+          "보고서_위치": "2.4절 같은 조건의 모델 비교, 결과보고서 PDF 18쪽",
+          "보고서_문장": "표준 순차 검출인 CUSUM[7]·EWMA[8]도 기록 경계에서 상태를 이어 가면 R1 수준이 된다.",
+          "원문_위치": "PDF 3쪽(논문 101쪽) 1.2 Detection of a change in the parameter / PDF 5쪽(논문 103쪽) 2.1절 Rule 1·식 (5), 2.2 A sequential scheme 식 (6)·(7) (PDF 1쪽은 JSTOR 표지)",
+          "원문_문장": [
+            {
+              "원문": "It is this problem that process inspection schemes are designed to solve; it is required to detect a deterioration in the quality of the output from a continuous production process.",
+              "해석": "공정 검사 방식은 바로 이 문제를 풀려고 만든 것이다. 즉 연속 생산 공정에서 산출물의 품질이 나빠지는 것을 탐지해야 한다."
+            },
+            {
+              "원문": "Rule 1. Take samples of fixed size N at regular intervals; assign a score x_k to the kth sample and plot the cumulative score S_n = Σ_{k=1}^{n} x_k on a chart: Take action if S_n − min_{0≤i<n} S_i ≥ h. (5)",
+              "해석": "규칙 1. 일정한 간격으로 크기 N의 표본을 뽑아 k번째 표본에 점수 x_k를 매기고, 누적 점수 S_n = Σx_k를 관리도에 그린다. S_n에서 그때까지의 최솟값을 뺀 값이 h 이상이면 조치한다."
+            },
+            {
+              "원문": "S'_n = max(S'_{n−1} + x_n, 0) (n ≥ 1), S'_0 = 0 … Take action after the nth observation if S'_n ≥ h. (7)",
+              "해석": "S'_n = max(S'_{n−1} + x_n, 0), S'_0 = 0으로 정의하면, n번째 관측 뒤 S'_n이 h 이상일 때 조치한다(식 (5)와 같은 조건)."
+            }
+          ],
+          "찾기_검색어": "cumulative score / Rule 1",
+          "판정": "뒷받침함",
+          "비고": "식 (6)·(7)이 보고서가 쓴 '상한·리셋 없는 표준형' CUSUM의 형태다. 'S'_0 = 0에서 시작'이 보고서의 '기록마다 0으로 되돌리는' 경우에 해당하고, 상태를 이어 가는 것은 팀이 비교용으로 바꾼 설정이다. 'R1 수준이 된다'는 팀 실험 결과다. 스캔본이라 수식은 쪽 이미지로 확인했다."
+        }
+      ]
+    },
+    {
+      "번호": 8,
+      "문헌": "Roberts, S. W. (1959). Control chart tests based on geometric moving averages. Technometrics 1(3):239–250.",
+      "파일": "원문/08_Roberts_1959_Geometric_Moving_Averages.pdf",
+      "인용": [
+        {
+          "보고서_위치": "2.4절 같은 조건의 모델 비교, 결과보고서 PDF 18쪽",
+          "보고서_문장": "표준 순차 검출인 CUSUM[7]·EWMA[8]도 기록 경계에서 상태를 이어 가면 R1 수준이 된다.",
+          "원문_위치": "PDF 2쪽(논문 239쪽), 초록 (PDF 1쪽은 JSTOR 표지)",
+          "원문_문장": [
+            {
+              "원문": "A geometrical moving average gives the most recent observation the greatest weight, and all previous observations weights decreasing in geometric progression from the most recent back to the first.",
+              "해석": "기하 이동평균은 가장 최근 관측값에 가장 큰 가중치를 주고, 그 이전 관측값에는 최근부터 처음까지 등비수열로 줄어드는 가중치를 준다."
+            },
+            {
+              "원문": "The properties of control chart tests based on geometric moving averages are compared to tests based on ordinary moving averages.",
+              "해석": "기하 이동평균에 기반한 관리도 검정의 성질을 일반 이동평균에 기반한 검정과 비교한다."
+            }
+          ],
+          "찾기_검색어": "geometric moving average",
+          "판정": "뒷받침함",
+          "비고": "EWMA 관리도의 원 논문이라는 방법 근거만 해당한다. 'R1 수준이 된다'는 팀 실험 결과다. CUSUM은 [7] 항목 참고."
+        }
+      ]
+    },
+    {
+      "번호": 9,
+      "문헌": "Audibert, J. et al. (2022). Do deep neural networks contribute to multivariate time series anomaly detection? Pattern Recognition 132:108945.",
+      "파일": "원문/09_Audibert_2022_DNN_Multivariate_TS_Anomaly_arXiv판.pdf",
+      "인용": [
+        {
+          "보고서_위치": "2.4절 같은 조건의 모델 비교(딥러닝을 고르지 않은 이유), 결과보고서 PDF 19쪽",
+          "보고서_문장": "다변량 시계열 이상탐지 연구에서도 단순한 방법이 딥러닝과 비슷하거나 낫다는 결과가 보고됐다[9][10].",
+          "원문_위치": "PDF 1쪽 Abstract 끝 / PDF 13쪽 Kruskal–Wallis 검정 문단 / PDF 17쪽 6. Conclusion",
+          "원문_문장": [
+            {
+              "원문": "By analyzing and comparing the performance of each of the sixteen methods, we show that no family of methods outperforms the others.",
+              "해석": "16개 방법 각각의 성능을 분석·비교한 결과, 어느 계열의 방법도 다른 계열보다 낫지 않음을 보인다."
+            },
+            {
+              "원문": "For F1, the null hypothesis was rejected only for SMD (p< 0.05). This indicated that there are no significant differences among the families of methods in four of the datasets",
+              "해석": "F1에서는 SMD 데이터셋에서만 귀무가설이 기각됐다(p<0.05). 즉 데이터셋 5개 중 4개에서는 방법 계열 간 유의한 차이가 없었다."
+            },
+            {
+              "원문": "The performance analysis did not allow us to observe a clear and consistent superiority of one category of methods over the others.",
+              "해석": "성능 분석에서 어느 한 계열의 방법이 다른 계열보다 분명하고 일관되게 우월한 모습은 관찰되지 않았다."
+            },
+            {
+              "원문": "The results show that if the training set is not large enough, the conventional methods outperform the other two categories.",
+              "해석": "결과에 따르면 학습 자료가 충분히 크지 않으면 전통적 방법이 나머지 두 계열(머신러닝·딥러닝)보다 성능이 좋다."
+            }
+          ],
+          "찾기_검색어": "no family of methods",
+          "판정": "뒷받침함",
+          "비고": "출판본(유료)이 아니라 arXiv 저자 원고 v1로 확인했다. 쪽수는 arXiv 판 기준. 결과는 공개 벤치마크(SWaT·WADI·SMD·SMAP·MSL) 기준이다."
+        }
+      ]
+    },
+    {
+      "번호": 10,
+      "문헌": "Sarfraz, M. S. et al. (2024). Position: Quo vadis, unsupervised time series anomaly detection? Proc. ICML, PMLR 235:43461–43476.",
+      "파일": "원문/10_Sarfraz_2024_Quo_Vadis_TSAD_ICML_PMLR.pdf",
+      "인용": [
+        {
+          "보고서_위치": "2.4절 같은 조건의 모델 비교(딥러닝을 고르지 않은 이유), 결과보고서 PDF 19쪽",
+          "보고서_문장": "다변량 시계열 이상탐지 연구에서도 단순한 방법이 딥러닝과 비슷하거나 낫다는 결과가 보고됐다[9][10].",
+          "원문_위치": "PDF 2쪽(논문 43462쪽), 1. Introduction의 기여 1) / PDF 9쪽, 5. Quo vadis 첫 문장",
+          "원문_문장": [
+            {
+              "원문": "1.) We introduce simple and effective baselines and demonstrate that they perform on par or better than the SOTA methods, thus challenging the efficiency and effectiveness of increasing model complexity to solve TAD problems.",
+              "해석": "1) 단순하고 효과적인 기준 모델을 제시하고, 이들이 최신(SOTA) 기법과 같거나 더 나은 성능을 냄을 보인다. 이로써 시계열 이상탐지 문제를 풀려고 모델을 복잡하게 만드는 것의 효율성과 효과에 의문을 제기한다."
+            },
+            {
+              "원문": "As we have demonstrated, a plethora of deep learning approaches introduced to solve the task of TAD were outperformed by simple neural networks and linear baselines.",
+              "해석": "보인 바와 같이, 시계열 이상탐지를 위해 제안된 수많은 딥러닝 기법이 단순한 신경망과 선형 기준 모델에 성능이 뒤졌다."
+            }
+          ],
+          "찾기_검색어": "perform on par or better",
+          "판정": "뒷받침함",
+          "비고": "공개 벤치마크(UCR/IB·SWaT·WADI·SMD) 기준. 이 논문은 test에서 최적 문턱을 고르는 관행을 따랐다고 밝혀(PDF 6쪽) 점수 자체는 보고서와 비교할 수 없다."
+        }
+      ]
+    },
+    {
+      "번호": 11,
+      "문헌": "Clopper, C. J., Pearson, E. S. (1934). The use of confidence or fiducial limits illustrated in the case of the binomial. Biometrika 26(4):404–413.",
+      "파일": "원문/11_Clopper_Pearson_1934_Binomial_Confidence.pdf",
+      "인용": [
+        {
+          "보고서_위치": "2.5절 최종 모델 선정(불확실성), 결과보고서 PDF 22쪽",
+          "보고서_문장": "불확실성: 정상 오경보 기록 0/120(A)·0/180(B)의 Clopper–Pearson 단측 95% 상한[11]은 2.47%·1.65%로 설계값(1/121 = 0.83%)보다 크다(기록을 서로 독립인 시행으로 본 참고 계산이다).",
+          "원문_위치": "PDF 2쪽(논문 404쪽), (1) General Discussion의 넷째 문단(식 (3) 바로 위)",
+          "원문_문장": [
+            {
+              "원문": "It is proposed in the present paper to illustrate on the following problem the ideas involved in this method of approach. A sample of n units is randomly drawn from a very large population in which the proportion of units bearing a certain character, A, is p.",
+              "해석": "이 논문에서는 다음 문제를 통해 이 접근법의 개념을 설명하고자 한다. 특성 A를 가진 개체의 비율이 p인 매우 큰 모집단에서 n개의 표본을 무작위로 뽑는다."
+            },
+            {
+              "원문": "In the sample x individuals bear the character A and n − x do not. p is unknown and the problem is to obtain limits p1 and p2 such that we may feel with a given degree of confidence that p1 < p < p2",
+              "해석": "표본에서 x개는 특성 A를 가지고 n − x개는 가지지 않는다. p는 모르며, 주어진 신뢰 수준으로 p1 < p < p2라고 말할 수 있는 한계 p1과 p2를 구하는 것이 문제다."
+            }
+          ],
+          "찾기_검색어": "It is proposed in the present paper",
+          "판정": "뒷받침함",
+          "비고": "JSTOR 스캔본이라 텍스트 검색이 부정확할 수 있다(쪽 이미지로 확인함). 원문은 이항 신뢰한계의 방법 근거이며, 단측 상한 2.47%·1.65%는 팀 계산이다. 독립 시행 가정은 보고서에 이미 적혀 있다."
+        }
+      ]
+    },
+    {
+      "번호": 12,
+      "문헌": "Kaya, S., Altan, T. (2007-07-10). Blanking developments – Part I: Fineblanking process and tool design. The Fabricator.",
+      "파일": "원문/12_Kaya_Altan_2007_Blanking_Developments_Part_I_웹저장.pdf",
+      "인용": [
+        {
+          "보고서_위치": "1.2절 설비 구조, 결과보고서 PDF 3쪽",
+          "보고서_문장": "파인블랭킹은 판재를 V링으로 눌러 고정하고(V링력), 아래에서 역압으로 받친 채(역압) 펀치로 절단한다(블랭킹력). 세 힘을 각각 유압 실린더로 거는 3중 동작 유압 프레스에서 한다[12].",
+          "원문_위치": "PDF 2쪽, 'What Is Fineblanking?' 절 둘째~셋째 문단 (PDF 1쪽 그림 1 설명 포함)",
+          "원문_문장": [
+            {
+              "원문": "The main purpose of these tool components is to generate compressive stresses and hold the material against horizontal movement.",
+              "해석": "(이젝터·카운터펀치와 V링) 이 공구 요소들의 주된 목적은 압축 응력을 만들고 재료가 수평으로 움직이지 않게 붙잡는 것이다."
+            },
+            {
+              "원문": "Three forces—V-ring force (FR), counterforce (FG), and blanking force (FS)—act on the blank.",
+              "해석": "블랭크에는 V링력(FR), 역압(FG), 블랭킹력(FS)의 세 힘이 작용한다."
+            },
+            {
+              "원문": "FR and FG are applied by hydraulic cylinders. In general, this operation is carried out on triple-action hydraulic presses on which the punch, guide plate, and die movements are controlled individually.",
+              "해석": "FR과 FG는 유압 실린더로 건다. 이 작업은 대개 펀치·가이드 판·다이의 움직임을 각각 따로 제어하는 3중 동작 유압 프레스에서 한다."
+            },
+            {
+              "원문": "During the beginning of the process, FR and FG are applied. These forces provide a firm clamp on the material before blanking begins. FS acts when the press moves down and completes the blanking operation.",
+              "해석": "공정 초기에 FR과 FG가 걸려 블랭킹 전에 재료를 단단히 고정한다. FS는 프레스가 움직일 때 작용해 블랭킹을 마친다."
+            }
+          ],
+          "찾기_검색어": "Three forces",
+          "판정": "뒷받침함",
+          "비고": "원문은 'FR과 FG를 유압 실린더로 건다'고 적었고, FS는 프레스(주 피스톤)의 움직임으로 건다고 설명한다. 보고서의 '세 힘을 각각 유압 실린더로'는 3중 동작 유압 프레스이므로 틀렸다고 보기 어렵지만, 원문 표현에 맞추면 'V링력·역압은 유압 실린더로, 블랭킹력은 주 램으로'가 더 정확하다. 같은 쪽의 'The slide stroke is divided into a rapid closing, touching, blanking, and rapid return travel.'(슬라이드 행정은 빠른 접근, 접촉, 블랭킹, 빠른 복귀로 나뉜다)는 [13]을 인용한 행정 단계 문장도 뒷받침한다."
+        },
+        {
+          "보고서_위치": "4.2절 경보에서 조치까지(품질 조치), 결과보고서 PDF 32쪽",
+          "보고서_문장": "파인블랭킹 품질은 V링력·역압에 달려 있으므로[12], 유압 약화가 의심되면 전단면 품질부터 본다.",
+          "원문_위치": "PDF 2쪽, 'What Is Fineblanking?' 절 셋째 문단 첫 문장 / PDF 3쪽, 'Cut Surface, Die Roll' 절",
+          "원문_문장": [
+            {
+              "원문": "Forces in fineblanking have great influence on a part's quality.",
+              "해석": "파인블랭킹의 힘들은 부품 품질에 큰 영향을 준다."
+            },
+            {
+              "원문": "In addition to the V-ring, edge preparation of the blanking plate and the punch influence the amount of die roll.",
+              "해석": "V링 외에도 블랭킹 판과 펀치의 날 가공 상태가 다이 롤(가장자리 처짐)의 양에 영향을 준다."
+            }
+          ],
+          "찾기_검색어": "great influence on a part's quality",
+          "판정": "뒷받침함",
+          "비고": "원문은 '힘들(세 힘)이 품질에 큰 영향'이라고 적었다. 보고서는 그중 V링력·역압을 꼽았는데, 두 힘이 재료를 고정하는 힘이라는 같은 문단 설명과 맞는다. '전단면 품질부터 본다'는 점검 순서 제안은 팀 판단이다."
+        }
+      ]
+    },
+    {
+      "번호": 13,
+      "문헌": "Shu, Y. et al. (2023). Optimization of Hydraulic Fine Blanking Press Control System Based on System Identification. Processes 11(1):59.",
+      "파일": "원문/13_Shu_2023_Hydraulic_Fine_Blanking_Press.pdf",
+      "인용": [
+        {
+          "보고서_위치": "1.2절 설비 구조, 결과보고서 PDF 3쪽",
+          "보고서_문장": "한 행정은 고속 접근 → 감속·감지 → 저속 블랭킹 → 고속 복귀로 나뉜다. 블랭킹 구간만 고압·저속이다[13].",
+          "원문_위치": "PDF 1–2쪽(논문 1–2쪽), 1. Introduction",
+          "원문_문장": [
+            {
+              "원문": "the first is the fast approaching (FA) stage. Under the action of the oil cylinder, the slide block begins to move rapidly upward from the bottom dead center and quickly approaches the sheet metal. When the slide block moves close to the sheet metal, it enters the detection (DT) stage.",
+              "해석": "첫째는 고속 접근(FA) 단계다. 유압 실린더의 작용으로 슬라이드 블록이 하사점에서 빠르게 위로 움직여 판재에 빠르게 다가간다. 슬라이드 블록이 판재 가까이 오면 감지(DT) 단계로 들어간다."
+            },
+            {
+              "원문": "The slide block is driven by the fast subsystem oil cylinder, and is altered to be driven by the main blanking subsystem oil cylinder with high pressure and large flow rate in order to complete the blanking and forming process of parts at a low speed. After the BL stage, it enters the fast returning (FR) stage",
+              "해석": "슬라이드 블록은 고속 서브시스템 실린더로 움직이다가, 부품의 블랭킹·성형을 저속으로 마치기 위해 고압·대유량의 주 블랭킹 서브시스템 실린더로 구동이 바뀐다. 블랭킹(BL) 단계가 끝나면 고속 복귀(FR) 단계로 들어간다."
+            }
+          ],
+          "찾기_검색어": "fast approaching",
+          "판정": "뒷받침함"
+        },
+        {
+          "보고서_위치": "1.2절 설비 구조, 결과보고서 PDF 3쪽",
+          "보고서_문장": "Shu 등이 분석한 12,000kN 유압 파인블랭킹 프레스의 압력원은 모터-펌프가 어큐뮬레이터를 채우다가 설정압에서 비례밸브로 기름을 탱크에 돌려보내는(언로딩) 구조다[13].",
+          "원문_위치": "PDF 4쪽(논문 4쪽), 2.1.1 Hydraulic System of Multi-Stage Pressure Source FBP",
+          "원문_문장": [
+            {
+              "원문": "The hydraulic multi-stage pressure source FBP researched in this paper, with the capacity of 12,000 kN, ...",
+              "해석": "이 논문에서 연구한 다단 압력원 유압 파인블랭킹 프레스는 용량이 12,000kN이며 …"
+            },
+            {
+              "원문": "During the working process, the motor pump continuously fills the accumulator with liquid to build pressure and store energy and pressure. When the accumulator reaches the set pressure, the proportional valve (YV1–YV5) in the cartridge valve cover plate controls the opening of the pressure building cartridge valve and the oil flows back to the oil tank through the pressure building cartridge valve.",
+              "해석": "작동 중에는 모터 펌프가 어큐뮬레이터에 계속 기름을 채워 압력을 만들고 에너지와 압력을 저장한다. 어큐뮬레이터가 설정 압력에 이르면 카트리지 밸브 커버의 비례밸브(YV1–YV5)가 압력 형성용 카트리지 밸브를 열고, 기름은 그 밸브를 거쳐 기름 탱크로 돌아간다."
+            }
+          ],
+          "찾기_검색어": "fills the accumulator",
+          "판정": "뒷받침함",
+          "비고": "대상 설비(KAMP 프레스)가 같은 구조라는 근거는 아니다. 보고서도 '이 설비도 그렇다면 … (추정)'으로 구분해 적었다."
+        }
+      ]
+    },
+    {
+      "번호": 14,
+      "문헌": "Morselli, M. A. (Danfoss Power Solutions). US 10,024,317 B2, Geared hydraulic machine and relative gear wheel, 2018.",
+      "파일": "원문/14_Morselli_US10024317B2_2018.pdf",
+      "인용": [
+        {
+          "보고서_위치": "1.2절 설비 구조, 결과보고서 PDF 3쪽",
+          "보고서_문장": "고압 기어펌프의 잇수는 보통 9~12개다[14].",
+          "원문_위치": "PDF 8쪽, 특허 본문 5단 마지막 줄 → 6단 첫 줄(4행 위)",
+          "원문_문장": [
+            {
+              "원문": "Usually, geared pumps with straight teeth for high performance and pressure can have a number of teeth between 9 and 12, this innovative geometry makes it possible, at one extreme, to adopt almost double the number of teeth for the same specific capacity, drastically lowering the pressure ripple, ...",
+              "해석": "보통 고성능·고압용 직선 치형 기어펌프의 잇수는 9~12개인데, 이 새로운 형상은 한쪽 극단에서는 같은 비용량에서 잇수를 거의 두 배로 늘려 압력 맥동을 크게 줄일 수 있게 하며, …"
+            }
+          ],
+          "찾기_검색어": "between 9 and 12",
+          "판정": "뒷받침함",
+          "비고": "문장이 5단 끝('Usually, geared')에서 6단 첫 줄로 이어진다. 텍스트 추출이 두 단을 섞으므로 쪽 이미지로 확인했다. 대상 설비의 실제 잇수는 아니다."
+        }
+      ]
+    },
+    {
+      "번호": 15,
+      "문헌": "Guo, R. et al. (2020). Research on Identification Method of Wear Degradation of External Gear Pump Based on Flow Field Analysis. Sensors 20(14):4058.",
+      "파일": "원문/15_Guo_2020_External_Gear_Pump_Wear.pdf",
+      "인용": [
+        {
+          "보고서_위치": "1.3절 기어펌프 고장의 물리와 센서 서명, 결과보고서 PDF 4쪽",
+          "보고서_문장": "끝면 누설은 틈새의 세제곱에 비례하고 그만큼 토출 유량과 체적효율이 떨어진다. 가속수명시험에서 체적효율 70%까지 960~982시간이 걸렸다[15].",
+          "원문_위치": "PDF 3쪽, 2.1절 식 (1) 아래 / PDF 1쪽 Abstract / PDF 17쪽 Table 3",
+          "원문_문장": [
+            {
+              "원문": "As already demonstrated in Equation (1), the total leakage of the end face is directly proportional to the third power of s, that is, the gap has a great influence on the leakage, which means its size must be strictly controlled.",
+              "해석": "식 (1)에서 보였듯이 끝면의 총 누설량은 틈새 s의 세제곱에 정비례한다. 즉 틈새가 누설에 큰 영향을 미치므로 그 크기를 엄격히 관리해야 한다."
+            },
+            {
+              "원문": "Based on the accelerated life test (ALT), this paper proposes a method to identify the wear degradation state of external gear pumps based on flow field analysis.",
+              "해석": "이 논문은 가속수명시험(ALT)을 바탕으로, 유동장 해석에 기반해 외접 기어펌프의 마모 열화 상태를 식별하는 방법을 제안한다."
+            },
+            {
+              "원문": "Table 3. Time for sample pump to reach each degradation stage. … 70%: 981.8 h (Pump 1), 960.3 h (Pump 2), 962.2 h (Pump 3), 966.9 h (Pump 4)",
+              "해석": "표 3. 시료 펌프가 각 열화 단계에 이르는 시간. … 체적효율 70%: 981.8시간(펌프 1), 960.3시간(펌프 2), 962.2시간(펌프 3), 966.9시간(펌프 4)"
+            }
+          ],
+          "찾기_검색어": "981.8",
+          "판정": "뒷받침함"
+        },
+        {
+          "보고서_위치": "1.3절 고장 모드 표 '측판·끝면 마모(내부 누설)' 행, 결과보고서 PDF 4쪽",
+          "보고서_문장": "| 측판·끝면 마모(내부 누설) | 내부 누설·체적효율 저하, 압력 맥동 증가(압력 측정)[15] | 유압 일이 줄어 전류 감소[16] |",
+          "원문_위치": "PDF 10쪽, 3.4절 Degradation Analysis of Simulated Pressure Signal (Figure 14·15 해설)",
+          "원문_문장": [
+            {
+              "원문": "Meanwhile, it is also found that the fluctuation tendency of the pressure pulsation increases with wear clearance of the end face, which means a substantial degradation of the gear pump performance [22].",
+              "해석": "또한 끝면 마모 틈새가 커질수록 압력 맥동의 변동 경향이 커지는 것으로 나타났으며, 이는 기어펌프 성능이 크게 열화됐음을 뜻한다."
+            }
+          ],
+          "찾기_검색어": "pressure pulsation increases with wear clearance of the end face",
+          "판정": "뒷받침함",
+          "비고": "시뮬레이션 압력 신호 결과다. 보고서가 '(압력 측정)'으로 하우징 진동과 구분해 둔 것이 맞다."
+        }
+      ]
+    },
+    {
+      "번호": 16,
+      "문헌": "Smiley, A. (2018). Troubleshooting Hydraulic Pumps. Machinery Lubrication (Noria).",
+      "파일": "원문/16_Smiley_2018_Troubleshooting_Hydraulic_Pumps_웹저장.pdf",
+      "인용": [
+        {
+          "보고서_위치": "1.3절 고장 모드 표 '측판·끝면 마모(내부 누설)' 행, 결과보고서 PDF 4쪽",
+          "보고서_문장": "| 측판·끝면 마모(내부 누설) | 내부 누설·체적효율 저하, 압력 맥동 증가(압력 측정)[15] | 유압 일이 줄어 전류 감소[16] |",
+          "원문_위치": "PDF 4쪽, 소제목 'Testing a Fixed Displacement Pump' 아래 전류 점검 문단",
+          "원문_문장": [
+            {
+              "원문": "To determine if the pump is badly worn and bypassing, first check the current to the electric motor.",
+              "해석": "펌프가 심하게 마모돼 내부에서 기름이 새고(바이패스) 있는지 판단하려면 먼저 전동기 전류를 확인한다."
+            },
+            {
+              "원문": "If the pump is delivering less oil than when it was new, the current to drive the pump will drop.",
+              "해석": "펌프가 새것일 때보다 기름을 적게 내보내면, 펌프를 구동하는 전류가 떨어진다."
+            },
+            {
+              "원문": "If the amperage is considerably lower, the pump is most likely bypassing and should be changed.",
+              "해석": "전류가 상당히 낮다면 펌프가 바이패스하고 있을 가능성이 높으므로 교체해야 한다."
+            }
+          ],
+          "찾기_검색어": "the current to drive the pump will drop",
+          "판정": "뒷받침함",
+          "비고": "원문은 같은 펌프를 새것일 때의 전류와 비교하라는 조건을 단다('this test should be made when the pump is new to establish a reference')."
+        }
+      ]
+    },
+    {
+      "번호": 17,
+      "문헌": "Lupea, I. et al. (2024). Helical gearbox defect detection with machine learning using regular mesh components and sidebands. Sensors 24(11):3337.",
+      "파일": "원문/17_Lupea_2024_Helical_Gearbox_Defect_Detection.pdf",
+      "인용": [
+        {
+          "보고서_위치": "1.3절 고장 모드 표 '치면 마모·피팅' 행, 결과보고서 PDF 4쪽",
+          "보고서_문장": "| 치면 마모·피팅 | 맞물림 주파수 주변 측대역(기어박스 연구, 적용은 가설)[17] | 부하 토크 변동 → 전류 위상 변조[18] |",
+          "원문_위치": "PDF 6쪽(논문 6쪽), 2절 첫 문단",
+          "원문_문장": [
+            {
+              "원문": "The GMF, the upper harmonics of the GMF, and their first pair of sidebands are known as regular mesh components. A faulty gear presents on the frequency axis several sideband pairs on both sides of the GMF and of the GMF's harmonics, at a distance equal to the rotational speed of the faulty gear.",
+              "해석": "맞물림 주파수(GMF)와 그 고조파, 그리고 첫 번째 측대역 쌍을 정규 맞물림 성분이라고 한다. 결함이 있는 기어는 주파수 축에서 GMF와 그 고조파 양쪽에, 결함 기어의 회전 속도만큼 떨어진 여러 측대역 쌍을 보인다."
+            },
+            {
+              "원문": "Frequency sidebands are generated by the amplitude modulation (AM) of the GMF component of the measured vibration signal and the frequency modulation (FM) or phase modulation of the same component of the measured signal.",
+              "해석": "주파수 측대역은 측정 진동 신호에서 GMF 성분의 진폭 변조(AM)와, 같은 성분의 주파수 변조(FM) 또는 위상 변조로 생긴다."
+            }
+          ],
+          "찾기_검색어": "regular mesh components",
+          "판정": "뒷받침함",
+          "비고": "헬리컬 기어박스 연구다. 기어펌프 적용은 보고서가 이미 '가설'로 표시했다."
+        }
+      ]
+    },
+    {
+      "번호": 18,
+      "문헌": "Blodt, M., Regnier, J., Faucher, J. (2009). Distinguishing Load Torque Oscillations and Eccentricity Faults in Induction Motors Using Stator Current Wigner Distributions. IEEE Trans. Ind. Appl. 45(6):1991–2000.",
+      "파일": "원문/18_Blodt_2009_IEEE_TIA_Load_Torque_Eccentricity_Wigner.pdf",
+      "인용": [
+        {
+          "보고서_위치": "1.3절 고장 모드 표 '치면 마모·피팅' 행, 결과보고서 PDF 4쪽",
+          "보고서_문장": "| 치면 마모·피팅 | 맞물림 주파수 주변 측대역(기어박스 연구, 적용은 가설)[17] | 부하 토크 변동 → 전류 위상 변조[18] |",
+          "원문_위치": "PDF 1쪽(논문 1991쪽), Abstract / PDF 2쪽(논문 1992쪽), II-A절 식 (2)·(3)",
+          "원문_문장": [
+            {
+              "원문": "A theoretical analysis shows that each fault modulates the stator current in a different way: torque oscillations lead to stator current phase modulation, whereas rotor eccentricities produce stator current amplitude modulation.",
+              "해석": "이론 분석에 따르면 두 고장은 고정자 전류를 서로 다르게 변조한다. 토크 진동은 고정자 전류의 위상 변조를, 회전자 편심은 진폭 변조를 일으킨다."
+            },
+            {
+              "원문": "These oscillations lead to a PM of the rotor magnetic field expressed in the stator reference frame, whereas the stator magnetic field is not directly affected. In the presence of load torque oscillations, the induction motor stator current can be considered as the sum of a phase modulated sinusoidal signal irt(t) and an unmodulated signal ist(t) [4]",
+              "해석": "이 (회전 위치의) 진동은 고정자 기준 좌표에서 본 회전자 자계를 위상 변조(PM)하며, 고정자 자계는 직접 영향을 받지 않는다. 부하 토크가 진동하면 유도전동기 고정자 전류는 위상 변조된 사인 신호와 변조되지 않은 신호의 합으로 볼 수 있다."
+            }
+          ],
+          "찾기_검색어": "phase modulation",
+          "판정": "뒷받침함"
+        },
+        {
+          "보고서_위치": "1.5절 센서 관측 가능성, 결과보고서 PDF 6쪽",
+          "보고서_문장": "전류 파형: 사인 적합. 부하 토크 변동은 전류를 위상 변조하고[18] 변조가 수 Hz 안이면 접혀도 사인의 일그러짐으로 남는다(추정)",
+          "원문_위치": "PDF 1쪽(논문 1991쪽), Abstract",
+          "원문_문장": [
+            {
+              "원문": "A theoretical analysis shows that each fault modulates the stator current in a different way: torque oscillations lead to stator current phase modulation, whereas rotor eccentricities produce stator current amplitude modulation.",
+              "해석": "이론 분석에 따르면 두 고장은 고정자 전류를 서로 다르게 변조한다. 토크 진동은 고정자 전류의 위상 변조를, 회전자 편심은 진폭 변조를 일으킨다."
+            }
+          ],
+          "찾기_검색어": "phase modulation",
+          "판정": "뒷받침함",
+          "비고": "앞부분(토크 변동 → 위상 변조)만 원문 근거다. '접혀도 사인의 일그러짐으로 남는다'는 보고서가 '(추정)'으로 표시한 팀 추론이다."
+        }
+      ]
+    },
+    {
+      "번호": 19,
+      "문헌": "Noria Corp. (2017). Cavitation or Aeration? How to Tell the Difference. Machinery Lubrication.",
+      "파일": "원문/19_Noria_2017_Cavitation_or_Aeration_웹저장.pdf",
+      "인용": [
+        {
+          "보고서_위치": "1.3절 고장 모드 표 '캐비테이션·에어레이션' 행, 결과보고서 PDF 4쪽",
+          "보고서_문장": "| 캐비테이션·에어레이션 | 고음(캐비테이션)·불규칙한 소음(에어레이션)[19], 고주파 광대역(추정) | 불규칙한 부하 변동(추정) |",
+          "원문_위치": "PDF 1–2쪽 소제목 'What Is Cavitation?' 아래 / PDF 3쪽 'Understanding Aeration' 첫 문단",
+          "원문_문장": [
+            {
+              "원문": "The ensuing shockwaves produce a steady, high-pitched whining sound and damage to the inside of the pump.",
+              "해석": "(기포가 꺼지며) 뒤따르는 충격파는 일정하고 높은 음의 윙윙거리는 소리를 내며 펌프 내부를 손상시킨다."
+            },
+            {
+              "원문": "Aeration occurs whenever outside air enters the suction side of the pump. This produces a sound that is more erratic than that of cavitation.",
+              "해석": "에어레이션은 외부 공기가 펌프 흡입측으로 들어올 때 생긴다. 이때 나는 소리는 캐비테이션보다 더 불규칙하다."
+            }
+          ],
+          "찾기_검색어": "high-pitched",
+          "판정": "뒷받침함",
+          "비고": "'고주파 광대역'은 원문에 없는 내용이며 보고서에 '(추정)'으로 구분돼 있다."
+        },
+        {
+          "보고서_위치": "4.2절 경보에서 조치까지(점검 순서 표 '진동 + 전류 함께' 행), 결과보고서 PDF 32쪽",
+          "보고서_문장": "흡입측 소리(고음은 캐비테이션, 불규칙한 소음은 에어레이션[19])·유면·거품",
+          "원문_위치": "PDF 1–2쪽 'What Is Cavitation?' 아래 / PDF 3쪽 'Understanding Aeration' 첫 문단",
+          "원문_문장": [
+            {
+              "원문": "The ensuing shockwaves produce a steady, high-pitched whining sound and damage to the inside of the pump.",
+              "해석": "(기포가 꺼지며) 뒤따르는 충격파는 일정하고 높은 음의 윙윙거리는 소리를 내며 펌프 내부를 손상시킨다."
+            },
+            {
+              "원문": "This produces a sound that is more erratic than that of cavitation.",
+              "해석": "이때 나는 소리는 캐비테이션보다 더 불규칙하다."
+            },
+            {
+              "원문": "If the oil in the reservoir is visible, you may see foaming.",
+              "해석": "탱크 안의 기름이 보인다면 거품을 볼 수 있다."
+            }
+          ],
+          "찾기_검색어": "erratic",
+          "판정": "뒷받침함",
+          "비고": "'유면·거품' 점검도 같은 문단의 'you may see foaming'과 맞는다."
+        }
+      ]
+    },
+    {
+      "번호": 20,
+      "문헌": "SKF Condition Monitoring. Vibration Diagnostic Guide CM5003 (보고서 서지: 2000 / 대조 파일: SKF 공식 2011년판 CM5003 EN).",
+      "파일": "원문/20_SKF_2011_Vibration_Diagnostic_Guide_CM5003.pdf",
+      "인용": [
+        {
+          "보고서_위치": "1.3절 고장 모드 표 '커플링 정렬 불량'·'기초·체결 풀림' 행, 결과보고서 PDF 4쪽",
+          "보고서_문장": "| 커플링 정렬 불량 | 회전 1X·2X, 커플링 양쪽 180° 위상[20] | / | 기초·체결 풀림(흔들림) | 발·베이스 사이 180° 위상[20] |",
+          "원문_위치": "PDF 12쪽(인쇄 12쪽), Spectrum Analysis Table의 Misalignment·Mechanical Looseness(Structural) 행",
+          "원문_문장": [
+            {
+              "원문": "Misalignment — Angular: Axial, 1X, 2X — A phase shift of 180 degrees in the axial direction will exist across the coupling.",
+              "해석": "정렬 불량 — 각도(편각) 정렬 불량: 축 방향, 1X·2X — 커플링 양쪽 사이에 축 방향으로 180° 위상차가 나타난다."
+            },
+            {
+              "원문": "Parallel: Radial, 1X, 2X — A phase shift of 180 degrees in the radial direction will exist across the coupling.",
+              "해석": "평행(편심) 정렬 불량: 반경 방향, 1X·2X — 커플링 양쪽 사이에 반경 방향으로 180° 위상차가 나타난다."
+            },
+            {
+              "원문": "Mechanical Looseness — Structural: Radial, 1X — Phase shifts of 180 degrees will exist between the machine's feet, baseplate, and/or foundation if the machine is rocking.",
+              "해석": "기계적 풀림 — 구조적 풀림: 반경 방향, 1X — 기계가 흔들리면 기계의 발·베이스판·기초 사이에 180° 위상차가 나타난다."
+            }
+          ],
+          "찾기_검색어": "A phase shift of 180 degrees",
+          "판정": "뒷받침함",
+          "비고": "표 형식이라 텍스트가 칸끼리 섞여 추출된다. 원문은 축·반경 방향과 1X라는 조건을 함께 단다. 대조 파일은 SKF 공식 2011년판이며 같은 표(Spectrum Analysis Table)가 있다. 보고서 서지 연도(2000)와 판이 달라 확인필요 MD에 적었다."
+        }
+      ]
+    },
+    {
+      "번호": 21,
+      "문헌": "「전기사업법 시행규칙」 별표 3 표준전압·표준주파수 및 허용오차.",
+      "파일": "원문/21_전기사업법_시행규칙_별표3_2025개정.pdf",
+      "인용": [
+        {
+          "보고서_위치": "1.4절 변수 정의와 물리 해석, 결과보고서 PDF 5쪽",
+          "보고서_문장": "표본 간격이 정확히 100ms라면 전류 주파수는 59.4 또는 60.6Hz여야 하지만 한국 계통 주파수 허용 범위는 60±0.2Hz다[21].",
+          "원문_위치": "PDF 1쪽, '2. 표준주파수 및 허용오차' 표",
+          "원문_문장": [
+            {
+              "원문": "2. 표준주파수 및 허용오차 — 표준주파수 60헤르츠, 허용오차 60헤르츠 상하로 0.2헤르츠 이내"
+            }
+          ],
+          "찾기_검색어": "표준주파수",
+          "판정": "뒷받침함",
+          "비고": "받아 둔 판본은 2025. 6. 13. 개정본이다. 데이터 수집 시점(2022년)의 시행 판본은 따로 확인하지 않았다."
+        }
+      ]
+    },
+    {
+      "번호": 22,
+      "문헌": "ISO 20816-1:2016 Mechanical vibration — Measurement and evaluation of machine vibration — Part 1: General guidelines.",
+      "파일": "공개미리보기/22_ISO_20816-1_2016_공개미리보기.pdf",
+      "인용": [
+        {
+          "보고서_위치": "1.4절 변수 정의와 물리 해석, 결과보고서 PDF 5쪽",
+          "보고서_문장": "진동 단위가 공개되지 않아 ISO 20816 진동 심각도 구역 판정은 할 수 없고 정상 기준 대비 상대 판정만 한다[22].",
+          "원문_위치": "공개 미리보기 PDF 9–10쪽(표준 본문 3–4쪽), 4.3.1 Measurement quantities",
+          "원문_문장": [
+            {
+              "원문": "For the purposes of this document, the following measurement quantities can be used: a) vibration displacement, measured in micrometres; b) vibration velocity, measured in millimetres per second; c) vibration acceleration, measured in metres per square second.",
+              "해석": "이 문서에서는 다음 측정량을 쓸 수 있다. a) 진동 변위(마이크로미터), b) 진동 속도(초당 밀리미터), c) 진동 가속도(제곱초당 미터)."
+            },
+            {
+              "원문": "However, the quantities shall be clearly identified so as to ensure correct interpretation of the measurements in terms of the criteria of Clause 6.",
+              "해석": "다만 6절의 기준에 비추어 측정값을 올바르게 해석할 수 있도록, 어떤 측정량인지 분명히 밝혀야 한다."
+            }
+          ],
+          "찾기_검색어": "clearly identified",
+          "판정": "뒷받침함",
+          "비고": "평가 구역 자체는 미리보기 밖(6절)이다. 측정량·단위가 분명해야 기준을 적용할 수 있다는 부분만 확인했다."
+        }
+      ]
+    },
+    {
+      "번호": 23,
+      "문헌": "Shell (2017). Technical Data Sheet — Shell Tellus S2 M 46 (v3.5).",
+      "파일": "원문/23_Shell_Tellus_S2_M_46_2017_TDS.pdf",
+      "인용": [
+        {
+          "보고서_위치": "2.2절 이상 사건 해부(기동 과도 가설 점검), 결과보고서 PDF 13쪽",
+          "보고서_문장": "작동유 점도(ISO VG 46을 20~25°C로 가정하면 약 100~135cSt)[23]는 …",
+          "원문_위치": "PDF 2쪽, Typical Physical Characteristics 표",
+          "원문_문장": [
+            {
+              "원문": "Kinematic Viscosity @0°C cSt (ASTM D445): 580",
+              "해석": "동점도(0°C, cSt, ASTM D445 시험법): 580"
+            },
+            {
+              "원문": "Kinematic Viscosity @40°C cSt (ASTM D445): 46",
+              "해석": "동점도(40°C, cSt, ASTM D445 시험법): 46"
+            },
+            {
+              "원문": "Kinematic Viscosity @100°C cSt (ASTM D445): 6.7",
+              "해석": "동점도(100°C, cSt, ASTM D445 시험법): 6.7"
+            }
+          ],
+          "찾기_검색어": "Kinematic Viscosity",
+          "판정": "일부만 뒷받침함",
+          "비고": "문헌 값(0·40·100°C)만 확인된다. 20~25°C의 100~135cSt는 내삽 계산이라 원문에 없다. 수정 제안은 참고문헌_확인필요.md 참고."
+        }
+      ]
+    },
+    {
+      "번호": 24,
+      "문헌": "Bosch Rexroth (2021). External gear pump High Performance AZPF, RE 10089.",
+      "파일": "원문/24_Bosch_Rexroth_AZPF_RE10089_2021.pdf",
+      "인용": [
+        {
+          "보고서_위치": "2.2절 이상 사건 해부(기동 과도 가설 점검), 결과보고서 PDF 13쪽",
+          "보고서_문장": "… 비교한 기어펌프 계열의 냉간 기동 최대 점도 2000mm²/s보다 훨씬 낮지만[24], 본 설비의 유온·흡입 조건이 없어 캐비테이션 판단에는 쓰지 않는다.",
+          "원문_위치": "PDF 11쪽, Hydraulic fluids → Viscosity and temperature of hydraulic fluids 표",
+          "원문_문장": [
+            {
+              "원문": "Viscosity range — Permissible in continuous operation ν = 12 … 800 mm²/s; Recommended in continuous operation νopt = 20 … 100 mm²/s; Permissible for cold start νmax ≤ 2000 mm²/s",
+              "해석": "점도 범위 — 연속 운전 허용: ν = 12~800 mm²/s, 연속 운전 권장: νopt = 20~100 mm²/s, 냉간 기동 허용: νmax ≤ 2000 mm²/s"
+            }
+          ],
+          "찾기_검색어": "Permissible for cold start",
+          "판정": "뒷받침함",
+          "비고": "AZPF 계열의 허용 조건이며 캐비테이션 경계값이 아니다. 보고서도 판단에 쓰지 않는다고 적었다."
+        }
+      ]
+    },
+    {
+      "번호": 25,
+      "문헌": "Helwig, N., Pignanelli, E., Schütze, A. (2015). Condition monitoring of a complex hydraulic system using multivariate statistics. Proc. IEEE I2MTC, 210–215 (데이터: Condition Monitoring of Hydraulic Systems [Dataset], UCI, 2018).",
+      "파일": "원문/25_Helwig_2015_I2MTC_Hydraulic_Multivariate.pdf (논문), 원문/25_UCI_description.txt · 원문/25_UCI_documentation.txt (데이터셋), 원문/25_UCI_Hydraulic_Systems_공식설명_웹저장.pdf (UCI 공식 페이지)",
+      "인용": [
+        {
+          "보고서_위치": "2.6절 검증표 '다른 설비에서도 되나' 행, 결과보고서 PDF 24쪽",
+          "보고서_문장": "UCI 유압 시험대(Helwig 등[25])에 v2 구조를 그대로 옮긴 실험은 AUROC 0.43~0.55로 실패했다",
+          "원문_위치": "논문 PDF 3쪽 III. EXPERIMENTAL SETUP 첫 문단 / PDF 3쪽 IV. RESULTS 첫 문장 / 데이터셋: 25_UCI_description.txt 'Relevant Information' 첫 문단",
+          "원문_문장": [
+            {
+              "원문": "For the evaluation of the condition monitoring concept we developed a hydraulic test rig that allows a reversible change of the state or condition of various components. The hydraulic system consists of a primary working (Fig. 2a) and a secondary cooling-filtration circuit (Fig. 2b) which are connected via the oil tank.",
+              "해석": "상태감시 방식을 평가하려고, 여러 부품의 상태를 되돌릴 수 있게 바꿀 수 있는 유압 시험대를 만들었다. 유압 시스템은 기름 탱크로 연결된 1차 작동 회로와 2차 냉각·여과 회로로 이뤄진다."
+            },
+            {
+              "원문": "Fig. 3a shows the fixed working cycle with a duration of 60 seconds, which is divided into 13 time intervals for which the different features are extracted from the measurement values.",
+              "해석": "그림 3a는 60초 길이의 고정 작동 주기이며, 이를 13개 시간 구간으로 나눠 측정값에서 특징을 뽑는다."
+            },
+            {
+              "원문": "The data set was experimentally obtained with a hydraulic test rig. This test rig consists of a primary working and a secondary cooling-filtration circuit which are connected via the oil tank [1], [2]. The system cyclically repeats constant load cycles (duration 60 seconds) and measures process values such as pressures, volume flows and temperatures while the condition of four hydraulic components (cooler, valve, pump and accumulator) is quantitatively varied.",
+              "해석": "이 데이터셋은 유압 시험대에서 실험으로 얻었다. 시험대는 기름 탱크로 연결된 1차 작동 회로와 2차 냉각·여과 회로로 이뤄진다. 시스템은 일정한 부하 주기(60초)를 반복하며 압력·유량·온도 같은 공정값을 측정하고, 그동안 유압 부품 네 개(냉각기, 밸브, 펌프, 어큐뮬레이터)의 상태를 정량적으로 바꾼다."
+            },
+            {
+              "원문": "[1] Nikolai Helwig, Eliseo Pignanelli, Andreas Schütze, Condition Monitoring of a Complex Hydraulic System Using Multivariate Statistics, in Proc. I2MTC-2015 - 2015 IEEE International Instrumentation and Measurement Technology Conference, paper PPS1-39, Pisa, Italy, May 11-14, 2015",
+              "해석": "[1] Helwig·Pignanelli·Schütze, 「다변량 통계를 이용한 복잡한 유압 시스템의 상태감시」, 2015 IEEE 계측 기술 국제학술대회(I2MTC) 논문집, 논문 PPS1-39, 이탈리아 피사, 2015년 5월 11–14일 (데이터셋 문서의 '과거 사용' 목록 첫 항목)"
+            }
+          ],
+          "찾기_검색어": "Relevant Information",
+          "판정": "뒷받침함",
+          "비고": "문장이 기대는 것은 시험대·데이터셋이 무엇인지이며, 논문 III절과 UCI 공식 설명이 같은 시험대를 설명한다. AUROC 0.43~0.55는 팀 실험 값이라 논문에 없다. 논문 PDF에는 쪽 번호가 찍혀 있지 않다(서지상 210–215쪽)."
+        }
+      ]
+    },
+    {
+      "번호": 26,
+      "문헌": "ISO 13374-1:2003 Condition monitoring and diagnostics of machines — Data processing, communication and presentation — Part 1: General guidelines.",
+      "파일": "공개미리보기/26_ISO_13374-1_2003_공개미리보기.pdf",
+      "인용": [
+        {
+          "보고서_위치": "4.1절 상태감시 표준 구조에 맞춘 운영 흐름, 결과보고서 PDF 31쪽",
+          "보고서_문장": "상태감시 데이터 처리 표준 ISO 13374-1의 6개 처리 블록[26]에 이 시스템을 맞추면 다음과 같다.",
+          "원문_위치": "공개 미리보기 PDF 7쪽(표준 본문 1쪽), 2.2.1 Machine condition assessment processing blocks / PDF 9쪽 a)–f) 블록 목록",
+          "원문_문장": [
+            {
+              "원문": "2.2.1 Machine condition assessment processing blocks — Machine condition assessment can be broken into six distinct, layered processing blocks.",
+              "해석": "2.2.1 기계 상태 평가 처리 블록 — 기계 상태 평가는 서로 구별되는 6개의 계층형 처리 블록으로 나눌 수 있다."
+            }
+          ],
+          "찾기_검색어": "six distinct",
+          "판정": "뒷받침함",
+          "비고": "블록 이름(Data Acquisition·Data Manipulation·State Detection·Health Assessment·Prognostic Assessment·Advisory Generation)은 PDF 9쪽 목록에서 확인한다. 공개 미리보기 범위다."
+        }
+      ]
+    }
+  ]
+}
