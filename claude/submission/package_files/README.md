@@ -4,7 +4,7 @@
 
 ## 0. 먼저 5분 확인(설치 없이)
 
-- zip에 든 `predictions/test_predictions_A.csv`·`_B.csv`에서 `label`과 `final_v2_R1_R2_realtime`(True/False)으로 행 F1을 계산하면 보고서 2.4절의 최종 모델 1.000·1.000이 나온다. `locked_v2_R1_realtime`은 1.000·0.995, `v2_realtime`은 0.965·0.970이다
+- zip에 든 `predictions/test_predictions_A.csv`·`_B.csv`에서 `label`과 `locked_v2_R1_realtime`(True/False)으로 행 F1을 계산하면 보고서의 공식 성능인 잠금 모델(1단계 "주의") 1.000·0.995가 나온다. `final_v2_R1_R2_realtime`(2단계 "점검 요청", test 확인 뒤 더한 R2 규칙)은 1.000·1.000, `v2_realtime`은 0.965·0.970이다
 - 그다음 `--quick`(약 14분, 대조 28개)으로 전처리 → 학습 → 추론 → 예측 파일 생성을 확인하고, 시간이 되면 전체(대조 37개)를 돌린다
 
 ## 1. 환경
@@ -50,9 +50,9 @@ python run_all.py --quick    # 핵심만: 진단·모델·test 예측·2.4·2.7�
 | `subset`, `label` | normal(정상, 0) / abnormal(이상, 1). label은 채점용이며 모델 입력에는 쓰지 않았다 |
 | `rec` | `test:normal:k`는 test 정상 구간 안 순번(보고서 기록 번호 = A는 k+480, B는 k+420), `test:abnormal:k`는 이상 기록 번호 k(10~20) |
 | `pos`, `ts` | 기록 안 위치(0 = 첫 행), 수집 시각 |
-| `final_v2_R1_R2_realtime` | **최종 모델** 실시간 경보(행이 들어오는 순간 판정, True/False) |
-| `final_v2_R1_R2_record` | 최종 모델 기록 단위 판정(기록이 끝난 뒤, 0/1) |
-| `locked_v2_R1_*` | valid에서 잠근 선택 모델(v2+R1) |
+| `final_v2_R1_R2_realtime` | 2단계 모델(v2+R1+R2, "점검 요청") 실시간 경보(행이 들어오는 순간 판정, True/False). R2는 경보를 빼기만 하므로 늘 `locked_v2_R1_realtime`의 부분집합이다 |
+| `final_v2_R1_R2_record` | 2단계 모델 기록 단위 판정(기록이 끝난 뒤, 0/1) |
+| `locked_v2_R1_*` | **공식 성능**: valid에서 골라 잠근 모델(v2+R1, 1단계 "주의") |
 | `v2_realtime`, `v2_record` | 기반 모델 v2 |
 | `v2_prob_site1pct`, `v2_prob_fileprior` | v2 이상 확률(0~1). valid 자료로만 보정했고, 사전 비율은 각각 현장 가정 1%와 test 파일의 이상 행 비율. 경보 판정과는 무관(보고서 2.5절) |
 
@@ -91,7 +91,7 @@ yejun/analysis/press_lstm_improvement/   보완 LSTM 실험(2.7절 †, run_all.
 ## 6. 재현성 메모
 
 - 원본 CSV 2개는 시작할 때 SHA-256으로 확인한다. 파일이 바뀌면 멈춘다. `press_data_normal.csv` 20,000행, `outlier_data.csv` 600행
-- 무작위가 들어가는 곳은 seed를 고정했다. 가이드북 방식 LSTM 오토인코더(비교용 기준선)는 seed 0·스레드 1로 고정했지만 CPU나 torch 빌드가 다르면 부동소수 연산 순서가 바뀌어 값이 조금 달라질 수 있어, 대조 허용 오차를 0.05로 두었다. 최종 모델 F1은 소수 9자리까지 같아야 한다
+- 무작위가 들어가는 곳은 seed를 고정했다. 가이드북 방식 LSTM 오토인코더(비교용 기준선)는 seed 0·스레드 1로 고정했지만 CPU나 torch 빌드가 다르면 부동소수 연산 순서가 바뀌어 값이 조금 달라질 수 있어, 대조 허용 오차를 0.05로 두었다. 잠금·2단계 모델 F1은 소수 9자리까지 같아야 한다
 - 예측 파일 대조는 줄바꿈(Windows CRLF, macOS·Linux LF)을 맞춘 뒤 해시를 비교한다. 내용이 같으면 OS와 관계없이 일치로 나온다
 - 사건 안 추세 분석(4단계)의 결과 파일에는 실행 날짜가 들어간다. 이 필드만 날짜에 따라 달라진다
 

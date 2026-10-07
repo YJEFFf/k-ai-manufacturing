@@ -6,6 +6,13 @@
   "lead_median_min": 1.64,
   "frac_at_alarm_median": 0.145
  },
+ "대조(주입 없음)|2분|v2+R1": {
+  "n": 8,
+  "alarm_rate": 0.125,
+  "before_complete_rate": 0.125,
+  "lead_median_min": 1.64,
+  "frac_at_alarm_median": 0.145
+ },
  "대조(주입 없음)|2분|v2+R1+R2": {
   "n": 8,
   "alarm_rate": 0.0,
@@ -14,6 +21,13 @@
   "frac_at_alarm_median": null
  },
  "대조(주입 없음)|5분|v2": {
+  "n": 8,
+  "alarm_rate": 0.25,
+  "before_complete_rate": 0.25,
+  "lead_median_min": 3.87,
+  "frac_at_alarm_median": 0.217
+ },
+ "대조(주입 없음)|5분|v2+R1": {
   "n": 8,
   "alarm_rate": 0.25,
   "before_complete_rate": 0.25,
@@ -34,6 +48,13 @@
   "lead_median_min": 8.72,
   "frac_at_alarm_median": 0.121
  },
+ "대조(주입 없음)|10분|v2+R1": {
+  "n": 8,
+  "alarm_rate": 0.375,
+  "before_complete_rate": 0.375,
+  "lead_median_min": 8.72,
+  "frac_at_alarm_median": 0.121
+ },
  "대조(주입 없음)|10분|v2+R1+R2": {
   "n": 8,
   "alarm_rate": 0.0,
@@ -42,6 +63,13 @@
   "frac_at_alarm_median": null
  },
  "전류 파형|2분|v2": {
+  "n": 24,
+  "alarm_rate": 1.0,
+  "before_complete_rate": 0.9583,
+  "lead_median_min": 0.53,
+  "frac_at_alarm_median": 0.724
+ },
+ "전류 파형|2분|v2+R1": {
   "n": 24,
   "alarm_rate": 1.0,
   "before_complete_rate": 0.9583,
@@ -62,6 +90,13 @@
   "lead_median_min": 2.16,
   "frac_at_alarm_median": 0.561
  },
+ "전류 파형|5분|v2+R1": {
+  "n": 24,
+  "alarm_rate": 1.0,
+  "before_complete_rate": 1.0,
+  "lead_median_min": 2.16,
+  "frac_at_alarm_median": 0.561
+ },
  "전류 파형|5분|v2+R1+R2": {
   "n": 24,
   "alarm_rate": 1.0,
@@ -70,6 +105,13 @@
   "frac_at_alarm_median": 0.59
  },
  "전류 파형|10분|v2": {
+  "n": 24,
+  "alarm_rate": 1.0,
+  "before_complete_rate": 1.0,
+  "lead_median_min": 4.5,
+  "frac_at_alarm_median": 0.548
+ },
+ "전류 파형|10분|v2+R1": {
   "n": 24,
   "alarm_rate": 1.0,
   "before_complete_rate": 1.0,
@@ -90,6 +132,13 @@
   "lead_median_min": 0.43,
   "frac_at_alarm_median": 0.747
  },
+ "진동|2분|v2+R1": {
+  "n": 96,
+  "alarm_rate": 0.4583,
+  "before_complete_rate": 0.3021,
+  "lead_median_min": 0.43,
+  "frac_at_alarm_median": 0.747
+ },
  "진동|2분|v2+R1+R2": {
   "n": 96,
   "alarm_rate": 0.2292,
@@ -104,6 +153,13 @@
   "lead_median_min": 3.1,
   "frac_at_alarm_median": 0.376
  },
+ "진동|5분|v2+R1": {
+  "n": 96,
+  "alarm_rate": 0.5208,
+  "before_complete_rate": 0.4583,
+  "lead_median_min": 3.1,
+  "frac_at_alarm_median": 0.376
+ },
  "진동|5분|v2+R1+R2": {
   "n": 96,
   "alarm_rate": 0.2917,
@@ -112,6 +168,13 @@
   "frac_at_alarm_median": 0.923
  },
  "진동|10분|v2": {
+  "n": 96,
+  "alarm_rate": 0.8333,
+  "before_complete_rate": 0.6979,
+  "lead_median_min": 2.61,
+  "frac_at_alarm_median": 0.738
+ },
+ "진동|10분|v2+R1": {
   "n": 96,
   "alarm_rate": 0.8333,
   "before_complete_rate": 0.6979,

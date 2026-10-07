@@ -76,7 +76,7 @@ def build_expected():
         checks.append(dict(name=f"기반 모델 v2 원래 평가 재현 F1 {s}", kind="json", file="code/press/tvt/outputs/tvt_scores_meta.json",
                            path=[s, "v2_original_protocol", "f1"], value=meta[s]["v2_original_protocol"]["f1"], quick=True, report="(6장)"))
     # LSTM은 학습 난수 때문에 값이 조금 흔들려 허용 오차를 넓게 둔다
-    for model, label, tol, rep in (("v2+H1+H2", "최종 v2+R1+R2", 1e-9, "(2.4절 표)"), ("v2+H1", "잠금 선택 v2+R1", 1e-9, "(2.5절)"),
+    for model, label, tol, rep in (("v2+H1+H2", "2단계 모델 v2+R1+R2", 1e-9, "(2.4절 표)"), ("v2+H1", "잠금 모델 v2+R1(공식 성능)", 1e-9, "(2.4절 표·2.5절)"),
                                    ("v2", "기반 모델 v2", 1e-9, "(2.4절 표)"), ("lstm20", "LSTM 오토인코더", 0.05, "(2.4절 표, 학습 난수로 소폭 변동 가능)")):
         for s in ("A", "B"):
             where = dict(split=s, alpha="0.01", model=model, mode="realtime")
@@ -98,7 +98,7 @@ def build_expected():
                        path=["1_alias_sampling_interval", "normal_records_ge30", "f_alias", "median"],
                        value=ph["1_alias_sampling_interval"]["normal_records_ge30"]["f_alias"]["median"], report="(1.4절)"))
     seq = dom / "04_sequential_uncertainty.csv"
-    for key, name, rep in (("v2+H1+H2", "순차 검출 비교표의 최종 모델 test F1 B", "(2.5절)"), ("CUSUM-carry", "CUSUM(상태 유지) test F1 B", "(2.7절 표)")):
+    for key, name, rep in (("v2+H1+H2", "순차 검출 비교표의 2단계 모델 test F1 B", "(2.5절)"), ("CUSUM-carry", "CUSUM(상태 유지) test F1 B", "(2.7절 표)")):
         where = dict(key=key, split="B", regime="test")
         checks.append(dict(name=name, kind="csv", file="code/press/domain/outputs/04_sequential_uncertainty.csv",
                            where=where, column="f1", value=csv_value(seq, where, "f1"), report=rep))
@@ -107,7 +107,7 @@ def build_expected():
         checks.append(dict(name=f"분할 B 고부하 정상 오경보 기록 {label}(α 5%)", kind="csv", file="code/press/domain/outputs/06_operating_regime.csv",
                            where=where, column="fa_records", value=csv_value(dom / "06_operating_regime.csv", where, "fa_records"), report="(3.2절 표)"))
     # 기록 하나를 1개로 센 F1(사후, 2.4절 표 † 열)
-    for model, label in (("v2", "기반 모델 v2"), ("v2+H1+H2", "최종 v2+R1+R2")):
+    for model, label in (("v2", "기반 모델 v2"), ("v2+H1+H2", "2단계 모델 v2+R1+R2")):
         where = dict(split="B", regime="test", model=model)
         checks.append(dict(name=f"test 기록 수 F1 {label} B", kind="csv", file="code/press/tvt/outputs/tvt_record_count.csv",
                            where=where, column="rec_f1", value=csv_value(tvt / "tvt_record_count.csv", where, "rec_f1"), quick=True, report="(2.4절 표 †)"))

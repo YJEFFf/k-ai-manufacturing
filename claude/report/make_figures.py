@@ -101,7 +101,7 @@ def fig_collection():
 def fig_flow():
     """[그림 6] 분석 흐름 8단계(실제 진행 순서, 4개씩 두 줄). '사후' 상자는 test 채점 뒤에 한 분석이다."""
     steps = ["데이터·구조\n확인", "데이터 결함\n진단", "모델 v1~v3·\n규칙 R1·R2\n(전체 데이터 봄)", "잠금(v2+R1)·\ntest 채점",
-             "test 확인 뒤\n최종 v2+R1+R2", "의심과 검증\n(2.6절)", "사후: 설비 물리·\n표준 기법·운전 상태", "사후(†):\n보완 LSTM 대조"]
+             "test 확인 뒤\n2단계 승격 R2\n(v2+R1+R2)", "의심과 검증\n(2.6절)", "사후: 설비 물리·\n표준 기법·운전 상태", "사후(†):\n보완 LSTM 대조"]
     dx, w, h, ys = 2.15, 1.75, 0.95, (1.45, 0.1)     # 칸 간격, 상자 폭·높이, 두 줄의 상자 아래 y
     fig, ax = plt.subplots(figsize=(8.4, 2.4))
     ax.set_xlim(0, 4 * dx); ax.set_ylim(0, 2.5); ax.axis("off")
@@ -137,7 +137,7 @@ def fig_miss_position():
 
 # 모델 비교 그림의 막대 순서와 표시 이름(내부 이름 H1·H2 = 보고서의 R1·R2)
 NAMES = {"iforest": "IsolationForest", "lstm20": "LSTM-AE(가이드북, 20행)", "maxz3": "max|z|", "knn5": "5NN", "mlp_ae5": "MLP-AE(5행)",
-         "v1": "v1", "v2": "기반 모델 v2", "v2+C1d1": "v2+v3 조건부", "v2+H1": "v2+R1(잠금 선택)", "v2+H1+H2": "v2+R1+R2(최종)"}
+         "v1": "v1", "v2": "기반 모델 v2", "v2+C1d1": "v2+v3 조건부", "v2+H1": "v2+R1(잠금·공식)", "v2+H1+H2": "v2+R1+R2(2단계)"}
 
 
 def fig_models():
@@ -306,7 +306,7 @@ def fig_load_vibration():
 
 
 def fig_model_structure():
-    """[그림 8] 최종 모델 구조: 센서 3개 → v2 세 성분 → conformal 문턱 → R2 교차 확인 → R1 사건 지속 → 2단계 경보, 아래에 확률 층."""
+    """[그림 8] 2단계 경보 구조: 센서 3개 → v2 세 성분 → conformal 문턱 → R2 교차 확인 → R1 사건 지속 → 2단계 경보, 아래에 확률 층."""
     fig, ax = plt.subplots(figsize=(7.8, 3.9))
     ax.set_xlim(0, 13.2); ax.set_ylim(0, 5.9); ax.axis("off")
     for i, name in enumerate(["상부 진동", "하부 진동", "모터 전류"]):
@@ -325,7 +325,9 @@ def fig_model_structure():
     box(ax, (7.55, 2.45), 2.2, 1.75, "R2 교차 확인\n크기 단독 경보이고\n전류 R²(8행 이상)가\n기준 이상이면 보류", fc="#fdeee6", ec=B, size=6.8)
     box(ax, (10.2, 2.45), 2.9, 1.75, "R1 사건 지속\n직전 기록(60초 안)이\n확인된 이상(경보 2행↑)이면\n첫 행부터 유지,\n8행 이상 R² 정상 시 해제", fc="#fdeee6", ec=B, size=6.8)
     arrow(ax, (7.1, 3.32), (7.55, 3.32)); arrow(ax, (9.75, 3.32), (10.2, 3.32))
-    box(ax, (10.2, 0.2), 2.9, 1.5, "경보\n사건 첫 경보 = 1단계 주의\n사건 안 2행 = 2단계\n점검 요청", fc="white", ec=INK2, size=7.2, weight="bold")
+    box(ax, (10.2, 0.2), 2.9, 1.5, "1단계 주의 = R1만 거침\n(잠금 모델 v2+R1)\n2단계 점검 요청 =\nR2·R1 통과(v2+R1+R2)", fc="white", ec=INK2, size=7.0, weight="bold")
+    ax.annotate("", xy=(10.35, 4.05), xytext=(6.9, 4.05), arrowprops=dict(arrowstyle="->", color=INK2, lw=0.9, ls="--", connectionstyle="arc3,rad=-0.3"))
+    ax.text(8.65, 5.0, "1단계는 R2를 거치지 않음", ha="center", fontsize=7.2, color=INK2)
     arrow(ax, (11.65, 2.45), (11.65, 1.7))
     box(ax, (2.05, 0.2), 7.7, 1.2, "확률 층(경보와 별도)\nv2 점수 → 단조 회귀(valid로만 맞춤) → 우도비 × 사전 오즈\n→ 이상 확률(예측 파일 열)",
         fc="#f3f2ef", size=7.2)
@@ -336,27 +338,27 @@ def fig_model_structure():
 
 
 def fig_alarm_card():
-    """[그림 13] 최종 모델 경보 카드 예시(분할 B test): 이상 기록 하나와, v2는 울렸지만 R2가 보류한 정상 기록 하나."""
+    """[그림 13] 2단계 경보 카드 예시(분할 B test): 이상 기록 하나와, v2는 울렸지만 R2가 보류한 정상 기록 하나."""
     t = pd.read_pickle(ROOT / "code/press/tvt/cache/rows_B.pkl")
     pred = pd.read_csv(TVT / "test_predictions_B.csv")
-    t = t[t.part == "test"].merge(pred[["subset", "rec", "pos", "final_v2_R1_R2_realtime", "v2_realtime"]], on=["subset", "rec", "pos"])
+    t = t[t.part == "test"].merge(pred[["subset", "rec", "pos", "final_v2_R1_R2_realtime", "locked_v2_R1_realtime", "v2_realtime"]], on=["subset", "rec", "pos"])
     held = pred[(pred.subset == "normal") & pred.v2_realtime & ~pred.final_v2_R1_R2_realtime].rec.unique()
     cases = [("abnormal", "test:abnormal:11", "(a) 이상 기록 11(상부 진동만 큰 양상)\nv2가 끊긴 행까지 R1이 채워\n기록 전체가 경보 → 2단계"),
-             ("normal", held[0], f"(b) 분할 B 정상 기록 {420 + int(held[0].split(':')[-1])}(test)\nv2는 크기만 넘어 경보,\n최종 모델은 R2로 보류")]
-    lanes = [("크기 문턱", "magnitude", A), ("파형 문턱", "waveform", A), ("동역학 문턱", "dynamics", A), ("v2 경보", None, INK2), ("최종 경보", None, B)]
-    fig, axes = plt.subplots(1, 2, figsize=(7.8, 2.9), sharey=True)
+             ("normal", held[0], f"(b) 분할 B 정상 기록 {420 + int(held[0].split(':')[-1])}(test)\nv2 크기만 넘어 1단계 주의,\nR2로 2단계는 보류")]
+    lanes = [("크기 문턱", "magnitude", A), ("파형 문턱", "waveform", A), ("동역학 문턱", "dynamics", A), ("v2 경보", None, INK2), ("1단계 경보", None, INK2), ("2단계 경보", None, B)]
+    fig, axes = plt.subplots(1, 2, figsize=(7.8, 3.2), sharey=True)
     for ax, (sub, rec, title) in zip(axes, cases):
         r = t[(t.subset == sub) & (t.rec == rec)].sort_values("pos")
         for i, (name, comp, col) in enumerate(lanes):
             if comp:     # 성분 꼬리 확률이 α 1% 이하인 행(그 성분이 문턱을 넘음)
                 on = r.pos[r[f"v2|cp_full|{comp}"] <= 0.01]
             else:
-                on = r.pos[r["v2_realtime" if name == "v2 경보" else "final_v2_R1_R2_realtime"].astype(bool)]
+                on = r.pos[r[{"v2 경보": "v2_realtime", "1단계 경보": "locked_v2_R1_realtime"}.get(name, "final_v2_R1_R2_realtime")].astype(bool)]
             y = len(lanes) - 1 - i
             ax.broken_barh([(p - 0.5, 1) for p in on], (y - 0.38, 0.76), color=col, lw=0)
             ax.plot([r.pos.min() - 0.5, r.pos.max() + 0.5], [y - 0.42, y - 0.42], color="#e6e5e1", lw=0.6)
-            if name == "최종 경보" and on.empty:
-                ax.text((r.pos.min() + r.pos.max()) / 2, y, "경보 없음(R2 보류)", ha="center", va="center", fontsize=8.5, color=B)
+            if name == "2단계 경보" and on.empty:
+                ax.text((r.pos.min() + r.pos.max()) / 2, y, "2단계 없음(R2 보류)", ha="center", va="center", fontsize=8.5, color=B)
         ax.set_xlim(r.pos.min() - 0.5, r.pos.max() + 0.5)
         ax.set_title(title, fontsize=9, loc="left", color=INK)
         ax.set_xlabel("기록 안 위치(행, 0.1초)", fontsize=8)

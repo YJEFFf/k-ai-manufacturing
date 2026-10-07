@@ -415,6 +415,9 @@ EXT = [
     ("run.quick_min", 14, "14", "같은 실행의 quick 단계 시간 합 13.6분(logs/run_summary.json)"),
     ("run.checks", 37, "37", "run_all.py 결과 대조 37/37"),
     ("run.cpu_cores", 16, "16", "검증 PC Core Ultra 7 155H 16코어"),
+    ("stage1.cp_B", 4.3, "4.3", "1단계 B test 오경보 3/180 Clopper-Pearson 단측 95% 상한 4.25%"),
+    ("stage1.pois_B", 19, "19", "1단계 B 경보 사건 3건 포아송 단측 95% 상한 7.75 / 24.1분 × 60 = 19.3건/시간"),
+    ("stage1.rate_B", 7.5, "7.5", "1단계(잠금 v2+R1) B test 정상 경보 사건 3건(기록 3·41·150) / 24.1분 × 60 = 7.47건/시간"),
     # 2.3절 보완 LSTM 비교(†): 예준 yejun/final-review 62482a5, research/yejun_lstm_improvement_62482a5/
     ("lstm.variants", 516, "516", "LSTM README: 변형 516개(설정 26 × 채점)"),
     ("lstm.test_A", 0.974684, "0.975", "06_summary 주 비교 보완 LSTM e345 test A"),
