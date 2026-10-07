@@ -145,13 +145,21 @@ def fig_models():
     t = pd.read_csv(TVT / "tvt_test.csv")
     t = t[(t.alpha == 0.01) & (t["mode"] == "realtime") & t.model.isin(NAMES)]
     p = t.pivot_table(index="model", columns="split", values="f1").loc[list(NAMES)]
+    # 사후(†) 보완 LSTM(예준 실험의 잠금 설정, 새 seed 3·4·5 앙상블)을 가이드북 LSTM 바로 아래에 회색으로 덧붙인다
+    lx = pd.read_csv(HERE / "research" / "yejun_lstm_improvement_62482a5" / "03_test.csv")
+    lx = lx[(lx.variant == "lx:W10-var-128x64-e1000p100:ct-mean:e345") & (lx.rule == "none") & (lx.alpha == 0.01)
+            & (lx.regime == "test") & (lx["mode"] == "realtime")].set_index("split").f1
+    rows = list(p.index)
+    p = pd.concat([p.loc[:"lstm20"], pd.DataFrame([[lx["A"], lx["B"]]], index=["lstm_imp"], columns=p.columns), p.loc[rows[rows.index("lstm20") + 1]:]])
+    labels = {**NAMES, "lstm_imp": "† 보완 LSTM-AE(사후)"}
     y = np.arange(len(p)); h = 0.38
-    fig, ax = plt.subplots(figsize=(6.4, 4.0))
+    fig, ax = plt.subplots(figsize=(6.4, 4.3))
+    post = np.array([m == "lstm_imp" for m in p.index])
     for off, s, c in ((h / 2, "A", A), (-h / 2, "B", B)):
-        ax.barh(y + off, p[s], h - 0.05, color=c, label=f"분할 {s}", **HATCH[s])
+        ax.barh(y + off, p[s], h - 0.05, color=[GREY if q else c for q in post], label=f"분할 {s}", **HATCH[s])
     for yi, (ma, mb) in zip(y, p[["A", "B"]].to_numpy()):
         ax.text(max(ma, mb) + 0.01, yi, f"{ma:.3f} / {mb:.3f}", va="center", fontsize=8, color=INK2)
-    ax.set_yticks(y, [NAMES[m] for m in p.index]); ax.set_xlim(0, 1.18); ax.set_xlabel("test 실시간 행 단위 F1 (α 1%)")
+    ax.set_yticks(y, [labels[m] for m in p.index]); ax.set_xlim(0, 1.18); ax.set_xlabel("test 실시간 행 단위 F1 (α 1%)")
     ax.legend(frameon=False, fontsize=8.5, loc="lower right")
     ax.set_title("같은 분할·같은 보정에서의 모델 비교", fontsize=10, loc="left", color=INK)
     save(fig, "fig5_models.png")

@@ -1,7 +1,7 @@
 """명령 하나로 전처리 → 학습 → 추론 → 결과 생성 → 보고서 수치 대조까지 실행한다.
 
     python run_all.py           # 전체: 데이터 진단, 모델(train/valid/test), test 예측 파일, 검증 실험, 사후 분석, 결과 대조
-    python run_all.py --quick   # 핵심만: 데이터 진단, 모델, test 예측 파일, 2.4절 사후 계산 2개, 결과 대조
+    python run_all.py --quick   # 핵심만: 데이터 진단, 모델, test 예측 파일, 2.4·2.7·4.3절 사후 계산, 결과 대조
 
 - 모든 단계는 이 폴더(압축을 푼 위치)를 기준으로 상대 경로만 쓴다. 인터넷 연결이 필요 없다
 - 단계마다 로그를 logs/<단계>.log 에 남기고, 끝나면 logs/run_summary.json 에 단계별 시간과 대조 결과를 쓴다
@@ -57,6 +57,8 @@ STEPS = [
     ("4_사후_R1기준선", "code/press/tvt/07_r1_on_baselines.py", [], True, "R1을 기준선에도 붙인 비교, 창 때문에 점수 없는 행(사후, 선택에 쓰지 않음)"),
     ("4_사후_성분절제", "code/press/tvt/09_component_ablation.py", ["--repo", "."], False, "v2 성분 조합별 인공 주입 탐지율(사후, 선택에 쓰지 않음)"),
     ("4_사후_문턱무관비교", "code/press/tvt/10_threshold_free.py", [], True, "R1 없는 행 AUROC·PR-AUC와 기록 단위 부트스트랩 구간(사후, 선택에 쓰지 않음)"),
+    ("4_사후_보조수치", "code/press/tvt/11_posthoc_numbers.py", ["--repo", "."], True, "max|z|+R1+R2, 이상 확률 AUROC·ECE, 수집 공백(사후, 선택에 쓰지 않음)"),
+    ("4_사후_합성열화", "code/press/tvt/12_ramp_warning.py", ["--repo", "."], True, "합성 열화(2·5·10분)에서 첫 경보 선행 시간(사후, 선택에 쓰지 않음)"),
 ]
 
 
@@ -148,7 +150,7 @@ def compare(quick):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--quick", action="store_true", help="핵심 단계만(진단·모델·test 예측·2.4절 사후 계산·대조)")
+    ap.add_argument("--quick", action="store_true", help="핵심 단계만(진단·모델·test 예측·2.4·2.7·4.3절 사후 계산·대조)")
     a = ap.parse_args()
     try:
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")

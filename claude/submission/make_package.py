@@ -98,7 +98,7 @@ def build_expected():
                        path=["1_alias_sampling_interval", "normal_records_ge30", "f_alias", "median"],
                        value=ph["1_alias_sampling_interval"]["normal_records_ge30"]["f_alias"]["median"], report="(1.4절)"))
     seq = dom / "04_sequential_uncertainty.csv"
-    for key, name, rep in (("v2+H1+H2", "순차 검출 비교표의 최종 모델 test F1 B", "(2.5절)"), ("CUSUM-carry", "CUSUM(상태 유지) test F1 B", "(2.4절 표)")):
+    for key, name, rep in (("v2+H1+H2", "순차 검출 비교표의 최종 모델 test F1 B", "(2.5절)"), ("CUSUM-carry", "CUSUM(상태 유지) test F1 B", "(2.7절 표)")):
         where = dict(key=key, split="B", regime="test")
         checks.append(dict(name=name, kind="csv", file="code/press/domain/outputs/04_sequential_uncertainty.csv",
                            where=where, column="f1", value=csv_value(seq, where, "f1"), report=rep))
@@ -119,11 +119,11 @@ def build_expected():
     pr = json.loads((tvt / "tvt_probability.json").read_text(encoding="utf-8"))
     checks.append(dict(name="이상 확률 test Brier B(파일 비율 사전)", kind="json", file="code/press/tvt/outputs/tvt_probability.json",
                        path=["B", "brier_fileprior"], value=pr["B"]["brier_fileprior"], tol=1e-6, quick=True, report="(2.5절)"))
-    # R1을 기준선에도 붙인 비교(사후, 2.4절)와 LSTM 창 때문에 점수 없는 행
+    # R1을 기준선에도 붙인 비교(사후, 2.7절)와 LSTM 창 때문에 점수 없는 행
     for model, col, label in (("iforest+H1", "test_f1", "IsolationForest+R1 test F1 B"), ("knn5+H1", "test_fp", "5NN+R1 test 오경보 행 B")):
         where = dict(split="B", model=model)
         checks.append(dict(name=label, kind="csv", file="code/press/tvt/outputs/tvt_r1_baselines.csv", where=where, column=col,
-                           value=csv_value(tvt / "tvt_r1_baselines.csv", where, col), quick=True, report="(2.4절 †)"))
+                           value=csv_value(tvt / "tvt_r1_baselines.csv", where, col), quick=True, report="(2.7절 †)"))
     where = dict(split="A", model="lstm20")
     checks.append(dict(name="LSTM 20행 창 때문에 점수 없는 test 이상 행 A", kind="csv", file="code/press/tvt/outputs/tvt_unscored.csv", where=where,
                        column="no_score_rows", value=csv_value(tvt / "tvt_unscored.csv", where, "no_score_rows"), quick=True, report="(2.4절)"))
@@ -135,6 +135,23 @@ def build_expected():
     where = dict(split="B", other="v1")
     checks.append(dict(name="부트스트랩 v2−v1 F1 차이 95% 하한 B", kind="csv", file="code/press/tvt/outputs/threshold_free_boot.csv",
                        where=where, column="d_f1_lo", value=csv_value(tvt / "threshold_free_boot.csv", where, "d_f1_lo"), tol=1e-6, quick=True, report="(2.4절 †)"))
+    # 사후 보조 수치(11, 2.5·2.7·4.3절)
+    ph = json.loads((tvt / "posthoc_numbers.json").read_text(encoding="utf-8"))
+    for path, label, rep in ((["maxz_rules", "A|maxz3+H1+H2|0.01", "valid_f1"], "max|z|+R1+R2 valid 실시간 F1 A(α 1%)", "(2.7절 † R1 표)"),
+                             (["maxz_rules", "B|maxz3+H1+H2|0.05", "test_fp"], "max|z|+R1+R2 test 오경보 행 B(α 5%)", "(2.7절 †)"),
+                             (["probability", "A|v2_prob_fileprior", "auroc"], "이상 확률 test 행 AUROC A", "(2.5절)"),
+                             (["gaps", "median_s"], "정상 파일 수집 공백 중앙값(초)", "(4.3절)")):
+        v = ph
+        for k in path:
+            v = v[k]
+        checks.append(dict(name=label, kind="json", file="code/press/tvt/outputs/posthoc_numbers.json", path=path, value=v, tol=1e-9,
+                           quick=True, report=rep))
+    # 합성 열화(12, 사후, 4.3절)
+    rs = json.loads((tvt / "ramp_summary.json").read_text(encoding="utf-8"))
+    for key, col, label in (("전류 파형|10분|v2+R1+R2", "lead_median_min", "합성 열화 10분 전류 파형 선행 시간 중앙값(분)"),
+                            ("진동|5분|v2+R1+R2", "before_complete_rate", "합성 열화 5분 진동 완성 전 경보 비율")):
+        checks.append(dict(name=label, kind="json", file="code/press/tvt/outputs/ramp_summary.json", path=[key, col],
+                           value=rs[key][col], tol=1e-9, quick=True, report="(4.3절)"))
     # 성분 절제(09, 사후, 2.4절 †): 분할 B 전류 파형 주입 강도 1의 크기 성분만 / v2 탐지율(전체 실행)
     for col, label in (("크기", "크기 성분만"), ("v2", "v2(세 성분)")):
         where = dict(split="B", family="current_residual", target="2", strength="1.0")
@@ -158,9 +175,13 @@ def main():
     shutil.copy2(PRESS / "06_alias_frequency_audit.py", stage / "code" / "press" / "06_alias_frequency_audit.py")
     # 팀원 모듈(레포와 같은 yejun/ 상대 위치를 지켜야 팀원 코드의 경로 계산이 맞는다)
     y = a.repo / "yejun"
-    for rel in ("press_guard", "analysis/press_master_validation_2026-10-03", "analysis/press_evidence", MASTER_PLAN):
+    for rel in ("press_guard", "analysis/press_master_validation_2026-10-03", "analysis/press_evidence"):
         copy_tree(y / rel, stage / "yejun" / rel)
-    # 보완 LSTM 실험(보고서 2.4절 †, run_all.py 밖): 코드와 결과 표(outputs)를 넣고 가중치 캐시(cache)는 뺀다
+    # v3 모듈(core.py)이 읽는 설계 파일만 넣는다. 같은 폴더의 계획·검토 문서(md)와 외부 자료 수집 기록은 실행에 쓰지 않아 뺀다
+    (stage / "yejun" / MASTER_PLAN).mkdir(parents=True)
+    for f in ("protocol.json", "execution_revision.json", "execution_contracts.json"):
+        shutil.copy2(y / MASTER_PLAN / f, stage / "yejun" / MASTER_PLAN / f)
+    # 보완 LSTM 실험(보고서 2.7절 †, run_all.py 밖): 코드와 결과 표(outputs)를 넣고 가중치 캐시(cache)는 뺀다
     copy_tree(y / "analysis" / "press_lstm_improvement", stage / "yejun" / "analysis" / "press_lstm_improvement",
               skip_dirs=SKIP_DIRS - {"outputs"})
     # 원본 데이터는 run_all.py가 해시 확인 뒤 이 폴더에 다시 배치하므로 빼 둔다

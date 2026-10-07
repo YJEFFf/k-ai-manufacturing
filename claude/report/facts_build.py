@@ -345,6 +345,16 @@ for _, r in pd.read_csv(ABL).iterrows():
         add(f"abl.{r.split}.{r.family}.{r.target}.{r.strength}.{col}", r[col], fmt(r[col] * 100, 1), ABL,
             f"{r.split}/{r.family}/{r.target}/{r.strength}/{col}")
 
+# ---- 사후 4.3절 †: 합성 열화(tvt/12) ----
+RS = TVT / "ramp_summary.json"
+for key, v in json.loads(RS.read_text(encoding="utf-8")).items():
+    for col in ("alarm_rate", "before_complete_rate"):
+        add(f"ramp.{key}.{col}", v[col], fmt(v[col] * 100, 1), RS, f"{key}/{col}")
+        add(f"ramp.{key}.{col}.0", v[col], fmt(v[col] * 100, 0), RS, f"{key}/{col}")
+    if v["lead_median_min"] is not None:
+        add(f"ramp.{key}.lead", v["lead_median_min"], fmt(v["lead_median_min"], 2), RS, f"{key}/lead_median_min")
+        add(f"ramp.{key}.frac", v["frac_at_alarm_median"], fmt(v["frac_at_alarm_median"], 2), RS, f"{key}/frac_at_alarm_median")
+
 # ---- v5: 외부 근거 수치(report/research/*.md에 출처 URL과 함께 기록) ----
 EXT = [
     ("grid.nominal_hz", 60, "60", "domain_sources.md 7장 전기사업법 시행규칙 별표 3"),
@@ -401,9 +411,9 @@ EXT = [
     ("regB.pct_hi", 99.6, "99.6", "06 records B 학습 기준 분위"),
     ("env.python", 3.13, "3.13", "실행 환경 파이썬 판"),
     ("env.python_old", 3.12, "3.12", "팀원 예전 환경 파일 판"),
-    ("run.full_min", 63, "63", "새 환경(C:/Temp/bj_v3/run4) run_all.py 전체 62.8분, 10/7, 최종 zip"),
-    ("run.quick_min", 24, "24", "같은 실행의 quick 단계 시간 합 24.3분(logs/run_summary.json)"),
-    ("run.checks", 31, "31", "run_all.py 결과 대조 31/31"),
+    ("run.full_min", 46, "46", "새 환경(C:/Temp/bj_v3/run5) run_all.py 전체 45.9분, 10/7, 최종 zip"),
+    ("run.quick_min", 14, "14", "같은 실행의 quick 단계 시간 합 13.6분(logs/run_summary.json)"),
+    ("run.checks", 37, "37", "run_all.py 결과 대조 37/37"),
     ("run.cpu_cores", 16, "16", "검증 PC Core Ultra 7 155H 16코어"),
     # 2.3절 보완 LSTM 비교(†): 예준 yejun/final-review 62482a5, research/yejun_lstm_improvement_62482a5/
     ("lstm.variants", 516, "516", "LSTM README: 변형 516개(설정 26 × 채점)"),
