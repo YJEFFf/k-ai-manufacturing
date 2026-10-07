@@ -283,7 +283,7 @@ def main():
         hwp.quit()
     patch_hwpx(OUT)
     # XML을 고친 hwpx를 다시 열어 PDF를 뽑는다(쪽 나눔이 PDF에도 반영되도록)
-    h2 = Hwp(visible=False)
+    h2 = Hwp(new=True, visible=False)   # 방금 끝낸 인스턴스가 실행 목록에 남아 붙으면 COM 오류가 나므로 새로 띄운다
     try:
         h2.set_message_box_mode(0x10000); h2.open(str(OUT)); h2.save_as(str(OUT.with_suffix(".pdf")), "PDF")
     finally:
