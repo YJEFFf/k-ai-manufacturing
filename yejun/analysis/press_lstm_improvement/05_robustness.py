@@ -247,17 +247,27 @@ def run_job(args):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--workers", type=int, default=7)
+    ap.add_argument("--retrain-only", action="store_true", help="가중치 재학습·결정성 확인만 하고 끝낸다(빈 코어에서 미리 돌리기)")
+    ap.add_argument("--start-only", action="store_true", help="출발점 설정만(최종 선택 전에도 돌 수 있다)")
+    ap.add_argument("--summary-only", action="store_true", help="저장된 05_*.csv로 요약·대조만 다시 낸다")
     a = ap.parse_args()
     t0 = time.time()
-    specs = selected_specs()
+    specs = [dict(label="start:e012", cfg=START[0], scoring=START[1], seeds=(0, 1, 2))] if a.start_only else selected_specs()
     print("강건성 대상 LSTM:", specs, flush=True)
-    det_check = []
+    det_path = H.OUT / "05_determinism.json"
+    det_check = json.loads(det_path.read_text(encoding="utf-8")) if det_path.exists() else []
     jobs = retrain_jobs(specs)
     if jobs:
         with ProcessPoolExecutor(max_workers=a.workers, mp_context=mp.get_context("spawn")) as ex:
             for f in as_completed([ex.submit(L.run, j) for j in jobs]):
                 det_check.append(check_determinism(f.result()))
+        H.dump(det_check, det_path)
         print("재학습 결정성:", det_check, flush=True)
+    if a.retrain_only:
+        return
+    if a.summary_only:   # 시험은 다시 돌리지 않고 저장된 CSV로 요약만
+        summarize(specs, det_check, None)
+        return
     work = [("v1", s, fam) for s in H.SPLITS for fam in ("band_noise", "damped_impulse", "current_residual")] + \
            [("v2", s, None) for s in H.SPLITS] + [("v5", s, None) for s in H.SPLITS]
     res = {"v1": [], "loss": [], "v5": []}
@@ -267,27 +277,39 @@ def main():
             kind, df = f.result()
             res[kind].append(df)
             print("완료", futs[f], f"{time.time() - t0:.0f}s", flush=True)
-    v1 = pd.concat(res["v1"], ignore_index=True)
-    loss = pd.concat(res["loss"], ignore_index=True)
-    v5 = pd.concat(res["v5"], ignore_index=True)
-    v1.to_csv(H.OUT / "05_v1.csv", index=False)
-    loss.to_csv(H.OUT / "05_v2_loss.csv", index=False)
-    v5.to_csv(H.OUT / "05_v5.csv", index=False)
+    pd.concat(res["v1"], ignore_index=True).to_csv(H.OUT / "05_v1.csv", index=False)
+    pd.concat(res["loss"], ignore_index=True).to_csv(H.OUT / "05_v2_loss.csv", index=False)
+    pd.concat(res["v5"], ignore_index=True).to_csv(H.OUT / "05_v5.csv", index=False)
+    summarize(specs, det_check, round(time.time() - t0, 1))
+
+
+def summarize(specs, det_check, seconds):
+    """저장한 CSV를 다시 읽어 탐지율을 내고 v2 계열이 준용 04 산출물과 같은지 대조한다.
+
+    탐지율 정의는 준용 04와 같다: 주입 강도 > 0인 모든 기록에서, 주입기가 주입할 수 없다고 한 기록은 '못 잡음'으로 센다.
+    """
+    v1, loss, v5 = (pd.read_csv(H.OUT / n) for n in ("05_v1.csv", "05_v2_loss.csv", "05_v5.csv"))
     det_cols = [c for c in v1.columns if c.endswith("|detected")]
-    sup = v1[v1.supported]
-    pod = sup.groupby(["split", "family", "target", "strength"])[det_cols].mean().reset_index()
+    v1[det_cols] = v1[det_cols].fillna(False).astype(float)
+    sel = v1[v1.strength > 0]
+    pod = sel.groupby(["split", "family", "target", "strength"])[det_cols].mean().reset_index()
     pod.to_csv(H.OUT / "05_v1_pod.csv", index=False)
-    lpod = loss.groupby(["split", "target", "multiplier"])[[c for c in loss.columns if c.endswith("|detected")]].mean().reset_index()
-    # v2 계열이 준용 04 산출물과 같은 계산인지
+    ctrl = v1[v1.strength == 0].groupby(["split", "family", "target"])[det_cols].mean().reset_index()   # 주입 없는 대조(오경보)
+    ctrl.to_csv(H.OUT / "05_v1_control.csv", index=False)
+    lcols = [c for c in loss.columns if c.endswith("|detected")]
+    lpod = loss.groupby(["split", "target", "multiplier"])[lcols].mean().reset_index()
     ref_pod = pd.read_csv(H.TVT / "outputs/validation_v1_pod.csv")
     chk = pod.merge(ref_pod, on=["split", "family", "target", "strength"], suffixes=("", "_ref"))
-    v2_same = {v: bool(np.allclose(chk[f"{v}|detected"], chk[f"{v}|detected_ref"])) for v in ("v2", "v2+R1", "v2+R1+R2")}
+    v2_same = {v: bool(np.allclose(chk[f"{v}|detected"].astype(float), chk[f"{v}|detected_ref"].astype(float)))
+               for v in ("v2", "v2+R1", "v2+R1+R2")}
     ref_v5 = pd.read_csv(H.TVT / "outputs/validation_v5.csv")
-    m5 = v5[v5.model.isin(["v2", "v2+R1", "v2+R1+R2"])].merge(ref_v5.rename(columns={"variant": "model"}),
-                                                                on=["split", "test", "level", "model"], suffixes=("", "_ref"))
+    v5k, refk = v5.copy(), ref_v5.rename(columns={"variant": "model"}).copy()
+    v5k["level"], refk["level"] = v5k.level.astype(str), refk.level.astype(str)
+    m5 = v5k[v5k.model.isin(["v2", "v2+R1", "v2+R1+R2"])].merge(refk, on=["split", "test", "level", "model"], suffixes=("", "_ref"))
     v5_same = bool((m5.alerted == m5.alerted_ref).all()) if len(m5) else None
-    summary = dict(specs=specs, determinism=det_check, v2_matches_tvt_validation=dict(v1_pod=v2_same, v5=v5_same, v5_cells=int(len(m5))),
-                   v2_loss_pod=lpod.round(4).to_dict("records"), seconds=round(time.time() - t0, 1))
+    summary = dict(specs=specs, determinism=det_check,
+                   v2_matches_tvt_validation=dict(v1_pod=v2_same, v1_cells=int(len(chk)), v5=v5_same, v5_cells=int(len(m5))),
+                   v2_loss_pod=lpod.round(4).to_dict("records"), seconds=seconds)
     H.dump(summary, H.OUT / "05_robustness.json")
     pd.set_option("display.width", 260)
     print(json.dumps({k: summary[k] for k in ("determinism", "v2_matches_tvt_validation")}, ensure_ascii=False, indent=1, default=str))

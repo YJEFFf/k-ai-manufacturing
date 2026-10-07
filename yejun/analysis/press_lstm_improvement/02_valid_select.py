@@ -57,28 +57,39 @@ def preflight(sid, table, info):
     assert bad.empty, f"{sid}: 시드 0·1·2가 다 있지 않은 설정 {bad.to_dict()}"
 
 
-def eval_valid():
+def eval_split(sid):
+    """분할 하나의 valid 채점(분할 A·B를 따로 프로세스에서 돌린다)."""
     _, ev, _ = H.tvt()
-    rows, refs, infos, cfg_sets = [], [], [], []
-    for sid in H.SPLITS:
-        t, meta, info = X.build_variant_table(sid, ens_sets=("e012",))
-        preflight(sid, t, info)
-        r2 = meta["r2_ref"]
-        for v in info.itertuples():
-            ens = v.seed.startswith("e")
-            for h1 in (False, True):
-                for a in (H.ALPHAS if ens else (H.PRIMARY_ALPHA,)):
-                    for mode, m in H.evaluate(t, v.variant, h1, a, "valid", r2).items():
-                        rows.append(dict(split=sid, variant=v.variant, rule="R1" if h1 else "none", alpha=a, mode=mode, **m))
-        infos.append(info)
-        cfg_sets.append(set(info.cfg))
-        known = {c[0]: c for c in ev.candidates(meta["complexity"])}
-        for name in REFS:
-            c = known.get(name) or (name, name.split("+")[0], "+H1" in name, "+H2" in name, False, 1)
-            for a in H.ALPHAS:
-                for mode, m in ev.evaluate(t, c, a, "valid", r2).items():
-                    refs.append(dict(split=sid, model=name, alpha=a, mode=mode, **m))
-    assert cfg_sets[0] == cfg_sets[1], f"분할 A·B의 설정이 다르다: {cfg_sets[0] ^ cfg_sets[1]}"
+    rows, refs = [], []
+    t, meta, info = X.build_variant_table(sid, ens_sets=("e012",))
+    # 선택에는 시드 0·1·2만 쓴다. 확인용 새 시드(3·4·5)가 캐시에 있어도 동률 폭·지표에 섞이지 않게 뺀다
+    info = info[info.seed.isin(["0", "1", "2", "e012"])].reset_index(drop=True)
+    preflight(sid, t, info)
+    r2 = meta["r2_ref"]
+    for v in info.itertuples():
+        ens = v.seed.startswith("e")
+        for h1 in (False, True):
+            for a in (H.ALPHAS if ens else (H.PRIMARY_ALPHA,)):
+                for mode, m in H.evaluate(t, v.variant, h1, a, "valid", r2).items():
+                    rows.append(dict(split=sid, variant=v.variant, rule="R1" if h1 else "none", alpha=a, mode=mode, **m))
+    known = {c[0]: c for c in ev.candidates(meta["complexity"])}
+    for name in REFS:
+        c = known.get(name) or (name, name.split("+")[0], "+H1" in name, "+H2" in name, False, 1)
+        for a in H.ALPHAS:
+            for mode, m in ev.evaluate(t, c, a, "valid", r2).items():
+                refs.append(dict(split=sid, model=name, alpha=a, mode=mode, **m))
+    return rows, refs, info
+
+
+def eval_valid():
+    import multiprocessing as mp
+    from concurrent.futures import ProcessPoolExecutor
+    with ProcessPoolExecutor(max_workers=len(H.SPLITS), mp_context=mp.get_context("spawn")) as ex:
+        parts = list(ex.map(eval_split, H.SPLITS))
+    rows = [r for p in parts for r in p[0]]
+    refs = [r for p in parts for r in p[1]]
+    infos = [p[2] for p in parts]
+    assert set(infos[0].cfg) == set(infos[1].cfg), f"분할 A·B의 설정이 다르다: {set(infos[0].cfg) ^ set(infos[1].cfg)}"
     info = pd.concat(infos, ignore_index=True).drop_duplicates("variant").reset_index(drop=True)
     return pd.DataFrame(rows), info, pd.DataFrame(refs)
 

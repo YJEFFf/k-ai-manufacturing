@@ -42,43 +42,54 @@ def s07():
     return m
 
 
-def main():
-    t0 = time.time()
+def score_split(sid):
+    """분할 하나의 test(와 새 시드 valid) 채점. 분할 A·B를 따로 프로세스에서 돌린다."""
     sel = check_lock()
     _, ev, _ = H.tvt()
     m07 = s07()
-    rows, refs, infos = [], [], []
+    rows, refs = [], []
     focus = {(sel["track_L"]["cfg"], sel["track_L"]["scoring"]), START,
              (sel["exploratory_LR1"]["cfg"], sel["exploratory_LR1"]["scoring"])}
-    for sid in H.SPLITS:
-        t, meta, info = X.build_variant_table(sid, ens_sets=("e012", "e345"))
-        r2 = meta["r2_ref"]
-        infos.append(info)
-        for v in info.itertuples():
-            ens = v.seed.startswith("e")
-            key = (v.cfg, v.scoring)
-            for h1 in (False, True):
-                # valid는 02에 없는 새 시드(e345, s3~s5)만 여기서 채점한다. 나머지 valid는 02_valid.csv를 쓴다
-                fresh = v.seed == "e345" or (not ens and int(v.seed) >= 3)
-                for a in (H.ALPHAS if ens else (H.PRIMARY_ALPHA,)):
-                    for regime in (("valid", "test") if fresh else ("test",)):
-                        for mode, m in H.evaluate(t, v.variant, h1, a, regime, r2).items():
-                            rows.append(dict(split=sid, variant=v.variant, rule="R1" if h1 else "none", alpha=a, regime=regime, mode=mode, **m))
-                if h1 and (ens or key in focus):
-                    to = m07.test_only(t, v.variant, True, False, r2)
-                    rows.append(dict(split=sid, variant=v.variant, rule="R1", alpha=H.PRIMARY_ALPHA, regime="test", mode="test_only", **to))
-        known = {c[0]: c for c in ev.candidates(meta["complexity"])}
-        for name in REFS:
-            base = name.split("+")[0]
-            c = known.get(name) or (name, base, "+H1" in name, "+H2" in name, False, 1)
-            for a in H.ALPHAS:
-                for regime in ("valid", "test"):
-                    for mode, m in ev.evaluate(t, c, a, regime, r2).items():
-                        refs.append(dict(split=sid, model=name, alpha=a, regime=regime, mode=mode, **m))
-            if c[2]:
-                to = m07.test_only(t, base, True, c[3], r2)
-                refs.append(dict(split=sid, model=name, alpha=H.PRIMARY_ALPHA, regime="test", mode="test_only", **to))
-        print(sid, "채점 완료", f"{time.time() - t0:.0f}s", flush=True)
+    t, meta, info = X.build_variant_table(sid, ens_sets=("e012", "e345"))
+    r2 = meta["r2_ref"]
+    for v in info.itertuples():
+        ens = v.seed.startswith("e")
+        key = (v.cfg, v.scoring)
+        for h1 in (False, True):
+            # valid는 02에 없는 새 시드(e345, s3~s5)만 여기서 채점한다. 나머지 valid는 02_valid.csv를 쓴다
+            fresh = v.seed == "e345" or (not ens and int(v.seed) >= 3)
+            for a in (H.ALPHAS if ens else (H.PRIMARY_ALPHA,)):
+                for regime in (("valid", "test") if fresh else ("test",)):
+                    for mode, m in H.evaluate(t, v.variant, h1, a, regime, r2).items():
+                        rows.append(dict(split=sid, variant=v.variant, rule="R1" if h1 else "none", alpha=a, regime=regime, mode=mode, **m))
+            if h1 and (ens or key in focus):
+                to = m07.test_only(t, v.variant, True, False, r2)
+                rows.append(dict(split=sid, variant=v.variant, rule="R1", alpha=H.PRIMARY_ALPHA, regime="test", mode="test_only", **to))
+    known = {c[0]: c for c in ev.candidates(meta["complexity"])}
+    for name in REFS:
+        base = name.split("+")[0]
+        c = known.get(name) or (name, base, "+H1" in name, "+H2" in name, False, 1)
+        for a in H.ALPHAS:
+            for regime in ("valid", "test"):
+                for mode, m in ev.evaluate(t, c, a, regime, r2).items():
+                    refs.append(dict(split=sid, model=name, alpha=a, regime=regime, mode=mode, **m))
+        if c[2]:
+            to = m07.test_only(t, base, True, c[3], r2)
+            refs.append(dict(split=sid, model=name, alpha=H.PRIMARY_ALPHA, regime="test", mode="test_only", **to))
+    return rows, refs, info
+
+
+def main():
+    import multiprocessing as mp
+    from concurrent.futures import ProcessPoolExecutor
+    t0 = time.time()
+    sel = check_lock()
+    with ProcessPoolExecutor(max_workers=len(H.SPLITS), mp_context=mp.get_context("spawn")) as ex:
+        parts = list(ex.map(score_split, H.SPLITS))
+    rows = [r for p in parts for r in p[0]]
+    refs = [r for p in parts for r in p[1]]
+    infos = [p[2] for p in parts]
+    print("채점 완료", f"{time.time() - t0:.0f}s", flush=True)
     res = pd.DataFrame(rows)
     res.to_csv(H.OUT / "03_test.csv", index=False)
     refs = pd.DataFrame(refs)

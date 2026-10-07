@@ -115,11 +115,14 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--stage", choices=["1", "2a", "2b", "confirm"], required=True)
     ap.add_argument("--workers", type=int, default=7)
+    ap.add_argument("--exclude", default="", help="쉼표로 구분한 설정 이름. 다른 프로세스가 학습 중인 설정을 빼서 중복 학습을 막는다")
+    ap.add_argument("--reverse", action="store_true")
     a = ap.parse_args()
     prepare_inputs()
-    jobs = jobs_for(a.stage)
-    # 오래 걸리는 작업(긴 창·edge/var·큰 용량·큰 예산)을 먼저 보낸다
-    jobs.sort(key=lambda j: -(j["W"] * (2 if j["warm"] != "none" else 1) * j["h1"] * j["epochs"]))
+    skip = {c for c in a.exclude.split(",") if c}
+    jobs = [j for j in jobs_for(a.stage) if j["cfg"] not in skip]
+    # 오래 걸리는 작업(긴 창·edge/var·큰 용량·큰 예산)을 먼저 보낸다. --reverse는 짧은 것부터(빈 코어를 채우는 보조 실행용)
+    jobs.sort(key=lambda j: -(j["W"] * (2 if j["warm"] != "none" else 1) * j["h1"] * j["epochs"]), reverse=a.reverse)
     t0 = time.time()
     print(f"stage {a.stage}: 작업 {len(jobs)}개, 작업자 {a.workers}", flush=True)
     with ProcessPoolExecutor(max_workers=a.workers, mp_context=mp.get_context("spawn")) as ex:
