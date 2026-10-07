@@ -17,7 +17,7 @@
 
 ## 파일
 
-- 원고와 최종 파일: `결과보고서_북적북적_개선본.md`, `.hwpx`, `.pdf`(69쪽).
+- 원고와 최종 파일: `결과보고서_북적북적_개선본.md`, `.hwpx`, `.pdf`(70쪽).
 - 그림: 원래 14개와 신규 그림 15.
 - HWPX/PDF는 Git 제외 대상이므로 다른 PC에서는 다시 조립한다.
   - 조립: `build_hwpx_copy.py --figure-map figure_map.json`
