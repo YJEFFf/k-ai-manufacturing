@@ -71,7 +71,13 @@ $env:PYTHONUTF8 = '1'
 ```powershell
 & $frontierPython yejun/analysis/press_frontier_improvement_2026-10-08/update_report.py
 & $frontierPython yejun/analysis/press_frontier_improvement_2026-10-08/build_hwpx_copy.py --figure-map yejun/analysis/press_frontier_improvement_2026-10-08/figure_map.json
-& $frontierPython yejun/analysis/press_frontier_improvement_2026-10-08/audit_hwpx_pdf.py --hwpx 'yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_경쟁모델융합_개선안.hwpx' --output yejun/analysis/press_frontier_improvement_2026-10-08/outputs/report_layout_audit.json
+& $frontierPython yejun/analysis/press_frontier_improvement_2026-10-08/audit_hwpx_pdf.py --hwpx 'yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.hwpx' --output yejun/analysis/press_frontier_improvement_2026-10-08/outputs/report_layout_audit.json
 ```
 
 `update_report.py`는 현재 복사 원고에 신규 실험 부분을 반영한다. 초기 원고나 원본을 덮어쓰지 않는다. HWPX/PDF는 `yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/`에 별도로 저장하며 Git에는 기존 제외 규칙에 따라 올리지 않는다. 표지 서명 및 만족도 조사 캡처는 실제 제출자가 마무리할 양식 항목이다.
+
+## 모의 재채점과 인용 정정
+
+서로 분리된 AI 평가 3개에서 기존 61쪽은 평균 85.0점, c7947f7 개선본 65쪽은 88.5·88.5·86.0점으로 평균 87.7점이었다. 공식 심사 결과나 실제 순위가 아니다. 항목별 근거와 평균은 [재채점 결과](review/regrade_c7947f7/summary.json), 수정 전후와 남은 한계는 [보완 내역](review/regrade_c7947f7/changes.json)에 있다. 과거 56쪽 평가 점수와 평가자·대상이 달라 직접 연결하지 않는다.
+
+이후 사용자 지적에 따라 제출 원고의 참고문헌 29번을 실제 사용한 Ledoit–Wolf 수축 공분산 원논문으로 정정하고 관련 본문 인용과 파일명을 고쳤다. 재생성 코드와 내용 검사에도 반영했다. 이 문구 정정으로 위 고정 평가 점수를 바꾸지 않았으며 실험 수치·모델 선택·원본 자료는 유지했다.

@@ -30,7 +30,7 @@ from bs4 import BeautifulSoup
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[2]
-DEFAULT_SOURCE = REPO / "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_경쟁모델융합_개선안.md"
+DEFAULT_SOURCE = REPO / "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.md"
 
 
 def sha256(path: Path) -> str:
@@ -176,7 +176,7 @@ def build_html(source: Path) -> tuple[str, dict]:
     figcaption{margin-top:2mm;font-size:9pt;line-height:1.5;color:#40576b;text-align:left;}
     hr{border:0;border-top:1px solid var(--line);margin:7mm 0;}
     @page{size:A4;margin:16mm 14mm 18mm;
-      @bottom-left{content:"북적북적 · 경쟁모델 융합 개선안";font-family:ReportKR,sans-serif;font-size:8pt;color:#647588;}
+      @bottom-left{content:"북적북적 · 결과보고서 개선본";font-family:ReportKR,sans-serif;font-size:8pt;color:#647588;}
       @bottom-right{content:counter(page) " / " counter(pages);font-family:ReportKR,sans-serif;font-size:8pt;color:#647588;}}
     @media print{html,body{background:white;}body{max-width:none;margin:0;padding:0;font-size:10.8pt;}
       nav{display:none;}.chapter{break-before:page;page-break-before:always;}a{color:inherit;}table{margin-top:3mm;}}

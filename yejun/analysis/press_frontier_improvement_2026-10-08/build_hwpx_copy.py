@@ -26,7 +26,7 @@ REPO = HERE.parents[2]
 COPY_DIR = REPO / "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08"
 TEMPLATE_NAME = "경진대회 결과보고서 양식_일반국민,대학(원)생 부문.hwpx"
 TEMPLATE = REPO / "관련 자료" / TEMPLATE_NAME
-SRC = COPY_DIR / "결과보고서_북적북적_경쟁모델융합_개선안.md"
+SRC = COPY_DIR / "결과보고서_북적북적_개선본.md"
 OUT = SRC.with_suffix(".hwpx")
 FIGURE_DIR = COPY_DIR / "figures"
 # v5 본문 등장 순서의 그림 번호 → 파일

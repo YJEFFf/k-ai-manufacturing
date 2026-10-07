@@ -20,7 +20,8 @@ def normalize(text: str) -> str:
 
 
 def audit(source: Path, hwpx: Path) -> dict:
-    cover, chapters = parse(source.read_text(encoding="utf-8-sig"))
+    source_text = source.read_text(encoding="utf-8-sig")
+    cover, chapters = parse(source_text)
     expected = [("project", cover["project"])]
     expected.extend(("summary", s) for s in cover["summary"])
     for heading, blocks in chapters:
@@ -33,6 +34,11 @@ def audit(source: Path, hwpx: Path) -> dict:
             elif block[0] == "fig":
                 expected.append(("caption", f"[그림 {block[1]}] {block[2]}"))
     with zipfile.ZipFile(hwpx) as z:
+        package_xml = "\n".join(z.read(n).decode("utf-8") for n in z.namelist()
+                                if n.endswith((".xml", ".hpf")))
+        preview_bytes = [z.read(n) for n in z.namelist() if n.endswith(".txt")]
+        preview_text = "\n".join(data.decode("utf-16" if data[:2] in (b"\xff\xfe", b"\xfe\xff")
+                                             else "utf-8-sig") for data in preview_bytes)
         sections = [ET.fromstring(z.read(n)) for n in z.namelist()
                     if re.fullmatch(r"Contents/section\d+\.xml", n)]
         xml_text = normalize("".join(e.text or "" for root in sections for e in root.iter()
@@ -41,6 +47,7 @@ def audit(source: Path, hwpx: Path) -> dict:
     missing_xml = [{"kind": kind, "text": text} for kind, text in expected if normalize(text) not in xml_text]
     pdf = hwpx.with_suffix(".pdf")
     with fitz.open(pdf) as doc:
+        pdf_metadata = json.dumps(doc.metadata, ensure_ascii=False)
         page_texts = [page.get_text() for page in doc]
         joined = normalize("".join(text.replace("일반국민/대학(원)생 부문", "") for text in page_texts))
         missing_pdf_short = [{"kind": kind, "text": text} for kind, text in expected
@@ -63,12 +70,25 @@ def audit(source: Path, hwpx: Path) -> dict:
                   "replacement_characters": "".join(page_texts).count("\ufffd"),
                   "out_of_page_text": bounds, "missing_pdf_short_blocks": missing_pdf_short,
                   "missing_required_form_text": missing_form_text}
+    forbidden = ("경쟁", "chlanstjr0301", "workspace---claude", "518f9ada91fa8adb",
+                 "공개 코드를 복사", "github.com/chlanstjr")
+    content_check = {}
+    for label, value in (("markdown", normalize(source_text)), ("hwpx", xml_text), ("pdf", joined)):
+        found = [token for token in forbidden if normalize(token).casefold() in value.casefold()]
+        content_check[label] = {"unexpected_provenance_markers": found,
+                                "method_reference_29_present": "10.1016/S0047-259X(03)00096-4" in value}
+    metadata_markers = {label: [token for token in forbidden
+                               if normalize(token).casefold() in normalize(value).casefold()]
+                        for label, value in (("hwpx_xml", package_xml), ("hwpx_preview_text", preview_text),
+                                             ("pdf_metadata", pdf_metadata))}
     return {"source": source.relative_to(REPO).as_posix(), "hwpx": hwpx.relative_to(REPO).as_posix(),
             "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
             "hwpx_sha256": hashlib.sha256(hwpx.read_bytes()).hexdigest(),
             "pdf_sha256": hashlib.sha256(pdf.read_bytes()).hexdigest(),
             "expected_text_blocks": len(expected), "missing_hwpx_blocks": missing_xml,
             "hwpx_picture_controls": picture_controls, "pdf": result,
+            "content_check": content_check,
+            "metadata_content_check": metadata_markers,
             "protected_sources": verify_protected_sources()}
 
 
@@ -88,7 +108,10 @@ def main():
         target.write_text(serialized, encoding="utf-8")
     print(serialized)
     if (result["missing_hwpx_blocks"] or result["pdf"]["out_of_page_text"]
-            or result["pdf"]["missing_pdf_short_blocks"] or result["pdf"]["missing_required_form_text"]):
+            or result["pdf"]["missing_pdf_short_blocks"] or result["pdf"]["missing_required_form_text"]
+            or any(item["unexpected_provenance_markers"] or not item["method_reference_29_present"]
+                   for item in result["content_check"].values())
+            or any(result["metadata_content_check"].values())):
         raise SystemExit(1)
 
 
