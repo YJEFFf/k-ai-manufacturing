@@ -1,0 +1,56 @@
+{
+  "passed": true,
+  "lock_sha256": "20c992cd930c02c59f3ef4d3b7cccc1b15e2f3eda1fd78065fd06452a3c1ce2b",
+  "selected": "V2+VD3@1",
+  "protected_sources": [
+    {
+      "path": "claude/report/final_v5.md",
+      "sha256": "8c07bf4076c0b3a0477e8115fdb006229d017208a1bf9d00d8f592c3580a26ea",
+      "canonical_sha256": "77eb87b789646063f8885024bf55328d469fc6489eb2cf00fb96f32a50ca1c11",
+      "crlf_only_difference": true
+    },
+    {
+      "path": "claude/report/결과보고서_북적북적.pdf",
+      "sha256": "92d528d4074629675467362717667e545daf7ece91199b1b664525cb8a892494",
+      "canonical_sha256": "92d528d4074629675467362717667e545daf7ece91199b1b664525cb8a892494",
+      "crlf_only_difference": false
+    },
+    {
+      "path": "claude/report/결과보고서_북적북적.hwpx",
+      "sha256": "221b237b6f57f45f99782fa5324c6b2bd7662eeb26f7e726d90d5513811db139",
+      "canonical_sha256": "221b237b6f57f45f99782fa5324c6b2bd7662eeb26f7e726d90d5513811db139",
+      "crlf_only_difference": false
+    },
+    {
+      "path": "claude/submission/북적북적_code.zip",
+      "sha256": "3680a315449d482a35b0a4fb4835a02ca8a6ce6de709790667918429a22437a4",
+      "canonical_sha256": "3680a315449d482a35b0a4fb4835a02ca8a6ce6de709790667918429a22437a4",
+      "crlf_only_difference": false
+    }
+  ],
+  "actual": {
+    "metric_rows": 1134,
+    "calibration_alarm_equality": true,
+    "all_rows_and_records_retained": true,
+    "historical_v2_counts_reproduced": true
+  },
+  "injection": {
+    "development": {
+      "detail_rows": 3360,
+      "aggregate_rows": 56
+    },
+    "A": {
+      "detail_rows": 20160,
+      "aggregate_rows": 168
+    },
+    "B": {
+      "detail_rows": 30240,
+      "aggregate_rows": 168
+    }
+  },
+  "injection_audit_models": [
+    "V2",
+    "V2+VD3@1"
+  ],
+  "limitations": "Saved prediction arithmetic and source integrity; not independent failure validation"
+}

@@ -1,0 +1,86 @@
+{
+  "source": "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_경쟁모델융합_개선안.md",
+  "hwpx": "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_경쟁모델융합_개선안.hwpx",
+  "source_sha256": "f4064f45f27a8c37c9d287e0add85cc11a50ef2bf35bfd4a37d9c90fd6b2061d",
+  "hwpx_sha256": "472bd0e6c9150998f21b3a5d22ccbc67655d98a3f80fe606673ad0ab6d302690",
+  "pdf_sha256": "32773495589f6edd759fe9033bc02f63086f8f42c4a98c93066fa693c16e6793",
+  "expected_text_blocks": 1237,
+  "missing_hwpx_blocks": [],
+  "hwpx_picture_controls": 16,
+  "pdf": {
+    "pages": 65,
+    "chapter_pages": {
+      "제1장. 데이터 이해 및 진단": [
+        2
+      ],
+      "제2장. AI 예측모델 개발 및 성능평가": [
+        13
+      ],
+      "제3장. 영향요인 및 오류분석": [
+        41
+      ],
+      "제4장. 현장 활용방안": [
+        48
+      ],
+      "제5장. 창의성 및 차별성": [
+        55
+      ],
+      "제6장. 코드 구성 및 재현성": [
+        59
+      ]
+    },
+    "pdf_image_instances": 16,
+    "replacement_characters": 0,
+    "out_of_page_text": [],
+    "missing_pdf_short_blocks": [],
+    "missing_required_form_text": []
+  },
+  "protected_sources": [
+    {
+      "path": "claude/report/final_v5.md",
+      "sha256": "8c07bf4076c0b3a0477e8115fdb006229d017208a1bf9d00d8f592c3580a26ea",
+      "canonical_sha256": "77eb87b789646063f8885024bf55328d469fc6489eb2cf00fb96f32a50ca1c11",
+      "crlf_only_difference": true
+    },
+    {
+      "path": "claude/report/결과보고서_북적북적.pdf",
+      "sha256": "92d528d4074629675467362717667e545daf7ece91199b1b664525cb8a892494",
+      "canonical_sha256": "92d528d4074629675467362717667e545daf7ece91199b1b664525cb8a892494",
+      "crlf_only_difference": false
+    },
+    {
+      "path": "claude/report/결과보고서_북적북적.hwpx",
+      "sha256": "221b237b6f57f45f99782fa5324c6b2bd7662eeb26f7e726d90d5513811db139",
+      "canonical_sha256": "221b237b6f57f45f99782fa5324c6b2bd7662eeb26f7e726d90d5513811db139",
+      "crlf_only_difference": false
+    },
+    {
+      "path": "claude/submission/북적북적_code.zip",
+      "sha256": "3680a315449d482a35b0a4fb4835a02ca8a6ce6de709790667918429a22437a4",
+      "canonical_sha256": "3680a315449d482a35b0a4fb4835a02ca8a6ce6de709790667918429a22437a4",
+      "crlf_only_difference": false
+    }
+  ],
+  "visual_review": {
+    "pages": [
+      1,
+      37,
+      38,
+      39,
+      40,
+      58,
+      65
+    ],
+    "result": "passed",
+    "checks": [
+      "Cover summary, submission date, signature labels, and complete form border fit page 1.",
+      "Section 2.8 tables fit their pages without clipping.",
+      "Figure 15 and its full caption appear together on page 58.",
+      "Last page survey form is preserved."
+    ],
+    "submission_placeholders": [
+      "The last page still contains the original organizer survey example image, to be replaced with the actual completion screenshot before submission.",
+      "Signature labels are present; handwritten or authorized digital signatures are not inserted."
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "selected": "V2+VD3@1",
+  "lock_sha256": "20c992cd930c02c59f3ef4d3b7cccc1b15e2f3eda1fd78065fd06452a3c1ce2b",
+  "completed_utc": "2026-10-07T17:42:54.425185+00:00",
+  "actual_worsening_splits": [],
+  "official_model_replacement_recommended": false,
+  "interpretation": "Retrospective result only; this does not establish independent failure generalization or justify overwriting the official model",
+  "missed_detection_delay_policy": "Misses retained and counted separately; hit-only delay summaries are not a failure lead time",
+  "limitation": "21 abnormal recording fragments are not 21 independent failures; A/B overlap; no deployment timing guarantee"
+}
