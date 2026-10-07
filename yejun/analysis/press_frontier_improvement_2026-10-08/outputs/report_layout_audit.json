@@ -1,14 +1,14 @@
 {
   "source": "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.md",
   "hwpx": "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.hwpx",
-  "source_sha256": "4606dbf794f9c503dbc8413f720e8b7289410b83ed9c706a9ec7098ac8a957f9",
-  "hwpx_sha256": "586498b1b6c00be75a63c7704e0faf6b7aed78dd273233dbe1689159f63dfd88",
-  "pdf_sha256": "39d98ad80f8ce80f6d4bb77e453631b6947b55b9f55af25f8d77610d9db7771f",
-  "expected_text_blocks": 1237,
+  "source_sha256": "74f6c232b84203a9872d361ebfe9f6ca1532599441f2fa3b3951b842771b52b4",
+  "hwpx_sha256": "33d86b2a37850f9ec472f7cf1a12eed06b6f83e031cff19cd2a1c436ecdbde2d",
+  "pdf_sha256": "f0a19a3c274ef4975189eb5b3b24e9141cef4882f1654c6885548a505eaca92b",
+  "expected_text_blocks": 1280,
   "missing_hwpx_blocks": [],
   "hwpx_picture_controls": 16,
   "pdf": {
-    "pages": 65,
+    "pages": 69,
     "chapter_pages": {
       "제1장. 데이터 이해 및 진단": [
         2
@@ -17,16 +17,16 @@
         13
       ],
       "제3장. 영향요인 및 오류분석": [
-        41
+        43
       ],
       "제4장. 현장 활용방안": [
-        48
+        50
       ],
       "제5장. 창의성 및 차별성": [
-        55
+        58
       ],
       "제6장. 코드 구성 및 재현성": [
-        59
+        62
       ]
     },
     "pdf_image_instances": 16,
@@ -79,42 +79,5 @@
       "canonical_sha256": "3680a315449d482a35b0a4fb4835a02ca8a6ce6de709790667918429a22437a4",
       "crlf_only_difference": false
     }
-  ],
-  "visual_review": {
-    "pages": [
-      1,
-      37,
-      38,
-      39,
-      40,
-      58,
-      64,
-      65
-    ],
-    "result": "passed",
-    "reviewed_pdf_sha256": "39d98ad80f8ce80f6d4bb77e453631b6947b55b9f55af25f8d77610d9db7771f",
-    "rendered_from_current_pdf": true,
-    "preview_directory": "outputs/local/report_preview_corrected",
-    "reference_29_page": 64,
-    "checks": [
-      "Current PDF cover summary, submission date, signature labels, and form border fit page 1.",
-      "Current PDF section 2.8 method references [6] and [29] and all tables are visible on pages 37-40.",
-      "Current PDF contribution paragraph, figure 15, and its caption fit page 58.",
-      "Current PDF reference [29] on page 64 names Ledoit and Wolf, the journal article, year, volume/pages, and DOI; the old repository citation is absent.",
-      "Current PDF last page preserves the original organizer survey example."
-    ],
-    "submission_placeholders": [
-      "Actual survey completion screenshot and authorized signatures remain to be supplied before submission."
-    ]
-  },
-  "report_generator_idempotence": {
-    "tested_on_isolated_copy": true,
-    "first_sha256": "4606dbf794f9c503dbc8413f720e8b7289410b83ed9c706a9ec7098ac8a957f9",
-    "second_sha256": "4606dbf794f9c503dbc8413f720e8b7289410b83ed9c706a9ec7098ac8a957f9",
-    "matches_current_manuscript": true,
-    "actual_source_unchanged": true,
-    "metric_and_lock_files_unchanged": true,
-    "checked_output_files": 24,
-    "unexpected_provenance_markers": []
-  }
+  ]
 }
