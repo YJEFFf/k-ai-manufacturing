@@ -456,7 +456,11 @@ EXT = [
     ("gap.median_s", 4.22, "4.2", "press_data_normal.csv 기록 사이 공백(>0.15s) 중앙값, 598개"),
     ("gap.p90_s", 8.4, "8.4", "같은 공백 90% 분위"),
     ("tfboot.n", 2000, "2,000", "tvt/10 부트스트랩 반복 수"),
-    ("tfboot.base_min_lo", 0.3261, "0.33", "threshold_free_boot.csv 베이스라인 대비 d_f1_lo 최솟값(B mlp_ae5)"),
+    ("tfboot.base_min_lo", 0.3261, "0.32", "threshold_free_boot.csv 베이스라인 대비 d_f1_lo 최솟값(B mlp_ae5) 내림"),
+    ("tfboot.base_min_auroc_lo", 0.0362, "0.036", "threshold_free_boot.csv 베이스라인 대비 d_auroc_lo 최솟값(A iforest)"),
+    ("test.abn_share_A", 324 / 4414, "0.073", "test 이상 행 비율 A(PR-AUC 무작위 기준선)"),
+    ("test.abn_share_B", 324 / 6421, "0.050", "test 이상 행 비율 B"),
+    ("r1.min_test_f1", 0.982, "0.982", "tvt_r1_baselines.csv +R1 test F1 최솟값(5NN+R1 B)"),
     ("lstm.ctrl_B_pct", 0.6, "0.6", "LSTM README: 주입 없는 대조 경보율 B 0.6%"),
 ]
 for fid, v, shown, src in EXT:
