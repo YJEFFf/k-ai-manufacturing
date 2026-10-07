@@ -1,0 +1,421 @@
+split,model,part,rec,n,first_alarm_row
+A,L:e345,valid,valid:abnormal:0,4,0.0
+A,L:e345,valid,valid:abnormal:1,50,1.0
+A,L:e345,valid,valid:abnormal:2,47,3.0
+A,L:e345,valid,valid:abnormal:3,31,5.0
+A,L:e345,valid,valid:abnormal:4,18,3.0
+A,L:e345,valid,valid:abnormal:5,3,0.0
+A,L:e345,valid,valid:abnormal:6,50,0.0
+A,L:e345,valid,valid:abnormal:7,40,0.0
+A,L:e345,valid,valid:abnormal:8,25,4.0
+A,L:e345,valid,valid:abnormal:9,8,0.0
+A,L:e345,test,test:abnormal:10,4,0.0
+A,L:e345,test,test:abnormal:11,50,0.0
+A,L:e345,test,test:abnormal:12,42,1.0
+A,L:e345,test,test:abnormal:13,28,2.0
+A,L:e345,test,test:abnormal:14,15,0.0
+A,L:e345,test,test:abnormal:15,50,3.0
+A,L:e345,test,test:abnormal:16,50,0.0
+A,L:e345,test,test:abnormal:17,36,0.0
+A,L:e345,test,test:abnormal:18,24,5.0
+A,L:e345,test,test:abnormal:19,10,2.0
+A,L:e345,test,test:abnormal:20,15,3.0
+A,L+R1:e345,valid,valid:abnormal:0,4,0.0
+A,L+R1:e345,valid,valid:abnormal:1,50,0.0
+A,L+R1:e345,valid,valid:abnormal:2,47,0.0
+A,L+R1:e345,valid,valid:abnormal:3,31,0.0
+A,L+R1:e345,valid,valid:abnormal:4,18,0.0
+A,L+R1:e345,valid,valid:abnormal:5,3,0.0
+A,L+R1:e345,valid,valid:abnormal:6,50,0.0
+A,L+R1:e345,valid,valid:abnormal:7,40,0.0
+A,L+R1:e345,valid,valid:abnormal:8,25,0.0
+A,L+R1:e345,valid,valid:abnormal:9,8,0.0
+A,L+R1:e345,test,test:abnormal:10,4,0.0
+A,L+R1:e345,test,test:abnormal:11,50,0.0
+A,L+R1:e345,test,test:abnormal:12,42,0.0
+A,L+R1:e345,test,test:abnormal:13,28,0.0
+A,L+R1:e345,test,test:abnormal:14,15,0.0
+A,L+R1:e345,test,test:abnormal:15,50,0.0
+A,L+R1:e345,test,test:abnormal:16,50,0.0
+A,L+R1:e345,test,test:abnormal:17,36,0.0
+A,L+R1:e345,test,test:abnormal:18,24,0.0
+A,L+R1:e345,test,test:abnormal:19,10,0.0
+A,L+R1:e345,test,test:abnormal:20,15,0.0
+A,L:e012,valid,valid:abnormal:0,4,0.0
+A,L:e012,valid,valid:abnormal:1,50,0.0
+A,L:e012,valid,valid:abnormal:2,47,2.0
+A,L:e012,valid,valid:abnormal:3,31,4.0
+A,L:e012,valid,valid:abnormal:4,18,2.0
+A,L:e012,valid,valid:abnormal:5,3,0.0
+A,L:e012,valid,valid:abnormal:6,50,0.0
+A,L:e012,valid,valid:abnormal:7,40,0.0
+A,L:e012,valid,valid:abnormal:8,25,4.0
+A,L:e012,valid,valid:abnormal:9,8,0.0
+A,L:e012,test,test:abnormal:10,4,0.0
+A,L:e012,test,test:abnormal:11,50,0.0
+A,L:e012,test,test:abnormal:12,42,1.0
+A,L:e012,test,test:abnormal:13,28,2.0
+A,L:e012,test,test:abnormal:14,15,0.0
+A,L:e012,test,test:abnormal:15,50,3.0
+A,L:e012,test,test:abnormal:16,50,0.0
+A,L:e012,test,test:abnormal:17,36,0.0
+A,L:e012,test,test:abnormal:18,24,3.0
+A,L:e012,test,test:abnormal:19,10,2.0
+A,L:e012,test,test:abnormal:20,15,3.0
+A,L+R1:e012,valid,valid:abnormal:0,4,0.0
+A,L+R1:e012,valid,valid:abnormal:1,50,0.0
+A,L+R1:e012,valid,valid:abnormal:2,47,0.0
+A,L+R1:e012,valid,valid:abnormal:3,31,0.0
+A,L+R1:e012,valid,valid:abnormal:4,18,0.0
+A,L+R1:e012,valid,valid:abnormal:5,3,0.0
+A,L+R1:e012,valid,valid:abnormal:6,50,0.0
+A,L+R1:e012,valid,valid:abnormal:7,40,0.0
+A,L+R1:e012,valid,valid:abnormal:8,25,0.0
+A,L+R1:e012,valid,valid:abnormal:9,8,0.0
+A,L+R1:e012,test,test:abnormal:10,4,0.0
+A,L+R1:e012,test,test:abnormal:11,50,0.0
+A,L+R1:e012,test,test:abnormal:12,42,0.0
+A,L+R1:e012,test,test:abnormal:13,28,0.0
+A,L+R1:e012,test,test:abnormal:14,15,0.0
+A,L+R1:e012,test,test:abnormal:15,50,0.0
+A,L+R1:e012,test,test:abnormal:16,50,0.0
+A,L+R1:e012,test,test:abnormal:17,36,0.0
+A,L+R1:e012,test,test:abnormal:18,24,0.0
+A,L+R1:e012,test,test:abnormal:19,10,0.0
+A,L+R1:e012,test,test:abnormal:20,15,0.0
+A,start:e012,valid,valid:abnormal:0,4,
+A,start:e012,valid,valid:abnormal:1,50,19.0
+A,start:e012,valid,valid:abnormal:2,47,19.0
+A,start:e012,valid,valid:abnormal:3,31,
+A,start:e012,valid,valid:abnormal:4,18,
+A,start:e012,valid,valid:abnormal:5,3,
+A,start:e012,valid,valid:abnormal:6,50,30.0
+A,start:e012,valid,valid:abnormal:7,40,19.0
+A,start:e012,valid,valid:abnormal:8,25,19.0
+A,start:e012,valid,valid:abnormal:9,8,
+A,start:e012,test,test:abnormal:10,4,
+A,start:e012,test,test:abnormal:11,50,41.0
+A,start:e012,test,test:abnormal:12,42,21.0
+A,start:e012,test,test:abnormal:13,28,19.0
+A,start:e012,test,test:abnormal:14,15,
+A,start:e012,test,test:abnormal:15,50,33.0
+A,start:e012,test,test:abnormal:16,50,38.0
+A,start:e012,test,test:abnormal:17,36,19.0
+A,start:e012,test,test:abnormal:18,24,19.0
+A,start:e012,test,test:abnormal:19,10,
+A,start:e012,test,test:abnormal:20,15,
+A,v2,valid,valid:abnormal:0,4,1.0
+A,v2,valid,valid:abnormal:1,50,2.0
+A,v2,valid,valid:abnormal:2,47,2.0
+A,v2,valid,valid:abnormal:3,31,5.0
+A,v2,valid,valid:abnormal:4,18,2.0
+A,v2,valid,valid:abnormal:5,3,0.0
+A,v2,valid,valid:abnormal:6,50,0.0
+A,v2,valid,valid:abnormal:7,40,0.0
+A,v2,valid,valid:abnormal:8,25,2.0
+A,v2,valid,valid:abnormal:9,8,0.0
+A,v2,test,test:abnormal:10,4,0.0
+A,v2,test,test:abnormal:11,50,0.0
+A,v2,test,test:abnormal:12,42,1.0
+A,v2,test,test:abnormal:13,28,2.0
+A,v2,test,test:abnormal:14,15,0.0
+A,v2,test,test:abnormal:15,50,2.0
+A,v2,test,test:abnormal:16,50,0.0
+A,v2,test,test:abnormal:17,36,1.0
+A,v2,test,test:abnormal:18,24,3.0
+A,v2,test,test:abnormal:19,10,2.0
+A,v2,test,test:abnormal:20,15,3.0
+A,v2+R1,valid,valid:abnormal:0,4,1.0
+A,v2+R1,valid,valid:abnormal:1,50,0.0
+A,v2+R1,valid,valid:abnormal:2,47,0.0
+A,v2+R1,valid,valid:abnormal:3,31,0.0
+A,v2+R1,valid,valid:abnormal:4,18,0.0
+A,v2+R1,valid,valid:abnormal:5,3,0.0
+A,v2+R1,valid,valid:abnormal:6,50,0.0
+A,v2+R1,valid,valid:abnormal:7,40,0.0
+A,v2+R1,valid,valid:abnormal:8,25,0.0
+A,v2+R1,valid,valid:abnormal:9,8,0.0
+A,v2+R1,test,test:abnormal:10,4,0.0
+A,v2+R1,test,test:abnormal:11,50,0.0
+A,v2+R1,test,test:abnormal:12,42,0.0
+A,v2+R1,test,test:abnormal:13,28,0.0
+A,v2+R1,test,test:abnormal:14,15,0.0
+A,v2+R1,test,test:abnormal:15,50,0.0
+A,v2+R1,test,test:abnormal:16,50,0.0
+A,v2+R1,test,test:abnormal:17,36,0.0
+A,v2+R1,test,test:abnormal:18,24,0.0
+A,v2+R1,test,test:abnormal:19,10,0.0
+A,v2+R1,test,test:abnormal:20,15,0.0
+A,v2+R1+R2,valid,valid:abnormal:0,4,1.0
+A,v2+R1+R2,valid,valid:abnormal:1,50,0.0
+A,v2+R1+R2,valid,valid:abnormal:2,47,0.0
+A,v2+R1+R2,valid,valid:abnormal:3,31,0.0
+A,v2+R1+R2,valid,valid:abnormal:4,18,0.0
+A,v2+R1+R2,valid,valid:abnormal:5,3,0.0
+A,v2+R1+R2,valid,valid:abnormal:6,50,0.0
+A,v2+R1+R2,valid,valid:abnormal:7,40,0.0
+A,v2+R1+R2,valid,valid:abnormal:8,25,0.0
+A,v2+R1+R2,valid,valid:abnormal:9,8,0.0
+A,v2+R1+R2,test,test:abnormal:10,4,0.0
+A,v2+R1+R2,test,test:abnormal:11,50,0.0
+A,v2+R1+R2,test,test:abnormal:12,42,0.0
+A,v2+R1+R2,test,test:abnormal:13,28,0.0
+A,v2+R1+R2,test,test:abnormal:14,15,0.0
+A,v2+R1+R2,test,test:abnormal:15,50,0.0
+A,v2+R1+R2,test,test:abnormal:16,50,0.0
+A,v2+R1+R2,test,test:abnormal:17,36,0.0
+A,v2+R1+R2,test,test:abnormal:18,24,0.0
+A,v2+R1+R2,test,test:abnormal:19,10,0.0
+A,v2+R1+R2,test,test:abnormal:20,15,0.0
+A,mlp_ae5,valid,valid:abnormal:0,4,
+A,mlp_ae5,valid,valid:abnormal:1,50,4.0
+A,mlp_ae5,valid,valid:abnormal:2,47,13.0
+A,mlp_ae5,valid,valid:abnormal:3,31,
+A,mlp_ae5,valid,valid:abnormal:4,18,4.0
+A,mlp_ae5,valid,valid:abnormal:5,3,
+A,mlp_ae5,valid,valid:abnormal:6,50,4.0
+A,mlp_ae5,valid,valid:abnormal:7,40,4.0
+A,mlp_ae5,valid,valid:abnormal:8,25,17.0
+A,mlp_ae5,valid,valid:abnormal:9,8,4.0
+A,mlp_ae5,test,test:abnormal:10,4,
+A,mlp_ae5,test,test:abnormal:11,50,4.0
+A,mlp_ae5,test,test:abnormal:12,42,4.0
+A,mlp_ae5,test,test:abnormal:13,28,4.0
+A,mlp_ae5,test,test:abnormal:14,15,4.0
+A,mlp_ae5,test,test:abnormal:15,50,34.0
+A,mlp_ae5,test,test:abnormal:16,50,4.0
+A,mlp_ae5,test,test:abnormal:17,36,4.0
+A,mlp_ae5,test,test:abnormal:18,24,9.0
+A,mlp_ae5,test,test:abnormal:19,10,
+A,mlp_ae5,test,test:abnormal:20,15,
+A,lstm20(행 표),valid,valid:abnormal:0,4,
+A,lstm20(행 표),valid,valid:abnormal:1,50,19.0
+A,lstm20(행 표),valid,valid:abnormal:2,47,19.0
+A,lstm20(행 표),valid,valid:abnormal:3,31,
+A,lstm20(행 표),valid,valid:abnormal:4,18,
+A,lstm20(행 표),valid,valid:abnormal:5,3,
+A,lstm20(행 표),valid,valid:abnormal:6,50,30.0
+A,lstm20(행 표),valid,valid:abnormal:7,40,21.0
+A,lstm20(행 표),valid,valid:abnormal:8,25,19.0
+A,lstm20(행 표),valid,valid:abnormal:9,8,
+A,lstm20(행 표),test,test:abnormal:10,4,
+A,lstm20(행 표),test,test:abnormal:11,50,41.0
+A,lstm20(행 표),test,test:abnormal:12,42,22.0
+A,lstm20(행 표),test,test:abnormal:13,28,19.0
+A,lstm20(행 표),test,test:abnormal:14,15,
+A,lstm20(행 표),test,test:abnormal:15,50,33.0
+A,lstm20(행 표),test,test:abnormal:16,50,28.0
+A,lstm20(행 표),test,test:abnormal:17,36,26.0
+A,lstm20(행 표),test,test:abnormal:18,24,19.0
+A,lstm20(행 표),test,test:abnormal:19,10,
+A,lstm20(행 표),test,test:abnormal:20,15,
+B,L:e345,valid,valid:abnormal:0,4,0.0
+B,L:e345,valid,valid:abnormal:1,50,1.0
+B,L:e345,valid,valid:abnormal:2,47,2.0
+B,L:e345,valid,valid:abnormal:3,31,5.0
+B,L:e345,valid,valid:abnormal:4,18,3.0
+B,L:e345,valid,valid:abnormal:5,3,0.0
+B,L:e345,valid,valid:abnormal:6,50,0.0
+B,L:e345,valid,valid:abnormal:7,40,0.0
+B,L:e345,valid,valid:abnormal:8,25,3.0
+B,L:e345,valid,valid:abnormal:9,8,0.0
+B,L:e345,test,test:abnormal:10,4,0.0
+B,L:e345,test,test:abnormal:11,50,0.0
+B,L:e345,test,test:abnormal:12,42,1.0
+B,L:e345,test,test:abnormal:13,28,2.0
+B,L:e345,test,test:abnormal:14,15,0.0
+B,L:e345,test,test:abnormal:15,50,3.0
+B,L:e345,test,test:abnormal:16,50,0.0
+B,L:e345,test,test:abnormal:17,36,0.0
+B,L:e345,test,test:abnormal:18,24,4.0
+B,L:e345,test,test:abnormal:19,10,2.0
+B,L:e345,test,test:abnormal:20,15,3.0
+B,L+R1:e345,valid,valid:abnormal:0,4,0.0
+B,L+R1:e345,valid,valid:abnormal:1,50,0.0
+B,L+R1:e345,valid,valid:abnormal:2,47,0.0
+B,L+R1:e345,valid,valid:abnormal:3,31,0.0
+B,L+R1:e345,valid,valid:abnormal:4,18,0.0
+B,L+R1:e345,valid,valid:abnormal:5,3,0.0
+B,L+R1:e345,valid,valid:abnormal:6,50,0.0
+B,L+R1:e345,valid,valid:abnormal:7,40,0.0
+B,L+R1:e345,valid,valid:abnormal:8,25,0.0
+B,L+R1:e345,valid,valid:abnormal:9,8,0.0
+B,L+R1:e345,test,test:abnormal:10,4,0.0
+B,L+R1:e345,test,test:abnormal:11,50,0.0
+B,L+R1:e345,test,test:abnormal:12,42,0.0
+B,L+R1:e345,test,test:abnormal:13,28,0.0
+B,L+R1:e345,test,test:abnormal:14,15,0.0
+B,L+R1:e345,test,test:abnormal:15,50,0.0
+B,L+R1:e345,test,test:abnormal:16,50,0.0
+B,L+R1:e345,test,test:abnormal:17,36,0.0
+B,L+R1:e345,test,test:abnormal:18,24,0.0
+B,L+R1:e345,test,test:abnormal:19,10,0.0
+B,L+R1:e345,test,test:abnormal:20,15,0.0
+B,L:e012,valid,valid:abnormal:0,4,0.0
+B,L:e012,valid,valid:abnormal:1,50,1.0
+B,L:e012,valid,valid:abnormal:2,47,2.0
+B,L:e012,valid,valid:abnormal:3,31,5.0
+B,L:e012,valid,valid:abnormal:4,18,3.0
+B,L:e012,valid,valid:abnormal:5,3,0.0
+B,L:e012,valid,valid:abnormal:6,50,0.0
+B,L:e012,valid,valid:abnormal:7,40,0.0
+B,L:e012,valid,valid:abnormal:8,25,3.0
+B,L:e012,valid,valid:abnormal:9,8,0.0
+B,L:e012,test,test:abnormal:10,4,0.0
+B,L:e012,test,test:abnormal:11,50,0.0
+B,L:e012,test,test:abnormal:12,42,1.0
+B,L:e012,test,test:abnormal:13,28,2.0
+B,L:e012,test,test:abnormal:14,15,0.0
+B,L:e012,test,test:abnormal:15,50,3.0
+B,L:e012,test,test:abnormal:16,50,0.0
+B,L:e012,test,test:abnormal:17,36,0.0
+B,L:e012,test,test:abnormal:18,24,5.0
+B,L:e012,test,test:abnormal:19,10,2.0
+B,L:e012,test,test:abnormal:20,15,3.0
+B,L+R1:e012,valid,valid:abnormal:0,4,0.0
+B,L+R1:e012,valid,valid:abnormal:1,50,0.0
+B,L+R1:e012,valid,valid:abnormal:2,47,0.0
+B,L+R1:e012,valid,valid:abnormal:3,31,0.0
+B,L+R1:e012,valid,valid:abnormal:4,18,0.0
+B,L+R1:e012,valid,valid:abnormal:5,3,0.0
+B,L+R1:e012,valid,valid:abnormal:6,50,0.0
+B,L+R1:e012,valid,valid:abnormal:7,40,0.0
+B,L+R1:e012,valid,valid:abnormal:8,25,0.0
+B,L+R1:e012,valid,valid:abnormal:9,8,0.0
+B,L+R1:e012,test,test:abnormal:10,4,0.0
+B,L+R1:e012,test,test:abnormal:11,50,0.0
+B,L+R1:e012,test,test:abnormal:12,42,0.0
+B,L+R1:e012,test,test:abnormal:13,28,0.0
+B,L+R1:e012,test,test:abnormal:14,15,0.0
+B,L+R1:e012,test,test:abnormal:15,50,0.0
+B,L+R1:e012,test,test:abnormal:16,50,0.0
+B,L+R1:e012,test,test:abnormal:17,36,0.0
+B,L+R1:e012,test,test:abnormal:18,24,0.0
+B,L+R1:e012,test,test:abnormal:19,10,0.0
+B,L+R1:e012,test,test:abnormal:20,15,0.0
+B,start:e012,valid,valid:abnormal:0,4,
+B,start:e012,valid,valid:abnormal:1,50,19.0
+B,start:e012,valid,valid:abnormal:2,47,19.0
+B,start:e012,valid,valid:abnormal:3,31,
+B,start:e012,valid,valid:abnormal:4,18,
+B,start:e012,valid,valid:abnormal:5,3,
+B,start:e012,valid,valid:abnormal:6,50,30.0
+B,start:e012,valid,valid:abnormal:7,40,19.0
+B,start:e012,valid,valid:abnormal:8,25,19.0
+B,start:e012,valid,valid:abnormal:9,8,
+B,start:e012,test,test:abnormal:10,4,
+B,start:e012,test,test:abnormal:11,50,41.0
+B,start:e012,test,test:abnormal:12,42,23.0
+B,start:e012,test,test:abnormal:13,28,19.0
+B,start:e012,test,test:abnormal:14,15,
+B,start:e012,test,test:abnormal:15,50,33.0
+B,start:e012,test,test:abnormal:16,50,43.0
+B,start:e012,test,test:abnormal:17,36,
+B,start:e012,test,test:abnormal:18,24,21.0
+B,start:e012,test,test:abnormal:19,10,
+B,start:e012,test,test:abnormal:20,15,
+B,v2,valid,valid:abnormal:0,4,0.0
+B,v2,valid,valid:abnormal:1,50,0.0
+B,v2,valid,valid:abnormal:2,47,2.0
+B,v2,valid,valid:abnormal:3,31,5.0
+B,v2,valid,valid:abnormal:4,18,2.0
+B,v2,valid,valid:abnormal:5,3,0.0
+B,v2,valid,valid:abnormal:6,50,0.0
+B,v2,valid,valid:abnormal:7,40,0.0
+B,v2,valid,valid:abnormal:8,25,2.0
+B,v2,valid,valid:abnormal:9,8,0.0
+B,v2,test,test:abnormal:10,4,0.0
+B,v2,test,test:abnormal:11,50,0.0
+B,v2,test,test:abnormal:12,42,1.0
+B,v2,test,test:abnormal:13,28,2.0
+B,v2,test,test:abnormal:14,15,0.0
+B,v2,test,test:abnormal:15,50,2.0
+B,v2,test,test:abnormal:16,50,0.0
+B,v2,test,test:abnormal:17,36,0.0
+B,v2,test,test:abnormal:18,24,3.0
+B,v2,test,test:abnormal:19,10,2.0
+B,v2,test,test:abnormal:20,15,3.0
+B,v2+R1,valid,valid:abnormal:0,4,0.0
+B,v2+R1,valid,valid:abnormal:1,50,0.0
+B,v2+R1,valid,valid:abnormal:2,47,0.0
+B,v2+R1,valid,valid:abnormal:3,31,0.0
+B,v2+R1,valid,valid:abnormal:4,18,0.0
+B,v2+R1,valid,valid:abnormal:5,3,0.0
+B,v2+R1,valid,valid:abnormal:6,50,0.0
+B,v2+R1,valid,valid:abnormal:7,40,0.0
+B,v2+R1,valid,valid:abnormal:8,25,0.0
+B,v2+R1,valid,valid:abnormal:9,8,0.0
+B,v2+R1,test,test:abnormal:10,4,0.0
+B,v2+R1,test,test:abnormal:11,50,0.0
+B,v2+R1,test,test:abnormal:12,42,0.0
+B,v2+R1,test,test:abnormal:13,28,0.0
+B,v2+R1,test,test:abnormal:14,15,0.0
+B,v2+R1,test,test:abnormal:15,50,0.0
+B,v2+R1,test,test:abnormal:16,50,0.0
+B,v2+R1,test,test:abnormal:17,36,0.0
+B,v2+R1,test,test:abnormal:18,24,0.0
+B,v2+R1,test,test:abnormal:19,10,0.0
+B,v2+R1,test,test:abnormal:20,15,0.0
+B,v2+R1+R2,valid,valid:abnormal:0,4,0.0
+B,v2+R1+R2,valid,valid:abnormal:1,50,0.0
+B,v2+R1+R2,valid,valid:abnormal:2,47,0.0
+B,v2+R1+R2,valid,valid:abnormal:3,31,0.0
+B,v2+R1+R2,valid,valid:abnormal:4,18,0.0
+B,v2+R1+R2,valid,valid:abnormal:5,3,0.0
+B,v2+R1+R2,valid,valid:abnormal:6,50,0.0
+B,v2+R1+R2,valid,valid:abnormal:7,40,0.0
+B,v2+R1+R2,valid,valid:abnormal:8,25,0.0
+B,v2+R1+R2,valid,valid:abnormal:9,8,0.0
+B,v2+R1+R2,test,test:abnormal:10,4,0.0
+B,v2+R1+R2,test,test:abnormal:11,50,0.0
+B,v2+R1+R2,test,test:abnormal:12,42,0.0
+B,v2+R1+R2,test,test:abnormal:13,28,0.0
+B,v2+R1+R2,test,test:abnormal:14,15,0.0
+B,v2+R1+R2,test,test:abnormal:15,50,0.0
+B,v2+R1+R2,test,test:abnormal:16,50,0.0
+B,v2+R1+R2,test,test:abnormal:17,36,0.0
+B,v2+R1+R2,test,test:abnormal:18,24,0.0
+B,v2+R1+R2,test,test:abnormal:19,10,0.0
+B,v2+R1+R2,test,test:abnormal:20,15,0.0
+B,mlp_ae5,valid,valid:abnormal:0,4,
+B,mlp_ae5,valid,valid:abnormal:1,50,4.0
+B,mlp_ae5,valid,valid:abnormal:2,47,13.0
+B,mlp_ae5,valid,valid:abnormal:3,31,
+B,mlp_ae5,valid,valid:abnormal:4,18,4.0
+B,mlp_ae5,valid,valid:abnormal:5,3,
+B,mlp_ae5,valid,valid:abnormal:6,50,4.0
+B,mlp_ae5,valid,valid:abnormal:7,40,4.0
+B,mlp_ae5,valid,valid:abnormal:8,25,17.0
+B,mlp_ae5,valid,valid:abnormal:9,8,4.0
+B,mlp_ae5,test,test:abnormal:10,4,
+B,mlp_ae5,test,test:abnormal:11,50,4.0
+B,mlp_ae5,test,test:abnormal:12,42,4.0
+B,mlp_ae5,test,test:abnormal:13,28,4.0
+B,mlp_ae5,test,test:abnormal:14,15,4.0
+B,mlp_ae5,test,test:abnormal:15,50,34.0
+B,mlp_ae5,test,test:abnormal:16,50,4.0
+B,mlp_ae5,test,test:abnormal:17,36,4.0
+B,mlp_ae5,test,test:abnormal:18,24,9.0
+B,mlp_ae5,test,test:abnormal:19,10,
+B,mlp_ae5,test,test:abnormal:20,15,
+B,lstm20(행 표),valid,valid:abnormal:0,4,
+B,lstm20(행 표),valid,valid:abnormal:1,50,19.0
+B,lstm20(행 표),valid,valid:abnormal:2,47,19.0
+B,lstm20(행 표),valid,valid:abnormal:3,31,
+B,lstm20(행 표),valid,valid:abnormal:4,18,
+B,lstm20(행 표),valid,valid:abnormal:5,3,
+B,lstm20(행 표),valid,valid:abnormal:6,50,30.0
+B,lstm20(행 표),valid,valid:abnormal:7,40,19.0
+B,lstm20(행 표),valid,valid:abnormal:8,25,19.0
+B,lstm20(행 표),valid,valid:abnormal:9,8,
+B,lstm20(행 표),test,test:abnormal:10,4,
+B,lstm20(행 표),test,test:abnormal:11,50,41.0
+B,lstm20(행 표),test,test:abnormal:12,42,
+B,lstm20(행 표),test,test:abnormal:13,28,19.0
+B,lstm20(행 표),test,test:abnormal:14,15,
+B,lstm20(행 표),test,test:abnormal:15,50,34.0
+B,lstm20(행 표),test,test:abnormal:16,50,43.0
+B,lstm20(행 표),test,test:abnormal:17,36,
+B,lstm20(행 표),test,test:abnormal:18,24,22.0
+B,lstm20(행 표),test,test:abnormal:19,10,
+B,lstm20(행 표),test,test:abnormal:20,15,
