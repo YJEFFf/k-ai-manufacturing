@@ -1,0 +1,123 @@
+{
+  "judge": "J3",
+  "persona": "대회 운영위원. 제출물 완결성(보고서 PDF·코드 ZIP·README·requirements·학습 데이터·테스트 예측 파일), 공식 요구 충족, 보고서와 코드·산출물의 일치, 한 명령 재현성을 가장 엄격하게 본다. 실행 허용 위원으로 임시 폴더에서 짧은 검사를 직접 돌렸다.",
+  "entries": {
+    "BASE61": {
+      "scores": {"data": 14, "model": 32, "error": 14, "field": 9, "creative": 9, "code": 9},
+      "total": 87,
+      "rationale": {
+        "data": "기록(최대 50행)·0.1초 표본과 공백(측정 43.3%), 중복 1행·결측 0, 불균형(20,000:600행, 600:21기록), 날짜·요일 차이, 저장 정밀도 누수(규칙만으로 F1 0.992), 전류의 교류 순시값 해석, 정숙 구간까지 진단하고 정밀도 맞춤·기록 분할·기록 단위 시간순 train/valid/test·해시 잠금으로 이었다. A·B test 정상 중첩과 이상 test가 같은 사건 뒷부분이라는 독립성 한계는 본문에 밝혔다.",
+        "model": "베이스라인 5종과 v1·v2·v3 계열을 같은 분할·같은 conformal 보정(α 1%)으로 비교하고 valid 선택을 해시로 잠근 뒤 test를 채점했으며 isotonic 보정 이상 확률을 예측 파일 열로 냈다. J3가 동봉 예측 파일로 계산한 행 F1(잠금 1.000/0.9954, 2단계 1.000/1.000, v2 0.9649/0.9701)이 보고와 일치한다. 다만 v2 특징·R1·R2를 전체 이상 자료를 본 뒤 설계했고 R2는 test 후 추가했으며 1.000은 단일 사건에서 R1이 경보를 이어 붙인 값이라 상위 구간(설계·선택이 검증 자료로만)에 못 미친다.",
+        "error": "v2 미탐이 기록 위치 0~1(A 14·B 12행)에, 오경보가 고부하 정상의 크기 성분 단독 경보(고부하 14.0% 대 전체 3.8%)에 몰림을 정량화했고 성분 절제·PCA 기여·부하–진동 관계(상호작용)·규칙별 효과 분해를 제시했다.",
+        "field": "주의/점검 요청 두 단계, 경보 근거별 점검 순서·품질 보류·사건 종료 양식, ISA-18.2 경보 예산 환산, 재보정 조건, 비용순 수집 개선 로드맵이 구체적이다. 점검 콘솔은 R1·R2가 반영되지 않은 v2 기준 프로토타입이다.",
+        "creative": "conformal 문턱, 전류 겉보기 0.6Hz 접힘으로 표본 간격 역산, ISO 13379 진단 매트릭스, 물리 근거 R1·R2, 세션 교락 크기 측정, 이항·포아송 상한 등 근거 있는 차별화가 여럿이다.",
+        "code": "README·판 고정 requirements·environment.yml·원본 CSV·예측 파일·run_all.py(26단계, 대조 43/quick 28)·상대경로·seed·CSV 해시 확인을 갖췄고 보고서 6장–README–ZIP 구성이 서로 맞는다. 전체 약 55분이며 보완 LSTM(2.7)은 run_all 밖의 별도 환경(파이썬 3.12.2·torch 2.5.1, 약 8시간)이고, J3 검사 환경에는 torch·statsmodels가 없어 quick은 환경 검사에서 멈췄다(패키지 결함 아님)."
+      },
+      "top_strength": "데이터 결함 진단이 시간순 분할·해시 잠금·예측 파일까지 이어지고 보고 수치가 동봉 산출물과 맞는다.",
+      "top_weakness": "v2·R1·R2를 전체 이상 자료를 본 뒤 설계했고 이상이 166초 단일 사건이라 1.000·0.995는 일반화 성능이 아니다."
+    },
+    "CUR65": {
+      "scores": {"data": 14, "model": 32, "error": 14, "field": 9, "creative": 9, "code": 8},
+      "total": 86,
+      "rationale": {
+        "data": "BASE61 진단에 2.8절 정상 전용 분리(적합 0~119·보정 120~239·선택 240~299)를 더했다. 수준은 BASE61과 같다.",
+        "model": "정상 자료만으로 56후보(관문 통과 31) 중 V2+VD3@1을 고르고 해시 잠금 뒤 이상 21기록을 재평가해 선택 누수를 줄인 점은 가점이다. 그러나 같은 조건의 강한 기준선(특징 5NN·Ridge)과는 비교하지 않았다고 스스로 밝혔고, 2.8 표의 PCA-MSPC·진동 거리·최소점수 결합 3행(원고 408~410행)과 '총 59개'는 통합 ZIP(56후보, 비교기 3개 제거)에 없어 재현할 수 없으므로 상쇄했다.",
+        "error": "BASE61 오류분석에 통합 후보의 정상 조건 변화(상수 이동·배율·부하·양자화·시각 흔들림) 최악 경보율 표가 더해졌으나 항목 수준은 같다.",
+        "field": "BASE61과 같고, 통합 후보의 운영 위치는 원칙 수준의 한 문단이다.",
+        "creative": "단일 경보 예산 결합은 새롭지만, 비교기로 넣은 PCA-MSPC→진동 Ledoit–Wolf Mahalanobis·최소점수 결합 구성이 REF19 최종 모델과 닮았고 출처가 없어 가점을 보류했다.",
+        "code": "동봉 통합 ZIP 자체는 무결성 검사(343파일 통과)·pytest·기준표 대조로 나아졌지만, 6장이 ZIP에 없는 environment.yml·predictions/ 폴더·파이썬 3.13·'--quick 약 13분'을 안내하고(원고 659~666행), 2.8 재현은 심사위원이 접근할 수 없는 저장소 경로(press_frontier_improvement_2026-10-08, requirements-windows-lock.txt, build_hwpx_copy.py, 원고 688~693행)로 안내해 보고서만으로는 재현 경로가 끊긴다."
+      },
+      "top_strength": "정상 자료만으로 결합 후보를 고르고 잠근 뒤에야 이상 자료를 연 절차를 추가했다.",
+      "top_weakness": "보고서 6장·2.8이 동봉 통합 ZIP과 어긋나(환경 파일명·예측 파일 위치·파이썬 판·후보 수·비교기 행·저장소 경로) 보고서대로는 재현할 수 없다."
+    },
+    "NEW69": {
+      "scores": {"data": 14, "model": 33, "error": 14.5, "field": 9.5, "creative": 9, "code": 9},
+      "total": 89,
+      "rationale": {
+        "data": "BASE61과 같은 진단·검증 연결에 2.8절 정상 전용 분리를 1.7절에서 기존 선택 이력과 구분해 명시했다.",
+        "model": "통합 후보를 같은 분할·같은 기록 보정·같은 인과적 주입에서 특징 맞춤 5NN·3채널 Ridge와 나란히 비교하고, 짝지은 블록 부트스트랩(4,000회)으로 5NN과는 F1이 갈리지 않음을 밝혔으며 선택 안정성(가족 하나 빼기 4회 중 2회 변경)도 공개했다. J3가 2.8 수치를 동봉 기준표로 재계산하고 README 명령으로 처음부터 재생성해 모두 일치함을 확인했다(기준표 rtol 1e-9). 공식 모델의 설계 단계 누수와 단일 사건 한계는 그대로라 34점에는 못 미친다.",
+        "error": "기존 FN·FP 조건 정량화에 겉보기 전류 주파수 −0.1Hz 이동 시 정상 오경보 급증(A 18/120·B 63/180), 느린 진동 수준 변화·전류 진폭 감소 미탐(0~3.8%), 간헐 끊김(30~35%), 보정 자료 오염 시 문턱 상승(통합 후보 3.68→18.03)을 더했고 J3 실행 결과와 일치했다.",
+        "field": "BASE61 운영 절차에 통합 후보의 1단계 표시·점검 순서·경로/관측 부족/겉보기 주파수 기록, '정상 확인' 기록만 쓰는 재보정 규칙과 오염 영향 수치, 새 자료를 재학습·재보정 없이 평가하는 동결 모델 도구(validate_holdout evaluate, 출처·중복 검사)를 더했다. 콘솔은 여전히 v2 기준이다.",
+        "creative": "정상 기록 최대값 하나로 보정하는 단일 경보 예산 결합과 선택 안정성 공개는 근거 있는 차별화지만, 진동 Ledoit–Wolf Mahalanobis 경로와 섭동 관문 선택이 REF19와 닮아 추가 가점은 주지 않았다.",
+        "code": "6장이 통합 ZIP 구성(run_all·run_official·verify_*·package_integrity, README_original·environment_original.yml, reference_results/official_predictions, 파이썬 3.14, 대조 43/28)과 맞고, J3 실행에서 무결성 343파일 통과·예측 파일 F1 일치·'run_all.py --section improvement' 7단계 593초 통과·'--extra-audits-only' 446초 통과(pytest 108개)를 확인했다. 감점: ZIP README가 예측 파일을 실행 후에만 생기는 predictions/로 안내, environment_original.yml이 3.14용 requirements를 불러 3.13 판이 실제로 보존되지 않음, 2.8 강한 기준선·민감도 수치는 플래그가 있어야 생기고 기준표가 없음, 공식 26단계(약 62분)는 J3 환경에서 확인 불가, 필수 만족도 캡처가 양식 예시 그대로다."
+      },
+      "top_strength": "보고서 6장·2.8 수치가 통합 ZIP과 맞고, README 명령으로 개선 실험과 추가 감사를 처음부터 재생성해 보고 수치와 기준표가 그대로 나왔다.",
+      "top_weakness": "공식 모델(v2+R1)의 설계가 전체 이상 자료에 맞춰져 있고 이상이 단일 사건이라, 개선분도 실제 F1이 아닌 합성 주입 범위의 이득에 그친다."
+    },
+    "REF19": {
+      "scores": {"data": 13.5, "model": 30, "error": 14, "field": 8.5, "creative": 9, "code": 9.5},
+      "total": 84.5,
+      "rationale": {
+        "data": "버스트(0.5초 공백) 구조, 표본·공백, 결측·이상치, 불균형, 날짜 교란(음성대조·가짜 고장), 저장 방식 차이(격자·자릿수)와 반사실 시험을 진단해 버스트 단위 시간블록·정상 전용 적합으로 이었다. 행 중복 점검이 부분적이고 타임스탬프 형식 차이·물리 단위는 다루지 않았으며 10샘플 미만 버스트 제외로 이상 4개가 빠졌다.",
+        "model": "베이스라인 2종(범위 규칙·가이드북 LSTM-AE)을 포함한 5종을 같은 5-fold·같은 conformal 문턱으로 비교하고 Platt 보정 확률·유병률별 사후확률·버스트 부트스트랩 구간을 냈으며 예측 파일과 수치가 맞는다. 그러나 평가 블록 4와 고장 428창을 선정에도 썼고 선정 기준이 결과를 본 뒤 바뀌어 보고 F1 0.931은 독립 test 수치가 아니다.",
+        "error": "PCA 기여·단일 특징 AUROC·특징군 제거, 주효과 로지스틱 대비 상호작용 정량, FN(각 버스트 첫 2창 62%)·FP(저부하 85%) 조건, 섭동 35조건 배수를 정량 제시했다.",
+        "field": "초록·노랑·빨강 단계, 진동 센서 우선 점검 문구, 정지 검토 규칙, 샘플 단위 재생 참조 구현(창당 1.4ms), 교대당 경보 빈도·재교정 조건을 냈다. 다만 교대당 빨강 61건은 현장 부담이 크다.",
+        "creative": "섭동 강건성 기반 선정, 채널 분리 2단 AND, 반사실·가짜 고장 대조, 유병률별 사후확률, 결과를 본 뒤의 결정 24건 공개 등 근거 있는 차별화가 여럿이다.",
+        "code": "한 명령 quick(약 3분)으로 점검부터 예측 파일·표 84개·재생 검증까지 돌고 판 고정·잠금 파일·상대경로 테스트·seed·데이터 SHA-256·예측 파일·pytest 14건·보고서 수치 대조 스크립트를 갖췄다. LSTM-AE full 모드 의존성이 요구사항에 없고 quick은 동봉 CSV를 재사용한다(팩트시트 기준, 실행 확인 불가)."
+      },
+      "top_strength": "진단→검증 설계→오류 조건→운영 지표가 정량으로 이어지고 3분짜리 한 명령 재현과 보고서 수치 대조 스크립트를 갖췄다.",
+      "top_weakness": "평가 블록과 고장 기록을 선정에도 써서 보고 성능이 독립 test가 아니고, 1단 오경보율이 블록 구성에 따라 0.27%~8.23%로 흔들린다."
+    }
+  },
+  "new_vs_cur": "NEW69 89.0 − CUR65 86.0 = +3.0. 모델 +1: ZIP에 없는 비교기 3행·'총 59개'를 지워 56후보로 맞췄고, 같은 조건의 특징 5NN·3채널 Ridge 비교와 짝지은 블록 부트스트랩(5NN과 구간이 0을 포함함을 그대로 공개)·선택 안정성을 더했으며 J3 재생성으로 수치가 확인됐다. 코드 +1: 6장이 통합 ZIP의 실제 파일·경로(environment_original.yml, reference_results/official_predictions)·파이썬 3.14·명령과 맞고 접근 불가 저장소 경로 안내를 없앴다. 오류 +0.5(겉보기 주파수·느린 변화·간헐 끊김·보정 오염 실패 조건), 현장 +0.5(통합 후보 운영 위치·재보정 자료 규칙·동결 모델 평가 도구). 데이터·창의성은 같다.",
+  "report_zip_inconsistencies": [
+    "NEW69 6장 '제출 예측 파일: reference_results/official_predictions/'(원고 707행)는 ZIP과 맞지만, ZIP의 README.md '결과와 검증 범위' 첫 항목은 'predictions/test_predictions_A.csv, _B.csv'로 안내한다. ZIP에는 predictions/ 폴더가 없고(run_official.py 실행 후 생성) README 어디에도 reference_results/official_predictions가 없다. README_original.md §0·§3·§5도 'zip에 든 predictions/'로 남아 있다.",
+    "NEW69 6장 환경(원고 683·684·704행) '3.13 환경 설명: README_original.md, environment_original.yml', '3.13 기록은 environment_original.yml' ↔ environment_original.yml은 python=3.13에 '-r requirements.txt'를 불러 지금의 3.14용 판(numpy 2.5.3·pandas 3.0.6·matplotlib 3.11.2·pytest·cloudpickle)을 설치한다. 원래 3.13 판(numpy 2.5.2·pandas 3.0.5·matplotlib 3.11.1)은 ZIP 어디에도 없고, README_original.md §1은 여전히 '파이썬 3.13이 필요하다'고 적는다.",
+    "NEW69 내용요약(원고 21행)·1장(40행) 'run_all.py 한 명령으로 ... 사후 보완 실험·검산', '명령 하나로 ... 43/43' ↔ 6장 687행 '세 부분은 각각 새로 푼 폴더에서 실행'. 2.8 '같은 조건 비교'·'선택의 안정성'·겉보기 주파수 행과 4.3 '재보정 자료'(원고 622행) 수치는 --extra-audits(또는 --extra-audits-only)를 줘야 outputs/strong_baselines·normal_sensitivity에 생기고 기본 'python run_all.py'로는 생기지 않는다. reference_results에 이들 기준표가 없어 verify_improvement.py가 대조하지 않는다(J3 실행으로 수치 일치는 확인). 깨끗한 재현 실행 기록도 ZIP에 없다(package_manifest.json: 'clean reproduction is recorded separately').",
+    "NEW69 2.8(원고 395행) '후보 격자와 규칙은 실행 전에 정했고', 6장 714행 'PROTOCOL.md에 ... 실행 전 계획으로 적었다' ↔ ZIP의 yejun/analysis/press_improvement/PROTOCOL.md는 배포용으로 고친 판('이 배포본은 ... 비교기 3개를 제외', 56개)이고 실행 전 원본(59개)은 해시(package_manifest original_selection_lock_sha256)만 있다. reference_results/improvement/selection_lock.json도 'Historical reference projected to 56 retained candidates; this is not a fresh execution lock'이라고 적는다(공개는 했으나 사전 계획 원문 확인 불가).",
+    "NEW69 2.8(원고 458행) '두 후보도 ... 점수 평균 창(1행·3행)과 가중치만 다르다' ↔ development_candidates.csv·normal_sensitivity/leave_one_family_out.csv의 CD+VD1@0.5는 전류 경로도 V2가 아닌 CD라 다르다(경미).",
+    "NEW69 6장(원고 688행) '한 행씩·임의 묶음·기록 단위로 넣어도 경보가 같은지 재생 검증' ↔ verify_replay.py는 이상 21기록 전부와 정상은 분할별 대표 기록(처음 3·끝 3·최단·최장)만 재생한다(J3 실행: A 28기록·844행, B 29기록·824행). 범위 설명이 빠졌다(경미).",
+    "NEW69 6장(원고 686행) '기존 26단계 ... 43항목 모두 일치(약 62분)' ↔ ZIP에 그 실행 기록이 없다. J3 환경에서는 torch·statsmodels 미설치로 run_official.py가 환경 검사에서 끝나 확인하지 못했다(검사 환경 한계, 패키지 결함 아님).",
+    "NEW69 2.7·6장(원고 692행) 보완 LSTM은 파이썬 3.12.2·torch 2.5.1(Apple M2)에서 실행 ↔ ZIP requirements.txt는 파이썬 3.14·torch 2.14.0이고 그 실험용 환경 파일은 없다(본문에 공개).",
+    "NEW69 69쪽(원고 755행) '경진대회 만족도 조사 완료 페이지 캡처: [제출 전 삽입]' ↔ PDF 마지막 쪽에 양식의 '예시' 이미지가 그대로 있다. 양식상 '(필수)' 항목 미삽입(BASE61·CUR65 PDF도 같음).",
+    "사소: 통합 ZIP에서 yejun/press_guard/HISTORY.md가 빠졌지만 README_original.md §5는 'yejun/ 아래의 README·PLAN·HISTORY'를 언급한다."
+  ],
+  "originality_concerns": [
+    "CUR65 2.8 실제 파일 재평가 표(원고 408~410행)와 설명(412행)의 'PCA-MSPC 비교기', 'Ledoit–Wolf 진동 Mahalanobis 비교기', '두 비교기 최소점수 결합(AND가 아님)'은 REF19 최종 모델(1단 PCA-MSPC → 2단 진동 전용 Ledoit–Wolf Mahalanobis, AND 구조)과 구성이 거의 같은데 다른 출품 출처 표기가 없다. 심각도 중간. NEW69에서는 표·설명·ZIP 모두에서 빠졌다. 점수 반영: CUR65 창의성 가점 보류(9 유지).",
+    "NEW69 2.8(원고 396행) VD3는 진동 2채널 예측 잔차를 Ledoit–Wolf 수축 공분산 Mahalanobis로 채점해 REF19 2단(진동 전용 Ledoit–Wolf Mahalanobis)과 닮았다. BASE61 2.4 † Ridge 예측 오차의 후속형이라는 내부 계보와 문헌[29][31]을 밝혀 심각도 낮음. 점수 반영: NEW69 창의성 추가 가점 없음(9 유지).",
+    "NEW69 2.8(원고 395행) 선택 관문 '센서 값 상수 이동 시 오경보 증가 2%p 이하'는 REF19의 '계측 섭동 시 정상 오경보 증가 한도(20%p)로 선정'과 발상이 닮았다. 가족별 최솟값 순위는 문헌[30]을 인용했다. 심각도 낮음.",
+    "NEW69 6장(원고 688행)·README의 한 행/임의 묶음/기록 단위 재생 검증과 잠금 해시·무결성 매니페스트는 REF19의 stream_replay·잠금 파일과 닮았으나, BASE61에도 해시 잠금·기록 재생(콘솔 모의 운용)이 있었고 일반 공학 관행이라 심각도 매우 낮음.",
+    "BASE61부터 있던 같은 날 정상 블록 음성대조, 직류 이동·양자화 반사실 시험, 사전 비율별 확률은 REF19와 겹치지만 BASE61 원고(2026-10-04)부터 있었고 표준 기법이라 반영하지 않았다."
+  ],
+  "overfitting_generalization_concerns": [
+    "이상은 166초 단일 사건(21기록)이고 A·B는 이상 기록이 같고 정상 test도 겹친다. valid(앞 10기록)·test(뒤 11기록)·2.8 재평가(21기록)가 모두 같은 사건 안의 재사용이다.",
+    "v2 특징·R1·R2 상수는 전체 이상 자료를 본 뒤 정했고 R2는 test 후 추가했으며 R2의 오경보 감소도 착안에 쓴 기록 위에서 잰 값이다. 1.000은 R1이 연속 사건에서 경보를 이어 붙인 결과(어느 앞단+R1이든 0.982~1.000)다.",
+    "2.8 통합 후보는 정상 전용 선택이지만 후보 격자(진동 차분 Ridge·Ledoit–Wolf)는 기존 사후 결과(Ridge의 진동 주입 탐지)를 본 뒤 설계됐고 선택이 팀이 정한 합성 주입 가족에 의존한다. 가족 하나를 빼면 4번 중 2번 1위가 바뀐다(J3가 동봉 표로 재계산해 확인).",
+    "실제 사건 이득은 R1 없는 행 F1 +0.006/+0.004로 작고 특징 맞춤 5NN과 구간이 겹친다. 감시 범위 이득은 합성 진동 잡음·충격에 한정되고 지속 증폭·느린 수준 변화·진폭 감소는 거의 못 잡는다.",
+    "정상 자료는 하루 77분 한 세션뿐이고 정상·이상 날짜가 달라 세션 교락이 남는다. 0.1ms 시각 흔들림에서 정상 기록 경보율 95~97%, 겉보기 주파수 −0.1Hz에서 B 63/180으로, 수집 조건이 조금만 달라져도 경보가 급증해 재보정·시각 동기화 없이는 현장 일반화가 어렵다.",
+    "보완 LSTM은 516개 변형을 같은 valid 사건으로 골라 낙관이 남고, 이상 확률은 같은 사건 앞부분으로 보정해 다른 사건에 옮길 수 없으며, 합성 열화의 '선행 시간'은 가정한 상승 속도가 정한다."
+  ],
+  "biggest_gains": [
+    {"action": "공식 모델에도 2.8과 같은 정상 전용 사전 잠금을 적용: v2 성분 조합·R1/R2 상수 후보를 실행 전에 고정하고 정상 기록만으로 고른 뒤 이상 앞10/뒤11을 따로 보고(결과가 지금보다 나빠도 그대로 공개)", "item": "AI 예측모델 개발", "expected_points": "+1~2", "overfit_risk": "중간"},
+    {"action": "한 명령 재현의 실증·정합: 새 폴더·새 환경에서 'python run_all.py --extra-audits' 한 번을 끝까지 돌린 integrated_run_summary.json을 ZIP에 동봉하고, README의 예측 파일 위치를 reference_results/official_predictions로 고치거나 predictions/에 미리 넣고, 3.13 원래 판 고정 파일을 보존하고, strong_baselines·normal_sensitivity 기준표를 reference_results에 넣어 자동 대조", "item": "코드 및 재현성", "expected_points": "+0.5~1", "overfit_risk": "낮음"},
+    {"action": "현장 적용 근거를 실제 제출 경보 체계로 갱신: 점검 콘솔·재생 검증을 v2가 아닌 1단계(v2+R1)·2단계(v2+R1+R2)로 바꾸고, 한 행씩 재생한 두 단계 경보가 제출 예측 파일과 같음과 교대당 단계별 경보량 추정을 추가", "item": "현장 활용방안", "expected_points": "+0.5", "overfit_risk": "낮음"},
+    {"action": "보고서 마지막 쪽 '만족도 조사 완료 캡처(필수)'를 양식 예시에서 실제 화면으로 교체", "item": "제출 요건(배점 외)", "expected_points": "0(형식 미비에 따른 감점·실격 위험 제거)", "overfit_risk": "낮음"}
+  ],
+  "commands_run": [
+    "J3_listzip.py(zipfile 목록·UTF-8 플래그) 두 ZIP: 약 1초. BASE 306항목·19.8MB, 통합 344항목·22.8MB",
+    "J3_extract.py(zipfile.testzip 후 추출, LongPathsEnabled=0이라 최상위 폴더명을 빼고 J3/b·J3/i·J3/o에 풀기): 각 0.5~0.6초, CRC 오류 없음, 최장 경로 246자",
+    "J3/i: python package_integrity.py — 2.3초, passed, 343파일 SHA-256 일치",
+    "J3_f1.py(예측 파일만으로 행·기록 F1): 1.5초. BASE predictions/와 통합 reference_results/official_predictions/가 바이트 동일. A 4,414행(정상 4,090·이상 324)·B 6,421행(6,097·324). locked_v2_R1_realtime 1.0000/0.9954(B 오경보 3행), final_v2_R1_R2_realtime 1.0000/1.0000, v2_realtime 0.9649/0.9701. 기록 단위(any alarm) F1 B 잠금 0.880",
+    "Get-FileHash: BASE run_all.py = 통합 run_official.py, BASE README.md = 통합 README_original.md, expected_results.json 동일(43항목, quick 28)",
+    "J3_check28.py(reference_results/improvement 표로 NEW69 2.8 표 재계산): 1.2초. 실제 재평가 4행, 주입 8행, 네 가족 평균(11.5/25.4→35.4/44.4)·손실(43.84→41.48, 17.85→17.50), 정상 조건 변화 5행 모두 일치",
+    "J3_lofo.py(development_candidates.csv로 가족 하나 빼기 재선택): 즉시. 전류 왜곡 제외→V2+VD1@1, 진동 증폭 제외→CD+VD1@0.5, 나머지 V2+VD3@1(보고와 일치)",
+    "J3/o: python run_all.py --section official --quick — 2.8초, 실패(exit 1): '설치되지 않은 패키지: statsmodels, torch'(검사 환경 한계, pip 설치 금지로 중단)",
+    "J3/b: python run_all.py --quick — 0.4초, 실패(exit 1): 같은 사유(statsmodels, torch 없음)",
+    "J3/i: python run_all.py --section improvement — 593초, 통과(exit 0). 정상 전용 재선택 V2+VD3@1(377초), 저장 예측 재계산 통과(16초), 재생 검증 통과(138초, A 28기록·844행, B 29기록·824행), reference_results 11개 표 rtol 1e-9 일치(1.6초), 독립 수식 감사 19,104행 경보 변화 0·점수 최대차 3.4e-12(21초), 동결 모델 11,387행 경보 일치(25초), pytest 108 passed(14초)",
+    "J3/i: python run_all.py --section improvement --extra-audits-only — 446초, 통과(exit 0). strong_baselines 314초, normal_sensitivity 110초, 집계 검증 4.5초, pytest 108 passed. 2.8 같은 조건 비교(5NN 0.969/0.972·오경보 0/1, Ridge 0.883/0.882·0/1, 가족별 탐지율·대조 경보율), 블록 부트스트랩 구간(통합−v2 A 0.0033~0.0088·B 0.0008~0.0067 등), 겉보기 주파수(A 18/120, B 63·53/180), 간헐 끊김(30.0·31.0/31.0·34.9%), 보정 오염(3.52→5.56, 3.68→18.03, 5기록 15.08·18.14) 모두 보고와 일치",
+    "pymupdf로 PDF 쪽수·키워드·마지막 쪽 확인: BASE 61쪽, CUR 65쪽, NEW 69쪽. 세 PDF 마지막 쪽 만족도 캡처가 양식 '예시' 이미지 그대로. CUR PDF 61쪽에 저장소 경로(press_frontier_improvement, requirements-windows-lock, build_hwpx_copy) 표기",
+    "pip list·importlib.find_spec: 검사용 venv에 torch·statsmodels 없음, 나머지(numpy 2.5.3·pandas 3.0.6·scipy 1.18.1·scikit-learn 1.9.1·matplotlib 3.11.2·pytest 9.1.1·cloudpickle 3.1.2)는 통합 requirements와 같음. CPU i7-8700(6코어), 파이썬 3.14.7"
+  ],
+  "opened_files": [
+    "yejun/analysis/press_frontier_improvement_2026-10-08/review/regrade_b26115a/judge_brief.md",
+    "yejun/analysis/press_competitor_review_2026-10-08/rubric.md",
+    "yejun/analysis/press_competitor_review_2026-10-08/factsheets/E19.md",
+    "claude/report/final_v5.md(6장 정독, 나머지는 CUR65와의 diff로 확인), claude/report/결과보고서_북적북적.pdf(쪽수·키워드·마지막 쪽)",
+    "scratchpad/regrade2/report_before_7f523b6.md(BASE61·NEW69와 diff), report_before_7f523b6.pdf(쪽수·키워드·마지막 쪽)",
+    "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.md(전체), 결과보고서_북적북적_개선본.pdf(쪽수·키워드·마지막 쪽)",
+    "claude/submission/북적북적_code.zip → J3/b: README.md, requirements.txt, environment.yml, run_all.py, expected_results.json, predictions/test_predictions_A·B.csv",
+    "yejun/submission/press_integrated_2026-10-08/북적북적_code_통합본.zip → J3/i: README.md, README_original.md, requirements.txt, environment_original.yml, run_all.py, run_official.py, verify_official.py, verify_improvement.py, package_integrity.py, package_manifest.json, expected_results.json, reference_results/improvement/*.csv·json, reference_results/official_predictions/*.csv",
+    "J3/i/yejun/analysis/press_improvement/: PROTOCOL.md, run_experiment.py(앞부분), verify_replay.py(앞부분), audit_strong_baselines.py·audit_normal_sensitivity.py(검색), tests/*.py(AST로 개수), 실행 산출 outputs/*·logs/*"
+  ],
+  "disclosure": "BASE61·CUR65·NEW69가 같은 팀(북적북적)의 원본·개선본이고 REF19가 공개 경쟁 출품이라는 것은 지침에 적혀 있어 알았다. 같은 잣대를 적용했고 실행 검사도 두 ZIP에 같은 방식으로 했다. review 폴더의 다른 파일·과거 채점·git 기록·저장소의 다른 실험 폴더는 열지 않았다. 한계: REF19는 팩트시트로만 채점해 실행 검증을 할 수 없었고, 우리 출품은 실행 결과로 가점·감점을 모두 받을 수 있어 검증 깊이가 비대칭이다. 공식 26단계 파이프라인은 검사 환경에 torch·statsmodels가 없어 어느 ZIP에서도 재현하지 못했다."
+}

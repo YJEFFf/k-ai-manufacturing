@@ -1,0 +1,105 @@
+{
+  "evaluated_commit": "b26115a",
+  "method": "Three new AI reviewers (J1 academic ML, J2 field PdM, J3 competition operations); same rubric and report+ZIP-only rule as regrade_a30d5ad; unblinded; J3 alone executed checks (including a fresh improvement run and extra audits) in a temp folder; not official results",
+  "entries": {
+    "BASE61": "original 61p report + original ZIP",
+    "CUR65": "pre-revision 65p report (7f523b6) + integrated ZIP 2bee634d",
+    "NEW69": "revised 69p report (b26115a) + same integrated ZIP",
+    "REF19": "E19 factsheet only"
+  },
+  "judge_totals": {
+    "J1": {
+      "BASE61": 84.5,
+      "CUR65": 83.5,
+      "NEW69": 86.5,
+      "REF19": 83.0
+    },
+    "J2": {
+      "BASE61": 88.5,
+      "CUR65": 88.0,
+      "NEW69": 90.5,
+      "REF19": 85.0
+    },
+    "J3": {
+      "BASE61": 87,
+      "CUR65": 86,
+      "NEW69": 89,
+      "REF19": 84.5
+    }
+  },
+  "means": {
+    "BASE61": {
+      "data": 14.17,
+      "model": 32.17,
+      "error": 13.5,
+      "field": 8.83,
+      "creative": 9.0,
+      "code": 9.0,
+      "total": 86.67
+    },
+    "CUR65": {
+      "data": 14.17,
+      "model": 32.17,
+      "error": 13.5,
+      "field": 8.83,
+      "creative": 9.0,
+      "code": 8.17,
+      "total": 85.83
+    },
+    "NEW69": {
+      "data": 14.17,
+      "model": 33.0,
+      "error": 14.0,
+      "field": 9.33,
+      "creative": 9.0,
+      "code": 9.17,
+      "total": 88.67
+    },
+    "REF19": {
+      "data": 13.67,
+      "model": 30.67,
+      "error": 13.5,
+      "field": 8.5,
+      "creative": 8.83,
+      "code": 9.0,
+      "total": 84.17
+    }
+  },
+  "delta_new_minus_cur": {
+    "data": 0.0,
+    "model": 0.83,
+    "error": 0.5,
+    "field": 0.5,
+    "creative": 0.0,
+    "code": 1.0,
+    "total": 2.84
+  },
+  "delta_new_minus_base": {
+    "data": 0.0,
+    "model": 0.83,
+    "error": 0.5,
+    "field": 0.5,
+    "creative": 0.0,
+    "code": 0.17,
+    "total": 2.0
+  },
+  "per_judge": {
+    "J1": {
+      "NEW69-CUR65": 3.0,
+      "NEW69-BASE61": 2.0
+    },
+    "J2": {
+      "NEW69-CUR65": 2.5,
+      "NEW69-BASE61": 2.0
+    },
+    "J3": {
+      "NEW69-CUR65": 3,
+      "NEW69-BASE61": 2
+    }
+  },
+  "j3_execution": "Fresh extraction: run_all.py --section improvement passed in 593 s (reselected V2+VD3@1, 11 reference tables matched, 108 tests); --extra-audits-only passed in 446 s; all revised 2.8/4.3 numbers reproduced. Official section not run (torch/statsmodels absent in the checker venv).",
+  "notes": [
+    "All three reviewers scored NEW69 above CUR65 (+3.0, +2.5, +3.0) and above BASE61 (+2.0 each).",
+    "Absolute totals are not comparable with regrade_a30d5ad (different reviewers); compare within the round."
+  ]
+}
