@@ -59,6 +59,10 @@ STEPS = [
     ("4_사후_문턱무관비교", "code/press/tvt/10_threshold_free.py", [], True, "R1 없는 행 AUROC·PR-AUC와 기록 단위 부트스트랩 구간(사후, 선택에 쓰지 않음)"),
     ("4_사후_보조수치", "code/press/tvt/11_posthoc_numbers.py", ["--repo", "."], True, "max|z|+R1+R2, 이상 확률 AUROC·ECE, 수집 공백(사후, 선택에 쓰지 않음)"),
     ("4_사후_합성열화", "code/press/tvt/12_ramp_warning.py", ["--repo", "."], True, "합성 열화(2·5·10분)에서 첫 경보 선행 시간(사후, 선택에 쓰지 않음)"),
+    ("4_사후_R2표본밖", "code/press/tvt/13_r2_oos_alpha.py", ["--repo", "."], False, "R2 준-표본 밖 확인, α 명목 대 실측, 블록 부트스트랩(사후, 선택에 쓰지 않음)"),
+    ("4_사후_베이스라인주입", "code/press/tvt/14_baseline_injection_ridge.py", ["--repo", "."], False, "베이스라인 인공 주입 탐지율, Ridge 예측 오차 베이스라인(사후, 선택에 쓰지 않음)"),
+    ("4_사후_특징맞춤", "code/press/tvt/15_record_auroc_featbase.py", ["--repo", "."], False, "기록 단위 AUROC, v2 특징을 넣은 5NN·IsolationForest(사후, 선택에 쓰지 않음)"),
+    ("4_사후_흔들림병행", "code/press/tvt/16_jitter_ridge_combo.py", ["--repo", "."], False, "표본 시각 흔들림 반증, v2+R1과 Ridge 병행(사후, 선택에 쓰지 않음)"),
 ]
 
 

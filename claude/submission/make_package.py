@@ -152,6 +152,22 @@ def build_expected():
                             ("진동|5분|v2+R1+R2", "before_complete_rate", "합성 열화 5분 진동 완성 전 경보 비율")):
         checks.append(dict(name=label, kind="json", file="code/press/tvt/outputs/ramp_summary.json", path=[key, col],
                            value=rs[key][col], tol=1e-9, quick=True, report="(4.3절)"))
+    # R2 준-표본 밖(13, 사후, 2.5절 †)과 Ridge 예측 오차(14, 사후, 2.4절 †): 전체 실행
+    ro = json.loads((tvt / "r2_oos_alpha.json").read_text(encoding="utf-8"))
+    rj = json.loads((tvt / "ridge_baseline.json").read_text(encoding="utf-8"))
+    fb = json.loads((tvt / "record_auroc_featbase.json").read_text(encoding="utf-8"))
+    jc = json.loads((tvt / "jitter_ridge_combo.json").read_text(encoding="utf-8"))
+    for f, js, path, label, rep in (
+            ("r2_oos_alpha.json", ro, ["A_r2_out_of_sample", "0.05", "rolling_total", "keep|v2"], "R2 준-표본 밖: α 5% 정상 오경보 기록 v2(시간순 5창, 착안 기록 제외)", "(2.5절 †)"),
+            ("r2_oos_alpha.json", ro, ["A_r2_out_of_sample", "0.05", "rolling_total", "keep|v2+R2"], "R2 준-표본 밖: α 5% 정상 오경보 기록 v2+R2", "(2.5절 †)"),
+            ("ridge_baseline.json", rj, ["ridge", "B", "ridge", "test_f1"], "Ridge 예측 오차 test 실시간 F1 B(R1 없이)", "(2.4절 †)"),
+            ("record_auroc_featbase.json", fb, ["featbase_rows", "B", "knn5_feat", "test_f1"], "v2 특징을 넣은 5NN test 실시간 F1 B(R1 없이)", "(2.4절 †)"),
+            ("jitter_ridge_combo.json", jc, ["A_jitter", "sigma_ms_reaching_abnormal_r2"], "정상 R² 중앙값이 이상 수준에 닿는 표본 시각 흔들림(ms)", "(2.6절 †)"),
+            ("jitter_ridge_combo.json", jc, ["B_combo", "high_load_B_a5_valid_test", "v2+R1|ridge", "all_fa_records"], "1단계 병행(v2+R1 OR Ridge) α 5% 정상 오경보 기록 B", "(4.3절 †)")):
+        v = js
+        for k in path:
+            v = v[k]
+        checks.append(dict(name=label, kind="json", file=f"code/press/tvt/outputs/{f}", path=path, value=v, tol=1e-9, report=rep))
     # 성분 절제(09, 사후, 2.4절 †): 분할 B 전류 파형 주입 강도 1의 크기 성분만 / v2 탐지율(전체 실행)
     for col, label in (("크기", "크기 성분만"), ("v2", "v2(세 성분)")):
         where = dict(split="B", family="current_residual", target="2", strength="1.0")

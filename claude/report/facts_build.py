@@ -355,6 +355,16 @@ for key, v in json.loads(RS.read_text(encoding="utf-8")).items():
         add(f"ramp.{key}.lead", v["lead_median_min"], fmt(v["lead_median_min"], 2), RS, f"{key}/lead_median_min")
         add(f"ramp.{key}.frac", v["frac_at_alarm_median"], fmt(v["frac_at_alarm_median"], 2), RS, f"{key}/frac_at_alarm_median")
 
+# ---- 사후 2.4·2.5·3.2절 †: R2 준-표본 밖·α 실측·블록 부트스트랩(tvt/13), 베이스라인 주입·Ridge(tvt/14) ----
+for name in ("r2_oos_alpha.json", "ridge_baseline.json", "record_auroc_featbase.json", "jitter_ridge_combo.json"):
+    if (TVT / name).exists():
+        walk(json.loads((TVT / name).read_text(encoding="utf-8")), name.split(".")[0], TVT / name)
+if (TVT / "baseline_injection.csv").exists():
+    _bi = pd.read_csv(TVT / "baseline_injection.csv")
+    for col in _bi.select_dtypes("number").columns:
+        for v in pd.unique(_bi[col].dropna()):
+            add_number(f"baseline_injection.{col}", v, TVT / "baseline_injection.csv")
+
 # ---- v5: 외부 근거 수치(report/research/*.md에 출처 URL과 함께 기록) ----
 EXT = [
     ("grid.nominal_hz", 60, "60", "domain_sources.md 7장 전기사업법 시행규칙 별표 3"),
@@ -411,10 +421,13 @@ EXT = [
     ("regB.pct_hi", 99.6, "99.6", "06 records B 학습 기준 분위"),
     ("env.python", 3.13, "3.13", "실행 환경 파이썬 판"),
     ("env.python_old", 3.12, "3.12", "팀원 예전 환경 파일 판"),
-    ("run.full_min", 46, "46", "새 환경(C:/Temp/bj_v3/run5) run_all.py 전체 45.9분, 10/7, 최종 zip"),
-    ("run.quick_min", 14, "14", "같은 실행의 quick 단계 시간 합 13.6분(logs/run_summary.json)"),
-    ("run.checks", 37, "37", "run_all.py 결과 대조 37/37"),
+    ("run.full_min", 55, "55", "새 환경(C:/Temp/bj_v3/run8) run_all.py 전체 54.8분, 10/8, 최종 zip"),
+    ("run.quick_min", 13, "13", "같은 실행의 quick 단계 시간 합 13.0분(logs/run_summary.json)"),
+    ("run.checks", 43, "43", "run_all.py 결과 대조 43/43"),
     ("run.cpu_cores", 16, "16", "검증 PC Core Ultra 7 155H 16코어"),
+    ("stage1.or_design", 7.4, "7.4", "두 α 1% 경보 OR의 설계 오경보 상한 3.7기록/시간 × 2"),
+    ("jitter.period_ms", 16.5, "16.5", "60.6Hz 한 주기 1/60.6 = 16.50ms"),
+    ("jitter.share_pct", 30, "30", "σ 5ms / 16.5ms = 30.3%"),
     ("stage1.cp_B", 4.3, "4.3", "1단계 B test 오경보 3/180 Clopper-Pearson 단측 95% 상한 4.25%"),
     ("stage1.pois_B", 19, "19", "1단계 B 경보 사건 3건 포아송 단측 95% 상한 7.75 / 24.1분 × 60 = 19.3건/시간"),
     ("stage1.rate_B", 7.5, "7.5", "1단계(잠금 v2+R1) B test 정상 경보 사건 3건(기록 3·41·150) / 24.1분 × 60 = 7.47건/시간"),

@@ -149,12 +149,14 @@ def fig_models():
     lx = pd.read_csv(HERE / "research" / "yejun_lstm_improvement_62482a5" / "03_test.csv")
     lx = lx[(lx.variant == "lx:W10-var-128x64-e1000p100:ct-mean:e345") & (lx.rule == "none") & (lx.alpha == 0.01)
             & (lx.regime == "test") & (lx["mode"] == "realtime")].set_index("split").f1
+    rj = json.loads((TVT / "ridge_baseline.json").read_text(encoding="utf-8"))["ridge"]     # 사후(†) Ridge 예측 오차(tvt/14)
     rows = list(p.index)
-    p = pd.concat([p.loc[:"lstm20"], pd.DataFrame([[lx["A"], lx["B"]]], index=["lstm_imp"], columns=p.columns), p.loc[rows[rows.index("lstm20") + 1]:]])
-    labels = {**NAMES, "lstm_imp": "† 보완 LSTM-AE(사후)"}
+    extra = pd.DataFrame([[lx["A"], lx["B"]], [rj["A"]["ridge"]["test_f1"], rj["B"]["ridge"]["test_f1"]]], index=["lstm_imp", "ridge"], columns=p.columns)
+    p = pd.concat([p.loc[:"lstm20"], extra, p.loc[rows[rows.index("lstm20") + 1]:]])
+    labels = {**NAMES, "lstm_imp": "† 보완 LSTM-AE(사후)", "ridge": "† Ridge 예측 오차(사후)"}
     y = np.arange(len(p)); h = 0.38
     fig, ax = plt.subplots(figsize=(6.4, 4.3))
-    post = np.array([m == "lstm_imp" for m in p.index])
+    post = np.array([m in ("lstm_imp", "ridge") for m in p.index])
     for off, s, c in ((h / 2, "A", A), (-h / 2, "B", B)):
         ax.barh(y + off, p[s], h - 0.05, color=[GREY if q else c for q in post], label=f"분할 {s}", **HATCH[s])
     for yi, (ma, mb) in zip(y, p[["A", "B"]].to_numpy()):
@@ -367,7 +369,28 @@ def fig_alarm_card():
     save(fig, "fig12_alarm_card.png")
 
 
+def fig_stage_timeline():
+    """[그림 14] 제출 예측 파일(분할 B test)의 기록별 두 단계 경보: 정상 180기록(시간순)과 이상 11기록."""
+    pred = pd.read_csv(TVT / "test_predictions_B.csv")
+    g = pred.groupby(["subset", "rec"], sort=False).agg(s1=("locked_v2_R1_realtime", "any"), s2=("final_v2_R1_R2_realtime", "any")).reset_index()
+    g["k"] = g.rec.str.split(":").str[-1].astype(int)
+    fig, axes = plt.subplots(1, 2, figsize=(7.8, 1.9), sharey=True, gridspec_kw=dict(width_ratios=[180, 34]))
+    for ax, sub, title in zip(axes, ("normal", "abnormal"), ("(a) 정상 test 180기록(시간순)", "(b) 이상 test 11기록")):
+        d = g[g.subset == sub].sort_values("k").reset_index(drop=True)
+        for lane, col, color, y in (("1단계", "s1", INK2, 1), ("2단계", "s2", B, 0)):
+            on = d.index[d[col].astype(bool)]
+            ax.broken_barh([(i - 0.45, 0.9) for i in on], (y - 0.35, 0.7), color=color, lw=0)
+            ax.plot([-0.5, len(d) - 0.5], [y - 0.42] * 2, color="#e6e5e1", lw=0.6)
+            ax.text(len(d) - 0.5, y + 0.38, f"{len(on)}기록", ha="right", va="bottom", fontsize=7.5, color=color)
+        ax.set_xlim(-0.5, len(d) - 0.5); ax.set_ylim(-0.6, 1.75)
+        ax.set_title(title, fontsize=9, loc="left", color=INK)
+        ax.set_xlabel("기록 순서", fontsize=8)
+    axes[0].set_yticks([1, 0], ["1단계 주의", "2단계 점검 요청"], fontsize=9)
+    axes[0].tick_params(axis="y", length=0)
+    save(fig, "fig13_stage_timeline.png")
+
+
 if __name__ == "__main__":
     fig_structure(); fig_collection(); fig_flow(); fig_miss_position(); fig_models(); fig_rules(); fig_leak(); fig_console()
-    fig_observability(); fig_regime_timeline(); fig_load_vibration(); fig_model_structure(); fig_alarm_card()
+    fig_observability(); fig_regime_timeline(); fig_load_vibration(); fig_model_structure(); fig_alarm_card(); fig_stage_timeline()
     print(sorted(p.name for p in FIG.glob("*.png")))

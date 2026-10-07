@@ -1,0 +1,100 @@
+{
+ "meta": {
+  "A": {
+   "ridge_alpha": 1.0,
+   "ridge_val_mse": {
+    "0.01": 0.12851850178662197,
+    "0.1": 0.1285169063428348,
+    "1.0": 0.12850425703265414,
+    "10.0": 0.1285083668007916,
+    "100.0": 0.12978573659086126
+   },
+   "lstm_epochs": 300,
+   "refit_max_abs_diff_vs_01_cache": {
+    "maxz3": 0.0,
+    "knn5": 0.0,
+    "iforest": 0.0,
+    "mlp_ae5": 0.0,
+    "lstm20": 0.0,
+    "v1": 0.0,
+    "v2": 0.0
+   }
+  },
+  "B": {
+   "ridge_alpha": 1.0,
+   "ridge_val_mse": {
+    "0.01": 0.11335809119031587,
+    "0.1": 0.11335666786855589,
+    "1.0": 0.11334568618470739,
+    "10.0": 0.11336493320867326,
+    "100.0": 0.1152054335238127
+   },
+   "lstm_epochs": 210,
+   "refit_max_abs_diff_vs_01_cache": {
+    "maxz3": 0.0,
+    "knn5": 0.0,
+    "iforest": 0.0,
+    "mlp_ae5": 0.0,
+    "lstm20": 0.0,
+    "v1": 0.0,
+    "v2": 0.0
+   }
+  }
+ },
+ "v2_check_vs_09": {
+  "records": 10500,
+  "mismatch": 0
+ },
+ "ridge": {
+  "A": {
+   "ridge": {
+    "valid_f1": 0.8875502008032129,
+    "test_f1": 0.8769497400346621,
+    "test_miss_rows": 71,
+    "test_fa_rows": 0,
+    "test_only_f1": 0.8769497400346621,
+    "auroc": 0.9535142926137221,
+    "prauc": 0.9290987910700219
+   },
+   "ridge+R1": {
+    "valid_f1": 0.9963768115942029,
+    "test_f1": 1.0,
+    "test_miss_rows": 0,
+    "test_fa_rows": 0,
+    "test_only_f1": 0.9984544049459042
+   }
+  },
+  "B": {
+   "ridge": {
+    "valid_f1": 0.8853118712273642,
+    "test_f1": 0.8773747841105354,
+    "test_miss_rows": 70,
+    "test_fa_rows": 1,
+    "test_only_f1": 0.8773747841105354,
+    "auroc": 0.9515715075416569,
+    "prauc": 0.9167532437205249
+   },
+   "ridge+R1": {
+    "valid_f1": 0.9963768115942029,
+    "test_f1": 0.9984591679506933,
+    "test_miss_rows": 0,
+    "test_fa_rows": 1,
+    "test_only_f1": 0.9969135802469136
+   }
+  }
+ },
+ "high_load_fa_B_a5_valid_test": {
+  "v2": {
+   "fa_records": 9,
+   "records": 53,
+   "all_fa_records": 13,
+   "all_records": 300
+  },
+  "ridge": {
+   "fa_records": 2,
+   "records": 53,
+   "all_fa_records": 11,
+   "all_records": 300
+  }
+ }
+}

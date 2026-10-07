@@ -1,0 +1,174 @@
+{
+ "record_auroc": {
+  "A": {
+   "v2": {
+    "auroc": 1.0,
+    "prauc": 1.0
+   },
+   "v1": {
+    "auroc": 1.0,
+    "prauc": 1.0
+   },
+   "maxz3": {
+    "auroc": 0.9712121212121212,
+    "prauc": 0.8865311592584322
+   },
+   "knn5": {
+    "auroc": 0.9840909090909091,
+    "prauc": 0.9188311688311688
+   },
+   "iforest": {
+    "auroc": 0.9689393939393939,
+    "prauc": 0.8656259565350475
+   },
+   "mlp_ae5": {
+    "auroc": 0.7587121212121213,
+    "prauc": 0.7506770330815815
+   },
+   "lstm20": {
+    "auroc": 0.6787878787878787,
+    "prauc": 0.6668979875086746
+   },
+   "ridge": {
+    "auroc": 1.0,
+    "prauc": 1.0
+   },
+   "knn5_feat": {
+    "auroc": 1.0,
+    "prauc": 1.0
+   },
+   "iforest_feat": {
+    "auroc": 1.0,
+    "prauc": 1.0
+   }
+  },
+  "B": {
+   "v2": {
+    "auroc": 1.0,
+    "prauc": 1.0
+   },
+   "v1": {
+    "auroc": 1.0,
+    "prauc": 1.0
+   },
+   "maxz3": {
+    "auroc": 0.95,
+    "prauc": 0.8517171717171717
+   },
+   "knn5": {
+    "auroc": 0.9656565656565657,
+    "prauc": 0.86619644723093
+   },
+   "iforest": {
+    "auroc": 0.9116161616161617,
+    "prauc": 0.686769510153957
+   },
+   "mlp_ae5": {
+    "auroc": 0.7641414141414142,
+    "prauc": 0.7437737656462395
+   },
+   "lstm20": {
+    "auroc": 0.6762626262626262,
+    "prauc": 0.6178038802384352
+   },
+   "ridge": {
+    "auroc": 1.0,
+    "prauc": 1.0
+   },
+   "knn5_feat": {
+    "auroc": 1.0,
+    "prauc": 1.0
+   },
+   "iforest_feat": {
+    "auroc": 0.998989898989899,
+    "prauc": 0.9860139860139859
+   }
+  }
+ },
+ "record_meta": {
+  "A": {
+   "normal_records": 120,
+   "abnormal_records": 11,
+   "auroc_step": 0.0007575757575757576,
+   "prauc_baseline": 0.08396946564885496
+  },
+  "B": {
+   "normal_records": 180,
+   "abnormal_records": 11,
+   "auroc_step": 0.000505050505050505,
+   "prauc_baseline": 0.05759162303664921
+  }
+ },
+ "featbase_rows": {
+  "A": {
+   "knn5_feat": {
+    "valid_f1": 0.9664179104477612,
+    "test_f1": 0.9697933227344993,
+    "test_miss_rows": 19,
+    "test_fa_rows": 0,
+    "auroc": 0.9784026079869601,
+    "prauc": 0.9666312859743351
+   },
+   "iforest_feat": {
+    "valid_f1": 0.8853118712273642,
+    "test_f1": 0.8671328671328671,
+    "test_miss_rows": 76,
+    "test_fa_rows": 0,
+    "auroc": 0.9800673126263998,
+    "prauc": 0.9572055266608751
+   }
+  },
+  "B": {
+   "knn5_feat": {
+    "valid_f1": 0.9702602230483272,
+    "test_f1": 0.9715189873417721,
+    "test_miss_rows": 17,
+    "test_fa_rows": 1,
+    "auroc": 0.9781227156849047,
+    "prauc": 0.9627240703991139
+   },
+   "iforest_feat": {
+    "valid_f1": 0.8875502008032129,
+    "test_f1": 0.8641114982578397,
+    "test_miss_rows": 76,
+    "test_fa_rows": 2,
+    "auroc": 0.9753288907517763,
+    "prauc": 0.9288551537457092
+   }
+  }
+ },
+ "check_vs_01_cache": {
+  "A": {
+   "v2": 0.0,
+   "knn5_3sensors": 0.0
+  },
+  "B": {
+   "v2": 0.0,
+   "knn5_3sensors": 0.0
+  }
+ },
+ "high_load_fa_B_a5_valid_test": {
+  "v2": {
+   "fa_records": 9,
+   "records": 53,
+   "all_fa_records": 13,
+   "all_records": 300
+  },
+  "knn5_feat": {
+   "fa_records": 1,
+   "records": 53,
+   "all_fa_records": 16,
+   "all_records": 300
+  },
+  "iforest_feat": {
+   "fa_records": 7,
+   "records": 53,
+   "all_fa_records": 9,
+   "all_records": 300
+  }
+ },
+ "featbase_valid_f1_mean": {
+  "knn5_feat": 0.9683390667480442,
+  "iforest_feat": 0.8864310360152885
+ }
+}
