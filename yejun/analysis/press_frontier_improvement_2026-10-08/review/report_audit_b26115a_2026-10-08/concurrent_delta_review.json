@@ -1,0 +1,49 @@
+{
+  "checked_utc": "2026-10-07T21:26:08.733744+00:00",
+  "original_commit": "b26115ac7461cafcae411fd4168f336edfc5f7bd",
+  "externally_completed_commit": "7a7e7f307c9c03b7bc643b18a0e4370180f3b5be",
+  "scope": "Changed paragraphs and rendering delta only; original audit retained.",
+  "paragraphs_checked": 318,
+  "paragraph_misses": [],
+  "pages": 69,
+  "page_31_table_bottom_margin_mm": 1.0572782728407117,
+  "finding_status": {
+    "R01": "remains",
+    "R02": "resolved_by_external_commit",
+    "R03": "remains",
+    "R04": "remains",
+    "R05": "remains",
+    "S01": "remains",
+    "S02": "remains"
+  },
+  "changed_paragraphs": [
+    21,
+    458,
+    678,
+    679,
+    683,
+    684,
+    688,
+    704,
+    714,
+    715
+  ],
+  "manual_delta_assessment": [
+    "CD is now described as replacing V2 with sine-waveform and current-difference prediction error; the incorrect only-window/weight claim is removed.",
+    "The extra-audits flag, legacy environment file, replay coverage and original-versus-packaged protocol distinction are clearer.",
+    "The run commands still invoke bare python after installing into .venv.",
+    "Baseline-comparison wording, reference 30 placement, the page-31 table margin and submission placeholders remain."
+  ],
+  "committed_manuscript_sha256": "8d1d1af1600c738f925079720d0782e074564fdce274674d91deb797519068a0",
+  "frozen_pdf_sha256": "f298bfcaa08ef3e30cccc0f8bc42438fbf2edcddd886ec44c3c0b7307821453f",
+  "later_uncommitted_changes_excluded": true,
+  "live_files_sha256": {
+    "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.md": "02ac3cb212fa8d953cf6a251c2471d5587eb1857d590e20e169e6c8830a24e6e",
+    "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.hwpx": "9a781cc1963000193199efd88ad92ac72eed875438b4e2727422aa01b12adedb",
+    "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.pdf": "f298bfcaa08ef3e30cccc0f8bc42438fbf2edcddd886ec44c3c0b7307821453f",
+    "yejun/submission/press_integrated_2026-10-08/북적북적_code_통합본.zip": "2bee634dc651368b5b11787c7e97b1a61b2b7e4ea2a6de8a059245536f4d4ed7"
+  },
+  "live_files_changed_during_check": false,
+  "reviewed_pages_contact": "C:\\Users\\junyj\\AppData\\Local\\Temp\\press_report_audit_b26115a_sfvyxsav\\after_7a7e7f3_contact.png",
+  "no_report_code_zip_edits_by_this_review": true
+}

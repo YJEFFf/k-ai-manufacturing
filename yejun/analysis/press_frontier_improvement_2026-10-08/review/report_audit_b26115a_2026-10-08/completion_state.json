@@ -1,0 +1,21 @@
+{
+  "completed_utc": "2026-10-07T21:23:04.725520+00:00",
+  "reviewed_commit": "b26115ac7461cafcae411fd4168f336edfc5f7bd",
+  "head_at_review_completion": "7a7e7f307c9c03b7bc643b18a0e4370180f3b5be",
+  "finding_count": 5,
+  "manual_submission_items": 2,
+  "review_authored_changes_scope": "yejun/analysis/press_frontier_improvement_2026-10-08/review/report_audit_b26115a_2026-10-08",
+  "report_code_zip_edits_by_this_review": false,
+  "current_report_and_zip_sha256": {
+    "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.md": "8d1d1af1600c738f925079720d0782e074564fdce274674d91deb797519068a0",
+    "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.hwpx": "cf519d9c34cc686a3e553f9f06c54a181794b630e7a1195d53843f6d3425564d",
+    "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.pdf": "f298bfcaa08ef3e30cccc0f8bc42438fbf2edcddd886ec44c3c0b7307821453f",
+    "yejun/submission/press_integrated_2026-10-08/북적북적_code_통합본.zip": "2bee634dc651368b5b11787c7e97b1a61b2b7e4ea2a6de8a059245536f4d4ed7"
+  },
+  "concurrent_changes_relative_to_review_start": [
+    "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.md",
+    "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.hwpx",
+    "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.pdf"
+  ],
+  "review_basis": "b26115a and original report/PDF hashes; later external edits were not folded into this review"
+}

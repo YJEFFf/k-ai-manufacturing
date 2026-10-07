@@ -1,0 +1,1963 @@
+{
+  "pages": [
+    {
+      "page": 1,
+      "characters": 1203,
+      "images": 0,
+      "fonts": [
+        [
+          "H2hdrM",
+          20.02
+        ],
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "MalgunGothicBold",
+          10.4
+        ],
+        [
+          "T5",
+          9.95
+        ],
+        [
+          "T6",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          11.63
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          11.75
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          11.99
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          12.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          17.03
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 781.7742919921875,
+      "image_boxes": []
+    },
+    {
+      "page": 2,
+      "characters": 1550,
+      "images": 0,
+      "fonts": [
+        [
+          "H2hdrM",
+          14.75
+        ],
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.79
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.83
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 763.8366088867188,
+      "image_boxes": []
+    },
+    {
+      "page": 3,
+      "characters": 1130,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          9.95
+        ],
+        [
+          "Haansoft Batang",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 760.959716796875,
+      "image_boxes": []
+    },
+    {
+      "page": 4,
+      "characters": 676,
+      "images": 1,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          9.83
+        ],
+        [
+          "Haansoft Batang",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.83
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 698.6278686523438,
+      "image_boxes": [
+        [
+          84.91400146484375,
+          227.5120086669922,
+          509.8450012207031,
+          445.5530090332031
+        ]
+      ]
+    },
+    {
+      "page": 5,
+      "characters": 1413,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 757.0040283203125,
+      "image_boxes": []
+    },
+    {
+      "page": 6,
+      "characters": 1194,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 755.9252319335938,
+      "image_boxes": []
+    },
+    {
+      "page": 7,
+      "characters": 127,
+      "images": 1,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.83
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 295.6563720703125,
+      "image_boxes": [
+        [
+          84.91400146484375,
+          115.55398559570312,
+          509.8450012207031,
+          279.77398681640625
+        ]
+      ]
+    },
+    {
+      "page": 8,
+      "characters": 1296,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.79
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 547.278076171875,
+      "image_boxes": []
+    },
+    {
+      "page": 9,
+      "characters": 921,
+      "images": 1,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          9.83
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.83
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 745.9761352539062,
+      "image_boxes": [
+        [
+          84.91400146484375,
+          70.843017578125,
+          509.8450012207031,
+          269.10601806640625
+        ]
+      ]
+    },
+    {
+      "page": 10,
+      "characters": 475,
+      "images": 2,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          9.83
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.83
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 720.2322998046875,
+      "image_boxes": [
+        [
+          84.91400146484375,
+          70.84297180175781,
+          509.8450012207031,
+          271.86297607421875
+        ],
+        [
+          84.91400146484375,
+          450.46697998046875,
+          509.8450012207031,
+          688.2869873046875
+        ]
+      ]
+    },
+    {
+      "page": 11,
+      "characters": 1222,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 767.3128051757812,
+      "image_boxes": []
+    },
+    {
+      "page": 12,
+      "characters": 765,
+      "images": 1,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          9.83
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.83
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 613.3092041015625,
+      "image_boxes": [
+        [
+          84.91400146484375,
+          451.18701171875,
+          509.8450012207031,
+          581.4840087890625
+        ]
+      ]
+    },
+    {
+      "page": 13,
+      "characters": 1238,
+      "images": 0,
+      "fonts": [
+        [
+          "H2hdrM",
+          14.75
+        ],
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          9.95
+        ],
+        [
+          "Haansoft Batang",
+          13.79
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 758.2027587890625,
+      "image_boxes": []
+    },
+    {
+      "page": 14,
+      "characters": 876,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 569.0494384765625,
+      "image_boxes": []
+    },
+    {
+      "page": 15,
+      "characters": 890,
+      "images": 1,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.83
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 762.5180053710938,
+      "image_boxes": [
+        [
+          84.91400146484375,
+          70.84201049804688,
+          509.8450012207031,
+          314.416015625
+        ]
+      ]
+    },
+    {
+      "page": 16,
+      "characters": 1145,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.79
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.83
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 752.8086547851562,
+      "image_boxes": []
+    },
+    {
+      "page": 17,
+      "characters": 917,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.83
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 512.8756713867188,
+      "image_boxes": []
+    },
+    {
+      "page": 18,
+      "characters": 809,
+      "images": 1,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          9.83
+        ],
+        [
+          "Haansoft Batang",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.83
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 765.7545166015625,
+      "image_boxes": [
+        [
+          84.91400146484375,
+          70.84297180175781,
+          509.8450012207031,
+          288.88397216796875
+        ]
+      ]
+    },
+    {
+      "page": 19,
+      "characters": 868,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 509.83416748046875,
+      "image_boxes": []
+    },
+    {
+      "page": 20,
+      "characters": 1581,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          9.95
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 754.366943359375,
+      "image_boxes": []
+    },
+    {
+      "page": 21,
+      "characters": 1303,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 755.9252319335938,
+      "image_boxes": []
+    },
+    {
+      "page": 22,
+      "characters": 1376,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 751.8496704101562,
+      "image_boxes": []
+    },
+    {
+      "page": 23,
+      "characters": 1596,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 744.1029663085938,
+      "image_boxes": []
+    },
+    {
+      "page": 24,
+      "characters": 1267,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 755.9252319335938,
+      "image_boxes": []
+    },
+    {
+      "page": 25,
+      "characters": 780,
+      "images": 1,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          9.83
+        ],
+        [
+          "Haansoft Batang",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.83
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 754.2470703125,
+      "image_boxes": [
+        [
+          84.91400146484375,
+          294.6379699707031,
+          509.8450012207031,
+          552.35595703125
+        ]
+      ]
+    },
+    {
+      "page": 26,
+      "characters": 1290,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 755.9252319335938,
+      "image_boxes": []
+    },
+    {
+      "page": 27,
+      "characters": 1346,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 755.9252319335938,
+      "image_boxes": []
+    },
+    {
+      "page": 28,
+      "characters": 1277,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 755.9252319335938,
+      "image_boxes": []
+    },
+    {
+      "page": 29,
+      "characters": 1350,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 755.9252319335938,
+      "image_boxes": []
+    },
+    {
+      "page": 30,
+      "characters": 658,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 465.123046875,
+      "image_boxes": []
+    },
+    {
+      "page": 31,
+      "characters": 2233,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 836.52197265625,
+      "image_boxes": []
+    },
+    {
+      "page": 32,
+      "characters": 1085,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.79
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 711.214111328125,
+      "image_boxes": []
+    },
+    {
+      "page": 33,
+      "characters": 1384,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 749.5722045898438,
+      "image_boxes": []
+    },
+    {
+      "page": 34,
+      "characters": 1576,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 768.87109375,
+      "image_boxes": []
+    },
+    {
+      "page": 35,
+      "characters": 1493,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 752.3739624023438,
+      "image_boxes": []
+    },
+    {
+      "page": 36,
+      "characters": 1222,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 755.9252319335938,
+      "image_boxes": []
+    },
+    {
+      "page": 37,
+      "characters": 1231,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 755.9252319335938,
+      "image_boxes": []
+    },
+    {
+      "page": 38,
+      "characters": 1057,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 666.5169067382812,
+      "image_boxes": []
+    },
+    {
+      "page": 39,
+      "characters": 1467,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 769.7101440429688,
+      "image_boxes": []
+    },
+    {
+      "page": 40,
+      "characters": 1341,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 760.959716796875,
+      "image_boxes": []
+    },
+    {
+      "page": 41,
+      "characters": 1524,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 761.3193359375,
+      "image_boxes": []
+    },
+    {
+      "page": 42,
+      "characters": 1018,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 666.5029907226562,
+      "image_boxes": []
+    },
+    {
+      "page": 43,
+      "characters": 1156,
+      "images": 0,
+      "fonts": [
+        [
+          "H2hdrM",
+          14.75
+        ],
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.79
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 757.6033935546875,
+      "image_boxes": []
+    },
+    {
+      "page": 44,
+      "characters": 1145,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 749.4523315429688,
+      "image_boxes": []
+    },
+    {
+      "page": 45,
+      "characters": 1005,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 666.5029907226562,
+      "image_boxes": []
+    },
+    {
+      "page": 46,
+      "characters": 1128,
+      "images": 1,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.83
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 757.9630126953125,
+      "image_boxes": [
+        [
+          84.91400146484375,
+          330.5989990234375,
+          509.8450012207031,
+          554.2739868164062
+        ]
+      ]
+    },
+    {
+      "page": 47,
+      "characters": 326,
+      "images": 1,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.83
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 432.3070068359375,
+      "image_boxes": [
+        [
+          84.91400146484375,
+          205.0959930419922,
+          509.8450012207031,
+          400.48199462890625
+        ]
+      ]
+    },
+    {
+      "page": 48,
+      "characters": 1394,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 754.00732421875,
+      "image_boxes": []
+    },
+    {
+      "page": 49,
+      "characters": 395,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 286.03875732421875,
+      "image_boxes": []
+    },
+    {
+      "page": 50,
+      "characters": 1207,
+      "images": 0,
+      "fonts": [
+        [
+          "H2hdrM",
+          14.75
+        ],
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 766.2339477539062,
+      "image_boxes": []
+    },
+    {
+      "page": 51,
+      "characters": 1541,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.83
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 768.63134765625,
+      "image_boxes": []
+    },
+    {
+      "page": 52,
+      "characters": 707,
+      "images": 2,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          9.83
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.83
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 765.2750244140625,
+      "image_boxes": [
+        [
+          84.91400146484375,
+          272.2220153808594,
+          509.8450012207031,
+          399.64300537109375
+        ],
+        [
+          84.91400146484375,
+          482.35198974609375,
+          509.8450012207031,
+          697.5169677734375
+        ]
+      ]
+    },
+    {
+      "page": 53,
+      "characters": 1032,
+      "images": 1,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          9.83
+        ],
+        [
+          "Haansoft Batang",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.83
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 755.8053588867188,
+      "image_boxes": [
+        [
+          84.91400146484375,
+          227.510986328125,
+          509.8450012207031,
+          448.4289855957031
+        ]
+      ]
+    },
+    {
+      "page": 54,
+      "characters": 1348,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 751.9695434570312,
+      "image_boxes": []
+    },
+    {
+      "page": 55,
+      "characters": 1194,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 755.9252319335938,
+      "image_boxes": []
+    },
+    {
+      "page": 56,
+      "characters": 1160,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.79
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 755.9252319335938,
+      "image_boxes": []
+    },
+    {
+      "page": 57,
+      "characters": 525,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 298.625,
+      "image_boxes": []
+    },
+    {
+      "page": 58,
+      "characters": 777,
+      "images": 0,
+      "fonts": [
+        [
+          "H2hdrM",
+          14.75
+        ],
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 511.3924865722656,
+      "image_boxes": []
+    },
+    {
+      "page": 59,
+      "characters": 1488,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 751.8496704101562,
+      "image_boxes": []
+    },
+    {
+      "page": 60,
+      "characters": 1308,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 755.9252319335938,
+      "image_boxes": []
+    },
+    {
+      "page": 61,
+      "characters": 404,
+      "images": 1,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.83
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 558.4091796875,
+      "image_boxes": [
+        [
+          84.91400146484375,
+          227.510986328125,
+          509.8450012207031,
+          510.6409912109375
+        ]
+      ]
+    },
+    {
+      "page": 62,
+      "characters": 1517,
+      "images": 0,
+      "fonts": [
+        [
+          "H2hdrM",
+          14.75
+        ],
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.83
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 754.366943359375,
+      "image_boxes": []
+    },
+    {
+      "page": 63,
+      "characters": 1144,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 688.798583984375,
+      "image_boxes": []
+    },
+    {
+      "page": 64,
+      "characters": 1674,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 765.3948974609375,
+      "image_boxes": []
+    },
+    {
+      "page": 65,
+      "characters": 1362,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 755.9252319335938,
+      "image_boxes": []
+    },
+    {
+      "page": 66,
+      "characters": 216,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 174.20098876953125,
+      "image_boxes": []
+    },
+    {
+      "page": 67,
+      "characters": 3031,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          9.83
+        ],
+        [
+          "Haansoft Batang",
+          13.91
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.83
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 755.2340698242188,
+      "image_boxes": []
+    },
+    {
+      "page": 68,
+      "characters": 1690,
+      "images": 0,
+      "fonts": [
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "Haansoft Batang",
+          9.83
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          9.83
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 448.3793029785156,
+      "image_boxes": []
+    },
+    {
+      "page": 69,
+      "characters": 91,
+      "images": 1,
+      "fonts": [
+        [
+          "H2hdrM",
+          14.87
+        ],
+        [
+          "H2hdrM",
+          23.86
+        ],
+        [
+          "HCRDotum",
+          8.99
+        ],
+        [
+          "T8",
+          12.88
+        ],
+        [
+          "T8",
+          13.96
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          12.95
+        ],
+        [
+          "ÈÞ¸Õ¸íÁ¶",
+          13.91
+        ]
+      ],
+      "content_top": 42.763267517089844,
+      "content_bottom": 155.72116088867188,
+      "image_boxes": [
+        [
+          63.08599853515625,
+          119.98800659179688,
+          528.9150390625,
+          341.6260070800781
+        ]
+      ]
+    }
+  ],
+  "paragraphs_checked": 318,
+  "exact_normalized_paragraph_misses": [],
+  "note": "Misses may be page-boundary/header artifacts; inspect before claiming omissions."
+}

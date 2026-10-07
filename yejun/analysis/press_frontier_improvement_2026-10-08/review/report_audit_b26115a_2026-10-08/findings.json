@@ -1,0 +1,164 @@
+{
+  "review_type": "report_review_only",
+  "reviewed_commit": "b26115ac7461cafcae411fd4168f336edfc5f7bd",
+  "reviewed_report": "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.md",
+  "page_numbering": "PDF physical pages, including cover; baseline has 69 pages.",
+  "addendum": {
+    "reviewed_external_commit": "7a7e7f307c9c03b7bc643b18a0e4370180f3b5be",
+    "evidence": "concurrent_delta_review.json",
+    "resolved_findings": ["R02"],
+    "remaining_in_that_completed_commit": ["R01", "R03", "R04", "R05"],
+    "scope": "변경 문단과 PDF를 추가 대조했다. 그 후 이어진 외부 미커밋 수정은 제외한다."
+  },
+  "scope": {
+    "manuscript_reviewed": true,
+    "hwpx_expected_text_blocks_checked": 1280,
+    "pdf_full_paragraphs_checked": 318,
+    "visual_review": "All 69 pages in six contact sheets; detailed views of pages 1, 31, 41, 61 and 69.",
+    "table_values_compared": 136,
+    "official_prediction_f1_recalculations": 6,
+    "full_model_training_rerun": false,
+    "previous_execution_evidence": "Existing clean_run.json is linked by the unchanged final ZIP SHA-256. Its 43 official checks and 108 contract checks were not freshly rerun in this review.",
+    "reference_review": "Primary-source checks focused on new references 29–31; selected existing reference metadata were also checked. This is not a full plagiarism or licensing audit.",
+    "report_code_experiment_zip_edits_by_this_review": false,
+    "score_assigned": false
+  },
+  "findings": [
+    {
+      "id": "R01",
+      "priority": "P1",
+      "category": "reproduction_instructions",
+      "title": "패키지를 설치한 가상환경과 실행 Python이 연결되지 않음",
+      "report_lines": [677, 678, 679],
+      "pdf_pages": [62],
+      "evidence": [
+        "설치는 .venv\\Scripts\\python으로 하지만 실행은 python run_all.py로 안내하며, 가상환경 활성화 단계가 없다.",
+        "ZIP의 run_all.py는 sys.executable로 하위 작업을 실행한다.",
+        "현재 셸의 python은 C:\\Python314\\python.exe이며 numpy가 없다. 검수 가상환경 Python에는 numpy가 있다. 별도 프로그램 실행 없이 실행 파일 위치와 모듈 유무만 확인했다."
+      ],
+      "impact": "안내를 처음부터 그대로 따라도 설치한 패키지를 쓰지 못해 실행이 실패할 수 있다.",
+      "recommendation_direction": "설치와 실행에서 같은 가상환경 Python을 사용하도록 명령을 연결하거나 활성화 단계를 명시할 필요가 있다.",
+      "evidence_files": ["evidence_check.json", "yejun/submission/press_integrated_2026-10-08/templates/run_all.py:28"],
+      "fix_applied_by_review": false
+    },
+    {
+      "id": "R02",
+      "priority": "P2",
+      "category": "model_description",
+      "title": "CD 후보의 구조 변경을 창 길이·가중치 차이로 축소 설명함",
+      "report_lines": [458],
+      "pdf_pages": [42],
+      "evidence": [
+        "원문은 V2+VD1@1과 CD+VD1@0.5가 '점수 평균 창(1행·3행)과 가중치만 다르다'고 설명한다.",
+        "V2는 크기 성분, 전류 사인 파형, 수준 AR2 동역학을 포함한다. CD는 크기 성분을 제외하고 전류 동역학을 1차 차분 AR2 잔차로 바꾼다.",
+        "frontier_model.py 100–108행의 _diff_residual, 125–126행의 C/CD 정의, 131–132행의 V2 크기 결합으로 확인된다.",
+        "진동 증폭 가족을 빼면 기존 후보는 9위가 된다. 가족 구성에 대한 민감도는 단순 평활·가중치 설정에만 한정되지 않는다."
+      ],
+      "impact": "선택 안정성에 대한 독자가 실제보다 작은 구조 변화로 이해할 수 있다.",
+      "recommendation_direction": "CD에서 달라지는 전류 경로와 크기 성분의 제외를 구분하여 설명할 필요가 있다.",
+      "concurrent_work_note": "검수 도중 다른 작업의 7a7e7f3 커밋에서 문구가 수정되었다. 해당 원고와 PDF를 대조하여 이 설명 오류의 해소를 확인했다. 이 항목은 b26115a에서의 발견 기록이며, 그 이후 미커밋 추가 변경은 제외한다.",
+      "evidence_files": ["evidence_check.json", "concurrent_change_observation.json", "yejun/analysis/press_frontier_improvement_2026-10-08/frontier_model.py"],
+      "fix_applied_by_review": false
+    },
+    {
+      "id": "R03",
+      "priority": "P2",
+      "category": "interpretation",
+      "title": "5NN의 진동 충격 탐지를 대조 수준으로 묶고 통합 후보의 유일성을 단정함",
+      "report_lines": [449, 452, 454],
+      "pdf_pages": [41],
+      "evidence": [
+        "5NN의 B 진동 충격 탐지율은 18.4%, 무주입 대조는 0.28%다. 원본 정밀도로 차이는 18.125%p다.",
+        "A 진동 충격도 7.8125% 대 대조 0%다. 잡음과 충격을 함께 '대조 수준 가까이'라고 설명하는 것은 수치와 맞지 않는다.",
+        "기존 v2도 전류 왜곡과 진동 충격을 일부 탐지한다. '두 종류를 함께 잡은 것은 통합 후보뿐'이라고 가를 사전 탐지율 기준이 제시되지 않았다."
+      ],
+      "impact": "정확한 표를 제시해 놓고 이어지는 문장이 기준선 성능을 낮춰 읽게 하고, 통합 후보의 범위를 과장할 수 있다.",
+      "recommendation_direction": "잡음과 충격을 나눠 설명하고, 통합 후보의 탐지율 증가와 실패 조건을 직접 수치로 비교할 필요가 있다. 이 검수는 통계적 유의성을 새로 주장하지 않는다.",
+      "evidence_files": ["evidence_check.json", "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/strong_baselines/injection_family_summary.csv"],
+      "fix_applied_by_review": false
+    },
+    {
+      "id": "R04",
+      "priority": "P3",
+      "category": "citation_scope",
+      "title": "참고문헌 30번이 뒷받침하는 개념과 자체 선택 규칙의 경계가 모호함",
+      "report_lines": [395, 752],
+      "pdf_pages": [37, 68],
+      "evidence": [
+        "인용 표시 [30]이 '합성 주입 가족별 평균 탐지율의 최솟값' 바로 뒤에 있다.",
+        "Goswami 등은 합성 이상 주입을 비지도 모델 선택의 대리 평가로 사용하는 근거를 제공하지만, 제시된 선택 결합은 Borda 계열의 순위 통합과 empirical influence를 사용한다.",
+        "이 보고서의 '가족 평균 최솟값 → 전체 평균 → 최악 오경보율' 사전식 선택 규칙을 그 논문에서 직접 가져온 것으로 읽히지 않도록 인용 범위를 구분해야 한다. 문헌 자체가 허위라는 지적은 아니다."
+      ],
+      "recommendation_direction": "합성 주입을 이용한 모델 선택이라는 참고 개념과 이 실험에서 정한 maximin 선택 규칙을 구분할 필요가 있다.",
+      "primary_source": "https://arxiv.org/html/2210.01078",
+      "source_sections": ["3.1 Synthetic Anomaly Injection", "4.2 Empirical Influence and Robust Rank Aggregation", "A.7.2 Robust Variations of Borda"],
+      "fix_applied_by_review": false
+    },
+    {
+      "id": "R05",
+      "priority": "P3",
+      "category": "layout",
+      "title": "31쪽 표 아래 여백이 약 1mm에 불과함",
+      "report_lines": [336],
+      "pdf_pages": [31],
+      "evidence": [
+        "PDF 페이지 높이 841pt, 마지막 표 테두리 아래쪽 좌표 838.003pt로 아래 여백은 1.057mm다.",
+        "마지막 본문 글자 상자의 아래 여백도 약 1.580mm다. 화면에서는 행이 남아 있으며 텍스트 누락은 발견되지 않았다."
+      ],
+      "impact": "인쇄 또는 재출력 설정에 따라 아래쪽 테두리와 내용이 비인쇄 영역에 들어갈 수 있다. 현재 PDF가 잘렸다고 단정하는 항목은 아니다.",
+      "recommendation_direction": "표 분할 또는 해당 쪽 조판을 검토하여 아래 여백을 확보할 필요가 있다.",
+      "evidence_files": ["evidence_check.json"],
+      "fix_applied_by_review": false
+    }
+  ],
+  "submission_items_not_yet_completed": [
+    {
+      "id": "S01",
+      "pdf_pages": [1],
+      "title": "팀장·팀원 서명란 공란",
+      "note": "PDF 표지의 두 '(서명)' 칸은 비어 있다. 실제 제출자의 서명이 필요한 수동 마무리 항목이다. 이 검수에서 대신 작성하지 않았다."
+    },
+    {
+      "id": "S02",
+      "report_lines": [755],
+      "pdf_pages": [69],
+      "title": "만족도 조사 완료 화면이 예시 상태",
+      "note": "원고는 '[제출 전 삽입]', PDF에는 빨간 '예 시'가 표시된 견본이 남아 있다. 양식에 필수라고 명시되어 있다. 실제 완료 화면으로 교체해야 제출본이 완성되며, 이 검수에서는 설문을 제출하거나 이미지를 교체하지 않았다."
+    }
+  ],
+  "minor_notes": [
+    {
+      "report_lines": [422],
+      "note": "B 진동 지속 증폭 강도 0.5의 통합 후보 값은 원본 평균 8.75%다. 표에는 8.7%, 재계산 포맷은 8.8%로 나오며, 반올림 경계 차이 1건이다. 실질 성능 불일치와 구분한다."
+    },
+    {
+      "report_lines": [441],
+      "note": "±0.05Hz 구간을 원본과 '같았다'고 표현했지만 같은 문장에 B 3~4/180으로 적혀 있다. 원본 3/180과 최대 1기록 차이가 있는 근사적 설명이다."
+    }
+  ],
+  "confirmed_or_previously_resolved": [
+    "핵심 표 136개 수치가 표시 정밀도 범위 안에서 원본 CSV와 일치한다. 135개는 재계산 포맷까지 같고 1개는 반올림 경계다.",
+    "ZIP에 든 공식 예측 파일로 잠금 모델·2단계 모델·v2의 A/B F1을 재계산한 6개 값이 보고서와 일치한다.",
+    "초기 완료본 HWPX 1,280개 내용 블록과 PDF 본문 318개 문단에서 누락을 발견하지 않았다. PDF는 69쪽, 그림 제어와 이미지 배치는 각 16개다.",
+    "신규 실험을 같은 자료에 대한 사후 실험으로 구분하고, A/B 중복과 단일 고장 사건 및 일반화 한계를 명시했다. 이를 새 독립 고장 검증으로 주장하지 않는다.",
+    "5NN 대비 F1 신뢰구간이 0을 포함한다는 설명은 우월성과 동등성을 모두 단정하지 않아 적절하다.",
+    "제출 ZIP의 선택 대상 56개와 별도 OR 4개라는 설명은 배포본 후보 구성과 맞는다.",
+    "VD3의 첫 점수가 5번째 행이라는 설명은 차분·과거 입력·3점 평균 구현과 맞는다.",
+    "참고문헌 29번은 Ledoit–Wolf 2004 원논문으로 현재 공분산 추정 방식의 근거와 맞는다. 31번도 잔차 기반 공정 감시라는 개념을 뒷받침한다.",
+    "이전 43개 공식 실행 대조와 108개 계약 검사의 완료 기록은 현재 ZIP 해시와 연결된다. 이번 검수에서 전체 학습을 재실행했다는 뜻은 아니다."
+  ],
+  "primary_references_checked": [
+    {"reference": 29, "url": "https://www.ledoit.net/Well-conditioned2004.pdf", "result": "공분산 수축 추정 원논문 및 서지정보 확인"},
+    {"reference": 30, "url": "https://arxiv.org/html/2210.01078", "result": "합성 주입 모델 선택 근거 확인; 본문의 maximin 규칙과 인용 범위 구분 필요"},
+    {"reference": 31, "url": "https://www.tandfonline.com/doi/abs/10.1080/07350015.1988.10509640", "result": "출판사 검색 결과의 서지·초록으로 잔차 감시 개념 확인; 원문 전체 열람으로 표현하지 않음"}
+  ],
+  "concurrent_changes": {
+    "observed": true,
+    "details": "concurrent_change_observation.json",
+    "policy": "검수 시작 시 완료본 b26115a를 고정하고 7a7e7f3의 변경 부분을 추가 대조했다. 다른 작업의 원고·HWPX 변경은 되돌리거나 스테이징하지 않는다. 현재 작업 폴더와 기준본의 차이를 이 검수의 수정으로 보지 않는다.",
+    "superseding_version_full_reaudit": false,
+    "superseding_version_delta_review": "7a7e7f3",
+    "further_uncommitted_changes_excluded": true
+  },
+  "overall": "기준본에는 실행 안내·기술 설명·해석에서 보완할 내용이 있다. 검수만 완료했으며 본문, 한글, PDF, 모델, 제출 ZIP의 수정은 수행하지 않았다. 서명과 실제 만족도 완료 화면도 아직 필요하다."
+}

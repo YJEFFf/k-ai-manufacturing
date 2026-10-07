@@ -1,0 +1,31 @@
+{
+  "observed_utc": "2026-10-07T21:18:25.698650+00:00",
+  "files": {
+    "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.md": {
+      "initial_sha256": "74f6c232b84203a9872d361ebfe9f6ca1532599441f2fa3b3951b842771b52b4",
+      "observed_sha256": "8d1d1af1600c738f925079720d0782e074564fdce274674d91deb797519068a0",
+      "changed": true
+    },
+    "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.hwpx": {
+      "initial_sha256": "33d86b2a37850f9ec472f7cf1a12eed06b6f83e031cff19cd2a1c436ecdbde2d",
+      "observed_sha256": "9a781cc1963000193199efd88ad92ac72eed875438b4e2727422aa01b12adedb",
+      "changed": true
+    },
+    "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.pdf": {
+      "initial_sha256": "f0a19a3c274ef4975189eb5b3b24e9141cef4882f1654c6885548a505eaca92b",
+      "observed_sha256": "f0a19a3c274ef4975189eb5b3b24e9141cef4882f1654c6885548a505eaca92b",
+      "changed": false
+    },
+    "yejun/submission/press_integrated_2026-10-08/북적북적_code_통합본.zip": {
+      "initial_sha256": "2bee634dc651368b5b11787c7e97b1a61b2b7e4ea2a6de8a059245536f4d4ed7",
+      "observed_sha256": "2bee634dc651368b5b11787c7e97b1a61b2b7e4ea2a6de8a059245536f4d4ed7",
+      "changed": false
+    }
+  },
+  "saved_baseline_copies_in_temp": [
+    "baseline.md",
+    "baseline.pdf"
+  ],
+  "review_modified_reports": false,
+  "note": "Concurrent changes outside this review detected. This review remains pinned to b26115a; no current report file is reverted or staged."
+}
