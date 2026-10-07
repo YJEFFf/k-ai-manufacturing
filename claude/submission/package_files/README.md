@@ -69,6 +69,7 @@ python run_all.py --quick    # 핵심만: 진단·모델·test 예측·2.4절 �
 - 4단계는 test 채점 이후에 덧붙인 분석이다. 모델 선택(2단계의 해시 잠금)에는 쓰지 않았다. tvt/06·07은 몇 초면 끝나 `--quick`에서도 돈다
 - 보고서의 R1(사건 지속)·R2(교차 확인)는 코드에서 H1·H2로 부른다
 - `run_all.py`가 다시 만들지 않는 수치: 2.6절 UCI 외부 실험, 2.4절 팀 문서의 단순 규칙 F1, 4.2절 콘솔 화면은 v1·v2·v3 모듈을 만들 때의 결과를 인용했다
+- 2.4절 보완 LSTM 비교(†)는 `yejun/analysis/press_lstm_improvement/`의 별도 실험이다. 결과 표는 그 폴더 `outputs/`에, 실험 설계(결과를 열기 전에 고정)는 `PROTOCOL.md`에, 결과 정리는 `README.md`에 있다. 다시 돌리려면 먼저 루트의 `run_all.py` 전체를 실행해 `code/press` 산출물을 만든 뒤, 그 폴더에서 README의 "다시 실행" 순서대로 실행한다(학습 162회, Apple M2 8코어에서 약 8시간). LSTM 학습은 PC마다 조금 달라 `run_all.py` 대조에는 넣지 않았다
 
 ## 5. 폴더 구조
 
@@ -81,6 +82,7 @@ data/                    주최 측 원본 CSV 2개
 predictions/             test 예측 결과(제출물)
 code/press/              우리 코드(cases 진단, tvt 모델, domain 사후 분석)
 yejun/                   v1·v2·v3 모듈. 우리 코드가 그대로 불러 쓴다
+yejun/analysis/press_lstm_improvement/   보완 LSTM 실험(2.4절 †, run_all.py 밖, 결과 표 포함)
 ```
 
 - `yejun/` 아래의 README·PLAN·HISTORY와 `yejun/press_submission/run_all.py`는 모듈을 만들 때의 기록이다. 그 안의 실행 방법(파이썬 3.12, 이 zip에 없는 requirements 파일 등)은 쓰지 않는다. 실행은 루트의 `run_all.py` 하나로 한다

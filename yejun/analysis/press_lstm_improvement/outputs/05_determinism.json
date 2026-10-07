@@ -1,0 +1,50 @@
+[
+ {
+  "sid": "A",
+  "cfg": "W20-none-64x32-e300p30",
+  "seed": 0,
+  "identical": true,
+  "epochs_run": 197,
+  "epochs_cached": 197
+ },
+ {
+  "sid": "A",
+  "cfg": "W20-none-64x32-e300p30",
+  "seed": 1,
+  "identical": true,
+  "epochs_run": 300,
+  "epochs_cached": 300
+ },
+ {
+  "sid": "B",
+  "cfg": "W20-none-64x32-e300p30",
+  "seed": 0,
+  "identical": true,
+  "epochs_run": 101,
+  "epochs_cached": 101
+ },
+ {
+  "sid": "A",
+  "cfg": "W20-none-64x32-e300p30",
+  "seed": 2,
+  "identical": true,
+  "epochs_run": 300,
+  "epochs_cached": 300
+ },
+ {
+  "sid": "B",
+  "cfg": "W20-none-64x32-e300p30",
+  "seed": 1,
+  "identical": true,
+  "epochs_run": 300,
+  "epochs_cached": 300
+ },
+ {
+  "sid": "B",
+  "cfg": "W20-none-64x32-e300p30",
+  "seed": 2,
+  "identical": true,
+  "epochs_run": 300,
+  "epochs_cached": 300
+ }
+]

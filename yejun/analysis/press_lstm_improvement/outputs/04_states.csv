@@ -1,0 +1,1081 @@
+split,model,alpha,part,state,records,fa_records
+A,L:e345,0.01,valid,quiet,7,0
+A,L:e345,0.01,valid,busy_low,30,1
+A,L:e345,0.01,valid,busy_mid,43,0
+A,L:e345,0.01,valid,busy_high,30,0
+A,L:e345,0.01,valid,busy_short,10,0
+A,L:e345,0.01,valid,all,120,1
+A,L:e345,0.01,test,quiet,83,0
+A,L:e345,0.01,test,busy_low,12,0
+A,L:e345,0.01,test,busy_mid,16,0
+A,L:e345,0.01,test,busy_high,7,0
+A,L:e345,0.01,test,busy_short,2,0
+A,L:e345,0.01,test,all,120,0
+A,L:e345,0.01,valid+test,quiet,90,0
+A,L:e345,0.01,valid+test,busy_low,42,1
+A,L:e345,0.01,valid+test,busy_mid,59,0
+A,L:e345,0.01,valid+test,busy_high,37,0
+A,L:e345,0.01,valid+test,busy_short,12,0
+A,L:e345,0.01,valid+test,all,240,1
+A,L:e345,0.03,valid,quiet,7,0
+A,L:e345,0.03,valid,busy_low,30,1
+A,L:e345,0.03,valid,busy_mid,43,1
+A,L:e345,0.03,valid,busy_high,30,1
+A,L:e345,0.03,valid,busy_short,10,0
+A,L:e345,0.03,valid,all,120,3
+A,L:e345,0.03,test,quiet,83,0
+A,L:e345,0.03,test,busy_low,12,0
+A,L:e345,0.03,test,busy_mid,16,1
+A,L:e345,0.03,test,busy_high,7,0
+A,L:e345,0.03,test,busy_short,2,0
+A,L:e345,0.03,test,all,120,1
+A,L:e345,0.03,valid+test,quiet,90,0
+A,L:e345,0.03,valid+test,busy_low,42,1
+A,L:e345,0.03,valid+test,busy_mid,59,2
+A,L:e345,0.03,valid+test,busy_high,37,1
+A,L:e345,0.03,valid+test,busy_short,12,0
+A,L:e345,0.03,valid+test,all,240,4
+A,L:e345,0.05,valid,quiet,7,0
+A,L:e345,0.05,valid,busy_low,30,1
+A,L:e345,0.05,valid,busy_mid,43,3
+A,L:e345,0.05,valid,busy_high,30,2
+A,L:e345,0.05,valid,busy_short,10,0
+A,L:e345,0.05,valid,all,120,6
+A,L:e345,0.05,test,quiet,83,0
+A,L:e345,0.05,test,busy_low,12,0
+A,L:e345,0.05,test,busy_mid,16,1
+A,L:e345,0.05,test,busy_high,7,0
+A,L:e345,0.05,test,busy_short,2,0
+A,L:e345,0.05,test,all,120,1
+A,L:e345,0.05,valid+test,quiet,90,0
+A,L:e345,0.05,valid+test,busy_low,42,1
+A,L:e345,0.05,valid+test,busy_mid,59,4
+A,L:e345,0.05,valid+test,busy_high,37,2
+A,L:e345,0.05,valid+test,busy_short,12,0
+A,L:e345,0.05,valid+test,all,240,7
+A,L+R1:e345,0.01,valid,quiet,7,0
+A,L+R1:e345,0.01,valid,busy_low,30,1
+A,L+R1:e345,0.01,valid,busy_mid,43,1
+A,L+R1:e345,0.01,valid,busy_high,30,0
+A,L+R1:e345,0.01,valid,busy_short,10,0
+A,L+R1:e345,0.01,valid,all,120,2
+A,L+R1:e345,0.01,test,quiet,83,0
+A,L+R1:e345,0.01,test,busy_low,12,0
+A,L+R1:e345,0.01,test,busy_mid,16,0
+A,L+R1:e345,0.01,test,busy_high,7,0
+A,L+R1:e345,0.01,test,busy_short,2,0
+A,L+R1:e345,0.01,test,all,120,0
+A,L+R1:e345,0.01,valid+test,quiet,90,0
+A,L+R1:e345,0.01,valid+test,busy_low,42,1
+A,L+R1:e345,0.01,valid+test,busy_mid,59,1
+A,L+R1:e345,0.01,valid+test,busy_high,37,0
+A,L+R1:e345,0.01,valid+test,busy_short,12,0
+A,L+R1:e345,0.01,valid+test,all,240,2
+A,L+R1:e345,0.03,valid,quiet,7,0
+A,L+R1:e345,0.03,valid,busy_low,30,1
+A,L+R1:e345,0.03,valid,busy_mid,43,2
+A,L+R1:e345,0.03,valid,busy_high,30,1
+A,L+R1:e345,0.03,valid,busy_short,10,0
+A,L+R1:e345,0.03,valid,all,120,4
+A,L+R1:e345,0.03,test,quiet,83,0
+A,L+R1:e345,0.03,test,busy_low,12,1
+A,L+R1:e345,0.03,test,busy_mid,16,1
+A,L+R1:e345,0.03,test,busy_high,7,0
+A,L+R1:e345,0.03,test,busy_short,2,0
+A,L+R1:e345,0.03,test,all,120,2
+A,L+R1:e345,0.03,valid+test,quiet,90,0
+A,L+R1:e345,0.03,valid+test,busy_low,42,2
+A,L+R1:e345,0.03,valid+test,busy_mid,59,3
+A,L+R1:e345,0.03,valid+test,busy_high,37,1
+A,L+R1:e345,0.03,valid+test,busy_short,12,0
+A,L+R1:e345,0.03,valid+test,all,240,6
+A,L+R1:e345,0.05,valid,quiet,7,0
+A,L+R1:e345,0.05,valid,busy_low,30,2
+A,L+R1:e345,0.05,valid,busy_mid,43,6
+A,L+R1:e345,0.05,valid,busy_high,30,3
+A,L+R1:e345,0.05,valid,busy_short,10,0
+A,L+R1:e345,0.05,valid,all,120,11
+A,L+R1:e345,0.05,test,quiet,83,0
+A,L+R1:e345,0.05,test,busy_low,12,1
+A,L+R1:e345,0.05,test,busy_mid,16,1
+A,L+R1:e345,0.05,test,busy_high,7,0
+A,L+R1:e345,0.05,test,busy_short,2,0
+A,L+R1:e345,0.05,test,all,120,2
+A,L+R1:e345,0.05,valid+test,quiet,90,0
+A,L+R1:e345,0.05,valid+test,busy_low,42,3
+A,L+R1:e345,0.05,valid+test,busy_mid,59,7
+A,L+R1:e345,0.05,valid+test,busy_high,37,3
+A,L+R1:e345,0.05,valid+test,busy_short,12,0
+A,L+R1:e345,0.05,valid+test,all,240,13
+A,L:e012,0.01,valid,quiet,7,0
+A,L:e012,0.01,valid,busy_low,30,0
+A,L:e012,0.01,valid,busy_mid,43,1
+A,L:e012,0.01,valid,busy_high,30,0
+A,L:e012,0.01,valid,busy_short,10,0
+A,L:e012,0.01,valid,all,120,1
+A,L:e012,0.01,test,quiet,83,0
+A,L:e012,0.01,test,busy_low,12,0
+A,L:e012,0.01,test,busy_mid,16,1
+A,L:e012,0.01,test,busy_high,7,0
+A,L:e012,0.01,test,busy_short,2,0
+A,L:e012,0.01,test,all,120,1
+A,L:e012,0.01,valid+test,quiet,90,0
+A,L:e012,0.01,valid+test,busy_low,42,0
+A,L:e012,0.01,valid+test,busy_mid,59,2
+A,L:e012,0.01,valid+test,busy_high,37,0
+A,L:e012,0.01,valid+test,busy_short,12,0
+A,L:e012,0.01,valid+test,all,240,2
+A,L:e012,0.03,valid,quiet,7,0
+A,L:e012,0.03,valid,busy_low,30,0
+A,L:e012,0.03,valid,busy_mid,43,2
+A,L:e012,0.03,valid,busy_high,30,1
+A,L:e012,0.03,valid,busy_short,10,0
+A,L:e012,0.03,valid,all,120,3
+A,L:e012,0.03,test,quiet,83,0
+A,L:e012,0.03,test,busy_low,12,0
+A,L:e012,0.03,test,busy_mid,16,1
+A,L:e012,0.03,test,busy_high,7,0
+A,L:e012,0.03,test,busy_short,2,0
+A,L:e012,0.03,test,all,120,1
+A,L:e012,0.03,valid+test,quiet,90,0
+A,L:e012,0.03,valid+test,busy_low,42,0
+A,L:e012,0.03,valid+test,busy_mid,59,3
+A,L:e012,0.03,valid+test,busy_high,37,1
+A,L:e012,0.03,valid+test,busy_short,12,0
+A,L:e012,0.03,valid+test,all,240,4
+A,L:e012,0.05,valid,quiet,7,0
+A,L:e012,0.05,valid,busy_low,30,0
+A,L:e012,0.05,valid,busy_mid,43,4
+A,L:e012,0.05,valid,busy_high,30,2
+A,L:e012,0.05,valid,busy_short,10,0
+A,L:e012,0.05,valid,all,120,6
+A,L:e012,0.05,test,quiet,83,0
+A,L:e012,0.05,test,busy_low,12,0
+A,L:e012,0.05,test,busy_mid,16,1
+A,L:e012,0.05,test,busy_high,7,0
+A,L:e012,0.05,test,busy_short,2,0
+A,L:e012,0.05,test,all,120,1
+A,L:e012,0.05,valid+test,quiet,90,0
+A,L:e012,0.05,valid+test,busy_low,42,0
+A,L:e012,0.05,valid+test,busy_mid,59,5
+A,L:e012,0.05,valid+test,busy_high,37,2
+A,L:e012,0.05,valid+test,busy_short,12,0
+A,L:e012,0.05,valid+test,all,240,7
+A,L+R1:e012,0.01,valid,quiet,7,0
+A,L+R1:e012,0.01,valid,busy_low,30,0
+A,L+R1:e012,0.01,valid,busy_mid,43,1
+A,L+R1:e012,0.01,valid,busy_high,30,0
+A,L+R1:e012,0.01,valid,busy_short,10,0
+A,L+R1:e012,0.01,valid,all,120,1
+A,L+R1:e012,0.01,test,quiet,83,0
+A,L+R1:e012,0.01,test,busy_low,12,1
+A,L+R1:e012,0.01,test,busy_mid,16,1
+A,L+R1:e012,0.01,test,busy_high,7,0
+A,L+R1:e012,0.01,test,busy_short,2,0
+A,L+R1:e012,0.01,test,all,120,2
+A,L+R1:e012,0.01,valid+test,quiet,90,0
+A,L+R1:e012,0.01,valid+test,busy_low,42,1
+A,L+R1:e012,0.01,valid+test,busy_mid,59,2
+A,L+R1:e012,0.01,valid+test,busy_high,37,0
+A,L+R1:e012,0.01,valid+test,busy_short,12,0
+A,L+R1:e012,0.01,valid+test,all,240,3
+A,L+R1:e012,0.03,valid,quiet,7,0
+A,L+R1:e012,0.03,valid,busy_low,30,0
+A,L+R1:e012,0.03,valid,busy_mid,43,3
+A,L+R1:e012,0.03,valid,busy_high,30,2
+A,L+R1:e012,0.03,valid,busy_short,10,0
+A,L+R1:e012,0.03,valid,all,120,5
+A,L+R1:e012,0.03,test,quiet,83,0
+A,L+R1:e012,0.03,test,busy_low,12,1
+A,L+R1:e012,0.03,test,busy_mid,16,1
+A,L+R1:e012,0.03,test,busy_high,7,0
+A,L+R1:e012,0.03,test,busy_short,2,0
+A,L+R1:e012,0.03,test,all,120,2
+A,L+R1:e012,0.03,valid+test,quiet,90,0
+A,L+R1:e012,0.03,valid+test,busy_low,42,1
+A,L+R1:e012,0.03,valid+test,busy_mid,59,4
+A,L+R1:e012,0.03,valid+test,busy_high,37,2
+A,L+R1:e012,0.03,valid+test,busy_short,12,0
+A,L+R1:e012,0.03,valid+test,all,240,7
+A,L+R1:e012,0.05,valid,quiet,7,0
+A,L+R1:e012,0.05,valid,busy_low,30,2
+A,L+R1:e012,0.05,valid,busy_mid,43,6
+A,L+R1:e012,0.05,valid,busy_high,30,4
+A,L+R1:e012,0.05,valid,busy_short,10,0
+A,L+R1:e012,0.05,valid,all,120,12
+A,L+R1:e012,0.05,test,quiet,83,0
+A,L+R1:e012,0.05,test,busy_low,12,1
+A,L+R1:e012,0.05,test,busy_mid,16,1
+A,L+R1:e012,0.05,test,busy_high,7,0
+A,L+R1:e012,0.05,test,busy_short,2,0
+A,L+R1:e012,0.05,test,all,120,2
+A,L+R1:e012,0.05,valid+test,quiet,90,0
+A,L+R1:e012,0.05,valid+test,busy_low,42,3
+A,L+R1:e012,0.05,valid+test,busy_mid,59,7
+A,L+R1:e012,0.05,valid+test,busy_high,37,4
+A,L+R1:e012,0.05,valid+test,busy_short,12,0
+A,L+R1:e012,0.05,valid+test,all,240,14
+A,start:e012,0.01,valid,quiet,7,0
+A,start:e012,0.01,valid,busy_low,30,0
+A,start:e012,0.01,valid,busy_mid,43,1
+A,start:e012,0.01,valid,busy_high,30,0
+A,start:e012,0.01,valid,busy_short,10,0
+A,start:e012,0.01,valid,all,120,1
+A,start:e012,0.01,test,quiet,83,0
+A,start:e012,0.01,test,busy_low,12,0
+A,start:e012,0.01,test,busy_mid,16,0
+A,start:e012,0.01,test,busy_high,7,0
+A,start:e012,0.01,test,busy_short,2,0
+A,start:e012,0.01,test,all,120,0
+A,start:e012,0.01,valid+test,quiet,90,0
+A,start:e012,0.01,valid+test,busy_low,42,0
+A,start:e012,0.01,valid+test,busy_mid,59,1
+A,start:e012,0.01,valid+test,busy_high,37,0
+A,start:e012,0.01,valid+test,busy_short,12,0
+A,start:e012,0.01,valid+test,all,240,1
+A,start:e012,0.03,valid,quiet,7,0
+A,start:e012,0.03,valid,busy_low,30,0
+A,start:e012,0.03,valid,busy_mid,43,3
+A,start:e012,0.03,valid,busy_high,30,0
+A,start:e012,0.03,valid,busy_short,10,0
+A,start:e012,0.03,valid,all,120,3
+A,start:e012,0.03,test,quiet,83,0
+A,start:e012,0.03,test,busy_low,12,0
+A,start:e012,0.03,test,busy_mid,16,0
+A,start:e012,0.03,test,busy_high,7,0
+A,start:e012,0.03,test,busy_short,2,0
+A,start:e012,0.03,test,all,120,0
+A,start:e012,0.03,valid+test,quiet,90,0
+A,start:e012,0.03,valid+test,busy_low,42,0
+A,start:e012,0.03,valid+test,busy_mid,59,3
+A,start:e012,0.03,valid+test,busy_high,37,0
+A,start:e012,0.03,valid+test,busy_short,12,0
+A,start:e012,0.03,valid+test,all,240,3
+A,start:e012,0.05,valid,quiet,7,0
+A,start:e012,0.05,valid,busy_low,30,0
+A,start:e012,0.05,valid,busy_mid,43,4
+A,start:e012,0.05,valid,busy_high,30,2
+A,start:e012,0.05,valid,busy_short,10,0
+A,start:e012,0.05,valid,all,120,6
+A,start:e012,0.05,test,quiet,83,0
+A,start:e012,0.05,test,busy_low,12,0
+A,start:e012,0.05,test,busy_mid,16,1
+A,start:e012,0.05,test,busy_high,7,0
+A,start:e012,0.05,test,busy_short,2,0
+A,start:e012,0.05,test,all,120,1
+A,start:e012,0.05,valid+test,quiet,90,0
+A,start:e012,0.05,valid+test,busy_low,42,0
+A,start:e012,0.05,valid+test,busy_mid,59,5
+A,start:e012,0.05,valid+test,busy_high,37,2
+A,start:e012,0.05,valid+test,busy_short,12,0
+A,start:e012,0.05,valid+test,all,240,7
+A,v2,0.01,valid,quiet,7,0
+A,v2,0.01,valid,busy_low,30,0
+A,v2,0.01,valid,busy_mid,43,0
+A,v2,0.01,valid,busy_high,30,1
+A,v2,0.01,valid,busy_short,10,0
+A,v2,0.01,valid,all,120,1
+A,v2,0.01,test,quiet,83,0
+A,v2,0.01,test,busy_low,12,0
+A,v2,0.01,test,busy_mid,16,0
+A,v2,0.01,test,busy_high,7,0
+A,v2,0.01,test,busy_short,2,0
+A,v2,0.01,test,all,120,0
+A,v2,0.01,valid+test,quiet,90,0
+A,v2,0.01,valid+test,busy_low,42,0
+A,v2,0.01,valid+test,busy_mid,59,0
+A,v2,0.01,valid+test,busy_high,37,1
+A,v2,0.01,valid+test,busy_short,12,0
+A,v2,0.01,valid+test,all,240,1
+A,v2,0.03,valid,quiet,7,0
+A,v2,0.03,valid,busy_low,30,0
+A,v2,0.03,valid,busy_mid,43,1
+A,v2,0.03,valid,busy_high,30,2
+A,v2,0.03,valid,busy_short,10,0
+A,v2,0.03,valid,all,120,3
+A,v2,0.03,test,quiet,83,0
+A,v2,0.03,test,busy_low,12,0
+A,v2,0.03,test,busy_mid,16,1
+A,v2,0.03,test,busy_high,7,0
+A,v2,0.03,test,busy_short,2,0
+A,v2,0.03,test,all,120,1
+A,v2,0.03,valid+test,quiet,90,0
+A,v2,0.03,valid+test,busy_low,42,0
+A,v2,0.03,valid+test,busy_mid,59,2
+A,v2,0.03,valid+test,busy_high,37,2
+A,v2,0.03,valid+test,busy_short,12,0
+A,v2,0.03,valid+test,all,240,4
+A,v2,0.05,valid,quiet,7,0
+A,v2,0.05,valid,busy_low,30,0
+A,v2,0.05,valid,busy_mid,43,3
+A,v2,0.05,valid,busy_high,30,3
+A,v2,0.05,valid,busy_short,10,0
+A,v2,0.05,valid,all,120,6
+A,v2,0.05,test,quiet,83,0
+A,v2,0.05,test,busy_low,12,0
+A,v2,0.05,test,busy_mid,16,1
+A,v2,0.05,test,busy_high,7,0
+A,v2,0.05,test,busy_short,2,0
+A,v2,0.05,test,all,120,1
+A,v2,0.05,valid+test,quiet,90,0
+A,v2,0.05,valid+test,busy_low,42,0
+A,v2,0.05,valid+test,busy_mid,59,4
+A,v2,0.05,valid+test,busy_high,37,3
+A,v2,0.05,valid+test,busy_short,12,0
+A,v2,0.05,valid+test,all,240,7
+A,v2+R1,0.01,valid,quiet,7,0
+A,v2+R1,0.01,valid,busy_low,30,0
+A,v2+R1,0.01,valid,busy_mid,43,0
+A,v2+R1,0.01,valid,busy_high,30,1
+A,v2+R1,0.01,valid,busy_short,10,0
+A,v2+R1,0.01,valid,all,120,1
+A,v2+R1,0.01,test,quiet,83,0
+A,v2+R1,0.01,test,busy_low,12,0
+A,v2+R1,0.01,test,busy_mid,16,0
+A,v2+R1,0.01,test,busy_high,7,0
+A,v2+R1,0.01,test,busy_short,2,0
+A,v2+R1,0.01,test,all,120,0
+A,v2+R1,0.01,valid+test,quiet,90,0
+A,v2+R1,0.01,valid+test,busy_low,42,0
+A,v2+R1,0.01,valid+test,busy_mid,59,0
+A,v2+R1,0.01,valid+test,busy_high,37,1
+A,v2+R1,0.01,valid+test,busy_short,12,0
+A,v2+R1,0.01,valid+test,all,240,1
+A,v2+R1,0.03,valid,quiet,7,0
+A,v2+R1,0.03,valid,busy_low,30,1
+A,v2+R1,0.03,valid,busy_mid,43,1
+A,v2+R1,0.03,valid,busy_high,30,2
+A,v2+R1,0.03,valid,busy_short,10,0
+A,v2+R1,0.03,valid,all,120,4
+A,v2+R1,0.03,test,quiet,83,0
+A,v2+R1,0.03,test,busy_low,12,0
+A,v2+R1,0.03,test,busy_mid,16,1
+A,v2+R1,0.03,test,busy_high,7,0
+A,v2+R1,0.03,test,busy_short,2,0
+A,v2+R1,0.03,test,all,120,1
+A,v2+R1,0.03,valid+test,quiet,90,0
+A,v2+R1,0.03,valid+test,busy_low,42,1
+A,v2+R1,0.03,valid+test,busy_mid,59,2
+A,v2+R1,0.03,valid+test,busy_high,37,2
+A,v2+R1,0.03,valid+test,busy_short,12,0
+A,v2+R1,0.03,valid+test,all,240,5
+A,v2+R1,0.05,valid,quiet,7,0
+A,v2+R1,0.05,valid,busy_low,30,2
+A,v2+R1,0.05,valid,busy_mid,43,4
+A,v2+R1,0.05,valid,busy_high,30,3
+A,v2+R1,0.05,valid,busy_short,10,0
+A,v2+R1,0.05,valid,all,120,9
+A,v2+R1,0.05,test,quiet,83,0
+A,v2+R1,0.05,test,busy_low,12,0
+A,v2+R1,0.05,test,busy_mid,16,1
+A,v2+R1,0.05,test,busy_high,7,0
+A,v2+R1,0.05,test,busy_short,2,0
+A,v2+R1,0.05,test,all,120,1
+A,v2+R1,0.05,valid+test,quiet,90,0
+A,v2+R1,0.05,valid+test,busy_low,42,2
+A,v2+R1,0.05,valid+test,busy_mid,59,5
+A,v2+R1,0.05,valid+test,busy_high,37,3
+A,v2+R1,0.05,valid+test,busy_short,12,0
+A,v2+R1,0.05,valid+test,all,240,10
+A,v2+R1+R2,0.01,valid,quiet,7,0
+A,v2+R1+R2,0.01,valid,busy_low,30,0
+A,v2+R1+R2,0.01,valid,busy_mid,43,0
+A,v2+R1+R2,0.01,valid,busy_high,30,0
+A,v2+R1+R2,0.01,valid,busy_short,10,0
+A,v2+R1+R2,0.01,valid,all,120,0
+A,v2+R1+R2,0.01,test,quiet,83,0
+A,v2+R1+R2,0.01,test,busy_low,12,0
+A,v2+R1+R2,0.01,test,busy_mid,16,0
+A,v2+R1+R2,0.01,test,busy_high,7,0
+A,v2+R1+R2,0.01,test,busy_short,2,0
+A,v2+R1+R2,0.01,test,all,120,0
+A,v2+R1+R2,0.01,valid+test,quiet,90,0
+A,v2+R1+R2,0.01,valid+test,busy_low,42,0
+A,v2+R1+R2,0.01,valid+test,busy_mid,59,0
+A,v2+R1+R2,0.01,valid+test,busy_high,37,0
+A,v2+R1+R2,0.01,valid+test,busy_short,12,0
+A,v2+R1+R2,0.01,valid+test,all,240,0
+A,v2+R1+R2,0.03,valid,quiet,7,0
+A,v2+R1+R2,0.03,valid,busy_low,30,0
+A,v2+R1+R2,0.03,valid,busy_mid,43,1
+A,v2+R1+R2,0.03,valid,busy_high,30,0
+A,v2+R1+R2,0.03,valid,busy_short,10,0
+A,v2+R1+R2,0.03,valid,all,120,1
+A,v2+R1+R2,0.03,test,quiet,83,0
+A,v2+R1+R2,0.03,test,busy_low,12,0
+A,v2+R1+R2,0.03,test,busy_mid,16,0
+A,v2+R1+R2,0.03,test,busy_high,7,0
+A,v2+R1+R2,0.03,test,busy_short,2,0
+A,v2+R1+R2,0.03,test,all,120,0
+A,v2+R1+R2,0.03,valid+test,quiet,90,0
+A,v2+R1+R2,0.03,valid+test,busy_low,42,0
+A,v2+R1+R2,0.03,valid+test,busy_mid,59,1
+A,v2+R1+R2,0.03,valid+test,busy_high,37,0
+A,v2+R1+R2,0.03,valid+test,busy_short,12,0
+A,v2+R1+R2,0.03,valid+test,all,240,1
+A,v2+R1+R2,0.05,valid,quiet,7,0
+A,v2+R1+R2,0.05,valid,busy_low,30,1
+A,v2+R1+R2,0.05,valid,busy_mid,43,2
+A,v2+R1+R2,0.05,valid,busy_high,30,0
+A,v2+R1+R2,0.05,valid,busy_short,10,0
+A,v2+R1+R2,0.05,valid,all,120,3
+A,v2+R1+R2,0.05,test,quiet,83,0
+A,v2+R1+R2,0.05,test,busy_low,12,0
+A,v2+R1+R2,0.05,test,busy_mid,16,0
+A,v2+R1+R2,0.05,test,busy_high,7,0
+A,v2+R1+R2,0.05,test,busy_short,2,0
+A,v2+R1+R2,0.05,test,all,120,0
+A,v2+R1+R2,0.05,valid+test,quiet,90,0
+A,v2+R1+R2,0.05,valid+test,busy_low,42,1
+A,v2+R1+R2,0.05,valid+test,busy_mid,59,2
+A,v2+R1+R2,0.05,valid+test,busy_high,37,0
+A,v2+R1+R2,0.05,valid+test,busy_short,12,0
+A,v2+R1+R2,0.05,valid+test,all,240,3
+A,mlp_ae5,0.01,valid,quiet,7,0
+A,mlp_ae5,0.01,valid,busy_low,30,0
+A,mlp_ae5,0.01,valid,busy_mid,43,0
+A,mlp_ae5,0.01,valid,busy_high,30,1
+A,mlp_ae5,0.01,valid,busy_short,10,0
+A,mlp_ae5,0.01,valid,all,120,1
+A,mlp_ae5,0.01,test,quiet,83,0
+A,mlp_ae5,0.01,test,busy_low,12,0
+A,mlp_ae5,0.01,test,busy_mid,16,1
+A,mlp_ae5,0.01,test,busy_high,7,0
+A,mlp_ae5,0.01,test,busy_short,2,0
+A,mlp_ae5,0.01,test,all,120,1
+A,mlp_ae5,0.01,valid+test,quiet,90,0
+A,mlp_ae5,0.01,valid+test,busy_low,42,0
+A,mlp_ae5,0.01,valid+test,busy_mid,59,1
+A,mlp_ae5,0.01,valid+test,busy_high,37,1
+A,mlp_ae5,0.01,valid+test,busy_short,12,0
+A,mlp_ae5,0.01,valid+test,all,240,2
+A,mlp_ae5,0.03,valid,quiet,7,0
+A,mlp_ae5,0.03,valid,busy_low,30,0
+A,mlp_ae5,0.03,valid,busy_mid,43,0
+A,mlp_ae5,0.03,valid,busy_high,30,3
+A,mlp_ae5,0.03,valid,busy_short,10,0
+A,mlp_ae5,0.03,valid,all,120,3
+A,mlp_ae5,0.03,test,quiet,83,0
+A,mlp_ae5,0.03,test,busy_low,12,0
+A,mlp_ae5,0.03,test,busy_mid,16,1
+A,mlp_ae5,0.03,test,busy_high,7,0
+A,mlp_ae5,0.03,test,busy_short,2,0
+A,mlp_ae5,0.03,test,all,120,1
+A,mlp_ae5,0.03,valid+test,quiet,90,0
+A,mlp_ae5,0.03,valid+test,busy_low,42,0
+A,mlp_ae5,0.03,valid+test,busy_mid,59,1
+A,mlp_ae5,0.03,valid+test,busy_high,37,3
+A,mlp_ae5,0.03,valid+test,busy_short,12,0
+A,mlp_ae5,0.03,valid+test,all,240,4
+A,mlp_ae5,0.05,valid,quiet,7,0
+A,mlp_ae5,0.05,valid,busy_low,30,0
+A,mlp_ae5,0.05,valid,busy_mid,43,2
+A,mlp_ae5,0.05,valid,busy_high,30,4
+A,mlp_ae5,0.05,valid,busy_short,10,0
+A,mlp_ae5,0.05,valid,all,120,6
+A,mlp_ae5,0.05,test,quiet,83,0
+A,mlp_ae5,0.05,test,busy_low,12,0
+A,mlp_ae5,0.05,test,busy_mid,16,1
+A,mlp_ae5,0.05,test,busy_high,7,0
+A,mlp_ae5,0.05,test,busy_short,2,0
+A,mlp_ae5,0.05,test,all,120,1
+A,mlp_ae5,0.05,valid+test,quiet,90,0
+A,mlp_ae5,0.05,valid+test,busy_low,42,0
+A,mlp_ae5,0.05,valid+test,busy_mid,59,3
+A,mlp_ae5,0.05,valid+test,busy_high,37,4
+A,mlp_ae5,0.05,valid+test,busy_short,12,0
+A,mlp_ae5,0.05,valid+test,all,240,7
+A,lstm20(행 표),0.01,valid,quiet,7,0
+A,lstm20(행 표),0.01,valid,busy_low,30,0
+A,lstm20(행 표),0.01,valid,busy_mid,43,1
+A,lstm20(행 표),0.01,valid,busy_high,30,0
+A,lstm20(행 표),0.01,valid,busy_short,10,0
+A,lstm20(행 표),0.01,valid,all,120,1
+A,lstm20(행 표),0.01,test,quiet,83,0
+A,lstm20(행 표),0.01,test,busy_low,12,0
+A,lstm20(행 표),0.01,test,busy_mid,16,1
+A,lstm20(행 표),0.01,test,busy_high,7,0
+A,lstm20(행 표),0.01,test,busy_short,2,0
+A,lstm20(행 표),0.01,test,all,120,1
+A,lstm20(행 표),0.01,valid+test,quiet,90,0
+A,lstm20(행 표),0.01,valid+test,busy_low,42,0
+A,lstm20(행 표),0.01,valid+test,busy_mid,59,2
+A,lstm20(행 표),0.01,valid+test,busy_high,37,0
+A,lstm20(행 표),0.01,valid+test,busy_short,12,0
+A,lstm20(행 표),0.01,valid+test,all,240,2
+A,lstm20(행 표),0.03,valid,quiet,7,0
+A,lstm20(행 표),0.03,valid,busy_low,30,0
+A,lstm20(행 표),0.03,valid,busy_mid,43,3
+A,lstm20(행 표),0.03,valid,busy_high,30,0
+A,lstm20(행 표),0.03,valid,busy_short,10,0
+A,lstm20(행 표),0.03,valid,all,120,3
+A,lstm20(행 표),0.03,test,quiet,83,1
+A,lstm20(행 표),0.03,test,busy_low,12,0
+A,lstm20(행 표),0.03,test,busy_mid,16,2
+A,lstm20(행 표),0.03,test,busy_high,7,0
+A,lstm20(행 표),0.03,test,busy_short,2,0
+A,lstm20(행 표),0.03,test,all,120,3
+A,lstm20(행 표),0.03,valid+test,quiet,90,1
+A,lstm20(행 표),0.03,valid+test,busy_low,42,0
+A,lstm20(행 표),0.03,valid+test,busy_mid,59,5
+A,lstm20(행 표),0.03,valid+test,busy_high,37,0
+A,lstm20(행 표),0.03,valid+test,busy_short,12,0
+A,lstm20(행 표),0.03,valid+test,all,240,6
+A,lstm20(행 표),0.05,valid,quiet,7,0
+A,lstm20(행 표),0.05,valid,busy_low,30,0
+A,lstm20(행 표),0.05,valid,busy_mid,43,5
+A,lstm20(행 표),0.05,valid,busy_high,30,1
+A,lstm20(행 표),0.05,valid,busy_short,10,0
+A,lstm20(행 표),0.05,valid,all,120,6
+A,lstm20(행 표),0.05,test,quiet,83,1
+A,lstm20(행 표),0.05,test,busy_low,12,0
+A,lstm20(행 표),0.05,test,busy_mid,16,2
+A,lstm20(행 표),0.05,test,busy_high,7,0
+A,lstm20(행 표),0.05,test,busy_short,2,0
+A,lstm20(행 표),0.05,test,all,120,3
+A,lstm20(행 표),0.05,valid+test,quiet,90,1
+A,lstm20(행 표),0.05,valid+test,busy_low,42,0
+A,lstm20(행 표),0.05,valid+test,busy_mid,59,7
+A,lstm20(행 표),0.05,valid+test,busy_high,37,1
+A,lstm20(행 표),0.05,valid+test,busy_short,12,0
+A,lstm20(행 표),0.05,valid+test,all,240,9
+B,L:e345,0.01,valid,quiet,0,0
+B,L:e345,0.01,valid,busy_low,32,0
+B,L:e345,0.01,valid,busy_mid,43,0
+B,L:e345,0.01,valid,busy_high,28,1
+B,L:e345,0.01,valid,busy_short,17,0
+B,L:e345,0.01,valid,all,120,1
+B,L:e345,0.01,test,quiet,90,0
+B,L:e345,0.01,test,busy_low,26,0
+B,L:e345,0.01,test,busy_mid,34,1
+B,L:e345,0.01,test,busy_high,25,0
+B,L:e345,0.01,test,busy_short,5,0
+B,L:e345,0.01,test,all,180,1
+B,L:e345,0.01,valid+test,quiet,90,0
+B,L:e345,0.01,valid+test,busy_low,58,0
+B,L:e345,0.01,valid+test,busy_mid,77,1
+B,L:e345,0.01,valid+test,busy_high,53,1
+B,L:e345,0.01,valid+test,busy_short,22,0
+B,L:e345,0.01,valid+test,all,300,2
+B,L:e345,0.03,valid,quiet,0,0
+B,L:e345,0.03,valid,busy_low,32,0
+B,L:e345,0.03,valid,busy_mid,43,2
+B,L:e345,0.03,valid,busy_high,28,1
+B,L:e345,0.03,valid,busy_short,17,0
+B,L:e345,0.03,valid,all,120,3
+B,L:e345,0.03,test,quiet,90,0
+B,L:e345,0.03,test,busy_low,26,0
+B,L:e345,0.03,test,busy_mid,34,1
+B,L:e345,0.03,test,busy_high,25,0
+B,L:e345,0.03,test,busy_short,5,0
+B,L:e345,0.03,test,all,180,1
+B,L:e345,0.03,valid+test,quiet,90,0
+B,L:e345,0.03,valid+test,busy_low,58,0
+B,L:e345,0.03,valid+test,busy_mid,77,3
+B,L:e345,0.03,valid+test,busy_high,53,1
+B,L:e345,0.03,valid+test,busy_short,22,0
+B,L:e345,0.03,valid+test,all,300,4
+B,L:e345,0.05,valid,quiet,0,0
+B,L:e345,0.05,valid,busy_low,32,0
+B,L:e345,0.05,valid,busy_mid,43,4
+B,L:e345,0.05,valid,busy_high,28,2
+B,L:e345,0.05,valid,busy_short,17,0
+B,L:e345,0.05,valid,all,120,6
+B,L:e345,0.05,test,quiet,90,0
+B,L:e345,0.05,test,busy_low,26,0
+B,L:e345,0.05,test,busy_mid,34,1
+B,L:e345,0.05,test,busy_high,25,1
+B,L:e345,0.05,test,busy_short,5,0
+B,L:e345,0.05,test,all,180,2
+B,L:e345,0.05,valid+test,quiet,90,0
+B,L:e345,0.05,valid+test,busy_low,58,0
+B,L:e345,0.05,valid+test,busy_mid,77,5
+B,L:e345,0.05,valid+test,busy_high,53,3
+B,L:e345,0.05,valid+test,busy_short,22,0
+B,L:e345,0.05,valid+test,all,300,8
+B,L+R1:e345,0.01,valid,quiet,0,0
+B,L+R1:e345,0.01,valid,busy_low,32,0
+B,L+R1:e345,0.01,valid,busy_mid,43,0
+B,L+R1:e345,0.01,valid,busy_high,28,1
+B,L+R1:e345,0.01,valid,busy_short,17,0
+B,L+R1:e345,0.01,valid,all,120,1
+B,L+R1:e345,0.01,test,quiet,90,0
+B,L+R1:e345,0.01,test,busy_low,26,1
+B,L+R1:e345,0.01,test,busy_mid,34,1
+B,L+R1:e345,0.01,test,busy_high,25,0
+B,L+R1:e345,0.01,test,busy_short,5,0
+B,L+R1:e345,0.01,test,all,180,2
+B,L+R1:e345,0.01,valid+test,quiet,90,0
+B,L+R1:e345,0.01,valid+test,busy_low,58,1
+B,L+R1:e345,0.01,valid+test,busy_mid,77,1
+B,L+R1:e345,0.01,valid+test,busy_high,53,1
+B,L+R1:e345,0.01,valid+test,busy_short,22,0
+B,L+R1:e345,0.01,valid+test,all,300,3
+B,L+R1:e345,0.03,valid,quiet,0,0
+B,L+R1:e345,0.03,valid,busy_low,32,0
+B,L+R1:e345,0.03,valid,busy_mid,43,3
+B,L+R1:e345,0.03,valid,busy_high,28,1
+B,L+R1:e345,0.03,valid,busy_short,17,0
+B,L+R1:e345,0.03,valid,all,120,4
+B,L+R1:e345,0.03,test,quiet,90,0
+B,L+R1:e345,0.03,test,busy_low,26,1
+B,L+R1:e345,0.03,test,busy_mid,34,1
+B,L+R1:e345,0.03,test,busy_high,25,0
+B,L+R1:e345,0.03,test,busy_short,5,0
+B,L+R1:e345,0.03,test,all,180,2
+B,L+R1:e345,0.03,valid+test,quiet,90,0
+B,L+R1:e345,0.03,valid+test,busy_low,58,1
+B,L+R1:e345,0.03,valid+test,busy_mid,77,4
+B,L+R1:e345,0.03,valid+test,busy_high,53,1
+B,L+R1:e345,0.03,valid+test,busy_short,22,0
+B,L+R1:e345,0.03,valid+test,all,300,6
+B,L+R1:e345,0.05,valid,quiet,0,0
+B,L+R1:e345,0.05,valid,busy_low,32,1
+B,L+R1:e345,0.05,valid,busy_mid,43,6
+B,L+R1:e345,0.05,valid,busy_high,28,4
+B,L+R1:e345,0.05,valid,busy_short,17,0
+B,L+R1:e345,0.05,valid,all,120,11
+B,L+R1:e345,0.05,test,quiet,90,0
+B,L+R1:e345,0.05,test,busy_low,26,2
+B,L+R1:e345,0.05,test,busy_mid,34,1
+B,L+R1:e345,0.05,test,busy_high,25,1
+B,L+R1:e345,0.05,test,busy_short,5,0
+B,L+R1:e345,0.05,test,all,180,4
+B,L+R1:e345,0.05,valid+test,quiet,90,0
+B,L+R1:e345,0.05,valid+test,busy_low,58,3
+B,L+R1:e345,0.05,valid+test,busy_mid,77,7
+B,L+R1:e345,0.05,valid+test,busy_high,53,5
+B,L+R1:e345,0.05,valid+test,busy_short,22,0
+B,L+R1:e345,0.05,valid+test,all,300,15
+B,L:e012,0.01,valid,quiet,0,0
+B,L:e012,0.01,valid,busy_low,32,0
+B,L:e012,0.01,valid,busy_mid,43,0
+B,L:e012,0.01,valid,busy_high,28,1
+B,L:e012,0.01,valid,busy_short,17,0
+B,L:e012,0.01,valid,all,120,1
+B,L:e012,0.01,test,quiet,90,0
+B,L:e012,0.01,test,busy_low,26,0
+B,L:e012,0.01,test,busy_mid,34,1
+B,L:e012,0.01,test,busy_high,25,0
+B,L:e012,0.01,test,busy_short,5,0
+B,L:e012,0.01,test,all,180,1
+B,L:e012,0.01,valid+test,quiet,90,0
+B,L:e012,0.01,valid+test,busy_low,58,0
+B,L:e012,0.01,valid+test,busy_mid,77,1
+B,L:e012,0.01,valid+test,busy_high,53,1
+B,L:e012,0.01,valid+test,busy_short,22,0
+B,L:e012,0.01,valid+test,all,300,2
+B,L:e012,0.03,valid,quiet,0,0
+B,L:e012,0.03,valid,busy_low,32,0
+B,L:e012,0.03,valid,busy_mid,43,2
+B,L:e012,0.03,valid,busy_high,28,1
+B,L:e012,0.03,valid,busy_short,17,0
+B,L:e012,0.03,valid,all,120,3
+B,L:e012,0.03,test,quiet,90,0
+B,L:e012,0.03,test,busy_low,26,0
+B,L:e012,0.03,test,busy_mid,34,1
+B,L:e012,0.03,test,busy_high,25,0
+B,L:e012,0.03,test,busy_short,5,0
+B,L:e012,0.03,test,all,180,1
+B,L:e012,0.03,valid+test,quiet,90,0
+B,L:e012,0.03,valid+test,busy_low,58,0
+B,L:e012,0.03,valid+test,busy_mid,77,3
+B,L:e012,0.03,valid+test,busy_high,53,1
+B,L:e012,0.03,valid+test,busy_short,22,0
+B,L:e012,0.03,valid+test,all,300,4
+B,L:e012,0.05,valid,quiet,0,0
+B,L:e012,0.05,valid,busy_low,32,0
+B,L:e012,0.05,valid,busy_mid,43,4
+B,L:e012,0.05,valid,busy_high,28,2
+B,L:e012,0.05,valid,busy_short,17,0
+B,L:e012,0.05,valid,all,120,6
+B,L:e012,0.05,test,quiet,90,0
+B,L:e012,0.05,test,busy_low,26,0
+B,L:e012,0.05,test,busy_mid,34,1
+B,L:e012,0.05,test,busy_high,25,0
+B,L:e012,0.05,test,busy_short,5,0
+B,L:e012,0.05,test,all,180,1
+B,L:e012,0.05,valid+test,quiet,90,0
+B,L:e012,0.05,valid+test,busy_low,58,0
+B,L:e012,0.05,valid+test,busy_mid,77,5
+B,L:e012,0.05,valid+test,busy_high,53,2
+B,L:e012,0.05,valid+test,busy_short,22,0
+B,L:e012,0.05,valid+test,all,300,7
+B,L+R1:e012,0.01,valid,quiet,0,0
+B,L+R1:e012,0.01,valid,busy_low,32,0
+B,L+R1:e012,0.01,valid,busy_mid,43,0
+B,L+R1:e012,0.01,valid,busy_high,28,1
+B,L+R1:e012,0.01,valid,busy_short,17,0
+B,L+R1:e012,0.01,valid,all,120,1
+B,L+R1:e012,0.01,test,quiet,90,0
+B,L+R1:e012,0.01,test,busy_low,26,1
+B,L+R1:e012,0.01,test,busy_mid,34,1
+B,L+R1:e012,0.01,test,busy_high,25,0
+B,L+R1:e012,0.01,test,busy_short,5,0
+B,L+R1:e012,0.01,test,all,180,2
+B,L+R1:e012,0.01,valid+test,quiet,90,0
+B,L+R1:e012,0.01,valid+test,busy_low,58,1
+B,L+R1:e012,0.01,valid+test,busy_mid,77,1
+B,L+R1:e012,0.01,valid+test,busy_high,53,1
+B,L+R1:e012,0.01,valid+test,busy_short,22,0
+B,L+R1:e012,0.01,valid+test,all,300,3
+B,L+R1:e012,0.03,valid,quiet,0,0
+B,L+R1:e012,0.03,valid,busy_low,32,1
+B,L+R1:e012,0.03,valid,busy_mid,43,4
+B,L+R1:e012,0.03,valid,busy_high,28,1
+B,L+R1:e012,0.03,valid,busy_short,17,0
+B,L+R1:e012,0.03,valid,all,120,6
+B,L+R1:e012,0.03,test,quiet,90,0
+B,L+R1:e012,0.03,test,busy_low,26,1
+B,L+R1:e012,0.03,test,busy_mid,34,1
+B,L+R1:e012,0.03,test,busy_high,25,0
+B,L+R1:e012,0.03,test,busy_short,5,0
+B,L+R1:e012,0.03,test,all,180,2
+B,L+R1:e012,0.03,valid+test,quiet,90,0
+B,L+R1:e012,0.03,valid+test,busy_low,58,2
+B,L+R1:e012,0.03,valid+test,busy_mid,77,5
+B,L+R1:e012,0.03,valid+test,busy_high,53,1
+B,L+R1:e012,0.03,valid+test,busy_short,22,0
+B,L+R1:e012,0.03,valid+test,all,300,8
+B,L+R1:e012,0.05,valid,quiet,0,0
+B,L+R1:e012,0.05,valid,busy_low,32,1
+B,L+R1:e012,0.05,valid,busy_mid,43,6
+B,L+R1:e012,0.05,valid,busy_high,28,4
+B,L+R1:e012,0.05,valid,busy_short,17,0
+B,L+R1:e012,0.05,valid,all,120,11
+B,L+R1:e012,0.05,test,quiet,90,0
+B,L+R1:e012,0.05,test,busy_low,26,1
+B,L+R1:e012,0.05,test,busy_mid,34,1
+B,L+R1:e012,0.05,test,busy_high,25,0
+B,L+R1:e012,0.05,test,busy_short,5,0
+B,L+R1:e012,0.05,test,all,180,2
+B,L+R1:e012,0.05,valid+test,quiet,90,0
+B,L+R1:e012,0.05,valid+test,busy_low,58,2
+B,L+R1:e012,0.05,valid+test,busy_mid,77,7
+B,L+R1:e012,0.05,valid+test,busy_high,53,4
+B,L+R1:e012,0.05,valid+test,busy_short,22,0
+B,L+R1:e012,0.05,valid+test,all,300,13
+B,start:e012,0.01,valid,quiet,0,0
+B,start:e012,0.01,valid,busy_low,32,0
+B,start:e012,0.01,valid,busy_mid,43,1
+B,start:e012,0.01,valid,busy_high,28,0
+B,start:e012,0.01,valid,busy_short,17,0
+B,start:e012,0.01,valid,all,120,1
+B,start:e012,0.01,test,quiet,90,0
+B,start:e012,0.01,test,busy_low,26,0
+B,start:e012,0.01,test,busy_mid,34,0
+B,start:e012,0.01,test,busy_high,25,0
+B,start:e012,0.01,test,busy_short,5,0
+B,start:e012,0.01,test,all,180,0
+B,start:e012,0.01,valid+test,quiet,90,0
+B,start:e012,0.01,valid+test,busy_low,58,0
+B,start:e012,0.01,valid+test,busy_mid,77,1
+B,start:e012,0.01,valid+test,busy_high,53,0
+B,start:e012,0.01,valid+test,busy_short,22,0
+B,start:e012,0.01,valid+test,all,300,1
+B,start:e012,0.03,valid,quiet,0,0
+B,start:e012,0.03,valid,busy_low,32,0
+B,start:e012,0.03,valid,busy_mid,43,3
+B,start:e012,0.03,valid,busy_high,28,0
+B,start:e012,0.03,valid,busy_short,17,0
+B,start:e012,0.03,valid,all,120,3
+B,start:e012,0.03,test,quiet,90,0
+B,start:e012,0.03,test,busy_low,26,0
+B,start:e012,0.03,test,busy_mid,34,1
+B,start:e012,0.03,test,busy_high,25,0
+B,start:e012,0.03,test,busy_short,5,0
+B,start:e012,0.03,test,all,180,1
+B,start:e012,0.03,valid+test,quiet,90,0
+B,start:e012,0.03,valid+test,busy_low,58,0
+B,start:e012,0.03,valid+test,busy_mid,77,4
+B,start:e012,0.03,valid+test,busy_high,53,0
+B,start:e012,0.03,valid+test,busy_short,22,0
+B,start:e012,0.03,valid+test,all,300,4
+B,start:e012,0.05,valid,quiet,0,0
+B,start:e012,0.05,valid,busy_low,32,0
+B,start:e012,0.05,valid,busy_mid,43,6
+B,start:e012,0.05,valid,busy_high,28,0
+B,start:e012,0.05,valid,busy_short,17,0
+B,start:e012,0.05,valid,all,120,6
+B,start:e012,0.05,test,quiet,90,0
+B,start:e012,0.05,test,busy_low,26,0
+B,start:e012,0.05,test,busy_mid,34,1
+B,start:e012,0.05,test,busy_high,25,0
+B,start:e012,0.05,test,busy_short,5,0
+B,start:e012,0.05,test,all,180,1
+B,start:e012,0.05,valid+test,quiet,90,0
+B,start:e012,0.05,valid+test,busy_low,58,0
+B,start:e012,0.05,valid+test,busy_mid,77,7
+B,start:e012,0.05,valid+test,busy_high,53,0
+B,start:e012,0.05,valid+test,busy_short,22,0
+B,start:e012,0.05,valid+test,all,300,7
+B,v2,0.01,valid,quiet,0,0
+B,v2,0.01,valid,busy_low,32,0
+B,v2,0.01,valid,busy_mid,43,0
+B,v2,0.01,valid,busy_high,28,1
+B,v2,0.01,valid,busy_short,17,0
+B,v2,0.01,valid,all,120,1
+B,v2,0.01,test,quiet,90,0
+B,v2,0.01,test,busy_low,26,0
+B,v2,0.01,test,busy_mid,34,1
+B,v2,0.01,test,busy_high,25,2
+B,v2,0.01,test,busy_short,5,0
+B,v2,0.01,test,all,180,3
+B,v2,0.01,valid+test,quiet,90,0
+B,v2,0.01,valid+test,busy_low,58,0
+B,v2,0.01,valid+test,busy_mid,77,1
+B,v2,0.01,valid+test,busy_high,53,3
+B,v2,0.01,valid+test,busy_short,22,0
+B,v2,0.01,valid+test,all,300,4
+B,v2,0.03,valid,quiet,0,0
+B,v2,0.03,valid,busy_low,32,0
+B,v2,0.03,valid,busy_mid,43,1
+B,v2,0.03,valid,busy_high,28,2
+B,v2,0.03,valid,busy_short,17,0
+B,v2,0.03,valid,all,120,3
+B,v2,0.03,test,quiet,90,0
+B,v2,0.03,test,busy_low,26,0
+B,v2,0.03,test,busy_mid,34,2
+B,v2,0.03,test,busy_high,25,3
+B,v2,0.03,test,busy_short,5,0
+B,v2,0.03,test,all,180,5
+B,v2,0.03,valid+test,quiet,90,0
+B,v2,0.03,valid+test,busy_low,58,0
+B,v2,0.03,valid+test,busy_mid,77,3
+B,v2,0.03,valid+test,busy_high,53,5
+B,v2,0.03,valid+test,busy_short,22,0
+B,v2,0.03,valid+test,all,300,8
+B,v2,0.05,valid,quiet,0,0
+B,v2,0.05,valid,busy_low,32,0
+B,v2,0.05,valid,busy_mid,43,2
+B,v2,0.05,valid,busy_high,28,4
+B,v2,0.05,valid,busy_short,17,0
+B,v2,0.05,valid,all,120,6
+B,v2,0.05,test,quiet,90,0
+B,v2,0.05,test,busy_low,26,0
+B,v2,0.05,test,busy_mid,34,2
+B,v2,0.05,test,busy_high,25,5
+B,v2,0.05,test,busy_short,5,0
+B,v2,0.05,test,all,180,7
+B,v2,0.05,valid+test,quiet,90,0
+B,v2,0.05,valid+test,busy_low,58,0
+B,v2,0.05,valid+test,busy_mid,77,4
+B,v2,0.05,valid+test,busy_high,53,9
+B,v2,0.05,valid+test,busy_short,22,0
+B,v2,0.05,valid+test,all,300,13
+B,v2+R1,0.01,valid,quiet,0,0
+B,v2+R1,0.01,valid,busy_low,32,0
+B,v2+R1,0.01,valid,busy_mid,43,0
+B,v2+R1,0.01,valid,busy_high,28,1
+B,v2+R1,0.01,valid,busy_short,17,0
+B,v2+R1,0.01,valid,all,120,1
+B,v2+R1,0.01,test,quiet,90,0
+B,v2+R1,0.01,test,busy_low,26,0
+B,v2+R1,0.01,test,busy_mid,34,1
+B,v2+R1,0.01,test,busy_high,25,2
+B,v2+R1,0.01,test,busy_short,5,0
+B,v2+R1,0.01,test,all,180,3
+B,v2+R1,0.01,valid+test,quiet,90,0
+B,v2+R1,0.01,valid+test,busy_low,58,0
+B,v2+R1,0.01,valid+test,busy_mid,77,1
+B,v2+R1,0.01,valid+test,busy_high,53,3
+B,v2+R1,0.01,valid+test,busy_short,22,0
+B,v2+R1,0.01,valid+test,all,300,4
+B,v2+R1,0.03,valid,quiet,0,0
+B,v2+R1,0.03,valid,busy_low,32,1
+B,v2+R1,0.03,valid,busy_mid,43,1
+B,v2+R1,0.03,valid,busy_high,28,2
+B,v2+R1,0.03,valid,busy_short,17,0
+B,v2+R1,0.03,valid,all,120,4
+B,v2+R1,0.03,test,quiet,90,0
+B,v2+R1,0.03,test,busy_low,26,1
+B,v2+R1,0.03,test,busy_mid,34,3
+B,v2+R1,0.03,test,busy_high,25,3
+B,v2+R1,0.03,test,busy_short,5,0
+B,v2+R1,0.03,test,all,180,7
+B,v2+R1,0.03,valid+test,quiet,90,0
+B,v2+R1,0.03,valid+test,busy_low,58,2
+B,v2+R1,0.03,valid+test,busy_mid,77,4
+B,v2+R1,0.03,valid+test,busy_high,53,5
+B,v2+R1,0.03,valid+test,busy_short,22,0
+B,v2+R1,0.03,valid+test,all,300,11
+B,v2+R1,0.05,valid,quiet,0,0
+B,v2+R1,0.05,valid,busy_low,32,1
+B,v2+R1,0.05,valid,busy_mid,43,2
+B,v2+R1,0.05,valid,busy_high,28,4
+B,v2+R1,0.05,valid,busy_short,17,0
+B,v2+R1,0.05,valid,all,120,7
+B,v2+R1,0.05,test,quiet,90,0
+B,v2+R1,0.05,test,busy_low,26,2
+B,v2+R1,0.05,test,busy_mid,34,3
+B,v2+R1,0.05,test,busy_high,25,5
+B,v2+R1,0.05,test,busy_short,5,0
+B,v2+R1,0.05,test,all,180,10
+B,v2+R1,0.05,valid+test,quiet,90,0
+B,v2+R1,0.05,valid+test,busy_low,58,3
+B,v2+R1,0.05,valid+test,busy_mid,77,5
+B,v2+R1,0.05,valid+test,busy_high,53,9
+B,v2+R1,0.05,valid+test,busy_short,22,0
+B,v2+R1,0.05,valid+test,all,300,17
+B,v2+R1+R2,0.01,valid,quiet,0,0
+B,v2+R1+R2,0.01,valid,busy_low,32,0
+B,v2+R1+R2,0.01,valid,busy_mid,43,0
+B,v2+R1+R2,0.01,valid,busy_high,28,1
+B,v2+R1+R2,0.01,valid,busy_short,17,0
+B,v2+R1+R2,0.01,valid,all,120,1
+B,v2+R1+R2,0.01,test,quiet,90,0
+B,v2+R1+R2,0.01,test,busy_low,26,0
+B,v2+R1+R2,0.01,test,busy_mid,34,0
+B,v2+R1+R2,0.01,test,busy_high,25,0
+B,v2+R1+R2,0.01,test,busy_short,5,0
+B,v2+R1+R2,0.01,test,all,180,0
+B,v2+R1+R2,0.01,valid+test,quiet,90,0
+B,v2+R1+R2,0.01,valid+test,busy_low,58,0
+B,v2+R1+R2,0.01,valid+test,busy_mid,77,0
+B,v2+R1+R2,0.01,valid+test,busy_high,53,1
+B,v2+R1+R2,0.01,valid+test,busy_short,22,0
+B,v2+R1+R2,0.01,valid+test,all,300,1
+B,v2+R1+R2,0.03,valid,quiet,0,0
+B,v2+R1+R2,0.03,valid,busy_low,32,0
+B,v2+R1+R2,0.03,valid,busy_mid,43,0
+B,v2+R1+R2,0.03,valid,busy_high,28,1
+B,v2+R1+R2,0.03,valid,busy_short,17,0
+B,v2+R1+R2,0.03,valid,all,120,1
+B,v2+R1+R2,0.03,test,quiet,90,0
+B,v2+R1+R2,0.03,test,busy_low,26,0
+B,v2+R1+R2,0.03,test,busy_mid,34,1
+B,v2+R1+R2,0.03,test,busy_high,25,0
+B,v2+R1+R2,0.03,test,busy_short,5,0
+B,v2+R1+R2,0.03,test,all,180,1
+B,v2+R1+R2,0.03,valid+test,quiet,90,0
+B,v2+R1+R2,0.03,valid+test,busy_low,58,0
+B,v2+R1+R2,0.03,valid+test,busy_mid,77,1
+B,v2+R1+R2,0.03,valid+test,busy_high,53,1
+B,v2+R1+R2,0.03,valid+test,busy_short,22,0
+B,v2+R1+R2,0.03,valid+test,all,300,2
+B,v2+R1+R2,0.05,valid,quiet,0,0
+B,v2+R1+R2,0.05,valid,busy_low,32,0
+B,v2+R1+R2,0.05,valid,busy_mid,43,1
+B,v2+R1+R2,0.05,valid,busy_high,28,1
+B,v2+R1+R2,0.05,valid,busy_short,17,0
+B,v2+R1+R2,0.05,valid,all,120,2
+B,v2+R1+R2,0.05,test,quiet,90,0
+B,v2+R1+R2,0.05,test,busy_low,26,1
+B,v2+R1+R2,0.05,test,busy_mid,34,1
+B,v2+R1+R2,0.05,test,busy_high,25,0
+B,v2+R1+R2,0.05,test,busy_short,5,0
+B,v2+R1+R2,0.05,test,all,180,2
+B,v2+R1+R2,0.05,valid+test,quiet,90,0
+B,v2+R1+R2,0.05,valid+test,busy_low,58,1
+B,v2+R1+R2,0.05,valid+test,busy_mid,77,2
+B,v2+R1+R2,0.05,valid+test,busy_high,53,1
+B,v2+R1+R2,0.05,valid+test,busy_short,22,0
+B,v2+R1+R2,0.05,valid+test,all,300,4
+B,mlp_ae5,0.01,valid,quiet,0,0
+B,mlp_ae5,0.01,valid,busy_low,32,0
+B,mlp_ae5,0.01,valid,busy_mid,43,1
+B,mlp_ae5,0.01,valid,busy_high,28,0
+B,mlp_ae5,0.01,valid,busy_short,17,0
+B,mlp_ae5,0.01,valid,all,120,1
+B,mlp_ae5,0.01,test,quiet,90,0
+B,mlp_ae5,0.01,test,busy_low,26,0
+B,mlp_ae5,0.01,test,busy_mid,34,1
+B,mlp_ae5,0.01,test,busy_high,25,0
+B,mlp_ae5,0.01,test,busy_short,5,0
+B,mlp_ae5,0.01,test,all,180,1
+B,mlp_ae5,0.01,valid+test,quiet,90,0
+B,mlp_ae5,0.01,valid+test,busy_low,58,0
+B,mlp_ae5,0.01,valid+test,busy_mid,77,2
+B,mlp_ae5,0.01,valid+test,busy_high,53,0
+B,mlp_ae5,0.01,valid+test,busy_short,22,0
+B,mlp_ae5,0.01,valid+test,all,300,2
+B,mlp_ae5,0.03,valid,quiet,0,0
+B,mlp_ae5,0.03,valid,busy_low,32,0
+B,mlp_ae5,0.03,valid,busy_mid,43,2
+B,mlp_ae5,0.03,valid,busy_high,28,1
+B,mlp_ae5,0.03,valid,busy_short,17,0
+B,mlp_ae5,0.03,valid,all,120,3
+B,mlp_ae5,0.03,test,quiet,90,0
+B,mlp_ae5,0.03,test,busy_low,26,0
+B,mlp_ae5,0.03,test,busy_mid,34,2
+B,mlp_ae5,0.03,test,busy_high,25,3
+B,mlp_ae5,0.03,test,busy_short,5,0
+B,mlp_ae5,0.03,test,all,180,5
+B,mlp_ae5,0.03,valid+test,quiet,90,0
+B,mlp_ae5,0.03,valid+test,busy_low,58,0
+B,mlp_ae5,0.03,valid+test,busy_mid,77,4
+B,mlp_ae5,0.03,valid+test,busy_high,53,4
+B,mlp_ae5,0.03,valid+test,busy_short,22,0
+B,mlp_ae5,0.03,valid+test,all,300,8
+B,mlp_ae5,0.05,valid,quiet,0,0
+B,mlp_ae5,0.05,valid,busy_low,32,0
+B,mlp_ae5,0.05,valid,busy_mid,43,3
+B,mlp_ae5,0.05,valid,busy_high,28,3
+B,mlp_ae5,0.05,valid,busy_short,17,0
+B,mlp_ae5,0.05,valid,all,120,6
+B,mlp_ae5,0.05,test,quiet,90,0
+B,mlp_ae5,0.05,test,busy_low,26,0
+B,mlp_ae5,0.05,test,busy_mid,34,3
+B,mlp_ae5,0.05,test,busy_high,25,3
+B,mlp_ae5,0.05,test,busy_short,5,0
+B,mlp_ae5,0.05,test,all,180,6
+B,mlp_ae5,0.05,valid+test,quiet,90,0
+B,mlp_ae5,0.05,valid+test,busy_low,58,0
+B,mlp_ae5,0.05,valid+test,busy_mid,77,6
+B,mlp_ae5,0.05,valid+test,busy_high,53,6
+B,mlp_ae5,0.05,valid+test,busy_short,22,0
+B,mlp_ae5,0.05,valid+test,all,300,12
+B,lstm20(행 표),0.01,valid,quiet,0,0
+B,lstm20(행 표),0.01,valid,busy_low,32,0
+B,lstm20(행 표),0.01,valid,busy_mid,43,1
+B,lstm20(행 표),0.01,valid,busy_high,28,0
+B,lstm20(행 표),0.01,valid,busy_short,17,0
+B,lstm20(행 표),0.01,valid,all,120,1
+B,lstm20(행 표),0.01,test,quiet,90,0
+B,lstm20(행 표),0.01,test,busy_low,26,0
+B,lstm20(행 표),0.01,test,busy_mid,34,0
+B,lstm20(행 표),0.01,test,busy_high,25,0
+B,lstm20(행 표),0.01,test,busy_short,5,0
+B,lstm20(행 표),0.01,test,all,180,0
+B,lstm20(행 표),0.01,valid+test,quiet,90,0
+B,lstm20(행 표),0.01,valid+test,busy_low,58,0
+B,lstm20(행 표),0.01,valid+test,busy_mid,77,1
+B,lstm20(행 표),0.01,valid+test,busy_high,53,0
+B,lstm20(행 표),0.01,valid+test,busy_short,22,0
+B,lstm20(행 표),0.01,valid+test,all,300,1
+B,lstm20(행 표),0.03,valid,quiet,0,0
+B,lstm20(행 표),0.03,valid,busy_low,32,0
+B,lstm20(행 표),0.03,valid,busy_mid,43,3
+B,lstm20(행 표),0.03,valid,busy_high,28,0
+B,lstm20(행 표),0.03,valid,busy_short,17,0
+B,lstm20(행 표),0.03,valid,all,120,3
+B,lstm20(행 표),0.03,test,quiet,90,0
+B,lstm20(행 표),0.03,test,busy_low,26,0
+B,lstm20(행 표),0.03,test,busy_mid,34,0
+B,lstm20(행 표),0.03,test,busy_high,25,0
+B,lstm20(행 표),0.03,test,busy_short,5,0
+B,lstm20(행 표),0.03,test,all,180,0
+B,lstm20(행 표),0.03,valid+test,quiet,90,0
+B,lstm20(행 표),0.03,valid+test,busy_low,58,0
+B,lstm20(행 표),0.03,valid+test,busy_mid,77,3
+B,lstm20(행 표),0.03,valid+test,busy_high,53,0
+B,lstm20(행 표),0.03,valid+test,busy_short,22,0
+B,lstm20(행 표),0.03,valid+test,all,300,3
+B,lstm20(행 표),0.05,valid,quiet,0,0
+B,lstm20(행 표),0.05,valid,busy_low,32,0
+B,lstm20(행 표),0.05,valid,busy_mid,43,6
+B,lstm20(행 표),0.05,valid,busy_high,28,0
+B,lstm20(행 표),0.05,valid,busy_short,17,0
+B,lstm20(행 표),0.05,valid,all,120,6
+B,lstm20(행 표),0.05,test,quiet,90,0
+B,lstm20(행 표),0.05,test,busy_low,26,0
+B,lstm20(행 표),0.05,test,busy_mid,34,1
+B,lstm20(행 표),0.05,test,busy_high,25,3
+B,lstm20(행 표),0.05,test,busy_short,5,0
+B,lstm20(행 표),0.05,test,all,180,4
+B,lstm20(행 표),0.05,valid+test,quiet,90,0
+B,lstm20(행 표),0.05,valid+test,busy_low,58,0
+B,lstm20(행 표),0.05,valid+test,busy_mid,77,7
+B,lstm20(행 표),0.05,valid+test,busy_high,53,3
+B,lstm20(행 표),0.05,valid+test,busy_short,22,0
+B,lstm20(행 표),0.05,valid+test,all,300,10

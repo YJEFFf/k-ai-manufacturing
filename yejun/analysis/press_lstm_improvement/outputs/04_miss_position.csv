@@ -1,0 +1,201 @@
+split,model,part,pos_bin,rows,missed
+A,L:e345,valid,0,10,5
+A,L:e345,valid,1,10,4
+A,L:e345,valid,2~7,51,7
+A,L:e345,valid,8~19,82,0
+A,L:e345,valid,20+,123,0
+A,L:e345,test,0,11,6
+A,L:e345,test,1,11,5
+A,L:e345,test,2~7,62,5
+A,L:e345,test,8~19,100,0
+A,L:e345,test,20+,140,0
+A,L+R1:e345,valid,0,10,0
+A,L+R1:e345,valid,1,10,0
+A,L+R1:e345,valid,2~7,51,0
+A,L+R1:e345,valid,8~19,82,0
+A,L+R1:e345,valid,20+,123,0
+A,L+R1:e345,test,0,11,0
+A,L+R1:e345,test,1,11,0
+A,L+R1:e345,test,2~7,62,0
+A,L+R1:e345,test,8~19,100,0
+A,L+R1:e345,test,20+,140,0
+A,L:e012,valid,0,10,4
+A,L:e012,valid,1,10,4
+A,L:e012,valid,2~7,51,4
+A,L:e012,valid,8~19,82,0
+A,L:e012,valid,20+,123,0
+A,L:e012,test,0,11,6
+A,L:e012,test,1,11,5
+A,L:e012,test,2~7,62,3
+A,L:e012,test,8~19,100,0
+A,L:e012,test,20+,140,0
+A,L+R1:e012,valid,0,10,0
+A,L+R1:e012,valid,1,10,0
+A,L+R1:e012,valid,2~7,51,0
+A,L+R1:e012,valid,8~19,82,0
+A,L+R1:e012,valid,20+,123,0
+A,L+R1:e012,test,0,11,0
+A,L+R1:e012,test,1,11,0
+A,L+R1:e012,test,2~7,62,0
+A,L+R1:e012,test,8~19,100,0
+A,L+R1:e012,test,20+,140,0
+A,start:e012,valid,0,10,10
+A,start:e012,valid,1,10,10
+A,start:e012,valid,2~7,51,51
+A,start:e012,valid,8~19,82,78
+A,start:e012,valid,20+,123,59
+A,start:e012,test,0,11,11
+A,start:e012,test,1,11,11
+A,start:e012,test,2~7,62,62
+A,start:e012,test,8~19,100,97
+A,start:e012,test,20+,140,82
+A,v2,valid,0,10,6
+A,v2,valid,1,10,6
+A,v2,valid,2~7,51,10
+A,v2,valid,8~19,82,0
+A,v2,valid,20+,123,0
+A,v2,test,0,11,7
+A,v2,test,1,11,7
+A,v2,test,2~7,62,6
+A,v2,test,8~19,100,1
+A,v2,test,20+,140,1
+A,v2+R1,valid,0,10,1
+A,v2+R1,valid,1,10,0
+A,v2+R1,valid,2~7,51,0
+A,v2+R1,valid,8~19,82,0
+A,v2+R1,valid,20+,123,0
+A,v2+R1,test,0,11,0
+A,v2+R1,test,1,11,0
+A,v2+R1,test,2~7,62,0
+A,v2+R1,test,8~19,100,0
+A,v2+R1,test,20+,140,0
+A,v2+R1+R2,valid,0,10,1
+A,v2+R1+R2,valid,1,10,0
+A,v2+R1+R2,valid,2~7,51,0
+A,v2+R1+R2,valid,8~19,82,0
+A,v2+R1+R2,valid,20+,123,0
+A,v2+R1+R2,test,0,11,0
+A,v2+R1+R2,test,1,11,0
+A,v2+R1+R2,test,2~7,62,0
+A,v2+R1+R2,test,8~19,100,0
+A,v2+R1+R2,test,20+,140,0
+A,mlp_ae5,valid,0,10,10
+A,mlp_ae5,valid,1,10,10
+A,mlp_ae5,valid,2~7,51,33
+A,mlp_ae5,valid,8~19,82,30
+A,mlp_ae5,valid,20+,123,61
+A,mlp_ae5,test,0,11,11
+A,mlp_ae5,test,1,11,11
+A,mlp_ae5,test,2~7,62,43
+A,mlp_ae5,test,8~19,100,57
+A,mlp_ae5,test,20+,140,94
+A,lstm20(행 표),valid,0,10,10
+A,lstm20(행 표),valid,1,10,10
+A,lstm20(행 표),valid,2~7,51,51
+A,lstm20(행 표),valid,8~19,82,79
+A,lstm20(행 표),valid,20+,123,65
+A,lstm20(행 표),test,0,11,11
+A,lstm20(행 표),test,1,11,11
+A,lstm20(행 표),test,2~7,62,62
+A,lstm20(행 표),test,8~19,100,98
+A,lstm20(행 표),test,20+,140,88
+B,L:e345,valid,0,10,5
+B,L:e345,valid,1,10,4
+B,L:e345,valid,2~7,51,5
+B,L:e345,valid,8~19,82,0
+B,L:e345,valid,20+,123,0
+B,L:e345,test,0,11,6
+B,L:e345,test,1,11,5
+B,L:e345,test,2~7,62,4
+B,L:e345,test,8~19,100,0
+B,L:e345,test,20+,140,0
+B,L+R1:e345,valid,0,10,0
+B,L+R1:e345,valid,1,10,0
+B,L+R1:e345,valid,2~7,51,0
+B,L+R1:e345,valid,8~19,82,0
+B,L+R1:e345,valid,20+,123,0
+B,L+R1:e345,test,0,11,0
+B,L+R1:e345,test,1,11,0
+B,L+R1:e345,test,2~7,62,0
+B,L+R1:e345,test,8~19,100,0
+B,L+R1:e345,test,20+,140,0
+B,L:e012,valid,0,10,5
+B,L:e012,valid,1,10,4
+B,L:e012,valid,2~7,51,5
+B,L:e012,valid,8~19,82,0
+B,L:e012,valid,20+,123,0
+B,L:e012,test,0,11,6
+B,L:e012,test,1,11,5
+B,L:e012,test,2~7,62,5
+B,L:e012,test,8~19,100,0
+B,L:e012,test,20+,140,0
+B,L+R1:e012,valid,0,10,0
+B,L+R1:e012,valid,1,10,0
+B,L+R1:e012,valid,2~7,51,0
+B,L+R1:e012,valid,8~19,82,0
+B,L+R1:e012,valid,20+,123,0
+B,L+R1:e012,test,0,11,0
+B,L+R1:e012,test,1,11,0
+B,L+R1:e012,test,2~7,62,0
+B,L+R1:e012,test,8~19,100,0
+B,L+R1:e012,test,20+,140,0
+B,start:e012,valid,0,10,10
+B,start:e012,valid,1,10,10
+B,start:e012,valid,2~7,51,51
+B,start:e012,valid,8~19,82,78
+B,start:e012,valid,20+,123,72
+B,start:e012,test,0,11,11
+B,start:e012,test,1,11,11
+B,start:e012,test,2~7,62,62
+B,start:e012,test,8~19,100,99
+B,start:e012,test,20+,140,97
+B,v2,valid,0,10,4
+B,v2,valid,1,10,4
+B,v2,valid,2~7,51,7
+B,v2,valid,8~19,82,0
+B,v2,valid,20+,123,0
+B,v2,test,0,11,6
+B,v2,test,1,11,6
+B,v2,test,2~7,62,4
+B,v2,test,8~19,100,0
+B,v2,test,20+,140,0
+B,v2+R1,valid,0,10,0
+B,v2+R1,valid,1,10,0
+B,v2+R1,valid,2~7,51,0
+B,v2+R1,valid,8~19,82,0
+B,v2+R1,valid,20+,123,0
+B,v2+R1,test,0,11,0
+B,v2+R1,test,1,11,0
+B,v2+R1,test,2~7,62,0
+B,v2+R1,test,8~19,100,0
+B,v2+R1,test,20+,140,0
+B,v2+R1+R2,valid,0,10,0
+B,v2+R1+R2,valid,1,10,0
+B,v2+R1+R2,valid,2~7,51,0
+B,v2+R1+R2,valid,8~19,82,0
+B,v2+R1+R2,valid,20+,123,0
+B,v2+R1+R2,test,0,11,0
+B,v2+R1+R2,test,1,11,0
+B,v2+R1+R2,test,2~7,62,0
+B,v2+R1+R2,test,8~19,100,0
+B,v2+R1+R2,test,20+,140,0
+B,mlp_ae5,valid,0,10,10
+B,mlp_ae5,valid,1,10,10
+B,mlp_ae5,valid,2~7,51,33
+B,mlp_ae5,valid,8~19,82,30
+B,mlp_ae5,valid,20+,123,61
+B,mlp_ae5,test,0,11,11
+B,mlp_ae5,test,1,11,11
+B,mlp_ae5,test,2~7,62,43
+B,mlp_ae5,test,8~19,100,57
+B,mlp_ae5,test,20+,140,94
+B,lstm20(행 표),valid,0,10,10
+B,lstm20(행 표),valid,1,10,10
+B,lstm20(행 표),valid,2~7,51,51
+B,lstm20(행 표),valid,8~19,82,78
+B,lstm20(행 표),valid,20+,123,72
+B,lstm20(행 표),test,0,11,11
+B,lstm20(행 표),test,1,11,11
+B,lstm20(행 표),test,2~7,62,62
+B,lstm20(행 표),test,8~19,100,99
+B,lstm20(행 표),test,20+,140,102

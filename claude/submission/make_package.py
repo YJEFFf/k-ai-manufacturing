@@ -22,7 +22,7 @@ NAME = "북적북적_code"
 # 산출물·캐시·웹·문서·시험 폴더는 넣지 않는다(실행하면 다시 생긴다)
 SKIP_DIRS = {"__pycache__", ".pytest_cache", "outputs", "cache", "web", "docs", "tests", ".omc"}
 # 실행에 안 쓰는 팀 내부 작업 지시 문서(보고서 수치와 다른 옛 수치가 적혀 있어 심사에서 혼동을 준다)
-SKIP_FILES = {"요청사항_준용.md"}
+SKIP_FILES = {"요청사항_준용.md", "STORYLINE.md"}   # STORYLINE.md: 팀 내부 보고서 구성 협의 문서
 # 팀원 v3 코드(core.py)가 import할 때 읽는 protocol.json이 있는 폴더
 MASTER_PLAN = Path("plans") / "press_master_2026-10-03"
 
@@ -147,6 +147,9 @@ def main():
     y = a.repo / "yejun"
     for rel in ("press_guard", "analysis/press_master_validation_2026-10-03", "analysis/press_evidence", MASTER_PLAN):
         copy_tree(y / rel, stage / "yejun" / rel)
+    # 보완 LSTM 실험(보고서 2.4절 †, run_all.py 밖): 코드와 결과 표(outputs)를 넣고 가중치 캐시(cache)는 뺀다
+    copy_tree(y / "analysis" / "press_lstm_improvement", stage / "yejun" / "analysis" / "press_lstm_improvement",
+              skip_dirs=SKIP_DIRS - {"outputs"})
     # 원본 데이터는 run_all.py가 해시 확인 뒤 이 폴더에 다시 배치하므로 빼 둔다
     copy_tree(y / "press_submission", stage / "yejun" / "press_submission", skip_dirs=SKIP_DIRS | {"data"})
     # 원본 데이터

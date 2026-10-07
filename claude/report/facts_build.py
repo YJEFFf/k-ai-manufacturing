@@ -425,6 +425,18 @@ EXT = [
     ("v2.jitter_A_pct", 7.7, "7.7", "06_summary jitter 0.1 A v2 0.0771"),
     ("v2.jitter_B_pct", 31.3, "31.3", "06_summary jitter 0.1 B v2 0.3131"),
     ("lstm.env_torch", 2.5, "2.5", "LSTM README: torch 2.5.1"),
+    ("lstmR.valid", 0.999, "0.999", "07_summary L+R1+R2b(넓힌 R2) α1% valid 평균"),
+    # 최종 심층 평가 MAJOR 반영(2026-10-07): scratchpad major_numbers.py로 계산, 원자료 경로는 각 항목
+    ("maxzR.valid", 0.9973, "0.997", "evalcore로 max|z|+R1+R2(R2 = prefix R² 정상이면 보류) α1% valid A 0.9964·B 0.9982 평균"),
+    ("loo.others", 119, "119", "valid 120기록 LOO: 자기 기록을 뺀 119기록(01_scores calibrate)"),
+    ("jitter.recA", 96, "96", "04_validation JITTER: 17행 이상 정상 test 기록 A 96개 × 5회 = 480"),
+    ("jitter.recB", 145, "145", "04_validation JITTER: B 145개 × 5회 = 725"),
+    ("prob.auroc_A", 0.9767, "0.977", "test_predictions_A.csv v2_prob 행 AUROC"),
+    ("prob.auroc_B", 0.9794, "0.979", "test_predictions_B.csv v2_prob 행 AUROC"),
+    ("prob.ece_A", 0.0071, "0.007", "test_predictions_A.csv v2_prob_fileprior ECE(구간 0·0.01·0.1·0.5·0.9·1)"),
+    ("prob.ece_B", 0.0064, "0.006", "test_predictions_B.csv v2_prob_fileprior ECE"),
+    ("gap.median_s", 4.22, "4.2", "press_data_normal.csv 기록 사이 공백(>0.15s) 중앙값, 598개"),
+    ("gap.p90_s", 8.4, "8.4", "같은 공백 90% 분위"),
 ]
 for fid, v, shown, src in EXT:
     add(fid, v, shown, "report/research", src)
