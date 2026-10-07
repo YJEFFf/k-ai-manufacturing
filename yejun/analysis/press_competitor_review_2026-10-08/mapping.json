@@ -1,0 +1,185 @@
+{
+ "E01": {
+  "source": "joonookwak/KAMP_ai",
+  "default_branch": "main",
+  "extra_branches": [
+   {
+    "branch": "analysis/gmm-current-audit",
+    "ahead": 6
+   }
+  ],
+  "commits_default": "1"
+ },
+ "E02": {
+  "source": "ChoeHyeongSoo/KAMP-Manufacturing-AI",
+  "default_branch": "main",
+  "extra_branches": [
+   {
+    "branch": "feat/JIW-model-guidebook-lstm-ae",
+    "ahead": 1
+   },
+   {
+    "branch": "revert-27-feat/CHS-error-analysis-refresh",
+    "ahead": 1
+   }
+  ],
+  "commits_default": "164"
+ },
+ "E03": {
+  "source": "yerinnn24/kamp",
+  "default_branch": "main",
+  "extra_branches": [],
+  "commits_default": "1"
+ },
+ "E04": {
+  "source": "cgyumun-hash/manufacturing",
+  "default_branch": "main",
+  "extra_branches": [
+   {
+    "branch": "figures/update-visualizations",
+    "ahead": 1
+   }
+  ],
+  "commits_default": "7"
+ },
+ "E05": {
+  "source": "OURS: 준용 b05570e report PDF + submission zip"
+ },
+ "E06": {
+  "source": "goddesse12-coder/pump-ai-team",
+  "default_branch": "main",
+  "extra_branches": [],
+  "commits_default": "17"
+ },
+ "E07": {
+  "source": "kwondonghoon20-dotcom/press-pump-anomaly-dashboard",
+  "default_branch": "master",
+  "extra_branches": [],
+  "commits_default": "2"
+ },
+ "E08": {
+  "source": "sunwoocodes/KAMPact",
+  "default_branch": "main",
+  "extra_branches": [],
+  "commits_default": "30"
+ },
+ "E09": {
+  "source": "Hankookiniayo/kamp2026",
+  "default_branch": "main",
+  "extra_branches": [],
+  "commits_default": "1"
+ },
+ "E10": {
+  "source": "naky1750/kamp-",
+  "default_branch": "main",
+  "extra_branches": [],
+  "commits_default": "7"
+ },
+ "E11": {
+  "source": "yoni0345678910/kamp-press-anomaly-detection",
+  "default_branch": "main",
+  "extra_branches": [],
+  "commits_default": "2"
+ },
+ "E12": {
+  "source": "choi-doongyi/Kamp_Taeseong",
+  "default_branch": "main",
+  "extra_branches": [],
+  "commits_default": "2"
+ },
+ "E13": {
+  "source": "MinSeok-Good/press-equipment-anomaly-detection",
+  "default_branch": "main",
+  "extra_branches": [],
+  "commits_default": "38"
+ },
+ "E14": {
+  "source": "zZ-SMJ-Zz/KAMP",
+  "default_branch": "main",
+  "extra_branches": [],
+  "commits_default": "1"
+ },
+ "E15": {
+  "source": "Yellow-Mongoose/phm-fine-blanking-press",
+  "default_branch": "main",
+  "extra_branches": [
+   {
+    "branch": "analysis/ujin-data-analysis",
+    "ahead": 4
+   },
+   {
+    "branch": "experiment/normalization-relative-signals",
+    "ahead": 5
+   },
+   {
+    "branch": "experiment/phm_base",
+    "ahead": 6
+   },
+   {
+    "branch": "experiment/sensor-fusion",
+    "ahead": 2
+   },
+   {
+    "branch": "experiment/window-size-comparison",
+    "ahead": 2
+   },
+   {
+    "branch": "guide/dasol_1",
+    "ahead": 1
+   },
+   {
+    "branch": "guide/ujin-reproduction",
+    "ahead": 1
+   },
+   {
+    "branch": "report/hypothesis-validation",
+    "ahead": 3
+   }
+  ],
+  "commits_default": "1"
+ },
+ "E16": {
+  "source": "ekhwn0430/KAMP",
+  "default_branch": "feature/Archive",
+  "extra_branches": [
+   {
+    "branch": "feature/preprocessing-pipeline",
+    "ahead": 12
+   }
+  ],
+  "commits_default": "18"
+ },
+ "E17": {
+  "source": "hdewcs-source/press-pump-anomaly-eprocess",
+  "default_branch": "main",
+  "extra_branches": [],
+  "commits_default": "2"
+ },
+ "E18": {
+  "source": "wodtod68-sys/press-machine-anomaly-detection-NBM",
+  "default_branch": "main",
+  "extra_branches": [],
+  "commits_default": "2"
+ },
+ "E19": {
+  "source": "chlanstjr0301/workspace---claude",
+  "default_branch": "main",
+  "extra_branches": [
+   {
+    "branch": "archive/pre-submission-cleanup",
+    "ahead": 13
+   },
+   {
+    "branch": "claude/hopeful-allen-vp7dcy",
+    "ahead": 19
+   }
+  ],
+  "commits_default": "26"
+ },
+ "E20": {
+  "source": "kimjaehyeonC/Kamp_AI",
+  "default_branch": "main",
+  "extra_branches": [],
+  "commits_default": "16"
+ }
+}

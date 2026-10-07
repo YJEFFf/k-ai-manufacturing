@@ -1,0 +1,10 @@
+{
+  "baseline_commit": "c898be297416587f0ef2f907177cebafcf7e6de2",
+  "protected_files": {
+    "claude/report/final_v5.md": "77eb87b789646063f8885024bf55328d469fc6489eb2cf00fb96f32a50ca1c11",
+    "claude/report/결과보고서_북적북적.pdf": "92d528d4074629675467362717667e545daf7ece91199b1b664525cb8a892494",
+    "claude/report/결과보고서_북적북적.hwpx": "221b237b6f57f45f99782fa5324c6b2bd7662eeb26f7e726d90d5513811db139",
+    "claude/submission/북적북적_code.zip": "3680a315449d482a35b0a4fb4835a02ca8a6ce6de709790667918429a22437a4"
+  },
+  "report_copy_dir": "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08"
+}
