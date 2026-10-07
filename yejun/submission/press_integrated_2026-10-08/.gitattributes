@@ -1,0 +1,2 @@
+# Evidence includes byte hashes; preserve JSON bytes across platform checkouts.
+*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

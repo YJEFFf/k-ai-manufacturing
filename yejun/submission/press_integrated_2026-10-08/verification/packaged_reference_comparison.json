@@ -1,0 +1,76 @@
+{
+  "passed": true,
+  "selected": "V2+VD3@1",
+  "csv_checks": [
+    {
+      "file": "A_actual_metrics.csv",
+      "rows": 540,
+      "columns": 23,
+      "passed": true
+    },
+    {
+      "file": "A_injection.csv",
+      "rows": 5040,
+      "columns": 17,
+      "passed": true
+    },
+    {
+      "file": "A_stress.csv",
+      "rows": 3600,
+      "columns": 17,
+      "passed": true
+    },
+    {
+      "file": "actual_metrics.csv",
+      "rows": 1080,
+      "columns": 23,
+      "passed": true
+    },
+    {
+      "file": "B_actual_metrics.csv",
+      "rows": 540,
+      "columns": 23,
+      "passed": true
+    },
+    {
+      "file": "B_injection.csv",
+      "rows": 5040,
+      "columns": 17,
+      "passed": true
+    },
+    {
+      "file": "B_stress.csv",
+      "rows": 3600,
+      "columns": 17,
+      "passed": true
+    },
+    {
+      "file": "development_candidates.csv",
+      "rows": 60,
+      "columns": 13,
+      "passed": true
+    },
+    {
+      "file": "development_injection.csv",
+      "rows": 1680,
+      "columns": 17,
+      "passed": true
+    },
+    {
+      "file": "development_stress.csv",
+      "rows": 1200,
+      "columns": 13,
+      "passed": true
+    },
+    {
+      "file": "selected_vs_v2.csv",
+      "rows": 12,
+      "columns": 23,
+      "passed": true
+    }
+  ],
+  "retained_protocol_equal": true,
+  "rtol": 1e-09,
+  "atol": 1e-11,
+  "scope": "Independent regeneration of existing results; not a new independent failure dataset"
+}

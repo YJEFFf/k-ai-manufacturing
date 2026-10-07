@@ -1,0 +1,559 @@
+{
+  "archive_name": "북적북적_code_통합본.zip",
+  "archive_sha256": "7f7e7f27a159fe24e0085774e2b2dee9b185f529ef7be348d0aed72cba491c8b",
+  "interpreter": {
+    "version": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+    "executable": "C:\\Users\\junyj\\AppData\\Local\\Temp\\k-manufacturing-integrated-clean-py314\\Scripts\\python.exe",
+    "prefix": "C:\\Users\\junyj\\AppData\\Local\\Temp\\k-manufacturing-integrated-clean-py314",
+    "base_prefix": "C:\\Python314"
+  },
+  "installed_packages": [
+    "cloudpickle==3.1.2",
+    "colorama==0.4.6",
+    "contourpy==1.4.0",
+    "cycler==0.12.1",
+    "filelock==4.0.12",
+    "fonttools==4.66.1",
+    "formulaic==1.2.2",
+    "fsspec==2026.9.0",
+    "iniconfig==2.3.1",
+    "interface_meta==2.0.1",
+    "Jinja2==3.1.6",
+    "joblib==1.6.0",
+    "kiwisolver==1.5.1",
+    "MarkupSafe==3.0.4",
+    "matplotlib==3.11.2",
+    "mpmath==1.3.0",
+    "narwhals==2.26.0",
+    "networkx==3.7",
+    "numpy==2.5.3",
+    "packaging==26.3",
+    "pandas==3.0.6",
+    "patsy==1.0.3",
+    "pillow==12.3.0",
+    "pluggy==1.6.0",
+    "Pygments==2.21.0",
+    "pyparsing==3.3.3",
+    "pytest==9.1.1",
+    "python-dateutil==2.9.0.post0",
+    "scikit-learn==1.9.1",
+    "scipy==1.18.1",
+    "setuptools==84.0.0",
+    "six==1.17.0",
+    "statsmodels==0.15.0",
+    "sympy==1.14.0",
+    "threadpoolctl==3.7.0",
+    "torch==2.14.0",
+    "typing_extensions==4.16.0",
+    "tzdata==2026.5",
+    "wrapt==2.5.0"
+  ],
+  "pip_check": "No broken requirements found.",
+  "extracted_root": "C:\\Users\\junyj\\AppData\\Local\\Temp\\k-manufacturing-official-clean-20261008\\unpacked\\북적북적_code_통합본",
+  "python_workspace_access_guard_tested": true,
+  "workspace_guard_probe": "workspace read denied",
+  "child_process_guard_probe": "workspace read denied",
+  "isolation_scope": "Fresh venv, archive extracted outside source workspace, user site disabled, Python file-access audit guard inherited by child processes. Not an OS sandbox for native libraries or non-Python processes.",
+  "section": "official",
+  "command": [
+    "C:\\Users\\junyj\\AppData\\Local\\Temp\\k-manufacturing-integrated-clean-py314\\Scripts\\python.exe",
+    "C:\\Users\\junyj\\AppData\\Local\\Temp\\k-manufacturing-official-clean-20261008\\unpacked\\북적북적_code_통합본\\run_all.py",
+    "--section",
+    "official"
+  ],
+  "status": "passed",
+  "returncode": 0,
+  "seconds": 3709.66,
+  "run_log": "C:\\Users\\junyj\\AppData\\Local\\Temp\\k-manufacturing-official-clean-20261008\\full_run.log",
+  "run_summaries": {
+    "logs/integrated_run_summary.json": {
+      "section": "official",
+      "quick": false,
+      "verify_only": false,
+      "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+      "integrity": {
+        "passed": true,
+        "checked_files": 339,
+        "original_selection_lock_sha256": "20c992cd930c02c59f3ef4d3b7cccc1b15e2f3eda1fd78065fd06452a3c1ce2b",
+        "packaged_selection_lock_sha256": "67f6288f1b1f7e01b972ee6df9fa3e58243881e4df9f32c2b91078b7bddb8754",
+        "calculation_ast_equivalent": true
+      },
+      "steps": [
+        {
+          "name": "official",
+          "returncode": 0,
+          "seconds": 3707.869,
+          "log": "logs\\integrated_official.log"
+        }
+      ],
+      "passed": true
+    },
+    "logs/run_summary.json": {
+      "mode": "full",
+      "python": "3.14.7",
+      "steps": [
+        {
+          "name": "1_진단_기록특징",
+          "script": "code/press/cases/01_case_features.py",
+          "returncode": 0,
+          "seconds": 15.6
+        },
+        {
+          "name": "1_진단_보조수치",
+          "script": "code/press/cases/03_facts_extra.py",
+          "returncode": 0,
+          "seconds": 1.5
+        },
+        {
+          "name": "1_진단_겉보기주파수",
+          "script": "code/press/06_alias_frequency_audit.py",
+          "returncode": 0,
+          "seconds": 92.6
+        },
+        {
+          "name": "2_모델_학습과점수",
+          "script": "code/press/tvt/01_scores.py",
+          "returncode": 0,
+          "seconds": 545.4
+        },
+        {
+          "name": "2_모델_valid선택",
+          "script": "code/press/tvt/02_select_on_valid.py",
+          "returncode": 0,
+          "seconds": 3.4
+        },
+        {
+          "name": "2_모델_test채점",
+          "script": "code/press/tvt/03_score_test.py",
+          "returncode": 0,
+          "seconds": 6.4
+        },
+        {
+          "name": "2_모델_test예측파일",
+          "script": "code/press/tvt/05_test_predictions.py",
+          "returncode": 0,
+          "seconds": 1.3
+        },
+        {
+          "name": "2_모델_이상확률",
+          "script": "code/press/tvt/08_probability.py",
+          "returncode": 0,
+          "seconds": 2.8
+        },
+        {
+          "name": "3_검증_실험",
+          "script": "code/press/tvt/04_validation.py",
+          "returncode": 0,
+          "seconds": 1188.1
+        },
+        {
+          "name": "4_사후_신호물리",
+          "script": "code/press/domain/01_signal_physics.py",
+          "returncode": 0,
+          "seconds": 50.0
+        },
+        {
+          "name": "4_사후_사건추세",
+          "script": "code/press/domain/02_event_trend.py",
+          "returncode": 0,
+          "seconds": 11.7
+        },
+        {
+          "name": "4_사후_PCA관리도",
+          "script": "code/press/domain/03_mspc.py",
+          "returncode": 0,
+          "seconds": 21.6
+        },
+        {
+          "name": "4_사후_순차검출",
+          "script": "code/press/domain/04_sequential_uncertainty.py",
+          "returncode": 0,
+          "seconds": 7.4
+        },
+        {
+          "name": "4_사후_지도학습대조",
+          "script": "code/press/domain/05_supervised_confound.py",
+          "returncode": 0,
+          "seconds": 526.0
+        },
+        {
+          "name": "4_사후_운전상태",
+          "script": "code/press/domain/06_operating_regime.py",
+          "returncode": 0,
+          "seconds": 10.6
+        },
+        {
+          "name": "4_사후_이상양상",
+          "script": "code/press/domain/07_anomaly_patterns.py",
+          "returncode": 0,
+          "seconds": 1.0
+        },
+        {
+          "name": "4_사후_기록수F1",
+          "script": "code/press/tvt/06_record_count.py",
+          "returncode": 0,
+          "seconds": 2.7
+        },
+        {
+          "name": "4_사후_R1기준선",
+          "script": "code/press/tvt/07_r1_on_baselines.py",
+          "returncode": 0,
+          "seconds": 4.4
+        },
+        {
+          "name": "4_사후_성분절제",
+          "script": "code/press/tvt/09_component_ablation.py",
+          "returncode": 0,
+          "seconds": 321.8
+        },
+        {
+          "name": "4_사후_문턱무관비교",
+          "script": "code/press/tvt/10_threshold_free.py",
+          "returncode": 0,
+          "seconds": 76.4
+        },
+        {
+          "name": "4_사후_보조수치",
+          "script": "code/press/tvt/11_posthoc_numbers.py",
+          "returncode": 0,
+          "seconds": 6.1
+        },
+        {
+          "name": "4_사후_합성열화",
+          "script": "code/press/tvt/12_ramp_warning.py",
+          "returncode": 0,
+          "seconds": 129.0
+        },
+        {
+          "name": "4_사후_R2표본밖",
+          "script": "code/press/tvt/13_r2_oos_alpha.py",
+          "returncode": 0,
+          "seconds": 51.2
+        },
+        {
+          "name": "4_사후_베이스라인주입",
+          "script": "code/press/tvt/14_baseline_injection_ridge.py",
+          "returncode": 0,
+          "seconds": 567.6
+        },
+        {
+          "name": "4_사후_특징맞춤",
+          "script": "code/press/tvt/15_record_auroc_featbase.py",
+          "returncode": 0,
+          "seconds": 17.4
+        },
+        {
+          "name": "4_사후_흔들림병행",
+          "script": "code/press/tvt/16_jitter_ridge_combo.py",
+          "returncode": 0,
+          "seconds": 45.6
+        }
+      ],
+      "checks": [
+        {
+          "name": "기반 모델 v2 원래 평가 재현 F1 A",
+          "ok": true,
+          "got": "0.961938",
+          "expected": 0.9619377162629758,
+          "report": "(6장)"
+        },
+        {
+          "name": "기반 모델 v2 원래 평가 재현 F1 B",
+          "ok": true,
+          "got": "0.97099",
+          "expected": 0.9709897610921502,
+          "report": "(6장)"
+        },
+        {
+          "name": "test 실시간 행 F1 2단계 모델 v2+R1+R2 A",
+          "ok": true,
+          "got": "1",
+          "expected": 1.0,
+          "report": "(2.4절 표)"
+        },
+        {
+          "name": "test 실시간 행 F1 2단계 모델 v2+R1+R2 B",
+          "ok": true,
+          "got": "1",
+          "expected": 1.0,
+          "report": "(2.4절 표)"
+        },
+        {
+          "name": "test 실시간 행 F1 잠금 모델 v2+R1(공식 성능) A",
+          "ok": true,
+          "got": "1",
+          "expected": 1.0,
+          "report": "(2.4절 표·2.5절)"
+        },
+        {
+          "name": "test 실시간 행 F1 잠금 모델 v2+R1(공식 성능) B",
+          "ok": true,
+          "got": "0.995392",
+          "expected": 0.9953917050691244,
+          "report": "(2.4절 표·2.5절)"
+        },
+        {
+          "name": "test 실시간 행 F1 기반 모델 v2 A",
+          "ok": true,
+          "got": "0.964856",
+          "expected": 0.9648562300319489,
+          "report": "(2.4절 표)"
+        },
+        {
+          "name": "test 실시간 행 F1 기반 모델 v2 B",
+          "ok": true,
+          "got": "0.970079",
+          "expected": 0.9700787401574803,
+          "report": "(2.4절 표)"
+        },
+        {
+          "name": "test 실시간 행 F1 LSTM 오토인코더 A",
+          "ok": true,
+          "got": "0.289474",
+          "expected": 0.2894736842105263,
+          "report": "(2.4절 표, 학습 난수로 소폭 변동 가능)"
+        },
+        {
+          "name": "test 실시간 행 F1 LSTM 오토인코더 B",
+          "ok": true,
+          "got": "0.238482",
+          "expected": 0.23848238482384823,
+          "report": "(2.4절 표, 학습 난수로 소폭 변동 가능)"
+        },
+        {
+          "name": "제출 test 예측 파일 A(줄바꿈을 맞춘 바이트 동일)",
+          "ok": true,
+          "got": "aa0678320ed4",
+          "expected": "aa0678320ed4",
+          "report": "(제출물)"
+        },
+        {
+          "name": "제출 test 예측 파일 B(줄바꿈을 맞춘 바이트 동일)",
+          "ok": true,
+          "got": "5bd7ed92134a",
+          "expected": "5bd7ed92134a",
+          "report": "(제출물)"
+        },
+        {
+          "name": "형식 누수: 자릿수 규칙 행 F1(원본)",
+          "ok": true,
+          "got": "0.992",
+          "expected": 0.992,
+          "report": "(1.6절)"
+        },
+        {
+          "name": "검증 V1b: R2 진동 단독 주입 최대 손실(%p)",
+          "ok": true,
+          "got": "23.7",
+          "expected": 23.7,
+          "report": "(2.6절)"
+        },
+        {
+          "name": "정상 전류 겉보기 주파수 중앙값(Hz)",
+          "ok": true,
+          "got": "0.6",
+          "expected": 0.6,
+          "report": "(1.4절)"
+        },
+        {
+          "name": "순차 검출 비교표의 2단계 모델 test F1 B",
+          "ok": true,
+          "got": "1",
+          "expected": 1.0,
+          "report": "(2.5절)"
+        },
+        {
+          "name": "CUSUM(상태 유지) test F1 B",
+          "ok": true,
+          "got": "1",
+          "expected": 1.0,
+          "report": "(2.7절 표)"
+        },
+        {
+          "name": "분할 B 고부하 정상 오경보 기록 v2(α 5%)",
+          "ok": true,
+          "got": "9",
+          "expected": 9.0,
+          "report": "(3.2절 표)"
+        },
+        {
+          "name": "분할 B 고부하 정상 오경보 기록 v2+R2(α 5%)",
+          "ok": true,
+          "got": "1",
+          "expected": 1.0,
+          "report": "(3.2절 표)"
+        },
+        {
+          "name": "test 기록 수 F1 기반 모델 v2 B",
+          "ok": true,
+          "got": "0.88",
+          "expected": 0.88,
+          "report": "(2.4절 표 †)"
+        },
+        {
+          "name": "test 기록 수 F1 2단계 모델 v2+R1+R2 B",
+          "ok": true,
+          "got": "1",
+          "expected": 1.0,
+          "report": "(2.4절 표 †)"
+        },
+        {
+          "name": "이상 양상: 상·하부 진동 모두 큰 기록 수",
+          "ok": true,
+          "got": "9",
+          "expected": 9,
+          "report": "(4.2절)"
+        },
+        {
+          "name": "이상 확률 test Brier B(파일 비율 사전)",
+          "ok": true,
+          "got": "0.00380621",
+          "expected": 0.0038062105835938325,
+          "report": "(2.5절)"
+        },
+        {
+          "name": "IsolationForest+R1 test F1 B",
+          "ok": true,
+          "got": "1",
+          "expected": 1.0,
+          "report": "(2.7절 †)"
+        },
+        {
+          "name": "5NN+R1 test 오경보 행 B",
+          "ok": true,
+          "got": "12",
+          "expected": 12.0,
+          "report": "(2.7절 †)"
+        },
+        {
+          "name": "LSTM 20행 창 때문에 점수 없는 test 이상 행 A",
+          "ok": true,
+          "got": "177",
+          "expected": 177.0,
+          "report": "(2.4절)"
+        },
+        {
+          "name": "test 행 AUROC 기반 모델 v2 A(R1 없이)",
+          "ok": true,
+          "got": "0.975388",
+          "expected": 0.9753882550031694,
+          "report": "(2.4절 †)"
+        },
+        {
+          "name": "test 행 AUROC 기반 모델 v2 B(R1 없이)",
+          "ok": true,
+          "got": "0.973826",
+          "expected": 0.9738261784281685,
+          "report": "(2.4절 †)"
+        },
+        {
+          "name": "부트스트랩 v2−v1 F1 차이 95% 하한 B",
+          "ok": true,
+          "got": "0.0335309",
+          "expected": 0.03353089800433543,
+          "report": "(2.4절 †)"
+        },
+        {
+          "name": "max|z|+R1+R2 valid 실시간 F1 A(α 1%)",
+          "ok": true,
+          "got": "0.996364",
+          "expected": 0.9963636363636363,
+          "report": "(2.7절 † R1 표)"
+        },
+        {
+          "name": "max|z|+R1+R2 test 오경보 행 B(α 5%)",
+          "ok": true,
+          "got": "0",
+          "expected": 0,
+          "report": "(2.7절 †)"
+        },
+        {
+          "name": "이상 확률 test 행 AUROC A",
+          "ok": true,
+          "got": "0.97669",
+          "expected": 0.9766899846056326,
+          "report": "(2.5절)"
+        },
+        {
+          "name": "정상 파일 수집 공백 중앙값(초)",
+          "ok": true,
+          "got": "4.2225",
+          "expected": 4.2225,
+          "report": "(4.3절)"
+        },
+        {
+          "name": "합성 열화 10분 전류 파형 선행 시간 중앙값(분)",
+          "ok": true,
+          "got": "4.5",
+          "expected": 4.5,
+          "report": "(4.3절)"
+        },
+        {
+          "name": "합성 열화 5분 진동 완성 전 경보 비율",
+          "ok": true,
+          "got": "0.2083",
+          "expected": 0.2083,
+          "report": "(4.3절)"
+        },
+        {
+          "name": "R2 준-표본 밖: α 5% 정상 오경보 기록 v2(시간순 5창, 착안 기록 제외)",
+          "ok": true,
+          "got": "10",
+          "expected": 10,
+          "report": "(2.5절 †)"
+        },
+        {
+          "name": "R2 준-표본 밖: α 5% 정상 오경보 기록 v2+R2",
+          "ok": true,
+          "got": "2",
+          "expected": 2,
+          "report": "(2.5절 †)"
+        },
+        {
+          "name": "Ridge 예측 오차 test 실시간 F1 B(R1 없이)",
+          "ok": true,
+          "got": "0.877375",
+          "expected": 0.8773747841105354,
+          "report": "(2.4절 †)"
+        },
+        {
+          "name": "v2 특징을 넣은 5NN test 실시간 F1 B(R1 없이)",
+          "ok": true,
+          "got": "0.971519",
+          "expected": 0.9715189873417721,
+          "report": "(2.4절 †)"
+        },
+        {
+          "name": "정상 R² 중앙값이 이상 수준에 닿는 표본 시각 흔들림(ms)",
+          "ok": true,
+          "got": "5",
+          "expected": 5.0,
+          "report": "(2.6절 †)"
+        },
+        {
+          "name": "1단계 병행(v2+R1 OR Ridge) α 5% 정상 오경보 기록 B",
+          "ok": true,
+          "got": "24",
+          "expected": 24,
+          "report": "(4.3절 †)"
+        },
+        {
+          "name": "성분 절제: 전류 파형 주입 강도 1 탐지율 크기 성분만 B",
+          "ok": true,
+          "got": "0.0167",
+          "expected": 0.0167,
+          "report": "(2.4절 †)"
+        },
+        {
+          "name": "성분 절제: 전류 파형 주입 강도 1 탐지율 v2(세 성분) B",
+          "ok": true,
+          "got": "0.663",
+          "expected": 0.663,
+          "report": "(2.4절 †)"
+        }
+      ],
+      "total_seconds": 3707.9
+    }
+  },
+  "completion_errors": []
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "press-frontier-frozen-holdout-v1",
+  "created_utc": "2026-10-07T18:38:33.430080+00:00",
+  "selected": "V2+VD3@1",
+  "alpha": 0.01,
+  "selection_lock_sha256": "20c992cd930c02c59f3ef4d3b7cccc1b15e2f3eda1fd78065fd06452a3c1ce2b",
+  "process": "plastic_forming_press_hydraulic_pump",
+  "retrospective_export_equivalence": [
+    {
+      "split": "A",
+      "rows": 4690,
+      "alarms_equal": {
+        "V2": true,
+        "V2+VD3@1": true
+      },
+      "maximum_absolute_score_differences": {
+        "V2": 0.0,
+        "V2+VD3@1": 5.684341886080802e-14
+      }
+    },
+    {
+      "split": "B",
+      "rows": 6697,
+      "alarms_equal": {
+        "V2": true,
+        "V2+VD3@1": true
+      },
+      "maximum_absolute_score_differences": {
+        "V2": 0.0,
+        "V2+VD3@1": 5.684341886080802e-14
+      }
+    }
+  ],
+  "known_data_previously_exposed": true,
+  "validation_scope": "Frozen inference only; independent event status requires external provenance verification",
+  "files": {
+    "A_state.json": "ed1cf0ed16f6072a45c9858a07a7f12c62aa76c93422ff0183bf6035998884b5",
+    "B_state.json": "a70ef745ad6d0c9a738b1452e215b73b2bfe8405e2ca38f7562d53f566f08a81",
+    "exposure_catalog.json": "7090fb21bc59aefae37e7975cd6d0bbab25cbab65e26edf1fd1e4025dbfb6267"
+  },
+  "commitment_sha256": "2fae57b968606efca58004ce05fec55d9fcb19a5b7dcd83227374042dd46cfde"
+}

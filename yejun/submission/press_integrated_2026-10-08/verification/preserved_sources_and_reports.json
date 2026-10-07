@@ -1,0 +1,72 @@
+{
+  "passed": true,
+  "protected_files": [
+    {
+      "file": "claude/report/final_v5.md",
+      "sha256": "77eb87b789646063f8885024bf55328d469fc6489eb2cf00fb96f32a50ca1c11",
+      "unchanged": true,
+      "normalization": "LF"
+    },
+    {
+      "file": "claude/report/결과보고서_북적북적.pdf",
+      "sha256": "92d528d4074629675467362717667e545daf7ece91199b1b664525cb8a892494",
+      "unchanged": true,
+      "normalization": "none"
+    },
+    {
+      "file": "claude/report/결과보고서_북적북적.hwpx",
+      "sha256": "221b237b6f57f45f99782fa5324c6b2bd7662eeb26f7e726d90d5513811db139",
+      "unchanged": true,
+      "normalization": "none"
+    },
+    {
+      "file": "claude/submission/북적북적_code.zip",
+      "sha256": "3680a315449d482a35b0a4fb4835a02ca8a6ce6de709790667918429a22437a4",
+      "unchanged": true,
+      "normalization": "none"
+    },
+    {
+      "file": "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.md",
+      "sha256": "4606dbf794f9c503dbc8413f720e8b7289410b83ed9c706a9ec7098ac8a957f9",
+      "normalization": "none",
+      "unchanged": true
+    },
+    {
+      "file": "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.hwpx",
+      "sha256": "586498b1b6c00be75a63c7704e0faf6b7aed78dd273233dbe1689159f63dfd88",
+      "normalization": "none",
+      "unchanged": true
+    },
+    {
+      "file": "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.pdf",
+      "sha256": "39d98ad80f8ce80f6d4bb77e453631b6947b55b9f55af25f8d77610d9db7771f",
+      "normalization": "none",
+      "unchanged": true
+    }
+  ],
+  "original_selection_lock": {
+    "schema": 1,
+    "created_utc": "2026-10-07T17:36:02.307310+00:00",
+    "selected": "V2+VD3@1",
+    "normal_only_selection": true,
+    "abnormal_file_read": false,
+    "config_sha256": "9e65ab272139e552f91d4599cbf7a4fbb12ae2c308727cf5341290c450b7ba50",
+    "selection_sha256": "06799281a2d178db3158bf5f18244c988af4f2ca88ea8e1568bf893629593357",
+    "development_candidates_sha256": "363938b8030ad7904be705ab0555acc16ff00fea47be93cac9ba70fbfeb40429",
+    "source_sha256_lf": {
+      "yejun/analysis/press_frontier_improvement_2026-10-08/PROTOCOL.md": "086875e28cb568a63227afa464bb9ce733c8fa60bea0cdcfe2e43aa7956dffff",
+      "yejun/analysis/press_frontier_improvement_2026-10-08/frontier_model.py": "36a3b2e94f3f2861ee7c744dde92aebf4cec0f18f1b70025644b1187c122728e",
+      "yejun/analysis/press_frontier_improvement_2026-10-08/scenarios.py": "93613cb60765f345a5fc46fd5ad6ba3c9942363b06b445ea8f423fa1b6524a19",
+      "yejun/analysis/press_frontier_improvement_2026-10-08/run_experiment.py": "565b030892936727e16e567f75088486e35ad7c8a8c2743bdb265a1e8e2c4568",
+      "yejun/analysis/press_frontier_improvement_2026-10-08/vibration_branch.py": "7943f73caa081c42cee9f99256d0197a30da610651747374b8cfa359442710ea",
+      "yejun/analysis/press_frontier_improvement_2026-10-08/competitor_reference.py": "2b2aa5fc9389419ab26064cb37a567f672bce6d71528db6d575915512811aebd",
+      "yejun/press_guard/model.py": "710bea85ce08b3777941e339c88f2616417b71f3636cc4e6ce2679d604ff87f5",
+      "yejun/press_submission/press/data.py": "81dc394c8b0b53618177e5822c7cc0f7ff7c7f060d08471c968b4cfaaa05411f",
+      "yejun/press_submission/press/scores.py": "22ed1700eabadaadcec25c2602b40bd8a0a84879ad658e0ced2b05c2b87078ae",
+      "yejun/press_submission/press/calibrate.py": "a2b7b686757cc513b6430637323c7d1059f485ff70c547492eefe9589b8eb17b",
+      "yejun/press_submission/press/validation.py": "87e9b6299981725fd59352805ff8e93cdfdb89f3ffd20b77216554070f682eb5"
+    },
+    "lock_sha256": "20c992cd930c02c59f3ef4d3b7cccc1b15e2f3eda1fd78065fd06452a3c1ce2b"
+  },
+  "report_update_performed": false
+}

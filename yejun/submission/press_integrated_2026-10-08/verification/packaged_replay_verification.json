@@ -1,0 +1,341 @@
+{
+  "passed": true,
+  "completed_utc": "2026-10-07T19:09:12.282475+00:00",
+  "selected": "V2+VD3@1",
+  "selection_lock_sha256": "6173e5894ecb5e4763f8fdd9e75ef68f1e85a3c1005aca95e7d33b8d3a85cf31",
+  "verification_script_sha256_lf": "2849344ebaceaa928d9f62649116b37c11c7619e341132032fe74c81ec160d9c",
+  "normal": {
+    "path": "C:\\Users\\junyj\\AppData\\Local\\Temp\\press_noref_check_1aef950b79454c25b734764bec4d7438\\unpacked\\북적북적_code_통합본\\data\\3_소성가공_예지보전\\press_data_normal.csv",
+    "sha256": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+    "rows": 20000,
+    "records": 600,
+    "loaded_utc": "2026-10-07T19:07:19.111518+00:00",
+    "quantization": "matched"
+  },
+  "abnormal": {
+    "path": "C:\\Users\\junyj\\AppData\\Local\\Temp\\press_noref_check_1aef950b79454c25b734764bec4d7438\\unpacked\\북적북적_code_통합본\\data\\3_소성가공_예지보전\\outlier_data.csv",
+    "sha256": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+    "rows": 600,
+    "records": 21,
+    "loaded_utc": "2026-10-07T19:07:19.128028+00:00",
+    "quantization": "matched"
+  },
+  "normal_sampling_rule": "first three, last three, shortest and longest test records; duplicates removed; no score-based sampling",
+  "abnormal_sampling_rule": "all 21 recording fragments in both overlapping splits",
+  "source_limit": "records up to 50 rows; replay stores current complete record and uses upstream record IDs",
+  "interpretation": "Numerical score/alert equivalence of reference replay; not sensor delivery latency or independent failure validation",
+  "elapsed_seconds": 113.25172360008582,
+  "splits": [
+    {
+      "split": "A",
+      "normal_record_ids": [
+        480,
+        481,
+        482,
+        531,
+        597,
+        598,
+        599
+      ],
+      "abnormal_record_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "replay": [
+        {
+          "mode": "sample",
+          "model": "V2",
+          "chunks": [
+            1
+          ],
+          "records": 28,
+          "rows": 844,
+          "alarms_equal": true,
+          "scores_allclose": true,
+          "score_rtol": 1e-09,
+          "score_atol": 1e-09,
+          "maximum_absolute_score_difference": 0.0,
+          "maximum_relative_score_difference": 0.0,
+          "maximum_buffer_rows": 50,
+          "empty_chunks_checked": true,
+          "record_boundaries_reset": true
+        },
+        {
+          "mode": "sample",
+          "model": "V2+VD3@1",
+          "chunks": [
+            1
+          ],
+          "records": 28,
+          "rows": 844,
+          "alarms_equal": true,
+          "scores_allclose": true,
+          "score_rtol": 1e-09,
+          "score_atol": 1e-09,
+          "maximum_absolute_score_difference": 7.105427357601002e-15,
+          "maximum_relative_score_difference": 2.0714774075801204e-16,
+          "maximum_buffer_rows": 50,
+          "empty_chunks_checked": true,
+          "record_boundaries_reset": true
+        },
+        {
+          "mode": "irregular_chunks",
+          "model": "V2",
+          "chunks": [
+            3,
+            1,
+            8,
+            2,
+            5
+          ],
+          "records": 28,
+          "rows": 844,
+          "alarms_equal": true,
+          "scores_allclose": true,
+          "score_rtol": 1e-09,
+          "score_atol": 1e-09,
+          "maximum_absolute_score_difference": 0.0,
+          "maximum_relative_score_difference": 0.0,
+          "maximum_buffer_rows": 50,
+          "empty_chunks_checked": true,
+          "record_boundaries_reset": true
+        },
+        {
+          "mode": "irregular_chunks",
+          "model": "V2+VD3@1",
+          "chunks": [
+            3,
+            1,
+            8,
+            2,
+            5
+          ],
+          "records": 28,
+          "rows": 844,
+          "alarms_equal": true,
+          "scores_allclose": true,
+          "score_rtol": 1e-09,
+          "score_atol": 1e-09,
+          "maximum_absolute_score_difference": 0.0,
+          "maximum_relative_score_difference": 0.0,
+          "maximum_buffer_rows": 50,
+          "empty_chunks_checked": true,
+          "record_boundaries_reset": true
+        },
+        {
+          "mode": "whole_record",
+          "model": "V2",
+          "chunks": [
+            100
+          ],
+          "records": 28,
+          "rows": 844,
+          "alarms_equal": true,
+          "scores_allclose": true,
+          "score_rtol": 1e-09,
+          "score_atol": 1e-09,
+          "maximum_absolute_score_difference": 0.0,
+          "maximum_relative_score_difference": 0.0,
+          "maximum_buffer_rows": 50,
+          "empty_chunks_checked": true,
+          "record_boundaries_reset": true
+        },
+        {
+          "mode": "whole_record",
+          "model": "V2+VD3@1",
+          "chunks": [
+            100
+          ],
+          "records": 28,
+          "rows": 844,
+          "alarms_equal": true,
+          "scores_allclose": true,
+          "score_rtol": 1e-09,
+          "score_atol": 1e-09,
+          "maximum_absolute_score_difference": 0.0,
+          "maximum_relative_score_difference": 0.0,
+          "maximum_buffer_rows": 50,
+          "empty_chunks_checked": true,
+          "record_boundaries_reset": true
+        }
+      ],
+      "future_suffix_score_and_alarm_invariance": true,
+      "reference_uses_explicit_record_boundaries": true
+    },
+    {
+      "split": "B",
+      "normal_record_ids": [
+        420,
+        421,
+        422,
+        423,
+        531,
+        597,
+        598,
+        599
+      ],
+      "abnormal_record_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "replay": [
+        {
+          "mode": "sample",
+          "model": "V2",
+          "chunks": [
+            1
+          ],
+          "records": 29,
+          "rows": 824,
+          "alarms_equal": true,
+          "scores_allclose": true,
+          "score_rtol": 1e-09,
+          "score_atol": 1e-09,
+          "maximum_absolute_score_difference": 0.0,
+          "maximum_relative_score_difference": 0.0,
+          "maximum_buffer_rows": 50,
+          "empty_chunks_checked": true,
+          "record_boundaries_reset": true
+        },
+        {
+          "mode": "sample",
+          "model": "V2+VD3@1",
+          "chunks": [
+            1
+          ],
+          "records": 29,
+          "rows": 824,
+          "alarms_equal": true,
+          "scores_allclose": true,
+          "score_rtol": 1e-09,
+          "score_atol": 1e-09,
+          "maximum_absolute_score_difference": 1.4210854715202004e-14,
+          "maximum_relative_score_difference": 2.082831510165223e-16,
+          "maximum_buffer_rows": 50,
+          "empty_chunks_checked": true,
+          "record_boundaries_reset": true
+        },
+        {
+          "mode": "irregular_chunks",
+          "model": "V2",
+          "chunks": [
+            3,
+            1,
+            8,
+            2,
+            5
+          ],
+          "records": 29,
+          "rows": 824,
+          "alarms_equal": true,
+          "scores_allclose": true,
+          "score_rtol": 1e-09,
+          "score_atol": 1e-09,
+          "maximum_absolute_score_difference": 0.0,
+          "maximum_relative_score_difference": 0.0,
+          "maximum_buffer_rows": 50,
+          "empty_chunks_checked": true,
+          "record_boundaries_reset": true
+        },
+        {
+          "mode": "irregular_chunks",
+          "model": "V2+VD3@1",
+          "chunks": [
+            3,
+            1,
+            8,
+            2,
+            5
+          ],
+          "records": 29,
+          "rows": 824,
+          "alarms_equal": true,
+          "scores_allclose": true,
+          "score_rtol": 1e-09,
+          "score_atol": 1e-09,
+          "maximum_absolute_score_difference": 0.0,
+          "maximum_relative_score_difference": 0.0,
+          "maximum_buffer_rows": 50,
+          "empty_chunks_checked": true,
+          "record_boundaries_reset": true
+        },
+        {
+          "mode": "whole_record",
+          "model": "V2",
+          "chunks": [
+            100
+          ],
+          "records": 29,
+          "rows": 824,
+          "alarms_equal": true,
+          "scores_allclose": true,
+          "score_rtol": 1e-09,
+          "score_atol": 1e-09,
+          "maximum_absolute_score_difference": 0.0,
+          "maximum_relative_score_difference": 0.0,
+          "maximum_buffer_rows": 50,
+          "empty_chunks_checked": true,
+          "record_boundaries_reset": true
+        },
+        {
+          "mode": "whole_record",
+          "model": "V2+VD3@1",
+          "chunks": [
+            100
+          ],
+          "records": 29,
+          "rows": 824,
+          "alarms_equal": true,
+          "scores_allclose": true,
+          "score_rtol": 1e-09,
+          "score_atol": 1e-09,
+          "maximum_absolute_score_difference": 0.0,
+          "maximum_relative_score_difference": 0.0,
+          "maximum_buffer_rows": 50,
+          "empty_chunks_checked": true,
+          "record_boundaries_reset": true
+        }
+      ],
+      "future_suffix_score_and_alarm_invariance": true,
+      "reference_uses_explicit_record_boundaries": true
+    }
+  ]
+}

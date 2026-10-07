@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "created_utc": "2026-10-07T18:45:34.652064+00:00",
+  "archive_sha256": "c8d8a1bde4af8cf7bb091c7fe582c7140038bf59c3f7355ca6d07a0ba28e6260",
+  "archive_members": 341,
+  "immutable_file_hashes_checked": 340,
+  "original_python_files_byte_identical": 94,
+  "original_python_file_mapping": "run_all.py renamed run_official.py; all other original Python paths preserved",
+  "specific_competing_repository_identifiers_or_korean_competition_mentions": [],
+  "internal_history_files": [],
+  "precomputed_pickle_or_torch_state": [],
+  "legacy_anonymous_comparator_metadata": {
+    "file": "code/press/domain/05_supervised_confound.py",
+    "line": 521,
+    "retained_unchanged": true,
+    "explanation": "Original anonymous public supervised comparison metadata; no team identity or source repository URL. Existing numerical pipeline intentionally unchanged."
+  },
+  "tests": {
+    "packaged_numerical_and_holdout_contracts": 92,
+    "builder_invariants": 4
+  },
+  "original_selection_lock_sha256": "20c992cd930c02c59f3ef4d3b7cccc1b15e2f3eda1fd78065fd06452a3c1ce2b",
+  "packaged_selection_lock_sha256": "67f6288f1b1f7e01b972ee6df9fa3e58243881e4df9f32c2b91078b7bddb8754",
+  "calculation_ast_equivalent": true,
+  "clean_end_to_end_validation": "Separate verification/ records; not claimed by this packaging audit"
+}

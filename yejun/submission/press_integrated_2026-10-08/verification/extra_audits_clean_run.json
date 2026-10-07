@@ -1,0 +1,171 @@
+{
+  "archive_name": "북적북적_code_통합본.zip",
+  "archive_sha256": "2bee634dc651368b5b11787c7e97b1a61b2b7e4ea2a6de8a059245536f4d4ed7",
+  "interpreter": {
+    "version": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+    "executable": "C:\\Users\\junyj\\AppData\\Local\\Temp\\k-manufacturing-integrated-clean-py314\\Scripts\\python.exe",
+    "prefix": "C:\\Users\\junyj\\AppData\\Local\\Temp\\k-manufacturing-integrated-clean-py314",
+    "base_prefix": "C:\\Python314"
+  },
+  "installed_packages": [
+    "cloudpickle==3.1.2",
+    "colorama==0.4.6",
+    "contourpy==1.4.0",
+    "cycler==0.12.1",
+    "filelock==4.0.12",
+    "fonttools==4.66.1",
+    "formulaic==1.2.2",
+    "fsspec==2026.9.0",
+    "iniconfig==2.3.1",
+    "interface_meta==2.0.1",
+    "Jinja2==3.1.6",
+    "joblib==1.6.0",
+    "kiwisolver==1.5.1",
+    "MarkupSafe==3.0.4",
+    "matplotlib==3.11.2",
+    "mpmath==1.3.0",
+    "narwhals==2.26.0",
+    "networkx==3.7",
+    "numpy==2.5.3",
+    "packaging==26.3",
+    "pandas==3.0.6",
+    "patsy==1.0.3",
+    "pillow==12.3.0",
+    "pluggy==1.6.0",
+    "Pygments==2.21.0",
+    "pyparsing==3.3.3",
+    "pytest==9.1.1",
+    "python-dateutil==2.9.0.post0",
+    "scikit-learn==1.9.1",
+    "scipy==1.18.1",
+    "setuptools==84.0.0",
+    "six==1.17.0",
+    "statsmodels==0.15.0",
+    "sympy==1.14.0",
+    "threadpoolctl==3.7.0",
+    "torch==2.14.0",
+    "typing_extensions==4.16.0",
+    "tzdata==2026.5",
+    "wrapt==2.5.0"
+  ],
+  "pip_check": "No broken requirements found.",
+  "extracted_root": "C:\\Users\\junyj\\AppData\\Local\\Temp\\k-manufacturing-final-extra-clean-20261008\\unpacked\\북적북적_code_통합본",
+  "python_workspace_access_guard_tested": true,
+  "workspace_guard_probe": "workspace read denied",
+  "child_process_guard_probe": "workspace read denied",
+  "isolation_scope": "Fresh venv, archive extracted outside source workspace, user site disabled, Python file-access audit guard inherited by child processes. Not an OS sandbox for native libraries or non-Python processes.",
+  "section": "improvement",
+  "command": [
+    "C:\\Users\\junyj\\AppData\\Local\\Temp\\k-manufacturing-integrated-clean-py314\\Scripts\\python.exe",
+    "C:\\Users\\junyj\\AppData\\Local\\Temp\\k-manufacturing-final-extra-clean-20261008\\unpacked\\북적북적_code_통합본\\run_all.py",
+    "--section",
+    "improvement",
+    "--extra-audits-only"
+  ],
+  "status": "passed",
+  "reused_core_evidence": {
+    "source_archive_sha256": "45027f35faf11a750c3be949543eea22faa41904c32c682f3aed981ed91f1661",
+    "source_extracted_root": "C:\\Users\\junyj\\AppData\\Local\\Temp\\press_noref_check_1aef950b79454c25b734764bec4d7438\\unpacked\\북적북적_code_통합본",
+    "source_bridge_sha256": "555b90afa151cda8737dbdbdfad5ca3e69bafd0a94469a0052628940eb796246",
+    "copied_output_files_sha256": {
+      "A_abnormal_records.csv": "ee24903144e9b5b2c2e3abff493024bab8a9c7a3a39bc08329d583185a6bc008",
+      "A_actual_metrics.csv": "650361823ba8b056806b65b89fa056ba90feed5de12e65bc64480a4343927162",
+      "A_fitted_metadata.json": "45d094817743ce5a230bc67aa94c79c9bb133da11379714f96d23fd43d375271",
+      "A_injection.csv": "b59e681023683fc99d5489c0cc7da486613892b54719d8a8397ca0c52aed9ad8",
+      "A_stress.csv": "8b0f262e014e4e1c3cfa3deb70a5345d3aeb5042a5f9eac74af5d45bff1eb13c",
+      "actual_metrics.csv": "7f715d9ee960da04e4ded13267543cced6cf287074b45b8c1fe1218742b26270",
+      "B_abnormal_records.csv": "dcd46ce93c184b21c360fd54995a97ff06633d7f4a836e749e755030607756d2",
+      "B_actual_metrics.csv": "3481937611ac0399b4c0f4d624697d09cae95aa5054f8267f3a4a8701b4dc98e",
+      "B_fitted_metadata.json": "05319ce80a4874c60fc14f7f2639af94c2a736d612e229745cc0a3ff461bb140",
+      "B_injection.csv": "9acb37d7b1e44f58f2372277e573fb6fab7fb0165862f1f3fec2ff0f87c028e2",
+      "B_stress.csv": "6fa165bbea9b4749c863a111ed309f8a51646e1c4de3e2c9d0d6c966ed9011b8",
+      "config.json": "94cee688913415c85aa586f23ec577bb6b6f0afaff7b9f54330413636c0ae4ee",
+      "decision.json": "1980cc0d984157b23a30fbadddb56d85aef631d04489382ce4d9a3977c5d7af1",
+      "development_candidates.csv": "d84243961350b1d0825d4c1c803d62750876aa3fd0595a54b3aa2656452c711e",
+      "development_injection.csv": "10c8b0974dd05be4bae089cd577ba804a98752874732a7f9f8e9bb3c966cb3e2",
+      "development_started.json": "7c473f2f552ec1560c402866ca0afc598def120bccededff67122939a0ef1c91",
+      "development_stress.csv": "e8dd65eb56c1d80ef53561b4131ce32a06710fca71e99e8b72329f8dac05ace9",
+      "evaluation_started.json": "16ecec2203e9cc15114d216a2b44debe85ec93fe891ed188ddd13a3bb01ee313",
+      "frozen_holdout/A_state.json": "ed1cf0ed16f6072a45c9858a07a7f12c62aa76c93422ff0183bf6035998884b5",
+      "frozen_holdout/B_state.json": "a70ef745ad6d0c9a738b1452e215b73b2bfe8405e2ca38f7562d53f566f08a81",
+      "frozen_holdout/exposure_catalog.json": "7090fb21bc59aefae37e7975cd6d0bbab25cbab65e26edf1fd1e4025dbfb6267",
+      "frozen_holdout/manifest.json": "7c81571263536a50a5ef0ea778643de536a749b575b24fd72cd08637766ad777",
+      "frozen_holdout/provenance.example.json": "d5daacd11c39841246d15f6a16578283ae86c20fa5237d6ca331bd418918178f",
+      "independent_implementation_verification.json": "28cbf0f999aedc8c42a9f1a7f58e3f1a7eba0b7b061b8cff0fa5bde877b64168",
+      "local/A_injection_records.csv.gz": "86b983ef8c059a1bc3e66860463a0cebef97a46327295662ab19612f316a36ff",
+      "local/A_row_predictions.csv.gz": "3c744a73c7567fea0776b4a30cd455327b588cc76d760771f19416ed97da0e73",
+      "local/B_injection_records.csv.gz": "510a2acf2f07434e1d57cc0b6411f8ce7c247d51f507bc7c6f2f28dd5ee5f4b2",
+      "local/B_row_predictions.csv.gz": "85d8986b743e89881b28bc0bf9070408fd3db82ba2d5c3f2c5ce3dcdf7607810",
+      "local/development_injection_records.csv.gz": "7c25db7beae51b714e0d524950d71a2be18ea3d2693e0bdf92d54d6f8e390aeb",
+      "reference_comparison.json": "be49b3a695a3973f73e50324a34460a75d17d63d07234fc79d022dddf025f5b9",
+      "replay_verification.json": "34c8de9fdb0534e9bc6273202ca8b5d5a878837a2dde9ac14f7921fef2b55047",
+      "selected_vs_v2.csv": "5048ccc280ebe7cc4bbc9dbde6b2ec92f036847db45e1e58133f0d22ddd2b2c2",
+      "selection.json": "8f67b9cfd1a3a19c7767cf249c813ff1be38550bb4a7a9a1aafc9482cd541065",
+      "selection_lock.json": "bd8ca41e3ff8490361f0c3d0747b38816e4813dffac0f25761c959475e1b8649",
+      "verification.json": "7f22d8483a71ac4241576b327926191ba84ae75edb4664520c074d96e5befe49"
+    },
+    "scope": "Reuse only outputs from the completed core reproduction after source/data/reference equivalence. All extra audit outputs are generated anew."
+  },
+  "extra_audits_only": true,
+  "returncode": 0,
+  "seconds": 375.52,
+  "run_log": "C:\\Users\\junyj\\AppData\\Local\\Temp\\k-manufacturing-final-extra-clean-20261008\\full_run.log",
+  "run_summaries": {
+    "logs/integrated_run_summary.json": {
+      "section": "improvement",
+      "quick": false,
+      "verify_only": false,
+      "extra_audits": true,
+      "extra_audits_only": true,
+      "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+      "integrity": {
+        "passed": true,
+        "checked_files": 343,
+        "original_selection_lock_sha256": "20c992cd930c02c59f3ef4d3b7cccc1b15e2f3eda1fd78065fd06452a3c1ce2b",
+        "packaged_selection_lock_sha256": "0251b20ef113bd98ce631d98897688503b7b1c139f07556e03cfdf018f6ad93f",
+        "calculation_ast_equivalent": true
+      },
+      "steps": [
+        {
+          "name": "reference",
+          "returncode": 0,
+          "seconds": 2.05,
+          "log": "logs\\integrated_reference.log"
+        },
+        {
+          "name": "strong_baselines",
+          "returncode": 0,
+          "seconds": 266.593,
+          "log": "logs\\integrated_strong_baselines.log"
+        },
+        {
+          "name": "normal_sensitivity",
+          "returncode": 0,
+          "seconds": 88.649,
+          "log": "logs\\integrated_normal_sensitivity.log"
+        },
+        {
+          "name": "normal_aggregation",
+          "returncode": 0,
+          "seconds": 3.408,
+          "log": "logs\\integrated_normal_aggregation.log"
+        },
+        {
+          "name": "tests",
+          "returncode": 0,
+          "seconds": 11.4,
+          "log": "logs\\integrated_tests.log"
+        }
+      ],
+      "passed": true,
+      "required_steps": [
+        "reference",
+        "strong_baselines",
+        "normal_sensitivity",
+        "normal_aggregation",
+        "tests"
+      ]
+    }
+  },
+  "completion_errors": []
+}

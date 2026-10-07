@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "lock_sha256": "6173e5894ecb5e4763f8fdd9e75ef68f1e85a3c1005aca95e7d33b8d3a85cf31",
+  "selected": "V2+VD3@1",
+  "package_integrity": {
+    "passed": true,
+    "checked_files": 338,
+    "original_selection_lock_sha256": "20c992cd930c02c59f3ef4d3b7cccc1b15e2f3eda1fd78065fd06452a3c1ce2b",
+    "packaged_selection_lock_sha256": "9228acd2f538f6c5b2f39674a3ebcc209738ac496245f37d0296179acb0aeca3",
+    "calculation_ast_equivalent": true
+  },
+  "actual": {
+    "metric_rows": 1080,
+    "calibration_alarm_equality": true,
+    "all_rows_and_records_retained": true,
+    "historical_v2_counts_reproduced": true
+  },
+  "injection": {
+    "development": {
+      "detail_rows": 3360,
+      "aggregate_rows": 56
+    },
+    "A": {
+      "detail_rows": 20160,
+      "aggregate_rows": 168
+    },
+    "B": {
+      "detail_rows": 30240,
+      "aggregate_rows": 168
+    }
+  },
+  "injection_audit_models": [
+    "V2",
+    "V2+VD3@1"
+  ],
+  "limitations": "Saved prediction arithmetic and source integrity; not independent failure validation"
+}

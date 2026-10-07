@@ -1,0 +1,408 @@
+{
+  "schema_version": 1,
+  "audited_utc": "2026-10-07T18:30:36.435151+00:00",
+  "user_confirmed_no_additional_data": true,
+  "audit_scope": {
+    "workspace": "C:\\Users\\junyj\\Desktop\\k-제조데이터",
+    "method": "Recursive local file inventory, all CSV headers, exact raw press hashes, raw CSV ZIP members, unlabelled cache value equality, prior exposure artifacts. No sensor data was modified.",
+    "excluded_directory_names": [
+      ".git",
+      ".pytest_cache",
+      ".venv",
+      "__pycache__",
+      "node_modules",
+      "venv"
+    ],
+    "excluded_detected_python_environments": [
+      "yejun/analysis/press_plan_execution_2026-10-03/cache/cold_env"
+    ],
+    "file_inventory_by_extension": {
+      ".csv": 792,
+      ".gz": 33,
+      ".zip": 2
+    },
+    "inventory_path_and_size_sha256": "80b11bf3ddb313c05ac098993670d8a6f7e76061343354e3dcfd2a6c678f9c12",
+    "scan_errors": [],
+    "limits": "Local workspace audit only. User confirmed no additional data. Filesystem modification times are not acquisition times."
+  },
+  "decision": {
+    "independent_same_process_fault_validation_available": false,
+    "same_process_unseen_fault_event_count": 0,
+    "known_abnormal_record_count": 21,
+    "known_abnormal_row_count": 600,
+    "known_abnormal_event_count": 1,
+    "new_temporal_holdout_can_be_created_from_existing_files": false,
+    "reason": "All same-process raw data and archive copies contain the same two previously analysed time periods. The 21 abnormal records belong to one previously inspected 165.597-second incident; relabelling, resplitting or resampling cannot create a new independent incident.",
+    "status": "unavailable_due_to_no_additional_independent_event_data",
+    "not_completed_claim": "This audit is not external fault performance validation and contains no new generalisation score."
+  },
+  "raw_press_files": [
+    {
+      "path": "yejun/analysis/press_plan_execution_2026-10-03/data/press/outlier_data.csv",
+      "sha256": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+      "bytes": 38823,
+      "kind": "abnormal",
+      "rows": 600,
+      "dates": [
+        "2022-07-17"
+      ],
+      "time_min": "2022-07-17 10:51:07.943000",
+      "time_max": "2022-07-17 10:53:53.540000",
+      "timestamp_span_seconds": 165.597,
+      "equipment_state_counts": {
+        "1": 600
+      },
+      "filesystem_mtime_utc": "2026-10-03T14:41:00.929685+00:00",
+      "mtime_is_acquisition_event_time": false
+    },
+    {
+      "path": "yejun/analysis/press_plan_execution_2026-10-03/data/press/press_data_normal.csv",
+      "sha256": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+      "bytes": 1211960,
+      "kind": "normal",
+      "rows": 20000,
+      "dates": [
+        "2022-07-12"
+      ],
+      "time_min": "2022-07-12 00:00:00.019000",
+      "time_max": "2022-07-12 01:16:55.828000",
+      "timestamp_span_seconds": 4615.809,
+      "equipment_state_counts": {
+        "0": 20000
+      },
+      "filesystem_mtime_utc": "2026-10-03T14:41:00.925695+00:00",
+      "mtime_is_acquisition_event_time": false
+    },
+    {
+      "path": "데이터셋/3. 소성가공 예지보전 AI 데이터셋/outlier_data.csv",
+      "sha256": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+      "bytes": 38823,
+      "kind": "abnormal",
+      "rows": 600,
+      "dates": [
+        "2022-07-17"
+      ],
+      "time_min": "2022-07-17 10:51:07.943000",
+      "time_max": "2022-07-17 10:53:53.540000",
+      "timestamp_span_seconds": 165.597,
+      "equipment_state_counts": {
+        "1": 600
+      },
+      "filesystem_mtime_utc": "2026-10-03T14:56:00.947153+00:00",
+      "mtime_is_acquisition_event_time": false
+    },
+    {
+      "path": "데이터셋/3. 소성가공 예지보전 AI 데이터셋/press_data_normal.csv",
+      "sha256": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+      "bytes": 1211960,
+      "kind": "normal",
+      "rows": 20000,
+      "dates": [
+        "2022-07-12"
+      ],
+      "time_min": "2022-07-12 00:00:00.019000",
+      "time_max": "2022-07-12 01:16:55.828000",
+      "timestamp_span_seconds": 4615.809,
+      "equipment_state_counts": {
+        "0": 20000
+      },
+      "filesystem_mtime_utc": "2026-10-03T14:56:01.016967+00:00",
+      "mtime_is_acquisition_event_time": false
+    }
+  ],
+  "archive_raw_press_copies": [
+    {
+      "path": "claude/submission/북적북적_code.zip",
+      "sha256": "3680a315449d482a35b0a4fb4835a02ca8a6ce6de709790667918429a22437a4",
+      "bytes": 3725662,
+      "total_member_count": 306,
+      "raw_press_members": [
+        {
+          "member": "북적북적_code/data/3_소성가공_예지보전/outlier_data.csv",
+          "bytes": 38823,
+          "sha256": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e"
+        },
+        {
+          "member": "북적북적_code/data/3_소성가공_예지보전/press_data_normal.csv",
+          "bytes": 1211960,
+          "sha256": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7"
+        }
+      ]
+    },
+    {
+      "path": "yejun/analysis/press_plan_execution_2026-10-03/data/press.zip",
+      "sha256": "dda4a581568aa5bd4c2ae6680d7595bcecd926158b58369f3d39cf2e0a820941",
+      "bytes": 407984,
+      "total_member_count": 3,
+      "raw_press_members": [
+        {
+          "member": "3. 소성가공 예지보전 AI 데이터셋/outlier_data.csv",
+          "bytes": 38823,
+          "sha256": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e"
+        },
+        {
+          "member": "3. 소성가공 예지보전 AI 데이터셋/press_data_normal.csv",
+          "bytes": 1211960,
+          "sha256": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7"
+        }
+      ]
+    }
+  ],
+  "unlabelled_cache_checks": [
+    {
+      "path": "yejun/analysis/press_plan_execution_2026-10-03/cache/unknown_unlabelled_input.csv",
+      "sha256": "d2a52b1c627ca83d80ddbb4024bfb3c77805071978175643642ec5685259281f",
+      "rows": 600,
+      "equals_existing_abnormal_after_removing_label": true,
+      "new_sensor_observations": 0
+    },
+    {
+      "path": "yejun/analysis/press_plan_execution_2026-10-03/cache/cold_run/cache/unknown_unlabelled_input.csv",
+      "sha256": "d2a52b1c627ca83d80ddbb4024bfb3c77805071978175643642ec5685259281f",
+      "rows": 600,
+      "equals_existing_abnormal_after_removing_label": true,
+      "new_sensor_observations": 0
+    }
+  ],
+  "same_sensor_header_candidates": [
+    {
+      "path": "claude/code/press/outputs/pipeline/predictions_test.csv",
+      "bytes": 4050520,
+      "columns": [
+        "split",
+        "source",
+        "record_uid",
+        "timestamp",
+        "AI0_Vibration",
+        "AI1_Vibration",
+        "AI2_Current",
+        "row_in_record",
+        "score_fused",
+        "neglog10p_acat",
+        "p_conformal",
+        "alarm",
+        "alarm_cutoff_yj",
+        "alarm_reason",
+        "maxz_sensor",
+        "comp_maxz",
+        "neglog10p_maxz",
+        "comp_knn5",
+        "neglog10p_knn5",
+        "comp_ae5",
+        "neglog10p_ae5",
+        "comp_sine",
+        "neglog10p_sine",
+        "model",
+        "w",
+        "budget",
+        "threshold"
+      ]
+    },
+    {
+      "path": "yejun/analysis/press_plan_execution_2026-10-03/cache/unknown_unlabelled_input.csv",
+      "bytes": 38218,
+      "columns": [
+        "Unnamed: 0",
+        "TimeStamp",
+        "AI0_Vibration",
+        "AI1_Vibration",
+        "AI2_Current"
+      ]
+    },
+    {
+      "path": "yejun/analysis/press_plan_execution_2026-10-03/cache/cold_run/cache/unknown_unlabelled_input.csv",
+      "bytes": 38218,
+      "columns": [
+        "Unnamed: 0",
+        "TimeStamp",
+        "AI0_Vibration",
+        "AI1_Vibration",
+        "AI2_Current"
+      ]
+    },
+    {
+      "path": "yejun/analysis/press_plan_execution_2026-10-03/data/press/outlier_data.csv",
+      "bytes": 38823,
+      "columns": [
+        "",
+        "TimeStamp",
+        "AI0_Vibration",
+        "AI1_Vibration",
+        "AI2_Current",
+        "Equipment_state"
+      ]
+    },
+    {
+      "path": "yejun/analysis/press_plan_execution_2026-10-03/data/press/press_data_normal.csv",
+      "bytes": 1211960,
+      "columns": [
+        "",
+        "TimeStamp",
+        "AI0_Vibration",
+        "AI1_Vibration",
+        "AI2_Current",
+        "Equipment_state"
+      ]
+    },
+    {
+      "path": "데이터셋/3. 소성가공 예지보전 AI 데이터셋/outlier_data.csv",
+      "bytes": 38823,
+      "columns": [
+        "",
+        "TimeStamp",
+        "AI0_Vibration",
+        "AI1_Vibration",
+        "AI2_Current",
+        "Equipment_state"
+      ]
+    },
+    {
+      "path": "데이터셋/3. 소성가공 예지보전 AI 데이터셋/press_data_normal.csv",
+      "bytes": 1211960,
+      "columns": [
+        "",
+        "TimeStamp",
+        "AI0_Vibration",
+        "AI1_Vibration",
+        "AI2_Current",
+        "Equipment_state"
+      ]
+    }
+  ],
+  "prior_exposure": {
+    "frontier_evaluation": {
+      "path": "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/evaluation_started.json",
+      "sha256": "60475bd677cf065c86ce49f589ec795da36402aee482b3fd4371fa5df9afe1d3",
+      "started_utc": "2026-10-07T17:37:11.800944+00:00",
+      "selection_lock_sha256": "20c992cd930c02c59f3ef4d3b7cccc1b15e2f3eda1fd78065fd06452a3c1ce2b",
+      "normal": {
+        "sha256": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+        "rows": 20000,
+        "records": 600,
+        "loaded_utc": "2026-10-07T17:37:11.777859+00:00"
+      },
+      "abnormal": {
+        "sha256": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+        "rows": 600,
+        "records": 21,
+        "loaded_utc": "2026-10-07T17:37:11.800904+00:00"
+      }
+    },
+    "earlier_normal_characterisation": {
+      "path": "yejun/analysis/press_evidence/operating_states.csv",
+      "sha256": "d7519e54162bed4f5e11b184ea5b68681873c388ddf6d555972cb187497ab71c",
+      "unique_fittable_record_count": 469,
+      "record_min": 0,
+      "record_max": 599,
+      "note": "This feature table covers 469 fittable records, not all 600. The current evaluation and earlier split_context document complete normal-data role coverage."
+    },
+    "earlier_abnormal_characterisation": {
+      "path": "yejun/analysis/press_evidence/abnormal_segments.csv",
+      "sha256": "b19eedfd8d07b2523221466e1e28ae1e18a44686bca2d2c28fc11f8ea67c0b42",
+      "unique_record_count": 21,
+      "record_min": 0,
+      "record_max": 20,
+      "latest_git_commit": "e9ed90f",
+      "latest_git_commit_date": "2026-09-27T19:14:10+09:00"
+    },
+    "text_evidence": [
+      {
+        "path": "claude/report/final_v5.md",
+        "sha256": "8c07bf4076c0b3a0477e8115fdb006229d017208a1bf9d00d8f592c3580a26ea",
+        "lines": [
+          21,
+          100,
+          120,
+          320
+        ],
+        "finding": "All abnormal 600 rows / 21 records represent a single incident and earlier valid/test partitions are not independent incidents."
+      },
+      {
+        "path": "yejun/analysis/press_frontier_improvement_2026-10-08/PROTOCOL.md",
+        "sha256": "086875e28cb568a63227afa464bb9ce733c8fa60bea0cdcfe2e43aa7956dffff",
+        "lines": [
+          4,
+          15,
+          16
+        ],
+        "finding": "Declares previously exposed data and a retrospective same-data study, not a new independent test."
+      },
+      {
+        "path": "yejun/analysis/press_evidence/split_context.csv",
+        "sha256": "9f3b99b623785085d030bd041dde55dc589fde88e46d8fb6df510c616eec39c1",
+        "lines": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "finding": "A covers 360/120/120 and B covers 300/120/180 normal records; 600 normal records have already appeared in fit/calibration/evaluation."
+      },
+      {
+        "path": "yejun/plans/press_master_2026-10-03/03_data_sources.md",
+        "sha256": "e4780f37a6f8a59526dfa49979e5cd968d500b865f414f20483d8ba6c7b9fd09",
+        "lines": [
+          24,
+          34,
+          45,
+          53
+        ],
+        "finding": "SKAB uses vibration RMS/current summaries, requires a distinct group/conflict protocol, and is not the press raw waveform."
+      },
+      {
+        "path": "yejun/plans/press_master_2026-10-03/07_validation_revision.md",
+        "sha256": "12bba33287c4fca2caadfe823b03110d6766d0668b513aa2f7ee852a0696401d",
+        "lines": [
+          69
+        ],
+        "finding": "Explicitly says SKAB group validation does not replace independent press-fault validation."
+      }
+    ]
+  },
+  "other_local_datasets": {
+    "skab": {
+      "local_csv_count": 35,
+      "total_bytes": 4392581,
+      "header_schemas": {
+        "datetime;Accelerometer1RMS;Accelerometer2RMS;Current;Pressure;Temperature;Thermocouple;Voltage;Volume Flow RateRMS": 1,
+        "datetime;Accelerometer1RMS;Accelerometer2RMS;Current;Pressure;Temperature;Thermocouple;Voltage;Volume Flow RateRMS;anomaly;changepoint": 34
+      },
+      "equivalent_press_process_or_same_signal_semantics": false,
+      "eligible_as_new_press_fault_event": false,
+      "permitted_interpretation": "Separate method-transfer/counterexample study under its own protocol; cannot establish the press fusion model on a new independent press fault."
+    }
+  },
+  "permitted_validation_now": [
+    "Independent reimplementation/check of metric arithmetic and record membership against frozen predictions.",
+    "Clean-environment execution of the integrated submission package and reproduction of frozen outputs.",
+    "Rechecking disjoint fit/calibration/evaluation roles within declared retrospective splits without calling them unseen external events.",
+    "Causal replay and fixed synthetic stress tests retaining their synthetic and same-source nature."
+  ],
+  "unjustified_claims_to_avoid": [
+    "A/B splits are independent fault repetitions.",
+    "The 21 abnormal records are 21 independent faults.",
+    "The unlabelled cache is newly collected data.",
+    "A new seed, bootstrap or repartition removes prior exposure.",
+    "Independent code verification establishes independent data generalisation.",
+    "Another process substitutes for a new press fault."
+  ],
+  "future_independent_validation_contract": {
+    "required_input": "A genuinely separate, previously unused press fault episode plus independently acquired normal operation from compatible sensors, with acquisition dates, machine/episode identifiers and event labels. No such input currently exists in the audited scope.",
+    "before_release": "Freeze code, preprocessing, fusion weight, thresholds, policy, baseline, metric definitions and file hashes before opening new evaluation labels/performance.",
+    "grouping": "Keep physical fault events/acquisition groups wholly in one role; check timestamp and sensor-row overlaps against all old files before scoring.",
+    "calibration": "Use the frozen calibrated model for direct validation, or preregister a distinct new-normal calibration group if needed; never tune using the new fault episode.",
+    "reporting": "Report event detection/delay, normal false alarms and exposure, all events and failures. One new event remains limited evidence; rows/windows are not independent event samples.",
+    "revision_rule": "A model change prompted by the new episode converts that episode to development evidence and needs another untouched episode for subsequent independent validation."
+  },
+  "checks": {
+    "raw_copy_hashes_identical": true,
+    "archive_raw_copy_hashes_identical": true,
+    "unknown_cache_is_label_removed_existing_abnormal": true,
+    "all_600_normal_records_already_used_across_declared_roles": true,
+    "all_21_abnormal_records_already_characterised": true,
+    "no_additional_same_process_raw_file_found": true,
+    "original_files_modified": false
+  }
+}

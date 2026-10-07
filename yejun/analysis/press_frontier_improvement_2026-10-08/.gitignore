@@ -8,3 +8,5 @@
 /outputs/*.joblib
 /outputs/*.pkl
 /outputs/*.npz
+/outputs/frozen_holdout/
+/outputs/strong_baselines/local/

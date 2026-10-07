@@ -1,0 +1,1216 @@
+{
+  "review_commit": "b9ad5e9",
+  "reviewed_report_commit": "7f523b6",
+  "user_direction": "현재 완료 작업과 대조해 중복을 제외하고 타당한 수정만 반영. 보고서 원고·HWPX·PDF는 검수 반영이 끝날 때까지 수정하지 않음.",
+  "report_update_status": "deferred_by_user",
+  "report_hashes_unchanged": {
+    "markdown": "4606dbf794f9c503dbc8413f720e8b7289410b83ed9c706a9ec7098ac8a957f9",
+    "hwpx": "586498b1b6c00be75a63c7704e0faf6b7aed78dd273233dbe1689159f63dfd88",
+    "pdf": "39d98ad80f8ce80f6d4bb77e453631b6947b55b9f55af25f8d77610d9db7771f"
+  },
+  "already_addressed_before_review_application": [
+    "검수 적용 전 버전에서 기존 공식 26단계와 신규 실험을 단일 ZIP 및 진입점에 통합; 이번 최종 ZIP의 전체 실행 완료를 뜻하지 않음",
+    "Python 3.14.7 공통 환경에 모든 필요한 패키지 설치 및 pip check",
+    "검수 적용 전 버전의 저장소 밖 새 압축해제·가상환경에서 신규 실험 7단계와 92개 계약 검사 통과; 현행 최종 ZIP 전체 검증과 구분",
+    "VD3 독립 수식 19,104행 검산과 기존 시험 11,387행 고정 추론 경보 일치",
+    "특정 경쟁팀 저장소 식별자와 불필요한 내부 HISTORY의 제출 ZIP 제외",
+    "추가 독립 고장 데이터 없음 확인 및 새로운 입력의 무재학습 평가 도구"
+  ],
+  "decisions": [
+    {
+      "ids": [
+        "P1",
+        "P4",
+        "P5",
+        "P6",
+        "P7",
+        "G4",
+        "G6",
+        "S8"
+      ],
+      "status": "deferred_report",
+      "reason": "문장 유사성 지적, 방법 계보·기여 범위·용어·비교 분모 정리는 타당하다. 사용자 지시로 원고는 현재 그대로 보존한다. P4 예시 중 수축 공분산을 기록 앞부분의 소표본 때문에 사용했다는 설명은 채택하지 않는다. 실제 공분산은 정상 학습 잔차 전체로 적합한다."
+    },
+    {
+      "ids": [
+        "P2",
+        "P3"
+      ],
+      "status": "completed_packaging",
+      "reason": "선택 대상이 아니었던 REF 비교기 3개를 배포본에서 제거했다. 남은 56개 후보·4개 OR의 계산 동등성과 후보 ZIP에서의 정상 전용 재선택·지표 재현을 확인했고 최종 패키지 무결성 감사도 통과했다. 기존 조사 이력과 잠금은 내부에 보존한다. 원본 26단계·기본 개선 실험·최종 추가 감사의 분리 실행 및 최종 ZIP과의 연결 검증도 완료했다."
+    },
+    {
+      "ids": [
+        "P3_lock_timestamp"
+      ],
+      "status": "completed_packaging",
+      "reason": "포장 시각과 과거 선택 시각을 분리해 기록했으며 최종 패키지 감사에서 확인했다. 배포 후보본에서 새 정상 전용 선택을 실행한 결과와 과거 선택 이력을 구분하고, 포장으로 바뀐 소스를 과거 시점에 잠근 것처럼 주장하지 않는다."
+    },
+    {
+      "ids": [
+        "P8"
+      ],
+      "status": "completed_packaging",
+      "reason": "제출 복사본의 사용하지 않는 익명 비교 메타데이터를 제거하고 계산 동등성과 최종 패키지 무결성을 확인했다. 원본 claude/는 수정하지 않았고 내부 HISTORY는 제외했다. 일반적인 그림 파일명의 frontier 표현 자체는 특정 출품작 식별자가 아니며 보고서 자산은 사용자 지시에 따라 그대로 보존한다."
+    },
+    {
+      "ids": [
+        "G1",
+        "G3",
+        "G5"
+      ],
+      "status": "completed_experiment_and_verification",
+      "reason": "사전 고정한 정상 자료 전용 주파수 이동·가족 제외 안정성·미사용 합성 가족·보정 오염 민감도 실험과 별도 집계 검산을 완료했다. 주파수 취약성, 네 가족 중 두 가족을 제외할 때 달라지는 감사상 선택, 새로운 가족에서의 손실, 오염 시 탐지 감소를 모두 보존한다. 이상 파일을 읽지 않았고 기존 후보·문턱·운영 규칙은 바꾸지 않았다.",
+      "evidence_key": "normal_sensitivity"
+    },
+    {
+      "ids": [
+        "G1_alarm_suppression",
+        "G2",
+        "G7"
+      ],
+      "status": "retain_existing_alarms",
+      "reason": "주파수나 R²만으로 고장 경보를 지우는 규칙은 별도 고장 검증 없이 추가하지 않는다. 현재 취약성은 감시 범위와 수집 조건의 한계로 기록한다. 이상 자료를 보고 사후 선택 조건을 추가하지 않는다."
+    },
+    {
+      "ids": [
+        "S1"
+      ],
+      "status": "completed_same_condition_comparison",
+      "reason": "원보고서의 특징 맞춤 5차원 5NN과 기존 3채널 Ridge를 동일 정상 적합·보정·개발 및 A/B 조건에서 평가 전용으로 재실행했다. 정상 네 가족 주입과 쌍 기록블록 부트스트랩을 완료했고 기준선이 앞서는 결과도 공개했다. 통합 후보와 5NN의 F1 차이 구간은 A/B 모두 0을 포함하므로 우위나 동등성을 주장하지 않는다. 기존 선택·R1/R2·문턱은 유지한다.",
+      "evidence_key": "strong_baselines"
+    },
+    {
+      "ids": [
+        "S2"
+      ],
+      "status": "completed_applicable_packaging_and_reproduction",
+      "reason": "검수 적용 전 통합 ZIP·단일 진입점·공통 Python 3.14.7 환경·고정 추론 일치 검증을 확인하고 중복 작업을 제외했다. 원본 26단계와 기대값 43개, REF 제거 후보의 기본 개선 실험 7단계, 최종 ZIP 추가 감사 5단계 및 계약 검사 108개가 통과했다. 서로 다른 새 압축 해제 폴더에서 실행했으며 소스·자료·분기 AST와 출력 해시를 대조해 최종 ZIP과 연결했다. 하나의 폴더에서 단일 전체 명령을 연속 실행했다고 주장하지 않는다. 새 입력 도구는 타임스탬프로 기록 경계를 판별한다. 검증 환경을 3.13으로 바꾸거나 R1/R2와 신규 경로를 새 현장 상태기계로 합치는 운영 변경은 도입하지 않았다."
+    },
+    {
+      "ids": [
+        "S3"
+      ],
+      "status": "not_adopted_in_this_iteration",
+      "reason": "같은 단일 고장 사건으로 통합 후보의 새 확률 층을 맞추어도 독립 확률 검증이 생기지 않는다. 기록 21개를 독립 고장 21건으로 취급한 PPV 하한도 부적절하다. p값을 고장 확률로 해석하지 않는 기존 원칙을 유지한다."
+    },
+    {
+      "ids": [
+        "S4"
+      ],
+      "status": "deferred_low_incremental_evidence",
+      "reason": "현재 실제 정상 오경보는 A 0건·B 3기록이며 v2와 통합 후보가 같다. 세부 조건 교차표와 다중 유의성 검정을 추가하는 것보다 동일 조건 강한 기준선과 미시험 정상 변화의 정량 검증을 우선한다."
+    },
+    {
+      "ids": [
+        "S5"
+      ],
+      "status": "new_promotion_rule_not_adopted",
+      "reason": "60초 내 두 기록이라는 새 진동 승격 규칙은 검증된 운영 기준이 아니다. 실제 고장 독립 검증 없이 단계를 추가하거나 경보를 억제하지 않는다. 기존 공식 단계와 신규 후보 출력을 구분한다."
+    },
+    {
+      "ids": [
+        "S6"
+      ],
+      "status": "deferred_after_priority_comparisons",
+      "reason": "VD3에 과거 전류가 들어간다는 사실은 이미 명시되어 있고 전류와 독립된 경로라고 주장하지 않는다. 현재는 강한 기준선과 새로운 정상 조건 비교를 먼저 수행하며 추가 성분 절제를 새 선택 근거로 사용하지 않는다."
+    },
+    {
+      "ids": [
+        "S7"
+      ],
+      "status": "partly_prepared_not_claimed_validated",
+      "reason": "고정 상태·새 입력 출처 선언·중복과 스키마 검사 도구는 마련했다. 새로운 정상 날짜의 수용 시험은 추가 자료가 없어 실행하지 못했다. 미검증 주파수 필터나 보정 자료 제거 규칙을 사후 도입하지 않는다."
+    }
+  ],
+  "final_evidence": {
+    "path_base": "repository_root",
+    "scope": "Experimental checks, final ZIP integrity, original 26-step reproduction, retained-candidate improvement and final extra audits are complete. Separate executions are connected by explicit source/data/dispatch equivalence and output hashes; no single sequential all-section run is claimed.",
+    "normal_sensitivity": {
+      "status": "completed",
+      "paths": [
+        "yejun/analysis/press_frontier_improvement_2026-10-08/audit_normal_sensitivity.py",
+        "yejun/analysis/press_frontier_improvement_2026-10-08/verify_normal_sensitivity.py",
+        "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/normal_sensitivity/protocol_lock.json",
+        "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/normal_sensitivity/summary.json",
+        "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/normal_sensitivity/aggregation_verification.json"
+      ],
+      "protocol_lock_sha256": "9a861867e0f45ff76fd47735ce72b2aeb3c348896ef2346534ca0bed048322d1",
+      "original_selection_lock_sha256": "20c992cd930c02c59f3ef4d3b7cccc1b15e2f3eda1fd78065fd06452a3c1ce2b",
+      "normal_rows": 20000,
+      "normal_records": 600,
+      "abnormal_file_read": false,
+      "independent_failure_validation": false,
+      "selected_model_unchanged": "V2+VD3@1",
+      "new_filter_gate_or_alarm_policy": false,
+      "G1_frequency_shift": {
+        "paths": [
+          "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/normal_sensitivity/A_frequency.csv",
+          "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/normal_sensitivity/B_frequency.csv",
+          "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/normal_sensitivity/normal_frequency_fits.csv"
+        ],
+        "alpha": 0.01,
+        "key_rows": [
+          {
+            "split": "A",
+            "model": "V2",
+            "scenario": "original",
+            "delta_hz": null,
+            "eligible_records": 114,
+            "short_records": 6,
+            "records": 120,
+            "alarm_records": 0,
+            "normal_record_fpr": 0.0
+          },
+          {
+            "split": "A",
+            "model": "V2+VD3@1",
+            "scenario": "original",
+            "delta_hz": null,
+            "eligible_records": 114,
+            "short_records": 6,
+            "records": 120,
+            "alarm_records": 0,
+            "normal_record_fpr": 0.0
+          },
+          {
+            "split": "A",
+            "model": "V2",
+            "scenario": "frequency_shift",
+            "delta_hz": -0.1,
+            "eligible_records": 114,
+            "short_records": 6,
+            "records": 120,
+            "alarm_records": 18,
+            "normal_record_fpr": 0.15
+          },
+          {
+            "split": "A",
+            "model": "V2+VD3@1",
+            "scenario": "frequency_shift",
+            "delta_hz": -0.1,
+            "eligible_records": 114,
+            "short_records": 6,
+            "records": 120,
+            "alarm_records": 18,
+            "normal_record_fpr": 0.15
+          },
+          {
+            "split": "B",
+            "model": "V2",
+            "scenario": "original",
+            "delta_hz": null,
+            "eligible_records": 171,
+            "short_records": 9,
+            "records": 180,
+            "alarm_records": 3,
+            "normal_record_fpr": 0.0166666666666666
+          },
+          {
+            "split": "B",
+            "model": "V2+VD3@1",
+            "scenario": "original",
+            "delta_hz": null,
+            "eligible_records": 171,
+            "short_records": 9,
+            "records": 180,
+            "alarm_records": 3,
+            "normal_record_fpr": 0.0166666666666666
+          },
+          {
+            "split": "B",
+            "model": "V2",
+            "scenario": "frequency_shift",
+            "delta_hz": -0.1,
+            "eligible_records": 171,
+            "short_records": 9,
+            "records": 180,
+            "alarm_records": 63,
+            "normal_record_fpr": 0.35
+          },
+          {
+            "split": "B",
+            "model": "V2+VD3@1",
+            "scenario": "frequency_shift",
+            "delta_hz": -0.1,
+            "eligible_records": 171,
+            "short_records": 9,
+            "records": 180,
+            "alarm_records": 53,
+            "normal_record_fpr": 0.2944444444444444
+          }
+        ],
+        "review_B_condition_model_rows_reproduced": 24,
+        "zero_shift_resynthesis_control": "Original and delta=0 alarm outcomes agree; shorter than eight-row records remain unchanged and retained in denominators.",
+        "limitation": "Whole-record sine reconstruction with preserved residuals measures hypothetical acquisition/drive sensitivity; it is not an online correction or a new physical observation."
+      },
+      "G3_family_sensitivity": {
+        "paths": [
+          "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/normal_sensitivity/leave_one_family_out.csv",
+          "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/normal_sensitivity/A_new_families.csv",
+          "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/normal_sensitivity/B_new_families.csv",
+          "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/normal_sensitivity/derived_family_macro.csv"
+        ],
+        "excluded_family_audits": 4,
+        "audit_choice_changes": 2,
+        "choices": [
+          {
+            "excluded_family": "current_distortion",
+            "audit_choice": "V2+VD1@1",
+            "original_choice_rank": 2,
+            "choice_changed": true,
+            "selection_applied": false
+          },
+          {
+            "excluded_family": "vibration_amplification",
+            "audit_choice": "CD+VD1@0.5",
+            "original_choice_rank": 9,
+            "choice_changed": true,
+            "selection_applied": false
+          },
+          {
+            "excluded_family": "vibration_impulse",
+            "audit_choice": "V2+VD3@1",
+            "original_choice_rank": 1,
+            "choice_changed": false,
+            "selection_applied": false
+          },
+          {
+            "excluded_family": "vibration_noise",
+            "audit_choice": "V2+VD3@1",
+            "original_choice_rank": 1,
+            "choice_changed": false,
+            "selection_applied": false
+          }
+        ],
+        "new_family_macro_rates": [
+          {
+            "split": "A",
+            "family": "gradual_current_amplitude_reduction",
+            "model": "V2",
+            "scenarios": 4,
+            "mean_detection_rate": 0.0,
+            "mean_control_rate": 0.0,
+            "mean_paired_increase": 0.0
+          },
+          {
+            "split": "A",
+            "family": "gradual_current_amplitude_reduction",
+            "model": "V2+VD3@1",
+            "scenarios": 4,
+            "mean_detection_rate": 0.0,
+            "mean_control_rate": 0.0,
+            "mean_paired_increase": 0.0
+          },
+          {
+            "split": "A",
+            "family": "intermittent_zeroing",
+            "model": "V2",
+            "scenarios": 36,
+            "mean_detection_rate": 0.3004629629629629,
+            "mean_control_rate": 0.0,
+            "mean_paired_increase": 0.3004629629629629
+          },
+          {
+            "split": "A",
+            "family": "intermittent_zeroing",
+            "model": "V2+VD3@1",
+            "scenarios": 36,
+            "mean_detection_rate": 0.3097222222222222,
+            "mean_control_rate": 0.0,
+            "mean_paired_increase": 0.3097222222222222
+          },
+          {
+            "split": "A",
+            "family": "slow_vibration_level_ramp",
+            "model": "V2",
+            "scenarios": 16,
+            "mean_detection_rate": 0.0005208333333333,
+            "mean_control_rate": 0.0,
+            "mean_paired_increase": 0.0005208333333333
+          },
+          {
+            "split": "A",
+            "family": "slow_vibration_level_ramp",
+            "model": "V2+VD3@1",
+            "scenarios": 16,
+            "mean_detection_rate": 0.0005208333333333,
+            "mean_control_rate": 0.0,
+            "mean_paired_increase": 0.0005208333333333
+          },
+          {
+            "split": "B",
+            "family": "gradual_current_amplitude_reduction",
+            "model": "V2",
+            "scenarios": 4,
+            "mean_detection_rate": 0.0374999999999999,
+            "mean_control_rate": 0.0138888888888888,
+            "mean_paired_increase": 0.0236111111111111
+          },
+          {
+            "split": "B",
+            "family": "gradual_current_amplitude_reduction",
+            "model": "V2+VD3@1",
+            "scenarios": 4,
+            "mean_detection_rate": 0.023611111111111,
+            "mean_control_rate": 0.0138888888888888,
+            "mean_paired_increase": 0.0097222222222222
+          },
+          {
+            "split": "B",
+            "family": "intermittent_zeroing",
+            "model": "V2",
+            "scenarios": 36,
+            "mean_detection_rate": 0.3103395061728394,
+            "mean_control_rate": 0.0138888888888888,
+            "mean_paired_increase": 0.2964506172839506
+          },
+          {
+            "split": "B",
+            "family": "intermittent_zeroing",
+            "model": "V2+VD3@1",
+            "scenarios": 36,
+            "mean_detection_rate": 0.3492283950617283,
+            "mean_control_rate": 0.0138888888888888,
+            "mean_paired_increase": 0.3353395061728395
+          },
+          {
+            "split": "B",
+            "family": "slow_vibration_level_ramp",
+            "model": "V2",
+            "scenarios": 16,
+            "mean_detection_rate": 0.0208333333333332,
+            "mean_control_rate": 0.0138888888888888,
+            "mean_paired_increase": 0.0069444444444444
+          },
+          {
+            "split": "B",
+            "family": "slow_vibration_level_ramp",
+            "model": "V2+VD3@1",
+            "scenarios": 16,
+            "mean_detection_rate": 0.0187499999999999,
+            "mean_control_rate": 0.0138888888888888,
+            "mean_paired_increase": 0.0048611111111111
+          }
+        ],
+        "rate_units": "fractions, not percentages; family means include all precommitted target/strength/sign/onset/seed combinations",
+        "conclusion": "Selection depends on the original injection family mix. New intermittent-zeroing detection increases, but gradual current-amplitude reduction and slow vibration-level ramps do not show consistent gains.",
+        "selection_reapplied": false,
+        "limitation": "Synthetic changes to already observed normal recordings; detection/control counts are onset-to-record-end outcomes, not evidence from independent failures."
+      },
+      "G5_calibration_contamination": {
+        "paths": [
+          "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/normal_sensitivity/A_calibration_contamination.csv",
+          "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/normal_sensitivity/B_calibration_contamination.csv",
+          "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/normal_sensitivity/derived_calibration_deltas.csv"
+        ],
+        "contaminated_calibration_record_counts": [
+          1,
+          2,
+          5
+        ],
+        "calibration_records": 120,
+        "selection_of_affected_records": "First 1/2/5 calibration recordings with at least eight rows, fixed before execution.",
+        "illustrative_selected_model_vibration_impulse_results": [
+          {
+            "split": "A",
+            "contaminated_records": 0,
+            "baseline_maximum": 4.552845878744396,
+            "contaminated_maximum": 4.552845878744396,
+            "maximum_ratio": 1.0,
+            "mean_detection_rate": 0.3097222222222222,
+            "detection_change": 0.0,
+            "normal_fp_records": 0,
+            "normal_records": 120
+          },
+          {
+            "split": "A",
+            "contaminated_records": 1,
+            "baseline_maximum": 4.552845878744396,
+            "contaminated_maximum": 15.295478747281743,
+            "maximum_ratio": 3.359542394942655,
+            "mean_detection_rate": 0.250462962962963,
+            "detection_change": -0.0592592592592591,
+            "normal_fp_records": 0,
+            "normal_records": 120
+          },
+          {
+            "split": "A",
+            "contaminated_records": 2,
+            "baseline_maximum": 4.552845878744396,
+            "contaminated_maximum": 22.425181158348373,
+            "maximum_ratio": 4.92553048260287,
+            "mean_detection_rate": 0.218287037037037,
+            "detection_change": -0.0914351851851851,
+            "normal_fp_records": 0,
+            "normal_records": 120
+          },
+          {
+            "split": "A",
+            "contaminated_records": 5,
+            "baseline_maximum": 4.552845878744396,
+            "contaminated_maximum": 22.425181158348373,
+            "maximum_ratio": 4.92553048260287,
+            "mean_detection_rate": 0.218287037037037,
+            "detection_change": -0.0914351851851851,
+            "normal_fp_records": 0,
+            "normal_records": 120
+          },
+          {
+            "split": "B",
+            "contaminated_records": 0,
+            "baseline_maximum": 3.6807727919102793,
+            "contaminated_maximum": 3.6807727919102793,
+            "maximum_ratio": 1.0,
+            "mean_detection_rate": 0.3492283950617283,
+            "detection_change": 0.0,
+            "normal_fp_records": 3,
+            "normal_records": 180
+          },
+          {
+            "split": "B",
+            "contaminated_records": 1,
+            "baseline_maximum": 3.6807727919102793,
+            "contaminated_maximum": 18.03037676926234,
+            "maximum_ratio": 4.898530224112197,
+            "mean_detection_rate": 0.2458333333333333,
+            "detection_change": -0.103395061728395,
+            "normal_fp_records": 0,
+            "normal_records": 180
+          },
+          {
+            "split": "B",
+            "contaminated_records": 2,
+            "baseline_maximum": 3.6807727919102793,
+            "contaminated_maximum": 22.33653199290383,
+            "maximum_ratio": 6.0684354225818495,
+            "mean_detection_rate": 0.2314814814814814,
+            "detection_change": -0.1177469135802469,
+            "normal_fp_records": 0,
+            "normal_records": 180
+          },
+          {
+            "split": "B",
+            "contaminated_records": 5,
+            "baseline_maximum": 3.6807727919102793,
+            "contaminated_maximum": 22.33653199290383,
+            "maximum_ratio": 6.0684354225818495,
+            "mean_detection_rate": 0.2314814814814814,
+            "detection_change": -0.1177469135802469,
+            "normal_fp_records": 0,
+            "normal_records": 180
+          }
+        ],
+        "illustration_evaluation_family": "intermittent_zeroing",
+        "maximum_selected_model_threshold_ratio_A": 4.92553048260287,
+        "maximum_selected_model_threshold_ratio_B": 6.0684354225818495,
+        "calibration_zero_control_identical": true,
+        "conclusion": "Contamination can increase the maximum-based threshold and reduce detection; lower false alarms after contamination are not an improvement.",
+        "deployed_or_frozen_calibration_changed": false,
+        "limitation": "Two fixed synthetic contamination scenarios and fixed record positions; no real contamination prevalence or universal robust-calibration guarantee is established."
+      },
+      "independent_aggregation_verification": {
+        "passed": true,
+        "output_hashes_checked": 11,
+        "record_scenario_rows": 33600,
+        "scenario_model_rows": 224,
+        "record_aggregation_exact": true
+      }
+    },
+    "strong_baselines": {
+      "status": "completed",
+      "paths": [
+        "yejun/analysis/press_frontier_improvement_2026-10-08/audit_strong_baselines.py",
+        "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/strong_baselines/protocol.json",
+        "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/strong_baselines/summary.json",
+        "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/strong_baselines/actual_metrics.csv",
+        "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/strong_baselines/paired_block_bootstrap.csv",
+        "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/strong_baselines/injection_metrics.csv",
+        "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/strong_baselines/injection_family_summary.csv"
+      ],
+      "protocol_sha256": "0663a956c509a1955fa04e7ff0b797979e9558dc91f0c9994fad82fdefad7a14",
+      "parent_selection_lock_sha256": "20c992cd930c02c59f3ef4d3b7cccc1b15e2f3eda1fd78065fd06452a3c1ce2b",
+      "normal_development_split": {
+        "fit": [
+          0,
+          120
+        ],
+        "calibration": [
+          120,
+          240
+        ],
+        "evaluation": [
+          240,
+          300
+        ]
+      },
+      "A_normal_split": {
+        "fit": [
+          0,
+          360
+        ],
+        "calibration": [
+          360,
+          480
+        ],
+        "evaluation": [
+          480,
+          600
+        ]
+      },
+      "B_normal_split": {
+        "fit": [
+          0,
+          300
+        ],
+        "calibration": [
+          300,
+          420
+        ],
+        "evaluation": [
+          420,
+          600
+        ]
+      },
+      "split_ranges": "Half-open recording index ranges; identical across compared models.",
+      "actual_alphas": [
+        0.01,
+        0.03,
+        0.05
+      ],
+      "injection_alpha": 0.01,
+      "primary_all21_alpha01": [
+        {
+          "split": "A",
+          "model": "V2",
+          "row_f1": 0.9619377162629758,
+          "tp": 556,
+          "fn": 44,
+          "normal_fp_rows": 0,
+          "normal_fp_records": 0,
+          "normal_rows": 4090,
+          "normal_records": 120,
+          "abnormal_rows": 600,
+          "abnormal_records": 21,
+          "detected_records": 21
+        },
+        {
+          "split": "A",
+          "model": "V2+VD3@1",
+          "row_f1": 0.9681857265692175,
+          "tp": 563,
+          "fn": 37,
+          "normal_fp_rows": 0,
+          "normal_fp_records": 0,
+          "normal_rows": 4090,
+          "normal_records": 120,
+          "abnormal_rows": 600,
+          "abnormal_records": 21,
+          "detected_records": 21
+        },
+        {
+          "split": "A",
+          "model": "5NN_feature_matched",
+          "row_f1": 0.9690721649484536,
+          "tp": 564,
+          "fn": 36,
+          "normal_fp_rows": 0,
+          "normal_fp_records": 0,
+          "normal_rows": 4090,
+          "normal_records": 120,
+          "abnormal_rows": 600,
+          "abnormal_records": 21,
+          "detected_records": 21
+        },
+        {
+          "split": "A",
+          "model": "RidgeForecast_3channel",
+          "row_f1": 0.88268156424581,
+          "tp": 474,
+          "fn": 126,
+          "normal_fp_rows": 0,
+          "normal_fp_records": 0,
+          "normal_rows": 4090,
+          "normal_records": 120,
+          "abnormal_rows": 600,
+          "abnormal_records": 21,
+          "detected_records": 21
+        },
+        {
+          "split": "B",
+          "model": "V2",
+          "row_f1": 0.9709897610921502,
+          "tp": 569,
+          "fn": 31,
+          "normal_fp_rows": 3,
+          "normal_fp_records": 3,
+          "normal_rows": 6097,
+          "normal_records": 180,
+          "abnormal_rows": 600,
+          "abnormal_records": 21,
+          "detected_records": 21
+        },
+        {
+          "split": "B",
+          "model": "V2+VD3@1",
+          "row_f1": 0.9744897959183674,
+          "tp": 573,
+          "fn": 27,
+          "normal_fp_rows": 3,
+          "normal_fp_records": 3,
+          "normal_rows": 6097,
+          "normal_records": 180,
+          "abnormal_rows": 600,
+          "abnormal_records": 21,
+          "detected_records": 21
+        },
+        {
+          "split": "B",
+          "model": "5NN_feature_matched",
+          "row_f1": 0.9717707442258341,
+          "tp": 568,
+          "fn": 32,
+          "normal_fp_rows": 1,
+          "normal_fp_records": 1,
+          "normal_rows": 6097,
+          "normal_records": 180,
+          "abnormal_rows": 600,
+          "abnormal_records": 21,
+          "detected_records": 21
+        },
+        {
+          "split": "B",
+          "model": "RidgeForecast_3channel",
+          "row_f1": 0.881860465116279,
+          "tp": 474,
+          "fn": 126,
+          "normal_fp_rows": 1,
+          "normal_fp_records": 1,
+          "normal_rows": 6097,
+          "normal_records": 180,
+          "abnormal_rows": 600,
+          "abnormal_records": 21,
+          "detected_records": 21
+        }
+      ],
+      "selected_minus_feature_matched_knn_paired_intervals": [
+        {
+          "split": "A",
+          "alpha": 0.01,
+          "abnormal_subset": "all21",
+          "first_model": "V2+VD3@1",
+          "second_model": "5NN_feature_matched",
+          "f1_difference": -0.0008864383792360764,
+          "ci95_low": -0.005360689870829963,
+          "ci95_high": 0.0023020210011485357,
+          "includes_zero": true,
+          "first_model_bootstrap_win_fraction": 0.2395,
+          "interpretation": "No directional separation within this resampling; not an equivalence test",
+          "changed_selection": false
+        },
+        {
+          "split": "B",
+          "alpha": 0.01,
+          "abnormal_subset": "all21",
+          "first_model": "V2+VD3@1",
+          "second_model": "5NN_feature_matched",
+          "f1_difference": 0.002719051692533281,
+          "ci95_low": -0.0026796969158404266,
+          "ci95_high": 0.0074770715815671105,
+          "includes_zero": true,
+          "first_model_bootstrap_win_fraction": 0.87225,
+          "interpretation": "No directional separation within this resampling; not an equivalence test",
+          "changed_selection": false
+        }
+      ],
+      "bootstrap": {
+        "repetitions": 4000,
+        "seed": 20261008,
+        "normal_block_records": 10,
+        "abnormal_block_records": 3,
+        "interval": "two-sided 95% percentile; same stratified circular recording blocks across models; fit and calibration fixed"
+      },
+      "comparison_conclusion": "Both selected-minus-5NN intervals include zero. A 5NN detects one more abnormal row with the same zero normal false alarms; B selected detects five more abnormal rows but has three rather than one normal false-alarm rows/records. Neither superiority nor equivalence to 5NN is established.",
+      "injection_family_summary": [
+        {
+          "phase": "A",
+          "model": "5NN_feature_matched",
+          "family": "current_distortion",
+          "detection_rate": 0.29583333333333334,
+          "control_rate": 0.0,
+          "paired_increase": 0.29583333333333334
+        },
+        {
+          "phase": "A",
+          "model": "5NN_feature_matched",
+          "family": "vibration_amplification",
+          "detection_rate": 0.01875,
+          "control_rate": 0.0,
+          "paired_increase": 0.01875
+        },
+        {
+          "phase": "A",
+          "model": "5NN_feature_matched",
+          "family": "vibration_impulse",
+          "detection_rate": 0.078125,
+          "control_rate": 0.0,
+          "paired_increase": 0.078125
+        },
+        {
+          "phase": "A",
+          "model": "5NN_feature_matched",
+          "family": "vibration_noise",
+          "detection_rate": 0.0024305555555555556,
+          "control_rate": 0.0,
+          "paired_increase": 0.0024305555555555556
+        },
+        {
+          "phase": "A",
+          "model": "RidgeForecast_3channel",
+          "family": "current_distortion",
+          "detection_rate": 0.0,
+          "control_rate": 0.0,
+          "paired_increase": 0.0
+        },
+        {
+          "phase": "A",
+          "model": "RidgeForecast_3channel",
+          "family": "vibration_amplification",
+          "detection_rate": 0.05833333333333333,
+          "control_rate": 0.0,
+          "paired_increase": 0.05833333333333333
+        },
+        {
+          "phase": "A",
+          "model": "RidgeForecast_3channel",
+          "family": "vibration_impulse",
+          "detection_rate": 0.7072916666666668,
+          "control_rate": 0.0,
+          "paired_increase": 0.7072916666666668
+        },
+        {
+          "phase": "A",
+          "model": "RidgeForecast_3channel",
+          "family": "vibration_noise",
+          "detection_rate": 0.4753472222222222,
+          "control_rate": 0.0,
+          "paired_increase": 0.4753472222222222
+        },
+        {
+          "phase": "A",
+          "model": "V2",
+          "family": "current_distortion",
+          "detection_rate": 0.3340277777777778,
+          "control_rate": 0.0,
+          "paired_increase": 0.3340277777777778
+        },
+        {
+          "phase": "A",
+          "model": "V2",
+          "family": "vibration_amplification",
+          "detection_rate": 0.04583333333333334,
+          "control_rate": 0.0,
+          "paired_increase": 0.04583333333333334
+        },
+        {
+          "phase": "A",
+          "model": "V2",
+          "family": "vibration_impulse",
+          "detection_rate": 0.07708333333333332,
+          "control_rate": 0.0,
+          "paired_increase": 0.07708333333333332
+        },
+        {
+          "phase": "A",
+          "model": "V2",
+          "family": "vibration_noise",
+          "detection_rate": 0.002777777777777778,
+          "control_rate": 0.0,
+          "paired_increase": 0.002777777777777778
+        },
+        {
+          "phase": "A",
+          "model": "V2+VD3@1",
+          "family": "current_distortion",
+          "detection_rate": 0.3340277777777778,
+          "control_rate": 0.0,
+          "paired_increase": 0.3340277777777778
+        },
+        {
+          "phase": "A",
+          "model": "V2+VD3@1",
+          "family": "vibration_amplification",
+          "detection_rate": 0.053125,
+          "control_rate": 0.0,
+          "paired_increase": 0.053125
+        },
+        {
+          "phase": "A",
+          "model": "V2+VD3@1",
+          "family": "vibration_impulse",
+          "detection_rate": 0.6583333333333333,
+          "control_rate": 0.0,
+          "paired_increase": 0.6583333333333333
+        },
+        {
+          "phase": "A",
+          "model": "V2+VD3@1",
+          "family": "vibration_noise",
+          "detection_rate": 0.3697916666666667,
+          "control_rate": 0.0,
+          "paired_increase": 0.3697916666666667
+        },
+        {
+          "phase": "B",
+          "model": "5NN_feature_matched",
+          "family": "current_distortion",
+          "detection_rate": 0.3634259259259259,
+          "control_rate": 0.002777777777777778,
+          "paired_increase": 0.3606481481481481
+        },
+        {
+          "phase": "B",
+          "model": "5NN_feature_matched",
+          "family": "vibration_amplification",
+          "detection_rate": 0.09791666666666667,
+          "control_rate": 0.002777777777777778,
+          "paired_increase": 0.09513888888888888
+        },
+        {
+          "phase": "B",
+          "model": "5NN_feature_matched",
+          "family": "vibration_impulse",
+          "detection_rate": 0.1840277777777778,
+          "control_rate": 0.002777777777777778,
+          "paired_increase": 0.18125000000000002
+        },
+        {
+          "phase": "B",
+          "model": "5NN_feature_matched",
+          "family": "vibration_noise",
+          "detection_rate": 0.021527777777777774,
+          "control_rate": 0.002777777777777778,
+          "paired_increase": 0.01875
+        },
+        {
+          "phase": "B",
+          "model": "RidgeForecast_3channel",
+          "family": "current_distortion",
+          "detection_rate": 0.006018518518518519,
+          "control_rate": 0.005555555555555556,
+          "paired_increase": 0.000462962962962963
+        },
+        {
+          "phase": "B",
+          "model": "RidgeForecast_3channel",
+          "family": "vibration_amplification",
+          "detection_rate": 0.1173611111111111,
+          "control_rate": 0.005555555555555556,
+          "paired_increase": 0.11180555555555555
+        },
+        {
+          "phase": "B",
+          "model": "RidgeForecast_3channel",
+          "family": "vibration_impulse",
+          "detection_rate": 0.7131944444444445,
+          "control_rate": 0.005555555555555556,
+          "paired_increase": 0.7076388888888889
+        },
+        {
+          "phase": "B",
+          "model": "RidgeForecast_3channel",
+          "family": "vibration_noise",
+          "detection_rate": 0.4928240740740741,
+          "control_rate": 0.005555555555555556,
+          "paired_increase": 0.48726851851851855
+        },
+        {
+          "phase": "B",
+          "model": "V2",
+          "family": "current_distortion",
+          "detection_rate": 0.43842592592592594,
+          "control_rate": 0.013888888888888888,
+          "paired_increase": 0.424537037037037
+        },
+        {
+          "phase": "B",
+          "model": "V2",
+          "family": "vibration_amplification",
+          "detection_rate": 0.17847222222222223,
+          "control_rate": 0.013888888888888888,
+          "paired_increase": 0.16458333333333333
+        },
+        {
+          "phase": "B",
+          "model": "V2",
+          "family": "vibration_impulse",
+          "detection_rate": 0.3451388888888889,
+          "control_rate": 0.013888888888888888,
+          "paired_increase": 0.33125
+        },
+        {
+          "phase": "B",
+          "model": "V2",
+          "family": "vibration_noise",
+          "detection_rate": 0.05462962962962963,
+          "control_rate": 0.013888888888888888,
+          "paired_increase": 0.04074074074074074
+        },
+        {
+          "phase": "B",
+          "model": "V2+VD3@1",
+          "family": "current_distortion",
+          "detection_rate": 0.4148148148148148,
+          "control_rate": 0.013888888888888888,
+          "paired_increase": 0.4009259259259259
+        },
+        {
+          "phase": "B",
+          "model": "V2+VD3@1",
+          "family": "vibration_amplification",
+          "detection_rate": 0.17500000000000002,
+          "control_rate": 0.013888888888888888,
+          "paired_increase": 0.16111111111111112
+        },
+        {
+          "phase": "B",
+          "model": "V2+VD3@1",
+          "family": "vibration_impulse",
+          "detection_rate": 0.7208333333333333,
+          "control_rate": 0.013888888888888888,
+          "paired_increase": 0.7069444444444445
+        },
+        {
+          "phase": "B",
+          "model": "V2+VD3@1",
+          "family": "vibration_noise",
+          "detection_rate": 0.4664351851851852,
+          "control_rate": 0.013888888888888888,
+          "paired_increase": 0.4525462962962963
+        },
+        {
+          "phase": "development",
+          "model": "5NN_feature_matched",
+          "family": "current_distortion",
+          "detection_rate": 0.09166666666666667,
+          "control_rate": 0.0,
+          "paired_increase": 0.09166666666666667
+        },
+        {
+          "phase": "development",
+          "model": "5NN_feature_matched",
+          "family": "vibration_amplification",
+          "detection_rate": 0.004166666666666667,
+          "control_rate": 0.0,
+          "paired_increase": 0.004166666666666667
+        },
+        {
+          "phase": "development",
+          "model": "5NN_feature_matched",
+          "family": "vibration_impulse",
+          "detection_rate": 0.0,
+          "control_rate": 0.0,
+          "paired_increase": 0.0
+        },
+        {
+          "phase": "development",
+          "model": "5NN_feature_matched",
+          "family": "vibration_noise",
+          "detection_rate": 0.0,
+          "control_rate": 0.0,
+          "paired_increase": 0.0
+        },
+        {
+          "phase": "development",
+          "model": "RidgeForecast_3channel",
+          "family": "current_distortion",
+          "detection_rate": 0.0,
+          "control_rate": 0.0,
+          "paired_increase": 0.0
+        },
+        {
+          "phase": "development",
+          "model": "RidgeForecast_3channel",
+          "family": "vibration_amplification",
+          "detection_rate": 0.15625,
+          "control_rate": 0.0,
+          "paired_increase": 0.15625
+        },
+        {
+          "phase": "development",
+          "model": "RidgeForecast_3channel",
+          "family": "vibration_impulse",
+          "detection_rate": 0.6708333333333333,
+          "control_rate": 0.0,
+          "paired_increase": 0.6708333333333333
+        },
+        {
+          "phase": "development",
+          "model": "RidgeForecast_3channel",
+          "family": "vibration_noise",
+          "detection_rate": 0.44166666666666665,
+          "control_rate": 0.0,
+          "paired_increase": 0.44166666666666665
+        },
+        {
+          "phase": "development",
+          "model": "V2",
+          "family": "current_distortion",
+          "detection_rate": 0.10833333333333334,
+          "control_rate": 0.0,
+          "paired_increase": 0.10833333333333334
+        },
+        {
+          "phase": "development",
+          "model": "V2",
+          "family": "vibration_amplification",
+          "detection_rate": 0.12083333333333333,
+          "control_rate": 0.0,
+          "paired_increase": 0.12083333333333333
+        },
+        {
+          "phase": "development",
+          "model": "V2",
+          "family": "vibration_impulse",
+          "detection_rate": 0.11875,
+          "control_rate": 0.0,
+          "paired_increase": 0.11875
+        },
+        {
+          "phase": "development",
+          "model": "V2",
+          "family": "vibration_noise",
+          "detection_rate": 0.010416666666666666,
+          "control_rate": 0.0,
+          "paired_increase": 0.010416666666666666
+        },
+        {
+          "phase": "development",
+          "model": "V2+VD3@1",
+          "family": "current_distortion",
+          "detection_rate": 0.10833333333333334,
+          "control_rate": 0.0,
+          "paired_increase": 0.10833333333333334
+        },
+        {
+          "phase": "development",
+          "model": "V2+VD3@1",
+          "family": "vibration_amplification",
+          "detection_rate": 0.12083333333333333,
+          "control_rate": 0.0,
+          "paired_increase": 0.12083333333333333
+        },
+        {
+          "phase": "development",
+          "model": "V2+VD3@1",
+          "family": "vibration_impulse",
+          "detection_rate": 0.30833333333333335,
+          "control_rate": 0.0,
+          "paired_increase": 0.30833333333333335
+        },
+        {
+          "phase": "development",
+          "model": "V2+VD3@1",
+          "family": "vibration_noise",
+          "detection_rate": 0.20625,
+          "control_rate": 0.0,
+          "paired_increase": 0.20625
+        }
+      ],
+      "ridge_tradeoff": "Historical three-channel Ridge has higher vibration-noise detection in A/B and higher vibration-impulse detection in A, but far lower current-distortion detection. Its favorable conditions are retained.",
+      "actual_metric_rows": 72,
+      "injection_condition_model_rows": 784,
+      "unchanged_original_actual_metric_rows": 36,
+      "unchanged_original_injection_condition_model_rows": 392,
+      "selected_model_unchanged": "V2+VD3@1",
+      "new_operational_rules": false,
+      "limitations": [
+        "All actual abnormal recording fragments arise from the same previously observed event",
+        "A/B normal test sets overlap; they are not independent replications",
+        "Bootstrap conditions on fitted models and calibration; blocks are recording fragments, not independent failures",
+        "A CI containing zero is not evidence of equivalence; no superiority claim in that case",
+        "The source event and comparator results had been viewed historically before this audit",
+        "No detector, threshold, R1/R2 rule or selected candidate was changed based on results"
+      ]
+    },
+    "previous_implementation_and_frozen_inference_checks": {
+      "paths": [
+        "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/independent_implementation_verification.json",
+        "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/frozen_holdout_manifest.json",
+        "yejun/analysis/press_frontier_improvement_2026-10-08/outputs/independent_data_audit.json"
+      ],
+      "independent_vd3_score_rows": 19104,
+      "maximum_absolute_vd3_score_difference": 3.410605131648481e-12,
+      "vd3_alarm_mismatches_all_audited_alphas": 0,
+      "frozen_inference_retrospective_rows": 11387,
+      "frozen_inference_alarms_equal": true,
+      "maximum_absolute_frozen_selected_score_difference": 5.684341886080802e-14,
+      "independent_failure_validation": false,
+      "additional_real_failure_data_available": false
+    },
+    "verified_test_groups": [
+      {
+        "path": "yejun/analysis/press_frontier_improvement_2026-10-08/tests/test_holdout_contracts.py",
+        "passed": 17,
+        "scope": "New-input schema/boundary/duplicate checks, no-refit evaluation, metadata exclusion and artifact integrity"
+      },
+      {
+        "path": "yejun/analysis/press_frontier_improvement_2026-10-08/tests/test_strong_baselines.py",
+        "passed": 9,
+        "scope": "Historical definition equality, causal boundaries, unavailable-row denominators, paired block bootstrap and protocol mutation"
+      },
+      {
+        "path": "yejun/analysis/press_frontier_improvement_2026-10-08/tests/test_normal_sensitivity.py",
+        "passed": 16,
+        "scope": "Normal-only sensitivity contracts and record-aggregation verification including missing records, false hit counts and invalid miss delays"
+      }
+    ],
+    "packaging_and_full_reproduction": {
+      "status": "completed_linked_runtime_verification",
+      "package_integrity_evidence_path": "yejun/submission/press_integrated_2026-10-08/package_audit.json",
+      "package_integrity_audit_passed": true,
+      "audited_final_archive_sha256": "2bee634dc651368b5b11787c7e97b1a61b2b7e4ea2a6de8a059245536f4d4ed7",
+      "archive_members": 344,
+      "immutable_file_hashes_checked": 343,
+      "original_python_files_byte_identical": 93,
+      "retained_selectable_candidates": 56,
+      "separate_or_comparators": 4,
+      "removed_nonselectable_comparators": 3,
+      "packaging_created_utc": "2026-10-07T19:15:45.781785+00:00",
+      "original_selection_created_utc": "2026-10-07T17:36:02.307310+00:00",
+      "candidate_evidence_path": "yejun/submission/press_integrated_2026-10-08/noref_candidate_reproduction.json",
+      "intermediate_noref_candidate_improvement_reproduction_passed": true,
+      "intermediate_noref_candidate_base_tests_passed": 83,
+      "additional_packaged_contract_tests_passed_separately": 25,
+      "builder_invariant_tests_passed": 6,
+      "intermediate_scope": "REF-free candidate archive improvement section; does not include the newly added strong-baseline and normal-sensitivity test groups.",
+      "final_combined_108_test_suite_verified": true,
+      "final_submission_zip_integrity_verified": true,
+      "original_26_step_full_reproduction_completed": true,
+      "note": "All required stages passed in separately documented fresh extractions. Source/data/dispatch equivalence and output hashes connect them to the final ZIP; no single sequential all-section run is claimed.",
+      "final_submission_zip_linked_runtime_verified": true,
+      "final_submission_zip_single_all_run_performed": false,
+      "original_expected_checks_passed": 43,
+      "final_extra_audit_steps_passed": 5,
+      "extra_reference_csv_files": 15,
+      "extra_reference_table_rows": 1598,
+      "final_evidence_path": "yejun/submission/press_integrated_2026-10-08/verification/clean_run.json",
+      "execution_strategy": "Official 26 steps and retained-candidate improvement 7 steps ran in separate fresh extractions using one newly installed virtual environment. Explicit source/data/dispatch bridges link both to the final ZIP; the official module has one removed unused metadata keyword, verified by AST comparison. Final ZIP extra audits ran in a third fresh extraction, reusing only hash-verified core outputs and generating all added audit outputs anew. No single sequential --section all run is claimed."
+    },
+    "report": {
+      "status": "deferred_report",
+      "manuscript_hwpx_pdf_edited_for_this_review": false,
+      "note": "Text attribution, unit consistency and report presentation changes remain deferred under the user instruction."
+    },
+    "unchanged_decisions": [
+      "No new model selection",
+      "No new fault-probability layer",
+      "No new R1/R2 or vibration escalation rule",
+      "No frequency-based alarm suppression",
+      "No data-driven post-hoc gate",
+      "No official grade or performance-generalization increase claimed"
+    ]
+  },
+  "performance_or_official_grade_increase_claimed": false,
+  "evidence_updated_utc": "2026-10-07T19:40:26.515484+00:00"
+}

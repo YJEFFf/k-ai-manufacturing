@@ -1,0 +1,11 @@
+# Reproduction environment: CPython 3.14, CPU.
+numpy==2.5.3
+pandas==3.0.6
+scipy==1.18.1
+scikit-learn==1.9.1
+statsmodels==0.15.0
+torch==2.14.0
+matplotlib==3.11.2
+threadpoolctl==3.7.0
+pytest==9.1.1
+cloudpickle==3.1.2

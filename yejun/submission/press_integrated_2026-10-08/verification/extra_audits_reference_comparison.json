@@ -1,0 +1,116 @@
+{
+  "passed": true,
+  "final_archive_sha256": "2bee634dc651368b5b11787c7e97b1a61b2b7e4ea2a6de8a059245536f4d4ed7",
+  "csv_files": 15,
+  "table_rows": 1598,
+  "checks": [
+    {
+      "file": "strong_baselines/actual_metrics.csv",
+      "rows": 72,
+      "source_sha256": "45ddb450f6c58645f6a27a036cc547946486bc4f92c333707cae31922661d468",
+      "actual_sha256": "45ddb450f6c58645f6a27a036cc547946486bc4f92c333707cae31922661d468",
+      "passed": true
+    },
+    {
+      "file": "strong_baselines/injection_family_summary.csv",
+      "rows": 48,
+      "source_sha256": "31f6f287b4ec0e8e3dbe9a3b0e5c9d3fa69ed27931cd75ab4a13250211e3159a",
+      "actual_sha256": "31f6f287b4ec0e8e3dbe9a3b0e5c9d3fa69ed27931cd75ab4a13250211e3159a",
+      "passed": true
+    },
+    {
+      "file": "strong_baselines/injection_metrics.csv",
+      "rows": 784,
+      "source_sha256": "6c18e235a9e2f34cd060063f13e65dcee6119983ad7ac4b01bd695fd9abb45b6",
+      "actual_sha256": "6c18e235a9e2f34cd060063f13e65dcee6119983ad7ac4b01bd695fd9abb45b6",
+      "passed": true
+    },
+    {
+      "file": "strong_baselines/normal_development.csv",
+      "rows": 12,
+      "source_sha256": "d3fc478a97ced1fcda12e0663524e292aa4e3e2dd1f886889ea28f29103567a9",
+      "actual_sha256": "d3fc478a97ced1fcda12e0663524e292aa4e3e2dd1f886889ea28f29103567a9",
+      "passed": true
+    },
+    {
+      "file": "strong_baselines/paired_block_bootstrap.csv",
+      "rows": 30,
+      "source_sha256": "a4d2efedcffee4b8ac970388ffc5f7f6edc96a6a2c029f043347becfcca21f8d",
+      "actual_sha256": "a4d2efedcffee4b8ac970388ffc5f7f6edc96a6a2c029f043347becfcca21f8d",
+      "passed": true
+    },
+    {
+      "file": "normal_sensitivity/A_calibration_contamination.csv",
+      "rows": 48,
+      "source_sha256": "06181a17d43ce4b179ad3261f0dd8806f8f1c1fddd894b3d7579b5c8c0867132",
+      "actual_sha256": "06181a17d43ce4b179ad3261f0dd8806f8f1c1fddd894b3d7579b5c8c0867132",
+      "passed": true
+    },
+    {
+      "file": "normal_sensitivity/A_frequency.csv",
+      "rows": 24,
+      "source_sha256": "512536c89678ff088368167a4ded82a875c7e26762576bec92736977a5bc7ea1",
+      "actual_sha256": "512536c89678ff088368167a4ded82a875c7e26762576bec92736977a5bc7ea1",
+      "passed": true
+    },
+    {
+      "file": "normal_sensitivity/A_new_families.csv",
+      "rows": 112,
+      "source_sha256": "39d96cb8efcb072b21aefa34f8138e499982bea8158b75214b99e33856ec177c",
+      "actual_sha256": "39d96cb8efcb072b21aefa34f8138e499982bea8158b75214b99e33856ec177c",
+      "passed": true
+    },
+    {
+      "file": "normal_sensitivity/B_calibration_contamination.csv",
+      "rows": 48,
+      "source_sha256": "e6a81a7f97f778f13e0ec535c39b0cf319bcb751f8c5ec52c38192f6342373d3",
+      "actual_sha256": "e6a81a7f97f778f13e0ec535c39b0cf319bcb751f8c5ec52c38192f6342373d3",
+      "passed": true
+    },
+    {
+      "file": "normal_sensitivity/B_frequency.csv",
+      "rows": 24,
+      "source_sha256": "81c6c1c9a2d887c88ec08ae87228904fc0704b1928665a3ef639d65f6c97d838",
+      "actual_sha256": "81c6c1c9a2d887c88ec08ae87228904fc0704b1928665a3ef639d65f6c97d838",
+      "passed": true
+    },
+    {
+      "file": "normal_sensitivity/B_new_families.csv",
+      "rows": 112,
+      "source_sha256": "4f442f9cef1499f2dedb8932324ee16f93ad77f30b77661b65b7542cbdff74af",
+      "actual_sha256": "4f442f9cef1499f2dedb8932324ee16f93ad77f30b77661b65b7542cbdff74af",
+      "passed": true
+    },
+    {
+      "file": "normal_sensitivity/derived_calibration_deltas.csv",
+      "rows": 96,
+      "source_sha256": "9f5059d240bd3999f02b825d6a3e00e75fb9b487c794734d4e304c80f137d886",
+      "actual_sha256": "9f5059d240bd3999f02b825d6a3e00e75fb9b487c794734d4e304c80f137d886",
+      "passed": true
+    },
+    {
+      "file": "normal_sensitivity/derived_family_macro.csv",
+      "rows": 12,
+      "source_sha256": "ae286dfec382d2986b29487d61bcf8283ee0b2bd6e300d6adfb1a3608f397dc8",
+      "actual_sha256": "ae286dfec382d2986b29487d61bcf8283ee0b2bd6e300d6adfb1a3608f397dc8",
+      "passed": true
+    },
+    {
+      "file": "normal_sensitivity/leave_one_family_out.csv",
+      "rows": 5,
+      "source_sha256": "b433e4bc89010f950e36a241c72258b57c199f6fe8d23b9e32e80314bddf3c8b",
+      "actual_sha256": "b433e4bc89010f950e36a241c72258b57c199f6fe8d23b9e32e80314bddf3c8b",
+      "passed": true
+    },
+    {
+      "file": "normal_sensitivity/normal_frequency_fits.csv",
+      "rows": 171,
+      "source_sha256": "5d7113dbca27a164471dc43f2fcf5f46089331a4579b158f75dbabfd5401f0b6",
+      "actual_sha256": "5d7113dbca27a164471dc43f2fcf5f46089331a4579b158f75dbabfd5401f0b6",
+      "passed": true
+    }
+  ],
+  "rtol": 1e-09,
+  "atol": 1e-11,
+  "scope": "Fresh added-audit reproduction matches the earlier local execution; same existing inputs, not independent failure validation."
+}

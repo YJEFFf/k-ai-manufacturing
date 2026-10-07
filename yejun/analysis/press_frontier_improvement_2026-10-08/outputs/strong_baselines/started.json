@@ -1,0 +1,13 @@
+{
+  "started_utc": "2026-10-07T19:03:18.340814+00:00",
+  "protocol_sha256": "0663a956c509a1955fa04e7ff0b797979e9558dc91f0c9994fad82fdefad7a14",
+  "normal_source": {
+    "path": "C:\\Users\\junyj\\Desktop\\k-제조데이터\\데이터셋\\3. 소성가공 예지보전 AI 데이터셋\\press_data_normal.csv",
+    "sha256": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+    "rows": 20000,
+    "records": 600,
+    "loaded_utc": "2026-10-07T19:03:18.340368+00:00",
+    "quantization": "matched"
+  },
+  "abnormal_opened": false
+}

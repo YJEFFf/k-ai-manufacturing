@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "verified_utc": "2026-10-07T19:24:20.211332+00:00",
+  "method": "Independent CSV aggregation from record outcomes; no model refit or raw dataset access",
+  "verifier_source_sha256_lf": "ab5152753e763ceaa863b2af79eda16170635c3757cd0404a7a89e07832d5372",
+  "source_summary_sha256": "c81ab5c84b662c786000ae5a92225696e20e4823f59a4db30b767457d323ac85",
+  "protocol_lock_sha256": "31338404c3c8c1db2a78d89e0fadc9baeeeb28b1d1aa0c3227259e44c827c9e6",
+  "original_selection_lock_sha256": "6173e5894ecb5e4763f8fdd9e75ef68f1e85a3c1005aca95e7d33b8d3a85cf31",
+  "summary_output_hashes_checked": 11,
+  "reviewed_B_frequency_rows_matched": null,
+  "record_aggregation_checks": [
+    {
+      "split": "A",
+      "record_scenario_rows": 13440,
+      "scenario_model_rows": 112,
+      "aggregation_exact": true,
+      "calibration_zero_control_identical": true,
+      "detail_sha256": "d8a1248173212287540c89f10648c53defbee915faf22d1e191a94479d86cb55"
+    },
+    {
+      "split": "B",
+      "record_scenario_rows": 20160,
+      "scenario_model_rows": 112,
+      "aggregation_exact": true,
+      "calibration_zero_control_identical": true,
+      "detail_sha256": "4e769f15ea9e878bec7aa242f0a0449eafd56cd83a4e2aad31d274b13bdf1623"
+    }
+  ],
+  "calibration_contamination_monotone_for_locked_scenarios": true,
+  "independent_failure_validation": false,
+  "derived_output_sha256": {
+    "derived_calibration_deltas.csv": "9f5059d240bd3999f02b825d6a3e00e75fb9b487c794734d4e304c80f137d886",
+    "derived_family_macro.csv": "ae286dfec382d2986b29487d61bcf8283ee0b2bd6e300d6adfb1a3608f397dc8"
+  }
+}
