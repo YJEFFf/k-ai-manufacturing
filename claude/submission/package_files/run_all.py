@@ -55,6 +55,8 @@ STEPS = [
     ("4_사후_이상양상", "code/press/domain/07_anomaly_patterns.py", [], False, "이상 기록 양상별 먼저 볼 곳(사후)"),
     ("4_사후_기록수F1", "code/press/tvt/06_record_count.py", [], True, "기록 하나를 1개로 센 F1(사후, 선택에 쓰지 않음)"),
     ("4_사후_R1기준선", "code/press/tvt/07_r1_on_baselines.py", [], True, "R1을 기준선에도 붙인 비교, 창 때문에 점수 없는 행(사후, 선택에 쓰지 않음)"),
+    ("4_사후_성분절제", "code/press/tvt/09_component_ablation.py", ["--repo", "."], False, "v2 성분 조합별 인공 주입 탐지율(사후, 선택에 쓰지 않음)"),
+    ("4_사후_문턱무관비교", "code/press/tvt/10_threshold_free.py", [], True, "R1 없는 행 AUROC·PR-AUC와 기록 단위 부트스트랩 구간(사후, 선택에 쓰지 않음)"),
 ]
 
 

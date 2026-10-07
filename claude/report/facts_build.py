@@ -328,6 +328,23 @@ for cs in sorted(DOM.glob("*.csv")):
         for v in pd.unique(df[col].dropna()):
             add_number(f"{cs.stem}.{col}", v, cs)
 
+# ---- 사후 2.4절 †: 문턱과 무관한 비교(tvt/10)와 성분 절제(tvt/09) ----
+TF = TVT / "threshold_free.csv"
+for r in pd.read_csv(TF).itertuples():
+    for col in ("auroc", "prauc", "f1"):
+        add(f"tf.{r.split}.{r.model}.{col}", getattr(r, col), fmt(getattr(r, col), 3), TF, f"{r.split}/{r.model}/{col}")
+TB = TVT / "threshold_free_boot.csv"
+for r in pd.read_csv(TB).itertuples():
+    for col in ("d_f1_lo", "d_f1_hi", "d_auroc_lo", "d_auroc_hi"):
+        v = getattr(r, col)
+        add(f"tfboot.{r.split}.{r.other}.{col}", v, fmt(v, 3), TB, f"{r.split}/{r.other}/{col}")
+        add(f"tfboot.{r.split}.{r.other}.{col}.2", v, fmt(v, 2), TB, f"{r.split}/{r.other}/{col}")
+ABL = TVT / "ablation_pod.csv"
+for _, r in pd.read_csv(ABL).iterrows():
+    for col in ("크기", "파형", "동역학", "크기+파형", "v2"):
+        add(f"abl.{r.split}.{r.family}.{r.target}.{r.strength}.{col}", r[col], fmt(r[col] * 100, 1), ABL,
+            f"{r.split}/{r.family}/{r.target}/{r.strength}/{col}")
+
 # ---- v5: 외부 근거 수치(report/research/*.md에 출처 URL과 함께 기록) ----
 EXT = [
     ("grid.nominal_hz", 60, "60", "domain_sources.md 7장 전기사업법 시행규칙 별표 3"),
@@ -384,8 +401,9 @@ EXT = [
     ("regB.pct_hi", 99.6, "99.6", "06 records B 학습 기준 분위"),
     ("env.python", 3.13, "3.13", "실행 환경 파이썬 판"),
     ("env.python_old", 3.12, "3.12", "팀원 예전 환경 파일 판"),
-    ("run.full_min", 56, "56", "새 환경(C:/Temp/bj_v3) run_all.py 전체 55.7분, 10/6, 최종 zip"),
-    ("run.checks", 26, "26", "run_all.py 결과 대조 26/26"),
+    ("run.full_min", 63, "63", "새 환경(C:/Temp/bj_v3/run4) run_all.py 전체 62.8분, 10/7, 최종 zip"),
+    ("run.quick_min", 24, "24", "같은 실행의 quick 단계 시간 합 24.3분(logs/run_summary.json)"),
+    ("run.checks", 31, "31", "run_all.py 결과 대조 31/31"),
     ("run.cpu_cores", 16, "16", "검증 PC Core Ultra 7 155H 16코어"),
     # 2.3절 보완 LSTM 비교(†): 예준 yejun/final-review 62482a5, research/yejun_lstm_improvement_62482a5/
     ("lstm.variants", 516, "516", "LSTM README: 변형 516개(설정 26 × 채점)"),
@@ -437,6 +455,9 @@ EXT = [
     ("prob.ece_B", 0.0064, "0.006", "test_predictions_B.csv v2_prob_fileprior ECE"),
     ("gap.median_s", 4.22, "4.2", "press_data_normal.csv 기록 사이 공백(>0.15s) 중앙값, 598개"),
     ("gap.p90_s", 8.4, "8.4", "같은 공백 90% 분위"),
+    ("tfboot.n", 2000, "2,000", "tvt/10 부트스트랩 반복 수"),
+    ("tfboot.base_min_lo", 0.3261, "0.33", "threshold_free_boot.csv 베이스라인 대비 d_f1_lo 최솟값(B mlp_ae5)"),
+    ("lstm.ctrl_B_pct", 0.6, "0.6", "LSTM README: 주입 없는 대조 경보율 B 0.6%"),
 ]
 for fid, v, shown, src in EXT:
     add(fid, v, shown, "report/research", src)

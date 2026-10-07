@@ -127,6 +127,19 @@ def build_expected():
     where = dict(split="A", model="lstm20")
     checks.append(dict(name="LSTM 20행 창 때문에 점수 없는 test 이상 행 A", kind="csv", file="code/press/tvt/outputs/tvt_unscored.csv", where=where,
                        column="no_score_rows", value=csv_value(tvt / "tvt_unscored.csv", where, "no_score_rows"), quick=True, report="(2.4절)"))
+    # 문턱과 무관한 비교(10, 사후, 2.4절 †): R1 없는 test 행 AUROC와 v2−v1 F1 차이의 부트스트랩 하한
+    for s_ in ("A", "B"):
+        where = dict(split=s_, model="v2")
+        checks.append(dict(name=f"test 행 AUROC 기반 모델 v2 {s_}(R1 없이)", kind="csv", file="code/press/tvt/outputs/threshold_free.csv",
+                           where=where, column="auroc", value=csv_value(tvt / "threshold_free.csv", where, "auroc"), tol=1e-9, quick=True, report="(2.4절 †)"))
+    where = dict(split="B", other="v1")
+    checks.append(dict(name="부트스트랩 v2−v1 F1 차이 95% 하한 B", kind="csv", file="code/press/tvt/outputs/threshold_free_boot.csv",
+                       where=where, column="d_f1_lo", value=csv_value(tvt / "threshold_free_boot.csv", where, "d_f1_lo"), tol=1e-6, quick=True, report="(2.4절 †)"))
+    # 성분 절제(09, 사후, 2.4절 †): 분할 B 전류 파형 주입 강도 1의 크기 성분만 / v2 탐지율(전체 실행)
+    for col, label in (("크기", "크기 성분만"), ("v2", "v2(세 성분)")):
+        where = dict(split="B", family="current_residual", target="2", strength="1.0")
+        checks.append(dict(name=f"성분 절제: 전류 파형 주입 강도 1 탐지율 {label} B", kind="csv", file="code/press/tvt/outputs/ablation_pod.csv",
+                           where=where, column=col, value=csv_value(tvt / "ablation_pod.csv", where, col), tol=1e-9, report="(2.4절 †)"))
     return dict(note="보고서 작성 때(2026-10-04) 볼트 산출물에서 뽑은 값. run_all.py가 실행 뒤 같은 위치의 값과 비교한다",
                 checks=checks)
 
