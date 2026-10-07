@@ -1,7 +1,7 @@
 ---
 title: 제조데이터 경진대회 MOC
 created: 2026-09-21
-updated: 2026-10-05
+updated: 2026-10-07
 tags: [moc/contest, contest/k-ai-manufacturing]
 source: 제6회 K-인공지능 제조데이터 분석 경진대회 과제공개 hwpx (KAMP)
 status: seed
@@ -43,6 +43,7 @@ status: seed
   - `report/plans/` 보고서 계획 v1·v4·v5 · `report/logs/` 판단 기록·검토 기록·v5 진행표
 
 ## 진행
+- **2026-10-07 예준 2차 검수 반영(4회차)** → 빨간 표시 9곳 중 8곳 반영(요일 표시는 2.2절 냉간 기동 가설 근거라 유지), 검증 V1~V5를 E1·E2·E3·E5로 개명, 3.3 실패하는 조건 명시. 예준의 가이드북 LSTM 보완 실험(`yejun/final-review` 62482a5)을 2.3절 끝 "사후 확인(†)"으로 넣음 — 보완 LSTM test 0.975·0.972로 v2와 같은 수준이나 전류 파형 이상 주입·전류 수준 이동에서 갈림. critic 1회(REVISE, 수치 오류 0) 반영 → 새 문단만 윤문(숫자·기호 차이 0). 보고서 46쪽, check_facts 0, 레이아웃 문제 0. 회신 기록 `report/logs/review_response_2026-10-05.md` 4회차 절, 근거 `report/research/yejun_lstm_improvement_62482a5/`
 - **2026-10-06 3회차 보강·최종본** → 점수 토론(84점)에서 고칠 수 있다고 합의한 감점을 문서·코드로 고침. 이상 확률을 valid로만 보정해 예측 파일 열로 추가(`code/press/tvt/08_probability.py`, Brier A 0.0046·B 0.0038), 예준 제안대로 이상 기록을 양상별로 묶어 '먼저 볼 곳' 표 추가(`code/press/domain/07_anomaly_patterns.py`, 4.2절), 모델 구조도(그림 8)·최종 모델 경보 카드(그림 13), 2.4절 미탐·오경보 행 열, 3.2절 Clopper–Pearson 구간, 5장 대조표 정리. 제출 zip 288개 파일·3.2MB, 새 가상환경 전체 실행 대조 26/26 일치·55.7분. 보고서 42쪽·그림 13장·참고문헌 26개(주요 11·보조 15). 진행표 `report/logs/round3_progress.md`, 예준 확인 질문 `report/logs/검토요청_예준.md`, 톡 초안 `report/logs/예준_톡_초안.md`. 남은 일: 만족도 조사 캡처 교체, 발표자료
 - **2026-10-05 참고문헌 정리·장별 쪽 나눔** → 참고문헌을 주요 11개(방법·평가)·보조 15개(설비·규격·자료)로 나눔(26개). 각 장과 참고문헌이 새 쪽에서 시작(build_hwpx.py). 보고서 35쪽. 한글에서 고친 원본은 `report/_archive/결과보고서_북적북적_사용자수정_1005.hwpx`
 - **2026-10-05 예준 검수 반영** → 검수 12개를 ralplan(Architect·Critic 3회, 3회차 승인)으로 걸러 반영. 회신 `report/logs/review_response_2026-10-05.md`. 기록 단위 F1을 "기록 판정 F1(행 가중)"으로 이름 정리하고 기록 하나를 1개로 센 F1을 † 열로 추가(`code/press/tvt/06_record_count.py`), zip에 `predictions/` 추가(공고 필수 예측결과 파일이 빠져 있었음), "팀원 v2" 등 30곳 정정, 앨리어싱·부하·문헌 범위 표현을 증거만큼으로. 새 가상환경 전체 실행 21/21 일치(80분, 다른 작업과 동시 실행. 단독 56분). 보고서 33쪽. 코드 변경 없는 대비 zip은 `submission/_archive/`
