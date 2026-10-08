@@ -1,0 +1,44 @@
+{
+  "review_date": "2026-10-08",
+  "report_path": "/Volumes/YJSSD/공모전/k-제조데이터/yejun/결과보고서_북적북적_통합본_2026-10-08/결과보고서_북적북적_통합본.md",
+  "report_sha256": "37061cfa50b9dfbcca6b1e223d073b86f8df177ce41671d91bd952345ba1badd",
+  "report_lines": 773,
+  "pdf_pages": 44,
+  "pdf_pages_visually_sampled": [
+    1,
+    13,
+    17,
+    22,
+    23,
+    24,
+    31,
+    36,
+    39,
+    40,
+    44
+  ],
+  "archive_path": "/private/tmp/kai-integrated-20261008/yejun/submission/press_integrated_2026-10-08/북적북적_code_통합본.zip",
+  "archive_sha256": "3ad0b609dfa737ed99dfee245c302cc335efa452943adb20e793fa8fbe46c375",
+  "bundled_check_exit_code": 0,
+  "manifest_files_verified": 401,
+  "full_training_rerun_in_this_review": false,
+  "previous_windows_run_log_checked": true,
+  "raw_data": [
+    {
+      "file": "press_data_normal.csv",
+      "rows": 20000,
+      "records": 600,
+      "duplicated_timestamp_and_sensor_rows": 1,
+      "start": "2022-07-12 00:00:00.019000",
+      "end": "2022-07-12 01:16:55.828000"
+    },
+    {
+      "file": "outlier_data.csv",
+      "rows": 600,
+      "records": 21,
+      "duplicated_timestamp_and_sensor_rows": 0,
+      "start": "2022-07-17 10:51:07.943000",
+      "end": "2022-07-17 10:53:53.540000"
+    }
+  ]
+}

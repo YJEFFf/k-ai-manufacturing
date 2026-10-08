@@ -1,0 +1,321 @@
+{
+  "probability": {
+    "A": {
+      "v2_prob_fileprior": {
+        "unweighted_brier": 0.004558229652465791,
+        "normal_mean_sqerror": 0.00017361329672518336,
+        "anomaly_mean_sqerror": 0.05990724476042593,
+        "reweighted_brier_at_1pct": 0.0007709496113621908
+      },
+      "v2_prob_site1pct": {
+        "unweighted_brier": 0.018248764793228137,
+        "normal_mean_sqerror": 2.7871612646699266e-05,
+        "anomaly_mean_sqerror": 0.24825942253575306,
+        "reweighted_brier_at_1pct": 0.0025101871218777628
+      }
+    },
+    "B": {
+      "v2_prob_fileprior": {
+        "unweighted_brier": 0.0038062105835938325,
+        "normal_mean_sqerror": 0.00038635584838510746,
+        "anomaly_mean_sqerror": 0.06816069922732097,
+        "reweighted_brier_at_1pct": 0.001064099282174466
+      },
+      "v2_prob_site1pct": {
+        "unweighted_brier": 0.012453669290813268,
+        "normal_mean_sqerror": 0.00014953599618500906,
+        "anomaly_mean_sqerror": 0.2439916344060864,
+        "reweighted_brier_at_1pct": 0.002587956980284023
+      }
+    }
+  },
+  "improvement_metrics": [
+    {
+      "split": "A",
+      "model": "V2",
+      "abnormal_subset": "back11",
+      "row_f1": "0.9648562300319489",
+      "normal_fp_records": "0",
+      "detected_records": "11",
+      "fn": "22"
+    },
+    {
+      "split": "A",
+      "model": "V2",
+      "abnormal_subset": "all21",
+      "row_f1": "0.9619377162629758",
+      "normal_fp_records": "0",
+      "detected_records": "21",
+      "fn": "44"
+    },
+    {
+      "split": "A",
+      "model": "VD3",
+      "abnormal_subset": "back11",
+      "row_f1": "0.6475409836065574",
+      "normal_fp_records": "1",
+      "detected_records": "8",
+      "fn": "166"
+    },
+    {
+      "split": "A",
+      "model": "VD3",
+      "abnormal_subset": "all21",
+      "row_f1": "0.6797385620915033",
+      "normal_fp_records": "1",
+      "detected_records": "16",
+      "fn": "288"
+    },
+    {
+      "split": "A",
+      "model": "V2+VD3@1",
+      "abnormal_subset": "back11",
+      "row_f1": "0.9714285714285714",
+      "normal_fp_records": "0",
+      "detected_records": "11",
+      "fn": "18"
+    },
+    {
+      "split": "A",
+      "model": "V2+VD3@1",
+      "abnormal_subset": "all21",
+      "row_f1": "0.9681857265692175",
+      "normal_fp_records": "0",
+      "detected_records": "21",
+      "fn": "37"
+    },
+    {
+      "split": "A",
+      "model": "OR_V2_VD3",
+      "abnormal_subset": "back11",
+      "row_f1": "0.9622641509433962",
+      "normal_fp_records": "1",
+      "detected_records": "11",
+      "fn": "18"
+    },
+    {
+      "split": "A",
+      "model": "OR_V2_VD3",
+      "abnormal_subset": "all21",
+      "row_f1": "0.9641025641025641",
+      "normal_fp_records": "1",
+      "detected_records": "21",
+      "fn": "36"
+    },
+    {
+      "split": "B",
+      "model": "V2",
+      "abnormal_subset": "back11",
+      "row_f1": "0.9700787401574803",
+      "normal_fp_records": "3",
+      "detected_records": "11",
+      "fn": "16"
+    },
+    {
+      "split": "B",
+      "model": "V2",
+      "abnormal_subset": "all21",
+      "row_f1": "0.9709897610921502",
+      "normal_fp_records": "3",
+      "detected_records": "21",
+      "fn": "31"
+    },
+    {
+      "split": "B",
+      "model": "VD3",
+      "abnormal_subset": "back11",
+      "row_f1": "0.6212765957446809",
+      "normal_fp_records": "0",
+      "detected_records": "8",
+      "fn": "178"
+    },
+    {
+      "split": "B",
+      "model": "VD3",
+      "abnormal_subset": "all21",
+      "row_f1": "0.6577181208053692",
+      "normal_fp_records": "0",
+      "detected_records": "16",
+      "fn": "306"
+    },
+    {
+      "split": "B",
+      "model": "V2+VD3@1",
+      "abnormal_subset": "back11",
+      "row_f1": "0.9733124018838305",
+      "normal_fp_records": "3",
+      "detected_records": "11",
+      "fn": "14"
+    },
+    {
+      "split": "B",
+      "model": "V2+VD3@1",
+      "abnormal_subset": "all21",
+      "row_f1": "0.9744897959183674",
+      "normal_fp_records": "3",
+      "detected_records": "21",
+      "fn": "27"
+    },
+    {
+      "split": "B",
+      "model": "OR_V2_VD3",
+      "abnormal_subset": "back11",
+      "row_f1": "0.9733124018838305",
+      "normal_fp_records": "3",
+      "detected_records": "11",
+      "fn": "14"
+    },
+    {
+      "split": "B",
+      "model": "OR_V2_VD3",
+      "abnormal_subset": "all21",
+      "row_f1": "0.9744897959183674",
+      "normal_fp_records": "3",
+      "detected_records": "21",
+      "fn": "27"
+    }
+  ],
+  "repeat_threshold": {
+    "3.1055445184119974": 0.04649000743409782,
+    "7.457368708880897": 0.999879313819699,
+    "9.775933685728884": 0.9999999936176741
+  },
+  "injection_table_checks": [
+    {
+      "family": "current_distortion",
+      "strength": 0.5,
+      "report": [
+        14.6,
+        30.2,
+        14.6,
+        27.8
+      ],
+      "recomputed": [
+        14.583333333333332,
+        30.185185185185187,
+        14.583333333333332,
+        27.77777777777778
+      ],
+      "matches": true
+    },
+    {
+      "family": "current_distortion",
+      "strength": 1,
+      "report": [
+        52.2,
+        57.5,
+        52.2,
+        55.2
+      ],
+      "recomputed": [
+        52.22222222222223,
+        57.50000000000001,
+        52.22222222222223,
+        55.18518518518518
+      ],
+      "matches": true
+    },
+    {
+      "family": "vibration_noise",
+      "strength": 0.5,
+      "report": [
+        0.0,
+        1.8,
+        16.5,
+        25.3
+      ],
+      "recomputed": [
+        0.0,
+        1.7592592592592593,
+        16.52777777777778,
+        25.324074074074076
+      ],
+      "matches": true
+    },
+    {
+      "family": "vibration_noise",
+      "strength": 1,
+      "report": [
+        0.6,
+        9.2,
+        57.4,
+        68.0
+      ],
+      "recomputed": [
+        0.5555555555555556,
+        9.166666666666666,
+        57.430555555555564,
+        67.96296296296296
+      ],
+      "matches": true
+    },
+    {
+      "family": "vibration_impulse",
+      "strength": 2,
+      "report": [
+        0.2,
+        3.5,
+        39.6,
+        45.6
+      ],
+      "recomputed": [
+        0.20833333333333334,
+        3.4722222222222223,
+        39.58333333333333,
+        45.55555555555556
+      ],
+      "matches": true
+    },
+    {
+      "family": "vibration_impulse",
+      "strength": 4,
+      "report": [
+        15.2,
+        65.6,
+        92.1,
+        98.6
+      ],
+      "recomputed": [
+        15.208333333333332,
+        65.55555555555556,
+        92.08333333333333,
+        98.61111111111111
+      ],
+      "matches": true
+    },
+    {
+      "family": "vibration_amplification",
+      "strength": 0.5,
+      "report": [
+        0.6,
+        11.4,
+        0.8,
+        8.8
+      ],
+      "recomputed": [
+        0.625,
+        11.38888888888889,
+        0.8333333333333334,
+        8.75
+      ],
+      "matches": true
+    },
+    {
+      "family": "vibration_amplification",
+      "strength": 1,
+      "report": [
+        8.5,
+        24.3,
+        9.8,
+        26.2
+      ],
+      "recomputed": [
+        8.541666666666666,
+        24.305555555555554,
+        9.791666666666666,
+        26.25
+      ],
+      "matches": true
+    }
+  ]
+}
