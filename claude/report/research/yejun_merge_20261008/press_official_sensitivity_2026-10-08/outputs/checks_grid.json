@@ -1,0 +1,50 @@
+{
+  "cache": {
+    "A": {
+      "sha256": "9e70cc018c2c1db6078ca62121f4dc4bc7ed03152bc242a517836d31cb2e7632",
+      "selection_inputs_sha256": "9e70cc018c2c1db6078ca62121f4dc4bc7ed03152bc242a517836d31cb2e7632",
+      "ok": true
+    },
+    "B": {
+      "sha256": "d4b967564d300dc62e1f3219bdb26a00885f8a8affdc592faef127a57b0b09db",
+      "selection_inputs_sha256": "d4b967564d300dc62e1f3219bdb26a00885f8a8affdc592faef127a57b0b09db",
+      "ok": true
+    }
+  },
+  "official_reproduction": {
+    "checked": 156,
+    "mismatches": [],
+    "ok": true
+  },
+  "prefix_and_r2_ref": {
+    "A: prefix_r2(8) == cached (bitwise, NaN positions)": true,
+    "A: r2_ref(0.005, 8) == meta": true,
+    "A: r2_ref recomputed": 0.9843232292370663,
+    "B: prefix_r2(8) == cached (bitwise, NaN positions)": true,
+    "B: r2_ref(0.005, 8) == meta": true,
+    "B: r2_ref recomputed": 0.9843965274302617
+  },
+  "patch_visibility": {
+    "evalcore.stream_rules is lib.stream_rules": true,
+    "evalcore.record_flags is lib.record_flags": true,
+    "07.stream_rules is lib.stream_rules": true,
+    "lib.stream_rules globals are lib module": true,
+    "lib.prefix_r2 globals are lib module": true,
+    "evalcore has no copied constants": true,
+    "07 has no copied rule constants": true,
+    "A: GAP_S=-1 -> stage1 == v2": true,
+    "A: GAP_S=-1 -> 07.test_only == v2": true,
+    "A: CONFIRM_ROWS=1e9 -> stage1 == v2": true,
+    "A: R2_MIN_LEN=6 -> first m-1 rows NaN only": true,
+    "A: R2_MIN_LEN=8 -> first m-1 rows NaN only": true,
+    "A: R2_MIN_LEN=10 -> first m-1 rows NaN only": true,
+    "B: GAP_S=-1 -> stage1 == v2": true,
+    "B: GAP_S=-1 -> 07.test_only == v2": true,
+    "B: CONFIRM_ROWS=1e9 -> stage1 == v2": true,
+    "B: R2_MIN_LEN=6 -> first m-1 rows NaN only": true,
+    "B: R2_MIN_LEN=8 -> first m-1 rows NaN only": true,
+    "B: R2_MIN_LEN=10 -> first m-1 rows NaN only": true,
+    "constants restored": true
+  },
+  "all_ok": true
+}

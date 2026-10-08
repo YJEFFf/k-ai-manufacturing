@@ -1,0 +1,749 @@
+{
+  "version": "frontier-20261008-v1",
+  "study": "retrospective_same_dataset_not_independent_test",
+  "development": {
+    "fit": [
+      0,
+      120
+    ],
+    "calibration": [
+      120,
+      240
+    ],
+    "selection": [
+      240,
+      300
+    ]
+  },
+  "evaluation_splits": {
+    "A": [
+      360,
+      480,
+      600
+    ],
+    "B": [
+      300,
+      420,
+      600
+    ]
+  },
+  "alphas": [
+    0.01,
+    0.03,
+    0.05
+  ],
+  "injection_alpha": 0.01,
+  "candidates": [
+    {
+      "name": "V2",
+      "kind": "single",
+      "components": [
+        "V2"
+      ],
+      "weight": 1.0,
+      "complexity": 1,
+      "selectable": true
+    },
+    {
+      "name": "C",
+      "kind": "single",
+      "components": [
+        "C"
+      ],
+      "weight": 1.0,
+      "complexity": 1,
+      "selectable": true
+    },
+    {
+      "name": "W",
+      "kind": "single",
+      "components": [
+        "W"
+      ],
+      "weight": 1.0,
+      "complexity": 1,
+      "selectable": true
+    },
+    {
+      "name": "CD",
+      "kind": "single",
+      "components": [
+        "CD"
+      ],
+      "weight": 1.0,
+      "complexity": 1,
+      "selectable": true
+    },
+    {
+      "name": "VR1",
+      "kind": "single",
+      "components": [
+        "VR1"
+      ],
+      "weight": 1.0,
+      "complexity": 1,
+      "selectable": true
+    },
+    {
+      "name": "VR3",
+      "kind": "single",
+      "components": [
+        "VR3"
+      ],
+      "weight": 1.0,
+      "complexity": 1,
+      "selectable": true
+    },
+    {
+      "name": "VD1",
+      "kind": "single",
+      "components": [
+        "VD1"
+      ],
+      "weight": 1.0,
+      "complexity": 1,
+      "selectable": true
+    },
+    {
+      "name": "VD3",
+      "kind": "single",
+      "components": [
+        "VD3"
+      ],
+      "weight": 1.0,
+      "complexity": 1,
+      "selectable": true
+    },
+    {
+      "name": "V2+VR1@0.5",
+      "kind": "fusion",
+      "components": [
+        "V2",
+        "VR1"
+      ],
+      "weight": 0.5,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "V2+VR1@1",
+      "kind": "fusion",
+      "components": [
+        "V2",
+        "VR1"
+      ],
+      "weight": 1.0,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "V2+VR1@2",
+      "kind": "fusion",
+      "components": [
+        "V2",
+        "VR1"
+      ],
+      "weight": 2.0,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "V2+VR3@0.5",
+      "kind": "fusion",
+      "components": [
+        "V2",
+        "VR3"
+      ],
+      "weight": 0.5,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "V2+VR3@1",
+      "kind": "fusion",
+      "components": [
+        "V2",
+        "VR3"
+      ],
+      "weight": 1.0,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "V2+VR3@2",
+      "kind": "fusion",
+      "components": [
+        "V2",
+        "VR3"
+      ],
+      "weight": 2.0,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "V2+VD1@0.5",
+      "kind": "fusion",
+      "components": [
+        "V2",
+        "VD1"
+      ],
+      "weight": 0.5,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "V2+VD1@1",
+      "kind": "fusion",
+      "components": [
+        "V2",
+        "VD1"
+      ],
+      "weight": 1.0,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "V2+VD1@2",
+      "kind": "fusion",
+      "components": [
+        "V2",
+        "VD1"
+      ],
+      "weight": 2.0,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "V2+VD3@0.5",
+      "kind": "fusion",
+      "components": [
+        "V2",
+        "VD3"
+      ],
+      "weight": 0.5,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "V2+VD3@1",
+      "kind": "fusion",
+      "components": [
+        "V2",
+        "VD3"
+      ],
+      "weight": 1.0,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "V2+VD3@2",
+      "kind": "fusion",
+      "components": [
+        "V2",
+        "VD3"
+      ],
+      "weight": 2.0,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "C+VR1@0.5",
+      "kind": "fusion",
+      "components": [
+        "C",
+        "VR1"
+      ],
+      "weight": 0.5,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "C+VR1@1",
+      "kind": "fusion",
+      "components": [
+        "C",
+        "VR1"
+      ],
+      "weight": 1.0,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "C+VR1@2",
+      "kind": "fusion",
+      "components": [
+        "C",
+        "VR1"
+      ],
+      "weight": 2.0,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "C+VR3@0.5",
+      "kind": "fusion",
+      "components": [
+        "C",
+        "VR3"
+      ],
+      "weight": 0.5,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "C+VR3@1",
+      "kind": "fusion",
+      "components": [
+        "C",
+        "VR3"
+      ],
+      "weight": 1.0,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "C+VR3@2",
+      "kind": "fusion",
+      "components": [
+        "C",
+        "VR3"
+      ],
+      "weight": 2.0,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "C+VD1@0.5",
+      "kind": "fusion",
+      "components": [
+        "C",
+        "VD1"
+      ],
+      "weight": 0.5,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "C+VD1@1",
+      "kind": "fusion",
+      "components": [
+        "C",
+        "VD1"
+      ],
+      "weight": 1.0,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "C+VD1@2",
+      "kind": "fusion",
+      "components": [
+        "C",
+        "VD1"
+      ],
+      "weight": 2.0,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "C+VD3@0.5",
+      "kind": "fusion",
+      "components": [
+        "C",
+        "VD3"
+      ],
+      "weight": 0.5,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "C+VD3@1",
+      "kind": "fusion",
+      "components": [
+        "C",
+        "VD3"
+      ],
+      "weight": 1.0,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "C+VD3@2",
+      "kind": "fusion",
+      "components": [
+        "C",
+        "VD3"
+      ],
+      "weight": 2.0,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "W+VR1@0.5",
+      "kind": "fusion",
+      "components": [
+        "W",
+        "VR1"
+      ],
+      "weight": 0.5,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "W+VR1@1",
+      "kind": "fusion",
+      "components": [
+        "W",
+        "VR1"
+      ],
+      "weight": 1.0,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "W+VR1@2",
+      "kind": "fusion",
+      "components": [
+        "W",
+        "VR1"
+      ],
+      "weight": 2.0,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "W+VR3@0.5",
+      "kind": "fusion",
+      "components": [
+        "W",
+        "VR3"
+      ],
+      "weight": 0.5,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "W+VR3@1",
+      "kind": "fusion",
+      "components": [
+        "W",
+        "VR3"
+      ],
+      "weight": 1.0,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "W+VR3@2",
+      "kind": "fusion",
+      "components": [
+        "W",
+        "VR3"
+      ],
+      "weight": 2.0,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "W+VD1@0.5",
+      "kind": "fusion",
+      "components": [
+        "W",
+        "VD1"
+      ],
+      "weight": 0.5,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "W+VD1@1",
+      "kind": "fusion",
+      "components": [
+        "W",
+        "VD1"
+      ],
+      "weight": 1.0,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "W+VD1@2",
+      "kind": "fusion",
+      "components": [
+        "W",
+        "VD1"
+      ],
+      "weight": 2.0,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "W+VD3@0.5",
+      "kind": "fusion",
+      "components": [
+        "W",
+        "VD3"
+      ],
+      "weight": 0.5,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "W+VD3@1",
+      "kind": "fusion",
+      "components": [
+        "W",
+        "VD3"
+      ],
+      "weight": 1.0,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "W+VD3@2",
+      "kind": "fusion",
+      "components": [
+        "W",
+        "VD3"
+      ],
+      "weight": 2.0,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "CD+VR1@0.5",
+      "kind": "fusion",
+      "components": [
+        "CD",
+        "VR1"
+      ],
+      "weight": 0.5,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "CD+VR1@1",
+      "kind": "fusion",
+      "components": [
+        "CD",
+        "VR1"
+      ],
+      "weight": 1.0,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "CD+VR1@2",
+      "kind": "fusion",
+      "components": [
+        "CD",
+        "VR1"
+      ],
+      "weight": 2.0,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "CD+VR3@0.5",
+      "kind": "fusion",
+      "components": [
+        "CD",
+        "VR3"
+      ],
+      "weight": 0.5,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "CD+VR3@1",
+      "kind": "fusion",
+      "components": [
+        "CD",
+        "VR3"
+      ],
+      "weight": 1.0,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "CD+VR3@2",
+      "kind": "fusion",
+      "components": [
+        "CD",
+        "VR3"
+      ],
+      "weight": 2.0,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "CD+VD1@0.5",
+      "kind": "fusion",
+      "components": [
+        "CD",
+        "VD1"
+      ],
+      "weight": 0.5,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "CD+VD1@1",
+      "kind": "fusion",
+      "components": [
+        "CD",
+        "VD1"
+      ],
+      "weight": 1.0,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "CD+VD1@2",
+      "kind": "fusion",
+      "components": [
+        "CD",
+        "VD1"
+      ],
+      "weight": 2.0,
+      "complexity": 2,
+      "selectable": true
+    },
+    {
+      "name": "CD+VD3@0.5",
+      "kind": "fusion",
+      "components": [
+        "CD",
+        "VD3"
+      ],
+      "weight": 0.5,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "CD+VD3@1",
+      "kind": "fusion",
+      "components": [
+        "CD",
+        "VD3"
+      ],
+      "weight": 1.0,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "CD+VD3@2",
+      "kind": "fusion",
+      "components": [
+        "CD",
+        "VD3"
+      ],
+      "weight": 2.0,
+      "complexity": 3,
+      "selectable": true
+    },
+    {
+      "name": "REF_PCA",
+      "kind": "reference",
+      "components": [
+        "REF_PCA"
+      ],
+      "weight": 1.0,
+      "complexity": 3,
+      "selectable": false
+    },
+    {
+      "name": "REF_VIB",
+      "kind": "reference",
+      "components": [
+        "REF_VIB"
+      ],
+      "weight": 1.0,
+      "complexity": 3,
+      "selectable": false
+    },
+    {
+      "name": "REF_AND",
+      "kind": "reference",
+      "components": [
+        "REF_AND"
+      ],
+      "weight": 1.0,
+      "complexity": 3,
+      "selectable": false
+    }
+  ],
+  "or_comparators": [
+    "OR_V2_VR1",
+    "OR_V2_VR3",
+    "OR_V2_VD1",
+    "OR_V2_VD3"
+  ],
+  "injection_families": {
+    "vibration_noise": {
+      "targets": [
+        0,
+        1
+      ],
+      "strengths": [
+        0.5,
+        1.0
+      ]
+    },
+    "vibration_impulse": {
+      "targets": [
+        0,
+        1
+      ],
+      "strengths": [
+        2.0,
+        4.0
+      ]
+    },
+    "vibration_amplification": {
+      "targets": [
+        0,
+        1
+      ],
+      "strengths": [
+        0.5,
+        1.0
+      ]
+    },
+    "current_distortion": {
+      "targets": [
+        2
+      ],
+      "strengths": [
+        0.5,
+        1.0
+      ]
+    }
+  },
+  "onset_fractions": [
+    0.25,
+    0.6
+  ],
+  "development_seeds": [
+    101
+  ],
+  "evaluation_seeds": [
+    811,
+    1217,
+    2027
+  ],
+  "quantization": "Original CSV matched quantization before injection/stress; continuous additive deltas retained",
+  "normal_record_gate": 0.05,
+  "each_offset_fpr_increase_gate": 0.02,
+  "ranking": [
+    "max minimum of four family mean detection rates",
+    "max family macro mean detection",
+    "min maximum stress record false alarm rate",
+    "min complexity",
+    "lexical name"
+  ],
+  "baseline_scope": "59 protocol candidates plus four separately calibrated OR comparators. These VR/VD branches are not the earlier three-channel RidgeForecast. Feature-matched 5NN and earlier Ridge are historical report comparisons, not rerun here.",
+  "no_alarm_persistence": true,
+  "unavailable_rows": "kept in all metric denominators",
+  "stress_assumptions": "offset +/- train SD per sensor; gain .8/1.2; current load AC multiplier .5/1.5 about train mean; all-channel 4x quantization; stuck final half; jitter sigma .1/.5 ms on assumed 60.6Hz carrier"
+}

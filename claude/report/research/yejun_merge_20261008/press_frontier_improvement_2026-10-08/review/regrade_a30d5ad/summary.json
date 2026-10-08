@@ -1,0 +1,119 @@
+{
+  "evaluated_commit": "a30d5ad",
+  "method": "Three separate AI reviewers (J1 academic ML, J2 field PdM, J3 competition operations); six-category rubric, 0.5-point grades; report + submitted ZIP only (repository paths treated as inaccessible); unblinded; J3 alone ran short checks in a temp folder; not official competition results",
+  "entries": {
+    "BASE61": "claude/report/final_v5.md (c898be2, 61p) + claude/submission/북적북적_code.zip",
+    "PREV65": "개선본 65p (7f523b6 = a30d5ad, unchanged) + original ZIP",
+    "CUR65": "same 65p report + yejun/submission/press_integrated_2026-10-08/북적북적_code_통합본.zip (SHA-256 2bee634d…)",
+    "REF19": "competitor E19 factsheet only"
+  },
+  "judge_totals": {
+    "J1": {
+      "BASE61": 87.0,
+      "PREV65": 86.5,
+      "CUR65": 88.0,
+      "REF19": 84.0
+    },
+    "J2": {
+      "BASE61": 89.0,
+      "PREV65": 88.0,
+      "CUR65": 89.5,
+      "REF19": 86.0
+    },
+    "J3": {
+      "BASE61": 92.0,
+      "PREV65": 90.5,
+      "CUR65": 91.0,
+      "REF19": 83.5
+    }
+  },
+  "means": {
+    "BASE61": {
+      "data": 14.5,
+      "model": 33.83,
+      "error": 13.67,
+      "field": 9.0,
+      "creative": 9.17,
+      "code": 9.17,
+      "total": 89.33
+    },
+    "PREV65": {
+      "data": 14.5,
+      "model": 33.67,
+      "error": 13.83,
+      "field": 9.0,
+      "creative": 9.17,
+      "code": 8.17,
+      "total": 88.33
+    },
+    "CUR65": {
+      "data": 14.5,
+      "model": 34.17,
+      "error": 14.0,
+      "field": 9.0,
+      "creative": 9.17,
+      "code": 8.67,
+      "total": 89.5
+    },
+    "REF19": {
+      "data": 13.83,
+      "model": 31.17,
+      "error": 13.5,
+      "field": 8.33,
+      "creative": 8.83,
+      "code": 8.83,
+      "total": 84.5
+    }
+  },
+  "delta_cur_minus_prev": {
+    "data": 0.0,
+    "model": 0.5,
+    "error": 0.17,
+    "field": 0.0,
+    "creative": 0.0,
+    "code": 0.5,
+    "total": 1.17
+  },
+  "delta_cur_minus_base": {
+    "data": 0.0,
+    "model": 0.34,
+    "error": 0.33,
+    "field": 0.0,
+    "creative": 0.0,
+    "code": -0.5,
+    "total": 0.17
+  },
+  "per_judge_deltas": {
+    "J1": {
+      "CUR65-PREV65": 1.5,
+      "CUR65-BASE61": 1.0,
+      "PREV65-BASE61": -0.5
+    },
+    "J2": {
+      "CUR65-PREV65": 1.5,
+      "CUR65-BASE61": 0.5,
+      "PREV65-BASE61": -1.0
+    },
+    "J3": {
+      "CUR65-PREV65": 0.5,
+      "CUR65-BASE61": -1.0,
+      "PREV65-BASE61": -1.5
+    }
+  },
+  "judge_spread_cur65": [
+    88.0,
+    91.0
+  ],
+  "notes": [
+    "All three judges score CUR65 above PREV65 (+0.5~+1.5): the integrated ZIP makes section 2.8 numbers verifiable.",
+    "CUR65 vs BASE61 is +0.17 on average with mixed signs (J1 +1.0, J2 +0.5, J3 -1.0), smaller than the 3-point judge spread: no reliable gain over the original 61p under report+ZIP-only judging.",
+    "Main loss: report chapter 6 and section 2.8 still describe the original ZIP / repository paths (Python 3.13, environment.yml, predictions/, README 0절, --quick 13 min, 59 candidates incl. 3 comparators) while the integrated ZIP differs.",
+    "All three judges flagged the 2.8 comparator trio (PCA-MSPC + vibration Ledoit-Wolf Mahalanobis + min combination) as resembling E19 without attribution (medium); creativity bonus withheld, no deduction.",
+    "Absolute totals are not comparable with regrade_c7947f7 (different reviewers and evidence rule; that round let reviewers read repository outputs)."
+  ],
+  "limitations": [
+    "Mock grading by AI reviewers, not the official 5-member panel; REF19 graded from a factsheet only.",
+    "Report unchanged since 7f523b6 by user direction; deferred report items not yet applied.",
+    "Only J3 executed checks; full pipelines were not re-run in this grading (environment lacked statsmodels/torch)."
+  ]
+}

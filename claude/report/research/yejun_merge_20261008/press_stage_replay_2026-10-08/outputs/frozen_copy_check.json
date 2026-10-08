@@ -1,0 +1,92 @@
+{
+  "A": {
+    "frozen_model_sha256": "9ca4ab2a6060992360b1fcb5cb214b290c540f8a20cd5a67e93dca5514d6c41d",
+    "fresh_model_sha256": "5a50f01a3a9cd146b655241673361c06a069da3bc4557b1c8f817eff3a1e8504",
+    "max_abs_param_diff": {
+      "mean": 4.440892098500626e-16,
+      "scale": 1.3877787807814457e-17,
+      "ar2": 3.7969627442180354e-14,
+      "calibration": 4.32525126825567e-11,
+      "tail_magnitude_ref": 8.881784197001252e-16,
+      "tail_sine6_ref": 1.712963104694154e-12,
+      "tail_sine8_ref": 1.6150969450734465e-13,
+      "tail_dynamics_ref": 2.3590018827235326e-12
+    },
+    "test_rows_equal_prediction_file": {
+      "normal": {
+        "stage1": {
+          "equal": 4090,
+          "rows": 4090
+        },
+        "stage2": {
+          "equal": 4090,
+          "rows": 4090
+        },
+        "v2_alarm": {
+          "equal": 4090,
+          "rows": 4090
+        }
+      },
+      "abnormal": {
+        "stage1": {
+          "equal": 324,
+          "rows": 324
+        },
+        "stage2": {
+          "equal": 324,
+          "rows": 324
+        },
+        "v2_alarm": {
+          "equal": 324,
+          "rows": 324
+        }
+      }
+    },
+    "all_equal": true
+  },
+  "B": {
+    "frozen_model_sha256": "4055023584f77f2b481546a89b4a33376fc970d849c71a9758be635e443fba22",
+    "fresh_model_sha256": "3a92690a68c56df2cf1842da906feaff51390138348e7726ef8c3842be9fe5ef",
+    "max_abs_param_diff": {
+      "mean": 4.440892098500626e-16,
+      "scale": 1.3877787807814457e-17,
+      "ar2": 2.2620794126737565e-14,
+      "calibration": 2.958877587388997e-11,
+      "tail_magnitude_ref": 4.440892098500626e-16,
+      "tail_sine6_ref": 1.712963104694154e-12,
+      "tail_sine8_ref": 1.450436992733728e-13,
+      "tail_dynamics_ref": 4.234834705130197e-12
+    },
+    "test_rows_equal_prediction_file": {
+      "normal": {
+        "stage1": {
+          "equal": 6097,
+          "rows": 6097
+        },
+        "stage2": {
+          "equal": 6097,
+          "rows": 6097
+        },
+        "v2_alarm": {
+          "equal": 6097,
+          "rows": 6097
+        }
+      },
+      "abnormal": {
+        "stage1": {
+          "equal": 324,
+          "rows": 324
+        },
+        "stage2": {
+          "equal": 324,
+          "rows": 324
+        },
+        "v2_alarm": {
+          "equal": 324,
+          "rows": 324
+        }
+      }
+    },
+    "all_equal": true
+  }
+}

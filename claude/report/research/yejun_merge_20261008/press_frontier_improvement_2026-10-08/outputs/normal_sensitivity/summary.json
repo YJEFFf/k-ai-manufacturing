@@ -1,0 +1,98 @@
+{
+  "passed": true,
+  "completed_utc": "2026-10-07T19:05:17.693074+00:00",
+  "protocol_lock_sha256": "9a861867e0f45ff76fd47735ce72b2aeb3c348896ef2346534ca0bed048322d1",
+  "original_selection_lock_sha256": "20c992cd930c02c59f3ef4d3b7cccc1b15e2f3eda1fd78065fd06452a3c1ce2b",
+  "selected_model_unchanged": "V2+VD3@1",
+  "abnormal_file_read": false,
+  "independent_failure_validation": false,
+  "no_new_filter_gate_or_alarm_policy": true,
+  "normal_input": {
+    "path": "C:\\Users\\junyj\\Desktop\\k-제조데이터\\데이터셋\\3. 소성가공 예지보전 AI 데이터셋\\press_data_normal.csv",
+    "sha256": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+    "rows": 20000,
+    "records": 600,
+    "loaded_utc": "2026-10-07T19:03:38.653089+00:00",
+    "quantization": "matched"
+  },
+  "leave_one_family_out_choices": [
+    {
+      "excluded_family": "none",
+      "audit_choice": "V2+VD3@1",
+      "original_choice": "V2+VD3@1",
+      "choice_changed": false,
+      "remaining_minimum": 0.1083333333333333,
+      "remaining_macro": 0.18593749999999998,
+      "original_choice_rank": 1,
+      "original_remaining_minimum": 0.1083333333333333,
+      "original_remaining_macro": 0.18593749999999998,
+      "eligible_candidates": 31,
+      "selection_applied": false
+    },
+    {
+      "excluded_family": "current_distortion",
+      "audit_choice": "V2+VD1@1",
+      "original_choice": "V2+VD3@1",
+      "choice_changed": true,
+      "remaining_minimum": 0.1229166666666666,
+      "remaining_macro": 0.2756944444444444,
+      "original_choice_rank": 2,
+      "original_remaining_minimum": 0.1208333333333333,
+      "original_remaining_macro": 0.2118055555555555,
+      "eligible_candidates": 31,
+      "selection_applied": false
+    },
+    {
+      "excluded_family": "vibration_amplification",
+      "audit_choice": "CD+VD1@0.5",
+      "original_choice": "V2+VD3@1",
+      "choice_changed": true,
+      "remaining_minimum": 0.2604166666666667,
+      "remaining_macro": 0.31875000000000003,
+      "original_choice_rank": 9,
+      "original_remaining_minimum": 0.1083333333333333,
+      "original_remaining_macro": 0.20763888888888885,
+      "eligible_candidates": 31,
+      "selection_applied": false
+    },
+    {
+      "excluded_family": "vibration_impulse",
+      "audit_choice": "V2+VD3@1",
+      "original_choice": "V2+VD3@1",
+      "choice_changed": false,
+      "remaining_minimum": 0.1083333333333333,
+      "remaining_macro": 0.14513888888888885,
+      "original_choice_rank": 1,
+      "original_remaining_minimum": 0.1083333333333333,
+      "original_remaining_macro": 0.14513888888888885,
+      "eligible_candidates": 31,
+      "selection_applied": false
+    },
+    {
+      "excluded_family": "vibration_noise",
+      "audit_choice": "V2+VD3@1",
+      "original_choice": "V2+VD3@1",
+      "choice_changed": false,
+      "remaining_minimum": 0.1083333333333333,
+      "remaining_macro": 0.1791666666666666,
+      "original_choice_rank": 1,
+      "original_remaining_minimum": 0.1083333333333333,
+      "original_remaining_macro": 0.1791666666666666,
+      "eligible_candidates": 31,
+      "selection_applied": false
+    }
+  ],
+  "output_sha256": {
+    "A_calibration_contamination.csv": "06181a17d43ce4b179ad3261f0dd8806f8f1c1fddd894b3d7579b5c8c0867132",
+    "A_frequency.csv": "512536c89678ff088368167a4ded82a875c7e26762576bec92736977a5bc7ea1",
+    "A_metadata.json": "1c5b3cca23c522c0795a9eb4336ff27da2161087e9648bb55ad15bbea32f994b",
+    "A_new_families.csv": "39d96cb8efcb072b21aefa34f8138e499982bea8158b75214b99e33856ec177c",
+    "B_calibration_contamination.csv": "e6a81a7f97f778f13e0ec535c39b0cf319bcb751f8c5ec52c38192f6342373d3",
+    "B_frequency.csv": "81c6c1c9a2d887c88ec08ae87228904fc0704b1928665a3ef639d65f6c97d838",
+    "B_metadata.json": "1765f8778ce6b19826aabcbcb066f0ede7f47ce339d3f3eeed71e0c4e75f3b6b",
+    "B_new_families.csv": "4f442f9cef1499f2dedb8932324ee16f93ad77f30b77661b65b7542cbdff74af",
+    "leave_one_family_out.csv": "b433e4bc89010f950e36a241c72258b57c199f6fe8d23b9e32e80314bddf3c8b",
+    "normal_frequency_fits.csv": "5d7113dbca27a164471dc43f2fcf5f46089331a4579b158f75dbabfd5401f0b6",
+    "protocol_lock.json": "c5d5f5fad4d1d7eaec1f805af1f96ca094b70adaa4c906e8ada9b98189cfb108"
+  }
+}

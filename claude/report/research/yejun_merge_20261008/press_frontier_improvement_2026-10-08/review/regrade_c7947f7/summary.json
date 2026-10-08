@@ -1,0 +1,64 @@
+{
+  "evaluated_commit": "c7947f7",
+  "method": "Three separate AI reviewers; 0.5-point category grades, six-category 100-point rubric; unblinded artifact review; not official competition results",
+  "judge_totals": {
+    "J1": {
+      "BASE61": 86.0,
+      "IMPROVED65": 88.5,
+      "REFERENCE": 85.0
+    },
+    "J2": {
+      "BASE61": 85,
+      "IMPROVED65": 88.5,
+      "REFERENCE": 85
+    },
+    "J3": {
+      "BASE61": 84.0,
+      "IMPROVED65": 86.0,
+      "REFERENCE": 83.0
+    }
+  },
+  "means": {
+    "BASE61": {
+      "data": 14.5,
+      "model": 29.833333333333332,
+      "error": 13.833333333333334,
+      "field": 8.666666666666666,
+      "creative": 9.0,
+      "code": 9.166666666666666,
+      "total": 85.0
+    },
+    "IMPROVED65": {
+      "data": 14.5,
+      "model": 31.5,
+      "error": 14.333333333333334,
+      "field": 8.833333333333334,
+      "creative": 9.5,
+      "code": 9.0,
+      "total": 87.66666666666667
+    },
+    "REFERENCE": {
+      "data": 14.0,
+      "model": 29.833333333333332,
+      "error": 13.833333333333334,
+      "field": 9.0,
+      "creative": 9.166666666666666,
+      "code": 8.5,
+      "total": 84.33333333333333
+    }
+  },
+  "delta_improved_minus_base": {
+    "data": 0.0,
+    "model": 1.6666666666666679,
+    "error": 0.5,
+    "field": 0.16666666666666785,
+    "creative": 0.5,
+    "code": -0.16666666666666607,
+    "total": 2.6666666666666714
+  },
+  "limitations": [
+    "BASE61 and IMPROVED65 assessed from actual local reports/code; REFERENCE from previously stored E19 factsheet only.",
+    "Earlier published 86.17 and89.33 arose from different reviewers and earlier own56page version; not directly comparable.",
+    "Subsequent user-requested bibliography/prose correction is outside this frozen numerical grade; model and measured performance unchanged."
+  ]
+}

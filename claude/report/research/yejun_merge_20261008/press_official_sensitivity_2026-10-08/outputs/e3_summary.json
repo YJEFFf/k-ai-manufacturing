@@ -1,0 +1,1002 @@
+{
+  "windows": [
+    "rolling 평가300~359",
+    "rolling 평가360~419",
+    "rolling 평가420~479",
+    "rolling 평가480~539",
+    "rolling 평가540~599"
+  ],
+  "n_records_all": 300,
+  "n_records_keep": 288,
+  "excluded_records": [
+    302,
+    303,
+    304,
+    422,
+    423,
+    424,
+    460,
+    461,
+    462,
+    569,
+    570,
+    571
+  ],
+  "note": "정상 전용. 평가 300기록은 분할 B valid+test와 같은 기록이며 창마다 v2를 다시 적합했다.",
+  "variants": {
+    "v2": "v2",
+    "v2+R2": "v2+R2",
+    "v2+R1": "v2+R1 (1단계)",
+    "v2+R1+R2": "v2+R1+R2 (2단계)"
+  },
+  "summary": {
+    "0.01": {
+      "all|v2": {
+        "n_records": 300,
+        "min": 2,
+        "median": 2.0,
+        "max": 2,
+        "official": 2,
+        "rate_min": 0.0067,
+        "rate_max": 0.0067,
+        "rate_official": 0.0067,
+        "n_points_differ": 0,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 2.0,
+            "60.0": 2.0,
+            "120.0": 2.0
+          },
+          "CONFIRM_ROWS": {
+            "1": 2.0,
+            "2": 2.0,
+            "3": 2.0
+          },
+          "R2_Q": {
+            "0.001": 2.0,
+            "0.005": 2.0,
+            "0.01": 2.0
+          },
+          "R2_MIN_LEN": {
+            "6": 2.0,
+            "8": 2.0,
+            "10": 2.0
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 0.0,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 0.0
+        },
+        "largest_main_effect": null
+      },
+      "keep|v2": {
+        "n_records": 288,
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "official": 0,
+        "rate_min": 0.0,
+        "rate_max": 0.0,
+        "rate_official": 0.0,
+        "n_points_differ": 0,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 0.0,
+            "60.0": 0.0,
+            "120.0": 0.0
+          },
+          "CONFIRM_ROWS": {
+            "1": 0.0,
+            "2": 0.0,
+            "3": 0.0
+          },
+          "R2_Q": {
+            "0.001": 0.0,
+            "0.005": 0.0,
+            "0.01": 0.0
+          },
+          "R2_MIN_LEN": {
+            "6": 0.0,
+            "8": 0.0,
+            "10": 0.0
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 0.0,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 0.0
+        },
+        "largest_main_effect": null
+      },
+      "all|v2+R2": {
+        "n_records": 300,
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "official": 0,
+        "rate_min": 0.0,
+        "rate_max": 0.0,
+        "rate_official": 0.0,
+        "n_points_differ": 0,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 0.0,
+            "60.0": 0.0,
+            "120.0": 0.0
+          },
+          "CONFIRM_ROWS": {
+            "1": 0.0,
+            "2": 0.0,
+            "3": 0.0
+          },
+          "R2_Q": {
+            "0.001": 0.0,
+            "0.005": 0.0,
+            "0.01": 0.0
+          },
+          "R2_MIN_LEN": {
+            "6": 0.0,
+            "8": 0.0,
+            "10": 0.0
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 0.0,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 0.0
+        },
+        "largest_main_effect": null
+      },
+      "keep|v2+R2": {
+        "n_records": 288,
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "official": 0,
+        "rate_min": 0.0,
+        "rate_max": 0.0,
+        "rate_official": 0.0,
+        "n_points_differ": 0,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 0.0,
+            "60.0": 0.0,
+            "120.0": 0.0
+          },
+          "CONFIRM_ROWS": {
+            "1": 0.0,
+            "2": 0.0,
+            "3": 0.0
+          },
+          "R2_Q": {
+            "0.001": 0.0,
+            "0.005": 0.0,
+            "0.01": 0.0
+          },
+          "R2_MIN_LEN": {
+            "6": 0.0,
+            "8": 0.0,
+            "10": 0.0
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 0.0,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 0.0
+        },
+        "largest_main_effect": null
+      },
+      "all|v2+R1": {
+        "n_records": 300,
+        "min": 2,
+        "median": 2.0,
+        "max": 4,
+        "official": 2,
+        "rate_min": 0.0067,
+        "rate_max": 0.0133,
+        "rate_official": 0.0067,
+        "n_points_differ": 27,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 2.6666666666666665,
+            "60.0": 2.6666666666666665,
+            "120.0": 2.6666666666666665
+          },
+          "CONFIRM_ROWS": {
+            "1": 4.0,
+            "2": 2.0,
+            "3": 2.0
+          },
+          "R2_Q": {
+            "0.001": 2.6666666666666665,
+            "0.005": 2.6666666666666665,
+            "0.01": 2.6666666666666665
+          },
+          "R2_MIN_LEN": {
+            "6": 2.6666666666666665,
+            "8": 2.6666666666666665,
+            "10": 2.6666666666666665
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 2.0,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 0.0
+        },
+        "largest_main_effect": "CONFIRM_ROWS"
+      },
+      "keep|v2+R1": {
+        "n_records": 288,
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "official": 0,
+        "rate_min": 0.0,
+        "rate_max": 0.0,
+        "rate_official": 0.0,
+        "n_points_differ": 0,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 0.0,
+            "60.0": 0.0,
+            "120.0": 0.0
+          },
+          "CONFIRM_ROWS": {
+            "1": 0.0,
+            "2": 0.0,
+            "3": 0.0
+          },
+          "R2_Q": {
+            "0.001": 0.0,
+            "0.005": 0.0,
+            "0.01": 0.0
+          },
+          "R2_MIN_LEN": {
+            "6": 0.0,
+            "8": 0.0,
+            "10": 0.0
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 0.0,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 0.0
+        },
+        "largest_main_effect": null
+      },
+      "all|v2+R1+R2": {
+        "n_records": 300,
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "official": 0,
+        "rate_min": 0.0,
+        "rate_max": 0.0,
+        "rate_official": 0.0,
+        "n_points_differ": 0,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 0.0,
+            "60.0": 0.0,
+            "120.0": 0.0
+          },
+          "CONFIRM_ROWS": {
+            "1": 0.0,
+            "2": 0.0,
+            "3": 0.0
+          },
+          "R2_Q": {
+            "0.001": 0.0,
+            "0.005": 0.0,
+            "0.01": 0.0
+          },
+          "R2_MIN_LEN": {
+            "6": 0.0,
+            "8": 0.0,
+            "10": 0.0
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 0.0,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 0.0
+        },
+        "largest_main_effect": null
+      },
+      "keep|v2+R1+R2": {
+        "n_records": 288,
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "official": 0,
+        "rate_min": 0.0,
+        "rate_max": 0.0,
+        "rate_official": 0.0,
+        "n_points_differ": 0,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 0.0,
+            "60.0": 0.0,
+            "120.0": 0.0
+          },
+          "CONFIRM_ROWS": {
+            "1": 0.0,
+            "2": 0.0,
+            "3": 0.0
+          },
+          "R2_Q": {
+            "0.001": 0.0,
+            "0.005": 0.0,
+            "0.01": 0.0
+          },
+          "R2_MIN_LEN": {
+            "6": 0.0,
+            "8": 0.0,
+            "10": 0.0
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 0.0,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 0.0
+        },
+        "largest_main_effect": null
+      }
+    },
+    "0.03": {
+      "all|v2": {
+        "n_records": 300,
+        "min": 8,
+        "median": 8.0,
+        "max": 8,
+        "official": 8,
+        "rate_min": 0.0267,
+        "rate_max": 0.0267,
+        "rate_official": 0.0267,
+        "n_points_differ": 0,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 8.0,
+            "60.0": 8.0,
+            "120.0": 8.0
+          },
+          "CONFIRM_ROWS": {
+            "1": 8.0,
+            "2": 8.0,
+            "3": 8.0
+          },
+          "R2_Q": {
+            "0.001": 8.0,
+            "0.005": 8.0,
+            "0.01": 8.0
+          },
+          "R2_MIN_LEN": {
+            "6": 8.0,
+            "8": 8.0,
+            "10": 8.0
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 0.0,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 0.0
+        },
+        "largest_main_effect": null
+      },
+      "keep|v2": {
+        "n_records": 288,
+        "min": 4,
+        "median": 4.0,
+        "max": 4,
+        "official": 4,
+        "rate_min": 0.0139,
+        "rate_max": 0.0139,
+        "rate_official": 0.0139,
+        "n_points_differ": 0,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 4.0,
+            "60.0": 4.0,
+            "120.0": 4.0
+          },
+          "CONFIRM_ROWS": {
+            "1": 4.0,
+            "2": 4.0,
+            "3": 4.0
+          },
+          "R2_Q": {
+            "0.001": 4.0,
+            "0.005": 4.0,
+            "0.01": 4.0
+          },
+          "R2_MIN_LEN": {
+            "6": 4.0,
+            "8": 4.0,
+            "10": 4.0
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 0.0,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 0.0
+        },
+        "largest_main_effect": null
+      },
+      "all|v2+R2": {
+        "n_records": 300,
+        "min": 2,
+        "median": 2.0,
+        "max": 3,
+        "official": 2,
+        "rate_min": 0.0067,
+        "rate_max": 0.01,
+        "rate_official": 0.0067,
+        "n_points_differ": 27,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 2.3333333333333335,
+            "60.0": 2.3333333333333335,
+            "120.0": 2.3333333333333335
+          },
+          "CONFIRM_ROWS": {
+            "1": 2.3333333333333335,
+            "2": 2.3333333333333335,
+            "3": 2.3333333333333335
+          },
+          "R2_Q": {
+            "0.001": 2.3333333333333335,
+            "0.005": 2.3333333333333335,
+            "0.01": 2.3333333333333335
+          },
+          "R2_MIN_LEN": {
+            "6": 2.0,
+            "8": 2.0,
+            "10": 3.0
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 0.0,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 1.0
+        },
+        "largest_main_effect": "R2_MIN_LEN"
+      },
+      "keep|v2+R2": {
+        "n_records": 288,
+        "min": 1,
+        "median": 1.0,
+        "max": 2,
+        "official": 1,
+        "rate_min": 0.0035,
+        "rate_max": 0.0069,
+        "rate_official": 0.0035,
+        "n_points_differ": 27,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 1.3333333333333333,
+            "60.0": 1.3333333333333333,
+            "120.0": 1.3333333333333333
+          },
+          "CONFIRM_ROWS": {
+            "1": 1.3333333333333333,
+            "2": 1.3333333333333333,
+            "3": 1.3333333333333333
+          },
+          "R2_Q": {
+            "0.001": 1.3333333333333333,
+            "0.005": 1.3333333333333333,
+            "0.01": 1.3333333333333333
+          },
+          "R2_MIN_LEN": {
+            "6": 1.0,
+            "8": 1.0,
+            "10": 2.0
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 0.0,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 1.0
+        },
+        "largest_main_effect": "R2_MIN_LEN"
+      },
+      "all|v2+R1": {
+        "n_records": 300,
+        "min": 8,
+        "median": 11.0,
+        "max": 16,
+        "official": 11,
+        "rate_min": 0.0267,
+        "rate_max": 0.0533,
+        "rate_official": 0.0367,
+        "n_points_differ": 54,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 11.666666666666666,
+            "60.0": 11.666666666666666,
+            "120.0": 11.666666666666666
+          },
+          "CONFIRM_ROWS": {
+            "1": 16.0,
+            "2": 11.0,
+            "3": 8.0
+          },
+          "R2_Q": {
+            "0.001": 11.666666666666666,
+            "0.005": 11.666666666666666,
+            "0.01": 11.666666666666666
+          },
+          "R2_MIN_LEN": {
+            "6": 11.666666666666666,
+            "8": 11.666666666666666,
+            "10": 11.666666666666666
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 8.0,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 0.0
+        },
+        "largest_main_effect": "CONFIRM_ROWS"
+      },
+      "keep|v2+R1": {
+        "n_records": 288,
+        "min": 4,
+        "median": 4.0,
+        "max": 7,
+        "official": 4,
+        "rate_min": 0.0139,
+        "rate_max": 0.0243,
+        "rate_official": 0.0139,
+        "n_points_differ": 27,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 5.0,
+            "60.0": 5.0,
+            "120.0": 5.0
+          },
+          "CONFIRM_ROWS": {
+            "1": 7.0,
+            "2": 4.0,
+            "3": 4.0
+          },
+          "R2_Q": {
+            "0.001": 5.0,
+            "0.005": 5.0,
+            "0.01": 5.0
+          },
+          "R2_MIN_LEN": {
+            "6": 5.0,
+            "8": 5.0,
+            "10": 5.0
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 3.0,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 0.0
+        },
+        "largest_main_effect": "CONFIRM_ROWS"
+      },
+      "all|v2+R1+R2": {
+        "n_records": 300,
+        "min": 2,
+        "median": 3.0,
+        "max": 6,
+        "official": 2,
+        "rate_min": 0.0067,
+        "rate_max": 0.02,
+        "rate_official": 0.0067,
+        "n_points_differ": 45,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 3.111111111111111,
+            "60.0": 3.111111111111111,
+            "120.0": 3.111111111111111
+          },
+          "CONFIRM_ROWS": {
+            "1": 4.666666666666667,
+            "2": 2.3333333333333335,
+            "3": 2.3333333333333335
+          },
+          "R2_Q": {
+            "0.001": 3.111111111111111,
+            "0.005": 3.111111111111111,
+            "0.01": 3.111111111111111
+          },
+          "R2_MIN_LEN": {
+            "6": 2.6666666666666665,
+            "8": 2.6666666666666665,
+            "10": 4.0
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 2.3333333333333335,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 1.3333333333333335
+        },
+        "largest_main_effect": "CONFIRM_ROWS"
+      },
+      "keep|v2+R1+R2": {
+        "n_records": 288,
+        "min": 1,
+        "median": 2.0,
+        "max": 3,
+        "official": 1,
+        "rate_min": 0.0035,
+        "rate_max": 0.0104,
+        "rate_official": 0.0035,
+        "n_points_differ": 45,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 1.6666666666666667,
+            "60.0": 1.6666666666666667,
+            "120.0": 1.6666666666666667
+          },
+          "CONFIRM_ROWS": {
+            "1": 2.3333333333333335,
+            "2": 1.3333333333333333,
+            "3": 1.3333333333333333
+          },
+          "R2_Q": {
+            "0.001": 1.6666666666666667,
+            "0.005": 1.6666666666666667,
+            "0.01": 1.6666666666666667
+          },
+          "R2_MIN_LEN": {
+            "6": 1.3333333333333333,
+            "8": 1.3333333333333333,
+            "10": 2.3333333333333335
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 1.0000000000000002,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 1.0000000000000002
+        },
+        "largest_main_effect": "CONFIRM_ROWS"
+      }
+    },
+    "0.05": {
+      "all|v2": {
+        "n_records": 300,
+        "min": 14,
+        "median": 14.0,
+        "max": 14,
+        "official": 14,
+        "rate_min": 0.0467,
+        "rate_max": 0.0467,
+        "rate_official": 0.0467,
+        "n_points_differ": 0,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 14.0,
+            "60.0": 14.0,
+            "120.0": 14.0
+          },
+          "CONFIRM_ROWS": {
+            "1": 14.0,
+            "2": 14.0,
+            "3": 14.0
+          },
+          "R2_Q": {
+            "0.001": 14.0,
+            "0.005": 14.0,
+            "0.01": 14.0
+          },
+          "R2_MIN_LEN": {
+            "6": 14.0,
+            "8": 14.0,
+            "10": 14.0
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 0.0,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 0.0
+        },
+        "largest_main_effect": null
+      },
+      "keep|v2": {
+        "n_records": 288,
+        "min": 10,
+        "median": 10.0,
+        "max": 10,
+        "official": 10,
+        "rate_min": 0.0347,
+        "rate_max": 0.0347,
+        "rate_official": 0.0347,
+        "n_points_differ": 0,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 10.0,
+            "60.0": 10.0,
+            "120.0": 10.0
+          },
+          "CONFIRM_ROWS": {
+            "1": 10.0,
+            "2": 10.0,
+            "3": 10.0
+          },
+          "R2_Q": {
+            "0.001": 10.0,
+            "0.005": 10.0,
+            "0.01": 10.0
+          },
+          "R2_MIN_LEN": {
+            "6": 10.0,
+            "8": 10.0,
+            "10": 10.0
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 0.0,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 0.0
+        },
+        "largest_main_effect": null
+      },
+      "all|v2+R2": {
+        "n_records": 300,
+        "min": 3,
+        "median": 3.0,
+        "max": 5,
+        "official": 3,
+        "rate_min": 0.01,
+        "rate_max": 0.0167,
+        "rate_official": 0.01,
+        "n_points_differ": 27,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 3.6666666666666665,
+            "60.0": 3.6666666666666665,
+            "120.0": 3.6666666666666665
+          },
+          "CONFIRM_ROWS": {
+            "1": 3.6666666666666665,
+            "2": 3.6666666666666665,
+            "3": 3.6666666666666665
+          },
+          "R2_Q": {
+            "0.001": 3.6666666666666665,
+            "0.005": 3.6666666666666665,
+            "0.01": 3.6666666666666665
+          },
+          "R2_MIN_LEN": {
+            "6": 3.0,
+            "8": 3.0,
+            "10": 5.0
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 0.0,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 2.0
+        },
+        "largest_main_effect": "R2_MIN_LEN"
+      },
+      "keep|v2+R2": {
+        "n_records": 288,
+        "min": 2,
+        "median": 2.0,
+        "max": 4,
+        "official": 2,
+        "rate_min": 0.0069,
+        "rate_max": 0.0139,
+        "rate_official": 0.0069,
+        "n_points_differ": 27,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 2.6666666666666665,
+            "60.0": 2.6666666666666665,
+            "120.0": 2.6666666666666665
+          },
+          "CONFIRM_ROWS": {
+            "1": 2.6666666666666665,
+            "2": 2.6666666666666665,
+            "3": 2.6666666666666665
+          },
+          "R2_Q": {
+            "0.001": 2.6666666666666665,
+            "0.005": 2.6666666666666665,
+            "0.01": 2.6666666666666665
+          },
+          "R2_MIN_LEN": {
+            "6": 2.0,
+            "8": 2.0,
+            "10": 4.0
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 0.0,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 2.0
+        },
+        "largest_main_effect": "R2_MIN_LEN"
+      },
+      "all|v2+R1": {
+        "n_records": 300,
+        "min": 15,
+        "median": 18.0,
+        "max": 28,
+        "official": 18,
+        "rate_min": 0.05,
+        "rate_max": 0.0933,
+        "rate_official": 0.06,
+        "n_points_differ": 54,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 20.333333333333332,
+            "60.0": 20.333333333333332,
+            "120.0": 20.333333333333332
+          },
+          "CONFIRM_ROWS": {
+            "1": 28.0,
+            "2": 18.0,
+            "3": 15.0
+          },
+          "R2_Q": {
+            "0.001": 20.333333333333332,
+            "0.005": 20.333333333333332,
+            "0.01": 20.333333333333332
+          },
+          "R2_MIN_LEN": {
+            "6": 20.333333333333332,
+            "8": 20.333333333333332,
+            "10": 20.333333333333332
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 13.0,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 0.0
+        },
+        "largest_main_effect": "CONFIRM_ROWS"
+      },
+      "keep|v2+R1": {
+        "n_records": 288,
+        "min": 10,
+        "median": 11.0,
+        "max": 19,
+        "official": 11,
+        "rate_min": 0.0347,
+        "rate_max": 0.066,
+        "rate_official": 0.0382,
+        "n_points_differ": 54,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 13.333333333333334,
+            "60.0": 13.333333333333334,
+            "120.0": 13.333333333333334
+          },
+          "CONFIRM_ROWS": {
+            "1": 19.0,
+            "2": 11.0,
+            "3": 10.0
+          },
+          "R2_Q": {
+            "0.001": 13.333333333333334,
+            "0.005": 13.333333333333334,
+            "0.01": 13.333333333333334
+          },
+          "R2_MIN_LEN": {
+            "6": 13.333333333333334,
+            "8": 13.333333333333334,
+            "10": 13.333333333333334
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 9.0,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 0.0
+        },
+        "largest_main_effect": "CONFIRM_ROWS"
+      },
+      "all|v2+R1+R2": {
+        "n_records": 300,
+        "min": 3,
+        "median": 5.0,
+        "max": 10,
+        "official": 4,
+        "rate_min": 0.01,
+        "rate_max": 0.0333,
+        "rate_official": 0.0133,
+        "n_points_differ": 63,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 5.222222222222222,
+            "60.0": 5.222222222222222,
+            "120.0": 5.222222222222222
+          },
+          "CONFIRM_ROWS": {
+            "1": 7.333333333333333,
+            "2": 4.666666666666667,
+            "3": 3.6666666666666665
+          },
+          "R2_Q": {
+            "0.001": 5.222222222222222,
+            "0.005": 5.222222222222222,
+            "0.01": 5.222222222222222
+          },
+          "R2_MIN_LEN": {
+            "6": 4.333333333333333,
+            "8": 4.333333333333333,
+            "10": 7.0
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 3.6666666666666665,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 2.666666666666667
+        },
+        "largest_main_effect": "CONFIRM_ROWS"
+      },
+      "keep|v2+R1+R2": {
+        "n_records": 288,
+        "min": 2,
+        "median": 4.0,
+        "max": 7,
+        "official": 3,
+        "rate_min": 0.0069,
+        "rate_max": 0.0243,
+        "rate_official": 0.0104,
+        "n_points_differ": 63,
+        "main_effects": {
+          "GAP_S": {
+            "30.0": 3.7777777777777777,
+            "60.0": 3.7777777777777777,
+            "120.0": 3.7777777777777777
+          },
+          "CONFIRM_ROWS": {
+            "1": 5.0,
+            "2": 3.6666666666666665,
+            "3": 2.6666666666666665
+          },
+          "R2_Q": {
+            "0.001": 3.7777777777777777,
+            "0.005": 3.7777777777777777,
+            "0.01": 3.7777777777777777
+          },
+          "R2_MIN_LEN": {
+            "6": 3.0,
+            "8": 3.0,
+            "10": 5.333333333333333
+          }
+        },
+        "main_effect_range": {
+          "GAP_S": 0.0,
+          "CONFIRM_ROWS": 2.3333333333333335,
+          "R2_Q": 0.0,
+          "R2_MIN_LEN": 2.333333333333333
+        },
+        "largest_main_effect": "CONFIRM_ROWS"
+      }
+    }
+  },
+  "seconds": 43.6,
+  "within_time_budget": true
+}

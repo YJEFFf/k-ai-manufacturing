@@ -365,6 +365,16 @@ if (TVT / "baseline_injection.csv").exists():
         for v in pd.unique(_bi[col].dropna()):
             add_number(f"baseline_injection.{col}", v, TVT / "baseline_injection.csv")
 
+# ---- 예준 통합본 추가분(2.7 규칙 민감도, 2.8 보완 실험, 4.3 경보량): 예준 브랜치 산출물 사본 ----
+YM = ROOT / "report/research/yejun_merge_20261008"
+for f in sorted(YM.rglob("*.json")):
+    walk(json.loads(f.read_text(encoding="utf-8")), "ym." + f.stem, f)
+for f in sorted(YM.rglob("*.csv")):
+    _d = pd.read_csv(f)
+    for col in _d.select_dtypes("number").columns:
+        for v in pd.unique(_d[col].dropna())[:5000]:
+            add_number(f"ym.{f.stem}.{col}", v, f)
+
 # ---- v5: 외부 근거 수치(report/research/*.md에 출처 URL과 함께 기록) ----
 EXT = [
     ("grid.nominal_hz", 60, "60", "domain_sources.md 7장 전기사업법 시행규칙 별표 3"),

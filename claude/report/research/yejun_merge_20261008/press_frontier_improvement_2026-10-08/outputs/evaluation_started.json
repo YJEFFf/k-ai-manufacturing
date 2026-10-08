@@ -1,0 +1,28 @@
+{
+  "started_utc": "2026-10-07T17:37:11.800944+00:00",
+  "lock_sha256": "20c992cd930c02c59f3ef4d3b7cccc1b15e2f3eda1fd78065fd06452a3c1ce2b",
+  "normal": {
+    "path": "C:\\Users\\junyj\\Desktop\\k-제조데이터\\데이터셋\\3. 소성가공 예지보전 AI 데이터셋\\press_data_normal.csv",
+    "sha256": "f2d61cb3b3108f49a3305d2966b3a31f26942ac8af8ffc9eb531b432b945b0a7",
+    "rows": 20000,
+    "records": 600,
+    "loaded_utc": "2026-10-07T17:37:11.777859+00:00",
+    "quantization": "matched"
+  },
+  "abnormal": {
+    "path": "C:\\Users\\junyj\\Desktop\\k-제조데이터\\데이터셋\\3. 소성가공 예지보전 AI 데이터셋\\outlier_data.csv",
+    "sha256": "9fad8c238e63dba3257d8be32a32362548955c772171a95c0d2af61b0435ed2e",
+    "rows": 600,
+    "records": 21,
+    "loaded_utc": "2026-10-07T17:37:11.800904+00:00",
+    "quantization": "matched"
+  },
+  "environment": {
+    "python": "3.14.7",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "scipy": "1.18.1",
+    "sklearn": "1.9.1"
+  }
+}

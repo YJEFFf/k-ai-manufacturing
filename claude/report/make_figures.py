@@ -101,7 +101,7 @@ def fig_collection():
 def fig_flow():
     """[그림 6] 분석 흐름 8단계(실제 진행 순서, 4개씩 두 줄). '사후' 상자는 test 채점 뒤에 한 분석이다."""
     steps = ["데이터·구조\n확인", "데이터 결함\n진단", "모델 v1~v3·\n규칙 R1·R2\n(전체 데이터 봄)", "잠금(v2+R1)·\ntest 채점",
-             "test 확인 뒤\n2단계 승격 R2\n(v2+R1+R2)", "의심과 검증\n(2.6절)", "사후: 설비 물리·\n표준 기법·운전 상태", "사후(사후):\n보완 LSTM 대조"]
+             "test 확인 뒤\n2단계 승격 R2\n(v2+R1+R2)", "의심과 검증\n(2.6절)", "사후: 설비 물리·\n표준 기법·운전 상태", "사후:\n보완 LSTM 대조"]
     dx, w, h, ys = 2.15, 1.75, 0.95, (1.45, 0.1)     # 칸 간격, 상자 폭·높이, 두 줄의 상자 아래 y
     fig, ax = plt.subplots(figsize=(8.4, 2.4))
     ax.set_xlim(0, 4 * dx); ax.set_ylim(0, 2.5); ax.axis("off")
@@ -145,11 +145,11 @@ def fig_models():
     t = pd.read_csv(TVT / "tvt_test.csv")
     t = t[(t.alpha == 0.01) & (t["mode"] == "realtime") & t.model.isin(NAMES)]
     p = t.pivot_table(index="model", columns="split", values="f1").loc[list(NAMES)]
-    # 사후(사후) 보완 LSTM(예준 실험의 잠금 설정, 새 seed 3·4·5 앙상블)을 가이드북 LSTM 바로 아래에 회색으로 덧붙인다
+    # 사후 보완 LSTM(예준 실험의 잠금 설정, 새 seed 3·4·5 앙상블)을 가이드북 LSTM 바로 아래에 회색으로 덧붙인다
     lx = pd.read_csv(HERE / "research" / "yejun_lstm_improvement_62482a5" / "03_test.csv")
     lx = lx[(lx.variant == "lx:W10-var-128x64-e1000p100:ct-mean:e345") & (lx.rule == "none") & (lx.alpha == 0.01)
             & (lx.regime == "test") & (lx["mode"] == "realtime")].set_index("split").f1
-    rj = json.loads((TVT / "ridge_baseline.json").read_text(encoding="utf-8"))["ridge"]     # 사후(사후) Ridge 예측 오차(tvt/14)
+    rj = json.loads((TVT / "ridge_baseline.json").read_text(encoding="utf-8"))["ridge"]     # 사후 Ridge 예측 오차(tvt/14)
     rows = list(p.index)
     extra = pd.DataFrame([[lx["A"], lx["B"]], [rj["A"]["ridge"]["test_f1"], rj["B"]["ridge"]["test_f1"]]], index=["lstm_imp", "ridge"], columns=p.columns)
     p = pd.concat([p.loc[:"lstm20"], extra, p.loc[rows[rows.index("lstm20") + 1]:]])

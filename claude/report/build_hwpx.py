@@ -23,7 +23,7 @@ OUT = HERE / (sys.argv[2] if len(sys.argv) > 2 else "결과보고서_북적북�
 # v5 본문 등장 순서의 그림 번호 → 파일
 FIGS = {1: "fig1_structure.png", 2: "fig8_observability.png", 3: "fig0_leak.png", 4: "fig2_collection.png",
         5: "fig9_regime_timeline.png", 6: "fig3_flow.png", 7: "fig10_load_vibration.png", 8: "fig11_model_structure.png",
-        9: "fig5_models.png", 10: "fig4_miss_position.png", 11: "fig6_rules.png", 12: "fig13_stage_timeline.png", 13: "fig12_alarm_card.png", 14: "fig7_console.png"}
+        9: "fig5_models.png", 10: "fig4_miss_position.png", 11: "fig6_rules.png", 12: "fig13_stage_timeline.png", 13: "fig12_alarm_card.png", 14: "fig14_console_stage.png", 15: "fig15_frontier_evaluation.png"}
 FIG_WIDTH_MM = 150
 # 내어쓰기(실측: 0.005pt/단위, 문단 왼쪽 56.6pt). 둘째 줄이 기호 뒤 첫 글자와 맞도록 PDF에서 잰 값
 DASH_INDENT = -7020    # "   - " 14pt (양식 값 -7720은 3.5pt 어긋남)

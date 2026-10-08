@@ -37,12 +37,13 @@ status: seed
 - `notes/` 작업 노트 — 핸드오프(`HANDOFF_*`), 데이터셋 실사, 주제 추천, 용접 전략, 프레스 분석방향·실행계획·결과요약, 가이드북 원문 확인, 외부 데이터, 문의 메일
 - `data/1_사출성형기` ~ `data/5_자원최적화` — 원본 데이터 (Obsidian 색인 제외)
 - `code/` 분석·파이프라인 코드
-- `submission/` 제출 코드 패키지 — `북적북적_code.zip`(만드는 법 `python submission/make_package.py --repo <팀 레포>`, 재료 `package_files/`: run_all.py·README·requirements)
+- `submission/` 제출 코드 패키지 — 최종 제출은 `북적북적_code_통합본.zip`(예준 통합), 이전 `북적북적_code.zip`(만드는 법 `python submission/make_package.py --repo <팀 레포>`, 재료 `package_files/`: run_all.py·README·requirements)
 - `report/` 최종 원고 `final_v5.md`, 결과보고서 `결과보고서_북적북적.hwpx`·`.pdf`, 조립·검증 스크립트(`*.py`, `facts.csv`), `figures/`·`research/`·`console_source/`·`_archive/`·`_workspace/`
   - `report/drafts/` 초안 v1~v5·백업본(r0·r1), 이전 v4 원고 `final.md`
   - `report/plans/` 보고서 계획 v1·v4·v5 · `report/logs/` 판단 기록·검토 기록·v5 진행표
 
 ## 진행
+- **2026-10-08 예준 통합본으로 최종 원고 교체** → 예준 9deb1b9(2.7절 규칙 민감도, 2.8절 통합 후보, 4.2·4.3절 두 단계 콘솔·경보량, 그림 14·15) 반영. 2.8절 1/3로 축약하고 공개 저장소 출처 [32][33] 표기, 6장 축약, 추가분 윤문. 60쪽, 레이아웃 0, 근거 없는 숫자 0. 제출 ZIP은 `submission/북적북적_code_통합본.zip` → [[review_response_2026-10-08_merge]]
 - **2026-10-08 핵심 중심 재편집** → "고장은 전류 파형이 말하고, 오경보는 진동이 만든다"를 축으로 전 장 재편집, 요약 1쪽 잘림 해결, 61→51쪽. 기록: [[review_response_2026-10-08_core_rewrite]]
 - **2026-10-08 동결** → 5차 채점 평균 85.0 대 경쟁 75.0. 문장 수정 3건(기여 서술 주어, 4.2절 그림 순서, 비교 모델 계열) 뒤 원고 동결. 남은 일: KAMP 제출, 만족도 캡처, 발표자료. 기록: [[review_response_2026-10-07_eval]]
 - **2026-10-08 4차 채점 뒤 남은 지적 전부 반영(10회차)** → 평균 86.0 대 경쟁 80.0. `tvt/15`(특징 맞춤 5NN이 v2와 같은 수준 → 우위는 특징 설계에서 온다고 정직하게 수정, 기록 AUROC 포화), `tvt/16`(흔들림 σ 5ms 필요·치우침 못 만듦, v2+R1 OR Ridge 병행 권고). 요약 축약, 그림 14. 기록: [[review_response_2026-10-07_eval]]

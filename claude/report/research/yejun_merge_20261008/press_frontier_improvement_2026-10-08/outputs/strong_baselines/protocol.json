@@ -1,0 +1,186 @@
+{
+  "schema": 1,
+  "created_utc": "2026-10-07T19:03:18.195080+00:00",
+  "parent_selection_lock_sha256": "20c992cd930c02c59f3ef4d3b7cccc1b15e2f3eda1fd78065fd06452a3c1ce2b",
+  "existing_selected_model": "V2+VD3@1",
+  "models": [
+    "V2",
+    "V2+VD3@1",
+    "5NN_feature_matched",
+    "RidgeForecast_3channel"
+  ],
+  "selectable_new_models": [],
+  "model_or_rule_selection_allowed": false,
+  "study": "Retrospective same previously observed source failure event; evaluation-only comparison",
+  "splits": {
+    "development": [
+      120,
+      240,
+      300
+    ],
+    "A": [
+      360,
+      480,
+      600
+    ],
+    "B": [
+      300,
+      420,
+      600
+    ]
+  },
+  "preprocessing": "Original matched quantization, before continuous causal injection; no re-quantization after injection",
+  "calibration": "Each model has one score, calibrated on the same 120 NORMAL record maxima, p=(1+count(cal>=score))/121",
+  "alphas": [
+    0.01,
+    0.03,
+    0.05
+  ],
+  "injection_alpha": 0.01,
+  "actual_subsets": [
+    "all21",
+    "front10",
+    "back11"
+  ],
+  "source_exposure": "Historical failure data and historical comparator results were known before this audit; this is not a blinded preregistration",
+  "abnormal_input_opened_during_this_audit": false,
+  "knn": {
+    "features": [
+      "upper sensor z",
+      "lower sensor z",
+      "current sensor z",
+      "v2 raw waveform",
+      "v2 raw AR2 absolute error"
+    ],
+    "imputation": "normal fit median",
+    "additional_feature_scaling": "normal fit mean and population SD",
+    "k": 5,
+    "source_definition": "original report tvt/15_record_auroc_featbase.py FeatBase"
+  },
+  "ridge": {
+    "input": "up to five prior rows of all three standardized sensors",
+    "output": "current three standardized sensors",
+    "score": "maximum absolute residual / respective training residual SD",
+    "first_row": "unavailable; retained",
+    "alpha_grid": [
+      0.01,
+      0.1,
+      1.0,
+      10.0,
+      100.0
+    ],
+    "alpha_choice": "minimum lag-5 MSE on normal FIT last20%, trained on FIT first80%; grid order breaks ties",
+    "source_definition": "original report tvt/14_baseline_injection_ridge.py RidgeForecast"
+  },
+  "injections": {
+    "families": {
+      "vibration_noise": {
+        "targets": [
+          0,
+          1
+        ],
+        "strengths": [
+          0.5,
+          1.0
+        ]
+      },
+      "vibration_impulse": {
+        "targets": [
+          0,
+          1
+        ],
+        "strengths": [
+          2.0,
+          4.0
+        ]
+      },
+      "vibration_amplification": {
+        "targets": [
+          0,
+          1
+        ],
+        "strengths": [
+          0.5,
+          1.0
+        ]
+      },
+      "current_distortion": {
+        "targets": [
+          2
+        ],
+        "strengths": [
+          0.5,
+          1.0
+        ]
+      }
+    },
+    "onsets": [
+      0.25,
+      0.6
+    ],
+    "development_seeds": [
+      101
+    ],
+    "evaluation_seeds": [
+      811,
+      1217,
+      2027
+    ],
+    "denominator": "every normal test record; only onset-and-later rows count as hits/control hits"
+  },
+  "bootstrap": {
+    "repetitions": 4000,
+    "seed": 20261008,
+    "normal_block_records": 10,
+    "abnormal_block_records": 3,
+    "method": "Stratified circular moving recording-block bootstrap; same sampled record IDs across models",
+    "interval": "two-sided percentile 95%, no retuning or recalibration in resamples",
+    "pairs": [
+      [
+        "V2+VD3@1",
+        "V2"
+      ],
+      [
+        "V2+VD3@1",
+        "5NN_feature_matched"
+      ],
+      [
+        "V2+VD3@1",
+        "RidgeForecast_3channel"
+      ],
+      [
+        "V2",
+        "5NN_feature_matched"
+      ],
+      [
+        "V2",
+        "RidgeForecast_3channel"
+      ]
+    ],
+    "interpretation": "Within-event conditional variability only; overlapping A/B are not replications; no independent failure generalization",
+    "zero_included": "No superiority or equivalence conclusion; retain existing selection",
+    "excludes_zero": "Describe directional difference only within this observed event; retain existing selection"
+  },
+  "operational_properties_frozen_before_run": {
+    "V2": "causal, deterministic, first-row availability, component-level explanation",
+    "V2+VD3@1": "causal, deterministic, first-row availability through V2, separate vibration residual indication",
+    "5NN_feature_matched": "causal, deterministic, first-row availability with fit-median fill, retained training reference rows",
+    "RidgeForecast_3channel": "causal, deterministic, first row unavailable, three-channel prediction residuals"
+  },
+  "rules": "No R1/R2/persistence or new operational rule; no candidate reselection",
+  "source_sha256_lf": {
+    "yejun/analysis/press_frontier_improvement_2026-10-08/PROTOCOL.md": "086875e28cb568a63227afa464bb9ce733c8fa60bea0cdcfe2e43aa7956dffff",
+    "yejun/analysis/press_frontier_improvement_2026-10-08/frontier_model.py": "36a3b2e94f3f2861ee7c744dde92aebf4cec0f18f1b70025644b1187c122728e",
+    "yejun/analysis/press_frontier_improvement_2026-10-08/scenarios.py": "93613cb60765f345a5fc46fd5ad6ba3c9942363b06b445ea8f423fa1b6524a19",
+    "yejun/analysis/press_frontier_improvement_2026-10-08/run_experiment.py": "565b030892936727e16e567f75088486e35ad7c8a8c2743bdb265a1e8e2c4568",
+    "yejun/analysis/press_frontier_improvement_2026-10-08/vibration_branch.py": "7943f73caa081c42cee9f99256d0197a30da610651747374b8cfa359442710ea",
+    "yejun/analysis/press_frontier_improvement_2026-10-08/competitor_reference.py": "2b2aa5fc9389419ab26064cb37a567f672bce6d71528db6d575915512811aebd",
+    "yejun/press_guard/model.py": "710bea85ce08b3777941e339c88f2616417b71f3636cc4e6ce2679d604ff87f5",
+    "yejun/press_submission/press/data.py": "81dc394c8b0b53618177e5822c7cc0f7ff7c7f060d08471c968b4cfaaa05411f",
+    "yejun/press_submission/press/scores.py": "22ed1700eabadaadcec25c2602b40bd8a0a84879ad658e0ced2b05c2b87078ae",
+    "yejun/press_submission/press/calibrate.py": "a2b7b686757cc513b6430637323c7d1059f485ff70c547492eefe9589b8eb17b",
+    "yejun/press_submission/press/validation.py": "87e9b6299981725fd59352805ff8e93cdfdb89f3ffd20b77216554070f682eb5",
+    "yejun/analysis/press_frontier_improvement_2026-10-08/audit_strong_baselines.py": "a1de48ec73b8f1f1caa8a08e93337efa4072a96dbb454852484c341fae0514ed"
+  },
+  "protocol_sha256": "0663a956c509a1955fa04e7ff0b797979e9558dc91f0c9994fad82fdefad7a14"
+}

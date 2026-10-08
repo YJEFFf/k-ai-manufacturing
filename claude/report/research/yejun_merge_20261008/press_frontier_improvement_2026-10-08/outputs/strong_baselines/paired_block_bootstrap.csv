@@ -1,0 +1,31 @@
+split,alpha,abnormal_subset,first_model,second_model,f1_difference,ci95_low,ci95_high,includes_zero,first_model_bootstrap_win_fraction,interpretation,changed_selection
+A,0.01,all21,V2+VD3@1,V2,0.00624801030624178,0.0033060429773801663,0.008831705446970798,False,0.99975,Directional difference within this single observed event only,False
+A,0.01,all21,V2+VD3@1,5NN_feature_matched,-0.0008864383792360764,-0.005360689870829963,0.0023020210011485357,True,0.2395,No directional separation within this resampling; not an equivalence test,False
+A,0.01,all21,V2+VD3@1,RidgeForecast_3channel,0.08550416232340752,0.07260973930457967,0.1012892559883465,False,1.0,Directional difference within this single observed event only,False
+A,0.01,all21,V2,5NN_feature_matched,-0.007134448685477857,-0.011946894723498603,-0.0027915333649996443,False,0.0,Directional difference within this single observed event only,False
+A,0.01,all21,V2,RidgeForecast_3channel,0.07925615201716574,0.06708667273525469,0.09543162156304821,False,1.0,Directional difference within this single observed event only,False
+A,0.03,all21,V2+VD3@1,V2,0.003500342171551707,0.0008247983393558117,0.006830797329217778,False,0.97825,Directional difference within this single observed event only,False
+A,0.03,all21,V2+VD3@1,5NN_feature_matched,0.002623014735727236,0.0,0.006397093945978267,True,0.906,No directional separation within this resampling; not an equivalence test,False
+A,0.03,all21,V2+VD3@1,RidgeForecast_3channel,0.07086758330928467,0.05992003838126744,0.08627728884852412,False,1.0,Directional difference within this single observed event only,False
+A,0.03,all21,V2,5NN_feature_matched,-0.0008773274358244709,-0.0024042272799252805,0.0,True,0.0,No directional separation within this resampling; not an equivalence test,False
+A,0.03,all21,V2,RidgeForecast_3channel,0.06736724113773296,0.05658536510226005,0.08278882587430682,False,1.0,Directional difference within this single observed event only,False
+A,0.05,all21,V2+VD3@1,V2,0.0018402232687947384,-0.0031733887317445726,0.006088706764303148,True,0.81,No directional separation within this resampling; not an equivalence test,False
+A,0.05,all21,V2+VD3@1,5NN_feature_matched,0.0009628958329702675,-0.003988064596423027,0.005531282229879192,True,0.6965,No directional separation within this resampling; not an equivalence test,False
+A,0.05,all21,V2+VD3@1,RidgeForecast_3channel,0.041509196271101056,0.02939698414903926,0.05645286008791729,False,1.0,Directional difference within this single observed event only,False
+A,0.05,all21,V2,5NN_feature_matched,-0.0008773274358244709,-0.0024042272799252805,0.0,True,0.0,No directional separation within this resampling; not an equivalence test,False
+A,0.05,all21,V2,RidgeForecast_3channel,0.03966897300230632,0.026370029866302807,0.056428489776632375,False,1.0,Directional difference within this single observed event only,False
+B,0.01,all21,V2+VD3@1,V2,0.003500034826217191,0.000765457458583166,0.006729191479351993,False,0.9755,Directional difference within this single observed event only,False
+B,0.01,all21,V2+VD3@1,5NN_feature_matched,0.002719051692533281,-0.0026796969158404266,0.0074770715815671105,True,0.87225,No directional separation within this resampling; not an equivalence test,False
+B,0.01,all21,V2+VD3@1,RidgeForecast_3channel,0.09262933080208835,0.07847260482700703,0.10959836730977679,False,1.0,Directional difference within this single observed event only,False
+B,0.01,all21,V2,5NN_feature_matched,-0.0007809831336839101,-0.005159596321699422,0.0032501906792340223,True,0.36525,No directional separation within this resampling; not an equivalence test,False
+B,0.01,all21,V2,RidgeForecast_3channel,0.08912929597587116,0.0753273485347218,0.106684164269801,False,1.0,Directional difference within this single observed event only,False
+B,0.03,all21,V2+VD3@1,V2,0.006802721088435382,0.0025838267777229056,0.012024123653508717,False,0.99975,Directional difference within this single observed event only,False
+B,0.03,all21,V2+VD3@1,5NN_feature_matched,0.002622788245733143,-0.001138871660435231,0.006925710672126387,True,0.90475,No directional separation within this resampling; not an equivalence test,False
+B,0.03,all21,V2+VD3@1,RidgeForecast_3channel,0.07503824198783726,0.06392627996052293,0.09044038225281797,False,1.0,Directional difference within this single observed event only,False
+B,0.03,all21,V2,5NN_feature_matched,-0.004179932842702239,-0.009818835753529112,0.0,True,0.02225,No directional separation within this resampling; not an equivalence test,False
+B,0.03,all21,V2,RidgeForecast_3channel,0.06823552089940188,0.05644934073478694,0.08404756982712633,False,1.0,Directional difference within this single observed event only,False
+B,0.05,all21,V2+VD3@1,V2,0.0026818279339198003,-0.002840536922972689,0.0073144684032358555,True,0.8755,No directional separation within this resampling; not an equivalence test,False
+B,0.05,all21,V2+VD3@1,5NN_feature_matched,0.00011146957630847609,-0.0092649673782354,0.008795085149567545,True,0.5375,No directional separation within this resampling; not an equivalence test,False
+B,0.05,all21,V2+VD3@1,RidgeForecast_3channel,0.04634061115682453,0.032852588703872136,0.0640906113147409,False,1.0,Directional difference within this single observed event only,False
+B,0.05,all21,V2,5NN_feature_matched,-0.0025703583576113243,-0.010472503758544915,0.005322529987231726,True,0.2355,No directional separation within this resampling; not an equivalence test,False
+B,0.05,all21,V2,RidgeForecast_3channel,0.04365878322290473,0.029649482921489563,0.06255133026036157,False,1.0,Directional difference within this single observed event only,False

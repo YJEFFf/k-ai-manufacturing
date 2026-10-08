@@ -1,0 +1,83 @@
+{
+  "source": "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.md",
+  "hwpx": "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.hwpx",
+  "source_sha256": "f106745ef106202eacc449f4bc9328f5140443d31634207a6f594a94ab6046ef",
+  "hwpx_sha256": "b63f53084c341892a64d07ba5a318db262e8fc9105fb9b6342905d3a285ce4fc",
+  "pdf_sha256": "d2178a0e41c5a5a280a04764be47b7adb18fb59d7a63e1bb1881b85df61ea205",
+  "expected_text_blocks": 1334,
+  "missing_hwpx_blocks": [],
+  "hwpx_picture_controls": 16,
+  "pdf": {
+    "pages": 73,
+    "chapter_pages": {
+      "제1장. 데이터 이해 및 진단": [
+        2
+      ],
+      "제2장. AI 예측모델 개발 및 성능평가": [
+        13
+      ],
+      "제3장. 영향요인 및 오류분석": [
+        45
+      ],
+      "제4장. 현장 활용방안": [
+        52
+      ],
+      "제5장. 창의성 및 차별성": [
+        61
+      ],
+      "제6장. 코드 구성 및 재현성": [
+        65
+      ]
+    },
+    "pdf_image_instances": 16,
+    "replacement_characters": 0,
+    "out_of_page_text": [],
+    "missing_pdf_short_blocks": [],
+    "missing_required_form_text": []
+  },
+  "content_check": {
+    "markdown": {
+      "unexpected_provenance_markers": [],
+      "method_reference_29_present": true
+    },
+    "hwpx": {
+      "unexpected_provenance_markers": [],
+      "method_reference_29_present": true
+    },
+    "pdf": {
+      "unexpected_provenance_markers": [],
+      "method_reference_29_present": true
+    }
+  },
+  "metadata_content_check": {
+    "hwpx_xml": [],
+    "hwpx_preview_text": [],
+    "pdf_metadata": []
+  },
+  "protected_sources": [
+    {
+      "path": "claude/report/final_v5.md",
+      "sha256": "8c07bf4076c0b3a0477e8115fdb006229d017208a1bf9d00d8f592c3580a26ea",
+      "canonical_sha256": "77eb87b789646063f8885024bf55328d469fc6489eb2cf00fb96f32a50ca1c11",
+      "crlf_only_difference": true
+    },
+    {
+      "path": "claude/report/결과보고서_북적북적.pdf",
+      "sha256": "92d528d4074629675467362717667e545daf7ece91199b1b664525cb8a892494",
+      "canonical_sha256": "92d528d4074629675467362717667e545daf7ece91199b1b664525cb8a892494",
+      "crlf_only_difference": false
+    },
+    {
+      "path": "claude/report/결과보고서_북적북적.hwpx",
+      "sha256": "221b237b6f57f45f99782fa5324c6b2bd7662eeb26f7e726d90d5513811db139",
+      "canonical_sha256": "221b237b6f57f45f99782fa5324c6b2bd7662eeb26f7e726d90d5513811db139",
+      "crlf_only_difference": false
+    },
+    {
+      "path": "claude/submission/북적북적_code.zip",
+      "sha256": "3680a315449d482a35b0a4fb4835a02ca8a6ce6de709790667918429a22437a4",
+      "canonical_sha256": "3680a315449d482a35b0a4fb4835a02ca8a6ce6de709790667918429a22437a4",
+      "crlf_only_difference": false
+    }
+  ]
+}

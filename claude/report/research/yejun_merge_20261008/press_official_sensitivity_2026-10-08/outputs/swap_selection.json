@@ -1,0 +1,193 @@
+{
+  "protocol": {
+    "splits": {
+      "A": "정상 학습 0~359 / 검증 360~479 / 시험 480~599",
+      "B": "정상 학습 0~299 / 검증 300~419 / 시험 420~599",
+      "abnormal": "이상 21기록 중 앞 10기록 검증, 뒤 11기록 시험, 학습 미사용"
+    },
+    "primary_alpha": 0.01,
+    "tie_tolerance": 0.002,
+    "rule_constants": {
+      "incident_gap_s": 60,
+      "confirm_rows": 2,
+      "r2_quantile": 0.005,
+      "r2_min_len": 8,
+      "source": "60초·2행은 예준 v2 사건·2단계 규칙 값, R² 기준은 정상 학습 자료"
+    }
+  },
+  "selected_realtime": {
+    "model": "v2+H1",
+    "valid_f1_mean": 0.9984591679506933,
+    "complexity": 4,
+    "tied_within_tolerance": [
+      "v2+H1",
+      "v2+C1d1+H1",
+      "v2+C2d1+H1",
+      "v2+H1+H2",
+      "v2+C1d1+H1+H2",
+      "v2+C2d1+H1+H2"
+    ]
+  },
+  "selected_record": {
+    "model": "v3_B3k5",
+    "valid_f1_mean": 0.9667323559563266,
+    "complexity": 2,
+    "tied_within_tolerance": [
+      "v3_B3k5"
+    ]
+  },
+  "hypotheses": {
+    "H1": {
+      "statement": "고장 상태는 수집 공백(수 초)을 넘어 이어진다. 직전 기록이 확인된 이상이면 새 기록 첫 행부터 경보를 유지하면(사건 지속) 기록 시작 직후 미탐이 준다",
+      "valid_evidence": {
+        "v2": {
+          "A": {
+            "tp": 302,
+            "fp": 1,
+            "fn": 22,
+            "f1": 0.963317
+          },
+          "B": {
+            "tp": 308,
+            "fp": 1,
+            "fn": 16,
+            "f1": 0.973144
+          }
+        },
+        "v2_H1": {
+          "A": {
+            "tp": 324,
+            "fp": 1,
+            "fn": 0,
+            "f1": 0.998459
+          },
+          "B": {
+            "tp": 324,
+            "fp": 1,
+            "fn": 0,
+            "f1": 0.998459
+          }
+        },
+        "v2_missed_by_position": {
+          "A": {
+            "0": 7,
+            "1": 7,
+            "2": 2,
+            "4": 2,
+            "6": 2,
+            "19": 1,
+            "25": 1
+          },
+          "B": {
+            "0": 6,
+            "1": 6,
+            "2": 2,
+            "4": 1,
+            "6": 1
+          }
+        }
+      },
+      "test_criterion": "A·B 모두 시험 미탐 행(v2+H1) < 미탐 행(v2) 이고 시험 오경보 행(v2+H1) ≤ 오경보 행(v2)"
+    },
+    "H2": {
+      "statement": "고부하 정상에서 진동 크기 성분만 문턱을 넘을 때 전류 파형은 정상이다. 크기 단독 + 파형 정상인 경보를 보류하면(교차 확인) 탐지를 잃지 않고 오경보가 준다",
+      "valid_evidence": {
+        "v2": {
+          "A": {
+            "tp": 302,
+            "fp": 1,
+            "fn": 22,
+            "f1": 0.963317
+          },
+          "B": {
+            "tp": 308,
+            "fp": 1,
+            "fn": 16,
+            "f1": 0.973144
+          }
+        },
+        "v2_H2": {
+          "A": {
+            "tp": 302,
+            "fp": 0,
+            "fn": 22,
+            "f1": 0.964856
+          },
+          "B": {
+            "tp": 308,
+            "fp": 1,
+            "fn": 16,
+            "f1": 0.973144
+          }
+        },
+        "v2_false_alarms": {
+          "A": [
+            {
+              "record": "valid:normal:101",
+              "position": 40,
+              "prefix_r2": 0.997,
+              "waveform_normal": true
+            }
+          ],
+          "B": [
+            {
+              "record": "valid:normal:3",
+              "position": 4,
+              "prefix_r2": null,
+              "waveform_normal": false
+            }
+          ]
+        }
+      },
+      "test_criterion": "A·B 모두 시험 오경보 행(v2+H2) ≤ 오경보 행(v2) 이고 시험 TP(v2+H2) = TP(v2)"
+    },
+    "H3": {
+      "statement": "전류 크기(부하)에 따라 진동 정상 범위를 바꾸는 예준 v3 조건부 성분을 v2에 더하면 성능이 오른다",
+      "chosen_component": "v2+C1d1",
+      "valid_evidence": {
+        "v2": {
+          "A": {
+            "tp": 302,
+            "fp": 1,
+            "fn": 22,
+            "f1": 0.963317
+          },
+          "B": {
+            "tp": 308,
+            "fp": 1,
+            "fn": 16,
+            "f1": 0.973144
+          }
+        },
+        "v2_C": {
+          "A": {
+            "tp": 304,
+            "fp": 1,
+            "fn": 20,
+            "f1": 0.966614
+          },
+          "B": {
+            "tp": 308,
+            "fp": 1,
+            "fn": 16,
+            "f1": 0.973144
+          }
+        }
+      },
+      "test_criterion": "시험 실시간 F1 A·B 평균: v2+C1d1 > v2"
+    },
+    "H4": {
+      "statement": "정상·이상 파일의 저장 형식 차이(진동 소수 자릿수)만으로 이상을 가를 수 있다(형식 누수). 그래서 정밀도 맞춤(matched)이 필요하다",
+      "valid_evidence": "형식 규칙은 학습이 필요 없다. 검증 근거 없이 시험에서 바로 판정한다",
+      "test_criterion": "시험 행에서 '진동 AI0 소수 자릿수 > 6이면 이상' 규칙의 F1 ≥ 0.9"
+    }
+  },
+  "inputs": {
+    "valid_csv_sha256": "a559746924cf8e7cd0c94e4837409259096acdcc97af57391467ed4090ccf808",
+    "scores_meta_sha256": "a12cfa5c095699e85cc2bdcda146ccd0021ec2fdb3cd79358144822d0b8cc7af",
+    "rows_sha256": {
+      "A": "605b86f134d836e332f398f6172bb29d38b419449531792ec1108884442c783d",
+      "B": "e573fcdd799769d6e7e40a9a9d26084b1c1e0977062226664ceb0eebb88f8fdf"
+    }
+  }
+}

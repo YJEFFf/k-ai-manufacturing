@@ -1,0 +1,13 @@
+phase,model,alpha,normal_rows,normal_fp_rows,normal_records,normal_fp_records,normal_record_fpr
+development,V2,0.01,1951,0,60,0,0.0
+development,V2+VD3@1,0.01,1951,0,60,0,0.0
+development,5NN_feature_matched,0.01,1951,0,60,0,0.0
+development,RidgeForecast_3channel,0.01,1951,0,60,0,0.0
+development,V2,0.03,1951,1,60,1,0.016666666666666666
+development,V2+VD3@1,0.03,1951,1,60,1,0.016666666666666666
+development,5NN_feature_matched,0.03,1951,1,60,1,0.016666666666666666
+development,RidgeForecast_3channel,0.03,1951,0,60,0,0.0
+development,V2,0.05,1951,3,60,3,0.05
+development,V2+VD3@1,0.05,1951,3,60,3,0.05
+development,5NN_feature_matched,0.05,1951,1,60,1,0.016666666666666666
+development,RidgeForecast_3channel,0.05,1951,0,60,0,0.0

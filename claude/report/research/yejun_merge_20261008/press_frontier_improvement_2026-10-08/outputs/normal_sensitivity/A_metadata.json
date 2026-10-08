@@ -1,0 +1,34 @@
+{
+  "split": "A",
+  "train_record_ids": [
+    0,
+    359
+  ],
+  "calibration_record_ids": [
+    360,
+    479
+  ],
+  "normal_test_record_ids": [
+    480,
+    599
+  ],
+  "target_calibration_scores_identical": true,
+  "injection_scales": {
+    "mean": [
+      -0.00020884393546769187,
+      -0.0002761431079160749,
+      1.6563544415113385
+    ],
+    "ac_rms": [
+      0.07320334430112724,
+      0.12463638761258718,
+      126.15643485975247
+    ]
+  },
+  "calibration_maxima": {
+    "V2": 4.417925848290822,
+    "V2+VD3@1": 4.552845878744396
+  },
+  "causal_prefix_preserved": true,
+  "other_channels_preserved": true
+}
