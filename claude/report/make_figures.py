@@ -137,7 +137,7 @@ def fig_miss_position():
 
 # 모델 비교 그림의 막대 순서와 표시 이름(내부 이름 H1·H2 = 보고서의 R1·R2)
 NAMES = {"iforest": "IsolationForest", "lstm20": "LSTM-AE(가이드북, 20행)", "maxz3": "max|z|", "knn5": "5NN", "mlp_ae5": "MLP-AE(5행)",
-         "v1": "v1", "v2": "기반 모델 v2", "v2+C1d1": "v2+v3 조건부", "v2+H1": "v2+R1(잠금·공식)", "v2+H1+H2": "v2+R1+R2(2단계)"}
+         "v1": "v1", "v2": "기반 모델 v2", "v2+C1d1": "v2+v3 조건부", "v2+H1": "v2+R1(제출 1단계)", "v2+H1+H2": "v2+R1+R2(제출 2단계)"}
 
 
 def fig_models():
