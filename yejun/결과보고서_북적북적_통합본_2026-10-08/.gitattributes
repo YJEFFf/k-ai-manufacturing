@@ -1,0 +1,2 @@
+# Keep the reviewed manuscript bytes stable between macOS and Windows.
+*.md text eol=lf
