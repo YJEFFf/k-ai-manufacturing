@@ -160,8 +160,8 @@ def build_expected():
     for f, js, path, label, rep in (
             ("r2_oos_alpha.json", ro, ["A_r2_out_of_sample", "0.05", "rolling_total", "keep|v2"], "R2 준-표본 밖: α 5% 정상 오경보 기록 v2(시간순 5창, 착안 기록 제외)", "(2.5절 †)"),
             ("r2_oos_alpha.json", ro, ["A_r2_out_of_sample", "0.05", "rolling_total", "keep|v2+R2"], "R2 준-표본 밖: α 5% 정상 오경보 기록 v2+R2", "(2.5절 †)"),
-            ("ridge_baseline.json", rj, ["ridge", "B", "ridge", "test_f1"], "Ridge 예측 오차 test 실시간 F1 B(R1 없이)", "(2.4절 †)"),
-            ("record_auroc_featbase.json", fb, ["featbase_rows", "B", "knn5_feat", "test_f1"], "v2 특징을 넣은 5NN test 실시간 F1 B(R1 없이)", "(2.4절 †)"),
+            ("ridge_baseline.json", rj, ["ridge", "B", "ridge", "test_f1"], "Ridge 예측 오차 test 실시간 F1 B(R1 없이)", "(2.7절 †)"),
+            ("record_auroc_featbase.json", fb, ["featbase_rows", "B", "knn5_feat", "test_f1"], "v2 특징을 넣은 5NN test 실시간 F1 B(R1 없이)", "(2.4·2.7절 †)"),
             ("jitter_ridge_combo.json", jc, ["A_jitter", "sigma_ms_reaching_abnormal_r2"], "정상 R² 중앙값이 이상 수준에 닿는 표본 시각 흔들림(ms)", "(2.6절 †)"),
             ("jitter_ridge_combo.json", jc, ["B_combo", "high_load_B_a5_valid_test", "v2+R1|ridge", "all_fa_records"], "1단계 병행(v2+R1 OR Ridge) α 5% 정상 오경보 기록 B", "(4.3절 †)")):
         v = js
@@ -172,7 +172,7 @@ def build_expected():
     for col, label in (("크기", "크기 성분만"), ("v2", "v2(세 성분)")):
         where = dict(split="B", family="current_residual", target="2", strength="1.0")
         checks.append(dict(name=f"성분 절제: 전류 파형 주입 강도 1 탐지율 {label} B", kind="csv", file="code/press/tvt/outputs/ablation_pod.csv",
-                           where=where, column=col, value=csv_value(tvt / "ablation_pod.csv", where, col), tol=1e-9, report="(2.4절 †)"))
+                           where=where, column=col, value=csv_value(tvt / "ablation_pod.csv", where, col), tol=1e-9, report="(2.7절 †)"))
     return dict(note="보고서 작성 때(2026-10-04) 볼트 산출물에서 뽑은 값. run_all.py가 실행 뒤 같은 위치의 값과 비교한다",
                 checks=checks)
 
