@@ -1,0 +1,200 @@
+{
+  "commit": "74e6be3",
+  "scope": "Stored artifact comparison and independent prediction arithmetic; no model retraining",
+  "checks": [
+    {
+      "name": "기반 모델 v2 원래 평가 재현 F1 A",
+      "ok": true,
+      "got": 0.9619377162629758
+    },
+    {
+      "name": "기반 모델 v2 원래 평가 재현 F1 B",
+      "ok": true,
+      "got": 0.9709897610921502
+    },
+    {
+      "name": "test 실시간 행 F1 최종 v2+R1+R2 A",
+      "ok": true,
+      "got": 1.0
+    },
+    {
+      "name": "test 실시간 행 F1 최종 v2+R1+R2 B",
+      "ok": true,
+      "got": 1.0
+    },
+    {
+      "name": "test 실시간 행 F1 잠금 선택 v2+R1 A",
+      "ok": true,
+      "got": 1.0
+    },
+    {
+      "name": "test 실시간 행 F1 잠금 선택 v2+R1 B",
+      "ok": true,
+      "got": 0.9953917050691244
+    },
+    {
+      "name": "test 실시간 행 F1 기반 모델 v2 A",
+      "ok": true,
+      "got": 0.9648562300319489
+    },
+    {
+      "name": "test 실시간 행 F1 기반 모델 v2 B",
+      "ok": true,
+      "got": 0.9700787401574803
+    },
+    {
+      "name": "test 실시간 행 F1 LSTM 오토인코더 A",
+      "ok": true,
+      "got": 0.2894736842105263
+    },
+    {
+      "name": "test 실시간 행 F1 LSTM 오토인코더 B",
+      "ok": true,
+      "got": 0.23848238482384823
+    },
+    {
+      "name": "제출 test 예측 파일 A(줄바꿈을 맞춘 바이트 동일)",
+      "ok": true,
+      "got": "aa0678320ed4d5d91bb883ca8d96b360a0050227decd4bd4567b41c1d8586c68"
+    },
+    {
+      "name": "제출 test 예측 파일 B(줄바꿈을 맞춘 바이트 동일)",
+      "ok": true,
+      "got": "5bd7ed92134a71613f5c041ba6061ff823572ff12db81eef6ba0ee2bfc083361"
+    },
+    {
+      "name": "형식 누수: 자릿수 규칙 행 F1(원본)",
+      "ok": true,
+      "got": 0.992
+    },
+    {
+      "name": "검증 V1b: R2 진동 단독 주입 최대 손실(%p)",
+      "ok": true,
+      "got": 23.7
+    },
+    {
+      "name": "정상 전류 겉보기 주파수 중앙값(Hz)",
+      "ok": true,
+      "got": 0.6
+    },
+    {
+      "name": "순차 검출 비교표의 최종 모델 test F1 B",
+      "ok": true,
+      "got": 1.0
+    },
+    {
+      "name": "CUSUM(상태 유지) test F1 B",
+      "ok": true,
+      "got": 1.0
+    },
+    {
+      "name": "분할 B 고부하 정상 오경보 기록 v2(α 5%)",
+      "ok": true,
+      "got": 9.0
+    },
+    {
+      "name": "분할 B 고부하 정상 오경보 기록 v2+R2(α 5%)",
+      "ok": true,
+      "got": 1.0
+    },
+    {
+      "name": "test 기록 수 F1 기반 모델 v2 B",
+      "ok": true,
+      "got": 0.88
+    },
+    {
+      "name": "test 기록 수 F1 최종 v2+R1+R2 B",
+      "ok": true,
+      "got": 1.0
+    },
+    {
+      "name": "이상 양상: 상·하부 진동 모두 큰 기록 수",
+      "ok": true,
+      "got": 9.0
+    },
+    {
+      "name": "이상 확률 test Brier B(파일 비율 사전)",
+      "ok": true,
+      "got": 0.0038062105835938325
+    },
+    {
+      "name": "IsolationForest+R1 test F1 B",
+      "ok": true,
+      "got": 1.0
+    },
+    {
+      "name": "5NN+R1 test 오경보 행 B",
+      "ok": true,
+      "got": 12.0
+    },
+    {
+      "name": "LSTM 20행 창 때문에 점수 없는 test 이상 행 A",
+      "ok": true,
+      "got": 177.0
+    }
+  ],
+  "prediction_metrics": {
+    "A": {
+      "final_v2_R1_R2_realtime": {
+        "tp": 324,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "locked_v2_R1_realtime": {
+        "tp": 324,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "v2_realtime": {
+        "tp": 302,
+        "fp": 0,
+        "fn": 22,
+        "f1": 0.9648562300319489
+      },
+      "v2_prob_site1pct": {
+        "brier": 0.018248764793228137,
+        "max": 0.55
+      },
+      "v2_prob_fileprior": {
+        "brier": 0.004558229652465791,
+        "max": 0.90553
+      }
+    },
+    "B": {
+      "final_v2_R1_R2_realtime": {
+        "tp": 324,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "locked_v2_R1_realtime": {
+        "tp": 324,
+        "fp": 3,
+        "fn": 0,
+        "f1": 0.9953917050691244
+      },
+      "v2_realtime": {
+        "tp": 308,
+        "fp": 3,
+        "fn": 16,
+        "f1": 0.9700787401574803
+      },
+      "v2_prob_site1pct": {
+        "brier": 0.012453669290813268,
+        "max": 0.55
+      },
+      "v2_prob_fileprior": {
+        "brier": 0.0038062105835938325,
+        "max": 0.865411
+      }
+    }
+  },
+  "raw_file_equal": {
+    "press_data_normal.csv": true,
+    "outlier_data.csv": true
+  },
+  "zip_files": 288,
+  "zip_integrity": null
+}
