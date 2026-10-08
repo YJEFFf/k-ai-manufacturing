@@ -1,0 +1,95 @@
+{
+  "chrome": "���� ������ ���ǿ��� ���� ���Դϴ�.",
+  "models": "outputs/expected 동결 사본",
+  "selected": {
+    "level2_incident": {
+      "incident_id": 4,
+      "case": 12,
+      "record_id": 191,
+      "abnormal_record": 11
+    },
+    "r2_incident": {
+      "incident_id": 1,
+      "records": "3",
+      "r2_hold_rows": 1
+    },
+    "r1_release_alpha5": {
+      "incident_id": 2,
+      "case": 2,
+      "records": "26+27"
+    }
+  },
+  "shots": {
+    "console_workspace_stage.png": {
+      "url": "/?split=B&alpha=0.01&incident=4&case=12",
+      "size": [
+        1600,
+        1560
+      ],
+      "sha256": "b32126c7971ddc35193ecba64686ed2bc4d5b9a09c9a5d870fdd8fdc8b64bd13"
+    },
+    "console_workspace_stage_r2.png": {
+      "url": "/?split=B&alpha=0.01&incident=1",
+      "size": [
+        1600,
+        1560
+      ],
+      "sha256": "c11f54791c529a080e7adfbe8bd74c2c575c3beb0308263c1f07a85de0f24a9c"
+    },
+    "console_workspace_stage_r1_alpha5.png": {
+      "url": "/?split=B&alpha=0.05&dataset=normal&incident=2&case=2",
+      "size": [
+        1600,
+        1560
+      ],
+      "sha256": "ed40662294235e75b08e9f489548a2e75b3c7670bb12656f6293bcbbb5cdb679"
+    },
+    "console_evidence_stage.png": {
+      "url": "/?split=B&alpha=0.01&tab=evidence",
+      "size": [
+        1600,
+        2300
+      ],
+      "sha256": "d86986c058dcd147afd08362b66aed7f4bdf3b1e24e64475184b373bcde66090"
+    }
+  },
+  "web_code_sha256": {
+    "stage.html": "5bc294f86c58a1ccdffa7480725400bc68b3f3c10f9d4118f2a87dc494a141dd",
+    "stage.js": "ce7fac9ac97864a0d5bccecebb5f2e51803122cbe1d8c5da732263bb29e8bb34",
+    "stage.css": "c323deb712f11c24d392c313a1a0e4b00a105f62ea4de30bbc625ee3a29b9299",
+    "style.css": "271dabddc6fa88a463fb2a3f73f726ffa56de6fa4f983cf0e97edbf5eb6d1012"
+  },
+  "code_sha256": {
+    "stage_console.py": "180b4cfdd15dd6846d771913bfad5054ad3ddcc8a3fe47004b8c881307db3f49",
+    "stages.py": "ff273847509104fec9175e76dd822d0005482510aeb20acec85155eb0eb31d0a",
+    "serve.py": "d93182ae913498e0cd31229f0408b62052b47480f872a982dff1e7181b5a40b6",
+    "model.py": "710bea85ce08b3777941e339c88f2616417b71f3636cc4e6ce2679d604ff87f5"
+  },
+  "stats_B_mixed": {
+    "rows": 6697,
+    "segments": 201,
+    "scored": 6697,
+    "invalid": 0,
+    "alarm_rows": 603,
+    "stage1_rows": 603,
+    "stage2_rows": 600,
+    "v2_alarm_rows": 572,
+    "r1_rows": 596,
+    "r1_only_rows": 31,
+    "r1_release_rows": 0,
+    "r2_hold_rows": 3,
+    "insufficient_rows": 1376,
+    "stage1_events": 4,
+    "stage2_events": 1,
+    "level2_incidents": 1,
+    "level1_incidents": 3,
+    "v2_mismatch_rows": 0,
+    "elapsed_s": 6.703834699932486,
+    "stage_elapsed_s": 2.6329433999489993
+  },
+  "level_counts_B_mixed": {
+    "점검 요청": 1,
+    "주의": 3
+  },
+  "note": "그림은 글꼴·브라우저 판에 따라 달라져 동결 대상이 아니다. 기존 v2 콘솔 그림은 capture.json에 있다"
+}

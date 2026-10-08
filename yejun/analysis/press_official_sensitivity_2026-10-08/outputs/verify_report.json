@@ -1,0 +1,192 @@
+{
+  "protocol_lock": {
+    "PROTOCOL.md": true,
+    "protocol.json": true,
+    "locked_at_utc": "2026-10-07T21:47:35Z"
+  },
+  "official_reproduction": {
+    "checked": 156,
+    "mismatches": [],
+    "ok": true
+  },
+  "prefix_and_r2_ref": {
+    "A: prefix_r2(8) == cached (bitwise, NaN positions)": true,
+    "A: r2_ref(0.005, 8) == meta": true,
+    "A: r2_ref recomputed": 0.9843232292370663,
+    "B: prefix_r2(8) == cached (bitwise, NaN positions)": true,
+    "B: r2_ref(0.005, 8) == meta": true,
+    "B: r2_ref recomputed": 0.9843965274302617
+  },
+  "patch_visibility": {
+    "evalcore.stream_rules is lib.stream_rules": true,
+    "evalcore.record_flags is lib.record_flags": true,
+    "07.stream_rules is lib.stream_rules": true,
+    "lib.stream_rules globals are lib module": true,
+    "lib.prefix_r2 globals are lib module": true,
+    "evalcore has no copied constants": true,
+    "07 has no copied rule constants": true,
+    "A: GAP_S=-1 -> stage1 == v2": true,
+    "A: GAP_S=-1 -> 07.test_only == v2": true,
+    "A: CONFIRM_ROWS=1e9 -> stage1 == v2": true,
+    "A: R2_MIN_LEN=6 -> first m-1 rows NaN only": true,
+    "A: R2_MIN_LEN=8 -> first m-1 rows NaN only": true,
+    "A: R2_MIN_LEN=10 -> first m-1 rows NaN only": true,
+    "B: GAP_S=-1 -> stage1 == v2": true,
+    "B: GAP_S=-1 -> 07.test_only == v2": true,
+    "B: CONFIRM_ROWS=1e9 -> stage1 == v2": true,
+    "B: R2_MIN_LEN=6 -> first m-1 rows NaN only": true,
+    "B: R2_MIN_LEN=8 -> first m-1 rows NaN only": true,
+    "B: R2_MIN_LEN=10 -> first m-1 rows NaN only": true,
+    "constants restored": true
+  },
+  "cache": {
+    "A": {
+      "sha256": "9e70cc018c2c1db6078ca62121f4dc4bc7ed03152bc242a517836d31cb2e7632",
+      "selection_inputs_sha256": "9e70cc018c2c1db6078ca62121f4dc4bc7ed03152bc242a517836d31cb2e7632",
+      "ok": true
+    },
+    "B": {
+      "sha256": "d4b967564d300dc62e1f3219bdb26a00885f8a8affdc592faef127a57b0b09db",
+      "selection_inputs_sha256": "d4b967564d300dc62e1f3219bdb26a00885f8a8affdc592faef127a57b0b09db",
+      "ok": true
+    }
+  },
+  "r2_ref_grid_matches": true,
+  "grid_recompute": {
+    "points": 9,
+    "checked": 1012,
+    "mismatches": [],
+    "ok": true
+  },
+  "grid_official_point_values": {
+    "A|stage1": 1.0,
+    "A|stage2": 1.0,
+    "B|stage1": 0.9953917050691244,
+    "B|stage2": 1.0
+  },
+  "grid_official_point_ok": true,
+  "swap": {
+    "control": {
+      "valid_csv_identical_bytes": true,
+      "valid_csv_identical_lf": true,
+      "valid_csv_identical_to_claude_repo_lf": true,
+      "selection_json_identical_bytes": true,
+      "selected_realtime": {
+        "model": "v2+H1",
+        "valid_f1_mean": 0.9972842466650942,
+        "complexity": 4,
+        "tied_within_tolerance": [
+          "v2+H1",
+          "v2+C1d1+H1",
+          "v2+C2d1+H1",
+          "v2+H1+H2",
+          "v2+C1d1+H1+H2",
+          "v2+C2d1+H1+H2"
+        ]
+      },
+      "selected_record": {
+        "model": "v3_B3k10",
+        "valid_f1_mean": 0.9928057553956835,
+        "complexity": 2,
+        "tied_within_tolerance": [
+          "v3_B3k10",
+          "v3_B3k5"
+        ]
+      },
+      "same_selection_as_official": true
+    },
+    "recomputed_front10": {
+      "A|v2+H1": {
+        "f1": 0.9981851179673321,
+        "same_as_summary": true
+      },
+      "B|v2+H1": {
+        "f1": 0.9945945945945946,
+        "same_as_summary": true
+      },
+      "A|v2+H1+H2": {
+        "f1": 0.9981851179673321,
+        "same_as_summary": true
+      },
+      "B|v2+H1+H2": {
+        "f1": 1.0,
+        "same_as_summary": true
+      },
+      "A|v2": {
+        "f1": 0.9584905660377359,
+        "same_as_summary": true
+      },
+      "B|v2": {
+        "f1": 0.9666666666666667,
+        "same_as_summary": true
+      }
+    },
+    "ok": true
+  },
+  "e3": {
+    "0.01|v2": {
+      "got": 2,
+      "official_13": 2,
+      "same": true
+    },
+    "0.01|v2+R1": {
+      "got": 2,
+      "official_13": 2,
+      "same": true
+    },
+    "0.01|v2+R1+R2": {
+      "got": 0,
+      "official_13": 0,
+      "same": true
+    },
+    "0.03|v2": {
+      "got": 8,
+      "official_13": 8,
+      "same": true
+    },
+    "0.03|v2+R1": {
+      "got": 11,
+      "official_13": 11,
+      "same": true
+    },
+    "0.03|v2+R1+R2": {
+      "got": 2,
+      "official_13": 2,
+      "same": true
+    },
+    "0.05|v2": {
+      "got": 14,
+      "official_13": 14,
+      "same": true
+    },
+    "0.05|v2+R1": {
+      "got": 18,
+      "official_13": 18,
+      "same": true
+    },
+    "0.05|v2+R1+R2": {
+      "got": 4,
+      "official_13": 4,
+      "same": true
+    },
+    "ok": true
+  },
+  "summary_consistent": true,
+  "claude_untouched": {
+    "git_status": "",
+    "ok": true
+  },
+  "clean_run_original_equals_copy": {
+    "lib.py": true,
+    "evalcore.py": true,
+    "01_scores.py": true,
+    "02_select_on_valid.py": true,
+    "04_validation.py": true,
+    "07_r1_on_baselines.py": true,
+    "10_threshold_free.py": true,
+    "13_r2_oos_alpha.py": true,
+    "cache/rows_A.pkl": true,
+    "cache/rows_B.pkl": true
+  },
+  "all_ok": true
+}

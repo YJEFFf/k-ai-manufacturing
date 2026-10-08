@@ -1,11 +1,11 @@
 {
   "zip": "C:\\Users\\junyj\\Desktop\\k-제조데이터\\yejun\\submission\\press_integrated_2026-10-08\\북적북적_code_통합본.zip",
-  "package": "C:\\Users\\junyj\\Desktop\\k-제조데이터\\yejun\\submission\\press_integrated_2026-10-08\\build\\package_9waix004\\북적북적_code_통합본",
-  "zip_sha256": "2bee634dc651368b5b11787c7e97b1a61b2b7e4ea2a6de8a059245536f4d4ed7",
-  "zip_bytes": 3949628,
-  "immutable_files": 343,
+  "package": "C:\\Users\\junyj\\Desktop\\k-제조데이터\\yejun\\submission\\press_integrated_2026-10-08\\build\\package_tv_c7ra2\\북적북적_code_통합본",
+  "zip_sha256": "3ad0b609dfa737ed99dfee245c302cc335efa452943adb20e793fa8fbe46c375",
+  "zip_bytes": 4157000,
+  "immutable_files": 401,
   "original_selection_lock_sha256": "20c992cd930c02c59f3ef4d3b7cccc1b15e2f3eda1fd78065fd06452a3c1ce2b",
-  "packaged_selection_lock_sha256": "0251b20ef113bd98ce631d98897688503b7b1c139f07556e03cfdf018f6ad93f",
+  "packaged_selection_lock_sha256": "856c617f452e679eab448ae76c5739bcef984a899cd28f0f5b5a956cc952c506",
   "calculation_ast_equivalent": true,
   "optional_audits_included": true
 }

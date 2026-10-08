@@ -1,0 +1,35 @@
+{
+  "note": "Windows System log power events during the clean run (Kernel-Power 42 = enter sleep, Power-Troubleshooter 1 = resume). Wall-clock durations in clean_full_run.json include this pause.",
+  "events": [
+    {
+      "time": "2026-10-08T08:46:57+09:00",
+      "id": 1,
+      "provider": "Microsoft-Windows-Kernel-General"
+    },
+    {
+      "time": "2026-10-08T08:47:04+09:00",
+      "id": 42,
+      "provider": "Microsoft-Windows-Kernel-Power"
+    },
+    {
+      "time": "2026-10-08T08:47:06+09:00",
+      "id": 107,
+      "provider": "Microsoft-Windows-Kernel-Power"
+    },
+    {
+      "time": "2026-10-08T11:52:20+09:00",
+      "id": 1,
+      "provider": "Microsoft-Windows-Kernel-General"
+    },
+    {
+      "time": "2026-10-08T11:52:29+09:00",
+      "id": 1,
+      "provider": "Microsoft-Windows-Power-Troubleshooter"
+    }
+  ],
+  "sleep_interval": {
+    "enter_sleep": "2026-10-08T08:47:04+09:00",
+    "clock_resynced_after_resume": "2026-10-08T11:52:20+09:00",
+    "seconds": 11116.0
+  }
+}

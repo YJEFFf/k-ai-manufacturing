@@ -1,0 +1,5 @@
+split,flow,rows,records,v2_alarm_rows,stage1_rows,stage2_rows,stage1_inherited_rows,stage2_inherited_rows,stage1_release_rows,stage2_release_rows,r2_hold_rows,insufficient_rows,stage1_events,stage2_events
+A,normal,8037,240,0,0,0,0,0,0,0,0,1631,0,0
+A,abnormal,600,21,556,599,599,596,596,0,0,0,137,1,1
+B,normal,9867,300,3,3,0,0,0,0,0,3,2014,3,0
+B,abnormal,600,21,569,600,600,596,596,0,0,0,137,1,1

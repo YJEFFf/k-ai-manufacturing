@@ -185,6 +185,7 @@ python yejun/press_guard/predict.py --input 새기록.csv --out 예측.csv --cas
 | 기능 | 파일 | 내용 |
 |---|---|---|
 | 점검 콘솔 | `serve.py`, `web/` | 사전 비율 선택, 사건 단위 1·2단계 건수와 대기열(단계 → 근거 수 → 경보 비율 → 최대 점수, 이상 라벨 없이 정함), 사건 안 건 목록(건 번호 = 첫 경보 행), 의심 생산 시간창·품질 조치·점검 항목, 사건 단위 점검 결과 기록과 CSV 내보내기, 10배속 모의 운용, 수집 시각 간격 경고. `python yejun/press_guard/serve.py --port 8765` |
+| 두 단계 경보 콘솔(제출 체계) | `stage_console.py`, `stages.py`, `web/stage.html`·`stage.js`·`stage.css` | 제출 두 단계 체계(1단계 주의 = v2+R1, 2단계 점검 요청 = v2 → R2 → R1)를 한 행씩 적용한다(`stages.TwoStageStream`, 제출 예측 파일 시험 행과 행마다 같음). 60초 묶음 사건 대기열, R1 이어받음·해제, R2 보류, 관측 부족, 근거 성분, 정상 경보량·되풀이 기준을 보인다. 위 점검 콘솔(v2 경보·사건 안 2행 격상)은 코드 해시 계약 때문에 그대로 둔다. `python yejun/press_guard/stage_console.py --port 8766 [--data-root 원본폴더] [--artifacts 모델폴더]` |
 | 모의 운용 | `simulate.py` | CSV를 10 Hz(`--speed 1`) 또는 배속으로 흘려 사건 알림(시작·격상)을 즉시 출력·기록한다. 알림 행이 일괄 분석과 같다 |
 | 운영 감시 | `monitor.py` | 창별 알림 단위 수를 보정 조건부 Beta-Binomial 95·99% 한도와 비교하고, 근거 구성과 전류 수준 이동을 본다. 99백분위 초과, 또는 95백분위 초과나 전류 수준 상승 이동이 연속 2창이면 조치 대상이고, 그 밖은 관측 지속이다. 조치 대상은 변경 기록이 있으면 재보정 검토, 기록 없이 전류 수준이 이동하면 FM4·FM5 설비 점검 요청, 둘 다 없으면 열화 의심 점검이다. 조치 대상 창(재보정 검토·점검 요청)은 결과가 정상 확인일 때만 재보정 자료로 쓴다. 변경 기록은 정상 확인을 대신하지 않는다. 명령: `python yejun/press_guard/monitor.py --csv 교대.csv --split B --changes 변경기록.csv --out 창별.csv` |
 | 재보정 | `recalibrate.py` | 새 정상 CSV로 학습·보정·수락 검사를 한다. 정상 알림은 Beta-Binomial 95백분위(α 5%에서 6→7, 정상 거부 5% 이하), 주입 3종은 2초 탐지 90%. 수락 구간 단위의 전류 RMS·진동 SD가 보정 범위 밖이면 교환가능 한도로 경고한다(운전 상태를 덮지 못한 보정, 수락 여부 불변). 검정력·알림 예산 환산·결과 기록으로 자료를 거르는 `--outcomes`와 감시 창의 조치·확인 결과를 읽는 `--windows`를 둔다 |
@@ -219,7 +220,7 @@ python yejun/press_guard/predict.py --input 새기록.csv --out 예측.csv --cas
 | `queue_mixed_ranks_v2.csv`, `queue_injection_ranks_v2.csv`, `queue_key_selection_v2.csv`, `quality_windows_v2.csv`, `monitor_gain_v2.csv`, `expected_effect_v2.csv`, `decision_table_v2.csv` | 대기열 순위, 품질 의심 시간창, 감시 규칙 모의, 기대효과·손익분기(가정), 판단표 |
 | `fig_*_v2.png` | 위치별 재현율, 첫 경보, 미탐 사례, 센서 중요도, 결합, 오경보 사례(성분 점수·문턱), 위치 × 진동 미탐, 확률 신뢰도 |
 | `expected/` | 동결 기대값: 결과 CSV 44개, manifest·audit·요약, 행 단위 예측 요약(`predictions_digest.json`, 실수 열의 행별 float32 값 포함), 동결 모델 사본(`guard_*.json`·`probability_*.json`) |
-| `console/` | 콘솔 화면 캡처와 해시(`tools/capture_console.py`) |
+| `console/` | 콘솔 화면 캡처와 해시(`tools/capture_console.py`: v2 콘솔 `*_v2.png`·`capture.json`, `tools/capture_stage_console.py`: 두 단계 콘솔 `*_stage*.png`·`capture_stage.json`) |
 
 행 단위 예측(`predictions_*`, `test_predictions_*`)과 저장 모델(`artifacts/`)은 Git에 넣지 않는다. 실행하면 생기고, 해시는 manifest와 `expected/predictions_digest.json`으로 대조한다. 다른 기기에서 다시 학습한 모델은 `expected/`의 동결 사본과 원소 단위로 대조한다([equivalence.py](equivalence.py)).
 
@@ -231,6 +232,7 @@ python yejun/press_guard/predict.py --input 새기록.csv --out 예측.csv --cas
 | `python yejun/press_guard/verify.py` | 동결 기대값과 비교한다. 결과 CSV는 \|차이\| ≤ 1e-9 + 1e-7·\|값\|(순위 통계 열만 이유와 함께 따로), 정수·문자 열은 정확 비교다. 행 단위 예측은 SHA-256이 같으면 통과한다. 다르면(다른 기기) 판정 열(경보·알림·단계·사건·근거·조치·상태)이 정확히 같고 NaN·±inf 위치가 같아야 한다. 실수 열은 동결 때 float32로 저장한 행별 값과 \|차이\| ≤ 1e-9 + 1e-6·\|값\|이고, 열 요약(개수·합·제곱합·최솟값·최댓값)도 상대 1e-6 안이어야 한다. 정상 기준 분포의 순위로 바꾼 점수 열(score·g_*)만 순위 구간(g ≤ 1.35)에서 행마다 1e-3, 열 요약 상대 1e-4까지 허용한다(요약의 최솟값·최댓값이 순위 구간이면 행별과 같은 1e-3). 수학적으로 같은 점수의 순위가 기기마다 한 칸 뒤바뀔 수 있어서다(리눅스 x86-64 실측 최대 2.3e-4, 경보 불변). 행 사이 값을 맞바꾸거나 작은 값 열을 몇 배로 바꾸면 실패한다. 저장 모델·확률 보정기는 동결 사본과 SHA-256이 같거나, 모든 원소가 \|차이\| ≤ 1e-10 + 1e-8·\|값\| 안이어야 한다(문자·논리 값은 정확 비교). `--freeze`는 audit를 통과한 실행만 동결한다 |
 | `python -m pytest -q yejun/press_guard` | 모델·스트림·서버·분석·재보정·감시·모의 운용·이식성(인코딩·resource·CP949) 시험 |
 | `node yejun/press_guard/test_web.cjs` | 콘솔 그래프·단계 표시·모의 운용·결과 양식 회귀 |
+| `python -m pytest -q yejun/press_guard/test_stages.py yejun/press_guard/test_stage_console.py`, `node yejun/press_guard/test_web_stage.cjs` | 두 단계 스트림: 공식 규칙(준용 tvt lib) 일치, 미래 행·묶음 크기 불변, 기록 경계 초기화, 제출 예측 파일 재현, 두 단계 콘솔 API·화면 집계, 기존 콘솔 파일 코드 해시 유지 |
 | `bash yejun/press_guard/tools/clean_repro.sh` | git 클론(또는 git 없는 사본)에 원본만 복사해 `reproduce.py`를 실행한다 |
 | `python yejun/press_guard/tools/package_manifest.py` | 최종 패키지 파일 목록·SHA-256·블라인드 검사(절대 경로·필수 파일·실행 기록 인용·문서 상대 링크). `--copy-test <빈 폴더>`는 목록만 복사해 한 명령 재현을 수행한다. ZIP은 만들지 않는다 |
 

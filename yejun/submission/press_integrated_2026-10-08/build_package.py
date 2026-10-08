@@ -27,6 +27,47 @@ OWN_LOCKED = ("PROTOCOL.md", "frontier_model.py", "scenarios.py", "run_experimen
               "vibration_branch.py")
 SHARED_LOCKED = ["yejun/press_guard/model.py"] + [f"yejun/press_submission/press/{name}"
                     for name in ("data.py", "scores.py", "calibrate.py", "validation.py")]
+# Files the official pipeline imports at run time; packaging must never change them.
+OFFICIAL_RUNTIME = ("yejun/press_guard/model.py", "yejun/press_guard/runtime.py")
+IMPROVEMENT_AUDIT_TABLES = ("strong_baselines", "normal_sensitivity")
+# Added studies that read the official pipeline outputs (filled when each study is frozen).
+# Each entry: source folder, destination folder, files to ship, reference tables (relative to
+# source outputs), the run_all step (arguments with {ROOT}/{DATA}/{STUDY} placeholders).
+SENSITIVITY_ENV = {"PRESS_OFFICIAL_COPY": "{ROOT}", "PRESS_SENS_WORK": "{ROOT}/logs/sensitivity_work",
+                   "PRESS_SENS_REFERENCE_TVT": "{ROOT}/code/press/tvt", "PRESS_SENS_CLEAN_ORIGINAL": "{ROOT}"}
+STAGE_ENV = {"PRESS_STAGE_TVT": "{ROOT}/code/press/tvt",
+             "PRESS_STAGE_DOMAIN_STATES": "{ROOT}/code/press/domain/outputs/06_operating_regime_records.csv"}
+ADDED_STUDIES: list[dict] = [
+    dict(name="official_sensitivity",
+         source=ROOT / "yejun/analysis/press_official_sensitivity_2026-10-08",
+         dest="yejun/analysis/press_official_sensitivity",
+         files=("README.md", "PROTOCOL.md", "protocol.json", "protocol_lock.json", "sens_common.py",
+                "run_grid.py", "run_swap.py", "run_e3.py", "make_summary.py"),
+         # v2-family tables only; the swap tables also hold guidebook-LSTM rows that vary slightly by machine.
+         reference_tables=("grid_metrics.csv", "grid_distribution.csv", "grid_main_effects.csv", "grid_oat.csv",
+                           "grid_alpha01_wide.csv", "grid_alpha03_wide.csv", "grid_alpha05_wide.csv",
+                           "grid_reference_v2.csv", "r2_ref_grid.csv", "e3_grid_per_window.csv",
+                           "e3_grid_pooled.csv", "e3_r2_ref.csv"),
+         steps=[dict(name=f"official_sensitivity_{part}", env=SENSITIVITY_ENV,
+                     args=[f"{{ROOT}}/yejun/analysis/press_official_sensitivity/{script}"])
+                for part, script in (("grid", "run_grid.py"), ("swap", "run_swap.py"),
+                                     ("e3", "run_e3.py"), ("summary", "make_summary.py"))]),
+    dict(name="stage_replay",
+         source=ROOT / "yejun/analysis/press_stage_replay_2026-10-08",
+         dest="yejun/analysis/press_stage_replay",
+         files=("README.md", "common.py", "replay.py", "alarm_volume.py"),
+         reference_tables=("replay_counts.csv", "alarm_events.csv", "alarm_volume_sets.csv",
+                           "alarm_volume_states.csv", "repeat_criterion.csv"),
+         steps=[dict(name="stage_replay", env=STAGE_ENV,
+                     args=["{ROOT}/yejun/analysis/press_stage_replay/replay.py", "--data", "{DATA}",
+                           "--official-cache", "{ROOT}/code/press/tvt/cache"]),
+                dict(name="stage_alarm_volume", env=STAGE_ENV,
+                     args=["{ROOT}/yejun/analysis/press_stage_replay/alarm_volume.py", "--data", "{DATA}"])]),
+]
+# Console/streaming files added to yejun/press_guard (never model.py/runtime.py).
+PRESS_GUARD_UPDATES: tuple[str, ...] = ("stages.py", "stage_console.py", "tools/capture_stage_console.py", "README.md",
+                                        "web/index.html", "web/app.js", "web/style.css",
+                                        "web/stage.html", "web/stage.js", "web/stage.css")
 
 
 def digest(data):
@@ -287,9 +328,21 @@ def extract_original(archive, target):
     return copied
 
 
-def build(target, include_extra_audits=False):
+def build(target, include_extra_audits=True, attach_verification=None, packaging_utc=None):
     historical = verify_historical_lock()
-    packaging_created_utc = datetime.now(timezone.utc).isoformat()
+    verification_basis = None
+    if attach_verification is not None:
+        # Clean-run records of an earlier build whose computational files are identical (checked by
+        # verify_attached_build.py after packaging); they describe that run, not new computation.
+        record = json.loads(read(Path(attach_verification) / "clean_full_run.json"))
+        verification_basis = dict(run_archive_sha256=record["archive_sha256"], files=[],
+                                  note="Run records of the archive above; this archive adds only these record files")
+        for path in sorted(Path(attach_verification).glob("*.json")):
+            destination = target / "verification" / path.name
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(path, destination)
+            verification_basis["files"].append(destination.relative_to(target).as_posix())
+    packaging_created_utc = packaging_utc or datetime.now(timezone.utc).isoformat()
     original_zip = ROOT / "claude/submission/북적북적_code.zip"
     originals = extract_original(original_zip, target)
     # Keep the original runner and expected result contracts in this same layout.
@@ -338,11 +391,45 @@ def build(target, include_extra_audits=False):
             new_functions = {node.name: ast.dump(node, include_attributes=False) for node in ast.parse(after).body if isinstance(node, ast.FunctionDef)}
             assert all(old_functions[name] == new_functions[name] for name in ("close", "verify_actual", "verify_injection"))
         write(study / filename, after)
+    extra_tables = []
     if include_extra_audits:
         for filename in ("audit_strong_baselines.py", "audit_normal_sensitivity.py", "verify_normal_sensitivity.py"):
             shutil.copy2(SOURCE / filename, study / filename)
         for filename in ("test_strong_baselines.py", "test_normal_sensitivity.py"):
             shutil.copy2(SOURCE / "tests" / filename, study / "tests" / filename)
+        for subdir in IMPROVEMENT_AUDIT_TABLES:
+            for path in sorted((SOURCE / "outputs" / subdir).glob("*.csv")):
+                destination = target / "reference_results/extra_audits/improvement" / subdir / path.name
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(path, destination)
+                extra_tables.append(dict(group="improvement", reference=destination.relative_to(target).as_posix(),
+                                         generated=(STUDY_REL / "outputs" / subdir / path.name).as_posix()))
+    official_audits = []
+    for added in ADDED_STUDIES:
+        destination = target / added["dest"]
+        for relative in added["files"]:
+            (destination / relative).parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(Path(added["source"]) / relative, destination / relative)
+        for relative in added["reference_tables"]:
+            reference = target / "reference_results/extra_audits/official" / added["name"] / Path(relative).name
+            reference.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(Path(added["source"]) / "outputs" / relative, reference)
+            extra_tables.append(dict(group="official", reference=reference.relative_to(target).as_posix(),
+                                     generated=(Path(added["dest"]) / "outputs" / relative).as_posix()))
+        for spec in added["steps"]:
+            official_audits.append(dict(name=spec["name"], args=spec["args"], env=spec.get("env", {})))
+    console_updates = []
+    for relative in PRESS_GUARD_UPDATES:
+        source_path, destination = ROOT / "yejun/press_guard" / relative, target / "yejun/press_guard" / relative
+        previous = file_hash(destination, True) if destination.is_file() else None
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source_path, destination)
+        console_updates.append(dict(file=f"yejun/press_guard/{relative}", previous_sha256_lf=previous,
+                                    distribution_sha256_lf=file_hash(destination, True),
+                                    change="Two-stage console/streaming code; not imported by the official pipeline"))
+    for relative in OFFICIAL_RUNTIME:
+        assert relative not in {item["file"] for item in console_updates}, relative
+        assert file_hash(target / relative) == originals[relative], f"Official runtime changed: {relative}"
     reference = target / "reference_results/improvement"
     reference.mkdir(parents=True, exist_ok=True)
     for path in (SOURCE / "outputs").iterdir():
@@ -390,6 +477,10 @@ def build(target, include_extra_audits=False):
         transformations=transformations,
         improvement_reference_csv_files=sorted(path.name for path in reference.glob("*.csv")),
         lock_scope="Historical lock retained by hash; distribution lock uses actual packaged source hashes. A fresh run generates its own normal-only selection lock.",
+        extra_reference_tables=extra_tables,
+        official_audits=official_audits,
+        console_updates=console_updates,
+        verification_basis=verification_basis,
         immutable_files_sha256={})
     for path in sorted(target.rglob("*")):
         if path.is_file():
@@ -404,8 +495,12 @@ def build(target, include_extra_audits=False):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=HERE / f"{NAME}.zip")
-    parser.add_argument("--include-extra-audits", action="store_true", help="Include stable strong-baseline and normal-sensitivity audit scripts and tests")
+    parser.add_argument("--include-extra-audits", action="store_true", help="Accepted for compatibility; added audits are included by default")
+    parser.add_argument("--no-extra-audits", action="store_true", help="Build without the added audits")
+    parser.add_argument("--attach-verification", type=Path, help="Folder with clean-run JSON records of an earlier identical build")
+    parser.add_argument("--packaging-utc", help="Reuse the packaging timestamp of the executed build so its files stay byte-identical")
     args = parser.parse_args()
+    args.include_extra_audits = not args.no_extra_audits
     output = args.output.resolve()
     if not output.is_relative_to(HERE) or output.suffix != ".zip":
         raise ValueError("Output ZIP must stay inside this integration workspace")
@@ -413,7 +508,8 @@ def main():
     build_root.mkdir(parents=True, exist_ok=True)
     target = Path(tempfile.mkdtemp(prefix="package_", dir=build_root)) / NAME
     target.mkdir()
-    manifest = build(target, include_extra_audits=args.include_extra_audits)
+    manifest = build(target, include_extra_audits=args.include_extra_audits,
+                     attach_verification=args.attach_verification, packaging_utc=args.packaging_utc)
     with zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED, compresslevel=9) as handle:
         for path in sorted(target.rglob("*")):
             if path.is_file():

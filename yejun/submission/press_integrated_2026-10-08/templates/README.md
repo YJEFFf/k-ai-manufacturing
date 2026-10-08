@@ -1,49 +1,74 @@
 # 북적북적 통합 코드 제출본
 
-기존 보고서의 공식 모델·예측 파일·대조 실험과 개선본의 정상 전용 후보 선택, 진동 잔차 결합, 인공 주입, 계측 섭동 및 재생 검증을 함께 실행합니다. 원본 CSV 2개와 필요한 팀 모듈을 포함하므로 Git 저장소 경로나 별도의 보고서 편집 프로그램이 필요하지 않습니다.
+결과보고서의 공식 모델(기반 모델 v2 + 규칙 R1·R2, 두 단계 경보)과 2.8절 사후 보완 실험, 같은 조건 비교·정상 조건 민감도 등 추가 감사를 이 폴더 하나에서 다시 만듭니다. 원본 CSV 2개와 필요한 팀 모듈이 들어 있어 저장소나 보고서 편집 프로그램이 필요하지 않습니다.
 
-## 실행
+## 0. 설치 없이 확인(수 초)
 
-Python 3.14 환경에서 압축을 풀고 다음 명령을 실행합니다. 패키지 설치에만 인터넷 연결이 필요합니다.
+```console
+python check_bundled.py
+```
+
+파이썬 표준 라이브러리만 씁니다. 세 가지를 확인합니다.
+
+- `package_manifest.json`의 해시로 배포 파일이 바뀌지 않았는지 봅니다.
+- 동봉한 공식 test 예측 파일의 해시를 `expected_results.json`과 대조합니다.
+- 같은 파일의 `label`과 경보 열로 행 F1을 다시 계산합니다. 공식 성능 1단계 v2+R1은 1.000·0.995, 2단계 v2+R1+R2는 1.000·1.000, 기반 모델 v2는 0.965·0.970입니다.
+
+공식 test 예측 파일은 `reference_results/official_predictions/test_predictions_A.csv`, `test_predictions_B.csv`입니다. 전체를 실행하면 같은 파일을 `predictions/`에 다시 만들고 해시를 대조합니다.
+
+## 1. 설치
+
+Python 3.14에서 압축을 풀고 가상환경에 설치합니다. 패키지 설치에만 인터넷이 필요합니다.
 
 ```console
 python -m venv .venv
 .venv\Scripts\python -m pip install -r requirements.txt
-.venv\Scripts\python run_all.py
 ```
 
-macOS/Linux에서는 `.venv/bin/python`을 사용합니다. 설치 이후의 실험은 인터넷 없이 실행할 수 있습니다. 압축 해제 경로에 공백이나 한글이 있어도 됩니다. 전체 실행은 CPU 성능에 따라 수십 분 이상 걸릴 수 있습니다. 각 단계 로그는 `logs/`, 전체 실행 결과는 `logs/integrated_run_summary.json`에 남습니다. 하나라도 실패하면 종료 코드가 0이 아닙니다.
+macOS/Linux에서는 `.venv/bin/python`을 씁니다. 아래 명령의 `python`은 이 가상환경의 파이썬입니다. 가상환경을 켜지 않았다면 `.venv\Scripts\python run_all.py`처럼 경로를 붙입니다. `run_all.py`는 자신을 실행한 파이썬으로 하위 단계를 돌립니다. 압축 해제 경로에 공백이나 한글이 있어도 됩니다.
+
+## 2. 실행
 
 ```console
-python run_all.py --section official
-python run_all.py --section improvement
-python run_all.py --verify-only
-python run_all.py --extra-audits
+python run_all.py
 ```
 
-`--section official`은 기존 전체 26단계를 실행합니다. `--section improvement`는 개선 실험 전체를 실행합니다. `--quick`은 기존 파이프라인 일부만 실행하므로 전체 보고서 검증용으로 쓰지 않습니다. `--verify-only`는 이미 생성된 결과의 수치·소스·재생 일치를 다시 검사합니다.
+한 명령으로 다음을 차례로 실행합니다.
 
-추가 감사가 포함된 배포본에서 `--extra-audits`를 주면 같은 조건의 특징 맞춤 5NN·3채널 Ridge 대조와 정상 조건 민감도 시험도 실행합니다. 추가 감사는 기존 선택 모델·문턱을 바꾸지 않습니다. 처음 실행할 때 지정하며 이미 결과가 있는 폴더에서는 새로 압축을 풀어 실행합니다. 포함 여부는 `package_manifest.json`의 `optional_audits_included`로 확인할 수 있습니다.
+- 기존 26단계: 전처리 → 학습 → 추론 → test 예측 파일 → 보고서 수치 대조 43항목
+- 2.8절 사후 보완 실험: 정상 전용 선택 → 잠금 → 평가 → 재계산·재생·독립 수식 감사 → 모델 동결
+- 추가 감사: 같은 조건 비교, 정상 조건 민감도, 공식 규칙 상수 민감도, 두 단계 경보 재생·경보량
+- 계약 검사(pytest)
 
-정상 조건 민감도 시험 후에는 상세 행 기록에서 집계를 별도로 계산하고, 주입 전 불변성·사전 잠금·집계 CSV와의 일치를 다시 확인합니다. 결과는 `outputs/normal_sensitivity/aggregation_verification.json`에 남습니다.
+추가 감사 결과는 `reference_results/extra_audits/`의 기준표와 자동으로 대조합니다. 단계 로그는 `logs/`, 전체 결과는 `logs/integrated_run_summary.json`에 남습니다. 하나라도 실패하면 종료 코드가 0이 아닙니다.
 
-같은 소스·자료로 기본 개선 실험을 이미 마쳤다면 `python run_all.py --section improvement --extra-audits-only`로 기준표 대조와 추가 감사만 실행할 수 있습니다. 이 실행은 기본 모델 선택·평가를 다시 수행했다고 표시하지 않습니다. 추가 감사 결과 폴더도 새로 생성해야 하므로 같은 후속 검사를 중복 실행하려면 기존 산출물을 별도로 보관한 새 압축 해제 폴더를 사용합니다.
+| 명령 | 내용 |
+|---|---|
+| `python run_all.py` | 전체(위 목록) |
+| `python run_all.py --skip-extra-audits` | 추가 감사 제외 |
+| `python run_all.py --section official` | 기존 26단계만(대조 43항목) |
+| `python run_all.py --section official --quick` | 기존 빠른 부분(대조 28항목) |
+| `python run_all.py --section improvement` | 2.8절 실험과 그 추가 감사 |
+| `python run_all.py --verify-only` | 이 폴더에서 이미 실행한 결과를 다시 검사(새로 푼 폴더에서는 안내 후 종료) |
 
-## 결과와 검증 범위
+기존 단계(`run_official.py`)는 시작할 때 "결과는 파이썬 3.13에서 만들었다"는 안내를 출력합니다. 기존 결과를 처음 만든 환경을 알리는 문장입니다. 이 배포본의 3.14 판에서도 대조 43항목이 모두 일치했습니다(`verification/`). 처음 쓰던 3.13 실행 설명은 `README_original.md`에 보존했습니다. `environment_original.yml`은 예전 conda 설정이며, 현재 `requirements.txt`를 설치합니다.
 
-- 기존 제출 모델 예측: `predictions/test_predictions_A.csv`, `predictions/test_predictions_B.csv`.
-- 개선 실험: `yejun/analysis/press_improvement/outputs/`. 정상 개발 자료로 단독 8개와 결합 48개, 모두 56개 후보 중 하나를 고른 후 실제 이상 데이터를 읽습니다. 후보 격자, 선택, 소스 해시를 먼저 잠급니다. 별도 보정 OR 4개는 선택 대상이 아닙니다.
-- 개선 결과 재현 대조: `reference_results/improvement/`의 고정 표와 새로 계산한 표를 비교합니다. 이 폴더는 계산 결과를 대신하지 않습니다.
-- 독립 수치 재계산: 저장한 행별 점수로 보정 순위·행 F1·기록 오경보와 주입 대조를 별도 계산합니다. 표본·청크·기록 재생에서 경보 일치도 검사합니다.
-- 독립 구현 감사: Ridge 정규방정식과 Ledoit–Wolf 공분산을 별도 수식으로 계산해 진동 차분 점수 및 세 α의 경보를 대조합니다. 결과는 `outputs/independent_implementation_verification.json`입니다.
-- 고정 모델 생성: 이번 실행에서 학습한 A/B 상태를 `outputs/frozen_holdout/`의 JSON으로 저장하고 기존 평가 전체 행에서 원래 모델과 점수·경보를 대조합니다. ZIP에는 학습 캐시를 넣지 않았으며 이 상태도 처음부터 생성합니다.
-- `package_manifest.json`은 배포 입력의 무결성과 원래 선택 잠금 SHA-256을 기록합니다. 선택 대상이 아니던 비교기 3개를 제외했고, 남은 후보의 계산 구문은 AST로 대조했습니다. 기준표는 과거 결과에서 제외한 비교기 행만 뺀 값입니다. 배포 생성 시각과 역사적 선택 시각을 구분하며, `reference_results`의 잠금은 새 실험 실행을 의미하지 않습니다. 실제 실행에서는 정상 전용 선택부터 새로 수행해 `outputs/selection_lock.json`을 생성합니다.
+## 3. 결과 위치
 
-공식 제출 모델과 추가 실험 모델의 결과를 각각 출력합니다. 이미 관찰한 동일 고장 자료를 재생·재계산하는 검증과 새 설비·새 고장 사건에서의 일반화 검증은 다릅니다. 21개 이상 기록은 21개의 독립 고장 사건이 아닙니다. 세부 분할·주입·선택 기준은 `yejun/analysis/press_improvement/PROTOCOL.md`에 있습니다.
+| 위치 | 내용 |
+|---|---|
+| `predictions/` | 실행 뒤 다시 만든 공식 test 예측 파일(동봉본은 `reference_results/official_predictions/`) |
+| `code/press/*/outputs/` | 기존 파이프라인 산출물(보고서 1~4장 표·그림의 원자료) |
+| `yejun/analysis/press_improvement/outputs/` | 2.8절 실험의 선택 기록·잠금·평가표, 같은 조건 비교(`strong_baselines/`)·정상 조건 민감도(`normal_sensitivity/`) |
+| `yejun/analysis/press_official_sensitivity/outputs/` | 공식 규칙 상수 민감도와 이상 기록 앞뒤 교차 평가 |
+| `yejun/analysis/press_stage_replay/outputs/` | 두 단계 경보의 한 행 재생 일치, 정상 자료 경보량 |
+| `logs/` | 단계별 로그와 실행 요약 |
 
-기존 실행 설명은 `README_original.md`에 보존했습니다. 공통 설치 환경은 최상위 `requirements.txt`를 따릅니다.
+## 4. 검증 기록
 
-## 새 수집 자료 평가
+`verification/`에는 이 배포본과 계산 파일이 같은 빌드를 새 가상환경·새 압축 해제 폴더에서 `python run_all.py`로 끝까지 실행한 기록(단계별 시간, 결과)이 있습니다. 그 빌드의 SHA-256과 이 배포본이 그 기록 파일만 더했다는 사실은 `package_manifest.json`의 `verification_basis`에 있습니다.
+
+## 5. 새 수집 자료 평가
 
 전체 또는 개선 실행 후 `yejun/analysis/press_improvement/outputs/frozen_holdout/provenance.example.json`을 복사해 실제 수집 출처·설비·사건 정보를 작성합니다. 새 자료는 같은 공정, 센서·단위, 10 Hz 표본 간격이어야 합니다. 아래 명령은 지정한 A 상태를 사용하며 새 자료로 재학습·재보정·후보 선택을 하지 않습니다.
 
@@ -51,4 +76,10 @@ python run_all.py --extra-audits
 python yejun/analysis/press_improvement/validate_holdout.py evaluate --artifact yejun/analysis/press_improvement/outputs/frozen_holdout --split A --csv new_session.csv --provenance provenance.json --output new_validation
 ```
 
-정답 0/1 열이 있으면 `--label-column 정답열이름`, 기록 경계 열이 있으면 `--record-column 기록열이름`을 추가합니다. 정답이 없으면 경보 건수만 출력하며 탐지율·오경보율이라고 부르지 않습니다. 기존 파일 전체·부분·재명명·시간 이동 사본은 중복 검사로 거부합니다. 출처 선언과 중복 통과만으로 별개 고장 사건임이 입증되지는 않으므로 실제 수집·정비 기록과 함께 판단해야 합니다.
+정답 0/1 열이 있으면 `--label-column 정답열이름`, 기록 경계 열이 있으면 `--record-column 기록열이름`을 추가합니다. 정답이 없으면 경보 건수만 출력하며 탐지율·오경보율이라고 부르지 않습니다. 기존 파일 전체·부분·재명명·시간 이동 사본은 중복 검사로 거부합니다. 출처 선언과 중복 통과만으로 별개 고장 사건임이 입증되지는 않습니다.
+
+## 6. 범위
+
+- 공식 제출 모델과 추가 실험 모델의 결과를 따로 출력합니다. 추가 감사는 공식 모델·문턱·규칙을 바꾸지 않습니다.
+- 이미 관찰한 같은 고장 자료를 재생·재계산하는 검증은 새 설비·새 고장 사건의 일반화 검증과 다릅니다. 이상 21기록은 21개의 독립 고장 사건이 아닙니다.
+- 2.8절 실험의 분할·주입·선택 기준은 `yejun/analysis/press_improvement/PROTOCOL.md`에 있습니다. 이 배포본은 선택 대상이 아니었던 참고 계산 3개를 빼고, 남은 56개 후보와 OR 4개의 계산은 원래 코드와 구문(AST) 단위로 같습니다. 원래 선택 잠금의 해시는 `package_manifest.json`에 있으며, 실제 실행은 정상 전용 선택부터 새로 하여 `outputs/selection_lock.json`을 만듭니다.

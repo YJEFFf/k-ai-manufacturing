@@ -1,0 +1,75 @@
+{
+  "title": "공식 모델 상수 민감도·선택 규칙 교차 확인",
+  "date": "2026-10-08",
+  "nature": "sensitivity audit; not new validation; official model/constants are NOT changed or reselected whatever the result",
+  "official_model": {
+    "stage1_caution": "v2+H1 (v2 + R1)",
+    "stage2_inspection": "v2+H1+H2 (v2 + R2 then R1)",
+    "constants": {"GAP_S": 60.0, "CONFIRM_ROWS": 2, "R2_Q": 0.005, "R2_MIN_LEN": 8},
+    "primary_alpha": 0.01
+  },
+  "inputs": {
+    "clean_run_original": "C:/Users/junyj/AppData/Local/Temp/k-manufacturing-official-clean-20261008/unpacked/북적북적_code_통합본",
+    "working_copy": "C:/Users/junyj/AppData/Local/Temp/press_official_sensitivity_work/북적북적_code_통합본",
+    "score_cache": ["code/press/tvt/cache/rows_A.pkl", "code/press/tvt/cache/rows_B.pkl"],
+    "retraining": "none for grid and swap; train-normal current re-read from CSV via 01_scores.frame_rows only to recompute r2_ref; E3 refits v2 per window via 04.fit_split exactly as official 13_r2_oos_alpha.py"
+  },
+  "grid": {
+    "GAP_S": [30.0, 60.0, 120.0],
+    "CONFIRM_ROWS": [1, 2, 3],
+    "R2_Q": [0.001, 0.005, 0.01],
+    "R2_MIN_LEN": [6, 8, 10],
+    "design": "full factorial, 81 points",
+    "R2_Q_role": "r2_ref = nanquantile(train-normal prefix R2, R2_Q); same r2_ref used for R1 release (wave_ok) and R2 hold",
+    "R2_MIN_LEN_role": "prefix R2 defined from row R2_MIN_LEN of each record (earlier rows NaN -> no release, no hold); applied to cached table prefix_r2 column and to the train prefix R2 for r2_ref"
+  },
+  "alphas": [0.01, 0.03, 0.05],
+  "primary_alpha": 0.01,
+  "splits": ["A", "B"],
+  "variants": {"stage1": "v2+H1", "stage2": "v2+H1+H2", "reference": "v2"},
+  "metrics": {
+    "test_realtime": "evalcore.evaluate(table, cand, alpha, 'test', r2_ref)['realtime']: tp, fp (normal false-alarm rows), fn (missed rows), f1",
+    "test_record": "evalcore.evaluate(...)['record'] f1 (secondary)",
+    "test_normal_fp_records": "number of test normal records (A 120, B 180) with >=1 real-time alarm row (evalcore.predict_rows)",
+    "test_abnormal_records_detected": "number of the 11 test abnormal records with >=1 real-time alarm row",
+    "valid_realtime": "evalcore.evaluate(..., 'valid', r2_ref)['realtime'] f1 per split and mean over A/B",
+    "test_only": "07_r1_on_baselines.test_only (abnormal stream starts at test records); module PRIMARY_ALPHA patched to alpha; f1 and fn"
+  },
+  "summaries": {
+    "distribution": "min/median/max over 81 grid points per variant x alpha x metric x split",
+    "share_f1_ge_0.99": "share of grid points with F1 >= 0.99 for A, for B, for both",
+    "fp_record_changes": "number of grid points whose test normal FP records differ from the official grid point (per split x variant)",
+    "influence_oat": "8 one-at-a-time points from the official point",
+    "influence_main_effect": "for each constant: mean metric at each level over the other 27 points; main effect = max - min; ranked for stage1/stage2 test F1 (A/B mean), test normal FP records (A+B), valid F1 mean"
+  },
+  "swap_cross_evaluation": {
+    "roles": "abnormal records 10..20 (11) = valid, 0..9 (10) = test; normal splits unchanged",
+    "selection": "official 02_select_on_valid.main run unchanged with CACHE/OUT redirected to temp dirs; same candidates/complexity, alpha 1%, TIE 0.002",
+    "control": "same redirected run on unswapped tables must reproduce official tvt_valid.csv and selection",
+    "test": "evalcore.evaluate(..., 'test') on front-10 for all candidates and alphas",
+    "report": "selected realtime and record models; selected model front-10 test F1 A/B; v2+H1, v2+H1+H2, v2 front-10 F1",
+    "caveat": "same single event reused with roles swapped; not independent"
+  },
+  "e3_optional": {
+    "windows": "rolling end in (180,240,300,360,420): train < end, cal end..end+119, eval end+120..end+179 (pooled 300 normal records)",
+    "fit": "04_validation.fit_split per window (as 13_r2_oos_alpha.py)",
+    "metrics": "normal alerted records for v2, v2+R2, v2+R1, v2+R1+R2 per grid point and alpha, pooled all 300 and keep 288 (excluding 302-304, 422-424, 460-462, 569-571)",
+    "control": "official constants must reproduce 13 A_per_fold all|/keep| counts for rolling windows",
+    "time_budget_minutes": 20
+  },
+  "verification": [
+    "official constants reproduce tvt_test.csv / tvt_valid.csv (copy and claude/ versions) for v2, v2+H1, v2+H1+H2, alpha 1/3/5%, A/B, realtime and record: ints exact, F1 within 1e-12",
+    "test_only F1 at alpha 1% equals tvt_r1_baselines.csv for v2+H1 and v2+H1+H2",
+    "prefix_r2 recomputed at R2_MIN_LEN 8 equals cached column incl. NaN positions; r2_ref at (0.005, 8) equals tvt_scores_meta.json",
+    "patch visibility: function identity/globals checks; GAP_S=-1 or CONFIRM_ROWS=1e9 makes stage1 equal v2; NaN prefix length equals R2_MIN_LEN-1; test_only normal FP rows equal evaluate at patched alpha",
+    "cache SHA-256 equals copy tvt_selection.json inputs.rows_sha256; record environment versions and imported source hashes",
+    "if reproduction fails, grid results are not reported as official-code results"
+  ],
+  "interpretation_rules": [
+    "primary alpha 1%; alpha 3%/5% secondary only",
+    "write 'all 81 grid points F1 >= 0.99' only if true for both A and B; otherwise report share and the constant conditions of failing points",
+    "write 'independent of a constant' only if the metric is identical across its levels for every combination of the other constants; otherwise report range",
+    "every statement carries: same single event; constants chosen after viewing data; grid is sensitivity, not new validation",
+    "no official model/constant/alpha change and no 'optimal constant' proposal based on these results"
+  ]
+}

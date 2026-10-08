@@ -1,0 +1,18 @@
+{
+  "patch_visibility": {
+    "13.prefix_r2 is lib.prefix_r2": true,
+    "04.stream_rules is lib.stream_rules": true,
+    "04.prefix_r2 is lib.prefix_r2": true,
+    "rolling 평가300~359: r2_ref(0.005, 8) == 04.fit_split": true,
+    "rolling 평가360~419: r2_ref(0.005, 8) == 04.fit_split": true,
+    "rolling 평가420~479: r2_ref(0.005, 8) == 04.fit_split": true,
+    "rolling 평가480~539: r2_ref(0.005, 8) == 04.fit_split": true,
+    "rolling 평가540~599: r2_ref(0.005, 8) == 04.fit_split": true
+  },
+  "official_13_reproduction": {
+    "checked": 150,
+    "mismatches": [],
+    "ok": true
+  },
+  "all_ok": true
+}

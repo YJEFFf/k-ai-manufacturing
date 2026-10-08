@@ -1,0 +1,8 @@
+{
+  "locked_at_utc": "2026-10-07T21:47:35Z",
+  "files": {
+    "PROTOCOL.md": "db5c0cedd9d7ed4d285db2d832e20a692f6e638064b658dea451d197df9baeed",
+    "protocol.json": "7334dc570f0f6a1b2e03b694c2dd2841982f541a4111180fa037297f5d558cd6"
+  },
+  "note": "평가 코드 실행 전 잠금. 이후 PROTOCOL.md·protocol.json을 고치지 않는다. 이탈은 README에 기록한다."
+}

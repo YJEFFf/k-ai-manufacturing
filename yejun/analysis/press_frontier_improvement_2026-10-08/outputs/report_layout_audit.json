@@ -1,14 +1,14 @@
 {
   "source": "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.md",
   "hwpx": "yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.hwpx",
-  "source_sha256": "02ac3cb212fa8d953cf6a251c2471d5587eb1857d590e20e169e6c8830a24e6e",
-  "hwpx_sha256": "5c08f07b2ce72b6018ff9370aacdf2370fcc5f01d4938fe79ee7e9a3f4fae4e7",
-  "pdf_sha256": "863eb48d07f391dd3d4705dea7f1706fdd7183c3ef2892f2461664565691a6ce",
-  "expected_text_blocks": 1281,
+  "source_sha256": "f106745ef106202eacc449f4bc9328f5140443d31634207a6f594a94ab6046ef",
+  "hwpx_sha256": "b63f53084c341892a64d07ba5a318db262e8fc9105fb9b6342905d3a285ce4fc",
+  "pdf_sha256": "d2178a0e41c5a5a280a04764be47b7adb18fb59d7a63e1bb1881b85df61ea205",
+  "expected_text_blocks": 1334,
   "missing_hwpx_blocks": [],
   "hwpx_picture_controls": 16,
   "pdf": {
-    "pages": 70,
+    "pages": 73,
     "chapter_pages": {
       "제1장. 데이터 이해 및 진단": [
         2
@@ -17,16 +17,16 @@
         13
       ],
       "제3장. 영향요인 및 오류분석": [
-        44
+        45
       ],
       "제4장. 현장 활용방안": [
-        51
+        52
       ],
       "제5장. 창의성 및 차별성": [
-        59
+        61
       ],
       "제6장. 코드 구성 및 재현성": [
-        63
+        65
       ]
     },
     "pdf_image_instances": 16,

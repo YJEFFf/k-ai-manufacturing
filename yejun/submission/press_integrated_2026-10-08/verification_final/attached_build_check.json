@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "run_archive": "북적북적_code_통합본_run.zip",
+  "run_archive_sha256": "e79a771e958a9aad3f9a7bacd57a30fb1d82f4ebfc64fcd50553255c4895f7ba",
+  "final_archive": "북적북적_code_통합본.zip",
+  "final_archive_sha256": "3ad0b609dfa737ed99dfee245c302cc335efa452943adb20e793fa8fbe46c375",
+  "identical_members": 399,
+  "added_members": [
+    "북적북적_code_통합본/verification/clean_full_run.json",
+    "북적북적_code_통합본/verification/power_events.json"
+  ],
+  "note": "Only package_manifest.json and the attached run records differ; all executed files are byte-identical."
+}
