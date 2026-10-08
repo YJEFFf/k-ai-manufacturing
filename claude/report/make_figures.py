@@ -101,7 +101,7 @@ def fig_collection():
 def fig_flow():
     """[그림 6] 분석 흐름 8단계(실제 진행 순서, 4개씩 두 줄). '사후' 상자는 test 채점 뒤에 한 분석이다."""
     steps = ["데이터·구조\n확인", "데이터 결함\n진단", "모델 v1~v3·\n규칙 R1·R2\n(전체 데이터 봄)", "잠금(v2+R1)·\ntest 채점",
-             "test 확인 뒤\n2단계 승격 R2\n(v2+R1+R2)", "의심과 검증\n(2.6절)", "사후: 설비 물리·\n표준 기법·운전 상태", "사후(†):\n보완 LSTM 대조"]
+             "test 확인 뒤\n2단계 승격 R2\n(v2+R1+R2)", "의심과 검증\n(2.6절)", "사후: 설비 물리·\n표준 기법·운전 상태", "사후(사후):\n보완 LSTM 대조"]
     dx, w, h, ys = 2.15, 1.75, 0.95, (1.45, 0.1)     # 칸 간격, 상자 폭·높이, 두 줄의 상자 아래 y
     fig, ax = plt.subplots(figsize=(8.4, 2.4))
     ax.set_xlim(0, 4 * dx); ax.set_ylim(0, 2.5); ax.axis("off")
@@ -145,15 +145,15 @@ def fig_models():
     t = pd.read_csv(TVT / "tvt_test.csv")
     t = t[(t.alpha == 0.01) & (t["mode"] == "realtime") & t.model.isin(NAMES)]
     p = t.pivot_table(index="model", columns="split", values="f1").loc[list(NAMES)]
-    # 사후(†) 보완 LSTM(예준 실험의 잠금 설정, 새 seed 3·4·5 앙상블)을 가이드북 LSTM 바로 아래에 회색으로 덧붙인다
+    # 사후(사후) 보완 LSTM(예준 실험의 잠금 설정, 새 seed 3·4·5 앙상블)을 가이드북 LSTM 바로 아래에 회색으로 덧붙인다
     lx = pd.read_csv(HERE / "research" / "yejun_lstm_improvement_62482a5" / "03_test.csv")
     lx = lx[(lx.variant == "lx:W10-var-128x64-e1000p100:ct-mean:e345") & (lx.rule == "none") & (lx.alpha == 0.01)
             & (lx.regime == "test") & (lx["mode"] == "realtime")].set_index("split").f1
-    rj = json.loads((TVT / "ridge_baseline.json").read_text(encoding="utf-8"))["ridge"]     # 사후(†) Ridge 예측 오차(tvt/14)
+    rj = json.loads((TVT / "ridge_baseline.json").read_text(encoding="utf-8"))["ridge"]     # 사후(사후) Ridge 예측 오차(tvt/14)
     rows = list(p.index)
     extra = pd.DataFrame([[lx["A"], lx["B"]], [rj["A"]["ridge"]["test_f1"], rj["B"]["ridge"]["test_f1"]]], index=["lstm_imp", "ridge"], columns=p.columns)
     p = pd.concat([p.loc[:"lstm20"], extra, p.loc[rows[rows.index("lstm20") + 1]:]])
-    labels = {**NAMES, "lstm_imp": "† 보완 LSTM-AE(사후)", "ridge": "† Ridge 예측 오차(사후)"}
+    labels = {**NAMES, "lstm_imp": "보완 LSTM-AE(사후)", "ridge": "Ridge 예측 오차(사후)"}
     y = np.arange(len(p)); h = 0.38
     fig, ax = plt.subplots(figsize=(6.4, 4.3))
     post = np.array([m in ("lstm_imp", "ridge") for m in p.index])
@@ -297,7 +297,7 @@ def fig_load_vibration():
         xx = np.linspace(np.log(tr.cur_rms.min()), np.log(tr.cur_rms.max()), 50)
         ax.plot(np.exp(xx), np.exp(b0 + b1 * xx), color=INK2, lw=1, label=f"로그-로그 회귀(분할 A 학습 정상 기록 {len(tr)}개로 적합)")
         ax.text(0.98, 0.04, f"정상 기울기 {b1:.2f}", transform=ax.transAxes, ha="right", fontsize=7.6, color=INK2)
-        ax.set_xscale("log"); ax.set_yscale("log"); ax.set_xlabel("전류 RMS(직류 제외) — 부하 대리변수", fontsize=8.5)
+        ax.set_xscale("log"); ax.set_yscale("log"); ax.set_xlabel("전류 RMS(직류 제외), 부하 대리변수", fontsize=8.5)
         yt = [0.03, 0.05, 0.1, 0.2, 0.3] if col == "sd_lower" else [0.03, 0.1, 0.3, 1.0]
         ax.set_xticks([60, 80, 100, 150, 200], ["60", "80", "100", "150", "200"]); ax.set_yticks(yt, [f"{v:g}" for v in yt])
         ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter()); ax.yaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())

@@ -106,11 +106,11 @@ def build_expected():
         where = dict(scheme="gmm", grouping="state", split="B", alpha="0.05", part="valid+test", state="busy_high", model=model)
         checks.append(dict(name=f"분할 B 고부하 정상 오경보 기록 {label}(α 5%)", kind="csv", file="code/press/domain/outputs/06_operating_regime.csv",
                            where=where, column="fa_records", value=csv_value(dom / "06_operating_regime.csv", where, "fa_records"), report="(3.2절 표)"))
-    # 기록 하나를 1개로 센 F1(사후, 2.4절 표 † 열)
+    # 기록 하나를 1개로 센 F1(사후, 2.4절 표 열)
     for model, label in (("v2", "기반 모델 v2"), ("v2+H1+H2", "2단계 모델 v2+R1+R2")):
         where = dict(split="B", regime="test", model=model)
         checks.append(dict(name=f"test 기록 수 F1 {label} B", kind="csv", file="code/press/tvt/outputs/tvt_record_count.csv",
-                           where=where, column="rec_f1", value=csv_value(tvt / "tvt_record_count.csv", where, "rec_f1"), quick=True, report="(2.4절 표 †)"))
+                           where=where, column="rec_f1", value=csv_value(tvt / "tvt_record_count.csv", where, "rec_f1"), quick=True, report="(2.4절 표 사후)"))
     # 이상 기록 양상(domain/07, 사후, 4.2절): 상·하부 진동이 모두 큰 기록 수
     ap_ = json.loads((dom / "07_anomaly_patterns.json").read_text(encoding="utf-8"))
     checks.append(dict(name="이상 양상: 상·하부 진동 모두 큰 기록 수", kind="json", file="code/press/domain/outputs/07_anomaly_patterns.json",
@@ -123,22 +123,22 @@ def build_expected():
     for model, col, label in (("iforest+H1", "test_f1", "IsolationForest+R1 test F1 B"), ("knn5+H1", "test_fp", "5NN+R1 test 오경보 행 B")):
         where = dict(split="B", model=model)
         checks.append(dict(name=label, kind="csv", file="code/press/tvt/outputs/tvt_r1_baselines.csv", where=where, column=col,
-                           value=csv_value(tvt / "tvt_r1_baselines.csv", where, col), quick=True, report="(2.7절 †)"))
+                           value=csv_value(tvt / "tvt_r1_baselines.csv", where, col), quick=True, report="(2.7절, 사후)"))
     where = dict(split="A", model="lstm20")
     checks.append(dict(name="LSTM 20행 창 때문에 점수 없는 test 이상 행 A", kind="csv", file="code/press/tvt/outputs/tvt_unscored.csv", where=where,
                        column="no_score_rows", value=csv_value(tvt / "tvt_unscored.csv", where, "no_score_rows"), quick=True, report="(2.4절)"))
-    # 문턱과 무관한 비교(10, 사후, 2.4절 †): R1 없는 test 행 AUROC와 v2−v1 F1 차이의 부트스트랩 하한
+    # 문턱과 무관한 비교(10, 사후, 2.4절 사후): R1 없는 test 행 AUROC와 v2−v1 F1 차이의 부트스트랩 하한
     for s_ in ("A", "B"):
         where = dict(split=s_, model="v2")
         checks.append(dict(name=f"test 행 AUROC 기반 모델 v2 {s_}(R1 없이)", kind="csv", file="code/press/tvt/outputs/threshold_free.csv",
-                           where=where, column="auroc", value=csv_value(tvt / "threshold_free.csv", where, "auroc"), tol=1e-9, quick=True, report="(2.4절 †)"))
+                           where=where, column="auroc", value=csv_value(tvt / "threshold_free.csv", where, "auroc"), tol=1e-9, quick=True, report="(2.4절, 사후)"))
     where = dict(split="B", other="v1")
     checks.append(dict(name="부트스트랩 v2−v1 F1 차이 95% 하한 B", kind="csv", file="code/press/tvt/outputs/threshold_free_boot.csv",
-                       where=where, column="d_f1_lo", value=csv_value(tvt / "threshold_free_boot.csv", where, "d_f1_lo"), tol=1e-6, quick=True, report="(2.4절 †)"))
+                       where=where, column="d_f1_lo", value=csv_value(tvt / "threshold_free_boot.csv", where, "d_f1_lo"), tol=1e-6, quick=True, report="(2.4절, 사후)"))
     # 사후 보조 수치(11, 2.5·2.7·4.3절)
     ph = json.loads((tvt / "posthoc_numbers.json").read_text(encoding="utf-8"))
-    for path, label, rep in ((["maxz_rules", "A|maxz3+H1+H2|0.01", "valid_f1"], "max|z|+R1+R2 valid 실시간 F1 A(α 1%)", "(2.7절 † R1 표)"),
-                             (["maxz_rules", "B|maxz3+H1+H2|0.05", "test_fp"], "max|z|+R1+R2 test 오경보 행 B(α 5%)", "(2.7절 †)"),
+    for path, label, rep in ((["maxz_rules", "A|maxz3+H1+H2|0.01", "valid_f1"], "max|z|+R1+R2 valid 실시간 F1 A(α 1%)", "(2.7절 R1 표)"),
+                             (["maxz_rules", "B|maxz3+H1+H2|0.05", "test_fp"], "max|z|+R1+R2 test 오경보 행 B(α 5%)", "(2.7절, 사후)"),
                              (["probability", "A|v2_prob_fileprior", "auroc"], "이상 확률 test 행 AUROC A", "(2.5절)"),
                              (["gaps", "median_s"], "정상 파일 수집 공백 중앙값(초)", "(4.3절)")):
         v = ph
@@ -152,27 +152,27 @@ def build_expected():
                             ("진동|5분|v2+R1+R2", "before_complete_rate", "합성 열화 5분 진동 완성 전 경보 비율")):
         checks.append(dict(name=label, kind="json", file="code/press/tvt/outputs/ramp_summary.json", path=[key, col],
                            value=rs[key][col], tol=1e-9, quick=True, report="(4.3절)"))
-    # R2 준-표본 밖(13, 사후, 2.5절 †)과 Ridge 예측 오차(14, 사후, 2.4절 †): 전체 실행
+    # R2 준-표본 밖(13, 사후, 2.5절 사후)과 Ridge 예측 오차(14, 사후, 2.4절 사후): 전체 실행
     ro = json.loads((tvt / "r2_oos_alpha.json").read_text(encoding="utf-8"))
     rj = json.loads((tvt / "ridge_baseline.json").read_text(encoding="utf-8"))
     fb = json.loads((tvt / "record_auroc_featbase.json").read_text(encoding="utf-8"))
     jc = json.loads((tvt / "jitter_ridge_combo.json").read_text(encoding="utf-8"))
     for f, js, path, label, rep in (
-            ("r2_oos_alpha.json", ro, ["A_r2_out_of_sample", "0.05", "rolling_total", "keep|v2"], "R2 준-표본 밖: α 5% 정상 오경보 기록 v2(시간순 5창, 착안 기록 제외)", "(2.5절 †)"),
-            ("r2_oos_alpha.json", ro, ["A_r2_out_of_sample", "0.05", "rolling_total", "keep|v2+R2"], "R2 준-표본 밖: α 5% 정상 오경보 기록 v2+R2", "(2.5절 †)"),
-            ("ridge_baseline.json", rj, ["ridge", "B", "ridge", "test_f1"], "Ridge 예측 오차 test 실시간 F1 B(R1 없이)", "(2.7절 †)"),
-            ("record_auroc_featbase.json", fb, ["featbase_rows", "B", "knn5_feat", "test_f1"], "v2 특징을 넣은 5NN test 실시간 F1 B(R1 없이)", "(2.4·2.7절 †)"),
-            ("jitter_ridge_combo.json", jc, ["A_jitter", "sigma_ms_reaching_abnormal_r2"], "정상 R² 중앙값이 이상 수준에 닿는 표본 시각 흔들림(ms)", "(2.6절 †)"),
-            ("jitter_ridge_combo.json", jc, ["B_combo", "high_load_B_a5_valid_test", "v2+R1|ridge", "all_fa_records"], "1단계 병행(v2+R1 OR Ridge) α 5% 정상 오경보 기록 B", "(4.3절 †)")):
+            ("r2_oos_alpha.json", ro, ["A_r2_out_of_sample", "0.05", "rolling_total", "keep|v2"], "R2 준-표본 밖: α 5% 정상 오경보 기록 v2(시간순 5창, 착안 기록 제외)", "(2.5절, 사후)"),
+            ("r2_oos_alpha.json", ro, ["A_r2_out_of_sample", "0.05", "rolling_total", "keep|v2+R2"], "R2 준-표본 밖: α 5% 정상 오경보 기록 v2+R2", "(2.5절, 사후)"),
+            ("ridge_baseline.json", rj, ["ridge", "B", "ridge", "test_f1"], "Ridge 예측 오차 test 실시간 F1 B(R1 없이)", "(2.7절, 사후)"),
+            ("record_auroc_featbase.json", fb, ["featbase_rows", "B", "knn5_feat", "test_f1"], "v2 특징을 넣은 5NN test 실시간 F1 B(R1 없이)", "(2.4·2.7절, 사후)"),
+            ("jitter_ridge_combo.json", jc, ["A_jitter", "sigma_ms_reaching_abnormal_r2"], "정상 R² 중앙값이 이상 수준에 닿는 표본 시각 흔들림(ms)", "(2.6절, 사후)"),
+            ("jitter_ridge_combo.json", jc, ["B_combo", "high_load_B_a5_valid_test", "v2+R1|ridge", "all_fa_records"], "1단계 병행(v2+R1 OR Ridge) α 5% 정상 오경보 기록 B", "(4.3절, 사후)")):
         v = js
         for k in path:
             v = v[k]
         checks.append(dict(name=label, kind="json", file=f"code/press/tvt/outputs/{f}", path=path, value=v, tol=1e-9, report=rep))
-    # 성분 절제(09, 사후, 2.4절 †): 분할 B 전류 파형 주입 강도 1의 크기 성분만 / v2 탐지율(전체 실행)
+    # 성분 절제(09, 사후, 2.4절 사후): 분할 B 전류 파형 주입 강도 1의 크기 성분만 / v2 탐지율(전체 실행)
     for col, label in (("크기", "크기 성분만"), ("v2", "v2(세 성분)")):
         where = dict(split="B", family="current_residual", target="2", strength="1.0")
         checks.append(dict(name=f"성분 절제: 전류 파형 주입 강도 1 탐지율 {label} B", kind="csv", file="code/press/tvt/outputs/ablation_pod.csv",
-                           where=where, column=col, value=csv_value(tvt / "ablation_pod.csv", where, col), tol=1e-9, report="(2.7절 †)"))
+                           where=where, column=col, value=csv_value(tvt / "ablation_pod.csv", where, col), tol=1e-9, report="(2.7절, 사후)"))
     return dict(note="보고서 작성 때(2026-10-04) 볼트 산출물에서 뽑은 값. run_all.py가 실행 뒤 같은 위치의 값과 비교한다",
                 checks=checks)
 
@@ -197,7 +197,7 @@ def main():
     (stage / "yejun" / MASTER_PLAN).mkdir(parents=True)
     for f in ("protocol.json", "execution_revision.json", "execution_contracts.json"):
         shutil.copy2(y / MASTER_PLAN / f, stage / "yejun" / MASTER_PLAN / f)
-    # 보완 LSTM 실험(보고서 2.7절 †, run_all.py 밖): 코드와 결과 표(outputs)를 넣고 가중치 캐시(cache)는 뺀다
+    # 보완 LSTM 실험(보고서 2.7절 사후, run_all.py 밖): 코드와 결과 표(outputs)를 넣고 가중치 캐시(cache)는 뺀다
     copy_tree(y / "analysis" / "press_lstm_improvement", stage / "yejun" / "analysis" / "press_lstm_improvement",
               skip_dirs=SKIP_DIRS - {"outputs"})
     # 원본 데이터는 run_all.py가 해시 확인 뒤 이 폴더에 다시 배치하므로 빼 둔다
