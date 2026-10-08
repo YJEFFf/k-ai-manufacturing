@@ -1,18 +1,18 @@
-"""15단계(사후, test 채점 이후): 기록 단위 AUROC와 특징 맞춤 베이스라인(보고서 2.4절 †). 선택·잠금·2단계 규칙 추가에는 쓰지 않는다.
+"""15단계(사후, test 채점 이후): 기록 단위 AUROC와 특징 맞춤 베이스라인(보고서 2.4절, 사후). 선택·잠금·2단계 규칙 추가에는 쓰지 않는다.
 
 (A) 기록 단위 AUROC: 기록이 5초 묶음으로 올라온다면(1.4절 추정) 운영 판정 단위는 기록이다. 01 캐시의 R1 없는 행 점수로 기록마다
-    최대 점수(점수 없는 행 제외, 기록 전체가 점수 없으면 가장 정상)를 내고, test 기록(정상 A 120·B 180, 이상 11)에서 기록 단위
+    최대 점수(점수 없는 행 제외, 기록 전체가 점수 없으면 가장 정상)를 구하고 test 기록(정상 A 120·B 180, 이상 11)에서 기록 단위
     AUROC·PR-AUC를 낸다. 모델: v2·v1·max|z|·5NN·IsolationForest·MLP 오토인코더·가이드북 LSTM 오토인코더, 그리고 14의 Ridge 예측 오차
     (LSTM 재학습 없이 Ridge만 다시 적합)와 아래 (B) 두 모델. 이상 기록이 11개라 AUROC 한 단계는 1/(11 × 정상 기록 수)이고 포화되기 쉽다.
 (B) 특징 맞춤 베이스라인: "v2 우위가 모델이 아니라 이상 파일을 본 뒤 고른 특징에서 온 것 아니냐"를 본다. 5NN 거리와 IsolationForest의
     행 입력에 v2와 같은 원값 두 개를 더한다: 파형(전류 사인 적합 1−R², 기록 6·7행째는 최근 6행, 8행째부터 최근 8행 = v2 파형 성분 입력)과
     동역학(정상 전류 AR(2) 예측 오차의 절댓값 = v2 동역학 성분 입력). 값이 아직 없는 기록 앞 행(파형 5행 미만·동역학 2행 미만)은 학습 중앙값으로
     채우고, 두 원값은 학습 평균·SD로 표준화한다(세 센서는 베이스라인과 같은 학습 표준화). 5NN·IsolationForest 설정은 예준 Scorer와 같다
-    (n_neighbors 5, IsolationForest random_state 0). 01·03과 같은 계약(분할 A·B, valid 정상 기록 최대 점수 conformal α 1%, 행 단위 실시간)으로
+    (n_neighbors 5, IsolationForest random_state 0). 01·03과 같은 평가 조건(분할 A·B, valid 정상 기록 최대 점수 conformal α 1%, 행 단위 실시간)으로
     valid·test 실시간 F1, 미탐·오경보 행, 행 AUROC·PR-AUC, 분할 B α 5% 고부하 정상 오경보 기록(valid+test, domain/06 busy_high)을 낸다.
 확인: 세 센서만 넣은 5NN은 01 캐시의 knn5 점수와, 다시 적합한 v2 점수는 01 캐시의 v2 점수와 같아야 한다(행 순서 확인).
 출력: outputs/record_auroc_featbase.json
-실행: python code/press/tvt/15_record_auroc_featbase.py --repo <팀 레포>
+실행(제출본 루트에서): python code/press/tvt/15_record_auroc_featbase.py --repo .
 """
 import importlib.util
 import json
@@ -125,7 +125,7 @@ def record_auc(t, models):
 
 
 def row_metrics(t, r2):
-    """01·03·10과 같은 계약의 행 단위 지표(R1 없음)."""
+    """01·03·10과 같은 평가 조건으로 낸 행 단위 지표(R1 없음)."""
     out = {}
     tt = t.query("part == 'test'")
     y = (tt.label == 1).to_numpy()

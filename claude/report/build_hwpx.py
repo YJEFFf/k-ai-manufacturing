@@ -23,7 +23,7 @@ OUT = HERE / (sys.argv[2] if len(sys.argv) > 2 else "결과보고서_북적북�
 # v5 본문 등장 순서의 그림 번호 → 파일
 FIGS = {1: "fig1_structure.png", 2: "fig8_observability.png", 3: "fig0_leak.png", 4: "fig2_collection.png",
         5: "fig9_regime_timeline.png", 6: "fig3_flow.png", 7: "fig10_load_vibration.png", 8: "fig11_model_structure.png",
-        9: "fig5_models.png", 10: "fig4_miss_position.png", 11: "fig6_rules.png", 12: "fig13_stage_timeline.png", 13: "fig12_alarm_card.png", 14: "fig14_console_stage.png", 15: "fig15_frontier_evaluation.png"}
+        9: "fig5_models.png", 10: "fig4_miss_position.png", 11: "fig6_rules.png", 12: "fig13_stage_timeline.png", 13: "fig12_alarm_card.png", 14: "fig14_console_stage.png", 15: "fig15_vibration_supplement.png"}
 FIG_WIDTH_MM = 150
 # 내어쓰기(실측: 0.005pt/단위, 문단 왼쪽 56.6pt). 둘째 줄이 기호 뒤 첫 글자와 맞도록 PDF에서 잰 값
 DASH_INDENT = -7020    # "   - " 14pt (양식 값 -7720은 3.5pt 어긋남)
@@ -278,6 +278,27 @@ def main():
                     hwp.insert_picture(str(path), sizeoption=1, width=FIG_WIDTH_MM, height=round(FIG_WIDTH_MM * h / w))   # 폭 150mm, 비율 유지
                     hwp.BreakPara()
                     apply("cap"); hwp.insert_text(f"[그림 {n}] {cap}"); hwp.BreakPara()
+        # 만족도 조사: 양식의 예시(사각형 "예 시"와 예시 그림 표)를 지우고 팀원 두 명의 완료 화면을 넣는다
+        shots = [("팀장 허예준", HERE / "figures" / "survey_yejun.png"), ("팀원 장준용", HERE / "figures" / "survey_jun.png")]
+        if all(p.is_file() for _, p in shots):
+            ctrls, c = [], hwp.HeadCtrl
+            while c:
+                ctrls.append(c); c = c.Next
+            tbl = [c for c in ctrls if c.CtrlID == "tbl"][-1]   # 만족도 조사가 양식의 마지막 장이라 마지막 표가 예시 표다
+            def where(ctrl):
+                a = ctrl.GetAnchorPos(0)
+                return a.Item("List"), a.Item("Para")
+            rect = [c for c in ctrls if c.CtrlID == "gso" and where(c) == where(tbl)]   # 같은 문단에 붙은 "예 시" 사각형
+            hwp.SetPosBySet(tbl.GetAnchorPos(0))
+            hwp.DeleteCtrl(tbl)
+            for r in rect[-1:]:
+                hwp.DeleteCtrl(r)
+            for who, path in shots:
+                w, h = Image.open(path).size
+                apply("center")
+                hwp.insert_picture(str(path), sizeoption=1, width=FIG_WIDTH_MM, height=round(FIG_WIDTH_MM * h / w))
+                hwp.BreakPara()
+                apply("cap"); hwp.insert_text(who); hwp.BreakPara()
         hwp.save_as(str(OUT), "HWPX")
     finally:
         hwp.quit()

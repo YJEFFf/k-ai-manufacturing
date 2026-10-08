@@ -72,7 +72,7 @@ def main():
                                           source="60초·2행은 예준 v2 사건·2단계 규칙 값, R² 기준은 정상 학습 자료")),
         selected_realtime=pick("realtime"), selected_record=pick("record"),
         hypotheses=hypotheses,
-        # 입력 해시까지 적어 두면 3단계가 점수 캐시가 바뀌었는지도 확인할 수 있다
+        # 입력 해시까지 적어 두면 3단계에서 점수 캐시가 바뀌었는지도 확인할 수 있다
         inputs=dict(valid_csv_sha256=sha256_file(OUT / "tvt_valid.csv"), scores_meta_sha256=sha256_file(OUT / "tvt_scores_meta.json"),
                     rows_sha256={s: sha256_file(CACHE / f"rows_{s}.pkl") for s in SPLITS}),
     )

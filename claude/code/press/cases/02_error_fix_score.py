@@ -1,10 +1,10 @@
 """2단계(초기 탐색): 예준 v2의 오답을 원인별로 나누고, 원인별 수정을 얹어 다시 채점한다(보고서 2.3절 R1·R2 착안, 6장 초기 탐색 기록).
 
-입력: v2_predictions/test_predictions_{A,B}.csv — 팀 레포에서 `python yejun/press_guard/train.py --out <폴더>`로 재현한 행별 예측
+입력: v2_predictions/test_predictions_{A,B}.csv, 팀 레포에서 `python yejun/press_guard/train.py --out <폴더>`로 재현한 행별 예측
       (F1 A 0.961938·B 0.970990 재현 확인)
 출력(outputs/): metrics_fixed.csv(변형별 F1), error_anatomy.json(오답 해부), predictions_fixed_{A,B}.csv(α 1% 행별 예측)
 실행: cd code/press/cases && python 02_error_fix_score.py
-보고서의 R1 사건 지속·R2 교차 확인이 여기서 처음 나왔다. v2 오답을 본 뒤 만든 사후 규칙이라 새 고장에서의 성능 근거는 아니다.
+보고서의 R1 사건 지속·R2 교차 확인이 여기서 처음 나왔다. v2 오답을 본 뒤 만든 사후 규칙이라 새 고장에서 성능이 나온다는 근거는 아니다.
 """
 import json
 

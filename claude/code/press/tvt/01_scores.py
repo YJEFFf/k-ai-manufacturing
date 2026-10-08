@@ -4,7 +4,7 @@
   v1·v2(예준 press_guard GuardModel), v2+C1·v2+C2(예준 v3 조건부 Detector를 기록 앞부분에 적용한 4번째 성분),
   기록 단위 전용 v3 B1·C1d1·C1d2·C2d1·C2d2·B3k5·B3k10. 규칙 H1(R1)·H2(R2)는 2·3단계에서 이 점수 위에 얹는다.
 출력: cache/rows_{A,B}.pkl(행 표, git 제외), outputs/tvt_scores_meta.json(재현 확인·누수 점검·기준값)
-실행: python code/press/tvt/01_scores.py --repo <팀 레포>
+실행(제출본 루트에서): python code/press/tvt/01_scores.py --repo .
 """
 from __future__ import annotations
 

@@ -1,4 +1,4 @@
-"""13단계(사후, test 채점 이후): R2 준-표본 밖 확인, conformal α 명목 대 실측, 블록 부트스트랩 대조(보고서 2.5·3.2절 †).
+"""13단계(사후, test 채점 이후): R2 준-표본 밖 확인, conformal α 명목 대 실측, 블록 부트스트랩 대조(보고서 2.5·3.2절, 사후).
 
 선택·잠금·2단계 규칙 추가에는 쓰지 않는다.
 (A) R2 준-표본 밖: R2 착안 때 본 정상 기록(α 1% v2 오경보 303·423·461·570, 정상 기록 번호 0~599)과 앞뒤 1기록을 빼고,
@@ -6,11 +6,11 @@
     시간순 5창의 평가 구간(300~599)은 서로 겹치지 않으므로 합계와 블록 부트스트랩은 5창으로 한다(창 안에서 연속 10기록 블록을
     복원 추출해 창을 합치는 쌍 부트스트랩, 2,000회, seed 0). 고부하는 domain/06의 기록 상태 busy_high(보고서 3.2절)다.
 (B) α 명목 대 실측: v2·v2+R1·v2+R1+R2의 정상 오경보 기록 비율을 α 1·3·5·10%에서 test 정상(A 120·B 180기록)과 V3 6개 분할에서 재고
-    Clopper–Pearson 양측 95% 구간을 붙인다. conformal 해상도 = 1/(보정 기록 수 + 1).
+    Clopper-Pearson 양측 95% 구간을 붙인다. conformal 해상도 = 1/(보정 기록 수 + 1).
 (C) 블록 부트스트랩: 10과 같은 v2 − v1 test 행 F1(R1 없음, α 1%)·AUROC 차이를, 정상은 연속 10기록·이상은 연속 3기록 이동 블록으로
     뽑아(2,000회, seed 0) 다시 구간을 내고 10의 기록 독립 구간(threshold_free_boot.csv)과 나란히 적는다.
 출력: outputs/r2_oos_alpha.json
-실행: python code/press/tvt/13_r2_oos_alpha.py --repo <팀 레포>
+실행(제출본 루트에서): python code/press/tvt/13_r2_oos_alpha.py --repo .
 """
 import importlib.util
 import json
@@ -73,7 +73,7 @@ def record_alerts(r, rec_ids):
 
 
 def cp_ci(k, n):
-    """Clopper–Pearson 양측 95% 구간."""
+    """Clopper-Pearson 양측 95% 구간."""
     lo = beta.ppf(0.025, k, n - k + 1) if k > 0 else 0.0
     hi = beta.ppf(0.975, k + 1, n - k) if k < n else 1.0
     return [round(float(lo), 4), round(float(hi), 4)]

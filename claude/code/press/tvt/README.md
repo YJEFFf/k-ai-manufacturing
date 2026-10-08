@@ -1,5 +1,5 @@
 ---
-title: 프레스 — 예준 v2·v3 + 가설 규칙, train/valid/test 분석
+title: "프레스: 예준 v2·v3 + 가설 규칙, train/valid/test 분석"
 created: 2026-10-03
 updated: 2026-10-03
 tags: [contest/k-ai-manufacturing]
@@ -9,7 +9,7 @@ status: seed
 
 # train / valid / test 분석
 
-> 상위: [[제조데이터 경진대회 MOC]] · 이전 사후 분석: `code/press/cases/README.md`
+> 상위 문서: 최상위 `README.md` · 이전 사후 분석: `code/press/cases/README.md`
 
 ## 절차 (실행 전 고정)
 
@@ -51,11 +51,11 @@ status: seed
 | 예준 v2 | 0.9635 | 0.965 / 0.970 | 1.000 / 0.818 |
 | 예준 v1 | 0.9221 | 0.904 / 0.912 | 1.000 / 0.818 |
 | v2 + v3 조건부 성분(C1) | 0.9635 | 0.968 / 0.955 | 1.000 / 0.736 |
-| 예준 v3 B3k10 (기록 단위 트랙 선택) | 0.9928 | — | 0.889 / 0.954 |
-| 예준 v3 C2d1 | 0.9211 | — | 0.934 / 0.934 |
-| 예준 v3 B1 | 0.8978 | — | 0.796 / 0.701 |
-| MLP-AE / 5NN / max\|z\| | 0.64 / 0.63 / 0.53 | 0.50 / 0.48 / 0.42 (평균) | — |
-| 가이드북형 LSTM-AE / IsolationForest | 0.34 / 0.03 | 0.26 / 0.11 (평균) | — |
+| 예준 v3 B3k10 (기록 단위 트랙 선택) | 0.9928 | - | 0.889 / 0.954 |
+| 예준 v3 C2d1 | 0.9211 | - | 0.934 / 0.934 |
+| 예준 v3 B1 | 0.8978 | - | 0.796 / 0.701 |
+| MLP-AE / 5NN / max\|z\| | 0.64 / 0.63 / 0.53 | 0.50 / 0.48 / 0.42 (평균) | - |
+| 가이드북형 LSTM-AE / IsolationForest | 0.34 / 0.03 | 0.26 / 0.11 (평균) | - |
 
 - valid 실시간 F1은 v2+R1+R2, v2+C1d1+R1+R2, v2+C2d1+R1+R2가 0.9982로 공동 1위다. v2+R1과의 valid 차이는 A 오경보 1행이다
 - 선택 규칙(0.002 동률 → 단순한 쪽)은 v2+R1을 골랐다. 최종 모델 v2+R1+R2는 test 결과를 확인한 뒤 정했다
@@ -71,12 +71,13 @@ status: seed
 
 ## 실행
 
+제출본에서는 루트에서 `python run_all.py --section official`로 26단계를 한 번에 돌린다. 단계 하나만 돌릴 때는 run_all.py를 먼저 한 번 실행해 원본 CSV가 `yejun/press_submission/data/`에 놓인 뒤 루트에서 실행한다.
+
 ```bash
-# 팀 레포 클론에 데이터 배치: yejun/press_submission/data/3_소성가공_예지보전/
-python 01_scores.py --repo <레포>      # 모든 후보 점수 (LSTM 학습 포함, 처음 약 10분)
-python 02_select_on_valid.py           # valid 채점·선택·판정 기준 기록·잠금
-python 03_score_test.py --repo <레포>  # 잠금 확인 후 test 1회 채점·가설 판정
-python 06_record_count.py             # (사후) 기록 하나를 1개로 센 F1. 선택에 쓰지 않음
+python code/press/tvt/01_scores.py --repo .        # 모든 후보 점수 (LSTM 학습 포함, 처음 약 10분)
+python code/press/tvt/02_select_on_valid.py        # valid 채점·선택·판정 기준 기록·잠금
+python code/press/tvt/03_score_test.py --repo .    # 잠금 확인 후 test 1회 채점·가설 판정
+python code/press/tvt/06_record_count.py           # (사후) 기록 하나를 1개로 센 F1. 선택에 쓰지 않음
 ```
 
 - pandas 3은 시각을 마이크로초로 읽는다. v3 코드는 나노초를 가정하므로 `01`에서 나노초로 바꿔 넘긴다

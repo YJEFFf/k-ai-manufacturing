@@ -131,7 +131,7 @@ def seq_predict(t, p_full, p_loo, alpha, regime):
 
 # ---------------------------------------------------------------- 지표
 def first_alarm(ab: pd.DataFrame) -> pd.DataFrame:
-    """이상 기록마다 첫 실시간 경보의 위치(행)와 기록 시작부터의 지연(초). 미탐이면 None."""
+    """이상 기록마다 첫 실시간 경보의 위치(행)와 기록 시작에서 잰 지연(초). 미탐이면 None."""
     rows = []
     for r, g in ab.groupby("rec", sort=False):
         a = g.alarm_realtime.to_numpy().astype(bool)
@@ -162,12 +162,12 @@ def summarize(pred: pd.DataFrame) -> dict:
 
 
 def cp_upper(k, n, conf=0.95):
-    """비율 k/n의 Clopper–Pearson 상한. 이항 정확 구간은 베타 분포 분위수로 바로 구해진다."""
+    """비율 k/n의 Clopper-Pearson 상한. 이항 정확 구간은 베타 분포 분위수로 바로 구한다."""
     return 1.0 if k >= n else float(stats.beta.ppf(conf, k + 1, n - k))
 
 
 def cp_lower(k, n, conf=0.95):
-    """비율 k/n의 Clopper–Pearson 하한."""
+    """비율 k/n의 Clopper-Pearson 하한."""
     return 0.0 if k <= 0 else float(stats.beta.ppf(1 - conf, k, n - k + 1))
 
 
@@ -473,7 +473,7 @@ def write_summary(res, comp, grid, delays, ops):
 
     L = ["---", "title: 프레스 — 순차 검출(CUSUM·EWMA) 비교·불확실성·경보 운영 지표 (사후 분석)",
          "created: 2026-10-04", "updated: 2026-10-04", "tags: [contest/k-ai-manufacturing]",
-         "source: Claude Code 세션 2026-10-04, code/press/domain/04_sequential_uncertainty.py (tvt 캐시 rows_{A,B}.pkl·evalcore 재사용)",
+         "source: code/press/domain/04_sequential_uncertainty.py (tvt 캐시 rows_{A,B}.pkl·evalcore 재사용)",
          "status: seed", "---", "",
          "# 순차 검출 비교 · 불확실성 · 경보 운영 지표 (사후 분석)", "",
          "> 상위: `code/press/tvt/README.md` · 산출: `outputs/04_sequential_uncertainty.json`(전체), `.csv`(비교 표), "

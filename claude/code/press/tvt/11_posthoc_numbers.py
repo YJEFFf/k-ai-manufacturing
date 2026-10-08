@@ -1,11 +1,11 @@
 """11단계(사후, test 채점 이후): 보고서에 쓴 사후 수치 몇 개를 다시 만든다(선택·잠금·최종 선정에 쓰지 않음).
 
-- max|z|+R1+R2(2.4절 † R1 표): max|z|는 크기 성분뿐이라 R2는 '전류 파형(기록 첫 행부터의 사인 적합 R²)이 정상이면 보류'가 된다.
+- max|z|+R1+R2(2.7절 R1 표, 사후): max|z|는 크기 성분뿐이라 R2는 '전류 파형(기록 첫 행부터의 사인 적합 R²)이 정상이면 보류'가 된다.
   evalcore의 채점을 그대로 쓰고 자기 경보만 이 규칙으로 바꾼다. α 1·5%의 valid·test 실시간 F1·오경보·미탐 행
 - 이상 확률(2.5절): 제출 예측 파일의 두 확률 열로 test 행 AUROC·PR-AUC와 구간(0·0.01·0.1·0.5·0.9·1)별 ECE
 - 수집 공백(4.3절): 정상 파일에서 이웃 행 간격이 0.15초를 넘는 곳의 길이 중앙값·90% 분위
 출력: outputs/posthoc_numbers.json
-실행: python code/press/tvt/11_posthoc_numbers.py --repo <팀 레포>
+실행(제출본 루트에서): python code/press/tvt/11_posthoc_numbers.py --repo .
 """
 import json
 

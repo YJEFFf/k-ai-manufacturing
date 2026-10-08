@@ -11,6 +11,7 @@ import argparse
 import csv
 import hashlib
 import json
+import re
 import shutil
 import zipfile
 from pathlib import Path
@@ -110,7 +111,7 @@ def build_expected():
     for model, label in (("v2", "기반 모델 v2"), ("v2+H1+H2", "2단계 모델 v2+R1+R2")):
         where = dict(split="B", regime="test", model=model)
         checks.append(dict(name=f"test 기록 수 F1 {label} B", kind="csv", file="code/press/tvt/outputs/tvt_record_count.csv",
-                           where=where, column="rec_f1", value=csv_value(tvt / "tvt_record_count.csv", where, "rec_f1"), quick=True, report="(2.4절 표 사후)"))
+                           where=where, column="rec_f1", value=csv_value(tvt / "tvt_record_count.csv", where, "rec_f1"), quick=True, report="(2.4절 표, 사후)"))
     # 이상 기록 양상(domain/07, 사후, 4.2절): 상·하부 진동이 모두 큰 기록 수
     ap_ = json.loads((dom / "07_anomaly_patterns.json").read_text(encoding="utf-8"))
     checks.append(dict(name="이상 양상: 상·하부 진동 모두 큰 기록 수", kind="json", file="code/press/domain/outputs/07_anomaly_patterns.json",
@@ -173,7 +174,7 @@ def build_expected():
         where = dict(split="B", family="current_residual", target="2", strength="1.0")
         checks.append(dict(name=f"성분 절제: 전류 파형 주입 강도 1 탐지율 {label} B", kind="csv", file="code/press/tvt/outputs/ablation_pod.csv",
                            where=where, column=col, value=csv_value(tvt / "ablation_pod.csv", where, col), tol=1e-9, report="(2.7절, 사후)"))
-    return dict(note="보고서 작성 때(2026-10-04) 볼트 산출물에서 뽑은 값. run_all.py가 실행 뒤 같은 위치의 값과 비교한다",
+    return dict(note="보고서 작성 때(2026-10-04)의 산출물에서 뽑은 값. run_all.py가 실행 뒤 같은 위치의 값과 비교한다",
                 checks=checks)
 
 
@@ -189,6 +190,12 @@ def main():
     for sub in ("cases", "tvt", "domain"):
         copy_tree(PRESS / sub, stage / "code" / "press" / sub, skip_prefix=("_",))
     shutil.copy2(PRESS / "06_alias_frequency_audit.py", stage / "code" / "press" / "06_alias_frequency_audit.py")
+    # 볼트 노트용 머리말(---)과 [[링크]]는 제출본 README에서 뺀다
+    for md in (stage / "code" / "press").rglob("README.md"):
+        t = md.read_text(encoding="utf-8")
+        t = re.sub(r"\A---\n.*?\n---\n+", "", t, flags=re.S)
+        t = re.sub(r"\[\[(?:[^\]|]*\|)?([^\]]*)\]\]", r"\1", t)
+        md.write_text(t, encoding="utf-8")
     # 팀원 모듈(레포와 같은 yejun/ 상대 위치를 지켜야 팀원 코드의 경로 계산이 맞는다)
     y = a.repo / "yejun"
     for rel in ("press_guard", "analysis/press_master_validation_2026-10-03", "analysis/press_evidence"):

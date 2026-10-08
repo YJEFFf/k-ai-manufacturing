@@ -1,4 +1,4 @@
-"""9단계(사후, test 채점 이후): v2 세 성분의 몫을 인공 고장 주입으로 가른다(보고서 2.4절 †). 선택·잠금·최종 선정에는 쓰지 않는다.
+"""9단계(사후, test 채점 이후): v2 세 성분의 몫을 인공 고장 주입으로 가른다(보고서 2.4절, 사후). 선택·잠금·최종 선정에는 쓰지 않는다.
 
 실제 이상 사건은 어느 모델로도 1.000 근처라 성분의 몫이 드러나지 않는다(2.4절). 그래서 04와 같은 주입(예준 v3 Generator,
 seed 11·29·47)을 test 정상 기록에 하나씩 넣고, v2의 성분 조합마다 경보가 나는지 본다.
@@ -7,7 +7,7 @@ seed 11·29·47)을 test 정상 기록에 하나씩 넣고, v2의 성분 조합�
 - 규칙(R1·R2)은 붙이지 않는다. 한 기록의 탐지력만 본다. 강도 0은 주입 없는 대조(정상 기록 경보율)
 - 확인: 세 성분 조합의 탐지는 04의 v2 결과(validation_v1.csv)와 같아야 한다
 출력: outputs/ablation_injection.csv(기록별), outputs/ablation_pod.csv(조건별 탐지율), outputs/ablation_summary.json
-실행: python code/press/tvt/09_component_ablation.py --repo <팀 레포>
+실행(제출본 루트에서): python code/press/tvt/09_component_ablation.py --repo .
 """
 import importlib.util
 import json

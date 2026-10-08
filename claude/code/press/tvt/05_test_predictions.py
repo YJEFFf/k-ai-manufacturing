@@ -1,6 +1,6 @@
 """5단계: 시험(test) 행 단위 예측 파일과 최종 모델의 첫 경보 지연을 만든다(보고서 2.5절 첫 경보 지연, 6장 제출 예측 파일).
 
-3단계와 같은 방식으로 선택 파일·점수 캐시 해시를 확인한 뒤 실행하고, 3단계 잠금 산출물은 건드리지 않는다.
+3단계와 같은 방식으로 선택 파일·점수 캐시 해시를 확인한 뒤 실행한다. 3단계 잠금 산출물은 건드리지 않는다.
 대상(α 1%): 최종 v2+R1+R2(코드 v2+H1+H2), 잠금 선택 v2+R1(v2+H1), v2.
 출력: outputs/test_predictions_{A,B}.csv, outputs/test_first_alarm.json(시험 이상 기록별 첫 경보까지의 시간)
 실행: python code/press/tvt/05_test_predictions.py
@@ -26,7 +26,7 @@ def main():
         t = pd.read_pickle(CACHE / f"rows_{s}.pkl")
         if sha256_file(CACHE / f"rows_{s}.pkl") != sel["inputs"]["rows_sha256"][s]:
             raise SystemExit("점수 캐시 해시 불일치")
-        # 모델별 예측을 행 키(subset·label·rec·pos·ts)로 옆으로 붙인다
+        # 모델별 예측을 행 키(subset·label·rec·pos·ts) 기준으로 옆에 붙인다
         frames = []
         for name, col in MODELS.items():
             p = predict_rows(t, cands[name], PRIMARY_ALPHA, "test", meta[s]["r2_ref"])

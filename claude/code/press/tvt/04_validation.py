@@ -1,10 +1,10 @@
-"""4단계: "다 맞았지만 의심했다" — 최종 모델 v2+R1+R2를 예준 v3 방식으로 검증한다(보고서 2.6절 검증표, 3.3절 실패 조건).
+"""4단계: "다 맞았지만 의심했다". 최종 모델 v2+R1+R2를 예준 v3 방식으로 검증한다(보고서 2.6절 검증표, 3.3절 실패 조건).
 
-판정 기준은 report/plans/plan_report_v4.md 2절에 실행 전에 고정했다. 모든 실험은 test 채점 이후, 같은 test 정상 기록을 쓴다.
+판정 기준은 실행 전에 팀 계획 문서(제출본에는 넣지 않음)에 고정했다. 모든 실험은 test 채점 이후에 하고 같은 test 정상 기록을 쓴다.
 V5 교락 대조(전류 수준 이동 +81.4·+272.4 / 표본화 시각 흔들림 0.1 ms·60.6 Hz / 이상 기록 평균 제거), V1 단일 기록 주입(예준 core.Generator,
 seed 11·29·47; 전류 잔차 → V1, 진동 → V1b), V1a R1 동작·V1a′ R1 비용, V2 진폭 감소, V3 분할 강건성(P2 분 단위 + 시간순 5창).
 대상: v2, v2+R1, v2+R1+R2(최종), v3 B1(기록 단위). α 1%. 출력: outputs/validation_*.csv, outputs/validation_summary.json
-실행: python code/press/tvt/04_validation.py --repo <팀 레포>
+실행(제출본 루트에서): python code/press/tvt/04_validation.py --repo .
 """
 import json
 import sys

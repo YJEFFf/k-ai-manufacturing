@@ -33,7 +33,7 @@ def main():
         for regime in ("test", "valid"):
             for m in MODELS:
                 p = predict_rows(t, cands[m], PRIMARY_ALPHA, regime, meta[s]["r2_ref"])
-                # 행으로 센 값이 표와 같아야 같은 판정을 묶은 것이다(정의 확인)
+                # 행으로 센 값이 표와 같아야 같은 판정을 묶었다고 할 수 있다(정의 확인)
                 by_row = f1_counts(p.label.to_numpy() == 1, p.alarm_record.to_numpy().astype(bool))
                 ref = table_f1[regime].query("split == @s and model == @m and alpha == @PRIMARY_ALPHA").f1
                 if len(ref) != 1 or not math.isclose(by_row["f1"], float(ref.iloc[0]), abs_tol=1e-9):

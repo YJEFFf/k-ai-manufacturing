@@ -410,7 +410,7 @@ def low_activity_segment(nf: pd.DataFrame, t_start: pd.Timestamp):
 
 def section_normal(nf, af, ref600, t_start):
     """4. 정상 77분 안정성: 시간 추세, 10분 구간 중앙값, 파일 첫 10기록 대 나머지, 운전 구간(생산/저부하)별 비교.
-    안정 기준은 |ρ| < 0.2이고 10분 구간 중앙값 범위가 1 robust SD 미만인 것이다."""
+    안정 기준은 |ρ| < 0.2이면서 10분 구간 중앙값 범위가 1 robust SD 미만이다."""
     nf = nf.sort_values("t_mid_min").reset_index(drop=True)
     for f in F:
         nf[f"z_{f}"] = zscore(ref600, f, nf[f])
@@ -592,7 +592,7 @@ def viscosity_note() -> dict:
 
 
 def write_summary(tests, power, onset, stab, regime, cond, af, first10):
-    """요약 md를 쓴다. 수치는 이번 실행 결과에서 끌어오고, 해석 문장은 이 자료의 결과를 전제로 쓴 것이다."""
+    """요약 md를 쓴다. 수치는 이번 실행 결과에서 끌어오고, 해석 문장은 이 자료의 결과를 전제로 썼다."""
     T = tests.set_index(["subset", "target", "feature"])
     S10 = f"ge{MIN_LEN}"
     g = lambda s, f, k, tg="absz": T.loc[(s, tg, f), k]

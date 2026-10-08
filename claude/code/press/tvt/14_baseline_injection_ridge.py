@@ -1,7 +1,7 @@
-"""14단계(사후, test 채점 이후): 베이스라인 인공 주입 탐지율과 Ridge 예측 오차 베이스라인(보고서 2.4·2.7절 †). 선택·잠금·2단계 규칙 추가에는 쓰지 않는다.
+"""14단계(사후, test 채점 이후): 베이스라인 인공 주입 탐지율과 Ridge 예측 오차 베이스라인(보고서 2.4·2.7절, 사후). 선택·잠금·2단계 규칙 추가에는 쓰지 않는다.
 
 ① 베이스라인 주입: 09와 같은 주입(예준 v3 Generator, seed 11·29·47, 같은 test 정상 기록)을 베이스라인(max|z|·5NN·IsolationForest·
-   MLP 오토인코더 5행·가이드북 방식 LSTM 오토인코더 20행)과 v1·v2에 넣고, 모델마다 01과 같은 α 1% 문턱(정상 valid 기록 최대 점수)으로
+   MLP 오토인코더 5행·가이드북 방식 LSTM 오토인코더 20행)과 v1·v2에 넣고 모델마다 01과 같은 α 1% 문턱(정상 valid 기록 최대 점수)으로
    기록 단위 탐지율(주입 뒤 한 행이라도 경보)을 잰다. 주입은 기록 안에서만 점수에 영향을 주므로 기록마다 따로 넣은 프레임을 한 번에 채점한다.
    확인: v2 탐지는 09의 ablation_injection.csv(v2 열)와 기록 단위로 같아야 한다
 ② Ridge 예측 오차(예측 계열 대표): 같은 기록 안 과거 5행 × 3채널로 세 센서의 현재 값을 예측(정상 train 학습, v2와 같은 표준화).
@@ -9,7 +9,7 @@
    alpha는 train 기록 앞 80%로 학습·뒤 20%로 검증해 고른다. 01·03과 같은 계약(분할 A·B, α 1%, 행 단위 실시간)으로 채점한다
 LSTM은 01과 같은 설정(seed 0)으로 분할마다 한 번 다시 학습한다(01의 캐시는 점수만 저장). 다시 학습한 점수와 01 캐시의 차이를 함께 적는다.
 출력: outputs/baseline_injection.csv(조건×모델 탐지율), outputs/ridge_baseline.json
-실행: python code/press/tvt/14_baseline_injection_ridge.py --repo <팀 레포>
+실행(제출본 루트에서): python code/press/tvt/14_baseline_injection_ridge.py --repo .
 """
 import importlib.util
 import json

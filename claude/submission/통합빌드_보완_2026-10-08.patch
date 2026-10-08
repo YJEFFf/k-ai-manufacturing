@@ -1,0 +1,346 @@
+diff --git a/yejun/analysis/press_official_sensitivity_2026-10-08/README.md b/yejun/analysis/press_official_sensitivity_2026-10-08/README.md
+index 97ae8cd..c358044 100644
+--- a/yejun/analysis/press_official_sensitivity_2026-10-08/README.md
++++ b/yejun/analysis/press_official_sensitivity_2026-10-08/README.md
+@@ -1,24 +1,24 @@
+ # 공식 모델 상수 민감도·선택 규칙 교차 확인 (2026-10-08)
+ 
+-심사 지적(설계 누출: R1·R2 상수를 전체 자료를 본 뒤 정했다)에 대한 **민감도 감사**다. 새 검증이 아니며 공식 모델·상수·α는 바꾸지 않았다.
++R1·R2 상수를 전체 자료를 본 뒤 정했다는 한계(설계 누출)를 점검하는 **민감도 감사**다. 새 검증이 아니며 공식 모델·상수·α는 바꾸지 않았다.
+ 
+ - 공식 모델: 1단계 '주의' = v2+R1(잠금 모델, 코드 `v2+H1`), 2단계 '점검 요청' = v2+R1+R2(`v2+H1+H2`). 상수 GAP_S 60초 · CONFIRM_ROWS 2행 · R2_Q 0.5% 분위 · R2_MIN_LEN 8행, α 1%.
+ - 계약 `PROTOCOL.md`·`protocol.json`은 평가 코드를 돌리기 전에 썼고, SHA-256과 시각(2026-10-07T21:47:35Z UTC)을 `protocol_lock.json`에 남겼다. 이후 고치지 않았다.
+ 
+ ## 한 일
+ 
+-- 입력: 새로 돌린 공식 실행 결과 폴더(`%TEMP%\k-manufacturing-official-clean-20261008\unpacked\북적북적_code_통합본`)를 `%TEMP%\press_official_sensitivity_work\`에 통째로 복사한 사본. 점수 캐시 `code/press/tvt/cache/rows_{A,B}.pkl`을 그대로 쓰고 재학습하지 않았다. R2_Q·R2_MIN_LEN에 따라 바뀌는 r2_ref(학습 정상 prefix R² 분위)만 원본 CSV를 공식 함수(`01_scores.frame_rows`)로 다시 읽어 계산했다.
++- 입력: 공식 파이프라인을 새로 실행한 결과 폴더(제출본에서는 루트 폴더). 팀 저장소에서 돌릴 때는 이 폴더를 임시 작업 폴더에 통째로 복사한 사본을 썼다. 점수 캐시 `code/press/tvt/cache/rows_{A,B}.pkl`을 그대로 쓰고 재학습하지 않았다. R2_Q·R2_MIN_LEN에 따라 바뀌는 r2_ref(학습 정상 prefix R² 분위)만 원본 CSV를 공식 함수(`01_scores.frame_rows`)로 다시 읽어 계산했다.
+ - 공식 코드(사본)를 import해 그대로 썼다: `lib.stream_rules`(R1)·`lib.prefix_r2`, `evalcore.evaluate`·`predict_rows`·`candidates`, `07_r1_on_baselines.test_only`(이상 흐름을 test부터 따로), `02_select_on_valid.main`(잠금 선택 규칙), `04.fit_split`·`13.rows_multi`·`record_alerts`(E3).
+ - 상수 바꾸기: GAP_S·CONFIRM_ROWS·R2_MIN_LEN은 `lib` 모듈 전역을 바꾸고, R2_Q는 다시 계산한 r2_ref를 인자로 넘겼다. R2_Q의 r2_ref는 공식 코드와 같이 R1 해제(파형 정상 행)와 R2 보류에 함께 쓰인다(`evalcore._streams`·`own_alarm` 확인). R2_MIN_LEN은 행 표의 `prefix_r2` 열을 저장된 전류로 다시 계산했다.
+ - 격자: GAP_S {30, 60, 120} × CONFIRM_ROWS {1, 2, 3} × R2_Q {0.001, 0.005, 0.01} × R2_MIN_LEN {6, 8, 10} = 81점, α 1%(주)·3·5%(보조), 분할 A·B.
+ 
+-## 공식 재현 확인 (모두 통과, `outputs/verify_report.json`)
++## 공식 재현 확인 (모두 통과, `outputs/verify_report.json`, 팀 저장소에만 있음)
+ 
+-- 공식 상수에서 v2·v2+R1·v2+R1+R2의 test/valid(α 1·3·5%, A·B, 실시간·기록 판정) 156건이 공식 `tvt_test.csv`·`tvt_valid.csv`(사본, `claude/code/press/tvt/outputs/` 판 모두)와 정수 일치, F1 차 ≤ 1e-12. test 실시간 행 F1은 v2+R1 A 1.000 · B 0.995391705, v2+R1+R2 A·B 1.000, valid 평균 0.9973·0.9982. test부터 따로 F1도 `tvt_r1_baselines.csv`와 같다.
++- 공식 상수에서 v2·v2+R1·v2+R1+R2의 test/valid(α 1·3·5%, A·B, 실시간·기록 판정) 156건이 공식 `tvt_test.csv`·`tvt_valid.csv`(사본, `code/press/tvt/outputs/` 판 모두)와 정수 일치, F1 차 ≤ 1e-12. test 실시간 행 F1은 v2+R1 A 1.000 · B 0.995391705, v2+R1+R2 A·B 1.000, valid 평균 0.9973·0.9982. test부터 따로 F1도 `tvt_r1_baselines.csv`와 같다.
+ - 8행으로 다시 계산한 prefix R²가 캐시 열과 비트 단위(NaN 위치 포함)로 같고, r2_ref(0.5%, 8행)가 메타 값과 같다(A 0.98432, B 0.98440).
+ - 패치 가시성: evalcore·07·04가 쓰는 `stream_rules`가 `lib.stream_rules`와 같은 객체이고 전역이 `lib`다. GAP_S = −1 또는 CONFIRM_ROWS = 10⁹이면 1단계가 v2와 같아지고, R2_MIN_LEN = m이면 기록 앞 m−1행만 NaN이다. α를 바꾼 `07.test_only`의 정상 오경보 행이 `evaluate`와 같다.
+ - 바꾸지 않은 표로 공식 02를 돌린 대조 실행은 `tvt_valid.csv`·`tvt_selection.json`을 공식 파일과 바이트 단위로 같게 냈다. E3 공식 상수는 13의 rolling 5창 수와 같다(150건 비교).
+-- 점수 캐시 해시가 사본 `tvt_selection.json`의 잠금 해시와 같다. import한 공식 소스는 `claude/code/press/tvt/`와 줄바꿈만 다르고(LF 맞춤 해시 같음) 원래 clean-run 폴더와 바이트 단위로 같다(`outputs/environment.json`). `claude/`에는 아무 파일도 생기지 않았다.
++- 점수 캐시 해시가 사본 `tvt_selection.json`의 잠금 해시와 같다. import한 공식 소스는 `code/press/tvt/`와 줄바꿈만 다르고(LF 맞춤 해시 같음) 공식 파이프라인을 새로 실행한 결과 폴더와 바이트 단위로 같다(`outputs/environment.json`). 공식 코드 폴더에는 아무 파일도 생기지 않았다.
+ 
+ ## 격자 결과 (α 1%, 81점)
+ 
+@@ -64,10 +64,10 @@
+ ## 프로토콜 이탈·검수 기록
+ 
+ - 프로토콜 이탈 없음.
+-- `verify.py` 첫 실행이 `r2_ref_grid.csv` 비교에서 실패했다. pandas 기본 CSV 실수 파서가 마지막 자리(1 ULP)를 잃은 탓이라 `float_precision="round_trip"`으로 읽게 고쳤고 18개 값이 모두 비트 단위로 일치했다. 결과 값은 바뀌지 않았다.
++- `verify.py`(팀 저장소에만 있음) 첫 실행이 `r2_ref_grid.csv` 비교에서 실패했다. pandas 기본 CSV 실수 파서가 마지막 자리(1 ULP)를 잃은 탓이라 `float_precision="round_trip"`으로 읽게 고쳤고 18개 값이 모두 비트 단위로 일치했다. 결과 값은 바뀌지 않았다.
+ - `outputs/swap_selection.json`은 공식 02를 고치지 않고 돌린 출력이라 `protocol.splits.abnormal` 문구('앞 10기록 검증, 뒤 11기록 시험')가 그대로 남아 있다. 실제 역할은 `swap_summary.json`에 적었다.
+ - 계약 외 추가 산출: FP 행·미탐 행·test부터 따로 F1의 주효과, α 3·5% 주효과, 규칙 없는 v2 참고값, 앞뒤 바꾸기의 α 3·5% F1, E3 창별 표와 v2·v2+R2 수.
+-- 결정성: 전체 파이프라인(아래 '실행')을 두 번 돌렸다. CSV 15개는 바이트 단위로 같고, JSON 9개는 실행 시간(`seconds`) 필드만 달랐다. 두 번째 실행의 `verify.py`도 통과했다.
++- 결정성: 전체 파이프라인(네 스크립트와 `verify.py`)을 두 번 돌렸다. CSV 15개는 바이트 단위로 같고, JSON 9개는 실행 시간(`seconds`) 필드만 달랐다. 두 번째 실행의 `verify.py`도 통과했다.
+ 
+ ## 파일
+ 
+@@ -78,7 +78,8 @@
+ | `run_grid.py` | 격자 81점 × α × A·B (약 3분) |
+ | `run_swap.py` | 앞뒤 바꾸기 선택·채점 (약 15초) |
+ | `run_e3.py` | E3 정상 5창 격자 (약 45초) |
+-| `make_summary.py`, `verify.py` | `summary.json`·`environment.json` 작성, 재현·재계산 확인 |
++| `make_summary.py` | `summary.json`·`environment.json` 작성 |
++| `verify.py`(팀 저장소에만 있음) | 재현·재계산 확인 |
+ | `outputs/summary.json` | 핵심 수치 모음 |
+ | `outputs/grid_metrics.csv` | 격자 긴 표(분할·α·상수·단계별 지표 972줄) |
+ | `outputs/grid_alpha0{1,3,5}_wide.csv` | α별 격자점 한 줄 요약 |
+@@ -86,17 +87,10 @@
+ | `outputs/grid_reference_v2.csv`, `r2_ref_grid.csv` | 규칙 없는 v2 참고값, (R2_Q, R2_MIN_LEN)별 r2_ref |
+ | `outputs/swap_*.csv/json` | 앞뒤 바꾸기 valid 표·선택·test 표·요약 |
+ | `outputs/e3_*.csv/json` | E3 창별·합계 표, r2_ref, 요약 |
+-| `outputs/checks_grid.json`, `checks_e3.json`, `verify_report.json`, `environment.json` | 확인 기록, 판·소스·캐시 해시 |
++| `outputs/checks_grid.json`, `checks_e3.json`, `verify_report.json`(팀 저장소에만 있음), `environment.json` | 확인 기록, 판·소스·캐시 해시 |
+ 
+ ## 실행
+ 
+-사용한 파이썬은 `%TEMP%\k-manufacturing-integrated-clean-py314\Scripts\python.exe`(공식 clean-run과 같은 환경)다.
++제출본 루트에서 `python run_all.py`를 실행하면 `package_manifest.json`의 `official_audits`에 적힌 환경 변수(`PRESS_OFFICIAL_COPY`·`PRESS_SENS_WORK` 등)를 넣어 run_grid → run_swap → run_e3 → make_summary 순서로 돌린다. 이어서 `verify_extra.py --group official`이 만들어진 표를 `reference_results/extra_audits/official/`의 기준표 17개(이 폴더 12개, `press_stage_replay` 5개)와 대조한다.
+ 
+-```console
+-set PYTHONDONTWRITEBYTECODE=1
+-set PYTHONUTF8=1
+-rem 공식 사본 위치가 다르면 PRESS_OFFICIAL_COPY, 임시 폴더는 PRESS_SENS_WORK로 지정
+-python run_grid.py && python run_swap.py && python run_e3.py && python make_summary.py && python verify.py
+-```
+-
+-환경: CPython 3.14.7, numpy 2.5.3, pandas 3.0.6, scipy 1.18.1, scikit-learn 1.9.1, statsmodels 0.15.0, torch 2.14.0(CPU), Windows 10.
++환경(공식 실행과 같은 가상환경): CPython 3.14.7, numpy 2.5.3, pandas 3.0.6, scipy 1.18.1, scikit-learn 1.9.1, statsmodels 0.15.0, torch 2.14.0(CPU), Windows 10.
+diff --git a/yejun/analysis/press_stage_replay_2026-10-08/README.md b/yejun/analysis/press_stage_replay_2026-10-08/README.md
+index b52800d..8c635d0 100644
+--- a/yejun/analysis/press_stage_replay_2026-10-08/README.md
++++ b/yejun/analysis/press_stage_replay_2026-10-08/README.md
+@@ -1,27 +1,25 @@
+ # 두 단계 경보: 행 단위 스트림 재현 · 정상 경보량 · 콘솔 (2026-10-08)
+ 
+-평가 질의 세 가지에 대한 구현·검증 기록이다. 대상은 제출 체계다. 1단계 "주의"는 잠금 모델 v2+R1이고, 2단계 "점검 요청"은 v2에 R2를 먼저 적용한 뒤 R1을 붙인 v2+R1+R2다.
++다음 세 가지를 확인한 구현·검증 기록이다. 대상은 제출 체계다. 1단계 "주의"는 잠금 모델 v2+R1이고, 2단계 "점검 요청"은 v2에 R2를 먼저 적용한 뒤 R1을 붙인 v2+R1+R2다.
+ 
+-1. 실제 두 단계 체계를 한 행씩 처리하는 구현이 제출 예측 파일(`claude/code/press/tvt/outputs/test_predictions_{A,B}.csv`)을 그대로 재현하는가
++1. 실제 두 단계 체계를 한 행씩 처리하는 구현이 제출 예측 파일(`code/press/tvt/outputs/test_predictions_{A,B}.csv`)을 그대로 재현하는가
+ 2. 정상 자료만으로 잰 단계별 경보 사건량(시간당·교대당)은 얼마이며 ISA-18.2 기준(운전원당 시간당 약 6건 이하)과 비교하면 어떤가. 1단계 "되풀이" 기준 횟수는 몇 건인가
+ 3. 점검 콘솔을 실제 두 단계 체계로 바꾼다
+ 
+ ## 실행
+ 
++제출본에서는 루트의 `python run_all.py`가 `package_manifest.json`의 `official_audits` 설정(`--data`, `--official-cache`, 환경 변수 `PRESS_STAGE_TVT`·`PRESS_STAGE_DOMAIN_STATES`)으로 replay.py(약 4분)·alarm_volume.py(약 1분)를 실행한다. 이어서 `verify_extra.py --group official`이 `outputs/`의 표 5개를 기준표와 대조한다. 시험 코드(`test_stages.py`·`test_stage_console.py`·`test_web_stage.cjs`), `frozen_copy_check.py`, 콘솔 화면 파일(`press_guard/outputs/console/`)은 팀 저장소에만 있다.
++
++두 단계 콘솔은 제출본의 `yejun/press_guard/`에서 직접 띄운다.
++
+ ```bash
+-# 저장소 루트에서. 원본 CSV 2개는 데이터셋/ 아래에서 해시로 찾는다(--data로 다른 폴더 지정 가능)
+-PYTHONDONTWRITEBYTECODE=1 python yejun/analysis/press_stage_replay_2026-10-08/replay.py [--official-cache <공식 실행의 tvt/cache>]  # 약 4분
+-PYTHONDONTWRITEBYTECODE=1 python yejun/analysis/press_stage_replay_2026-10-08/alarm_volume.py                                   # 약 1분
+-PYTHONDONTWRITEBYTECODE=1 python yejun/analysis/press_stage_replay_2026-10-08/frozen_copy_check.py                              # 콘솔용 동결 모델 사본 대조, 약 20초
+-PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider yejun/press_guard/test_stages.py yejun/press_guard/test_stage_console.py
+-node yejun/press_guard/test_web_stage.cjs
+-PYTHONDONTWRITEBYTECODE=1 python yejun/press_guard/stage_console.py --data-root 데이터셋 --artifacts <guard_*.json 폴더>   # http://127.0.0.1:8766
++PYTHONDONTWRITEBYTECODE=1 python yejun/press_guard/stage_console.py --data-root <데이터 폴더> --artifacts <guard_*.json 폴더>   # http://127.0.0.1:8766
+ PYTHONDONTWRITEBYTECODE=1 python yejun/press_guard/tools/capture_stage_console.py --chrome <Chrome 실행 파일>
+ ```
+ 
+ - 검증 환경: Windows 10, Intel i7-8700, 파이썬 3.14.7(numpy 2.5.3, pandas 3.0.6)이다. 통합 제출본과 같은 가상환경이며 BLAS 스레드는 1개다.
+-- `--official-cache`에는 통합 제출본 공식 실행의 `code/press/tvt/cache/`(rows_A.pkl·rows_B.pkl)를 준다. 주지 않으면 이 대조만 빠진다. 기준값은 공식 함수로 매번 다시 만든다.
+-- 준용 `claude/` 코드는 읽기 전용으로 import만 한다. `sys.dont_write_bytecode`를 켜서 `__pycache__`가 생기지 않게 했다.
++- run_all.py는 `--official-cache`에 공식 실행의 `code/press/tvt/cache/`(rows_A.pkl·rows_B.pkl)를 넘긴다. 이 인자가 없으면 이 대조만 빠진다. 기준값은 공식 함수로 매번 다시 만든다.
++- 공식 코드(`code/press/`)는 읽기 전용으로 import만 한다. `sys.dont_write_bytecode`를 켜서 `__pycache__`가 생기지 않게 했다.
+ 
+ ## 1. 행 단위 스트림 구현과 재현 (`yejun/press_guard/stages.py`, `replay.py`)
+ 
+@@ -55,8 +53,8 @@ PYTHONDONTWRITEBYTECODE=1 python yejun/press_guard/tools/capture_stage_console.p
+ - 상태 크기
+   - 행마다 바뀌는 상태: pickle로 2,027바이트 이하다. prefix R²용 현재 기록 전류는 기록 길이만큼 쌓인다(대회 자료 최대 50행).
+   - 고정 모델: JSON 0.91 MB(A)·0.77 MB(B)이며 대부분 꼬리 분포 참조값이다.
+-- 콘솔용 동결 모델 사본(`press_guard/outputs/expected/guard_*.json`, macOS·numpy 1.26 학습)은 새로 학습한 모델과 원소 차이가 5e-11 미만이다(보정값 최대 4.3e-11). 이 사본으로도 시험 행의 1·2단계가 모두 같다(`frozen_copy_check.py`).
+-- 시험 `yejun/press_guard/test_stages.py`(10개)는 다음을 본다.
++- 콘솔용 동결 모델 사본(팀 저장소 `press_guard/outputs/expected/guard_*.json`, macOS·numpy 1.26 학습)은 새로 학습한 모델과 원소 차이가 5e-11 미만이다(보정값 최대 4.3e-11). 이 사본으로도 시험 행의 1·2단계가 모두 같다(`frozen_copy_check.py`, 팀 저장소에만 있음).
++- 시험 `yejun/press_guard/test_stages.py`(10개, 팀 저장소에만 있음)는 다음을 본다.
+   - lib 상수·R² 식 일치, 무작위 2,000개 입력에서 R1 상태 기계 = lib.stream_rules, 정밀도 맞춤 일치
+   - 묶음 크기 불변, 미래 행 불변(잘라 흘리기·뒤 값 바꾸기), 기록 경계에서 창·R1 초기화(60초·확인 2행·0.13초 경계)
+   - 수집 오류 행, 2단계 ⊂ 1단계, 제출 예측 파일 A·B 재현
+@@ -78,7 +76,7 @@ PYTHONDONTWRITEBYTECODE=1 python yejun/press_guard/tools/capture_stage_console.p
+ | 제출 A 시험 정상(120기록) | 16.1분 | 0 · 0 (0~13.7) | 0 · 0 (0~13.7) |
+ | 제출 B 시험 정상(180기록) | 24.1분 | 3 · 7.5 (1.5~21.8) · 59.7 (12.3~174.4) | 0 · 0 (0~9.2) |
+ 
+-- 운전 상태별(E3 5창 합침, `claude/code/press/domain/outputs/06_operating_regime_records.csv`)
++- 운전 상태별(E3 5창 합침, `code/press/domain/outputs/06_operating_regime_records.csv`)
+   - 1단계 사건 2건은 모두 고부하에서 났다(기록 423·461). 고부하 7.1분에서 17.0건/시(2.1~61.4)다.
+   - 정숙 11.9분·저부하 7.7분·중부하 10.0분·짧은 기록 2.0분은 0건이다.
+   - 2단계는 모든 상태에서 0건이다.
+@@ -105,10 +103,10 @@ PYTHONDONTWRITEBYTECODE=1 python yejun/press_guard/tools/capture_stage_console.p
+   - 상세: 2단계 승격 시점, 기록별 R1 해제 위치, 행마다의 판정 띠(단계·R1·R2·관측 부족), 전류 그래프의 채운 점(v2 자기 경보)·빈 원(R1로만 켜진 행)
+   - 성능 검증 탭: 정상 경보량·운전 상태별 사건·되풀이 기준·재생 대조 표
+   - 기존 기능(모의 운용, 점검 결과 기록, CSV 불러오기·내보내기, 재생, 외부 데이터 탭)은 그대로다.
+-- 시험
++- 시험(팀 저장소에만 있음)
+   - `test_stage_console.py`(6개): 기존 콘솔 파일 해시 유지, B 혼합 자료의 계약·제출 파일 행 일치, 기존 v2 결과 불변, α 5% R1 해제, 업로드 = 내장 자료, HTTP 경로
+   - `test_web_stage.cjs`: 사건 집계, 모의 운용에서 2단계 행 전에는 1단계, 대기열·KPI·판정 띠, 성능 표
+-- 화면(`yejun/press_guard/outputs/console/`, `capture_stage.json`에 해시·선택 사건)
++- 화면(팀 저장소에만 있음: `yejun/press_guard/outputs/console/`, `capture_stage.json`에 해시·선택 사건)
+ 
+ | 파일 | 보이는 것 |
+ |---|---|
+@@ -133,7 +131,7 @@ PYTHONDONTWRITEBYTECODE=1 python yejun/press_guard/tools/capture_stage_console.p
+ 
+ - `replay_summary.json`(분할·흐름별 일치 수, 점수 차이, 지연, 상태 크기, 고정 상태 요약), `replay_counts.csv`
+ - `alarm_volume.json`(정의·대조·집합별·상태별·사건·되풀이 기준), `alarm_volume_sets.csv`, `alarm_volume_states.csv`, `alarm_events.csv`, `repeat_criterion.csv`
+-- `frozen_copy_check.json`(콘솔용 동결 모델 사본의 원소 차이와 제출 파일 대조)
++- `frozen_copy_check.json`(콘솔용 동결 모델 사본의 원소 차이와 제출 파일 대조, 팀 저장소에만 있음)
+ - 행 단위 예측은 저장하지 않는다.
+ 
+ ## 한계
+diff --git a/yejun/submission/press_integrated_2026-10-08/build_package.py b/yejun/submission/press_integrated_2026-10-08/build_package.py
+index 922fa38..683b770 100644
+--- a/yejun/submission/press_integrated_2026-10-08/build_package.py
++++ b/yejun/submission/press_integrated_2026-10-08/build_package.py
+@@ -245,6 +245,8 @@ def retained_calculation_ast(text):
+ 
+ def strip_anonymous_metadata(text):
+     nodes = [node for node in ast.walk(ast.parse(text)) if isinstance(node, ast.keyword) and node.arg == "competitor"]
++    if not nodes:
++        return text  # 원본 모듈에서 이미 지운 경우
+     assert len(nodes) == 1, "Expected one historical anonymous metadata keyword"
+     node = nodes[0]
+     expected = ast.parse('dict(repo="공개된 지도학습 분석(이름 생략)", f1=0.944)', mode="eval").body
+@@ -336,7 +338,7 @@ def build(target, include_extra_audits=True, attach_verification=None, packaging
+         # verify_attached_build.py after packaging); they describe that run, not new computation.
+         record = json.loads(read(Path(attach_verification) / "clean_full_run.json"))
+         verification_basis = dict(run_archive_sha256=record["archive_sha256"], files=[],
+-                                  note="Run records of the archive above; this archive adds only these record files")
++                                  note="Run records of the archive above; after that run only README, comment and docstring text changed (see doc_only_changes.json)")
+         for path in sorted(Path(attach_verification).glob("*.json")):
+             destination = target / "verification" / path.name
+             destination.parent.mkdir(parents=True, exist_ok=True)
+diff --git a/yejun/submission/press_integrated_2026-10-08/build_result.json b/yejun/submission/press_integrated_2026-10-08/build_result.json
+index 4bc13ad..68ae303 100644
+--- a/yejun/submission/press_integrated_2026-10-08/build_result.json
++++ b/yejun/submission/press_integrated_2026-10-08/build_result.json
+@@ -1,11 +1,11 @@
+ {
+-  "zip": "C:\\Users\\junyj\\Desktop\\k-제조데이터\\yejun\\submission\\press_integrated_2026-10-08\\북적북적_code_통합본.zip",
+-  "package": "C:\\Users\\junyj\\Desktop\\k-제조데이터\\yejun\\submission\\press_integrated_2026-10-08\\build\\package_tv_c7ra2\\북적북적_code_통합본",
+-  "zip_sha256": "3ad0b609dfa737ed99dfee245c302cc335efa452943adb20e793fa8fbe46c375",
+-  "zip_bytes": 4157000,
++  "zip": "C:\\Temp\\bj_int\\wt\\yejun\\submission\\press_integrated_2026-10-08\\북적북적_code_통합본.zip",
++  "package": "C:\\Temp\\bj_int\\wt\\yejun\\submission\\press_integrated_2026-10-08\\build\\package_v9oglyh8\\북적북적_code_통합본",
++  "zip_sha256": "c37d3c3f4e26d0ca4a169e512f5724c52a711024d20375d442f3eaab246bc6c5",
++  "zip_bytes": 4146820,
+   "immutable_files": 401,
+   "original_selection_lock_sha256": "20c992cd930c02c59f3ef4d3b7cccc1b15e2f3eda1fd78065fd06452a3c1ce2b",
+-  "packaged_selection_lock_sha256": "856c617f452e679eab448ae76c5739bcef984a899cd28f0f5b5a956cc952c506",
++  "packaged_selection_lock_sha256": "a6a3ce14f2104f0d087a180a6b50cbd6e184311b60a02ff5761272f4e6268a7e",
+   "calculation_ast_equivalent": true,
+   "optional_audits_included": true
+ }
+diff --git a/yejun/submission/press_integrated_2026-10-08/templates/README.md b/yejun/submission/press_integrated_2026-10-08/templates/README.md
+index 6093950..5c36db1 100644
+--- a/yejun/submission/press_integrated_2026-10-08/templates/README.md
++++ b/yejun/submission/press_integrated_2026-10-08/templates/README.md
+@@ -1,85 +1,75 @@
+-# 북적북적 통합 코드 제출본
++# 북적북적 코드 제출본
+ 
+-결과보고서의 공식 모델(기반 모델 v2 + 규칙 R1·R2, 두 단계 경보)과 2.8절 사후 보완 실험, 같은 조건 비교·정상 조건 민감도 등 추가 감사를 이 폴더 하나에서 다시 만듭니다. 원본 CSV 2개와 필요한 팀 모듈이 들어 있어 저장소나 보고서 편집 프로그램이 필요하지 않습니다.
++결과보고서의 공식 모델(기반 모델 v2 + 규칙 R1·R2, 두 단계 경보), 2.8절 사후 보완 실험, 추가 감사를 이 폴더에서 다시 만듭니다. 원본 CSV 2개와 필요한 팀 모듈이 모두 들어 있어 저장소를 따로 받을 필요가 없습니다.
+ 
+-## 0. 설치 없이 확인(수 초)
++한글 폴더 이름이 깨져 보이면 `python -m zipfile -e 북적북적_code_통합본.zip .`로 압축을 푸세요.
++
++## 1. 설치 없이 확인(수 초)
+ 
+ ```console
+ python check_bundled.py
+ ```
+ 
+-파이썬 표준 라이브러리만 씁니다. 세 가지를 확인합니다.
+-
+-- `package_manifest.json`의 해시로 배포 파일이 바뀌지 않았는지 봅니다.
+-- 동봉한 공식 test 예측 파일의 해시를 `expected_results.json`과 대조합니다.
+-- 같은 파일의 `label`과 경보 열로 행 F1을 다시 계산합니다. 공식 성능 1단계 v2+R1은 1.000·0.995, 2단계 v2+R1+R2는 1.000·1.000, 기반 모델 v2는 0.965·0.970입니다.
+-
+-공식 test 예측 파일은 `reference_results/official_predictions/test_predictions_A.csv`, `test_predictions_B.csv`입니다. 전체를 실행하면 같은 파일을 `predictions/`에 다시 만들고 해시를 대조합니다.
+-
+-## 1. 설치
++표준 라이브러리만 씁니다. 배포 파일 해시와 동봉한 공식 test 예측 파일 해시를 확인하고, 그 파일의 `label`과 경보 열로 행 F1을 다시 계산합니다. 행 F1(분할 A·B)은 1단계 v2+R1(공식 성능) 1.000·0.995, 2단계 v2+R1+R2 1.000·1.000, 기반 모델 v2 0.965·0.970입니다.
+ 
+-Python 3.14에서 압축을 풀고 가상환경에 설치합니다. 패키지 설치에만 인터넷이 필요합니다.
++## 2. 설치와 실행
+ 
+ ```console
+ python -m venv .venv
+ .venv\Scripts\python -m pip install -r requirements.txt
++.venv\Scripts\python run_all.py
+ ```
+ 
+-macOS/Linux에서는 `.venv/bin/python`을 씁니다. 아래 명령의 `python`은 이 가상환경의 파이썬입니다. 가상환경을 켜지 않았다면 `.venv\Scripts\python run_all.py`처럼 경로를 붙입니다. `run_all.py`는 자신을 실행한 파이썬으로 하위 단계를 돌립니다. 압축 해제 경로에 공백이나 한글이 있어도 됩니다.
+-
+-## 2. 실행
+-
+-```console
+-python run_all.py
+-```
+-
+-한 명령으로 다음을 차례로 실행합니다.
+-
+-- 기존 26단계: 전처리 → 학습 → 추론 → test 예측 파일 → 보고서 수치 대조 43항목
+-- 2.8절 사후 보완 실험: 정상 전용 선택 → 잠금 → 평가 → 재계산·재생·독립 수식 감사 → 모델 동결
+-- 추가 감사: 같은 조건 비교, 정상 조건 민감도, 공식 규칙 상수 민감도, 두 단계 경보 재생·경보량
+-- 계약 검사(pytest)
+-
+-추가 감사 결과는 `reference_results/extra_audits/`의 기준표와 자동으로 대조합니다. 단계 로그는 `logs/`, 전체 결과는 `logs/integrated_run_summary.json`에 남습니다. 하나라도 실패하면 종료 코드가 0이 아닙니다.
++- 파이썬 3.13 또는 3.14가 필요합니다. 검증한 환경은 Windows 11·파이썬 3.13.15와 Windows 10·파이썬 3.14.7입니다. macOS·Linux는 `.venv/bin/python`을 쓰며 실행해 보지는 않았습니다. Linux에서는 `pip install torch==2.14.0 --index-url https://download.pytorch.org/whl/cpu`를 먼저 하면 CUDA 라이브러리를 받지 않습니다.
++- 패키지 설치에만 인터넷이 필요하고, 압축을 푼 경로에 공백이나 한글이 있어도 됩니다. 하나라도 어긋나면 종료 코드가 0이 아닙니다.
++- 전체 실행은 검증 PC에서 약 70분(공식 파이프라인 26단계 약 52분) 걸립니다. 화면에는 단계 시작과 통과만 나오고 진행 내용은 `logs/integrated_<단계>.log`에 쌓이므로, 공식 단계에서 한 시간 가까이 화면이 멈춰 보여도 정상입니다.
+ 
+ | 명령 | 내용 |
+ |---|---|
+-| `python run_all.py` | 전체(위 목록) |
+-| `python run_all.py --skip-extra-audits` | 추가 감사 제외 |
+-| `python run_all.py --section official` | 기존 26단계만(대조 43항목) |
+-| `python run_all.py --section official --quick` | 기존 빠른 부분(대조 28항목) |
+-| `python run_all.py --section improvement` | 2.8절 실험과 그 추가 감사 |
+-| `python run_all.py --verify-only` | 이 폴더에서 이미 실행한 결과를 다시 검사(새로 푼 폴더에서는 안내 후 종료) |
++| `run_all.py` | 전체: 공식 파이프라인 26단계(보고서 수치 43항목 대조), 2.8절 실험, 추가 감사, 계약 검사(pytest) |
++| `run_all.py --section official` | 공식 파이프라인 26단계만 |
++| `run_all.py --section official --quick` | 공식 파이프라인 핵심 13단계(대조 28항목) |
++| `run_all.py --section improvement` | 2.8절 실험과 그 추가 감사 |
++| `run_all.py --skip-extra-audits` | 추가 감사 제외 |
++| `run_all.py --verify-only` | 이 폴더에서 이미 실행한 결과만 다시 검사 |
+ 
+-기존 단계(`run_official.py`)는 시작할 때 "결과는 파이썬 3.13에서 만들었다"는 안내를 출력합니다. 기존 결과를 처음 만든 환경을 알리는 문장입니다. 이 배포본의 3.14 판에서도 대조 43항목이 모두 일치했습니다(`verification/`). 처음 쓰던 3.13 실행 설명은 `README_original.md`에 보존했습니다. `environment_original.yml`은 예전 conda 설정이며, 현재 `requirements.txt`를 설치합니다.
++추가 감사 결과는 `reference_results/extra_audits/`의 기준표 32개와 자동으로 대조합니다. 단계 로그는 `logs/`, 실행 요약은 `logs/integrated_run_summary.json`에 남습니다.
+ 
+-## 3. 결과 위치
++## 3. 코드 구조
+ 
+-| 위치 | 내용 |
+-|---|---|
+-| `predictions/` | 실행 뒤 다시 만든 공식 test 예측 파일(동봉본은 `reference_results/official_predictions/`) |
+-| `code/press/*/outputs/` | 기존 파이프라인 산출물(보고서 1~4장 표·그림의 원자료) |
+-| `yejun/analysis/press_improvement/outputs/` | 2.8절 실험의 선택 기록·잠금·평가표, 같은 조건 비교(`strong_baselines/`)·정상 조건 민감도(`normal_sensitivity/`) |
+-| `yejun/analysis/press_official_sensitivity/outputs/` | 공식 규칙 상수 민감도와 이상 기록 앞뒤 교차 평가 |
+-| `yejun/analysis/press_stage_replay/outputs/` | 두 단계 경보의 한 행 재생 일치, 정상 자료 경보량 |
+-| `logs/` | 단계별 로그와 실행 요약 |
++공식 결과는 표의 앞 세 줄을 따라가면 됩니다. 나머지는 그 결과를 검증하거나 보고서 1·3·4장의 근거를 만드는 코드입니다.
+ 
+-## 4. 검증 기록
++| 위치 | 하는 일 | 보고서 |
++|---|---|---|
++| `code/press/tvt/01`·`02`·`03`·`05`·`08` | 공식 파이프라인: 정상 train 학습과 valid 보정, valid 선택과 해시 잠금, 잠금 확인 뒤 test 채점, test 예측 파일, 이상 확률 열(경보와 무관) | 2.3~2.5절 |
++| `yejun/press_guard/model.py`, `yejun/press_submission/press/`, `yejun/analysis/press_master_validation_2026-10-03/core.py` | 기반 모델 v2(크기·파형·동역학 성분, conformal 문턱), v1 성분·베이스라인·LSTM, v3 모듈과 인공 고장 주입 생성기 | 2.3·2.4·2.6절 |
++| `code/press/tvt/lib.py`, `evalcore.py` | 규칙 R1(`lib.stream_rules`)·R2(`evalcore.own_alarm`, `lib.prefix_r2`)와 행 단위 채점 | 2.5절 |
++| `code/press/cases/`, `code/press/06_alias_frequency_audit.py` | 데이터 진단: 기록 특징, 저장 형식 누수, 겉보기 주파수 | 1장 |
++| `code/press/tvt/04`, `06`·`07`, `09`~`16` | 검증과 사후 대조: 인공 고장 주입, 성분 절제, 문턱 무관 비교, R2 표본 밖 확인 등 | 2.6·2.7절 |
++| `code/press/domain/` | 영향요인과 오경보 조건: 신호 물리, PCA 관리도, CUSUM·EWMA, 운전 상태 | 3장 |
++| `yejun/analysis/press_improvement/` | 2.8절 보완 실험: 정상 전용 선택, 잠금, 평가, 모델 동결, 새 자료 평가 도구 | 2.8절 |
++| `yejun/analysis/press_official_sensitivity/`, `press_stage_replay/` | 규칙 상수 민감도, 두 단계 경보 재생과 정상 자료 경보량 | 2.7·4.3절 |
++| `yejun/press_guard/stages.py`, `stage_console.py` | 두 단계 경보 스트림(`run_all.py`가 재생 대조)과 점검 콘솔(`run_all.py` 범위 밖, 모델 파일 `yejun/press_guard/artifacts/guard_*.json`이 있어야 열림) | 4.2절 |
++| `yejun/analysis/press_lstm_improvement/` | 2.7절 보완 LSTM 비교(사후). `run_all.py` 범위 밖이며 결과 표를 동봉했다. 다시 돌리면 학습 162회, 약 8시간 | 2.7절 |
++| `expected_results.json`, `reference_results/` | 보고서 수치 기대값, 동봉 예측 파일과 추가 감사 기준표 | 6장 |
+ 
+-`verification/`에는 이 배포본과 계산 파일이 같은 빌드를 새 가상환경·새 압축 해제 폴더에서 `python run_all.py`로 끝까지 실행한 기록(단계별 시간, 결과)이 있습니다. 그 빌드의 SHA-256과 이 배포본이 그 기록 파일만 더했다는 사실은 `package_manifest.json`의 `verification_basis`에 있습니다.
++실행 결과는 `predictions/`(공식 test 예측 파일), `code/press/*/outputs/`, `yejun/analysis/*/outputs/`에 생깁니다. 보고서의 R1·R2는 코드에서 H1·H2로, 검증 E1·E2·E3·E5는 V1·V2·V3·V5로 부릅니다.
+ 
+-## 5. 새 수집 자료 평가
++## 4. 검증 기록과 범위
+ 
+-전체 또는 개선 실행 후 `yejun/analysis/press_improvement/outputs/frozen_holdout/provenance.example.json`을 복사해 실제 수집 출처·설비·사건 정보를 작성합니다. 새 자료는 같은 공정, 센서·단위, 10 Hz 표본 간격이어야 합니다. 아래 명령은 지정한 A 상태를 사용하며 새 자료로 재학습·재보정·후보 선택을 하지 않습니다.
++- `verification/clean_full_run.json`은 새 가상환경과 새로 푼 폴더에서 `python run_all.py`를 끝까지 돌린 기록(단계별 시간과 결과)입니다. 실행한 빌드의 SHA-256은 `package_manifest.json`의 `verification_basis`에 있습니다. 그 뒤로는 README·주석·docstring만 고쳤고, 계산 코드와 기대값 숫자가 같다는 대조 결과는 `verification/doc_only_changes.json`에 있습니다.
++- `run_official.py`는 시작할 때 "결과는 파이썬 3.13에서 만들었다"고 출력합니다. 기존 결과를 처음 만든 환경을 알리는 문장입니다.
++- `README_original.md`는 통합 전 제출본 설명서입니다. 그 문서의 `run_all.py`는 이 폴더의 `run_official.py`, `predictions/`는 `reference_results/official_predictions/`, `environment.yml`은 `environment_original.yml`에 해당하며, 예측 파일 열 설명(3절)은 그대로 유효합니다.
++- `yejun/` 아래 README·PLAN·PROTOCOL과 `yejun/press_submission/run_all.py`·`yejun/press_guard/reproduce.py`는 각 모듈을 만들 때의 팀 저장소 기록입니다. 그 안의 실행 방법(파이썬 3.11~3.12 등)과 이 폴더에 없는 파일(시험 코드·그림·캐시·계획 문서)은 쓰지 않고, 실행은 이 README를 따릅니다. 문서와 주석의 `claude/code/press/`는 이 폴더의 `code/press/`이고, '예준'·'준용'은 팀원 이름, '사이클·평가관 NN' 같은 번호는 팀 내부 검토 회차입니다. 공식 계산이 불러 쓰는 모듈은 해시로 잠가 두어 이런 문구도 고치지 않았습니다.
++- 추가 감사는 공식 모델·문턱·규칙을 바꾸지 않습니다. 같은 고장 자료를 다시 계산하는 검증이라 새 설비·새 고장 사건에 대한 일반화 검증과는 다릅니다. 이상 21기록은 21개의 독립 고장이 아닙니다.
++- 2.8절 실험의 분할·주입·선택 기준은 `yejun/analysis/press_improvement/PROTOCOL.md`에 있습니다. 후보 56개와 비교용 OR 4개의 계산은 실험 당시 코드와 구문(AST) 단위로 같고, 실제 실행은 정상 전용 선택부터 새로 해서 `outputs/selection_lock.json`을 만듭니다.
++
++## 5. 새로 수집한 자료 평가
++
++전체 또는 2.8절 실행 뒤 `yejun/analysis/press_improvement/outputs/frozen_holdout/provenance.example.json`을 복사해 수집 출처·설비·사건 정보를 적습니다. 같은 공정, 같은 센서·단위, 10 Hz 표본 간격이어야 하며 새 자료로 재학습·재보정·후보 선택을 하지 않습니다.
+ 
+ ```console
+ python yejun/analysis/press_improvement/validate_holdout.py evaluate --artifact yejun/analysis/press_improvement/outputs/frozen_holdout --split A --csv new_session.csv --provenance provenance.json --output new_validation
+ ```
+ 
+-정답 0/1 열이 있으면 `--label-column 정답열이름`, 기록 경계 열이 있으면 `--record-column 기록열이름`을 추가합니다. 정답이 없으면 경보 건수만 출력하며 탐지율·오경보율이라고 부르지 않습니다. 기존 파일 전체·부분·재명명·시간 이동 사본은 중복 검사로 거부합니다. 출처 선언과 중복 통과만으로 별개 고장 사건임이 입증되지는 않습니다.
+-
+-## 6. 범위
+-
+-- 공식 제출 모델과 추가 실험 모델의 결과를 따로 출력합니다. 추가 감사는 공식 모델·문턱·규칙을 바꾸지 않습니다.
+-- 이미 관찰한 같은 고장 자료를 재생·재계산하는 검증은 새 설비·새 고장 사건의 일반화 검증과 다릅니다. 이상 21기록은 21개의 독립 고장 사건이 아닙니다.
+-- 2.8절 실험의 분할·주입·선택 기준은 `yejun/analysis/press_improvement/PROTOCOL.md`에 있습니다. 이 배포본은 선택 대상이 아니었던 참고 계산 3개를 빼고, 남은 56개 후보와 OR 4개의 계산은 원래 코드와 구문(AST) 단위로 같습니다. 원래 선택 잠금의 해시는 `package_manifest.json`에 있으며, 실제 실행은 정상 전용 선택부터 새로 하여 `outputs/selection_lock.json`을 만듭니다.
++정답 0/1 열이 있으면 `--label-column 열이름`, 기록 경계 열이 있으면 `--record-column 열이름`을 붙입니다. 정답이 없으면 경보 건수만 내고 탐지율·오경보율이라고 부르지 않습니다. 기존 파일을 자르거나 이름·시각만 바꾼 사본은 중복 검사에서 거부합니다.
+diff --git "a/yejun/submission/press_integrated_2026-10-08/\353\266\201\354\240\201\353\266\201\354\240\201_code_\355\206\265\355\225\251\353\263\270.zip" "b/yejun/submission/press_integrated_2026-10-08/\353\266\201\354\240\201\353\266\201\354\240\201_code_\355\206\265\355\225\251\353\263\270.zip"
+index 226231e..f77cae8 100644
+Binary files "a/yejun/submission/press_integrated_2026-10-08/\353\266\201\354\240\201\353\266\201\354\240\201_code_\355\206\265\355\225\251\353\263\270.zip" and "b/yejun/submission/press_integrated_2026-10-08/\353\266\201\354\240\201\353\266\201\354\240\201_code_\355\206\265\355\225\251\353\263\270.zip" differ
+diff --git "a/yejun/submission/press_integrated_2026-10-08/\353\266\201\354\240\201\353\266\201\354\240\201_code_\355\206\265\355\225\251\353\263\270_run.zip" "b/yejun/submission/press_integrated_2026-10-08/\353\266\201\354\240\201\353\266\201\354\240\201_code_\355\206\265\355\225\251\353\263\270_run.zip"
+index f1ec1c4..f94d840 100644
+Binary files "a/yejun/submission/press_integrated_2026-10-08/\353\266\201\354\240\201\353\266\201\354\240\201_code_\355\206\265\355\225\251\353\263\270_run.zip" and "b/yejun/submission/press_integrated_2026-10-08/\353\266\201\354\240\201\353\266\201\354\240\201_code_\355\206\265\355\225\251\353\263\270_run.zip" differ

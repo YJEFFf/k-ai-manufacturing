@@ -5,7 +5,7 @@
 - 사전 비율 두 가지: 현장 가정 1%(운영 표시용), test 파일의 이상 행 비율(파일 라벨로 채점할 때)
 - 평가: test 행 Brier 점수, 그리고 비율만 쓴 예측(상수 π)의 Brier
 출력: outputs/test_predictions_{A,B}.csv에 확률 열 2개를 붙인다(경보 열은 그대로), outputs/tvt_probability.json
-실행: python code/press/tvt/08_probability.py --repo <팀 레포>
+실행(제출본 루트에서): python code/press/tvt/08_probability.py --repo .
 """
 import json
 import sys

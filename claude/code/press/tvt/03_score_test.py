@@ -4,7 +4,7 @@
 채점 전후로 선택 파일 해시를 확인해, 시험 결과를 본 뒤 선택을 고치지 않았음을 남긴다.
 입력: cache/rows_{A,B}.pkl, outputs/tvt_selection.json(.sha256), tvt_scores_meta.json, 팀 레포 원자료(H4 형식 누수용)
 출력: outputs/tvt_test.csv, tvt_hypotheses.json, tvt_summary.md
-실행: python code/press/tvt/03_score_test.py --repo <팀 레포>
+실행(제출본 루트에서): python code/press/tvt/03_score_test.py --repo .
 """
 import json
 

@@ -139,7 +139,7 @@ class MSPC:
 
     def _z(self, F, nwin):
         """창 길이 n별 정상 학습 평균·SD로 표준화한다. 짧은 창은 추정량 분산이 커서 한 표준화로 묶으면
-        기록 시작 직후 행이 일괄로 튄다(배치 MSPC의 '시점별 평균 궤적 차감'을 창 길이별로 줄인 것)."""
+        기록 시작 직후 행이 한꺼번에 튄다(배치 MSPC의 '시점별 평균 궤적 차감'을 창 길이별로 줄인 것)."""
         Z = np.zeros_like(F)
         for n in range(MIN_ROWS, self.w + 1):
             m = nwin == n
@@ -195,7 +195,7 @@ class MSPC:
         self.lam_all, self.P_all, self.k, self.cum = lam, P, k, cum
         self.P, self.lam = P[:, :k], lam[:k]
         self.m = mrows
-        # 고전 한계 모수: 잔차 공간 고유값의 1·2·3제곱 합 θ와 Jackson–Mudholkar 지수 h0
+        # 고전 한계 모수: 잔차 공간 고유값의 1·2·3제곱 합 θ와 Jackson-Mudholkar 지수 h0
         th = [float((lam[k:] ** i).sum()) for i in (1, 2, 3)]
         self.theta = th
         self.h0 = 1 - 2 * th[0] * th[2] / (3 * th[1] ** 2)
@@ -219,7 +219,7 @@ class MSPC:
         return k * (m + 1) * (m - 1) / (m * (m - k)) * stats.f.ppf(conf, k, m - k)
 
     def spe_limit(self, conf):
-        """Jackson–Mudholkar SPE 한계."""
+        """Jackson-Mudholkar SPE 한계."""
         t1, t2, _ = self.theta
         h0 = self.h0
         c = stats.norm.ppf(conf)
@@ -275,7 +275,7 @@ def raw_frames():
 
 
 def align(table: pd.DataFrame, raw: pd.DataFrame) -> np.ndarray:
-    """캐시 행 표의 각 행에 대응하는 raw 행 번호. 키 = (subset, ts, pos) — B에 같은 시각 행이 한 쌍 있어 pos로 가른다."""
+    """캐시 행 표의 각 행에 대응하는 raw 행 번호. 키는 (subset, ts, pos)다. B에 같은 시각 행이 한 쌍 있어 pos로 가른다."""
     key = raw[["subset", "ts", "pos"]].reset_index(drop=True).assign(_i=np.arange(len(raw)))
     m = table[["subset", "ts", "pos"]].merge(key, on=["subset", "ts", "pos"], how="left", validate="one_to_one")
     assert m._i.notna().all(), "캐시 행 중 원자료와 맞지 않는 행"
@@ -571,7 +571,7 @@ def _c(res, model, regime, alpha, unit, sid, k):
 
 
 def f3(x):
-    """소수 셋째 자리 문자열, 값이 없으면 —."""
+    """소수 셋째 자리 문자열. 값이 없으면 '—'를 돌려준다."""
     return "—" if x is None or (isinstance(x, float) and np.isnan(x)) else f"{x:.3f}"
 
 
@@ -588,7 +588,7 @@ def summarize(res, info):
         return f"{F(m, reg, a, u, 'A')} / {F(m, reg, a, u, 'B')}"
 
     w("---\ntitle: 프레스 — MSPC(PCA T²·SPE) 기준선 사후 비교\ncreated: 2026-10-04\nupdated: 2026-10-04\n"
-      "tags: [contest/k-ai-manufacturing]\nsource: Claude Code 세션 2026-10-04 (code/press/domain/03_mspc.py)\nstatus: seed\n---\n")
+      "tags: [contest/k-ai-manufacturing]\nsource: code/press/domain/03_mspc.py\nstatus: seed\n---\n")
     w("# MSPC 기준선: 창 특징 PCA + Hotelling T² / SPE\n")
     w("> **사후 비교다.** test 채점(`tvt/03_score_test.py`) 뒤에 덧붙였다. 잠근 선택(`tvt_selection.json`)과 "
       "최종 모델 v2+R1+R2(코드 이름 v2+H1+H2)는 바뀌지 않는다. 분할·평가 함수(`tvt/evalcore.py`)는 그대로 썼다. "
