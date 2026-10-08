@@ -1,6 +1,6 @@
 # 결과보고서 통합본: 준용 52쪽 원고 + 예준 개선본 추가분
 
-이 폴더는 준용의 52쪽 원고(`claude/report/final_v5.md`, 57617ef)를 바탕으로 만든 복사본이다. 여기에 예준 개선본(`yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.md`, 6d8175f)의 추가분을 옮겼다. 두 원본은 고치지 않았다. GitHub에는 올리지 않는다(예준 지시, 2026-10-08). 작업은 로컬 브랜치 `yejun/report-merge-local`에만 있다.
+이 폴더는 준용의 52쪽 원고(`claude/report/final_v5.md`, 57617ef)를 바탕으로 만든 복사본이다. 여기에 예준 개선본(`yejun/결과보고서_북적북적_경쟁모델융합_개선안_2026-10-08/결과보고서_북적북적_개선본.md`, 6d8175f)의 추가분을 옮겼다. 두 원본은 고치지 않았다. 예준 지시로 2026-10-08 GitHub 브랜치 `yejun/report-merge-20261008`에 올렸다(main에는 합치지 않았다).
 
 ## 옮긴 것
 
@@ -71,7 +71,7 @@
 
 맥에는 한글이 없어서 조립하지 못했다. 빌더가 pyhwpx로 한글을 직접 조작하기 때문이다.
 
-Windows에서는 개선본과 같은 가상환경(`$frontierPython`, `yejun/analysis/press_frontier_improvement_2026-10-08/README.md`)을 쓴다. 이 폴더를 Windows 저장소의 같은 경로에 둔 뒤, 저장소 루트의 PowerShell에서 실행한다.
+Windows에서는 개선본과 같은 가상환경(`$frontierPython`, `yejun/analysis/press_frontier_improvement_2026-10-08/README.md`)을 쓴다. 이 브랜치를 받은 뒤(`git fetch origin`, `git switch yejun/report-merge-20261008`) 저장소 루트의 PowerShell에서 실행한다.
 
 ```powershell
 $env:PYTHONDONTWRITEBYTECODE = '1'; $env:PYTHONUTF8 = '1'
