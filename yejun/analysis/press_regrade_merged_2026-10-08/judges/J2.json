@@ -1,0 +1,130 @@
+{
+  "judge": "J2",
+  "persona": "제조 설비 예지보전 현장 전문가(유압 계통·회전기계 상태감시 15년). 설비 물리 해석의 타당성, 경보 운영(오경보 부담·점검 절차), 현장 적용 가능성, 재보정·운영 절차를 중시한다.",
+  "entries": {
+    "K2": {
+      "scores": {"data": 14.5, "model": 35.0, "error": 13.5, "field": 8.5, "creative": 8.5, "code": 7.5},
+      "total": 87.5,
+      "rationale": {
+        "data": "기록 조각 구조(정상 599·이상 21, 10 Hz, duty 42%), 결측·중복, 파일 형식 누수(|DC| AUC 0.89~0.94, 1.19209 격자)와 날짜 교란, 60 Hz→0.6 Hz 접힘, 운전 상태·블록 드리프트, 라벨 신뢰도 등급, 공백 보간 불가 검증까지 진단했다. 결과가 형식 통일+평균 제거 전처리, 세그먼트 GroupKFold+정상 시간 블록 분할, 1초·2초 분모 분리로 이어진다.",
+        "model": "규칙 7종 베이스라인부터 예측·그래프·분포·복원 계열 20여 모델을 같은 두 분할·같은 train 정상 q99 기준으로 비교했고, 이상 데이터로 문턱·특징·하이퍼파라미터를 고르지 않았다(코드에서 정상만 학습·문턱 확인). 최종 Ridge+MCD의 선정근거(인과 입력·판정 범위·지연·재현성, 공통 세그먼트 부트스트랩)가 명확하고 수치가 산출물과 맞지만, 이상 확률 출력이 없고(컨포멀 p는 보조), 선택과 보고가 같은 CV 위에 있으며 문턱이 학습 표본 내 q99라는 점을 감점했다.",
+        "error": "32개 모델의 FP를 운전 상태별로 Fisher·BH 검정해 고부하 집중(23/32)과 예외(PCA SPE는 저부하)를 보였고, 반복 FP 세그먼트, FN 유형(조용한 3·19·20은 전류를 넣은 모델만 탐지), 채널 기여·채널 관계 반전을 정량화했다. 오류 발생에 대한 변수 간 상호작용 분석은 상대적으로 약하다.",
+        "field": "주의(Ridge)·경보(AND) 2단계와 시간당 환산(주의 약 7~8.5건, 경보 0~1건), 인과 처리시간, 목표 오경보율 운영점·재학습 기준, 컨포멀 보정에 필요한 정상 개수와 운전 상태 구성 조건을 근거와 함께 제시했다. 근거 카드·조기경보·챗봇은 비최종 CNN+MCD 시제품이고, 품질검사 연계와 경보 종료·피드백 절차가 없다.",
+        "creative": "이종 계열 AND(FP Jaccard로 근거), 강도별 합성 주입, 분할 컨포멀 p-value의 유효 조건 검증, 인과 피처의 미래 정보 정량화, 근거 번호만 고르는 로컬 LLM이 근거와 함께 있다. 확률 보정은 없고, 5장에 1.4절과 모순되는 '라벨 노이즈 후보로 분리' 서술이 남아 있다.",
+        "code": "src/run_all.py가 노트북 25개를 의존 순서대로 실행하고 버전 고정·paths.py 상대경로·시드·결과 CSV·repro_compare.py와 전체 재실행 기록이 있다. 다만 학습 데이터가 동봉되지 않아 수동으로 받아 넣어야 하고, run_all 기본 커널명 'kamp' 등록이 README에 없으며 단위 테스트가 없다."
+      },
+      "top_strength": "20여 개 모델을 세그먼트 그룹·정상 시간 블록 두 분할과 train 정상 q99 한 기준으로 비교하고, 이종 계열 AND로 오경보를 낮추면서 17/17 탐지를 유지함을 저장 점수로 다시 셀 수 있게 남겼다.",
+      "top_weakness": "최종 Ridge+MCD에 보정된 이상 확률이 없고, 학습 데이터 미동봉·초안 상태 보고서에 근거 카드·조기경보가 비최종 모델 시제품에 머문다."
+    },
+    "K5": {
+      "scores": {"data": 14.5, "model": 32.5, "error": 14.0, "field": 9.5, "creative": 9.0, "code": 9.0},
+      "total": 88.5,
+      "rationale": {
+        "data": "설비 구조·기어펌프 고장 서명·10 Hz 관측 가능성을 정리하고, 전류가 교류 순시값이며 0.6 Hz 접힘·홀수 고조파·표본 간격 역산까지 변수 의미를 물리적으로 해석했다. 형식 누수(자릿수 규칙 행 F1 0.992), 끊긴 기록, 날짜·요일 교란, 단일 사건, 정숙 구간, 결측·중복·불균형을 표로 진단했고 정밀도 맞춤·기록 내 창·시간순 train/valid/test(A·B)로 이어진다.",
+        "model": "베이스라인 5종·v1·v2·v3와 사후 PCA·CUSUM·EWMA·Ridge·보완 LSTM까지 같은 분할·같은 conformal 보정으로 비교했고, valid 해시 잠금, R1 없는 F1·AUROC·블록 부트스트랩, 등위회귀 이상 확률(Brier·ECE)을 냈으며 수치가 예측 파일과 맞는다. 그러나 v2 특징과 R1·R2를 이상 사건 전체를 본 뒤 정했고 R2는 test 확인 뒤 추가했으며, R1이 이어진 단일 사건에서 point-adjust와 비슷한 이득을 줘(IsolationForest+R1도 1.000) 공식 1.000/0.995가 부풀었고 확률 평가 사전도 test 파일 이상 비율이라 test 재사용으로 감점했다.",
+        "error": "기록별 특징 AUROC, 성분 절제·주입, PCA T² 기여, 부하-진동 관계(하부 SD∝전류^1.73)로 영향변수를 보였고, 진동 크기×전류 파형 상호작용을 R2로 연결했다. 오경보는 고부하 정상의 크기 단독 경보(고부하 기록 오경보율이 전체의 3.7배), 미탐은 기록 위치 0~1과 진동이 작은 이상 기록(3·19·20)에 몰린다는 점을 정량으로 제시했다.",
+        "field": "ISO 13374 흐름에 맞춰 1단계(표시만, 교대당 34건 누적 시 품질 샘플·정지 점검)와 2단계(점검 요청)의 역할, 경보 근거별 운전 중/정지 점검 순서, 품질 보류(전단면·버·치수), 사건 종료 양식과 '정상 확인' 기록만 재보정에 쓰는 규칙, 보정 오염 시험, 정상 자료 경보량과 ISA-18.2 비교까지 근거 있게 냈다. R2는 착안 자료 안에서만 확인된 가설 규칙이라 도입 첫 달 표본 밖 검증이 남는다.",
+        "creative": "ISO 13379 고장모드-증상 매트릭스, 접힘 기반 표본 간격 역산, 전류 사인 적합 파형 성분, 물리 근거의 R2 교차 확인, conformal 문턱과 등위 확률, 표본 시각 흔들림 반증 시험이 근거와 함께 있다. 다수가 사후 분석이고 2.8절 통합 후보(차분 Ridge+Ledoit-Wolf)는 출처가 불분명해 할인했다.",
+        "code": "run_all.py 한 명령(공식 26단계·보완 실험·감사·pytest), 원본 CSV 해시 확인, 버전 고정, check_bundled.py와 기대값 43개 자동 대조, 새 폴더 전체 실행 기록이 있다. 실행이 4시간대(기록 245분, 보고서는 절전 제외 약 60분)이고 일부 수치(UCI·보완 LSTM)는 run_all 밖이며, 기본 비교표 산출물은 동봉되지 않아 실행해야 확인된다."
+      },
+      "top_strength": "설비 물리·수집 구조 진단에서 출발해 전류 파형 성분과 R2 교차 확인으로 고부하 정상 오경보를 줄이고, 두 단계 경보 운영(사건 종료 기록·품질 보류·재보정 자료 관리)까지 현장 절차로 설계했다.",
+      "top_weakness": "v2 특징과 R1·R2를 이상 사건 전체를 본 뒤 정하고 R2는 test 확인 뒤 더했으며, R1이 단일 연속 사건에서 point-adjust 유사 이득을 줘 공식 test F1 1.000이 모델 우열을 말해 주지 못한다."
+    },
+    "K8": {
+      "scores": {"data": 13.5, "model": 31.5, "error": 14.0, "field": 8.0, "creative": 8.5, "code": 9.5},
+      "total": 85.0,
+      "rationale": {
+        "data": "버스트 구조와 window 길이별 잔존율, 결측·중복·관측 시간, 가이드북 120샘플 창의 불성립, 수집 지문(1.192 격자·자릿수·전류 평균), 저부하 운전, 고장 전 구간 0초를 진단해 버스트 내부 window·시간블록 5-fold·버스트 부트스트랩·2단에서 전류 제외로 연결했다. 판별의 주역인 전류가 교류 순시값(0.6 Hz 접힘)이라는 변수 의미 진단이 없어 한 단계 낮다.",
+        "model": "BL-0·가이드북 LSTM-AE·Mahalanobis·IF·PCA-MSPC를 같은 시간블록 5-fold·conformal 기준으로 비교하고 지도·음성 대조를 두었으며, 최종 빨강 F1 0.931·FPR 0.10%가 예측 파일과 맞는다. 그러나 원 기준으로 BL-0가 뽑히자 결과를 본 뒤 기준을 바꿔 M3를 골랐고 선정 게이트에 고장 라벨을 썼으며, 최종 구성에서는 M2·M3 순위가 뒤집히고 1단 오경보가 보정 블록 구성에 따라 30배 달라져 선정근거가 약하다. 확률은 기록 안 Platt와 유병률 가정 사후확률에 그친다.",
+        "error": "M3 기여도 1위 비중·단일 AUROC·특징군 제거, 직류 이동·격자 반사실 시험과 가짜 고장 대조로 영향요인을 분해했다. 진동×전류 3×3 표와 주효과 로지스틱으로 상호작용을 검정했고, 1단 오경보 85%가 저부하 구간, 빨강 미탐 62%가 버스트 첫 2 window, 진동 오프셋 섭동에 최대 96.7배 취약함을 정량으로 보였다.",
+        "field": "초록·노랑·빨강 3상태와 작업자 조치, 인접 버스트 연속 빨강 정지 검토 규칙(정상 0회·고장 8.0초), 한 샘플씩 재생한 판정의 일괄 예측 일치·처리 1.4 ms, 사후확률로 단건 정지 배제, 재교정 조건을 근거와 함께 냈다. 다만 빨강이 교대당 61건(상한 192건)이고 매 건 센서 확인을 요구해 조치 부담이 크며 품질검사 연계가 없다.",
+        "creative": "섭동 강건성을 선정 축으로 쓴 점, 같은 날 가짜 고장 대조, 교란 채널(전류)을 뺀 2단 확인, conformal p·버스트 부트스트랩·유병률별 사후확률, 결과를 본 뒤의 결정 24건 공개가 차별점이다. 설비 물리·제조지식 결합은 상대적으로 약하다.",
+        "code": "run_all.py 1명령(약 3분)으로 표 84개·예측 파일·그림·재생 검증을 만들고, 데이터·산출물 동봉, 시드·lock 파일, 누수·형식·재생 테스트 14건, 보고 수치 자동 대조(check_numbers.py), Python 3.11·3.13 재현 기록이 있다. LSTM-AE full 모드의 TensorFlow/PyTorch가 requirements에 없다(결과 파일은 동봉)."
+      },
+      "top_strength": "전류를 뺀 진동 2단 확인·3연속 구조와 가짜 고장 대조·반사실 시험으로 수집 경로 교란을 정면으로 통제하고, 1명령 3분 재현·테스트·수치 자동 대조까지 갖췄다.",
+      "top_weakness": "결과를 본 뒤 선정 기준을 바꿔 M3를 골랐고(원 기준은 BL-0), 보정 블록 구성에 따라 1단 오경보가 30배 달라지며, 빨강이 교대당 61건이라 현장 조치 부담이 크다."
+    }
+  },
+  "ranking": ["K5", "K2", "K8"],
+  "item_comparison": {
+    "data": "K2·K5는 기록 구조·형식 누수·날짜 교란·운전 상태·변수 의미(전류 접힘)를 모두 진단해 전처리·분할로 이었고(K5는 설비 물리·관측 가능성, K2는 누수 정량·보간 검증이 더 깊음) 동점이다. K8은 수집 지문·window 설계 연결은 좋으나 전류 신호의 물리적 의미 진단이 빠져 1점 낮다.",
+    "model": "K2가 가장 넓은 비교를 이상 데이터로 설계·문턱을 고르지 않은 깨끗한 계약으로 해 가장 높고 확률 부재만 감점했다. K5는 비교 폭·확률 보정은 앞서지만 이상 전체를 본 뒤의 설계·test 후 R2·R1 부풀림으로, K8은 결과를 본 뒤의 선정 기준 개정·약한 선정근거·제한된 확률로 각각 26~33 구간 상단에 두었고 K5가 확률과 선정 절차(해시 잠금)에서 1점 앞선다.",
+    "error": "K5·K8은 진동×전류(부하) 상호작용을 오경보 조건과 정량으로 연결했고 FN 위치 분석도 있어 14점이다. K2는 32모델 FP 상태 집중 검정·반복 FP·FN 유형이 탄탄하지만 오류에 대한 변수 상호작용 분석이 약해 0.5점 낮다.",
+    "field": "K5가 단계별 역할·사건 종료 기록·품질 보류·재보정 자료 위생·경보량과 ISA 기준 비교까지 가장 성숙하다. K2는 2단계·시간당 환산·목표 오경보율·컨포멀 운영 조건이 구체적이나 일부가 비최종 시제품이고 품질 연계가 없으며, K8은 정지 검토 규칙 검증·실시간 재생이 좋지만 최상위 경보(빨강) 부담이 교대당 61건으로 커서 가장 낮다.",
+    "creative": "K5는 설비 물리 진단 매트릭스·전류 파형 성분·R2·conformal·등위 확률·수집 조건 반증 시험이 근거와 함께 있어 가장 높다(2.8절 출처 불명은 할인). K2(이종 AND·강도별 합성 주입·컨포멀 p·LLM 근거 선택)와 K8(섭동 강건성 선정·가짜 고장 대조·교란 채널 배제)은 근거 있는 차별화가 비슷한 수준이다.",
+    "code": "K8이 3분 1명령·테스트 14건·보고 수치 자동 대조·데이터와 산출물 동봉으로 가장 깔끔하다. K5도 1명령·데이터 해시·기대값 43개·실행 기록을 갖췄으나 실행이 4시간대이고 일부 수치가 run_all 밖이며, K2는 재실행 기록·결과 CSV는 좋지만 학습 데이터 미동봉·커널 수동 설정·테스트 부재로 6~8 구간이다."
+  },
+  "verification_done": {
+    "K2": [
+      "results/23_model_ensemble_ridge_mcd_JSC/scores.csv(18,810행)를 세그먼트별 최대 z로 모아 재계산: gkf Ridge 오경보 11/530(fold 평균 2.06%), MCD 4.29%, AND 0/530; time_block Ridge 7/417(fold 평균 1.70%), MCD 8.63%, AND 1/417(fold 평균 0.25%) — 보고서 2.5·2.6절과 일치",
+      "같은 파일에서 이상 세그먼트 탐지 gkf 17/17, time_block 68/68(4 fold×17) — 일치. AND 점수가 min(z_ridge, z_mcd)임을 확인",
+      "정상 FP Jaccard 재계산: gkf 0.000, time_block 0.041~0.042(시드별) — 보고서 0.000/0.041과 일치",
+      "summary.csv 고부하 세그먼트 오경보(time_block, fold 평균) Ridge 4.49%·AND 0.49% — 일치(합산 기준이면 4.09%·0.58%)",
+      "model_comparison.csv ridge_diff gkf tp 17·fp 11 → F1 0.7556 — 비교표와 일치"
+    ],
+    "K5": [
+      "reference_results/official_predictions/test_predictions_A·B.csv로 행 F1 재계산: v2 0.9649/0.9701(미탐 22/16행, 오경보 0/3행), v2+R1 1.0000/0.9954, v2+R1+R2 1.0000/1.0000 — 일치",
+      "기록 판정(행 가중) F1 v2+R1 1.000/0.818, 분할 B 정상 180기록 중 1단계 경보 기록 3·2단계 0 — 일치",
+      "이상 확률(파일 비율 사전) AUROC 0.977/0.979, Brier 0.0046/0.0038, ECE(10구간) 0.007/0.006, 현장 1% 사전 확률 최댓값 0.55 — 일치(평가 사전이 test 파일 이상 행 비율 7.3%·5.0%임도 확인)",
+      "동봉 원본 CSV 2개의 SHA-256이 run_official.py 기록값과 일치"
+    ],
+    "K8": [
+      "outputs/predictions.csv의 holdout+fault 3,357 window: 빨강 TP 375·FP 3·FN 53 → F1 0.9305, FPR 0.10%; 1단 TP 428·FP 241, FPR 8.23% — 일치",
+      "p1·p2 ≤ 0.01 동시 경보가 같은 버스트에서 3연속인 규칙으로 빨강을 다시 만들면 410행 전부 파일과 일치",
+      "고장 버스트 15/17 탐지(놓친 19·20), 평가 블록 빨강 사건 2건(버스트 569·598), 노랑 8.13%·54/106 버스트 — 일치",
+      "Brier risk_score 0.487, anomaly_prob_cal 0.0025(상수 예측 0.111) — 일치. 데이터 SHA-256이 run_manifest.json과 일치"
+    ]
+  },
+  "originality_concerns": [
+    "K5 2.8절 통합 후보(VD3: 기록 안 1차 차분, 과거 최대 5행 Ridge 예측 잔차 + Ledoit-Wolf 수축 Mahalanobis)는 K2 최종 Ridge-VAR[1차 차분, lookback 5]와 K8의 Ledoit-Wolf Mahalanobis(M1)와 구성이 겹친다. K5 원고 머리말은 추가분 출처를 '경쟁모델융합_개선안'으로 적고 있으나 본문에는 다른 팀·저장소에서 착안했다는 표기가 없다. 방법 자체는 표준 기법이고 문헌을 인용했으므로 확정할 수는 없으며, 공식 모델이 아닌 사후 보완 절에 한정된다.",
+    "K2·K8의 '서로 다른 두 모델 AND' 결합, K5·K8의 conformal 문턱은 표준 기법의 독립적 사용으로 보이며, 출품 간 문장·구조 차용 흔적은 찾지 못했다(교차 검색 결과 없음)."
+  ],
+  "form_items": {
+    "K2": "PDF가 없고 md 원고(제목에 '통합 보고서 (초안)')만 있다. 표지·서명·만족도 조사 캡처가 없고 공식 양식이 아니다. 패키지에 개발용 파일(CLAUDE.md, .github)과 이니셜(JIW·CHS·JSC) 파일명이 들어 있다.",
+    "K5": "PDF 머리말에 '검토용, 한컴 양식 아님'·'검토용 복사본', 원고 머리말에 '통합 작업본' 표기가 있고 만족도 조사 캡처가 '[제출 전 삽입]'으로 빠져 있으며 서명란이 없다. 표지 실명, 패키지 폴더명(yejun/, 팀명), 검증 기록의 PC 경로에 식별 정보가 있다.",
+    "K8": "표지·서명란·만족도 조사 캡처를 갖춘 48쪽 PDF로 형식 미비는 눈에 띄지 않는다(한컴 양식 여부는 판단하지 않음)."
+  },
+  "improvements": {
+    "K2": [
+      {"action": "최종 Ridge+MCD 점수를 검증용 정상·이상으로 확률 보정(예: conformal p→등위회귀 또는 유병률 가정 사후확률)하고 Brier·ECE를 보고", "item": "model, creative", "expected_points": "+1.5~2"},
+      {"action": "학습 데이터(또는 해시 확인 내려받기 스크립트)를 동봉하고 run_all이 현재 인터프리터 커널을 쓰게 바꾸며 핵심 계약(정상만 학습, q99 문턱)을 pytest로 고정", "item": "code", "expected_points": "+1~1.5"},
+      {"action": "근거 카드·목표 오경보율 운영점을 최종 Ridge+MCD에 적용하고, 경보 종료 기록·품질검사 우선순위(가공품 보류) 절차를 추가", "item": "field", "expected_points": "+0.5~1"},
+      {"action": "운전 상태×진동 수준 같은 변수 상호작용이 FP에 미치는 효과를 로지스틱 등으로 정량화", "item": "error", "expected_points": "+0.5~1"},
+      {"action": "학습 표본 내 q99 대신 별도 정상 보정 구간으로 문턱을 정하고 5장의 라벨 노이즈 서술 등 내부 모순을 정리", "item": "model, creative", "expected_points": "+0.5~1"}
+    ],
+    "K5": [
+      {"action": "공식 성능의 머리 수치를 R1 없는 행 F1·기록/사건 단위 지표로 바꾸고, 확률 평가 사전을 test 파일 비율 대신 valid 비율이나 현장 가정으로 고정", "item": "model", "expected_points": "+1~1.5"},
+      {"action": "설계를 동결한 채 이상 기록을 앞·뒤·교차 블록으로 나눈 다중 분할에서 v2 특징·R1·R2를 다시 평가해 '이상 전체를 본 뒤 설계'의 영향을 수치로 제시", "item": "model", "expected_points": "+0.5~1"},
+      {"action": "2.8절 통합 후보의 착안 출처(다른 팀·공개 저장소 포함)를 명시하거나 독자 설계 경위를 기록", "item": "creative", "expected_points": "+0.5"},
+      {"action": "전류 파형 이상이 계측(영점·포화·수집 경로) 탓인지 가르는 센서 건전성 단계를 코드로 구현해 2단계 앞에 두기", "item": "field, error", "expected_points": "+0.5"},
+      {"action": "개인명 폴더 정리, 기본 비교표 산출물 동봉, 실행 시간 단축(빠른 공식 경로 기본화)", "item": "code", "expected_points": "+0.5"}
+    ],
+    "K8": [
+      {"action": "보정 블록에 저부하를 포함하도록 층화 보정해 1단 오경보(평가 블록 8.23%)와 CV 대비 30배 불안정을 줄이기", "item": "model, field", "expected_points": "+1~1.5"},
+      {"action": "빨강의 교대당 61건 부담을 줄이도록 사건 묶음·버스트 간 확인·S2 기반 출동 기준을 정하고 ISA-18.2 기준과 비교", "item": "field", "expected_points": "+0.5~1"},
+      {"action": "선정 기준을 결과 전에 고정하고 선정에 쓰지 않은 블록·고장 구간으로 선정 안정성을 다시 평가해 M3 선정근거 보강", "item": "model", "expected_points": "+1"},
+      {"action": "전류가 교류 순시값(60 Hz 접힘 0.6 Hz 사인)임을 진단하고 파형 특징의 물리 의미를 오류·교란 분석에 반영", "item": "data, creative", "expected_points": "+0.5~1"},
+      {"action": "기록 밖에서도 쓸 수 있는 확률(정상 블록으로 보정한 conformal→확률, 유병률 사전 명시)과 품질검사 연계 절차 추가", "item": "model, field", "expected_points": "+0.5~1"}
+    ]
+  },
+  "opened_files": [
+    "regrade3/judge_brief.md",
+    "regrade3/rubric.md",
+    "regrade3/entries/K2/report/final_report.md",
+    "regrade3/entries/K2/report/안내.txt",
+    "regrade3/entries/K2/package/README.md, requirements.txt, .gitignore, data/README.md, results/README.md",
+    "regrade3/entries/K2/package/src/run_all.py, paths.py, extract.py, split.py, benchmark_jsc.py, ensemble_jsc.py (일부)",
+    "regrade3/entries/K2/package/docs/reproducibility_check.md",
+    "regrade3/entries/K2/package/results/23_model_ensemble_ridge_mcd_JSC/*.csv, results/model_comparison.csv",
+    "regrade3/entries/K2/package/figures/23_model_ensemble_ridge_mcd_JSC/state_fpr.png",
+    "regrade3/entries/K5/report/결과보고서.md, 그림_대응.txt, 결과보고서.pdf(텍스트 추출), figures/fig5_models.png",
+    "regrade3/entries/K5/package/북적북적_code_통합본/README.md, requirements.txt, run_all.py, run_official.py, expected_results.json, verification/clean_full_run.json",
+    "regrade3/entries/K5/package/북적북적_code_통합본/code/press/tvt/03_score_test.py (머리 부분)",
+    "regrade3/entries/K5/package/북적북적_code_통합본/reference_results/official_predictions/test_predictions_A.csv, test_predictions_B.csv",
+    "regrade3/entries/K8/report/결과보고서.md, 결과보고서.pdf(텍스트 추출), fig_3_1_confound.png",
+    "regrade3/entries/K8/package/README.md, requirements.txt, requirements-lock.txt, config.yaml, src/selection.py(검색), tests/test_no_leakage.py",
+    "regrade3/entries/K8/package/outputs/predictions.csv, run_manifest.json, tables/r2_operational_performance.csv, final_alarm_summary.csv, e2_selection_gates.csv",
+    "regrade3/judges/J2_work/k2_verify.py, k5_verify.py, k8_verify.py, pdf_check.py (자작 스크립트)"
+  ],
+  "disclosure": "K5는 표지의 팀명·실명(북적북적, 허예준·장준용), 패키지 폴더명(북적북적_code_통합본, yejun/), 검증 기록의 PC 경로로 보아 이 채점을 요청한 사용자(자동 문맥의 git 사용자 Heo Yejun, 메모리 색인의 yejun/ 폴더·press_guard 언급)의 팀 출품으로 짐작했다. K8은 표지의 팀명 mechai와 실명, K2는 파일명 이니셜(JIW·CHS·JSC)만 보였고 누구인지 알지 못한다. 자동 문맥(메모리 색인·git 상태, 경쟁 저장소 비교 기록 언급 포함)은 채점 근거로 쓰지 않았고 메모리 파일·git 기록·R 밖 파일·R/private·R/src·다른 채점자 파일은 열지 않았으며 어느 출품의 코드도 실행하지 않았다. 같은 잣대를 지키려고 K5의 test 재사용·R1 부풀림·2.8절 출처 문제를 다른 출품의 사후 선정 개정·확률 부재와 같은 기준으로 감점했고, 정체 짐작이 점수를 바꾸지는 않았다고 판단한다."
+}
